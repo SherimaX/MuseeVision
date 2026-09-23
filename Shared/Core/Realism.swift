@@ -105,6 +105,7 @@ extension Mat {
         let key = "\(kind)-\(tint)-\(polish)-\(seed)"
         if let m = cache[key] { return m }
         let t = Stone.tile(kind, seed: seed)
+        TextureNames.note(t.albedo, name: TextureNames.snakeCase("\(kind)") + "_polished")
         var m = PhysicallyBasedMaterial()
         m.baseColor = .init(tint: PlatformColor(hex: tint),
                             texture: .init(Textures.resource(t.albedo), sampler: repeatSampler))
@@ -124,6 +125,7 @@ extension Mat {
         let key = "honed-\(kind)-\(tint)-\(seed)"
         if let m = cache[key] { return m }
         let t = Stone.tile(kind, px: 512, slabs: 1, seed: seed)
+        TextureNames.note(t.albedo, name: TextureNames.snakeCase("\(kind)") + "_honed")
         var m = PhysicallyBasedMaterial()
         m.baseColor = .init(tint: PlatformColor(hex: tint), texture: .init(Textures.resource(t.albedo), sampler: repeatSampler))
         m.normal = .init(texture: .init(try! TextureResource(image: t.normal, withName: nil,

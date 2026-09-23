@@ -21,7 +21,7 @@ enum Catalogue {
     private struct Extra: Decodable { let works: [Artwork] }
 
     private static func load<T: Decodable>(_ name: String, _ type: T.Type) -> T? {
-        guard let url = Bundle.main.url(forResource: name, withExtension: "json"),
+        guard let url = MuseumResources.url(name, "json"),
               let data = try? Data(contentsOf: url) else { return nil }
         do { return try JSONDecoder().decode(type, from: data) } catch {
             print("Catalogue: could not read \(name).json: \(error)")

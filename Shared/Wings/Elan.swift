@@ -200,6 +200,7 @@ extension MuseumScene {
             let p = E.at(th, E.radius - 0.9)
             let plate = ModelEntity(mesh: .generatePlane(width: 0.5, depth: 0.5),
                                     materials: [Mat.glow(Textures.resource(Textures.floorNumeral(letter, dark: false)))])
+            plate.name = "Bay letter " + letter
             plate.position = [p.x, 0.004, p.y]
             plate.orientation = simd_quatf(angle: -th - .pi / 2, axis: [0, 1, 0])
             building.addChild(plate)
@@ -328,6 +329,7 @@ extension MuseumScene {
                 if num == "5" { p = [c.x, c.y - 3.2] }
                 let plate = ModelEntity(mesh: .generatePlane(width: 1.2, depth: 1.2),
                                         materials: [Mat.glow(Textures.resource(Textures.floorNumeral(num, dark: isDark)))])
+                plate.name = "Numeral " + num
                 plate.position = [p.x, 0.006, p.y]
                 root.addChild(plate)
             }
@@ -351,6 +353,7 @@ extension MuseumScene {
         let c = E.centre
         el.root.name = "Élan elevator"
         root.addChild(el.root)
+        el.car.name = "Car"
         el.car.position = [c.x, E.home, c.y]
         el.root.addChild(el.car)
 
@@ -394,6 +397,7 @@ extension MuseumScene {
         var glowMat = UnlitMaterial(color: PlatformColor(hex: 0x7CC3C5))
         glowMat.blending = .transparent(opacity: 0.18)
         let glow = ModelEntity(mesh: glowMesh.mesh(name: "glow"), materials: [glowMat])
+        glow.name = "Car glow"
         glow.isEnabled = false
         el.car.addChild(glow)
         el.glow = glow
@@ -459,8 +463,10 @@ extension MuseumScene {
         // The bronze mast inside the Sphere (from the south pole to the car's stop).
         let mastMesh = MeshResource.generateCylinder(height: E.topFloor - 26, radius: 0.2)
         let mastModel = ModelEntity(mesh: mastMesh, materials: [Mat.metal(0xC9A266, roughness: 0.3)])
+        mastModel.name = "Mast column"
         mastModel.position = [c.x, 26 + (E.topFloor - 26) / 2, c.y]
         el.mast.addChild(mastModel)
+        el.mast.name = "Mast"
         el.mast.isEnabled = false
         el.root.addChild(el.mast)
 
@@ -588,7 +594,7 @@ extension MuseumScene {
             sunWasHidden = true
         } else if sunWasHidden {
             sunWasHidden = false
-            updateSun(Date())
+            updateSun(Self.now())
         }
         el.mast.isEnabled = inSphere
         skySystem?.sphereMode = inSphere
@@ -663,7 +669,7 @@ extension Textures {
 
     /// A bronze numeral (or letter) cast in the floor.
     static func floorNumeral(_ s: String, dark: Bool) -> CGImage {
-        draw(width: 256, height: 256) { ctx in
+        draw(width: 256, height: 256, name: "floor_numeral_" + s + (dark ? "_dark" : "")) { ctx in
             ctx.setFillColor(dark ? cg(0x2E2924) : cg(0xF1E9DC))
             ctx.fill(CGRect(x: 0, y: 0, width: 256, height: 256))
             ctx.translateBy(x: 128, y: 128)

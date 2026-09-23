@@ -221,7 +221,7 @@ extension MuseumScene {
         }
         add(vel, Mat.glow(Textures.resource(Textures.velarium()), repeating: true), name: "Velarium")
 
-        buildPond()
+        part("Reserve") { buildPond() }   // the lifting pond belongs with the Reserve below it
 
         // Four curved stone benches facing the panels.
         var benches = MeshBuilder()

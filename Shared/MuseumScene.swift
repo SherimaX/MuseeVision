@@ -96,24 +96,48 @@ final class MuseumScene {
     lazy var lightGridTexture = Textures.resource(Textures.lightGrid())
     lazy var contactTexture = Textures.resource(Textures.contactGradient())
 
+    /// The clock the museum is built and run by. `nil` is now; the USD exporter fixes a date so
+    /// that what follows the season, the solar term or the hour comes out the same every time.
+    nonisolated(unsafe) static var fixedDate: Date?
+    nonisolated static func now() -> Date { fixedDate ?? Date() }
+
+    /// Which part of the museum each top-level entity (under `building` or `root`) was built by,
+    /// in build order. Only read by the USD exporter, which writes one layer per part.
+    private(set) var parts: [(name: String, entities: [Entity])] = []
+    private var claimed = Set<ObjectIdentifier>()
+
+    /// Runs `build` and records the top-level entities it adds as the part `name`. Parts may nest
+    /// (the pond, built with the Salon's oval, belongs to the Reserve); the inner one keeps its own.
+    func part(_ name: String, _ build: () -> Void) {
+        let before = Set((building.children.map { $0 } + root.children.map { $0 }).map(ObjectIdentifier.init))
+        build()
+        let added = (building.children.map { $0 } + root.children.map { $0 }).filter {
+            !before.contains(ObjectIdentifier($0)) && !claimed.contains(ObjectIdentifier($0))
+        }
+        claimed.formUnion(added.map(ObjectIdentifier.init))
+        parts.append((name, added))
+    }
+
     init() {
         root.name = "Musée Vision"
         building.name = "Building"
         root.addChild(building)
         floors.add("Level 0", .everywhere, height: 0, holes: groundHoles())
-        buildRotunda()
-        buildPassage()
-        buildSalon()
-        buildCabinet()
-        buildOval()
-        buildHang()
-        buildSalonLights()
-        buildReserve()
-        buildSculptureHall()
-        buildChineseWing()
-        buildHallOfLight()
-        buildElan()
-        buildSky()
+        part("Rotunda") { buildRotunda() }
+        part("Salon") {
+            buildPassage()
+            buildSalon()
+            buildCabinet()
+            buildOval()
+            buildHang()
+            buildSalonLights()
+        }
+        part("Reserve") { buildReserve() }
+        part("SculptureHall") { buildSculptureHall() }
+        part("ChineseWing") { buildChineseWing() }
+        part("HallOfLight") { buildHallOfLight() }
+        part("Elan") { buildElan() }
+        part("Sky") { buildSky() }
         for name in ["Benches", "Sculpture bench", "Sculpture plinths", "Little Dancer plinth", "Stereo stones", "Ceramic plinth",
                      "Terrace benches", "Stele foot", "Viewing easel", "Plan chest", "Handscroll case", "Orchid case", "Taihu rock",
                      "Pond basin", "Solar-term stele"] {
@@ -176,9 +200,12 @@ final class MuseumScene {
             fr.box(min: [w, -h, 0], max: [w + fw, h, depth])
             let colour = frame?.colour ?? Mat.gilt
             let mat = (frame?.metallic ?? true) ? Mat.metal(colour, roughness: 0.35) : Mat.matte(colour)
-            entity.addChild(ModelEntity(mesh: fr.mesh(name: "frame"), materials: [mat]))
+            let frameEntity = ModelEntity(mesh: fr.mesh(name: "frame"), materials: [mat])
+            frameEntity.name = "Frame"
+            entity.addChild(frameEntity)
         }
         let picture = ModelEntity(mesh: .generatePlane(width: width, height: height), materials: [placeholder])
+        picture.name = "Canvas"
         picture.position = [0, 0, max(depth - 0.015, 0.004)]
         entity.addChild(picture)
         (parent ?? building).addChild(entity)
@@ -258,8 +285,7 @@ final class MuseumScene {
 
     private func load(slot i: Int) {
         let slot = paintingSlots[i]
-        guard let url = Bundle.main.url(forResource: slot.image, withExtension: "jpg", subdirectory: "paintings")
-                ?? Bundle.main.url(forResource: slot.image, withExtension: "jpg") else {
+        guard let url = MuseumResources.url(slot.image, "jpg", subdirectory: "paintings") else {
             paintingSlots[i].loading = false
             paintingSlots[i].loaded = true   // nothing to load; keep the placeholder
             return

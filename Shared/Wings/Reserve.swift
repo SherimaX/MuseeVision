@@ -160,6 +160,7 @@ extension MuseumScene {
         var haloMat = UnlitMaterial(color: PlatformColor(hex: 0xE9B75A))
         haloMat.blending = .transparent(opacity: 0.8)
         lift.halo.model = ModelComponent(mesh: ring.mesh(name: "halo"), materials: [haloMat])
+        lift.halo.name = "Halo"
         lift.halo.isEnabled = false
         lift.pond.addChild(lift.halo)
         // Rim light: 32 segments that light one after another, starting nearest the lily.
@@ -176,14 +177,16 @@ extension MuseumScene {
                          [a.x - na.x * 0.05, B.height + 0.006, a.y - na.y * 0.05], normal: [0, 1, 0])
             }
             let e = ModelEntity(mesh: seg.mesh(name: "rim light"), materials: [Mat.glow(0xFFE3A0)])
+            e.name = String(format: "Rim light %02d", k + 1)
             e.isEnabled = false
             lift.pond.addChild(e)
             lift.rimSegments.append(e)
         }
 
         // Four bronze posts that telescope up with the pond.
-        for p in P.posts {
+        for (i, p) in P.posts.enumerated() {
             let post = ModelEntity(mesh: .generateCylinder(height: 1, radius: 0.075), materials: [Mat.metal(0x8A6A3E, roughness: 0.4)])
+            post.name = "Pond post \(i + 1)"
             post.position = [p.x, 0, p.y]
             post.scale = [1, 0.001, 1]
             post.isEnabled = false
@@ -423,6 +426,7 @@ extension MuseumScene {
                 // The two plan chests take the first two south slots (56 racks in all; see README).
                 if !north && k < 2 { continue }
                 let rack = ReserveRack(north: north, x: x)
+                rack.entity.name = String(format: "Rack %@%02d", north ? "N" : "S", k + 1)
                 rack.entity.position = [x, 0, rack.homeCentreY]
                 base.addChild(rack.entity)
                 let L = R.rack
@@ -445,6 +449,7 @@ extension MuseumScene {
         // Letter plates and the works on racks A–E (west face).
         for rack in racks where rack.north {
             guard let lettered = R.lettered.first(where: { abs($0.x - rack.x) < 0.01 }) else { continue }
+            rack.entity.name = "Rack " + lettered.letter
             actionHandlers["rack.\(lettered.letter)"] = { [weak self, weak rack] in
                 guard let self, let rack else { return }
                 let out = rack.target == 0
@@ -453,6 +458,7 @@ extension MuseumScene {
             }
             let plate = ModelEntity(mesh: .generatePlane(width: 0.18, height: 0.18),
                                     materials: [Mat.glow(Textures.resource(Textures.letterPlate(lettered.letter)))])
+            plate.name = "Letter plate"
             plate.position = [-R.rack.thickness / 2 - 0.004, 1.55, R.rack.length / 2 - 0.2]
             plate.orientation = simd_quatf(angle: -.pi / 2, axis: [0, 1, 0])
             rack.entity.addChild(plate)
@@ -598,7 +604,7 @@ extension MuseumScene {
 extension Textures {
     /// A small brass plate with a rack letter.
     static func letterPlate(_ s: String) -> CGImage {
-        draw(width: 128, height: 128) { ctx in
+        draw(width: 128, height: 128, name: "letter_plate_" + s) { ctx in
             ctx.setFillColor(cg(0xC9A266))
             ctx.fill(CGRect(x: 0, y: 0, width: 128, height: 128))
             ctx.translateBy(x: 64, y: 64)

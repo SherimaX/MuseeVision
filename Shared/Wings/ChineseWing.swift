@@ -70,7 +70,7 @@ enum ChinesePlan {
 extension MuseumScene {
     func buildChineseWing() {
         typealias C = ChinesePlan
-        let term = Ephemeris.solarTerm(Date())
+        let term = Ephemeris.solarTerm(Self.now())
         let t = observer.latitude < 0 ? (term + 12) % 24 : term
         let whitewash = Mat.matte(0xFBF9F4, roughness: 0.92)
         let timber = Mat.matte(0x4A3A2C, roughness: 0.7)
@@ -99,6 +99,7 @@ extension MuseumScene {
         collision.addRect(x0: -2.35, x1: -2.05, z0: 11.5, z1: 12.3, occludes: false, y1: 1.5)
         let inscription = ModelEntity(mesh: .generatePlane(width: 0.72, height: 1.36),
                                       materials: [Mat.glow(Textures.resource(Textures.steleInscription(term: term)), tint: 0xE6E0D6)])
+        inscription.name = "Stele inscription"
         inscription.position = [-2.045, 0.75, 11.9]
         inscription.orientation = simd_quatf(angle: .pi / 2, axis: [0, 1, 0])
         building.addChild(inscription)
@@ -139,6 +140,7 @@ extension MuseumScene {
         add(surround, Mat.matte(0xB8B2A6), name: "Moon gate surround")
         let plaque = ModelEntity(mesh: .generatePlane(width: 1.61, height: 0.53),
                                  materials: [Mat.glow(Textures.resource(Textures.plaque()), tint: 0xF0EBE2)])
+        plaque.name = "Plaque"
         plaque.position = [0, 4.0, 12.88]
         plaque.orientation = simd_quatf(angle: .pi, axis: [0, 1, 0])
         building.addChild(plaque)
@@ -458,6 +460,7 @@ extension MuseumScene {
         add(og, glass, name: "Orchid case glass")
         collision.addRect(x0: -9.3, x1: -7.3, z0: 13.9, z1: 14.7, occludes: false, y1: 0.9)
         let mount = ModelEntity(mesh: .generatePlane(width: 1.6, depth: 0.36), materials: [Mat.matte(0xDDCFAE)])
+        mount.name = "Orchid Preface mount"
         mount.position = [-8.3, 0.851, 14.35]
         building.addChild(mount)
         // The tracing, read from the south: the characters' tops point north.
@@ -518,6 +521,7 @@ extension MuseumScene {
         for s in C.scrolls {
             let mw = s.w + 0.2, top = 1.6 + s.h / 2 + max(0.3, s.h * 0.2), bottom = 1.6 - s.h / 2 - max(0.16, s.h * 0.12)
             let silk = ModelEntity(mesh: .generatePlane(width: mw, height: top - bottom), materials: [Mat.matte(0xC9BB98, roughness: 0.85)])
+            silk.name = "Mount " + s.id
             silk.position = [s.x, (top + bottom) / 2, 33.47]
             silk.orientation = simd_quatf(angle: .pi, axis: [0, 1, 0])
             building.addChild(silk)
@@ -565,12 +569,15 @@ extension MuseumScene {
         veilMat.blending = .transparent(opacity: 0.72)
         let veilNorth = ModelEntity(mesh: .generatePlane(width: H.silkW + 0.04, depth: 1), materials: [veilMat])
         let veilSouth = ModelEntity(mesh: .generatePlane(width: H.silkW + 0.04, depth: 1), materials: [veilMat])
+        veilNorth.name = "Veil north"
+        veilSouth.name = "Veil south"
         var roller = MeshBuilder()
         roller.stem(from: [-0.3, 0, 0], to: [0.3, 0, 0], r0: 0.0365, r1: 0.0365, segments: 12)
         var rod = MeshBuilder()
         rod.stem(from: [-0.324, 0, 0], to: [0.324, 0, 0], r0: 0.0165, r1: 0.0165, segments: 8)
-        let rollers: [Entity] = (0..<2).map { _ in
+        let rollers: [Entity] = (0..<2).map { i in
             let e = Entity()
+            e.name = i == 0 ? "Roller north" : "Roller south"
             e.addChild(ModelEntity(mesh: roller.mesh(name: "roller"), materials: [Mat.matte(0xD9CDB0)]))
             e.addChild(ModelEntity(mesh: rod.mesh(name: "rod"), materials: [timber]))
             return e
@@ -719,7 +726,7 @@ extension Textures {
     /// The stele: today's solar term in two large gilt characters, with its pinyin and English.
     static func steleInscription(term: Int) -> CGImage {
         let t = Ephemeris.solarTerms[term]
-        return draw(width: 360, height: 680) { ctx in
+        return draw(width: 360, height: 680, name: "stele_inscription") { ctx in
             ctx.setFillColor(cg(0xCFC6B8))
             ctx.fill(CGRect(x: 0, y: 0, width: 360, height: 680))
             ctx.setStrokeColor(cg(0xB7AD9C))

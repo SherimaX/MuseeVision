@@ -135,15 +135,16 @@ extension MuseumScene {
         // The sun: one directional light for the whole museum, following the Rotunda's idealised
         // sun, so the eye and every skylight let in a pool of sunlight with real shadows (the
         // lattice and the bronze node draw their own shadow on the clock).
+        sunLight.name = "Sun"
         sunLight.components.set(DirectionalLightComponent(color: PlatformColor(hex: 0xFFEFD6), intensity: 9_000))
         sunLight.components.set(DirectionalLightComponent.Shadow(shadowProjection: .automatic(maximumDistance: 60), depthBias: 2.0,
                                                                   cullMode: MaterialParameterTypes.FaceCulling.none))
         root.addChild(sunLight)
-        updateSun(Date())
+        updateSun(Self.now())
         var sunTimer: Float = 0
         updaters.append { [weak self] dt, _ in
             sunTimer += dt
-            if sunTimer > 20 { sunTimer = 0; self?.updateSun(Date()) }
+            if sunTimer > 20 { sunTimer = 0; self?.updateSun(Self.now()) }
         }
     }
 

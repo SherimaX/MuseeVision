@@ -126,8 +126,7 @@ enum StarField {
     struct Star { var ra: Float; var dec: Float; var mag: Float; var bv: Float }
 
     static func load() -> [Star] {
-        guard let url = Bundle.main.url(forResource: "stars", withExtension: "bin", subdirectory: "sky")
-                ?? Bundle.main.url(forResource: "stars", withExtension: "bin"),
+        guard let url = MuseumResources.url("stars", "bin", subdirectory: "sky"),
               let data = try? Data(contentsOf: url), data.count > 8 else { return [] }
         return data.withUnsafeBytes { raw -> [Star] in
             let count = Int(raw.loadUnaligned(fromByteOffset: 4, as: UInt32.self))
@@ -176,11 +175,12 @@ enum StarField {
             bins[colour(s.bv), default: MeshBuilder()].quad(c - t1 - t2, c + t1 - t2, c + t1 + t2, c - t1 + t2, normal: n,
                                                             uv: ([0, 0], [1, 0], [1, 1], [0, 1]))
         }
-        for (hex, b) in bins {
+        for (hex, b) in bins.sorted(by: { $0.key < $1.key }) {
             var m = UnlitMaterial()
             m.color = .init(tint: PlatformColor(hex: hex), texture: .init(sprite))
             m.blending = .transparent(opacity: .init(floatLiteral: 1))
             let e = ModelEntity(mesh: b.mesh(name: "stars"), materials: [m])
+            e.name = String(format: "Stars %06X", hex)
             root.addChild(e)
         }
         return root

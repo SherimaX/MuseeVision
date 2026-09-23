@@ -7,8 +7,7 @@ import simd
 /// glass stand-in of its size, so the room still reads.
 extension MuseumScene {
     static func loadScan(_ id: String) -> MeshResource? {
-        guard let url = Bundle.main.url(forResource: id, withExtension: "mvm", subdirectory: "sculptures")
-                ?? Bundle.main.url(forResource: id, withExtension: "mvm"),
+        guard let url = MuseumResources.url(id, "mvm", subdirectory: "sculptures"),
               let data = try? Data(contentsOf: url), data.count > 12 else { return nil }
         return data.withUnsafeBytes { raw -> MeshResource? in
             guard raw.loadUnaligned(fromByteOffset: 0, as: UInt32.self) == 0x314D_564D else { return nil } // "MVM1"

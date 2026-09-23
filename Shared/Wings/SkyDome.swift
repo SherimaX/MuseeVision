@@ -56,7 +56,7 @@ final class SkySystem {
         timer += dt
         if timer > 20 {
             timer = 0
-            let now = Date()
+            let now = MuseumScene.now()
             let sun = Ephemeris.sun(now, observer)
             sunAltitudeDegrees = sun.altitude * 180 / .pi
             let band = sphereMode ? -99 : (sunAltitudeDegrees >= 8 ? 2 : (sunAltitudeDegrees >= -4 ? 1 : (sunAltitudeDegrees >= -12 ? 0 : -1)))

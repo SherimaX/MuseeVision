@@ -10,7 +10,7 @@ import simd
 enum Textures {
     // MARK: Drawing helpers
 
-    static func draw(width: Int, height: Int, _ body: (CGContext) -> Void) -> CGImage {
+    static func draw(width: Int, height: Int, name: String = #function, _ body: (CGContext) -> Void) -> CGImage {
         let cs = CGColorSpace(name: CGColorSpace.sRGB)!
         let ctx = CGContext(data: nil, width: width, height: height, bitsPerComponent: 8, bytesPerRow: 0,
                             space: cs, bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue)!
@@ -18,7 +18,9 @@ enum Textures {
         ctx.setShouldAntialias(true)
         ctx.interpolationQuality = .high
         body(ctx)
-        return ctx.makeImage()!
+        let image = ctx.makeImage()!
+        TextureNames.note(image, function: name)
+        return image
     }
 
     static func cg(_ hex: UInt32, _ alpha: CGFloat = 1) -> CGColor {
@@ -28,8 +30,10 @@ enum Textures {
 
     @MainActor
     static func resource(_ image: CGImage, color: Bool = true) -> TextureResource {
-        try! TextureResource(image: image, withName: nil,
-                             options: .init(semantic: color ? .color : .raw, mipmapsMode: .allocateAndGenerateAll))
+        let texture = try! TextureResource(image: image, withName: nil,
+                                           options: .init(semantic: color ? .color : .raw, mipmapsMode: .allocateAndGenerateAll))
+        TextureNames.note(texture, from: image)
+        return texture
     }
 
     /// Draws a string centred at the origin of the current transform (y up in the context).
@@ -155,7 +159,7 @@ enum Textures {
 
     /// One 1.2 m stone slab with a joint on two edges (repeats seamlessly).
     static func stoneSlab(base: UInt32 = 0xF4EFE5, joint: UInt32 = 0xDCD3C3) -> CGImage {
-        draw(width: 256, height: 256) { ctx in
+        draw(width: 256, height: 256, name: "stone_slab_" + String(format: "%06X", base)) { ctx in
             ctx.setFillColor(cg(base))
             ctx.fill(CGRect(x: 0, y: 0, width: 256, height: 256))
             // A little veining so the floor reads as stone, not paper.
@@ -173,7 +177,7 @@ enum Textures {
 
     /// One coffer: a recessed square panel with shaded bevels (for dome and vault).
     static func coffer(base: UInt32 = 0xEFE8DB) -> CGImage {
-        draw(width: 256, height: 256) { ctx in
+        draw(width: 256, height: 256, name: "coffer_" + String(format: "%06X", base)) { ctx in
             ctx.setFillColor(cg(base))
             ctx.fill(CGRect(x: 0, y: 0, width: 256, height: 256))
             let rib: CGFloat = 26, bevel: CGFloat = 30
@@ -251,7 +255,7 @@ enum Textures {
 
     /// Bronze door with a small engraved name plate.
     static func bronzeDoor(label: String) -> CGImage {
-        draw(width: 512, height: 1024) { ctx in
+        draw(width: 512, height: 1024, name: "bronze_door_" + label) { ctx in
             let cs = CGColorSpace(name: CGColorSpace.sRGB)!
             let grad = CGGradient(colorsSpace: cs, colors: [cg(0x4A3620), cg(0x6B4E2E), cg(0x4A3620)] as CFArray,
                                   locations: [0, 0.5, 1])!
@@ -293,7 +297,7 @@ enum Textures {
     /// The moon's disc with its phase (lit fraction 0…1; waxing = lit on the right as seen
     /// from the northern hemisphere).
     static func moonDisc(illuminated k: Float, waxing: Bool) -> CGImage {
-        draw(width: 256, height: 256) { ctx in
+        draw(width: 256, height: 256, name: "moon_disc") { ctx in
             let r: CGFloat = 110
             ctx.translateBy(x: 128, y: 128)
             let cs = CGColorSpace(name: CGColorSpace.sRGB)!
@@ -362,8 +366,7 @@ struct SplitMix {
 /// Reads an image file's pixel size from its header (cheap) to get its proportions.
 enum ImageInfo {
     static func aspect(_ name: String) -> Float? {
-        guard let url = Bundle.main.url(forResource: name, withExtension: "jpg", subdirectory: "paintings")
-                ?? Bundle.main.url(forResource: name, withExtension: "jpg"),
+        guard let url = MuseumResources.url(name, "jpg", subdirectory: "paintings"),
               let src = CGImageSourceCreateWithURL(url as CFURL, nil),
               let props = CGImageSourceCopyPropertiesAtIndex(src, 0, nil) as? [CFString: Any],
               let w = props[kCGImagePropertyPixelWidth] as? Int, let h = props[kCGImagePropertyPixelHeight] as? Int, h > 0

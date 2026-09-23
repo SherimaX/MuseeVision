@@ -7,7 +7,7 @@ import simd
 enum Season: Int {
     case spring, summer, autumn, winter
 
-    static func now(_ date: Date = Date(), latitude: Double) -> Season {
+    static func now(_ date: Date = MuseumScene.now(), latitude: Double) -> Season {
         var term = Ephemeris.solarTerm(date)
         if latitude < 0 { term = (term + 12) % 24 }
         return Season(rawValue: term / 6) ?? .spring
@@ -19,7 +19,7 @@ enum Season: Int {
 @MainActor
 enum Garden {
     static func grassTexture(base: UInt32 = 0x8FA36E) -> TextureResource {
-        Textures.resource(Textures.draw(width: 256, height: 256) { ctx in
+        Textures.resource(Textures.draw(width: 256, height: 256, name: "grass_" + String(format: "%06X", base)) { ctx in
             ctx.setFillColor(Textures.cg(base))
             ctx.fill(CGRect(x: 0, y: 0, width: 256, height: 256))
             var rng = SplitMix(seed: 11)
@@ -50,6 +50,7 @@ enum Garden {
         }
         scene.add(trunk, Mat.matte(trunkColour, roughness: 0.9), name: "Trunk")
         let crown = Entity()
+        crown.name = "Crown"
         crown.position = p + [0, crownCentre, 0]
         scene.building.addChild(crown)
         if let crownColour {
