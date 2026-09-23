@@ -78,6 +78,7 @@ final class MuseumScene {
     let easelLight = Entity()
     var elevator: Elevator?
     var chickenCup: (entity: Entity, home: SIMD3<Float>)?
+    var sunWasHidden = false
     var cupHeld = false
     var visitorForward: SIMD3<Float> = [0, 0, -1]
     var irisProxy: Entity?
@@ -93,6 +94,7 @@ final class MuseumScene {
     lazy var slabTexture = Textures.resource(Textures.stoneSlab())
     lazy var cofferTexture = Textures.resource(Textures.coffer())
     lazy var lightGridTexture = Textures.resource(Textures.lightGrid())
+    lazy var contactTexture = Textures.resource(Textures.contactGradient())
 
     init() {
         root.name = "Musée Vision"
@@ -112,6 +114,11 @@ final class MuseumScene {
         buildHallOfLight()
         buildElan()
         buildSky()
+        for name in ["Benches", "Sculpture bench", "Sculpture plinths", "Little Dancer plinth", "Stereo stones", "Ceramic plinth",
+                     "Terrace benches", "Stele foot", "Viewing easel", "Plan chest", "Handscroll case", "Orchid case", "Taihu rock",
+                     "Pond basin", "Solar-term stele"] {
+            for e in building.descendants(named: name) { groundShadow(e) }
+        }
     }
 
     // MARK: Building helpers
@@ -121,8 +128,16 @@ final class MuseumScene {
         guard !b.isEmpty else { return nil }
         let e = ModelEntity(mesh: b.mesh(name: name), materials: [material])
         e.name = name
+        if Self.lightPasses(material, name) { e.components.set(DynamicLightShadowComponent(castsShadow: false)) }
         (parent ?? building).addChild(e)
         return e
+    }
+
+    /// Glass, skylights and glowing diffusers let the sun through.
+    static func lightPasses(_ m: RealityKit.Material, _ name: String) -> Bool {
+        if let pbr = m as? PhysicallyBasedMaterial, case .transparent = pbr.blending { return true }
+        if let u = m as? UnlitMaterial, case .transparent = u.blending { return true }
+        return ["Light-grid skylights", "Misty glass", "Hall of Light glass", "Oculus glass", "Contact shade"].contains(name)
     }
 
     func addLight(_ e: Entity, always: Bool = false) {
@@ -338,5 +353,16 @@ final class MuseumScene {
         func within(_ x: Float) -> Bool { x >= t0 && x <= t1 }
         guard within(ang) || within(ang + 2 * .pi) || within(ang - 2 * .pi) else { return nil }
         return t
+    }
+}
+
+extension Entity {
+    func descendants(named name: String) -> [Entity] {
+        var out: [Entity] = []
+        for c in children {
+            if c.name == name { out.append(c) }
+            out += c.descendants(named: name)
+        }
+        return out
     }
 }

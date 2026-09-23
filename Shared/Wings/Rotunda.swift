@@ -21,8 +21,10 @@ extension MuseumScene {
         }
         var floorMat = PhysicallyBasedMaterial()
         floorMat.baseColor = .init(tint: .white, texture: .init(Textures.resource(Textures.sunClockFloor())))
-        floorMat.roughness = .init(floatLiteral: 0.8)
+        floorMat.roughness = .init(floatLiteral: 0.5)
         floorMat.metallic = .init(floatLiteral: 0)
+        floorMat.clearcoat = .init(floatLiteral: 0.9)
+        floorMat.clearcoatRoughness = .init(floatLiteral: 0.07)
         add(floor, floorMat, name: "Sun clock")
 
         // Drum wall: a loop starting at 22.5° so no opening straddles the seam. Plan angle θ
@@ -43,12 +45,13 @@ extension MuseumScene {
         let drum = WallRun(points: loop, inside: .right, height: R.drumHeight, thickness: R.wall, openings: openings)
         var wall = MeshBuilder()
         wall.wall(drum)
-        add(wall, Mat.matte(0xF1EBDF), name: "Drum")
+        add(wall, Mat.honedStone(.travertine, tint: 0xFFFBF3, seed: 3), name: "Drum")
         var moulding = MeshBuilder()
         moulding.band(drum, from: 9.55, to: 10.0, depth: 0.32)
         moulding.band(drum, from: 0, to: 0.18, depth: 0.04)
         add(moulding, Mat.matte(Mat.moulding), name: "Drum mouldings")
         collision.add(run: drum)
+        contactShade(drum)
 
         // Sixteen pilasters framing the doors and niches.
         var pil = MeshBuilder()
@@ -68,7 +71,7 @@ extension MuseumScene {
             let hw = R.pilasterWidth / 2 + 0.05
             collision.addPolyline([outer - tangent * hw, inner - tangent * hw, inner + tangent * hw, outer + tangent * hw])
         }
-        add(pil, Mat.matte(Mat.stone), name: "Pilasters")
+        add(pil, Mat.honedStone(.travertine, tint: 0xFFF9EE), name: "Pilasters")
 
         // Dome: 5 rings × 28 coffers between plain bands, up to the Ø 5 m eye.
         let centre = SIMD3<Float>(0, R.drumHeight, 0)
@@ -77,10 +80,15 @@ extension MuseumScene {
         plain.domeBand(center: centre, radius: R.radius, from: 0, to: 4 * deg, rings: 2)
         plain.domeBand(center: centre, radius: R.radius, from: 64 * deg, to: eyeEl, rings: 4)
         add(plain, Mat.matte(Mat.stone), name: "Dome")
+        // 5 rings × 28 real coffers, each a rib frame, a stepped bevel and a recessed panel.
         var coffers = MeshBuilder()
-        coffers.domeBand(center: centre, radius: R.radius, from: 4 * deg, to: 64 * deg, rings: 30,
-                         uRepeat: Float(R.coffers.perRing), vRepeat: Float(R.coffers.rings))
-        add(coffers, Mat.textured(cofferTexture, roughness: 0.9), name: "Dome coffers")
+        let us = (0...R.coffers.perRing).map { 2 * Float.pi * Float($0) / Float(R.coffers.perRing) }
+        let vs = (0...R.coffers.rings).map { (4 + 60 * Float($0) / Float(R.coffers.rings)) * deg }
+        coffers.coffers(us: us, vs: vs, depth: 0.45, rib: 0.13, centre: { _ in centre }) { a, e, d in
+            let r = R.radius + d
+            return centre + SIMD3<Float>(r * cos(e) * cos(a), r * sin(e), r * cos(e) * sin(a))
+        }
+        add(coffers, Mat.honedStone(.travertine, tint: 0xFFFAF0, seed: 9), name: "Dome coffers")
 
         // The eye: a short curb, then the steel-and-glass lattice with its bronze node.
         let eyeY = R.drumHeight + R.radius * sin(eyeEl)
@@ -123,10 +131,14 @@ extension MuseumScene {
         building.addChild(shadowPoint)
 
         // Daylight through the eye, and the idealised sun that keeps the hour on the clock.
-        addLight(spot(at: [0, 19.5, 0], looking: .zero, colour: 0xFFF7EA, intensity: 140_000, inner: 40, outer: 80, radius: 30))
-        sunLight.components.set(SpotLightComponent(color: PlatformColor(hex: 0xFFE9C2), intensity: 120_000,
-                                                   innerAngleInDegrees: 5, outerAngleInDegrees: 7.5, attenuationRadius: 40))
-        addLight(sunLight)
+        addLight(withShadow(spot(at: [0, 19.5, 0], looking: .zero, colour: 0xFFF7EA, intensity: 140_000, inner: 40, outer: 80, radius: 30), softness: 1.2))
+        // The sun: one directional light for the whole museum, following the Rotunda's idealised
+        // sun, so the eye and every skylight let in a pool of sunlight with real shadows (the
+        // lattice and the bronze node draw their own shadow on the clock).
+        sunLight.components.set(DirectionalLightComponent(color: PlatformColor(hex: 0xFFEFD6), intensity: 9_000))
+        sunLight.components.set(DirectionalLightComponent.Shadow(shadowProjection: .automatic(maximumDistance: 60), depthBias: 2.0,
+                                                                  cullMode: MaterialParameterTypes.FaceCulling.none))
+        root.addChild(sunLight)
         updateSun(Date())
         var sunTimer: Float = 0
         updaters.append { [weak self] dt, _ in
@@ -159,7 +171,7 @@ extension MuseumScene {
         collision.addPolyline([[-10.9, hw], [x1, hw]])
         var f = MeshBuilder()
         f.floorRect(x0: x1 - 0.7, x1: -9.8, z0: -hw, z1: hw, y: -0.002, up: true, tile: 1.2)
-        add(f, Mat.textured(slabTexture, roughness: 0.75), name: "Passage floor")
+        add(f, Mat.polishedStone(.travertine), name: "Passage floor")
     }
 
     func updateSun(_ date: Date) {
@@ -168,22 +180,15 @@ extension MuseumScene {
         let hour = Float(comps.hour ?? 12) + Float(comps.minute ?? 0) / 60
         let day = hour >= 6 && hour <= 18
         sunLight.isEnabled = day
-        shadowPoint.isEnabled = day
-        sunPatch.isEnabled = day
+        shadowPoint.isEnabled = false
+        sunPatch.isEnabled = false
         guard day else { return }
-        // Angle from west (VI) through north (XII) to east (VI).
+        // Angle from west (VI) through north (XII) to east (VI); the point of shadow sits 6.78 m out.
         let phi = (hour - 6) * 15 * .pi / 180
         let r: Float = 6.78
         let p = SIMD3<Float>(-cos(phi) * r, 0, -sin(phi) * r)
         let node = SIMD3<Float>(0, Plan.Rotunda.latticeHeight, 0)
         sunLight.position = node
         sunLight.look(at: p, from: node, relativeTo: nil)
-        shadowPoint.position = p + [0, 0.006, 0]
-        // The lit image of the eye, stretched along the direction of the light.
-        let slant = simd_length(node - p) / node.y
-        sunPatch.position = p + [0, 0.004, 0]
-        sunPatch.scale = [2 * Plan.Rotunda.oculusRadius * slant, 1, 2 * Plan.Rotunda.oculusRadius]
-        sunPatch.orientation = simd_quatf(angle: -atan2(p.z, p.x), axis: [0, 1, 0])
     }
-
 }

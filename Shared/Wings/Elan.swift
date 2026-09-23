@@ -85,12 +85,12 @@ extension MuseumScene {
             for i in 0..<segs {
                 let a0 = 2 * Float.pi * Float(i) / Float(segs), a1 = 2 * Float.pi * Float(i + 1) / Float(segs)
                 let p = { (r: Float, a: Float) -> SIMD3<Float> in [c.x + r * cos(a), 0, c.y + r * sin(a)] }
-                let uv = { (q: SIMD3<Float>) -> SIMD2<Float> in [q.x / 1.5, q.z / 1.5] }
+                let uv = { (q: SIMD3<Float>) -> SIMD2<Float> in [q.x / 2.4, q.z / 2.4] }
                 let q00 = p(r0, a0), q10 = p(r0, a1), q11 = p(r1, a1), q01 = p(r1, a0)
                 floor.quad(q00, q10, q11, q01, normal: [0, 1, 0], uv: (uv(q00), uv(q10), uv(q11), uv(q01)))
             }
         }
-        add(floor, Mat.textured(Textures.resource(Textures.stoneSlab(base: 0xF3EEE5, joint: 0xDDD3C2)), roughness: 0.6),
+        add(floor, Mat.polishedStone(.marble, seed: 7),
             name: "Atrium floor")
         // The bronze ring where you wait, and the waiting mark on the axis.
         var ring = MeshBuilder()
@@ -114,8 +114,9 @@ extension MuseumScene {
                            openings: [WallOpening(center: E.radius * .pi, width: E.door.width, spring: E.door.height, arched: false)])
         var wall = MeshBuilder()
         wall.wall(base)
-        add(wall, Mat.matte(0xE4DBCB, roughness: 0.85), name: "Atrium stone base")
+        add(wall, Mat.honedStone(.travertine, tint: 0xF7EFE2, seed: 8), name: "Atrium stone base")
         collision.add(run: base)
+        contactShade(base)
         var coping = MeshBuilder()
         for i in 0..<192 {
             let a0 = 2 * Float.pi * Float(i) / 192, a1 = 2 * Float.pi * Float(i + 1) / 192
@@ -582,6 +583,13 @@ extension MuseumScene {
         // Inside the Sphere: the building is gone, only the sky, the mast and the car remain.
         let inSphere = inCar && el.y > 26
         building.isEnabled = !inSphere
+        if inSphere {
+            sunLight.isEnabled = false
+            sunWasHidden = true
+        } else if sunWasHidden {
+            sunWasHidden = false
+            updateSun(Date())
+        }
         el.mast.isEnabled = inSphere
         skySystem?.sphereMode = inSphere
         irisProxy?.isEnabled = !(el.y + E.car.height > 24 && el.y < 27)

@@ -45,13 +45,16 @@ struct MuseumView: View {
                 RealityView { content in
                     let t0 = Date()
                     content.camera = .virtual
+                    if #available(iOS 26.0, *) {
+                        content.renderingEffects.customPostProcessing = .effect(MuseumPostFX())
+                    }
                     content.add(controller.scene.root)
                     let camera = Entity()
                     camera.name = "Visitor"
                     camera.components.set(PerspectiveCameraComponent())
                     content.add(camera)
                     controller.attach(camera: camera)
-                    if let sky = try? await EnvironmentResource(equirectangular: Textures.skyEquirect()) {
+                    if let sky = try? await EnvironmentResource(equirectangular: Textures.interiorProbe()) {
                         content.environment = .skybox(sky)
                     }
                     #if DEBUG

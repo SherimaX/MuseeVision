@@ -57,6 +57,7 @@ extension MuseumScene {
             e.name = id
             e.position = base
             e.orientation = simd_quatf(angle: yaw, axis: [0, 1, 0])
+            groundShadow(e)
             building.addChild(e)
             if pickBox == nil {
                 let b = e.visualBounds(relativeTo: nil)

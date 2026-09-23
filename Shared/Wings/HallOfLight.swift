@@ -43,8 +43,8 @@ extension MuseumScene {
 
         // Floor and the stone plinths the glass stands on.
         var f = MeshBuilder()
-        f.floorRect(x0: H.x0 - 0.3, x1: H.x1 + 0.3, z0: -hw, z1: hw, y: -0.003, up: true, tile: 1.5)
-        add(f, Mat.textured(Textures.resource(Textures.stoneSlab(base: 0xE4DBCB, joint: 0xCFC4B1)), roughness: 0.55),
+        f.floorRect(x0: H.x0 - 0.3, x1: H.x1 + 0.3, z0: -hw, z1: hw, y: -0.003, up: true, tile: 2.4)
+        add(f, Mat.polishedStone(.travertine, tint: 0xF4EEE4, seed: 6),
             name: "Hall of Light floor")
         var plinth = MeshBuilder()
         for side: Float in [-1, 1] {

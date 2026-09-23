@@ -11,8 +11,8 @@ extension MuseumScene {
         let hw = S.halfWidth
         // Floor.
         var floor = MeshBuilder()
-        floor.floorRect(x0: S.farWallX, x1: S.endWallX, z0: -hw, z1: hw, y: 0, up: true, tile: 1.2)
-        add(floor, Mat.textured(slabTexture, roughness: 0.75), name: "Salon floor")
+        floor.floorRect(x0: S.farWallX, x1: S.endWallX, z0: -hw, z1: hw, y: 0, up: true, tile: 2.4)
+        add(floor, Mat.polishedStone(.travertine), name: "Salon floor")
 
         // Long walls, one colour per bay; each run spans from pier centre to pier centre.
         let breaks: [Float] = [S.endWallX] + S.piers + [S.farWallX]
@@ -29,6 +29,7 @@ extension MuseumScene {
             b.wall(south, faces: (true, false))
             add(b, Mat.matte(bay.colour), name: "Bay \(bay.number) walls")
             for run in [north, south] {
+                contactShade(run)
                 mouldings.band(run, from: 6.2, to: 6.6, depth: 0.35)
                 mouldings.band(run, from: 0, to: 0.15, depth: 0.03)
                 collision.add(run: run)
@@ -45,6 +46,7 @@ extension MuseumScene {
         var e5 = MeshBuilder(); e5.wall(farWall)
         add(e5, Mat.matte(S.bays[4].colour), name: "Bay 5 end wall")
         for run in [endWall, farWall] {
+            contactShade(run)
             mouldings.band(run, from: 6.2, to: 6.6, depth: 0.35)
             mouldings.band(run, from: 0, to: 0.15, depth: 0.03)
             collision.add(run: run)
@@ -64,13 +66,34 @@ extension MuseumScene {
             collision.addRect(x0: x - t, x1: x + t, z0: -hw, z1: -hw + S.pierDepth)
             collision.addRect(x0: x - t, x1: x + t, z0: hw - S.pierDepth, z1: hw)
         }
-        add(piers, Mat.matte(Mat.stone), name: "Piers and arches")
+        add(piers, Mat.honedStone(.travertine, tint: 0xFFF9EE), name: "Piers and arches")
 
         // Coffered barrel vault with a light-grid skylight over each bay.
+        // The coffered barrel vault: real coffers over each bay (skylight cells left open),
+        // plain vault over the piers and the 0.6 m strips at each end of a bay.
         var vault = MeshBuilder()
-        let holes = S.bays.map { (x0: $0.skylight.x0, x1: $0.skylight.x1, halfWidth: S.skylightHalfWidth) }
-        vault.barrelVault(x0: S.endWallX, x1: S.farWallX, radius: S.vaultRadius, spring: S.wallHeight, holes: holes, tile: 1.2)
-        add(vault, Mat.textured(cofferTexture, roughness: 0.9), name: "Vault")
+        let R = S.vaultRadius
+        let hole = acos(S.skylightHalfWidth / R)
+        let side = (0...8).map { hole * Float($0) / 8 }
+        let angles = side + [Float.pi / 2] + side.reversed().map { Float.pi - $0 }
+        for bay in S.bays {
+            let xa = bay.skylight.x0, xb = bay.skylight.x1
+            let n = 8
+            let xs = (0...n).map { xa + (xb - xa) * Float($0) / Float(n) }
+            vault.coffers(us: xs, vs: angles, depth: 0.32, rib: 0.14,
+                          centre: { p in [p.x, S.wallHeight, 0] },
+                          skip: { _, j in j == 8 || j == 9 }) { x, a, d in
+                [x, S.wallHeight + (R + d) * sin(a), (R + d) * cos(a)]
+            }
+        }
+        // Plain strips: bay ends and the pier zones.
+        var strips: [(Float, Float)] = []
+        let edges: [Float] = [S.endWallX] + S.bays.flatMap { [$0.skylight.x0, $0.skylight.x1] } + [S.farWallX]
+        for k in stride(from: 0, to: edges.count - 1, by: 2) { strips.append((edges[k], edges[k + 1])) }
+        for (a, b) in strips where abs(a - b) > 1e-3 {
+            vault.barrelVault(x0: a, x1: b, radius: R, spring: S.wallHeight, holes: [], tile: 1.2)
+        }
+        add(vault, Mat.honedStone(.travertine, tint: 0xFFFAF0, seed: 10), name: "Vault")
         var lunettes = MeshBuilder()
         lunettes.lunette(x: S.endWallX - 0.001, radius: S.vaultRadius, spring: S.wallHeight, facing: -1)
         lunettes.lunette(x: S.farWallX + 0.001, radius: S.vaultRadius, spring: S.wallHeight, facing: 1)
@@ -117,8 +140,8 @@ extension MuseumScene {
         add(b, Mat.matte(C.colour), name: "Cabinet walls")
         add(m, Mat.matte(Mat.moulding), name: "Cabinet mouldings")
         var f = MeshBuilder()
-        f.floorRect(x0: C.x1, x1: C.x0, z0: C.z0, z1: C.z1 + 0.62, y: 0, up: true, tile: 1.2)
-        add(f, Mat.textured(slabTexture, roughness: 0.75), name: "Cabinet floor")
+        f.floorRect(x0: C.x1, x1: C.x0, z0: C.z0, z1: C.z1 + 0.62, y: 0, up: true, tile: 2.4)
+        add(f, Mat.polishedStone(.travertine), name: "Cabinet floor")
         var ceiling = MeshBuilder()
         ceiling.floorRect(x0: C.x1, x1: C.x0, z0: C.z0, z1: C.z1, y: C.height, up: false)
         add(ceiling, Mat.matte(Mat.stone), name: "Cabinet ceiling")
@@ -150,8 +173,8 @@ extension MuseumScene {
         collision.addPolyline([[px0, -hw], [px1, -hw]])
         collision.addPolyline([[px0, hw], [px1, hw]])
         var pf = MeshBuilder()
-        pf.floorRect(x0: -76.2, x1: Plan.Salon.farWallX, z0: -hw, z1: hw, y: 0, up: true, tile: 1.2)
-        add(pf, Mat.textured(slabTexture, roughness: 0.75), name: "Oval passage floor")
+        pf.floorRect(x0: -76.2, x1: Plan.Salon.farWallX, z0: -hw, z1: hw, y: 0, up: true, tile: 2.4)
+        add(pf, Mat.polishedStone(.travertine), name: "Oval passage floor")
 
         // The oval wall: a loop from the west apex, so the door (east apex) sits mid-run.
         // (The loop overlaps itself by a hair so no seam shows at the west apex.)
@@ -167,6 +190,7 @@ extension MuseumScene {
         m.band(run, from: 0, to: 0.15, depth: 0.03)
         add(m, Mat.matte(Mat.moulding), name: "Oval mouldings")
         collision.add(run: run)
+        contactShade(run)
 
         var floor = MeshBuilder()
         // The floor has an opening over the stair shaft, covered by the pond until it lifts.
@@ -174,11 +198,11 @@ extension MuseumScene {
         // Grid aligned to the opening's edges so the hole is exact.
         let o = PondPlan.openingRect
         let gx0 = o.x0 - 0.3 * ceil((o.x0 - (c.x - fa)) / 0.3), gz0 = o.z0 - 0.3 * ceil((o.z0 - (c.y - fb)) / 0.3)
-        floor.floorCells(x0: gx0, x1: c.x + fa, z0: gz0, z1: c.y + fb, y: 0, cell: 0.3, tile: 1.2) { p in
+        floor.floorCells(x0: gx0, x1: c.x + fa, z0: gz0, z1: c.y + fb, y: 0, cell: 0.3, tile: 2.4) { p in
             let d = p - c
             return (d.x * d.x) / (fa * fa) + (d.y * d.y) / (fb * fb) <= 1 && !PondPlan.opening.contains(p)
         }
-        add(floor, Mat.textured(slabTexture, roughness: 0.75), name: "Oval floor")
+        add(floor, Mat.polishedStone(.travertine), name: "Oval floor")
 
         // Velarium: a softly glowing fabric dome over the whole oval.
         var vel = MeshBuilder()
@@ -283,7 +307,7 @@ extension MuseumScene {
         // Daylight from each bay's skylight.
         for bay in Plan.Salon.bays {
             let x = (bay.x0 + bay.x1) / 2
-            addLight(spot(at: [x, 13.2, 0], looking: [x, 0, 0], intensity: 90_000))
+            addLight(withShadow(spot(at: [x, 13.2, 0], looking: [x, 0, 0], intensity: 90_000), softness: 1.0))
         }
         // The oval under its velarium.
         addLight(spot(at: [Plan.Oval.centre.x, 5.8, 0], looking: [Plan.Oval.centre.x, 0, 0], colour: 0xFFF6E6,

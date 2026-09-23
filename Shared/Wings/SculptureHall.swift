@@ -51,7 +51,7 @@ extension MuseumScene {
                             openings: [WallOpening(center: s, width: P.door.width, spring: P.door.spring)])
         var w = MeshBuilder()
         w.wall(court)
-        add(w, Mat.matte(0xF6F1E7, roughness: 0.9), name: "Sculpture court walls")
+        add(w, Mat.honedStone(.travertine, tint: 0xFFFBF3, seed: 5), name: "Sculpture court walls")
         var m = MeshBuilder()
         m.band(court, from: 0, to: 0.18, depth: 0.03)
         m.band(court, from: 3.18, to: 3.22, depth: 0.01)
@@ -59,6 +59,7 @@ extension MuseumScene {
         m.band(court, from: 9.3, to: 9.65, depth: 0.25)
         add(m, Mat.matte(0xE4DBCB), name: "Sculpture court mouldings")
         collision.add(run: court)
+        contactShade(court)
 
         // Passage from the Rotunda: 4 m wide under a barrel vault continuing the door's arch.
         barrelPassage(alongZ: true, fixed: 0, from: P.passage.z0, to: P.passage.z1 - 0.01, halfWidth: P.passage.x,
@@ -66,9 +67,9 @@ extension MuseumScene {
 
         // Travertine floor.
         var f = MeshBuilder()
-        f.floorRect(x0: P.x0, x1: P.x1, z0: P.z0, z1: P.z1, y: 0, up: true, tile: 1.2)
+        f.floorRect(x0: P.x0, x1: P.x1, z0: P.z0, z1: P.z1, y: 0, up: true, tile: 2.4)
         f.floorRect(x0: -P.passage.x, x1: P.passage.x, z0: P.z1, z1: P.passage.z0 + 0.8, y: -0.002, up: true, tile: 1.2)
-        add(f, Mat.textured(Textures.resource(Textures.stoneSlab(base: 0xE9DFCD, joint: 0xD3C6AE)), roughness: 0.6),
+        add(f, Mat.polishedStone(.travertine, polish: 0.7, seed: 4),
             name: "Sculpture court floor")
 
         // Ceiling with its laylight (a glowing diffuser under the glass roof).
@@ -88,8 +89,8 @@ extension MuseumScene {
         var lay = MeshBuilder()
         lay.floorRect(x0: L.x0, x1: L.x1, z0: L.z0, z1: L.z1, y: 9.97, up: false, tile: 1.4)
         add(lay, Mat.glow(lightGridTexture, tint: 0xFFF3DA, repeating: true), name: "Sculpture laylight")
-        addLight(spot(at: [0, 9.8, -22.5], looking: [0, 0, -22.5], colour: 0xFFF1D6, intensity: 150_000,
-                      inner: 55, outer: 89, radius: 26))
+        addLight(withShadow(spot(at: [0, 9.8, -22.5], looking: [0, 0, -22.5], colour: 0xFFF1D6, intensity: 150_000,
+                                 inner: 55, outer: 89, radius: 26), softness: 2.5))
 
         // The bench opposite The Dance.
         var bench = MeshBuilder()

@@ -41,10 +41,13 @@ final class SkySystem {
         dome.model = ModelComponent(mesh: b.mesh(name: "sky"), materials: [Mat.glow(0x9FBCD8)])
         dome.name = "Sky dome"
         root.addChild(dome)
+        dome.components.set(DynamicLightShadowComponent(castsShadow: false))
         stars = StarField.make(radius: 600)
+        for c in stars.children { c.components.set(DynamicLightShadowComponent(castsShadow: false)) }
         root.addChild(stars)
         moon.model = ModelComponent(mesh: .generatePlane(width: 1, height: 1), materials: [Mat.glow(0xFFFFFF)])
         moon.name = "Moon"
+        moon.components.set(DynamicLightShadowComponent(castsShadow: false))
         root.addChild(moon)
     }
 
