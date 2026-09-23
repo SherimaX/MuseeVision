@@ -9,7 +9,8 @@ illustrated guide PDF). When a board changes, refresh `plan/`, then update the n
 `Shared/Plan/` and the wing files in `Shared/Wings/`.
 
 A Windows desktop version for an RTX 4090 is planned from this same repository: see
-[`WINDOWS.md`](WINDOWS.md).
+[`WINDOWS.md`](WINDOWS.md). It imports the museum from [`usd/`](usd/README.md), which the Swift builder
+exports.
 
 Everything is built in code (SwiftUI + RealityKit): no 3D assets except the open sculpture scans.
 
@@ -67,6 +68,8 @@ Didot for the wordmark. The app icon has light, dark and tinted variants; lockup
 | `Shared/Wings/` | One file per wing: Rotunda, Salon (with the cabinet and oval), Reserve (pond, stair, racks, easel), SculptureHall, ChineseWing, HallOfLight, Elan (Atrium, Square, elevator), SkyDome. |
 | `Shared/MuseumScene.swift` | Builds everything and runs the moving parts; platform-neutral for a future visionOS target. |
 | `iOS/` | RealityView, walking, multitouch, placards, buttons, location. |
+| `tools/usd-export/` | The USD exporter: a macOS command-line tool that builds the museum from `Shared/` and writes `usd/`. Run `tools/usd-export/export.sh`. |
+| `usd/` | The whole museum as USD (one layer per wing, the sculpture scans, materials), for Unreal on the Windows PC. See `usd/README.md`. |
 | `data/` | The painting and sculpture catalogues (`artworks.json`, `sculptures.json`). |
 | `plan/` | Snapshot of the design canvas: the boards and `Musee-Vision-Guide.pdf`. |
 | `assets/` | `paintings/` (images + CREDITS.md), `sculptures/` (scans + CREDITS.md), `sky/` (stars), `logo/`, `collection.json` (placards for the other wings' works), `reference/` (glaze colours, not bundled). |

@@ -21,16 +21,17 @@ stills, DLSS for 4K, and OpenXR if the museum later goes into a PC headset.
 ## Pipeline and order of work
 
 The building is defined once. The Swift builder (on the Mac) exports it as USD, one layer per wing with
-stable names and a material slot on every surface, and Unreal imports that. Only the behaviour is
-rewritten for Unreal. When the design changes: canvas → `plan/` → the Swift wing → re-export USD →
-reimport in Unreal (stable names keep the materials and lighting).
+stable names and a material slot on every surface, and Unreal imports that. The export is in
+[`usd/`](usd/README.md): open or import `usd/museum.usda`. Only the behaviour is rewritten for Unreal.
+When the design changes: canvas → `plan/` → the Swift wing → re-export USD on the Mac
+(`tools/usd-export/export.sh`) → reimport in Unreal (stable names keep the materials and lighting).
 
 1. **Start now, PC (≈ 1 week):** set up Unreal 5.8, Visual Studio 2022 and Git LFS; material library
    from the Concept palette; the 12 sculptures from their full-resolution originals as Nanite meshes;
    walking and collision.
-2. **In parallel, Mac (1–2 weeks):** the USD exporter; coffers, cornices, fluting, mouldings and brick
-   courses modelled as geometry.
-3. **Look-match, PC (1–2 weeks):** import the USD, light it, then render the Rotunda and the Salon
+2. **In parallel, Mac (1–2 weeks):** the USD exporter (done: `usd/`, `tools/usd-export/`); coffers,
+   cornices, fluting, mouldings and brick courses modelled as geometry, then re-exported.
+3. **Look-match, PC (1–2 weeks):** import `usd/museum.usda`, light it, then render the Rotunda and the Salon
    arrival from the cameras of `plan/renderings/05-the-rotunda-v2.png` and
    `plan/renderings/01-salon-arrival.png` and compare side by side. Get the stone rooms right before
    building out.
@@ -39,7 +40,11 @@ reimport in Unreal (stable names keep the materials and lighting).
 5. **Alive and ship, PC (1–2 weeks):** gardens, wind and rain, sound, performance, path-traced photo
    mode, packaged app.
 
-Until the USD exporter lands, don't hand-build the architecture in Unreal; it would be thrown away.
+Don't hand-build the architecture in Unreal; import it from `usd/` (with Interchange, or a USD Stage
+actor) and reimport after each re-export. Prim paths and material names stay the same from one export
+to the next, so the materials assigned in Unreal should survive a reimport. `usd/README.md` lists what
+is in it: the wings, the 12 scans with their sources, the lights, and the moving parts as separate,
+tagged prims.
 Summary with the renderings: https://claude.ai/artifact/RyC1hYn7S2w59TtozVvTCY
 
 Put the project in `windows/` in this repository. Keep build output out of git: `Binaries/`,
@@ -56,8 +61,9 @@ Read these in this order:
    so exact positions and dimensions can be read from the markup.
 4. **`README.md`, "Where the plan was read, resolved or bent"**: every place the boards disagree or
    can't be built as drawn, and the reading chosen. Use the same readings so the two builds match.
-5. **`Shared/` (Swift)**: the iPhone build already turned the boards into numbers. Treat it as an exact
-   spec to port, not as code to reuse:
+5. **`Shared/` (Swift)**: the iPhone build already turned the boards into numbers. The building itself
+   reaches Unreal through `usd/`; for everything else, treat it as an exact spec to port, not as code
+   to reuse:
    - `Shared/Plan/`: the Salon plan and hang, and the Hall of Light planting.
    - `Shared/Wings/<Wing>.swift`: one file per wing, with every wall, opening, vault, plinth and position.
    - `Shared/Core/`: the sky (sun and moon ephemerides, the 24 solar terms, the star catalogue),
@@ -80,11 +86,14 @@ Unreal Z = height × 100    (up)
 ```
 
 Swift uses RealityKit's y-up frame, so plan y is RealityKit **z** there, and height is RealityKit y.
+The USD in `usd/` keeps that frame (metres, `upAxis = "Y"`); Unreal's USD importer turns it into the
+mapping above.
 
 ## Assets in the repo
 
 | Path | What | Notes |
 |---|---|---|
+| `usd/` | The whole museum as USD: `museum.usda`, one layer per wing, the scans, materials, drawn textures | Import `museum.usda`. Exported from the Swift builder; every file is under 50 MB, so it needs no LFS. See `usd/README.md`. |
 | `data/artworks.json`, `data/sculptures.json` | Catalogue and placard text for the Salon paintings and the sculptures | Same files the iPhone app bundles. |
 | `assets/collection.json` | Placards for the Chinese Wing, the Hall of Light and *The Starry Night* | |
 | `assets/paintings/` | Every painting, photograph and scroll as JPEG | Sources and licences in `CREDITS.md`. Where a museum offers a larger open-access file, fetch it: a 4090 can hold them. |
@@ -96,7 +105,8 @@ Swift uses RealityKit's y-up frame, so plan y is RealityKit **z** there, and hei
 **`.mvm` format** (little-endian): `u32` magic `0x314D564D` ("MVM1"), `u32` vertex count *V*, `u32`
 triangle count *T*, then *V* × `float3` positions, *V* × `float3` normals, then *T* × 3 `u32` indices.
 Metres, y-up (RealityKit). The meshes are open in places, so render them two-sided. There are no UVs;
-the iPhone build gives them bronze, marble or stone materials by work.
+the iPhone build gives them bronze, marble or stone materials by work. In `usd/sculptures/` each scan
+prim carries its work id and scan source, so the full-resolution original can be swapped in for it.
 
 ## What to build (parity with the iPhone app)
 
