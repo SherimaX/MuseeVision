@@ -16,10 +16,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		A10000000000000000000201 /* artworks.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = artworks.json; path = ../artworks.json; sourceTree = SOURCE_ROOT; };
+		A10000000000000000000201 /* artworks.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = artworks.json; path = data/artworks.json; sourceTree = SOURCE_ROOT; };
 		A10000000000000000000202 /* paintings */ = {isa = PBXFileReference; lastKnownFileType = folder; name = paintings; path = assets/paintings; sourceTree = SOURCE_ROOT; };
 		A10000000000000000000203 /* MuseeVision.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MuseeVision.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		A10000000000000000000204 /* sculptures.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = sculptures.json; path = ../sculptures.json; sourceTree = SOURCE_ROOT; };
+		A10000000000000000000204 /* sculptures.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = sculptures.json; path = data/sculptures.json; sourceTree = SOURCE_ROOT; };
 		A10000000000000000000205 /* sky */ = {isa = PBXFileReference; lastKnownFileType = folder; name = sky; path = assets/sky; sourceTree = SOURCE_ROOT; };
 		A10000000000000000000206 /* sculptures */ = {isa = PBXFileReference; lastKnownFileType = folder; name = sculptures; path = assets/sculptures; sourceTree = SOURCE_ROOT; };
 		A10000000000000000000207 /* collection.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = collection.json; path = assets/collection.json; sourceTree = SOURCE_ROOT; };

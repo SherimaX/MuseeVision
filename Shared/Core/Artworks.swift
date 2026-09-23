@@ -1,7 +1,7 @@
 import Foundation
 
-/// A work for the placards. Drawn from the workspace catalogues — `artworks.json` (paintings)
-/// and `sculptures.json` — plus `assets/collection.json` for the works of the other wings
+/// A work for the placards. Drawn from the catalogues `data/artworks.json` (paintings)
+/// and `data/sculptures.json`, plus `assets/collection.json` for the works of the other wings
 /// (Chinese Wing, Hall of Light photographs, The Starry Night), all bundled as-is.
 struct Artwork: Decodable, Identifiable, Hashable {
     let id: String

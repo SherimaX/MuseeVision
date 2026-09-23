@@ -4,8 +4,12 @@
 
 The whole of Musée Vision as a walk-through on iPhone, built from the plan on the design canvas
 (https://claude.ai/artifact/5KS3Zkfoub5zBdopET1Qc6). The long-term target is visionOS 27 on
-Apple Vision Pro. The canvas is the design record; this folder holds only the app. When a board
-changes, update the numbers in `Shared/Plan/` and the wing files in `Shared/Wings/`.
+Apple Vision Pro. The canvas is the design record; `plan/` holds a snapshot of it (the boards and the
+illustrated guide PDF). When a board changes, refresh `plan/`, then update the numbers in
+`Shared/Plan/` and the wing files in `Shared/Wings/`.
+
+A Windows desktop version for an RTX 4090 is planned from this same repository: see
+[`WINDOWS.md`](WINDOWS.md).
 
 Everything is built in code (SwiftUI + RealityKit): no 3D assets except the open sculpture scans.
 
@@ -63,6 +67,8 @@ Didot for the wordmark. The app icon has light, dark and tinted variants; lockup
 | `Shared/Wings/` | One file per wing: Rotunda, Salon (with the cabinet and oval), Reserve (pond, stair, racks, easel), SculptureHall, ChineseWing, HallOfLight, Elan (Atrium, Square, elevator), SkyDome. |
 | `Shared/MuseumScene.swift` | Builds everything and runs the moving parts; platform-neutral for a future visionOS target. |
 | `iOS/` | RealityView, walking, multitouch, placards, buttons, location. |
+| `data/` | The painting and sculpture catalogues (`artworks.json`, `sculptures.json`). |
+| `plan/` | Snapshot of the design canvas: the boards and `Musee-Vision-Guide.pdf`. |
 | `assets/` | `paintings/` (images + CREDITS.md), `sculptures/` (scans + CREDITS.md), `sky/` (stars), `logo/`, `collection.json` (placards for the other wings' works), `reference/` (glaze colours, not bundled). |
 
 World coordinates follow the boards: metres, Rotunda centre = origin, x east, plan y south (RealityKit z),
@@ -133,4 +139,4 @@ size, the Water Lilies panel lengths) still stand; see the notes below the table
 - **Paintings, photographs, scrolls:** `assets/paintings/CREDITS.md` gives the source URL and licence for every file. They are mostly museum open access (Met, AIC, NGA) or public-domain scans on Wikimedia Commons. A few gallery photos are CC BY or CC BY-SA and need attribution if shared.
 - **Sculpture scans:** `assets/sculptures/CREDITS.md`; all CC BY or CC0, decimated to at most 150k triangles, untextured (bronze, marble and stone materials).
 - **Stars:** `assets/sky/CREDITS.md` (Yale Bright Star Catalogue, CDS V/50).
-- **Placards:** the workspace's `artworks.json` and `sculptures.json` (bundled as-is), plus `assets/collection.json` for the Chinese Wing, the Hall of Light and The Starry Night.
+- **Placards:** `data/artworks.json` and `data/sculptures.json` (bundled as-is), plus `assets/collection.json` for the Chinese Wing, the Hall of Light and The Starry Night.

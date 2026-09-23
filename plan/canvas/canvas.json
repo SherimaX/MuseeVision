@@ -1,0 +1,172 @@
+{
+  "v": 3,
+  "attachments": {},
+  "boards": {
+    "FutureAtrium.dc.html": {
+      "h": 1440,
+      "title": "Section II · Élan · The Atrium, level 0",
+      "w": 1440,
+      "x": 3040,
+      "y": 3380
+    },
+    "HallOfLight.dc.html": {
+      "h": 1440,
+      "title": "Hall of Light",
+      "w": 1440,
+      "x": 1520,
+      "y": 3380
+    },
+    "Journey.dc.html": {
+      "h": 1340,
+      "title": "The visit on Vision Pro",
+      "w": 1440,
+      "x": 1520,
+      "y": 1320
+    },
+    "Main.dc.html": {
+      "h": 960,
+      "title": "Concept",
+      "w": 1440,
+      "x": 0,
+      "y": 0
+    },
+    "MasterPlan.dc.html": {
+      "h": 1060,
+      "title": "Master plan",
+      "w": 1440,
+      "x": 1520,
+      "y": 0
+    },
+    "Rotunda.dc.html": {
+      "h": 1440,
+      "title": "The Rotunda",
+      "w": 1440,
+      "x": 0,
+      "y": 3380
+    },
+    "Salon.dc.html": {
+      "h": 1700,
+      "title": "01 · Salon Impression",
+      "w": 1440,
+      "x": 0,
+      "y": 1320
+    },
+    "SalonDetails.dc.html": {
+      "h": 1560,
+      "title": "01 · Salon Impression · Details",
+      "w": 2160,
+      "x": 0,
+      "y": 6780
+    },
+    "SalonHang.dc.html": {
+      "h": 3280,
+      "title": "01 · Salon Impression · The hang",
+      "w": 2160,
+      "x": 2240,
+      "y": 5180
+    },
+    "SalonPlan.dc.html": {
+      "h": 1480,
+      "title": "01 · Salon Impression · Plan",
+      "w": 2160,
+      "x": 0,
+      "y": 5180
+    },
+    "SalonReserve.dc.html": {
+      "h": 2260,
+      "title": "01 · Salon Impression · The lily pond and the Reserve",
+      "w": 2160,
+      "x": 0,
+      "y": 8460
+    },
+    "Sculpture.dc.html": {
+      "h": 1440,
+      "title": "Sculpture Hall",
+      "w": 1440,
+      "x": 7600,
+      "y": 3380
+    },
+    "ChineseWing.dc.html": {
+      "x": 9120,
+      "y": 3380,
+      "w": 2160,
+      "h": 1480,
+      "title": "The Chinese Wing"
+    },
+    "ElanSquare.dc.html": {
+      "x": 4560,
+      "y": 3380,
+      "w": 1440,
+      "h": 1440,
+      "title": "Section II · Élan · The Square, level −1"
+    },
+    "ElanSphere.dc.html": {
+      "x": 6080,
+      "y": 3380,
+      "w": 1440,
+      "h": 1440,
+      "title": "Section II · Élan · The Sphere, level 2"
+    }
+  },
+  "createdOnFiles": {
+    "at": "2026-09-23T17:45:00Z",
+    "v": 1
+  },
+  "designSystems": [],
+  "launch": {
+    "view": "canvas"
+  },
+  "notes": {
+    "row1": {
+      "kind": "title1",
+      "maxW": 2960,
+      "text": "Musée Vision: concept and master plan",
+      "w": 240,
+      "x": 0,
+      "y": -300
+    },
+    "row2": {
+      "kind": "title1",
+      "maxW": 2960,
+      "text": "Room 01 and the visit",
+      "w": 240,
+      "x": 0,
+      "y": 1090
+    },
+    "row3": {
+      "kind": "title1",
+      "maxW": 11280,
+      "text": "The wings to come",
+      "w": 240,
+      "x": 0,
+      "y": 3080
+    },
+    "row4": {
+      "kind": "title1",
+      "maxW": 4400,
+      "text": "Salon Impression: design development",
+      "w": 240,
+      "x": 0,
+      "y": 4880
+    }
+  },
+  "order": [
+    "Main.dc.html",
+    "MasterPlan.dc.html",
+    "Salon.dc.html",
+    "Journey.dc.html",
+    "Rotunda.dc.html",
+    "HallOfLight.dc.html",
+    "FutureAtrium.dc.html",
+    "ElanSquare.dc.html",
+    "ElanSphere.dc.html",
+    "Sculpture.dc.html",
+    "ChineseWing.dc.html",
+    "SalonPlan.dc.html",
+    "SalonHang.dc.html",
+    "SalonDetails.dc.html",
+    "SalonReserve.dc.html"
+  ],
+  "pages": [],
+  "title": "Musée Vision"
+}
