@@ -1,0 +1,29 @@
+#usda 1.0
+(
+    defaultPrim = "Museum"
+    doc = "Musée Vision, the whole museum, exported from the Swift builder (tools/usd-export). Metres, Y up, the Rotunda's centre at the origin, x east, z south (plan y). See usd/README.md."
+    metersPerUnit = 1
+    customLayerData = {
+        string museevision_clock = "2026-06-21T12:00:00Z"
+        string museevision_frame = "metres; +X east, +Y up, +Z south (plan y); origin at the centre of the Rotunda"
+    }
+    subLayers = [
+        @./sculptures/Sculptures.usda@,
+        @./wings/Rotunda.usdc@,
+        @./wings/Salon.usdc@,
+        @./wings/Reserve.usdc@,
+        @./wings/SculptureHall.usdc@,
+        @./wings/ChineseWing.usdc@,
+        @./wings/HallOfLight.usdc@,
+        @./wings/Elan.usdc@,
+        @./Materials.usda@
+    ]
+    upAxis = "Y"
+)
+
+def Xform "Museum" (
+    kind = "assembly"
+)
+{
+    reorder nameChildren = ["Rotunda", "Salon", "Reserve", "SculptureHall", "ChineseWing", "HallOfLight", "Elan", "Materials"]
+}

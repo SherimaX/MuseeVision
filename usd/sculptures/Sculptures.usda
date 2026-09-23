@@ -1,0 +1,388 @@
+#usda 1.0
+(
+    defaultPrim = "Museum"
+    doc = "Musée Vision: the sculpture scans in place (geometry in the <id>.usdc files beside this one)."
+    metersPerUnit = 1
+    upAxis = "Y"
+)
+
+over "Museum"
+{
+    over "Salon"
+    {
+        def Mesh "degas_little_dancer" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+            prepend references = @./degas-little-dancer.usdc@
+            customData = {
+                dictionary museevision = {
+                    string workId = "degas-little-dancer"
+                    string scanFile = "assets/sculptures/degas-little-dancer.mvm"
+                    string work = "Edgar Degas, Little Dancer Aged Fourteen"
+                    string scanSource = "passivactivist (Sketchfab), via Objaverse mirror (000-000)"
+                    string scanSourcePage = "https://sketchfab.com/3d-models/863f2eb0ec4c44d7bb33091a58a12560"
+                    string scanLicence = "CC BY 4.0"
+                    string scanTriangles = "401,610 → 39,772"
+                }
+            }
+        )
+        {
+            float3 xformOp:translate = (-34.5, 1, 3.4)
+            quatf xformOp:orient = (0.70710677, 0, 0.70710677, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+            custom string museevision:entity = "degas-little-dancer"
+            uniform bool doubleSided = 1
+            custom string museevision:workId = "degas-little-dancer"
+            custom string museevision:scanFile = "assets/sculptures/degas-little-dancer.mvm"
+            custom string museevision:work = "Edgar Degas, Little Dancer Aged Fourteen"
+            custom string museevision:scanSource = "passivactivist (Sketchfab), via Objaverse mirror (000-000)"
+            custom string museevision:scanSourcePage = "https://sketchfab.com/3d-models/863f2eb0ec4c44d7bb33091a58a12560"
+            custom string museevision:scanLicence = "CC BY 4.0"
+            custom string museevision:scanTriangles = "401,610 → 39,772"
+            rel material:binding = </Museum/Materials/bronze_warm>
+        }
+    }
+
+    over "SculptureHall"
+    {
+        def Mesh "rude_marseillaise" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+            prepend references = @./rude-marseillaise.usdc@
+            customData = {
+                dictionary museevision = {
+                    string workId = "rude-marseillaise"
+                    string scanFile = "assets/sculptures/rude-marseillaise.mvm"
+                    string work = "François Rude, La Marseillaise (Departure of the Volunteers), head of the Genius of Liberty"
+                    string scanSource = "Mesheritage (Sketchfab), via Objaverse mirror (shard 000-067)"
+                    string scanSourcePage = "https://sketchfab.com/3d-models/3674251455b04b5a8d16206060d7c182"
+                    string scanLicence = "CC BY 4.0"
+                    string scanTriangles = "121,730 → 39,899"
+                }
+            }
+        )
+        {
+            float3 xformOp:translate = (-6.4, 1.3, -16.3)
+            quatf xformOp:orient = (0.70710677, 0, 0.70710677, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+            custom string museevision:entity = "rude-marseillaise"
+            uniform bool doubleSided = 1
+            custom string museevision:workId = "rude-marseillaise"
+            custom string museevision:scanFile = "assets/sculptures/rude-marseillaise.mvm"
+            custom string museevision:work = "François Rude, La Marseillaise (Departure of the Volunteers), head of the Genius of Liberty"
+            custom string museevision:scanSource = "Mesheritage (Sketchfab), via Objaverse mirror (shard 000-067)"
+            custom string museevision:scanSourcePage = "https://sketchfab.com/3d-models/3674251455b04b5a8d16206060d7c182"
+            custom string museevision:scanLicence = "CC BY 4.0"
+            custom string museevision:scanTriangles = "121,730 → 39,899"
+            rel material:binding = </Museum/Materials/plaster_cast>
+        }
+
+        def Mesh "carpeaux_la_danse" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+            prepend references = @./carpeaux-la-danse.usdc@
+            customData = {
+                dictionary museevision = {
+                    string workId = "carpeaux-la-danse"
+                    string scanFile = "assets/sculptures/carpeaux-la-danse.mvm"
+                    string work = "Jean-Baptiste Carpeaux, The Dance"
+                    string scanSource = "HoangHiepVu (Sketchfab), via Objaverse mirror (000-110)"
+                    string scanSourcePage = "https://sketchfab.com/3d-models/3eb3104e246c43f6ac6cb47e19f229f7"
+                    string scanLicence = "CC BY 4.0"
+                    string scanTriangles = "1,050,416 → 79,740"
+                }
+            }
+        )
+        {
+            float3 xformOp:translate = (-7.7, 0.8, -21.1)
+            quatf xformOp:orient = (0.70710677, 0, 0.70710677, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+            custom string museevision:entity = "carpeaux-la-danse"
+            uniform bool doubleSided = 1
+            custom string museevision:workId = "carpeaux-la-danse"
+            custom string museevision:scanFile = "assets/sculptures/carpeaux-la-danse.mvm"
+            custom string museevision:work = "Jean-Baptiste Carpeaux, The Dance"
+            custom string museevision:scanSource = "HoangHiepVu (Sketchfab), via Objaverse mirror (000-110)"
+            custom string museevision:scanSourcePage = "https://sketchfab.com/3d-models/3eb3104e246c43f6ac6cb47e19f229f7"
+            custom string museevision:scanLicence = "CC BY 4.0"
+            custom string museevision:scanTriangles = "1,050,416 → 79,740"
+            rel material:binding = </Museum/Materials/stone_facade>
+        }
+
+        def Mesh "rodin_age_of_bronze" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+            prepend references = @./rodin-age-of-bronze.usdc@
+            customData = {
+                dictionary museevision = {
+                    string workId = "rodin-age-of-bronze"
+                    string scanFile = "assets/sculptures/rodin-age-of-bronze.mvm"
+                    string work = "Auguste Rodin, The Age of Bronze"
+                    string scanSource = "Scan The World / Nationalmuseum, Stockholm (Wikimedia Commons STL)"
+                    string scanSourcePage = "https://commons.wikimedia.org/wiki/File:The_Age_Of_Bronze_(Auguste_Rodin).stl (origin: https://www.myminifactory.com/object/3d-print-man-s-awakening-or-the-age-of-bronze-101775)"
+                    string scanLicence = "CC0 1.0"
+                    string scanTriangles = "1,880,066 → 79,988"
+                }
+            }
+        )
+        {
+            float3 xformOp:translate = (-6.4, 0.9, -25.5)
+            quatf xformOp:orient = (0.70710677, 0, 0.70710677, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+            custom string museevision:entity = "rodin-age-of-bronze"
+            uniform bool doubleSided = 1
+            custom string museevision:workId = "rodin-age-of-bronze"
+            custom string museevision:scanFile = "assets/sculptures/rodin-age-of-bronze.mvm"
+            custom string museevision:work = "Auguste Rodin, The Age of Bronze"
+            custom string museevision:scanSource = "Scan The World / Nationalmuseum, Stockholm (Wikimedia Commons STL)"
+            custom string museevision:scanSourcePage = "https://commons.wikimedia.org/wiki/File:The_Age_Of_Bronze_(Auguste_Rodin).stl (origin: https://www.myminifactory.com/object/3d-print-man-s-awakening-or-the-age-of-bronze-101775)"
+            custom string museevision:scanLicence = "CC0 1.0"
+            custom string museevision:scanTriangles = "1,880,066 → 79,988"
+            rel material:binding = </Museum/Materials/bronze>
+        }
+
+        def Mesh "rodin_gates_of_hell" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+            prepend references = @./rodin-gates-of-hell.usdc@
+            customData = {
+                dictionary museevision = {
+                    string workId = "rodin-gates-of-hell"
+                    string scanFile = "assets/sculptures/rodin-gates-of-hell.mvm"
+                    string work = "Auguste Rodin, The Gates of Hell"
+                    string scanSource = "Alan Zimmerman (nenjo, Sketchfab), via Objaverse mirror (000-154)"
+                    string scanSourcePage = "https://sketchfab.com/3d-models/d4328120c44d470ca86c678220e3921b"
+                    string scanLicence = "CC BY 4.0"
+                    string scanTriangles = "175,663 → 95,343"
+                }
+            }
+        )
+        {
+            float3 xformOp:translate = (0, 0, -30.45)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+            custom string museevision:entity = "rodin-gates-of-hell"
+            uniform bool doubleSided = 1
+            custom string museevision:workId = "rodin-gates-of-hell"
+            custom string museevision:scanFile = "assets/sculptures/rodin-gates-of-hell.mvm"
+            custom string museevision:work = "Auguste Rodin, The Gates of Hell"
+            custom string museevision:scanSource = "Alan Zimmerman (nenjo, Sketchfab), via Objaverse mirror (000-154)"
+            custom string museevision:scanSourcePage = "https://sketchfab.com/3d-models/d4328120c44d470ca86c678220e3921b"
+            custom string museevision:scanLicence = "CC BY 4.0"
+            custom string museevision:scanTriangles = "175,663 → 95,343"
+            rel material:binding = </Museum/Materials/bronze_dark>
+        }
+
+        def Mesh "rodin_thinker" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+            prepend references = @./rodin-thinker.usdc@
+            customData = {
+                dictionary museevision = {
+                    string workId = "rodin-thinker"
+                    string scanFile = "assets/sculptures/rodin-thinker.mvm"
+                    string work = "Auguste Rodin, The Thinker (monumental)"
+                    string scanSource = "Rigsters (Sketchfab), via Objaverse mirror (000-032)"
+                    string scanSourcePage = "https://sketchfab.com/3d-models/08a1e693c9674a3292dec2298b09e0ae"
+                    string scanLicence = "CC BY 4.0"
+                    string scanTriangles = "50,974 → 50,974"
+                }
+            }
+        )
+        {
+            float3 xformOp:translate = (-3.6, 1.2, -26.9)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+            custom string museevision:entity = "rodin-thinker"
+            uniform bool doubleSided = 1
+            custom string museevision:workId = "rodin-thinker"
+            custom string museevision:scanFile = "assets/sculptures/rodin-thinker.mvm"
+            custom string museevision:work = "Auguste Rodin, The Thinker (monumental)"
+            custom string museevision:scanSource = "Rigsters (Sketchfab), via Objaverse mirror (000-032)"
+            custom string museevision:scanSourcePage = "https://sketchfab.com/3d-models/08a1e693c9674a3292dec2298b09e0ae"
+            custom string museevision:scanLicence = "CC BY 4.0"
+            custom string museevision:scanTriangles = "50,974 → 50,974"
+            rel material:binding = </Museum/Materials/bronze>
+        }
+
+        def Mesh "rodin_kiss" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+            prepend references = @./rodin-kiss.usdc@
+            customData = {
+                dictionary museevision = {
+                    string workId = "rodin-kiss"
+                    string scanFile = "assets/sculptures/rodin-kiss.mvm"
+                    string work = "Auguste Rodin, The Kiss"
+                    string scanSource = "Migg (Sketchfab), via Objaverse mirror (000-069)"
+                    string scanSourcePage = "https://sketchfab.com/3d-models/41dd704633244bb1ad4f13d8a50fccd1"
+                    string scanLicence = "CC BY 4.0"
+                    string scanTriangles = "1,000,098 → 79,211"
+                }
+            }
+        )
+        {
+            float3 xformOp:translate = (3.6, 0.5, -26.9)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+            custom string museevision:entity = "rodin-kiss"
+            uniform bool doubleSided = 1
+            custom string museevision:workId = "rodin-kiss"
+            custom string museevision:scanFile = "assets/sculptures/rodin-kiss.mvm"
+            custom string museevision:work = "Auguste Rodin, The Kiss"
+            custom string museevision:scanSource = "Migg (Sketchfab), via Objaverse mirror (000-069)"
+            custom string museevision:scanSourcePage = "https://sketchfab.com/3d-models/41dd704633244bb1ad4f13d8a50fccd1"
+            custom string museevision:scanLicence = "CC BY 4.0"
+            custom string museevision:scanTriangles = "1,000,098 → 79,211"
+            rel material:binding = </Museum/Materials/marble_carrara>
+        }
+
+        def Mesh "rodin_burghers_of_calais" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+            prepend references = @./rodin-burghers-of-calais.usdc@
+            customData = {
+                dictionary museevision = {
+                    string workId = "rodin-burghers-of-calais"
+                    string scanFile = "assets/sculptures/rodin-burghers-of-calais.mvm"
+                    string work = "Auguste Rodin, The Burghers of Calais (group of six)"
+                    string scanSource = "RS (raphazou, Sketchfab), via Objaverse mirror (000-019)"
+                    string scanSourcePage = "https://sketchfab.com/3d-models/441792cf92da4e6e86e37be77a3ce792"
+                    string scanLicence = "CC BY 4.0"
+                    string scanTriangles = "813,838 → 149,584"
+                }
+            }
+        )
+        {
+            float3 xformOp:translate = (5.2, 0.12, -22.7)
+            quatf xformOp:orient = (0.70710677, 0, -0.70710677, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+            custom string museevision:entity = "rodin-burghers-of-calais"
+            uniform bool doubleSided = 1
+            custom string museevision:workId = "rodin-burghers-of-calais"
+            custom string museevision:scanFile = "assets/sculptures/rodin-burghers-of-calais.mvm"
+            custom string museevision:work = "Auguste Rodin, The Burghers of Calais (group of six)"
+            custom string museevision:scanSource = "RS (raphazou, Sketchfab), via Objaverse mirror (000-019)"
+            custom string museevision:scanSourcePage = "https://sketchfab.com/3d-models/441792cf92da4e6e86e37be77a3ce792"
+            custom string museevision:scanLicence = "CC BY 4.0"
+            custom string museevision:scanTriangles = "813,838 → 149,584"
+            rel material:binding = </Museum/Materials/bronze>
+        }
+
+        def Mesh "rodin_balzac" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+            prepend references = @./rodin-balzac.usdc@
+            customData = {
+                dictionary museevision = {
+                    string workId = "rodin-balzac"
+                    string scanFile = "assets/sculptures/rodin-balzac.mvm"
+                    string work = "Auguste Rodin, Monument to Balzac"
+                    string scanSource = "pattarrian (Sketchfab), via Objaverse mirror (000-056)"
+                    string scanSourcePage = "https://sketchfab.com/3d-models/0de8117fc262431e81066cba6697bc6c"
+                    string scanLicence = "CC BY 4.0"
+                    string scanTriangles = "950,164 → 79,927"
+                }
+            }
+        )
+        {
+            float3 xformOp:translate = (6.4, 0.3, -19.1)
+            quatf xformOp:orient = (0.70710677, 0, -0.70710677, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+            custom string museevision:entity = "rodin-balzac"
+            uniform bool doubleSided = 1
+            custom string museevision:workId = "rodin-balzac"
+            custom string museevision:scanFile = "assets/sculptures/rodin-balzac.mvm"
+            custom string museevision:work = "Auguste Rodin, Monument to Balzac"
+            custom string museevision:scanSource = "pattarrian (Sketchfab), via Objaverse mirror (000-056)"
+            custom string museevision:scanSourcePage = "https://sketchfab.com/3d-models/0de8117fc262431e81066cba6697bc6c"
+            custom string museevision:scanLicence = "CC BY 4.0"
+            custom string museevision:scanTriangles = "950,164 → 79,927"
+            rel material:binding = </Museum/Materials/bronze_dark>
+        }
+
+        def Mesh "rodin_walking_man" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+            prepend references = @./rodin-walking-man.usdc@
+            customData = {
+                dictionary museevision = {
+                    string workId = "rodin-walking-man"
+                    string scanFile = "assets/sculptures/rodin-walking-man.mvm"
+                    string work = "Auguste Rodin, The Walking Man"
+                    string scanSource = "Cosmo Wenman (Thingiverse thing:24997), via Wikimedia Commons STL"
+                    string scanSourcePage = "https://commons.wikimedia.org/wiki/File:Auguste_Rodin_-_L'Homme_qui_marche_-_3D_model_Thingiverse.stl (origin: https://www.thingiverse.com/thing:24997)"
+                    string scanLicence = "CC BY 4.0"
+                    string scanTriangles = "71,794 → 62,505"
+                }
+            }
+        )
+        {
+            float3 xformOp:translate = (6.4, 0.3, -15.9)
+            quatf xformOp:orient = (0.70710677, 0, -0.70710677, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+            custom string museevision:entity = "rodin-walking-man"
+            uniform bool doubleSided = 1
+            custom string museevision:workId = "rodin-walking-man"
+            custom string museevision:scanFile = "assets/sculptures/rodin-walking-man.mvm"
+            custom string museevision:work = "Auguste Rodin, The Walking Man"
+            custom string museevision:scanSource = "Cosmo Wenman (Thingiverse thing:24997), via Wikimedia Commons STL"
+            custom string museevision:scanSourcePage = "https://commons.wikimedia.org/wiki/File:Auguste_Rodin_-_L'Homme_qui_marche_-_3D_model_Thingiverse.stl (origin: https://www.thingiverse.com/thing:24997)"
+            custom string museevision:scanLicence = "CC BY 4.0"
+            custom string museevision:scanTriangles = "71,794 → 62,505"
+            rel material:binding = </Museum/Materials/bronze>
+        }
+
+        def Mesh "bourdelle_heracles_archer" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+            prepend references = @./bourdelle-heracles-archer.usdc@
+            customData = {
+                dictionary museevision = {
+                    string workId = "bourdelle-heracles-archer"
+                    string scanFile = "assets/sculptures/bourdelle-heracles-archer.mvm"
+                    string work = "Antoine Bourdelle, Hercules the Archer"
+                    string scanSource = "Azad Balabanian (azadbal, Sketchfab), via Objaverse mirror (000-141)"
+                    string scanSourcePage = "https://sketchfab.com/3d-models/4d257818de1b4c7fa859085e478a0c56"
+                    string scanLicence = "CC BY 4.0"
+                    string scanTriangles = "640,265 → 79,978"
+                }
+            }
+        )
+        {
+            float3 xformOp:translate = (3.9, 0.5, -17.3)
+            quatf xformOp:orient = (0.70710677, 0, 0.70710677, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+            custom string museevision:entity = "bourdelle-heracles-archer"
+            uniform bool doubleSided = 1
+            custom string museevision:workId = "bourdelle-heracles-archer"
+            custom string museevision:scanFile = "assets/sculptures/bourdelle-heracles-archer.mvm"
+            custom string museevision:work = "Antoine Bourdelle, Hercules the Archer"
+            custom string museevision:scanSource = "Azad Balabanian (azadbal, Sketchfab), via Objaverse mirror (000-141)"
+            custom string museevision:scanSourcePage = "https://sketchfab.com/3d-models/4d257818de1b4c7fa859085e478a0c56"
+            custom string museevision:scanLicence = "CC BY 4.0"
+            custom string museevision:scanTriangles = "640,265 → 79,978"
+            rel material:binding = </Museum/Materials/gilt_r30>
+        }
+    }
+
+    over "ChineseWing"
+    {
+        over "chinese_sancai_horse"
+        {
+            def Mesh "chinese_sancai_horse" (
+                prepend apiSchemas = ["MaterialBindingAPI"]
+                prepend references = @./chinese-sancai-horse.usdc@
+                customData = {
+                    dictionary museevision = {
+                        string workId = "chinese-sancai-horse"
+                        string scanFile = "assets/sculptures/chinese-sancai-horse.mvm"
+                        string work = "Tang-dynasty-style pottery horse (stand-in)"
+                        string scanSource = "Mixed Reality Lab (mxrlab, Sketchfab), via Objaverse mirror (000-027)"
+                        string scanSourcePage = "https://sketchfab.com/3d-models/36cbd6380b7740998fc01f29426e2780"
+                        string scanLicence = "CC BY 4.0"
+                        string scanTriangles = "49,951 → 37,240"
+                    }
+                }
+            )
+            {
+                quatf xformOp:orient = (0.7071068, 0, -0.70710677, 0)
+                uniform token[] xformOpOrder = ["xformOp:orient"]
+                custom string museevision:workId = "chinese-sancai-horse"
+                custom string museevision:scanFile = "assets/sculptures/chinese-sancai-horse.mvm"
+                custom string museevision:work = "Tang-dynasty-style pottery horse (stand-in)"
+                custom string museevision:scanSource = "Mixed Reality Lab (mxrlab, Sketchfab), via Objaverse mirror (000-027)"
+                custom string museevision:scanSourcePage = "https://sketchfab.com/3d-models/36cbd6380b7740998fc01f29426e2780"
+                custom string museevision:scanLicence = "CC BY 4.0"
+                custom string museevision:scanTriangles = "49,951 → 37,240"
+                rel material:binding = </Museum/Materials/sancai_amber>
+            }
+        }
+    }
+}
