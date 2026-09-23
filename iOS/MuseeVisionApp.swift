@@ -18,10 +18,14 @@ struct MuseumView: View {
     @State private var showHint = true
     @State private var sceneReady = false
     @State private var location: LocationProvider?
+    @State private var windowTop: CGFloat = 0
 
     private let joystickRadius: CGFloat = 58
 
     /// The window's top safe inset (the Dynamic Island), since the view ignores safe areas.
+    /// Read it in onAppear, never in body: asking UIKit for the window's insets mid-update
+    /// forces a layout that re-enters SwiftUI, and the resulting graph cycle starves the main
+    /// actor so the launch screen never lifts.
     static var windowSafeTop: CGFloat {
         let scenes = UIApplication.shared.connectedScenes.compactMap { $0 as? UIWindowScene }
         return scenes.first?.windows.first?.safeAreaInsets.top ?? 47
@@ -38,7 +42,7 @@ struct MuseumView: View {
 
     var body: some View {
         GeometryReader { geo in
-            let topInset = max(geo.safeAreaInsets.top, MuseumView.windowSafeTop)
+            let topInset = max(geo.safeAreaInsets.top, windowTop)
             let joystickCentre = CGPoint(x: geo.safeAreaInsets.leading + joystickRadius + 28,
                                          y: geo.size.height - geo.safeAreaInsets.bottom - joystickRadius - 28)
             ZStack {
@@ -124,6 +128,7 @@ struct MuseumView: View {
             .animation(.easeOut(duration: 0.3), value: controller.message)
             .onAppear {
                 controller.viewSize = geo.size
+                windowTop = MuseumView.windowSafeTop
                 if location == nil {
                     let scene = controller.scene
                     location = LocationProvider { scene.observer = $0 }
