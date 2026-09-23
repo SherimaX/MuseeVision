@@ -1,0 +1,294 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A10000000000000000000101 /* artworks.json in Resources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000201 /* artworks.json */; };
+		A10000000000000000000102 /* paintings in Resources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000202 /* paintings */; };
+		A10000000000000000000103 /* sculptures.json in Resources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000204 /* sculptures.json */; };
+		A10000000000000000000104 /* sky in Resources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000205 /* sky */; };
+		A10000000000000000000105 /* sculptures in Resources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000206 /* sculptures */; };
+		A10000000000000000000106 /* collection.json in Resources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000207 /* collection.json */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		A10000000000000000000201 /* artworks.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = artworks.json; path = ../artworks.json; sourceTree = SOURCE_ROOT; };
+		A10000000000000000000202 /* paintings */ = {isa = PBXFileReference; lastKnownFileType = folder; name = paintings; path = assets/paintings; sourceTree = SOURCE_ROOT; };
+		A10000000000000000000203 /* MuseeVision.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MuseeVision.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A10000000000000000000204 /* sculptures.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = sculptures.json; path = ../sculptures.json; sourceTree = SOURCE_ROOT; };
+		A10000000000000000000205 /* sky */ = {isa = PBXFileReference; lastKnownFileType = folder; name = sky; path = assets/sky; sourceTree = SOURCE_ROOT; };
+		A10000000000000000000206 /* sculptures */ = {isa = PBXFileReference; lastKnownFileType = folder; name = sculptures; path = assets/sculptures; sourceTree = SOURCE_ROOT; };
+		A10000000000000000000207 /* collection.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = collection.json; path = assets/collection.json; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		A10000000000000000000301 /* Shared */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		A10000000000000000000302 /* iOS */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = iOS;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A10000000000000000000401 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A10000000000000000000501 = {
+			isa = PBXGroup;
+			children = (
+				A10000000000000000000301 /* Shared */,
+				A10000000000000000000302 /* iOS */,
+				A10000000000000000000502 /* Resources */,
+				A10000000000000000000503 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A10000000000000000000502 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A10000000000000000000201 /* artworks.json */,
+				A10000000000000000000202 /* paintings */,
+				A10000000000000000000204 /* sculptures.json */,
+				A10000000000000000000205 /* sky */,
+				A10000000000000000000206 /* sculptures */,
+				A10000000000000000000207 /* collection.json */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		A10000000000000000000503 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A10000000000000000000203 /* MuseeVision.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A10000000000000000000601 /* MuseeVision */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A10000000000000000000801 /* Build configuration list for PBXNativeTarget "MuseeVision" */;
+			buildPhases = (
+				A10000000000000000000701 /* Sources */,
+				A10000000000000000000401 /* Frameworks */,
+				A10000000000000000000702 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				A10000000000000000000301 /* Shared */,
+				A10000000000000000000302 /* iOS */,
+			);
+			name = MuseeVision;
+			productName = MuseeVision;
+			productReference = A10000000000000000000203 /* MuseeVision.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A10000000000000000000901 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2700;
+				LastUpgradeCheck = 2700;
+				TargetAttributes = {
+					A10000000000000000000601 = {
+						CreatedOnToolsVersion = 27.0;
+					};
+				};
+			};
+			buildConfigurationList = A10000000000000000000802 /* Build configuration list for PBXProject "MuseeVision" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A10000000000000000000501;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = A10000000000000000000503 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A10000000000000000000601 /* MuseeVision */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A10000000000000000000702 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A10000000000000000000101 /* artworks.json in Resources */,
+				A10000000000000000000102 /* paintings in Resources */,
+				A10000000000000000000103 /* sculptures.json in Resources */,
+				A10000000000000000000104 /* sky in Resources */,
+				A10000000000000000000105 /* sculptures in Resources */,
+				A10000000000000000000106 /* collection.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A10000000000000000000701 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		A10000000000000000000A01 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		A10000000000000000000A02 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A10000000000000000000A03 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = D4QJ9DK7QE;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Musée Vision";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Musée Vision uses your approximate location only to show the real sky, sun and moon over where you are. It never leaves your phone.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UIStatusBarHidden = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = vision.musee.prototype;
+				PRODUCT_NAME = MuseeVision;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		A10000000000000000000A04 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = D4QJ9DK7QE;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Musée Vision";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Musée Vision uses your approximate location only to show the real sky, sun and moon over where you are. It never leaves your phone.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UIStatusBarHidden = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = vision.musee.prototype;
+				PRODUCT_NAME = MuseeVision;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A10000000000000000000801 /* Build configuration list for PBXNativeTarget "MuseeVision" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A10000000000000000000A03 /* Debug */,
+				A10000000000000000000A04 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A10000000000000000000802 /* Build configuration list for PBXProject "MuseeVision" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A10000000000000000000A01 /* Debug */,
+				A10000000000000000000A02 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A10000000000000000000901 /* Project object */;
+}
