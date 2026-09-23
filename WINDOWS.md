@@ -20,31 +20,46 @@ stills, DLSS for 4K, and OpenXR if the museum later goes into a PC headset.
 
 ## Pipeline and order of work
 
-The building is defined once. The Swift builder (on the Mac) exports it as USD, one layer per wing with
-stable names and a material slot on every surface, and Unreal imports that. The export is in
-[`usd/`](usd/README.md): open or import `usd/museum.usda`. Only the behaviour is rewritten for Unreal.
-When the design changes: canvas → `plan/` → the Swift wing → re-export USD on the Mac
-(`tools/usd-export/export.sh`) → reimport in Unreal (stable names keep the materials and lighting).
+**Now: the 4090 desktop build only.** The iPhone isn't a target for now. Whether Unreal later becomes
+the main build for every platform (iPhone and Vision Pro included) is undecided; until then, keep the
+architecture coming from the Mac.
 
-1. **Start now, PC (≈ 1 week):** set up Unreal 5.8, Visual Studio 2022 and Git LFS; material library
-   from the Concept palette; the 12 sculptures from their full-resolution originals as Nanite meshes;
-   walking and collision.
-2. **In parallel, Mac (1–2 weeks):** the USD exporter (done: `usd/`, `tools/usd-export/`); coffers,
-   cornices, fluting, mouldings and brick courses modelled as geometry, then re-exported.
-3. **Look-match, PC (1–2 weeks):** import `usd/museum.usda`, light it, then render the Rotunda and the Salon
-   arrival from the cameras of `plan/renderings/05-the-rotunda-v2.png` and
-   `plan/renderings/01-salon-arrival.png` and compare side by side. Get the stone rooms right before
-   building out.
-4. **Build-out, PC (3–5 weeks):** sky, elevator, pond and Reserve, handscroll, cup, stereo stones,
+The building is defined once. The Swift builder (on the Mac) exports it as USD, one layer per wing with
+stable names and a material slot on every surface. The export is in [`usd/`](usd/README.md). When the
+design changes: canvas → `plan/` → the Swift wing → re-export on the Mac (`tools/usd-export/export.sh`)
+→ reimport in Unreal.
+
+**Import `usd/` as it is; don't rebuild the architecture by hand.** Its geometry was checked against
+the plan wing by wing. Import it with Interchange as ordinary Unreal assets (static meshes, materials,
+levels), not as a live USD Stage actor, with Nanite on. Keep the prim and material names: they trace
+back to the plan and let a reimport keep what was assigned in Unreal.
+
+**Then rebuild natively only where the export is weak or missing:**
+
+| Part | Why | Do instead |
+|---|---|---|
+| Coffers, cornices, mouldings | Flat textures in the export | Model one coffer or moulding piece and instance it; Nanite carries the detail |
+| Materials | Basic colour and roughness only | Real Unreal materials matched by name (travertine, Carrara, bronze, gilt, brick…) |
+| Lights | Approximate conversion from the iPhone's values | Relight with Lumen and MegaLights, using the exported positions as a guide |
+| Sculptures | Decimated to ≤150k triangles | Full-resolution originals from `assets/sculptures/CREDITS.md`, as Nanite meshes |
+| Gardens and plants | Simple stand-ins | Unreal's foliage and procedural tools, with wind |
+| Collision | Not in the export | Generate it in Unreal |
+| Behaviour | USD carries none | Build it in Unreal; the moving parts are separate prims tagged `museevision:movingPart` |
+
+**Order:**
+
+1. **Set up (≈ 1 week):** Unreal 5.8, Visual Studio 2022, Git LFS; the project in `windows/` with
+   hardware ray tracing, Lumen, MegaLights, Nanite and DLSS on; walking and collision.
+2. **The Rotunda first:** import only `usd/wings/Rotunda`, then do its materials, lighting and coffers.
+   Render it from the camera of `plan/renderings/05-the-rotunda-v2.png` and compare side by side, in
+   real time and path-traced. Get this room right before importing the rest.
+3. **The other wings:** the same way, starting with the Salon (look-match against
+   `plan/renderings/01-salon-arrival.png`).
+4. **Build-out (3–5 weeks):** sky, elevator, pond and Reserve, handscroll, cup, stereo stones,
    placards, the Sphere.
-5. **Alive and ship, PC (1–2 weeks):** gardens, wind and rain, sound, performance, path-traced photo
+5. **Alive and ship (1–2 weeks):** gardens, wind and rain, sound, performance at 4K, path-traced photo
    mode, packaged app.
 
-Don't hand-build the architecture in Unreal; import it from `usd/` (with Interchange, or a USD Stage
-actor) and reimport after each re-export. Prim paths and material names stay the same from one export
-to the next, so the materials assigned in Unreal should survive a reimport. `usd/README.md` lists what
-is in it: the wings, the 12 scans with their sources, the lights, and the moving parts as separate,
-tagged prims.
 Summary with the renderings: https://claude.ai/artifact/RyC1hYn7S2w59TtozVvTCY
 
 Put the project in `windows/` in this repository. Keep build output out of git: `Binaries/`,
