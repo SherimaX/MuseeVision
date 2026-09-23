@@ -14,9 +14,33 @@ building; this should feel like standing in it.
 
 ## Engine
 
-**Recommended: Unreal Engine 5** (the current release). It has Lumen with hardware ray tracing for the
-daylight, Nanite for multi-million-triangle scans and coffers, the path tracer for stills, DLSS for 4K,
-and OpenXR if the museum later goes into a PC headset. Confirm the choice with the user before starting.
+**Unreal Engine 5.8** (decided). It has Lumen with hardware ray tracing for the daylight, MegaLights
+for many soft-shadowed lights, Nanite for multi-million-triangle scans and coffers, the path tracer for
+stills, DLSS for 4K, and OpenXR if the museum later goes into a PC headset.
+
+## Pipeline and order of work
+
+The building is defined once. The Swift builder (on the Mac) exports it as USD, one layer per wing with
+stable names and a material slot on every surface, and Unreal imports that. Only the behaviour is
+rewritten for Unreal. When the design changes: canvas → `plan/` → the Swift wing → re-export USD →
+reimport in Unreal (stable names keep the materials and lighting).
+
+1. **Start now, PC (≈ 1 week):** set up Unreal 5.8, Visual Studio 2022 and Git LFS; material library
+   from the Concept palette; the 12 sculptures from their full-resolution originals as Nanite meshes;
+   walking and collision.
+2. **In parallel, Mac (1–2 weeks):** the USD exporter; coffers, cornices, fluting, mouldings and brick
+   courses modelled as geometry.
+3. **Look-match, PC (1–2 weeks):** import the USD, light it, then render the Rotunda and the Salon
+   arrival from the cameras of `output/imagegen` renderings `05-the-rotunda-v2` and `01-salon-arrival`
+   (on the Mac; ask the user for them) and compare side by side. Get the stone rooms right before
+   building out.
+4. **Build-out, PC (3–5 weeks):** sky, elevator, pond and Reserve, handscroll, cup, stereo stones,
+   placards, the Sphere.
+5. **Alive and ship, PC (1–2 weeks):** gardens, wind and rain, sound, performance, path-traced photo
+   mode, packaged app.
+
+Until the USD exporter lands, don't hand-build the architecture in Unreal; it would be thrown away.
+Summary with the renderings: https://claude.ai/artifact/RyC1hYn7S2w59TtozVvTCY
 
 Put the project in `windows/` in this repository. Keep build output out of git: `Binaries/`,
 `Intermediate/`, `Saved/`, `DerivedDataCache/`, `.vs/`. Unreal's `.uasset` and `.umap` files are binary
