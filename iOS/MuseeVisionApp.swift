@@ -38,7 +38,7 @@ struct MuseumView: View {
 
     var body: some View {
         GeometryReader { geo in
-            let topInset = max(geo.safeAreaInsets.top, MuseumView.windowSafeTop)
+            let topInset = max(geo.safeAreaInsets.top, 59)
             let joystickCentre = CGPoint(x: geo.safeAreaInsets.leading + joystickRadius + 28,
                                          y: geo.size.height - geo.safeAreaInsets.bottom - joystickRadius - 28)
             ZStack {
@@ -54,6 +54,11 @@ struct MuseumView: View {
                     if let sky = try? await EnvironmentResource(equirectangular: Textures.skyEquirect()) {
                         content.environment = .skybox(sky)
                     }
+                    #if DEBUG
+                    if Lab.enabled { Lab.install(in: controller.scene.root) }
+                    if Lab.stats { Lab.printStats(controller.scene.root); Lab.paintingMemory(controller.scene) }
+                    if ProcessInfo.processInfo.arguments.contains("-export") { await Lab.export(controller.scene.root) }
+                    #endif
                     #if DEBUG
                     print("[debug] scene ready after \(Date().timeIntervalSince(t0)) s")
                     #endif
@@ -113,7 +118,7 @@ struct MuseumView: View {
                     }
                 }
                 .ignoresSafeArea()
-                if !sceneReady {
+                if !sceneReady, !ProcessInfo.processInfo.arguments.contains("-lab") {
                     LaunchView().transition(.opacity)
                 }
             }
@@ -121,7 +126,7 @@ struct MuseumView: View {
             .animation(.easeOut(duration: 0.3), value: controller.message)
             .onAppear {
                 controller.viewSize = geo.size
-                if location == nil {
+                if location == nil, !ProcessInfo.processInfo.arguments.contains("-lab") {
                     let scene = controller.scene
                     location = LocationProvider { scene.observer = $0 }
                     location?.start()

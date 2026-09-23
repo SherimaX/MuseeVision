@@ -226,7 +226,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = vision.musee.prototype;
+				PRODUCT_BUNDLE_IDENTIFIER = vision.musee.perflab;
 				PRODUCT_NAME = MuseeVision;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -257,7 +257,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = vision.musee.prototype;
+				PRODUCT_BUNDLE_IDENTIFIER = vision.musee.perflab;
 				PRODUCT_NAME = MuseeVision;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
