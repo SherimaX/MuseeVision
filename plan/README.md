@@ -10,6 +10,7 @@ from it so every build (iPhone, Windows) reads the same plan.
 | `Musee-Vision-Guide.pdf` | **Start here.** The whole museum in visit order, 37 landscape pages built from the boards: Rotunda → Salon + Reserve → Sculpture → Chinese Wing → Hall of Light → Élan. |
 | `canvas/*.dc.html` | The boards' own source. Plans, sections and elevations are inline SVG with every dimension in the markup, so they can be read directly. They render properly only inside the canvas; use the PDF for looking. |
 | `canvas/canvas.json` | Board titles and their layout on the canvas. |
+| `renderings/` | The GPT concept renderings with their prompts: mood targets, not the plan. Three are out of date; see its README. |
 
 ## Boards
 

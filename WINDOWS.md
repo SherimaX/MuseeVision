@@ -31,8 +31,8 @@ reimport in Unreal (stable names keep the materials and lighting).
 2. **In parallel, Mac (1–2 weeks):** the USD exporter; coffers, cornices, fluting, mouldings and brick
    courses modelled as geometry.
 3. **Look-match, PC (1–2 weeks):** import the USD, light it, then render the Rotunda and the Salon
-   arrival from the cameras of `output/imagegen` renderings `05-the-rotunda-v2` and `01-salon-arrival`
-   (on the Mac; ask the user for them) and compare side by side. Get the stone rooms right before
+   arrival from the cameras of `plan/renderings/05-the-rotunda-v2.png` and
+   `plan/renderings/01-salon-arrival.png` and compare side by side. Get the stone rooms right before
    building out.
 4. **Build-out, PC (3–5 weeks):** sky, elevator, pond and Reserve, handscroll, cup, stereo stones,
    placards, the Sphere.
