@@ -70,8 +70,10 @@ and large, so set up **Git LFS** for them before the first commit (GitHub reject
 
 Read these in this order:
 
-1. **`plan/Musee-Vision-Guide.pdf`**: the whole museum, room by room, in visit order.
-2. **`plan/README.md`**: the plan in words, and an index of the boards.
+1. **`plan/boards/*.png`**: every board of the canvas as an image (current). The older
+   `plan/Musee-Vision-Guide.pdf` walks the museum in visit order but dates from 23 September.
+2. **`plan/README.md`**: the plan in words, an index of the boards, and the proposals in
+   `plan/proposals/` (Salon interior update, Chenghuai, Albion) with what is decided and what is not.
 3. **`plan/canvas/*.dc.html`**: the boards themselves. Every plan, section and elevation is inline SVG,
    so exact positions and dimensions can be read from the markup.
 4. **`README.md`, "Where the plan was read, resolved or bent"**: every place the boards disagree or
