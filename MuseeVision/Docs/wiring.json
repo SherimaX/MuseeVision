@@ -1,0 +1,79 @@
+{
+  "about": "The museum's wiring as data: which Musee modules each module may depend on, which module owns each engine capability, and what no module rules may use. workshop/verify.ps1 (step 2) compares UnrealBuildTool's resolved module graph (-Mode=JsonExport) with this file, and always reads it from the renaissance tip. Written from Docs/Architecture.md (The wiring: the exact edges and rules 1-7) and Journal/Decisions.md (D-007, D-008, D-010, D-011, D-014). The Architect owns it; it changes only with the architecture or a decision.",
+  "rulesBase": "MuseeModuleRules",
+  "foundation": "MuseeFoundation",
+  "kit": ["MuseeFoundation", "MuseeTime", "MuseeMatter", "MuseeForm", "MuseeLight", "MuseeSound", "MuseeMotion", "MuseeNature", "MuseeArt"],
+  "modules": {
+    "MuseeFoundation": { "system": "Foundation", "layer": "L0", "phase": "runtime", "musee": [] },
+    "MuseeTime": { "system": "Time", "layer": "L1", "phase": "runtime", "musee": ["MuseeFoundation"] },
+    "MuseeMatterShaders": {
+      "system": "Matter", "layer": "L2", "phase": "runtime", "musee": [], "rulesBase": "ModuleRules",
+      "engineOnly": ["Core", "RenderCore", "Projects"],
+      "why": "Maps Matter's shading library at /Project/Matter before any material compiles (PostConfigInit): Core, RenderCore and Projects only."
+    },
+    "MuseeMatter": { "system": "Matter", "layer": "L2", "phase": "runtime", "musee": ["MuseeFoundation", "MuseeTime"] },
+    "MuseeMatterMaking": {
+      "system": "Matter", "layer": "L2", "phase": "editor", "musee": ["MuseeFoundation", "MuseeMatter"],
+      "why": "D-014: Matter's editor twin builds its material graphs in C++ (D-007)."
+    },
+    "MuseeForm": { "system": "Form", "layer": "L3", "phase": "runtime", "musee": ["MuseeFoundation", "MuseeMatter"] },
+    "MuseeFormMaking": { "system": "Form", "layer": "L3", "phase": "editor", "musee": ["MuseeFoundation", "MuseeForm"] },
+    "MuseeLight": { "system": "Light", "layer": "L4", "phase": "runtime", "musee": ["MuseeFoundation", "MuseeForm", "MuseeMatter", "MuseeTime"] },
+    "MuseeSound": { "system": "Sound", "layer": "L4", "phase": "runtime", "musee": ["MuseeFoundation", "MuseeForm", "MuseeMatter", "MuseeTime"] },
+    "MuseeMotion": { "system": "Motion", "layer": "L4", "phase": "runtime", "musee": ["MuseeFoundation", "MuseeForm", "MuseeMatter"] },
+    "MuseeNature": { "system": "Nature", "layer": "L4", "phase": "runtime", "musee": ["MuseeFoundation", "MuseeForm", "MuseeMatter", "MuseeTime"] },
+    "MuseeArt": { "system": "Art", "layer": "L5", "phase": "runtime", "musee": ["MuseeFoundation", "MuseeLight", "MuseeForm", "MuseeMatter", "MuseeTime"] },
+    "MuseeVisitor": {
+      "system": "Visitor", "layer": "side", "phase": "runtime", "musee": ["MuseeFoundation"],
+      "why": "Visitor sees only Foundation. D-014: the screen adapter lives in MuseeVisitor."
+    },
+    "MuseeVisitorHeadset": {
+      "system": "Visitor", "layer": "side", "phase": "runtime", "musee": ["MuseeFoundation", "MuseeVisitor"], "targets": ["MuseeVisionVR"],
+      "why": "D-010: the headset adapter is built only in the MuseeVisionVR target."
+    },
+    "MuseeSite": {
+      "system": "Site", "layer": "L6", "phase": "runtime",
+      "musee": ["MuseeFoundation", "MuseeArt", "MuseeLight", "MuseeSound", "MuseeMotion", "MuseeNature", "MuseeForm", "MuseeMatter", "MuseeTime", "MuseeVisitor"]
+    },
+    "MuseeInstruments": { "system": "Instruments", "layer": "beside", "phase": "runtime", "musee": ["MuseeFoundation", "MuseeVisitor"] },
+    "MuseeStudio": { "system": "Studio", "layer": "beside", "phase": "editor", "musee": "*", "why": "Studio sees everything; nothing sees it." }
+  },
+  "stages": {
+    "room": {
+      "folder": "Source/Stages/Rooms/<Room>", "module": "Musee<Room>", "phase": "editor", "musee": ["MuseeSite", "@kit"],
+      "why": "A room describes itself through Site and the kit it uses; never FormMaking, Visitor, Studio or another stage."
+    },
+    "work": {
+      "folder": "Source/Stages/Works/<Work>/Musee<Work>", "module": "Musee<Work>", "phase": "runtime", "musee": ["MuseeSite", "@kit"],
+      "why": "A work performs through Art, the kit and Site; never a room."
+    },
+    "workMaking": {
+      "folder": "Source/Stages/Works/<Work>/Musee<Work>Making", "module": "Musee<Work>Making", "phase": "editor", "musee": ["Musee<Work>", "MuseeSite", "@kit"],
+      "why": "A work's making module describes it through its work, Site and the kit; never FormMaking or a room."
+    }
+  },
+  "capabilities": [
+    { "capability": "HTTP", "engine": ["HTTP"], "owners": ["MuseeTime"] },
+    { "capability": "Json", "engine": ["Json", "JsonUtilities"], "owners": ["MuseeFoundation"] },
+    { "capability": "the geometry kernel", "engine": ["GeometryCore", "GeometryAlgorithms", "DynamicMesh"], "owners": ["MuseeFormMaking"] },
+    { "capability": "audio mixing and MetaSound", "engine": ["AudioMixer", "AudioMixerCore", "Metasound*"], "owners": ["MuseeSound"] },
+    { "capability": "Niagara", "engine": ["Niagara*"], "owners": ["MuseeNature"] },
+    { "capability": "input and interface", "engine": ["EnhancedInput", "UMG"], "owners": ["MuseeVisitor", "MuseeVisitorHeadset"] },
+    { "capability": "sampling: the upscaler and frame generation (D-014: the Eye owns sampling)", "engine": ["Streamline*", "DLSS*", "NGX*"], "owners": ["MuseeVisitor"] },
+    { "capability": "OpenXR and the head-mounted display (D-010)", "engine": ["OpenXR*", "HeadMountedDisplay", "XRBase"], "owners": ["MuseeVisitorHeadset"] },
+    { "capability": "navigation", "engine": ["NavigationSystem"], "owners": ["MuseeSite"] },
+    { "capability": "mesh descriptions and casting", "engine": ["MeshDescription", "StaticMeshDescription", "MeshConversion"], "owners": ["MuseeStudio"] },
+    { "capability": "material graphs in C++ (D-007, D-014)", "engine": ["MaterialEditor"], "owners": ["MuseeMatterMaking"] },
+    { "capability": "editor APIs", "engine": ["UnrealEd", "AssetTools", "LevelInstanceEditor", "EditorScriptingUtilities", "EditorSubsystem"], "enginePaths": ["Engine/Source/Editor/"], "owners": ["MuseeStudio", "MuseeMatterMaking"] },
+    { "capability": "localisation", "engine": ["Localization"], "owners": ["MuseeStudio"] },
+    { "capability": "Python", "engine": ["PythonScriptPlugin"], "owners": ["MuseeStudio"] },
+    { "capability": "procedural mesh components, Landscape and the Water plugin (used nowhere)", "engine": ["ProceduralMeshComponent", "Landscape", "Water*"], "owners": [] }
+  ],
+  "bannedRules": ["PublicIncludePaths", "PublicIncludePathModuleNames", "DynamicallyLoadedModuleNames", "CircularlyReferencedDependentModules"],
+  "bannedRulesAllowlist": {},
+  "targets": {
+    "MuseeVisionEditor": { "kind": "editor" },
+    "MuseeVision": { "kind": "game", "never": ["MuseeVisitorHeadset", "OpenXR*"], "why": "D-010: the desktop game never links OpenXR or the headset adapter." },
+    "MuseeVisionVR": { "kind": "game", "never": [] }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "about": "The Unreal slot table (BUILD_PLAN 7.4). Each slot is one or more machine-wide named mutexes, Global\\<namespace>_<mutex>; a run holds one of its slot's mutexes for as long as Unreal runs. unreal.ps1 reads this file.",
+  "slots": {
+    "GPU": {
+      "use": "measurements, evidence renders, test-bench walks, game runs",
+      "mutexes": ["GPU"],
+      "gpuIdleBelowPercent": 10
+    },
+    "HEAVY": {
+      "use": "Nanite and texture generation, cooking and packaging, any game-target build (it compiles the shared plugin folder C:\\mv\\third_party\\Plugins)",
+      "mutexes": ["HEAVY"]
+    },
+    "LIGHT": {
+      "use": "headless (-nullrhi) automation tests and geometry checks",
+      "mutexes": ["LIGHT_1", "LIGHT_2"],
+      "minAvailableGB": 40
+    }
+  },
+  "oneUnrealAtATime": true,
+  "oneUnrealAtATimeReason": "The bootstrap rule: until the Phase 0a spike 'two LIGHT jobs at once' is measured, every GPU and LIGHT run also holds HEAVY, so only one Unreal process runs on the machine. The Architect sets this to false when the spike passes.",
+  "childGraceSeconds": 300,
+  "sharedServices": ["zenserver.exe", "UnrealTraceServer.exe", "mspdbsrv.exe"]
+}
