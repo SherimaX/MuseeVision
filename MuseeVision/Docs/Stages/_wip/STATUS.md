@@ -23,3 +23,12 @@
   data/*.json and the assets/*/ catalogues, so hang ids come from whichever catalogue owns the work.
 - Conflict to raise: D-012 says the Salon's pond serves the stair to the Reserve, but D-019 moves the pond and
   stair to `nympheas`. The Reserve's up-port therefore mates the oval, not the Salon.
+
+## The Architect's answers (received at the pause)
+1. The Reserve's receiving stair port mates `nympheas.stair`. The oval serves that well (D-019), and D-012's
+   "Salon's pond" now means the oval's. The Salon bays have no stair port.
+2. Hang ids come from the catalogue that owns each work. Every Hang.json entry adds
+   `"source": "<repo-relative path of that catalogue>"`. Don't unify the catalogues: Art merges them later. Where a
+   work has no size in its catalogue, take it from the old hang scripts or the boards and cite where.
+3. The provisional key convention `<family>.<material>[.<variety>]`, with gilt as a working, stands until the
+   palette lands.

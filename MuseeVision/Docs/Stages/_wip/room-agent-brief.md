@@ -122,9 +122,12 @@ Lighting.json  { "stage": "<room>",
                  "luminaires": [ { "id": "cast-niche-nw", "type": "<catalogue key>", "mount": [x,y,z], "aim": [x,y,z], "operation": "always|dusk|presence" } ],
                  "targets":    [ { "surface": "<surface>", "class": "<use or care class>", "lux": [min,max], "source": "UseTargets|Care" } ],
                  "design":     [ { "brighter": "<surface>", "darker": "<surface>", "ratio": [min,max], "note": "" } ] }
-Hang.json      { "stage": "<room>", "works": [ { "work": "<collection id>", "anchor": "<anchor key>", "wall": "<surface>", "centre": [x,y,z], "size": [w,h], "support": "canvas|panel|paper|silk|cast|…", "frame": "<frame type or none>", "care": "<care class>" } ] }
+Hang.json      { "stage": "<room>", "works": [ { "work": "<collection id>", "anchor": "<anchor key>", "wall": "<surface>", "centre": [x,y,z], "size": [w,h], "support": "canvas|panel|paper|silk|cast|…", "frame": "<frame type or none>", "care": "<care class>", "source": "<repo-relative path of the owning catalogue>" } ] }
 Planting.json  { "stage": "<room>", "beds": [ { "bed": "<bed key>", "species": "<Latin name>", "count": n, "spacing": s, "note": "" } ] }
 ```
+Hang ids come verbatim from the catalogue that owns the work (collection.json, data/*.json, assets/*/*.json); name it in
+`source` (e.g. `data/albion.json`) and never unify catalogues. A size missing from the catalogue comes from the old hang
+scripts or the boards, cited in §8. The Reserve's stair port mates `nympheas.stair`; the Salon has no stair port.
 Positions are metres in the room's frame. `aim` is a POINT in the room frame the luminaire aims at (not a vector).
 Keys lowercase, dot-scoped. Every surface named in the sheet appears in Finishes.json; every `wall` in Hang.json
 and every `surface` in Lighting targets is a surface from the sheet. Write JSON with UTF-8, 2-space indent.
