@@ -188,18 +188,50 @@ extension MeshBuilder {
     /// Coffers on a curved surface. `P(u, v, depth)` maps grid coordinates to a point, pushed
     /// `depth` metres away from the viewer (into the vault). Each cell gets a rib frame, a
     /// stepped bevel and a recessed panel. `centre` is a point on the viewer's side, used to
-    /// face the normals inwards. `skip` leaves cells open (skylights).
-    mutating func coffers(us: [Float], vs: [Float], depth: Float, rib: Float = 0.15, centre: (SIMD3<Float>) -> SIMD3<Float>,
+    /// face the normals inwards. `skip` leaves cells open (skylights). `segments` subdivides each
+    /// cell along u and v in grid space, so the ribs follow the curve instead of cutting chords
+    /// (which left crescent gaps against the plain vault or dome next to them), and the faces get
+    /// smooth normals from the surface. Neighbouring surfaces meet the cells exactly when they
+    /// use the same subdivided grid lines.
+    mutating func coffers(us: [Float], vs: [Float], depth: Float, rib: Float = 0.15, segments: (u: Int, v: Int) = (1, 1),
+                          centre: (SIMD3<Float>) -> SIMD3<Float>,
                           skip: (Int, Int) -> Bool = { _, _ in false },
                           _ P: (Float, Float, Float) -> SIMD3<Float>) {
-        func face(_ a: SIMD3<Float>, _ b: SIMD3<Float>, _ c: SIMD3<Float>, _ d: SIMD3<Float>) {
-            var n = cross(b - a, d - a)
-            if simd_length(n) < 1e-9 { n = cross(c - b, a - b) }
-            n = simd_length(n) > 1e-9 ? normalize(n) : [0, -1, 0]
-            let mid = (a + b + c + d) / 4
-            if dot(n, centre(mid) - mid) < 0 { n = -n }
-            quad(a, b, c, d, normal: n)
+        // A face between four grid corners (u, v, depth), s running c[0]→c[1] and t running c[0]→c[3].
+        func face(_ c: [SIMD3<Float>], _ ns: Int, _ nt: Int) {
+            func g(_ s: Float, _ t: Float) -> SIMD3<Float> {
+                let ab = c[0] + (c[1] - c[0]) * s, dc = c[3] + (c[2] - c[3]) * s
+                return ab + (dc - ab) * t
+            }
+            func X(_ s: Float, _ t: Float) -> SIMD3<Float> { let q = g(s, t); return P(q.x, q.y, q.z) }
+            func normal(_ s: Float, _ t: Float) -> SIMD3<Float> {
+                let h: Float = 0.01
+                let n = cross(X(min(1, s + h), t) - X(max(0, s - h), t), X(s, min(1, t + h)) - X(s, max(0, t - h)))
+                return simd_length(n) > 1e-12 ? normalize(n) : [0, -1, 0]
+            }
+            // Facing the viewer, decided once per face.
+            let mid = X(0.5, 0.5)
+            let flip: Float = dot(normal(0.5, 0.5), centre(mid) - mid) < 0 ? -1 : 1
+            var pts: [[SIMD3<Float>]] = [], nrm: [[SIMD3<Float>]] = []
+            for j in 0...nt {
+                let t = Float(j) / Float(nt)
+                var row: [SIMD3<Float>] = [], rowN: [SIMD3<Float>] = []
+                for i in 0...ns {
+                    let s = Float(i) / Float(ns)
+                    row.append(X(s, t))
+                    rowN.append(normal(s, t) * flip)
+                }
+                pts.append(row)
+                nrm.append(rowN)
+            }
+            for j in 0..<nt {
+                for i in 0..<ns {
+                    quad(pts[j][i], pts[j][i + 1], pts[j + 1][i + 1], pts[j + 1][i],
+                         normals: nrm[j][i], nrm[j][i + 1], nrm[j + 1][i + 1], nrm[j + 1][i])
+                }
+            }
         }
+        let nu = max(1, segments.u), nv = max(1, segments.v)
         for i in 0..<(us.count - 1) {
             for j in 0..<(vs.count - 1) where !skip(i, j) {
                 let u0 = us[i], u1 = us[i + 1], v0 = vs[j], v1 = vs[j + 1]
@@ -209,17 +241,18 @@ extension MeshBuilder {
                 var rings: [[SIMD3<Float>]] = []
                 for (f, d) in insets {
                     let a0 = u0 + du * f, a1 = u1 - du * f, b0 = v0 + dv * f, b1 = v1 - dv * f
-                    rings.append([P(a0, b0, d * depth), P(a1, b0, d * depth), P(a1, b1, d * depth), P(a0, b1, d * depth)])
+                    rings.append([[a0, b0, d * depth], [a1, b0, d * depth], [a1, b1, d * depth], [a0, b1, d * depth]])
                 }
                 for k in 0..<3 {
                     let o = rings[k], n = rings[k + 1]
                     for e in 0..<4 {
                         let e1 = (e + 1) % 4
-                        face(o[e], o[e1], n[e1], n[e])
+                        // Edges 0 and 2 run along u, 1 and 3 along v.
+                        face([o[e], o[e1], n[e1], n[e]], e % 2 == 0 ? nu : nv, 1)
                     }
                 }
                 let p = rings[3]
-                face(p[0], p[1], p[2], p[3])
+                face([p[0], p[1], p[2], p[3]], nu, nv)
             }
         }
     }

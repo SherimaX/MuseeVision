@@ -345,8 +345,9 @@ extension MuseumScene {
         let brick = Mat.textured(Textures.resource(Textures.brick()), roughness: 0.9)
 
         // Brick walls with the one opening, from the stair (arched to the aisle vault).
+        // Closed exactly, so the outer faces mitre at the start corner (the 1 cm overrun left it open).
         let loop: [SIMD2<Float>] = [[R.x0, R.halfWidth], [R.x0, -R.halfWidth], [R.x1, -R.halfWidth], [R.x1, R.halfWidth],
-                                    [R.x0 - 0.01, R.halfWidth]]
+                                    [R.x0, R.halfWidth]]
         let run = WallRun(points: loop, inside: .right, height: R.clear, thickness: 0.6,
                           openings: [WallOpening(center: R.halfWidth, width: 2.4, spring: 2.0)])
         var walls = MeshBuilder()
@@ -374,23 +375,41 @@ extension MuseumScene {
             if abs(z) < 1.8 { h = max(h, R.springing + sqrt(max(0, 3.24 - z * z))) }
             return min(h, R.clear)
         }
+        // Sampled at equal angles round each barrel (even 0.25 m steps left the steep parts near
+        // the springing in coarse facets), with smooth normals from whichever barrel forms the
+        // ceiling in each cell (flat per-cell normals showed every facet), so the groins stay crisp.
+        func bayCentre(_ x: Float) -> Float { ((x - R.x0) / 6).rounded(.down) * 6 + R.x0 + 3 }
+        func unique(_ v: [Float]) -> [Float] { Array(Set(v.map { ($0 * 10000).rounded() / 10000 })).sorted() }
+        let steps = Tessellation.segments(24)
+        var xs: [Float] = [], zs: [Float] = []
+        var bx = R.x0
+        while bx < R.x1 - 1e-3 {
+            xs += (0...steps).map { bx + 3 - 3 * cos(Float.pi * Float($0) / Float(steps)) }
+            bx += 6
+        }
+        zs += (0...56).map { -R.halfWidth + 0.25 * Float($0) }
+        zs += (0...steps).map { -1.8 * cos(Float.pi * Float($0) / Float(steps)) }
+        xs = unique(xs).filter { $0 >= R.x0 && $0 <= R.x1 }
+        zs = unique(zs).filter { $0 >= -R.halfWidth && $0 <= R.halfWidth }
+        // The downward normal at p of the barrel that shows at the cell centre m.
+        func normal(_ p: SIMD3<Float>, cell m: SIMD2<Float>) -> SIMD3<Float> {
+            let bc = bayCentre(m.x), dx = m.x - bc
+            let bayHeight = R.springing + sqrt(max(0, 9 - dx * dx))
+            let aisle = abs(m.y) < 1.8 && R.springing + sqrt(max(0, 3.24 - m.y * m.y)) > bayHeight
+            let v: SIMD3<Float> = aisle ? [0, p.y - R.springing, p.z] : [p.x - bc, p.y - R.springing, 0]
+            return simd_length(v) > 1e-6 ? -normalize(v) : [0, -1, 0]
+        }
         var vault = MeshBuilder()
-        let cell: Float = 0.25
-        var gx = R.x0
-        while gx < R.x1 - 1e-3 {
-            var gz = -R.halfWidth
-            while gz < R.halfWidth - 1e-3 {
-                let x0 = gx, x1 = min(R.x1, gx + cell), z0 = gz, z1 = min(R.halfWidth, gz + cell)
+        for (x0, x1) in zip(xs, xs.dropFirst()) where x1 - x0 > 1e-6 {
+            for (z0, z1) in zip(zs, zs.dropFirst()) where z1 - z0 > 1e-6 {
                 let p00 = SIMD3<Float>(x0, ceiling(x0, z0), z0), p10 = SIMD3<Float>(x1, ceiling(x1, z0), z0)
                 let p11 = SIMD3<Float>(x1, ceiling(x1, z1), z1), p01 = SIMD3<Float>(x0, ceiling(x0, z1), z1)
-                var n = normalize(cross(p01 - p00, p10 - p00))
-                if n.y > 0 { n = -n }
-                vault.quad(p00, p10, p11, p01, normal: n,
+                let m = SIMD2<Float>((x0 + x1) / 2, (z0 + z1) / 2)
+                vault.quad(p00, p10, p11, p01,
+                           normals: normal(p00, cell: m), normal(p10, cell: m), normal(p11, cell: m), normal(p01, cell: m),
                            uv: ([x0 / 0.9, (z0 + p00.y) / 0.6], [x1 / 0.9, (z0 + p10.y) / 0.6], [x1 / 0.9, (z1 + p11.y) / 0.6],
                                 [x0 / 0.9, (z1 + p01.y) / 0.6]))
-                gz += cell
             }
-            gx += cell
         }
         add(vault, brick, name: "Reserve vault", to: base)
 

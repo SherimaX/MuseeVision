@@ -76,11 +76,19 @@ extension MuseumScene {
         let hole = acos(S.skylightHalfWidth / R)
         let side = (0...8).map { hole * Float($0) / 8 }
         let angles = side + [Float.pi / 2] + side.reversed().map { Float.pi - $0 }
+        // Each coffer row is subdivided round the arc, and the plain strips and lunettes use the
+        // very same angles, so they meet the coffers vertex for vertex. (Unsubdivided, each 9.7°
+        // row was one chord, 2.5 cm inside the plain vault next to it: a crescent open to the sky
+        // at both ends of every bay.)
+        let perRow = Tessellation.segments(4)
+        let arc: [Float] = (0..<(angles.count - 1)).flatMap { j in
+            (0..<perRow).map { k in angles[j] + (angles[j + 1] - angles[j]) * (Float(k) / Float(perRow)) }
+        } + [angles[angles.count - 1]]
         for bay in S.bays {
             let xa = bay.skylight.x0, xb = bay.skylight.x1
             let n = 8
             let xs = (0...n).map { xa + (xb - xa) * Float($0) / Float(n) }
-            vault.coffers(us: xs, vs: angles, depth: 0.32, rib: 0.14,
+            vault.coffers(us: xs, vs: angles, depth: 0.32, rib: 0.14, segments: (u: 1, v: perRow),
                           centre: { p in [p.x, S.wallHeight, 0] },
                           skip: { _, j in j == 8 || j == 9 }) { x, a, d in
                 [x, S.wallHeight + (R + d) * sin(a), (R + d) * cos(a)]
@@ -91,12 +99,12 @@ extension MuseumScene {
         let edges: [Float] = [S.endWallX] + S.bays.flatMap { [$0.skylight.x0, $0.skylight.x1] } + [S.farWallX]
         for k in stride(from: 0, to: edges.count - 1, by: 2) { strips.append((edges[k], edges[k + 1])) }
         for (a, b) in strips where abs(a - b) > 1e-3 {
-            vault.barrelVault(x0: a, x1: b, radius: R, spring: S.wallHeight, holes: [], tile: 1.2)
+            vault.barrelVault(x0: a, x1: b, radius: R, spring: S.wallHeight, holes: [], tile: 1.2, arc: arc)
         }
         add(vault, Mat.honedStone(.travertine, tint: 0xFFFAF0, seed: 10), name: "Vault")
         var lunettes = MeshBuilder()
-        lunettes.lunette(x: S.endWallX - 0.001, radius: S.vaultRadius, spring: S.wallHeight, facing: -1)
-        lunettes.lunette(x: S.farWallX + 0.001, radius: S.vaultRadius, spring: S.wallHeight, facing: 1)
+        lunettes.lunette(x: S.endWallX - 0.001, radius: S.vaultRadius, spring: S.wallHeight, facing: -1, arc: arc)
+        lunettes.lunette(x: S.farWallX + 0.001, radius: S.vaultRadius, spring: S.wallHeight, facing: 1, arc: arc)
         add(lunettes, Mat.matte(Mat.stone), name: "Lunettes")
 
         let crown = S.wallHeight + sqrt(S.vaultRadius * S.vaultRadius - S.skylightHalfWidth * S.skylightHalfWidth)
@@ -160,12 +168,19 @@ extension MuseumScene {
         let hw: Float = 1.5
         let spring = Plan.Salon.door.spring
         var p = MeshBuilder()
-        let px0 = Plan.Salon.farWallX - 0.55, px1: Float = -75.9
-        p.wall(WallRun(points: [[px0, -hw], [px1, -hw]], inside: .left, height: spring, thickness: 0.2), faces: (true, false))
-        p.wall(WallRun(points: [[px0, hw], [px1, hw]], inside: .right, height: spring, thickness: 0.2), faces: (true, false))
-        for i in 0..<32 {
-            let a0 = Float.pi * Float(i) / 32, a1 = Float.pi * Float(i + 1) / 32
-            func q(_ x: Float, _ a: Float) -> SIMD3<Float> { [x, spring + hw * sin(a), hw * cos(a)] }
+        // From the far wall's outer face (it began 5 cm inside that wall, over the door's reveal)
+        // to 0.3 m inside the oval wall at the jambs (it ran on to −75.9, 0.4 m into the oval room
+        // at the crown). It overlaps the oval door's reveal, so it is built 5 mm wider than the
+        // doors: the two soffits never share a plane (they z-fought).
+        let jamb = c.x + O.a * (1 - hw * hw / (O.b * O.b)).squareRoot()   // the oval's inner face at the jambs
+        let px0 = Plan.Salon.farWallX - Plan.Salon.wall, px1 = jamb + 0.3
+        let wide = hw + 0.005
+        p.wall(WallRun(points: [[px0, -wide], [px1, -wide]], inside: .left, height: spring, thickness: 0.2), faces: (true, false))
+        p.wall(WallRun(points: [[px0, wide], [px1, wide]], inside: .right, height: spring, thickness: 0.2), faces: (true, false))
+        let n = Tessellation.arch
+        for i in 0..<n {
+            let a0 = Float.pi * Float(i) / Float(n), a1 = Float.pi * Float(i + 1) / Float(n)
+            func q(_ x: Float, _ a: Float) -> SIMD3<Float> { [x, spring + wide * sin(a), wide * cos(a)] }
             let n0 = SIMD3<Float>(0, -sin(a0), -cos(a0)), n1 = SIMD3<Float>(0, -sin(a1), -cos(a1))
             p.quad(q(px0, a0), q(px1, a0), q(px1, a1), q(px0, a1), normals: n0, n0, n1, n1)
         }
@@ -173,12 +188,13 @@ extension MuseumScene {
         collision.addPolyline([[px0, -hw], [px1, -hw]])
         collision.addPolyline([[px0, hw], [px1, hw]])
         var pf = MeshBuilder()
-        pf.floorRect(x0: -76.2, x1: Plan.Salon.farWallX, z0: -hw, z1: hw, y: 0, up: true, tile: 2.4)
+        pf.floorRect(x0: -76.2, x1: Plan.Salon.farWallX, z0: -wide, z1: wide, y: 0, up: true, tile: 2.4)
         add(pf, Mat.polishedStone(.travertine), name: "Oval passage floor")
 
         // The oval wall: a loop from the west apex, so the door (east apex) sits mid-run.
-        // (The loop overlaps itself by a hair so no seam shows at the west apex.)
-        let loop = Poly.ellipse(c, a: O.a, b: O.b, from: .pi, to: 3 * .pi + 0.01, segments: 400)
+        // (It closes exactly on itself; the wall mitres and smooths across the seam. The old
+        // overrun of 0.01 rad z-fought over 10 cm at the west apex.)
+        let loop = Poly.ellipse(c, a: O.a, b: O.b, from: .pi, to: 3 * .pi, segments: 400)
         let half = Poly.arcLength(Poly.ellipse(c, a: O.a, b: O.b, from: .pi, to: 2 * .pi, segments: 400))
         let run = WallRun(points: loop, inside: .right, height: O.height, thickness: O.wall,
                           openings: [WallOpening(center: half, width: 3, spring: spring)])

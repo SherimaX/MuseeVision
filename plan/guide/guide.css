@@ -1,0 +1,238 @@
+/*
+  Musée Vision · A guide to the museum
+  One 15 × 10 in sheet (1080 × 720 pt, 1440 × 960 CSS px) per <section class="page">.
+
+  House type is Cormorant Garamond (titles), Jost (text) and IBM Plex Mono (labels). They are
+  web fonts, so the guide is set in the nearest fonts that ship with Windows and embed in the
+  printed PDF: Garamond, Segoe UI and Consolas (Noto Serif SC for Chinese).
+*/
+
+:root {
+  --paper: #F3EEE5;
+  --card: #FBF8F2;
+  --ink: #1E1C19;
+  --text: #4A443B;
+  --muted: #5E574D;
+  --faint: #8A8172;
+  --rule: #D9D0C1;
+  --teal: #2C6E73;
+  --glass: #7CC3C5;
+  --gilt: #7E5C25;
+  --gilt-light: #C9A266;
+  --night: #17150F;
+  --night-text: #F1EBDF;
+  --night-muted: #B8AE9C;
+  --night-rule: #3A352C;
+
+  --serif: Garamond, "Cormorant Garamond", Georgia, serif;
+  --sans: "Segoe UI", Jost, sans-serif;
+  --mono: Consolas, "IBM Plex Mono", monospace;
+  --cjk: "Noto Serif SC", "Noto Serif TC", SimSun, serif;
+}
+
+@page { size: 15in 10in; margin: 0; }
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: #8C857A;
+  font-family: var(--sans);
+  color: var(--ink);
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+  text-rendering: geometricPrecision;
+}
+@media print { body { background: none; } }
+
+/* ------------------------------------------------------------------ sheets */
+
+.page {
+  position: relative;
+  width: 1440px;
+  height: 960px;
+  overflow: hidden;
+  background: var(--paper);
+  padding: 58px 72px 0;
+  break-after: page;
+  page-break-after: always;
+}
+.page:last-child { break-after: auto; page-break-after: auto; }
+@media screen { .page { margin: 0 auto 24px; } }
+
+/* A single sheet on screen, for page screenshots: guide.html#p07 */
+body.solo { background: var(--paper); }
+body.solo .page { display: none; margin: 0; }
+body.solo .page.shown { display: block; }
+
+.page.dark { background: var(--night); color: var(--night-text); }
+
+/* ------------------------------------------------------------------ type */
+
+.eyebrow {
+  font: 13px/1 var(--mono);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gilt);
+}
+.eyebrow.teal, .elan .eyebrow { color: var(--teal); }
+.dark .eyebrow { color: var(--gilt-light); }
+.dark.elan .eyebrow { color: var(--glass); }
+
+h1, h2, h3 { margin: 0; font-family: var(--serif); font-weight: 400; }
+h1 { font-size: 68px; line-height: 1; letter-spacing: -0.005em; }
+h2 { font-size: 30px; line-height: 1.12; }
+h3 { font-size: 25px; line-height: 1.15; }
+
+.lede {
+  margin: 0;
+  font: 300 18px/1.62 var(--sans);
+  color: var(--text);
+}
+.dark .lede { color: #D8CFBF; }
+
+p { margin: 0; }
+.body { font: 300 14.5px/1.62 var(--sans); color: var(--muted); }
+.dark .body { color: var(--night-muted); }
+.small { font: 300 13px/1.55 var(--sans); color: var(--muted); }
+em, i { font-style: italic; }
+
+.label {
+  font: 12px/1.3 var(--mono);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.label.g { color: var(--gilt); }
+.label.t { color: var(--teal); }
+.dark .label { color: var(--night-muted); }
+
+.mono { font-family: var(--mono); }
+.cjk { font-family: var(--cjk); }
+
+/* ------------------------------------------------------------------ header and folio */
+
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 48px;
+  height: 100px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--rule);
+}
+.head .eyebrow { margin-bottom: 18px; }
+.head .lede { flex: 0 1 auto; min-width: 460px; }
+.head-l { flex: 0 0 auto; }
+
+.folio {
+  position: absolute;
+  left: 72px; right: 72px; top: 904px;
+  padding-top: 15px;
+  border-top: 1px solid var(--rule);
+  display: flex;
+  justify-content: space-between;
+  font: 11.5px/1 var(--mono);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+.dark .folio { border-top-color: var(--night-rule); color: #8F8676; }
+
+/* ------------------------------------------------------------------ drawings */
+
+.fig svg, svg.fig { display: block; height: auto; overflow: visible; }
+.card { background: var(--card); border: 1px solid #E4DBCB; border-radius: 12px; }
+
+svg text { font-family: var(--mono); }
+svg .lbl   { font-size: 11px; letter-spacing: 0.08em; fill: #5E574D; }
+svg .lbl-t { font-size: 11px; letter-spacing: 0.08em; fill: #2C6E73; }
+svg .lbl-g { font-size: 11px; letter-spacing: 0.08em; fill: #7E5C25; }
+svg .lbl-l { font-size: 11px; letter-spacing: 0.08em; fill: #F1EBDF; }
+svg .lbl-d { font-size: 12px; letter-spacing: 0.08em; fill: #1E1C19; }
+svg .s-lbl   { font-size: 9px; letter-spacing: 0.08em; fill: #5E574D; }
+svg .s-lbl-t { font-size: 9px; letter-spacing: 0.08em; fill: #2C6E73; }
+svg .d-lbl   { font-size: 11px; letter-spacing: 0.08em; fill: #5E574D; }
+svg .d-lbl-t { font-size: 11px; letter-spacing: 0.08em; fill: #2C6E73; }
+svg .tag   { font-size: 9.5px; font-weight: 700; fill: #FBF8F2; }
+svg .room  { font-family: var(--sans); font-size: 13px; font-weight: 600; letter-spacing: 0.14em; fill: #1E1C19; }
+svg .bay   { font-family: var(--sans); font-size: 14px; font-weight: 600; fill: #1E1C19; }
+svg .cap   { font-family: var(--sans); font-size: 13px; font-weight: 300; fill: #5E574D; }
+svg .num   { font-family: var(--serif); font-size: 16px; font-weight: 700; fill: #7E5C25; }
+svg .motto { font-size: 9px; letter-spacing: 0.02em; fill: #7E5C25; }
+svg .cjk   { font-family: var(--cjk); }
+svg .mid { text-anchor: middle; }
+svg .end { text-anchor: end; }
+/* The Élan boards set their labels a size larger. */
+.e12 svg .lbl, .e12 svg .lbl-t, .e12 svg .lbl-g, .e12 svg .lbl-l { font-size: 12px; }
+.e12 svg .num { font-family: var(--serif); font-size: 40px; font-weight: 400; }
+.e12 svg .room { font-size: 14px; }
+
+/* ------------------------------------------------------------------ recurring blocks */
+
+.stats { display: flex; gap: 44px; }
+.stat b { display: block; font: 400 50px/1 var(--serif); color: var(--ink); }
+.stat span { display: block; margin-top: 8px; font: 11px/1.2 var(--mono); letter-spacing: 0.2em; text-transform: uppercase; color: var(--faint); }
+.dark .stat b { color: var(--night-text); }
+.dark .stat span { color: #9D9483; }
+
+.notes { display: grid; gap: 56px; }
+.note { border-top: 1px solid var(--rule); padding-top: 22px; }
+.note h3 { margin-bottom: 10px; }
+.dark .note { border-top-color: var(--night-rule); }
+
+.swatch { display: inline-block; width: 30px; height: 30px; border-radius: 5px; border: 1px solid rgba(0,0,0,0.12); vertical-align: middle; }
+
+.worklist { list-style: none; margin: 0; padding: 0; }
+.worklist li { display: grid; grid-template-columns: 40px 1fr; font: 300 14.5px/1.45 var(--sans); color: var(--muted); margin-bottom: 7px; }
+.worklist li b { font-weight: 300; color: var(--gilt); }
+.worklist li i { color: var(--ink); font-weight: 400; }
+
+/* ------------------------------------------------------------------ cover and closing */
+
+.cover { padding: 0 72px; }
+.cover .eyebrow { position: absolute; left: 72px; top: 204px; }
+.cover h1 { position: absolute; left: 66px; top: 234px; font-size: 138px; font-weight: 400; color: var(--night-text); letter-spacing: -0.01em; }
+.cover .motto { position: absolute; left: 72px; top: 400px; font: italic 40px/1.1 var(--serif); color: #E6DCC8; }
+.cover .intro { position: absolute; left: 72px; top: 466px; width: 640px; font: 300 17px/1.65 var(--sans); color: var(--night-muted); }
+.cover .emblem { position: absolute; left: 960px; top: 190px; width: 400px; }
+.cover .rule { position: absolute; left: 72px; right: 72px; top: 680px; border-top: 1px solid var(--night-rule); }
+.cover .plan { position: absolute; left: 72px; top: 708px; width: 420px; }
+.cover .imprint { position: absolute; right: 72px; top: 868px; text-align: right; font: 12px/1.8 var(--mono); letter-spacing: 0.2em; color: #9D9483; }
+
+/* ------------------------------------------------------------------ chapter openers (dark) */
+
+.opener .eyebrow { position: absolute; left: 72px; top: 72px; }
+.opener .view { position: absolute; left: 72px; top: 107px; width: 760px; height: 497px; border-radius: 22px; overflow: hidden; }
+.opener .view svg { width: 100%; height: 100%; display: block; }
+.opener .caption { position: absolute; left: 72px; top: 624px; width: 700px; font: 300 15px/1.6 var(--sans); color: #D8CFBF; }
+.opener h1 { position: absolute; left: 894px; top: 84px; width: 480px; font-size: 88px; line-height: 0.98; color: var(--night-text); }
+.opener .desc { position: absolute; left: 896px; width: 470px; font: 300 17px/1.65 var(--sans); color: #D8CFBF; }
+.opener .stats { position: absolute; left: 896px; }
+.opener .stat b { font-size: 46px; }
+.opener .where { position: absolute; left: 896px; top: 616px; }
+.opener .keyplan { position: absolute; left: 896px; top: 646px; width: 444px; }
+
+/* ------------------------------------------------------------------ full-bleed renderings */
+
+.photo { padding: 0; }
+.photo > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.photo .plate {
+  position: absolute; left: 0; bottom: 0; width: 640px;
+  padding: 44px 72px 50px;
+  background: rgba(23, 21, 15, 0.92);
+  color: var(--night-text);
+}
+.photo .plate .eyebrow { color: var(--gilt-light); margin-bottom: 16px; }
+.photo .plate h1 { font-size: 64px; line-height: 1.02; margin-bottom: 18px; }
+.photo .plate p { font: 300 15.5px/1.62 var(--sans); color: #D8CFBF; }
+
+/* ------------------------------------------------------------------ helpers */
+
+.abs { position: absolute; }
+.row { display: flex; }
+.col { display: flex; flex-direction: column; }
+.gap8 { gap: 8px; } .gap16 { gap: 16px; } .gap24 { gap: 24px; } .gap32 { gap: 32px; }
+.ink { color: var(--ink); }
+.teal { color: var(--teal); }
+.gilt { color: var(--gilt); }
+.upper { text-transform: uppercase; }

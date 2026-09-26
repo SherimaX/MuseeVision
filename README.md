@@ -2,6 +2,10 @@
 
 ![Musée Vision](assets/logo/Logo-light.png)
 
+> **Unreal is now the native build** ([`windows/`](windows/README.md), decided 2026-09-23). This README
+> describes the earlier iPhone prototype in `Shared/` and `iOS/`, kept for reference and no longer
+> maintained. There is no more USD export; an iOS version, if there is one, is exported from Unreal.
+
 The whole of Musée Vision as a walk-through on iPhone, built from the plan on the design canvas
 (https://claude.ai/artifact/5KS3Zkfoub5zBdopET1Qc6). The long-term target is visionOS 27 on
 Apple Vision Pro. The canvas is the design record; `plan/` holds a snapshot of it (the boards and the
@@ -24,9 +28,9 @@ Everything is built in code (SwiftUI + RealityKit): no 3D assets except the open
 | **Sculpture Hall** (north) | A top-lit court, 16.8 m square: ten works from open 3D scans, with The Gates of Hell closing the axis 30 m from the sun. | Sculpture |
 | **The Chinese Wing** (south) | The solar-term stele, the moon gate, the moon terrace, a cloister round the Garden of the Four Seasons: ceramics (the chicken cup is the one you may hold: tap it), six hanging scrolls, and the 11.9 m Thousand Li handscroll, which opens an arm's length at a time as you walk north beside it. The garden follows today's solar term; at night the real moon lies in the pond. | ChineseWing |
 | **The Hall of Light** (east) | 30 m of glass under a lattice vault, between a birch meadow and an orchard that follow the season. Twenty photographs, walking forward in time; four stereo stones whose stereographs rock gently to show their depth. | HallOfLight |
-| **Élan: the Atrium** | A 28 m circle of twelve bays under misty glass. The Starry Night on its glass stele marks the car. Stand on the bronze ring and tap **Call the car**: it glows down through the misty glass (the wait is part of the visit). | FutureAtrium |
+| **Élan: the Atrium** | A 28 m circle of twelve bays in a drum of misty glass, under the Sphere: its underside is the ceiling, hanging down to the opening over the car. The Starry Night on its glass stele marks the car. Stand on the bronze ring and tap **Call the car**: it glows down through the misty glass (the wait is part of the visit). | FutureAtrium |
 | **Élan: the Square** (−9 m) | Down to the earth first: rammed earth, the Lo Shu's nine squares with bronze numerals, four dark rooms, the strata under the glass floor. | ElanSquare |
-| **Élan: the Sphere** (+101 m) | Then up to the stars: a steady 1.5 m/s for about 70 seconds, up the bronze mast to the exact centre of Boullée's 150 m shell. The glass dims to a rail and a floor, and the real sky over you, now, surrounds you, below your feet too. | ElanSphere |
+| **Élan: the Sphere** (+22 m) | Then up to the stars: a steady 1.5 m/s for about 16 seconds, through the opening in the ceiling and up the bronze mast to the exact centre of the Sphere, 28 m across, which sits in the Atrium like a ball in a cup. The glass dims to a rail and a floor, and the real sky over you, now, surrounds you, below your feet too. | ElanSphere |
 
 ## Controls (iPhone)
 
@@ -70,6 +74,7 @@ Didot for the wordmark. The app icon has light, dark and tinted variants; lockup
 | `iOS/` | RealityView, walking, multitouch, placards, buttons, location. |
 | `tools/usd-export/` | The USD exporter: a macOS command-line tool that builds the museum from `Shared/` and writes `usd/`. Run `tools/usd-export/export.sh`. |
 | `usd/` | The whole museum as USD (one layer per wing, the sculpture scans, materials), for Unreal on the Windows PC. See `usd/README.md`. |
+| `windows/` | The Windows desktop build in Unreal 5.8: C++ (walking, sky, placards, Élan) and editor scripts that import `usd/`. See `windows/README.md`. |
 | `data/` | The painting and sculpture catalogues (`artworks.json`, `sculptures.json`). |
 | `plan/` | Snapshot of the design canvas: the boards and `Musee-Vision-Guide.pdf`. |
 | `assets/` | `paintings/` (images + CREDITS.md), `sculptures/` (scans + CREDITS.md), `sky/` (stars), `logo/`, `collection.json` (placards for the other wings' works), `reference/` (glaze colours, not bundled). |
@@ -87,16 +92,31 @@ size, the Water Lilies panel lengths) still stand; see the notes below the table
 
 | Item | Why | What the app does |
 |---|---|---|
-| The Sphere, 150 m across, centred 101 m over the Atrium | At true scale it would loom over the Hall of Light, the gardens and the Rotunda's eye, but the board says it is "never seen". | Not rendered from outside. Once the car passes the south pole (26 m), the building is hidden and you are in the sky. |
 | "The real sky over your location" | Needs your location. | Asks for approximate location (reduced accuracy). If refused, uses your time zone. Stars are the 9,096 naked-eye stars of the Yale Bright Star Catalogue. |
 | The moon lying in the Chinese pond | With exact physics the Taihu rock and the south wall hide the reflection most of the night. | Drawn as seen from where you stand whenever the moon is up at night (the poetic option on the board). |
 | Gaze-and-pinch (the golden lily, racks, the car) | Vision Pro gestures. | Tap. The lily needs two taps (wake, then lift), keeping the board's two-step cue. |
 | Holding the chicken cup | No hands on a phone. | Tap it and it floats into your hand, turning slowly; tap again to put it back. |
 | Stereographs "in 3D" | No stereo display on a phone. | The left and right views alternate four times a second, so the depth shows as a gentle rocking. |
-| "No skip" elevator | — | Honoured: rides run in real time at 1.5 m/s with soft starts (Atrium to centre ≈ 69 s). The first ride from the Atrium goes down to the Square first. |
+| "No skip" elevator | — | Honoured: rides run in real time at 1.5 m/s with soft starts (Atrium to centre ≈ 16 s). The first ride from the Atrium goes down to the Square first. |
 | The Sphere's opening piece ("the sky becomes The Starry Night") | Marked "proposed" on the board. | Not built; the live sky is shown. |
 | Sculpture scans from Sketchfab | Downloads need an account. | The same CC-BY/CC0 scans were taken from Objaverse, the Allen Institute's open copy of Sketchfab's CC models, and Wikimedia Commons. The Cleveland CC0 Age of Bronze isn't in it, so the CC0 Stockholm cast is used. See `assets/sculptures/CREDITS.md`. |
 | The Tang sancai horse | No open museum scan exists. | An unprovenanced CC-BY Tang-style horse scan, glazed amber; marked as a stand-in in the credits. |
+
+### Changed since the boards
+
+The boards (`FutureAtrium`, `ElanSphere`, `MasterPlan`, the guide PDF) still draw the first design; update
+the canvas to match.
+
+- **The Sphere is Ø 28 m, not Boullée's Ø 150 m.** Its radius is the Atrium's (14 m), its centre 22 m
+  over the Atrium floor, so its equator sits exactly on the top of the Atrium's drum. It sits there like
+  a ball in a cup: the Atrium's ceiling is the Sphere's own underside, hanging down from 22 m at the wall
+  to the opening over the car, Ø 6 m at 8.3 m (the south pole would be at 8 m).
+- **The Atrium's roof** is a drum of misty glass from the 6 m stone base up to the equator, and the
+  Sphere is clad in the same misty glass, so the floor keeps the same soft light (the two spot lights are
+  unchanged). The twelve ribs rise up the drum and turn under the Sphere to a ring round the opening.
+- **Seen from outside** (from the Hall of Light and its gardens) the Sphere is a pearl on the drum, 36 m
+  high. From inside it is still never seen: once the car's floor passes the opening, the building is
+  hidden and you are in the sky.
 
 ### Conflicts between boards, and the reading used
 
@@ -115,10 +135,9 @@ size, the Water Lilies panel lengths) still stand; see the notes below the table
   - The hedges are 1.5 m tall (not drawn).
   - Nadar hangs in bay 4 and Muybridge in bay 6 (north wall). The 12 unnamed bays and the four autochrome plates are filled with landmark photographs of their years (listed in `assets/paintings/CREDITS.md`).
 - **Élan:**
-  - The car waits in the throat at 22 m when idle, so a call brings it down in about 16 s.
+  - The car waits just inside the Sphere, over the opening (8.6 m), when idle, so a call brings it down in about 8 s.
   - A glass landing screen stands round the shaft at the Atrium and the Square.
-  - The car floor stops at 99.4 m so your eyes are at the centre.
-  - The ribs follow the half-section's curves, not the small section's straight lines.
+  - The car floor stops at 20.4 m so your eyes are at the centre.
   - The Square's dark-room doors are 2.6 × 3.0 m.
 - **Sculpture Hall:**
   - The roof is a glass pyramid over the laylight; only the laylight is seen from inside.

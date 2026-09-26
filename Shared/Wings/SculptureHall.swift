@@ -44,7 +44,8 @@ extension MuseumScene {
     func buildSculptureHall() {
         typealias P = SculptureHallPlan
         // Court walls: a loop of inner faces from the SW corner, the 4 m door in the south wall.
-        let loop: [SIMD2<Float>] = [[P.x0, P.z1], [P.x0, P.z0], [P.x1, P.z0], [P.x1, P.z1], [P.x0 - 0.01, P.z1]]
+        // Closed exactly, so the outer faces mitre at the start corner (the 1 cm overrun left it open).
+        let loop: [SIMD2<Float>] = [[P.x0, P.z1], [P.x0, P.z0], [P.x1, P.z0], [P.x1, P.z1], [P.x0, P.z1]]
         // Arc length from the start to the door centre: west + north + east walls + 8.4 m along the south.
         let s = (P.z1 - P.z0) * 2 + (P.x1 - P.x0) + P.x1
         let court = WallRun(points: loop, inside: .right, height: P.wallHeight, thickness: P.wall,
@@ -61,14 +62,17 @@ extension MuseumScene {
         collision.add(run: court)
         contactShade(court)
 
-        // Passage from the Rotunda: 4 m wide under a barrel vault continuing the door's arch.
-        barrelPassage(alongZ: true, fixed: 0, from: P.passage.z0, to: P.passage.z1 - 0.01, halfWidth: P.passage.x,
+        // Passage from the Rotunda: 4 m wide under a barrel vault continuing the door's arch. It
+        // ends exactly at the court wall's outer face, where the door's reveal takes over (the
+        // 1 cm overlap put the two soffits in one plane).
+        barrelPassage(alongZ: true, fixed: 0, from: P.passage.z0, to: P.passage.z1, halfWidth: P.passage.x,
                       spring: P.door.spring, material: Mat.matte(0xF1EBDF), name: "Sculpture passage")
 
         // Travertine floor.
         var f = MeshBuilder()
         f.floorRect(x0: P.x0, x1: P.x1, z0: P.z0, z1: P.z1, y: 0, up: true, tile: 2.4)
-        f.floorRect(x0: -P.passage.x, x1: P.passage.x, z0: P.z1, z1: P.passage.z0 + 0.8, y: -0.002, up: true, tile: 1.2)
+        // (As wide as the passage's walls, which stand 5 mm outside the door's jambs.)
+        f.floorRect(x0: -P.passage.x - 0.005, x1: P.passage.x + 0.005, z0: P.z1, z1: P.passage.z0 + 0.8, y: -0.002, up: true, tile: 1.2)
         add(f, Mat.polishedStone(.travertine, polish: 0.7, seed: 4),
             name: "Sculpture court floor")
 
@@ -140,15 +144,19 @@ extension MuseumScene {
             alongZ ? [fixed + lateral, y, along] : [along, y, fixed + lateral]
         }
         func N(_ lateral: Float, _ y: Float) -> SIMD3<Float> { alongZ ? [lateral, y, 0] : [0, y, lateral] }
+        // Built 5 mm wider than the doors whose reveals it overlaps (inside the Rotunda's drum), so
+        // the soffits never share a plane; they used to z-fight near the crown.
+        let wide = hw + 0.005
         // Side walls, facing into the passage.
         for side: Float in [-1, 1] {
-            m.quad(P(a, side * hw, floorY), P(b, side * hw, floorY), P(b, side * hw, floorY + spring), P(a, side * hw, floorY + spring),
-                   normal: N(-side, 0))
+            m.quad(P(a, side * wide, floorY), P(b, side * wide, floorY), P(b, side * wide, floorY + spring),
+                   P(a, side * wide, floorY + spring), normal: N(-side, 0))
         }
-        for i in 0..<32 {
-            let t0 = Float.pi * Float(i) / 32, t1 = Float.pi * Float(i + 1) / 32
-            let l0 = hw * cos(t0), y0 = floorY + spring + hw * sin(t0)
-            let l1 = hw * cos(t1), y1 = floorY + spring + hw * sin(t1)
+        let n = Tessellation.arch
+        for i in 0..<n {
+            let t0 = Float.pi * Float(i) / Float(n), t1 = Float.pi * Float(i + 1) / Float(n)
+            let l0 = wide * cos(t0), y0 = floorY + spring + wide * sin(t0)
+            let l1 = wide * cos(t1), y1 = floorY + spring + wide * sin(t1)
             m.quad(P(a, l0, y0), P(b, l0, y0), P(b, l1, y1), P(a, l1, y1),
                    normals: N(-cos(t0), -sin(t0)), N(-cos(t0), -sin(t0)), N(-cos(t1), -sin(t1)), N(-cos(t1), -sin(t1)))
         }

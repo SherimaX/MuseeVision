@@ -5,34 +5,34 @@ import simd
 
 /// Section II · Élan (boards: FutureAtrium, ElanSquare, ElanSphere). The Atrium: a 28 m circle
 /// of twelve bays under misty glass, centred (54, 0). At its centre a glass car joins the
-/// square earth below (the Square, floor at −9 m, numbered by the Lo Shu) to the stars above
-/// (the Sphere, Ø 150 m, its centre 101 m up). The Starry Night on a glass stele marks the car.
+/// square earth below (the Square, floor at −9 m, numbered by the Lo Shu) to the stars above.
+/// The Sphere sits in the Atrium like a ball in a cup: its radius is the Atrium's (14 m), its
+/// equator on the top of the glass drum at 22 m, and its underside is the Atrium's ceiling.
+/// The Starry Night on a glass stele marks the car.
 enum ElanPlan {
     static let centre = SIMD2<Float>(54, 0)
     static let radius: Float = 14
     static let wall: Float = 0.8
     static let baseHeight: Float = 6
-    static let ringHeight: Float = 22
-    static let ringRadius: Float = 4.2
     static let door = (width: Float(4), height: Float(4.5))
     static let car = (radius: Float(2.2), height: Float(2.6), doorHalfAngle: Float(24) * Float.pi / 180)
     static let waitRing: Float = 3.0
     static let squareFloor: Float = -9
     static let squareCeiling: Float = -1.5
-    static let sphereCentreY: Float = 101
-    static let sphereRadius: Float = 75
-    static let topFloor: Float = 99.4               // eyes at 101: the centre
-    static let home: Float = 22                      // where the car waits, in the throat
+    static let sphereRadius: Float = radius
+    static let sphereCentreY: Float = 22            // the equator, on the top of the drum
+    static let southPole: Float = sphereCentreY - sphereRadius                      // 8
+    /// The opening at the south pole, over the bronze ring, and the height of its rim (≈ 8.33 m).
+    static let ringRadius: Float = 3.0
+    static let ringHeight: Float = underside(ringRadius)
+    static let topFloor: Float = sphereCentreY - 1.6 // eyes at the centre
+    static let home: Float = ringHeight + 0.3        // where the car waits, just inside the Sphere
     static let speed: Float = 1.5
     static let accel: Float = 0.75
     static let starryNight = (canvas: SIMD3<Float>(50.10, 1.38, -1.90), stele: SIMD2<Float>(50.30, -1.90))
 
-    /// Rib curves (radius, height): quadratic Béziers for the upper (glass) and lower faces.
-    static func ribUpper(_ t: Float) -> SIMD2<Float> { bezier(t, [14.0, 6.0], [13.07, 19.0], [4.2, 22.0]) }
-    static func ribLower(_ t: Float) -> SIMD2<Float> { bezier(t, [13.42, 6.0], [12.37, 18.5], [4.2, 21.42]) }
-    static func bezier(_ t: Float, _ a: SIMD2<Float>, _ b: SIMD2<Float>, _ c: SIMD2<Float>) -> SIMD2<Float> {
-        (1 - t) * (1 - t) * a + 2 * (1 - t) * t * b + t * t * c
-    }
+    /// Height of the Sphere's underside (the Atrium's ceiling) at radius r from the axis.
+    static func underside(_ r: Float) -> Float { sphereCentreY - (sphereRadius * sphereRadius - r * r).squareRoot() }
 
     /// World point at plan angle θ (from east towards south) and radius r about the centre.
     static func at(_ theta: Float, _ r: Float) -> SIMD2<Float> { centre + [r * cos(theta), r * sin(theta)] }
@@ -109,7 +109,9 @@ extension MuseumScene {
         add(ring, Mat.metal(0xC9A266, roughness: 0.3), name: "Bronze ring")
 
         // The stone base: a 0.8 m wall, 6 m high, with the one 4 m door to the Hall (west).
-        let loop = Poly.circle(c, r: E.radius, from: 0, to: 2 * .pi + 0.01, segments: 192)
+        // Closed exactly (the 0.01 rad overrun z-fought at the seam and put the wall's vertices
+        // off the coping's).
+        let loop = Poly.circle(c, r: E.radius, from: 0, to: 2 * .pi, segments: 192)
         let base = WallRun(points: loop, inside: .right, height: E.baseHeight, thickness: E.wall,
                            openings: [WallOpening(center: E.radius * .pi, width: E.door.width, spring: E.door.height, arched: false)])
         var wall = MeshBuilder()
@@ -125,7 +127,16 @@ extension MuseumScene {
         }
         add(coping, Mat.matte(0xD8CDB9), name: "Atrium coping")
 
-        // Twelve stone pilasters on the bay boundaries, carrying twelve dark ribs to the ring at 22 m.
+        // Twelve stone pilasters on the bay boundaries, carrying twelve dark ribs up the glass drum
+        // and on under the Sphere to the ring round the south pole.
+        // A rib in (radius, height): its outer edge runs up the drum to the equator, then round the
+        // Sphere's underside to the opening; its inner edge stands 0.58 m into the room. Where the
+        // two turn, a haunch fills the cusp between the drum and the Sphere.
+        let depth: Float = 0.58
+        let R = E.sphereRadius, poleAngle = asin((E.sphereCentreY - E.ringHeight) / R)
+        let haunch = acos((E.radius - depth) / (R + depth))   // angle below the equator where the inner edge turns
+        let corner = SIMD2<Float>(E.radius - depth, E.sphereCentreY - (R + depth) * sin(haunch))
+        func onSphere(_ a: Float, _ r: Float) -> SIMD2<Float> { [r * cos(a), E.sphereCentreY - r * sin(a)] }
         var pil = MeshBuilder()
         var ribs = MeshBuilder()
         for k in 0..<12 {
@@ -137,48 +148,84 @@ extension MuseumScene {
                                    E.at(th, E.radius - 0.3) - SIMD2<Float>(tangent.x, tangent.z) * 0.8,
                                    E.at(th, E.radius - 0.3) + SIMD2<Float>(tangent.x, tangent.z) * 0.8,
                                    E.at(th, E.radius) + SIMD2<Float>(tangent.x, tangent.z) * 0.8], y1: 6)
-            // Rib: sweep a 0.6 m-wide band between the upper and lower curves.
-            let n = 24
+            // Rib: a 0.6 m-wide band between the outer and inner edges.
             let cw: Float = 0.3
+            func P(_ q: SIMD2<Float>, _ s: Float) -> SIMD3<Float> {
+                [c.x, 0, c.y] + radial * q.x + [0, q.y, 0] + tangent * (s * cw)
+            }
+            func N(_ q: SIMD2<Float>) -> SIMD3<Float> { radial * q.x + [0, q.y, 0] }
+            /// The front face along an edge (from `a` to `b`), with its normals at each end.
+            func face(_ a: SIMD2<Float>, _ b: SIMD2<Float>, _ na: SIMD2<Float>, _ nb: SIMD2<Float>) {
+                ribs.quad(P(a, -1), P(b, -1), P(b, 1), P(a, 1), normals: N(na), N(nb), N(nb), N(na))
+            }
+            let n = 24
+            // Up the drum: outer on the glass to the equator, inner to the corner.
             for i in 0..<n {
                 let t0 = Float(i) / Float(n), t1 = Float(i + 1) / Float(n)
-                let u0 = E.ribUpper(t0), u1 = E.ribUpper(t1), l0 = E.ribLower(t0), l1 = E.ribLower(t1)
-                func P(_ q: SIMD2<Float>, _ s: Float) -> SIMD3<Float> {
-                    [c.x, 0, c.y] + radial * q.x + [0, q.y, 0] + tangent * (s * cw)
-                }
+                let o0 = SIMD2<Float>(E.radius, E.baseHeight + (E.sphereCentreY - E.baseHeight) * t0)
+                let o1 = SIMD2<Float>(E.radius, E.baseHeight + (E.sphereCentreY - E.baseHeight) * t1)
+                let i0 = SIMD2<Float>(corner.x, E.baseHeight + (corner.y - E.baseHeight) * t0)
+                let i1 = SIMD2<Float>(corner.x, E.baseHeight + (corner.y - E.baseHeight) * t1)
+                for s: Float in [-1, 1] { ribs.quad(P(o0, s), P(o1, s), P(i1, s), P(i0, s), normal: tangent * s) }
+                face(i0, i1, [-1, 0], [-1, 0])
+                face(o0, o1, [1, 0], [1, 0])
+            }
+            // The haunch: a fan from the corner to the Sphere between the equator and the turn.
+            for i in 0..<8 {
+                let a0 = haunch * Float(i) / 8, a1 = haunch * Float(i + 1) / 8
                 for s: Float in [-1, 1] {
-                    ribs.quad(P(u0, s), P(u1, s), P(l1, s), P(l0, s), normal: tangent * s)
+                    ribs.tri(P(corner, s), P(onSphere(a0, R), s), P(onSphere(a1, R), s), tangent * s, tangent * s, tangent * s)
                 }
-                let dn = normalize(SIMD2<Float>(l1.y - l0.y, -(l1.x - l0.x)))
-                ribs.quad(P(l0, -1), P(l1, -1), P(l1, 1), P(l0, 1), normal: normalize(radial * -abs(dn.x) + [0, -abs(dn.y), 0]))
-                let up = normalize(SIMD2<Float>(-(u1.y - u0.y), u1.x - u0.x))
-                ribs.quad(P(u0, -1), P(u1, -1), P(u1, 1), P(u0, 1), normal: normalize(radial * abs(up.x) + [0, abs(up.y), 0]))
+                face(onSphere(a0, R), onSphere(a1, R), [-cos(a0), sin(a0)], [-cos(a1), sin(a1)])
+            }
+            // Under the Sphere, from the turn to the ring round the opening.
+            for i in 0..<n {
+                let a0 = haunch + (poleAngle - haunch) * Float(i) / Float(n)
+                let a1 = haunch + (poleAngle - haunch) * Float(i + 1) / Float(n)
+                let o0 = onSphere(a0, R), o1 = onSphere(a1, R), i0 = onSphere(a0, R + depth), i1 = onSphere(a1, R + depth)
+                for s: Float in [-1, 1] { ribs.quad(P(o0, s), P(o1, s), P(i1, s), P(i0, s), normal: tangent * s) }
+                face(i0, i1, [cos(a0), -sin(a0)], [cos(a1), -sin(a1)])
+                face(o0, o1, [-cos(a0), sin(a0)], [-cos(a1), sin(a1)])
             }
         }
         add(pil, Mat.matte(0xE4DBCB, roughness: 0.85), name: "Atrium pilasters")
-        // The compression ring at 22 m and the throat collar up to the Sphere's south pole.
-        ribs.lathe([[E.ringRadius, 21.4], [E.ringRadius + 0.6, 21.4], [E.ringRadius + 0.6, 22.0], [E.ringRadius, 22.0], [E.ringRadius, 21.4]],
+        // The compression ring round the opening at the south pole, under the Sphere.
+        let r0 = E.ringRadius, r1 = E.ringRadius + 0.6
+        ribs.lathe([[r0, E.underside(r0) - depth], [r1, E.underside(r1) - depth], [r1, E.underside(r1)], [r0, E.underside(r0)],
+                    [r0, E.underside(r0) - depth]],
                    center: [c.x, 0, c.y], segments: 48, inside: true)
         add(ribs, Mat.metal(0x1E1C19, roughness: 0.5), name: "Atrium ribs")
 
-        // Misty glass: the ribs' upper curve turned about the axis, a luminous haze that hides the Sphere.
-        let profile = (0...24).map { E.ribUpper(Float($0) / 24) }
+        // Misty glass: the drum from the stone base up to the equator, and the whole Sphere in the
+        // same frit (double-sided). Its underside is the Atrium's ceiling, the same luminous haze
+        // as the old vault; from outside it is a pearl on the drum.
         var glass = MeshBuilder()
-        glass.lathe(profile, center: [c.x, 0, c.y], segments: 96, inside: true)
-        glass.lathe([[E.ringRadius, 22.0], [E.ringRadius, 27.0]], center: [c.x, 0, c.y], segments: 48, inside: true)
-        glass.uvs = glass.uvs.map { $0 * SIMD2<Float>(72, 14) }
+        // Drum and Sphere share one count round, so they meet at the equator vertex for vertex.
+        let around = Tessellation.segments(96)
+        glass.lathe([[E.radius, E.baseHeight], [E.radius, E.sphereCentreY]], center: [c.x, 0, c.y], segments: around, inside: true)
+        glass.uvs = glass.uvs.map { $0 * SIMD2<Float>(72, 12) }
+        var shell = MeshBuilder()
+        let shellN = Tessellation.segments(48)
+        let shellProfile = (0...shellN).map { i -> SIMD2<Float> in
+            let a = -poleAngle + (Float.pi / 2 + poleAngle) * Float(i) / Float(shellN)   // from the opening to the top
+            return [max(0, R * cos(a)), E.sphereCentreY + R * sin(a)]
+        }
+        shell.lathe(shellProfile, center: [c.x, 0, c.y], segments: around, inside: true)
+        shell.uvs = shell.uvs.map { $0 * SIMD2<Float>(72, 28) }
+        glass.append(shell)
         var misty = UnlitMaterial()
         misty.color = .init(tint: PlatformColor(hex: 0xEEF3F1), texture: .init(Textures.resource(Textures.frit()), sampler: Mat.repeatSampler))
         add(glass, misty, name: "Misty glass")
-        // The iris at the south pole (opens round the car as it passes).
+        // The iris across the opening at the south pole (opens round the car as it passes).
         var irisMesh = MeshBuilder()
-        irisMesh.ellipseDisc(center: [c.x, 26.9, c.y], a: E.ringRadius, b: E.ringRadius, up: false)
+        irisMesh.ellipseDisc(center: [c.x, E.ringHeight + 0.01, c.y], a: E.ringRadius, b: E.ringRadius, up: false)
         let irisEntity = ModelEntity(mesh: irisMesh.mesh(name: "iris"), materials: [Mat.glow(0xE3ECEA)])
         irisEntity.name = "Iris"
         building.addChild(irisEntity)
         irisProxy = irisEntity
 
-        // Light: the soft even haze of the misty roof.
+        // Light: the soft even haze of the misty glass. Kept exactly as under the old vault; the
+        // lights cast no shadows, so the Sphere above them doesn't change the floor's light.
         addLight(spot(at: [c.x, 20, c.y + 6], looking: [c.x, 0, c.y + 4], colour: 0xFFF7EC, intensity: 160_000, inner: 70, outer: 89, radius: 34))
         addLight(spot(at: [c.x, 20, c.y - 6], looking: [c.x, 0, c.y - 4], colour: 0xFFF7EC, intensity: 160_000, inner: 70, outer: 89, radius: 34))
 
@@ -264,7 +311,8 @@ extension MuseumScene {
         add(pitInside, Mat.textured(Textures.resource(Textures.strata()), roughness: 0.95), name: "Strata pit", to: root)
 
         // Rammed-earth walls: the outer square and the partitions of the four dark rooms.
-        let outer = WallRun(points: [[x0, z1], [x0, z0], [x1, z0], [x1, z1], [x0 - 0.01, z1]], inside: .right, height: h, thickness: 1.2)
+        // Closed exactly, so the outer faces mitre at the start corner (the 1 cm overrun left it open).
+        let outer = WallRun(points: [[x0, z1], [x0, z0], [x1, z0], [x1, z1], [x0, z1]], inside: .right, height: h, thickness: 1.2)
         var walls = MeshBuilder()
         walls.wall(outer)
         collision.add(run: outer, base: E.squareFloor)
@@ -461,10 +509,10 @@ extension MuseumScene {
         floors.add("Car", .ellipse(c: c, a: R + 0.1, b: R + 0.1)) { [weak el] _ in el?.y ?? 0 }
 
         // The bronze mast inside the Sphere (from the south pole to the car's stop).
-        let mastMesh = MeshResource.generateCylinder(height: E.topFloor - 26, radius: 0.2)
+        let mastMesh = MeshResource.generateCylinder(height: E.topFloor - E.southPole, radius: 0.2)
         let mastModel = ModelEntity(mesh: mastMesh, materials: [Mat.metal(0xC9A266, roughness: 0.3)])
         mastModel.name = "Mast column"
-        mastModel.position = [c.x, 26 + (E.topFloor - 26) / 2, c.y]
+        mastModel.position = [c.x, E.southPole + (E.topFloor - E.southPole) / 2, c.y]
         el.mast.addChild(mastModel)
         el.mast.name = "Mast"
         el.mast.isEnabled = false
@@ -558,7 +606,7 @@ extension MuseumScene {
         }
         // At the top the glass dims to a rail and a floor.
         if el.at(E.topFloor) { el.dim = min(1, el.dim + dt / 3) }
-        // Left behind at the Atrium: the car closes and goes home to the throat.
+        // Left behind at the Atrium: the car closes and goes home, just inside the Sphere.
         if el.at(0), el.doors > 0.95, !inCar, simd_distance(visitorPlan, c) > E.waitRing + 0.5 || abs(visitorFeet) > 0.5 {
             el.leaveTimer += dt
             if el.leaveTimer > 4 { el.target = E.home; el.leaveTimer = 0 }
@@ -586,8 +634,9 @@ extension MuseumScene {
                 }
             }
         }
-        // Inside the Sphere: the building is gone, only the sky, the mast and the car remain.
-        let inSphere = inCar && el.y > 26
+        // Inside the Sphere (the car's floor past the opening): the building is gone, only the sky,
+        // the mast and the car remain.
+        let inSphere = inCar && el.y > E.ringHeight
         building.isEnabled = !inSphere
         if inSphere {
             sunLight.isEnabled = false
@@ -598,7 +647,7 @@ extension MuseumScene {
         }
         el.mast.isEnabled = inSphere
         skySystem?.sphereMode = inSphere
-        irisProxy?.isEnabled = !(el.y + E.car.height > 24 && el.y < 27)
+        irisProxy?.isEnabled = !(el.y + E.car.height > E.ringHeight - 2.9 && el.y < E.ringHeight + 0.1)
     }
 }
 

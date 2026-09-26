@@ -1,0 +1,44 @@
+{
+ "docs": {
+  "catalogue": {
+   "file": "catalogue.jpg",
+   "px": [
+    2540,
+    1866
+   ],
+   "width_m": 0.25,
+   "note": "pp. 14-15 of the 1874 catalogue, open (Monet's nos 95-103 on p. 15)"
+  },
+  "charivari": {
+   "file": "charivari.jpg",
+   "px": [
+    2350,
+    3470
+   ],
+   "width_m": 0.32,
+   "note": "Le Charivari, 25 April 1874, p. 2 (Leroy's review begins)"
+  }
+ },
+ "willows": {
+  "monet-willows-clear-morning": [
+   1275,
+   200,
+   3
+  ],
+  "monet-willows-two-willows": [
+   1700,
+   200,
+   4
+  ],
+  "monet-willows-morning": [
+   1275,
+   200,
+   3
+  ],
+  "monet-willows-reflections-of-trees": [
+   850,
+   200,
+   2
+  ]
+ }
+}

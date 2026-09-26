@@ -8,3 +8,31 @@ DerivedData/
 build/
 *.xcscmblueprint
 *.xccheckout
+
+# Unreal (windows/): build output and caches
+windows/Binaries/
+windows/Intermediate/
+windows/Saved/
+windows/DerivedDataCache/
+windows/.vs/
+windows/*.sln
+windows/*.VC.db
+windows/Import/
+windows/Content/MuseeData/
+windows/Content/Developers/
+windows/Content/Collections/
+windows/Packaged/
+windows/Builds/
+# NVIDIA's DLSS plugin (1.1 GB, from developer.nvidia.com; see windows/README.md).
+windows/Plugins/DLSS/
+windows/Plugins/StreamlineNGXCommon/
+
+# Full-resolution art downloads (art.py prepares them into assets/paintings) and the 2048 px originals it keeps.
+assets/paintings_hires/
+assets/paintings/_2048/
+# The Classical Hall casts' raw scans and converted meshes (re-fetch and convert with classical_art.py; the imported assets are in Content).
+assets/classical/*.stl
+assets/classical/*.glb
+# The Élan Cube's Matterhorn: swisstopo and Copernicus raw downloads and the built terrain (journey_terrain.py re-fetches and rebuilds them).
+windows/SourceArt/Journeys/Matterhorn/raw/
+windows/SourceArt/Journeys/Matterhorn/terrain/

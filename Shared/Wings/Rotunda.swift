@@ -27,10 +27,16 @@ extension MuseumScene {
         floorMat.clearcoatRoughness = .init(floatLiteral: 0.07)
         add(floor, floorMat, name: "Sun clock")
 
-        // Drum wall: a loop starting at 22.5° so no opening straddles the seam. Plan angle θ
-        // is measured from east towards south (x = cos θ, z = sin θ).
+        // One count round the whole Rotunda, so the drum, the dome's bands, the coffers and the eye
+        // share their vertices where they meet (the old 256 / 112 / 28 / 64 left slivers of sky).
+        // A multiple of the 28 coffers and of 16, so the drum's start at 22.5° is on it: 336 on
+        // the phone, 1008 in the export.
+        let around = R.coffers.perRing * Tessellation.segments(12)
+        // Drum wall: a closed loop starting at 22.5° so no opening straddles the seam. Plan angle θ
+        // is measured from east towards south (x = cos θ, z = sin θ). (It used to overrun by
+        // 0.01 rad, which also put its vertices off the dome's and z-fought over 10 cm at the seam.)
         let start = 22.5 * deg
-        let loop = Poly.circle(.zero, r: R.radius, from: start, to: start + 2 * .pi + 0.01, segments: 256)
+        let loop = Poly.circle(.zero, r: R.radius, from: start, to: start + 2 * .pi, segments: around)
         func s(_ theta: Float) -> Float { R.radius * (theta - start) }
         var openings: [WallOpening] = [
             WallOpening(center: s(90 * deg), width: 4, spring: R.doorSpring),    // S · Chinese Wing
@@ -77,14 +83,18 @@ extension MuseumScene {
         let centre = SIMD3<Float>(0, R.drumHeight, 0)
         let eyeEl = acos(R.oculusRadius / R.radius)
         var plain = MeshBuilder()
-        plain.domeBand(center: centre, radius: R.radius, from: 0, to: 4 * deg, rings: 2)
-        plain.domeBand(center: centre, radius: R.radius, from: 64 * deg, to: eyeEl, rings: 4)
+        plain.domeBand(center: centre, radius: R.radius, from: 0, to: 4 * deg, segments: around, rings: Tessellation.segments(2))
+        plain.domeBand(center: centre, radius: R.radius, from: 64 * deg, to: eyeEl, segments: around,
+                       rings: Tessellation.segments(6))
         add(plain, Mat.matte(Mat.stone), name: "Dome")
-        // 5 rings × 28 real coffers, each a rib frame, a stepped bevel and a recessed panel.
+        // 5 rings × 28 real coffers, each a rib frame, a stepped bevel and a recessed panel,
+        // subdivided so their edges lie on the sphere where the plain bands meet them.
         var coffers = MeshBuilder()
         let us = (0...R.coffers.perRing).map { 2 * Float.pi * Float($0) / Float(R.coffers.perRing) }
         let vs = (0...R.coffers.rings).map { (4 + 60 * Float($0) / Float(R.coffers.rings)) * deg }
-        coffers.coffers(us: us, vs: vs, depth: 0.45, rib: 0.13, centre: { _ in centre }) { a, e, d in
+        coffers.coffers(us: us, vs: vs, depth: 0.45, rib: 0.13,
+                        segments: (u: around / R.coffers.perRing, v: Tessellation.segments(6)),
+                        centre: { _ in centre }) { a, e, d in
             let r = R.radius + d
             return centre + SIMD3<Float>(r * cos(e) * cos(a), r * sin(e), r * cos(e) * sin(a))
         }
@@ -93,7 +103,7 @@ extension MuseumScene {
         // The eye: a short curb, then the steel-and-glass lattice with its bronze node.
         let eyeY = R.drumHeight + R.radius * sin(eyeEl)
         var curb = MeshBuilder()
-        let ring = Poly.circle(.zero, r: R.oculusRadius, from: 0, to: 2 * .pi, segments: 64)
+        let ring = Poly.circle(.zero, r: R.oculusRadius, from: 0, to: 2 * .pi, segments: around)
         curb.ribbon(ring, y0: eyeY - 0.05, y1: R.latticeHeight, facing: { -$0 / simd_length($0) })
         add(curb, Mat.matte(Mat.stone), name: "Oculus curb")
         var lattice = MeshBuilder()
@@ -112,8 +122,30 @@ extension MuseumScene {
         lattice.ribbon(ring, y0: R.latticeHeight - 0.06, y1: R.latticeHeight + 0.06, facing: { -$0 / simd_length($0) })
         add(lattice, Mat.metal(0x3C3F42, roughness: 0.4), name: "Lattice")
         var glass = MeshBuilder()
-        glass.ellipseDisc(center: [0, R.latticeHeight + 0.06, 0], a: R.oculusRadius, b: R.oculusRadius, up: false)
+        glass.ellipseDisc(center: [0, R.latticeHeight + 0.06, 0], a: R.oculusRadius, b: R.oculusRadius, up: false,
+                          segments: around)
         add(glass, Mat.glass(0xE3EFEF, opacity: 0.12), name: "Oculus glass")
+
+        // The dome's outside. The dome was a single inward-facing skin on an open-topped drum, so
+        // from the Hall of Light, the gardens or Unreal's camera it vanished and showed the
+        // Rotunda's interior. The shell springs from the drum's outer face (r 11.2 at 10 m) and
+        // rises on a sphere to a 0.4 m flat round the eye at the lattice (20.3 m), closing the
+        // solid between it and the coffered dome; it stays clear of the coffers' backs.
+        let outer = R.radius + R.wall
+        let top = SIMD2<Float>(R.oculusRadius + 0.4, R.latticeHeight)
+        // Sphere centred on the axis through (outer, drumHeight) and `top`.
+        let y0 = (outer * outer + R.drumHeight * R.drumHeight - top.x * top.x - top.y * top.y) / (2 * (R.drumHeight - top.y))
+        let rs = (outer * outer + (R.drumHeight - y0) * (R.drumHeight - y0)).squareRoot()
+        let a0 = asin((R.drumHeight - y0) / rs), a1 = asin((top.y - y0) / rs)
+        let steps = Tessellation.segments(32)
+        let profile = (0...steps).map { i -> SIMD2<Float> in
+            let a = a0 + (a1 - a0) * Float(i) / Float(steps)
+            return [rs * cos(a), y0 + rs * sin(a)]
+        }
+        var shell = MeshBuilder()
+        shell.lathe(profile, center: .zero, segments: around)
+        shell.lathe([top, [R.oculusRadius, R.latticeHeight]], center: .zero, segments: around)
+        add(shell, Mat.honedStone(.travertine, tint: 0xF3ECE0, seed: 11), name: "Dome exterior")
         let node = ModelEntity(mesh: .generateSphere(radius: 0.12), materials: [Mat.metal(0x7E5C25, roughness: 0.3)])
         node.position = [0, R.latticeHeight - 0.05, 0]
         node.name = "Bronze node"
@@ -156,14 +188,18 @@ extension MuseumScene {
         let hw = P.halfWidth
         let spring = Plan.Rotunda.doorSpring
         var b = MeshBuilder()
-        let north = WallRun(points: [[x0, -hw], [x1, -hw]], inside: .left, height: spring, thickness: 0.3)
-        let south = WallRun(points: [[x0, hw], [x1, hw]], inside: .right, height: spring, thickness: 0.3)
+        // It starts inside the drum, overlapping the W door's reveal, so it is built 5 mm wider than
+        // the door: near the crown the two soffits used to share a plane and z-fought.
+        let wide = hw + 0.005
+        let north = WallRun(points: [[x0, -wide], [x1, -wide]], inside: .left, height: spring, thickness: 0.3)
+        let south = WallRun(points: [[x0, wide], [x1, wide]], inside: .right, height: spring, thickness: 0.3)
         b.wall(north, faces: (true, false))
         b.wall(south, faces: (true, false))
         // Arched ceiling continuing the Rotunda door's arch.
-        for i in 0..<32 {
-            let a0 = Float.pi * Float(i) / 32, a1 = Float.pi * Float(i + 1) / 32
-            func p(_ x: Float, _ a: Float) -> SIMD3<Float> { [x, spring + hw * sin(a), hw * cos(a)] }
+        let n = Tessellation.arch
+        for i in 0..<n {
+            let a0 = Float.pi * Float(i) / Float(n), a1 = Float.pi * Float(i + 1) / Float(n)
+            func p(_ x: Float, _ a: Float) -> SIMD3<Float> { [x, spring + wide * sin(a), wide * cos(a)] }
             let n0 = SIMD3<Float>(0, -sin(a0), -cos(a0)), n1 = SIMD3<Float>(0, -sin(a1), -cos(a1))
             b.quad(p(x0, a0), p(x1, a0), p(x1, a1), p(x0, a1), normals: n0, n0, n1, n1)
         }
@@ -171,7 +207,7 @@ extension MuseumScene {
         collision.addPolyline([[-10.9, -hw], [x1, -hw]])
         collision.addPolyline([[-10.9, hw], [x1, hw]])
         var f = MeshBuilder()
-        f.floorRect(x0: x1 - 0.7, x1: -9.8, z0: -hw, z1: hw, y: -0.002, up: true, tile: 1.2)
+        f.floorRect(x0: x1 - 0.7, x1: -9.8, z0: -wide, z1: wide, y: -0.002, up: true, tile: 1.2)
         add(f, Mat.polishedStone(.travertine), name: "Passage floor")
     }
 

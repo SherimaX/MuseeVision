@@ -172,6 +172,10 @@ extension MuseumScene {
             let e = ModelEntity(mesh: q.mesh(name: "\(id)-\(half)"), materials: [placeholder])
             holder.addChild(e)
             addImageSlot(e, image: id, maxPixels: 1600, at: c)
+            // Only one view is shown at a time: both start in the same plane, so the second starts
+            // hidden (both were enabled until you came within 12 m, and z-fought; the export has it
+            // invisible at start).
+            e.isEnabled = half == 0
             views.append(e)
         }
         var t: Float = 0

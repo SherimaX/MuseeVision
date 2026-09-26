@@ -14,7 +14,7 @@ inscriptions in them are AI-redrawn.
 | The Rotunda | `05-the-rotunda-v2.png` (earlier: `05-the-rotunda.png`) | Yes |
 | Hall of Light | `06-hall-of-light.png` | **No.** Shows the old concrete vault with a light slit; the plan is now a 30 × 9 m glass hall between two gardens. |
 | Élan, the Atrium | `07-future-atrium.png` | **Partly.** Missing *The Starry Night* on its stele by the car door; the pedestals and fountain aren't on the plan. |
-| Élan, the Sphere | `08-the-sphere.png` | **No.** The car sits on the floor and the stars are painted on a visible shell; the plan puts the car at the centre, 101 m up, with the shell never seen. |
+| Élan, the Sphere | `08-the-sphere.png` | **No.** The car sits on the floor and the stars are painted on a visible shell; the plan puts the car at the centre, 22 m up, and the shell is never seen from inside. |
 
 **For the Windows build:** `05-the-rotunda-v2.png` and `01-salon-arrival.png` are the look-match
 targets. Put Unreal's camera where each image's camera is, render, and compare side by side before

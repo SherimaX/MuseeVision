@@ -109,7 +109,8 @@ extension MuseumScene {
                                   hit: { o, d in Self.rayBox(o, d, min: [-2.35, 0, 11.5], max: [-2.05, 1.5, 12.3]) }))
 
         // Perimeter walls, whitewashed, with the moon gate in the north wall.
-        let loop: [SIMD2<Float>] = [[C.x0, C.z0], [C.x1, C.z0], [C.x1, C.z1], [C.x0, C.z1], [C.x0, C.z0 - 0.01]]
+        // Closed exactly, so the outer faces mitre at the start corner (the 1 cm overrun left it open).
+        let loop: [SIMD2<Float>] = [[C.x0, C.z0], [C.x1, C.z0], [C.x1, C.z1], [C.x0, C.z1], [C.x0, C.z0]]
         let walls = WallRun(points: loop, inside: .right, height: C.wallHeight, thickness: C.wall,
                             openings: [WallOpening(center: 10, width: 2 * C.moonGate.radius, spring: C.moonGate.centreHeight, round: true)])
         var w = MeshBuilder()
@@ -177,7 +178,8 @@ extension MuseumScene {
         typealias C = ChinesePlan
         var cols = MeshBuilder()
         for c in C.columns {
-            cols.stem(from: [c.x, 0, c.y], to: [c.x, 3.0, c.y], r0: 0.15, r1: 0.15, segments: 12)
+            // 32 sides (12 read as a polygon at arm's length).
+            cols.stem(from: [c.x, 0, c.y], to: [c.x, 3.0, c.y], r0: 0.15, r1: 0.15, segments: Tessellation.segments(32))
             collision.addCircle(c, r: 0.16, segments: 10, occludes: false, y1: 3.3)
         }
         // Eave beams on the column lines.
@@ -212,26 +214,42 @@ extension MuseumScene {
         }
         var top = MeshBuilder(), under = MeshBuilder()
         let cell: Float = 0.32
-        var x = C.x0
-        while x < C.x1 - 1e-3 {
-            var z = C.z0
-            while z < C.z1 - 1e-3 {
-                let x1 = min(C.x1, x + cell), z1 = min(C.z1, z + cell)
-                let corners: [SIMD2<Float>] = [[x, z], [x1, z], [x1, z1], [x, z1]]
-                if let _ = dist([(x + x1) / 2, (z + z1) / 2]), corners.allSatisfy({ dist($0) != nil || true }) {
-                    let dT = corners.map { C.interp(dist($0) ?? 5.1, C.roofTop) }
-                    let dU = corners.map { C.interp(dist($0) ?? 5.1, C.roofUnder) }
-                    let pT = zip(corners, dT).map { SIMD3<Float>($0.x, $1, $0.y) }
-                    let pU = zip(corners, dU).map { SIMD3<Float>($0.x, $1, $0.y) }
-                    var n = normalize(cross(pT[3] - pT[0], pT[1] - pT[0]))
-                    if n.y < 0 { n = -n }
-                    top.quad(pT[0], pT[1], pT[2], pT[3], normal: n,
-                             uv: ([x / 0.32, z / 0.32], [x1 / 0.32, z / 0.32], [x1 / 0.32, z1 / 0.32], [x / 0.32, z1 / 0.32]))
-                    under.quad(pU[0], pU[1], pU[2], pU[3], normal: -n)
-                }
-                z += cell
+        // The 0.32 m grid plus the eave lines, so the roofs end exactly at their fascias (on the
+        // plain grid the east roof stopped 14 cm outside its fascia and the west one 2 cm inside).
+        func grid(_ a: Float, _ b: Float, _ extra: [Float]) -> [Float] {
+            let n = Int(((b - a) / cell).rounded(.up))
+            let v = (0...n).map { min(b, a + cell * Float($0)) } + extra
+            return Array(Set(v.map { ($0 * 10000).rounded() / 10000 })).sorted()
+        }
+        let xs = grid(C.x0, C.x1, [-4.9, 4.9]), zs = grid(C.z0, C.z1, [28.4])
+        // Smooth normals along the roof's curve, from the profile of the walk that covers the cell
+        // (flat per-cell normals showed every 0.32 m facet); the valleys stay crisp.
+        func walk(_ p: SIMD2<Float>) -> (d: Float, inward: SIMD2<Float>)? {
+            var best: (d: Float, inward: SIMD2<Float>)?
+            for w in [(p.x < -4.9, p.x - C.x0, SIMD2<Float>(1, 0)), (p.x > 4.9, C.x1 - p.x, SIMD2<Float>(-1, 0)),
+                      (p.y > 28.4, C.z1 - p.y, SIMD2<Float>(0, -1))] where w.0 && w.1 < (best?.d ?? .infinity) {
+                best = (w.1, w.2)
             }
-            x += cell
+            return best
+        }
+        func normal(_ q: SIMD2<Float>, _ inward: SIMD2<Float>, _ ys: [Float]) -> SIMD3<Float> {
+            // Distance from that walk's outer wall, and the profile's slope there.
+            let d = inward.x != 0 ? (inward.x > 0 ? q.x - C.x0 : C.x1 - q.x) : C.z1 - q.y
+            let slope = (C.interp(d + 0.05, ys) - C.interp(d - 0.05, ys)) / 0.1
+            return normalize(SIMD3<Float>(-slope * inward.x, 1, -slope * inward.y))
+        }
+        for (x, x1) in zip(xs, xs.dropFirst()) {
+            for (z, z1) in zip(zs, zs.dropFirst()) {
+                guard let w = walk([(x + x1) / 2, (z + z1) / 2]) else { continue }
+                let corners: [SIMD2<Float>] = [[x, z], [x1, z], [x1, z1], [x, z1]]
+                let pT = corners.map { SIMD3<Float>($0.x, C.interp(dist($0) ?? 5.1, C.roofTop), $0.y) }
+                let pU = corners.map { SIMD3<Float>($0.x, C.interp(dist($0) ?? 5.1, C.roofUnder), $0.y) }
+                let nT = corners.map { normal($0, w.inward, C.roofTop) }
+                let nU = corners.map { -normal($0, w.inward, C.roofUnder) }
+                top.quad(pT[0], pT[1], pT[2], pT[3], normals: nT[0], nT[1], nT[2], nT[3],
+                         uv: ([x / 0.32, z / 0.32], [x1 / 0.32, z / 0.32], [x1 / 0.32, z1 / 0.32], [x / 0.32, z1 / 0.32]))
+                under.quad(pU[0], pU[1], pU[2], pU[3], normals: nU[0], nU[1], nU[2], nU[3])
+            }
         }
         // Eave tips.
         let tipT = C.interp(5.1, C.roofTop), tipU = C.interp(5.1, C.roofUnder)

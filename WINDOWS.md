@@ -20,19 +20,14 @@ stills, DLSS for 4K, and OpenXR if the museum later goes into a PC headset.
 
 ## Pipeline and order of work
 
-**Now: the 4090 desktop build only.** The iPhone isn't a target for now. Whether Unreal later becomes
-the main build for every platform (iPhone and Vision Pro included) is undecided; until then, keep the
-architecture coming from the Mac.
+**Unreal is the native build and the source of truth** (decided 2026-09-23). There is no more Mac
+export: the Swift build in `Shared/`, the exporter in `tools/usd-export/` and `usd/` are kept only as
+references and aren't maintained. When the design changes: canvas → `plan/` → the Unreal project in
+`windows/`. An iOS or Vision Pro version, if there is one, is exported from the Unreal build.
 
-The building is defined once. The Swift builder (on the Mac) exports it as USD, one layer per wing with
-stable names and a material slot on every surface. The export is in [`usd/`](usd/README.md). When the
-design changes: canvas → `plan/` → the Swift wing → re-export on the Mac (`tools/usd-export/export.sh`)
-→ reimport in Unreal.
-
-**Import `usd/` as it is; don't rebuild the architecture by hand.** Its geometry was checked against
-the plan wing by wing. Import it with Interchange as ordinary Unreal assets (static meshes, materials,
-levels), not as a live USD Stage actor, with Nanite on. Keep the prim and material names: they trace
-back to the plan and let a reimport keep what was assigned in Unreal.
+**The museum started from a one-time import of `usd/`** (Interchange, as ordinary Unreal assets with
+Nanite on; prim and material names kept as actor labels and tags). Where that geometry is weak, it is
+rebuilt natively in C++ and the imported pieces are hidden: see `windows/GEOMETRY_AUDIT.md`.
 
 **Then rebuild natively only where the export is weak or missing:**
 
@@ -142,8 +137,10 @@ prim carries its work id and scan source, so the full-resolution original can be
   floors. The elevator and the lifting pond carry you.
 - **Stereographs:** on a monitor, keep the iPhone's gentle rocking between the two views. In a headset,
   show them in true stereo.
-- **The Sphere** is never seen from outside. Once the car passes the south pole at 26 m, hide the
-  building.
+- **The Sphere** (Ø 28 m, centre 22 m up) sits on the Atrium's drum; its underside is the Atrium's
+  ceiling. Once the car's floor passes the opening at the south pole (8.33 m), hide the building. The
+  drum, ribs and Sphere are built natively (`AElanStructure`); the imported Élan layer's old rib vault
+  and throat are hidden.
 
 ## Where a 4090 can go further
 
@@ -151,7 +148,7 @@ Only in ways the plan already implies:
 
 - Daylight through the eye, the lattices and the glass hall, moving with the real sun. Rain and wind in
   the Hall of Light's gardens ("Modern · Alive").
-- Real reflections and refraction in the pond, the glass steles, the glass car and the misty dome.
+- Real reflections and refraction in the pond, the glass steles, the glass car and the misty drum and Sphere.
 - Stone, bronze and gilt that read as stone, bronze and gilt: travertine, Carrara, patinated bronze.
   The palette is on the `Main` board.
 - A path-traced screenshot or photo mode.

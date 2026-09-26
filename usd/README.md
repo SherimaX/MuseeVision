@@ -1,5 +1,9 @@
 # Musée Vision · USD
 
+**Frozen.** This is a one-time snapshot of the Swift build, imported into Unreal to start the Windows
+build. Unreal (`windows/`) is now the source of truth, and this folder isn't re-exported any more.
+What follows describes how the snapshot was made.
+
 The whole museum as USD, exported from the Swift builder. The architecture is still defined only in
 `Shared/`; this folder is its output, for Unreal on the Windows PC (see [`../WINDOWS.md`](../WINDOWS.md))
 and later for baking light in Blender. Don't edit these files by hand: change the Swift, then re-export.

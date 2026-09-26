@@ -1,0 +1,456 @@
+{
+  "title": "The Classical Hall",
+  "description": "Casts of the great sculptures of Greece and Rome, below the Rotunda. The casts are the Royal Cast Collection's (SMK - National Gallery of Denmark, Copenhagen), scanned and published by SMK in the public domain; each label names the original and where it stands.",
+  "works": [
+    {
+      "id": "classical-apollo-belvedere",
+      "artist": "After Leochares",
+      "title": "Apollo Belvedere",
+      "year": "Roman copy, c. 120-140 AD, after a bronze of c. 330-320 BC",
+      "medium": "Cast after the marble",
+      "collection": "Original: Vatican Museums, Museo Pio-Clementino",
+      "city": "Vatican City",
+      "notes": "For three centuries the measure of ideal beauty; Winckelmann called it the highest ideal of art. Cast: SMK, KAS353."
+    },
+    {
+      "id": "classical-laocoon",
+      "artist": "Agesander, Athenodoros and Polydorus of Rhodes",
+      "title": "Laocoön and His Sons",
+      "year": "c. 40-20 BC",
+      "medium": "Cast after the marble",
+      "collection": "Original: Vatican Museums, Museo Pio-Clementino",
+      "city": "Vatican City",
+      "notes": "Unearthed in Rome in 1506 with Michelangelo looking on; the priest of Troy and his sons in the coils of the serpents. Cast: SMK, KAS385."
+    },
+    {
+      "id": "classical-belvedere-torso",
+      "artist": "Apollonios, son of Nestor, of Athens",
+      "title": "Belvedere Torso",
+      "year": "1st century BC",
+      "medium": "Cast after the marble",
+      "collection": "Original: Vatican Museums, Museo Pio-Clementino",
+      "city": "Vatican City",
+      "notes": "A fragment Michelangelo refused to complete; its twisting strength lives on in the Sistine Chapel. Cast: SMK, KAS402."
+    },
+    {
+      "id": "classical-venus-de-milo",
+      "artist": "Attributed to Alexandros of Antioch",
+      "title": "Venus de Milo (Aphrodite of Melos)",
+      "year": "c. 150-125 BC",
+      "medium": "Cast after the Parian marble",
+      "collection": "Original: Musée du Louvre",
+      "city": "Paris",
+      "notes": "Found on the island of Melos in 1820; her lost arms have kept her a question ever since. Cast: SMK, KAS434."
+    },
+    {
+      "id": "classical-barberini-faun",
+      "artist": "Unknown Hellenistic sculptor",
+      "title": "Barberini Faun (Sleeping Satyr)",
+      "year": "c. 220 BC",
+      "medium": "Cast after the marble",
+      "collection": "Original: Glyptothek",
+      "city": "Munich",
+      "notes": "A drunken satyr asleep on a rock, his body utterly abandoned: the Hellenistic eye for the unguarded moment. Cast: SMK, KAS208."
+    },
+    {
+      "id": "classical-discobolus",
+      "artist": "After Myron",
+      "title": "Discobolus (The Discus Thrower)",
+      "year": "Roman copy after a bronze of c. 460-450 BC",
+      "medium": "Cast after a Roman marble copy",
+      "collection": "Original bronze lost; Roman copies in Rome and London",
+      "city": "Rome",
+      "notes": "The athlete caught at the still point between the backswing and the throw. Cast: SMK, KAS1074."
+    },
+    {
+      "id": "classical-doryphoros",
+      "artist": "After Polykleitos",
+      "title": "Doryphoros (The Spear Bearer)",
+      "year": "Roman copy after a bronze of c. 440 BC",
+      "medium": "Cast after a Roman marble copy",
+      "collection": "Best-preserved copy: Museo Archeologico Nazionale",
+      "city": "Naples",
+      "notes": "Polykleitos's Canon made flesh: the proportions of the ideal body, and the weight shifted onto one leg. Cast: SMK, KAS11."
+    },
+    {
+      "id": "classical-augustus-prima-porta",
+      "artist": "Unknown Roman sculptor",
+      "title": "Augustus of Prima Porta",
+      "year": "Early 1st century AD",
+      "medium": "Cast after the marble",
+      "collection": "Original: Vatican Museums, Braccio Nuovo",
+      "city": "Vatican City",
+      "notes": "The first emperor as a general addressing his troops, his breastplate a map of Rome's peace. Cast: SMK, KAS65."
+    },
+    {
+      "id": "classical-dying-gaul",
+      "artist": "After Epigonos of Pergamon",
+      "title": "Dying Gaul",
+      "year": "Roman copy after a bronze of c. 230-220 BC",
+      "medium": "Cast after the marble",
+      "collection": "Original: Capitoline Museums",
+      "city": "Rome",
+      "notes": "A defeated warrior sinking onto his shield: the victors of Pergamon honoured their enemy's courage. Cast: SMK, KAS1312."
+    },
+    {
+      "id": "classical-capitoline-venus",
+      "artist": "After Praxiteles",
+      "title": "Capitoline Venus",
+      "year": "Roman copy, 2nd century AD, after a Hellenistic original",
+      "medium": "Cast after the marble",
+      "collection": "Original: Capitoline Museums",
+      "city": "Rome",
+      "notes": "A descendant of the Aphrodite of Knidos, the first life-size nude goddess in Greek art. Cast: SMK, KAS493."
+    },
+    {
+      "id": "classical-homer",
+      "artist": "Unknown Hellenistic sculptor",
+      "title": "Homer (the blind type)",
+      "year": "Roman copy after an original of c. 150 BC",
+      "medium": "Cast after the marble",
+      "collection": "Roman copies in Munich, London and Rome",
+      "city": "Munich",
+      "notes": "No one knew Homer's face; the Hellenistic age imagined the blind poet, and the image has stood for him since. Cast: SMK, KAS210."
+    },
+    {
+      "id": "classical-artemision-bronze",
+      "artist": "Unknown Greek sculptor",
+      "title": "Zeus or Poseidon of Artemision",
+      "year": "c. 460 BC",
+      "medium": "Cast after the bronze",
+      "collection": "Original: National Archaeological Museum",
+      "city": "Athens",
+      "notes": "Raised from a shipwreck off Cape Artemision in 1928; the god's thunderbolt or trident long lost from his hand. Cast: SMK, KAS2100."
+    },
+    {
+      "id": "classical-sleeping-ariadne",
+      "artist": "Unknown Roman sculptor",
+      "title": "Sleeping Ariadne",
+      "year": "Roman copy, 2nd century AD, after a Hellenistic original",
+      "medium": "Cast after the marble",
+      "collection": "Original: Vatican Museums, Galleria delle Statue",
+      "city": "Vatican City",
+      "notes": "Abandoned by Theseus on Naxos, asleep before Dionysus finds her; once taken for Cleopatra. Cast: SMK, KAS134."
+    },
+    {
+      "id": "classical-lansdowne-heracles",
+      "artist": "After Skopas?",
+      "title": "Lansdowne Heracles",
+      "year": "Roman copy, c. 125 AD, after a Greek original of the 4th century BC",
+      "medium": "Cast after the original",
+      "collection": "Original: J. Paul Getty Museum",
+      "city": "Los Angeles",
+      "notes": "Found at Hadrian's Villa at Tivoli in 1790; the hero with his club and lion skin, youthful and serene. Cast: SMK, KAS224."
+    },
+    {
+      "id": "classical-belvedere-antinous",
+      "artist": "Unknown Roman sculptor",
+      "title": "Belvedere Antinous (Hermes)",
+      "year": "Roman copy, 2nd century AD, after a Greek original",
+      "medium": "Cast after the original",
+      "collection": "Original: Vatican Museums, Museo Pio-Clementino",
+      "city": "Vatican City",
+      "notes": "Long taken for Antinous, Hadrian's favourite; now recognised as Hermes. For the eighteenth century, the canon of male proportion. Cast: SMK, KAS1161."
+    },
+    {
+      "id": "classical-capitoline-antinous",
+      "artist": "Unknown Roman sculptor",
+      "title": "Capitoline Antinous",
+      "year": "Roman copy, 2nd century AD, after a Hellenistic original",
+      "medium": "Cast after the original",
+      "collection": "Original: Capitoline Museums",
+      "city": "Rome",
+      "notes": "The same Hermes type as the Belvedere figure, gentler and more inward. Cast: SMK, KAS824."
+    },
+    {
+      "id": "classical-minerva-giustiniani",
+      "artist": "Unknown Roman sculptor",
+      "title": "Minerva Giustiniani",
+      "year": "Roman copy after a Greek original of the 4th century BC",
+      "medium": "Cast after the original",
+      "collection": "Original: Vatican Museums, Braccio Nuovo",
+      "city": "Vatican City",
+      "notes": "Athena helmeted and cloaked, a serpent at her side; once the Giustiniani family's pride. Cast: SMK, KAS255."
+    },
+    {
+      "id": "classical-farnese-diadoumenos",
+      "artist": "After Polykleitos",
+      "title": "Farnese Diadoumenos",
+      "year": "Roman copy after a bronze of c. 430 BC",
+      "medium": "Cast after the original",
+      "collection": "Original: British Museum",
+      "city": "London",
+      "notes": "An athlete tying the victor's fillet round his head: Polykleitos's canon in motion. Cast: SMK, KAS79."
+    },
+    {
+      "id": "classical-sophocles",
+      "artist": "Unknown Roman sculptor",
+      "title": "Lateran Sophocles",
+      "year": "Roman copy after a bronze of c. 330 BC",
+      "medium": "Cast after the original",
+      "collection": "Original: Vatican Museums",
+      "city": "Vatican City",
+      "notes": "The tragedian as the model citizen, wrapped in his cloak, poised and grave. Cast: SMK, KAS633."
+    },
+    {
+      "id": "classical-socrates",
+      "artist": "Unknown Roman sculptor",
+      "title": "Socrates",
+      "year": "Roman copy after a Greek portrait of the 4th century BC",
+      "medium": "Cast after the original",
+      "collection": "Roman copies in many collections",
+      "city": "",
+      "notes": "The philosopher's snub nose and satyr's brow, which his friends said hid a god within. Cast: SMK, KAS635."
+    },
+    {
+      "id": "classical-plato",
+      "artist": "After Silanion",
+      "title": "Plato",
+      "year": "Roman copy after a portrait of c. 370 BC",
+      "medium": "Cast after the original",
+      "collection": "Roman copies in many collections",
+      "city": "",
+      "notes": "The founder of the Academy, by tradition portrayed by Silanion. Cast: SMK, KAS2111."
+    },
+    {
+      "id": "classical-euripides",
+      "artist": "Unknown Roman sculptor",
+      "title": "Euripides (Farnese type)",
+      "year": "Roman copy after a Greek portrait of c. 330 BC",
+      "medium": "Cast after the original",
+      "collection": "Original: Museo Archeologico Nazionale",
+      "city": "Naples",
+      "notes": "The third of the great tragedians, lined and brooding. Cast: SMK, KAS620."
+    },
+    {
+      "id": "classical-homer-epimenides",
+      "artist": "Unknown Roman sculptor",
+      "title": "Homer (Epimenides type)",
+      "year": "Roman copy after a Greek portrait of c. 460 BC",
+      "medium": "Cast after the original",
+      "collection": "Roman copies in many collections",
+      "city": "",
+      "notes": "An earlier, calmer image of the poet than the Hellenistic blind Homer. Cast: SMK, KAS2237."
+    },
+    {
+      "id": "classical-kimon",
+      "artist": "Unknown Roman sculptor",
+      "title": "A general, identified as Kimon",
+      "year": "Roman copy after a Greek portrait of the 5th century BC",
+      "medium": "Cast after the original",
+      "collection": "",
+      "city": "",
+      "notes": "A helmeted Athenian strategos; the name is a scholar's suggestion. Cast: SMK, KAS534."
+    },
+    {
+      "id": "classical-pseudo-seneca",
+      "artist": "Unknown Hellenistic sculptor",
+      "title": "The so-called Seneca",
+      "year": "Roman copy after a Hellenistic portrait",
+      "medium": "Cast after the original",
+      "collection": "Roman copies in many collections",
+      "city": "",
+      "notes": "Long believed to be the Stoic philosopher; perhaps an image of the poet Hesiod. Cast: SMK, KAS94."
+    },
+    {
+      "id": "classical-alexander-helios",
+      "artist": "Unknown Hellenistic sculptor",
+      "title": "Alexander the Great as Helios",
+      "year": "Hellenistic, 2nd century BC",
+      "medium": "Cast after the original",
+      "collection": "Original: Capitoline Museums",
+      "city": "Rome",
+      "notes": "The conqueror as the sun god, head tossed back, hair like rays. Cast: SMK, KAS283."
+    },
+    {
+      "id": "classical-ptolemy-ii",
+      "artist": "Unknown Hellenistic sculptor",
+      "title": "Ptolemy II Philadelphus",
+      "year": "3rd century BC",
+      "medium": "Cast after the original",
+      "collection": "",
+      "city": "",
+      "notes": "King of Egypt, founder of the Library of Alexandria's great age. Cast: SMK, KAS752."
+    },
+    {
+      "id": "classical-philip-the-arab",
+      "artist": "Unknown Roman sculptor",
+      "title": "Philip the Arab",
+      "year": "Roman, 244-249 AD",
+      "medium": "Cast after the original",
+      "collection": "Original: Vatican Museums",
+      "city": "Vatican City",
+      "notes": "An emperor of a crisis century, his frown carved with a new, hard realism. Cast: SMK, KAS2147."
+    },
+    {
+      "id": "classical-chrysippus",
+      "artist": "Unknown Roman sculptor",
+      "title": "Chrysippus",
+      "year": "Roman copy after a Greek portrait of c. 200 BC",
+      "medium": "Cast after the original",
+      "collection": "",
+      "city": "",
+      "notes": "The Stoic logician, who, it was said, wrote more than seven hundred books. Cast: SMK, KAS602."
+    },
+    {
+      "id": "classical-young-marcus-aurelius",
+      "artist": "Unknown Roman sculptor",
+      "title": "Marcus Aurelius as a youth",
+      "year": "c. 140 AD",
+      "medium": "Cast after the original",
+      "collection": "Original: Capitoline Museums",
+      "city": "Rome",
+      "notes": "The future philosopher-emperor at about eighteen. Cast: SMK, KAS1090."
+    },
+    {
+      "id": "classical-zeno-of-citium",
+      "artist": "Unknown Roman sculptor",
+      "title": "Zeno of Citium",
+      "year": "Roman copy after a Greek portrait of the 3rd century BC",
+      "medium": "Cast after the original",
+      "collection": "Original: Museo Archeologico Nazionale",
+      "city": "Naples",
+      "notes": "The founder of Stoicism, who taught in the Painted Stoa at Athens. Cast: SMK, KAS745."
+    },
+    {
+      "id": "classical-antoninus-pius",
+      "artist": "Unknown Roman sculptor",
+      "title": "Antoninus Pius in a toga",
+      "year": "c. 140 AD",
+      "medium": "Cast after the original",
+      "collection": "",
+      "city": "",
+      "notes": "Emperor of Rome's calmest reign, draped as a citizen. Cast: SMK, KAS596."
+    },
+    {
+      "id": "classical-septimius-severus",
+      "artist": "Unknown Roman sculptor",
+      "title": "Septimius Severus in a toga",
+      "year": "c. 200 AD",
+      "medium": "Cast after the original",
+      "collection": "",
+      "city": "",
+      "notes": "The emperor from Leptis Magna, with his forked beard. Cast: SMK, KAS683."
+    },
+    {
+      "id": "classical-severan-lady",
+      "artist": "Unknown Roman sculptor",
+      "title": "A lady of the Severan court",
+      "year": "c. 200 AD",
+      "medium": "Cast after the original",
+      "collection": "",
+      "city": "",
+      "notes": "Her hair in the waved, helmet-like style of the empress Julia Domna. Cast: SMK, KAS687."
+    },
+    {
+      "id": "classical-julius-caesar",
+      "artist": "Unknown Roman sculptor",
+      "title": "Julius Caesar",
+      "year": "Roman portrait",
+      "medium": "Cast after the original",
+      "collection": "",
+      "city": "",
+      "notes": "The dictator's lean, lined face, as the Romans remembered it. Cast: SMK, KAS297."
+    },
+    {
+      "id": "classical-head-of-a-gaul",
+      "artist": "Unknown sculptor",
+      "title": "Head of a Gaul",
+      "year": "Roman copy after a Hellenistic original",
+      "medium": "Cast after the original",
+      "collection": "",
+      "city": "",
+      "notes": "The Pergamene sculptors' noble enemy: tousled hair, moustache, defiance. Cast: SMK, KAS796."
+    },
+    {
+      "id": "classical-julia-titi",
+      "artist": "Unknown Roman sculptor",
+      "title": "Julia Titi",
+      "year": "c. 80-90 AD",
+      "medium": "Cast after the original",
+      "collection": "",
+      "city": "",
+      "notes": "Daughter of the emperor Titus, her curls built up in the Flavian fashion. Cast: SMK, KAS866."
+    },
+    {
+      "id": "classical-sciarra-amazon",
+      "artist": "After a Greek sculptor",
+      "title": "Head of an Amazon (Sciarra type)",
+      "year": "Roman copy after a Greek statue of c. 440 BC",
+      "medium": "Cast after the original",
+      "collection": "",
+      "city": "",
+      "notes": "From one of the wounded Amazons made for Ephesus, when, the story goes, the great sculptors competed. Cast: SMK, KAS615."
+    },
+    {
+      "id": "classical-athena-parthenos",
+      "artist": "After Phidias",
+      "title": "Athena Parthenos",
+      "year": "After the gold-and-ivory statue of 438 BC",
+      "medium": "Cast after the original",
+      "collection": "",
+      "city": "",
+      "notes": "A reflection of the lost colossus that stood in the Parthenon. Cast: SMK, KAS2272."
+    },
+    {
+      "id": "classical-apollo-giustiniani",
+      "artist": "Unknown Roman sculptor",
+      "title": "Head of Apollo Giustiniani",
+      "year": "Roman copy after a Greek original",
+      "medium": "Cast after the original",
+      "collection": "",
+      "city": "",
+      "notes": "The god's calm, oval face, framed by long curls. Cast: SMK, KAS616."
+    },
+    {
+      "id": "classical-oxford-bust",
+      "artist": "Unknown Roman sculptor",
+      "title": "The Oxford bust",
+      "year": "Roman",
+      "medium": "Cast after the original",
+      "collection": "",
+      "city": "",
+      "notes": "A woman with her right breast bared: an Amazon or a goddess. Cast: SMK, KAS106."
+    },
+    {
+      "id": "classical-dying-slave",
+      "artist": "Michelangelo Buonarroti",
+      "title": "Dying Slave",
+      "year": "1513–1516",
+      "medium": "Cast after the marble",
+      "collection": "Original: Musée du Louvre",
+      "city": "Paris",
+      "notes": "Carved for the tomb of Pope Julius II and never placed there; a youth sinking into sleep or death, the block still rough at his back. Cast: SMK, KAS87."
+    },
+    {
+      "id": "classical-rebellious-slave",
+      "artist": "Michelangelo Buonarroti",
+      "title": "Rebellious Slave",
+      "year": "1513–1516",
+      "medium": "Cast after the marble",
+      "collection": "Original: Musée du Louvre",
+      "city": "Paris",
+      "notes": "The Dying Slave's companion for the same tomb, twisting against his bonds. Cast: SMK, KAS86."
+    },
+    {
+      "id": "classical-bacchus",
+      "artist": "Michelangelo Buonarroti",
+      "title": "Bacchus",
+      "year": "1496–1497",
+      "medium": "Cast after the marble",
+      "collection": "Original: Museo Nazionale del Bargello",
+      "city": "Florence",
+      "notes": "His first large statue, made in Rome at twenty-one: the wine god unsteady on his feet, a satyr stealing his grapes. Cast: SMK, KAS83."
+    },
+    {
+      "id": "classical-venere-italica",
+      "artist": "Antonio Canova",
+      "title": "Venere Italica",
+      "year": "1804–1812",
+      "medium": "Cast after the marble",
+      "collection": "Original: Galleria Palatina, Palazzo Pitti",
+      "city": "Florence",
+      "notes": "Made to replace the Medici Venus when Napoleon carried it off to Paris; a goddess surprised at her bath. Cast: SMK, KAS793."
+    }
+  ]
+}

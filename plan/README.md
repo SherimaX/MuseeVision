@@ -7,7 +7,8 @@ from it so every build (iPhone, Windows) reads the same plan.
 
 | File | What it is |
 |---|---|
-| `Musee-Vision-Guide.pdf` | **Start here.** The whole museum in visit order, 37 landscape pages built from the boards: Rotunda → Salon + Reserve → Sculpture → Chinese Wing → Hall of Light → Élan. |
+| `Musee-Vision-Guide.pdf` | **Start here.** The whole museum in visit order, 38 landscape pages built from the boards and the current design: Rotunda → Salon + Reserve → Sculpture → Chinese Wing → Hall of Light → Élan. |
+| `guide/` | The guide's source: `guide.html` (one section per page), `guide.css`, the renderings in `images/`, and `elan_drawings.py` (the Élan drawings at true scale). `guide/build.ps1` prints the PDF with headless Chrome; `-Png` renders pages for checking. |
 | `canvas/*.dc.html` | The boards' own source. Plans, sections and elevations are inline SVG with every dimension in the markup, so they can be read directly. They render properly only inside the canvas; use the PDF for looking. |
 | `canvas/canvas.json` | Board titles and their layout on the canvas. |
 | `renderings/` | The GPT concept renderings with their prompts: mood targets, not the plan. Three are out of date; see its README. |
@@ -78,8 +79,10 @@ autochromes), and four stereo stones stand off the axis. The doors are 3 m (Rotu
 
 **Élan, level 0: the Atrium.** A Ø 28 m circle, its centre 54 m east of the Rotunda, with twelve bays
 between rib piers. Its only door is the west bay. Eleven bays (A–K) are for new art; bay F, on the east
-axis, is seen through the glass car. The ribs spring from a 6 m travertine base to a ring at 22 m under
-plain misty glass. A round glass car (Ø 4.4 m) stands at the centre with its door facing west. *The Starry
+axis, is seen through the glass car. Above a 6 m travertine base, a drum of plain misty glass rises to
+22 m, where the Sphere sits on it; the Sphere's underside is the ceiling, and the ribs run up the drum
+and under the Sphere to a ring round the opening over the car (changed since the boards, which still
+draw ribs leaning in to a ring at 22 m). A round glass car (Ø 4.4 m) stands at the centre with its door facing west. *The Starry
 Night* (the only painting here) stands on a glass stele 1.9 m north of the axis. You wait on the bronze
 ring, and the first ride goes down before it goes up.
 
@@ -88,10 +91,13 @@ of clear height. The floor is the Lo Shu's nine squares (north up: 6 1 8 / 7 5 3
 numerals. The car lands on 5, where a glass floor looks down through soil, clay, chalk and bedrock. There
 are open galleries on the cross (1, 3, 9, 7) and dark rooms in the corners (6, 8, 4, 2), for new art.
 
-**Élan, level 2: the Sphere.** Boullée's Ø 150 m shell, used like the Las Vegas Sphere: the whole inner
-surface is one image. One glass car rises a bronze mast from the south pole (26 m) to the exact centre,
-101 m above the Atrium floor, at a steady 1.5 m/s (about 70 s, with no skip). There the glass dims to a
-rail and a floor, and the image surrounds you, below your feet too. It is never seen from outside. It
+**Élan, level 2: the Sphere.** A Ø 28 m shell after Boullée's, used like the Las Vegas Sphere: the whole
+inner surface is one image. Its radius is the Atrium's and it sits in the Atrium like a ball in a cup,
+its centre 22 m up, its equator on the top of the drum. (Changed since the boards, which draw Boullée's
+Ø 150 m shell centred 101 m up.) One glass car rises through the opening at the south pole (8.3 m) and up
+a bronze mast to the exact centre at a steady 1.5 m/s (about 16 s, with no skip). There the glass dims
+to a rail and a floor, and the image surrounds you, below your feet too. From outside it is a misty
+pearl on the drum; from inside, the building is gone. It
 always shows the real sky over your location now, and new art on a timetable. The proposed opening piece
 has the live sky turn into *The Starry Night*.
 
