@@ -203,41 +203,87 @@ function Get-AdmissionWait($SlotRules) {
     return ''
 }
 
-function Enter-OneOf($Mutexes, [int] $Milliseconds) {
-    <# Waits up to the time for any one of the mutexes; returns the index taken, or -1. #>
-    try {
-        $index = [System.Threading.WaitHandle]::WaitAny([System.Threading.WaitHandle[]]$Mutexes, $Milliseconds)
-        if ($index -eq [System.Threading.WaitHandle]::WaitTimeout) { return -1 }
-        return $index
-    } catch [System.Threading.AbandonedMutexException] {
-        return $_.Exception.MutexIndex
+function Get-CancelEventName([string] $Id) { return "Global\MuseeUnrealCancel_$Id" }
+
+function Get-StopHandles($Spec) {
+    <# Kernel handles that end a wait at once: the job's cancel event and, for a blocking run, its caller's process
+       (a process handle is signalled when the process exits). #>
+    $handles = @(New-Object System.Threading.EventWaitHandle($false, [System.Threading.EventResetMode]::ManualReset, (Get-CancelEventName $Spec.id)))
+    if ($Spec.callerPid) {
+        try {
+            $script:CallerProcess = Get-Process -Id $Spec.callerPid -ErrorAction Stop
+            $watch = New-Object System.Threading.ManualResetEvent($false)
+            $watch.SafeWaitHandle = New-Object Microsoft.Win32.SafeHandles.SafeWaitHandle($script:CallerProcess.Handle, $false)
+            $handles += $watch
+        } catch [Microsoft.PowerShell.Commands.ProcessCommandException] { }
     }
+    return ,$handles
+}
+
+function Enter-OneOf($Mutexes, $Stops, [int] $Milliseconds) {
+    <# Waits up to the time for any one of the mutexes, or for a stop handle. Returns the index of the mutex taken,
+       -1 when the time ran out, or -2 when a stop handle fired. #>
+    $all = [System.Threading.WaitHandle[]](@($Mutexes) + @($Stops))
+    try { $index = [System.Threading.WaitHandle]::WaitAny($all, $Milliseconds) }
+    catch [System.Threading.AbandonedMutexException] { $index = $_.Exception.MutexIndex }
+    if ($index -eq [System.Threading.WaitHandle]::WaitTimeout) { return -1 }
+    if ($index -ge @($Mutexes).Count) { return -2 }
+    return $index
+}
+
+function Get-WaitMilliseconds([DateTime] $Deadline, [double] $Most) {
+    $left = ($Deadline - [DateTime]::UtcNow).TotalMilliseconds
+    return [int][Math]::Max(0, [Math]::Min($left, $Most))
+}
+
+function Set-WaitMessage($Spec, $State, [string] $Message) {
+    if ($State.message -eq $Message) { return }
+    $State.message = $Message
+    Write-JobState $Spec.id $State
+}
+
+function Wait-ForHeavy($Spec, $State, [DateTime] $Deadline, [System.Collections.ArrayList] $Held, $Stops) {
+    <# While one Unreal runs at a time, a GPU or LIGHT run also holds HEAVY. Returns '' once HEAVY is held, or why
+       it stopped waiting. #>
+    $heavy = New-Object System.Threading.Mutex($false, (Get-MutexName $Spec.namespace 'HEAVY'))
+    Set-SlotHolders $Spec $Held $true
+    Set-WaitMessage $Spec $State "holding $($Held[0].Name); waiting for HEAVY, as one Unreal runs at a time"
+    $reason = ''
+    while (-not ($reason = Get-StopReason $Spec $Deadline)) {
+        if ((Enter-OneOf @($heavy) $Stops (Get-WaitMilliseconds $Deadline ([int]::MaxValue))) -ge 0) {
+            [void]$Held.Add([pscustomobject]@{ Mutex = $heavy; Name = 'HEAVY' })
+            return ''
+        }
+    }
+    return $reason
 }
 
 function Wait-ForSlot($Spec, $Table, $State, [DateTime] $Deadline, [System.Collections.ArrayList] $Held) {
     <# Takes the job's slot, and HEAVY too while one Unreal runs at a time, adding each mutex to $Held.
-       Returns $true when held, or $false with $State saying why it gave up. #>
+       Returns $true when held, or $false with $State saying why it gave up.
+       A slot with no admission rule (HEAVY) is waited for in one long wait, so the worker keeps its place in the
+       queue of waiters, beside the bootstrap lock's; a slot with rules (RAM, GPU) re-checks them every two seconds. #>
     if ($Spec.slot -eq 'NONE') { return $true }
     $rules = $Table.slots.($Spec.slot)
     $names = @($rules.mutexes | ForEach-Object { $_ })
     $own = @($names | ForEach-Object { New-Object System.Threading.Mutex($false, (Get-MutexName $Spec.namespace $_)) })
-    $heavy = New-Object System.Threading.Mutex($false, (Get-MutexName $Spec.namespace 'HEAVY'))
-    $alsoHeavy = $Table.oneUnrealAtATime -and $Spec.slot -ne 'HEAVY'
+    $stops = Get-StopHandles $Spec
+    $longest = $(if ($rules.minAvailableGB -or $rules.gpuIdleBelowPercent) { 2000 } else { [int]::MaxValue })
     $reason = ''
     while (-not ($reason = Get-StopReason $Spec $Deadline)) {
         $admission = Get-AdmissionWait $rules
-        if ($admission) { $State.message = "waiting for $admission"; Write-JobState $Spec.id $State; Start-Sleep -Seconds 2; continue }
-        $index = Enter-OneOf $own 1000
+        if ($admission) { Set-WaitMessage $Spec $State "waiting for $admission"; [void](Enter-OneOf @() $stops 2000); continue }
+        Set-WaitMessage $Spec $State "waiting for the $($Spec.slot) slot"
+        $index = Enter-OneOf $own $stops (Get-WaitMilliseconds $Deadline $longest)
         if ($index -lt 0) { continue }
         [void]$Held.Add([pscustomobject]@{ Mutex = $own[$index]; Name = $names[$index] })
-        if (-not $alsoHeavy) { return $true }
-        while (-not ($reason = Get-StopReason $Spec $Deadline)) {
-            if ((Enter-OneOf @($heavy) 1000) -ge 0) { [void]$Held.Add([pscustomobject]@{ Mutex = $heavy; Name = 'HEAVY' }); return $true }
-        }
-        Exit-NamedMutex $Held[0].Mutex
-        $Held.Clear()
         break
     }
+    if ($Held.Count -and $Table.oneUnrealAtATime -and $Spec.slot -ne 'HEAVY') { $reason = Wait-ForHeavy $Spec $State $Deadline $Held $stops }
+    if ($Held.Count -and -not $reason) { return $true }
+    Set-SlotHolders $Spec $Held $false
+    for ($i = $Held.Count - 1; $i -ge 0; $i--) { Exit-NamedMutex $Held[$i].Mutex }
+    $Held.Clear()
     $State.state = @{ 'cancelled' = 'cancelled'; 'caller-gone' = 'cancelled'; 'deadline' = 'queue-timeout' }[$reason]
     $State.message = @{ 'cancelled' = 'cancelled while waiting for its slot'; 'caller-gone' = 'its caller ended while it waited for its slot'
         'deadline' = "never got the $($Spec.slot) slot before its time ran out" }[$reason]
@@ -541,6 +587,8 @@ switch ($Command) {
         if (-not $JobId) { throw 'cancel needs a job id.' }
         [void](Read-JobState $JobId)
         Write-TextFile (Join-Path (Get-JobFolder $JobId) 'cancel') (Get-UtcStamp)
+        $wake = New-Object System.Threading.EventWaitHandle($false, [System.Threading.EventResetMode]::ManualReset, (Get-CancelEventName $JobId))
+        [void]$wake.Set()
         Write-Host "Asked job $JobId to stop; its worker ends the run and releases the slot within a few seconds."
         exit 0
     }

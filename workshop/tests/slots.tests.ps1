@@ -156,6 +156,18 @@ $cancelled = Submit-Stand 'HEAVY' 'Start-Sleep 120' 'cancel me'
 $c = Invoke-Unreal @('wait', $cancelled, '-TimeoutSeconds', '20')
 Test-That 'cancel stops a running job' ($c.Code -eq 127) $c.Text
 
+# Cancel reaches a job that is still waiting for its slot at once (its wait includes the cancel event).
+$blocker = Enter-NamedMutex -Name 'Global\MuseeUnrealSelfTest_HEAVY' -TimeoutMilliseconds 5000
+$waiting = Submit-Stand 'HEAVY' 'exit 0' 'queued cancel'
+[void](Wait-State $waiting @('queued') 30)
+Start-Sleep -Seconds 1
+$asked = Get-Date
+[void](Invoke-Unreal @('cancel', $waiting))
+$q = Wait-State $waiting @('cancelled') 10
+$latency = ((Get-Date) - $asked).TotalSeconds
+Exit-NamedMutex $blocker
+Test-That 'cancel ends a job waiting in the HEAVY queue within seconds' ($q -and $q.message -match 'waiting for its slot' -and $latency -lt 6) "latency=$latency"
+
 # Slot jobs are recorded in the Register.
 $records = @(Get-ChildItem (Join-Path $env:MUSEE_REGISTER 'jobs') -Filter '*.json')
 $pending = Invoke-Git -Repo $env:MUSEE_REGISTER -Arguments @('status', '--porcelain')
