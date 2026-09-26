@@ -151,8 +151,8 @@
       "evidence": [
         {
           "fields": ["averageIlluminanceLux"],
-          "source": "nfpa-101-summary",
-          "row": "An average of one foot-candle along the path of egress; 1 fc = 10.764 lx"
+          "source": "wikipedia-emergency-light",
+          "row": "An average of one foot candle of light along the path of egress; 1 fc = 1 lm/ft² = 10.764 lx"
         }
       ]
     }
@@ -165,7 +165,7 @@
   "sources": [
     {
       "id": "en12464-1-2011",
-      "title": "EN 12464-1:2011 Lighting of indoor workplaces (June 2011), schedule of lighting requirements, as reproduced in Zumtobel, The Lighting Handbook, 6th edition, April 2018, pp. 30-37",
+      "title": "EN 12464-1:2011 Lighting of indoor workplaces (June 2011), schedule of lighting requirements, as reproduced in Zumtobel, The Lighting Handbook, 6th edition, April 2018, pp. 30-38",
       "url": "https://www.zumtobel.com/PDB/teaser/EN/lichthandbuch.pdf",
       "readOn": "2026-09-26"
     },
@@ -188,8 +188,8 @@
       "readOn": "2026-09-26"
     },
     {
-      "id": "nfpa-101-summary",
-      "title": "Wikipedia, 'Emergency light': the requirement of an average of one foot-candle along the path of egress (NFPA 101 practice)",
+      "id": "wikipedia-emergency-light",
+      "title": "Wikipedia, 'Emergency light': 'strict requirements to provide an average of one foot candle of light along the path of egress' (the sentence names no code)",
       "url": "https://en.wikipedia.org/wiki/Emergency_light",
       "readOn": "2026-09-26"
     },
@@ -205,6 +205,7 @@
     "The reference plane 'floor' for traffic zones (EN 12464-1 notes illuminance at floor level for circulation; the note itself was not read).",
     "IES Lighting Handbook and ANSI/IES RP-30-17 values for circulation and orientation in museums (the RP-30-17 preview refused automated reads).",
     "CIBSE SLL Code for Lighting and CIBSE LG8 values (not publicly readable).",
-    "EN 1838 escape-route illuminance (1 lx on the centre line) was not read from a source; the escape floor uses the NFPA 101 figure as summarised by Wikipedia."
+    "EN 1838 escape-route illuminance (1 lx on the centre line) was not read from a source.",
+    "The code behind the one foot-candle egress average (NFPA 101, Life Safety Code, is the likely origin); Wikipedia states the requirement without naming the code, and NFPA 101 itself was not read."
   ]
 }

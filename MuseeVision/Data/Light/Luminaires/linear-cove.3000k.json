@@ -58,6 +58,7 @@
   "unverified": [
     "Whether the Downloads section of the RE18 page offers LDT and IES files (the file list was not in the page text).",
     "CRI (minimum) 90 comes from the search index text of the RE18 page; the fetched page showed Rf 90 and Rg 97 only.",
-    "The cutting step of the strip (the page names set cutting distances without a value)."
+    "The cutting step of the strip (the page names set cutting distances without a value).",
+    "Power per metre: the page's table gives 16 W per metre (80 W for the 5 m reel) and its text 'approximate power of strip 15W/m'; the record keeps the tabulated 16 W."
   ]
 }

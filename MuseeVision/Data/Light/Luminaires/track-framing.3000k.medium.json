@@ -26,7 +26,7 @@
   "electrical": {
     "systemPowerWatts": 35,
     "control": "DALI-2",
-    "mounting": "electrified DALI track with double electric and mechanical coupling"
+    "mounting": "electrified track with double electric and mechanical coupling (the page names no track type)"
   },
   "housing": {
     "diameterMillimeters": 115,

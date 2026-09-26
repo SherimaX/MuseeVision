@@ -23,16 +23,16 @@
   },
   "electrical": {
     "systemPowerWatts": null,
-    "control": "DALI through the seven-pole through-wiring (three phases, two DALI lines, two emergency lines)"
+    "control": "DALI through the seven-pole terminal (three phases and two lines for DALI and/or emergency lighting)"
   },
   "housing": {
     "channelLengthMillimetersRange": [1000, 4000],
     "channelStepMillimeters": 250,
     "battenLengthMillimetersRange": [1000, 2000],
     "housingColours": [
-      "white RAL 9016",
-      "black RAL 9005",
-      "silver RAL 9006"
+      "white RAL 9016 (MRC and MRT)",
+      "black RAL 9005 (MRT only)",
+      "silver RAL 9006 (MRT only)"
     ]
   },
   "photometricFile": {
