@@ -170,3 +170,24 @@ configuration) are kept apart. Masters are split by physical shading topology an
 applied as a vertical layer that any opaque master can carry.
 **Follows:** The same pattern holds for every system with a making twin: the system defines its builders, and
 Studio writes the assets.
+
+## D-016 · The whole museum, first pass, by Sunday night
+**Context:** The owner (Saturday 26 September, 18:10): "this is a weekend project. tomorrow is the deadline." Offered
+three scopes, the owner chose **"Whole museum, first pass"**.
+**Decision:** By Sunday night, every stage is rebuilt on the new systems, joined by the site plan, and packaged
+for desktop and VR: the Rotunda, Classical Hall, Salon, Reserve, Hall of Light, Chenghuai, Albion, Atrium, Sphere,
+Cube with Sea Light, and the Grounds. "First pass" means:
+- every room is built through the shared systems, from real records and specs (never tuned by hand);
+- the systems are built to the depth the rooms need tonight;
+- polish follows in later sessions.
+
+The gates compress:
+- no separate specimen-wall walk;
+- the owner walks the joined museum on Sunday and gives notes, and one fix round follows;
+- inspections stay, one inspector per order.
+
+The principles and the wiring don't compress.
+**Follows:**
+- The systems are built tonight in parallel, and the rooms overnight as the systems land.
+- Assembly and packaging happen Sunday morning, then the owner's walk, one fix round, and the final package on
+  Sunday evening.
