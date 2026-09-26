@@ -1,0 +1,112 @@
+{
+  "schema": "musee.matter.working/1",
+  "key": "sawn.vein-cut",
+  "name": "Sawn vein-cut (across the bed)",
+  "kind": "cut",
+  "appliesTo": {
+    "families": [
+      "stone"
+    ],
+    "substances": [
+      "travertine",
+      "cream-marble"
+    ]
+  },
+  "over": [],
+  "process": "The block is sawn into slabs with the saw plane across the bedding planes, so the face shows the edges of the layers. Slabs come from a gang saw (steel shot, chat or sand in a slurry, or diamond blades), a diamond wire or a disc; the sawn face is then left as sawn, or honed or polished.",
+  "processSources": [
+    "Natural Stone Institute (2022) Dimension Stone Design Manual, chapter 12 'Travertine' (Specification, Product Description, Technical Data), pp. 12-1 to 12-14, https://transparencycatalog.com/assets/uploads/greener-images/12-TRAVERTINE-2022.pdf, Product Description 4.1.4 and 10.1.1",
+    "Urosevic M., Sebastian-Pardo E., Cardell C. (2010) 'Rough and polished travertine building stone decay evaluated by a marine aerosol ageing test', Construction and Building Materials 24:1438-1448 (Olivillo travertine, Alhama de Almeria, Spain, sawn vein-cut), https://doi.org/10.1016/j.conbuildmat.2010.01.011, section 2.1"
+  ],
+  "bedToFace": {
+    "value": 90,
+    "unit": "deg",
+    "grade": "guidance",
+    "source": "Natural Stone Institute (2022) Dimension Stone Design Manual, chapter 12 'Travertine' (Specification, Product Description, Technical Data), pp. 12-1 to 12-14, https://transparencycatalog.com/assets/uploads/greener-images/12-TRAVERTINE-2022.pdf, Product Description 10.1.1 ('cut against the bedding planes, exposing the edge of the formation') ; Urosevic M., Sebastian-Pardo E., Cardell C. (2010) 'Rough and polished travertine building stone decay evaluated by a marine aerosol ageing test', Construction and Building Materials 24:1438-1448 (Olivillo travertine, Alhama de Almeria, Spain, sawn vein-cut), https://doi.org/10.1016/j.conbuildmat.2010.01.011, section 2.1 ('perpendicular to the layering (vein cut)')",
+    "conditions": "angle between the face and the bedding planes"
+  },
+  "surface": {
+    "asSawn": [
+      {
+        "text": "Sawn: a comparatively rough surface; chat, shot, sand or diamond sawn.",
+        "grade": "guidance",
+        "source": "Natural Stone Institute (2022) Dimension Stone Design Manual, chapter 12 'Travertine' (Specification, Product Description, Technical Data), pp. 12-1 to 12-14, https://transparencycatalog.com/assets/uploads/greener-images/12-TRAVERTINE-2022.pdf, Product Description 4.1.4"
+      },
+      {
+        "text": "Diamond gang sawn: a comparatively smooth surface with some parallel markings and scratches.",
+        "grade": "guidance",
+        "source": "Natural Stone Institute (2022) Dimension Stone Design Manual, chapter 12 'Travertine' (Specification, Product Description, Technical Data), pp. 12-1 to 12-14, https://transparencycatalog.com/assets/uploads/greener-images/12-TRAVERTINE-2022.pdf, Specification 6.2.5.7"
+      }
+    ],
+    "arealRoughness": {
+      "value": 0.24,
+      "unit": "mm",
+      "grade": "measured",
+      "source": "Molina E., Arizzi A., Benavente D., Cultrone G. (2020) 'Influence of surface finishes and a calcium phosphate-based consolidant on the decay of sedimentary building stones due to acid attack', Frontiers in Materials 7:581979, Tables 1 and 2, https://doi.org/10.3389/fmats.2020.581979, Table 2",
+      "conditions": "Sa (ISO 25178-2), saw-cut Travertino Amarillo, fresh and untreated, the cut's orientation to the bed not stated; Leica VDM2000 videomicroscope; no filter is stated, so open pores are presumably included; Sz 1.08 mm, Sku 1.75"
+    },
+    "arealRoughnessCalcarenite": {
+      "value": 0.27,
+      "unit": "mm",
+      "grade": "measured",
+      "source": "Molina E., Arizzi A., Benavente D., Cultrone G. (2020) 'Influence of surface finishes and a calcium phosphate-based consolidant on the decay of sedimentary building stones due to acid attack', Frontiers in Materials 7:581979, Tables 1 and 2, https://doi.org/10.3389/fmats.2020.581979, Table 2",
+      "conditions": "Sa, saw-cut Calcarenita de Santa Pudia, a porous bioclastic limestone; Sz 2.6 mm"
+    }
+  },
+  "appearance": [
+    {
+      "text": "A very linear pattern: the layers show as parallel bands.",
+      "grade": "guidance",
+      "source": "Natural Stone Institute (2022) Dimension Stone Design Manual, chapter 12 'Travertine' (Specification, Product Description, Technical Data), pp. 12-1 to 12-14, https://transparencycatalog.com/assets/uploads/greener-images/12-TRAVERTINE-2022.pdf, Product Description 10.1.1"
+    },
+    {
+      "text": "Clear, regular sedimentation lines with smaller, more consistent holes.",
+      "grade": "manufacturer",
+      "source": "Alberti e Alberti (Tivoli), 'Travertino Romano Classico', technical properties to UNI EN test standards, product page read 2026-09-26, https://marmialberti.it/en/travertino-romano-classico/"
+    }
+  ],
+  "cutDependence": {
+    "text": "The two cuts give different strength, and the cut the project uses is tested.",
+    "grade": "guidance",
+    "source": "Natural Stone Institute (2022) Dimension Stone Design Manual, chapter 12 'Travertine' (Specification, Product Description, Technical Data), pp. 12-1 to 12-14, https://transparencycatalog.com/assets/uploads/greener-images/12-TRAVERTINE-2022.pdf, Technical Data 2.3"
+  },
+  "creamMarble": [
+    {
+      "text": "Crema Marfil's veins belong to several families of stylolites and calcite veins.",
+      "grade": "measured",
+      "source": "Lopez-Buendia A.M., Guillem C., Cuevas J.M., Mateos F., Montoto M. (2013) 'Natural stone reinforcement of discontinuities with resin for industrial processing', Engineering Geology 166:39-51, abstract, https://doi.org/10.1016/j.enggeo.2013.09.004"
+    },
+    {
+      "text": "Botticino's stylolites run almost parallel to the sedimentation level, so a cut across the bed shows them as lines.",
+      "grade": "manufacturer",
+      "source": "Cooperativa Cavatori Botticino, 'The Marble' (description and technical data to UNI EN test standards), read 2026-09-26, https://www.cavatoribotticino.it/en/the-marble/"
+    }
+  ],
+  "photograph": [
+    "Bands of ivory, cream and honey run the length of the slab, wavy, sometimes pinching out.",
+    "Voids are drawn out along the bands like small lenses and are smaller and more regular than in a cross-cut slab.",
+    "Each slab is a different slice of the same bed: tone and band character carry across a joint, the lines do not.",
+    "As sawn, a diamond gang saw leaves fine parallel markings."
+  ],
+  "unverified": [
+    {
+      "field": "surface.bandSpacing",
+      "value": null,
+      "unit": "mm",
+      "reason": "No measured band spacing for vein-cut Roman travertine was found."
+    },
+    {
+      "field": "creamMarble",
+      "text": "How Crema Marfil's figure changes with the saw plane.",
+      "reason": "Not found in any source read."
+    }
+  ],
+  "sources": [
+    "Natural Stone Institute (2022) Dimension Stone Design Manual, chapter 12 'Travertine' (Specification, Product Description, Technical Data), pp. 12-1 to 12-14, https://transparencycatalog.com/assets/uploads/greener-images/12-TRAVERTINE-2022.pdf",
+    "Urosevic M., Sebastian-Pardo E., Cardell C. (2010) 'Rough and polished travertine building stone decay evaluated by a marine aerosol ageing test', Construction and Building Materials 24:1438-1448 (Olivillo travertine, Alhama de Almeria, Spain, sawn vein-cut), https://doi.org/10.1016/j.conbuildmat.2010.01.011",
+    "Molina E., Arizzi A., Benavente D., Cultrone G. (2020) 'Influence of surface finishes and a calcium phosphate-based consolidant on the decay of sedimentary building stones due to acid attack', Frontiers in Materials 7:581979, Tables 1 and 2, https://doi.org/10.3389/fmats.2020.581979",
+    "Alberti e Alberti (Tivoli), 'Travertino Romano Classico', technical properties to UNI EN test standards, product page read 2026-09-26, https://marmialberti.it/en/travertino-romano-classico/",
+    "Lopez-Buendia A.M., Guillem C., Cuevas J.M., Mateos F., Montoto M. (2013) 'Natural stone reinforcement of discontinuities with resin for industrial processing', Engineering Geology 166:39-51, abstract, https://doi.org/10.1016/j.enggeo.2013.09.004",
+    "Cooperativa Cavatori Botticino, 'The Marble' (description and technical data to UNI EN test standards), read 2026-09-26, https://www.cavatoribotticino.it/en/the-marble/"
+  ]
+}

@@ -1,0 +1,185 @@
+{
+  "schema": "musee.matter.history/1",
+  "key": "stone.foot-traffic-wear",
+  "name": "Worn by feet",
+  "family": "stone",
+  "appliesTo": {
+    "families": [
+      "stone"
+    ],
+    "substances": [
+      "travertine",
+      "cream-marble"
+    ],
+    "workings": []
+  },
+  "describes": "Floor stone where people walk, most at thresholds and on stair treads: grit under shoes scratches the polish off first, then wears the stone into a shallow dish, and edges round.",
+  "surfaceLawTerms": [
+    "wear",
+    "age"
+  ],
+  "terms": {
+    "mechanism": [
+      {
+        "text": "Shoes carry mineral grit onto the floor. Quartz (Mohs 7) is far harder than calcite (Mohs 3), so each step drags harder grains across the stone and ploughs fine scratches.",
+        "grade": "measured",
+        "source": "Anthony J.W., Bideaux R.A., Bladh K.W., Nichols M.C. (eds.) Handbook of Mineralogy, Mineralogical Society of America, 'Quartz' (Mineral Data Publishing, version 1.2, 2001), http://www.handbookofmineralogy.org/pdfs/quartz.pdf ; Anthony J.W., Bideaux R.A., Bladh K.W., Nichols M.C. (eds.) Handbook of Mineralogy, Mineralogical Society of America, 'Calcite' (Mineral Data Publishing, version 1, 2001-2005), http://www.handbookofmineralogy.org/pdfs/calcite.pdf"
+      },
+      {
+        "text": "Worn volume grows with load times sliding distance, divided by the hardness of the worn surface and multiplied by a wear coefficient: V = K W s / H.",
+        "grade": "measured",
+        "source": "Archard J.F. (1953) 'Contact and rubbing of flat surfaces', Journal of Applied Physics 24:981-988, https://doi.org/10.1063/1.1721448"
+      }
+    ],
+    "glossLoss": [
+      {
+        "text": "Gloss rises steeply as roughness falls in polishing, so the first scratches take a polish down steeply; the relation is weaker in travertine.",
+        "grade": "measured",
+        "source": "Yavuz H., Ozkahraman T., Demirdag S. (2011) 'Polishing experiments on surface quality of building stone tiles', Construction and Building Materials 25:1707-1711, abstract as indexed (full text not read), https://doi.org/10.1016/j.conbuildmat.2010.10.016"
+      },
+      {
+        "min": 75,
+        "unit": "GU",
+        "grade": "manufacturer",
+        "source": "McDonell J.A., Kyle R.C. (Minnesota Mining and Manufacturing Co.) (1994) US Patent 5,282,900 'Nonwoven surface treating articles, system including same, and method of treating calcium carbonate-containing surfaces with said system', https://patents.google.com/patent/US5282900A/en",
+        "conditions": "60 degree gloss of polished ('high gloss') marble: the state traffic wears away"
+      },
+      {
+        "max": 5,
+        "unit": "GU",
+        "grade": "manufacturer",
+        "source": "McDonell J.A., Kyle R.C. (Minnesota Mining and Manufacturing Co.) (1994) US Patent 5,282,900 'Nonwoven surface treating articles, system including same, and method of treating calcium carbonate-containing surfaces with said system', https://patents.google.com/patent/US5282900A/en",
+        "conditions": "marble ground with a 120-grade abrasive, at any angle: a scratched, matt face"
+      }
+    ],
+    "floorRules": {
+      "minimumForFloors": {
+        "min": 10,
+        "unit": "Ha",
+        "grade": "guidance",
+        "source": "Natural Stone Institute (2022) Dimension Stone Design Manual, chapter 12 'Travertine' (Specification, Product Description, Technical Data), pp. 12-1 to 12-14, https://transparencycatalog.com/assets/uploads/greener-images/12-TRAVERTINE-2022.pdf, Technical Data 4.2",
+        "conditions": "ASTM C241 abrasion hardness recommended for floors in normal foot traffic"
+      },
+      "minimumForHeavyTraffic": {
+        "min": 12,
+        "unit": "Ha",
+        "grade": "guidance",
+        "source": "Natural Stone Institute (2022) Dimension Stone Design Manual, chapter 12 'Travertine' (Specification, Product Description, Technical Data), pp. 12-1 to 12-14, https://transparencycatalog.com/assets/uploads/greener-images/12-TRAVERTINE-2022.pdf, Technical Data 4.2",
+        "conditions": "commercial floors, stair treads and platforms under heavy foot traffic"
+      },
+      "largestDifferenceInOneFloor": {
+        "max": 5,
+        "unit": "Ha",
+        "grade": "guidance",
+        "source": "Natural Stone Institute (2022) Dimension Stone Design Manual, chapter 12 'Travertine' (Specification, Product Description, Technical Data), pp. 12-1 to 12-14, https://transparencycatalog.com/assets/uploads/greener-images/12-TRAVERTINE-2022.pdf, Technical Data 4.2",
+        "conditions": "stones laid in one floor; beyond it the floor will not wear evenly"
+      }
+    },
+    "voidsOpen": {
+      "text": "In cross-cut (fleuri) travertine, thin-walled cavities at or near the face may break open under heavy foot traffic after installation; filling them is accepted practice.",
+      "grade": "guidance",
+      "source": "Natural Stone Institute (2022) Dimension Stone Design Manual, chapter 12 'Travertine' (Specification, Product Description, Technical Data), pp. 12-1 to 12-14, https://transparencycatalog.com/assets/uploads/greener-images/12-TRAVERTINE-2022.pdf, Product Description 10.1.2"
+    }
+  },
+  "drivers": [
+    {
+      "driver": "traffic",
+      "owner": "Site (per-stage plan-field texture: traffic density)",
+      "meaning": "footfalls per square metre over the piece's life",
+      "source": "MuseeVision/Docs/Architecture.md, Matter (per stage, plan-field textures: traffic density)",
+      "grade": "design"
+    },
+    {
+      "driver": "walkable",
+      "owner": "Form (piece table: walkable)",
+      "meaning": "which faces are walked on",
+      "source": "MuseeVision/Docs/Architecture.md, Matter (piece table: walkable)",
+      "grade": "design"
+    },
+    {
+      "driver": "arrisProximity",
+      "owner": "Form (vertex colour: arris proximity)",
+      "meaning": "nearness to an edge, where treads and sills round first",
+      "source": "MuseeVision/Docs/Architecture.md, Matter (vertex colour: arris proximity)",
+      "grade": "design"
+    },
+    {
+      "driver": "age",
+      "owner": "Matter (piece table: age)",
+      "meaning": "years the piece has been in service",
+      "source": "MuseeVision/Docs/Architecture.md, Matter (piece table: age)",
+      "grade": "design"
+    }
+  ],
+  "bySubstance": {
+    "travertine": {
+      "abrasionGroove": {
+        "value": 21.3,
+        "unit": "mm",
+        "grade": "manufacturer",
+        "source": "Alberti e Alberti (Tivoli), 'Travertino Romano Classico', technical properties to UNI EN test standards, product page read 2026-09-26, https://marmialberti.it/en/travertino-romano-classico/",
+        "conditions": "wide-wheel abrasion, Annex C of UNI EN 1341; a longer groove is a softer stone"
+      },
+      "abrasionHardnessRange": {
+        "min": 7,
+        "max": 25,
+        "unit": "Ha",
+        "grade": "guidance",
+        "source": "Natural Stone Institute (2022) Dimension Stone Design Manual, chapter 12 'Travertine' (Specification, Product Description, Technical Data), pp. 12-1 to 12-14, https://transparencycatalog.com/assets/uploads/greener-images/12-TRAVERTINE-2022.pdf, Technical Data 1.6",
+        "conditions": "ASTM C241, travertine generally"
+      }
+    },
+    "cream-marble": {
+      "abrasionGroove": {
+        "value": 19.5,
+        "unit": "mm",
+        "grade": "manufacturer",
+        "source": "Levantina, 'Crema Marfil Coto: ficha tecnica / technical file' (UNE-EN and ASTM test results), pp. 1-4, https://www.levantina.com/files/3351814979b33856c831796bdbd7340f/10004220/1/cremamarfil-2.pdf",
+        "conditions": "UNE-EN 14157"
+      }
+    }
+  },
+  "photograph": [
+    "The polish goes first: dull lanes along the walking lines and a dull fan at each doorway, with the gloss surviving beside walls and in corners.",
+    "Treads and sills round at their arrises and dish in the middle, where feet land most.",
+    "In cross-cut travertine, voids open through the face along the busiest routes and are later filled."
+  ],
+  "evidence": [],
+  "evidenceSearch": {
+    "searched": [
+      "the sets listed in Substances/travertine.json and Substances/cream-marble.json, evidenceSearch"
+    ],
+    "found": "No photograph on this PC shows real worn, soiled or weathered travertine or cream marble.",
+    "tier": "A tier (c) set of museum photographs at known exposure (worn thresholds, soiled open pores, weathered exterior travertine) would close the gap."
+  },
+  "unverified": [
+    {
+      "field": "terms.wearCoefficient",
+      "value": null,
+      "unit": "1",
+      "reason": "No measured Archard wear coefficient for grit under shoes on travertine or Crema Marfil was found."
+    },
+    {
+      "field": "terms.depthPerFootfall",
+      "value": null,
+      "unit": "um",
+      "reason": "No measured wear depth per footfall (or per million footfalls) on a travertine or marble floor or threshold was read at its source."
+    },
+    {
+      "field": "terms.glossPerFootfall",
+      "value": null,
+      "unit": "GU",
+      "reason": "No measured loss of gloss of a polished calcite floor against traffic was read."
+    }
+  ],
+  "sources": [
+    "Anthony J.W., Bideaux R.A., Bladh K.W., Nichols M.C. (eds.) Handbook of Mineralogy, Mineralogical Society of America, 'Quartz' (Mineral Data Publishing, version 1.2, 2001), http://www.handbookofmineralogy.org/pdfs/quartz.pdf",
+    "Anthony J.W., Bideaux R.A., Bladh K.W., Nichols M.C. (eds.) Handbook of Mineralogy, Mineralogical Society of America, 'Calcite' (Mineral Data Publishing, version 1, 2001-2005), http://www.handbookofmineralogy.org/pdfs/calcite.pdf",
+    "Archard J.F. (1953) 'Contact and rubbing of flat surfaces', Journal of Applied Physics 24:981-988, https://doi.org/10.1063/1.1721448",
+    "Yavuz H., Ozkahraman T., Demirdag S. (2011) 'Polishing experiments on surface quality of building stone tiles', Construction and Building Materials 25:1707-1711, abstract as indexed (full text not read), https://doi.org/10.1016/j.conbuildmat.2010.10.016",
+    "McDonell J.A., Kyle R.C. (Minnesota Mining and Manufacturing Co.) (1994) US Patent 5,282,900 'Nonwoven surface treating articles, system including same, and method of treating calcium carbonate-containing surfaces with said system', https://patents.google.com/patent/US5282900A/en",
+    "Alberti e Alberti (Tivoli), 'Travertino Romano Classico', technical properties to UNI EN test standards, product page read 2026-09-26, https://marmialberti.it/en/travertino-romano-classico/",
+    "Levantina, 'Crema Marfil Coto: ficha tecnica / technical file' (UNE-EN and ASTM test results), pp. 1-4, https://www.levantina.com/files/3351814979b33856c831796bdbd7340f/10004220/1/cremamarfil-2.pdf",
+    "Natural Stone Institute (2022) Dimension Stone Design Manual, chapter 12 'Travertine' (Specification, Product Description, Technical Data), pp. 12-1 to 12-14, https://transparencycatalog.com/assets/uploads/greener-images/12-TRAVERTINE-2022.pdf"
+  ]
+}

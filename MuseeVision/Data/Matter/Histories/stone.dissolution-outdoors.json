@@ -1,0 +1,216 @@
+{
+  "schema": "musee.matter.history/1",
+  "key": "stone.dissolution-outdoors",
+  "name": "Dissolved by rain",
+  "family": "stone",
+  "appliesTo": {
+    "families": [
+      "stone"
+    ],
+    "substances": [
+      "travertine",
+      "cream-marble"
+    ],
+    "workings": []
+  },
+  "describes": "Stone out in the weather: rain dissolves its calcite, the finest grains first, so the face roughens and loses its polish, and veins, bands and voids come up in faint relief; salts and de-icers open the pores.",
+  "surfaceLawTerms": [
+    "chemistry",
+    "wetness",
+    "age"
+  ],
+  "terms": {
+    "cleanRain": {
+      "karstRecession": {
+        "value": 18.8,
+        "unit": "um/m",
+        "grade": "secondary",
+        "source": "Lipfert F.W. (1989) 'Atmospheric damage to calcareous stones: comparison and reconciliation of recent experimental findings', Atmospheric Environment 23:415-429; the constant and its meaning as restated in Coletti et al. (2023) HYPERION D4.5 section 1.1, https://doi.org/10.5281/zenodo.7620509",
+        "conditions": "surface recession per metre of rain, from the solubility of calcite in rain in equilibrium with 330 ppm CO2 (the karst effect)"
+      },
+      "lipfertFunction": {
+        "text": "Lipfert's function adds acid rain and the dry deposition of SO2 and HNO3 to the clean-rain term: yearly recession L (um/year) from the precipitation rate R (m/year), the hydrogen-ion concentration [H+] (umol/L, from the annual pH of rain, with a constant 0.016 valid for rain pH 3 to 5) and the deposition velocities of SO2 and HNO3 (cm/s).",
+        "grade": "secondary",
+        "source": "Castillo-Miranda J.O. et al. (2017) 'Mapping recession risk for cultural heritage stone in Mexico City due to dry and wet deposition of urban air pollutants', Atmosfera 30(3):189-207, https://www.scielo.org.mx/scielo.php?script=sci_arttext&pid=S0187-62362017000300189"
+      },
+      "exampleRecession": {
+        "min": 13,
+        "max": 16,
+        "unit": "um/year",
+        "grade": "secondary",
+        "source": "Castillo-Miranda J.O. et al. (2017) 'Mapping recession risk for cultural heritage stone in Mexico City due to dry and wet deposition of urban air pollutants', Atmosfera 30(3):189-207, https://www.scielo.org.mx/scielo.php?script=sci_arttext&pid=S0187-62362017000300189",
+        "conditions": "Lipfert recession computed for carbonate-stone monuments in Mexico City, 2007 data"
+      }
+    },
+    "accelerated": {
+      "rainEquivalence": {
+        "text": "240 wetting cycles in the chamber correspond to about 1 m of natural rain, judged against Delalieux's function for Carrara marble.",
+        "grade": "measured",
+        "source": "Coletti C., Germinario L., Mazzoli C. (2023) 'D4.5 Material specific dose-response functions and validation required in the CH vulnerability assessment', HYPERION project, EU H2020 grant 821054, Zenodo, https://doi.org/10.5281/zenodo.7620509, section 2.2.1"
+      },
+      "carraraRecession": {
+        "min": 11.1,
+        "max": 17.4,
+        "unit": "um",
+        "grade": "measured",
+        "source": "Coletti C., Germinario L., Mazzoli C. (2023) 'D4.5 Material specific dose-response functions and validation required in the CH vulnerability assessment', HYPERION project, EU H2020 grant 821054, Zenodo, https://doi.org/10.5281/zenodo.7620509, section 2.2.1 and Table 6",
+        "conditions": "Carrara marble after 240 cycles, by weight loss: 11.1 um in Bologna rain water (pH 7), 17.4 um in Stresa rain water (pH 6)"
+      }
+    },
+    "grainSize": {
+      "rule": {
+        "text": "Recession is set by grain size: coarse sparry calcite recedes on average about half as fast as fine micrite, with bioclasts in between; stones with clay minerals recede fastest; no evident correlation with porosity was found.",
+        "grade": "measured",
+        "source": "Coletti C., Germinario L., Mazzoli C. (2023) 'D4.5 Material specific dose-response functions and validation required in the CH vulnerability assessment', HYPERION project, EU H2020 grant 821054, Zenodo, https://doi.org/10.5281/zenodo.7620509, section 2.2.1 and Table 8"
+      },
+      "sparOverMicrite": {
+        "value": 0.5,
+        "unit": "1",
+        "grade": "measured",
+        "source": "Coletti C., Germinario L., Mazzoli C. (2023) 'D4.5 Material specific dose-response functions and validation required in the CH vulnerability assessment', HYPERION project, EU H2020 grant 821054, Zenodo, https://doi.org/10.5281/zenodo.7620509, section 2.2.1",
+        "conditions": "recession of coarse sparry calcite over that of fine-grained micrite, on average"
+      }
+    },
+    "polishLost": {
+      "text": "Outdoors a polish does not last: dissolution takes the finest grains first, so the face roughens at the grain scale and its gloss falls with its roughness.",
+      "grade": "derived",
+      "source": "Coletti C., Germinario L., Mazzoli C. (2023) 'D4.5 Material specific dose-response functions and validation required in the CH vulnerability assessment', HYPERION project, EU H2020 grant 821054, Zenodo, https://doi.org/10.5281/zenodo.7620509 ; Yavuz H., Ozkahraman T., Demirdag S. (2011) 'Polishing experiments on surface quality of building stone tiles', Construction and Building Materials 25:1707-1711, abstract as indexed (full text not read), https://doi.org/10.1016/j.conbuildmat.2010.10.016",
+      "derivation": "the grain-size rule above combined with gloss against roughness (Workings/honed.json, surface.glossWithGrit)"
+    },
+    "salts": {
+      "deIcers": {
+        "text": "Exterior travertine paving is not recommended where de-icing chemicals are used: they damage most travertine.",
+        "grade": "guidance",
+        "source": "Natural Stone Institute (2022) Dimension Stone Design Manual, chapter 12 'Travertine' (Specification, Product Description, Technical Data), pp. 12-1 to 12-14, https://transparencycatalog.com/assets/uploads/greener-images/12-TRAVERTINE-2022.pdf, Technical Data 5.2"
+      },
+      "saltSprayPorosity": {
+        "min": 8.16,
+        "max": 10.65,
+        "unit": "%",
+        "grade": "measured",
+        "source": "Urosevic M., Sebastian-Pardo E., Cardell C. (2010) 'Rough and polished travertine building stone decay evaluated by a marine aerosol ageing test', Construction and Building Materials 24:1438-1448 (Olivillo travertine, Alhama de Almeria, Spain, sawn vein-cut), https://doi.org/10.1016/j.conbuildmat.2010.01.011, Table 3",
+        "conditions": "open porosity of rough travertine before and after a sea-salt spray ageing test; resin-filled and polished: 7.26 to 8.34 %"
+      }
+    }
+  },
+  "drivers": [
+    {
+      "driver": "rainHistory",
+      "owner": "Time (MPC_Moment: rain history)",
+      "meaning": "rain over the piece's life",
+      "source": "MuseeVision/Docs/Architecture.md, Matter (the live terms: MPC_Moment rain and snow history)",
+      "grade": "design"
+    },
+    {
+      "driver": "skyExposure",
+      "owner": "Form (piece table: sky exposure)",
+      "meaning": "the share of sky a face sees; a sheltered face takes little rain",
+      "source": "MuseeVision/Docs/Architecture.md, Matter (piece table: sky exposure)",
+      "grade": "design"
+    },
+    {
+      "driver": "wash",
+      "owner": "Form (vertex colour: wash exposure)",
+      "meaning": "where run-off gathers and where it cannot reach",
+      "source": "MuseeVision/Docs/Architecture.md, Matter (vertex colour: wash exposure)",
+      "grade": "design"
+    },
+    {
+      "driver": "rainAcidity",
+      "owner": "none declared (no slot)",
+      "meaning": "the annual pH of rain at the observer ([H+])",
+      "source": "Time's weather service in MuseeVision/Docs/Architecture.md does not carry rain acidity: a gap for the Register",
+      "grade": "design"
+    },
+    {
+      "driver": "age",
+      "owner": "Matter (piece table: age)",
+      "meaning": "years of exposure",
+      "source": "MuseeVision/Docs/Architecture.md, Matter (piece table: age)",
+      "grade": "design"
+    }
+  ],
+  "bySubstance": {
+    "travertine": {
+      "layers": {
+        "text": "Travertine is layered in coarse sparry and fine micritic calcite.",
+        "grade": "measured",
+        "source": "Urosevic M., Sebastian-Pardo E., Cardell C. (2010) 'Rough and polished travertine building stone decay evaluated by a marine aerosol ageing test', Construction and Building Materials 24:1438-1448 (Olivillo travertine, Alhama de Almeria, Spain, sawn vein-cut), https://doi.org/10.1016/j.conbuildmat.2010.01.011, section 3.2.3"
+      }
+    },
+    "cream-marble": {
+      "veins": {
+        "text": "Crema Marfil's veins are coarse calcite, and its dark stylolites are lined with iron oxides and clay minerals.",
+        "grade": "measured",
+        "source": "Lopez-Buendia A.M., Guillem C., Cuevas J.M., Mateos F., Montoto M. (2013) 'Natural stone reinforcement of discontinuities with resin for industrial processing', Engineering Geology 166:39-51, abstract, https://doi.org/10.1016/j.enggeo.2013.09.004"
+      },
+      "botticinoDolomite": {
+        "max": 3,
+        "unit": "um",
+        "grade": "measured",
+        "source": "Coletti C., Germinario L., Mazzoli C. (2023) 'D4.5 Material specific dose-response functions and validation required in the CH vulnerability assessment', HYPERION project, EU H2020 grant 821054, Zenodo, https://doi.org/10.5281/zenodo.7620509, section 2.2.1",
+        "conditions": "for comparison, Botticino: dolomite crystals after 240 cycles in Stresa water stood proud of micrite that receded about 33 um (fine) and 29 um (coarse)"
+      },
+      "botticinoRelativeRecession": {
+        "value": 0.95,
+        "unit": "1",
+        "grade": "measured",
+        "source": "Coletti C., Germinario L., Mazzoli C. (2023) 'D4.5 Material specific dose-response functions and validation required in the CH vulnerability assessment', HYPERION project, EU H2020 grant 821054, Zenodo, https://doi.org/10.5281/zenodo.7620509, section 2.2.2",
+        "conditions": "Botticino's recession relative to Carrara marble in the same ageing"
+      }
+    }
+  },
+  "photograph": [
+    "A polished face out in the rain turns matt and paler, the reverse of the darkening that polishing brought; a honed face turns granular.",
+    "In cream marble, white calcite veins stand slightly proud and clay-lined stylolites sink: the crackle becomes a faint relief (inferred from the grain-size rule).",
+    "In travertine, fine micritic layers recede faster than sparry ones, so the bands show as fine ridges and voids open wider at the face (inferred from the grain-size rule).",
+    "Faces sheltered from the rain are not washed and keep their deposits."
+  ],
+  "evidence": [],
+  "evidenceSearch": {
+    "searched": [
+      "the sets listed in Substances/travertine.json and Substances/cream-marble.json, evidenceSearch"
+    ],
+    "found": "No photograph on this PC shows real worn, soiled or weathered travertine or cream marble.",
+    "tier": "A tier (c) set of museum photographs at known exposure (worn thresholds, soiled open pores, weathered exterior travertine) would close the gap."
+  },
+  "unverified": [
+    {
+      "field": "terms.cleanRain.lipfertDryDepositionCoefficient",
+      "value": 0.18,
+      "unit": "1",
+      "reason": "The form usually reproduced is L = 18.8 R + 0.016 [H+] R + 0.18 (VdS [SO2] + VdN [HNO3]); the 18.8 and 0.016 constants and the variables were read (HYPERION D4.5; Castillo-Miranda et al. 2017), but the 0.18 coefficient and the exact placement of R were not read at a source."
+    },
+    {
+      "field": "terms.icpMaterialsLimestone",
+      "value": null,
+      "unit": "um",
+      "reason": "The UN/ECE ICP Materials multi-pollutant function for limestone (Kucera et al. 2007, Water Air Soil Pollution: Focus 7:249-258), reproduced in search summaries as R = 3.1 + t (0.85 + 0.0059 [SO2] Rh60 + 0.054 Rain [H+] + 0.078 [HNO3] Rh60 + 0.0258 PM10), was not read at the source; the published equation images could not be read."
+    },
+    {
+      "field": "terms.travertineRecession",
+      "value": null,
+      "unit": "um/year",
+      "reason": "No measured recession rate of Tivoli travertine outdoors was found."
+    },
+    {
+      "field": "terms.blackCrusts",
+      "text": "Gypsum black crusts form on rain-sheltered carbonate stone in polluted air.",
+      "reason": "Widely described, but no source for it was read in this research."
+    },
+    {
+      "field": "drivers.rainAcidity",
+      "text": "The annual pH of rain has no owner and no slot.",
+      "reason": "Time's weather service, as the architecture describes it, does not carry rain acidity: a gap for the Register."
+    }
+  ],
+  "sources": [
+    "Lipfert F.W. (1989) 'Atmospheric damage to calcareous stones: comparison and reconciliation of recent experimental findings', Atmospheric Environment 23:415-429; the constant and its meaning as restated in Coletti et al. (2023) HYPERION D4.5 section 1.1, https://doi.org/10.5281/zenodo.7620509",
+    "Castillo-Miranda J.O. et al. (2017) 'Mapping recession risk for cultural heritage stone in Mexico City due to dry and wet deposition of urban air pollutants', Atmosfera 30(3):189-207, https://www.scielo.org.mx/scielo.php?script=sci_arttext&pid=S0187-62362017000300189",
+    "Coletti C., Germinario L., Mazzoli C. (2023) 'D4.5 Material specific dose-response functions and validation required in the CH vulnerability assessment', HYPERION project, EU H2020 grant 821054, Zenodo, https://doi.org/10.5281/zenodo.7620509",
+    "Yavuz H., Ozkahraman T., Demirdag S. (2011) 'Polishing experiments on surface quality of building stone tiles', Construction and Building Materials 25:1707-1711, abstract as indexed (full text not read), https://doi.org/10.1016/j.conbuildmat.2010.10.016",
+    "Lopez-Buendia A.M., Guillem C., Cuevas J.M., Mateos F., Montoto M. (2013) 'Natural stone reinforcement of discontinuities with resin for industrial processing', Engineering Geology 166:39-51, abstract, https://doi.org/10.1016/j.enggeo.2013.09.004",
+    "Urosevic M., Sebastian-Pardo E., Cardell C. (2010) 'Rough and polished travertine building stone decay evaluated by a marine aerosol ageing test', Construction and Building Materials 24:1438-1448 (Olivillo travertine, Alhama de Almeria, Spain, sawn vein-cut), https://doi.org/10.1016/j.conbuildmat.2010.01.011",
+    "Natural Stone Institute (2022) Dimension Stone Design Manual, chapter 12 'Travertine' (Specification, Product Description, Technical Data), pp. 12-1 to 12-14, https://transparencycatalog.com/assets/uploads/greener-images/12-TRAVERTINE-2022.pdf"
+  ]
+}

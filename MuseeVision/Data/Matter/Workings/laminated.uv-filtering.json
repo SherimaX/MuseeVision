@@ -1,0 +1,226 @@
+{
+  "schema": "musee.matter.working/1",
+  "key": "laminated.uv-filtering",
+  "name": "Laminated with UV-filtering PVB",
+  "appliesTo": {
+    "families": [
+      "glass"
+    ],
+    "substances": [
+      "low-iron-glass"
+    ]
+  },
+  "over": [
+    "annealed",
+    "heat-strengthened",
+    "toughened"
+  ],
+  "process": "As 'laminated', with a PVB that carries more UV absorber, so the laminate passes almost nothing below 400 nm, the conventional boundary of light. This is how the daylit galleries meet their UV limit without blinds: the glazing itself is the filter (D-014).",
+  "interlayer": {
+    "material": "Plasticised polyvinyl butyral (PVB)",
+    "density": {
+      "value": 1070,
+      "unit": "kg/m3",
+      "grade": "manufacturer",
+      "source": "Eastman, 'Product technical data: Saflex UV polyvinyl butyral interlayer (RB4U)', Applications Technical Documentation 031720 (UV screening 99 % up to 400 nm; optical and solar data for 3 mm clear / 0.76 mm / 3 mm clear), https://saflex-vanceva.eastman.com/content/dam/saflex/pdf-documents/arch/saflex-uv/Product%20Technical%20Sheet%20-%20Saflex%20UV.pdf",
+      "conditions": "specific gravity 1.07 at 23 degC"
+    },
+    "glassTransition": {
+      "value": 25,
+      "unit": "degC",
+      "grade": "manufacturer",
+      "source": "Eastman, 'Product technical data: Saflex UV polyvinyl butyral interlayer (RB4U)', Applications Technical Documentation 031720 (UV screening 99 % up to 400 nm; optical and solar data for 3 mm clear / 0.76 mm / 3 mm clear), https://saflex-vanceva.eastman.com/content/dam/saflex/pdf-documents/arch/saflex-uv/Product%20Technical%20Sheet%20-%20Saflex%20UV.pdf",
+      "conditions": "1 Hz, heating 3 degC/min, +/- 1"
+    },
+    "specificHeat": {
+      "value": 1980,
+      "unit": "J/(kg*K)",
+      "grade": "manufacturer",
+      "source": "Eastman, 'Product technical data: Saflex UV polyvinyl butyral interlayer (RB4U)', Applications Technical Documentation 031720 (UV screening 99 % up to 400 nm; optical and solar data for 3 mm clear / 0.76 mm / 3 mm clear), https://saflex-vanceva.eastman.com/content/dam/saflex/pdf-documents/arch/saflex-uv/Product%20Technical%20Sheet%20-%20Saflex%20UV.pdf",
+      "conditions": "at 50 degC"
+    },
+    "thermalConductivity": {
+      "value": 0.2,
+      "unit": "W/(m*K)",
+      "grade": "manufacturer",
+      "source": "Eastman, 'Product technical data: Saflex UV polyvinyl butyral interlayer (RB4U)', Applications Technical Documentation 031720 (UV screening 99 % up to 400 nm; optical and solar data for 3 mm clear / 0.76 mm / 3 mm clear), https://saflex-vanceva.eastman.com/content/dam/saflex/pdf-documents/arch/saflex-uv/Product%20Technical%20Sheet%20-%20Saflex%20UV.pdf",
+      "conditions": "at 65 degC"
+    },
+    "thermalExpansion": {
+      "value": 0.000155,
+      "unit": "1/K",
+      "grade": "manufacturer",
+      "source": "Eastman, 'Product technical data: Saflex UV polyvinyl butyral interlayer (RB4U)', Applications Technical Documentation 031720 (UV screening 99 % up to 400 nm; optical and solar data for 3 mm clear / 0.76 mm / 3 mm clear), https://saflex-vanceva.eastman.com/content/dam/saflex/pdf-documents/arch/saflex-uv/Product%20Technical%20Sheet%20-%20Saflex%20UV.pdf",
+      "conditions": "30-100 degC"
+    },
+    "emissivity": {
+      "value": 0.94,
+      "unit": "1",
+      "grade": "manufacturer",
+      "source": "Eastman, 'Product technical data: Saflex UV polyvinyl butyral interlayer (RB4U)', Applications Technical Documentation 031720 (UV screening 99 % up to 400 nm; optical and solar data for 3 mm clear / 0.76 mm / 3 mm clear), https://saflex-vanceva.eastman.com/content/dam/saflex/pdf-documents/arch/saflex-uv/Product%20Technical%20Sheet%20-%20Saflex%20UV.pdf",
+      "conditions": "19.5 degC"
+    },
+    "rollWidthMax": {
+      "value": 3220,
+      "unit": "mm",
+      "grade": "manufacturer",
+      "source": "Eastman, 'Saflex Clear PVB interlayer' product bulletin AI-ARCH-4321 2/18 (2018), https://saflex-vanceva.eastman.com/content/dam/saflex/product-pages/saflex-clear/ai-arch-4321_saflex_clear_product_bulletin.pdf",
+      "note": "322 cm, the widest interlayer roll, which bounds a laminate's width"
+    },
+    "product": "Saflex UV (RB4U), 0.76 mm; Trosifol Extra Protect (blocking from 400 nm) is the like product tested by Mueller et al.",
+    "thicknesses": {
+      "unit": "mm",
+      "values": [
+        0.76
+      ],
+      "grade": "manufacturer",
+      "source": "Eastman, 'Product technical data: Saflex UV polyvinyl butyral interlayer (RB4U)', Applications Technical Documentation 031720 (UV screening 99 % up to 400 nm; optical and solar data for 3 mm clear / 0.76 mm / 3 mm clear), https://saflex-vanceva.eastman.com/content/dam/saflex/pdf-documents/arch/saflex-uv/Product%20Technical%20Sheet%20-%20Saflex%20UV.pdf"
+    },
+    "refractiveIndex": {
+      "value": 1.478,
+      "unit": "1",
+      "grade": "manufacturer",
+      "source": "Eastman, 'Product technical data: Saflex UV polyvinyl butyral interlayer (RB4U)', Applications Technical Documentation 031720 (UV screening 99 % up to 400 nm; optical and solar data for 3 mm clear / 0.76 mm / 3 mm clear), https://saflex-vanceva.eastman.com/content/dam/saflex/pdf-documents/arch/saflex-uv/Product%20Technical%20Sheet%20-%20Saflex%20UV.pdf",
+      "conditions": "ASTM D542, 23 degC"
+    },
+    "haze": {
+      "unit": "1",
+      "max": 0.01,
+      "grade": "manufacturer",
+      "source": "Eastman, 'Product technical data: Saflex UV polyvinyl butyral interlayer (RB4U)', Applications Technical Documentation 031720 (UV screening 99 % up to 400 nm; optical and solar data for 3 mm clear / 0.76 mm / 3 mm clear), https://saflex-vanceva.eastman.com/content/dam/saflex/pdf-documents/arch/saflex-uv/Product%20Technical%20Sheet%20-%20Saflex%20UV.pdf",
+      "conditions": "0.76 mm between 3 mm clear glass, ASTM D1003"
+    },
+    "yellownessIndex": {
+      "unit": "1",
+      "max": 1,
+      "grade": "manufacturer",
+      "source": "Eastman, 'Product technical data: Saflex UV polyvinyl butyral interlayer (RB4U)', Applications Technical Documentation 031720 (UV screening 99 % up to 400 nm; optical and solar data for 3 mm clear / 0.76 mm / 3 mm clear), https://saflex-vanceva.eastman.com/content/dam/saflex/pdf-documents/arch/saflex-uv/Product%20Technical%20Sheet%20-%20Saflex%20UV.pdf",
+      "conditions": "ASTM E313, laminate"
+    },
+    "uvScreening": {
+      "unit": "1",
+      "min": 0.99,
+      "grade": "manufacturer",
+      "source": "Eastman, 'Product technical data: Saflex UV polyvinyl butyral interlayer (RB4U)', Applications Technical Documentation 031720 (UV screening 99 % up to 400 nm; optical and solar data for 3 mm clear / 0.76 mm / 3 mm clear), https://saflex-vanceva.eastman.com/content/dam/saflex/pdf-documents/arch/saflex-uv/Product%20Technical%20Sheet%20-%20Saflex%20UV.pdf ; Eastman, 'Saflex UV' performance page (conventional Saflex: 99 % UV screening to 380 nm; Saflex UV: 99 % up to 400 nm, ISO 13837 method A; for museums, archives, galleries), https://saflex-vanceva.eastman.com/en/architectural/interlayer-performance/uv",
+      "conditions": "up to 400 nm, ISO 13837 method A"
+    },
+    "uvCutOff": {
+      "value": 400,
+      "unit": "nm",
+      "grade": "manufacturer",
+      "source": "Eastman, 'Saflex UV' performance page (conventional Saflex: 99 % UV screening to 380 nm; Saflex UV: 99 % up to 400 nm, ISO 13837 method A; for museums, archives, galleries), https://saflex-vanceva.eastman.com/en/architectural/interlayer-performance/uv ; M. Mueller, S. Reich, C. Pfuetze, I. Stelzer, 'Investigation of color protection of laminated glass by UV-blocking interlayers for conservation application', Glass Structures & Engineering (2024), doi:10.1007/s40940-023-00246-9; summary at https://www.glassonweb.com/article/investigation-color-protection-laminated-glass-uv-blocking-interlayers-conservation",
+      "note": "standard PVB blocks from 360-380 nm; UV-blocking interlayers from 400 nm"
+    }
+  },
+  "laminate": {
+    "conditions": "3 mm clear / 0.76 mm / 3 mm clear, LBNL WINDOW 7.0",
+    "visibleTransmittance": {
+      "value": 0.88,
+      "unit": "1",
+      "grade": "manufacturer",
+      "source": "Eastman, 'Product technical data: Saflex UV polyvinyl butyral interlayer (RB4U)', Applications Technical Documentation 031720 (UV screening 99 % up to 400 nm; optical and solar data for 3 mm clear / 0.76 mm / 3 mm clear), https://saflex-vanceva.eastman.com/content/dam/saflex/pdf-documents/arch/saflex-uv/Product%20Technical%20Sheet%20-%20Saflex%20UV.pdf"
+    },
+    "visibleReflectance": {
+      "value": 0.07,
+      "unit": "1",
+      "grade": "manufacturer",
+      "source": "Eastman, 'Product technical data: Saflex UV polyvinyl butyral interlayer (RB4U)', Applications Technical Documentation 031720 (UV screening 99 % up to 400 nm; optical and solar data for 3 mm clear / 0.76 mm / 3 mm clear), https://saflex-vanceva.eastman.com/content/dam/saflex/pdf-documents/arch/saflex-uv/Product%20Technical%20Sheet%20-%20Saflex%20UV.pdf"
+    },
+    "solarTransmittance": {
+      "value": 0.72,
+      "unit": "1",
+      "grade": "manufacturer",
+      "source": "Eastman, 'Product technical data: Saflex UV polyvinyl butyral interlayer (RB4U)', Applications Technical Documentation 031720 (UV screening 99 % up to 400 nm; optical and solar data for 3 mm clear / 0.76 mm / 3 mm clear), https://saflex-vanceva.eastman.com/content/dam/saflex/pdf-documents/arch/saflex-uv/Product%20Technical%20Sheet%20-%20Saflex%20UV.pdf"
+    },
+    "damageWeightedTransmittanceKrochmann": {
+      "value": 0.21,
+      "unit": "1",
+      "grade": "manufacturer",
+      "source": "Eastman, 'Product technical data: Saflex UV polyvinyl butyral interlayer (RB4U)', Applications Technical Documentation 031720 (UV screening 99 % up to 400 nm; optical and solar data for 3 mm clear / 0.76 mm / 3 mm clear), https://saflex-vanceva.eastman.com/content/dam/saflex/pdf-documents/arch/saflex-uv/Product%20Technical%20Sheet%20-%20Saflex%20UV.pdf",
+      "conditions": "Tdw-K, 300-500 nm"
+    },
+    "damageWeightedTransmittanceIso": {
+      "value": 0.53,
+      "unit": "1",
+      "grade": "manufacturer",
+      "source": "Eastman, 'Product technical data: Saflex UV polyvinyl butyral interlayer (RB4U)', Applications Technical Documentation 031720 (UV screening 99 % up to 400 nm; optical and solar data for 3 mm clear / 0.76 mm / 3 mm clear), https://saflex-vanceva.eastman.com/content/dam/saflex/pdf-documents/arch/saflex-uv/Product%20Technical%20Sheet%20-%20Saflex%20UV.pdf",
+      "conditions": "Tdw-ISO, 300-600 nm"
+    },
+    "transmittedUv": {
+      "unit": "1",
+      "max": 0.01,
+      "grade": "manufacturer",
+      "source": "Eastman, 'Product technical data: Saflex UV polyvinyl butyral interlayer (RB4U)', Applications Technical Documentation 031720 (UV screening 99 % up to 400 nm; optical and solar data for 3 mm clear / 0.76 mm / 3 mm clear), https://saflex-vanceva.eastman.com/content/dam/saflex/pdf-documents/arch/saflex-uv/Product%20Technical%20Sheet%20-%20Saflex%20UV.pdf",
+      "conditions": "300-400 nm"
+    }
+  },
+  "interfaceReflectance": {
+    "value": 0.0002464,
+    "unit": "1",
+    "grade": "derived",
+    "derivation": "Fresnel ((n1-n2)/(n1+n2))^2 with glass n(550 nm) from Rubin's fit and PVB n = 1.478 (Saflex UV)",
+    "source": "M. Rubin, 'Optical properties of soda lime silica glasses', Solar Energy Materials 12 (1985) 275-288; dispersion fit n = 1.5130 - 0.003169 L^2 + 0.003962 L^-2 (L in um, 0.31-4.6 um) via refractiveindex.info, https://refractiveindex.info/?shelf=glass&book=soda-lime&page=Rubin-lowiron ; Eastman, 'Product technical data: Saflex UV polyvinyl butyral interlayer (RB4U)', Applications Technical Documentation 031720 (UV screening 99 % up to 400 nm; optical and solar data for 3 mm clear / 0.76 mm / 3 mm clear), https://saflex-vanceva.eastman.com/content/dam/saflex/pdf-documents/arch/saflex-uv/Product%20Technical%20Sheet%20-%20Saflex%20UV.pdf"
+  },
+  "conservation": {
+    "uvBoundary": {
+      "value": 400,
+      "unit": "nm",
+      "grade": "guidance",
+      "source": "S. Michalski, 'Agent of Deterioration: Light, Ultraviolet and Infrared', Canadian Conservation Institute, 2018-05-17, https://www.canada.ca/en/conservation-institute/services/agents-deterioration/light.html",
+      "note": "'Convention assigns the boundary between UV and light at 400 nm, but slight perception begins at 380 nm.'"
+    },
+    "uvLimitTraditional": {
+      "value": 75,
+      "unit": "uW/lm",
+      "grade": "guidance",
+      "source": "S. Michalski, 'Agent of Deterioration: Light, Ultraviolet and Infrared', Canadian Conservation Institute, 2018-05-17, https://www.canada.ca/en/conservation-institute/services/agents-deterioration/light.html",
+      "note": "the 1970s limit, the UV of an incandescent lamp"
+    },
+    "uvLimitAchievable": {
+      "unit": "uW/lm",
+      "min": 0,
+      "max": 10,
+      "grade": "guidance",
+      "source": "Conservation Center for Art and Historic Artifacts, 'Light Exposure for Artifacts on Exhibition' ('75 microwatts per lumen ... maximum allowable, but 0-10 microwatts per lumen is easily achievable'), https://ccaha.org/resources/light-exposure-artifacts-exhibition"
+    },
+    "daylightUv": {
+      "unit": "uW/lm",
+      "min": 600,
+      "max": 1000,
+      "grade": "guidance",
+      "source": "S. Michalski, 'Agent of Deterioration: Light, Ultraviolet and Infrared', Canadian Conservation Institute, 2018-05-17, https://www.canada.ca/en/conservation-institute/services/agents-deterioration/light.html"
+    },
+    "daylightThroughWindowGlassUv": {
+      "unit": "uW/lm",
+      "min": 400,
+      "max": 500,
+      "grade": "guidance",
+      "source": "S. Michalski, 'Agent of Deterioration: Light, Ultraviolet and Infrared', Canadian Conservation Institute, 2018-05-17, https://www.canada.ca/en/conservation-institute/services/agents-deterioration/light.html"
+    },
+    "uvBehindLaminateBound": {
+      "max": 11.4,
+      "unit": "uW/lm",
+      "grade": "derived",
+      "derivation": "an upper bound: daylight UV (at most 1000 uW/lm, CCI) times the laminate's transmitted UV (under 0.01 from 300 to 400 nm, Saflex UV) over its visible transmittance (0.88). Art.WithinCare measures the real value with Light's probe.",
+      "source": "S. Michalski, 'Agent of Deterioration: Light, Ultraviolet and Infrared', Canadian Conservation Institute, 2018-05-17, https://www.canada.ca/en/conservation-institute/services/agents-deterioration/light.html ; Eastman, 'Product technical data: Saflex UV polyvinyl butyral interlayer (RB4U)', Applications Technical Documentation 031720 (UV screening 99 % up to 400 nm; optical and solar data for 3 mm clear / 0.76 mm / 3 mm clear), https://saflex-vanceva.eastman.com/content/dam/saflex/pdf-documents/arch/saflex-uv/Product%20Technical%20Sheet%20-%20Saflex%20UV.pdf"
+    },
+    "yellowing": {
+      "text": "Filtration around 380-400 nm causes slight yellowing of the light due to the reduction of violet radiation at the edge of the visible range.",
+      "grade": "guidance",
+      "source": "J. Tetreault, C. Anuzet, 'Ultraviolet Filters', CCI Notes 2/1, Canadian Conservation Institute, 2015, https://www.canada.ca/en/conservation-institute/services/conservation-preservation-publications/canadian-conservation-institute-notes/ultraviolet-filters.html"
+    },
+    "fadingEvidence": {
+      "text": "In 148 days of outdoor exposure over the summer of 2021 (5 May to 6 November) behind laminates of two 4 mm panes, the 400 nm interlayer (Trosifol Extra Protect) measurably delayed the fading of medium-stable samples (Blue Wool 4 to 7, most clearly 5 and 6) compared with the 380 nm standard PVB (Trosifol Ultra Clear); the benefit depends on the colourant and exposure time and was not reduced to one number.",
+      "grade": "measured",
+      "source": "M. Mueller, S. Reich, C. Pfuetze, I. Stelzer, 'Investigation of color protection of laminated glass by UV-blocking interlayers for conservation application', Glass Structures & Engineering (2024), doi:10.1007/s40940-023-00246-9; summary at https://www.glassonweb.com/article/investigation-color-protection-laminated-glass-uv-blocking-interlayers-conservation"
+    },
+    "laminatedGlassScreensUva": {
+      "text": "Clear glass screens nearly all UVB but little UVA; laminated glass with UV-absorbing interlayers screens both.",
+      "grade": "guidance",
+      "source": "National Glass Association, Glass Technical Paper FB34-12 (2023) 'Screening Out Ultraviolet Radiation with Laminated Glass', https://www.glass.org/sites/default/files/2023-04/FB34-12_2023_Screening_Out_Ultraviolet_Radiation_with_Laminated_Glass.pdf"
+    }
+  },
+  "photograph": [
+    "The light behind it is a touch warmer: the violet edge of the spectrum is cut."
+  ]
+}

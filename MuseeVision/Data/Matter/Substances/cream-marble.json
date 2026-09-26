@@ -1,0 +1,815 @@
+{
+  "schema": "musee.matter.substance/1",
+  "key": "cream-marble",
+  "name": "Cream crackle marble (Crema Marfil Coto, Pinoso, Alicante)",
+  "family": "stone",
+  "accentOf": null,
+  "summary": "A cream, compact nummulitic limestone sold as marble, crossed by a network of fine veins and stylolites that reads as a crackle; laid down on the sea floor about 50 million years ago and quarried on Monte El Coto at Pinoso (Alicante, Spain). It is the Rotunda's marble: its walls, its pilasters and the sun clock's drum, honed, and glass-smooth where the future rooms carry it on.",
+  "dossier": "Docs/Matter/cream-marble.md",
+  "aliases": [
+    "Crema Marfil",
+    "Crema Marfil Coto",
+    "Ivory Cream",
+    "Rotunda marble",
+    "cream crackle marble"
+  ],
+  "identity": {
+    "class": {
+      "text": "A nummulitic limestone, petrographically a biosparite(-biomicrite) with veins and stylolites; a commercial marble (it meets the Marble Institute of America's requirements), not a metamorphic one.",
+      "grade": "manufacturer",
+      "source": "Levantina, 'Crema Marfil Coto: ficha tecnica / technical file' (UNE-EN and ASTM test results), pp. 1-4, https://www.levantina.com/files/3351814979b33856c831796bdbd7340f/10004220/1/cremamarfil-2.pdf ; Ordonez S., Garcia del Cura M.A., Fort R., Pina J.A. (1996) 'El Crema Marfil (Pinoso, Alicante) I. Caracteristicas petrofisicas y parametros de durabilidad', Geogaceta 20(3):727-730, abstract, https://dialnet.unirioja.es/servlet/articulo?codigo=7459067"
+    },
+    "designations": [
+      {
+        "system": "trade",
+        "designation": "Crema Marfil Coto",
+        "source": "Levantina, 'Crema Marfil Coto: ficha tecnica / technical file' (UNE-EN and ASTM test results), pp. 1-4, https://www.levantina.com/files/3351814979b33856c831796bdbd7340f/10004220/1/cremamarfil-2.pdf",
+        "grade": "manufacturer"
+      },
+      {
+        "system": "trade",
+        "designation": "Crema Marfil (Coto Pinoso quarries, Pinoso, Alicante)",
+        "source": "Ordonez S., Garcia del Cura M.A., Fort R., Pina J.A. (1996) 'El Crema Marfil (Pinoso, Alicante) I. Caracteristicas petrofisicas y parametros de durabilidad', Geogaceta 20(3):727-730, abstract, https://dialnet.unirioja.es/servlet/articulo?codigo=7459067",
+        "grade": "measured"
+      },
+      {
+        "system": "UNE-EN 12407 (petrographic denomination)",
+        "designation": "biosparite",
+        "source": "Levantina, 'Crema Marfil Coto: ficha tecnica / technical file' (UNE-EN and ASTM test results), pp. 1-4, https://www.levantina.com/files/3351814979b33856c831796bdbd7340f/10004220/1/cremamarfil-2.pdf",
+        "grade": "manufacturer"
+      }
+    ],
+    "identifiedFrom": [
+      {
+        "text": "The design: cream marble with grey crackle veins on the Rotunda's walls and pilasters, drawn by the old build as 'a crackle of fine grey veins round cells 25-40 cm across, a finer set in patches, over a soft cloud'.",
+        "grade": "design",
+        "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/stone_textures.py (frozen reference) ; C:/Users/anan9/Desktop/Projects/Musee Vision/plan/boards/MaterialsStone.png and plan/canvas/MaterialsStone.dc.html (the material language: stone)"
+      },
+      {
+        "text": "The Rotunda rendering shows pale cream ashlar with fine, faint grey veining.",
+        "grade": "design",
+        "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/plan/renderings/05-the-rotunda-v2.png"
+      }
+    ],
+    "chosenBecause": [
+      {
+        "text": "Its veins form a network rather than parallel lines: five families of discontinuity planes cross it (open stylolites, partly open stylolites, stylolites cemented with iron oxides and clay minerals, stylolites cemented with calcite, and calcite veins).",
+        "grade": "measured",
+        "source": "Lopez-Buendia A.M., Guillem C., Cuevas J.M., Mateos F., Montoto M. (2013) 'Natural stone reinforcement of discontinuities with resin for industrial processing', Engineering Geology 166:39-51, abstract, https://doi.org/10.1016/j.enggeo.2013.09.004"
+      },
+      {
+        "text": "It is cream-coloured with 'refined tones and discrete natural veins': a biosparite of foraminifera with irregularly distributed calcite veins.",
+        "grade": "manufacturer",
+        "source": "Levantina, 'Crema Marfil Coto: ficha tecnica / technical file' (UNE-EN and ASTM test results), pp. 1-4, https://www.levantina.com/files/3351814979b33856c831796bdbd7340f/10004220/1/cremamarfil-2.pdf"
+      },
+      {
+        "text": "The one local photograph of a cream compact stone, Poly Haven marble_01 ('smooth, even cream-beige tiles with subtle veining and low sheen'), shows a fine dark vein network on a cream ground (see evidence).",
+        "grade": "manufacturer",
+        "source": "Poly Haven, 'Marble 01' by Rob Tuytel, CC0; metadata: 'smooth, even cream-beige tiles with subtle veining and low sheen', 1.5 m wide, https://polyhaven.com/a/marble_01 and https://api.polyhaven.com/info/marble_01"
+      }
+    ],
+    "alternativesConsidered": [
+      {
+        "designation": "Botticino Classico (Botticino, Rezzato and Mazzano, east of Brescia, Italy)",
+        "reason": "The classical Italian cream 'marble': a compact, partly dolomitised micritic limestone of the Corna Formation (Jurassic), white through ivory with hints of chestnut. Set aside as the crackle because its stylolites are thin, chestnut-coloured and run almost parallel to the bedding, so its veining reads as lines, not as a network.",
+        "source": "Cooperativa Cavatori Botticino, 'The Marble' (description and technical data to UNI EN test standards), read 2026-09-26, https://www.cavatoribotticino.it/en/the-marble/ ; Coletti C., Germinario L., Mazzoli C. (2023) 'D4.5 Material specific dose-response functions and validation required in the CH vulnerability assessment', HYPERION project, EU H2020 grant 821054, Zenodo, https://doi.org/10.5281/zenodo.7620509, Table 1",
+        "grade": "manufacturer",
+        "facts": {
+          "realDensity": {
+            "value": 2710,
+            "unit": "kg/m3",
+            "grade": "manufacturer",
+            "source": "Cooperativa Cavatori Botticino, 'The Marble' (description and technical data to UNI EN test standards), read 2026-09-26, https://www.cavatoribotticino.it/en/the-marble/",
+            "conditions": "UNI EN 1936"
+          },
+          "waterAbsorption": {
+            "value": 0.14,
+            "unit": "%",
+            "grade": "manufacturer",
+            "source": "Cooperativa Cavatori Botticino, 'The Marble' (description and technical data to UNI EN test standards), read 2026-09-26, https://www.cavatoribotticino.it/en/the-marble/",
+            "conditions": "UNI EN 13755"
+          },
+          "compressiveBreakingStress": {
+            "value": 183,
+            "unit": "MPa",
+            "grade": "manufacturer",
+            "source": "Cooperativa Cavatori Botticino, 'The Marble' (description and technical data to UNI EN test standards), read 2026-09-26, https://www.cavatoribotticino.it/en/the-marble/",
+            "conditions": "UNI EN 1926; 164 MPa after freeze-thaw cycles"
+          },
+          "flexuralBreakingStress": {
+            "value": 12.7,
+            "unit": "MPa",
+            "grade": "manufacturer",
+            "source": "Cooperativa Cavatori Botticino, 'The Marble' (description and technical data to UNI EN test standards), read 2026-09-26, https://www.cavatoribotticino.it/en/the-marble/",
+            "conditions": "UNI EN 12372"
+          },
+          "abrasionGroove": {
+            "value": 20.0,
+            "unit": "mm",
+            "grade": "manufacturer",
+            "source": "Cooperativa Cavatori Botticino, 'The Marble' (description and technical data to UNI EN test standards), read 2026-09-26, https://www.cavatoribotticino.it/en/the-marble/",
+            "conditions": "UNI EN 14157"
+          },
+          "calciteShare": {
+            "value": 57,
+            "unit": "%",
+            "grade": "measured",
+            "source": "Coletti C., Germinario L., Mazzoli C. (2023) 'D4.5 Material specific dose-response functions and validation required in the CH vulnerability assessment', HYPERION project, EU H2020 grant 821054, Zenodo, https://doi.org/10.5281/zenodo.7620509, Table 4",
+            "conditions": "X-ray powder diffraction (RIR method): 57 % calcite, 43 % dolomite; the report's text gives 46 % dolomite"
+          }
+        }
+      }
+    ]
+  },
+  "constituents": [
+    {
+      "mineral": "calcite",
+      "formula": "CaCO3",
+      "role": "the stone itself: crusts, cement, grains and veins",
+      "grade": "manufacturer",
+      "source": "Levantina, 'Crema Marfil Coto: ficha tecnica / technical file' (UNE-EN and ASTM test results), pp. 1-4, https://www.levantina.com/files/3351814979b33856c831796bdbd7340f/10004220/1/cremamarfil-2.pdf"
+    },
+    {
+      "mineral": "foraminifera (nummulites)",
+      "formula": "CaCO3",
+      "role": "the grains of the biosparite",
+      "grade": "manufacturer",
+      "source": "Levantina, 'Crema Marfil Coto: ficha tecnica / technical file' (UNE-EN and ASTM test results), pp. 1-4, https://www.levantina.com/files/3351814979b33856c831796bdbd7340f/10004220/1/cremamarfil-2.pdf"
+    },
+    {
+      "mineral": "iron oxides and clay minerals",
+      "formula": null,
+      "role": "the filling of the darker, cemented stylolites",
+      "grade": "measured",
+      "source": "Lopez-Buendia A.M., Guillem C., Cuevas J.M., Mateos F., Montoto M. (2013) 'Natural stone reinforcement of discontinuities with resin for industrial processing', Engineering Geology 166:39-51, abstract, https://doi.org/10.1016/j.enggeo.2013.09.004"
+    }
+  ],
+  "formation": {
+    "how": "Shells of foraminifera (nummulites) and lime mud gathered on the sea floor in the early Eocene and were cemented into a biosparite. The rock was later cut by stylolites, jagged seams lined with iron oxides and clay, and by fractures healed with white calcite; together they make the crackle.",
+    "sources": [
+      "Levantina, 'Crema Marfil Coto: ficha tecnica / technical file' (UNE-EN and ASTM test results), pp. 1-4, https://www.levantina.com/files/3351814979b33856c831796bdbd7340f/10004220/1/cremamarfil-2.pdf",
+      "Lopez-Buendia A.M., Guillem C., Cuevas J.M., Mateos F., Montoto M. (2013) 'Natural stone reinforcement of discontinuities with resin for industrial processing', Engineering Geology 166:39-51, abstract, https://doi.org/10.1016/j.enggeo.2013.09.004"
+    ],
+    "facts": {
+      "age": {
+        "value": 50000000.0,
+        "unit": "year",
+        "grade": "manufacturer",
+        "source": "Levantina, 'Crema Marfil Coto: ficha tecnica / technical file' (UNE-EN and ASTM test results), pp. 1-4, https://www.levantina.com/files/3351814979b33856c831796bdbd7340f/10004220/1/cremamarfil-2.pdf",
+        "conditions": "early (to middle) Eocene",
+        "asReported": "approximately 50 Ma"
+      },
+      "annualExtraction": {
+        "value": 500000,
+        "unit": "m3/year",
+        "grade": "secondary",
+        "source": "Litos Online (trade press), 'The immense world of Crema Marfil', read 2026-09-26, https://litosonline.com/en/article/immense-world-crema-marfil",
+        "note": "'approximately 500.000 cubic metres are annualy extracted'"
+      }
+    },
+    "quarries": {
+      "text": "Extracted mainly on the mountain El Coto at Pinoso (Alicante), from about 20 quarries.",
+      "grade": "secondary",
+      "source": "Litos Online (trade press), 'The immense world of Crema Marfil', read 2026-09-26, https://litosonline.com/en/article/immense-world-crema-marfil"
+    },
+    "varieties": {
+      "text": "The trade grades it by tone (dark or light) and by vein density (free of veins, few veins, many veins), and names varieties with fossil grains, a wavy 'water' figure, pinkish or greenish tones, a 'flower' type with white coin-sized spots, and 'encalizado' with white limestone veins.",
+      "grade": "secondary",
+      "source": "Litos Online (trade press), 'The immense world of Crema Marfil', read 2026-09-26, https://litosonline.com/en/article/immense-world-crema-marfil"
+    }
+  },
+  "physical": {
+    "apparentDensity": {
+      "value": 2690,
+      "unit": "kg/m3",
+      "grade": "manufacturer",
+      "source": "Levantina, 'Crema Marfil Coto: ficha tecnica / technical file' (UNE-EN and ASTM test results), pp. 1-4, https://www.levantina.com/files/3351814979b33856c831796bdbd7340f/10004220/1/cremamarfil-2.pdf",
+      "conditions": "UNE-EN 1936"
+    },
+    "density": {
+      "value": 2680,
+      "unit": "kg/m3",
+      "grade": "manufacturer",
+      "source": "Levantina, 'Crema Marfil Coto: ficha tecnica / technical file' (UNE-EN and ASTM test results), pp. 1-4, https://www.levantina.com/files/3351814979b33856c831796bdbd7340f/10004220/1/cremamarfil-2.pdf",
+      "conditions": "bulk specific gravity, ASTM C97-02"
+    },
+    "densityTrade": {
+      "value": 2680,
+      "unit": "kg/m3",
+      "grade": "secondary",
+      "source": "Litos Online (trade press), 'The immense world of Crema Marfil', read 2026-09-26, https://litosonline.com/en/article/immense-world-crema-marfil",
+      "asReported": "Volume Mass: 2.68 gms/cm3"
+    },
+    "grainDensity": {
+      "value": 2710.2,
+      "unit": "kg/m3",
+      "grade": "measured",
+      "source": "Anthony J.W., Bideaux R.A., Bladh K.W., Nichols M.C. (eds.) Handbook of Mineralogy, Mineralogical Society of America, 'Calcite' (Mineral Data Publishing, version 1, 2001-2005), http://www.handbookofmineralogy.org/pdfs/calcite.pdf",
+      "conditions": "calcite, measured",
+      "asReported": "D(meas.) = 2.7102"
+    },
+    "openPorosity": {
+      "value": 0.5,
+      "unit": "%",
+      "grade": "manufacturer",
+      "source": "Levantina, 'Crema Marfil Coto: ficha tecnica / technical file' (UNE-EN and ASTM test results), pp. 1-4, https://www.levantina.com/files/3351814979b33856c831796bdbd7340f/10004220/1/cremamarfil-2.pdf",
+      "conditions": "UNE-EN 1936"
+    },
+    "waterAbsorption": {
+      "value": 0.2,
+      "unit": "%",
+      "grade": "manufacturer",
+      "source": "Levantina, 'Crema Marfil Coto: ficha tecnica / technical file' (UNE-EN and ASTM test results), pp. 1-4, https://www.levantina.com/files/3351814979b33856c831796bdbd7340f/10004220/1/cremamarfil-2.pdf",
+      "conditions": "at atmospheric pressure, UNE-EN 13755"
+    },
+    "waterAbsorptionAstm": {
+      "value": 0.34,
+      "unit": "%",
+      "grade": "manufacturer",
+      "source": "Levantina, 'Crema Marfil Coto: ficha tecnica / technical file' (UNE-EN and ASTM test results), pp. 1-4, https://www.levantina.com/files/3351814979b33856c831796bdbd7340f/10004220/1/cremamarfil-2.pdf",
+      "conditions": "ASTM C97-02"
+    },
+    "flexuralBreakingStress": {
+      "value": 9.7,
+      "unit": "MPa",
+      "grade": "manufacturer",
+      "source": "Levantina, 'Crema Marfil Coto: ficha tecnica / technical file' (UNE-EN and ASTM test results), pp. 1-4, https://www.levantina.com/files/3351814979b33856c831796bdbd7340f/10004220/1/cremamarfil-2.pdf",
+      "conditions": "under concentrated load, UNE-EN 12372; ASTM C880-06 gives 8.0 MPa and the ASTM C99-87 modulus of rupture 10.8 MPa (dry)"
+    },
+    "compressiveBreakingStress": {
+      "value": 157,
+      "unit": "MPa",
+      "grade": "manufacturer",
+      "source": "Levantina, 'Crema Marfil Coto: ficha tecnica / technical file' (UNE-EN and ASTM test results), pp. 1-4, https://www.levantina.com/files/3351814979b33856c831796bdbd7340f/10004220/1/cremamarfil-2.pdf",
+      "conditions": "ASTM C170-06, dry"
+    },
+    "frostLoss": {
+      "value": 15,
+      "unit": "%",
+      "grade": "manufacturer",
+      "source": "Levantina, 'Crema Marfil Coto: ficha tecnica / technical file' (UNE-EN and ASTM test results), pp. 1-4, https://www.levantina.com/files/3351814979b33856c831796bdbd7340f/10004220/1/cremamarfil-2.pdf",
+      "conditions": "decrease of flexural breaking stress after 56 freeze-thaw cycles, UNE-EN 12371"
+    },
+    "thermalShockLoss": {
+      "value": 11.2,
+      "unit": "%",
+      "grade": "manufacturer",
+      "source": "Levantina, 'Crema Marfil Coto: ficha tecnica / technical file' (UNE-EN and ASTM test results), pp. 1-4, https://www.levantina.com/files/3351814979b33856c831796bdbd7340f/10004220/1/cremamarfil-2.pdf",
+      "conditions": "decrease of flexural breaking stress after thermal-shock ageing, UNE-EN 14066; the dynamic elastic modulus changed by 3.8 % on average"
+    },
+    "abrasionGroove": {
+      "value": 19.5,
+      "unit": "mm",
+      "grade": "manufacturer",
+      "source": "Levantina, 'Crema Marfil Coto: ficha tecnica / technical file' (UNE-EN and ASTM test results), pp. 1-4, https://www.levantina.com/files/3351814979b33856c831796bdbd7340f/10004220/1/cremamarfil-2.pdf",
+      "conditions": "UNE-EN 14157; a longer groove is a softer stone"
+    },
+    "abrasionHardness": {
+      "value": 4.1,
+      "unit": "Ha",
+      "grade": "manufacturer",
+      "source": "Levantina, 'Crema Marfil Coto: ficha tecnica / technical file' (UNE-EN and ASTM test results), pp. 1-4, https://www.levantina.com/files/3351814979b33856c831796bdbd7340f/10004220/1/cremamarfil-2.pdf",
+      "conditions": "ASTM C241-90, as printed",
+      "note": "far below the NSI floor minimum of 10 quoted for travertine; recorded as printed (see unverified)"
+    },
+    "anchorBreakingLoad": {
+      "value": 1850,
+      "unit": "N",
+      "grade": "manufacturer",
+      "source": "Levantina, 'Crema Marfil Coto: ficha tecnica / technical file' (UNE-EN and ASTM test results), pp. 1-4, https://www.levantina.com/files/3351814979b33856c831796bdbd7340f/10004220/1/cremamarfil-2.pdf",
+      "conditions": "breaking load at dowel hole, UNE-EN 13364, mean"
+    },
+    "hardness": {
+      "value": 3,
+      "unit": "Mohs",
+      "grade": "measured",
+      "source": "Anthony J.W., Bideaux R.A., Bladh K.W., Nichols M.C. (eds.) Handbook of Mineralogy, Mineralogical Society of America, 'Calcite' (Mineral Data Publishing, version 1, 2001-2005), http://www.handbookofmineralogy.org/pdfs/calcite.pdf",
+      "conditions": "calcite, the stone's mineral"
+    }
+  },
+  "optics": {
+    "kind": "dielectric: an aggregate of birefringent calcite grains, translucent at the grain scale",
+    "refractiveIndex": [
+      {
+        "value": 1.6583,
+        "unit": "1",
+        "grade": "measured",
+        "source": "Ghosh G. (1999) 'Dispersion-equation coefficients for the refractive index and birefringence of calcite and quartz crystals', Optics Communications 163:95-102; coefficients as tabulated at https://refractiveindex.info/?shelf=main&book=CaCO3&page=Ghosh-o and https://refractiveindex.info/?shelf=main&book=CaCO3&page=Ghosh-e",
+        "conditions": "589.3 nm, room temperature, from the dispersion formula",
+        "phase": "calcite",
+        "direction": "omega",
+        "note": "the Handbook of Mineralogy lists omega = 1.658 (Anthony J.W., Bideaux R.A., Bladh K.W., Nichols M.C. (eds.) Handbook of Mineralogy, Mineralogical Society of America, 'Calcite' (Mineral Data Publishing, version 1, 2001-2005), http://www.handbookofmineralogy.org/pdfs/calcite.pdf)"
+      },
+      {
+        "value": 1.4861,
+        "unit": "1",
+        "grade": "measured",
+        "source": "Ghosh G. (1999) 'Dispersion-equation coefficients for the refractive index and birefringence of calcite and quartz crystals', Optics Communications 163:95-102; coefficients as tabulated at https://refractiveindex.info/?shelf=main&book=CaCO3&page=Ghosh-o and https://refractiveindex.info/?shelf=main&book=CaCO3&page=Ghosh-e",
+        "conditions": "589.3 nm, room temperature, from the dispersion formula",
+        "phase": "calcite",
+        "direction": "epsilon",
+        "note": "the Handbook of Mineralogy lists epsilon = 1.486 (Anthony J.W., Bideaux R.A., Bladh K.W., Nichols M.C. (eds.) Handbook of Mineralogy, Mineralogical Society of America, 'Calcite' (Mineral Data Publishing, version 1, 2001-2005), http://www.handbookofmineralogy.org/pdfs/calcite.pdf)"
+      }
+    ],
+    "dispersion": {
+      "formula": {
+        "omega": "n^2 - 1 = 0.73358749 + 0.96464345 L^2 / (L^2 - 1.94325203e-2) + 1.82831454 L^2 / (L^2 - 120)",
+        "epsilon": "n^2 - 1 = 0.35859695 + 0.82427830 L^2 / (L^2 - 1.06689543e-2) + 0.14429128 L^2 / (L^2 - 120)",
+        "variable": "L, the vacuum wavelength in um",
+        "grade": "measured",
+        "source": "Ghosh G. (1999) 'Dispersion-equation coefficients for the refractive index and birefringence of calcite and quartz crystals', Optics Communications 163:95-102; coefficients as tabulated at https://refractiveindex.info/?shelf=main&book=CaCO3&page=Ghosh-o and https://refractiveindex.info/?shelf=main&book=CaCO3&page=Ghosh-e"
+      },
+      "validRange": {
+        "min": 0.204,
+        "max": 2.172,
+        "unit": "um",
+        "grade": "measured",
+        "source": "Ghosh G. (1999) 'Dispersion-equation coefficients for the refractive index and birefringence of calcite and quartz crystals', Optics Communications 163:95-102; coefficients as tabulated at https://refractiveindex.info/?shelf=main&book=CaCO3&page=Ghosh-o and https://refractiveindex.info/?shelf=main&book=CaCO3&page=Ghosh-e"
+      },
+      "evaluatedOmega": {
+        "axis": "wavelength",
+        "axisUnit": "um",
+        "axisValues": [
+          0.4,
+          0.45,
+          0.5,
+          0.55,
+          0.6,
+          0.65,
+          0.7
+        ],
+        "unit": "1",
+        "values": [
+          1.682,
+          1.6726,
+          1.666,
+          1.6613,
+          1.6576,
+          1.6548,
+          1.6524
+        ],
+        "grade": "derived",
+        "source": "Ghosh G. (1999) 'Dispersion-equation coefficients for the refractive index and birefringence of calcite and quartz crystals', Optics Communications 163:95-102; coefficients as tabulated at https://refractiveindex.info/?shelf=main&book=CaCO3&page=Ghosh-o and https://refractiveindex.info/?shelf=main&book=CaCO3&page=Ghosh-e",
+        "conditions": "calcite, omega ray, room temperature",
+        "derivation": "Ghosh's dispersion formula (dispersion.formula) evaluated at each wavelength"
+      },
+      "evaluatedEpsilon": {
+        "axis": "wavelength",
+        "axisUnit": "um",
+        "axisValues": [
+          0.4,
+          0.45,
+          0.5,
+          0.55,
+          0.6,
+          0.65,
+          0.7
+        ],
+        "unit": "1",
+        "values": [
+          1.4972,
+          1.4928,
+          1.4897,
+          1.4875,
+          1.4858,
+          1.4845,
+          1.4835
+        ],
+        "grade": "derived",
+        "source": "Ghosh G. (1999) 'Dispersion-equation coefficients for the refractive index and birefringence of calcite and quartz crystals', Optics Communications 163:95-102; coefficients as tabulated at https://refractiveindex.info/?shelf=main&book=CaCO3&page=Ghosh-o and https://refractiveindex.info/?shelf=main&book=CaCO3&page=Ghosh-e",
+        "conditions": "calcite, epsilon ray, room temperature",
+        "derivation": "Ghosh's dispersion formula (dispersion.formula) evaluated at each wavelength"
+      }
+    },
+    "specularF0": {
+      "value": 0.0533,
+      "min": 0.0382,
+      "max": 0.0613,
+      "unit": "1",
+      "grade": "derived",
+      "source": "Ghosh G. (1999) 'Dispersion-equation coefficients for the refractive index and birefringence of calcite and quartz crystals', Optics Communications 163:95-102; coefficients as tabulated at https://refractiveindex.info/?shelf=main&book=CaCO3&page=Ghosh-o and https://refractiveindex.info/?shelf=main&book=CaCO3&page=Ghosh-e",
+      "conditions": "normal incidence from air, 589.3 nm (0.0536 at 550 nm)",
+      "derivation": "F = ((n - 1) / (n + 1))^2. A face cut through randomly oriented calcite grains: half the light meets n_o (F = 0.0613); half meets n_e(theta), with 1/n_e(theta)^2 = cos^2(theta)/n_o^2 + sin^2(theta)/n_e^2, averaged over the sphere of grain orientations (mean F = 0.0453); 0.5 x 0.0613 + 0.5 x 0.0453 = 0.0533. min is F(n_e) and max is F(n_o), the extremes a single grain shows."
+    },
+    "wet": {
+      "text": "A wet face darkens: water in the pores and on the surface lowers the index step at the grains, and the water film traps diffusely reflected light by total internal reflection, so more of it is absorbed.",
+      "grade": "measured",
+      "source": "Lekner J., Dorf M.C. (1988) 'Why some things are darker when wet', Applied Optics 27(7):1278-1280, https://doi.org/10.1364/AO.27.001278"
+    },
+    "luminousReflectance": {
+      "value": 0.644,
+      "unit": "1",
+      "grade": "manufacturer",
+      "source": "Levantina, 'Crema Marfil Coto: ficha tecnica / technical file' (UNE-EN and ASTM test results), pp. 1-4, https://www.levantina.com/files/3351814979b33856c831796bdbd7340f/10004220/1/cremamarfil-2.pdf",
+      "conditions": "light reflectance value as printed on the technical file; finish and instrument geometry not stated",
+      "asReported": "LRV 64,40%",
+      "note": "CIE L* 84.2 if read as Y"
+    },
+    "subsurfaceReference": {
+      "specimen": "a white marble measured by Jensen et al. (2001): the nearest measured calcite stone, not this substance",
+      "reducedScattering": {
+        "value": [
+          2.19,
+          2.62,
+          3.0
+        ],
+        "unit": "1/mm",
+        "space": "the R, G and B channels of the authors' 3-CCD camera",
+        "grade": "measured",
+        "source": "Jensen H.W., Marschner S.R., Levoy M., Hanrahan P. (2001) 'A practical model for subsurface light transport', Proceedings of SIGGRAPH 2001, Figure 5(b), row 'Marble', https://graphics.stanford.edu/papers/bssrdf/bssrdf.pdf"
+      },
+      "absorption": {
+        "value": [
+          0.0021,
+          0.0041,
+          0.0071
+        ],
+        "unit": "1/mm",
+        "space": "the R, G and B channels of the authors' 3-CCD camera",
+        "grade": "measured",
+        "source": "Jensen H.W., Marschner S.R., Levoy M., Hanrahan P. (2001) 'A practical model for subsurface light transport', Proceedings of SIGGRAPH 2001, Figure 5(b), row 'Marble', https://graphics.stanford.edu/papers/bssrdf/bssrdf.pdf"
+      },
+      "diffuseReflectance": {
+        "value": [
+          0.83,
+          0.79,
+          0.75
+        ],
+        "unit": "1",
+        "space": "the R, G and B channels of the authors' 3-CCD camera",
+        "grade": "measured",
+        "source": "Jensen H.W., Marschner S.R., Levoy M., Hanrahan P. (2001) 'A practical model for subsurface light transport', Proceedings of SIGGRAPH 2001, Figure 5(b), row 'Marble', https://graphics.stanford.edu/papers/bssrdf/bssrdf.pdf"
+      },
+      "refractiveIndex": {
+        "value": 1.5,
+        "unit": "1",
+        "grade": "measured",
+        "source": "Jensen H.W., Marschner S.R., Levoy M., Hanrahan P. (2001) 'A practical model for subsurface light transport', Proceedings of SIGGRAPH 2001, Figure 5(b), row 'Marble', https://graphics.stanford.edu/papers/bssrdf/bssrdf.pdf",
+        "note": "the index the authors used for marble"
+      },
+      "diffusionLength": {
+        "value": [
+          8.51,
+          5.57,
+          3.95
+        ],
+        "unit": "mm",
+        "space": "the R, G and B channels of the authors' 3-CCD camera",
+        "grade": "derived",
+        "source": "Jensen H.W., Marschner S.R., Levoy M., Hanrahan P. (2001) 'A practical model for subsurface light transport', Proceedings of SIGGRAPH 2001, Figure 5(b), row 'Marble', https://graphics.stanford.edu/papers/bssrdf/bssrdf.pdf",
+        "derivation": "1 / sqrt(3 sigma_a sigma_t'), with sigma_t' = sigma_s' + sigma_a, per channel"
+      },
+      "note": "A fine-grained biosparite with iron-oxide seams scatters and absorbs more than a white crystalline marble; no subsurface measurement of Crema Marfil was found (see unverified)."
+    }
+  },
+  "surface": {
+    "veins": [
+      {
+        "text": "Stylolites are jagged seams, some open, some cemented with iron oxides and clay (the dark set) or with calcite (pale); calcite veins are white.",
+        "grade": "measured",
+        "source": "Lopez-Buendia A.M., Guillem C., Cuevas J.M., Mateos F., Montoto M. (2013) 'Natural stone reinforcement of discontinuities with resin for industrial processing', Engineering Geology 166:39-51, abstract, https://doi.org/10.1016/j.enggeo.2013.09.004"
+      },
+      {
+        "text": "Discrete natural veins on a cream ground.",
+        "grade": "manufacturer",
+        "source": "Levantina, 'Crema Marfil Coto: ficha tecnica / technical file' (UNE-EN and ASTM test results), pp. 1-4, https://www.levantina.com/files/3351814979b33856c831796bdbd7340f/10004220/1/cremamarfil-2.pdf"
+      }
+    ]
+  },
+  "acoustic": {
+    "absorption": {
+      "axis": "frequency",
+      "axisUnit": "Hz",
+      "axisValues": [
+        125,
+        250,
+        500,
+        1000,
+        2000,
+        4000
+      ],
+      "unit": "1",
+      "values": [
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.02,
+        0.02
+      ],
+      "grade": "secondary",
+      "source": "US Enclosure, 'Sound Absorption Coefficients' (compiled table; its original bibliographic source is not stated), row 'Marble or Glazed Tile', http://usenclosure.com/Diffraction%20Graphs/Sound%20Absorption%20Coefficients.pdf",
+      "conditions": "random incidence; a dense stone face (row 'Marble or Glazed Tile'); Crema Marfil's open porosity is 0.5 %"
+    }
+  },
+  "stock": {
+    "slabThicknesses": {
+      "values": [
+        10,
+        12,
+        20,
+        30
+      ],
+      "unit": "mm",
+      "grade": "manufacturer",
+      "source": "Levantina, 'Crema Marfil Coto: ficha tecnica / technical file' (UNE-EN and ASTM test results), pp. 1-4, https://www.levantina.com/files/3351814979b33856c831796bdbd7340f/10004220/1/cremamarfil-2.pdf",
+      "conditions": "formats offered: slab, tile and cut to size",
+      "asReported": "1.0, 1.2, 2.0, 3.0 cm"
+    },
+    "thinSlabReinforcement": {
+      "text": "Thin slabs are consolidated by vacuum impregnation with epoxy resin, because stylolites are planes of weakness.",
+      "grade": "measured",
+      "source": "Lopez-Buendia A.M., Guillem C., Cuevas J.M., Mateos F., Montoto M. (2013) 'Natural stone reinforcement of discontinuities with resin for industrial processing', Engineering Geology 166:39-51, abstract, https://doi.org/10.1016/j.enggeo.2013.09.004"
+    }
+  },
+  "physicalMaterial": {
+    "footfallClass": "stone",
+    "friction": {
+      "method": {
+        "text": "Pendulum slip test, wet and dry; the standard is printed as 'UNE-EN 41902: 2017'. A printed '>45' is recorded as min 45.",
+        "grade": "manufacturer",
+        "source": "Levantina, 'Crema Marfil Coto: ficha tecnica / technical file' (UNE-EN and ASTM test results), pp. 1-4, https://www.levantina.com/files/3351814979b33856c831796bdbd7340f/10004220/1/cremamarfil-2.pdf"
+      },
+      "agedWet": {
+        "value": 20,
+        "unit": "PTV",
+        "grade": "manufacturer",
+        "source": "Levantina, 'Crema Marfil Coto: ficha tecnica / technical file' (UNE-EN and ASTM test results), pp. 1-4, https://www.levantina.com/files/3351814979b33856c831796bdbd7340f/10004220/1/cremamarfil-2.pdf"
+      },
+      "agedDry": {
+        "min": 45,
+        "unit": "PTV",
+        "grade": "manufacturer",
+        "source": "Levantina, 'Crema Marfil Coto: ficha tecnica / technical file' (UNE-EN and ASTM test results), pp. 1-4, https://www.levantina.com/files/3351814979b33856c831796bdbd7340f/10004220/1/cremamarfil-2.pdf"
+      },
+      "bushHammeredWet": {
+        "min": 45,
+        "unit": "PTV",
+        "grade": "manufacturer",
+        "source": "Levantina, 'Crema Marfil Coto: ficha tecnica / technical file' (UNE-EN and ASTM test results), pp. 1-4, https://www.levantina.com/files/3351814979b33856c831796bdbd7340f/10004220/1/cremamarfil-2.pdf"
+      },
+      "bushHammeredDry": {
+        "min": 45,
+        "unit": "PTV",
+        "grade": "manufacturer",
+        "source": "Levantina, 'Crema Marfil Coto: ficha tecnica / technical file' (UNE-EN and ASTM test results), pp. 1-4, https://www.levantina.com/files/3351814979b33856c831796bdbd7340f/10004220/1/cremamarfil-2.pdf"
+      },
+      "roughWet": {
+        "value": 55,
+        "unit": "PTV",
+        "grade": "manufacturer",
+        "source": "Levantina, 'Crema Marfil Coto: ficha tecnica / technical file' (UNE-EN and ASTM test results), pp. 1-4, https://www.levantina.com/files/3351814979b33856c831796bdbd7340f/10004220/1/cremamarfil-2.pdf"
+      },
+      "roughDry": {
+        "min": 45,
+        "unit": "PTV",
+        "grade": "manufacturer",
+        "source": "Levantina, 'Crema Marfil Coto: ficha tecnica / technical file' (UNE-EN and ASTM test results), pp. 1-4, https://www.levantina.com/files/3351814979b33856c831796bdbd7340f/10004220/1/cremamarfil-2.pdf"
+      },
+      "sandblastedWet": {
+        "value": 57,
+        "unit": "PTV",
+        "grade": "manufacturer",
+        "source": "Levantina, 'Crema Marfil Coto: ficha tecnica / technical file' (UNE-EN and ASTM test results), pp. 1-4, https://www.levantina.com/files/3351814979b33856c831796bdbd7340f/10004220/1/cremamarfil-2.pdf"
+      },
+      "sandblastedDry": {
+        "value": 71,
+        "unit": "PTV",
+        "grade": "manufacturer",
+        "source": "Levantina, 'Crema Marfil Coto: ficha tecnica / technical file' (UNE-EN and ASTM test results), pp. 1-4, https://www.levantina.com/files/3351814979b33856c831796bdbd7340f/10004220/1/cremamarfil-2.pdf"
+      }
+    },
+    "note": "Honed and polished pendulum values were not on the technical file (see unverified)."
+  },
+  "workings": [
+    "sawn.vein-cut",
+    "sawn.cross-cut",
+    "honed",
+    "polished.stone",
+    "bush-hammered"
+  ],
+  "workingsOffered": {
+    "text": "Polished, honed, aged and bush-hammered finishes are offered.",
+    "grade": "manufacturer",
+    "source": "Levantina, 'Crema Marfil Coto: ficha tecnica / technical file' (UNE-EN and ASTM test results), pp. 1-4, https://www.levantina.com/files/3351814979b33856c831796bdbd7340f/10004220/1/cremamarfil-2.pdf"
+  },
+  "excludedWorkings": [
+    {
+      "key": "flamed",
+      "reason": {
+        "text": "Limestone and marble cannot be flamed: calcium carbonate responds uniformly to heat and does not flake.",
+        "grade": "guidance",
+        "source": "Polycor Inc. (quarrier), 'How to add a flamed finish to granite surfaces', read 2026-09-26, https://www.polycor.com/resources/how-to-add-a-flamed-finish-to-granite-surfaces/"
+      }
+    }
+  ],
+  "histories": [
+    "stone.foot-traffic-wear",
+    "stone.pore-soiling",
+    "stone.dissolution-outdoors"
+  ],
+  "uses": [
+    {
+      "where": "the Rotunda's walls and its 16 fluted pilasters",
+      "working": "honed",
+      "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/plan/boards/MaterialsStone.png and plan/canvas/MaterialsStone.dc.html (the material language: stone), swatch 'Cream crackle marble' (I, the anchor) ; MuseeVision/Docs/Architecture.md, method step 5",
+      "histories": [
+        "stone.pore-soiling"
+      ],
+      "grade": "design"
+    },
+    {
+      "where": "the sun clock's drum (the rising cylinder) and the Classical Hall",
+      "working": "honed",
+      "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/plan/boards/MaterialsStone.png and plan/canvas/MaterialsStone.dc.html (the material language: stone), swatch 'Cream crackle marble'",
+      "histories": [
+        "stone.pore-soiling"
+      ],
+      "grade": "design"
+    },
+    {
+      "where": "the Atrium floor and the Sphere's platform, glass-smooth",
+      "working": "polished.stone",
+      "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/plan/boards/MaterialsStone.png and plan/canvas/MaterialsStone.dc.html (the material language: stone), swatch 'The Rotunda's marble, glass-smooth'",
+      "histories": [
+        "stone.foot-traffic-wear"
+      ],
+      "grade": "design"
+    },
+    {
+      "where": "the sun clock's dial field, polished, with the bronze inlay",
+      "working": "polished.stone",
+      "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/LOOK_TARGETS.md (frozen reference): 'The bronze sun clock inlaid in polished marble'",
+      "note": "Which stone the dial field is belongs to the Rotunda's description: the old build laid it in a paler two-tone marble (M_SunClock_Marble in windows/Scripts/materials.py), and the Architect's specimen order names travertine for the Rotunda floor.",
+      "histories": [
+        "stone.foot-traffic-wear"
+      ],
+      "grade": "design"
+    }
+  ],
+  "photograph": [
+    "A cream ground, even in tone, crossed by fine jagged seams in several directions that join into a network of irregular cells.",
+    "The darker seams (stylolites with iron oxides and clay) are grey-brown and toothed; the paler ones (calcite) are white and smoother.",
+    "Some slabs carry small fossil grains, white coin-sized spots or wavy figures; grades differ by vein density.",
+    "Honed: a low, even sheen, the veins soft. Polished: a deep gloss in which the veins sharpen and the ground warms.",
+    "Thin pieces break along the seams: look for resin-mended cracks that follow a vein."
+  ],
+  "evidence": [
+    {
+      "path": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR/S3/Color.png",
+      "set": "marble_01 by Rob Tuytel, 2k (key S3: 'weathered honed limestone: the facade and grounds')",
+      "provider": "Poly Haven",
+      "url": "https://polyhaven.com/a/marble_01",
+      "licence": "CC0 1.0",
+      "credits": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR/CREDITS.md, row S3",
+      "method": "photograph (Poly Haven texture; the asset metadata does not state the capture method)",
+      "tier": "c (photograph, not calibrated)",
+      "shows": "A photographed wall of cream compact limestone ashlar, honed to a low sheen: a network of fine dark veins, small dark pores, thin joints, and blocks of differing tone. Its source does not name the stone, so it shows the kind of stone, not Crema Marfil itself.",
+      "statistics": {
+        "extent": {
+          "value": 1.5,
+          "unit": "m",
+          "grade": "manufacturer",
+          "source": "Poly Haven, 'Marble 01' by Rob Tuytel, CC0; metadata: 'smooth, even cream-beige tiles with subtle veining and low sheen', 1.5 m wide, https://polyhaven.com/a/marble_01 and https://api.polyhaven.com/info/marble_01",
+          "conditions": "width of the texture"
+        },
+        "colorMeanLinear": {
+          "value": [
+            0.4434,
+            0.3382,
+            0.1947
+          ],
+          "unit": "1",
+          "space": "linear Rec.709 (sRGB primaries), D65 white",
+          "grade": "derived",
+          "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR/S3/Color.png",
+          "note": "uncalibrated: exposure and white balance are unknown, so only the vein network and the tone differences between blocks are evidence",
+          "derivation": "mean over all pixels after decoding sRGB; CIE L*a*b* (D65) 65.8, 2.1, 21.2"
+        }
+      }
+    }
+  ],
+  "evidenceRejected": [
+    {
+      "path": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR/S2",
+      "set": "ambientCG Marble014 ('cream crackle marble: the Rotunda's and Elan's' in CREDITS.md)",
+      "reason": "Procedurally generated (ambientCG creation method 'Procedural', parent MarbleSubstance002), not a photograph.",
+      "source": "ambientCG, 'Marble 014' asset page: creation method 'Procedural' (parent MarbleSubstance002), released 2020-01-26, https://ambientcg.com/view?id=Marble014",
+      "grade": "manufacturer"
+    },
+    {
+      "path": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/Textures/T_marble_crackle.png",
+      "set": "generated by windows/Scripts/stone_textures.py (warped Voronoi cells)",
+      "reason": "A drawing of the design intent, not a stone.",
+      "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/Textures/CREDITS.md",
+      "grade": "design"
+    },
+    {
+      "path": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/Textures/T_limestone_honed.png",
+      "set": "Marble014's colour map with its mean colour moved to #E8DFCF",
+      "reason": "A recoloured procedural image.",
+      "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/Textures/CREDITS.md",
+      "grade": "design"
+    },
+    {
+      "path": "C:/Users/anan9/Desktop/Projects/Musee Vision/usd/textures/marble_polished.png",
+      "set": "the frozen iOS app's drawn texture",
+      "reason": "Drawn in code.",
+      "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/usd/README.md",
+      "grade": "design"
+    }
+  ],
+  "evidenceSearch": {
+    "searched": [
+      "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR (CREDITS.md, CREDITS_chenghuai.md, every SET.txt)",
+      "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/Textures/CREDITS.md",
+      "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/Journeys (CREDITS.md, every SET.txt)",
+      "C:/Users/anan9/Desktop/Projects/Musee Vision/usd/textures and usd/README.md",
+      "image file names containing marble, stone, limestone, marfil or botticino across the frozen tree (builds and caches excluded)"
+    ],
+    "found": "One photograph of a cream compact limestone with a fine vein network (S3, Poly Haven marble_01), admitted at tier (c) for its pattern. Every other marble image is procedural, generated or drawn.",
+    "tier": "Tier (a) for the physical data (Levantina's tests) and the calcite optics; tier (c) for the pattern. A tier (b) specimen closes the gap: ColorChecker photographs of Crema Marfil Coto, honed and polished, under one known light."
+  },
+  "unverified": [
+    {
+      "field": "optics.measuredColour (Crema Marfil)",
+      "value": null,
+      "unit": "1",
+      "reason": "Only the light reflectance value (64.40 %) was found; a* and b* were not."
+    },
+    {
+      "field": "surface.crackleCellSize",
+      "min": 0.25,
+      "max": 0.4,
+      "unit": "m",
+      "reason": "The old build's design value for the crackle's cells (stone_textures.py); no measured vein spacing for Crema Marfil was found."
+    },
+    {
+      "field": "physical.abrasionHardness",
+      "value": 4.1,
+      "unit": "Ha",
+      "reason": "As printed on the Levantina file, it is out of line with the stone's EN 14157 groove (19.5 mm, close to travertine's 21.3 mm) and needs confirming."
+    },
+    {
+      "field": "physicalMaterial.friction (honed, polished)",
+      "value": null,
+      "unit": "PTV",
+      "reason": "Not on the technical file."
+    },
+    {
+      "field": "physical.capillaryAbsorptionCoefficient",
+      "value": null,
+      "unit": "kg/(m2*s^0.5)",
+      "reason": "Needed by the surface law; not found."
+    },
+    {
+      "field": "optics.subsurface (Crema Marfil)",
+      "value": null,
+      "unit": "1/mm",
+      "reason": "Only a white marble's scattering and absorption were found (Jensen et al. 2001)."
+    },
+    {
+      "field": "formation.stylolites",
+      "text": "Stylolites form by pressure solution under burial.",
+      "reason": "Standard geology, but no source for it was read here; the record states only what its sources say about the stylolites' fillings."
+    },
+    {
+      "field": "identity.alternativesConsidered",
+      "text": "Botticino was used for the Vittoriano in Rome.",
+      "reason": "Seen only in a search summary of Coletti et al. (2025) Rendiconti Lincei 36:103-127; not read at the source."
+    },
+    {
+      "field": "surface.figureByCut",
+      "text": "How Crema Marfil's figure changes between a cut across and a cut along the bed.",
+      "reason": "Not found in any source read."
+    },
+    {
+      "field": "physical.thinSlabBreakage",
+      "min": 10,
+      "max": 15,
+      "unit": "%",
+      "reason": "Breakage of untreated 2 cm slabs in industrial processing. Cited from the abstract of Lopez-Buendia et al. (2013), Engineering Geology 166:39-51, but the abstract read in the citation check (2026-09-26) does not contain it, and the full text is closed access, so it was not confirmed at the source."
+    },
+    {
+      "field": "surface.veins (breakage along stylolites)",
+      "text": "More than 95 % of breakages at thin sizes run along stylolites.",
+      "reason": "Cited from the abstract of Lopez-Buendia et al. (2013), Engineering Geology 166:39-51, but the abstract read in the citation check (2026-09-26) does not contain it, and the full text is closed access, so it was not confirmed at the source."
+    }
+  ],
+  "sources": [
+    "Anthony J.W., Bideaux R.A., Bladh K.W., Nichols M.C. (eds.) Handbook of Mineralogy, Mineralogical Society of America, 'Calcite' (Mineral Data Publishing, version 1, 2001-2005), http://www.handbookofmineralogy.org/pdfs/calcite.pdf",
+    "Coletti C., Germinario L., Mazzoli C. (2023) 'D4.5 Material specific dose-response functions and validation required in the CH vulnerability assessment', HYPERION project, EU H2020 grant 821054, Zenodo, https://doi.org/10.5281/zenodo.7620509",
+    "Cooperativa Cavatori Botticino, 'The Marble' (description and technical data to UNI EN test standards), read 2026-09-26, https://www.cavatoribotticino.it/en/the-marble/",
+    "Ghosh G. (1999) 'Dispersion-equation coefficients for the refractive index and birefringence of calcite and quartz crystals', Optics Communications 163:95-102; coefficients as tabulated at https://refractiveindex.info/?shelf=main&book=CaCO3&page=Ghosh-o and https://refractiveindex.info/?shelf=main&book=CaCO3&page=Ghosh-e",
+    "Jensen H.W., Marschner S.R., Levoy M., Hanrahan P. (2001) 'A practical model for subsurface light transport', Proceedings of SIGGRAPH 2001, Figure 5(b), row 'Marble', https://graphics.stanford.edu/papers/bssrdf/bssrdf.pdf",
+    "Lekner J., Dorf M.C. (1988) 'Why some things are darker when wet', Applied Optics 27(7):1278-1280, https://doi.org/10.1364/AO.27.001278",
+    "Levantina, 'Crema Marfil Coto: ficha tecnica / technical file' (UNE-EN and ASTM test results), pp. 1-4, https://www.levantina.com/files/3351814979b33856c831796bdbd7340f/10004220/1/cremamarfil-2.pdf",
+    "Litos Online (trade press), 'The immense world of Crema Marfil', read 2026-09-26, https://litosonline.com/en/article/immense-world-crema-marfil",
+    "Lopez-Buendia A.M., Guillem C., Cuevas J.M., Mateos F., Montoto M. (2013) 'Natural stone reinforcement of discontinuities with resin for industrial processing', Engineering Geology 166:39-51, abstract, https://doi.org/10.1016/j.enggeo.2013.09.004",
+    "Ordonez S., Garcia del Cura M.A., Fort R., Pina J.A. (1996) 'El Crema Marfil (Pinoso, Alicante) I. Caracteristicas petrofisicas y parametros de durabilidad', Geogaceta 20(3):727-730, abstract, https://dialnet.unirioja.es/servlet/articulo?codigo=7459067",
+    "Poly Haven, 'Marble 01' by Rob Tuytel, CC0; metadata: 'smooth, even cream-beige tiles with subtle veining and low sheen', 1.5 m wide, https://polyhaven.com/a/marble_01 and https://api.polyhaven.com/info/marble_01",
+    "Polycor Inc. (quarrier), 'How to add a flamed finish to granite surfaces', read 2026-09-26, https://www.polycor.com/resources/how-to-add-a-flamed-finish-to-granite-surfaces/",
+    "US Enclosure, 'Sound Absorption Coefficients' (compiled table; its original bibliographic source is not stated), row 'Marble or Glazed Tile', http://usenclosure.com/Diffraction%20Graphs/Sound%20Absorption%20Coefficients.pdf",
+    "ambientCG, 'Marble 014' asset page: creation method 'Procedural' (parent MarbleSubstance002), released 2020-01-26, https://ambientcg.com/view?id=Marble014"
+  ]
+}

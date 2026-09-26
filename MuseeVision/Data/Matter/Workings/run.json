@@ -1,0 +1,103 @@
+{
+  "schema": "musee.matter.working/1",
+  "key": "run",
+  "name": "Run (profile drawn with a running mould)",
+  "appliesTo": {
+    "families": [
+      "white"
+    ],
+    "substances": [
+      "lime-plaster",
+      "fibrous-plaster"
+    ]
+  },
+  "over": [],
+  "process": "A sheet-zinc template cut to the profile is mounted on a wooden horse (sledge) and pushed along rules or battens fixed to the wall or ceiling, through wet plaster laid on in successive coats, coarse then fine, until the full profile stands. In situ the stuff is lime putty gauged with plaster of Paris, whose quick set and slight expansion suit running; on the bench the same method makes the model from which fibrous plaster lengths are cast. Lengths are cut for corners, mitres and returns and fixed with nails or screws and fresh plaster; the ends the sledge cannot reach are finished by hand.",
+  "steps": [
+    {
+      "step": "fix running rules or battens as guides for the horse",
+      "source": "Who's Been Living in My House? Kemp Town Estate histories, Plasterwork (2015), https://www.kemptownestatehistories.com/plasterwork",
+      "grade": "secondary"
+    },
+    {
+      "step": "push the zinc profile on its horse through wet plaster, building coarse coats then fine",
+      "source": "Vadstrup, S., Working techniques and repair methods for plaster decorations on facades: running mould decorations. Plaster Architecture project essay, https://www.palazzospinelli.org/plaster/essay/essay/Soren06.html",
+      "grade": "guidance"
+    },
+    {
+      "step": "draw the mould the opposite way, slanting edge forward, for a particularly hard, smooth surface",
+      "source": "Vadstrup, S., https://www.palazzospinelli.org/plaster/essay/essay/Soren06.html",
+      "grade": "guidance"
+    },
+    {
+      "step": "cut sections for corners, mitres and awkward returns and fix them with nails or screws, fresh plaster as the adhesive",
+      "source": "Who's Been Living in My House? Kemp Town Estate histories, Plasterwork (2015), https://www.kemptownestatehistories.com/plasterwork",
+      "grade": "secondary"
+    },
+    {
+      "step": "finish by hand the end of each run that the sledge cannot reach, with wooden floats",
+      "source": "Vadstrup, S., https://www.palazzospinelli.org/plaster/essay/essay/Soren06.html",
+      "grade": "guidance"
+    }
+  ],
+  "facts": {
+    "layerMaxThickness": {
+      "min": 50,
+      "max": 60,
+      "unit": "mm",
+      "asReported": "the mortar layer must not be more than 5-6 cm thick",
+      "source": "Vadstrup, S., https://www.palazzospinelli.org/plaster/essay/essay/Soren06.html",
+      "grade": "guidance"
+    },
+    "handFinishedEnd": {
+      "value": 0.1,
+      "unit": "m",
+      "source": "Vadstrup, S., https://www.palazzospinelli.org/plaster/essay/essay/Soren06.html ('the last 10 cm at the end of the running mould decoration by hand')",
+      "grade": "guidance"
+    },
+    "gaugingReason": {
+      "text": "the speed at which a mix of lime and gypsum sets, and the slight expansion that occurs, are particularly useful when running cornices and other mouldings in situ",
+      "source": "Ratcliffe, T. (1997) The Use of Gypsum Plaster. The Building Conservation Directory, https://www.buildingconservation.com/articles/gypsum/gypsum_plaster.htm",
+      "grade": "guidance"
+    },
+    "twoCoatReason": {
+      "text": "a relatively thin finishing coat run over a thicker but hardened ground layer fills, covers and minimises the shrinkage cracks in the ground",
+      "source": "Vadstrup, S., https://www.palazzospinelli.org/plaster/essay/essay/Soren06.html",
+      "grade": "guidance"
+    },
+    "castEnrichment": {
+      "text": "repeated ornament is cast in the workshop in moulds, traditionally of hard material such as lead or boxwood, and fixed to the run",
+      "source": "Who's Been Living in My House? Kemp Town Estate histories, Plasterwork (2015), https://www.kemptownestatehistories.com/plasterwork",
+      "grade": "secondary"
+    }
+  },
+  "surface": {
+    "profile": "Exactly constant along the run: every section is the template's, so the member reads as a perfect extrusion.",
+    "texture": "Fine striations parallel to the run where the template dragged grit; a hard, smooth, slightly polished skin where the mould was drawn back.",
+    "arrises": "Crisp on the run, since the zinc edge forms them; softer and slightly irregular at hand-made mitres, returns and run ends.",
+    "joints": "In situ runs are continuous between corners; fibrous lengths meet about every 3 m (see fibrous-plaster stock)."
+  },
+  "photograph": [
+    "Straight members whose profile never varies, with hairline striations along their length in raking light.",
+    "Corners and returns that are visibly hand-made: tiny misalignments, a softer arris, a change of texture over the last hand's breadth."
+  ],
+  "unverified": [
+    {
+      "field": "surface.texture (striation depth and spacing)",
+      "value": null,
+      "unit": "mm",
+      "reason": "No measured profile of running marks was found."
+    },
+    {
+      "field": "facts.zincThickness (template sheet)",
+      "value": null,
+      "unit": "mm",
+      "reason": "Sources name sheet zinc without a gauge."
+    }
+  ],
+  "sources": [
+    "Ratcliffe, T. (1997) The Use of Gypsum Plaster. The Building Conservation Directory.",
+    "Vadstrup, S., Running mould decorations, https://www.palazzospinelli.org/plaster/essay/essay/Soren06.html",
+    "Who's Been Living in My House? Kemp Town Estate histories, Plasterwork (2015), https://www.kemptownestatehistories.com/plasterwork"
+  ]
+}

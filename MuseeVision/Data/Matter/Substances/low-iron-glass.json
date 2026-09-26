@@ -1,0 +1,1379 @@
+{
+  "schema": "musee.matter.substance/1",
+  "key": "low-iron-glass",
+  "name": "Low-iron float glass",
+  "family": "glass",
+  "accentOf": null,
+  "summary": "Soda-lime-silica glass melted from low-iron sand and floated on molten tin: clear to the edge, with a pale aqua-blue colour only where light runs a long way through it. It is the museum's glass: the Rotunda's glazed eye, the vitrines, and the glazing of the daylit galleries.",
+  "dossier": "Docs/Matter/low-iron-glass.md",
+  "workings": [
+    "annealed",
+    "heat-strengthened",
+    "toughened",
+    "laminated",
+    "laminated.uv-filtering",
+    "anti-reflective"
+  ],
+  "histories": [
+    "glass.soiling",
+    "glass.cleaning-wear",
+    "glass.water-stain",
+    "glass.edge-delamination"
+  ],
+  "constituents": [
+    {
+      "material": "silica (from sand)",
+      "formula": "SiO2",
+      "role": "the glass network"
+    },
+    {
+      "material": "soda (from soda ash)",
+      "formula": "Na2O",
+      "role": "flux: lowers the melting temperature"
+    },
+    {
+      "material": "lime (from limestone) and magnesia (from dolomite)",
+      "formula": "CaO, MgO",
+      "role": "stabilisers: make the glass durable in water"
+    },
+    {
+      "material": "salt cake",
+      "formula": "Na2SO4",
+      "role": "a batch material (SO3 remains in the glass)"
+    },
+    {
+      "material": "iron oxide",
+      "formula": "Fe2O3 / FeO",
+      "role": "an impurity of the sand that sets the colour; low-iron glass keeps it below 100 ppm"
+    }
+  ],
+  "formation": {
+    "how": "The batch (sand, soda ash, limestone, dolomite, salt cake and about 20 % cullet) is melted and floated on a bath of molten tin, where it spreads to an even thickness with fire-finished faces; the ribbon is annealed in a lehr and cut. The face that lay on the tin carries diffused tin (the tin side); the other is the air side. Low-iron glass is made the same way from raw materials chosen for their low iron, with the melt's redox held so that little of that iron is ferrous.",
+    "facts": {
+      "culletShare": {
+        "value": 0.2,
+        "unit": "1",
+        "grade": "manufacturer",
+        "source": "Pilkington North America, Technical Bulletin ATS-129 'Properties of soda-lime silica float glass', 04/2025, https://www.pilkington.com/-/media/pilkington/site-content/usa/window-manufacturers/technical-bulletins/ats-129---properties-of-soda-lime-silica-float-glass.pdf",
+        "note": "'approximately 20% cullet'"
+      },
+      "totalIronAsFe2O3": {
+        "unit": "wt%",
+        "max": 0.01,
+        "grade": "manufacturer",
+        "source": "Vitro SAB de CV (originally PPG Industries Ohio), patent EP2396284B1 'Method of reducing redox ratio of molten glass for making ultra-clear glass' (ultra-clear glass: total iron less than 0.010 wt% Fe2O3, redox less than 0.200; one example reached a visible transmittance (LTA) of 91.3 % at an actual thickness of about 3.2 mm), https://patents.google.com/patent/EP2396284B1/en",
+        "note": "ultra-clear (low-iron) glass: 'less than 0.010 wt. % (100 parts per million)'"
+      },
+      "totalIronAsFe2O3ClearFloat": {
+        "value": 0.11,
+        "unit": "wt%",
+        "grade": "manufacturer",
+        "source": "Pilkington, 'Properties of soda-lime-silica float glass' (earlier edition of ATS-129 with 'Chemical analysis of a typical clear float glass', citing Button and Pye, Glass in Building, Butterworth Architecture, 1993), http://www.swiftglass.com/assets/floatglass.pdf",
+        "note": "a typical clear float glass, for comparison"
+      },
+      "redoxFerrousOverTotal": {
+        "unit": "1",
+        "max": 0.2,
+        "grade": "manufacturer",
+        "source": "Vitro SAB de CV (originally PPG Industries Ohio), patent EP2396284B1 'Method of reducing redox ratio of molten glass for making ultra-clear glass' (ultra-clear glass: total iron less than 0.010 wt% Fe2O3, redox less than 0.200; one example reached a visible transmittance (LTA) of 91.3 % at an actual thickness of about 3.2 mm), https://patents.google.com/patent/EP2396284B1/en",
+        "note": "FeO over total iron as Fe2O3 in the ultra-clear glass; 'preferably less than 0.150'"
+      },
+      "softeningPoint": {
+        "value": 732,
+        "unit": "degC",
+        "grade": "manufacturer",
+        "source": "Pilkington North America, Technical Bulletin ATS-129 'Properties of soda-lime silica float glass', 04/2025, https://www.pilkington.com/-/media/pilkington/site-content/usa/window-manufacturers/technical-bulletins/ats-129---properties-of-soda-lime-silica-float-glass.pdf",
+        "conditions": "Pilkington Optiwhite, log10(viscosity / Pa s) = 6.6"
+      },
+      "annealingPoint": {
+        "value": 559,
+        "unit": "degC",
+        "grade": "manufacturer",
+        "source": "Pilkington North America, Technical Bulletin ATS-129 'Properties of soda-lime silica float glass', 04/2025, https://www.pilkington.com/-/media/pilkington/site-content/usa/window-manufacturers/technical-bulletins/ats-129---properties-of-soda-lime-silica-float-glass.pdf",
+        "conditions": "Pilkington Optiwhite, log10(viscosity / Pa s) = 12.0"
+      },
+      "strainPoint": {
+        "value": 526,
+        "unit": "degC",
+        "grade": "manufacturer",
+        "source": "Pilkington North America, Technical Bulletin ATS-129 'Properties of soda-lime silica float glass', 04/2025, https://www.pilkington.com/-/media/pilkington/site-content/usa/window-manufacturers/technical-bulletins/ats-129---properties-of-soda-lime-silica-float-glass.pdf",
+        "conditions": "Pilkington Optiwhite, log10(viscosity / Pa s) = 13.5"
+      }
+    },
+    "compositionClearFloat": {
+      "note": "A typical clear float glass (Button and Pye, 1993, via Pilkington). Low-iron glass has the same matrix with far less iron.",
+      "SiO2": {
+        "value": 72.6,
+        "unit": "wt%",
+        "grade": "manufacturer",
+        "source": "Pilkington, 'Properties of soda-lime-silica float glass' (earlier edition of ATS-129 with 'Chemical analysis of a typical clear float glass', citing Button and Pye, Glass in Building, Butterworth Architecture, 1993), http://www.swiftglass.com/assets/floatglass.pdf"
+      },
+      "Na2O": {
+        "value": 13.9,
+        "unit": "wt%",
+        "grade": "manufacturer",
+        "source": "Pilkington, 'Properties of soda-lime-silica float glass' (earlier edition of ATS-129 with 'Chemical analysis of a typical clear float glass', citing Button and Pye, Glass in Building, Butterworth Architecture, 1993), http://www.swiftglass.com/assets/floatglass.pdf"
+      },
+      "CaO": {
+        "value": 8.4,
+        "unit": "wt%",
+        "grade": "manufacturer",
+        "source": "Pilkington, 'Properties of soda-lime-silica float glass' (earlier edition of ATS-129 with 'Chemical analysis of a typical clear float glass', citing Button and Pye, Glass in Building, Butterworth Architecture, 1993), http://www.swiftglass.com/assets/floatglass.pdf"
+      },
+      "MgO": {
+        "value": 3.9,
+        "unit": "wt%",
+        "grade": "manufacturer",
+        "source": "Pilkington, 'Properties of soda-lime-silica float glass' (earlier edition of ATS-129 with 'Chemical analysis of a typical clear float glass', citing Button and Pye, Glass in Building, Butterworth Architecture, 1993), http://www.swiftglass.com/assets/floatglass.pdf"
+      },
+      "Al2O3": {
+        "value": 1.1,
+        "unit": "wt%",
+        "grade": "manufacturer",
+        "source": "Pilkington, 'Properties of soda-lime-silica float glass' (earlier edition of ATS-129 with 'Chemical analysis of a typical clear float glass', citing Button and Pye, Glass in Building, Butterworth Architecture, 1993), http://www.swiftglass.com/assets/floatglass.pdf"
+      },
+      "K2O": {
+        "value": 0.6,
+        "unit": "wt%",
+        "grade": "manufacturer",
+        "source": "Pilkington, 'Properties of soda-lime-silica float glass' (earlier edition of ATS-129 with 'Chemical analysis of a typical clear float glass', citing Button and Pye, Glass in Building, Butterworth Architecture, 1993), http://www.swiftglass.com/assets/floatglass.pdf"
+      },
+      "SO3": {
+        "value": 0.2,
+        "unit": "wt%",
+        "grade": "manufacturer",
+        "source": "Pilkington, 'Properties of soda-lime-silica float glass' (earlier edition of ATS-129 with 'Chemical analysis of a typical clear float glass', citing Button and Pye, Glass in Building, Butterworth Architecture, 1993), http://www.swiftglass.com/assets/floatglass.pdf"
+      },
+      "Fe2O3": {
+        "value": 0.11,
+        "unit": "wt%",
+        "grade": "manufacturer",
+        "source": "Pilkington, 'Properties of soda-lime-silica float glass' (earlier edition of ATS-129 with 'Chemical analysis of a typical clear float glass', citing Button and Pye, Glass in Building, Butterworth Architecture, 1993), http://www.swiftglass.com/assets/floatglass.pdf"
+      }
+    },
+    "ironBands": {
+      "ferric": {
+        "bands": [
+          {
+            "value": 385,
+            "unit": "nm",
+            "grade": "secondary",
+            "source": "J. E. Shelby, 'Lecture 4: Color in commercial glasses', Glass Processing Course, IMI-NFG, Lehigh University, Spring 2015, https://www.lehigh.edu/imi/teched/GlassProcess/Lectures/Lecture04_Shelby_ColoredGlass.pdf"
+          },
+          {
+            "value": 420,
+            "unit": "nm",
+            "grade": "secondary",
+            "source": "J. E. Shelby, 'Lecture 4: Color in commercial glasses', Glass Processing Course, IMI-NFG, Lehigh University, Spring 2015, https://www.lehigh.edu/imi/teched/GlassProcess/Lectures/Lecture04_Shelby_ColoredGlass.pdf"
+          },
+          {
+            "value": 435,
+            "unit": "nm",
+            "grade": "secondary",
+            "source": "J. E. Shelby, 'Lecture 4: Color in commercial glasses', Glass Processing Course, IMI-NFG, Lehigh University, Spring 2015, https://www.lehigh.edu/imi/teched/GlassProcess/Lectures/Lecture04_Shelby_ColoredGlass.pdf"
+          }
+        ],
+        "effect": "The tail of the 385 nm band removes blue-violet: a yellow-green cast."
+      },
+      "ferrous": {
+        "band": {
+          "value": 1050,
+          "unit": "nm",
+          "grade": "secondary",
+          "source": "J. E. Shelby, 'Lecture 4: Color in commercial glasses', Glass Processing Course, IMI-NFG, Lehigh University, Spring 2015, https://www.lehigh.edu/imi/teched/GlassProcess/Lectures/Lecture04_Shelby_ColoredGlass.pdf"
+        },
+        "effect": "A broad band whose tail removes red, orange and yellow: a blue-green cast. Its extinction coefficient is about ten times the strongest ferric band's."
+      },
+      "chargeTransfer": {
+        "ferric": {
+          "value": 225,
+          "unit": "nm",
+          "grade": "secondary",
+          "source": "J. E. Shelby, 'Lecture 4: Color in commercial glasses', Glass Processing Course, IMI-NFG, Lehigh University, Spring 2015, https://www.lehigh.edu/imi/teched/GlassProcess/Lectures/Lecture04_Shelby_ColoredGlass.pdf"
+        },
+        "ferrous": {
+          "value": 200,
+          "unit": "nm",
+          "grade": "secondary",
+          "source": "J. E. Shelby, 'Lecture 4: Color in commercial glasses', Glass Processing Course, IMI-NFG, Lehigh University, Spring 2015, https://www.lehigh.edu/imi/teched/GlassProcess/Lectures/Lecture04_Shelby_ColoredGlass.pdf"
+        },
+        "apparentUvEdge": {
+          "value": 310,
+          "unit": "nm",
+          "grade": "secondary",
+          "source": "J. E. Shelby, 'Lecture 4: Color in commercial glasses', Glass Processing Course, IMI-NFG, Lehigh University, Spring 2015, https://www.lehigh.edu/imi/teched/GlassProcess/Lectures/Lecture04_Shelby_ColoredGlass.pdf",
+          "note": "the tails of the charge-transfer bands set the UV edge of commercial glass"
+        }
+      }
+    }
+  },
+  "optics": {
+    "refractiveIndex": [
+      {
+        "value": 1.523,
+        "unit": "1",
+        "grade": "manufacturer",
+        "source": "Pilkington North America, Technical Bulletin ATS-129 'Properties of soda-lime silica float glass', 04/2025, https://www.pilkington.com/-/media/pilkington/site-content/usa/window-manufacturers/technical-bulletins/ats-129---properties-of-soda-lime-silica-float-glass.pdf",
+        "conditions": "589.3 nm (sodium D line)"
+      },
+      {
+        "value": 1.511,
+        "unit": "1",
+        "grade": "manufacturer",
+        "source": "Pilkington North America, Technical Bulletin ATS-129 'Properties of soda-lime silica float glass', 04/2025, https://www.pilkington.com/-/media/pilkington/site-content/usa/window-manufacturers/technical-bulletins/ats-129---properties-of-soda-lime-silica-float-glass.pdf",
+        "conditions": "1 um"
+      },
+      {
+        "value": 1.5223,
+        "unit": "1",
+        "grade": "measured",
+        "source": "A. Kamptner, M. C. Scharber, M. Schiek, ChemPhysChem (2024) e202400233; Marienfeld float-glass slide 1 mm, air side, via refractiveindex.info, https://refractiveindex.info/?shelf=glass&book=soda-lime&page=Kamptner",
+        "conditions": "587.6 nm, air side of a float-glass slide",
+        "note": "interpolated between the tabulated rows at 586.65 and 588.25 nm (n = 1.5222 to 1.5223)"
+      },
+      {
+        "value": 1.516,
+        "unit": "1",
+        "grade": "measured",
+        "source": "M. R. Vogt et al., IEEE J. Photovoltaics 6 (2016) 111-118; Fe2O3 0.01 permille (10 ppm), via refractiveindex.info, https://refractiveindex.info/?shelf=glass&book=soda-lime&page=Vogt-10ppm",
+        "conditions": "550 nm, Fe2O3 10 ppm glass"
+      }
+    ],
+    "dispersion": {
+      "formula": "n(L) = 1.5130 - 0.003169 L^2 + 0.003962 L^-2, L in um",
+      "validRange": {
+        "unit": "um",
+        "min": 0.31,
+        "max": 4.6,
+        "grade": "measured",
+        "source": "M. Rubin, 'Optical properties of soda lime silica glasses', Solar Energy Materials 12 (1985) 275-288; dispersion fit n = 1.5130 - 0.003169 L^2 + 0.003962 L^-2 (L in um, 0.31-4.6 um) via refractiveindex.info, https://refractiveindex.info/?shelf=glass&book=soda-lime&page=Rubin-lowiron"
+      },
+      "evaluated": {
+        "axis": "wavelength",
+        "axisUnit": "um",
+        "axisValues": [
+          0.4,
+          0.45,
+          0.4861,
+          0.55,
+          0.5876,
+          0.6563,
+          0.7
+        ],
+        "unit": "1",
+        "values": [
+          1.53726,
+          1.53192,
+          1.52902,
+          1.52514,
+          1.52338,
+          1.52083,
+          1.51953
+        ],
+        "grade": "derived",
+        "derivation": "Rubin's dispersion fit evaluated at 400, 450, 486.1 (F), 550, 587.6 (d), 656.3 (C) and 700 nm",
+        "source": "M. Rubin, 'Optical properties of soda lime silica glasses', Solar Energy Materials 12 (1985) 275-288; dispersion fit n = 1.5130 - 0.003169 L^2 + 0.003962 L^-2 (L in um, 0.31-4.6 um) via refractiveindex.info, https://refractiveindex.info/?shelf=glass&book=soda-lime&page=Rubin-lowiron"
+      },
+      "abbeNumber": {
+        "value": 63.9,
+        "unit": "1",
+        "grade": "derived",
+        "derivation": "(n_d - 1) / (n_F - n_C) from Rubin's fit; the fit spans 0.31-4.6 um, so its visible dispersion is approximate (too small to matter for the look of architectural glass)",
+        "source": "M. Rubin, 'Optical properties of soda lime silica glasses', Solar Energy Materials 12 (1985) 275-288; dispersion fit n = 1.5130 - 0.003169 L^2 + 0.003962 L^-2 (L in um, 0.31-4.6 um) via refractiveindex.info, https://refractiveindex.info/?shelf=glass&book=soda-lime&page=Rubin-lowiron"
+      }
+    },
+    "specularF0": {
+      "value": 0.04325,
+      "unit": "1",
+      "grade": "derived",
+      "derivation": "normal-incidence Fresnel reflectance per face, ((n-1)/(n+1))^2, with n(550 nm) from Rubin's fit",
+      "source": "M. Rubin, 'Optical properties of soda lime silica glasses', Solar Energy Materials 12 (1985) 275-288; dispersion fit n = 1.5130 - 0.003169 L^2 + 0.003962 L^-2 (L in um, 0.31-4.6 um) via refractiveindex.info, https://refractiveindex.info/?shelf=glass&book=soda-lime&page=Rubin-lowiron"
+    },
+    "extinctionCoefficient": {
+      "axis": "wavelength",
+      "axisUnit": "um",
+      "axisValues": [
+        0.31,
+        0.32,
+        0.33,
+        0.34,
+        0.35,
+        0.36,
+        0.37,
+        0.38,
+        0.39,
+        0.4,
+        0.41,
+        0.42,
+        0.43,
+        0.44,
+        0.45,
+        0.46,
+        0.47,
+        0.48,
+        0.49,
+        0.5,
+        0.51,
+        0.52,
+        0.53,
+        0.54,
+        0.55,
+        0.56,
+        0.57,
+        0.58,
+        0.59,
+        0.6,
+        0.61,
+        0.62,
+        0.63,
+        0.64,
+        0.65,
+        0.66,
+        0.67,
+        0.68,
+        0.69,
+        0.7,
+        0.71,
+        0.72,
+        0.73,
+        0.74,
+        0.75,
+        0.76,
+        0.77,
+        0.78,
+        0.79,
+        0.8,
+        0.81,
+        0.82,
+        0.83,
+        0.84,
+        0.85,
+        0.86,
+        0.87,
+        0.88,
+        0.89,
+        0.9,
+        0.91,
+        0.92,
+        0.93,
+        0.94,
+        0.95,
+        0.96,
+        0.97,
+        0.98,
+        0.99,
+        1.0,
+        1.1,
+        1.2
+      ],
+      "unit": "1",
+      "values": [
+        1.191e-05,
+        3.062e-06,
+        1.399e-06,
+        6.061e-07,
+        2.458e-07,
+        1.164e-07,
+        9.3e-08,
+        1.309e-07,
+        6.261e-08,
+        4.57e-08,
+        5.013e-08,
+        5.449e-08,
+        5.878e-08,
+        5.095e-08,
+        4.252e-08,
+        3.351e-08,
+        3.675e-08,
+        3.995e-08,
+        2.972e-08,
+        3.257e-08,
+        3.538e-08,
+        3.816e-08,
+        4.091e-08,
+        4.362e-08,
+        4.632e-08,
+        6.429e-08,
+        6.721e-08,
+        8.597e-08,
+        8.913e-08,
+        1.087e-07,
+        1.121e-07,
+        1.325e-07,
+        1.534e-07,
+        1.749e-07,
+        1.79e-07,
+        2.013e-07,
+        2.242e-07,
+        2.476e-07,
+        2.526e-07,
+        2.769e-07,
+        3.017e-07,
+        3.271e-07,
+        3.531e-07,
+        3.796e-07,
+        4.067e-07,
+        4.344e-07,
+        4.627e-07,
+        4.916e-07,
+        5.21e-07,
+        5.51e-07,
+        5.816e-07,
+        6.128e-07,
+        6.446e-07,
+        6.77e-07,
+        7.099e-07,
+        7.193e-07,
+        7.513e-07,
+        7.875e-07,
+        7.975e-07,
+        8.328e-07,
+        8.43e-07,
+        8.792e-07,
+        8.897e-07,
+        9.002e-07,
+        9.376e-07,
+        9.484e-07,
+        9.592e-07,
+        9.977e-07,
+        1.009e-06,
+        1.02e-06,
+        1.132e-06,
+        1.21e-06
+      ],
+      "grade": "measured",
+      "source": "M. Rubin, 'Optical properties of soda lime silica glasses', Solar Energy Materials 12 (1985) 275-288; tabulated k for the low-iron window glass via refractiveindex.info, https://refractiveindex.info/?shelf=glass&book=soda-lime&page=Rubin-lowiron"
+    },
+    "absorptionCoefficient": {
+      "axis": "wavelength",
+      "axisUnit": "um",
+      "axisValues": [
+        0.38,
+        0.39,
+        0.4,
+        0.41,
+        0.42,
+        0.43,
+        0.44,
+        0.45,
+        0.46,
+        0.47,
+        0.48,
+        0.49,
+        0.5,
+        0.51,
+        0.52,
+        0.53,
+        0.54,
+        0.55,
+        0.56,
+        0.57,
+        0.58,
+        0.59,
+        0.6,
+        0.61,
+        0.62,
+        0.63,
+        0.64,
+        0.65,
+        0.66,
+        0.67,
+        0.68,
+        0.69,
+        0.7,
+        0.71,
+        0.72,
+        0.73,
+        0.74,
+        0.75,
+        0.76,
+        0.77,
+        0.78
+      ],
+      "unit": "1/mm",
+      "values": [
+        0.004329,
+        0.002017,
+        0.001436,
+        0.001536,
+        0.00163,
+        0.001718,
+        0.001455,
+        0.001187,
+        0.0009154,
+        0.0009826,
+        0.001046,
+        0.0007622,
+        0.0008186,
+        0.0008718,
+        0.0009222,
+        0.00097,
+        0.001015,
+        0.001058,
+        0.001443,
+        0.001482,
+        0.001863,
+        0.001898,
+        0.002277,
+        0.002309,
+        0.002686,
+        0.00306,
+        0.003434,
+        0.003461,
+        0.003833,
+        0.004205,
+        0.004576,
+        0.0046,
+        0.004971,
+        0.00534,
+        0.005709,
+        0.006078,
+        0.006446,
+        0.006814,
+        0.007183,
+        0.007551,
+        0.00792
+      ],
+      "grade": "derived",
+      "derivation": "alpha = 4 pi k / wavelength; internal transmittance through a path d is exp(-alpha d); from Rubin's low-iron k, 380-780 nm",
+      "source": "M. Rubin, 'Optical properties of soda lime silica glasses', Solar Energy Materials 12 (1985) 275-288; tabulated k for the low-iron window glass via refractiveindex.info, https://refractiveindex.info/?shelf=glass&book=soda-lime&page=Rubin-lowiron",
+      "note": "Matter integrates this spectrum against the eye's colour matching to get the glass's per-channel absorption. The spectrum is the truth, not an RGB tint."
+    },
+    "leastAbsorbed": {
+      "value": 0.49,
+      "unit": "um",
+      "grade": "derived",
+      "derivation": "the wavelength of the smallest alpha in Rubin's low-iron table (380-780 nm)",
+      "source": "M. Rubin, 'Optical properties of soda lime silica glasses', Solar Energy Materials 12 (1985) 275-288; tabulated k for the low-iron window glass via refractiveindex.info, https://refractiveindex.info/?shelf=glass&book=soda-lime&page=Rubin-lowiron"
+    },
+    "extinctionByIron": {
+      "note": "How iron sets the colour: the same spectrum at other iron contents. Vogt's semi-empirical model is not linear in iron (k rises about ninefold from 10 ppm to 703 ppm); Rubin's clear window glass sits close to Vogt's 703 ppm glass.",
+      "fe2o3At5ppm": {
+        "axis": "wavelength",
+        "axisUnit": "um",
+        "axisValues": [
+          0.4,
+          0.45,
+          0.5,
+          0.55,
+          0.6,
+          0.65,
+          0.7
+        ],
+        "unit": "1",
+        "values": [
+          2.82e-08,
+          2.44e-08,
+          1.68e-08,
+          1.73e-08,
+          2.89e-08,
+          4.64e-08,
+          6.93e-08
+        ],
+        "grade": "measured",
+        "source": "M. R. Vogt, H. Hahn, H. Holst, M. Winter, C. Schinke, M. Koentges, R. Brendel, P. P. Altermatt, 'Measurement of the optical constants of soda-lime glasses in dependence of iron content, and modeling of iron-related power losses in crystalline Si solar cell modules', IEEE J. Photovoltaics 6 (2016) 111-118; Fe2O3 0.005 permille, via refractiveindex.info, https://refractiveindex.info/?shelf=glass&book=soda-lime&page=Vogt-5ppm",
+        "conditions": "Fe2O3 5 ppm"
+      },
+      "fe2o3At10ppm": {
+        "axis": "wavelength",
+        "axisUnit": "um",
+        "axisValues": [
+          0.3,
+          0.35,
+          0.4,
+          0.45,
+          0.5,
+          0.55,
+          0.6,
+          0.65,
+          0.7,
+          0.75,
+          0.8,
+          0.85,
+          0.9,
+          0.95,
+          1.0,
+          1.05,
+          1.1,
+          1.15,
+          1.2
+        ],
+        "unit": "1",
+        "values": [
+          6.24e-06,
+          1.7e-07,
+          4.27e-08,
+          3.7e-08,
+          2.54e-08,
+          2.62e-08,
+          4.38e-08,
+          7.03e-08,
+          1.05e-07,
+          1.52e-07,
+          2.04e-07,
+          2.57e-07,
+          3.02e-07,
+          3.36e-07,
+          3.62e-07,
+          3.88e-07,
+          4.07e-07,
+          4.17e-07,
+          4.21e-07
+        ],
+        "grade": "measured",
+        "source": "M. R. Vogt et al., IEEE J. Photovoltaics 6 (2016) 111-118; Fe2O3 0.01 permille (10 ppm), via refractiveindex.info, https://refractiveindex.info/?shelf=glass&book=soda-lime&page=Vogt-10ppm",
+        "conditions": "Fe2O3 10 ppm"
+      },
+      "fe2o3At703ppm": {
+        "axis": "wavelength",
+        "axisUnit": "um",
+        "axisValues": [
+          0.3,
+          0.35,
+          0.4,
+          0.45,
+          0.5,
+          0.55,
+          0.6,
+          0.65,
+          0.7,
+          0.75,
+          0.8,
+          0.85,
+          0.9,
+          0.95,
+          1.0,
+          1.05,
+          1.1,
+          1.15,
+          1.2
+        ],
+        "unit": "1",
+        "values": [
+          5.79e-05,
+          1.58e-06,
+          3.96e-07,
+          3.43e-07,
+          2.36e-07,
+          2.43e-07,
+          4.06e-07,
+          6.52e-07,
+          9.75e-07,
+          1.41e-06,
+          1.89e-06,
+          2.38e-06,
+          2.8e-06,
+          3.12e-06,
+          3.36e-06,
+          3.6e-06,
+          3.77e-06,
+          3.87e-06,
+          3.9e-06
+        ],
+        "grade": "measured",
+        "source": "M. R. Vogt et al., IEEE J. Photovoltaics 6 (2016) 111-118; Fe2O3 0.703 permille (703 ppm), via refractiveindex.info, https://refractiveindex.info/?shelf=glass&book=soda-lime&page=Vogt-703ppm",
+        "conditions": "Fe2O3 703 ppm"
+      },
+      "clearWindowGlass": {
+        "axis": "wavelength",
+        "axisUnit": "um",
+        "axisValues": [
+          0.31,
+          0.32,
+          0.33,
+          0.34,
+          0.35,
+          0.36,
+          0.37,
+          0.38,
+          0.39,
+          0.4,
+          0.41,
+          0.42,
+          0.43,
+          0.44,
+          0.45,
+          0.46,
+          0.47,
+          0.48,
+          0.49,
+          0.5,
+          0.51,
+          0.52,
+          0.53,
+          0.54,
+          0.55,
+          0.56,
+          0.57,
+          0.58,
+          0.59,
+          0.6,
+          0.61,
+          0.62,
+          0.63,
+          0.64,
+          0.65,
+          0.66,
+          0.67,
+          0.68,
+          0.69,
+          0.7,
+          0.71,
+          0.72,
+          0.73,
+          0.74,
+          0.75,
+          0.76,
+          0.77,
+          0.78,
+          0.79,
+          0.8,
+          0.81,
+          0.82,
+          0.83,
+          0.84,
+          0.85,
+          0.86,
+          0.87,
+          0.88,
+          0.89,
+          0.9,
+          0.91,
+          0.92,
+          0.93,
+          0.94,
+          0.95,
+          0.96,
+          0.97,
+          0.98,
+          0.99,
+          1.0,
+          1.1,
+          1.2
+        ],
+        "unit": "1",
+        "values": [
+          4.996e-05,
+          1.375e-05,
+          6.281e-06,
+          2.713e-06,
+          1.118e-06,
+          5.419e-07,
+          4.061e-07,
+          5.936e-07,
+          2.828e-07,
+          2.047e-07,
+          2.182e-07,
+          2.279e-07,
+          2.397e-07,
+          2.342e-07,
+          1.925e-07,
+          1.669e-07,
+          1.7e-07,
+          1.683e-07,
+          1.554e-07,
+          1.492e-07,
+          1.499e-07,
+          1.582e-07,
+          1.769e-07,
+          1.988e-07,
+          2.2e-07,
+          2.529e-07,
+          3.051e-07,
+          3.563e-07,
+          4.003e-07,
+          4.548e-07,
+          5.217e-07,
+          5.972e-07,
+          6.913e-07,
+          7.754e-07,
+          8.371e-07,
+          9.108e-07,
+          1.009e-06,
+          1.097e-06,
+          1.159e-06,
+          1.234e-06,
+          1.349e-06,
+          1.466e-06,
+          1.585e-06,
+          1.706e-06,
+          1.83e-06,
+          1.956e-06,
+          2.085e-06,
+          2.214e-06,
+          2.345e-06,
+          2.477e-06,
+          2.617e-06,
+          2.755e-06,
+          2.89e-06,
+          3.022e-06,
+          3.15e-06,
+          3.274e-06,
+          3.394e-06,
+          3.51e-06,
+          3.621e-06,
+          3.727e-06,
+          3.817e-06,
+          3.906e-06,
+          3.995e-06,
+          4.083e-06,
+          4.17e-06,
+          4.261e-06,
+          4.349e-06,
+          4.433e-06,
+          4.514e-06,
+          4.591e-06,
+          5.111e-06,
+          5.374e-06
+        ],
+        "grade": "measured",
+        "source": "M. Rubin, 'Optical properties of soda lime silica glasses', Solar Energy Materials 12 (1985) 275-288; tabulated k for the clear window glass via refractiveindex.info, https://refractiveindex.info/?shelf=glass&book=soda-lime&page=Rubin-clear",
+        "conditions": "Rubin's clear window glass; its iron content is not in the readable record"
+      }
+    },
+    "luminousReflectance": {
+      "value": 0.08,
+      "unit": "1",
+      "grade": "manufacturer",
+      "source": "Pilkington Building Products UK, 'Performance data summary: Low-iron clear float glass, Pilkington Optiwhite and Optiwhite E', publication 4101, July 2011 (determined to EN 410 and EN 673), https://www.flairwindows.com/assets/pilkington-optiwhite-datasheet.pdf",
+      "conditions": "a pane, both faces, EN 410"
+    },
+    "luminousTransmittance": {
+      "axis": "thickness",
+      "axisUnit": "mm",
+      "axisValues": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        8,
+        10,
+        12,
+        15,
+        19
+      ],
+      "unit": "1",
+      "values": [
+        0.92,
+        0.92,
+        0.92,
+        0.91,
+        0.91,
+        0.91,
+        0.91,
+        0.91,
+        0.9,
+        0.9
+      ],
+      "grade": "manufacturer",
+      "source": "Pilkington Building Products UK, 'Performance data summary: Low-iron clear float glass, Pilkington Optiwhite and Optiwhite E', publication 4101, July 2011 (determined to EN 410 and EN 673), https://www.flairwindows.com/assets/pilkington-optiwhite-datasheet.pdf",
+      "conditions": "Pilkington Optiwhite, EN 410"
+    },
+    "solarDirectTransmittance": {
+      "axis": "thickness",
+      "axisUnit": "mm",
+      "axisValues": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        8,
+        10,
+        12,
+        15,
+        19
+      ],
+      "unit": "1",
+      "values": [
+        0.91,
+        0.91,
+        0.91,
+        0.9,
+        0.9,
+        0.89,
+        0.88,
+        0.88,
+        0.87,
+        0.86
+      ],
+      "grade": "manufacturer",
+      "source": "Pilkington Building Products UK, 'Performance data summary: Low-iron clear float glass, Pilkington Optiwhite and Optiwhite E', publication 4101, July 2011 (determined to EN 410 and EN 673), https://www.flairwindows.com/assets/pilkington-optiwhite-datasheet.pdf",
+      "conditions": "Pilkington Optiwhite, EN 410"
+    },
+    "crossCheck": {
+      "note": "The measured spectrum reproduces the maker's measured light transmittance to within 0.005 at 2, 6, 12 and 19 mm, and to within 0.007 at every thickness the maker lists (the largest gaps are at 3 and 4 mm, where the maker's rounded 0.92 sits 0.006 and 0.007 above the prediction; compare luminousTransmittance).",
+      "predictedTransmittance550": {
+        "axis": "thickness",
+        "axisUnit": "mm",
+        "axisValues": [
+          2,
+          6,
+          12,
+          19
+        ],
+        "unit": "1",
+        "values": [
+          0.9151,
+          0.9113,
+          0.9055,
+          0.8988
+        ],
+        "grade": "derived",
+        "derivation": "T = T0 exp(-alpha d) at 550 nm with T0 = (1-R)^2/(1-R^2) for two faces (incoherent), R from Rubin's n, alpha from Rubin's k",
+        "source": "M. Rubin, 'Optical properties of soda lime silica glasses', Solar Energy Materials 12 (1985) 275-288; tabulated k for the low-iron window glass via refractiveindex.info, https://refractiveindex.info/?shelf=glass&book=soda-lime&page=Rubin-lowiron"
+      }
+    },
+    "uvTransmittance": {
+      "value": 0.86,
+      "unit": "1",
+      "grade": "manufacturer",
+      "source": "SCHOTT AG, 'SCHOTT AMIRAN - Anti-Reflective Glass for Showcases', technical data sheet, version February 2022 (values to DIN EN 410; monolithic 4 mm; laminated 4/0.76/4 mm with PVB), https://media.schott.com/api/public/content/15fee70340c44e738fd4f24c40702d8c?v=35137cd2&download=true",
+      "conditions": "4 mm extra-clear low-iron float, EN 410"
+    },
+    "uvTransmittanceClearFloat": {
+      "value": 0.7,
+      "unit": "1",
+      "grade": "manufacturer",
+      "source": "SCHOTT AG, 'SCHOTT AMIRAN - Anti-Reflective Glass for Showcases', technical data sheet, version February 2022 (values to DIN EN 410; monolithic 4 mm; laminated 4/0.76/4 mm with PVB), https://media.schott.com/api/public/content/15fee70340c44e738fd4f24c40702d8c?v=35137cd2&download=true",
+      "conditions": "4 mm conventional float, EN 410"
+    },
+    "colourRenderingIndex": {
+      "value": 99,
+      "unit": "1",
+      "grade": "manufacturer",
+      "source": "SCHOTT AG, 'SCHOTT AMIRAN - Anti-Reflective Glass for Showcases', technical data sheet, version February 2022 (values to DIN EN 410; monolithic 4 mm; laminated 4/0.76/4 mm with PVB), https://media.schott.com/api/public/content/15fee70340c44e738fd4f24c40702d8c?v=35137cd2&download=true",
+      "conditions": "4 mm extra-clear low-iron float, Ra, EN 410"
+    },
+    "edgeColour": {
+      "description": "Pale aqua-blue, seen only through long paths: the edge of a pane, a thick stack, or light running along a pane. Clear float glass is dark green at the edge.",
+      "cause": "The ferrous band's tail absorbs red about three times as strongly as green or blue, so the least absorbed light is blue-green near 490 nm.",
+      "sources": [
+        "Vitro Architectural Glass, 'Heavy Starphire Glass' product page ('With its signature blue edge, Starphire glass is the ideal choice for a wide range of extra-heavy glass applications'; VLT 90-91 %; 3.2 mm to 19 mm), https://www.vitroglazings.com/products/low-iron-glass/starphire-ultra-clear-glass/heavy-starphire-glass/",
+        "J. E. Shelby, 'Lecture 4: Color in commercial glasses', Glass Processing Course, IMI-NFG, Lehigh University, Spring 2015, https://www.lehigh.edu/imi/teched/GlassProcess/Lectures/Lecture04_Shelby_ColoredGlass.pdf",
+        "Guardian Glass, 'Pure. Bright. Boundless. Guardian UltraClear Low-Iron Glass', brochure ver. 6.2019 (2 mm to 12 mm; maximum size 130 in x 204 in), https://www.guardianglass.com/content/dam/guardianindustriesholdings/collateral/ame/brochure_ultra_clear_EN_product_information_2019.pdf"
+      ],
+      "lowIron": {
+        "at450nm": {
+          "axis": "path",
+          "axisUnit": "mm",
+          "axisValues": [
+            12,
+            100,
+            500,
+            1000
+          ],
+          "unit": "1",
+          "values": [
+            0.9859,
+            0.888,
+            0.5523,
+            0.305
+          ],
+          "grade": "derived",
+          "derivation": "internal transmittance exp(-alpha d) at 450 nm; alpha = 4 pi k / wavelength; internal transmittance through a path d is exp(-alpha d)",
+          "source": "M. Rubin, 'Optical properties of soda lime silica glasses', Solar Energy Materials 12 (1985) 275-288; tabulated k for the low-iron window glass via refractiveindex.info, https://refractiveindex.info/?shelf=glass&book=soda-lime&page=Rubin-lowiron"
+        },
+        "at550nm": {
+          "axis": "path",
+          "axisUnit": "mm",
+          "axisValues": [
+            12,
+            100,
+            500,
+            1000
+          ],
+          "unit": "1",
+          "values": [
+            0.9874,
+            0.8996,
+            0.5891,
+            0.347
+          ],
+          "grade": "derived",
+          "derivation": "internal transmittance exp(-alpha d) at 550 nm; alpha = 4 pi k / wavelength; internal transmittance through a path d is exp(-alpha d)",
+          "source": "M. Rubin, 'Optical properties of soda lime silica glasses', Solar Energy Materials 12 (1985) 275-288; tabulated k for the low-iron window glass via refractiveindex.info, https://refractiveindex.info/?shelf=glass&book=soda-lime&page=Rubin-lowiron"
+        },
+        "at650nm": {
+          "axis": "path",
+          "axisUnit": "mm",
+          "axisValues": [
+            12,
+            100,
+            500,
+            1000
+          ],
+          "unit": "1",
+          "values": [
+            0.9593,
+            0.7075,
+            0.1772,
+            0.03141
+          ],
+          "grade": "derived",
+          "derivation": "internal transmittance exp(-alpha d) at 650 nm; alpha = 4 pi k / wavelength; internal transmittance through a path d is exp(-alpha d)",
+          "source": "M. Rubin, 'Optical properties of soda lime silica glasses', Solar Energy Materials 12 (1985) 275-288; tabulated k for the low-iron window glass via refractiveindex.info, https://refractiveindex.info/?shelf=glass&book=soda-lime&page=Rubin-lowiron"
+        }
+      },
+      "clearFloat": {
+        "at450nm": {
+          "axis": "path",
+          "axisUnit": "mm",
+          "axisValues": [
+            12,
+            100,
+            500,
+            1000
+          ],
+          "unit": "1",
+          "values": [
+            0.9375,
+            0.5842,
+            0.06803,
+            0.004628
+          ],
+          "grade": "derived",
+          "derivation": "internal transmittance exp(-alpha d) at 450 nm; alpha = 4 pi k / wavelength; internal transmittance through a path d is exp(-alpha d)",
+          "source": "M. Rubin, 'Optical properties of soda lime silica glasses', Solar Energy Materials 12 (1985) 275-288; tabulated k for the clear window glass via refractiveindex.info, https://refractiveindex.info/?shelf=glass&book=soda-lime&page=Rubin-clear"
+        },
+        "at550nm": {
+          "axis": "path",
+          "axisUnit": "mm",
+          "axisValues": [
+            12,
+            100,
+            500,
+            1000
+          ],
+          "unit": "1",
+          "values": [
+            0.9415,
+            0.6049,
+            0.081,
+            0.006561
+          ],
+          "grade": "derived",
+          "derivation": "internal transmittance exp(-alpha d) at 550 nm; alpha = 4 pi k / wavelength; internal transmittance through a path d is exp(-alpha d)",
+          "source": "M. Rubin, 'Optical properties of soda lime silica glasses', Solar Energy Materials 12 (1985) 275-288; tabulated k for the clear window glass via refractiveindex.info, https://refractiveindex.info/?shelf=glass&book=soda-lime&page=Rubin-clear"
+        },
+        "at650nm": {
+          "axis": "path",
+          "axisUnit": "mm",
+          "axisValues": [
+            12,
+            100,
+            500,
+            1000
+          ],
+          "unit": "1",
+          "values": [
+            0.8235,
+            0.1982,
+            0.000306,
+            9.366e-08
+          ],
+          "grade": "derived",
+          "derivation": "internal transmittance exp(-alpha d) at 650 nm; alpha = 4 pi k / wavelength; internal transmittance through a path d is exp(-alpha d)",
+          "source": "M. Rubin, 'Optical properties of soda lime silica glasses', Solar Energy Materials 12 (1985) 275-288; tabulated k for the clear window glass via refractiveindex.info, https://refractiveindex.info/?shelf=glass&book=soda-lime&page=Rubin-clear"
+        }
+      }
+    },
+    "hemisphericalEmissivity": {
+      "unit": "1",
+      "min": 0.837,
+      "max": 0.84,
+      "grade": "measured",
+      "source": "M. Rubin, 'Optical constants and bulk optical properties of soda lime silica glasses for windows', LBNL publication record (abstract: hemispherical total emissivity 0.837 at 20 degC), https://windows.lbl.gov/publications/optical-constants-and-bulk-optical ; Pilkington North America, Technical Bulletin ATS-129 'Properties of soda-lime silica float glass', 04/2025, https://www.pilkington.com/-/media/pilkington/site-content/usa/window-manufacturers/technical-bulletins/ats-129---properties-of-soda-lime-silica-float-glass.pdf",
+      "conditions": "0.837 at 20 degC (Rubin); 0.84 at 75 degF (ATS-129)"
+    },
+    "wet": "A water film on glass lowers the face's reflection a little, because water's index lies between air's and glass's; drops on the face refract the view behind them. Glass takes up no water, so it never darkens as porous materials do."
+  },
+  "physical": {
+    "density": {
+      "unit": "kg/m3",
+      "min": 2500,
+      "max": 2530,
+      "grade": "manufacturer",
+      "source": "Pilkington North America, Technical Bulletin ATS-129 'Properties of soda-lime silica float glass', 04/2025, https://www.pilkington.com/-/media/pilkington/site-content/usa/window-manufacturers/technical-bulletins/ats-129---properties-of-soda-lime-silica-float-glass.pdf ; Pilkington, 'Properties of soda-lime-silica float glass' (earlier edition of ATS-129 with 'Chemical analysis of a typical clear float glass', citing Button and Pye, Glass in Building, Butterworth Architecture, 1993), http://www.swiftglass.com/assets/floatglass.pdf",
+      "note": "2500 in ATS-129 (2025); 2530 in its earlier edition"
+    },
+    "youngsModulus": {
+      "unit": "GPa",
+      "min": 70.0,
+      "max": 72.0,
+      "grade": "guidance",
+      "source": "Saint-Gobain Building Glass UK, 'Glass Fundamentals GF-1B: The Strength of Glass', 2018 (Table 1 characteristic strengths to EN 572-1, EN 1863-1, EN 12150-1; Table 3 TRLV permissible stresses), https://www.saint-gobain-glass.co.uk/wp-content/uploads/2024/02/Glass-Fundamentals-1B-The-Strength-of-Glass-19-09-2018-1.pdf ; Pilkington North America, Technical Bulletin ATS-129 'Properties of soda-lime silica float glass', 04/2025, https://www.pilkington.com/-/media/pilkington/site-content/usa/window-manufacturers/technical-bulletins/ats-129---properties-of-soda-lime-silica-float-glass.pdf",
+      "note": "70.0 in Saint-Gobain GF-1B; 72 in ATS-129"
+    },
+    "shearModulus": {
+      "value": 30,
+      "unit": "GPa",
+      "grade": "manufacturer",
+      "source": "Pilkington North America, Technical Bulletin ATS-129 'Properties of soda-lime silica float glass', 04/2025, https://www.pilkington.com/-/media/pilkington/site-content/usa/window-manufacturers/technical-bulletins/ats-129---properties-of-soda-lime-silica-float-glass.pdf"
+    },
+    "bulkModulus": {
+      "value": 43,
+      "unit": "GPa",
+      "grade": "manufacturer",
+      "source": "Pilkington North America, Technical Bulletin ATS-129 'Properties of soda-lime silica float glass', 04/2025, https://www.pilkington.com/-/media/pilkington/site-content/usa/window-manufacturers/technical-bulletins/ats-129---properties-of-soda-lime-silica-float-glass.pdf"
+    },
+    "poissonsRatio": {
+      "unit": "1",
+      "min": 0.22,
+      "max": 0.23,
+      "grade": "manufacturer",
+      "source": "Pilkington North America, Technical Bulletin ATS-129 'Properties of soda-lime silica float glass', 04/2025, https://www.pilkington.com/-/media/pilkington/site-content/usa/window-manufacturers/technical-bulletins/ats-129---properties-of-soda-lime-silica-float-glass.pdf ; Pilkington, 'Properties of soda-lime-silica float glass' (earlier edition of ATS-129 with 'Chemical analysis of a typical clear float glass', citing Button and Pye, Glass in Building, Butterworth Architecture, 1993), http://www.swiftglass.com/assets/floatglass.pdf",
+      "note": "0.22 in ATS-129 (2025); 0.23 in its earlier edition"
+    },
+    "specificHeat": {
+      "value": 880,
+      "unit": "J/(kg*K)",
+      "grade": "manufacturer",
+      "source": "Pilkington North America, Technical Bulletin ATS-129 'Properties of soda-lime silica float glass', 04/2025, https://www.pilkington.com/-/media/pilkington/site-content/usa/window-manufacturers/technical-bulletins/ats-129---properties-of-soda-lime-silica-float-glass.pdf",
+      "conditions": "at 75 degF"
+    },
+    "thermalConductivity": {
+      "value": 0.937,
+      "unit": "W/(m*K)",
+      "grade": "manufacturer",
+      "source": "Pilkington North America, Technical Bulletin ATS-129 'Properties of soda-lime silica float glass', 04/2025, https://www.pilkington.com/-/media/pilkington/site-content/usa/window-manufacturers/technical-bulletins/ats-129---properties-of-soda-lime-silica-float-glass.pdf",
+      "conditions": "at 75 degF"
+    },
+    "thermalExpansion": {
+      "value": 8.3e-06,
+      "unit": "1/K",
+      "grade": "manufacturer",
+      "source": "Pilkington North America, Technical Bulletin ATS-129 'Properties of soda-lime silica float glass', 04/2025, https://www.pilkington.com/-/media/pilkington/site-content/usa/window-manufacturers/technical-bulletins/ats-129---properties-of-soda-lime-silica-float-glass.pdf",
+      "conditions": "75-575 degF"
+    },
+    "thermalStressCoefficient": {
+      "value": 0.62,
+      "unit": "MPa/K",
+      "grade": "manufacturer",
+      "source": "Pilkington North America, Technical Bulletin ATS-129 'Properties of soda-lime silica float glass', 04/2025, https://www.pilkington.com/-/media/pilkington/site-content/usa/window-manufacturers/technical-bulletins/ats-129---properties-of-soda-lime-silica-float-glass.pdf"
+    },
+    "hardness": {
+      "unit": "Mohs",
+      "min": 5,
+      "max": 6,
+      "grade": "manufacturer",
+      "source": "Pilkington North America, Technical Bulletin ATS-129 'Properties of soda-lime silica float glass', 04/2025, https://www.pilkington.com/-/media/pilkington/site-content/usa/window-manufacturers/technical-bulletins/ats-129---properties-of-soda-lime-silica-float-glass.pdf"
+    },
+    "fractureSurfaceEnergy": {
+      "value": 3.5,
+      "unit": "J/m2",
+      "grade": "guidance",
+      "source": "Saint-Gobain Building Glass UK, 'Glass Fundamentals GF-1B: The Strength of Glass', 2018 (Table 1 characteristic strengths to EN 572-1, EN 1863-1, EN 12150-1; Table 3 TRLV permissible stresses), https://www.saint-gobain-glass.co.uk/wp-content/uploads/2024/02/Glass-Fundamentals-1B-The-Strength-of-Glass-19-09-2018-1.pdf"
+    },
+    "stressOpticalCoefficient": {
+      "text": "Stress (psi) = 2.18 x retardation (um) / thickness (in)",
+      "grade": "manufacturer",
+      "source": "Pilkington North America, Technical Bulletin ATS-129 'Properties of soda-lime silica float glass', 04/2025, https://www.pilkington.com/-/media/pilkington/site-content/usa/window-manufacturers/technical-bulletins/ats-129---properties-of-soda-lime-silica-float-glass.pdf"
+    },
+    "pores": {
+      "open": false,
+      "note": "A fused amorphous solid with no open pores: the surface law's pore-scale soiling term is zero for glass, and all soiling is a film on the face."
+    }
+  },
+  "surface": {
+    "roughnessRms": {
+      "unit": "nm",
+      "max": 0.25,
+      "grade": "measured",
+      "source": "D. Moseler, G. Heide, G. H. Frischat, 'Atomic force microscope study of the topography of float glasses and a model to explain the bloom effect', Glass Science and Technology 75(4) (2002) 174-183, https://www.osti.gov/etdeweb/biblio/20330699",
+      "conditions": "as-received air and tin sides, AFM over 1 x 1 um2; ripple about 60 nm across and under 1 nm high"
+    },
+    "sides": "The air side is fire-finished. The tin side carries diffused tin: it glows under a shortwave (254 nm) lamp, which is how glaziers find it. After reheating, iron-poor float glass can develop 'bloom' on the tin side, a faint haze from a buckled tin-rich skin.",
+    "sidesSources": [
+      "D. Moseler, G. Heide, G. H. Frischat, 'Atomic force microscope study of the topography of float glasses and a model to explain the bloom effect', Glass Science and Technology 75(4) (2002) 174-183, https://www.osti.gov/etdeweb/biblio/20330699",
+      "Camlab, 'How to distinguish the tin side of float glass' (shortwave 254 nm UV lamp; the tin side glows), https://www.camlab.co.uk/blog/how-to-distinguish-the-tin-side-of-float-glass"
+    ],
+    "bloomSkinThickness": {
+      "unit": "nm",
+      "min": 50,
+      "max": 150,
+      "grade": "measured",
+      "source": "D. Moseler, G. Heide, G. H. Frischat, 'Atomic force microscope study of the topography of float glasses and a model to explain the bloom effect', Glass Science and Technology 75(4) (2002) 174-183, https://www.osti.gov/etdeweb/biblio/20330699",
+      "note": "tin (Sn4+) enrichment after air annealing; the bloom was pronounced only in Fe2O3-poor clear float glasses"
+    }
+  },
+  "acoustic": {
+    "absorption": {
+      "axis": "frequency",
+      "axisUnit": "Hz",
+      "axisValues": [
+        125,
+        250,
+        500,
+        1000,
+        2000,
+        4000
+      ],
+      "unit": "1",
+      "values": [
+        0.18,
+        0.06,
+        0.04,
+        0.03,
+        0.02,
+        0.02
+      ],
+      "grade": "secondary",
+      "source": "Commercial Acoustics, 'Sound absorption coefficient chart (125 Hz-4 kHz)', row 'Glass (6mm pane)', https://commercial-acoustics.com/sound-advice/sound-absorption-coefficient-chart/ ; the same six values listed as 'Large Panes of Heavy Plate Glass' in US Enclosure, 'Sound Absorption Coefficients', http://usenclosure.com/Diffraction%20Graphs/Sound%20Absorption%20Coefficients.pdf",
+      "conditions": "large panes of heavy plate glass (random incidence)"
+    },
+    "absorptionThinWindow": {
+      "axis": "frequency",
+      "axisUnit": "Hz",
+      "axisValues": [
+        125,
+        250,
+        500,
+        1000,
+        2000,
+        4000
+      ],
+      "unit": "1",
+      "values": [
+        0.35,
+        0.25,
+        0.18,
+        0.12,
+        0.07,
+        0.04
+      ],
+      "grade": "secondary",
+      "source": "US Enclosure, 'Sound Absorption Coefficients', row 'Ordinary Window Glass', http://usenclosure.com/Diffraction%20Graphs/Sound%20Absorption%20Coefficients.pdf",
+      "conditions": "ordinary window glass (thin panes, which drum at low frequency)"
+    }
+  },
+  "stock": {
+    "thickness": {
+      "unit": "mm",
+      "min": 2,
+      "max": 19,
+      "grade": "manufacturer",
+      "source": "Pilkington, 'Pilkington Optiwhite' product page (thicknesses 2 mm to 19 mm), https://www.pilkington.com/en/gbl/architectural-and-technical-glass/product-categories/enhanced-visibility/pilkington-optiwhite"
+    },
+    "standardThicknesses": {
+      "unit": "mm",
+      "values": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        8,
+        10,
+        12,
+        15,
+        19
+      ],
+      "grade": "manufacturer",
+      "source": "Pilkington Building Products UK, 'Performance data summary: Low-iron clear float glass, Pilkington Optiwhite and Optiwhite E', publication 4101, July 2011 (determined to EN 410 and EN 673), https://www.flairwindows.com/assets/pilkington-optiwhite-datasheet.pdf"
+    },
+    "sheetLength": {
+      "value": 6000,
+      "unit": "mm",
+      "grade": "manufacturer",
+      "source": "Pilkington, 'Pilkington Optifloat Clear' product page ('jumbo size 6000 x 3210 mm, LES size 3210 x 2550 mm'; EN 572-2), https://www.pilkington.com/en/gbl/architectural-and-technical-glass/product-categories/thermal-insulation/pilkington-optifloat-clear",
+      "note": "the float line's jumbo sheet, the largest standard pane"
+    },
+    "sheetWidth": {
+      "value": 3210,
+      "unit": "mm",
+      "grade": "manufacturer",
+      "source": "Pilkington, 'Pilkington Optifloat Clear' product page ('jumbo size 6000 x 3210 mm, LES size 3210 x 2550 mm'; EN 572-2), https://www.pilkington.com/en/gbl/architectural-and-technical-glass/product-categories/thermal-insulation/pilkington-optifloat-clear",
+      "note": "the float ribbon's width"
+    },
+    "largestSheetByMaker": [
+      {
+        "maker": "Guardian UltraClear",
+        "length": {
+          "value": 5182,
+          "unit": "mm",
+          "grade": "manufacturer",
+          "source": "Guardian Glass, 'Pure. Bright. Boundless. Guardian UltraClear Low-Iron Glass', brochure ver. 6.2019 (2 mm to 12 mm; maximum size 130 in x 204 in), https://www.guardianglass.com/content/dam/guardianindustriesholdings/collateral/ame/brochure_ultra_clear_EN_product_information_2019.pdf",
+          "note": "204 in"
+        },
+        "width": {
+          "value": 3302,
+          "unit": "mm",
+          "grade": "manufacturer",
+          "source": "Guardian Glass, 'Pure. Bright. Boundless. Guardian UltraClear Low-Iron Glass', brochure ver. 6.2019 (2 mm to 12 mm; maximum size 130 in x 204 in), https://www.guardianglass.com/content/dam/guardianindustriesholdings/collateral/ame/brochure_ultra_clear_EN_product_information_2019.pdf",
+          "note": "130 in"
+        }
+      },
+      {
+        "maker": "SCHOTT AMIRAN (coated)",
+        "length": {
+          "value": 3770,
+          "unit": "mm",
+          "grade": "manufacturer",
+          "source": "SCHOTT AG, 'SCHOTT AMIRAN - Anti-Reflective Glass for Showcases', technical data sheet, version February 2022 (values to DIN EN 410; monolithic 4 mm; laminated 4/0.76/4 mm with PVB), https://media.schott.com/api/public/content/15fee70340c44e738fd4f24c40702d8c?v=35137cd2&download=true"
+        },
+        "width": {
+          "value": 1770,
+          "unit": "mm",
+          "grade": "manufacturer",
+          "source": "SCHOTT AG, 'SCHOTT AMIRAN - Anti-Reflective Glass for Showcases', technical data sheet, version February 2022 (values to DIN EN 410; monolithic 4 mm; laminated 4/0.76/4 mm with PVB), https://media.schott.com/api/public/content/15fee70340c44e738fd4f24c40702d8c?v=35137cd2&download=true"
+        }
+      }
+    ],
+    "grain": "None: glass is isotropic until heat treatment adds a stress pattern (see the heat-strengthened and toughened workings)."
+  },
+  "physicalMaterial": {
+    "note": "Friction has no verified source yet (see unverified). The museum's glass is overhead or in vitrines; no floor is glazed."
+  },
+  "photograph": [
+    "The edge: a polished edge, or light running along a pane, is pale aqua-blue; ordinary glass is bottle-green. A green edge means it is not low-iron glass.",
+    "Two reflections per pane, one from each face (about 4 % each head-on, rising toward grazing), offset by the thickness; four in an insulating unit. A laminate adds none.",
+    "Straight lines in reflection: a slow ripple means reheated (heat-strengthened or toughened) glass; a calm reflection means annealed glass.",
+    "Darker patches in polarised skylight or at oblique angles: quench marks of heat treatment.",
+    "A grey veil on the weather face of sloped glass, heaviest where water pools against glazing bars, with drainage streaks below them.",
+    "Vitrines: a dim, faintly coloured reflection on anti-reflective glass; fingerprints at hand height; a thin interlayer line at a polished laminated edge.",
+    "Through the face the view is neutral (Ra 99); under a UV-filtering laminate the light is a touch warmer, because the violet edge is cut."
+  ],
+  "evidence": [],
+  "evidenceSearch": {
+    "searched": [
+      "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR (CREDITS.md, CREDITS_chenghuai.md, every SET.txt)",
+      "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/Journeys (CREDITS.md, every SET.txt)",
+      "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/Textures/CREDITS.md",
+      "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/Albion",
+      "C:/mv/third_party (no SourceArt folder is present)"
+    ],
+    "found": "No CC0 photograph or PBR set of architectural glass is on this PC. The Albion lancet textures are images of stained-glass designs (Art's), not evidence of this substance; JS4 (ambientCG Rock041) is flint, a glassy stone.",
+    "tier": "Glass is calibrated from tier (a), measured tables (Architecture, Matter: 'Metals and glass are calibrated mainly from (a)'). The spectra and tables in this record are that evidence."
+  },
+  "unverified": [
+    {
+      "field": "physicalMaterial.friction",
+      "value": [
+        0.9,
+        1.0
+      ],
+      "unit": "1",
+      "reason": "Static friction of clean dry glass on glass (kinetic 0.4) as quoted by ficientdesign.com ('Coefficient of Friction: Glass on Glass (Dry)', https://ficientdesign.com/glass-on-glass-dry/) without a primary measurement; no handbook table could be read to confirm it."
+    },
+    {
+      "field": "formation.facts.totalIronAsFe2O3 (Guardian UltraClear)",
+      "value": 0.01,
+      "unit": "wt%",
+      "reason": "A search summary attributes 'average iron content of just 0.01%' to Guardian's low-iron page (https://innovation.guardianglass.com/us/en/ultraclear/low-iron-glass); the page refused access (HTTP 403), so it was not read."
+    },
+    {
+      "field": "optics.extinctionCoefficient (iron content of Rubin's low-iron sample)",
+      "value": null,
+      "unit": "wt%",
+      "reason": "Rubin 1985 does not state the sample's iron content in the parts that could be read; the LBNL report PDF is a scan without text."
+    },
+    {
+      "field": "acoustic.absorption (original source)",
+      "value": null,
+      "unit": "1",
+      "reason": "The six values are the classic handbook row, but neither web table names its original; attributing them to Everest, Master Handbook of Acoustics, was not confirmed."
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "schema": "musee.matter.working/1",
+  "key": "heat-strengthened",
+  "name": "Heat-strengthened",
+  "appliesTo": {
+    "families": [
+      "glass"
+    ],
+    "substances": [
+      "low-iron-glass"
+    ]
+  },
+  "over": [
+    "annealed"
+  ],
+  "process": "The cut and edged pane is heated close to its softening point on rollers and cooled by air more gently than for toughening (EN 1863). The faces are left in moderate compression: about twice annealed strength. It breaks into large pieces that stay in a laminate, which is why heat-strengthened plies are chosen for overhead laminated glass.",
+  "strength": {
+    "characteristicBendingStrength": {
+      "value": 70,
+      "unit": "MPa",
+      "grade": "guidance",
+      "source": "Saint-Gobain Building Glass UK, 'Glass Fundamentals GF-1B: The Strength of Glass', 2018 (Table 1 characteristic strengths to EN 572-1, EN 1863-1, EN 12150-1; Table 3 TRLV permissible stresses), https://www.saint-gobain-glass.co.uk/wp-content/uploads/2024/02/Glass-Fundamentals-1B-The-Strength-of-Glass-19-09-2018-1.pdf",
+      "conditions": "EN 1863-1, float, 5 % fractile"
+    },
+    "meanModulusOfRupture": {
+      "value": 83,
+      "unit": "MPa",
+      "grade": "manufacturer",
+      "source": "Pilkington North America, Technical Bulletin ATS-129 'Properties of soda-lime silica float glass', 04/2025, https://www.pilkington.com/-/media/pilkington/site-content/usa/window-manufacturers/technical-bulletins/ats-129---properties-of-soda-lime-silica-float-glass.pdf",
+      "conditions": "60 s load, 50 % probability of breakage"
+    },
+    "permissibleStress": {
+      "value": 29,
+      "unit": "MPa",
+      "grade": "guidance",
+      "source": "Saint-Gobain Building Glass UK, 'Glass Fundamentals GF-1B: The Strength of Glass', 2018 (Table 1 characteristic strengths to EN 572-1, EN 1863-1, EN 12150-1; Table 3 TRLV permissible stresses), https://www.saint-gobain-glass.co.uk/wp-content/uploads/2024/02/Glass-Fundamentals-1B-The-Strength-of-Glass-19-09-2018-1.pdf",
+      "conditions": "TRLV, vertical and overhead alike"
+    }
+  },
+  "flatness": {
+    "rollerWaveCentre": {
+      "value": 0.076,
+      "unit": "mm",
+      "grade": "secondary",
+      "source": "D. Lohrer, J. P. Martinez, 'Making glass flatness a standard', glassonweb.com, 2 April 2024, https://www.glassonweb.com/article/making-glass-flatness-standard",
+      "note": "0.003 in peak to valley, architectural quality"
+    },
+    "rollerWaveBorder": {
+      "value": 0.203,
+      "unit": "mm",
+      "grade": "secondary",
+      "source": "D. Lohrer, J. P. Martinez, 'Making glass flatness a standard', glassonweb.com, 2 April 2024, https://www.glassonweb.com/article/making-glass-flatness-standard",
+      "note": "0.008 in peak to valley, architectural quality"
+    },
+    "note": "Reheating on rollers leaves a faint periodic waviness parallel to one edge; it shows as a ripple in reflections of straight lines."
+  },
+  "strainPattern": {
+    "description": "Quench marks (anisotropy, 'leopard spots'): darker patches or bands where the air nozzles cooled the glass slightly harder. Birefringence makes them visible only in polarised light: most at oblique angles, in skylight polarised by the sun's position, or through polarising sunglasses. They are inherent to all heat-treated glass and are not a defect.",
+    "grade": "manufacturer",
+    "source": "Viracon, Tech Talk VTT-009 'Quench pattern characteristics' (2019; quoting ASTM C1048-18 and EN 12150-1:2000), https://viracon.com/wp-content/uploads/2020/03/VTT-009_QuenchPatternCharacteristics.pdf"
+  },
+  "bloom": "Iron-poor float glass can develop a faint tin-side haze on reheating (see low-iron-glass surface.sides).",
+  "photograph": [
+    "A slow ripple in reflected straight lines (roller wave).",
+    "Patches in polarised skylight (quench marks)."
+  ]
+}

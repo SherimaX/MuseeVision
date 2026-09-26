@@ -1,0 +1,239 @@
+{
+  "schema": "musee.matter.substance/1",
+  "key": "fibrous-plaster",
+  "family": "white",
+  "accentOf": null,
+  "name": "Fibrous plaster (moulding plaster)",
+  "aliases": [
+    "moulding plaster",
+    "run and cast mouldings",
+    "hessian-reinforced gypsum"
+  ],
+  "summary": "A thin laminate made in the workshop: a face coat of plaster of Paris cast against a mould, backed by layers of hessian (jute scrim) soaked in plaster and stiffened with timber laths. The moulds are taken from models whose profiles were run with a zinc template, so a cornice arrives as straight lengths that are fixed on site, with corners and returns cut and made up there. It is the Rotunda's entablature, archivolts, imposts, niche surrounds and sills.",
+  "dossier": "Docs/Matter/fibrous-plaster.md",
+  "face": "plaster-of-paris",
+  "faceNote": "Everything a visitor sees is the plaster of Paris face coat, so optics, luminous reflectance and surface histories are the face substance's; this record holds only what the laminate adds (reinforcement, stock, fixing, failure).",
+  "formation": {
+    "how": "A flexible or plaster mould is taken from a run or modelled original. The face coat is poured or brushed into it, hessian scrim dipped in plaster is laid behind in two or more layers, and sawn timber laths and ribs are bedded in to stiffen the back. When set the cast is lifted, and lengths are fixed on site by wads (strips of plaster-soaked hessian tied round the structure above) or by screws and metalwork.",
+    "history": {
+      "text": "The modern method was patented in 1856 by the French modeller Leonard Alexander Desachy, drawing on a Parisian recipe (Harrison); lighter than solid plaster, easily reinforced and cheap to make in ornate designs, it quickly became popular with homeowners, theatre and music hall owners, and architects (Clifford).",
+      "grade": "guidance",
+      "source": "Harrison, D. (1999) Dramatic Plasterwork: Fibrous Plaster in Theatres. The Building Conservation Directory, https://www.buildingconservation.com/articles/theatre/theatre.htm; Clifford, R. (2016) Maintaining Large Fibrous Plaster Ceilings. The Building Conservation Directory, https://www.buildingconservation.com/articles/fibrous-plaster-ceilings/fibrous-plaster-ceilings.htm"
+    },
+    "facts": {
+      "patentYear": {
+        "value": 1856,
+        "unit": "year CE",
+        "grade": "guidance",
+        "source": "Harrison, D. (1999) Dramatic Plasterwork: Fibrous Plaster in Theatres, https://www.buildingconservation.com/articles/theatre/theatre.htm"
+      },
+      "faceCoatThickness": {
+        "value": 6.35,
+        "unit": "mm",
+        "asReported": "a gel coat (a plaster coating of approximately 1/4 inch to the face of the piece); burlap brushed into the molding at least 1/4 inch away from the face",
+        "grade": "guidance",
+        "source": "Webb, P. (2020) Fibrous Plaster. Walls & Ceilings, 21 February 2020, https://www.wconline.com/articles/92801-fibrous-plaster"
+      }
+    }
+  },
+  "constituents": [
+    {
+      "material": "plaster-of-paris",
+      "role": "matrix and face coat (see that record)"
+    },
+    {
+      "material": "hessian (jute scrim)",
+      "role": "fibre reinforcement laid in layers behind the face coat"
+    },
+    {
+      "material": "softwood laths and ribs",
+      "role": "stiffening bedded into the back"
+    },
+    {
+      "material": "wads (plaster-soaked hessian ties) or screws",
+      "role": "fixing to the structure above or behind"
+    }
+  ],
+  "physical": {
+    "matrixMoistureUptakeHighDensity": {
+      "value": 0.002,
+      "unit": "1",
+      "asReported": "0.2 %",
+      "note": "high-density gypsum matrix, dynamic vapour sorption; conditions as in the paper",
+      "grade": "measured",
+      "source": "Awang Ngah, S., Dams, B., Ansell, M. et al. (2020) Structural performance of fibrous plaster. Part 1: Physical and mechanical properties of hessian and glass fibre reinforced gypsum composites. Construction and Building Materials 259, 120396, https://doi.org/10.1016/j.conbuildmat.2020.120396 (abstract, https://hero.epa.gov/reference/7699584/)"
+    },
+    "matrixMoistureUptakeLowDensity": {
+      "value": 0.01,
+      "unit": "1",
+      "asReported": "1 %",
+      "grade": "measured",
+      "source": "Awang Ngah et al. (2020) Construction and Building Materials 259, 120396, https://doi.org/10.1016/j.conbuildmat.2020.120396"
+    },
+    "hessianMoistureUptake": {
+      "min": 0.2,
+      "unit": "1",
+      "asReported": "more than 20 %",
+      "grade": "measured",
+      "source": "Awang Ngah et al. (2020) Construction and Building Materials 259, 120396, https://doi.org/10.1016/j.conbuildmat.2020.120396"
+    },
+    "hessianServiceLife": {
+      "value": 80,
+      "unit": "year",
+      "asReported": "the normal life of hessian scrim is about 80 years",
+      "grade": "guidance",
+      "source": "Harrison, D. (1999) Dramatic Plasterwork: Fibrous Plaster in Theatres, https://www.buildingconservation.com/articles/theatre/theatre.htm; Clifford, R. (2016), https://www.buildingconservation.com/articles/fibrous-plaster-ceilings/fibrous-plaster-ceilings.htm"
+    },
+    "settingExpansion": {
+      "min": 0.0015,
+      "max": 0.002,
+      "unit": "1",
+      "asReported": "0.15 %-0.20 %",
+      "note": "of the moulding plaster matrix",
+      "grade": "manufacturer",
+      "source": "USG, Submittal Sheet: USG No. 1 Moulding Plaster (Southard, OK), IG1937-USA-ENG rev. 1-20 (2020), https://www.usg.com/content/dam/USG_Marketing_Communications/united_states/product_promotional_materials/finished_assets/usg-no-1-moulding-plaster-submital-southard-IG1937.pdf"
+    }
+  },
+  "acoustic": {
+    "absorption": {
+      "axis": "frequency",
+      "axisUnit": "Hz",
+      "axisValues": [
+        125,
+        250,
+        500,
+        1000,
+        2000,
+        4000
+      ],
+      "unit": "1",
+      "values": [
+        0.14,
+        0.1,
+        0.06,
+        0.04,
+        0.04,
+        0.03
+      ],
+      "grade": "secondary",
+      "conditions": "the nearest tabulated analogue: gypsum or lime plaster, smooth finish on lath (a thin shell over a void, which absorbs more at low frequency than plaster on the hard)",
+      "note": "random-incidence coefficients from a widely reproduced table with no named primary source; sengpielaudio.com lists a different 'rough on lath' row (0.02, 0.03, 0.04, 0.05, 0.04, 0.03), so this row needs a primary check",
+      "source": "Table 'Sound Absorption Coefficients', row 'Plaster - Gypsum, or Lime, Smooth Finish on Lath', http://usenclosure.com/Diffraction%20Graphs/Sound%20Absorption%20Coefficients.pdf"
+    }
+  },
+  "physicalMaterial": {
+    "note": "Not walked on: entablature, archivolts, imposts, niche surrounds and sills. The sills are horizontal but out of reach. No footfall class."
+  },
+  "stock": {
+    "corniceLength": {
+      "value": 3.0,
+      "unit": "m",
+      "asReported": "plain fibrous plaster cornice 3 metres in length",
+      "grade": "manufacturer",
+      "source": "G J Plaster Mouldings, product CN71 plain fibrous plaster cornice, https://www.gjplastermouldings.com/product/cn71-plain-fibrous-plaster-cornice/"
+    },
+    "corners": {
+      "text": "Sections of runs are cut for corners, mitres and awkward returns and fixed with nails or screws, fresh plaster serving as the adhesive; where a running mould cannot reach (its sledge has a length), the last part of a run is finished by hand.",
+      "grade": "guidance",
+      "source": "Who's Been Living in My House? Kemp Town Estate histories, Plasterwork (2015), https://www.kemptownestatehistories.com/plasterwork; Vadstrup, S., Working techniques and repair methods for plaster decorations on facades: running mould decorations. Plaster Architecture project essay, https://www.palazzospinelli.org/plaster/essay/essay/Soren06.html"
+    },
+    "handFinishedRunEnd": {
+      "value": 0.1,
+      "unit": "m",
+      "asReported": "the last 10 cm at the end of the running mould decoration made 'by hand'",
+      "grade": "guidance",
+      "source": "Vadstrup, S., Running mould decorations, https://www.palazzospinelli.org/plaster/essay/essay/Soren06.html"
+    }
+  },
+  "workings": [
+    "run",
+    "cast.plaster"
+  ],
+  "histories": [
+    "white.soiling",
+    "white.micro-cracking",
+    "white.patching"
+  ],
+  "photograph": [
+    "Long straight members with a perfectly continuous profile, broken about every 3 m by the joint between two cast lengths, which reads as a hairline or a faint change of texture.",
+    "Mitres at corners slightly softer and less regular than the run lengths, because they were finished by hand.",
+    "The face is plaster of Paris: matt, fine, sometimes with pinholes; soiling lies on the upward faces of cornices and in the quirks and fillets.",
+    "Hairline cracks along joints and at fixings; in old ceilings, sagging or cracks where wads have failed."
+  ],
+  "evidence": [
+    {
+      "path": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR/P2",
+      "set": "white_stucco",
+      "provider": "Poly Haven",
+      "url": "https://polyhaven.com/a/white_stucco",
+      "licence": "CC0 1.0",
+      "credits": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR/CREDITS.md (row P2: 'fine stucco: coffers, mouldings', 2.0 m)",
+      "tier": "reference",
+      "shows": "The fine, pinholed face of set plaster, as on a cast moulding length.",
+      "statistics": {
+        "colorMeanLinear": {
+          "value": [
+            0.6802,
+            0.6513,
+            0.6286
+          ],
+          "unit": "1",
+          "note": "exposure unknown, not an albedo",
+          "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR/stats.json",
+          "derivation": "mean over a 256 x 256 resample of the set Color.png, decoded from sRGB to linear (windows/Scripts/pbr_fetch.py, stats())",
+          "grade": "derived",
+          "space": "linear, sRGB (Rec.709) primaries, D65 white, decoded from the set Color.png"
+        }
+      }
+    }
+  ],
+  "evidenceSearch": {
+    "searched": [
+      "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR (CREDITS.md, CREDITS_chenghuai.md, every SET.txt, stats.json, chenghuai_stats.json)",
+      "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/Textures/CREDITS.md",
+      "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/Journeys/CREDITS.md",
+      "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/Albion",
+      "C:/mv/third_party (no SourceArt folder present)"
+    ],
+    "found": "P2 (Poly Haven white_stucco, 'fine stucco: coffers, mouldings') shows the plaster face. No photograph of a fibrous plaster cornice or its joints is on this PC.",
+    "tier": "The local sets are reference photographs of unknown exposure (texture, relief and ageing pattern only). Albedo needs tier (b), a ColorChecker photograph of a physical specimen; tier (a) here gives only the bounds listed under optics.luminousReflectance."
+  },
+  "unverified": [
+    {
+      "field": "total thickness of a fibrous plaster casting (face coat, hessian layers, back)",
+      "min": 10,
+      "max": 25,
+      "unit": "mm",
+      "reason": "Only the face coat (about 6 mm, Webb 2020) was sourced; laboratory laminates of 10 mm are reported in the search summary of Awang Ngah et al. (2020) but the paper itself was not read."
+    },
+    {
+      "field": "mass per unit area of a fibrous plaster panel",
+      "unit": "kg/m2",
+      "reason": "No sourced figure found.",
+      "value": null
+    },
+    {
+      "field": "how butt joints between cast lengths are stopped and how visible they stay",
+      "unit": "mm",
+      "reason": "Trade practice is to stop joints in plaster, but no source read in this search states it or gives a joint width.",
+      "value": null
+    },
+    {
+      "field": "maximum length or panel size cast in one piece beyond the 3 m cornice stock",
+      "unit": "m",
+      "reason": "Only one manufacturer's stock length was verified.",
+      "value": null
+    }
+  ],
+  "sources": [
+    "Awang Ngah, S., Dams, B., Ansell, M. et al. (2020) Construction and Building Materials 259, 120396, https://doi.org/10.1016/j.conbuildmat.2020.120396",
+    "Clifford, R. (2016) Maintaining Large Fibrous Plaster Ceilings. The Building Conservation Directory.",
+    "G J Plaster Mouldings, CN71 plain fibrous plaster cornice, https://www.gjplastermouldings.com/product/cn71-plain-fibrous-plaster-cornice/",
+    "Harrison, D. (1999) Dramatic Plasterwork: Fibrous Plaster in Theatres. The Building Conservation Directory.",
+    "USG IG1937 rev. 1-20 (No. 1 Moulding Plaster).",
+    "Vadstrup, S., Running mould decorations, https://www.palazzospinelli.org/plaster/essay/essay/Soren06.html",
+    "Who's Been Living in My House? Kemp Town Estate histories, Plasterwork (2015), https://www.kemptownestatehistories.com/plasterwork",
+    "Webb, P. (2020) Fibrous Plaster. Walls & Ceilings.",
+    "Sound absorption table (secondary): http://usenclosure.com/Diffraction%20Graphs/Sound%20Absorption%20Coefficients.pdf"
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "schema": "musee.matter.working/1",
+  "key": "sawn.cross-cut",
+  "name": "Sawn cross-cut (fleuri, along the bed)",
+  "kind": "cut",
+  "appliesTo": {
+    "families": [
+      "stone"
+    ],
+    "substances": [
+      "travertine",
+      "cream-marble"
+    ]
+  },
+  "over": [],
+  "process": "The block is sawn with the saw plane parallel to the bedding, so the face lies within one layer and shows its cloudy, flowery plan; then left as sawn, or honed or polished.",
+  "processSources": [
+    "Natural Stone Institute (2022) Dimension Stone Design Manual, chapter 12 'Travertine' (Specification, Product Description, Technical Data), pp. 12-1 to 12-14, https://transparencycatalog.com/assets/uploads/greener-images/12-TRAVERTINE-2022.pdf, Product Description 10.1.2"
+  ],
+  "bedToFace": {
+    "value": 0,
+    "unit": "deg",
+    "grade": "guidance",
+    "source": "Natural Stone Institute (2022) Dimension Stone Design Manual, chapter 12 'Travertine' (Specification, Product Description, Technical Data), pp. 12-1 to 12-14, https://transparencycatalog.com/assets/uploads/greener-images/12-TRAVERTINE-2022.pdf, Product Description 10.1.2 ('the fleuri cut is parallel to the bedding plane')",
+    "conditions": "angle between the face and the bedding planes"
+  },
+  "appearance": [
+    {
+      "text": "Fleuri, sometimes called cross cut: a flowery, random pattern.",
+      "grade": "guidance",
+      "source": "Natural Stone Institute (2022) Dimension Stone Design Manual, chapter 12 'Travertine' (Specification, Product Description, Technical Data), pp. 12-1 to 12-14, https://transparencycatalog.com/assets/uploads/greener-images/12-TRAVERTINE-2022.pdf, Product Description 10.1.2"
+    },
+    {
+      "text": "A uniform appearance with larger, irregular holes; the cut of the Colosseum's travertine.",
+      "grade": "manufacturer",
+      "source": "Alberti e Alberti (Tivoli), 'Travertino Romano Classico', technical properties to UNI EN test standards, product page read 2026-09-26, https://marmialberti.it/en/travertino-romano-classico/",
+      "note": "the Colosseum attribution is the maker's statement"
+    }
+  ],
+  "weakness": {
+    "text": "Strong as cut, but in high-traffic paving holes may appear after installation where thin-walled cavities lie at or near the face; filling them afterwards is accepted practice.",
+    "grade": "guidance",
+    "source": "Natural Stone Institute (2022) Dimension Stone Design Manual, chapter 12 'Travertine' (Specification, Product Description, Technical Data), pp. 12-1 to 12-14, https://transparencycatalog.com/assets/uploads/greener-images/12-TRAVERTINE-2022.pdf, Product Description 10.1.2"
+  },
+  "cutDependence": {
+    "text": "The two cuts give different strength, and the cut the project uses is tested.",
+    "grade": "guidance",
+    "source": "Natural Stone Institute (2022) Dimension Stone Design Manual, chapter 12 'Travertine' (Specification, Product Description, Technical Data), pp. 12-1 to 12-14, https://transparencycatalog.com/assets/uploads/greener-images/12-TRAVERTINE-2022.pdf, Technical Data 2.3"
+  },
+  "photograph": [
+    "No bands: soft clouds of cream and honey, with rounded, irregular voids scattered over the face.",
+    "Voids are larger and less aligned than in a vein-cut slab of the same stone.",
+    "On a busy floor, thin-walled voids near the face open through it and are later filled."
+  ],
+  "unverified": [
+    {
+      "field": "surface.voidFaceFraction (cross-cut)",
+      "value": null,
+      "unit": "1",
+      "reason": "No measured void area on a cross-cut face of Roman travertine was found."
+    }
+  ],
+  "sources": [
+    "Natural Stone Institute (2022) Dimension Stone Design Manual, chapter 12 'Travertine' (Specification, Product Description, Technical Data), pp. 12-1 to 12-14, https://transparencycatalog.com/assets/uploads/greener-images/12-TRAVERTINE-2022.pdf",
+    "Alberti e Alberti (Tivoli), 'Travertino Romano Classico', technical properties to UNI EN test standards, product page read 2026-09-26, https://marmialberti.it/en/travertino-romano-classico/"
+  ]
+}

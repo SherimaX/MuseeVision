@@ -1,0 +1,36 @@
+{
+  "schema": "musee.matter.history/1",
+  "key": "glass.edge-delamination",
+  "name": "Laminate edge delamination",
+  "family": "glass",
+  "surfaceLawTerms": [
+    "chemistry"
+  ],
+  "describes": "Where a laminate's edge is exposed, moisture can reach the PVB and the interlayer can lose its bond along the edge: a narrow band of silvery bubbles or clouding. Modern PVB shows none, or small defects mostly under 3 mm deep; an obsolete PVB type showed a band up to about 12 mm deep within a few years.",
+  "terms": {
+    "depthModernPvb": {
+      "unit": "mm",
+      "min": 0,
+      "max": 4.7,
+      "grade": "measured",
+      "source": "P. Davies, R. Cadwallader (DuPont), 'Delamination issues with laminated glass - causes and prevention', Glass Processing Days, Session 16, p. 427 (the PDF is undated; the latest inspection it reports is October 2002), https://www.aisglass.com/wp-content/uploads/2020/11/AIS-82.pdf",
+      "note": "B14-type PVB. In service (Changi Terminal 2, 1995 extension): zero or almost zero, with occasional localised patches up to 2 mm deep. After 54 months of Florida exposure with open edges (annealed laminates): 57 % of defects under 1.6 mm deep, 39 % from 1.6 to 3.1 mm, and 4 % of the exposed edge length from 3.2 to 4.7 mm. The paper's conclusion: most defects under 3.1 mm."
+    },
+    "depthObsoletePvb": {
+      "unit": "mm",
+      "min": 8,
+      "max": 12,
+      "grade": "measured",
+      "source": "P. Davies, R. Cadwallader (DuPont), 'Delamination issues with laminated glass - causes and prevention', Glass Processing Days, Session 16, p. 427 (the PDF is undated; the latest inspection it reports is October 2002), https://www.aisglass.com/wp-content/uploads/2020/11/AIS-82.pdf",
+      "note": "'Type X' PVB: about 12 mm at the Sydney Opera House by 1978; about 8 mm at Changi Terminal 2 (glazed about 1991)"
+    },
+    "sunburst": {
+      "text": "'Sunburst' delaminations at the edges of laminated toughened glass come from clamping during autoclaving, and optical distortion is normally evident there; they are a making defect.",
+      "grade": "measured",
+      "source": "P. Davies, R. Cadwallader (DuPont), 'Delamination issues with laminated glass - causes and prevention', Glass Processing Days, Session 16, p. 427 (the PDF is undated; the latest inspection it reports is October 2002), https://www.aisglass.com/wp-content/uploads/2020/11/AIS-82.pdf"
+    }
+  },
+  "photograph": [
+    "A narrow silvery or cloudy band along an exposed laminated edge."
+  ]
+}

@@ -1,0 +1,229 @@
+{
+  "schema": "musee.matter.history/1",
+  "key": "bronze.weathering",
+  "name": "Outdoor patina of the copper alloys",
+  "family": "bronze",
+  "appliesTo": {
+    "families": [
+      "bronze",
+      "accent"
+    ],
+    "substances": [
+      "bronze",
+      "brass"
+    ],
+    "workings": [
+      "cast.bronze",
+      "brushed",
+      "patinated"
+    ]
+  },
+  "surfaceLawTerms": [
+    "chemistry",
+    "age",
+    "wetness"
+  ],
+  "describes": "Out of doors, rain, dew and polluted air turn the copper alloys' tarnish into a true patina. In moist climates the metal goes from salmon pink through deepening browns to the grey-green or blue-green of a mature patina, made mostly of basic copper sulfate (brochantite) and basic copper carbonate; near the sea the shares of sulfates, chlorides and carbonates differ, and the chloride atacamite forms under saline conditions. In arid climates it stays in the browns, to a walnut colour. The change is fast in the first years and then slows to almost nothing. Horizontal faces, which stay wet longer, go green first; vertical faces lag; sheltered faces stay brown. The alloy tints the result: tin bronze browns, cartridge brass stays yellowish before it greens. A founder's brown patina outdoors is carried along by the same process.",
+  "terms": {
+    "sequence": {
+      "text": "'In moist climates, copper typically begins as a reddish salmon pink and then progress through deepening browns to the greenish blue of a mature patina. In arid climates, the coloring tends to move through various shades of brown to a walnut hue.'",
+      "source": "Copper Development Association, 'Copper Brass Bronze Design Handbook: Architectural Applications' (A4039), p. 11, https://www.copper.org/publications/pub_list/pdf/A4039-ArchitecturalApplications.pdf",
+      "grade": "guidance"
+    },
+    "pace": {
+      "text": "Rapid at first, then slowing to an imperceptible rate after several years; vertical surfaces weather more slowly than horizontal.",
+      "source": "Copper Development Association, A4039, p. 12, https://www.copper.org/publications/pub_list/pdf/A4039-ArchitecturalApplications.pdf",
+      "grade": "guidance"
+    },
+    "timescale": {
+      "text": "A copper roof shown after more than 20 years in a humid environment; a mature patina 'characteristic of over 80 years' exposure in a humid location'.",
+      "humidMature": {
+        "min": 20,
+        "max": 80,
+        "unit": "year",
+        "source": "Copper Development Association, A4039, Figure VI-8 captions (a) and (b), https://www.copper.org/publications/pub_list/pdf/A4039-ArchitecturalApplications.pdf",
+        "grade": "guidance",
+        "note": "Illustrated examples of copper, not controlled measurements of bronze."
+      }
+    },
+    "composition": {
+      "text": "'Natural patinas are predominantly mixtures of basic copper carbonate and basic copper sulfate (the latter being the mineral, brochantite).' Patinas formed near the sea 'contain slightly different percentages of copper sulfates, chlorides and carbonates'. Composition, and so colour, is set by moisture, sulfides, sulfates, carbon dioxide and chlorides, and in brasses and bronzes also by the alloy.",
+      "source": "Copper Development Association, A4039, pp. 12 and 41, https://www.copper.org/publications/pub_list/pdf/A4039-ArchitecturalApplications.pdf",
+      "grade": "guidance"
+    },
+    "earlyBrownMeasured": {
+      "text": "Polished tin bronze immersed in a mixed-acid (urban acid-rain) solution for five one-week cycles, dried and measured after each: the colour fell from L* 84.07, a* 8.26, b* 14.63 to L* 49.89, a* 1.13, b* 9.43 (7 % Sn; delta E 35.28). With 3 % Sn: L* 52.08, a* -1.55, b* 12.08 (delta E 33.78). X-ray diffraction of the corroded bronzes found cuprite, cassiterite and brochantite.",
+      "L": {
+        "value": 49.89,
+        "unit": "CIELAB",
+        "source": "L. Gianni, G. E. Gigante, M. Cavallini, A. Adriaens, 'Corrosion of bronzes by extended wetting with single versus mixed acidic pollutants', Materials 7(5) (2014) 3353-3370, doi:10.3390/ma7053353, https://pmc.ncbi.nlm.nih.gov/articles/PMC5453210/",
+        "grade": "measured",
+        "conditions": "7 % Sn bronze, five one-week immersions in the mixed-acid (acid-rain) solution; X-Rite SP64 spectrophotometer"
+      },
+      "a": {
+        "value": 1.13,
+        "unit": "CIELAB",
+        "source": "L. Gianni et al. 2014, https://pmc.ncbi.nlm.nih.gov/articles/PMC5453210/",
+        "grade": "measured"
+      },
+      "b": {
+        "value": 9.43,
+        "unit": "CIELAB",
+        "source": "L. Gianni et al. 2014, https://pmc.ncbi.nlm.nih.gov/articles/PMC5453210/",
+        "grade": "measured"
+      },
+      "albedo": {
+        "value": [
+          0.213,
+          0.179,
+          0.135
+        ],
+        "unit": "1",
+        "space": "linear Rec.709, D65",
+        "grade": "derived",
+        "derivation": "CIELAB (49.89, 1.13, 9.43) to XYZ with the D65 2-degree white (the paper does not report its illuminant and observer) and to linear Rec.709.",
+        "source": "L. Gianni, G. E. Gigante, M. Cavallini, A. Adriaens, 'Corrosion of bronzes by extended wetting with single versus mixed acidic pollutants', Materials 7(5) (2014) 3353-3370, doi:10.3390/ma7053353, https://pmc.ncbi.nlm.nih.gov/articles/PMC5453210/"
+      }
+    },
+    "thickness": {
+      "text": "After 9 years in a moderately polluted city (Ljubljana), a natural patina on bronze was 5-10 um thick; artificial patinas on the same bronze: brown sulfide up to 17 um, green chloride 20-45 um, green-blue nitrate up to 30 um.",
+      "natural": {
+        "min": 5,
+        "max": 10,
+        "unit": "um",
+        "source": "T. Kosec, M. Bajt Leban, P. Ropret, M. Finsgar, 'The impact of urban rain on the changes of bare and artificially patinated bronze during 9-year exposure', Environ. Sci. Pollut. Res. 31 (2024) 31925-31941, doi:10.1007/s11356-024-33369-9, https://pmc.ncbi.nlm.nih.gov/articles/PMC11133102/",
+        "grade": "measured"
+      },
+      "rain": {
+        "text": "Average rain at the site, 2012-2021: sulfate 0.686 mg/L, chloride 0.287 mg/L, nitrate 0.943 mg/L.",
+        "sulfate": {
+          "value": 0.686,
+          "unit": "mg/L",
+          "source": "T. Kosec et al. 2024, https://pmc.ncbi.nlm.nih.gov/articles/PMC11133102/",
+          "grade": "measured"
+        },
+        "chloride": {
+          "value": 0.287,
+          "unit": "mg/L",
+          "source": "T. Kosec et al. 2024, https://pmc.ncbi.nlm.nih.gov/articles/PMC11133102/",
+          "grade": "measured"
+        },
+        "nitrate": {
+          "value": 0.943,
+          "unit": "mg/L",
+          "source": "T. Kosec et al. 2024, https://pmc.ncbi.nlm.nih.gov/articles/PMC11133102/",
+          "grade": "measured"
+        }
+      }
+    },
+    "minerals": [
+      {
+        "phase": "brochantite",
+        "formula": "Cu4(SO4)(OH)6",
+        "colour": "emerald-green, blackish green, pale green; bluish green in transmitted light; streak pale green; vitreous",
+        "refractiveIndex": {
+          "min": 1.728,
+          "max": 1.8,
+          "unit": "1",
+          "source": "Handbook of Mineralogy, 'Brochantite' (alpha 1.728, beta 1.771, gamma 1.800), https://www.handbookofmineralogy.org/pdfs/brochantite.pdf",
+          "grade": "measured"
+        },
+        "density": {
+          "value": 3970,
+          "unit": "kg/m3",
+          "source": "Handbook of Mineralogy, 'Brochantite' (D(meas.) = 3.97), https://www.handbookofmineralogy.org/pdfs/brochantite.pdf",
+          "grade": "measured"
+        },
+        "f0": {
+          "value": 0.077,
+          "unit": "1",
+          "grade": "derived",
+          "derivation": "F0 = ((n-1)/(n+1))^2 with n the mean of the three principal refractive indices.",
+          "source": "J. W. Anthony, R. A. Bideaux, K. W. Bladh, M. C. Nichols (eds.), Handbook of Mineralogy, Mineralogical Society of America, 'Brochantite', https://www.handbookofmineralogy.org/pdfs/brochantite.pdf"
+        }
+      },
+      {
+        "phase": "atacamite",
+        "formula": "Cu2Cl(OH)3",
+        "colour": "bright green, dark emerald-green to blackish green; streak apple-green; adamantine; forms under arid, saline conditions",
+        "refractiveIndex": {
+          "min": 1.831,
+          "max": 1.88,
+          "unit": "1",
+          "source": "Handbook of Mineralogy, 'Atacamite' (alpha 1.831, beta 1.861, gamma 1.880), https://www.handbookofmineralogy.org/pdfs/atacamite.pdf",
+          "grade": "measured"
+        },
+        "density": {
+          "min": 3745,
+          "max": 3776,
+          "unit": "kg/m3",
+          "source": "Handbook of Mineralogy, 'Atacamite' (D(meas.) = 3.745-3.776), https://www.handbookofmineralogy.org/pdfs/atacamite.pdf",
+          "grade": "measured"
+        },
+        "f0": {
+          "value": 0.09,
+          "unit": "1",
+          "grade": "derived",
+          "derivation": "F0 = ((n-1)/(n+1))^2 with n the mean of the three principal refractive indices.",
+          "source": "J. W. Anthony, R. A. Bideaux, K. W. Bladh, M. C. Nichols (eds.), Handbook of Mineralogy, Mineralogical Society of America, 'Atacamite', https://www.handbookofmineralogy.org/pdfs/atacamite.pdf"
+        }
+      },
+      {
+        "phase": "cuprite",
+        "formula": "Cu2O",
+        "note": "The first layer, next to the metal; optics recorded in the working 'patinated'.",
+        "source": "Handbook of Mineralogy, 'Cuprite', https://www.handbookofmineralogy.org/pdfs/cuprite.pdf",
+        "grade": "measured"
+      }
+    ]
+  },
+  "drivers": [
+    {
+      "driver": "rainHistory",
+      "owner": "Time",
+      "meaning": "rain and dew over the piece's life (MPC_Moment and the weather record)",
+      "source": "MuseeVision/Docs/Architecture.md, Matter (the live terms: MPC_Moment rain and snow history)",
+      "grade": "design"
+    },
+    {
+      "driver": "skyExposure",
+      "owner": "Form",
+      "meaning": "the share of sky a face sees; a sheltered face stays brown",
+      "source": "MuseeVision/Docs/Architecture.md, Matter (piece table: sky exposure)",
+      "grade": "design"
+    },
+    {
+      "driver": "wash",
+      "owner": "Form",
+      "meaning": "where run-off gathers and dries, which goes green first",
+      "source": "MuseeVision/Docs/Architecture.md, Matter (vertex colour: wash exposure)",
+      "grade": "design"
+    },
+    {
+      "driver": "age",
+      "owner": "Matter piece table",
+      "meaning": "years the piece has been in service",
+      "source": "MuseeVision/Docs/Architecture.md, Matter (piece table: age)",
+      "grade": "design"
+    }
+  ],
+  "photograph": [
+    "Look for green where water lingers and dries (tops of mouldings, horizontal faces, drip lines) and brown where it does not (sheltered undersides, vertical faces).",
+    "Streaks of green run-down on vertical faces.",
+    "Bright metal only where hands keep touching.",
+    "The green is matte and powdery-looking.",
+    "The brown under it keeps a faint metallic sheen."
+  ],
+  "unverified": [
+    {
+      "field": "terms.matureGreenAlbedo",
+      "value": null,
+      "unit": "1",
+      "reason": "No measured L*a*b* or reflectance of a mature green patina on bronze was read; the mineral data give colour names and indices, not albedo."
+    },
+    {
+      "field": "terms.runoffStaining",
+      "reason": "Green staining of stone below weathering bronze is widely observed; no measured source was read."
+    }
+  ]
+}

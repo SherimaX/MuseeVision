@@ -1,0 +1,100 @@
+{
+  "schema": "musee.matter.working/1",
+  "key": "trowelled",
+  "name": "Trowelled (steel-trowel closed finish)",
+  "appliesTo": {
+    "families": [
+      "white"
+    ],
+    "substances": [
+      "lime-plaster"
+    ]
+  },
+  "over": [],
+  "process": "The setting coat of lime and fine sand or marble dust is laid in two or three thin coats in quick succession, lightly wetted and floated with a timber float as it begins to set, then polished with a steel trowel as it hardens. Over the following hours and days the plasterer wets, scours and polishes again to close shrinkage cracks and crazing. A trowel gives a fine closed finish; wooden and sponge floats alone give an open, sandy texture.",
+  "steps": [
+    {
+      "step": "lay setting stuff in two or three thin coats in quick succession",
+      "source": "Napier, W. & Jenkins, M. (2018) Inform Guide: Plain Lime Plastering. Historic Environment Scotland, https://www.historicenvironment.scot/archives-and-research/publications/publication/?publicationId=67d4d72c-7b8c-4622-a244-a94b01090177",
+      "grade": "guidance"
+    },
+    {
+      "step": "float with a timber float as it begins to set",
+      "source": "Napier & Jenkins (2018), Historic Environment Scotland, https://www.historicenvironment.scot/archives-and-research/publications/publication/?publicationId=67d4d72c-7b8c-4622-a244-a94b01090177",
+      "grade": "guidance"
+    },
+    {
+      "step": "polish with a steel trowel as it sets to a hardened finish",
+      "source": "Napier & Jenkins (2018), Historic Environment Scotland, https://www.historicenvironment.scot/archives-and-research/publications/publication/?publicationId=67d4d72c-7b8c-4622-a244-a94b01090177",
+      "grade": "guidance"
+    },
+    {
+      "step": "re-wet, scour and polish over hours and days to control shrinkage cracking and crazing",
+      "source": "Napier & Jenkins (2018), Historic Environment Scotland, https://www.historicenvironment.scot/archives-and-research/publications/publication/?publicationId=67d4d72c-7b8c-4622-a244-a94b01090177",
+      "grade": "guidance"
+    }
+  ],
+  "finish": {
+    "coatThickness": {
+      "min": 2,
+      "max": 3,
+      "unit": "mm",
+      "source": "Napier & Jenkins (2018) Inform Guide: Plain Lime Plastering, Historic Environment Scotland, https://www.historicenvironment.scot/archives-and-research/publications/publication/?publicationId=67d4d72c-7b8c-4622-a244-a94b01090177",
+      "grade": "guidance"
+    },
+    "layers": {
+      "min": 2,
+      "max": 3,
+      "unit": "coat",
+      "source": "Ratcliffe, T. (2006) Internal Lime-Plastering. The Building Conservation Directory, https://www.buildingconservation.com/articles/internallimeplast/lime_plaster.htm ('two or three very thin layers', laid in alternate directions)",
+      "grade": "guidance"
+    },
+    "closedVersusOpen": {
+      "text": "a trowel achieves a fine closed finish; a combination of wooden and sponge floats creates an open textured finish",
+      "source": "Ratcliffe (2006) Internal Lime-Plastering, https://www.buildingconservation.com/articles/internallimeplast/lime_plaster.htm",
+      "grade": "guidance"
+    },
+    "classicalPolish": {
+      "text": "well-made stucco, laid thick in three sand and three marble-dust coats, takes a high polish like a thick silver mirror, while thin plaster cracks and soon decays",
+      "source": "Vitruvius, De Architectura VII.3.6 and VII.3.9, trans. J. Gwilt (1826), https://penelope.uchicago.edu/Thayer/E/Roman/Texts/Vitruvius/7*.html",
+      "grade": "historical"
+    },
+    "gaugedSetting": {
+      "text": "the setting coat mix can be gauged with plaster of Paris to minimise the need for scouring",
+      "source": "Ratcliffe (2006) Internal Lime-Plastering, https://www.buildingconservation.com/articles/internallimeplast/lime_plaster.htm",
+      "grade": "guidance"
+    }
+  },
+  "surface": {
+    "skin": "Closed and dense: trowelling presses the fine calcite and binder to the face, so the finish is smoother and less porous at the surface than the body below.",
+    "sheen": "A soft sheen from the steel polish, strongest where the trowel pressed hardest; not a varnish gloss.",
+    "texture": "Long shallow arcs and overlaps of the trowel, laid in alternate directions coat by coat; broad, low clouding where suction varied.",
+    "arrises": "Formed against rules or run members; finished by hand, so slightly softened.",
+    "evidence": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR/P1 (ambientCG Plaster001, CC0 1.0): trowel strokes in the normal map, clouding in the colour map."
+  },
+  "photograph": [
+    "Raking light shows long trowel arcs and slight undulation over metres; frontal light shows almost nothing but a faint sheen.",
+    "A specular highlight that is broad and soft, never a sharp reflection, except on a burnished stucco lustro finish."
+  ],
+  "unverified": [
+    {
+      "field": "surface.sheen (specular lobe width)",
+      "min": 0.3,
+      "max": 0.6,
+      "unit": "1",
+      "reason": "No measured BRDF or gloss reading of trowelled lime plaster was found. Needs a goniometric measurement or a tier (b) specimen under raking light.",
+      "conditions": "GGX (Trowbridge-Reitz) roughness alpha"
+    },
+    {
+      "field": "surface.texture (trowel stroke length and relief)",
+      "value": null,
+      "unit": "mm",
+      "reason": "No measured profile of trowel marks was found; the P1 evidence set shows their pattern but its height map is not calibrated."
+    }
+  ],
+  "sources": [
+    "Napier, W. & Jenkins, M. (2018) Inform Guide: Plain Lime Plastering. Historic Environment Scotland.",
+    "Ratcliffe, T. (2006) Internal Lime-Plastering. The Building Conservation Directory, https://www.buildingconservation.com/articles/internallimeplast/lime_plaster.htm",
+    "Vitruvius, De Architectura, Book VII, trans. J. Gwilt (1826), https://penelope.uchicago.edu/Thayer/E/Roman/Texts/Vitruvius/7*.html"
+  ]
+}

@@ -1,0 +1,445 @@
+{
+  "schema": "musee.matter.substance/1",
+  "key": "brass",
+  "name": "Cartridge brass CuZn30 (70/30), the bronze family's declared accent",
+  "family": "accent",
+  "accentOf": "bronze",
+  "summary": "A wrought yellow brass of 70 parts copper to 30 parts zinc (UNS C26000 'Cartridge Brass, 70%'; EN CW505L CuZn30). It is a single-phase brass that works well cold and is made as sheet, strip, rod, tube and wire, so it is the metal of the woven mesh of the Reserve's racks and of small brushed fittings. It is a copper alloy and ages like the bronze, but it is yellower: it is declared as an accent of the bronze family, never a second bronze.",
+  "dossier": "Docs/Matter/brass.md",
+  "workings": [
+    "brushed",
+    "patinated"
+  ],
+  "histories": [
+    "bronze.tarnish",
+    "bronze.wear",
+    "bronze.weathering"
+  ],
+  "identity": {
+    "class": "metal, copper alloy, alpha brass (single-phase Cu-Zn solid solution)",
+    "designations": [
+      {
+        "system": "UNS",
+        "designation": "C26000 'Cartridge Brass, 70%'",
+        "source": "Copper Development Association, 'Copper Brass Bronze Design Handbook: Architectural Applications' (A4039), Table 1 ('C26000, Cartridge Brass, 70%: 70% copper, 30% zinc'), https://www.copper.org/publications/pub_list/pdf/A4039-ArchitecturalApplications.pdf",
+        "grade": "guidance"
+      },
+      {
+        "system": "EN 1652 / EN 12164 (wrought copper alloys)",
+        "designation": "CuZn30",
+        "number": "CW505L",
+        "source": "EN 1412 'Copper and copper alloys - European numbering system' (CW505L = CuZn30); the European equivalent of C26000",
+        "grade": "guidance",
+        "note": "The text of EN 1412 was not read (the standard is sold, not published); CW505L is the European number under which CuZn30 is traded. No number in this record depends on it."
+      }
+    ],
+    "whyAnAccent": {
+      "text": "Decision D-014 reads the boards' brass as a declared accent of the bronze family: one bronze, and brass only where a wrought yellow copper alloy is the real material (woven wire, deep-drawn or thin sheet).",
+      "source": "MuseeVision/Journal/Decisions.md, D-014 (Matter)",
+      "grade": "design"
+    },
+    "colourAgainstTheBronze": {
+      "text": "Natural colour of C26000: yellow ('Yellow-Gold' in the colour-matching table); weathered: yellowish, ultimately to grey-green patina. The bronze (tin bronze) is golden with more red.",
+      "source": "Copper Development Association, A4039, Table 1 and Table 7 (Color-matched Copper Alloys), https://www.copper.org/publications/pub_list/pdf/A4039-ArchitecturalApplications.pdf",
+      "grade": "guidance"
+    }
+  },
+  "composition": {
+    "standard": "UNS C26000 nominal",
+    "Cu": {
+      "value": 70,
+      "unit": "wt%",
+      "source": "Copper Development Association, A4039, Table 1, https://www.copper.org/publications/pub_list/pdf/A4039-ArchitecturalApplications.pdf",
+      "grade": "guidance"
+    },
+    "Zn": {
+      "value": 30,
+      "unit": "wt%",
+      "source": "Copper Development Association, A4039, Table 1, https://www.copper.org/publications/pub_list/pdf/A4039-ArchitecturalApplications.pdf",
+      "grade": "guidance"
+    }
+  },
+  "formation": {
+    "how": "Copper and zinc are melted together and cast as slabs or billets, then hot and cold rolled to sheet and strip, extruded and drawn to rod and tube, or drawn to wire. Cold work hardens it; annealing softens it again. Wire is woven on a loom into mesh.",
+    "facts": {
+      "solidus": {
+        "value": 916,
+        "unit": "degC",
+        "source": "Copper Development Association, A4039, Table 1 ('1680-S (916)'), https://www.copper.org/publications/pub_list/pdf/A4039-ArchitecturalApplications.pdf",
+        "grade": "guidance"
+      }
+    }
+  },
+  "physical": {
+    "density": {
+      "value": 8530,
+      "unit": "kg/m3",
+      "source": "Copper Development Association, A4039, Table 1 ('0.308 lb/in3 (8.53 g/cm3)'), https://www.copper.org/publications/pub_list/pdf/A4039-ArchitecturalApplications.pdf",
+      "grade": "guidance"
+    },
+    "tensileStrength": {
+      "value": 427,
+      "unit": "MPa",
+      "source": "Copper Development Association, A4039, Table 1, https://www.copper.org/publications/pub_list/pdf/A4039-ArchitecturalApplications.pdf",
+      "grade": "guidance",
+      "conditions": "half-hard sheet, temper H02"
+    },
+    "yieldStrength": {
+      "value": 359,
+      "unit": "MPa",
+      "source": "Copper Development Association, A4039, Table 1, https://www.copper.org/publications/pub_list/pdf/A4039-ArchitecturalApplications.pdf",
+      "grade": "guidance",
+      "conditions": "half-hard sheet, temper H02"
+    },
+    "elongation": {
+      "value": 25,
+      "unit": "%",
+      "source": "Copper Development Association, A4039, Table 1, https://www.copper.org/publications/pub_list/pdf/A4039-ArchitecturalApplications.pdf",
+      "grade": "guidance",
+      "conditions": "half-hard sheet, temper H02"
+    },
+    "youngsModulus": {
+      "value": 110.3,
+      "unit": "GPa",
+      "source": "Copper Development Association, A4039, Table 1 ('16,000 ksi (110.3)'), https://www.copper.org/publications/pub_list/pdf/A4039-ArchitecturalApplications.pdf",
+      "grade": "guidance"
+    },
+    "thermalExpansion": {
+      "value": 2e-05,
+      "unit": "1/K",
+      "source": "Copper Development Association, A4039, Table 1 (20-100 degC), https://www.copper.org/publications/pub_list/pdf/A4039-ArchitecturalApplications.pdf",
+      "grade": "guidance"
+    },
+    "thermalConductivity": {
+      "value": 121.2,
+      "unit": "W/(m*K)",
+      "source": "Copper Development Association, A4039, Table 1, https://www.copper.org/publications/pub_list/pdf/A4039-ArchitecturalApplications.pdf",
+      "grade": "guidance"
+    },
+    "electricalConductivity": {
+      "value": 28,
+      "unit": "%IACS",
+      "source": "Copper Development Association, A4039, Table 1, https://www.copper.org/publications/pub_list/pdf/A4039-ArchitecturalApplications.pdf",
+      "grade": "guidance"
+    }
+  },
+  "optics": {
+    "kind": "conductor",
+    "spectral": {
+      "note": "Measured optical constants of Cu70Zn30 brass, the museum's alloy.",
+      "n": {
+        "axis": "wavelength",
+        "axisUnit": "um",
+        "axisValues": [
+          0.38,
+          0.39,
+          0.4,
+          0.41,
+          0.42,
+          0.43,
+          0.44,
+          0.45,
+          0.46,
+          0.47,
+          0.48,
+          0.49,
+          0.5,
+          0.51,
+          0.52,
+          0.53,
+          0.54,
+          0.55,
+          0.56,
+          0.57,
+          0.58,
+          0.59,
+          0.6,
+          0.61,
+          0.62,
+          0.63,
+          0.64,
+          0.65,
+          0.66,
+          0.67,
+          0.68,
+          0.69,
+          0.7,
+          0.71,
+          0.72,
+          0.73,
+          0.74,
+          0.75,
+          0.76,
+          0.77,
+          0.78
+        ],
+        "unit": "1",
+        "values": [
+          1.487,
+          1.471,
+          1.445,
+          1.405,
+          1.35,
+          1.278,
+          1.191,
+          1.094,
+          0.994,
+          0.9,
+          0.816,
+          0.745,
+          0.686,
+          0.639,
+          0.602,
+          0.573,
+          0.549,
+          0.527,
+          0.505,
+          0.484,
+          0.468,
+          0.46,
+          0.45,
+          0.452,
+          0.449,
+          0.445,
+          0.444,
+          0.444,
+          0.445,
+          0.444,
+          0.444,
+          0.445,
+          0.446,
+          0.448,
+          0.45,
+          0.452,
+          0.455,
+          0.457,
+          0.458,
+          0.46,
+          0.464
+        ],
+        "grade": "measured",
+        "source": "M. R. Querry, 'Optical constants', Contractor Report CRDC-CR-85034 (1985), https://apps.dtic.mil/sti/citations/ADA158623 ; data file refractiveindex.info-database other/alloys/Cu-Zn/nk/Querry-Cu70Zn30.yml (comment '70% Cu, 30% Zn'), https://github.com/polyanskiy/refractiveindex.info-database"
+      },
+      "k": {
+        "axis": "wavelength",
+        "axisUnit": "um",
+        "axisValues": [
+          0.38,
+          0.39,
+          0.4,
+          0.41,
+          0.42,
+          0.43,
+          0.44,
+          0.45,
+          0.46,
+          0.47,
+          0.48,
+          0.49,
+          0.5,
+          0.51,
+          0.52,
+          0.53,
+          0.54,
+          0.55,
+          0.56,
+          0.57,
+          0.58,
+          0.59,
+          0.6,
+          0.61,
+          0.62,
+          0.63,
+          0.64,
+          0.65,
+          0.66,
+          0.67,
+          0.68,
+          0.69,
+          0.7,
+          0.71,
+          0.72,
+          0.73,
+          0.74,
+          0.75,
+          0.76,
+          0.77,
+          0.78
+        ],
+        "unit": "1",
+        "values": [
+          1.818,
+          1.813,
+          1.805,
+          1.794,
+          1.786,
+          1.784,
+          1.797,
+          1.829,
+          1.883,
+          1.957,
+          2.046,
+          2.145,
+          2.25,
+          2.358,
+          2.464,
+          2.568,
+          2.668,
+          2.765,
+          2.86,
+          2.958,
+          3.059,
+          3.159,
+          3.253,
+          3.345,
+          3.434,
+          3.522,
+          3.609,
+          3.695,
+          3.778,
+          3.86,
+          3.943,
+          4.025,
+          4.106,
+          4.186,
+          4.266,
+          4.346,
+          4.424,
+          4.501,
+          4.579,
+          4.657,
+          4.737
+        ],
+        "grade": "measured",
+        "source": "M. R. Querry, 'Optical constants', Contractor Report CRDC-CR-85034 (1985), https://apps.dtic.mil/sti/citations/ADA158623 ; data file refractiveindex.info-database other/alloys/Cu-Zn/nk/Querry-Cu70Zn30.yml (comment '70% Cu, 30% Zn'), https://github.com/polyanskiy/refractiveindex.info-database"
+      }
+    },
+    "f0": {
+      "value": [
+        0.909,
+        0.779,
+        0.422
+      ],
+      "unit": "1",
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "grade": "derived",
+      "derivation": "Unpolarised Fresnel reflectance at normal incidence, R = ((n-1)^2 + k^2) / ((n+1)^2 + k^2), from the tabulated n,k interpolated linearly to 380-780 nm in 10 nm steps (end values held), integrated against the CIE 1931 2-degree colour-matching functions under CIE illuminant D65, normalised so that a perfect reflector has Y = 1, and converted from XYZ to linear Rec.709 with the sRGB matrix.",
+      "source": "M. R. Querry, 'Optical constants', Contractor Report CRDC-CR-85034 (1985), https://apps.dtic.mil/sti/citations/ADA158623 , via refractiveindex.info-database other/alloys/Cu-Zn (Querry-Cu70Zn30) ; CIE 018:2019 Table 6, CIE 1931 2-degree colour-matching functions, doi:10.25039/CIE.DS.xvudnb9b ; CIE standard illuminant D65, https://files.cie.co.at/Publications-datasets/CIE_std_illum_D65.csv",
+      "spectralCheck": {
+        "axis": "wavelength",
+        "axisUnit": "um",
+        "axisValues": [
+          0.45,
+          0.55,
+          0.65
+        ],
+        "unit": "1",
+        "values": [
+          0.434,
+          0.789,
+          0.887
+        ],
+        "grade": "derived",
+        "derivation": "Normal-incidence Fresnel reflectance at 450, 550 and 650 nm.",
+        "source": "M. R. Querry, 'Optical constants', Contractor Report CRDC-CR-85034 (1985), https://apps.dtic.mil/sti/citations/ADA158623 , via refractiveindex.info-database other/alloys/Cu-Zn (Querry-Cu70Zn30)"
+      },
+      "luminance": {
+        "value": 0.781,
+        "unit": "1",
+        "grade": "derived",
+        "derivation": "CIE Y of the F0 spectrum under D65.",
+        "source": "M. R. Querry, 'Optical constants', Contractor Report CRDC-CR-85034 (1985), https://apps.dtic.mil/sti/citations/ADA158623 , via refractiveindex.info-database other/alloys/Cu-Zn (Querry-Cu70Zn30) ; CIE 018:2019 Table 6, CIE 1931 2-degree colour-matching functions, doi:10.25039/CIE.DS.xvudnb9b ; CIE standard illuminant D65, https://files.cie.co.at/Publications-datasets/CIE_std_illum_D65.csv"
+      }
+    },
+    "f82": {
+      "value": [
+        0.907,
+        0.865,
+        0.709
+      ],
+      "unit": "1",
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "grade": "derived",
+      "derivation": "As f0, but the unpolarised Fresnel reflectance of the complex index at 82 degrees incidence (the edge tint of N. Hoffman's F82 model).",
+      "source": "M. R. Querry, 'Optical constants', Contractor Report CRDC-CR-85034 (1985), https://apps.dtic.mil/sti/citations/ADA158623 , via refractiveindex.info-database other/alloys/Cu-Zn (Querry-Cu70Zn30) ; CIE 018:2019 Table 6, CIE 1931 2-degree colour-matching functions, doi:10.25039/CIE.DS.xvudnb9b ; CIE standard illuminant D65, https://files.cie.co.at/Publications-datasets/CIE_std_illum_D65.csv",
+      "note": "The edge tint of the F82 model (N. Hoffman, 'Generalization of Adobe's Fresnel Model', 2019): the reflectance near grazing, where the brass whitens."
+    }
+  },
+  "acoustic": {
+    "note": "No measured octave-band absorption for brass sheet or mesh was found. See unverified."
+  },
+  "stock": {
+    "forms": {
+      "text": "Plate, bar and sheet (ASTM B36), wire (ASTM B134), tube (ASTM B135), strip (ASTM B19, B36, B569, B888).",
+      "source": "Copper Development Association, A4039, Table 1 (forms and specification standards for C26000), https://www.copper.org/publications/pub_list/pdf/A4039-ArchitecturalApplications.pdf",
+      "grade": "guidance"
+    },
+    "fasteners": {
+      "text": "C26000 screws, bolts and nuts colour-match cartridge brass sheet, tube and rod.",
+      "source": "Copper Development Association, A4039, Table 8 (Characteristics of Common Fastener Alloys), https://www.copper.org/publications/pub_list/pdf/A4039-ArchitecturalApplications.pdf",
+      "grade": "guidance"
+    }
+  },
+  "physicalMaterial": {
+    "footfallClass": "metal",
+    "note": "Brass is not walked on in the museum; its pieces are handled."
+  },
+  "uses": [
+    {
+      "where": "the Reserve's racks: woven brass mesh",
+      "working": null,
+      "histories": [
+        "bronze.tarnish",
+        "bronze.wear"
+      ],
+      "source": "windows/LOOK_TARGETS.md (frozen reference): 'Brass-mesh racks edge-on'",
+      "grade": "design",
+      "note": "Drawn wire, woven. The Reserve is a later stage (D-013, tier 2); the weaving is recorded as a working when the Reserve is specified."
+    },
+    {
+      "where": "the steles' feet in the Salon and the Atrium",
+      "working": "brushed",
+      "histories": [
+        "bronze.tarnish",
+        "bronze.wear"
+      ],
+      "source": "windows/Scripts/materials.py (frozen reference), NAMED['M_Brass_Brushed'] comment: 'the stele feet's brushed brass (the Salon's and the Atrium's)'",
+      "grade": "design"
+    }
+  ],
+  "photograph": [
+    "Clean cartridge brass is a clear yellow, visibly yellower than the golden bronze beside it.",
+    "Unlacquered brass dulls to a yellow-brown and keeps fingerprints; lacquered brass stays bright until the lacquer breaks, and then tarnishes at the break.",
+    "Woven brass mesh reads as a fine yellow grid whose sheen changes with the angle of view as the wires turn."
+  ],
+  "evidence": [],
+  "evidenceRejected": [],
+  "evidenceSearch": {
+    "searched": [
+      "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt (PBR, Textures, Journeys, Albion and their CREDITS)",
+      "C:/Users/anan9/Desktop/Projects/Musee Vision/usd/textures/brass_mesh.png (a texture of the old build, without a credit or a photographic source)"
+    ],
+    "found": "No CC0 photograph of real brass is on this PC. The old build's brass_mesh.png has no recorded source, so it is not evidence.",
+    "tier": "Brass is calibrated from tier (a): Querry's measured n,k of the exact alloy."
+  },
+  "unverified": [
+    {
+      "field": "composition limits",
+      "value": null,
+      "unit": "wt%",
+      "reason": "Only the nominal 70/30 composition was read (CDA A4039); the ASTM B36 / EN 1652 limits for C26000 / CW505L were not read."
+    },
+    {
+      "field": "acoustic.absorptionByOctave",
+      "value": null,
+      "unit": "1",
+      "reason": "No handbook row for brass sheet or woven mesh was read."
+    },
+    {
+      "field": "physicalMaterial.friction",
+      "value": null,
+      "unit": "1",
+      "reason": "No measured friction for brass against skin or shoe was found."
+    }
+  ]
+}

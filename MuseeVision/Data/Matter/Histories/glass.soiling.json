@@ -1,0 +1,109 @@
+{
+  "schema": "musee.matter.history/1",
+  "key": "glass.soiling",
+  "name": "Soiling of glass",
+  "family": "glass",
+  "surfaceLawTerms": [
+    "soiling",
+    "touch"
+  ],
+  "describes": "City air lays a film on the weather face: soot (elemental carbon) absorbs light and soluble salts scatter it. Both saturate as the deposit grows. Rain washes a steep face partly clean; a sheltered or flat face keeps more. Glass has no pores, so the pore-scale term of the surface law is zero and all soiling is this film. Indoors, the same film comes from touch: fingerprints at hand height on vitrine faces.",
+  "terms": {
+    "model": "Favez et al. (2006), as quoted by Du et al. (2017): absorbed fraction X = 0.16 EC / (EC + 15), with EC the elemental carbon on the face in ugC/cm2; diffuse (scattered) transmittance Y = 0.28 ions / (ions + 64), with ions the soluble inorganic deposit in ug/cm2.",
+    "absorptionCoefficientMax": {
+      "value": 0.16,
+      "unit": "1",
+      "grade": "secondary",
+      "source": "J. Du, X. Zhang, S. Sharples, 'Air pollution and daylight availability in the urban area: dynamic simulation in an open-plan office in London', Proc. 15th IBPSA Conference, San Francisco (2017) 437-444, doi:10.26868/25222708.2017.114 (quoting Favez et al. 2006, Tregenza et al. 1999, Sharples et al. 2001, Ullah et al. 2003), https://publications.ibpsa.org/proceedings/bs/2017/papers/BS2017_114.pdf",
+      "note": "the paper labels X in percent, but its stated ceiling of about 16 % shows the coefficient is a fraction"
+    },
+    "absorptionHalfDeposit": {
+      "value": 15,
+      "unit": "ugC/cm2",
+      "grade": "secondary",
+      "source": "J. Du, X. Zhang, S. Sharples, 'Air pollution and daylight availability in the urban area: dynamic simulation in an open-plan office in London', Proc. 15th IBPSA Conference, San Francisco (2017) 437-444, doi:10.26868/25222708.2017.114 (quoting Favez et al. 2006, Tregenza et al. 1999, Sharples et al. 2001, Ullah et al. 2003), https://publications.ibpsa.org/proceedings/bs/2017/papers/BS2017_114.pdf"
+    },
+    "diffuseTransmittanceCoefficient": {
+      "value": 0.28,
+      "unit": "1",
+      "grade": "secondary",
+      "source": "J. Du, X. Zhang, S. Sharples, 'Air pollution and daylight availability in the urban area: dynamic simulation in an open-plan office in London', Proc. 15th IBPSA Conference, San Francisco (2017) 437-444, doi:10.26868/25222708.2017.114 (quoting Favez et al. 2006, Tregenza et al. 1999, Sharples et al. 2001, Ullah et al. 2003), https://publications.ibpsa.org/proceedings/bs/2017/papers/BS2017_114.pdf"
+    },
+    "diffuseHalfDeposit": {
+      "value": 64,
+      "unit": "ug/cm2",
+      "grade": "secondary",
+      "source": "J. Du, X. Zhang, S. Sharples, 'Air pollution and daylight availability in the urban area: dynamic simulation in an open-plan office in London', Proc. 15th IBPSA Conference, San Francisco (2017) 437-444, doi:10.26868/25222708.2017.114 (quoting Favez et al. 2006, Tregenza et al. 1999, Sharples et al. 2001, Ullah et al. 2003), https://publications.ibpsa.org/proceedings/bs/2017/papers/BS2017_114.pdf"
+    },
+    "absorptionCeiling": {
+      "value": 0.16,
+      "unit": "1",
+      "grade": "secondary",
+      "source": "J. Du, X. Zhang, S. Sharples, 'Air pollution and daylight availability in the urban area: dynamic simulation in an open-plan office in London', Proc. 15th IBPSA Conference, San Francisco (2017) 437-444, doi:10.26868/25222708.2017.114 (quoting Favez et al. 2006, Tregenza et al. 1999, Sharples et al. 2001, Ullah et al. 2003), https://publications.ibpsa.org/proceedings/bs/2017/papers/BS2017_114.pdf",
+      "note": "'a top limit of light absorption at around 16%' where the carbon deposit saturates"
+    },
+    "diffuseCeiling": {
+      "value": 0.2,
+      "unit": "1",
+      "grade": "secondary",
+      "source": "J. Du, X. Zhang, S. Sharples, 'Air pollution and daylight availability in the urban area: dynamic simulation in an open-plan office in London', Proc. 15th IBPSA Conference, San Francisco (2017) 437-444, doi:10.26868/25222708.2017.114 (quoting Favez et al. 2006, Tregenza et al. 1999, Sharples et al. 2001, Ullah et al. 2003), https://publications.ibpsa.org/proceedings/bs/2017/papers/BS2017_114.pdf",
+      "note": "'The top limit of diffuse transmittance is around 20%'"
+    },
+    "kinetics": {
+      "text": "Sheltered float glass in Paris soiled continuously over 1-24 months along a sigmoid (Hill equation) curve in deposited mass, carbon, soluble ions and haze.",
+      "grade": "measured",
+      "source": "T. Lombardo, A. Ionescu, R. A. Lefevre, A. Chabas, P. Ausset, H. Cachier, 'Soiling of silica-soda-lime float glass in urban environment: measurements and modelling', Atmospheric Environment 39(6) (2005) 989-997, doi:10.1016/j.atmosenv.2004.10.030, https://hero.epa.gov/reference/126177/"
+    },
+    "lossCommercialCleanAir": {
+      "unit": "1",
+      "min": 0.04,
+      "max": 0.08,
+      "grade": "secondary",
+      "source": "J. Du, X. Zhang, S. Sharples, 'Air pollution and daylight availability in the urban area: dynamic simulation in an open-plan office in London', Proc. 15th IBPSA Conference, San Francisco (2017) 437-444, doi:10.26868/25222708.2017.114 (quoting Favez et al. 2006, Tregenza et al. 1999, Sharples et al. 2001, Ullah et al. 2003), https://publications.ibpsa.org/proceedings/bs/2017/papers/BS2017_114.pdf",
+      "note": "Tregenza et al. 1999: average transmittance reduction, commercial buildings in clean environments, UK"
+    },
+    "lossVerticalWindow": {
+      "unit": "1",
+      "max": 0.1,
+      "grade": "secondary",
+      "source": "J. Du, X. Zhang, S. Sharples, 'Air pollution and daylight availability in the urban area: dynamic simulation in an open-plan office in London', Proc. 15th IBPSA Conference, San Francisco (2017) 437-444, doi:10.26868/25222708.2017.114 (quoting Favez et al. 2006, Tregenza et al. 1999, Sharples et al. 2001, Ullah et al. 2003), https://publications.ibpsa.org/proceedings/bs/2017/papers/BS2017_114.pdf",
+      "note": "Sharples et al. 2001: the loss in diffuse transmittance for a vertical window did not usually exceed 10 %"
+    },
+    "lossTropicalVerticalAndHorizontal": {
+      "unit": "1",
+      "min": 0.09,
+      "max": 0.36,
+      "grade": "secondary",
+      "source": "J. Du, X. Zhang, S. Sharples, 'Air pollution and daylight availability in the urban area: dynamic simulation in an open-plan office in London', Proc. 15th IBPSA Conference, San Francisco (2017) 437-444, doi:10.26868/25222708.2017.114 (quoting Favez et al. 2006, Tregenza et al. 1999, Sharples et al. 2001, Ullah et al. 2003), https://publications.ibpsa.org/proceedings/bs/2017/papers/BS2017_114.pdf",
+      "note": "Ullah et al. 2003, Singapore, vertical and horizontal windows"
+    },
+    "drivers": {
+      "text": "The glazing dirt correction factor is related to the particulates in the external atmosphere, precipitation and building form (Tregenza et al. 1999).",
+      "grade": "secondary",
+      "source": "J. Du, X. Zhang, S. Sharples, 'Air pollution and daylight availability in the urban area: dynamic simulation in an open-plan office in London', Proc. 15th IBPSA Conference, San Francisco (2017) 437-444, doi:10.26868/25222708.2017.114 (quoting Favez et al. 2006, Tregenza et al. 1999, Sharples et al. 2001, Ullah et al. 2003), https://publications.ibpsa.org/proceedings/bs/2017/papers/BS2017_114.pdf"
+    },
+    "touch": {
+      "text": "Coated (anti-reflective) faces are sold with an optional finish that 'repels fingerprints and dirt'; fingerprints are the vitrine's everyday soiling.",
+      "grade": "manufacturer",
+      "source": "SCHOTT AG, 'SCHOTT AMIRAN - Anti-Reflective Glass for Showcases', technical data sheet, version February 2022 (values to DIN EN 410; monolithic 4 mm; laminated 4/0.76/4 mm with PVB), https://media.schott.com/api/public/content/15fee70340c44e738fd4f24c40702d8c?v=35137cd2&download=true"
+    }
+  },
+  "photograph": [
+    "A grey veil on the weather face of sloped glass, heaviest where water pools against glazing bars, with drainage streaks below them.",
+    "Fingerprints at hand height on vitrine faces."
+  ],
+  "unverified": [
+    {
+      "field": "terms.depositRate",
+      "value": null,
+      "unit": "ugC/(cm2*month)",
+      "reason": "The Hill-equation parameters of Lombardo et al. 2005 (deposit against months) could not be read (ScienceDirect and HAL refused access), so the museum's deposit rate has no sourced number yet."
+    },
+    {
+      "field": "terms.lossBySlope",
+      "value": null,
+      "unit": "1",
+      "reason": "The CIBSE LG10 and BS 8206-2 tables of dirt loss by slope and location could not be read (the standards are paywalled; the web calculators do not print the values)."
+    }
+  ]
+}

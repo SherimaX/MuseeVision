@@ -1,0 +1,220 @@
+{
+  "schema": "musee.matter.working/1",
+  "key": "laminated",
+  "name": "Laminated with clear PVB",
+  "appliesTo": {
+    "families": [
+      "glass"
+    ],
+    "substances": [
+      "low-iron-glass"
+    ]
+  },
+  "over": [
+    "annealed",
+    "heat-strengthened",
+    "toughened"
+  ],
+  "process": "Two or more plies, each with its own heat treatment (one of the 'over' workings), are bonded by a PVB interlayer under heat and pressure in an autoclave. When the glass breaks the shards stay stuck to the interlayer and the pane stays in place, which is what makes glass safe overhead. The ply thicknesses are the piece's make-up, set by Form and the stage.",
+  "interlayer": {
+    "material": "Plasticised polyvinyl butyral (PVB)",
+    "density": {
+      "value": 1070,
+      "unit": "kg/m3",
+      "grade": "manufacturer",
+      "source": "Eastman, 'Product technical data: Saflex Clear PVB interlayer', Applications Technical Documentation 031720 (optical and solar data for 3 mm clear / 0.76 mm / 3 mm clear, LBNL OPTICS and WINDOW 7.0), https://saflex-vanceva.eastman.com/content/dam/saflex/pdf-documents/arch/saflex-clear/product_technical_sheet_-_saflex_clear_031720_0.pdf",
+      "conditions": "specific gravity 1.07 at 23 degC"
+    },
+    "glassTransition": {
+      "value": 25,
+      "unit": "degC",
+      "grade": "manufacturer",
+      "source": "Eastman, 'Product technical data: Saflex Clear PVB interlayer', Applications Technical Documentation 031720 (optical and solar data for 3 mm clear / 0.76 mm / 3 mm clear, LBNL OPTICS and WINDOW 7.0), https://saflex-vanceva.eastman.com/content/dam/saflex/pdf-documents/arch/saflex-clear/product_technical_sheet_-_saflex_clear_031720_0.pdf",
+      "conditions": "1 Hz, heating 3 degC/min, +/- 1"
+    },
+    "specificHeat": {
+      "value": 1980,
+      "unit": "J/(kg*K)",
+      "grade": "manufacturer",
+      "source": "Eastman, 'Product technical data: Saflex Clear PVB interlayer', Applications Technical Documentation 031720 (optical and solar data for 3 mm clear / 0.76 mm / 3 mm clear, LBNL OPTICS and WINDOW 7.0), https://saflex-vanceva.eastman.com/content/dam/saflex/pdf-documents/arch/saflex-clear/product_technical_sheet_-_saflex_clear_031720_0.pdf",
+      "conditions": "at 50 degC"
+    },
+    "thermalConductivity": {
+      "value": 0.2,
+      "unit": "W/(m*K)",
+      "grade": "manufacturer",
+      "source": "Eastman, 'Product technical data: Saflex Clear PVB interlayer', Applications Technical Documentation 031720 (optical and solar data for 3 mm clear / 0.76 mm / 3 mm clear, LBNL OPTICS and WINDOW 7.0), https://saflex-vanceva.eastman.com/content/dam/saflex/pdf-documents/arch/saflex-clear/product_technical_sheet_-_saflex_clear_031720_0.pdf",
+      "conditions": "at 65 degC"
+    },
+    "thermalExpansion": {
+      "value": 0.000155,
+      "unit": "1/K",
+      "grade": "manufacturer",
+      "source": "Eastman, 'Product technical data: Saflex Clear PVB interlayer', Applications Technical Documentation 031720 (optical and solar data for 3 mm clear / 0.76 mm / 3 mm clear, LBNL OPTICS and WINDOW 7.0), https://saflex-vanceva.eastman.com/content/dam/saflex/pdf-documents/arch/saflex-clear/product_technical_sheet_-_saflex_clear_031720_0.pdf",
+      "conditions": "30-100 degC"
+    },
+    "emissivity": {
+      "value": 0.94,
+      "unit": "1",
+      "grade": "manufacturer",
+      "source": "Eastman, 'Product technical data: Saflex Clear PVB interlayer', Applications Technical Documentation 031720 (optical and solar data for 3 mm clear / 0.76 mm / 3 mm clear, LBNL OPTICS and WINDOW 7.0), https://saflex-vanceva.eastman.com/content/dam/saflex/pdf-documents/arch/saflex-clear/product_technical_sheet_-_saflex_clear_031720_0.pdf",
+      "conditions": "19.5 degC"
+    },
+    "rollWidthMax": {
+      "value": 3220,
+      "unit": "mm",
+      "grade": "manufacturer",
+      "source": "Eastman, 'Saflex Clear PVB interlayer' product bulletin AI-ARCH-4321 2/18 (2018), https://saflex-vanceva.eastman.com/content/dam/saflex/product-pages/saflex-clear/ai-arch-4321_saflex_clear_product_bulletin.pdf",
+      "note": "322 cm, the widest interlayer roll, which bounds a laminate's width"
+    },
+    "product": "Saflex Clear (RB41), nominal 0.76 mm",
+    "thicknesses": {
+      "unit": "mm",
+      "values": [
+        0.38,
+        0.76,
+        1.14,
+        1.52
+      ],
+      "grade": "manufacturer",
+      "source": "Eastman, 'Product technical data: Saflex Clear PVB interlayer', Applications Technical Documentation 031720 (optical and solar data for 3 mm clear / 0.76 mm / 3 mm clear, LBNL OPTICS and WINDOW 7.0), https://saflex-vanceva.eastman.com/content/dam/saflex/pdf-documents/arch/saflex-clear/product_technical_sheet_-_saflex_clear_031720_0.pdf"
+    },
+    "refractiveIndex": {
+      "value": 1.479,
+      "unit": "1",
+      "grade": "manufacturer",
+      "source": "Eastman, 'Product technical data: Saflex Clear PVB interlayer', Applications Technical Documentation 031720 (optical and solar data for 3 mm clear / 0.76 mm / 3 mm clear, LBNL OPTICS and WINDOW 7.0), https://saflex-vanceva.eastman.com/content/dam/saflex/pdf-documents/arch/saflex-clear/product_technical_sheet_-_saflex_clear_031720_0.pdf",
+      "conditions": "ASTM D542, 23 degC"
+    },
+    "haze": {
+      "unit": "1",
+      "max": 0.01,
+      "grade": "manufacturer",
+      "source": "Eastman, 'Product technical data: Saflex Clear PVB interlayer', Applications Technical Documentation 031720 (optical and solar data for 3 mm clear / 0.76 mm / 3 mm clear, LBNL OPTICS and WINDOW 7.0), https://saflex-vanceva.eastman.com/content/dam/saflex/pdf-documents/arch/saflex-clear/product_technical_sheet_-_saflex_clear_031720_0.pdf",
+      "conditions": "3 mm clear / 0.76 / 3 mm clear, ASTM D1003"
+    },
+    "yellownessIndex": {
+      "unit": "1",
+      "max": 1,
+      "grade": "manufacturer",
+      "source": "Eastman, 'Product technical data: Saflex Clear PVB interlayer', Applications Technical Documentation 031720 (optical and solar data for 3 mm clear / 0.76 mm / 3 mm clear, LBNL OPTICS and WINDOW 7.0), https://saflex-vanceva.eastman.com/content/dam/saflex/pdf-documents/arch/saflex-clear/product_technical_sheet_-_saflex_clear_031720_0.pdf",
+      "conditions": "ASTM E313, laminate"
+    },
+    "uvScreening": {
+      "unit": "1",
+      "min": 0.99,
+      "grade": "manufacturer",
+      "source": "Eastman, 'Saflex Clear PVB interlayer' product bulletin AI-ARCH-4321 2/18 (2018), https://saflex-vanceva.eastman.com/content/dam/saflex/product-pages/saflex-clear/ai-arch-4321_saflex_clear_product_bulletin.pdf ; Eastman, 'Product technical data: Saflex Clear PVB interlayer', Applications Technical Documentation 031720 (optical and solar data for 3 mm clear / 0.76 mm / 3 mm clear, LBNL OPTICS and WINDOW 7.0), https://saflex-vanceva.eastman.com/content/dam/saflex/pdf-documents/arch/saflex-clear/product_technical_sheet_-_saflex_clear_031720_0.pdf",
+      "conditions": "300-380 nm, calculated, laminate"
+    },
+    "uvCutOff": {
+      "value": 380,
+      "unit": "nm",
+      "grade": "manufacturer",
+      "source": "Eastman, 'Saflex UV' performance page (conventional Saflex: 99 % UV screening to 380 nm; Saflex UV: 99 % up to 400 nm, ISO 13837 method A; for museums, archives, galleries), https://saflex-vanceva.eastman.com/en/architectural/interlayer-performance/uv",
+      "note": "99 % screening to 380 nm; the 380-400 nm band partly passes"
+    }
+  },
+  "laminate": {
+    "conditions": "3 mm clear / 0.76 mm / 3 mm clear, LBNL WINDOW 7.0",
+    "visibleTransmittance": {
+      "value": 0.89,
+      "unit": "1",
+      "grade": "manufacturer",
+      "source": "Eastman, 'Product technical data: Saflex Clear PVB interlayer', Applications Technical Documentation 031720 (optical and solar data for 3 mm clear / 0.76 mm / 3 mm clear, LBNL OPTICS and WINDOW 7.0), https://saflex-vanceva.eastman.com/content/dam/saflex/pdf-documents/arch/saflex-clear/product_technical_sheet_-_saflex_clear_031720_0.pdf"
+    },
+    "visibleReflectance": {
+      "value": 0.08,
+      "unit": "1",
+      "grade": "manufacturer",
+      "source": "Eastman, 'Product technical data: Saflex Clear PVB interlayer', Applications Technical Documentation 031720 (optical and solar data for 3 mm clear / 0.76 mm / 3 mm clear, LBNL OPTICS and WINDOW 7.0), https://saflex-vanceva.eastman.com/content/dam/saflex/pdf-documents/arch/saflex-clear/product_technical_sheet_-_saflex_clear_031720_0.pdf"
+    },
+    "solarTransmittance": {
+      "value": 0.75,
+      "unit": "1",
+      "grade": "manufacturer",
+      "source": "Eastman, 'Product technical data: Saflex Clear PVB interlayer', Applications Technical Documentation 031720 (optical and solar data for 3 mm clear / 0.76 mm / 3 mm clear, LBNL OPTICS and WINDOW 7.0), https://saflex-vanceva.eastman.com/content/dam/saflex/pdf-documents/arch/saflex-clear/product_technical_sheet_-_saflex_clear_031720_0.pdf"
+    },
+    "damageWeightedTransmittanceKrochmann": {
+      "value": 0.3,
+      "unit": "1",
+      "grade": "manufacturer",
+      "source": "Eastman, 'Product technical data: Saflex Clear PVB interlayer', Applications Technical Documentation 031720 (optical and solar data for 3 mm clear / 0.76 mm / 3 mm clear, LBNL OPTICS and WINDOW 7.0), https://saflex-vanceva.eastman.com/content/dam/saflex/pdf-documents/arch/saflex-clear/product_technical_sheet_-_saflex_clear_031720_0.pdf",
+      "conditions": "Tdw-K, 300-500 nm"
+    },
+    "damageWeightedTransmittanceIso": {
+      "value": 0.62,
+      "unit": "1",
+      "grade": "manufacturer",
+      "source": "Eastman, 'Product technical data: Saflex Clear PVB interlayer', Applications Technical Documentation 031720 (optical and solar data for 3 mm clear / 0.76 mm / 3 mm clear, LBNL OPTICS and WINDOW 7.0), https://saflex-vanceva.eastman.com/content/dam/saflex/pdf-documents/arch/saflex-clear/product_technical_sheet_-_saflex_clear_031720_0.pdf",
+      "conditions": "Tdw-ISO, 300-600 nm"
+    },
+    "transmittedUv": {
+      "unit": "1",
+      "max": 0.01,
+      "grade": "manufacturer",
+      "source": "Eastman, 'Product technical data: Saflex Clear PVB interlayer', Applications Technical Documentation 031720 (optical and solar data for 3 mm clear / 0.76 mm / 3 mm clear, LBNL OPTICS and WINDOW 7.0), https://saflex-vanceva.eastman.com/content/dam/saflex/pdf-documents/arch/saflex-clear/product_technical_sheet_-_saflex_clear_031720_0.pdf",
+      "conditions": "300-380 nm"
+    }
+  },
+  "interfaceReflectance": {
+    "value": 0.0002359,
+    "unit": "1",
+    "grade": "derived",
+    "derivation": "Fresnel ((n1-n2)/(n1+n2))^2 with glass n(550 nm) from Rubin's fit and PVB n = 1.479 (Saflex Clear): a laminate reads as one pane",
+    "source": "M. Rubin, 'Optical properties of soda lime silica glasses', Solar Energy Materials 12 (1985) 275-288; dispersion fit n = 1.5130 - 0.003169 L^2 + 0.003962 L^-2 (L in um, 0.31-4.6 um) via refractiveindex.info, https://refractiveindex.info/?shelf=glass&book=soda-lime&page=Rubin-lowiron ; Eastman, 'Product technical data: Saflex Clear PVB interlayer', Applications Technical Documentation 031720 (optical and solar data for 3 mm clear / 0.76 mm / 3 mm clear, LBNL OPTICS and WINDOW 7.0), https://saflex-vanceva.eastman.com/content/dam/saflex/pdf-documents/arch/saflex-clear/product_technical_sheet_-_saflex_clear_031720_0.pdf"
+  },
+  "overhead": {
+    "minimumInterlayer": {
+      "value": 0.76,
+      "unit": "mm",
+      "grade": "guidance",
+      "source": "International Code Council, International Building Code 2024, sections 2405.1-2405.2 (as adopted in the TWIA Building Code 2024), via UpCodes, https://up.codes/s/sloped-glazing-and-skylights",
+      "conditions": "IBC 2405.2: laminated glass in sloped glazing with a minimum 30-mil PVB interlayer; 0.38 mm only in dwelling units, for panes up to 1.5 m2 whose top is up to 3658 mm above a walking surface"
+    },
+    "slopeFromVertical": {
+      "unit": "deg",
+      "min": 15,
+      "grade": "guidance",
+      "source": "International Code Council, International Building Code 2024, sections 2405.1-2405.2 (as adopted in the TWIA Building Code 2024), via UpCodes, https://up.codes/s/sloped-glazing-and-skylights",
+      "note": "the code's definition of sloped glazing: more than 15 degrees from vertical"
+    },
+    "permissibleStressLaminatedAnnealed": {
+      "value": 15,
+      "unit": "MPa",
+      "grade": "guidance",
+      "source": "Saint-Gobain Building Glass UK, 'Glass Fundamentals GF-1B: The Strength of Glass', 2018 (Table 1 characteristic strengths to EN 572-1, EN 1863-1, EN 12150-1; Table 3 TRLV permissible stresses), https://www.saint-gobain-glass.co.uk/wp-content/uploads/2024/02/Glass-Fundamentals-1B-The-Strength-of-Glass-19-09-2018-1.pdf",
+      "conditions": "TRLV overhead; 25 MPa for the lower laminated pane of an insulating unit if the upper pane has failed"
+    },
+    "precedent": {
+      "text": "The Great Court at the British Museum, the Rotunda eye's model: insulating units 38.76 mm thick, an outer 10 mm toughened pane, a 16 mm cavity, and an inner laminated pane of two 6 mm annealed sheets with 0.76 mm PVB; 3,312 triangular panes from 800 x 1500 mm to 2200 x 3300 mm. Its outer pane was green-tinted and fritted for solar control (about 30 % light transmission); the museum's eye is low-iron glass.",
+      "innerPlies": {
+        "unit": "mm",
+        "values": [
+          6,
+          0.76,
+          6
+        ],
+        "grade": "manufacturer",
+        "source": "Pilkington, project reference 'The Great Court at The British Museum, London, UK' (38.76 mm units: outer 10 mm toughened Optifloat Green T with 57 % frit, 16 mm cavity, inner Optilam K Glass of two 6 mm annealed sheets with 0.76 mm PVB; 3,312 panes, 800 x 1500 mm to 2200 x 3300 mm; light transmission about 30 %), https://projects.pilkington.com/show/7555/The-Great-Court-at-The-British-Museum-London-UK.aspx"
+      },
+      "unitThickness": {
+        "value": 38.76,
+        "unit": "mm",
+        "grade": "manufacturer",
+        "source": "Pilkington, project reference 'The Great Court at The British Museum, London, UK' (38.76 mm units: outer 10 mm toughened Optifloat Green T with 57 % frit, 16 mm cavity, inner Optilam K Glass of two 6 mm annealed sheets with 0.76 mm PVB; 3,312 panes, 800 x 1500 mm to 2200 x 3300 mm; light transmission about 30 %), https://projects.pilkington.com/show/7555/The-Great-Court-at-The-British-Museum-London-UK.aspx"
+      },
+      "lightTransmission": {
+        "value": 0.3,
+        "unit": "1",
+        "grade": "manufacturer",
+        "source": "Pilkington, project reference 'The Great Court at The British Museum, London, UK' (38.76 mm units: outer 10 mm toughened Optifloat Green T with 57 % frit, 16 mm cavity, inner Optilam K Glass of two 6 mm annealed sheets with 0.76 mm PVB; 3,312 panes, 800 x 1500 mm to 2200 x 3300 mm; light transmission about 30 %), https://projects.pilkington.com/show/7555/The-Great-Court-at-The-British-Museum-London-UK.aspx",
+        "note": "'approximately 30%', with the fritted green outer pane"
+      }
+    }
+  },
+  "photograph": [
+    "No extra reflection from the interlayer.",
+    "At a polished edge, a thin line where the interlayer lies between the plies."
+  ]
+}

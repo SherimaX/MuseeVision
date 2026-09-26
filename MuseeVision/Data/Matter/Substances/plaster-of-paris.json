@@ -1,0 +1,323 @@
+{
+  "schema": "musee.matter.substance/1",
+  "key": "plaster-of-paris",
+  "family": "white",
+  "accentOf": null,
+  "name": "Plaster of Paris (set gypsum, casting grade)",
+  "aliases": [
+    "cast plaster",
+    "casting plaster",
+    "moulding plaster (the binder)"
+  ],
+  "summary": "Gypsum rock heated until it gives up three quarters of its water becomes calcium sulfate hemihydrate. Mixed with water it recrystallises within minutes into an interlocking mass of gypsum needles, expanding very slightly, which is why it takes the finest detail of a mould. The water beyond the small amount the reaction needs leaves as pores, so a set cast is about half void, soft, absorbent and slightly soluble. It is the substance of the four casts in the Rotunda's niches and of the face of every fibrous plaster piece.",
+  "dossier": "Docs/Matter/plaster-of-paris.md",
+  "formation": {
+    "how": "Gypsum (CaSO4·2H2O) is calcined to the hemihydrate (CaSO4·½H2O), ground fine and sold as casting or moulding plaster. Strewn into water and mixed, it sets by recrystallising to gypsum. The water-to-plaster ratio governs the density and strength of the cast.",
+    "reaction": "CaSO4·½H2O + 1½ H2O -> CaSO4·2H2O",
+    "facts": {
+      "calcinationTemperature": {
+        "value": 150,
+        "unit": "degC",
+        "asReported": "heated to approximately 150°C",
+        "grade": "guidance",
+        "source": "Ratcliffe, T. (1997) The Use of Gypsum Plaster. The Building Conservation Directory, https://www.buildingconservation.com/articles/gypsum/gypsum_plaster.htm"
+      },
+      "calcinationTemperatureMinimum": {
+        "value": 100,
+        "unit": "degC",
+        "asReported": "requiring heating to only 100°C for the initial calcination (citing Penny 1993; Carran et al. 2012)",
+        "grade": "secondary",
+        "source": "Payne, E.M. (2020) The Conservation of Plaster Casts in the Nineteenth Century. Studies in Conservation 65(1), 37-58, https://doi.org/10.1080/00393630.2019.1610845 (accepted manuscript https://discovery.ucl.ac.uk/id/eprint/10077875/)"
+      },
+      "dehydrationOnset": {
+        "value": 50,
+        "unit": "degC",
+        "note": "combined water starts to be released above this; about 75 % is gone at 180 °C and all only above 400 °C (natural ground gypsum)",
+        "grade": "manufacturer",
+        "source": "USG, Technical Specifications: USG Terra Alba No. 1 Calcium Sulfate Dihydrate Filler, IG574-USA-ENG rev. 1-21 (2021), https://www.usg.com/content/dam/USG/pdpmovedocuments/usg-terra-alba-no1-calcium-sulfate-filler-data-en-IG574.pdf"
+      },
+      "stoichiometricWater": {
+        "value": 0.186,
+        "unit": "kg/kg",
+        "grade": "derived",
+        "derivation": "1.5 x M(H2O) / M(CaSO4·½H2O) = 27.02 / 145.14 with Ca 40.078 and the conventional values S 32.06, O 15.999, H 1.008 for the elements CIAAW gives as intervals",
+        "source": "CIAAW (IUPAC) Standard Atomic Weights 2024, https://www.ciaaw.org/atomic-weights.htm",
+        "conditions": "kg of water per kg of calcium sulfate hemihydrate"
+      },
+      "waterToPlasterRatioMoulding": {
+        "min": 0.63,
+        "max": 0.7,
+        "unit": "kg/kg",
+        "asReported": "63-70 lbs. water/100 lbs. product",
+        "grade": "manufacturer",
+        "source": "USG, Submittal Sheet: USG No. 1 Moulding Plaster (Southard, OK), IG1937-USA-ENG rev. 1-20 (2020), https://www.usg.com/content/dam/USG_Marketing_Communications/united_states/product_promotional_materials/finished_assets/usg-no-1-moulding-plaster-submital-southard-IG1937.pdf"
+      },
+      "waterToPlasterRatioCasting": {
+        "min": 0.6,
+        "max": 0.66,
+        "unit": "kg/kg",
+        "asReported": "60-66 lbs. water/100 lbs. product",
+        "grade": "manufacturer",
+        "source": "USG, Submittal Sheet: USG No. 1 Casting Plaster (Southard, OK), IG1375-USA-ENG rev. 8-24 (2024), https://www.usg.com/content/dam/USG/pdpmovedocuments/usg-no-1-casting-plaster-data-en-IG1375.pdf"
+      },
+      "setTimeVicatMoulding": {
+        "min": 25,
+        "max": 35,
+        "unit": "min",
+        "grade": "manufacturer",
+        "source": "USG IG1937 rev. 1-20, USG No. 1 Moulding Plaster, https://www.usg.com/content/dam/USG_Marketing_Communications/united_states/product_promotional_materials/finished_assets/usg-no-1-moulding-plaster-submital-southard-IG1937.pdf"
+      },
+      "setTimeTrade": {
+        "min": 10,
+        "max": 20,
+        "unit": "min",
+        "grade": "guidance",
+        "source": "Ratcliffe, T. (1997) The Use of Gypsum Plaster, https://www.buildingconservation.com/articles/gypsum/gypsum_plaster.htm"
+      },
+      "settingExpansion": {
+        "min": 0.0015,
+        "max": 0.0021,
+        "unit": "1",
+        "asReported": "0.15 %-0.20 % (moulding plaster); 0.21 % maximum (casting plaster)",
+        "grade": "manufacturer",
+        "source": "USG IG1937 rev. 1-20 (No. 1 Moulding Plaster) and USG IG1375 rev. 8-24 (No. 1 Casting Plaster), https://www.usg.com/content/dam/USG/pdpmovedocuments/usg-no-1-casting-plaster-data-en-IG1375.pdf"
+      },
+      "safeDryingTemperature": {
+        "max": 49,
+        "unit": "degC",
+        "asReported": "120 °F (49 °C)",
+        "note": "above this a dry cast begins to calcine",
+        "grade": "manufacturer",
+        "source": "USG IG1375 rev. 8-24, USG No. 1 Casting Plaster, https://www.usg.com/content/dam/USG/pdpmovedocuments/usg-no-1-casting-plaster-data-en-IG1375.pdf"
+      }
+    }
+  },
+  "constituents": [
+    {
+      "mineral": "gypsum",
+      "formula": "CaSO4·2H2O",
+      "role": "the set body: interlocking crystals with water-filled then air-filled pores between them"
+    },
+    {
+      "mineral": "iron (armature)",
+      "formula": "Fe",
+      "role": "rods cast into slender limbs of large casts; corrodes when humidity reaches it"
+    }
+  ],
+  "optics": {
+    "refractiveIndex": [
+      {
+        "phase": "gypsum",
+        "direction": "alpha",
+        "value": 1.521,
+        "unit": "1",
+        "grade": "measured",
+        "source": "Anthony, J.W., Bideaux, R.A., Bladh, K.W. & Nichols, M.C. (eds.) Handbook of Mineralogy: Gypsum. Mineral Data Publishing, version 1 (2001-2005), Mineralogical Society of America, http://www.handbookofmineralogy.org/pdfs/gypsum.pdf"
+      },
+      {
+        "phase": "gypsum",
+        "direction": "beta",
+        "value": 1.523,
+        "unit": "1",
+        "grade": "measured",
+        "source": "Handbook of Mineralogy: Gypsum, http://www.handbookofmineralogy.org/pdfs/gypsum.pdf"
+      },
+      {
+        "phase": "gypsum",
+        "direction": "gamma",
+        "value": 1.53,
+        "unit": "1",
+        "grade": "measured",
+        "source": "Handbook of Mineralogy: Gypsum, http://www.handbookofmineralogy.org/pdfs/gypsum.pdf"
+      }
+    ],
+    "specularF0": {
+      "min": 0.043,
+      "max": 0.044,
+      "unit": "1",
+      "grade": "derived",
+      "derivation": "normal-incidence Fresnel reflectance R0 = ((n-1)/(n+1))^2 over gypsum's alpha (1.521) and gamma (1.530) indices",
+      "source": "Born, M. & Wolf, E. (1999) Principles of Optics, 7th ed., Cambridge University Press, section 1.5; indices from Handbook of Mineralogy: Gypsum, http://www.handbookofmineralogy.org/pdfs/gypsum.pdf"
+    },
+    "luminousReflectance": {
+      "naturalGroundGypsum": {
+        "value": 0.774,
+        "unit": "1",
+        "grade": "derived",
+        "derivation": "Y/Yn = (L/100)^2 from Hunter L = 88.0 (HunterLab Colorflex EZ); a = 0.8, b = 4.3 show a faint warm cast",
+        "note": "ground natural white gypsum filler (98 % CaSO4·2H2O, median particle size 13.0 um in the property table, though the same sheet's Microtrac table puts 50 % finer than 22 um); impurities in natural rock hold it below the whitest calcined plasters. The sheet prints 'L, a, b values (3) 88.0, 0.8, 4.3' with footnote 'HunterLab Colorflex EZ Colorimeter L,a,b values': unstarred, i.e. Hunter Lab notation, but the scale is not named; read as CIE L* = 88.0 the same reading would give Y/Yn = 0.72",
+        "source": "USG IG574-USA-ENG rev. 1-21, USG Terra Alba No. 1, https://www.usg.com/content/dam/USG/pdpmovedocuments/usg-terra-alba-no1-calcium-sulfate-filler-data-en-IG574.pdf; Hunter L = 100·sqrt(Y/Yn): Hunter, R.S. & Harold, R.W. (1987) The Measurement of Appearance, 2nd ed., Wiley, formula as given at https://en.wikipedia.org/wiki/Hunter_Lab"
+      },
+      "reflectanceStandardUse": {
+        "text": "Plaster of Paris set in water (1:3 by mass) was studied as a field diffuse-reflectance standard for its high reflectance, fairly flat spectrum and nearly perfect diffuseness.",
+        "grade": "measured",
+        "source": "Arai, T. (1979) Gypsum as Reflectance Standard in Field Works. Transactions of the Society of Instrument and Control Engineers 15(5), 678-682, https://doi.org/10.9746/sicetr1965.15.678 (abstract)"
+      }
+    },
+    "wet": "Set plaster is about half open pore; water filling the pores lowers the index contrast at crystal boundaries and the cast darkens and loses its chalky scatter until it dries."
+  },
+  "physical": {
+    "gypsumDensity": {
+      "value": 2317,
+      "unit": "kg/m3",
+      "asReported": "D(meas.) = 2.317(5) g/cm3",
+      "grade": "measured",
+      "source": "Handbook of Mineralogy: Gypsum, http://www.handbookofmineralogy.org/pdfs/gypsum.pdf"
+    },
+    "bulkDensityDry": {
+      "value": 1153,
+      "unit": "kg/m3",
+      "asReported": "Density, Dry 72 lbs./cu. ft. (1153 kg/m3)",
+      "grade": "manufacturer",
+      "source": "USG IG1375 rev. 8-24, USG No. 1 Casting Plaster, https://www.usg.com/content/dam/USG/pdpmovedocuments/usg-no-1-casting-plaster-data-en-IG1375.pdf"
+    },
+    "bulkDensityWet": {
+      "value": 1602,
+      "unit": "kg/m3",
+      "grade": "manufacturer",
+      "source": "USG IG1375 rev. 8-24, USG No. 1 Casting Plaster, https://www.usg.com/content/dam/USG/pdpmovedocuments/usg-no-1-casting-plaster-data-en-IG1375.pdf"
+    },
+    "porosity": {
+      "value": 0.5,
+      "unit": "1",
+      "grade": "derived",
+      "derivation": "1 - bulk/grain density = 1 - 1153/2317",
+      "source": "USG IG1375 rev. 8-24 (dry density) and Handbook of Mineralogy: Gypsum (grain density), http://www.handbookofmineralogy.org/pdfs/gypsum.pdf"
+    },
+    "compressiveStrengthDry": {
+      "min": 11.7,
+      "max": 17.2,
+      "unit": "MPa",
+      "note": "moulding plaster; casting plaster 16.5 MPa",
+      "grade": "manufacturer",
+      "source": "USG IG1937 rev. 1-20 and USG IG1375 rev. 8-24, https://www.usg.com/content/dam/USG/pdpmovedocuments/usg-no-1-casting-plaster-data-en-IG1375.pdf"
+    },
+    "hardness": {
+      "min": 1.5,
+      "max": 2,
+      "unit": "Mohs",
+      "note": "varies with direction; a fingernail scratches it",
+      "grade": "measured",
+      "source": "Handbook of Mineralogy: Gypsum, http://www.handbookofmineralogy.org/pdfs/gypsum.pdf"
+    },
+    "solubility25c": {
+      "min": 0.0147,
+      "max": 0.0182,
+      "unit": "mol/L",
+      "note": "spread of published estimates; 2.5-3.1 g of CaSO4·2H2O per litre",
+      "grade": "measured",
+      "source": "Lebedev, A.L. & Kosorukov, V.L. (2017) Gypsum solubility in water at 25 °C. Geochemistry International 55(2), 205-210, https://doi.org/10.1134/S0016702917010062"
+    }
+  },
+  "acoustic": {
+    "note": "Casts are free-standing objects in niches; their absorption belongs to the niche surface. Fibrous plaster panels carry their own record."
+  },
+  "physicalMaterial": {
+    "note": "Not walked on and not to be touched: the casts stand in niches above the floor. No footfall class."
+  },
+  "stock": {
+    "pieceMouldSections": {
+      "text": "Large figures are cast in separate moulds (head, limbs, torso); limbs are cast around iron rods; the portions are joined with steel dowels and fresh plaster, and the joins are sealed with plaster and paint or left detachable.",
+      "grade": "historical",
+      "source": "Payne, E.M. (2020) Studies in Conservation 65(1), 37-58, https://doi.org/10.1080/00393630.2019.1610845"
+    },
+    "finePlasterLining": {
+      "text": "Only superfine plaster is used for small casts or for lining the moulds of large ones; a thin skin of fine plaster over coarser plaster chips off in transport.",
+      "grade": "historical",
+      "source": "Brigham, W.T. (1874), pp. 27-29, as quoted in Payne, E.M. (2020) Studies in Conservation 65(1), 37-58, https://doi.org/10.1080/00393630.2019.1610845"
+    }
+  },
+  "workings": [
+    "cast.plaster"
+  ],
+  "histories": [
+    "white.soiling",
+    "white.micro-cracking",
+    "white.patching"
+  ],
+  "photograph": [
+    "A network of fine raised seam lines where the pieces of the mould met; fine sharp lines mean a good mould, thick ridges a worn one.",
+    "A matt, chalky, faintly warm white, or a tinted and waxed coat: nineteenth-century casts were often sealed, tinted with earth pigments or waxed.",
+    "Sub-millimetre pinholes from air trapped against the mould face.",
+    "Thick grey dust on upward-facing forms (heads, shoulders, the tops of drapery folds); on old casts, corroding iron armatures inside slender parts.",
+    "Old repairs: rejoined slender parts, fills and paint that read slightly differently from the original skin."
+  ],
+  "evidence": [
+    {
+      "path": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR/P2",
+      "set": "white_stucco",
+      "provider": "Poly Haven",
+      "url": "https://polyhaven.com/a/white_stucco",
+      "licence": "CC0 1.0",
+      "credits": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR/CREDITS.md (row P2: 'fine stucco: coffers, mouldings', 2.0 m)",
+      "tier": "reference",
+      "shows": "A smooth, set white plaster face with fine pinholes and almost no relief: the face a mould gives, before soiling.",
+      "statistics": {
+        "colorMeanLinear": {
+          "value": [
+            0.6802,
+            0.6513,
+            0.6286
+          ],
+          "unit": "1",
+          "note": "mean of the set's Color map (linear); exposure unknown, not an albedo",
+          "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR/stats.json",
+          "derivation": "mean over a 256 x 256 resample of the set Color.png, decoded from sRGB to linear (windows/Scripts/pbr_fetch.py, stats())",
+          "grade": "derived",
+          "space": "linear, sRGB (Rec.709) primaries, D65 white, decoded from the set Color.png"
+        },
+        "roughnessMapMedian": {
+          "value": 0.878,
+          "unit": "1",
+          "note": "authored map, near constant (percentiles 5/50/95 = 0.878/0.878/0.886)",
+          "source": "computed from C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR/P2/ORM.png",
+          "derivation": "percentiles of the green (roughness) channel of the set ORM.png over a 256 x 256 resample",
+          "grade": "derived"
+        }
+      }
+    }
+  ],
+  "evidenceSearch": {
+    "searched": [
+      "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR (CREDITS.md, CREDITS_chenghuai.md, every SET.txt, stats.json, chenghuai_stats.json)",
+      "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/Textures/CREDITS.md",
+      "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/Journeys/CREDITS.md",
+      "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/Albion",
+      "C:/mv/third_party (no SourceArt folder present)"
+    ],
+    "found": "P2 (Poly Haven white_stucco) shows a smooth set plaster face with pinholes. No photograph of a plaster cast is on this PC. The SMK Royal Cast Collection scans in C:/Users/anan9/Desktop/Projects/Musee Vision/assets/classical (public domain, see its CREDITS.md) are geometry of real plaster casts, not photographs of the substance.",
+    "tier": "The local sets are reference photographs of unknown exposure (texture, relief and ageing pattern only). Albedo needs tier (b), a ColorChecker photograph of a physical specimen; tier (a) here gives only the bounds listed under optics.luminousReflectance."
+  },
+  "unverified": [
+    {
+      "field": "luminous reflectance of a clean, uncoated cast of high-purity casting plaster",
+      "min": 0.8,
+      "max": 0.92,
+      "unit": "1",
+      "reason": "No measured value for a set cast was found. Ground natural gypsum measures 0.77 (derived from Hunter L); calcined high-purity casting plaster is whiter than natural rock, and Arai (1979) used set plaster as a reflectance standard for its high reflectance, but gives no number in the abstract. The tier (b) specimen sheet must settle it."
+    },
+    {
+      "field": "light transport depth (subsurface diffusion) in set plaster",
+      "unit": "mm",
+      "reason": "No measured scattering or absorption coefficient for set plaster was found; it governs how soft a cast's arrises look.",
+      "value": null
+    },
+    {
+      "field": "seam line width and height on a piece-mould cast",
+      "unit": "mm",
+      "reason": "Sources describe them as fine raised lines that thicken with mould wear, without numbers.",
+      "value": null
+    }
+  ],
+  "sources": [
+    "Anthony, J.W. et al. (eds.) Handbook of Mineralogy: Gypsum, http://www.handbookofmineralogy.org/pdfs/gypsum.pdf",
+    "Arai, T. (1979) Transactions of the Society of Instrument and Control Engineers 15(5), 678-682, https://doi.org/10.9746/sicetr1965.15.678",
+    "Born, M. & Wolf, E. (1999) Principles of Optics, 7th ed., Cambridge University Press.",
+    "CIAAW (IUPAC) Standard Atomic Weights 2024, https://www.ciaaw.org/atomic-weights.htm",
+    "Hunter, R.S. & Harold, R.W. (1987) The Measurement of Appearance, 2nd ed., Wiley.",
+    "Lebedev, A.L. & Kosorukov, V.L. (2017) Geochemistry International 55(2), 205-210, https://doi.org/10.1134/S0016702917010062",
+    "Payne, E.M. (2020) Studies in Conservation 65(1), 37-58, https://doi.org/10.1080/00393630.2019.1610845",
+    "Ratcliffe, T. (1997) The Use of Gypsum Plaster. The Building Conservation Directory.",
+    "USG IG1937 rev. 1-20 (No. 1 Moulding Plaster); IG1375 rev. 8-24 (No. 1 Casting Plaster); IG574 rev. 1-21 (Terra Alba No. 1)."
+  ]
+}

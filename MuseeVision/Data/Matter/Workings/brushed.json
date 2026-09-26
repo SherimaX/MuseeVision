@@ -1,0 +1,129 @@
+{
+  "schema": "musee.matter.working/1",
+  "key": "brushed",
+  "name": "Brushed (medium satin, directional)",
+  "appliesTo": {
+    "families": [
+      "bronze",
+      "accent"
+    ],
+    "substances": [
+      "bronze",
+      "brass"
+    ]
+  },
+  "over": [],
+  "process": "The metal is ground flat and then polished in one direction with an abrasive belt or wheel of 180-240 grit, leaving closely spaced, nearly parallel scratches: the satin grain. On a threshold strip the grain runs along the strip, parallel to the seam it covers. Walked strips are left uncoated, so that feet keep them bright and the strip can be re-grained in place; handled brass fittings are given a clear inhibited acrylic coat.",
+  "designation": {
+    "system": "NAAMM/NOMMA Metal Finishes Manual, as abstracted by the Copper Development Association",
+    "code": "M32 Medium satin",
+    "text": "Wheel or belt polishing with aluminium oxide or silicon carbide abrasives of 180-240 grit using a peripheral speed of 6,000 ft/min (30 m/s).",
+    "grit": {
+      "min": 180,
+      "max": 240,
+      "unit": "grit",
+      "source": "Copper Development Association, 'Copper Brass Bronze Design Handbook: Architectural Applications' (A4039), Table 16 (M32 Medium satin), https://www.copper.org/publications/pub_list/pdf/A4039-ArchitecturalApplications.pdf",
+      "grade": "guidance"
+    },
+    "peripheralSpeed": {
+      "value": 30,
+      "unit": "m/s",
+      "source": "Copper Development Association, A4039, Table 16 (M31-M33: 6,000 ft/min (30 m/s)), https://www.copper.org/publications/pub_list/pdf/A4039-ArchitecturalApplications.pdf",
+      "grade": "guidance"
+    }
+  },
+  "family": {
+    "text": "The directionally textured finishes: M31 fine satin (240-320 grit), M32 medium satin (180-240 grit), M33 coarse satin (120-180 grit), M34 hand rubbed (stainless steel wool or #0 pumice with solvent, or a non-abrasive mesh pad), M35 brushed (rotary stainless steel, brass or nickel-silver wire wheel). 'These finishes are the most frequently used mechanical treatments for architectural copper metals.'",
+    "fineSatinGrit": {
+      "min": 240,
+      "max": 320,
+      "unit": "grit",
+      "source": "Copper Development Association, A4039, Table 16 (M31), https://www.copper.org/publications/pub_list/pdf/A4039-ArchitecturalApplications.pdf",
+      "grade": "guidance"
+    },
+    "coarseSatinGrit": {
+      "min": 120,
+      "max": 180,
+      "unit": "grit",
+      "source": "Copper Development Association, A4039, Table 16 (M33), https://www.copper.org/publications/pub_list/pdf/A4039-ArchitecturalApplications.pdf",
+      "grade": "guidance"
+    },
+    "source": "Copper Development Association, A4039, Table 16 and p. 39 (Directionally Textured), https://www.copper.org/publications/pub_list/pdf/A4039-ArchitecturalApplications.pdf",
+    "grade": "guidance"
+  },
+  "precedent": {
+    "text": "A cast and fabricated bronze balcony railing finished with a satin grain of 180-220 grit and a clear lacquer.",
+    "grit": {
+      "min": 180,
+      "max": 220,
+      "unit": "grit",
+      "source": "Copper Development Association, A4039, Figure II-4 caption, https://www.copper.org/publications/pub_list/pdf/A4039-ArchitecturalApplications.pdf",
+      "grade": "guidance"
+    }
+  },
+  "hardwareEquivalents": {
+    "text": "BHMA 612 'Satin bronze, clear coated' (US10); BHMA 606 'Satin brass, clear coated' (US4).",
+    "source": "Copper Development Association, A4039, Table 15 (BHMA and U.S. Finishes for Brass and Bronze Hardware), https://www.copper.org/publications/pub_list/pdf/A4039-ArchitecturalApplications.pdf",
+    "grade": "guidance"
+  },
+  "surface": {
+    "texture": "directional: parallel scratches along the piece's u axis (UV0 +u, laid by Form along the strip or the brushing direction)",
+    "metal": "bare metal of the substance (bronze f0 or brass f0); on handled brass, under a clear inhibited acrylic film",
+    "roughnessNote": {
+      "text": "Roughness falls as the grit gets finer, and gloss rises exponentially as roughness falls; lightness L* falls as Ra falls. Measured on copper alloys (brass C2801, phosphor bronze C5191) polished with abrasive papers to Ra 0.03-1.00 um, in four directions relative to the scratches.",
+      "RaStudied": {
+        "min": 0.03,
+        "max": 1.0,
+        "unit": "um",
+        "source": "M. Yonehara, T. Matsui, K. Kihara, H. Isono, A. Kijima, T. Sugibayashi, 'Experimental Relationships between Surface Roughness, Glossiness and Color of Chromatic Colored Metals', Materials Transactions 45(4) (2004) 1027-1032, https://www.jstage.jst.go.jp/article/matertrans/45/4/45_4_1027/_article",
+        "grade": "measured"
+      }
+    },
+    "comparableStainless": {
+      "text": "On stainless steel, a 32 microinch Ra finish (0.81 um) is 'the accepted equivalent of higher range No. 4 finish', and a No. 4 finish spans grits from 60 to 220.",
+      "Ra": {
+        "value": 0.81,
+        "unit": "um",
+        "source": "C. T. Karpus, 'RA Finishes on Stainless Steel' (Diamond Brite Metals white paper), p. 2 (32 RA), https://www.msci.org/wp-content/uploads/2022/01/Diamond-Brite-Metals-RA-Finishes-on-Stainless-Steel.pdf",
+        "grade": "secondary",
+        "conditions": "stainless steel, not copper alloy; 32 microinch converted at 0.0254 um per microinch"
+      }
+    },
+    "anisotropy": "The grain scatters light across the scratches much more than along them, so a highlight is drawn out across the grain. The degree has no verified measurement (see unverified)."
+  },
+  "coating": {
+    "walked": {
+      "text": "None (a design choice of this record). Clear organic coatings degrade over time and must periodically be removed, the metal refinished and the coating re-applied; on a walked strip the coat would wear through along the traffic path first. The strip is kept bright by traffic and re-grained in maintenance.",
+      "source": "Copper Development Association, A4039, p. 42 ('These coatings degrade over time ... consider effort required to periodically remove the clear coating, refinish the underlying metal and apply a new coating'), https://www.copper.org/publications/pub_list/pdf/A4039-ArchitecturalApplications.pdf",
+      "grade": "guidance"
+    },
+    "handled": {
+      "text": "An INCRALAC-type inhibited acrylic lacquer (acrylic with benzotriazole). 'Baked films are more abrasion resistant and are preferred for interior applications, although periodic maintenance is required.'",
+      "source": "Copper Development Association, A4039, p. 42 (Inhibited acrylic coatings), https://www.copper.org/publications/pub_list/pdf/A4039-ArchitecturalApplications.pdf",
+      "grade": "guidance"
+    }
+  },
+  "maintenance": {
+    "text": "Wire-wheel (M35) brushed finishes are 'difficult to maintain'; belt satin finishes are renewed in place by hand rubbing (M34), which is used 'where there is a need to smooth and blend other satin finishes'. Avoid steel wool, which can contain a rust inhibitor that later stains copper.",
+    "source": "Copper Development Association, A4039, p. 39 (Hand-rubbed and Brushed finishes) and pp. 42-43 (avoid steel wool), https://www.copper.org/publications/pub_list/pdf/A4039-ArchitecturalApplications.pdf",
+    "grade": "guidance"
+  },
+  "photograph": [
+    "Fine parallel lines along the piece, the colour of the bare alloy.",
+    "A highlight stretched across the lines, which slides along the piece as the viewer moves."
+  ],
+  "unverified": [
+    {
+      "field": "surface.roughnessRa (M32 on bronze)",
+      "value": null,
+      "unit": "um",
+      "reason": "No measured Ra for a 180-240 grit belt finish on a copper alloy was read. Yonehara et al. 2004 give their results as figures, not a grit table; Karpus's 0.81 um is for stainless steel."
+    },
+    {
+      "field": "surface.anisotropy",
+      "value": null,
+      "unit": "1",
+      "reason": "No measured BRDF or slope distribution of a satin-grained copper alloy was read. The Matter builder must derive along- and across-grain roughness from a measurement (tier a) or a specimen photograph (tier b)."
+    }
+  ]
+}

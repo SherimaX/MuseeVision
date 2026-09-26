@@ -1,0 +1,158 @@
+{
+  "schema": "musee.matter.working/1",
+  "key": "painted.steel",
+  "name": "Shop-painted structural steel (ISO 12944 protective paint system)",
+  "appliesTo": {
+    "families": [
+      "accent"
+    ],
+    "substances": [
+      "steel"
+    ]
+  },
+  "over": [],
+  "process": "After welding, the welds are ground and faired and the whole lattice is abrasive blast-cleaned to Sa 2 1/2 (mill scale, rust and old coatings removed, only slight staining left). In the fabricator's shop it is sprayed with a two-coat protective system rated for a C2 environment with very high durability: an epoxy build coat of 125 um, then a polyurethane topcoat of 55 um, 180 um nominal dry film thickness in all. The topcoat carries the colour, a dark grey, and leaves the faint orange-peel texture of spray-applied paint. Bolted or site-welded joints are touched up after erection with the same system. The steel is seen only through its paint.",
+  "environment": {
+    "text": "The lattice is inside the heated Rotunda (ISO 12944-2 C1, heated interiors with clean air, steel corrosion at most 1.3 um a year), but it lies directly under the glazing, where condensation can form on cold nights: the system is therefore specified for the next category, C2 (unheated buildings and low-pollution atmospheres, 1.3-25 um a year). The condensation argument is this record's reasoning, not a measurement.",
+    "C1": {
+      "max": 1.3,
+      "unit": "um/year",
+      "source": "World of Corrosion, 'ISO 12944 Coating Systems' (ISO 12944-2 C1 very low: heated interiors, offices, shops, schools; <= 1.3 um/year), https://worldofcorrosion.com/iso-12944.html",
+      "grade": "secondary",
+      "conditions": "first-year thickness loss of low-carbon steel"
+    },
+    "C2": {
+      "min": 1.3,
+      "max": 25,
+      "unit": "um/year",
+      "source": "World of Corrosion, 'ISO 12944 Coating Systems' (ISO 12944-2 C2 low: unheated buildings, rural areas; 1.3-25 um/year), https://worldofcorrosion.com/iso-12944.html",
+      "grade": "secondary",
+      "conditions": "first-year thickness loss of low-carbon steel"
+    }
+  },
+  "steps": [
+    {
+      "step": "surface preparation",
+      "text": "Abrasive blast-cleaning to Sa 2 1/2, 'very thorough blast-cleaning': mill scale, rust and coatings removed; residual staining only as slight discolouration.",
+      "source": "World of Corrosion, 'ISO 12944 Coating Systems' (ISO 8501-1 Sa 2 1/2), https://worldofcorrosion.com/iso-12944.html",
+      "grade": "secondary"
+    },
+    {
+      "step": "epoxy build coat",
+      "text": "Epoxy build coat (Sherwin-Williams Macropoxy 400 in the certified system; the guide lists its chemistry as 'Epoxy').",
+      "dryFilmThickness": {
+        "value": 125,
+        "unit": "um",
+        "source": "Sherwin-Williams Protective and Marine, 'ISO 12944 Systems Guide', 2021 edition (compliant with ISO 12944:2018), p. 3, C2 Very High Durability (>25 years), system 1 (certificate ERO027446-5-C2VH), https://industrial.sherwin-williams.com/content/dam/pcg/sherwin-williams/protective-marine/emeai/de/de-de/pdfs/system-guides/ISO-12944-2018-Systems-Coatings-Guide-2021-English.pdf",
+        "grade": "manufacturer"
+      }
+    },
+    {
+      "step": "polyurethane topcoat",
+      "text": "Polyurethane finish (Sherwin-Williams Acrolon 7300 in the certified system), in the museum's lattice colour.",
+      "dryFilmThickness": {
+        "value": 55,
+        "unit": "um",
+        "source": "Sherwin-Williams, 'ISO 12944 Systems Guide' 2021, p. 3, C2 VH system 1, https://industrial.sherwin-williams.com/content/dam/pcg/sherwin-williams/protective-marine/emeai/de/de-de/pdfs/system-guides/ISO-12944-2018-Systems-Coatings-Guide-2021-English.pdf",
+        "grade": "manufacturer"
+      }
+    }
+  ],
+  "system": {
+    "totalDryFilmThickness": {
+      "value": 180,
+      "unit": "um",
+      "source": "Sherwin-Williams, 'ISO 12944 Systems Guide' 2021, p. 3, C2 VH system 1 (TOTAL 180), https://industrial.sherwin-williams.com/content/dam/pcg/sherwin-williams/protective-marine/emeai/de/de-de/pdfs/system-guides/ISO-12944-2018-Systems-Coatings-Guide-2021-English.pdf",
+      "grade": "manufacturer"
+    },
+    "durability": {
+      "min": 25,
+      "unit": "year",
+      "source": "Sherwin-Williams, 'ISO 12944 Systems Guide' 2021, p. 3 ('C2 VERY HIGH DURABILITY: >25 YRS'; 'The durability range is not a guarantee time'), https://industrial.sherwin-williams.com/content/dam/pcg/sherwin-williams/protective-marine/emeai/de/de-de/pdfs/system-guides/ISO-12944-2018-Systems-Coatings-Guide-2021-English.pdf",
+      "grade": "manufacturer",
+      "conditions": "time to first major maintenance, ISO 12944:2018 very high (VH)"
+    },
+    "alternativeHigh": {
+      "text": "C2 High durability (15-25 years): epoxy 70 um + polyurethane 50 um = 120 um (system 6).",
+      "totalDryFilmThickness": {
+        "value": 120,
+        "unit": "um",
+        "source": "Sherwin-Williams, 'ISO 12944 Systems Guide' 2021, p. 2, C2 High Durability system 6 (ERO029057-2-C2H), https://industrial.sherwin-williams.com/content/dam/pcg/sherwin-williams/protective-marine/emeai/de/de-de/pdfs/system-guides/ISO-12944-2018-Systems-Coatings-Guide-2021-English.pdf",
+        "grade": "manufacturer"
+      }
+    }
+  },
+  "colour": {
+    "text": "The as-built lattice colour: a dark neutral grey, tint #3C3F42, linear albedo about 0.05. It is a design value carried over from the finished museum (D-001), not a measurement of a paint.",
+    "albedo": {
+      "value": [
+        0.0452,
+        0.0497,
+        0.0545
+      ],
+      "unit": "1",
+      "space": "linear Rec.709, D65",
+      "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/usd/Materials.usda (frozen reference), Material 'steel_lattice': museevision:tint '#3C3F42', diffuseColor (0.0452, 0.0497, 0.0545)",
+      "grade": "design"
+    },
+    "note": "The frozen reference also has 'steel_lattice_hall' (#3B3A36) for the Hall of Light. One steel in one paint would give the museum one lattice colour; which of the two is the Architect's decision."
+  },
+  "surface": {
+    "kind": "dielectric coat over metal (the steel's own optics are hidden)",
+    "texture": "spray orange peel: a gentle, isotropic waviness of the topcoat",
+    "layers": [
+      {
+        "layer": "polyurethane topcoat",
+        "thickness": {
+          "value": 55,
+          "unit": "um",
+          "source": "Sherwin-Williams, 'ISO 12944 Systems Guide' 2021, p. 3, C2 VH system 1",
+          "grade": "manufacturer"
+        }
+      },
+      {
+        "layer": "epoxy build coat",
+        "thickness": {
+          "value": 125,
+          "unit": "um",
+          "source": "Sherwin-Williams, 'ISO 12944 Systems Guide' 2021, p. 3, C2 VH system 1",
+          "grade": "manufacturer"
+        }
+      },
+      {
+        "layer": "steel, blast-cleaned Sa 2 1/2",
+        "source": "World of Corrosion, 'ISO 12944 Coating Systems' (ISO 8501-1), https://worldofcorrosion.com/iso-12944.html",
+        "grade": "secondary"
+      }
+    ]
+  },
+  "photograph": [
+    "An even dark grey with a satin sheen and a faint spray orange peel.",
+    "Faired welds; the steel itself is never seen."
+  ],
+  "unverified": [
+    {
+      "field": "surface.topcoatF0",
+      "value": 0.04,
+      "unit": "1",
+      "reason": "F0 = ((n-1)/(n+1))^2 = 0.040 for a binder index n = 1.50. The refractive index of the polyurethane topcoat was not read from a source; organic binders lie near 1.5."
+    },
+    {
+      "field": "surface.gloss",
+      "value": null,
+      "unit": "GU",
+      "reason": "The topcoat's gloss level (ISO 2813, 60 degrees) was not specified by a source; a satin finish is the usual architectural choice but no value was read."
+    },
+    {
+      "field": "surface.orangePeel",
+      "value": null,
+      "unit": "um",
+      "reason": "No measured amplitude or wavelength of spray orange peel on a polyurethane topcoat was read."
+    },
+    {
+      "field": "environment (C1 or C2)",
+      "text": "C2",
+      "reason": "The condensation risk under the glazing is argued, not measured; Light and Studio could measure the glass's inner-face temperature against the dew point at the reference moments."
+    }
+  ]
+}

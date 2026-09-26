@@ -1,0 +1,119 @@
+{
+  "schema": "musee.matter.history/1",
+  "key": "bronze.wear",
+  "name": "Feet and hands on the copper alloys",
+  "family": "bronze",
+  "appliesTo": {
+    "families": [
+      "bronze",
+      "accent"
+    ],
+    "substances": [
+      "bronze",
+      "brass"
+    ],
+    "workings": [
+      "cast.bronze",
+      "brushed",
+      "patinated"
+    ]
+  },
+  "surfaceLawTerms": [
+    "wear",
+    "touch"
+  ],
+  "describes": "Where feet land, grit under shoes scours the metal: tarnish and patina are rubbed off the walked faces down to bright metal, and the founder's satin grain is slowly replaced by a fine, random polish that follows the traffic path. Across a threshold strip the wear is brightest in the middle of the doorway and fades toward the jambs; on the sun clock's dial the tops of the inlaid lines and letters go bright where visitors stand and walk, while the recesses and the edges against the stone keep their brown. Hands do the same to rails and edges, and leave skin oils that tarnish the metal again between cleanings. Wear follows Site's traffic field and the pieces' touch height.",
+  "terms": {
+    "patinaInTraffic": {
+      "text": "'Patinas are normally reserved for non-traffic areas and areas that will receive little or no maintenance. If placed in a traffic area, a clear organic coating may provide protection, but can alter the color.'",
+      "source": "Copper Development Association, 'Copper Brass Bronze Design Handbook: Architectural Applications' (A4039), p. 41, https://www.copper.org/publications/pub_list/pdf/A4039-ArchitecturalApplications.pdf",
+      "grade": "guidance"
+    },
+    "highlights": {
+      "text": "Statuary finishes 'are often augmented by mechanical abrasion to produce highlights': the founder does by hand, on high points, what wear does over years.",
+      "source": "Copper Development Association, A4039, p. 42, https://www.copper.org/publications/pub_list/pdf/A4039-ArchitecturalApplications.pdf",
+      "grade": "guidance"
+    },
+    "polishRaisesGloss": {
+      "text": "As a copper alloy's roughness Ra falls, its gloss Gs(60 degrees) rises exponentially and its lightness L* falls; the surface colour becomes bluer. Wear that polishes a satin or blasted face therefore makes it glossier and darker in diffuse light, brighter in the mirror direction.",
+      "source": "M. Yonehara, T. Matsui, K. Kihara, H. Isono, A. Kijima, T. Sugibayashi, 'Experimental Relationships between Surface Roughness, Glossiness and Color of Chromatic Colored Metals', Materials Transactions 45(4) (2004) 1027-1032, abstract, https://www.jstage.jst.go.jp/article/matertrans/45/4/45_4_1027/_article",
+      "grade": "measured"
+    },
+    "skinOils": {
+      "text": "Skin oils tarnish copper alloys; in exterior use tarnishing and fingerprints are unavoidable, and natural weathering makes the marks hard to notice after a few months.",
+      "source": "Copper Development Association, A4039, p. 26, https://www.copper.org/publications/pub_list/pdf/A4039-ArchitecturalApplications.pdf",
+      "grade": "guidance"
+    },
+    "hardness": {
+      "text": "The walked bronze has a Brinell hardness of 70-100: at least 70 as a sand casting (the dial's inlays), at least 80 as continuously cast bar (the strips), about 100 typical.",
+      "bronzeHardness": {
+        "min": 70,
+        "max": 100,
+        "unit": "HB",
+        "source": "Deutsches Kupferinstitut data sheet CuSn10-C, section 4.1.1 (minimum 70, GS sand casting), https://www.kupferinstitut.de/wp-content/uploads/2019/11/CuSn10-C.pdf ; Keskipakovalu Oy data sheet CuSn10-C (minimum 80, GZ and GC), https://www.keskipakovalu.fi/wp-content/uploads/2019/09/Data-sheet__TP10-Eng.pdf ; Copper Alloys Ltd CC480K (typical 100), https://copperalloys.net/alloys/bs-en-19822008-gc-cc480k/",
+        "grade": "manufacturer"
+      }
+    },
+    "maintenance": {
+      "text": "Statuary finishes are hand-rubbed periodically with wax or oils; satin finishes are renewed by hand rubbing (M34) along the grain.",
+      "source": "Copper Development Association, A4039, p. 42 and p. 39, https://www.copper.org/publications/pub_list/pdf/A4039-ArchitecturalApplications.pdf",
+      "grade": "guidance"
+    }
+  },
+  "drivers": [
+    {
+      "driver": "traffic",
+      "owner": "Site",
+      "meaning": "the traffic field: footfalls per square metre over the piece's life",
+      "source": "MuseeVision/Docs/Architecture.md, Matter (per stage, plan-field textures: traffic density)",
+      "grade": "design"
+    },
+    {
+      "driver": "walkable",
+      "owner": "Form",
+      "meaning": "which faces are walked on",
+      "source": "MuseeVision/Docs/Architecture.md, Matter (piece table: walkable)",
+      "grade": "design"
+    },
+    {
+      "driver": "arrisProximity",
+      "owner": "Form",
+      "meaning": "nearness to an edge or a high point, where rubbing reaches first",
+      "source": "MuseeVision/Docs/Architecture.md, Matter (vertex colour: arris proximity)",
+      "grade": "design"
+    },
+    {
+      "driver": "touch",
+      "owner": "not declared",
+      "meaning": "how often hands meet a face (rails, edges, fittings at hand height)",
+      "source": "The piece-data layout in MuseeVision/Docs/Architecture.md, Matter has no touch slot (touch is named among the surface law's terms but has no carrier): a gap for the Register",
+      "grade": "design"
+    },
+    {
+      "driver": "age",
+      "owner": "Matter piece table",
+      "meaning": "years the piece has been in service",
+      "source": "MuseeVision/Docs/Architecture.md, Matter (piece table: age)",
+      "grade": "design"
+    }
+  ],
+  "photograph": [
+    "Look for bright, glossy metal exactly where feet and hands go (the centre line of a threshold, the standing places on the dial, the top of a rail), with a soft edge into the untouched brown or satin.",
+    "Scratches running in every direction on walked faces and along the grain on unwalked ones.",
+    "Dark lines where the metal meets the stone."
+  ],
+  "unverified": [
+    {
+      "field": "terms.wearRate (patina removed per visitor or per year)",
+      "value": null,
+      "unit": "um/year",
+      "reason": "No measured abrasion rate of patina or bronze under foot traffic was read. The surface law must scale wear by Site's traffic density with a constant calibrated from tier (c) photographs of walked bronze of known age."
+    },
+    {
+      "field": "terms.hardness (brass)",
+      "value": null,
+      "unit": "HB",
+      "reason": "A Brinell hardness for C26000 was not in the tables read (CDA gives tensile strength by temper)."
+    }
+  ]
+}

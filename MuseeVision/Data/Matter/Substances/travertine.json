@@ -1,0 +1,898 @@
+{
+  "schema": "musee.matter.substance/1",
+  "key": "travertine",
+  "name": "Roman travertine (Travertino Romano; the lapis Tiburtinus of Tivoli)",
+  "family": "stone",
+  "accentOf": null,
+  "summary": "A banded, porous limestone laid down as calcite by carbon-dioxide-rich thermal springs in the plain below Tivoli, east of Rome, and quarried there since antiquity. It is the museum's stone: sawn vein-cut, honed on walls and plinths, polished where a floor holds a reflection, and laid as the threshold of every doorway.",
+  "dossier": "Docs/Matter/travertine.md",
+  "aliases": [
+    "Travertino Romano",
+    "Travertino Romano Classico",
+    "Tivoli travertine",
+    "lapis Tiburtinus"
+  ],
+  "identity": {
+    "class": {
+      "text": "A chemical sedimentary rock: travertine is a precipitate of calcium carbonate from saturated, generally warm or hot, fresh, mineral-laden waters in and around the mouths of fractures; Tivoli's is an endogenic (thermogene) travertine.",
+      "grade": "guidance",
+      "source": "Natural Stone Institute (2022) Dimension Stone Design Manual, chapter 12 'Travertine' (Specification, Product Description, Technical Data), pp. 12-1 to 12-14, https://transparencycatalog.com/assets/uploads/greener-images/12-TRAVERTINE-2022.pdf, Product Description 1.1-1.4 ; De Filippis L., Faccenna C., Funiciello R., Billi A., Soligo M., Rossetti C., Tuccimei P. (2011) 'The Lapis Tiburtinus travertine (Tivoli, Central Italy): its controversial tectonic vs paleoclimatic origin', Rendiconti Online della Societa Geologica Italiana 16:15-16, abstract, https://www.rendicontisocietageologicaitaliana.it/297/article-1181/the-lapis-tiburtinus-travertine-tivoli-central-italy-its-controversial-tectonic-vs-paleoclimatic-origin.html"
+    },
+    "designations": [
+      {
+        "system": "trade",
+        "designation": "Travertino Romano Classico",
+        "source": "Alberti e Alberti (Tivoli), 'Travertino Romano Classico', technical properties to UNI EN test standards, product page read 2026-09-26, https://marmialberti.it/en/travertino-romano-classico/",
+        "grade": "manufacturer"
+      },
+      {
+        "system": "historical",
+        "designation": "lapis Tiburtinus (the stone of Tibur, now Tivoli)",
+        "source": "Natural Stone Institute (2022) Dimension Stone Design Manual, chapter 12 'Travertine' (Specification, Product Description, Technical Data), pp. 12-1 to 12-14, https://transparencycatalog.com/assets/uploads/greener-images/12-TRAVERTINE-2022.pdf, Product Description 1.3 ; De Filippis L., Faccenna C., Funiciello R., Billi A., Soligo M., Rossetti C., Tuccimei P. (2011) 'The Lapis Tiburtinus travertine (Tivoli, Central Italy): its controversial tectonic vs paleoclimatic origin', Rendiconti Online della Societa Geologica Italiana 16:15-16, abstract, https://www.rendicontisocietageologicaitaliana.it/297/article-1181/the-lapis-tiburtinus-travertine-tivoli-central-italy-its-controversial-tectonic-vs-paleoclimatic-origin.html",
+        "grade": "guidance"
+      }
+    ],
+    "etymology": {
+      "text": "The name travertine comes from travertino, from Tibur (now Tivoli), where the stone forms an extensive deposit worked for many centuries.",
+      "grade": "guidance",
+      "source": "Natural Stone Institute (2022) Dimension Stone Design Manual, chapter 12 'Travertine' (Specification, Product Description, Technical Data), pp. 12-1 to 12-14, https://transparencycatalog.com/assets/uploads/greener-images/12-TRAVERTINE-2022.pdf, Product Description 1.3"
+    },
+    "chosenBecause": [
+      {
+        "text": "The museum's design names vein-cut Roman travertine as the museum stone, one stone finished honed, polished or glass-smooth by era.",
+        "grade": "design",
+        "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/plan/boards/MaterialsStone.png and plan/canvas/MaterialsStone.dc.html (the material language: stone) ; C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR/CREDITS.md (row S1)"
+      }
+    ],
+    "correction": {
+      "text": "The NSI product description says Tivoli's springs were heated by volcanism of Mt. Vesuvius. The geological literature places the deposit 30 km east of Rome near the Colli Albani volcano; this record follows the geology.",
+      "grade": "measured",
+      "source": "De Filippis L., Faccenna C., Funiciello R., Billi A., Soligo M., Rossetti C., Tuccimei P. (2011) 'The Lapis Tiburtinus travertine (Tivoli, Central Italy): its controversial tectonic vs paleoclimatic origin', Rendiconti Online della Societa Geologica Italiana 16:15-16, abstract, https://www.rendicontisocietageologicaitaliana.it/297/article-1181/the-lapis-tiburtinus-travertine-tivoli-central-italy-its-controversial-tectonic-vs-paleoclimatic-origin.html"
+    }
+  },
+  "constituents": [
+    {
+      "mineral": "calcite",
+      "formula": "CaCO3",
+      "role": "the stone itself: crusts, cement, grains and veins",
+      "grade": "guidance",
+      "source": "Natural Stone Institute (2022) Dimension Stone Design Manual, chapter 12 'Travertine' (Specification, Product Description, Technical Data), pp. 12-1 to 12-14, https://transparencycatalog.com/assets/uploads/greener-images/12-TRAVERTINE-2022.pdf, Product Description 1.11.1"
+    },
+    {
+      "mineral": "aragonite",
+      "formula": "CaCO3",
+      "role": "a metastable carbonate present in a few travertines; reverts to calcite",
+      "grade": "guidance",
+      "source": "Natural Stone Institute (2022) Dimension Stone Design Manual, chapter 12 'Travertine' (Specification, Product Description, Technical Data), pp. 12-1 to 12-14, https://transparencycatalog.com/assets/uploads/greener-images/12-TRAVERTINE-2022.pdf, Product Description 1.11.1 and note 2"
+    },
+    {
+      "mineral": "hydrous silica, clay, quartz silt",
+      "formula": null,
+      "role": "minor impurities: the insoluble residue",
+      "grade": "guidance",
+      "source": "Natural Stone Institute (2022) Dimension Stone Design Manual, chapter 12 'Travertine' (Specification, Product Description, Technical Data), pp. 12-1 to 12-14, https://transparencycatalog.com/assets/uploads/greener-images/12-TRAVERTINE-2022.pdf, Product Description 1.11.1"
+    }
+  ],
+  "formation": {
+    "how": "Thermal water rising along a fault from depth near the Colli Albani volcano carries calcium bicarbonate. At the surface it loses carbon dioxide and calcite precipitates in thin crusts, layer on layer, over vents, pools and terraces, trapping gas bubbles. The layers stack into depositional benches separated by erosional surfaces; the gaps between crusts and the gas bubbles become the stone's voids.",
+    "sources": [
+      "Natural Stone Institute (2022) Dimension Stone Design Manual, chapter 12 'Travertine' (Specification, Product Description, Technical Data), pp. 12-1 to 12-14, https://transparencycatalog.com/assets/uploads/greener-images/12-TRAVERTINE-2022.pdf, Product Description 1.4",
+      "De Filippis L., Faccenna C., Funiciello R., Billi A., Soligo M., Rossetti C., Tuccimei P. (2011) 'The Lapis Tiburtinus travertine (Tivoli, Central Italy): its controversial tectonic vs paleoclimatic origin', Rendiconti Online della Societa Geologica Italiana 16:15-16, abstract, https://www.rendicontisocietageologicaitaliana.it/297/article-1181/the-lapis-tiburtinus-travertine-tivoli-central-italy-its-controversial-tectonic-vs-paleoclimatic-origin.html",
+      "Travertino Romano Group (Guidonia Montecelio), 'Tivoli travertine quarries' (finishes listed: filled/honed, open pore honed, brushed, brushed open pore, antique, natural split), read 2026-09-26, https://www.travertino-romano.com/en/formation/tivoli-travertine-quarries",
+      "Alberti e Alberti (Tivoli), 'Travertino Romano Classico', technical properties to UNI EN test standards, product page read 2026-09-26, https://marmialberti.it/en/travertino-romano-classico/ ('The porous structure that distinguishes its appearance is due to the presence of gas bubbles trapped during the sedimentation phase.')"
+    ],
+    "facts": {
+      "age": {
+        "min": 30000,
+        "max": 115000,
+        "unit": "year",
+        "grade": "measured",
+        "source": "De Filippis L., Faccenna C., Funiciello R., Billi A., Soligo M., Rossetti C., Tuccimei P. (2011) 'The Lapis Tiburtinus travertine (Tivoli, Central Italy): its controversial tectonic vs paleoclimatic origin', Rendiconti Online della Societa Geologica Italiana 16:15-16, abstract, https://www.rendicontisocietageologicaitaliana.it/297/article-1181/the-lapis-tiburtinus-travertine-tivoli-central-italy-its-controversial-tectonic-vs-paleoclimatic-origin.html",
+        "conditions": "onset and end of deposition, uranium-series geochronology",
+        "asReported": "about 115 and 30 ka"
+      },
+      "depositArea": {
+        "value": 20000000.0,
+        "unit": "m2",
+        "grade": "measured",
+        "source": "De Filippis L., Faccenna C., Funiciello R., Billi A., Soligo M., Rossetti C., Tuccimei P. (2011) 'The Lapis Tiburtinus travertine (Tivoli, Central Italy): its controversial tectonic vs paleoclimatic origin', Rendiconti Online della Societa Geologica Italiana 16:15-16, abstract, https://www.rendicontisocietageologicaitaliana.it/297/article-1181/the-lapis-tiburtinus-travertine-tivoli-central-italy-its-controversial-tectonic-vs-paleoclimatic-origin.html",
+        "asReported": "about 20 km2"
+      },
+      "depositThickness": {
+        "value": 60,
+        "max": 85,
+        "unit": "m",
+        "grade": "measured",
+        "source": "De Filippis L., Faccenna C., Funiciello R., Billi A., Soligo M., Rossetti C., Tuccimei P. (2011) 'The Lapis Tiburtinus travertine (Tivoli, Central Italy): its controversial tectonic vs paleoclimatic origin', Rendiconti Online della Societa Geologica Italiana 16:15-16, abstract, https://www.rendicontisocietageologicaitaliana.it/297/article-1181/the-lapis-tiburtinus-travertine-tivoli-central-italy-its-controversial-tectonic-vs-paleoclimatic-origin.html",
+        "conditions": "60 m on average; over 85 m on the western side, over the seismically active fault where thermal springs and sinkholes occur"
+      },
+      "calciumCarbonate": {
+        "min": 85.64,
+        "max": 99.94,
+        "unit": "%",
+        "grade": "measured",
+        "source": "Mancini A., Frondini F., Capezzuoli E., Galvez Mejia E., Lezzi G., Matarazzi D., Brogi A., Swennen R. (2019) 'Porosity, bulk density and CaCO3 content of travertines. A new dataset from Rapolano, Canino and Tivoli travertines (Italy)', Data in Brief 25:104158, Table 2, Tivoli (Cava Morelli) rows, https://doi.org/10.1016/j.dib.2019.104158",
+        "conditions": "mass fraction by dissolution in 5 M HCl; specimens of 10-20 cm3 from three quarry banks at Cava Morelli, Tivoli"
+      }
+    },
+    "benches": {
+      "text": "The deposit is a succession of depositional benches, grown in an aggradational fashion and separated by five main erosional surfaces.",
+      "grade": "measured",
+      "source": "De Filippis L., Faccenna C., Funiciello R., Billi A., Soligo M., Rossetti C., Tuccimei P. (2011) 'The Lapis Tiburtinus travertine (Tivoli, Central Italy): its controversial tectonic vs paleoclimatic origin', Rendiconti Online della Societa Geologica Italiana 16:15-16, abstract, https://www.rendicontisocietageologicaitaliana.it/297/article-1181/the-lapis-tiburtinus-travertine-tivoli-central-italy-its-controversial-tectonic-vs-paleoclimatic-origin.html"
+    },
+    "quarries": {
+      "text": "Quarried in the basin of Tivoli and Guidonia; the Societa del Travertino Romano works three quarries there: Valle Pilella, Barco and Le Fosse.",
+      "grade": "manufacturer",
+      "source": "Societa del Travertino Romano, 'Quarries', read 2026-09-26, https://www.iltravertino.com/en/quarries.html"
+    },
+    "colour": [
+      {
+        "text": "From milky white to walnut, with shades from yellow to red, set by the oxides taken up while the stone was deposited.",
+        "grade": "manufacturer",
+        "source": "Alberti e Alberti (Tivoli), 'Travertino Romano Classico', technical properties to UNI EN test standards, product page read 2026-09-26, https://marmialberti.it/en/travertino-romano-classico/"
+      },
+      {
+        "text": "Light buff through tan to brown and into reds, from iron oxides; the colours of the bands record changes in the volume or chemistry of the water, in the conduits, and wet and dry climatic cycles.",
+        "grade": "guidance",
+        "source": "Natural Stone Institute (2022) Dimension Stone Design Manual, chapter 12 'Travertine' (Specification, Product Description, Technical Data), pp. 12-1 to 12-14, https://transparencycatalog.com/assets/uploads/greener-images/12-TRAVERTINE-2022.pdf, Product Description 2.1-2.2"
+      }
+    ]
+  },
+  "physical": {
+    "density": {
+      "min": 2250,
+      "max": 2690,
+      "unit": "kg/m3",
+      "grade": "measured",
+      "source": "Mancini A., Frondini F., Capezzuoli E., Galvez Mejia E., Lezzi G., Matarazzi D., Brogi A., Swennen R. (2019) 'Porosity, bulk density and CaCO3 content of travertines. A new dataset from Rapolano, Canino and Tivoli travertines (Italy)', Data in Brief 25:104158, Table 2, Tivoli (Cava Morelli) rows, https://doi.org/10.1016/j.dib.2019.104158",
+      "conditions": "bulk density; specimens of 10-20 cm3 from three quarry banks, Tivoli (Cava Morelli), mass over volume by water displacement",
+      "asReported": "2.25-2.69 g/cm3"
+    },
+    "apparentDensity": {
+      "value": 2491,
+      "unit": "kg/m3",
+      "grade": "manufacturer",
+      "source": "Alberti e Alberti (Tivoli), 'Travertino Romano Classico', technical properties to UNI EN test standards, product page read 2026-09-26, https://marmialberti.it/en/travertino-romano-classico/",
+      "conditions": "Travertino Romano Classico, UNI EN 1936"
+    },
+    "densityRange": {
+      "min": 2243,
+      "max": 2643,
+      "unit": "kg/m3",
+      "grade": "guidance",
+      "source": "Natural Stone Institute (2022) Dimension Stone Design Manual, chapter 12 'Travertine' (Specification, Product Description, Technical Data), pp. 12-1 to 12-14, https://transparencycatalog.com/assets/uploads/greener-images/12-TRAVERTINE-2022.pdf, Technical Data 1.6",
+      "conditions": "travertine dimension stone generally, ASTM C97; recommended minimum 144 lb/ft3 (2307 kg/m3)",
+      "asReported": "140-165 lb/ft3"
+    },
+    "grainDensity": {
+      "value": 2710.2,
+      "unit": "kg/m3",
+      "grade": "measured",
+      "source": "Anthony J.W., Bideaux R.A., Bladh K.W., Nichols M.C. (eds.) Handbook of Mineralogy, Mineralogical Society of America, 'Calcite' (Mineral Data Publishing, version 1, 2001-2005), http://www.handbookofmineralogy.org/pdfs/calcite.pdf",
+      "conditions": "calcite, measured",
+      "asReported": "D(meas.) = 2.7102"
+    },
+    "totalPorosity": {
+      "min": 0.27,
+      "max": 16.67,
+      "unit": "%",
+      "grade": "measured",
+      "source": "Mancini A., Frondini F., Capezzuoli E., Galvez Mejia E., Lezzi G., Matarazzi D., Brogi A., Swennen R. (2019) 'Porosity, bulk density and CaCO3 content of travertines. A new dataset from Rapolano, Canino and Tivoli travertines (Italy)', Data in Brief 25:104158, Table 2, Tivoli (Cava Morelli) rows, https://doi.org/10.1016/j.dib.2019.104158",
+      "conditions": "computed from bulk density with a calcite particle density of 2.7 g/cm3; specimens from three quarry banks, Tivoli (Cava Morelli)"
+    },
+    "openPorosityMercury": {
+      "value": 8.16,
+      "unit": "%",
+      "grade": "measured",
+      "source": "Urosevic M., Sebastian-Pardo E., Cardell C. (2010) 'Rough and polished travertine building stone decay evaluated by a marine aerosol ageing test', Construction and Building Materials 24:1438-1448 (Olivillo travertine, Alhama de Almeria, Spain, sawn vein-cut), https://doi.org/10.1016/j.conbuildmat.2010.01.011, Table 3",
+      "conditions": "mercury intrusion porosimetry, fresh unpolished vein-cut Olivillo travertine (Spain); 7.26 % after resin filling and polishing",
+      "note": "mean; standard deviation 1.21"
+    },
+    "waterAbsorption": {
+      "value": 0.6,
+      "unit": "%",
+      "grade": "manufacturer",
+      "source": "Alberti e Alberti (Tivoli), 'Travertino Romano Classico', technical properties to UNI EN test standards, product page read 2026-09-26, https://marmialberti.it/en/travertino-romano-classico/",
+      "conditions": "by mass at atmospheric pressure, UNI EN 13755, Travertino Romano Classico"
+    },
+    "waterAbsorptionRange": {
+      "min": 0.1,
+      "max": 2.5,
+      "unit": "%",
+      "grade": "guidance",
+      "source": "Natural Stone Institute (2022) Dimension Stone Design Manual, chapter 12 'Travertine' (Specification, Product Description, Technical Data), pp. 12-1 to 12-14, https://transparencycatalog.com/assets/uploads/greener-images/12-TRAVERTINE-2022.pdf, Technical Data 1.6",
+      "conditions": "by weight, ASTM C97; recommended maximum 2.5"
+    },
+    "flexuralBreakingStress": {
+      "value": 11.7,
+      "unit": "MPa",
+      "grade": "manufacturer",
+      "source": "Alberti e Alberti (Tivoli), 'Travertino Romano Classico', technical properties to UNI EN test standards, product page read 2026-09-26, https://marmialberti.it/en/travertino-romano-classico/",
+      "conditions": "UNI EN 12372; 11.2 MPa after 48 freeze-thaw cycles (UNI EN 12371)"
+    },
+    "compressiveBreakingStressRange": {
+      "min": 34.5,
+      "max": 72.4,
+      "unit": "MPa",
+      "grade": "guidance",
+      "source": "Natural Stone Institute (2022) Dimension Stone Design Manual, chapter 12 'Travertine' (Specification, Product Description, Technical Data), pp. 12-1 to 12-14, https://transparencycatalog.com/assets/uploads/greener-images/12-TRAVERTINE-2022.pdf, Technical Data 1.6",
+      "conditions": "ASTM C170; recommended minimum 5,000 psi interior and 7,500 psi exterior",
+      "asReported": "5,000-10,500 lbs/in2"
+    },
+    "youngsModulusRange": {
+      "min": 13.8,
+      "max": 103.4,
+      "unit": "GPa",
+      "grade": "guidance",
+      "source": "Natural Stone Institute (2022) Dimension Stone Design Manual, chapter 12 'Travertine' (Specification, Product Description, Technical Data), pp. 12-1 to 12-14, https://transparencycatalog.com/assets/uploads/greener-images/12-TRAVERTINE-2022.pdf, Technical Data 1.6",
+      "conditions": "modulus of elasticity",
+      "asReported": "2.0-15.0 million lbs/in2"
+    },
+    "abrasionGroove": {
+      "value": 21.3,
+      "unit": "mm",
+      "grade": "manufacturer",
+      "source": "Alberti e Alberti (Tivoli), 'Travertino Romano Classico', technical properties to UNI EN test standards, product page read 2026-09-26, https://marmialberti.it/en/travertino-romano-classico/",
+      "conditions": "wide-wheel abrasion test, Annex C of UNI EN 1341; a longer groove is a softer stone"
+    },
+    "abrasionHardnessRange": {
+      "min": 7,
+      "max": 25,
+      "unit": "Ha",
+      "grade": "guidance",
+      "source": "Natural Stone Institute (2022) Dimension Stone Design Manual, chapter 12 'Travertine' (Specification, Product Description, Technical Data), pp. 12-1 to 12-14, https://transparencycatalog.com/assets/uploads/greener-images/12-TRAVERTINE-2022.pdf, Technical Data 1.6 and 4.2",
+      "conditions": "ASTM C241; recommended at least 10 for floors in normal foot traffic and 12 for commercial floors, stair treads and platforms"
+    },
+    "thermalShockMassChange": {
+      "value": -0.06,
+      "unit": "%",
+      "grade": "manufacturer",
+      "source": "Alberti e Alberti (Tivoli), 'Travertino Romano Classico', technical properties to UNI EN test standards, product page read 2026-09-26, https://marmialberti.it/en/travertino-romano-classico/",
+      "conditions": "UNI EN 14066, 20 cycles"
+    },
+    "hardness": {
+      "value": 3,
+      "unit": "Mohs",
+      "grade": "measured",
+      "source": "Anthony J.W., Bideaux R.A., Bladh K.W., Nichols M.C. (eds.) Handbook of Mineralogy, Mineralogical Society of America, 'Calcite' (Mineral Data Publishing, version 1, 2001-2005), http://www.handbookofmineralogy.org/pdfs/calcite.pdf",
+      "conditions": "calcite, the stone's mineral"
+    },
+    "cutDependence": {
+      "text": "The two cuts give different strength; the cut the project uses is tested.",
+      "grade": "guidance",
+      "source": "Natural Stone Institute (2022) Dimension Stone Design Manual, chapter 12 'Travertine' (Specification, Product Description, Technical Data), pp. 12-1 to 12-14, https://transparencycatalog.com/assets/uploads/greener-images/12-TRAVERTINE-2022.pdf, Technical Data 2.3"
+    }
+  },
+  "optics": {
+    "kind": "dielectric: an aggregate of birefringent calcite grains, translucent at the grain scale",
+    "refractiveIndex": [
+      {
+        "value": 1.6583,
+        "unit": "1",
+        "grade": "measured",
+        "source": "Ghosh G. (1999) 'Dispersion-equation coefficients for the refractive index and birefringence of calcite and quartz crystals', Optics Communications 163:95-102; coefficients as tabulated at https://refractiveindex.info/?shelf=main&book=CaCO3&page=Ghosh-o and https://refractiveindex.info/?shelf=main&book=CaCO3&page=Ghosh-e",
+        "conditions": "589.3 nm, room temperature, from the dispersion formula",
+        "phase": "calcite",
+        "direction": "omega",
+        "note": "the Handbook of Mineralogy lists omega = 1.658 (Anthony J.W., Bideaux R.A., Bladh K.W., Nichols M.C. (eds.) Handbook of Mineralogy, Mineralogical Society of America, 'Calcite' (Mineral Data Publishing, version 1, 2001-2005), http://www.handbookofmineralogy.org/pdfs/calcite.pdf)"
+      },
+      {
+        "value": 1.4861,
+        "unit": "1",
+        "grade": "measured",
+        "source": "Ghosh G. (1999) 'Dispersion-equation coefficients for the refractive index and birefringence of calcite and quartz crystals', Optics Communications 163:95-102; coefficients as tabulated at https://refractiveindex.info/?shelf=main&book=CaCO3&page=Ghosh-o and https://refractiveindex.info/?shelf=main&book=CaCO3&page=Ghosh-e",
+        "conditions": "589.3 nm, room temperature, from the dispersion formula",
+        "phase": "calcite",
+        "direction": "epsilon",
+        "note": "the Handbook of Mineralogy lists epsilon = 1.486 (Anthony J.W., Bideaux R.A., Bladh K.W., Nichols M.C. (eds.) Handbook of Mineralogy, Mineralogical Society of America, 'Calcite' (Mineral Data Publishing, version 1, 2001-2005), http://www.handbookofmineralogy.org/pdfs/calcite.pdf)"
+      }
+    ],
+    "dispersion": {
+      "formula": {
+        "omega": "n^2 - 1 = 0.73358749 + 0.96464345 L^2 / (L^2 - 1.94325203e-2) + 1.82831454 L^2 / (L^2 - 120)",
+        "epsilon": "n^2 - 1 = 0.35859695 + 0.82427830 L^2 / (L^2 - 1.06689543e-2) + 0.14429128 L^2 / (L^2 - 120)",
+        "variable": "L, the vacuum wavelength in um",
+        "grade": "measured",
+        "source": "Ghosh G. (1999) 'Dispersion-equation coefficients for the refractive index and birefringence of calcite and quartz crystals', Optics Communications 163:95-102; coefficients as tabulated at https://refractiveindex.info/?shelf=main&book=CaCO3&page=Ghosh-o and https://refractiveindex.info/?shelf=main&book=CaCO3&page=Ghosh-e"
+      },
+      "validRange": {
+        "min": 0.204,
+        "max": 2.172,
+        "unit": "um",
+        "grade": "measured",
+        "source": "Ghosh G. (1999) 'Dispersion-equation coefficients for the refractive index and birefringence of calcite and quartz crystals', Optics Communications 163:95-102; coefficients as tabulated at https://refractiveindex.info/?shelf=main&book=CaCO3&page=Ghosh-o and https://refractiveindex.info/?shelf=main&book=CaCO3&page=Ghosh-e"
+      },
+      "evaluatedOmega": {
+        "axis": "wavelength",
+        "axisUnit": "um",
+        "axisValues": [
+          0.4,
+          0.45,
+          0.5,
+          0.55,
+          0.6,
+          0.65,
+          0.7
+        ],
+        "unit": "1",
+        "values": [
+          1.682,
+          1.6726,
+          1.666,
+          1.6613,
+          1.6576,
+          1.6548,
+          1.6524
+        ],
+        "grade": "derived",
+        "source": "Ghosh G. (1999) 'Dispersion-equation coefficients for the refractive index and birefringence of calcite and quartz crystals', Optics Communications 163:95-102; coefficients as tabulated at https://refractiveindex.info/?shelf=main&book=CaCO3&page=Ghosh-o and https://refractiveindex.info/?shelf=main&book=CaCO3&page=Ghosh-e",
+        "conditions": "calcite, omega ray, room temperature",
+        "derivation": "Ghosh's dispersion formula (dispersion.formula) evaluated at each wavelength"
+      },
+      "evaluatedEpsilon": {
+        "axis": "wavelength",
+        "axisUnit": "um",
+        "axisValues": [
+          0.4,
+          0.45,
+          0.5,
+          0.55,
+          0.6,
+          0.65,
+          0.7
+        ],
+        "unit": "1",
+        "values": [
+          1.4972,
+          1.4928,
+          1.4897,
+          1.4875,
+          1.4858,
+          1.4845,
+          1.4835
+        ],
+        "grade": "derived",
+        "source": "Ghosh G. (1999) 'Dispersion-equation coefficients for the refractive index and birefringence of calcite and quartz crystals', Optics Communications 163:95-102; coefficients as tabulated at https://refractiveindex.info/?shelf=main&book=CaCO3&page=Ghosh-o and https://refractiveindex.info/?shelf=main&book=CaCO3&page=Ghosh-e",
+        "conditions": "calcite, epsilon ray, room temperature",
+        "derivation": "Ghosh's dispersion formula (dispersion.formula) evaluated at each wavelength"
+      }
+    },
+    "specularF0": {
+      "value": 0.0533,
+      "min": 0.0382,
+      "max": 0.0613,
+      "unit": "1",
+      "grade": "derived",
+      "source": "Ghosh G. (1999) 'Dispersion-equation coefficients for the refractive index and birefringence of calcite and quartz crystals', Optics Communications 163:95-102; coefficients as tabulated at https://refractiveindex.info/?shelf=main&book=CaCO3&page=Ghosh-o and https://refractiveindex.info/?shelf=main&book=CaCO3&page=Ghosh-e",
+      "conditions": "normal incidence from air, 589.3 nm (0.0536 at 550 nm)",
+      "derivation": "F = ((n - 1) / (n + 1))^2. A face cut through randomly oriented calcite grains: half the light meets n_o (F = 0.0613); half meets n_e(theta), with 1/n_e(theta)^2 = cos^2(theta)/n_o^2 + sin^2(theta)/n_e^2, averaged over the sphere of grain orientations (mean F = 0.0453); 0.5 x 0.0613 + 0.5 x 0.0453 = 0.0533. min is F(n_e) and max is F(n_o), the extremes a single grain shows."
+    },
+    "wet": {
+      "text": "A wet face darkens: water in the pores and on the surface lowers the index step at the grains, and the water film traps diffusely reflected light by total internal reflection, so more of it is absorbed.",
+      "grade": "measured",
+      "source": "Lekner J., Dorf M.C. (1988) 'Why some things are darker when wet', Applied Optics 27(7):1278-1280, https://doi.org/10.1364/AO.27.001278"
+    },
+    "measuredColour": [
+      {
+        "specimen": "Olivillo travertine (Alhama de Almeria, Spain), a massive travertine, sawn vein-cut, unpolished, freshly quarried",
+        "working": "sawn.vein-cut",
+        "cieLab": {
+          "value": [
+            69.78,
+            1.83,
+            7.31
+          ],
+          "unit": "CIELAB",
+          "space": "CIELAB 1976 (L*, a*, b*); illuminant and observer not stated by the source",
+          "grade": "measured",
+          "source": "Urosevic M., Sebastian-Pardo E., Cardell C. (2010) 'Rough and polished travertine building stone decay evaluated by a marine aerosol ageing test', Construction and Building Materials 24:1438-1448 (Olivillo travertine, Alhama de Almeria, Spain, sawn vein-cut), https://doi.org/10.1016/j.conbuildmat.2010.01.011, Table 5",
+          "conditions": "Minolta CR-210 colorimeter, 0 degree viewing, 50 mm measuring area (as the paper states; the CR-200 series illuminates diffusely, d/0, which the paper does not say)"
+        },
+        "luminousReflectance": {
+          "value": 0.404,
+          "unit": "1",
+          "grade": "derived",
+          "source": "Urosevic M., Sebastian-Pardo E., Cardell C. (2010) 'Rough and polished travertine building stone decay evaluated by a marine aerosol ageing test', Construction and Building Materials 24:1438-1448 (Olivillo travertine, Alhama de Almeria, Spain, sawn vein-cut), https://doi.org/10.1016/j.conbuildmat.2010.01.011, Table 5",
+          "derivation": "Y = ((L* + 16) / 116)^3, the CIE 1976 lightness function inverted"
+        }
+      },
+      {
+        "specimen": "Olivillo travertine, large pores filled with a beige gypsum-based plaster, dressed with epoxy-silicone resin, polished",
+        "working": "polished.stone",
+        "cieLab": {
+          "value": [
+            62.0,
+            5.52,
+            15.69
+          ],
+          "unit": "CIELAB",
+          "space": "CIELAB 1976 (L*, a*, b*); illuminant and observer not stated by the source",
+          "grade": "measured",
+          "source": "Urosevic M., Sebastian-Pardo E., Cardell C. (2010) 'Rough and polished travertine building stone decay evaluated by a marine aerosol ageing test', Construction and Building Materials 24:1438-1448 (Olivillo travertine, Alhama de Almeria, Spain, sawn vein-cut), https://doi.org/10.1016/j.conbuildmat.2010.01.011, Table 5 and section 2.1",
+          "conditions": "Minolta CR-210 colorimeter, 0 degree viewing, 50 mm measuring area (as the paper states; the CR-200 series illuminates diffusely, d/0, which the paper does not say)"
+        },
+        "luminousReflectance": {
+          "value": 0.304,
+          "unit": "1",
+          "grade": "derived",
+          "source": "Urosevic M., Sebastian-Pardo E., Cardell C. (2010) 'Rough and polished travertine building stone decay evaluated by a marine aerosol ageing test', Construction and Building Materials 24:1438-1448 (Olivillo travertine, Alhama de Almeria, Spain, sawn vein-cut), https://doi.org/10.1016/j.conbuildmat.2010.01.011, Table 5 and section 2.1",
+          "derivation": "Y = ((L* + 16) / 116)^3, the CIE 1976 lightness function inverted; in d/0 geometry the mirror direction of the viewer is the instrument's own port, so a polished face's specular reflection is barely counted"
+        }
+      },
+      {
+        "specimen": "Travertino Amarillo (Albox, Almeria, Spain), a yellow travertine of about 8 % porosity, saw-cut (the cut's orientation to the bed is not stated)",
+        "working": null,
+        "cieLab": {
+          "value": [
+            69,
+            8,
+            17
+          ],
+          "unit": "CIELAB",
+          "space": "CIELAB 1976 (L*, a*, b*); illuminant and observer not stated by the source",
+          "grade": "measured",
+          "source": "Molina E., Arizzi A., Benavente D., Cultrone G. (2020) 'Influence of surface finishes and a calcium phosphate-based consolidant on the decay of sedimentary building stones due to acid attack', Frontiers in Materials 7:581979, Tables 1 and 2, https://doi.org/10.3389/fmats.2020.581979, Table 1",
+          "conditions": "spectrophotometer, untreated specimens",
+          "note": "standard deviations 4, 2, 3"
+        },
+        "luminousReflectance": {
+          "value": 0.393,
+          "unit": "1",
+          "grade": "derived",
+          "source": "Molina E., Arizzi A., Benavente D., Cultrone G. (2020) 'Influence of surface finishes and a calcium phosphate-based consolidant on the decay of sedimentary building stones due to acid attack', Frontiers in Materials 7:581979, Tables 1 and 2, https://doi.org/10.3389/fmats.2020.581979, Table 1",
+          "derivation": "Y = ((L* + 16) / 116)^3, the CIE 1976 lightness function inverted"
+        }
+      },
+      {
+        "specimen": "Travertino Amarillo, honed",
+        "working": "honed",
+        "cieLab": {
+          "value": [
+            65,
+            12,
+            31
+          ],
+          "unit": "CIELAB",
+          "space": "CIELAB 1976 (L*, a*, b*); illuminant and observer not stated by the source",
+          "grade": "measured",
+          "source": "Molina E., Arizzi A., Benavente D., Cultrone G. (2020) 'Influence of surface finishes and a calcium phosphate-based consolidant on the decay of sedimentary building stones due to acid attack', Frontiers in Materials 7:581979, Tables 1 and 2, https://doi.org/10.3389/fmats.2020.581979, Table 1",
+          "conditions": "spectrophotometer, untreated specimens",
+          "note": "standard deviations 3, 2, 4"
+        },
+        "luminousReflectance": {
+          "value": 0.34,
+          "unit": "1",
+          "grade": "derived",
+          "source": "Molina E., Arizzi A., Benavente D., Cultrone G. (2020) 'Influence of surface finishes and a calcium phosphate-based consolidant on the decay of sedimentary building stones due to acid attack', Frontiers in Materials 7:581979, Tables 1 and 2, https://doi.org/10.3389/fmats.2020.581979, Table 1",
+          "derivation": "Y = ((L* + 16) / 116)^3, the CIE 1976 lightness function inverted"
+        }
+      },
+      {
+        "specimen": "Travertino Amarillo, bush-hammered",
+        "working": "bush-hammered",
+        "cieLab": {
+          "value": [
+            69,
+            10,
+            27
+          ],
+          "unit": "CIELAB",
+          "space": "CIELAB 1976 (L*, a*, b*); illuminant and observer not stated by the source",
+          "grade": "measured",
+          "source": "Molina E., Arizzi A., Benavente D., Cultrone G. (2020) 'Influence of surface finishes and a calcium phosphate-based consolidant on the decay of sedimentary building stones due to acid attack', Frontiers in Materials 7:581979, Tables 1 and 2, https://doi.org/10.3389/fmats.2020.581979, Table 1",
+          "conditions": "spectrophotometer, untreated specimens",
+          "note": "standard deviations 5, 3, 4"
+        },
+        "luminousReflectance": {
+          "value": 0.393,
+          "unit": "1",
+          "grade": "derived",
+          "source": "Molina E., Arizzi A., Benavente D., Cultrone G. (2020) 'Influence of surface finishes and a calcium phosphate-based consolidant on the decay of sedimentary building stones due to acid attack', Frontiers in Materials 7:581979, Tables 1 and 2, https://doi.org/10.3389/fmats.2020.581979, Table 1",
+          "derivation": "Y = ((L* + 16) / 116)^3, the CIE 1976 lightness function inverted"
+        }
+      }
+    ],
+    "polishDarkens": {
+      "text": "Filling and polishing a travertine lowered its lightness from L* 69.78 to 62.00 and raised a* from 1.83 to 5.52 and b* from 7.31 to 15.69: 'after polishing the travertine becomes more reddish and yellowish'.",
+      "grade": "measured",
+      "source": "Urosevic M., Sebastian-Pardo E., Cardell C. (2010) 'Rough and polished travertine building stone decay evaluated by a marine aerosol ageing test', Construction and Building Materials 24:1438-1448 (Olivillo travertine, Alhama de Almeria, Spain, sawn vein-cut), https://doi.org/10.1016/j.conbuildmat.2010.01.011, section 3.2.5"
+    },
+    "subsurfaceReference": {
+      "specimen": "a white marble measured by Jensen et al. (2001): the nearest measured calcite stone, not this substance",
+      "reducedScattering": {
+        "value": [
+          2.19,
+          2.62,
+          3.0
+        ],
+        "unit": "1/mm",
+        "space": "the R, G and B channels of the authors' 3-CCD camera",
+        "grade": "measured",
+        "source": "Jensen H.W., Marschner S.R., Levoy M., Hanrahan P. (2001) 'A practical model for subsurface light transport', Proceedings of SIGGRAPH 2001, Figure 5(b), row 'Marble', https://graphics.stanford.edu/papers/bssrdf/bssrdf.pdf"
+      },
+      "absorption": {
+        "value": [
+          0.0021,
+          0.0041,
+          0.0071
+        ],
+        "unit": "1/mm",
+        "space": "the R, G and B channels of the authors' 3-CCD camera",
+        "grade": "measured",
+        "source": "Jensen H.W., Marschner S.R., Levoy M., Hanrahan P. (2001) 'A practical model for subsurface light transport', Proceedings of SIGGRAPH 2001, Figure 5(b), row 'Marble', https://graphics.stanford.edu/papers/bssrdf/bssrdf.pdf"
+      },
+      "diffuseReflectance": {
+        "value": [
+          0.83,
+          0.79,
+          0.75
+        ],
+        "unit": "1",
+        "space": "the R, G and B channels of the authors' 3-CCD camera",
+        "grade": "measured",
+        "source": "Jensen H.W., Marschner S.R., Levoy M., Hanrahan P. (2001) 'A practical model for subsurface light transport', Proceedings of SIGGRAPH 2001, Figure 5(b), row 'Marble', https://graphics.stanford.edu/papers/bssrdf/bssrdf.pdf"
+      },
+      "refractiveIndex": {
+        "value": 1.5,
+        "unit": "1",
+        "grade": "measured",
+        "source": "Jensen H.W., Marschner S.R., Levoy M., Hanrahan P. (2001) 'A practical model for subsurface light transport', Proceedings of SIGGRAPH 2001, Figure 5(b), row 'Marble', https://graphics.stanford.edu/papers/bssrdf/bssrdf.pdf",
+        "note": "the index the authors used for marble"
+      },
+      "diffusionLength": {
+        "value": [
+          8.51,
+          5.57,
+          3.95
+        ],
+        "unit": "mm",
+        "space": "the R, G and B channels of the authors' 3-CCD camera",
+        "grade": "derived",
+        "source": "Jensen H.W., Marschner S.R., Levoy M., Hanrahan P. (2001) 'A practical model for subsurface light transport', Proceedings of SIGGRAPH 2001, Figure 5(b), row 'Marble', https://graphics.stanford.edu/papers/bssrdf/bssrdf.pdf",
+        "derivation": "1 / sqrt(3 sigma_a sigma_t'), with sigma_t' = sigma_s' + sigma_a, per channel"
+      },
+      "note": "Travertine's pores and iron oxides make it more absorbing and its light shorter-ranged than a white marble's; no subsurface measurement of travertine was found (see unverified)."
+    }
+  },
+  "surface": {
+    "fabric": {
+      "text": "Layers of coarse sparry calcite (crystals over 10 um) alternate with microsparry (4-10 um) and micritic (under 4 um) calcite; the ratio between them sets each layer's colour.",
+      "grade": "measured",
+      "source": "Urosevic M., Sebastian-Pardo E., Cardell C. (2010) 'Rough and polished travertine building stone decay evaluated by a marine aerosol ageing test', Construction and Building Materials 24:1438-1448 (Olivillo travertine, Alhama de Almeria, Spain, sawn vein-cut), https://doi.org/10.1016/j.conbuildmat.2010.01.011, section 3.2.3 and Fig. 3",
+      "note": "Olivillo travertine (Spain), the nearest travertine whose thin sections were read"
+    },
+    "banding": {
+      "text": "The stone is layered: cut across the bedding it shows a very linear pattern; cut along it, a flowery, random pattern.",
+      "grade": "guidance",
+      "source": "Natural Stone Institute (2022) Dimension Stone Design Manual, chapter 12 'Travertine' (Specification, Product Description, Technical Data), pp. 12-1 to 12-14, https://transparencycatalog.com/assets/uploads/greener-images/12-TRAVERTINE-2022.pdf, Product Description 10.1"
+    },
+    "voids": {
+      "extent": {
+        "text": "Very porous, often cavernous on a scale of inches.",
+        "grade": "guidance",
+        "source": "Natural Stone Institute (2022) Dimension Stone Design Manual, chapter 12 'Travertine' (Specification, Product Description, Technical Data), pp. 12-1 to 12-14, https://transparencycatalog.com/assets/uploads/greener-images/12-TRAVERTINE-2022.pdf, Product Description 1.2"
+      },
+      "poreSizes": {
+        "min": 0.004,
+        "max": 0.7,
+        "unit": "mm",
+        "grade": "measured",
+        "source": "Urosevic M., Sebastian-Pardo E., Cardell C. (2010) 'Rough and polished travertine building stone decay evaluated by a marine aerosol ageing test', Construction and Building Materials 24:1438-1448 (Olivillo travertine, Alhama de Almeria, Spain, sawn vein-cut), https://doi.org/10.1016/j.conbuildmat.2010.01.011, section 3.2.3",
+        "conditions": "pore sizes graded in thin section, Olivillo travertine"
+      },
+      "elongatedPoreLength": {
+        "value": 2,
+        "unit": "mm",
+        "grade": "measured",
+        "source": "Urosevic M., Sebastian-Pardo E., Cardell C. (2010) 'Rough and polished travertine building stone decay evaluated by a marine aerosol ageing test', Construction and Building Materials 24:1438-1448 (Olivillo travertine, Alhama de Almeria, Spain, sawn vein-cut), https://doi.org/10.1016/j.conbuildmat.2010.01.011, Fig. 3c and 3d",
+        "conditions": "irregular elongated pores in thin section, some partly filled by coarse sparry calcite over 150 um"
+      },
+      "elongatedPoreWidth": {
+        "value": 1,
+        "unit": "mm",
+        "grade": "measured",
+        "source": "Urosevic M., Sebastian-Pardo E., Cardell C. (2010) 'Rough and polished travertine building stone decay evaluated by a marine aerosol ageing test', Construction and Building Materials 24:1438-1448 (Olivillo travertine, Alhama de Almeria, Spain, sawn vein-cut), https://doi.org/10.1016/j.conbuildmat.2010.01.011, Fig. 3c"
+      },
+      "holeFilledAbove": {
+        "value": 20,
+        "unit": "mm",
+        "grade": "guidance",
+        "source": "Natural Stone Institute (2022) Dimension Stone Design Manual, chapter 12 'Travertine' (Specification, Product Description, Technical Data), pp. 12-1 to 12-14, https://transparencycatalog.com/assets/uploads/greener-images/12-TRAVERTINE-2022.pdf, Specification 2.1.1.1",
+        "conditions": "holes larger than 2 cm across, and holes through the stone, are filled with a travertine chip cemented below the surface"
+      }
+    },
+    "voidTreatment": [
+      {
+        "text": "Travertine for horizontal use is usually filled with a cementitious or epoxy filler similar in colour to the background.",
+        "grade": "guidance",
+        "source": "Natural Stone Institute (2022) Dimension Stone Design Manual, chapter 12 'Travertine' (Specification, Product Description, Technical Data), pp. 12-1 to 12-14, https://transparencycatalog.com/assets/uploads/greener-images/12-TRAVERTINE-2022.pdf, Product Description 4.1.5"
+      },
+      {
+        "text": "Fillers are natural (grey) or tinted portland cement, or clear or coloured epoxy or polyester resins; unless specified otherwise, colour-matched portland cement is used. Filling in the shop under controlled conditions is preferred to grinding filler into a floor in place.",
+        "grade": "guidance",
+        "source": "Natural Stone Institute (2022) Dimension Stone Design Manual, chapter 12 'Travertine' (Specification, Product Description, Technical Data), pp. 12-1 to 12-14, https://transparencycatalog.com/assets/uploads/greener-images/12-TRAVERTINE-2022.pdf, Product Description 11.1-11.2"
+      },
+      {
+        "text": "Surfaces are sold 'open hole' or 'filled' with natural, transparent or coloured fillers.",
+        "grade": "manufacturer",
+        "source": "Alberti e Alberti (Tivoli), 'Travertino Romano Classico', technical properties to UNI EN test standards, product page read 2026-09-26, https://marmialberti.it/en/travertino-romano-classico/"
+      }
+    ]
+  },
+  "acoustic": {
+    "absorption": {
+      "axis": "frequency",
+      "axisUnit": "Hz",
+      "axisValues": [
+        125,
+        250,
+        500,
+        1000,
+        2000,
+        4000
+      ],
+      "unit": "1",
+      "values": [
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.02,
+        0.02
+      ],
+      "grade": "secondary",
+      "source": "US Enclosure, 'Sound Absorption Coefficients' (compiled table; its original bibliographic source is not stated), row 'Marble or Glazed Tile', http://usenclosure.com/Diffraction%20Graphs/Sound%20Absorption%20Coefficients.pdf",
+      "conditions": "random incidence; a dense, sealed stone face (row 'Marble or Glazed Tile'). Filled travertine presents such a face; open-pore travertine was not measured."
+    }
+  },
+  "stock": {
+    "standardThicknesses": {
+      "values": [
+        20,
+        30,
+        50,
+        60
+      ],
+      "unit": "mm",
+      "grade": "guidance",
+      "source": "Natural Stone Institute (2022) Dimension Stone Design Manual, chapter 12 'Travertine' (Specification, Product Description, Technical Data), pp. 12-1 to 12-14, https://transparencycatalog.com/assets/uploads/greener-images/12-TRAVERTINE-2022.pdf, Product Description 5.1"
+    },
+    "floorMinimumThickness": {
+      "value": 20,
+      "unit": "mm",
+      "grade": "guidance",
+      "source": "Natural Stone Institute (2022) Dimension Stone Design Manual, chapter 12 'Travertine' (Specification, Product Description, Technical Data), pp. 12-1 to 12-14, https://transparencycatalog.com/assets/uploads/greener-images/12-TRAVERTINE-2022.pdf, Product Description 8.1",
+      "conditions": "commercial floors, with a honed finish recommended"
+    },
+    "thinTileHeightLimit": {
+      "value": 2.5,
+      "unit": "m",
+      "grade": "guidance",
+      "source": "Natural Stone Institute (2022) Dimension Stone Design Manual, chapter 12 'Travertine' (Specification, Product Description, Technical Data), pp. 12-1 to 12-14, https://transparencycatalog.com/assets/uploads/greener-images/12-TRAVERTINE-2022.pdf, Specification 5.2.11",
+      "conditions": "individually set thin tile (nominal 9.5 mm) is not recommended on vertical surfaces higher than this"
+    },
+    "bed": {
+      "text": "The stone lies in depositional benches; the saw plane is chosen across the bed (vein-cut) or along it (cross-cut), and Form's per-piece bed frame carries that choice.",
+      "grade": "measured",
+      "source": "De Filippis L., Faccenna C., Funiciello R., Billi A., Soligo M., Rossetti C., Tuccimei P. (2011) 'The Lapis Tiburtinus travertine (Tivoli, Central Italy): its controversial tectonic vs paleoclimatic origin', Rendiconti Online della Societa Geologica Italiana 16:15-16, abstract, https://www.rendicontisocietageologicaitaliana.it/297/article-1181/the-lapis-tiburtinus-travertine-tivoli-central-italy-its-controversial-tectonic-vs-paleoclimatic-origin.html ; Natural Stone Institute (2022) Dimension Stone Design Manual, chapter 12 'Travertine' (Specification, Product Description, Technical Data), pp. 12-1 to 12-14, https://transparencycatalog.com/assets/uploads/greener-images/12-TRAVERTINE-2022.pdf, Product Description 10.1"
+    }
+  },
+  "physicalMaterial": {
+    "footfallClass": "stone",
+    "note": "No measured slip value for Roman travertine was read (see unverified). The cream-marble record carries pendulum values for a comparable calcite stone in several finishes."
+  },
+  "workings": [
+    "sawn.vein-cut",
+    "sawn.cross-cut",
+    "honed",
+    "polished.stone",
+    "bush-hammered"
+  ],
+  "excludedWorkings": [
+    {
+      "key": "flamed",
+      "reason": {
+        "text": "Limestone and marble cannot be flamed: calcium carbonate responds uniformly to heat and does not flake.",
+        "grade": "guidance",
+        "source": "Polycor Inc. (quarrier), 'How to add a flamed finish to granite surfaces', read 2026-09-26, https://www.polycor.com/resources/how-to-add-a-flamed-finish-to-granite-surfaces/"
+      }
+    }
+  ],
+  "histories": [
+    "stone.foot-traffic-wear",
+    "stone.pore-soiling",
+    "stone.dissolution-outdoors"
+  ],
+  "uses": [
+    {
+      "where": "the threshold of every doorway, running through both wall depths and the passage",
+      "working": "honed",
+      "source": "MuseeVision/Docs/Architecture.md, How rooms join (the joint is a doorcase)",
+      "histories": [
+        "stone.foot-traffic-wear"
+      ],
+      "grade": "design"
+    },
+    {
+      "where": "the lining in front of both rough faces of every doorway",
+      "working": "honed",
+      "source": "MuseeVision/Docs/Architecture.md, How rooms join",
+      "histories": [
+        "stone.pore-soiling"
+      ],
+      "grade": "design"
+    },
+    {
+      "where": "walls, piers, plinths and door surrounds: Salon, Rotunda passages, Hall of Light, Reserve bases",
+      "working": "honed",
+      "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/plan/boards/MaterialsStone.png and plan/canvas/MaterialsStone.dc.html (the material language: stone), swatch 'Travertine, honed'",
+      "histories": [
+        "stone.pore-soiling"
+      ],
+      "grade": "design"
+    },
+    {
+      "where": "floors of the Salon, the Nympheas oval and the Hall of Light",
+      "working": "polished.stone",
+      "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/plan/boards/MaterialsStone.png and plan/canvas/MaterialsStone.dc.html (the material language: stone), swatch 'Travertine, polished'",
+      "histories": [
+        "stone.foot-traffic-wear"
+      ],
+      "grade": "design"
+    },
+    {
+      "where": "the Rotunda floor",
+      "working": "polished.stone",
+      "source": "Order R-MATTER-01 (the Architect's specimen order for the stone group)",
+      "note": "Rendering 05 and the look targets show the sun clock inlaid in pale polished marble (C:/Users/anan9/Desktop/Projects/Musee Vision/windows/LOOK_TARGETS.md (frozen reference)); the Rotunda's description decides the dial field's stone.",
+      "histories": [
+        "stone.foot-traffic-wear"
+      ],
+      "grade": "design"
+    },
+    {
+      "where": "the Nympheas oval's kerb and four curved backless benches; the Salon's transverse arch",
+      "working": "honed",
+      "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/LOOK_TARGETS.md (frozen reference)",
+      "histories": [
+        "stone.pore-soiling"
+      ],
+      "grade": "design"
+    }
+  ],
+  "photograph": [
+    "Vein-cut: parallel, wavy bands of ivory, cream and honey along the slab, with voids drawn out along the bands like small lenses.",
+    "Cross-cut: no bands, but soft clouds of tone with rounded, irregular voids scattered over the face, larger than in vein-cut slabs.",
+    "Open voids read as dark dots and dashes; filled voids as flush patches, grey where cement was used, glossier where resin was.",
+    "Honed: broad, soft reflections with no sharp image. Polished: sharp reflections, and the stone darker and warmer than when honed.",
+    "Adjacent slabs are different slices of one bed: the tone and band character carry across a joint, the lines do not.",
+    "On floors, the gloss is lost along walking lines and at doorways first; voids near the face open there."
+  ],
+  "evidence": [],
+  "evidenceRejected": [
+    {
+      "path": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR/S1/source",
+      "set": "ambientCG Travertine009 ('vein-cut Roman travertine: the museum stone' in CREDITS.md)",
+      "reason": "Procedurally generated (ambientCG creation method 'Procedural'), not a photograph of real travertine.",
+      "source": "ambientCG, 'Travertine 009' asset page: creation method 'Procedural', released 2023-12-20, https://ambientcg.com/view?id=Travertine009",
+      "grade": "manufacturer"
+    },
+    {
+      "path": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR/S1",
+      "set": "maps derived from Travertine009's colour by derive_travertine() (CREDITS.md, 'Derived maps')",
+      "reason": "Derived from a procedural image: its voids and relief are the script's, not the stone's.",
+      "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR/CREDITS.md",
+      "grade": "design"
+    },
+    {
+      "path": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/Textures/T_travertine_veincut.png",
+      "set": "Travertine009's colour map with its mean colour moved to #E6DDCF",
+      "reason": "A recoloured procedural image.",
+      "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/Textures/CREDITS.md",
+      "grade": "design"
+    },
+    {
+      "path": "C:/Users/anan9/Desktop/Projects/Musee Vision/usd/textures/travertine_honed.png",
+      "set": "the frozen iOS app's drawn textures (with travertine_polished.png)",
+      "reason": "Drawn in code ('The textures the app draws in code').",
+      "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/usd/README.md",
+      "grade": "design"
+    }
+  ],
+  "evidenceSearch": {
+    "searched": [
+      "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR (CREDITS.md, CREDITS_chenghuai.md, every SET.txt)",
+      "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/Textures/CREDITS.md",
+      "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/Journeys (CREDITS.md, every SET.txt)",
+      "C:/Users/anan9/Desktop/Projects/Musee Vision/usd/textures and usd/README.md",
+      "C:/Users/anan9/Desktop/Projects/Musee Vision/assets/reference/CREDITS.md",
+      "image file names containing travertine, marble, stone, limestone or tivoli across the frozen tree (builds and caches excluded)"
+    ],
+    "found": "No photograph of real travertine is on this PC. Every travertine image of the old build is procedural, derived from a procedural image, or drawn in code, and is rejected above.",
+    "tier": "Travertine stands on tier (a) only: measured porosity, density and colour, the colour from Spanish travertines. A tier (b) specimen closes the gap: ColorChecker photographs of Travertino Romano Classico, vein-cut and cross-cut, honed open, honed filled and polished, under one known light."
+  },
+  "unverified": [
+    {
+      "field": "optics.measuredColour (Tivoli travertine)",
+      "value": null,
+      "unit": "1",
+      "reason": "No colour or spectral measurement of Tivoli travertine was found. The measured rows are Spanish travertines, and the Tivoli stone may be lighter. A specimen measurement is needed."
+    },
+    {
+      "field": "optics (design colours as built, 2026-09)",
+      "text": "honed #E6DDCF, polished #E8E0D2, ashlar #E1D6C4 (sRGB): CIE L* 88.5, 89.4 and 86.0",
+      "reason": "The old build's colours (windows/Scripts/materials.py; the MaterialsStone board) were chosen by eye against the renderings, and are lighter than every measured travertine above (L* 62 to 70). They are design values, not measurements."
+    },
+    {
+      "field": "surface.voidFaceFraction",
+      "value": 0.04,
+      "unit": "1",
+      "reason": "The old build's 'about 4 % of the face', read from the procedural Travertine009 image (windows/SourceArt/PBR/CREDITS.md, 'Derived maps'). Not a measurement of real stone."
+    },
+    {
+      "field": "surface.voidDepth",
+      "value": 2.5,
+      "unit": "mm",
+      "reason": "The old build's void depth, from the same procedural image. Not a measurement."
+    },
+    {
+      "field": "surface.bandSpacing",
+      "value": null,
+      "unit": "mm",
+      "reason": "No measured band spacing for vein-cut Roman travertine was found."
+    },
+    {
+      "field": "physical.compressiveBreakingStress (Travertino Romano)",
+      "value": 76.1,
+      "unit": "MPa",
+      "reason": "Seen only in a search-engine summary of trade pages (EN 1926), not read at its source."
+    },
+    {
+      "field": "physical.capillaryAbsorptionCoefficient",
+      "value": null,
+      "unit": "kg/(m2*s^0.5)",
+      "reason": "Needed by the surface law's wetting and drying; no measurement of Tivoli travertine was read."
+    },
+    {
+      "field": "stock.largestBlock and stock.bedHeight",
+      "value": null,
+      "unit": "m",
+      "reason": "No quarry block or bench dimensions for Tivoli were found."
+    },
+    {
+      "field": "physicalMaterial.friction",
+      "value": null,
+      "unit": "PTV",
+      "reason": "No pendulum or friction measurement of Roman travertine was read. A search summary cites mean values of 18 to 24 for polished limestones (Coskun, Sariisik and Sariisik 2016, Cogent Engineering 3:1217821), not read at the source."
+    },
+    {
+      "field": "acoustic.absorption (open pores)",
+      "value": null,
+      "unit": "1",
+      "reason": "The dense-stone row does not describe open-pore travertine; no measurement was found."
+    },
+    {
+      "field": "optics.subsurface (travertine)",
+      "value": null,
+      "unit": "1/mm",
+      "reason": "Only a white marble's scattering and absorption were found (Jensen et al. 2001)."
+    }
+  ],
+  "sources": [
+    "Alberti e Alberti (Tivoli), 'Travertino Romano Classico', technical properties to UNI EN test standards, product page read 2026-09-26, https://marmialberti.it/en/travertino-romano-classico/",
+    "Anthony J.W., Bideaux R.A., Bladh K.W., Nichols M.C. (eds.) Handbook of Mineralogy, Mineralogical Society of America, 'Calcite' (Mineral Data Publishing, version 1, 2001-2005), http://www.handbookofmineralogy.org/pdfs/calcite.pdf",
+    "De Filippis L., Faccenna C., Funiciello R., Billi A., Soligo M., Rossetti C., Tuccimei P. (2011) 'The Lapis Tiburtinus travertine (Tivoli, Central Italy): its controversial tectonic vs paleoclimatic origin', Rendiconti Online della Societa Geologica Italiana 16:15-16, abstract, https://www.rendicontisocietageologicaitaliana.it/297/article-1181/the-lapis-tiburtinus-travertine-tivoli-central-italy-its-controversial-tectonic-vs-paleoclimatic-origin.html",
+    "Ghosh G. (1999) 'Dispersion-equation coefficients for the refractive index and birefringence of calcite and quartz crystals', Optics Communications 163:95-102; coefficients as tabulated at https://refractiveindex.info/?shelf=main&book=CaCO3&page=Ghosh-o and https://refractiveindex.info/?shelf=main&book=CaCO3&page=Ghosh-e",
+    "Jensen H.W., Marschner S.R., Levoy M., Hanrahan P. (2001) 'A practical model for subsurface light transport', Proceedings of SIGGRAPH 2001, Figure 5(b), row 'Marble', https://graphics.stanford.edu/papers/bssrdf/bssrdf.pdf",
+    "Lekner J., Dorf M.C. (1988) 'Why some things are darker when wet', Applied Optics 27(7):1278-1280, https://doi.org/10.1364/AO.27.001278",
+    "Mancini A., Frondini F., Capezzuoli E., Galvez Mejia E., Lezzi G., Matarazzi D., Brogi A., Swennen R. (2019) 'Porosity, bulk density and CaCO3 content of travertines. A new dataset from Rapolano, Canino and Tivoli travertines (Italy)', Data in Brief 25:104158, Table 2, Tivoli (Cava Morelli) rows, https://doi.org/10.1016/j.dib.2019.104158",
+    "Molina E., Arizzi A., Benavente D., Cultrone G. (2020) 'Influence of surface finishes and a calcium phosphate-based consolidant on the decay of sedimentary building stones due to acid attack', Frontiers in Materials 7:581979, Tables 1 and 2, https://doi.org/10.3389/fmats.2020.581979",
+    "Natural Stone Institute (2022) Dimension Stone Design Manual, chapter 12 'Travertine' (Specification, Product Description, Technical Data), pp. 12-1 to 12-14, https://transparencycatalog.com/assets/uploads/greener-images/12-TRAVERTINE-2022.pdf",
+    "Polycor Inc. (quarrier), 'How to add a flamed finish to granite surfaces', read 2026-09-26, https://www.polycor.com/resources/how-to-add-a-flamed-finish-to-granite-surfaces/",
+    "Societa del Travertino Romano, 'Quarries', read 2026-09-26, https://www.iltravertino.com/en/quarries.html",
+    "Travertino Romano Group (Guidonia Montecelio), 'Tivoli travertine quarries' (finishes listed: filled/honed, open pore honed, brushed, brushed open pore, antique, natural split), read 2026-09-26, https://www.travertino-romano.com/en/formation/tivoli-travertine-quarries",
+    "US Enclosure, 'Sound Absorption Coefficients' (compiled table; its original bibliographic source is not stated), row 'Marble or Glazed Tile', http://usenclosure.com/Diffraction%20Graphs/Sound%20Absorption%20Coefficients.pdf",
+    "Urosevic M., Sebastian-Pardo E., Cardell C. (2010) 'Rough and polished travertine building stone decay evaluated by a marine aerosol ageing test', Construction and Building Materials 24:1438-1448 (Olivillo travertine, Alhama de Almeria, Spain, sawn vein-cut), https://doi.org/10.1016/j.conbuildmat.2010.01.011",
+    "ambientCG, 'Travertine 009' asset page: creation method 'Procedural', released 2023-12-20, https://ambientcg.com/view?id=Travertine009"
+  ]
+}

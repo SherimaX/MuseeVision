@@ -1,0 +1,137 @@
+{
+  "schema": "musee.matter.working/1",
+  "key": "cast.plaster",
+  "name": "Cast in plaster (piece-mould and fibrous casting)",
+  "appliesTo": {
+    "families": [
+      "white"
+    ],
+    "substances": [
+      "plaster-of-paris",
+      "fibrous-plaster"
+    ]
+  },
+  "over": [],
+  "process": "Plaster slurry is poured or brushed against the face of a mould, so the cast's surface is a replica of the mould's. A sculpture cast is made in a piece mould: many small keyed pieces (tasselli) taken from the original, oiled and shellacked, held in a plaster mother mould; a fine creamy plaster is run round the inside first, then the mould is filled with coarser plaster and opened when the cast has set but is still damp. Where the pieces met, the cast carries a network of fine raised seam lines. Fibrous castings take a face coat of plaster about 6 mm deep in a flexible or plaster case mould, backed by plaster-soaked hessian and timber laths.",
+  "steps": [
+    {
+      "step": "take the piece mould (tasselli keyed with joggles, oiled and shellacked) and its plaster mother mould",
+      "source": "Payne, E.M. (2020) The Conservation of Plaster Casts in the Nineteenth Century. Studies in Conservation 65(1), 37-58, https://doi.org/10.1080/00393630.2019.1610845",
+      "grade": "secondary"
+    },
+    {
+      "step": "run a fine creamy plaster round the mould to coat every surface, then fill with a coarser plaster; limbs are cast around iron rods",
+      "source": "Payne (2020), https://doi.org/10.1080/00393630.2019.1610845",
+      "grade": "secondary"
+    },
+    {
+      "step": "pour carefully into the deepest part and agitate the filled mould so no air is trapped at the face; slurry striking the face directly makes a dense hard spot of uneven absorption",
+      "source": "USG, Submittal Sheet: USG No. 1 Casting Plaster, IG1375-USA-ENG rev. 8-24 (2024), https://www.usg.com/content/dam/USG/pdpmovedocuments/usg-no-1-casting-plaster-data-en-IG1375.pdf",
+      "grade": "manufacturer"
+    },
+    {
+      "step": "open the mould when the plaster has set but is still damp; join separately cast parts with steel dowels and fresh plaster",
+      "source": "Payne (2020), https://doi.org/10.1080/00393630.2019.1610845",
+      "grade": "secondary"
+    },
+    {
+      "step": "dry quickly but below the calcining temperature",
+      "source": "USG IG1375 rev. 8-24, https://www.usg.com/content/dam/USG/pdpmovedocuments/usg-no-1-casting-plaster-data-en-IG1375.pdf",
+      "grade": "manufacturer"
+    },
+    {
+      "step": "fibrous: brush a face coat into the mould, then lay hessian dipped in plaster behind it and bed in laths",
+      "source": "Webb, P. (2020) Fibrous Plaster. Walls & Ceilings, https://www.wconline.com/articles/92801-fibrous-plaster; Harrison, D. (1999) Dramatic Plasterwork: Fibrous Plaster in Theatres, https://www.buildingconservation.com/articles/theatre/theatre.htm",
+      "grade": "guidance"
+    }
+  ],
+  "facts": {
+    "fibrousFaceCoat": {
+      "value": 6.35,
+      "unit": "mm",
+      "asReported": "approximately 1/4 inch to the face",
+      "source": "Webb, P. (2020) Fibrous Plaster. Walls & Ceilings, https://www.wconline.com/articles/92801-fibrous-plaster",
+      "grade": "guidance"
+    },
+    "safeDryingTemperature": {
+      "max": 49,
+      "unit": "degC",
+      "asReported": "120 °F (49 °C)",
+      "source": "USG IG1375 rev. 8-24, https://www.usg.com/content/dam/USG/pdpmovedocuments/usg-no-1-casting-plaster-data-en-IG1375.pdf",
+      "grade": "manufacturer"
+    },
+    "seamLines": {
+      "text": "If the casting has been successful the cast is marked with a network of fine lines made by the joints of the pieces of the mould; their fineness and the sharpness of their intersections show the condition of the mould. Worn moulds give a thick ridge. Casts were usually sent with seam lines unless asked otherwise.",
+      "source": "Brigham, W.T. (1874), p. 27, and formatori catalogues (Hennecke 1889; Castelvecchi 1906), as quoted in Payne (2020), https://doi.org/10.1080/00393630.2019.1610845",
+      "grade": "historical"
+    },
+    "seamRemovalDamage": {
+      "text": "seam lines cut away carelessly and sandpapered destroy the surface of the part",
+      "source": "Brigham (1874), pp. 27-29, as quoted in Payne (2020), https://doi.org/10.1080/00393630.2019.1610845",
+      "grade": "historical"
+    }
+  },
+  "finishes": {
+    "bare": {
+      "text": "as cast: matt, chalky, porous, with the mould's face and seam lines",
+      "source": "Payne (2020), https://doi.org/10.1080/00393630.2019.1610845 (gypsum plaster captures fine surface detail but is soft, porous and easily damaged)",
+      "grade": "secondary"
+    },
+    "sealed": {
+      "text": "sealed with shellac, size or dextrine to reduce porosity and ease cleaning; white shellac in alcohol gives an easily broken surface; store casts coated in shellac now look dark brown",
+      "source": "Payne (2020), https://doi.org/10.1080/00393630.2019.1610845",
+      "grade": "secondary"
+    },
+    "hardenedAndTinted": {
+      "text": "a thin barium- and lead-rich hardening layer next to the plaster, then lead-based paint with earth pigments giving a warm tint, refreshed later",
+      "source": "Payne (2020), SEM-EDS of the Perry collection casts (South Kensington Museum, later British Museum), https://doi.org/10.1080/00393630.2019.1610845",
+      "grade": "secondary"
+    },
+    "coatingStackThickness": {
+      "min": 40,
+      "max": 280,
+      "unit": "um",
+      "asReported": "between approximately 40 um (0.04 mm) and 280 um (0.280 mm); no sample showed more than four layers",
+      "source": "Payne (2020), https://doi.org/10.1080/00393630.2019.1610845",
+      "grade": "measured"
+    },
+    "imitations": {
+      "text": "surfaces made to mimic bronze, ivory, stone, wood and gilding; coatings included linseed oil, shellac, mastic, gum arabic, milk, casein, metallic powders and animal size",
+      "source": "Healey, S. (2011) Sculpture conservation shines a light on the plaster casts. V&A Blog, https://www.vam.ac.uk/blog/futureplan/sculpture-conservation-shines-a-light-on-the-plaster-casts",
+      "grade": "secondary"
+    }
+  },
+  "surface": {
+    "replica": "The face is the mould's face: every tool mark, crack and texture of the original, at the mould's resolution.",
+    "seams": "A net of fine raised lines, straight or gently curving, meeting at sharp intersections; thicker ridges on casts from worn moulds.",
+    "pinholes": "Sub-millimetre pits where air bubbles lay against the mould.",
+    "hardSpots": "Occasional denser patches of lower absorption where the slurry struck the mould face.",
+    "coats": "Unless bare: a thin film (tens to a few hundred micrometres) that fills pinholes, softens seam lines, adds a faint warm tint or a waxy sheen."
+  },
+  "photograph": [
+    "Look along a limb or drapery fold for the seam lines: a real cast has them unless it was cleaned up; they are the clearest sign of casting.",
+    "Bare casts are chalky and scatter light softly; sealed or waxed ones have a low sheen and a slightly warmer, sometimes browner white.",
+    "Pinholes and hard spots appear under raking light on broad smooth areas."
+  ],
+  "unverified": [
+    {
+      "field": "surface.seams (width and height)",
+      "value": null,
+      "unit": "mm",
+      "reason": "Described qualitatively in the sources; no measurement found."
+    },
+    {
+      "field": "surface.pinholes (diameter and areal density)",
+      "value": null,
+      "unit": "mm",
+      "reason": "Visible in the P2 evidence set but not measured; USG names air entrainment as the cause without numbers."
+    }
+  ],
+  "sources": [
+    "Harrison, D. (1999) Dramatic Plasterwork: Fibrous Plaster in Theatres. The Building Conservation Directory.",
+    "Healey, S. (2011) V&A Blog, https://www.vam.ac.uk/blog/futureplan/sculpture-conservation-shines-a-light-on-the-plaster-casts",
+    "Payne, E.M. (2020) Studies in Conservation 65(1), 37-58, https://doi.org/10.1080/00393630.2019.1610845 (quoting Brigham 1874)",
+    "USG IG1375 rev. 8-24 (No. 1 Casting Plaster).",
+    "Webb, P. (2020) Fibrous Plaster. Walls & Ceilings."
+  ]
+}

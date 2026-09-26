@@ -1,0 +1,69 @@
+{
+  "schema": "musee.matter.working/1",
+  "key": "bush-hammered",
+  "name": "Bush-hammered",
+  "kind": "finish",
+  "appliesTo": {
+    "families": [
+      "stone"
+    ],
+    "substances": [
+      "travertine",
+      "cream-marble"
+    ]
+  },
+  "over": [
+    "sawn.vein-cut",
+    "sawn.cross-cut"
+  ],
+  "process": "The face is struck repeatedly with a hammer whose head carries steel teeth, leaving a field of small craters over the whole face.",
+  "processSources": [
+    "Molina E., Arizzi A., Benavente D., Cultrone G. (2020) 'Influence of surface finishes and a calcium phosphate-based consolidant on the decay of sedimentary building stones due to acid attack', Frontiers in Materials 7:581979, Tables 1 and 2, https://doi.org/10.3389/fmats.2020.581979 ('hitting the stone with hammers with steel teeth')",
+    "Levantina, 'Crema Marfil Coto: ficha tecnica / technical file' (UNE-EN and ASTM test results), pp. 1-4, https://www.levantina.com/files/3351814979b33856c831796bdbd7340f/10004220/1/cremamarfil-2.pdf (bush-hammered Crema Marfil is offered)"
+  ],
+  "surface": {
+    "arealRoughness": {
+      "value": 0.38,
+      "unit": "mm",
+      "grade": "measured",
+      "source": "Molina E., Arizzi A., Benavente D., Cultrone G. (2020) 'Influence of surface finishes and a calcium phosphate-based consolidant on the decay of sedimentary building stones due to acid attack', Frontiers in Materials 7:581979, Tables 1 and 2, https://doi.org/10.3389/fmats.2020.581979, Table 2",
+      "conditions": "Sa, bush-hammered Travertino Amarillo, fresh and untreated; Sz 2.24 mm, Sku 3.81 (saw-cut 0.24 mm and honed 0.22 mm on the same stone)"
+    },
+    "arealRoughnessCalcarenite": {
+      "value": 0.42,
+      "unit": "mm",
+      "grade": "measured",
+      "source": "Molina E., Arizzi A., Benavente D., Cultrone G. (2020) 'Influence of surface finishes and a calcium phosphate-based consolidant on the decay of sedimentary building stones due to acid attack', Frontiers in Materials 7:581979, Tables 1 and 2, https://doi.org/10.3389/fmats.2020.581979, Table 2",
+      "conditions": "Sa, bush-hammered Calcarenita de Santa Pudia; Sz 3.24 mm, Sku 5.27"
+    },
+    "colour": {
+      "text": "Bush-hammered Travertino Amarillo: L* 69, a* 10, b* 27 (saw-cut 69, 8, 17).",
+      "grade": "measured",
+      "source": "Molina E., Arizzi A., Benavente D., Cultrone G. (2020) 'Influence of surface finishes and a calcium phosphate-based consolidant on the decay of sedimentary building stones due to acid attack', Frontiers in Materials 7:581979, Tables 1 and 2, https://doi.org/10.3389/fmats.2020.581979, Table 1",
+      "note": "the rows are in Substances/travertine.json, optics.measuredColour"
+    }
+  },
+  "friction": {
+    "min": 45,
+    "unit": "PTV",
+    "grade": "manufacturer",
+    "source": "Levantina, 'Crema Marfil Coto: ficha tecnica / technical file' (UNE-EN and ASTM test results), pp. 1-4, https://www.levantina.com/files/3351814979b33856c831796bdbd7340f/10004220/1/cremamarfil-2.pdf",
+    "conditions": "bush-hammered Crema Marfil, wet and dry (printed '>45')"
+  },
+  "photograph": [
+    "An even, matt, pale, pitted face.",
+    "Under raking light each crater shows a small bright rim and a shadowed pit."
+  ],
+  "unverified": [
+    {
+      "field": "tool.pointsPerHead",
+      "value": null,
+      "unit": "1",
+      "reason": "No source for the tooth count or pitch of a bush-hammer head was read."
+    }
+  ],
+  "sources": [
+    "Molina E., Arizzi A., Benavente D., Cultrone G. (2020) 'Influence of surface finishes and a calcium phosphate-based consolidant on the decay of sedimentary building stones due to acid attack', Frontiers in Materials 7:581979, Tables 1 and 2, https://doi.org/10.3389/fmats.2020.581979",
+    "Levantina, 'Crema Marfil Coto: ficha tecnica / technical file' (UNE-EN and ASTM test results), pp. 1-4, https://www.levantina.com/files/3351814979b33856c831796bdbd7340f/10004220/1/cremamarfil-2.pdf"
+  ]
+}
