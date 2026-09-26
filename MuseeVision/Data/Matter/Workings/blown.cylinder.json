@@ -1,0 +1,82 @@
+{
+  "schema": "musee.matter.working/1",
+  "key": "blown.cylinder",
+  "name": "Mouth-blown cylinder (antique) sheet",
+  "appliesTo": {
+    "families": [
+      "glass"
+    ],
+    "substances": [
+      "antique-glass"
+    ]
+  },
+  "over": [],
+  "process": "The glassmaker gathers glass from the pot on a blowpipe and inflates it slowly to the size of a balloon, turning it by hand in a mould that gives the surface its structure; the balloon is swung and blown into a cylinder, its end cut open and widened, and the pipe knocked off. When cool the cylinder is cut open along its length, reheated in a flattening kiln, laid open and relaxed, and the wavy sheet flattened with a piece of wood, then annealed. Each sheet is unique: its seeds, reams and waviness, and its thickness, about 2 mm in the middle and up to 5 mm near the natural edge.",
+  "processSources": [
+    "Glashuette Lamberts, 'Production', https://lamberts.de/production",
+    "Glashuette Lamberts, 'Genuine antique glass', https://lamberts.de/genuine-antique-glass",
+    "H. J. Powell, W. Rosenhain and A. Nesbitt, 'Glass', Encyclopaedia Britannica, 11th ed. (1911), via Wikisource, https://en.wikisource.org/wiki/1911_Encyclop%C3%A6dia_Britannica/Glass"
+  ],
+  "steps": [
+    {
+      "step": "melt at 1450 degC for 14 hours",
+      "grade": "manufacturer",
+      "source": "Glashuette Lamberts, 'Production', https://lamberts.de/production"
+    },
+    {
+      "step": "blow a balloon, turning it in a mould for the surface structure; blow out to a cylinder",
+      "grade": "manufacturer",
+      "source": "Glashuette Lamberts, 'Production', https://lamberts.de/production"
+    },
+    {
+      "step": "'the cylinder is cut open length-ways and then heated again, laid open and relaxed'; flattened with wood",
+      "grade": "manufacturer",
+      "source": "Glashuette Lamberts, 'Production', https://lamberts.de/production"
+    },
+    {
+      "step": "the 1911 account: the glass is extended into a long cylinder, split longitudinally and 'flattened down ... by the careful application of pressure'",
+      "grade": "historical",
+      "source": "H. J. Powell, W. Rosenhain and A. Nesbitt, 'Glass', Encyclopaedia Britannica, 11th ed. (1911), via Wikisource, https://en.wikisource.org/wiki/1911_Encyclop%C3%A6dia_Britannica/Glass"
+    }
+  ],
+  "surface": {
+    "thickness": {
+      "min": 2,
+      "max": 5,
+      "unit": "mm",
+      "grade": "manufacturer",
+      "source": "Glashuette Lamberts, 'Production', https://lamberts.de/production"
+    },
+    "seeds": {
+      "text": "From no seeds to strong seedy, to order; round or oval bubbles.",
+      "grade": "manufacturer",
+      "source": "Glashuette Lamberts, 'Genuine antique glass', https://lamberts.de/genuine-antique-glass"
+    },
+    "distortion": {
+      "text": "Slight distortions, scattered bubbles and streaks; subtle occasional reams in the smoother grade.",
+      "grade": "manufacturer",
+      "source": "Glashuette Lamberts, 'Restauro window glass', https://lamberts.de/restauro-r-window-glass"
+    }
+  },
+  "stock": {
+    "text": "About 60 x 90 cm, about 3 mm (Genuine Antique); Restauro 2 mm up to about 85 x 100 cm.",
+    "grade": "manufacturer",
+    "source": "Glashuette Lamberts, 'Genuine antique glass', https://lamberts.de/genuine-antique-glass ; Glashuette Lamberts, 'Restauro window glass', https://lamberts.de/restauro-r-window-glass"
+  },
+  "photograph": [
+    "Reflections that bend and wobble across a pane; seeds catching the light; colour deepening where the sheet is thicker."
+  ],
+  "unverified": [
+    {
+      "field": "surface.waviness",
+      "text": "waviness amplitude and wavelength of antique sheet",
+      "reason": "No measured waviness (amplitude and wavelength) of cylinder sheet was read; the as-built normal ripple (0.012) is a design value."
+    }
+  ],
+  "sources": [
+    "Glashuette Lamberts, 'Production', https://lamberts.de/production",
+    "H. J. Powell, W. Rosenhain and A. Nesbitt, 'Glass', Encyclopaedia Britannica, 11th ed. (1911), via Wikisource, https://en.wikisource.org/wiki/1911_Encyclop%C3%A6dia_Britannica/Glass",
+    "Glashuette Lamberts, 'Genuine antique glass', https://lamberts.de/genuine-antique-glass",
+    "Glashuette Lamberts, 'Restauro window glass', https://lamberts.de/restauro-r-window-glass"
+  ]
+}

@@ -1,0 +1,140 @@
+{
+  "schema": "musee.matter.working/1",
+  "key": "lacquered.guang",
+  "name": "Chestnut lacquer (广漆, 栗壳色)",
+  "appliesTo": {
+    "families": [
+      "accent"
+    ],
+    "substances": [
+      "korean-pine",
+      "chinese-fir"
+    ]
+  },
+  "over": [
+    "sawn.plain",
+    "sawn.quarter"
+  ],
+  "process": "True lacquer for the garden's timber in the Jiangnan manner: raw lacquer (the sap of the lacquer tree, Toxicodendron vernicifluum) mixed with boiled tung oil, laid in thin coats that cure, not dry, in warm humid air as the enzyme laccase polymerises the urushiol. The film is a translucent brown, deep and glossy, the grain faintly visible under it: Suzhou's chestnut-shell colour, unpainted.",
+  "material": {
+    "guangqi": {
+      "text": "广漆 is a mixture of natural raw lacquer and boiled tung oil; its colour runs from purple-brown to purple-red with its lacquer content, semi-transparent.",
+      "grade": "secondary",
+      "source": "雅昌艺术市场监测中心 (2018) 明清家具透明涂料的成分与鉴别 [The composition and identification of the clear finishes of Ming and Qing furniture], 2018-10-10, https://amma.artron.net/observation_shownews.php?newid=1030835"
+    },
+    "rawLacquer": {
+      "urushiol": {
+        "min": 0.6,
+        "max": 0.65,
+        "unit": "1",
+        "grade": "measured",
+        "source": "Hou, J., Wang, T., Wang, Y., Feng, X. & Liu, X. (2025) Research on the rapid curing mechanism and technology of Chinese lacquer. Polymers 17(12), 1596, https://doi.org/10.3390/polym17121596",
+        "asReported": "60-65 %"
+      },
+      "water": {
+        "min": 0.2,
+        "max": 0.3,
+        "unit": "1",
+        "grade": "measured",
+        "source": "Hou, J., Wang, T., Wang, Y., Feng, X. & Liu, X. (2025) Research on the rapid curing mechanism and technology of Chinese lacquer. Polymers 17(12), 1596, https://doi.org/10.3390/polym17121596",
+        "asReported": "20-30 %"
+      },
+      "others": {
+        "text": "Plant gums, glycoproteins and the enzyme laccase.",
+        "grade": "measured",
+        "source": "Hou, J., Wang, T., Wang, Y., Feng, X. & Liu, X. (2025) Research on the rapid curing mechanism and technology of Chinese lacquer. Polymers 17(12), 1596, https://doi.org/10.3390/polym17121596"
+      }
+    },
+    "cure": {
+      "temperature": {
+        "min": 20,
+        "max": 30,
+        "unit": "degC",
+        "grade": "measured",
+        "source": "Hou, J., Wang, T., Wang, Y., Feng, X. & Liu, X. (2025) Research on the rapid curing mechanism and technology of Chinese lacquer. Polymers 17(12), 1596, https://doi.org/10.3390/polym17121596"
+      },
+      "humidity": {
+        "min": 0.7,
+        "max": 0.8,
+        "unit": "1",
+        "grade": "measured",
+        "source": "Hou, J., Wang, T., Wang, Y., Feng, X. & Liu, X. (2025) Research on the rapid curing mechanism and technology of Chinese lacquer. Polymers 17(12), 1596, https://doi.org/10.3390/polym17121596",
+        "asReported": "70-80 % RH"
+      },
+      "surfaceDry": {
+        "min": 30,
+        "max": 120,
+        "unit": "min",
+        "grade": "measured",
+        "source": "Hou, J., Wang, T., Wang, Y., Feng, X. & Liu, X. (2025) Research on the rapid curing mechanism and technology of Chinese lacquer. Polymers 17(12), 1596, https://doi.org/10.3390/polym17121596",
+        "conditions": "ordinary urushi"
+      },
+      "hardDry": {
+        "min": 30,
+        "max": 90,
+        "unit": "day",
+        "grade": "measured",
+        "source": "Hou, J., Wang, T., Wang, Y., Feng, X. & Liu, X. (2025) Research on the rapid curing mechanism and technology of Chinese lacquer. Polymers 17(12), 1596, https://doi.org/10.3390/polym17121596",
+        "conditions": "ordinary urushi"
+      }
+    },
+    "shadeRoom": {
+      "text": "笼罩漆 (a clear lacquer with boiled tung oil) dries in a closed shade room at 22-28 degC and over 80 % RH.",
+      "grade": "secondary",
+      "source": "雅昌艺术市场监测中心 (2018) 明清家具透明涂料的成分与鉴别 [The composition and identification of the clear finishes of Ming and Qing furniture], 2018-10-10, https://amma.artron.net/observation_shownews.php?newid=1030835"
+    }
+  },
+  "optics": {
+    "gloss": {
+      "value": 57,
+      "unit": "GU",
+      "grade": "measured",
+      "source": "Hou, J., Wang, T., Wang, Y., Feng, X. & Liu, X. (2025) Research on the rapid curing mechanism and technology of Chinese lacquer. Polymers 17(12), 1596, https://doi.org/10.3390/polym17121596",
+      "asReported": "gloss 57 %",
+      "conditions": "ordinary urushi film"
+    },
+    "colour": {
+      "value": [
+        0.063,
+        0.0296,
+        0.0137
+      ],
+      "unit": "1",
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "grade": "design",
+      "source": "windows/Scripts/chenghuai.py (frozen as-built reference) (Chestnut)",
+      "asReported": "#47301F",
+      "conditions": "栗壳色 chestnut lacquer on the garden's timber",
+      "derivation": "the design's sRGB hex decoded with the sRGB transfer function; a design colour, not a measurement"
+    },
+    "appearance": "A translucent dark brown film with a clear-coat-like surface reflection over the wood's own figure; the figure reads only at grazing light."
+  },
+  "design": {
+    "text": "栗壳色 广漆, chestnut lacquer: all garden timber, Suzhou brown, no paint.",
+    "grade": "design",
+    "source": "plan/proposals/chenghuai/canvas/Materials.dc.html (approved Chenghuai proposal: '營造')"
+  },
+  "photograph": [
+    "A deep, warm, dark brown gloss like a chestnut's shell; the grain faintly visible; hand-worn edges lighter and polished.",
+    "Outdoors, a fine craze and loss of gloss on sunlit faces."
+  ],
+  "unverified": [
+    {
+      "field": "mix ratio (raw lacquer : boiled tung oil)",
+      "value": null,
+      "unit": "1",
+      "reason": "Not given in the source read."
+    },
+    {
+      "field": "ground under the lacquer",
+      "value": null,
+      "unit": "text",
+      "reason": "Jiangnan work lays the lacquer over a thin putty ground; no source describing it was read."
+    }
+  ],
+  "sources": [
+    "雅昌艺术市场监测中心 (2018) 明清家具透明涂料的成分与鉴别 [The composition and identification of the clear finishes of Ming and Qing furniture], 2018-10-10, https://amma.artron.net/observation_shownews.php?newid=1030835",
+    "Hou, J., Wang, T., Wang, Y., Feng, X. & Liu, X. (2025) Research on the rapid curing mechanism and technology of Chinese lacquer. Polymers 17(12), 1596, https://doi.org/10.3390/polym17121596",
+    "plan/proposals/chenghuai/canvas/Materials.dc.html (approved Chenghuai proposal: '營造')"
+  ]
+}

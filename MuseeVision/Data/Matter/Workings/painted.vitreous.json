@@ -1,0 +1,64 @@
+{
+  "schema": "musee.matter.working/1",
+  "key": "painted.vitreous",
+  "name": "Vitreous paint (grisaille) fired on glass",
+  "appliesTo": {
+    "families": [
+      "glass"
+    ],
+    "substances": [
+      "antique-glass"
+    ]
+  },
+  "over": [
+    "blown.cylinder",
+    "flashed"
+  ],
+  "process": "The glass painter grinds a paint of finely powdered low-melting glass (a lead-silicate flux) and iron or copper oxide, mixes it with water or vinegar and gum arabic, and lays it on the cut pieces over the cartoon: first the trace lines, near-opaque, with a long brush; then washes (mattes) that are stippled, badgered or scratched out with a needle or stick to model light. Back-painting on the other face deepens the shading. The pieces are fired in a kiln at 650-700 degC so that the flux fuses the pigment to the glass, leaving a thin (10-100 um), uneven brown-black layer. Morris's firm drew with brown-black grisaille in this way from the cartoons, whose leads were marked in brown.",
+  "processSources": [
+    "A. Rodrigues, M. L. Coutinho, C. Machado, L. Cerqueira Alves, A. Machado and M. Vilarigues, 'An Overview of Germanic Grisailles through the Stained-Glass Collection at Pena Palace', Heritage 5 (2022) 1003-1023, doi:10.3390/heritage5020055",
+    "A. Gilchrist, ''The tears wept by our windows': severe paint loss from stained glass windows of the mid-nineteenth century', Vidimus 64, https://www.vidimus.org/issue-64/feature-83/",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/albion_glass.py (frozen reference)"
+  ],
+  "facts": {
+    "composition": {
+      "text": "A mixture of finely ground glass, iron and/or copper oxide as pigment, applied with a vehicle (vinegar or water) and a temporary binder (gum arabic).",
+      "grade": "measured",
+      "source": "A. Rodrigues, M. L. Coutinho, C. Machado, L. Cerqueira Alves, A. Machado and M. Vilarigues, 'An Overview of Germanic Grisailles through the Stained-Glass Collection at Pena Palace', Heritage 5 (2022) 1003-1023, doi:10.3390/heritage5020055"
+    },
+    "firingTemperature": {
+      "min": 650,
+      "max": 700,
+      "unit": "degC",
+      "grade": "measured",
+      "source": "A. Rodrigues, M. L. Coutinho, C. Machado, L. Cerqueira Alves, A. Machado and M. Vilarigues, 'An Overview of Germanic Grisailles through the Stained-Glass Collection at Pena Palace', Heritage 5 (2022) 1003-1023, doi:10.3390/heritage5020055"
+    },
+    "layerThickness": {
+      "min": 10,
+      "max": 100,
+      "unit": "um",
+      "grade": "measured",
+      "source": "A. Rodrigues, M. L. Coutinho, C. Machado, L. Cerqueira Alves, A. Machado and M. Vilarigues, 'An Overview of Germanic Grisailles through the Stained-Glass Collection at Pena Palace', Heritage 5 (2022) 1003-1023, doi:10.3390/heritage5020055",
+      "note": "'thin (10-100 um) and uneven'"
+    },
+    "victorianRecipe": {
+      "text": "A mid-19th-century paint (Hardman) analysed: pigment about 50 % by weight, a hard lead-silicate flux (lead to silica about 3:2), coarsely ground iron-oxide particles.",
+      "grade": "measured",
+      "source": "A. Gilchrist, ''The tears wept by our windows': severe paint loss from stained glass windows of the mid-nineteenth century', Vidimus 64, https://www.vidimus.org/issue-64/feature-83/"
+    }
+  },
+  "photograph": [
+    "Crisp, near-opaque dark trace lines; a granular, translucent brown haze of matting (thicker matte, less and browner light) with highlights scratched out; faint back-painting as a softer shadow."
+  ],
+  "unverified": [
+    {
+      "field": "optics.transmittance",
+      "text": "transmittance of grisaille per um",
+      "reason": "No measured transmittance of a fired grisaille matte per unit thickness was read."
+    }
+  ],
+  "sources": [
+    "A. Rodrigues, M. L. Coutinho, C. Machado, L. Cerqueira Alves, A. Machado and M. Vilarigues, 'An Overview of Germanic Grisailles through the Stained-Glass Collection at Pena Palace', Heritage 5 (2022) 1003-1023, doi:10.3390/heritage5020055",
+    "A. Gilchrist, ''The tears wept by our windows': severe paint loss from stained glass windows of the mid-nineteenth century', Vidimus 64, https://www.vidimus.org/issue-64/feature-83/"
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "schema": "musee.matter.working/1",
+  "key": "blown.cased",
+  "name": "Mouth-blown cased opal (globes)",
+  "appliesTo": {
+    "families": [
+      "glass"
+    ],
+    "substances": [
+      "opal-glass"
+    ]
+  },
+  "over": [],
+  "process": "The gaffer blows a thin gather of clear glass, overlays it with a gather of opal, and (for triplex) with a further layer of clear, then blows the globe to shape in a mould or free, leaving a neck and rolled lip for the gallery. The opal layer sits between glossy clear skins: outside the globe mirrors the room like any glass; inside, the opal diffuses the lamp so that no filament shows. The thinner and more even the opal layer, the more light the globe passes.",
+  "processSources": [
+    "Arlico Lighting, 'Lucis: hand made opal glass lighting', https://arlico.co.uk/brands/lucis-hand-made-opal-glass-lighting/"
+  ],
+  "optics": {
+    "conventional": {
+      "min": 0.5,
+      "max": 0.55,
+      "unit": "1",
+      "grade": "manufacturer",
+      "source": "Arlico Lighting, 'Lucis: hand made opal glass lighting', https://arlico.co.uk/brands/lucis-hand-made-opal-glass-lighting/",
+      "note": "'Conventional glass normally has a light transmission of just 50% - 55%'"
+    },
+    "triplex": {
+      "max": 0.86,
+      "unit": "1",
+      "grade": "manufacturer",
+      "source": "Arlico Lighting, 'Lucis: hand made opal glass lighting', https://arlico.co.uk/brands/lucis-hand-made-opal-glass-lighting/",
+      "note": "'up to 86% efficient' (luminaire efficiency, a maker's claim)"
+    },
+    "skinF0": {
+      "value": 0.0432,
+      "unit": "1",
+      "grade": "derived",
+      "source": "SCHOTT North America, 'OPALIKA' technical data sheet (970-3d/09/04-P), https://www.sydor.com/wp-content/uploads/SCHOTT-OPALIKA-Display-Glass.pdf",
+      "derivation": "((n-1)/(n+1))^2 with n = 1.525 (soda-lime clear skin)"
+    }
+  },
+  "stock": {
+    "text": "As built: 17 cm (Albion), 34 and 44 cm (the Reserve).",
+    "grade": "design",
+    "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Source/MuseeVision/Albion/AlbionLamps.h (frozen reference) ; C:/Users/anan9/Desktop/Projects/Musee Vision/plan/canvas/AsBuiltReserve.dc.html (as-built board, D-001)"
+  },
+  "photograph": [
+    "A glossy ball with a soft milky interior; brighter towards the lamp, warmer and dimmer at the rim and neck."
+  ],
+  "unverified": [
+    {
+      "field": "stock.wall",
+      "text": "globe wall and opal layer thickness",
+      "reason": "Wall and opal-layer thickness of a cased globe were not read."
+    }
+  ],
+  "sources": [
+    "Arlico Lighting, 'Lucis: hand made opal glass lighting', https://arlico.co.uk/brands/lucis-hand-made-opal-glass-lighting/",
+    "SCHOTT North America, 'OPALIKA' technical data sheet (970-3d/09/04-P), https://www.sydor.com/wp-content/uploads/SCHOTT-OPALIKA-Display-Glass.pdf",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Source/MuseeVision/Albion/AlbionLamps.h (frozen reference)",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/plan/canvas/AsBuiltReserve.dc.html (as-built board, D-001)"
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "schema": "musee.matter.working/1",
+  "key": "sawn.plain",
+  "name": "Plain-sawn (flat-sawn)",
+  "appliesTo": {
+    "families": [
+      "oak",
+      "accent"
+    ],
+    "substances": [
+      "oak",
+      "korean-pine",
+      "chinese-fir",
+      "phoebe"
+    ]
+  },
+  "over": [],
+  "process": "The log is sawn through and through, so most boards have their growth rings roughly parallel to the face, in arches. The face is tangential: the rings cut obliquely give the arched 'cathedral' figure, and the width is as wide as the log allows. It yields the most timber and moves most across its width.",
+  "geometry": {
+    "ringAngleToFace": {
+      "text": "Rings roughly parallel to the face, usually in arches; below the rift range (under about 45 degrees).",
+      "grade": "secondary",
+      "source": "WOODWEB Knowledge Base, 'Rays and Flecks in Oak' (forum digest of 30 September 2009; answer by Gene Wengert), https://woodweb.com/knowledge_base/Rays_and_Flecks_in_Oak.html ; Wikipedia, 'Quarter sawing', https://en.wikipedia.org/wiki/Quarter_sawing (read 2026-09-26)"
+    }
+  },
+  "stability": {
+    "widthShrinkageOak": {
+      "value": 0.084,
+      "unit": "1",
+      "grade": "secondary",
+      "source": "Meier, E. The Wood Database: English Oak (Quercus robur), https://www.wood-database.com/english-oak/ (read 2026-09-26)",
+      "conditions": "tangential, green to oven-dry"
+    },
+    "cupping": {
+      "text": "A flatsawn board cups more than a quartersawn one.",
+      "grade": "secondary",
+      "source": "Wikipedia, 'Quarter sawing', https://en.wikipedia.org/wiki/Quarter_sawing (read 2026-09-26)"
+    }
+  },
+  "surface": {
+    "figure": "Arched cathedrals and wide bands of earlywood pores; no ray fleck (the rays are cut end-on as short dark lines)."
+  },
+  "photograph": [
+    "Arched figure repeating up each board; wider boards; each board a different pattern."
+  ],
+  "sources": [
+    "WOODWEB Knowledge Base, 'Rays and Flecks in Oak' (forum digest of 30 September 2009; answer by Gene Wengert), https://woodweb.com/knowledge_base/Rays_and_Flecks_in_Oak.html",
+    "Wikipedia, 'Quarter sawing', https://en.wikipedia.org/wiki/Quarter_sawing (read 2026-09-26)",
+    "Meier, E. The Wood Database: English Oak (Quercus robur), https://www.wood-database.com/english-oak/ (read 2026-09-26)"
+  ]
+}

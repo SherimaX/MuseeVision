@@ -1,0 +1,162 @@
+{
+  "schema": "musee.matter.working/1",
+  "key": "painted.iron",
+  "name": "Victorian lead-and-linseed oil paint on iron",
+  "appliesTo": {
+    "families": [
+      "accent"
+    ],
+    "substances": [
+      "cast-iron",
+      "wrought-iron"
+    ]
+  },
+  "over": [
+    "cast.iron",
+    "riveted.iron",
+    "forged.iron"
+  ],
+  "process": "The period system is oil paint: a primer of red lead in linseed oil, the most common primer pigment of the late 18th and 19th centuries, then undercoats and finishing coats of white lead (lead carbonates and sulfates) ground in linseed oil with turpentine and driers, tinted with coloured pigments. A scheme is two to four coats and sometimes more, brushed on. Iron was repainted again and again: one sample held 37 schemes, 35 of them lead paints. The paint dries to a gloss that weathers to a satin, and the brush and the build-up of schemes soften every arris of the castings. In Albion the court's iron is one dark slate grey (the as-built design); the Victorians favoured green through the mid century, with dark blue, red and chocolate brown also popular, and Oxford's roof carried stencilled patterns on its arched girders, repainted in 1864. Lead paint is permitted in the UK today only to maintain historic finishes; a modern equivalent is a zinc-based primer, a micaceous iron oxide coat and two coats of gloss.",
+  "processSources": [
+    "K. Blackney, 'Painting Historic Ironwork', Historic Churches (2002), via The Building Conservation Directory, https://www.buildingconservation.com/articles/paintingiron/paintingiron.htm",
+    "The Victorian Society, 'Paint colours and finishes' (advice), https://www.victoriansociety.org.uk/advice/paint-colours-and-finishes/",
+    "Oxford University Museum of Natural History, 'Design and decoration: Central Court Roof', https://oum-ox.shorthandstories.com/oumnh-design-and-decoration/central-court-roof/",
+    "Historic Environment Scotland, Engine Shed, 'Iron' (Building advice: building materials), https://www.engineshed.scot/building-advice/building-materials/iron/"
+  ],
+  "steps": [
+    {
+      "step": "primer: red lead in linseed oil ('the most common pigment in linseed oil primers in the late 18th and 19th centuries')",
+      "grade": "secondary",
+      "source": "K. Blackney, 'Painting Historic Ironwork', Historic Churches (2002), via The Building Conservation Directory, https://www.buildingconservation.com/articles/paintingiron/paintingiron.htm"
+    },
+    {
+      "step": "build and finish: white lead in linseed oil with turpentine, driers and pigments; 'two to four coats and sometimes more'",
+      "grade": "secondary",
+      "source": "K. Blackney, 'Painting Historic Ironwork', Historic Churches (2002), via The Building Conservation Directory, https://www.buildingconservation.com/articles/paintingiron/paintingiron.htm"
+    },
+    {
+      "step": "repainting over decades: 'a total of 37 schemes, 35 of which are traditional lead paints' in one analysed sample",
+      "grade": "secondary",
+      "source": "K. Blackney, 'Painting Historic Ironwork', Historic Churches (2002), via The Building Conservation Directory, https://www.buildingconservation.com/articles/paintingiron/paintingiron.htm"
+    }
+  ],
+  "system": {
+    "coatsPerScheme": {
+      "min": 2,
+      "max": 4,
+      "unit": "coat",
+      "grade": "secondary",
+      "source": "K. Blackney, 'Painting Historic Ironwork', Historic Churches (2002), via The Building Conservation Directory, https://www.buildingconservation.com/articles/paintingiron/paintingiron.htm"
+    },
+    "schemesFound": {
+      "value": 37,
+      "unit": "1",
+      "grade": "secondary",
+      "source": "K. Blackney, 'Painting Historic Ironwork', Historic Churches (2002), via The Building Conservation Directory, https://www.buildingconservation.com/articles/paintingiron/paintingiron.htm",
+      "conditions": "one analysed sample of historic ironwork"
+    },
+    "modernEquivalent": {
+      "text": "A zinc-based primer as base coat, a micaceous iron oxide layer and two coats of gloss paint.",
+      "grade": "guidance",
+      "source": "Historic Environment Scotland, Engine Shed, 'Iron' (Building advice: building materials), https://www.engineshed.scot/building-advice/building-materials/iron/"
+    },
+    "serviceCycle": {
+      "value": 100,
+      "unit": "year",
+      "grade": "secondary",
+      "source": "A. Davey and E. Troup, 'Maintaining and Repairing Coatings on Cast Iron Structures', The Building Conservation Directory (2016), https://www.buildingconservation.com/articles/cast-iron-coatings/cast-iron-coatings.htm",
+      "note": "'large, more complex cast iron structures usually need a thorough 100-year service'"
+    },
+    "leadRegulation": {
+      "text": "Lead paint may be used in the UK only 'for the restoration and maintenance of an historic building ... where it is required to maintain historic textures and finishes' (Environmental Protection Regulations 1992).",
+      "grade": "secondary",
+      "source": "K. Blackney, 'Painting Historic Ironwork', Historic Churches (2002), via The Building Conservation Directory, https://www.buildingconservation.com/articles/paintingiron/paintingiron.htm"
+    }
+  },
+  "colours": {
+    "period": {
+      "text": "First half of the 19th century: 'invisible' greens; mid-Victorian: 'Green was used throughout the mid Victorian period but dark blue, red and chocolate brown were also popular'; an 1840s 'bronze' finish of copper or gold powder on a green ground.",
+      "grade": "secondary",
+      "source": "The Victorian Society, 'Paint colours and finishes' (advice), https://www.victoriansociety.org.uk/advice/paint-colours-and-finishes/"
+    },
+    "oxford": {
+      "text": "Stencilled repeating patterns on the arched girders; the scheme was revised during building, 'toned down', and repainted in April 1864 by G. Thicke and J. Randall.",
+      "grade": "secondary",
+      "source": "Oxford University Museum of Natural History, 'Design and decoration: Central Court Roof', https://oum-ox.shorthandstories.com/oumnh-design-and-decoration/central-court-roof/"
+    },
+    "asBuilt": {
+      "text": "Albion's iron: 'cast and wrought iron in a dark slate-grey paint (the Details board's; Oxford's is grey), light enough to read against the sky (satin, a little orange peel, worn at the arrises)'.",
+      "albedo": {
+        "value": [
+          0.0561,
+          0.0723,
+          0.0802
+        ],
+        "unit": "1",
+        "grade": "design",
+        "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/albion_materials.py (frozen reference) (metal_specs: MI_Albion_Iron, BaseColor lin(0x434C50))",
+        "space": "linear Rec.709, D65"
+      },
+      "roughness": {
+        "value": 0.42,
+        "unit": "1",
+        "grade": "design",
+        "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/albion_materials.py (frozen reference) (MI_Albion_Iron: Roughness 0.42, Metallic 0.0)",
+        "conditions": "M_Metal roughness parameter; metallic 0 (a paint, correctly)"
+      },
+      "grade": "design",
+      "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/albion_materials.py (frozen reference)"
+    }
+  },
+  "surface": {
+    "kind": "dielectric oil-paint film over metal; the iron's own optics are hidden",
+    "texture": {
+      "text": "Brushwork and the accumulated build of repainting soften arrises and fill fine detail; runs and sags collect in the hollows of clustered shafts.",
+      "grade": "secondary",
+      "source": "K. Blackney, 'Painting Historic Ironwork', Historic Churches (2002), via The Building Conservation Directory, https://www.buildingconservation.com/articles/paintingiron/paintingiron.htm"
+    }
+  },
+  "asBuiltCorrection": {
+    "text": "The as-built paint is a single uniform grey. The real surface is a stack of schemes: the colour the visitor sees is the top scheme, but its thickness (many coats) rounds the castings' edges and its age sets its sheen. Matter should carry the scheme count and let the history (iron.paint-ageing) set sheen and soiling, rather than one hand-set roughness.",
+    "grade": "design",
+    "source": "MuseeVision/Journal/Decisions.md, D-001 (the design is the finished museum) and D-017 (port the finished rooms; the as-built material values seed the records)"
+  },
+  "photograph": [
+    "An even, slightly glossy-to-satin film, thick enough to round every arris; brush marks in raking light.",
+    "Chips at the arrises show earlier colours beneath; a rust bloom where the film has cracked over a joint."
+  ],
+  "unverified": [
+    {
+      "field": "surface.f0",
+      "value": 0.037,
+      "unit": "1",
+      "reason": "F0 = ((n-1)/(n+1))^2 = 0.037 for a linseed-oil film of n about 1.48; the binder's index was not read from a source."
+    },
+    {
+      "field": "system.dryFilmPerCoat",
+      "text": "dry film thickness per coat",
+      "reason": "Dry film thickness of a 19th-century brushed lead-oil coat was not read."
+    },
+    {
+      "field": "process (sheen)",
+      "text": "gloss to satin to chalk with age",
+      "reason": "That lead-and-linseed-oil paint dries glossy and weathers to a satin and then chalks is trade knowledge; no measurement was read."
+    },
+    {
+      "field": "process (hot oiling)",
+      "text": "castings oiled hot before priming",
+      "reason": "A foundry supplier says new castings were doused in linseed oil while hot to prevent flash rusting before the red lead; that page was not read in full."
+    }
+  ],
+  "sources": [
+    "K. Blackney, 'Painting Historic Ironwork', Historic Churches (2002), via The Building Conservation Directory, https://www.buildingconservation.com/articles/paintingiron/paintingiron.htm",
+    "Historic Environment Scotland, Engine Shed, 'Iron' (Building advice: building materials), https://www.engineshed.scot/building-advice/building-materials/iron/",
+    "A. Davey and E. Troup, 'Maintaining and Repairing Coatings on Cast Iron Structures', The Building Conservation Directory (2016), https://www.buildingconservation.com/articles/cast-iron-coatings/cast-iron-coatings.htm",
+    "The Victorian Society, 'Paint colours and finishes' (advice), https://www.victoriansociety.org.uk/advice/paint-colours-and-finishes/",
+    "Oxford University Museum of Natural History, 'Design and decoration: Central Court Roof', https://oum-ox.shorthandstories.com/oumnh-design-and-decoration/central-court-roof/",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/albion_materials.py (frozen reference) (metal_specs: MI_Albion_Iron, BaseColor lin(0x434C50))",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/albion_materials.py (frozen reference) (MI_Albion_Iron: Roughness 0.42, Metallic 0.0)",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/albion_materials.py (frozen reference)",
+    "MuseeVision/Journal/Decisions.md, D-001 (the design is the finished museum) and D-017 (port the finished rooms; the as-built material values seed the records)"
+  ]
+}

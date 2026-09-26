@@ -1,0 +1,65 @@
+{
+  "schema": "musee.matter.history/1",
+  "key": "lead.creep",
+  "name": "Creep and fatigue of lead (bulging lights, cracked sheet)",
+  "family": "accent",
+  "appliesTo": {
+    "families": [
+      "accent"
+    ],
+    "substances": [
+      "lead"
+    ],
+    "workings": [
+      "leaded",
+      "milled.lead"
+    ]
+  },
+  "surfaceLawTerms": [
+    "age"
+  ],
+  "describes": "Lead is soft and creeps under its own weight and the glass's; its thermal movement is large (29 x 10^-6 /K). A leaded light slowly sags and bows between its saddle bars, the came's leaves loosen and the cement falls out; sheet lead restrained by too many fixings cracks by fatigue at its thin points. The time scale varies enormously: the '100 years or so' said of came is a myth; some leading has failed within years and some has served for more than 800.",
+  "terms": {
+    "cameLifespan": {
+      "text": "The common claim of a lifespan of '100 years or so' is a myth: some leadwork 'disintegrated within years', other came remains 'fully functioning after more than 800 years'.",
+      "grade": "secondary",
+      "source": "S. Strobl, 'Lead in Stained Glass Windows', Historic Churches (2002), via The Building Conservation Directory, https://www.buildingconservation.com/articles/leadstainedglass/lead_stained_glass.htm"
+    },
+    "thermalMovement": {
+      "value": 1.44,
+      "unit": "mm",
+      "grade": "derived",
+      "source": "Wikipedia, 'Lead' (infobox; section 'Chemistry'), https://en.wikipedia.org/wiki/Lead",
+      "derivation": "1000 mm x 28.73e-6 /K x 50 K",
+      "conditions": "per metre of sheet over a 50 K swing"
+    },
+    "fixing": {
+      "text": "Sheet lead is fixed at the head of each bay so it can move; that is what keeps it from fatigue cracking.",
+      "grade": "secondary",
+      "source": "The Lead Lads, 'Leadwork: the ultimate guide to lead roofing' (BS EN 12588; BS 6915:2001+A1:2014), https://theleadlads.co.uk/leadwork-the-ultimate-guide-to-lead-roofing/"
+    }
+  },
+  "drivers": [
+    {
+      "driver": "span between saddle bars (the light's unsupported height)",
+      "owner": "Form (opening make-up)"
+    },
+    {
+      "driver": "temperature swing (sun on the south screen)",
+      "owner": "Time (sun, weather) and Light"
+    }
+  ],
+  "photograph": "A leaded light gently bellied between its saddle bars, catching the light unevenly; hairline cracks at came joints; on a roof, splits along a restrained edge.",
+  "unverified": [
+    {
+      "field": "terms.bulge",
+      "text": "bulge depth of an old leaded panel",
+      "reason": "The magnitude of bulging in old leaded lights (mm over a span) was not read from a source."
+    }
+  ],
+  "sources": [
+    "S. Strobl, 'Lead in Stained Glass Windows', Historic Churches (2002), via The Building Conservation Directory, https://www.buildingconservation.com/articles/leadstainedglass/lead_stained_glass.htm",
+    "Wikipedia, 'Lead' (infobox; section 'Chemistry'), https://en.wikipedia.org/wiki/Lead",
+    "The Lead Lads, 'Leadwork: the ultimate guide to lead roofing' (BS EN 12588; BS 6915:2001+A1:2014), https://theleadlads.co.uk/leadwork-the-ultimate-guide-to-lead-roofing/"
+  ]
+}

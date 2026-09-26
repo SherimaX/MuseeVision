@@ -1,0 +1,139 @@
+{
+  "schema": "musee.matter.working/1",
+  "key": "dizhang",
+  "name": "地仗 ground (一麻五灰: one hemp, five ash)",
+  "appliesTo": {
+    "families": [
+      "accent"
+    ],
+    "substances": [
+      "korean-pine",
+      "chinese-fir"
+    ]
+  },
+  "over": [
+    "sawn.plain",
+    "sawn.quarter"
+  ],
+  "process": "The Qing official ground laid on structural timber before oil paint or painting. The wood is cut back and its joints and checks opened; a thin size of 油满, blood and water is brushed on; then five ash coats of 油满 (lime water, flour and boiled tung oil), 血料 (fresh pig's blood set with lime) and graded brick dust, coarse near the wood and finer outward, with a layer of hemp fibre laid across the grain and hammered into the second coat; the last, fine coat is ground smooth and soaked with raw tung oil (钻生). It wraps each member in a tough, waterproof, crack-bridging skin; plainer grounds without hemp serve rafters, boards and small members.",
+  "steps": [
+    {
+      "step": "木基层处理: prepare the wood (cut back, open joints and checks)",
+      "source": "周乾 Zhou Qian (2023) 解码故宫古建筑'一麻五灰地仗'技艺 [Decoding the 'one hemp, five ash' ground of the Palace Museum's buildings]. 故宫古建文化漫谈, Tencent News, 2023-11-04, https://news.qq.com/rain/a/20231104A08JWV00"
+    },
+    {
+      "step": "汁浆: size, 油满 : 血料 : water = 1 : 1 : 10 by volume",
+      "source": "周乾 Zhou Qian (2023) 解码故宫古建筑'一麻五灰地仗'技艺 [Decoding the 'one hemp, five ash' ground of the Palace Museum's buildings]. 故宫古建文化漫谈, Tencent News, 2023-11-04, https://news.qq.com/rain/a/20231104A08JWV00"
+    },
+    {
+      "step": "捉缝灰: fill the joints and checks; 油满 : 血料 : 砖灰 = 1 : 1 : 1.5",
+      "source": "周乾 Zhou Qian (2023) 解码故宫古建筑'一麻五灰地仗'技艺 [Decoding the 'one hemp, five ash' ground of the Palace Museum's buildings]. 故宫古建文化漫谈, Tencent News, 2023-11-04, https://news.qq.com/rain/a/20231104A08JWV00"
+    },
+    {
+      "step": "通灰 (扫荡灰): wrap the member completely, average 2-3 mm; 1 : 1 : 1.5",
+      "source": "周乾 Zhou Qian (2023) 解码故宫古建筑'一麻五灰地仗'技艺 [Decoding the 'one hemp, five ash' ground of the Palace Museum's buildings]. 故宫古建文化漫谈, Tencent News, 2023-11-04, https://news.qq.com/rain/a/20231104A08JWV00 ; 哲匠之家 (2019) '地仗'原来是用在柱子上的 | 古建筑地仗工艺大全 [The ground layer of traditional buildings: a compendium]. Sohu, 2019-07-21, https://www.sohu.com/a/328405399_617491"
+    },
+    {
+      "step": "使麻: hemp laid perpendicular to the grain on the 通灰 in a 油满 : 血料 = 1 : 1 paste and hammered flat",
+      "source": "周乾 Zhou Qian (2023) 解码故宫古建筑'一麻五灰地仗'技艺 [Decoding the 'one hemp, five ash' ground of the Palace Museum's buildings]. 故宫古建文化漫谈, Tencent News, 2023-11-04, https://news.qq.com/rain/a/20231104A08JWV00"
+    },
+    {
+      "step": "压麻灰: press coat over the hemp; 1 : 1 : 3",
+      "source": "周乾 Zhou Qian (2023) 解码故宫古建筑'一麻五灰地仗'技艺 [Decoding the 'one hemp, five ash' ground of the Palace Museum's buildings]. 故宫古建文化漫谈, Tencent News, 2023-11-04, https://news.qq.com/rain/a/20231104A08JWV00"
+    },
+    {
+      "step": "中灰: middle coat, thin; 1 : 2 : 3.5",
+      "source": "周乾 Zhou Qian (2023) 解码故宫古建筑'一麻五灰地仗'技艺 [Decoding the 'one hemp, five ash' ground of the Palace Museum's buildings]. 故宫古建文化漫谈, Tencent News, 2023-11-04, https://news.qq.com/rain/a/20231104A08JWV00 ; 哲匠之家 (2019) '地仗'原来是用在柱子上的 | 古建筑地仗工艺大全 [The ground layer of traditional buildings: a compendium]. Sohu, 2019-07-21, https://www.sohu.com/a/328405399_617491"
+    },
+    {
+      "step": "细灰: fine coat, smoothed; 1 : 10 : 20",
+      "source": "周乾 Zhou Qian (2023) 解码故宫古建筑'一麻五灰地仗'技艺 [Decoding the 'one hemp, five ash' ground of the Palace Museum's buildings]. 故宫古建文化漫谈, Tencent News, 2023-11-04, https://news.qq.com/rain/a/20231104A08JWV00"
+    },
+    {
+      "step": "磨细钻生: grind fine and soak with raw tung oil (生桐油)",
+      "source": "周乾 Zhou Qian (2023) 解码故宫古建筑'一麻五灰地仗'技艺 [Decoding the 'one hemp, five ash' ground of the Palace Museum's buildings]. 故宫古建文化漫谈, Tencent News, 2023-11-04, https://news.qq.com/rain/a/20231104A08JWV00"
+    }
+  ],
+  "materials": {
+    "youman": {
+      "text": "油满: boiled oil (灰油), flour and lime water mixed in proportion.",
+      "grade": "secondary",
+      "source": "周乾 Zhou Qian (2023) 解码故宫古建筑'一麻五灰地仗'技艺 [Decoding the 'one hemp, five ash' ground of the Palace Museum's buildings]. 故宫古建文化漫谈, Tencent News, 2023-11-04, https://news.qq.com/rain/a/20231104A08JWV00"
+    },
+    "xueliao": {
+      "text": "血料: fresh pig's blood with lime and water at room temperature.",
+      "grade": "secondary",
+      "source": "周乾 Zhou Qian (2023) 解码故宫古建筑'一麻五灰地仗'技艺 [Decoding the 'one hemp, five ash' ground of the Palace Museum's buildings]. 故宫古建文化漫谈, Tencent News, 2023-11-04, https://news.qq.com/rain/a/20231104A08JWV00"
+    },
+    "bloodGel": {
+      "text": "Porcine blood mixed with lime water in the traditional recipe's ratio is a constituent of the composite mortar of Chinese architectural painting grounds; the study examines the hydrogel it forms and its carbonation.",
+      "grade": "measured",
+      "source": "Cheng, C., Ma, W., Chen, R., Zhu, Y., Zheng, L., Li, W. & Hu, D. (2024) Study on carbonation of porcine blood hydrogel in the composite mortar of ancient Chinese architectural painting. Gels 10(3), 191, https://doi.org/10.3390/gels10030191"
+    },
+    "brickDust": {
+      "text": "Brick dust in three grades: coarse, medium and powder-fine; the further from the wood, the finer.",
+      "grade": "secondary",
+      "source": "哲匠之家 (2019) '地仗'原来是用在柱子上的 | 古建筑地仗工艺大全 [The ground layer of traditional buildings: a compendium]. Sohu, 2019-07-21, https://www.sohu.com/a/328405399_617491 ; 周乾 Zhou Qian (2023) 解码故宫古建筑'一麻五灰地仗'技艺 [Decoding the 'one hemp, five ash' ground of the Palace Museum's buildings]. 故宫古建文化漫谈, Tencent News, 2023-11-04, https://news.qq.com/rain/a/20231104A08JWV00"
+    },
+    "ratiosRule": {
+      "text": "From the wood outward the blood increases and the 油满 decreases.",
+      "grade": "secondary",
+      "source": "周乾 Zhou Qian (2024) 故宫建筑油饰工艺里的民间智慧 [Folk wisdom in the oil-paint craft of the Palace Museum's buildings]. 北京晚报 (15 August 2024), republished by Tencent News 2024-09-21, https://news.qq.com/rain/a/20240921A07NT600"
+    }
+  },
+  "schedules": {
+    "yiMaWuHui": {
+      "text": "一麻五灰: the representative ground; variants 一麻四灰, 二麻六灰.",
+      "grade": "secondary",
+      "source": "哲匠之家 (2019) '地仗'原来是用在柱子上的 | 古建筑地仗工艺大全 [The ground layer of traditional buildings: a compendium]. Sohu, 2019-07-21, https://www.sohu.com/a/328405399_617491"
+    },
+    "withoutHemp": {
+      "text": "单披灰 (no hemp) for large timbers and some joinery; rafter heads four ash coats (四道灰); rafters and roof boards, brackets and boards three (三道灰); carved members only 捉缝, 中灰 and 细灰.",
+      "grade": "secondary",
+      "source": "哲匠之家 (2019) '地仗'原来是用在柱子上的 | 古建筑地仗工艺大全 [The ground layer of traditional buildings: a compendium]. Sohu, 2019-07-21, https://www.sohu.com/a/328405399_617491"
+    },
+    "museum": "一麻五灰 on columns, beams, frames, doors and gate leaves (the board: '一麻五灰 ground under the lacquer'); 三道灰 on rafters and roof boards; 捉缝-中灰-细灰 on lattice bars and carving.",
+    "museumSource": "plan/proposals/chenghuai/canvas/Materials.dc.html (approved Chenghuai proposal: '營造')"
+  },
+  "thickness": {
+    "tonghui": {
+      "min": 2,
+      "max": 3,
+      "unit": "mm",
+      "grade": "secondary",
+      "source": "哲匠之家 (2019) '地仗'原来是用在柱子上的 | 古建筑地仗工艺大全 [The ground layer of traditional buildings: a compendium]. Sohu, 2019-07-21, https://www.sohu.com/a/328405399_617491",
+      "note": "the second coat alone, average"
+    },
+    "thinGroundMeasured": {
+      "min": 600,
+      "max": 700,
+      "unit": "um",
+      "grade": "measured",
+      "source": "Huang, D., Han, K., Teri, G., Cheng, C., Qi, Y. & Li, Y. (2024) Material and microstructure analysis of wood color paintings from Shaanxi Cangjie Temple, China. Molecules 29(12), 2734, https://doi.org/10.3390/molecules29122734 (https://pmc.ncbi.nlm.nih.gov/articles/PMC11205893/)",
+      "conditions": "ground layer under a temple's painted woodwork (Cangjie Temple, Shaanxi); a thin ground, not 一麻五灰"
+    }
+  },
+  "surface": {
+    "form": "Every arris rounded and every joint hidden; a column reads as one smooth turned body.",
+    "texture": "After 钻生 the ground is hard and fine; it is the paint's substrate, never seen bare except where paint has flaked."
+  },
+  "photograph": [
+    "Where paint has flaked: a grey-brown, sandy ground with hemp fibres showing in the break; the wood deeper still.",
+    "Hairline cracks through paint and ground following the timber's checks along the grain."
+  ],
+  "unverified": [
+    {
+      "field": "thickness.total yiMaWuHui",
+      "value": null,
+      "unit": "mm",
+      "reason": "The total thickness of a 一麻五灰 ground was not read (the 通灰 alone is 2-3 mm)."
+    }
+  ],
+  "sources": [
+    "周乾 Zhou Qian (2023) 解码故宫古建筑'一麻五灰地仗'技艺 [Decoding the 'one hemp, five ash' ground of the Palace Museum's buildings]. 故宫古建文化漫谈, Tencent News, 2023-11-04, https://news.qq.com/rain/a/20231104A08JWV00",
+    "周乾 Zhou Qian (2024) 故宫建筑油饰工艺里的民间智慧 [Folk wisdom in the oil-paint craft of the Palace Museum's buildings]. 北京晚报 (15 August 2024), republished by Tencent News 2024-09-21, https://news.qq.com/rain/a/20240921A07NT600",
+    "哲匠之家 (2019) '地仗'原来是用在柱子上的 | 古建筑地仗工艺大全 [The ground layer of traditional buildings: a compendium]. Sohu, 2019-07-21, https://www.sohu.com/a/328405399_617491",
+    "Cheng, C., Ma, W., Chen, R., Zhu, Y., Zheng, L., Li, W. & Hu, D. (2024) Study on carbonation of porcine blood hydrogel in the composite mortar of ancient Chinese architectural painting. Gels 10(3), 191, https://doi.org/10.3390/gels10030191",
+    "Huang, D., Han, K., Teri, G., Cheng, C., Qi, Y. & Li, Y. (2024) Material and microstructure analysis of wood color paintings from Shaanxi Cangjie Temple, China. Molecules 29(12), 2734, https://doi.org/10.3390/molecules29122734 (https://pmc.ncbi.nlm.nih.gov/articles/PMC11205893/)"
+  ]
+}

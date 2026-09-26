@@ -1,0 +1,325 @@
+{
+  "schema": "musee.matter.working/1",
+  "key": "painted.pearl",
+  "name": "Pearl-white lacquer on steel (the Elan's pearl steel)",
+  "dossier": "Docs/Matter/painted.pearl.md",
+  "appliesTo": {
+    "families": [
+      "accent"
+    ],
+    "substances": [
+      "steel"
+    ]
+  },
+  "over": [],
+  "process": "Pearl steel is the white of the Future: steel under a warm-white lacquer (RAL 1013, whose German name is Perlweiss, 'pearl white') carrying a silver-white pearl pigment, so the white has a soft inner lustre that brightens toward the specular and sparkles faintly up close. The pearl is made by platelets of mica (n about 1.5), 10-60 um across and about 0.5 um thick, coated with a thin film of titanium dioxide (n about 2.7); the film reflects by interference, and the platelets lie parallel to the surface, so the lustre follows the light like a mirror broken into flakes. Two builds are needed. Inside (the Atrium's twelve ribs, the Sphere's lattice and throat, the collar and the irises, the Hall of Light's frame and vault): the ribs are shop-painted like the Rotunda's lattice (blast-cleaned to Sa 2 1/2, an epoxy build coat), then a pearl basecoat and a satin clear. Outside (the dome's seamless shell, 22-36.3 m): the steel plates are welded, the welds ground, and the whole shell faired like a superyacht hull: epoxy fairing compound, a high-build epoxy surfacer sanded straight, then a white basecoat, the pearl, and a gloss clearcoat that gives depth and carries the UV; the hull painter's tolerance is under 0.5 mm over lines of 50-60 m.",
+  "processSources": [
+    "A. Rohrer and M. T. Venturini, 'Pearlescent Pigments in Coatings - a Primer', PCI Magazine (1 August 2018), https://www.pcimag.com/articles/105225-pearlescent-pigments-in-coatings-a-primer",
+    "Susonity (formerly Merck KGaA), 'IRIODIN 100 Silver Pearl, white, 10-60 um particle size distribution', product 104670, https://www.susonity.com/US/en/product/pm/104670",
+    "RALcolorchart.com, 'RAL 1013 Oyster white (RAL Classic)' (German name Perlweiss; LRV), https://www.ralcolorchart.com/ral-classic/ral-1013-oyster-white",
+    "ALEXSEAL Yacht Coatings (Mankiewicz), 'Fairing & Finishes', vol. XVI (2024), https://www.alexseal.com/fileadmin/user_upload/Alexseal/Downloads/Alexseal_Fairing_Finishes_Vol_XVI_2024_A4_01.pdf",
+    "Mankiewicz, 'ALEXSEAL Super Build 302' technical data sheet 153-14 (Rev 03/2024), https://www.alexseal.com/fileadmin/user_upload/Alexseal/TDS/English/TDS_Alexseal_Super_Build_302_2024_engl.pdf",
+    "MuseeVision/Data/Matter/Workings/painted.steel.json",
+    "MuseeVision/Journal/Decisions.md, D-014 (Matter: families and accents; Form: joints 'welded and faired' for the Elan's pearl shell; Glazing: stained glass with lead cames)"
+  ],
+  "effectPigment": {
+    "type": {
+      "text": "Silver-white pearl lustre pigment: muscovite mica coated with titanium dioxide (anatase), 10-60 um particle size distribution.",
+      "grade": "manufacturer",
+      "source": "Susonity (formerly Merck KGaA), 'IRIODIN 100 Silver Pearl, white, 10-60 um particle size distribution', product 104670, https://www.susonity.com/US/en/product/pm/104670"
+    },
+    "micaIndex": {
+      "value": 1.5,
+      "unit": "1",
+      "grade": "secondary",
+      "source": "A. Rohrer and M. T. Venturini, 'Pearlescent Pigments in Coatings - a Primer', PCI Magazine (1 August 2018), https://www.pcimag.com/articles/105225-pearlescent-pigments-in-coatings-a-primer",
+      "note": "'n approx. 1.5'"
+    },
+    "titaniaIndex": {
+      "value": 2.7,
+      "unit": "1",
+      "grade": "secondary",
+      "source": "A. Rohrer and M. T. Venturini, 'Pearlescent Pigments in Coatings - a Primer', PCI Magazine (1 August 2018), https://www.pcimag.com/articles/105225-pearlescent-pigments-in-coatings-a-primer",
+      "note": "'n approx. 2.7'"
+    },
+    "plateletDiameter": {
+      "min": 10,
+      "max": 60,
+      "unit": "um",
+      "grade": "secondary",
+      "source": "A. Rohrer and M. T. Venturini, 'Pearlescent Pigments in Coatings - a Primer', PCI Magazine (1 August 2018), https://www.pcimag.com/articles/105225-pearlescent-pigments-in-coatings-a-primer",
+      "note": "the 10-60 um distribution gives the optimum lustre; larger reads sparkly, smaller satin with more hiding"
+    },
+    "plateletThickness": {
+      "value": 0.5,
+      "unit": "um",
+      "grade": "secondary",
+      "source": "A. Rohrer and M. T. Venturini, 'Pearlescent Pigments in Coatings - a Primer', PCI Magazine (1 August 2018), https://www.pcimag.com/articles/105225-pearlescent-pigments-in-coatings-a-primer",
+      "note": "synthetic micas can be under 0.25 um"
+    },
+    "loading": {
+      "min": 0.1,
+      "max": 0.2,
+      "unit": "1",
+      "grade": "secondary",
+      "source": "A. Rohrer and M. T. Venturini, 'Pearlescent Pigments in Coatings - a Primer', PCI Magazine (1 August 2018), https://www.pcimag.com/articles/105225-pearlescent-pigments-in-coatings-a-primer",
+      "conditions": "share of total paint solids for a full pearl effect"
+    },
+    "hidingFilm": {
+      "min": 15,
+      "max": 25,
+      "unit": "um",
+      "grade": "secondary",
+      "source": "A. Rohrer and M. T. Venturini, 'Pearlescent Pigments in Coatings - a Primer', PCI Magazine (1 August 2018), https://www.pcimag.com/articles/105225-pearlescent-pigments-in-coatings-a-primer",
+      "conditions": "dry film thickness at which a pearl coat covers"
+    },
+    "angleShift": {
+      "text": "A thin-film interference colour shifts toward shorter wavelengths as the view turns toward grazing, so a silver-white pearl can cool faintly (bluish or lilac) at the silhouette while its face stays warm white.",
+      "grade": "derived",
+      "source": "A. Rohrer and M. T. Venturini, 'Pearlescent Pigments in Coatings - a Primer', PCI Magazine (1 August 2018), https://www.pcimag.com/articles/105225-pearlescent-pigments-in-coatings-a-primer",
+      "derivation": "thin-film condition 2 n d cos(theta_t) = m lambda: at larger angles cos(theta_t) falls and the reflected peak moves to shorter lambda"
+    }
+  },
+  "systems": {
+    "interior": {
+      "text": "The ribs, lattice, collar, irises and throat: shop preparation and epoxy build as painted.steel, then a pearl basecoat on a RAL 1013 white ground and a satin clear.",
+      "preparation": {
+        "text": "Abrasive blast-cleaning to Sa 2 1/2 and a high-build epoxy (125 um) as the Rotunda's lattice.",
+        "grade": "record",
+        "source": "MuseeVision/Data/Matter/Workings/painted.steel.json"
+      },
+      "finish": {
+        "text": "Satin: the as-built ribs are roughness 0.32.",
+        "grade": "design",
+        "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/native.py (frozen reference) (make_rib_pearl: Roughness 0.32)"
+      }
+    },
+    "exteriorShell": {
+      "text": "The dome: steel plate welded and faired (D-014's joint kind), fairing compound, high-build epoxy surfacer, white basecoat, pearl, gloss clearcoat.",
+      "surfacer": {
+        "twoCoats": {
+          "min": 150,
+          "max": 300,
+          "unit": "um",
+          "grade": "manufacturer",
+          "source": "Mankiewicz, 'ALEXSEAL Super Build 302' technical data sheet 153-14 (Rev 03/2024), https://www.alexseal.com/fileadmin/user_upload/Alexseal/TDS/English/TDS_Alexseal_Super_Build_302_2024_engl.pdf",
+          "conditions": "dry film, two coats of high-build epoxy surfacer over sanded fairing compound"
+        },
+        "threeCoats": {
+          "min": 225,
+          "max": 450,
+          "unit": "um",
+          "grade": "manufacturer",
+          "source": "Mankiewicz, 'ALEXSEAL Super Build 302' technical data sheet 153-14 (Rev 03/2024), https://www.alexseal.com/fileadmin/user_upload/Alexseal/TDS/English/TDS_Alexseal_Super_Build_302_2024_engl.pdf",
+          "conditions": "dry film, three coats"
+        },
+        "maximum": {
+          "value": 500,
+          "unit": "um",
+          "grade": "manufacturer",
+          "source": "Mankiewicz, 'ALEXSEAL Super Build 302' technical data sheet 153-14 (Rev 03/2024), https://www.alexseal.com/fileadmin/user_upload/Alexseal/TDS/English/TDS_Alexseal_Super_Build_302_2024_engl.pdf",
+          "conditions": "maximum recommended dry film in one spray application (960 um wet)"
+        }
+      },
+      "fairnessTolerance": {
+        "max": 0.5,
+        "unit": "mm",
+        "grade": "secondary",
+        "source": "ALEXSEAL Yacht Coatings (Mankiewicz), 'Fairing & Finishes', vol. XVI (2024), https://www.alexseal.com/fileadmin/user_upload/Alexseal/Downloads/Alexseal_Fairing_Finishes_Vol_XVI_2024_A4_01.pdf",
+        "conditions": "yacht hulls faired 'straight and fair' over lines that can exceed 50-60 m, tolerance 'less than 500 microns'"
+      },
+      "layers": {
+        "text": "A yacht coating has five layers; the basecoat/clearcoat approach came from aviation, and 'the clearcoat - gives the finish particularly high durability, UV resistance, and visual depth'.",
+        "grade": "secondary",
+        "source": "ALEXSEAL Yacht Coatings (Mankiewicz), 'Fairing & Finishes', vol. XVI (2024), https://www.alexseal.com/fileadmin/user_upload/Alexseal/Downloads/Alexseal_Fairing_Finishes_Vol_XVI_2024_A4_01.pdf"
+      },
+      "architecturalAlternative": {
+        "text": "An architectural fluoropolymer (70 % PVDF) system with mica: primer plus colour coat with mica flakes (Sunstorm), or primer, barrier, colour and clearcoat (XL, required for metallic and exotic colours).",
+        "primer": {
+          "value": 6.4,
+          "unit": "um",
+          "grade": "manufacturer",
+          "source": "PPG Industrial Coatings, 'Duranar PVDF liquid extrusion coatings' (PPG168, 10/24), https://assets-eu-01.kc-usercontent.com/cce44467-0106-013b-6c0b-26132a361492/d1325832-fefb-482f-b750-1ffe988aa65f/Duranar%20Extrusion%20Sheet_v9%2010-10-24.pdf",
+          "asReported": "0.25 +/- 0.05 mil"
+        },
+        "colourCoat": {
+          "min": 25.4,
+          "unit": "um",
+          "grade": "manufacturer",
+          "source": "PPG Industrial Coatings, 'Duranar PVDF liquid extrusion coatings' (PPG168, 10/24), https://assets-eu-01.kc-usercontent.com/cce44467-0106-013b-6c0b-26132a361492/d1325832-fefb-482f-b750-1ffe988aa65f/Duranar%20Extrusion%20Sheet_v9%2010-10-24.pdf",
+          "asReported": "1.0 mil minimum"
+        },
+        "clearcoat": {
+          "value": 15.2,
+          "unit": "um",
+          "grade": "manufacturer",
+          "source": "PPG Industrial Coatings, 'Duranar PVDF liquid extrusion coatings' (PPG168, 10/24), https://assets-eu-01.kc-usercontent.com/cce44467-0106-013b-6c0b-26132a361492/d1325832-fefb-482f-b750-1ffe988aa65f/Duranar%20Extrusion%20Sheet_v9%2010-10-24.pdf",
+          "asReported": "0.6 +/- 0.2 mil",
+          "conditions": "three-coat XL system"
+        },
+        "gloss": {
+          "text": "Low and medium gloss (Sunstorm mica); medium (XL).",
+          "grade": "manufacturer",
+          "source": "PPG Industrial Coatings, 'Duranar PVDF liquid extrusion coatings' (PPG168, 10/24), https://assets-eu-01.kc-usercontent.com/cce44467-0106-013b-6c0b-26132a361492/d1325832-fefb-482f-b750-1ffe988aa65f/Duranar%20Extrusion%20Sheet_v9%2010-10-24.pdf"
+        }
+      }
+    }
+  },
+  "colour": {
+    "ral": {
+      "text": "RAL 1013: English 'Oyster white', German 'Perlweiss'; light reflectance value 70.76.",
+      "grade": "secondary",
+      "source": "RALcolorchart.com, 'RAL 1013 Oyster white (RAL Classic)' (German name Perlweiss; LRV), https://www.ralcolorchart.com/ral-classic/ral-1013-oyster-white"
+    },
+    "lrv": {
+      "value": 0.7076,
+      "unit": "1",
+      "grade": "secondary",
+      "source": "RALcolorchart.com, 'RAL 1013 Oyster white (RAL Classic)' (German name Perlweiss; LRV), https://www.ralcolorchart.com/ral-classic/ral-1013-oyster-white",
+      "note": "LRV 70.76 (CIE Y)"
+    },
+    "board": {
+      "albedo": {
+        "value": [
+          0.7682,
+          0.7157,
+          0.5972
+        ],
+        "unit": "1",
+        "grade": "design",
+        "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/plan/canvas/MaterialsOther.dc.html (the material language board, D-001) ('M_RibPearl . #E3DCCB (RAL 1013)', 'Satin lacquer 0.32')",
+        "space": "linear Rec.709, D65"
+      }
+    },
+    "asBuiltRibs": {
+      "albedo": {
+        "value": [
+          0.8388,
+          0.8148,
+          0.7682
+        ],
+        "unit": "1",
+        "grade": "design",
+        "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/native.py (frozen reference) (make_rib_pearl: hex_colour(0xECE9E3), Roughness 0.32, Specular 0.55)",
+        "space": "linear Rec.709, D65"
+      }
+    },
+    "asBuiltShell": {
+      "albedo": {
+        "value": [
+          0.8,
+          0.79,
+          0.76
+        ],
+        "unit": "1",
+        "grade": "design",
+        "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/exterior_materials.py (frozen reference), PEARL_HLSL and build_pearl() (Pearl)",
+        "space": "linear Rec.709, D65"
+      },
+      "baseRoughness": {
+        "value": 0.3,
+        "unit": "1",
+        "grade": "design",
+        "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/exterior_materials.py (frozen reference), PEARL_HLSL and build_pearl() (BaseRough)"
+      },
+      "clearcoatRoughness": {
+        "value": 0.07,
+        "unit": "1",
+        "grade": "design",
+        "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/exterior_materials.py (frozen reference), PEARL_HLSL and build_pearl() (CoatRoughness)"
+      },
+      "panelTone": {
+        "value": 0.03,
+        "unit": "1",
+        "grade": "design",
+        "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/exterior_materials.py (frozen reference), PEARL_HLSL and build_pearl() (PanelTone)"
+      }
+    },
+    "note": "Three whites are on record: the board's #E3DCCB (its RAL 1013 reading), the as-built ribs' brighter #ECE9E3, and the shell's linear (0.80, 0.79, 0.76). One substance in one finish would give the museum one pearl; which is the Architect's decision (RAL 1013 has an LRV near 0.71, closest to the board's)."
+  },
+  "joints": {
+    "text": "D-014 gives the pearl shell the joint kind 'welded and faired': no joints show. The as-built shell's hairline joints (6 mm, on meridians every 7.5 degrees and parallels every 6 degrees) belong to the earlier panelled reading and are superseded.",
+    "grade": "design",
+    "source": "MuseeVision/Journal/Decisions.md, D-014 (Matter: families and accents; Form: joints 'welded and faired' for the Elan's pearl shell; Glazing: stained glass with lead cames) ; C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/exterior_materials.py (frozen reference), PEARL_HLSL and build_pearl() (JointWidth 0.006)"
+  },
+  "uses": [
+    {
+      "where": "the Atrium's twelve ribs (0.42 x 0.30 m, chamfered), the collar, the iris blades' faces",
+      "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/plan/canvas/FutureAtrium.dc.html (as-built board, D-001) ; C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/native.py (frozen reference)",
+      "grade": "design"
+    },
+    {
+      "where": "the Sphere's underside grid, its throat (the pearl neck) and its floor's underside",
+      "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/plan/canvas/FutureAtrium.dc.html (as-built board, D-001) ; C:/Users/anan9/Desktop/Projects/Musee Vision/plan/canvas/ElanSphere.dc.html (as-built board, D-001)",
+      "grade": "design"
+    },
+    {
+      "where": "the Hall of Light's posts, frame and vault lattice ('pearl-white steel and glass vault')",
+      "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Source/MuseeVision/HallOfLight/HallOfLightStructure.h (frozen reference)",
+      "grade": "design"
+    },
+    {
+      "where": "the Elan's exterior: the drum's twelve fins and mullions, and the dome's seamless pearl shell",
+      "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Source/MuseeVision/ElanExterior/ElanExteriorStructure.h (frozen reference), class comment",
+      "grade": "design"
+    }
+  ],
+  "familyNote": {
+    "text": "The owner's principles put pearl steel in the white family ('plaster, then limewash, then pearl steel'; 'Pearl-white lacquered steel, satin' as the Future's white), but the steel record is declared an accent of the glass family. A family belongs to a substance, so pearl steel is steel (accent of glass) in this working until the Architect decides; the look is the white family's.",
+    "grade": "design",
+    "source": "Owner's standing principles (design-principles, 2026-09-26): 'white (plaster, then limewash, then pearl steel)'; 'Future mirror or gilt'; 'Pearl-white lacquered steel, satin' on the stone board ; MuseeVision/Data/Matter/Substances/steel.json (familyDeclaration)"
+  },
+  "photograph": [
+    "A warm white with a soft, deep lustre that brightens toward the reflection of the sky and dims at the flanks; close up a fine glitter of flakes.",
+    "The shell, faired and clear-coated, mirrors the sky and the trees in long unbroken reflections, with no panel lines.",
+    "The interior ribs are satin: a broad soft highlight along each rib, no mirror."
+  ],
+  "unverified": [
+    {
+      "field": "optics.clearcoatF0",
+      "value": 0.04,
+      "unit": "1",
+      "reason": "F0 = 0.040 for a clearcoat of n about 1.50; the clear's index was not read."
+    },
+    {
+      "field": "effectPigment.titaniaThickness",
+      "text": "TiO2 film thickness of a silver-white pearl",
+      "reason": "A patent summary gives TiO2 films of about 20-165 nm on pearl pigments, silver first and then gold, red, violet, blue and green interference with thickness; the silver-white thickness itself was not read."
+    },
+    {
+      "field": "systems.exteriorShell.gloss",
+      "text": "gloss and orange peel of the shell's clear",
+      "reason": "The shell's clearcoat gloss (60 degree GU) and orange-peel (wave-scan) values were not read."
+    },
+    {
+      "field": "substrate",
+      "text": "shell substrate",
+      "reason": "Whether the dome shell is steel (as 'pearl steel' says) or an aluminium or composite shell under the same system is not settled by any record read; the as-built comment calls it 'a white ceramic-metal under a clear lacquer'."
+    }
+  ],
+  "sources": [
+    "Susonity (formerly Merck KGaA), 'IRIODIN 100 Silver Pearl, white, 10-60 um particle size distribution', product 104670, https://www.susonity.com/US/en/product/pm/104670",
+    "A. Rohrer and M. T. Venturini, 'Pearlescent Pigments in Coatings - a Primer', PCI Magazine (1 August 2018), https://www.pcimag.com/articles/105225-pearlescent-pigments-in-coatings-a-primer",
+    "MuseeVision/Data/Matter/Workings/painted.steel.json",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/native.py (frozen reference) (make_rib_pearl: Roughness 0.32)",
+    "Mankiewicz, 'ALEXSEAL Super Build 302' technical data sheet 153-14 (Rev 03/2024), https://www.alexseal.com/fileadmin/user_upload/Alexseal/TDS/English/TDS_Alexseal_Super_Build_302_2024_engl.pdf",
+    "ALEXSEAL Yacht Coatings (Mankiewicz), 'Fairing & Finishes', vol. XVI (2024), https://www.alexseal.com/fileadmin/user_upload/Alexseal/Downloads/Alexseal_Fairing_Finishes_Vol_XVI_2024_A4_01.pdf",
+    "PPG Industrial Coatings, 'Duranar PVDF liquid extrusion coatings' (PPG168, 10/24), https://assets-eu-01.kc-usercontent.com/cce44467-0106-013b-6c0b-26132a361492/d1325832-fefb-482f-b750-1ffe988aa65f/Duranar%20Extrusion%20Sheet_v9%2010-10-24.pdf",
+    "RALcolorchart.com, 'RAL 1013 Oyster white (RAL Classic)' (German name Perlweiss; LRV), https://www.ralcolorchart.com/ral-classic/ral-1013-oyster-white",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/plan/canvas/MaterialsOther.dc.html (the material language board, D-001) ('M_RibPearl . #E3DCCB (RAL 1013)', 'Satin lacquer 0.32')",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/native.py (frozen reference) (make_rib_pearl: hex_colour(0xECE9E3), Roughness 0.32, Specular 0.55)",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/exterior_materials.py (frozen reference), PEARL_HLSL and build_pearl() (Pearl)",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/exterior_materials.py (frozen reference), PEARL_HLSL and build_pearl() (BaseRough)",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/exterior_materials.py (frozen reference), PEARL_HLSL and build_pearl() (CoatRoughness)",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/exterior_materials.py (frozen reference), PEARL_HLSL and build_pearl() (PanelTone)",
+    "MuseeVision/Journal/Decisions.md, D-014 (Matter: families and accents; Form: joints 'welded and faired' for the Elan's pearl shell; Glazing: stained glass with lead cames)",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/exterior_materials.py (frozen reference), PEARL_HLSL and build_pearl() (JointWidth 0.006)",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/plan/canvas/FutureAtrium.dc.html (as-built board, D-001)",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/native.py (frozen reference)",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/plan/canvas/ElanSphere.dc.html (as-built board, D-001)",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Source/MuseeVision/HallOfLight/HallOfLightStructure.h (frozen reference)",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Source/MuseeVision/ElanExterior/ElanExteriorStructure.h (frozen reference), class comment",
+    "Owner's standing principles (design-principles, 2026-09-26): 'white (plaster, then limewash, then pearl steel)'; 'Future mirror or gilt'; 'Pearl-white lacquered steel, satin' on the stone board",
+    "MuseeVision/Data/Matter/Substances/steel.json (familyDeclaration)"
+  ]
+}

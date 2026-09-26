@@ -1,0 +1,74 @@
+{
+  "schema": "musee.matter.working/1",
+  "key": "flashed",
+  "name": "Flashed (cased-layer) glass",
+  "appliesTo": {
+    "families": [
+      "glass"
+    ],
+    "substances": [
+      "antique-glass",
+      "opal-glass"
+    ]
+  },
+  "over": [
+    "blown.cylinder"
+  ],
+  "process": "A gather of clear or tinted carrier glass is dipped into, or overlaid with, one or two layers of intensely coloured (or opal) glass, and the two are blown and flattened together, so the sheet is clear through most of its thickness with a thin coloured skin on one face. Ruby is always flashed, because a full thickness of copper or gold ruby is almost black. The shape of the gather sets the flash: round gathers give an even layer, pear-shaped ones a shaded one. The flash can be abraded or acid-etched away to leave clear or lighter areas within one piece. Flashed opal sheet (OPALIKA) is made the same way on a drawn clear sheet: a 0.45 mm opal layer on a clear base.",
+  "processSources": [
+    "H. J. Powell, W. Rosenhain and A. Nesbitt, 'Glass', Encyclopaedia Britannica, 11th ed. (1911), via Wikisource, https://en.wikisource.org/wiki/1911_Encyclop%C3%A6dia_Britannica/Glass",
+    "Glashuette Lamberts, 'Flashed glass', https://lamberts.de/flashed-glass",
+    "SCHOTT North America, 'OPALIKA' technical data sheet (970-3d/09/04-P), https://www.sydor.com/wp-content/uploads/SCHOTT-OPALIKA-Display-Glass.pdf"
+  ],
+  "facts": {
+    "definition": {
+      "text": "'the coloured sheet consists of ordinary white glass covered upon one side with a thin coating of intensely coloured glass'",
+      "grade": "historical",
+      "source": "H. J. Powell, W. Rosenhain and A. Nesbitt, 'Glass', Encyclopaedia Britannica, 11th ed. (1911), via Wikisource, https://en.wikisource.org/wiki/1911_Encyclop%C3%A6dia_Britannica/Glass"
+    },
+    "carrier": {
+      "text": "'The clear or tinted carrier glass is over-laid with one or two layers of coloured glass'; flashed glass can be refined by 'engraving or acid etching'.",
+      "grade": "manufacturer",
+      "source": "Glashuette Lamberts, 'Flashed glass', https://lamberts.de/flashed-glass"
+    },
+    "opalLayer": {
+      "value": 0.45,
+      "unit": "mm",
+      "grade": "manufacturer",
+      "source": "SCHOTT North America, 'OPALIKA' technical data sheet (970-3d/09/04-P), https://www.sydor.com/wp-content/uploads/SCHOTT-OPALIKA-Display-Glass.pdf",
+      "note": "+0.35 / -0.2 mm"
+    },
+    "sheet": {
+      "text": "About 60 x 90 cm, about 3 mm thick (antique flashed).",
+      "grade": "manufacturer",
+      "source": "Glashuette Lamberts, 'Flashed glass', https://lamberts.de/flashed-glass"
+    }
+  },
+  "optics": {
+    "text": "The colour sits in a thin skin, so a flashed piece reads as one uniform colour regardless of the sheet's thickness variations, unlike pot-metal; where the flash thins at a gather's edge it pales.",
+    "grade": "derived",
+    "source": "Glashuette Lamberts, 'Flashed glass', https://lamberts.de/flashed-glass ; H. J. Powell, W. Rosenhain and A. Nesbitt, 'Glass', Encyclopaedia Britannica, 11th ed. (1911), via Wikisource, https://en.wikisource.org/wiki/1911_Encyclop%C3%A6dia_Britannica/Glass",
+    "derivation": "Beer-Lambert applied to a thin coloured layer of near-constant thickness over a clear carrier"
+  },
+  "conservation": {
+    "text": "Pitting of about 2.0 mm has been seen on flashed ruby glass.",
+    "grade": "secondary",
+    "source": "D. Anderson, 'Stained Glass and its Decay', The Building Conservation Directory (1996), https://www.buildingconservation.com/articles/glassdecay/glassdecay.htm"
+  },
+  "photograph": [
+    "A ruby piece of even depth with, at its edge or where abraded, a clear margin; a thin coloured line visible on the cut edge."
+  ],
+  "unverified": [
+    {
+      "field": "facts.rubyFlashThickness",
+      "text": "ruby flash thickness",
+      "reason": "The thickness of a Victorian ruby flash was not read."
+    }
+  ],
+  "sources": [
+    "H. J. Powell, W. Rosenhain and A. Nesbitt, 'Glass', Encyclopaedia Britannica, 11th ed. (1911), via Wikisource, https://en.wikisource.org/wiki/1911_Encyclop%C3%A6dia_Britannica/Glass",
+    "Glashuette Lamberts, 'Flashed glass', https://lamberts.de/flashed-glass",
+    "SCHOTT North America, 'OPALIKA' technical data sheet (970-3d/09/04-P), https://www.sydor.com/wp-content/uploads/SCHOTT-OPALIKA-Display-Glass.pdf",
+    "D. Anderson, 'Stained Glass and its Decay', The Building Conservation Directory (1996), https://www.buildingconservation.com/articles/glassdecay/glassdecay.htm"
+  ]
+}

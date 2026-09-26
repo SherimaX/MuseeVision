@@ -1,0 +1,111 @@
+{
+  "schema": "musee.matter.working/1",
+  "key": "painted.tung-oil.green",
+  "name": "Oil-painted green (洋绿油)",
+  "appliesTo": {
+    "families": [
+      "accent"
+    ],
+    "substances": [
+      "korean-pine",
+      "chinese-fir"
+    ]
+  },
+  "over": [
+    "dizhang"
+  ],
+  "process": "Oil paint in the Qing official manner (油饰), over a 地仗 ground: putty, then three coats of 光油 (boiled tung oil) — two pigmented and one clear. The film is thin, glossy when new, and chalks and dulls in weather. The board's 'lacquer' for the house is the trade's 油漆: Qing official buildings are finished in pigmented boiled tung oil (油饰), not in true lacquer (大漆); true lacquer appears in Chenghuai only as the garden's 广漆.",
+  "steps": [
+    {
+      "step": "one coat of putty (腻子), ground fine and levelled, wiped with a damp cloth",
+      "source": "周乾 Zhou Qian (2024) 故宫建筑油饰工艺里的民间智慧 [Folk wisdom in the oil-paint craft of the Palace Museum's buildings]. 北京晚报 (15 August 2024), republished by Tencent News 2024-09-21, https://news.qq.com/rain/a/20240921A07NT600"
+    },
+    {
+      "step": "first coat of pigmented 光油",
+      "source": "周乾 Zhou Qian (2024) 故宫建筑油饰工艺里的民间智慧 [Folk wisdom in the oil-paint craft of the Palace Museum's buildings]. 北京晚报 (15 August 2024), republished by Tencent News 2024-09-21, https://news.qq.com/rain/a/20240921A07NT600"
+    },
+    {
+      "step": "second coat of pigmented 光油, after rubbing with 青粉 and fine sandpaper",
+      "source": "周乾 Zhou Qian (2024) 故宫建筑油饰工艺里的民间智慧 [Folk wisdom in the oil-paint craft of the Palace Museum's buildings]. 北京晚报 (15 August 2024), republished by Tencent News 2024-09-21, https://news.qq.com/rain/a/20240921A07NT600"
+    },
+    {
+      "step": "a clear top coat of 光油 (罩面油, no pigment)",
+      "source": "周乾 Zhou Qian (2024) 故宫建筑油饰工艺里的民间智慧 [Folk wisdom in the oil-paint craft of the Palace Museum's buildings]. 北京晚报 (15 August 2024), republished by Tencent News 2024-09-21, https://news.qq.com/rain/a/20240921A07NT600"
+    }
+  ],
+  "binder": {
+    "text": "光油 (广油): tung oil boiled with a little rosin powder, 土子 (an iron mineral) and 黄丹 (a lead powder): clear, quick-drying, the least durable of the transparent finishes.",
+    "grade": "secondary",
+    "source": "雅昌艺术市场监测中心 (2018) 明清家具透明涂料的成分与鉴别 [The composition and identification of the clear finishes of Ming and Qing furniture], 2018-10-10, https://amma.artron.net/observation_shownews.php?newid=1030835"
+  },
+  "pigment": {
+    "recipe": {
+      "text": "洋绿油: 光油 with 洋绿 (emerald green): rafter heads (椽头) and screen doors (屏门).",
+      "grade": "secondary",
+      "source": "周乾 Zhou Qian (2024) 故宫建筑油饰工艺里的民间智慧 [Folk wisdom in the oil-paint craft of the Palace Museum's buildings]. 北京晚报 (15 August 2024), republished by Tencent News 2024-09-21, https://news.qq.com/rain/a/20240921A07NT600"
+    },
+    "mineral": "emerald green, a synthetic copper acetoarsenite (the 'foreign green' of late Qing work)",
+    "note": "Emerald (Paris) green is toxic; the museum's is a pigment specification for Matter, not a material anyone handles."
+  },
+  "uses": [
+    {
+      "where": "Chenghuai: the festooned gate's screen door and the entry yard's screen door (屏门)",
+      "source": "plan/proposals/chenghuai/canvas/Materials.dc.html (approved Chenghuai proposal: '營造') ('green 屏门'); windows/Source/MuseeVision/Chenghuai/ChenghuaiGeometry.h, enum EChPart (frozen as-built reference) (GreenLacquer)",
+      "grade": "design"
+    }
+  ],
+  "designColour": {
+    "value": [
+      0.0212,
+      0.0685,
+      0.0467
+    ],
+    "unit": "1",
+    "space": "linear Rec.709 (sRGB primaries), D65 white",
+    "grade": "design",
+    "source": "windows/Scripts/chenghuai.py (frozen as-built reference) (colours of the first build)",
+    "asReported": "#284A3D",
+    "conditions": "green of the screen doors",
+    "derivation": "the design's sRGB hex decoded with the sRGB transfer function; a design colour, not a measurement",
+    "note": "the first build's colour, kept as the design until a painted specimen is measured"
+  },
+  "layers": {
+    "system": {
+      "text": "地仗 layer (protects the timber) → 油皮 oil paint (decoration) → gilding where required.",
+      "grade": "secondary",
+      "source": "周乾 Zhou Qian (2024) 故宫建筑油饰工艺里的民间智慧 [Folk wisdom in the oil-paint craft of the Palace Museum's buildings]. 北京晚报 (15 August 2024), republished by Tencent News 2024-09-21, https://news.qq.com/rain/a/20240921A07NT600"
+    }
+  },
+  "surface": {
+    "new": "Glossy, smooth, deep colour.",
+    "aged": "Dull, chalky, crazed along the grain, darker with dirt on rafters and under eaves."
+  },
+  "photograph": [
+    "An even, opaque colour over a perfectly smooth rounded body; a soft gloss when new, dull and chalky after years outdoors.",
+    "Fine cracks along the grain and short cross-cracks (断纹) on old work; flakes showing grey ground beneath."
+  ],
+  "unverified": [
+    {
+      "field": "film thickness per coat",
+      "value": null,
+      "unit": "um",
+      "reason": "Not read."
+    },
+    {
+      "field": "pigment.identity",
+      "value": null,
+      "unit": "text",
+      "reason": "That 洋绿 is emerald green (copper acetoarsenite) is the conservation literature's reading (for example Paris green identified in Qing painted woodwork by Huang et al. 2024); Zhou's article names only 洋绿."
+    },
+    {
+      "field": "pigment.lightfastness",
+      "value": null,
+      "unit": "grade",
+      "reason": "Not read for emerald green in oil."
+    }
+  ],
+  "sources": [
+    "周乾 Zhou Qian (2024) 故宫建筑油饰工艺里的民间智慧 [Folk wisdom in the oil-paint craft of the Palace Museum's buildings]. 北京晚报 (15 August 2024), republished by Tencent News 2024-09-21, https://news.qq.com/rain/a/20240921A07NT600",
+    "雅昌艺术市场监测中心 (2018) 明清家具透明涂料的成分与鉴别 [The composition and identification of the clear finishes of Ming and Qing furniture], 2018-10-10, https://amma.artron.net/observation_shownews.php?newid=1030835"
+  ]
+}

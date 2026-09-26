@@ -1,0 +1,160 @@
+{
+  "schema": "musee.matter.working/1",
+  "key": "painted.caihua",
+  "name": "Painted in the Suzhou manner (苏式彩画)",
+  "appliesTo": {
+    "families": [
+      "accent"
+    ],
+    "substances": [
+      "korean-pine",
+      "chinese-fir"
+    ]
+  },
+  "over": [
+    "dizhang"
+  ],
+  "process": "Architectural painting on beams and boards over a 地仗 ground: mineral pigments in a glue binder laid flat in bands and panels, with a 包袱 (a large 'wrapper' panel of landscape, figures or flowers) at the middle of each bay's beams, and 箍头 bands at the ends; details in gold leaf over a mordant. Matt where the pigment lies bare; the gilding catches the light.",
+  "pigments": {
+    "design": {
+      "text": "苏式彩画: azurite, malachite, gold leaf; a painted 包袱 in each bay of the house beams.",
+      "grade": "design",
+      "source": "plan/proposals/chenghuai/canvas/Materials.dc.html (approved Chenghuai proposal: '營造')"
+    },
+    "azurite": {
+      "formula": "Cu3(CO3)2(OH)2",
+      "nAlpha": {
+        "value": 1.73,
+        "unit": "1",
+        "grade": "measured",
+        "source": "Anthony, J.W., Bideaux, R.A., Bladh, K.W. & Nichols, M.C. (eds.) Handbook of Mineralogy, Mineralogical Society of America: Azurite, http://www.handbookofmineralogy.org/pdfs/azurite.pdf"
+      },
+      "nBeta": {
+        "min": 1.754,
+        "max": 1.758,
+        "unit": "1",
+        "grade": "measured",
+        "source": "Anthony, J.W., Bideaux, R.A., Bladh, K.W. & Nichols, M.C. (eds.) Handbook of Mineralogy, Mineralogical Society of America: Azurite, http://www.handbookofmineralogy.org/pdfs/azurite.pdf"
+      },
+      "nGamma": {
+        "min": 1.835,
+        "max": 1.838,
+        "unit": "1",
+        "grade": "measured",
+        "source": "Anthony, J.W., Bideaux, R.A., Bladh, K.W. & Nichols, M.C. (eds.) Handbook of Mineralogy, Mineralogical Society of America: Azurite, http://www.handbookofmineralogy.org/pdfs/azurite.pdf"
+      },
+      "density": {
+        "value": 3773,
+        "unit": "kg/m3",
+        "grade": "measured",
+        "source": "Anthony, J.W., Bideaux, R.A., Bladh, K.W. & Nichols, M.C. (eds.) Handbook of Mineralogy, Mineralogical Society of America: Azurite, http://www.handbookofmineralogy.org/pdfs/azurite.pdf",
+        "asReported": "D(meas.) = 3.773(3)"
+      },
+      "colour": {
+        "text": "Azure-blue, Berlin blue, very dark to pale blue; streak pale blue.",
+        "grade": "measured",
+        "source": "Anthony, J.W., Bideaux, R.A., Bladh, K.W. & Nichols, M.C. (eds.) Handbook of Mineralogy, Mineralogical Society of America: Azurite, http://www.handbookofmineralogy.org/pdfs/azurite.pdf"
+      }
+    },
+    "malachite": {
+      "formula": "Cu2(CO3)(OH)2",
+      "nAlpha": {
+        "value": 1.655,
+        "unit": "1",
+        "grade": "measured",
+        "source": "Anthony, J.W., Bideaux, R.A., Bladh, K.W. & Nichols, M.C. (eds.) Handbook of Mineralogy, Mineralogical Society of America: Malachite, http://www.handbookofmineralogy.org/pdfs/malachite.pdf"
+      },
+      "nBeta": {
+        "value": 1.875,
+        "unit": "1",
+        "grade": "measured",
+        "source": "Anthony, J.W., Bideaux, R.A., Bladh, K.W. & Nichols, M.C. (eds.) Handbook of Mineralogy, Mineralogical Society of America: Malachite, http://www.handbookofmineralogy.org/pdfs/malachite.pdf"
+      },
+      "nGamma": {
+        "value": 1.909,
+        "unit": "1",
+        "grade": "measured",
+        "source": "Anthony, J.W., Bideaux, R.A., Bladh, K.W. & Nichols, M.C. (eds.) Handbook of Mineralogy, Mineralogical Society of America: Malachite, http://www.handbookofmineralogy.org/pdfs/malachite.pdf"
+      },
+      "density": {
+        "value": 4050,
+        "unit": "kg/m3",
+        "grade": "measured",
+        "source": "Anthony, J.W., Bideaux, R.A., Bladh, K.W. & Nichols, M.C. (eds.) Handbook of Mineralogy, Mineralogical Society of America: Malachite, http://www.handbookofmineralogy.org/pdfs/malachite.pdf",
+        "asReported": "D(meas.) = 4.05(2)"
+      },
+      "colour": {
+        "text": "Bright green to dark green; green to yellowish green in transmitted light; streak pale green.",
+        "grade": "measured",
+        "source": "Anthony, J.W., Bideaux, R.A., Bladh, K.W. & Nichols, M.C. (eds.) Handbook of Mineralogy, Mineralogical Society of America: Malachite, http://www.handbookofmineralogy.org/pdfs/malachite.pdf"
+      }
+    },
+    "goldLeaf": {
+      "thickness": {
+        "value": 0.12,
+        "unit": "um",
+        "grade": "secondary",
+        "source": "周乾 Zhou Qian (2024) 故宫建筑油饰工艺里的民间智慧 [Folk wisdom in the oil-paint craft of the Palace Museum's buildings]. 北京晚报 (15 August 2024), republished by Tencent News 2024-09-21, https://news.qq.com/rain/a/20240921A07NT600",
+        "asReported": "0.12 微米 (943 leaves make 1 mm)"
+      },
+      "steps": {
+        "text": "打金胶 (mordant) → 贴金 (lay the leaf with tongs) → 帚金 (press with cotton).",
+        "grade": "secondary",
+        "source": "周乾 Zhou Qian (2024) 故宫建筑油饰工艺里的民间智慧 [Folk wisdom in the oil-paint craft of the Palace Museum's buildings]. 北京晚报 (15 August 2024), republished by Tencent News 2024-09-21, https://news.qq.com/rain/a/20240921A07NT600"
+      },
+      "note": "Gilt is its own working (D-014); these are the Chinese leaf and method."
+    },
+    "realPractice": {
+      "text": "Qing and later architectural paintings often used synthetic pigments: a temple's painted woodwork carried cinnabar, lapis lazuli, lead white, Paris green and carbon black.",
+      "grade": "measured",
+      "source": "Huang, D., Han, K., Teri, G., Cheng, C., Qi, Y. & Li, Y. (2024) Material and microstructure analysis of wood color paintings from Shaanxi Cangjie Temple, China. Molecules 29(12), 2734, https://doi.org/10.3390/molecules29122734 (https://pmc.ncbi.nlm.nih.gov/articles/PMC11205893/)"
+    }
+  },
+  "stratigraphy": {
+    "pigmentLayers": {
+      "min": 18,
+      "max": 81,
+      "unit": "um",
+      "grade": "measured",
+      "source": "Huang, D., Han, K., Teri, G., Cheng, C., Qi, Y. & Li, Y. (2024) Material and microstructure analysis of wood color paintings from Shaanxi Cangjie Temple, China. Molecules 29(12), 2734, https://doi.org/10.3390/molecules29122734 (https://pmc.ncbi.nlm.nih.gov/articles/PMC11205893/)",
+      "conditions": "single pigment layers in cross-section (black 18, blue 40, white 61, red 81 um)"
+    },
+    "ground": {
+      "min": 600,
+      "max": 700,
+      "unit": "um",
+      "grade": "measured",
+      "source": "Huang, D., Han, K., Teri, G., Cheng, C., Qi, Y. & Li, Y. (2024) Material and microstructure analysis of wood color paintings from Shaanxi Cangjie Temple, China. Molecules 29(12), 2734, https://doi.org/10.3390/molecules29122734 (https://pmc.ncbi.nlm.nih.gov/articles/PMC11205893/)",
+      "conditions": "the thin ground under those paintings"
+    }
+  },
+  "pattern": "The painted image is an atlas the stage draws (the first build's T_ch_suhua, generated by windows/Scripts/chenghuai_textures.py): a design artefact, not evidence.",
+  "surface": {
+    "finish": "Dead matt pigment fields (coarse mineral particles in glue), a slight relief at band edges, bright gold."
+  },
+  "photograph": [
+    "Flat blue and green bands with crisp white and black outlines; the 包袱 panel a picture framed in the beam; gold catching light at the edges.",
+    "Old work: powdery, faded where weathered, dark with soot under eaves, flaking at cracks."
+  ],
+  "unverified": [
+    {
+      "field": "binder",
+      "value": null,
+      "unit": "text",
+      "reason": "Glue (animal glue) as the pigment binder is the trade's account; no source describing the binder of 苏式彩画 was read (Huang et al. found protein and tung oil in the ground)."
+    },
+    {
+      "field": "pigments.particleSize",
+      "value": null,
+      "unit": "um",
+      "reason": "Coarse azurite and malachite grades set the colour; sizes were not read."
+    }
+  ],
+  "sources": [
+    "plan/proposals/chenghuai/canvas/Materials.dc.html (approved Chenghuai proposal: '營造')",
+    "Anthony, J.W., Bideaux, R.A., Bladh, K.W. & Nichols, M.C. (eds.) Handbook of Mineralogy, Mineralogical Society of America: Azurite, http://www.handbookofmineralogy.org/pdfs/azurite.pdf",
+    "Anthony, J.W., Bideaux, R.A., Bladh, K.W. & Nichols, M.C. (eds.) Handbook of Mineralogy, Mineralogical Society of America: Malachite, http://www.handbookofmineralogy.org/pdfs/malachite.pdf",
+    "周乾 Zhou Qian (2024) 故宫建筑油饰工艺里的民间智慧 [Folk wisdom in the oil-paint craft of the Palace Museum's buildings]. 北京晚报 (15 August 2024), republished by Tencent News 2024-09-21, https://news.qq.com/rain/a/20240921A07NT600",
+    "Huang, D., Han, K., Teri, G., Cheng, C., Qi, Y. & Li, Y. (2024) Material and microstructure analysis of wood color paintings from Shaanxi Cangjie Temple, China. Molecules 29(12), 2734, https://doi.org/10.3390/molecules29122734 (https://pmc.ncbi.nlm.nih.gov/articles/PMC11205893/)"
+  ]
+}

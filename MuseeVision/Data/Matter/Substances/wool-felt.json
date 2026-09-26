@@ -1,0 +1,167 @@
+{
+  "schema": "musee.matter.substance/1",
+  "key": "wool-felt",
+  "name": "Wool felt",
+  "family": "accent",
+  "accentOf": "oak",
+  "aliases": [
+    "felt",
+    "feutre"
+  ],
+  "summary": "A non-woven sheet of wool fibres locked together by moisture, heat and agitation. In the Reserve it is the mat on which a Degas pastel lies in each south plan chest; in the Salon it lines the floor of the 1874 case under the catalogue and Le Charivari.",
+  "dossier": "Docs/Matter/wool-felt.md",
+  "workings": [
+    "stretched"
+  ],
+  "histories": [
+    "cloth.light-fading",
+    "cloth.wear"
+  ],
+  "identity": {
+    "class": "non-woven keratin fibre sheet",
+    "whyAnAccent": {
+      "text": "The material-language board groups the cloths with the timber: 'D · The oak, and what it carries: timber, leather, silk, felt'. Each cloth is declared an accent of the oak family (D-014); the Architect may overturn this reading.",
+      "grade": "design",
+      "source": "MuseeVision/Journal/Decisions.md, D-014 (Matter: every substance carries its family; an accent names its core family); plan/canvas/MaterialsOther.dc.html, section 'D · The oak, and what it carries'"
+    }
+  },
+  "formation": {
+    "how": "Layers of wool are wetted with hot water and repeatedly agitated and compressed: heat, moisture and motion open the scales on each fibre, and agitation makes them latch onto one another, so the fibres felt into one sheet, which fulling then densifies.",
+    "facts": {
+      "wetFelting": {
+        "text": "Hot water is applied to layers of animal hairs, while repeated agitation and compression causes the fibres to hook together; the scales open with heat, motion and moisture and latch on agitation; the felt may be finished by fulling.",
+        "grade": "secondary",
+        "source": "Wikipedia, 'Felt', https://en.wikipedia.org/wiki/Felt (read 2026-09-26)"
+      }
+    }
+  },
+  "optics": {
+    "note": "A dense, matt, fibrous surface: diffuse, with a faint grazing sheen from loose fibre ends (asperity scattering, as velvet's but weaker).",
+    "asperityScattering": {
+      "text": "Sparse scatterers such as hairs add a grazing surface lobe.",
+      "grade": "measured",
+      "source": "Koenderink, J.J. & Pont, S.C. (2003) The secret of velvety skin. Machine Vision and Applications 14, 260-268, https://doi.org/10.1007/s00138-002-0089-7 (abstract read)"
+    }
+  },
+  "designColours": {
+    "reserveFelt": {
+      "value": [
+        0.0762,
+        0.1022,
+        0.0723
+      ],
+      "unit": "1",
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "grade": "design",
+      "source": "plan/canvas/MaterialsOther.dc.html, section 'D · The oak, and what it carries' ('Wool felt · M_Felt #4E5A4C · matt 0.95')",
+      "asReported": "#4E5A4C",
+      "conditions": "the Reserve's plan-chest mats: a green-grey, matt",
+      "derivation": "the design's sRGB hex decoded with the sRGB transfer function; a design colour, not a measurement"
+    }
+  },
+  "physical": {
+    "note": "Density and thickness of the chosen felt are unverified."
+  },
+  "acoustic": {
+    "note": "Small mats and linings inside chests and a case: not a room surface. No absorption is recorded."
+  },
+  "stock": {
+    "note": "Cut from sheet; thickness and density were not read (see unverified)."
+  },
+  "conservation": {
+    "sulfur": {
+      "text": "Wool is a pollutant source for metals: a nineteenth-century coin balance's brass cups are blackened in lines wherever wool threads touched them.",
+      "grade": "guidance",
+      "source": "Tétreault, J. (2021) Agent of deterioration: pollutants. Canadian Conservation Institute, 2021-02-17, https://www.canada.ca/en/conservation-institute/services/agents-deterioration/pollutants.html (Figure 10)"
+    },
+    "rule": "A felt near silver, brass or lead must be tested before use (an accelerated corrosion test); the 1874 case holds paper only and the pastels lie on felt in their chests, so the felt stays, tested. Wool is also food for moth and beetle larvae."
+  },
+  "physicalMaterial": {
+    "note": "Not walked on."
+  },
+  "uses": [
+    {
+      "where": "the Reserve: the felt mat under a Degas pastel on each south plan chest",
+      "working": "stretched",
+      "histories": [
+        "cloth.wear"
+      ],
+      "source": "windows/Source/MuseeVision/Reserve/ReserveRacks.h and ReserveStructure.h; windows/Source/MuseeVision/Plan/MuseePlan.h (frozen as-built reference); plan/canvas/MaterialsOther.dc.html, section 'D · The oak, and what it carries'",
+      "grade": "design"
+    },
+    {
+      "where": "the 1874 case: its felt-lined floor and sloped reading mount",
+      "working": "stretched",
+      "histories": [
+        "cloth.light-fading"
+      ],
+      "source": "windows/Source/MuseeVision/Salon/SalonInterior.h (frozen as-built reference)",
+      "grade": "design"
+    }
+  ],
+  "photograph": [
+    "A dense, even, matt nap with no weave; tiny loose fibres at the cut edges; faint marks where objects have pressed it."
+  ],
+  "evidence": [
+    {
+      "path": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR/F2",
+      "set": "Fabric034",
+      "provider": "ambientCG",
+      "url": "https://ambientcg.com/view?id=Fabric034",
+      "licence": "CC0 1.0",
+      "credits": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR/CREDITS.md (row F2: 'wool felt')",
+      "tier": "reference",
+      "shows": "A wool felt at 0.5 m: the nap and its fine mottle.",
+      "statistics": {
+        "colorMeanLinear": {
+          "value": [
+            0.3586,
+            0.3482,
+            0.3787
+          ],
+          "unit": "1",
+          "space": "linear Rec.709 (sRGB primaries), D65 white",
+          "grade": "derived",
+          "derivation": "sRGB decode of every pixel of a 256 x 256 bilinear resample, then the mean",
+          "note": "mean of the set's Color map (linear, 256 x 256 resample); the photograph's exposure is unknown, so this is not an albedo",
+          "source": "computed from C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR/F2/Color.png"
+        },
+        "roughnessMapMedian": {
+          "value": 0.808,
+          "unit": "1",
+          "grade": "derived",
+          "derivation": "green channel of ORM.png, 256 x 256 bilinear resample; median, with percentiles 5/50/95 in the note",
+          "note": "authored roughness map, not a measurement; percentiles 5/50/95 = 0.773/0.808/0.902",
+          "source": "computed from C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR/F2/ORM.png"
+        }
+      }
+    }
+  ],
+  "evidenceSearch": {
+    "searched": [
+      "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR (CREDITS.md, every SET.txt)"
+    ],
+    "found": "F2 (Fabric034).",
+    "tier": "Reference: nap and mottle; the colour is the design's."
+  },
+  "unverified": [
+    {
+      "field": "physical.density",
+      "value": null,
+      "unit": "kg/m3",
+      "reason": "Industrial felt grades (SAE) specify densities; none was read."
+    },
+    {
+      "field": "stock.thickness",
+      "value": null,
+      "unit": "mm",
+      "reason": "Not read."
+    },
+    {
+      "field": "conservation.testResult",
+      "value": null,
+      "unit": "text",
+      "reason": "The felt chosen must pass an accelerated corrosion (Oddy) test; no result exists yet."
+    }
+  ]
+}

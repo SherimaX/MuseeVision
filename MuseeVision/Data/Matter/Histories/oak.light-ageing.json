@@ -1,0 +1,80 @@
+{
+  "schema": "musee.matter.history/1",
+  "key": "oak.light-ageing",
+  "family": "oak",
+  "name": "Light-aged",
+  "appliesTo": {
+    "families": [
+      "oak",
+      "accent"
+    ],
+    "substances": [
+      "oak",
+      "phoebe"
+    ],
+    "workings": [
+      "sawn.quarter",
+      "sawn.plain",
+      "fumed",
+      "oiled.hardwax",
+      "waxed",
+      "parquet.versailles"
+    ]
+  },
+  "surfaceLawTerms": [
+    "age",
+    "chemistry"
+  ],
+  "describes": "Light, ultraviolet above all, photo-oxidises the lignin and extractives in a thin surface layer of wood, forming coloured carbonyl compounds: pale woods yellow and darken, dark extractive-rich woods can lighten. The change starts at once and is fastest at first; a clear finish slows it but does not stop it. Its signature is a sharp-edged difference where something has shaded the wood: under a rug, a frame or an object on a table.",
+  "terms": {
+    "mechanism": {
+      "text": "Photo-oxidation or photochemical degradation affects only the wood surface and starts immediately after exposure; solar radiation depolymerises lignin and cellulose; colour change is the main indicator.",
+      "grade": "secondary",
+      "source": "Teacă, C.-A., Roşu, D., Bodîrlău, R. & Roşu, L. (2013) Structural changes in wood under artificial UV light irradiation determined by FTIR spectroscopy and color measurements - a brief review. BioResources 8(1), 1478-1507, https://bioresources.cnr.ncsu.edu/resources/structural-changes-in-wood-under-artificial-uv-light-irradiation-determined-by-ftir-spectroscopy-and-color-measurements-a-brief-review/"
+    },
+    "fumedOak": {
+      "text": "Ammonia-fumed oak had better colour resistance against UV than heat-treated oak; fuming can pre-age wood and stabilise its colour.",
+      "grade": "secondary",
+      "source": "Miklečić, J., Španić, N. & Jirouš-Rajković, V. (2012) Wood color changes by ammonia fuming. BioResources 7(3), 3767-3778, https://bioresources.cnr.ncsu.edu/resources/wood-color-changes-by-ammonia-fuming/"
+    },
+    "museumLight": {
+      "text": "UV kept below 75 uW/lm (about 10 uW/lm for the most sensitive), light by use; direct sun patches are part of the Salon's design (bay 1 and bay 5 cross the oak).",
+      "grade": "guidance",
+      "source": "Michalski, S. (2018) Agent of deterioration: light, ultraviolet and infrared. Canadian Conservation Institute, 2018-05-17, https://www.canada.ca/en/conservation-institute/services/agents-deterioration/light.html ; plan/proposals/salon-interior/canvas/Light.dc.html (approved Salon interior proposal)"
+    },
+    "shadowLine": "Where a piece is shaded (under a case's plinth, behind a frame, under a bench's footprint) the unaged tone keeps a crisp edge."
+  },
+  "drivers": {
+    "up": [
+      "daylight and UV on the piece (Light's dose at the surface)",
+      "a pale, unfumed wood"
+    ],
+    "down": [
+      "fuming",
+      "UV-filtering glazing",
+      "shade"
+    ]
+  },
+  "photograph": [
+    "A warmer, more golden tone on sunlit oak than on the same boards in shade; paler rectangles where something stood."
+  ],
+  "unverified": [
+    {
+      "field": "terms.rate (oak, indoor)",
+      "value": null,
+      "unit": "1/day",
+      "reason": "Search summaries report that about half of oak's colour change under UV occurs in the first 20 hours and give delta E of about 4-6 under visible and UV lamps; the papers could not be opened."
+    },
+    {
+      "field": "terms.depth of the photo-degraded layer",
+      "value": null,
+      "unit": "um",
+      "reason": "Not read."
+    }
+  ],
+  "sources": [
+    "Teacă, C.-A., Roşu, D., Bodîrlău, R. & Roşu, L. (2013) Structural changes in wood under artificial UV light irradiation determined by FTIR spectroscopy and color measurements - a brief review. BioResources 8(1), 1478-1507, https://bioresources.cnr.ncsu.edu/resources/structural-changes-in-wood-under-artificial-uv-light-irradiation-determined-by-ftir-spectroscopy-and-color-measurements-a-brief-review/",
+    "Miklečić, J., Španić, N. & Jirouš-Rajković, V. (2012) Wood color changes by ammonia fuming. BioResources 7(3), 3767-3778, https://bioresources.cnr.ncsu.edu/resources/wood-color-changes-by-ammonia-fuming/",
+    "Michalski, S. (2018) Agent of deterioration: light, ultraviolet and infrared. Canadian Conservation Institute, 2018-05-17, https://www.canada.ca/en/conservation-institute/services/agents-deterioration/light.html"
+  ]
+}

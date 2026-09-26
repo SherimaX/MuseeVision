@@ -1,0 +1,89 @@
+{
+  "schema": "musee.matter.history/1",
+  "key": "iron.paint-ageing",
+  "name": "Ageing of paint on Victorian iron",
+  "family": "accent",
+  "appliesTo": {
+    "families": [
+      "accent"
+    ],
+    "substances": [
+      "cast-iron",
+      "wrought-iron"
+    ],
+    "workings": [
+      "painted.iron"
+    ]
+  },
+  "surfaceLawTerms": [
+    "age",
+    "soiling",
+    "chemistry"
+  ],
+  "describes": "Linseed-oil paint oxidises, hardens and slowly chalks; its gloss falls to a satin and then a matt bloom. Iron is repainted every few decades, so each campaign adds a scheme and the film thickens: detail softens, arrises round, hollows fill. Under a glass roof the paint also gathers the court's soot and dust on every upward face, heaviest high up where warm air carries it. The film fails first where it is thinnest or where water lies: at arrises, bolt heads, rivet heads, joints and the shoes, and there rust breaks through and runs.",
+  "terms": {
+    "schemes": {
+      "value": 37,
+      "unit": "1",
+      "grade": "secondary",
+      "source": "K. Blackney, 'Painting Historic Ironwork', Historic Churches (2002), via The Building Conservation Directory, https://www.buildingconservation.com/articles/paintingiron/paintingiron.htm",
+      "conditions": "one analysed sample of historic ironwork",
+      "note": "35 of them lead paints"
+    },
+    "coatsPerScheme": {
+      "min": 2,
+      "max": 4,
+      "unit": "coat",
+      "grade": "secondary",
+      "source": "K. Blackney, 'Painting Historic Ironwork', Historic Churches (2002), via The Building Conservation Directory, https://www.buildingconservation.com/articles/paintingiron/paintingiron.htm"
+    },
+    "majorService": {
+      "value": 100,
+      "unit": "year",
+      "grade": "secondary",
+      "source": "A. Davey and E. Troup, 'Maintaining and Repairing Coatings on Cast Iron Structures', The Building Conservation Directory (2016), https://www.buildingconservation.com/articles/cast-iron-coatings/cast-iron-coatings.htm",
+      "note": "large, complex cast-iron structures"
+    },
+    "insideGrime": {
+      "text": "Inside, a Victorian court's grime: soot of gas and of London's air settles under the glass (walls darken toward the springing), dust on every ledge.",
+      "grade": "design",
+      "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/albion_materials.py (frozen reference) (INSIDE weathering note)"
+    }
+  },
+  "drivers": [
+    {
+      "driver": "arris and edge proximity (thin film)",
+      "owner": "Form (vertex colour: arris proximity)"
+    },
+    {
+      "driver": "upward-facing area (soot and dust)",
+      "owner": "Form (world normal) and Time (age)"
+    },
+    {
+      "driver": "water standing at joints, shoes and bolt heads",
+      "owner": "Form (joint and fastener positions)"
+    },
+    {
+      "driver": "repainting campaigns (scheme count)",
+      "owner": "Matter (the spec's history regime)"
+    }
+  ],
+  "photograph": "A thick, soft-edged paint film, satin to matt with age, dusty on its tops; chips at arrises showing older colours; small rust blooms at bolt heads and joints.",
+  "unverified": [
+    {
+      "field": "terms.glossLoss",
+      "text": "gloss retention of lead-oil paint over time",
+      "reason": "No measured gloss loss of a lead-oil paint indoors was read."
+    },
+    {
+      "field": "terms.repaintInterval",
+      "text": "years between repaintings",
+      "reason": "The interval between repainting campaigns of Victorian ironwork was not read."
+    }
+  ],
+  "sources": [
+    "K. Blackney, 'Painting Historic Ironwork', Historic Churches (2002), via The Building Conservation Directory, https://www.buildingconservation.com/articles/paintingiron/paintingiron.htm",
+    "A. Davey and E. Troup, 'Maintaining and Repairing Coatings on Cast Iron Structures', The Building Conservation Directory (2016), https://www.buildingconservation.com/articles/cast-iron-coatings/cast-iron-coatings.htm",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/albion_materials.py (frozen reference) (INSIDE weathering note)"
+  ]
+}

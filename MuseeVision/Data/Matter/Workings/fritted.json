@@ -1,0 +1,165 @@
+{
+  "schema": "musee.matter.working/1",
+  "key": "fritted",
+  "name": "Ceramic frit (enamel) fired on glass",
+  "dossier": "Docs/Matter/misty-glass.md",
+  "appliesTo": {
+    "families": [
+      "glass"
+    ],
+    "substances": [
+      "low-iron-glass"
+    ]
+  },
+  "over": [
+    "annealed"
+  ],
+  "process": "A paste of glass frit (a durable mixture of glass and ceramic particles, which act as pigments) in an organic medium is applied to the air side of the float, over the whole face or in a pattern of dots or stripes, by screen printing (through a fine mesh with a squeegee), digital printing, roller coating or curtain coating. The printed pane is dried at about 170-190 degC and then heat-strengthened or toughened: in the same heat the enamel fires and fuses to the glass. The fired layer scatters and reflects light, and a white enamel over the whole face gives an even, milky glow. Its thickness, and so its light, depends on the process and even on the screen used (for example a 68-55 W PW mesh), and two makers' 'same' RAL colour can differ.",
+  "processSources": [
+    "H. R. Wilson and M. Elstner, 'Spot Landing: Determining the Light and Solar Properties of Fritted and Coated Glass', Challenging Glass 6, Delft University of Technology (2018), doi:10.7480/cgc.6.2133"
+  ],
+  "optics": {
+    "note": "Measured at Fraunhofer ISE with a 620 mm integrating sphere (a 220 mm sphere under-reads a scattering pane by more than 0.1).",
+    "whiteFullCoverage": {
+      "luminousTransmittance": {
+        "value": 0.32,
+        "unit": "1",
+        "grade": "measured",
+        "source": "H. R. Wilson and M. Elstner, 'Spot Landing: Determining the Light and Solar Properties of Fritted and Coated Glass', Challenging Glass 6, Delft University of Technology (2018), doi:10.7480/cgc.6.2133",
+        "conditions": "6 mm low-iron glass, RAL 9010 white, screen-printed over the whole face, normal-hemispherical, EN 410"
+      },
+      "luminousReflectanceGlassSide": {
+        "value": 0.572,
+        "unit": "1",
+        "grade": "measured",
+        "source": "H. R. Wilson and M. Elstner, 'Spot Landing: Determining the Light and Solar Properties of Fritted and Coated Glass', Challenging Glass 6, Delft University of Technology (2018), doi:10.7480/cgc.6.2133",
+        "conditions": "light incident on the glass side"
+      },
+      "luminousReflectanceFritSide": {
+        "value": 0.623,
+        "unit": "1",
+        "grade": "measured",
+        "source": "H. R. Wilson and M. Elstner, 'Spot Landing: Determining the Light and Solar Properties of Fritted and Coated Glass', Challenging Glass 6, Delft University of Technology (2018), doi:10.7480/cgc.6.2133",
+        "conditions": "light incident on the enamel side"
+      },
+      "solarTransmittance": {
+        "value": 0.337,
+        "unit": "1",
+        "grade": "measured",
+        "source": "H. R. Wilson and M. Elstner, 'Spot Landing: Determining the Light and Solar Properties of Fritted and Coated Glass', Challenging Glass 6, Delft University of Technology (2018), doi:10.7480/cgc.6.2133"
+      },
+      "absorptance": {
+        "value": 0.108,
+        "unit": "1",
+        "grade": "derived",
+        "source": "H. R. Wilson and M. Elstner, 'Spot Landing: Determining the Light and Solar Properties of Fritted and Coated Glass', Challenging Glass 6, Delft University of Technology (2018), doi:10.7480/cgc.6.2133",
+        "derivation": "1 - 0.320 - 0.572 (light incident on the glass side)"
+      }
+    },
+    "greyFullCoverage": {
+      "value": 0.035,
+      "unit": "1",
+      "grade": "measured",
+      "source": "H. R. Wilson and M. Elstner, 'Spot Landing: Determining the Light and Solar Properties of Fritted and Coated Glass', Challenging Glass 6, Delft University of Technology (2018), doi:10.7480/cgc.6.2133",
+      "conditions": "RAL 7037 dusty grey, same set-up; luminous transmittance"
+    },
+    "blackFullCoverage": {
+      "value": 0.0,
+      "unit": "1",
+      "grade": "measured",
+      "source": "H. R. Wilson and M. Elstner, 'Spot Landing: Determining the Light and Solar Properties of Fritted and Coated Glass', Challenging Glass 6, Delft University of Technology (2018), doi:10.7480/cgc.6.2133",
+      "conditions": "RAL 9005 black, same set-up; luminous transmittance"
+    },
+    "smallSphereError": {
+      "text": "The white pane measured 0.218 in transmission with a 220 mm sphere against 0.320 with the 620 mm sphere: scattering glazing must be measured with a large sphere.",
+      "grade": "measured",
+      "source": "H. R. Wilson and M. Elstner, 'Spot Landing: Determining the Light and Solar Properties of Fritted and Coated Glass', Challenging Glass 6, Delft University of Technology (2018), doi:10.7480/cgc.6.2133"
+    }
+  },
+  "precedent": {
+    "text": "The British Museum's Great Court roof: glass 'fritted with screen-printed dots over 50 percent of their surface'.",
+    "grade": "record",
+    "source": "MuseeVision/Data/Matter/Substances/steel.json (identity.precedentFacts.glazing)"
+  },
+  "uses": [
+    {
+      "where": "the Atrium's drum: misty glass from the 6 m travertine base to the ring at 22 m, r 14 m",
+      "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/plan/canvas/FutureAtrium.dc.html (as-built board, D-001) ('travertine to 6 m, misty glass to 22 m') ; C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Source/MuseeVision/Elan/ElanStructure.h (frozen reference)",
+      "grade": "design"
+    },
+    {
+      "where": "the Sphere's underside, the Atrium's ceiling: 'glass on a triangulated grid of pearl-white steel'",
+      "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/plan/canvas/FutureAtrium.dc.html (as-built board, D-001)",
+      "grade": "design"
+    },
+    {
+      "where": "the Hall of Light: the misty glass above the clear walls, under the pearl vault",
+      "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Source/MuseeVision/HallOfLight/HallOfLightStructure.h (frozen reference)",
+      "grade": "design"
+    },
+    {
+      "where": "the Elan's exterior: the drum's misty layer behind a clear outer pane (3 cm outside the interior's)",
+      "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Source/MuseeVision/ElanExterior/ElanExteriorStructure.h (frozen reference), class comment",
+      "grade": "design"
+    },
+    {
+      "where": "the glass car's floor, 'lightly frosted', walked on",
+      "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Source/MuseeVision/Elan/ElanCar.cpp (frozen reference), lines 29-35 ; C:/Users/anan9/Desktop/Projects/Musee Vision/plan/canvas/ElanSphere.dc.html (as-built board, D-001) ('The frosted glass floor and the glass rail stay with you the whole way')",
+      "grade": "design"
+    }
+  ],
+  "asBuilt": {
+    "mistyGlass": {
+      "text": "M_MistyGlass: an unlit, two-sided emissive, 'milky translucent glazing lit by the sky behind it (about 450 nits at noon: a soft pearl, not a lamp)', tint #F1F4F2, a faint cloudiness 6 m across (+/-3.5 %), brighter higher up, and the panels' horizontal seams every 1.6 m (2 cm, 15 % darker); it replaced a 64 px dot frit that 'read as a grey perforated sheet'.",
+      "grade": "design",
+      "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/setup_project.py (frozen reference), make_misty()"
+    },
+    "luminanceAtNoon": {
+      "value": 450,
+      "unit": "cd/m2",
+      "grade": "design",
+      "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/setup_project.py (frozen reference), make_misty() (Luminance 450)"
+    },
+    "seamPitch": {
+      "value": 1.6,
+      "unit": "m",
+      "grade": "design",
+      "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/setup_project.py (frozen reference), make_misty()"
+    },
+    "carFloor": {
+      "text": "The car's floor: the glass instance at opacity 0.3, roughness 0.3, specular 0.5, tint (0.86, 0.90, 0.89), diffuse 0.08: 'a pale satin, so it reads as a floor you can see down through'.",
+      "grade": "design",
+      "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Source/MuseeVision/Elan/ElanCar.cpp (frozen reference), lines 29-35"
+    }
+  },
+  "asBuiltCorrection": {
+    "text": "The as-built misty glass is self-lit at a constant 450 nits scaled by a daylight factor. Physically it is glass that passes the sky's light and scatters it: an etched pane passes about 0.9 of it, spread over a wide cone; a white frit about 0.3, spread almost evenly; so its luminance follows the real sky behind it (and the sun's disc shows through an etched pane as a bright blur). Light should compute it from the sky and the record, never from a nits constant (principle 5: fix causes).",
+    "grade": "design",
+    "source": "MuseeVision/Journal/Decisions.md, D-001 (the design is the finished museum) and D-017 (port the finished rooms; the as-built material values seed the records)"
+  },
+  "photograph": [
+    "A full white frit is an even milky white by day from inside, with no bright blur of the sun; from outside it reads as white, matt enamel with a glassy sheen on the smooth face.",
+    "A dot frit reads as dots only up close; at a distance it greys the view (the as-built 64 px dot frit read as a grey perforated sheet)."
+  ],
+  "unverified": [
+    {
+      "field": "optics.enamelThickness",
+      "text": "fired enamel thickness per process",
+      "reason": "The paper's figure of median fired enamel thickness by process (after Krampe 2013) was not legible in the text extract."
+    }
+  ],
+  "sources": [
+    "H. R. Wilson and M. Elstner, 'Spot Landing: Determining the Light and Solar Properties of Fritted and Coated Glass', Challenging Glass 6, Delft University of Technology (2018), doi:10.7480/cgc.6.2133",
+    "MuseeVision/Data/Matter/Substances/steel.json (identity.precedentFacts.glazing)",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/plan/canvas/FutureAtrium.dc.html (as-built board, D-001) ('travertine to 6 m, misty glass to 22 m')",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Source/MuseeVision/Elan/ElanStructure.h (frozen reference)",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/plan/canvas/FutureAtrium.dc.html (as-built board, D-001)",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Source/MuseeVision/HallOfLight/HallOfLightStructure.h (frozen reference)",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Source/MuseeVision/ElanExterior/ElanExteriorStructure.h (frozen reference), class comment",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Source/MuseeVision/Elan/ElanCar.cpp (frozen reference), lines 29-35",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/plan/canvas/ElanSphere.dc.html (as-built board, D-001) ('The frosted glass floor and the glass rail stay with you the whole way')",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/setup_project.py (frozen reference), make_misty()",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/setup_project.py (frozen reference), make_misty() (Luminance 450)",
+    "MuseeVision/Journal/Decisions.md, D-001 (the design is the finished museum) and D-017 (port the finished rooms; the as-built material values seed the records)"
+  ]
+}

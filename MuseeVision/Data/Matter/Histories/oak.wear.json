@@ -1,0 +1,98 @@
+{
+  "schema": "musee.matter.history/1",
+  "key": "oak.wear",
+  "family": "oak",
+  "name": "Worn",
+  "appliesTo": {
+    "families": [
+      "oak",
+      "accent"
+    ],
+    "substances": [
+      "oak",
+      "phoebe"
+    ],
+    "workings": [
+      "oiled.hardwax",
+      "waxed",
+      "fumed",
+      "parquet.versailles"
+    ]
+  },
+  "surfaceLawTerms": [
+    "wear",
+    "touch",
+    "soiling"
+  ],
+  "describes": "Feet wear an oiled floor's surface in the paths people take: the oil is abraded from the tops of the grain, the surface roughens and dulls, grit scratches it, and dirt settles into the open pores and joints until it is cleaned and re-oiled. Hands and bodies do the opposite on furniture: they polish and darken the edges they touch (bench arrises, case rails, the lectern's desk). On surface-fumed oak, wear through the coloured layer shows pale wood.",
+  "terms": {
+    "slip": {
+      "dry": {
+        "value": 59,
+        "unit": "PTV",
+        "grade": "manufacturer",
+        "source": "SATRA Technology Centre, Technical Services Report FLO0215387/1324 (1 July 2013) for Muylle Facon NV: 'Oak parquet finished with Rubio Monocoat Oil +2C (hardwaxoil)' tested to BS 7976-2:2002, https://service.rubiomonocoat.com/hubfs/Anti-slip%20test%20Oil+2C%20BS%207976-22002_Satra_2013.pdf",
+        "conditions": "new hardwax-oiled oak parquet"
+      },
+      "wet": {
+        "value": 35,
+        "unit": "PTV",
+        "grade": "manufacturer",
+        "source": "SATRA Technology Centre, Technical Services Report FLO0215387/1324 (1 July 2013) for Muylle Facon NV: 'Oak parquet finished with Rubio Monocoat Oil +2C (hardwaxoil)' tested to BS 7976-2:2002, https://service.rubiomonocoat.com/hubfs/Anti-slip%20test%20Oil+2C%20BS%207976-22002_Satra_2013.pdf"
+      }
+    },
+    "roughnessNew": {
+      "value": 14.0,
+      "min": 5.8,
+      "max": 24.9,
+      "unit": "um",
+      "grade": "manufacturer",
+      "source": "SATRA Technology Centre, Technical Services Report FLO0215387/1324 (1 July 2013) for Muylle Facon NV: 'Oak parquet finished with Rubio Monocoat Oil +2C (hardwaxoil)' tested to BS 7976-2:2002, https://service.rubiomonocoat.com/hubfs/Anti-slip%20test%20Oil+2C%20BS%207976-22002_Satra_2013.pdf",
+      "conditions": "Rz of the new oiled parquet"
+    },
+    "renewal": {
+      "text": "Oiled surfaces are renewed by a thin further coat; a fully finished floor may take an initial care coat in high-traffic areas.",
+      "grade": "manufacturer",
+      "source": "Osmo Holz und Color GmbH & Co. KG, Product Information | Interior: Polyx-Oil Original, https://int.osmo.com/fileadmin/media/pim_assets/pim_file_36247.pdf"
+    },
+    "fumedDepth": {
+      "text": "Surface fuming colours a layer; vacuum-pressure fuming colours the full depth.",
+      "grade": "secondary",
+      "source": "Miklečić, J., Španić, N. & Jirouš-Rajković, V. (2012) Wood color changes by ammonia fuming. BioResources 7(3), 3767-3778, https://bioresources.cnr.ncsu.edu/resources/wood-color-changes-by-ammonia-fuming/"
+    },
+    "traffic": "Driven by Site's traffic field and Form's piece facts; strongest across thresholds and along the Salon's line, where the axis is kept clear and the benches stand either side."
+  },
+  "drivers": {
+    "up": [
+      "traffic density (Site)",
+      "grit brought in from the grounds",
+      "time since re-oiling"
+    ],
+    "down": [
+      "mats at entrances",
+      "regular re-oiling"
+    ]
+  },
+  "photograph": [
+    "Duller, slightly paler paths on the parquet, crossing each panel's lattice regardless of pattern; darker, glossier edges on benches and case rails."
+  ],
+  "unverified": [
+    {
+      "field": "terms.gloss loss per traffic",
+      "value": null,
+      "unit": "GU",
+      "reason": "No measured gloss or abrasion rate for a hardwax-oiled floor under traffic was read."
+    },
+    {
+      "field": "terms.handPolish",
+      "value": null,
+      "unit": "text",
+      "reason": "The darkening and polishing of touched edges is the trade's observation; no measurement was read."
+    }
+  ],
+  "sources": [
+    "SATRA Technology Centre, Technical Services Report FLO0215387/1324 (1 July 2013) for Muylle Facon NV: 'Oak parquet finished with Rubio Monocoat Oil +2C (hardwaxoil)' tested to BS 7976-2:2002, https://service.rubiomonocoat.com/hubfs/Anti-slip%20test%20Oil+2C%20BS%207976-22002_Satra_2013.pdf",
+    "Osmo Holz und Color GmbH & Co. KG, Product Information | Interior: Polyx-Oil Original, https://int.osmo.com/fileadmin/media/pim_assets/pim_file_36247.pdf",
+    "Miklečić, J., Španić, N. & Jirouš-Rajković, V. (2012) Wood color changes by ammonia fuming. BioResources 7(3), 3767-3778, https://bioresources.cnr.ncsu.edu/resources/wood-color-changes-by-ammonia-fuming/"
+  ]
+}

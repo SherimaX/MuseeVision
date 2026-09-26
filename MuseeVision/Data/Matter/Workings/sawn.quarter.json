@@ -1,0 +1,86 @@
+{
+  "schema": "musee.matter.working/1",
+  "key": "sawn.quarter",
+  "name": "Quarter-sawn",
+  "appliesTo": {
+    "families": [
+      "oak",
+      "accent"
+    ],
+    "substances": [
+      "oak",
+      "korean-pine",
+      "chinese-fir",
+      "phoebe"
+    ]
+  },
+  "over": [],
+  "process": "The log is first quartered along its length, and boards are cut from each quarter so the growth rings stand steeply to the face (about 75-90 degrees; 45-75 degrees is rift-sawn). The face is then radial: a straight, close stripe of rings, and in oak the broad rays cut lengthwise as ray fleck. It is the wasteful cut: few boards, narrow boards, width bounded by the radius.",
+  "geometry": {
+    "ringAngleToFace": {
+      "min": 75,
+      "max": 90,
+      "unit": "deg",
+      "grade": "secondary",
+      "source": "WOODWEB Knowledge Base, 'Rays and Flecks in Oak' (forum digest of 30 September 2009; answer by Gene Wengert), https://woodweb.com/knowledge_base/Rays_and_Flecks_in_Oak.html",
+      "note": "Gene Wengert: quartersawn approximately 75 to 90 degrees; riftsawn 45 to 75"
+    },
+    "rayFleck": {
+      "text": "Quartersawn and riftsawn both show ray fleck, more pronounced on quartersawn; the only way to avoid fleck is to flatsaw.",
+      "grade": "secondary",
+      "source": "WOODWEB Knowledge Base, 'Rays and Flecks in Oak' (forum digest of 30 September 2009; answer by Gene Wengert), https://woodweb.com/knowledge_base/Rays_and_Flecks_in_Oak.html"
+    },
+    "widthLimit": {
+      "text": "Narrower boards and considerable waste when a log is cut for quarter-sawn boards only.",
+      "grade": "secondary",
+      "source": "Wikipedia, 'Quarter sawing', https://en.wikipedia.org/wiki/Quarter_sawing (read 2026-09-26)"
+    }
+  },
+  "stability": {
+    "text": {
+      "text": "Greater stability of form and size, with less cupping, less shrinkage across the width, less shake and splitting.",
+      "grade": "secondary",
+      "source": "Wikipedia, 'Quarter sawing', https://en.wikipedia.org/wiki/Quarter_sawing (read 2026-09-26)"
+    },
+    "widthShrinkageOak": {
+      "value": 0.047,
+      "unit": "1",
+      "grade": "secondary",
+      "source": "Meier, E. The Wood Database: English Oak (Quercus robur), https://www.wood-database.com/english-oak/ (read 2026-09-26)",
+      "conditions": "a quarter-sawn face moves across its width by the radial shrinkage, green to oven-dry"
+    },
+    "ratioToPlainSawn": {
+      "value": 0.56,
+      "unit": "1",
+      "grade": "derived",
+      "source": "Meier, E. The Wood Database: English Oak (Quercus robur), https://www.wood-database.com/english-oak/ (read 2026-09-26)",
+      "derivation": "radial / tangential shrinkage = 4.7 % / 8.4 %: a quarter-sawn board moves across its width about half as much as a plain-sawn one"
+    },
+    "historicUse": {
+      "text": "Gustav Stickley championed quarter-sawn oak as structurally stronger, finer in grain and less liable to warp and check.",
+      "grade": "secondary",
+      "source": "Wikipedia, 'Quarter sawing', https://en.wikipedia.org/wiki/Quarter_sawing (read 2026-09-26)"
+    }
+  },
+  "surface": {
+    "figure": "Parallel stripes of latewood; in oak, silvery flakes and ribbons of ray across the stripe, which read light or dark as the view turns.",
+    "sheen": "The ray flecks are cut cells lying in the face: they reflect differently from the fibre ground, so the fleck shimmers."
+  },
+  "photograph": [
+    "Straight, evenly spaced grain lines; ray flecks up to several centimetres long crossing them in oak.",
+    "Board widths modest and all similar."
+  ],
+  "unverified": [
+    {
+      "field": "geometry.rayFleckSize (oak)",
+      "value": null,
+      "unit": "mm",
+      "reason": "Fleck length and width follow the ray dimensions, which were not read in an oak anatomy source."
+    }
+  ],
+  "sources": [
+    "WOODWEB Knowledge Base, 'Rays and Flecks in Oak' (forum digest of 30 September 2009; answer by Gene Wengert), https://woodweb.com/knowledge_base/Rays_and_Flecks_in_Oak.html",
+    "Wikipedia, 'Quarter sawing', https://en.wikipedia.org/wiki/Quarter_sawing (read 2026-09-26)",
+    "Meier, E. The Wood Database: English Oak (Quercus robur), https://www.wood-database.com/english-oak/ (read 2026-09-26)"
+  ]
+}

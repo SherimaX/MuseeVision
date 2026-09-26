@@ -1,0 +1,67 @@
+{
+  "schema": "musee.matter.working/1",
+  "key": "rolled.glass",
+  "name": "Rolled (cast) plate glass",
+  "appliesTo": {
+    "families": [
+      "glass"
+    ],
+    "substances": [
+      "antique-glass"
+    ]
+  },
+  "over": [],
+  "process": "Molten glass is carried from the furnace in large iron ladles, thrown onto the cast-iron bed of a rolling table and rolled into a sheet by an iron roller (James Hartley's patent rolled plate, about 1847). The sheet is thicker and stronger than blown sheet, wavy, and translucent rather than clear when one face takes the texture of the table or roller. In the mid-19th century it roofed railway stations and greenhouses. The Oxford Museum's roof is of this family: about 8,500 diamond-shaped panels of sand-cast glass, a nominal 10 mm (8-12 mm), each with its own pattern.",
+  "processSources": [
+    "H. J. Powell, W. Rosenhain and A. Nesbitt, 'Glass', Encyclopaedia Britannica, 11th ed. (1911), via Wikisource, https://en.wikisource.org/wiki/1911_Encyclop%C3%A6dia_Britannica/Glass",
+    "Wikipedia, 'Rolled plate glass' (citing Grace's Guide, 'James Hartley'), https://en.wikipedia.org/wiki/Rolled_plate_glass",
+    "Archetech, 'Oxford University Museum of Natural History reopens to the public: Beard and Purcell's GBP 2 million roof restoration is completed' (2014), https://www.archetech.org.uk/oxford-university-museum-of-natural-history-reopens-to-the-public-beard-and-purcells-2-million-roof-restoration-is-completed/",
+    "Eura Conservation, 'Oxford University Museum of Natural History - Glass Roof', https://eura.co.uk/architecture-cultural-services/oxford-university-museum-of-natural-history-glass-roof/"
+  ],
+  "stock": {
+    "roughCastPlate": {
+      "unit": "in",
+      "values": [
+        0.25,
+        0.375,
+        0.5,
+        0.75,
+        1.0
+      ],
+      "grade": "historical",
+      "source": "H. Fidler, Notes on Building Construction, 'Rough-cast Plate, or Rough Plate', via chestofbooks.com, https://chestofbooks.com/architecture/Building-Construction-3-3/Rough-cast-Plate-or-Rough-Plate.html"
+    },
+    "oxfordTiles": {
+      "value": 10,
+      "unit": "mm",
+      "grade": "secondary",
+      "source": "Archetech, 'Oxford University Museum of Natural History reopens to the public: Beard and Purcell's GBP 2 million roof restoration is completed' (2014), https://www.archetech.org.uk/oxford-university-museum-of-natural-history-reopens-to-the-public-beard-and-purcells-2-million-roof-restoration-is-completed/",
+      "note": "cast to a nominal 10 mm, 8-12 mm in fact; about 8,500 diamond-shaped panels"
+    }
+  },
+  "uses": {
+    "text": "An alternative for Albion's vaults if the Architect follows Oxford's cast roof rather than the board's clear glass.",
+    "grade": "design",
+    "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/plan/proposals/albion/canvas/Details.dc.html (approved proposal, D-001)"
+  },
+  "photograph": [
+    "Translucent, faintly green, textured: the sky reads as light and weather, not as a view; a slight lens-like distortion of the iron seen through it."
+  ],
+  "unverified": [
+    {
+      "field": "process.textureFace",
+      "text": "one face smooth, one ribbed",
+      "reason": "That rolled plate is smooth on one face and ribbed on the other comes from an early-20th-century text seen only in a search summary."
+    },
+    {
+      "field": "optics",
+      "text": "light transmittance and haze of rolled plate",
+      "reason": "No transmittance or haze of Victorian rolled plate was read."
+    }
+  ],
+  "sources": [
+    "H. Fidler, Notes on Building Construction, 'Rough-cast Plate, or Rough Plate', via chestofbooks.com, https://chestofbooks.com/architecture/Building-Construction-3-3/Rough-cast-Plate-or-Rough-Plate.html",
+    "Archetech, 'Oxford University Museum of Natural History reopens to the public: Beard and Purcell's GBP 2 million roof restoration is completed' (2014), https://www.archetech.org.uk/oxford-university-museum-of-natural-history-reopens-to-the-public-beard-and-purcells-2-million-roof-restoration-is-completed/",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/plan/proposals/albion/canvas/Details.dc.html (approved proposal, D-001)"
+  ]
+}

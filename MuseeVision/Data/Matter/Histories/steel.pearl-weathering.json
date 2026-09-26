@@ -1,0 +1,88 @@
+{
+  "schema": "musee.matter.history/1",
+  "key": "steel.pearl-weathering",
+  "name": "Weathering of the pearl lacquer outdoors",
+  "family": "accent",
+  "appliesTo": {
+    "families": [
+      "accent"
+    ],
+    "substances": [
+      "steel"
+    ],
+    "workings": [
+      "painted.pearl"
+    ]
+  },
+  "surfaceLawTerms": [
+    "age",
+    "soiling",
+    "wetness"
+  ],
+  "describes": "Outdoors, the shell's clearcoat takes the sun, the rain and the city's soot. A good clear holds its gloss and colour for a decade or more, then slowly loses gloss and chalks; before that, what the eye sees is dirt: rain carries grime down the shell in faint runs that grow heavier low on the dome, where more water has passed, and a film settles where the water dries. The fins and cornice beneath shed their own dirt. Indoors, the ribs age as the Rotunda's painted steel does (dust on upward faces, sheen softening), recorded in steel.coating-ageing.",
+  "terms": {
+    "tenYearBound": {
+      "text": "An architectural fluoropolymer mica system after 10 years in South Florida at 45 degrees: colour change at most 5 Delta E, chalking no worse than rating 8, film loss at most 5 %.",
+      "deltaE": {
+        "max": 5,
+        "unit": "1",
+        "grade": "manufacturer",
+        "source": "PPG Industrial Coatings, 'Duranar PVDF liquid extrusion coatings' (PPG168, 10/24), https://assets-eu-01.kc-usercontent.com/cce44467-0106-013b-6c0b-26132a361492/d1325832-fefb-482f-b750-1ffe988aa65f/Duranar%20Extrusion%20Sheet_v9%2010-10-24.pdf",
+        "conditions": "ASTM D2244, 10 years South Florida, 45 degrees"
+      },
+      "chalkRating": {
+        "min": 8,
+        "unit": "1",
+        "grade": "manufacturer",
+        "source": "PPG Industrial Coatings, 'Duranar PVDF liquid extrusion coatings' (PPG168, 10/24), https://assets-eu-01.kc-usercontent.com/cce44467-0106-013b-6c0b-26132a361492/d1325832-fefb-482f-b750-1ffe988aa65f/Duranar%20Extrusion%20Sheet_v9%2010-10-24.pdf",
+        "conditions": "ASTM D4214 rating (10 = none)"
+      },
+      "filmLoss": {
+        "max": 0.05,
+        "unit": "1",
+        "grade": "manufacturer",
+        "source": "PPG Industrial Coatings, 'Duranar PVDF liquid extrusion coatings' (PPG168, 10/24), https://assets-eu-01.kc-usercontent.com/cce44467-0106-013b-6c0b-26132a361492/d1325832-fefb-482f-b750-1ffe988aa65f/Duranar%20Extrusion%20Sheet_v9%2010-10-24.pdf",
+        "conditions": "ASTM B244 erosion"
+      }
+    },
+    "clearcoat": {
+      "text": "The clearcoat gives the finish 'particularly high durability, UV resistance, and visual depth'.",
+      "grade": "secondary",
+      "source": "ALEXSEAL Yacht Coatings (Mankiewicz), 'Fairing & Finishes', vol. XVI (2024), https://www.alexseal.com/fileadmin/user_upload/Alexseal/Downloads/Alexseal_Fairing_Finishes_Vol_XVI_2024_A4_01.pdf"
+    },
+    "interior": {
+      "text": "Indoors the pearl ages as the painted steel lattice: see steel.coating-ageing.",
+      "grade": "record",
+      "source": "MuseeVision/Data/Matter/Histories/steel.coating-ageing.json"
+    },
+    "asBuiltRuns": {
+      "text": "The as-built shell: rain runs in lanes 30 cm apart at the foot, heavier low on the dome (StreakAmount 0.18), a general dirt film (DirtAmount 0.12).",
+      "grade": "design",
+      "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/exterior_materials.py (frozen reference), PEARL_HLSL and build_pearl() (PEARL_HLSL; StreakAmount, DirtAmount)"
+    }
+  },
+  "drivers": [
+    {
+      "driver": "rain path length down the shell (more water low on the dome)",
+      "owner": "Form (shell geometry) and Time (weather)"
+    },
+    {
+      "driver": "UV dose on the clearcoat",
+      "owner": "Time (sun) and Light"
+    }
+  ],
+  "photograph": "A clean, glossy white shell with faint grey runs on its lower flanks and a slightly duller, dusty band where the water dries at the gilt drip ring.",
+  "unverified": [
+    {
+      "field": "terms.glossRetention",
+      "text": "gloss retention per year",
+      "reason": "No measured gloss retention of a 2K polyurethane or yacht clearcoat over years outdoors was read."
+    }
+  ],
+  "sources": [
+    "PPG Industrial Coatings, 'Duranar PVDF liquid extrusion coatings' (PPG168, 10/24), https://assets-eu-01.kc-usercontent.com/cce44467-0106-013b-6c0b-26132a361492/d1325832-fefb-482f-b750-1ffe988aa65f/Duranar%20Extrusion%20Sheet_v9%2010-10-24.pdf",
+    "ALEXSEAL Yacht Coatings (Mankiewicz), 'Fairing & Finishes', vol. XVI (2024), https://www.alexseal.com/fileadmin/user_upload/Alexseal/Downloads/Alexseal_Fairing_Finishes_Vol_XVI_2024_A4_01.pdf",
+    "MuseeVision/Data/Matter/Histories/steel.coating-ageing.json",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/exterior_materials.py (frozen reference), PEARL_HLSL and build_pearl() (PEARL_HLSL; StreakAmount, DirtAmount)"
+  ]
+}

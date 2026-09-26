@@ -1,0 +1,383 @@
+{
+  "schema": "musee.matter.substance/1",
+  "key": "korean-pine",
+  "name": "Korean pine (红松, Pinus koraiensis)",
+  "family": "accent",
+  "accentOf": "oak",
+  "aliases": [
+    "红松",
+    "Korean pine",
+    "Korea-Kiefer"
+  ],
+  "summary": "A light, soft, resinous white pine of north-east China, Korea and the Russian Far East. In Chenghuai it is the columns, beams and all the lattice, and it is never seen bare: every member is wrapped in a lime-and-hemp ground (地仗) and oil-painted iron-oxide red, black or green, or painted in the Suzhou manner.",
+  "dossier": "Docs/Matter/korean-pine.md",
+  "workings": [
+    "sawn.plain",
+    "sawn.quarter",
+    "dizhang",
+    "painted.tung-oil.iron-red",
+    "painted.tung-oil.black",
+    "painted.tung-oil.green",
+    "painted.caihua",
+    "lacquered.guang"
+  ],
+  "histories": [
+    "oak.movement",
+    "oak.coating-ageing"
+  ],
+  "identity": {
+    "class": {
+      "text": "Softwood (vessels absent); normal resin canals, axial and radial, large and diffuse; growth-ring boundaries distinct with a gradual earlywood-latewood transition; rays narrow; resinous odour.",
+      "grade": "secondary",
+      "source": "Richter, H.G., Gembruch, K. & Koch, G. (2014 onwards) CITESwoodID: Pinus koraiensis (Korea-Kiefer, Korean pine), version 4 April 2023, https://www.delta-intkey.com/citeswood/en/www/pinpinko.htm"
+    },
+    "whyAnAccent": {
+      "text": "Principle 2 names one oak. Chenghuai is built as it would be in Beijing, and its approved Materials board names Korean pine, Chinese fir and plantation Phoebe. Each is declared an accent of the oak family (D-014): timber in the oak's role, tied to it by value and hue under its finish. The Architect may overturn this reading.",
+      "grade": "design",
+      "source": "MuseeVision/Journal/Decisions.md, D-014 (Matter: every substance carries its family; an accent names its core family); plan/proposals/chenghuai/canvas/Materials.dc.html (approved Chenghuai proposal: '營造')"
+    }
+  },
+  "formation": {
+    "how": "A five-needle white pine of cold mixed forest. Its wood is even-textured, with a gradual change from earlywood to latewood, large resin canals and a heartwood that turns brown, red or yellow, distinct from the sapwood. Soft, light and easily worked, it takes the carpenter's joints and, under the ground, the painter's work.",
+    "facts": {
+      "treeHeight": {
+        "value": 30,
+        "unit": "m",
+        "grade": "secondary",
+        "source": "Earle, C.J. (ed.) The Gymnosperm Database: Pinus koraiensis, last modified 2026-07-30, https://www.conifers.org/pi/Pinus_koraiensis.php",
+        "note": "'up to 30 m tall'; a notable tree of 42 m in the Ussuri Nature Reserve"
+      },
+      "trunkDiameter": {
+        "value": 1.5,
+        "unit": "m",
+        "grade": "secondary",
+        "source": "Earle, C.J. (ed.) The Gymnosperm Database: Pinus koraiensis, last modified 2026-07-30, https://www.conifers.org/pi/Pinus_koraiensis.php",
+        "asReported": "150 cm dbh"
+      },
+      "heartwoodColour": {
+        "text": "Brown, red, yellow; without streaks; sapwood distinct from heartwood.",
+        "grade": "secondary",
+        "source": "Richter, H.G., Gembruch, K. & Koch, G. (2014 onwards) CITESwoodID: Pinus koraiensis (Korea-Kiefer, Korean pine), version 4 April 2023, https://www.delta-intkey.com/citeswood/en/www/pinpinko.htm"
+      },
+      "tracheidLengthEarlywood": {
+        "value": 2.36,
+        "unit": "mm",
+        "grade": "measured",
+        "source": "Park, Y., Kim, C.K., Jeong, H., Lee, H.M., Lee, I.H., Kwon, G.B., Yoon, N. & Lee, N. (2025) Evaluation of the basic properties for the Korean major domestic wood species III. Korean pine (Pinus koraiensis) in Jinan-gun, Jeollabuk-do. Journal of the Korean Wood Science and Technology 53(3), 301-310, https://doi.org/10.5658/WOOD.2025.53.3.301"
+      },
+      "tracheidLengthLatewood": {
+        "value": 3.12,
+        "unit": "mm",
+        "grade": "measured",
+        "source": "Park, Y., Kim, C.K., Jeong, H., Lee, H.M., Lee, I.H., Kwon, G.B., Yoon, N. & Lee, N. (2025) Evaluation of the basic properties for the Korean major domestic wood species III. Korean pine (Pinus koraiensis) in Jinan-gun, Jeollabuk-do. Journal of the Korean Wood Science and Technology 53(3), 301-310, https://doi.org/10.5658/WOOD.2025.53.3.301"
+      },
+      "cellWallThicknessEarlywood": {
+        "value": 2.74,
+        "unit": "um",
+        "grade": "measured",
+        "source": "Park, Y., Kim, C.K., Jeong, H., Lee, H.M., Lee, I.H., Kwon, G.B., Yoon, N. & Lee, N. (2025) Evaluation of the basic properties for the Korean major domestic wood species III. Korean pine (Pinus koraiensis) in Jinan-gun, Jeollabuk-do. Journal of the Korean Wood Science and Technology 53(3), 301-310, https://doi.org/10.5658/WOOD.2025.53.3.301"
+      },
+      "cellWallThicknessLatewood": {
+        "value": 4.73,
+        "unit": "um",
+        "grade": "measured",
+        "source": "Park, Y., Kim, C.K., Jeong, H., Lee, H.M., Lee, I.H., Kwon, G.B., Yoon, N. & Lee, N. (2025) Evaluation of the basic properties for the Korean major domestic wood species III. Korean pine (Pinus koraiensis) in Jinan-gun, Jeollabuk-do. Journal of the Korean Wood Science and Technology 53(3), 301-310, https://doi.org/10.5658/WOOD.2025.53.3.301"
+      }
+    }
+  },
+  "constituents": [
+    {
+      "material": "lignin",
+      "fraction": {
+        "value": 0.2912,
+        "unit": "1",
+        "grade": "measured",
+        "source": "Park, Y., Kim, C.K., Jeong, H., Lee, H.M., Lee, I.H., Kwon, G.B., Yoon, N. & Lee, N. (2025) Evaluation of the basic properties for the Korean major domestic wood species III. Korean pine (Pinus koraiensis) in Jinan-gun, Jeollabuk-do. Journal of the Korean Wood Science and Technology 53(3), 301-310, https://doi.org/10.5658/WOOD.2025.53.3.301",
+        "asReported": "29.12 %"
+      },
+      "role": "cell wall"
+    },
+    {
+      "material": "total sugars (cellulose and hemicelluloses)",
+      "fraction": {
+        "value": 0.6423,
+        "unit": "1",
+        "grade": "measured",
+        "source": "Park, Y., Kim, C.K., Jeong, H., Lee, H.M., Lee, I.H., Kwon, G.B., Yoon, N. & Lee, N. (2025) Evaluation of the basic properties for the Korean major domestic wood species III. Korean pine (Pinus koraiensis) in Jinan-gun, Jeollabuk-do. Journal of the Korean Wood Science and Technology 53(3), 301-310, https://doi.org/10.5658/WOOD.2025.53.3.301",
+        "asReported": "64.23 %"
+      },
+      "role": "cell wall"
+    },
+    {
+      "material": "extractives (resin among them)",
+      "fraction": {
+        "value": 0.0334,
+        "unit": "1",
+        "grade": "measured",
+        "source": "Park, Y., Kim, C.K., Jeong, H., Lee, H.M., Lee, I.H., Kwon, G.B., Yoon, N. & Lee, N. (2025) Evaluation of the basic properties for the Korean major domestic wood species III. Korean pine (Pinus koraiensis) in Jinan-gun, Jeollabuk-do. Journal of the Korean Wood Science and Technology 53(3), 301-310, https://doi.org/10.5658/WOOD.2025.53.3.301",
+        "asReported": "3.34 %"
+      },
+      "role": "resin canals; why fresh pine is primed before a coating"
+    },
+    {
+      "material": "ash",
+      "fraction": {
+        "value": 0.0027,
+        "unit": "1",
+        "grade": "measured",
+        "source": "Park, Y., Kim, C.K., Jeong, H., Lee, H.M., Lee, I.H., Kwon, G.B., Yoon, N. & Lee, N. (2025) Evaluation of the basic properties for the Korean major domestic wood species III. Korean pine (Pinus koraiensis) in Jinan-gun, Jeollabuk-do. Journal of the Korean Wood Science and Technology 53(3), 301-310, https://doi.org/10.5658/WOOD.2025.53.3.301",
+        "asReported": "0.27 %"
+      },
+      "role": "mineral"
+    }
+  ],
+  "optics": {
+    "note": "Never seen bare in the museum: the visible surface is the working's (dizhang and paint). The bare-wood facts are kept for the history of a worn or cracked coating.",
+    "cellWallRefractiveIndex": {
+      "value": 1.55,
+      "unit": "1",
+      "grade": "secondary",
+      "source": "Marschner, S.R., Westin, S.H., Arbree, A. & Moon, J.T. (2005) Measuring and modeling the appearance of finished wood. ACM Transactions on Graphics 24(3), 727-734, https://doi.org/10.1145/1073204.1073254 (https://www.cs.cornell.edu/~srm/publications/SG05-wood-lr.pdf)",
+      "note": "the cell wall treated as one homogeneous dielectric ('cellulose'), following Saarinen and Muinonen (2001) for paper fibres; a modelling value, not a measured index of oak"
+    },
+    "fibreHighlight": {
+      "text": "Finished wood shows a subsurface highlight that no surface-anisotropy model reproduces: light enters, scatters from the aligned fibres below the surface and leaves on a cone about the local fibre axis, which can tilt out of the surface plane. The model adds a fibre term (fibre axis u, fibre colour k_f, and a Gaussian highlight width beta, one per species) to a Fresnel-corrected diffuse term and the finish's own surface specular; both subsurface terms are attenuated by Fresnel transmission in and out through the finish. On interlocked grain the highlight swings 30-40 degrees either side of the normal across the figure. Measured samples: varnished walnut, lacquered walnut, lacquered curly maple, varnished padauk; oak was not measured.",
+      "grade": "measured",
+      "source": "Marschner, S.R., Westin, S.H., Arbree, A. & Moon, J.T. (2005) Measuring and modeling the appearance of finished wood. ACM Transactions on Graphics 24(3), 727-734, https://doi.org/10.1145/1073204.1073254 (https://www.cs.cornell.edu/~srm/publications/SG05-wood-lr.pdf)"
+    }
+  },
+  "physical": {
+    "specificGravityGreen": {
+      "value": 0.38,
+      "unit": "1",
+      "grade": "measured",
+      "source": "Park, Y., Kim, C.K., Jeong, H., Lee, H.M., Lee, I.H., Kwon, G.B., Yoon, N. & Lee, N. (2025) Evaluation of the basic properties for the Korean major domestic wood species III. Korean pine (Pinus koraiensis) in Jinan-gun, Jeollabuk-do. Journal of the Korean Wood Science and Technology 53(3), 301-310, https://doi.org/10.5658/WOOD.2025.53.3.301",
+      "conditions": "plantation-grown Korean pine, Jinan-gun, Korea"
+    },
+    "specificGravityAirDry": {
+      "value": 0.399,
+      "unit": "1",
+      "grade": "measured",
+      "source": "Park, Y., Kim, C.K., Jeong, H., Lee, H.M., Lee, I.H., Kwon, G.B., Yoon, N. & Lee, N. (2025) Evaluation of the basic properties for the Korean major domestic wood species III. Korean pine (Pinus koraiensis) in Jinan-gun, Jeollabuk-do. Journal of the Korean Wood Science and Technology 53(3), 301-310, https://doi.org/10.5658/WOOD.2025.53.3.301"
+    },
+    "specificGravityOvenDry": {
+      "value": 0.421,
+      "unit": "1",
+      "grade": "measured",
+      "source": "Park, Y., Kim, C.K., Jeong, H., Lee, H.M., Lee, I.H., Kwon, G.B., Yoon, N. & Lee, N. (2025) Evaluation of the basic properties for the Korean major domestic wood species III. Korean pine (Pinus koraiensis) in Jinan-gun, Jeollabuk-do. Journal of the Korean Wood Science and Technology 53(3), 301-310, https://doi.org/10.5658/WOOD.2025.53.3.301"
+    },
+    "densityRange": {
+      "value": 440,
+      "min": 400,
+      "max": 520,
+      "unit": "kg/m3",
+      "grade": "secondary",
+      "source": "Richter, H.G., Gembruch, K. & Koch, G. (2014 onwards) CITESwoodID: Pinus koraiensis (Korea-Kiefer, Korean pine), version 4 April 2023, https://www.delta-intkey.com/citeswood/en/www/pinpinko.htm",
+      "asReported": "0.40-0.44-0.52 g/cm3"
+    },
+    "shrinkageRadial": {
+      "value": 0.0224,
+      "unit": "1",
+      "grade": "measured",
+      "source": "Park, Y., Kim, C.K., Jeong, H., Lee, H.M., Lee, I.H., Kwon, G.B., Yoon, N. & Lee, N. (2025) Evaluation of the basic properties for the Korean major domestic wood species III. Korean pine (Pinus koraiensis) in Jinan-gun, Jeollabuk-do. Journal of the Korean Wood Science and Technology 53(3), 301-310, https://doi.org/10.5658/WOOD.2025.53.3.301",
+      "asReported": "2.24 %"
+    },
+    "shrinkageTangential": {
+      "value": 0.0719,
+      "unit": "1",
+      "grade": "measured",
+      "source": "Park, Y., Kim, C.K., Jeong, H., Lee, H.M., Lee, I.H., Kwon, G.B., Yoon, N. & Lee, N. (2025) Evaluation of the basic properties for the Korean major domestic wood species III. Korean pine (Pinus koraiensis) in Jinan-gun, Jeollabuk-do. Journal of the Korean Wood Science and Technology 53(3), 301-310, https://doi.org/10.5658/WOOD.2025.53.3.301",
+      "asReported": "7.19 %"
+    },
+    "shrinkageVolumetric": {
+      "value": 0.097,
+      "unit": "1",
+      "grade": "measured",
+      "source": "Park, Y., Kim, C.K., Jeong, H., Lee, H.M., Lee, I.H., Kwon, G.B., Yoon, N. & Lee, N. (2025) Evaluation of the basic properties for the Korean major domestic wood species III. Korean pine (Pinus koraiensis) in Jinan-gun, Jeollabuk-do. Journal of the Korean Wood Science and Technology 53(3), 301-310, https://doi.org/10.5658/WOOD.2025.53.3.301",
+      "asReported": "9.70 %"
+    },
+    "shrinkageLongitudinal": {
+      "value": 0.0049,
+      "unit": "1",
+      "grade": "measured",
+      "source": "Park, Y., Kim, C.K., Jeong, H., Lee, H.M., Lee, I.H., Kwon, G.B., Yoon, N. & Lee, N. (2025) Evaluation of the basic properties for the Korean major domestic wood species III. Korean pine (Pinus koraiensis) in Jinan-gun, Jeollabuk-do. Journal of the Korean Wood Science and Technology 53(3), 301-310, https://doi.org/10.5658/WOOD.2025.53.3.301",
+      "asReported": "0.49 %"
+    },
+    "modulusOfRupture": {
+      "value": 73.3,
+      "unit": "MPa",
+      "grade": "measured",
+      "source": "Park, Y., Kim, C.K., Jeong, H., Lee, H.M., Lee, I.H., Kwon, G.B., Yoon, N. & Lee, N. (2025) Evaluation of the basic properties for the Korean major domestic wood species III. Korean pine (Pinus koraiensis) in Jinan-gun, Jeollabuk-do. Journal of the Korean Wood Science and Technology 53(3), 301-310, https://doi.org/10.5658/WOOD.2025.53.3.301",
+      "conditions": "air-dry (green 33.6 MPa)"
+    },
+    "compressiveStrength": {
+      "value": 38.1,
+      "unit": "MPa",
+      "grade": "measured",
+      "source": "Park, Y., Kim, C.K., Jeong, H., Lee, H.M., Lee, I.H., Kwon, G.B., Yoon, N. & Lee, N. (2025) Evaluation of the basic properties for the Korean major domestic wood species III. Korean pine (Pinus koraiensis) in Jinan-gun, Jeollabuk-do. Journal of the Korean Wood Science and Technology 53(3), 301-310, https://doi.org/10.5658/WOOD.2025.53.3.301",
+      "conditions": "air-dry, parallel to grain (green 16.0 MPa)"
+    },
+    "tensileStrength": {
+      "value": 77.1,
+      "unit": "MPa",
+      "grade": "measured",
+      "source": "Park, Y., Kim, C.K., Jeong, H., Lee, H.M., Lee, I.H., Kwon, G.B., Yoon, N. & Lee, N. (2025) Evaluation of the basic properties for the Korean major domestic wood species III. Korean pine (Pinus koraiensis) in Jinan-gun, Jeollabuk-do. Journal of the Korean Wood Science and Technology 53(3), 301-310, https://doi.org/10.5658/WOOD.2025.53.3.301",
+      "conditions": "air-dry (green 50.1 MPa)"
+    },
+    "shearStrengthRadial": {
+      "value": 7.4,
+      "unit": "MPa",
+      "grade": "measured",
+      "source": "Park, Y., Kim, C.K., Jeong, H., Lee, H.M., Lee, I.H., Kwon, G.B., Yoon, N. & Lee, N. (2025) Evaluation of the basic properties for the Korean major domestic wood species III. Korean pine (Pinus koraiensis) in Jinan-gun, Jeollabuk-do. Journal of the Korean Wood Science and Technology 53(3), 301-310, https://doi.org/10.5658/WOOD.2025.53.3.301",
+      "conditions": "air-dry"
+    },
+    "shearStrengthTangential": {
+      "value": 8.0,
+      "unit": "MPa",
+      "grade": "measured",
+      "source": "Park, Y., Kim, C.K., Jeong, H., Lee, H.M., Lee, I.H., Kwon, G.B., Yoon, N. & Lee, N. (2025) Evaluation of the basic properties for the Korean major domestic wood species III. Korean pine (Pinus koraiensis) in Jinan-gun, Jeollabuk-do. Journal of the Korean Wood Science and Technology 53(3), 301-310, https://doi.org/10.5658/WOOD.2025.53.3.301",
+      "conditions": "air-dry"
+    },
+    "hardnessEnd": {
+      "value": 3600,
+      "unit": "N",
+      "grade": "measured",
+      "source": "Park, Y., Kim, C.K., Jeong, H., Lee, H.M., Lee, I.H., Kwon, G.B., Yoon, N. & Lee, N. (2025) Evaluation of the basic properties for the Korean major domestic wood species III. Korean pine (Pinus koraiensis) in Jinan-gun, Jeollabuk-do. Journal of the Korean Wood Science and Technology 53(3), 301-310, https://doi.org/10.5658/WOOD.2025.53.3.301",
+      "asReported": "3.6 kN (cross section)"
+    },
+    "hardnessSide": {
+      "value": 2400,
+      "unit": "N",
+      "grade": "measured",
+      "source": "Park, Y., Kim, C.K., Jeong, H., Lee, H.M., Lee, I.H., Kwon, G.B., Yoon, N. & Lee, N. (2025) Evaluation of the basic properties for the Korean major domestic wood species III. Korean pine (Pinus koraiensis) in Jinan-gun, Jeollabuk-do. Journal of the Korean Wood Science and Technology 53(3), 301-310, https://doi.org/10.5658/WOOD.2025.53.3.301",
+      "asReported": "2.4 kN (radial and tangential)"
+    }
+  },
+  "acoustic": {
+    "absorptionByOctave": {
+      "axis": "frequency",
+      "axisUnit": "Hz",
+      "axisValues": [
+        125,
+        250,
+        500,
+        1000,
+        2000,
+        4000
+      ],
+      "unit": "1",
+      "values": [
+        0.15,
+        0.11,
+        0.1,
+        0.07,
+        0.06,
+        0.07
+      ],
+      "grade": "secondary",
+      "source": "Table 'Sound Absorption Coefficients', http://usenclosure.com/Diffraction%20Graphs/Sound%20Absorption%20Coefficients.pdf (the same table the white group cites for plaster; it names no primary source) ; Sengpiel Audio, table of absorption coefficients, https://sengpielaudio.com/calculator-RT60Coeff.htm (names no primary source)",
+      "conditions": "row 'Wood' under Floors (usenclosure) = 'wood on joists' (Sengpiel): boards on joists, random incidence"
+    },
+    "note": "The nearest tabulated case. Chenghuai's columns and beams are solid, oil-painted members; the boards on rafters (the fir's) are the case the row describes."
+  },
+  "stock": {
+    "logSize": {
+      "value": 1.5,
+      "unit": "m",
+      "grade": "secondary",
+      "source": "Earle, C.J. (ed.) The Gymnosperm Database: Pinus koraiensis, last modified 2026-07-30, https://www.conifers.org/pi/Pinus_koraiensis.php",
+      "note": "largest trunk diameter; column and beam sizes follow the Qing carpentry rules, which are Form's"
+    },
+    "note": "Member sizes (column diameter, taper, beam depth) are Form's drawing, after the Qing official rules; Matter records only the timber."
+  },
+  "physicalMaterial": {
+    "note": "Not walked on; the painted door sills (门槛) are stepped over. No friction is sourced (see unverified)."
+  },
+  "uses": [
+    {
+      "where": "Chenghuai: columns (with their taper), beams, door and window frames, doors, lattice frames and bars, plank shutters",
+      "working": "dizhang",
+      "finish": "painted.tung-oil.iron-red",
+      "histories": [
+        "oak.coating-ageing",
+        "oak.movement"
+      ],
+      "source": "plan/proposals/chenghuai/canvas/Materials.dc.html (approved Chenghuai proposal: '營造') ('红松 Korean pine: columns, beams, all lattice'); windows/Source/MuseeVision/Chenghuai/ChenghuaiGeometry.h, enum EChPart (frozen as-built reference) (RedLacquer)",
+      "grade": "design"
+    },
+    {
+      "where": "Chenghuai: the gate's leaves; the plaques' boards",
+      "working": "dizhang",
+      "finish": "painted.tung-oil.black",
+      "histories": [
+        "oak.coating-ageing"
+      ],
+      "source": "plan/proposals/chenghuai/canvas/Materials.dc.html (approved Chenghuai proposal: '營造') ('the gate leaves black (门用黑饰)'); windows/Source/MuseeVision/Chenghuai/ChenghuaiGeometry.h, enum EChPart (frozen as-built reference) (BlackLacquer)",
+      "grade": "design"
+    },
+    {
+      "where": "Chenghuai: the festooned gate's and the entry yard's screen doors (屏门)",
+      "working": "dizhang",
+      "finish": "painted.tung-oil.green",
+      "histories": [
+        "oak.coating-ageing"
+      ],
+      "source": "plan/proposals/chenghuai/canvas/Materials.dc.html (approved Chenghuai proposal: '營造') ('green 屏门'); windows/Source/MuseeVision/Chenghuai/ChenghuaiGeometry.h, enum EChPart (frozen as-built reference) (GreenLacquer)",
+      "grade": "design"
+    },
+    {
+      "where": "Chenghuai: the painted beams and boards of the house (a 包袱 in each bay)",
+      "working": "dizhang",
+      "finish": "painted.caihua",
+      "histories": [
+        "oak.coating-ageing"
+      ],
+      "source": "plan/proposals/chenghuai/canvas/Materials.dc.html (approved Chenghuai proposal: '營造') ('苏式彩画')",
+      "grade": "design"
+    },
+    {
+      "where": "Chenghuai garden: all the garden's timber",
+      "working": "sawn.plain",
+      "finish": "lacquered.guang",
+      "histories": [
+        "oak.coating-ageing"
+      ],
+      "note": "the board names the finish (栗壳色 广漆), not the species under it; see unverified",
+      "source": "plan/proposals/chenghuai/canvas/Materials.dc.html (approved Chenghuai proposal: '營造') ('栗壳色 广漆 chestnut lacquer: all garden timber')",
+      "grade": "design"
+    }
+  ],
+  "photograph": [
+    "No bare pine shows. Under the red paint, fine checks along the grain of big columns telegraph through the ground as hairline cracks.",
+    "A column is slightly tapered (收分) and its paint wraps it without joints; the ground rounds every arris."
+  ],
+  "evidence": [],
+  "evidenceSearch": {
+    "searched": [
+      "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR (CREDITS.md, CREDITS_chenghuai.md, every SET.txt)",
+      "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/Textures/CREDITS.md"
+    ],
+    "found": "Nothing: no pine set on this PC, and none is needed while every pine surface is painted.",
+    "tier": "The painted surface is calibrated through the workings' pigments and films (tier a) and a painted specimen (tier b)."
+  },
+  "unverified": [
+    {
+      "field": "uses[garden].species",
+      "value": null,
+      "unit": "text",
+      "reason": "The Materials board gives the garden's finish (栗壳色 广漆) but not its timber; Korean pine and Chinese fir are the board's two structural timbers. The Architect should name it."
+    },
+    {
+      "field": "physical.density of natural-forest Korean pine",
+      "value": null,
+      "unit": "kg/m3",
+      "reason": "The measured values are for plantation trees grown in Korea; old-growth north-east Chinese timber, the historic Beijing supply, may be denser."
+    },
+    {
+      "field": "physicalMaterial.friction",
+      "value": null,
+      "unit": "1",
+      "reason": "Not sourced; the pine is not walked on."
+    }
+  ]
+}

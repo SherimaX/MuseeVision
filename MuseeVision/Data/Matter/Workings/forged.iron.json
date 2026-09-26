@@ -1,0 +1,39 @@
+{
+  "schema": "musee.matter.working/1",
+  "key": "forged.iron",
+  "name": "Forged wrought iron (the smith's ornament and saddle bars)",
+  "appliesTo": {
+    "families": [
+      "accent"
+    ],
+    "substances": [
+      "wrought-iron"
+    ]
+  },
+  "over": [],
+  "process": "The smith heats wrought-iron bar in the forge and works it on the anvil: drawing tapers, scrolling, bending rings over a mandrel, splitting and upsetting, and joining pieces by forge-welding (the iron's own slag acts as the flux) or with collars and rivets. Leaves and flowers are cut from sheet, veined with chisels and dished. At Oxford the capitals of the iron clusters carry wrought-iron flowers and foliage and the spandrels are wrought-iron branches; in Albion the smith's work is the rings in the arcade spandrels and the saddle bars that stiffen the leaded lights.",
+  "processSources": [
+    "Wikipedia, 'Wrought iron' (Table 2 cited to E. Oberg, F. D. Jones and H. H. Ryffel, Machinery's Handbook, 26th ed., Industrial Press 2000, p. 476; Table 1 cited to J. M. Camp and C. B. Francis, The Making, Shaping and Treating of Steel, Carnegie Steel Company 1920, pp. 173-174; the Atlas Forge closure cited to S. B. Smith and W. K. V. Gale, Historical Metallurgy 21(1) 1987, pp. 44-45), https://en.wikipedia.org/wiki/Wrought_iron",
+    "M. Bussell, '19th-century Structural Ironwork in Buildings: Understanding, Care and Re-use', The Building Conservation Directory (2011), https://www.buildingconservation.com/articles/structural-ironwork/structural-ironwork.htm",
+    "Oxford University Museum of Natural History, 'Design and decoration: Central Court Roof', https://oum-ox.shorthandstories.com/oumnh-design-and-decoration/central-court-roof/",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Source/MuseeVision/Albion/AlbionIron.cpp (frozen reference), header comment and constants kBarDepth, kPurlinDepth, kMainDepth, kLightDepth"
+  ],
+  "precedent": {
+    "text": "Oxford: 'capitals featuring wrought iron flowers and foliage' (water-lily, passion-flower, holly and other plants) and sixteen botanical spandrels (lime, horse chestnut, sycamore, oak, pawpaw, bananas, palms, staghorn fern, coltsfoot).",
+    "grade": "secondary",
+    "source": "Oxford University Museum of Natural History, 'Design and decoration: Central Court Roof', https://oum-ox.shorthandstories.com/oumnh-design-and-decoration/central-court-roof/"
+  },
+  "photograph": [
+    "Rings and scrolls with hand-drawn tapers, collared joints, facets of the hammer."
+  ],
+  "unverified": [
+    {
+      "field": "asBuilt.rings",
+      "text": "section of the spandrel rings",
+      "reason": "The rings' bar section was not read from the frozen code."
+    }
+  ],
+  "sources": [
+    "Oxford University Museum of Natural History, 'Design and decoration: Central Court Roof', https://oum-ox.shorthandstories.com/oumnh-design-and-decoration/central-court-roof/"
+  ]
+}

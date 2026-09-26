@@ -1,0 +1,384 @@
+{
+  "schema": "musee.matter.substance/1",
+  "key": "lead",
+  "name": "Lead: came for stained glass, sheet for gutters and flats",
+  "family": "accent",
+  "accentOf": "glass",
+  "summary": "Soft, dense, low-melting grey metal that weathers to a protective carbonate patina. In Albion it holds the glass (the H-section cames of the Tristram band and the lancets) and keeps the water off the glass roofs (the valley gutters on the arcade lines and the porch's lead flat).",
+  "dossier": "Docs/Matter/lead.md",
+  "aliases": [
+    "milled lead",
+    "rolled lead sheet",
+    "sheet lead",
+    "lead came",
+    "calme"
+  ],
+  "workings": [
+    "milled.lead",
+    "leaded"
+  ],
+  "histories": [
+    "lead.patina",
+    "lead.creep"
+  ],
+  "formation": {
+    "how": "Lead is smelted from galena and refined; for building it is cast, then milled (rolled) to sheet, or milled or extruded into came. It melts at 327 degC and is so soft it can be scratched with a fingernail, so it is worked cold: bossed and dressed to shape on a roof, opened and folded round glass at the bench. Freshly cut it is silvery with a bluish tint; in air it tarnishes to dull grey under a thin, protective film in which lead carbonate is common, with sulfate or chloride in city or sea air.",
+    "facts": {
+      "meltingPoint": {
+        "value": 327.46,
+        "unit": "degC",
+        "grade": "secondary",
+        "source": "Wikipedia, 'Lead' (infobox; section 'Chemistry'), https://en.wikipedia.org/wiki/Lead"
+      },
+      "appearance": {
+        "text": "Freshly cut: 'shiny silvery with a bluish tint'; 'tarnishes to dull gray on exposure to air'.",
+        "grade": "secondary",
+        "source": "Wikipedia, 'Lead' (infobox; section 'Chemistry'), https://en.wikipedia.org/wiki/Lead"
+      },
+      "patina": {
+        "text": "In moist air lead forms a protective layer; 'Lead(II) carbonate is a common constituent', with lead(II) sulfate or chloride in urban or maritime air; the layer makes the metal 'effectively inert under atmospheric conditions'.",
+        "grade": "secondary",
+        "source": "Wikipedia, 'Lead' (infobox; section 'Chemistry'), https://en.wikipedia.org/wiki/Lead"
+      }
+    }
+  },
+  "physical": {
+    "density": {
+      "value": 11348,
+      "unit": "kg/m3",
+      "grade": "secondary",
+      "source": "Wikipedia, 'Lead' (infobox; section 'Chemistry'), https://en.wikipedia.org/wiki/Lead",
+      "asReported": "11.348 g/cm3",
+      "conditions": "20 degC"
+    },
+    "youngsModulus": {
+      "value": 16,
+      "unit": "GPa",
+      "grade": "secondary",
+      "source": "Wikipedia, 'Lead' (infobox; section 'Chemistry'), https://en.wikipedia.org/wiki/Lead"
+    },
+    "shearModulus": {
+      "value": 5.6,
+      "unit": "GPa",
+      "grade": "secondary",
+      "source": "Wikipedia, 'Lead' (infobox; section 'Chemistry'), https://en.wikipedia.org/wiki/Lead"
+    },
+    "poissonsRatio": {
+      "value": 0.44,
+      "unit": "1",
+      "grade": "secondary",
+      "source": "Wikipedia, 'Lead' (infobox; section 'Chemistry'), https://en.wikipedia.org/wiki/Lead"
+    },
+    "thermalExpansion": {
+      "value": 2.873e-05,
+      "unit": "1/K",
+      "grade": "secondary",
+      "source": "Wikipedia, 'Lead' (infobox; section 'Chemistry'), https://en.wikipedia.org/wiki/Lead",
+      "conditions": "20 degC"
+    },
+    "thermalConductivity": {
+      "value": 35.3,
+      "unit": "W/(m*K)",
+      "grade": "secondary",
+      "source": "Wikipedia, 'Lead' (infobox; section 'Chemistry'), https://en.wikipedia.org/wiki/Lead"
+    },
+    "hardness": {
+      "value": 1.5,
+      "unit": "Mohs",
+      "grade": "secondary",
+      "source": "Wikipedia, 'Lead' (infobox; section 'Chemistry'), https://en.wikipedia.org/wiki/Lead"
+    },
+    "thermalMovement": {
+      "value": 1.44,
+      "unit": "mm",
+      "grade": "derived",
+      "source": "Wikipedia, 'Lead' (infobox; section 'Chemistry'), https://en.wikipedia.org/wiki/Lead",
+      "derivation": "1000 mm x 28.73e-6 /K x 50 K",
+      "conditions": "one metre of sheet over a 50 K swing between a winter night and a summer noon on a roof",
+      "note": "why sheet lead is laid in bays fixed at the head only"
+    }
+  },
+  "optics": {
+    "kind": "conductor under a dielectric patina",
+    "note": "Weathered lead shows only its patina: a dull, pale bluish grey, matt to satin. Fresh-cut lead (a scratch, a new cut edge of came) is briefly metallic; its complex index was not read here."
+  },
+  "acoustic": {
+    "note": "Came and gutters are not absorbing surfaces. The drumming of rain on a lead flat is Sound's."
+  },
+  "stock": {
+    "sheetCodes": {
+      "standard": "BS EN 12588 (rolled lead sheet for building); code = nominal weight in lb/ft2",
+      "code3": {
+        "thickness": {
+          "value": 1.32,
+          "unit": "mm",
+          "grade": "manufacturer",
+          "source": "Ecobat, 'Weight Chart: Rolled Lead Sheet to BS EN 12588', https://ecobat.com/wp-content/uploads/2022/06/Ecobat-Sizing-Guide-final.pdf"
+        },
+        "mass": {
+          "value": 15.0,
+          "unit": "kg/m2",
+          "grade": "manufacturer",
+          "source": "Ecobat, 'Weight Chart: Rolled Lead Sheet to BS EN 12588', https://ecobat.com/wp-content/uploads/2022/06/Ecobat-Sizing-Guide-final.pdf"
+        }
+      },
+      "code4": {
+        "thickness": {
+          "value": 1.8,
+          "unit": "mm",
+          "grade": "manufacturer",
+          "source": "Ecobat, 'Weight Chart: Rolled Lead Sheet to BS EN 12588', https://ecobat.com/wp-content/uploads/2022/06/Ecobat-Sizing-Guide-final.pdf"
+        },
+        "mass": {
+          "value": 20.41,
+          "unit": "kg/m2",
+          "grade": "manufacturer",
+          "source": "Ecobat, 'Weight Chart: Rolled Lead Sheet to BS EN 12588', https://ecobat.com/wp-content/uploads/2022/06/Ecobat-Sizing-Guide-final.pdf"
+        }
+      },
+      "code5": {
+        "thickness": {
+          "value": 2.24,
+          "unit": "mm",
+          "grade": "manufacturer",
+          "source": "Ecobat, 'Weight Chart: Rolled Lead Sheet to BS EN 12588', https://ecobat.com/wp-content/uploads/2022/06/Ecobat-Sizing-Guide-final.pdf"
+        },
+        "mass": {
+          "value": 25.4,
+          "unit": "kg/m2",
+          "grade": "manufacturer",
+          "source": "Ecobat, 'Weight Chart: Rolled Lead Sheet to BS EN 12588', https://ecobat.com/wp-content/uploads/2022/06/Ecobat-Sizing-Guide-final.pdf"
+        }
+      },
+      "code6": {
+        "thickness": {
+          "value": 2.65,
+          "unit": "mm",
+          "grade": "manufacturer",
+          "source": "Ecobat, 'Weight Chart: Rolled Lead Sheet to BS EN 12588', https://ecobat.com/wp-content/uploads/2022/06/Ecobat-Sizing-Guide-final.pdf"
+        },
+        "mass": {
+          "value": 30.1,
+          "unit": "kg/m2",
+          "grade": "manufacturer",
+          "source": "Ecobat, 'Weight Chart: Rolled Lead Sheet to BS EN 12588', https://ecobat.com/wp-content/uploads/2022/06/Ecobat-Sizing-Guide-final.pdf"
+        }
+      },
+      "code7": {
+        "thickness": {
+          "value": 3.15,
+          "unit": "mm",
+          "grade": "manufacturer",
+          "source": "Ecobat, 'Weight Chart: Rolled Lead Sheet to BS EN 12588', https://ecobat.com/wp-content/uploads/2022/06/Ecobat-Sizing-Guide-final.pdf"
+        },
+        "mass": {
+          "value": 35.72,
+          "unit": "kg/m2",
+          "grade": "manufacturer",
+          "source": "Ecobat, 'Weight Chart: Rolled Lead Sheet to BS EN 12588', https://ecobat.com/wp-content/uploads/2022/06/Ecobat-Sizing-Guide-final.pdf"
+        }
+      },
+      "code8": {
+        "thickness": {
+          "value": 3.55,
+          "unit": "mm",
+          "grade": "manufacturer",
+          "source": "Ecobat, 'Weight Chart: Rolled Lead Sheet to BS EN 12588', https://ecobat.com/wp-content/uploads/2022/06/Ecobat-Sizing-Guide-final.pdf"
+        },
+        "mass": {
+          "value": 40.26,
+          "unit": "kg/m2",
+          "grade": "manufacturer",
+          "source": "Ecobat, 'Weight Chart: Rolled Lead Sheet to BS EN 12588', https://ecobat.com/wp-content/uploads/2022/06/Ecobat-Sizing-Guide-final.pdf"
+        }
+      },
+      "lengths": {
+        "unit": "m",
+        "values": [
+          3,
+          6
+        ],
+        "grade": "manufacturer",
+        "source": "Ecobat, 'Weight Chart: Rolled Lead Sheet to BS EN 12588', https://ecobat.com/wp-content/uploads/2022/06/Ecobat-Sizing-Guide-final.pdf"
+      },
+      "widths": {
+        "unit": "mm",
+        "values": [
+          150,
+          180,
+          210,
+          240,
+          300,
+          360,
+          390,
+          450,
+          510,
+          600,
+          760,
+          800,
+          900,
+          1000,
+          1220,
+          1275,
+          1580
+        ],
+        "grade": "manufacturer",
+        "source": "Ecobat, 'Weight Chart: Rolled Lead Sheet to BS EN 12588', https://ecobat.com/wp-content/uploads/2022/06/Ecobat-Sizing-Guide-final.pdf"
+      }
+    },
+    "came": {
+      "leafWidths": {
+        "min": 3,
+        "max": 25,
+        "unit": "mm",
+        "grade": "manufacturer",
+        "source": "Heaps, Arnold & Heaps Ltd, 'Lead came: decorative lead profiles', https://heapsarnold.com/product-catalogue/lead-came-decorative-profiles/lead-came-decorative-lead-profiles/",
+        "conditions": "flat-leaf came; oval or round leaf 4-20 mm; imperial 3/16 to 3/4 in"
+      },
+      "hearts": {
+        "text": "Narrow-heart came 3-4 mm, wide-heart came 6-7 mm.",
+        "grade": "manufacturer",
+        "source": "Heaps, Arnold & Heaps Ltd, 'Lead came: decorative lead profiles', https://heapsarnold.com/product-catalogue/lead-came-decorative-profiles/lead-came-decorative-lead-profiles/"
+      },
+      "alloy": {
+        "text": "Traditional came is pure lead or a low-antimony lead alloy; higher antimony makes a harder, stiffer came.",
+        "grade": "manufacturer",
+        "source": "Heaps, Arnold & Heaps Ltd, 'Lead came: decorative lead profiles', https://heapsarnold.com/product-catalogue/lead-came-decorative-profiles/lead-came-decorative-lead-profiles/"
+      },
+      "length": {
+        "value": 1.8,
+        "unit": "m",
+        "grade": "manufacturer",
+        "source": "Heaps, Arnold & Heaps Ltd, 'Lead came: decorative lead profiles', https://heapsarnold.com/product-catalogue/lead-came-decorative-profiles/lead-came-decorative-lead-profiles/",
+        "note": "supplied in 6 ft lengths or coils"
+      },
+      "historicRange": {
+        "min": 3,
+        "max": 20,
+        "unit": "mm",
+        "grade": "secondary",
+        "source": "S. Strobl, 'Lead in Stained Glass Windows', Historic Churches (2002), via The Building Conservation Directory, https://www.buildingconservation.com/articles/leadstainedglass/lead_stained_glass.htm",
+        "note": "milled profiles '3 mm to 20 mm or more'"
+      },
+      "asBuiltLeadWidth": {
+        "value": 6,
+        "unit": "mm",
+        "grade": "design",
+        "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/albion_glass.py (frozen reference) (lead_from_brown: 'Thin to a lead's width (6 mm)')"
+      }
+    }
+  },
+  "physicalMaterial": {
+    "footfallClass": "metal",
+    "note": "The porch flat and gutters are roofs, never walked by visitors; the cames are overhead."
+  },
+  "uses": [
+    {
+      "where": "Albion: the cames of the Tristram and Isolde band and of the twelve lancets",
+      "working": "leaded",
+      "histories": [
+        "lead.patina",
+        "lead.creep"
+      ],
+      "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/plan/proposals/albion/canvas/Details.dc.html (approved proposal, D-001) ; MuseeVision/Journal/Decisions.md, D-014 (Matter: families and accents; Form: joints 'welded and faired' for the Elan's pearl shell; Glazing: stained glass with lead cames)",
+      "grade": "design"
+    },
+    {
+      "where": "Albion: valley gutters on the arcade lines (10.0 m), the porch's lead flat (7.45 m), flashings",
+      "working": "milled.lead",
+      "histories": [
+        "lead.patina",
+        "lead.creep"
+      ],
+      "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/plan/proposals/albion/canvas/Plan.dc.html (approved proposal, D-001) ('lead gutters on the arcade lines, a lead roof over the porch') ; C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Source/MuseeVision/Albion/AlbionPlan.h (frozen reference) (PorchRoof 7.45)",
+      "grade": "design"
+    }
+  ],
+  "asBuilt": {
+    "sheet": {
+      "albedo": {
+        "value": [
+          0.2086,
+          0.2232,
+          0.2346
+        ],
+        "unit": "1",
+        "grade": "design",
+        "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/albion_materials.py (frozen reference) (metal_specs: MI_Albion_Lead, BaseColor lin(0x7E8285))",
+        "space": "linear Rec.709, D65"
+      },
+      "roughness": {
+        "value": 0.62,
+        "unit": "1",
+        "grade": "design",
+        "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/albion_materials.py (frozen reference) (MI_Albion_Lead)",
+        "conditions": "GGX alpha-style roughness parameter of M_Metal, metallic 0"
+      },
+      "note": "'weathered sheet lead, a dull pale grey (its carbonate patina), no metal left showing': the physics agrees (a patinated face is dielectric); the albedo is a design value, not a measurement."
+    },
+    "came": {
+      "colour": {
+        "value": [
+          0.1,
+          0.1,
+          0.1
+        ],
+        "unit": "1",
+        "grade": "design",
+        "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/albion_materials.py (frozen reference) (build_stained: LeadColor)",
+        "space": "linear Rec.709, D65",
+        "note": "the cames seen against the light, from inside"
+      }
+    }
+  },
+  "photograph": [
+    "Old lead is a soft, pale bluish grey, dull, with white carbonate blooms where water lingers and dark streaks where it runs.",
+    "Sheet lead lies in bays with rolls and drips; its surface is gently undulating, never flat like metal sheet.",
+    "Came seen from inside against the sky is a black line with a narrow soft highlight on its rounded or flat leaf; soldered joints are small bright-grey lumps at each junction."
+  ],
+  "evidence": [],
+  "evidenceSearch": {
+    "searched": [
+      "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt (PBR, Textures, Albion and CREDITS files)",
+      "C:/Users/anan9/Desktop/Projects/Musee Vision/assets/albion/glass"
+    ],
+    "found": "No CC0 photograph of sheet lead is on this PC. The CC0 photographs of Morris & Co. panels (antique-glass evidence) show the cames in transmitted light, which is the only way the museum sees them from inside.",
+    "tier": "The came's look is carried by the stained-glass evidence (antique-glass); a roof photograph of weathered sheet lead would be a tier-(b) reference."
+  },
+  "familyDeclaration": {
+    "text": "Lead is declared an accent of the glass family: in Albion it exists to hold the glass (cames) and to drain the glass roofs (gutters, flats). The Architect may overturn this reading.",
+    "grade": "design",
+    "source": "MuseeVision/Journal/Decisions.md, D-014 (Matter: families and accents; Form: joints 'welded and faired' for the Elan's pearl shell; Glazing: stained glass with lead cames)"
+  },
+  "unverified": [
+    {
+      "field": "stock.sheetCodes (Albion's choice)",
+      "text": "code 7 for the porch flat and valley gutters",
+      "reason": "The Lead Lads' guide places code 6 for flat roofs and gutters and code 7 for heritage work; the code for Albion's gutters and porch flat is a design choice not yet made."
+    },
+    {
+      "field": "stock.bays",
+      "text": "maximum bay size per code",
+      "reason": "Maximum bay sizes per code (the Lead Sheet Association manual) were seen only in conflicting secondary summaries (for example 3000 x 850 mm for code 6); not read from the manual."
+    },
+    {
+      "field": "optics.freshLead",
+      "text": "n, k of lead",
+      "reason": "The complex refractive index of lead was not read; only a fresh scratch would show it."
+    }
+  ],
+  "sources": [
+    "Wikipedia, 'Lead' (infobox; section 'Chemistry'), https://en.wikipedia.org/wiki/Lead",
+    "Ecobat, 'Weight Chart: Rolled Lead Sheet to BS EN 12588', https://ecobat.com/wp-content/uploads/2022/06/Ecobat-Sizing-Guide-final.pdf",
+    "Heaps, Arnold & Heaps Ltd, 'Lead came: decorative lead profiles', https://heapsarnold.com/product-catalogue/lead-came-decorative-profiles/lead-came-decorative-lead-profiles/",
+    "S. Strobl, 'Lead in Stained Glass Windows', Historic Churches (2002), via The Building Conservation Directory, https://www.buildingconservation.com/articles/leadstainedglass/lead_stained_glass.htm",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/albion_glass.py (frozen reference) (lead_from_brown: 'Thin to a lead's width (6 mm)')",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/plan/proposals/albion/canvas/Details.dc.html (approved proposal, D-001)",
+    "MuseeVision/Journal/Decisions.md, D-014 (Matter: families and accents; Form: joints 'welded and faired' for the Elan's pearl shell; Glazing: stained glass with lead cames)",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/plan/proposals/albion/canvas/Plan.dc.html (approved proposal, D-001) ('lead gutters on the arcade lines, a lead roof over the porch')",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Source/MuseeVision/Albion/AlbionPlan.h (frozen reference) (PorchRoof 7.45)",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/albion_materials.py (frozen reference) (metal_specs: MI_Albion_Lead, BaseColor lin(0x7E8285))",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/albion_materials.py (frozen reference) (MI_Albion_Lead)",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/albion_materials.py (frozen reference) (build_stained: LeadColor)"
+  ]
+}

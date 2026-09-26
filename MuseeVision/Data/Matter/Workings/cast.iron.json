@@ -1,0 +1,63 @@
+{
+  "schema": "musee.matter.working/1",
+  "key": "cast.iron",
+  "name": "Sand-cast iron (green-sand foundry casting)",
+  "appliesTo": {
+    "families": [
+      "accent"
+    ],
+    "substances": [
+      "cast-iron"
+    ]
+  },
+  "over": [],
+  "process": "The patternmaker carves the part in wood about one per cent oversize, with draft on every face so it will lift out of the sand. The moulder rams damp 'green' sand round the pattern in a two-part flask, lifts the pattern, sets cores for any hollows, cuts the runners and closes the mould. Iron remelted in a cupola is poured at about 1300 degC; once cold the casting is knocked out, the runners and fins broken off and the skin fettled. Parts are joined by bolted flanges and spigots; cast iron is not welded. The result keeps the mould's marks: a fine sand texture, parting lines, generous fillets, and a hard skin that resists corrosion.",
+  "processSources": [
+    "M. Bussell, '19th-century Structural Ironwork in Buildings: Understanding, Care and Re-use', The Building Conservation Directory (2011), https://www.buildingconservation.com/articles/structural-ironwork/structural-ironwork.htm",
+    "Historic Environment Scotland, Engine Shed, 'Iron' (Building advice: building materials), https://www.engineshed.scot/building-advice/building-materials/iron/"
+  ],
+  "steps": [
+    {
+      "step": "pattern about 1 % oversize (shrinkage allowance)",
+      "grade": "secondary",
+      "source": "M. Bussell, '19th-century Structural Ironwork in Buildings: Understanding, Care and Re-use', The Building Conservation Directory (2011), https://www.buildingconservation.com/articles/structural-ironwork/structural-ironwork.htm"
+    },
+    {
+      "step": "sand mould ('Molten iron is poured into the mould and left to set into a rigid structure')",
+      "grade": "guidance",
+      "source": "Historic Environment Scotland, Engine Shed, 'Iron' (Building advice: building materials), https://www.engineshed.scot/building-advice/building-materials/iron/"
+    },
+    {
+      "step": "pour at about 1300 degC",
+      "grade": "secondary",
+      "source": "M. Bussell, '19th-century Structural Ironwork in Buildings: Understanding, Care and Re-use', The Building Conservation Directory (2011), https://www.buildingconservation.com/articles/structural-ironwork/structural-ironwork.htm"
+    }
+  ],
+  "surface": {
+    "skin": {
+      "text": "A tough as-cast skin with good resistance to corrosion.",
+      "grade": "secondary",
+      "source": "M. Bussell, '19th-century Structural Ironwork in Buildings: Understanding, Care and Re-use', The Building Conservation Directory (2011), https://www.buildingconservation.com/articles/structural-ironwork/structural-ironwork.htm"
+    }
+  },
+  "joints": {
+    "text": "Bolted flanges and shoes; the as-built shafts sit on bolted shoes over the stone capitals.",
+    "grade": "design",
+    "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Source/MuseeVision/Albion/AlbionIron.cpp (frozen reference), header comment and constants kBarDepth, kPurlinDepth, kMainDepth, kLightDepth"
+  },
+  "photograph": [
+    "Parting lines, draft and fillets; bolted joints; a grainy skin under the paint."
+  ],
+  "unverified": [
+    {
+      "field": "surface.sandTexture",
+      "text": "Ra of an as-cast green-sand skin",
+      "reason": "No measured roughness of a green-sand cast iron skin was read."
+    }
+  ],
+  "sources": [
+    "M. Bussell, '19th-century Structural Ironwork in Buildings: Understanding, Care and Re-use', The Building Conservation Directory (2011), https://www.buildingconservation.com/articles/structural-ironwork/structural-ironwork.htm",
+    "Historic Environment Scotland, Engine Shed, 'Iron' (Building advice: building materials), https://www.engineshed.scot/building-advice/building-materials/iron/",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Source/MuseeVision/Albion/AlbionIron.cpp (frozen reference), header comment and constants kBarDepth, kPurlinDepth, kMainDepth, kLightDepth"
+  ]
+}

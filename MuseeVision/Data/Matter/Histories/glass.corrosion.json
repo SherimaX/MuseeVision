@@ -1,0 +1,59 @@
+{
+  "schema": "musee.matter.history/1",
+  "key": "glass.corrosion",
+  "name": "Weathering (corrosion) of antique glass",
+  "family": "glass",
+  "appliesTo": {
+    "families": [
+      "glass"
+    ],
+    "substances": [
+      "antique-glass"
+    ]
+  },
+  "surfaceLawTerms": [
+    "age",
+    "wetness",
+    "chemistry"
+  ],
+  "describes": "Water leaches alkali from a glass surface; on unstable glasses this leaves a hydrated, crazed layer, crusts of salts and pits. Medieval potash glass with little silica decays badly; 19th-century soda-lime glass, with more silica, is far more durable, so Victorian windows mostly show soiling rather than crusts, with occasional pitting (flashed ruby is prone). Pits range from about 0.1 mm to 2-4 mm across.",
+  "terms": {
+    "composition": {
+      "text": "Potash glass is 'more prone to deterioration and was later abandoned'; early glass with a low silica ratio 'is more prone to decay than later 19th and early 20th century glass'; soda-lime glass has 13-17 % Na2O.",
+      "grade": "secondary",
+      "source": "D. Anderson, 'Stained Glass and its Decay', The Building Conservation Directory (1996), https://www.buildingconservation.com/articles/glassdecay/glassdecay.htm"
+    },
+    "pitSize": {
+      "min": 0.1,
+      "max": 4.0,
+      "unit": "mm",
+      "grade": "secondary",
+      "source": "D. Anderson, 'Stained Glass and its Decay', The Building Conservation Directory (1996), https://www.buildingconservation.com/articles/glassdecay/glassdecay.htm",
+      "note": "'0.1 mm in diameter to much larger, perhaps around 2.0-4.0 mm'"
+    },
+    "flashedRuby": {
+      "value": 2.0,
+      "unit": "mm",
+      "grade": "secondary",
+      "source": "D. Anderson, 'Stained Glass and its Decay', The Building Conservation Directory (1996), https://www.buildingconservation.com/articles/glassdecay/glassdecay.htm",
+      "note": "pitting of about 2.0 mm seen on flashed ruby glass"
+    }
+  },
+  "drivers": [
+    {
+      "driver": "condensation and rain (London's weather on the outside, D-005)",
+      "owner": "Time (weather) and Nature"
+    }
+  ],
+  "photograph": "On Victorian glass: little or no crust; faint pitting on some coloured pieces; a grey film of soot rather than decay.",
+  "unverified": [
+    {
+      "field": "terms.rate",
+      "text": "weathering rate of Victorian sheet",
+      "reason": "No rate of weathering for 19th-century soda-lime sheet was read."
+    }
+  ],
+  "sources": [
+    "D. Anderson, 'Stained Glass and its Decay', The Building Conservation Directory (1996), https://www.buildingconservation.com/articles/glassdecay/glassdecay.htm"
+  ]
+}

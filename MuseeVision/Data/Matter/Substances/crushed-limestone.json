@@ -1,0 +1,335 @@
+{
+  "schema": "musee.matter.substance/1",
+  "key": "crushed-limestone",
+  "name": "Crushed limestone sand and grit, 0/6 mm (the Paris gardens' 'sable'; limestone screenings)",
+  "family": "accent",
+  "accentOf": "stone",
+  "summary": "Limestone crushed and screened to a sand-and-grit of 0 to 6 mm with its own fines: the pale, dusty surface of the French formal garden's walks (the stabilise of the Tuileries), and the sharp limestone screenings that bed and joint stone paving. In the museum it is the grounds' walks and the cour round the canal, the walk east and the Elan's terrace (rolled), and the sand in the joints of the grounds' stone paving. It ties to the stone family as the same calcite, broken small.",
+  "dossier": "Docs/Matter/crushed-limestone.md",
+  "workings": {
+    "admits": [
+      "rolled.self-binding",
+      "rolled.stabilised"
+    ],
+    "jointsFor": [
+      "laid.sand-jointed"
+    ]
+  },
+  "histories": [
+    "ground.trodden"
+  ],
+  "aliases": [
+    "sable concasse calcaire 0/6",
+    "stabilise (when rolled with a binder)",
+    "self-binding gravel",
+    "hoggin (UK, a clay-bound cousin)",
+    "limestone screenings",
+    "crusher fines"
+  ],
+  "constituents": [
+    {
+      "mineral": "calcite",
+      "formula": "CaCO3",
+      "role": "the grains and the fines"
+    },
+    {
+      "material": "fines (the dust fraction produced by crushing)",
+      "formula": null,
+      "role": "fill the voids and bind the surface when wetted and rolled"
+    },
+    {
+      "material": "hydraulic binder (lime or cement), optional",
+      "formula": null,
+      "role": "working rolled.stabilised"
+    }
+  ],
+  "formation": {
+    "how": "Quarried limestone is crushed and screened; the 0/6 fraction keeps everything that passes a 6.3 mm sieve, from grit down to dust. The grains are angular, which is why the material locks together when wetted and rolled; river sand, rounded, does not.",
+    "facts": {
+      "grading": {
+        "min": 0,
+        "max": 6.3,
+        "unit": "mm",
+        "grade": "manufacturer",
+        "source": "Bronzo Perasso (Marseille), 'Sable naturel pour sols stabilises 0/6,3' (concasse, petrographie calcaire, for sols stabilises) and the linked product 'Sable traite pour sols stabilises (3,5%, 5%, 7%)', read 2026-09-26, https://bronzoperasso.fr/produit/sable-naturel-pour-sols-stabilises-0-63/",
+        "conditions": "'Sable naturel pour sols stabilises 0/6,3', mode d'elaboration: concasse; petrographie: calcaire"
+      },
+      "angularGrains": {
+        "text": "Crushed limestone 0/6: 'grains anguleux'; river 0/6: 'grains arrondis polis'.",
+        "grade": "manufacturer",
+        "source": "Koncrete, 'Sable 0/6 livre en vrac', product page read 2026-09-26, https://www.koncrete.fr/produits/sable-0-6"
+      },
+      "colours": {
+        "text": "Crushed limestone 0/6 is sold in 'Blanc - Jaune', 'Brun' and 'Ocre'.",
+        "grade": "manufacturer",
+        "source": "Via Materiaux (Annecy), 'Sable 0/6 concasse calcaire - Vrac', product page read 2026-09-26, https://viamateriaux.fr/produit/sable-0-6-concasse-calcaire/"
+      },
+      "originInParis": {
+        "text": "The Tuileries' walks are 'le stabilise, le revetement invente par Lenotre pour une frequentation de promeneurs'; under trucks and fourteen million visitors a year it breaks into a fine grey powder.",
+        "grade": "secondary",
+        "source": "franceinfo, 'Les jardins des Tuileries recherchent 15 millions pour eradiquer la poussiere' (3 May 2013), https://www.franceinfo.fr/culture/patrimoine/les-jardins-des-tuileries-recherchent-15-millions-pour-eradiquer-la-poussiere_3310669.html",
+        "note": "Journalism; the attribution to Le Notre is the article's."
+      }
+    }
+  },
+  "optics": {
+    "kind": "granular dielectric: angular calcite grains and dust; diffuse, with glints from cleavage faces",
+    "grainF0": {
+      "value": 0.0533,
+      "unit": "1",
+      "grade": "derived",
+      "derivation": "as the travertine record: F = ((n - 1)/(n + 1))^2 averaged over randomly oriented calcite grains (n_o 1.6583, n_e 1.4861 at 589.3 nm)",
+      "source": "Ghosh G. (1999) 'Dispersion-equation coefficients for the refractive index and birefringence of calcite and quartz crystals', Optics Communications 163:95-102; coefficients as tabulated at https://refractiveindex.info/?shelf=main&book=CaCO3&page=Ghosh-o and https://refractiveindex.info/?shelf=main&book=CaCO3&page=Ghosh-e",
+      "conditions": "a single grain face; a granular bed's reflectance is dominated by multiple scattering, not by this"
+    },
+    "wet": [
+      {
+        "text": "Wet, the gravel darkens: water in the pores and on the grains lowers the index step and traps diffusely reflected light by total internal reflection in the film.",
+        "grade": "measured",
+        "source": "J. Lekner, M.C. Dorf (1988) 'Why some things are darker when wet', Applied Optics 27(7):1278-1280, https://doi.org/10.1364/AO.27.001278"
+      },
+      {
+        "text": "Wet and dry surfaces differ in reflectance through the same mechanism in soils and sands; the darkening is largest for bright, strongly scattering materials.",
+        "grade": "measured",
+        "source": "S.A. Twomey, C.F. Bohren, J.L. Mergenthaler (1986) 'Reflectance and albedo differences between wet and dry surfaces', Applied Optics 25(3):431-437, https://doi.org/10.1364/AO.25.000431",
+        "note": "Qualitative summary; the paper's numbers were not read."
+      }
+    ],
+    "dust": {
+      "text": "Broken down by traffic, the stabilise becomes a fine grey powder that 'envahit tout'.",
+      "grade": "secondary",
+      "source": "franceinfo, 'Les jardins des Tuileries recherchent 15 millions pour eradiquer la poussiere' (3 May 2013), https://www.franceinfo.fr/culture/patrimoine/les-jardins-des-tuileries-recherchent-15-millions-pour-eradiquer-la-poussiere_3310669.html"
+    }
+  },
+  "physical": {
+    "grainDensity": {
+      "value": 2.7102,
+      "unit": "g/cm3",
+      "grade": "measured",
+      "source": "Anthony J.W., Bideaux R.A., Bladh K.W., Nichols M.C. (eds.) Handbook of Mineralogy, Mineralogical Society of America, 'Calcite' (Mineral Data Publishing, version 1, 2001-2005), http://www.handbookofmineralogy.org/pdfs/calcite.pdf",
+      "conditions": "calcite, D(meas.)"
+    },
+    "hardnessMohs": {
+      "value": 3,
+      "unit": "Mohs",
+      "grade": "measured",
+      "source": "Anthony J.W., Bideaux R.A., Bladh K.W., Nichols M.C. (eds.) Handbook of Mineralogy, Mineralogical Society of America, 'Calcite' (Mineral Data Publishing, version 1, 2001-2005), http://www.handbookofmineralogy.org/pdfs/calcite.pdf",
+      "conditions": "calcite"
+    },
+    "bulkDensityLoose": {
+      "value": 1.5,
+      "unit": "t/m3",
+      "grade": "manufacturer",
+      "source": "Koncrete, 'Sable 0/6 livre en vrac', product page read 2026-09-26, https://www.koncrete.fr/produits/sable-0-6",
+      "conditions": "0/6 sand in bulk ('densite apparente en vrac'), any origin",
+      "note": "Koncrete also lists 'Densite: 1.6 t/m3'"
+    },
+    "bulking": {
+      "min": 0.05,
+      "max": 0.08,
+      "unit": "1",
+      "grade": "manufacturer",
+      "source": "Koncrete, 'Sable 0/6 livre en vrac', product page read 2026-09-26, https://www.koncrete.fr/produits/sable-0-6",
+      "conditions": "'foisonnement faible : 5 a 8 %'"
+    }
+  },
+  "surface": {
+    "grainSize": {
+      "min": 0,
+      "max": 6.3,
+      "unit": "mm",
+      "grade": "manufacturer",
+      "source": "Bronzo Perasso (Marseille), 'Sable naturel pour sols stabilises 0/6,3' (concasse, petrographie calcaire, for sols stabilises) and the linked product 'Sable traite pour sols stabilises (3,5%, 5%, 7%)', read 2026-09-26, https://bronzoperasso.fr/produit/sable-naturel-pour-sols-stabilises-0-63/"
+    }
+  },
+  "acoustic": {
+    "groundClass": [
+      {
+        "text": "Nord2000 class E, 'compacted field and gravel (compacted lawns, park area)', representative flow resistivity 500 kPa s/m2.",
+        "grade": "secondary",
+        "source": "M. Ahearn, E. Boeker, J. Rosenbaum, P. Gerbi, C. Roof (2012) 'The Analysis of Modeling Aircraft Noise with the Nord2000 Noise Model', US DOT Volpe Center, DOT/FAA/AEE/2012-5 (DOT-VNTSC-FAA-12-07), Table 4 'Classification of ground type' (the Nord2000 impedance classes; 1 cgs rayl = 1 kN s/m4 = 1 kPa s/m2), https://rosap.ntl.bts.gov/view/dot/9687/dot_9687_DS1.pdf"
+      },
+      {
+        "text": "Nord2000 class F, 'compacted dense ground (gravel road, parking lot, ISO 10844 asphalt)', representative flow resistivity 2000 kPa s/m2.",
+        "grade": "secondary",
+        "source": "M. Ahearn, E. Boeker, J. Rosenbaum, P. Gerbi, C. Roof (2012) 'The Analysis of Modeling Aircraft Noise with the Nord2000 Noise Model', US DOT Volpe Center, DOT/FAA/AEE/2012-5 (DOT-VNTSC-FAA-12-07), Table 4 'Classification of ground type' (the Nord2000 impedance classes; 1 cgs rayl = 1 kN s/m4 = 1 kPa s/m2), https://rosap.ntl.bts.gov/view/dot/9687/dot_9687_DS1.pdf"
+      }
+    ],
+    "flowResistivity": {
+      "value": 2000,
+      "min": 500,
+      "max": 2000,
+      "unit": "kPa*s/m2",
+      "grade": "secondary",
+      "source": "M. Ahearn, E. Boeker, J. Rosenbaum, P. Gerbi, C. Roof (2012) 'The Analysis of Modeling Aircraft Noise with the Nord2000 Noise Model', US DOT Volpe Center, DOT/FAA/AEE/2012-5 (DOT-VNTSC-FAA-12-07), Table 4 'Classification of ground type' (the Nord2000 impedance classes; 1 cgs rayl = 1 kN s/m4 = 1 kPa s/m2), https://rosap.ntl.bts.gov/view/dot/9687/dot_9687_DS1.pdf",
+      "conditions": "value: class F for a rolled walk; min: class E for loose-surfaced gravel"
+    },
+    "absorption": {
+      "axis": "frequency",
+      "axisUnit": "Hz",
+      "axisValues": [
+        125,
+        250,
+        500,
+        1000,
+        2000,
+        4000
+      ],
+      "unit": "1",
+      "values": [
+        0.021,
+        0.035,
+        0.058,
+        0.094,
+        0.152,
+        0.241
+      ],
+      "grade": "derived",
+      "derivation": "Normal-incidence absorption 1 - |R|^2 of a semi-infinite ground, R = (Z - 1)/(Z + 1), with the Delany-Bazley normalised impedance Z = 1 + 0.0571 X^-0.754 - i 0.087 X^-0.732, X = rho0 f / sigma, rho0 = 1.204 kg/m3, at the class's representative flow resistivity sigma. The ground's X lies below the model's fitted range (about 0.01 to 1), as in every ground model that uses it; Sound should compute its own ground impedance from sigma rather than read this table.",
+      "source": "M. Ahearn, E. Boeker, J. Rosenbaum, P. Gerbi, C. Roof (2012) 'The Analysis of Modeling Aircraft Noise with the Nord2000 Noise Model', US DOT Volpe Center, DOT/FAA/AEE/2012-5 (DOT-VNTSC-FAA-12-07), Table 4 'Classification of ground type' (the Nord2000 impedance classes; 1 cgs rayl = 1 kN s/m4 = 1 kPa s/m2), https://rosap.ntl.bts.gov/view/dot/9687/dot_9687_DS1.pdf ; M.E. Delany, E.N. Bazley (1970) 'Acoustical properties of fibrous absorbent materials', Applied Acoustics 3:105-116 (the one-parameter impedance model the Nord2000 and Embleton-Piercy-Daigle ground models use)",
+      "conditions": "class F (2000 kPa s/m2), normal incidence, semi-infinite ground"
+    },
+    "absorptionLoose": {
+      "axis": "frequency",
+      "axisUnit": "Hz",
+      "axisValues": [
+        125,
+        250,
+        500,
+        1000,
+        2000,
+        4000
+      ],
+      "unit": "1",
+      "values": [
+        0.058,
+        0.094,
+        0.152,
+        0.241,
+        0.367,
+        0.528
+      ],
+      "grade": "derived",
+      "derivation": "Normal-incidence absorption 1 - |R|^2 of a semi-infinite ground, R = (Z - 1)/(Z + 1), with the Delany-Bazley normalised impedance Z = 1 + 0.0571 X^-0.754 - i 0.087 X^-0.732, X = rho0 f / sigma, rho0 = 1.204 kg/m3, at the class's representative flow resistivity sigma. The ground's X lies below the model's fitted range (about 0.01 to 1), as in every ground model that uses it; Sound should compute its own ground impedance from sigma rather than read this table.",
+      "source": "M. Ahearn, E. Boeker, J. Rosenbaum, P. Gerbi, C. Roof (2012) 'The Analysis of Modeling Aircraft Noise with the Nord2000 Noise Model', US DOT Volpe Center, DOT/FAA/AEE/2012-5 (DOT-VNTSC-FAA-12-07), Table 4 'Classification of ground type' (the Nord2000 impedance classes; 1 cgs rayl = 1 kN s/m4 = 1 kPa s/m2), https://rosap.ntl.bts.gov/view/dot/9687/dot_9687_DS1.pdf ; M.E. Delany, E.N. Bazley (1970) 'Acoustical properties of fibrous absorbent materials', Applied Acoustics 3:105-116 (the one-parameter impedance model the Nord2000 and Embleton-Piercy-Daigle ground models use)",
+      "conditions": "class E (500 kPa s/m2), normal incidence, semi-infinite ground"
+    },
+    "note": "The crunch underfoot is Sound's footfall class 'gravel' (physicalMaterial)."
+  },
+  "stock": {
+    "grading": {
+      "min": 0,
+      "max": 6.3,
+      "unit": "mm",
+      "grade": "manufacturer",
+      "source": "Bronzo Perasso (Marseille), 'Sable naturel pour sols stabilises 0/6,3' (concasse, petrographie calcaire, for sols stabilises) and the linked product 'Sable traite pour sols stabilises (3,5%, 5%, 7%)', read 2026-09-26, https://bronzoperasso.fr/produit/sable-naturel-pour-sols-stabilises-0-63/"
+    },
+    "finishLayer": {
+      "min": 30,
+      "max": 50,
+      "unit": "mm",
+      "grade": "manufacturer",
+      "source": "Via Materiaux (Annecy), 'Sable 0/6 concasse calcaire - Vrac', product page read 2026-09-26, https://viamateriaux.fr/produit/sable-0-6-concasse-calcaire/",
+      "conditions": "'finition sur une epaisseur comprise entre 3cm et 5cm', raked then ideally compacted"
+    },
+    "note": "Sold in bulk by the tonne; there is no unit stock. Form draws the walk's layers (see rolled.*)."
+  },
+  "physicalMaterial": {
+    "footfallClass": "gravel",
+    "note": "No measured friction for a rolled limestone walk was read (see unverified)."
+  },
+  "uses": [
+    {
+      "where": "the grounds' walks: the podium's gravel strip, the allees beside the parvis, the cour round the canal, the avenue, the walk east and the rond-point, the Elan's terrace",
+      "working": "rolled.self-binding",
+      "source": "windows/Source/MuseeVision/Facade/MuseeLandscape.cpp (P.Gravel slabs) and windows/Scripts/exterior_materials.py ('the Paris gardens' pale sable (a beige grit with small stones)')"
+    },
+    {
+      "where": "the joints and sand bed of the grounds' stone paving (parvis, kerbs)",
+      "working": "laid.sand-jointed",
+      "source": "Marble Institute of America (now the Natural Stone Institute) (2016) Dimension Stone Design Manual, Version VIII, chapter 'Horizontal Surfaces' (excerpt), Introduction 2.4 'Width of Joints between Stones' and 'Exterior Paving Systems' 2.1-2.4, https://nsrstone.com/wp-content/uploads/2025/07/Horizontal-Surfaces.pdf"
+    }
+  ],
+  "photograph": [
+    "Pale beige-grey grit with small angular stones; paler and smoother in the trodden lanes, darker and looser at the edges.",
+    "Dust on shoes and on the lower edge of hedges and benches in a dry summer; a darker, uniformly damp surface after rain, drying from the crown of the walk.",
+    "Shallow puddles in low spots after rain, with a rim of washed-out fines when they dry.",
+    "The grains' faces glint in low sun.",
+    "Up close: angular grains up to about 6 mm set in compacted fines, with loose grit on top swept into low ridges at the edges of the lanes."
+  ],
+  "evidence": [],
+  "evidenceRejected": [
+    {
+      "path": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR/G3/Color.png",
+      "set": "ambientCG Gravel022, 2K (key G3: 'river gravel', 1.5 m)",
+      "licence": "CC0 1.0",
+      "credit": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR/CREDITS.md, row G3",
+      "shows": "Rounded river pebbles of mixed rock, grey, rust-red and green, with no fines between them: not a crushed limestone and not a rolled walk.",
+      "meanColour": {
+        "linearSrgb": [
+          0.2266,
+          0.2141,
+          0.1737
+        ],
+        "cieLab": [
+          53.4,
+          -0.9,
+          6.9
+        ],
+        "unit": "linear Rec.709 (sRGB primaries); CIELAB 1976 with a D65 white",
+        "source": "Derived here (R-MATTER, group ground-water): mean over all pixels of Color.png, decoded from sRGB",
+        "note": "uncalibrated; and the wrong stone"
+      },
+      "reason": "The wrong material: the old build used it only after quietening its colours toward beige (windows/Scripts/exterior_materials.py). Its pebble scale (about 5-15 mm) is also coarser than a 0/6 walk."
+    }
+  ],
+  "evidenceSearch": {
+    "searched": [
+      "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR (CREDITS.md, CREDITS_chenghuai.md, stats.json, every SET.txt)",
+      "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/Textures/CREDITS.md"
+    ],
+    "found": "No photograph of a crushed-limestone walk is on this PC. G3 (river gravel) is rejected above; G2 (Rocks023, pebble mosaic) is Chenghuai's pebble paving, another material.",
+    "tier": "Tier (a) is thin: grading, grain mineral and trade practice. A tier (b) specimen closes the gap: a calibrated photograph of a Paris stabilise walk (Tuileries or Luxembourg), dry and wet, trodden lane and edge, with a ColorChecker."
+  },
+  "unverified": [
+    {
+      "field": "optics.reflectance (dry crushed limestone walk)",
+      "value": null,
+      "unit": "1",
+      "reason": "No colorimetric or reflectance measurement of a limestone walk was read. A search summary cites solar reflectances of about 0.42-0.45 for unbound limestone aggregates (ASTM E1918), not read at the source."
+    },
+    {
+      "field": "design colour as built (2026-09)",
+      "value": [
+        "#BDAF94",
+        "#D6CBB2"
+      ],
+      "unit": "sRGB hex",
+      "reason": "The old build's gravel BaseColor #BDAF94 and trodden-lane colour #D6CBB2 (windows/Scripts/exterior_materials.py), chosen by eye. Not measurements."
+    },
+    {
+      "field": "formation.binder in the Tuileries' stabilise",
+      "value": null,
+      "unit": "",
+      "reason": "A search summary describes the Tuileries' stabilise as 'un melange de chaux, de gravier et de sable'; the article was not readable (lejdd.fr, 403)."
+    },
+    {
+      "field": "physicalMaterial.friction",
+      "value": null,
+      "unit": "1",
+      "reason": "No friction or slip measurement for rolled limestone walks was read."
+    },
+    {
+      "field": "physical.bulkDensity (crushed limestone 0/6)",
+      "value": 1.7,
+      "unit": "t/m3",
+      "reason": "Via Materiaux lists 'Masse volumique: 1.7' for its crushed limestone 0/6 without a unit; t/m3 is assumed. Source: Via Materiaux (Annecy), 'Sable 0/6 concasse calcaire - Vrac', product page read 2026-09-26, https://viamateriaux.fr/produit/sable-0-6-concasse-calcaire/"
+    },
+    {
+      "field": "acoustic.absorption (random incidence, measured)",
+      "value": null,
+      "unit": "1",
+      "reason": "No measured octave-band absorption of a compacted limestone walk was read; the table is derived from a ground class."
+    }
+  ]
+}

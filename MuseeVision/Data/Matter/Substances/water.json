@@ -1,0 +1,653 @@
+{
+  "schema": "musee.matter.substance/1",
+  "key": "water",
+  "name": "Fresh water",
+  "family": "water",
+  "accentOf": null,
+  "summary": "Liquid water, the museum's one transparent liquid: the Salon's lily pond in the Nympheas oval (indoors, dyed black to a mirror), Chenghuai's garden pond (outdoors, a living green pond), and the grounds' long canal before the portico and the round basin on the walk east (outdoors, clear water over a dark bed). This record holds the water's own physics; what the pond has dissolved and grown in it is its history, and a dye is its working. Nature owns each body of water as an object (its level, waves and flow); Matter owns what light and sound do in it.",
+  "dossier": "Docs/Matter/water.md",
+  "workings": {
+    "admits": [
+      "water.dyed-black"
+    ],
+    "note": "Untreated water needs no working; the canal, the round basin and Chenghuai's pond are untreated."
+  },
+  "histories": [
+    "water.phytoplankton",
+    "water.dissolved-organic"
+  ],
+  "aliases": [
+    "H2O",
+    "pond water",
+    "still water"
+  ],
+  "constituents": [
+    {
+      "material": "water",
+      "formula": "H2O",
+      "role": "the liquid; absorbs red light by its molecular vibrational overtones, so deep clear water is blue"
+    },
+    {
+      "material": "phytoplankton (chlorophyll a and accessory pigments)",
+      "formula": null,
+      "role": "history water.phytoplankton: green water"
+    },
+    {
+      "material": "coloured dissolved organic matter (humic and fulvic substances, tannins)",
+      "formula": null,
+      "role": "history water.dissolved-organic: yellow-brown water"
+    },
+    {
+      "material": "a black acid dye",
+      "formula": null,
+      "role": "working water.dyed-black: the Salon pond's mirror"
+    }
+  ],
+  "formation": {
+    "how": "The museum's water is mains or rain water held in built basins. Its colour is not a property of 'pond water' but the sum of the absorbers in it: the water molecule itself (a weak absorption rising steeply into the red), plus whatever the basin's life and surroundings add over time (algae, dissolved humic matter) or the keeper adds on purpose (dye). Each absorber has a measured spectrum; the total absorption is their sum, and light's path through the water (down to the bed and back) sets how much of the bed is seen.",
+    "facts": {
+      "absorptionIsAdditive": {
+        "text": "Total absorption is modelled as the sum of the pure-water term, a phytoplankton term that depends on chlorophyll a, a yellow-substance (dissolved organic matter) term and a detritus term, each a concentration times a specific coefficient.",
+        "grade": "secondary",
+        "source": "A. Morel, D. Antoine (2011) 'Pigment index retrieval in Case 1 waters', MERIS ATBD 2.9, PO-TN-MEL-GS-0005 issue 4 rev. 3, ACRI-ST for ESA, yellow-substance term (quoting A. Bricaud, A. Morel, L. Prieur (1981) 'Absorption by dissolved organic matter of the sea (yellow substance) in the UV and visible domains', Limnology and Oceanography 26:43-53), https://earth.esa.int/eogateway/documents/20142/37627/MERIS-ATBD-2-9.pdf"
+      }
+    }
+  },
+  "optics": {
+    "kind": "dielectric liquid: a Fresnel interface over an absorbing, weakly scattering volume",
+    "refractiveIndex": [
+      {
+        "value": 1.33335,
+        "unit": "1",
+        "grade": "derived",
+        "derivation": "Daimon and Masumura's 20.0 degC Sellmeier equation evaluated at 0.5893 um",
+        "source": "M. Daimon, A. Masumura (2007) 'Measurement of the refractive index of distilled water from the near-infrared region to the ultraviolet region', Applied Optics 46(18):3811-3820, https://doi.org/10.1364/AO.46.003811 ; Sellmeier coefficients for 20.0 degC as tabulated at https://refractiveindex.info/?shelf=main&book=H2O&page=Daimon-20.0C",
+        "conditions": "distilled water, 20.0 degC, 589.3 nm"
+      }
+    ],
+    "dispersion": {
+      "formula": "n^2 - 1 = 0.5684027565 L^2/(L^2 - 0.005101829712) + 0.1726177391 L^2/(L^2 - 0.01821153936) + 0.02086189578 L^2/(L^2 - 0.02620722293) + 0.1130748688 L^2/(L^2 - 10.69792721)",
+      "wavelengthSymbol": "L, the vacuum wavelength in micrometres",
+      "validRange": {
+        "min": 0.18,
+        "max": 1.13,
+        "unit": "um",
+        "grade": "measured",
+        "source": "M. Daimon, A. Masumura (2007) 'Measurement of the refractive index of distilled water from the near-infrared region to the ultraviolet region', Applied Optics 46(18):3811-3820, https://doi.org/10.1364/AO.46.003811 ; Sellmeier coefficients for 20.0 degC as tabulated at https://refractiveindex.info/?shelf=main&book=H2O&page=Daimon-20.0C"
+      },
+      "evaluated": {
+        "axis": "wavelength",
+        "axisUnit": "um",
+        "axisValues": [
+          0.4,
+          0.45,
+          0.5,
+          0.55,
+          0.6,
+          0.65,
+          0.7
+        ],
+        "unit": "1",
+        "values": [
+          1.34356,
+          1.33961,
+          1.3368,
+          1.33468,
+          1.33302,
+          1.33167,
+          1.33052
+        ],
+        "grade": "derived",
+        "derivation": "the Sellmeier equation above evaluated at each wavelength",
+        "source": "M. Daimon, A. Masumura (2007) 'Measurement of the refractive index of distilled water from the near-infrared region to the ultraviolet region', Applied Optics 46(18):3811-3820, https://doi.org/10.1364/AO.46.003811 ; Sellmeier coefficients for 20.0 degC as tabulated at https://refractiveindex.info/?shelf=main&book=H2O&page=Daimon-20.0C",
+        "conditions": "20.0 degC"
+      },
+      "source": "M. Daimon, A. Masumura (2007) 'Measurement of the refractive index of distilled water from the near-infrared region to the ultraviolet region', Applied Optics 46(18):3811-3820, https://doi.org/10.1364/AO.46.003811 ; Sellmeier coefficients for 20.0 degC as tabulated at https://refractiveindex.info/?shelf=main&book=H2O&page=Daimon-20.0C",
+      "grade": "measured"
+    },
+    "specularF0": {
+      "axis": "wavelength",
+      "axisUnit": "um",
+      "axisValues": [
+        0.4,
+        0.45,
+        0.5,
+        0.55,
+        0.6,
+        0.65,
+        0.7
+      ],
+      "unit": "1",
+      "values": [
+        0.02149,
+        0.02107,
+        0.02077,
+        0.02055,
+        0.02038,
+        0.02023,
+        0.02011
+      ],
+      "grade": "derived",
+      "derivation": "F0 = ((n - 1)/(n + 1))^2 at normal incidence from air, n from the dispersion above",
+      "source": "M. Daimon, A. Masumura (2007) 'Measurement of the refractive index of distilled water from the near-infrared region to the ultraviolet region', Applied Optics 46(18):3811-3820, https://doi.org/10.1364/AO.46.003811 ; Sellmeier coefficients for 20.0 degC as tabulated at https://refractiveindex.info/?shelf=main&book=H2O&page=Daimon-20.0C",
+      "note": "0.02041 at 589.3 nm; about 0.02, half of glass's 0.043"
+    },
+    "fresnelUnpolarised": {
+      "axis": "incidence",
+      "axisUnit": "deg",
+      "axisValues": [
+        0,
+        20,
+        30,
+        40,
+        50,
+        60,
+        70,
+        75,
+        80,
+        85,
+        88,
+        89
+      ],
+      "unit": "1",
+      "values": [
+        0.0206,
+        0.0207,
+        0.0216,
+        0.0247,
+        0.0339,
+        0.06,
+        0.1339,
+        0.2129,
+        0.3485,
+        0.584,
+        0.8043,
+        0.8964
+      ],
+      "grade": "derived",
+      "derivation": "Fresnel's equations for unpolarised light from air onto water, n = 1.3347 (550 nm)",
+      "source": "M. Daimon, A. Masumura (2007) 'Measurement of the refractive index of distilled water from the near-infrared region to the ultraviolet region', Applied Optics 46(18):3811-3820, https://doi.org/10.1364/AO.46.003811 ; Sellmeier coefficients for 20.0 degC as tabulated at https://refractiveindex.info/?shelf=main&book=H2O&page=Daimon-20.0C",
+      "note": "The surface is a faint window looking down and a bright mirror at grazing: the far bank and the sky dominate a pond seen at a low angle."
+    },
+    "brewsterAngle": {
+      "value": 53.16,
+      "unit": "deg",
+      "grade": "derived",
+      "derivation": "arctan(n) at 550 nm, n from Daimon and Masumura",
+      "source": "M. Daimon, A. Masumura (2007) 'Measurement of the refractive index of distilled water from the near-infrared region to the ultraviolet region', Applied Optics 46(18):3811-3820, https://doi.org/10.1364/AO.46.003811 ; Sellmeier coefficients for 20.0 degC as tabulated at https://refractiveindex.info/?shelf=main&book=H2O&page=Daimon-20.0C",
+      "note": "Skylight reflected near this angle is strongly polarised; a polariser removes it and shows the bed."
+    },
+    "absorptionCoefficient": {
+      "axis": "wavelength",
+      "axisUnit": "nm",
+      "axisValues": [
+        380,
+        390,
+        400,
+        410,
+        420,
+        430,
+        440,
+        450,
+        460,
+        470,
+        480,
+        490,
+        500,
+        510,
+        520,
+        530,
+        540,
+        550,
+        560,
+        570,
+        580,
+        590,
+        600,
+        610,
+        620,
+        630,
+        640,
+        650,
+        660,
+        670,
+        680,
+        690,
+        700
+      ],
+      "unit": "1/m",
+      "values": [
+        0.01137,
+        0.00851,
+        0.00663,
+        0.00473,
+        0.00454,
+        0.00495,
+        0.00635,
+        0.00922,
+        0.00979,
+        0.0106,
+        0.0127,
+        0.015,
+        0.0204,
+        0.0325,
+        0.0409,
+        0.0434,
+        0.0474,
+        0.0565,
+        0.0619,
+        0.0695,
+        0.0896,
+        0.1351,
+        0.2224,
+        0.2644,
+        0.2755,
+        0.2916,
+        0.3108,
+        0.34,
+        0.41,
+        0.439,
+        0.465,
+        0.516,
+        0.624
+      ],
+      "grade": "measured",
+      "source": "R.M. Pope, E.S. Fry (1997) 'Absorption spectrum (380-700 nm) of pure water. II. Integrating cavity measurements', Applied Optics 36(33):8710-8723, https://doi.org/10.1364/AO.36.008710 ; tabulated by S. Prahl, Oregon Medical Laser Center, https://omlc.org/spectra/water/data/pope97.txt",
+      "conditions": "pure water, integrating cavity; tabulated in 1/cm, multiplied here by 100",
+      "note": "Minimum near 418 nm (0.0044 /m); about 140 times larger at 700 nm. The spectrum is the truth: Matter integrates it against the eye's colour matching, never an RGB tint."
+    },
+    "absorptionCoefficientCrossCheck": {
+      "axis": "wavelength",
+      "axisUnit": "nm",
+      "axisValues": [
+        400,
+        450,
+        500,
+        550,
+        600,
+        650,
+        700
+      ],
+      "unit": "1/m",
+      "values": [
+        1.71,
+        0.0145,
+        0.0257,
+        0.0638,
+        0.244,
+        0.349,
+        0.65
+      ],
+      "grade": "measured",
+      "source": "R.C. Smith, K.S. Baker (1981) 'Optical properties of the clearest natural waters (200-800 nm)', Applied Optics 20:177-184 ; tabulated by S. Prahl, Oregon Medical Laser Center, https://omlc.org/spectra/water/data/smith81.txt",
+      "conditions": "'clearest natural waters' (an upper bound for pure water); tabulated in 1/cm, multiplied here by 100",
+      "note": "Agrees with Pope and Fry above 550 nm; higher in the blue, where natural waters carried traces of dissolved matter."
+    },
+    "internalTransmittance1m": {
+      "axis": "wavelength",
+      "axisUnit": "nm",
+      "axisValues": [
+        450,
+        550,
+        650
+      ],
+      "unit": "1",
+      "values": [
+        0.9908,
+        0.9451,
+        0.7118
+      ],
+      "grade": "derived",
+      "derivation": "exp(-a_w d) with d = 1 m and a_w from the Pope and Fry table",
+      "source": "R.M. Pope, E.S. Fry (1997) 'Absorption spectrum (380-700 nm) of pure water. II. Integrating cavity measurements', Applied Optics 36(33):8710-8723, https://doi.org/10.1364/AO.36.008710 ; tabulated by S. Prahl, Oregon Medical Laser Center, https://omlc.org/spectra/water/data/pope97.txt",
+      "note": "Pure water takes out almost 30 % of the red in a metre and almost nothing of the blue: the museum's shallow basins owe their colour to what is in them, not to the water."
+    },
+    "wet": {
+      "text": "Water is the wetting film of every other substance: a film on a porous or rough surface darkens it by lowering the index step at the grains and trapping diffusely reflected light by total internal reflection.",
+      "grade": "measured",
+      "source": "J. Lekner, M.C. Dorf (1988) 'Why some things are darker when wet', Applied Optics 27(7):1278-1280, https://doi.org/10.1364/AO.27.001278"
+    }
+  },
+  "surface": {
+    "stillSurface": {
+      "text": "Below the wind-wave threshold the surface carries only disorganised 'wrinkles' elongated along the wind, of micrometre amplitude; above it, regular waves grow.",
+      "grade": "measured",
+      "source": "A. Paquier, F. Moisy, M. Rabaud (2016) 'Viscosity effects in wind wave generation', Laboratoire FAST (CNRS, Universite Paris-Sud), arXiv:1611.01208, https://arxiv.org/abs/1611.01208"
+    },
+    "wrinkleSlope": {
+      "value": 6e-05,
+      "unit": "1",
+      "grade": "derived",
+      "derivation": "rms height over streamwise correlation length: about 12 um / 200 mm at 3.2 m/s (see wrinkles)",
+      "source": "A. Paquier, F. Moisy, M. Rabaud (2016) 'Viscosity effects in wind wave generation', Laboratoire FAST (CNRS, Universite Paris-Sud), arXiv:1611.01208, https://arxiv.org/abs/1611.01208",
+      "note": "Slopes this small leave the surface a near-perfect mirror; the eye sees only faint streaking of sharp reflections."
+    },
+    "windThreshold": {
+      "rows": [
+        {
+          "min": 1,
+          "max": 3,
+          "unit": "m/s",
+          "grade": "secondary",
+          "source": "A. Paquier, F. Moisy, M. Rabaud (2016) 'Viscosity effects in wind wave generation', Laboratoire FAST (CNRS, Universite Paris-Sud), arXiv:1611.01208, https://arxiv.org/abs/1611.01208",
+          "conditions": "the range observed at sea and in laboratories for the onset of wind waves on water",
+          "note": "Paquier et al.: the inviscid Kelvin-Helmholtz prediction, 6.6 m/s, 'largely overestimates' this."
+        },
+        {
+          "min": 2.9,
+          "max": 3.4,
+          "unit": "m/s",
+          "grade": "secondary",
+          "source": "A. Paquier, F. Moisy, M. Rabaud (2016) 'Viscosity effects in wind wave generation', Laboratoire FAST (CNRS, Universite Paris-Sud), arXiv:1611.01208, https://arxiv.org/abs/1611.01208",
+          "conditions": "Kahma and Donelan (1988), laboratory, water, as tabulated by Paquier et al. Table I",
+          "note": "K.K. Kahma, M.A. Donelan (1988) 'A laboratory study of the minimum wind speed for wind wave generation', J. Fluid Mech. 192:339-364"
+        },
+        {
+          "value": 0.4,
+          "unit": "m/s",
+          "grade": "secondary",
+          "source": "A. Paquier, F. Moisy, M. Rabaud (2016) 'Viscosity effects in wind wave generation', Laboratoire FAST (CNRS, Universite Paris-Sud), arXiv:1611.01208, https://arxiv.org/abs/1611.01208",
+          "conditions": "Roll (1951), water outdoors, as tabulated by Paquier et al. Table I (cited by Kahma and Donelan)"
+        }
+      ],
+      "note": "The threshold depends on how the wind speed is defined (height, fetch); lab mean air speeds are not 10 m winds."
+    },
+    "wrinkles": {
+      "amplitudeLaw": {
+        "text": "Below the threshold, the rms height of the wrinkles scales as zeta_rms = alpha nu^-1/2 u*^3/2 with alpha = 1.9e-7 (SI), u* the friction velocity, approximately 0.05 times the mean air speed; water shows slightly smaller wrinkles than the law.",
+        "grade": "measured",
+        "source": "A. Paquier, F. Moisy, M. Rabaud (2016) 'Viscosity effects in wind wave generation', Laboratoire FAST (CNRS, Universite Paris-Sud), arXiv:1611.01208, https://arxiv.org/abs/1611.01208"
+      },
+      "amplitudeAt3_2": {
+        "value": 1.2e-05,
+        "unit": "m",
+        "grade": "derived",
+        "derivation": "alpha nu^-1/2 (0.05 U)^3/2 with alpha = 1.9e-7, nu = 1.0e-6 m2/s, U = 3.2 m/s",
+        "source": "A. Paquier, F. Moisy, M. Rabaud (2016) 'Viscosity effects in wind wave generation', Laboratoire FAST (CNRS, Universite Paris-Sud), arXiv:1611.01208, https://arxiv.org/abs/1611.01208",
+        "note": "about 12 um: invisible to the eye, but it breaks up a mirror's reflection into faint streaks"
+      },
+      "correlationLength": {
+        "streamwise": {
+          "value": 200,
+          "unit": "mm",
+          "grade": "measured",
+          "source": "A. Paquier, F. Moisy, M. Rabaud (2016) 'Viscosity effects in wind wave generation', Laboratoire FAST (CNRS, Universite Paris-Sud), arXiv:1611.01208, https://arxiv.org/abs/1611.01208",
+          "conditions": "wind 3.2 m/s, lab channel, all viscosities"
+        },
+        "spanwise": {
+          "value": 75,
+          "unit": "mm",
+          "grade": "measured",
+          "source": "A. Paquier, F. Moisy, M. Rabaud (2016) 'Viscosity effects in wind wave generation', Laboratoire FAST (CNRS, Universite Paris-Sud), arXiv:1611.01208, https://arxiv.org/abs/1611.01208",
+          "conditions": "wind 3.2 m/s, lab channel, all viscosities"
+        },
+        "note": "Wrinkles are elongated along the wind."
+      }
+    },
+    "slopeVariance": {
+      "cleanTotal": {
+        "text": "Clean surface: sigma^2 = sigma_c^2 + sigma_u^2 = 0.003 + 5.12e-3 W (+/- 0.004), r = 0.986, with W the wind speed in m/s at 41 ft (12.5 m); measured off Hawaii from aerial sun-glitter photographs, wind 1 to 14 m/s.",
+        "grade": "measured",
+        "source": "C. Cox, W. Munk (1954) 'Measurement of the roughness of the sea surface from photographs of the sun's glitter', Journal of the Optical Society of America 44(11):838-850, section 6 (regression lines), https://doi.org/10.1364/JOSA.44.000838 ; read at https://userpages.umbc.edu/~martins/phys650/Cox%20and%20Munk%20Glint%20paper.pdf",
+        "note": "The same regression is reproduced in C.D. Mobley et al., Ocean Optics Web Book, 'Cox-Munk sea surface slope statistics', https://www.oceanopticsbook.info/view/surfaces/cox-munk-sea-surface-slope-statistics"
+      },
+      "cleanComponents": {
+        "text": "Crosswind sigma_c^2 = 0.003 + 1.92e-3 W (+/- 0.002), r = 0.956; upwind sigma_u^2 = 0.000 + 3.16e-3 W (+/- 0.004), r = 0.945.",
+        "grade": "measured",
+        "source": "C. Cox, W. Munk (1954) 'Measurement of the roughness of the sea surface from photographs of the sun's glitter', Journal of the Optical Society of America 44(11):838-850, section 6 (regression lines), https://doi.org/10.1364/JOSA.44.000838 ; read at https://userpages.umbc.edu/~martins/phys650/Cox%20and%20Munk%20Glint%20paper.pdf"
+      },
+      "slickTotal": {
+        "text": "Slick surface: sigma^2 = 0.008 + 1.56e-3 W (+/- 0.004), r = 0.77; oil slicks reduce the mean square slope by a factor of two to three.",
+        "grade": "measured",
+        "source": "C. Cox, W. Munk (1954) 'Measurement of the roughness of the sea surface from photographs of the sun's glitter', Journal of the Optical Society of America 44(11):838-850, section 6 (regression lines), https://doi.org/10.1364/JOSA.44.000838 ; read at https://userpages.umbc.edu/~martins/phys650/Cox%20and%20Munk%20Glint%20paper.pdf"
+      },
+      "evaluated": {
+        "axis": "windSpeed",
+        "axisUnit": "m/s",
+        "axisValues": [
+          0,
+          1,
+          2,
+          3,
+          5,
+          8
+        ],
+        "unit": "1",
+        "values": [
+          0.003,
+          0.0081,
+          0.0132,
+          0.0184,
+          0.0286,
+          0.044
+        ],
+        "grade": "derived",
+        "derivation": "sigma^2 = 0.003 + 5.12e-3 W, clean surface",
+        "source": "C. Cox, W. Munk (1954) 'Measurement of the roughness of the sea surface from photographs of the sun's glitter', Journal of the Optical Society of America 44(11):838-850, section 6 (regression lines), https://doi.org/10.1364/JOSA.44.000838 ; read at https://userpages.umbc.edu/~martins/phys650/Cox%20and%20Munk%20Glint%20paper.pdf"
+      },
+      "beckmannRoughness": {
+        "axis": "windSpeed",
+        "axisUnit": "m/s",
+        "axisValues": [
+          0,
+          1,
+          2,
+          3,
+          5,
+          8
+        ],
+        "unit": "1",
+        "values": [
+          0.0548,
+          0.09,
+          0.1149,
+          0.1356,
+          0.1691,
+          0.2098
+        ],
+        "grade": "derived",
+        "derivation": "For an isotropic Gaussian slope distribution the Beckmann roughness m satisfies m^2 = sigma^2 (the total mean square slope); m = sqrt(0.003 + 5.12e-3 W). The GGX alpha is commonly set equal to m.",
+        "source": "C. Cox, W. Munk (1954) 'Measurement of the roughness of the sea surface from photographs of the sun's glitter', Journal of the Optical Society of America 44(11):838-850, section 6 (regression lines), https://doi.org/10.1364/JOSA.44.000838 ; read at https://userpages.umbc.edu/~martins/phys650/Cox%20and%20Munk%20Glint%20paper.pdf",
+        "conditions": "open ocean with unlimited fetch: an upper bound for a basin tens of metres long, whose waves are fetch-limited"
+      },
+      "useInMuseum": {
+        "text": "The indoor Salon pond has no wind: its surface is a mirror. Outdoors, the canal, the round basin and Chenghuai's pond take the live wind from the museum Moment; below the threshold they stay mirrors broken by wrinkles, above it the Cox-Munk law bounds their roughness.",
+        "grade": "derived",
+        "derivation": "the design's exposures (indoor oval; outdoor canal, basin and garden pond) combined with the two measured regimes",
+        "source": "A. Paquier, F. Moisy, M. Rabaud (2016) 'Viscosity effects in wind wave generation', Laboratoire FAST (CNRS, Universite Paris-Sud), arXiv:1611.01208, https://arxiv.org/abs/1611.01208 ; C. Cox, W. Munk (1954) 'Measurement of the roughness of the sea surface from photographs of the sun's glitter', Journal of the Optical Society of America 44(11):838-850, section 6 (regression lines), https://doi.org/10.1364/JOSA.44.000838 ; read at https://userpages.umbc.edu/~martins/phys650/Cox%20and%20Munk%20Glint%20paper.pdf ; C:/Users/anan9/Desktop/Projects/Musee Vision/plan/proposals/salon-interior/canvas/Oval.dc.html (the pond indoors)",
+        "note": "Nature owns the waves themselves."
+      }
+    },
+    "surfaceTension": {
+      "value": 0.072736,
+      "unit": "N/m",
+      "grade": "guidance",
+      "source": "E.W. Lemmon, M.O. McLinden, D.G. Friend, 'Thermophysical Properties of Fluid Systems', NIST Chemistry WebBook, NIST Standard Reference Database 69 (water: the IAPWS-95 formulation), https://webbook.nist.gov/cgi/fluid.cgi?ID=C7732185",
+      "conditions": "saturated liquid, 20 degC; 0.074942 at 5 degC, 0.071972 at 25 degC",
+      "note": "Sets the capillary ripples' scale and the meniscus where water meets a coping or a lily pad."
+    },
+    "slicks": {
+      "text": "Oil slicks cut the mean square slope by a factor of two to three and remove the slope distribution's skewness; natural slicks are probably only a few molecules thick and do not change the reflectance itself.",
+      "grade": "measured",
+      "source": "C. Cox, W. Munk (1954) 'Measurement of the roughness of the sea surface from photographs of the sun's glitter', Journal of the Optical Society of America 44(11):838-850, section 6 (regression lines), https://doi.org/10.1364/JOSA.44.000838 ; read at https://userpages.umbc.edu/~martins/phys650/Cox%20and%20Munk%20Glint%20paper.pdf"
+    }
+  },
+  "physical": {
+    "density": {
+      "value": 998.21,
+      "unit": "kg/m3",
+      "grade": "guidance",
+      "source": "E.W. Lemmon, M.O. McLinden, D.G. Friend, 'Thermophysical Properties of Fluid Systems', NIST Chemistry WebBook, NIST Standard Reference Database 69 (water: the IAPWS-95 formulation), https://webbook.nist.gov/cgi/fluid.cgi?ID=C7732185",
+      "conditions": "20 degC, 0.101325 MPa; 999.97 at 5 degC, 997.05 at 25 degC"
+    },
+    "dynamicViscosity": {
+      "value": 0.0010016,
+      "unit": "Pa*s",
+      "grade": "guidance",
+      "source": "E.W. Lemmon, M.O. McLinden, D.G. Friend, 'Thermophysical Properties of Fluid Systems', NIST Chemistry WebBook, NIST Standard Reference Database 69 (water: the IAPWS-95 formulation), https://webbook.nist.gov/cgi/fluid.cgi?ID=C7732185",
+      "conditions": "20 degC, 0.101325 MPa"
+    },
+    "specificHeat": {
+      "value": 4184.1,
+      "unit": "J/(kg*K)",
+      "grade": "guidance",
+      "source": "E.W. Lemmon, M.O. McLinden, D.G. Friend, 'Thermophysical Properties of Fluid Systems', NIST Chemistry WebBook, NIST Standard Reference Database 69 (water: the IAPWS-95 formulation), https://webbook.nist.gov/cgi/fluid.cgi?ID=C7732185",
+      "conditions": "isobaric, 20 degC, 0.101325 MPa",
+      "asReported": "4.1841 J/g*K"
+    },
+    "thermalConductivity": {
+      "value": 0.59801,
+      "unit": "W/(m*K)",
+      "grade": "guidance",
+      "source": "E.W. Lemmon, M.O. McLinden, D.G. Friend, 'Thermophysical Properties of Fluid Systems', NIST Chemistry WebBook, NIST Standard Reference Database 69 (water: the IAPWS-95 formulation), https://webbook.nist.gov/cgi/fluid.cgi?ID=C7732185",
+      "conditions": "20 degC, 0.101325 MPa"
+    },
+    "speedOfSound": {
+      "value": 1482.3,
+      "unit": "m/s",
+      "grade": "guidance",
+      "source": "E.W. Lemmon, M.O. McLinden, D.G. Friend, 'Thermophysical Properties of Fluid Systems', NIST Chemistry WebBook, NIST Standard Reference Database 69 (water: the IAPWS-95 formulation), https://webbook.nist.gov/cgi/fluid.cgi?ID=C7732185",
+      "conditions": "20 degC, 0.101325 MPa"
+    }
+  },
+  "acoustic": {
+    "absorption": {
+      "axis": "frequency",
+      "axisUnit": "Hz",
+      "axisValues": [
+        125,
+        250,
+        500,
+        1000,
+        2000,
+        4000
+      ],
+      "unit": "1",
+      "values": [
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.02,
+        0.02
+      ],
+      "grade": "secondary",
+      "source": "akustik.ua, 'Absorption coefficients' (compiled table; its original sources are not stated), section OTHER, row 'Water surface, ie swimming pool', https://www.acoustic.ua/st/web_absorption_data_eng.pdf",
+      "conditions": "a water surface, e.g. a swimming pool (random incidence)"
+    },
+    "absorptionThreeDecimals": {
+      "axis": "frequency",
+      "axisUnit": "Hz",
+      "axisValues": [
+        125,
+        250,
+        500,
+        1000,
+        2000,
+        4000
+      ],
+      "unit": "1",
+      "values": [
+        0.008,
+        0.008,
+        0.013,
+        0.015,
+        0.02,
+        0.025
+      ],
+      "grade": "secondary",
+      "source": "US Enclosure, 'Sound Absorption Coefficients' (compiled table; its original bibliographic source is not stated), row 'Water Surface, e.g. Swimming Pool', http://usenclosure.com/Diffraction%20Graphs/Sound%20Absorption%20Coefficients.pdf",
+      "conditions": "water surface, e.g. swimming pool",
+      "note": "Printed '.008 .008 .013 0.15 .020 0.25': the 1 kHz and 4 kHz entries are read here as 0.015 and 0.025, the only readings consistent with the row and with the two-decimal table above (see unverified)."
+    },
+    "groundClass": {
+      "text": "Nord2000 impedance class H, 'very hard and dense surface (dense asphalt, concrete, water)', representative flow resistivity 200000 kPa s/m2.",
+      "grade": "secondary",
+      "source": "M. Ahearn, E. Boeker, J. Rosenbaum, P. Gerbi, C. Roof (2012) 'The Analysis of Modeling Aircraft Noise with the Nord2000 Noise Model', US DOT Volpe Center, DOT/FAA/AEE/2012-5 (DOT-VNTSC-FAA-12-07), Table 4 'Classification of ground type' (the Nord2000 impedance classes; 1 cgs rayl = 1 kN s/m4 = 1 kPa s/m2), https://rosap.ntl.bts.gov/view/dot/9687/dot_9687_DS1.pdf"
+    },
+    "note": "Acoustically, open water is a hard reflector; rain on water is Sound's emitter, placed on Form's exposed surfaces."
+  },
+  "stock": {
+    "note": "A liquid has no stock: its body is the basin's volume, which Form draws and Nature fills (level by gravity, volume conserved)."
+  },
+  "physicalMaterial": {
+    "footfallClass": "water",
+    "note": "Not walkable: the bodies carry no collision for the visitor (the old build's water had none, windows/Source/MuseeVision/Facade/MuseeLandscape.h). A contact with water is a splash, not a footfall."
+  },
+  "uses": [
+    {
+      "body": "the Salon's lily pond (Nympheas oval)",
+      "exposure": "indoors, no wind",
+      "working": "water.dyed-black",
+      "history": "none: the dye blocks light for algae",
+      "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/plan/proposals/salon-interior/canvas/Oval.dc.html ('the water dyed black so it becomes a mirror')"
+    },
+    {
+      "body": "Chenghuai's garden pond",
+      "exposure": "outdoors, live wind and rain",
+      "working": null,
+      "history": "water.phytoplankton and water.dissolved-organic",
+      "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/plan/proposals/chenghuai/canvas/Garden.dc.html ; windows/Source/MuseeVision/Chenghuai/ChenghuaiPlan.h (water 0.28 m under the garden ground)"
+    },
+    {
+      "body": "the grounds' canal before the portico and the round basin on the walk east",
+      "exposure": "outdoors, live wind and rain",
+      "working": null,
+      "history": "a clear state of water.phytoplankton (low chlorophyll)",
+      "source": "windows/Source/MuseeVision/Facade/MuseeLandscape.h (the cour's long still canal, the rond-point's round basin); C:/Users/anan9/Desktop/Projects/Musee Vision/plan/canvas/MaterialsOther.dc.html ('Still water: absorption and scattering by depth over a dark bed ... The Nympheas pond, the Chinese pond, the canal and basin'; 'Mown lawn')"
+    }
+  ],
+  "photograph": [
+    "Looking down near the edge you see the bed through the water; looking across, the far bank and the sky in reflection: the Fresnel curve, not a change of paint.",
+    "Reflections of verticals (trees, columns) are stretched into vertical streaks as soon as there is any ripple: the slope distribution, elongated along the wind.",
+    "On a still day a garden pond shows wind 'cat's-paws': dark patches where gusts roughen the surface and reflect less of the bright sky.",
+    "Clear water over a dark bed reads black and mirror-like; green water shows its colour mostly where the sun enters it and near the edge.",
+    "Dyed black water hides everything below a few centimetres: lily stems vanish at the surface, pads float on a mirror.",
+    "Floating pollen or dust leaves smooth, slick lanes where the ripples are damped."
+  ],
+  "evidence": [],
+  "evidenceSearch": {
+    "searched": [
+      "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR (CREDITS.md, CREDITS_chenghuai.md, stats.json, every SET.txt)",
+      "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/Textures/CREDITS.md",
+      "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/Journeys"
+    ],
+    "found": "No photograph of real water is on this PC. T_water_ripples.png is generated (windows/Scripts/water_ripples.py) and is not evidence; G5 (ambientCG Rock032) is the bed's dark stone, another substance.",
+    "tier": "Water stands on tier (a): measured spectra and laws. A tier (b) check: photographs of a still pond and of dyed black water at known sun and view angles, to compare the rendered Fresnel sheen and bed visibility."
+  },
+  "unverified": [
+    {
+      "field": "optics.scatteringCoefficient (pure water)",
+      "value": null,
+      "unit": "1/m",
+      "reason": "Morel's (1974) molecular scattering of pure water, of the order of 1e-3 /m at 500 nm with a lambda^-4.32 dependence, was not read at a source (the Ocean Optics Web Book page read gives no numbers)."
+    },
+    {
+      "field": "acoustic.absorptionThreeDecimals at 1 kHz and 4 kHz",
+      "value": [
+        0.015,
+        0.025
+      ],
+      "unit": "1",
+      "reason": "The source prints 0.15 and 0.25; the record reads them as misprints of 0.015 and 0.025."
+    },
+    {
+      "field": "design absorption and scattering as built (2026-09)",
+      "value": null,
+      "unit": "1/cm",
+      "reason": "The old build's Single Layer Water instances, set by eye: MI_Water_Pond absorption (0.020, 0.013, 0.016) and scattering (0.0012, 0.0024, 0.0016); MI_Water_Garden (0.022, 0.012, 0.018) and (0.0010, 0.0030, 0.0020); MI_Water_Canal (0.026, 0.016, 0.018) and (0.0008, 0.0016, 0.0012); MI_Ch_Pond (0.06, 0.02, 0.06) and (0.006, 0.014, 0.008), per centimetre in R, G, B. Not measurements. Source: C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/setup_project.py (WATERS table) and windows/Scripts/chenghuai.py (make_pond)"
+    },
+    {
+      "field": "surface.wrinkles at gallery air speeds",
+      "value": 1.9e-07,
+      "unit": "m",
+      "reason": "Extrapolating Paquier et al.'s law to indoor air movement of about 0.2 m/s gives wrinkles of about 0.2 um, a perfect mirror; the law was measured only at 1 to 10 m/s."
+    },
+    {
+      "field": "surface.slopeVariance for fetch-limited basins",
+      "value": null,
+      "unit": "1",
+      "reason": "No measurement of slope statistics on a basin 10 to 40 m long was found; the Cox-Munk law is an open-sea upper bound."
+    }
+  ]
+}

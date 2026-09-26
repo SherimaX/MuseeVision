@@ -1,0 +1,66 @@
+{
+  "schema": "musee.matter.history/1",
+  "key": "lead.patina",
+  "name": "Patina of lead",
+  "family": "accent",
+  "appliesTo": {
+    "families": [
+      "accent"
+    ],
+    "substances": [
+      "lead"
+    ],
+    "workings": [
+      "milled.lead",
+      "leaded"
+    ]
+  },
+  "surfaceLawTerms": [
+    "age",
+    "chemistry",
+    "wetness"
+  ],
+  "describes": "A fresh lead surface is bright bluish silver for hours; in moist air it tarnishes to dull grey under a thin, protective film of oxide and basic carbonate, with sulfate or chloride in city or sea air. While the film forms, rain on new sheet leaves uneven white carbonate blooms (hence patination oil). Once formed, the patina is stable: weathered lead is a soft, pale bluish grey, matt to satin, darker where water runs and paler where it lingers and dries.",
+  "terms": {
+    "film": {
+      "text": "Lead(II) carbonate is a common constituent of the protective layer; lead(II) sulfate or chloride may be present in urban or maritime environments; the layer makes the metal effectively inert.",
+      "grade": "secondary",
+      "source": "Wikipedia, 'Lead' (infobox; section 'Chemistry'), https://en.wikipedia.org/wiki/Lead"
+    },
+    "earlyStaining": {
+      "text": "New lead sheet can develop uneven white carbonate staining when exposed to rain and damp conditions; patination oil controls it.",
+      "grade": "secondary",
+      "source": "The Lead Lads, 'Leadwork: the ultimate guide to lead roofing' (BS EN 12588; BS 6915:2001+A1:2014), https://theleadlads.co.uk/leadwork-the-ultimate-guide-to-lead-roofing/"
+    },
+    "fresh": {
+      "text": "Freshly cut: shiny silvery with a bluish tint; tarnishes to dull grey on exposure to air.",
+      "grade": "secondary",
+      "source": "Wikipedia, 'Lead' (infobox; section 'Chemistry'), https://en.wikipedia.org/wiki/Lead"
+    }
+  },
+  "bySubstance": {
+    "came": {
+      "text": "Inside, out of the rain, came patinates only to dull grey; outside it weathers like the sheet.",
+      "grade": "design",
+      "source": "MuseeVision/Journal/Decisions.md, D-001 (the design is the finished museum) and D-017 (port the finished rooms; the as-built material values seed the records)"
+    }
+  },
+  "photograph": "Dull, pale bluish grey; whitish blooms at drips and laps; darker streaks where water runs off.",
+  "unverified": [
+    {
+      "field": "terms.patinaAlbedo",
+      "text": "albedo of patinated lead",
+      "reason": "No measured reflectance of weathered lead was read; the as-built albedo (lin #7E8285) is a design value."
+    },
+    {
+      "field": "terms.runoffStaining",
+      "text": "white run-off staining below lead",
+      "reason": "Lead run-off is said to stain stone and glass below it; not read from a source."
+    }
+  ],
+  "sources": [
+    "Wikipedia, 'Lead' (infobox; section 'Chemistry'), https://en.wikipedia.org/wiki/Lead",
+    "The Lead Lads, 'Leadwork: the ultimate guide to lead roofing' (BS EN 12588; BS 6915:2001+A1:2014), https://theleadlads.co.uk/leadwork-the-ultimate-guide-to-lead-roofing/",
+    "MuseeVision/Journal/Decisions.md, D-001 (the design is the finished museum) and D-017 (port the finished rooms; the as-built material values seed the records)"
+  ]
+}

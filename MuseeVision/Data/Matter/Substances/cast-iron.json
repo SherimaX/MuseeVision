@@ -1,0 +1,326 @@
+{
+  "schema": "musee.matter.substance/1",
+  "key": "cast-iron",
+  "name": "Grey cast iron: Victorian architectural castings",
+  "family": "accent",
+  "accentOf": "glass",
+  "summary": "Grey (flake-graphite) cast iron: remelted pig iron with about 4 % carbon, poured into green-sand moulds, strong in compression and brittle in tension. In Albion it makes the clustered shafts that rise from the stone capitals (6.2 to 9.7 m) on bolted shoes, the ridges, ventilators, rainwater heads and downpipes; it is always seen painted.",
+  "dossier": "Docs/Matter/cast-iron.md",
+  "aliases": [
+    "grey iron",
+    "gray iron",
+    "flake graphite iron",
+    "structural cast iron",
+    "EN-GJL (modern European designation)"
+  ],
+  "workings": [
+    "cast.iron",
+    "painted.iron"
+  ],
+  "histories": [
+    "iron.paint-ageing",
+    "iron.corrosion"
+  ],
+  "identity": {
+    "class": "ferrous; hypoeutectic grey cast iron (flake graphite in a ferrite-pearlite matrix), sand cast",
+    "designations": [
+      {
+        "system": "ASTM A48 (grey iron castings)",
+        "designation": "Class 20 to Class 30",
+        "source": "Wikipedia, 'Gray iron' (ASTM A48 table cited to P. A. Schweitzer, Metallic Materials: Physical, Mechanical, and Corrosion Properties, CRC Press 2003, p. 73), https://en.wikipedia.org/wiki/Gray_iron",
+        "grade": "secondary",
+        "note": "The modern classes whose strength and stiffness bracket 19th-century structural grey iron; Victorian iron was not made to any class. The bracket is this record's reading (see unverified)."
+      }
+    ],
+    "chosenBecause": [
+      {
+        "text": "Grey cast iron is the form met in Victorian buildings: re-melted pig iron shaped by sand casting.",
+        "grade": "secondary",
+        "source": "M. Bussell, '19th-century Structural Ironwork in Buildings: Understanding, Care and Re-use', The Building Conservation Directory (2011), https://www.buildingconservation.com/articles/structural-ironwork/structural-ironwork.htm ; Historic Environment Scotland, Engine Shed, 'Iron' (Building advice: building materials), https://www.engineshed.scot/building-advice/building-materials/iron/"
+      },
+      {
+        "text": "At the Oxford University Museum the first roof, built entirely of wrought iron, failed in February 1858 when thicker glass was specified; Skidmore rebuilt it by early 1859 on structural cast-iron columns and kept the decorative wrought iron.",
+        "grade": "secondary",
+        "source": "Oxford University Museum of Natural History, 'Design and decoration: Central Court Roof', https://oum-ox.shorthandstories.com/oumnh-design-and-decoration/central-court-roof/ ; Oxford University Museum of Natural History, 'The Museum's Architecture', https://oumnh.ox.ac.uk/learn-architecture"
+      }
+    ]
+  },
+  "composition": {
+    "standard": "none (historic iron); values are the carbon of the melt and the typical ranges of grey iron",
+    "C": {
+      "min": 4.0,
+      "max": 4.5,
+      "unit": "wt%",
+      "grade": "secondary",
+      "source": "M. Bussell, '19th-century Structural Ironwork in Buildings: Understanding, Care and Re-use', The Building Conservation Directory (2011), https://www.buildingconservation.com/articles/structural-ironwork/structural-ironwork.htm",
+      "conditions": "molten pig iron",
+      "note": "'4-4.5 per cent'"
+    },
+    "Cgeneral": {
+      "value": 4,
+      "unit": "wt%",
+      "grade": "guidance",
+      "source": "Historic Environment Scotland, Engine Shed, 'Iron' (Building advice: building materials), https://www.engineshed.scot/building-advice/building-materials/iron/",
+      "note": "'around 4%', much of it as graphite flakes"
+    },
+    "CtypicalRange": {
+      "min": 2.5,
+      "max": 4.7,
+      "unit": "wt%",
+      "grade": "secondary",
+      "source": "Wikipedia, 'Gray iron' (ASTM A48 table cited to P. A. Schweitzer, Metallic Materials: Physical, Mechanical, and Corrosion Properties, CRC Press 2003, p. 73), https://en.wikipedia.org/wiki/Gray_iron",
+      "conditions": "range that gives a graphitic microstructure"
+    },
+    "SitypicalRange": {
+      "min": 1,
+      "max": 8,
+      "unit": "wt%",
+      "grade": "secondary",
+      "source": "Wikipedia, 'Gray iron' (ASTM A48 table cited to P. A. Schweitzer, Metallic Materials: Physical, Mechanical, and Corrosion Properties, CRC Press 2003, p. 73), https://en.wikipedia.org/wiki/Gray_iron",
+      "conditions": "range that gives a graphitic microstructure"
+    },
+    "graphiteVolume": {
+      "min": 0.06,
+      "max": 0.1,
+      "unit": "1",
+      "grade": "secondary",
+      "source": "Wikipedia, 'Gray iron' (ASTM A48 table cited to P. A. Schweitzer, Metallic Materials: Physical, Mechanical, and Corrosion Properties, CRC Press 2003, p. 73), https://en.wikipedia.org/wiki/Gray_iron",
+      "note": "'Graphite may occupy 6 to 10% of the volume of grey iron.'"
+    }
+  },
+  "formation": {
+    "how": "Iron ore is smelted in a blast furnace to pig iron, which carries 4 to 4.5 % carbon. The founder remelts the pig (in a cupola) and pours it at about 1300 degC into a mould of green sand rammed round a wooden pattern made about one per cent oversize, because the iron shrinks as it cools. As it freezes, most of the carbon comes out of solution as flakes of graphite, randomly oriented, which give a fresh fracture its grey, crystalline look and act as voids with sharp corners: the iron is very strong in compression, but in tension it cracks and fails abruptly. The skin that freezes against the sand is hard and resists corrosion better than a machined face.",
+    "facts": {
+      "castingTemperature": {
+        "value": 1300,
+        "unit": "degC",
+        "grade": "secondary",
+        "source": "M. Bussell, '19th-century Structural Ironwork in Buildings: Understanding, Care and Re-use', The Building Conservation Directory (2011), https://www.buildingconservation.com/articles/structural-ironwork/structural-ironwork.htm",
+        "note": "'approximately 1300 degC'"
+      },
+      "patternShrinkageAllowance": {
+        "value": 0.01,
+        "unit": "1",
+        "grade": "secondary",
+        "source": "M. Bussell, '19th-century Structural Ironwork in Buildings: Understanding, Care and Re-use', The Building Conservation Directory (2011), https://www.buildingconservation.com/articles/structural-ironwork/structural-ironwork.htm",
+        "note": "pattern 'about one per cent' oversize"
+      },
+      "pureIronMeltingPoint": {
+        "value": 1535,
+        "unit": "degC",
+        "grade": "secondary",
+        "source": "M. Bussell, '19th-century Structural Ironwork in Buildings: Understanding, Care and Re-use', The Building Conservation Directory (2011), https://www.buildingconservation.com/articles/structural-ironwork/structural-ironwork.htm",
+        "note": "cast iron melts 'considerably below that of pure iron, c1535 degC'"
+      },
+      "fracture": {
+        "text": "Grey and crystalline when fractured; the graphite flakes appear as fine lines on a polished section.",
+        "grade": "secondary",
+        "source": "Historic Environment Scotland, Engine Shed, 'Iron' (Building advice: building materials), https://www.engineshed.scot/building-advice/building-materials/iron/ ; Wikipedia, 'Gray iron' (ASTM A48 table cited to P. A. Schweitzer, Metallic Materials: Physical, Mechanical, and Corrosion Properties, CRC Press 2003, p. 73), https://en.wikipedia.org/wiki/Gray_iron"
+      },
+      "failure": {
+        "text": "Fails 'abruptly in a brittle manner from cracking' in tension, at the graphite flakes' sharp corners; 'actually stronger than mild steel' in compression.",
+        "grade": "secondary",
+        "source": "M. Bussell, '19th-century Structural Ironwork in Buildings: Understanding, Care and Re-use', The Building Conservation Directory (2011), https://www.buildingconservation.com/articles/structural-ironwork/structural-ironwork.htm"
+      },
+      "skin": {
+        "text": "'good resistance to corrosion, thanks to the tough surface skin'",
+        "grade": "secondary",
+        "source": "M. Bussell, '19th-century Structural Ironwork in Buildings: Understanding, Care and Re-use', The Building Conservation Directory (2011), https://www.buildingconservation.com/articles/structural-ironwork/structural-ironwork.htm"
+      }
+    }
+  },
+  "physical": {
+    "tensileStrength": {
+      "value": 152,
+      "unit": "MPa",
+      "grade": "secondary",
+      "source": "Wikipedia, 'Gray iron' (ASTM A48 table cited to P. A. Schweitzer, Metallic Materials: Physical, Mechanical, and Corrosion Properties, CRC Press 2003, p. 73), https://en.wikipedia.org/wiki/Gray_iron",
+      "asReported": "22 ksi",
+      "conditions": "ASTM A48 Class 20"
+    },
+    "tensileStrengthClass30": {
+      "value": 214,
+      "unit": "MPa",
+      "grade": "secondary",
+      "source": "Wikipedia, 'Gray iron' (ASTM A48 table cited to P. A. Schweitzer, Metallic Materials: Physical, Mechanical, and Corrosion Properties, CRC Press 2003, p. 73), https://en.wikipedia.org/wiki/Gray_iron",
+      "asReported": "31 ksi",
+      "conditions": "ASTM A48 Class 30"
+    },
+    "compressiveStrength": {
+      "value": 572,
+      "unit": "MPa",
+      "grade": "secondary",
+      "source": "Wikipedia, 'Gray iron' (ASTM A48 table cited to P. A. Schweitzer, Metallic Materials: Physical, Mechanical, and Corrosion Properties, CRC Press 2003, p. 73), https://en.wikipedia.org/wiki/Gray_iron",
+      "asReported": "83 ksi",
+      "conditions": "ASTM A48 Class 20"
+    },
+    "youngsModulus": {
+      "min": 69,
+      "max": 97,
+      "unit": "GPa",
+      "grade": "secondary",
+      "source": "Wikipedia, 'Gray iron' (ASTM A48 table cited to P. A. Schweitzer, Metallic Materials: Physical, Mechanical, and Corrosion Properties, CRC Press 2003, p. 73), https://en.wikipedia.org/wiki/Gray_iron",
+      "asReported": "10 to 14 Mpsi",
+      "conditions": "tensile modulus, ASTM A48 Classes 20 to 30; the modulus falls as the graphite share rises"
+    },
+    "thermalConductivity": {
+      "value": 53,
+      "unit": "W/(m*K)",
+      "grade": "secondary",
+      "source": "nuclear-power.com, 'Properties of Gray Cast Iron - ASTM A48 Class 40' (citing the US DOE Fundamentals Handbook, Material Science, 1993, and W. D. Callister and D. G. Rethwisch, Materials Science and Engineering, 9th ed., 2013), https://www.nuclear-power.com/nuclear-engineering/metals-what-are-metals/cast-iron/gray-iron-gray-cast-iron/properties-of-gray-cast-iron/",
+      "conditions": "ASTM A48 Class 40"
+    }
+  },
+  "optics": {
+    "kind": "conductor",
+    "note": "Victorian iron is never seen bare in Albion: it is always under its paint (painted.iron), whose optics are a dielectric coat. For a cut or worn-through edge, the bare metal's constants are those of iron, already recorded (Johnson and Christy 1974) in the steel record; a grey cast iron's graphite flakes and a wrought iron's slag stringers lower and darken a bare face but were not measured here.",
+    "spectral": {
+      "text": "Iron n,k (0.381-0.756 um) and the derived F0 and F82 triples are in the steel record; they are not copied here.",
+      "grade": "record",
+      "source": "MuseeVision/Data/Matter/Substances/steel.json (optics.spectral: P. B. Johnson and R. W. Christy 1974, Fe; optics.f0)"
+    }
+  },
+  "acoustic": {
+    "note": "The iron members are slender and overhead; they are not an absorbing surface of the court. What the design asks of them is sound, not absorption: 'Rain runs down the glass and drums on the ribs' (Albion's Outside board), which is Sound's to model.",
+    "design": {
+      "text": "Rain runs down the glass and drums on the ribs; the court goes a stop darker and the band dims.",
+      "grade": "design",
+      "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/plan/proposals/albion/canvas/Outside.dc.html (approved proposal, D-001)"
+    }
+  },
+  "stock": {
+    "castings": {
+      "text": "Castings are made one pattern at a time: a shaft, a shoe or a rainwater head is a single pour, so there is no stock length; joints are bolted flanges and spigots, not welds.",
+      "grade": "secondary",
+      "source": "M. Bussell, '19th-century Structural Ironwork in Buildings: Understanding, Care and Re-use', The Building Conservation Directory (2011), https://www.buildingconservation.com/articles/structural-ironwork/structural-ironwork.htm ; C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Source/MuseeVision/Albion/AlbionIron.cpp (frozen reference), header comment and constants kBarDepth, kPurlinDepth, kMainDepth, kLightDepth"
+    },
+    "asBuiltShafts": {
+      "text": "Clustered cast-iron shafts on bolted shoes over the stone capitals, from 6.2 m to their capital at 9.70 m under the box girder that carries the valley gutter at 10.0 m; bolt heads 16 mm, rivet heads 11 mm (radii in the frozen code).",
+      "grade": "design",
+      "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Source/MuseeVision/Albion/AlbionPlan.h (frozen reference) (CapitalTop, ClusterTop, Spring) ; C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Source/MuseeVision/Albion/AlbionIron.cpp (frozen reference), header comment and constants kBarDepth, kPurlinDepth, kMainDepth, kLightDepth (Bolt R 0.016, Rivet R 0.011)"
+    },
+    "boardShaft": {
+      "text": "IRON SHAFT, CLUSTERED, 6.2-10.0",
+      "grade": "design",
+      "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/plan/proposals/albion/canvas/Details.dc.html (approved proposal, D-001)"
+    }
+  },
+  "physicalMaterial": {
+    "footfallClass": "metal",
+    "note": "Overhead, except the downpipes and rainwater goods at ground level outside; nothing of it is walked on."
+  },
+  "uses": [
+    {
+      "where": "Albion: the clustered shafts from the capitals (6.2 m) to 9.7 m, their bolted shoes",
+      "working": "cast.iron",
+      "histories": [
+        "iron.paint-ageing",
+        "iron.corrosion"
+      ],
+      "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Source/MuseeVision/Albion/AlbionIron.cpp (frozen reference), header comment and constants kBarDepth, kPurlinDepth, kMainDepth, kLightDepth ; C:/Users/anan9/Desktop/Projects/Musee Vision/plan/proposals/albion/canvas/Details.dc.html (approved proposal, D-001)",
+      "grade": "design"
+    },
+    {
+      "where": "Albion: ridges, ventilators, rainwater heads and downpipes",
+      "working": "cast.iron",
+      "histories": [
+        "iron.paint-ageing",
+        "iron.corrosion"
+      ],
+      "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Source/MuseeVision/Albion/AlbionIron.cpp (frozen reference), header comment and constants kBarDepth, kPurlinDepth, kMainDepth, kLightDepth",
+      "grade": "design"
+    }
+  ],
+  "precedent": {
+    "oxford": {
+      "text": "Oxford University Museum of Natural History (Woodward, with Francis Skidmore of Coventry for the iron): clusters of iron columns and girders; the capitals of the iron clusters carry wrought-iron flowers and foliage; sixteen botanical spandrels in the central aisle. The roof's painted decoration was altered during building and repainted in April 1864 by G. Thicke and J. Randall (an inscription found in 2013).",
+      "grade": "secondary",
+      "source": "Oxford University Museum of Natural History, 'Design and decoration: Central Court Roof', https://oum-ox.shorthandstories.com/oumnh-design-and-decoration/central-court-roof/"
+    }
+  },
+  "asBuilt": {
+    "text": "The as-built court (D-017) painted all its iron one dark slate grey, satin, as a non-metal: the values are the paint's, recorded in painted.iron.",
+    "grade": "design",
+    "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/albion_materials.py (frozen reference) (metal_specs: MI_Albion_Iron)"
+  },
+  "photograph": [
+    "Look for the paint, not the metal: many coats softening the arrises of the castings, runs and sags in the hollows of the cluster.",
+    "Cast details: parting lines where the mould halves met, draft on the faces, generous fillets, bolt heads and nuts at every flange, no welds anywhere.",
+    "Where the paint has failed (at shoes, bolt heads and anywhere water lies), rust bleeds down from the joint."
+  ],
+  "evidence": [],
+  "evidenceRejected": [
+    {
+      "path": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR/M5",
+      "set": "ambientCG Metal029 ('satin lacquer orange peel (pearl steel)' in CREDITS.md)",
+      "reason": "Procedurally generated (ambientCG creation method 'Procedural'), not a photograph of painted iron; the as-built MI_Albion_Iron used it only for relief (colour_amount 0). The steel group rejected it on the same grounds.",
+      "source": "https://ambientcg.com/view?id=Metal029 ; MuseeVision/Data/Matter/Substances/steel.json (evidenceRejected)",
+      "grade": "record"
+    }
+  ],
+  "evidenceSearch": {
+    "searched": [
+      "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt (PBR, Textures, Journeys, Albion and their CREDITS files)",
+      "C:/Users/anan9/Desktop/Projects/Musee Vision/assets/albion (glass, paintings, vessels)"
+    ],
+    "found": "No CC0 photograph of Victorian cast or wrought iron, painted or bare, is on this PC. SourceArt/PBR/M5 is procedural (see evidenceRejected).",
+    "tier": "The iron is always seen under its paint (painted.iron). A tier-(b) reference would be a photographed set of painted Victorian ironwork (Oxford's court, a train shed); none is downloaded (no downloads in this order)."
+  },
+  "familyDeclaration": {
+    "text": "D-014 admits the families stone, white, bronze, oak, accent, glass, water and living; an accent names the core family it ties back to. Albion's iron exists to carry the glass of the vaults and screens (the stone stops at the capitals; above 6.2 m everything is iron and glass), as the Rotunda's steel lattice does, so it is declared an accent of the glass family, the same reading the metal group made for steel. The Architect may overturn it.",
+    "grade": "design",
+    "source": "MuseeVision/Journal/Decisions.md, D-014 (Matter: families and accents; Form: joints 'welded and faired' for the Elan's pearl shell; Glazing: stained glass with lead cames) ; MuseeVision/Data/Matter/Substances/steel.json (familyDeclaration)"
+  },
+  "unverified": [
+    {
+      "field": "physical.density",
+      "value": null,
+      "min": 7100,
+      "max": 7300,
+      "unit": "kg/m3",
+      "reason": "Grey iron's density is commonly quoted near 7.1-7.2 g/cm3, but only weak web sources (and one listing 7.5 g/cm3) were read; no handbook value was confirmed."
+    },
+    {
+      "field": "physical.thermalExpansion",
+      "value": null,
+      "min": 1e-05,
+      "max": 1.1e-05,
+      "unit": "1/K",
+      "reason": "Commonly quoted near 10-11 x 10^-6 /K for grey iron; no primary source was read."
+    },
+    {
+      "field": "composition (19th-century structural iron)",
+      "text": "C 3.2-3.3, Si 0.9-1.1, P 0.2-0.3, Mn 1.1-1.7, S 0.05-0.07 wt%",
+      "reason": "A case-study paper on failed historic cast-iron columns (Infrastructures 5(9) 71, MDPI 2020) is reported by a search summary to give C 3.2-3.3, Si 0.9-1.1, P 0.2-0.3, Mn 1.1-1.7, S 0.05-0.07 wt% for later-19th-century iron; the paper could not be read (HTTP 403)."
+    },
+    {
+      "field": "identity.designations",
+      "text": "ASTM A48 Class 20-30",
+      "reason": "Bracketing Victorian structural grey iron by ASTM A48 Classes 20-30 is this record's reading of Bussell's qualitative account; historic test data (Bussell's SCI appraisal guide) were not read."
+    },
+    {
+      "field": "precedent.oxford (paint)",
+      "text": "metals painted in the colour of their oxides",
+      "reason": "A search summary said Skidmore wished 'to paint the metals in the colour of their oxides', with russet colours and stencilling; the museum's own page confirms stencilled patterns and the 1864 repainting but not the oxide colours."
+    }
+  ],
+  "sources": [
+    "Wikipedia, 'Gray iron' (ASTM A48 table cited to P. A. Schweitzer, Metallic Materials: Physical, Mechanical, and Corrosion Properties, CRC Press 2003, p. 73), https://en.wikipedia.org/wiki/Gray_iron",
+    "M. Bussell, '19th-century Structural Ironwork in Buildings: Understanding, Care and Re-use', The Building Conservation Directory (2011), https://www.buildingconservation.com/articles/structural-ironwork/structural-ironwork.htm",
+    "Historic Environment Scotland, Engine Shed, 'Iron' (Building advice: building materials), https://www.engineshed.scot/building-advice/building-materials/iron/",
+    "Oxford University Museum of Natural History, 'Design and decoration: Central Court Roof', https://oum-ox.shorthandstories.com/oumnh-design-and-decoration/central-court-roof/",
+    "Oxford University Museum of Natural History, 'The Museum's Architecture', https://oumnh.ox.ac.uk/learn-architecture",
+    "nuclear-power.com, 'Properties of Gray Cast Iron - ASTM A48 Class 40' (citing the US DOE Fundamentals Handbook, Material Science, 1993, and W. D. Callister and D. G. Rethwisch, Materials Science and Engineering, 9th ed., 2013), https://www.nuclear-power.com/nuclear-engineering/metals-what-are-metals/cast-iron/gray-iron-gray-cast-iron/properties-of-gray-cast-iron/",
+    "MuseeVision/Data/Matter/Substances/steel.json (optics.spectral: P. B. Johnson and R. W. Christy 1974, Fe; optics.f0)",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/plan/proposals/albion/canvas/Outside.dc.html (approved proposal, D-001)",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Source/MuseeVision/Albion/AlbionIron.cpp (frozen reference), header comment and constants kBarDepth, kPurlinDepth, kMainDepth, kLightDepth",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Source/MuseeVision/Albion/AlbionPlan.h (frozen reference) (CapitalTop, ClusterTop, Spring)",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Source/MuseeVision/Albion/AlbionIron.cpp (frozen reference), header comment and constants kBarDepth, kPurlinDepth, kMainDepth, kLightDepth (Bolt R 0.016, Rivet R 0.011)",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/plan/proposals/albion/canvas/Details.dc.html (approved proposal, D-001)",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/albion_materials.py (frozen reference) (metal_specs: MI_Albion_Iron)",
+    "https://ambientcg.com/view?id=Metal029",
+    "MuseeVision/Data/Matter/Substances/steel.json (evidenceRejected)",
+    "MuseeVision/Journal/Decisions.md, D-014 (Matter: families and accents; Form: joints 'welded and faired' for the Elan's pearl shell; Glazing: stained glass with lead cames)",
+    "MuseeVision/Data/Matter/Substances/steel.json (familyDeclaration)"
+  ]
+}

@@ -1,0 +1,140 @@
+{
+  "schema": "musee.matter.working/1",
+  "key": "parquet.versailles",
+  "name": "Parquet de Versailles (laid in panels)",
+  "appliesTo": {
+    "families": [
+      "oak"
+    ],
+    "substances": [
+      "oak"
+    ]
+  },
+  "over": [
+    "sawn.quarter",
+    "sawn.plain"
+  ],
+  "process": "Solid oak is made up into square panels (feuilles): a frame and a lattice of bars interlaced on the diagonal at 45 degrees round small squares, every piece tongued, grooved, tenoned and pegged, assembled by hand without glue. The panels are laid square or on the diagonal, traditionally nailed to joists (lambourdes) over the floor structure, and finished. Designed about 1684 for the palace, where it replaced marble floors; by 1693 the lozenge 'à la nouvelle manière' had displaced squared patterns.",
+  "history": {
+    "date": {
+      "value": 1684,
+      "unit": "year CE",
+      "grade": "secondary",
+      "source": "Marc Maison, 'Parquet de Versailles', Architectural antiques resources, https://www.marcmaison.fr/architectural-antiques-resources/parquet-de-versailles (read 2026-09-26)",
+      "note": "designed around 1684 for the Palace of Versailles, replacing marble"
+    },
+    "lozenge": {
+      "value": 1693,
+      "unit": "year CE",
+      "grade": "secondary",
+      "source": "Marc Maison, 'Parquet de Versailles', Architectural antiques resources, https://www.marcmaison.fr/architectural-antiques-resources/parquet-de-versailles (read 2026-09-26)",
+      "note": "by 1693 most floors were 'losange à la nouvelle manière'"
+    },
+    "panelWidthStandard": {
+      "text": "A standard of 3-4 feet (97-130 cm) according to the room was established by 1770.",
+      "grade": "secondary",
+      "source": "Marc Maison, 'Parquet de Versailles', Architectural antiques resources, https://www.marcmaison.fr/architectural-antiques-resources/parquet-de-versailles (read 2026-09-26)"
+    }
+  },
+  "construction": {
+    "joints": {
+      "value": 42,
+      "unit": "count",
+      "grade": "secondary",
+      "source": "Marc Maison, 'Parquet de Versailles', Architectural antiques resources, https://www.marcmaison.fr/architectural-antiques-resources/parquet-de-versailles (read 2026-09-26)",
+      "note": "'42 mortaises, 42 tenons, et 42 chevilles, assemblés à la main, sans colle, et cirés'"
+    },
+    "pattern": {
+      "text": "Squares and interlaced grooved-and-tongued bars laid at 45 degrees inside a frame; pegs at the four corners.",
+      "grade": "manufacturer",
+      "source": "Parqueterie Gagnieu, 'Panneau Versailles, parquet en chêne massif', https://www.gagnieu.fr/fabrication/panneaux-parquets-mesure/panneau-versailles-parquet-en-chene-massif-p22.php"
+    },
+    "pegs": {
+      "text": "A true Versailles panel is assembled by hand and every piece is held by pegs that remain visible.",
+      "grade": "secondary",
+      "source": "PagesJaunes (rédaction), 'Parquet Versailles', updated 23/07/2025, https://parquet.pagesjaunes.fr/astuce/voir/578561/parquet-versailles"
+    },
+    "modern": {
+      "text": "'New generation' panels 14/15 mm thick have glued, not pegged, pieces (formats such as 600 x 600 and 800 x 800 mm).",
+      "grade": "secondary",
+      "source": "PagesJaunes (rédaction), 'Parquet Versailles', updated 23/07/2025, https://parquet.pagesjaunes.fr/astuce/voir/578561/parquet-versailles"
+    }
+  },
+  "stock": {
+    "panelWidth": {
+      "min": 0.97,
+      "max": 1.3,
+      "unit": "m",
+      "grade": "secondary",
+      "source": "Marc Maison, 'Parquet de Versailles', Architectural antiques resources, https://www.marcmaison.fr/architectural-antiques-resources/parquet-de-versailles (read 2026-09-26)",
+      "asReported": "3-4 feet (97-130 cm)"
+    },
+    "panelTraditional": {
+      "value": 1.0,
+      "unit": "m",
+      "grade": "secondary",
+      "source": "PagesJaunes (rédaction), 'Parquet Versailles', updated 23/07/2025, https://parquet.pagesjaunes.fr/astuce/voir/578561/parquet-versailles",
+      "asReported": "1 000 x 1 000 mm, 23 mm thick, nailed to lambourdes"
+    },
+    "thickness": {
+      "min": 20,
+      "max": 35,
+      "unit": "mm",
+      "grade": "secondary",
+      "source": "Marc Maison, 'Parquet de Versailles', Architectural antiques resources, https://www.marcmaison.fr/architectural-antiques-resources/parquet-de-versailles (read 2026-09-26)",
+      "asReported": "3/4 to 1 1/2 inches (2-3.5 cm); up to 2 inches (5 cm) on damp ground floors"
+    },
+    "thicknessTraditional": {
+      "value": 23,
+      "unit": "mm",
+      "grade": "secondary",
+      "source": "PagesJaunes (rédaction), 'Parquet Versailles', updated 23/07/2025, https://parquet.pagesjaunes.fr/astuce/voir/578561/parquet-versailles"
+    },
+    "museum": {
+      "text": "Panels on the Salon floor's existing 1.2 m grid, 22 mm thick, flush with the travertine under each arch with a brass strip between; viewing stones Ø 0.9 m with a gilt ring set in the oak.",
+      "grade": "design",
+      "source": "plan/proposals/salon-interior/canvas/Details.dc.html (approved Salon interior proposal)"
+    }
+  },
+  "laying": {
+    "traditional": {
+      "text": "Nailed on joists (lambourdes) and beams forming the floor structure.",
+      "grade": "secondary",
+      "source": "Marc Maison, 'Parquet de Versailles', Architectural antiques resources, https://www.marcmaison.fr/architectural-antiques-resources/parquet-de-versailles (read 2026-09-26) ; PagesJaunes (rédaction), 'Parquet Versailles', updated 23/07/2025, https://parquet.pagesjaunes.fr/astuce/voir/578561/parquet-versailles"
+    },
+    "museum": "On the Salon's slab, in place of the travertine it replaces, so the oak's top meets the stone flush (Form sets out the panels on the grid; Site owns the brass threshold strip)."
+  },
+  "finish": {
+    "historic": {
+      "text": "Waxed.",
+      "grade": "secondary",
+      "source": "Marc Maison, 'Parquet de Versailles', Architectural antiques resources, https://www.marcmaison.fr/architectural-antiques-resources/parquet-de-versailles (read 2026-09-26)"
+    },
+    "museum": "oiled.hardwax (matt), laid over this working; wax is the historic alternative."
+  },
+  "photograph": [
+    "A grid of square panels, each a woven diagonal lattice of short bars round small squares, framed; peg heads visible as small dots at the joints.",
+    "Every bar's grain runs along it, so the lattice reads by the light changing from bar to bar as the grain turns 90 degrees.",
+    "Fine dark joints between panels; a slight lip or gap here and there after the seasons."
+  ],
+  "unverified": [
+    {
+      "field": "stock.barWidth",
+      "value": null,
+      "unit": "mm",
+      "reason": "The widths of the frame and lattice bars in a 1.2 m panel were not read; they are Form's drawing, after a measured panel."
+    },
+    {
+      "field": "finish.museum",
+      "value": null,
+      "unit": "text",
+      "reason": "Oil (hardwax) instead of the historic wax is this record's choice for traffic; the design says 'warm oak, no glare'."
+    }
+  ],
+  "sources": [
+    "Marc Maison, 'Parquet de Versailles', Architectural antiques resources, https://www.marcmaison.fr/architectural-antiques-resources/parquet-de-versailles (read 2026-09-26)",
+    "PagesJaunes (rédaction), 'Parquet Versailles', updated 23/07/2025, https://parquet.pagesjaunes.fr/astuce/voir/578561/parquet-versailles",
+    "Parqueterie Gagnieu, 'Panneau Versailles, parquet en chêne massif', https://www.gagnieu.fr/fabrication/panneaux-parquets-mesure/panneau-versailles-parquet-en-chene-massif-p22.php",
+    "plan/proposals/salon-interior/canvas/Details.dc.html (approved Salon interior proposal)"
+  ]
+}

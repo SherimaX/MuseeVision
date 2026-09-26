@@ -1,0 +1,85 @@
+{
+  "schema": "musee.matter.history/1",
+  "key": "water.dissolved-organic",
+  "name": "Dissolved organic matter (tea-coloured water)",
+  "family": "water",
+  "describes": "Leaves, roots and soil leach humic and fulvic substances and tannins into a pond. This dissolved 'yellow substance' absorbs most strongly in the blue and ultraviolet and falls off exponentially toward the red, so it tints water yellow-brown (tea-coloured) and, with algae, olive. It builds up with leaf fall and run-off from planted banks and is diluted by fresh water. It acts through the whole volume; it does not scatter.",
+  "terms": {
+    "model": {
+      "text": "a_y(lambda) = a_y(lambda0) exp[-0.014 (lambda - lambda0)], lambda in nm (Bricaud, Morel and Prieur 1981).",
+      "grade": "secondary",
+      "source": "A. Morel, D. Antoine (2011) 'Pigment index retrieval in Case 1 waters', MERIS ATBD 2.9, PO-TN-MEL-GS-0005 issue 4 rev. 3, ACRI-ST for ESA, yellow-substance term (quoting A. Bricaud, A. Morel, L. Prieur (1981) 'Absorption by dissolved organic matter of the sea (yellow substance) in the UV and visible domains', Limnology and Oceanography 26:43-53), https://earth.esa.int/eogateway/documents/20142/37627/MERIS-ATBD-2-9.pdf"
+    },
+    "spectralSlope": {
+      "value": 0.014,
+      "unit": "1/nm",
+      "grade": "secondary",
+      "source": "A. Morel, D. Antoine (2011) 'Pigment index retrieval in Case 1 waters', MERIS ATBD 2.9, PO-TN-MEL-GS-0005 issue 4 rev. 3, ACRI-ST for ESA, yellow-substance term (quoting A. Bricaud, A. Morel, L. Prieur (1981) 'Absorption by dissolved organic matter of the sea (yellow substance) in the UV and visible domains', Limnology and Oceanography 26:43-53), https://earth.esa.int/eogateway/documents/20142/37627/MERIS-ATBD-2-9.pdf",
+      "conditions": "reference wavelength lambda0 = 440 nm in this record"
+    },
+    "relativeSpectrum": {
+      "axis": "wavelength",
+      "axisUnit": "nm",
+      "axisValues": [
+        400,
+        450,
+        500,
+        550,
+        600,
+        650,
+        700
+      ],
+      "unit": "1",
+      "values": [
+        1.7507,
+        0.8694,
+        0.4317,
+        0.2144,
+        0.1065,
+        0.0529,
+        0.0263
+      ],
+      "grade": "derived",
+      "derivation": "exp(-0.014 (lambda - 440)): a_y(lambda)/a_y(440)",
+      "source": "A. Morel, D. Antoine (2011) 'Pigment index retrieval in Case 1 waters', MERIS ATBD 2.9, PO-TN-MEL-GS-0005 issue 4 rev. 3, ACRI-ST for ESA, yellow-substance term (quoting A. Bricaud, A. Morel, L. Prieur (1981) 'Absorption by dissolved organic matter of the sea (yellow substance) in the UV and visible domains', Limnology and Oceanography 26:43-53), https://earth.esa.int/eogateway/documents/20142/37627/MERIS-ATBD-2-9.pdf",
+      "note": "Multiply by the basin's a_y(440) in 1/m to get the absorption."
+    },
+    "strength": {
+      "text": "The magnitude a_y(440) is set per basin: it is the one free parameter of this mechanism.",
+      "grade": "secondary",
+      "source": "A. Morel, D. Antoine (2011) 'Pigment index retrieval in Case 1 waters', MERIS ATBD 2.9, PO-TN-MEL-GS-0005 issue 4 rev. 3, ACRI-ST for ESA, yellow-substance term (quoting A. Bricaud, A. Morel, L. Prieur (1981) 'Absorption by dissolved organic matter of the sea (yellow substance) in the UV and visible domains', Limnology and Oceanography 26:43-53), https://earth.esa.int/eogateway/documents/20142/37627/MERIS-ATBD-2-9.pdf"
+    }
+  },
+  "surfaceLawTerms": [
+    "age",
+    "chemistry"
+  ],
+  "drivers": [],
+  "photograph": [
+    "A tea tint in shallow water over a pale step; in depth it reads brown-black.",
+    "Seen together with algae it makes the olive of an old garden pond rather than a fresh green."
+  ],
+  "unverified": [
+    {
+      "field": "strength a_y(440) per basin",
+      "value": null,
+      "unit": "1/m",
+      "reason": "No measured a_y(440) for a garden pond was read. Values for eutrophic shallow lakes such as Lake Taihu appear in the literature (for example Y. Zhang et al. 2007, Hydrobiologia) but were not read at the source."
+    },
+    {
+      "field": "drivers",
+      "value": null,
+      "unit": "",
+      "reason": "That leaf fall and litter from planted banks raise dissolved organic matter (Chenghuai's pond) while a paved basin (the canal) gets little is limnological common knowledge, not read at a source; the ATBD read attributes marine yellow substance to algal decay and excretion."
+    },
+    {
+      "field": "spectralSlope for inland waters",
+      "value": null,
+      "unit": "1/nm",
+      "reason": "Inland waters show slopes other than the marine 0.014; no inland measurement was read."
+    }
+  ],
+  "sources": [
+    "A. Morel, D. Antoine (2011) 'Pigment index retrieval in Case 1 waters', MERIS ATBD 2.9, PO-TN-MEL-GS-0005 issue 4 rev. 3, ACRI-ST for ESA, yellow-substance term (quoting A. Bricaud, A. Morel, L. Prieur (1981) 'Absorption by dissolved organic matter of the sea (yellow substance) in the UV and visible domains', Limnology and Oceanography 26:43-53), https://earth.esa.int/eogateway/documents/20142/37627/MERIS-ATBD-2-9.pdf"
+  ]
+}

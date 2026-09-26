@@ -1,0 +1,374 @@
+{
+  "schema": "musee.matter.substance/1",
+  "key": "opal-glass",
+  "name": "Opal glass: white light-scattering glass, cased or flashed on clear",
+  "family": "glass",
+  "accentOf": null,
+  "summary": "Glass made milky white by a second phase dispersed through it (historically tin or arsenic oxide, bone ash, cryolite or fluorspar) that scatters light almost ideally in every direction. In the museum it is always a thin opal layer carried on clear glass: cased in mouth-blown globes (Albion's electroliers, the Reserve's pendants, the grounds' lamp standards) and flashed on drawn sheet (the Salon's bay-2 lantern, the Reserve's picture-light lenses).",
+  "dossier": "Docs/Matter/opal-glass.md",
+  "aliases": [
+    "opal",
+    "milk glass",
+    "flashed opal",
+    "cased opal",
+    "triplex opal",
+    "opaline (in part)"
+  ],
+  "workings": [
+    "flashed",
+    "blown.cased"
+  ],
+  "histories": [
+    "glass.soiling"
+  ],
+  "formation": {
+    "how": "An opal glass is melted with an opacifier that stays dissolved while the glass is hot and separates as it cools into tiny particles (or droplets) of a different refractive index; each particle scatters, and many together send light out in all directions, so the glass glows evenly and hides the lamp. A solid opal glass would absorb and back-scatter too much, so the trade carries a thin opal layer on clear glass: flashed on a drawn or blown sheet, or cased in a blown globe between clear layers.",
+    "opacifiers": {
+      "text": "Opacity is produced by 'oxide of tin, oxide of arsenic, phosphate of lime, cryolite or a mixture of felspar and fluorspar'.",
+      "grade": "historical",
+      "source": "H. J. Powell, W. Rosenhain and A. Nesbitt, 'Glass', Encyclopaedia Britannica, 11th ed. (1911), via Wikisource, https://en.wikisource.org/wiki/1911_Encyclop%C3%A6dia_Britannica/Glass"
+    },
+    "construction": {
+      "text": "OPALIKA is 'a colourless base glass which serves as a carrier material and a thin white flashed layer for producing a diffuse and shadow reducing light'.",
+      "grade": "manufacturer",
+      "source": "SCHOTT North America, 'OPALIKA' technical data sheet (970-3d/09/04-P), https://www.sydor.com/wp-content/uploads/SCHOTT-OPALIKA-Display-Glass.pdf"
+    },
+    "casedConstruction": {
+      "text": "Triplex: 'A thin opal layer is sandwiched in between two outer layers of clear glass'; the hand-blown inner clear form is overlaid with opal, then with clear.",
+      "grade": "manufacturer",
+      "source": "Arlico Lighting, 'Lucis: hand made opal glass lighting', https://arlico.co.uk/brands/lucis-hand-made-opal-glass-lighting/"
+    }
+  },
+  "optics": {
+    "kind": "volume scatterer (thin layer) on a clear dielectric carrier",
+    "luminousTransmittance": {
+      "value": 0.32,
+      "unit": "1",
+      "grade": "manufacturer",
+      "source": "SCHOTT North America, 'OPALIKA' technical data sheet (970-3d/09/04-P), https://www.sydor.com/wp-content/uploads/SCHOTT-OPALIKA-Display-Glass.pdf",
+      "conditions": "tau_vA (illuminant A), nominal opal layer 0.45 mm; tolerance +/- 0.08 because the layer varies across the sheet",
+      "note": "'32 +/- 8'"
+    },
+    "spectralTransmittance": {
+      "axis": "wavelength",
+      "axisUnit": "um",
+      "axisValues": [
+        0.3,
+        0.325,
+        0.35,
+        0.375,
+        0.4,
+        0.45,
+        0.5,
+        0.55,
+        0.6,
+        0.65,
+        0.7,
+        0.75,
+        0.8
+      ],
+      "unit": "1",
+      "values": [
+        0.01,
+        0.12,
+        0.25,
+        0.28,
+        0.29,
+        0.3,
+        0.31,
+        0.32,
+        0.325,
+        0.33,
+        0.335,
+        0.34,
+        0.345
+      ],
+      "grade": "derived",
+      "source": "SCHOTT North America, 'OPALIKA' technical data sheet (970-3d/09/04-P), https://www.sydor.com/wp-content/uploads/SCHOTT-OPALIKA-Display-Glass.pdf",
+      "derivation": "digitised by eye from the data sheet's plot of spectral transmittance, 300-800 nm (reading uncertainty about +/- 0.01, +/- 0.03 on the steep UV edge)",
+      "conditions": "OPALIKA, opal layer 0.45 mm"
+    },
+    "diffusion": {
+      "text": "'almost ideal diffusion': the angular indicatrix is nearly a circle (Lambertian), with a small direct 'nose' on the axis that depends on wavelength and rises sharply above 800 nm.",
+      "grade": "manufacturer",
+      "source": "SCHOTT North America, 'OPALIKA' technical data sheet (970-3d/09/04-P), https://www.sydor.com/wp-content/uploads/SCHOTT-OPALIKA-Display-Glass.pdf"
+    },
+    "baseRefractiveIndex": {
+      "value": 1.525,
+      "unit": "1",
+      "grade": "manufacturer",
+      "source": "SCHOTT North America, 'OPALIKA' technical data sheet (970-3d/09/04-P), https://www.sydor.com/wp-content/uploads/SCHOTT-OPALIKA-Display-Glass.pdf",
+      "conditions": "ne, base glass annealed at 40 degC/h"
+    },
+    "specularF0": {
+      "value": 0.0432,
+      "unit": "1",
+      "grade": "derived",
+      "source": "SCHOTT North America, 'OPALIKA' technical data sheet (970-3d/09/04-P), https://www.sydor.com/wp-content/uploads/SCHOTT-OPALIKA-Display-Glass.pdf",
+      "derivation": "((n-1)/(n+1))^2 with n = 1.525",
+      "conditions": "the glossy clear skin of a cased globe or the flashed sheet's faces"
+    },
+    "casedGlobes": {
+      "text": "'Conventional glass normally has a light transmission of just 50% - 55%', while the maker's 3-ply (triplex) opal 'is up to 86% efficient'.",
+      "grade": "manufacturer",
+      "source": "Arlico Lighting, 'Lucis: hand made opal glass lighting', https://arlico.co.uk/brands/lucis-hand-made-opal-glass-lighting/",
+      "note": "luminaire efficiency claims, not EN 410 measurements"
+    },
+    "flashedOpalOther": {
+      "value": 0.35,
+      "unit": "1",
+      "grade": "manufacturer",
+      "source": "Glass Dynamics LLC, 'Flashed Opal', https://www.glassdynamicsllc.com/flashedopal.html",
+      "note": "'approximately 35% of light transmission' for flashed opal generally; its table lists OPALIKA at 32 %"
+    },
+    "asBuiltCheck": {
+      "text": "The as-built Salon diffuser used tau = 0.30 for bay 2's flashed opal, inside OPALIKA's measured 0.32 +/- 0.08: the as-built value agrees with the physics.",
+      "grade": "design",
+      "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/salon_interior.py (frozen reference), make_diffusers() (MI_Salon_Opal: Tau 0.30)"
+    }
+  },
+  "physical": {
+    "density": {
+      "value": 2600,
+      "unit": "kg/m3",
+      "grade": "manufacturer",
+      "source": "SCHOTT North America, 'OPALIKA' technical data sheet (970-3d/09/04-P), https://www.sydor.com/wp-content/uploads/SCHOTT-OPALIKA-Display-Glass.pdf",
+      "asReported": "2.6 g/cm3"
+    },
+    "admissibleBendingStress": {
+      "value": 30,
+      "unit": "MPa",
+      "grade": "manufacturer",
+      "source": "SCHOTT North America, 'OPALIKA' technical data sheet (970-3d/09/04-P), https://www.sydor.com/wp-content/uploads/SCHOTT-OPALIKA-Display-Glass.pdf",
+      "conditions": "technically annealed glass, calculation basis (air)"
+    },
+    "softeningPoint": {
+      "value": 719,
+      "unit": "degC",
+      "grade": "manufacturer",
+      "source": "SCHOTT North America, 'OPALIKA' technical data sheet (970-3d/09/04-P), https://www.sydor.com/wp-content/uploads/SCHOTT-OPALIKA-Display-Glass.pdf",
+      "conditions": "base glass, eta = 10^7.6 dPa s"
+    },
+    "transformationTemperature": {
+      "value": 533,
+      "unit": "degC",
+      "grade": "manufacturer",
+      "source": "SCHOTT North America, 'OPALIKA' technical data sheet (970-3d/09/04-P), https://www.sydor.com/wp-content/uploads/SCHOTT-OPALIKA-Display-Glass.pdf",
+      "conditions": "Tg, base glass"
+    },
+    "thermalExpansion": {
+      "value": 9.4e-06,
+      "unit": "1/K",
+      "grade": "manufacturer",
+      "source": "SCHOTT North America, 'OPALIKA' technical data sheet (970-3d/09/04-P), https://www.sydor.com/wp-content/uploads/SCHOTT-OPALIKA-Display-Glass.pdf",
+      "conditions": "20-300 degC, base glass"
+    },
+    "stressOpticalCoefficient": {
+      "value": 2.7,
+      "unit": "1",
+      "grade": "manufacturer",
+      "source": "SCHOTT North America, 'OPALIKA' technical data sheet (970-3d/09/04-P), https://www.sydor.com/wp-content/uploads/SCHOTT-OPALIKA-Display-Glass.pdf",
+      "conditions": "in units of 1.02 x 10^-12 m2/N"
+    },
+    "chemical": {
+      "text": "Largely resistant to water, acids, alkalis and salt solutions, except hydrofluoric acid; the two glasses differ, so no standard class is given.",
+      "grade": "manufacturer",
+      "source": "SCHOTT North America, 'OPALIKA' technical data sheet (970-3d/09/04-P), https://www.sydor.com/wp-content/uploads/SCHOTT-OPALIKA-Display-Glass.pdf"
+    }
+  },
+  "acoustic": {
+    "note": "Globes and lantern diffusers are small or overhead; not absorbing surfaces."
+  },
+  "stock": {
+    "flashedSheet": {
+      "thicknesses": {
+        "unit": "mm",
+        "values": [
+          2.4,
+          3.0,
+          3.85,
+          4.65,
+          5.5,
+          8.0
+        ],
+        "grade": "manufacturer",
+        "source": "SCHOTT North America, 'OPALIKA' technical data sheet (970-3d/09/04-P), https://www.sydor.com/wp-content/uploads/SCHOTT-OPALIKA-Display-Glass.pdf"
+      },
+      "opalLayer": {
+        "value": 0.45,
+        "unit": "mm",
+        "grade": "manufacturer",
+        "source": "SCHOTT North America, 'OPALIKA' technical data sheet (970-3d/09/04-P), https://www.sydor.com/wp-content/uploads/SCHOTT-OPALIKA-Display-Glass.pdf",
+        "note": "+0.35 / -0.2 mm (+0.85 / -0.2 at 8 mm)"
+      },
+      "largestSheet": {
+        "text": "2,400 x 1,600 mm (3.85-5.50 mm); 2,100 x 1,500 mm at 8 mm.",
+        "grade": "manufacturer",
+        "source": "SCHOTT North America, 'OPALIKA' technical data sheet (970-3d/09/04-P), https://www.sydor.com/wp-content/uploads/SCHOTT-OPALIKA-Display-Glass.pdf"
+      },
+      "warp": {
+        "max": 4.8,
+        "unit": "mm",
+        "grade": "manufacturer",
+        "source": "SCHOTT North America, 'OPALIKA' technical data sheet (970-3d/09/04-P), https://www.sydor.com/wp-content/uploads/SCHOTT-OPALIKA-Display-Glass.pdf",
+        "conditions": "deviation from flat over a 320 x 320 mm area"
+      },
+      "drawing": {
+        "text": "Made by the traditional Fourcault drawing process.",
+        "grade": "secondary",
+        "source": "Adamer Specialglass, 'OPALIKA white flashed opal glass', https://www.adamer-specialglass.com/white-flashed-opal-glass"
+      }
+    },
+    "asBuiltGlobes": {
+      "text": "Albion's electroliers: cased opal globes 17 cm across, one 60 W-equivalent lamp (520 lm, 2900 K) in each, six to a fitting; the Reserve's pendants: 44 cm (3400 lm) in the nave and 34 cm (2600 lm) in the aisles, 3800 K on the as-built board, 2900 K in the frozen material; the grounds' lamp standards carry opal globes.",
+      "grade": "design",
+      "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Source/MuseeVision/Albion/AlbionLamps.h (frozen reference) ; C:/Users/anan9/Desktop/Projects/Musee Vision/plan/canvas/AsBuiltReserve.dc.html (as-built board, D-001) ; C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/reserve_materials.py (frozen reference) ; C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Source/MuseeVision/Facade/MuseeLandscape.h (frozen reference)"
+    }
+  },
+  "physicalMaterial": {
+    "footfallClass": "none",
+    "note": "Overhead or out of reach."
+  },
+  "uses": [
+    {
+      "where": "Albion: the electroliers' cased opal globes (twelve fittings of six, one of four in the porch)",
+      "working": "blown.cased",
+      "histories": [
+        "glass.soiling"
+      ],
+      "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Source/MuseeVision/Albion/AlbionLamps.h (frozen reference)",
+      "grade": "design"
+    },
+    {
+      "where": "the Reserve: an opal globe on a bronze rod in every bay (44 cm nave, 34 cm aisles)",
+      "working": "blown.cased",
+      "histories": [
+        "glass.soiling"
+      ],
+      "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/plan/canvas/AsBuiltReserve.dc.html (as-built board, D-001)",
+      "grade": "design"
+    },
+    {
+      "where": "the grounds: the lamp standards' globes",
+      "working": "blown.cased",
+      "histories": [
+        "glass.soiling"
+      ],
+      "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Source/MuseeVision/Facade/MuseeLandscape.h (frozen reference)",
+      "grade": "design"
+    },
+    {
+      "where": "the Salon: bay 2's lantern glass ('Milk glass spreads the light evenly')",
+      "working": "flashed",
+      "histories": [
+        "glass.soiling"
+      ],
+      "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/plan/proposals/salon-interior/canvas/Light.dc.html (approved proposal, D-001) ; C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/salon_interior.py (frozen reference), make_diffusers()",
+      "grade": "design"
+    },
+    {
+      "where": "the Reserve: the picture lights' lenses (lit opal)",
+      "working": "flashed",
+      "histories": [
+        "glass.soiling"
+      ],
+      "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/reserve_materials.py (frozen reference) (M_PictureLens)",
+      "grade": "design"
+    }
+  ],
+  "asBuilt": {
+    "globeOpal": {
+      "value": [
+        0.8,
+        0.78,
+        0.74
+      ],
+      "unit": "1",
+      "grade": "design",
+      "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/reserve_materials.py (frozen reference) (OPAL)",
+      "space": "linear Rec.709, D65",
+      "note": "'the opal's own white, seen when other lamps light it'"
+    },
+    "globeSkinRoughness": {
+      "value": 0.04,
+      "unit": "1",
+      "grade": "design",
+      "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/reserve_materials.py (frozen reference) (SKIN_ROUGHNESS)"
+    },
+    "globeLuminance": {
+      "text": "600 + 5400 cos^7 nits core to rim, averaging 1800 nits over the disc for a 3400 lm lamp in a 17-inch ball; 'Opal is never even: milky clouds (6 cm) and a slower drift (18 cm)', +/-9 % and +/-6 %.",
+      "grade": "design",
+      "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/reserve_materials.py (frozen reference) (GLOBE, make_globe_lamp)"
+    },
+    "opalGlobeEmissive": {
+      "text": "M_OpalGlobe: an unlit emissive of colour (1.0, 0.82, 0.62) at 2500 nits.",
+      "grade": "design",
+      "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/native.py (frozen reference) (make of M_OpalGlobe)"
+    },
+    "salonOpal": {
+      "text": "MI_Salon_Opal: Tau 0.30, Roughness 0.06, Mottle 0.025, BaseColor (0.86, 0.86, 0.85).",
+      "grade": "design",
+      "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/salon_interior.py (frozen reference), make_diffusers()"
+    }
+  },
+  "asBuiltCorrection": {
+    "text": "The as-built globes are emissive surfaces with hand-set nits. Physically a globe's luminance is the lamp's flux through the opal: transmitted flux about 0.3 (flashed) to 0.5-0.55 (conventional cased) of the lamp's lumens, spread nearly Lambertian over the globe, plus the thin direct 'nose'. Light should derive the glow from the lamp and this record, not from a nits constant.",
+    "grade": "design",
+    "source": "MuseeVision/Journal/Decisions.md, D-001 (the design is the finished museum) and D-017 (port the finished rooms; the as-built material values seed the records)"
+  },
+  "photograph": [
+    "A lit opal globe is brightest where the view passes nearest the lamp and falls off to the rim, faintly warmer at the rim; the lamp itself is not visible, only perhaps a soft brighter core.",
+    "The cased skin is glossy: it mirrors the room and the other lamps; unlit, the globe is a soft milky white with a slightly bluish cast in daylight.",
+    "Hand-blown opal is never perfectly even: faint clouds and a denser neck."
+  ],
+  "evidence": [],
+  "evidenceSearch": {
+    "searched": [
+      "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt (all folders and CREDITS files)",
+      "C:/Users/anan9/Desktop/Projects/Musee Vision/assets"
+    ],
+    "found": "No CC0 photograph of an opal globe or flashed opal sheet is on this PC.",
+    "tier": "The data sheet's spectrum and diffusion indicatrix carry the physics; a photographed lit globe would be a tier-(b) reference for Studio."
+  },
+  "unverified": [
+    {
+      "field": "optics.reflectance",
+      "value": 0.6,
+      "unit": "1",
+      "reason": "The diffuse reflectance of flashed opal was not read. By analogy with a white fired frit of the same transmittance (T 0.32, R 0.57-0.62, Wilson and Elstner 2018) it is probably near 0.6, but that is a different material."
+    },
+    {
+      "field": "optics.casedTransmittance",
+      "value": null,
+      "min": 0.5,
+      "max": 0.55,
+      "unit": "1",
+      "reason": "The transmittance of the museum's cased globes depends on the opal layer's thickness, which a maker would set; the 0.50-0.55 figure is a manufacturer's claim for 'conventional' opal glass shades."
+    },
+    {
+      "field": "formation.modernOpacifier",
+      "text": "fluoride (NaF, CaF2) or phosphate opal",
+      "reason": "Modern opal glasses are said to use fluoride or phosphate opacifiers (fluoride crystals such as NaF or CaF2); not read from a primary source."
+    }
+  ],
+  "sources": [
+    "H. J. Powell, W. Rosenhain and A. Nesbitt, 'Glass', Encyclopaedia Britannica, 11th ed. (1911), via Wikisource, https://en.wikisource.org/wiki/1911_Encyclop%C3%A6dia_Britannica/Glass",
+    "SCHOTT North America, 'OPALIKA' technical data sheet (970-3d/09/04-P), https://www.sydor.com/wp-content/uploads/SCHOTT-OPALIKA-Display-Glass.pdf",
+    "Arlico Lighting, 'Lucis: hand made opal glass lighting', https://arlico.co.uk/brands/lucis-hand-made-opal-glass-lighting/",
+    "Glass Dynamics LLC, 'Flashed Opal', https://www.glassdynamicsllc.com/flashedopal.html",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/salon_interior.py (frozen reference), make_diffusers() (MI_Salon_Opal: Tau 0.30)",
+    "Adamer Specialglass, 'OPALIKA white flashed opal glass', https://www.adamer-specialglass.com/white-flashed-opal-glass",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Source/MuseeVision/Albion/AlbionLamps.h (frozen reference)",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/plan/canvas/AsBuiltReserve.dc.html (as-built board, D-001)",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/reserve_materials.py (frozen reference)",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Source/MuseeVision/Facade/MuseeLandscape.h (frozen reference)",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/plan/proposals/salon-interior/canvas/Light.dc.html (approved proposal, D-001)",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/salon_interior.py (frozen reference), make_diffusers()",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/reserve_materials.py (frozen reference) (M_PictureLens)",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/reserve_materials.py (frozen reference) (OPAL)",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/reserve_materials.py (frozen reference) (SKIN_ROUGHNESS)",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/reserve_materials.py (frozen reference) (GLOBE, make_globe_lamp)",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/native.py (frozen reference) (make of M_OpalGlobe)",
+    "MuseeVision/Journal/Decisions.md, D-001 (the design is the finished museum) and D-017 (port the finished rooms; the as-built material values seed the records)"
+  ]
+}
