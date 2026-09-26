@@ -191,3 +191,48 @@ The principles and the wiring don't compress.
 - The systems are built tonight in parallel, and the rooms overnight as the systems land.
 - Assembly and packaging happen Sunday morning, then the owner's walk, one fix round, and the final package on
   Sunday evening.
+
+## D-017 · Port the finished rooms; refine details later through schedules
+**Context:** The owner (Saturday 18:45): "we are not changing the geometry of the room, it's just some details we
+want to change … it should already be 95% there … we need to design the system so that it's easy to refine details
+later, like changing the material of something … use the Rotunda to verify and make it robust, and then the other
+rooms should really be one-shot … reuse ideas from previous work."
+**Decision:**
+1. **Port, don't redesign.** Each room's geometry is carried over from the as-built museum (the old room code and
+   its plan numbers are the source), expressed through Form's language, with only the approved deltas (D-001).
+   Research refines what the old museum already had; it never starts from zero.
+2. **Geometry is code; everything a designer changes is data.** Each room keeps its shape in its module, and keeps
+   its choices in plain files beside it, in `Data/Stages/<Room>/`, named after the documents real architects use:
+   - `Finishes.json`, the **finish schedule:** each named surface or part mapped to its material key
+     (substance.working.history);
+   - `Lighting.json`, the **lighting schedule:** each fixture's catalogue type, mount and aim, and each surface's
+     target;
+   - `Hang.json`, the **hanging plan:** works to anchors;
+   - `Planting.json`, the **planting plan:** species to beds (where the room has any).
+
+   Changing a material, a fixture or a painting is a one-line edit to a schedule. Studio's incremental make remakes
+   only what the edit touches, and the checks re-run.
+3. **Materials start from the as-built language.** The old museum's material values (the LANGUAGE, NAMED,
+   PHYSICS and POLISH tables of `windows/Scripts/materials.py`, and the CC0 photographic sets the owner already
+   approved in the Rotunda and Salon) seed the new records. The research corrects them where the physics was wrong
+   and sources them. A record says which of the two each number came from.
+4. **The Rotunda proves the pipeline.** It goes through the whole pipeline first. Every defect it reveals is fixed
+   in the system that owns it, and the pipeline's checks are hardened, so that each later room is a single pass. The
+   checks every room must pass are:
+   - sealed shells, with no light leaks;
+   - every material key resolved;
+   - UVs in metres;
+   - lux targets met;
+   - reachability, with no traps;
+   - ports mated;
+   - performance within budget.
+
+   Overnight, the other rooms' modules are ported and compiled in parallel. Their full make, lighting and checks run
+   after the Rotunda has hardened the pipeline.
+5. **Reuse the old workshop's good ideas:**
+   - one Unreal session doing many steps (`apply_all`);
+   - named views shot in one launch (`tour.ps1`, the MuseeDo steps);
+   - the sun clock's clearance checks at several states;
+   - the Nanite bake settings.
+
+   These are kept as evidence and verification. They are never used as targets for tuning a room (D-013).
