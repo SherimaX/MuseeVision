@@ -258,3 +258,35 @@ maybe change to better ones."
 
 **Follows:** The Matter session builds its records and instances from the palette, not from the old tables. The
 story is reviewed by independent critics before the instances are made.
+
+## D-019 · The Nymphéas oval is the first room, and the golden iris opens the pond
+**Context:** The owner (Saturday 19:20): "let's rebuild the lily pond room first, as that's a room [that has]
+different things inside and [is] quite simple. we don't need to build the basement yet, but you can make the lily
+pond openable by clicking on the golden iris on it."
+**Decision:**
+- **The Nymphéas oval becomes its own stage**, `nympheas`, split from the Salon. Its east port mates the Salon's
+  west port, beyond bay 5. It proves the pipeline in place of the Rotunda (D-017 point 4). Its geometry is simple,
+  but it exercises nearly every system:
+  - water carried by a moving basin, and planting (Nature);
+  - the lift (Motion);
+  - the carved lily frieze (Form);
+  - travertine, gilt bronze, plaster and canvas (Matter);
+  - the four willow panels of the Orangerie's second room, 51 m at true size (Art);
+  - daylight under the velarium (Light), and the click (Visitor).
+- The Rotunda joins the one-pass rooms.
+- **The pond** follows the approved design (plan/proposals/salon-interior, the Oval board):
+  - an 8.4 × 4.6 m oval echoing the room;
+  - a sitting-height moulded travertine coping with a gilt-bronze inner lip;
+  - brimming black water that mirrors the velarium and the panels;
+  - lilies in clumps as at Giverny;
+  - an Art Nouveau carved lily frieze on the coping's outer face;
+  - iris clumps only at the two ends of the axis.
+
+  It lifts 2.6 m in 5 s on four bronze posts, water and planting with it, over the 36-step stair east to the
+  Reserve.
+- **The golden iris** is a gilt-bronze iris set on the coping at the head of the axis, echoing the living irises at
+  its ends. (The old build's control was a golden lily; the owner's word is iris.) Using it (click, or the headset
+  trigger) runs the line of warm light round the lip, then lifts the pond. Using it again lowers it. Motion's guard
+  stops the pond if the visitor is in its way.
+- **The basement isn't built yet.** The stair is the oval's own (it serves the well), and it ends at the Reserve's
+  closed bronze doors: the port's blind.
