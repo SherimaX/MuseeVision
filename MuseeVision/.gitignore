@@ -1,0 +1,15 @@
+# Unreal build output and caches
+Binaries/
+Intermediate/
+Saved/
+DerivedDataCache/
+.vs/
+*.sln
+*.VC.db
+
+# Content Studio generates from code, records and evidence (reproducible, never edited by hand)
+Content/Generated/
+
+# Python caches
+__pycache__/
+*.pyc

@@ -1,0 +1,159 @@
+# Decisions
+
+Each decision records its context, the decision, and what follows from it. The owner asked the Architect to decide
+these by judgment (2026-09-26): "use your judgment on all … the designs of the previous complete museum was great
+already. we are just restructuring it to make it a real one piece of complete art." The owner can overturn any of
+them; a changed decision gets a new record, never an edit.
+
+## D-001 · The design is the finished museum
+**Context:** The as-built museum (September 2026) and the approved proposals are the design.
+**Decision:** The new build reproduces that design through the new systems; designs are not re-approved. The design
+consists of the as-built rooms and these approved proposals:
+- Chenghuai on the north door;
+- Albion on the south door;
+- the Salon interior update and the pond edge;
+- the Élan exterior dome;
+- the Cube's first work, *Sea Light*.
+
+The Sculpture Hall, the Chinese Wing and the Square are retired, as are the Cube's Matterhorn and Raja Ampat
+journeys. None of them is built.
+**Follows:** Room specs draw on the owner's standing decisions, then the approved proposals, then the master boards,
+then the as-built photographs. Where a board contradicts a later decision (for example, a board still showing the
+Sculpture Hall north), the later decision wins.
+
+## D-002 · Where the museum stands
+**Context:** The old museum had a city switch: Beijing (the default) or New York. A real sun needs a real place, and
+a sundial is cut for one latitude.
+**Decision:** Keep both cities. Beijing (39.9° N) and New York (40.7° N) lie within 0.8° of latitude, so one dial cut
+for 40.3° N reads within a fraction of a degree in either. The city stays a runtime setting, restricted to cities
+within 1° of the dial's latitude. `Time.DialTrue` enforces that restriction.
+**Follows:** Time holds the observer. Beijing is the default.
+
+## D-003 · The sun keeps the approved idealised path
+**Context:** The approved design idealises the museum's sun at 15° an hour, from 06:00 to 18:00, on a path through the
+bronze node onto the hour ring, so the sun clock reads every hour. A real sun, with the node 20.3 m above a 14 m dial,
+would reach the dial only around noon in June and July.
+**Decision:** Keep the design. Time declares a **sun model** in `Data/Time/Museum.json`. The model is `idealised`
+(the default, as designed) or `ephemeris`. The moon, the stars and the solar terms always come from the real Meeus
+ephemeris. `Time::Dial` and `Time.DialTrue` check the dial against the declared model. With the idealised sun the
+dial doesn't depend on latitude, so the Beijing/New York switch (D-002) stays at runtime without restriction.
+
+## D-012 · The finished museum's topology, restored
+The panel's architecture had drifted from the as-built design. The Site plan follows the museum as built:
+- **The Rotunda's ports:** west (to the Salon), north (to Chenghuai), south (to Albion) and east (to the Hall of Light),
+  plus the stairwell it serves (down to the Classical Hall).
+- **Further matings:**
+  - the Hall of Light's east port to the Atrium;
+  - the Salon's stair port to the Reserve's, a well that the Salon's lifting pond serves;
+  - the Atrium's vertical ports to the Cube (below) and the Sphere (above).
+- **The arrival point** is the gilt sun at the Rotunda's centre.
+- **Élan is three stages:** Atrium, Cube and Sphere.
+  - The glass car never lands.
+  - Its vertical ports close with an **iris** closure class.
+  - The Cube is sealed by its ceiling iris around the mast. It has no side vestibule, light lock or landing door.
+- **The Sphere** shows the real sky over the museum's city. No stage "pushes" a different sky, and the
+  scoped-sky machinery is removed. Sea Light is a near piece that performs inside the Cube's sealed shell.
+
+## D-013 · Connectors come in two tiers
+**Decision:** A system's public connectors are split into two tiers, and a tier-2 item is built when the first stage
+that needs it is specified.
+- **Tier 1 (now)** is what the Rotunda and the mock-up bay need. It is written, implemented and frozen at Gate A′.
+- **Tier 2 (declared)** is named in the system's README under "Later", with its owner, but no header exists for it
+  yet.
+
+## D-014 · Amendments from the second architecture check
+Each of these is folded into the architecture:
+- **Matter**
+  - *Gilt* is a working, not a substance: gold leaf with its measured complex F0, laid over a substrate (plaster,
+    bronze or wood). The bole shows through with wear.
+  - Every substance record carries its family (stone, white, bronze, oak, accent, glass, water, living), and an
+    accent names the core family it ties back to. `Matter.OneLanguage` fails any accent that isn't declared.
+  - The boards' *brass* is read as a declared accent of the bronze family.
+- **Form**
+  - The drawing vocabulary admits **Carving** (relief or in-the-round ornament made by rule inside a block within
+    stock) and **Ornament** (a displacement relief on a host surface, drawn from evidence such as a cast or a
+    measured drawing).
+  - Joints gain the kind **welded and faired**, for seamless shells such as the Élan's pearl shell.
+  - The leak probe (`Form::FindLeakPaths`, pure ray casting) lives in the runtime module, so Instruments can show it
+    in any development build.
+- **Glazing**
+  - A Glazed opening is *any transmissive infill*: glass, stained glass with lead cames, paper or silk, each with
+    its transmission in Matter.
+  - A stained-glass work is an Art anchor of kind **Glazing** set into a Form opening. Art owns the image, Form owns
+    the opening, and Matter owns the glass.
+- **Light**
+  - Light reads the museum Moment for operation and prediction.
+  - A stage may declare **design targets** as luminance order or ratio between named surfaces (for example, the
+    Salon's half-light vault). These are measured, not knobs.
+  - No automatic blinds. Where the design has sun patches, care limits are met by the hang and by UV-filtering
+    glazing, as real museums do.
+  - For now: direct-model prediction plus measurement. Path-traced commissioning, daylight coefficients and annual
+    dose are tier 2.
+- **Visitor**
+  - The Eye owns exposure, the tone curve (with a highlight shoulder, so skies and glass never clip) and *sampling*:
+    screen percentage, the upscaler and anti-aliasing. Light owns transport quality only.
+  - The owner's intents are kept: walk, stride, hop, look, sit, step-to, the hour key and the city key.
+  - Quest Touch bindings are primary in the headset adapter.
+- **Site**
+  - Reachability is judged over a state graph: walking, plus any use the visitor can trigger. A closed door with a
+    usable handle is not a trap.
+  - The **passage** between two mated ports is an enclosure owned by the joint. It has its own pieces, traffic and
+    light targets, and `RoomAt` returns "between A and B" there.
+  - Wayfinding text belongs to Site; captions and labels belong to Art.
+- **Motion** owns the runtime occupancy guard: a drive holds, or reverses for a door, when the visitor's body is in
+  its next travel slice.
+- **Time** owns a seeded weather generator conditioned on each place's climate normals, used when the live feed
+  is unreachable, so the weather never falls back to a plain default.
+- **Foundation's record reader** fails on a missing field marked Required, and on a field whose units don't match.
+- **Content** is generated entirely by Studio, including the material parameter collections (MPC_Moment and
+  others), from definitions in their owning systems. There are no hand-made assets.
+- **Specimens:** the mock-up bay lives in `Source/Stages/Specimens/MockupBay`. It is made of two small stages mated
+  by the standard doorway, so the joint, a blind and Mate are all exercised before the Rotunda.
+- **Modules**
+  - Matter gains an editor twin, `MuseeMatterMaking`, which builds its material graphs in C++ (D-007).
+  - The screen adapter lives in `MuseeVisitor`.
+  - `MuseeVisitorHeadset` is built only in the VR target (D-010).
+
+## D-004 · The Rotunda's eye is glazed
+**Decision:** The steel-and-glass lattice eye stays as built, after the British Museum's Great Court. The Rotunda is an
+Enclosed shell whose only opening to the sky is Glazed.
+
+## D-005 · Remote weather over two rooms' glass
+**Context:** The approved designs give the Salon's lanterns Giverny's live cloud and rain, and Albion's glass London's.
+**Decision:** Keep them, as the owner designed. The sun and the hour are always the museum's. Only the *weather* over a
+room's glazing may come from another place. Time keeps its weather by keyed observers (museum, giverny, london),
+fetched in one request. A room's Glazed opening may declare which observer's weather falls on it.
+**Follows:** Time's weather service is keyed. Matter's surface law and Nature's precipitation read the weather of the
+observer the opening declares. This is a deliberate artistic exception to "one sky", limited to weather and recorded
+here.
+
+## D-006 · The museum is always open
+**Decision:** There are no opening hours. Light operates the way a modern gallery's controls do: daylight-linked
+dimming, dusk switching of architectural light, and presence-linked gallery light.
+
+## D-007 · Generation in C++
+**Decision:** Studio generates meshes, levels and material graphs in C++ (UMaterialEditingLibrary and Substrate
+expressions), where automation tests reach them. Python is at most a thin driver. A Phase 0a spike confirms that a
+Substrate material can be generated from code.
+
+## D-008 · Plugins and source art outside the repo
+**Decision:** The DLSS and Streamline plugins live in `C:/mv/third_party/Plugins`, which the `.uproject` names through
+`AdditionalPluginDirectories`. The folder is writable, because game-target builds compile into it, and game builds
+run one at a time. Source art lives in `C:/mv/third_party/SourceArt`. The engine's shared Zen DDC is used as it
+is: `UE-LocalDataCachePath` is never set.
+
+## D-009 · Knowledge in the Journal, process in the Register
+**Decision:** `Journal/` holds what the museum knows: decisions, defects and reviews. The Register (`C:/mv/register`,
+branch `register`) holds the state of the work: orders, gaps, inspections, verify stamps and jobs.
+
+## D-010 · The headset
+**Decision:** An installed engine can't enable plugins per target. So OpenXR is enabled for DebugGame game builds
+only, and the headset adapter (`MuseeVisitorHeadset`) is built only in the `MuseeVisionVR` target. The desktop game
+never links OpenXR.
+
+## D-011 · Folders and modules
+**Decision:**
+- A system's folder is named for the system (`Source/Systems/Form`).
+- Its modules are named `Musee<System>` (`MuseeForm`, and `MuseeFormMaking` for the editor half).
+- Stages live under `Source/Stages/Rooms/<Room>` and `Source/Stages/Works/<Work>`.
+- Studio and Instruments sit beside the systems, in `Source/Studio` and `Source/Instruments`.
