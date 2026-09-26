@@ -1,0 +1,90 @@
+{
+ "v": 3,
+ "createdOnFiles": {
+  "v": 1,
+  "at": "2026-09-25T14:55:57Z"
+ },
+ "title": "Chenghuai · 澄懷 · 三进四合院",
+ "launch": {
+  "view": "canvas"
+ },
+ "pages": [],
+ "boards": {
+  "Main.dc.html": {
+   "x": 0,
+   "y": 0,
+   "w": 2160,
+   "h": 1480,
+   "title": "Chenghuai · 澄懷"
+  },
+  "Plan.dc.html": {
+   "x": 2240,
+   "y": 0,
+   "w": 2160,
+   "h": 1480,
+   "title": "Plan · one door, one loop"
+  },
+  "Rooms.dc.html": {
+   "x": 4480,
+   "y": 0,
+   "w": 2160,
+   "h": 1640,
+   "title": "Rooms and works"
+  },
+  "Hang.dc.html": {
+   "x": 0,
+   "y": 1760,
+   "w": 2160,
+   "h": 1440,
+   "title": "The hang, to scale"
+  },
+  "Materials.dc.html": {
+   "x": 2240,
+   "y": 1760,
+   "w": 2160,
+   "h": 1860,
+   "title": "Materials"
+  },
+  "Garden.dc.html": {
+   "x": 4480,
+   "y": 1760,
+   "w": 2160,
+   "h": 1480,
+   "title": "The garden · 臥遊"
+  },
+  "Section.dc.html": {
+   "x": 0,
+   "y": 3740,
+   "w": 2160,
+   "h": 1100,
+   "title": "Section · elevations"
+  },
+  "Rules.dc.html": {
+   "x": 2240,
+   "y": 3740,
+   "w": 2160,
+   "h": 960,
+   "title": "Research · the rules"
+  },
+  "Names.dc.html": {
+   "x": 4480,
+   "y": 3740,
+   "w": 2160,
+   "h": 2360,
+   "title": "Names · 題名"
+  }
+ },
+ "order": [
+  "Main.dc.html",
+  "Plan.dc.html",
+  "Rooms.dc.html",
+  "Hang.dc.html",
+  "Materials.dc.html",
+  "Garden.dc.html",
+  "Section.dc.html",
+  "Rules.dc.html",
+  "Names.dc.html"
+ ],
+ "notes": {},
+ "designSystems": []
+}

@@ -2,26 +2,75 @@
   "v": 3,
   "attachments": {},
   "boards": {
+    "AsBuilt.dc.html": {
+      "h": 1720,
+      "title": "As built · The museum",
+      "w": 2160,
+      "x": 0,
+      "y": 15540
+    },
+    "AsBuiltChinese.dc.html": {
+      "h": 1700,
+      "title": "As built · The Chinese Wing",
+      "w": 2160,
+      "x": 6720,
+      "y": 15540
+    },
+    "AsBuiltClassical.dc.html": {
+      "h": 1960,
+      "title": "As built · The Rotunda and the Classical Hall",
+      "w": 2160,
+      "x": 2240,
+      "y": 15540
+    },
+    "AsBuiltElan.dc.html": {
+      "h": 2080,
+      "title": "As built · Élan: the ribs and the iris",
+      "w": 2160,
+      "x": 4480,
+      "y": 15540
+    },
+    "AsBuiltReserve.dc.html": {
+      "h": 3000,
+      "title": "As built · The Reserve",
+      "w": 2160,
+      "x": 8960,
+      "y": 15540
+    },
+    "ChineseWing.dc.html": {
+      "h": 1800,
+      "title": "The Chinese Wing",
+      "w": 2160,
+      "x": 9120,
+      "y": 5040
+    },
+    "ElanSphere.dc.html": {
+      "h": 1860,
+      "title": "Section II · Élan · The Sphere, level 2",
+      "w": 1440,
+      "x": 6080,
+      "y": 5040
+    },
     "FutureAtrium.dc.html": {
-      "h": 1440,
+      "h": 1860,
       "title": "Section II · Élan · The Atrium, level 0",
       "w": 1440,
       "x": 3040,
-      "y": 3380
+      "y": 5040
     },
     "HallOfLight.dc.html": {
-      "h": 1440,
+      "h": 2100,
       "title": "Hall of Light",
       "w": 1440,
       "x": 1520,
-      "y": 3380
+      "y": 5040
     },
     "Journey.dc.html": {
-      "h": 1340,
-      "title": "The visit on Vision Pro",
+      "h": 2620,
+      "title": "The visit",
       "w": 1440,
       "x": 1520,
-      "y": 1320
+      "y": 2000
     },
     "Main.dc.html": {
       "h": 960,
@@ -31,81 +80,88 @@
       "y": 0
     },
     "MasterPlan.dc.html": {
-      "h": 1060,
+      "h": 1580,
       "title": "Master plan",
       "w": 1440,
       "x": 1520,
       "y": 0
     },
+    "MaterialsOther.dc.html": {
+      "h": 3700,
+      "title": "The material language · II · White, bronze, oak, glass, water",
+      "w": 2160,
+      "x": 2240,
+      "y": 18960
+    },
+    "MaterialsStone.dc.html": {
+      "h": 3100,
+      "title": "The material language · I · Stone",
+      "w": 2160,
+      "x": 0,
+      "y": 18960
+    },
     "Rotunda.dc.html": {
-      "h": 1440,
-      "title": "The Rotunda",
+      "h": 3140,
+      "title": "The Rotunda and the Classical Hall",
       "w": 1440,
       "x": 0,
-      "y": 3380
+      "y": 5040
     },
     "Salon.dc.html": {
       "h": 1700,
       "title": "01 · Salon Impression",
       "w": 1440,
       "x": 0,
-      "y": 1320
+      "y": 2000
     },
     "SalonDetails.dc.html": {
       "h": 1560,
       "title": "01 · Salon Impression · Details",
       "w": 2160,
       "x": 0,
-      "y": 6780
+      "y": 10200
     },
     "SalonHang.dc.html": {
       "h": 3280,
       "title": "01 · Salon Impression · The hang",
       "w": 2160,
       "x": 2240,
-      "y": 5180
+      "y": 8600
     },
     "SalonPlan.dc.html": {
       "h": 1480,
       "title": "01 · Salon Impression · Plan",
       "w": 2160,
       "x": 0,
-      "y": 5180
+      "y": 8600
     },
     "SalonReserve.dc.html": {
-      "h": 2260,
+      "h": 3240,
       "title": "01 · Salon Impression · The lily pond and the Reserve",
       "w": 2160,
       "x": 0,
-      "y": 8460
+      "y": 11880
     },
     "Sculpture.dc.html": {
-      "h": 1440,
-      "title": "Sculpture Hall",
+      "h": 1600,
+      "title": "Sculpture Hall · empty for now",
       "w": 1440,
       "x": 7600,
-      "y": 3380
+      "y": 5040
     },
-    "ChineseWing.dc.html": {
-      "x": 9120,
-      "y": 3380,
-      "w": 2160,
-      "h": 1480,
-      "title": "The Chinese Wing"
-    },
-    "ElanSquare.dc.html": {
+    "ElanCube.dc.html": {
+      "h": 1960,
+      "title": "Section II · Élan · The Cube, level −1",
+      "w": 1440,
       "x": 4560,
-      "y": 3380,
-      "w": 1440,
-      "h": 1440,
-      "title": "Section II · Élan · The Square, level −1"
+      "y": 5040
     },
-    "ElanSphere.dc.html": {
-      "x": 6080,
-      "y": 3380,
+    "ElanCubeJourneys.dc.html": {
+      "h": 3240,
+      "title": "Section II · Élan · The Cube · two journeys",
       "w": 1440,
-      "h": 1440,
-      "title": "Section II · Élan · The Sphere, level 2"
+      "x": 4560,
+      "y": 7120
     }
   },
   "createdOnFiles": {
@@ -131,23 +187,39 @@
       "text": "Room 01 and the visit",
       "w": 240,
       "x": 0,
-      "y": 1090
+      "y": 1700
     },
     "row3": {
       "kind": "title1",
-      "maxW": 11280,
-      "text": "The wings to come",
+      "maxW": 8000,
+      "text": "The rooms",
       "w": 240,
       "x": 0,
-      "y": 3080
+      "y": 4740
     },
     "row4": {
       "kind": "title1",
       "maxW": 4400,
-      "text": "Salon Impression: design development",
+      "text": "Salon Impression in detail",
       "w": 240,
       "x": 0,
-      "y": 4880
+      "y": 8300
+    },
+    "row5": {
+      "kind": "title1",
+      "maxW": 8000,
+      "text": "As built in Unreal: September 2026",
+      "w": 240,
+      "x": 0,
+      "y": 15240
+    },
+    "row6": {
+      "kind": "title1",
+      "maxW": 4400,
+      "text": "The material language",
+      "w": 240,
+      "x": 0,
+      "y": 18660
     }
   },
   "order": [
@@ -158,14 +230,22 @@
     "Rotunda.dc.html",
     "HallOfLight.dc.html",
     "FutureAtrium.dc.html",
-    "ElanSquare.dc.html",
+    "ElanCube.dc.html",
+    "ElanCubeJourneys.dc.html",
     "ElanSphere.dc.html",
     "Sculpture.dc.html",
     "ChineseWing.dc.html",
     "SalonPlan.dc.html",
     "SalonHang.dc.html",
     "SalonDetails.dc.html",
-    "SalonReserve.dc.html"
+    "SalonReserve.dc.html",
+    "AsBuilt.dc.html",
+    "AsBuiltClassical.dc.html",
+    "AsBuiltElan.dc.html",
+    "AsBuiltChinese.dc.html",
+    "AsBuiltReserve.dc.html",
+    "MaterialsStone.dc.html",
+    "MaterialsOther.dc.html"
   ],
   "pages": [],
   "title": "Musée Vision"

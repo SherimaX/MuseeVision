@@ -1,0 +1,84 @@
+{
+  "v": 3,
+  "attachments": {},
+  "boards": {
+    "Details.dc.html": {
+      "h": 2320,
+      "title": "05 · Details",
+      "w": 2160,
+      "x": 2240,
+      "y": 2270
+    },
+    "Hang.dc.html": {
+      "h": 3020,
+      "title": "04 · The hang",
+      "w": 2160,
+      "x": 0,
+      "y": 2270
+    },
+    "Main.dc.html": {
+      "h": 1460,
+      "title": "01 · Overview",
+      "w": 2160,
+      "x": 0,
+      "y": 0
+    },
+    "Outside.dc.html": {
+      "h": 2190,
+      "title": "06 · Outside and site",
+      "w": 2160,
+      "x": 4480,
+      "y": 2270
+    },
+    "Plan.dc.html": {
+      "h": 1620,
+      "title": "02 · Plan and roof",
+      "w": 2160,
+      "x": 2240,
+      "y": 0
+    },
+    "Sections.dc.html": {
+      "h": 1870,
+      "title": "03 · Sections",
+      "w": 2160,
+      "x": 4480,
+      "y": 0
+    }
+  },
+  "createdOnFiles": {
+    "at": "2026-09-25T11:20:00Z",
+    "v": 1
+  },
+  "designSystems": [],
+  "launch": {
+    "view": "canvas"
+  },
+  "notes": {
+    "row1": {
+      "kind": "title1",
+      "maxW": 6640,
+      "text": "Albion: the idea, the plan, the sections",
+      "w": 240,
+      "x": 0,
+      "y": -300
+    },
+    "row2": {
+      "kind": "title1",
+      "maxW": 6640,
+      "text": "Albion: the hang, the details, the outside",
+      "w": 240,
+      "x": 0,
+      "y": 1970
+    }
+  },
+  "order": [
+    "Main.dc.html",
+    "Plan.dc.html",
+    "Sections.dc.html",
+    "Hang.dc.html",
+    "Details.dc.html",
+    "Outside.dc.html"
+  ],
+  "pages": [],
+  "title": "Albion"
+}

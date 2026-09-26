@@ -76,7 +76,7 @@ Didot for the wordmark. The app icon has light, dark and tinted variants; lockup
 | `usd/` | The whole museum as USD (one layer per wing, the sculpture scans, materials), for Unreal on the Windows PC. See `usd/README.md`. |
 | `windows/` | The Windows desktop build in Unreal 5.8: C++ (walking, sky, placards, Élan) and editor scripts that import `usd/`. See `windows/README.md`. |
 | `data/` | The painting and sculpture catalogues (`artworks.json`, `sculptures.json`). |
-| `plan/` | Snapshot of the design canvas: the boards and `Musee-Vision-Guide.pdf`. |
+| `plan/` | Snapshot of the design canvas: the boards (source and PNG), the proposals in `plan/proposals/`, and `Musee-Vision-Guide.pdf`. |
 | `assets/` | `paintings/` (images + CREDITS.md), `sculptures/` (scans + CREDITS.md), `sky/` (stars), `logo/`, `collection.json` (placards for the other wings' works), `reference/` (glaze colours, not bundled). |
 
 World coordinates follow the boards: metres, Rotunda centre = origin, x east, plan y south (RealityKit z),
