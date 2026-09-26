@@ -236,3 +236,25 @@ rooms should really be one-shot … reuse ideas from previous work."
    - the Nanite bake settings.
 
    These are kept as evidence and verification. They are never used as targets for tuning a room (D-013).
+
+## D-018 · The material story (replaces D-017 point 3)
+**Context:** The owner (Saturday 19:00): "you need to make sure you have the actual wood or stone in your mind, not
+copying their values, but look at the design to decide your kind of wood or stones, and these materials should
+build a whole story, we don't decide the materials just by the previous work, we need to understand the choice and
+maybe change to better ones."
+**Decision:** Geometry is ported (D-017), but materials are **chosen**. Before any material instance is made:
+- **One document tells the museum's material story,** `Docs/Matter/Story.md`, with its data in
+  `Data/Matter/Palette.json`. It reads the design (the boards, the proposals, the rooms' eras: Classical bones,
+  modern light, future glass) and the four families (stone, white, bronze, oak; D-014). For every role in the museum
+  it names the **specific real material**: the stone by its trade name, quarry and cut; the wood by species, origin
+  and sawing; the alloy by its composition; the glass by its make. It says why that material, in that room, in that
+  finish, belongs to the story.
+- **Each old choice is examined:** what it was and why it was made. It is kept, or replaced by a better real
+  material, with the reason.
+- **Values come from the chosen real material.** Its records carry its measured values with their sources. Old
+  values from `materials.py` are never copied as values. The CC0 scan sets count as evidence only where they are a
+  photograph of that material.
+- The rooms' finish schedules name palette entries, so the story is carried through every room.
+
+**Follows:** The Matter session builds its records and instances from the palette, not from the old tables. The
+story is reviewed by independent critics before the instances are made.
