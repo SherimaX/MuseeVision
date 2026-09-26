@@ -19,7 +19,7 @@ looks.
 ## The wiring
 - A module depends only on modules below it (see `Docs/Architecture.md`). Peers never see each other; they meet
   through Foundation's keys, signals, channels, settings and commands.
-- Every `Build.cs` derives from `MuseeModuleRules`.
+- Every `Build.cs` derives from `MuseeModuleRules`. The one exception is `MuseeMatterShaders`, which loads at PostConfigInit, before Foundation, to map the shader library, so it depends on engine modules only.
 - Each engine capability has one owner (HTTP in Time, Json in Foundation, GeometryCore in FormMaking, and so on).
 - No `#include` reaches into another module's `Private/`, and no include path contains `..`.
 

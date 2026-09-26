@@ -157,3 +157,16 @@ never links OpenXR.
 - Its modules are named `Musee<System>` (`MuseeForm`, and `MuseeFormMaking` for the editor half).
 - Stages live under `Source/Stages/Rooms/<Room>` and `Source/Stages/Works/<Work>`.
 - Studio and Instruments sit beside the systems, in `Source/Studio` and `Source/Instruments`.
+
+## D-015 · Matter defines, Studio writes
+**Context:** The architecture says "Studio alone writes assets", while D-007 and D-014 put the material graph
+builders in C++.
+**Decision:** `MuseeMatterMaking` exposes pure builders: `BuildMaster(EMatterMaster, UMaterial&)` and
+`FillInstance(const FMatterSpec&, UMaterialInstanceConstant&)`. They fill an object they are given and never create,
+name or save a package. Studio's make step calls them and saves the result under `/Game/Generated/Matter/`, with
+names formed by one function in Matter. `Musee::Matter::Resolve(spec)` depends on the spec alone, never on a room,
+and there is never a fallback material. A family (D-014's data concept) and a master (a Substrate shading
+configuration) are kept apart. Masters are split by physical shading topology and never by room. Gilt is a working,
+applied as a vertical layer that any opaque master can carry.
+**Follows:** The same pattern holds for every system with a making twin: the system defines its builders, and
+Studio writes the assets.
