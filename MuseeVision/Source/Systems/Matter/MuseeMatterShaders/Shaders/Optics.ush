@@ -1,0 +1,80 @@
+// Optics: what light does at the boundary between two media, written once for the whole library.
+//
+// Every surface in the museum is an interface: air to stone, air to water, water to stone, air to glass, air to metal.
+// The fraction reflected there follows Fresnel's equations from the two media's refractive indices. Stone, water and
+// glass are dielectrics (a real index n); metals are conductors (a complex index n + ik). The history law (wet
+// darkening), the metals (complex F0 and edge tint) and the glazing (pane transmission) all take their interface
+// optics from here.
+//
+// Indices are relative: the index of the medium the light enters, divided by the index of the medium it leaves.
+
+#pragma once
+
+#include "/Project/Matter/Frame.ush"
+
+// Egan & Hilgeman's polynomial fit to the hemispherical (diffuse) reflectance of a dielectric boundary for light
+// arriving from inside a medium of relative index Eta > 1, including total internal reflection:
+// F = x / Eta^2 + y / Eta + z + w * Eta. Egan & Hilgeman 1979, "Optical Properties of Inhomogeneous Materials"
+// (Academic Press); in this form in Jensen, Marschner, Levoy & Hanrahan 2001, "A Practical Model for Subsurface
+// Light Transport", SIGGRAPH, section 2.4.
+static const float4 MatterEganHilgemanFit = float4(-1.440, 0.710, 0.668, 0.0636);
+
+/** Reflectance of a dielectric interface at normal incidence (Fresnel; Born & Wolf, Principles of Optics, 7th ed.,
+ *  section 1.5.3): ((n - 1) / (n + 1))^2. A relative index of 1.5 gives Unreal's familiar 0.04. */
+float MatterDielectricF0(float RelativeIndex)
+{
+	const float Amplitude = (RelativeIndex - 1.0) / (RelativeIndex + 1.0);
+	return Amplitude * Amplitude;
+}
+
+/** Cosine of the refracted angle inside the second medium (Snell's law), or zero past the critical angle. */
+float MatterRefractedCosine(float CosIncidence, float RelativeIndex)
+{
+	const float SinRefracted2 = (1.0 - CosIncidence * CosIncidence) / (RelativeIndex * RelativeIndex);
+	return sqrt(saturate(1.0 - SinRefracted2));
+}
+
+/** Unpolarised reflectance of a dielectric interface at any angle (Born & Wolf, section 1.5.2): the mean of the s and
+ *  p amplitudes squared. Past the critical angle every ray is reflected. */
+float MatterDielectricFresnel(float CosIncidence, float RelativeIndex)
+{
+	const float SinRefracted2 = (1.0 - CosIncidence * CosIncidence) / (RelativeIndex * RelativeIndex);
+	if (SinRefracted2 >= 1.0)
+	{
+		return 1.0;
+	}
+	const float CosRefracted = sqrt(1.0 - SinRefracted2);
+	const float Rs = (CosIncidence - RelativeIndex * CosRefracted) / (CosIncidence + RelativeIndex * CosRefracted);
+	const float Rp = (RelativeIndex * CosIncidence - CosRefracted) / (RelativeIndex * CosIncidence + CosRefracted);
+	return 0.5 * (Rs * Rs + Rp * Rp);
+}
+
+/** Hemispherical reflectance, back into the medium, of diffuse light meeting the boundary of a medium of relative
+ *  index Eta > 1 from inside (Egan & Hilgeman's fit above). For water (Eta = 1.333) it is 0.475: nearly half the
+ *  light scattered inside a water layer is turned back by its surface, most of it by total internal reflection. */
+float MatterInternalDiffuseReflectance(float Eta)
+{
+	const float4 C = MatterEganHilgemanFit;
+	return C.x / (Eta * Eta) + C.y / Eta + C.z + C.w * Eta;
+}
+
+/** Unpolarised reflectance of a conductor of complex index n + ik in air, at any angle, per colour channel. This is
+ *  the exact solution of Fresnel's equations for an absorbing medium (Born & Wolf, section 14.2), in the arrangement
+ *  of Lagarde 2013, "Memo on Fresnel equations". At normal incidence it reduces to ((n - 1)^2 + k^2) / ((n + 1)^2 + k^2). */
+float3 MatterConductorFresnel(float CosIncidence, float3 N, float3 K)
+{
+	const float Cos2 = CosIncidence * CosIncidence;
+	const float Sin2 = 1.0 - Cos2;
+	const float3 N2 = N * N;
+	const float3 K2 = K * K;
+	const float3 T0 = N2 - K2 - Sin2;
+	const float3 A2PlusB2 = sqrt(T0 * T0 + 4.0 * N2 * K2);
+	const float3 T1 = A2PlusB2 + Cos2;
+	const float3 A = sqrt(max(0.5 * (A2PlusB2 + T0), 0.0));
+	const float3 T2 = 2.0 * A * CosIncidence;
+	const float3 Rs = (T1 - T2) / max(T1 + T2, MatterTiny);
+	const float3 T3 = Cos2 * A2PlusB2 + Sin2 * Sin2;
+	const float3 T4 = T2 * Sin2;
+	const float3 Rp = Rs * (T3 - T4) / max(T3 + T4, MatterTiny);
+	return 0.5 * (Rp + Rs);
+}

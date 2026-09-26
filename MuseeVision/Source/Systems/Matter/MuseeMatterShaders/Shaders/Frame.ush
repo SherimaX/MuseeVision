@@ -1,0 +1,35 @@
+// Frame: the frame of reference Matter's shading library works in.
+//
+// Every function in the library works in SI units, with the unit in each argument's name (metres, millimetres,
+// metres per second, years). Unreal's positions arrive in centimetres, its engine unit; they are converted here and
+// nowhere else, as Musee::ToEngine is the one conversion on the C++ side. Axes laid on a surface (a stone's bedding, a
+// brush's stroke) are built here from the surface's normal.
+
+#pragma once
+
+// Unreal's world and local positions are in centimetres.
+static const float MatterMetersPerEngineUnit = 0.01;
+
+// Millimetres in a metre: the library states small depths (water, texture, relief, grain) in millimetres.
+static const float MatterMillimetersPerMeter = 1000.0;
+
+// Guards divisions whose denominator is an input that may be zero when a record leaves a quantity unset. It lies far
+// below any quantity the library measures in its units (the smallest, a polished face's texture depth, is ~1e-3 mm).
+static const float MatterTiny = 1e-6;
+
+// An axis perpendicular to a normal is built by crossing it with a reference axis that must not lie near the normal;
+// switching the reference where the normal's z component passes one half keeps the two at least 60 degrees apart.
+static const float MatterAxisSwitch = 0.5;
+
+/** A position in Unreal's engine unit (centimetres), in metres. */
+float3 MatterMetersFromEngine(float3 EnginePosition)
+{
+	return EnginePosition * MatterMetersPerEngineUnit;
+}
+
+/** A unit axis perpendicular to the unit vector Normal. */
+float3 MatterPerpendicular(float3 Normal)
+{
+	const float3 Reference = abs(Normal.z) < MatterAxisSwitch ? float3(0.0, 0.0, 1.0) : float3(1.0, 0.0, 0.0);
+	return normalize(cross(Reference, Normal));
+}
