@@ -1,0 +1,155 @@
+{
+  "place": "beijing",
+  "station": "Beijing, China Meteorological Administration station 54511, elevation 31 m",
+  "period": "1991-2020",
+  "wetDayThresholdMillimeters": 0.1,
+  "months": [
+    {
+      "month": 1,
+      "meanMaximumCelsius": 2.3,
+      "meanMinimumCelsius": -6.9,
+      "precipitationMillimeters": 2.2,
+      "wetDays": 1.6,
+      "sunshineHours": 188.1,
+      "windSpeedMetersPerSecond": 3.26,
+      "windFromDegrees": 0,
+      "snowDays": 2.8
+    },
+    {
+      "month": 2,
+      "meanMaximumCelsius": 6.1,
+      "meanMinimumCelsius": -4.2,
+      "precipitationMillimeters": 5.8,
+      "wetDays": 2.3,
+      "sunshineHours": 189.1,
+      "windSpeedMetersPerSecond": 3.31,
+      "windFromDegrees": 0,
+      "snowDays": 2.5
+    },
+    {
+      "month": 3,
+      "meanMaximumCelsius": 13.2,
+      "meanMinimumCelsius": 1.9,
+      "precipitationMillimeters": 8.6,
+      "wetDays": 3.0,
+      "sunshineHours": 231.1,
+      "windSpeedMetersPerSecond": 3.62,
+      "windFromDegrees": 0,
+      "snowDays": 1.3
+    },
+    {
+      "month": 4,
+      "meanMaximumCelsius": 21.0,
+      "meanMinimumCelsius": 9.0,
+      "precipitationMillimeters": 21.7,
+      "wetDays": 4.7,
+      "sunshineHours": 243.2,
+      "windSpeedMetersPerSecond": 3.93,
+      "windFromDegrees": 0,
+      "snowDays": 0.1
+    },
+    {
+      "month": 5,
+      "meanMaximumCelsius": 27.2,
+      "meanMinimumCelsius": 15.1,
+      "precipitationMillimeters": 36.1,
+      "wetDays": 6.0,
+      "sunshineHours": 265.1,
+      "windSpeedMetersPerSecond": 3.76,
+      "windFromDegrees": 180,
+      "snowDays": 0.0
+    },
+    {
+      "month": 6,
+      "meanMaximumCelsius": 30.8,
+      "meanMinimumCelsius": 20.0,
+      "precipitationMillimeters": 72.4,
+      "wetDays": 10.0,
+      "sunshineHours": 221.6,
+      "windSpeedMetersPerSecond": 3.04,
+      "windFromDegrees": 180,
+      "snowDays": 0.0
+    },
+    {
+      "month": 7,
+      "meanMaximumCelsius": 31.8,
+      "meanMinimumCelsius": 23.0,
+      "precipitationMillimeters": 169.7,
+      "wetDays": 11.9,
+      "sunshineHours": 190.5,
+      "windSpeedMetersPerSecond": 2.59,
+      "windFromDegrees": 180,
+      "snowDays": 0.0
+    },
+    {
+      "month": 8,
+      "meanMaximumCelsius": 30.7,
+      "meanMinimumCelsius": 22.0,
+      "precipitationMillimeters": 113.4,
+      "wetDays": 10.5,
+      "sunshineHours": 205.3,
+      "windSpeedMetersPerSecond": 2.41,
+      "windFromDegrees": 180,
+      "snowDays": 0.0
+    },
+    {
+      "month": 9,
+      "meanMaximumCelsius": 26.5,
+      "meanMinimumCelsius": 16.3,
+      "precipitationMillimeters": 53.7,
+      "wetDays": 7.1,
+      "sunshineHours": 206.1,
+      "windSpeedMetersPerSecond": 2.68,
+      "windFromDegrees": 180,
+      "snowDays": 0.0
+    },
+    {
+      "month": 10,
+      "meanMaximumCelsius": 19.3,
+      "meanMinimumCelsius": 8.8,
+      "precipitationMillimeters": 28.7,
+      "wetDays": 5.2,
+      "sunshineHours": 199.9,
+      "windSpeedMetersPerSecond": 3.04,
+      "windFromDegrees": 0,
+      "snowDays": 0.0
+    },
+    {
+      "month": 11,
+      "meanMaximumCelsius": 10.3,
+      "meanMinimumCelsius": 0.7,
+      "precipitationMillimeters": 13.5,
+      "wetDays": 2.9,
+      "sunshineHours": 173.4,
+      "windSpeedMetersPerSecond": 3.08,
+      "windFromDegrees": 0,
+      "snowDays": 1.7
+    },
+    {
+      "month": 12,
+      "meanMaximumCelsius": 3.7,
+      "meanMinimumCelsius": -5.0,
+      "precipitationMillimeters": 2.2,
+      "wetDays": 1.6,
+      "sunshineHours": 177.1,
+      "windSpeedMetersPerSecond": 3.22,
+      "windFromDegrees": 0,
+      "snowDays": 2.8
+    }
+  ],
+  "sources": [
+    {
+      "values": "temperature, precipitation, wet days (at least 0.1 mm), snowy days, sunshine hours",
+      "source": "China Meteorological Administration, climate averages 1991-2020, station 54511, as tabulated in Wikipedia's Beijing weatherbox",
+      "url": "https://en.wikipedia.org/wiki/Template:Beijing_weatherbox",
+      "accessed": "2026-09-26"
+    },
+    {
+      "values": "wind speed (monthly mean of hourly 10 m wind, published in mph, converted at 0.44704 m/s per mph) and prevailing direction (north from 30 September to 17 April, south from 17 April to 30 September; each month takes the direction that holds most of it)",
+      "source": "Weather Spark, Beijing, from NASA's MERRA-2 reanalysis",
+      "url": "https://weatherspark.com/y/131055/Average-Weather-in-Beijing-China-Year-Round",
+      "accessed": "2026-09-26"
+    }
+  ],
+  "notes": "The CMA counts a snowy day for any snowfall, trace included, so January has more snowy days (2.8) than days with at least 0.1 mm (1.6)."
+}

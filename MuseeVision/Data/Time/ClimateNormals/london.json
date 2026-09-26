@@ -1,0 +1,155 @@
+{
+  "place": "london",
+  "station": "Heathrow, Met Office, elevation 25 m, about 22 km west of Charing Cross",
+  "period": "1991-2020",
+  "wetDayThresholdMillimeters": 1.0,
+  "months": [
+    {
+      "month": 1,
+      "meanMaximumCelsius": 8.42,
+      "meanMinimumCelsius": 2.68,
+      "precipitationMillimeters": 58.83,
+      "wetDays": 11.53,
+      "sunshineHours": 61.09,
+      "windSpeedMetersPerSecond": 4.19,
+      "windFromDegrees": 270,
+      "frostDays": 6.8
+    },
+    {
+      "month": 2,
+      "meanMaximumCelsius": 8.98,
+      "meanMinimumCelsius": 2.65,
+      "precipitationMillimeters": 44.96,
+      "wetDays": 9.5,
+      "sunshineHours": 78.81,
+      "windSpeedMetersPerSecond": 4.02,
+      "windFromDegrees": 270,
+      "frostDays": 6.2
+    },
+    {
+      "month": 3,
+      "meanMaximumCelsius": 11.73,
+      "meanMinimumCelsius": 4.14,
+      "precipitationMillimeters": 38.78,
+      "wetDays": 8.47,
+      "sunshineHours": 124.45,
+      "windSpeedMetersPerSecond": 3.95,
+      "windFromDegrees": 270,
+      "frostDays": 2.93
+    },
+    {
+      "month": 4,
+      "meanMaximumCelsius": 15.0,
+      "meanMinimumCelsius": 6.03,
+      "precipitationMillimeters": 42.31,
+      "wetDays": 8.8,
+      "sunshineHours": 176.67,
+      "windSpeedMetersPerSecond": 3.63,
+      "windFromDegrees": 270,
+      "frostDays": 0.8
+    },
+    {
+      "month": 5,
+      "meanMaximumCelsius": 18.37,
+      "meanMinimumCelsius": 9.08,
+      "precipitationMillimeters": 45.91,
+      "wetDays": 8.0,
+      "sunshineHours": 207.49,
+      "windSpeedMetersPerSecond": 3.73,
+      "windFromDegrees": 270,
+      "frostDays": 0.03
+    },
+    {
+      "month": 6,
+      "meanMaximumCelsius": 21.57,
+      "meanMinimumCelsius": 12.03,
+      "precipitationMillimeters": 47.25,
+      "wetDays": 8.33,
+      "sunshineHours": 208.39,
+      "windSpeedMetersPerSecond": 3.64,
+      "windFromDegrees": 270,
+      "frostDays": 0.0
+    },
+    {
+      "month": 7,
+      "meanMaximumCelsius": 23.89,
+      "meanMinimumCelsius": 14.18,
+      "precipitationMillimeters": 45.8,
+      "wetDays": 7.9,
+      "sunshineHours": 217.81,
+      "windSpeedMetersPerSecond": 3.7,
+      "windFromDegrees": 270,
+      "frostDays": 0.0
+    },
+    {
+      "month": 8,
+      "meanMaximumCelsius": 23.4,
+      "meanMinimumCelsius": 14.06,
+      "precipitationMillimeters": 52.78,
+      "wetDays": 8.43,
+      "sunshineHours": 202.12,
+      "windSpeedMetersPerSecond": 3.55,
+      "windFromDegrees": 270,
+      "frostDays": 0.0
+    },
+    {
+      "month": 9,
+      "meanMaximumCelsius": 20.22,
+      "meanMinimumCelsius": 11.62,
+      "precipitationMillimeters": 49.61,
+      "wetDays": 7.9,
+      "sunshineHours": 157.11,
+      "windSpeedMetersPerSecond": 3.46,
+      "windFromDegrees": 270,
+      "frostDays": 0.0
+    },
+    {
+      "month": 10,
+      "meanMaximumCelsius": 15.81,
+      "meanMinimumCelsius": 8.78,
+      "precipitationMillimeters": 65.07,
+      "wetDays": 10.8,
+      "sunshineHours": 115.17,
+      "windSpeedMetersPerSecond": 3.67,
+      "windFromDegrees": 270,
+      "frostDays": 0.33
+    },
+    {
+      "month": 11,
+      "meanMaximumCelsius": 11.47,
+      "meanMinimumCelsius": 5.26,
+      "precipitationMillimeters": 66.63,
+      "wetDays": 11.23,
+      "sunshineHours": 70.74,
+      "windSpeedMetersPerSecond": 3.61,
+      "windFromDegrees": 270,
+      "frostDays": 2.73
+    },
+    {
+      "month": 12,
+      "meanMaximumCelsius": 8.79,
+      "meanMinimumCelsius": 3.08,
+      "precipitationMillimeters": 57.05,
+      "wetDays": 10.77,
+      "sunshineHours": 54.96,
+      "windSpeedMetersPerSecond": 4.0,
+      "windFromDegrees": 270,
+      "frostDays": 7.17
+    }
+  ],
+  "sources": [
+    {
+      "values": "temperature, rainfall, days of rainfall of at least 1 mm, sunshine hours, days of air frost, mean wind speed at 10 m (published in knots, converted at 1852/3600 m/s)",
+      "source": "Met Office, Heathrow location-specific long-term averages 1991-2020",
+      "url": "https://www.metoffice.gov.uk/research/climate/maps-and-data/location-specific-long-term-averages/gcpsveqyg",
+      "accessed": "2026-09-26"
+    },
+    {
+      "values": "prevailing wind direction (west for eleven months, 12 May to 16 April)",
+      "source": "Weather Spark, London, from NASA's MERRA-2 reanalysis",
+      "url": "https://weatherspark.com/y/45062/Average-Weather-in-London-United-Kingdom-Year-Round",
+      "accessed": "2026-09-26"
+    }
+  ],
+  "notes": "The Met Office's 1991-2020 averages carry no snow-day counts; the generator's snow follows from temperature alone."
+}

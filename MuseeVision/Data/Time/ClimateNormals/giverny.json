@@ -1,0 +1,155 @@
+{
+  "place": "giverny",
+  "station": "Evreux-Huest, Meteo-France station 27347001, altitude 138 m, about 25 km south-west of Giverny",
+  "period": "1991-2020",
+  "wetDayThresholdMillimeters": 1.0,
+  "months": [
+    {
+      "month": 1,
+      "meanMaximumCelsius": 7.0,
+      "meanMinimumCelsius": 1.6,
+      "precipitationMillimeters": 49.0,
+      "wetDays": 10.9,
+      "sunshineHours": 63.5,
+      "windSpeedMetersPerSecond": 4.61,
+      "windFromDegrees": 180,
+      "frostDays": 10.7
+    },
+    {
+      "month": 2,
+      "meanMaximumCelsius": 8.1,
+      "meanMinimumCelsius": 1.5,
+      "precipitationMillimeters": 43.6,
+      "wetDays": 9.9,
+      "sunshineHours": 79.9,
+      "windSpeedMetersPerSecond": 4.5,
+      "windFromDegrees": 270,
+      "frostDays": 10.0
+    },
+    {
+      "month": 3,
+      "meanMaximumCelsius": 11.7,
+      "meanMinimumCelsius": 3.4,
+      "precipitationMillimeters": 44.3,
+      "wetDays": 9.5,
+      "sunshineHours": 128.1,
+      "windSpeedMetersPerSecond": 4.31,
+      "windFromDegrees": 270,
+      "frostDays": 5.9
+    },
+    {
+      "month": 4,
+      "meanMaximumCelsius": 15.0,
+      "meanMinimumCelsius": 5.1,
+      "precipitationMillimeters": 43.8,
+      "wetDays": 8.7,
+      "sunshineHours": 173.2,
+      "windSpeedMetersPerSecond": 3.89,
+      "windFromDegrees": 0,
+      "frostDays": 2.4
+    },
+    {
+      "month": 5,
+      "meanMaximumCelsius": 18.3,
+      "meanMinimumCelsius": 8.4,
+      "precipitationMillimeters": 53.5,
+      "wetDays": 9.0,
+      "sunshineHours": 193.9,
+      "windSpeedMetersPerSecond": 3.69,
+      "windFromDegrees": 0,
+      "frostDays": 0.1
+    },
+    {
+      "month": 6,
+      "meanMaximumCelsius": 21.6,
+      "meanMinimumCelsius": 11.4,
+      "precipitationMillimeters": 50.7,
+      "wetDays": 8.1,
+      "sunshineHours": 207.7,
+      "windSpeedMetersPerSecond": 3.5,
+      "windFromDegrees": 270,
+      "frostDays": 0.0
+    },
+    {
+      "month": 7,
+      "meanMaximumCelsius": 24.2,
+      "meanMinimumCelsius": 13.3,
+      "precipitationMillimeters": 49.4,
+      "wetDays": 7.9,
+      "sunshineHours": 213.6,
+      "windSpeedMetersPerSecond": 3.61,
+      "windFromDegrees": 270,
+      "frostDays": 0.0
+    },
+    {
+      "month": 8,
+      "meanMaximumCelsius": 24.2,
+      "meanMinimumCelsius": 13.3,
+      "precipitationMillimeters": 45.0,
+      "wetDays": 7.5,
+      "sunshineHours": 205.7,
+      "windSpeedMetersPerSecond": 3.5,
+      "windFromDegrees": 270,
+      "frostDays": 0.0
+    },
+    {
+      "month": 9,
+      "meanMaximumCelsius": 20.7,
+      "meanMinimumCelsius": 10.6,
+      "precipitationMillimeters": 44.6,
+      "wetDays": 7.6,
+      "sunshineHours": 170.4,
+      "windSpeedMetersPerSecond": 3.61,
+      "windFromDegrees": 270,
+      "frostDays": 0.0
+    },
+    {
+      "month": 10,
+      "meanMaximumCelsius": 15.7,
+      "meanMinimumCelsius": 8.0,
+      "precipitationMillimeters": 58.1,
+      "wetDays": 10.4,
+      "sunshineHours": 120.2,
+      "windSpeedMetersPerSecond": 4.0,
+      "windFromDegrees": 180,
+      "frostDays": 0.9
+    },
+    {
+      "month": 11,
+      "meanMaximumCelsius": 10.6,
+      "meanMinimumCelsius": 4.5,
+      "precipitationMillimeters": 53.8,
+      "wetDays": 10.9,
+      "sunshineHours": 72.0,
+      "windSpeedMetersPerSecond": 4.11,
+      "windFromDegrees": 180,
+      "frostDays": 4.4
+    },
+    {
+      "month": 12,
+      "meanMaximumCelsius": 7.4,
+      "meanMinimumCelsius": 2.0,
+      "precipitationMillimeters": 64.8,
+      "wetDays": 12.3,
+      "sunshineHours": 61.7,
+      "windSpeedMetersPerSecond": 4.5,
+      "windFromDegrees": 180,
+      "frostDays": 10.7
+    }
+  ],
+  "sources": [
+    {
+      "values": "temperature, precipitation, wet days (at least 1 mm), sunshine hours, frost days, wind speed (published in km/h, converted at 1/3.6)",
+      "source": "Meteo-France normals 1991-2020 for Evreux-Huest, as published by Meteociel",
+      "url": "https://www.meteociel.fr/obs/clim/normales_records.php?code=27347001",
+      "accessed": "2026-09-26"
+    },
+    {
+      "values": "prevailing wind direction (west from 1 February to 5 April and from 8 June to 28 September, north from 5 April to 8 June, south from 28 September to 1 February; each month takes the direction that holds most of it)",
+      "source": "Weather Spark, Paris, from NASA's MERRA-2 reanalysis: the nearest place with published directions, 70 km up the Seine from Giverny",
+      "url": "https://weatherspark.com/y/47913/Average-Weather-in-Paris-France-Year-Round",
+      "accessed": "2026-09-26"
+    }
+  ],
+  "notes": "Meteo-France publishes no snow-day normals for Evreux-Huest; the generator's snow follows from temperature alone."
+}
