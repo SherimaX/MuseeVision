@@ -1,0 +1,4 @@
+{
+	"$units": { "SpeedMetersPerSecond": "km/h" },
+	"Body": "visitor.body", "Substance": "travertine", "SpeedMetersPerSecond": 1.3
+}

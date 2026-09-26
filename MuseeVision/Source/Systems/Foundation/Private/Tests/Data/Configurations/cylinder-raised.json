@@ -1,0 +1,11 @@
+{
+	"$sources": "A fixture of the record reader: the sun clock's cylinder raised 1.2 m out of the floor.",
+	"$units": { "OriginMeters": "Meters" },
+	"Name": "rotunda.cylinder-raised",
+	"Poses": [
+		{
+			"Key": "rotunda.cylinder",
+			"Frame": { "OriginMeters": { "X": 0.0, "Y": 0.0, "Z": 1.2 }, "Rotation": { "X": 0.0, "Y": 0.0, "Z": 0.0, "W": 1.0 } }
+		}
+	]
+}

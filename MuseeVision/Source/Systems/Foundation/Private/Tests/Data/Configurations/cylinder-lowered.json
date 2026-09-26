@@ -1,0 +1,8 @@
+{
+	"$sources": "A fixture of the record reader: the sun clock's cylinder at rest in the Rotunda's floor.",
+	"$units": { "OriginMeters": "m" },
+	"Name": "rotunda.cylinder-lowered",
+	"Poses": [
+		{ "Key": "rotunda.cylinder", "Frame": { "OriginMeters": { "X": 0.0, "Y": 0.0, "Z": 0.0 } } }
+	]
+}

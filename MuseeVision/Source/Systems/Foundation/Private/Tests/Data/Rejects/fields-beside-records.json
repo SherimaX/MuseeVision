@@ -1,0 +1,4 @@
+{
+	"Body": "visitor.body",
+	"$records": [ { "Body": "visitor.body", "Substance": "oak", "SpeedMetersPerSecond": 0.3 } ]
+}
