@@ -95,72 +95,66 @@ namespace Musee::Records
 
 		bool ValidateObject(const UStruct& Type, const FJsonObject& Object, FReading& Reading, const FString& Where);
 
-		bool ValidateElement(const FProperty& Property, const FJsonValue& Value, FReading& Reading, const FString& Where)
+		bool ValidateElement(const FProperty& Property, const FJsonValue& Value, FReading& Reading, const FString& Where);
+
+		bool ValidateList(const FProperty& Inner, const FJsonValue& Value, FReading& Reading, const FString& Where)
 		{
-			const FProperty* Inner = nullptr;
-			if (const FArrayProperty* Array = CastField<FArrayProperty>(&Property))
+			if (!Expect(Value, EJson::Array, Reading, Where, TEXT("an array")))
 			{
-				Inner = Array->Inner;
+				return false;
 			}
-			else if (const FSetProperty* Set = CastField<FSetProperty>(&Property))
+			const TArray<TSharedPtr<FJsonValue>>& Items = Value.AsArray();
+			for (int32 Index = 0; Index < Items.Num(); ++Index)
 			{
-				Inner = Set->ElementProp;
-			}
-			if (Inner)
-			{
-				if (!Expect(Value, EJson::Array, Reading, Where, TEXT("an array")))
+				if (!Items[Index].IsValid() || Items[Index]->IsNull())
+				{
+					return Reading.Fail(Element(Where, Index), TEXT("is null; an array holds values"));
+				}
+				if (!ValidateElement(Inner, *Items[Index], Reading, Element(Where, Index)))
 				{
 					return false;
 				}
-				const TArray<TSharedPtr<FJsonValue>>& Items = Value.AsArray();
-				for (int32 Index = 0; Index < Items.Num(); ++Index)
-				{
-					if (!Items[Index].IsValid() || Items[Index]->IsNull())
-					{
-						return Reading.Fail(Element(Where, Index), TEXT("is null; an array holds values"));
-					}
-					if (!ValidateElement(*Inner, *Items[Index], Reading, Element(Where, Index)))
-					{
-						return false;
-					}
-				}
-				return true;
 			}
-			if (const FMapProperty* Map = CastField<FMapProperty>(&Property))
+			return true;
+		}
+
+		bool ValidateMap(const FMapProperty& Map, const FJsonValue& Value, FReading& Reading, const FString& Where)
+		{
+			if (!Expect(Value, EJson::Object, Reading, Where, TEXT("an object")))
 			{
-				if (!Expect(Value, EJson::Object, Reading, Where, TEXT("an object")))
+				return false;
+			}
+			for (const auto& Entry : Value.AsObject()->Values)
+			{
+				const FString EntryWhere = FString::Printf(TEXT("%s[%s]"), *Where, *Entry.Key);
+				if (IsKey(*Map.KeyProp) && !CheckKey(FString(*Entry.Key), Reading, EntryWhere))
 				{
 					return false;
 				}
-				for (const auto& Entry : Value.AsObject()->Values)
+				if (Entry.Value.IsValid() && !Entry.Value->IsNull() && !ValidateElement(*Map.ValueProp, *Entry.Value, Reading, EntryWhere))
 				{
-					const FString EntryWhere = FString::Printf(TEXT("%s[%s]"), *Where, *Entry.Key);
-					if (IsKey(*Map->KeyProp) && !CheckKey(FString(*Entry.Key), Reading, EntryWhere))
-					{
-						return false;
-					}
-					if (Entry.Value.IsValid() && !Entry.Value->IsNull() && !ValidateElement(*Map->ValueProp, *Entry.Value, Reading, EntryWhere))
-					{
-						return false;
-					}
+					return false;
 				}
+			}
+			return true;
+		}
+
+		bool ValidateStruct(const FStructProperty& Struct, const FJsonValue& Value, FReading& Reading, const FString& Where)
+		{
+			if (IsKey(Struct))
+			{
+				return Expect(Value, EJson::String, Reading, Where, TEXT("a key, written as a string")) && CheckKey(Value.AsString(), Reading, Where);
+			}
+			if (Value.Type == EJson::String)
+			{
+				// The engine's own text form of the struct (a colour, a date), converted by the struct itself.
 				return true;
 			}
-			if (const FStructProperty* Struct = CastField<FStructProperty>(&Property))
-			{
-				if (IsKey(Property))
-				{
-					return Expect(Value, EJson::String, Reading, Where, TEXT("a key, written as a string"))
-						&& CheckKey(Value.AsString(), Reading, Where);
-				}
-				if (Value.Type == EJson::String)
-				{
-					// The engine's own text form of the struct (a colour, a date), converted by the struct itself.
-					return true;
-				}
-				return Expect(Value, EJson::Object, Reading, Where, TEXT("an object"))
-					&& ValidateObject(*Struct->Struct, *Value.AsObject(), Reading, Where);
-			}
+			return Expect(Value, EJson::Object, Reading, Where, TEXT("an object")) && ValidateObject(*Struct.Struct, *Value.AsObject(), Reading, Where);
+		}
+
+		bool ValidateScalar(const FProperty& Property, const FJsonValue& Value, FReading& Reading, const FString& Where)
+		{
 			if (Property.IsA<FBoolProperty>())
 			{
 				return Expect(Value, EJson::Boolean, Reading, Where, TEXT("true or false"));
@@ -168,8 +162,7 @@ namespace Musee::Records
 			const FNumericProperty* Numeric = CastField<FNumericProperty>(&Property);
 			if (Property.IsA<FEnumProperty>() || (Numeric && Numeric->IsEnum()))
 			{
-				return Value.Type == EJson::String
-					|| Expect(Value, EJson::Number, Reading, Where, TEXT("an enumerator's name"));
+				return Value.Type == EJson::Number || Expect(Value, EJson::String, Reading, Where, TEXT("an enumerator's name"));
 			}
 			if (Numeric)
 			{
@@ -181,6 +174,27 @@ namespace Musee::Records
 			}
 			// Object paths and the rarer kinds are converted, and their values checked, by the engine's converter.
 			return true;
+		}
+
+		bool ValidateElement(const FProperty& Property, const FJsonValue& Value, FReading& Reading, const FString& Where)
+		{
+			if (const FArrayProperty* Array = CastField<FArrayProperty>(&Property))
+			{
+				return ValidateList(*Array->Inner, Value, Reading, Where);
+			}
+			if (const FSetProperty* Set = CastField<FSetProperty>(&Property))
+			{
+				return ValidateList(*Set->ElementProp, Value, Reading, Where);
+			}
+			if (const FMapProperty* Map = CastField<FMapProperty>(&Property))
+			{
+				return ValidateMap(*Map, Value, Reading, Where);
+			}
+			if (const FStructProperty* Struct = CastField<FStructProperty>(&Property))
+			{
+				return ValidateStruct(*Struct, Value, Reading, Where);
+			}
+			return ValidateScalar(Property, Value, Reading, Where);
 		}
 
 		bool ValidateObject(const UStruct& Type, const FJsonObject& Object, FReading& Reading, const FString& Where)

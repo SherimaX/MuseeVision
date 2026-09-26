@@ -48,6 +48,7 @@ bool FMuseeFoundationSettingsTest::RunTest(const FString& Parameters)
 	FString Stored;
 	GConfig->GetString(SettingsSection, *Hour.ToString(), Stored, GGameUserSettingsIni);
 	TestEqual(TEXT("The value is kept in the user's config"), Stored, FString(TEXT("15.5")));
+	AddExpectedMessagePlain(TEXT("takes one value, a number from 0 to 24"), ELogVerbosity::Warning, EAutomationExpectedMessageFlags::Contains, 1);
 	TestFalse(TEXT("A value out of range is refused"), FMuseeCommand::Run(HourCommand, {TEXT("30")}));
 	TestFalse(TEXT("Text that isn't a number is refused"), Setting->SetFromText(TEXT("noon")));
 	TestTrue(TEXT("Setting the value it has changes nothing"), Setting->SetNumber(15.5));

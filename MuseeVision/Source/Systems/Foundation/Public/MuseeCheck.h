@@ -87,7 +87,7 @@ public:
 	/** Unregisters a check. */
 	static void Unregister(FName Name);
 
-	/** A registered check, or null. It stays valid until it is unregistered. */
+	/** A registered check, or null. It stays valid until it is unregistered or registered again. */
 	[[nodiscard]] static const FMuseeCheck* Find(FName Name);
 
 	/** Every registered check, in name order. */
