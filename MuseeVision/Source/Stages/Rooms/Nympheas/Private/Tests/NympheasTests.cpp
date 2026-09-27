@@ -109,9 +109,10 @@ namespace Musee::Nympheas::Tests
 		const FMuseeStageAnchor* Willows = FindAnchor(Description, FMuseeKey(TEXT("nympheas.wall.willows")), TEXT("Wall"));
 		if (TestNotNull(TEXT("the willows' wall"), Willows) && TestTrue(TEXT("its path is given"), !Hang.GetValue().Walls.IsEmpty()))
 		{
+			// The schedule's angle is read as a float, good to a micrometre on the wall.
 			const double From = FMath::DegreesToRadians(Hang.GetValue().Walls[0].Path.From_Deg);
 			const FVector Start(Plan::OvalA * FMath::Cos(From), Plan::OvalB * FMath::Sin(From), 0.0);
-			TestTrue(TEXT("it starts at the door's north jamb, on its path"), Willows->Frame.OriginMeters.Equals(Start, 1e-9)
+			TestTrue(TEXT("it starts at the door's north jamb, on its path"), Willows->Frame.OriginMeters.Equals(Start, 1e-5)
 				&& Willows->Frame.OriginMeters.Equals(FVector(10.778, -1.5, 0.0), 0.001));
 			const FVector Out = Willows->Frame.DirectionToParent(FVector(0.0, 1.0, 0.0));
 			TestTrue(TEXT("its y looks into the room"), FVector::DotProduct(Out, -Start) > 0.0 && FMath::IsNearlyZero(Out.Z));
