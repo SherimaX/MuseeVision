@@ -4,8 +4,8 @@
 /**
  * The five lanterns inside the roof (§3.4): each bay's shaft rising from the crown of its vault to the roof's top, and
  * at the shaft's mouth a bronze grid carrying the inner pane (bay 2's flashed opal, the others clear), with bay 4's
- * linen scrim stretched on its angle frame below the grid, a fixed diffuser (D-014). The weather glazing over each shaft
- * is the roof's.
+ * linen scrim stretched on its angle frame below the grid and sagging under its own weight, a fixed diffuser (D-014).
+ * The weather glazing over each shaft is the roof's.
  */
 namespace Musee::Salon
 {
@@ -55,13 +55,18 @@ namespace Musee::Salon
 			}
 		}
 
-		/** Bay 4's linen, stretched taut at 13.490 and seen from below, on its angle frame round the shaft's mouth. */
+		/**
+		 * Bay 4's linen, stretched at 13.490 on its angle frame round the shaft's mouth and sagging 30 mm at its middle, as a
+		 * cloth held on its four sides hangs under its own weight.
+		 */
 		void Scrim(TArray<FFormDrawing>& Out, const FString& Name, const FBox2D& L)
 		{
-			FFormFace Linen;
-			Linen.Outline = FFormProfile::Rectangle(FVector2D::ZeroVector, FVector2D(L.Max.X - L.Min.X, L.Max.Y - L.Min.Y));
-			FFormDrawing Cloth = Drawn(Name + TEXT(".scrim"), TEXT("lantern.scrim"), MoveTemp(Linen), nullptr,
-				FrameOfAxes(FVector(L.Min.X, L.Max.Y, Plan::ScrimZ), FMuseeFrame::East(), FMuseeFrame::North()));
+			FFormCloth Linen;
+			Linen.SizeMeters = L.Max - L.Min;
+			Linen.SagMeters = Plan::ScrimSag;
+			Linen.ThicknessMeters = Plan::ScrimThickness;
+			Linen.GridMeters = Plan::ScrimGrid;
+			FFormDrawing Cloth = Drawn(Name + TEXT(".scrim"), TEXT("lantern.scrim"), MoveTemp(Linen), nullptr, FMuseeFrame(FVector(L.Min.X, L.Min.Y, Plan::ScrimZ)));
 			Cloth.bNanite = false;
 			Out.Add(MoveTemp(Cloth));
 
