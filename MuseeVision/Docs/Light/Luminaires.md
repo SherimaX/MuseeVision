@@ -46,7 +46,7 @@ stand on; Light lights one lamp in each globe and shares the fitting's flux equa
 
 ## The catalogue
 
-Twenty-nine luminaires from ERCO, iGuzzini, Zumtobel, Edison Price Lighting, Hogarth Lighting, Lumistrips, FX
+Twenty-eight luminaires from ERCO, iGuzzini, Zumtobel, Hogarth Lighting, Lumistrips, FX
 Luminaire, Segula, Ledstore, LEDVANCE, Spanlite, Color Kinetics and Light Field Lab. Every track spotlight
 and wallwasher has a colour rendering index of 95 or more, at both 3000 K and 4000 K. The flux is the luminaire's own
 output (the light that leaves the housing), not the LED's.
@@ -60,8 +60,7 @@ output (the light that leaves the housing), not the LED's.
 | `track-spot.4000k.12deg` | iGuzzini Palco ø 102 mm | QG50 | 1987.2 lm | 12° | 4000 K | 97 | 28.5 W | gallery | complete |
 | `track-spot.4000k.20deg` | iGuzzini Palco ø 102 mm | QG51 | 1981.26 lm | 20° | 4000 K | 97 | 28.5 W | gallery | complete |
 | `track-spot.4000k.38deg` | iGuzzini Palco ø 102 mm | QG52 | 1921.59 lm | 38° | 4000 K | 97 | 28.5 W | gallery | complete |
-| `track-wallwasher.3000k` | iGuzzini Sipario LV ø 73 mm | 362G | 999 lm | wall wash | 3000 K | 97 | 16.1 W | gallery | complete |
-| `track-wallwasher.4000k` | Edison Price Stacklite | STK-CZE-2000L-40K-XIA-95+-DIMTR-120V-WH | 2000 lm, nominal | wall wash | 4000 K | ≥ 95 | not published | gallery | incomplete |
+| `track-wallwasher.3000k` | iGuzzini Sipario LV ø 73 mm | 362G | 999 lm | wall wash, its IES file 362G_O25F | 3000 K | 97 | 16.1 W | gallery | complete |
 | `track-framing.3000k.small` | iGuzzini Palco framer ø 99 mm | Q745 | 552 lm | flaps open: the beam its flux and peak fix | 3000 K | 97 | 24.2 W | gallery | complete |
 | `track-framing.3000k.medium` | iGuzzini Palco framer ø 115 mm | P252 | 896 lm | flaps open: the beam its flux and peak fix | 3000 K | 97 | 35 W | gallery | complete |
 | `picture-light.2700k` | Hogarth Classic Picture Light, antique bronze | #100 | not published | shuttered hood | 2700 K | 97 | not published | gallery | incomplete |
@@ -98,7 +97,8 @@ The unit of every number is in its field name, the way the museum writes units e
   (`laylight`, `edge-lit-glass`, `light-field-panel`), not whether its maker publishes the number: a type whose
   photometry is unpublished is still laid over its zone, and stands there unlit until its flux is published or derived.
 - `beamAngleDegrees` is the full angle at which the intensity falls to half its peak. Framers and wallwashers have no
-  single beam angle: their light is shaped by shutters or an asymmetric lens, described in `beamName`. Where a maker
+  single beam angle: their light is shaped by shutters or an asymmetric lens, described in `beamName`, and a
+  wallwasher's by its photometric file (below). Where a maker
   publishes a flux and a peak intensity but no beam angle (the step light), Light takes the Gaussian beam those two fix
   together: the one whose intensity, integrated over the hemisphere in front of it, carries that flux under that peak.
 - `peakCandela` is the luminous intensity on the beam's axis. It is the number that decides the illuminance a spot
@@ -109,16 +109,11 @@ The unit of every number is in its field name, the way the museum writes units e
 - `systemPowerWatts`, `control` and `mounting` describe the electrical side: DALI or an on-board dimmer, and which
   track or ceiling the luminaire fits.
 - `housing` gives the size, weight and materials, so Form can draw the luminaire as a real object in the room.
-- `photometricFile` links the maker's IES or LDT file where one is public. The files are not in the repository; the
-  record names where each one is published.
-
-**Photometric files awaiting the owner's approval** (no file is downloaded without it). The track wallwashers stand
-unlit until their files are read, since only a photometric file describes an asymmetric wash:
-
-| Type | Product | File | Where the maker publishes it |
-|---|---|---|---|
-| `track-wallwasher.3000k` | iGuzzini Sipario LV ø 73, 362G | the 362G photometry, IES (and LDT) | the Downloads tab of [iguzzini.com/en/362g](https://www.iguzzini.com/en/362g/) (its links are built in the browser, so no direct address is recorded) |
-| `track-wallwasher.4000k` | Edison Price Stacklite STK-CZE, 2000L 40K XIA-95+ | the 2000L 40K file inside the family's IES archive | [epl.com/media/ies/stk-cze.zip](https://epl.com/media/ies/stk-cze.zip), linked from [epl.com/product/stk-cze](https://epl.com/product/stk-cze/) |
+- `photometricFile` names the maker's IES or LDT file. A file the owner has approved is kept in the repository, byte
+  for byte, in `Data/Light/Photometry`, beside a `SOURCES.md` that records its maker, page, LUMCAT, test, issue date,
+  the day it was obtained and its use; `path` names it under `Data`, and the make reads it, so it is part of the
+  museum's reproducible input. A file that isn't approved stays out, and the record names where it is published
+  (`url`). No file is downloaded without the owner's approval.
 - `controlClass` is the class Light's Operation uses to switch and dim the luminaire through the day: `gallery` for
   light on works, `circulation` for light on the architecture.
 - `evidenceState` is `complete` when every number the Scheme needs (flux, beam or distribution, colour, power) is
@@ -130,6 +125,46 @@ unlit until their files are read, since only a photometric file describes an asy
   square metre is its LED lines' published flux per metre, times the metres of line the grid lays per square metre of
   canopy, times the share a light guide's maker publishes as let out of its face (Evonik's PLEXIGLAS LED, 70 to 97 %;
   the low end is taken).
+
+## Photometric files
+
+Only a photometric file describes a light an asymmetric lens shapes, so a track wallwasher is lit from its maker's
+file and from nothing else. No file awaits the owner's approval: the 362G's is in the repository
+(`Data/Light/Photometry/iguzzini-362G_O25F.ies`, LUMCAT 362G_O25F, test 887A0000.RV1, issued 03/07/2025, obtained
+2026-09-27). `track-wallwasher.4000k`, the Edison Price Stacklite STK-CZE 2000L 40K, is retired: its maker's published
+archive holds only another variant (STK-CZE-L31A-30K, 3000 K, 1,586 lm), so no measured file describes it, and no
+stage uses it.
+
+- **The flux.** Light reads the LM-63 file and integrates its candela table over the sphere, with the symmetry the
+  file declares: the 362G's Type C table (181 vertical angles, 0° to 180°, and 37 horizontal, 0° to 180°) carries
+  999 lm, its rated flux, peaking at 1566.3 cd 21° from the nadir in its 0° plane. A file whose flux differs from its
+  record's by more than 1 % leaves the type unlit, saying so.
+- **The profile.** Studio imports the file through the engine's own IES import (the IES converter the texture factory
+  runs, with the factory's settings) as a `UTextureLightProfile` at `/Game/Generated/Light/Profiles/IES_<file>`
+  (`IES_iguzzini_362G_O25F`). Nothing about the import's time or place is kept, so a second make writes nothing.
+- **The intensity, in physical units.** The luminaire is a point source the size of the file's round luminous
+  opening, 44 mm across, carrying the profile. `bUseIESBrightness` is on, so the engine takes its intensity from the
+  profile itself: its `Brightness`, the file's greatest candela value, over a table normalised to it (its
+  `TextureMultiplier` is 1). The light's intensity units are candelas, the unit the file measures in, so the engine's
+  conversion leaves the value a luminous intensity; lumens would spread the flux evenly over the light's sphere or
+  cone and ignore the profile. Every direction then gives the file's absolute candelas, and the whole the file's 999 lm.
+  `IESBrightnessScale` is the dimming level, 1 at full output: it scales the whole table, as the driver's current does.
+  No invented number stands between the file and the light.
+- **The orientation.** A designer aims a luminaire's light, not its housing, so a luminaire lit by its file puts the
+  file's **throw**, the direction of its greatest intensity, on the schedule's `aim` (a point on the washed wall). The
+  362G's throw is 21° from the nadir in its 0° plane. The engine reads a profile about its light's axes: the vertical
+  angle from the light's x axis, the horizontal from its -y axis, turning towards -z. The luminaire's x points at the
+  aim and its +z is its seat's up, taken square to its light. The file's nadir lies in that vertical plane, the throw's
+  vertical angle below x, and the throw's horizontal plane on the upper side, towards +z: the emitter's x is the nadir
+  and its -y that upper side, so the file's (21°, 0°) lies on the aim and the lens's brighter half, two thirds of the
+  flux, falls on the wall below it. (Carrying the nadir on the aim instead would lift the peak 21° over it: past the
+  top of the walls under Chenghuai's sealed eaves, and into a hot band under the Classical Hall's entablature.)
+  `Musee.Studio.WallwasherWashesWall` places the Classical Hall's washer.000 and Chenghuai's wash.linchi.s.01 and
+  wash.shujuan.01 from their schedules' geometry, with the top of each wall from the stage's drawing (3.70 at the
+  tribune's ledge; 3.279 where the sealed eave's rafters meet the back walls), and reads the profile as the renderer
+  does: each peak lies within 0.4° of its aim; 66 %, 62 % and 64 % of the flux falls on the wall below its top, 1 %,
+  4 % and 4 % past it; the wall receives 45, 35 and 37 lx on average up its height, against 12, 7 and 7 lx on the floor
+  at its foot, and nothing the other way.
 
 ## How a room gets its light
 
@@ -242,7 +277,10 @@ circulation and orientation, have no museum row in the standards and are taken f
   edition 28.04.2026; [IES downloads](https://download.erco.com/en/planning_luminaire/ies/);
   [Museum lighting with 50lx](https://www.erco.com/en/designing-with-light/mediaassetpool/lighting-technology/museum-lighting-with-50lx-6481/).
 - Edison Price Lighting, [Stacklite STK-CZE spec sheet](https://epl.com/media/spec/stk-cze.pdf) and
-  [product page](https://epl.com/product/stk-cze/).
+  [product page](https://epl.com/product/stk-cze/); its [IES archive](https://epl.com/media/ies/stk-cze.zip), read
+  2026-09-27, holds one file, STK-CZE-L31A-30K.
+- iGuzzini, the 362G's photometric file 362G_O25F (test 887A0000.RV1, issued 03/07/2025), from the Downloads tab of
+  the [362G page](https://www.iguzzini.com/en/362g/), obtained by the owner 2026-09-27 (`Data/Light/Photometry`).
 - Hogarth Lighting, [Classic Picture Light](https://hogarthlighting.com/our_picture_lights/classic_picture_light).
 - Zumtobel, [SLOTLIGHT infinity II brochure](https://www.zumtobel.com/PDB/Ressource/teaser/en/com/SLOTLIGHT_infinity_II.pdf),
   [ARCOS brochure](https://www.zumtobel.com/PDB/Ressource/teaser/en/com/ARCOS.pdf),

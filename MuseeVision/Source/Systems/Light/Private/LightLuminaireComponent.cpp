@@ -3,6 +3,7 @@
 #include "Components/PointLightComponent.h"
 #include "Components/RectLightComponent.h"
 #include "Components/SpotLightComponent.h"
+#include "Engine/TextureLightProfile.h"
 #include "Engine/World.h"
 #include "GameFramework/Pawn.h"
 #include "GameFramework/PlayerController.h"
@@ -35,6 +36,26 @@ namespace Musee::Light
 
 		/** Seconds in a minute. */
 		constexpr double SecondsPerMinute = 60.0;
+
+		/**
+		 * A photometric file's Type C frame in the luminaire's frame, its throw on the luminaire's aim. The engine reads a
+		 * light profile about its light's own axes (Engine/Shaders/Private/IESLightProfilesCommon.ush): the vertical angle
+		 * from the light's x axis, and the horizontal angle from its -y axis, turning towards -z (a right-handed turn about
+		 * x). The luminaire's x points at the schedule's aim, and a designer aims a luminaire's light, not its housing: so
+		 * the direction of the file's greatest intensity, its throw, is carried onto x. The file's nadir lies below the throw
+		 * in the vertical plane through it (the luminaire's x-z plane, z its seat's up taken square to its light), the throw's
+		 * vertical angle down from x; the throw's horizontal plane is the side of the nadir towards the throw, which is up,
+		 * towards +z. A track wallwasher tilted towards its wall so carries its asymmetric lens's brighter half onto the wall,
+		 * its peak on the aim; a file whose peak is on its nadir (a spot's) keeps its nadir on x.
+		 */
+		FQuat TypeCInLuminaire(const FLightLuminaire& Type)
+		{
+			const double Tilt = FMath::DegreesToRadians(Type.PeakVertical.Get());
+			const FVector Nadir(FMath::Cos(Tilt), 0.0, -FMath::Sin(Tilt));
+			const FVector ThrowSide(FMath::Sin(Tilt), 0.0, FMath::Cos(Tilt));
+			const FQuat ThrowPlaneUp = FRotationMatrix::MakeFromXY(Nadir, -ThrowSide).ToQuat();
+			return ThrowPlaneUp * FQuat(FVector::ForwardVector, -FMath::DegreesToRadians(Type.PeakHorizontal.Get()));
+		}
 
 		/**
 		 * How far a luminaire's light is followed: until its illuminance falls to a third of the full Moon's (so about
@@ -112,6 +133,26 @@ namespace Musee::Light
 		}
 
 		/**
+		 * A type's measured distribution: a source the size of its luminous opening, carrying its photometric file's candela
+		 * table through the profile Studio imported from the file. The engine takes the profile's own intensity, the file's
+		 * greatest candela value, over a table normalised to it (bUseIESBrightness), in candelas, the unit the file measures
+		 * in, so every direction gives the file's absolute candelas and the whole the file's flux; IESBrightnessScale is the
+		 * dimming level (Apply). The light is placed in the file's Type C frame, its throw on the aim.
+		 */
+		ULocalLightComponent* MakeProfileLamp(USceneComponent& Mount, const FLightLuminaire& Type, UTextureLightProfile& Profile)
+		{
+			UPointLightComponent* Lamp = NewObject<UPointLightComponent>(Mount.GetOwner(), NAME_None, RF_Transient);
+			ColourAndShadow(*Lamp, Type);
+			Lamp->SourceRadius = static_cast<float>(ToEngine(Type.SourceRadius));
+			Lamp->IntensityUnits = ELightUnits::Candelas;
+			Lamp->IESTexture = &Profile;
+			Lamp->bUseIESBrightness = true;
+			Lamp->AttenuationRadius = static_cast<float>(ToEngine(ReachOf(Type.PeakIntensity)));
+			Lamp->SetRelativeRotation(TypeCInLuminaire(Type));
+			return Lamp;
+		}
+
+		/**
 		 * Where lamp Index stands: on the axis for a single lamp, else at equal angles round a ring of the type's radius in
 		 * the plane square to the luminaire's x axis, the first on its z axis.
 		 */
@@ -153,6 +194,8 @@ void ULightLuminaireComponent::Configure(const FMuseeKey& InType, ELightOperatio
 	FollowedChannel = InFollows;
 	LengthMeters = InLength.Get();
 	FaceMeters = InFaceMeters;
+	const FLightLuminaire* Luminaire = Musee::Light::FindLuminaire(LuminaireType);
+	Profile = Luminaire && Luminaire->Emitter == FLightLuminaire::EEmitter::Profile ? Musee::Light::FindProfile(*Luminaire) : nullptr;
 	DestroyEmitters();
 	if (IsRegistered()) { MakeEmitters(); }
 }
@@ -199,11 +242,13 @@ void ULightLuminaireComponent::MakeEmitters()
 	if (!Luminaire || !Luminaire->bLit || !GetOwner()) { return; }
 	if (Luminaire->Emitter == EEmitter::Linear && LengthMeters <= 0.0) { return; }
 	if (Luminaire->IsAreal() && FaceMeters.X * FaceMeters.Y <= 0.0) { return; }
+	if (Luminaire->Emitter == EEmitter::Profile && !Profile) { return; }
 	const int32 Count = Luminaire->Emitter == EEmitter::Point ? FMath::Max(Luminaire->LampCount, 1) : 1;
 	for (int32 Index = 0; Index < Count; ++Index)
 	{
 		ULocalLightComponent* Light = Luminaire->Emitter == EEmitter::Spot ? Musee::Light::MakeSpot(*this, *Luminaire)
 			: Luminaire->Emitter == EEmitter::Point ? Musee::Light::MakeLamp(*this, *Luminaire)
+			: Luminaire->Emitter == EEmitter::Profile ? Musee::Light::MakeProfileLamp(*this, *Luminaire, *Profile)
 			: Musee::Light::MakeFace(*this, *Luminaire, Length(), FaceMeters);
 		Light->SetupAttachment(this);
 		Light->SetRelativeLocation(Musee::Light::LampOffset(*Luminaire, Index));
@@ -217,10 +262,13 @@ void ULightLuminaireComponent::Apply()
 {
 	const FLightLuminaire* Luminaire = Musee::Light::FindLuminaire(LuminaireType);
 	if (!Luminaire) { return; }
+	const bool bByProfile = Luminaire->Emitter == FLightLuminaire::EEmitter::Profile;
 	const float Setting = static_cast<float>(Musee::Light::FullSetting(*Luminaire, LengthMeters, FaceMeters) * Level());
 	for (ULocalLightComponent* Light : EmitterLights)
 	{
-		Light->SetIntensity(Setting);
+		// A profile carries its own intensity, the file's; dimming turns its level down, as the driver's current does.
+		if (bByProfile) { Light->SetIESBrightnessScale(static_cast<float>(Level())); }
+		else { Light->SetIntensity(Setting); }
 		Light->SetVisibility(Level() > 0.0);
 	}
 }

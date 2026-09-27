@@ -51,7 +51,9 @@ namespace Musee::Light::Tests
 	IMPLEMENT_SIMPLE_AUTOMATION_TEST(FLightCatalogueTest, "Musee.Light.Catalogue", Flags)
 	bool FLightCatalogueTest::RunTest(const FString& Parameters)
 	{
-		TestEqual(TEXT("Twenty-nine luminaires in the catalogue"), LuminaireKeys().Num(), 29);
+		TestEqual(TEXT("Twenty-eight luminaires in the catalogue"), LuminaireKeys().Num(), 28);
+		TestNull(TEXT("The Stacklite, whose maker publishes no file for its variant, is retired"),
+			FindLuminaire(FMuseeKey(TEXTVIEW("track-wallwasher.4000k"))));
 		const FLightLuminaire* Spot = FindLuminaire(FMuseeKey(TEXTVIEW("track-spot.3000k.20deg")));
 		if (TestNotNull(TEXT("The 20 degree spot"), Spot))
 		{
@@ -126,7 +128,17 @@ namespace Musee::Light::Tests
 		TestTrue(TEXT("A framer lights as the beam its 552 lm and 7257 cd fix, its flaps open, about 15 degrees"), Framer && Framer->bLit
 			&& Framer->Emitter == FLightLuminaire::EEmitter::Spot && Framer->BeamAngle.Get() > 13.0 && Framer->BeamAngle.Get() < 17.0);
 		const FLightLuminaire* Washer = FindLuminaire(FMuseeKey(TEXTVIEW("track-wallwasher.3000k")));
-		TestTrue(TEXT("A wallwasher waits for its photometric file"), Washer && !Washer->bLit);
+		if (TestNotNull(TEXT("The 362G wallwasher"), Washer))
+		{
+			TestTrue(TEXT("is lit by its maker's photometric file"), Washer->bLit && Washer->Emitter == FLightLuminaire::EEmitter::Profile
+				&& FPaths::GetCleanFilename(Washer->PhotometricFile) == TEXT("iguzzini-362G_O25F.ies"));
+			TestTrue(TEXT("at the 999 lm its candela table integrates to"), FMath::Abs(Washer->Flux.Get() - 999.0) <= 9.99);
+			TestTrue(TEXT("its peak the table's 1566.3 cd"), FMath::IsNearlyEqual(Washer->PeakIntensity.Get(), 1566.3, 1e-6));
+			TestTrue(TEXT("from the file's round luminous opening, 44 mm across"), FMath::IsNearlyEqual(Washer->SourceRadius.Get(), 0.022, 1e-9));
+			TestEqual(TEXT("its profile made at the museum's"), ProfilePackage(*Washer), FString(TEXT("/Game/Generated/Light/Profiles/IES_iguzzini_362G_O25F")));
+		}
+		const FLightLuminaire* Spot20 = FindLuminaire(FMuseeKey(TEXTVIEW("track-spot.3000k.20deg")));
+		TestTrue(TEXT("A type lit otherwise has no profile"), Spot20 && Spot20->PhotometricFile.IsEmpty() && ProfilePackage(*Spot20).IsEmpty());
 		return true;
 	}
 

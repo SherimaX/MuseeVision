@@ -19,6 +19,7 @@
 #include "SiteVolume.h"
 #include "Stages/CastScans.h"
 #include "Stages/JointsMake.h"
+#include "Stages/LightProfiles.h"
 #include "Stages/MakeFinding.h"
 #include "Stages/PaintLayers.h"
 #include "Stages/StageCast.h"
@@ -47,12 +48,12 @@ namespace Musee::Studio
 		/**
 		 * The hash of everything a stage's level is made from besides its placements: the records the making read, the
 		 * ports the site plan mates (the mechanisms' rides read them), every schedule in the stage's folder (the dressers read
-		 * their own), and the dressers that run, in order.
+		 * their own), the dressers that run, in order, and the light profiles the luminaires it places are lit by.
 		 */
-		FString LevelDependencyHash(const FStageFabric& Fabric, const FString& ScheduleDir)
+		FString LevelDependencyHash(const FStageFabric& Fabric, const FString& ScheduleDir, const FString& Profiles)
 		{
 			FInputHasher Hasher;
-			Hasher.Add(TEXT("stage-dependencies")).Add(Fabric.Dependencies.Hash());
+			Hasher.Add(TEXT("stage-dependencies")).Add(Fabric.Dependencies.Hash()).Add(Profiles);
 			for (const FMuseeKey& Port : Fabric.MatedPorts)
 			{
 				Hasher.Add(Port.ToString());
@@ -143,6 +144,11 @@ namespace Musee::Studio
 				Cast.Instanced, Fabric.Pieces.Num());
 		}
 		Report.DerivedData = MeasureDerivedData() - Before;
+		FString Profiles;
+		{
+			FMakeStepTimer Timer(Report, Folder + TEXT(": light profiles"));
+			Profiles = MakeLightProfiles(Options, Report);
+		}
 		{
 			FMakeStepTimer Timer(Report, Folder + TEXT(": level"));
 			FStageLevel Level;
@@ -155,7 +161,7 @@ namespace Musee::Studio
 				Level.Barriers.Add({AssetToken(Barrier.Key.ToName()), Barrier.Key.ToName(), Barrier.Frame.OriginMeters, Barrier.Frame.Rotation,
 					Barrier.HalfSizeMeters});
 			}
-			Level.DependencyHash = LevelDependencyHash(Fabric, ScheduleDir);
+			Level.DependencyHash = LevelDependencyHash(Fabric, ScheduleDir, Profiles);
 			const TArray<FMuseeStageAnchor>& Anchors = Fabric.Description.Anchors;
 			const TArray<FMuseeKey>& Mated = Fabric.MatedPorts;
 			Level.Dress = [&Report, &Stage, &ScheduleDir, &Anchors, &Mated](AActor& Actor, FString&)

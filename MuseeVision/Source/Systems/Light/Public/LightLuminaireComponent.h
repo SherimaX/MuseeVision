@@ -9,6 +9,7 @@
 #include "LightLuminaireComponent.generated.h"
 
 class ULocalLightComponent;
+class UTextureLightProfile;
 struct FMuseeChannel;
 struct FTimeMoment;
 
@@ -18,7 +19,10 @@ struct FTimeMoment;
  * component; the lamps of an electrolier stand on a ring about its x axis; an areal face lies square to x, its width
  * along y and its height along z). It lights at its catalogue output, switched by its operation (always, at dusk, on
  * presence) and dimmed by the channel it follows (0 to 1); an image panel gives the light of the picture it shows, and
- * stands at its black level until one is shown. Nothing else sets how much light it gives. Light's stage dresser places it.
+ * stands at its black level until one is shown. A type lit by its maker's photometric file (a wallwasher) gives that file's
+ * candela table through the light profile made from it: the file's nadir, its optical axis, along x, and the file's 0°
+ * plane on the side of z, the side the luminaire tilts towards, which for a wallwasher aimed at its wall is the wall's.
+ * Nothing else sets how much light it gives. Light's stage dresser places it.
  */
 UCLASS(ClassGroup = (Musee))
 class MUSEELIGHT_API ULightLuminaireComponent final : public USceneComponent
@@ -42,6 +46,9 @@ public:
 	[[nodiscard]] Musee::Meters Length() const { return Musee::Meters(LengthMeters); }
 	/** The face an areal type lights, [width, height] in metres; zero for any other. */
 	[[nodiscard]] const FVector2D& Face() const { return FaceMeters; }
+
+	/** The light profile made from its type's photometric file, or null for a type lit otherwise (or not yet made). */
+	[[nodiscard]] const UTextureLightProfile* LightProfile() const { return Profile; }
 
 	/** The fraction of its catalogue output it gives now, 0 to 1: its switch times the channel it follows. */
 	[[nodiscard]] double Level() const;
@@ -98,6 +105,13 @@ private:
 	/** The face an areal type lights, [width, height] in metres. */
 	UPROPERTY(EditAnywhere, Category = "Luminaire")
 	FVector2D FaceMeters = FVector2D::ZeroVector;
+
+	/**
+	 * The light profile Studio made from its type's photometric file, found when it is configured and kept with the stage,
+	 * so the level carries the profile it is lit by.
+	 */
+	UPROPERTY(VisibleAnywhere, Category = "Luminaire")
+	TObjectPtr<UTextureLightProfile> Profile;
 
 	UPROPERTY(Transient)
 	TArray<TObjectPtr<ULocalLightComponent>> EmitterLights;

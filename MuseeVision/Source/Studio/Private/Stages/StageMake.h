@@ -45,7 +45,7 @@ namespace Musee::Studio
 	 * describe it, make its drawings (and a blind for every port
 	 * the site plan leaves unmated), gather the pieces the systems add, check its shells, make each hung work's paint
 	 * layer (its image as a texture, its paint instance), cast every piece in the
-	 * material of its finish, write its level with a body component per moving body (hung from the body it rides), a
+	 * material of its finish, make the light profiles its luminaires are lit by (MakeLightProfiles), write its level with a body component per moving body (hung from the body it rides), a
 	 * tagged component per piece or set of identical pieces, and an unseen box per barrier, dress it, and save. Only what changed is written. Every piece whose material can't be resolved is a finding and is
 	 * left out; the level still holds everything else.
 	 */

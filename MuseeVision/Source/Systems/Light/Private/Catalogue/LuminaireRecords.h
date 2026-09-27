@@ -115,12 +115,21 @@ struct FLightHousingRecord
 	UPROPERTY() double LampRingRadiusMillimeters = -1.0;
 };
 
+/**
+ * The maker's photometric file. Path names it under Data once the owner has approved it and it is kept in the repository
+ * (Data/Light/Photometry); the rest say where and when it was published and obtained.
+ */
 USTRUCT()
 struct FLightPhotometricFileRecord
 {
 	GENERATED_BODY()
 
+	UPROPERTY() FString Path;
 	UPROPERTY() FString Url;
+	UPROPERTY() FString Lumcat;
+	UPROPERTY() FString Test;
+	UPROPERTY() FString IssueDate;
+	UPROPERTY() FString ObtainedOn;
 	UPROPERTY() FString Note;
 };
 

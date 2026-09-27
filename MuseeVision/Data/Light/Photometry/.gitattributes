@@ -1,0 +1,3 @@
+# The makers' photometric files are kept byte for byte: no line-ending conversion, on any checkout.
+*.ies -text
+*.ldt -text
