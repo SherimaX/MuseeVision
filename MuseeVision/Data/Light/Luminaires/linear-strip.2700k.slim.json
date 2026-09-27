@@ -1,0 +1,59 @@
+{
+  "key": "linear-strip.2700k.slim",
+  "kind": "linear-strip",
+  "controlClass": "circulation",
+  "evidenceState": "complete",
+  "product": {
+    "manufacturer": "Lumistrips",
+    "family": "SlimFlex3090 Nichia",
+    "description": "flexible LED strip 5 mm wide - Nichia 757G series mid-power LEDs - warm white 2700 K - CRI 90 - 24 V - 2 m reel",
+    "code": "56027",
+    "status": "active"
+  },
+  "light": {
+    "luminousFluxLumensPerMeter": 1950,
+    "fluxBasis": "per-metre",
+    "reelFluxLumens": 3900,
+    "beamName": "bare strip without optic: each LED emits into the half space, near Lambertian",
+    "beamAngleDegrees": 120,
+    "cctKelvin": 2700,
+    "cri": 90,
+    "criBasis": "minimum",
+    "ledsPerMeter": 120
+  },
+  "electrical": {
+    "powerWattsPerMeter": 18,
+    "supplyVolts": 24,
+    "control": "constant-voltage 24 V supply; dimmed by a DALI PWM dimmer ordered separately"
+  },
+  "housing": {
+    "sectionMillimeters": [5, 1],
+    "reelLengthMillimeters": 2000,
+    "mounting": "self-adhesive, laid in a slot at least 6 mm high: the pond lip's rim-light slot (Salon specification, section 3.8)"
+  },
+  "photometricFile": {
+    "url": null,
+    "note": "The maker publishes no LDT or IES file for a bare strip; a bare strip is a line of near-Lambertian emitters."
+  },
+  "sources": [
+    {
+      "id": "maker-page",
+      "title": "Lumistrips, SlimFlex3090 Nichia LED Strip 5mm wide (product page, which lists the 2700 K sibling 56027 at 1950 lm/m)",
+      "url": "https://www.lumistrips.com/flexible-led-lumistrips-en/browse-all-flexible-led-lumistrips-en/slimflex-240-pro-nichia-led-strip-neutral-white-cri90-4000k-4240lm-24v-120-leds-m-2m-reel-2120lm-m-19w-m-56026-en.html.html",
+      "readOn": "2026-09-27",
+      "covers": ["product", "light", "housing"]
+    },
+    {
+      "id": "reseller-page",
+      "title": "LEDRise, SlimFlex3090 Nichia LED Strips 5mm width (variants 56027 2700 K 1950 lm/m 18 W/m, 56026 4000 K 2120 lm/m)",
+      "url": "https://www.ledrise.eu/led-strips-modules/our-profesional-led-strips/strip-led-slimflex-led-nichia-1900-2200-lm-m.html",
+      "readOn": "2026-09-27",
+      "covers": ["product", "light", "electrical"]
+    }
+  ],
+  "unverified": [
+    "The strip's height of 1 mm and its 120 degree beam are from the maker's page for the 4000 K sibling; the 2700 K page was not read directly.",
+    "The cutting interval (33 mm on the maker's page) decides how closely a length can follow a drawn run; it is not recorded as a field.",
+    "Whether a DALI PWM dimmer is the maker's recommendation: the pages name no dimming method."
+  ]
+}
