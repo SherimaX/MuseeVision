@@ -1,0 +1,88 @@
+{
+  "schema": "musee.matter.shading.substance/1",
+  "key": "negro-marquina",
+  "name": "Negro Marquina (Markina-Xemein)",
+  "family": "accent",
+  "record": "Palette.json",
+  "master": "stone",
+  "accentOf": "stone",
+  "dielectric": {
+    "diffuseAlbedo": {
+      "value": [
+        28.0,
+        0.5,
+        -1.0
+      ],
+      "space": "CIELAB (D65, 2 deg)",
+      "unit": "CIELAB",
+      "grade": "unverified",
+      "source": "Palette.json: accent.negro-marquina research.needed (no substance record yet)",
+      "note": "A first near-black for a fine black limestone, read from trade photographs; to be measured on a specimen."
+    },
+    "refractiveIndex": {
+      "value": 1.6003,
+      "unit": "1",
+      "grade": "derived",
+      "source": "Substances/cream-marble.json: optics.specularF0 (0.0533, calcite grains in random orientations)",
+      "derivation": "n = (1 + sqrt(F0)) / (1 - sqrt(F0)), the index whose normal-incidence reflectance is the record's F0"
+    },
+    "porosity": {
+      "value": 0.004,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.negro-marquina (a fine dense limestone)",
+      "note": "No measured porosity was read."
+    },
+    "wettingDepth": {
+      "value": 1.0,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: accent.negro-marquina",
+      "note": "As the Crema Marfil."
+    }
+  },
+  "structure": {
+    "grain": {
+      "value": 0.05,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: accent.negro-marquina realMaterial (white calcite veins)",
+      "note": "A fine black limestone with white calcite veins."
+    },
+    "bed": {
+      "value": 200,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: accent.negro-marquina realMaterial (white calcite veins)",
+      "note": "A first value for the band or bed a honed face shows, until a specimen is measured."
+    },
+    "bedAspect": {
+      "value": 1.5,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.negro-marquina realMaterial (white calcite veins)",
+      "note": "How much finer the veining is across its run than along it, read from trade photographs."
+    },
+    "hurst": {
+      "value": 0.7,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Candela et al. 2012, Journal of Geophysical Research 117, B08409 (fault surfaces, 0.6 to 0.8; cited in Stone.ush)",
+      "note": "The middle of the range measured on rock surfaces, as the travertine's."
+    },
+    "toneSpread": {
+      "value": 0.2,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.negro-marquina realMaterial (white calcite veins)",
+      "note": "A first half-range of ln(albedo) across a face, from its veins and clasts."
+    },
+    "roughnessSpread": {
+      "value": 0.15,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Workings/honed.json: unverified surface.microRoughness (no filtered roughness read)",
+      "note": "A first half-range of ln(roughness) across a honed face, as the travertine's."
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "schema": "musee.matter.shading.working/1",
+  "key": "cast.seams-kept.sized",
+  "name": "Cast, its mould seams kept, sized",
+  "record": "Workings/cast.plaster.json",
+  "kind": "face",
+  "roughness": {
+    "value": 0.55,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Workings/cast.plaster.json: finishes.coatingStackThickness (a size coat seals the face)"
+  },
+  "roughnessAcross": {
+    "value": 0.55,
+    "unit": "1",
+    "grade": "derived",
+    "source": "Workings/cast.plaster.json: finishes.coatingStackThickness (a size coat seals the face)",
+    "derivation": "a face with no grain: equal to the roughness along"
+  },
+  "haziness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Workings/cast.plaster.json: finishes.coatingStackThickness (a size coat seals the face)",
+    "note": "One specular lobe unless noted."
+  },
+  "textureDepth": {
+    "value": 0.02,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Workings/cast.plaster.json"
+  },
+  "relief": {
+    "value": 0.03,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Workings/cast.plaster.json (the seams stand proud)"
+  }
+}

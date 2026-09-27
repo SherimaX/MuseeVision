@@ -1,0 +1,77 @@
+{
+  "schema": "musee.matter.shading.history/1",
+  "key": "stone.handled",
+  "name": "Handled: touched in passing",
+  "mechanisms": [
+    "stone.pore-soiling",
+    "stone.foot-traffic-wear"
+  ],
+  "age": {
+    "value": 20.0,
+    "unit": "year",
+    "grade": "design",
+    "source": "Palette.json eras (a generation of use in the classical rooms; a new face is new)"
+  },
+  "passagesPerYear": {
+    "value": 20000.0,
+    "unit": "1/year",
+    "grade": "design",
+    "source": "a reveal or a coping touched by passing hands (as stone.touched)",
+    "note": "Site's traffic field will give each point its own."
+  },
+  "skyExposure": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "design",
+    "source": "an interior face"
+  },
+  "keptWet": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "design",
+    "source": "the face stands clear of water"
+  },
+  "deposition": {
+    "value": 0.005,
+    "unit": "1/year",
+    "grade": "unverified",
+    "source": "Histories/stone.pore-soiling.json (skin grease, as stone.touched)"
+  },
+  "washRemoval": {
+    "value": 0.0,
+    "unit": "1/year",
+    "grade": "derived",
+    "source": "an interior face",
+    "derivation": "no rain wash reaches it"
+  },
+  "soilAlbedo": {
+    "value": [
+      0.2,
+      0.17,
+      0.14
+    ],
+    "space": "linear Rec.709 (sRGB primaries), D65 white",
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Histories/stone.pore-soiling.json (as stone.touched)"
+  },
+  "wornRoughness": {
+    "value": 0.6,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Workings/honed.json"
+  },
+  "wornHaziness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "derived",
+    "source": "a worn face",
+    "derivation": "no second lobe"
+  },
+  "wearPassages": {
+    "value": 2000000.0,
+    "unit": "count",
+    "grade": "unverified",
+    "source": "as stone.touched"
+  }
+}

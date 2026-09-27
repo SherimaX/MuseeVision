@@ -1,0 +1,65 @@
+{
+  "schema": "musee.matter.shading.working/1",
+  "key": "oiled.hard-waxed",
+  "name": "Oiled and hard-waxed (hardwax oil, two coats)",
+  "record": "Workings/oiled.hardwax.json",
+  "kind": "face",
+  "roughness": {
+    "value": 0.45,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Substances/oak.json: evidence roughness medians (0.44 to 0.53) and the satin sheen of a hardwax oil"
+  },
+  "roughnessAcross": {
+    "value": 0.45,
+    "unit": "1",
+    "grade": "derived",
+    "source": "Substances/oak.json: evidence roughness medians (0.44 to 0.53) and the satin sheen of a hardwax oil",
+    "derivation": "a face with no grain: equal to the roughness along"
+  },
+  "haziness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Substances/oak.json: evidence roughness medians (0.44 to 0.53) and the satin sheen of a hardwax oil",
+    "note": "One specular lobe unless noted."
+  },
+  "textureDepth": {
+    "value": 0.014,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Workings/oiled.hardwax.json: slip.roughnessRz (14 um, manufacturer)"
+  },
+  "relief": {
+    "value": 0.05,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Workings/oiled.hardwax.json"
+  },
+  "film": {
+    "refractiveIndex": {
+      "value": 1.46,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Workings/oiled.hardwax.json: unverified (1.44 to 1.48)"
+    },
+    "cover": {
+      "value": 1.0,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Workings/oiled.hardwax.json: facts.coats (2) and facts.wetFilmPerCoat (41.7 um): the oil fills the surface cells"
+    }
+  },
+  "stain": {
+    "value": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "space": "linear Rec.709 (sRGB primaries), D65 white",
+    "unit": "1",
+    "grade": "derived",
+    "source": "Workings/oiled.hardwax.json (a clear grade)",
+    "derivation": "a clear oil leaves the wood's own colour"
+  }
+}

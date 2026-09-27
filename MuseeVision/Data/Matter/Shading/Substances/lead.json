@@ -1,0 +1,70 @@
+{
+  "schema": "musee.matter.shading.substance/1",
+  "key": "lead",
+  "name": "Milled sheet lead",
+  "family": "accent",
+  "record": "Substances/lead.json",
+  "master": "metal",
+  "accentOf": "bronze",
+  "conductor": {
+    "f0": {
+      "value": [
+        0.6325,
+        0.6325,
+        0.6325
+      ],
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "unit": "1",
+      "grade": "derived",
+      "source": "Golovashkin & Motulevich 1964, \"Optical and electrical properties of tin and lead\", Soviet Physics JETP 19 (n 1.91, k 3.51 at 550 nm)",
+      "derivation": "((n - 1)^2 + k^2) / ((n + 1)^2 + k^2); one index for the three primaries, lead being nearly grey",
+      "note": "The record holds no optical constants; the literature value is read for all three primaries."
+    },
+    "f82": {
+      "value": [
+        0.67,
+        0.67,
+        0.67
+      ],
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "unit": "1",
+      "grade": "derived",
+      "source": "Golovashkin & Motulevich 1964 (n 1.91, k 3.51 at 550 nm)",
+      "derivation": "Fresnel's reflectance of the complex index at the incidence cosine 1/7 (Optics.ush, MatterConductorFresnel)"
+    }
+  },
+  "tarnish": {
+    "diffuseAlbedo": {
+      "value": [
+        0.2086,
+        0.2232,
+        0.2346
+      ],
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "unit": "1",
+      "grade": "design",
+      "source": "Substances/lead.json: asBuilt.sheet.albedo (the as-built roof's weathered lead)",
+      "note": "The grey of lead's basic carbonate patina, as the as-built museum showed it; to be measured."
+    },
+    "refractiveIndex": {
+      "value": 2.08,
+      "unit": "1",
+      "grade": "secondary",
+      "source": "Anthony, Bideaux, Bladh & Nichols, Handbook of Mineralogy (cerussite, PbCO3: n 1.80 to 2.08)",
+      "note": "The highest principal index, the patina's crystals being small and random; a first value."
+    },
+    "roughness": {
+      "value": 0.62,
+      "unit": "1",
+      "grade": "design",
+      "source": "Substances/lead.json: asBuilt.sheet.roughness"
+    },
+    "cover": {
+      "value": 0.0,
+      "unit": "1",
+      "grade": "derived",
+      "source": "the tarnish's cover is its history's",
+      "derivation": "unused: the history gives the cover"
+    }
+  }
+}

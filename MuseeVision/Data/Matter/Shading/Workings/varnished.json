@@ -1,0 +1,41 @@
+{
+  "schema": "musee.matter.shading.working/1",
+  "key": "varnished",
+  "name": "Painted on a stretched canvas, varnished",
+  "record": "Workings/stretched.json",
+  "kind": "face",
+  "roughness": {
+    "value": 0.35,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "no research record of a varnished paint surface yet",
+    "note": "A first value for a satin picture varnish."
+  },
+  "roughnessAcross": {
+    "value": 0.35,
+    "unit": "1",
+    "grade": "derived",
+    "source": "a varnish has no grain",
+    "derivation": "equal to the roughness along"
+  },
+  "haziness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "no research record of a varnished paint surface yet"
+  },
+  "textureDepth": {
+    "value": 0.05,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Substances/linen.json (the weave under the ground and paint)",
+    "note": "A first value for the weave the paint follows."
+  },
+  "relief": {
+    "value": 0.0,
+    "unit": "mm",
+    "grade": "derived",
+    "source": "the image carries the brushwork",
+    "derivation": "no relief is drawn over the work's own image"
+  }
+}

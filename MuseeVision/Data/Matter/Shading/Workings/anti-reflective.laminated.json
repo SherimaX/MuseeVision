@@ -1,0 +1,46 @@
+{
+  "schema": "musee.matter.shading.working/1",
+  "key": "anti-reflective.laminated",
+  "name": "Anti-reflective, laminated (4 / 0.76 PVB / 4)",
+  "record": "Workings/anti-reflective.json",
+  "kind": "face",
+  "roughness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Workings/anti-reflective.json: optics.luminousReflectance (0.01)"
+  },
+  "roughnessAcross": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "derived",
+    "source": "Workings/anti-reflective.json: optics.luminousReflectance (0.01)",
+    "derivation": "a face with no grain: equal to the roughness along"
+  },
+  "haziness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Workings/anti-reflective.json: optics.luminousReflectance (0.01)",
+    "note": "One specular lobe unless noted."
+  },
+  "textureDepth": {
+    "value": 0.001,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Workings/anti-reflective.json"
+  },
+  "relief": {
+    "value": 0.0,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Workings/anti-reflective.json"
+  },
+  "paneThickness": {
+    "value": 8.0,
+    "unit": "mm",
+    "grade": "manufacturer",
+    "source": "Workings/anti-reflective.json: optics.luminousTransmittanceLaminated (4 / 0.76 PVB / 4 mm)",
+    "note": "The coating's low reflectance (0.01 against 0.08) is not yet shown: the glass master takes its reflectance from the glass's index."
+  }
+}

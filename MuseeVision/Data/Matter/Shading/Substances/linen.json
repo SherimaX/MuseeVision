@@ -1,0 +1,56 @@
+{
+  "schema": "musee.matter.shading.substance/1",
+  "key": "linen",
+  "name": "Linen, muslin-weight, stretched",
+  "family": "accent",
+  "record": "Substances/linen.json",
+  "master": "sheet",
+  "accentOf": "oak",
+  "dielectric": {
+    "diffuseAlbedo": {
+      "value": [
+        0.45,
+        0.42,
+        0.36
+      ],
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Substances/linen.json: unverified (no measured reflectance of the cloth)",
+      "note": "Unbleached muslin-weight linen reflects about 0.4 to 0.5 of the light; a warm first value."
+    },
+    "refractiveIndex": {
+      "value": 1.46,
+      "unit": "1",
+      "grade": "record",
+      "source": "Substances/linen.json: optics.clothModelLinenPlain.eta (measured fit, Irawan & Marschner 2012)"
+    },
+    "porosity": {
+      "value": 0.4,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Substances/linen.json: unverified (0.4)"
+    },
+    "wettingDepth": {
+      "value": 0.3,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Substances/linen.json",
+      "note": "The cloth's thickness."
+    }
+  },
+  "sheet": {
+    "transmittance": {
+      "value": [
+        0.4,
+        0.37,
+        0.3
+      ],
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Substances/linen.json: unverified (0.4); Palette.json accent.linen research.needed",
+      "note": "A muslin-weight linen passes about 0.4 of the light, a little warmer than it arrives; to be measured in an integrating sphere."
+    }
+  }
+}

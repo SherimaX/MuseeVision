@@ -1,0 +1,109 @@
+{
+  "schema": "musee.matter.shading.substance/1",
+  "key": "wool-felt",
+  "name": "Wool felt, green-grey",
+  "family": "accent",
+  "record": "Substances/wool-felt.json",
+  "master": "cloth",
+  "accentOf": "oak",
+  "dielectric": {
+    "diffuseAlbedo": {
+      "value": [
+        0.0762,
+        0.1022,
+        0.0723
+      ],
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "unit": "1",
+      "grade": "design",
+      "source": "Substances/wool-felt.json: designColours.reserveFelt"
+    },
+    "refractiveIndex": {
+      "value": 1.55,
+      "unit": "1",
+      "grade": "secondary",
+      "source": "Wool keratin, n 1.55 (Morton & Hearle 2008, Physical Properties of Textile Fibres, 4th ed.)"
+    },
+    "porosity": {
+      "value": 0.8,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Substances/wool-felt.json",
+      "note": "A felt is mostly air; no measured porosity was read."
+    },
+    "wettingDepth": {
+      "value": 1.0,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Substances/wool-felt.json",
+      "note": "A first depth of the felt's face."
+    }
+  },
+  "structure": {
+    "grain": {
+      "value": 0.03,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Substances/wool-felt.json",
+      "note": "The finest structure the cloth shows: its thread or fibre tufts."
+    },
+    "bed": {
+      "value": 10.0,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Substances/wool-felt.json",
+      "note": "The length of the yarn's slubs, the coarsest unevenness the cloth shows."
+    },
+    "bedAspect": {
+      "value": 1.0,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Substances/wool-felt.json",
+      "note": "Slubs run along the thread: how much longer than wide."
+    },
+    "hurst": {
+      "value": 0.6,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Substances/wool-felt.json",
+      "note": "A first self-affinity for a yarn's unevenness."
+    },
+    "toneSpread": {
+      "value": 0.05,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Substances/wool-felt.json",
+      "note": "A first half-range of the dye's tone across the cloth."
+    },
+    "roughnessSpread": {
+      "value": 0.1,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Substances/wool-felt.json",
+      "note": "A first half-range across the cloth."
+    }
+  },
+  "fibre": {
+    "roughness": {
+      "value": 0.8,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Substances/wool-felt.json",
+      "note": "Matted scaly fibres show no highlight."
+    },
+    "sheen": {
+      "value": 0.4,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Substances/wool-felt.json",
+      "note": "Its matted face stands many fibre ends."
+    },
+    "sheenRoughness": {
+      "value": 0.8,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Substances/wool-felt.json",
+      "note": "A broad, soft sheen."
+    }
+  }
+}

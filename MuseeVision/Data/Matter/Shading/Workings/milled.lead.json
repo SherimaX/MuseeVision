@@ -1,0 +1,39 @@
+{
+  "schema": "musee.matter.shading.working/1",
+  "key": "milled.lead",
+  "name": "Milled sheet lead, laid",
+  "record": "Workings/milled.lead.json",
+  "kind": "face",
+  "roughness": {
+    "value": 0.62,
+    "unit": "1",
+    "grade": "design",
+    "source": "Substances/lead.json: asBuilt.sheet.roughness"
+  },
+  "roughnessAcross": {
+    "value": 0.62,
+    "unit": "1",
+    "grade": "derived",
+    "source": "Substances/lead.json: asBuilt.sheet.roughness",
+    "derivation": "a face with no grain: equal to the roughness along"
+  },
+  "haziness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Substances/lead.json: asBuilt.sheet.roughness",
+    "note": "One specular lobe unless noted."
+  },
+  "textureDepth": {
+    "value": 0.01,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Workings/milled.lead.json"
+  },
+  "relief": {
+    "value": 0.0,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Workings/milled.lead.json"
+  }
+}

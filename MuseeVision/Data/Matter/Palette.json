@@ -65,6 +65,31 @@
           "working": "honed",
           "history": "weathered",
           "note": "Nymphéas oval: outer masonry, the passage block's top"
+        },
+        {
+          "working": "honed",
+          "history": "foot-worn",
+          "note": "Stages: nympheas.floor, nympheas.floor.viewing-stone, nympheas.stair.tread, nympheas.well.curb, salon.floor.stone, salon.floor.viewing-stone, salon.pier.base, salon.skirting"
+        },
+        {
+          "working": "honed",
+          "history": "new",
+          "note": "Stages: nympheas.wall.skirting, nympheas.door.architrave, nympheas.bench.plinth, nympheas.stair.string, salon.pier, salon.pier.impost, salon.arch.voussoir, salon.arch.keystone, salon.arch.archivolt, salon.arch.spandrel, salon.east.step"
+        },
+        {
+          "working": "honed",
+          "history": "handled",
+          "note": "Stages: nympheas.passage.reveal, nympheas.pond.coping, salon.door.reveal, salon.door.architrave, salon.east.reveal, salon.dancer.plinth"
+        },
+        {
+          "working": "carved",
+          "history": "new",
+          "note": "Stages: nympheas.pond.frieze"
+        },
+        {
+          "working": "sawn",
+          "history": "new",
+          "note": "Stages: rotunda.port.rough-opening, salon.port.rough-opening"
         }
       ]
     },
@@ -91,11 +116,25 @@
       "verdictReason": "The look is kept, the drawn crackle (read as cracked paint) retired; the procedural Marble014 is not evidence. Now also the dial's field, replacing the statuary white, so the anchor is one stone.",
       "research": {
         "records": [
-          "r-matter: Substances/cream-marble.json (alternativesConsidered: Botticino Classico)",
-          "Workings/honed.json, polished.stone.json"
+          "Workings/honed.json, polished.stone.json",
+          "r-matter: Shading/Substances/cream-marble.json",
+          "r-matter: Substances/cream-marble.json (alternativesConsidered: Botticino Classico)"
         ],
         "needed": "a* b* of Crema Marfil; the crackle's cell size; honed and polished slip values; a mirror-polish working distinct from polished; tier (b) specimen honed and polished."
-      }
+      },
+      "substance": "cream-marble",
+      "finishes": [
+        {
+          "working": "honed",
+          "history": "new",
+          "note": "Stages: rotunda.drum.wall.inner, rotunda.drum.shadow-gap, rotunda.pilaster, rotunda.door.archivolt, rotunda.niche.reveal, rotunda.niche.back, rotunda.niche.head, rotunda.niche.surround, rotunda.niche.sill, rotunda.sun-clock.wall, rotunda.sun-clock.wall.inner, rotunda.sun-clock.pilaster, rotunda.sun-clock.door, rotunda.shaft.pocket, rotunda.stair.wall, rotunda.stair.port.reveal, rotunda.stair.port.dressing, rotunda.stair.string, rotunda.stair.soffit, rotunda.stair.housing.side"
+        },
+        {
+          "working": "honed",
+          "history": "foot-worn",
+          "note": "Stages: rotunda.floor.ring.a, rotunda.floor.ring.b, rotunda.dial.field.a, rotunda.dial.field.b, rotunda.sun-clock.door.sill, rotunda.stair.tread, rotunda.stair.landing.floor"
+        }
+      ]
     },
     {
       "key": "accent.rojo-alicante",
@@ -116,9 +155,19 @@
       "verdict": "replaced",
       "verdictReason": "Rosso Levanto is a serpentinite, harder than calcite, and would stand proud as the dial wore; rosso antico is unobtainable.",
       "research": {
-        "records": [],
+        "records": [
+          "r-matter: Shading/Substances/rojo-alicante.json"
+        ],
         "needed": "Substance record: formation, optics (calcite, hematite colour), abrasion vs Crema Marfil, specimen."
-      }
+      },
+      "substance": "rojo-alicante",
+      "finishes": [
+        {
+          "working": "honed",
+          "history": "foot-worn",
+          "note": "Stages: rotunda.dial.band.red, rotunda.stair.landing.red"
+        }
+      ]
     },
     {
       "key": "accent.negro-marquina",
@@ -139,9 +188,19 @@
       "verdict": "kept",
       "verdictReason": "The old choice was already the right real stone.",
       "research": {
-        "records": [],
+        "records": [
+          "r-matter: Shading/Substances/negro-marquina.json"
+        ],
         "needed": "Substance record and specimen."
-      }
+      },
+      "substance": "negro-marquina",
+      "finishes": [
+        {
+          "working": "honed",
+          "history": "foot-worn",
+          "note": "Stages: rotunda.dial.band.black, rotunda.stair.landing.black"
+        }
+      ]
     },
     {
       "key": "accent.statuario",
@@ -274,9 +333,19 @@
       "verdict": "replaced",
       "verdictReason": "Keeps the dark value, but as stone, honed, and a real Paris cellar floor; concrete read modern under the Salon.",
       "research": {
-        "records": [],
+        "records": [
+          "r-matter: Shading/Substances/pierre-bleue.json"
+        ],
         "needed": "Substance record and specimen; submerged-bed history."
-      }
+      },
+      "substance": "pierre-bleue",
+      "finishes": [
+        {
+          "working": "honed",
+          "history": "weathered",
+          "note": "Stages: nympheas.pond.bed"
+        }
+      ]
     },
     {
       "key": "accent.brique-bourgogne",
@@ -296,9 +365,19 @@
       "verdict": "refined",
       "verdictReason": "Same warm brick vault; now a named brick with a history in this city.",
       "research": {
-        "records": [],
+        "records": [
+          "r-matter: Shading/Substances/brick.json"
+        ],
         "needed": "Substance record (fired clay), brick size and bond, mortar, specimen."
-      }
+      },
+      "substance": "brick",
+      "finishes": [
+        {
+          "working": "laid.mortar-jointed",
+          "history": "new",
+          "note": "Stages: nympheas.well.wall"
+        }
+      ]
     },
     {
       "key": "accent.encaustic-tile",
@@ -664,6 +743,21 @@
           "working": "trowelled",
           "history": "clean",
           "note": "Nymphéas oval: walls and cove (the burnished marmorino the story names awaits its working record)"
+        },
+        {
+          "working": "burnished",
+          "history": "new",
+          "note": "Stages: nympheas.wall.plaster"
+        },
+        {
+          "working": "run",
+          "history": "new",
+          "note": "Stages: nympheas.cove, rotunda.dome.coffer, rotunda.sun-clock.soffit, salon.vault.coffer"
+        },
+        {
+          "working": "trowelled",
+          "history": "new",
+          "note": "Stages: nympheas.attic.upstand, nympheas.well.soffit, rotunda.dome.band, rotunda.dome.eye-curb, salon.vault.band, salon.lunette, salon.lantern.shaft, salon.cabinet.ceiling"
         }
       ]
     },
@@ -688,11 +782,25 @@
       "verdictReason": "Now a real making. The Rotunda's niche sills and surrounds move to Crema Marfil: they carry casts over two metres tall.",
       "research": {
         "records": [
-          "r-matter: Substances/fibrous-plaster.json",
-          "Workings/run.json, cast.plaster.json"
+          "Workings/run.json, cast.plaster.json",
+          "r-matter: Shading/Substances/fibrous-plaster.json",
+          "r-matter: Substances/fibrous-plaster.json"
         ],
         "needed": "None beyond the face's reflectance."
-      }
+      },
+      "substance": "fibrous-plaster",
+      "finishes": [
+        {
+          "working": "cast.plaster",
+          "history": "new",
+          "note": "Stages: rotunda.entablature, salon.cornice, salon.cabinet.cornice"
+        },
+        {
+          "working": "gilt.gold-leaf.oil",
+          "history": "aged.patina",
+          "note": "Stages: salon.vault.rosette"
+        }
+      ]
     },
     {
       "key": "white.plaster-of-paris",
@@ -715,11 +823,20 @@
       "verdictReason": "The old intent (an old cast's waxy sheen) is exactly a sized plaster.",
       "research": {
         "records": [
-          "r-matter: Substances/plaster-of-paris.json",
-          "Workings/cast.plaster.json"
+          "Workings/cast.plaster.json",
+          "r-matter: Shading/Substances/plaster-of-paris.json",
+          "r-matter: Substances/plaster-of-paris.json"
         ],
         "needed": "Light transport inside plaster (softness of a cast's edges); the sized-surface optics."
-      }
+      },
+      "substance": "plaster-of-paris",
+      "finishes": [
+        {
+          "working": "cast.seams-kept.sized",
+          "history": "new",
+          "note": "Stages: rotunda.niche.cast"
+        }
+      ]
     },
     {
       "key": "white.limewash",
@@ -747,6 +864,34 @@
       }
     },
     {
+      "key": "white.gesso",
+      "family": "white",
+      "accentOf": null,
+      "substance": "gesso",
+      "realMaterial": "Gesso: whiting (chalk) bound in rabbit-skin glue, laid in coats and recut, the ground of water gilding",
+      "workingsByEra": {},
+      "roles": [
+        "Salon: the gilt frames' face under the leaf"
+      ],
+      "why": "The water-gilt frame's face is gesso and bole under the leaf, whatever wood carries it.",
+      "oldChoice": "",
+      "verdict": "new",
+      "verdictReason": "A frame's gilding lies on gesso, not on the oak; the gilt working lays its leaf over this ground.",
+      "research": {
+        "records": [
+          "r-matter: Shading/Substances/gesso.json"
+        ],
+        "needed": "A measured gesso reflectance; bole as its own layer."
+      },
+      "finishes": [
+        {
+          "working": "gilt.gold-leaf.water",
+          "history": "aged.patina",
+          "note": "Stages: salon.frame.gilt"
+        }
+      ]
+    },
+    {
       "key": "white.pearl-steel",
       "family": "white",
       "accentOf": null,
@@ -769,12 +914,21 @@
       "verdictReason": "The pearl becomes a real coating; the dark lattice greys are replaced so one lineage has one colour.",
       "research": {
         "records": [
-          "r-matter: Substances/steel.json (declared accent of glass: to be re-declared as the substrate of white.pearl-steel)",
+          "Histories/steel.coating-ageing.json",
           "Workings/painted.steel.json",
-          "Histories/steel.coating-ageing.json"
+          "r-matter: Shading/Substances/steel.json",
+          "r-matter: Substances/steel.json (declared accent of glass: to be re-declared as the substrate of white.pearl-steel)"
         ],
         "needed": "A pearl (mica interference) coating working with measured goniometric data; fluoropolymer exterior variant; welded-and-faired shell."
-      }
+      },
+      "substance": "steel",
+      "finishes": [
+        {
+          "working": "pearl.satin",
+          "history": "new",
+          "note": "Stages: rotunda.eye.lattice"
+        }
+      ]
     },
     {
       "key": "bronze.cusn10",
@@ -839,6 +993,56 @@
           "working": "brushed",
           "history": "handled",
           "note": "Nymphéas oval: the guard rails round the opening"
+        },
+        {
+          "working": "gilt.gold-leaf.oil",
+          "history": "foot-worn",
+          "note": "Stages: nympheas.floor.viewing-stone.ring, rotunda.dial.meridian, rotunda.dial.sun, rotunda.floor.motto.stop, salon.floor.viewing-stone.ring"
+        },
+        {
+          "working": "patinated",
+          "history": "new",
+          "note": "Stages: nympheas.velarium.frame, nympheas.east.blind-doors, nympheas.stair.blind-doors, salon.lantern.grid"
+        },
+        {
+          "working": "patinated",
+          "history": "weathered",
+          "note": "Stages: nympheas.roof.bars"
+        },
+        {
+          "working": "gilt.gold-leaf.oil",
+          "history": "handled",
+          "note": "Stages: nympheas.pond.lip, nympheas.golden-iris, nympheas.golden-iris (cast)"
+        },
+        {
+          "working": "patinated",
+          "history": "aged.patina",
+          "note": "Stages: nympheas.pond.tray, nympheas.pond.post, rotunda.eye.node, rotunda.sun-clock.rim, rotunda.stair.balustrade, rotunda.stair.housing.cap, rotunda.west.blind-doors, rotunda.north.blind-doors, rotunda.south.blind-doors, rotunda.east.blind-doors, rotunda.stair.blind-doors, salon.east.blind-doors, salon.west.blind-doors"
+        },
+        {
+          "working": "patinated",
+          "history": "handled",
+          "note": "Stages: nympheas.guard.rail, nympheas.stair.handrail, rotunda.stair.handrail, salon.case.angles"
+        },
+        {
+          "working": "patinated",
+          "history": "foot-worn",
+          "note": "Stages: rotunda.dial.inlay, rotunda.floor.motto"
+        },
+        {
+          "working": "gilt.gold-leaf.oil",
+          "history": "aged.patina",
+          "note": "Stages: rotunda.sun-clock.pendant"
+        },
+        {
+          "working": "brushed",
+          "history": "foot-worn",
+          "note": "Stages: salon.floor.strip, salon.stele.foot"
+        },
+        {
+          "working": "cast.bronze",
+          "history": "weathered",
+          "note": "Stages: salon.lantern.outer.bars, salon.pergola"
         }
       ]
     },
@@ -922,6 +1126,34 @@
       }
     },
     {
+      "key": "steel.hard-chrome",
+      "family": "accent",
+      "accentOf": "bronze",
+      "substance": "chromium",
+      "realMaterial": "Hard chromium electroplate over steel, polished (a hydraulic ram's rod)",
+      "workingsByEra": {},
+      "roles": [
+        "Rotunda: the sun clock's ram"
+      ],
+      "why": "A lift's ram is hard-chromed for wear and sealing: the one honest machine surface in the Rotunda.",
+      "oldChoice": "",
+      "verdict": "new",
+      "verdictReason": "The ram is the machine's own material.",
+      "research": {
+        "records": [
+          "r-matter: Shading/Substances/chromium.json"
+        ],
+        "needed": "A specimen's measured reflectance."
+      },
+      "finishes": [
+        {
+          "working": "hard-chromed",
+          "history": "new",
+          "note": "Stages: rotunda.sun-clock.ram"
+        }
+      ]
+    },
+    {
       "key": "accent.milled-lead",
       "family": "accent",
       "accentOf": "bronze",
@@ -941,9 +1173,19 @@
       "verdict": "new",
       "verdictReason": "The Rotunda's outer dome cannot be Crema Marfil outdoors (freeze-thaw) and domes are leaded (open question).",
       "research": {
-        "records": [],
+        "records": [
+          "r-matter: Shading/Substances/lead.json"
+        ],
         "needed": "Substance record."
-      }
+      },
+      "substance": "lead",
+      "finishes": [
+        {
+          "working": "milled.lead",
+          "history": "weathered",
+          "note": "Stages: nympheas.exterior.roof, rotunda.dome.outer"
+        }
+      ]
     },
     {
       "key": "oak.sessile-french",
@@ -967,9 +1209,29 @@
       "verdict": "refined",
       "verdictReason": "Now a named species and sawing with real workings; walnut and pine replaced so there is one wood.",
       "research": {
-        "records": [],
+        "records": [
+          "r-matter: Shading/Substances/oak.json"
+        ],
         "needed": "Substance record (species, sawing, ray fleck, anisotropy); workings: oiled-waxed, fumed, French-polished, wire-brushed; history: foot and hand wear."
-      }
+      },
+      "substance": "oak",
+      "finishes": [
+        {
+          "working": "oiled.hard-waxed",
+          "history": "handled",
+          "note": "Stages: nympheas.bench.seat"
+        },
+        {
+          "working": "oiled.hard-waxed",
+          "history": "foot-worn",
+          "note": "Stages: salon.floor.parquet"
+        },
+        {
+          "working": "fumed.waxed",
+          "history": "handled",
+          "note": "Stages: salon.bench.plinth, salon.case.carcase"
+        }
+      ]
     },
     {
       "key": "accent.qing-pine-lacquered",
@@ -1060,6 +1322,174 @@
       }
     },
     {
+      "key": "accent.silk.oxblood",
+      "family": "accent",
+      "accentOf": "oak",
+      "substance": "silk.oxblood",
+      "realMaterial": "Plain-woven silk with a soft slub, stretched on battens over an interlining; dyed per chapter, dyed oxblood",
+      "workingsByEra": {},
+      "roles": [
+        "Salon: bay 1 (Birth) wall silk"
+      ],
+      "why": "The Salon's silk in the dye its bay was designed with (Substances/silk.json, designColours).",
+      "oldChoice": "",
+      "verdict": "new",
+      "verdictReason": "One key per dye: the bays' silks are one cloth in six dyes.",
+      "research": {
+        "records": [
+          "r-matter: Shading/Substances/silk.oxblood.json"
+        ],
+        "needed": "A dyed specimen's measured reflectance."
+      },
+      "finishes": [
+        {
+          "working": "stretched",
+          "history": "new",
+          "note": "Stages: salon.bay1.silk"
+        }
+      ]
+    },
+    {
+      "key": "accent.silk.paris-grey",
+      "family": "accent",
+      "accentOf": "oak",
+      "substance": "silk.paris-grey",
+      "realMaterial": "Plain-woven silk with a soft slub, stretched on battens over an interlining; dyed per chapter, dyed paris grey",
+      "workingsByEra": {},
+      "roles": [
+        "Salon: bay 2 (Modern Paris) wall silk"
+      ],
+      "why": "The Salon's silk in the dye its bay was designed with (Substances/silk.json, designColours).",
+      "oldChoice": "",
+      "verdict": "new",
+      "verdictReason": "One key per dye: the bays' silks are one cloth in six dyes.",
+      "research": {
+        "records": [
+          "r-matter: Shading/Substances/silk.paris-grey.json"
+        ],
+        "needed": "A dyed specimen's measured reflectance."
+      },
+      "finishes": [
+        {
+          "working": "stretched",
+          "history": "new",
+          "note": "Stages: salon.bay2.silk"
+        }
+      ]
+    },
+    {
+      "key": "accent.silk.sage",
+      "family": "accent",
+      "accentOf": "oak",
+      "substance": "silk.sage",
+      "realMaterial": "Plain-woven silk with a soft slub, stretched on battens over an interlining; dyed per chapter, dyed sage",
+      "workingsByEra": {},
+      "roles": [
+        "Salon: bay 3 (Leisure & Light) wall silk"
+      ],
+      "why": "The Salon's silk in the dye its bay was designed with (Substances/silk.json, designColours).",
+      "oldChoice": "",
+      "verdict": "new",
+      "verdictReason": "One key per dye: the bays' silks are one cloth in six dyes.",
+      "research": {
+        "records": [
+          "r-matter: Shading/Substances/silk.sage.json"
+        ],
+        "needed": "A dyed specimen's measured reflectance."
+      },
+      "finishes": [
+        {
+          "working": "stretched",
+          "history": "new",
+          "note": "Stages: salon.bay3.silk"
+        }
+      ]
+    },
+    {
+      "key": "accent.silk.old-rose",
+      "family": "accent",
+      "accentOf": "oak",
+      "substance": "silk.old-rose",
+      "realMaterial": "Plain-woven silk with a soft slub, stretched on battens over an interlining; dyed per chapter, dyed old rose",
+      "workingsByEra": {},
+      "roles": [
+        "Salon: bay 4 (Women) wall silk"
+      ],
+      "why": "The Salon's silk in the dye its bay was designed with (Substances/silk.json, designColours).",
+      "oldChoice": "",
+      "verdict": "new",
+      "verdictReason": "One key per dye: the bays' silks are one cloth in six dyes.",
+      "research": {
+        "records": [
+          "r-matter: Shading/Substances/silk.old-rose.json"
+        ],
+        "needed": "A dyed specimen's measured reflectance."
+      },
+      "finishes": [
+        {
+          "working": "stretched",
+          "history": "new",
+          "note": "Stages: salon.bay4.silk"
+        }
+      ]
+    },
+    {
+      "key": "accent.silk.haystack",
+      "family": "accent",
+      "accentOf": "oak",
+      "substance": "silk.haystack",
+      "realMaterial": "Plain-woven silk with a soft slub, stretched on battens over an interlining; dyed per chapter, dyed haystack",
+      "workingsByEra": {},
+      "roles": [
+        "Salon: bay 5 (Monet's Series) wall silk"
+      ],
+      "why": "The Salon's silk in the dye its bay was designed with (Substances/silk.json, designColours).",
+      "oldChoice": "",
+      "verdict": "new",
+      "verdictReason": "One key per dye: the bays' silks are one cloth in six dyes.",
+      "research": {
+        "records": [
+          "r-matter: Shading/Substances/silk.haystack.json"
+        ],
+        "needed": "A dyed specimen's measured reflectance."
+      },
+      "finishes": [
+        {
+          "working": "stretched",
+          "history": "new",
+          "note": "Stages: salon.bay5.silk"
+        }
+      ]
+    },
+    {
+      "key": "accent.silk.cabinet-green",
+      "family": "accent",
+      "accentOf": "oak",
+      "substance": "silk.cabinet-green",
+      "realMaterial": "Plain-woven silk with a soft slub, stretched on battens over an interlining; dyed per chapter, dyed cabinet green",
+      "workingsByEra": {},
+      "roles": [
+        "Salon: the Manet cabinet wall silk"
+      ],
+      "why": "The Salon's silk in the dye its bay was designed with (Substances/silk.json, designColours).",
+      "oldChoice": "",
+      "verdict": "new",
+      "verdictReason": "One key per dye: the bays' silks are one cloth in six dyes.",
+      "research": {
+        "records": [
+          "r-matter: Shading/Substances/silk.cabinet-green.json"
+        ],
+        "needed": "A dyed specimen's measured reflectance."
+      },
+      "finishes": [
+        {
+          "working": "stretched",
+          "history": "new",
+          "note": "Stages: salon.cabinet.silk"
+        }
+      ]
+    },
+    {
       "key": "accent.mohair-velvet",
       "family": "accent",
       "accentOf": "oak",
@@ -1082,6 +1512,118 @@
       }
     },
     {
+      "key": "accent.mohair-velvet.paris-grey",
+      "family": "accent",
+      "accentOf": "oak",
+      "substance": "velvet.paris-grey",
+      "realMaterial": "Mohair velvet, dyed in each bay's colour, dyed paris grey",
+      "workingsByEra": {},
+      "roles": [
+        "Salon: bay 2 (Modern Paris) bench seat"
+      ],
+      "why": "The bench velvet in its bay's dye (Substances/velvet.json, designColours).",
+      "oldChoice": "",
+      "verdict": "new",
+      "verdictReason": "One key per dye: the benches take their bay's colour.",
+      "research": {
+        "records": [
+          "r-matter: Shading/Substances/velvet.paris-grey.json"
+        ],
+        "needed": "A dyed specimen's measured reflectance."
+      },
+      "finishes": [
+        {
+          "working": "upholstered",
+          "history": "handled",
+          "note": "Stages: salon.bench.bay2.velvet"
+        }
+      ]
+    },
+    {
+      "key": "accent.mohair-velvet.sage",
+      "family": "accent",
+      "accentOf": "oak",
+      "substance": "velvet.sage",
+      "realMaterial": "Mohair velvet, dyed in each bay's colour, dyed sage",
+      "workingsByEra": {},
+      "roles": [
+        "Salon: bay 3 (Leisure & Light) bench seat"
+      ],
+      "why": "The bench velvet in its bay's dye (Substances/velvet.json, designColours).",
+      "oldChoice": "",
+      "verdict": "new",
+      "verdictReason": "One key per dye: the benches take their bay's colour.",
+      "research": {
+        "records": [
+          "r-matter: Shading/Substances/velvet.sage.json"
+        ],
+        "needed": "A dyed specimen's measured reflectance."
+      },
+      "finishes": [
+        {
+          "working": "upholstered",
+          "history": "handled",
+          "note": "Stages: salon.bench.bay3.velvet"
+        }
+      ]
+    },
+    {
+      "key": "accent.mohair-velvet.old-rose",
+      "family": "accent",
+      "accentOf": "oak",
+      "substance": "velvet.old-rose",
+      "realMaterial": "Mohair velvet, dyed in each bay's colour, dyed old rose",
+      "workingsByEra": {},
+      "roles": [
+        "Salon: bay 4 (Women) bench seat"
+      ],
+      "why": "The bench velvet in its bay's dye (Substances/velvet.json, designColours).",
+      "oldChoice": "",
+      "verdict": "new",
+      "verdictReason": "One key per dye: the benches take their bay's colour.",
+      "research": {
+        "records": [
+          "r-matter: Shading/Substances/velvet.old-rose.json"
+        ],
+        "needed": "A dyed specimen's measured reflectance."
+      },
+      "finishes": [
+        {
+          "working": "upholstered",
+          "history": "handled",
+          "note": "Stages: salon.bench.bay4.velvet"
+        }
+      ]
+    },
+    {
+      "key": "accent.mohair-velvet.haystack",
+      "family": "accent",
+      "accentOf": "oak",
+      "substance": "velvet.haystack",
+      "realMaterial": "Mohair velvet, dyed in each bay's colour, dyed haystack",
+      "workingsByEra": {},
+      "roles": [
+        "Salon: bay 5 (Monet's Series) bench seat"
+      ],
+      "why": "The bench velvet in its bay's dye (Substances/velvet.json, designColours).",
+      "oldChoice": "",
+      "verdict": "new",
+      "verdictReason": "One key per dye: the benches take their bay's colour.",
+      "research": {
+        "records": [
+          "r-matter: Shading/Substances/velvet.haystack.json"
+        ],
+        "needed": "A dyed specimen's measured reflectance."
+      },
+      "finishes": [
+        {
+          "working": "upholstered",
+          "history": "handled",
+          "note": "Stages: salon.bench.bay5.velvet"
+        }
+      ]
+    },
+    {
       "key": "accent.linen",
       "family": "accent",
       "accentOf": "oak",
@@ -1100,9 +1642,19 @@
       "verdict": "new",
       "verdictReason": "The approved lantern glasses and oval.",
       "research": {
-        "records": [],
+        "records": [
+          "r-matter: Shading/Substances/linen.json"
+        ],
         "needed": "Textile record with transmission."
-      }
+      },
+      "substance": "linen",
+      "finishes": [
+        {
+          "working": "stretched",
+          "history": "new",
+          "note": "Stages: nympheas.velarium, salon.lantern.scrim"
+        }
+      ]
     },
     {
       "key": "accent.oil-on-linen",
@@ -1131,7 +1683,7 @@
       },
       "finishes": [
         {
-          "working": "stretched",
+          "working": "varnished",
           "history": "clean",
           "note": "Nymphéas oval and Salon: every canvas; each work gives the instance its own image"
         }
@@ -1156,9 +1708,19 @@
       "verdict": "kept",
       "verdictReason": "As the old intent.",
       "research": {
-        "records": [],
+        "records": [
+          "r-matter: Shading/Substances/wool-felt.json"
+        ],
         "needed": "Textile record."
-      }
+      },
+      "substance": "wool-felt",
+      "finishes": [
+        {
+          "working": "laid",
+          "history": "new",
+          "note": "Stages: salon.case.felt"
+        }
+      ]
     },
     {
       "key": "glass.low-iron",
@@ -1198,6 +1760,41 @@
           "working": "laminated.uv-filtering",
           "history": "soiled",
           "note": "Nymphéas oval: the glass roof over the velarium"
+        },
+        {
+          "working": "laminated.uv-filtering",
+          "history": "weathered",
+          "note": "Stages: nympheas.roof.glass, salon.lantern.outer.glass"
+        },
+        {
+          "working": "laminated.uv-filtering",
+          "history": "new",
+          "note": "Stages: rotunda.eye.glass"
+        },
+        {
+          "working": "laminated",
+          "history": "new",
+          "note": "Stages: salon.lantern.pane.clear"
+        },
+        {
+          "working": "acid-etched",
+          "history": "new",
+          "note": "Stages: salon.cabinet.laylight"
+        },
+        {
+          "working": "toughened.laminated",
+          "history": "handled",
+          "note": "Stages: salon.stele.glass"
+        },
+        {
+          "working": "anti-reflective.laminated",
+          "history": "handled",
+          "note": "Stages: salon.case.hood"
+        },
+        {
+          "working": "toughened.anti-reflective",
+          "history": "handled",
+          "note": "Stages: salon.dancer.vitrine"
         }
       ]
     },
@@ -1245,9 +1842,19 @@
       "verdict": "new",
       "verdictReason": "Real glass for the approved stained glass and globes.",
       "research": {
-        "records": [],
+        "records": [
+          "r-matter: Shading/Substances/opal-glass.json"
+        ],
         "needed": "Substance records: pot-metal, flashed, opal; a 'leaded' working."
-      }
+      },
+      "substance": "opal-glass",
+      "finishes": [
+        {
+          "working": "flashed-opal",
+          "history": "new",
+          "note": "Stages: salon.lantern.pane.opal"
+        }
+      ]
     },
     {
       "key": "water.still",
@@ -1275,9 +1882,377 @@
       },
       "finishes": [
         {
-          "working": "water.dyed-black",
+          "working": "still.dyed-black",
           "history": "clean",
           "note": "Nymphéas oval: the lily pond, dyed black"
+        },
+        {
+          "working": "still.dyed-black",
+          "history": "new",
+          "note": "Stages: nympheas.pond.water"
+        }
+      ]
+    },
+    {
+      "key": "living.leaf",
+      "family": "living",
+      "accentOf": null,
+      "substance": "tissue.leaf",
+      "realMaterial": "A green leaf: a few layers of cells under a waxy cuticle",
+      "workingsByEra": {},
+      "roles": [
+        "Nature: the plantings' living tissue"
+      ],
+      "why": "Living tissue: the species' colour travels on its vertices (Nature); the tissue's record gives its cuticle and what it passes.",
+      "oldChoice": "",
+      "verdict": "new",
+      "verdictReason": "Plants are living matter, shaded by the living master.",
+      "research": {
+        "records": [
+          "r-matter: Shading/Substances/tissue.leaf.json"
+        ],
+        "needed": "Measured reflectance and transmittance of the species' tissue."
+      },
+      "finishes": [
+        {
+          "working": "grown",
+          "history": "tended",
+          "note": "Nature: organs and species in a tended or an outdoor bed"
+        },
+        {
+          "working": "grown",
+          "history": "weathered",
+          "note": "Nature: organs and species in a tended or an outdoor bed"
+        }
+      ]
+    },
+    {
+      "key": "living.leaf-floating",
+      "family": "living",
+      "accentOf": null,
+      "substance": "tissue.leaf-floating",
+      "realMaterial": "A floating leaf: a water lily's thick, waxy pad",
+      "workingsByEra": {},
+      "roles": [
+        "Nature: the plantings' living tissue"
+      ],
+      "why": "Living tissue: the species' colour travels on its vertices (Nature); the tissue's record gives its cuticle and what it passes.",
+      "oldChoice": "",
+      "verdict": "new",
+      "verdictReason": "Plants are living matter, shaded by the living master.",
+      "research": {
+        "records": [
+          "r-matter: Shading/Substances/tissue.leaf-floating.json"
+        ],
+        "needed": "Measured reflectance and transmittance of the species' tissue."
+      },
+      "finishes": [
+        {
+          "working": "grown",
+          "history": "tended",
+          "note": "Nature: organs and species in a tended or an outdoor bed"
+        },
+        {
+          "working": "grown",
+          "history": "weathered",
+          "note": "Nature: organs and species in a tended or an outdoor bed"
+        }
+      ]
+    },
+    {
+      "key": "living.petal",
+      "family": "living",
+      "accentOf": null,
+      "substance": "tissue.petal",
+      "realMaterial": "A petal: a thin, lightly pigmented sheet of cells",
+      "workingsByEra": {},
+      "roles": [
+        "Nature: the plantings' living tissue"
+      ],
+      "why": "Living tissue: the species' colour travels on its vertices (Nature); the tissue's record gives its cuticle and what it passes.",
+      "oldChoice": "",
+      "verdict": "new",
+      "verdictReason": "Plants are living matter, shaded by the living master.",
+      "research": {
+        "records": [
+          "r-matter: Shading/Substances/tissue.petal.json"
+        ],
+        "needed": "Measured reflectance and transmittance of the species' tissue."
+      },
+      "finishes": [
+        {
+          "working": "grown",
+          "history": "tended",
+          "note": "Nature: organs and species in a tended or an outdoor bed"
+        },
+        {
+          "working": "grown",
+          "history": "weathered",
+          "note": "Nature: organs and species in a tended or an outdoor bed"
+        }
+      ]
+    },
+    {
+      "key": "living.stamen",
+      "family": "living",
+      "accentOf": null,
+      "substance": "tissue.stamen",
+      "realMaterial": "Stamens and a flower's eye",
+      "workingsByEra": {},
+      "roles": [
+        "Nature: the plantings' living tissue"
+      ],
+      "why": "Living tissue: the species' colour travels on its vertices (Nature); the tissue's record gives its cuticle and what it passes.",
+      "oldChoice": "",
+      "verdict": "new",
+      "verdictReason": "Plants are living matter, shaded by the living master.",
+      "research": {
+        "records": [
+          "r-matter: Shading/Substances/tissue.stamen.json"
+        ],
+        "needed": "Measured reflectance and transmittance of the species' tissue."
+      },
+      "finishes": [
+        {
+          "working": "grown",
+          "history": "tended",
+          "note": "Nature: organs and species in a tended or an outdoor bed"
+        },
+        {
+          "working": "grown",
+          "history": "weathered",
+          "note": "Nature: organs and species in a tended or an outdoor bed"
+        }
+      ]
+    },
+    {
+      "key": "living.stem",
+      "family": "living",
+      "accentOf": null,
+      "substance": "tissue.stem",
+      "realMaterial": "A green stem",
+      "workingsByEra": {},
+      "roles": [
+        "Nature: the plantings' living tissue"
+      ],
+      "why": "Living tissue: the species' colour travels on its vertices (Nature); the tissue's record gives its cuticle and what it passes.",
+      "oldChoice": "",
+      "verdict": "new",
+      "verdictReason": "Plants are living matter, shaded by the living master.",
+      "research": {
+        "records": [
+          "r-matter: Shading/Substances/tissue.stem.json"
+        ],
+        "needed": "Measured reflectance and transmittance of the species' tissue."
+      },
+      "finishes": [
+        {
+          "working": "grown",
+          "history": "tended",
+          "note": "Nature: organs and species in a tended or an outdoor bed"
+        },
+        {
+          "working": "grown",
+          "history": "weathered",
+          "note": "Nature: organs and species in a tended or an outdoor bed"
+        }
+      ]
+    },
+    {
+      "key": "living.seed",
+      "family": "living",
+      "accentOf": null,
+      "substance": "tissue.seed",
+      "realMaterial": "A seed head",
+      "workingsByEra": {},
+      "roles": [
+        "Nature: the plantings' living tissue"
+      ],
+      "why": "Living tissue: the species' colour travels on its vertices (Nature); the tissue's record gives its cuticle and what it passes.",
+      "oldChoice": "",
+      "verdict": "new",
+      "verdictReason": "Plants are living matter, shaded by the living master.",
+      "research": {
+        "records": [
+          "r-matter: Shading/Substances/tissue.seed.json"
+        ],
+        "needed": "Measured reflectance and transmittance of the species' tissue."
+      },
+      "finishes": [
+        {
+          "working": "grown",
+          "history": "tended",
+          "note": "Nature: organs and species in a tended or an outdoor bed"
+        },
+        {
+          "working": "grown",
+          "history": "weathered",
+          "note": "Nature: organs and species in a tended or an outdoor bed"
+        }
+      ]
+    },
+    {
+      "key": "living.nymphaea",
+      "family": "living",
+      "accentOf": null,
+      "substance": "tissue.leaf-floating",
+      "realMaterial": "A water lily (Nymphaea), by its pads, the most of it that shows",
+      "workingsByEra": {},
+      "roles": [
+        "Nature: the plantings' living tissue"
+      ],
+      "why": "Living tissue: the species' colour travels on its vertices (Nature); the tissue's record gives its cuticle and what it passes.",
+      "oldChoice": "",
+      "verdict": "new",
+      "verdictReason": "Plants are living matter, shaded by the living master.",
+      "research": {
+        "records": [
+          "r-matter: Shading/Substances/tissue.leaf-floating.json"
+        ],
+        "needed": "Measured reflectance and transmittance of the species' tissue."
+      },
+      "finishes": [
+        {
+          "working": "grown",
+          "history": "tended",
+          "note": "Stages: nympheas.pond.lilies, nympheas.pond.lilies"
+        },
+        {
+          "working": "grown",
+          "history": "weathered",
+          "note": "Nature: organs and species in a tended or an outdoor bed"
+        }
+      ]
+    },
+    {
+      "key": "living.iris-laevigata",
+      "family": "living",
+      "accentOf": null,
+      "substance": "tissue.leaf",
+      "realMaterial": "Iris laevigata, by its sword leaves",
+      "workingsByEra": {},
+      "roles": [
+        "Nature: the plantings' living tissue"
+      ],
+      "why": "Living tissue: the species' colour travels on its vertices (Nature); the tissue's record gives its cuticle and what it passes.",
+      "oldChoice": "",
+      "verdict": "new",
+      "verdictReason": "Plants are living matter, shaded by the living master.",
+      "research": {
+        "records": [
+          "r-matter: Shading/Substances/tissue.leaf.json"
+        ],
+        "needed": "Measured reflectance and transmittance of the species' tissue."
+      },
+      "finishes": [
+        {
+          "working": "grown",
+          "history": "tended",
+          "note": "Stages: nympheas.pond.shelf.east, nympheas.pond.shelf.west"
+        },
+        {
+          "working": "grown",
+          "history": "weathered",
+          "note": "Nature: organs and species in a tended or an outdoor bed"
+        }
+      ]
+    },
+    {
+      "key": "living.carex-elata",
+      "family": "living",
+      "accentOf": null,
+      "substance": "tissue.leaf",
+      "realMaterial": "Carex elata, by its leaves",
+      "workingsByEra": {},
+      "roles": [
+        "Nature: the plantings' living tissue"
+      ],
+      "why": "Living tissue: the species' colour travels on its vertices (Nature); the tissue's record gives its cuticle and what it passes.",
+      "oldChoice": "",
+      "verdict": "new",
+      "verdictReason": "Plants are living matter, shaded by the living master.",
+      "research": {
+        "records": [
+          "r-matter: Shading/Substances/tissue.leaf.json"
+        ],
+        "needed": "Measured reflectance and transmittance of the species' tissue."
+      },
+      "finishes": [
+        {
+          "working": "grown",
+          "history": "tended",
+          "note": "Stages: nympheas.pond.shelf.east, nympheas.pond.shelf.west"
+        },
+        {
+          "working": "grown",
+          "history": "weathered",
+          "note": "Nature: organs and species in a tended or an outdoor bed"
+        }
+      ]
+    },
+    {
+      "key": "living.myosotis-scorpioides",
+      "family": "living",
+      "accentOf": null,
+      "substance": "tissue.leaf",
+      "realMaterial": "Myosotis scorpioides, by its leaves",
+      "workingsByEra": {},
+      "roles": [
+        "Nature: the plantings' living tissue"
+      ],
+      "why": "Living tissue: the species' colour travels on its vertices (Nature); the tissue's record gives its cuticle and what it passes.",
+      "oldChoice": "",
+      "verdict": "new",
+      "verdictReason": "Plants are living matter, shaded by the living master.",
+      "research": {
+        "records": [
+          "r-matter: Shading/Substances/tissue.leaf.json"
+        ],
+        "needed": "Measured reflectance and transmittance of the species' tissue."
+      },
+      "finishes": [
+        {
+          "working": "grown",
+          "history": "tended",
+          "note": "Stages: nympheas.pond.shelf.east, nympheas.pond.shelf.west"
+        },
+        {
+          "working": "grown",
+          "history": "weathered",
+          "note": "Nature: organs and species in a tended or an outdoor bed"
+        }
+      ]
+    },
+    {
+      "key": "living.vitis-vinifera",
+      "family": "living",
+      "accentOf": null,
+      "substance": "tissue.leaf",
+      "realMaterial": "Vitis vinifera, by its leaves",
+      "workingsByEra": {},
+      "roles": [
+        "Nature: the plantings' living tissue"
+      ],
+      "why": "Living tissue: the species' colour travels on its vertices (Nature); the tissue's record gives its cuticle and what it passes.",
+      "oldChoice": "",
+      "verdict": "new",
+      "verdictReason": "Plants are living matter, shaded by the living master.",
+      "research": {
+        "records": [
+          "r-matter: Shading/Substances/tissue.leaf.json"
+        ],
+        "needed": "Measured reflectance and transmittance of the species' tissue."
+      },
+      "finishes": [
+        {
+          "working": "grown",
+          "history": "weathered",
+          "note": "Stages: salon.pergola.planter.nw, salon.pergola.planter.ne, salon.pergola.planter.sw, salon.pergola.planter.se"
+        },
+        {
+          "working": "grown",
+          "history": "tended",
+          "note": "Nature: organs and species in a tended or an outdoor bed"
         }
       ]
     }

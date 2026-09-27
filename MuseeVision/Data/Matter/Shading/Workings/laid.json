@@ -1,0 +1,39 @@
+{
+  "schema": "musee.matter.shading.working/1",
+  "key": "laid",
+  "name": "Laid loose (a felt lining)",
+  "record": "Substances/wool-felt.json",
+  "kind": "face",
+  "roughness": {
+    "value": 0.8,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Substances/wool-felt.json"
+  },
+  "roughnessAcross": {
+    "value": 0.8,
+    "unit": "1",
+    "grade": "derived",
+    "source": "Substances/wool-felt.json",
+    "derivation": "a face with no grain: equal to the roughness along"
+  },
+  "haziness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Substances/wool-felt.json",
+    "note": "One specular lobe unless noted."
+  },
+  "textureDepth": {
+    "value": 0.3,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Substances/wool-felt.json"
+  },
+  "relief": {
+    "value": 0.1,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Substances/wool-felt.json"
+  }
+}

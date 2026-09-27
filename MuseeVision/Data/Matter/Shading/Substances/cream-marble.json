@@ -1,0 +1,115 @@
+{
+  "schema": "musee.matter.shading.substance/1",
+  "key": "cream-marble",
+  "name": "Crema Marfil Coto (Pinoso)",
+  "family": "stone",
+  "record": "Substances/cream-marble.json",
+  "master": "marble",
+  "dielectric": {
+    "diffuseAlbedo": {
+      "value": [
+        84.2,
+        2.0,
+        12.0
+      ],
+      "space": "CIELAB (D65, 2 deg)",
+      "unit": "CIELAB",
+      "grade": "unverified",
+      "source": "Substances/cream-marble.json: optics.luminousReflectance (0.644, manufacturer) for L*; the palette entry's research.needed (no a* b* measured)",
+      "derivation": "L* = 116 Y^(1/3) - 16 with Y = 0.644",
+      "note": "a* and b* are a first warm ivory until a specimen of Crema Marfil is measured (Palette.json: research.needed)."
+    },
+    "refractiveIndex": {
+      "value": 1.6003,
+      "unit": "1",
+      "grade": "derived",
+      "source": "Substances/cream-marble.json: optics.specularF0 (0.0533, calcite grains in random orientations)",
+      "derivation": "n = (1 + sqrt(F0)) / (1 - sqrt(F0)), the index whose normal-incidence reflectance is the record's F0"
+    },
+    "porosity": {
+      "value": 0.005,
+      "unit": "1",
+      "grade": "record",
+      "source": "Substances/cream-marble.json: physical.openPorosity (0.5 %, UNE-EN 1936)",
+      "derivation": "0.5 % as a fraction"
+    },
+    "wettingDepth": {
+      "value": 1.0,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Substances/cream-marble.json: physical.waterAbsorption (0.2 %)",
+      "note": "A dense stone takes water only into its outer millimetre; no measured depth was read."
+    }
+  },
+  "structure": {
+    "grain": {
+      "value": 0.1,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Substances/cream-marble.json: unverified (the crackle's cell size, 0.25 to 0.4 m)",
+      "note": "A micritic limestone: its calcite grains are finer than the eye resolves; the stylolite crackle is its coarsest structure."
+    },
+    "bed": {
+      "value": 300,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Substances/cream-marble.json: unverified (the crackle's cell size, 0.25 to 0.4 m)",
+      "note": "A first value for the band or bed a honed face shows, until a specimen is measured."
+    },
+    "bedAspect": {
+      "value": 1.5,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Substances/cream-marble.json: unverified (the crackle's cell size, 0.25 to 0.4 m)",
+      "note": "How much finer the veining is across its run than along it, read from trade photographs."
+    },
+    "hurst": {
+      "value": 0.7,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Candela et al. 2012, Journal of Geophysical Research 117, B08409 (fault surfaces, 0.6 to 0.8; cited in Stone.ush)",
+      "note": "The middle of the range measured on rock surfaces, as the travertine's."
+    },
+    "toneSpread": {
+      "value": 0.08,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Substances/cream-marble.json: unverified (the crackle's cell size, 0.25 to 0.4 m)",
+      "note": "A first half-range of ln(albedo) across a face, from its veins and clasts."
+    },
+    "roughnessSpread": {
+      "value": 0.15,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Workings/honed.json: unverified surface.microRoughness (no filtered roughness read)",
+      "note": "A first half-range of ln(roughness) across a honed face, as the travertine's."
+    }
+  },
+  "medium": {
+    "absorption": {
+      "value": [
+        0.0021,
+        0.0041,
+        0.0071
+      ],
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "unit": "1/mm",
+      "grade": "record",
+      "source": "Substances/cream-marble.json: optics.subsurfaceReference.absorption (Jensen, Marschner, Levoy & Hanrahan 2001, measured marble)",
+      "conditions": "red, green, blue",
+      "note": "A measured white marble stands in for the Crema Marfil until the stone is measured."
+    },
+    "scattering": {
+      "value": [
+        2.19,
+        2.62,
+        3.0
+      ],
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "unit": "1/mm",
+      "grade": "record",
+      "source": "Substances/cream-marble.json: optics.subsurfaceReference.reducedScattering (Jensen et al. 2001)",
+      "conditions": "red, green, blue"
+    }
+  }
+}

@@ -1,41 +1,39 @@
 {
   "schema": "musee.matter.shading.working/1",
   "key": "stretched",
-  "name": "Painted on a stretched canvas, varnished",
+  "name": "Stretched on a frame or a wall",
   "record": "Workings/stretched.json",
   "kind": "face",
   "roughness": {
-    "value": 0.35,
+    "value": 0.8,
     "unit": "1",
     "grade": "unverified",
-    "source": "no research record of a varnished paint surface yet",
-    "note": "A first value for a satin picture varnish."
+    "source": "Workings/stretched.json (a stretched cloth's face is matte)"
   },
   "roughnessAcross": {
-    "value": 0.35,
+    "value": 0.8,
     "unit": "1",
     "grade": "derived",
-    "source": "a varnish has no grain",
-    "derivation": "equal to the roughness along"
+    "source": "Workings/stretched.json (a stretched cloth's face is matte)",
+    "derivation": "a face with no grain: equal to the roughness along"
   },
   "haziness": {
     "value": 0.0,
     "unit": "1",
     "grade": "unverified",
-    "source": "no research record of a varnished paint surface yet"
+    "source": "Workings/stretched.json (a stretched cloth's face is matte)",
+    "note": "One specular lobe unless noted."
   },
   "textureDepth": {
+    "value": 0.1,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Workings/stretched.json"
+  },
+  "relief": {
     "value": 0.05,
     "unit": "mm",
     "grade": "unverified",
-    "source": "Substances/linen.json (the weave under the ground and paint)",
-    "note": "A first value for the weave the paint follows."
-  },
-  "relief": {
-    "value": 0.0,
-    "unit": "mm",
-    "grade": "derived",
-    "source": "the image carries the brushwork",
-    "derivation": "no relief is drawn over the work's own image"
+    "source": "Workings/stretched.json (the weave's relief)"
   }
 }

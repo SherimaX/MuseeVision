@@ -15,6 +15,8 @@
 #include "MatterMake.h"
 #include "MatterMasters.h"
 #include "MatterMomentCollection.h"
+#include "MatterNames.h"
+#include "Misc/PackageName.h"
 #include "Tests/MatterTestMasters.h"
 #include "Materials/MaterialParameterCollection.h"
 #include "Misc/FileHelper.h"
@@ -42,15 +44,22 @@ namespace Musee::Matter::Tests
 		return StoneRecipe(*TestMasters::TransientMoment());
 	}
 
-	/** The stone master's recipe over the museum Moment as the make step saves it: a saved master can read only a saved
-	 *  collection. An unmade Moment is reported on Test and gives an empty recipe, which does not validate. */
+	/** The stone master's recipe over the museum Moment as the make step saves it (a saved master can read only a
+	 *  saved collection): the Moment already made, or made now. An unmade Moment is reported on Test and gives an empty
+	 *  recipe, which does not validate. */
 	FMasterRecipe SavedStoneMaster(FAutomationTestBase& Test)
 	{
-		FMatterMakeReport Report;
-		UMaterialParameterCollection* Moment = MakeMomentCollection(Report);
-		for (const FString& Problem : Report.Problems)
+		UMaterialParameterCollection* Moment = FPackageName::DoesPackageExist(MomentCollectionPackage)
+			? LoadObject<UMaterialParameterCollection>(nullptr, *ObjectPathOf(MomentCollectionPackage))
+			: nullptr;
+		if (!Moment)
 		{
-			Test.AddError(Problem);
+			FMatterMakeReport Report;
+			Moment = MakeMomentCollection(Report);
+			for (const FString& Problem : Report.Problems)
+			{
+				Test.AddError(Problem);
+			}
 		}
 		return Moment ? StoneRecipe(*Moment) : FMasterRecipe();
 	}
@@ -212,18 +221,20 @@ bool FMatterRecipeValidates::RunTest(const FString& Parameters)
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FMatterIdentityFollowsRecipe, "Musee.Matter.IdentityFollowsRecipe", TestFlags)
 bool FMatterIdentityFollowsRecipe::RunTest(const FString& Parameters)
 {
-	const FMasterIdentity Identity = IdentityOf(StoneMaster());
-	TestTrue(TEXT("The same recipe has the same identity"), Identity.InputHash == IdentityOf(StoneMaster()).InputHash);
+	// One Moment for every recipe compared: the collection is part of a master's identity.
+	UMaterialParameterCollection& Moment = *TestMasters::TransientMoment();
+	const FMasterIdentity Identity = IdentityOf(StoneRecipe(Moment));
+	TestTrue(TEXT("The same recipe has the same identity"), Identity.InputHash == IdentityOf(StoneRecipe(Moment)).InputHash);
 
-	FMasterRecipe OtherDefault = StoneMaster();
+	FMasterRecipe OtherDefault = StoneRecipe(Moment);
 	OtherDefault.Parameters[0].Default.R += 0.01f;
 	TestTrue(TEXT("A changed default changes the identity"), IdentityOf(OtherDefault).InputHash != Identity.InputHash);
 
-	FMasterRecipe OtherCode = StoneMaster();
+	FMasterRecipe OtherCode = StoneRecipe(Moment);
 	OtherCode.Calls[1].Code += TEXT("\n");
 	TestTrue(TEXT("Changed code changes the identity"), IdentityOf(OtherCode).InputHash != Identity.InputHash);
 
-	FMasterRecipe WindowsLines = StoneMaster();
+	FMasterRecipe WindowsLines = StoneRecipe(Moment);
 	WindowsLines.Calls[1].Code.ReplaceInline(TEXT("\n"), TEXT("\r\n"));
 	TestTrue(TEXT("Line endings do not change the identity"), IdentityOf(WindowsLines).InputHash == Identity.InputHash);
 

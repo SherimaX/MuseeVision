@@ -1,0 +1,39 @@
+{
+  "schema": "musee.matter.shading.working/1",
+  "key": "hard-chromed",
+  "name": "Hard-chromed and polished",
+  "record": "Palette.json",
+  "kind": "face",
+  "roughness": {
+    "value": 0.1,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Palette.json: steel.hard-chrome (a polished hard chrome, Ra about 0.1 um)"
+  },
+  "roughnessAcross": {
+    "value": 0.1,
+    "unit": "1",
+    "grade": "derived",
+    "source": "Palette.json: steel.hard-chrome (a polished hard chrome, Ra about 0.1 um)",
+    "derivation": "a face with no grain: equal to the roughness along"
+  },
+  "haziness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Palette.json: steel.hard-chrome (a polished hard chrome, Ra about 0.1 um)",
+    "note": "One specular lobe unless noted."
+  },
+  "textureDepth": {
+    "value": 0.001,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Palette.json: steel.hard-chrome"
+  },
+  "relief": {
+    "value": 0.0,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Palette.json: steel.hard-chrome"
+  }
+}

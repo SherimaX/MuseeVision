@@ -1,0 +1,39 @@
+{
+  "schema": "musee.matter.shading.working/1",
+  "key": "flashed-opal",
+  "name": "Flashed with opal, fire-polished",
+  "record": "Workings/flashed.json",
+  "kind": "face",
+  "roughness": {
+    "value": 0.04,
+    "unit": "1",
+    "grade": "design",
+    "source": "Substances/opal-glass.json: asBuilt.globeSkinRoughness"
+  },
+  "roughnessAcross": {
+    "value": 0.04,
+    "unit": "1",
+    "grade": "derived",
+    "source": "Substances/opal-glass.json: asBuilt.globeSkinRoughness",
+    "derivation": "a face with no grain: equal to the roughness along"
+  },
+  "haziness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Substances/opal-glass.json: asBuilt.globeSkinRoughness",
+    "note": "One specular lobe unless noted."
+  },
+  "textureDepth": {
+    "value": 0.001,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Workings/flashed.json"
+  },
+  "relief": {
+    "value": 0.0,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Workings/flashed.json"
+  }
+}

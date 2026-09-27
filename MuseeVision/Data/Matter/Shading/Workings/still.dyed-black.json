@@ -1,6 +1,6 @@
 {
   "schema": "musee.matter.shading.working/1",
-  "key": "water.dyed-black",
+  "key": "still.dyed-black",
   "name": "Dyed black (a reflecting-pool dye)",
   "record": "Workings/water.dyed-black.json",
   "kind": "face",

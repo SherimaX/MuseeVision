@@ -15,6 +15,7 @@
 
 #include "/Project/Matter/Frame.ush"
 #include "/Project/Matter/Optics.ush"
+#include "/Project/Matter/History.ush"
 #include "/Project/Matter/Stone.ush"
 
 /** The cloth's face at FaceMeters (UV0, the warp along u): its tone and roughness varied over its yarn's slubs, which

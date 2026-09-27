@@ -89,6 +89,19 @@ namespace
 UMaterialParameterCollection* MakeMomentCollection(FMatterMakeReport& Report)
 {
 	const FString PackageName = MomentCollectionPackage;
+	// Time loads the made collection as the editor starts, which holds its file open: a collection already made with
+	// these names is kept as it is, as a re-make of it would write the same thing.
+	if (FPackageName::DoesPackageExist(PackageName))
+	{
+		UMaterialParameterCollection* Made = LoadObject<UMaterialParameterCollection>(nullptr, *ObjectPathOf(PackageName));
+		const TArray<FName> Names = MomentParameterNames();
+		if (Made && Made->StateId == MomentStateId(Names) && Made->GetScalarParameterNames() == Names && Made->VectorParameters.IsEmpty())
+		{
+			++Report.Unchanged;
+			Report.Lines.Add(FString::Printf(TEXT("Unchanged %s: made with the Moment's names"), *Made->GetPathName()));
+			return Made;
+		}
+	}
 	const FName AssetName(*FPackageName::GetShortName(PackageName));
 	UPackage* Package = PrepareMadePackage(PackageName, AssetName);
 	UMaterialParameterCollection* Moment = NewObject<UMaterialParameterCollection>(Package, AssetName, MadeFlags);

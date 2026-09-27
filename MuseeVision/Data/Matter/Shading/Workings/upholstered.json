@@ -1,0 +1,39 @@
+{
+  "schema": "musee.matter.shading.working/1",
+  "key": "upholstered",
+  "name": "Upholstered over padding",
+  "record": "Workings/upholstered.json",
+  "kind": "face",
+  "roughness": {
+    "value": 0.8,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Workings/upholstered.json"
+  },
+  "roughnessAcross": {
+    "value": 0.8,
+    "unit": "1",
+    "grade": "derived",
+    "source": "Workings/upholstered.json",
+    "derivation": "a face with no grain: equal to the roughness along"
+  },
+  "haziness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Workings/upholstered.json",
+    "note": "One specular lobe unless noted."
+  },
+  "textureDepth": {
+    "value": 0.5,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Workings/upholstered.json (a pile holds water in its depth)"
+  },
+  "relief": {
+    "value": 0.3,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Workings/upholstered.json (the padding's unevenness)"
+  }
+}
