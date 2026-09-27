@@ -115,6 +115,22 @@ namespace Musee::Form::Tests::WorkedSlabs
 			TestEqual(FString::Printf(TEXT("%s: the slab less what the pockets take"), Case.What), VolumeCubicMeters(Pieces[0]), Slab - Case.Taken, 1e-9);
 			TestEqual(FString::Printf(TEXT("%s: the pockets are finished apart"), Case.What), Pieces[0].SlotSurfaces, TArray<FName>{TEXT("flag.pocket")});
 		}
+		// A slab of a ring (r 2.29 to 2.94 over 30 degrees), a band rebated across it (r 2.36 to 2.49): the Atrium's shoe.
+		auto Sector = [](double R0, double R1, double From, double To)
+		{
+			return FFormProfile::From(FVector2D(R0 * FMath::Cos(FMath::DegreesToRadians(From)), R0 * FMath::Sin(FMath::DegreesToRadians(From))))
+				.ArcAbout(FVector2D::ZeroVector, R0, R0, From, To).ArcAbout(FVector2D::ZeroVector, R1, R1, To, From).Close();
+		};
+		FFormExtrusion Curved;
+		Curved.Outline = Sector(2.29, 2.94, 45.0, 75.0);
+		Curved.DepthMeters = 0.03;
+		Curved.Pockets = {FFormPocket{Sector(2.36, 2.49, 30.0, 90.0), 0.01}};
+		const TArray<FFormMadePiece> Ringed = MakeDrawing(*this, FFormDrawing::Of(TEXT("ring"), TEXT("marble"), Curved));
+		if (TestEqual(TEXT("the ring's slab is one piece"), Ringed.Num(), 1))
+		{
+			TestClosed(*this, TEXT("a band rebated across a ring's slab"), Ringed[0], 2);
+		}
+
 		// A pocket as deep as the slab has no floor: it is a hole, drawn as one.
 		FFormExtrusion Through = Flag();
 		Through.Pockets = {Pocket({0.2, 0.2}, {0.5, 0.4}, 0.1)};

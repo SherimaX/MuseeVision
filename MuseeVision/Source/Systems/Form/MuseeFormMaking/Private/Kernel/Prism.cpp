@@ -70,12 +70,15 @@ namespace Musee::Form
 			OutLevels = {0.0, Depth};
 			for (const FPrismPocket& Pocket : Pockets)
 			{
-				if (Pocket.DepthMeters <= WeldToleranceMeters || Pocket.DepthMeters >= Depth - WeldToleranceMeters)
+				if (Pocket.DepthMeters <= WeldToleranceMeters || Pocket.CoverMeters < 0.0
+					|| Pocket.CoverMeters + Pocket.DepthMeters >= Depth - WeldToleranceMeters)
 				{
-					OutWhy = FString::Printf(TEXT("a pocket %.4f m deep in a slab %.4f m thick has no floor"), Pocket.DepthMeters, Depth);
+					OutWhy = FString::Printf(TEXT("a pocket %.4f m deep under %.4f m of cover in a slab %.4f m thick has no floor"),
+						Pocket.DepthMeters, Pocket.CoverMeters, Depth);
 					return false;
 				}
-				OutLevels.Add(Pocket.bNearFace ? Pocket.DepthMeters : Depth - Pocket.DepthMeters);
+				OutLevels.Add(Pocket.Low(Depth));
+				OutLevels.Add(Pocket.High(Depth));
 			}
 			OutLevels.Sort();
 			for (int32 Index = OutLevels.Num() - 1; Index > 0; --Index)
@@ -119,6 +122,10 @@ namespace Musee::Form
 			for (const FGeneralPolygon2d& Polygon : Region)
 			{
 				TArray<TArray<FVector2D>> Loops = NodedLoops(Polygon, Nodes);
+				if (Loops.IsEmpty())
+				{
+					continue;
+				}
 				const TArray<FVector2D> Outer = Loops[0];
 				Loops.RemoveAt(0);
 				if (!LevelFace(Mesh, Outer, Loops, Z, bUp))
@@ -151,7 +158,7 @@ namespace Musee::Form
 			FRegion Taken;
 			for (const FPrismPocket& Pocket : Pockets)
 			{
-				const bool bReaches = Pocket.bNearFace ? Middle < Pocket.DepthMeters : Middle > DepthMeters - Pocket.DepthMeters;
+				const bool bReaches = Middle > Pocket.Low(DepthMeters) && Middle < Pocket.High(DepthMeters);
 				Taken = bReaches ? Union(Taken, Pocket.Region) : Taken;
 			}
 			Layers.Add(Difference(Base, Taken));
@@ -235,6 +242,10 @@ namespace Musee::Form
 				for (const FGeneralPolygon2d& Polygon : Pocket.Region)
 				{
 					const TArray<TArray<FVector2D>> Loops = LoopsOf(Polygon);
+					if (Loops.IsEmpty())
+					{
+						continue;
+					}
 					bool bClear = Loops.Num() == 1;
 					for (const FVector2D& Point : Loops[0])
 					{
@@ -317,14 +328,16 @@ namespace Musee::Form
 		bool bMade = true;
 		for (const FPrismPocket& Pocket : Pockets)
 		{
-			if (Pocket.DepthMeters <= WeldToleranceMeters || Pocket.DepthMeters >= DepthMeters - WeldToleranceMeters)
+			if (Pocket.DepthMeters <= WeldToleranceMeters || Pocket.DepthMeters >= DepthMeters - WeldToleranceMeters || Pocket.CoverMeters != 0.0)
 			{
-				OutWhy = FString::Printf(TEXT("a pocket %.4f m deep in a slab %.4f m thick has no floor"), Pocket.DepthMeters, DepthMeters);
+				OutWhy = FString::Printf(TEXT("a pocket in an eased slab opens at its face and has a floor (%.4f m deep in %.4f m)"), Pocket.DepthMeters,
+					DepthMeters);
 				return false;
 			}
 			for (const FGeneralPolygon2d& Polygon : Pocket.Region)
 			{
-				bMade &= BlindPocket(Mesh, LoopsOf(Polygon)[0], Pocket.bNearFace ? 0.0 : DepthMeters,
+				const TArray<TArray<FVector2D>> Loops = LoopsOf(Polygon);
+				bMade &= Loops.IsEmpty() || BlindPocket(Mesh, Loops[0], Pocket.bNearFace ? 0.0 : DepthMeters,
 					Pocket.bNearFace ? Pocket.DepthMeters : DepthMeters - Pocket.DepthMeters, Parts.Pocket);
 			}
 		}

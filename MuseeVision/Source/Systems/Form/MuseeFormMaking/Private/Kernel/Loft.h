@@ -26,9 +26,9 @@ namespace Musee::Form
 	/**
 	 * Adds a loft's side (smooth between its arrises: each vertex takes the mean of the faces round it within its smooth
 	 * patch) in SideSlot, and the flat ends that close it, facing down its z axis at the first section and up it at the
-	 * last, in EndSlot. An end whose section has closed to a point needs no face. The side's U runs up the loft and its V
-	 * round it, in metres; the ends' UVs are their (x, y). Returns false, adding nothing further, when an end's outline
-	 * can't be triangulated (it crosses itself).
+	 * last, in EndSlot. An end whose section has closed to an edge or a point needs no face. The side's U runs up the
+	 * loft and its V round it, in metres; the ends' UVs are their (x, y). Returns false, adding nothing further, when an
+	 * end's outline can't be triangulated (it crosses itself).
 	 */
 	bool Loft(FMeshBuilder& Mesh, const FLoftGrid& Grid, FName SideSlot, FName EndSlot);
 }

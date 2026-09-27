@@ -113,13 +113,22 @@ namespace Musee::Form
 		TArray<TArray<FVector2D>> Loops;
 		auto Add = [&Loops](const FPolygon2d& Loop)
 		{
-			TArray<FVector2D>& Points = Loops.AddDefaulted_GetRef();
+			TArray<FVector2D> Points;
 			for (const UE::Math::TVector2<double>& Point : Loop.GetVertices())
 			{
 				Points.Add(FVector2D(Point.X, Point.Y));
 			}
+			Points = CleanLoop(Points, WeldToleranceMeters);
+			if (Points.Num() >= 3)
+			{
+				Loops.Add(MoveTemp(Points));
+			}
 		};
 		Add(Polygon.GetOuter());
+		if (Loops.IsEmpty())
+		{
+			return {};
+		}
 		for (const FPolygon2d& Hole : Polygon.GetHoles())
 		{
 			Add(Hole);
@@ -218,7 +227,7 @@ namespace Musee::Form
 		return Stations;
 	}
 
-	TArray<FVector2D> CleanLoop(TConstArrayView<FVector2D> Loop)
+	TArray<FVector2D> CleanLoop(TConstArrayView<FVector2D> Loop, double LeastMeters)
 	{
 		// A turn within a microradian of straight back is a spike, not a corner.
 		constexpr double StraightBack = 1.0e-6;
@@ -231,7 +240,7 @@ namespace Musee::Form
 			{
 				const FVector2D In = Points[Index] - Points[(Index + Points.Num() - 1) % Points.Num()];
 				const FVector2D Out = Points[(Index + 1) % Points.Num()] - Points[Index];
-				const bool bShort = In.Size() < LeastEdgeMeters;
+				const bool bShort = In.Size() < LeastMeters;
 				const bool bSpike = FVector2D::DotProduct(In, Out) < 0.0
 					&& FMath::Abs(FVector2D::CrossProduct(In, Out)) <= StraightBack * In.Size() * Out.Size();
 				if (bShort || bSpike)

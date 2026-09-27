@@ -55,7 +55,25 @@ namespace Musee::Form::Tests::Laying
 		TestEqual(TEXT("the filling is named for the floor"), Pieces[1].Name, FName(TEXT("floor.joints")));
 		TestEqual(TEXT("and finished as grout"), Pieces[1].Surface, FName(TEXT("floor.joint")));
 		TestClosed(*this, TEXT("the filling"), Pieces[1], 2);
-		TestEqual(TEXT("it fills what the flags leave, to 3 mm below the face"), VolumeCubicMeters(Pieces[1]), (2.4 * 1.6 - 4.0 * Flag) * 0.097, 1e-9);
+		// It stands 2 micrometres off the flags and the outline all round its edges (some 16 m of them).
+		TestEqual(TEXT("it fills what the flags leave, to 3 mm below the face"), VolumeCubicMeters(Pieces[1]), (2.4 * 1.6 - 4.0 * Flag) * 0.097,
+			16.0 * 2.0e-6 * 0.097);
+
+		// The Hall of Light's floor in little: curved ends, two viewing stones' discs, joints filled flush.
+		FFormLaid Hall = Flags120By80(FVector2D(6.0, 3.2));
+		Hall.Outline = FFormProfile::From(FVector2D(0.0, 0.0)).LineTo(FVector2D(6.0, 0.0)).ArcAbout(FVector2D(4.0, 1.6), 2.563, 2.563, -38.66, 38.66)
+			.LineTo(FVector2D(0.0, 3.2)).ArcAbout(FVector2D(2.0, 1.6), 2.563, 2.563, 141.34, 218.66).Close();
+		Hall.Holes = {FFormProfile::Ellipse(FVector2D(1.4, 1.6), 0.45, 0.45, 0.0, true), FFormProfile::Ellipse(FVector2D(4.3, 0.8), 0.45, 0.45, 0.0, true)};
+		Hall.OriginMeters = FVector2D(0.0, 1.6);
+		Hall.FillMeters = 0.0;
+		FFormDrawing HallDrawing = FFormDrawing::Of(TEXT("hall.floor"), TEXT("floor"), Hall);
+		HallDrawing.PartSurfaces.Add(FFormLaid::JointPart, TEXT("floor"));
+		const TArray<FFormMadePiece> HallFloor = MakeDrawing(*this, HallDrawing);
+		if (TestEqual(TEXT("the hall's floor is its slabs and their filling"), HallFloor.Num(), 2))
+		{
+			TestTrue(TEXT("its slabs are closed"), MeasureShellEdges(*HallFloor[0].Mesh).IsClosed());
+			TestTrue(TEXT("its filling is closed"), MeasureShellEdges(*HallFloor[1].Mesh).IsClosed());
+		}
 
 		// Filled joints need their own surface.
 		TArray<FMuseeFinding> Findings;

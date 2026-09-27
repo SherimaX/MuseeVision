@@ -53,7 +53,7 @@ namespace Musee::Form::Drawing
 				{
 					return false;
 				}
-				Pockets.Add({RegionOf(Resolve(Pocket.Outline).Points()), Pocket.DepthMeters, Pocket.bNearFace});
+				Pockets.Add({RegionOf(Resolve(Pocket.Outline).Points()), Pocket.DepthMeters, Pocket.bNearFace, Pocket.CoverMeters});
 			}
 			if (!Shape.NearArris.IsSharp() || !Shape.FarArris.IsSharp())
 			{

@@ -39,6 +39,9 @@ namespace Musee::Form::Drawing
 		/** A unit carries its arris when it keeps its shape shrunk by twice the arris: its eased faces stay clear of each other. */
 		constexpr double ArrisClearance = 2.0;
 
+		/** How far the joints' filling stands off the units: two weld tolerances, so the two never weld. */
+		constexpr double FillClearance = 2.0 * WeldToleranceMeters;
+
 		/** The most cells a laid surface may set out: a floor of a hundred thousand units is a drawing's mistake, not a floor. */
 		constexpr int32 MostCells = 200000;
 
@@ -496,15 +499,18 @@ namespace Musee::Form::Drawing
 			return Units;
 		}
 
-		/** The filling of the joints: what is laid less every unit, up to the fill's level. */
+		/**
+		 * The filling of the joints: what is laid less every unit, up to the fill's level. It stands a hair off the units
+		 * (FillClearance), so where a joint narrows to a point between two units' corners the filling parts there.
+		 */
 		bool Filling(const FFormLaid& Shape, const FRegion& Laid, const FRegion& Units, FMeshBuilder& Joints, FString& OutWhy)
 		{
 			Joints.UseSlot(FFormLaid::JointPart);
 			const FPlaneFrame Plane;
-			for (const FGeneralPolygon2d& Polygon : Difference(Laid, Units))
+			for (const FGeneralPolygon2d& Polygon : Offset(Difference(Laid, Units), -FillClearance))
 			{
 				TArray<FProfileStations> Loops;
-				for (const TArray<FVector2D>& Loop : CleanLoops(Polygon))
+				for (const TArray<FVector2D>& Loop : LoopsOf(Polygon))
 				{
 					Loops.Add(LoopStations(Loop));
 				}

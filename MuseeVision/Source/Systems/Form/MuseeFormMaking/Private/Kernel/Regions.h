@@ -40,7 +40,11 @@ namespace Musee::Form
 
 	double AreaSquareMeters(const FRegion& Region);
 
-	/** The loops of one polygon of a region, the outer first and then the holes, as points. */
+	/**
+	 * The loops of one polygon of a region, the outer first and then the holes, as points, each without the spikes of no
+	 * width and the repeated points a boolean leaves where two outlines ran along each other (CleanLoop at the weld
+	 * tolerance). A loop left with no area is left out.
+	 */
 	TArray<TArray<FVector2D>> LoopsOf(const UE::Geometry::FGeneralPolygon2d& Polygon);
 
 	/** Every loop of a region's every polygon, as points. */
@@ -59,10 +63,10 @@ namespace Musee::Form
 	FProfileStations LoopStations(TConstArrayView<FVector2D> Loop, double CreaseRadians = CreaseAngleRadians);
 
 	/**
-	 * A cut loop as a made thing's outline: without a point closer to the one before it than LeastEdgeMeters, or one where
-	 * the loop turns straight back on itself (a spike of no width), dropped again and again until none is left.
+	 * A cut loop as a made thing's outline: without a point closer to the one before it than LeastMeters, or one where the
+	 * loop turns straight back on itself (a spike of no width), dropped again and again until none is left.
 	 */
-	TArray<FVector2D> CleanLoop(TConstArrayView<FVector2D> Loop);
+	TArray<FVector2D> CleanLoop(TConstArrayView<FVector2D> Loop, double LeastMeters = LeastEdgeMeters);
 
 	/** Whether a point lies inside a closed loop (a point on its edge may be read either way). */
 	bool IsInside(TConstArrayView<FVector2D> Loop, const FVector2D& Point);

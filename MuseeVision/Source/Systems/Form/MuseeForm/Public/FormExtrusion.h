@@ -7,7 +7,8 @@
 /**
  * A pocket sunk into one face of a slab or block, square to it with a flat floor: a recess for an inlay or a mark, the
  * housing a fitting stands in, the rebate a slab's edge is let into. Where its outline stays inside the face it is a
- * blind pocket; where it runs over the slab's edge it is a rebate, open to the side.
+ * blind pocket; where it runs over the slab's edge it is a rebate, open to the side. Buried under a cover of the slab's
+ * own material, it opens only at the side it runs over: a housing let into a plinth's face.
  */
 struct FFormPocket
 {
@@ -19,6 +20,9 @@ struct FFormPocket
 
 	/** Sunk into the near face (at z = 0) rather than the far face (at z = DepthMeters). */
 	bool bNearFace = false;
+
+	/** The material left between the face and the pocket, metres: zero opens the pocket at the face. */
+	double CoverMeters = 0.0;
 };
 
 /**

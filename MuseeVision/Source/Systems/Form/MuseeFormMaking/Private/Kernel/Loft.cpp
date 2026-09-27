@@ -95,7 +95,10 @@ namespace Musee::Form
 			}
 		}
 
-		/** Closes an end with its flat section, facing along Normal; an end closed to a point needs none. */
+		/**
+		 * Closes an end with its flat section, facing along Normal. An end closed to an edge or a point (a blade's edge, a
+		 * ray's tip), narrower than the weld tolerance, needs none: the sides meet there.
+		 */
 		bool End(FMeshBuilder& Mesh, TConstArrayView<FVector> Ring, const FVector& Normal)
 		{
 			TArray<FVector2D> Outline;
@@ -111,7 +114,14 @@ namespace Musee::Form
 			{
 				Outline.Pop();
 			}
-			if (Outline.Num() < 3)
+			double Twice = 0.0;
+			FBox2D Extent(ForceInit);
+			for (int32 Index = 0; Index < Outline.Num(); ++Index)
+			{
+				Twice += FVector2D::CrossProduct(Outline[Index], Outline[(Index + 1) % Outline.Num()]);
+				Extent += Outline[Index];
+			}
+			if (Outline.Num() < 3 || FMath::Abs(Twice) <= 2.0 * WeldToleranceMeters * Extent.GetSize().Size())
 			{
 				return true;
 			}
