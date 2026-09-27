@@ -47,6 +47,26 @@ struct MUSEESITE_API FSiteArrival
 };
 
 /**
+ * A stage with no ports, the grounds, placed by the plan itself: its origin's translation in the anchor's frame. Its yaw
+ * is written only to say it keeps true north, as every stage does: anything but zero is a finding.
+ */
+USTRUCT()
+struct MUSEESITE_API FSitePlacement
+{
+	GENERATED_BODY()
+
+	UPROPERTY(meta = (MuseeRequired))
+	FMuseeKey Stage;
+
+	/** (x east, y south, z up) in the anchor's frame, metres. */
+	UPROPERTY(meta = (MuseeRequired))
+	TArray<double> TranslationMeters;
+
+	UPROPERTY(meta = (Units = "Degrees"))
+	double YawDegrees = 0.0;
+};
+
+/**
  * The site plan (Data/Site/SitePlan.json): the one record of how the museum's stages join. The anchor stage stands at
  * the museum's origin; every other stage is placed by translation alone, through the matings, so each keeps its true
  * north and the sun comes from the real direction.
@@ -64,6 +84,10 @@ struct MUSEESITE_API FSitePlan
 
 	UPROPERTY()
 	TArray<FSiteMating> Matings;
+
+	/** The stages placed without a mating: those with no ports. */
+	UPROPERTY()
+	TArray<FSitePlacement> Placed;
 };
 
 /** Where the plan puts the stages it can place: each stage's translation, the ports mated, and the arrival. */

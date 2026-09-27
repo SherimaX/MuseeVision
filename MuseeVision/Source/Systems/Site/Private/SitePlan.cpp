@@ -138,6 +138,23 @@ namespace Musee::Site
 				Frontier.Add(There);
 			}
 		}
+		// A stage with no ports stands where the plan puts it, in the anchor's frame, and keeps true north.
+		for (const FSitePlacement& Placement : Plan.Placed)
+		{
+			if (!PortsByStage.Contains(Placement.Stage))
+			{
+				continue;
+			}
+			const TArray<double>& T = Placement.TranslationMeters;
+			if (T.Num() != 3 || !FMath::IsNearlyZero(Placement.YawDegrees) || Layout.TranslationsMeters.Contains(Placement.Stage))
+			{
+				OutFindings.Add(SiteFinding(TEXT("Site.PlanResolves"), FName(*Placement.Stage.ToString()), FString::Printf(
+					TEXT("%s is placed with a translation of three numbers, no yaw, and no mating besides"), *Placement.Stage.ToString()),
+					TEXT("placements that resolve"), 0.0, 1.0, 1.0, Placement.Stage));
+				continue;
+			}
+			Layout.TranslationsMeters.Add(Placement.Stage, FVector(T[0], T[1], T[2]));
+		}
 		if (const FVector* Stage = Layout.TranslationsMeters.Find(Plan.Arrival.Stage); Stage && Plan.Arrival.PointMeters.Num() == 3)
 		{
 			const TArray<double>& P = Plan.Arrival.PointMeters;
