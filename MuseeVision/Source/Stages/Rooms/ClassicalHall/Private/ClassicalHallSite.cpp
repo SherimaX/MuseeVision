@@ -11,14 +11,22 @@ namespace Musee::ClassicalHall
 {
 	namespace
 	{
-		/** Stations on an arc about a centre from one angle to another, no more than the sheet's 1.5° apart, both ends included. */
+		/**
+		 * Stations on an arc about a centre from one angle to another: its ends, and between them the sheet's stations,
+		 * every 1.5° of the full round (240 round), so the arcs pass the sheet's points at the quarters.
+		 */
 		void ArcStations(TArray<FVector2D>& Out, const FVector2D& Centre, double Radius, double FromDeg, double ToDeg)
 		{
-			const int32 Steps = FMath::Max(1, FMath::CeilToInt32(FMath::Abs(ToDeg - FromDeg) / Plan::ArcStationDeg - 1e-9));
-			for (int32 Step = 0; Step <= Steps; ++Step)
+			const double Step = Plan::ArcStationDeg;
+			const double Sense = ToDeg > FromDeg ? 1.0 : -1.0;
+			const double Tolerance = 1e-9;
+			Out.Add(Centre + Polar(Radius, FromDeg));
+			double Station = Step * (Sense > 0.0 ? FMath::FloorToDouble(FromDeg / Step + Tolerance) + 1.0 : FMath::CeilToDouble(FromDeg / Step - Tolerance) - 1.0);
+			for (; Sense * (ToDeg - Station) > Tolerance; Station += Sense * Step)
 			{
-				Out.Add(Centre + Polar(Radius, FMath::Lerp(FromDeg, ToDeg, double(Step) / Steps)));
+				Out.Add(Centre + Polar(Radius, Station));
 			}
+			Out.Add(Centre + Polar(Radius, ToDeg));
 		}
 
 		/**
