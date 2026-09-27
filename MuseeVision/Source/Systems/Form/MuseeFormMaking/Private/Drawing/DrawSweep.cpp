@@ -1,0 +1,228 @@
+#include "Drawing/Draw.h"
+
+#include "Drawing/DrawnProfile.h"
+#include "Kernel/MeshBuilder.h"
+#include "Kernel/PlanRuns.h"
+#include "Kernel/Sweep.h"
+#include "Kernel/Tolerances.h"
+
+/**
+ * A sweep in plan runs its section along frames laid on the plan path. A sweep on a face is drawn the same way in the
+ * face's development, (U along the face, Z up, W out of it), where the face is flat, and every point is then carried onto
+ * the face: a vertical face is developable, so the development is an isometry and the section keeps its true size on a
+ * curved wall, lying on it rather than on a tangent plane. A chamfered end moves the end's section along the travel onto
+ * its cutting plane, so the sides run on to the plane and the cap lies in it.
+ */
+namespace Musee::Form::Drawing
+{
+	namespace
+	{
+		/** Two distances along a face closer than the weld tolerance are one. */
+		constexpr double Same = WeldToleranceMeters;
+
+		/** The frame of a sweep's end cut on a plane through its origin: the section carried along the travel onto the plane. */
+		bool CutFrame(FSweepFrame& Frame, const FVector& PlaneNormal, FString& OutWhy)
+		{
+			const FVector Normal = PlaneNormal.GetSafeNormal();
+			const double Along = FVector::DotProduct(Frame.Along, Normal);
+			if (FMath::Abs(Along) < FMath::Cos(FMath::DegreesToRadians(FFormSweep::MaxCutDegrees)))
+			{
+				OutWhy = FString::Printf(TEXT("a chamfered end leans more than %.0f degrees from square to the path"), FFormSweep::MaxCutDegrees);
+				return false;
+			}
+			Frame.AxisA -= Frame.Along * (FVector::DotProduct(Frame.AxisA, Normal) / Along);
+			Frame.AxisB -= Frame.Along * (FVector::DotProduct(Frame.AxisB, Normal) / Along);
+			Frame.Along = Normal * FMath::Sign(Along);
+			return true;
+		}
+
+		/**
+		 * A vertical face in plan and its development: U along its line, Z up, W out of it (to the line's left). A
+		 * development's point or direction is carried onto the face at its U.
+		 */
+		struct FFaceDevelopment
+		{
+			TArray<FSweepFrame> Line;
+
+			double Length() const { return Line.Last().U; }
+
+			FVector Point(const FVector& Developed) const
+			{
+				const FSweepFrame F = FrameAt(Line, Developed.X);
+				return F.Origin + FVector::UpVector * Developed.Y - F.NormalA * Developed.Z;
+			}
+
+			FVector Direction(double U, const FVector& Developed) const
+			{
+				const FSweepFrame F = FrameAt(Line, U);
+				return F.Along * Developed.X + FVector::UpVector * Developed.Y - F.NormalA * Developed.Z;
+			}
+
+			/** A direction of the drawing's frame, as the development sees it at U. */
+			FVector Developed(double U, const FVector& Direction) const
+			{
+				const FSweepFrame F = FrameAt(Line, U);
+				return FVector(FVector::DotProduct(Direction, F.Along), Direction.Z, -FVector::DotProduct(Direction, F.NormalA));
+			}
+		};
+
+		/**
+		 * The path in the development, raised by the elevation, with a station added wherever it crosses one of the face's:
+		 * each chord of the path is then carried onto one flat strip of the face, and follows the face within its tolerance.
+		 */
+		FProfileStations DevelopedPath(const FProfileStations& Path, double Elevation, const FFaceDevelopment& Face)
+		{
+			FProfileStations Out;
+			Out.bClosed = Path.bClosed;
+			Out.ClosedLengthMeters = Path.ClosedLengthMeters;
+			auto Raised = [Elevation](FProfileVertex Vertex) { Vertex.Point.Y += Elevation; return Vertex; };
+			for (int32 Index = 0; Index < Path.Vertices.Num(); ++Index)
+			{
+				const FProfileVertex& From = Path.Vertices[Index];
+				Out.Vertices.Add(Raised(From));
+				if (Index >= Path.NumSegments())
+				{
+					continue;
+				}
+				const FProfileVertex& To = Path.Vertices[(Index + 1) % Path.Vertices.Num()];
+				const double ToLength = Path.LengthAtSegmentEnd(Index);
+				const double Low = FMath::Min(From.Point.X, To.Point.X);
+				const double High = FMath::Max(From.Point.X, To.Point.X);
+				TArray<double> Crossed;
+				for (const FSweepFrame& Station : Face.Line)
+				{
+					if (Station.U > Low + Same && Station.U < High - Same)
+					{
+						Crossed.Add((Station.U - From.Point.X) / (To.Point.X - From.Point.X));
+					}
+				}
+				Crossed.Sort();
+				for (const double Alpha : Crossed)
+				{
+					FProfileVertex Between;
+					Between.Point = FMath::Lerp(From.Point, To.Point, Alpha);
+					Between.NormalIn = From.NormalOut;
+					Between.NormalOut = From.NormalOut;
+					Between.LengthMeters = FMath::Lerp(From.LengthMeters, ToLength, Alpha);
+					Out.Vertices.Add(Raised(Between));
+				}
+			}
+			return Out;
+		}
+
+		/** Caps an open sweep's ends, cut where the drawing chamfers them. The runs' end frames take the cut. */
+		bool CutAndCap(TArray<TArray<FSweepFrame>>& Runs, const FProfileStations& Section, const FVector& StartCut, const FVector& EndCut,
+			TFunctionRef<FVector(const FSweepFrame&, const FVector&)> Developed, FMeshBuilder& Mesh, FString& OutWhy)
+		{
+			FSweepFrame& First = Runs[0][0];
+			FSweepFrame& Last = Runs.Last().Last();
+			if ((!StartCut.IsNearlyZero() && !CutFrame(First, Developed(First, StartCut), OutWhy))
+				|| (!EndCut.IsNearlyZero() && !CutFrame(Last, Developed(Last, EndCut), OutWhy)))
+			{
+				return false;
+			}
+			for (const TArray<FSweepFrame>& Run : Runs)
+			{
+				Sweep(Mesh, Run, Section);
+			}
+			if (Section.bClosed && !(Cap(Mesh, First, Section, false) && Cap(Mesh, Last, Section, true)))
+			{
+				OutWhy = TEXT("the section's outline crosses itself, so its ends can't be capped");
+				return false;
+			}
+			return true;
+		}
+
+		/** Every vertex and triangle of a development carried onto its face. The carrying keeps handedness, so windings hold. */
+		void CarryOnto(const FFaceDevelopment& Face, const FMeshBuilder& Developed, FMeshBuilder& Mesh)
+		{
+			TArray<int32> Carried;
+			for (int32 Vertex = 0; Vertex < Developed.NumVertices(); ++Vertex)
+			{
+				const FVector& P = Developed.Position(Vertex);
+				Carried.Add(Mesh.AddVertex(Face.Point(P), Face.Direction(P.X, Developed.Normal(Vertex)), Developed.UV(Vertex)));
+			}
+			for (int32 Triangle = 0; Triangle < Developed.NumTriangles(); ++Triangle)
+			{
+				const FIntVector& T = Developed.Triangle(Triangle);
+				Mesh.UseSlot(Developed.Slots()[Developed.TriangleSlot(Triangle)]);
+				Mesh.AddTriangle(Carried[T.X], Carried[T.Y], Carried[T.Z]);
+			}
+		}
+
+		bool DrawOnFace(const FFormSweep& Shape, const FProfileStations& Section, FMeshBuilder& Mesh, FString& OutWhy)
+		{
+			if (!CheckProfile(Shape.Face, TEXT("the face"), false, OutWhy))
+			{
+				return false;
+			}
+			const TArray<TArray<FSweepFrame>> Lines = PlanRuns(Resolve(Shape.Face), 0.0);
+			if (Lines.Num() != 1)
+			{
+				OutWhy = TEXT("a sweep's face is one straight or smooth stretch");
+				return false;
+			}
+			const FFaceDevelopment Face{Lines[0]};
+			const FProfileStations Path = DevelopedPath(Resolve(Shape.Path), Shape.ElevationMeters, Face);
+			for (const FProfileVertex& Vertex : Path.Vertices)
+			{
+				if (Vertex.Point.X < -Same || Vertex.Point.X > Face.Length() + Same)
+				{
+					OutWhy = FString::Printf(TEXT("the path runs off its face (U %.4f m of %.4f m)"), Vertex.Point.X, Face.Length());
+					return false;
+				}
+			}
+			TArray<TArray<FSweepFrame>> Runs = PlanRuns(Path, 0.0);
+			if (Runs.IsEmpty())
+			{
+				OutWhy = TEXT("the path has fewer than two stations, or doubles back too sharply to mitre");
+				return false;
+			}
+			FMeshBuilder Developed(Mesh.NumUVChannels());
+			auto AsDeveloped = [&Face](const FSweepFrame& End, const FVector& Direction) { return Face.Developed(End.Origin.X, Direction); };
+			const bool bEnds = Path.bClosed || CutAndCap(Runs, Section, Shape.StartCut, Shape.EndCut, AsDeveloped, Developed, OutWhy);
+			if (!bEnds)
+			{
+				return false;
+			}
+			if (Path.bClosed)
+			{
+				for (const TArray<FSweepFrame>& Run : Runs)
+				{
+					Sweep(Developed, Run, Section);
+				}
+			}
+			CarryOnto(Face, Developed, Mesh);
+			return true;
+		}
+	}
+
+	bool DrawSweep(const FFormSweep& Shape, FMeshBuilder& Mesh, FString& OutWhy)
+	{
+		if (!CheckProfile(Shape.Section, TEXT("the section"), false, OutWhy) || !CheckProfile(Shape.Path, TEXT("the path"), false, OutWhy))
+		{
+			return false;
+		}
+		const FProfileStations Section = Resolve(Shape.Section);
+		if (Shape.IsOnFace())
+		{
+			return DrawOnFace(Shape, Section, Mesh, OutWhy);
+		}
+		TArray<TArray<FSweepFrame>> Runs = PlanRuns(Resolve(Shape.Path), Shape.ElevationMeters);
+		if (Runs.IsEmpty())
+		{
+			OutWhy = TEXT("the path has fewer than two stations, or doubles back too sharply to mitre");
+			return false;
+		}
+		if (Shape.Path.Closed)
+		{
+			for (const TArray<FSweepFrame>& Run : Runs)
+			{
+				Sweep(Mesh, Run, Section);
+			}
+			return true;
+		}
+		auto InPlan = [](const FSweepFrame&, const FVector& Direction) { return Direction; };
+		return CutAndCap(Runs, Section, Shape.StartCut, Shape.EndCut, InPlan, Mesh, OutWhy);
+	}
+}

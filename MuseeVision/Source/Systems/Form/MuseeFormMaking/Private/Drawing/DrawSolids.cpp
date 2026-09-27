@@ -75,35 +75,6 @@ namespace Musee::Form::Drawing
 		return true;
 	}
 
-	bool DrawSweep(const FFormSweep& Shape, FMeshBuilder& Mesh, FString& OutWhy)
-	{
-		if (!CheckProfile(Shape.Section, TEXT("the section"), false, OutWhy) || !CheckProfile(Shape.Path, TEXT("the path"), false, OutWhy))
-		{
-			return false;
-		}
-		const FProfileStations Section = Resolve(Shape.Section);
-		const TArray<TArray<FSweepFrame>> Runs = PlanRuns(Resolve(Shape.Path), Shape.ElevationMeters);
-		if (Runs.IsEmpty())
-		{
-			OutWhy = TEXT("the path has fewer than two stations, or doubles back too sharply to mitre");
-			return false;
-		}
-		for (const TArray<FSweepFrame>& Run : Runs)
-		{
-			Sweep(Mesh, Run, Section);
-		}
-		if (Section.bClosed && !Shape.Path.Closed)
-		{
-			const bool bCapped = Cap(Mesh, Runs[0][0], Section, false) && Cap(Mesh, Runs.Last().Last(), Section, true);
-			if (!bCapped)
-			{
-				OutWhy = TEXT("the section's outline crosses itself, so its ends can't be capped");
-				return false;
-			}
-		}
-		return true;
-	}
-
 	bool DrawLathe(const FFormLathe& Shape, FMeshBuilder& Mesh, FString& OutWhy)
 	{
 		if (!CheckProfile(Shape.Section, TEXT("the section"), false, OutWhy))
