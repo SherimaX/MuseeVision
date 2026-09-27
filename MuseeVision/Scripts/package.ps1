@@ -38,7 +38,9 @@ Get-ChildItem (Join-Path $Generated "Stages") -Recurse -Filter "L_*.umap" -Error
     $Maps += "/Game/Generated/Stages/" + $_.Directory.Name + "/" + $_.BaseName
 }
 
-$Arguments = "BuildCookRun `"-project=$Project\MuseeVision.uproject`" -noP4 -utf8output -unattended " +
+# UBT expands the Data/... runtime dependency when it writes a target's makefile, and reuses a cached makefile while
+# only code changes: records added since would never be staged. -NoUBTMakefiles makes every package read them afresh.
+$Arguments = "BuildCookRun `"-project=$Project\MuseeVision.uproject`" -noP4 -utf8output -unattended `"-ubtargs=-NoUBTMakefiles`" " +
     "-target=$Target -platform=Win64 -clientconfig=$Config $Own " +
     "-build -cook `"-map=$($Maps -join '+')`" -stage -pak -iostore -prereqs -archive `"-archivedirectory=$Out`""
 & $Lock -Exe "$Engine\Engine\Build\BatchFiles\RunUAT.bat" -Args $Arguments -WaitMinutes $WaitMinutes -RunMinutes $RunMinutes
