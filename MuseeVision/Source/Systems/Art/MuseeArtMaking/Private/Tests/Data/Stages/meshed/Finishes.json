@@ -1,0 +1,7 @@
+{
+  "stage": "meshed",
+  "finishes": [
+    { "surface": "meshed.frame.gilt", "material": "oak.sessile-french", "working": "gilt.gold-leaf.water", "history": "aged.patina", "note": "The frames' finish." },
+    { "surface": "meshed.hook", "material": "bronze.cusn10", "working": "patinated", "history": "handled", "note": "The S-hooks and screw eyes." }
+  ]
+}

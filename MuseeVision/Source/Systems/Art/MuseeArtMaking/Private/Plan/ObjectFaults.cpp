@@ -2,6 +2,7 @@
 
 #include "Algo/Find.h"
 #include "ArtWork.h"
+#include "Frame/Hooks.h"
 #include "Cast/ScanMesh.h"
 #include "HAL/FileManager.h"
 #include "MatterRecords.h"
@@ -400,6 +401,21 @@ namespace Musee::ArtMaking
 			return Out;
 		}
 
+		/**
+		 * A work on a mesh's anchor hangs from the mesh by the hooks in its frame's back: a framed canvas, its hooks in a
+		 * surface of the schedule, on a mesh the plan gives soundly.
+		 */
+		TArray<FString> MeshEntryFaults(const FArtHangEntry& Entry, const FArtMesh& Mesh, const FEntryContext& Context)
+		{
+			TArray<FString> Out = MeshFaults(Mesh);
+			if (Entry.Support != Supports::Canvas || !IsFramed(Entry))
+			{
+				Out.Add(TEXT("a work on a mesh hangs by the hooks in its frame's back, and only a framed canvas has them yet"));
+			}
+			Out.Append(SurfaceFaults(Context, Mesh.Hooks, TEXT("hooks")));
+			return Out;
+		}
+
 		/** A work cast from a scan may leave its width 0, to be measured from the scan; any other object gives both. */
 		bool SizeFaulty(const FArtHangEntry& Entry)
 		{
@@ -475,6 +491,10 @@ namespace Musee::ArtMaking
 		if (Musee::Art::PaintMaterial(Entry.Work).IsNone())
 		{
 			Out.Add(TEXT("its id can't name a paint layer (it must be one key segment)"));
+		}
+		if (const FArtMesh* Mesh = MeshOf(Context.Meshes, Entry.Anchor))
+		{
+			Out.Append(MeshEntryFaults(Entry, *Mesh, Context));
 		}
 		if (!Entry.Body.IsNone() && !Stage.FindAnchor(Entry.Body, BodyAnchorKind))
 		{

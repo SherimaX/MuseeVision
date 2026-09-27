@@ -13,7 +13,7 @@ namespace Musee::ArtMaking
 {
 	/**
 	 * What the checks of a plan's entries read once: Care.json's keys, the stage's finishes, the turned forms, the books,
-	 * and for works in the round the media, how works are cast and how vessels are turned, every finish they name offered
+	 * the meshes works hang on, and for works in the round the media, how works are cast and how vessels are turned, every finish they name offered
 	 * by the palette (RoundWhy says why they can't be read).
 	 */
 	struct FEntryContext
@@ -29,6 +29,7 @@ namespace Musee::ArtMaking
 		FString RoundWhy;
 		TArray<FArtBook> Books;
 		FString BooksWhy;
+		TArray<FArtMesh> Meshes;
 	};
 
 	/** Whether the plan frames the object in a surface of the finish schedule (`"frame"` names one, not `none`). */

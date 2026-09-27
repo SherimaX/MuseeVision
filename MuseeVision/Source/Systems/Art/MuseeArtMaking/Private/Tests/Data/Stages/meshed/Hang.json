@@ -1,0 +1,28 @@
+{
+  "stage": "meshed",
+  "meshes": [
+    {
+      "anchor": "oval.wall.flat", "hooks": "meshed.hook",
+      "levels": { "from": 0.23, "to": 3.28, "pitch": 0.025 }, "uprights": { "from": 0.1, "to": 4.9, "pitch": 0.025 },
+      "behind": 0.0105, "wire": 0.003,
+      "note": "A rack's west face, as the Reserve's: level wires in front, 10.5 mm behind the works' back plane."
+    },
+    {
+      "anchor": "faulty.wall", "hooks": "meshed.hook",
+      "levels": { "from": 0.23, "to": 3.28, "pitch": 0.025 }, "uprights": { "from": 0.1, "to": 4.9, "pitch": 0.025 },
+      "behind": 0.0105, "wire": 0.003, "note": "The same mesh, where an unframed canvas can't hang."
+    }
+  ],
+  "works": [
+    {
+      "work": "monet-impression-sunrise", "source": "MuseeVision/Source/Systems/Art/MuseeArtMaking/Private/Tests/Data/artworks.json",
+      "anchor": "oval.wall.flat", "along": 1.0, "height": 1.31, "size": [0.63, 0.48],
+      "support": "canvas", "frame": "meshed.frame.gilt", "care": "oil-and-tempera", "note": "Framed, hung on the mesh by its hooks."
+    },
+    {
+      "work": "monet-willows-two-willows", "source": "MuseeVision/Source/Systems/Art/MuseeArtMaking/Private/Tests/Data/collection.json",
+      "anchor": "faulty.wall", "along": 0.5, "height": 0.7, "size": [2.0, 2.0],
+      "support": "canvas", "frame": "none", "care": "oil-and-tempera", "note": "Unframed on a mesh: it has no eyes to hang by, a finding."
+    }
+  ]
+}

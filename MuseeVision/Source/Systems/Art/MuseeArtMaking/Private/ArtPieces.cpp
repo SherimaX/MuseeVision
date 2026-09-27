@@ -5,6 +5,7 @@
 #include "Canvas/CanvasMesh.h"
 #include "Canvas/WallPath.h"
 #include "FormMake.h"
+#include "Frame/Hooks.h"
 #include "Frame/Moulding.h"
 #include "Glass/GlassPane.h"
 #include "MuseeCollision.h"
@@ -52,7 +53,34 @@ namespace Musee::ArtMaking
 			return FMuseeFrame(Work.PointToParent(FVector(0.0, 0.0, TopMeters)), FQuat(FMatrix(Across, Down, Out, FVector::ZeroVector)));
 		}
 
-		/** The moulded frame round a canvas, in the finish of the plan's frame surface; false with a finding when it can't be. */
+		/**
+		 * The drawings of the hooks a framed canvas hangs on its mesh by, where its anchor is a mesh's (none on a wall); false
+		 * with a finding when they can't be made.
+		 */
+		bool HangOnMesh(FObjectMaking& Making, const FArtHangEntry& Entry, bool bSplit, const FArtMoulding& Moulding, TArray<FFormDrawing>& OutDrawings,
+			TArray<FMuseeFinding>& OutFindings)
+		{
+			const FArtMesh* Mesh = MeshOf(Making.Hang.Meshes, Entry.Anchor);
+			if (!Mesh)
+			{
+				return true;
+			}
+			const TValueOrError<FArtHooks, FString>& Hooks = Making.Hooks();
+			const TValueOrError<FHookPlan, FString> Plan = Hooks.HasError() ? MakeError(Hooks.GetError()) : PlanHooks(Hooks.GetValue(), *Mesh, Moulding, Entry);
+			if (Plan.HasError())
+			{
+				OutFindings.Add(ArtFinding(Making.Stage, FString::Printf(TEXT("Work %s: its hooks can't be made: %s."), *Entry.Work, *Plan.GetError())));
+				return false;
+			}
+			const FMuseeFrame& Anchor = Making.Stage.FindAnchor(Entry.Anchor, WallAnchorKind)->Frame;
+			OutDrawings = HookDrawings(Plan.GetValue(), Hooks.GetValue(), *Mesh, Anchor, PartName(Entry, bSplit, TEXT("hook")), PartName(Entry, bSplit, TEXT("eye")));
+			return true;
+		}
+
+		/**
+		 * The moulded frame round a canvas, in the finish of the plan's frame surface, and on a mesh the hooks it hangs by;
+		 * false with a finding when they can't be made.
+		 */
 		bool MakeFrame(FObjectMaking& Making, const FArtHangEntry& Entry, bool bSplit, bool bCurved, const FMuseeFrame& Work,
 			TArray<FFormMadePiece>& OutPieces, TArray<FMuseeFinding>& OutFindings)
 		{
@@ -63,6 +91,11 @@ namespace Musee::ArtMaking
 					bCurved ? TEXT("a moulded frame is made on a straight wall") : *Moulding.GetError())));
 				return false;
 			}
+			TArray<FFormDrawing> Hardware;
+			if (!HangOnMesh(Making, Entry, bSplit, Moulding.GetValue(), Hardware, OutFindings))
+			{
+				return false;
+			}
 			const FVector2D Size(Entry.Size[0], Entry.Size[1]);
 			// The lip rests on the painted face; the back stands on the hanging gap, as the stretcher's does.
 			const FFrameDepth Depth{ StretcherDepthMeters, HangingGapMeters };
@@ -71,7 +104,12 @@ namespace Musee::ArtMaking
 			Drawing.Drawer = TEXT("Art");
 			const int32 Before = OutPieces.Num();
 			Musee::FormMaking::Make(Drawing, OutPieces, OutFindings);
-			return OutPieces.Num() > Before;
+			const bool bFramed = OutPieces.Num() > Before;
+			if (bFramed && !Hardware.IsEmpty())
+			{
+				Musee::FormMaking::Make(Hardware, OutPieces, OutFindings);
+			}
+			return bFramed;
 		}
 
 		/** One canvas of a work: its painted face, its linen and its frame, on its wall. */

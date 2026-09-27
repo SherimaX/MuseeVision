@@ -437,6 +437,7 @@ namespace Musee::ArtMaking
 			Context.Care = Care.StealValue();
 		}
 		ReadFinishesInto(Stage, Hang, Context);
+		Context.Meshes = Hang.Meshes;
 		ReadTurnedInto(Hang, Context);
 		ReadRoundInto(Hang, Context);
 		ReadBooksInto(Hang, Context);
