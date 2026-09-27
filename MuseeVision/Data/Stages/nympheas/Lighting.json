@@ -134,6 +134,11 @@
         -0.182,
         0.38
       ],
+      "along": [
+        0.2773,
+        -0.9608,
+        0.0
+      ],
       "length": 0.594,
       "operation": "always",
       "follows": "nympheas.pond.rim",
@@ -151,6 +156,11 @@
         -3.265,
         -0.546,
         0.38
+      ],
+      "along": [
+        0.6521,
+        -0.7581,
+        0.0
       ],
       "length": 0.594,
       "operation": "always",
@@ -170,6 +180,11 @@
         -0.868,
         0.38
       ],
+      "along": [
+        0.8249,
+        -0.5653,
+        0.0
+      ],
       "length": 0.594,
       "operation": "always",
       "follows": "nympheas.pond.rim",
@@ -187,6 +202,11 @@
         -2.438,
         -1.125,
         0.38
+      ],
+      "along": [
+        0.9084,
+        -0.4182,
+        0.0
       ],
       "length": 0.594,
       "operation": "always",
@@ -206,6 +226,11 @@
         -1.32,
         0.38
       ],
+      "along": [
+        0.9532,
+        -0.3022,
+        0.0
+      ],
       "length": 0.594,
       "operation": "always",
       "follows": "nympheas.pond.rim",
@@ -223,6 +248,11 @@
         -1.394,
         -1.46,
         0.38
+      ],
+      "along": [
+        0.9787,
+        -0.2052,
+        0.0
       ],
       "length": 0.594,
       "operation": "always",
@@ -242,6 +272,11 @@
         -1.55,
         0.38
       ],
+      "along": [
+        0.9929,
+        -0.1192,
+        0.0
+      ],
       "length": 0.594,
       "operation": "always",
       "follows": "nympheas.pond.rim",
@@ -259,6 +294,11 @@
         -0.281,
         -1.594,
         0.38
+      ],
+      "along": [
+        0.9992,
+        -0.0392,
+        0.0
       ],
       "length": 0.594,
       "operation": "always",
@@ -278,6 +318,11 @@
         -1.594,
         0.38
       ],
+      "along": [
+        0.9992,
+        0.0392,
+        0.0
+      ],
       "length": 0.594,
       "operation": "always",
       "follows": "nympheas.pond.rim",
@@ -295,6 +340,11 @@
         0.842,
         -1.55,
         0.38
+      ],
+      "along": [
+        0.9929,
+        0.1192,
+        0.0
       ],
       "length": 0.594,
       "operation": "always",
@@ -314,6 +364,11 @@
         -1.46,
         0.38
       ],
+      "along": [
+        0.9787,
+        0.2052,
+        0.0
+      ],
       "length": 0.594,
       "operation": "always",
       "follows": "nympheas.pond.rim",
@@ -331,6 +386,11 @@
         1.93,
         -1.32,
         0.38
+      ],
+      "along": [
+        0.9532,
+        0.3022,
+        0.0
       ],
       "length": 0.594,
       "operation": "always",
@@ -350,6 +410,11 @@
         -1.125,
         0.38
       ],
+      "along": [
+        0.9084,
+        0.4182,
+        0.0
+      ],
       "length": 0.594,
       "operation": "always",
       "follows": "nympheas.pond.rim",
@@ -367,6 +432,11 @@
         2.897,
         -0.868,
         0.38
+      ],
+      "along": [
+        0.8249,
+        0.5653,
+        0.0
       ],
       "length": 0.594,
       "operation": "always",
@@ -386,6 +456,11 @@
         -0.546,
         0.38
       ],
+      "along": [
+        0.6521,
+        0.7581,
+        0.0
+      ],
       "length": 0.594,
       "operation": "always",
       "follows": "nympheas.pond.rim",
@@ -403,6 +478,11 @@
         3.474,
         -0.182,
         0.38
+      ],
+      "along": [
+        0.2773,
+        0.9608,
+        0.0
       ],
       "length": 0.594,
       "operation": "always",
@@ -422,6 +502,11 @@
         0.182,
         0.38
       ],
+      "along": [
+        -0.2773,
+        0.9608,
+        0.0
+      ],
       "length": 0.594,
       "operation": "always",
       "follows": "nympheas.pond.rim",
@@ -439,6 +524,11 @@
         3.265,
         0.546,
         0.38
+      ],
+      "along": [
+        -0.6521,
+        0.7581,
+        0.0
       ],
       "length": 0.594,
       "operation": "always",
@@ -458,6 +548,11 @@
         0.868,
         0.38
       ],
+      "along": [
+        -0.8249,
+        0.5653,
+        0.0
+      ],
       "length": 0.594,
       "operation": "always",
       "follows": "nympheas.pond.rim",
@@ -475,6 +570,11 @@
         2.438,
         1.125,
         0.38
+      ],
+      "along": [
+        -0.9084,
+        0.4182,
+        0.0
       ],
       "length": 0.594,
       "operation": "always",
@@ -494,6 +594,11 @@
         1.32,
         0.38
       ],
+      "along": [
+        -0.9532,
+        0.3022,
+        0.0
+      ],
       "length": 0.594,
       "operation": "always",
       "follows": "nympheas.pond.rim",
@@ -511,6 +616,11 @@
         1.394,
         1.46,
         0.38
+      ],
+      "along": [
+        -0.9787,
+        0.2052,
+        0.0
       ],
       "length": 0.594,
       "operation": "always",
@@ -530,6 +640,11 @@
         1.55,
         0.38
       ],
+      "along": [
+        -0.9929,
+        0.1192,
+        0.0
+      ],
       "length": 0.594,
       "operation": "always",
       "follows": "nympheas.pond.rim",
@@ -547,6 +662,11 @@
         0.281,
         1.594,
         0.38
+      ],
+      "along": [
+        -0.9992,
+        0.0392,
+        0.0
       ],
       "length": 0.594,
       "operation": "always",
@@ -566,6 +686,11 @@
         1.594,
         0.38
       ],
+      "along": [
+        -0.9992,
+        -0.0392,
+        0.0
+      ],
       "length": 0.594,
       "operation": "always",
       "follows": "nympheas.pond.rim",
@@ -583,6 +708,11 @@
         -0.842,
         1.55,
         0.38
+      ],
+      "along": [
+        -0.9929,
+        -0.1192,
+        0.0
       ],
       "length": 0.594,
       "operation": "always",
@@ -602,6 +732,11 @@
         1.46,
         0.38
       ],
+      "along": [
+        -0.9787,
+        -0.2052,
+        0.0
+      ],
       "length": 0.594,
       "operation": "always",
       "follows": "nympheas.pond.rim",
@@ -619,6 +754,11 @@
         -1.93,
         1.32,
         0.38
+      ],
+      "along": [
+        -0.9532,
+        -0.3022,
+        0.0
       ],
       "length": 0.594,
       "operation": "always",
@@ -638,6 +778,11 @@
         1.125,
         0.38
       ],
+      "along": [
+        -0.9084,
+        -0.4182,
+        0.0
+      ],
       "length": 0.594,
       "operation": "always",
       "follows": "nympheas.pond.rim",
@@ -655,6 +800,11 @@
         -2.897,
         0.868,
         0.38
+      ],
+      "along": [
+        -0.8249,
+        -0.5653,
+        0.0
       ],
       "length": 0.594,
       "operation": "always",
@@ -674,6 +824,11 @@
         0.546,
         0.38
       ],
+      "along": [
+        -0.6521,
+        -0.7581,
+        0.0
+      ],
       "length": 0.594,
       "operation": "always",
       "follows": "nympheas.pond.rim",
@@ -692,6 +847,11 @@
         0.182,
         0.38
       ],
+      "along": [
+        -0.2773,
+        -0.9608,
+        0.0
+      ],
       "length": 0.594,
       "operation": "always",
       "follows": "nympheas.pond.rim",
@@ -701,32 +861,42 @@
       "id": "stair.rail.north",
       "type": "linear-cove.3000k",
       "point": [
-        3.6,
+        3.013,
         -1.115,
-        -2.5
+        -2.5335
       ],
       "aim": [
-        3.6,
+        2.5994,
         -0.6,
-        -3.383
+        -3.3238
       ],
-      "length": 13.2,
+      "along": [
+        0.886,
+        0.0,
+        -0.4637
+      ],
+      "length": 10.215,
       "operation": "always"
     },
     {
       "id": "stair.rail.south",
       "type": "linear-cove.3000k",
       "point": [
-        3.6,
+        3.013,
         1.115,
-        -2.5
+        -2.5335
       ],
       "aim": [
-        3.6,
+        2.5994,
         0.6,
-        -3.383
+        -3.3238
       ],
-      "length": 13.2,
+      "along": [
+        0.886,
+        0.0,
+        -0.4637
+      ],
+      "length": 10.215,
       "operation": "always"
     },
     {

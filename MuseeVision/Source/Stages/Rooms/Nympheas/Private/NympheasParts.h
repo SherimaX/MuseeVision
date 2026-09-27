@@ -21,6 +21,12 @@ namespace Musee::Nympheas
 	/** A surface of the stage's finish schedule: nympheas.<Local>. */
 	FName Surface(const TCHAR* Local);
 
+	/**
+	 * The moving body that carries one stage of the four posts (0 the lowest, Ø 0.210, to 2 the ram under the tray):
+	 * nympheas.post.stage-<n>. Each rises as its mechanism follows the pond's height (Mechanisms.json).
+	 */
+	FMuseeKey PostStageBody(int32 Stage);
+
 	/** The oval's inner face, and the pond's water edge: the two ellipses everything is set out from. */
 	const FOvalCurve& Oval();
 	const FOvalCurve& Pond();

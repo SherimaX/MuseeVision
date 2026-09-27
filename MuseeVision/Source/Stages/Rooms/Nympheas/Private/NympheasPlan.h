@@ -84,7 +84,12 @@ namespace Musee::Nympheas::Plan
 	// ---- §3.7 the stair: 36 risers of 5.80 / 36 running east down from the top landing ---------------------------------
 	inline constexpr int32 Risers = 36;
 	inline constexpr double StairRise = 5.800;
-	inline constexpr double Going = 0.3389;
+	/**
+	 * The going, set to a comfortable pace: 2R + T = 0.630 m, the middle of Blondel's rule for a stair walked easily
+	 * (2R + T between 0.60 and 0.64 m; DIN 18065's step-length rule, 0.59 to 0.65 m), with R = 5.80 / 36 = 0.16111. The
+	 * as-built going, 0.3389, made 2R + T = 0.661, a stride too long for the rise (the sheet's Departures).
+	 */
+	inline constexpr double Going = 0.3078;
 	inline constexpr double TopRiserX = -3.500;
 	/** The strings' faces, 25 mm proud of the brick. */
 	inline constexpr double StringFace = 1.175;
@@ -97,7 +102,8 @@ namespace Musee::Nympheas::Plan
 	inline constexpr double HandrailAxisY = 1.115;
 	inline constexpr double HandrailOverNosing = 0.900;
 	inline constexpr double HandrailStartX = -1.502;
-	inline constexpr double HandrailKneeX = 8.700;
+	/** The rail turns level onto the landing one going past the last riser, where the nosing line reaches the landing. */
+	inline constexpr double HandrailKneeX = TopRiserX + Risers * Going;
 	inline constexpr double HandrailKneeRadius = 0.150;
 	inline constexpr double HandrailEndX = 11.200;
 	inline constexpr double HandrailDiameter = 0.050;

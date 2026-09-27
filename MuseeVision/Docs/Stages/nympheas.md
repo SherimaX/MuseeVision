@@ -59,6 +59,7 @@ All frames are in the stage frame with the pond Down. Anchors on `nympheas.basin
 |---|---|---|---|
 | `nympheas.basin` | Body | origin (0, 0, 0), axes of the stage; moves +z 0 → 2.600 | coping, frieze, lip, vessel, tray, the golden iris, the water, the planting and the 32 rim lengths (§6) |
 | `nympheas.guard-rails` | Body | origin (0, 0, 0), axes of the stage; moves +z 0 → 1.000 | the three rails (§3.6) |
+| `nympheas.post.stage-1` … `stage-3` | Body | origin (0, 0, 0), axes of the stage; move +z 0 → 0.867 / 1.733 / 2.600 | the four posts' telescopic stages (§3.5, M-3) |
 | `nympheas.golden-iris` | Use | (−4.150, 0.000, 0.420), on the coping's seat, facing +x; usable from within 6.50 of the centre | on `nympheas.basin` |
 | `nympheas.golden-iris` | Bed | the same frame: Nature's cast specimen (Planting.json `cast`: *Iris laevigata* grown, cast in oil-gilt `bronze.cusn10`, handled) | on `nympheas.basin` |
 | `nympheas.pond.water` | Water | (0, 0, 0.380): the water level at the centre | on `nympheas.basin` |
@@ -159,7 +160,8 @@ bluestone bed). Water `nympheas.pond.water` (§7).
 
 **Posts** `nympheas.pond.post`: four at **(±3.000, ±1.350)**. Telescopic, three stages Ø 0.210 (lowest) / 0.180 /
 0.150, each 0.95 long, overlaps 0.08; collapsed inside sleeves Ø 0.230 × 1.00 deep in the shaft walls and curb
-(y 1.235…1.465, ≥ 35 mm of brick to the shaft face), heads flush with the floor under the tray at rest.
+(y 1.235…1.465, ≥ 35 mm of brick to the shaft face), heads flush with the floor under the tray at rest. Each stage
+(all four posts' stage 1, 2, 3) rides its own body `nympheas.post.stage-1…3`, moved by M-3 (§6).
 
 **The golden iris** `nympheas.golden-iris` (the pond's control; replaces the golden lily; Nature grows it as a cast specimen, Planting.json, and Motion makes it the control, the Use anchor): a cast gilt-bronze
 *Iris laevigata* at life size, set on the coping's seat at the **west apex, (−4.150, 0.000), pond-z 0.420** (the head of
@@ -174,15 +176,17 @@ shelves ≈ 1.6 m³ ≈ 4.5 t; bronze tray, lip, iris ≈ 2 t. **≈ 22 t**, ≈
 ### 3.6 Guard rails round the opening (the retracting body `nympheas.guard-rails`)
 `nympheas.guard.rail`: three rails housed in chases in the curb when down: north and south on y = ∓1.275 (chases
 y 1.250–1.300, x −3.500…+3.600, stopped ±0.13 either side of the posts at x ±3.000), east on x +3.675 (chase
-x 3.650–3.700, y −1.300…+1.300, in the slab, with a closed bronze housing 0.10 × 0.65 below the soffit). At full
+x 3.650–3.700, y −1.300…+1.300, in the slab, with a closed bronze housing 0.10 × 0.65 below the soffit, its own
+surface `nympheas.guard.housing`). At full
 height: top rail Ø 40 at 1.000, mid-rail Ø 25 at 0.500, stanchions Ø 25 at ≤ 1.10. Chase depth 1.05.
 
 ### 3.7 The stair and the well
-- **Flight:** 36 risers of 0.16111 (5.80/36), goings 0.3389, running east; pitch 25.43°, 2R + T = 0.661. Riser k
-  (k = 0…35) at x_k = −3.5000 + 0.3389k from z −0.16111k to −0.16111(k+1); the last at x +8.3615. Treads
+- **Flight:** 36 risers of 0.16111 (5.80/36), goings 0.3078, running east; pitch 27.63°, 2R + T = 0.630 (Blondel's
+  comfortable pace; see Departures). Riser k (k = 0…35) at x_k = −3.5000 + 0.3078k from z −0.16111k to −0.16111(k+1);
+  the last at x +7.2730. Treads
   `nympheas.stair.tread`, one stone each, running 2 mm into the strings; nosing 25 mm proud, 40 mm deep, 12 mm round
   on top, 12 mm undercut; treads, risers and nosings share their profile's stations.
-- **Top landing:** x −3.900…−3.500 at z 0.000, flush with the floor, wall to wall. **Bottom landing:** x +8.3615…+11.900
+- **Top landing:** x −3.900…−3.500 at z 0.000, flush with the floor, wall to wall. **Bottom landing:** x +7.2730…+11.900
   at z −5.800, between the strings, then wall to wall through the head wall's opening to the port face.
 - **Strings** `nympheas.stair.string`: face y ±1.175 (25 mm proud of the brick); top = nosing line + 0.24 (capped at
   z −0.06 under the top landing's nosing, to x −2.869), bottom = nosing line − 0.35; on the bottom landing a 0.15
@@ -194,8 +198,9 @@ height: top rail Ø 40 at 1.000, mid-rail Ø 25 at 0.500, stanchions Ø 25 at �
   class opening. Foundation underside z −6.150.
 - **Soffit** `nympheas.well.soffit`: z −0.400, x +3.600…+11.500, y ±1.200.
 - **Handrails** `nympheas.stair.handrail`, both walls: Ø 50 with a flat underside (the chord 240°–300°, 25 mm wide) that
-  carries the LED strip (§4); axis y ±1.115, 0.90 over the nosing line. From x −1.502 (axis z −0.05), out of the wall
-  with a r 0.06 return, down the flight, a r 0.15 knee at x +8.700 onto the landing (axis z −4.90), level to x +11.200,
+  carries the LED strip (§4); axis y ±1.115, 0.90 over the nosing line. From x −1.502 (axis z −0.146), out of the wall
+  with a r 0.06 return, down the flight, a r 0.15 knee at x +7.5808 (one going past the last riser) onto the landing
+  (axis z −4.90), level to x +11.200,
   returned into the wall r 0.06. Brackets evenly ≈ 1.30: wall rose Ø 60 × 8, arm Ø 16, 75 mm drop.
 
 ### 3.8 Fittings: four curved benches
@@ -227,8 +232,8 @@ opening on its port face, meeting rail on the axis (§2).
 | Id | Type | Count / extent | Mount and aim | Operation |
 |---|---|---|---|---|
 | `velarium.row.*` | `linear-slot.3000k` (opal-cover battens, surface-hung on the dome bars) | 7 rows along x at y 0, ±1.5, ±3.0, ±4.5; lengths 18.50 / 17.86 / 15.78 / 11.52 (≈ 109 m), stepped in 1.0–2.0 m battens 0.30 above the cloth | row midpoint (0, y, cloth + 0.30); aim straight down onto the cloth | presence (daylight-linked top-up by day, gallery light at night) |
-| `pond.rim.01…32` | `linear-cove.3000k` strip | 32 lengths of 0.594 on centres (8 mm gaps) round the water's edge | in the lip's slot, face d −0.010, pond-z 0.3905; aim 0.40 inward onto the water. Order: from the **west apex, clockwise (north first)**, back to the west apex | always, follows `nympheas.pond.rim`; body `nympheas.basin` |
-| `stair.rail.north/south` | `linear-cove.3000k` strip | 2 runs, the rails' full length (≈ 13.2 m each) | the rails' flat underside; aim onto the treads | always |
+| `pond.rim.01…32` | `linear-cove.3000k` strip | 32 lengths of 0.594 on centres (8 mm gaps) round the water's edge | in the lip's slot, face d −0.010, pond-z 0.3905, each `along` the edge's tangent; aim 0.40 inward onto the water. Order: from the **west apex, clockwise (north first)**, back to the west apex | always, follows `nympheas.pond.rim`; body `nympheas.basin` |
+| `stair.rail.north/south` | `linear-cove.3000k` strip | 2 runs of 10.215, each rail's straight run down the flight (a straight strip can't turn the knee) | the rails' flat underside, `along` the flight (0.886, 0, −0.464); aim 30° in from the flat's normal onto the treads | always |
 | `stair.downlight.1/2` | `downlight.3000k.31deg`, recessed | 2 | soffit (6.30, 0, −0.40) and (10.10, 0, −0.40); aim straight down | always |
 
 **Targets**
@@ -286,6 +291,17 @@ rim's "halo", the rect lights standing in for the cloth.
 **M-2 `nympheas.guard-rails`** (body `nympheas.guard-rails`; follows `nympheas.pond.height`, in [0.0385, 0.4231] → out [0, 1.0], linear, clamped): the three rails (§3.6), prismatic +z, travel 0 → 1.000; rail height =
 clamp(h − 0.10, 0, 1.00) for pond height h. Interlock: the pond may not enter its last 0.10 of descent unless the rails
 are housed.
+
+**M-3 `nympheas.post.stage-1…3`** (the posts' telescopic stages, each its own body; each follows `nympheas.pond.height`,
+prismatic +z, linear, clamped, no guard of its own: the pond's guard sweeps the posts' columns). A single-acting
+telescopic ram extends its largest stage first, since the pump's pressure lifts the load soonest on the largest area;
+each stage strokes a third of the travel (0.867 of its 0.95, keeping 0.083 ≥ the 0.08 overlap):
+
+| Mechanism | Stage | Follows in → out |
+|---|---|---|
+| `nympheas.post.stage-1` | Ø 0.210, lowest | [0, 0.3333] → [0, 0.8667] |
+| `nympheas.post.stage-2` | Ø 0.180 | [0, 0.6667] → [0, 1.7333] |
+| `nympheas.post.stage-3` | Ø 0.150, the ram under the tray | [0, 1] → [0, 2.600] |
 
 ## 7. Nature
 - **Water:** `nympheas.pond` (Planting.json `water`; anchor `nympheas.pond.water`; body `nympheas.basin`; ellipse a 3.90 × b 2.00, depth 0.32, freeboard 0.023, `water.still`), volume **7.41 m³** (24.50 m² × 0.32, less 2 × 1.088 m² of shelf × 0.20);
@@ -485,4 +501,9 @@ Reserve's west door (x +11.90, z −5.80), where the stair ends at the closed br
 - The **stair-foot plate** is dropped, because the pond never lowers while the visitor is below.
 - The lip carries a 10 mm band with a 13 × 5 mm slot sized to the catalogue strip. The rim light is 3000 K (as built 2700 K), and the stair lights 3000 K (as built 3800 K).
 - A **fixed louvre** under the glass dome keeps the willows within their care range (no blinds, D-014).
+- **The stair walks at a comfortable pace.** As built, its 36 risers of 0.16111 had goings of 0.3389: 2R + T = 0.661,
+  a stride too long for the rise. The going is now 0.3078, so 2R + T = 0.630, inside Blondel's 0.60–0.64 m; the 36
+  risers and the 5.80 rise are kept. The flight runs 10.773 in plan (1.089 shorter) and ends at x +7.273, inside the well;
+  the bottom landing grows to match, the handrails' knee moves with the last riser (one going past it, x +7.581), and
+  the stair's rail strips follow the rails' new straight run (10.215 each).
 - Materials follow the Story (D-018): the floor is honed, not polished; the walls are burnished lime; the velarium is linen; the pond's bed is Belgian bluestone.

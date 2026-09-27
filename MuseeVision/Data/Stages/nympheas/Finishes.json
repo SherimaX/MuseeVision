@@ -170,6 +170,13 @@
       "note": "The three retracting guard rails round the pond opening (M-2), rails and stanchions."
     },
     {
+      "surface": "nympheas.guard.housing",
+      "material": "bronze.cusn10",
+      "working": "patinated",
+      "history": "aged.patina",
+      "note": "The east rail's closed cast-bronze housing, 0.10 x 0.65 below the slab's soffit: overhead from the stair and out of reach, so it keeps its statuary patina undisturbed, as the tray above it."
+    },
+    {
       "surface": "nympheas.bench.seat",
       "material": "oak.sessile-french",
       "working": "oiled.hard-waxed",

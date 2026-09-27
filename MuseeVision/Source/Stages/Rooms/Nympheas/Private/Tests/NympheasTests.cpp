@@ -219,6 +219,13 @@ namespace Musee::Nympheas::Tests
 			West = FMath::Min(West, Point.X);
 		}
 		TestEqual(TEXT("the outer face passes x -11.60 at the west apex"), West, -11.6, 1e-6);
+
+		// The stair keeps its 36 risers and its 5.80 rise at a comfortable pace, inside the well.
+		const double Riser = Plan::StairRise / Plan::Risers;
+		const double Pace = 2.0 * Riser + Plan::Going;
+		TestTrue(TEXT("the stair walks at Blondel's pace, 2R + T from 0.60 to 0.64 m"), Pace >= 0.60 && Pace <= 0.64);
+		TestTrue(TEXT("its flight lies in the well, from the top landing to short of the head wall"), Plan::TopRiserX - Plan::Going > Plan::OpeningWestX
+			&& Plan::HandrailKneeX < Plan::HeadWallX);
 		return true;
 	}
 }

@@ -115,6 +115,10 @@ namespace Musee::Nympheas
 		{
 			Anchor(Out, TEXT("basin"), TEXT("Body"), FMuseeFrame());
 			Anchor(Out, TEXT("guard-rails"), TEXT("Body"), FMuseeFrame());
+			for (int32 Stage = 0; Stage < int32(UE_ARRAY_COUNT(Plan::StageDiameters)); ++Stage)
+			{
+				Out.Anchors.Add({PostStageBody(Stage), TEXT("Body"), FMuseeFrame()});
+			}
 			const FMuseeFrame Iris(FVector(Plan::IrisX, 0.0, Plan::SeatZ));
 			Anchor(Out, TEXT("golden-iris"), TEXT("Use"), Iris);
 			Anchor(Out, TEXT("golden-iris"), TEXT("Bed"), Iris);

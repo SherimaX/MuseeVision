@@ -166,9 +166,9 @@ namespace Musee::Nympheas
 			const double Foot = Plan::SlabSoffit - Plan::HousingDepth;
 			const FVector2D Min(Plan::EastRailX - 0.5 * Plan::HousingWidth, -Plan::EastRailHalf - Side);
 			const FVector2D Max(Plan::EastRailX + 0.5 * Plan::HousingWidth, Plan::EastRailHalf + Side);
-			Out.Add(Drawn(TEXT("guard.housing.east"), TEXT("guard.rail"), Slab(FFormProfile::Rectangle(Min, Max), {EastChase()}, Foot + Side,
+			Out.Add(Drawn(TEXT("guard.housing.east"), TEXT("guard.housing"), Slab(FFormProfile::Rectangle(Min, Max), {EastChase()}, Foot + Side,
 				Plan::SlabSoffit), Solid, FMuseeFrame(FVector(0.0, 0.0, Foot + Side))));
-			Out.Add(Drawn(TEXT("guard.housing.east.bottom"), TEXT("guard.rail"), Block(FVector(Min.X, Min.Y, Foot), FVector(Max.X, Max.Y, Foot + Side)),
+			Out.Add(Drawn(TEXT("guard.housing.east.bottom"), TEXT("guard.housing"), Block(FVector(Min.X, Min.Y, Foot), FVector(Max.X, Max.Y, Foot + Side)),
 				Solid, FMuseeFrame(FVector(0.0, 0.0, Foot))));
 		}
 	}

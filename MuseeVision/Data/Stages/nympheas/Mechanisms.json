@@ -65,6 +65,84 @@
       "guard": "body-in-travel",
       "clearance": 0.05,
       "note": "The three rails round the open well (§3.6) rise 0 → 1.00 m as the pond passes 0.10 → 1.10 m of its 2.6 m, and are housed before the pond's last 0.10 of descent. Driven by the pond's channel, never used directly."
+    },
+    {
+      "key": "nympheas.post.stage-1",
+      "joint": "prismatic",
+      "body": "nympheas.post.stage-1",
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "travel": 0.866667,
+      "time": 5.0,
+      "profile": "linear",
+      "follows": {
+        "channel": "nympheas.pond.height",
+        "in": [
+          0.0,
+          0.333333
+        ],
+        "out": [
+          0.0,
+          0.866667
+        ]
+      },
+      "guard": "none",
+      "note": "The lowest stage (Ø 0.210) of the four telescopic rams (§3.5). A single-acting telescopic ram extends its largest stage first, since the pump's pressure lifts the load soonest on the largest area; each stage strokes a third of the pond's 2.6 m (0.867 of its 0.95, leaving 0.083 ≥ the 0.08 overlap in the sleeve). It carries the two stages nested in it, and stops once out. The pond's own guard sweeps the posts' columns."
+    },
+    {
+      "key": "nympheas.post.stage-2",
+      "joint": "prismatic",
+      "body": "nympheas.post.stage-2",
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "travel": 1.733333,
+      "time": 5.0,
+      "profile": "linear",
+      "follows": {
+        "channel": "nympheas.pond.height",
+        "in": [
+          0.0,
+          0.666667
+        ],
+        "out": [
+          0.0,
+          1.733333
+        ]
+      },
+      "guard": "none",
+      "note": "The middle stage (Ø 0.180): it rides out with the lowest stage over the pond's first third, then strokes out of it over the second, 0.083 of it kept inside."
+    },
+    {
+      "key": "nympheas.post.stage-3",
+      "joint": "prismatic",
+      "body": "nympheas.post.stage-3",
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "travel": 2.6,
+      "time": 5.0,
+      "profile": "linear",
+      "follows": {
+        "channel": "nympheas.pond.height",
+        "in": [
+          0.0,
+          1.0
+        ],
+        "out": [
+          0.0,
+          2.6
+        ]
+      },
+      "guard": "none",
+      "note": "The ram (Ø 0.150), its head under the tray: it rises with the pond the whole way, stroking out of the middle stage over the last third."
     }
   ]
 }

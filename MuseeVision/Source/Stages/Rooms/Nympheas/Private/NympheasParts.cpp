@@ -14,6 +14,11 @@ namespace Musee::Nympheas
 		return FName(FString::Printf(TEXT("%s.%s"), Plan::Stage, Local));
 	}
 
+	FMuseeKey PostStageBody(int32 Stage)
+	{
+		return Key(*FString::Printf(TEXT("post.stage-%d"), Stage + 1));
+	}
+
 	const FOvalCurve& Oval()
 	{
 		static const FOvalCurve Curve(Plan::OvalA, Plan::OvalB);

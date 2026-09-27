@@ -177,7 +177,10 @@ namespace Musee::Nympheas
 			OnBasin(Out.Add_GetRef(Drawn(TEXT("pond.lip"), TEXT("pond.lip"), MoveTemp(Lip), Solid)));
 		}
 
-		/** The four posts, each of three nested stages collapsed in its sleeve: two tubes, each the bore of the next, round a solid ram. */
+		/**
+		 * The four posts, each of three nested stages collapsed in its sleeve: two tubes, each the bore of the next, round a
+		 * solid ram. Each stage rides its own body, which rises with the pond as its mechanism follows the pond's height.
+		 */
 		void Posts(TArray<FFormDrawing>& Out)
 		{
 			const int32 Stages = int32(UE_ARRAY_COUNT(Plan::StageDiameters));
@@ -195,7 +198,7 @@ namespace Musee::Nympheas
 								FVector2D(0.0, 0.0)}, false);
 						const FString Name = FString::Printf(TEXT("pond.post.%s%s.stage-%d"), Y < 0.0 ? TEXT("north") : TEXT("south"),
 							X < 0.0 ? TEXT("west") : TEXT("east"), Stage + 1);
-						Out.Add(Drawn(*Name, TEXT("pond.post"), MoveTemp(Tube), Solid, FMuseeFrame(FVector(X, Y, 0.0))));
+						Out.Add_GetRef(Drawn(*Name, TEXT("pond.post"), MoveTemp(Tube), Solid, FMuseeFrame(FVector(X, Y, 0.0)))).Body = PostStageBody(Stage);
 					}
 				}
 			}
