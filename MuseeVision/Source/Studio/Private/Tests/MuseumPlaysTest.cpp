@@ -10,6 +10,7 @@
 #include "Misc/AutomationTest.h"
 #include "Tests/AutomationCommon.h"
 #include "Tests/AutomationEditorCommon.h"
+#include "Tests/EditorPlay.h"
 #include "Tests/ProofPlan.h"
 
 #if WITH_DEV_AUTOMATION_TESTS
@@ -89,17 +90,6 @@ namespace Musee::Studio
 			FAutomationTestBase& Test;
 			FExpectedColumn Expected;
 			double Deadline;
-		};
-
-		/** Leaves the editor on a fresh untitled level, so no made level stays open after the test. */
-		class FOpenUntitledLevel : public IAutomationLatentCommand
-		{
-		public:
-			virtual bool Update() override
-			{
-				GEditor->CreateNewMapForEditing(/*bPromptUserToSave*/ false);
-				return true;
-			}
 		};
 	}
 }
