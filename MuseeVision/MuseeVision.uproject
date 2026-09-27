@@ -2,7 +2,7 @@
 	"FileVersion": 3,
 	"EngineAssociation": "5.8",
 	"Category": "",
-	"Description": "Mus・・ｽｩe Vision: the museum as one work, built by eleven systems (Source/Systems) and its stages (Source/Stages).",
+	"Description": "Mus繝ｻ繝ｻ・ｽ・ｩe Vision: the museum as one work, built by eleven systems (Source/Systems) and its stages (Source/Stages).",
 	"Modules": [
 		{
 			"Name": "MuseeFoundation",
@@ -107,6 +107,11 @@
 		},
 		{
 			"Name": "MuseeSalon",
+			"Type": "Editor",
+			"LoadingPhase": "Default"
+		},
+		{
+			"Name": "MuseeClassicalHall",
 			"Type": "Editor",
 			"LoadingPhase": "Default"
 		},
