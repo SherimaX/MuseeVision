@@ -64,6 +64,6 @@
   "unverified": [
     "The faceplate's size: the spec sheet gives it only in a drawing whose figures were not read; the sheets ask for a face about 0.10 by 0.06.",
     "The RB faceplate's form: the spec sheet names it RB and shows it only in a drawing; whether it is louvred, as the sheets ask, was not read.",
-    "Its distribution beyond the peak intensity: Light has no emitter for a step light's shaped downward distribution without its photometric file, so the fitting stands unlit until the file is read."
+    "Its distribution beyond the peak: the IES file was not read, so Light lights it as the Gaussian beam that its published flux (86 lm) and peak intensity (49 cd) fix together, about the axis it is aimed along."
   ]
 }

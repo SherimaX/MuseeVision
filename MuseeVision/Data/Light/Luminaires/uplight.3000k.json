@@ -1,0 +1,57 @@
+{
+  "key": "uplight.3000k",
+  "kind": "uplight",
+  "controlClass": "circulation",
+  "evidenceState": "complete",
+  "product": {
+    "manufacturer": "Ledstore",
+    "family": "LED GU10 spot, 40 degrees, high CRI",
+    "description": "the lamp of a miniature ledge uplight: one GU10 LED reflector lamp, 40 degree beam, 3000 K, CRI 98, dimmable, in a glare-shielded can on a knuckle; the can, its knuckle and stem are the stage's own pieces",
+    "code": "GU10-6W-3000",
+    "codeBasis": "the maker's product code of the lamp",
+    "status": "listed on the maker's site"
+  },
+  "light": {
+    "luminousFluxLumens": 500,
+    "fluxBasis": "lamp: the reflector lamp's own output, which leaves the can's mouth",
+    "beamName": "a 40 degree reflector beam",
+    "beamAngleDegrees": 40,
+    "cctKelvin": 3000,
+    "cri": 98,
+    "criBasis": "published value"
+  },
+  "electrical": {
+    "systemPowerWatts": 6,
+    "supplyVolts": 230,
+    "control": "phase dimmable 10 to 100 % (the maker names Schneider and ABB regulators and its own wireless dimmer)"
+  },
+  "housing": {
+    "diameterMillimeters": 50,
+    "lengthMillimeters": 57,
+    "dimensionBasis": "the lamp, 50 mm across its face and 57 mm long, as the maker lists it",
+    "materials": "GU10 reflector lamp in the stage's can",
+    "mounting": "GU10 lampholder in a can on a knuckle standing on the pier's ledge"
+  },
+  "photometricFile": {
+    "url": null,
+    "note": "The maker gives the beam angle and flux, not a photometric file."
+  },
+  "sources": [
+    {
+      "id": "maker-page",
+      "title": "Ledstore, LED GU10, 40 degrees, high CRI98, dimmable spot 6W, 3000K (500 lm, 50 x 57 mm, 35 000 h)",
+      "url": "https://ledstore.pro/product/led-gu10-40-high-cri98-dimmable-spot-6w-3000k",
+      "readOn": "2026-09-27",
+      "covers": [
+        "product",
+        "light",
+        "electrical",
+        "housing"
+      ]
+    }
+  ],
+  "unverified": [
+    "The lamp's face is 50 mm across, where the Reserve's sheet asks for a lens of about 45 mm.",
+    "Its peak intensity is not published; Light takes it from the flux within the beam."
+  ]
+}

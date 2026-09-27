@@ -1,0 +1,59 @@
+{
+  "key": "light-field-panel.d65",
+  "kind": "light-field-panel",
+  "controlClass": "gallery",
+  "evidenceState": "complete",
+  "product": {
+    "manufacturer": "Light Field Lab",
+    "family": "SolidLight",
+    "description": "light-field image panel: modular, bezel-less holographic display panels about 28 inches (0.7 m) across, tiled into a surface of any size, whose light is the image they are fed; the room lays the panels over its faces and gives each face's extent",
+    "code": "SolidLight panel",
+    "codeBasis": "the maker's platform name; the panels are made to order",
+    "status": "announced by the maker"
+  },
+  "light": {
+    "peakLuminanceCandelaPerSquareMeter": 200,
+    "fluxBasis": "image: the maker calibrates objects to 100 to 200 nits for indoor use; the record takes the peak white at 200 cd/m2",
+    "beamName": "an emissive picture; at rest its standby image, the black level",
+    "cctKelvin": 6504,
+    "cri": null
+  },
+  "electrical": {
+    "control": "fed by a work's image source"
+  },
+  "housing": {
+    "dimensionBasis": "panels about 28 inches across, tiled without bezels; the room gives each face's extent",
+    "mounting": "tiled on the room's faces"
+  },
+  "photometricFile": {
+    "url": null,
+    "note": "A display's light is its picture; its face is taken as Lambertian at its luminance."
+  },
+  "sources": [
+    {
+      "id": "press-techhive",
+      "title": "TechHive, Light Field Lab's SolidLight offers a true holographic video display: a 28 inch panel of 2.5 billion pixels (over 10 billion a square metre); object brightness calibrated to 100 to 200 nits for indoor use",
+      "url": "https://www.techhive.com/article/579894/light-field-labs-solidlight-offers-a-true-holographic-video-display.html",
+      "readOn": "2026-09-27",
+      "covers": [
+        "product",
+        "light",
+        "housing"
+      ]
+    },
+    {
+      "id": "press-release",
+      "title": "Light Field Lab, press release: Light Field Lab Unveils SolidLight, the Highest Resolution Holographic Display Platform Ever Designed",
+      "url": "https://www.prnewswire.com/news-releases/light-field-lab-unveils-solidlight--the-highest-resolution-holographic-display-platform-ever-designed-301395002.html",
+      "readOn": "2026-09-27",
+      "covers": [
+        "product"
+      ]
+    }
+  ],
+  "unverified": [
+    "The TechHive page now answers 410 Gone; its figures were read from the search engine's copy of it.",
+    "The white point: D65 (6504 K) is the sheets' choice for the panels' white; the maker publishes none.",
+    "The black level and the panels' face reflectance (the sheets ask for 1 % or less) are not published."
+  ]
+}

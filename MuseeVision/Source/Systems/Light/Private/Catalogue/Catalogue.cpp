@@ -14,19 +14,81 @@ namespace Musee::Light
 		constexpr double MillimetersPerMeter = 1000.0;
 
 		/**
-		 * How each kind's light leaves it. A wallwasher's asymmetric lens, a framer's shutters, a picture light's hood and
-		 * a step light's louvre shape light in ways only their photometric files describe, so those kinds have no emitter
-		 * yet. An edge-lit pane lets its light out evenly over its etched face, as a laylight's diffusing face does.
+		 * How each kind's light leaves it. A wallwasher's asymmetric lens, a framer's shutters and a picture light's hood
+		 * shape light in ways only their photometric files describe, so those kinds have no emitter yet. A step light's,
+		 * a pinspot's and an uplight's light is a beam about their axis; an edge-lit pane lets its light out evenly over its
+		 * etched face, as a laylight's diffusing face does; a pendant's lamp lights all round inside its globe; an image
+		 * panel's light is its picture.
 		 */
 		TOptional<FLightLuminaire::EEmitter> EmitterOfKind(const FString& Kind)
 		{
-			if (Kind == TEXT("track-spot") || Kind == TEXT("downlight")) { return FLightLuminaire::EEmitter::Spot; }
+			if (Kind == TEXT("track-spot") || Kind == TEXT("downlight") || Kind == TEXT("step-light") || Kind == TEXT("pinspot") || Kind == TEXT("uplight"))
+			{
+				return FLightLuminaire::EEmitter::Spot;
+			}
 			if (Kind == TEXT("linear-cove") || Kind == TEXT("linear-slot") || Kind == TEXT("linear-strip") || Kind == TEXT("case-linear"))
 			{
 				return FLightLuminaire::EEmitter::Linear;
 			}
 			if (Kind == TEXT("laylight") || Kind == TEXT("edge-lit-glass")) { return FLightLuminaire::EEmitter::Rect; }
-			if (Kind == TEXT("lantern") || Kind == TEXT("electrolier")) { return FLightLuminaire::EEmitter::Point; }
+			if (Kind == TEXT("lantern") || Kind == TEXT("electrolier") || Kind == TEXT("pendant")) { return FLightLuminaire::EEmitter::Point; }
+			if (Kind == TEXT("light-field-panel")) { return FLightLuminaire::EEmitter::Image; }
+			return {};
+		}
+
+		/** The steps of the Simpson's rule that integrates a beam's intensity over its hemisphere. */
+		constexpr int32 BeamIntegrationSteps = 256;
+
+		/** How many halvings find a beam's spread: to a millionth of a radian over the hemisphere's width. */
+		constexpr int32 BeamBisections = 48;
+
+		/**
+		 * The solid angle, in steradians, a beam of unit peak spreads over the hemisphere in front of it when its intensity
+		 * falls off as a Gaussian of spread Sigma (radians): 2 pi times the integral of exp(-theta^2 / 2 sigma^2) sin theta
+		 * over theta from 0 to pi / 2. Its flux is this times its peak intensity.
+		 */
+		double GaussianBeamSteradians(double Sigma)
+		{
+			const double Half = UE_DOUBLE_HALF_PI;
+			const double Step = Half / BeamIntegrationSteps;
+			double Sum = 0.0;
+			for (int32 I = 0; I <= BeamIntegrationSteps; ++I)
+			{
+				const double Theta = I * Step;
+				const double Weight = (I == 0 || I == BeamIntegrationSteps) ? 1.0 : (I % 2 == 1 ? 4.0 : 2.0);
+				Sum += Weight * FMath::Exp(-Theta * Theta / (2.0 * Sigma * Sigma)) * FMath::Sin(Theta);
+			}
+			return 2.0 * UE_DOUBLE_PI * Sum * Step / 3.0;
+		}
+
+		/**
+		 * The beam angle (the full width at half the peak) of the Gaussian beam a luminaire's published flux and peak
+		 * intensity fix together, for a maker who publishes those two and no beam angle (a step light's spec sheet). Unset
+		 * if no beam into a hemisphere carries that much flux under that peak.
+		 */
+		TOptional<double> GaussianBeamAngleDegrees(double FluxLumens, double PeakCandela)
+		{
+			const double Steradians = FluxLumens / PeakCandela;
+			double Narrow = 1e-4;
+			double Wide = 1e3;
+			if (Steradians <= GaussianBeamSteradians(Narrow) || Steradians >= GaussianBeamSteradians(Wide)) { return {}; }
+			for (int32 I = 0; I < BeamBisections; ++I)
+			{
+				const double Middle = 0.5 * (Narrow + Wide);
+				(GaussianBeamSteradians(Middle) < Steradians ? Narrow : Wide) = Middle;
+			}
+			// A Gaussian's full width at half its peak is 2 sqrt(2 ln 2) sigma.
+			return FMath::RadiansToDegrees(2.0 * FMath::Sqrt(2.0 * FMath::Loge(2.0)) * 0.5 * (Narrow + Wide));
+		}
+
+		/** A spot's beam angle: as published, else the Gaussian beam its flux and peak fix, else unset. */
+		TOptional<double> BeamAngleOf(const FLightLuminaireRecord& Record)
+		{
+			if (Record.Light.BeamAngleDegrees > 0.0) { return Record.Light.BeamAngleDegrees; }
+			if (Record.Light.LuminousFluxLumens > 0.0 && Record.Light.PeakCandela > 0.0)
+			{
+				return GaussianBeamAngleDegrees(Record.Light.LuminousFluxLumens, Record.Light.PeakCandela);
+			}
 			return {};
 		}
 
@@ -44,7 +106,7 @@ namespace Musee::Light
 			switch (Emitter.GetValue())
 			{
 			case FLightLuminaire::EEmitter::Spot:
-				if (Record.Light.BeamAngleDegrees <= 0.0) { return TEXT("its beam angle isn't published"); }
+				if (!BeamAngleOf(Record).IsSet()) { return TEXT("neither its beam angle nor its flux and peak intensity together are published"); }
 				if (Record.Light.PeakCandela <= 0.0 && Record.Light.LuminousFluxLumens <= 0.0) { return TEXT("neither its peak intensity nor its flux is published"); }
 				return FString();
 			case FLightLuminaire::EEmitter::Linear:
@@ -55,8 +117,12 @@ namespace Musee::Light
 				if (Record.Light.LuminousFluxLumens <= 0.0) { return TEXT("its lamps' flux isn't published"); }
 				if (Record.Housing.LampCount > 1 && Record.Housing.LampRingRadiusMillimeters <= 0.0) { return TEXT("the ring its lamps stand on isn't given"); }
 				return FString();
+			case FLightLuminaire::EEmitter::Image:
+				if (Record.Light.PeakLuminanceCandelaPerSquareMeter <= 0.0) { return TEXT("its luminance at peak white isn't published"); }
+				return FString();
 			default:
-				if (Record.Light.LuminousFluxLumens <= 0.0) { return TEXT("its flux isn't published"); }
+				if (Record.Light.LuminousFluxLumensPerSquareMeter > 0.0) { return FString(); }
+				if (Record.Light.LuminousFluxLumens <= 0.0) { return TEXT("neither its flux nor its flux per square metre is published"); }
 				if (Record.Housing.EmittingMillimeters.Num() != 2) { return TEXT("its emitting face isn't published"); }
 				return FString();
 			}
@@ -74,8 +140,10 @@ namespace Musee::Light
 			Result.bLit = Result.WhyUnlit.IsEmpty();
 			Result.Flux = Lumens(FMath::Max(Record.Light.LuminousFluxLumens, 0.0));
 			Result.FluxPerMeterLumens = FMath::Max(Record.Light.LuminousFluxLumensPerMeter, 0.0);
+			Result.FluxPerSquareMeterLumens = FMath::Max(Record.Light.LuminousFluxLumensPerSquareMeter, 0.0);
+			Result.PeakLuminanceCandelaPerSquareMeter = FMath::Max(Record.Light.PeakLuminanceCandelaPerSquareMeter, 0.0);
 			Result.PeakIntensity = Candela(FMath::Max(Record.Light.PeakCandela, 0.0));
-			Result.BeamAngle = Degrees(FMath::Max(Record.Light.BeamAngleDegrees, 0.0));
+			Result.BeamAngle = Degrees(Result.Emitter == FLightLuminaire::EEmitter::Spot ? BeamAngleOf(Record).Get(0.0) : FMath::Max(Record.Light.BeamAngleDegrees, 0.0));
 			Result.ColourTemperature = Kelvin(FMath::Max(Record.Light.CctKelvin, 0.0));
 			const double Diameter = Record.Housing.CutOutDiameterMillimeters > 0.0 ? Record.Housing.CutOutDiameterMillimeters : Record.Housing.DiameterMillimeters;
 			Result.SourceRadius = FromMillimeters(FMath::Max(Diameter, 0.0) / 2.0);

@@ -1,0 +1,60 @@
+{
+  "key": "pinspot.3000k",
+  "kind": "pinspot",
+  "controlClass": "gallery",
+  "evidenceState": "incomplete",
+  "product": {
+    "manufacturer": "ERCO",
+    "family": "Parscan 48V spotlight, construction size M, narrow spot",
+    "description": "a spotlight on the Minirail 48V system with a narrow spot Spherolit lens (the 5 degree class), 3000 K CRI 97, On-board Dim; its body under the Cube's soffit ring",
+    "codeBasis": "the 3000 K CRI 97 narrow spot article's number was not found; its 3500 K CRI 92 sibling is A1014612",
+    "status": "current"
+  },
+  "light": {
+    "luminousFluxLumens": null,
+    "fluxBasis": "not read for 3000 K CRI 97; the 3500 K CRI 92 sibling A1014612 gives 348 lm and 27 525 cd from a 4.3 W, 417 lm module",
+    "beamName": "narrow spot, Spherolit lens",
+    "beamAngleDegrees": null,
+    "peakCandela": null,
+    "cctKelvin": 3000,
+    "cri": 97
+  },
+  "electrical": {
+    "control": "On-board Dim (a rotary control), 1 to 100 %"
+  },
+  "housing": {
+    "weightKilograms": 0.55,
+    "materials": "cast aluminium housing, polymer upper cover and lens unit, Spherolit lens of optical polymer",
+    "mounting": "Minirail 48V track or singlet"
+  },
+  "photometricFile": {
+    "url": "https://download.erco.com/en/planning_luminaire/ies/",
+    "note": "ERCO publishes a data sheet and an IES file per article; the 3000 K article's were not found."
+  },
+  "sources": [
+    {
+      "id": "sibling-data-sheet",
+      "title": "ERCO, data sheet A1014612 Parscan 48V Spotlight, size M, narrow spot, 3500 K CRI 92, edition 28.04.2026 (348 lm, Imax 27 525 cd, 6.0 W, 0.55 kg)",
+      "url": "https://download-service.erco.com/download/A1014612/en?types=15&formattedId=&productType=article",
+      "readOn": "2026-09-27",
+      "covers": [
+        "product",
+        "housing",
+        "electrical"
+      ]
+    },
+    {
+      "id": "maker-page",
+      "title": "ERCO, Parscan 48V (product page): Spherolit lenses narrow spot, spot, flood, wide flood, oval flood, wallwash; 2700 to 4000 K, CRI up to 97 at 3000 K",
+      "url": "https://www.erco.com/en/products/indoor/spotlights-for-track/parscan-new-48v-7334/",
+      "readOn": "2026-09-27",
+      "covers": [
+        "product"
+      ]
+    }
+  ],
+  "unverified": [
+    "The flux, peak intensity and beam angle of the 3000 K CRI 97 narrow spot article: its article number was not found, so the record stands unlit until its data sheet is read.",
+    "The Cube's sheet asks for a 5 degree beam with a 2 degree core; the sibling's data sheet draws its cone at 4.4 degrees."
+  ]
+}

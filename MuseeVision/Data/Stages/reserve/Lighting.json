@@ -4,7 +4,7 @@
   "luminaires": [
     {
       "id": "pendant.nave.1",
-      "type": "gap.pendant-globe.3000k",
+      "type": "pendant-globe.3000k",
       "point": [
         -26.425,
         0.0,
@@ -19,7 +19,7 @@
     },
     {
       "id": "pendant.nave.2",
-      "type": "gap.pendant-globe.3000k",
+      "type": "pendant-globe.3000k",
       "point": [
         -18.75,
         0.0,
@@ -34,7 +34,7 @@
     },
     {
       "id": "pendant.nave.3",
-      "type": "gap.pendant-globe.3000k",
+      "type": "pendant-globe.3000k",
       "point": [
         -11.25,
         0.0,
@@ -49,7 +49,7 @@
     },
     {
       "id": "pendant.nave.4",
-      "type": "gap.pendant-globe.3000k",
+      "type": "pendant-globe.3000k",
       "point": [
         -3.75,
         0.0,
@@ -64,7 +64,7 @@
     },
     {
       "id": "pendant.nave.5",
-      "type": "gap.pendant-globe.3000k",
+      "type": "pendant-globe.3000k",
       "point": [
         3.75,
         0.0,
@@ -79,7 +79,7 @@
     },
     {
       "id": "pendant.nave.6",
-      "type": "gap.pendant-globe.3000k",
+      "type": "pendant-globe.3000k",
       "point": [
         11.25,
         0.0,
@@ -94,7 +94,7 @@
     },
     {
       "id": "pendant.nave.7",
-      "type": "gap.pendant-globe.3000k",
+      "type": "pendant-globe.3000k",
       "point": [
         18.75,
         0.0,
@@ -109,7 +109,7 @@
     },
     {
       "id": "pendant.nave.8",
-      "type": "gap.pendant-globe.3000k",
+      "type": "pendant-globe.3000k",
       "point": [
         26.425,
         0.0,
@@ -124,7 +124,7 @@
     },
     {
       "id": "pendant.aisle-n.1",
-      "type": "gap.pendant-globe.3000k",
+      "type": "pendant-globe.3000k",
       "point": [
         -26.425,
         -8.675,
@@ -139,7 +139,7 @@
     },
     {
       "id": "pendant.aisle-n.2",
-      "type": "gap.pendant-globe.3000k",
+      "type": "pendant-globe.3000k",
       "point": [
         -18.75,
         -8.675,
@@ -154,7 +154,7 @@
     },
     {
       "id": "pendant.aisle-n.3",
-      "type": "gap.pendant-globe.3000k",
+      "type": "pendant-globe.3000k",
       "point": [
         -11.25,
         -8.675,
@@ -169,7 +169,7 @@
     },
     {
       "id": "pendant.aisle-n.4",
-      "type": "gap.pendant-globe.3000k",
+      "type": "pendant-globe.3000k",
       "point": [
         -3.75,
         -8.675,
@@ -184,7 +184,7 @@
     },
     {
       "id": "pendant.aisle-n.5",
-      "type": "gap.pendant-globe.3000k",
+      "type": "pendant-globe.3000k",
       "point": [
         3.75,
         -8.675,
@@ -199,7 +199,7 @@
     },
     {
       "id": "pendant.aisle-n.6",
-      "type": "gap.pendant-globe.3000k",
+      "type": "pendant-globe.3000k",
       "point": [
         11.25,
         -8.675,
@@ -214,7 +214,7 @@
     },
     {
       "id": "pendant.aisle-n.7",
-      "type": "gap.pendant-globe.3000k",
+      "type": "pendant-globe.3000k",
       "point": [
         18.75,
         -8.675,
@@ -229,7 +229,7 @@
     },
     {
       "id": "pendant.aisle-n.8",
-      "type": "gap.pendant-globe.3000k",
+      "type": "pendant-globe.3000k",
       "point": [
         26.425,
         -8.675,
@@ -244,7 +244,7 @@
     },
     {
       "id": "pendant.aisle-s.1",
-      "type": "gap.pendant-globe.3000k",
+      "type": "pendant-globe.3000k",
       "point": [
         -26.425,
         8.675,
@@ -259,7 +259,7 @@
     },
     {
       "id": "pendant.aisle-s.2",
-      "type": "gap.pendant-globe.3000k",
+      "type": "pendant-globe.3000k",
       "point": [
         -18.75,
         8.675,
@@ -274,7 +274,7 @@
     },
     {
       "id": "pendant.aisle-s.3",
-      "type": "gap.pendant-globe.3000k",
+      "type": "pendant-globe.3000k",
       "point": [
         -11.25,
         8.675,
@@ -289,7 +289,7 @@
     },
     {
       "id": "pendant.aisle-s.4",
-      "type": "gap.pendant-globe.3000k",
+      "type": "pendant-globe.3000k",
       "point": [
         -3.75,
         8.675,
@@ -304,7 +304,7 @@
     },
     {
       "id": "pendant.aisle-s.5",
-      "type": "gap.pendant-globe.3000k",
+      "type": "pendant-globe.3000k",
       "point": [
         3.75,
         8.675,
@@ -319,7 +319,7 @@
     },
     {
       "id": "pendant.aisle-s.6",
-      "type": "gap.pendant-globe.3000k",
+      "type": "pendant-globe.3000k",
       "point": [
         11.25,
         8.675,
@@ -334,7 +334,7 @@
     },
     {
       "id": "pendant.aisle-s.7",
-      "type": "gap.pendant-globe.3000k",
+      "type": "pendant-globe.3000k",
       "point": [
         18.75,
         8.675,
@@ -349,7 +349,7 @@
     },
     {
       "id": "pendant.aisle-s.8",
-      "type": "gap.pendant-globe.3000k",
+      "type": "pendant-globe.3000k",
       "point": [
         26.425,
         8.675,
@@ -364,7 +364,7 @@
     },
     {
       "id": "uplight.p1n.nw",
-      "type": "gap.uplight.3000k",
+      "type": "uplight.3000k",
       "point": [
         -22.9,
         -5.4,
@@ -379,7 +379,7 @@
     },
     {
       "id": "uplight.p1n.sw",
-      "type": "gap.uplight.3000k",
+      "type": "uplight.3000k",
       "point": [
         -22.9,
         -4.6,
@@ -394,7 +394,7 @@
     },
     {
       "id": "uplight.p1n.ne",
-      "type": "gap.uplight.3000k",
+      "type": "uplight.3000k",
       "point": [
         -22.1,
         -5.4,
@@ -409,7 +409,7 @@
     },
     {
       "id": "uplight.p1n.se",
-      "type": "gap.uplight.3000k",
+      "type": "uplight.3000k",
       "point": [
         -22.1,
         -4.6,
@@ -424,7 +424,7 @@
     },
     {
       "id": "uplight.p1s.nw",
-      "type": "gap.uplight.3000k",
+      "type": "uplight.3000k",
       "point": [
         -22.9,
         4.6,
@@ -439,7 +439,7 @@
     },
     {
       "id": "uplight.p1s.sw",
-      "type": "gap.uplight.3000k",
+      "type": "uplight.3000k",
       "point": [
         -22.9,
         5.4,
@@ -454,7 +454,7 @@
     },
     {
       "id": "uplight.p1s.ne",
-      "type": "gap.uplight.3000k",
+      "type": "uplight.3000k",
       "point": [
         -22.1,
         4.6,
@@ -469,7 +469,7 @@
     },
     {
       "id": "uplight.p1s.se",
-      "type": "gap.uplight.3000k",
+      "type": "uplight.3000k",
       "point": [
         -22.1,
         5.4,
@@ -484,7 +484,7 @@
     },
     {
       "id": "uplight.p2n.nw",
-      "type": "gap.uplight.3000k",
+      "type": "uplight.3000k",
       "point": [
         -15.4,
         -5.4,
@@ -499,7 +499,7 @@
     },
     {
       "id": "uplight.p2n.sw",
-      "type": "gap.uplight.3000k",
+      "type": "uplight.3000k",
       "point": [
         -15.4,
         -4.6,
@@ -514,7 +514,7 @@
     },
     {
       "id": "uplight.p2n.ne",
-      "type": "gap.uplight.3000k",
+      "type": "uplight.3000k",
       "point": [
         -14.6,
         -5.4,
@@ -529,7 +529,7 @@
     },
     {
       "id": "uplight.p2n.se",
-      "type": "gap.uplight.3000k",
+      "type": "uplight.3000k",
       "point": [
         -14.6,
         -4.6,
@@ -544,7 +544,7 @@
     },
     {
       "id": "uplight.p2s.nw",
-      "type": "gap.uplight.3000k",
+      "type": "uplight.3000k",
       "point": [
         -15.4,
         4.6,
@@ -559,7 +559,7 @@
     },
     {
       "id": "uplight.p2s.sw",
-      "type": "gap.uplight.3000k",
+      "type": "uplight.3000k",
       "point": [
         -15.4,
         5.4,
@@ -574,7 +574,7 @@
     },
     {
       "id": "uplight.p2s.ne",
-      "type": "gap.uplight.3000k",
+      "type": "uplight.3000k",
       "point": [
         -14.6,
         4.6,
@@ -589,7 +589,7 @@
     },
     {
       "id": "uplight.p2s.se",
-      "type": "gap.uplight.3000k",
+      "type": "uplight.3000k",
       "point": [
         -14.6,
         5.4,
@@ -604,7 +604,7 @@
     },
     {
       "id": "uplight.p3n.nw",
-      "type": "gap.uplight.3000k",
+      "type": "uplight.3000k",
       "point": [
         -7.9,
         -5.4,
@@ -619,7 +619,7 @@
     },
     {
       "id": "uplight.p3n.sw",
-      "type": "gap.uplight.3000k",
+      "type": "uplight.3000k",
       "point": [
         -7.9,
         -4.6,
@@ -634,7 +634,7 @@
     },
     {
       "id": "uplight.p3n.ne",
-      "type": "gap.uplight.3000k",
+      "type": "uplight.3000k",
       "point": [
         -7.1,
         -5.4,
@@ -649,7 +649,7 @@
     },
     {
       "id": "uplight.p3n.se",
-      "type": "gap.uplight.3000k",
+      "type": "uplight.3000k",
       "point": [
         -7.1,
         -4.6,
@@ -664,7 +664,7 @@
     },
     {
       "id": "uplight.p3s.nw",
-      "type": "gap.uplight.3000k",
+      "type": "uplight.3000k",
       "point": [
         -7.9,
         4.6,
@@ -679,7 +679,7 @@
     },
     {
       "id": "uplight.p3s.sw",
-      "type": "gap.uplight.3000k",
+      "type": "uplight.3000k",
       "point": [
         -7.9,
         5.4,
@@ -694,7 +694,7 @@
     },
     {
       "id": "uplight.p3s.ne",
-      "type": "gap.uplight.3000k",
+      "type": "uplight.3000k",
       "point": [
         -7.1,
         4.6,
@@ -709,7 +709,7 @@
     },
     {
       "id": "uplight.p3s.se",
-      "type": "gap.uplight.3000k",
+      "type": "uplight.3000k",
       "point": [
         -7.1,
         5.4,
@@ -724,7 +724,7 @@
     },
     {
       "id": "uplight.p4n.nw",
-      "type": "gap.uplight.3000k",
+      "type": "uplight.3000k",
       "point": [
         -0.4,
         -5.4,
@@ -739,7 +739,7 @@
     },
     {
       "id": "uplight.p4n.sw",
-      "type": "gap.uplight.3000k",
+      "type": "uplight.3000k",
       "point": [
         -0.4,
         -4.6,
@@ -754,7 +754,7 @@
     },
     {
       "id": "uplight.p4n.ne",
-      "type": "gap.uplight.3000k",
+      "type": "uplight.3000k",
       "point": [
         0.4,
         -5.4,
@@ -769,7 +769,7 @@
     },
     {
       "id": "uplight.p4n.se",
-      "type": "gap.uplight.3000k",
+      "type": "uplight.3000k",
       "point": [
         0.4,
         -4.6,
@@ -784,7 +784,7 @@
     },
     {
       "id": "uplight.p4s.nw",
-      "type": "gap.uplight.3000k",
+      "type": "uplight.3000k",
       "point": [
         -0.4,
         4.6,
@@ -799,7 +799,7 @@
     },
     {
       "id": "uplight.p4s.sw",
-      "type": "gap.uplight.3000k",
+      "type": "uplight.3000k",
       "point": [
         -0.4,
         5.4,
@@ -814,7 +814,7 @@
     },
     {
       "id": "uplight.p4s.ne",
-      "type": "gap.uplight.3000k",
+      "type": "uplight.3000k",
       "point": [
         0.4,
         4.6,
@@ -829,7 +829,7 @@
     },
     {
       "id": "uplight.p4s.se",
-      "type": "gap.uplight.3000k",
+      "type": "uplight.3000k",
       "point": [
         0.4,
         5.4,
@@ -844,7 +844,7 @@
     },
     {
       "id": "uplight.p5n.nw",
-      "type": "gap.uplight.3000k",
+      "type": "uplight.3000k",
       "point": [
         7.1,
         -5.4,
@@ -859,7 +859,7 @@
     },
     {
       "id": "uplight.p5n.sw",
-      "type": "gap.uplight.3000k",
+      "type": "uplight.3000k",
       "point": [
         7.1,
         -4.6,
@@ -874,7 +874,7 @@
     },
     {
       "id": "uplight.p5n.ne",
-      "type": "gap.uplight.3000k",
+      "type": "uplight.3000k",
       "point": [
         7.9,
         -5.4,
@@ -889,7 +889,7 @@
     },
     {
       "id": "uplight.p5n.se",
-      "type": "gap.uplight.3000k",
+      "type": "uplight.3000k",
       "point": [
         7.9,
         -4.6,
@@ -904,7 +904,7 @@
     },
     {
       "id": "uplight.p5s.nw",
-      "type": "gap.uplight.3000k",
+      "type": "uplight.3000k",
       "point": [
         7.1,
         4.6,
@@ -919,7 +919,7 @@
     },
     {
       "id": "uplight.p5s.sw",
-      "type": "gap.uplight.3000k",
+      "type": "uplight.3000k",
       "point": [
         7.1,
         5.4,
@@ -934,7 +934,7 @@
     },
     {
       "id": "uplight.p5s.ne",
-      "type": "gap.uplight.3000k",
+      "type": "uplight.3000k",
       "point": [
         7.9,
         4.6,
@@ -949,7 +949,7 @@
     },
     {
       "id": "uplight.p5s.se",
-      "type": "gap.uplight.3000k",
+      "type": "uplight.3000k",
       "point": [
         7.9,
         5.4,
@@ -964,7 +964,7 @@
     },
     {
       "id": "uplight.p6n.nw",
-      "type": "gap.uplight.3000k",
+      "type": "uplight.3000k",
       "point": [
         14.6,
         -5.4,
@@ -979,7 +979,7 @@
     },
     {
       "id": "uplight.p6n.sw",
-      "type": "gap.uplight.3000k",
+      "type": "uplight.3000k",
       "point": [
         14.6,
         -4.6,
@@ -994,7 +994,7 @@
     },
     {
       "id": "uplight.p6n.ne",
-      "type": "gap.uplight.3000k",
+      "type": "uplight.3000k",
       "point": [
         15.4,
         -5.4,
@@ -1009,7 +1009,7 @@
     },
     {
       "id": "uplight.p6n.se",
-      "type": "gap.uplight.3000k",
+      "type": "uplight.3000k",
       "point": [
         15.4,
         -4.6,
@@ -1024,7 +1024,7 @@
     },
     {
       "id": "uplight.p6s.nw",
-      "type": "gap.uplight.3000k",
+      "type": "uplight.3000k",
       "point": [
         14.6,
         4.6,
@@ -1039,7 +1039,7 @@
     },
     {
       "id": "uplight.p6s.sw",
-      "type": "gap.uplight.3000k",
+      "type": "uplight.3000k",
       "point": [
         14.6,
         5.4,
@@ -1054,7 +1054,7 @@
     },
     {
       "id": "uplight.p6s.ne",
-      "type": "gap.uplight.3000k",
+      "type": "uplight.3000k",
       "point": [
         15.4,
         4.6,
@@ -1069,7 +1069,7 @@
     },
     {
       "id": "uplight.p6s.se",
-      "type": "gap.uplight.3000k",
+      "type": "uplight.3000k",
       "point": [
         15.4,
         5.4,
@@ -1084,7 +1084,7 @@
     },
     {
       "id": "uplight.p7n.nw",
-      "type": "gap.uplight.3000k",
+      "type": "uplight.3000k",
       "point": [
         22.1,
         -5.4,
@@ -1099,7 +1099,7 @@
     },
     {
       "id": "uplight.p7n.sw",
-      "type": "gap.uplight.3000k",
+      "type": "uplight.3000k",
       "point": [
         22.1,
         -4.6,
@@ -1114,7 +1114,7 @@
     },
     {
       "id": "uplight.p7n.ne",
-      "type": "gap.uplight.3000k",
+      "type": "uplight.3000k",
       "point": [
         22.9,
         -5.4,
@@ -1129,7 +1129,7 @@
     },
     {
       "id": "uplight.p7n.se",
-      "type": "gap.uplight.3000k",
+      "type": "uplight.3000k",
       "point": [
         22.9,
         -4.6,
@@ -1144,7 +1144,7 @@
     },
     {
       "id": "uplight.p7s.nw",
-      "type": "gap.uplight.3000k",
+      "type": "uplight.3000k",
       "point": [
         22.1,
         4.6,
@@ -1159,7 +1159,7 @@
     },
     {
       "id": "uplight.p7s.sw",
-      "type": "gap.uplight.3000k",
+      "type": "uplight.3000k",
       "point": [
         22.1,
         5.4,
@@ -1174,7 +1174,7 @@
     },
     {
       "id": "uplight.p7s.ne",
-      "type": "gap.uplight.3000k",
+      "type": "uplight.3000k",
       "point": [
         22.9,
         4.6,
@@ -1189,7 +1189,7 @@
     },
     {
       "id": "uplight.p7s.se",
-      "type": "gap.uplight.3000k",
+      "type": "uplight.3000k",
       "point": [
         22.9,
         5.4,

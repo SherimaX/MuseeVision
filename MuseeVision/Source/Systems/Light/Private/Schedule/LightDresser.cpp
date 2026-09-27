@@ -17,6 +17,13 @@ namespace Musee::Light
 		/** Whose findings these are: Light's, where the fix belongs. */
 		const FName LightSystem(TEXT("Light"));
 
+		/** The tags a luminaire set in a piece carries: `musee.host:<surface>`, and `musee.lights:<surface>` for its target. */
+		const TCHAR* const HostTagPrefix = TEXT("musee.host:");
+		const TCHAR* const LitSurfaceTagPrefix = TEXT("musee.lights:");
+
+		/** A full turn, in degrees of bearing. */
+		constexpr double FullTurnDegrees = 360.0;
+
 		/** The places whose weather may fall on an opening (Decision D-005, the stage contract). */
 		const TCHAR* const WeatherPlaces[] = { TEXT("museum"), TEXT("giverny"), TEXT("london") };
 
@@ -45,6 +52,10 @@ namespace Musee::Light
 			TOptional<FVector> Aim;
 			/** For a linear luminaire, the direction its run lies in, square to its light. */
 			TOptional<FVector> Run;
+			/** For an areal luminaire, the face it lights, [width, height] in metres. */
+			FVector2D Face = FVector2D::ZeroVector;
+			/** For a zone, the direction the face's height runs in: out from the axis, through the zone's middle. */
+			TOptional<FVector> FaceHeight;
 			ELightOperation Operation = ELightOperation::Always;
 			FMuseeKey Follows;
 			USceneComponent* Body = nullptr;
@@ -134,6 +145,63 @@ namespace Musee::Light
 			return FString();
 		}
 
+		/** A bearing's direction on the plan: clockwise from north, which is -y. */
+		FVector BearingDirection(double BearingDegrees)
+		{
+			const double Radians = FMath::DegreesToRadians(BearingDegrees);
+			return FVector(FMath::Sin(Radians), -FMath::Cos(Radians), 0.0);
+		}
+
+		/**
+		 * The face a zone lights: a rectangle of the zone's own area, as wide as the zone's middle arc (or its outer chord,
+		 * for a zone wider than that), laid across the zone's middle bearing with its height running out from the axis. The
+		 * reason it has none, or empty.
+		 */
+		FString ZoneFaceOf(const FLightScheduleZone& Zone, FPlacement& Out)
+		{
+			if (Zone.R.Num() != 2 || Zone.R[0] < 0.0 || Zone.R[1] <= Zone.R[0]) { return TEXT("its zone's radii aren't [inner, outer], inner less than outer"); }
+			if (Zone.Bearing.Num() != 2) { return TEXT("its zone's bearings aren't [from, to]"); }
+			const double RawSweep = FMath::Fmod(Zone.Bearing[1] - Zone.Bearing[0], FullTurnDegrees);
+			const double SweepDegrees = RawSweep <= 0.0 ? RawSweep + FullTurnDegrees : RawSweep;
+			const double Sweep = FMath::DegreesToRadians(SweepDegrees);
+			const double Inner = Zone.R[0];
+			const double Outer = Zone.R[1];
+			const double Area = 0.5 * Sweep * (Outer * Outer - Inner * Inner);
+			const double MiddleArc = 0.5 * Sweep * (Inner + Outer);
+			const double OuterChord = 2.0 * Outer * FMath::Sin(0.5 * FMath::Min(Sweep, UE_DOUBLE_PI));
+			const double Width = FMath::Min(MiddleArc, OuterChord);
+			Out.Face = FVector2D(Width, Area / Width);
+			Out.FaceHeight = BearingDirection(Zone.Bearing[0] + 0.5 * SweepDegrees);
+			const FVector Plan(Out.Seat.OriginMeters.X, Out.Seat.OriginMeters.Y, 0.0);
+			const double Radius = Plan.Size();
+			double Bearing = FMath::RadiansToDegrees(FMath::Atan2(Plan.X, -Plan.Y));
+			Bearing = FMath::Fmod(Bearing - Zone.Bearing[0] + 2.0 * FullTurnDegrees, FullTurnDegrees);
+			if (Radius < Inner || Radius > Outer || Bearing > SweepDegrees + UE_KINDA_SMALL_NUMBER)
+			{
+				return TEXT("it sits outside its own zone");
+			}
+			return FString();
+		}
+
+		/**
+		 * The face an areal type lights (the stage contract): its extent, or its zone, never both; only an areal type is laid
+		 * over a face. The reason it has none, or empty.
+		 */
+		FString FaceOf(const FLightScheduleLuminaire& Entry, const FLightLuminaire& Luminaire, FPlacement& Out)
+		{
+			const bool bExtent = !Entry.Extent.IsEmpty();
+			const bool bZone = !Entry.Zone.R.IsEmpty() || !Entry.Zone.Bearing.IsEmpty();
+			if (!Luminaire.IsAreal())
+			{
+				return bExtent || bZone ? TEXT("only an areal type (a luminous ceiling, edge-lit panes, an image panel) is laid over an extent or a zone") : FString();
+			}
+			if (bExtent == bZone) { return TEXT("an areal type needs either the extent or the zone of the face it lights, and not both"); }
+			if (bZone) { return ZoneFaceOf(Entry.Zone, Out); }
+			if (Entry.Extent.Num() != 2 || Entry.Extent[0] <= 0.0 || Entry.Extent[1] <= 0.0) { return TEXT("its extent isn't [width, height] in metres"); }
+			Out.Face = FVector2D(Entry.Extent[0], Entry.Extent[1]);
+			return FString();
+		}
+
 		/** Checks one entry; the reason it can't be placed, or empty. */
 		FString Check(const FMuseeStageContext& Stage, const FLightScheduleLuminaire& Entry, FPlacement& Out)
 		{
@@ -158,13 +226,15 @@ namespace Musee::Light
 				if (!Out.Body) { return FString::Printf(TEXT("the stage has no moving body '%s'"), *Entry.Body); }
 			}
 			if (Luminaire->Emitter == FLightLuminaire::EEmitter::Linear && Entry.Length <= 0.0) { return TEXT("a linear type needs the length laid"); }
+			const FString WhyNoFace = FaceOf(Entry, *Luminaire, Out);
+			if (!WhyNoFace.IsEmpty()) { return WhyNoFace; }
 			return RunOf(Entry, *Luminaire, Out);
 		}
 
 		/**
 		 * The luminaire's frame in the stage: where it sits, its light leaving along x towards its aim. A linear luminaire
-		 * lies along the frame's y axis, its run; any other keeps its seat's z up (its seat's y, when it is aimed straight
-		 * along z).
+		 * lies along the frame's y axis, its run; a zone's face has its height along z, out from the axis; any other keeps
+		 * its seat's z up (its seat's y, when it is aimed straight along z).
 		 */
 		FMuseeFrame FrameOf(const FPlacement& Placement)
 		{
@@ -173,6 +243,10 @@ namespace Musee::Light
 			if (Placement.Run.IsSet())
 			{
 				return FMuseeFrame(Seat.OriginMeters, FRotationMatrix::MakeFromXY(Light, Placement.Run.GetValue()).ToQuat());
+			}
+			if (Placement.FaceHeight.IsSet() && FMath::Abs(Light | Placement.FaceHeight.GetValue()) < 1.0 - UE_KINDA_SMALL_NUMBER)
+			{
+				return FMuseeFrame(Seat.OriginMeters, FRotationMatrix::MakeFromXZ(Light, Placement.FaceHeight.GetValue()).ToQuat());
 			}
 			const FVector Up = FMath::Abs(Light | Seat.Rotation.GetAxisZ()) < 1.0 - UE_KINDA_SMALL_NUMBER ? Seat.Rotation.GetAxisZ() : Seat.Rotation.GetAxisY();
 			return FMuseeFrame(Seat.OriginMeters, FRotationMatrix::MakeFromXZ(Light, Up).ToQuat());
@@ -185,8 +259,10 @@ namespace Musee::Light
 			USceneComponent* Parent = Placement.Body ? Placement.Body : Root;
 			const FName Name = MakeUniqueObjectName(Actor, ULightLuminaireComponent::StaticClass(), FName(*(TEXT("Luminaire_") + Entry.Id.Replace(TEXT("."), TEXT("_")))));
 			ULightLuminaireComponent* Component = NewObject<ULightLuminaireComponent>(Actor, Name);
-			Component->Configure(Placement.Type, Placement.Operation, Placement.Follows, Meters(Entry.Length));
+			Component->Configure(Placement.Type, Placement.Operation, Placement.Follows, Meters(Entry.Length), Placement.Face);
 			Component->ComponentTags.Add(FName(FString(LuminaireTagPrefix) + Entry.Id));
+			if (!Entry.Host.IsNone()) { Component->ComponentTags.Add(FName(FString(HostTagPrefix) + Entry.Host.ToString())); }
+			if (!Entry.Surface.IsNone()) { Component->ComponentTags.Add(FName(FString(LitSurfaceTagPrefix) + Entry.Surface.ToString())); }
 			const FTransform InStage = ToEngine(FrameOf(Placement)) * Root->GetComponentTransform();
 			Component->SetupAttachment(Parent);
 			Component->SetRelativeTransform(InStage.GetRelativeTransform(Parent->GetComponentTransform()));

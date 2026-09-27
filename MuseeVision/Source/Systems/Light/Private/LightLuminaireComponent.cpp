@@ -50,20 +50,28 @@ namespace Musee::Light
 			return Meters(FMath::Sqrt(PeakIntensity.Get() / ReachIlluminanceLux()));
 		}
 
-		/** The flux a type gives at full output, laid to a length if it is linear. */
-		double FullFlux(const FLightLuminaire& Type, double LengthMeters)
+		/**
+		 * The flux a type gives at full output: laid to a length if it is linear, over its face if it is areal; an image
+		 * panel's at its peak white, whose face is Lambertian, so its flux is pi times its luminance times its area.
+		 */
+		double FullFlux(const FLightLuminaire& Type, double LengthMeters, const FVector2D& Face)
 		{
-			return Type.Emitter == FLightLuminaire::EEmitter::Linear ? Type.FluxPerMeterLumens * LengthMeters : Type.Flux.Get();
+			switch (Type.Emitter)
+			{
+			case FLightLuminaire::EEmitter::Linear: return Type.FluxPerMeterLumens * LengthMeters;
+			case FLightLuminaire::EEmitter::Image: return LambertianSteradians * Type.PeakLuminanceCandelaPerSquareMeter * Face.X * Face.Y;
+			default: return Type.IsAreal() ? Type.FluxPerSquareMeterLumens * Face.X * Face.Y : Type.Flux.Get();
+			}
 		}
 
 		/**
 		 * What each engine light is set to at full output: a spot's peak intensity where published, else the flux, shared
 		 * equally between a luminaire's lamps.
 		 */
-		double FullSetting(const FLightLuminaire& Type, double LengthMeters)
+		double FullSetting(const FLightLuminaire& Type, double LengthMeters, const FVector2D& Face)
 		{
 			const bool bByIntensity = Type.Emitter == FLightLuminaire::EEmitter::Spot && Type.PeakIntensity.Get() > 0.0;
-			return bByIntensity ? Type.PeakIntensity.Get() : FullFlux(Type, LengthMeters) / FMath::Max(Type.LampCount, 1);
+			return bByIntensity ? Type.PeakIntensity.Get() : FullFlux(Type, LengthMeters, Face) / FMath::Max(Type.LampCount, 1);
 		}
 
 		void ColourAndShadow(ULocalLightComponent& Light, const FLightLuminaire& Type)
@@ -115,15 +123,18 @@ namespace Musee::Light
 			return FVector(0.0, Radius * FMath::Sin(Angle), Radius * FMath::Cos(Angle));
 		}
 
-		ULocalLightComponent* MakeFace(USceneComponent& Mount, const FLightLuminaire& Type, Meters Length)
+		/** A face of light: a linear type's line of its length, a panel of its published face, or the face an areal type lights. */
+		ULocalLightComponent* MakeFace(USceneComponent& Mount, const FLightLuminaire& Type, Meters Length, const FVector2D& AreaFace)
 		{
 			URectLightComponent* Face = NewObject<URectLightComponent>(Mount.GetOwner(), NAME_None, RF_Transient);
 			ColourAndShadow(*Face, Type);
 			const bool bLinear = Type.Emitter == FLightLuminaire::EEmitter::Linear;
-			Face->SourceWidth = static_cast<float>(ToEngine(bLinear ? Length : Type.EmittingWidth));
-			Face->SourceHeight = static_cast<float>(ToEngine(bLinear ? Type.EmittingWidth : Type.EmittingHeight));
+			const FVector2D Size = bLinear ? FVector2D(Length.Get(), Type.EmittingWidth.Get())
+				: Type.IsAreal() ? AreaFace : FVector2D(Type.EmittingWidth.Get(), Type.EmittingHeight.Get());
+			Face->SourceWidth = static_cast<float>(ToEngine(Meters(Size.X)));
+			Face->SourceHeight = static_cast<float>(ToEngine(Meters(Size.Y)));
 			Face->IntensityUnits = ELightUnits::Lumens;
-			Face->AttenuationRadius = static_cast<float>(ToEngine(ReachOf(Candela(FullFlux(Type, Length.Get()) / LambertianSteradians))));
+			Face->AttenuationRadius = static_cast<float>(ToEngine(ReachOf(Candela(FullFlux(Type, Length.Get(), AreaFace) / LambertianSteradians))));
 			return Face;
 		}
 	}
@@ -134,26 +145,30 @@ ULightLuminaireComponent::ULightLuminaireComponent()
 	SetMobility(EComponentMobility::Movable);
 }
 
-void ULightLuminaireComponent::Configure(const FMuseeKey& InType, ELightOperation InOperation, const FMuseeKey& InFollows, Musee::Meters InLength)
+void ULightLuminaireComponent::Configure(const FMuseeKey& InType, ELightOperation InOperation, const FMuseeKey& InFollows, Musee::Meters InLength,
+	const FVector2D& InFaceMeters)
 {
 	LuminaireType = InType;
 	LuminaireOperation = InOperation;
 	FollowedChannel = InFollows;
 	LengthMeters = InLength.Get();
+	FaceMeters = InFaceMeters;
 	DestroyEmitters();
 	if (IsRegistered()) { MakeEmitters(); }
 }
 
 double ULightLuminaireComponent::Level() const
 {
-	return bSwitchedOn ? ChannelLevel : 0.0;
+	const FLightLuminaire* Luminaire = Musee::Light::FindLuminaire(LuminaireType);
+	const double Picture = Luminaire && Luminaire->Emitter == FLightLuminaire::EEmitter::Image ? ImageLevel : 1.0;
+	return bSwitchedOn ? ChannelLevel * Picture : 0.0;
 }
 
 Musee::Lumens ULightLuminaireComponent::EmittedFlux() const
 {
 	const FLightLuminaire* Luminaire = Musee::Light::FindLuminaire(LuminaireType);
 	if (!Luminaire || !Luminaire->bLit || EmitterLights.IsEmpty()) { return Musee::Lumens(0.0); }
-	return Musee::Lumens(Musee::Light::FullFlux(*Luminaire, LengthMeters) * Level());
+	return Musee::Lumens(Musee::Light::FullFlux(*Luminaire, LengthMeters, FaceMeters) * Level());
 }
 
 void ULightLuminaireComponent::OnRegister()
@@ -183,12 +198,13 @@ void ULightLuminaireComponent::MakeEmitters()
 	const FLightLuminaire* Luminaire = Musee::Light::FindLuminaire(LuminaireType);
 	if (!Luminaire || !Luminaire->bLit || !GetOwner()) { return; }
 	if (Luminaire->Emitter == EEmitter::Linear && LengthMeters <= 0.0) { return; }
+	if (Luminaire->IsAreal() && FaceMeters.X * FaceMeters.Y <= 0.0) { return; }
 	const int32 Count = Luminaire->Emitter == EEmitter::Point ? FMath::Max(Luminaire->LampCount, 1) : 1;
 	for (int32 Index = 0; Index < Count; ++Index)
 	{
 		ULocalLightComponent* Light = Luminaire->Emitter == EEmitter::Spot ? Musee::Light::MakeSpot(*this, *Luminaire)
 			: Luminaire->Emitter == EEmitter::Point ? Musee::Light::MakeLamp(*this, *Luminaire)
-			: Musee::Light::MakeFace(*this, *Luminaire, Length());
+			: Musee::Light::MakeFace(*this, *Luminaire, Length(), FaceMeters);
 		Light->SetupAttachment(this);
 		Light->SetRelativeLocation(Musee::Light::LampOffset(*Luminaire, Index));
 		Light->RegisterComponent();
@@ -201,7 +217,7 @@ void ULightLuminaireComponent::Apply()
 {
 	const FLightLuminaire* Luminaire = Musee::Light::FindLuminaire(LuminaireType);
 	if (!Luminaire) { return; }
-	const float Setting = static_cast<float>(Musee::Light::FullSetting(*Luminaire, LengthMeters) * Level());
+	const float Setting = static_cast<float>(Musee::Light::FullSetting(*Luminaire, LengthMeters, FaceMeters) * Level());
 	for (ULocalLightComponent* Light : EmitterLights)
 	{
 		Light->SetIntensity(Setting);
@@ -247,6 +263,12 @@ void ULightLuminaireComponent::HearChannel(const FMuseeChannel& Channel)
 void ULightLuminaireComponent::FollowChannel(float Value)
 {
 	ChannelLevel = FMath::Clamp(static_cast<double>(Value), 0.0, 1.0);
+	Apply();
+}
+
+void ULightLuminaireComponent::ShowImage(double MeanLuminanceShare)
+{
+	ImageLevel = FMath::Clamp(MeanLuminanceShare, 0.0, 1.0);
 	Apply();
 }
 

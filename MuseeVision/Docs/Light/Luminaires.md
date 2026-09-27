@@ -28,11 +28,15 @@ A key names what a luminaire does, then the colour of its light, then what tells
 | `linear-strip` | A bare strip laid in a narrow slot or lip. |
 | `case-linear` | A strip laid in a vitrine's lamp rail or behind its canopy baffle, outside the sealed case. |
 | `downlight` | A luminaire recessed in the ceiling that lights the floor below it. |
-| `laylight` | A field of backlight modules in the plenum over a laylight's glass. |
+| `laylight` | A luminous ceiling in the plenum over a laylight's glass, giving its light per square metre over the face the room lays it on. |
 | `edge-lit-glass` | LED lines lighting etched panes through their edges, so the panes' faces glow. |
 | `step-light` | A small light set flush in a kerb, step or stone, its source hidden, grazing the walk. |
+| `pinspot` | A miniature spotlight of a very narrow beam, for one small object. |
+| `uplight` | A small can standing on a ledge, its lamp's beam thrown up onto the vault. |
 | `lantern` | The lamp at the centre of a lantern; the lantern's frame and silk are the room's own pieces. |
 | `electrolier` | The lamps of a hanging fitting, one in each globe on its arms' ring; the body and globes are the room's own pieces. |
+| `pendant` | The lamp at the centre of a hanging globe; the globe, its gallery and rod are the room's own pieces. |
+| `light-field-panel` | An image panel whose light is the picture it shows, up to its peak white; the room gives the face it covers. |
 
 A **lamp luminaire** (a lantern, an electrolier) is its bare lamps. What surrounds them, a lantern's silk or an
 electrolier's cased opal globes, is a piece the room draws in Matter's material, and the light reaches the room through
@@ -41,8 +45,8 @@ stand on; Light lights one lamp in each globe and shares the fitting's flux equa
 
 ## The catalogue
 
-Twenty-four luminaires from ERCO, iGuzzini, Zumtobel, Edison Price Lighting, Hogarth Lighting, Lumistrips, FX
-Luminaire, Segula, Ledstore and Spanlite. Every track spotlight
+Twenty-eight luminaires from ERCO, iGuzzini, Zumtobel, Edison Price Lighting, Hogarth Lighting, Lumistrips, FX
+Luminaire, Segula, Ledstore, Spanlite, Color Kinetics and Light Field Lab. Every track spotlight
 and wallwasher has a colour rendering index of 95 or more, at both 3000 K and 4000 K. The flux is the luminaire's own
 output (the light that leaves the housing), not the LED's.
 
@@ -67,9 +71,13 @@ output (the light that leaves the housing), not the LED's.
 | `lantern.2200k` | Segula Vintage Line LED candle, E14, frosted | 50200 | 200 lm | all round | 2200 K | 90 | 3.5 W | circulation | complete |
 | `electrolier.3000k` | six Ledstore LED filament candles, E14 | E14-clear-HIGH-CRI-3000 | 6 × 260 lm | all round, ring r 0.505 | 3000 K | 95 | 24 W | circulation | complete |
 | `electrolier.3000k.four-light` | four of the same lamps (Albion's porch) | E14-clear-HIGH-CRI-3000 | 4 × 260 lm | all round, ring r 0.505 | 3000 K | 95 | 16 W | circulation | complete |
-| `step-light.2700k` | FX Luminaire RH, 3 LED, RB faceplate, bronze | RH-3LED-W-RB-BZ | 86 lm (49 cd peak) | diffused down | 2700 K | 84 | 4.0 W | circulation | complete |
+| `step-light.2700k` | FX Luminaire RH, 3 LED, RB faceplate, bronze | RH-3LED-W-RB-BZ | 86 lm (49 cd peak) | the Gaussian beam those fix, 75.6° | 2700 K | 84 | 4.0 W | circulation | complete |
 | `edge-lit-glass.3000k` | Spanlite Edge Lit Glass | made to order | not published | the etched face | 3000 K | not published | not published | circulation | incomplete |
-| `luminous-ceiling.3000k` | Lumistrips BackMatrix-49, configured | backmatrix_3080 | not published at CRI 95 | behind the laylight | 3000 K | 95 | not published | gallery | incomplete |
+| `luminous-ceiling.3000k` | Color Kinetics OneSpace gen2, Tunable White at 3000 K | OneSpace gen2 | 2574 lm/m² | a Lambertian plane | 3000 K | 95 | 39.5–41.1 W/m² | gallery | complete |
+| `pinspot.3000k` | ERCO Parscan 48V, size M, narrow spot | not found | not read at 3000 K | narrow spot | 3000 K | 97 | not read | gallery | incomplete |
+| `uplight.3000k` | Ledstore GU10 reflector lamp in the room's can | GU10-6W-3000 | 500 lm | 40° | 3000 K | 98 | 6 W | circulation | complete |
+| `pendant-globe.3000k` | Ledstore E27 opal lamp in the room's cased opal globe | E27-classic-milky-10W-3000 | 596 lm | all round | 3000 K | 97 | 10 W | circulation | complete |
+| `light-field-panel.d65` | Light Field Lab SolidLight | made to order | 200 cd/m² at peak white | its picture | 6504 K | not published | not published | gallery | complete |
 | `downlight.3000k.31deg` | iGuzzini Laser fixed round, Super Comfort | RA18 | 1944.8 lm | 31° | 3000 K | 92 | 17 W | circulation | complete |
 | `downlight.4000k.31deg` | iGuzzini Laser fixed round, Super Comfort | RA24 | 2068 lm | 31° | 4000 K | 92 | 17 W | circulation | complete |
 
@@ -82,8 +90,13 @@ The unit of every number is in its field name, the way the museum writes units e
 - `luminousFluxLumens` is the luminaire's flux. `fluxBasis` says what kind of number it is: `luminaire` (measured
   output of the whole luminaire), `per-metre` (a linear luminaire), or `nominal-package` (the lumen class in the
   maker's ordering code). `ledFluxLumens` is the bare LED's flux, kept only to show the optic's losses.
+- `luminousFluxLumensPerSquareMeter` is an areal luminaire's flux over each square metre of its face (a luminous
+  ceiling), and `peakLuminanceCandelaPerSquareMeter` an image panel's luminance at its peak white. The room gives the
+  face each is laid over, as an `extent` or a `zone` in its Lighting.json.
 - `beamAngleDegrees` is the full angle at which the intensity falls to half its peak. Framers and wallwashers have no
-  single beam angle: their light is shaped by shutters or an asymmetric lens, described in `beamName`.
+  single beam angle: their light is shaped by shutters or an asymmetric lens, described in `beamName`. Where a maker
+  publishes a flux and a peak intensity but no beam angle (the step light), Light takes the Gaussian beam those two fix
+  together: the one whose intensity, integrated over the hemisphere in front of it, carries that flux under that peak.
 - `peakCandela` is the luminous intensity on the beam's axis. It is the number that decides the illuminance a spot
   lays on a work: for a surface at distance *d* metres whose normal makes angle *θ* with the beam, the illuminance is
   `peakCandela × cos θ / d²` lux.

@@ -4,7 +4,7 @@
   "luminaires": [
     {
       "id": "image",
-      "type": "gap.light-field-panel.d65",
+      "type": "light-field-panel.d65",
       "mount": "sphere.image.mount",
       "aim": [
         0.0,

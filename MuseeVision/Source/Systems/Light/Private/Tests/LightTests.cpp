@@ -51,7 +51,7 @@ namespace Musee::Light::Tests
 	IMPLEMENT_SIMPLE_AUTOMATION_TEST(FLightCatalogueTest, "Musee.Light.Catalogue", Flags)
 	bool FLightCatalogueTest::RunTest(const FString& Parameters)
 	{
-		TestEqual(TEXT("Twenty-four luminaires in the catalogue"), LuminaireKeys().Num(), 24);
+		TestEqual(TEXT("Twenty-eight luminaires in the catalogue"), LuminaireKeys().Num(), 28);
 		const FLightLuminaire* Spot = FindLuminaire(FMuseeKey(TEXTVIEW("track-spot.3000k.20deg")));
 		if (TestNotNull(TEXT("The 20 degree spot"), Spot))
 		{
@@ -91,9 +91,26 @@ namespace Musee::Light::Tests
 		const FLightLuminaire* Porch = FindLuminaire(FMuseeKey(TEXTVIEW("electrolier.3000k.four-light")));
 		TestTrue(TEXT("and the porch's, four"), Porch && Porch->bLit && Porch->LampCount == 4);
 		const FLightLuminaire* Step = FindLuminaire(FMuseeKey(TEXTVIEW("step-light.2700k")));
-		TestTrue(TEXT("A step light's louvred light waits for its photometric file"), Step && !Step->bLit);
+		if (TestNotNull(TEXT("The step light"), Step))
+		{
+			TestTrue(TEXT("is lit as a beam, at its published 49 cd peak"), Step->bLit && Step->Emitter == FLightLuminaire::EEmitter::Spot
+				&& Step->PeakIntensity.Get() == 49.0);
+			TestTrue(TEXT("its beam the Gaussian its 86 lm and 49 cd fix, about 76 degrees"), Step->BeamAngle.Get() > 74.0 && Step->BeamAngle.Get() < 77.0);
+		}
 		const FLightLuminaire* Ceiling = FindLuminaire(FMuseeKey(TEXTVIEW("luminous-ceiling.3000k")));
-		TestTrue(TEXT("A record without its flux stands unlit"), Ceiling && !Ceiling->bLit && !Ceiling->WhyUnlit.IsEmpty());
+		TestTrue(TEXT("A luminous ceiling is lit over the face the room gives it, at 2574 lm a square metre"), Ceiling && Ceiling->bLit && Ceiling->IsAreal()
+			&& Ceiling->FluxPerSquareMeterLumens == 2574.0);
+		const FLightLuminaire* Pendant = FindLuminaire(FMuseeKey(TEXTVIEW("pendant-globe.3000k")));
+		TestTrue(TEXT("A globe pendant is its one lamp of 596 lm"), Pendant && Pendant->bLit && Pendant->Emitter == FLightLuminaire::EEmitter::Point
+			&& Pendant->LampCount == 1 && Pendant->Flux.Get() == 596.0);
+		const FLightLuminaire* Uplight = FindLuminaire(FMuseeKey(TEXTVIEW("uplight.3000k")));
+		TestTrue(TEXT("An uplight is a 40 degree beam of 500 lm"), Uplight && Uplight->bLit && Uplight->Emitter == FLightLuminaire::EEmitter::Spot
+			&& Uplight->BeamAngle.Get() == 40.0 && Uplight->Flux.Get() == 500.0);
+		const FLightLuminaire* Panel = FindLuminaire(FMuseeKey(TEXTVIEW("light-field-panel.d65")));
+		TestTrue(TEXT("An image panel is lit by its picture, up to 200 cd/m2 at D65"), Panel && Panel->bLit && Panel->Emitter == FLightLuminaire::EEmitter::Image
+			&& Panel->IsAreal() && Panel->PeakLuminanceCandelaPerSquareMeter == 200.0 && Panel->ColourTemperature.Get() == 6504.0);
+		const FLightLuminaire* Pinspot = FindLuminaire(FMuseeKey(TEXTVIEW("pinspot.3000k")));
+		TestTrue(TEXT("A pinspot whose data sheet isn't read stands unlit, saying why"), Pinspot && !Pinspot->bLit && !Pinspot->WhyUnlit.IsEmpty());
 		const FLightLuminaire* Glass = FindLuminaire(FMuseeKey(TEXTVIEW("edge-lit-glass.3000k")));
 		TestTrue(TEXT("An edge-lit pane lets its light out as a face, once its flux is published"), Glass && !Glass->bLit
 			&& Glass->Emitter == FLightLuminaire::EEmitter::Rect);
@@ -166,6 +183,25 @@ namespace Musee::Light::Tests
 		}
 		TestTrue(TEXT("It emits the fitting's flux"), FMath::IsNearlyEqual(Electrolier->EmittedFlux().Get(), 1560.0));
 
+		ULightLuminaireComponent* Laylight = NewObject<ULightLuminaireComponent>(Actor, TEXT("Laylight"));
+		Laylight->Configure(FMuseeKey(TEXTVIEW("luminous-ceiling.3000k")), ELightOperation::Always, FMuseeKey(), Meters(0.0), FVector2D(2.0, 1.5));
+		Laylight->SetupAttachment(Actor->GetRootComponent());
+		Laylight->RegisterComponent();
+		const URectLightComponent* Plane = Cast<URectLightComponent>(Laylight->Emitter());
+		if (TestNotNull(TEXT("A luminous ceiling lights as a rect light"), Plane))
+		{
+			TestTrue(TEXT("the size of the face it is laid over"), FMath::IsNearlyEqual(Plane->SourceWidth, 200.0f) && FMath::IsNearlyEqual(Plane->SourceHeight, 150.0f));
+			TestTrue(TEXT("at its flux per square metre over that face"), FMath::IsNearlyEqual(Plane->Intensity, 2574.0f * 3.0f, 0.1f));
+		}
+		ULightLuminaireComponent* Wall = NewObject<ULightLuminaireComponent>(Actor, TEXT("Wall"));
+		Wall->Configure(FMuseeKey(TEXTVIEW("light-field-panel.d65")), ELightOperation::Always, FMuseeKey(), Meters(0.0), FVector2D(2.8, 2.8));
+		Wall->SetupAttachment(Actor->GetRootComponent());
+		Wall->RegisterComponent();
+		TestEqual(TEXT("An image panel at rest shows its black level, and gives no light"), Wall->EmittedFlux().Get(), 0.0);
+		Wall->ShowImage(0.25);
+		TestTrue(TEXT("Showing a picture of a quarter of its peak white, it gives pi L A of that picture"),
+			FMath::IsNearlyEqual(Wall->EmittedFlux().Get(), UE_DOUBLE_PI * 200.0 * 2.8 * 2.8 * 0.25, 1e-6));
+
 		FTimeMoment Day;
 		Day.bSunUp = true;
 		Lamp->FollowMoment(Day);
@@ -191,7 +227,16 @@ namespace Musee::Light::Tests
 				{ "id": "unaimed", "type": "track-spot.3000k.20deg", "point": [0, 0, 3], "operation": "always" },
 				{ "id": "cove", "type": "linear-strip.2700k.slim", "point": [-3.848, -0.29, 0.39], "aim": [-3.474, -0.182, 0.38], "along": [0.2757, -0.9612, 0.0], "operation": "always", "length": 0.594 },
 				{ "id": "sideways", "type": "linear-strip.2700k.slim", "point": [-3.9, 0, 0.39], "aim": [-3.5, 0, 0.39], "operation": "always", "length": 0.594 },
-				{ "id": "spot.laid", "type": "track-spot.3000k.20deg", "point": [0, 0, 3], "aim": [0, 0, 0], "along": [1, 0, 0], "operation": "always" } ] })");
+				{ "id": "spot.laid", "type": "track-spot.3000k.20deg", "point": [0, 0, 3], "aim": [0, 0, 0], "along": [1, 0, 0], "operation": "always" },
+				{ "id": "laylight", "type": "luminous-ceiling.3000k", "point": [2, 0, 5], "aim": [2, 0, 0], "operation": "always", "extent": [2.246, 2.28] },
+				{ "id": "canopy", "type": "luminous-ceiling.3000k", "point": [0, -6, 9], "aim": [0, -6, 0], "operation": "always", "zone": { "r": [3.6, 8.5], "bearing": [345, 15] } },
+				{ "id": "eye", "type": "luminous-ceiling.3000k", "point": [0, 0, 5.1], "aim": [0, 0, 0], "operation": "always", "zone": { "r": [0, 1.2], "bearing": [0, 360] } },
+				{ "id": "bare", "type": "luminous-ceiling.3000k", "point": [2, 0, 5], "aim": [2, 0, 0], "operation": "always" },
+				{ "id": "astray", "type": "luminous-ceiling.3000k", "point": [0, 6, 9], "aim": [0, 6, 0], "operation": "always", "zone": { "r": [3.6, 8.5], "bearing": [345, 15] } },
+				{ "id": "spot.spread", "type": "track-spot.3000k.20deg", "point": [0, 0, 3], "aim": [0, 0, 0], "operation": "always", "extent": [1, 1] },
+				{ "id": "step", "type": "step-light.2700k", "point": [6.2, -28.1, 0.14], "aim": [6.2, -27.6, 0.1], "operation": "dusk", "host": "test.bridge.kerb", "surface": "test.garden.path" } ],
+			"targets": [ { "surface": "test.floor", "class": "circulation", "lux": [50, null], "source": "UseTargets", "when": { "mechanism": "test.car", "stop": "floor" } } ],
+			"design": [ { "brighter": "test.canvas", "darker": "test.wall", "ratio": [1.5, null] } ] })");
 		FFileHelper::SaveStringToFile(Schedule, *(Folder / TEXT("Lighting.json")));
 
 		const FLightTestWorld World;
@@ -210,11 +255,11 @@ namespace Musee::Light::Tests
 		TArray<FMuseeFinding> Findings;
 		DressStage(Context, Findings);
 
-		TestEqual(TEXT("An unknown weather place and type, a line without length, a mount with a point, a point without aim, a line along its own light and a spot laid along a line are findings"),
-			Findings.Num(), 7);
+		TestEqual(TEXT("An unknown weather place and type, a line without length, a mount with a point, a point without aim, a line along its own light, a spot laid along a line, a ceiling without its face or outside its zone and a spot over an extent are findings"),
+			Findings.Num(), 10);
 		TArray<ULightLuminaireComponent*> Placed;
 		Stage->GetComponents(Placed);
-		TestEqual(TEXT("Four luminaires are placed"), Placed.Num(), 4);
+		TestEqual(TEXT("Eight luminaires are placed"), Placed.Num(), 8);
 		const auto Placement = [&Placed](const TCHAR* Id) -> ULightLuminaireComponent*
 		{
 			const FName Tag(FString(LuminaireTagPrefix) + Id);
@@ -249,6 +294,29 @@ namespace Musee::Light::Tests
 			const FVector Run = Cove->GetRightVector();
 			TestTrue(TEXT("and runs along the tangent it is laid in, square to its light"), FMath::Abs(Run | Light) < 1e-4
 				&& (Run | FVector(0.2757, -0.9612, 0.0).GetSafeNormal()) > 0.999);
+		}
+		if (ULightLuminaireComponent* Laylight = Placement(TEXT("laylight")); TestNotNull(TEXT("A laylight, over its extent"), Laylight))
+		{
+			TestTrue(TEXT("the extent's width along the stage's x, its height along y"), Laylight->Face().Equals(FVector2D(2.246, 2.28))
+				&& FMath::IsNearlyEqual(FMath::Abs(Laylight->GetRightVector().X), 1.0, 1e-4) && FMath::IsNearlyEqual(FMath::Abs(Laylight->GetUpVector().Y), 1.0, 1e-4));
+		}
+		if (ULightLuminaireComponent* Canopy = Placement(TEXT("canopy")); TestNotNull(TEXT("A canopy zone"), Canopy))
+		{
+			const double Area = 0.5 * FMath::DegreesToRadians(30.0) * (8.5 * 8.5 - 3.6 * 3.6);
+			TestTrue(TEXT("over a face of the zone's own area"), FMath::IsNearlyEqual(Canopy->Face().X * Canopy->Face().Y, Area, 1e-6));
+			TestTrue(TEXT("as wide as its middle arc, its height running out from the axis through the zone's middle, north"),
+				FMath::IsNearlyEqual(Canopy->Face().X, FMath::DegreesToRadians(30.0) * 6.05, 1e-6) && Canopy->GetUpVector().Equals(FVector(0.0, -1.0, 0.0), 1e-4));
+		}
+		if (ULightLuminaireComponent* Eye = Placement(TEXT("eye")); TestNotNull(TEXT("A disc, a zone all round"), Eye))
+		{
+			TestTrue(TEXT("over a face of the disc's area, as wide as the disc"), FMath::IsNearlyEqual(Eye->Face().X * Eye->Face().Y, UE_DOUBLE_PI * 1.44, 1e-6)
+				&& FMath::IsNearlyEqual(Eye->Face().X, 2.4, 1e-6));
+		}
+		if (ULightLuminaireComponent* Step = Placement(TEXT("step")); TestNotNull(TEXT("A step light"), Step))
+		{
+			TestTrue(TEXT("is tagged with the kerb it is set in and the walk it lights"), Step->ComponentHasTag(TEXT("musee.host:test.bridge.kerb"))
+				&& Step->ComponentHasTag(TEXT("musee.lights:test.garden.path")));
+			TestTrue(TEXT("and lights as a spot"), Cast<USpotLightComponent>(Step->Emitter()) != nullptr);
 		}
 		IFileManager::Get().DeleteDirectory(*FPaths::GetPath(Folder), false, true);
 		return true;

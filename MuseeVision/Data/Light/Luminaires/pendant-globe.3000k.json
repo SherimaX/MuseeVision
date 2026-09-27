@@ -1,0 +1,56 @@
+{
+  "key": "pendant-globe.3000k",
+  "kind": "pendant",
+  "controlClass": "circulation",
+  "evidenceState": "complete",
+  "product": {
+    "manufacturer": "Ledstore",
+    "family": "LED E27 bulb, Classic, milky, high CRI",
+    "description": "the lamp of a cased opal globe pendant: one opal LED lamp, E27, 3000 K, CRI 97, dimmable, at the centre of the globe; the globe (0.44 or 0.34 across), its bronze gallery and the rod are the stage's own pieces, in Matter's cased opal glass and bronze",
+    "code": "E27-classic-milky-10W-3000",
+    "codeBasis": "the maker's product code of the lamp",
+    "status": "listed on the maker's site (on back order when read)"
+  },
+  "light": {
+    "luminousFluxLumens": 596,
+    "fluxBasis": "lamp: one bare lamp; the globe's cased opal, drawn by the stage, passes its light on",
+    "beamName": "an opal lamp lighting all round, at the centre of its globe",
+    "cctKelvin": 3000,
+    "cri": 97,
+    "criBasis": "published value"
+  },
+  "electrical": {
+    "systemPowerWatts": 10,
+    "supplyVolts": 230,
+    "control": "phase dimmable: the maker names the Schneider 315 RC regulator and the VaLO wireless series"
+  },
+  "housing": {
+    "diameterMillimeters": 60,
+    "lengthMillimeters": 106,
+    "dimensionBasis": "the lamp, 60 x 106 mm, as the maker lists it",
+    "materials": "opal white glass bulb, E27 cap, inside a cased opal globe",
+    "mounting": "E27 lampholder in the globe's gallery on the pendant rod"
+  },
+  "photometricFile": {
+    "url": null,
+    "note": "A lamp has no luminaire photometry; its light leaves all round it and the cased opal globe is Matter's glass."
+  },
+  "sources": [
+    {
+      "id": "maker-page",
+      "title": "Ledstore, LED E27 dimmable bulb, CLASSIC, milky, high CRI97, 10W, 3000K (596 lm, 60 x 106 mm, 30 000 h)",
+      "url": "https://ledstore.pro/product/led-e27-dimmable-bulb-classic-milky-high-cri97-10w-3000k",
+      "readOn": "2026-09-27",
+      "covers": [
+        "product",
+        "light",
+        "electrical",
+        "housing"
+      ]
+    }
+  ],
+  "unverified": [
+    "The lamp's distribution is not published; an opal lamp lights all round, as the record takes it.",
+    "The pendant itself (globe, gallery, rod) is drawn by the stage after the Reserve's sheet; no maker of the whole fitting was chosen."
+  ]
+}
