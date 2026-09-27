@@ -148,7 +148,7 @@ Ring and dial meet with 10 mm clear (r 6.99 against 7.00).
   course; cap 0.26, baseline r 8.53 (tops towards the dial, cap line r 8.27); centred on φ 90° (south), read from the
   ring facing the dial, running west to east; tracking 0.16 cap, word gap 0.6 cap; 8 mm proud, 2.5 mm bevel. Each "·"
   is a gap of 1.15 cap holding a triangular stop `rotunda.floor.motto.stop` (point down, ±0.12 cap at 0.60 cap height,
-  point at 0.36 cap, apex 8 mm high). Glyphs: as built Centaur capitals baked in `SunClockGlyphs.h` (licence open, §13).
+  point at 0.36 cap, apex 8 mm high). Glyphs: port the as-built outlines baked from Centaur (installed at C:/Windows/Fonts/CENTAUR.TTF) in `SunClockGlyphs.h`; no download. A public release switches to an open-licence face.
 
 ### 3.2 Walls: the drum
 - **Section** 1.20: inner face r 10.00 to outer face r 11.20; travertine core, 30 mm Crema Marfil inside.
@@ -563,8 +563,7 @@ entablature, 12 pilasters, door with archivolt, soffit coffers, rim, pendant); M
 channels; the shaft (sleeve, pocket, masonry, port with lintel and tympanum, 8 bores with plain rams); the landing and
 rosette; the stair (treads, nosings, string, soffit); the balustrade (fixed part with bars, balusters, handrail; the
 retracting panels in their housings; the wall rail; the newel); the luminaires of §4 and daylight through the eye; the
-four casts; acoustics and footfalls. Numerals and motto only if the glyph licence is cleared tonight (otherwise the
-hour lines alone read the hour). If Form's Laid isn't ready, the Crema Marfil faces are solids of their visible stone
+four casts; acoustics and footfalls. Numerals and motto from the ported `SunClockGlyphs.h` outlines. If Form's Laid isn't ready, the Crema Marfil faces are solids of their visible stone
 and Form.WithinStock findings are listed, not waived.
 
 **Waits for polish:** the exterior dress (§3.10); the balustrade's rings and bosses (plain balusters full height
@@ -572,9 +571,9 @@ tonight); the drum door's keystone and imposts; the stair-side port dressings; t
 foot; the drum's steel carcass; the lift's voice and rain on the eye; falls for the eye's glass; path-traced daylight.
 
 ## 13. Palette keys to confirm and catalogue gaps
-**Palette keys** (one `todo.` key; roles guessed or workings outside `workingsByEra`):
-- `todo.steel.hard-chrome` → hard-chromed carbon-steel hydraulic ram rods (hidden in their bores): the palette has no
-  plain steel.
+**Palette keys** (roles guessed or workings outside `workingsByEra`):
+- `steel.hard-chrome` (ruled by the Architect; Matter adds it) → hard-chromed carbon-steel hydraulic ram rods (hidden
+  in their bores).
 - `stone.crema-marfil` **two selections** (Story: "two selections for the two tones"): A = the paler ground with sparse
   crackle, B = the warmer ground with fuller crackle; which is which is guessed. Used also for the **door archivolts**
   (as built plaster; roles name only niche surrounds and sills), the **stair soffit, string, landing, pocket and port
@@ -608,5 +607,5 @@ drafts). This sheet uses width × crown; `hall-of-light.west`, `chenghuai.south`
 sit within it.
 (d) Story choices over the as-built: pearl lattice (as built dark), lead dome (as built stone), patinated node (as built
 gilt), gilt meridian 60 mm (as built none: "No meridian", `SunClockDial.cpp:13`). Kept per D-018 and the board.
-(e) **Glyph licence**: the numerals and motto are Centaur (Monotype) outlines; an OFL face (e.g. Cinzel) needs a download
-the owner must approve.
+(e) **Glyphs** (ruled): port the as-built Centaur outlines from `SunClockGlyphs.h` (Centaur is installed on this PC); a
+public release would switch to an open-licence face.

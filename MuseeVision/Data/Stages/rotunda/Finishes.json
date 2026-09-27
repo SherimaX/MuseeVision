@@ -283,7 +283,7 @@
     },
     {
       "surface": "rotunda.sun-clock.ram",
-      "material": "todo.steel.hard-chrome",
+      "material": "steel.hard-chrome",
       "working": "hard-chromed",
       "history": "new",
       "note": "Eight telescopic ram stages in their bores, hidden."

@@ -6,6 +6,8 @@ CAT = r"C:\mv\wt\r-light\MuseeVision\Data\Light\Luminaires"
 USE = r"C:\mv\wt\r-light\MuseeVision\Data\Light\UseTargets.json"
 CARE = r"C:\mv\wt\r-light\MuseeVision\Data\Art\Care.json"
 PALETTE = "C:/Users/anan9/AppData/Local/Temp/claude/C--Users-anan9-Desktop-Projects-Musee-Vision/fe83b0c0-89f0-4a7a-aec6-d7928054970e/scratchpad/Palette.json"
+# keys the Architect has ruled in, which Matter will add to the palette
+RULED_KEYS = {"steel.hard-chrome"}
 COLL = r"C:\Users\anan9\Desktop\Projects\Musee Vision\assets\collection.json"
 
 HEADINGS = ["Identity and placement", "Ports", "Pieces by trade", "Light", "Time and weather", "Motion",
@@ -83,7 +85,7 @@ def main(room):
             if bad in raw:
                 errs.append(f"{name} contains '{bad}'")
     surfaces = set()
-    palette = {e["key"] for e in load(PALETTE)["entries"]}
+    palette = {e["key"] for e in load(PALETTE)["entries"]} | RULED_KEYS
     if "Finishes.json" not in data:
         errs.append("Finishes.json missing")
     else:
