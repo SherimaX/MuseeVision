@@ -17,17 +17,7 @@
       "unit": "CIELAB",
       "grade": "derived",
       "source": "Zhao Ren et al. (2026) 'The mechanisms of color, opacifying, and cracks in celadon glazes from the Southern Song Guan Kiln', npj Heritage Science 14, https://www.nature.com/articles/s40494-026-02383-0 (text: L* 'at 60 ± 10', a* -8.49 to -2.25, b* 2.56 to 8.99, all C* below 10; six sherds G-1 to G-6; X-Rite Ci7800, 2 mm aperture, mean of three readings)",
-      "note": "Checked: the text gives these ranges and the hue groups (G-4 and G-5 yellow, from more Fe3+; G-1 and G-6 green; G-2 and G-3 tending blue). The value is the midpoint of all six sherds, yellow ones included, so it is greener and yellower than the grey-blue Guan the record names. The claim that a grey-blue sherd sits near b* 3 is a guess: the per-sherd numbers are only in Fig. 3a and were not read. The paper does not state the illuminant or observer, so D65/2 deg is an assumption.",
-      "min": [
-        50,
-        -8.49,
-        2.56
-      ],
-      "max": [
-        70,
-        -2.25,
-        8.99
-      ],
+      "note": "Checked: the text gives these ranges and the hue groups (G-4 and G-5 yellow, from more Fe3+; G-1 and G-6 green; G-2 and G-3 tending blue). The value is the midpoint of all six sherds, yellow ones included, so it is greener and yellower than the grey-blue Guan the record names. The claim that a grey-blue sherd sits near b* 3 is a guess: the per-sherd numbers are only in Fig. 3a and were not read. The paper does not state the illuminant or observer, so D65/2 deg is an assumption. The source's range runs from [50, -8.49, 2.56] to [70, -2.25, 8.99].",
       "derivation": "L* = 60, the stated centre (60 +/- 10); a* = (-8.49 + -2.25)/2 = -5.37; b* = (2.56 + 8.99)/2 = 5.78"
     },
     "refractiveIndex": {

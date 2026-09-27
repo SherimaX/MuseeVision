@@ -17,17 +17,7 @@
       "unit": "CIELAB",
       "grade": "measured",
       "source": "Correlation between Colour Traits and Intrinsic Quality of Dalbergiae Odoriferae Lignum, Molecules 28(22), 7635 (2023), https://doi.org/10.3390/molecules28227635 (read at https://pmc.ncbi.nlm.nih.gov/articles/PMC10674628/), Table 1",
-      "note": "Checked against the paper. Mean of 54 qualified D. odorifera heartwood samples (60 collected, Hainan, Guangdong and elsewhere): L* 44.59 ± 3.29 (38.98-52.91), a* 9.71 ± 1.65 (5.93-12.84), b* 9.44 ± 2.93 (3.83-16.88). HunterLab UltraScan VIS, D65, SCE. The paper does not state the observer, so the record's 'D65, 2 deg' space label is an assumption for this value. Measured on 40-mesh POWDER of medicinal-grade heartwood (降香), not on a planed or oiled face. It is the same species and the same tissue, but powder scatters more than a solid finished face, which will look darker and more saturated. Treat it as the species' measured anchor, not the colour of the finished table. It replaces the photograph-read (48, 14, 30): that b* of 30 is far outside the measured range of 3.8-16.9.",
-      "min": [
-        38.98,
-        5.93,
-        3.83
-      ],
-      "max": [
-        52.91,
-        12.84,
-        16.88
-      ]
+      "note": "Checked against the paper. Mean of 54 qualified D. odorifera heartwood samples (60 collected, Hainan, Guangdong and elsewhere): L* 44.59 ± 3.29 (38.98-52.91), a* 9.71 ± 1.65 (5.93-12.84), b* 9.44 ± 2.93 (3.83-16.88). HunterLab UltraScan VIS, D65, SCE. The paper does not state the observer, so the record's 'D65, 2 deg' space label is an assumption for this value. Measured on 40-mesh POWDER of medicinal-grade heartwood (降香), not on a planed or oiled face. It is the same species and the same tissue, but powder scatters more than a solid finished face, which will look darker and more saturated. Treat it as the species' measured anchor, not the colour of the finished table. It replaces the photograph-read (48, 14, 30): that b* of 30 is far outside the measured range of 3.8-16.9. The source's range runs from [38.98, 5.93, 3.83] to [52.91, 12.84, 16.88]."
     },
     "refractiveIndex": {
       "value": 1.55,

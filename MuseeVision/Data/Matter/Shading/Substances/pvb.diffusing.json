@@ -16,8 +16,7 @@
       "unit": "1",
       "grade": "derived",
       "source": "Eastman, Vanceva White Collection (Arctic Snow 65 % VLT), https://saflex-vanceva.eastman.com/en/architectural/interlayer-performance/vanceva-colors/vanceva-white-collection-samples-kit; soda-lime n 1.525 (Rubin 1985, via https://refractiveindex.info/?shelf=glass&book=soda-lime&page=Rubin-clear)",
-      "note": "Accepted as an UPPER BOUND, not a measured reflectance; neither maker's page gives a reflectance value. The old 0.7 together with T 0.65 would send out more light than arrives. Absorption by the white pigment and the laminate's second glass face would both lower it. It must be recomputed if the transmittance changes (T 0.267 for four layers gives at most 0.69).",
-      "max": 0.31,
+      "note": "Accepted as an UPPER BOUND, not a measured reflectance; neither maker's page gives a reflectance value. The old 0.7 together with T 0.65 would send out more light than arrives. Absorption by the white pigment and the laminate's second glass face would both lower it. It must be recomputed if the transmittance changes (T 0.267 for four layers gives at most 0.69). The source's range runs to 0.31.",
       "derivation": "Energy balance with absorption neglected: R_diffuse <= 1 - F0 - T = 1 - 0.043 - 0.65 = 0.307, with F0 = ((1.525 - 1)/(1.525 + 1))^2 = 0.0432 for the glass face"
     },
     "refractiveIndex": {
