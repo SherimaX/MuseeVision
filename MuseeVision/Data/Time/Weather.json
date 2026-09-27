@@ -7,7 +7,9 @@
   ],
   "live": {
     "validMinutes": 90,
-    "notes": "The feed's current conditions are refreshed every 15 minutes; a reading stands for the weather up to 90 minutes either side of its instant (six missed refreshes) before the generator takes over. A clock set far from the real hour therefore shows generated weather of its own hour."
+    "refreshMinutes": 15,
+    "endpoint": "https://api.open-meteo.com/v1/forecast",
+    "notes": "The feed's current conditions are refreshed every 15 minutes; a reading stands for the weather up to 90 minutes either side of its instant (six missed refreshes) before the generator takes over. A clock set far from the real hour therefore shows generated weather of its own hour. The feed is asked every 15 minutes, for every place in one request (Open-Meteo forecast API, current conditions, https://open-meteo.com/en/docs), and its answer is kept in Saved/Musee/Time, so a restart without a network keeps the last reading while it is current."
   },
   "smoothing": {
     "temperatureSeconds": 300,
@@ -45,5 +47,14 @@
     "snowNotes": "Precipitation turns from snow to rain across a 2 degree band of air temperature, centred on the 1.0 C at which rain and snow are equally likely over Northern Hemisphere land (Jennings et al., Nature Communications 9, 1148, 2018).",
     "windDirectionSpreadDegrees": 45,
     "windNotes": "A day's wind direction wanders about the month's prevailing direction with a standard deviation of 45 degrees, half a quadrant: the normals give only the prevailing quadrant."
+  },
+  "surface": {
+    "wetFilmMillimeters": 1.27,
+    "fullSnowCoverMeters": 0.10,
+    "notes": "Wetness is the water an exposed impervious surface holds, read from the ground-history record with the shortest memory (an hour), as a fraction of the surface's depression storage, 0.05 in (1.27 mm), the lower bound SWMM gives for impervious surfaces. Snow cover is the fraction of open ground under snow: the lying depth over 0.10 m, the depth at which CLASS takes the ground as fully covered.",
+    "sources": [
+      { "values": "wetFilmMillimeters", "source": "L. A. Rossman, Storm Water Management Model Reference Manual, Volume I: Hydrology, US EPA (2015), EPA/600/R-15/162A, table 3-5: depression storage of impervious surfaces 0.05 to 0.10 in" },
+      { "values": "fullSnowCoverMeters", "source": "D. L. Verseghy, CLASS: a Canadian land surface scheme for GCMs, International Journal of Climatology 11 (1991): fractional snow cover as the depth over a limiting depth of 0.10 m" }
+    ]
   }
 }
