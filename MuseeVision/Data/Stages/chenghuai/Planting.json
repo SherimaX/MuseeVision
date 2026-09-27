@@ -348,6 +348,32 @@
         "material": "accent.site-geology",
         "history": "weathered",
         "working": "topsoil.bare"
+      },
+      "height": 4.6,
+      "crownCentre": 3.3,
+      "crownRadii": [
+        1.7,
+        1.2
+      ],
+      "outline": {
+        "polygon": [
+          [
+            -13.66,
+            -20.64
+          ],
+          [
+            -10.74,
+            -20.64
+          ],
+          [
+            -10.74,
+            -24.56
+          ],
+          [
+            -13.66,
+            -24.56
+          ]
+        ]
       }
     },
     {
@@ -363,6 +389,32 @@
         "material": "accent.site-geology",
         "history": "weathered",
         "working": "topsoil.bare"
+      },
+      "height": 4.5,
+      "crownCentre": 3.2,
+      "crownRadii": [
+        1.7,
+        1.2
+      ],
+      "outline": {
+        "polygon": [
+          [
+            -7.66,
+            -20.64
+          ],
+          [
+            -4.74,
+            -20.64
+          ],
+          [
+            -4.74,
+            -24.56
+          ],
+          [
+            -7.66,
+            -24.56
+          ]
+        ]
       }
     },
     {
@@ -378,6 +430,32 @@
         "material": "accent.site-geology",
         "history": "weathered",
         "working": "topsoil.bare"
+      },
+      "height": 3.6,
+      "crownCentre": 2.3,
+      "crownRadii": [
+        1.3,
+        1.2
+      ],
+      "outline": {
+        "polygon": [
+          [
+            -13.66,
+            -13.84
+          ],
+          [
+            -10.74,
+            -13.84
+          ],
+          [
+            -10.74,
+            -17.76
+          ],
+          [
+            -13.66,
+            -17.76
+          ]
+        ]
       }
     },
     {
@@ -393,6 +471,32 @@
         "material": "accent.site-geology",
         "history": "weathered",
         "working": "topsoil.bare"
+      },
+      "height": 3.5,
+      "crownCentre": 2.3,
+      "crownRadii": [
+        1.3,
+        1.2
+      ],
+      "outline": {
+        "polygon": [
+          [
+            -7.66,
+            -13.84
+          ],
+          [
+            -4.74,
+            -13.84
+          ],
+          [
+            -4.74,
+            -17.76
+          ],
+          [
+            -7.66,
+            -17.76
+          ]
+        ]
       }
     },
     {
@@ -408,6 +512,32 @@
         "material": "accent.site-geology",
         "history": "weathered",
         "working": "topsoil.bare"
+      },
+      "height": 5.2,
+      "crownCentre": 3.8,
+      "crownRadii": [
+        1.9,
+        1.3
+      ],
+      "outline": {
+        "polygon": [
+          [
+            -17.38,
+            -34.72
+          ],
+          [
+            -16.22,
+            -34.72
+          ],
+          [
+            -16.22,
+            -35.88
+          ],
+          [
+            -17.38,
+            -35.88
+          ]
+        ]
       }
     },
     {
@@ -423,6 +553,32 @@
         "material": "accent.site-geology",
         "history": "weathered",
         "working": "topsoil.bare"
+      },
+      "height": 5.0,
+      "crownCentre": 3.7,
+      "crownRadii": [
+        1.9,
+        1.3
+      ],
+      "outline": {
+        "polygon": [
+          [
+            -2.18,
+            -34.72
+          ],
+          [
+            -1.02,
+            -34.72
+          ],
+          [
+            -1.02,
+            -35.88
+          ],
+          [
+            -2.18,
+            -35.88
+          ]
+        ]
       }
     },
     {
@@ -433,7 +589,13 @@
       "working": "grown",
       "history": "weathered",
       "body": "",
-      "note": "The board willow by the water at (6.00, -23.10) (as built an osmanthus stood in); height 4.4, crown 2.0 x 1.6."
+      "note": "The board willow by the water at (6.00, -23.10) (as built an osmanthus stood in); height 4.4, crown 2.0 x 1.6.",
+      "height": 4.4,
+      "crownCentre": 2.9,
+      "crownRadii": [
+        2.0,
+        1.6
+      ]
     },
     {
       "bed": "chenghuai.garden.tree.willow-2",
@@ -443,7 +605,13 @@
       "working": "grown",
       "history": "weathered",
       "body": "",
-      "note": "Willow at (5.10, -20.90); height 3.4, crown 1.2 x 1.1."
+      "note": "Willow at (5.10, -20.90); height 3.4, crown 1.2 x 1.1.",
+      "height": 3.4,
+      "crownCentre": 2.2,
+      "crownRadii": [
+        1.2,
+        1.1
+      ]
     },
     {
       "bed": "chenghuai.garden.tree.pine",
@@ -453,7 +621,13 @@
       "working": "grown",
       "history": "weathered",
       "body": "",
-      "note": "The board pine on the rockery at (13.40, -15.90), rooted in the rockery ground; height 4.8, crown 2.1 x 1.7."
+      "note": "The board pine on the rockery at (13.40, -15.90), rooted in the rockery ground; height 4.8, crown 2.1 x 1.7.",
+      "height": 4.8,
+      "crownCentre": 3.2,
+      "crownRadii": [
+        2.1,
+        1.7
+      ]
     },
     {
       "bed": "chenghuai.garden.tree.plum-1",
@@ -463,7 +637,13 @@
       "working": "grown",
       "history": "weathered",
       "body": "",
-      "note": "Plum at (15.10, -37.00); height 3.6, crown 1.2 x 0.9."
+      "note": "Plum at (15.10, -37.00); height 3.6, crown 1.2 x 0.9.",
+      "height": 3.6,
+      "crownCentre": 2.7,
+      "crownRadii": [
+        1.2,
+        0.9
+      ]
     },
     {
       "bed": "chenghuai.garden.tree.plum-2",
@@ -473,7 +653,13 @@
       "working": "grown",
       "history": "weathered",
       "body": "",
-      "note": "Plum at (14.70, -20.70); height 3.8, crown 1.4 x 1.0."
+      "note": "Plum at (14.70, -20.70); height 3.8, crown 1.4 x 1.0.",
+      "height": 3.8,
+      "crownCentre": 2.8,
+      "crownRadii": [
+        1.4,
+        1.0
+      ]
     },
     {
       "bed": "chenghuai.garden.tree.crabapple",
@@ -483,7 +669,13 @@
       "working": "grown",
       "history": "weathered",
       "body": "",
-      "note": "Crabapple at (6.80, -5.30); height 4.2, crown 1.7 x 1.2."
+      "note": "Crabapple at (6.80, -5.30); height 4.2, crown 1.7 x 1.2.",
+      "height": 4.2,
+      "crownCentre": 3.0,
+      "crownRadii": [
+        1.7,
+        1.2
+      ]
     },
     {
       "bed": "chenghuai.garden.bamboo.east",
@@ -493,7 +685,65 @@
       "working": "grown",
       "history": "weathered",
       "body": "",
-      "note": "14 culms by the pond, x 15.53..16.07, y -23.35..-28.14 (culm points chenghuai_works.py:454-463, y + 17)."
+      "note": "14 culms by the pond, x 15.53..16.07, y -23.35..-28.14 (culm points chenghuai_works.py:454-463, y + 17).",
+      "points": [
+        [
+          15.87,
+          -27.6
+        ],
+        [
+          16.05,
+          -25.28
+        ],
+        [
+          15.8,
+          -28.08
+        ],
+        [
+          15.8,
+          -23.54
+        ],
+        [
+          15.95,
+          -24.74
+        ],
+        [
+          15.69,
+          -26.12
+        ],
+        [
+          16.07,
+          -23.35
+        ],
+        [
+          16.0,
+          -27.8
+        ],
+        [
+          15.53,
+          -27.41
+        ],
+        [
+          15.65,
+          -26.26
+        ],
+        [
+          16.05,
+          -28.14
+        ],
+        [
+          15.62,
+          -25.94
+        ],
+        [
+          15.54,
+          -24.31
+        ],
+        [
+          15.7,
+          -25.35
+        ]
+      ]
     },
     {
       "bed": "chenghuai.garden.bamboo.north-west",
@@ -503,7 +753,81 @@
       "working": "grown",
       "history": "weathered",
       "body": "",
-      "note": "18 culms behind the flower hall, x 5.33..10.01, y -42.81..-44.02."
+      "note": "18 culms behind the flower hall, x 5.33..10.01, y -42.81..-44.02.",
+      "points": [
+        [
+          8.05,
+          -43.73
+        ],
+        [
+          8.72,
+          -43.11
+        ],
+        [
+          6.46,
+          -43.69
+        ],
+        [
+          9.52,
+          -43.34
+        ],
+        [
+          6.84,
+          -42.87
+        ],
+        [
+          8.76,
+          -44.02
+        ],
+        [
+          8.95,
+          -42.81
+        ],
+        [
+          6.5,
+          -43.99
+        ],
+        [
+          10.01,
+          -42.95
+        ],
+        [
+          6.58,
+          -43.74
+        ],
+        [
+          8.47,
+          -43.43
+        ],
+        [
+          7.5,
+          -42.96
+        ],
+        [
+          9.09,
+          -44.02
+        ],
+        [
+          6.47,
+          -43.3
+        ],
+        [
+          5.63,
+          -43.41
+        ],
+        [
+          5.33,
+          -42.98
+        ],
+        [
+          7.59,
+          -43.41
+        ],
+        [
+          7.08,
+          -43.14
+        ]
+      ]
     },
     {
       "bed": "chenghuai.garden.bamboo.north-east",
@@ -513,7 +837,93 @@
       "working": "grown",
       "history": "weathered",
       "body": "",
-      "note": "21 culms behind the flower hall, x 10.36..15.75, y -42.95..-44.10."
+      "note": "21 culms behind the flower hall, x 10.36..15.75, y -42.95..-44.10.",
+      "points": [
+        [
+          14.72,
+          -43.55
+        ],
+        [
+          14.34,
+          -43.46
+        ],
+        [
+          12.9,
+          -43.6
+        ],
+        [
+          15.75,
+          -43.5
+        ],
+        [
+          14.73,
+          -44.02
+        ],
+        [
+          14.59,
+          -43.78
+        ],
+        [
+          12.09,
+          -42.95
+        ],
+        [
+          14.35,
+          -43.87
+        ],
+        [
+          13.46,
+          -43.47
+        ],
+        [
+          13.13,
+          -44.1
+        ],
+        [
+          11.97,
+          -43.37
+        ],
+        [
+          11.72,
+          -43.58
+        ],
+        [
+          13.73,
+          -43.89
+        ],
+        [
+          15.42,
+          -44.1
+        ],
+        [
+          14.89,
+          -43.63
+        ],
+        [
+          13.25,
+          -43.65
+        ],
+        [
+          14.66,
+          -42.99
+        ],
+        [
+          10.92,
+          -43.47
+        ],
+        [
+          10.36,
+          -43.64
+        ],
+        [
+          12.41,
+          -43.81
+        ],
+        [
+          15.69,
+          -43.74
+        ]
+      ]
     },
     {
       "bed": "chenghuai.pond.lotus",
@@ -523,7 +933,33 @@
       "working": "grown",
       "history": "weathered",
       "body": "",
-      "note": "Plants at (7.60, -33.90) dia 0.9 flowering, (8.60, -32.80) 0.7, (6.80, -32.30) 0.8, (11.00, -24.50) 0.9 flowering, (9.80, -23.90) 0.7, (11.80, -25.50) 0.6; rooted on the bed, leaves at the water (-0.28); held inside the edge."
+      "note": "Plants at (7.60, -33.90) dia 0.9 flowering, (8.60, -32.80) 0.7, (6.80, -32.30) 0.8, (11.00, -24.50) 0.9 flowering, (9.80, -23.90) 0.7, (11.80, -25.50) 0.6; rooted on the bed, leaves at the water (-0.28); held inside the edge.",
+      "points": [
+        [
+          7.6,
+          -33.9
+        ],
+        [
+          8.6,
+          -32.8
+        ],
+        [
+          6.8,
+          -32.3
+        ],
+        [
+          11.0,
+          -24.5
+        ],
+        [
+          9.8,
+          -23.9
+        ],
+        [
+          11.8,
+          -25.5
+        ]
+      ]
     },
     {
       "bed": "chenghuai.garden.ground",
@@ -538,6 +974,26 @@
         "material": "accent.site-geology",
         "history": "weathered",
         "working": "topsoil.under-moss"
+      },
+      "outline": {
+        "polygon": [
+          [
+            2.3,
+            -0.5
+          ],
+          [
+            16.4,
+            -0.5
+          ],
+          [
+            16.4,
+            -44.4
+          ],
+          [
+            2.3,
+            -44.4
+          ]
+        ]
       }
     },
     {
@@ -553,7 +1009,18 @@
         "history": "weathered",
         "working": "topsoil.potted"
       },
-      "note": "Pomegranate in its glazed tub (surface chenghuai.tub; dia 0.63, h 0.46) on the court paving at (-11.60, -25.60), flanking the main hall's steps; soil 0.425; height 1.9, crown radii 0.75 x 0.55 (Rules board: 石榴树)."
+      "note": "Pomegranate in its glazed tub (surface chenghuai.tub; dia 0.63, h 0.46) on the court paving at (-11.60, -25.60), flanking the main hall's steps; soil 0.425; height 1.9, crown radii 0.75 x 0.55 (Rules board: 石榴树).",
+      "height": 1.9,
+      "crownRadii": [
+        0.75,
+        0.55
+      ],
+      "outline": {
+        "ellipse": [
+          0.285,
+          0.285
+        ]
+      }
     },
     {
       "bed": "chenghuai.inner-court.tub.e",
@@ -568,7 +1035,18 @@
         "history": "weathered",
         "working": "topsoil.potted"
       },
-      "note": "Pomegranate in its glazed tub (surface chenghuai.tub; dia 0.63, h 0.46) on the court paving at (-6.80, -25.60), flanking the main hall's steps; soil 0.425; height 1.9, crown radii 0.75 x 0.55 (Rules board: 石榴树)."
+      "note": "Pomegranate in its glazed tub (surface chenghuai.tub; dia 0.63, h 0.46) on the court paving at (-6.80, -25.60), flanking the main hall's steps; soil 0.425; height 1.9, crown radii 0.75 x 0.55 (Rules board: 石榴树).",
+      "height": 1.9,
+      "crownRadii": [
+        0.75,
+        0.55
+      ],
+      "outline": {
+        "ellipse": [
+          0.285,
+          0.285
+        ]
+      }
     }
   ]
 }

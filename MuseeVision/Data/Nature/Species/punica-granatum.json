@@ -1,0 +1,168 @@
+{
+  "$sources": [
+    "The species: Punica granatum L., shi liu: a deciduous shrub or small tree 2-7 m, the branchlets angled, the short ones ending in spines; leaves oblong-lanceolate 2-9 cm by 1-2 cm, shining; flowers 1-5 at the branch ends, the calyx tube and the crumpled petals red-orange, the petals 1.5-3 cm; flowering May to July (Flora of China (Wu Zhengyi, P. H. Raven and Hong Deyuan, eds., Science Press and Missouri Botanical Garden, 1994-2013), vol. 13, Lythraceae).",
+    "Habit: the tree grower's shrubby small tree, for the pomegranates in their glazed tubs (the Chenghuai sheet: 1.9 m, crown radii 0.75 and 0.55), several stems from the pot.",
+    "Colours: the young leaves' bronze-tinted green and the flowers' scarlet."
+  ],
+  "key": "punica-granatum",
+  "name": "Punica granatum",
+  "common": "Pomegranate (石榴)",
+  "form": "tree",
+  "organs": [
+    {
+      "organ": "trunk",
+      "material": "living.stem"
+    },
+    {
+      "organ": "stem",
+      "material": "living.stem"
+    },
+    {
+      "organ": "leaf",
+      "material": "living.leaf"
+    },
+    {
+      "organ": "flower",
+      "material": "living.petal"
+    }
+  ],
+  "reachMeters": [
+    0.5,
+    0.9
+  ],
+  "heightMeters": [
+    1.6,
+    2.2
+  ],
+  "leafLengthMeters": [
+    0.03,
+    0.07
+  ],
+  "leafWidthMeters": [
+    0.01,
+    0.02
+  ],
+  "floweringShare": 1.0,
+  "leafColours": [
+    "#4E7A2E",
+    "#5A8434",
+    "#6A7A34"
+  ],
+  "stemColours": [
+    "#7A6E62",
+    "#8A5A3E"
+  ],
+  "tree": {
+    "crownCentreShare": 0.62,
+    "crownRadiusShares": [
+      0.4,
+      0.29
+    ],
+    "trunkRadiusMeters": 0.035,
+    "trunkTipShare": 0.4,
+    "flareShare": 0.15,
+    "leanDegrees": 5,
+    "wanderDegrees": 7,
+    "zigzagDegrees": 0,
+    "trunkShare": 0.5,
+    "crownFollowShare": 0.6,
+    "stems": 3,
+    "stemSpreadDegrees": 14,
+    "bEvenScaffolds": false,
+    "minRadiusMeters": 0.002,
+    "trunkSegments": 7,
+    "trunkSides": 8,
+    "branching": [
+      {
+        "count": 7,
+        "perMeter": 0.0,
+        "start": 0.25,
+        "end": 1.0,
+        "angleDegrees": 38,
+        "angleLowDegrees": 55,
+        "angleSpreadDegrees": 12,
+        "phyllotaxisDegrees": 137.5,
+        "lengthShare": 0.9,
+        "lengthSpread": 0.2,
+        "lengthTaper": 0.4,
+        "radiusShare": 0.55,
+        "curveDegrees": 6,
+        "wanderDegrees": 8,
+        "droopDegrees": 8,
+        "riseDegrees": 0,
+        "zigzagDegrees": 8,
+        "segments": 6,
+        "sides": 6
+      },
+      {
+        "count": 0,
+        "perMeter": 6,
+        "start": 0.1,
+        "end": 1.0,
+        "angleDegrees": 45,
+        "angleLowDegrees": 45,
+        "angleSpreadDegrees": 15,
+        "phyllotaxisDegrees": 137.5,
+        "lengthShare": 0.55,
+        "lengthSpread": 0.3,
+        "lengthTaper": 0.5,
+        "radiusShare": 0.55,
+        "curveDegrees": 6,
+        "wanderDegrees": 10,
+        "droopDegrees": 14,
+        "riseDegrees": 0,
+        "zigzagDegrees": 8,
+        "segments": 4,
+        "sides": 4
+      },
+      {
+        "count": 0,
+        "perMeter": 9,
+        "start": 0.1,
+        "end": 1.0,
+        "angleDegrees": 45,
+        "angleLowDegrees": 45,
+        "angleSpreadDegrees": 15,
+        "phyllotaxisDegrees": 180,
+        "lengthShare": 0.45,
+        "lengthSpread": 0.3,
+        "lengthTaper": 0.4,
+        "radiusShare": 0.6,
+        "curveDegrees": 4,
+        "wanderDegrees": 10,
+        "droopDegrees": 18,
+        "riseDegrees": 0,
+        "zigzagDegrees": 0,
+        "segments": 3,
+        "sides": 3
+      }
+    ],
+    "leafOrder": 2,
+    "leafStartShare": 0.1,
+    "leavesPerPlant": 3500,
+    "leafAngleDegrees": 45,
+    "leafDroop": 0.2,
+    "leafFold": 0.25,
+    "leafCurl": 0.05,
+    "flowerOrder": 2,
+    "flowersPerCluster": [
+      1,
+      3
+    ],
+    "pedicelMeters": 0.006,
+    "secondColourShare": 0.0
+  },
+  "note": "In its glazed tub on the court paving, as the Chenghuai sheet draws it (Rules board: 石榴树). The museum shows it in early summer, Mangzhong to Xiazhi (June). Its trunk and branches take living.stem, the palette's stem tissue, with the bark's colour on their vertices, until Matter records a bark tissue.",
+  "flowersPerPlant": [
+    25,
+    50
+  ],
+  "flowerSizeMeters": [
+    0.035,
+    0.05
+  ],
+  "flowerColours": [
+    "#E0402A",
+    "#C8321E"
+  ]
+}

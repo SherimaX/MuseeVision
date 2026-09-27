@@ -55,11 +55,11 @@ namespace Musee::NatureMaking
 			return true;
 		}
 
-		/** A polygonal surface: Form's flat face over the outline, facing up. */
-		bool MakePolygonSurface(const FNatureWater& Water, FFormMadePiece& OutPiece, FString& OutWhy)
+		/** A polygonal surface: Form's flat face over the outline (seen from the datum), facing up. */
+		bool MakePolygonSurface(const FNatureWater& Water, const FNatureOutline& Seen, FFormMadePiece& OutPiece, FString& OutWhy)
 		{
 			FFormFace Face;
-			Face.Outline = FFormProfile::Polyline(Water.Outline.Polygon, true);
+			Face.Outline = FFormProfile::Polyline(Seen.Polygon, true);
 			TArray<FFormMadePiece> Made;
 			TArray<FMuseeFinding> Findings;
 			Musee::FormMaking::Make(FFormDrawing::Of(FName(Water.Key.ToString()), WaterSurface, MoveTemp(Face)), Made, Findings);
@@ -109,7 +109,7 @@ namespace Musee::NatureMaking
 		{
 			return false;
 		}
-		const bool bMade = Water.Outline.IsEllipse() ? MakeEllipseSurface(Water.Outline.SemiAxes(), OutPiece) : MakePolygonSurface(Water, OutPiece, OutWhy);
+		const bool bMade = Water.Outline.IsEllipse() ? MakeEllipseSurface(Water.Outline.SemiAxes(), OutPiece) : MakePolygonSurface(Water, Water.Outline.SeenFrom(Datum->Frame), OutPiece, OutWhy);
 		if (!bMade)
 		{
 			return false;

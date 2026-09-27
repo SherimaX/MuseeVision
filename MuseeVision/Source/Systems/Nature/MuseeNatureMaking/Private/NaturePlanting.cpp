@@ -37,11 +37,12 @@ namespace Musee::NatureMaking
 			return Found;
 		}
 
-		/** The water a bed lies in, seen from the bed: its entry, its datum in the stage, and the datum in the bed's frame. */
+		/** The water a bed lies in, seen from the bed: its entry, its datum in the stage, its outline seen from the datum, and the datum in the bed's frame. */
 		struct FBedWater
 		{
 			const FNatureWater* Water = nullptr;
 			FMuseeFrame Datum;
+			FNatureOutline Outline;
 			FVector DatumInBed = FVector::ZeroVector;
 		};
 
@@ -55,10 +56,11 @@ namespace Musee::NatureMaking
 				{
 					continue;
 				}
+				const FNatureOutline Seen = Water.Outline.SeenFrom(Datum->Frame);
 				const FVector Local = Datum->Frame.PointFromParent(Bed.OriginMeters);
-				if (Water.Outline.Contains(FVector2D(Local.X, Local.Y), 0.0))
+				if (Seen.Contains(FVector2D(Local.X, Local.Y), 0.0))
 				{
-					return { &Water, Datum->Frame, Bed.PointFromParent(Datum->Frame.OriginMeters) };
+					return { &Water, Datum->Frame, Seen, Bed.PointFromParent(Datum->Frame.OriginMeters) };
 				}
 			}
 			return {};
@@ -74,13 +76,15 @@ namespace Musee::NatureMaking
 				return Site;
 			}
 			Site.WaterLevel = In.DatumInBed.Z - Crown.Z;
+			Site.WaterDepth = In.Water->Depth;
 			Site.Inward = (FVector2D(In.DatumInBed.X, In.DatumInBed.Y) - FVector2D(Crown.X, Crown.Y)).GetSafeNormal();
 			const FNatureWater& Water = *In.Water;
+			const FNatureOutline Outline = In.Outline;
 			const FMuseeFrame Datum = In.Datum;
-			Site.IsClear = [&Water, Datum, Bed](const FVector& Point, double Margin)
+			Site.IsClear = [&Water, Outline, Datum, Bed](const FVector& Point, double Margin)
 			{
 				const FVector Local = Datum.PointFromParent(Bed.PointToParent(Point));
-				return Local.Z > Water.Freeboard + OverhangClearanceMeters || Water.Outline.Contains(FVector2D(Local.X, Local.Y), Margin);
+				return Local.Z > Water.Freeboard + OverhangClearanceMeters || Outline.Contains(FVector2D(Local.X, Local.Y), Margin);
 			};
 			return Site;
 		}
@@ -93,12 +97,18 @@ namespace Musee::NatureMaking
 			const FForm* Form = nullptr;
 		};
 
+		/** A plan point of the stage, on the soil, in the bed's frame. */
+		FVector OnSoil(const FMuseeFrame& Bed, const FVector2D& Plan)
+		{
+			return Bed.PointFromParent(FVector(Plan.X, Plan.Y, Bed.OriginMeters.Z));
+		}
+
 		/**
-		 * The crowns of one planting, in its bed's frame: a Vogel spiral round the anchor at the planting's spacing,
-		 * turned so plantings sharing the bed interleave, keeping each crown inside the bed's water (less the plant's
-		 * reach) and nearer its own bed than any other bed in that water.
+		 * The crowns round the anchor, in its bed's frame: a Vogel spiral at the planting's spacing, turned so plantings
+		 * sharing the bed interleave, keeping each crown inside the bed's water (less the plant's reach) and nearer its own
+		 * bed than any other bed in that water.
 		 */
-		TArray<FVector> Crowns(const FPlanting& Planting, int32 Turn, int32 Turns, const FMuseeFrame& Bed, const FBedWater& In, const TArray<FVector2D>& Neighbours)
+		TArray<FVector> Spiral(const FPlanting& Planting, int32 Turn, int32 Turns, const FMuseeFrame& Bed, const FBedWater& In, const TArray<FVector2D>& Neighbours)
 		{
 			const FNatureBed& Entry = *Planting.Entry;
 			const double Margin = Planting.Species->ReachMeters.Num() == 2 ? Planting.Species->ReachMeters[1] : 0.0;
@@ -122,9 +132,59 @@ namespace Musee::NatureMaking
 		}
 
 		/**
+		 * Where a planting's plants stand, in its bed's frame: at its points, at its point, once for a form planted along a
+		 * line or over a region (at the anchor), or on the spiral round the anchor.
+		 */
+		TArray<FVector> Crowns(const FPlanting& Planting, int32 Turn, int32 Turns, const FMuseeFrame& Bed, const FBedWater& In, const TArray<FVector2D>& Neighbours)
+		{
+			const FNatureBed& Entry = *Planting.Entry;
+			TArray<FVector> Out;
+			if (!Entry.Points.IsEmpty())
+			{
+				for (const FVector2D& Point : Entry.Points)
+				{
+					Out.Add(OnSoil(Bed, Point));
+				}
+				return Out;
+			}
+			if (Entry.Point.Num() == 2)
+			{
+				return { OnSoil(Bed, FVector2D(Entry.Point[0], Entry.Point[1])) };
+			}
+			if (Planting.Form->Planting != EPlanting::EachPlant || (Entry.Count == 1 && !In.Water))
+			{
+				return { FVector::ZeroVector };
+			}
+			return Spiral(Planting, Turn, Turns, Bed, In, Neighbours);
+		}
+
+		/** The site's further facts from the plan: a tree's height and crown, a hedge's line and section, a cover's region, a climber's paths. */
+		void DrawnFacts(const FNatureBed& Entry, const FMuseeFrame& Bed, const FBedRegion& Region, FPlantSite& Site)
+		{
+			Site.Height = Entry.Height;
+			Site.CrownCentre = Entry.CrownCentre;
+			Site.CrownRadii = Entry.CrownRadii.Num() == 2 ? FVector2D(Entry.CrownRadii[0], Entry.CrownRadii[1]) : FVector2D::ZeroVector;
+			for (const FVector2D& End : Entry.Line)
+			{
+				Site.Line.Add(OnSoil(Bed, End));
+			}
+			Site.Clip = Entry.Clipped;
+			Site.Region = Region.Outline;
+			Site.Holes = Region.Holes;
+			for (const FNatureTraining& Path : Entry.Trained)
+			{
+				TArray<FVector>& Local = Site.Trained.AddDefaulted_GetRef();
+				for (const FVector& Point : Path.Path)
+				{
+					Local.Add(Bed.PointFromParent(Point));
+				}
+			}
+		}
+
+		/**
 		 * What a grown part is made of: a cast specimen's metal, which the visitor can't pass through; or its organ's own
-		 * living tissue (a lily's pad a floating leaf, its petal a thin translucent sheet), which nothing collides with,
-		 * worked and aged as its bed says.
+		 * living tissue (a lily's pad a floating leaf, its petal a thin translucent sheet), worked and aged as its bed says,
+		 * which nothing collides with but a trunk or a hedge's core.
 		 */
 		void MaterialOfPart(const FNatureBed& Entry, const FNatureSpecies& Species, FName Organ, FFormMadePiece& OutPiece)
 		{
@@ -139,16 +199,37 @@ namespace Musee::NatureMaking
 			OutPiece.Material = Species.MaterialOf(Organ);
 			OutPiece.Working = Entry.Working;
 			OutPiece.History = Entry.History;
-			OutPiece.Collision = NAME_None;
+			OutPiece.Collision = Organ == Organ::Trunk ? Collision::Solid.Profile() : NAME_None;
 		}
 
-		/** What is wrong with a bed's count, spacing and material spec, one clause each. */
-		TArray<FString> BedFaults(const FNatureBed& Entry)
+		/** What is wrong with a bed's count, places, spacing and material spec for its form, one clause each. */
+		TArray<FString> BedFaults(const FNatureBed& Entry, const FForm& Form)
 		{
 			TArray<FString> Out;
-			if (Entry.Count <= 0 || (Entry.Count > 1 && Entry.Spacing <= 0.0f) || Entry.Spacing < 0.0f)
+			if (Entry.Count <= 0 || Entry.Spacing < 0.0f)
 			{
-				Out.Add(TEXT("it needs a count of more than zero, and a spacing of more than zero for more than one plant"));
+				Out.Add(TEXT("it needs a count of more than zero"));
+			}
+			if (!Entry.Points.IsEmpty() && Entry.Points.Num() != Entry.Count)
+			{
+				Out.Add(FString::Printf(TEXT("it counts %d plants at %d points"), Entry.Count, Entry.Points.Num()));
+			}
+			if (!Entry.Point.IsEmpty() && (Entry.Point.Num() != 2 || Entry.Count != 1))
+			{
+				Out.Add(TEXT("a point is [x, y], for one plant"));
+			}
+			const bool bPlaced = !Entry.Points.IsEmpty() || !Entry.Point.IsEmpty();
+			if (Form.Planting == EPlanting::EachPlant && !bPlaced && Entry.Count > 1 && Entry.Spacing <= 0.0f)
+			{
+				Out.Add(TEXT("more than one plant needs its points or a spacing of more than zero"));
+			}
+			if (Form.Planting == EPlanting::AlongLine && (Entry.Line.Num() != 2 || !Entry.Clipped.IsSet()))
+			{
+				Out.Add(TEXT("a hedge needs its line, [[x, y], [x, y]], and the section it is clipped to"));
+			}
+			if (Form.Planting == EPlanting::OverRegion && !Entry.Outline.IsValid())
+			{
+				Out.Add(TEXT("a cover needs the bed's outline to grow over"));
 			}
 			if (Entry.Cast.IsSet())
 			{
@@ -164,17 +245,10 @@ namespace Musee::NatureMaking
 			return Out;
 		}
 
-		void Grow(const FMuseeStageContext& Stage, const FPlanting& Planting, const TArray<FVector>& Places, const FMuseeFrame& Bed,
-			const FBedWater& In, TArray<FFormMadePiece>& OutPieces, TArray<FMuseeFinding>& OutFindings)
+		void AddParts(const FMuseeStageContext& Stage, const FPlanting& Planting, const FPlantParts& Parts, const FMuseeFrame& Bed, TArray<FFormMadePiece>& OutPieces,
+			TArray<FMuseeFinding>& OutFindings)
 		{
 			const FNatureBed& Entry = *Planting.Entry;
-			FPlantParts Parts;
-			const FMuseeKey Stream = Entry.Bed.Child(Planting.Species->Key.ToString());
-			for (int32 Index = 0; Index < Places.Num(); ++Index)
-			{
-				FRandomStream Random(Seed(Stream.Child(FString::Printf(TEXT("plant-%d"), Index))));
-				Planting.Form->Grow(*Planting.Species, SiteAt(Places[Index], Bed, In), Random, Parts);
-			}
 			FMuseeFrame Frame;
 			FString Why;
 			if (!PieceFrame(Stage, Bed, Entry.Body, Frame, Why))
@@ -198,6 +272,36 @@ namespace Musee::NatureMaking
 				Piece.Frame = Frame;
 				Surface->Write(Piece.Mesh);
 			}
+		}
+
+		void Grow(const FMuseeStageContext& Stage, const FPlanting& Planting, const TArray<FVector>& Places, const FMuseeFrame& Bed, const FBedWater& In,
+			const FBedRegion& Region, TArray<FFormMadePiece>& OutPieces, TArray<FMuseeFinding>& OutFindings)
+		{
+			const FNatureBed& Entry = *Planting.Entry;
+			if (!Planting.Form->Grow)
+			{
+				FFormMadePiece Carpet;
+				FString Why;
+				if (MakeCarpetPiece(Stage, Entry, *Planting.Species, Region, Bed, Carpet, Why))
+				{
+					OutPieces.Add(MoveTemp(Carpet));
+				}
+				else
+				{
+					OutFindings.Add(Finding(Stage, FString::Printf(TEXT("Bed %s: %s."), *Entry.Bed.ToString(), *Why)));
+				}
+				return;
+			}
+			FPlantParts Parts;
+			const FMuseeKey Stream = Entry.Bed.Child(Planting.Species->Key.ToString());
+			for (int32 Index = 0; Index < Places.Num(); ++Index)
+			{
+				FRandomStream Random(Seed(Stream.Child(FString::Printf(TEXT("plant-%d"), Index))));
+				FPlantSite Site = SiteAt(Places[Index], Bed, In);
+				DrawnFacts(Entry, Bed, Region, Site);
+				Planting.Form->Grow(*Planting.Species, Site, Random, Parts);
+			}
+			AddParts(Stage, Planting, Parts, Bed, OutPieces, OutFindings);
 		}
 	}
 
@@ -223,13 +327,17 @@ namespace Musee::NatureMaking
 				{
 					Faults.Append(SpeciesFaults(*Found));
 				}
-				Faults.Append(BedFaults(Entry));
+				const FForm* Form = Found ? FindForm(Found->Form) : nullptr;
+				if (Form)
+				{
+					Faults.Append(BedFaults(Entry, *Form));
+				}
 				if (!Faults.IsEmpty())
 				{
 					OutFindings.Add(Finding(Stage, FString::Printf(TEXT("Bed %s (%s): %s."), *Entry.Bed.ToString(), *Entry.Species, *FString::Join(Faults, TEXT("; ")))));
 					continue;
 				}
-				Out.Add({ &Entry, Found, FindForm(Found->Form) });
+				Out.Add({ &Entry, Found, Form });
 			}
 			return Out;
 		}
@@ -281,12 +389,43 @@ namespace Musee::NatureMaking
 						continue;
 					}
 					const TArray<FVector> Places = Crowns(Planting, Turn, Here.Num(), Bed, In, Neighbours);
-					if (Places.Num() < Planting.Entry->Count)
+					const bool bOnce = Planting.Form->Planting != EPlanting::EachPlant;
+					if (!bOnce && Places.Num() < Planting.Entry->Count)
 					{
 						OutFindings.Add(Finding(Stage, FString::Printf(TEXT("Bed %s holds %d of its %d %s at a spacing of %.2f m."), *Key.ToString(), Places.Num(),
 							Planting.Entry->Count, *Planting.Species->Name, Planting.Entry->Spacing)));
 					}
-					Grow(Stage, Planting, Places, Bed, In, OutPieces, OutFindings);
+					Grow(Stage, Planting, Places, Bed, In, RegionOf(Stage, Plan, *Planting.Entry, Bed), OutPieces, OutFindings);
+				}
+			}
+		}
+
+		/** The ground of each bed that gives one: at most one ground a bed. */
+		void MakeGrounds(const FMuseeStageContext& Stage, const FNaturePlanting& Plan, TArray<FFormMadePiece>& OutPieces, TArray<FMuseeFinding>& OutFindings)
+		{
+			TSet<FMuseeKey> Made;
+			for (const FNatureBed& Entry : Plan.Beds)
+			{
+				const FMuseeStageAnchor* Anchor = Stage.FindAnchor(Entry.Bed, AnchorKind::Bed);
+				if (!Entry.Ground.IsSet() || !Anchor)
+				{
+					continue;
+				}
+				bool bAlready = false;
+				Made.Add(Entry.Bed, &bAlready);
+				FFormMadePiece Piece;
+				FString Why;
+				if (bAlready)
+				{
+					OutFindings.Add(Finding(Stage, FString::Printf(TEXT("Bed %s: its ground is given twice."), *Entry.Bed.ToString())));
+				}
+				else if (MakeGroundPiece(Stage, Entry, RegionOf(Stage, Plan, Entry, Anchor->Frame), Anchor->Frame, Piece, Why))
+				{
+					OutPieces.Add(MoveTemp(Piece));
+				}
+				else
+				{
+					OutFindings.Add(Finding(Stage, FString::Printf(TEXT("Bed %s: %s."), *Entry.Bed.ToString(), *Why)));
 				}
 			}
 		}
@@ -324,6 +463,7 @@ namespace Musee::NatureMaking
 				OutFindings.Add(Finding(Stage, FString::Printf(TEXT("Water %s: %s."), *Water.Key.ToString(), *Why)));
 			}
 		}
+		MakeGrounds(Stage, Plan.GetValue(), OutPieces, OutFindings);
 		if (Plan.GetValue().Beds.IsEmpty())
 		{
 			return;

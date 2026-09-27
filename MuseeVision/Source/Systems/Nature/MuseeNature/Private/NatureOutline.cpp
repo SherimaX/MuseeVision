@@ -81,3 +81,18 @@ double FNatureOutline::Area() const
 	}
 	return IsEllipse() ? UE_DOUBLE_PI * Ellipse[0] * Ellipse[1] : 0.5 * FMath::Abs(TwiceSignedArea(Polygon));
 }
+
+FNatureOutline FNatureOutline::SeenFrom(const FMuseeFrame& Anchor) const
+{
+	if (IsEllipse())
+	{
+		return *this;
+	}
+	FNatureOutline Out;
+	for (const FVector2D& Corner : Polygon)
+	{
+		const FVector Local = Anchor.PointFromParent(FVector(Corner.X, Corner.Y, Anchor.OriginMeters.Z));
+		Out.Polygon.Add(FVector2D(Local.X, Local.Y));
+	}
+	return Out;
+}

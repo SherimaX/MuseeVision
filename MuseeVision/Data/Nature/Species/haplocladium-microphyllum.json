@@ -1,0 +1,32 @@
+{
+  "$sources": [
+    "The species: Haplocladium microphyllum (Hedw.) Broth., a pleurocarpous moss of soil, rock and tree bases throughout China, in loose to dense mats, the stems creeping, irregularly pinnate, 1-3 cm (Moss Flora of China, vol. 6, Thuidiaceae, Science Press and Missouri Botanical Garden 2002).",
+    "The garden ground under moss: the Chenghuai sheet, section 7."
+  ],
+  "key": "haplocladium-microphyllum",
+  "name": "Haplocladium microphyllum",
+  "common": "Moss (小羽藓)",
+  "form": "moss",
+  "organs": [
+    {
+      "organ": "leaf",
+      "material": "living.leaf"
+    }
+  ],
+  "reachMeters": [
+    0.01,
+    0.03
+  ],
+  "leafLengthMeters": [
+    0.01,
+    0.015
+  ],
+  "floweringShare": 0.0,
+  "leafColours": [
+    "#5A7A32",
+    "#4E6E2C",
+    "#66843A",
+    "#6E7E3A"
+  ],
+  "note": "A carpet over the garden ground, less the pond: its leafLengthMeters is the mat's depth over the soil. The museum shows it in early summer, Mangzhong to Xiazhi (June)."
+}

@@ -4,6 +4,32 @@
 
 namespace Musee::NatureMaking
 {
+	namespace
+	{
+		/** Whether a plan point lies inside a closed polygon: an odd count of its edges crossed by the ray along +x. */
+		bool InsidePolygon(const TArray<FVector2D>& Corners, const FVector2D& Point)
+		{
+			bool bInside = false;
+			for (int32 Index = 0, Previous = Corners.Num() - 1; Index < Corners.Num(); Previous = Index++)
+			{
+				const FVector2D& A = Corners[Index];
+				const FVector2D& B = Corners[Previous];
+				if ((A.Y > Point.Y) != (B.Y > Point.Y) && Point.X < A.X + (B.X - A.X) * (Point.Y - A.Y) / (B.Y - A.Y))
+				{
+					bInside = !bInside;
+				}
+			}
+			return bInside;
+		}
+
+		const FForm* const* Forms()
+		{
+			static const FForm* const All[] = { &WaterLilyForm(), &IrisForm(), &SedgeForm(), &ForgetMeNotForm(), &TreeForm(), &BambooForm(), &LotusForm(),
+				&MossForm(), &GrassForm(), &HerbForm(), &HedgeForm(), &VineForm(), nullptr };
+			return All;
+		}
+	}
+
 	bool FPlantSite::IsClearOf(const FNatureSurface& Surface, double MarginMeters) const
 	{
 		if (!IsClear)
@@ -20,17 +46,31 @@ namespace Musee::NatureMaking
 		return true;
 	}
 
+	bool FPlantSite::InRegion(const FVector2D& Point) const
+	{
+		return InsidePolygon(Region, Point) && !Holes.ContainsByPredicate([&Point](const TArray<FVector2D>& Hole) { return InsidePolygon(Hole, Point); });
+	}
+
 	const FForm* FindForm(FName Name)
 	{
-		const FForm* const Forms[] = { &WaterLilyForm(), &IrisForm(), &SedgeForm(), &ForgetMeNotForm() };
-		for (const FForm* Form : Forms)
+		for (const FForm* const* Form = Forms(); *Form; ++Form)
 		{
-			if (Form->Name == Name)
+			if ((*Form)->Name == Name)
 			{
-				return Form;
+				return *Form;
 			}
 		}
 		return nullptr;
+	}
+
+	FString FormNames()
+	{
+		TArray<FString> Names;
+		for (const FForm* const* Form = Forms(); *Form; ++Form)
+		{
+			Names.Add((*Form)->Name.ToString());
+		}
+		return FString::Join(Names, TEXT(", "));
 	}
 
 	double Draw(const TArray<float>& Range, FRandomStream& Random)
@@ -43,9 +83,19 @@ namespace Musee::NatureMaking
 		return Range.Num() == 2 ? Random.RandRange(Range[0], Range[1]) : 0;
 	}
 
+	double Middle(const TArray<float>& Range)
+	{
+		return Range.Num() == 2 ? 0.5 * (Range[0] + Range[1]) : 0.0;
+	}
+
 	FLinearColor Colour(const TArray<FString>& List, int32 Index)
 	{
 		return List.IsValidIndex(Index) ? FromHex(List[Index]) : FLinearColor::Black;
+	}
+
+	FLinearColor AnyColour(const TArray<FString>& List, FRandomStream& Random)
+	{
+		return List.IsEmpty() ? FLinearColor::Black : FromHex(List[Random.RandRange(0, List.Num() - 1)]);
 	}
 
 	void NeedRange(const TArray<float>& Range, const TCHAR* Name, TArray<FString>& Out)

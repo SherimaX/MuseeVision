@@ -1,0 +1,156 @@
+{
+  "$sources": [
+    "The species: Malus x micromalus Makino, xifu haitang: a small tree 2.5-5 m, upright, the branches ascending; leaves elliptic to oblong-elliptic 5-10 cm by 2.5-5 cm; flowers pink in April to May; fruit subglobose 1-1.5 cm, red, ripe in September (Flora of China (Wu Zhengyi, P. H. Raven and Hong Deyuan, eds., Science Press and Missouri Botanical Garden, 1994-2013), vol. 9, Rosaceae).",
+    "Habit: the as-built museum's tree grower (windows/Source/MuseeVision/Nature/MuseeTree.cpp, OrchardSpec (apple) for the court's crabapples, 4.6 m, crown at 3.3 m, radii 1.7 and 1.2, which this record steepens to the xifu haitang's upright, vase-like habit), its branching, leaf and crown numbers.",
+    "Colours: the as-built apple's summer greens."
+  ],
+  "key": "malus-micromalus",
+  "name": "Malus × micromalus",
+  "common": "Xifu crabapple (西府海棠)",
+  "form": "tree",
+  "organs": [
+    {
+      "organ": "trunk",
+      "material": "living.stem"
+    },
+    {
+      "organ": "stem",
+      "material": "living.stem"
+    },
+    {
+      "organ": "leaf",
+      "material": "living.leaf"
+    },
+    {
+      "organ": "flower",
+      "material": "living.petal"
+    }
+  ],
+  "reachMeters": [
+    1.2,
+    1.8
+  ],
+  "heightMeters": [
+    3.5,
+    5.0
+  ],
+  "leafLengthMeters": [
+    0.05,
+    0.1
+  ],
+  "leafWidthMeters": [
+    0.025,
+    0.045
+  ],
+  "floweringShare": 0.0,
+  "leafColours": [
+    "#557F3A",
+    "#4C7634",
+    "#5E8840"
+  ],
+  "stemColours": [
+    "#5E4E40",
+    "#6A5646"
+  ],
+  "tree": {
+    "crownCentreShare": 0.7,
+    "crownRadiusShares": [
+      0.36,
+      0.26
+    ],
+    "trunkRadiusMeters": 0.1,
+    "trunkTipShare": 0.5,
+    "flareShare": 0.3,
+    "leanDegrees": 3,
+    "wanderDegrees": 4,
+    "zigzagDegrees": 0,
+    "trunkShare": 0.45,
+    "crownFollowShare": 0.5,
+    "stems": 1,
+    "stemSpreadDegrees": 0,
+    "bEvenScaffolds": false,
+    "minRadiusMeters": 0.002,
+    "trunkSegments": 8,
+    "trunkSides": 14,
+    "branching": [
+      {
+        "count": 6,
+        "perMeter": 0.0,
+        "start": 0.45,
+        "end": 1.0,
+        "angleDegrees": 24,
+        "angleLowDegrees": 36,
+        "angleSpreadDegrees": 6,
+        "phyllotaxisDegrees": 137.5,
+        "lengthShare": 0.95,
+        "lengthSpread": 0.12,
+        "lengthTaper": 0.4,
+        "radiusShare": 0.62,
+        "curveDegrees": 4,
+        "wanderDegrees": 5,
+        "droopDegrees": 0,
+        "riseDegrees": 6,
+        "zigzagDegrees": 3,
+        "segments": 8,
+        "sides": 10
+      },
+      {
+        "count": 0,
+        "perMeter": 5.5,
+        "start": 0.1,
+        "end": 1.0,
+        "angleDegrees": 38,
+        "angleLowDegrees": 45,
+        "angleSpreadDegrees": 12,
+        "phyllotaxisDegrees": 137.5,
+        "lengthShare": 0.55,
+        "lengthSpread": 0.3,
+        "lengthTaper": 0.5,
+        "radiusShare": 0.55,
+        "curveDegrees": 8,
+        "wanderDegrees": 8,
+        "droopDegrees": 6,
+        "riseDegrees": 14,
+        "zigzagDegrees": 5,
+        "segments": 5,
+        "sides": 6
+      },
+      {
+        "count": 0,
+        "perMeter": 9,
+        "start": 0.08,
+        "end": 1.0,
+        "angleDegrees": 42,
+        "angleLowDegrees": 45,
+        "angleSpreadDegrees": 15,
+        "phyllotaxisDegrees": 137.5,
+        "lengthShare": 0.5,
+        "lengthSpread": 0.35,
+        "lengthTaper": 0.4,
+        "radiusShare": 0.55,
+        "curveDegrees": 6,
+        "wanderDegrees": 10,
+        "droopDegrees": 10,
+        "riseDegrees": 6,
+        "zigzagDegrees": 6,
+        "segments": 4,
+        "sides": 4
+      }
+    ],
+    "leafOrder": 3,
+    "leafStartShare": 0.1,
+    "leavesPerPlant": 8000,
+    "leafAngleDegrees": 45,
+    "leafDroop": 0.25,
+    "leafFold": 0.3,
+    "leafCurl": 0.08,
+    "flowerOrder": 2,
+    "flowersPerCluster": [
+      1,
+      3
+    ],
+    "pedicelMeters": 0.01,
+    "secondColourShare": 0.0
+  },
+  "note": "Before the main hall and in the garden, as the Chenghuai sheet draws them. Its fruit sets later than the museum's season. The museum shows it in early summer, Mangzhong to Xiazhi (June). Its trunk and branches take living.stem, the palette's stem tissue, with the bark's colour on their vertices, until Matter records a bark tissue."
+}

@@ -1,0 +1,158 @@
+{
+  "$sources": [
+    "The species: Osmanthus fragrans Loureiro, gui hua: an evergreen shrub or tree 3-5 m (to 18 m), leaves elliptic to elliptic-lanceolate 7-14.5 cm by 2.6-4.5 cm, leathery; flowers in axillary fascicles, fragrant, in September to October (Flora of China (Wu Zhengyi, P. H. Raven and Hong Deyuan, eds., Science Press and Missouri Botanical Garden, 1994-2013), vol. 15, Oleaceae).",
+    "Habit: the as-built museum's tree grower (windows/Source/MuseeVision/Nature/MuseeTree.cpp, OsmanthusSpec: 4.1 m, three stems 13 degrees apart, crown at 2.7 m, radii 1.5 and 1.45, 11 000 leaves of 8.5 cm), its branching, leaf and crown numbers.",
+    "Colours: the as-built osmanthus (MuseeTree.cpp, LookFor)."
+  ],
+  "key": "osmanthus-fragrans",
+  "name": "Osmanthus fragrans",
+  "common": "Sweet osmanthus (桂花)",
+  "form": "tree",
+  "organs": [
+    {
+      "organ": "trunk",
+      "material": "living.stem"
+    },
+    {
+      "organ": "stem",
+      "material": "living.stem"
+    },
+    {
+      "organ": "leaf",
+      "material": "living.leaf"
+    },
+    {
+      "organ": "flower",
+      "material": "living.petal"
+    }
+  ],
+  "reachMeters": [
+    1.1,
+    1.6
+  ],
+  "heightMeters": [
+    3.2,
+    5.0
+  ],
+  "leafLengthMeters": [
+    0.07,
+    0.12
+  ],
+  "leafWidthMeters": [
+    0.026,
+    0.042
+  ],
+  "floweringShare": 0.0,
+  "leafColours": [
+    "#34502A",
+    "#2E4A26",
+    "#3E5C30",
+    "#46633A",
+    "#3A5A2E"
+  ],
+  "stemColours": [
+    "#7A7468",
+    "#5E6A4A"
+  ],
+  "tree": {
+    "crownCentreShare": 0.659,
+    "crownRadiusShares": [
+      0.366,
+      0.354
+    ],
+    "trunkRadiusMeters": 0.075,
+    "trunkTipShare": 0.4,
+    "flareShare": 0.2,
+    "leanDegrees": 4,
+    "wanderDegrees": 5,
+    "zigzagDegrees": 0,
+    "trunkShare": 0.55,
+    "crownFollowShare": 0.5,
+    "stems": 3,
+    "stemSpreadDegrees": 13,
+    "bEvenScaffolds": false,
+    "minRadiusMeters": 0.002,
+    "trunkSegments": 8,
+    "trunkSides": 10,
+    "branching": [
+      {
+        "count": 8,
+        "perMeter": 0.0,
+        "start": 0.3,
+        "end": 1.0,
+        "angleDegrees": 35,
+        "angleLowDegrees": 55,
+        "angleSpreadDegrees": 10,
+        "phyllotaxisDegrees": 137.5,
+        "lengthShare": 0.9,
+        "lengthSpread": 0.15,
+        "lengthTaper": 0.4,
+        "radiusShare": 0.62,
+        "curveDegrees": 6,
+        "wanderDegrees": 7,
+        "droopDegrees": 6,
+        "riseDegrees": 0,
+        "zigzagDegrees": 4,
+        "segments": 6,
+        "sides": 6
+      },
+      {
+        "count": 0,
+        "perMeter": 6,
+        "start": 0.1,
+        "end": 1.0,
+        "angleDegrees": 45,
+        "angleLowDegrees": 45,
+        "angleSpreadDegrees": 15,
+        "phyllotaxisDegrees": 137.5,
+        "lengthShare": 0.5,
+        "lengthSpread": 0.3,
+        "lengthTaper": 0.5,
+        "radiusShare": 0.6,
+        "curveDegrees": 6,
+        "wanderDegrees": 10,
+        "droopDegrees": 10,
+        "riseDegrees": 0,
+        "zigzagDegrees": 4,
+        "segments": 4,
+        "sides": 4
+      },
+      {
+        "count": 0,
+        "perMeter": 9,
+        "start": 0.1,
+        "end": 1.0,
+        "angleDegrees": 40,
+        "angleLowDegrees": 45,
+        "angleSpreadDegrees": 15,
+        "phyllotaxisDegrees": 180,
+        "lengthShare": 0.5,
+        "lengthSpread": 0.3,
+        "lengthTaper": 0.4,
+        "radiusShare": 0.6,
+        "curveDegrees": 6,
+        "wanderDegrees": 10,
+        "droopDegrees": 8,
+        "riseDegrees": 4,
+        "zigzagDegrees": 0,
+        "segments": 3,
+        "sides": 3
+      }
+    ],
+    "leafOrder": 2,
+    "leafStartShare": 0.05,
+    "leavesPerPlant": 11000,
+    "leafAngleDegrees": 45,
+    "leafDroop": 0.1,
+    "leafFold": 0.35,
+    "leafCurl": 0.05,
+    "flowerOrder": 2,
+    "flowersPerCluster": [
+      1,
+      3
+    ],
+    "pedicelMeters": 0.01,
+    "secondColourShare": 0.0
+  },
+  "note": "Evergreen, dense to the ground; it flowers in autumn, so the museum shows it in leaf. Not hardy in Beijing, where it is kept in tubs (the Chenghuai sheet). The museum shows it in early summer, Mangzhong to Xiazhi (June). Its trunk and branches take living.stem, the palette's stem tissue, with the bark's colour on their vertices, until Matter records a bark tissue."
+}

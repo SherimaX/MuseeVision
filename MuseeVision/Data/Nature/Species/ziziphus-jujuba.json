@@ -1,0 +1,168 @@
+{
+  "$sources": [
+    "The species: Ziziphus jujuba Miller, zao: a deciduous tree to 10 m, the branches zigzag (the long shoots bending at each node), with paired stipular spines; the leaves on deciduous short green branchlets, ovate to ovate-elliptic 3-7 cm by 1.5-4 cm, three-veined; flowers yellow-green, 5-7 mm, in axillary cymes, May to July; drupe ripe in August to September (Flora of China (Wu Zhengyi, P. H. Raven and Hong Deyuan, eds., Science Press and Missouri Botanical Garden, 1994-2013), vol. 12, Rhamnaceae).",
+    "Habit: the as-built museum's tree grower (windows/Source/MuseeVision/Nature/MuseeTree.cpp, PlumSpec for the rear court's pits, 5.2 m, crown at 3.8 m, radii 1.9 and 1.3, which this record gives the jujube's zigzag shoots and drooping deciduous branchlets), its branching, leaf and crown numbers.",
+    "Colours: the jujube's glossy leaves and its yellow-green flowers."
+  ],
+  "key": "ziziphus-jujuba",
+  "name": "Ziziphus jujuba",
+  "common": "Jujube (枣)",
+  "form": "tree",
+  "organs": [
+    {
+      "organ": "trunk",
+      "material": "living.stem"
+    },
+    {
+      "organ": "stem",
+      "material": "living.stem"
+    },
+    {
+      "organ": "leaf",
+      "material": "living.leaf"
+    },
+    {
+      "organ": "flower",
+      "material": "living.petal"
+    }
+  ],
+  "reachMeters": [
+    1.3,
+    2.0
+  ],
+  "heightMeters": [
+    4.5,
+    5.8
+  ],
+  "leafLengthMeters": [
+    0.03,
+    0.07
+  ],
+  "leafWidthMeters": [
+    0.015,
+    0.04
+  ],
+  "floweringShare": 1.0,
+  "leafColours": [
+    "#4E7A2E",
+    "#5A8436",
+    "#46702A"
+  ],
+  "stemColours": [
+    "#4E4238",
+    "#6A5A48"
+  ],
+  "tree": {
+    "crownCentreShare": 0.73,
+    "crownRadiusShares": [
+      0.365,
+      0.25
+    ],
+    "trunkRadiusMeters": 0.11,
+    "trunkTipShare": 0.4,
+    "flareShare": 0.3,
+    "leanDegrees": 5,
+    "wanderDegrees": 6,
+    "zigzagDegrees": 6,
+    "trunkShare": 0.6,
+    "crownFollowShare": 0.7,
+    "stems": 1,
+    "stemSpreadDegrees": 0,
+    "bEvenScaffolds": false,
+    "minRadiusMeters": 0.002,
+    "trunkSegments": 9,
+    "trunkSides": 12,
+    "branching": [
+      {
+        "count": 6,
+        "perMeter": 0.0,
+        "start": 0.45,
+        "end": 1.0,
+        "angleDegrees": 42,
+        "angleLowDegrees": 60,
+        "angleSpreadDegrees": 12,
+        "phyllotaxisDegrees": 137.5,
+        "lengthShare": 0.95,
+        "lengthSpread": 0.2,
+        "lengthTaper": 0.4,
+        "radiusShare": 0.6,
+        "curveDegrees": 2,
+        "wanderDegrees": 8,
+        "droopDegrees": 6,
+        "riseDegrees": 6,
+        "zigzagDegrees": 22,
+        "segments": 7,
+        "sides": 8
+      },
+      {
+        "count": 0,
+        "perMeter": 4.5,
+        "start": 0.12,
+        "end": 1.0,
+        "angleDegrees": 50,
+        "angleLowDegrees": 45,
+        "angleSpreadDegrees": 15,
+        "phyllotaxisDegrees": 180,
+        "lengthShare": 0.55,
+        "lengthSpread": 0.3,
+        "lengthTaper": 0.45,
+        "radiusShare": 0.5,
+        "curveDegrees": 4,
+        "wanderDegrees": 8,
+        "droopDegrees": 10,
+        "riseDegrees": 4,
+        "zigzagDegrees": 26,
+        "segments": 5,
+        "sides": 5
+      },
+      {
+        "count": 0,
+        "perMeter": 7.0,
+        "start": 0.1,
+        "end": 1.0,
+        "angleDegrees": 55,
+        "angleLowDegrees": 45,
+        "angleSpreadDegrees": 15,
+        "phyllotaxisDegrees": 180,
+        "lengthShare": 0.45,
+        "lengthSpread": 0.3,
+        "lengthTaper": 0.3,
+        "radiusShare": 0.5,
+        "curveDegrees": 0,
+        "wanderDegrees": 6,
+        "droopDegrees": 25,
+        "riseDegrees": 0,
+        "zigzagDegrees": 8,
+        "segments": 3,
+        "sides": 3
+      }
+    ],
+    "leafOrder": 3,
+    "leafStartShare": 0.05,
+    "leavesPerPlant": 9000,
+    "leafAngleDegrees": 50,
+    "leafDroop": 0.2,
+    "leafFold": 0.2,
+    "leafCurl": 0.05,
+    "flowerOrder": 3,
+    "flowersPerCluster": [
+      2,
+      5
+    ],
+    "pedicelMeters": 0.004,
+    "secondColourShare": 0.0
+  },
+  "note": "In the rear court's pits, as the Chenghuai sheet draws them (as built a plum stood in). The museum shows it in early summer, Mangzhong to Xiazhi (June). Its trunk and branches take living.stem, the palette's stem tissue, with the bark's colour on their vertices, until Matter records a bark tissue.",
+  "flowersPerPlant": [
+    400,
+    700
+  ],
+  "flowerSizeMeters": [
+    0.005,
+    0.007
+  ],
+  "flowerColours": [
+    "#C8CC6A",
+    "#B8C050"
+  ]
+}

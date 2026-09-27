@@ -242,7 +242,7 @@ namespace Musee::NatureMaking
 
 	const FForm& WaterLilyForm()
 	{
-		static const FForm Form{ TEXT("water-lily"), { Organ::Leaf, Organ::Sepal, Organ::Flower, Organ::Eye }, true, &GrowWaterLily, &WaterLilyFaults };
+		static const FForm Form{ TEXT("water-lily"), { Organ::Leaf, Organ::Sepal, Organ::Flower, Organ::Eye }, true, &GrowWaterLily, &WaterLilyFaults, EPlanting::EachPlant, true };
 		return Form;
 	}
 }

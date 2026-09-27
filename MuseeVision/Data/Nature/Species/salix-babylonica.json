@@ -1,0 +1,157 @@
+{
+  "$sources": [
+    "The species: Salix babylonica L., chui liu: a tree 12-18 m, the crown open, the branchlets slender and pendulous, hanging to the ground; leaves narrowly lanceolate to linear-lanceolate 9-16 cm by 0.5-1.5 cm, serrulate (Flora of China (Wu Zhengyi, P. H. Raven and Hong Deyuan, eds., Science Press and Missouri Botanical Garden, 1994-2013), vol. 4, Salicaceae).",
+    "Habit: the as-built museum's tree grower (windows/Source/MuseeVision/Nature/MuseeTree.cpp, BirchSpec's pendent twigs, for the garden willow by the water (as built an osmanthus stood in), which this record lets fall as the willow's long hanging branchlets), its branching, leaf and crown numbers.",
+    "Colours: the willow's light, silvery-green summer leaves."
+  ],
+  "key": "salix-babylonica",
+  "name": "Salix babylonica",
+  "common": "Weeping willow (垂柳)",
+  "form": "tree",
+  "organs": [
+    {
+      "organ": "trunk",
+      "material": "living.stem"
+    },
+    {
+      "organ": "stem",
+      "material": "living.stem"
+    },
+    {
+      "organ": "leaf",
+      "material": "living.leaf"
+    },
+    {
+      "organ": "flower",
+      "material": "living.petal"
+    }
+  ],
+  "reachMeters": [
+    1.0,
+    2.2
+  ],
+  "heightMeters": [
+    3.2,
+    4.8
+  ],
+  "leafLengthMeters": [
+    0.09,
+    0.16
+  ],
+  "leafWidthMeters": [
+    0.006,
+    0.015
+  ],
+  "floweringShare": 0.0,
+  "leafColours": [
+    "#7A9A46",
+    "#6E9240",
+    "#86A452",
+    "#688C3C"
+  ],
+  "stemColours": [
+    "#5E5244",
+    "#8A8A48"
+  ],
+  "tree": {
+    "crownCentreShare": 0.62,
+    "crownRadiusShares": [
+      0.42,
+      0.36
+    ],
+    "trunkRadiusMeters": 0.12,
+    "trunkTipShare": 0.1,
+    "flareShare": 0.3,
+    "leanDegrees": 4,
+    "wanderDegrees": 3,
+    "zigzagDegrees": 0,
+    "trunkShare": 0.9,
+    "crownFollowShare": 0.6,
+    "stems": 1,
+    "stemSpreadDegrees": 0,
+    "bEvenScaffolds": false,
+    "minRadiusMeters": 0.002,
+    "trunkSegments": 12,
+    "trunkSides": 14,
+    "branching": [
+      {
+        "count": 14,
+        "perMeter": 0.0,
+        "start": 0.45,
+        "end": 0.98,
+        "angleDegrees": 38,
+        "angleLowDegrees": 62,
+        "angleSpreadDegrees": 10,
+        "phyllotaxisDegrees": 137.5,
+        "lengthShare": 0.9,
+        "lengthSpread": 0.15,
+        "lengthTaper": 0.4,
+        "radiusShare": 0.45,
+        "curveDegrees": 10,
+        "wanderDegrees": 5,
+        "droopDegrees": 16,
+        "riseDegrees": 0,
+        "zigzagDegrees": 0,
+        "segments": 8,
+        "sides": 8
+      },
+      {
+        "count": 0,
+        "perMeter": 4.0,
+        "start": 0.1,
+        "end": 1.0,
+        "angleDegrees": 45,
+        "angleLowDegrees": 45,
+        "angleSpreadDegrees": 12,
+        "phyllotaxisDegrees": 150,
+        "lengthShare": 0.6,
+        "lengthSpread": 0.3,
+        "lengthTaper": 0.4,
+        "radiusShare": 0.5,
+        "curveDegrees": -10,
+        "wanderDegrees": 6,
+        "droopDegrees": 90,
+        "riseDegrees": 0,
+        "zigzagDegrees": 0,
+        "segments": 6,
+        "sides": 5
+      },
+      {
+        "count": 0,
+        "perMeter": 6.0,
+        "start": 0.1,
+        "end": 1.0,
+        "angleDegrees": 30,
+        "angleLowDegrees": 45,
+        "angleSpreadDegrees": 10,
+        "phyllotaxisDegrees": 170,
+        "lengthShare": 1.4,
+        "lengthSpread": 0.3,
+        "lengthTaper": 0.2,
+        "radiusShare": 0.5,
+        "curveDegrees": 0,
+        "wanderDegrees": 4,
+        "droopDegrees": 220,
+        "riseDegrees": 0,
+        "zigzagDegrees": 0,
+        "segments": 6,
+        "sides": 3
+      }
+    ],
+    "leafOrder": 3,
+    "leafStartShare": 0.05,
+    "leavesPerPlant": 14000,
+    "leafAngleDegrees": 30,
+    "leafDroop": 0.6,
+    "leafFold": 0.15,
+    "leafCurl": 0.05,
+    "flowerOrder": 2,
+    "flowersPerCluster": [
+      1,
+      3
+    ],
+    "pedicelMeters": 0.01,
+    "secondColourShare": 0.0
+  },
+  "note": "The board's willow by the water, as the Chenghuai sheet draws it: its hanging branchlets reach down towards the pond. The museum shows it in early summer, Mangzhong to Xiazhi (June). Its trunk and branches take living.stem, the palette's stem tissue, with the bark's colour on their vertices, until Matter records a bark tissue."
+}
