@@ -3,6 +3,7 @@
 #include "CoreMinimal.h"
 #include "FormBasin.h"
 #include "FormCeiling.h"
+#include "FormDome.h"
 #include "FormExtrusion.h"
 #include "FormFace.h"
 #include "FormLathe.h"
@@ -15,7 +16,7 @@
 #include "MuseeKey.h"
 
 /** The shape a drawing draws: one word of Form's vocabulary. */
-using FFormShape = TVariant<FFormExtrusion, FFormSweep, FFormLathe, FFormFace, FFormWall, FFormBasin, FFormStair, FFormCeiling,
+using FFormShape = TVariant<FFormExtrusion, FFormSweep, FFormLathe, FFormFace, FFormWall, FFormBasin, FFormStair, FFormCeiling, FFormDome,
 	FFormRelief>;
 
 /**
