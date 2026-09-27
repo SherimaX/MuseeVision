@@ -1,0 +1,1152 @@
+{
+  "stage": "albion",
+  "daylight": [
+    {
+      "opening": "albion.vault.nave",
+      "glazing": "glass.clear-float",
+      "weather": "london",
+      "control": "none",
+      "note": "clear, laminated UV-filtering (albion.vault.glass.nave)"
+    },
+    {
+      "opening": "albion.vault.west",
+      "glazing": "glass.clear-float",
+      "weather": "london",
+      "control": "none",
+      "note": "laminated with a diffusing UV-filtering interlayer (albion.vault.glass.aisle)"
+    },
+    {
+      "opening": "albion.vault.east",
+      "glazing": "glass.clear-float",
+      "weather": "london",
+      "control": "none",
+      "note": "laminated with a diffusing UV-filtering interlayer (albion.vault.glass.aisle)"
+    },
+    {
+      "opening": "albion.screen.north",
+      "glazing": "glass.clear-float",
+      "weather": "london",
+      "control": "none",
+      "note": "the nave's north screen, clear (albion.screen.glass)"
+    },
+    {
+      "opening": "albion.screen.south",
+      "glazing": "glass.clear-float",
+      "weather": "london",
+      "control": "none",
+      "note": "the nave's south screen round the band, clear (albion.screen.glass)"
+    },
+    {
+      "opening": "albion.gable.nw",
+      "glazing": "glass.clear-float",
+      "weather": "london",
+      "control": "none",
+      "note": "diffusing (albion.screen.glass.gable)"
+    },
+    {
+      "opening": "albion.gable.ne",
+      "glazing": "glass.clear-float",
+      "weather": "london",
+      "control": "none",
+      "note": "diffusing (albion.screen.glass.gable)"
+    },
+    {
+      "opening": "albion.gable.sw",
+      "glazing": "glass.clear-float",
+      "weather": "london",
+      "control": "none",
+      "note": "diffusing (albion.screen.glass.gable)"
+    },
+    {
+      "opening": "albion.gable.se",
+      "glazing": "glass.clear-float",
+      "weather": "london",
+      "control": "none",
+      "note": "diffusing (albion.screen.glass.gable)"
+    },
+    {
+      "opening": "albion.band",
+      "glazing": "glass.mouth-blown",
+      "weather": "london",
+      "control": "none",
+      "note": "the twelve Tristram panels, leaded, behind protective glazing (albion.guard-glazing)"
+    },
+    {
+      "opening": "albion.lancet.w1",
+      "glazing": "glass.mouth-blown",
+      "weather": "london",
+      "control": "none",
+      "note": "leaded, behind protective glazing (albion.guard-glazing)"
+    },
+    {
+      "opening": "albion.lancet.w2",
+      "glazing": "glass.mouth-blown",
+      "weather": "london",
+      "control": "none",
+      "note": "leaded, behind protective glazing (albion.guard-glazing)"
+    },
+    {
+      "opening": "albion.lancet.w3",
+      "glazing": "glass.mouth-blown",
+      "weather": "london",
+      "control": "none",
+      "note": "leaded, behind protective glazing (albion.guard-glazing)"
+    },
+    {
+      "opening": "albion.lancet.w4",
+      "glazing": "glass.mouth-blown",
+      "weather": "london",
+      "control": "none",
+      "note": "leaded, behind protective glazing (albion.guard-glazing)"
+    },
+    {
+      "opening": "albion.lancet.w5",
+      "glazing": "glass.mouth-blown",
+      "weather": "london",
+      "control": "none",
+      "note": "leaded, behind protective glazing (albion.guard-glazing)"
+    },
+    {
+      "opening": "albion.lancet.w6",
+      "glazing": "glass.mouth-blown",
+      "weather": "london",
+      "control": "none",
+      "note": "leaded, behind protective glazing (albion.guard-glazing)"
+    },
+    {
+      "opening": "albion.lancet.e1",
+      "glazing": "glass.mouth-blown",
+      "weather": "london",
+      "control": "none",
+      "note": "leaded, behind protective glazing (albion.guard-glazing)"
+    },
+    {
+      "opening": "albion.lancet.e2",
+      "glazing": "glass.mouth-blown",
+      "weather": "london",
+      "control": "none",
+      "note": "leaded, behind protective glazing (albion.guard-glazing)"
+    },
+    {
+      "opening": "albion.lancet.e3",
+      "glazing": "glass.mouth-blown",
+      "weather": "london",
+      "control": "none",
+      "note": "leaded, behind protective glazing (albion.guard-glazing)"
+    },
+    {
+      "opening": "albion.lancet.e4",
+      "glazing": "glass.mouth-blown",
+      "weather": "london",
+      "control": "none",
+      "note": "leaded, behind protective glazing (albion.guard-glazing)"
+    },
+    {
+      "opening": "albion.lancet.e5",
+      "glazing": "glass.mouth-blown",
+      "weather": "london",
+      "control": "none",
+      "note": "leaded, behind protective glazing (albion.guard-glazing)"
+    },
+    {
+      "opening": "albion.lancet.e6",
+      "glazing": "glass.mouth-blown",
+      "weather": "london",
+      "control": "none",
+      "note": "leaded, behind protective glazing (albion.guard-glazing)"
+    }
+  ],
+  "luminaires": [
+    {
+      "id": "frame.millais-mariana",
+      "type": "track-framing.3000k.small",
+      "point": [
+        -6.45,
+        -15.18,
+        9.3
+      ],
+      "aim": [
+        -13.95,
+        -15.0,
+        1.65
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "frame.brown-pretty-baa-lambs",
+      "type": "track-framing.3000k.small",
+      "point": [
+        -6.45,
+        -14.82,
+        9.3
+      ],
+      "aim": [
+        -13.95,
+        -15.0,
+        2.646
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "frame.millais-ophelia",
+      "type": "track-framing.3000k.small",
+      "point": [
+        -6.45,
+        -9.18,
+        9.3
+      ],
+      "aim": [
+        -13.95,
+        -9.0,
+        1.65
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "frame.brown-english-autumn-afternoon",
+      "type": "track-framing.3000k.medium",
+      "point": [
+        -6.45,
+        -8.82,
+        9.3
+      ],
+      "aim": [
+        -13.95,
+        -9.0,
+        2.842
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "frame.hunt-awakening-conscience",
+      "type": "track-framing.3000k.small",
+      "point": [
+        -6.45,
+        -3.927,
+        9.3
+      ],
+      "aim": [
+        -13.95,
+        -3.927,
+        1.65
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "frame.brown-last-of-england",
+      "type": "track-framing.3000k.small",
+      "point": [
+        -6.45,
+        -2.161,
+        9.3
+      ],
+      "aim": [
+        -13.95,
+        -2.161,
+        1.65
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "frame.millais-blind-girl",
+      "type": "track-framing.3000k.small",
+      "point": [
+        -6.45,
+        2.046,
+        9.3
+      ],
+      "aim": [
+        -13.95,
+        2.046,
+        1.655
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "frame.wallis-stonebreaker",
+      "type": "track-framing.3000k.small",
+      "point": [
+        -6.45,
+        3.871,
+        9.3
+      ],
+      "aim": [
+        -13.95,
+        3.871,
+        1.645
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "frame.hughes-long-engagement",
+      "type": "track-framing.3000k.small",
+      "point": [
+        -6.45,
+        8.277,
+        9.3
+      ],
+      "aim": [
+        -13.95,
+        8.277,
+        1.645
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "frame.brown-walton-on-the-naze",
+      "type": "track-framing.3000k.small",
+      "point": [
+        -6.45,
+        9.856,
+        9.3
+      ],
+      "aim": [
+        -13.95,
+        9.856,
+        1.65
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "frame.sandys-morgan-le-fay",
+      "type": "track-framing.3000k.small",
+      "point": [
+        -6.45,
+        14.212,
+        9.3
+      ],
+      "aim": [
+        -13.95,
+        14.212,
+        1.65
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "frame.sandys-medea",
+      "type": "track-framing.3000k.small",
+      "point": [
+        -6.45,
+        15.778,
+        9.3
+      ],
+      "aim": [
+        -13.95,
+        15.778,
+        1.65
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "frame.morris-trellis",
+      "type": "track-framing.3000k.medium",
+      "point": [
+        6.45,
+        -16.743,
+        9.3
+      ],
+      "aim": [
+        13.95,
+        -16.743,
+        1.7
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "frame.morris-acanthus",
+      "type": "track-framing.3000k.medium",
+      "point": [
+        6.45,
+        -15.0,
+        9.3
+      ],
+      "aim": [
+        13.95,
+        -15.0,
+        1.7
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "frame.morris-willow-bough",
+      "type": "track-framing.3000k.medium",
+      "point": [
+        6.45,
+        -13.258,
+        9.3
+      ],
+      "aim": [
+        13.95,
+        -13.258,
+        1.7
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "frame.stillman-loves-messenger",
+      "type": "track-framing.3000k.small",
+      "point": [
+        6.45,
+        -11.088,
+        9.3
+      ],
+      "aim": [
+        13.95,
+        -11.088,
+        1.645
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "frame.millais-portia",
+      "type": "track-framing.3000k.medium",
+      "point": [
+        6.45,
+        -9.767,
+        9.3
+      ],
+      "aim": [
+        13.95,
+        -9.767,
+        1.645
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "frame.de-morgan-flora",
+      "type": "track-framing.3000k.medium",
+      "point": [
+        6.45,
+        -8.299,
+        9.3
+      ],
+      "aim": [
+        13.95,
+        -8.299,
+        1.745
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "frame.leighton-lachrymae",
+      "type": "track-framing.3000k.medium",
+      "point": [
+        6.45,
+        -6.934,
+        9.3
+      ],
+      "aim": [
+        13.95,
+        -6.934,
+        1.69
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "frame.burne-jones-golden-stairs",
+      "type": "track-framing.3000k.medium",
+      "point": [
+        6.45,
+        -4.188,
+        9.3
+      ],
+      "aim": [
+        13.95,
+        -4.188,
+        2.095
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "frame.moore-dreamers",
+      "type": "track-framing.3000k.small",
+      "point": [
+        6.45,
+        -1.796,
+        9.3
+      ],
+      "aim": [
+        13.95,
+        -1.796,
+        1.645
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "frame.burne-jones-pygmalion-1",
+      "type": "track-framing.3000k.small",
+      "point": [
+        6.45,
+        0.996,
+        9.3
+      ],
+      "aim": [
+        13.95,
+        0.996,
+        1.645
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "frame.burne-jones-pygmalion-2",
+      "type": "track-framing.3000k.small",
+      "point": [
+        6.45,
+        2.332,
+        9.3
+      ],
+      "aim": [
+        13.95,
+        2.332,
+        1.645
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "frame.burne-jones-pygmalion-3",
+      "type": "track-framing.3000k.small",
+      "point": [
+        6.45,
+        3.668,
+        9.3
+      ],
+      "aim": [
+        13.95,
+        3.668,
+        1.645
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "frame.burne-jones-pygmalion-4",
+      "type": "track-framing.3000k.small",
+      "point": [
+        6.45,
+        5.004,
+        9.3
+      ],
+      "aim": [
+        13.95,
+        5.004,
+        1.645
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "frame.burne-jones-love-song",
+      "type": "track-framing.3000k.medium",
+      "point": [
+        6.45,
+        9.0,
+        9.3
+      ],
+      "aim": [
+        13.95,
+        9.0,
+        1.65
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "frame.rossetti-beata-beatrix",
+      "type": "track-framing.3000k.small",
+      "point": [
+        6.45,
+        13.411,
+        9.3
+      ],
+      "aim": [
+        13.95,
+        13.411,
+        1.65
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "frame.rossetti-lady-lilith",
+      "type": "track-framing.3000k.small",
+      "point": [
+        6.45,
+        14.994,
+        9.3
+      ],
+      "aim": [
+        13.95,
+        14.994,
+        1.65
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "frame.rossetti-proserpine",
+      "type": "track-framing.3000k.medium",
+      "point": [
+        6.45,
+        16.583,
+        9.3
+      ],
+      "aim": [
+        13.95,
+        16.583,
+        1.645
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "frame.waterhouse-lady-of-shalott",
+      "type": "track-framing.3000k.medium",
+      "point": [
+        -10.0,
+        12.0,
+        14.4
+      ],
+      "aim": [
+        -10.0,
+        17.95,
+        1.765
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "frame.morris-attainment",
+      "type": "track-framing.3000k.medium",
+      "point": [
+        0.0,
+        12.0,
+        16.2
+      ],
+      "aim": [
+        0.0,
+        17.95,
+        2.22
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "frame.burne-jones-king-cophetua",
+      "type": "track-framing.3000k.medium",
+      "point": [
+        10.0,
+        12.0,
+        14.4
+      ],
+      "aim": [
+        10.0,
+        17.95,
+        2.165
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "frame.burne-jones-star-of-bethlehem",
+      "type": "track-framing.3000k.medium",
+      "point": [
+        10.5,
+        -12.0,
+        14.241
+      ],
+      "aim": [
+        10.5,
+        -17.95,
+        2.18
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "spot.case.charger",
+      "type": "track-spot.3000k.12deg",
+      "point": [
+        -6.45,
+        -6.45,
+        9.3
+      ],
+      "aim": [
+        -10.4,
+        -6.45,
+        0.585
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "spot.case.dish-eagle",
+      "type": "track-spot.3000k.12deg",
+      "point": [
+        -6.45,
+        -5.5,
+        9.3
+      ],
+      "aim": [
+        -10.4,
+        -5.5,
+        0.57
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "spot.case.peacock-dish",
+      "type": "track-spot.3000k.12deg",
+      "point": [
+        6.45,
+        -6.3,
+        9.3
+      ],
+      "aim": [
+        10.4,
+        -6.3,
+        0.578
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "spot.case.vase",
+      "type": "track-spot.3000k.12deg",
+      "point": [
+        6.45,
+        -5.45,
+        9.3
+      ],
+      "aim": [
+        10.4,
+        -5.45,
+        0.725
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "spot.case.rice-dish",
+      "type": "track-spot.3000k.12deg",
+      "point": [
+        -6.45,
+        5.55,
+        9.3
+      ],
+      "aim": [
+        -10.4,
+        5.55,
+        0.572
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "spot.case.fish-dish",
+      "type": "track-spot.3000k.12deg",
+      "point": [
+        -6.45,
+        6.45,
+        9.3
+      ],
+      "aim": [
+        -10.4,
+        6.45,
+        0.575
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "spot.case.ship-plate",
+      "type": "track-spot.3000k.12deg",
+      "point": [
+        6.45,
+        5.6,
+        9.3
+      ],
+      "aim": [
+        10.4,
+        5.6,
+        0.565
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "spot.case.jar",
+      "type": "track-spot.3000k.12deg",
+      "point": [
+        6.45,
+        6.4,
+        9.3
+      ],
+      "aim": [
+        10.4,
+        6.4,
+        0.74
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "spot.chaucer",
+      "type": "track-spot.3000k.12deg",
+      "point": [
+        12.2,
+        -12.0,
+        13.216
+      ],
+      "aim": [
+        12.2,
+        -13.3,
+        1.12
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "electrolier.w1",
+      "type": "gap.electrolier.3000k",
+      "point": [
+        -6.0,
+        -15.0,
+        5.849
+      ],
+      "aim": [
+        -6.0,
+        -15.0,
+        0.0
+      ],
+      "operation": "dusk"
+    },
+    {
+      "id": "electrolier.w2",
+      "type": "gap.electrolier.3000k",
+      "point": [
+        -6.0,
+        -9.0,
+        5.849
+      ],
+      "aim": [
+        -6.0,
+        -9.0,
+        0.0
+      ],
+      "operation": "dusk"
+    },
+    {
+      "id": "electrolier.w3",
+      "type": "gap.electrolier.3000k",
+      "point": [
+        -6.0,
+        -3.0,
+        5.849
+      ],
+      "aim": [
+        -6.0,
+        -3.0,
+        0.0
+      ],
+      "operation": "dusk"
+    },
+    {
+      "id": "electrolier.w4",
+      "type": "gap.electrolier.3000k",
+      "point": [
+        -6.0,
+        3.0,
+        5.849
+      ],
+      "aim": [
+        -6.0,
+        3.0,
+        0.0
+      ],
+      "operation": "dusk"
+    },
+    {
+      "id": "electrolier.w5",
+      "type": "gap.electrolier.3000k",
+      "point": [
+        -6.0,
+        9.0,
+        5.849
+      ],
+      "aim": [
+        -6.0,
+        9.0,
+        0.0
+      ],
+      "operation": "dusk"
+    },
+    {
+      "id": "electrolier.w6",
+      "type": "gap.electrolier.3000k",
+      "point": [
+        -6.0,
+        15.0,
+        5.849
+      ],
+      "aim": [
+        -6.0,
+        15.0,
+        0.0
+      ],
+      "operation": "dusk"
+    },
+    {
+      "id": "electrolier.e1",
+      "type": "gap.electrolier.3000k",
+      "point": [
+        6.0,
+        -15.0,
+        5.849
+      ],
+      "aim": [
+        6.0,
+        -15.0,
+        0.0
+      ],
+      "operation": "dusk"
+    },
+    {
+      "id": "electrolier.e2",
+      "type": "gap.electrolier.3000k",
+      "point": [
+        6.0,
+        -9.0,
+        5.849
+      ],
+      "aim": [
+        6.0,
+        -9.0,
+        0.0
+      ],
+      "operation": "dusk"
+    },
+    {
+      "id": "electrolier.e3",
+      "type": "gap.electrolier.3000k",
+      "point": [
+        6.0,
+        -3.0,
+        5.849
+      ],
+      "aim": [
+        6.0,
+        -3.0,
+        0.0
+      ],
+      "operation": "dusk"
+    },
+    {
+      "id": "electrolier.e4",
+      "type": "gap.electrolier.3000k",
+      "point": [
+        6.0,
+        3.0,
+        5.849
+      ],
+      "aim": [
+        6.0,
+        3.0,
+        0.0
+      ],
+      "operation": "dusk"
+    },
+    {
+      "id": "electrolier.e5",
+      "type": "gap.electrolier.3000k",
+      "point": [
+        6.0,
+        9.0,
+        5.849
+      ],
+      "aim": [
+        6.0,
+        9.0,
+        0.0
+      ],
+      "operation": "dusk"
+    },
+    {
+      "id": "electrolier.e6",
+      "type": "gap.electrolier.3000k",
+      "point": [
+        6.0,
+        15.0,
+        5.849
+      ],
+      "aim": [
+        6.0,
+        15.0,
+        0.0
+      ],
+      "operation": "dusk"
+    },
+    {
+      "id": "electrolier.porch",
+      "type": "gap.electrolier.3000k",
+      "point": [
+        0.0,
+        -21.25,
+        5.299
+      ],
+      "aim": [
+        0.0,
+        -21.25,
+        0.0
+      ],
+      "operation": "dusk"
+    }
+  ],
+  "targets": [
+    {
+      "surface": "albion.frame.gilt",
+      "class": "oil-and-tempera",
+      "lux": [
+        150,
+        200
+      ],
+      "source": "Care",
+      "note": "Measured on the faces of the 26 oils in these frames (both side walls, the south wall's Shalott and Cophetua)."
+    },
+    {
+      "surface": "albion.frame.gilt.glazed",
+      "class": "works-on-paper",
+      "lux": [
+        50,
+        50
+      ],
+      "source": "Care",
+      "note": "Measured on Lady Lilith, Love's Messenger and the Star of Bethlehem (watercolour, gouache, tempera on paper), behind their UV-filtering glazing."
+    },
+    {
+      "surface": "albion.frame.oak",
+      "class": "works-on-paper",
+      "lux": [
+        50,
+        50
+      ],
+      "source": "Care",
+      "note": "Measured on Morris's three wallpaper panels (distemper on paper), glazed."
+    },
+    {
+      "surface": "albion.lectern",
+      "class": "works-on-paper",
+      "lux": [
+        50,
+        50
+      ],
+      "source": "Care",
+      "note": "Measured on the Kelmscott Chaucer's open pages."
+    },
+    {
+      "surface": "albion.tapestry.lining",
+      "class": "textiles.silk",
+      "lux": [
+        50,
+        50
+      ],
+      "source": "Care",
+      "note": "Measured on the Attainment's face (wool and silk: the silk's class, 15,000 lx h a year)."
+    },
+    {
+      "surface": "albion.case.baize",
+      "class": "ceramic-and-glass",
+      "lux": [
+        300,
+        null
+      ],
+      "source": "Care",
+      "note": "Measured on the De Morgan lustreware on the baize beds; 300 recommended, no maximum."
+    },
+    {
+      "surface": "albion.floor.nave",
+      "class": "gallery.low-light",
+      "lux": [
+        50,
+        50
+      ],
+      "source": "UseTargets",
+      "note": "The court holds 50 lx works (ruled class). By day the glass gives far more; this is the electric floor after dusk."
+    },
+    {
+      "surface": "albion.floor.aisle",
+      "class": "gallery.low-light",
+      "lux": [
+        50,
+        50
+      ],
+      "source": "UseTargets",
+      "note": "As the nave."
+    },
+    {
+      "surface": "albion.porch.floor",
+      "class": "circulation",
+      "lux": [
+        100,
+        100
+      ],
+      "source": "UseTargets",
+      "note": "The porch holds no work: a passage from the Rotunda's entrance hall."
+    },
+    {
+      "surface": "albion.porch.floor",
+      "class": "circulation.night",
+      "lux": [
+        50,
+        50
+      ],
+      "source": "UseTargets"
+    }
+  ],
+  "design": [
+    {
+      "brighter": "albion.screen.glass",
+      "darker": "albion.band.glass",
+      "ratio": [
+        1.0,
+        null
+      ],
+      "note": "By day, from the gilt sun's eye point (0, -35.2, 1.60): the sky through the south screen's clear panes over the band."
+    },
+    {
+      "brighter": "albion.band.glass",
+      "darker": "albion.wall.buff",
+      "ratio": [
+        1.0,
+        null
+      ],
+      "note": "By day: the band over the south wall's stone round the tapestry ('the coloured band glowing above it')."
+    },
+    {
+      "brighter": "albion.frame.gilt",
+      "darker": "albion.wall.buff",
+      "ratio": [
+        1.0,
+        null
+      ],
+      "note": "Day and night: every work's face at least as bright as the banded wall within 0.5 m of its frame."
+    },
+    {
+      "brighter": "albion.vault.glass.nave",
+      "darker": "albion.iron.cast",
+      "ratio": [
+        1.0,
+        null
+      ],
+      "note": "By day the iron's soffits read darker than the glass behind them, never black (measured, not tuned)."
+    },
+    {
+      "brighter": "albion.electrolier.globe",
+      "darker": "albion.frame.gilt",
+      "ratio": [
+        1.0,
+        null
+      ],
+      "note": "At night the opal globes are the brightest thing in view; then the works."
+    },
+    {
+      "brighter": "albion.frame.gilt",
+      "darker": "albion.floor.nave",
+      "ratio": [
+        1.0,
+        null
+      ],
+      "note": "At night: works over floors."
+    },
+    {
+      "brighter": "albion.floor.nave",
+      "darker": "albion.vault.glass.nave",
+      "ratio": [
+        1.0,
+        null
+      ],
+      "note": "At night the vault glass is darkest."
+    }
+  ]
+}
