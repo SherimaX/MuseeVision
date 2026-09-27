@@ -59,8 +59,9 @@ namespace Musee::ArtMaking
 		 */
 		void Label(AActor& Actor, const TArray<UStaticMeshComponent*>& Pieces, const FArtHangEntry& Entry, bool bSplit, const FArtWork& Work)
 		{
-			const FString Name = bSplit ? FString::Printf(TEXT("Work_%s_%d"), *Work.Id, Entry.Canvas) : FString::Printf(TEXT("Work_%s"), *Work.Id);
-			UArtWorkComponent* Carrier = NewObject<UArtWorkComponent>(&Actor, FName(Name));
+			// Named apart from the pieces' components, whose names may spell the work's the same way.
+			const FString Name = bSplit ? FString::Printf(TEXT("Label_%s_%d"), *Work.Id, Entry.Canvas) : FString::Printf(TEXT("Label_%s"), *Work.Id);
+			UArtWorkComponent* Carrier = NewObject<UArtWorkComponent>(&Actor, MakeUniqueObjectName(&Actor, UArtWorkComponent::StaticClass(), FName(Name)));
 			Carrier->SetupAttachment(Pieces[0]->GetAttachParent());
 			Carrier->Describe(Work.Id, Entry.Care, Work.Caption());
 			Actor.AddInstanceComponent(Carrier);
