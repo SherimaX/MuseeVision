@@ -14,15 +14,16 @@ namespace Musee::Light
 		constexpr double MillimetersPerMeter = 1000.0;
 
 		/**
-		 * How each kind's light leaves it. A wallwasher's asymmetric lens, a framer's shutters and a picture light's hood
-		 * shape light in ways only their photometric files describe, so those kinds have no emitter yet. A step light's,
-		 * a pinspot's and an uplight's light is a beam about their axis; an edge-lit pane lets its light out evenly over its
-		 * etched face, as a laylight's diffusing face does; a pendant's lamp lights all round inside its globe; an image
-		 * panel's light is its picture.
+		 * How each kind's light leaves it. A wallwasher's asymmetric lens and a picture light's hood shape light in ways only
+		 * their photometric files describe, so those kinds have no emitter yet. A step light's, a pinspot's and an uplight's
+		 * light is a beam about their axis, and so is a framing projector's with its flaps open (its flaps' cut to the
+		 * frame is not drawn yet); an edge-lit pane lets its light out evenly over its etched face, as a laylight's diffusing
+		 * face does; a pendant's lamp lights all round inside its globe; an image panel's light is its picture.
 		 */
 		TOptional<FLightLuminaire::EEmitter> EmitterOfKind(const FString& Kind)
 		{
-			if (Kind == TEXT("track-spot") || Kind == TEXT("downlight") || Kind == TEXT("step-light") || Kind == TEXT("pinspot") || Kind == TEXT("uplight"))
+			if (Kind == TEXT("track-spot") || Kind == TEXT("track-framing") || Kind == TEXT("downlight") || Kind == TEXT("step-light") || Kind == TEXT("pinspot")
+				|| Kind == TEXT("uplight"))
 			{
 				return FLightLuminaire::EEmitter::Spot;
 			}

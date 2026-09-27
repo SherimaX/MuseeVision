@@ -61,8 +61,8 @@ output (the light that leaves the housing), not the LED's.
 | `track-spot.4000k.38deg` | iGuzzini Palco ø 102 mm | QG52 | 1921.59 lm | 38° | 4000 K | 97 | 28.5 W | gallery | complete |
 | `track-wallwasher.3000k` | iGuzzini Sipario LV ø 73 mm | 362G | 999 lm | wall wash | 3000 K | 97 | 16.1 W | gallery | complete |
 | `track-wallwasher.4000k` | Edison Price Stacklite | STK-CZE-2000L-40K-XIA-95+-DIMTR-120V-WH | 2000 lm, nominal | wall wash | 4000 K | ≥ 95 | not published | gallery | incomplete |
-| `track-framing.3000k.small` | iGuzzini Palco framer ø 99 mm | Q745 | 552 lm | shutters | 3000 K | 97 | 24.2 W | gallery | complete |
-| `track-framing.3000k.medium` | iGuzzini Palco framer ø 115 mm | P252 | 896 lm | shutters | 3000 K | 97 | 35 W | gallery | complete |
+| `track-framing.3000k.small` | iGuzzini Palco framer ø 99 mm | Q745 | 552 lm | flaps open: the beam its flux and peak fix | 3000 K | 97 | 24.2 W | gallery | complete |
+| `track-framing.3000k.medium` | iGuzzini Palco framer ø 115 mm | P252 | 896 lm | flaps open: the beam its flux and peak fix | 3000 K | 97 | 35 W | gallery | complete |
 | `picture-light.2700k` | Hogarth Classic Picture Light, antique bronze | #100 | not published | shuttered hood | 2700 K | 97 | not published | gallery | incomplete |
 | `linear-cove.3000k` | iGuzzini Underscore No-Dot strip | RE18 | 1420 lm/m | general | 3000 K | ≥ 90 | 16 W/m | circulation | complete |
 | `linear-strip.2700k.slim` | Lumistrips SlimFlex3090 Nichia | 56027 | 1950 lm/m | bare strip, 120° | 2700 K | ≥ 90 | 18 W/m | circulation | complete |

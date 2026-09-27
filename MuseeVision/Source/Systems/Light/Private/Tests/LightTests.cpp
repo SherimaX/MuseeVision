@@ -114,6 +114,9 @@ namespace Musee::Light::Tests
 		const FLightLuminaire* Glass = FindLuminaire(FMuseeKey(TEXTVIEW("edge-lit-glass.3000k")));
 		TestTrue(TEXT("An edge-lit pane lets its light out as a face, once its flux is published"), Glass && !Glass->bLit
 			&& Glass->Emitter == FLightLuminaire::EEmitter::Rect);
+		const FLightLuminaire* Framer = FindLuminaire(FMuseeKey(TEXTVIEW("track-framing.3000k.small")));
+		TestTrue(TEXT("A framer lights as the beam its 552 lm and 7257 cd fix, its flaps open, about 15 degrees"), Framer && Framer->bLit
+			&& Framer->Emitter == FLightLuminaire::EEmitter::Spot && Framer->BeamAngle.Get() > 13.0 && Framer->BeamAngle.Get() < 17.0);
 		const FLightLuminaire* Washer = FindLuminaire(FMuseeKey(TEXTVIEW("track-wallwasher.3000k")));
 		TestTrue(TEXT("A wallwasher waits for its photometric file"), Washer && !Washer->bLit);
 		return true;
