@@ -5,9 +5,14 @@
 #include "EngineUtils.h"
 #include "GameFramework/Controller.h"
 #include "GameFramework/Pawn.h"
+#include "GameFramework/PlayerController.h"
 #include "GameFramework/PlayerStart.h"
+#include "Kismet/KismetSystemLibrary.h"
 #include "LevelInstance/LevelInstanceActor.h"
+#include "LevelInstance/LevelInstanceLevelStreaming.h"
 #include "LevelInstance/LevelInstanceSubsystem.h"
+#include "Misc/MessageDialog.h"
+#include "Misc/PackageName.h"
 #include "MuseeCollision.h"
 #include "SiteLog.h"
 #include "UObject/SoftObjectPtr.h"
@@ -23,6 +28,36 @@ namespace Musee::Site
 		{
 			const APawn* Body = BodyClass ? BodyClass->GetDefaultObject<APawn>() : nullptr;
 			return Body ? Body->GetDefaultHalfHeight() : 0.0;
+		}
+
+		/** Whether a start is the museum's arrival, the player start Studio writes at the floor under the visitor's feet. */
+		bool IsArrival(const AActor& Start)
+		{
+			const APlayerStart* Player = Cast<APlayerStart>(&Start);
+			return Player && Player->PlayerStartTag == FName(ArrivalTag);
+		}
+
+		/**
+		 * Whether a stage's level can never stream in: its package is not in this build (an editor or -game run refuses
+		 * such a stage before it streams, so it is never loading), or its streaming has failed (a packaged game streams
+		 * a missing or broken package and ends there).
+		 */
+		bool StageFailed(const UWorld& World, const ALevelInstance& Stage)
+		{
+			if (!FPackageName::DoesPackageExist(Stage.GetWorldAssetPackage()))
+			{
+				return true;
+			}
+			const ILevelInstanceInterface* Instance = &Stage;
+			for (const ULevelStreaming* Streaming : World.GetStreamingLevels())
+			{
+				const ULevelStreamingLevelInstance* Streams = Cast<ULevelStreamingLevelInstance>(Streaming);
+				if (Streams && Streams->GetLevelInstance() == Instance && Streams->GetLevelStreamingState() == ELevelStreamingState::FailedToLoad)
+				{
+					return true;
+				}
+			}
+			return false;
 		}
 	}
 }
@@ -51,10 +86,9 @@ void ASiteGameMode::InitGame(const FString& MapName, const FString& Options, FSt
 
 AActor* ASiteGameMode::ChoosePlayerStart_Implementation(AController* Player)
 {
-	const FName Arrival(Musee::Site::ArrivalTag);
 	for (TActorIterator<APlayerStart> It(GetWorld()); It; ++It)
 	{
-		if (It->PlayerStartTag == Arrival)
+		if (Musee::Site::IsArrival(**It))
 		{
 			return *It;
 		}
@@ -62,27 +96,31 @@ AActor* ASiteGameMode::ChoosePlayerStart_Implementation(AController* Player)
 	return Super::ChoosePlayerStart_Implementation(Player);
 }
 
-bool ASiteGameMode::StagesStreamedIn() const
+bool ASiteGameMode::StagesSettled()
 {
 	const UWorld* World = GetWorld();
 	const ULevelInstanceSubsystem* Instances = World->GetSubsystem<ULevelInstanceSubsystem>();
+	bool bSettled = true;
 	for (TActorIterator<ALevelInstance> It(World); It; ++It)
 	{
 		const ULevel* Level = Instances && Instances->IsLoaded(*It) ? Instances->GetLevelInstanceLevel(*It) : nullptr;
-		if (It->IsWorldAssetValid() && !(Level && Level->bIsVisible))
+		if (!It->IsWorldAssetValid() || (Level && Level->bIsVisible) || FailedStages.Contains(*It))
 		{
-			return false;
+			continue;
 		}
+		if (!Musee::Site::StageFailed(*World, **It))
+		{
+			bSettled = false;
+			continue;
+		}
+		FailedStages.Add(*It);
+		UE_LOG(LogMuseeSite, Error, TEXT("The stage %s did not stream in from %s: the visit goes on without it."), *It->GetName(), *It->GetWorldAssetPackage());
 	}
-	return !World->IsVisibilityRequestPending();
+	return bSettled && !World->IsVisibilityRequestPending();
 }
 
-bool ASiteGameMode::IsReadyAt(const AActor& Start) const
+bool ASiteGameMode::FloorAnswersAt(const AActor& Start) const
 {
-	if (!StagesStreamedIn())
-	{
-		return false;
-	}
 	// A line down through where the body will stand, from a body's height above the floor to a body's height below it.
 	const FVector Reach(0.0, 0.0, 2.0 * Musee::Site::BodyHalfHeight(DefaultPawnClass));
 	const FVector Floor = Start.GetActorLocation();
@@ -90,12 +128,59 @@ bool ASiteGameMode::IsReadyAt(const AActor& Start) const
 	return GetWorld()->LineTraceTestByChannel(Floor + Reach, Floor - Reach, Musee::Collision::Body.Channel, Query);
 }
 
+bool ASiteGameMode::TryArrive(AController& Player, const AActor& Start)
+{
+	if (!StagesSettled())
+	{
+		return false;
+	}
+	// Every stage is now in, or never will be; a stage's collision is in the physics scene once its level is visible.
+	// So a floor that does not answer now never will. Only the museum's arrival promises a floor: any other start (the
+	// editor's play-from-here camera, or a level with no arrival) is the engine's, and the body starts there as it would.
+	if (!Musee::Site::IsArrival(Start) || FloorAnswersAt(Start))
+	{
+		if (Waiting.Contains(&Player))
+		{
+			UE_LOG(LogMuseeSite, Log, TEXT("The museum has streamed in after %.2f s: the visitor arrives."), GetWorld()->GetTimeSeconds() - WaitingSince);
+		}
+		Super::RestartPlayer(&Player);
+	}
+	else
+	{
+		FailArrival(Player, Start);
+	}
+	return true;
+}
+
+void ASiteGameMode::FailArrival(AController& Player, const AActor& Start)
+{
+	bArrivalFailed = true;
+	TArray<FString> Failed;
+	for (const TWeakObjectPtr<const ALevelInstance>& Stage : FailedStages)
+	{
+		if (const ALevelInstance* Level = Stage.Get())
+		{
+			Failed.Add(FString::Printf(TEXT("%s (%s)"), *Level->GetName(), *Level->GetWorldAssetPackage()));
+		}
+	}
+	const FString Why = FString::Printf(TEXT("The museum cannot open: every stage has streamed in or failed, and nothing under the arrival %s holds the visitor up. Stages that did not stream in: %s."),
+		*Start.GetName(), Failed.IsEmpty() ? TEXT("none") : *FString::Join(Failed, TEXT(", ")));
+	// The log is for the editor and development builds; the dialog is what a packaged visit shows, and the visit then ends.
+	UE_LOG(LogMuseeSite, Error, TEXT("%s"), *Why);
+	FMessageDialog::Open(EAppMsgType::Ok, FText::FromString(Why), FText::FromString(TEXT("Musée Vision")));
+	UKismetSystemLibrary::QuitGame(this, Cast<APlayerController>(&Player), EQuitPreference::Quit, /*bIgnorePlatformRestrictions*/ false);
+}
+
 void ASiteGameMode::RestartPlayer(AController* NewPlayer)
 {
 	AActor* Start = NewPlayer && DefaultPawnClass ? FindPlayerStart(NewPlayer) : nullptr;
-	if (!Start || IsReadyAt(*Start))
+	if (!Start)
 	{
 		Super::RestartPlayer(NewPlayer);
+		return;
+	}
+	if (TryArrive(*NewPlayer, *Start))
+	{
 		return;
 	}
 	if (Waiting.IsEmpty())
@@ -115,14 +200,13 @@ void ASiteGameMode::Tick(float DeltaSeconds)
 	{
 		AController* Controller = Player.Get();
 		AActor* Start = Controller ? FindPlayerStart(Controller) : nullptr;
-		if (Controller && Start && !IsReadyAt(*Start))
+		if (Controller && Start && !TryArrive(*Controller, *Start))
 		{
 			continue;
 		}
 		Waiting.Remove(Player);
-		if (Controller)
+		if (Controller && !Start)
 		{
-			UE_LOG(LogMuseeSite, Log, TEXT("The museum has streamed in after %.2f s: the visitor arrives."), GetWorld()->GetTimeSeconds() - WaitingSince);
 			Super::RestartPlayer(Controller);
 		}
 	}

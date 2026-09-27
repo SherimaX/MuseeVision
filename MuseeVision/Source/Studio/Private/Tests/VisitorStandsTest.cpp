@@ -18,6 +18,7 @@
 #include "Tests/AutomationCommon.h"
 #include "Tests/AutomationEditorCommon.h"
 #include "Tests/EditorPlay.h"
+#include "UObject/UnrealType.h"
 #include "VisitorBody.h"
 
 #if WITH_DEV_AUTOMATION_TESTS
@@ -25,7 +26,8 @@
 /**
  * The visitor stands where they arrive: the made museum level played in a real game world (PIE) under the site's game
  * mode. Play in the editor streams the stages in before it starts the player, so the test then starts the visitor a
- * second time as a packaged game does: with the stages still streaming in through their Level Instances.
+ * second time as a packaged game does: with the stages still streaming in through their Level Instances, and with two
+ * stages that never will. Last, the arrival's own stage is broken, and the visit must fail loudly rather than wait.
  */
 namespace Musee::Studio
 {
@@ -43,6 +45,18 @@ namespace Musee::Studio
 		/** A second stage, and a floor of it, whose collision the body must meet. */
 		const TCHAR* const OtherStage = TEXT("Salon");
 		const TCHAR* const OtherFloorTag = TEXT("musee.piece:floor.bay1");
+
+		/** The stage the arrival stands in. */
+		const TCHAR* const ArrivalStage = TEXT("Rotunda");
+
+		/** A level that is not in the build, and a package that is but holds no level (as a broken package would). */
+		const TCHAR* const MissingLevel = TEXT("/Game/Generated/Nowhere/L_Nowhere.L_Nowhere");
+		const TCHAR* const NotALevel = TEXT("/Engine/BasicShapes/Cube.Cube");
+
+		/** The stages this test adds, broken on purpose, by name; and the tag it takes them away again by. */
+		const TCHAR* const MissingStage = TEXT("BrokenStage_Missing");
+		const TCHAR* const NotALevelStage = TEXT("BrokenStage_NotALevel");
+		const FName BrokenStageTag(TEXT("musee.test.broken-stage"));
 
 		UWorld* PlayWorld() { return GEditor ? GEditor->PlayWorld.Get() : nullptr; }
 
@@ -85,6 +99,41 @@ namespace Musee::Studio
 				}
 			}
 			return nullptr;
+		}
+
+		/** Points a stage at a level. A Level Instance refuses a level that is not there, so the test sets it as a level file does. */
+		void PointStageAt(ALevelInstance& Stage, const TCHAR* Level)
+		{
+			const FSoftObjectProperty* WorldAsset = FindFProperty<FSoftObjectProperty>(ALevelInstance::StaticClass(), TEXT("WorldAsset"));
+			check(WorldAsset);
+			WorldAsset->SetPropertyValue_InContainer(&Stage, FSoftObjectPtr(FSoftObjectPath(Level)));
+		}
+
+		/** Adds two stages that can never stream in: one whose level is missing, one whose package holds no level. */
+		void AddBrokenStages(UWorld& Play)
+		{
+			const TPair<const TCHAR*, const TCHAR*> Broken[] = {{MissingStage, MissingLevel}, {NotALevelStage, NotALevel}};
+			for (const TPair<const TCHAR*, const TCHAR*>& Each : Broken)
+			{
+				FActorSpawnParameters Spawn;
+				Spawn.Name = FName(Each.Key);
+				ALevelInstance* Stage = Play.SpawnActor<ALevelInstance>(ALevelInstance::StaticClass(), FTransform::Identity, Spawn);
+				Stage->Tags.Add(BrokenStageTag);
+				Stage->SetDesiredRuntimeBehavior(ELevelInstanceRuntimeBehavior::LevelStreaming);
+				PointStageAt(*Stage, Each.Value);
+			}
+		}
+
+		/** Breaks the arrival's own stage: its level is no longer there. */
+		void BreakArrivalStage(UWorld& Play)
+		{
+			for (TActorIterator<ALevelInstance> It(&Play); It; ++It)
+			{
+				if (It->GetName() == ArrivalStage)
+				{
+					PointStageAt(**It, MissingLevel);
+				}
+			}
 		}
 
 		/**
@@ -183,13 +232,15 @@ namespace Musee::Studio
 		};
 
 		/**
-		 * Starts the visitor again as a packaged game starts it: the visitor leaves, every stage streams out, and the game
-		 * mode restarts the visitor in the frame the stages are asked to stream back in.
+		 * Starts the visitor again as a packaged game starts it: the visitor leaves, every stage streams out (and the
+		 * stages this test broke on purpose are taken away), the museum is changed as the step asks, and the game mode
+		 * restarts the visitor in the frame the stages are asked to stream back in.
 		 */
 		class FArriveWhileStreaming : public IAutomationLatentCommand
 		{
 		public:
-			explicit FArriveWhileStreaming(FAutomationTestBase& InTest) : Test(InTest), Deadline(FPlatformTime::Seconds() + PlayPatienceSeconds) {}
+			FArriveWhileStreaming(FAutomationTestBase& InTest, TFunction<void(UWorld&)> InChange)
+				: Test(InTest), Change(MoveTemp(InChange)), Deadline(FPlatformTime::Seconds() + PlayPatienceSeconds) {}
 
 			virtual bool Update() override
 			{
@@ -209,7 +260,11 @@ namespace Musee::Studio
 						Player->UnPossess();
 						Body->Destroy();
 					}
-					for (TActorIterator<ALevelInstance> It(Play); It; ++It) { It->UnloadLevelInstance(); }
+					for (TActorIterator<ALevelInstance> It(Play); It; ++It)
+					{
+						if (It->Tags.Contains(BrokenStageTag)) { It->Destroy(); }
+						else { It->UnloadLevelInstance(); }
+					}
 					bStreamedOut = true;
 					return false;
 				}
@@ -222,6 +277,7 @@ namespace Musee::Studio
 						return true;
 					}
 				}
+				Change(*Play);
 				for (TActorIterator<ALevelInstance> It(Play); It; ++It) { It->LoadLevelInstance(); }
 				Mode->RestartPlayer(Player);
 				return true;
@@ -229,8 +285,45 @@ namespace Musee::Studio
 
 		private:
 			FAutomationTestBase& Test;
+			TFunction<void(UWorld&)> Change;
 			double Deadline;
 			bool bStreamedOut = false;
+		};
+
+		/** Watches an arrival that has no floor: the visit must fail, loudly, and neither start the visitor nor wait. */
+		class FWatchArrivalFails : public IAutomationLatentCommand
+		{
+		public:
+			explicit FWatchArrivalFails(FAutomationTestBase& InTest) : Test(InTest), Deadline(FPlatformTime::Seconds() + PlayPatienceSeconds) {}
+
+			virtual bool Update() override
+			{
+				UWorld* Play = PlayWorld();
+				const ASiteGameMode* Mode = Play ? Cast<ASiteGameMode>(Play->GetAuthGameMode()) : nullptr;
+				const APlayerController* Player = Play ? Play->GetFirstPlayerController() : nullptr;
+				if (Player && Player->GetPawn())
+				{
+					Test.AddError(TEXT("With the arrival's stage broken, the visitor was started with no floor under the arrival"));
+					return true;
+				}
+				if (!Mode)
+				{
+					Test.AddInfo(TEXT("With the arrival's stage broken, the visit ended."));
+					return true;
+				}
+				if (Mode->HasArrivalFailed())
+				{
+					Test.AddInfo(TEXT("With the arrival's stage broken, the game mode failed the arrival."));
+					return true;
+				}
+				if (FPlatformTime::Seconds() < Deadline) { return false; }
+				Test.AddError(TEXT("With the arrival's stage broken, the visit waited and never failed"));
+				return true;
+			}
+
+		private:
+			FAutomationTestBase& Test;
+			double Deadline;
 		};
 	}
 }
@@ -247,11 +340,23 @@ bool FSiteVisitorStandsTest::RunTest(const FString& Parameters)
 	{
 		return false;
 	}
+	// The broken stages are named once each by the game mode, and the broken arrival fails the visit.
+	constexpr EAutomationExpectedErrorFlags::MatchType Contains = EAutomationExpectedErrorFlags::Contains;
+	AddExpectedError(FString::Printf(TEXT("The stage %s did not stream in"), MissingStage), Contains, 1, false);
+	AddExpectedError(FString::Printf(TEXT("The stage %s did not stream in"), NotALevelStage), Contains, 1, false);
+	AddExpectedError(FString::Printf(TEXT("The stage %s did not stream in"), ArrivalStage), Contains, 1, false);
+	AddExpectedError(TEXT("The museum cannot open"), Contains, 1, false);
+	// What the engine says of them: the editor refuses a missing level, and a package with no level fails to stream.
+	AddExpectedError(TEXT("because it refers to an invalid package"), Contains, 0, false);
+	AddExpectedMessage(TEXT("Failed to find a world in package"), ELogVerbosity::Warning, EAutomationExpectedMessageFlags::Contains, 0, false);
+
 	// Opens the museum level in the editor and plays it (UEditorEngine::AutomationLoadMap), under its own game mode.
 	TestTrue(TEXT("the museum level opens"), AutomationOpenMap(Museum));
 	ADD_LATENT_AUTOMATION_COMMAND(FWatchVisitorStand(*this, TEXT("When play starts"), false));
-	ADD_LATENT_AUTOMATION_COMMAND(FArriveWhileStreaming(*this));
-	ADD_LATENT_AUTOMATION_COMMAND(FWatchVisitorStand(*this, TEXT("Arriving while the stages stream in"), true));
+	ADD_LATENT_AUTOMATION_COMMAND(FArriveWhileStreaming(*this, &AddBrokenStages));
+	ADD_LATENT_AUTOMATION_COMMAND(FWatchVisitorStand(*this, TEXT("Arriving while the stages stream in, two of them broken"), true));
+	ADD_LATENT_AUTOMATION_COMMAND(FArriveWhileStreaming(*this, &BreakArrivalStage));
+	ADD_LATENT_AUTOMATION_COMMAND(FWatchArrivalFails(*this));
 	ADD_LATENT_AUTOMATION_COMMAND(FEndPlayMapCommand());
 	ADD_LATENT_AUTOMATION_COMMAND(FOpenUntitledLevel());
 	return true;
