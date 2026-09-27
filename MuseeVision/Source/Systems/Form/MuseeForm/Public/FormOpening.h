@@ -57,9 +57,16 @@ struct MUSEEFORM_API FFormOpening
 	UPROPERTY()
 	FMuseeKey Beyond;
 
-	/** Where it is, in the stage's frame. */
+	/** Where it is, in the stage's frame, or in its body's when it rides one. */
 	UPROPERTY()
 	FMuseeFrame Frame;
+
+	/**
+	 * The moving body the opening is cut in (the Rotunda's sun clock carries its door up and down), or the none key for an
+	 * opening in a shell that stands still.
+	 */
+	UPROPERTY()
+	FMuseeKey Body;
 
 	/** Its extent along the frame's x (along the arc, when it is bent) and y, metres. */
 	UPROPERTY(meta = (Units = "Meters"))

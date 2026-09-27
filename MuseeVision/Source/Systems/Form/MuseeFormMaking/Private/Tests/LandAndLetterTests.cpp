@@ -160,25 +160,36 @@ namespace Musee::Form::Tests
 			return false;
 		}
 		TestNotNull(TEXT("with the motto's letters"), Face.GetValue().Find(TEXT('N')));
-		// The Rotunda's motto's first word: capitals 0.26 on the circle r 8.53, tops to the dial, 8 mm proud, 2.5 mm bevel.
+		// The Rotunda's motto's first words: capitals 0.26 on the circle r 8.53, tops to the dial, 8 mm proud, 2.5 mm bevel, the
+		// words parted by a gilt triangular stop in a gap of 1.15 caps (rotunda.md section 3.1).
 		FFormLettering Motto;
 		Motto.Text = TEXT("HORAS");
+		Motto.Text.AppendChar(FFormLettering::Interpunct);
+		Motto.Text += TEXT("NON");
 		Motto.Typeface = Face.GetValue();
 		Motto.CapMeters = 0.26;
 		Motto.TrackingCaps = 0.16;
 		Motto.WordSpaceCaps = 0.6;
+		Motto.StopGapCaps = 1.15;
+		Motto.StopHalfWidthCaps = 0.12;
+		Motto.StopTopCaps = 0.60;
+		Motto.StopPointCaps = 0.36;
+		Motto.StopApexMeters = 0.008;
 		Motto.BaselineRadiusMeters = 8.53;
 		Motto.CentreDegrees = 90.0;
 		Motto.bTopsInward = true;
 		Motto.ProudMeters = 0.008;
 		Motto.BevelMeters = 0.0025;
-		const TArray<FFormMadePiece> Pieces = LandMake(*this, FFormDrawing::Of(TEXT("floor.motto"), TEXT("motto"), Motto));
+		FFormDrawing Drawing = FFormDrawing::Of(TEXT("floor.motto"), TEXT("motto"), Motto);
+		Drawing.PartSurfaces.Add(FFormLettering::StopPart, TEXT("motto.stop"));
+		const TArray<FFormMadePiece> Pieces = LandMake(*this, Drawing);
 		if (!TestEqual(TEXT("a line of letters is one piece"), Pieces.Num(), 1))
 		{
 			return false;
 		}
-		// H and S are solid; O, R and A each have a counter: five closed shells, three of them rings.
-		LandClosed(*this, TEXT("HORAS cast in bronze"), Pieces[0], 5 * 2 - 3 * 2);
+		// H, S and N twice are solid; O twice, R and A each have a counter; the stop is a pyramid: nine closed shells, four rings.
+		LandClosed(*this, TEXT("HORAS, a stop and NON cast in bronze"), Pieces[0], 9 * 2 - 4 * 2);
+		TestEqual(TEXT("the stop takes its own surface"), Pieces[0].SlotSurfaces, TArray<FName>{TEXT("motto.stop")});
 		double Top = 0.0;
 		double Inner = TNumericLimits<double>::Max();
 		double Outer = 0.0;

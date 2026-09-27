@@ -5,7 +5,8 @@
 /**
  * Each letter is cast as the founder casts it: its bed on the outline, plumb sides up to the bevel, the bevel's band in to
  * the face, and the face over the same triangles as the bed, moved in along each point's mitre (FFormGlyph). The letters
- * are set out along the line by their advances and the tracking, and the line is centred on its place.
+ * are set out along the line by their advances and the tracking between them, the words by their spaces and stops, and
+ * the line is centred on its place.
  */
 namespace Musee::Form::Drawing
 {
@@ -19,15 +20,27 @@ namespace Musee::Form::Drawing
 			FVector2D Up = FVector2D(0.0, 1.0);
 		};
 
-		/** The width of a character in cap heights, and the space after it. */
-		double LetterWidth(const FFormLettering& Shape, TCHAR Character, bool bLast)
+		/** Whether a character is a letter of the typeface: neither a space nor a stop. */
+		bool IsLetter(TCHAR Character)
 		{
+			return Character != TEXT(' ') && Character != FFormLettering::Interpunct;
+		}
+
+		/** How far the pen moves on over the character at Index, in cap heights: tracking only between two letters. */
+		double LetterWidth(const FFormLettering& Shape, int32 Index)
+		{
+			const TCHAR Character = Shape.Text[Index];
 			if (Character == TEXT(' '))
 			{
 				return Shape.WordSpaceCaps;
 			}
+			if (Character == FFormLettering::Interpunct)
+			{
+				return Shape.StopGapCaps;
+			}
 			const FFormGlyph* Glyph = Shape.Typeface.Find(Character);
-			return (Glyph ? Glyph->Advance : 0.0) + (bLast ? 0.0 : Shape.TrackingCaps);
+			const bool bLetterFollows = Index + 1 < Shape.Text.Len() && IsLetter(Shape.Text[Index + 1]);
+			return (Glyph ? Glyph->Advance : 0.0) + (bLetterFollows ? Shape.TrackingCaps : 0.0);
 		}
 
 		/** The place of the letter whose middle lies Along metres from the line's middle. */
@@ -142,6 +155,44 @@ namespace Musee::Form::Drawing
 			}
 		}
 
+		/**
+		 * One stop, cast in the middle of its gap: a triangular pyramid, point down, its base on the bed and its apex over the
+		 * triangle's incentre, where its three faces meet.
+		 */
+		void CastStop(const FFormLettering& Shape, const FLetterPlace& Place, FMeshBuilder& Mesh)
+		{
+			const double Cap = Shape.CapMeters;
+			auto InPlane = [&](double X, double Y) { return Place.Middle + Place.Along * (X * Cap) + Place.Up * (Y * Cap); };
+			const FVector2D Corners[3] = {InPlane(-Shape.StopHalfWidthCaps, Shape.StopTopCaps), InPlane(Shape.StopHalfWidthCaps, Shape.StopTopCaps),
+				InPlane(0.0, Shape.StopPointCaps)};
+			const double Opposite[3] = {FVector2D::Distance(Corners[1], Corners[2]), FVector2D::Distance(Corners[2], Corners[0]),
+				FVector2D::Distance(Corners[0], Corners[1])};
+			const FVector2D Incentre = (Corners[0] * Opposite[0] + Corners[1] * Opposite[1] + Corners[2] * Opposite[2])
+				/ (Opposite[0] + Opposite[1] + Opposite[2]);
+			const FVector Apex(Incentre.X, Incentre.Y, Shape.StopApexMeters);
+			Mesh.UseSlot(FFormLettering::StopPart);
+			int32 Bed[3];
+			for (int32 Corner = 0; Corner < 3; ++Corner)
+			{
+				Bed[Corner] = Mesh.AddVertex(FVector(Corners[Corner].X, Corners[Corner].Y, 0.0), -FVector::UpVector, (Corners[Corner] - Incentre));
+			}
+			Mesh.AddTriangle(Bed[0], Bed[1], Bed[2]);
+			for (int32 Corner = 0; Corner < 3; ++Corner)
+			{
+				const FVector A(Corners[Corner].X, Corners[Corner].Y, 0.0);
+				const FVector B(Corners[(Corner + 1) % 3].X, Corners[(Corner + 1) % 3].Y, 0.0);
+				FVector Facet = FVector::CrossProduct(B - A, Apex - A).GetSafeNormal();
+				const FVector Outward = 0.5 * (A + B) - FVector(Incentre.X, Incentre.Y, 0.0);
+				Facet = FVector::DotProduct(Facet, Outward) >= 0.0 ? Facet : -Facet;
+				const double Run = FVector::Distance(A, B);
+				const int32 VA = Mesh.AddVertex(A, Facet, FVector2D(0.0, 0.0));
+				const int32 VB = Mesh.AddVertex(B, Facet, FVector2D(Run, 0.0));
+				const int32 VApex = Mesh.AddVertex(Apex, Facet, FVector2D(0.5 * Run, FVector::Distance(0.5 * (A + B), Apex)));
+				Mesh.AddTriangle(VA, VB, VApex);
+			}
+			Mesh.UseSlot(NAME_None);
+		}
+
 		bool CheckLettering(const FFormLettering& Shape, FString& OutWhy)
 		{
 			if (Shape.CapMeters <= 0.0 || Shape.ProudMeters <= 0.0 || Shape.BevelMeters < 0.0 || Shape.BevelMeters >= Shape.ProudMeters)
@@ -155,8 +206,18 @@ namespace Musee::Form::Drawing
 					*Shape.Typeface.Key.ToString(), Shape.Typeface.MaxBevel);
 				return false;
 			}
+			bool bAnyLetter = false;
 			for (const TCHAR Character : Shape.Text)
 			{
+				if (Character == FFormLettering::Interpunct)
+				{
+					if (Shape.StopGapCaps <= 0.0 || Shape.StopHalfWidthCaps <= 0.0 || Shape.StopTopCaps <= Shape.StopPointCaps || Shape.StopApexMeters <= 0.0)
+					{
+						OutWhy = TEXT("a stop needs its gap, its triangle (its top above its point) and its apex");
+						return false;
+					}
+					continue;
+				}
 				FString Why;
 				const FFormGlyph* Glyph = Shape.Typeface.Find(Character);
 				if (Character != TEXT(' ') && (!Glyph || !Glyph->IsWellFormed(&Why)))
@@ -164,8 +225,9 @@ namespace Musee::Form::Drawing
 					OutWhy = FString::Printf(TEXT("%s has no whole letter %c %s"), *Shape.Typeface.Key.ToString(), Character, *Why);
 					return false;
 				}
+				bAnyLetter |= Character != TEXT(' ');
 			}
-			return !Shape.Text.TrimStartAndEnd().IsEmpty();
+			return bAnyLetter;
 		}
 	}
 
@@ -182,17 +244,21 @@ namespace Musee::Form::Drawing
 		double Total = 0.0;
 		for (int32 Index = 0; Index < Shape.Text.Len(); ++Index)
 		{
-			Total += LetterWidth(Shape, Shape.Text[Index], Index + 1 == Shape.Text.Len());
+			Total += LetterWidth(Shape, Index);
 		}
 		double Pen = -0.5 * Total;
 		for (int32 Index = 0; Index < Shape.Text.Len(); ++Index)
 		{
 			const TCHAR Character = Shape.Text[Index];
-			if (const FFormGlyph* Glyph = Character == TEXT(' ') ? nullptr : Shape.Typeface.Find(Character))
+			if (Character == FFormLettering::Interpunct)
+			{
+				CastStop(Shape, PlaceAt(Shape, (Pen + 0.5 * Shape.StopGapCaps) * Shape.CapMeters), Mesh);
+			}
+			else if (const FFormGlyph* Glyph = IsLetter(Character) ? Shape.Typeface.Find(Character) : nullptr)
 			{
 				CastLetter(Shape, *Glyph, PlaceAt(Shape, (Pen + 0.5 * Glyph->Advance) * Shape.CapMeters), Mesh);
 			}
-			Pen += LetterWidth(Shape, Character, Index + 1 == Shape.Text.Len());
+			Pen += LetterWidth(Shape, Index);
 		}
 		return true;
 	}

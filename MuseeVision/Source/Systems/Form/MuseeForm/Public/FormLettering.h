@@ -9,12 +9,19 @@
  * along the frame's x from its origin, or round a circle about the frame's origin, each letter square to the circle at its
  * own middle. The letters stand ProudMeters along the frame's z from their bed, their top edges bevelled by BevelMeters
  * (a founder's chamfer, measured across the face), and the line is centred on its place. A space moves the pen on by a
- * word space; the typeface must hold every other character. The whole line is one piece of as many closed solids as it
- * has letters.
+ * word space; an interpunct (U+00B7, the Roman inscription's stop between words) moves it on by a stop's gap and sets a
+ * triangular stop in it, point down, a low pyramid rising to its apex; the typeface must hold every other character. The
+ * whole line is one piece of as many closed solids as it has letters and stops, the stops in their own part.
  */
 struct FFormLettering
 {
-	/** The text, in the typeface's letters and spaces. */
+	/** The stops' part, which the drawing may finish apart from the letters (a gilt stop among patinated capitals). */
+	static constexpr const TCHAR* StopPart = TEXT("stop");
+
+	/** The character set as a triangular stop. */
+	static constexpr TCHAR Interpunct = TCHAR(0x00B7);
+
+	/** The text, in the typeface's letters, spaces and interpuncts. */
 	FString Text;
 
 	/** The letters' outlines (Musee::Form::FindTypeface). */
@@ -23,9 +30,19 @@ struct FFormLettering
 	/** The cap height, metres. */
 	double CapMeters = 0.0;
 
-	/** The space added after each letter, and a word space, in cap heights. */
+	/** The space between two letters of a word, and a word space, in cap heights. */
 	double TrackingCaps = 0.0;
 	double WordSpaceCaps = 0.0;
+
+	/**
+	 * A stop: the gap it stands in, its triangle's half-width at its top edge, the heights of that edge and of its point
+	 * above the baseline, in cap heights; and the height of its apex above the bed, metres.
+	 */
+	double StopGapCaps = 0.0;
+	double StopHalfWidthCaps = 0.0;
+	double StopTopCaps = 0.0;
+	double StopPointCaps = 0.0;
+	double StopApexMeters = 0.0;
 
 	/**
 	 * Zero: the baseline runs along the frame's x, the letters' tops towards its y, and the line is centred on the origin.
