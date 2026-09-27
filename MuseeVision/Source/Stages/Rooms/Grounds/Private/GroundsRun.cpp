@@ -72,9 +72,11 @@ namespace Musee::Grounds
 
 	FRun& FRun::LineTo(const FVector2D& Point)
 	{
-		FRunLeg& Leg = RunLegs.AddDefaulted_GetRef();
+		// The leg starts where the run ends before it is added: once added, it is the run's end.
+		FRunLeg Leg;
 		Leg.Start = End();
 		Leg.End = Point;
+		RunLegs.Add(Leg);
 		return *this;
 	}
 

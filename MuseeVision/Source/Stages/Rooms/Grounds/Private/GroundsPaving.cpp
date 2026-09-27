@@ -2,8 +2,8 @@
 
 /**
  * The parvis (§3.3): bush-hammered travertine laid as a mason divides the as-built rectangle, x -60 ... -28 from the
- * Salon strip's edge (y 9.16) to y 23.00. Seventeen courses run east-west, each 0.8141 deep, so the joint at y 17.30
- * falls on the portico's first nosing; slabs 1.1852 long, 27 to a full course with the middle slab centred on the axis,
+ * Salon strip's edge (y 9.16) to y 23.00. Seventeen courses run east-west, each 0.8140 deep, set out so the joint at
+ * y 17.30 falls on the portico's first nosing; slabs 1.1852 long, 27 to a full course with the middle slab centred on the axis,
  * alternate courses offset half a slab and cut at the ends; 6 mm joints; each slab -0.120 to +0.024. The kerbs round it
  * (x -60, x -28, y 23) take their 60 mm off the slabs beside them; the strip's edge is the paving's north side.
  *

@@ -51,6 +51,20 @@ namespace Musee::Grounds::Tests
 			return Found;
 		}
 
+		/** The Seat anchors whose keys run on from a prefix (<coping>.seat.<n>), each key its own. */
+		TArray<const FMuseeStageAnchor*> SeatsOf(const FSiteDescription& Description, const FString& Prefix)
+		{
+			TArray<const FMuseeStageAnchor*> Found;
+			for (const FMuseeStageAnchor& Anchor : Description.Anchors)
+			{
+				if (Anchor.Kind == FName(TEXT("Seat")) && Anchor.Key.ToString().StartsWith(Prefix))
+				{
+					Found.Add(&Anchor);
+				}
+			}
+			return Found;
+		}
+
 		int32 CountPieces(const FSiteDescription& Description, const FString& Prefix, const FString& Suffix = FString())
 		{
 			return Description.Pieces.FilterByPredicate([&](const FFormDrawing& D)
@@ -220,10 +234,14 @@ namespace Musee::Grounds::Tests
 		}
 
 		// The copings' seats: every 0.80 on the canal's seat line, clear of corners and lamp bases; round the basin.
-		const TArray<const FMuseeStageAnchor*> Canal = AnchorsOf(Description, TEXT("grounds.canal.coping.seat"));
-		const TArray<const FMuseeStageAnchor*> Basin = AnchorsOf(Description, TEXT("grounds.rond-point.coping.seat"));
+		const TArray<const FMuseeStageAnchor*> Canal = SeatsOf(Description, TEXT("grounds.canal.coping.seat."));
+		const TArray<const FMuseeStageAnchor*> Basin = SeatsOf(Description, TEXT("grounds.rond-point.coping.seat."));
 		TestEqual(TEXT("the canal seats 80: 31 on each long side, 9 on each end"), Canal.Num(), 80);
 		TestEqual(TEXT("the round basin seats 21, 0.82 apart"), Basin.Num(), 21);
+		TSet<FString> SeatKeys;
+		for (const FMuseeStageAnchor* Seat : Canal) { SeatKeys.Add(Seat->Key.ToString()); }
+		for (const FMuseeStageAnchor* Seat : Basin) { SeatKeys.Add(Seat->Key.ToString()); }
+		TestEqual(TEXT("each seat has its own key"), SeatKeys.Num(), Canal.Num() + Basin.Num());
 		const FVector2D CanalCentre(-44.0, 42.0);
 		for (const FMuseeStageAnchor* Seat : Canal)
 		{
@@ -303,8 +321,9 @@ namespace Musee::Grounds::Tests
 		const FSiteDescription& Description = Described();
 
 		// §3.3: seventeen courses fill the parvis, the joint under the portico's first nosing; 27 slabs fill a course.
-		TestEqual(TEXT("17 courses reach y 23.00"), Plan::SalonStripEdgeY + Plan::ParvisCourses * Plan::CourseDepth, 23.0, 0.001);
-		TestEqual(TEXT("the tenth joint falls on the nosing at y 17.30"), Plan::SalonStripEdgeY + 10 * Plan::CourseDepth, 17.3, 0.001);
+		const double Reach = Plan::SalonStripEdgeY + Plan::ParvisCourses * Plan::CourseDepth;
+		TestTrue(TEXT("17 courses reach under the kerb at y 23.00"), Reach >= Plan::ParvisSouthY - Plan::KerbHalf && Reach <= Plan::ParvisSouthY);
+		TestEqual(TEXT("the tenth joint falls on the nosing at y 17.30"), Plan::SalonStripEdgeY + 10 * Plan::CourseDepth, 17.3, 1e-9);
 		TestEqual(TEXT("27 slabs span the parvis"), Plan::SlabsPerCourse * Plan::SlabLength, 32.0, 0.001);
 		TestEqual(TEXT("nine full courses of 27 and eight offset of 28"), CountPieces(Description, TEXT("parvis.")), 9 * 27 + 8 * 28);
 		const FFormDrawing* Middle = Description.Pieces.FindByPredicate([](const FFormDrawing& D) { return D.Name == FName(TEXT("parvis.c01.s14")); });

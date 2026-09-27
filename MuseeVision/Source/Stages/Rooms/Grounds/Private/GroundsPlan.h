@@ -88,9 +88,15 @@ namespace Musee::Grounds::Plan
 	inline constexpr double TerraceEndKerbFrom = 15.370;
 
 	// ---- §3.3 the parvis's paving -----------------------------------------------------------------------------------------
-	/** 17 courses east-west, each 0.8141 deep from y 9.16; slabs 1.1852 long, 27 to a full course; 6 mm joints (pitches). */
+	/**
+	 * 17 courses east-west from y 9.16, set out as a mason does from the line the eye reads, the portico's first nosing: the
+	 * tenth joint falls on it (y 17.30), so each course is (17.30 - 9.16) / 10 = 0.8140 deep. The sheet's 0.8141 is the
+	 * rectangle's 13.84 / 17 rounded, which puts that joint a millimetre off the nosing; the seventeenth course runs 2 mm
+	 * short of y 23.00, under the kerb that takes 60 mm off it. Slabs 1.1852 long, 27 to a full course; 6 mm joints.
+	 */
 	inline constexpr int32 ParvisCourses = 17;
-	inline constexpr double CourseDepth = 0.8141;
+	inline constexpr int32 NosingJoint = 10;
+	inline constexpr double CourseDepth = (PorticoNosingY - SalonStripEdgeY) / NosingJoint;
 	inline constexpr int32 SlabsPerCourse = 27;
 	inline constexpr double SlabLength = 1.1852;
 	inline constexpr double PavingJoint = 0.006;

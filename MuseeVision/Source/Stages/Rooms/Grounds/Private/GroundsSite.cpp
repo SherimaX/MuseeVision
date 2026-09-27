@@ -51,7 +51,8 @@ namespace Musee::Grounds
 
 		/**
 		 * The canal coping's seats: on its seat line, 0.25 in from the outer face at the coping's top, a frame every 0.80 set
-		 * out from each side's middle, none within 0.60 of a corner or of a lamp's base; each faces out, away from the water.
+		 * out from each side's middle, none within 0.60 of a corner or of a lamp's base; each faces out, away from the water. Each
+		 * seat is a place of its own, canal.coping.seat.<n>, numbered round the canal from its north-west corner.
 		 */
 		void CanalSeats(FSiteDescription& Out)
 		{
@@ -59,6 +60,7 @@ namespace Musee::Grounds
 			const FVector2D Min(Plan::CanalWestX + In, Plan::CanalNorthY + In);
 			const FVector2D Max(Plan::CanalEastX - In, Plan::CanalSouthY - In);
 			const FVector2D Corners[] = {Min, FVector2D(Min.X, Max.Y), Max, FVector2D(Max.X, Min.Y)};
+			int32 Seats = 0;
 			for (int32 Side = 0; Side < 4; ++Side)
 			{
 				const FVector2D A = Corners[Side];
@@ -73,7 +75,7 @@ namespace Musee::Grounds
 					const FVector2D Point = A + Along * (Half + Plan::SeatPitch * Step);
 					if (ClearOfLamps(Point))
 					{
-						Anchor(Out, TEXT("canal.coping.seat"), Seat, FacingInPlan(FVector(Point, Plan::CopingTop), Outward));
+						Anchor(Out, FString::Printf(TEXT("canal.coping.seat.%d"), ++Seats), Seat, FacingInPlan(FVector(Point, Plan::CopingTop), Outward));
 					}
 				}
 			}
@@ -88,7 +90,8 @@ namespace Musee::Grounds
 			{
 				const double Degrees = 360.0 * Index / Count;
 				const FVector2D Point = OnCircle(Centre, Plan::BasinSeatRadius, Degrees);
-				Anchor(Out, TEXT("rond-point.coping.seat"), Seat, FacingInPlan(FVector(Point, Plan::CopingTop), (Point - Centre).GetSafeNormal()));
+				Anchor(Out, FString::Printf(TEXT("rond-point.coping.seat.%d"), Index + 1), Seat, FacingInPlan(FVector(Point, Plan::CopingTop),
+					(Point - Centre).GetSafeNormal()));
 			}
 		}
 

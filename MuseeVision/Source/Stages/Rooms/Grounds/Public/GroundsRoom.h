@@ -19,8 +19,8 @@
  * - a **Ground footprint**, the 800 m square, from the soil's bottom (-0.33) to the tallest birch (13.0);
  * - no **ports**;
  * - **anchors** `grounds.canal.water` and `grounds.rond-point.water` (Water), `grounds.lamp.01`...`10` (Mount, the globes'
- *   centres), `grounds.lawn`, the hedges and the 37 trees (Bed), and `grounds.canal.coping.seat` and
- *   `grounds.rond-point.coping.seat` (Seat, a frame every 0.80 along each coping's seat line);
+ *   centres), `grounds.lawn`, the hedges and the 37 trees (Bed), and `grounds.canal.coping.seat.<n>` and
+ *   `grounds.rond-point.coping.seat.<n>` (Seat, each a frame of its own every 0.80 along each coping's seat line);
  * - the **enclosure** `grounds.open` (Outdoors).
  */
 UCLASS()
