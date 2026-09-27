@@ -28,30 +28,16 @@ namespace Musee::ClassicalHall
 			return Drawn(Name, LocalSurface, MoveTemp(Shape), Solid, Frame);
 		}
 
-		/** The niche carriers' base (0.015, −0.005) (0.015, 0.025) cyma to (0, 0.045) convex first, and their cap cyma to (0.02, H). */
-		FFormProfile NicheBase()
-		{
-			return FPen(-Plan::Sink, -0.005).To(Plan::NicheCarrierBase, -0.005).To(Plan::NicheCarrierBase, 0.025).Cyma(0.0, Plan::NicheCarrierBaseTop, true)
-				.To(-Plan::Sink, Plan::NicheCarrierBaseTop).Closed();
-		}
-
-		FFormProfile NicheCap()
-		{
-			const double C = Plan::NicheCarrierCap;
-			return FPen(-Plan::Sink, 0.0).To(0.0, 0.0).Cyma(C, Plan::NicheCarrierCapHigh - 0.005, false).To(C, Plan::NicheCarrierCapHigh)
-				.To(-Plan::Sink, Plan::NicheCarrierCapHigh).Closed();
-		}
-
 		/** A die with the niche carriers' base and cap, in a frame, its top Width × Depth centred on the frame's origin. */
 		void MouldedDie(TArray<FFormDrawing>& Out, const FString& Name, const TCHAR* LocalSurface, const FMuseeFrame& Frame, double Width, double Depth,
 			double Foot, double Top)
 		{
-			const double C = Plan::NicheCarrierCap;
+			const double C = Plan::NicheCarrierCapProud;
 			const double X = 0.5 * Depth - C;
 			const double Y = 0.5 * Width - C;
-			Out.Add(PrismIn(Name, LocalSurface, Frame, Rect(-X, -Y, X, Y), Foot - 0.005, Top, Solid));
-			Out.Add(Ring(Name + TEXT(".base"), LocalSurface, Frame, NicheBase(), RectOutward(-X, -Y, X, Y), Foot));
-			Out.Add(Ring(Name + TEXT(".cap"), LocalSurface, Frame, NicheCap(), RectOutward(-X, -Y, X, Y), Top - Plan::NicheCarrierCapHigh));
+			Out.Add(PrismIn(Name, LocalSurface, Frame, Rect(-X, -Y, X, Y), Foot - Plan::NicheCarrierBed, Top, Solid));
+			Out.Add(Ring(Name + TEXT(".base"), LocalSurface, Frame, Written(Plan::NicheCarrierBase), RectOutward(-X, -Y, X, Y), Foot));
+			Out.Add(Ring(Name + TEXT(".cap"), LocalSurface, Frame, Written(Plan::NicheCarrierCap), RectOutward(-X, -Y, X, Y), Top));
 		}
 
 		/**
@@ -61,7 +47,7 @@ namespace Musee::ClassicalHall
 		 */
 		void NichePedestal(TArray<FFormDrawing>& Out, const FString& Name, const Plan::FCarrierPlan& Carrier, const FNiche& Niche)
 		{
-			const double C = Plan::NicheCarrierCap;
+			const double C = Plan::NicheCarrierCapProud;
 			const double Axial = FVector::DotProduct(FVector(Carrier.X, Carrier.Y, 0.0) - Niche.Origin, Niche.In);
 			const double Front = Axial - 0.5 * Carrier.Depth + C;
 			const double Back = Axial + 0.5 * Carrier.Depth - C;
@@ -69,7 +55,7 @@ namespace Musee::ClassicalHall
 			const FVector2D Section[] = {{Front, -Plan::Sink}, {0.0, -Plan::Sink}, {0.0, Plan::DadoTop}, {Back, Plan::DadoTop}, {Back, Carrier.Top}, {Front, Carrier.Top}};
 			const FMuseeFrame Across = FrameOfAxes(Niche.Origin + Niche.Lateral() * Half, Niche.In, FVector::UpVector);
 			Out.Add(Drawn(Name, TEXT("plinth"), Prism(Polygon(Section), 2.0 * Half), Solid, Across));
-			Out.Add(Ring(Name + TEXT(".cap"), TEXT("plinth"), Niche.PlanFrame(), NicheCap(), RectOutward(Front, -Half, Back, Half), Carrier.Top - Plan::NicheCarrierCapHigh));
+			Out.Add(Ring(Name + TEXT(".cap"), TEXT("plinth"), Niche.PlanFrame(), Written(Plan::NicheCarrierCap), RectOutward(Front, -Half, Back, Half), Carrier.Top));
 		}
 
 		/**
@@ -83,10 +69,9 @@ namespace Musee::ClassicalHall
 			const FVector Across = Floor.DirectionToParent(FVector::RightVector);
 			const double Proud = Carrier.Depth;
 			const FVector Back = Floor.OriginMeters - Facing * (0.5 * Proud) + Across * (0.5 * Carrier.Width);
-			const double Fillet = 0.030;
-			const FFormProfile Section = FPen(-0.03, Plan::ConsoleFoot).To(Plan::ConsoleCurveA, Plan::ConsoleFoot)
-				.Ellipse(FVector2D(Plan::ConsoleCurveA, Plan::ConsoleCurveB), Proud - Plan::ConsoleCurveA - Fillet, Plan::ConsoleCurveHigh, -90.0, 0.0)
-				.To(Proud, Plan::ConsoleCurveB).To(Proud, Plan::ConsoleTop).To(-0.03, Plan::ConsoleTop).Closed();
+			const FFormProfile Section = FPen(Plan::ConsoleBack, Plan::ConsoleFoot).To(Plan::ConsoleCurveA, Plan::ConsoleFoot)
+				.Ellipse(FVector2D(Plan::ConsoleCurveA, Plan::ConsoleCurveB), Proud - Plan::ConsoleCurveA - Plan::ConsoleNib, Plan::ConsoleCurveHigh, -90.0, 0.0)
+				.To(Proud, Plan::ConsoleCurveB).To(Proud, Plan::ConsoleTop).To(Plan::ConsoleBack, Plan::ConsoleTop).Closed();
 			Out.Add(Drawn(Name, TEXT("console"), Prism(Section, Carrier.Width), Solid, FrameOfAxes(Back, Facing, FVector::UpVector)));
 		}
 
@@ -106,31 +91,23 @@ namespace Musee::ClassicalHall
 
 		/**
 		 * An axis or ambulatory plinth: its die with the base (0.03, −0.01) (0.03, 0.06) cyma to (0, 0.10) convex first and the
-		 * cap (0, H − 0.075) cyma to (0.03, H − 0.02) concave first (0.03, H).
+		 * cap (0, H − 0.075) cyma to (0.03, H − 0.02) concave first (0.03, H), round it.
 		 */
 		void Plinth(TArray<FFormDrawing>& Out, const FString& Name, const Plan::FCarrierPlan& Carrier)
 		{
 			const FMuseeFrame Floor = FloorFrame(Carrier);
-			const double C = Plan::PlinthCap;
-			const double X = 0.5 * Carrier.Depth - C;
-			const double Y = 0.5 * Carrier.Width - C;
-			const double H = Carrier.Top;
-			Out.Add(PrismIn(Name, TEXT("plinth"), Floor, Rect(-X, -Y, X, Y), -Plan::Sink, H, Solid));
-			const FFormProfile Base = FPen(-Plan::Sink, -Plan::Sink).To(Plan::PlinthBase, -Plan::Sink).To(Plan::PlinthBase, Plan::PlinthBaseFillet)
-				.Cyma(0.0, Plan::PlinthBaseTop, true).To(-Plan::Sink, Plan::PlinthBaseTop).Closed();
-			Out.Add(Ring(Name + TEXT(".base"), TEXT("plinth"), Floor, Base, RectOutward(-X, -Y, X, Y), 0.0));
-			const FFormProfile Cap = FPen(-Plan::Sink, H - Plan::PlinthCapHigh).To(0.0, H - Plan::PlinthCapHigh).Cyma(C, H - Plan::PlinthCapFillet, false).To(C, H)
-				.To(-Plan::Sink, H).Closed();
-			Out.Add(Ring(Name + TEXT(".cap"), TEXT("plinth"), Floor, Cap, RectOutward(-X, -Y, X, Y), 0.0));
+			const double X = 0.5 * Carrier.Depth - Plan::PlinthCapProud;
+			const double Y = 0.5 * Carrier.Width - Plan::PlinthCapProud;
+			Out.Add(PrismIn(Name, TEXT("plinth"), Floor, Rect(-X, -Y, X, Y), -Plan::Sink, Carrier.Top, Solid));
+			Out.Add(Ring(Name + TEXT(".base"), TEXT("plinth"), Floor, Written(Plan::PlinthBaseProfile), RectOutward(-X, -Y, X, Y), 0.0));
+			Out.Add(Ring(Name + TEXT(".cap"), TEXT("plinth"), Floor, Written(Plan::PlinthCapProfile), RectOutward(-X, -Y, X, Y), Carrier.Top));
 		}
 
 		/** The centrepiece's pedestal, turned about O: Ø 2.20 × 0.30. */
 		void Pedestal(TArray<FFormDrawing>& Out, const FString& Name, const Plan::FCarrierPlan& Carrier)
 		{
-			const double R = Plan::CentreRadius;
 			FFormLathe Shape;
-			Shape.Section = FPen(0.0, -Plan::Sink).To(R, -Plan::Sink).To(R, 0.03).Round(R - 0.02, 0.07, true).To(R - 0.05, 0.07).To(R - 0.05, 0.24)
-				.Cyma(R, 0.285, true).To(R, Carrier.Top).To(0.0, Carrier.Top).Closed();
+			Shape.Section = Written(Plan::CentrePedestal);
 			Out.Add(Drawn(Name, TEXT("pedestal"), MoveTemp(Shape), Solid, FloorFrame(Carrier)));
 		}
 	}

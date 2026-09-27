@@ -1,5 +1,6 @@
 #pragma once
 
+#include "ClassicalHallPlan.h"
 #include "CoreMinimal.h"
 #include "FormDrawing.h"
 #include "MuseeCollision.h"
@@ -87,6 +88,8 @@ namespace Musee::ClassicalHall
 		FPen& Cyma(double A, double B, bool bConvexFirst);
 		/** An arc about a centre, from one angle to another (degrees), joined by a line where it starts elsewhere. */
 		FPen& Arc(const FVector2D& Centre, double Radius, double FromDeg, double ToDeg);
+		/** The sheet's strokes from the pen's point on, each moved by an offset (a line to where the pen already is draws nothing). */
+		FPen& Strokes(TConstArrayView<Plan::FStroke> Written, const FVector2D& Offset = FVector2D::ZeroVector);
 		/** An elliptical arc about a centre, radii along A and B, from one parametric angle to another (degrees). */
 		FPen& Ellipse(const FVector2D& Centre, double RadiusA, double RadiusB, double FromDeg, double ToDeg);
 
@@ -98,6 +101,9 @@ namespace Musee::ClassicalHall
 		FFormProfile Profile;
 		FVector2D Here;
 	};
+
+	/** A closed profile written in the sheet's strokes, moved by an offset. */
+	FFormProfile Written(TConstArrayView<Plan::FStroke> Strokes, const FVector2D& Offset = FVector2D::ZeroVector);
 
 	// ---- solids -------------------------------------------------------------------------------------------------------
 

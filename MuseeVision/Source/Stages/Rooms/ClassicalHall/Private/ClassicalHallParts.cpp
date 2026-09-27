@@ -107,6 +107,38 @@ namespace Musee::ClassicalHall
 		return *this;
 	}
 
+	FPen& FPen::Strokes(TConstArrayView<Plan::FStroke> Written, const FVector2D& Offset)
+	{
+		for (const Plan::FStroke& Stroke : Written)
+		{
+			const FVector2D To = FVector2D(Stroke.A, Stroke.B) + Offset;
+			switch (Stroke.Kind)
+			{
+			case Plan::EStroke::Line:
+				if (!To.Equals(Here, UE_DOUBLE_KINDA_SMALL_NUMBER))
+				{
+					this->To(To.X, To.Y);
+				}
+				break;
+			case Plan::EStroke::Convex:
+			case Plan::EStroke::Concave:
+				Round(To.X, To.Y, Stroke.Kind == Plan::EStroke::Convex);
+				break;
+			case Plan::EStroke::CymaReversa:
+			case Plan::EStroke::CymaRecta:
+				Cyma(To.X, To.Y, Stroke.Kind == Plan::EStroke::CymaReversa);
+				break;
+			}
+		}
+		return *this;
+	}
+
+	FFormProfile Written(TConstArrayView<Plan::FStroke> Strokes, const FVector2D& Offset)
+	{
+		FPen Pen(FVector2D(Strokes[0].A, Strokes[0].B) + Offset);
+		return Pen.Strokes(Strokes.RightChop(1), Offset).Closed();
+	}
+
 	FPen& FPen::Ellipse(const FVector2D& Centre, double RadiusA, double RadiusB, double FromDeg, double ToDeg)
 	{
 		Profile.ArcAbout(Centre, RadiusA, RadiusB, FromDeg, ToDeg, EFormJoint::Auto);

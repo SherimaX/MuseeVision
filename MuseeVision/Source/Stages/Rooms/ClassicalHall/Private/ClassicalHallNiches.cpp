@@ -111,8 +111,7 @@ namespace Musee::ClassicalHall
 			const double RailTop = Plan::DadoTop + Plan::Sink;
 			const FMuseeFrame Face = FrameOfAxes(Niche.Origin, -Niche.Lateral(), FVector::UpVector);
 			FFormSweep Surround;
-			Surround.Section = FPen(-0.015, -Plan::Sink).To(0.100, -Plan::Sink).To(0.100, 0.014).Cyma(0.075, 0.035, true).To(0.012, 0.035)
-				.Round(-0.015, 0.019, true).Closed();
+			Surround.Section = Written(Plan::NicheSurround);
 			Surround.Path = FFormProfile::From(FVector2D(-Niche.Radius, RailTop));
 			Surround.Path.LineTo(FVector2D(-Niche.Radius, Niche.Springing), EFormJoint::Crisp)
 				.ArcAbout(FVector2D(0.0, Niche.Springing), Niche.Radius, Niche.Radius, 180.0, 0.0, EFormJoint::Smooth)

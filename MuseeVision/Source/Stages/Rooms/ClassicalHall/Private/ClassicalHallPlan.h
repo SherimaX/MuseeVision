@@ -14,6 +14,29 @@ namespace Musee::ClassicalHall::Plan
 	/** The stage's key (§1). */
 	inline constexpr const TCHAR* Stage = TEXT("classical-hall");
 
+	/**
+	 * One stroke of a profile as the sheet writes it (§3's legend): a line to a point, a quarter round to it (convex
+	 * bulging away from the solid on the profile's left, concave into it), or a cyma to it (a reversa is convex first,
+	 * a recta concave first). A profile's first stroke is where it starts; a closed profile returns to it.
+	 */
+	enum class EStroke : uint8
+	{
+		Line,
+		Convex,
+		Concave,
+		CymaReversa,
+		CymaRecta,
+	};
+
+	struct FStroke
+	{
+		EStroke Kind;
+		double A;
+		double B;
+	};
+
+	using enum EStroke;
+
 	// ---- §1 the shell's faces and the stage's height -------------------------------------------------------------------
 	inline constexpr double SlabUnderside = -0.400;
 	inline constexpr double RoofTop = 5.450;
@@ -127,9 +150,8 @@ namespace Musee::ClassicalHall::Plan
 	/** A rosette's radius is 0.3 of its coffer back's smaller side; its heights are drawn at R 0.08 and scale with it. */
 	inline constexpr double RosetteOfBack = 0.300;
 	inline constexpr double RosetteDrawnRadius = 0.080;
-	/** The turned section: (radius fraction, height), from the flat underside's rim over the petals to the boss. */
+	/** The turned section's top: (radius fraction, height), from the rim of the flat underside (−0.004, set into the back) over the petals to the boss. */
 	inline constexpr double RosetteSection[][2] = {{1.00, 0.004}, {0.86, 0.014}, {0.62, 0.020}, {0.36, 0.023}, {0.20, 0.032}, {0.00, 0.036}};
-	inline constexpr double RosetteUnderside = -0.004;
 	/** Eight petals: on the section's rows 1.00 to 0.36 the radius swells by 0.84 + 0.16 |cos 4α|. */
 	inline constexpr int32 RosettePetalRows = 4;
 	inline constexpr double RosettePetalBase = 0.840;
@@ -195,7 +217,6 @@ namespace Musee::ClassicalHall::Plan
 	inline constexpr double ShaftTop = 2.865;
 	/** The entasis is drawn at 12 stations, each under a millimetre from the curve r(t) = 0.170 − 0.02833 (1 − cos πt/2). */
 	inline constexpr int32 EntasisStations = 12;
-	inline constexpr double CapitalTop = 2.965;
 	/** The canalis block 0.31 across the volutes × 0.34, z 2.945–3.04; the plate 0.47 × 0.32, z 3.005–3.05. */
 	inline constexpr double CanalisAcross = 0.310;
 	inline constexpr double CanalisDeep = 0.340;
@@ -222,9 +243,6 @@ namespace Musee::ClassicalHall::Plan
 	inline constexpr double FilletWidth = 0.012;
 	inline constexpr double FilletProud = 0.012;
 	inline constexpr double FilletSet = 0.004;
-	inline constexpr double VoluteEye = 0.018;
-	/** The eye's boss, 14 mm proud (as built). */
-	inline constexpr double VoluteEyeProud = 0.014;
 	/** The spiral is drawn at 24 stations a turn, each chord within a millimetre of the curve at its outer turn. */
 	inline constexpr int32 VoluteStationsPerTurn = 24;
 	/** The abacus 0.37 square, z 3.035–3.07; its edge (0, 0) (0, 0.012) round to (0.015, 0.027) convex (0.015, 0.035). */
@@ -232,6 +250,29 @@ namespace Musee::ClassicalHall::Plan
 	inline constexpr double AbacusFoot = 3.035;
 	inline constexpr double AbacusTop = 3.070;
 	inline constexpr double AbacusEdge = 0.015;
+
+	/** The turned base (r, z), from its bed on the plinth: the lower torus, the scotia, the upper torus, the apophyge. */
+	inline constexpr FStroke ColumnBase[] = {{Line, 0.0, 0.050}, {Line, 0.200, 0.050}, {Line, 0.200, 0.055}, {Convex, 0.200, 0.115}, {Line, 0.190, 0.115},
+		{Line, 0.190, 0.120}, {Concave, 0.190, 0.155}, {Line, 0.185, 0.155}, {Line, 0.185, 0.160}, {Convex, 0.185, 0.195}, {Line, 0.176, 0.195},
+		{Line, 0.176, 0.200}, {Concave, 0.170, 0.215}, {Line, 0.0, 0.215}};
+	/** The capital's turned part (r, z): the apophyge at the neck, the astragal, the echinus. */
+	inline constexpr FStroke ColumnEchinus[] = {{Line, 0.0, 2.865}, {Line, 0.14167, 2.865}, {Concave, 0.14967, 2.875}, {Line, 0.14967, 2.878},
+		{Convex, 0.14967, 2.900}, {Line, 0.14567, 2.900}, {Convex, 0.195, 2.965}, {Line, 0.0, 2.965}};
+	/** The abacus's edge (A out from its core, B up from its foot), sunk 0.01 into the core; the edge stands 0.015 proud at the top. */
+	inline constexpr FStroke AbacusEdgeProfile[] = {{Line, -0.010, 0.0}, {Line, 0.0, 0.0}, {Line, 0.0, 0.012}, {Convex, 0.015, 0.027}, {Line, 0.015, 0.035},
+		{Line, -0.010, 0.035}};
+	/** The volute's eye, turned about the face's normal (r, out of the face): a boss R 0.018 standing 14 mm proud. */
+	inline constexpr FStroke VoluteEyeProfile[] = {{Line, 0.0, -0.004}, {Line, 0.018, -0.004}, {Convex, 0.0, 0.014}};
+	/** The pilaster's Attic base swept round three faces (A out from the shaft's faces, B up from the floor). */
+	inline constexpr FStroke PilasterBase[] = {{Line, -0.010, -0.010}, {Line, 0.065, -0.010}, {Line, 0.065, 0.055}, {Line, 0.045, 0.055},
+		{Convex, 0.075, 0.085}, {Convex, 0.045, 0.115}, {Line, 0.035, 0.115}, {Line, 0.035, 0.120}, {Concave, 0.020, 0.1375}, {Concave, 0.035, 0.155},
+		{Line, 0.030, 0.155}, {Line, 0.030, 0.160}, {Convex, 0.0475, 0.1775}, {Convex, 0.030, 0.195}, {Line, 0.005, 0.195}, {Line, 0.005, 0.200},
+		{Concave, 0.0, 0.215}, {Line, -0.010, 0.215}};
+	/** The pilaster's neck swept round three faces. */
+	inline constexpr FStroke PilasterNeck[] = {{Line, -0.010, 2.865}, {Line, 0.004, 2.865}, {Convex, 0.004, 2.890}, {Convex, 0.030, 2.945},
+		{Line, -0.010, 2.945}};
+	/** The pilasters' base and neck start 0.10 inside the wall, so their returns are whole where they meet it. */
+	inline constexpr double PilasterReturnInside = 0.100;
 
 	/** Gallery pairs x ±2.60 at their centres ± 0.50; the screen x ±1.10 at y 7.0283, facing south. */
 	inline constexpr double PairX = 2.600;
@@ -245,8 +286,6 @@ namespace Musee::ClassicalHall::Plan
 	inline constexpr double PilasterHalf = 0.170;
 	inline constexpr double PilasterFoot = 0.200;
 	inline constexpr double PilasterTop = 2.900;
-	inline constexpr double PilasterNeckFoot = 2.865;
-	inline constexpr double PilasterNeckTop = 2.945;
 	/**
 	 * The pilaster's capital (§3.4): its canalis block 0.02 in front of the shaft, the flat volute discs 0.01 thick on it,
 	 * and the abacus 0.40 wide standing 0.01 proud of the canalis.
@@ -274,6 +313,12 @@ namespace Musee::ClassicalHall::Plan
 	inline constexpr double ScreenEntablatureY = 7.170;
 	/** The tribune's run: face r 6.53. */
 	inline constexpr double TribuneEntablatureR = 6.530;
+	/** The entablature's face (A out from the lowest fascia, B up from the soffit), from the soffit's front to the ledge behind the lip. */
+	inline constexpr FStroke EntablatureFace[] = {{Line, 0.0, 0.0}, {Line, 0.0, 0.055}, {Line, 0.012, 0.055}, {Line, 0.012, 0.115}, {Line, 0.024, 0.115},
+		{Line, 0.024, 0.185}, {CymaReversa, 0.050, 0.215}, {Line, 0.050, 0.228}, {Line, 0.012, 0.228}, {Line, 0.012, 0.418},
+		{CymaReversa, 0.040, 0.445}, {Line, 0.045, 0.445}, {Line, 0.045, 0.500}, {Line, 0.085, 0.500}, {Line, 0.085, 0.515}, {Convex, 0.125, 0.555},
+		{Line, 0.260, 0.555}, {Line, 0.260, 0.620}, {Line, 0.272, 0.620}, {Line, 0.272, 0.630}, {CymaRecta, 0.330, 0.705}, {Line, 0.330, 0.720},
+		{Line, 0.250, 0.720}, {Line, 0.250, 0.640}};
 	/** Dentils 0.034 wide × 0.040 deep × 0.048 high (z 3.516–3.564), pitch 0.052, on the band 0.035–0.075 out; 0.06 clear of a run's ends. */
 	inline constexpr double DentilWidth = 0.034;
 	inline constexpr double DentilPitch = 0.052;
@@ -286,6 +331,18 @@ namespace Musee::ClassicalHall::Plan
 	inline constexpr double DentilGrid = 0.004;
 
 	// ---- §3.4 the wall mouldings, panels and consoles ---------------------------------------------------------------------
+	/** The skirting 0.14 × 0.025 (A out from the wall, B up from the floor). */
+	inline constexpr FStroke Skirting[] = {{Line, -0.010, -0.025}, {Line, 0.025, -0.025}, {Line, 0.025, 0.100}, {CymaReversa, 0.006, 0.135},
+		{Line, 0.006, 0.140}, {Line, -0.010, 0.140}};
+	/** The dado rail, its top 0.46, across the niches' mouths. */
+	inline constexpr FStroke DadoRail[] = {{Line, -0.010, 0.350}, {Line, 0.008, 0.350}, {CymaRecta, 0.040, 0.405}, {Line, 0.045, 0.405},
+		{Line, 0.045, 0.435}, {Convex, 0.030, 0.460}, {Line, -0.010, 0.460}};
+	/** The niche surround, a 0.10 band from the dado rail's top (A out from the opening's edge, B out of the wall). */
+	inline constexpr FStroke NicheSurround[] = {{Line, -0.015, -0.010}, {Line, 0.100, -0.010}, {Line, 0.100, 0.014}, {CymaReversa, 0.075, 0.035},
+		{Line, 0.012, 0.035}, {Convex, -0.015, 0.019}};
+	/** The panels' frame (A out from the panel's edge, B out of the wall). */
+	inline constexpr FStroke PanelFrame[] = {{Line, -0.012, -0.010}, {Line, 0.045, -0.010}, {Line, 0.045, 0.012}, {CymaRecta, 0.012, 0.035},
+		{Line, -0.012, 0.035}};
 	/** The keystone at each niche's crown, from 0.04 below it into the architrave's soffit, widening 0.10 → 0.15, 0.055 proud. */
 	inline constexpr double KeystoneUnder = 0.040;
 	inline constexpr double KeystoneFootWidth = 0.100;
@@ -303,6 +360,9 @@ namespace Musee::ClassicalHall::Plan
 	inline constexpr double LunetteWidth = 2.600;
 	inline constexpr double LunetteFoot = 3.980;
 	inline constexpr double LunetteTop = 4.780;
+	/** The console's back sinks 0.03 behind the face it is fixed to; its quarter ellipse stops 0.03 short of its front. */
+	inline constexpr double ConsoleBack = -0.030;
+	inline constexpr double ConsoleNib = 0.030;
 	/** The console: a quadrant bracket 0.36 wide × 0.30 proud × 0.41 high, top 1.55; the quarter ellipse 0.21 × 0.36 about (0.06, 1.50). */
 	inline constexpr double ConsoleFoot = 1.140;
 	inline constexpr double ConsoleTop = 1.550;
@@ -311,18 +371,20 @@ namespace Musee::ClassicalHall::Plan
 	inline constexpr double ConsoleCurveHigh = 0.360;
 
 	// ---- §3.5 the carriers ------------------------------------------------------------------------------------------------
-	/** The niche carriers' moulding: base 0.015 proud to 0.045, cap 0.02 proud from H − 0.03. */
-	inline constexpr double NicheCarrierBase = 0.015;
-	inline constexpr double NicheCarrierBaseTop = 0.045;
-	inline constexpr double NicheCarrierCap = 0.020;
-	inline constexpr double NicheCarrierCapHigh = 0.030;
-	/** The axis and ambulatory plinths' moulding: base 0.03 proud to 0.10, cap 0.03 proud from H − 0.075. */
-	inline constexpr double PlinthBase = 0.030;
-	inline constexpr double PlinthBaseFillet = 0.060;
-	inline constexpr double PlinthBaseTop = 0.100;
-	inline constexpr double PlinthCap = 0.030;
-	inline constexpr double PlinthCapHigh = 0.075;
-	inline constexpr double PlinthCapFillet = 0.020;
+	/** The niche carriers' base (A out from the die, B up from its foot) and cap (B down from its top), the cap 0.02 proud. */
+	inline constexpr FStroke NicheCarrierBase[] = {{Line, -0.010, -0.005}, {Line, 0.015, -0.005}, {Line, 0.015, 0.025}, {CymaReversa, 0.0, 0.045},
+		{Line, -0.010, 0.045}};
+	inline constexpr FStroke NicheCarrierCap[] = {{Line, -0.010, -0.030}, {Line, 0.0, -0.030}, {CymaRecta, 0.020, -0.005}, {Line, 0.020, 0.0},
+		{Line, -0.010, 0.0}};
+	inline constexpr double NicheCarrierCapProud = 0.020;
+	/** The niche carriers' die stands on a bed 5 mm into the sill, under the base's foot. */
+	inline constexpr double NicheCarrierBed = 0.005;
+	/** The axis and ambulatory plinths' base and cap, likewise, the cap 0.03 proud. */
+	inline constexpr FStroke PlinthBaseProfile[] = {{Line, -0.010, -0.010}, {Line, 0.030, -0.010}, {Line, 0.030, 0.060}, {CymaReversa, 0.0, 0.100},
+		{Line, -0.010, 0.100}};
+	inline constexpr FStroke PlinthCapProfile[] = {{Line, -0.010, -0.075}, {Line, 0.0, -0.075}, {CymaRecta, 0.030, -0.020}, {Line, 0.030, 0.0},
+		{Line, -0.010, 0.0}};
+	inline constexpr double PlinthCapProud = 0.030;
 	/** The herms: a moulded plinth 0.40 square × 0.14, the shaft 0.26 square at 0.13 widening to 0.32 at 1.17, the cap 0.09 from 1.16. */
 	inline constexpr double HermPlinthHigh = 0.140;
 	inline constexpr double HermShaftFoot = 0.130;
@@ -330,8 +392,9 @@ namespace Musee::ClassicalHall::Plan
 	inline constexpr double HermShaftTop = 1.170;
 	inline constexpr double HermShaftTopSide = 0.320;
 	inline constexpr double HermCapFoot = 1.160;
-	/** The centrepiece's pedestal, turned: Ø 2.20 × 0.30. */
-	inline constexpr double CentreRadius = 1.100;
+	/** The centrepiece's pedestal, turned about O (r, z): Ø 2.20 × 0.30. */
+	inline constexpr FStroke CentrePedestal[] = {{Line, 0.0, -0.010}, {Line, 1.100, -0.010}, {Line, 1.100, 0.030}, {Convex, 1.080, 0.070},
+		{Line, 1.050, 0.070}, {Line, 1.050, 0.240}, {CymaReversa, 1.100, 0.285}, {Line, 1.100, 0.300}, {Line, 0.0, 0.300}};
 
 	/** What stands on a carrier (§8), and so how the room builds it. */
 	enum class ECarrier : uint8

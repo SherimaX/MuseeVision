@@ -15,11 +15,7 @@ namespace Musee::ClassicalHall
 		/** The profile (A out from the architrave's lowest fascia, B up from its soffit), closed back to BackA. */
 		FFormProfile EntablatureSection(double BackA)
 		{
-			return FPen(BackA, 0.0).To(0.0, 0.0).To(0.0, 0.055).To(0.012, 0.055).To(0.012, 0.115).To(0.024, 0.115).To(0.024, 0.185)
-				.Cyma(0.050, 0.215, true).To(0.050, 0.228).To(0.012, 0.228).To(0.012, 0.418).Cyma(0.040, 0.445, true).To(0.045, 0.445)
-				.To(0.045, 0.500).To(0.085, 0.500).To(0.085, 0.515).Round(0.125, 0.555, true).To(0.260, 0.555).To(0.260, 0.620).To(0.272, 0.620)
-				.To(0.272, 0.630).Cyma(0.330, 0.705, false).To(0.330, 0.720).To(0.250, 0.720).To(0.250, Plan::Ledge - Plan::ArchitraveSoffit)
-				.To(BackA, Plan::Ledge - Plan::ArchitraveSoffit).Closed();
+			return FPen(BackA, 0.0).Strokes(Plan::EntablatureFace).To(BackA, Plan::Ledge - Plan::ArchitraveSoffit).Closed();
 		}
 
 		FFormDrawing Entablature(const FString& Name, FFormProfile Path, double BackA)

@@ -12,14 +12,6 @@ namespace Musee::ClassicalHall
 {
 	namespace
 	{
-		/** The turned base: from its bed on the plinth, the lower torus, the scotia, the upper torus and the apophyge. */
-		FFormProfile BaseSection()
-		{
-			return FPen(0.0, 0.050).To(0.200, 0.050).To(0.200, 0.055).Round(0.200, 0.115, true).To(0.190, 0.115).To(0.190, 0.120)
-				.Round(0.190, 0.155, false).To(0.185, 0.155).To(0.185, 0.160).Round(0.185, 0.195, true).To(0.176, 0.195).To(0.176, 0.200)
-				.Round(Plan::ShaftRadius, Plan::ShaftFoot, false).To(0.0, Plan::ShaftFoot).Closed();
-		}
-
 		/** The shaft: straight to 1.0983, then the entasis r(t) = 0.170 − 0.02833 (1 − cos πt/2) to r 0.14167 at 2.865. */
 		FFormProfile ShaftSection()
 		{
@@ -32,14 +24,6 @@ namespace Musee::ClassicalHall
 				Pen.To(Radius, FMath::Lerp(Plan::EntasisFrom, Plan::ShaftTop, T));
 			}
 			return Pen.To(0.0, Plan::ShaftTop).Closed();
-		}
-
-		/** The capital's turned part: the apophyge at the neck, the astragal and the echinus. */
-		FFormProfile EchinusSection()
-		{
-			const double Neck = Plan::ShaftTopRadius + 0.008;
-			return FPen(0.0, Plan::ShaftTop).To(Plan::ShaftTopRadius, Plan::ShaftTop).Round(Neck, 2.875, false).To(Neck, 2.878).Round(Neck, 2.900, true)
-				.To(Plan::ShaftTopRadius + 0.004, 2.900).Round(0.195, Plan::CapitalTop, true).To(0.0, Plan::CapitalTop).Closed();
 		}
 
 		/** A volute's spiral: 2.5 turns from the top inwards, clockwise (Turn 1) or anticlockwise (−1) seen from its face. */
@@ -73,7 +57,7 @@ namespace Musee::ClassicalHall
 			if (bEye)
 			{
 				FFormLathe Eye;
-				Eye.Section = FPen(0.0, -Plan::FilletSet).To(Plan::VoluteEye, -Plan::FilletSet).Round(0.0, Plan::VoluteEyeProud, true).Closed();
+				Eye.Section = Written(Plan::VoluteEyeProfile);
 				Out.Add(Drawn(Name + TEXT(".eye"), TEXT("order.carved"), MoveTemp(Eye), nullptr, Face));
 			}
 		}
@@ -82,11 +66,10 @@ namespace Musee::ClassicalHall
 		void Abacus(TArray<FFormDrawing>& Out, const FString& Name, const FMuseeFrame& Frame, double Front, double Back, double Half)
 		{
 			const double E = Plan::AbacusEdge;
-			const double High = Plan::AbacusTop - Plan::AbacusFoot;
 			Out.Add(PrismIn(Name + TEXT(".abacus"), TEXT("order.carved"), Frame, Rect(Back, -Half + E, Front - E, Half - E), Plan::AbacusFoot, Plan::AbacusTop,
 				nullptr));
 			FFormSweep Edge;
-			Edge.Section = FPen(-Plan::Sink, 0.0).To(0.0, 0.0).To(0.0, 0.012).Round(E, 0.027, true).To(E, High).To(-Plan::Sink, High).Closed();
+			Edge.Section = Written(Plan::AbacusEdgeProfile);
 			Edge.Path = RectOutward(Back, -Half + E, Front - E, Half - E);
 			Edge.ElevationMeters = Plan::AbacusFoot;
 			Out.Add(Drawn(Name + TEXT(".abacus.edge"), TEXT("order.carved"), MoveTemp(Edge), nullptr, Frame));
@@ -100,13 +83,13 @@ namespace Musee::ClassicalHall
 			const double P = 0.5 * Plan::PlinthSide;
 			Out.Add(PrismIn(Name + TEXT(".plinth"), TEXT("order.carved"), Frame, Rect(-P, -P, P, P), -Plan::Sink, Plan::PlinthTop, Solid));
 			FFormLathe Base;
-			Base.Section = BaseSection();
+			Base.Section = Written(Plan::ColumnBase);
 			Out.Add(Drawn(Name + TEXT(".base"), TEXT("order.carved"), MoveTemp(Base), Solid, Frame));
 			FFormLathe ShaftLathe;
 			ShaftLathe.Section = ShaftSection();
 			Out.Add(Drawn(Name + TEXT(".shaft"), Shaft, MoveTemp(ShaftLathe), Solid, Frame));
 			FFormLathe Echinus;
-			Echinus.Section = EchinusSection();
+			Echinus.Section = Written(Plan::ColumnEchinus);
 			Out.Add(Drawn(Name + TEXT(".echinus"), TEXT("order.carved"), MoveTemp(Echinus), nullptr, Frame));
 
 			const double CA = 0.5 * Plan::CanalisAcross;
@@ -151,19 +134,15 @@ namespace Musee::ClassicalHall
 		{
 			const double Proud = Plan::PilasterProud;
 			const double Half = Plan::PilasterHalf;
-			const double Inside = -0.1;
+			const double Inside = -Plan::PilasterReturnInside;
 			Out.Add(PrismIn(Name + TEXT(".shaft"), Shaft, Frame, Rect(-Plan::Sink, -Half, Proud, Half), Plan::PilasterFoot, Plan::PilasterTop, Solid));
 			const FVector2D Round3[] = {{Inside, Half}, {Proud, Half}, {Proud, -Half}, {Inside, -Half}};
 			FFormSweep Base;
-			Base.Section = FPen(-Plan::Sink, -Plan::Sink).To(0.065, -Plan::Sink).To(0.065, 0.055).To(0.045, 0.055).Round(0.075, 0.085, true).Round(0.045, 0.115, true)
-				.To(0.035, 0.115).To(0.035, 0.120).Round(0.020, 0.1375, false).Round(0.035, 0.155, false).To(0.030, 0.155).To(0.030, 0.160)
-				.Round(0.0475, 0.1775, true).Round(0.030, 0.195, true).To(0.005, 0.195).To(0.005, 0.200).Round(0.0, Plan::ShaftFoot, false)
-				.To(-Plan::Sink, Plan::ShaftFoot).Closed();
+			Base.Section = Written(Plan::PilasterBase);
 			Base.Path = FFormProfile::Polyline(Round3, false);
 			Out.Add(Drawn(Name + TEXT(".base"), TEXT("order.carved"), MoveTemp(Base), Solid, Frame));
 			FFormSweep Neck;
-			Neck.Section = FPen(-Plan::Sink, Plan::PilasterNeckFoot).To(0.004, Plan::PilasterNeckFoot).Round(0.004, 2.890, true).Round(0.030, Plan::PilasterNeckTop, true)
-				.To(-Plan::Sink, Plan::PilasterNeckTop).Closed();
+			Neck.Section = Written(Plan::PilasterNeck);
 			Neck.Path = FFormProfile::Polyline(Round3, false);
 			Out.Add(Drawn(Name + TEXT(".neck"), TEXT("order.carved"), MoveTemp(Neck), nullptr, Frame));
 

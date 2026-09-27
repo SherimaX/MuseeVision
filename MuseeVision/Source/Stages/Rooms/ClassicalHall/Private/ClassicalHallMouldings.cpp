@@ -39,8 +39,8 @@ namespace Musee::ClassicalHall
 				if (Carrier.Kind == Plan::ECarrier::NichePedestal && Niche.AnchorLocal() == Carrier.Anchor)
 				{
 					const double Axial = FVector::DotProduct(FVector(Carrier.X, Carrier.Y, 0.0) - Niche.Origin, Niche.In);
-					return FDie{Axial - 0.5 * Carrier.Depth + Plan::NicheCarrierCap, Axial + 0.5 * Carrier.Depth - Plan::NicheCarrierCap,
-						0.5 * Carrier.Width - Plan::NicheCarrierCap};
+					return FDie{Axial - 0.5 * Carrier.Depth + Plan::NicheCarrierCapProud, Axial + 0.5 * Carrier.Depth - Plan::NicheCarrierCapProud,
+						0.5 * Carrier.Width - Plan::NicheCarrierCapProud};
 				}
 			}
 			return {};
@@ -133,13 +133,11 @@ namespace Musee::ClassicalHall
 		{
 			const FFormProfile Path = Perimeter();
 			FFormSweep Skirting;
-			Skirting.Section = FPen(-Plan::Sink, -0.025).To(0.025, -0.025).To(0.025, 0.100).Cyma(0.006, 0.135, true).To(0.006, 0.140).To(-Plan::Sink, 0.140)
-				.Closed();
+			Skirting.Section = Written(Plan::Skirting);
 			Skirting.Path = Path;
 			Out.Add(Drawn(TEXT("wall.skirting"), TEXT("moulding"), MoveTemp(Skirting), nullptr));
 			FFormSweep Rail;
-			Rail.Section = FPen(-Plan::Sink, 0.350).To(0.008, 0.350).Cyma(0.040, 0.405, false).To(0.045, 0.405).To(0.045, 0.435).Round(0.030, 0.460, true)
-				.To(-Plan::Sink, 0.460).Closed();
+			Rail.Section = Written(Plan::DadoRail);
 			Rail.Path = Path;
 			Out.Add(Drawn(TEXT("wall.dado-rail"), TEXT("moulding"), MoveTemp(Rail), nullptr));
 		}
@@ -155,7 +153,7 @@ namespace Musee::ClassicalHall
 			const FMuseeFrame Sunk(Frame.PointToParent(FVector(0.0, 0.0, -Plan::Sink)), Frame.Rotation);
 			Out.Add(Drawn(Name, TEXT("panel"), Prism(Rect(-Half, Foot, Half, Top), Plan::PanelProud + Plan::Sink), nullptr, Sunk));
 			FFormSweep Moulding;
-			Moulding.Section = FPen(-0.012, -Plan::Sink).To(0.045, -Plan::Sink).To(0.045, 0.012).Cyma(0.012, 0.035, false).To(-0.012, 0.035).Closed();
+			Moulding.Section = Written(Plan::PanelFrame);
 			Moulding.Path = RectOutward(-Half, Foot, Half, Top);
 			Out.Add(Drawn(Name + TEXT(".frame"), TEXT("moulding"), MoveTemp(Moulding), nullptr, Frame));
 		}
@@ -184,9 +182,9 @@ namespace Musee::ClassicalHall
 				const double Deg = FMath::RadiansToDegrees(FMath::Atan2(Niche.In.Y, Niche.In.X));
 				for (const double Offset : {-Plan::TribunePanelOffsetDeg, Plan::TribunePanelOffsetDeg})
 				{
-					const FVector Out3 = Direction(Deg + Offset);
-					Panel(Out, FString::Printf(TEXT("tribune.panel.%s.%s"), *Niche.Name, Offset < 0.0 ? TEXT("a") : TEXT("b")), Out3 * Plan::TribuneRadius, -Out3, Half,
-						Plan::PanelFoot, Plan::PanelTop);
+					const FVector Radial = Direction(Deg + Offset);
+					Panel(Out, FString::Printf(TEXT("tribune.panel.%s.%s"), *Niche.Name, Offset < 0.0 ? TEXT("a") : TEXT("b")), Radial * Plan::TribuneRadius, -Radial,
+						Half, Plan::PanelFoot, Plan::PanelTop);
 				}
 			}
 			Panel(Out, TEXT("lintel.lunette"), FVector(0.0, Plan::ScreenY, 0.0), FVector(0.0, 1.0, 0.0), 0.5 * Plan::LunetteWidth, Plan::LunetteFoot,
