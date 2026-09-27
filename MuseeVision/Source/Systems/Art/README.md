@@ -86,6 +86,12 @@ Every object is named `<word>.<id>[.<index>]` (`canvas`, `glass`, `paper`, `plat
 Every object is named `<word>.<id>[.<index>]` (`canvas`, `panel`, `glass`, `paper`, `silk`, `plate`, `ware`,
 `tapestry`), its parts `<name>.<part>`.
 
+**Works on moving bodies.** An entry whose anchor rides a moving body (a store's rack) names it, `"body": "<Body
+anchor>"`, as Lighting's and Planting's entries do. Its pieces are made where the anchor stands at rest and carried on
+that body, each piece's frame in the body's frame, so Studio hangs them from the body's component and they move, and
+are guarded, with it; the dresser hangs the work's label where its pieces hang. A body that isn't a Body anchor of the
+stage is a finding.
+
 A work the stage builds (`"built": "form"`) gets only its caption and care: the stage names its pieces
 `work.<id>[.<index>][.<part>]`, and the dresser hangs them from the work's label. A reproduction (`"reproduction":
 "exhibition-facsimile"`, Care.json's `reproductions`) keeps its original's care class and credits the original; care

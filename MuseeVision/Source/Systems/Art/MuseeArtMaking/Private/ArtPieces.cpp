@@ -228,6 +228,24 @@ namespace Musee::ArtMaking
 				MakeCard(Making, Plan, Canvas, OutPieces);
 			}
 		}
+
+		/**
+		 * Puts an object's pieces, made where its anchor stands at rest, on the body its entry names: each piece's frame
+		 * seen from the body's, so the body carries it (a piece with a body is placed in the body's frame).
+		 */
+		void Carry(const FMuseeStageContext& Stage, const FArtHangEntry& Entry, TArrayView<FFormMadePiece> Pieces)
+		{
+			const FMuseeStageAnchor* Body = Entry.Body.IsNone() ? nullptr : Stage.FindAnchor(Entry.Body, BodyAnchorKind);
+			if (!Body)
+			{
+				return;
+			}
+			for (FFormMadePiece& Piece : Pieces)
+			{
+				Piece.Body = Entry.Body;
+				Piece.Frame = Body->Frame.FrameFromParent(Piece.Frame);
+			}
+		}
 	}
 
 	FString CanvasName(const FArtHangEntry& Entry, bool bSplit)
@@ -277,7 +295,9 @@ namespace Musee::ArtMaking
 		{
 			for (const FCanvasPlan& Canvas : Plan.Canvases)
 			{
+				const int32 First = OutPieces.Num();
 				MakeObject(Making, Plan, Canvas, OutPieces, OutFindings);
+				Carry(Stage, *Canvas.Entry, TArrayView<FFormMadePiece>(OutPieces).Slice(First, OutPieces.Num() - First));
 			}
 		}
 	}

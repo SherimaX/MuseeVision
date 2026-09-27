@@ -476,6 +476,10 @@ namespace Musee::ArtMaking
 		{
 			Out.Add(TEXT("its id can't name a paint layer (it must be one key segment)"));
 		}
+		if (!Entry.Body.IsNone() && !Stage.FindAnchor(Entry.Body, BodyAnchorKind))
+		{
+			Out.Add(FString::Printf(TEXT("its body %s is not a Body anchor of the stage"), *Entry.Body.ToString()));
+		}
 		return Out;
 	}
 

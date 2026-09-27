@@ -375,6 +375,77 @@ bool FArtFrameTest::RunTest(const FString& Parameters)
 	return true;
 }
 
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FArtBodyTest, "Musee.Art.Body", Musee::ArtMaking::Tests::Flags)
+
+/**
+ * A work whose wall rides a moving body (a store's rack) rides it: its pieces are those the work makes standing still,
+ * each carried on the body in the body's frame, and its label hangs where they hang, on the body.
+ */
+bool FArtBodyTest::RunTest(const FString& Parameters)
+{
+	using namespace Musee::ArtMaking;
+	const FMuseeFrame Rack(FVector(1.5, -4.0, 0.0), FQuat(FVector::UpVector, FMath::DegreesToRadians(30.0)));
+	FMuseeStageContext Carried = Tests::Oval(TEXT("carried"));
+	Carried.Anchors.Add(Tests::Anchor(TEXT("carried.rack"), TEXT("Body"), Rack.OriginMeters, Rack.Rotation));
+
+	TArray<FFormMadePiece> Still;
+	TArray<FMuseeFinding> StillFindings;
+	GatherArt(Tests::Oval(TEXT("framed")), Still, StillFindings);
+	TArray<FFormMadePiece> Pieces;
+	TArray<FMuseeFinding> Findings;
+	GatherArt(Carried, Pieces, Findings);
+	TestEqual(TEXT("A work on a body the stage doesn't declare is a finding"), Findings.Num(), 1);
+	TestFalse(TEXT("and nothing is made of it"), Pieces.ContainsByPredicate([](const FFormMadePiece& P) { return P.Name.ToString().Contains(TEXT("willows")); }));
+	const TArray<FName> Parts = { TEXT("canvas.monet-impression-sunrise"), TEXT("canvas.monet-impression-sunrise.linen"),
+		TEXT("canvas.monet-impression-sunrise.frame") };
+	for (const FName Part : Parts)
+	{
+		const FFormMadePiece* Moving = Tests::FindPiece(Pieces, *Part.ToString());
+		const FFormMadePiece* Standing = Tests::FindPiece(Still, *Part.ToString());
+		if (!TestNotNull(*FString::Printf(TEXT("%s is made on the rack"), *Part.ToString()), Moving) || !TestNotNull(TEXT("and standing still"), Standing))
+		{
+			continue;
+		}
+		TestEqual(*FString::Printf(TEXT("%s rides the rack"), *Part.ToString()), Moving->Body, FMuseeKey(TEXT("carried.rack")));
+		TestTrue(TEXT("A still work rides nothing"), Standing->Body.IsNone());
+		const FMuseeFrame AtRest = Rack.FrameToParent(Moving->Frame);
+		TestTrue(*FString::Printf(TEXT("%s, seen from the stage with the rack at rest, is where the still work is"), *Part.ToString()),
+			AtRest.OriginMeters.Equals(Standing->Frame.OriginMeters, 1e-9) && AtRest.Rotation.Equals(Standing->Frame.Rotation, 1e-9));
+		TestTrue(TEXT("in the rack's frame, not the stage's"), !Moving->Frame.OriginMeters.Equals(Standing->Frame.OriginMeters, 1e-3));
+	}
+
+	// The dresser hangs the label where the pieces hang: on the rack's component, so the label moves with them.
+	UWorld* World = UWorld::CreateWorld(EWorldType::Game, false);
+	AActor* Actor = Tests::StageActor(*World, {});
+	USceneComponent* Body = NewObject<USceneComponent>(Actor, TEXT("Rack"));
+	Body->SetMobility(EComponentMobility::Movable);
+	Body->SetupAttachment(Actor->GetRootComponent());
+	Body->ComponentTags.Add(TEXT("carried.rack"));
+	Body->RegisterComponent();
+	for (const FName Part : Parts)
+	{
+		UStaticMeshComponent* Mesh = NewObject<UStaticMeshComponent>(Actor, FName(Part.ToString().Replace(TEXT("."), TEXT("_"))));
+		Mesh->SetMobility(EComponentMobility::Movable);
+		Mesh->SetupAttachment(Body);
+		Mesh->ComponentTags.Add(FName(FString::Printf(TEXT("musee.piece:%s"), *Part.ToString())));
+		Mesh->RegisterComponent();
+	}
+	Carried.StageActor = Actor;
+	TArray<FMuseeFinding> Dressed;
+	DressWorks(Carried, Dressed);
+	TestEqual(TEXT("The carried work dresses without findings"), Dressed.Num(), 0);
+	TArray<UArtWorkComponent*> Works;
+	Actor->GetComponents(Works);
+	if (TestEqual(TEXT("It carries its label"), Works.Num(), 1))
+	{
+		TestTrue(TEXT("which hangs from the rack and moves with it"), Works[0]->GetAttachParent() == Body && Works[0]->Mobility == EComponentMobility::Movable);
+		const UStaticMeshComponent* Face = Tests::FindMesh(*Actor, TEXT("canvas.monet-impression-sunrise"));
+		TestTrue(TEXT("and the face hangs from the label, under the rack"), Face && Face->GetAttachParent() == Works[0]);
+	}
+	World->DestroyWorld(false);
+	return true;
+}
+
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FArtImageTest, "Musee.Art.Image", Musee::ArtMaking::Tests::Flags)
 
 bool FArtImageTest::RunTest(const FString& Parameters)

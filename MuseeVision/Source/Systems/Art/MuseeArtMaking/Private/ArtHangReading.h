@@ -25,6 +25,9 @@ namespace Musee::ArtMaking
 	 */
 	inline const FName MountAnchorKind(TEXT("Mount"));
 
+	/** The kind of stage anchor a moving body is (the stage contract): the body's frame, which a work on it rides. */
+	inline const FName BodyAnchorKind(TEXT("Body"));
+
 	/** The supports Art makes, as the hanging plans write them. */
 	namespace Supports
 	{

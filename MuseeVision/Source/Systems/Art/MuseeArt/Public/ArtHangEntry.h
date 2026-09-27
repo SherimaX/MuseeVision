@@ -44,6 +44,14 @@ struct MUSEEART_API FArtHangEntry
 	UPROPERTY(meta = (MuseeRequired))
 	FMuseeKey Anchor;
 
+	/**
+	 * The moving body the work rides with its anchor, a Body anchor of the stage (a store's rack, `reserve.screen-c`), as
+	 * Lighting's and Planting's entries name theirs; empty for a work that stands still. Its pieces are made where the
+	 * anchor stands at rest and carried on the body, so they move with it.
+	 */
+	UPROPERTY()
+	FMuseeKey Body;
+
 	/** The distance along the anchor's x (its arc length on a curved wall) from the anchor to the work's start edge. */
 	UPROPERTY(meta = (Units = "Meters"))
 	float Along = 0.0f;

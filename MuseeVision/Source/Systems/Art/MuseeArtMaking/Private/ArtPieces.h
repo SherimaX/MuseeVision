@@ -68,6 +68,8 @@ namespace Musee::ArtMaking
 	 * - a hanging scroll at its Wall anchor, on silk or paper: the painting in its mount, with its stick, roller, knobs and
 	 *   cord;
 	 * - a book lying open, or a loose leaf lying flat, on its Mount anchor (ObjectMaking.h).
+	 * A work whose entry names a `body` (its anchor rides a moving body: a store's rack) is made where its anchor stands
+	 * at rest, and its pieces are carried on that body, in its frame, so they move with it.
 	 * A work the stage builds (`"built": "form"`) is left to the stage. Anything the plan gets wrong is a finding and
 	 * that work isn't made.
 	 */
