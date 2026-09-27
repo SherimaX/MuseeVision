@@ -1,0 +1,63 @@
+{
+  "key": "downlight.3000k.31deg",
+  "kind": "downlight",
+  "controlClass": "circulation",
+  "evidenceState": "complete",
+  "product": {
+    "manufacturer": "iGuzzini illuminazione",
+    "family": "Laser fixed round",
+    "description": "Fixed round recessed luminaire - LED - flood - Super Comfort",
+    "code": "RA18",
+    "status": "active"
+  },
+  "light": {
+    "luminousFluxLumens": 1944.8,
+    "fluxBasis": "luminaire",
+    "ledFluxLumens": 2210,
+    "beamName": "F - Flood",
+    "beamAngleDegrees": 31,
+    "peakCandela": 6649,
+    "cctKelvin": 3000,
+    "cri": 92,
+    "tm30Rf": 92,
+    "tm30Rg": 99,
+    "macAdamSteps": 2,
+    "ugrMax": 10,
+    "luminanceAt65DegreesCandelaPerSquareMeterMax": 1500
+  },
+  "electrical": {
+    "systemPowerWatts": 17,
+    "efficacyLumensPerWatt": 114.4,
+    "control": "control gear ordered separately: on-off, 1-10 V, DALI or trailing-edge dimming"
+  },
+  "housing": {
+    "diameterMillimeters": 104,
+    "cutOutDiameterMillimeters": 96,
+    "weightKilograms": 0.38,
+    "materials": "die-cast aluminium body, metallised thermoplastic reflector, safety glass",
+    "lightOutputRatioPercent": 88,
+    "protection": "IP20 inside, IP44 on the visible part, class III",
+    "mounting": "recessed in the ceiling"
+  },
+  "photometricFile": {
+    "url": null,
+    "note": "The maker's page has a Downloads section; its file links are built in the browser, so no direct URL is recorded."
+  },
+  "sources": [
+    {
+      "id": "maker-page",
+      "title": "iGuzzini, product page RA18",
+      "url": "https://www.iguzzini.com/en/ra18/",
+      "readOn": "2026-09-26",
+      "covers": [
+        "product",
+        "light",
+        "electrical",
+        "housing"
+      ]
+    }
+  ],
+  "unverified": [
+    "Whether the Downloads section of the RA18 page offers LDT and IES files (the file list was not in the page text)."
+  ]
+}

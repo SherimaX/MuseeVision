@@ -1,0 +1,181 @@
+{
+  "about": "Conservation lighting limits by medium: the museum's only lux-by-medium numbers. Art maps each work's medium to one class and sends Light an FLightTarget (lux range, colour temperature, UV, annual dose). Art.WithinCare checks every reference moment and the annual dose. A work of mixed media takes the class of its most sensitive component.",
+  "classes": [
+    {
+      "key": "works-on-paper",
+      "responsivity": "medium",
+      "media": ["watercolour", "gouache", "pastel", "drawing", "print", "manuscript", "printed book", "ink and colour on paper", "wallpaper block-printed in distemper"],
+      "illuminanceLuxMax": 50,
+      "illuminanceLuxRecommended": 50,
+      "annualExposureLuxHoursMax": 150000,
+      "uvMicrowattsPerLumenMax": 75,
+      "cctKelvinRange": [2800, 3000],
+      "cctBasis": "viewer preference for warmer light at low illuminance; not a damage limit",
+      "evidence": [
+        { "fields": ["illuminanceLuxMax", "illuminanceLuxRecommended"], "source": "cci-light", "confirmed": true, "row": "50 lux for textiles, works on paper, watercolours on any medium, photographs, feathers" },
+        { "fields": ["illuminanceLuxMax"], "source": "thomson-1986", "confirmed": true, "row": "textiles, works on paper and dyed leather generally kept at about 50 lux" },
+        { "fields": ["illuminanceLuxMax", "annualExposureLuxHoursMax"], "source": "cie-157-2004", "confirmed": false, "row": "medium responsivity: 50 lx, 150 000 lx h per year" },
+        { "fields": ["uvMicrowattsPerLumenMax"], "source": "cci-light", "confirmed": true, "row": "keep all UV levels below 75 µW/lm" },
+        { "fields": ["cctKelvinRange"], "source": "cci-light", "confirmed": true, "row": "with low light levels, as in museums, viewers tend to prefer warmer light similar to that of incandescent lamps, e.g. the 2800 K of standard incandescent lamps, or the slightly higher 3000 K of quartz halogen" }
+      ]
+    },
+    {
+      "key": "works-on-paper.fugitive",
+      "responsivity": "high",
+      "media": ["colorants known to be highly fugitive", "newsprint"],
+      "illuminanceLuxMax": 50,
+      "illuminanceLuxRecommended": 50,
+      "annualExposureLuxHoursMax": 15000,
+      "uvMicrowattsPerLumenMax": 75,
+      "cctKelvinRange": [2800, 3000],
+      "cctBasis": "viewer preference for warmer light at low illuminance; not a damage limit",
+      "evidence": [
+        { "fields": ["illuminanceLuxMax", "illuminanceLuxRecommended"], "source": "cci-light", "confirmed": true, "row": "50 lux for works on paper" },
+        { "fields": ["illuminanceLuxMax", "annualExposureLuxHoursMax", "media"], "source": "cie-157-2004", "confirmed": false, "row": "high responsivity: silk, colorants known to be highly fugitive, newspaper; 50 lx, 15 000 lx h per year" },
+        { "fields": ["uvMicrowattsPerLumenMax"], "source": "cci-light", "confirmed": true, "row": "keep all UV levels below 75 µW/lm" },
+        { "fields": ["cctKelvinRange"], "source": "cci-light", "confirmed": true, "row": "with low light levels, as in museums, viewers tend to prefer warmer light similar to that of incandescent lamps, e.g. the 2800 K of standard incandescent lamps, or the slightly higher 3000 K of quartz halogen" }
+      ]
+    },
+    {
+      "key": "textiles",
+      "responsivity": "medium",
+      "media": ["tapestry", "costume", "dyed textile", "dyed leather"],
+      "illuminanceLuxMax": 50,
+      "illuminanceLuxRecommended": 50,
+      "annualExposureLuxHoursMax": 150000,
+      "uvMicrowattsPerLumenMax": 75,
+      "cctKelvinRange": [2800, 3000],
+      "cctBasis": "viewer preference for warmer light at low illuminance; not a damage limit",
+      "evidence": [
+        { "fields": ["illuminanceLuxMax", "illuminanceLuxRecommended"], "source": "cci-light", "confirmed": true, "row": "50 lux for textiles" },
+        { "fields": ["illuminanceLuxMax"], "source": "thomson-1986", "confirmed": true, "row": "textiles, works on paper and dyed leather generally kept at about 50 lux" },
+        { "fields": ["illuminanceLuxMax", "annualExposureLuxHoursMax"], "source": "cie-157-2004", "confirmed": false, "row": "medium responsivity (costumes, tapestries, dyed leather): 50 lx, 150 000 lx h per year" },
+        { "fields": ["uvMicrowattsPerLumenMax"], "source": "cci-light", "confirmed": true, "row": "keep all UV levels below 75 µW/lm" },
+        { "fields": ["cctKelvinRange"], "source": "cci-light", "confirmed": true, "row": "with low light levels, as in museums, viewers tend to prefer warmer light similar to that of incandescent lamps, e.g. the 2800 K of standard incandescent lamps, or the slightly higher 3000 K of quartz halogen" }
+      ]
+    },
+    {
+      "key": "textiles.silk",
+      "responsivity": "high",
+      "media": ["silk", "ink and colour on silk", "silk scroll mounts", "mixed media with silk or satin"],
+      "illuminanceLuxMax": 50,
+      "illuminanceLuxRecommended": 50,
+      "annualExposureLuxHoursMax": 15000,
+      "uvMicrowattsPerLumenMax": 75,
+      "cctKelvinRange": [2800, 3000],
+      "cctBasis": "viewer preference for warmer light at low illuminance; not a damage limit",
+      "evidence": [
+        { "fields": ["illuminanceLuxMax", "illuminanceLuxRecommended"], "source": "cci-light", "confirmed": true, "row": "50 lux for textiles" },
+        { "fields": ["illuminanceLuxMax", "annualExposureLuxHoursMax", "media"], "source": "cie-157-2004", "confirmed": false, "row": "high responsivity: silk, colorants known to be highly fugitive, newspaper; 50 lx, 15 000 lx h per year" },
+        { "fields": ["uvMicrowattsPerLumenMax"], "source": "cci-light", "confirmed": true, "row": "keep all UV levels below 75 µW/lm" },
+        { "fields": ["cctKelvinRange"], "source": "cci-light", "confirmed": true, "row": "with low light levels, as in museums, viewers tend to prefer warmer light similar to that of incandescent lamps, e.g. the 2800 K of standard incandescent lamps, or the slightly higher 3000 K of quartz halogen" }
+      ]
+    },
+    {
+      "key": "oil-and-tempera",
+      "responsivity": "low",
+      "media": ["oil on canvas", "oil on panel", "oil on wood", "tempera on panel", "acrylic"],
+      "illuminanceLuxMax": 200,
+      "illuminanceLuxRecommended": 150,
+      "annualExposureLuxHoursMax": 600000,
+      "uvMicrowattsPerLumenMax": 75,
+      "cctKelvinRange": null,
+      "cctBasis": "no conservation limit on colour temperature; at equal illuminance a spectrum richer in short wavelengths carries more damaging potential",
+      "evidence": [
+        { "fields": ["illuminanceLuxRecommended"], "source": "cci-light", "confirmed": true, "row": "150 lux for all oil and acrylic paint surfaces, polychrome, panels, furniture" },
+        { "fields": ["illuminanceLuxMax"], "source": "thomson-1986", "confirmed": true, "row": "200 lux a more common guideline for more light-resistant materials such as oil paintings, bone and natural leather" },
+        { "fields": ["illuminanceLuxMax", "annualExposureLuxHoursMax"], "source": "cie-157-2004", "confirmed": false, "row": "low responsivity (oil and tempera paintings): 200 lx, 600 000 lx h per year" },
+        { "fields": ["uvMicrowattsPerLumenMax"], "source": "cci-light", "confirmed": true, "row": "keep all UV levels below 75 µW/lm" },
+        { "fields": ["cctBasis"], "source": "zumtobel-arcos", "confirmed": true, "row": "adjustable colour temperatures modify the proportion of short and long wavelengths, which influences the damaging potential of the radiation" }
+      ]
+    },
+    {
+      "key": "stone-and-bronze",
+      "responsivity": "irresponsive",
+      "media": ["stone", "marble", "bronze", "gilt bronze", "iron"],
+      "illuminanceLuxMax": null,
+      "illuminanceLuxRecommended": 300,
+      "annualExposureLuxHoursMax": null,
+      "uvMicrowattsPerLumenMax": 75,
+      "cctKelvinRange": null,
+      "cctBasis": "no conservation limit on colour temperature",
+      "note": "A patina, wax, lacquer, organic coating or polychromy is not irresponsive: such a surface takes the class of its coating.",
+      "evidence": [
+        { "fields": ["illuminanceLuxRecommended"], "source": "cci-light", "confirmed": true, "row": "300 lux for stone, metal, etc., primarily to avoid contrasting lighting" },
+        { "fields": ["illuminanceLuxMax", "annualExposureLuxHoursMax"], "source": "cie-157-2004", "confirmed": false, "row": "irresponsive (most metals, stone): illuminance set by the display, no annual limit" },
+        { "fields": ["uvMicrowattsPerLumenMax"], "source": "cci-light", "confirmed": true, "row": "keep all UV levels below 75 µW/lm" }
+      ]
+    },
+    {
+      "key": "ceramic-and-glass",
+      "responsivity": "irresponsive",
+      "media": ["earthenware", "stoneware", "tin-glazed earthenware", "lustreware", "enamel", "fired stained glass"],
+      "illuminanceLuxMax": null,
+      "illuminanceLuxRecommended": 300,
+      "annualExposureLuxHoursMax": null,
+      "uvMicrowattsPerLumenMax": 75,
+      "cctKelvinRange": null,
+      "cctBasis": "no conservation limit on colour temperature",
+      "evidence": [
+        { "fields": ["responsivity"], "source": "cci-light", "confirmed": true, "row": "no sensitivity: mineral pigments, true fresco palette, ceramics, monochrome carbon inks" },
+        { "fields": ["illuminanceLuxRecommended"], "source": "cci-light", "confirmed": true, "row": "300 lux for stone, metal, etc., primarily to avoid contrasting lighting" },
+        { "fields": ["illuminanceLuxMax", "annualExposureLuxHoursMax"], "source": "cie-157-2004", "confirmed": false, "row": "irresponsive (most glass, genuine ceramic, enamel): illuminance set by the display, no annual limit" },
+        { "fields": ["uvMicrowattsPerLumenMax"], "source": "cci-light", "confirmed": true, "row": "keep all UV levels below 75 µW/lm" }
+      ]
+    }
+  ],
+  "doseAccounting": {
+    "note": "Annual exposure is illuminance on the work times the hours it is lit in a year. The museum never closes (D-006), so presence-linked gallery light, not opening hours, bounds the hours; the annual limit, not the hour count, is what Art.WithinCare holds.",
+    "referenceHoursPerYear": 3000,
+    "referenceHoursPerDay": 8,
+    "evidence": [
+      { "fields": ["referenceHoursPerYear", "referenceHoursPerDay"], "source": "cci-light", "confirmed": true, "row": "each day of exposure is assumed to be 8 hours, each year 3,000 hours" }
+    ]
+  },
+  "sourceSpectrum": {
+    "note": "The catalogue's LED luminaires emit almost nothing in the UV and IR; the UV limit still binds daylight through glazing, which is filtered (D-014).",
+    "evidence": [
+      { "source": "erco-culture", "confirmed": true, "row": "a light spectrum without IR and UV radiation" },
+      { "source": "zumtobel-arcos", "confirmed": true, "row": "the spectrum of the LED includes almost no radiation in the infrared and ultraviolet ranges" }
+    ]
+  },
+  "sources": [
+    {
+      "id": "cci-light",
+      "title": "Stefan Michalski, 'Agent of deterioration: Light, ultraviolet and infrared', Canadian Conservation Institute, 2018-05-17",
+      "url": "https://www.canada.ca/en/conservation-institute/services/agents-deterioration/light.html",
+      "readOn": "2026-09-26"
+    },
+    {
+      "id": "thomson-1986",
+      "title": "Garry Thomson, The Museum Environment, 2nd ed., Butterworth-Heinemann, 1986, p. 23, as cited by Wikipedia, 'Agents of deterioration'",
+      "url": "https://en.wikipedia.org/wiki/Agents_of_deterioration",
+      "readOn": "2026-09-26"
+    },
+    {
+      "id": "cie-157-2004",
+      "title": "CIE 157:2004 Control of damage to museum objects by optical radiation, CIE TC 3-22 Museum Lighting (limiting illuminance and annual exposure by responsivity); CCI states that CIE 2004 adopted its high, medium and low sensitivity categories",
+      "url": "https://cie.co.at/publications/control-damage-museum-objects-optical-radiation",
+      "readOn": "2026-09-26"
+    },
+    {
+      "id": "zumtobel-arcos",
+      "title": "Zumtobel, ARCOS LED spotlight system brochure, 'Potential damage' (citing TU Darmstadt photometrics test report PB289/2010)",
+      "url": "https://www.zumtobel.com/PDB/Ressource/teaser/en/com/ARCOS.pdf",
+      "readOn": "2026-09-26"
+    },
+    {
+      "id": "erco-culture",
+      "title": "ERCO, Light for museums and galleries",
+      "url": "https://www.erco.com/en/designing-with-light/culture/",
+      "readOn": "2026-09-26"
+    }
+  ],
+  "unverified": [
+    "Every value marked confirmed false comes from CIE 157:2004's table of limiting illuminance and annual exposure (low 200 lx and 600 000 lx h, medium 50 lx and 150 000 lx h, high 50 lx and 15 000 lx h, irresponsive no limit) and its lists of materials per class; the report itself was not read. The medium and low annual values equal CCI's 3000 h a year at 50 lx and 200 lx.",
+    "ANSI/IES RP-30-17 limits and lux-hour recommendations (the preview refused automated reads).",
+    "CIBSE LG8 (Museums and art galleries) limits (not publicly readable).",
+    "A tighter UV limit than 75 µW/lm for modern practice (10 µW/lm is often quoted); no source was read.",
+    "Display-and-rest rotation periods for Chinese paintings on silk and paper as practised by the holding museums."
+  ]
+}

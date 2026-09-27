@@ -1,0 +1,61 @@
+{
+  "key": "linear-slot.3000k",
+  "kind": "linear-slot",
+  "controlClass": "circulation",
+  "evidenceState": "incomplete",
+  "product": {
+    "manufacturer": "Zumtobel",
+    "family": "SLOTLIGHT infinity II",
+    "description": "recessed continuous light line: channel for plasterboard (MRC) or technical ceilings (MRT), LED batten High Efficiency (HE), 3000 K, CRI > 90, opal polycarbonate cover (PC)",
+    "code": null,
+    "status": "current family brochure"
+  },
+  "light": {
+    "luminousFluxLumensPerMeter": null,
+    "ledPackageLumensPerMeter": 1600,
+    "fluxBasis": "LED package per metre (HE)",
+    "beamName": "PC opal cover, diffuse; other covers: office PCO, drop diffuser DD, minicell MC, wallwasher WW",
+    "beamAngleDegrees": null,
+    "cctKelvin": 3000,
+    "cri": 90,
+    "criBasis": "greater than",
+    "efficacyLumensPerWattMax": 130
+  },
+  "electrical": {
+    "systemPowerWatts": null,
+    "control": "DALI through the seven-pole terminal (three phases and two lines for DALI and/or emergency lighting)"
+  },
+  "housing": {
+    "channelLengthMillimetersRange": [1000, 4000],
+    "channelStepMillimeters": 250,
+    "battenLengthMillimetersRange": [1000, 2000],
+    "housingColours": [
+      "white RAL 9016 (MRC and MRT)",
+      "black RAL 9005 (MRT only)",
+      "silver RAL 9006 (MRT only)"
+    ]
+  },
+  "photometricFile": {
+    "url": null,
+    "note": "Zumtobel's article data sheets (resources.z.lighting) refuse automated reads; no public file URL is recorded."
+  },
+  "sources": [
+    {
+      "id": "brochure",
+      "title": "Zumtobel, SLOTLIGHT infinity II brochure (technical table)",
+      "url": "https://www.zumtobel.com/PDB/Ressource/teaser/en/com/SLOTLIGHT_infinity_II.pdf",
+      "readOn": "2026-09-26",
+      "covers": [
+        "product",
+        "light",
+        "electrical",
+        "housing"
+      ]
+    }
+  ],
+  "unverified": [
+    "The article number of the recessed HE 3000 K CRI > 90 opal configuration (the brochure lists families, not articles).",
+    "The delivered flux per metre and the power per metre of that configuration: 1600 lm/m is the HE LED package; 130 lm/W is the brochure's best efficacy for the opal cover.",
+    "The channel's section (width and depth) for the standard recessed version; the brochure gives 45 mm by 64 mm only for the slimmer SLOTLIGHT infinity 45."
+  ]
+}

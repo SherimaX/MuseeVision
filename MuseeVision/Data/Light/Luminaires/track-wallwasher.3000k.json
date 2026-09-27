@@ -1,0 +1,71 @@
+{
+  "key": "track-wallwasher.3000k",
+  "kind": "track-wallwasher",
+  "controlClass": "gallery",
+  "evidenceState": "complete",
+  "product": {
+    "manufacturer": "iGuzzini illuminazione",
+    "family": "Sipario Wall Washer ø 56 / 73 / 86 mm for Low Voltage track DALI Powerline",
+    "description": "Sipario LV Ø 73 - DALI Powerline - Wall Washer - Lens",
+    "code": "362G",
+    "status": "active"
+  },
+  "light": {
+    "luminousFluxLumens": 999,
+    "fluxBasis": "luminaire",
+    "ledFluxLumens": 1350,
+    "beamName": "WW - Wall Washer (OptiBeam lens)",
+    "beamAngleDegrees": null,
+    "peakCandela": 1567,
+    "cctKelvin": 3000,
+    "cri": 97,
+    "tm30Rf": 94,
+    "tm30Rg": 101,
+    "macAdamSteps": 2
+  },
+  "electrical": {
+    "systemPowerWatts": 16.1,
+    "control": "DALI over the track's Powerline, constant current reduction (CCR)",
+    "dimmingRangePercent": [5, 100],
+    "mounting": "48 V low-voltage track (Superrail with an accessory)"
+  },
+  "housing": {
+    "diameterMillimeters": 73,
+    "weightKilograms": 0.52,
+    "materials": "painted die-cast aluminium body; thermoplastic rear cap and front ring",
+    "rotationDegrees": 360,
+    "tiltDegrees": 90
+  },
+  "photometricFile": {
+    "url": null,
+    "note": "The maker's page has a Downloads section; its file links are built in the browser, so no direct URL is recorded."
+  },
+  "sources": [
+    {
+      "id": "maker-page",
+      "title": "iGuzzini, product page 362G",
+      "url": "https://www.iguzzini.com/en/362g/",
+      "readOn": "2026-09-26",
+      "covers": [
+        "product",
+        "light",
+        "electrical",
+        "housing"
+      ]
+    },
+    {
+      "id": "maker-page-apac",
+      "title": "iGuzzini, product page 362G (Asia-Pacific site)",
+      "url": "https://www.iguzzini.com/apac/362g/",
+      "readOn": "2026-09-26",
+      "covers": [
+        "electrical.dimmingRangePercent",
+        "housing.materials"
+      ]
+    }
+  ],
+  "unverified": [
+    "Whether the Downloads section of the 362G page offers LDT and IES files (the file list was not in the page text).",
+    "The housing length of 362G (the page gives only the diameter)."
+  ]
+}

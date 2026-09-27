@@ -1,0 +1,86 @@
+{
+  "key": "track-wallwasher.4000k",
+  "kind": "track-wallwasher",
+  "controlClass": "gallery",
+  "evidenceState": "incomplete",
+  "product": {
+    "manufacturer": "Edison Price Lighting",
+    "family": "Stacklite",
+    "description": "Compact Track Mounted LED Wallwasher",
+    "code": "STK-CZE-2000L-40K-XIA-95+-DIMTR-120V-WH",
+    "codeBasis": "built from the maker's ordering nomenclature (series, lumens, CCT, CRI, driver, voltage, finish)",
+    "status": "listed on the maker's site",
+    "notableProjects": [
+      "Crystal Bridges Museum of American Art",
+      "Brooklyn Museum",
+      "Beinecke Rare Book & Manuscript Library",
+      "LBJ Presidential Library"
+    ]
+  },
+  "light": {
+    "luminousFluxLumens": 2000,
+    "fluxBasis": "nominal-package",
+    "beamName": "wallwash, scallop-free, ceiling to floor",
+    "beamAngleDegrees": null,
+    "peakCandela": null,
+    "cctKelvin": 4000,
+    "cri": 95,
+    "criBasis": "minimum of the XIA-95+ option",
+    "macAdamSteps": 2,
+    "aimVerticalDegreesMax": 60,
+    "aimHorizontalDegrees": 360
+  },
+  "electrical": {
+    "systemPowerWatts": null,
+    "control": "DIMTR (TRIAC and ELV to 5 % at 120 V), LTEA2W (Hi-lume 1 % two-wire) or DIMTR-IDM (integral rotary dimmer to 10 %); a Eutrac adaptor with 0-10 V or DALI is available from the factory",
+    "supplyVolts": 120,
+    "mounting": "Edison Price track systems (Sightline, Highline, Upline, Autobus, Unicep) or Eutrac"
+  },
+  "housing": {
+    "driverCaseMillimeters": [152.4, 88.9],
+    "trackAdaptorLengthMillimeters": 171.45,
+    "spacingMinMillimeters": 177.8,
+    "dimensionBasis": "converted from the spec sheet's inches: driver case 6 in by 3 1/2 in, adaptor 6 3/4 in, at least 7 in on centre",
+    "finishes": [
+      "white",
+      "black",
+      "silver",
+      "RAL"
+    ]
+  },
+  "photometricFile": {
+    "url": "https://epl.com/media/ies/stk-cze.zip",
+    "note": "The maker's public IES archive for the STK-CZE family."
+  },
+  "sources": [
+    {
+      "id": "spec-sheet",
+      "title": "Edison Price Lighting, Stacklite STK-CZE spec sheet (last update 2021-10-27)",
+      "url": "https://epl.com/media/spec/stk-cze.pdf",
+      "readOn": "2026-09-26",
+      "covers": [
+        "product",
+        "light",
+        "electrical",
+        "housing"
+      ]
+    },
+    {
+      "id": "maker-page",
+      "title": "Edison Price Lighting, product page STK-CZE",
+      "url": "https://epl.com/product/stk-cze/",
+      "readOn": "2026-09-26",
+      "covers": [
+        "product.status",
+        "product.notableProjects",
+        "photometricFile"
+      ]
+    }
+  ],
+  "unverified": [
+    "The delivered flux of the 4000 K XIA-95+ variant: 2000 lm is the nominal package in the ordering code (2000L), not a measured luminaire flux; the IES file carries the measured value.",
+    "The input power in watts (not on the spec sheet or the product page).",
+    "The colour rendering: the 2021 spec sheet offers 90+ or XIA-95+, the 2026 product page states 97+; the record keeps the lower, documented minimum.",
+    "The lumen packages differ between the 2021 spec sheet (1500 to 4000 lm) and the 2026 product page (1400 to 4100 lm); 2000L appears in both."
+  ]
+}

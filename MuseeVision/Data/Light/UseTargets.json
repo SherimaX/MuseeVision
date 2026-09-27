@@ -1,0 +1,211 @@
+{
+  "about": "Target illuminance for the museum's architecture by use class. A stage names a class for each walked or seen surface; Light holds it at every reference moment (Light.MeetsTarget). Values are maintained illuminance, the level below which the average must never fall. Care limits for works are Art's (Data/Art/Care.json), not these.",
+  "classes": [
+    {
+      "key": "circulation",
+      "use": "Corridors, passages between stages, the walking zones of halls and galleries",
+      "maintainedIlluminanceLux": 100,
+      "referencePlane": "floor",
+      "uniformityMin": 0.4,
+      "glareUgrMax": 28,
+      "criMin": 40,
+      "wallIlluminanceLuxMin": 75,
+      "ceilingIlluminanceLuxMin": 50,
+      "surfaceUniformityMin": 0.1,
+      "analogue": false,
+      "evidence": [
+        {
+          "fields": ["maintainedIlluminanceLux", "uniformityMin", "glareUgrMax", "criMin"],
+          "source": "en12464-1-2011",
+          "row": "Traffic zones and general areas inside buildings: circulation areas and corridors (100 lx, UGRL 28, Uo 0.4, Ra 40)"
+        },
+        {
+          "fields": ["wallIlluminanceLuxMin", "ceilingIlluminanceLuxMin", "surfaceUniformityMin"],
+          "source": "trilux-public-areas",
+          "row": "Bright primary surfaces for corridors, staircases and entrance halls: walls 75 lx, ceilings 50 lx, uniformity 0.10 at minimum"
+        }
+      ]
+    },
+    {
+      "key": "circulation.night",
+      "use": "The same routes after dusk when few visitors walk them; the museum never closes (D-006)",
+      "maintainedIlluminanceLux": 50,
+      "referencePlane": "floor",
+      "uniformityMin": 0.4,
+      "glareUgrMax": 22,
+      "criMin": 80,
+      "analogue": true,
+      "analogueOf": "EN 12464-1 health-care premises: corridors during the night",
+      "evidence": [
+        {
+          "fields": ["maintainedIlluminanceLux", "uniformityMin", "glareUgrMax", "criMin"],
+          "source": "en12464-1-2011",
+          "row": "Health care premises, rooms for general use: corridors during the night (50 lx, UGRL 22, Uo 0.4, Ra 80)"
+        }
+      ]
+    },
+    {
+      "key": "stairs",
+      "use": "Stairs, the Rotunda's spiral stair, ramps with steps; held day and night",
+      "maintainedIlluminanceLux": 100,
+      "referencePlane": "floor (treads and landings)",
+      "uniformityMin": 0.4,
+      "glareUgrMax": 25,
+      "criMin": 40,
+      "wallIlluminanceLuxMin": 75,
+      "ceilingIlluminanceLuxMin": 50,
+      "surfaceUniformityMin": 0.1,
+      "analogue": false,
+      "evidence": [
+        {
+          "fields": ["maintainedIlluminanceLux", "uniformityMin", "glareUgrMax", "criMin"],
+          "source": "en12464-1-2011",
+          "row": "Traffic zones and general areas inside buildings: stairs, escalators, moving walkways (100 lx, UGRL 25, Uo 0.4, Ra 40)"
+        },
+        {
+          "fields": ["wallIlluminanceLuxMin", "ceilingIlluminanceLuxMin", "surfaceUniformityMin"],
+          "source": "trilux-public-areas",
+          "row": "Bright primary surfaces for corridors, staircases and entrance halls: walls 75 lx, ceilings 50 lx, uniformity 0.10 at minimum"
+        }
+      ]
+    },
+    {
+      "key": "lift",
+      "use": "Lift cars and landings, the Élan glass car",
+      "maintainedIlluminanceLux": 100,
+      "referencePlane": "floor",
+      "uniformityMin": 0.4,
+      "glareUgrMax": 25,
+      "criMin": 40,
+      "analogue": false,
+      "evidence": [
+        {
+          "fields": ["maintainedIlluminanceLux", "uniformityMin", "glareUgrMax", "criMin"],
+          "source": "en12464-1-2011",
+          "row": "Traffic zones and general areas inside buildings: elevators, lifts (100 lx, UGRL 25, Uo 0.4, Ra 40)"
+        }
+      ]
+    },
+    {
+      "key": "entrance-hall",
+      "use": "The arrival space: the Rotunda around the gilt sun, the Atrium",
+      "maintainedIlluminanceLux": 100,
+      "referencePlane": "floor",
+      "uniformityMin": 0.4,
+      "glareUgrMax": 22,
+      "criMin": 80,
+      "wallIlluminanceLuxMin": 75,
+      "ceilingIlluminanceLuxMin": 50,
+      "surfaceUniformityMin": 0.1,
+      "analogue": false,
+      "evidence": [
+        {
+          "fields": ["maintainedIlluminanceLux", "uniformityMin", "glareUgrMax", "criMin"],
+          "source": "en12464-1-2011",
+          "row": "Places of public assembly, general areas: entrance halls (100 lx, UGRL 22, Uo 0.4, Ra 80)"
+        },
+        {
+          "fields": ["wallIlluminanceLuxMin", "ceilingIlluminanceLuxMin", "surfaceUniformityMin"],
+          "source": "trilux-public-areas",
+          "row": "Bright primary surfaces for corridors, staircases and entrance halls: walls 75 lx, ceilings 50 lx, uniformity 0.10 at minimum"
+        }
+      ]
+    },
+    {
+      "key": "orientation",
+      "use": "Low light that shows the way through a darkened space: the Cube's sealed shell during a performance, a gallery at night",
+      "maintainedIlluminanceLux": 5,
+      "referencePlane": "floor",
+      "criMin": 80,
+      "analogue": true,
+      "analogueOf": "EN 12464-1 health-care premises: night lighting, observation lighting",
+      "evidence": [
+        {
+          "fields": ["maintainedIlluminanceLux", "criMin"],
+          "source": "en12464-1-2011",
+          "row": "Health care premises: night lighting, observation lighting (5 lx, Ra 80)"
+        }
+      ]
+    },
+    {
+      "key": "exterior-walkway",
+      "use": "Paths of the Grounds and the pond edge after dusk",
+      "maintainedIlluminanceLux": 5,
+      "referencePlane": "ground",
+      "criMin": 20,
+      "analogue": false,
+      "evidence": [
+        {
+          "fields": ["maintainedIlluminanceLux", "criMin"],
+          "source": "en12464-2-2007",
+          "row": "General circulation areas at outdoor workplaces: walkways exclusively for pedestrians (5 lx, Ra 20)"
+        }
+      ]
+    },
+    {
+      "key": "escape-route",
+      "use": "The floor under every other class: no walked route in any configuration falls below it",
+      "averageIlluminanceLux": 10.76,
+      "referencePlane": "floor along the path of egress",
+      "analogue": false,
+      "evidence": [
+        {
+          "fields": ["averageIlluminanceLux"],
+          "source": "wikipedia-emergency-light",
+          "row": "An average of one foot candle of light along the path of egress; 1 fc = 1 lm/ft² = 10.764 lx"
+        }
+      ]
+    }
+  ],
+  "viewerAge": {
+    "note": "Older visitors may need two to three times the illuminance for the same visual experience; a class is a floor, never a ceiling, for architecture.",
+    "illuminanceFactorRange": [2, 3],
+    "source": "erco-50lx"
+  },
+  "sources": [
+    {
+      "id": "en12464-1-2011",
+      "title": "EN 12464-1:2011 Lighting of indoor workplaces (June 2011), schedule of lighting requirements, as reproduced in Zumtobel, The Lighting Handbook, 6th edition, April 2018, pp. 30-38",
+      "url": "https://www.zumtobel.com/PDB/teaser/EN/lichthandbuch.pdf",
+      "readOn": "2026-09-26"
+    },
+    {
+      "id": "en12464-2-2007",
+      "title": "EN 12464-2:2007 Lighting of outdoor workplaces (October 2007), as reproduced in Zumtobel, The Lighting Handbook, 6th edition, April 2018, p. 42",
+      "url": "https://www.zumtobel.com/PDB/teaser/EN/lichthandbuch.pdf",
+      "readOn": "2026-09-26"
+    },
+    {
+      "id": "trilux-public-areas",
+      "title": "TRILUX Lighting Practice, lighting of public areas: corridors, entrance halls, cloakrooms (requirements of EN 12464-1)",
+      "url": "https://www.trilux.com/en/lighting-practice/indoor-lighting/specific-lighting-requirements/lighting-of-public-areas/corridors-entrance-halls-cloakrooms/",
+      "readOn": "2026-09-26"
+    },
+    {
+      "id": "en12464-1-2021-summary",
+      "title": "Glamox, 'Change for the better' on EN 12464-1:2021: required and modified illuminance; wall, cylindrical and ceiling illuminance as indicators of room brightness",
+      "url": "https://www.glamox.com/en/pbs/news-and-stories/change-for-the-better/",
+      "readOn": "2026-09-26"
+    },
+    {
+      "id": "wikipedia-emergency-light",
+      "title": "Wikipedia, 'Emergency light': 'strict requirements to provide an average of one foot candle of light along the path of egress' (the sentence names no code)",
+      "url": "https://en.wikipedia.org/wiki/Emergency_light",
+      "readOn": "2026-09-26"
+    },
+    {
+      "id": "erco-50lx",
+      "title": "ERCO, 'Museum lighting with 50lx': the origin of the 50 lx rule and the age of the observer",
+      "url": "https://www.erco.com/en/designing-with-light/mediaassetpool/lighting-technology/museum-lighting-with-50lx-6481/",
+      "readOn": "2026-09-26"
+    }
+  ],
+  "unverified": [
+    "The 2021 edition's rows (EN 12464-1:2021 adds a 'modified' illuminance and wall, ceiling and cylindrical values per row); the values above are the 2011 rows as reproduced by Zumtobel, and the wall and ceiling minimums come from TRILUX without an edition named.",
+    "The reference plane 'floor' for traffic zones (EN 12464-1 notes illuminance at floor level for circulation; the note itself was not read).",
+    "IES Lighting Handbook and ANSI/IES RP-30-17 values for circulation and orientation in museums (the RP-30-17 preview refused automated reads).",
+    "CIBSE SLL Code for Lighting and CIBSE LG8 values (not publicly readable).",
+    "EN 1838 escape-route illuminance (1 lx on the centre line) was not read from a source.",
+    "The code behind the one foot-candle egress average (NFPA 101, Life Safety Code, is the likely origin); Wikipedia states the requirement without naming the code, and NFPA 101 itself was not read."
+  ]
+}

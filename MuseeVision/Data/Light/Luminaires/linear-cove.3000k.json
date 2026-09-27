@@ -1,0 +1,64 @@
+{
+  "key": "linear-cove.3000k",
+  "kind": "linear-cove",
+  "controlClass": "circulation",
+  "evidenceState": "complete",
+  "product": {
+    "manufacturer": "iGuzzini illuminazione",
+    "family": "Underscore Ledstrip tube no-dot 24V",
+    "description": "flexible strip - 5m - white LED - No-Dot tube",
+    "code": "RE18",
+    "status": "active"
+  },
+  "light": {
+    "luminousFluxLumensPerMeter": 1420,
+    "fluxBasis": "per-metre",
+    "reelFluxLumens": 7100,
+    "beamName": "GL - general lighting (fixed)",
+    "beamAngleDegrees": null,
+    "cctKelvin": 3000,
+    "cri": 90,
+    "criBasis": "minimum",
+    "tm30Rf": 90,
+    "tm30Rg": 97,
+    "macAdamSteps": 3,
+    "ledsPerMeter": 266
+  },
+  "electrical": {
+    "powerWattsPerMeter": 16,
+    "reelPowerWatts": 80,
+    "efficacyLumensPerWatt": 88.75,
+    "supplyVolts": 24,
+    "control": "constant-voltage power supply ordered separately; DALI interface available"
+  },
+  "housing": {
+    "sectionMillimeters": [12, 4],
+    "reelLengthMillimeters": 5000,
+    "protection": "IP65 on the uncut strip, IP20 at the connectors",
+    "mounting": "surface-mounted (listed as wall surface), laid along the cove"
+  },
+  "photometricFile": {
+    "url": null,
+    "note": "The maker's page has a Downloads section; its file links are built in the browser, so no direct URL is recorded."
+  },
+  "sources": [
+    {
+      "id": "maker-page",
+      "title": "iGuzzini, product page RE18",
+      "url": "https://www.iguzzini.com/en/re18/",
+      "readOn": "2026-09-26",
+      "covers": [
+        "product",
+        "light",
+        "electrical",
+        "housing"
+      ]
+    }
+  ],
+  "unverified": [
+    "Whether the Downloads section of the RE18 page offers LDT and IES files (the file list was not in the page text).",
+    "CRI (minimum) 90 comes from the search index text of the RE18 page; the fetched page showed Rf 90 and Rg 97 only.",
+    "The cutting step of the strip (the page names set cutting distances without a value).",
+    "Power per metre: the page's table gives 16 W per metre (80 W for the 5 m reel) and its text 'approximate power of strip 15W/m'; the record keeps the tabulated 16 W."
+  ]
+}

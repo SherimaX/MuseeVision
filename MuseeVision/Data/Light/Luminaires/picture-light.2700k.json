@@ -1,0 +1,76 @@
+{
+  "key": "picture-light.2700k",
+  "kind": "picture-light",
+  "controlClass": "gallery",
+  "evidenceState": "incomplete",
+  "product": {
+    "manufacturer": "Hogarth Lighting",
+    "family": "Classic Picture Light",
+    "description": "Classic picture light with patented shutters, finish #100 Antique Bronze",
+    "code": "#100",
+    "codeBasis": "the maker's model number for the Antique Bronze finish",
+    "status": "listed on the maker's site",
+    "notableProjects": [
+      "The National Trust, Petworth House",
+      "Trinity College, Cambridge",
+      "Knowsley Hall",
+      "Wilton House"
+    ],
+    "makerClaim": "Museum certified as meeting the CIBSE museum lighting guide, with zero heat and UV output onto the canvas (the maker's statement)"
+  },
+  "light": {
+    "luminousFluxLumens": null,
+    "fluxBasis": "not published",
+    "beamName": "LED lamps behind individual shutters in the hood; the hood swivels for height",
+    "beamAngleDegrees": null,
+    "peakCandela": null,
+    "cctKelvin": 2700,
+    "cri": 97
+  },
+  "electrical": {
+    "systemPowerWatts": null,
+    "control": "in-line dimmer, dimmer at the driver, or a lighting control system such as DALI",
+    "supply": "invisible wire, thin wire or rechargeable battery"
+  },
+  "housing": {
+    "hoodWidthMillimeters": 50,
+    "hoodHeightMillimeters": 35,
+    "lengthMillimetersRange": [25.4, 3657.6],
+    "bracketMillimeters": [50.8, 19.05],
+    "dimensionBasis": "hood 5 cm by 3.5 cm as published; length made to order from 1 inch to 12 feet and bracket 2 in by 3/4 in, converted from inches",
+    "materials": "hood of aluminium, other parts of brass",
+    "finish": "antique bronze"
+  },
+  "photometricFile": {
+    "url": null,
+    "note": "The maker publishes no photometric file."
+  },
+  "sources": [
+    {
+      "id": "maker-page",
+      "title": "Hogarth Lighting, Classic Picture Light",
+      "url": "https://hogarthlighting.com/our_picture_lights/classic_picture_light",
+      "readOn": "2026-09-26",
+      "covers": [
+        "product",
+        "light",
+        "electrical",
+        "housing"
+      ]
+    },
+    {
+      "id": "maker-home",
+      "title": "Hogarth Fine Art Picture Lights, home page (clients and certification)",
+      "url": "https://www.hogarthlighting.com/",
+      "readOn": "2026-09-26",
+      "covers": [
+        "product.notableProjects",
+        "product.makerClaim"
+      ]
+    }
+  ],
+  "unverified": [
+    "Luminous flux, intensity distribution and power: Hogarth publishes none; the record cannot be lit until the maker's photometry is obtained.",
+    "The CIBSE certification is the maker's claim; the certificate itself was not seen."
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "key": "track-spot.3000k.29deg",
+  "kind": "track-spot",
+  "controlClass": "gallery",
+  "evidenceState": "complete",
+  "product": {
+    "manufacturer": "ERCO",
+    "family": "Optec New",
+    "description": "Optec New Spotlight, construction size L, Spherolit lens flood, On-board Dim, white (RAL9002)",
+    "code": "A9001745",
+    "status": "current data sheet, edition 2026-04-28"
+  },
+  "light": {
+    "luminousFluxLumens": 2541,
+    "fluxBasis": "luminaire",
+    "ledFluxLumens": 3406,
+    "beamName": "Spherolit flood",
+    "beamAngleDegrees": 28.6,
+    "peakCandela": 9423,
+    "cctKelvin": 3000,
+    "cri": 97,
+    "colourDeviationSdcm": 1.5
+  },
+  "electrical": {
+    "systemPowerWatts": 38.0,
+    "ledPowerWatts": 34.6,
+    "control": "On-board Dim: rotary control on the luminaire, constant current reduction (CCR)",
+    "dimmingRangePercent": [1, 100],
+    "mounting": "ERCO 3-circuit track, Hi-trac 3-circuit track or 1-circuit singlet"
+  },
+  "housing": {
+    "diameterMillimeters": 129,
+    "drawingDimensionsMillimeters": [185, 92, 182],
+    "weightKilograms": 1.5,
+    "materials": "cylindrical light head of powder-coated cast aluminium; housing of polymer",
+    "rotationDegrees": 360,
+    "tiltDegrees": 270
+  },
+  "photometricFile": {
+    "url": "https://download.erco.com/en/planning_luminaire/ies/",
+    "note": "ERCO's public IES download portal; the file is found by the article number A9001745."
+  },
+  "sources": [
+    {
+      "id": "data-sheet",
+      "title": "ERCO, data sheet A9001745 Optec New Spotlight, edition 28.04.2026",
+      "url": "https://download-service.erco.com/download/A9001745/en/?types=15&formattedId=&productType=article",
+      "readOn": "2026-09-26",
+      "covers": [
+        "product",
+        "light",
+        "electrical",
+        "housing"
+      ]
+    },
+    {
+      "id": "article-page",
+      "title": "ERCO, article page A9001745 (the data sheet names it as the current version)",
+      "url": "https://www.erco.com/A9001745",
+      "readOn": "2026-09-26",
+      "covers": [
+        "product"
+      ]
+    }
+  ],
+  "unverified": [
+    "Which of the drawing dimensions 185, 92 and 182 mm is the head length, the overall height or the adapter: the data sheet's text layer gives the numbers without labels (Ø129 mm is marked as a diameter).",
+    "The beam angle 28.6° is read from the data sheet's cone diagram (diameter 0.51 m at 1 m); ERCO names the lens 'flood' without a separate nominal angle on the sheet."
+  ]
+}
