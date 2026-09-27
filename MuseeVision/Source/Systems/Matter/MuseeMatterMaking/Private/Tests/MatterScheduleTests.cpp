@@ -76,15 +76,17 @@ namespace Musee::Matter::ScheduleTests
 		return Found;
 	}
 
-	/** The specs a planting schedule names; a "material" without its working and history is reported on Test. */
-	TArray<FNamedSpec> PlantingSpecs(FAutomationTestBase& Test, const FString& Stage)
+	/**
+	 * The specs a record's text names, each "material" with its working and history; a "material" without them is
+	 * reported on Test.
+	 */
+	TArray<FNamedSpec> TextSpecs(FAutomationTestBase& Test, const FString& Where, const FString& Text)
 	{
-		const FString Text = ScheduleText(Stage, TEXT("Planting.json"));
 		TArray<FNamedSpec> Specs;
 		FRegexMatcher Matcher(FRegexPattern(SpecPattern), Text);
 		while (Matcher.FindNext())
 		{
-			Specs.Add({ FString::Printf(TEXT("%s/Planting.json"), *Stage), Matcher.GetCaptureGroup(1), Matcher.GetCaptureGroup(2), Matcher.GetCaptureGroup(3) });
+			Specs.Add({ Where, Matcher.GetCaptureGroup(1), Matcher.GetCaptureGroup(2), Matcher.GetCaptureGroup(3) });
 		}
 		int32 Materials = 0;
 		FRegexMatcher Named(FRegexPattern(MaterialPattern), Text);
@@ -92,7 +94,25 @@ namespace Musee::Matter::ScheduleTests
 		{
 			++Materials;
 		}
-		Test.TestEqual(FString::Printf(TEXT("%s/Planting.json: every material is named with its working and history"), *Stage), Specs.Num(), Materials);
+		Test.TestEqual(FString::Printf(TEXT("%s: every material is named with its working and history"), *Where), Specs.Num(), Materials);
+		return Specs;
+	}
+
+	/** The specs a planting schedule names: its water, beds and cast specimens. */
+	TArray<FNamedSpec> PlantingSpecs(FAutomationTestBase& Test, const FString& Stage)
+	{
+		return TextSpecs(Test, FString::Printf(TEXT("%s/Planting.json"), *Stage), ScheduleText(Stage, TEXT("Planting.json")));
+	}
+
+	/** The Site's blind doors, which carry their own bronze rather than a stage's finish (Site/Blinds.json). */
+	const TCHAR* const BlindsRecord = TEXT("Site/Blinds.json");
+
+	TArray<FNamedSpec> BlindSpecs(FAutomationTestBase& Test)
+	{
+		FString Text;
+		FFileHelper::LoadFileToString(Text, *(Records::DataRoot() / BlindsRecord));
+		const TArray<FNamedSpec> Specs = TextSpecs(Test, BlindsRecord, Text);
+		Test.TestEqual(TEXT("The blind doors name their bronze"), Specs.Num(), 1);
 		return Specs;
 	}
 
@@ -167,15 +187,9 @@ bool FMatterEveryScheduleResolves::RunTest(const FString& Parameters)
 	const TArray<FString> Stages = StageKeys();
 	TestTrue(TEXT("There are stages to check"), !Stages.IsEmpty());
 	int32 Checked = 0;
-	for (const FString& Stage : Stages)
+	const auto Check = [this, &Offered, &Masters, &Checked](const TArray<FNamedSpec>& Specs)
 	{
-		const TValueOrError<FMatterFinishSchedule, FString> Finishes = ReadFinishSchedule(FString(StagesFolder) / Stage);
-		if (Finishes.HasError())
-		{
-			AddError(FString::Printf(TEXT("%s: %s"), *Stage, *Finishes.GetError()));
-		}
-		const FMatterFinishSchedule* Schedule = Finishes.HasValue() ? &Finishes.GetValue() : nullptr;
-		for (const FNamedSpec& Named : StageSpecs(*this, Stage, Schedule))
+		for (const FNamedSpec& Named : Specs)
 		{
 			const FString Why = Unresolved(Named, Offered.GetValue(), Masters);
 			if (!Why.IsEmpty())
@@ -184,8 +198,19 @@ bool FMatterEveryScheduleResolves::RunTest(const FString& Parameters)
 			}
 			++Checked;
 		}
+	};
+	for (const FString& Stage : Stages)
+	{
+		const TValueOrError<FMatterFinishSchedule, FString> Finishes = ReadFinishSchedule(FString(StagesFolder) / Stage);
+		if (Finishes.HasError())
+		{
+			AddError(FString::Printf(TEXT("%s: %s"), *Stage, *Finishes.GetError()));
+		}
+		const FMatterFinishSchedule* Schedule = Finishes.HasValue() ? &Finishes.GetValue() : nullptr;
+		Check(StageSpecs(*this, Stage, Schedule));
 		CheckGlazingAndFrames(*this, Stage, Palette.GetValue(), Schedule);
 	}
+	Check(BlindSpecs(*this));
 	TestTrue(TEXT("The schedules name materials"), Checked > 0);
 	AddInfo(FString::Printf(TEXT("%d material specs checked across %d stages."), Checked, Stages.Num()));
 	TestMasters::Retire(Masters);
