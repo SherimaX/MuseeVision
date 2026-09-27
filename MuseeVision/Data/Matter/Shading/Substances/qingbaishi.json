@@ -27,11 +27,11 @@
       "derivation": "n = (1 + sqrt(F0)) / (1 - sqrt(F0)), the index whose normal-incidence reflectance is the record's F0"
     },
     "porosity": {
-      "value": 0.003,
+      "value": 0.019,
       "unit": "1",
-      "grade": "unverified",
-      "source": "Palette.json: accent.qingbaishi",
-      "note": "A dense marble; fine marbles absorb under 0.5 % water. No measurement of Dashiwo stone was read."
+      "grade": "measured",
+      "source": "Zhang et al. (2018), 'Thermally induced deterioration behaviour of two dolomitic marbles under heating-cooling cycles', Royal Society Open Science 5:180779, doi:10.1098/rsos.180779, Table 2, row QM-F (freshly quarried Qingbaishi marble, Dashiwo town, Fangshan district, Beijing). Read at https://pmc.ncbi.nlm.nih.gov/articles/PMC6227961/",
+      "note": "Confirmed. Table 2 gives the porosity of fresh QM as the fraction 0.019, with bulk density 2.824 g/cm3 and 99.7 % dolomite (0.3 % quartz). The value is high for a marble but it is measured on this stone. The dolomite result supports the proposer's point that refractiveIndex (1.6003, from calcite) should be derived again; that change is outside this batch."
     },
     "wettingDepth": {
       "value": 1.0,
@@ -43,11 +43,12 @@
   },
   "structure": {
     "grain": {
-      "value": 0.2,
+      "value": 0.067,
       "unit": "mm",
-      "grade": "unverified",
-      "source": "Palette.json: accent.qingbaishi",
-      "note": "The finest structure the face shows at gallery distance."
+      "grade": "measured",
+      "source": "Zhang et al. 2018, Royal Society Open Science 5:180779 (PMC6227961), text: average grain size of the minerals of QM 67.4 µm (HM, Hanbaiyu, 97.9 µm)",
+      "note": "Confirmed on the source. This is the mean crystal size of Dashiwo Qingbaishi, and it replaces the unverified 0.2 mm.",
+      "derivation": "67.4 µm = 0.0674 mm, rounded to 0.067"
     },
     "bed": {
       "value": 500,
@@ -66,9 +67,12 @@
     "hurst": {
       "value": 0.7,
       "unit": "1",
-      "grade": "unverified",
-      "source": "Candela et al. 2012, Journal of Geophysical Research 117, B08409 (fault surfaces, 0.6 to 0.8; cited in Stone.ush)",
-      "note": "The middle of the range measured on rock surfaces, as the travertine's."
+      "grade": "derived",
+      "source": "Candela, Renard, Klinger, Mair, Schmittbuhl & Brodsky (2012), 'Roughness of fault surfaces over nine decades of length scales', J. Geophys. Res. Solid Earth 117, B08409, doi:10.1029/2011JB009041. Abstract read via Crossref (https://api.crossref.org/works/10.1029/2011JB009041): H = 0.58 +/- 0.07 parallel and 0.81 +/- 0.04 perpendicular to slip, scales from 50 µm upward. The ipgp.fr PDF was fetched but its text could not be read.",
+      "note": "The exponents and the arithmetic are confirmed from the abstract. I could not read section 4.1 details: the 41 patches, the limestone faults, mode I near 0.8, and independence from lithology. Cite the abstract only. This transfers a value from natural fault surfaces to a worked marble face.",
+      "min": 0.58,
+      "max": 0.81,
+      "derivation": "H = (H_par + H_perp)/2 = (0.58 + 0.81)/2 = 0.695, rounded to 0.70"
     },
     "toneSpread": {
       "value": 0.06,

@@ -27,11 +27,12 @@
       "derivation": "n = (1 + sqrt(F0)) / (1 - sqrt(F0)), the index whose normal-incidence reflectance is the record's F0"
     },
     "porosity": {
-      "value": 0.004,
+      "value": 0.002,
       "unit": "1",
-      "grade": "unverified",
-      "source": "Palette.json: accent.pavonazzetto realMaterial (violet-veined white marble, Afyon-Iscehisar)",
-      "note": "A dense crystalline marble, open porosity a few tenths of a per cent; no measured value was read."
+      "grade": "manufacturer",
+      "source": "Arel Stone (Turkey), 'Afyon Violet Marble' product technical data: porosity 0.2 %, water absorption 0.1 %, density 2.73 g/cm3, http://www.arelstone.com/en/DetayAfyonMenekse.aspx",
+      "note": "Verified on the page, which names no test standard. The identity of Afyon Violet with pavonazzetto rests on the project's own Palette.json (accent.pavonazzetto realMaterial: 'traded today as Afyon violet', Afyon-Iscehisar, the site of the ancient Docimium quarries). The proposal also cited an IUGS Heritage Stone designation and literature saying the breccia is more porous. I did not open or verify either, so both are dropped. A specimen test to TS EN 1936 on the violet breccia would settle the value.",
+      "derivation": "0.2 % as a fraction"
     },
     "wettingDepth": {
       "value": 1.0,

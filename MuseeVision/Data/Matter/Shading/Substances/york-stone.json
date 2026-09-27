@@ -27,11 +27,14 @@
       "note": "The ordinary index of the quartz grains that make most of a sandstone."
     },
     "porosity": {
-      "value": 0.07,
+      "value": 0.124,
       "unit": "1",
-      "grade": "unverified",
-      "source": "Palette.json: accent.york-stone",
-      "note": "A first open porosity for the rock type; no measurement of this stone was read."
+      "grade": "derived",
+      "source": "Marshalls plc data sheets. 'Howley Park Yorkstone Blue/Grey' (created 28/01/25; Thornhill sandstone sequence, Howley Park, West Yorkshire): open porosity 13.90 % (mean, EN 1936:2006), density 2339 kg/m3, water absorption 4.5 % (EN 13755). 'Scoutmoor Yorkstone' (created 12/03/25; Millstone Grit and Westphalian A sandstone, Appleton Quarry, Yorkshire and Whitworth Quarry, Lancashire): open porosity 10.82 % (EN 1936:2006), density 2389 kg/m3, water absorption 2.29 %. https://docs.planning.org.uk/20260416/31/TCRT03BK12200/uzzfiyfhe0hv98iw.pdf and https://www.externalworksindex.co.uk/Docs/1765277226161/preview/Scoutmoor-Yorkstone-paving-data-sheet.pdf",
+      "note": "Both values were confirmed on the sheets. Scoutmoor is partly quarried in Lancashire (Whitworth), outside the record's West Yorkshire. If the record should stay strictly West Yorkshire, use the Howley Park value, 0.139 (manufacturer). Either way, 11 to 14 % replaces the unverified 7 %.",
+      "min": 0.1082,
+      "max": 0.139,
+      "derivation": "mean of two manufacturer EN 1936 open porosities: (0.1390 + 0.1082)/2 = 0.1236, rounded to 0.124"
     },
     "wettingDepth": {
       "value": 1.5,
@@ -66,9 +69,12 @@
     "hurst": {
       "value": 0.7,
       "unit": "1",
-      "grade": "unverified",
-      "source": "Candela et al. 2012, Journal of Geophysical Research 117, B08409 (fault surfaces, 0.6 to 0.8; cited in Stone.ush)",
-      "note": "The middle of the range measured on rock surfaces, as the travertine's."
+      "grade": "derived",
+      "source": "Candela et al. 2012, J. Geophys. Res. Solid Earth 117, B08409, doi:10.1029/2011JB009041, abstract (read via https://api.crossref.org/works/10.1029/2011JB009041).",
+      "note": "The exponents are confirmed. This is a transfer from fracture surfaces to a sawn and trodden sandstone flag.",
+      "min": 0.58,
+      "max": 0.81,
+      "derivation": "H = (0.58 + 0.81)/2 = 0.695, rounded to 0.70"
     },
     "toneSpread": {
       "value": 0.1,

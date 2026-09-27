@@ -20,11 +20,12 @@
       "note": "Mona marble, Anglesey: a green serpentinite breccia; no measured colour was read: a first value read from trade and museum photographs of the named material (as the Oxford University Museum's shafts show it)."
     },
     "refractiveIndex": {
-      "value": 1.56,
+      "value": 1.558,
       "unit": "1",
-      "grade": "unverified",
-      "source": "Serpentine minerals (antigorite, lizardite) have indices of 1.55 to 1.57 (Handbook of Mineralogy)",
-      "note": "The mean index of the rock's main minerals."
+      "grade": "derived",
+      "source": "Amgueddfa Cymru, Mineralogy of Wales database, 'Antigorite': the serpentinized rocks of the New Harbour Group, Anglesey, 'were once referred to as Mona Marble'; antigorite SW of Llanfechell; Maltman (1977) mentions antigorite with lizardite in serpentinite from Holy Island. https://museum.wales/mineralogy-of-wales/database/?mineral=15&name=Antigorite . Handbook of Mineralogy 'Antigorite' (alpha 1.558-1.567, beta 1.565, gamma 1.562-1.574) https://www.handbookofmineralogy.org/pdfs/antigorite.pdf and 'Lizardite' (alpha 1.538-1.554, beta and gamma 1.546-1.560) https://www.handbookofmineralogy.org/pdfs/lizardite.pdf",
+      "note": "Checked: all the indices and museum statements are as cited, and the arithmetic holds. The equal weighting is an assumption. The museum page records the two serpentines together only in Holy Island serpentinite, which is New Harbour Group, and gives no proportions. Calcite or dolomite in the veins and breccia matrix (n about 1.60) is left out. A carbonate-rich shaft would read higher. If a shaft is known to be antigorite-only, 1.565 applies.",
+      "derivation": "antigorite mean = (1.5625 + 1.565 + 1.568) / 3 = 1.5652; lizardite mean = (1.546 + 1.553 + 1.553) / 3 = 1.5507; weighted equally, (1.5652 + 1.5507) / 2 = 1.558."
     },
     "porosity": {
       "value": 0.005,

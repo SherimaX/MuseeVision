@@ -28,9 +28,10 @@
     "porosity": {
       "value": 0.0,
       "unit": "1",
-      "grade": "unverified",
-      "source": "a glaze is glass",
-      "note": "The fired glaze has no open pores."
+      "grade": "derived",
+      "source": "a fired tin glaze is a glass fused to the body (the reasoning the frit.white and opal-glass records already use)",
+      "note": "The value is unchanged, and the grade follows the reasoning the frit and opal records already accept. Any bubbles in a glaze are closed, so they add no open porosity. Caveat: tin glaze on earthenware often crazes, and crazed ware lets water reach the porous body. That belongs to a history, not to this sound-glaze value.",
+      "derivation": "a fused glass layer has no open pores"
     },
     "wettingDepth": {
       "value": 0.0,

@@ -42,11 +42,14 @@
   },
   "structure": {
     "grain": {
-      "value": 0.05,
+      "value": 0.031,
       "unit": "mm",
-      "grade": "unverified",
-      "source": "Palette.json: accent.qing-pine-lacquered",
-      "note": "The finest structure: vessels or tracheids."
+      "grade": "derived",
+      "source": "Park, Y., Kim, C.K., Jeong, H., Lee, H.M., Lee, I.H., Kwon, G.B., Yoon, N. & Lee, N. (2025) Evaluation of the basic properties for the Korean major domestic wood species III. Korean pine (Pinus koraiensis). Journal of the Korean Wood Science and Technology 53(3), 301-310, http://www.woodj.org/archive/view_article?doi=10.5658/WOOD.2025.53.3.301",
+      "note": "Confirmed: tangential widths are 31.62 um (earlywood) and 29.92 um (latewood); radial widths are 44.83 um (earlywood) and 20.88 um (latewood). The paper does not say whether it measured the whole cell or only the lumen; whole-cell width is the usual convention. The large resin canals are coarser, but the tracheid is the finest structure this field describes.",
+      "min": 0.021,
+      "max": 0.045,
+      "derivation": "Mean of the measured tangential tracheid widths: (31.62 + 29.92) / 2 = 30.8 um"
     },
     "bed": {
       "value": 4.0,

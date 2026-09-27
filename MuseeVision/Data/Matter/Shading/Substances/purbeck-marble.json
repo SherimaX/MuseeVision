@@ -50,11 +50,11 @@
       "note": "The finest structure the face shows at gallery distance."
     },
     "bed": {
-      "value": 250,
+      "value": 300,
       "unit": "mm",
-      "grade": "unverified",
-      "source": "Palette.json: accent.british-column-stones.d",
-      "note": "The coarsest structure the face shows: its bedding, veining or banding."
+      "grade": "secondary",
+      "source": "Dorset Building Stone, 'Upper Purbeck (Purbeck Marble)': the thin beds are 'usually of less than 12\" (.3 m) in thickness but rarely as much as 1.00 m or more'; maximum thicknesses: Blue bed 0.11 m, Green bed 0.81 m, Grey bed 0.38 m, Pre-Unio grey bed 0.20 m; the Green bed 'not uncommonly' oxidises to red. https://www.dorsetbuildingstone.org/upper-purbeck-purbeck-marble.html . Wikipedia, 'Purbeck Marble': beds 'never more than 1.2 m thick and are often much thinner'. https://en.wikipedia.org/wiki/Purbeck_Marble",
+      "note": "Checked. Clarified: 0.3 m is the usual upper limit ('usually of less than 12 in'), not a typical thickness. Most beds are thinner, so 300 mm is the top of the usual range. The per-bed figures are maxima. Neither cited page says that shafts were cut from single beds, so that remains an inference. The Green bed (up to 810 mm, and it can oxidise red) is the exception if a shaft is read as that bed."
     },
     "bedAspect": {
       "value": 1.5,

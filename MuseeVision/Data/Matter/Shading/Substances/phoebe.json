@@ -42,18 +42,19 @@
   },
   "structure": {
     "grain": {
-      "value": 0.1,
+      "value": 0.072,
       "unit": "mm",
-      "grade": "unverified",
-      "source": "Palette.json: accent.phoebe",
-      "note": "The finest structure: vessels or tracheids."
+      "grade": "measured",
+      "source": "Wu, J., Liang, J., Chen, M., Zheng, S. & Xu, J. (2022) Study on the structural characteristics and physical and mechanical properties of Phoebe bournei thinning wood. Journal of Renewable Materials 10(11), https://www.techscience.com/jrm/v10n11/48716/html",
+      "note": "Confirmed. Mean tangential vessel diameter 72 um, maximum 111 um, about 19 vessels per mm2 (vessel proportion 12.89 %). The trees are P. bournei, 14-year-old plantation thinnings. This record is named P. zhennan, but its research record covers both species and uses this paper for density.",
+      "max": 0.111
     },
     "bed": {
-      "value": 4.0,
+      "value": 5.0,
       "unit": "mm",
-      "grade": "unverified",
-      "source": "Palette.json: accent.phoebe",
-      "note": "A growth ring's width."
+      "grade": "measured",
+      "source": "Wu, J., Liang, J., Chen, M., Zheng, S. & Xu, J. (2022) Study on the structural characteristics and physical and mechanical properties of Phoebe bournei thinning wood. Journal of Renewable Materials 10(11), https://www.techscience.com/jrm/v10n11/48716/html",
+      "note": "Confirmed: growth-ring width averages 4.99 mm and decreases gradually from pith to bark. These are young plantation stems, so boards from older trees would have narrower rings. That matches the museum's stated plantation-grown phoebe."
     },
     "bedAspect": {
       "value": 20.0,
@@ -98,11 +99,12 @@
       "source": "Palette.json: accent.phoebe"
     },
     "rayFleck": {
-      "value": 0.02,
+      "value": 0.1,
       "unit": "1",
-      "grade": "unverified",
-      "source": "Palette.json: accent.phoebe",
-      "note": "How much of a quarter-sawn face the rays show."
+      "grade": "derived",
+      "source": "Wu, J., Liang, J., Chen, M., Zheng, S. & Xu, J. (2022) Study on the structural characteristics and physical and mechanical properties of Phoebe bournei thinning wood. Journal of Renewable Materials 10(11), https://www.techscience.com/jrm/v10n11/48716/html (ray tissue proportion 10.24 %)",
+      "note": "Confirmed 10.24 % rays (fibres 64.83 %, axial parenchyma 11.23 %). The figure counts uniseriate and multiseriate rays together. Multiseriate rays are only about 22 um wide, so they read as fine silk, not oak-like fleck, and rayTone should stay near 1.",
+      "derivation": "Delesse's principle: for a section plane of any fixed orientation placed at random, the expected area share of a phase equals its volume share. The ray share of a quarter-sawn face is therefore about the ray volume proportion, 0.1024."
     },
     "rayTone": {
       "value": 1.05,
@@ -111,10 +113,13 @@
       "source": "Palette.json: accent.phoebe"
     },
     "rayLength": {
-      "value": 1.0,
+      "value": 0.275,
       "unit": "mm",
-      "grade": "unverified",
-      "source": "Palette.json: accent.phoebe"
+      "grade": "measured",
+      "source": "Wu, J., Liang, J., Chen, M., Zheng, S. & Xu, J. (2022) Study on the structural characteristics and physical and mechanical properties of Phoebe bournei thinning wood. Journal of Renewable Materials 10(11), https://www.techscience.com/jrm/v10n11/48716/html",
+      "min": 0.081,
+      "max": 0.726,
+      "note": "Confirmed. Multiseriate ray height is 81-726 um, mean 275 um (5-30 cells). Uniseriate rays are 54-179 um, mean 104 um (2-5 cells). MatterWood.h / Wood.ush define rayLength as 'a fleck's length along the grain'. On a quarter-sawn (radial) face that is the ray's axial height, so this is the right quantity."
     },
     "rayWidth": {
       "value": 0.1,

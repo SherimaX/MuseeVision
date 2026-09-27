@@ -20,10 +20,12 @@
       "note": "The Ding kilns' thin ivory glaze over a white porcelain body, warm where it pools in the carving: no measured colour was read: a first value read from museum photographs of the named ware."
     },
     "refractiveIndex": {
-      "value": 1.52,
+      "value": 1.5,
       "unit": "1",
-      "grade": "unverified",
-      "source": "Substances/low-iron-glass.json (1.523 for soda-lime float); a ceramic glaze is a soda-lime-alumina-silica glass of about the same index"
+      "grade": "secondary",
+      "source": "Sang et al. 2025, npj Heritage Science s40494-025-01630-0: glaze glass phase 1.500 (after Pagliari et al. 2013)",
+      "derivation": "Transferred from the same family of high-fired calcium/magnesium silicate glazes",
+      "note": "Not measured on Ding glaze. A lime-magnesia glaze is probably about 1.50 to 1.52."
     },
     "porosity": {
       "value": 0.0,

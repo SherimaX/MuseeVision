@@ -9,15 +9,25 @@
   "dielectric": {
     "diffuseAlbedo": {
       "value": [
-        48.0,
-        14.0,
-        30.0
+        44.6,
+        9.7,
+        9.4
       ],
       "space": "CIELAB (D65, 2 deg)",
       "unit": "CIELAB",
-      "grade": "unverified",
-      "source": "Palette.json: accent.huanghuali",
-      "note": "Golden to reddish-brown heartwood with darker 'ghost face' figure; no measured colour was read: a first value read from trade and museum photographs of the named material."
+      "grade": "measured",
+      "source": "Correlation between Colour Traits and Intrinsic Quality of Dalbergiae Odoriferae Lignum, Molecules 28(22), 7635 (2023), https://doi.org/10.3390/molecules28227635 (read at https://pmc.ncbi.nlm.nih.gov/articles/PMC10674628/), Table 1",
+      "note": "Checked against the paper. Mean of 54 qualified D. odorifera heartwood samples (60 collected, Hainan, Guangdong and elsewhere): L* 44.59 ± 3.29 (38.98-52.91), a* 9.71 ± 1.65 (5.93-12.84), b* 9.44 ± 2.93 (3.83-16.88). HunterLab UltraScan VIS, D65, SCE. The paper does not state the observer, so the record's 'D65, 2 deg' space label is an assumption for this value. Measured on 40-mesh POWDER of medicinal-grade heartwood (降香), not on a planed or oiled face. It is the same species and the same tissue, but powder scatters more than a solid finished face, which will look darker and more saturated. Treat it as the species' measured anchor, not the colour of the finished table. It replaces the photograph-read (48, 14, 30): that b* of 30 is far outside the measured range of 3.8-16.9.",
+      "min": [
+        38.98,
+        5.93,
+        3.83
+      ],
+      "max": [
+        52.91,
+        12.84,
+        16.88
+      ]
     },
     "refractiveIndex": {
       "value": 1.55,
@@ -26,11 +36,14 @@
       "source": "Marschner, S.R., Westin, S.H., Arbree, A. & Moon, J.T. (2005) Measuring and modeling the appearance of finished wood, ACM Transactions on Graphics 24(3) (as cited in the timber records)"
     },
     "porosity": {
-      "value": 0.41,
+      "value": 0.37,
       "unit": "1",
-      "grade": "unverified",
-      "source": "Palette.json: accent.huanghuali",
-      "note": "A dense tropical hardwood of about 0.85 to 0.95 g/cm3; 1 - 0.88 / 1.5. No measurement was read."
+      "grade": "derived",
+      "source": "Richter, H.G., Gembruch, K. & Koch, G. CITESwoodID: Dalbergia odorifera (Huanghuali), https://www.delta-intkey.com/citeswood/en/www/fabfaodo.htm ('Wood heavy and hard (0.93-0.97 g/cm3)'); cell-wall density 1500 kg/m3 (Siau 1995), as in the oak record",
+      "note": "Checked against the source. CITESwoodID does not state the moisture content for its density. The Wood Database (Meier, https://www.wood-database.com/huanghuali/, opened) gives 875 kg/m3 average dried weight (SG 0.85 basic, 0.88 at 12 % MC), which would give 0.42. Range 0.35-0.42.",
+      "min": 0.35,
+      "max": 0.42,
+      "derivation": "1 - 950 / 1500 = 0.367, where 950 kg/m3 is the middle of CITESwoodID's 930-970"
     },
     "wettingDepth": {
       "value": 1.0,
@@ -42,11 +55,13 @@
   },
   "structure": {
     "grain": {
-      "value": 0.15,
+      "value": 0.16,
       "unit": "mm",
-      "grade": "unverified",
-      "source": "Palette.json: accent.huanghuali",
-      "note": "The finest structure: vessels or tracheids."
+      "grade": "secondary",
+      "source": "Richter, H.G., Gembruch, K. & Koch, G. CITESwoodID: Dalbergia odorifera (Huanghuali), https://www.delta-intkey.com/citeswood/en/www/fabfaodo.htm",
+      "note": "Confirmed. Diffuse-porous. Vessels 'small to medium to large (50-160-280 um)', so the mean tangential diameter is 160 um. Vessels are 'very few, or few (3-12)' per mm2.",
+      "min": 0.05,
+      "max": 0.28
     },
     "bed": {
       "value": 3.0,

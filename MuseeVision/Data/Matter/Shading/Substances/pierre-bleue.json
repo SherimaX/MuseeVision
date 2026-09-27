@@ -27,11 +27,12 @@
       "derivation": "n = (1 + sqrt(F0)) / (1 - sqrt(F0)), the index whose normal-incidence reflectance is the record's F0"
     },
     "porosity": {
-      "value": 0.003,
+      "value": 0.0024,
       "unit": "1",
-      "grade": "unverified",
-      "source": "Palette.json: accent.pierre-bleue",
-      "note": "Belgian bluestone absorbs 0.1 to 0.2 % water by producers' sheets; no sheet was read."
+      "grade": "manufacturer",
+      "source": "Les Carrieres de la Pierre Bleue Belge SA (Soignies), 'Belgian Blue Stone' brochure (2022), Technical characteristics table, p. 11: Porosity 0.24 % vol, standard deviation 0.15, n = 244 (NBN EN 1936:2007); water absorption 0.10 % m (NBN EN 13755:2008); apparent bulk density 2690 kg/m3; capillary absorption (NBN EN 1925) 'Not applicable, due to the low porosity of the stone', https://www.pierrebleuebelge.be/en/wp-content/uploads/sites/3/2022/12/Pierre-Bleue-Belge-Brochure-Belgian-Blue-Stone.pdf",
+      "note": "Verified. It agrees with UBAtc ATG 00/H724 (S.A. Carrieres du Hainaut, Soignies, 2000): porosity under vacuum 0.28 % vol, s = 0.13, n = 131 (NBN B24-213), averaged over the Soignies and Condroz basins, https://api.butgb-ubatc.be/api/public/file/ATG00H724F_000114A_1.pdf. I did not open Pereira et al. 2015, so it is dropped from the note.",
+      "derivation": "0.24 % by volume as a fraction"
     },
     "wettingDepth": {
       "value": 1.0,
@@ -43,11 +44,14 @@
   },
   "structure": {
     "grain": {
-      "value": 1.0,
+      "value": 1.4,
       "unit": "mm",
-      "grade": "unverified",
-      "source": "Palette.json: accent.pierre-bleue realMaterial",
-      "note": "Its crinoid fragments, up to about a millimetre, show as pale specks on the honed face."
+      "grade": "derived",
+      "source": "Debout L. & Denayer J. (2018) 'Palaeoecology of the Upper Tournaisian (Mississippian) crinoidal limestones from South Belgium', Geologica Belgica 21(3-4):111-127: in the Soignies Member at the Gauthier-Wincqz quarry 'The columnal diameter fluctuates between 0.2 to 10 mm'; histograms polymodal (Fig. 11), https://popups.uliege.be/1374-8505/index.php?id=5991",
+      "note": "Verified. The paper gives the 0.2 to 10 mm range for the Soignies Member beds, which it names as the Gros dur, Cul de Poupli, Banc dit de 3 metres and so on, the same beds as the ATG quarry log. It reports polymodal histograms and gives no numerical mode or mean, so the geometric mean of the range is a stand-in. UBAtc ATG 00/H724 describes the stone as innumerable crinoid articles cemented in microcrystalline calcite.",
+      "min": 0.2,
+      "max": 10,
+      "derivation": "Geometric mean of the measured range of columnal diameters: sqrt(0.2 mm x 10 mm) = 1.41 mm"
     },
     "bed": {
       "value": 300,

@@ -19,11 +19,12 @@
       "note": "Seen through the glass, as the Atrium's frit is from the room. Only the luminous value was read, so it is neutral; the frit side reflects 0.623."
     },
     "refractiveIndex": {
-      "value": 1.52,
+      "value": 1.525,
       "unit": "1",
-      "grade": "unverified",
-      "source": "Workings/fritted.json: process (an enamel is a glass flux fired onto the float); a soda-lime glass's index stands for it",
-      "note": "The face the eye meets is the glass's; the enamel's own index is not read."
+      "grade": "derived",
+      "source": "Rubin, M. (1985) Optical properties of soda lime silica glasses. Solar Energy Materials 12, 275-288, via refractiveindex.info, https://refractiveindex.info/?shelf=glass&book=soda-lime&page=Rubin-clear",
+      "note": "The formula and coefficients are confirmed on the page (valid 0.31-4.6 um), and the arithmetic has been checked. This is the index of the clear float the eye meets from the room side, as the record intends; the enamel's own index is not read. It agrees with OPALIKA's base glass (ne 1.525, as given in Substances/opal-glass.json).",
+      "derivation": "n = 1.5130 - 0.003169 lambda^2 + 0.003962 / lambda^2 at lambda = 0.55 um: 1.5130 - 0.00096 + 0.01310 = 1.5251"
     },
     "porosity": {
       "value": 0.0,

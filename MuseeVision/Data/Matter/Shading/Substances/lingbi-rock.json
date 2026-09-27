@@ -43,11 +43,14 @@
   },
   "structure": {
     "grain": {
-      "value": 0.03,
+      "value": 0.032,
       "unit": "mm",
-      "grade": "unverified",
-      "source": "Palette.json: accent.lingbi-rock",
-      "note": "The finest structure the face shows at gallery distance."
+      "grade": "derived",
+      "source": "Li L., Zhao J., Li J., Guo J. (2026) 'Provenance study of Eastern Zhou Dynasty (770-256 BC) stone chimes excavated from the Chu territory, China', Frontiers in Earth Science 14:1812060, doi:10.3389/feart.2026.1812060: Lingbi samples Lbs01 0.02-0.1 mm, Lbs02 0.01-0.05 mm, Lbs03 0.01-0.1 mm, 'calcite grains in mosaic contact, with minimal mineral impurities', https://www.frontiersin.org/journals/earth-science/articles/10.3389/feart.2026.1812060/full",
+      "note": "Verified. The ranges and the mosaic calcite texture are as stated. I did not confirm the Qingyunshan locality detail, so the citation names the samples by their Lbs labels only.",
+      "min": 0.01,
+      "max": 0.1,
+      "derivation": "Geometric mean of the combined measured range: sqrt(0.01 mm x 0.1 mm) = 0.0316 mm"
     },
     "bed": {
       "value": 200,

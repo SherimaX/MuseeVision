@@ -20,18 +20,24 @@
       "note": "A first colour for Grey brick (reduction-fired and water-quenched Ming and Qing wall brick): no measured colour was read: a first value read from trade and museum photographs of the named material."
     },
     "refractiveIndex": {
-      "value": 1.55,
+      "value": 1.54,
       "unit": "1",
-      "grade": "unverified",
-      "source": "Substances/brick.json (Shading): fired clay is quartz, feldspar and glass, indices 1.5 to 1.6",
-      "note": "The middle of the fired body's mineral indices, as the brick's."
+      "grade": "derived",
+      "source": "Sun and Jin 2025, npj Heritage Science 13:331 (XRD: quartz, potassium feldspar, albite and amphibole), https://www.nature.com/articles/s40494-025-01902-9; webmineral.com Quartz (w 1.543-1.545, e 1.552-1.554), https://www.webmineral.com/data/Quartz.shtml; Orthoclase (a 1.518, b 1.522, g 1.523-1.524), https://www.webmineral.com/data/Orthoclase.shtml; Albite (a 1.528-1.533, g 1.538-1.542), https://www.webmineral.com/data/Albite.shtml",
+      "note": "Checked against all three webmineral pages. If quartz dominates, the true value leans towards 1.55. F0 differs from the old 1.55 by less than 0.001. Amphibole and the glass phase are not included.",
+      "min": 1.518,
+      "max": 1.554,
+      "derivation": "The main minerals' indices run from 1.518 to 1.554; the midpoint is 1.536, rounded to 1.54. It is unweighted because the phase fractions are unknown."
     },
     "porosity": {
-      "value": 0.25,
+      "value": 0.28,
       "unit": "1",
-      "grade": "unverified",
-      "source": "Palette.json: accent.grey-brick",
-      "note": "A first open porosity for the material; no measurement was read."
+      "grade": "derived",
+      "source": "Sun and Jin (2025) 'Characterization of decorative bricks from Qing Dynasty dwellings in southern Anhui Province of China', npj Heritage Science 13:331, https://www.nature.com/articles/s40494-025-01902-9, Table 1 (density 1.69 and 1.67, mean 1.68 g/cm3; water absorption 18.98 and 19.01 %; porosity 29.81 and 29.78 %, mean 29.79 %); He, Li and Zhou (2025), npj Heritage Science 13, https://www.nature.com/articles/s40494-025-02072-4 (cites Yang et al. 1989: Forbidden City imperial bricks, open porosity about 27.3 %; fired Jin Zhuan MIP total porosity 25.3 %); Ma, Wu and Bao (2021), Scientific Reports, https://pmc.ncbi.nlm.nih.gov/articles/PMC8526661/ (Kaifeng blue clay brick: mean bulk density 1.573 g/cm3, mean 24 h water absorption 17.9 %)",
+      "note": "Corrected details: the Anhui table gives a mean density of 1.68 (not about 1.70) and porosity of 29.79 %, and the mean of the three is 0.284 (not 0.285). The result is unchanged. None of these is a Linqing wall brick: the Anhui samples are decorative bricks, the Kaifeng brick is modern, and the Jin Zhuan MIP figure is a total porosity, not an open one. For Linqing the value may be low.",
+      "min": 0.25,
+      "max": 0.3,
+      "derivation": "Kaifeng open porosity = 0.179 x 1.573 / 1.00 = 0.282; Anhui Qing grey brick = 0.298 (Table 1); Forbidden City = 0.273. Mean = (0.282 + 0.298 + 0.273)/3 = 0.284, rounded to 0.28."
     },
     "wettingDepth": {
       "value": 2.5,
@@ -43,11 +49,13 @@
   },
   "structure": {
     "grain": {
-      "value": 0.3,
+      "value": 0.1,
       "unit": "mm",
-      "grade": "unverified",
-      "source": "Palette.json: accent.grey-brick",
-      "note": "The finest structure the face shows."
+      "grade": "measured",
+      "source": "Sun and Jin 2025, npj Heritage Science 13:331, https://www.nature.com/articles/s40494-025-01902-9, SEM ('flakes, strips, and lumps of mineral particles' of 10 to 100 um, with gaps between them and smaller particles around them)",
+      "note": "0.1 mm is the top of the measured SEM particle range for a Qing grey decorative brick from Anhui. It is not a Linqing wall brick, and grog or sand in a Linqing body could be coarser.",
+      "min": 0.01,
+      "max": 0.1
     },
     "bed": {
       "value": 480,

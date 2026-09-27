@@ -65,9 +65,12 @@
     "hurst": {
       "value": 0.7,
       "unit": "1",
-      "grade": "unverified",
-      "source": "Candela et al. 2012, Journal of Geophysical Research 117, B08409 (fault surfaces, 0.6 to 0.8; cited in Stone.ush)",
-      "note": "The middle of the range measured on rock fracture surfaces; no measurement of a worked travertine face was read."
+      "grade": "derived",
+      "source": "Candela et al. 2012, J. Geophys. Res. Solid Earth 117, B08409, doi:10.1029/2011JB009041, abstract (read via https://api.crossref.org/works/10.1029/2011JB009041): H_par 0.58 +/- 0.07, H_perp 0.81 +/- 0.04, five exhumed faults and 13 earthquake ruptures, 50 µm upward.",
+      "note": "The exponents are confirmed. The abstract spans 50 µm to 50 km in total, not '0.05 mm to 10 m'; the latter is probably the fault-patch subset, which I could not verify. Also unverified: '41 patches' and 'three of five in limestone'. No measurement of a worked travertine face was found.",
+      "min": 0.58,
+      "max": 0.81,
+      "derivation": "H = (H_par + H_perp)/2 = (0.58 + 0.81)/2 = 0.695, rounded to 0.70"
     },
     "toneSpread": {
       "value": 0.1,

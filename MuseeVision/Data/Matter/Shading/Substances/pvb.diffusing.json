@@ -8,15 +8,17 @@
   "dielectric": {
     "diffuseAlbedo": {
       "value": [
-        0.7,
-        0.7,
-        0.7
+        0.31,
+        0.31,
+        0.31
       ],
       "space": "linear Rec.709 (sRGB primaries), D65 white",
       "unit": "1",
-      "grade": "unverified",
-      "source": "Palette.json: glass.clear-float",
-      "note": "A white translucent interlayer reflects much of what it does not pass; a first value."
+      "grade": "derived",
+      "source": "Eastman, Vanceva White Collection (Arctic Snow 65 % VLT), https://saflex-vanceva.eastman.com/en/architectural/interlayer-performance/vanceva-colors/vanceva-white-collection-samples-kit; soda-lime n 1.525 (Rubin 1985, via https://refractiveindex.info/?shelf=glass&book=soda-lime&page=Rubin-clear)",
+      "note": "Accepted as an UPPER BOUND, not a measured reflectance; neither maker's page gives a reflectance value. The old 0.7 together with T 0.65 would send out more light than arrives. Absorption by the white pigment and the laminate's second glass face would both lower it. It must be recomputed if the transmittance changes (T 0.267 for four layers gives at most 0.69).",
+      "max": 0.31,
+      "derivation": "Energy balance with absorption neglected: R_diffuse <= 1 - F0 - T = 1 - 0.043 - 0.65 = 0.307, with F0 = ((1.525 - 1)/(1.525 + 1))^2 = 0.0432 for the glass face"
     },
     "refractiveIndex": {
       "value": 1.48,
@@ -43,15 +45,15 @@
   "sheet": {
     "transmittance": {
       "value": [
-        0.25,
-        0.25,
-        0.25
+        0.65,
+        0.65,
+        0.65
       ],
       "space": "linear Rec.709 (sRGB primaries), D65 white",
       "unit": "1",
-      "grade": "unverified",
-      "source": "Palette.json: glass.clear-float",
-      "note": "A first diffuse transmittance for a translucent white interlayer; the makers' figures were not read."
+      "grade": "manufacturer",
+      "source": "Eastman, Vanceva White Collection, https://saflex-vanceva.eastman.com/en/architectural/interlayer-performance/vanceva-colors/vanceva-white-collection-samples-kit",
+      "note": "Confirmed: Arctic Snow 65 % VLT, Cool White 80 %, Polar White 7 %, and four layers of Arctic Snow 26.7 % (the Museum of Fine Arts Houston configuration). The page does not give the glass make-up or a product code, so the proposal's '(0009)' is dropped as unverified. The value is luminous only, so it is set neutral. Kuraray gives 70 % light transmission for Trosifol Translucent White 0.76 mm (https://www.trosifol.com/about-us/news/new-trosifolr-translucent-white-pvb-film-with-high-adhesion, 14 Jan 2021, opened). If Albion's glazing specifies a four-layer stack, use 0.267 instead."
     }
   }
 }

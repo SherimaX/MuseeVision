@@ -27,11 +27,12 @@
       "derivation": "n = (1 + sqrt(F0)) / (1 - sqrt(F0)), the index whose normal-incidence reflectance is the record's F0"
     },
     "porosity": {
-      "value": 0.25,
+      "value": 0.238,
       "unit": "1",
-      "grade": "unverified",
-      "source": "Palette.json: accent.bath-stone",
-      "note": "Oolitic freestones of the Great Oolite commonly hold 20 to 30 % open porosity; no measurement of Monks Park stone was read."
+      "grade": "measured",
+      "source": "BRE (Building Research Establishment), 'Monks Park Limestone: Technical Data Sheet', Monks Park Mine, Corsham, Wilts, compiled September 1997 (tests at BRE 1996; porosity method Note 3 = prEN 1341 / BRE 141), Test Results table, 'Porosity and Water Absorption', pp. 3-4, https://bregroup.com/documents/311572/1309416/Monks+Park+Limestone.pdf/031955ac-5182-4710-370d-33f40c2466b2",
+      "note": "Verified on the sheet. Porosity 23.8 % is on p. 3. The saturation coefficient of 0.85, the water absorption of 10.3 % by weight and the bulk density of 2066 kg/m3 (labelled 'bulk specific gravity') are on p. 4, not p. 3. The sheet calls the stone 'a fine-grained, buff coloured stone' and an oolitic limestone of the Great Oolite. It says three beds tested earlier had similar porosity and water absorption.",
+      "derivation": "23.8 % as a fraction"
     },
     "wettingDepth": {
       "value": 2.5,
@@ -52,9 +53,9 @@
     "bed": {
       "value": 300,
       "unit": "mm",
-      "grade": "unverified",
-      "source": "Palette.json: accent.bath-stone",
-      "note": "A course of Albion's ashlar, 0.30 high."
+      "grade": "design",
+      "source": "MuseeVision/Docs/Stages/albion.md §3.1 Coursing (BandCuts): 'every 1.20 one red course of 0.30 and three buff of 0.30'; §3.10 maps albion.wall.buff to accent.bath-stone",
+      "note": "Verified in albion.md lines 119-122 and 322. The value is the height of the designed buff ashlar course, not a natural bed, and 'design' is the honest grade. BRE's Monks Park sheet (p. 2) says the stone is worked in galleries about 6 m high and seems to be divided into 'four or more beds'. A 0.30 m block therefore shows no natural bed."
     },
     "bedAspect": {
       "value": 1.5,

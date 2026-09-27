@@ -8,15 +8,22 @@
   "dielectric": {
     "diffuseAlbedo": {
       "value": [
-        0.6,
-        0.6,
-        0.6
+        0.62,
+        0.65,
+        0.69
       ],
       "space": "linear Rec.709 (sRGB primaries), D65 white",
       "unit": "1",
-      "grade": "unverified",
-      "source": "Substances/opal-glass.json: unverified (0.6)",
-      "note": "An opal flash reflects most of what it does not pass."
+      "grade": "derived",
+      "source": "Substances/opal-glass.json: optics.luminousTransmittance (0.32 ± 0.08), optics.spectralTransmittance and optics.specularF0 (0.0432), all from the SCHOTT OPALIKA data sheet as recorded there; this shading record's sheet.transmittance [0.335, 0.31, 0.27]",
+      "note": "Accepted only as an UPPER BOUND. The inequality holds because every term left out (absorption, the second face's specular reflection) is non-negative. The SCHOTT PDF could not be read here, so the inputs rest on the research record. Two cautions. (1) Per the proposal's own frit analogy (Wilson and Elstner 2018: T 0.32, R 0.57-0.62, so about 0.06-0.1 absorbed), the true value is probably 0.55-0.65, below this bound, especially in blue. (2) This record's sheet.transmittance [0.335, 0.31, 0.27] claims to be read near 650/550/450 nm, but the research record's spectrum there is [0.33, 0.32, 0.30]. Recomputed from the spectrum, the bound is [0.627, 0.637, 0.657]. The blue channel should be rechecked before the bound is used as the value.",
+      "min": 0.55,
+      "max": [
+        0.62,
+        0.65,
+        0.69
+      ],
+      "derivation": "Energy balance per channel with absorption neglected: R_diffuse <= 1 - F0 - T = 1 - 0.043 - [0.335, 0.31, 0.27] = [0.622, 0.647, 0.687]"
     },
     "refractiveIndex": {
       "value": 1.525,

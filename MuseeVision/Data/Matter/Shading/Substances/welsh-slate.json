@@ -66,9 +66,12 @@
     "hurst": {
       "value": 0.7,
       "unit": "1",
-      "grade": "unverified",
-      "source": "Candela et al. 2012, Journal of Geophysical Research 117, B08409 (fault surfaces, 0.6 to 0.8; cited in Stone.ush)",
-      "note": "The middle of the range measured on rock surfaces, as the travertine's."
+      "grade": "derived",
+      "source": "Candela et al. 2012, J. Geophys. Res. Solid Earth 117, B08409, doi:10.1029/2011JB009041, abstract (read via https://api.crossref.org/works/10.1029/2011JB009041).",
+      "note": "The exponents are confirmed. This is a general rock-fracture value. A riven slate face is itself a fracture, along cleavage, so the transfer is reasonable for it; for a honed face across cleavage it is weaker.",
+      "min": 0.58,
+      "max": 0.81,
+      "derivation": "H = (0.58 + 0.81)/2 = 0.695, rounded to 0.70"
     },
     "toneSpread": {
       "value": 0.04,

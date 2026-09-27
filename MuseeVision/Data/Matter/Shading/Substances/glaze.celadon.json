@@ -9,21 +9,24 @@
   "dielectric": {
     "diffuseAlbedo": {
       "value": [
-        62.0,
-        -8.0,
-        6.0
+        53.6,
+        -5.4,
+        6.7
       ],
       "space": "CIELAB (D65, 2 deg)",
       "unit": "CIELAB",
-      "grade": "unverified",
-      "source": "Palette.json: accent.stoneware-glazed",
-      "note": "The scholar's-desk glaze: the grey-green of Longquan celadon, a design choice for the sheet's 'glazed' desk things; no measured colour was read: a first value read from trade and museum photographs of the named material."
+      "grade": "derived",
+      "source": "Z. Sang, L. Li, M. Wu et al., 'Color characteristics of plum-green celadon glaze from the Longquan kiln in Southern Song (1127-1276 A.D.) and Yuan Dynasties (1271-1368 A.D.)', npj Heritage Science 2025, https://www.nature.com/articles/s40494-025-01630-0 (X-Rite i4800): Southern Song mean L* 53.62, b* 6.74; Yuan L* 50.38, b* 7.09. Z. Ren, H. Wang et al., 'The mechanisms of color, opacifying, and cracks in celadon glazes from the Southern Song Guan Kiln', npj Heritage Science 2026, https://www.nature.com/articles/s40494-026-02383-0 (X-Rite Ci7800): L* 60 +/- 10, a* -8.49 to -2.25, b* 2.56 to 8.99, C* < 10",
+      "note": "This is a hybrid of two kilns. Plum-green Longquan is likely greener (more negative a*) than the Guan middle. The record says 'grey-green', and plum-green is the deeper green Longquan type. Neither paper states an illuminant or observer, so the D65/2-deg label is approximate. The measurements include the body under the glaze.",
+      "derivation": "L* and b* are the Southern Song Longquan means (53.62, 6.74). a* is the middle of the Guan range, (-8.49 + -2.25)/2 = -5.37, because the Longquan paper gives no numeric a* mean in its text (it says only that Southern Song a* was smaller than Yuan)"
     },
     "refractiveIndex": {
-      "value": 1.52,
+      "value": 1.5,
       "unit": "1",
-      "grade": "unverified",
-      "source": "Substances/low-iron-glass.json (1.523 for soda-lime float); a ceramic glaze is a soda-lime-alumina-silica glass of about the same index"
+      "grade": "secondary",
+      "source": "Sang et al. 2025, npj Heritage Science s40494-025-01630-0 (Longquan plum-green celadon): 'the similar refractive indices of quartz crystals (1.544) and the glass phase (1.500)', citing Pagliari et al., J. Eur. Ceram. Soc. 2013 (Pagliari not opened)",
+      "derivation": "The paper's stated glass-phase index, 1.500",
+      "note": "The paper uses this value to explain why the quartz barely affects transparency. It was not measured on the glaze and comes from Pagliari's ceramic work. My own oxide-additivity estimate for a typical lime-alkali Longquan glaze gives about 1.51, so 1.50 is good to about 0.01 to 0.02."
     },
     "porosity": {
       "value": 0.0,
@@ -42,11 +45,12 @@
   },
   "structure": {
     "grain": {
-      "value": 0.05,
+      "value": 0.007,
       "unit": "mm",
-      "grade": "unverified",
-      "source": "Palette.json: accent.stoneware-glazed",
-      "note": "The bubbles held in the glaze."
+      "grade": "measured",
+      "source": "Sang et al. 2025, npj Heritage Science s40494-025-01630-0: average bubble size 6.87 um (Southern Song) and 8.92 um (Yuan); average glaze thickness 1.04 and 1.10 mm",
+      "note": "The record calls this field 'the bubbles held in the glaze'. It is measured on Longquan plum-green celadon and is about a seventh of the old 0.05 mm. Sparse larger bubbles are not captured by the mean.",
+      "derivation": "The Southern Song mean bubble size, 6.87 um, rounded to 0.007 mm"
     },
     "bed": {
       "value": 50,

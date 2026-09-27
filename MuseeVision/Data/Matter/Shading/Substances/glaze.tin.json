@@ -28,16 +28,17 @@
     "porosity": {
       "value": 0.0,
       "unit": "1",
-      "grade": "unverified",
-      "source": "a glaze is glass",
-      "note": "The fired glaze has no open pores."
+      "grade": "record",
+      "source": "MuseeVision/Docs/Matter/Story.md, 'Glazed stoneware and fired clay' (after Kingery, Bowen and Uhlmann 1976)",
+      "note": "The Story.md paragraph is about stoneware glazes, but it rests on the general point that a glaze is a glass, and that also covers an opacified lead glaze. The porous earthenware body under it is not what the eye meets."
     },
     "wettingDepth": {
       "value": 0.0,
       "unit": "mm",
-      "grade": "unverified",
-      "source": "a glaze is glass",
-      "note": "The depth whose pores govern the face's look when wet."
+      "grade": "derived",
+      "source": "MuseeVision/Docs/Matter/Story.md (a glaze has no open pores)",
+      "note": "",
+      "derivation": "With no open pores, water cannot enter, so the wetting depth is zero."
     }
   },
   "structure": {

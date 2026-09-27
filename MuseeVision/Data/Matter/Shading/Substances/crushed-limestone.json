@@ -20,10 +20,12 @@
       "note": "No measured colour of the site's own ground was read: a first colour from the Munsell notation field descriptions give the layer, converted approximately."
     },
     "refractiveIndex": {
-      "value": 1.6,
+      "value": 1.6007,
       "unit": "1",
-      "grade": "unverified",
-      "source": "Handbook of Mineralogy, Calcite (Anthony, Bideaux, Bladh and Nichols, Mineralogical Society of America): n omega 1.658, n epsilon 1.486; their mean (limestone is calcite)"
+      "grade": "derived",
+      "source": "Handbook of Mineralogy, 'Calcite', https://www.handbookofmineralogy.org/pdfs/calcite.pdf: omega = 1.658, epsilon = 1.486",
+      "derivation": "(2 x 1.658 + 1.486)/3 = 1.6007",
+      "note": "This assumes the limestone is calcitic, not dolomitic. Reconcile it with the 1.6003 in travertine.json and cream-marble.json."
     },
     "porosity": {
       "value": 0.35,
@@ -43,16 +45,18 @@
     "grain": {
       "value": 12,
       "unit": "mm",
-      "grade": "unverified",
-      "source": "Docs/Stages/cube.md section 7 (the ground rule's relief and stones)",
-      "note": "The finest structure the face shows."
+      "grade": "design",
+      "source": "Docs/Stages/cube.md section 7, row 'Hardcore | topsoil': 'angular stones 12-28 mm in a 45 mm jittered cell' (read, line 340)",
+      "note": "A design value. No grading sheet of the hardcore was read.",
+      "derivation": "The smallest stone of the stage rule"
     },
     "bed": {
       "value": 45,
       "unit": "mm",
-      "grade": "unverified",
-      "source": "Docs/Stages/cube.md section 7 (the ground rule's relief and stones)",
-      "note": "The coarsest structure the face shows."
+      "grade": "design",
+      "source": "Docs/Stages/cube.md section 7, row 'Hardcore | topsoil': '45 mm jittered cell' (read, line 340)",
+      "note": "A design value.",
+      "derivation": "The stage rule's cell"
     },
     "bedAspect": {
       "value": 1.0,

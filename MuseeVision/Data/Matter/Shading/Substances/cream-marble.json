@@ -52,9 +52,11 @@
     "bed": {
       "value": 300,
       "unit": "mm",
-      "grade": "unverified",
-      "source": "Substances/cream-marble.json: unverified (the crackle's cell size, 0.25 to 0.4 m)",
-      "note": "A first value for the band or bed a honed face shows, until a specimen is measured."
+      "grade": "design",
+      "source": "Data/Matter/Substances/cream-marble.json identity.identifiedFrom[0] (grade design): the old build drew 'a crackle of fine grey veins round cells 25-40 cm across, a finer set in patches, over a soft cloud' (windows/Scripts/stone_textures.py, frozen reference; plan/boards/MaterialsStone.png); also Docs/Matter/cream-marble.md line 177",
+      "note": "Verified in the project records. The value is the design's crackle cell, and 'design' is the honest grade. The 250 to 400 mm range is the stated 25 to 40 cm. The stylolite network is recorded in cream-marble.json chosenBecause (Lopez-Buendia et al. 2013, abstract), which gives no cell size; I did not open that paper. A measurement on a Crema Marfil Coto slab is still needed.",
+      "min": 250,
+      "max": 400
     },
     "bedAspect": {
       "value": 1.5,

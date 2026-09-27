@@ -28,9 +28,12 @@
     "porosity": {
       "value": 0.61,
       "unit": "1",
-      "grade": "unverified",
-      "source": "Palette.json: accent.mahogany",
-      "note": "Mahogany of about 0.59 g/cm3 air-dry; 1 - 0.59 / 1.5, the cell wall's own density as the oak's. No measurement was read."
+      "grade": "derived",
+      "source": "Meier, E. The Wood Database: Honduran Mahogany (Swietenia macrophylla), https://www.wood-database.com/honduran-mahogany/ (average dried weight 590 kg/m3; SG 0.52 basic, 0.59 at 12 % MC); cell-wall density 1500 kg/m3 (Siau 1995), as in the oak record",
+      "note": "Checked against both sources. The value is unchanged and now has a source. Richter & Dallwitz (https://www.delta-intkey.com/wood/en/www/melswmac.htm, opened) give a basic specific gravity of 0.4-0.5-0.65 g/cm3. Because that figure is basic rather than air-dry, the porosity range it implies (0.57-0.73) is only approximate. This assumes S. macrophylla. Denser Cuban S. mahagoni would give a lower porosity.",
+      "min": 0.57,
+      "max": 0.73,
+      "derivation": "1 - 590 / 1500 = 0.607"
     },
     "wettingDepth": {
       "value": 1.0,
@@ -42,11 +45,13 @@
   },
   "structure": {
     "grain": {
-      "value": 0.2,
+      "value": 0.16,
       "unit": "mm",
-      "grade": "unverified",
-      "source": "Palette.json: accent.mahogany",
-      "note": "The finest structure: its diffuse vessels."
+      "grade": "secondary",
+      "source": "Richter, H.G. & Dallwitz, M.J. Commercial timbers: Swietenia macrophylla King, https://www.delta-intkey.com/wood/en/www/melswmac.htm",
+      "note": "Vessel tangential diameter is 90-160-255 um (mean 160 um), with 2-18 vessels per mm2. Corrected from the proposal: rays are '1-2-4(-5) cells wide' and '5-10 per tangential mm', and the storied structure is 'present or absent'.",
+      "min": 0.09,
+      "max": 0.255
     },
     "bed": {
       "value": 5.0,

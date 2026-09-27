@@ -9,21 +9,26 @@
   "dielectric": {
     "diffuseAlbedo": {
       "value": [
-        50.0,
-        7.0,
-        22.0
+        51.6,
+        6.5,
+        25.4
       ],
       "space": "CIELAB (D65, 2 deg)",
       "unit": "CIELAB",
-      "grade": "unverified",
-      "source": "Munsell 10YR 5/4 (yellowish brown), a weathered B horizon as the Soil Survey Field Handbook (Hodgson 1997) describes it",
-      "note": "No measured colour of the site's own ground was read: a first colour from the Munsell notation field descriptions give the layer, converted approximately."
+      "grade": "derived",
+      "source": "Munsell renotation data, RIT MCSL real.dat, https://www.rit-mcsl.org/MunsellRenotation/real.dat: '10YR 5 4 0.3995 0.3840 19.770' (illuminant C, 2 deg); the notation 10YR 5/4 is the record's own (after Hodgson 1997, not opened)",
+      "note": "The conversion is exact. The input notation 10YR 5/4 still has no opened source for the site's own B horizon.",
+      "derivation": "xyY (C) to XYZ, Bradford adaptation from C to D65, then CIELAB with a D65 white = (51.60, 6.51, 25.44). I recomputed and confirmed this."
     },
     "refractiveIndex": {
-      "value": 1.544,
+      "value": 1.547,
       "unit": "1",
-      "grade": "unverified",
-      "source": "Handbook of Mineralogy, Quartz (Anthony, Bideaux, Bladh and Nichols, Mineralogical Society of America): n omega 1.544 (the subsoil is mostly quartz grains)"
+      "grade": "derived",
+      "source": "webmineral.com, Quartz: 'w=1.543-1.545, e=1.552-1.554', https://www.webmineral.com/data/Quartz.shtml",
+      "min": 1.543,
+      "max": 1.554,
+      "derivation": "The orientation average for uniaxial quartz is (2w + e)/3 = (2 x 1.544 + 1.553)/3 = 1.547",
+      "note": "Corrected from 1.548, the unweighted mean. Clay minerals are ignored."
     },
     "porosity": {
       "value": 0.42,

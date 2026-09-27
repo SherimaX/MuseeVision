@@ -20,11 +20,14 @@
       "note": "The dark green serpentine matrix with its pale calcite and dark clasts, averaged over a face; read from trade photographs until a specimen is measured."
     },
     "refractiveIndex": {
-      "value": 1.565,
+      "value": 1.583,
       "unit": "1",
-      "grade": "unverified",
-      "source": "Palette.json: accent.verde-antico realMaterial (serpentine breccia, Larissa, Thessaly)",
-      "note": "Antigorite serpentine, the matrix, has indices near 1.56 to 1.57; the calcite clasts are near 1.60. No measurement of the stone was read."
+      "grade": "derived",
+      "source": "(1) Handbook of Mineralogy, 'Antigorite' (Mineral Data Publishing 2001, v1.2): alpha 1.558-1.567, beta 1.565, gamma 1.562-1.574, D(meas.) 2.65. https://www.handbookofmineralogy.org/pdfs/antigorite.pdf (2) Melfos, Magganas, Voudouris & Kati (2009), Geophysical Research Abstracts 11, EGU2009-10797-2 (Chasanbali Hill, Larissa). Its findings: the carbonate is exclusively calcite; the serpentine is antigorite with subordinate lizardite and chrysotile; whole-rock CaO of the ophicalcite is 26.39 to 31.00 wt%. https://meetingorganizer.copernicus.org/EGU2009/EGU2009-10797-2.pdf (3) Calcite F0 0.0533 from Substances/cream-marble.json optics.specularF0 (Ghosh 1999, averaged over grain orientations).",
+      "note": "Every input was checked on its source, and the arithmetic was recomputed (1.5832; ends 1.5817 and 1.5846). The calcite F0 is in Substances/cream-marble.json, not in the Shading/Substances copy. Two caveats. First, the CaO range belongs to the analysed ophicalcite; the abstract says the breccias range down to pure serpentinite breccia, which would give 1.565. Second, all whole-rock Ca is assigned to calcite, although trace tremolite and epidote also carry some. The error from this is small. Area-weighting F0 is the right mixing rule for a polished multi-phase face.",
+      "min": 1.582,
+      "max": 1.585,
+      "derivation": "Calcite mass fraction = CaO x 100.09/56.08: 26.39 -> 47.1 %, 31.00 -> 55.3 %, mid 51.2 %. The volume fraction is taken equal to the mass fraction (antigorite 2.65, calcite 2.71). F0_antigorite = ((1.565-1)/(1.565+1))^2 = 0.04852. F0_mix = 0.512 x 0.0533 + 0.488 x 0.04852 = 0.05097. n = (1+sqrt(F0))/(1-sqrt(F0)) = 1.583. The ends of the CaO range give 1.582 and 1.585."
     },
     "porosity": {
       "value": 0.005,
@@ -66,9 +69,12 @@
     "hurst": {
       "value": 0.7,
       "unit": "1",
-      "grade": "unverified",
-      "source": "Candela et al. 2012, Journal of Geophysical Research 117, B08409 (fault surfaces, 0.6 to 0.8; cited in Stone.ush)",
-      "note": "The middle of the range measured on rock surfaces, as the travertine's."
+      "grade": "derived",
+      "source": "Candela et al. 2012, J. Geophys. Res. Solid Earth 117, B08409, doi:10.1029/2011JB009041, abstract (read via https://api.crossref.org/works/10.1029/2011JB009041).",
+      "note": "The exponents are confirmed. I could not verify the claim that the exponents do not depend on lithology (rhyolite, chert, limestone), because the PDF was unreadable, so remove it from the note. No serpentinite was among the measured rocks as far as the abstract shows. This is a transfer.",
+      "min": 0.58,
+      "max": 0.81,
+      "derivation": "H = (0.58 + 0.81)/2 = 0.695, rounded to 0.70"
     },
     "toneSpread": {
       "value": 0.4,

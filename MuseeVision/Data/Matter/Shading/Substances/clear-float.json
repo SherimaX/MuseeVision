@@ -31,15 +31,16 @@
   "medium": {
     "absorption": {
       "value": [
-        0.0073,
-        0.0051,
-        0.004
+        0.0162,
+        0.005,
+        0.0054
       ],
       "space": "linear Rec.709 (sRGB primaries), D65 white",
       "unit": "1/mm",
-      "grade": "unverified",
-      "source": "Palette.json: glass.clear-float (Pilkington Optifloat Clear)",
-      "note": "A first absorption for float glass of about 0.1 % Fe2O3: internal transmittance near 0.95 through 10 mm in the green, lower in the red where ferrous iron's band reaches, which is the green of the edge. The maker's spectral data were not read."
+      "grade": "derived",
+      "source": "M. Rubin, 'Optical properties of soda lime silica glasses', Solar Energy Materials 12 (1985) 275-288, 'Clear soda lime silica window glass' k, refractiveindex.info-database data/glass/misc/soda-lime/nk/Rubin-clear.yml (https://raw.githubusercontent.com/polyanskiy/refractiveindex.info-database/master/database/data/glass/misc/soda-lime/nk/Rubin-clear.yml; page https://refractiveindex.info/?shelf=glass&book=soda-lime&page=Rubin-clear), as tabulated in Substances/low-iron-glass.json optics clearWindowGlass and edgeColour.clearFloat (k = 8.371e-7, 2.2e-7, 1.925e-7 at 650, 550, 450 nm)",
+      "note": "Verified: the database file was opened and gives k = 8.371e-7 (0.65 um), 2.200e-7 (0.55 um) and 1.925e-7 (0.45 um) under the comment 'Clear soda lime silica window glass'. The arithmetic reproduces. Correction to the proposal's note: Rubin's iron content is not stated in anything read (low-iron-glass.json clearWindowGlass says so), so calling this glass 'the ~0.1 % Fe2O3 class' is an inference, not a sourced fact. Record it as ordinary clear soda-lime window glass of unstated iron. The low-iron record likens it to Vogt's 703 ppm glass. Red absorbs about three times green and blue, which gives the green edge. The old first value (0.0073) under-stated red absorption by more than half. 450 nm sits on the falling shoulder of the ferric band near 440 nm (k 2.34e-7 at 440 nm), so the blue component is sensitive to the sampling wavelength. Pilkington Optifloat's own spectral data were not read. Add conditions 'components at 650, 550 and 450 nm (red, green, blue)'.",
+      "derivation": "alpha = 4 pi k / wavelength: 650 nm 0.01618, 550 nm 0.00503, 450 nm 0.00538 per mm; equivalently -ln(T)/12 mm from the record's internal transmittances 0.8235, 0.9415, 0.9375 through 12 mm. Components at 650, 550 and 450 nm (red, green, blue), the same convention as low-iron-glass."
     },
     "scattering": {
       "value": [

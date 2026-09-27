@@ -27,25 +27,33 @@
     "porosity": {
       "value": 0.8,
       "unit": "1",
-      "grade": "unverified",
-      "source": "Substances/wool-felt.json",
-      "note": "A felt is mostly air; no measured porosity was read."
+      "grade": "derived",
+      "source": "Felt densities: thefeltstore.com, 'SAE Industrial Felt 101: The Basics', https://thefeltstore.com/blogs/news/sae-industrial-felt (F-1 and F-3 0.32-0.36 g/cm3; F-5 and F-7 0.25-0.27 g/cm3; F-10 0.17-0.20 g/cm3), agreeing with Sutherland Felt Co., 'SAE Felt Specification Chart', https://sutherlandfelt.com/quality-resources/sae-felt-specification-chart/ ('Density (1\"), Lbs./Sq Yd': F-1 16, F-3 15.6, F-7 12.24, F-10 and F-13 8.48 = 0.342, 0.333, 0.261, 0.181 g/cm3). Wool fibre density: Merrick, N.C. (1998) Measurement of density and medullation in wool, FAO AGRIS record, https://agris.fao.org/search/en/providers/125257/records/6765995f6784547a43e36890 (non-medullated wool 1.29 g/cm3 by helium pycnometer, 1.30 g/cm3 by density-gradient column or benzene pycnometer).",
+      "note": "Checked and accepted with the note corrected. Both sources list F-10 as white or off-white, not grey. The grey grade at the same density is F-13 (Sutherland, 8.48 lb/sq yd per inch, at least 75 % wool), so the soft end of the range still holds. The felt here is dyed green-grey (#4E5A4C), so matching the SAE grade's natural colour carries no weight: 0.80 is just the mid (F-7) grade. The felt's actual grade and density are not specified. The 20 % non-wool share allowed in F-7 is ignored, and no source was read for its fibre density. A non-SAE craft or pressed felt could be less dense and more porous than 0.87.",
+      "min": 0.72,
+      "max": 0.87,
+      "derivation": "porosity = 1 - rho_felt / rho_wool. Medium SAE grade (F-5/F-7, 0.25-0.27 g/cm3): 1 - 0.27/1.29 = 0.791 to 1 - 0.25/1.30 = 0.808, so 0.80. Range: densest grades F-1/F-3 at 0.36 g/cm3, 1 - 0.36/1.29 = 0.72; softest wool-majority grades F-10/F-13 at 0.17 g/cm3, 1 - 0.17/1.30 = 0.87 (Sutherland's 0.181 g/cm3 gives 0.86). 1 lb/sq yd per inch = 21.36 kg/m3."
     },
     "wettingDepth": {
-      "value": 1.0,
+      "value": 3.2,
       "unit": "mm",
-      "grade": "unverified",
-      "source": "Substances/wool-felt.json",
-      "note": "A first depth of the felt's face."
+      "grade": "manufacturer",
+      "source": "Sutherland Felt Co., 'SAE Felt Specification Chart', https://sutherlandfelt.com/quality-resources/sae-felt-specification-chart/ ('Standard Thickness Range, in.: 1/8 to 1' for every grade F-1 to F-26)",
+      "note": "Checked and accepted. The source gives only the manufacturer's standard thickness range. Choosing its minimum as this mat's thickness is an assumption, because the chosen felt's thickness is still unrecorded (wool-felt.json lists stock.thickness as unverified). Treating the whole sheet as wetting through is a modelling assumption that suits thin sheets but would overstate a 25 mm block. The felt is not wetted in the museum.",
+      "min": 3.2,
+      "max": 25.4,
+      "derivation": "1/8 in = 3.175 mm, the thinnest standard SAE sheet, taken as the mat's whole depth (a thin felt wets through; it has no separate face layer). 1 in = 25.4 mm is the thickest."
     }
   },
   "structure": {
     "grain": {
       "value": 0.03,
       "unit": "mm",
-      "grade": "unverified",
-      "source": "Substances/wool-felt.json",
-      "note": "The finest structure the cloth shows: its thread or fibre tufts."
+      "grade": "secondary",
+      "source": "Wikipedia, 'Wool', https://en.wikipedia.org/wiki/Wool (read 2026-09-27): Fine Merino 18.6-20 um, Medium Merino 20.1-23 um, Fine crossbred 27-31 um, Medium crossbred 32-35 um",
+      "note": "Accepted with corrections. min is changed from 0.018 to 0.0186 mm, the stated lower bound for Fine Merino; 0.018 fell outside the cited grade. The proposal called fine crossbred 'the natural grey felting wool grade', but no source read supports that, so it is dropped. 0.03 mm is a fine crossbred diameter (27-31 um), picked because the chosen felt's fibre diameter is not specified. Single fibres are the finest structure a felt shows.",
+      "min": 0.0186,
+      "max": 0.035
     },
     "bed": {
       "value": 10.0,
@@ -57,9 +65,10 @@
     "bedAspect": {
       "value": 1.0,
       "unit": "1",
-      "grade": "unverified",
-      "source": "Substances/wool-felt.json",
-      "note": "Slubs run along the thread: how much longer than wide."
+      "grade": "derived",
+      "source": "Wikipedia, 'Felt', https://en.wikipedia.org/wiki/Felt: wet felting applies hot water to layers of animal hairs while repeated agitation and compression hook the fibres together (a matted non-woven, with no interlaced threads)",
+      "note": "Accepted as an idealisation. The article does not state isotropy outright. It describes matting by agitation and compression and never mentions warp or weft; isotropy is inferred from that. Machine-made felts from carded or cross-lapped batts can keep a mild machine-direction fibre orientation, so a measured specimen might show an aspect a little above 1. The field's note about slubs along a thread does not apply to felt. The same applies to the record's structure.bed (10 mm 'slub length'), which is still unverified.",
+      "derivation": "A felt is matted, not woven, so it has no thread and no slubs along a thread. Its coarse unevenness (cloudy mottle from uneven fibre distribution) has no preferred in-plane direction, so the longer-than-wide ratio is 1."
     },
     "hurst": {
       "value": 0.6,

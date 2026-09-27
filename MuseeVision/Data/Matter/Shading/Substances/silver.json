@@ -8,27 +8,29 @@
   "conductor": {
     "f0": {
       "value": [
-        0.972,
-        0.96,
-        0.915
+        0.989,
+        0.984,
+        0.977
       ],
       "space": "linear Rec.709 (sRGB primaries), D65 white",
       "unit": "1",
-      "grade": "unverified",
-      "source": "Akenine-Moller, Haines, Hoffman et al., Real-Time Rendering, 4th ed. (2018), Table 9.2 (silver's F0 in linear sRGB, from measured n and k)",
-      "note": "The values as that table quotes them; its measured constants (Johnson and Christy 1972) were not read in this pass."
+      "grade": "derived",
+      "source": "P. B. Johnson and R. W. Christy, 'Optical constants of the noble metals', Phys. Rev. B 6, 4370-4379 (1972), silver n,k as tabulated in refractiveindex.info-database data/main/Ag/nk/Johnson.yml (https://raw.githubusercontent.com/polyanskiy/refractiveindex.info-database/master/database/data/main/Ag/nk/Johnson.yml); cross-check K. M. McPeak et al., 'Plasmonic films can easily be better: Rules and recipes', ACS Photonics 2, 326-333 (2015), data/main/Ag/nk/McPeak.yml; CIE 1931 2-degree CMFs, https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv ; CIE D65, https://files.cie.co.at/Publications-datasets/CIE_std_illum_D65.csv",
+      "note": "Verified: both n,k tables opened and re-integrated independently; J&C gives [0.98876, 0.98420, 0.97712] (Y 0.9847) and McPeak [0.98937, 0.98780, 0.97840] (Y 0.9875, i.e. 0.987 rather than the stated 0.988), and the spectral checks reproduce. Replaces the Real-Time Rendering Table 9.2 quotation ([0.972, 0.960, 0.915]). Channel envelope of the two measured sets: min [0.989, 0.984, 0.977], max [0.989, 0.988, 0.978]. Both sets are fresh, smooth evaporated films with very low n (about 0.04-0.05), which puts them at the high end for silver. A buffed, aged daguerreotype plate may reflect somewhat less in the blue (surface scatter, incipient sulfide). A measured reflectance of a plate's highlight (Palette research.needed) would settle it.",
+      "derivation": "Unpolarised normal-incidence Fresnel reflectance R = ((n-1)^2 + k^2)/((n+1)^2 + k^2) from Johnson & Christy's silver n,k (0.3679-0.8211 um), interpolated linearly to 380-780 nm in 10 nm steps, integrated against the CIE 1931 2-degree CMFs under D65, normalised so a perfect reflector has Y = 1, XYZ to linear Rec.709 with the sRGB matrix: [0.9888, 0.9842, 0.9771], Y 0.985. McPeak 2015 template-stripped silver gives [0.9894, 0.9878, 0.9784], Y 0.987. Spectral checks (J&C): R(450) 0.980, R(550) 0.983, R(650) 0.990."
     },
     "f82": {
       "value": [
-        0.972,
-        0.96,
-        0.915
+        0.987,
+        0.986,
+        0.986
       ],
       "space": "linear Rec.709 (sRGB primaries), D65 white",
       "unit": "1",
-      "grade": "unverified",
-      "source": "no measured reflectance of silver at 82 degrees was read",
-      "note": "Silver's absorption index is high across the visible, so its reflectance barely dips before grazing: taken equal to F0 until n and k are read."
+      "grade": "derived",
+      "source": "P. B. Johnson and R. W. Christy, Phys. Rev. B 6, 4370-4379 (1972), silver n,k via refractiveindex.info-database data/main/Ag/nk/Johnson.yml; cross-check McPeak et al., ACS Photonics 2, 326-333 (2015), data/main/Ag/nk/McPeak.yml; CIE 1931 2-degree CMFs and D65 as for f0",
+      "note": "Verified by independent recomputation (all three triples reproduce to 4 decimals). Silver's edge is nearly neutral: F82 is slightly below F0 in red and above it in green and blue, so the old 'equal to F0' placeholder was close in form, but its F0 was wrong.",
+      "derivation": "As f0, but the unpolarised Fresnel reflectance (Rs+Rp)/2 of the complex index at incidence cosine 1/7 (81.79 degrees; Optics.ush MatterConductorFresnel): J&C [0.9870, 0.9862, 0.9863]; at exactly 82 degrees [0.9871, 0.9865, 0.9866]; McPeak [0.9878, 0.9892, 0.9870]."
     }
   }
 }

@@ -27,11 +27,12 @@
       "derivation": "n = (1 + sqrt(F0)) / (1 - sqrt(F0)), the index whose normal-incidence reflectance is the record's F0"
     },
     "porosity": {
-      "value": 0.004,
+      "value": 0.003,
       "unit": "1",
-      "grade": "unverified",
-      "source": "Palette.json: accent.negro-marquina (a fine dense limestone)",
-      "note": "No measured porosity was read."
+      "grade": "manufacturer",
+      "source": "Levantina, 'Negro Marquina Marmol / Marble: Ficha tecnica | Technical file' (March 2025), p. 03 table: Porosidad abierta / Open porosity 0.3 % (UNE-EN 1936); water absorption 0.1 % (UNE-EN 13755); apparent density 2700 kg/m3; p. 04: ASTM C 97-09 absorption 0.13 %, bulk specific gravity 2699 kg/m3, https://www.levantina.com/files/74b9d95b0cbb53ef86851135a9b72c53/20004873/1/12-negro-marquina-ficha-v2.pdf",
+      "note": "Verified. The ASTM figures are on p. 04 of the sheet, not p. 03. The sheet's 'Nature' section describes the stone as a limestone biomicrite with rudist and oyster (ostreid) remains, about 115 Ma (early Aptian to late Albian, Early Cretaceous), with calcite veins and scattered fossils. Its UNE-EN 12407 petrographic name is 'Caliza / Limestone'.",
+      "derivation": "0.3 % as a fraction"
     },
     "wettingDepth": {
       "value": 1.0,
