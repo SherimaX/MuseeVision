@@ -1,0 +1,2472 @@
+{
+  "stage": "chenghuai",
+  "daylight": [
+    {
+      "opening": "chenghuai.linchi.lattice",
+      "glazing": "glass.low-iron",
+      "weather": "museum",
+      "control": "none"
+    },
+    {
+      "opening": "chenghuai.tianqing.lattice",
+      "glazing": "glass.low-iron",
+      "weather": "museum",
+      "control": "none"
+    },
+    {
+      "opening": "chenghuai.changnan.lattice",
+      "glazing": "glass.low-iron",
+      "weather": "museum",
+      "control": "none"
+    },
+    {
+      "opening": "chenghuai.chenghuaitang.lattice",
+      "glazing": "glass.low-iron",
+      "weather": "museum",
+      "control": "none"
+    },
+    {
+      "opening": "chenghuai.qingbi.lattice",
+      "glazing": "glass.low-iron",
+      "weather": "museum",
+      "control": "none"
+    },
+    {
+      "opening": "chenghuai.tingyun.lattice",
+      "glazing": "glass.low-iron",
+      "weather": "museum",
+      "control": "none"
+    },
+    {
+      "opening": "chenghuai.shujuan.lattice",
+      "glazing": "glass.low-iron",
+      "weather": "museum",
+      "control": "none"
+    },
+    {
+      "opening": "chenghuai.linquan.lattice",
+      "glazing": "glass.low-iron",
+      "weather": "museum",
+      "control": "none"
+    }
+  ],
+  "luminaires": [
+    {
+      "id": "case.linchi",
+      "type": "case-linear.3000k",
+      "point": [
+        -12.3,
+        -0.565,
+        1.474
+      ],
+      "aim": [
+        -12.3,
+        -0.907,
+        1.283
+      ],
+      "operation": "presence",
+      "length": 15.08
+    },
+    {
+      "id": "case.thousand-li",
+      "type": "case-linear.3000k",
+      "point": [
+        -13.0,
+        -44.335,
+        1.474
+      ],
+      "aim": [
+        -13.0,
+        -43.993,
+        1.283
+      ],
+      "operation": "presence",
+      "length": 13.28
+    },
+    {
+      "id": "case.qingming",
+      "type": "case-linear.3000k",
+      "point": [
+        -2.2,
+        -44.335,
+        1.474
+      ],
+      "aim": [
+        -2.2,
+        -43.993,
+        1.283
+      ],
+      "operation": "presence",
+      "length": 6.08
+    },
+    {
+      "id": "case.tianqing",
+      "type": "case-linear.3000k",
+      "point": [
+        -19.675,
+        -19.2,
+        2.764
+      ],
+      "aim": [
+        -20.165,
+        -19.2,
+        1.6
+      ],
+      "operation": "presence",
+      "length": 8.26
+    },
+    {
+      "id": "case.changnan",
+      "type": "case-linear.3000k",
+      "point": [
+        1.275,
+        -19.2,
+        2.764
+      ],
+      "aim": [
+        1.765,
+        -19.2,
+        1.6
+      ],
+      "operation": "presence",
+      "length": 8.26
+    },
+    {
+      "id": "case.hall.west",
+      "type": "case-linear.3000k",
+      "point": [
+        -12.7,
+        -33.875,
+        4.304
+      ],
+      "aim": [
+        -12.7,
+        -34.347,
+        2.774
+      ],
+      "operation": "presence",
+      "length": 1.56
+    },
+    {
+      "id": "case.hall.west.low",
+      "type": "case-linear.3000k",
+      "point": [
+        -12.7,
+        -33.87,
+        0.97
+      ],
+      "aim": [
+        -12.7,
+        -34.347,
+        2.0
+      ],
+      "operation": "presence",
+      "length": 1.56
+    },
+    {
+      "id": "case.hall.centre",
+      "type": "case-linear.3000k",
+      "point": [
+        -9.2,
+        -33.875,
+        4.304
+      ],
+      "aim": [
+        -9.2,
+        -34.347,
+        2.464
+      ],
+      "operation": "presence",
+      "length": 1.46
+    },
+    {
+      "id": "case.hall.centre.low",
+      "type": "case-linear.3000k",
+      "point": [
+        -9.2,
+        -33.87,
+        0.97
+      ],
+      "aim": [
+        -9.2,
+        -34.347,
+        2.0
+      ],
+      "operation": "presence",
+      "length": 1.46
+    },
+    {
+      "id": "case.hall.east",
+      "type": "case-linear.3000k",
+      "point": [
+        -5.7,
+        -33.875,
+        4.304
+      ],
+      "aim": [
+        -5.7,
+        -34.347,
+        2.572
+      ],
+      "operation": "presence",
+      "length": 1.86
+    },
+    {
+      "id": "case.hall.east.low",
+      "type": "case-linear.3000k",
+      "point": [
+        -5.7,
+        -33.87,
+        0.97
+      ],
+      "aim": [
+        -5.7,
+        -34.347,
+        2.0
+      ],
+      "operation": "presence",
+      "length": 1.86
+    },
+    {
+      "id": "case.qingbi.back",
+      "type": "case-linear.3000k",
+      "point": [
+        -15.95,
+        -33.025,
+        3.574
+      ],
+      "aim": [
+        -15.95,
+        -33.347,
+        2.652
+      ],
+      "operation": "presence",
+      "length": 0.96
+    },
+    {
+      "id": "case.qingbi.back.low",
+      "type": "case-linear.3000k",
+      "point": [
+        -15.95,
+        -33.025,
+        0.72
+      ],
+      "aim": [
+        -15.95,
+        -33.347,
+        1.4
+      ],
+      "operation": "presence",
+      "length": 0.96
+    },
+    {
+      "id": "case.qingbi.side",
+      "type": "case-linear.3000k",
+      "point": [
+        -16.825,
+        -32.0,
+        3.574
+      ],
+      "aim": [
+        -17.147,
+        -32.0,
+        2.262
+      ],
+      "operation": "presence",
+      "length": 1.06
+    },
+    {
+      "id": "case.qingbi.side.low",
+      "type": "case-linear.3000k",
+      "point": [
+        -16.825,
+        -32.0,
+        0.72
+      ],
+      "aim": [
+        -17.147,
+        -32.0,
+        1.4
+      ],
+      "operation": "presence",
+      "length": 1.06
+    },
+    {
+      "id": "case.tingyun.back",
+      "type": "case-linear.3000k",
+      "point": [
+        -2.45,
+        -33.025,
+        3.574
+      ],
+      "aim": [
+        -2.45,
+        -33.347,
+        1.996
+      ],
+      "operation": "presence",
+      "length": 1.36
+    },
+    {
+      "id": "case.tingyun.back.low",
+      "type": "case-linear.3000k",
+      "point": [
+        -2.45,
+        -33.025,
+        0.72
+      ],
+      "aim": [
+        -2.45,
+        -33.347,
+        1.4
+      ],
+      "operation": "presence",
+      "length": 1.36
+    },
+    {
+      "id": "case.tingyun.side",
+      "type": "case-linear.3000k",
+      "point": [
+        -1.575,
+        -32.0,
+        3.574
+      ],
+      "aim": [
+        -1.253,
+        -32.0,
+        2.509
+      ],
+      "operation": "presence",
+      "length": 1.06
+    },
+    {
+      "id": "case.tingyun.side.low",
+      "type": "case-linear.3000k",
+      "point": [
+        -1.575,
+        -32.0,
+        0.72
+      ],
+      "aim": [
+        -1.253,
+        -32.0,
+        1.4
+      ],
+      "operation": "presence",
+      "length": 1.06
+    },
+    {
+      "id": "spot.ru-basin",
+      "type": "track-spot.3000k.12deg",
+      "point": [
+        -16.65,
+        -19.2,
+        3.17
+      ],
+      "aim": [
+        -18.2,
+        -19.2,
+        1.45
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "wash.linchi.s.01",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        -19.004,
+        -4.95,
+        3.02
+      ],
+      "aim": [
+        -19.004,
+        -0.515,
+        1.9
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "wash.linchi.s.02",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        -17.811,
+        -4.95,
+        3.02
+      ],
+      "aim": [
+        -17.811,
+        -0.515,
+        1.9
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "wash.linchi.s.03",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        -16.618,
+        -4.95,
+        3.02
+      ],
+      "aim": [
+        -16.618,
+        -0.515,
+        1.9
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "wash.linchi.s.04",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        -15.425,
+        -4.95,
+        3.02
+      ],
+      "aim": [
+        -15.425,
+        -0.515,
+        1.9
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "wash.linchi.s.05",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        -14.232,
+        -4.95,
+        3.02
+      ],
+      "aim": [
+        -14.232,
+        -0.515,
+        1.9
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "wash.linchi.s.06",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        -13.039,
+        -4.95,
+        3.02
+      ],
+      "aim": [
+        -13.039,
+        -0.515,
+        1.9
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "wash.linchi.s.07",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        -11.846,
+        -4.95,
+        3.02
+      ],
+      "aim": [
+        -11.846,
+        -0.515,
+        1.9
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "wash.linchi.s.08",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        -10.654,
+        -4.95,
+        3.02
+      ],
+      "aim": [
+        -10.654,
+        -0.515,
+        1.9
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "wash.linchi.s.09",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        -9.461,
+        -4.95,
+        3.02
+      ],
+      "aim": [
+        -9.461,
+        -0.515,
+        1.9
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "wash.linchi.s.10",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        -8.268,
+        -4.95,
+        3.02
+      ],
+      "aim": [
+        -8.268,
+        -0.515,
+        1.9
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "wash.linchi.s.11",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        -7.075,
+        -4.95,
+        3.02
+      ],
+      "aim": [
+        -7.075,
+        -0.515,
+        1.9
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "wash.linchi.s.12",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        -5.882,
+        -4.95,
+        3.02
+      ],
+      "aim": [
+        -5.882,
+        -0.515,
+        1.9
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "wash.linchi.s.13",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        -4.689,
+        -4.95,
+        3.02
+      ],
+      "aim": [
+        -4.689,
+        -0.515,
+        1.9
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "wash.linchi.s.14",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        -3.496,
+        -4.95,
+        3.02
+      ],
+      "aim": [
+        -3.496,
+        -0.515,
+        1.9
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "wash.linchi.n.01",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        -18.407,
+        -0.85,
+        3.02
+      ],
+      "aim": [
+        -18.407,
+        -5.2,
+        1.2
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "wash.linchi.n.02",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        -16.021,
+        -0.85,
+        3.02
+      ],
+      "aim": [
+        -16.021,
+        -5.2,
+        1.2
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "wash.linchi.n.03",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        -13.636,
+        -0.85,
+        3.02
+      ],
+      "aim": [
+        -13.636,
+        -5.2,
+        1.2
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "wash.linchi.n.04",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        -11.25,
+        -0.85,
+        3.02
+      ],
+      "aim": [
+        -11.25,
+        -5.2,
+        1.2
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "wash.linchi.n.05",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        -8.864,
+        -0.85,
+        3.02
+      ],
+      "aim": [
+        -8.864,
+        -5.2,
+        1.2
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "wash.linchi.n.06",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        -6.479,
+        -0.85,
+        3.02
+      ],
+      "aim": [
+        -6.479,
+        -5.2,
+        1.2
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "wash.linchi.n.07",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        -4.093,
+        -0.85,
+        3.02
+      ],
+      "aim": [
+        -4.093,
+        -5.2,
+        1.2
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "wash.tianqing.01",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        -16.65,
+        -22.714,
+        3.17
+      ],
+      "aim": [
+        -19.6,
+        -22.714,
+        2.0
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "wash.tianqing.02",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        -16.65,
+        -21.543,
+        3.17
+      ],
+      "aim": [
+        -19.6,
+        -21.543,
+        2.0
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "wash.tianqing.03",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        -16.65,
+        -20.371,
+        3.17
+      ],
+      "aim": [
+        -19.6,
+        -20.371,
+        2.0
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "wash.tianqing.04",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        -16.65,
+        -19.2,
+        3.17
+      ],
+      "aim": [
+        -19.6,
+        -19.2,
+        2.0
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "wash.tianqing.05",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        -16.65,
+        -18.029,
+        3.17
+      ],
+      "aim": [
+        -19.6,
+        -18.029,
+        2.0
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "wash.tianqing.06",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        -16.65,
+        -16.857,
+        3.17
+      ],
+      "aim": [
+        -19.6,
+        -16.857,
+        2.0
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "wash.tianqing.07",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        -16.65,
+        -15.686,
+        3.17
+      ],
+      "aim": [
+        -19.6,
+        -15.686,
+        2.0
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "wash.changnan.01",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        -1.75,
+        -22.714,
+        3.17
+      ],
+      "aim": [
+        1.2,
+        -22.714,
+        2.0
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "wash.changnan.02",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        -1.75,
+        -21.543,
+        3.17
+      ],
+      "aim": [
+        1.2,
+        -21.543,
+        2.0
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "wash.changnan.03",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        -1.75,
+        -20.371,
+        3.17
+      ],
+      "aim": [
+        1.2,
+        -20.371,
+        2.0
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "wash.changnan.04",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        -1.75,
+        -19.2,
+        3.17
+      ],
+      "aim": [
+        1.2,
+        -19.2,
+        2.0
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "wash.changnan.05",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        -1.75,
+        -18.029,
+        3.17
+      ],
+      "aim": [
+        1.2,
+        -18.029,
+        2.0
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "wash.changnan.06",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        -1.75,
+        -16.857,
+        3.17
+      ],
+      "aim": [
+        1.2,
+        -16.857,
+        2.0
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "wash.changnan.07",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        -1.75,
+        -15.686,
+        3.17
+      ],
+      "aim": [
+        1.2,
+        -15.686,
+        2.0
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "wash.hall.01",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        -13.137,
+        -28.7,
+        4.45
+      ],
+      "aim": [
+        -13.137,
+        -33.8,
+        2.6
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "wash.hall.02",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        -12.012,
+        -28.7,
+        4.45
+      ],
+      "aim": [
+        -12.012,
+        -33.8,
+        2.6
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "wash.hall.03",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        -10.887,
+        -28.7,
+        4.45
+      ],
+      "aim": [
+        -10.887,
+        -33.8,
+        2.6
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "wash.hall.04",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        -9.762,
+        -28.7,
+        4.45
+      ],
+      "aim": [
+        -9.762,
+        -33.8,
+        2.6
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "wash.hall.05",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        -8.637,
+        -28.7,
+        4.45
+      ],
+      "aim": [
+        -8.637,
+        -33.8,
+        2.6
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "wash.hall.06",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        -7.512,
+        -28.7,
+        4.45
+      ],
+      "aim": [
+        -7.512,
+        -33.8,
+        2.6
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "wash.hall.07",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        -6.387,
+        -28.7,
+        4.45
+      ],
+      "aim": [
+        -6.387,
+        -33.8,
+        2.6
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "wash.hall.08",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        -5.262,
+        -28.7,
+        4.45
+      ],
+      "aim": [
+        -5.262,
+        -33.8,
+        2.6
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "wash.qingbi.s.01",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        -16.425,
+        -29.25,
+        3.45
+      ],
+      "aim": [
+        -16.425,
+        -32.95,
+        2.0
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "wash.qingbi.s.02",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        -15.475,
+        -29.25,
+        3.45
+      ],
+      "aim": [
+        -15.475,
+        -32.95,
+        2.0
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "wash.qingbi.e.01",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        -15.0,
+        -30.217,
+        3.7
+      ],
+      "aim": [
+        -16.75,
+        -30.217,
+        2.0
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "wash.qingbi.e.02",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        -15.0,
+        -31.25,
+        3.7
+      ],
+      "aim": [
+        -16.75,
+        -31.25,
+        2.0
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "wash.qingbi.e.03",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        -15.0,
+        -32.283,
+        3.7
+      ],
+      "aim": [
+        -16.75,
+        -32.283,
+        2.0
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "wash.tingyun.s.01",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        -2.925,
+        -29.25,
+        3.45
+      ],
+      "aim": [
+        -2.925,
+        -32.95,
+        2.0
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "wash.tingyun.s.02",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        -1.975,
+        -29.25,
+        3.45
+      ],
+      "aim": [
+        -1.975,
+        -32.95,
+        2.0
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "wash.tingyun.w.01",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        -3.4,
+        -30.217,
+        3.7
+      ],
+      "aim": [
+        -1.65,
+        -30.217,
+        2.0
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "wash.tingyun.w.02",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        -3.4,
+        -31.25,
+        3.7
+      ],
+      "aim": [
+        -1.65,
+        -31.25,
+        2.0
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "wash.tingyun.w.03",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        -3.4,
+        -32.283,
+        3.7
+      ],
+      "aim": [
+        -1.65,
+        -32.283,
+        2.0
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "wash.shujuan.01",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        -18.988,
+        -40.1,
+        3.02
+      ],
+      "aim": [
+        -18.988,
+        -44.385,
+        2.0
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "wash.shujuan.02",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        -17.765,
+        -40.1,
+        3.02
+      ],
+      "aim": [
+        -17.765,
+        -44.385,
+        2.0
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "wash.shujuan.03",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        -16.541,
+        -40.1,
+        3.02
+      ],
+      "aim": [
+        -16.541,
+        -44.385,
+        2.0
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "wash.shujuan.04",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        -15.318,
+        -40.1,
+        3.02
+      ],
+      "aim": [
+        -15.318,
+        -44.385,
+        2.0
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "wash.shujuan.05",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        -14.094,
+        -40.1,
+        3.02
+      ],
+      "aim": [
+        -14.094,
+        -44.385,
+        2.0
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "wash.shujuan.06",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        -12.871,
+        -40.1,
+        3.02
+      ],
+      "aim": [
+        -12.871,
+        -44.385,
+        2.0
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "wash.shujuan.07",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        -11.647,
+        -40.1,
+        3.02
+      ],
+      "aim": [
+        -11.647,
+        -44.385,
+        2.0
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "wash.shujuan.08",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        -10.424,
+        -40.1,
+        3.02
+      ],
+      "aim": [
+        -10.424,
+        -44.385,
+        2.0
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "wash.shujuan.09",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        -9.2,
+        -40.1,
+        3.02
+      ],
+      "aim": [
+        -9.2,
+        -44.385,
+        2.0
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "wash.shujuan.10",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        -7.976,
+        -40.1,
+        3.02
+      ],
+      "aim": [
+        -7.976,
+        -44.385,
+        2.0
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "wash.shujuan.11",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        -6.753,
+        -40.1,
+        3.02
+      ],
+      "aim": [
+        -6.753,
+        -44.385,
+        2.0
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "wash.shujuan.12",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        -5.529,
+        -40.1,
+        3.02
+      ],
+      "aim": [
+        -5.529,
+        -44.385,
+        2.0
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "wash.shujuan.13",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        -4.306,
+        -40.1,
+        3.02
+      ],
+      "aim": [
+        -4.306,
+        -44.385,
+        2.0
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "wash.shujuan.14",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        -3.082,
+        -40.1,
+        3.02
+      ],
+      "aim": [
+        -3.082,
+        -44.385,
+        2.0
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "wash.shujuan.15",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        -1.859,
+        -40.1,
+        3.02
+      ],
+      "aim": [
+        -1.859,
+        -44.385,
+        2.0
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "wash.shujuan.16",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        -0.635,
+        -40.1,
+        3.02
+      ],
+      "aim": [
+        -0.635,
+        -44.385,
+        2.0
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "wash.shujuan.17",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        0.588,
+        -40.1,
+        3.02
+      ],
+      "aim": [
+        0.588,
+        -44.385,
+        2.0
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "wash.linquan.01",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        8.13,
+        -38.9,
+        3.25
+      ],
+      "aim": [
+        8.13,
+        -42.1,
+        1.8
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "wash.linquan.02",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        9.39,
+        -38.9,
+        3.25
+      ],
+      "aim": [
+        9.39,
+        -42.1,
+        1.8
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "wash.linquan.03",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        10.65,
+        -38.9,
+        3.25
+      ],
+      "aim": [
+        10.65,
+        -42.1,
+        1.8
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "wash.linquan.04",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        11.91,
+        -38.9,
+        3.25
+      ],
+      "aim": [
+        11.91,
+        -42.1,
+        1.8
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "wash.linquan.05",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        13.17,
+        -38.9,
+        3.25
+      ],
+      "aim": [
+        13.17,
+        -42.1,
+        1.8
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "lantern.hall.w",
+      "type": "lantern.2200k",
+      "point": [
+        -10.2,
+        -27.15,
+        3.81
+      ],
+      "aim": [
+        -10.2,
+        -27.15,
+        2.81
+      ],
+      "operation": "dusk"
+    },
+    {
+      "id": "lantern.hall.e",
+      "type": "lantern.2200k",
+      "point": [
+        -8.2,
+        -27.15,
+        3.81
+      ],
+      "aim": [
+        -8.2,
+        -27.15,
+        2.81
+      ],
+      "operation": "dusk"
+    },
+    {
+      "id": "lantern.gallery.sw",
+      "type": "lantern.2200k",
+      "point": [
+        -13.0,
+        -12.45,
+        2.72
+      ],
+      "aim": [
+        -13.0,
+        -12.45,
+        1.72
+      ],
+      "operation": "dusk"
+    },
+    {
+      "id": "lantern.gallery.se",
+      "type": "lantern.2200k",
+      "point": [
+        -5.4,
+        -12.45,
+        2.72
+      ],
+      "aim": [
+        -5.4,
+        -12.45,
+        1.72
+      ],
+      "operation": "dusk"
+    },
+    {
+      "id": "lantern.tianqing.veranda",
+      "type": "lantern.2200k",
+      "point": [
+        -15.75,
+        -19.2,
+        2.92
+      ],
+      "aim": [
+        -15.75,
+        -19.2,
+        1.92
+      ],
+      "operation": "dusk"
+    },
+    {
+      "id": "lantern.changnan.veranda",
+      "type": "lantern.2200k",
+      "point": [
+        -2.65,
+        -19.2,
+        2.92
+      ],
+      "aim": [
+        -2.65,
+        -19.2,
+        1.92
+      ],
+      "operation": "dusk"
+    },
+    {
+      "id": "lantern.linchi.door.w",
+      "type": "lantern.2200k",
+      "point": [
+        -18.708,
+        -5.58,
+        2.52
+      ],
+      "aim": [
+        -18.708,
+        -5.58,
+        1.52
+      ],
+      "operation": "dusk"
+    },
+    {
+      "id": "lantern.linchi.door.e",
+      "type": "lantern.2200k",
+      "point": [
+        -3.792,
+        -5.58,
+        2.52
+      ],
+      "aim": [
+        -3.792,
+        -5.58,
+        1.52
+      ],
+      "operation": "dusk"
+    },
+    {
+      "id": "lantern.shujuan.door.w",
+      "type": "lantern.2200k",
+      "point": [
+        -18.629,
+        -39.42,
+        2.52
+      ],
+      "aim": [
+        -18.629,
+        -39.42,
+        1.52
+      ],
+      "operation": "dusk"
+    },
+    {
+      "id": "lantern.shujuan.door.e",
+      "type": "lantern.2200k",
+      "point": [
+        0.229,
+        -39.42,
+        2.52
+      ],
+      "aim": [
+        0.229,
+        -39.42,
+        1.52
+      ],
+      "operation": "dusk"
+    },
+    {
+      "id": "lantern.walk.1",
+      "type": "lantern.2200k",
+      "point": [
+        2.925,
+        -9.4,
+        2.46
+      ],
+      "aim": [
+        2.925,
+        -9.4,
+        1.46
+      ],
+      "operation": "dusk"
+    },
+    {
+      "id": "lantern.walk.2",
+      "type": "lantern.2200k",
+      "point": [
+        2.925,
+        -17.5,
+        2.46
+      ],
+      "aim": [
+        2.925,
+        -17.5,
+        1.46
+      ],
+      "operation": "dusk"
+    },
+    {
+      "id": "lantern.walk.3",
+      "type": "lantern.2200k",
+      "point": [
+        2.925,
+        -25.6,
+        2.46
+      ],
+      "aim": [
+        2.925,
+        -25.6,
+        1.46
+      ],
+      "operation": "dusk"
+    },
+    {
+      "id": "lantern.walk.4",
+      "type": "lantern.2200k",
+      "point": [
+        2.925,
+        -33.7,
+        2.46
+      ],
+      "aim": [
+        2.925,
+        -33.7,
+        1.46
+      ],
+      "operation": "dusk"
+    },
+    {
+      "id": "lantern.zhiyu",
+      "type": "lantern.2200k",
+      "point": [
+        14.7,
+        -31.35,
+        2.72
+      ],
+      "aim": [
+        14.7,
+        -31.35,
+        1.72
+      ],
+      "operation": "dusk"
+    },
+    {
+      "id": "lantern.linquan.w",
+      "type": "lantern.2200k",
+      "point": [
+        9.9,
+        -38.4,
+        2.73
+      ],
+      "aim": [
+        9.9,
+        -38.4,
+        1.73
+      ],
+      "operation": "dusk"
+    },
+    {
+      "id": "lantern.linquan.e",
+      "type": "lantern.2200k",
+      "point": [
+        11.4,
+        -38.4,
+        2.73
+      ],
+      "aim": [
+        11.4,
+        -38.4,
+        1.73
+      ],
+      "operation": "dusk"
+    },
+    {
+      "id": "step.bridge.1",
+      "type": "gap.step-light.2700k",
+      "point": [
+        6.2,
+        -27.5,
+        0.14
+      ],
+      "aim": [
+        6.2,
+        -28.1,
+        0.1
+      ],
+      "operation": "dusk",
+      "host": "chenghuai.bridge.kerb",
+      "surface": "chenghuai.garden.bluestone"
+    },
+    {
+      "id": "step.bridge.2",
+      "type": "gap.step-light.2700k",
+      "point": [
+        8.025,
+        -27.432,
+        0.14
+      ],
+      "aim": [
+        7.537,
+        -27.084,
+        0.1
+      ],
+      "operation": "dusk",
+      "host": "chenghuai.bridge.kerb",
+      "surface": "chenghuai.garden.bluestone"
+    },
+    {
+      "id": "step.bridge.3",
+      "type": "gap.step-light.2700k",
+      "point": [
+        9.3,
+        -26.1,
+        0.14
+      ],
+      "aim": [
+        9.3,
+        -26.7,
+        0.1
+      ],
+      "operation": "dusk",
+      "host": "chenghuai.bridge.kerb",
+      "surface": "chenghuai.garden.bluestone"
+    },
+    {
+      "id": "step.bridge.4",
+      "type": "gap.step-light.2700k",
+      "point": [
+        10.617,
+        -27.283,
+        0.14
+      ],
+      "aim": [
+        11.041,
+        -26.859,
+        0.1
+      ],
+      "operation": "dusk",
+      "host": "chenghuai.bridge.kerb",
+      "surface": "chenghuai.garden.bluestone"
+    },
+    {
+      "id": "step.bridge.5",
+      "type": "gap.step-light.2700k",
+      "point": [
+        12.2,
+        -27.1,
+        0.14
+      ],
+      "aim": [
+        12.2,
+        -27.7,
+        0.1
+      ],
+      "operation": "dusk",
+      "host": "chenghuai.bridge.kerb",
+      "surface": "chenghuai.garden.bluestone"
+    },
+    {
+      "id": "step.rockery.01",
+      "type": "gap.step-light.2700k",
+      "point": [
+        5.661,
+        -13.417,
+        0.52
+      ],
+      "aim": [
+        6.717,
+        -13.685,
+        0.92
+      ],
+      "operation": "dusk",
+      "host": "chenghuai.rockery",
+      "surface": "chenghuai.rockery"
+    },
+    {
+      "id": "step.rockery.02",
+      "type": "gap.step-light.2700k",
+      "point": [
+        6.935,
+        -14.266,
+        1.12
+      ],
+      "aim": [
+        7.538,
+        -13.332,
+        1.52
+      ],
+      "operation": "dusk",
+      "host": "chenghuai.rockery",
+      "surface": "chenghuai.rockery"
+    },
+    {
+      "id": "step.rockery.03",
+      "type": "gap.step-light.2700k",
+      "point": [
+        7.261,
+        -12.777,
+        1.72
+      ],
+      "aim": [
+        8.282,
+        -12.846,
+        2.12
+      ],
+      "operation": "dusk",
+      "host": "chenghuai.rockery",
+      "surface": "chenghuai.rockery"
+    },
+    {
+      "id": "step.rockery.04",
+      "type": "gap.step-light.2700k",
+      "point": [
+        8.655,
+        -13.341,
+        2.32
+      ],
+      "aim": [
+        8.995,
+        -12.305,
+        2.72
+      ],
+      "operation": "dusk",
+      "host": "chenghuai.rockery",
+      "surface": "chenghuai.rockery"
+    },
+    {
+      "id": "step.rockery.05",
+      "type": "gap.step-light.2700k",
+      "point": [
+        8.628,
+        -11.805,
+        2.92
+      ],
+      "aim": [
+        9.755,
+        -11.842,
+        2.72
+      ],
+      "operation": "dusk",
+      "host": "chenghuai.rockery",
+      "surface": "chenghuai.rockery"
+    },
+    {
+      "id": "step.rockery.06",
+      "type": "gap.step-light.2700k",
+      "point": [
+        12.566,
+        -10.62,
+        2.92
+      ],
+      "aim": [
+        12.762,
+        -9.496,
+        2.42
+      ],
+      "operation": "dusk",
+      "host": "chenghuai.rockery",
+      "surface": "chenghuai.rockery"
+    },
+    {
+      "id": "step.rockery.07",
+      "type": "gap.step-light.2700k",
+      "point": [
+        12.734,
+        -8.495,
+        2.62
+      ],
+      "aim": [
+        13.679,
+        -8.044,
+        2.12
+      ],
+      "operation": "dusk",
+      "host": "chenghuai.rockery",
+      "surface": "chenghuai.rockery"
+    },
+    {
+      "id": "step.rockery.08",
+      "type": "gap.step-light.2700k",
+      "point": [
+        14.384,
+        -7.081,
+        2.32
+      ],
+      "aim": [
+        13.463,
+        -6.402,
+        1.82
+      ],
+      "operation": "dusk",
+      "host": "chenghuai.rockery",
+      "surface": "chenghuai.rockery"
+    },
+    {
+      "id": "step.rockery.09",
+      "type": "gap.step-light.2700k",
+      "point": [
+        12.508,
+        -6.133,
+        2.02
+      ],
+      "aim": [
+        12.331,
+        -5.115,
+        1.52
+      ],
+      "operation": "dusk",
+      "host": "chenghuai.rockery",
+      "surface": "chenghuai.rockery"
+    },
+    {
+      "id": "step.rockery.10",
+      "type": "gap.step-light.2700k",
+      "point": [
+        11.831,
+        -4.163,
+        1.72
+      ],
+      "aim": [
+        10.721,
+        -4.566,
+        1.22
+      ],
+      "operation": "dusk",
+      "host": "chenghuai.rockery",
+      "surface": "chenghuai.rockery"
+    },
+    {
+      "id": "step.rockery.11",
+      "type": "gap.step-light.2700k",
+      "point": [
+        9.898,
+        -5.158,
+        1.42
+      ],
+      "aim": [
+        9.007,
+        -4.656,
+        0.92
+      ],
+      "operation": "dusk",
+      "host": "chenghuai.rockery",
+      "surface": "chenghuai.rockery"
+    },
+    {
+      "id": "step.rockery.12",
+      "type": "gap.step-light.2700k",
+      "point": [
+        7.933,
+        -4.384,
+        1.12
+      ],
+      "aim": [
+        7.464,
+        -5.397,
+        0.62
+      ],
+      "operation": "dusk",
+      "host": "chenghuai.rockery",
+      "surface": "chenghuai.rockery"
+    },
+    {
+      "id": "step.rockery.13",
+      "type": "gap.step-light.2700k",
+      "point": [
+        7.233,
+        -6.37,
+        0.82
+      ],
+      "aim": [
+        6.172,
+        -6.535,
+        0.32
+      ],
+      "operation": "dusk",
+      "host": "chenghuai.rockery",
+      "surface": "chenghuai.rockery"
+    },
+    {
+      "id": "step.rockery.14",
+      "type": "gap.step-light.2700k",
+      "point": [
+        5.164,
+        -7.017,
+        0.52
+      ],
+      "aim": [
+        5.467,
+        -8.096,
+        0.02
+      ],
+      "operation": "dusk",
+      "host": "chenghuai.rockery",
+      "surface": "chenghuai.rockery"
+    },
+    {
+      "id": "step.path4.1",
+      "type": "gap.step-light.2700k",
+      "point": [
+        7.453,
+        -20.051,
+        0.07
+      ],
+      "aim": [
+        7.315,
+        -20.681,
+        0.06
+      ],
+      "operation": "dusk",
+      "host": "chenghuai.garden.bluestone",
+      "surface": "chenghuai.garden.path"
+    },
+    {
+      "id": "step.path4.2",
+      "type": "gap.step-light.2700k",
+      "point": [
+        10.031,
+        -21.398,
+        0.07
+      ],
+      "aim": [
+        10.158,
+        -20.765,
+        0.06
+      ],
+      "operation": "dusk",
+      "host": "chenghuai.garden.bluestone",
+      "surface": "chenghuai.garden.path"
+    },
+    {
+      "id": "step.path4.3",
+      "type": "gap.step-light.2700k",
+      "point": [
+        13.072,
+        -21.387,
+        0.07
+      ],
+      "aim": [
+        12.663,
+        -21.886,
+        0.06
+      ],
+      "operation": "dusk",
+      "host": "chenghuai.garden.bluestone",
+      "surface": "chenghuai.garden.path"
+    },
+    {
+      "id": "step.fork.1",
+      "type": "gap.step-light.2700k",
+      "point": [
+        5.3,
+        -39.25,
+        0.07
+      ],
+      "aim": [
+        5.3,
+        -38.775,
+        0.06
+      ],
+      "operation": "dusk",
+      "host": "chenghuai.garden.bluestone",
+      "surface": "chenghuai.garden.path"
+    },
+    {
+      "id": "step.court.1",
+      "type": "gap.step-light.2700k",
+      "point": [
+        -10.6,
+        -15.4,
+        0.08
+      ],
+      "aim": [
+        -9.0,
+        -15.4,
+        0.026
+      ],
+      "operation": "dusk",
+      "host": "chenghuai.stone.kerb",
+      "surface": "chenghuai.brick.on-edge"
+    },
+    {
+      "id": "step.court.2",
+      "type": "gap.step-light.2700k",
+      "point": [
+        -7.8,
+        -22.0,
+        0.08
+      ],
+      "aim": [
+        -9.4,
+        -22.0,
+        0.026
+      ],
+      "operation": "dusk",
+      "host": "chenghuai.stone.kerb",
+      "surface": "chenghuai.brick.on-edge"
+    },
+    {
+      "id": "step.court.3",
+      "type": "gap.step-light.2700k",
+      "point": [
+        -12.0,
+        -17.9,
+        0.08
+      ],
+      "aim": [
+        -12.0,
+        -19.4,
+        0.026
+      ],
+      "operation": "dusk",
+      "host": "chenghuai.stone.kerb",
+      "surface": "chenghuai.brick.on-edge"
+    },
+    {
+      "id": "step.court.4",
+      "type": "gap.step-light.2700k",
+      "point": [
+        -6.4,
+        -20.5,
+        0.08
+      ],
+      "aim": [
+        -6.4,
+        -19.0,
+        0.026
+      ],
+      "operation": "dusk",
+      "host": "chenghuai.stone.kerb",
+      "surface": "chenghuai.brick.on-edge"
+    },
+    {
+      "id": "step.court.5",
+      "type": "gap.step-light.2700k",
+      "point": [
+        -10.6,
+        -20.5,
+        0.08
+      ],
+      "aim": [
+        -9.6,
+        -19.6,
+        0.026
+      ],
+      "operation": "dusk",
+      "host": "chenghuai.stone.kerb",
+      "surface": "chenghuai.brick.on-edge"
+    },
+    {
+      "id": "step.court.6",
+      "type": "gap.step-light.2700k",
+      "point": [
+        -7.8,
+        -17.9,
+        0.08
+      ],
+      "aim": [
+        -8.8,
+        -18.8,
+        0.026
+      ],
+      "operation": "dusk",
+      "host": "chenghuai.stone.kerb",
+      "surface": "chenghuai.brick.on-edge"
+    },
+    {
+      "id": "step.gate.1",
+      "type": "gap.step-light.2700k",
+      "point": [
+        1.08,
+        -2.3,
+        1.0
+      ],
+      "aim": [
+        -0.3,
+        -1.6,
+        0.9
+      ],
+      "operation": "dusk",
+      "host": "chenghuai.stone.base",
+      "surface": "chenghuai.brick.on-edge"
+    },
+    {
+      "id": "step.gate.2",
+      "type": "gap.step-light.2700k",
+      "point": [
+        0.6,
+        -5.25,
+        0.9
+      ],
+      "aim": [
+        0.0,
+        -3.3,
+        0.9
+      ],
+      "operation": "dusk",
+      "host": "chenghuai.stone.kerb",
+      "surface": "chenghuai.brick.on-edge"
+    },
+    {
+      "id": "step.gate.3",
+      "type": "gap.step-light.2700k",
+      "point": [
+        1.2,
+        -6.05,
+        0.45
+      ],
+      "aim": [
+        0.0,
+        -6.3,
+        0.3
+      ],
+      "operation": "dusk",
+      "host": "chenghuai.stone.step",
+      "surface": "chenghuai.stone.step"
+    },
+    {
+      "id": "step.yard.1",
+      "type": "gap.step-light.2700k",
+      "point": [
+        -1.84,
+        -8.4,
+        0.05
+      ],
+      "aim": [
+        -0.6,
+        -7.8,
+        0.02
+      ],
+      "operation": "dusk",
+      "host": "chenghuai.stone.step",
+      "surface": "chenghuai.court.paving"
+    }
+  ],
+  "targets": [
+    {
+      "surface": "chenghuai.case.silk",
+      "class": "textiles.silk",
+      "lux": [
+        50,
+        50
+      ],
+      "source": "Care"
+    },
+    {
+      "surface": "chenghuai.case.silk",
+      "class": "works-on-paper",
+      "lux": [
+        50,
+        50
+      ],
+      "source": "Care"
+    },
+    {
+      "surface": "chenghuai.case.silk.ceramics",
+      "class": "ceramic-and-glass",
+      "lux": [
+        300,
+        null
+      ],
+      "source": "Care"
+    },
+    {
+      "surface": "chenghuai.floor.chiqi",
+      "class": "gallery.low-light",
+      "lux": [
+        50,
+        50
+      ],
+      "source": "UseTargets"
+    },
+    {
+      "surface": "chenghuai.floor.chisi",
+      "class": "gallery.low-light",
+      "lux": [
+        50,
+        50
+      ],
+      "source": "UseTargets"
+    },
+    {
+      "surface": "chenghuai.porch.paving",
+      "class": "garden.night",
+      "lux": [
+        1,
+        null
+      ],
+      "source": "UseTargets"
+    },
+    {
+      "surface": "chenghuai.court.paving",
+      "class": "garden.night",
+      "lux": [
+        1,
+        null
+      ],
+      "source": "UseTargets"
+    },
+    {
+      "surface": "chenghuai.brick.on-edge",
+      "class": "garden.night",
+      "lux": [
+        1,
+        null
+      ],
+      "source": "UseTargets"
+    },
+    {
+      "surface": "chenghuai.stone.step",
+      "class": "garden.night",
+      "lux": [
+        1,
+        null
+      ],
+      "source": "UseTargets"
+    },
+    {
+      "surface": "chenghuai.garden.path",
+      "class": "garden.night",
+      "lux": [
+        1,
+        null
+      ],
+      "source": "UseTargets"
+    },
+    {
+      "surface": "chenghuai.garden.bluestone",
+      "class": "garden.night",
+      "lux": [
+        1,
+        null
+      ],
+      "source": "UseTargets"
+    },
+    {
+      "surface": "chenghuai.rockery",
+      "class": "garden.night",
+      "lux": [
+        1,
+        null
+      ],
+      "source": "UseTargets"
+    }
+  ],
+  "design": [
+    {
+      "brighter": "chenghuai.case.silk",
+      "darker": "chenghuai.room.plaster",
+      "ratio": [
+        2.0,
+        5.0
+      ],
+      "note": "Every scroll room, day and night: the works on their silk are the brightest reflecting surfaces; the walls at least a fifth of them (the washers). Measured, never tuned."
+    },
+    {
+      "brighter": "chenghuai.room.plaster",
+      "darker": "chenghuai.floor.chiqi",
+      "ratio": [
+        1.0,
+        4.0
+      ],
+      "note": "The hall and ear rooms: the whitened walls over the dark oiled floor."
+    },
+    {
+      "brighter": "chenghuai.lattice.paper",
+      "darker": "chenghuai.case.silk",
+      "ratio": [
+        2.0,
+        50.0
+      ],
+      "note": "By day, in a paper room: the lattice's inner face is the brightest thing in view (diffuse transmission through the paper, never a glow)."
+    },
+    {
+      "brighter": "chenghuai.case.silk.ceramics",
+      "darker": "chenghuai.room.plaster",
+      "ratio": [
+        1.5,
+        5.0
+      ],
+      "note": "The side halls: the ceramics' decks over the walls; the Ru basin's pedestal a step brighter than the wall case."
+    },
+    {
+      "brighter": "chenghuai.lantern.silk",
+      "darker": "chenghuai.court.paving",
+      "ratio": [
+        5.0,
+        100.0
+      ],
+      "note": "Courts at night: the lantern gauze over the paving in its pools, over the moonlit roofs."
+    }
+  ]
+}
