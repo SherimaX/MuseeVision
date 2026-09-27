@@ -53,19 +53,69 @@ namespace Musee::Sphere
 			return FVector2D(FMath::Sqrt(FMath::Square(Plan::SkinInner) - FMath::Square(Plan::SkinFoot - Plan::CentreZ)), Plan::SkinFoot);
 		}
 
-		/** The skin (§3.2): 60 mm between R 14.240 and 14.300 about C, from its foot on the ring to the crown hole. */
-		FFormLathe Skin()
+		/** A point of a sphere about C at a latitude, in degrees above the equator. */
+		FVector2D AtLatitude(double SphereRadius, double Degrees)
+		{
+			const double Angle = FMath::DegreesToRadians(Degrees);
+			return C + SphereRadius * FVector2D(FMath::Cos(Angle), FMath::Sin(Angle));
+		}
+
+		/**
+		 * One band of the skin's plates (§3.2), 60 mm between R 14.240 and 14.300 about C, between two latitudes, its edges cut
+		 * square to the skin on the cones through C; the lowest band stands on the skin's level foot on the ring, the highest
+		 * stops at the crown hole.
+		 */
+		FFormProfile SkinBand(double FromDeg, double ToDeg, bool bFoot, bool bCrown)
 		{
 			const FVector2D FootInner = SkinFootInner();
 			const FVector2D FootOuter(FMath::Sqrt(FMath::Square(Plan::SkinOuter) - FMath::Square(Plan::SkinFoot - Plan::CentreZ)), Plan::SkinFoot);
-			const FVector2D CrownOuter = OnSphere(Plan::SkinOuter, Plan::CrownHole, true);
-			const FVector2D CrownInner = OnSphere(Plan::SkinInner, Plan::CrownHole, true);
-			FFormProfile Section = FFormProfile::From(FootInner);
-			Section.LineTo(FootOuter, EFormJoint::Crisp)
-				.ArcAbout(C, Plan::SkinOuter, Plan::SkinOuter, AboutC(FootOuter), AboutC(CrownOuter), EFormJoint::Crisp)
-				.LineTo(CrownInner, EFormJoint::Crisp)
-				.ArcAbout(C, Plan::SkinInner, Plan::SkinInner, AboutC(CrownInner), AboutC(FootInner), EFormJoint::Crisp);
-			return Turned(Section.Close());
+			const FVector2D LowInner = bFoot ? FootInner : AtLatitude(Plan::SkinInner, FromDeg);
+			const FVector2D LowOuter = bFoot ? FootOuter : AtLatitude(Plan::SkinOuter, FromDeg);
+			const FVector2D HighOuter = bCrown ? OnSphere(Plan::SkinOuter, Plan::CrownHole, true) : AtLatitude(Plan::SkinOuter, ToDeg);
+			const FVector2D HighInner = bCrown ? OnSphere(Plan::SkinInner, Plan::CrownHole, true) : AtLatitude(Plan::SkinInner, ToDeg);
+			FFormProfile Section = FFormProfile::From(LowInner);
+			Section.LineTo(LowOuter, EFormJoint::Crisp)
+				.ArcAbout(C, Plan::SkinOuter, Plan::SkinOuter, AboutC(LowOuter), AboutC(HighOuter), EFormJoint::Crisp)
+				.LineTo(HighInner, EFormJoint::Crisp)
+				.ArcAbout(C, Plan::SkinInner, Plan::SkinInner, AboutC(HighInner), AboutC(LowInner), EFormJoint::Crisp);
+			return Section.Close();
+		}
+
+		/**
+		 * The skin in its welded plates (§3.2): its seams, welded and ground, read only in grazing light where one plate meets
+		 * the next. Parallels every 6° of latitude part the bands; meridians part each band into plates, every 7.5° of bearing
+		 * below 60° and every 15° above. Each plate is its band turned between two meridians, meeting its neighbours face to
+		 * face.
+		 */
+		void Skin(TArray<FFormDrawing>& Out)
+		{
+			const double Foot = AboutC(FVector2D(FMath::Sqrt(FMath::Square(Plan::SkinOuter) - FMath::Square(Plan::SkinFoot - Plan::CentreZ)), Plan::SkinFoot));
+			const double Crown = AboutC(OnSphere(Plan::SkinOuter, Plan::CrownHole, true));
+			TArray<double> Parallels = {Foot};
+			for (double Latitude = Plan::SeamLatitudeStep; Latitude < Crown; Latitude += Plan::SeamLatitudeStep)
+			{
+				if (Latitude > Foot)
+				{
+					Parallels.Add(Latitude);
+				}
+			}
+			Parallels.Add(Crown);
+			for (int32 Band = 0; Band + 1 < Parallels.Num(); ++Band)
+			{
+				const bool bFoot = Band == 0;
+				const bool bCrown = Band + 2 == Parallels.Num();
+				const FFormProfile Section = SkinBand(Parallels[Band], Parallels[Band + 1], bFoot, bCrown);
+				const double Step = Parallels[Band] < Plan::SeamWidenAt ? Plan::SeamBearingStep : Plan::SeamBearingStepAbove;
+				const int32 Plates = FMath::RoundToInt32(360.0 / Step);
+				for (int32 Plate = 0; Plate < Plates; ++Plate)
+				{
+					FFormLathe Shape;
+					Shape.Section = Section;
+					Shape.FromDegrees = Step * Plate;
+					Shape.ToDegrees = Step * (Plate + 1);
+					Out.Add(Drawn(FString::Printf(TEXT("dome.skin.%02d.%02d"), Band + 1, Plate + 1), TEXT("skin"), MoveTemp(Shape), Solid));
+				}
+			}
 		}
 
 		/**
@@ -128,7 +178,7 @@ namespace Musee::Sphere
 		Image.bNanite = false;
 
 		// §3.2: the exterior dome, outdoors.
-		Out.Add(Drawn(TEXT("dome.skin"), TEXT("skin"), Skin(), Solid));
+		Skin(Out);
 		Out.Add(Drawn(TEXT("dome.drip-ring"), TEXT("gilt.outside"), DripRing(), Solid));
 		Out.Add(Drawn(TEXT("dome.boss"), TEXT("gilt.outside"), Boss(), Solid));
 		Out.Add(Drawn(TEXT("dome.ball"), TEXT("gilt.outside"), Ball(), Solid));

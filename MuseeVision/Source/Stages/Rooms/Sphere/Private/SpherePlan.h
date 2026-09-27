@@ -46,6 +46,11 @@ namespace Musee::Sphere::Plan
 	/** The skin's foot, on the drip ring, and the crown hole the boss's spigot passes. */
 	inline constexpr double SkinFoot = 22.625;
 	inline constexpr double CrownHole = 0.490;
+	/** Its plates' seams: parallels every 6° of latitude; meridians at bearings 7.5° k up to latitude 60°, every 15° above. */
+	inline constexpr double SeamLatitudeStep = 6.0;
+	inline constexpr double SeamBearingStep = 7.5;
+	inline constexpr double SeamBearingStepAbove = 15.0;
+	inline constexpr double SeamWidenAt = 60.0;
 	/** The Atrium's entablature wash, which the ring is bedded on: its inner edge, and its fall outwards (atrium.md §3). */
 	inline constexpr double WashInnerR = 14.080;
 	inline constexpr double WashInnerZ = 22.580;
