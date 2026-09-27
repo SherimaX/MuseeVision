@@ -571,9 +571,9 @@
       "centre": [
         -9.0,
         -8.45,
-        0.866
+        0.864
       ],
-      "height": 0.866,
+      "height": 0.864,
       "size": [
         0.25,
         0.184
@@ -581,7 +581,13 @@
       "support": "paper",
       "frame": "none",
       "care": "works-on-paper",
-      "note": "Catalogue of the first exhibition (April 1874), open at pp. 14-15, flat on the felt at case-x -0.40, reading towards -y (the reader's side); size from assets/salon/manifest.json (0.25 m wide at the scan's 2540 x 1866 px)."
+      "note": "Catalogue of the first exhibition (April 1874), open at pp. 14-15, flat on the felt at case-x -0.40, reading towards -y (the reader's side); size from assets/salon/manifest.json (0.25 m wide at the scan's 2540 x 1866 px). Its spread (pp. 14-15, the seventh opening) lies on the felt at 0.864, its foot to the reader on the north (-y).",
+      "canvas": 0,
+      "image": "catalogue",
+      "kind": "book",
+      "opening": 6,
+      "facing": "north",
+      "facing_deg": 270.0
     },
     {
       "work": "salon-1874-case",
@@ -591,9 +597,9 @@
       "centre": [
         -8.32,
         -8.45,
-        0.875
+        0.874
       ],
-      "height": 0.875,
+      "height": 0.874,
       "size": [
         0.32,
         0.473
@@ -601,7 +607,12 @@
       "support": "paper",
       "frame": "none",
       "care": "works-on-paper.fugitive",
-      "note": "Le Charivari, 25 April 1874, p. 2 (newsprint), on a felt board raised 10 mm at case-x +0.28; size from assets/salon/manifest.json (0.32 m wide at 2350 x 3470 px)."
+      "note": "Le Charivari, 25 April 1874, p. 2 (newsprint), on a felt board raised 10 mm at case-x +0.28; size from assets/salon/manifest.json (0.32 m wide at 2350 x 3470 px). It lies on its felt board, whose top is at 0.874, its foot to the reader on the north (-y).",
+      "canvas": 1,
+      "image": "charivari",
+      "kind": "leaf",
+      "facing": "north",
+      "facing_deg": 270.0
     },
     {
       "work": "degas-little-dancer",

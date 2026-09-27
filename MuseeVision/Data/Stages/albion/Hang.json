@@ -23,7 +23,8 @@
       "frameWidth": 0.11,
       "sight": "rect",
       "glazed": false,
-      "note": "Hung by two bronze rods from the picture rail at 4.20; face 0.05 proud of the wall; outer frame 0.715 x 0.817."
+      "note": "Hung by two bronze rods from the picture rail at 4.20; face 0.05 proud of the wall; outer frame 0.715 x 0.817.",
+      "wall": "albion.panel"
     },
     {
       "work": "albion-brown-pretty-baa-lambs",
@@ -47,7 +48,8 @@
       "frameWidth": 0.1,
       "sight": "rect",
       "glazed": false,
-      "note": "Hung by two bronze rods from the picture rail at 4.20; face 0.05 proud of the wall; outer frame 0.966 x 0.814."
+      "note": "Hung by two bronze rods from the picture rail at 4.20; face 0.05 proud of the wall; outer frame 0.966 x 0.814.",
+      "wall": "albion.panel"
     },
     {
       "work": "albion-millais-ophelia",
@@ -143,7 +145,8 @@
       "frameWidth": 0.1,
       "sight": "oval",
       "glazed": false,
-      "note": "Hung by two bronze rods from the picture rail at 4.20; face 0.05 proud of the wall; outer frame 0.954 x 1.029. A gilt oak slip fills the oval sight."
+      "note": "Hung by two bronze rods from the picture rail at 4.20; face 0.05 proud of the wall; outer frame 0.954 x 1.029. A gilt oak slip fills the oval sight.",
+      "wall": "albion.panel"
     },
     {
       "work": "albion-millais-blind-girl",
@@ -263,7 +266,8 @@
       "frameWidth": 0.11,
       "sight": "rect",
       "glazed": false,
-      "note": "Hung by two bronze rods from the picture rail at 4.20; face 0.05 proud of the wall; outer frame 0.657 x 0.838."
+      "note": "Hung by two bronze rods from the picture rail at 4.20; face 0.05 proud of the wall; outer frame 0.657 x 0.838.",
+      "wall": "albion.panel"
     },
     {
       "work": "albion-sandys-medea",
@@ -287,7 +291,8 @@
       "frameWidth": 0.11,
       "sight": "rect",
       "glazed": false,
-      "note": "Hung by two bronze rods from the picture rail at 4.20; face 0.05 proud of the wall; outer frame 0.676 x 0.832."
+      "note": "Hung by two bronze rods from the picture rail at 4.20; face 0.05 proud of the wall; outer frame 0.676 x 0.832.",
+      "wall": "albion.panel"
     },
     {
       "work": "albion-morris-trellis",
@@ -311,7 +316,15 @@
       "frameWidth": 0.035,
       "sight": "rect",
       "glazed": true,
-      "note": "A panel of the paper, 1.20 x 3.00, block-printed in distemper, repeat [0.52, 0.52] m; in a narrow fumed-oak panel frame 0.035, glazed; image assets/albion/paintings/albion-morris-trellis.jpg."
+      "note": "A panel of the paper, 1.20 x 3.00, block-printed in distemper, repeat [0.52, 0.52] m; in a narrow fumed-oak panel frame 0.035, glazed; image assets/albion/paintings/albion-morris-trellis.jpg. Laid down on its conservation board (albion.mount) the sheet's own size, 3 mm, in its frame's rebate under the glazing; the board's back and the frame's 0.002 off the wall on their hanging plates, as the canvases' stretchers.",
+      "mat": "albion.mount",
+      "matSize": [
+        1.2,
+        3.0
+      ],
+      "matDepth": 0.003,
+      "glazing": "albion.frame.glazing",
+      "offWall": 0.002
     },
     {
       "work": "albion-morris-acanthus",
@@ -335,7 +348,15 @@
       "frameWidth": 0.035,
       "sight": "rect",
       "glazed": true,
-      "note": "A panel of the paper, 1.20 x 3.00, block-printed in distemper, repeat [0.66, 0.53] m; in a narrow fumed-oak panel frame 0.035, glazed; image assets/albion/paintings/albion-morris-acanthus.jpg."
+      "note": "A panel of the paper, 1.20 x 3.00, block-printed in distemper, repeat [0.66, 0.53] m; in a narrow fumed-oak panel frame 0.035, glazed; image assets/albion/paintings/albion-morris-acanthus.jpg. Laid down on its conservation board (albion.mount) the sheet's own size, 3 mm, in its frame's rebate under the glazing; the board's back and the frame's 0.002 off the wall on their hanging plates, as the canvases' stretchers.",
+      "mat": "albion.mount",
+      "matSize": [
+        1.2,
+        3.0
+      ],
+      "matDepth": 0.003,
+      "glazing": "albion.frame.glazing",
+      "offWall": 0.002
     },
     {
       "work": "albion-morris-willow-bough",
@@ -359,7 +380,15 @@
       "frameWidth": 0.035,
       "sight": "rect",
       "glazed": true,
-      "note": "A panel of the paper, 1.20 x 3.00, block-printed in distemper, repeat [0.436, 0.514] m; in a narrow fumed-oak panel frame 0.035, glazed; image assets/albion/paintings/albion-morris-willow-bough.jpg."
+      "note": "A panel of the paper, 1.20 x 3.00, block-printed in distemper, repeat [0.436, 0.514] m; in a narrow fumed-oak panel frame 0.035, glazed; image assets/albion/paintings/albion-morris-willow-bough.jpg. Laid down on its conservation board (albion.mount) the sheet's own size, 3 mm, in its frame's rebate under the glazing; the board's back and the frame's 0.002 off the wall on their hanging plates, as the canvases' stretchers.",
+      "mat": "albion.mount",
+      "matSize": [
+        1.2,
+        3.0
+      ],
+      "matDepth": 0.003,
+      "glazing": "albion.frame.glazing",
+      "offWall": 0.002
     },
     {
       "work": "albion-stillman-loves-messenger",
@@ -383,7 +412,15 @@
       "frameWidth": 0.1,
       "sight": "rect",
       "glazed": true,
-      "note": "Hung by two bronze rods from the picture rail at 4.20; face 0.05 proud of the wall; outer frame 0.864 x 1.017."
+      "note": "Hung by two bronze rods from the picture rail at 4.20; face 0.05 proud of the wall; outer frame 0.864 x 1.017. Laid down on its conservation board (albion.mount) the sheet's own size, 3 mm, in its frame's rebate under the glazing; the board's back and the frame's 0.002 off the wall on their hanging plates, as the canvases' stretchers.",
+      "mat": "albion.mount",
+      "matSize": [
+        0.66,
+        0.813
+      ],
+      "matDepth": 0.003,
+      "glazing": "albion.frame.glazing",
+      "offWall": 0.002
     },
     {
       "work": "albion-millais-portia",
@@ -671,7 +708,15 @@
       "frameWidth": 0.1,
       "sight": "rect",
       "glazed": true,
-      "note": "Hung by two bronze rods from the picture rail at 4.20; face 0.05 proud of the wall; outer frame 0.644 x 0.717."
+      "note": "Hung by two bronze rods from the picture rail at 4.20; face 0.05 proud of the wall; outer frame 0.644 x 0.717. Laid down on its conservation board (albion.mount) the sheet's own size, 3 mm, in its frame's rebate under the glazing; the board's back and the frame's 0.002 off the wall on their hanging plates, as the canvases' stretchers.",
+      "mat": "albion.mount",
+      "matSize": [
+        0.44,
+        0.513
+      ],
+      "matDepth": 0.003,
+      "glazing": "albion.frame.glazing",
+      "offWall": 0.002
     },
     {
       "work": "albion-rossetti-proserpine",
@@ -743,7 +788,8 @@
       "frameWidth": 0.0,
       "sight": "rect",
       "glazed": false,
-      "note": "Hung flat on a lined oak batten (albion.tapestry.batten) with two painted-iron brackets, its face 0.05 off the wall; lined (albion.tapestry.lining)."
+      "note": "Hung flat on a lined oak batten (albion.tapestry.batten) with two painted-iron brackets, its face 0.05 off the wall; lined (albion.tapestry.lining). offWall: its back 0.047 off the wall, the weave 0.003 in front of the lining (the stage's tapestry.lining at 0.045-0.047).",
+      "offWall": 0.047
     },
     {
       "work": "albion-burne-jones-king-cophetua",
@@ -791,7 +837,15 @@
       "frameWidth": 0.17,
       "sight": "rect",
       "glazed": true,
-      "note": "Hung on two concealed bronze plates (the end walls carry no rail, as built); face 0.05 proud of the wall; outer frame 4.21 x 2.9. Moved 0.5 m east of the as-built x 10.0 (sheet section 4: out of the late sun through the arcade)."
+      "note": "Hung on two concealed bronze plates (the end walls carry no rail, as built); face 0.05 proud of the wall; outer frame 4.21 x 2.9. Moved 0.5 m east of the as-built x 10.0 (sheet section 4: out of the late sun through the arcade). Laid down on its conservation board (albion.mount) the sheet's own size, 3 mm, in its frame's rebate under the glazing; the board's back and the frame's 0.002 off the wall on their hanging plates, as the canvases' stretchers.",
+      "mat": "albion.mount",
+      "matSize": [
+        3.87,
+        2.56
+      ],
+      "matDepth": 0.003,
+      "glazing": "albion.frame.glazing",
+      "offWall": 0.002
     },
     {
       "work": "albion-de-morgan-charger",
@@ -963,15 +1017,43 @@
         1.107
       ],
       "size": [
-        0.59,
-        0.435
+        0.29,
+        0.425
       ],
       "support": "paper",
       "frame": "none",
       "care": "works-on-paper",
       "kind": "book",
       "opening": 0,
-      "note": "Folio 0.425 x 0.290 a leaf, block 0.066 (277 leaves), boards 0.003 with a 0.005 square, half holland over blue-grey paper boards; open at the first opening (assets/albion/chaucer/page_000, page_001) on the desk sloping 18 deg, the reader facing east. Static tonight."
+      "note": "The verso of the first opening (the title and the first page of text): a folio leaf 0.290 x 0.425 (the scan spans the leaf). Folio 0.425 x 0.290 a leaf, block 0.066 (277 leaves), boards 0.003 with a 0.005 square, half holland over blue-grey paper boards; open at the first opening (assets/albion/chaucer/page_000, page_001) on the desk sloping 18 deg, the reader facing east. Static tonight.",
+      "canvas": 0,
+      "image": "page_000",
+      "facing": "west",
+      "facing_deg": 180.0
+    },
+    {
+      "work": "albion-kelmscott-chaucer",
+      "source": "data/albion.json",
+      "anchor": "albion.lectern",
+      "centre": [
+        12.2,
+        -13.3,
+        1.107
+      ],
+      "size": [
+        0.29,
+        0.425
+      ],
+      "support": "paper",
+      "frame": "none",
+      "care": "works-on-paper",
+      "kind": "book",
+      "opening": 0,
+      "note": "The recto of the first opening (the title and the first page of text): a folio leaf 0.290 x 0.425 (the scan spans the leaf). Folio 0.425 x 0.290 a leaf, block 0.066 (277 leaves), boards 0.003 with a 0.005 square, half holland over blue-grey paper boards; open at the first opening (assets/albion/chaucer/page_000, page_001) on the desk sloping 18 deg, the reader facing east. Static tonight.",
+      "canvas": 1,
+      "image": "page_001",
+      "facing": "west",
+      "facing_deg": 180.0
     },
     {
       "work": "albion-tristram-isolde",
