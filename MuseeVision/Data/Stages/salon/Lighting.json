@@ -1199,7 +1199,11 @@
         -11.6,
         0.0
       ],
-      "operation": "presence"
+      "operation": "presence",
+      "extent": [
+        5.0,
+        5.0
+      ]
     }
   ],
   "targets": [

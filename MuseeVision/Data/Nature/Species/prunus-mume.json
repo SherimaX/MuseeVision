@@ -1,0 +1,178 @@
+{
+  "$sources": [
+    "The species: Prunus mume Siebold and Zucc., mei: a small tree 4-10 m, the branchlets green; leaves ovate to elliptic 4-8 cm by 2.5-5 cm, long-acuminate; flowers before the leaves, in winter to early spring; fruit ripe in May to June (Flora of China (Wu Zhengyi, P. H. Raven and Hong Deyuan, eds., Science Press and Missouri Botanical Garden, 1994-2013), vol. 9, Rosaceae).",
+    "Habit: the as-built museum's tree grower (windows/Source/MuseeVision/Nature/MuseeTree.cpp, PlumSpec: 3.6 m, crown at 2.75 m, radii 1.35 and 0.95, a leaning, zigzag trunk and the long straight one-year shoots, 7000 leaves of 7 cm), its branching, leaf and crown numbers.",
+    "Colours: the as-built summer mume (MuseeTree.cpp, LookFor)."
+  ],
+  "key": "prunus-mume",
+  "name": "Prunus mume",
+  "common": "Mei, Chinese plum (梅)",
+  "form": "tree",
+  "organs": [
+    {
+      "organ": "trunk",
+      "material": "living.stem"
+    },
+    {
+      "organ": "stem",
+      "material": "living.stem"
+    },
+    {
+      "organ": "leaf",
+      "material": "living.leaf"
+    },
+    {
+      "organ": "flower",
+      "material": "living.petal"
+    }
+  ],
+  "reachMeters": [
+    0.9,
+    1.4
+  ],
+  "heightMeters": [
+    3.0,
+    4.2
+  ],
+  "leafLengthMeters": [
+    0.04,
+    0.08
+  ],
+  "leafWidthMeters": [
+    0.025,
+    0.045
+  ],
+  "floweringShare": 0.0,
+  "leafColours": [
+    "#55803A",
+    "#4D7834",
+    "#5E8A40",
+    "#52793A"
+  ],
+  "stemColours": [
+    "#4A3A30",
+    "#4E6A36"
+  ],
+  "tree": {
+    "crownCentreShare": 0.764,
+    "crownRadiusShares": [
+      0.375,
+      0.264
+    ],
+    "trunkRadiusMeters": 0.12,
+    "trunkTipShare": 0.45,
+    "flareShare": 0.35,
+    "leanDegrees": 11,
+    "wanderDegrees": 8,
+    "zigzagDegrees": 9,
+    "trunkShare": 0.62,
+    "crownFollowShare": 0.85,
+    "stems": 1,
+    "stemSpreadDegrees": 0,
+    "bEvenScaffolds": false,
+    "minRadiusMeters": 0.002,
+    "trunkSegments": 9,
+    "trunkSides": 14,
+    "branching": [
+      {
+        "count": 7,
+        "perMeter": 0.0,
+        "start": 0.45,
+        "end": 1.0,
+        "angleDegrees": 40,
+        "angleLowDegrees": 62,
+        "angleSpreadDegrees": 12,
+        "phyllotaxisDegrees": 137.5,
+        "lengthShare": 0.95,
+        "lengthSpread": 0.2,
+        "lengthTaper": 0.4,
+        "radiusShare": 0.6,
+        "curveDegrees": 4,
+        "wanderDegrees": 8,
+        "droopDegrees": 4,
+        "riseDegrees": 10,
+        "zigzagDegrees": 18,
+        "segments": 6,
+        "sides": 9
+      },
+      {
+        "count": 0,
+        "perMeter": 4.5,
+        "start": 0.12,
+        "end": 1.0,
+        "angleDegrees": 48,
+        "angleLowDegrees": 45,
+        "angleSpreadDegrees": 15,
+        "phyllotaxisDegrees": 160,
+        "lengthShare": 0.55,
+        "lengthSpread": 0.3,
+        "lengthTaper": 0.45,
+        "radiusShare": 0.5,
+        "curveDegrees": 6,
+        "wanderDegrees": 8,
+        "droopDegrees": 6,
+        "riseDegrees": 8,
+        "zigzagDegrees": 20,
+        "segments": 4,
+        "sides": 5
+      },
+      {
+        "count": 0,
+        "perMeter": 7.0,
+        "start": 0.1,
+        "end": 1.0,
+        "angleDegrees": 38,
+        "angleLowDegrees": 45,
+        "angleSpreadDegrees": 10,
+        "phyllotaxisDegrees": 180,
+        "lengthShare": 0.6,
+        "lengthSpread": 0.3,
+        "lengthTaper": 0.3,
+        "radiusShare": 0.5,
+        "curveDegrees": 8,
+        "wanderDegrees": 4,
+        "droopDegrees": 0,
+        "riseDegrees": 22,
+        "zigzagDegrees": 3,
+        "segments": 3,
+        "sides": 4
+      },
+      {
+        "count": 0,
+        "perMeter": 8.0,
+        "start": 0.1,
+        "end": 1.0,
+        "angleDegrees": 45,
+        "angleLowDegrees": 45,
+        "angleSpreadDegrees": 15,
+        "phyllotaxisDegrees": 140,
+        "lengthShare": 0.35,
+        "lengthSpread": 0.4,
+        "lengthTaper": 0.3,
+        "radiusShare": 0.6,
+        "curveDegrees": 4,
+        "wanderDegrees": 10,
+        "droopDegrees": 5,
+        "riseDegrees": 10,
+        "zigzagDegrees": 10,
+        "segments": 2,
+        "sides": 3
+      }
+    ],
+    "leafOrder": 3,
+    "leafStartShare": 0.1,
+    "leavesPerPlant": 7000,
+    "leafAngleDegrees": 50,
+    "leafDroop": 0.25,
+    "leafFold": 0.25,
+    "leafCurl": 0.06,
+    "flowerOrder": 2,
+    "flowersPerCluster": [
+      1,
+      3
+    ],
+    "pedicelMeters": 0.01,
+    "secondColourShare": 0.0
+  },
+  "note": "The garden's plums, as built. Its fruit ripens in the plum rain (meiyu) and is not grown in the first pass. The museum shows it in early summer, Mangzhong to Xiazhi (June). Its trunk and branches take living.stem, the palette's stem tissue, with the bark's colour on their vertices, until Matter records a bark tissue."
+}

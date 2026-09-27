@@ -7,8 +7,8 @@ All light in the museum, in real units. Module `MuseeLight` (Runtime), depending
 | Header | Connector |
 | --- | --- |
 | `LightSky.h` | `ALightSky`: the one sun, Moon, atmosphere, sky light, volumetric clouds and height fog, following Time's moment (sun in lux at the luminous solar constant over the distance squared; Moon by its phase law; cloud cover; rain and snow haze). One is placed in every game world. |
-| `LightLuminaire.h` | `FLightLuminaire` and `Musee::Light::FindLuminaire`, `LuminaireKeys`: the catalogue of `Data/Light/Luminaires` as emitters (spot, rect, linear), with why a type stands unlit |
-| `LightLuminaireComponent.h` | `ULightLuminaireComponent`: a catalogue type mounted in a stage, at its catalogue output, switched by `ELightOperation` and dimmed by the channel it follows |
+| `LightLuminaire.h` | `FLightLuminaire` and `Musee::Light::FindLuminaire`, `LuminaireKeys`: the catalogue of `Data/Light/Luminaires` as emitters (spot, rect, linear, point, image), areal types by the square metre, with why a type stands unlit |
+| `LightLuminaireComponent.h` | `ULightLuminaireComponent`: a catalogue type mounted in a stage, at its catalogue output over the length or face it is laid to, switched by `ELightOperation`, dimmed by the channel it follows; an image panel by the picture it is shown (`ShowImage`) |
 | `LightOperation.h` | `ELightOperation`: `Always`, `Dusk` (sun down), `Presence` (`Data/Light/Operation.json`) |
 
 The stage dresser (order 40) reads `Data/Stages/<stage>/Lighting.json` and places each luminaire either on its `mount`
@@ -16,9 +16,16 @@ The stage dresser (order 40) reads `Data/Stages/<stage>/Lighting.json` and place
 `body`. Its light leaves towards `aim`, the point `[x, y, z]` in the stage's frame it is aimed at; a luminaire on a
 mount without an aim shines along the mount's x axis, and one at a point needs its aim. A linear type lies across the
 aim, level where it can (along the stage's x axis when aimed straight up or down), and takes the length laid from the
-entry's `length` (metres). Findings: an unknown type, mount, body or operation, a mount and a point together or
-neither, a point without its aim, a line without length, an opening whose weather isn't one of Time's places, and a
-type that stands unlit.
+entry's `length` (metres). An areal type (a luminous ceiling, edge-lit panes, an image panel) is laid over the face its
+entry gives: an `extent` [width, height] in metres, or a `zone` of a round field, `{ "r": [inner, outer], "bearing":
+[from, to] }` about the stage's vertical axis, bearings clockwise from north; a zone's face is the rectangle of its own
+area, as wide as its middle arc (or its outer chord), its height running out from the axis. A luminaire set in a piece
+names it as `host`, and the surface it lights as `surface`; they are kept as the tags `musee.host:<key>` and
+`musee.lights:<key>`. Targets may hold only `when` a mechanism stands at a stop, and a target's `lux` and a design's
+`ratio` may leave one end open (`[50, null]`). Findings: an unknown type, mount, body or operation, a mount and a point
+together or neither, a point without its aim, a line without length, an areal type without its face (or with both
+faces, or outside its zone), a face on a type that isn't areal, an opening whose weather isn't one of Time's places,
+and a type that stands unlit.
 
 The renderer's transport stays in `Config/DefaultEngine.ini`, as it is.
 
@@ -33,4 +40,5 @@ The renderer's transport stays in `Config/DefaultEngine.ini`, as it is.
 
 ## Tests
 
-`Musee.Light.Catalogue`, `Photometry`, `Luminaire`, `Dresser`, `Sky`.
+`Musee.Light.Catalogue`, `Photometry`, `Luminaire`, `Dresser`, `Sky`, and `EveryScheduleReads` (every stage's
+Lighting.json reads through Light's reader, and every type it names is in the catalogue).

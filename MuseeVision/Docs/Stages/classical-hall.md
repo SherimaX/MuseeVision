@@ -578,3 +578,4 @@ use the shell line.
 - All light is 3000 K (as built 3800 K). The φ 90° wall-washer, which aimed at no wall, is dropped.
 - Materials follow the Story; only the tribune's rosettes are gilt. The niches' red is `white.lime-plaster.red-ochre`,
   the porphyry is `polished` and the gallery rosettes `cast.plaster` (§13: the schedule changed to the Story's material).
+- Lighting.json (K3-LIGHT-NATURE): the eye's laylight is a disc, so it gives `zone: { r: [0, 1.2], bearing: [0, 360] }` in place of the square `extent` [2.4, 2.4], which overstated its face by 27 %.

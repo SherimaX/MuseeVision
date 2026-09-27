@@ -15,8 +15,10 @@ struct FTimeMoment;
 /**
  * One luminaire in the museum: a catalogue type (Data/Light/Luminaires) mounted where a stage's lighting schedule puts
  * it, with its light leaving along the component's x axis (a linear luminaire lies along its y axis, centred on the
- * component; the lamps of an electrolier stand on a ring about its x axis). It lights at its catalogue output, switched by its operation (always, at dusk, on presence) and dimmed by
- * the channel it follows (0 to 1), and nothing else sets how much light it gives. Light's stage dresser places it.
+ * component; the lamps of an electrolier stand on a ring about its x axis; an areal face lies square to x, its width
+ * along y and its height along z). It lights at its catalogue output, switched by its operation (always, at dusk, on
+ * presence) and dimmed by the channel it follows (0 to 1); an image panel gives the light of the picture it shows, and
+ * stands at its black level until one is shown. Nothing else sets how much light it gives. Light's stage dresser places it.
  */
 UCLASS(ClassGroup = (Musee))
 class MUSEELIGHT_API ULightLuminaireComponent final : public USceneComponent
@@ -28,14 +30,18 @@ public:
 
 	/**
 	 * Sets what the luminaire is and how it is run: its catalogue type, its operation, the channel it follows (the none
-	 * key for none) and, for a linear type, the length laid.
+	 * key for none), for a linear type the length laid, and for an areal type the face it lights, [width, height] in
+	 * metres (zero for any other).
 	 */
-	void Configure(const FMuseeKey& InType, ELightOperation InOperation, const FMuseeKey& InFollows, Musee::Meters InLength);
+	void Configure(const FMuseeKey& InType, ELightOperation InOperation, const FMuseeKey& InFollows, Musee::Meters InLength,
+		const FVector2D& InFaceMeters = FVector2D::ZeroVector);
 
 	[[nodiscard]] const FMuseeKey& Type() const { return LuminaireType; }
 	[[nodiscard]] ELightOperation Operation() const { return LuminaireOperation; }
 	[[nodiscard]] const FMuseeKey& Follows() const { return FollowedChannel; }
 	[[nodiscard]] Musee::Meters Length() const { return Musee::Meters(LengthMeters); }
+	/** The face an areal type lights, [width, height] in metres; zero for any other. */
+	[[nodiscard]] const FVector2D& Face() const { return FaceMeters; }
 
 	/** The fraction of its catalogue output it gives now, 0 to 1: its switch times the channel it follows. */
 	[[nodiscard]] double Level() const;
@@ -54,6 +60,12 @@ public:
 
 	/** Takes a value of the channel it follows. */
 	void FollowChannel(float Value);
+
+	/**
+	 * For an image panel, the picture it shows now, as its mean luminance over its peak white (0 to 1): the work whose
+	 * image source feeds the panel sets it. 0, its black level, is the standby picture.
+	 */
+	void ShowImage(double MeanLuminanceShare);
 
 protected:
 	virtual void OnRegister() override;
@@ -83,11 +95,17 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Luminaire", meta = (Units = "Meters"))
 	double LengthMeters = 0.0;
 
+	/** The face an areal type lights, [width, height] in metres. */
+	UPROPERTY(EditAnywhere, Category = "Luminaire")
+	FVector2D FaceMeters = FVector2D::ZeroVector;
+
 	UPROPERTY(Transient)
 	TArray<TObjectPtr<ULocalLightComponent>> EmitterLights;
 
 	bool bSwitchedOn = true;
 	double ChannelLevel = 1.0;
+	/** An image panel's picture: its mean luminance over its peak white. */
+	double ImageLevel = 0.0;
 	/** The world time, in seconds, at which the presence detector last saw the visitor. */
 	TOptional<double> LastSeenSeconds;
 	FDelegateHandle MomentHandle;

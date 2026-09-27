@@ -75,7 +75,7 @@ bool FNatureSpeciesTest::RunTest(const FString& Parameters)
 		AddError(Species.GetError());
 		return false;
 	}
-	TestTrue(TEXT("The oval's five species and the contract's example are recorded"), Species.GetValue().Num() >= 6);
+	TestTrue(TEXT("The oval's five species, the contract's example, and the gardens' and the pergola's twenty-three are recorded"), Species.GetValue().Num() >= 29);
 	for (const FNatureSpecies& One : Species.GetValue())
 	{
 		const TArray<FString> Faults = SpeciesFaults(One);
@@ -159,10 +159,29 @@ bool FNatureGrowthTest::RunTest(const FString& Parameters)
 	}
 	FPlantSite Site;
 	Site.WaterLevel = 0.32;
+	Site.WaterDepth = 0.45;
 	Site.IsClear = [](const FVector& Point, double Margin) { return Point.Z > 0.4 || FMath::Square(Point.X / (3.9 - Margin)) + FMath::Square(Point.Y / (2.0 - Margin)) <= 1.0; };
+	// What a garden's beds give the forms planted along a line, over a region, or trained: a metre of hedge, a square of
+	// sward, a vine up a post and out along a bar.
+	Site.Line = { FVector(-0.5, 0.0, 0.0), FVector(0.5, 0.0, 0.0) };
+	Site.Clip.Width = 0.45f;
+	Site.Clip.Height = 1.5f;
+	Site.Clip.Batter = 0.02f;
+	Site.Clip.Shoulder = 0.06f;
+	Site.Clip.CoreInset = 0.065f;
+	Site.Clip.Ends = TEXT("open");
+	Site.bOpenStart = true;
+	Site.bOpenEnd = true;
+	Site.Region = { FVector2D(-1.0, -1.0), FVector2D(1.0, -1.0), FVector2D(1.0, 1.0), FVector2D(-1.0, 1.0) };
+	Site.Trained = { { FVector(0.0, 0.0, 0.0), FVector(0.0, 0.0, 1.8) }, { FVector(0.0, 0.0, 1.8), FVector(1.5, 0.0, 1.8) } };
 	for (const FNatureSpecies& One : Species.GetValue())
 	{
 		const FForm* Form = FindForm(One.Form);
+		if (!Form->Grow)
+		{
+			// A carpet is laid over its region by the planting (Musee.Nature.Garden), not grown plant by plant.
+			continue;
+		}
 		FPlantParts First, Second;
 		FRandomStream A(Musee::Seed(FMuseeKey(TEXTVIEW("test.plant"))));
 		FRandomStream B(Musee::Seed(FMuseeKey(TEXTVIEW("test.plant"))));
@@ -177,7 +196,7 @@ bool FNatureGrowthTest::RunTest(const FString& Parameters)
 			bSame &= Other && Other->NumVertices() == Part.Value.NumVertices() && TArray<FVector>(Other->AllPositions()) == TArray<FVector>(Part.Value.AllPositions());
 		}
 		TestTrue(FString::Printf(TEXT("%s grows the same from the same stream"), *One.Name), bSame);
-		if (Form->bInWater && Leaves)
+		if (Form->bFloating && Leaves)
 		{
 			const bool bFloating = !Leaves->AllPositions().ContainsByPredicate([](const FVector& P) { return FMath::Abs(P.Z - 0.32) > 0.05; });
 			TestTrue(FString::Printf(TEXT("%s's pads float on the water"), *One.Name), bFloating);
@@ -266,6 +285,87 @@ bool FNaturePlantingTest::RunTest(const FString& Parameters)
 			&& (Pieces[I].Mesh->VertexCount() == 0 || Again[I].Mesh->GetVertex(0) == Pieces[I].Mesh->GetVertex(0));
 	}
 	TestTrue(TEXT("A second make grows the same planting"), bSame);
+	return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FNatureGardenTest, "Musee.Nature.Garden", Musee::NatureMaking::Tests::Flags)
+
+bool FNatureGardenTest::RunTest(const FString& Parameters)
+{
+	using namespace Musee::NatureMaking;
+	FMuseeStageContext Stage;
+	Stage.Stage = FMuseeKey(TEXTVIEW("garden"));
+	Stage.ScheduleDir = Tests::Fixture(TEXT("Stages/garden"));
+	Stage.Anchors = {
+		Tests::Anchor(TEXT("garden.pool"), TEXT("Water"), FVector(4.0, 4.0, -0.1)),
+		Tests::Anchor(TEXT("garden.ground"), TEXT("Bed"), FVector(5.0, 5.0, 0.02)),
+		Tests::Anchor(TEXT("garden.birch"), TEXT("Bed"), FVector(8.0, 2.0, 0.02)),
+		Tests::Anchor(TEXT("garden.bamboo"), TEXT("Bed"), FVector(1.5, 8.5, 0.02)),
+		Tests::Anchor(TEXT("garden.hedge"), TEXT("Bed"), FVector(5.0, 10.2, 0.0)),
+		Tests::Anchor(TEXT("garden.sward"), TEXT("Bed"), FVector(12.5, 1.0, 0.0)),
+		Tests::Anchor(TEXT("garden.planter"), TEXT("Bed"), FVector(12.0, 8.0, 0.5)),
+		Tests::Anchor(TEXT("garden.stray"), TEXT("Bed"), FVector(1.0, 1.0, 0.02)),
+	};
+	TArray<FFormMadePiece> Pieces;
+	TArray<FMuseeFinding> Findings;
+	GatherNature(Stage, Pieces, Findings);
+	const auto Named = [&Pieces](const TCHAR* Name) { return Pieces.FindByPredicate([Name](const FFormMadePiece& P) { return P.Name == Name; }); };
+	TestEqual(TEXT("Only the stray bed, which counts three plants at two points, is a finding"), Findings.Num(), 1);
+	TestTrue(TEXT("and it says so"), Findings.Num() == 1 && Findings[0].Summary.Contains(TEXT("counts 3 plants at 2 points")));
+
+	const FFormMadePiece* Ground = Named(TEXT("garden.ground.ground"));
+	if (TestNotNull(TEXT("The garden's ground is made"), Ground))
+	{
+		// A 10 m square of ground less the 1 m radius pool that lies in it.
+		TestEqual(TEXT("over its outline less the water in it"), Tests::AreaSquareMeters(Ground->Mesh), 100.0 - UE_DOUBLE_PI, 0.01);
+		TestTrue(TEXT("in its soil's material spec, walkable"), Ground->Material == TEXT("accent.site-geology") && Ground->Working == TEXT("topsoil.bare")
+			&& Ground->History == TEXT("weathered") && Ground->Collision == Musee::Collision::Walkable.Profile());
+		TestTrue(TEXT("on no body: its body written empty is the none key"), Ground->Body.IsNone());
+	}
+	const FFormMadePiece* Carpet = Named(TEXT("garden.ground.haplocladium-microphyllum.leaf"));
+	if (TestNotNull(TEXT("The moss is a carpet over the ground"), Carpet))
+	{
+		TestEqual(TEXT("over the same region"), Tests::AreaSquareMeters(Carpet->Mesh), 100.0 - UE_DOUBLE_PI, 0.01);
+		TestTrue(TEXT("its shoots' length above the soil"), Carpet->Frame.OriginMeters.Z > 0.02 + 0.009 && Carpet->Frame.OriginMeters.Z < 0.02 + 0.016);
+		TestTrue(TEXT("in its leaves' tissue"), Carpet->Material == TEXT("living.leaf") && Carpet->Collision.IsNone());
+	}
+	const FFormMadePiece* Trunk = Named(TEXT("garden.birch.betula-pendula.trunk"));
+	if (TestNotNull(TEXT("The birch grows a trunk"), Trunk))
+	{
+		TestTrue(TEXT("which the visitor can't pass through"), Trunk->Collision == Musee::Collision::Solid.Profile());
+		double Top = 0.0;
+		for (const int32 V : Trunk->Mesh->VertexIndicesItr())
+		{
+			Top = FMath::Max(Top, Musee::FromEngine(Trunk->Mesh->GetVertex(V)).Z);
+		}
+		TestTrue(TEXT("up to the height its bed draws"), Top > 0.9 * 9.3 * 0.97 - 0.1 && Top < 9.3);
+	}
+	TestNotNull(TEXT("and its leaves"), Named(TEXT("garden.birch.betula-pendula.leaf")));
+	TestNotNull(TEXT("The bamboo grows its culms at their points"), Named(TEXT("garden.bamboo.phyllostachys-aureosulcata.stem")));
+	const FFormMadePiece* Core = Named(TEXT("garden.hedge.taxus-baccata.trunk.0"));
+	TestTrue(TEXT("The hedge grows its solid core along its line"), Core && Core->Collision == Musee::Collision::Solid.Profile());
+	const FFormMadePiece* Second = Named(TEXT("garden.hedge.taxus-baccata.leaf.1"));
+	const FFormMadePiece* Third = Named(TEXT("garden.hedge.taxus-baccata.leaf.2"));
+	if (TestTrue(TEXT("and its skin of needles, a module to each of its five plants"), Second && Third && Named(TEXT("garden.hedge.taxus-baccata.leaf.4"))))
+	{
+		TestTrue(TEXT("its middle modules the same, so they can be cast once"), Second->Mesh->VertexCount() == Third->Mesh->VertexCount()
+			&& Second->Mesh->GetVertex(0) == Third->Mesh->GetVertex(0));
+		TestTrue(TEXT("each at its place along the line"), FMath::IsNearlyEqual(Third->Frame.OriginMeters.X - Second->Frame.OriginMeters.X, 0.4, 1e-6));
+	}
+	TestNotNull(TEXT("The sward grows its tufts over its region"), Named(TEXT("garden.sward.festuca-rubra.leaf")));
+	const FFormMadePiece* Soil = Named(TEXT("garden.planter.ground"));
+	TestTrue(TEXT("The planter's soil is made, potted"), Soil && Soil->Working == TEXT("topsoil.potted"));
+	const FFormMadePiece* Vine = Named(TEXT("garden.planter.vitis-vinifera.leaf"));
+	if (TestNotNull(TEXT("The vine grows its leaves"), Vine))
+	{
+		bool bHigh = true;
+		for (const int32 V : Vine->Mesh->VertexIndicesItr())
+		{
+			bHigh &= Musee::FromEngine(Vine->Mesh->GetVertex(V)).Z > 1.2;
+		}
+		TestTrue(TEXT("along the canes it is trained on, up by the bar"), bHigh);
+	}
+	TestNotNull(TEXT("and its stem up the post"), Named(TEXT("garden.planter.vitis-vinifera.trunk")));
 	return true;
 }
 

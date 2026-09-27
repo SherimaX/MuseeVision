@@ -2,45 +2,43 @@
   "key": "luminous-ceiling.3000k",
   "kind": "laylight",
   "controlClass": "gallery",
-  "evidenceState": "incomplete",
+  "evidenceState": "complete",
   "product": {
-    "manufacturer": "Lumistrips",
-    "family": "BackMatrix-49 (configurable)",
-    "description": "backlight module for luminous ceilings and light boxes: 49 Nichia 757 mid-power LEDs on a 290 x 290 mm board, built to order at CRI 70 to 99 and 1800 to 7800 K; here 3000 K at CRI 95, laid in the plenum over a laylight's glass",
-    "code": "backmatrix_3080",
-    "codeBasis": "the configurator's product code; the configured variant has no article number of its own",
-    "status": "made to order"
+    "manufacturer": "Color Kinetics (Signify)",
+    "family": "OneSpace gen2, Tunable White",
+    "description": "luminous ceiling panel: LED modules of 600 x 600 and 300 x 300 mm on an aluminium frame behind a light-diffusing white fabric, a seamless plane of light; tunable 2700 to 6500 K, set here to 3000 K; laid in the plenum over a laylight's etched glass, which the room draws",
+    "code": "OneSpace gen2 Tunable White",
+    "codeBasis": "the maker's product name; a panel is built to size from its modules, frames and fabric (the specification sheet's bill of material), in over 170 sizes",
+    "status": "current"
   },
   "light": {
-    "luminousFluxLumens": null,
-    "fluxBasis": "not published for the configuration: the maker gives 24 lm per LED at CRI 95 and 31 lm per LED at CRI 95 H6, without their colour temperature or drive",
-    "beamName": "bare mid-power LEDs, near Lambertian, behind the laylight's diffusing face",
+    "luminousFluxLumensPerSquareMeter": 2574,
+    "fluxBasis": "luminaire: 2574 lm/m2 (239 lm/ft2) at 3000 K, measured to IES LM-79-08 on the 900 x 900 mm panel and taken per square metre for the other sizes (the maker's note)",
+    "beamName": "a Lambertian plane behind its diffusing fabric, 162 degree viewing angle",
     "cctKelvin": 3000,
     "cri": 95,
-    "criBasis": "configured value"
+    "criBasis": "published value at 3000 K",
+    "macAdamSteps": 2
   },
   "electrical": {
-    "systemPowerWatts": null,
     "supplyVolts": 24,
-    "control": "constant-voltage 24 V, dimmable, with an onboard switch for three levels"
+    "supply": "100 to 277 V AC to the maker's 100 W, 24 V DC power supplies",
+    "control": "colour tuning and intensity by the LED module controller on PWM, 0-10 V or TouchDim; DALI through a DALI-to-PWM converter"
   },
   "housing": {
-    "emittingMillimeters": [
-      290,
-      290
-    ],
-    "dimensionBasis": "the module's board, 290 x 290 x 7 mm; a laylight is a field of modules, whose extent the room gives",
-    "mounting": "laid in the plenum over the laylight's glass"
+    "dimensionBasis": "the room gives the extent of the laylight; the panel is 113 mm deep (the 900 x 3600 mm panel's height x width x depth, 929 x 3630 x 113 mm), so it fits a laylight's 0.20 plenum",
+    "materials": "extruded aluminium frame and crossbars, aluminium reflective inserts, light-diffusing white polyester fabric",
+    "mounting": "laid in the plenum over the laylight's glass, on brackets or cables"
   },
   "photometricFile": {
-    "url": null,
-    "note": "The maker publishes no LDT or IES file for the configurable module."
+    "url": "https://www.colorkinetics.com/global/support/ies",
+    "note": "The maker publishes IES data by size; a luminous plane behind diffusing fabric is near Lambertian, as the record takes it."
   },
   "sources": [
     {
-      "id": "maker-page",
-      "title": "Lumistrips, BackMatrix-49-3080 Configurable Nichia LED Module White CRI 70-99 1800-7800K 24V 49 LEDs 11.42x11.42 in",
-      "url": "https://us.lumistrips.com/lumistrips-plug-play-led-us.html/custom-made-backmatrix-3080-nichia-led-module-white-int-1.html",
+      "id": "spec-sheet",
+      "title": "Color Kinetics, OneSpace gen2 Tunable White 900 x 3600 mm specification sheet (3/20/2026): 3000 K 2574 lm/m2, CRI 95, 39.5 to 41.1 W/m2, 162 degree viewing angle, 929 x 3630 x 113 mm; PWM, 0-10 V, TouchDim, DALI through a converter",
+      "url": "https://www.docs.colorkinetics.com/specsheets/OneSpace_gen2/OneSpace_gen2_TunableWhite_900x3600.pdf",
       "readOn": "2026-09-27",
       "covers": [
         "product",
@@ -48,10 +46,20 @@
         "electrical",
         "housing"
       ]
+    },
+    {
+      "id": "maker-page",
+      "title": "Color Kinetics, OneSpace gen2 (product page): up to 2964 lm/m2, 90+ CRI, 2 step MacAdam, sizes 924 x 924 to 2424 x 9924 mm",
+      "url": "https://www.colorkinetics.com/global/products/essentialwhite/onespace-gen2",
+      "readOn": "2026-09-27",
+      "covers": [
+        "product",
+        "housing"
+      ]
     }
   ],
   "unverified": [
-    "The module's flux and power at 3000 K and CRI 95: the maker gives flux per LED by CRI class only, and up to 25 W per module, so the record stands unlit until the configured module's figures are obtained.",
-    "How many modules a square metre of the Salon's and the Classical Hall's laylights takes, and at what depth; the room gives the extent."
+    "The flux per square metre of sizes other than 900 x 900 mm is the maker's estimate from that panel, as its sheet says.",
+    "The etched laylight glass under the panel is the room's piece in Matter's glass; Light counts the panel's own output."
   ]
 }

@@ -3,6 +3,7 @@
 #include "CoreMinimal.h"
 #include "MuseeKey.h"
 #include "NatureOrgan.h"
+#include "NatureTreeHabit.h"
 
 #include "NatureSpecies.generated.h"
 
@@ -11,10 +12,15 @@
  * [least, most] a grown plant falls in, with its sources in the record), its colours as sRGB hex (`#3F6B2E`), and the
  * form that grows it: `water-lily` (Nymphaea: floating pads and flowers on the water), `iris` (fans of sword leaves and
  * flowers on stalks), `sedge` (a tussock of arching blades and fruiting culms), `forget-me-not` (low leafy stems and
- * coiled sprays of small flowers).
+ * coiled sprays of small flowers), `tree` (a trunk, orders of branches, leaves and flowers on the twigs, by its habit),
+ * `bamboo` (a grove of jointed culms with branches and leaf sprays), `lotus` (round leaves and flowers held above the
+ * water), `moss` (a carpet over the ground), `grass` (a sward of tufts), `herb` (a meadow flower or a bulb: basal
+ * leaves and flowering stems), `hedge` (a clipped hedge along a line) and `vine` (a climber trained along its paths).
  *
  * What each measure means depends on the form: a lily's leaf length is its pad's radius and its reach the colony's
- * radius on the water; an iris's leaf length is its sword's length from the soil; a forget-me-not's is its stem's.
+ * radius on the water; an iris's leaf length is its sword's length from the soil; a forget-me-not's is its stem's; a
+ * lotus's is its leaf's radius; a moss's is its shoots' length, the carpet's depth. The museum shows its plants in early
+ * summer, from Mangzhong to Xiazhi (June): what flowers then, and how much of the planting, is the floweringShare.
  */
 USTRUCT()
 struct MUSEENATURE_API FNatureSpecies
@@ -32,7 +38,7 @@ struct MUSEENATURE_API FNatureSpecies
 	UPROPERTY()
 	FString Common;
 
-	/** The form that grows it: `water-lily`, `iris`, `sedge` or `forget-me-not`. */
+	/** The form that grows it, one of those above (`water-lily`, `tree`, `vine`...). */
 	UPROPERTY(meta = (MuseeRequired))
 	FName Form;
 
@@ -51,6 +57,49 @@ struct MUSEENATURE_API FNatureSpecies
 	/** A leaf's width (unused by a water lily, whose pad is round). */
 	UPROPERTY()
 	TArray<float> LeafWidthMeters;
+
+	/** How high a leaf is held above the water or soil (a lotus's leaves stand above the water on their stalks). */
+	UPROPERTY()
+	TArray<float> LeafHeightMeters;
+
+	/** The plant's height: a tree's, a bamboo culm's, the shoots of a hedge left unclipped. */
+	UPROPERTY()
+	TArray<float> HeightMeters;
+
+	/** A stem's radius at its foot: a bamboo culm's, a vine's stem and its canes. */
+	UPROPERTY()
+	TArray<float> StemRadiusMeters;
+
+	/** How many plants (tufts, shoots) stand on a square metre of a cover. */
+	UPROPERTY()
+	TArray<float> PlantsPerSquareMeter;
+
+	/** How many leaves (needles) a square metre of a clipped hedge's surface carries. */
+	UPROPERTY()
+	TArray<float> LeavesPerSquareMeter;
+
+	/** How many leaves a metre of shoot carries (a vine's canes). */
+	UPROPERTY()
+	TArray<float> LeavesPerMeter;
+
+	/** How many petals (tepals, rays) a flower has. */
+	UPROPERTY()
+	TArray<int32> PetalsPerFlower;
+
+	/**
+	 * How a flower's petals stand: `cup` (rising, a buttercup's, a tulip's), `flat` (spread, a mallow's, a narcissus's
+	 * perianth), `reflexed` (swept back, a sneezeweed's rays) or `head` (a scabious's flat head of florets).
+	 */
+	UPROPERTY()
+	FName FlowerShape;
+
+	/** A narcissus's corona, as a share of the petals' length; zero for none. */
+	UPROPERTY()
+	float CoronaShare = 0.0f;
+
+	/** A tree's habit, for the `tree` form. */
+	UPROPERTY()
+	FNatureTreeHabit Tree;
 
 	/** A flower's size across. */
 	UPROPERTY()

@@ -1,0 +1,57 @@
+{
+  "$sources": [
+    "The species: Phyllostachys aureosulcata McClure, huang cao zhu, yellow-groove bamboo: culms 3-9 m, 1-4 cm across, green with a yellow groove (sulcus) above each branch, the lower internodes sometimes zigzag; branches two at a node; leaves 7-15 cm by 1-1.5 cm (Flora of China (Wu Zhengyi, P. H. Raven and Hong Deyuan, eds., Science Press and Missouri Botanical Garden, 1994-2013), vol. 22, Poaceae, Bambusoideae).",
+    "Culm habit, internodes, branching and sprays: the as-built museum's grove (windows/Source/MuseeVision/Nature/MuseeTree.cpp, GrowBamboo): culms 4.7-6.1 m, 22-32 mm radius at the foot, leaves 10-17 cm, 12-15 % as wide as long."
+  ],
+  "key": "phyllostachys-aureosulcata",
+  "name": "Phyllostachys aureosulcata",
+  "common": "Yellow-groove bamboo (黄槽竹)",
+  "form": "bamboo",
+  "organs": [
+    {
+      "organ": "stem",
+      "material": "living.stem"
+    },
+    {
+      "organ": "leaf",
+      "material": "living.leaf"
+    }
+  ],
+  "reachMeters": [
+    0.3,
+    0.6
+  ],
+  "heightMeters": [
+    4.7,
+    6.1
+  ],
+  "stemRadiusMeters": [
+    0.012,
+    0.02
+  ],
+  "leafLengthMeters": [
+    0.07,
+    0.15
+  ],
+  "leafWidthMeters": [
+    0.01,
+    0.015
+  ],
+  "floweringShare": 0.0,
+  "leafColours": [
+    "#5E8A3E",
+    "#6B9444",
+    "#507A36",
+    "#5A8640",
+    "#648C40"
+  ],
+  "leafAgeColours": [
+    "#A8A450"
+  ],
+  "stemColours": [
+    "#6E8E3E",
+    "#F4F4EA",
+    "#C8C8A8"
+  ],
+  "note": "Each plant is one culm, standing at its point in the grove as the Chenghuai sheet plots them (the as-built culm points). Its culm radius is the species' 1-4 cm across. The museum shows it in early summer, Mangzhong to Xiazhi (June)."
+}

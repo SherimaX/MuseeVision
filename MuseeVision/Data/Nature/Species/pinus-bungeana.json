@@ -1,0 +1,157 @@
+{
+  "$sources": [
+    "The species: Pinus bungeana Zuccarini ex Endlicher, bai pi song, lacebark pine: a tree to 30 m, often divided near the base into several stems; the bark flaking off in patches, greyish white, green and brown; needles three in a fascicle, 5-10 cm by 1.5-2 mm, stiff, persisting 3-4 years (Flora of China (Wu Zhengyi, P. H. Raven and Hong Deyuan, eds., Science Press and Missouri Botanical Garden, 1994-2013), vol. 4, Pinaceae).",
+    "Habit: the as-built museum's tree grower (windows/Source/MuseeVision/Nature/MuseeTree.cpp, the tree grower's scaffolds for the board's pine on the rockery, 4.8 m, crown radii 2.1 and 1.7, which this record gives the lacebark pine's several stems, level limbs and tufts of needles at the shoots' ends), its branching, leaf and crown numbers.",
+    "Colours: the needles' dark bluish green; the bark's pale flakes."
+  ],
+  "key": "pinus-bungeana",
+  "name": "Pinus bungeana",
+  "common": "Lacebark pine (白皮松)",
+  "form": "tree",
+  "organs": [
+    {
+      "organ": "trunk",
+      "material": "living.stem"
+    },
+    {
+      "organ": "stem",
+      "material": "living.stem"
+    },
+    {
+      "organ": "leaf",
+      "material": "living.leaf"
+    },
+    {
+      "organ": "flower",
+      "material": "living.petal"
+    }
+  ],
+  "reachMeters": [
+    1.4,
+    2.4
+  ],
+  "heightMeters": [
+    4.0,
+    6.0
+  ],
+  "leafLengthMeters": [
+    0.05,
+    0.1
+  ],
+  "leafWidthMeters": [
+    0.0015,
+    0.002
+  ],
+  "floweringShare": 0.0,
+  "leafColours": [
+    "#2E4A3A",
+    "#35523E",
+    "#2A4434",
+    "#3C5A44"
+  ],
+  "stemColours": [
+    "#B8B4A0",
+    "#6E6A4E"
+  ],
+  "tree": {
+    "crownCentreShare": 0.64,
+    "crownRadiusShares": [
+      0.44,
+      0.35
+    ],
+    "trunkRadiusMeters": 0.1,
+    "trunkTipShare": 0.25,
+    "flareShare": 0.25,
+    "leanDegrees": 6,
+    "wanderDegrees": 4,
+    "zigzagDegrees": 0,
+    "trunkShare": 0.8,
+    "crownFollowShare": 0.6,
+    "stems": 3,
+    "stemSpreadDegrees": 16,
+    "bEvenScaffolds": false,
+    "minRadiusMeters": 0.002,
+    "trunkSegments": 10,
+    "trunkSides": 12,
+    "branching": [
+      {
+        "count": 10,
+        "perMeter": 0.0,
+        "start": 0.35,
+        "end": 1.0,
+        "angleDegrees": 55,
+        "angleLowDegrees": 78,
+        "angleSpreadDegrees": 10,
+        "phyllotaxisDegrees": 137.5,
+        "lengthShare": 0.9,
+        "lengthSpread": 0.2,
+        "lengthTaper": 0.4,
+        "radiusShare": 0.5,
+        "curveDegrees": 8,
+        "wanderDegrees": 5,
+        "droopDegrees": 4,
+        "riseDegrees": 8,
+        "zigzagDegrees": 0,
+        "segments": 7,
+        "sides": 8
+      },
+      {
+        "count": 0,
+        "perMeter": 3.5,
+        "start": 0.2,
+        "end": 1.0,
+        "angleDegrees": 50,
+        "angleLowDegrees": 45,
+        "angleSpreadDegrees": 12,
+        "phyllotaxisDegrees": 140,
+        "lengthShare": 0.5,
+        "lengthSpread": 0.3,
+        "lengthTaper": 0.5,
+        "radiusShare": 0.55,
+        "curveDegrees": 10,
+        "wanderDegrees": 6,
+        "droopDegrees": 0,
+        "riseDegrees": 14,
+        "zigzagDegrees": 0,
+        "segments": 4,
+        "sides": 5
+      },
+      {
+        "count": 0,
+        "perMeter": 5.0,
+        "start": 0.3,
+        "end": 1.0,
+        "angleDegrees": 40,
+        "angleLowDegrees": 45,
+        "angleSpreadDegrees": 12,
+        "phyllotaxisDegrees": 160,
+        "lengthShare": 0.35,
+        "lengthSpread": 0.3,
+        "lengthTaper": 0.3,
+        "radiusShare": 0.55,
+        "curveDegrees": 6,
+        "wanderDegrees": 6,
+        "droopDegrees": 0,
+        "riseDegrees": 18,
+        "zigzagDegrees": 0,
+        "segments": 3,
+        "sides": 4
+      }
+    ],
+    "leafOrder": 3,
+    "leafStartShare": 0.55,
+    "leavesPerPlant": 30000,
+    "leafAngleDegrees": 35,
+    "leafDroop": 0.05,
+    "leafFold": 0.0,
+    "leafCurl": 0.02,
+    "flowerOrder": 2,
+    "flowersPerCluster": [
+      1,
+      3
+    ],
+    "pedicelMeters": 0.01,
+    "secondColourShare": 0.0
+  },
+  "note": "On the rockery, as the Chenghuai sheet draws it. Each leaf is one needle, set in the last order's outer shoots. The museum shows it in early summer, Mangzhong to Xiazhi (June). Its trunk and branches take living.stem, the palette's stem tissue, with the bark's colour on their vertices, until Matter records a bark tissue."
+}

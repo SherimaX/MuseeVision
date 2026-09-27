@@ -1,0 +1,34 @@
+{
+  "$sources": "A test garden after the Chenghuai garden, the Hall of Light's orchard and the Salon's pergola: a 10 m square of ground under moss with a round pool in it, a birch at its point, a few bamboo culms, a clipped yew along a line, a patch of sward, a vine trained up a post from its planter, and a bed that counts more plants than it plots.",
+  "stage": "garden",
+  "water": [
+    {
+      "key": "garden.pool", "anchor": "garden.pool", "body": "",
+      "outline": { "ellipse": [1.0, 1.0] }, "depth": 0.4, "freeboard": 0.12,
+      "material": "water.still", "working": "still.clear", "history": "weathered"
+    }
+  ],
+  "beds": [
+    { "bed": "garden.ground", "species": "Haplocladium microphyllum", "count": 1, "working": "grown", "history": "weathered", "body": "",
+      "ground": { "material": "accent.site-geology", "history": "weathered", "working": "topsoil.bare" },
+      "outline": { "polygon": [[0.0, 0.0], [10.0, 0.0], [10.0, 10.0], [0.0, 10.0]] } },
+    { "bed": "garden.birch", "species": "Betula pendula", "count": 1, "working": "grown", "history": "weathered", "body": "",
+      "point": [8.0, 2.0], "height": 9.3, "crownCentre": 6.8, "crownRadii": [1.9, 2.5] },
+    { "bed": "garden.bamboo", "species": "Phyllostachys aureosulcata", "count": 3, "spacing": 0.3, "working": "grown", "history": "weathered",
+      "points": [[1.2, 8.3], [1.6, 8.7], [1.8, 8.4]] },
+    { "bed": "garden.hedge", "species": "Taxus baccata", "count": 5, "spacing": 0.5, "working": "grown", "history": "weathered", "body": "",
+      "line": [[3.0, 10.2], [5.0, 10.2]],
+      "clipped": { "width": 0.45, "height": 1.5, "batter": 0.02, "shoulder": 0.06, "coreInset": 0.065, "ends": "open" } },
+    { "bed": "garden.sward", "species": "Festuca rubra", "count": 1, "working": "grown", "history": "weathered", "body": "",
+      "outline": { "polygon": [[12.0, 0.0], [13.0, 0.0], [13.0, 2.0], [12.0, 2.0]] } },
+    { "bed": "garden.planter", "species": "Vitis vinifera", "count": 1, "working": "grown", "history": "weathered", "body": "",
+      "ground": { "material": "accent.site-geology", "working": "topsoil.potted", "history": "weathered" },
+      "outline": { "polygon": [[11.71, 7.71], [12.29, 7.71], [12.29, 8.29], [11.71, 8.29]] },
+      "trained": [
+        { "path": [[12.0, 8.0, 0.46], [12.0, 8.3, 1.0], [12.0, 8.3, 2.3]] },
+        { "path": [[12.0, 8.3, 2.3], [13.5, 8.3, 2.3]] }
+      ] },
+    { "bed": "garden.stray", "species": "Knautia arvensis", "count": 3, "working": "grown", "history": "weathered", "body": "",
+      "points": [[1.0, 1.0], [1.3, 1.2]] }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "$sources": [
+    "The species: Taxus baccata L., yew: an evergreen tree or shrub, the needles linear, 1-3 cm by 2-3 mm, dark green above, paler beneath, spirally set but spreading in two ranks on the side shoots; clipped, it forms a dense hedge (C. Stace, New Flora of the British Isles, 4th ed., Cambridge 2019, Taxaceae).",
+    "The clipped hedge: the as-built museum's yew hedges (windows/Source/MuseeVision/Nature/MuseeHedge.cpp, NarrowYewRun): needles 1.6-2.6 cm, 30 000 to a square metre of clipped surface, the season's new growth paler at the skin, a dark core of bare twigs."
+  ],
+  "key": "taxus-baccata",
+  "name": "Taxus baccata",
+  "common": "Yew",
+  "form": "hedge",
+  "organs": [
+    {
+      "organ": "trunk",
+      "material": "living.stem"
+    },
+    {
+      "organ": "leaf",
+      "material": "living.leaf"
+    }
+  ],
+  "reachMeters": [
+    0.2,
+    0.3
+  ],
+  "leavesPerSquareMeter": [
+    28000,
+    32000
+  ],
+  "leafLengthMeters": [
+    0.016,
+    0.026
+  ],
+  "leafWidthMeters": [
+    0.002,
+    0.003
+  ],
+  "floweringShare": 0.0,
+  "leafColours": [
+    "#233A22",
+    "#2A4226",
+    "#1E3420",
+    "#2E4628"
+  ],
+  "leafAgeColours": [
+    "#5A7A36"
+  ],
+  "stemColours": [
+    "#2E241C"
+  ],
+  "note": "Clipped to the section its bed gives; its core, the bare twigs inside, takes living.stem. The museum shows it in early summer, Mangzhong to Xiazhi (June)."
+}

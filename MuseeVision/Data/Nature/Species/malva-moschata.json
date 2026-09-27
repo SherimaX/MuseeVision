@@ -1,0 +1,81 @@
+{
+  "$sources": [
+    "The species: Malva moschata L., musk mallow: a perennial 30-80 cm, the stem leaves deeply palmately divided; flowers 3-6 cm, pale pink (rarely white), the five petals notched, flowering July to August (C. Stace, New Flora of the British Isles, 4th ed., Cambridge 2019, Malvaceae).",
+    "The plants at the Hall of Light's plotted points (the as-built meadow, HallOfLightPlanting.swift and nature.py:922-930), heights 0.4-0.9."
+  ],
+  "key": "malva-moschata",
+  "name": "Malva moschata",
+  "common": "Musk mallow",
+  "form": "herb",
+  "organs": [
+    {
+      "organ": "leaf",
+      "material": "living.leaf"
+    },
+    {
+      "organ": "stem",
+      "material": "living.stem"
+    },
+    {
+      "organ": "flower",
+      "material": "living.petal"
+    },
+    {
+      "organ": "eye",
+      "material": "living.stamen"
+    }
+  ],
+  "reachMeters": [
+    0.05,
+    0.15
+  ],
+  "leavesPerShoot": [
+    4,
+    8
+  ],
+  "leafLengthMeters": [
+    0.05,
+    0.1
+  ],
+  "leafWidthMeters": [
+    0.04,
+    0.08
+  ],
+  "shootsPerPlant": [
+    1,
+    3
+  ],
+  "flowerHeightMeters": [
+    0.4,
+    0.75
+  ],
+  "flowersPerPlant": [
+    2,
+    5
+  ],
+  "flowerSizeMeters": [
+    0.035,
+    0.055
+  ],
+  "flowerShape": "flat",
+  "floweringShare": 0.25,
+  "leafColours": [
+    "#557A3A",
+    "#5E823E"
+  ],
+  "stemColours": [
+    "#6A843E"
+  ],
+  "flowerColours": [
+    "#F4DADA",
+    "#D9A5A0"
+  ],
+  "eyeColours": [
+    "#F2E4D8"
+  ],
+  "note": "Pink, as the sheet colours it (0xD9A5A0); its first flowers at the end of June. The museum shows it in early summer, Mangzhong to Xiazhi (June).",
+  "petalsPerFlower": [
+    5,
+    5
+  ]
+}

@@ -1,0 +1,84 @@
+{
+  "$sources": [
+    "The species: Narcissus poeticus L., pheasant's-eye: a bulb, the leaves linear, 20-45 cm by 6-10 mm; a single flower 4.5-7 cm on a scape, the perianth white, spreading, the corona a shallow cup, yellow with a red rim; flowering April to May, the leaves dying back by June (C. Stace, New Flora of the British Isles, 4th ed., Cambridge 2019, Amaryllidaceae).",
+    "The bulbs at the Hall of Light's plotted points (the as-built orchard, HallOfLightPlanting.swift), heights 0.20-0.35."
+  ],
+  "key": "narcissus-poeticus",
+  "name": "Narcissus poeticus",
+  "common": "Pheasant's-eye daffodil",
+  "form": "herb",
+  "organs": [
+    {
+      "organ": "leaf",
+      "material": "living.leaf"
+    },
+    {
+      "organ": "stem",
+      "material": "living.stem"
+    },
+    {
+      "organ": "flower",
+      "material": "living.petal"
+    },
+    {
+      "organ": "eye",
+      "material": "living.stamen"
+    }
+  ],
+  "reachMeters": [
+    0.05,
+    0.15
+  ],
+  "leavesPerShoot": [
+    3,
+    4
+  ],
+  "leafLengthMeters": [
+    0.2,
+    0.32
+  ],
+  "leafWidthMeters": [
+    0.006,
+    0.01
+  ],
+  "shootsPerPlant": [
+    1,
+    1
+  ],
+  "flowerHeightMeters": [
+    0.2,
+    0.35
+  ],
+  "flowersPerPlant": [
+    1,
+    1
+  ],
+  "flowerSizeMeters": [
+    0.045,
+    0.065
+  ],
+  "flowerShape": "flat",
+  "floweringShare": 0.0,
+  "leafColours": [
+    "#9A9A48",
+    "#A8A054",
+    "#8A8A42"
+  ],
+  "stemColours": [
+    "#8A8A48"
+  ],
+  "flowerColours": [
+    "#FFFFFA",
+    "#F8F6EC"
+  ],
+  "eyeColours": [
+    "#E0B040",
+    "#C8402A"
+  ],
+  "note": "Out of flower in June, its leaves yellowing as they die back after flowering. The museum shows it in early summer, Mangzhong to Xiazhi (June).",
+  "petalsPerFlower": [
+    6,
+    6
+  ],
+  "coronaShare": 0.15
+}

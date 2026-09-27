@@ -1,0 +1,84 @@
+{
+  "$sources": [
+    "The species: Narcissus pseudonarcissus L., wild daffodil: a bulb, the leaves linear, 12-35 cm by 5-12 mm, glaucous; a single nodding flower 3.5-6 cm, the perianth pale yellow, the corona a long trumpet, deeper yellow; flowering March to April, the leaves dying back by June (C. Stace, New Flora of the British Isles, 4th ed., Cambridge 2019, Amaryllidaceae).",
+    "The bulbs at the Hall of Light's plotted points (the as-built orchard, HallOfLightPlanting.swift), heights 0.20-0.35."
+  ],
+  "key": "narcissus-pseudonarcissus",
+  "name": "Narcissus pseudonarcissus",
+  "common": "Wild daffodil",
+  "form": "herb",
+  "organs": [
+    {
+      "organ": "leaf",
+      "material": "living.leaf"
+    },
+    {
+      "organ": "stem",
+      "material": "living.stem"
+    },
+    {
+      "organ": "flower",
+      "material": "living.petal"
+    },
+    {
+      "organ": "eye",
+      "material": "living.stamen"
+    }
+  ],
+  "reachMeters": [
+    0.05,
+    0.15
+  ],
+  "leavesPerShoot": [
+    3,
+    5
+  ],
+  "leafLengthMeters": [
+    0.15,
+    0.3
+  ],
+  "leafWidthMeters": [
+    0.006,
+    0.012
+  ],
+  "shootsPerPlant": [
+    1,
+    1
+  ],
+  "flowerHeightMeters": [
+    0.2,
+    0.35
+  ],
+  "flowersPerPlant": [
+    1,
+    1
+  ],
+  "flowerSizeMeters": [
+    0.035,
+    0.06
+  ],
+  "flowerShape": "flat",
+  "floweringShare": 0.0,
+  "leafColours": [
+    "#9A9A48",
+    "#A09A50",
+    "#8E8C44"
+  ],
+  "stemColours": [
+    "#8A8A48"
+  ],
+  "flowerColours": [
+    "#F4E6A0",
+    "#E6C77A"
+  ],
+  "eyeColours": [
+    "#E8B838",
+    "#F0C040"
+  ],
+  "note": "Out of flower in June, its leaves yellowing as they die back after flowering. The museum shows it in early summer, Mangzhong to Xiazhi (June).",
+  "petalsPerFlower": [
+    6,
+    6
+  ],
+  "coronaShare": 0.9
+}

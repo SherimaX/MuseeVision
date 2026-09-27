@@ -1,0 +1,53 @@
+{
+  "$sources": [
+    "The species: Vitis vinifera L., grape vine: a woody climber, the bark shredding; leaves 5-20 cm, palmately 3-5-lobed, cordate at the base; tendrils opposite the leaves; flowering June; trained on a support, it is pruned to its stem and canes (C. Stace, New Flora of the British Isles, 4th ed., Cambridge 2019, Vitaceae; Flora of China (Wu Zhengyi, P. H. Raven and Hong Deyuan, eds., Science Press and Missouri Botanical Garden, 1994-2013), vol. 12, Vitaceae).",
+    "The pergola's vines: the as-built pergola (windows/Source/MuseeVision/Salon/SalonStructure.cpp, 1113-1201): the stem 28 mm radius at the soil, 16 at the bars; canes 12 to 7 mm along the bars; leaf clusters every 0.16 m, 7-13 leaves of 9-16 cm, where a slow noise leaves gaps."
+  ],
+  "key": "vitis-vinifera",
+  "name": "Vitis vinifera",
+  "common": "Grape vine",
+  "form": "vine",
+  "organs": [
+    {
+      "organ": "trunk",
+      "material": "living.stem"
+    },
+    {
+      "organ": "stem",
+      "material": "living.stem"
+    },
+    {
+      "organ": "leaf",
+      "material": "living.leaf"
+    }
+  ],
+  "reachMeters": [
+    2.0,
+    3.5
+  ],
+  "stemRadiusMeters": [
+    0.007,
+    0.028
+  ],
+  "leavesPerMeter": [
+    45,
+    80
+  ],
+  "leafLengthMeters": [
+    0.09,
+    0.16
+  ],
+  "floweringShare": 0.0,
+  "leafColours": [
+    "#5E7A3A",
+    "#56733A",
+    "#668240"
+  ],
+  "leafAgeColours": [
+    "#9AA858"
+  ],
+  "stemColours": [
+    "#6E6254"
+  ],
+  "note": "Trained up the post by its planter, along the beam and out along the bars, as the Salon sheet trains it. Its inconspicuous June flowers are not grown. The museum shows it in early summer, Mangzhong to Xiazhi (June). Its trunk and branches take living.stem, the palette's stem tissue, with the bark's colour on their vertices, until Matter records a bark tissue."
+}

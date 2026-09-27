@@ -5,7 +5,9 @@
 
 /**
  * Light's step in furnishing a stage while Studio makes it (stage dresser order 40): it reads the stage's lighting
- * schedule and places each luminaire at its mount, on the moving body it rides, aimed and operated as the schedule says.
+ * schedule and places each luminaire at its mount, on the moving body it rides, aimed and operated as the schedule says,
+ * laid to its length (a line) or over its extent or zone (an areal face), and tagged with the piece it is set in and the
+ * surface it lights, where the schedule names them.
  * Anything the schedule names that doesn't exist is a finding.
  */
 namespace Musee::Light

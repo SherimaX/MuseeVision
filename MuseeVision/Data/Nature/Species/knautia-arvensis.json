@@ -1,0 +1,77 @@
+{
+  "$sources": [
+    "The species: Knautia arvensis (L.) Coult., field scabious: a perennial to 1 m, the basal leaves in a rosette, lanceolate to pinnatifid, 10-30 cm; flower heads flat, 1.5-4 cm, bluish lilac, on long stalks, flowering July to September (C. Stace, New Flora of the British Isles, 4th ed., Cambridge 2019, Dipsacaceae).",
+    "The plants at the Hall of Light's plotted points (the as-built meadow, HallOfLightPlanting.swift and nature.py:922-930), heights 0.4-0.9."
+  ],
+  "key": "knautia-arvensis",
+  "name": "Knautia arvensis",
+  "common": "Field scabious",
+  "form": "herb",
+  "organs": [
+    {
+      "organ": "leaf",
+      "material": "living.leaf"
+    },
+    {
+      "organ": "stem",
+      "material": "living.stem"
+    },
+    {
+      "organ": "flower",
+      "material": "living.petal"
+    },
+    {
+      "organ": "eye",
+      "material": "living.stamen"
+    }
+  ],
+  "reachMeters": [
+    0.05,
+    0.15
+  ],
+  "leavesPerShoot": [
+    4,
+    7
+  ],
+  "leafLengthMeters": [
+    0.1,
+    0.22
+  ],
+  "leafWidthMeters": [
+    0.02,
+    0.04
+  ],
+  "shootsPerPlant": [
+    1,
+    4
+  ],
+  "flowerHeightMeters": [
+    0.45,
+    0.85
+  ],
+  "flowersPerPlant": [
+    1,
+    4
+  ],
+  "flowerSizeMeters": [
+    0.03,
+    0.04
+  ],
+  "flowerShape": "head",
+  "floweringShare": 0.3,
+  "leafColours": [
+    "#4E6E36",
+    "#567639"
+  ],
+  "stemColours": [
+    "#5E7A3E"
+  ],
+  "flowerColours": [
+    "#B8A0C8",
+    "#A08AB0"
+  ],
+  "eyeColours": [
+    "#E8E0EA"
+  ],
+  "note": "Lilac heads, as the sheet colours them (0xA08AB0); coming into flower at the end of June. The museum shows it in early summer, Mangzhong to Xiazhi (June)."
+}

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "MuseeKey.h"
 
 #include "LightingRecords.generated.h"
 
@@ -21,6 +22,22 @@ struct FLightScheduleDaylight
 	/** Its daylight control from the catalogue, or `none`. */
 	UPROPERTY() FString Control;
 	UPROPERTY() FString Note;
+};
+
+/**
+ * A zone of a luminous surface laid round the stage's vertical axis through its origin (the Atrium's canopy): the ring
+ * between two radii, over the bearings from one to the other, clockwise from north (-y). A full ring or disc runs
+ * [0, 360].
+ */
+USTRUCT()
+struct FLightScheduleZone
+{
+	GENERATED_BODY()
+
+	/** The inner and outer radii, in metres. */
+	UPROPERTY() TArray<double> R;
+	/** The bearings it runs from and to, in degrees clockwise from north; it may pass north ([345, 15]). */
+	UPROPERTY() TArray<double> Bearing;
 };
 
 USTRUCT()
@@ -54,7 +71,29 @@ struct FLightScheduleLuminaire
 	 * it, a run at a point lies along the stage's x axis, and one on a mount along the mount's x axis.
 	 */
 	UPROPERTY() TArray<double> Along;
+	/**
+	 * For an areal type (a luminous ceiling's modules, edge-lit panes), the size [width, height] of the face it lights, in
+	 * metres: its width along the stage's x axis and its height along its y when the face is level (in general, across
+	 * and up the face). A luminaire has either an extent or a zone.
+	 */
+	UPROPERTY() TArray<double> Extent;
+	/** For an areal type, the zone of a curved or round field it lights, in place of an extent. */
+	UPROPERTY() FLightScheduleZone Zone;
+	/** The piece it is set flush in (a step light's kerb or stone), by its surface key. */
+	UPROPERTY() FMuseeKey Host;
+	/** The surface its light is for (the walk a step light grazes), by its surface key. */
+	UPROPERTY() FMuseeKey Surface;
 	UPROPERTY() FString Note;
+};
+
+/** When a target holds: while a mechanism stands at one of its stops (the Cube's car on its floor). */
+USTRUCT()
+struct FLightScheduleWhen
+{
+	GENERATED_BODY()
+
+	UPROPERTY(meta = (MuseeRequired)) FMuseeKey Mechanism;
+	UPROPERTY(meta = (MuseeRequired)) FString Stop;
 };
 
 USTRUCT()
@@ -64,9 +103,11 @@ struct FLightScheduleTarget
 
 	UPROPERTY(meta = (MuseeRequired)) FString Surface;
 	UPROPERTY() FString Class;
-	/** The target range, in lux. */
-	UPROPERTY() TArray<double> Lux;
+	/** The target range [least, most], in lux; either end may be open (`[50, null]`, at least 50 lx). */
+	UPROPERTY(meta = (MuseeRange)) TArray<double> Lux;
 	UPROPERTY() FString Source;
+	/** Checked only while its mechanism stands at its stop; always, without it. */
+	UPROPERTY() FLightScheduleWhen When;
 	UPROPERTY() FString Note;
 };
 
@@ -77,7 +118,8 @@ struct FLightScheduleDesign
 
 	UPROPERTY(meta = (MuseeRequired)) FString Brighter;
 	UPROPERTY(meta = (MuseeRequired)) FString Darker;
-	UPROPERTY() TArray<double> Ratio;
+	/** The range [least, most] of the brighter surface's luminance over the darker's; either end may be open. */
+	UPROPERTY(meta = (MuseeRange)) TArray<double> Ratio;
 	UPROPERTY() FString Note;
 };
 

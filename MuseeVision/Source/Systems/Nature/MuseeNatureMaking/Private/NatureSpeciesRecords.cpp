@@ -20,7 +20,7 @@ namespace Musee::NatureMaking
 		const FForm* Form = FindForm(Species.Form);
 		if (!Form)
 		{
-			return { FString::Printf(TEXT("its form '%s' is not water-lily, iris, sedge or forget-me-not"), *Species.Form.ToString()) };
+			return { FString::Printf(TEXT("its form '%s' is none of %s"), *Species.Form.ToString(), *FormNames()) };
 		}
 		TArray<FString> Out = Form->Faults(Species);
 		NeedRange(Species.ReachMeters, TEXT("reachMeters"), Out);

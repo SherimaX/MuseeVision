@@ -1,0 +1,75 @@
+{
+  "$sources": [
+    "The species: Nelumbo nucifera Gaertner, lian, sacred lotus: rhizome in the mud; leaves peltate, orbicular, 25-90 cm across, glaucous, raised above the water on prickly petioles 1-2 m, or floating when young; flowers solitary on peduncles above the leaves, 10-23 cm across, the petals pink to white; receptacle obconic, yellow; flowering June to August (Flora of China (Wu Zhengyi, P. H. Raven and Hong Deyuan, eds., Science Press and Missouri Botanical Garden, 1994-2013), vol. 6, Nelumbonaceae).",
+    "The plants in the Chenghuai pond: the as-built lotus (windows/Scripts/chenghuai_works.py, LOTUS): six plants 0.6-0.9 m across, flowers on two of them."
+  ],
+  "key": "nelumbo-nucifera",
+  "name": "Nelumbo nucifera",
+  "common": "Sacred lotus (莲)",
+  "form": "lotus",
+  "organs": [
+    {
+      "organ": "leaf",
+      "material": "living.leaf"
+    },
+    {
+      "organ": "stem",
+      "material": "living.stem"
+    },
+    {
+      "organ": "flower",
+      "material": "living.petal"
+    },
+    {
+      "organ": "eye",
+      "material": "living.stamen"
+    }
+  ],
+  "reachMeters": [
+    0.3,
+    0.45
+  ],
+  "leafLengthMeters": [
+    0.14,
+    0.25
+  ],
+  "leafHeightMeters": [
+    0.25,
+    0.6
+  ],
+  "flowerSizeMeters": [
+    0.12,
+    0.18
+  ],
+  "flowerHeightMeters": [
+    0.55,
+    0.8
+  ],
+  "shootsPerPlant": [
+    5,
+    9
+  ],
+  "flowersPerPlant": [
+    1,
+    2
+  ],
+  "floweringShare": 0.33,
+  "leafColours": [
+    "#5E8A52",
+    "#668E58",
+    "#557F4A"
+  ],
+  "leafEdgeColour": "#8AAA7A",
+  "stemColours": [
+    "#6A8A46"
+  ],
+  "flowerColours": [
+    "#F8E8EA",
+    "#E07898"
+  ],
+  "eyeColours": [
+    "#E8C040",
+    "#F0D46A"
+  ],
+  "note": "A young garden plant in the court pond: its leaves at the small end of the species' size and height. Two plants in six in flower, as the sheet plants them. The museum shows it in early summer, Mangzhong to Xiazhi (June)."
+}

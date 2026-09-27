@@ -536,3 +536,4 @@ scale.
   eased). §2, §6 and C-2, C-3, C-5 keep the eased figures.
 - **Panel mounts:** each `cube.panels.*` Mount's x is the way its face looks into the room, as Light reads a mount (its
   light leaves along x); the ceiling's and the floor's keep the stage's y.
+- Lighting.json, to the contract (K3-LIGHT-NATURE): the catalogue gaps are real types now, `light-field-panel.d65` (Light Field Lab SolidLight, an image panel lit by its picture, dark at its standby black level) and `pinspot.3000k` (ERCO Parscan 48V narrow spot, standing unlit until its 3000 K data sheet is read); each panel wall gives its face as an `extent`, 28.0 x 28.0 (40 x 40 modules at 0.700), the ceiling 28.0 x 26.46 (its 1,512 modules' area).

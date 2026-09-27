@@ -15,6 +15,8 @@
 #include "Serialization/JsonSerializer.h"
 #include "UObject/UnrealType.h"
 
+#include <limits>
+
 namespace Musee::Records
 {
 	namespace
@@ -83,6 +85,20 @@ namespace Musee::Records
 #endif
 		}
 
+		/**
+		 * Whether a field is a range [least, most] that may leave one end open (`meta = (MuseeRange)`). The mark is metadata,
+		 * which exists where records are made; a cooked game reads no open range.
+		 */
+		bool IsRange(const FProperty& Property)
+		{
+#if WITH_METADATA
+			const FArrayProperty* Array = CastField<FArrayProperty>(&Property);
+			return Array && CastField<FNumericProperty>(Array->Inner) && Property.HasMetaData(RangeMetadata);
+#else
+			return false;
+#endif
+		}
+
 		bool IsKey(const FProperty& Property)
 		{
 			const FStructProperty* Struct = CastField<FStructProperty>(&Property);
@@ -93,6 +109,15 @@ namespace Musee::Records
 		{
 			FString Why;
 			return FMuseeKey::IsValid(Text, &Why) || Reading.Fail(Where, FString::Printf(TEXT("'%s' is not a key: %s"), *Text, *Why));
+		}
+
+		/**
+		 * An optional key written empty, `""`: the none key, as the stage contract writes a field that names nothing (a bed
+		 * that rides no body). A required key is never empty.
+		 */
+		bool IsNoneKey(const FProperty& Property, const FJsonValue& Value)
+		{
+			return IsKey(Property) && !IsRequired(Property) && Value.Type == EJson::String && Value.AsString().IsEmpty();
 		}
 
 		/** The engine's vectors a record may write as a plain array of numbers: [x, y, z] and [x, y]. */
@@ -129,6 +154,42 @@ namespace Musee::Records
 		}
 
 		bool ValidateObject(const UStruct& Type, const FJsonObject& Object, FReading& Reading, const FString& Where);
+
+		/**
+		 * A range [least, most]: two numbers, least first, either of which may be null for an open end (`[50, null]` is at
+		 * least 50), but not both.
+		 */
+		bool ValidateRange(const FJsonValue& Value, FReading& Reading, const FString& Where)
+		{
+			if (!Expect(Value, EJson::Array, Reading, Where, TEXT("a range [least, most]")))
+			{
+				return false;
+			}
+			const TArray<TSharedPtr<FJsonValue>>& Ends = Value.AsArray();
+			if (Ends.Num() != 2)
+			{
+				return Reading.Fail(Where, FString::Printf(TEXT("has %d numbers where a range [least, most] is written"), Ends.Num()));
+			}
+			int32 Open = 0;
+			for (int32 Index = 0; Index < 2; ++Index)
+			{
+				const bool bOpen = !Ends[Index].IsValid() || Ends[Index]->IsNull();
+				Open += bOpen ? 1 : 0;
+				if (!bOpen && !Expect(*Ends[Index], EJson::Number, Reading, Element(Where, Index), TEXT("a number or null")))
+				{
+					return false;
+				}
+			}
+			if (Open == 2)
+			{
+				return Reading.Fail(Where, TEXT("is open at both ends; a range bounds at least one side"));
+			}
+			if (Open == 0 && Ends[0]->AsNumber() > Ends[1]->AsNumber())
+			{
+				return Reading.Fail(Where, TEXT("has its least end above its most"));
+			}
+			return true;
+		}
 
 		bool ValidateElement(const FProperty& Property, const FJsonValue& Value, FReading& Reading, const FString& Where);
 
@@ -247,7 +308,23 @@ namespace Musee::Records
 				{
 					return Reading.Fail(FieldWhere, FString::Printf(TEXT("%s has no field of this name"), *CppName(Type)));
 				}
-				if (Field.Value.IsValid() && !Field.Value->IsNull() && !ValidateElement(*Property, *Field.Value, Reading, FieldWhere))
+				if (!Field.Value.IsValid() || Field.Value->IsNull())
+				{
+					continue;
+				}
+				if (IsRange(*Property))
+				{
+					if (!ValidateRange(*Field.Value, Reading, FieldWhere))
+					{
+						return false;
+					}
+					continue;
+				}
+				if (IsNoneKey(*Property, *Field.Value))
+				{
+					continue;
+				}
+				if (!ValidateElement(*Property, *Field.Value, Reading, FieldWhere))
 				{
 					return false;
 				}
@@ -312,6 +389,20 @@ namespace Musee::Records
 			if (!Value.IsValid() || Value->IsNull())
 			{
 				return Value;
+			}
+			if (IsRange(Property) && Value->Type == EJson::Array)
+			{
+				// An open end is unbounded on its side: -infinity below, +infinity above.
+				TArray<TSharedPtr<FJsonValue>> Ends = Value->AsArray();
+				for (int32 Index = 0; Index < Ends.Num(); ++Index)
+				{
+					if (!Ends[Index].IsValid() || Ends[Index]->IsNull())
+					{
+						const double Unbounded = std::numeric_limits<double>::infinity();
+						Ends[Index] = MakeShared<FJsonValueNumber>(Index == 0 ? -Unbounded : Unbounded);
+					}
+				}
+				return MakeShared<FJsonValueArray>(Ends);
 			}
 			const FProperty* Inner = nullptr;
 			if (const FArrayProperty* Array = CastField<FArrayProperty>(&Property)) { Inner = Array->Inner; }

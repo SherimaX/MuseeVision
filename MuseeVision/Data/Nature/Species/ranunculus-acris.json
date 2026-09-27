@@ -1,0 +1,81 @@
+{
+  "$sources": [
+    "The species: Ranunculus acris L., meadow buttercup: a perennial to 1 m, the basal leaves palmately 3-7-lobed; flowers 1.5-2.5 cm, the five petals glossy yellow, cupped; flowering May to August (C. Stace, New Flora of the British Isles, 4th ed., Cambridge 2019, Ranunculaceae).",
+    "The plants at the Hall of Light's plotted points (the as-built meadow, HallOfLightPlanting.swift and nature.py:922-930), heights 0.4-0.9."
+  ],
+  "key": "ranunculus-acris",
+  "name": "Ranunculus acris",
+  "common": "Meadow buttercup",
+  "form": "herb",
+  "organs": [
+    {
+      "organ": "leaf",
+      "material": "living.leaf"
+    },
+    {
+      "organ": "stem",
+      "material": "living.stem"
+    },
+    {
+      "organ": "flower",
+      "material": "living.petal"
+    },
+    {
+      "organ": "eye",
+      "material": "living.stamen"
+    }
+  ],
+  "reachMeters": [
+    0.05,
+    0.15
+  ],
+  "leavesPerShoot": [
+    4,
+    7
+  ],
+  "leafLengthMeters": [
+    0.05,
+    0.1
+  ],
+  "leafWidthMeters": [
+    0.04,
+    0.08
+  ],
+  "shootsPerPlant": [
+    2,
+    4
+  ],
+  "flowerHeightMeters": [
+    0.4,
+    0.8
+  ],
+  "flowersPerPlant": [
+    3,
+    8
+  ],
+  "flowerSizeMeters": [
+    0.018,
+    0.025
+  ],
+  "flowerShape": "cup",
+  "floweringShare": 0.9,
+  "leafColours": [
+    "#4E7236",
+    "#557A3A"
+  ],
+  "stemColours": [
+    "#6A8A3E"
+  ],
+  "flowerColours": [
+    "#F2D24A",
+    "#E6C77A"
+  ],
+  "eyeColours": [
+    "#C8B040"
+  ],
+  "note": "Yellow, as the sheet colours it (0xE6C77A); in full flower in June. The museum shows it in early summer, Mangzhong to Xiazhi (June).",
+  "petalsPerFlower": [
+    5,
+    5
+  ]
+}

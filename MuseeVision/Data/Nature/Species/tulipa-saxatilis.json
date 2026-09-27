@@ -1,0 +1,81 @@
+{
+  "$sources": [
+    "The species: Tulipa saxatilis Sieber ex Spreng., a stoloniferous tulip of Crete: leaves 2-4, lanceolate, shining, 15-25 cm by 1.5-2.5 cm; flowers 1-3, lilac-pink with a yellow base, the tepals 4-5.5 cm, cupped; flowering April (W. Blunt and C. Grey-Wilson, Flora of Crete, and the RHS Plant Finder).",
+    "The bulbs at the Hall of Light's plotted points (the as-built orchard, HallOfLightPlanting.swift), heights 0.20-0.35."
+  ],
+  "key": "tulipa-saxatilis",
+  "name": "Tulipa saxatilis",
+  "common": "Cretan tulip",
+  "form": "herb",
+  "organs": [
+    {
+      "organ": "leaf",
+      "material": "living.leaf"
+    },
+    {
+      "organ": "stem",
+      "material": "living.stem"
+    },
+    {
+      "organ": "flower",
+      "material": "living.petal"
+    },
+    {
+      "organ": "eye",
+      "material": "living.stamen"
+    }
+  ],
+  "reachMeters": [
+    0.05,
+    0.15
+  ],
+  "leavesPerShoot": [
+    2,
+    4
+  ],
+  "leafLengthMeters": [
+    0.15,
+    0.25
+  ],
+  "leafWidthMeters": [
+    0.015,
+    0.025
+  ],
+  "shootsPerPlant": [
+    1,
+    2
+  ],
+  "flowerHeightMeters": [
+    0.2,
+    0.3
+  ],
+  "flowersPerPlant": [
+    1,
+    2
+  ],
+  "flowerSizeMeters": [
+    0.06,
+    0.09
+  ],
+  "flowerShape": "cup",
+  "floweringShare": 0.0,
+  "leafColours": [
+    "#9AA04E",
+    "#A8A858"
+  ],
+  "stemColours": [
+    "#8A9048"
+  ],
+  "flowerColours": [
+    "#F4D8E4",
+    "#D9A5A0"
+  ],
+  "eyeColours": [
+    "#E8C040"
+  ],
+  "note": "Out of flower in June, its leaves yellowing as they die back after flowering. The museum shows it in early summer, Mangzhong to Xiazhi (June).",
+  "petalsPerFlower": [
+    6,
+    6
+  ]
+}

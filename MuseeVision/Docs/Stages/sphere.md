@@ -487,3 +487,4 @@ the Cube's panels are the flat kind.
   at `orientation` 5 lx. The "building hidden" sky mode is retired: the sky is a display on the Sphere's own shell.
 - **Materials follow the Story:** Crema Marfil mirror-polished platform (as built the Future's "mirror" travertine shader);
   mirror-polished bronze seats (as built dark bronze); pearl-lined blades; fluoropolymer pearl outdoors.
+- Lighting.json (K3-LIGHT-NATURE): the image luminaire names the real type `light-field-panel.d65`. An image panel is laid over a flat extent or a plan zone; a face curved to the sphere, and the celestial image source that feeds it, wait for Light's image work, so the entry stands as a finding until then.

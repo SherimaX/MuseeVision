@@ -6,5 +6,8 @@
 	"Outline": [[0.0, 0.0], [3.0, 0.0], [3.0, 2.0], [0.0, 2.0]],
 	"Path": [[0.0, 0.0, 0.0], { "X": 1.0, "Y": 2.0, "Z": 3.0 }],
 	"Marks": { "east": [4.15, 0.0] },
-	"Labels": ["The east mark", { "key": "survey.west", "source": "The west mark" }]
+	"Labels": ["The east mark", { "key": "survey.west", "source": "The west mark" }],
+	"Lux": [50, null],
+	"Ratio": [null, 3.0],
+	"Body": ""
 }

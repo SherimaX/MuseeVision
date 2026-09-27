@@ -31,6 +31,10 @@ struct FLightOutputRecord
 
 	UPROPERTY() double LuminousFluxLumens = -1.0;
 	UPROPERTY() double LuminousFluxLumensPerMeter = -1.0;
+	/** An areal luminaire's flux per square metre of its face (a luminous ceiling). */
+	UPROPERTY() double LuminousFluxLumensPerSquareMeter = -1.0;
+	/** An image panel's luminance at its peak white. */
+	UPROPERTY() double PeakLuminanceCandelaPerSquareMeter = -1.0;
 	UPROPERTY() FString FluxBasis;
 	UPROPERTY() double LedFluxLumens = -1.0;
 	UPROPERTY() double LedPackageLumensPerMeter = -1.0;
