@@ -479,3 +479,9 @@ it: Site must compare volumes.
 - **Seat anchors** on the copings (sitting height as built; the approved pond edge's language).
 - **Retired:** the outdoor tone-compensation volume (the Eye owns it), the bamboo (with the Chinese Wing), the
   Sculpture Hall's dress, the Square (never built).
+- **Species, not palette keys (the contract, at the build):** Planting.json's beds named their material as
+  `living.<species>` palette keys (`living.festuca-rubra`, `living.betula-pendula`, `living.osmanthus-fragrans`,
+  `living.buxus-sempervirens`, `living.taxus-baccata`). Those keys are retired: each bed names its `species`, and Nature's
+  species record gives each organ its tissue, worked and aged as the bed's `working` and `history` say. The fifty beds'
+  `material` fields are dropped (§13's Living line is superseded); the lawn's `ground` (`accent.site-geology`,
+  topsoil) stays, as it is a soil, not a plant.
