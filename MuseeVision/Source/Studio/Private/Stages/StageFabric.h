@@ -26,7 +26,8 @@ namespace Musee::Studio
 	};
 
 	/**
-	 * The stage contract's first three steps and the shell check: describe the stage, solve the site plan for the ports it
+	 * The stage contract's first three steps and the shell check: describe the stage (a Ground stage with the buildings the
+	 * site plan stands on it), solve the site plan for the ports it
 	 * mates and add a blind for each it leaves unmated, make every drawing, gather the pieces the systems add, and check
 	 * each enclosure's pieces are closed solids (Form.Sealed). Everything found wrong is appended to OutFindings.
 	 */

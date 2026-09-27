@@ -9,6 +9,7 @@
 #include "SitePlan.h"
 #include "SiteReceivedWell.h"
 #include "SiteRoom.h"
+#include "SiteVolume.h"
 #include "Stages/MakeFinding.h"
 #include "Stages/StageMake.h"
 
@@ -63,6 +64,27 @@ namespace Musee::Studio
 						*Port.Key.ToString(), *Why)));
 				}
 			}
+		}
+
+		/**
+		 * A Ground stage describes itself again with the buildings standing on it: every building the site plan places, its
+		 * prisms moved into the ground's frame, so its soil gives way to them. A plan that doesn't read leaves it as it was;
+		 * that is the site make's finding.
+		 */
+		void ReceiveBuildings(const USiteRoom& Room, const FStageMakeOptions& Options, FStageFabric& Fabric)
+		{
+			const TValueOrError<FSitePlan, FString> Plan = Musee::Site::ReadPlan(Options.PlanRecord);
+			if (Plan.HasError())
+			{
+				return;
+			}
+			const FSiteRooms Rooms = DescribeRooms(Fabric.Dependencies);
+			TArray<FMuseeFinding> PlanFindings;
+			const FSiteLayout Layout = Musee::Site::Solve(Plan.GetValue(), Rooms.Ports, PlanFindings);
+			FSiteDescription Received;
+			Received.ReceivedPrisms = Musee::Site::PlacedPrisms(Room.StageKey(), Rooms.Footprints, Layout);
+			Room.Describe(Received);
+			Fabric.Description = MoveTemp(Received);
 		}
 
 		/** A made piece's triangles in the stage's frame, as it is drawn (its body at its anchor's frame), metres. */
@@ -151,6 +173,10 @@ namespace Musee::Studio
 		FStageFabric Fabric;
 		FMuseeDependencySet::FScope Reading(Fabric.Dependencies);
 		Room.Describe(Fabric.Description);
+		if (Fabric.Description.Footprint.Kind == ESiteFootprintKind::Ground)
+		{
+			ReceiveBuildings(Room, Options, Fabric);
+		}
 		FSiteDescription& Description = Fabric.Description;
 		if (!(Description.Stage == Room.StageKey()))
 		{

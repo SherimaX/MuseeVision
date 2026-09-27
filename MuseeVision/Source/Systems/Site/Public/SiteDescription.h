@@ -30,7 +30,8 @@ struct FSiteBarrier
  * Everything a stage says about itself, in its own frame and in metres: which stage it is, the ground it stands on,
  * the spaces it encloses and their openings, the ports where it meets other stages, the anchors the systems furnish,
  * and its pieces as Form drawings. It holds no exposure, no light level, no finish override, no world position and no
- * other stage: those belong to the systems, the schedules and the site plan.
+ * other stage: those belong to the systems, the schedules and the site plan. The one exception is what a Ground stage
+ * receives before it describes itself: the volumes of the buildings standing on it.
  */
 struct FSiteDescription
 {
@@ -41,6 +42,13 @@ struct FSiteDescription
 	FText DisplayName;
 
 	FSiteFootprint Footprint;
+
+	/**
+	 * Handed to a Ground stage (the grounds) before it describes itself: the prisms of every building the site plan
+	 * places, moved into the ground's frame, so its soil gives way to them (Site::PlacedPrisms). Studio fills it; a
+	 * building receives nothing, and describes itself the same without it.
+	 */
+	TArray<FSitePrism> ReceivedPrisms;
 
 	TArray<FFormEnclosure> Enclosures;
 

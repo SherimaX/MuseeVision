@@ -148,6 +148,25 @@ namespace Musee::Site::Tests
 		TestEqual(TEXT("a mast part is admitted"), PartOf(Down.Well, TEXT("mast.column")), FName(TEXT("mast")));
 		return true;
 	}
-}
 
+	IMPLEMENT_SIMPLE_AUTOMATION_TEST(FSitePlacedPrismsTest, "Musee.Site.PlacedPrisms", Flags)
+	bool FSitePlacedPrismsTest::RunTest(const FString& Parameters)
+	{
+		// The grounds at (10, 0, 0) receive a building placed at (0, 20, -1), and not another ground, nor themselves.
+		FSiteFootprint Ground = Stacked(100.0, -0.3, 13.0);
+		Ground.Kind = ESiteFootprintKind::Ground;
+		TMap<FMuseeKey, FSiteFootprint> Footprints;
+		Footprints.Add(FMuseeKey(TEXT("grounds")), Ground);
+		Footprints.Add(FMuseeKey(TEXT("hall")), Stacked(2.0, -0.5, 6.0));
+		const FSiteLayout Layout = Placed({{TEXT("grounds"), FVector(10.0, 0.0, 0.0)}, {TEXT("hall"), FVector(0.0, 20.0, -1.0)}});
+		const TArray<FSitePrism> Received = PlacedPrisms(FMuseeKey(TEXT("grounds")), Footprints, Layout);
+		if (TestEqual(TEXT("the grounds receive the hall's one prism"), Received.Num(), 1))
+		{
+			TestTrue(TEXT("moved into the grounds' frame"), Received[0].OutlineMeters[0].Equals(FVector2D(-12.0, 18.0), 1e-12)
+				&& Received[0].BottomMeters == -1.5 && Received[0].TopMeters == 5.0);
+		}
+		TestTrue(TEXT("a stage not placed receives nothing"), PlacedPrisms(FMuseeKey(TEXT("elsewhere")), Footprints, Layout).IsEmpty());
+		return true;
+	}
+}
 #endif

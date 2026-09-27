@@ -161,6 +161,34 @@ namespace Musee::Site
 		return Longest;
 	}
 
+	TArray<FSitePrism> PlacedPrisms(const FMuseeKey& Receiver, const TMap<FMuseeKey, FSiteFootprint>& Footprints, const FSiteLayout& Layout)
+	{
+		TArray<FSitePrism> Out;
+		const FVector* At = Layout.TranslationsMeters.Find(Receiver);
+		if (!At)
+		{
+			return Out;
+		}
+		TArray<FMuseeKey> Buildings;
+		for (const TPair<FMuseeKey, FSiteFootprint>& Entry : Footprints)
+		{
+			if (Entry.Value.Kind == ESiteFootprintKind::Building && Layout.TranslationsMeters.Contains(Entry.Key)) { Buildings.Add(Entry.Key); }
+		}
+		Buildings.Sort([](const FMuseeKey& A, const FMuseeKey& B) { return A.ToString() < B.ToString(); });
+		for (const FMuseeKey& Building : Buildings)
+		{
+			const FVector By = Layout.TranslationsMeters[Building] - *At;
+			for (FSitePrism Prism : Footprints[Building].PrismsOrOutline())
+			{
+				Prism.OutlineMeters = Moved(Prism.OutlineMeters, FVector2D(By));
+				Prism.BottomMeters += By.Z;
+				Prism.TopMeters += By.Z;
+				Out.Add(MoveTemp(Prism));
+			}
+		}
+		return Out;
+	}
+
 	TArray<FMuseeFinding> CheckOverlaps(const TMap<FMuseeKey, FSiteFootprint>& Footprints, const FSiteLayout& Layout)
 	{
 		TArray<FMuseeKey> Stages;

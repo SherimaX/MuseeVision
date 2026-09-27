@@ -29,4 +29,12 @@ namespace Musee::Site
 	 * is a finding drawn by the later of the two stages by key.
 	 */
 	[[nodiscard]] MUSEESITE_API TArray<FMuseeFinding> CheckOverlaps(const TMap<FMuseeKey, FSiteFootprint>& Footprints, const FSiteLayout& Layout);
+
+	/**
+	 * The prisms of every Building the layout places, moved into the frame of the placed stage Receiver: what a Ground
+	 * stage receives (FSiteDescription::ReceivedPrisms). Empty when the receiver isn't placed. In the order of the
+	 * buildings' keys.
+	 */
+	[[nodiscard]] MUSEESITE_API TArray<FSitePrism> PlacedPrisms(const FMuseeKey& Receiver, const TMap<FMuseeKey, FSiteFootprint>& Footprints,
+		const FSiteLayout& Layout);
 }
