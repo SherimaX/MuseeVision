@@ -68,24 +68,24 @@ namespace Musee::ArtMaking
 		Face.Write(OutFace);
 
 		FFormMesh Linen;
-		const double Depth = StretcherDepthMeters - HangingGapMeters;
+		const double Depth = StretcherDepthMeters - Canvas.BackMeters;
 		for (const double Z : { Bottom, Top })
 		{
-			Strip(Linen, Across, [&](const FWallPath::FStation& At, int32 Side) { return Height(At, Side == 0 ? HangingGapMeters : StretcherDepthMeters, Z); },
+			Strip(Linen, Across, [&](const FWallPath::FStation& At, int32 Side) { return Height(At, Side == 0 ? Canvas.BackMeters : StretcherDepthMeters, Z); },
 				[&](const FWallPath::FStation&) { return Z == Bottom ? -Up : Up; },
 				[&](double Along, int32 Side) { return FVector2D(Along, Side * Depth); });
 		}
-		Strip(Linen, Across, [&](const FWallPath::FStation& At, int32 Side) { return Height(At, HangingGapMeters, Side == 0 ? Bottom : Top); },
+		Strip(Linen, Across, [&](const FWallPath::FStation& At, int32 Side) { return Height(At, Canvas.BackMeters, Side == 0 ? Bottom : Top); },
 			[](const FWallPath::FStation& At) { return -At.Out; },
 			[&](double Along, int32 Side) { return FVector2D(Along, Side * Canvas.HeightMeters); });
 		for (int32 End = 0; End < 2; ++End)
 		{
 			const FWallPath::FStation& At = End == 0 ? Across.At[0] : Across.At.Last();
 			const FVector Normal = End == 0 ? -At.Along : At.Along;
-			const int32 A = Linen.AddVertex(Height(At, HangingGapMeters, Bottom), Normal, FVector2D(0.0, 0.0));
+			const int32 A = Linen.AddVertex(Height(At, Canvas.BackMeters, Bottom), Normal, FVector2D(0.0, 0.0));
 			const int32 B = Linen.AddVertex(Height(At, StretcherDepthMeters, Bottom), Normal, FVector2D(Depth, 0.0));
 			const int32 C = Linen.AddVertex(Height(At, StretcherDepthMeters, Top), Normal, FVector2D(Depth, Canvas.HeightMeters));
-			const int32 D = Linen.AddVertex(Height(At, HangingGapMeters, Top), Normal, FVector2D(0.0, Canvas.HeightMeters));
+			const int32 D = Linen.AddVertex(Height(At, Canvas.BackMeters, Top), Normal, FVector2D(0.0, Canvas.HeightMeters));
 			Linen.AddQuad(A, B, C, D);
 		}
 		Linen.Write(OutLinen);

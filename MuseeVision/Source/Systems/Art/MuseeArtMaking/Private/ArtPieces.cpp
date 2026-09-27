@@ -83,7 +83,7 @@ namespace Musee::ArtMaking
 		 * The moulded frame round a canvas, in the finish of the plan's frame surface, and on a mesh the hooks it hangs by;
 		 * false with a finding when they can't be made.
 		 */
-		bool MakeFrame(FObjectMaking& Making, const FArtHangEntry& Entry, bool bSplit, bool bCurved, const FMuseeFrame& Work,
+		bool MakeFrame(FObjectMaking& Making, const FArtHangEntry& Entry, bool bSplit, bool bCurved, const FMuseeFrame& Work, double Back,
 			TArray<FFormMadePiece>& OutPieces, TArray<FMuseeFinding>& OutFindings)
 		{
 			const TValueOrError<FArtMoulding, FString>& Moulding = Making.Moulding(Entry.FrameStyle);
@@ -99,8 +99,8 @@ namespace Musee::ArtMaking
 				return false;
 			}
 			const FVector2D Size(Entry.Size[0], Entry.Size[1]);
-			// The lip rests on the painted face; the back stands on the hanging gap, as the stretcher's does.
-			const FFrameDepth Depth{ StretcherDepthMeters, HangingGapMeters };
+			// The lip rests on the painted face; the back stands where the stretcher's does.
+			const FFrameDepth Depth{ StretcherDepthMeters, Back };
 			FFormDrawing Drawing = FrameDrawing(Moulding.GetValue(), Size, TopLeftOf(Work, Entry.Height + Size.Y), Depth, FramePieceName(Entry, bSplit), Entry.Frame);
 			Drawing.Collision = Collision::Solid.Profile();
 			Drawing.Drawer = TEXT("Art");
@@ -129,11 +129,13 @@ namespace Musee::ArtMaking
 			}
 			const FWallPath::FStation Start = Wall.At(Entry.Along);
 			FCanvasSpec Spec{ Entry.Along, Width, Entry.Height, Entry.Size[1], true, Canvas.ImageOffsetMeters };
+			// On a mesh the frame's eyes and hooks hold its back on the anchor's plane; on a wall it stands on its hanging plates.
+			Spec.BackMeters = MeshOf(Making.Hang.Meshes, Entry.Anchor) ? MeshBackMeters : HangingGapMeters;
 			// The image reads left to right as seen from the room, whichever way the wall's path runs.
 			Spec.bReadsWithPath = FVector::DotProduct(Start.Along, FVector::CrossProduct(Start.Out, FVector::UpVector)) > 0.0;
 			const FMuseeFrame Frame = WorkFrame(Spec.bReadsWithPath ? Start : Wall.At(Entry.Along + Width));
 			const bool bSplit = Plan.IsSplit();
-			if (!Entry.Frame.IsNone() && Entry.Frame != NoFrame && !MakeFrame(Making, Entry, bSplit, bCurved, Frame, OutPieces, OutFindings))
+			if (!Entry.Frame.IsNone() && Entry.Frame != NoFrame && !MakeFrame(Making, Entry, bSplit, bCurved, Frame, Spec.BackMeters, OutPieces, OutFindings))
 			{
 				return;
 			}

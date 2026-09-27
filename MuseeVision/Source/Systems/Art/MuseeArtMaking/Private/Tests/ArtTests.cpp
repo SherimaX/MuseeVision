@@ -466,7 +466,8 @@ bool FArtHooksTest::RunTest(const FString& Parameters)
 		TestTrue(TEXT("it has no eyes to hang by"), Findings[0].ToString().Contains(TEXT("hooks in its frame's back")));
 	}
 	const double Wall = -5.0;
-	const double Back = Wall + 0.002;
+	// On a mesh the frame's back stands on the anchor's plane, held by its eyes and hooks (reserve.md section 3.7).
+	const double Back = Wall;
 	const double Mesh = Wall - 0.0105;
 	for (const TCHAR* Index : { TEXT("1"), TEXT("2") })
 	{
@@ -480,11 +481,11 @@ bool FArtHooksTest::RunTest(const FString& Parameters)
 		TestTrue(TEXT("each a closed solid"), Musee::FormMaking::MeasureShell(*Hook).IsClosed() && Musee::FormMaking::MeasureShell(*Eye).IsClosed());
 		const FBox H = Tests::StageBox(*Hook);
 		const FBox E = Tests::StageBox(*Eye);
-		// The eye: a 4 mm ring of 2 mm wire lying level against the frame's back, a third of the 0.671 m frame down its 1.886 top.
+		// The eye: a 3 mm ring of 1.5 mm wire lying level against the frame's back, a third of the 0.671 m frame down its 1.886 top.
 		// Form draws a round of wire as a polygon, whose corners stand past the round by under a millimetre.
 		const double Polygon = 0.001;
 		TestEqual(TEXT("The eye's ring touches the frame's back"), E.Max.Y, Back, Polygon);
-		TestEqual(TEXT("and stands 8 mm off it"), E.GetSize().Y, 0.008, Polygon);
+		TestEqual(TEXT("and stands 6 mm off it"), E.GetSize().Y, 0.006, Polygon);
 		TestEqual(TEXT("a third of the frame down"), E.GetCenter().Z, 1.3100 + 0.48 + 0.0957 - (0.48 + 2.0 * 0.0957) / 3.0, 2e-4);
 		const double Gap = (E.GetCenter().X - 0.1) / 0.025 - 0.5;
 		TestEqual(TEXT("halfway between two uprights"), Gap, FMath::RoundToDouble(Gap), 1e-6);
@@ -497,7 +498,7 @@ bool FArtHooksTest::RunTest(const FString& Parameters)
 		TestTrue(TEXT("its lower bend round the eye's far wire"), H.Min.Z < E.Min.Z && H.Min.Y < E.Min.Y);
 	}
 	const FFormMadePiece* Frame = Tests::FindPiece(Pieces, TEXT("canvas.monet-impression-sunrise.frame"));
-	TestTrue(TEXT("The frame hangs where it would on a wall"), Frame && FMath::IsNearlyEqual(Tests::StageBox(*Frame).Min.Y, Back, 1e-6));
+	TestTrue(TEXT("The frame's back stands on the mesh's anchor plane"), Frame && FMath::IsNearlyEqual(Tests::StageBox(*Frame).Min.Y, Back, 1e-6));
 
 	// Hung where it can't be: the mesh too close behind the frame's back for a hook's bends, no wire high enough.
 	const TValueOrError<FArtHooks, FString> Hooks = Musee::ReadRecord<FArtHooks>(FArtHooks::Record);

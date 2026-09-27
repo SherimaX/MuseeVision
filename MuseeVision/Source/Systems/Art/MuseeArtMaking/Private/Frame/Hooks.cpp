@@ -14,8 +14,8 @@ namespace Musee::ArtMaking
 		constexpr double PlaceTolerance = 1e-9;
 
 		/**
-		 * The hooks' section, in the wall's (out, up), from the anchor's plane out: the eye's ring touches the frame's back
-		 * and lies level; its far wire runs through the hook's lower bend, with play all round; the shank rises straight
+		 * The hooks' section, in the wall's (out, up), from the anchor's plane out: the frame's back stands on the plane
+		 * (MeshBackMeters), the eye's ring touches it and lies level; its far wire runs through the hook's lower bend, with play all round; the shank rises straight
 		 * from that bend to the upper bend, which rests over the level wire with play at its top and turns down behind it.
 		 */
 		struct FHookSection
@@ -44,7 +44,7 @@ namespace Musee::ArtMaking
 				, Play(Hooks.PlayMeters)
 			{
 				RingRadius = 0.5 * Hooks.EyeInsideMeters + Eye;
-				RingOut = HangingGapMeters - Eye - RingRadius;
+				RingOut = MeshBackMeters - Eye - RingRadius;
 				LowerOut = RingOut - RingRadius;
 				LowerRadius = Eye + Hook + Play;
 				ShankOut = LowerOut - LowerRadius;

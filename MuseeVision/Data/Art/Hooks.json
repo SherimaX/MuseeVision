@@ -2,7 +2,7 @@
   "$sources": [
     "The hardware a framed work hangs on a wire mesh by (a picture store's sliding racks, Data/Stages/reserve/Hang.json): first values from framers' and store fitters' practice, none measured on the museum's works.",
     "The S-hooks: bent from 2 mm round wire, as the small S-hooks a store hangs framed works on its racks' mesh by; one through the screw eye in each side of the frame's back, the upper bend over a level wire of the mesh, passing its uprights halfway between two.",
-    "The screw eyes: 2 mm wire, a 4 mm ring, screwed into the back of the frame's sides with the ring lying level against the back, a third of the frame's height down from its top (the framers' rule for a frame's hangers, so the work hangs close to what it hangs on).",
+    "The screw eyes: 1.5 mm wire, a 3 mm ring, screwed into the back of the frame's sides with the ring lying level against the back, a third of the frame's height down from its top (the framers' rule for a frame's hangers, so the work hangs close to what it hangs on). Small enough that the eye, the hook and its play round the level wire fit the 9 mm between a work's back and the front of the level wires on a rack's west face, where the backs stand 0.012 off the rack's centre plane and the level wires, 3.0 mm, lie on it (reserve.md section 3.7): 3.0 + 2 x 1.5 + 2.0 + 2 x 0.2 = 8.4 mm.",
     "A shank of at least 20 mm between the bends: each hook is as long as its eye's height asks, to the next level wire above; the ends turned on 5 mm past the bends; 0.2 mm of play where the wires link, so each hangs free."
   ],
   "$units": {
@@ -14,8 +14,8 @@
     "PlayMeters": "m"
   },
   "hookWireMeters": 0.002,
-  "eyeWireMeters": 0.002,
-  "eyeInsideMeters": 0.004,
+  "eyeWireMeters": 0.0015,
+  "eyeInsideMeters": 0.003,
   "eyeDropShare": 0.3333,
   "leastShankMeters": 0.02,
   "endMeters": 0.005,

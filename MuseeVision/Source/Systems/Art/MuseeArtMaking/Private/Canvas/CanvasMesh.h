@@ -11,6 +11,15 @@ namespace UE::Geometry
 
 namespace Musee::ArtMaking
 {
+	/** The stretcher's back stands 2 mm off the plaster on its hanging plates, as the as-built canvases did. */
+	inline constexpr double HangingGapMeters = 0.002;
+
+	/**
+	 * On a wire mesh a framed work's back stands on its Wall anchor's plane: its screw eyes and S-hooks hold it there, with
+	 * no hanging plates (reserve.md section 3.7: the works' backs 0.012 off the rack's centre plane, on the face's anchor).
+	 */
+	inline constexpr double MeshBackMeters = 0.0;
+
 	/**
 	 * A stretched canvas as it hangs: linen stretched over a wooden stretcher, its painted face standing the stretcher's
 	 * depth proud of the wall, the linen turned round the stretcher's sides (the tacking edges, where the tacks hold it)
@@ -28,6 +37,8 @@ namespace Musee::ArtMaking
 		bool bReadsWithPath = true;
 		/** Where the canvas's left edge falls in the work's image, from the image's left edge: the canvases before it. */
 		double ImageOffsetMeters = 0.0;
+		/** How far its stretcher's back stands off the wall: on its hanging plates, or on a mesh's plane (MeshBackMeters). */
+		double BackMeters = HangingGapMeters;
 	};
 
 	/**
@@ -35,9 +46,6 @@ namespace Musee::ArtMaking
 	 * stretcher bars run 38 to 45 mm deep).
 	 */
 	inline constexpr double StretcherDepthMeters = 0.04;
-
-	/** The stretcher's back stands 2 mm off the plaster on its hanging plates, as the as-built canvases did. */
-	inline constexpr double HangingGapMeters = 0.002;
 
 	/**
 	 * Builds a canvas's two surfaces, each in a piece frame given in the stage's frame, to the Form kernel's mesh
