@@ -1,6 +1,7 @@
 #include "Drawing/Draw.h"
 
 #include "Drawing/DrawnProfile.h"
+#include "Drawing/LaidRules.h"
 #include "Kernel/Extrude.h"
 #include "Kernel/MeshBuilder.h"
 #include "Kernel/PlanarFace.h"
@@ -10,16 +11,20 @@
 
 /**
  * Lay: a surface set out in units as the mason and the joiner set it out. The rule gives every unit's cell, joint centre
- * to joint centre, in the setting-out frame; each cell is cut to what is laid and loses half a joint to each neighbour,
- * butting the outline and the holes, and what remains is one unit, a solid of its own. Each unit is drawn in its own frame, its grain along its longest spread (a
- * board's length, a flag's long side), and takes its own window on the stock's figure, since no two units are cut from
- * the same place: the unit's texture origin steps through the stock by the R2 sequence, so no two neighbours repeat.
+ * to joint centre, in the setting-out frame (LaidRules.h); each cell is cut to what is laid and loses half a joint to
+ * each neighbour, butting the outline and the holes, and what remains is one unit, a solid of its own. Each unit is drawn
+ * in its own frame, its grain along its longest spread (a board's length, a flag's long side), and takes its own window
+ * on the stock's figure, since no two units are cut from the same place: the unit's texture origin steps through the
+ * stock by the R2 sequence, so no two neighbours repeat.
  */
 namespace Musee::Form::Drawing
 {
 	namespace
 	{
 		using UE::Geometry::FGeneralPolygon2d;
+		using Laying::BoundsOf;
+		using Laying::FCell;
+		using Laying::FSetting;
 
 		/**
 		 * The R2 low-discrepancy sequence (M. Roberts, "The unreasonable effectiveness of quasirandom sequences", 2018):
@@ -41,211 +46,6 @@ namespace Musee::Form::Drawing
 
 		/** How far the joints' filling stands off the units: two weld tolerances, so the two never weld. */
 		constexpr double FillClearance = 2.0 * WeldToleranceMeters;
-
-		/** The most cells a laid surface may set out: a floor of a hundred thousand units is a drawing's mistake, not a floor. */
-		constexpr int32 MostCells = 200000;
-
-		/** The setting-out frame: where the rule's (x, y) lie in the drawing's. */
-		struct FSetting
-		{
-			FVector2D Origin;
-			double Cos = 1.0;
-			double Sin = 0.0;
-
-			FSetting(const FFormLaid& Shape)
-				: Origin(Shape.OriginMeters)
-				, Cos(FMath::Cos(FMath::DegreesToRadians(Shape.AngleDegrees)))
-				, Sin(FMath::Sin(FMath::DegreesToRadians(Shape.AngleDegrees)))
-			{
-			}
-
-			FVector2D ToDrawing(const FVector2D& P) const { return Origin + FVector2D(Cos * P.X - Sin * P.Y, Sin * P.X + Cos * P.Y); }
-			FVector2D ToRule(const FVector2D& Q) const
-			{
-				const FVector2D D = Q - Origin;
-				return FVector2D(Cos * D.X + Sin * D.Y, -Sin * D.X + Cos * D.Y);
-			}
-		};
-
-		/** A cell of the rule, in the rule's frame: one loop, or a loop with a hole (a whole ring). */
-		struct FCell
-		{
-			TArray<FVector2D> Outer;
-			TArray<TArray<FVector2D>> Holes;
-		};
-
-		FBox2D BoundsOf(TConstArrayView<FVector2D> Points)
-		{
-			FBox2D Box(ForceInit);
-			for (const FVector2D& Point : Points)
-			{
-				Box += Point;
-			}
-			return Box;
-		}
-
-		/** The module's outlines laid at every lattice point whose copy reaches the bounds. */
-		bool ModuleCells(const FFormLaid& Shape, const FBox2D& Bounds, TArray<FCell>& OutCells, FString& OutWhy)
-		{
-			const double Determinant = FVector2D::CrossProduct(Shape.LatticeU, Shape.LatticeV);
-			if (FMath::Abs(Determinant) <= SliverSquareMeters)
-			{
-				OutWhy = TEXT("a laid module's lattice has two directions that aren't parallel");
-				return false;
-			}
-			TArray<TArray<FVector2D>> Units;
-			FBox2D Module(ForceInit);
-			for (const FFormProfile& Unit : Shape.Module)
-			{
-				if (!CheckProfile(Unit, TEXT("a module's unit"), true, OutWhy))
-				{
-					return false;
-				}
-				Units.Add(Resolve(Unit).Points());
-				Module += BoundsOf(Units.Last());
-			}
-			// The lattice points whose module can reach the bounds: the corners of the bounds less the module, in lattice terms.
-			const FVector2D Low = Bounds.Min - Module.Max;
-			const FVector2D High = Bounds.Max - Module.Min;
-			auto Lattice = [&](const FVector2D& P)
-			{
-				return FVector2D(FVector2D::CrossProduct(P, Shape.LatticeV), FVector2D::CrossProduct(Shape.LatticeU, P)) / Determinant;
-			};
-			const FVector2D Corners[4] = {Lattice(Low), Lattice(High), Lattice(FVector2D(Low.X, High.Y)), Lattice(FVector2D(High.X, Low.Y))};
-			const FBox2D Range = BoundsOf(Corners);
-			if ((Range.Max.X - Range.Min.X + 2.0) * (Range.Max.Y - Range.Min.Y + 2.0) * Units.Num() > MostCells)
-			{
-				OutWhy = TEXT("a laid module sets out more cells than any floor has units");
-				return false;
-			}
-			for (int32 J = FMath::FloorToInt32(Range.Min.Y); J <= FMath::CeilToInt32(Range.Max.Y); ++J)
-			{
-				for (int32 I = FMath::FloorToInt32(Range.Min.X); I <= FMath::CeilToInt32(Range.Max.X); ++I)
-				{
-					const FVector2D At = Shape.LatticeU * I + Shape.LatticeV * J;
-					for (const TArray<FVector2D>& Unit : Units)
-					{
-						FCell& Cell = OutCells.AddDefaulted_GetRef();
-						for (const FVector2D& Point : Unit)
-						{
-							Cell.Outer.Add(Point + At);
-						}
-					}
-				}
-			}
-			return true;
-		}
-
-		/** The joints along one course that reach the span, from its start both ways, its lengths taken in turn. */
-		TArray<double> CourseJoints(const FFormCourse& Course, double From, double To)
-		{
-			TArray<double> Joints = {Course.StartMeters};
-			const int32 Count = Course.LengthsMeters.Num();
-			for (int32 Index = 0; Joints.Last() < To; ++Index)
-			{
-				Joints.Add(Joints.Last() + Course.LengthsMeters[Index % Count]);
-			}
-			for (int32 Index = Count - 1; Joints[0] > From; Index = (Index + Count - 1) % Count)
-			{
-				Joints.Insert(Joints[0] - Course.LengthsMeters[Index], 0);
-			}
-			return Joints;
-		}
-
-		/** Courses up the rule's y from its origin (and down from it), taken in turn, cut at their joints. */
-		bool CourseCells(const FFormLaid& Shape, const FBox2D& Bounds, TArray<FCell>& OutCells, FString& OutWhy)
-		{
-			for (const FFormCourse& Course : Shape.Courses)
-			{
-				if (Course.HeightMeters <= WeldToleranceMeters || Course.LengthsMeters.IsEmpty()
-					|| Course.LengthsMeters.ContainsByPredicate([](double Length) { return Length <= WeldToleranceMeters; }))
-				{
-					OutWhy = TEXT("a course has a height and lengths");
-					return false;
-				}
-			}
-			const int32 Count = Shape.Courses.Num();
-			auto Add = [&](const FFormCourse& Course, double Bed)
-			{
-				const TArray<double> Joints = CourseJoints(Course, Bounds.Min.X, Bounds.Max.X);
-				for (int32 Index = 0; Index + 1 < Joints.Num(); ++Index)
-				{
-					OutCells.AddDefaulted_GetRef().Outer = {FVector2D(Joints[Index], Bed), FVector2D(Joints[Index + 1], Bed),
-						FVector2D(Joints[Index + 1], Bed + Course.HeightMeters), FVector2D(Joints[Index], Bed + Course.HeightMeters)};
-				}
-				return OutCells.Num() <= MostCells;
-			};
-			bool bFits = true;
-			double Bed = 0.0;
-			for (int32 Index = 0; bFits && Bed < Bounds.Max.Y; ++Index)
-			{
-				const FFormCourse& Course = Shape.Courses[Index % Count];
-				bFits = Bed + Course.HeightMeters <= Bounds.Min.Y || Add(Course, Bed);
-				Bed += Course.HeightMeters;
-			}
-			Bed = 0.0;
-			for (int32 Index = Count - 1; bFits && Bed > Bounds.Min.Y; Index = (Index + Count - 1) % Count)
-			{
-				const FFormCourse& Course = Shape.Courses[Index];
-				Bed -= Course.HeightMeters;
-				bFits = Bed >= Bounds.Max.Y || Add(Course, Bed);
-			}
-			if (!bFits)
-			{
-				OutWhy = TEXT("the courses set out more cells than any floor has units");
-			}
-			return bFits;
-		}
-
-		/** Rings of radial slabs about the rule's origin, their arcs divided at the chord tolerance. */
-		bool RingCells(const FFormLaid& Shape, TArray<FCell>& OutCells, FString& OutWhy)
-		{
-			for (const FFormRing& Ring : Shape.Rings)
-			{
-				if (Ring.Units < 1 || Ring.InnerMeters < 0.0 || Ring.OuterMeters <= Ring.InnerMeters + WeldToleranceMeters)
-				{
-					OutWhy = TEXT("a ring has slabs between two circles");
-					return false;
-				}
-				auto Arc = [](double Radius, double From, double To)
-				{
-					TArray<FVector2D> Points;
-					for (const double Angle : ArcStations(Radius, From, To, DefaultChordToleranceMeters))
-					{
-						Points.Add(FVector2D(FMath::Cos(Angle), FMath::Sin(Angle)) * Radius);
-					}
-					return Points;
-				};
-				const double Step = 2.0 * UE_DOUBLE_PI / Ring.Units;
-				const double Start = FMath::DegreesToRadians(Ring.StartDegrees);
-				for (int32 Unit = 0; Unit < Ring.Units; ++Unit)
-				{
-					FCell& Cell = OutCells.AddDefaulted_GetRef();
-					const double From = Start + Step * Unit;
-					if (Ring.Units == 1)
-					{
-						Cell.Outer = Arc(Ring.OuterMeters, From, From + Step);
-						Cell.Outer.Pop();
-						if (Ring.InnerMeters > WeldToleranceMeters)
-						{
-							Cell.Holes.Add(Arc(Ring.InnerMeters, From, From + Step));
-							Cell.Holes.Last().Pop();
-						}
-						continue;
-					}
-					Cell.Outer = Arc(Ring.OuterMeters, From, From + Step);
-					if (Ring.InnerMeters > WeldToleranceMeters)
-					{
-						Cell.Outer.Append(Arc(Ring.InnerMeters, From + Step, From));
-					}
-					else
-					{
-						Cell.Outer.Add(FVector2D::ZeroVector);
-					}
-				}
-			}
-			return true;
-		}
 
 		/**
 		 * The spread of a region's area about its centroid: its centroid, and the angle of its longest spread, radians.
@@ -410,29 +210,25 @@ namespace Musee::Form::Drawing
 			return true;
 		}
 
-		/**
-		 * The units the cells leave, each cut to what is laid: a unit gives up half a joint to each neighbour (its cut cell
-		 * less its neighbours' grown by half a joint) and butts whatever it is laid against, a wall, a plinth, a stone's ring.
-		 */
-		TArray<FRegion> CutUnits(const FFormLaid& Shape, const FSetting& Setting, TConstArrayView<FCell> Cells, const FBox2D& Bounds, const FRegion& Laid)
+		/** Each cell cut to the laid region, with its bounds grown by a joint: the cells that lay anything. */
+		void CutCells(const FFormLaid& Shape, const FSetting& Setting, TConstArrayView<FCell> Cells, const FBox2D& Bounds, const FRegion& Laid,
+			TArray<FRegion>& OutCut, TArray<FBox2D>& OutBoxes)
 		{
-			TArray<FRegion> Cut;
-			TArray<FBox2D> Boxes;
+			auto Drawn = [&Setting](TConstArrayView<FVector2D> Loop)
+			{
+				TArray<FVector2D> Out;
+				for (const FVector2D& P : Loop)
+				{
+					Out.Add(Setting.ToDrawing(P));
+				}
+				return Out;
+			};
 			for (const FCell& Cell : Cells)
 			{
 				if (!BoundsOf(Cell.Outer).Intersect(Bounds))
 				{
 					continue;
 				}
-				auto Drawn = [&Setting](TConstArrayView<FVector2D> Loop)
-				{
-					TArray<FVector2D> Out;
-					for (const FVector2D& P : Loop)
-					{
-						Out.Add(Setting.ToDrawing(P));
-					}
-					return Out;
-				};
 				TArray<TArray<FVector2D>> CellHoles;
 				for (const TArray<FVector2D>& Hole : Cell.Holes)
 				{
@@ -446,17 +242,20 @@ namespace Musee::Form::Drawing
 					{
 						Box += BoundsOf(Loop);
 					}
-					Boxes.Add(Box.ExpandBy(Shape.JointMeters));
-					Cut.Add(MoveTemp(Within));
+					OutBoxes.Add(Box.ExpandBy(Shape.JointMeters));
+					OutCut.Add(MoveTemp(Within));
 				}
 			}
-			// Neighbours are found through a grid of buckets as large as the largest unit.
+		}
+
+		/** For each box, the others it meets, found through a grid of buckets as large as the largest box. */
+		TArray<TArray<int32>> Neighbours(TConstArrayView<FBox2D> Boxes)
+		{
 			double Bucket = WeldToleranceMeters;
 			for (const FBox2D& Box : Boxes)
 			{
 				Bucket = FMath::Max(Bucket, Box.GetSize().GetMax());
 			}
-			TMultiMap<FIntPoint, int32> Grid;
 			auto Buckets = [Bucket](const FBox2D& Box, TFunctionRef<void(const FIntPoint&)> Visit)
 			{
 				for (int32 X = FMath::FloorToInt32(Box.Min.X / Bucket); X <= FMath::FloorToInt32(Box.Max.X / Bucket); ++X)
@@ -467,17 +266,13 @@ namespace Musee::Form::Drawing
 					}
 				}
 			};
+			TMultiMap<FIntPoint, int32> Grid;
 			for (int32 Index = 0; Index < Boxes.Num(); ++Index)
 			{
 				Buckets(Boxes[Index], [&Grid, Index](const FIntPoint& Key) { Grid.AddUnique(Key, Index); });
 			}
-			TArray<FRegion> Grown;
-			for (const FRegion& Region : Cut)
-			{
-				Grown.Add(Offset(Region, 0.5 * Shape.JointMeters));
-			}
-			TArray<FRegion> Units;
-			for (int32 Index = 0; Index < Cut.Num(); ++Index)
+			TArray<TArray<int32>> Out;
+			for (int32 Index = 0; Index < Boxes.Num(); ++Index)
 			{
 				TSet<int32> Near;
 				Buckets(Boxes[Index], [&Grid, &Near](const FIntPoint& Key)
@@ -486,13 +281,41 @@ namespace Musee::Form::Drawing
 					Grid.MultiFind(Key, Found);
 					Near.Append(Found);
 				});
-				FRegion Taken;
+				TArray<int32>& Met = Out.AddDefaulted_GetRef();
 				for (const int32 Other : Near)
 				{
 					if (Other != Index && Boxes[Other].Intersect(Boxes[Index]))
 					{
-						Taken.Append(Grown[Other]);
+						Met.Add(Other);
 					}
+				}
+				Met.Sort();
+			}
+			return Out;
+		}
+
+		/**
+		 * The units the cells leave, each cut to what is laid: a unit gives up half a joint to each neighbour (its cut cell
+		 * less its neighbours' grown by half a joint) and butts whatever it is laid against, a wall, a plinth, a stone's ring.
+		 */
+		TArray<FRegion> CutUnits(const FFormLaid& Shape, const FSetting& Setting, TConstArrayView<FCell> Cells, const FBox2D& Bounds, const FRegion& Laid)
+		{
+			TArray<FRegion> Cut;
+			TArray<FBox2D> Boxes;
+			CutCells(Shape, Setting, Cells, Bounds, Laid, Cut, Boxes);
+			TArray<FRegion> Grown;
+			for (const FRegion& Region : Cut)
+			{
+				Grown.Add(Offset(Region, 0.5 * Shape.JointMeters));
+			}
+			const TArray<TArray<int32>> Near = Neighbours(Boxes);
+			TArray<FRegion> Units;
+			for (int32 Index = 0; Index < Cut.Num(); ++Index)
+			{
+				FRegion Taken;
+				for (const int32 Other : Near[Index])
+				{
+					Taken.Append(Grown[Other]);
 				}
 				Units.Add(Difference(Cut[Index], Taken));
 			}
@@ -558,9 +381,7 @@ namespace Musee::Form::Drawing
 		}
 		const FBox2D Bounds = BoundsOf(Seen);
 		TArray<FCell> Cells;
-		const bool bSetOut = !Shape.Module.IsEmpty() ? ModuleCells(Shape, Bounds, Cells, OutWhy)
-			: (!Shape.Courses.IsEmpty() ? CourseCells(Shape, Bounds, Cells, OutWhy) : RingCells(Shape, Cells, OutWhy));
-		if (!bSetOut)
+		if (!Laying::SetOut(Shape, Bounds, Cells, OutWhy))
 		{
 			return false;
 		}

@@ -129,7 +129,12 @@ namespace Musee::Form::Drawing
 		 */
 		bool TrimSink(FProfileStations& Section, int32 Axis, FString& OutWhy)
 		{
-			auto Height = [Axis](const FVector2D& P) { return Axis == 0 ? P.X : P.Y; };
+			// A point within the weld tolerance of the surface lies on it: the section's own point there is the cut.
+			auto Height = [Axis](const FVector2D& P)
+			{
+				const double H = Axis == 0 ? P.X : P.Y;
+				return FMath::Abs(H) <= WeldToleranceMeters ? 0.0 : H;
+			};
 			const int32 Count = Section.Vertices.Num();
 			TArray<FProfileVertex> Kept;
 			int32 Crossings = 0;
@@ -143,14 +148,14 @@ namespace Musee::Form::Drawing
 				{
 					Kept.Add(Here);
 				}
-				if ((H0 >= 0.0) != (H1 >= 0.0))
+				Crossings += (H0 >= 0.0) != (H1 >= 0.0) ? 1 : 0;
+				if ((H0 > 0.0 && H1 < 0.0) || (H0 < 0.0 && H1 > 0.0))
 				{
 					FProfileVertex Cut;
 					Cut.Point = FMath::Lerp(Here.Point, Next.Point, H0 / (H0 - H1));
 					Cut.NormalIn = Cut.NormalOut = (Here.NormalOut + Next.NormalIn).GetSafeNormal();
 					Cut.bCrisp = true;
 					Kept.Add(Cut);
-					++Crossings;
 				}
 			}
 			if (Crossings == 0 && Kept.IsEmpty())
@@ -169,7 +174,7 @@ namespace Musee::Form::Drawing
 			{
 				FProfileVertex& From = Kept[Index];
 				FProfileVertex& To = Kept[(Index + 1) % Kept0];
-				if (Crossings == 2 && FMath::Abs(Height(From.Point)) <= WeldToleranceMeters && FMath::Abs(Height(To.Point)) <= WeldToleranceMeters)
+				if (Crossings == 2 && Height(From.Point) == 0.0 && Height(To.Point) == 0.0)
 				{
 					const FVector2D Step = To.Point - From.Point;
 					From.NormalOut = To.NormalIn = FVector2D(Step.Y, -Step.X).GetSafeNormal();

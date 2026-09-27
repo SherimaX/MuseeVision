@@ -80,6 +80,20 @@ namespace Musee::Form::Tests::Cuts
 				0.001 * 0.025 * 0.14 * 2.0 * UE_DOUBLE_PI * 3.0);
 		}
 
+		// A die's base moulding whose section reaches the die's face exactly at a point of its own before sinking behind it,
+		// run round the die: trimmed, the point on the face is where it is cut.
+		FFormSweep Base;
+		Base.Section = FFormProfile::Polyline({FVector2D(-0.01, -0.005), FVector2D(0.015, -0.005), FVector2D(0.015, 0.025), FVector2D(0.0, 0.045),
+			FVector2D(-0.01, 0.045)}, true);
+		Base.Path = FFormProfile::Polyline({FVector2D(0.2, 0.2), FVector2D(0.2, -0.2), FVector2D(-0.2, -0.2), FVector2D(-0.2, 0.2)}, true);
+		Base.bTrimSinkA = true;
+		Base.bTrimSinkB = true;
+		const TArray<FFormMadePiece> Moulded = MakeDrawing(*this, FFormDrawing::Of(TEXT("die.base"), TEXT("stone"), Base));
+		if (TestEqual(TEXT("the trimmed base is one piece"), Moulded.Num(), 1))
+		{
+			TestClosed(*this, TEXT("a base trimmed where its section meets the face"), Moulded[0], 0);
+		}
+
 		// A ring turned about z, cut on the plane x = 0: half a ring, closed by two round cut faces.
 		FFormLathe Ring;
 		Ring.Section = FFormProfile::Ellipse(FVector2D(1.0, 0.0), 0.1, 0.1, 0.0, true);
