@@ -131,8 +131,10 @@ namespace Musee::Reserve
 			Shape.Module.Add(FFormProfile::Rectangle(FVector2D::ZeroVector, FVector2D(Plan::FlagSize, Plan::FlagSize)));
 			Shape.LatticeU = FVector2D(Plan::FlagSize, 0.0);
 			Shape.LatticeV = FVector2D(0.0, Plan::FlagSize);
+			FFormDrawing Drawing = Drawn(Name, LocalSurface, MoveTemp(Shape), Walkable, FMuseeFrame(FVector(0.0, 0.0, -Plan::FlagThickness)));
 			// The lime in the joints takes the flags' own finish: the palette has no lime mortar yet (the README's gaps).
-			return Drawn(Name, LocalSurface, MoveTemp(Shape), Walkable, FMuseeFrame(FVector(0.0, 0.0, -Plan::FlagThickness)));
+			Drawing.PartSurfaces.Add(FFormLaid::JointPart, Surface(LocalSurface));
+			return Drawing;
 		}
 
 		/** A rack's flush track: the channel filling the cut through the flags, its slot sunk from the floor, closed at its ends. */
