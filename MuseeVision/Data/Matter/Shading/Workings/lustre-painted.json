@@ -1,0 +1,41 @@
+{
+  "schema": "musee.matter.shading.working/1",
+  "key": "lustre-painted",
+  "name": "Painted in lustre over a fired tin glaze and fired again in a reducing kiln",
+  "record": "Palette.json",
+  "kind": "face",
+  "roughness": {
+    "value": 0.05,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Shading/Workings/glazed.json (a glaze's first roughness)",
+    "note": "A fired glaze is glossy; the lustre's own metallic sheen, a film of copper and silver particles tens of nanometres across, is not yet drawn."
+  },
+  "roughnessAcross": {
+    "value": 0.05,
+    "unit": "1",
+    "grade": "derived",
+    "source": "a glaze has no grain",
+    "derivation": "equal to the roughness along"
+  },
+  "haziness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Shading/Workings/glazed.json",
+    "note": "One specular lobe until a goniometric measurement shows a second."
+  },
+  "textureDepth": {
+    "value": 0.001,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Shading/Workings/glazed.json"
+  },
+  "relief": {
+    "value": 0.0,
+    "unit": "mm",
+    "grade": "derived",
+    "source": "the image carries the painting",
+    "derivation": "no relief is drawn over the work's own image"
+  }
+}

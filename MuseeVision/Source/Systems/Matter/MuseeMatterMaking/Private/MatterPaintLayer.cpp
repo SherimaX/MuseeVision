@@ -16,16 +16,17 @@ namespace
 		return Name.IsNone() ? TOptional<FMuseeKey>() : FMuseeKey::Parse(Name.ToString());
 	}
 
-	/** The master a finish's layer is composed over: the paint master for a paint, the stained-glass master for a glass. */
+	/** The master a finish's layer is composed over: the paint master for a paint, the plate master for a daguerreotype's
+	 *  plate, the stained-glass master for a glass. */
 	TOptional<FName> LayerMasterOf(const FMasterKind& Finish)
 	{
 		if (!Finish.Layer.IsNone())
 		{
 			return {};
 		}
-		if (Finish.Master == FName(Masters::Paint))
+		if (Finish.Master == FName(Masters::Paint) || Finish.Master == FName(Masters::Plate))
 		{
-			return FName(Masters::Paint);
+			return Finish.Master;
 		}
 		return Finish.Master == FName(Masters::Glass) ? TOptional<FName>(FName(Masters::Stained)) : TOptional<FName>();
 	}
@@ -65,7 +66,7 @@ TValueOrError<FString, FString> LayerMasterPackage(const FMatterPaintLayer& Laye
 	const TOptional<FName> Master = LayerMasterOf(Records.GetValue().Master);
 	if (!Master)
 	{
-		return MakeError(FString::Printf(TEXT("%s is shaded by the %s master, which carries no work's image; a paint or a glass does."),
+		return MakeError(FString::Printf(TEXT("%s is shaded by the %s master, which carries no work's image; a paint, a plate or a glass does."),
 			*Finish.GetValue().ToString(), *MasterName(Records.GetValue().Master.Master, Records.GetValue().Master.Layer)));
 	}
 	return MakeValue(MasterPackage(*Master));

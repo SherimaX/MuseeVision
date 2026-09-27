@@ -62,7 +62,7 @@ bool FMatterMastersValidate::RunTest(const FString& Parameters)
 			{
 				bHistory |= Include == TEXT("/Project/Matter/History.ush") || Include == TEXT("/Project/Matter/Metal.ush")
 					|| Include == TEXT("/Project/Matter/Glass.ush") || Include == TEXT("/Project/Matter/Medium.ush") || Include == TEXT("/Project/Matter/Paint.ush")
-					|| Include == TEXT("/Project/Matter/Sheet.ush");
+					|| Include == TEXT("/Project/Matter/Sheet.ush") || Include == TEXT("/Project/Matter/Plate.ush");
 			}
 		}
 		// A master has no emissive input by construction: a recipe's surfaces have no emissive pin.

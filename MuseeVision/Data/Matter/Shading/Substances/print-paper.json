@@ -1,0 +1,43 @@
+{
+  "schema": "musee.matter.shading.substance/1",
+  "key": "print-paper",
+  "name": "A photographic print on paper (salted paper, albumen, cyanotype, gelatin silver): the image in the paper's surface",
+  "family": "accent",
+  "record": "Palette.json",
+  "master": "paint",
+  "accentOf": "white",
+  "dielectric": {
+    "diffuseAlbedo": {
+      "value": [
+        0.8,
+        0.8,
+        0.8
+      ],
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.print-on-paper",
+      "note": "The reflectance a photograph of the print's white stands for: a first value for a paper's white, until a print is measured. The paper's tone as it has aged is in the photograph itself."
+    },
+    "refractiveIndex": {
+      "value": 1.53,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Shading/Substances/rag-board.json (cellulose fibres about 1.53)",
+      "note": "The paper's cellulose and the albumen or gelatin binder over it lie near the same index."
+    },
+    "porosity": {
+      "value": 0.5,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Shading/Substances/rag-board.json (a cotton paper's first porosity)"
+    },
+    "wettingDepth": {
+      "value": 0.1,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "the paper's thickness",
+      "note": "A print is a single thin sheet: water reaches all of it."
+    }
+  }
+}

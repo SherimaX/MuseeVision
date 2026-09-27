@@ -19,6 +19,7 @@ namespace Musee::Matter::MasterParts
 	inline constexpr const TCHAR* LibraryGlass = TEXT("/Project/Matter/Glass.ush");
 	inline constexpr const TCHAR* LibraryMedium = TEXT("/Project/Matter/Medium.ush");
 	inline constexpr const TCHAR* LibraryPaint = TEXT("/Project/Matter/Paint.ush");
+	inline constexpr const TCHAR* LibraryPlate = TEXT("/Project/Matter/Plate.ush");
 	inline constexpr const TCHAR* LibraryWood = TEXT("/Project/Matter/Wood.ush");
 	inline constexpr const TCHAR* LibraryCloth = TEXT("/Project/Matter/Cloth.ush");
 	inline constexpr const TCHAR* LibrarySheet = TEXT("/Project/Matter/Sheet.ush");

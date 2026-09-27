@@ -1,0 +1,43 @@
+{
+  "schema": "musee.matter.shading.substance/1",
+  "key": "lustreware",
+  "name": "Tin-glazed earthenware painted in lustre (William De Morgan's lustreware)",
+  "family": "accent",
+  "record": "Palette.json",
+  "master": "paint",
+  "accentOf": "stone",
+  "dielectric": {
+    "diffuseAlbedo": {
+      "value": [
+        88.0,
+        1.0,
+        6.0
+      ],
+      "space": "CIELAB (D65, 2 deg)",
+      "unit": "CIELAB",
+      "grade": "unverified",
+      "source": "Palette.json: accent.lustreware",
+      "note": "The white a photograph of the ware's white stands for: the tin glaze's warm white; no measured colour was read."
+    },
+    "refractiveIndex": {
+      "value": 1.52,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Shading/Substances/glaze.celadon.json (a ceramic glaze is a soda-lime-alumina-silica glass of about 1.52)"
+    },
+    "porosity": {
+      "value": 0.0,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "a glaze is glass",
+      "note": "The fired glaze has no open pores."
+    },
+    "wettingDepth": {
+      "value": 0.0,
+      "unit": "mm",
+      "grade": "derived",
+      "source": "a glaze is glass",
+      "derivation": "with no pores, nothing wets its body"
+    }
+  }
+}
