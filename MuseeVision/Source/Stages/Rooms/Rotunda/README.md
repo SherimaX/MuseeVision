@@ -20,22 +20,21 @@ restated here.
 | `RotundaSite.cpp` | footprint, the five ports (the stair's serving the well), openings, anchors, enclosures |
 | `RotundaDrum.cpp` | the drum's wall with its doorways and niches, footing, plinth over the shadow gap, top course; the niches' backs, heads and floors |
 | `RotundaOrder.cpp` | sixteen fluted pilasters, the entablature, the door archivolts, the niche surrounds and sills |
-| `RotundaDome.cpp` | the plain bands, shell, curb and lead; the coffers' ring ribs and meridional ribs |
+| `RotundaDome.cpp` | the plain bands, shell, curb and lead; the 140 coffers, each its section run round its cell in the dome's development |
 | `RotundaEye.cpp` | the lattice's ring and bars, the laminated glass, the node |
-| `RotundaFloors.cpp` | the ring's core and slabs; the dial's bands and fillets and the gilt sun (body `rotunda.sun-clock.drum`) |
+| `RotundaFloors.cpp` | the ring's core and slabs and the motto (Form's lettering, Centaur's capitals and gilt stops); the dial's bands and fillets and the gilt sun (body `rotunda.sun-clock.drum`) |
 | `RotundaDialInlay.cpp` | the dial's hour ring, hour lines, gilt meridian and minute ticks, laid from Time's dial (`Musee::Time::FMuseumDial`, sheet §5) |
 | `RotundaSunClock.cpp` | the lifting drum: wall, foot, base, pilasters, entablature, door archivolt, deck, soffit, rim, pendant |
 | `RotundaShaft.cpp` | the sleeve, the pocket's masonry and bores, the tympanum and the port's reveal, the rams, the foundation, the landing and rosette |
-| `RotundaStair.cpp` | the helical stair's treads, nosings and string |
+| `RotundaStairLine` | the stair's setting-out: nosing lines, the pitch line, soffit and string top, and the cylinders its fittings are drawn on |
+| `RotundaStair.cpp` | the helical stair's treads (spandrel steps dressed to the helicoid soffit), nosings and string |
+| `RotundaStairFittings.cpp` | the well balustrade (fixed, and the two retracting panels on body `rotunda.stair.balustrade.panels`), their housings, the newel, the wall rail with its return, rose and brackets |
 
 ## Waiting on the systems
 
-- The numerals wait for Form's lettering and the ported glyphs, as the motto does; the hour ring, lines, meridian and
-  ticks are laid from Time's dial (RotundaDialInlay). Nothing is drawn by hand here.
-- Form draws straight passages through curved walls radially, sweeps only along plan paths, and has no relief on a
-  surface of revolution or lofted solid: the doorways, the stair's string and soffit, the coffers' meridional ribs and
-  the sun's rays are their nearest honest forms, as each file's comment says. The stair's balustrades, handrails and
-  their housings wait for sweeps along helices.
+- The hour ring, lines, meridian and ticks are laid from Time's dial (RotundaDialInlay); its numerals wait to be lettered
+  with Form's lettering. The doorways through the drum are still cut radially on the room's face, and the housings'
+  sunk fields are polish.
 
 ## Tests
 

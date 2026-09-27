@@ -17,7 +17,7 @@ are `Data/Stages/sphere/` (Finishes, Lighting, Mechanisms), read by the systems 
 | `SpherePlan.h` | every number the stage is built to, from the sheet, by section |
 | `SphereParts` | setting out about the axis in bearings; rings, sectors, the seats' 96-gon, the class's iris blade, the bodies' frames |
 | `SphereSite.cpp` | footprint, the vertical port `sphere.down` with the well it receives, openings, anchors, enclosures |
-| `SphereShells.cpp` | the steel plate, the image surface, the pearl skin, the drip ring on the Atrium's wash, the boss and the ball |
+| `SphereShells.cpp` | the steel plate, the image surface, the pearl skin in its welded plates (seams every 6° of latitude, 7.5° of bearing below 60°, 15° above), the drip ring on the Atrium's wash, the boss and the ball |
 | `SphereNeck.cpp` | the throat and its band between the dogs' housings, the gilt trellis, the flange and pins, the neck iris, the rails |
 | `SpherePlatform.cpp` | deck, stone ring, seat ring and sill, the platform iris and pins, nosing, balustrade, handrail, channel, struts |
 | `SphereMast.cpp` | the mast's foot ring (body `sphere.mast.foot`), the four bearing dogs and their housings |

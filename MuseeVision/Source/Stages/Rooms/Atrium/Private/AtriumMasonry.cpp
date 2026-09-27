@@ -7,9 +7,9 @@
  *
  * Form lays no ashlar yet (Lay, the kit's backlog): the base is drawn as the stones its door needs (the long ring, the two
  * returns beside the jambs, the lintel and the sill), not coursed. A turned solid ends on a radial plane, so the dress
- * stops where its bed meets the portal's side and the entablature's notches are radial; and Form has no passage of a
- * segmental arch through a block to a curved face, so the portal is its front slab to the base's face on the axis, with
- * piers, haunches and attic behind it drawn exactly where the plan allows. Each is the nearest honest form.
+ * stops where its bed meets the portal's side and the entablature's notches are radial; each is the nearest honest form.
+ * The portal is a block from its front plane back to the base's face, and above the wall top a second course back to the
+ * drum's outer face, the segmental arch passing straight through both.
  */
 namespace Musee::Atrium
 {
@@ -114,60 +114,57 @@ namespace Musee::Atrium
 			Out.Add(Drawn(TEXT("entablature.corona"), TEXT("dress"), TurnedAround(Section(Plan::EntablatureUpper, true)), Solid));
 		}
 
-		/** The arch's half-width at a height, and its springing from the jambs. */
-		double ArchHalf(double Z)
-		{
-			const double Rise = Z - Plan::PortalArchCentreZ;
-			return FMath::Sqrt(FMath::Max(0.0, Plan::PortalArchRadius * Plan::PortalArchRadius - Rise * Rise));
-		}
-
+		/** The springing of the portal's arch at its jambs. */
 		double Springing()
 		{
 			return Plan::PortalArchCentreZ + FMath::Sqrt(Plan::PortalArchRadius * Plan::PortalArchRadius - Plan::PortalJamb * Plan::PortalJamb);
 		}
 
-		/** A plan block from the front slab's back (x -14.800) to a circle about the axis, between |y| From and To on one side. */
-		FFormProfile Behind(double Radius, double Side, double FromY, double ToY)
+		/** The arc of a circle about the axis across the portal's width on the west, run from its south side to its north. */
+		FFormProfile AcrossPortal(double Radius)
 		{
-			const double Back = -Plan::BaseOuter;
-			FFormProfile Outline = FFormProfile::From(FVector2D(Back, Side * ToY));
-			Outline.LineTo(FVector2D(Back, Side * FromY), EFormJoint::Crisp).LineTo(WestAt(Radius, Side * FromY), EFormJoint::Crisp);
-			return ArcThrough(Outline, Radius, WestAt(Radius, Side * FromY), WestAt(Radius, Side * ToY)).Close();
+			const double Half = Plan::PortalHalfWidth;
+			FFormProfile Arc = FFormProfile::From(WestAt(Radius, Half));
+			return ArcThrough(Arc, Radius, WestAt(Radius, Half), WestAt(Radius, -Half));
+		}
+
+		/** The portal's opening through a course of it: its jambs ±4.950 and its segmental arch R 5.800, run straight through. */
+		FFormWallOpening PortalOpening(double CentreAlong, double Bed)
+		{
+			FFormWallOpening Opening;
+			Opening.CenterMeters = CentreAlong;
+			Opening.WidthMeters = 2.0 * Plan::PortalJamb;
+			Opening.HeadMeters = Springing() - Bed;
+			Opening.bArched = true;
+			Opening.ArchRadiusMeters = Plan::PortalArchRadius;
+			Opening.bStraight = true;
+			return Opening;
 		}
 
 		/**
-		 * The portal: the front slab with its opening (jambs ±4.950, the segmental arch R 5.800, crown 8.000) from the front
-		 * plane to the base's face on the axis; behind it the piers to the base's face, the haunches over the arch and the
-		 * attic over its crown to the drum's outer face; the cornice round its front and returns.
+		 * The portal: the block from the front plane back to the base's face r 14.800, its full height, and over the wall top
+		 * the course from that face back to the drum's outer face r 14.050, the segmental arch passing straight through both
+		 * (springing 5.221, crown 8.000: in the upper course it springs below the bed and opens on its chord there); the
+		 * cornice round its front and returns.
 		 */
 		void Portal(TArray<FFormDrawing>& Out)
 		{
 			const double Half = Plan::PortalHalfWidth;
-			const double Jamb = Plan::PortalJamb;
-			const double Spring = Springing();
-			const double SpringDeg = FMath::RadiansToDegrees(FMath::Atan2(Spring - Plan::PortalArchCentreZ, Jamb));
-			FFormProfile Front = FFormProfile::From(FVector2D(-Half, Plan::PortalBottom));
-			Front.LineTo(FVector2D(-Jamb, Plan::PortalBottom), EFormJoint::Crisp).LineTo(FVector2D(-Jamb, Spring), EFormJoint::Crisp)
-				.ArcAbout(FVector2D(0.0, Plan::PortalArchCentreZ), Plan::PortalArchRadius, Plan::PortalArchRadius, 180.0 - SpringDeg, SpringDeg, EFormJoint::Crisp)
-				.LineTo(FVector2D(Jamb, Plan::PortalBottom), EFormJoint::Crisp).LineTo(FVector2D(Half, Plan::PortalBottom), EFormJoint::Crisp)
-				.LineTo(FVector2D(Half, Plan::PortalTop), EFormJoint::Crisp).LineTo(FVector2D(-Half, Plan::PortalTop), EFormJoint::Crisp);
-			const FMuseeFrame Elevation = FrameOfAxes(FVector(Plan::PortalFrontX, 0.0, 0.0), FVector(0.0, 1.0, 0.0), FVector::UpVector);
-			Out.Add(Drawn(TEXT("portal.front"), TEXT("dress"), Prism(Front.Close(), 0.0, -Plan::BaseOuter - Plan::PortalFrontX), Solid, Elevation));
+			FFormWall Front;
+			Front.Plan = FFormProfile::Polyline({FVector2D(Plan::PortalFrontX, Half), FVector2D(Plan::PortalFrontX, -Half)}, false);
+			Front.Back = AcrossPortal(Plan::BaseOuter);
+			Front.BaseMeters = Plan::PortalBottom;
+			Front.HeightMeters = Plan::PortalTop - Plan::PortalBottom;
+			Front.Openings.Add(PortalOpening(Half, Plan::PortalBottom));
+			Out.Add(Drawn(TEXT("portal.front"), TEXT("dress"), MoveTemp(Front), Solid));
 
-			const double Crown = Plan::PortalArchCentreZ + Plan::PortalArchRadius;
-			const double HaunchFoot = ArchHalf(Plan::WallTop);
-			for (const double Side : {-1.0, 1.0})
-			{
-				const TCHAR* Name = Side < 0.0 ? TEXT("north") : TEXT("south");
-				Out.Add(Drawn(FString::Printf(TEXT("portal.pier.%s"), Name), TEXT("dress"), Prism(Behind(Plan::BaseOuter, Side, Jamb, Half),
-					Plan::PortalBottom, Plan::WallTop), Solid, FMuseeFrame(FVector(0.0, 0.0, Plan::PortalBottom))));
-				Out.Add(Drawn(FString::Printf(TEXT("portal.haunch.%s"), Name), TEXT("dress"), Prism(Behind(Plan::PortalBackAbove, Side, HaunchFoot, Half),
-					Plan::WallTop, Crown), Solid, FMuseeFrame(FVector(0.0, 0.0, Plan::WallTop))));
-			}
-			FFormProfile Attic = FFormProfile::From(FVector2D(-Plan::BaseOuter, Half));
-			Attic.LineTo(FVector2D(-Plan::BaseOuter, -Half), EFormJoint::Crisp).LineTo(WestAt(Plan::PortalBackAbove, -Half), EFormJoint::Crisp);
-			ArcThrough(Attic, Plan::PortalBackAbove, WestAt(Plan::PortalBackAbove, -Half), WestAt(Plan::PortalBackAbove, Half));
-			Out.Add(Drawn(TEXT("portal.attic"), TEXT("dress"), Prism(Attic.Close(), Crown, Plan::PortalTop), Solid, FMuseeFrame(FVector(0.0, 0.0, Crown))));
+			FFormWall Upper;
+			Upper.Plan = AcrossPortal(Plan::BaseOuter);
+			Upper.Back = AcrossPortal(Plan::PortalBackAbove);
+			Upper.BaseMeters = Plan::WallTop;
+			Upper.HeightMeters = Plan::PortalTop - Plan::WallTop;
+			Upper.Openings.Add(PortalOpening(Plan::BaseOuter * FMath::DegreesToRadians(OffsetFromWest(Half, Plan::BaseOuter)), Plan::WallTop));
+			Out.Add(Drawn(TEXT("portal.upper"), TEXT("dress"), MoveTemp(Upper), Solid));
 
 			FFormSweep Cornice;
 			Cornice.Section = Section(Plan::Cornice, true);

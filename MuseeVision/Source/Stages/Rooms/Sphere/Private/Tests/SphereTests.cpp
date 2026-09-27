@@ -262,7 +262,7 @@ namespace Musee::Sphere::Tests
 
 		// The pieces the sheet's first-pass cut asks for are drawn.
 		const FSiteDescription Description = Described();
-		for (const TCHAR* Name : {TEXT("shell.plate"), TEXT("image.surface"), TEXT("dome.skin"), TEXT("dome.drip-ring"), TEXT("dome.boss"), TEXT("dome.ball"),
+		for (const TCHAR* Name : {TEXT("shell.plate"), TEXT("image.surface"), TEXT("dome.skin.01.01"), TEXT("dome.skin.15.24"), TEXT("dome.drip-ring"), TEXT("dome.boss"), TEXT("dome.ball"),
 			TEXT("neck.throat"), TEXT("neck.flange"), TEXT("neck.rail.north"), TEXT("platform.deck"), TEXT("platform.sill"), TEXT("platform.handrail"),
 			TEXT("mast.foot-ring"), TEXT("mast.dog.4"), TEXT("neck.iris.blade.7"), TEXT("platform.iris.blade.7")})
 		{

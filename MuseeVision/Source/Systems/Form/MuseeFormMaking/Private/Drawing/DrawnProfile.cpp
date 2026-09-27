@@ -38,6 +38,8 @@ namespace Musee::Form::Drawing
 			F.AxisB = FMath::Lerp(A.AxisB, B.AxisB, Alpha);
 			F.NormalA = FMath::Lerp(A.NormalA, B.NormalA, Alpha).GetSafeNormal();
 			F.NormalB = FMath::Lerp(A.NormalB, B.NormalB, Alpha).GetSafeNormal();
+			F.Rake = FMath::Lerp(A.Rake, B.Rake, Alpha);
+			F.Bend = FMath::Lerp(A.Bend, B.Bend, Alpha);
 			F.Along = FMath::Lerp(A.Along, B.Along, Alpha).GetSafeNormal();
 			F.U = FMath::Lerp(A.U, B.U, Alpha);
 			return F;

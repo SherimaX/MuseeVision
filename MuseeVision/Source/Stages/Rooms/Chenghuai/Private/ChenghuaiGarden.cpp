@@ -1,4 +1,3 @@
-#include "Algo/Reverse.h"
 #include "ChenghuaiParts.h"
 #include "ChenghuaiPlanGarden.h"
 #include "ChenghuaiPlanHalls.h"
@@ -6,9 +5,9 @@
 #include "Math/RandomStream.h"
 
 /**
- * The garden's landform and stonework (§3.9; ChenghuaiGarden.cpp:79-321, ChenghuaiRockery.cpp:178-215): the pond's basin
- * (its bank run round the edge, its bed a surface of revolution about the Classical Hall's tribune beneath, rising over
- * it), the lake rocks along its edge, the paths of pebble mosaic between bluestone kerbs (path 0 dividing round 石兄), the
+ * The garden's landform and stonework (§3.9; ChenghuaiGarden.cpp:79-321, ChenghuaiRockery.cpp:178-215): the pond's basin,
+ * one landform over the pond's edge (its bank falling from the garden's ground to the bed, the bed rising over the Classical
+ * Hall's tribune beneath), the lake rocks along its edge, the paths of pebble mosaic between bluestone kerbs (path 0 dividing round 石兄), the
  * zigzag bridge on its piers with its low kerbs, the flower hall's terrace, the water pavilion's base in the pond and the
  * twelve engraved stones in the covered walk's wall. The garden's ground and its water are Nature's.
  */
@@ -34,122 +33,41 @@ namespace Musee::Chenghuai
 			return FMath::Lerp(Plan::BedShallow, Plan::BedDeep, FMath::Clamp((Radius - Plan::TribuneClear) / Plan::BedRamp, 0.0, 1.0));
 		}
 
-		/** The edge run so that the bank's carving, to its right, lies in the water: anticlockwise in (x, y) with y south. */
-		TArray<FVector2D> EdgeInward()
+		/** The distance from a point to the nearest chord of a closed loop. */
+		double ToLoop(TConstArrayView<FVector2D> Loop, const FVector2D& Point)
 		{
-			TArray<FVector2D> Edge = Points(Plan::PondEdge);
-			if (SignedArea(Edge) < 0.0)
+			double Least = TNumericLimits<double>::Max();
+			for (int32 I = 0, J = Loop.Num() - 1; I < Loop.Num(); J = I++)
 			{
-				Algo::Reverse(Edge);
+				const FVector2D Chord = Loop[I] - Loop[J];
+				const double Along = FMath::Clamp(FVector2D::DotProduct(Point - Loop[J], Chord) / FMath::Max(Chord.SizeSquared(), UE_DOUBLE_SMALL_NUMBER), 0.0, 1.0);
+				Least = FMath::Min(Least, FVector2D::Distance(Loop[J] + Chord * Along, Point));
 			}
-			return Edge;
-		}
-
-		/** Where along the segment from A to B the distance from the tribune's axis first reaches R (as a fraction). */
-		double CrossingAt(const FVector2D& A, const FVector2D& B, double R)
-		{
-			double Low = 0.0;
-			double High = 1.0;
-			const bool bRising = FVector2D::Distance(A, Tribune) < R;
-			for (int32 Step = 0; Step < 48; ++Step)
-			{
-				const double Mid = 0.5 * (Low + High);
-				const bool bPast = FVector2D::Distance(FMath::Lerp(A, B, Mid), Tribune) >= R;
-				(bPast == bRising ? High : Low) = Mid;
-			}
-			return 0.5 * (Low + High);
+			return Least;
 		}
 
 		/**
-		 * The bank: a relief round the edge's vertical, carved inward to the bed, 0.45 in at the bed's level. It is split where
-		 * the edge crosses the tribune's clear radius, so the stretch over the tribune stops at -0.50 and the rest reaches the
-		 * deep bed.
+		 * The pond's basin (§3.9), one landform over the pond's edge: its top the bank, falling in a straight slope from the
+		 * garden's ground at the edge to the bed 0.45 in, and the bed, bed(r), beyond; its underside the bed's slab, on the
+		 * footprint's floor under the deep part and held at -0.50 over the Classical Hall's tribune beneath.
 		 */
-		void Bank(TArray<FFormDrawing>& Out)
+		void Basin(TArray<FFormDrawing>& Out)
 		{
-			const TArray<FVector2D> Edge = EdgeInward();
-			const int32 N = Edge.Num();
-			// Split the loop into the stretches inside and outside the clear radius at their crossings, starting at one.
-			auto In = [](const FVector2D& Point) { return FVector2D::Distance(Point, Tribune) < Plan::TribuneClear; };
-			int32 First = 0;
-			while (First < N && In(Edge[(First + N - 1) % N]) == In(Edge[First]))
+			const TArray<FVector2D> Edge = Points(Plan::PondEdge);
+			FFormHeightfield Shape;
+			Shape.Outline = FFormProfile::Polyline(Edge, true);
+			Shape.TopMeters = [Edge](double X, double Y)
 			{
-				++First;
-			}
-			TArray<TArray<FVector2D>> Stretches;
-			TArray<bool> Inside;
-			for (int32 Step = 0; Step < N; ++Step)
+				const FVector2D At(X, Y);
+				const double In = FMath::Min(ToLoop(Edge, At) / Plan::BankReach, 1.0);
+				return FMath::Lerp(Plan::GardenGround, BedAt(FVector2D::Distance(At, Tribune)), In);
+			};
+			Shape.BottomMeters = [](double X, double Y)
 			{
-				const FVector2D& A = Edge[(First + N - 1 + Step) % N];
-				const FVector2D& B = Edge[(First + Step) % N];
-				if (Stretches.IsEmpty() || In(A) != In(B))
-				{
-					const FVector2D Cross = In(A) != In(B) ? FMath::Lerp(A, B, CrossingAt(A, B, Plan::TribuneClear)) : A;
-					if (!Stretches.IsEmpty())
-					{
-						Stretches.Last().Add(Cross);
-					}
-					Stretches.AddDefaulted();
-					Inside.Add(In(B));
-					Stretches.Last().Add(Cross);
-				}
-				Stretches.Last().Add(B);
-			}
-			Stretches.Last().Add(Stretches[0][0]);
-			for (int32 Index = 0; Index < Stretches.Num(); ++Index)
-			{
-				TSharedRef<const FMeasuredLine> Line = MakeShared<FMeasuredLine>(Stretches[Index]);
-				FFormRelief Shape;
-				Shape.Path = SmoothPath(Stretches[Index]);
-				Shape.BottomMeters = Inside[Index] ? Plan::HallClearZ : Plan::BedDeep - Plan::BedSlab;
-				Shape.TopMeters = Plan::GardenGround;
-				Shape.GridMeters = Plan::MemberGrid;
-				Shape.BackMeters = Plan::BankBack;
-				Shape.HeightMeters = [Line](double Distance, double Z)
-				{
-					// The bed's level at the bank's toe, 0.45 in from the edge towards the tribune's side of the water.
-					const FVector2D At = Line->At(Distance);
-					const FVector2D Ahead = Line->At(Distance + Plan::MemberGrid);
-					const FVector2D Behind = Line->At(Distance - Plan::MemberGrid);
-					const FVector2D Along = (Ahead - Behind).GetSafeNormal();
-					const FVector2D Toe = At + FVector2D(-Along.Y, Along.X) * Plan::BankReach;
-					const double Bed = BedAt(FVector2D::Distance(Toe, Tribune));
-					const double Fall = (Plan::GardenGround - Z) / (Plan::GardenGround - Bed);
-					return Plan::BankReach * FMath::Clamp(Fall, 0.0, 1.0);
-				};
-				Draw(Out, FString::Printf(TEXT("pond.bank.%d"), Index + 1), TEXT("pond.bed"), MoveTemp(Shape), EHit::Walkable);
-			}
-		}
-
-		/**
-		 * The bed: a surface of revolution about the tribune's axis (the sheet's bed(r)), turned over the pond's arc and span;
-		 * beyond the bank's toe it lies under the bank and the garden's ground. Its underside keeps above -0.50 over the tribune.
-		 */
-		void Bed(TArray<FFormDrawing>& Out)
-		{
-			double Near = TNumericLimits<double>::Max();
-			double Far = 0.0;
-			double From = TNumericLimits<double>::Max();
-			double To = -TNumericLimits<double>::Max();
-			for (const FVector2D& Point : Points(Plan::PondEdge))
-			{
-				const FVector2D Off = Point - Tribune;
-				Near = FMath::Min(Near, Off.Size());
-				Far = FMath::Max(Far, Off.Size());
-				const double Angle = FMath::RadiansToDegrees(FMath::Atan2(Off.Y, Off.X));
-				From = FMath::Min(From, Angle);
-				To = FMath::Max(To, Angle);
-			}
-			Near -= Plan::BedMargin;
-			Far += Plan::BedMargin;
-			const double Clear = Plan::TribuneClear;
-			const double Ramp = Clear + Plan::BedRamp;
-			FFormLathe Shape;
-			Shape.Section = Section({{Near, Plan::HallClearZ}, {Clear, Plan::HallClearZ}, {Clear, Plan::BedDeep - Plan::BedSlab},
-				{Far, Plan::BedDeep - Plan::BedSlab}, {Far, Plan::BedDeep}, {Ramp, Plan::BedDeep}, {Clear, Plan::BedShallow}, {Near, Plan::BedShallow}}, true);
-			Shape.FromDegrees = From - Plan::BedMarginDegrees;
-			Shape.ToDegrees = To + Plan::BedMarginDegrees;
-			Draw(Out, TEXT("pond.bed"), TEXT("pond.bed"), MoveTemp(Shape), EHit::Walkable, FMuseeFrame(FVector(Tribune.X, Tribune.Y, 0.0)));
+				return FVector2D::Distance(FVector2D(X, Y), Tribune) < Plan::TribuneClear ? Plan::HallClearZ : Plan::BedDeep - Plan::BedSlab;
+			};
+			Shape.GridMeters = Plan::PondGrid;
+			Draw(Out, TEXT("pond.bed"), TEXT("pond.bed"), MoveTemp(Shape), EHit::Walkable);
 		}
 
 		/** The lake rocks along the edge: broad stones at the water, and on some an upper stone, each an irregular prism. */
@@ -311,8 +229,7 @@ namespace Musee::Chenghuai
 
 	void DrawGarden(TArray<FFormDrawing>& Out)
 	{
-		Bank(Out);
-		Bed(Out);
+		Basin(Out);
 		EdgeRocks(Out);
 		Paths(Out);
 		Bridge(Out);

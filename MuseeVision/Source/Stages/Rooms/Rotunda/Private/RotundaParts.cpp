@@ -17,6 +17,11 @@ namespace Musee::Rotunda
 		return Key(TEXT("sun-clock.drum"));
 	}
 
+	FMuseeKey PanelsBody()
+	{
+		return Key(TEXT("stair.balustrade.panels"));
+	}
+
 	FFormProfile Profile(TConstArrayView<Plan::FStep> Steps, bool bClosed)
 	{
 		auto ArcStart = [](const Plan::FStep& Step)

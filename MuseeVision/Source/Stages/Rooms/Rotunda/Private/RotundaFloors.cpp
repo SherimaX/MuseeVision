@@ -1,3 +1,4 @@
+#include "FormCatalogue.h"
 #include "RotundaParts.h"
 #include "RotundaPlan.h"
 #include "TimeMuseumDial.h"
@@ -5,9 +6,9 @@
 /**
  * The floors (§3.1): the fixed ring of radial Crema Marfil slabs in three courses, laid 30 mm over its core; and the
  * dial, the lifting drum's top, in seven bands with bronze fillets on their joints and the gilt sun at its centre,
- * the arrival point. The dial's hour ring, hour lines, meridian and minute ticks are laid from Time's dial (§5), in the
- * groove its ring cuts in the outer band (RotundaDialInlay); the numerals and the motto's letters wait for lettering in
- * Form. Nothing is typed by hand here.
+ * the arrival point; the motto in bronze capitals on the ring's middle course. The dial's hour ring, hour lines,
+ * meridian and minute ticks are laid from Time's dial (ﾂｧ5), in the groove its ring cuts in the outer band
+ * (RotundaDialInlay). Nothing is typed by hand here.
  */
 namespace Musee::Rotunda
 {
@@ -32,6 +33,41 @@ namespace Musee::Rotunda
 						Ring(C.Inner, C.Outer, -Plan::FinishDepth, 0.0, From, From + Each), Walkable));
 				}
 			}
+		}
+
+		/**
+		 * The motto (§3.1): its capitals cast in bronze and set on the middle course, its words parted by gilt stops, lettered
+		 * in the catalogue's Centaur. When the catalogue lacks the face, the empty face leaves every letter undrawn and Form's
+		 * making says so.
+		 */
+		void Motto(TArray<FFormDrawing>& Out)
+		{
+			const TValueOrError<FFormTypeface, FString> Face = Musee::Form::FindTypeface(FMuseeKey(Plan::MottoFace));
+			FFormLettering Shape;
+			for (const TCHAR* Word : Plan::MottoWords)
+			{
+				if (!Shape.Text.IsEmpty())
+				{
+					Shape.Text.AppendChar(FFormLettering::Interpunct);
+				}
+				Shape.Text += Word;
+			}
+			Shape.Typeface = Face.HasValue() ? Face.GetValue() : FFormTypeface();
+			Shape.CapMeters = Plan::MottoCap;
+			Shape.TrackingCaps = Plan::MottoTracking;
+			Shape.WordSpaceCaps = Plan::MottoWordSpace;
+			Shape.StopGapCaps = Plan::MottoStopGap;
+			Shape.StopHalfWidthCaps = Plan::MottoStopHalfWidth;
+			Shape.StopTopCaps = Plan::MottoStopTop;
+			Shape.StopPointCaps = Plan::MottoStopPoint;
+			Shape.StopApexMeters = Plan::MottoStopApex;
+			Shape.BaselineRadiusMeters = Plan::MottoBaseline;
+			Shape.CentreDegrees = Plan::MottoCentreDeg;
+			Shape.bTopsInward = true;
+			Shape.ProudMeters = Plan::MottoProud;
+			Shape.BevelMeters = Plan::MottoBevel;
+			FFormDrawing& Drawing = Out.Add_GetRef(Drawn(TEXT("floor.motto"), TEXT("floor.motto"), MoveTemp(Shape), nullptr));
+			Drawing.PartSurfaces.Add(FFormLettering::StopPart, Surface(TEXT("floor.motto.stop")));
 		}
 
 		bool HasFillet(double Radius)
@@ -194,6 +230,7 @@ namespace Musee::Rotunda
 	void DrawFloors(TArray<FFormDrawing>& Out)
 	{
 		FixedRing(Out);
+		Motto(Out);
 		// The dial is Time's: where its ring runs and its marks fall is where the museum's sun casts the node's shadow.
 		// Without it the dial is drawn bare, and the missing inlay is Rotunda.DialLaid's to report.
 		const TValueOrError<Time::FMuseumDial, FString> TimeDial = Time::FMuseumDial::Read();

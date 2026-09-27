@@ -274,6 +274,14 @@ namespace Musee::Salon::Plan
 	inline constexpr double ScrimFrameTop = 13.494;
 	/** A 25 × 25 angle is rolled 3 mm thick (EN 10056-1: the lightest equal angle of 25 mm legs). */
 	inline constexpr double ScrimFrameThickness = 0.003;
+	/**
+	 * The linen hangs 30 mm at its middle (the sheet's depth; its shape is the stretched cloth's own, Form's membrane). It is
+	 * a medium linen about 0.5 mm thick (textile thickness by ASTM D1777: medium-weight linen gauges 0.4 to 0.6 mm), set out
+	 * on a grid of 0.05, which follows its sag (curvature under 0.05 per metre) within a hundredth of a millimetre.
+	 */
+	inline constexpr double ScrimSag = 0.030;
+	inline constexpr double ScrimThickness = 0.0005;
+	inline constexpr double ScrimGrid = 0.050;
 	/** The outer lantern: a kerb 0.150 wide from the roof's top to 14.200, two glass slopes at 30° to a ridge along x. */
 	inline constexpr double KerbWidth = 0.150;
 	inline constexpr double KerbTop = 14.200;

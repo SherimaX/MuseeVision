@@ -18,8 +18,8 @@ namespace Musee::Form
 	void Sweep(FMeshBuilder& Mesh, TConstArrayView<FSweepFrame> Run, const FProfileStations& Profile);
 
 	/**
-	 * Closes a closed profile's end at a frame with a flat cap, concave profiles included: at the run's start
-	 * (bRunEnd false) or its end. The cap faces the way the profile's surfaces face: out of the solid for a
+	 * Closes a closed profile's end at a frame with a flat cap in the frame's section plane, concave profiles included: at
+	 * the run's start (bRunEnd false) or its end. The cap faces the way the profile's surfaces face: out of the solid for a
 	 * counter-clockwise profile (back along the run at its start, forward at its end), into the void for a clockwise
 	 * one, so the capped sweep is one consistently oriented shell. The cap's UVs are metres in its own plane. It uses
 	 * the profile's stations and no others, so it meets the sweep vertex for vertex. Returns false, adding nothing,

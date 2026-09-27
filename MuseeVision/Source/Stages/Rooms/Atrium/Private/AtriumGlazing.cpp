@@ -1,10 +1,9 @@
 #include "AtriumParts.h"
 
 /**
- * The glazing (§3.4): the drum's double skin (the misty inner leaf in 96 panes, the clear outer leaf between the order's
- * verticals, the head closer that caps the cavity) and the canopy, the Sphere's glazed underside between the ring and the
- * drum. The canopy is drawn as its one spherical zone: Form cuts no panes on a doubly curved surface yet, so the ≈ 2,350
- * triangles of the grid are the zone's nearest honest form, and the edge-lit panes' division waits for Form.
+ * The drum's glazing (§3.4): its double skin (the misty inner leaf in 96 panes, the clear outer leaf between the order's
+ * verticals, the head closer that caps the cavity). The canopy's panes are cut on the grid that carries them
+ * (AtriumCanopyGrid).
  */
 namespace Musee::Atrium
 {
@@ -100,29 +99,11 @@ namespace Musee::Atrium
 				}
 			}
 		}
-
-		/**
-		 * The canopy's glass: the spherical zone from the ring to the drum, its upper face on the seam (R 14.000) and its
-		 * room face R 14.024 about the Sphere's centre, drawn as the section between them turned full round.
-		 */
-		void Canopy(TArray<FFormDrawing>& Out)
-		{
-			const double C = Plan::SphereCentreZ;
-			const double Ring = Plan::RingOuter;
-			auto Angle = [](double Radius, double R) { return -FMath::RadiansToDegrees(FMath::Acos(R / Radius)); };
-			FFormProfile Zone = FFormProfile::From(FVector2D(Ring, C - FMath::Sqrt(FMath::Square(Plan::CanopyRadius) - Ring * Ring)));
-			Zone.ArcAbout(FVector2D(0.0, C), Plan::CanopyRadius, Plan::CanopyRadius, Angle(Plan::CanopyRadius, Ring), Angle(Plan::CanopyRadius, Plan::SeamRadius),
-				EFormJoint::Crisp);
-			Zone.LineTo(FVector2D(Plan::SeamRadius, C), EFormJoint::Crisp);
-			Zone.ArcAbout(FVector2D(0.0, C), Plan::SeamRadius, Plan::SeamRadius, 0.0, Angle(Plan::SeamRadius, Ring), EFormJoint::Crisp);
-			AsGlass(Out.Add_GetRef(Drawn(Pieces::Canopy, TEXT("canopy.glass"), TurnedAround(Zone.Close()), Solid)));
-		}
 	}
 
 	void DrawGlazing(TArray<FFormDrawing>& Out)
 	{
 		InnerLeaf(Out);
 		OuterLeaf(Out);
-		Canopy(Out);
 	}
 }

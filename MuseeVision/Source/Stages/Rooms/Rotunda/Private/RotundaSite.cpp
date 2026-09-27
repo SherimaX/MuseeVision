@@ -73,10 +73,9 @@ namespace Musee::Rotunda
 		}
 
 		/**
-		 * The openings: the eye, the hall's one opening to the sky (D-004); the rough openings at the five ports; and the
-		 * housings in the floor: the pocket the drum's wall slides into and the ram bores in its floor. The drum's door,
-		 * which joins the hall and the stair while the sun clock is raised, is no opening to the sky, and Form has no kind
-		 * for a passage between two enclosures of one stage, so it is not declared.
+		 * The openings: the eye, the hall's one opening to the sky (D-004); the rough openings at the five ports; the
+		 * housings in the floor: the pocket the drum's wall slides into and the ram bores in its floor; and the sun clock's
+		 * door, a passage from the stair within the lifting drum to the hall, which rides the drum and opens only raised.
 		 */
 		void Openings(FSiteDescription& Out)
 		{
@@ -103,6 +102,16 @@ namespace Musee::Rotunda
 				FVector2D(2.0 * Plan::PocketOuter, 2.0 * Plan::PocketOuter));
 			const double Bores = 2.0 * (Plan::BoreRadius + 0.5 * Plan::BoreDiameter);
 			Opening(Out, TEXT("sun-clock.rams"), EFormOpeningKind::Housing, TEXT("hall"), LookingDown(Plan::PocketFloor), FVector2D(Bores, Bores));
+
+			// The door on the drum's wall face, in the drum's frame: its radial jambs 2.60 apart there, from the sill to the crown.
+			const double DoorHalf = Plan::SunWallFace * FMath::DegreesToRadians(Plan::SunDoorHalfDeg);
+			const double DoorCrown = Plan::SunDoorSpringing + DoorHalf;
+			const FVector2D DoorFace = Polar(Plan::SunWallFace, Plan::SunDoorDeg);
+			const FVector DoorCentre(DoorFace.X, DoorFace.Y, 0.5 * (Plan::SunSill + DoorCrown));
+			FFormOpening& Door = Opening(Out, TEXT("sun-clock.door"), EFormOpeningKind::Passage, TEXT("stair"),
+				FrameOfAxes(DoorCentre, Tangent(Plan::SunDoorDeg), FVector::UpVector), FVector2D(2.0 * DoorHalf, DoorCrown - Plan::SunSill));
+			Door.Beyond = Key(TEXT("hall"));
+			Door.Body = DrumBody();
 		}
 
 		void Anchor(FSiteDescription& Out, const TCHAR* Local, const TCHAR* Kind, const FMuseeFrame& Frame)

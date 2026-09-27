@@ -23,6 +23,15 @@ namespace Musee::Form::Drawing
 	bool DrawBasin(const FFormBasin& Shape, FMeshBuilder& Mesh, FString& OutWhy);
 	bool DrawStair(const FFormStair& Shape, FMeshBuilder& Mesh, FString& OutWhy);
 	bool DrawRelief(const FFormRelief& Shape, FMeshBuilder& Mesh, FString& OutWhy);
+	bool DrawHeightfield(const FFormHeightfield& Shape, FMeshBuilder& Mesh, FString& OutWhy);
+	bool DrawLettering(const FFormLettering& Shape, FMeshBuilder& Mesh, FString& OutWhy);
+	bool DrawCloth(const FFormCloth& Shape, FMeshBuilder& Mesh, FString& OutWhy);
+
+	/**
+	 * Carries a shape drawn in its ground's development onto the ground (FFormGround) within the chord tolerance, into Out;
+	 * false, with the reason, for a ground that can't be set out.
+	 */
+	bool SetOnGround(const FFormGround& Ground, const FMeshBuilder& Developed, FMeshBuilder& Out, FString& OutWhy);
 
 	/** The parts a dome is drawn in: its outer face and springing, its inner face (or its one sheet), its crown zone. */
 	namespace DomePart

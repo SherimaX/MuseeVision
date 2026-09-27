@@ -8,6 +8,7 @@
 #include "MotionSchedule.h"
 #include "MuseeRecords.h"
 #include "RotundaPlan.h"
+#include "RotundaStairLine.h"
 #include "RotundaRoom.h"
 #include "SiteDescription.h"
 #include "SitePortClass.h"
@@ -230,13 +231,27 @@ namespace Musee::Rotunda::Tests
 			}
 		}
 
-		// The dial and the sun clock's drum ride its body; nothing else moves.
+		// The dial and the sun clock's drum ride its body, the retracting balustrade's panels theirs; nothing else moves.
 		const FMuseeKey Drum(TEXT("rotunda.sun-clock.drum"));
+		const FMuseeKey Panels(TEXT("rotunda.stair.balustrade.panels"));
+		int32 PanelPieces = 0;
 		for (const FFormDrawing& Piece : Description.Pieces)
 		{
 			const FString Name = Piece.Name.ToString();
-			const bool bRides = Name.StartsWith(TEXT("dial.")) || Name.StartsWith(TEXT("sun-clock."));
-			TestTrue(*FString::Printf(TEXT("%s rides the drum only if it is the drum's"), *Name), bRides ? Piece.Body == Drum : Piece.Body.IsNone());
+			const bool bRidesDrum = Name.StartsWith(TEXT("dial.")) || Name.StartsWith(TEXT("sun-clock."));
+			const bool bRidesPanels = Name.StartsWith(TEXT("stair.balustrade.panel."));
+			PanelPieces += bRidesPanels ? 1 : 0;
+			const FMuseeKey Expected = bRidesDrum ? Drum : (bRidesPanels ? Panels : FMuseeKey());
+			TestTrue(*FString::Printf(TEXT("%s rides a body only if it is that body's"), *Name), Piece.Body == Expected);
+		}
+		TestTrue(TEXT("the two retracting panels are drawn"), PanelPieces > 0);
+
+		// The sun clock's door is a passage from the stair to the hall, on the drum.
+		const FFormOpening* Door = Description.Openings.FindByPredicate([](const FFormOpening& O) { return O.Key == FMuseeKey(TEXT("rotunda.sun-clock.door")); });
+		if (TestNotNull(TEXT("the sun clock's door is declared"), Door))
+		{
+			TestTrue(TEXT("a passage from the stair into the hall, riding the drum"), Door->Kind == EFormOpeningKind::Passage
+				&& Door->Enclosure == FMuseeKey(TEXT("rotunda.stair")) && Door->Beyond == FMuseeKey(TEXT("rotunda.hall")) && Door->Body == Drum);
 		}
 
 		// The description is a plain function of the plan: the same on every call.
@@ -281,15 +296,42 @@ namespace Musee::Rotunda::Tests
 		const FFormDrawing* TopLanding = FindPiece(Description, TEXT("stair.tread.01"));
 		const FFormDrawing* Mid = FindPiece(Description, TEXT("stair.tread.20"));
 		const FFormDrawing* Last = FindPiece(Description, TEXT("stair.tread.39"));
-		if (TestTrue(TEXT("the top landing, the mid landing and the last tread are drawn"), TopLanding && Mid && Last)
-			&& TestTrue(TEXT("each a turned stone"), TopLanding->Shape.IsType<FFormLathe>() && Mid->Shape.IsType<FFormLathe>() && Last->Shape.IsType<FFormLathe>()))
+		auto Span = [](const FFormDrawing* Tread, double& OutFrom, double& OutTo)
 		{
-			TestEqual(TEXT("the top landing's back edge"), TopLanding->Shape.Get<FFormLathe>().ToDegrees, 194.0, 1e-9);
-			TestEqual(TEXT("its nosing"), TopLanding->Shape.Get<FFormLathe>().FromDegrees, 164.0, 1e-9);
-			TestEqual(TEXT("the mid landing turns 20 degrees"), Mid->Shape.Get<FFormLathe>().ToDegrees - Mid->Shape.Get<FFormLathe>().FromDegrees, 20.0, 1e-9);
-			TestEqual(TEXT("from 69.622 degrees"), Mid->Shape.Get<FFormLathe>().ToDegrees, 69.622, 0.001);
-			TestEqual(TEXT("the last riser at -50 degrees"), Last->Shape.Get<FFormLathe>().FromDegrees, -50.0, 1e-9);
+			// A tread's plan: the annular sector whose first step is its outer arc, from its nosing to its back.
+			const FFormArc& Arc = Tread->Shape.Get<FFormHeightfield>().Outline.Steps[0].Arc;
+			OutFrom = Arc.FromDegrees;
+			OutTo = Arc.ToDegrees;
+		};
+		if (TestTrue(TEXT("the top landing, the mid landing and the last tread are drawn"), TopLanding && Mid && Last)
+			&& TestTrue(TEXT("each a stone dressed to the soffit"), TopLanding->Shape.IsType<FFormHeightfield>() && Mid->Shape.IsType<FFormHeightfield>()
+				&& Last->Shape.IsType<FFormHeightfield>()))
+		{
+			double From = 0.0;
+			double To = 0.0;
+			Span(TopLanding, From, To);
+			TestEqual(TEXT("the top landing's back edge"), To, 194.0, 1e-9);
+			TestEqual(TEXT("its nosing"), From, 164.0, 1e-9);
+			Span(Mid, From, To);
+			TestEqual(TEXT("the mid landing turns 20 degrees"), To - From, 20.0, 1e-9);
+			TestEqual(TEXT("from 69.622 degrees"), To, 69.622, 0.001);
+			Span(Last, From, To);
+			TestEqual(TEXT("the last riser at -50 degrees"), From, -50.0, 1e-9);
+			const FFormHeightfield& Stone = Last->Shape.Get<FFormHeightfield>();
+			TestTrue(TEXT("the last tread's underside runs into the landing no lower than -6.02"),
+				Stone.BottomMeters(6.0 * FMath::Cos(FMath::DegreesToRadians(-47.0)), 6.0 * FMath::Sin(FMath::DegreesToRadians(-47.0))) >= -6.02 - 1e-12);
 		}
+		// §3.9: at the split the fixed balustrade's handrail tops out at -0.23, under the lowered dial's ribs (-0.13) with 0.10 to
+		// spare; the wall rail's top end at -0.18.
+		const double Split = Stair::Front(Plan::SplitTread);
+		TestEqual(TEXT("the split's handrail top"), Stair::StringTop(Split) + Plan::HandrailHeight + 0.5 * Plan::HandrailHigh, -0.2325, 1e-9);
+		TestEqual(TEXT("the wall rail's top"), Stair::Pitch(Stair::Front(Plan::WallRailFromTread)) + Plan::WallRailOverPitch + 0.5 * Plan::WallRailDiameter,
+			-0.18, 1e-9);
+		// §3.4: 5 rings of 28 coffers, each run round its cell.
+		const int32 Coffers = Description.Pieces.FilterByPredicate([](const FFormDrawing& D) { return D.Name.ToString().StartsWith(TEXT("dome.coffer.ring-")); }).Num();
+		TestEqual(TEXT("140 coffers"), Coffers, 140);
+		const FFormDrawing* Motto = FindPiece(Description, TEXT("floor.motto"));
+		TestTrue(TEXT("the motto is lettered"), Motto && Motto->Shape.IsType<FFormLettering>() && Motto->Shape.Get<FFormLettering>().Text.StartsWith(TEXT("HORAS")));
 		TestEqual(TEXT("forty risers make the 6.00 from the raised sill to the landing"), Plan::Risers * Plan::Riser, 6.0, 1e-12);
 		TestEqual(TEXT("the walking line's going makes Blondel's pace"), 2.0 * Plan::Riser + 3.61 * FMath::DegreesToRadians(Plan::TreadDeg), 0.630, 0.001);
 		return true;

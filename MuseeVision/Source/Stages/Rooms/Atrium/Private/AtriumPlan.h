@@ -179,9 +179,10 @@ namespace Musee::Atrium::Plan
 	inline constexpr double RibTurnCentreR = 10.995;
 	inline constexpr double RibTurnRadius = 3.000;
 	inline constexpr double RibTurnEndDeg = 130.230;
-	/** Its section: 0.420 deep from the back into the room, 0.300 wide. */
+	/** Its section: 0.420 deep from the back into the room, 0.300 wide, with 30 mm chamfers on its room-side arrises. */
 	inline constexpr double RibDepth = 0.420;
 	inline constexpr double RibHalf = 0.150;
+	inline constexpr double RibChamfer = 0.030;
 	/** The shoe: a sleeve 0.435 deep and ±0.165 wide round the rib's foot, z 0.000 → 0.360. */
 	inline constexpr double ShoeDepth = 0.435;
 	inline constexpr double ShoeHalf = 0.165;

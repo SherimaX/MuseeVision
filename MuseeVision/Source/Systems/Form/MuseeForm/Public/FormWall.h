@@ -22,11 +22,28 @@ struct FFormWallOpening
 	/** The sill above the wall's base, metres; zero for a door, whose opening runs to the floor. */
 	double SillMeters = 0.0;
 
-	/** The head above the wall's base, metres: the lintel's soffit, or the springing of an arched head. */
+	/**
+	 * The head above the wall's base, metres: the lintel's soffit, or the springing of an arched head, which may lie below the
+	 * sill where the wall is the upper course of a block the arch passes through (SillHalfWidthMeters).
+	 */
 	double HeadMeters = 0.0;
 
-	/** A semicircular head of half the width's radius, springing at HeadMeters. */
+	/**
+	 * An arched head springing at HeadMeters from both jambs: a semicircle of half the width's radius, unless
+	 * ArchRadiusMeters says otherwise.
+	 */
 	bool bArched = false;
+
+	/**
+	 * The radius of an arched head's intrados, metres. Zero: a semicircle. Larger than half the width: a segmental arch
+	 * of that radius through both springings, its centre below them (a portal's flat arch); or, with bPointed, a
+	 * two-centred pointed arch whose two arcs of that radius each spring from one jamb and meet at the crown, their
+	 * centres on the springing line (an equilateral arch's radius is the width).
+	 */
+	double ArchRadiusMeters = 0.0;
+
+	/** The arched head is pointed: two arcs of ArchRadiusMeters meeting at the crown. */
+	bool bPointed = false;
 
 	/**
 	 * A straight passage: its jambs and soffit run parallel to the opening's axis (the face's normal where the axis meets
@@ -36,8 +53,79 @@ struct FFormWallOpening
 	 */
 	bool bStraight = false;
 
+	/** Half the clear width, metres. */
+	[[nodiscard]] double HalfWidthMeters() const { return 0.5 * WidthMeters; }
+
+	/** The radius of the head's arcs: half the width for a semicircle. Meaningless for a flat head. */
+	[[nodiscard]] double IntradosRadiusMeters() const { return ArchRadiusMeters > 0.0 ? ArchRadiusMeters : HalfWidthMeters(); }
+
+	/** Whether the arched head's radius suits its kind: at least half the width, as a segment or two arcs must be. */
+	[[nodiscard]] bool HasBuildableHead() const
+	{
+		return !bArched || IntradosRadiusMeters() >= HalfWidthMeters();
+	}
+
+	/** How far the head's crown stands above its springing, metres: zero for a flat head. */
+	[[nodiscard]] double RiseMeters() const
+	{
+		if (!bArched)
+		{
+			return 0.0;
+		}
+		const double Half = HalfWidthMeters();
+		const double Radius = IntradosRadiusMeters();
+		if (bPointed)
+		{
+			return FMath::Sqrt(FMath::Max(0.0, Radius * Radius - FMath::Square(Radius - Half)));
+		}
+		return Radius - FMath::Sqrt(FMath::Max(0.0, Radius * Radius - Half * Half));
+	}
+
+	/**
+	 * The head's soffit above the wall's base at an offset across the opening's axis (clamped to the jambs), metres: the
+	 * lintel's, or the arch's intrados.
+	 */
+	[[nodiscard]] double HeadAt(double AcrossMeters) const
+	{
+		if (!bArched)
+		{
+			return HeadMeters;
+		}
+		const double Half = HalfWidthMeters();
+		const double Radius = IntradosRadiusMeters();
+		const double Across = FMath::Min(FMath::Abs(AcrossMeters), Half);
+		if (bPointed)
+		{
+			return HeadMeters + FMath::Sqrt(FMath::Max(0.0, Radius * Radius - FMath::Square(Across + Radius - Half)));
+		}
+		const double CentreBelow = FMath::Sqrt(FMath::Max(0.0, Radius * Radius - Half * Half));
+		return HeadMeters - CentreBelow + FMath::Sqrt(FMath::Max(0.0, Radius * Radius - Across * Across));
+	}
+
 	/** The top of the opening above the wall's base: the crown of an arch, or the lintel's soffit. */
-	[[nodiscard]] double CrownMeters() const { return HeadMeters + (bArched ? 0.5 * WidthMeters : 0.0); }
+	[[nodiscard]] double CrownMeters() const { return HeadMeters + RiseMeters(); }
+
+	/**
+	 * Half the opening's width at its sill: the jambs', or, where an arch springs below the sill (the upper course of a
+	 * block a segmental arch passes through, whose bed lies above the springing), the arch's half-chord at the sill, where
+	 * its intrados comes down to it.
+	 */
+	[[nodiscard]] double SillHalfWidthMeters() const
+	{
+		const double Half = HalfWidthMeters();
+		if (!bArched || HeadMeters >= SillMeters)
+		{
+			return Half;
+		}
+		const double Radius = IntradosRadiusMeters();
+		const double Below = SillMeters - HeadMeters;
+		if (bPointed)
+		{
+			return FMath::Max(0.0, FMath::Sqrt(FMath::Max(0.0, Radius * Radius - Below * Below)) - Radius + Half);
+		}
+		const double CentreBelow = FMath::Sqrt(FMath::Max(0.0, Radius * Radius - Half * Half));
+		return FMath::Sqrt(FMath::Max(0.0, Radius * Radius - FMath::Square(Below + CentreBelow)));
+	}
 };
 
 /**
@@ -82,5 +170,17 @@ struct FFormWall
 	double BaseMeters = 0.0;
 	double HeightMeters = 0.0;
 
+	/**
+	 * The wall's top, when it isn't level at HeightMeters: its line drawn on the face's development, (U metres along the
+	 * face from the start of its plan path, Z above the base), in lines and arcs running forward in U, one height at each
+	 * distance: a lining that follows the arc of the vault above it, a gable's rake, a tympanum under an arch. Before its
+	 * start and past its end the top runs level at that end's height. Undrawn (no start): the top is level.
+	 */
+	FFormProfile Top;
+
+	/** Whether the top follows a drawn line. */
+	[[nodiscard]] bool HasDrawnTop() const { return !Top.Start.IsEmpty(); }
+
+	/** The openings, side by side along the face or one wholly above another (a lunette over a door), never overlapping. */
 	TArray<FFormWallOpening> Openings;
 };

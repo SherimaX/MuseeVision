@@ -126,13 +126,22 @@ namespace Musee::HallOfLight::Tests
 		{
 			const FFormDrawing* Lining = FindPiece(Description, Rough.Key);
 			const FFormWall* Wall = Lining ? Lining->Shape.TryGet<FFormWall>() : nullptr;
-			if (!TestTrue(*FString::Printf(TEXT("%s is a wall with its port's rough opening"), Rough.Key), Wall && Wall->Openings.Num() == 1))
+			const bool bEast = Rough.Key == FString(TEXT("lining.east"));
+			if (!TestTrue(*FString::Printf(TEXT("%s is a wall with its port's rough opening"), Rough.Key), Wall && Wall->Openings.Num() == (bEast ? 2 : 1)))
 			{
 				continue;
 			}
 			const FFormWallOpening& Opening = Wall->Openings[0];
-			const double Radius = FVector2D(Wall->Plan.StartPoint() - FVector2D(Rough.Key == FString(TEXT("lining.west")) ? -11.2 : 42.8, 0.0)).Size();
-			TestEqual(TEXT("its jambs stand 1/2 the rough width off the axis"), Radius * FMath::Sin(0.5 * Opening.WidthMeters / Radius), 0.5 * Rough.Value.X, 1e-9);
+			TestTrue(TEXT("its rough opening runs straight through, jambs parallel"), Opening.bStraight);
+			TestEqual(TEXT("its jambs stand 1/2 the rough width off the axis"), 0.5 * Opening.WidthMeters, 0.5 * Rough.Value.X, 1e-9);
+			TestTrue(TEXT("its top follows the vault's arc"), Wall->HasDrawnTop());
+			if (bEast)
+			{
+				// Sec. 3.1: the lunette above the door, the arc R 5.19 about the vault's axis over its sill at 6.20.
+				const FFormWallOpening& Lunette = Wall->Openings[1];
+				TestEqual(TEXT("the lunette's sill"), Wall->BaseMeters + Lunette.SillMeters, 6.2, 1e-9);
+				TestEqual(TEXT("its arc's crown"), Wall->BaseMeters + Lunette.CrownMeters(), 2.2 + 5.19, 1e-9);
+			}
 			TestEqual(TEXT("its head springs from the sheet's height"), Wall->BaseMeters + Opening.HeadMeters, Rough.Value.Y, 1e-9);
 			TestEqual(TEXT("its sill is 0.050 under the threshold"), Wall->BaseMeters + Opening.SillMeters, -0.050, 1e-9);
 			TestTrue(TEXT("its head is arched as its class"), Opening.bArched == (Rough.Value.Z > 0.5));
@@ -306,7 +315,7 @@ namespace Musee::HallOfLight::Tests
 		TestEqual(TEXT("18 arches, three plates each"), CountPieces(Description, TEXT("arch."), TEXT(".web")), 18);
 		TestEqual(TEXT("7 purlin lines in 19 lengths"), CountPieces(Description, TEXT("purlin.")), 7 * 19);
 		TestEqual(TEXT("136 crosses"), CountPieces(Description, TEXT("cross."), TEXT(".a")), 136);
-		TestEqual(TEXT("2 collars of 8 flats"), CountPieces(Description, TEXT("collar.")), 16);
+		TestEqual(TEXT("2 collars, each one flat bent round its lining"), CountPieces(Description, TEXT("collar.")), 2);
 		TestEqual(TEXT("32 print stems"), CountPieces(Description, TEXT("print.stem."), TEXT("west")) + CountPieces(Description, TEXT("print.stem."), TEXT("east")), 32);
 		TestEqual(TEXT("8 autochrome bars"), CountPieces(Description, TEXT("autochrome.bar.")), 8);
 		TestEqual(TEXT("5 viewing stones"), CountPieces(Description, TEXT("viewing-stone."), TEXT(".ring")), 5);

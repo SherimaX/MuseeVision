@@ -13,7 +13,10 @@
  * faces. Each strip is split round the openings that cross it, and every strip edge carries every height at which its
  * neighbours break (a sill, a head), so the strips, the reveals, the top and the bed meet edge to edge and the wall is one
  * closed solid. A straight passage's stations stand where its jambs and its arch's stations stand across its axis, and
- * each finds its back at the same offset across the axis, so the passage's jambs and soffit run parallel to its axis.
+ * each finds its back at the same offset across the axis, so the passage's jambs and soffit run parallel to its axis. An
+ * arched head, round, segmental or pointed, has a station at each of its arcs' stations; a drawn top has one at each of
+ * its own, and each strip's top follows it on that chord. Openings may stand one above another in a stretch (a lunette over
+ * a door): a strip under both is solid from the bed to the lower one's sill, between them, and over the upper one's head.
  */
 namespace Musee::Form::Drawing
 {
@@ -70,18 +73,96 @@ namespace Musee::Form::Drawing
 				return bInclusive ? U >= Low - Same && U <= High + Same : U > Low + Same && U < High - Same;
 			}
 
-			/** The underside of the head at U: the lintel, or the arch. */
+			/** The underside of the head at U: the lintel, or the arch's intrados, round, segmental or pointed. */
 			double HeadAt(double U) const
 			{
-				if (!Opening->bArched)
-				{
-					return Opening->HeadMeters;
-				}
-				const double Radius = 0.5 * Opening->WidthMeters;
-				const double Across = FMath::Clamp(AcrossAt(U), -Radius, Radius);
-				return Opening->HeadMeters + FMath::Sqrt(FMath::Max(0.0, Radius * Radius - Across * Across));
+				return Opening->HeadAt(AcrossAt(U));
 			}
 		};
+
+		/**
+		 * The offsets across an opening's axis at which its arched head must have a station, so its intrados is followed
+		 * within the chord tolerance: each arc's own stations, and the crown.
+		 */
+		TArray<double> HeadStationsAcross(const FFormWallOpening& O)
+		{
+			TArray<double> Across;
+			if (!O.bArched)
+			{
+				return Across;
+			}
+			const double Half = O.HalfWidthMeters();
+			const double Radius = O.IntradosRadiusMeters();
+			if (O.bPointed)
+			{
+				// Each half is an arc of the radius about a centre on the springing line, Radius - Half across the axis from
+				// its own jamb's far side: from the springing (angle 0 at the jamb) to the crown on the axis.
+				const double Centre = Half - Radius;
+				const double Crown = FMath::Acos(FMath::Clamp((Radius - Half) / Radius, -1.0, 1.0));
+				for (const double Angle : ArcStations(Radius, 0.0, Crown, DefaultChordToleranceMeters))
+				{
+					const double Offset = FMath::Max(0.0, Centre + Radius * FMath::Cos(Angle));
+					if (Offset <= O.SillHalfWidthMeters())
+					{
+						Across.Add(Offset);
+						Across.Add(-Offset);
+					}
+				}
+				return Across;
+			}
+			// A round or segmental head is one arc about a centre on the axis, at or below the springing, with its crown; where
+			// it springs below the sill, only the part above the sill is the opening's.
+			const double Springing = FMath::Acos(FMath::Clamp(O.SillHalfWidthMeters() / Radius, -1.0, 1.0));
+			const double Crown[1] = {UE_DOUBLE_HALF_PI};
+			for (const double Angle : ArcStations(Radius, UE_DOUBLE_PI - Springing, Springing, DefaultChordToleranceMeters, Crown))
+			{
+				Across.Add(Radius * FMath::Cos(Angle));
+			}
+			return Across;
+		}
+
+		/**
+		 * The wall's top along its face: level at its height, or on the drawn line's stations (U along the face, Z above the
+		 * base), held level beyond its ends.
+		 */
+		struct FWallTop
+		{
+			double Level = 0.0;
+			TArray<double> U;
+			TArray<double> Z;
+
+			double At(double Along) const { return U.IsEmpty() ? Level : Interpolate(U, Z, Along); }
+		};
+
+		bool ReadTop(const FFormWall& Wall, FWallTop& Out, FString& OutWhy)
+		{
+			Out.Level = Wall.HeightMeters;
+			if (!Wall.HasDrawnTop())
+			{
+				return true;
+			}
+			if (!CheckProfile(Wall.Top, TEXT("the top"), false, OutWhy))
+			{
+				return false;
+			}
+			for (const FProfileVertex& Vertex : Resolve(Wall.Top).Vertices)
+			{
+				if (!Out.U.IsEmpty() && Vertex.Point.X <= Out.U.Last() + Same)
+				{
+					OutWhy = FString::Printf(TEXT("the top runs back or stands vertical at %.4f m along the face: it gives one height at each distance"),
+						Vertex.Point.X);
+					return false;
+				}
+				if (Vertex.Point.Y <= Same)
+				{
+					OutWhy = FString::Printf(TEXT("the top comes down to the base at %.4f m along the face"), Vertex.Point.X);
+					return false;
+				}
+				Out.U.Add(Vertex.Point.X);
+				Out.Z.Add(Vertex.Point.Y);
+			}
+			return true;
+		}
 
 		/** A back line in plan, as its points and the normals out of the wall there. */
 		struct FBackLine
@@ -182,7 +263,7 @@ namespace Musee::Form::Drawing
 				Span.StationU.Add((*Run)[Index].U);
 				Span.StationAcross.Add(Across((*Run)[Index]));
 			}
-			const double Half = 0.5 * O.WidthMeters;
+			const double Half = O.SillHalfWidthMeters();
 			if (Span.StationAcross[0] > -Half || Span.StationAcross.Last() < Half)
 			{
 				OutWhy = TEXT("a straight passage is wider than the stretch of wall it passes through");
@@ -194,20 +275,31 @@ namespace Musee::Form::Drawing
 		}
 
 		/** Every opening set out on the face; false, with the reason, when one doesn't fit or two overlap. */
-		bool SetOutOpenings(const FFormWall& Wall, const TArray<TArray<FSweepFrame>>& Runs, TArray<FOpeningSpan>& OutSpans, FString& OutWhy)
+		bool SetOutOpenings(const FFormWall& Wall, const FWallTop& Top, const TArray<TArray<FSweepFrame>>& Runs, TArray<FOpeningSpan>& OutSpans,
+			FString& OutWhy)
 		{
 			for (int32 Index = 0; Index < Wall.Openings.Num(); ++Index)
 			{
 				const FFormWallOpening& O = Wall.Openings[Index];
-				if (!(O.WidthMeters > 0.0 && O.SillMeters >= 0.0 && O.HeadMeters > O.SillMeters && O.CrownMeters() < Wall.HeightMeters - Same))
+				// Under the top at its crown and at its jambs (where it meets its sill, for an arch springing below it).
+				const double Half = O.SillHalfWidthMeters();
+				const bool bUnderTop = O.CrownMeters() < Top.At(O.CenterMeters) - Same && O.HeadAt(Half) < Top.At(O.CenterMeters - Half) - Same
+					&& O.HeadAt(Half) < Top.At(O.CenterMeters + Half) - Same;
+				const bool bHeadAboveSill = O.HeadMeters > O.SillMeters || (O.bArched && O.CrownMeters() > O.SillMeters + Same);
+				if (!(O.WidthMeters > 0.0 && O.SillMeters >= 0.0 && bHeadAboveSill && bUnderTop))
 				{
 					OutWhy = FString::Printf(TEXT("opening %d doesn't fit: it needs a width, a head above its sill, and a crown under the wall's top"), Index);
 					return false;
 				}
+				if (!O.HasBuildableHead())
+				{
+					OutWhy = FString::Printf(TEXT("opening %d's arch has a radius under half its width, which can't span it"), Index);
+					return false;
+				}
 				FOpeningSpan& Span = OutSpans.AddDefaulted_GetRef();
 				Span.Opening = &O;
-				Span.Low = O.CenterMeters - 0.5 * O.WidthMeters;
-				Span.High = O.CenterMeters + 0.5 * O.WidthMeters;
+				Span.Low = O.CenterMeters - O.SillHalfWidthMeters();
+				Span.High = O.CenterMeters + O.SillHalfWidthMeters();
 				if (O.bStraight && !SetOutStraight(O, Runs, Span, OutWhy))
 				{
 					return false;
@@ -218,7 +310,12 @@ namespace Musee::Form::Drawing
 				const FOpeningSpan& Span = OutSpans[Index];
 				for (int32 Other = Index + 1; Other < OutSpans.Num(); ++Other)
 				{
-					if (OutSpans[Other].Low < Span.High + Same && Span.Low < OutSpans[Other].High + Same)
+					// Two openings may share the face's stretch when one stands wholly above the other: a door under a lunette.
+					const FFormWallOpening& A = *Span.Opening;
+					const FFormWallOpening& B = *OutSpans[Other].Opening;
+					const bool bAlongside = OutSpans[Other].Low < Span.High + Same && Span.Low < OutSpans[Other].High + Same;
+					const bool bOneAbove = A.CrownMeters() + Same < B.SillMeters || B.CrownMeters() + Same < A.SillMeters;
+					if (bAlongside && !bOneAbove)
 					{
 						OutWhy = FString::Printf(TEXT("openings %d and %d overlap or touch"), Index, Other);
 						return false;
@@ -261,22 +358,20 @@ namespace Musee::Form::Drawing
 
 		/**
 		 * Every distance along the face at which the wall must have a station: the jambs, the stations of each arch (set
-		 * across a straight passage's axis), and, for a wall between two faces, across from each of the back line's.
+		 * across a straight passage's axis), the drawn top's, and, for a wall between two faces, across from each of the back
+		 * line's.
 		 */
-		TArray<double> RequiredStations(const FFormWall& Wall, TConstArrayView<FOpeningSpan> Spans, const TArray<TArray<FSweepFrame>>& Runs)
+		TArray<double> RequiredStations(const FFormWall& Wall, const FWallTop& Top, TConstArrayView<FOpeningSpan> Spans,
+			const TArray<TArray<FSweepFrame>>& Runs)
 		{
-			TArray<double> Required;
+			TArray<double> Required = Top.U;
 			for (const FOpeningSpan& Span : Spans)
 			{
 				Required.Add(Span.Low);
 				Required.Add(Span.High);
-				if (Span.Opening->bArched)
+				for (const double Across : HeadStationsAcross(*Span.Opening))
 				{
-					const double Radius = 0.5 * Span.Opening->WidthMeters;
-					for (const double Angle : ArcStations(Radius, UE_DOUBLE_PI, 0.0, DefaultChordToleranceMeters))
-					{
-						Required.Add(Span.UAt(Radius * FMath::Cos(Angle)));
-					}
+					Required.Add(Span.UAt(Across));
 				}
 			}
 			if (Wall.HasBack())
@@ -334,19 +429,34 @@ namespace Musee::Form::Drawing
 			const FWallRun& Run;
 			/** The depth that reaches the back from any station: the thickness, or 1 when each station's AxisA reaches it whole. */
 			double Depth = 0.0;
+			/** The wall's top along its face. */
+			const FWallTop* Top = nullptr;
 
 			const FSweepFrame& Frame(int32 Station) const { return Run.Frames[Station]; }
 
-			const FOpeningSpan* SpanAt(double U, bool bInclusive) const
+			/** The top above the base at U. */
+			double TopAt(double U) const { return Top->At(U); }
+
+			/** The openings a station or a strip lies within, from the lowest up. */
+			TArray<const FOpeningSpan*> SpansAt(double U, bool bInclusive) const
 			{
-				return Spans.FindByPredicate([U, bInclusive](const FOpeningSpan& S) { return S.Holds(U, bInclusive); });
+				TArray<const FOpeningSpan*> Found;
+				for (const FOpeningSpan& S : Spans)
+				{
+					if (S.Holds(U, bInclusive))
+					{
+						Found.Add(&S);
+					}
+				}
+				Found.Sort([](const FOpeningSpan& A, const FOpeningSpan& B) { return A.Opening->SillMeters < B.Opening->SillMeters; });
+				return Found;
 			}
 
 			/** Every height at which the wall's surfaces break at station U, ascending. */
 			TArray<double> BreaksAt(double U) const
 			{
-				TArray<double> Breaks = {0.0, Wall.HeightMeters};
-				if (const FOpeningSpan* S = SpanAt(U, true))
+				TArray<double> Breaks = {0.0, TopAt(U)};
+				for (const FOpeningSpan* S : SpansAt(U, true))
 				{
 					Breaks.Add(S->Opening->SillMeters);
 					Breaks.Add(S->HeadAt(U));
@@ -390,21 +500,24 @@ namespace Musee::Form::Drawing
 			TFunction<double(double)> High;
 		};
 
+		/** The solid bands of a strip: from the bed (or each opening's head) up to the next opening's sill, or to the top. */
 		TArray<FBand> BandsOf(const FWallSetOut& SetOut, double MidU)
 		{
-			const double Height = SetOut.Wall.HeightMeters;
-			const FOpeningSpan* S = SetOut.SpanAt(MidU, false);
-			if (!S)
-			{
-				return {FBand{[](double) { return 0.0; }, [Height](double) { return Height; }}};
-			}
+			const FWallTop* Top = SetOut.Top;
+			TFunction<double(double)> Low = [](double) { return 0.0; };
+			bool bFromBed = true;
 			TArray<FBand> Bands;
-			const double Sill = S->Opening->SillMeters;
-			if (Sill > Same)
+			for (const FOpeningSpan* S : SetOut.SpansAt(MidU, false))
 			{
-				Bands.Add(FBand{[](double) { return 0.0; }, [Sill](double) { return Sill; }});
+				const double Sill = S->Opening->SillMeters;
+				if (!bFromBed || Sill > Same)
+				{
+					Bands.Add(FBand{Low, [Sill](double) { return Sill; }});
+				}
+				Low = [S](double U) { return S->HeadAt(U); };
+				bFromBed = false;
 			}
-			Bands.Add(FBand{[S](double U) { return S->HeadAt(U); }, [Height](double) { return Height; }});
+			Bands.Add(FBand{Low, [Top](double U) { return Top->At(U); }});
 			return Bands;
 		}
 
@@ -483,34 +596,48 @@ namespace Musee::Form::Drawing
 			return FVector::DotProduct(Normal, Toward) >= 0.0 ? Normal : -Normal;
 		}
 
+		/** The top of a strip: the normal of its own quad, turned up (level where the top is level, leaning where it rakes). */
+		FVector TopNormal(const FWallSetOut& SetOut, int32 Left, double TL, double TR)
+		{
+			const FVector A0 = SetOut.PointAt(Left, TL, 0.0);
+			const FVector Along = SetOut.PointAt(Left + 1, TR, 0.0) - A0;
+			const FVector Across = SetOut.PointAt(Left, TL, SetOut.Depth) - A0;
+			const FVector Normal = FVector::CrossProduct(Along, Across).GetSafeNormal();
+			if (Normal.IsNearlyZero())
+			{
+				return FVector::UpVector;
+			}
+			return Normal.Z >= 0.0 ? Normal : -Normal;
+		}
+
 		/** The top and the bed of every strip, and the sill and head linings of the strips inside openings. */
 		void DrawAcross(const FWallSetOut& SetOut, int32 Left, FMeshBuilder& Mesh)
 		{
 			const int32 Right = Left + 1;
 			const double UL = SetOut.Frame(Left).U;
 			const double UR = SetOut.Frame(Right).U;
-			const double Height = SetOut.Wall.HeightMeters;
+			const double TL = SetOut.TopAt(UL);
+			const double TR = SetOut.TopAt(UR);
 			Mesh.UseSlot(FFormWall::TopPart);
-			AcrossQuad(SetOut, Left, Height, Right, Height, FVector::UpVector, FVector2D(UL, 0.0), FVector2D(UR, 0.0), Mesh);
-			const FOpeningSpan* S = SetOut.SpanAt(0.5 * (UL + UR), false);
-			if (!S || S->Opening->SillMeters > Same)
+			AcrossQuad(SetOut, Left, TL, Right, TR, TopNormal(SetOut, Left, TL, TR), FVector2D(UL, 0.0), FVector2D(UR, 0.0), Mesh);
+			const TArray<const FOpeningSpan*> Openings = SetOut.SpansAt(0.5 * (UL + UR), false);
+			if (Openings.IsEmpty() || Openings[0]->Opening->SillMeters > Same)
 			{
 				Mesh.UseSlot(FFormWall::BedPart);
 				AcrossQuad(SetOut, Left, 0.0, Right, 0.0, -FVector::UpVector, FVector2D(UL, 0.0), FVector2D(UR, 0.0), Mesh);
 			}
-			if (!S)
-			{
-				return;
-			}
 			Mesh.UseSlot(FFormWall::RevealPart);
-			const double Sill = S->Opening->SillMeters;
-			if (Sill > Same)
+			for (const FOpeningSpan* S : Openings)
 			{
-				AcrossQuad(SetOut, Left, Sill, Right, Sill, FVector::UpVector, FVector2D(UL, 0.0), FVector2D(UR, 0.0), Mesh);
+				const double Sill = S->Opening->SillMeters;
+				if (Sill > Same)
+				{
+					AcrossQuad(SetOut, Left, Sill, Right, Sill, FVector::UpVector, FVector2D(UL, 0.0), FVector2D(UR, 0.0), Mesh);
+				}
+				const double HL = S->HeadAt(UL);
+				const double HR = S->HeadAt(UR);
+				AcrossQuad(SetOut, Left, HL, Right, HR, SoffitNormal(SetOut, Left, HL, HR), FVector2D(UL, HL), FVector2D(UR, HR), Mesh);
 			}
-			const double HL = S->HeadAt(UL);
-			const double HR = S->HeadAt(UR);
-			AcrossQuad(SetOut, Left, HL, Right, HR, SoffitNormal(SetOut, Left, HL, HR), FVector2D(UL, HL), FVector2D(UR, HR), Mesh);
 		}
 
 		/** The lining of a jamb: its whole height at one station, split at every break, across the thickness. */
@@ -539,9 +666,10 @@ namespace Musee::Form::Drawing
 		void DrawEnd(const FWallSetOut& SetOut, int32 Station, bool bStart, FMeshBuilder& Mesh)
 		{
 			const FSweepFrame& F = SetOut.Frame(Station);
+			const double Top = SetOut.TopAt(F.U);
 			Mesh.UseSlot(FFormWall::EndPart);
-			AcrossQuad(SetOut, Station, 0.0, Station, SetOut.Wall.HeightMeters, SetOut.AcrossNormal(Station, bStart ? -F.Along : F.Along),
-				FVector2D(0.0, 0.0), FVector2D(SetOut.Wall.HeightMeters, 0.0), Mesh);
+			AcrossQuad(SetOut, Station, 0.0, Station, Top, SetOut.AcrossNormal(Station, bStart ? -F.Along : F.Along), FVector2D(0.0, 0.0),
+				FVector2D(Top, 0.0), Mesh);
 		}
 
 		bool DrawRun(const FWallSetOut& SetOut, bool bStartsPath, bool bEndsPath, FMeshBuilder& Mesh)
@@ -587,9 +715,9 @@ namespace Musee::Form::Drawing
 			{
 				return false;
 			}
-			if ((!Shape.HasBack() && Shape.ThicknessMeters <= 0.0) || Shape.HeightMeters <= 0.0)
+			if ((!Shape.HasBack() && Shape.ThicknessMeters <= 0.0) || (!Shape.HasDrawnTop() && Shape.HeightMeters <= 0.0))
 			{
-				OutWhy = TEXT("a wall has a thickness (or a back) and a height");
+				OutWhy = TEXT("a wall has a thickness (or a back) and a height (or a drawn top)");
 				return false;
 			}
 			return true;
@@ -598,7 +726,8 @@ namespace Musee::Form::Drawing
 
 	bool DrawWall(const FFormWall& Shape, FMeshBuilder& Mesh, FString& OutWhy)
 	{
-		if (!CheckWall(Shape, OutWhy))
+		FWallTop Top;
+		if (!CheckWall(Shape, OutWhy) || !ReadTop(Shape, Top, OutWhy))
 		{
 			return false;
 		}
@@ -611,11 +740,11 @@ namespace Musee::Form::Drawing
 			return false;
 		}
 		TArray<FOpeningSpan> Spans;
-		if (!SetOutOpenings(Shape, FaceRuns, Spans, OutWhy))
+		if (!SetOutOpenings(Shape, Top, FaceRuns, Spans, OutWhy))
 		{
 			return false;
 		}
-		const TArray<TArray<FSweepFrame>> Runs = PathRuns(Plan, Shape.BaseMeters, RequiredStations(Shape, Spans, FaceRuns));
+		const TArray<TArray<FSweepFrame>> Runs = PathRuns(Plan, Shape.BaseMeters, RequiredStations(Shape, Top, Spans, FaceRuns));
 		const double Depth = Shape.HasBack() ? 1.0 : Shape.ThicknessMeters;
 		for (int32 Index = 0; Index < Runs.Num(); ++Index)
 		{
@@ -624,7 +753,7 @@ namespace Musee::Form::Drawing
 			{
 				return false;
 			}
-			const FWallSetOut SetOut{Shape, Spans, Run, Depth};
+			const FWallSetOut SetOut{Shape, Spans, Run, Depth, &Top};
 			const bool bStart = !Shape.Plan.Closed && Index == 0;
 			const bool bEnd = !Shape.Plan.Closed && Index == Runs.Num() - 1;
 			if (!DrawRun(SetOut, bStart, bEnd, Mesh))
