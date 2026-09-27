@@ -87,7 +87,8 @@ namespace Musee::Nympheas
 
 		/**
 		 * The floor's outline: the footprint, stopped at the port face across the passage half the class's strip short, so the
-		 * joint's bronze strip lies on the mating plane between the two stages' floors.
+		 * joint's bronze strip lies on the mating plane between the two stages' floors. The passage is the oval's own, finished
+		 * at the class's clear opening, so its floor there is the clear width.
 		 */
 		TArray<FVector2D> FloorOutline()
 		{
@@ -95,7 +96,7 @@ namespace Musee::Nympheas
 			TArray<FVector2D> Outline = FootprintOutline();
 			if (Door.HasValue() && Door.GetValue().StripMeters > 0.0)
 			{
-				const double Half = 0.5 * Door.GetValue().ClearWidthMeters + Door.GetValue().AllowanceMeters;
+				const double Half = 0.5 * Door.GetValue().ClearWidthMeters;
 				const double Short = Plan::PortFaceX - 0.5 * Door.GetValue().StripMeters;
 				Outline.Append({FVector2D(Plan::PortFaceX, -Half), FVector2D(Short, -Half), FVector2D(Short, Half), FVector2D(Plan::PortFaceX, Half)});
 			}

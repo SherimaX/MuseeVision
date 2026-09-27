@@ -279,7 +279,9 @@ Raised, a tempietto 13.98 across (r 6.99) with its door west, facing the Salon. 
   180°). Rams `rotunda.sun-clock.ram` (§6).
 - **Stair-side port dressings** `rotunda.stair.port.dressing` (polish): an arch ring 0.18 wide, 0.14 proud; a moulded
   architrave out to 0.40, crown 0.20 proud; plinth blocks 0.40 high; a keystone; moulded transoms on the lintel.
-- **Landing** `rotunda.stair.landing.floor` at z −6.000 from r 0 to the stair wall and through the portal to r 7.60.
+- **Landing** `rotunda.stair.landing.floor` at z −6.000 from r 0 to the stair wall and through the portal to r 7.57: it is
+  the stair port's threshold, stopped half the class's 0.060 strip short of the port face, so the joint's strip lies on
+  the mating arc and the joint lays no second stone on this side (K10).
   Rosette: pale eye r 0–0.12; black disc r 0.12–0.30 (edge a 32-gon through the points' roots and valleys); a 16-point
   star, long points to r 1.80 at φ = 45°·k, short to r 1.20 at φ = 22.5° + 45°·k, each split on its axis, black on the
   lower-φ half of the long points and red on the other (the short points the other way round); pale field between the

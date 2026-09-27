@@ -45,7 +45,10 @@ namespace Musee::Rotunda
 
 		/**
 		 * The ports: four doorways through the drum, their frames on the outer face at the threshold, facing out; and the
-		 * stair's portal at the landing, facing north, which serves the well under the drum.
+		 * stair's portal at the landing, facing north, which serves the well under the drum. The Rotunda draws each door's
+		 * archivolt on the drum's inner face (§3.3) and the stair port's dressings on its stair side (§3.7), so the joints
+		 * draw no surround there; and the landing runs through the portal to the port face as the stair port's threshold
+		 * (§3.7), stopped half the class's strip short.
 		 */
 		void Ports(FSiteDescription& Out)
 		{
@@ -59,6 +62,7 @@ namespace Musee::Rotunda
 				Port.Frame = Turned(Door.Deg, FVector(Face.X, Face.Y, 0.0));
 				Port.WallDepthMeters = Plan::DrumOuter - Plan::DrumInner;
 				Port.FaceRadiusMeters = Plan::DrumOuter;
+				Port.bOwnSurround = true;
 				Port.Mates = FMuseeKey(Door.Mates);
 			}
 			FSitePort& Stair = Out.Ports.AddDefaulted_GetRef();
@@ -68,6 +72,8 @@ namespace Musee::Rotunda
 			Stair.Frame = Turned(Plan::NorthDeg, FVector(0.0, -Plan::WellRadius, Plan::LandingZ));
 			Stair.WallDepthMeters = Plan::WellRadius - Plan::RevealInner;
 			Stair.FaceRadiusMeters = Plan::WellRadius;
+			Stair.bOwnSurround = true;
+			Stair.bOwnThreshold = true;
 			Stair.Mates = FMuseeKey(TEXT("classical-hall.stair"));
 			Stair.bHasWell = true;
 			Stair.Well.bServing = true;

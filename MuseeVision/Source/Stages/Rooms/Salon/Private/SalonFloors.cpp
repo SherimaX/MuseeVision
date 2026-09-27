@@ -68,12 +68,16 @@ namespace Musee::Salon
 			}
 		}
 
-		/** A strip 12 wide centred on a line of the plan, from 12 mm down to half a millimetre proud. */
-		void Strip(TArray<FFormDrawing>& Out, const FString& Name, const FVector2D& From, const FVector2D& To)
+		/**
+		 * A strip 12 wide on a line of the plan, from 12 mm down to half a millimetre proud: centred on it, or, at a port,
+		 * wholly on the room's side (Toward, -1 or +1 across the line), for the joint's threshold runs through the wall to it.
+		 */
+		void Strip(TArray<FFormDrawing>& Out, const FString& Name, const FVector2D& From, const FVector2D& To, double Toward = 0.0)
 		{
 			const double H = 0.5 * Plan::StripWidth;
-			const FVector2D Min(FMath::Min(From.X, To.X) - (From.X == To.X ? H : 0.0), FMath::Min(From.Y, To.Y) - (From.Y == To.Y ? H : 0.0));
-			const FVector2D Max(FMath::Max(From.X, To.X) + (From.X == To.X ? H : 0.0), FMath::Max(From.Y, To.Y) + (From.Y == To.Y ? H : 0.0));
+			const FVector2D Shift = Toward * H * (From.X == To.X ? FVector2D(1.0, 0.0) : FVector2D(0.0, 1.0));
+			const FVector2D Min = Shift + FVector2D(FMath::Min(From.X, To.X) - (From.X == To.X ? H : 0.0), FMath::Min(From.Y, To.Y) - (From.Y == To.Y ? H : 0.0));
+			const FVector2D Max = Shift + FVector2D(FMath::Max(From.X, To.X) + (From.X == To.X ? H : 0.0), FMath::Max(From.Y, To.Y) + (From.Y == To.Y ? H : 0.0));
 			Out.Add(Box(Name, TEXT("floor.strip"), FVector(Min.X, Min.Y, Plan::StripProud - Plan::StripDepth), FVector(Max.X, Max.Y, Plan::StripProud),
 				Walkable));
 		}
@@ -91,8 +95,9 @@ namespace Musee::Salon
 				}
 			}
 			const double Half = 0.5 * Plan::DoorWidth;
-			Strip(Out, TEXT("floor.strip.east"), {Plan::EndSilkX, -Half}, {Plan::EndSilkX, Half});
-			Strip(Out, TEXT("floor.strip.west"), {Plan::FarSilkX, -Half}, {Plan::FarSilkX, Half});
+			// The port doors' strips lie in the bays, oak to the joint's threshold at the wall's inner face (§2).
+			Strip(Out, TEXT("floor.strip.east"), {Plan::EndSilkX, -Half}, {Plan::EndSilkX, Half}, -1.0);
+			Strip(Out, TEXT("floor.strip.west"), {Plan::FarSilkX, -Half}, {Plan::FarSilkX, Half}, 1.0);
 			const double X0 = Plan::CabinetDoorX - Half;
 			const double X1 = Plan::CabinetDoorX + Half;
 			Strip(Out, TEXT("floor.strip.cabinet.bay"), {X0, -Plan::SilkHalf}, {X1, -Plan::SilkHalf});

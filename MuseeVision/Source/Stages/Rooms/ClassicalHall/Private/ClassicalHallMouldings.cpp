@@ -1,9 +1,10 @@
 #include "ClassicalHallParts.h"
 #include "ClassicalHallPlan.h"
+#include "SiteJoint.h"
 
 /**
  * The wall mouldings and panels (§3.4): the skirting and the dado rail swept round the whole perimeter, from one side
- * of the port's rough opening to the other, across the niches' mouths, back into each tribune niche's bay by its
+ * of the port's surround to the other, across the niches' mouths, back into each tribune niche's bay by its
  * sliver reveal and round every niche pedestal that stands on the floor; the framed panels (the gallery's sixteen at
  * each bay's centre ± 1.60, the tribune's ten flat at each niche ± 15°) and the lunette panel on the lintel.
  */
@@ -82,12 +83,23 @@ namespace Musee::ClassicalHall
 		}
 
 		/**
-		 * The perimeter at the wall's face, with the room on its right: west along the south wall from the rough opening,
-		 * up the west wall, round the tribune (into each niche's bay and out), down the east wall, and west to the opening.
+		 * Where the wall mouldings stop either side of the port on the south face: against the side of the joint's surround,
+		 * which Site draws round the clear opening on this face (§2), so they meet it and never run under it. Against the
+		 * rough opening when the joints' record can't be read, which Site reports.
+		 */
+		double BesideTheSurround()
+		{
+			const TValueOrError<FSiteJointRecord, FString> Joints = Musee::Site::ReadJoints();
+			return Joints.HasValue() ? Plan::PortClearHalf + Musee::Site::SurroundReachMeters(Joints.GetValue()) : Plan::PortClearHalf + Plan::LiningAllowance;
+		}
+
+		/**
+		 * The perimeter at the wall's face, with the room on its right: west along the south wall from the port's surround,
+		 * up the west wall, round the tribune (into each niche's bay and out), down the east wall, and west to the surround.
 		 */
 		FFormProfile Perimeter()
 		{
-			const double Opening = Plan::PortClearHalf + Plan::LiningAllowance;
+			const double Opening = BesideTheSurround();
 			const double Half = Plan::GalleryHalf;
 			const double JambY = FMath::Sqrt(FMath::Square(Plan::TribuneRadius) - Half * Half);
 			FFormProfile Path = FFormProfile::From(FVector2D(-Opening, Plan::SouthFaceY));

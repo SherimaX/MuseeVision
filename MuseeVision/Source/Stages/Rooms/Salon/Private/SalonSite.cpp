@@ -31,7 +31,9 @@ namespace Musee::Salon
 
 		/**
 		 * The ports: the east door on bay 1's end wall, the Rotunda's arch (its class), which steps down inside the wall to
-		 * the Salon's own door; and the west door through bay 5's far wall into the oval's passage.
+		 * the Salon's own door; and the west door through bay 5's far wall into the oval's passage. The Salon draws the P5
+		 * architrave on the bay face round both (§2, §3.3), and finishes the east door itself behind the step, the inner
+		 * 0.300 of the wall, where the joint's lining stops against the step (§2, the step down).
 		 */
 		void Ports(FSiteDescription& Out)
 		{
@@ -41,6 +43,8 @@ namespace Musee::Salon
 			East.Class = FMuseeKey(Plan::EastClass);
 			East.Frame = FacingInPlan(FVector(Plan::EastPortX, 0.0, 0.0), FMuseeFrame::East());
 			East.WallDepthMeters = Plan::PortWallDepth;
+			East.bOwnSurround = true;
+			East.OwnLiningMeters = Plan::EastStepX - Plan::EndSilkX;
 			East.Mates = FMuseeKey(Plan::EastMates);
 
 			FSitePort& West = Out.Ports.AddDefaulted_GetRef();
@@ -49,6 +53,7 @@ namespace Musee::Salon
 			West.Class = FMuseeKey(Plan::WestClass);
 			West.Frame = FacingInPlan(FVector(Plan::WestPortX, 0.0, 0.0), FMuseeFrame::West());
 			West.WallDepthMeters = Plan::PortWallDepth;
+			West.bOwnSurround = true;
 			West.Mates = FMuseeKey(Plan::WestMates);
 		}
 

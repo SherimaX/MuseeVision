@@ -60,12 +60,40 @@ namespace Musee::Rotunda
 				ReturnAtWall(1.0)}, false);
 		}
 
-		/** A moulding swept round the pilaster, its section's height absolute. */
+		/** How far a section reaches out from its path: the furthest of its points and arcs, metres. */
+		double Reach(TConstArrayView<Plan::FStep> Section)
+		{
+			double Furthest = 0.0;
+			for (const Plan::FStep& Step : Section)
+			{
+				Furthest = FMath::Max(Furthest, Step.A + (Step.bArc ? Step.RadiusA : 0.0));
+			}
+			return Furthest;
+		}
+
+		/**
+		 * Where a moulding dies into the drum at a return's foot: cut on the chord of the wall's face from the return's foot
+		 * out past the section's reach, so the whole end stands on the curved face or within its sagitta in front of it. Cut
+		 * square to the return, the end's plane would run into the concave face beside the return, and on into a door's
+		 * lining where a pilaster stands by a door. The chord's plan normal.
+		 */
+		FVector EndOnWall(double Side, double Out)
+		{
+			const FVector2D Foot = ReturnAtWall(Side);
+			const double Y = Side * (PilasterHalf() + Out);
+			const FVector2D Chord = FVector2D(FMath::Sqrt(FMath::Square(Plan::DrumInner) - Y * Y), Y) - Foot;
+			return FVector(-Chord.Y, Chord.X, 0.0);
+		}
+
+		/** A moulding swept round the pilaster, its section's height absolute, its ends cut to the wall. */
 		FFormSweep Moulding(TConstArrayView<Plan::FStep> Section)
 		{
 			FFormSweep Shape;
 			Shape.Section = Profile(Section, true);
 			Shape.Path = RoundThePilaster();
+			const double Out = Reach(Section);
+			Shape.StartCut = EndOnWall(-1.0, Out);
+			Shape.EndCut = EndOnWall(1.0, Out);
 			return Shape;
 		}
 
@@ -102,6 +130,7 @@ namespace Musee::Rotunda
 				FFaceArch Arch;
 				Arch.FaceRadius = Plan::DrumInner;
 				Arch.AxisDeg = Door.Deg;
+				Arch.bStraight = true;
 				Arch.ArchRadius = 0.5 * Door.Clear;
 				Arch.Springing = Plan::DoorSpringing;
 				Arch.JambFoot = Plan::DoorSpringing;

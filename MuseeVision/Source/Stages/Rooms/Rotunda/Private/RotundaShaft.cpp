@@ -1,5 +1,6 @@
 #include "RotundaParts.h"
 #include "RotundaPlan.h"
+#include "SitePortClass.h"
 
 /**
  * The shaft under the drum (§3.7), in the well the Rotunda serves: the stair's wall (the sleeve), the pocket the lifting
@@ -139,19 +140,31 @@ namespace Musee::Rotunda
 		}
 
 		/**
+		 * Where the landing stops in the portal: at the port face, half the port class's bronze strip short, for the landing is
+		 * the port's threshold and the joint lays its strip astride the mating arc (§2, §3.7). At the port face when the class
+		 * can't be read, which Site reports.
+		 */
+		double LandingEdge()
+		{
+			const TValueOrError<FSitePortClass, FString> Class = Musee::Site::FindPortClass(FMuseeKey(Plan::StairClass));
+			return Plan::WellRadius - (Class.HasValue() ? 0.5 * Class.GetValue().StripMeters : 0.0);
+		}
+
+		/**
 		 * The foundation under the well, and the landing laid on it: the pale field from the rosette to the stair's wall
-		 * and out through the portal to the port face; and the rosette, from its pale eye and black 32-gon disc through
+		 * and out through the portal to the port's strip; and the rosette, from its pale eye and black 32-gon disc through
 		 * the star in its pale field to the black and red bands.
 		 */
 		void Landing(TArray<FFormDrawing>& Out)
 		{
 			Out.Add(Drawn(Pieces::Foundation, TEXT("stair.landing.floor"), Ring(0.0, Plan::WellRadius, Plan::FoundationBottom, WellBed()), Solid));
 			const double Half = PortalHalfDeg();
+			const double Edge = LandingEdge();
 			const FMuseeFrame Bed = Raised(WellBed());
 			FFormProfile Field = FFormProfile::From(Polar(Plan::SleeveFace, Plan::NorthDeg + Half));
 			Field.ArcAbout(FVector2D::ZeroVector, Plan::SleeveFace, Plan::SleeveFace, Plan::NorthDeg + Half, Plan::NorthDeg - Half + 360.0, EFormJoint::Crisp)
-				.LineTo(Polar(Plan::WellRadius, Plan::NorthDeg - Half), EFormJoint::Crisp)
-				.ArcAbout(FVector2D::ZeroVector, Plan::WellRadius, Plan::WellRadius, Plan::NorthDeg - Half, Plan::NorthDeg + Half, EFormJoint::Crisp)
+				.LineTo(Polar(Edge, Plan::NorthDeg - Half), EFormJoint::Crisp)
+				.ArcAbout(FVector2D::ZeroVector, Edge, Edge, Plan::NorthDeg - Half, Plan::NorthDeg + Half, EFormJoint::Crisp)
 				.Close();
 			Out.Add(Drawn(TEXT("stair.landing"), TEXT("stair.landing.floor"), Slab(MoveTemp(Field), {Circle(Plan::RosetteRed)}, Plan::FinishDepth),
 				Walkable, Bed));

@@ -32,7 +32,8 @@ namespace Musee::Nympheas
 		 * architrave round it, P6); and the stair's foot at the Reserve's west door, whose well (the stair's shaft under the
 		 * oval) the oval serves. The Reserve's door is the shaft's whole width, so no wall stands beside it on the well's
 		 * side to carry a surround (§3.7: the head wall is plain brick): the oval owns that face bare, and the Reserve draws
-		 * its own on the hall face.
+		 * its own on the hall face. At both the oval finishes its own opening at the class's clear opening (the passage's
+		 * tunnel, the head wall's arch) and its own floor is the threshold to the port face, half the strip short (§2).
 		 */
 		void Ports(FSiteDescription& Out)
 		{
@@ -44,6 +45,8 @@ namespace Musee::Nympheas
 			East.WallDepthMeters = Plan::PortFaceX - Plan::OvalA;
 			East.Mates = FMuseeKey(TEXT("salon.west"));
 			East.bOwnSurround = true;
+			East.OwnLiningMeters = East.WallDepthMeters;
+			East.bOwnThreshold = true;
 
 			FSitePort& Stair = Out.Ports.AddDefaulted_GetRef();
 			Stair.Key = Key(TEXT("stair"));
@@ -53,6 +56,8 @@ namespace Musee::Nympheas
 			Stair.WallDepthMeters = Plan::PortFaceX - Plan::HeadWallX;
 			Stair.Mates = FMuseeKey(TEXT("reserve.stair"));
 			Stair.bOwnSurround = true;
+			Stair.OwnLiningMeters = Stair.WallDepthMeters;
+			Stair.bOwnThreshold = true;
 			Stair.bHasWell = true;
 			Stair.Well.bServing = true;
 			Stair.Well.MinMeters = FVector(Plan::EndWallWestX, -Plan::ShaftOuterHalf, Plan::FoundationUnderside);

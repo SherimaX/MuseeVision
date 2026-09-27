@@ -146,58 +146,76 @@ namespace Musee::Rotunda
 	namespace
 	{
 		/**
-		 * The frame of the plane tangent to a cylindrical face at a distance U along it from an opening's axis: x along
-		 * the face (the way U runs), y up, z out of the face towards whoever sees it. Seen from inside (the drum's inner
-		 * face), U runs the way φ falls; seen from outside, the way φ rises; either way z = x × y faces the viewer.
+		 * The face's line in plan, run the way U runs so the face looks to its left, towards whoever sees it: seen from inside
+		 * (the drum's inner face) the way φ falls, from outside the way φ rises. It spans a half turn centred on the opening's
+		 * axis, so every run round an opening lies on it; U is measured from its start, a quarter turn before the axis.
 		 */
-		FMuseeFrame TangentAt(const FFaceArch& Arch, double U)
+		FFormProfile FaceLine(const FFaceArch& Arch)
 		{
 			const double Sense = Arch.bConvex ? 1.0 : -1.0;
-			const double Phi = FMath::DegreesToRadians(Arch.AxisDeg) + Sense * U / Arch.FaceRadius;
-			const FVector Origin(Arch.FaceRadius * FMath::Cos(Phi), Arch.FaceRadius * FMath::Sin(Phi), 0.0);
-			const FVector Along = Sense * FVector(-FMath::Sin(Phi), FMath::Cos(Phi), 0.0);
-			return FrameOfAxes(Origin, Along, FVector::UpVector);
+			const double From = Arch.AxisDeg - Sense * 90.0;
+			const double To = Arch.AxisDeg + Sense * 90.0;
+			FFormProfile Line = FFormProfile::From(Polar(Arch.FaceRadius, From));
+			Line.ArcAbout(FVector2D::ZeroVector, Arch.FaceRadius, Arch.FaceRadius, From, To, EFormJoint::Smooth);
+			return Line;
 		}
 
-		/** One voussoir: the section swept along a path drawn in the tangent plane at U. */
+		/**
+		 * Where a point Across the opening's axis lies on the face's development: through a straight passage the jambs run
+		 * parallel to the axis, so a point across it meets the face round the arc; a square-cut opening is set out along
+		 * the face itself.
+		 */
+		double AlongFace(const FFaceArch& Arch, double Across)
+		{
+			const double Along = Arch.bStraight ? Arch.FaceRadius * FMath::Asin(FMath::Clamp(Across / Arch.FaceRadius, -1.0, 1.0)) : Across;
+			return 0.5 * UE_DOUBLE_PI * Arch.FaceRadius + Along;
+		}
+
+		/** One voussoir: the section swept on the face along a path in its development (U along the face, Z up). */
 		void Voussoir(TArray<FFormDrawing>& Out, const FString& Name, const TCHAR* LocalSurface, const FFormProfile& Section,
-			FFormProfile Path, const FFaceArch& Arch, double U, const FMuseeKey& Body)
+			FFormProfile Path, const FFaceArch& Arch, const FMuseeKey& Body)
 		{
 			FFormSweep Shape;
 			Shape.Section = Section;
 			Shape.Path = MoveTemp(Path);
-			Out.Add_GetRef(Drawn(Name, LocalSurface, MoveTemp(Shape), nullptr, TangentAt(Arch, U))).Body = Body;
+			Shape.Face = FaceLine(Arch);
+			Out.Add_GetRef(Drawn(Name, LocalSurface, MoveTemp(Shape), nullptr)).Body = Body;
 		}
 	}
 
 	void RunRoundArch(TArray<FFormDrawing>& Out, const FString& Name, const TCHAR* LocalSurface, const FFormProfile& Section,
 		const FFaceArch& Arch, const FMuseeKey& Body)
 	{
-		// The path is drawn in each tangent plane's (x, y) = (U, z), so that the section's A (the walker's right) points
-		// away from the opening: up the left jamb, over the head from left to right, down the right jamb.
+		// The path is drawn on the face's development, (U, z), so that the section's A (the walker's right) points away from
+		// the opening: up the left jamb, over the head from left to right, down the right jamb. Each stone of the head runs
+		// on the arch's stations, and lies on the face, so its back meets the face and whatever stands in the opening.
 		const double Radius = Arch.ArchRadius;
 		const bool bJambs = Arch.JambFoot < Arch.Springing;
+		auto OnFace = [&Arch](double Across, double Z) { return FVector2D(AlongFace(Arch, Across), Z); };
 		int32 Index = 0;
 		if (bJambs)
 		{
 			Voussoir(Out, FString::Printf(TEXT("%s.%02d"), *Name, Index++), LocalSurface, Section,
-				FFormProfile::Polyline({FVector2D(0.0, Arch.JambFoot), FVector2D(0.0, Arch.Springing)}, false), Arch, -Radius, Body);
+				FFormProfile::Polyline({OnFace(-Radius, Arch.JambFoot), OnFace(-Radius, Arch.Springing)}, false), Arch, Body);
 		}
 		const int32 Count = FMath::Max(2, FMath::CeilToInt32(UE_DOUBLE_PI * Radius / Plan::VoussoirMeters));
 		for (int32 Stone = 0; Stone < Count; ++Stone)
 		{
 			const double From = 180.0 - 180.0 * Stone / Count;
 			const double To = 180.0 - 180.0 * (Stone + 1) / Count;
-			const double Middle = Radius * FMath::Cos(FMath::DegreesToRadians(0.5 * (From + To)));
-			const FVector2D Centre(-Middle, Arch.Springing);
-			FFormProfile Path = FFormProfile::From(Centre + Polar(Radius, From));
-			Path.ArcAbout(Centre, Radius, Radius, From, To);
-			Voussoir(Out, FString::Printf(TEXT("%s.%02d"), *Name, Index++), LocalSurface, Section, MoveTemp(Path), Arch, Middle, Body);
+			const int32 Steps = FMath::Max(1, FMath::CeilToInt32(Plan::ArchStations * (From - To) / 180.0));
+			FFormProfile Path = FFormProfile::From(OnFace(Radius * FMath::Cos(FMath::DegreesToRadians(From)), Arch.Springing + Radius * FMath::Sin(FMath::DegreesToRadians(From))));
+			for (int32 Step = 1; Step <= Steps; ++Step)
+			{
+				const double Angle = FMath::DegreesToRadians(FMath::Lerp(From, To, double(Step) / Steps));
+				Path.LineTo(OnFace(Radius * FMath::Cos(Angle), Arch.Springing + Radius * FMath::Sin(Angle)), EFormJoint::Smooth);
+			}
+			Voussoir(Out, FString::Printf(TEXT("%s.%02d"), *Name, Index++), LocalSurface, Section, MoveTemp(Path), Arch, Body);
 		}
 		if (bJambs)
 		{
 			Voussoir(Out, FString::Printf(TEXT("%s.%02d"), *Name, Index++), LocalSurface, Section,
-				FFormProfile::Polyline({FVector2D(0.0, Arch.Springing), FVector2D(0.0, Arch.JambFoot)}, false), Arch, Radius, Body);
+				FFormProfile::Polyline({OnFace(Radius, Arch.Springing), OnFace(Radius, Arch.JambFoot)}, false), Arch, Body);
 		}
 	}
 }

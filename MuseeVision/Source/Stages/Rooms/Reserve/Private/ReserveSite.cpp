@@ -37,7 +37,8 @@ namespace Musee::Reserve
 		/**
 		 * The port: the west door on the west wall's outer face, facing west, where the oval's stair lands. The oval serves
 		 * the well its stair runs down (museum x -90.80…-74.60, y ±1.60, z -6.15…0.00), which the Reserve receives and
-		 * builds nothing in; the Reserve draws its own architrave on the hall face.
+		 * builds nothing in; the Reserve draws its own architrave on the hall face, finishes its door at the class opening
+		 * through the wall, and lays its own threshold stone from the strip to the flags (§2).
 		 */
 		void Port(FSiteDescription& Out)
 		{
@@ -48,6 +49,8 @@ namespace Musee::Reserve
 			Stair.Frame = FMuseeFrame(FVector(-Plan::OuterX, 0.0, 0.0), FQuat(FVector::UpVector, UE_DOUBLE_PI));
 			Stair.WallDepthMeters = Plan::WallMeters;
 			Stair.bOwnSurround = true;
+			Stair.OwnLiningMeters = Stair.WallDepthMeters;
+			Stair.bOwnThreshold = true;
 			Stair.Mates = FMuseeKey(Plan::PortMates);
 			Stair.bHasWell = true;
 			Stair.Well.bServing = false;

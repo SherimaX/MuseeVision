@@ -303,11 +303,16 @@ namespace Musee::Rotunda::Plan
 	inline constexpr double SillHalfLength = 1.260;
 
 	/**
-	 * A moulding on the drum's curved face is laid as voussoirs, each a short sweep in the plane tangent to the face at
-	 * its middle: no longer than this across the face, so no voussoir stands more than 2 mm off the face (a chord of
-	 * 0.40 on r 10.00 has a sagitta of 2 mm).
+	 * A moulding round an arch on the drum's curved face (an archivolt, a niche's surround) is laid as voussoirs no longer
+	 * than this round the arch, each drawn on the face itself.
 	 */
 	inline constexpr double VoussoirMeters = 0.400;
+
+	/**
+	 * An arch's line is set out at 64 stations per semicircle, as Site sets out the doors' surrounds (SiteJoint.cpp; the
+	 * Salon's and the oval's doors, salon.md section 2): its chords keep within a millimetre of an arch of 2.35 m.
+	 */
+	inline constexpr int32 ArchStations = 64;
 
 	// ---- §3.4 the dome -------------------------------------------------------------------------------------------------
 	/** The inner sphere R 10.00 about (0, 0, 10.00); the coffers' panels on R 10.45; the shell's outer sphere R 10.60. */

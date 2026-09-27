@@ -106,9 +106,10 @@ namespace Musee::Rotunda
 
 	/**
 	 * A moulding run round an arched opening on a cylindrical face (the drum's inner face, the sun clock's outer one): up
-	 * the left jamb from its foot, over the semicircular head, down the right jamb. The face has no plane, so the run is
-	 * laid as voussoirs (Plan::VoussoirMeters), each a sweep in the plane tangent to the face at its middle, the section's
-	 * A out from the arch's line and its B proud of the face.
+	 * the left jamb from its foot, over the semicircular head, down the right jamb. It is laid as voussoirs
+	 * (Plan::VoussoirMeters), each a sweep drawn on the face itself, so its back lies on the curved face and its inner
+	 * return meets the opening's edge where the face meets it: the section's A out from the arch's line, its B proud of the
+	 * face.
 	 */
 	struct FFaceArch
 	{
@@ -116,6 +117,12 @@ namespace Musee::Rotunda
 		double FaceRadius = 0.0;
 		double AxisDeg = 0.0;
 		bool bConvex = false;
+		/**
+		 * Whether the opening is a straight passage (its jambs parallel to its axis, as the drum's doorways are cut), so the
+		 * arch's line meets the face round the arc from where it stands across the axis; otherwise the opening is set out
+		 * along the face (the niches, the sun clock's door, their jambs square to it).
+		 */
+		bool bStraight = false;
 		/** The line the section is set out from: the arch's radius about its springing, and the jambs' foot. */
 		double ArchRadius = 0.0;
 		double Springing = 0.0;

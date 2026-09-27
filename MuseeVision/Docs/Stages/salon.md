@@ -59,10 +59,10 @@ Frames on the port face at the threshold (z 0), on the opening's centreline, fac
     at 5.60 stays whole.
   - The joint lays the threshold slab through the whole wall depth (x 0.000 → +0.600, 3.100 wide in the outer part,
     3.000 between the finished jambs) and the bronze strip on the mating plane x +0.600; the Salon's own strip
-    `salon.floor.strip` at x 0.000 (oak to threshold).
+    `salon.floor.strip` against x 0.000 on the bay's side, x −0.012 → 0.000 (oak to threshold).
 - **`salon.west`:** the Salon builds only the rough opening through its far wall (x −60.000 → −60.600; 3.100 wide,
   head r 1.550 about z 3.300, rough crown 4.850, sill −0.050), faces `salon.port.rough-opening`; the P5 architrave on
-  the bay face (x −60.000) and its strip at x −60.000. The oval owns the passage block and the tunnel from the port
+  the bay face (x −60.000) and its strip against it on the bay's side, x −60.000 → −59.988. The oval owns the passage block and the tunnel from the port
   face x −60.600 west; the joint lines the Salon's wall depth and lays the threshold and the strip on the mating plane.
   The far wall's outer face `salon.exterior.wall` stops at the passage block's outline (|y| 2.100, z 5.200).
 - **Blinds.** Both neighbours are built tonight: both ports are open portals. On the stand alone (or with a neighbour

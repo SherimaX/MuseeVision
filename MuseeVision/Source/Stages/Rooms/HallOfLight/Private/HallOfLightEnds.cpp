@@ -27,7 +27,24 @@ namespace Musee::HallOfLight
 
 	void AddFaceArc(FFormProfile& Profile, const FEndFace& Face, double FromY, double ToY)
 	{
-		Profile.ArcAbout(Face.Centre(), Face.Radius, Face.Radius, Face.AngleDegrees(FromY), Face.AngleDegrees(ToY), EFormJoint::Crisp);
+		// The arc is divided where the port's rough opening meets it: the joint's threshold and lining meet the face across
+		// the rough opening, so there the two are divided alike and meet vertex for vertex (Form's stations are a function
+		// of the arc and its ends).
+		const double Rough = 0.5 * (Face.End == EHallEnd::West ? Plan::WestClearWidth : Plan::EastClearWidth) + Plan::RoughAllowance;
+		TArray<double> Ys = {FromY};
+		for (const double Edge : FromY < ToY ? TArray<double>{-Rough, Rough} : TArray<double>{Rough, -Rough})
+		{
+			if (Edge > FMath::Min(FromY, ToY) && Edge < FMath::Max(FromY, ToY))
+			{
+				Ys.Add(Edge);
+			}
+		}
+		Ys.Add(ToY);
+		for (int32 Index = 0; Index + 1 < Ys.Num(); ++Index)
+		{
+			Profile.ArcAbout(Face.Centre(), Face.Radius, Face.Radius, Face.AngleDegrees(Ys[Index]), Face.AngleDegrees(Ys[Index + 1]),
+				Index == 0 ? EFormJoint::Crisp : EFormJoint::Smooth);
+		}
 	}
 
 	FVector2D FEndFace::Centre() const
