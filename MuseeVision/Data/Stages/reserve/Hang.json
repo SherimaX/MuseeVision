@@ -1,0 +1,198 @@
+{
+  "stage": "reserve",
+  "works": [
+    {
+      "work": "caillebotte-young-man-window",
+      "source": "data/artworks.json",
+      "anchor": "reserve.screen-a.west",
+      "along": 2.095,
+      "height": 0.97,
+      "size": [
+        0.81,
+        1.16
+      ],
+      "support": "canvas",
+      "frame": "reserve.frame.gilt",
+      "care": "oil-and-tempera"
+    },
+    {
+      "work": "degas-place-de-la-concorde",
+      "source": "data/artworks.json",
+      "anchor": "reserve.screen-b.west",
+      "along": 1.91,
+      "height": 1.16,
+      "size": [
+        1.18,
+        0.78
+      ],
+      "support": "canvas",
+      "frame": "reserve.frame.gilt",
+      "care": "oil-and-tempera"
+    },
+    {
+      "work": "degas-orchestra-opera",
+      "source": "data/artworks.json",
+      "anchor": "reserve.screen-b.east",
+      "along": 2.27,
+      "height": 1.265,
+      "size": [
+        0.46,
+        0.57
+      ],
+      "support": "canvas",
+      "frame": "reserve.frame.gilt",
+      "care": "oil-and-tempera"
+    },
+    {
+      "work": "renoir-cirque-fernando",
+      "source": "data/artworks.json",
+      "anchor": "reserve.screen-c.west",
+      "along": 0.705,
+      "height": 0.895,
+      "size": [
+        0.99,
+        1.31
+      ],
+      "support": "canvas",
+      "frame": "reserve.frame.gilt",
+      "care": "oil-and-tempera"
+    },
+    {
+      "work": "renoir-two-sisters",
+      "source": "data/artworks.json",
+      "anchor": "reserve.screen-c.west",
+      "along": 2.225,
+      "height": 1.045,
+      "size": [
+        0.81,
+        1.01
+      ],
+      "support": "canvas",
+      "frame": "reserve.frame.gilt",
+      "care": "oil-and-tempera"
+    },
+    {
+      "work": "renoir-the-swing",
+      "source": "data/artworks.json",
+      "anchor": "reserve.screen-c.west",
+      "along": 3.565,
+      "height": 1.09,
+      "size": [
+        0.73,
+        0.92
+      ],
+      "support": "canvas",
+      "frame": "reserve.frame.gilt",
+      "care": "oil-and-tempera"
+    },
+    {
+      "work": "pissarro-red-roofs",
+      "source": "data/artworks.json",
+      "anchor": "reserve.screen-d.west",
+      "along": 2.17,
+      "height": 1.275,
+      "size": [
+        0.66,
+        0.55
+      ],
+      "support": "canvas",
+      "frame": "reserve.frame.gilt",
+      "care": "oil-and-tempera"
+    },
+    {
+      "work": "pissarro-avenue-opera-snow",
+      "source": "data/artworks.json",
+      "anchor": "reserve.screen-d.east",
+      "along": 2.095,
+      "height": 1.225,
+      "size": [
+        0.81,
+        0.65
+      ],
+      "support": "canvas",
+      "frame": "reserve.frame.gilt",
+      "care": "oil-and-tempera"
+    },
+    {
+      "work": "sisley-bridge-villeneuve",
+      "source": "data/artworks.json",
+      "anchor": "reserve.screen-e.west",
+      "along": 2.175,
+      "height": 1.3,
+      "size": [
+        0.65,
+        0.5
+      ],
+      "support": "canvas",
+      "frame": "reserve.frame.gilt",
+      "care": "oil-and-tempera"
+    },
+    {
+      "work": "sisley-snow-louveciennes",
+      "source": "data/artworks.json",
+      "anchor": "reserve.screen-e.east",
+      "along": 2.245,
+      "height": 1.245,
+      "size": [
+        0.51,
+        0.61
+      ],
+      "support": "canvas",
+      "frame": "reserve.frame.gilt",
+      "care": "oil-and-tempera"
+    },
+    {
+      "work": "caillebotte-pont-europe",
+      "source": "data/artworks.json",
+      "anchor": "reserve.easel",
+      "along": 0.1,
+      "height": 0.89,
+      "size": [
+        1.8,
+        1.25
+      ],
+      "support": "canvas",
+      "frame": "reserve.frame.gilt",
+      "care": "oil-and-tempera",
+      "note": "On the easel: frame on the ledge (top 0.80), back on the uprights (plane x 28.945), facing west; centre z 1.515."
+    },
+    {
+      "work": "degas-the-tub",
+      "source": "data/artworks.json",
+      "anchor": "reserve.chest.bay7-south",
+      "wall": "reserve.chest.mat",
+      "centre": [
+        18.75,
+        8.675,
+        0.905
+      ],
+      "size": [
+        0.83,
+        0.6
+      ],
+      "support": "paper",
+      "frame": "reserve.pastel.mat",
+      "care": "works-on-paper",
+      "note": "Pastel on card lying flat on its felt, top edge to the south, read from the north (the arcade side); window mat and UV-filtering glazing (reserve.pastel.glass) are Art's. Size from the as-built mat (ReserveStructure.cpp:1131)."
+    },
+    {
+      "work": "degas-the-star",
+      "source": "data/artworks.json",
+      "anchor": "reserve.chest.bay8-south",
+      "wall": "reserve.chest.mat",
+      "centre": [
+        26.25,
+        8.675,
+        0.905
+      ],
+      "size": [
+        0.42,
+        0.58
+      ],
+      "support": "paper",
+      "frame": "reserve.pastel.mat",
+      "care": "works-on-paper",
+      "note": "Pastel over monotype on paper, flat on its felt as The Tub. Size from the as-built mat (ReserveStructure.cpp:1131)."
+    }
+  ]
+}

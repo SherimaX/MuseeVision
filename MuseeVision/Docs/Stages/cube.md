@@ -77,10 +77,10 @@ no daylight and no sky (D-012). The panels are a luminaire, not an opening.
   (tangential ±0.008) from r 2.265 to 2.300 at bearings 0° and 180°. Closure: seven blades, each a 110° arc of the middle
   circle r 3.095, 1.250 wide with round ends, **2 mm thick at a 4 mm pitch** (stack 26 mm), pins at r 3.745 on plan angles
   360°k/7 (k 0…6, pin 0 due east), blade k 4k mm below the top; each turns 52° on its pin, eased over 4.0 s; open, the
-  inner edge at r 2.470 in a seat r ≥ 2.460; in travel the blades reach r 4.010. States **shut 0**, **clamp 0.378** (round
-  the mast head's groove r 0.195; the blades leave r 0.197), **open 1**.
+  inner edge at r 2.470 in a seat r ≥ 2.460; in travel the blades reach r 4.010; each blade's pin-end is lengthened by a **pin lug**, a round boss r 0.060 about the pin joined to the round end by a 0.120-wide web on the pin's radius, so the blade encloses its pin (as built the pin stood 25 mm outside the blade). States **shut 0**, **clamp 0.3206** (round
+  the mast head's groove r 0.195; the blades leave r 0.197; the channel maps linearly to the blade angle (Motion `follows`), so the as-built eased clamp 0.378 is **0.3206** here, the same blade pose), **open 1**.
 - **The closure is the Cube's** (the stage below the plane): its **ceiling iris**, top blade face **−7.942** (7.442 below
-  the plane, `CubePlan.h:62`), declaring **`cube.up.closure`** (0 shut, 0.378 clamp, 1 open). The Atrium's car sequences
+  the plane, `CubePlan.h:62`), declaring **`cube.up.closure`** (0 shut, 0.3206 clamp, 1 open). The Atrium's car sequences
   step it; the blades follow it (§6). **Joint:** none; the faces touch (the Atrium's lining bottom on the Cube's head plate,
   top frame and brackets). No collar or threshold at the plane.
 - **The received well:** the Cube reserves the prism r ≤ 2.300 (less the notches) from −0.500 to −23.800 and builds inside
@@ -298,15 +298,15 @@ drawn shut, opening 52° towards decreasing plan angle; **follow `cube.up.closur
 
 **The Atrium's sequences at the Cube (matched with `atrium.md` §6 and its Mechanisms.json):**
 - "Down to the Cube" (`atrium.car.panel` at `atrium`; requires `atrium.down` mated): leaves shut → `cube.up.closure` → 1
-  (4.0 s) → move `clamp` (the car waits at −7.750 until the iris is open) → `cube.up.closure` → 0.378 (2.49 s) → move `cube`
+  (4.0 s) → move `clamp` (the car waits at −7.750 until the iris is open) → `cube.up.closure` → 0.3206 (2.49 s) → move `cube`
   on the mast (1.0 m/s, 0.5 m/s², ≈ 14.8 s) → `atrium.car.light` → 0.03 (2.5 s). ≈ 25 s.
 - "Up to the Atrium" / "Up to the Sphere" (`atrium.car.panel` at `cube`; both **require `cube.performance.active` ≤ 0**):
   `atrium.car.light` → 1 (2.5 s) → move `clamp` → `cube.up.closure` → 1 (2.49 s) → move on up → `cube.up.closure` → 0 (4.0 s)
   once the car is above −7.450.
 
 **The performance** (Mechanisms.json `performances`, `cube.sea-light`): Use `cube.performance` at `cube`, verb **"II · Sea
-Light, 8 min"**, caption as §8; **requires** `cube.up` mated, `atrium.car.height` ≤ 0 (at `cube`), `cube.up.closure` 0.376 …
-0.380 (clamped: sealed), `atrium.car.doors` ≤ 0, `atrium.car.light` ≤ 0.03 (the glimmer reached) and
+Light, 8 min"**, caption as §8; **requires** `cube.up` mated, `atrium.car.height` ≤ 0 (at `cube`), `cube.up.closure` 0.3186 …
+0.3226 (clamped: sealed), `atrium.car.doors` ≤ 0, `atrium.car.light` ≤ 0.03 (the glimmer reached) and
 `cube.performance.active` ≤ 0; sequence `cube.performance.active` → 1; the work runs 480 s (fade in 2 s). **Ends** (fade out
 3 s, then `cube.performance.active` → 0) when its score ends, on **"End the piece"** (the same Use while it performs), or
 when the eyes leave the room's cube (\|x\|, \|y\| or \|z + 22\| > 14.000).
@@ -317,9 +317,9 @@ when the eyes leave the room's cube (\|x\|, \|y\| or \|z + 22\| > 14.000).
 |---|---|---|
 | C-1 | The car floor passes below the ceiling gate **−7.750** only with `cube.up.closure` ≥ 0.999 (its lowest point, −0.160, then clears the top blade by 32 mm). | A-6 |
 | C-2 | The iris leaves **open** towards **clamp** only with the car floor at −10.825 ± 0.005 (the head's groove in the stack), and shuts (→ 0) only with the car floor above **−7.450** and not heading down through it. | A-6 |
-| C-3 | The car leaves `clamp` downward only with the iris at 0.378 ± 0.002, upward only with it ≥ 0.999. | A-6 |
+| C-3 | The car leaves `clamp` downward only with the iris at 0.3206 ± 0.002, upward only with it ≥ 0.999. | A-6 |
 | C-4 | The car leaves `cube` only with `cube.performance.active` ≤ 0 and `atrium.car.light` back at 1: a performing work holds it. | A-8 |
-| C-5 | A work begins only with the room sealed: the car at `cube`, its leaves shut, the iris clamped (0.378 ± 0.002). | — |
+| C-5 | A work begins only with the room sealed: the car at `cube`, its leaves shut, the iris clamped (0.3206 ± 0.002). | — |
 | C-6 | Occupancy guard (`body-in-travel`): a blade holds or reverses while any body but the mast head is in its next travel slice. | A-3 |
 
 **Clearances:** car rings (2.235) ↔ tier frames (2.410) 175 mm, ↔ housing inner wall (2.450) 215, ↔ soffit bore (2.460) 225,
@@ -505,6 +505,7 @@ scale.
 - **Unmated** (the stand): Site's blind iris on the plane, the ceiling iris shut, no car, no performance.
 
 **Departures from as-built** (for the owner's review):
+- **iris.4600 corrected:** each blade gains a pin lug (r 0.060 boss on a 0.120 web) so it encloses its pin; as built the pin stood 25 mm outside the blade. The clamp value is 0.3206 on the linear channel (as built 0.378 through a smoothstep: the same blade pose, r 0.197). Shut, clamp, open and reach checked by polygon union.
 - **Mast pinspots** (contract shape): as built on below the clamp + 0.5 with no work performing; now `presence` with a derived channel that follows the performance, which is equivalent because the visitor is in the Cube only in the car.
 - **Ruled with the Atrium:** the port is `cube.up` (class `iris.4600`) closed by the Cube's own ceiling iris; the car, the
   mast head and the column are the Atrium's; the clamp (−10.825) and gate (−7.750) are kept exactly.

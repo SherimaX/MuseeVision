@@ -1,0 +1,1590 @@
+{
+  "stage": "reserve",
+  "mechanisms": [
+    {
+      "key": "reserve.screen-a",
+      "joint": "prismatic",
+      "body": "reserve.screen-a",
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "travel": 5.65,
+      "drive": {
+        "speed": 1.0,
+        "accel": 0.6,
+        "jerk": 1.2,
+        "zones": []
+      },
+      "control": "reserve.screen-a.pull",
+      "openUse": {
+        "verb": "Draw out screen A",
+        "caption": ""
+      },
+      "closeUse": {
+        "verb": "Slide screen A home",
+        "caption": ""
+      },
+      "open": [
+        {
+          "move": "open"
+        }
+      ],
+      "close": [
+        {
+          "move": "closed"
+        }
+      ],
+      "home": "closed",
+      "guard": "body-in-travel",
+      "clearance": 0.05,
+      "publishes": "reserve.screen-a.position",
+      "group": "reserve.screens",
+      "note": "Rack at x -28.15, north aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice (caption: Screen A waits: you are in its way); it never pushes."
+    },
+    {
+      "key": "reserve.screen-b",
+      "joint": "prismatic",
+      "body": "reserve.screen-b",
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "travel": 5.65,
+      "drive": {
+        "speed": 1.0,
+        "accel": 0.6,
+        "jerk": 1.2,
+        "zones": []
+      },
+      "control": "reserve.screen-b.pull",
+      "openUse": {
+        "verb": "Draw out screen B",
+        "caption": ""
+      },
+      "closeUse": {
+        "verb": "Slide screen B home",
+        "caption": ""
+      },
+      "open": [
+        {
+          "move": "open"
+        }
+      ],
+      "close": [
+        {
+          "move": "closed"
+        }
+      ],
+      "home": "closed",
+      "guard": "body-in-travel",
+      "clearance": 0.05,
+      "publishes": "reserve.screen-b.position",
+      "group": "reserve.screens",
+      "note": "Rack at x -26.25, north aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice (caption: Screen B waits: you are in its way); it never pushes."
+    },
+    {
+      "key": "reserve.screen-c",
+      "joint": "prismatic",
+      "body": "reserve.screen-c",
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "travel": 5.65,
+      "drive": {
+        "speed": 1.0,
+        "accel": 0.6,
+        "jerk": 1.2,
+        "zones": []
+      },
+      "control": "reserve.screen-c.pull",
+      "openUse": {
+        "verb": "Draw out screen C",
+        "caption": ""
+      },
+      "closeUse": {
+        "verb": "Slide screen C home",
+        "caption": ""
+      },
+      "open": [
+        {
+          "move": "open"
+        }
+      ],
+      "close": [
+        {
+          "move": "closed"
+        }
+      ],
+      "home": "closed",
+      "guard": "body-in-travel",
+      "clearance": 0.05,
+      "publishes": "reserve.screen-c.position",
+      "group": "reserve.screens",
+      "start": "open",
+      "note": "Rack at x -24.35, north aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice (caption: Screen C waits: you are in its way); it never pushes. Starts out: the visit begins with the three Renoirs in the nave."
+    },
+    {
+      "key": "reserve.screen-d",
+      "joint": "prismatic",
+      "body": "reserve.screen-d",
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "travel": 5.65,
+      "drive": {
+        "speed": 1.0,
+        "accel": 0.6,
+        "jerk": 1.2,
+        "zones": []
+      },
+      "control": "reserve.screen-d.pull",
+      "openUse": {
+        "verb": "Draw out screen D",
+        "caption": ""
+      },
+      "closeUse": {
+        "verb": "Slide screen D home",
+        "caption": ""
+      },
+      "open": [
+        {
+          "move": "open"
+        }
+      ],
+      "close": [
+        {
+          "move": "closed"
+        }
+      ],
+      "home": "closed",
+      "guard": "body-in-travel",
+      "clearance": 0.05,
+      "publishes": "reserve.screen-d.position",
+      "group": "reserve.screens",
+      "note": "Rack at x -20.65, north aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice (caption: Screen D waits: you are in its way); it never pushes."
+    },
+    {
+      "key": "reserve.screen-e",
+      "joint": "prismatic",
+      "body": "reserve.screen-e",
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "travel": 5.65,
+      "drive": {
+        "speed": 1.0,
+        "accel": 0.6,
+        "jerk": 1.2,
+        "zones": []
+      },
+      "control": "reserve.screen-e.pull",
+      "openUse": {
+        "verb": "Draw out screen E",
+        "caption": ""
+      },
+      "closeUse": {
+        "verb": "Slide screen E home",
+        "caption": ""
+      },
+      "open": [
+        {
+          "move": "open"
+        }
+      ],
+      "close": [
+        {
+          "move": "closed"
+        }
+      ],
+      "home": "closed",
+      "guard": "body-in-travel",
+      "clearance": 0.05,
+      "publishes": "reserve.screen-e.position",
+      "group": "reserve.screens",
+      "note": "Rack at x -18.75, north aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice (caption: Screen E waits: you are in its way); it never pushes."
+    },
+    {
+      "key": "reserve.screen-f",
+      "joint": "prismatic",
+      "body": "reserve.screen-f",
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "travel": 5.65,
+      "drive": {
+        "speed": 1.0,
+        "accel": 0.6,
+        "jerk": 1.2,
+        "zones": []
+      },
+      "control": "reserve.screen-f.pull",
+      "openUse": {
+        "verb": "Draw out screen F",
+        "caption": ""
+      },
+      "closeUse": {
+        "verb": "Slide screen F home",
+        "caption": ""
+      },
+      "open": [
+        {
+          "move": "open"
+        }
+      ],
+      "close": [
+        {
+          "move": "closed"
+        }
+      ],
+      "home": "closed",
+      "guard": "body-in-travel",
+      "clearance": 0.05,
+      "publishes": "reserve.screen-f.position",
+      "group": "reserve.screens",
+      "note": "Rack at x -16.85, north aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice (caption: Screen F waits: you are in its way); it never pushes."
+    },
+    {
+      "key": "reserve.screen-n07",
+      "joint": "prismatic",
+      "body": "reserve.screen-n07",
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "travel": 5.65,
+      "drive": {
+        "speed": 1.0,
+        "accel": 0.6,
+        "jerk": 1.2,
+        "zones": []
+      },
+      "control": "reserve.screen-n07.pull",
+      "openUse": {
+        "verb": "Draw out screen N07",
+        "caption": ""
+      },
+      "closeUse": {
+        "verb": "Slide screen N07 home",
+        "caption": ""
+      },
+      "open": [
+        {
+          "move": "open"
+        }
+      ],
+      "close": [
+        {
+          "move": "closed"
+        }
+      ],
+      "home": "closed",
+      "guard": "body-in-travel",
+      "clearance": 0.05,
+      "publishes": "reserve.screen-n07.position",
+      "group": "reserve.screens",
+      "note": "Rack at x -13.15, north aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice (caption: Screen N07 waits: you are in its way); it never pushes."
+    },
+    {
+      "key": "reserve.screen-n08",
+      "joint": "prismatic",
+      "body": "reserve.screen-n08",
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "travel": 5.65,
+      "drive": {
+        "speed": 1.0,
+        "accel": 0.6,
+        "jerk": 1.2,
+        "zones": []
+      },
+      "control": "reserve.screen-n08.pull",
+      "openUse": {
+        "verb": "Draw out screen N08",
+        "caption": ""
+      },
+      "closeUse": {
+        "verb": "Slide screen N08 home",
+        "caption": ""
+      },
+      "open": [
+        {
+          "move": "open"
+        }
+      ],
+      "close": [
+        {
+          "move": "closed"
+        }
+      ],
+      "home": "closed",
+      "guard": "body-in-travel",
+      "clearance": 0.05,
+      "publishes": "reserve.screen-n08.position",
+      "group": "reserve.screens",
+      "note": "Rack at x -11.25, north aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice (caption: Screen N08 waits: you are in its way); it never pushes."
+    },
+    {
+      "key": "reserve.screen-n09",
+      "joint": "prismatic",
+      "body": "reserve.screen-n09",
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "travel": 5.65,
+      "drive": {
+        "speed": 1.0,
+        "accel": 0.6,
+        "jerk": 1.2,
+        "zones": []
+      },
+      "control": "reserve.screen-n09.pull",
+      "openUse": {
+        "verb": "Draw out screen N09",
+        "caption": ""
+      },
+      "closeUse": {
+        "verb": "Slide screen N09 home",
+        "caption": ""
+      },
+      "open": [
+        {
+          "move": "open"
+        }
+      ],
+      "close": [
+        {
+          "move": "closed"
+        }
+      ],
+      "home": "closed",
+      "guard": "body-in-travel",
+      "clearance": 0.05,
+      "publishes": "reserve.screen-n09.position",
+      "group": "reserve.screens",
+      "note": "Rack at x -9.35, north aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice (caption: Screen N09 waits: you are in its way); it never pushes."
+    },
+    {
+      "key": "reserve.screen-n10",
+      "joint": "prismatic",
+      "body": "reserve.screen-n10",
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "travel": 5.65,
+      "drive": {
+        "speed": 1.0,
+        "accel": 0.6,
+        "jerk": 1.2,
+        "zones": []
+      },
+      "control": "reserve.screen-n10.pull",
+      "openUse": {
+        "verb": "Draw out screen N10",
+        "caption": ""
+      },
+      "closeUse": {
+        "verb": "Slide screen N10 home",
+        "caption": ""
+      },
+      "open": [
+        {
+          "move": "open"
+        }
+      ],
+      "close": [
+        {
+          "move": "closed"
+        }
+      ],
+      "home": "closed",
+      "guard": "body-in-travel",
+      "clearance": 0.05,
+      "publishes": "reserve.screen-n10.position",
+      "group": "reserve.screens",
+      "note": "Rack at x -5.65, north aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice (caption: Screen N10 waits: you are in its way); it never pushes."
+    },
+    {
+      "key": "reserve.screen-n11",
+      "joint": "prismatic",
+      "body": "reserve.screen-n11",
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "travel": 5.65,
+      "drive": {
+        "speed": 1.0,
+        "accel": 0.6,
+        "jerk": 1.2,
+        "zones": []
+      },
+      "control": "reserve.screen-n11.pull",
+      "openUse": {
+        "verb": "Draw out screen N11",
+        "caption": ""
+      },
+      "closeUse": {
+        "verb": "Slide screen N11 home",
+        "caption": ""
+      },
+      "open": [
+        {
+          "move": "open"
+        }
+      ],
+      "close": [
+        {
+          "move": "closed"
+        }
+      ],
+      "home": "closed",
+      "guard": "body-in-travel",
+      "clearance": 0.05,
+      "publishes": "reserve.screen-n11.position",
+      "group": "reserve.screens",
+      "note": "Rack at x -3.75, north aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice (caption: Screen N11 waits: you are in its way); it never pushes."
+    },
+    {
+      "key": "reserve.screen-n12",
+      "joint": "prismatic",
+      "body": "reserve.screen-n12",
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "travel": 5.65,
+      "drive": {
+        "speed": 1.0,
+        "accel": 0.6,
+        "jerk": 1.2,
+        "zones": []
+      },
+      "control": "reserve.screen-n12.pull",
+      "openUse": {
+        "verb": "Draw out screen N12",
+        "caption": ""
+      },
+      "closeUse": {
+        "verb": "Slide screen N12 home",
+        "caption": ""
+      },
+      "open": [
+        {
+          "move": "open"
+        }
+      ],
+      "close": [
+        {
+          "move": "closed"
+        }
+      ],
+      "home": "closed",
+      "guard": "body-in-travel",
+      "clearance": 0.05,
+      "publishes": "reserve.screen-n12.position",
+      "group": "reserve.screens",
+      "note": "Rack at x -1.85, north aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice (caption: Screen N12 waits: you are in its way); it never pushes."
+    },
+    {
+      "key": "reserve.screen-n13",
+      "joint": "prismatic",
+      "body": "reserve.screen-n13",
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "travel": 5.65,
+      "drive": {
+        "speed": 1.0,
+        "accel": 0.6,
+        "jerk": 1.2,
+        "zones": []
+      },
+      "control": "reserve.screen-n13.pull",
+      "openUse": {
+        "verb": "Draw out screen N13",
+        "caption": ""
+      },
+      "closeUse": {
+        "verb": "Slide screen N13 home",
+        "caption": ""
+      },
+      "open": [
+        {
+          "move": "open"
+        }
+      ],
+      "close": [
+        {
+          "move": "closed"
+        }
+      ],
+      "home": "closed",
+      "guard": "body-in-travel",
+      "clearance": 0.05,
+      "publishes": "reserve.screen-n13.position",
+      "group": "reserve.screens",
+      "note": "Rack at x 1.85, north aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice (caption: Screen N13 waits: you are in its way); it never pushes."
+    },
+    {
+      "key": "reserve.screen-n14",
+      "joint": "prismatic",
+      "body": "reserve.screen-n14",
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "travel": 5.65,
+      "drive": {
+        "speed": 1.0,
+        "accel": 0.6,
+        "jerk": 1.2,
+        "zones": []
+      },
+      "control": "reserve.screen-n14.pull",
+      "openUse": {
+        "verb": "Draw out screen N14",
+        "caption": ""
+      },
+      "closeUse": {
+        "verb": "Slide screen N14 home",
+        "caption": ""
+      },
+      "open": [
+        {
+          "move": "open"
+        }
+      ],
+      "close": [
+        {
+          "move": "closed"
+        }
+      ],
+      "home": "closed",
+      "guard": "body-in-travel",
+      "clearance": 0.05,
+      "publishes": "reserve.screen-n14.position",
+      "group": "reserve.screens",
+      "note": "Rack at x 3.75, north aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice (caption: Screen N14 waits: you are in its way); it never pushes."
+    },
+    {
+      "key": "reserve.screen-n15",
+      "joint": "prismatic",
+      "body": "reserve.screen-n15",
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "travel": 5.65,
+      "drive": {
+        "speed": 1.0,
+        "accel": 0.6,
+        "jerk": 1.2,
+        "zones": []
+      },
+      "control": "reserve.screen-n15.pull",
+      "openUse": {
+        "verb": "Draw out screen N15",
+        "caption": ""
+      },
+      "closeUse": {
+        "verb": "Slide screen N15 home",
+        "caption": ""
+      },
+      "open": [
+        {
+          "move": "open"
+        }
+      ],
+      "close": [
+        {
+          "move": "closed"
+        }
+      ],
+      "home": "closed",
+      "guard": "body-in-travel",
+      "clearance": 0.05,
+      "publishes": "reserve.screen-n15.position",
+      "group": "reserve.screens",
+      "note": "Rack at x 5.65, north aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice (caption: Screen N15 waits: you are in its way); it never pushes."
+    },
+    {
+      "key": "reserve.screen-n16",
+      "joint": "prismatic",
+      "body": "reserve.screen-n16",
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "travel": 5.65,
+      "drive": {
+        "speed": 1.0,
+        "accel": 0.6,
+        "jerk": 1.2,
+        "zones": []
+      },
+      "control": "reserve.screen-n16.pull",
+      "openUse": {
+        "verb": "Draw out screen N16",
+        "caption": ""
+      },
+      "closeUse": {
+        "verb": "Slide screen N16 home",
+        "caption": ""
+      },
+      "open": [
+        {
+          "move": "open"
+        }
+      ],
+      "close": [
+        {
+          "move": "closed"
+        }
+      ],
+      "home": "closed",
+      "guard": "body-in-travel",
+      "clearance": 0.05,
+      "publishes": "reserve.screen-n16.position",
+      "group": "reserve.screens",
+      "note": "Rack at x 9.35, north aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice (caption: Screen N16 waits: you are in its way); it never pushes."
+    },
+    {
+      "key": "reserve.screen-n17",
+      "joint": "prismatic",
+      "body": "reserve.screen-n17",
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "travel": 5.65,
+      "drive": {
+        "speed": 1.0,
+        "accel": 0.6,
+        "jerk": 1.2,
+        "zones": []
+      },
+      "control": "reserve.screen-n17.pull",
+      "openUse": {
+        "verb": "Draw out screen N17",
+        "caption": ""
+      },
+      "closeUse": {
+        "verb": "Slide screen N17 home",
+        "caption": ""
+      },
+      "open": [
+        {
+          "move": "open"
+        }
+      ],
+      "close": [
+        {
+          "move": "closed"
+        }
+      ],
+      "home": "closed",
+      "guard": "body-in-travel",
+      "clearance": 0.05,
+      "publishes": "reserve.screen-n17.position",
+      "group": "reserve.screens",
+      "note": "Rack at x 11.25, north aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice (caption: Screen N17 waits: you are in its way); it never pushes."
+    },
+    {
+      "key": "reserve.screen-n18",
+      "joint": "prismatic",
+      "body": "reserve.screen-n18",
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "travel": 5.65,
+      "drive": {
+        "speed": 1.0,
+        "accel": 0.6,
+        "jerk": 1.2,
+        "zones": []
+      },
+      "control": "reserve.screen-n18.pull",
+      "openUse": {
+        "verb": "Draw out screen N18",
+        "caption": ""
+      },
+      "closeUse": {
+        "verb": "Slide screen N18 home",
+        "caption": ""
+      },
+      "open": [
+        {
+          "move": "open"
+        }
+      ],
+      "close": [
+        {
+          "move": "closed"
+        }
+      ],
+      "home": "closed",
+      "guard": "body-in-travel",
+      "clearance": 0.05,
+      "publishes": "reserve.screen-n18.position",
+      "group": "reserve.screens",
+      "note": "Rack at x 13.15, north aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice (caption: Screen N18 waits: you are in its way); it never pushes."
+    },
+    {
+      "key": "reserve.screen-s01",
+      "joint": "prismatic",
+      "body": "reserve.screen-s01",
+      "axis": [
+        0,
+        -1,
+        0
+      ],
+      "travel": 5.65,
+      "drive": {
+        "speed": 1.0,
+        "accel": 0.6,
+        "jerk": 1.2,
+        "zones": []
+      },
+      "control": "reserve.screen-s01.pull",
+      "openUse": {
+        "verb": "Draw out screen S01",
+        "caption": ""
+      },
+      "closeUse": {
+        "verb": "Slide screen S01 home",
+        "caption": ""
+      },
+      "open": [
+        {
+          "move": "open"
+        }
+      ],
+      "close": [
+        {
+          "move": "closed"
+        }
+      ],
+      "home": "closed",
+      "guard": "body-in-travel",
+      "clearance": 0.05,
+      "publishes": "reserve.screen-s01.position",
+      "group": "reserve.screens",
+      "note": "Rack at x -28.15, south aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice (caption: Screen S01 waits: you are in its way); it never pushes."
+    },
+    {
+      "key": "reserve.screen-s02",
+      "joint": "prismatic",
+      "body": "reserve.screen-s02",
+      "axis": [
+        0,
+        -1,
+        0
+      ],
+      "travel": 5.65,
+      "drive": {
+        "speed": 1.0,
+        "accel": 0.6,
+        "jerk": 1.2,
+        "zones": []
+      },
+      "control": "reserve.screen-s02.pull",
+      "openUse": {
+        "verb": "Draw out screen S02",
+        "caption": ""
+      },
+      "closeUse": {
+        "verb": "Slide screen S02 home",
+        "caption": ""
+      },
+      "open": [
+        {
+          "move": "open"
+        }
+      ],
+      "close": [
+        {
+          "move": "closed"
+        }
+      ],
+      "home": "closed",
+      "guard": "body-in-travel",
+      "clearance": 0.05,
+      "publishes": "reserve.screen-s02.position",
+      "group": "reserve.screens",
+      "note": "Rack at x -26.25, south aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice (caption: Screen S02 waits: you are in its way); it never pushes."
+    },
+    {
+      "key": "reserve.screen-s03",
+      "joint": "prismatic",
+      "body": "reserve.screen-s03",
+      "axis": [
+        0,
+        -1,
+        0
+      ],
+      "travel": 5.65,
+      "drive": {
+        "speed": 1.0,
+        "accel": 0.6,
+        "jerk": 1.2,
+        "zones": []
+      },
+      "control": "reserve.screen-s03.pull",
+      "openUse": {
+        "verb": "Draw out screen S03",
+        "caption": ""
+      },
+      "closeUse": {
+        "verb": "Slide screen S03 home",
+        "caption": ""
+      },
+      "open": [
+        {
+          "move": "open"
+        }
+      ],
+      "close": [
+        {
+          "move": "closed"
+        }
+      ],
+      "home": "closed",
+      "guard": "body-in-travel",
+      "clearance": 0.05,
+      "publishes": "reserve.screen-s03.position",
+      "group": "reserve.screens",
+      "note": "Rack at x -24.35, south aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice (caption: Screen S03 waits: you are in its way); it never pushes."
+    },
+    {
+      "key": "reserve.screen-s04",
+      "joint": "prismatic",
+      "body": "reserve.screen-s04",
+      "axis": [
+        0,
+        -1,
+        0
+      ],
+      "travel": 5.65,
+      "drive": {
+        "speed": 1.0,
+        "accel": 0.6,
+        "jerk": 1.2,
+        "zones": []
+      },
+      "control": "reserve.screen-s04.pull",
+      "openUse": {
+        "verb": "Draw out screen S04",
+        "caption": ""
+      },
+      "closeUse": {
+        "verb": "Slide screen S04 home",
+        "caption": ""
+      },
+      "open": [
+        {
+          "move": "open"
+        }
+      ],
+      "close": [
+        {
+          "move": "closed"
+        }
+      ],
+      "home": "closed",
+      "guard": "body-in-travel",
+      "clearance": 0.05,
+      "publishes": "reserve.screen-s04.position",
+      "group": "reserve.screens",
+      "note": "Rack at x -20.65, south aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice (caption: Screen S04 waits: you are in its way); it never pushes."
+    },
+    {
+      "key": "reserve.screen-s05",
+      "joint": "prismatic",
+      "body": "reserve.screen-s05",
+      "axis": [
+        0,
+        -1,
+        0
+      ],
+      "travel": 5.65,
+      "drive": {
+        "speed": 1.0,
+        "accel": 0.6,
+        "jerk": 1.2,
+        "zones": []
+      },
+      "control": "reserve.screen-s05.pull",
+      "openUse": {
+        "verb": "Draw out screen S05",
+        "caption": ""
+      },
+      "closeUse": {
+        "verb": "Slide screen S05 home",
+        "caption": ""
+      },
+      "open": [
+        {
+          "move": "open"
+        }
+      ],
+      "close": [
+        {
+          "move": "closed"
+        }
+      ],
+      "home": "closed",
+      "guard": "body-in-travel",
+      "clearance": 0.05,
+      "publishes": "reserve.screen-s05.position",
+      "group": "reserve.screens",
+      "note": "Rack at x -18.75, south aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice (caption: Screen S05 waits: you are in its way); it never pushes."
+    },
+    {
+      "key": "reserve.screen-s06",
+      "joint": "prismatic",
+      "body": "reserve.screen-s06",
+      "axis": [
+        0,
+        -1,
+        0
+      ],
+      "travel": 5.65,
+      "drive": {
+        "speed": 1.0,
+        "accel": 0.6,
+        "jerk": 1.2,
+        "zones": []
+      },
+      "control": "reserve.screen-s06.pull",
+      "openUse": {
+        "verb": "Draw out screen S06",
+        "caption": ""
+      },
+      "closeUse": {
+        "verb": "Slide screen S06 home",
+        "caption": ""
+      },
+      "open": [
+        {
+          "move": "open"
+        }
+      ],
+      "close": [
+        {
+          "move": "closed"
+        }
+      ],
+      "home": "closed",
+      "guard": "body-in-travel",
+      "clearance": 0.05,
+      "publishes": "reserve.screen-s06.position",
+      "group": "reserve.screens",
+      "note": "Rack at x -16.85, south aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice (caption: Screen S06 waits: you are in its way); it never pushes."
+    },
+    {
+      "key": "reserve.screen-s07",
+      "joint": "prismatic",
+      "body": "reserve.screen-s07",
+      "axis": [
+        0,
+        -1,
+        0
+      ],
+      "travel": 5.65,
+      "drive": {
+        "speed": 1.0,
+        "accel": 0.6,
+        "jerk": 1.2,
+        "zones": []
+      },
+      "control": "reserve.screen-s07.pull",
+      "openUse": {
+        "verb": "Draw out screen S07",
+        "caption": ""
+      },
+      "closeUse": {
+        "verb": "Slide screen S07 home",
+        "caption": ""
+      },
+      "open": [
+        {
+          "move": "open"
+        }
+      ],
+      "close": [
+        {
+          "move": "closed"
+        }
+      ],
+      "home": "closed",
+      "guard": "body-in-travel",
+      "clearance": 0.05,
+      "publishes": "reserve.screen-s07.position",
+      "group": "reserve.screens",
+      "note": "Rack at x -13.15, south aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice (caption: Screen S07 waits: you are in its way); it never pushes."
+    },
+    {
+      "key": "reserve.screen-s08",
+      "joint": "prismatic",
+      "body": "reserve.screen-s08",
+      "axis": [
+        0,
+        -1,
+        0
+      ],
+      "travel": 5.65,
+      "drive": {
+        "speed": 1.0,
+        "accel": 0.6,
+        "jerk": 1.2,
+        "zones": []
+      },
+      "control": "reserve.screen-s08.pull",
+      "openUse": {
+        "verb": "Draw out screen S08",
+        "caption": ""
+      },
+      "closeUse": {
+        "verb": "Slide screen S08 home",
+        "caption": ""
+      },
+      "open": [
+        {
+          "move": "open"
+        }
+      ],
+      "close": [
+        {
+          "move": "closed"
+        }
+      ],
+      "home": "closed",
+      "guard": "body-in-travel",
+      "clearance": 0.05,
+      "publishes": "reserve.screen-s08.position",
+      "group": "reserve.screens",
+      "note": "Rack at x -11.25, south aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice (caption: Screen S08 waits: you are in its way); it never pushes."
+    },
+    {
+      "key": "reserve.screen-s09",
+      "joint": "prismatic",
+      "body": "reserve.screen-s09",
+      "axis": [
+        0,
+        -1,
+        0
+      ],
+      "travel": 5.65,
+      "drive": {
+        "speed": 1.0,
+        "accel": 0.6,
+        "jerk": 1.2,
+        "zones": []
+      },
+      "control": "reserve.screen-s09.pull",
+      "openUse": {
+        "verb": "Draw out screen S09",
+        "caption": ""
+      },
+      "closeUse": {
+        "verb": "Slide screen S09 home",
+        "caption": ""
+      },
+      "open": [
+        {
+          "move": "open"
+        }
+      ],
+      "close": [
+        {
+          "move": "closed"
+        }
+      ],
+      "home": "closed",
+      "guard": "body-in-travel",
+      "clearance": 0.05,
+      "publishes": "reserve.screen-s09.position",
+      "group": "reserve.screens",
+      "note": "Rack at x -9.35, south aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice (caption: Screen S09 waits: you are in its way); it never pushes."
+    },
+    {
+      "key": "reserve.screen-s10",
+      "joint": "prismatic",
+      "body": "reserve.screen-s10",
+      "axis": [
+        0,
+        -1,
+        0
+      ],
+      "travel": 5.65,
+      "drive": {
+        "speed": 1.0,
+        "accel": 0.6,
+        "jerk": 1.2,
+        "zones": []
+      },
+      "control": "reserve.screen-s10.pull",
+      "openUse": {
+        "verb": "Draw out screen S10",
+        "caption": ""
+      },
+      "closeUse": {
+        "verb": "Slide screen S10 home",
+        "caption": ""
+      },
+      "open": [
+        {
+          "move": "open"
+        }
+      ],
+      "close": [
+        {
+          "move": "closed"
+        }
+      ],
+      "home": "closed",
+      "guard": "body-in-travel",
+      "clearance": 0.05,
+      "publishes": "reserve.screen-s10.position",
+      "group": "reserve.screens",
+      "note": "Rack at x -5.65, south aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice (caption: Screen S10 waits: you are in its way); it never pushes."
+    },
+    {
+      "key": "reserve.screen-s11",
+      "joint": "prismatic",
+      "body": "reserve.screen-s11",
+      "axis": [
+        0,
+        -1,
+        0
+      ],
+      "travel": 5.65,
+      "drive": {
+        "speed": 1.0,
+        "accel": 0.6,
+        "jerk": 1.2,
+        "zones": []
+      },
+      "control": "reserve.screen-s11.pull",
+      "openUse": {
+        "verb": "Draw out screen S11",
+        "caption": ""
+      },
+      "closeUse": {
+        "verb": "Slide screen S11 home",
+        "caption": ""
+      },
+      "open": [
+        {
+          "move": "open"
+        }
+      ],
+      "close": [
+        {
+          "move": "closed"
+        }
+      ],
+      "home": "closed",
+      "guard": "body-in-travel",
+      "clearance": 0.05,
+      "publishes": "reserve.screen-s11.position",
+      "group": "reserve.screens",
+      "note": "Rack at x -3.75, south aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice (caption: Screen S11 waits: you are in its way); it never pushes."
+    },
+    {
+      "key": "reserve.screen-s12",
+      "joint": "prismatic",
+      "body": "reserve.screen-s12",
+      "axis": [
+        0,
+        -1,
+        0
+      ],
+      "travel": 5.65,
+      "drive": {
+        "speed": 1.0,
+        "accel": 0.6,
+        "jerk": 1.2,
+        "zones": []
+      },
+      "control": "reserve.screen-s12.pull",
+      "openUse": {
+        "verb": "Draw out screen S12",
+        "caption": ""
+      },
+      "closeUse": {
+        "verb": "Slide screen S12 home",
+        "caption": ""
+      },
+      "open": [
+        {
+          "move": "open"
+        }
+      ],
+      "close": [
+        {
+          "move": "closed"
+        }
+      ],
+      "home": "closed",
+      "guard": "body-in-travel",
+      "clearance": 0.05,
+      "publishes": "reserve.screen-s12.position",
+      "group": "reserve.screens",
+      "note": "Rack at x -1.85, south aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice (caption: Screen S12 waits: you are in its way); it never pushes."
+    },
+    {
+      "key": "reserve.screen-s13",
+      "joint": "prismatic",
+      "body": "reserve.screen-s13",
+      "axis": [
+        0,
+        -1,
+        0
+      ],
+      "travel": 5.65,
+      "drive": {
+        "speed": 1.0,
+        "accel": 0.6,
+        "jerk": 1.2,
+        "zones": []
+      },
+      "control": "reserve.screen-s13.pull",
+      "openUse": {
+        "verb": "Draw out screen S13",
+        "caption": ""
+      },
+      "closeUse": {
+        "verb": "Slide screen S13 home",
+        "caption": ""
+      },
+      "open": [
+        {
+          "move": "open"
+        }
+      ],
+      "close": [
+        {
+          "move": "closed"
+        }
+      ],
+      "home": "closed",
+      "guard": "body-in-travel",
+      "clearance": 0.05,
+      "publishes": "reserve.screen-s13.position",
+      "group": "reserve.screens",
+      "note": "Rack at x 1.85, south aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice (caption: Screen S13 waits: you are in its way); it never pushes."
+    },
+    {
+      "key": "reserve.screen-s14",
+      "joint": "prismatic",
+      "body": "reserve.screen-s14",
+      "axis": [
+        0,
+        -1,
+        0
+      ],
+      "travel": 5.65,
+      "drive": {
+        "speed": 1.0,
+        "accel": 0.6,
+        "jerk": 1.2,
+        "zones": []
+      },
+      "control": "reserve.screen-s14.pull",
+      "openUse": {
+        "verb": "Draw out screen S14",
+        "caption": ""
+      },
+      "closeUse": {
+        "verb": "Slide screen S14 home",
+        "caption": ""
+      },
+      "open": [
+        {
+          "move": "open"
+        }
+      ],
+      "close": [
+        {
+          "move": "closed"
+        }
+      ],
+      "home": "closed",
+      "guard": "body-in-travel",
+      "clearance": 0.05,
+      "publishes": "reserve.screen-s14.position",
+      "group": "reserve.screens",
+      "note": "Rack at x 3.75, south aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice (caption: Screen S14 waits: you are in its way); it never pushes."
+    },
+    {
+      "key": "reserve.screen-s15",
+      "joint": "prismatic",
+      "body": "reserve.screen-s15",
+      "axis": [
+        0,
+        -1,
+        0
+      ],
+      "travel": 5.65,
+      "drive": {
+        "speed": 1.0,
+        "accel": 0.6,
+        "jerk": 1.2,
+        "zones": []
+      },
+      "control": "reserve.screen-s15.pull",
+      "openUse": {
+        "verb": "Draw out screen S15",
+        "caption": ""
+      },
+      "closeUse": {
+        "verb": "Slide screen S15 home",
+        "caption": ""
+      },
+      "open": [
+        {
+          "move": "open"
+        }
+      ],
+      "close": [
+        {
+          "move": "closed"
+        }
+      ],
+      "home": "closed",
+      "guard": "body-in-travel",
+      "clearance": 0.05,
+      "publishes": "reserve.screen-s15.position",
+      "group": "reserve.screens",
+      "note": "Rack at x 5.65, south aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice (caption: Screen S15 waits: you are in its way); it never pushes."
+    },
+    {
+      "key": "reserve.screen-s16",
+      "joint": "prismatic",
+      "body": "reserve.screen-s16",
+      "axis": [
+        0,
+        -1,
+        0
+      ],
+      "travel": 5.65,
+      "drive": {
+        "speed": 1.0,
+        "accel": 0.6,
+        "jerk": 1.2,
+        "zones": []
+      },
+      "control": "reserve.screen-s16.pull",
+      "openUse": {
+        "verb": "Draw out screen S16",
+        "caption": ""
+      },
+      "closeUse": {
+        "verb": "Slide screen S16 home",
+        "caption": ""
+      },
+      "open": [
+        {
+          "move": "open"
+        }
+      ],
+      "close": [
+        {
+          "move": "closed"
+        }
+      ],
+      "home": "closed",
+      "guard": "body-in-travel",
+      "clearance": 0.05,
+      "publishes": "reserve.screen-s16.position",
+      "group": "reserve.screens",
+      "note": "Rack at x 9.35, south aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice (caption: Screen S16 waits: you are in its way); it never pushes."
+    },
+    {
+      "key": "reserve.screen-s17",
+      "joint": "prismatic",
+      "body": "reserve.screen-s17",
+      "axis": [
+        0,
+        -1,
+        0
+      ],
+      "travel": 5.65,
+      "drive": {
+        "speed": 1.0,
+        "accel": 0.6,
+        "jerk": 1.2,
+        "zones": []
+      },
+      "control": "reserve.screen-s17.pull",
+      "openUse": {
+        "verb": "Draw out screen S17",
+        "caption": ""
+      },
+      "closeUse": {
+        "verb": "Slide screen S17 home",
+        "caption": ""
+      },
+      "open": [
+        {
+          "move": "open"
+        }
+      ],
+      "close": [
+        {
+          "move": "closed"
+        }
+      ],
+      "home": "closed",
+      "guard": "body-in-travel",
+      "clearance": 0.05,
+      "publishes": "reserve.screen-s17.position",
+      "group": "reserve.screens",
+      "note": "Rack at x 11.25, south aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice (caption: Screen S17 waits: you are in its way); it never pushes."
+    },
+    {
+      "key": "reserve.screen-s18",
+      "joint": "prismatic",
+      "body": "reserve.screen-s18",
+      "axis": [
+        0,
+        -1,
+        0
+      ],
+      "travel": 5.65,
+      "drive": {
+        "speed": 1.0,
+        "accel": 0.6,
+        "jerk": 1.2,
+        "zones": []
+      },
+      "control": "reserve.screen-s18.pull",
+      "openUse": {
+        "verb": "Draw out screen S18",
+        "caption": ""
+      },
+      "closeUse": {
+        "verb": "Slide screen S18 home",
+        "caption": ""
+      },
+      "open": [
+        {
+          "move": "open"
+        }
+      ],
+      "close": [
+        {
+          "move": "closed"
+        }
+      ],
+      "home": "closed",
+      "guard": "body-in-travel",
+      "clearance": 0.05,
+      "publishes": "reserve.screen-s18.position",
+      "group": "reserve.screens",
+      "note": "Rack at x 13.15, south aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice (caption: Screen S18 waits: you are in its way); it never pushes."
+    }
+  ],
+  "channels": [
+    {
+      "key": "reserve.screen-a.lamp",
+      "follows": {
+        "channel": "reserve.screen-a.position",
+        "in": [
+          0.99,
+          1.0
+        ],
+        "out": [
+          0,
+          1
+        ]
+      }
+    },
+    {
+      "key": "reserve.screen-b.lamp",
+      "follows": {
+        "channel": "reserve.screen-b.position",
+        "in": [
+          0.99,
+          1.0
+        ],
+        "out": [
+          0,
+          1
+        ]
+      }
+    },
+    {
+      "key": "reserve.screen-c.lamp",
+      "follows": {
+        "channel": "reserve.screen-c.position",
+        "in": [
+          0.99,
+          1.0
+        ],
+        "out": [
+          0,
+          1
+        ]
+      }
+    },
+    {
+      "key": "reserve.screen-d.lamp",
+      "follows": {
+        "channel": "reserve.screen-d.position",
+        "in": [
+          0.99,
+          1.0
+        ],
+        "out": [
+          0,
+          1
+        ]
+      }
+    },
+    {
+      "key": "reserve.screen-e.lamp",
+      "follows": {
+        "channel": "reserve.screen-e.position",
+        "in": [
+          0.99,
+          1.0
+        ],
+        "out": [
+          0,
+          1
+        ]
+      }
+    }
+  ]
+}
