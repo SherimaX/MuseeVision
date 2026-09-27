@@ -1,0 +1,82 @@
+{
+  "schema": "musee.matter.shading.history/1",
+  "key": "stone.submerged",
+  "name": "Submerged: a bed or lining that lies under still water",
+  "mechanisms": [
+    "stone.pore-soiling"
+  ],
+  "age": {
+    "value": 20.0,
+    "unit": "year",
+    "grade": "design",
+    "source": "Palette.json eras: \"classical: honed, patinated, oiled and waxed\" and \"worn soft\"",
+    "note": "The age the museum's classical rooms show: a generation of use."
+  },
+  "passagesPerYear": {
+    "value": 0.0,
+    "unit": "1/year",
+    "grade": "design",
+    "source": "the face lies under water, where no one walks or touches it"
+  },
+  "skyExposure": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "derived",
+    "source": "the water above the face",
+    "derivation": "rain and snow fall into the water, never on the face"
+  },
+  "keptWet": {
+    "value": 1.0,
+    "unit": "1",
+    "grade": "design",
+    "source": "Palette.json: accent.pierre-bleue, workingsByEra.outdoors ('honed, submerged')",
+    "derivation": "under water all the time: its pores are always full"
+  },
+  "deposition": {
+    "value": 0.0066,
+    "unit": "1/year",
+    "grade": "unverified",
+    "source": "Histories/white.soiling.json: terms.soiling.coverageRateVertical (up to 1.8e-5 per day), as Shading/Histories/stone.weathered.json",
+    "note": "No settling rate of silt and biofilm on a still basin's bed was read: the outdoor face's upper rate, with nothing to wash it off, keeps the thin film the grounds' sheet asks for."
+  },
+  "washRemoval": {
+    "value": 0.0,
+    "unit": "1/year",
+    "grade": "derived",
+    "source": "still water over the face",
+    "derivation": "no rain runs over it and the water does not scour it"
+  },
+  "soilAlbedo": {
+    "value": [
+      0.06,
+      0.06,
+      0.04
+    ],
+    "space": "linear Rec.709 (sRGB primaries), D65 white",
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Histories/stone.pore-soiling.json (no measured colour of a submerged deposit)",
+    "note": "A first dark olive for silt and a thin algal film on a pond's bed."
+  },
+  "wornRoughness": {
+    "value": 0.6,
+    "unit": "1",
+    "grade": "derived",
+    "source": "Shading/Workings/honed.json",
+    "derivation": "the face is never worn: the honed face's own roughness"
+  },
+  "wornHaziness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "derived",
+    "source": "a matte face",
+    "derivation": "no second lobe"
+  },
+  "wearPassages": {
+    "value": 0.0,
+    "unit": "count",
+    "grade": "derived",
+    "source": "the face is not abraded",
+    "derivation": "0: it never wears"
+  }
+}

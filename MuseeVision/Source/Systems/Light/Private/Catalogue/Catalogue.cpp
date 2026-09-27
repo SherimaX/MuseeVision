@@ -18,7 +18,8 @@ namespace Musee::Light
 		 * their photometric files describe, so those kinds have no emitter yet. A step light's, a pinspot's and an uplight's
 		 * light is a beam about their axis, and so is a framing projector's with its flaps open (its flaps' cut to the
 		 * frame is not drawn yet); an edge-lit pane lets its light out evenly over its etched face, as a laylight's diffusing
-		 * face does; a pendant's lamp lights all round inside its globe; an image panel's light is its picture.
+		 * face does; a pendant's lamp, and a post-top lantern's, lights all round inside its globe; an image panel's light is
+		 * its picture.
 		 */
 		TOptional<FLightLuminaire::EEmitter> EmitterOfKind(const FString& Kind)
 		{
@@ -32,9 +33,22 @@ namespace Musee::Light
 				return FLightLuminaire::EEmitter::Linear;
 			}
 			if (Kind == TEXT("laylight") || Kind == TEXT("edge-lit-glass")) { return FLightLuminaire::EEmitter::Rect; }
-			if (Kind == TEXT("lantern") || Kind == TEXT("electrolier") || Kind == TEXT("pendant")) { return FLightLuminaire::EEmitter::Point; }
+			if (Kind == TEXT("lantern") || Kind == TEXT("electrolier") || Kind == TEXT("pendant") || Kind == TEXT("post-top"))
+			{
+				return FLightLuminaire::EEmitter::Point;
+			}
 			if (Kind == TEXT("light-field-panel")) { return FLightLuminaire::EEmitter::Image; }
 			return {};
+		}
+
+		/**
+		 * Whether a kind lights a face the room gives it (an extent or a zone) rather than a face of its own: a luminous
+		 * ceiling's modules over the plenum, edge-lit panes over the canopy they glaze, an image panel over its wall. It is
+		 * what the product is, whether or not its maker publishes how much light each square metre gives.
+		 */
+		bool IsArealKind(const FString& Kind)
+		{
+			return Kind == TEXT("laylight") || Kind == TEXT("edge-lit-glass") || Kind == TEXT("light-field-panel");
 		}
 
 		/** The steps of the Simpson's rule that integrates a beam's intensity over its hemisphere. */
@@ -123,6 +137,7 @@ namespace Musee::Light
 				return FString();
 			default:
 				if (Record.Light.LuminousFluxLumensPerSquareMeter > 0.0) { return FString(); }
+				if (IsArealKind(Record.Kind)) { return TEXT("its flux per square metre of the face it lights isn't published"); }
 				if (Record.Light.LuminousFluxLumens <= 0.0) { return TEXT("neither its flux nor its flux per square metre is published"); }
 				if (Record.Housing.EmittingMillimeters.Num() != 2) { return TEXT("its emitting face isn't published"); }
 				return FString();
@@ -137,6 +152,7 @@ namespace Musee::Light
 			Result.Kind = FName(*Record.Kind);
 			Result.Emitter = Emitter.Get(FLightLuminaire::EEmitter::Spot);
 			Result.ControlClass = FName(*Record.ControlClass);
+			Result.bAreal = IsArealKind(Record.Kind);
 			Result.WhyUnlit = WhyUnlit(Record, Emitter);
 			Result.bLit = Result.WhyUnlit.IsEmpty();
 			Result.Flux = Lumens(FMath::Max(Record.Light.LuminousFluxLumens, 0.0));

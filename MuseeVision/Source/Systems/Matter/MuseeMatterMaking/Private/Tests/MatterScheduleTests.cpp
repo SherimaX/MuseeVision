@@ -447,4 +447,49 @@ bool FMatterStainedLayerComposes::RunTest(const FString& Parameters)
 	return true;
 }
 
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FMatterPlateLayerComposes, "Musee.Matter.PlateLayer", TestFlags)
+bool FMatterPlateLayerComposes::RunTest(const FString& Parameters)
+{
+	UMaterialParameterCollection* Moment = TestMasters::TransientMoment();
+	const TArray<FMadeMaster> Made = TestMasters::TransientMasters(*this, *Moment);
+	UMaterialInterface* Plate = TestMasters::FindIn(Made, FMasterKind{ FName(Masters::Plate), NAME_None });
+	UTexture* Image = LoadObject<UTexture>(nullptr, MasterParts::EngineDefaultTexture);
+	if (!TestNotNull(TEXT("The plate master builds"), Plate) || !TestNotNull(TEXT("The engine's default texture loads"), Image))
+	{
+		return false;
+	}
+	// A stereo daguerreotype of the Hall of Light, on its silvered plate (Data/Art/Supports.json).
+	FMatterPaintLayer Daguerreotype;
+	Daguerreotype.Work = TEXT("paint.matter-test.plate");
+	Daguerreotype.Palette = TEXT("accent.daguerreotype");
+	Daguerreotype.Working = TEXT("developed");
+	Daguerreotype.History = TEXT("clean");
+	Daguerreotype.Image = Image;
+	Daguerreotype.WidthMeters = 0.171;
+	Daguerreotype.HeightMeters = 0.086;
+	const TValueOrError<FString, FString> Master = LayerMasterPackage(Daguerreotype);
+	TestTrue(TEXT("A daguerreotype's layer is composed over the plate master"), Master.HasValue() && Master.GetValue() == MasterPackage(FName(Masters::Plate)));
+	FMatterPaintLayer Print = Daguerreotype;
+	Print.Palette = TEXT("accent.print-on-paper");
+	Print.Working = TEXT("printed");
+	const TValueOrError<FString, FString> PrintMaster = LayerMasterPackage(Print);
+	TestTrue(TEXT("a print's and a lustre dish's over the paint master"), PrintMaster.HasValue() && PrintMaster.GetValue() == PaintMasterPackage());
+
+	UMaterialInstanceConstant* Instance = TestMasters::TransientInstance();
+	for (const FString& Problem : ComposePaintLayer(Daguerreotype, *Plate, *Instance))
+	{
+		AddError(Problem);
+	}
+	TestTrue(TEXT("The plate is parented to the plate master"), Instance->Parent == Plate);
+	FLinearColor Silver = FLinearColor::Black;
+	FLinearColor Particles = FLinearColor::Black;
+	Instance->GetVectorParameterValue(FHashedMaterialParameterInfo(MasterParameter::MetalF0), Silver);
+	Instance->GetVectorParameterValue(FHashedMaterialParameterInfo(MasterParameter::FilmAlbedo), Particles);
+	TestTrue(TEXT("It reflects as silver, from the silver's record"), Silver.R > 0.9f && Silver.G > 0.9f && Silver.B > 0.9f);
+	TestTrue(TEXT("and its image's particles scatter white, from the working's"), Particles.R > 0.5f && FMath::IsNearlyEqual(Particles.R, Particles.B));
+	Instance->MarkAsGarbage();
+	TestMasters::Retire(Made);
+	return true;
+}
+
 #endif

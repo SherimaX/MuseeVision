@@ -61,7 +61,7 @@
       "body": "",
       "ground": {
         "material": "accent.site-geology",
-        "working": "topsoil",
+        "working": "topsoil.bare",
         "history": "weathered"
       },
       "outline": {

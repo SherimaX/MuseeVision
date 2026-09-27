@@ -267,7 +267,10 @@ namespace Musee::HallOfLight
 			Out.Anchors.Add({Key(Local), FName(Kind), Frame});
 		}
 
-		/** The hanging walls and the stereo readers (sec. 2): origin at the viewer's left on the hanging plane, y towards the viewer. */
+		/**
+		 * The hanging walls and the stereo readers (sec. 2): origin at the viewer's left on the hanging plane, y towards the
+		 * viewer; a reader's at the centre of its plate's face, where the card lies.
+		 */
 		void WorkAnchors(FSiteDescription& Out)
 		{
 			const TPair<const TCHAR*, double> Planes[] = {{TEXT("prints"), Plan::PrintsD}, {TEXT("autochromes"), Plan::AutochromesD}};
@@ -279,7 +282,9 @@ namespace Musee::HallOfLight
 			}
 			for (int32 Index = 0; Index < Plan::StereoStones; ++Index)
 			{
-				Anchor(Out, FString::Printf(TEXT("stereo.%d"), Index + 1), TEXT("Mount"), StereoReader(Index));
+				const FMuseeFrame Reader = StereoReader(Index);
+				const FVector Face = Reader.OriginMeters + Reader.DirectionToParent(FVector::RightVector) * (0.5 * Plan::ReaderThickness);
+				Anchor(Out, FString::Printf(TEXT("stereo.%d"), Index + 1), TEXT("Mount"), FMuseeFrame(Face, Reader.Rotation));
 			}
 		}
 

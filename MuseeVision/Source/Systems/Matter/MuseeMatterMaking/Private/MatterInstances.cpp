@@ -255,6 +255,19 @@ namespace
 		W.Scalar(RoughnessAcross, Wk.RoughnessAcross, Fraction, FieldOf(TEXT("Workings"), Wk.Key, TEXT("roughnessAcross")));
 	}
 
+	/** A daguerreotype's plate: the silver's reflection, and the image's particles its working laid over it (their cover
+	 *  is the work's image, never a record's). */
+	void WritePlate(FWriter& W, const FMatterSubstance& S, const FMatterWorking& Wk)
+	{
+		const auto Worked = [&Wk](const TCHAR* Name) { return FieldOf(TEXT("Workings"), Wk.Key, Name); };
+		W.Colour(MetalF0, S.Conductor.F0, Fraction, FieldOf(TEXT("Substances"), S.Key, TEXT("conductor.f0")));
+		W.Colour(MetalF82, S.Conductor.F82, Fraction, FieldOf(TEXT("Substances"), S.Key, TEXT("conductor.f82")));
+		W.Colour(FilmAlbedo, Wk.Film.DiffuseAlbedo, Fraction, Worked(TEXT("film.diffuseAlbedo")));
+		W.Scalar(FilmRefractiveIndex, Wk.Film.RefractiveIndex, Fraction, Worked(TEXT("film.refractiveIndex")));
+		W.Scalar(FilmRoughness, Wk.Film.Roughness, Fraction, Worked(TEXT("film.roughness")));
+		WriteFaceRoughness(W, Wk);
+	}
+
 	void WriteLeaf(FWriter& W, const FMatterWorking& Gilt)
 	{
 		const auto Field = [&Gilt](const TCHAR* Name) { return FieldOf(TEXT("Workings"), Gilt.Key, Name); };
@@ -308,6 +321,10 @@ namespace
 		else if (Master == FName(Masters::Metal))
 		{
 			WriteMetal(W, R.Substance, Face, R.History);
+		}
+		else if (Master == FName(Masters::Plate))
+		{
+			WritePlate(W, R.Substance, Face);
 		}
 		else if (Master == FName(Masters::Wood))
 		{

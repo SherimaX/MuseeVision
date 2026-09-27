@@ -3,6 +3,8 @@
 #include "Algo/StableSort.h"
 #include "ArtCare.h"
 #include "ArtPaintLayer.h"
+#include "Plan/EntryContext.h"
+#include "Support/ArtSupport.h"
 #include "HAL/FileManager.h"
 #include "MatterRecords.h"
 #include "Misc/Paths.h"
@@ -13,107 +15,10 @@ namespace Musee::ArtMaking
 	namespace
 	{
 		const FName ArtSystem(TEXT("Art"));
-		const FName CanvasSupport(TEXT("canvas"));
-		const FName GlassSupport(TEXT("glass"));
-		const FName NoFrame(TEXT("none"));
 
 		FString ScheduleFolder(const FMuseeStageContext& Stage)
 		{
 			return FPaths::IsRelative(Stage.ScheduleDir) ? Records::DataRoot() / Stage.ScheduleDir : Stage.ScheduleDir;
-		}
-
-		/** What the checks of a plan's entries read once: Care.json's keys, the stage's finishes and the oil paint's finish. */
-		struct FEntryContext
-		{
-			FCareKeys Care;
-			TOptional<FMatterFinishSchedule> Finishes;
-			FString FinishesWhy;
-			FLayerFinish Paint;
-		};
-
-		bool IsFramed(const FArtHangEntry& Entry)
-		{
-			return !Entry.Frame.IsNone() && Entry.Frame != NoFrame;
-		}
-
-		/** Why a surface the entry names (What: "frame", "glass") has no finish in the stage's schedule, or nothing. */
-		TArray<FString> SurfaceFaults(const FEntryContext& Context, FName Surface, const TCHAR* What)
-		{
-			if (!Context.Finishes.IsSet())
-			{
-				return { FString::Printf(TEXT("its %s's surface %s has no finish: %s"), What, *Surface.ToString(), *Context.FinishesWhy) };
-			}
-			if (!Context.Finishes->Find(Surface))
-			{
-				return { FString::Printf(TEXT("its %s '%s' is none of the surfaces in the stage's Finishes.json"), What, *Surface.ToString()) };
-			}
-			return {};
-		}
-
-		/** A canvas hangs on a Wall anchor, framed in a surface of the finish schedule or not at all. */
-		TArray<FString> CanvasEntryFaults(const FMuseeStageContext& Stage, const FArtHangEntry& Entry, const FEntryContext& Context)
-		{
-			TArray<FString> Out;
-			if (!Stage.FindAnchor(Entry.Anchor, WallAnchorKind))
-			{
-				Out.Add(FString::Printf(TEXT("%s is not a Wall anchor of the stage"), *Entry.Anchor.ToString()));
-			}
-			if (IsFramed(Entry))
-			{
-				Out.Append(SurfaceFaults(Context, Entry.Frame, TEXT("frame")));
-			}
-			return Out;
-		}
-
-		/** A stained-glass panel is set in a Glazing anchor, unframed (its came is the opening's), in its glass's surface. */
-		TArray<FString> GlassEntryFaults(const FMuseeStageContext& Stage, const FArtHangEntry& Entry, const FEntryContext& Context)
-		{
-			TArray<FString> Out;
-			if (!Stage.FindAnchor(Entry.Anchor, GlazingAnchorKind))
-			{
-				Out.Add(FString::Printf(TEXT("%s is not a Glazing anchor of the stage"), *Entry.Anchor.ToString()));
-			}
-			if (IsFramed(Entry))
-			{
-				Out.Add(TEXT("stained glass is leaded in its opening, never framed"));
-			}
-			if (Entry.Wall.IsNone())
-			{
-				Out.Add(TEXT("it names no glass to be fired in (its `wall`, a surface of the finish schedule)"));
-			}
-			else
-			{
-				Out.Append(SurfaceFaults(Context, Entry.Wall, TEXT("glass")));
-			}
-			return Out;
-		}
-
-		/** What is wrong with making one object on its own, one clause each. */
-		TArray<FString> EntryFaults(const FMuseeStageContext& Stage, const FArtHangEntry& Entry, const FEntryContext& Context)
-		{
-			TArray<FString> Out;
-			const FVector2D Size = Entry.SizeMeters();
-			if (Size.X <= 0.0 || Size.Y <= 0.0 || Entry.Along < 0.0f || Entry.Height < 0.0f)
-			{
-				Out.Add(TEXT("it needs a size [w, h] of more than zero, and an along and a height of zero or more"));
-			}
-			if (Entry.Support == CanvasSupport)
-			{
-				Out.Append(CanvasEntryFaults(Stage, Entry, Context));
-			}
-			else if (Entry.Support == GlassSupport)
-			{
-				Out.Append(GlassEntryFaults(Stage, Entry, Context));
-			}
-			else
-			{
-				Out.Add(FString::Printf(TEXT("its support '%s' isn't made yet; a canvas and stained glass are"), *Entry.Support.ToString()));
-			}
-			if (Musee::Art::PaintMaterial(Entry.Work).IsNone())
-			{
-				Out.Add(TEXT("its id can't name a paint layer (it must be one key segment)"));
-			}
-			return Out;
 		}
 
 		/**
@@ -174,22 +79,30 @@ namespace Musee::ArtMaking
 			return Out;
 		}
 
-		/** The layer an object shows is finished as the oil paint is on a canvas, and as its glass on stained glass. */
-		FLayerFinish FinishOf(const FArtHangEntry& Entry, const FEntryContext& Context)
+		/**
+		 * The layer an object shows is finished as its support's record says (the oil paint on a canvas, the paper of a
+		 * print, the silver of a daguerreotype, the lustre on ware), and as its glass on stained glass; its faces without
+		 * the image, as its support's ground.
+		 */
+		void FinishOf(const FArtHangEntry& Entry, const FEntryContext& Context, FCanvasPlan& OutCanvas)
 		{
-			if (Entry.Support != GlassSupport)
+			if (Entry.Support == Supports::Glass)
 			{
-				return Context.Paint;
+				const FMatterFinish& Glass = *Context.Finishes->Find(Entry.Wall);
+				OutCanvas.Finish = { Glass.Material.ToName(), Glass.Working.ToName(), Glass.History.ToName() };
+				return;
 			}
-			const FMatterFinish& Glass = *Context.Finishes->Find(Entry.Wall);
-			return { Glass.Material.ToName(), Glass.Working.ToName(), Glass.History.ToName() };
+			const FArtSupport& Support = *FindSupport(Entry.Support);
+			OutCanvas.Finish = { Support.Palette, Support.Working, Support.History };
+			OutCanvas.Ground = { Support.Palette, Support.GroundWorking, Support.GroundHistory };
 		}
 
 		/**
 		 * A work's plan from its checked objects: each one's place in the one image or its own image, its layer and
 		 * finish; and the one image's size. Faults, one clause each, where an image the plan needs can't be found.
 		 */
-		FWorkPlan PlanOf(FArtWork&& Work, const TArray<const FArtHangEntry*>& Canvases, const FEntryContext& Context, TArray<FString>& OutFaults)
+		FWorkPlan PlanOf(const FMuseeStageContext& Stage, FArtWork&& Work, const TArray<const FArtHangEntry*>& Canvases, const FEntryContext& Context,
+			TArray<FString>& OutFaults)
 		{
 			FWorkPlan Plan;
 			Plan.bOwnImages = !Canvases[0]->Image.IsEmpty();
@@ -197,8 +110,16 @@ namespace Musee::ArtMaking
 			{
 				FCanvasPlan& Canvas = Plan.Canvases.AddDefaulted_GetRef();
 				Canvas.Entry = Entry;
-				Canvas.Finish = FinishOf(*Entry, Context);
+				FinishOf(*Entry, Context, Canvas);
+				Canvas.GlazingMeters = GlazingMeters(*Entry, Context);
+				Canvas.PlateMeters = IsTransparency(Stage, *Entry) ? PaneMeters(Entry->Wall, Context) : 0.0;
+				Canvas.BackingMeters = PaneMeters(Entry->Backing, Context);
 				Canvas.Layer = Plan.bOwnImages ? Musee::Art::PaintMaterial(Entry->Work, Entry->Canvas) : Musee::Art::PaintMaterial(Entry->Work);
+				const bool bWare = Entry->Support == Supports::Earthenware;
+				if (bWare)
+				{
+					Canvas.Ware = WareOf(*Entry, Context);
+				}
 				if (Plan.bOwnImages)
 				{
 					const TValueOrError<FArtWork, FString> Own = Musee::Art::ReadWork(*Entry);
@@ -207,6 +128,12 @@ namespace Musee::ArtMaking
 					{
 						OutFaults.Add(FString::Printf(TEXT("object %d: no image '%s' is in the collection"), Entry->Canvas, *Entry->Image));
 					}
+					continue;
+				}
+				if (bWare)
+				{
+					// Ware shows its photograph whole: the image spans the photograph, the piece its window in it.
+					Plan.ImageMeters = WareImageMeters(Canvas.Ware);
 					continue;
 				}
 				Canvas.ImageOffsetMeters = Plan.ImageMeters.X;
@@ -220,26 +147,62 @@ namespace Musee::ArtMaking
 			return Plan;
 		}
 
-		/** The paint palette entry's one finish, or why it has none. */
-		bool ReadPaintFinish(FLayerFinish& OutPaint, FString& OutWhy)
+		bool Offers(const FMatterPaletteEntry& Entry, FName Working, FName History)
 		{
-			const TValueOrError<FMatterPalette, FString> Palette = Musee::Matter::ReadPalette();
-			const FMatterPaletteEntry* Entry = Palette.HasValue() ? Palette.GetValue().Find(FMuseeKey(PaintPalette)) : nullptr;
-			if (!Entry || Entry->Finishes.Num() != 1)
+			return Entry.Finishes.ContainsByPredicate([Working, History](const FMatterPaletteFinish& Finish)
 			{
-				OutWhy = Palette.HasError() ? Palette.GetError()
-					: FString::Printf(TEXT("the paint's palette entry %s must offer one finish, its working and history"), PaintPalette);
+				return Finish.Working.ToName() == Working && Finish.History.ToName() == History;
+			});
+		}
+
+		/** Whether every support's record reads and the palette offers the finishes it names; why not, if not. */
+		bool ReadSupportFinishes(FString& OutWhy)
+		{
+			const TValueOrError<FArtSupports, FString>& Supports = ReadSupports();
+			const TValueOrError<FMatterPalette, FString> Palette = Musee::Matter::ReadPalette();
+			if (Supports.HasError() || Palette.HasError())
+			{
+				OutWhy = Supports.HasError() ? Supports.GetError() : Palette.GetError();
 				return false;
 			}
-			OutPaint = { FName(PaintPalette), Entry->Finishes[0].Working.ToName(), Entry->Finishes[0].History.ToName() };
+			for (const FArtSupport& Support : Supports.GetValue().Supports)
+			{
+				const FMatterPaletteEntry* Entry = Palette.GetValue().Find(FMuseeKey(Support.Palette.ToString()));
+				const bool bGround = !Support.GroundWorking.IsNone();
+				if (!Entry || !Offers(*Entry, Support.Working, Support.History) || (bGround && !Offers(*Entry, Support.GroundWorking, Support.GroundHistory)))
+				{
+					OutWhy = FString::Printf(TEXT("the palette offers no finish %s/%s/%s%s that %s names for %s"), *Support.Palette.ToString(),
+						*Support.Working.ToString(), *Support.History.ToString(), bGround ? TEXT(" (or its ground's)") : TEXT(""), FArtSupports::Record,
+						*Support.Support.ToString());
+					return false;
+				}
+			}
 			return true;
+		}
+
+		/** The turned forms of the plan's ware, read once when the plan holds ware. */
+		void ReadTurnedInto(const FArtHang& Hang, FEntryContext& Context)
+		{
+			if (!Hang.Works.ContainsByPredicate([](const FArtHangEntry& Entry) { return !Entry.IsBuilt() && Entry.Support == Supports::Earthenware; }))
+			{
+				return;
+			}
+			TValueOrError<TArray<FArtTurned>, FString> Turned = ReadRecords<FArtTurned>(FArtTurned::Record);
+			if (Turned.HasValue())
+			{
+				Context.Turned = Turned.StealValue();
+			}
+			else
+			{
+				Context.TurnedWhy = Turned.GetError();
+			}
 		}
 
 		void ReadFinishesInto(const FMuseeStageContext& Stage, const FArtHang& Hang, FEntryContext& Context)
 		{
 			const bool bNamesSurfaces = Hang.Works.ContainsByPredicate([](const FArtHangEntry& Entry)
 			{
-				return !Entry.IsBuilt() && (IsFramed(Entry) || Entry.Support == GlassSupport);
+				return !Entry.IsBuilt() && (IsFramed(Entry) || Entry.Support == Supports::Glass || !Entry.Mat.IsNone() || Entry.Glazed);
 			});
 			if (!bNamesSurfaces)
 			{
@@ -342,9 +305,9 @@ namespace Musee::ArtMaking
 	{
 		FEntryContext Context;
 		FString Why;
-		if (!ReadPaintFinish(Context.Paint, Why))
+		if (!ReadSupportFinishes(Why))
 		{
-			OutFindings.Add(ArtFinding(Stage, FString::Printf(TEXT("No work can be painted: %s."), *Why)));
+			OutFindings.Add(ArtFinding(Stage, FString::Printf(TEXT("No work can be made: %s."), *Why)));
 			return false;
 		}
 		TValueOrError<FCareKeys, FString> Care = ReadCareKeys();
@@ -357,6 +320,7 @@ namespace Musee::ArtMaking
 			Context.Care = Care.StealValue();
 		}
 		ReadFinishesInto(Stage, Hang, Context);
+		ReadTurnedInto(Hang, Context);
 		for (const TArray<const FArtHangEntry*>& Canvases : WorksOf(Hang))
 		{
 			const FString& Id = Canvases[0]->Work;
@@ -368,7 +332,7 @@ namespace Musee::ArtMaking
 			}
 			if (Faults.IsEmpty())
 			{
-				FWorkPlan Plan = PlanOf(Work.StealValue(), Canvases, Context, Faults);
+				FWorkPlan Plan = PlanOf(Stage, Work.StealValue(), Canvases, Context, Faults);
 				if (Faults.IsEmpty())
 				{
 					OutWorks.Add(MoveTemp(Plan));
@@ -397,7 +361,8 @@ namespace Musee::ArtMaking
 				FArtPaintLayer& Layer = Out.AddDefaulted_GetRef();
 				Layer.Work = Plan.bOwnImages ? FString::Printf(TEXT("%s.%d"), *Plan.Work.Id, Canvas.Entry->Canvas) : Plan.Work.Id;
 				Layer.ImagePath = Plan.bOwnImages ? Canvas.OwnImagePath : Plan.Work.ImagePath;
-				Layer.SizeMeters = Plan.bOwnImages ? Canvas.Entry->SizeMeters() : Plan.ImageMeters;
+				const bool bWare = Canvas.Entry->Support == Supports::Earthenware;
+				Layer.SizeMeters = !Plan.bOwnImages ? Plan.ImageMeters : bWare ? WareImageMeters(Canvas.Ware) : Canvas.Entry->SizeMeters();
 				Layer.Palette = Canvas.Layer;
 				Layer.Parent = Canvas.Finish.Palette;
 				Layer.Working = Canvas.Finish.Working;

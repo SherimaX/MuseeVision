@@ -1,0 +1,11 @@
+{
+  "stage": "cabinet",
+  "finishes": [
+    { "surface": "cabinet.frame.oak", "material": "oak.sessile-french", "working": "fumed.wire-brushed.oiled", "history": "new", "note": "The photograph frames." },
+    { "surface": "cabinet.mount", "material": "accent.rag-board", "working": "faced", "history": "new", "note": "The prints' mounts." },
+    { "surface": "cabinet.mat", "material": "accent.rag-board", "working": "cut.bevelled", "history": "new", "note": "The transparencies' window mats." },
+    { "surface": "cabinet.plate", "material": "glass.clear-float", "working": "plate.photographic", "history": "new", "note": "The transparencies' plates." },
+    { "surface": "cabinet.backing", "material": "glass.low-iron", "working": "acid-etched", "history": "new", "note": "The diffusing panes behind them." },
+    { "surface": "cabinet.glazing", "material": "glass.low-iron", "working": "anti-reflective.laminated", "history": "new", "note": "The glazing." }
+  ]
+}

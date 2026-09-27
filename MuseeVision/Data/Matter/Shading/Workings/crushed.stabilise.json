@@ -1,0 +1,43 @@
+{
+  "schema": "musee.matter.shading.working/1",
+  "key": "crushed.stabilise",
+  "name": "Crushed to a 0/6 sand, bound with a hydraulic binder, laid, wetted and rolled (sable stabilisé)",
+  "record": "Workings/rolled.stabilised.json",
+  "kind": "face",
+  "roughness": {
+    "value": 0.9,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Workings/rolled.stabilised.json: look ('conserve la couleur naturelle du sable et son aspect rustique'): a face of loose-looking grains",
+    "note": "No gloss of a stabilised walk was read: a first value for a face of angular grains, as the crushed hardcore's (Shading/Workings/excavated.crushed-stone.json)."
+  },
+  "roughnessAcross": {
+    "value": 0.9,
+    "unit": "1",
+    "grade": "derived",
+    "source": "Workings/rolled.stabilised.json: a rolled sand has no direction",
+    "derivation": "a face with no grain: equal to the roughness along"
+  },
+  "haziness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Workings/rolled.stabilised.json (no measured haze)",
+    "note": "One specular lobe until a goniometric measurement shows a second."
+  },
+  "textureDepth": {
+    "value": 1.0,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Workings/rolled.stabilised.json: the 0/6,3 grading (Bronzo Perasso) of a sand rolled into a crust",
+    "note": "No texture depth of a stabilised walk was read: a first value, a sixth of the largest grain, for the hollows between rolled grains that hold rain."
+  },
+  "relief": {
+    "value": 3.15,
+    "unit": "mm",
+    "grade": "derived",
+    "source": "Workings/rolled.stabilised.json: the 0/6,3 grading (Bronzo Perasso: 'Sable naturel pour sols stabilises 0/6,3')",
+    "derivation": "half the largest grain, 6.3 mm: the most a grain rolled into the crust stands proud of it"
+  },
+  "lays": "crushed-travertine"
+}

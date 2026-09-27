@@ -1,0 +1,42 @@
+{
+  "schema": "musee.matter.shading.working/1",
+  "key": "printed",
+  "name": "Printed in the paper by the light of the negative, and mounted",
+  "record": "Palette.json",
+  "kind": "face",
+  "roughness": {
+    "value": 0.6,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Palette.json: accent.print-on-paper",
+    "note": "No gloss of an early print was read: a first value between the matte salted and cyanotype papers and the semi-gloss of albumen."
+  },
+  "roughnessAcross": {
+    "value": 0.6,
+    "unit": "1",
+    "grade": "derived",
+    "source": "a paper's face has no grain the eye resolves",
+    "derivation": "equal to the roughness along"
+  },
+  "haziness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Palette.json (no measured haze)",
+    "note": "One specular lobe until a goniometric measurement shows a second."
+  },
+  "textureDepth": {
+    "value": 0.02,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Palette.json: accent.print-on-paper",
+    "note": "A first value for a smooth photographic paper's surface."
+  },
+  "relief": {
+    "value": 0.0,
+    "unit": "mm",
+    "grade": "derived",
+    "source": "the image carries the paper's texture",
+    "derivation": "no relief is drawn over the work's own image"
+  }
+}

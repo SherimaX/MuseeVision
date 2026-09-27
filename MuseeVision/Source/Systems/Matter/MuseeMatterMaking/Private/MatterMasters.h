@@ -18,6 +18,7 @@ class UMaterialParameterCollection;
  * - stained: a glass pane whose colour varies across it as its work's image says: a stained-glass panel (Glass.ush);
  * - water: a still body of water seen through its surface, as Single Layer Water (Medium.ush);
  * - paint: a painted canvas carrying the work's own image under its varnish (Paint.ush);
+ * - plate: a daguerreotype, its image a cover of scattering particles over a silver mirror (Plate.ush);
  * - wood: an opaque fibrous body with growth rings and rays, its grain along each board, under an oil or wax that soaks
  *   into it (Wood.ush);
  * - cloth: an opaque textile, its dye in its fibres and the sheen of its standing fibre ends on a fuzz layer (Cloth.ush);
@@ -45,6 +46,7 @@ namespace Musee::Matter
 		inline constexpr const TCHAR* Stained = TEXT("stained");
 		inline constexpr const TCHAR* Water = TEXT("water");
 		inline constexpr const TCHAR* Paint = TEXT("paint");
+		inline constexpr const TCHAR* Plate = TEXT("plate");
 		inline constexpr const TCHAR* Wood = TEXT("wood");
 		inline constexpr const TCHAR* Cloth = TEXT("cloth");
 		inline constexpr const TCHAR* Sheet = TEXT("sheet");
@@ -77,6 +79,9 @@ namespace Musee::Matter
 
 	/** The recipe of the metal master. */
 	FMasterRecipe MetalRecipe(UMaterialParameterCollection& Moment, bool bGilt);
+
+	/** The recipe of the plate master: a daguerreotype's silver carrying its work's image. */
+	FMasterRecipe PlateRecipe(UMaterialParameterCollection& Moment);
 
 	/** The recipes of the glass, stained glass, water and paint masters. */
 	FMasterRecipe GlassRecipe(UMaterialParameterCollection& Moment);

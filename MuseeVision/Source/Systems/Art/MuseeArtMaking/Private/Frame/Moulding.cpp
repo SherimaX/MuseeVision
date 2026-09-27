@@ -1,6 +1,6 @@
 #include "Frame/Moulding.h"
 
-#include "Canvas/CanvasMesh.h"
+#include "Misc/Paths.h"
 
 namespace Musee::ArtMaking
 {
@@ -31,13 +31,12 @@ namespace Musee::ArtMaking
 		}
 
 		/**
-		 * The frame's closed section: the moulding's face at its width, then under the lip along the canvas's face to the
-		 * rebate, down the rebate to the frame's back (standing on the hanging gap, as the stretcher's does), and along
-		 * the back to the outside edge.
+		 * The frame's closed section: the moulding's face at its width, then under the lip along the face it rests on to
+		 * the rebate, down the rebate to the frame's back, and along the back to the outside edge.
 		 */
-		FFormProfile Section(const FArtMoulding& Moulding, double Width)
+		FFormProfile Section(const FArtMoulding& Moulding, double Width, const FFrameDepth& Depth)
 		{
-			const double Back = -(StretcherDepthMeters - HangingGapMeters);
+			const double Back = Depth.BackMeters - Depth.FaceMeters;
 			const double Outside = Moulding.Face.StartPoint().X * Width;
 			FFormProfile Out = ScaledProfile(Moulding.Face, Width);
 			Out.LineTo(FVector2D(Moulding.RebateClearanceMeters, 0.0), EFormJoint::Crisp)
@@ -48,18 +47,31 @@ namespace Musee::ArtMaking
 		}
 	}
 
-	FFormDrawing FrameDrawing(const FArtMoulding& Moulding, const FVector2D& CanvasMeters, const FMuseeFrame& CanvasTopLeft, FName Name, FName Surface)
+	FFormDrawing FrameDrawing(const FArtMoulding& Moulding, const FVector2D& FramedMeters, const FMuseeFrame& TopLeft, const FFrameDepth& Depth,
+		FName Name, FName Surface)
 	{
 		FFormSweep Sweep;
-		Sweep.Section = Section(Moulding, Moulding.WidthFor(CanvasMeters));
-		// Run anticlockwise as the room sees it (x along the top, y down), so the moulding lies outside the canvas.
-		const TArray<FVector2D> Edge = { FVector2D(0.0, 0.0), FVector2D(0.0, CanvasMeters.Y), CanvasMeters, FVector2D(CanvasMeters.X, 0.0) };
+		Sweep.Section = Section(Moulding, Moulding.WidthFor(FramedMeters), Depth);
+		// Run anticlockwise as the room sees it (x along the top, y down), so the moulding lies outside what it frames.
+		const TArray<FVector2D> Edge = { FVector2D(0.0, 0.0), FVector2D(0.0, FramedMeters.Y), FramedMeters, FVector2D(FramedMeters.X, 0.0) };
 		Sweep.Path = FFormProfile::Polyline(Edge, true);
-		Sweep.ElevationMeters = StretcherDepthMeters;
+		Sweep.ElevationMeters = Depth.FaceMeters;
 		FFormDrawing Drawing = FFormDrawing::Of(Name, Surface, MoveTemp(Sweep));
-		Drawing.Frame = CanvasTopLeft;
+		Drawing.Frame = TopLeft;
 		return Drawing;
 	}
+}
+
+FString FArtMoulding::RecordFor(FName FrameStyle)
+{
+	for (const TCHAR* Style : DrawnStyles)
+	{
+		if (FrameStyle == Style)
+		{
+			return FPaths::Combine(TEXT("Art/Mouldings"), FString(Style) + TEXT(".json"));
+		}
+	}
+	return Record;
 }
 
 double FArtMoulding::WidthFor(const FVector2D& CanvasMeters) const

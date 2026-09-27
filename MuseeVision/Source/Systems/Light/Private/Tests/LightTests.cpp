@@ -51,7 +51,7 @@ namespace Musee::Light::Tests
 	IMPLEMENT_SIMPLE_AUTOMATION_TEST(FLightCatalogueTest, "Musee.Light.Catalogue", Flags)
 	bool FLightCatalogueTest::RunTest(const FString& Parameters)
 	{
-		TestEqual(TEXT("Twenty-eight luminaires in the catalogue"), LuminaireKeys().Num(), 28);
+		TestEqual(TEXT("Twenty-nine luminaires in the catalogue"), LuminaireKeys().Num(), 29);
 		const FLightLuminaire* Spot = FindLuminaire(FMuseeKey(TEXTVIEW("track-spot.3000k.20deg")));
 		if (TestNotNull(TEXT("The 20 degree spot"), Spot))
 		{
@@ -114,6 +114,11 @@ namespace Musee::Light::Tests
 		const FLightLuminaire* Glass = FindLuminaire(FMuseeKey(TEXTVIEW("edge-lit-glass.3000k")));
 		TestTrue(TEXT("An edge-lit pane lets its light out as a face, once its flux is published"), Glass && !Glass->bLit
 			&& Glass->Emitter == FLightLuminaire::EEmitter::Rect);
+		TestTrue(TEXT("and it is laid over the face the room gives it, as an areal type, though unlit"), Glass && Glass->IsAreal());
+		const FLightLuminaire* PostTop = FindLuminaire(FMuseeKey(TEXTVIEW("post-top-globe.2700k")));
+		TestTrue(TEXT("A post-top lantern is its one lamp of 5400 lm at 2700 K, lighting all round"), PostTop && PostTop->bLit
+			&& PostTop->Emitter == FLightLuminaire::EEmitter::Point && PostTop->LampCount == 1 && PostTop->Flux.Get() == 5400.0
+			&& PostTop->ColourTemperature.Get() == 2700.0 && !PostTop->IsAreal());
 		const FLightLuminaire* Framer = FindLuminaire(FMuseeKey(TEXTVIEW("track-framing.3000k.small")));
 		TestTrue(TEXT("A framer lights as the beam its 552 lm and 7257 cd fix, its flaps open, about 15 degrees"), Framer && Framer->bLit
 			&& Framer->Emitter == FLightLuminaire::EEmitter::Spot && Framer->BeamAngle.Get() > 13.0 && Framer->BeamAngle.Get() < 17.0);
@@ -233,6 +238,7 @@ namespace Musee::Light::Tests
 				{ "id": "spot.laid", "type": "track-spot.3000k.20deg", "point": [0, 0, 3], "aim": [0, 0, 0], "along": [1, 0, 0], "operation": "always" },
 				{ "id": "laylight", "type": "luminous-ceiling.3000k", "point": [2, 0, 5], "aim": [2, 0, 0], "operation": "always", "extent": [2.246, 2.28] },
 				{ "id": "canopy", "type": "luminous-ceiling.3000k", "point": [0, -6, 9], "aim": [0, -6, 0], "operation": "always", "zone": { "r": [3.6, 8.5], "bearing": [345, 15] } },
+				{ "id": "panes", "type": "edge-lit-glass.3000k", "point": [0, -11, 13.3], "aim": [0, -11, 0], "operation": "always", "zone": { "r": [8.5, 14.0], "bearing": [345, 15] } },
 				{ "id": "eye", "type": "luminous-ceiling.3000k", "point": [0, 0, 5.1], "aim": [0, 0, 0], "operation": "always", "zone": { "r": [0, 1.2], "bearing": [0, 360] } },
 				{ "id": "bare", "type": "luminous-ceiling.3000k", "point": [2, 0, 5], "aim": [2, 0, 0], "operation": "always" },
 				{ "id": "astray", "type": "luminous-ceiling.3000k", "point": [0, 6, 9], "aim": [0, 6, 0], "operation": "always", "zone": { "r": [3.6, 8.5], "bearing": [345, 15] } },
@@ -258,11 +264,11 @@ namespace Musee::Light::Tests
 		TArray<FMuseeFinding> Findings;
 		DressStage(Context, Findings);
 
-		TestEqual(TEXT("An unknown weather place and type, a line without length, a mount with a point, a point without aim, a line along its own light, a spot laid along a line, a ceiling without its face or outside its zone and a spot over an extent are findings"),
-			Findings.Num(), 10);
+		TestEqual(TEXT("An unknown weather place and type, a line without length, a mount with a point, a point without aim, a line along its own light, a spot laid along a line, a ceiling without its face or outside its zone, a spot over an extent and panes whose photometry isn't published are findings"),
+			Findings.Num(), 11);
 		TArray<ULightLuminaireComponent*> Placed;
 		Stage->GetComponents(Placed);
-		TestEqual(TEXT("Eight luminaires are placed"), Placed.Num(), 8);
+		TestEqual(TEXT("Nine luminaires are placed"), Placed.Num(), 9);
 		const auto Placement = [&Placed](const TCHAR* Id) -> ULightLuminaireComponent*
 		{
 			const FName Tag(FString(LuminaireTagPrefix) + Id);
@@ -309,6 +315,12 @@ namespace Musee::Light::Tests
 			TestTrue(TEXT("over a face of the zone's own area"), FMath::IsNearlyEqual(Canopy->Face().X * Canopy->Face().Y, Area, 1e-6));
 			TestTrue(TEXT("as wide as its middle arc, its height running out from the axis through the zone's middle, north"),
 				FMath::IsNearlyEqual(Canopy->Face().X, FMath::DegreesToRadians(30.0) * 6.05, 1e-6) && Canopy->GetUpVector().Equals(FVector(0.0, -1.0, 0.0), 1e-4));
+		}
+		if (ULightLuminaireComponent* Panes = Placement(TEXT("panes")); TestNotNull(TEXT("Edge-lit panes, laid over their zone"), Panes))
+		{
+			const double Area = 0.5 * FMath::DegreesToRadians(30.0) * (14.0 * 14.0 - 8.5 * 8.5);
+			TestTrue(TEXT("over a face of the zone's own area, unlit until their photometry is published"),
+				FMath::IsNearlyEqual(Panes->Face().X * Panes->Face().Y, Area, 1e-6) && Panes->Emitter() == nullptr);
 		}
 		if (ULightLuminaireComponent* Eye = Placement(TEXT("eye")); TestNotNull(TEXT("A disc, a zone all round"), Eye))
 		{

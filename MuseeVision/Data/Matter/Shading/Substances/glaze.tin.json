@@ -1,0 +1,87 @@
+{
+  "schema": "musee.matter.shading.substance/1",
+  "key": "glaze.tin",
+  "name": "Tin glaze (a lead glaze made opaque white with tin oxide)",
+  "family": "accent",
+  "record": "Palette.json",
+  "master": "white",
+  "accentOf": "stone",
+  "dielectric": {
+    "diffuseAlbedo": {
+      "value": [
+        88.0,
+        1.0,
+        6.0
+      ],
+      "space": "CIELAB (D65, 2 deg)",
+      "unit": "CIELAB",
+      "grade": "unverified",
+      "source": "Palette.json: accent.lustreware",
+      "note": "The tin glaze's warm white; no measured colour was read."
+    },
+    "refractiveIndex": {
+      "value": 1.52,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Shading/Substances/glaze.celadon.json (a ceramic glaze is a glass of about 1.52)"
+    },
+    "porosity": {
+      "value": 0.0,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "a glaze is glass",
+      "note": "The fired glaze has no open pores."
+    },
+    "wettingDepth": {
+      "value": 0.0,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "a glaze is glass",
+      "note": "The depth whose pores govern the face's look when wet."
+    }
+  },
+  "structure": {
+    "grain": {
+      "value": 0.05,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Shading/Substances/glaze.celadon.json",
+      "note": "The bubbles and tin oxide held in the glaze."
+    },
+    "bed": {
+      "value": 50,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Shading/Substances/glaze.celadon.json",
+      "note": "The coarsest structure the face shows."
+    },
+    "bedAspect": {
+      "value": 1.0,
+      "unit": "1",
+      "grade": "derived",
+      "source": "An unbedded body",
+      "derivation": "unbedded"
+    },
+    "hurst": {
+      "value": 0.7,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Candela et al. 2012, Journal of Geophysical Research 117, B08409 (fault surfaces, 0.6 to 0.8; cited in Stone.ush)",
+      "note": "As the celadon glaze's."
+    },
+    "toneSpread": {
+      "value": 0.05,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Shading/Substances/glaze.celadon.json",
+      "note": "A first half-range of ln(albedo) across one face."
+    },
+    "roughnessSpread": {
+      "value": 0.05,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Shading/Substances/glaze.celadon.json",
+      "note": "A first half-range of ln(roughness) across one face."
+    }
+  }
+}

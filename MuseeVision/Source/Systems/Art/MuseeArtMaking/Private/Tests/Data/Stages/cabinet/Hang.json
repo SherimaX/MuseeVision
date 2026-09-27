@@ -1,0 +1,43 @@
+{
+  "stage": "cabinet",
+  "works": [
+    {
+      "work": "monet-impression-sunrise", "source": "MuseeVision/Source/Systems/Art/MuseeArtMaking/Private/Tests/Data/artworks.json",
+      "anchor": "cabinet.wall", "along": 1.0, "height": 1.5, "size": [0.2, 0.25], "support": "paper", "care": "works-on-paper",
+      "frame": "cabinet.frame.oak", "frameStyle": "photograph", "mat": "cabinet.mount", "matSize": [1.0, 0.9], "matDepth": 0.03,
+      "glazed": true, "glazing": "cabinet.glazing", "note": "A print on its mount, framed and glazed."
+    },
+    {
+      "work": "monet-willows-two-willows", "source": "MuseeVision/Source/Systems/Art/MuseeArtMaking/Private/Tests/Data/collection.json",
+      "anchor": "cabinet.reader", "size": [0.171, 0.086], "support": "paper", "frame": "none", "care": "works-on-paper",
+      "glazed": true, "glazing": "cabinet.glazing", "note": "A stereograph's card on its reader, under glass."
+    },
+    {
+      "work": "daguerre-boulevard", "source": "MuseeVision/Source/Systems/Art/MuseeArtMaking/Private/Tests/Data/collection.json",
+      "anchor": "cabinet.reader", "size": [0.17, 0.085], "support": "silvered copper plate", "frame": "none", "care": "works-on-paper",
+      "note": "A daguerreotype's plate on the same reader, bare."
+    },
+    {
+      "work": "albion-de-morgan-charger", "source": "MuseeVision/Source/Systems/Art/MuseeArtMaking/Private/Tests/Data/collection.json",
+      "anchor": "cabinet.bed", "centre": [4.0, -0.3, 0.55], "size": [0.514, 0.07], "support": "earthenware", "frame": "none",
+      "care": "ceramic-and-glass", "kind": "dish", "facing_deg": 90.0, "note": "A dish on the bed, its front south."
+    },
+    {
+      "work": "albion-de-morgan-jar", "source": "MuseeVision/Source/Systems/Art/MuseeArtMaking/Private/Tests/Data/collection.json",
+      "anchor": "cabinet.bed", "centre": [4.0, 0.4, 0.55], "size": [0.24, 0.38], "support": "earthenware", "frame": "none",
+      "care": "ceramic-and-glass", "kind": "vase", "note": "A jar on the bed, its front east."
+    },
+    {
+      "work": "lumiere-peacock", "source": "MuseeVision/Source/Systems/Art/MuseeArtMaking/Private/Tests/Data/collection.json",
+      "anchor": "cabinet.wall", "along": 5.0, "height": 1.5, "size": [0.177, 0.13], "support": "glass", "care": "works-on-paper.fugitive",
+      "frame": "cabinet.frame.oak", "frameStyle": "photograph", "mat": "cabinet.mat", "matSize": [1.0, 0.9], "matDepth": 0.0015,
+      "wall": "cabinet.plate", "backing": "cabinet.backing", "glazed": true, "glazing": "cabinet.glazing",
+      "note": "A transparency in its window mat, the diffusing pane behind it, framed and glazed."
+    },
+    {
+      "work": "monet-impression-sunrise-2", "source": "MuseeVision/Source/Systems/Art/MuseeArtMaking/Private/Tests/Data/artworks.json",
+      "anchor": "cabinet.wall", "along": 3.0, "height": 1.5, "size": [0.5, 0.2], "support": "paper", "kind": "handscroll", "frame": "none",
+      "care": "works-on-paper", "note": "A scroll, not made yet: a finding."
+    }
+  ]
+}

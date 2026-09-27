@@ -142,6 +142,13 @@
       "note": "The autochromes' white window mats 1.000 x 0.900, bevel-cut round each plate."
     },
     {
+      "surface": "hall-of-light.autochrome.plate",
+      "material": "glass.clear-float",
+      "working": "plate.photographic",
+      "history": "new",
+      "note": "The autochromes' glass plates, bound under their cover glass: each carries its work's image in its own layer (Art), passing the light its starch-grain screen passes."
+    },
+    {
       "surface": "hall-of-light.autochrome.backing",
       "material": "glass.low-iron",
       "working": "acid-etched",

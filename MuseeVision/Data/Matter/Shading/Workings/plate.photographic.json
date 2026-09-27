@@ -1,0 +1,48 @@
+{
+  "schema": "musee.matter.shading.working/1",
+  "key": "plate.photographic",
+  "name": "A photographic plate: a thin sheet of clear glass carrying its emulsion (an autochrome's screen and image)",
+  "record": "Palette.json",
+  "kind": "face",
+  "roughness": {
+    "value": 0.03,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Shading/Workings/leaded.json (a fire-finished sheet's first roughness)",
+    "note": "The varnished emulsion is sealed under a cover glass bound to the plate: both faces are smooth glass."
+  },
+  "roughnessAcross": {
+    "value": 0.03,
+    "unit": "1",
+    "grade": "derived",
+    "source": "a glass face has no grain",
+    "derivation": "equal to the roughness along"
+  },
+  "haziness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Palette.json (no measured haze)",
+    "note": "One specular lobe until a goniometric measurement shows a second."
+  },
+  "textureDepth": {
+    "value": 0.01,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Shading/Workings/leaded.json"
+  },
+  "relief": {
+    "value": 0.0,
+    "unit": "mm",
+    "grade": "derived",
+    "source": "the image carries the screen",
+    "derivation": "no relief is drawn over the work's own image"
+  },
+  "paneThickness": {
+    "value": 3.0,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Palette.json: glass.clear-float, plate.photographic",
+    "note": "The plate and the cover glass bound over it, each a thin sheet of about 1.5 mm; no measured plate was read."
+  }
+}

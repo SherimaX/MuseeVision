@@ -87,16 +87,51 @@ namespace Musee::ArtMaking::Tests
 		return Context;
 	}
 
-	/** A stage actor with a root and a mesh component per named piece, tagged as Studio tags them. */
+	/**
+	 * The test cabinet: a flat wall facing south where a print hangs on its mount, a reader facing south (its face's
+	 * centre at 1.3 m, x to the viewer's right, y out of the face) where a card and a plate lie, and a case's bed.
+	 */
+	FMuseeStageContext Cabinet()
+	{
+		FMuseeStageContext Context;
+		Context.Stage = FMuseeKey(TEXT("cabinet"));
+		Context.ScheduleDir = Fixture(TEXT("Stages/cabinet"));
+		Context.Anchors = {
+			Anchor(TEXT("cabinet.wall"), FVector(0.0, -5.0, 0.0)),
+			Anchor(TEXT("cabinet.reader"), TEXT("Mount"), FVector(2.0, 0.0, 1.3)),
+			Anchor(TEXT("cabinet.bed"), TEXT("Mount"), FVector(4.0, 0.0, 0.55)),
+		};
+		return Context;
+	}
+
+	/** A piece's bounds in the stage, metres. */
+	FBox StageBox(const FFormMadePiece& Piece)
+	{
+		FBox Box(ForceInit);
+		for (const int32 V : Piece.Mesh->VertexIndicesItr())
+		{
+			Box += Piece.Frame.PointToParent(Musee::FromEngine(Piece.Mesh->GetVertex(V)));
+		}
+		return Box;
+	}
+
+	const FFormMadePiece* FindPiece(const TArray<FFormMadePiece>& Pieces, const TCHAR* Name)
+	{
+		return Pieces.FindByPredicate([Name](const FFormMadePiece& P) { return P.Name == Name; });
+	}
+
+	/** A stage actor with a root and a mesh component per named piece, tagged and static as Studio makes them. */
 	AActor* StageActor(UWorld& World, const TArray<FString>& Pieces)
 	{
 		AActor* Actor = World.SpawnActor<AActor>();
 		USceneComponent* Root = NewObject<USceneComponent>(Actor, TEXT("Root"));
+		Root->SetMobility(EComponentMobility::Static);
 		Actor->SetRootComponent(Root);
 		Root->RegisterComponent();
 		for (const FString& Piece : Pieces)
 		{
 			UStaticMeshComponent* Mesh = NewObject<UStaticMeshComponent>(Actor, FName(Piece.Replace(TEXT("."), TEXT("_"))));
+			Mesh->SetMobility(EComponentMobility::Static);
 			Mesh->SetupAttachment(Root);
 			Mesh->ComponentTags.Add(FName(FString::Printf(TEXT("musee.piece:%s"), *Piece)));
 			Mesh->RegisterComponent();
@@ -510,6 +545,145 @@ bool FArtReproductionTest::RunTest(const FString& Parameters)
 	TestTrue(TEXT("Stone has no lux or dose limit, only its ultraviolet"), Stone.HasValue() && Stone.GetValue().Num() == 1);
 	TestFalse(TEXT("An unknown class is refused"), Musee::Art::CareFaults(TEXT("no-such-class"), NAME_None, Daylight).HasValue());
 	TestFalse(TEXT("An unknown reproduction is refused"), Musee::Art::CareFaults(TEXT("works-on-paper"), TEXT("photograph-on-sale"), Daylight).HasValue());
+	return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FArtPaperTest, "Musee.Art.Paper", Musee::ArtMaking::Tests::Flags)
+
+bool FArtPaperTest::RunTest(const FString& Parameters)
+{
+	using namespace Musee::ArtMaking;
+	TArray<FFormMadePiece> Pieces;
+	TArray<FMuseeFinding> Findings;
+	GatherArt(Tests::Cabinet(), Pieces, Findings);
+	TestEqual(TEXT("A scroll, not made yet, is the one finding"), Findings.Num(), 1);
+	const FFormMadePiece* Print = Tests::FindPiece(Pieces, TEXT("paper.monet-impression-sunrise"));
+	const FFormMadePiece* Mount = Tests::FindPiece(Pieces, TEXT("paper.monet-impression-sunrise.mount"));
+	const FFormMadePiece* Glazing = Tests::FindPiece(Pieces, TEXT("paper.monet-impression-sunrise.glazing"));
+	const FFormMadePiece* Frame = Tests::FindPiece(Pieces, TEXT("paper.monet-impression-sunrise.frame"));
+	if (!TestTrue(TEXT("A print is made on its mount, glazed and framed"), Print && Mount && Glazing && Frame))
+	{
+		return false;
+	}
+	TestTrue(TEXT("The print is the work's own layer over the paper's finish"), Print->Material == TEXT("paint.monet-impression-sunrise")
+		&& Print->Working == TEXT("printed") && Print->History == TEXT("clean"));
+	const FBox PrintBox = Tests::StageBox(*Print);
+	TestTrue(TEXT("at its place and size on the mount's face, a sheet of paper"), PrintBox.Min.Equals(FVector(1.0, -5.0, 1.5), 1e-6)
+		&& PrintBox.Max.Equals(FVector(1.2, -5.0 + 0.0003, 1.75), 1e-6));
+	const FBox MountBox = Tests::StageBox(*Mount);
+	TestTrue(TEXT("The mount is centred on the print, its face on the wall's plane and its depth behind"), MountBox.Min.Equals(FVector(0.6, -5.03, 1.175), 1e-6)
+		&& MountBox.Max.Equals(FVector(1.6, -5.0, 2.075), 1e-6) && Mount->Surface == TEXT("cabinet.mount") && Mount->Material.IsNone());
+	const FBox GlassBox = Tests::StageBox(*Glazing);
+	TestTrue(TEXT("The glazing lies on the print, the mount's size, as thick as its working's pane (8 mm)"), GlassBox.Min.Equals(FVector(0.6, -5.0 + 0.0003, 1.175), 1e-6)
+		&& GlassBox.Max.Equals(FVector(1.6, -5.0 + 0.0083, 2.075), 1e-6) && Glazing->Surface == TEXT("cabinet.glazing") && !Glazing->bNanite);
+	const FBox FrameBox = Tests::StageBox(*Frame);
+	TestTrue(TEXT("The frame is the photograph's 22 mm moulding round the mount, one closed solid"), Musee::FormMaking::MeasureShell(*Frame).IsClosed()
+		&& FMath::IsNearlyEqual(FrameBox.GetSize().X, 1.044, 1e-4) && FMath::IsNearlyEqual(FrameBox.GetSize().Z, 0.944, 1e-4));
+	TestTrue(TEXT("its back flush with the mount's, its face 0.8 of its width proud of the glass"), FMath::IsNearlyEqual(FrameBox.Min.Y, -5.03, 1e-6)
+		&& FMath::IsNearlyEqual(FrameBox.Max.Y, -5.0 + 0.0083 + 0.8 * 0.022, 1e-4));
+
+	const FFormMadePiece* Card = Tests::FindPiece(Pieces, TEXT("paper.monet-willows-two-willows"));
+	const FFormMadePiece* Cover = Tests::FindPiece(Pieces, TEXT("paper.monet-willows-two-willows.glazing"));
+	if (TestTrue(TEXT("A card lies on its reader under its glass"), Card && Cover))
+	{
+		const FBox CardBox = Tests::StageBox(*Card);
+		TestTrue(TEXT("centred on the reader's face"), CardBox.GetCenter().Equals(FVector(2.0, 0.00015, 1.3), 1e-6)
+			&& FMath::IsNearlyEqual(CardBox.GetSize().X, 0.171, 1e-6) && FMath::IsNearlyEqual(CardBox.Min.Y, 0.0, 1e-9));
+		TestTrue(TEXT("the glass on it"), FMath::IsNearlyEqual(Tests::StageBox(*Cover).Min.Y, 0.0003, 1e-9));
+	}
+	const FFormMadePiece* Plate = Tests::FindPiece(Pieces, TEXT("plate.daguerre-boulevard"));
+	if (TestNotNull(TEXT("A daguerreotype is its plate"), Plate))
+	{
+		TestTrue(TEXT("its layer over the silver, developed and clean"), Plate->Material == TEXT("paint.daguerre-boulevard")
+			&& Plate->Working == TEXT("developed") && Plate->History == TEXT("clean"));
+		TestTrue(TEXT("a sheet half a millimetre thick"), FMath::IsNearlyEqual(Tests::StageBox(*Plate).GetSize().Y, 0.0005, 1e-9));
+		TestFalse(TEXT("and bare: it names no glazing"), Pieces.ContainsByPredicate([](const FFormMadePiece& P) { return P.Name == TEXT("plate.daguerre-boulevard.glazing"); }));
+	}
+	const TArray<FArtPaintLayer> Layers = PaintLayers(Tests::Cabinet());
+	const FArtPaintLayer* PrintLayer = Layers.FindByPredicate([](const FArtPaintLayer& L) { return L.Work == TEXT("monet-impression-sunrise"); });
+	const FArtPaintLayer* PlateLayer = Layers.FindByPredicate([](const FArtPaintLayer& L) { return L.Work == TEXT("daguerre-boulevard"); });
+	TestTrue(TEXT("A print's layer is its image at its size over the paper"), PrintLayer && PrintLayer->Parent == TEXT("accent.print-on-paper")
+		&& PrintLayer->SizeMeters.Equals(FVector2D(0.2, 0.25)));
+	TestTrue(TEXT("A plate's is over the daguerreotype's silver"), PlateLayer && PlateLayer->Parent == TEXT("accent.daguerreotype")
+		&& PlateLayer->Working == TEXT("developed"));
+	return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FArtTransparencyTest, "Musee.Art.Transparency", Musee::ArtMaking::Tests::Flags)
+
+bool FArtTransparencyTest::RunTest(const FString& Parameters)
+{
+	using namespace Musee::ArtMaking;
+	TArray<FFormMadePiece> Pieces;
+	TArray<FMuseeFinding> Findings;
+	GatherArt(Tests::Cabinet(), Pieces, Findings);
+	const FFormMadePiece* Plate = Tests::FindPiece(Pieces, TEXT("glass.lumiere-peacock"));
+	const FFormMadePiece* Mat = Tests::FindPiece(Pieces, TEXT("glass.lumiere-peacock.mat"));
+	const FFormMadePiece* Backing = Tests::FindPiece(Pieces, TEXT("glass.lumiere-peacock.backing"));
+	const FFormMadePiece* Glazing = Tests::FindPiece(Pieces, TEXT("glass.lumiere-peacock.glazing"));
+	const FFormMadePiece* Frame = Tests::FindPiece(Pieces, TEXT("glass.lumiere-peacock.frame"));
+	if (!TestTrue(TEXT("A transparency on a wall is made in its window mat, backed, glazed and framed"), Plate && Mat && Backing && Glazing && Frame))
+	{
+		return false;
+	}
+	TestTrue(TEXT("Its plate is the work's own layer over the plate's glass, translucent"), Plate->Material == TEXT("paint.lumiere-peacock")
+		&& Plate->Surface == TEXT("cabinet.plate") && Plate->Working == TEXT("plate.photographic") && !Plate->bNanite);
+	const FBox PlateBox = Tests::StageBox(*Plate);
+	TestTrue(TEXT("behind the mat's window, as thick as its working's plate (3 mm)"), PlateBox.Min.Equals(FVector(5.0, -5.0 - 0.0015 - 0.003, 1.5), 1e-6)
+		&& PlateBox.Max.Equals(FVector(5.177, -5.0 - 0.0015, 1.63), 1e-6));
+	TestTrue(TEXT("The mat is one closed solid with the window cut through it"), Musee::FormMaking::MeasureShell(*Mat).IsClosed()
+		&& FMath::IsNearlyEqual(Tests::AreaSquareMeters(Mat->Mesh), 2.0 * (1.0 * 0.9 - 0.177 * 0.13) + 2.0 * (1.0 + 0.9 + 0.177 + 0.13) * 0.0015, 1e-6));
+	const FBox BackingBox = Tests::StageBox(*Backing);
+	TestTrue(TEXT("The diffusing pane lies behind the plate, the mat's size"), FMath::IsNearlyEqual(BackingBox.Max.Y, -5.0045, 1e-6)
+		&& FMath::IsNearlyEqual(BackingBox.Min.Y, -5.0045 - 0.006, 1e-6) && FMath::IsNearlyEqual(BackingBox.GetSize().X, 1.0, 1e-6));
+	const FBox FrameBox = Tests::StageBox(*Frame);
+	TestTrue(TEXT("The frame's back is flush with the backing's, its lip on the glazing"), FMath::IsNearlyEqual(FrameBox.Min.Y, -5.0105, 1e-6)
+		&& FMath::IsNearlyEqual(FrameBox.Max.Y, -5.0 + 0.008 + 0.8 * 0.022, 1e-4));
+	const TArray<FArtPaintLayer> Layers = PaintLayers(Tests::Cabinet());
+	const FArtPaintLayer* Layer = Layers.FindByPredicate([](const FArtPaintLayer& L) { return L.Work == TEXT("lumiere-peacock"); });
+	TestTrue(TEXT("Its layer is its image over the plate's glass"), Layer && Layer->Parent == TEXT("glass.clear-float") && Layer->Working == TEXT("plate.photographic")
+		&& Layer->SizeMeters.Equals(FVector2D(0.177, 0.13)));
+	return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FArtWareTest, "Musee.Art.Ware", Musee::ArtMaking::Tests::Flags)
+
+bool FArtWareTest::RunTest(const FString& Parameters)
+{
+	using namespace Musee::ArtMaking;
+	TArray<FFormMadePiece> Pieces;
+	TArray<FMuseeFinding> Findings;
+	GatherArt(Tests::Cabinet(), Pieces, Findings);
+	const FFormMadePiece* Dish = Tests::FindPiece(Pieces, TEXT("ware.albion-de-morgan-charger"));
+	const FFormMadePiece* Underside = Tests::FindPiece(Pieces, TEXT("ware.albion-de-morgan-charger.ground"));
+	const FFormMadePiece* Jar = Tests::FindPiece(Pieces, TEXT("ware.albion-de-morgan-jar"));
+	const FFormMadePiece* Inside = Tests::FindPiece(Pieces, TEXT("ware.albion-de-morgan-jar.ground"));
+	if (!TestTrue(TEXT("A dish and a jar are each turned, decorated and grounded"), Dish && Underside && Jar && Inside))
+	{
+		return false;
+	}
+	TestTrue(TEXT("Its decoration is the work's own layer over the lustre"), Dish->Material == TEXT("paint.albion-de-morgan-charger")
+		&& Dish->Working == TEXT("lustre-painted") && Dish->History == TEXT("clean"));
+	TestTrue(TEXT("its underside the plain tin glaze"), Underside->Material == TEXT("accent.lustreware") && Underside->Working == TEXT("tin-glazed"));
+	const FBox DishBox = Tests::StageBox(*Dish) + Tests::StageBox(*Underside);
+	TestTrue(TEXT("The dish stands at its centre on the bed, its size"), FMath::IsNearlyEqual(DishBox.GetSize().X, 0.514, 1e-3)
+		&& FMath::IsNearlyEqual(DishBox.Min.Z, 0.55, 1e-6) && FMath::IsNearlyEqual(DishBox.Max.Z, 0.62, 1e-6)
+		&& FMath::IsNearlyEqual(DishBox.GetCenter().Y, -0.3, 1e-3));
+	const FBox JarBox = Tests::StageBox(*Jar);
+	TestTrue(TEXT("The jar stands its height"), FMath::IsNearlyEqual(JarBox.Min.Z, 0.55, 1e-6) && FMath::IsNearlyEqual(JarBox.Max.Z, 0.93, 1e-6));
+	// The dish is photographed from above: its image's top-left corner lies at its far left, the image spanning the dish.
+	const UE::Geometry::FDynamicMeshUVOverlay* UVs = Dish->Mesh->Attributes()->GetUVLayer(0);
+	FVector2f Least(TNumericLimits<float>::Max()), Most(TNumericLimits<float>::Lowest());
+	for (const int32 E : UVs->ElementIndicesItr())
+	{
+		Least = FVector2f::Min(Least, UVs->GetElement(E));
+		Most = FVector2f::Max(Most, UVs->GetElement(E));
+	}
+	TestTrue(TEXT("Its image spans its face in metres"), Least.Equals(FVector2f(0.0f, 0.0f), 2e-3f) && Most.Equals(FVector2f(0.514f, 0.514f), 2e-3f));
+	const TArray<FArtPaintLayer> Layers = PaintLayers(Tests::Cabinet());
+	const FArtPaintLayer* JarLayer = Layers.FindByPredicate([](const FArtPaintLayer& L) { return L.Work == TEXT("albion-de-morgan-jar"); });
+	TestTrue(TEXT("The jar's layer spans its whole photograph, the jar filling its window"), JarLayer && JarLayer->Parent == TEXT("accent.lustreware")
+		&& JarLayer->SizeMeters.Equals(FVector2D(0.24 / (0.926 - 0.066), 0.38 / (0.997 - 0.0278)), 1e-6));
 	return true;
 }
 

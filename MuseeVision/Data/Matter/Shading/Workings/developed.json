@@ -1,0 +1,69 @@
+{
+  "schema": "musee.matter.shading.working/1",
+  "key": "developed",
+  "name": "Polished to a mirror, sensitised, exposed and developed over mercury (the daguerreotype process)",
+  "record": "Palette.json",
+  "kind": "face",
+  "roughness": {
+    "value": 0.05,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Palette.json: accent.daguerreotype",
+    "note": "The silver is buffed to a mirror before it is sensitised: a first value for a polished metal."
+  },
+  "roughnessAcross": {
+    "value": 0.05,
+    "unit": "1",
+    "grade": "derived",
+    "source": "a buffed face has no grain",
+    "derivation": "equal to the roughness along"
+  },
+  "haziness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Palette.json (no measured haze)"
+  },
+  "textureDepth": {
+    "value": 0.0,
+    "unit": "mm",
+    "grade": "derived",
+    "source": "a mirror under its cover glass",
+    "derivation": "it holds no film of water"
+  },
+  "relief": {
+    "value": 0.0,
+    "unit": "mm",
+    "grade": "derived",
+    "source": "the image carries the plate",
+    "derivation": "no relief is drawn over the work's own image"
+  },
+  "film": {
+    "diffuseAlbedo": {
+      "value": [
+        0.7,
+        0.7,
+        0.7
+      ],
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.daguerreotype",
+      "note": "The image's silver-mercury particles scatter white; no measured reflectance of a daguerreotype's highlights was read."
+    },
+    "refractiveIndex": {
+      "value": 1.5,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.daguerreotype",
+      "note": "The particles are metallic, but their field scatters as a rough dielectric does; a first index for its faint specular."
+    },
+    "roughness": {
+      "value": 0.9,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.daguerreotype",
+      "note": "The particles scatter light diffusely: that is what makes the highlights."
+    }
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "schema": "musee.matter.shading.working/1",
+  "key": "tin-glazed",
+  "name": "Tin-glazed: dipped in an opaque white glaze and fired",
+  "record": "Palette.json",
+  "kind": "face",
+  "roughness": {
+    "value": 0.05,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Shading/Workings/glazed.json (a glaze's first roughness)"
+  },
+  "roughnessAcross": {
+    "value": 0.05,
+    "unit": "1",
+    "grade": "derived",
+    "source": "a glaze has no grain",
+    "derivation": "equal to the roughness along"
+  },
+  "haziness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Shading/Workings/glazed.json",
+    "note": "One specular lobe until a goniometric measurement shows a second."
+  },
+  "textureDepth": {
+    "value": 0.001,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Shading/Workings/glazed.json"
+  },
+  "relief": {
+    "value": 0.02,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Shading/Workings/glazed.json"
+  },
+  "lays": "glaze.tin"
+}

@@ -105,6 +105,21 @@
           "working": "filled.polished",
           "history": "new",
           "note": "Stages: atrium.base, hall-of-light.lining, hall-of-light.plinth"
+        },
+        {
+          "working": "sawn",
+          "history": "weathered",
+          "note": "Stages: grounds.kerb, grounds.strip.edge"
+        },
+        {
+          "working": "bush-hammered",
+          "history": "weathered",
+          "note": "Stages: grounds.parvis.paving"
+        },
+        {
+          "working": "crushed.stabilise",
+          "history": "weathered",
+          "note": "Stages: grounds.gravel, grounds.gravel.canal-walks (the museum's own offcuts, crushed and stabilised)"
         }
       ]
     },
@@ -439,6 +454,11 @@
           "working": "honed",
           "history": "weathered",
           "note": "Stages: nympheas.pond.bed"
+        },
+        {
+          "working": "honed",
+          "history": "submerged",
+          "note": "Stages: grounds.basin.bed"
         }
       ]
     },
@@ -2534,6 +2554,11 @@
           "working": "laminated.uv-filtering.diffusing",
           "history": "weathered",
           "note": "Stages: albion.screen.glass.gable, albion.vault.glass.aisle"
+        },
+        {
+          "working": "plate.photographic",
+          "history": "new",
+          "note": "Stages: hall-of-light.autochrome.plate (the autochromes' plates, each work's image in its own layer)"
         }
       ]
     },
@@ -2575,6 +2600,11 @@
           "working": "cased-opal",
           "history": "new",
           "note": "Stages: albion.electrolier.globe"
+        },
+        {
+          "working": "cased-opal",
+          "history": "weathered",
+          "note": "Stages: grounds.lamp.globe"
         }
       ]
     },
@@ -3352,6 +3382,112 @@
           "working": "polished.hand-touched",
           "history": "handled",
           "note": "Stages: albion.shaft.j"
+        }
+      ]
+    },
+    {
+      "key": "accent.print-on-paper",
+      "family": "accent",
+      "accentOf": "white",
+      "substance": "print-paper",
+      "realMaterial": "The photographs themselves: salted-paper, albumen, cyanotype and gelatin silver prints and albumen stereographs, the image in the paper's surface, whose image each work supplies",
+      "workingsByEra": {
+        "classical": "printed and mounted",
+        "modern": "printed and mounted (the Hall of Light)",
+        "future": "absent"
+      },
+      "roles": [
+        "Hall of Light: the sixteen prints on their mounts and the two albumen stereographs on the readers"
+      ],
+      "why": "The works are not chosen by the story but hung in it: a print brings its own paper. It is cellulose, the white family's fibre, as the mounts it rests on are.",
+      "oldChoice": "the old build's per-work image materials",
+      "verdict": "new",
+      "verdictReason": "A print needs a palette entry so every work on paper resolves through the same connector as a canvas; each work supplies its image.",
+      "research": {
+        "records": [
+          "Shading/Substances/print-paper.json",
+          "Shading/Workings/printed.json"
+        ],
+        "needed": "Measured whites and gloss of salted, albumen and gelatin silver prints."
+      },
+      "finishes": [
+        {
+          "working": "printed",
+          "history": "clean",
+          "note": "Art: every print and stereograph on paper; each work gives the instance its own image"
+        }
+      ]
+    },
+    {
+      "key": "accent.daguerreotype",
+      "family": "accent",
+      "accentOf": "metal",
+      "substance": "silver",
+      "realMaterial": "Daguerreotypes: copper plates faced with silver, buffed to a mirror, the image a field of silver-mercury particles over it, sealed under a cover glass",
+      "workingsByEra": {
+        "classical": "developed and sealed",
+        "modern": "developed and sealed (the Hall of Light)",
+        "future": "absent"
+      },
+      "roles": [
+        "Hall of Light: the two stereo daguerreotypes on the readers"
+      ],
+      "why": "The first photographs were mirrors: a daguerreotype turns from positive to negative as the eye moves, because its shadows are bare silver reflecting the room. It is silver on copper, the metal family's.",
+      "oldChoice": "",
+      "verdict": "new",
+      "verdictReason": "A daguerreotype's image is a cover over a mirror, not a pigment: the plate master draws it.",
+      "research": {
+        "records": [
+          "Shading/Substances/silver.json",
+          "Shading/Workings/developed.json"
+        ],
+        "needed": "Silver's n and k at the primaries (Johnson and Christy 1972); a measured reflectance of a daguerreotype's highlights."
+      },
+      "finishes": [
+        {
+          "working": "developed",
+          "history": "clean",
+          "note": "Art: every daguerreotype; each work gives the instance its own image"
+        }
+      ]
+    },
+    {
+      "key": "accent.lustreware",
+      "family": "accent",
+      "accentOf": "stone",
+      "substance": "lustreware",
+      "realMaterial": "William De Morgan's lustreware: earthenware under an opaque white tin glaze, painted in copper and silver lustre and fired again, whose decoration each work supplies",
+      "workingsByEra": {
+        "classical": "lustre-painted over the tin glaze (Albion)",
+        "modern": "absent",
+        "future": "absent"
+      },
+      "roles": [
+        "Albion: De Morgan's dishes, vase and jar in the cases"
+      ],
+      "why": "Fired clay again, the stone that is made, under a glass fused to it; the lustre is the Arts and Crafts revival of the Hispano-Moresque and Deruta wares.",
+      "oldChoice": "the old build's per-work image materials",
+      "verdict": "new",
+      "verdictReason": "The dishes and vessels are objects in the round; their decoration is the work's image, laid on the glaze.",
+      "research": {
+        "records": [
+          "Shading/Substances/lustreware.json",
+          "Shading/Workings/lustre-painted.json",
+          "Shading/Substances/glaze.tin.json",
+          "Shading/Workings/tin-glazed.json"
+        ],
+        "needed": "The tin glaze's measured white; the lustre's reflectance (a metallic nanoparticle film)."
+      },
+      "finishes": [
+        {
+          "working": "lustre-painted",
+          "history": "clean",
+          "note": "Art: the decorated faces of the De Morgan ware; each work gives the instance its own image"
+        },
+        {
+          "working": "tin-glazed",
+          "history": "clean",
+          "note": "Art: the undersides and feet of the dishes, glazed without decoration"
         }
       ]
     }

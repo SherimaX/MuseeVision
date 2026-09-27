@@ -4,7 +4,7 @@
     {
       "surface": "grounds.terrain",
       "material": "accent.site-geology",
-      "working": "topsoil",
+      "working": "topsoil.bare",
       "history": "weathered",
       "note": "The ground body under the lawn: 0.30 of topsoil (z -0.33 to -0.03) over the whole footprint; its top carries the lawn (Planting grounds.lawn). Seen only where a cut shows it."
     },
@@ -53,14 +53,14 @@
     {
       "surface": "grounds.basin.bed",
       "material": "accent.pierre-bleue",
-      "working": "honed.submerged",
-      "history": "weathered",
+      "working": "honed",
+      "history": "submerged",
       "note": "Canal and basin floors: Belgian bluestone, honed, permanently under water with a thin biofilm and silt, so the still water reads as a mirror (palette: Grounds canal and basin beds)."
     },
     {
       "surface": "grounds.lamp.post",
       "material": "bronze.cusn10",
-      "working": "cast",
+      "working": "cast.bronze",
       "history": "weathered",
       "note": "Lamp standards (post, collar, cup, finial): sand-cast CuSn10 left to weather outdoors (palette outdoors working: cast, weathered): brown-green patina, streaked below the cup, brighter where hands rub the base."
     },

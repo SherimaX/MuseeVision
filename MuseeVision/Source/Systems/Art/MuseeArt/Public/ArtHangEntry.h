@@ -95,7 +95,8 @@ struct MUSEEART_API FArtHangEntry
 
 	/**
 	 * The surface in the stage's Finishes.json the work stands on or is made in: the glass a stained-glass panel is
-	 * fired in (`albion.band.glass`), the stone of a built work, a cast's carrier, a case's lining.
+	 * fired in (`albion.band.glass`), a transparency's plate (`hall-of-light.autochrome.plate`), the stone of a built
+	 * work, a cast's carrier, a case's lining.
 	 */
 	UPROPERTY()
 	FName Wall;
@@ -108,7 +109,10 @@ struct MUSEEART_API FArtHangEntry
 	UPROPERTY()
 	FName Part;
 
-	/** The work's centre in the stage's frame [x, y, z], as the sheet computed it: a cross-check of its placing. */
+	/**
+	 * The work's centre in the stage's frame [x, y, z], as the sheet computed it: a cross-check of a work on a wall; where an
+	 * object in the round stands on its Mount anchor (the foot of a dish or vessel on a case's bed).
+	 */
 	UPROPERTY()
 	TArray<double> Centre;
 
@@ -126,6 +130,17 @@ struct MUSEEART_API FArtHangEntry
 	/** Whether the work is glazed in its frame or case. */
 	UPROPERTY()
 	bool Glazed = false;
+
+	/** The surface in the stage's Finishes.json of the glass a glazed work lies under (`hall-of-light.frame.glazing`). */
+	UPROPERTY()
+	FName Glazing;
+
+	/**
+	 * The surface in the stage's Finishes.json of the diffusing pane behind a transparency, through which the daylight
+	 * behind it lights it (`hall-of-light.autochrome.backing`).
+	 */
+	UPROPERTY()
+	FName Backing;
 
 	/** The frame's pattern (`watts`, `reeded`), its moulding's width, and its sight's shape (`rect`, `arched`, `oval`). */
 	UPROPERTY()
@@ -156,12 +171,18 @@ struct MUSEEART_API FArtHangEntry
 	UPROPERTY()
 	FArtScrollMount Mount;
 
-	/** The surface of the board a print or transparency is mounted on or matted in, and the board's size [w, h], metres. */
+	/**
+	 * The surface of the board a print or transparency is mounted on or matted in, the board's size [w, h] and its
+	 * depth, metres: its face is the Wall anchor's plane, its back that depth behind it.
+	 */
 	UPROPERTY()
 	FName Mat;
 
 	UPROPERTY()
 	TArray<double> MatSize;
+
+	UPROPERTY(meta = (Units = "Meters"))
+	float MatDepth = 0.0f;
 
 	/** How a work made from a scan is set. */
 	UPROPERTY()

@@ -53,8 +53,9 @@ namespace Musee::Matter
 
 	/**
 	 * The long package name of the master a layer is composed over, from the palette finish it derives from: the paint
-	 * master for a paint (a canvas), the stained-glass master (M_Matter_Stained) for a glass (a stained-glass panel, whose
-	 * image is the colour of its glass). A finish that is neither carries no image, and that is the error.
+	 * master for a paint (a canvas, a print on paper, a lustre-painted glaze), the plate master (M_Matter_Plate) for a
+	 * daguerreotype's silvered plate, the stained-glass master (M_Matter_Stained) for a glass (a stained-glass panel,
+	 * whose image is the colour of its glass). A finish that is none of these carries no image, and that is the error.
 	 */
 	[[nodiscard]] MUSEEMATTERMAKING_API TValueOrError<FString, FString> LayerMasterPackage(const FMatterPaintLayer& Layer);
 

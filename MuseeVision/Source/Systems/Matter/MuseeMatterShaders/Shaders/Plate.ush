@@ -1,0 +1,43 @@
+// Plate: a daguerreotype, the image carried on a mirror of silver.
+//
+// A daguerreotype is a copper plate faced with silver and polished to a mirror, made light-sensitive, exposed in the
+// camera and developed over mercury. Where light fell, the development leaves a field of tiny silver-mercury particles
+// that scatter light back diffusely: the highlights. Where none fell, the polished silver stays bare, and a mirror
+// shows the dark room it faces: the shadows. So the image is not a pigment but a cover: the fraction of the mirror the
+// particles hide. Art supplies a photograph of the plate taken, as daguerreotypes are photographed, facing a dark
+// field, in which the particles read bright and the bare silver dark; its luminance, relative to its white, is that
+// cover. The particles' own colour, and the tone gilding gives the image, are the photograph's hue over the particles'
+// white (the working's record).
+//
+// Art builds the plate's face with its UV0 in metres from the image's top-left corner, as a canvas's (Paint.ush).
+
+#pragma once
+
+#include "/Project/Matter/Metal.ush"
+#include "/Project/Matter/Paint.ush"
+
+// The luminance of a linear Rec.709 colour: ITU-R Recommendation BT.709-6 (2015), item 3.2, the derivation of the
+// luminance signal from the primaries.
+static const float3 MatterRec709Luminance = float3(0.2126, 0.7152, 0.0722);
+
+/** The fraction of the silver the image's particles cover where the plate's photograph has the colour ImageLinear. */
+float MatterPlateCover(float3 ImageLinear)
+{
+	return saturate(dot(saturate(ImageLinear), MatterRec709Luminance));
+}
+
+/** The particles' diffuse colour: their white, tinted by the photograph's hue there (the gilding's warm tone). */
+float3 MatterPlateParticleAlbedo(float3 ImageLinear, float3 ParticleWhite)
+{
+	const float Luminance = max(dot(saturate(ImageLinear), MatterRec709Luminance), MatterTiny);
+	return saturate(saturate(ImageLinear) / Luminance) * ParticleWhite;
+}
+
+/** The plate's face before its history: the polished silver, with the image's particles over the fraction the image
+ *  gives. */
+FMatterSurface MatterPlateSurface(float3 ImageLinear, float3 SilverF0, float Roughness, float3 ParticleWhite, float ParticleRefractiveIndex,
+	float ParticleRoughness)
+{
+	return MatterFilmed(MatterBareMetal(SilverF0, Roughness), MatterPlateParticleAlbedo(ImageLinear, ParticleWhite), ParticleRefractiveIndex,
+		ParticleRoughness, MatterPlateCover(ImageLinear));
+}
