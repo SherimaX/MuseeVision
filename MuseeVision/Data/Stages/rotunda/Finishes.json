@@ -1,0 +1,425 @@
+{
+  "stage": "rotunda",
+  "finishes": [
+    {
+      "surface": "rotunda.drum.wall.inner",
+      "material": "stone.crema-marfil",
+      "working": "honed",
+      "history": "new",
+      "note": "Drum inner face r 10.00, z 0.15-10.00: 30 mm revetment in ashlar courses (8 of 1.165 from 0.15 to 9.47), blocks <= 1.9 m, half-bond, each block its own slice; crackle soft. Core travertine (hidden)."
+    },
+    {
+      "surface": "rotunda.drum.shadow-gap",
+      "material": "stone.crema-marfil",
+      "working": "honed",
+      "history": "new",
+      "note": "The 0.15 x 0.04 shadow gap at the foot of the drum: back face r 10.04 and soffit z 0.15."
+    },
+    {
+      "surface": "rotunda.port.rough-opening",
+      "material": "stone.travertine-romano",
+      "working": "sawn",
+      "history": "new",
+      "note": "The four doorway rough openings through the drum (jambs, head, sill), hidden behind Site's lining: the travertine core as sawn."
+    },
+    {
+      "surface": "rotunda.pilaster",
+      "material": "stone.crema-marfil",
+      "working": "honed",
+      "history": "new",
+      "note": "Sixteen fluted Roman Doric pilasters: base, shaft, capital; dust in the flutes' feet."
+    },
+    {
+      "surface": "rotunda.door.archivolt",
+      "material": "stone.crema-marfil",
+      "working": "honed",
+      "history": "new",
+      "note": "The four door archivolts on the drum's inner face, springing 4.50 (role guessed; as built plaster)."
+    },
+    {
+      "surface": "rotunda.niche.reveal",
+      "material": "stone.crema-marfil",
+      "working": "honed",
+      "history": "new",
+      "note": "The niches' sliver reveals (0.050 at the jambs to 0 on the axis)."
+    },
+    {
+      "surface": "rotunda.niche.back",
+      "material": "stone.crema-marfil",
+      "working": "honed",
+      "history": "new",
+      "note": "Niche half-round back r 1.00, z 2.00-4.67."
+    },
+    {
+      "surface": "rotunda.niche.head",
+      "material": "stone.crema-marfil",
+      "working": "honed",
+      "history": "new",
+      "note": "Niche half-dome r 1.00 about (r 10.00, z 4.67)."
+    },
+    {
+      "surface": "rotunda.niche.surround",
+      "material": "stone.crema-marfil",
+      "working": "honed",
+      "history": "new",
+      "note": "Niche architrave surround (Story: sills and surrounds are Crema Marfil, not plaster)."
+    },
+    {
+      "surface": "rotunda.niche.sill",
+      "material": "stone.crema-marfil",
+      "working": "honed",
+      "history": "new",
+      "note": "Niche sill ledge (z 1.84-2.00, 0.16 proud, +/-1.26) and the niche floor behind it: the casts stand on it."
+    },
+    {
+      "surface": "rotunda.niche.cast",
+      "material": "white.plaster-of-paris",
+      "working": "cast.seams-kept.sized",
+      "history": "new",
+      "note": "The four casts after SMK's Royal Cast Collection: piece-mould seams kept, sealed with a thin size; dust on upward forms. Art makes the objects."
+    },
+    {
+      "surface": "rotunda.entablature",
+      "material": "white.fibrous-plaster",
+      "working": "cast",
+      "history": "new",
+      "note": "Entablature ring at the springing (architrave, frieze, cornice), cast in lengths about 3 m from run models, mitred by hand; plaster-of-Paris face."
+    },
+    {
+      "surface": "rotunda.dome.band",
+      "material": "white.lime-plaster",
+      "working": "trowelled",
+      "history": "new",
+      "note": "The dome's plain bands: 2.866-4 deg and 64-72.54 deg."
+    },
+    {
+      "surface": "rotunda.dome.coffer",
+      "material": "white.lime-plaster",
+      "working": "run",
+      "history": "new",
+      "note": "5 rings x 28 coffers, run in lime gauged with plaster of Paris, trowelled setting coat."
+    },
+    {
+      "surface": "rotunda.dome.eye-curb",
+      "material": "white.lime-plaster",
+      "working": "trowelled",
+      "history": "new",
+      "note": "The eye's stepped curb inside, r 3.00 -> 2.50, z 19.42-20.45."
+    },
+    {
+      "surface": "rotunda.eye.lattice",
+      "material": "white.pearl-steel",
+      "working": "pearl.satin",
+      "history": "new",
+      "note": "Ring and 21 bars, one welded and faired body: the future's seed in the anchor (Story; as built dark grey #1E1C19)."
+    },
+    {
+      "surface": "rotunda.eye.glass",
+      "material": "glass.low-iron",
+      "working": "laminated.uv-filtering",
+      "history": "new",
+      "note": "One disc r 2.50, 2 x 5 mm low-iron + 0.76 PVB (10.76 mm), top z 20.39; rain and soiling from the museum observer through Matter's surface law."
+    },
+    {
+      "surface": "rotunda.eye.node",
+      "material": "bronze.cusn10",
+      "working": "patinated",
+      "history": "aged.patina",
+      "note": "The node, a sphere r 0.12 at (0, 0, 20.25): cast, patinated (Story; as built gilt)."
+    },
+    {
+      "surface": "rotunda.drum.wall.outer",
+      "material": "stone.travertine-romano",
+      "working": "honed",
+      "history": "weathered",
+      "note": "Drum outer face r 11.20, z 0-11.00 (the outer drum is travertine; the Crema Marfil stays inside)."
+    },
+    {
+      "surface": "rotunda.drum.top",
+      "material": "stone.travertine-romano",
+      "working": "honed",
+      "history": "weathered",
+      "note": "The drum top annulus z 11.00, r 10.553-11.20."
+    },
+    {
+      "surface": "rotunda.dome.outer",
+      "material": "accent.milled-lead",
+      "working": "patinated",
+      "history": "weathered",
+      "note": "Milled sheet lead on boarding with rolls over the shell R 10.60, dressed over the eye's curb (r 2.90 -> 2.50 at z 20.45). Replaces the as-built stone outside (Story)."
+    },
+    {
+      "surface": "rotunda.floor.ring.a",
+      "material": "stone.crema-marfil",
+      "working": "honed",
+      "history": "foot-worn",
+      "note": "Fixed ring r 7.00-10.04, tone A (slab + course even): the paler selection, sparse crackle."
+    },
+    {
+      "surface": "rotunda.floor.ring.b",
+      "material": "stone.crema-marfil",
+      "working": "honed",
+      "history": "foot-worn",
+      "note": "Fixed ring tone B (slab + course odd): the warmer selection, fuller crackle."
+    },
+    {
+      "surface": "rotunda.dial.field.a",
+      "material": "stone.crema-marfil",
+      "working": "honed",
+      "history": "foot-worn",
+      "note": "Dial bands A (r 0-1.40, 3.20-4.90, 6.38-6.99): selection A. Honed so the point of shadow reads without glare."
+    },
+    {
+      "surface": "rotunda.dial.field.b",
+      "material": "stone.crema-marfil",
+      "working": "honed",
+      "history": "foot-worn",
+      "note": "Dial bands B (r 1.52-3.20, 4.90-6.30): selection B."
+    },
+    {
+      "surface": "rotunda.dial.band.red",
+      "material": "accent.rojo-alicante",
+      "working": "honed",
+      "history": "foot-worn",
+      "note": "Dial band r 1.40-1.52 (Rojo Alicante replaces the as-built rosso)."
+    },
+    {
+      "surface": "rotunda.dial.band.black",
+      "material": "accent.negro-marquina",
+      "working": "honed",
+      "history": "foot-worn",
+      "note": "Dial band r 6.30-6.38."
+    },
+    {
+      "surface": "rotunda.dial.inlay",
+      "material": "bronze.cusn10",
+      "working": "patinated",
+      "history": "foot-worn",
+      "note": "Hour ring, band fillets, 12 hour lines (all but XII), minute ticks and the 13 numerals: cast, patinated; feet polish the high points."
+    },
+    {
+      "surface": "rotunda.dial.meridian",
+      "material": "bronze.cusn10",
+      "working": "gilt.gold-leaf.oil",
+      "history": "foot-worn",
+      "note": "The XII line, 60 mm, r 1.60-6.80: oil-gilt on cast bronze, walked through to the bronze where people stand."
+    },
+    {
+      "surface": "rotunda.dial.sun",
+      "material": "bronze.cusn10",
+      "working": "gilt.gold-leaf.oil",
+      "history": "foot-worn",
+      "note": "The gilt sun: boss, bead ring, beaded foot and the 32 rays, oil-gilt on cast bronze (rays gilt: role read as the whole sun; as built bronze)."
+    },
+    {
+      "surface": "rotunda.floor.motto",
+      "material": "bronze.cusn10",
+      "working": "patinated",
+      "history": "foot-worn",
+      "note": "HORAS NON NUMERO NISI SERENAS in cast capitals on the ring."
+    },
+    {
+      "surface": "rotunda.floor.motto.stop",
+      "material": "bronze.cusn10",
+      "working": "gilt.gold-leaf.oil",
+      "history": "foot-worn",
+      "note": "The four triangular stops of the motto (as built gilt; role guessed)."
+    },
+    {
+      "surface": "rotunda.sun-clock.wall",
+      "material": "stone.crema-marfil",
+      "working": "honed",
+      "history": "new",
+      "note": "The lifting drum's wall face r 6.90, base and entablature profiles (all inside r 6.99)."
+    },
+    {
+      "surface": "rotunda.sun-clock.wall.inner",
+      "material": "stone.crema-marfil",
+      "working": "honed",
+      "history": "new",
+      "note": "The drum wall's inner face r 6.545, seen from the stair when raised."
+    },
+    {
+      "surface": "rotunda.sun-clock.pilaster",
+      "material": "stone.crema-marfil",
+      "working": "honed",
+      "history": "new",
+      "note": "Twelve fluted pilasters on the lifting drum."
+    },
+    {
+      "surface": "rotunda.sun-clock.door",
+      "material": "stone.crema-marfil",
+      "working": "honed",
+      "history": "new",
+      "note": "The drum's west door: radial jambs, conical intrados, archivolt, imposts, keystone."
+    },
+    {
+      "surface": "rotunda.sun-clock.door.sill",
+      "material": "stone.crema-marfil",
+      "working": "honed",
+      "history": "foot-worn",
+      "note": "The door's flat sill r 6.545-6.99 at drum z -3.50 (the floor, z 0, when raised)."
+    },
+    {
+      "surface": "rotunda.sun-clock.soffit",
+      "material": "white.lime-plaster",
+      "working": "run",
+      "history": "new",
+      "note": "The dial slab's underside: ring and radial ribs and five rings of coffers (Story: drum soffit coffers, lime plaster)."
+    },
+    {
+      "surface": "rotunda.sun-clock.rim",
+      "material": "bronze.cusn10",
+      "working": "patinated",
+      "history": "aged.patina",
+      "note": "The bronze rim round the soffit, with its groove over the sleeve's top (role by analogy with the drum balustrade)."
+    },
+    {
+      "surface": "rotunda.sun-clock.pendant",
+      "material": "bronze.cusn10",
+      "working": "gilt.gold-leaf.oil",
+      "history": "aged.patina",
+      "note": "The pendant boss over the well (as built gilt; role guessed)."
+    },
+    {
+      "surface": "rotunda.sun-clock.ram",
+      "material": "todo.steel.hard-chrome",
+      "working": "hard-chromed",
+      "history": "new",
+      "note": "Eight telescopic ram stages in their bores, hidden."
+    },
+    {
+      "surface": "rotunda.shaft.pocket",
+      "material": "stone.crema-marfil",
+      "working": "honed",
+      "history": "new",
+      "note": "The pocket r 6.54-7.00 (faces and floor) and the sleeve's top and back; the sleeve top at -0.07 shows at the raised drum's door."
+    },
+    {
+      "surface": "rotunda.stair.wall",
+      "material": "stone.crema-marfil",
+      "working": "honed",
+      "history": "new",
+      "note": "The stair wall (sleeve face) r 6.48, the portal's jambs, lintel and tympanum."
+    },
+    {
+      "surface": "rotunda.stair.port.reveal",
+      "material": "stone.crema-marfil",
+      "working": "honed",
+      "history": "new",
+      "note": "The port's arched reveal r 7.05-7.60 (the Rotunda's side of the joint)."
+    },
+    {
+      "surface": "rotunda.stair.port.dressing",
+      "material": "stone.crema-marfil",
+      "working": "honed",
+      "history": "new",
+      "note": "Stair-side port dressings (polish): arch ring, architrave, plinth blocks, keystone, transoms (role guessed)."
+    },
+    {
+      "surface": "rotunda.stair.tread",
+      "material": "stone.crema-marfil",
+      "working": "honed",
+      "history": "foot-worn",
+      "note": "Treads, risers, nosings and both landings of the helical stair; worn on the walking line (r 3.61)."
+    },
+    {
+      "surface": "rotunda.stair.string",
+      "material": "stone.crema-marfil",
+      "working": "honed",
+      "history": "new",
+      "note": "The inner string r 2.20-2.35."
+    },
+    {
+      "surface": "rotunda.stair.soffit",
+      "material": "stone.crema-marfil",
+      "working": "honed",
+      "history": "new",
+      "note": "The helicoid underside, 0.40 under the pitch line."
+    },
+    {
+      "surface": "rotunda.stair.landing.floor",
+      "material": "stone.crema-marfil",
+      "working": "honed",
+      "history": "foot-worn",
+      "note": "The landing at z -6.00 (r 2.06-6.48 and through the portal to r 7.60) and the rosette's pale eye and field."
+    },
+    {
+      "surface": "rotunda.stair.landing.red",
+      "material": "accent.rojo-alicante",
+      "working": "honed",
+      "history": "foot-worn",
+      "note": "The rosette's red halves and the band r 2.00-2.06."
+    },
+    {
+      "surface": "rotunda.stair.landing.black",
+      "material": "accent.negro-marquina",
+      "working": "honed",
+      "history": "foot-worn",
+      "note": "The rosette's core disc, black halves and the band r 1.90-2.00."
+    },
+    {
+      "surface": "rotunda.stair.balustrade",
+      "material": "bronze.cusn10",
+      "working": "patinated",
+      "history": "aged.patina",
+      "note": "Well balustrade (fixed and retracting): standards, bars, balusters, rings, brackets, newel, carrier bars."
+    },
+    {
+      "surface": "rotunda.stair.handrail",
+      "material": "bronze.cusn10",
+      "working": "patinated",
+      "history": "handled",
+      "note": "Well handrail and wall handrail, hand-polished through the patina."
+    },
+    {
+      "surface": "rotunda.stair.housing.side",
+      "material": "stone.crema-marfil",
+      "working": "honed",
+      "history": "new",
+      "note": "The retracting balustrade's housing sides, with sunk fields where seen."
+    },
+    {
+      "surface": "rotunda.stair.housing.cap",
+      "material": "bronze.cusn10",
+      "working": "patinated",
+      "history": "aged.patina",
+      "note": "Housing caps round the slots, shoes and end plates."
+    },
+    {
+      "surface": "rotunda.west.blind-doors",
+      "material": "bronze.cusn10",
+      "working": "patinated",
+      "history": "aged.patina",
+      "note": "Closed pair of cast bronze leaves in the class opening on the port face of rotunda.west, while the port is unmated (on the stand, or while the neighbour is absent)."
+    },
+    {
+      "surface": "rotunda.north.blind-doors",
+      "material": "bronze.cusn10",
+      "working": "patinated",
+      "history": "aged.patina",
+      "note": "Closed pair of cast bronze leaves in the class opening on the port face of rotunda.north, while the port is unmated (on the stand, or while the neighbour is absent)."
+    },
+    {
+      "surface": "rotunda.south.blind-doors",
+      "material": "bronze.cusn10",
+      "working": "patinated",
+      "history": "aged.patina",
+      "note": "Closed pair of cast bronze leaves in the class opening on the port face of rotunda.south, while the port is unmated (on the stand, or while the neighbour is absent)."
+    },
+    {
+      "surface": "rotunda.east.blind-doors",
+      "material": "bronze.cusn10",
+      "working": "patinated",
+      "history": "aged.patina",
+      "note": "Closed pair of cast bronze leaves in the class opening on the port face of rotunda.east, while the port is unmated (on the stand, or while the neighbour is absent)."
+    },
+    {
+      "surface": "rotunda.stair.blind-doors",
+      "material": "bronze.cusn10",
+      "working": "patinated",
+      "history": "aged.patina",
+      "note": "Closed pair of cast bronze leaves in the class opening on the port face of rotunda.stair, while the port is unmated (on the stand, or while the neighbour is absent)."
+    }
+  ]
+}
