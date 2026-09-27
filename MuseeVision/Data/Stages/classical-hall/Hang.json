@@ -1,0 +1,1668 @@
+{
+  "stage": "classical-hall",
+  "works": [
+    {
+      "work": "classical-augustus-prima-porta",
+      "source": "data/classical.json",
+      "anchor": "classical-hall.gallery.niche.e1",
+      "wall": "classical-hall.plinth",
+      "centre": [
+        3.247,
+        28.1,
+        0.57
+      ],
+      "height": 0.57,
+      "size": [
+        1.179,
+        2.08
+      ],
+      "facing_deg": 180,
+      "support": "cast",
+      "frame": "none",
+      "care": "stone-and-bronze",
+      "scan": {
+        "source": "assets/classical/SOURCES.json",
+        "id": "augustus-prima-porta",
+        "mesh": "assets/classical/augustus-prima-porta.glb",
+        "depth": 0.994,
+        "base": [
+          0.78,
+          0.64
+        ]
+      },
+      "carrier": {
+        "kind": "niche-pedestal",
+        "top": [
+          0.84,
+          0.7
+        ],
+        "z": 0.57,
+        "axis_depth": 0.247
+      },
+      "note": "A cast in the round: 'centre' is the carrier's top centre, on which the scan's base slice (z < 0.04) is centred; 'size' is the scan's width x true height (length x height for a reclining figure); front faces 'facing_deg' (stage frame, from +x towards +y)."
+    },
+    {
+      "work": "classical-capitoline-venus",
+      "source": "data/classical.json",
+      "anchor": "classical-hall.gallery.niche.e2",
+      "wall": "classical-hall.plinth",
+      "centre": [
+        3.315,
+        22.1,
+        0.57
+      ],
+      "height": 0.57,
+      "size": [
+        0.656,
+        1.93
+      ],
+      "facing_deg": 180,
+      "support": "cast",
+      "frame": "none",
+      "care": "stone-and-bronze",
+      "scan": {
+        "source": "assets/classical/SOURCES.json",
+        "id": "capitoline-venus",
+        "mesh": "assets/classical/capitoline-venus.glb",
+        "depth": 0.772,
+        "base": [
+          0.55,
+          0.48
+        ]
+      },
+      "carrier": {
+        "kind": "niche-plinth",
+        "top": [
+          0.61,
+          0.54
+        ],
+        "z": 0.57,
+        "axis_depth": 0.315
+      },
+      "note": "A cast in the round: 'centre' is the carrier's top centre, on which the scan's base slice (z < 0.04) is centred; 'size' is the scan's width x true height (length x height for a reclining figure); front faces 'facing_deg' (stage frame, from +x towards +y)."
+    },
+    {
+      "work": "classical-minerva-giustiniani",
+      "source": "data/classical.json",
+      "anchor": "classical-hall.gallery.niche.e3",
+      "wall": "classical-hall.plinth",
+      "centre": [
+        3.25,
+        16.1,
+        0.57
+      ],
+      "height": 0.57,
+      "size": [
+        0.908,
+        2.19
+      ],
+      "facing_deg": 180,
+      "support": "cast",
+      "frame": "none",
+      "care": "stone-and-bronze",
+      "scan": {
+        "source": "assets/classical/SOURCES.json",
+        "id": "minerva-giustiniani",
+        "mesh": "assets/classical/minerva-giustiniani.glb",
+        "depth": 0.616,
+        "base": [
+          0.9,
+          0.54
+        ]
+      },
+      "carrier": {
+        "kind": "niche-pedestal",
+        "top": [
+          0.96,
+          0.6
+        ],
+        "z": 0.57,
+        "axis_depth": 0.25
+      },
+      "note": "A cast in the round: 'centre' is the carrier's top centre, on which the scan's base slice (z < 0.04) is centred; 'size' is the scan's width x true height (length x height for a reclining figure); front faces 'facing_deg' (stage frame, from +x towards +y)."
+    },
+    {
+      "work": "classical-sophocles",
+      "source": "data/classical.json",
+      "anchor": "classical-hall.gallery.niche.e4",
+      "wall": "classical-hall.plinth",
+      "centre": [
+        3.267,
+        10.1,
+        0.57
+      ],
+      "height": 0.57,
+      "size": [
+        0.844,
+        2.16
+      ],
+      "facing_deg": 180,
+      "support": "cast",
+      "frame": "none",
+      "care": "stone-and-bronze",
+      "scan": {
+        "source": "assets/classical/SOURCES.json",
+        "id": "sophocles",
+        "mesh": "assets/classical/sophocles.glb",
+        "depth": 0.654,
+        "base": [
+          0.82,
+          0.57
+        ]
+      },
+      "carrier": {
+        "kind": "niche-pedestal",
+        "top": [
+          0.88,
+          0.63
+        ],
+        "z": 0.57,
+        "axis_depth": 0.267
+      },
+      "note": "A cast in the round: 'centre' is the carrier's top centre, on which the scan's base slice (z < 0.04) is centred; 'size' is the scan's width x true height (length x height for a reclining figure); front faces 'facing_deg' (stage frame, from +x towards +y)."
+    },
+    {
+      "work": "classical-doryphoros",
+      "source": "data/classical.json",
+      "anchor": "classical-hall.gallery.niche.w1",
+      "wall": "classical-hall.plinth",
+      "centre": [
+        -3.226,
+        28.1,
+        0.57
+      ],
+      "height": 0.57,
+      "size": [
+        0.751,
+        2.12
+      ],
+      "facing_deg": 0,
+      "support": "cast",
+      "frame": "none",
+      "care": "stone-and-bronze",
+      "scan": {
+        "source": "assets/classical/SOURCES.json",
+        "id": "doryphoros",
+        "mesh": "assets/classical/doryphoros.glb",
+        "depth": 0.775,
+        "base": [
+          0.69,
+          0.74
+        ]
+      },
+      "carrier": {
+        "kind": "niche-pedestal",
+        "top": [
+          0.75,
+          0.8
+        ],
+        "z": 0.57,
+        "axis_depth": 0.226
+      },
+      "note": "A cast in the round: 'centre' is the carrier's top centre, on which the scan's base slice (z < 0.04) is centred; 'size' is the scan's width x true height (length x height for a reclining figure); front faces 'facing_deg' (stage frame, from +x towards +y)."
+    },
+    {
+      "work": "classical-lansdowne-heracles",
+      "source": "data/classical.json",
+      "anchor": "classical-hall.gallery.niche.w2",
+      "wall": "classical-hall.plinth",
+      "centre": [
+        -3.229,
+        22.1,
+        0.57
+      ],
+      "height": 0.57,
+      "size": [
+        0.881,
+        2.08
+      ],
+      "facing_deg": 0,
+      "support": "cast",
+      "frame": "none",
+      "care": "stone-and-bronze",
+      "scan": {
+        "source": "assets/classical/SOURCES.json",
+        "id": "lansdowne-heracles",
+        "mesh": "assets/classical/lansdowne-heracles.glb",
+        "depth": 0.73,
+        "base": [
+          0.88,
+          0.6
+        ]
+      },
+      "carrier": {
+        "kind": "niche-pedestal",
+        "top": [
+          0.94,
+          0.66
+        ],
+        "z": 0.57,
+        "axis_depth": 0.229
+      },
+      "note": "A cast in the round: 'centre' is the carrier's top centre, on which the scan's base slice (z < 0.04) is centred; 'size' is the scan's width x true height (length x height for a reclining figure); front faces 'facing_deg' (stage frame, from +x towards +y)."
+    },
+    {
+      "work": "classical-capitoline-antinous",
+      "source": "data/classical.json",
+      "anchor": "classical-hall.gallery.niche.w3",
+      "wall": "classical-hall.plinth",
+      "centre": [
+        -3.315,
+        16.1,
+        0.57
+      ],
+      "height": 0.57,
+      "size": [
+        0.66,
+        1.89
+      ],
+      "facing_deg": 0,
+      "support": "cast",
+      "frame": "none",
+      "care": "stone-and-bronze",
+      "scan": {
+        "source": "assets/classical/SOURCES.json",
+        "id": "capitoline-antinous",
+        "mesh": "assets/classical/capitoline-antinous.glb",
+        "depth": 0.607,
+        "base": [
+          0.55,
+          0.46
+        ]
+      },
+      "carrier": {
+        "kind": "niche-plinth",
+        "top": [
+          0.61,
+          0.52
+        ],
+        "z": 0.57,
+        "axis_depth": 0.315
+      },
+      "note": "A cast in the round: 'centre' is the carrier's top centre, on which the scan's base slice (z < 0.04) is centred; 'size' is the scan's width x true height (length x height for a reclining figure); front faces 'facing_deg' (stage frame, from +x towards +y)."
+    },
+    {
+      "work": "classical-farnese-diadoumenos",
+      "source": "data/classical.json",
+      "anchor": "classical-hall.gallery.niche.w4",
+      "wall": "classical-hall.plinth",
+      "centre": [
+        -3.315,
+        10.1,
+        0.57
+      ],
+      "height": 0.57,
+      "size": [
+        0.832,
+        1.85
+      ],
+      "facing_deg": 0,
+      "support": "cast",
+      "frame": "none",
+      "care": "stone-and-bronze",
+      "scan": {
+        "source": "assets/classical/SOURCES.json",
+        "id": "farnese-diadoumenos",
+        "mesh": "assets/classical/farnese-diadoumenos.glb",
+        "depth": 0.442,
+        "base": [
+          0.62,
+          0.44
+        ]
+      },
+      "carrier": {
+        "kind": "niche-plinth",
+        "top": [
+          0.68,
+          0.5
+        ],
+        "z": 0.57,
+        "axis_depth": 0.315
+      },
+      "note": "A cast in the round: 'centre' is the carrier's top centre, on which the scan's base slice (z < 0.04) is centred; 'size' is the scan's width x true height (length x height for a reclining figure); front faces 'facing_deg' (stage frame, from +x towards +y)."
+    },
+    {
+      "work": "classical-julia-titi",
+      "source": "data/classical.json",
+      "anchor": "classical-hall.gallery.bust.e1s",
+      "wall": "classical-hall.console",
+      "centre": [
+        2.85,
+        29.7,
+        1.55
+      ],
+      "height": 1.55,
+      "size": [
+        0.232,
+        0.485
+      ],
+      "facing_deg": 180,
+      "support": "cast",
+      "frame": "none",
+      "care": "stone-and-bronze",
+      "scan": {
+        "source": "assets/classical/SOURCES.json",
+        "id": "julia-titi",
+        "mesh": "assets/classical/julia-titi.glb",
+        "depth": 0.31,
+        "base": [
+          0.16,
+          0.21
+        ]
+      },
+      "carrier": {
+        "kind": "console",
+        "top": [
+          0.36,
+          0.3
+        ],
+        "z": 1.55
+      },
+      "note": "A cast in the round: 'centre' is the carrier's top centre, on which the scan's base slice (z < 0.04) is centred; 'size' is the scan's width x true height (length x height for a reclining figure); front faces 'facing_deg' (stage frame, from +x towards +y)."
+    },
+    {
+      "work": "classical-julius-caesar",
+      "source": "data/classical.json",
+      "anchor": "classical-hall.gallery.bust.e1n",
+      "wall": "classical-hall.console",
+      "centre": [
+        2.85,
+        26.5,
+        1.55
+      ],
+      "height": 1.55,
+      "size": [
+        0.23,
+        0.52
+      ],
+      "facing_deg": 180,
+      "support": "cast",
+      "frame": "none",
+      "care": "stone-and-bronze",
+      "scan": {
+        "source": "assets/classical/SOURCES.json",
+        "id": "julius-caesar",
+        "mesh": "assets/classical/julius-caesar.glb",
+        "depth": 0.256,
+        "base": [
+          0.22,
+          0.22
+        ]
+      },
+      "carrier": {
+        "kind": "console",
+        "top": [
+          0.36,
+          0.3
+        ],
+        "z": 1.55
+      },
+      "note": "A cast in the round: 'centre' is the carrier's top centre, on which the scan's base slice (z < 0.04) is centred; 'size' is the scan's width x true height (length x height for a reclining figure); front faces 'facing_deg' (stage frame, from +x towards +y)."
+    },
+    {
+      "work": "classical-antoninus-pius",
+      "source": "data/classical.json",
+      "anchor": "classical-hall.gallery.bust.e2s",
+      "wall": "classical-hall.console",
+      "centre": [
+        2.85,
+        23.7,
+        1.55
+      ],
+      "height": 1.55,
+      "size": [
+        0.673,
+        0.895
+      ],
+      "facing_deg": 180,
+      "support": "cast",
+      "frame": "none",
+      "care": "stone-and-bronze",
+      "scan": {
+        "source": "assets/classical/SOURCES.json",
+        "id": "antoninus-pius",
+        "mesh": "assets/classical/antoninus-pius.glb",
+        "depth": 0.335,
+        "base": [
+          0.24,
+          0.24
+        ]
+      },
+      "carrier": {
+        "kind": "console",
+        "top": [
+          0.36,
+          0.3
+        ],
+        "z": 1.55
+      },
+      "note": "A cast in the round: 'centre' is the carrier's top centre, on which the scan's base slice (z < 0.04) is centred; 'size' is the scan's width x true height (length x height for a reclining figure); front faces 'facing_deg' (stage frame, from +x towards +y)."
+    },
+    {
+      "work": "classical-young-marcus-aurelius",
+      "source": "data/classical.json",
+      "anchor": "classical-hall.gallery.bust.e2n",
+      "wall": "classical-hall.console",
+      "centre": [
+        2.85,
+        20.5,
+        1.55
+      ],
+      "height": 1.55,
+      "size": [
+        0.521,
+        0.75
+      ],
+      "facing_deg": 180,
+      "support": "cast",
+      "frame": "none",
+      "care": "stone-and-bronze",
+      "scan": {
+        "source": "assets/classical/SOURCES.json",
+        "id": "young-marcus-aurelius",
+        "mesh": "assets/classical/young-marcus-aurelius.glb",
+        "depth": 0.323,
+        "base": [
+          0.23,
+          0.23
+        ]
+      },
+      "carrier": {
+        "kind": "console",
+        "top": [
+          0.36,
+          0.3
+        ],
+        "z": 1.55
+      },
+      "note": "A cast in the round: 'centre' is the carrier's top centre, on which the scan's base slice (z < 0.04) is centred; 'size' is the scan's width x true height (length x height for a reclining figure); front faces 'facing_deg' (stage frame, from +x towards +y)."
+    },
+    {
+      "work": "classical-severan-lady",
+      "source": "data/classical.json",
+      "anchor": "classical-hall.gallery.bust.e3s",
+      "wall": "classical-hall.console",
+      "centre": [
+        2.85,
+        17.7,
+        1.55
+      ],
+      "height": 1.55,
+      "size": [
+        0.489,
+        0.81
+      ],
+      "facing_deg": 180,
+      "support": "cast",
+      "frame": "none",
+      "care": "stone-and-bronze",
+      "scan": {
+        "source": "assets/classical/SOURCES.json",
+        "id": "severan-lady",
+        "mesh": "assets/classical/severan-lady.glb",
+        "depth": 0.336,
+        "base": [
+          0.23,
+          0.23
+        ]
+      },
+      "carrier": {
+        "kind": "console",
+        "top": [
+          0.36,
+          0.3
+        ],
+        "z": 1.55
+      },
+      "note": "A cast in the round: 'centre' is the carrier's top centre, on which the scan's base slice (z < 0.04) is centred; 'size' is the scan's width x true height (length x height for a reclining figure); front faces 'facing_deg' (stage frame, from +x towards +y)."
+    },
+    {
+      "work": "classical-septimius-severus",
+      "source": "data/classical.json",
+      "anchor": "classical-hall.gallery.bust.e3n",
+      "wall": "classical-hall.console",
+      "centre": [
+        2.845,
+        14.5,
+        1.55
+      ],
+      "height": 1.55,
+      "size": [
+        0.546,
+        0.85
+      ],
+      "facing_deg": 180,
+      "support": "cast",
+      "frame": "none",
+      "care": "stone-and-bronze",
+      "scan": {
+        "source": "assets/classical/SOURCES.json",
+        "id": "septimius-severus",
+        "mesh": "assets/classical/septimius-severus.glb",
+        "depth": 0.396,
+        "base": [
+          0.25,
+          0.25
+        ]
+      },
+      "carrier": {
+        "kind": "console",
+        "top": [
+          0.36,
+          0.31
+        ],
+        "z": 1.55
+      },
+      "note": "A cast in the round: 'centre' is the carrier's top centre, on which the scan's base slice (z < 0.04) is centred; 'size' is the scan's width x true height (length x height for a reclining figure); front faces 'facing_deg' (stage frame, from +x towards +y)."
+    },
+    {
+      "work": "classical-oxford-bust",
+      "source": "data/classical.json",
+      "anchor": "classical-hall.gallery.bust.e4s",
+      "wall": "classical-hall.console",
+      "centre": [
+        2.85,
+        11.7,
+        1.55
+      ],
+      "height": 1.55,
+      "size": [
+        0.573,
+        0.8
+      ],
+      "facing_deg": 180,
+      "support": "cast",
+      "frame": "none",
+      "care": "stone-and-bronze",
+      "scan": {
+        "source": "assets/classical/SOURCES.json",
+        "id": "oxford-bust",
+        "mesh": "assets/classical/oxford-bust.glb",
+        "depth": 0.314,
+        "base": [
+          0.22,
+          0.22
+        ]
+      },
+      "carrier": {
+        "kind": "console",
+        "top": [
+          0.36,
+          0.3
+        ],
+        "z": 1.55
+      },
+      "note": "A cast in the round: 'centre' is the carrier's top centre, on which the scan's base slice (z < 0.04) is centred; 'size' is the scan's width x true height (length x height for a reclining figure); front faces 'facing_deg' (stage frame, from +x towards +y)."
+    },
+    {
+      "work": "classical-philip-the-arab",
+      "source": "data/classical.json",
+      "anchor": "classical-hall.gallery.bust.e4n",
+      "wall": "classical-hall.console",
+      "centre": [
+        2.85,
+        8.5,
+        1.55
+      ],
+      "height": 1.55,
+      "size": [
+        0.557,
+        0.46
+      ],
+      "facing_deg": 180,
+      "support": "cast",
+      "frame": "none",
+      "care": "stone-and-bronze",
+      "scan": {
+        "source": "assets/classical/SOURCES.json",
+        "id": "philip-the-arab",
+        "mesh": "assets/classical/philip-the-arab.glb",
+        "depth": 0.31,
+        "base": [
+          0.52,
+          0.23
+        ]
+      },
+      "carrier": {
+        "kind": "console",
+        "top": [
+          0.58,
+          0.3
+        ],
+        "z": 1.55
+      },
+      "note": "A cast in the round: 'centre' is the carrier's top centre, on which the scan's base slice (z < 0.04) is centred; 'size' is the scan's width x true height (length x height for a reclining figure); front faces 'facing_deg' (stage frame, from +x towards +y)."
+    },
+    {
+      "work": "classical-euripides",
+      "source": "data/classical.json",
+      "anchor": "classical-hall.gallery.bust.w1s",
+      "wall": "classical-hall.console",
+      "centre": [
+        -2.85,
+        29.7,
+        1.55
+      ],
+      "height": 1.55,
+      "size": [
+        0.303,
+        0.56
+      ],
+      "facing_deg": 0,
+      "support": "cast",
+      "frame": "none",
+      "care": "stone-and-bronze",
+      "scan": {
+        "source": "assets/classical/SOURCES.json",
+        "id": "euripides",
+        "mesh": "assets/classical/euripides.glb",
+        "depth": 0.301,
+        "base": [
+          0.22,
+          0.22
+        ]
+      },
+      "carrier": {
+        "kind": "console",
+        "top": [
+          0.36,
+          0.3
+        ],
+        "z": 1.55
+      },
+      "note": "A cast in the round: 'centre' is the carrier's top centre, on which the scan's base slice (z < 0.04) is centred; 'size' is the scan's width x true height (length x height for a reclining figure); front faces 'facing_deg' (stage frame, from +x towards +y)."
+    },
+    {
+      "work": "classical-plato",
+      "source": "data/classical.json",
+      "anchor": "classical-hall.gallery.bust.w1n",
+      "wall": "classical-hall.console",
+      "centre": [
+        -2.85,
+        26.5,
+        1.55
+      ],
+      "height": 1.55,
+      "size": [
+        0.247,
+        0.49
+      ],
+      "facing_deg": 0,
+      "support": "cast",
+      "frame": "none",
+      "care": "stone-and-bronze",
+      "scan": {
+        "source": "assets/classical/SOURCES.json",
+        "id": "plato",
+        "mesh": "assets/classical/plato.glb",
+        "depth": 0.288,
+        "base": [
+          0.22,
+          0.22
+        ]
+      },
+      "carrier": {
+        "kind": "console",
+        "top": [
+          0.36,
+          0.3
+        ],
+        "z": 1.55
+      },
+      "note": "A cast in the round: 'centre' is the carrier's top centre, on which the scan's base slice (z < 0.04) is centred; 'size' is the scan's width x true height (length x height for a reclining figure); front faces 'facing_deg' (stage frame, from +x towards +y)."
+    },
+    {
+      "work": "classical-kimon",
+      "source": "data/classical.json",
+      "anchor": "classical-hall.gallery.bust.w2s",
+      "wall": "classical-hall.console",
+      "centre": [
+        -2.84,
+        23.7,
+        1.55
+      ],
+      "height": 1.55,
+      "size": [
+        0.303,
+        0.66
+      ],
+      "facing_deg": 0,
+      "support": "cast",
+      "frame": "none",
+      "care": "stone-and-bronze",
+      "scan": {
+        "source": "assets/classical/SOURCES.json",
+        "id": "kimon",
+        "mesh": "assets/classical/kimon.glb",
+        "depth": 0.334,
+        "base": [
+          0.3,
+          0.26
+        ]
+      },
+      "carrier": {
+        "kind": "console",
+        "top": [
+          0.36,
+          0.32
+        ],
+        "z": 1.55
+      },
+      "note": "A cast in the round: 'centre' is the carrier's top centre, on which the scan's base slice (z < 0.04) is centred; 'size' is the scan's width x true height (length x height for a reclining figure); front faces 'facing_deg' (stage frame, from +x towards +y)."
+    },
+    {
+      "work": "classical-homer-epimenides",
+      "source": "data/classical.json",
+      "anchor": "classical-hall.gallery.bust.w2n",
+      "wall": "classical-hall.console",
+      "centre": [
+        -2.85,
+        20.5,
+        1.55
+      ],
+      "height": 1.55,
+      "size": [
+        0.234,
+        0.49
+      ],
+      "facing_deg": 0,
+      "support": "cast",
+      "frame": "none",
+      "care": "stone-and-bronze",
+      "scan": {
+        "source": "assets/classical/SOURCES.json",
+        "id": "homer-epimenides",
+        "mesh": "assets/classical/homer-epimenides.glb",
+        "depth": 0.24,
+        "base": [
+          0.18,
+          0.18
+        ]
+      },
+      "carrier": {
+        "kind": "console",
+        "top": [
+          0.36,
+          0.3
+        ],
+        "z": 1.55
+      },
+      "note": "A cast in the round: 'centre' is the carrier's top centre, on which the scan's base slice (z < 0.04) is centred; 'size' is the scan's width x true height (length x height for a reclining figure); front faces 'facing_deg' (stage frame, from +x towards +y)."
+    },
+    {
+      "work": "classical-chrysippus",
+      "source": "data/classical.json",
+      "anchor": "classical-hall.gallery.bust.w3s",
+      "wall": "classical-hall.console",
+      "centre": [
+        -2.85,
+        17.7,
+        1.55
+      ],
+      "height": 1.55,
+      "size": [
+        0.267,
+        0.44
+      ],
+      "facing_deg": 0,
+      "support": "cast",
+      "frame": "none",
+      "care": "stone-and-bronze",
+      "scan": {
+        "source": "assets/classical/SOURCES.json",
+        "id": "chrysippus",
+        "mesh": "assets/classical/chrysippus.glb",
+        "depth": 0.261,
+        "base": [
+          0.18,
+          0.18
+        ]
+      },
+      "carrier": {
+        "kind": "console",
+        "top": [
+          0.36,
+          0.3
+        ],
+        "z": 1.55
+      },
+      "note": "A cast in the round: 'centre' is the carrier's top centre, on which the scan's base slice (z < 0.04) is centred; 'size' is the scan's width x true height (length x height for a reclining figure); front faces 'facing_deg' (stage frame, from +x towards +y)."
+    },
+    {
+      "work": "classical-pseudo-seneca",
+      "source": "data/classical.json",
+      "anchor": "classical-hall.gallery.bust.w3n",
+      "wall": "classical-hall.console",
+      "centre": [
+        -2.85,
+        14.5,
+        1.55
+      ],
+      "height": 1.55,
+      "size": [
+        0.252,
+        0.47
+      ],
+      "facing_deg": 0,
+      "support": "cast",
+      "frame": "none",
+      "care": "stone-and-bronze",
+      "scan": {
+        "source": "assets/classical/SOURCES.json",
+        "id": "pseudo-seneca",
+        "mesh": "assets/classical/pseudo-seneca.glb",
+        "depth": 0.273,
+        "base": [
+          0.19,
+          0.19
+        ],
+        "turn": [
+          [
+            -1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            -1
+          ],
+          [
+            0,
+            -1,
+            0
+          ]
+        ]
+      },
+      "carrier": {
+        "kind": "console",
+        "top": [
+          0.36,
+          0.3
+        ],
+        "z": 1.55
+      },
+      "note": "A cast in the round: 'centre' is the carrier's top centre, on which the scan's base slice (z < 0.04) is centred; 'size' is the scan's width x true height (length x height for a reclining figure); front faces 'facing_deg' (stage frame, from +x towards +y)."
+    },
+    {
+      "work": "classical-sciarra-amazon",
+      "source": "data/classical.json",
+      "anchor": "classical-hall.gallery.bust.w4s",
+      "wall": "classical-hall.console",
+      "centre": [
+        -2.85,
+        11.7,
+        1.55
+      ],
+      "height": 1.55,
+      "size": [
+        0.322,
+        0.61
+      ],
+      "facing_deg": 0,
+      "support": "cast",
+      "frame": "none",
+      "care": "stone-and-bronze",
+      "scan": {
+        "source": "assets/classical/SOURCES.json",
+        "id": "sciarra-amazon",
+        "mesh": "assets/classical/sciarra-amazon.glb",
+        "depth": 0.278,
+        "base": [
+          0.2,
+          0.2
+        ]
+      },
+      "carrier": {
+        "kind": "console",
+        "top": [
+          0.36,
+          0.3
+        ],
+        "z": 1.55
+      },
+      "note": "A cast in the round: 'centre' is the carrier's top centre, on which the scan's base slice (z < 0.04) is centred; 'size' is the scan's width x true height (length x height for a reclining figure); front faces 'facing_deg' (stage frame, from +x towards +y)."
+    },
+    {
+      "work": "classical-zeno-of-citium",
+      "source": "data/classical.json",
+      "anchor": "classical-hall.gallery.bust.w4n",
+      "wall": "classical-hall.console",
+      "centre": [
+        -2.85,
+        8.5,
+        1.55
+      ],
+      "height": 1.55,
+      "size": [
+        0.254,
+        0.47
+      ],
+      "facing_deg": 0,
+      "support": "cast",
+      "frame": "none",
+      "care": "stone-and-bronze",
+      "scan": {
+        "source": "assets/classical/SOURCES.json",
+        "id": "zeno-of-citium",
+        "mesh": "assets/classical/zeno-of-citium.glb",
+        "depth": 0.294,
+        "base": [
+          0.25,
+          0.21
+        ]
+      },
+      "carrier": {
+        "kind": "console",
+        "top": [
+          0.36,
+          0.3
+        ],
+        "z": 1.55
+      },
+      "note": "A cast in the round: 'centre' is the carrier's top centre, on which the scan's base slice (z < 0.04) is centred; 'size' is the scan's width x true height (length x height for a reclining figure); front faces 'facing_deg' (stage frame, from +x towards +y)."
+    },
+    {
+      "work": "classical-homer",
+      "source": "data/classical.json",
+      "anchor": "classical-hall.gallery.herm.w",
+      "wall": "classical-hall.herm",
+      "centre": [
+        -2.45,
+        30.83,
+        1.25
+      ],
+      "height": 1.25,
+      "size": [
+        0.307,
+        0.57
+      ],
+      "facing_deg": 270,
+      "support": "cast",
+      "frame": "none",
+      "care": "stone-and-bronze",
+      "scan": {
+        "source": "assets/classical/SOURCES.json",
+        "id": "homer",
+        "mesh": "assets/classical/homer.glb",
+        "depth": 0.292,
+        "base": [
+          0.18,
+          0.18
+        ]
+      },
+      "carrier": {
+        "kind": "herm",
+        "top": [
+          0.4,
+          0.4
+        ],
+        "z": 1.25
+      },
+      "note": "A cast in the round: 'centre' is the carrier's top centre, on which the scan's base slice (z < 0.04) is centred; 'size' is the scan's width x true height (length x height for a reclining figure); front faces 'facing_deg' (stage frame, from +x towards +y)."
+    },
+    {
+      "work": "classical-socrates",
+      "source": "data/classical.json",
+      "anchor": "classical-hall.gallery.herm.e",
+      "wall": "classical-hall.herm",
+      "centre": [
+        2.45,
+        30.83,
+        1.25
+      ],
+      "height": 1.25,
+      "size": [
+        0.31,
+        0.51
+      ],
+      "facing_deg": 270,
+      "support": "cast",
+      "frame": "none",
+      "care": "stone-and-bronze",
+      "scan": {
+        "source": "assets/classical/SOURCES.json",
+        "id": "socrates",
+        "mesh": "assets/classical/socrates.glb",
+        "depth": 0.284,
+        "base": [
+          0.3,
+          0.25
+        ]
+      },
+      "carrier": {
+        "kind": "herm",
+        "top": [
+          0.4,
+          0.4
+        ],
+        "z": 1.25
+      },
+      "note": "A cast in the round: 'centre' is the carrier's top centre, on which the scan's base slice (z < 0.04) is centred; 'size' is the scan's width x true height (length x height for a reclining figure); front faces 'facing_deg' (stage frame, from +x towards +y)."
+    },
+    {
+      "work": "classical-sleeping-ariadne",
+      "source": "data/classical.json",
+      "anchor": "classical-hall.gallery.plinth.2",
+      "wall": "classical-hall.plinth",
+      "centre": [
+        0.0,
+        22.1,
+        0.55
+      ],
+      "height": 0.55,
+      "size": [
+        1.95,
+        0.904
+      ],
+      "facing_deg": 0,
+      "support": "cast",
+      "frame": "none",
+      "care": "stone-and-bronze",
+      "scan": {
+        "source": "assets/classical/SOURCES.json",
+        "id": "sleeping-ariadne",
+        "mesh": "assets/classical/sleeping-ariadne.glb",
+        "depth": 0.784,
+        "base": [
+          1.82,
+          0.7
+        ]
+      },
+      "carrier": {
+        "kind": "plinth",
+        "top": [
+          2.3,
+          1.04
+        ],
+        "z": 0.55
+      },
+      "note": "A cast in the round: 'centre' is the carrier's top centre, on which the scan's base slice (z < 0.04) is centred; 'size' is the scan's width x true height (length x height for a reclining figure); front faces 'facing_deg' (stage frame, from +x towards +y)."
+    },
+    {
+      "work": "classical-dying-gaul",
+      "source": "data/classical.json",
+      "anchor": "classical-hall.gallery.plinth.3",
+      "wall": "classical-hall.plinth",
+      "centre": [
+        0.0,
+        16.1,
+        0.55
+      ],
+      "height": 0.55,
+      "size": [
+        1.918,
+        0.93
+      ],
+      "facing_deg": 180,
+      "support": "cast",
+      "frame": "none",
+      "care": "stone-and-bronze",
+      "scan": {
+        "source": "assets/classical/SOURCES.json",
+        "id": "dying-gaul",
+        "mesh": "assets/classical/dying-gaul.glb",
+        "depth": 0.954,
+        "base": [
+          1.92,
+          0.95
+        ]
+      },
+      "carrier": {
+        "kind": "plinth",
+        "top": [
+          2.3,
+          1.04
+        ],
+        "z": 0.55
+      },
+      "note": "A cast in the round: 'centre' is the carrier's top centre, on which the scan's base slice (z < 0.04) is centred; 'size' is the scan's width x true height (length x height for a reclining figure); front faces 'facing_deg' (stage frame, from +x towards +y)."
+    },
+    {
+      "work": "classical-apollo-belvedere",
+      "source": "data/classical.json",
+      "anchor": "classical-hall.tribune.niche.n",
+      "wall": "classical-hall.plinth",
+      "centre": [
+        0.0,
+        -6.96,
+        0.53
+      ],
+      "height": 0.53,
+      "size": [
+        1.419,
+        2.24
+      ],
+      "facing_deg": 90,
+      "support": "cast",
+      "frame": "none",
+      "care": "stone-and-bronze",
+      "scan": {
+        "source": "assets/classical/SOURCES.json",
+        "id": "apollo-belvedere",
+        "mesh": "assets/classical/apollo-belvedere.glb",
+        "depth": 0.978,
+        "base": [
+          0.81,
+          0.75
+        ]
+      },
+      "carrier": {
+        "kind": "niche-pedestal",
+        "top": [
+          0.87,
+          0.81
+        ],
+        "z": 0.53,
+        "axis_depth": 0.36
+      },
+      "note": "A cast in the round: 'centre' is the carrier's top centre, on which the scan's base slice (z < 0.04) is centred; 'size' is the scan's width x true height (length x height for a reclining figure); front faces 'facing_deg' (stage frame, from +x towards +y)."
+    },
+    {
+      "work": "classical-laocoon",
+      "source": "data/classical.json",
+      "anchor": "classical-hall.tribune.niche.ne",
+      "wall": "classical-hall.plinth",
+      "centre": [
+        5.807,
+        -3.352,
+        0.53
+      ],
+      "height": 0.53,
+      "size": [
+        1.548,
+        2.08
+      ],
+      "facing_deg": 150,
+      "support": "cast",
+      "frame": "none",
+      "care": "stone-and-bronze",
+      "scan": {
+        "source": "assets/classical/SOURCES.json",
+        "id": "laocoon",
+        "mesh": "assets/classical/laocoon.glb",
+        "depth": 0.918,
+        "base": [
+          1.36,
+          0.77
+        ]
+      },
+      "carrier": {
+        "kind": "niche-pedestal",
+        "top": [
+          1.42,
+          0.83
+        ],
+        "z": 0.53,
+        "axis_depth": 0.105
+      },
+      "note": "A cast in the round: 'centre' is the carrier's top centre, on which the scan's base slice (z < 0.04) is centred; 'size' is the scan's width x true height (length x height for a reclining figure); front faces 'facing_deg' (stage frame, from +x towards +y)."
+    },
+    {
+      "work": "classical-venus-de-milo",
+      "source": "data/classical.json",
+      "anchor": "classical-hall.tribune.niche.nw",
+      "wall": "classical-hall.plinth",
+      "centre": [
+        -6.043,
+        -3.489,
+        0.53
+      ],
+      "height": 0.53,
+      "size": [
+        0.674,
+        2.04
+      ],
+      "facing_deg": 30,
+      "support": "cast",
+      "frame": "none",
+      "care": "stone-and-bronze",
+      "scan": {
+        "source": "assets/classical/SOURCES.json",
+        "id": "venus-de-milo",
+        "mesh": "assets/classical/venus-de-milo.glb",
+        "depth": 0.615,
+        "base": [
+          0.58,
+          0.52
+        ]
+      },
+      "carrier": {
+        "kind": "niche-plinth",
+        "top": [
+          0.7,
+          0.58
+        ],
+        "z": 0.53,
+        "axis_depth": 0.378
+      },
+      "note": "A cast in the round: 'centre' is the carrier's top centre, on which the scan's base slice (z < 0.04) is centred; 'size' is the scan's width x true height (length x height for a reclining figure); front faces 'facing_deg' (stage frame, from +x towards +y)."
+    },
+    {
+      "work": "classical-barberini-faun",
+      "source": "data/classical.json",
+      "anchor": "classical-hall.tribune.niche.se",
+      "wall": "classical-hall.plinth",
+      "centre": [
+        5.798,
+        3.347,
+        0.53
+      ],
+      "height": 0.53,
+      "size": [
+        1.568,
+        2.15
+      ],
+      "facing_deg": 210,
+      "support": "cast",
+      "frame": "none",
+      "care": "stone-and-bronze",
+      "scan": {
+        "source": "assets/classical/SOURCES.json",
+        "id": "barberini-faun",
+        "mesh": "assets/classical/barberini-faun.glb",
+        "depth": 1.341,
+        "base": [
+          1.18,
+          1.0
+        ]
+      },
+      "carrier": {
+        "kind": "niche-pedestal",
+        "top": [
+          1.24,
+          1.06
+        ],
+        "z": 0.53,
+        "axis_depth": 0.094
+      },
+      "note": "A cast in the round: 'centre' is the carrier's top centre, on which the scan's base slice (z < 0.04) is centred; 'size' is the scan's width x true height (length x height for a reclining figure); front faces 'facing_deg' (stage frame, from +x towards +y)."
+    },
+    {
+      "work": "classical-belvedere-antinous",
+      "source": "data/classical.json",
+      "anchor": "classical-hall.tribune.niche.sw",
+      "wall": "classical-hall.plinth",
+      "centre": [
+        -6.029,
+        3.481,
+        0.51
+      ],
+      "height": 0.51,
+      "size": [
+        0.934,
+        2.335
+      ],
+      "facing_deg": 330,
+      "support": "cast",
+      "frame": "none",
+      "care": "stone-and-bronze",
+      "scan": {
+        "source": "assets/classical/SOURCES.json",
+        "id": "belvedere-antinous",
+        "mesh": "assets/classical/belvedere-antinous.glb",
+        "depth": 0.773,
+        "base": [
+          0.82,
+          0.74
+        ]
+      },
+      "carrier": {
+        "kind": "niche-pedestal",
+        "top": [
+          0.88,
+          0.8
+        ],
+        "z": 0.51,
+        "axis_depth": 0.362
+      },
+      "note": "A cast in the round: 'centre' is the carrier's top centre, on which the scan's base slice (z < 0.04) is centred; 'size' is the scan's width x true height (length x height for a reclining figure); front faces 'facing_deg' (stage frame, from +x towards +y)."
+    },
+    {
+      "work": "classical-head-of-a-gaul",
+      "source": "data/classical.json",
+      "anchor": "classical-hall.tribune.bust.n-a",
+      "wall": "classical-hall.console",
+      "centre": [
+        -1.664,
+        -6.211,
+        1.55
+      ],
+      "height": 1.55,
+      "size": [
+        0.21,
+        0.39
+      ],
+      "facing_deg": 75,
+      "support": "cast",
+      "frame": "none",
+      "care": "stone-and-bronze",
+      "scan": {
+        "source": "assets/classical/SOURCES.json",
+        "id": "head-of-a-gaul",
+        "mesh": "assets/classical/head-of-a-gaul.glb",
+        "depth": 0.244,
+        "base": [
+          0.19,
+          0.2
+        ]
+      },
+      "carrier": {
+        "kind": "console",
+        "top": [
+          0.36,
+          0.3
+        ],
+        "z": 1.55
+      },
+      "note": "A cast in the round: 'centre' is the carrier's top centre, on which the scan's base slice (z < 0.04) is centred; 'size' is the scan's width x true height (length x height for a reclining figure); front faces 'facing_deg' (stage frame, from +x towards +y)."
+    },
+    {
+      "work": "classical-athena-parthenos",
+      "source": "data/classical.json",
+      "anchor": "classical-hall.tribune.bust.ne-a",
+      "wall": "classical-hall.console",
+      "centre": [
+        4.511,
+        -4.511,
+        1.55
+      ],
+      "height": 1.55,
+      "size": [
+        0.647,
+        0.805
+      ],
+      "facing_deg": 135,
+      "support": "cast",
+      "frame": "none",
+      "care": "stone-and-bronze",
+      "scan": {
+        "source": "assets/classical/SOURCES.json",
+        "id": "athena-parthenos",
+        "mesh": "assets/classical/athena-parthenos.glb",
+        "depth": 0.555,
+        "base": [
+          0.33,
+          0.34
+        ],
+        "turn": [
+          [
+            0,
+            0,
+            -1
+          ],
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            1,
+            0,
+            0
+          ]
+        ]
+      },
+      "carrier": {
+        "kind": "console",
+        "top": [
+          0.39,
+          0.4
+        ],
+        "z": 1.55
+      },
+      "note": "A cast in the round: 'centre' is the carrier's top centre, on which the scan's base slice (z < 0.04) is centred; 'size' is the scan's width x true height (length x height for a reclining figure); front faces 'facing_deg' (stage frame, from +x towards +y)."
+    },
+    {
+      "work": "classical-apollo-giustiniani",
+      "source": "data/classical.json",
+      "anchor": "classical-hall.tribune.bust.ne-b",
+      "wall": "classical-hall.console",
+      "centre": [
+        6.206,
+        -1.663,
+        1.55
+      ],
+      "height": 1.55,
+      "size": [
+        0.348,
+        0.58
+      ],
+      "facing_deg": 165,
+      "support": "cast",
+      "frame": "none",
+      "care": "stone-and-bronze",
+      "scan": {
+        "source": "assets/classical/SOURCES.json",
+        "id": "apollo-giustiniani",
+        "mesh": "assets/classical/apollo-giustiniani.glb",
+        "depth": 0.519,
+        "base": [
+          0.25,
+          0.25
+        ]
+      },
+      "carrier": {
+        "kind": "console",
+        "top": [
+          0.36,
+          0.31
+        ],
+        "z": 1.55
+      },
+      "note": "A cast in the round: 'centre' is the carrier's top centre, on which the scan's base slice (z < 0.04) is centred; 'size' is the scan's width x true height (length x height for a reclining figure); front faces 'facing_deg' (stage frame, from +x towards +y)."
+    },
+    {
+      "work": "classical-alexander-helios",
+      "source": "data/classical.json",
+      "anchor": "classical-hall.tribune.bust.nw-a",
+      "wall": "classical-hall.console",
+      "centre": [
+        -6.211,
+        -1.664,
+        1.55
+      ],
+      "height": 1.55,
+      "size": [
+        0.376,
+        0.71
+      ],
+      "facing_deg": 15,
+      "support": "cast",
+      "frame": "none",
+      "care": "stone-and-bronze",
+      "scan": {
+        "source": "assets/classical/SOURCES.json",
+        "id": "alexander-helios",
+        "mesh": "assets/classical/alexander-helios.glb",
+        "depth": 0.372,
+        "base": [
+          0.22,
+          0.22
+        ],
+        "turn": [
+          [
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            -1,
+            0,
+            0
+          ]
+        ]
+      },
+      "carrier": {
+        "kind": "console",
+        "top": [
+          0.36,
+          0.3
+        ],
+        "z": 1.55
+      },
+      "note": "A cast in the round: 'centre' is the carrier's top centre, on which the scan's base slice (z < 0.04) is centred; 'size' is the scan's width x true height (length x height for a reclining figure); front faces 'facing_deg' (stage frame, from +x towards +y)."
+    },
+    {
+      "work": "classical-ptolemy-ii",
+      "source": "data/classical.json",
+      "anchor": "classical-hall.tribune.bust.nw-b",
+      "wall": "classical-hall.console",
+      "centre": [
+        -4.547,
+        -4.547,
+        1.55
+      ],
+      "height": 1.55,
+      "size": [
+        0.435,
+        0.7
+      ],
+      "facing_deg": 45,
+      "support": "cast",
+      "frame": "none",
+      "care": "stone-and-bronze",
+      "scan": {
+        "source": "assets/classical/SOURCES.json",
+        "id": "ptolemy-ii",
+        "mesh": "assets/classical/ptolemy-ii.glb",
+        "depth": 0.287,
+        "base": [
+          0.23,
+          0.23
+        ]
+      },
+      "carrier": {
+        "kind": "console",
+        "top": [
+          0.36,
+          0.3
+        ],
+        "z": 1.55
+      },
+      "note": "A cast in the round: 'centre' is the carrier's top centre, on which the scan's base slice (z < 0.04) is centred; 'size' is the scan's width x true height (length x height for a reclining figure); front faces 'facing_deg' (stage frame, from +x towards +y)."
+    },
+    {
+      "work": "classical-discobolus",
+      "source": "data/classical.json",
+      "anchor": "classical-hall.tribune.plinth.e",
+      "wall": "classical-hall.plinth",
+      "centre": [
+        5.1,
+        0.0,
+        0.5
+      ],
+      "height": 0.5,
+      "size": [
+        0.959,
+        1.55
+      ],
+      "facing_deg": 180,
+      "support": "cast",
+      "frame": "none",
+      "care": "stone-and-bronze",
+      "scan": {
+        "source": "assets/classical/SOURCES.json",
+        "id": "discobolus",
+        "mesh": "assets/classical/discobolus.glb",
+        "depth": 0.467,
+        "base": [
+          0.7,
+          0.41
+        ]
+      },
+      "carrier": {
+        "kind": "plinth",
+        "top": [
+          0.9,
+          0.9
+        ],
+        "z": 0.5
+      },
+      "note": "A cast in the round: 'centre' is the carrier's top centre, on which the scan's base slice (z < 0.04) is centred; 'size' is the scan's width x true height (length x height for a reclining figure); front faces 'facing_deg' (stage frame, from +x towards +y)."
+    },
+    {
+      "work": "classical-artemision-bronze",
+      "source": "data/classical.json",
+      "anchor": "classical-hall.tribune.plinth.w",
+      "wall": "classical-hall.plinth",
+      "centre": [
+        -5.1,
+        0.0,
+        0.5
+      ],
+      "height": 0.5,
+      "size": [
+        2.233,
+        2.09
+      ],
+      "facing_deg": 0,
+      "support": "cast",
+      "frame": "none",
+      "care": "stone-and-bronze",
+      "scan": {
+        "source": "assets/classical/SOURCES.json",
+        "id": "artemision-bronze",
+        "mesh": "assets/classical/artemision-bronze.glb",
+        "depth": 0.523,
+        "base": [
+          1.09,
+          0.28
+        ]
+      },
+      "carrier": {
+        "kind": "plinth",
+        "top": [
+          1.15,
+          0.9
+        ],
+        "z": 0.5
+      },
+      "note": "A cast in the round: 'centre' is the carrier's top centre, on which the scan's base slice (z < 0.04) is centred; 'size' is the scan's width x true height (length x height for a reclining figure); front faces 'facing_deg' (stage frame, from +x towards +y)."
+    },
+    {
+      "work": "classical-belvedere-torso",
+      "source": "data/classical.json",
+      "anchor": "classical-hall.tribune.centre",
+      "wall": "classical-hall.pedestal",
+      "centre": [
+        0.0,
+        0.0,
+        0.3
+      ],
+      "height": 0.3,
+      "size": [
+        1.047,
+        1.59
+      ],
+      "facing_deg": 90,
+      "support": "cast",
+      "frame": "none",
+      "care": "stone-and-bronze",
+      "scan": {
+        "source": "assets/classical/SOURCES.json",
+        "id": "belvedere-torso",
+        "mesh": "assets/classical/belvedere-torso.glb",
+        "depth": 1.166,
+        "base": [
+          0.87,
+          0.51
+        ]
+      },
+      "carrier": {
+        "kind": "pedestal",
+        "top": [
+          2.2,
+          2.2
+        ],
+        "z": 0.3
+      },
+      "note": "A cast in the round: 'centre' is the carrier's top centre, on which the scan's base slice (z < 0.04) is centred; 'size' is the scan's width x true height (length x height for a reclining figure); front faces 'facing_deg' (stage frame, from +x towards +y)."
+    }
+  ]
+}

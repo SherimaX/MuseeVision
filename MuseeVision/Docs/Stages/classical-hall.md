@@ -1,881 +1,553 @@
-# The Classical Hall · stage specification
+# The Classical Hall · design sheet
 
-The stage `classical-hall` is the Classical Hall at level −1 below the Rotunda: a barrel-vaulted sculpture gallery after
-the Vatican's Braccio Nuovo, and beyond a screen of two columns a round domed tribune after the Sala delle Muse and the
-Sala Rotonda. It holds 41 plaster casts from the Royal Cast Collection (SMK, Copenhagen). There is no daylight: the
-light comes from laylights in the vault's crowns and the dome's eye, and from coves concealed on the cornices. The
-visitor reaches the hall only by the Rotunda's spiral stair. The stair is the Rotunda's; this stage receives its well.
-
-This page is the design sheet for the Room Builder, written for the first pass on Sunday 27 September 2026 (D-016). It
-reproduces the hall as built (D-001), taking its numbers from the frozen code (section 11), and puts them through the new
-systems. No number here may be changed by hand to make the room look right. When a number is wrong, the fix goes to the
-system that owns it.
-
-**Module and names.** The module is `MuseeClassicalHall` in `Source/Stages/Rooms/ClassicalHall`. It has the class
-`UClassicalHallRoom : USiteRoom`, the public header `Public/ClassicalHallRoom.h`, and the plan numbers in
-`Private/ClassicalHallPlan.h`. The stage key is `classical-hall`.
-
-**Conventions used on this page.**
-- **Units and axes.** Metres, in the stage's own frame: x east, y south, z up, true north.
-- **Angles.** A plan angle φ is measured from east (+x) towards south (+y), as in the old code. So φ 90° is south
-  (towards the gallery) and φ 270° is north. A compass bearing is φ + 90°.
-- **Profiles.** A profile is a list of points (A, B).
-  - A runs out from the named face and B runs up. It is traced with the solid on the left.
-  - "round to P, convex" is a quarter circle from the previous point to P that bulges outwards; "concave" bulges
-    inwards.
-  - "cyma to P, convex first" is two quarter rounds that meet at the chord's midpoint: a cyma reversa. "Concave first"
-    gives a cyma recta.
-- **Material keys.** A key is `substance.working.history`. The working is the leaf of the Matter working record
-  (`stone.honed` becomes `honed`, `cast.plaster` becomes `cast`). The history is a regime, defined in section 3.8.
-
----
+- **Stage key** `classical-hall` (module `MuseeClassicalHall`, `UClassicalHallRoom : USiteRoom`). Display name "The
+  Classical Hall". Era: Classical. Level −1 under the Rotunda: a barrel-vaulted sculpture gallery after the Vatican's
+  Braccio Nuovo, and through a screen of two columns a round domed tribune after the Sala delle Muse. It holds 41
+  plaster casts from SMK's Royal Cast Collection. No daylight. The only way in is the Rotunda's spiral stair, whose
+  well this stage **receives**.
+- **Sources:** D-001…D-019 (D-012, D-017, D-018 binding here); Palette.json and Story.md §5 and "The Classical Hall";
+  the drafter's spec `r-specs/…/Stages/classical-hall.md` (verified, corrections in §11); the finished `rotunda.md`
+  (§2, the stair port and served well); the as-built code in `windows/` (§11). Schedules:
+  `Data/Stages/classical-hall/{Finishes,Lighting,Hang}.json` (no Planting, no Mechanisms).
+- **Units** metres. **Frame:** origin O at the tribune's centre on its finished floor (the axis of the centrepiece,
+  under the eye); x east, y south, z up, true north. **φ** is the plan angle from +x towards +y (east 0°, south 90°
+  towards the gallery, north 270°); a compass bearing is φ + 90°. **Old numbers convert** as x = x_old,
+  y = y_old + 39.30, z = z_old + 6.00.
 
 ## 1. Identity and placement
 
-**Origin.** The origin O is the centre of the tribune, on its finished floor. It is the axis of the centrepiece and lies
-under the dome's eye.
+| | |
+|---|---|
+| Origin in the museum plan | (0.000, −39.300, −6.000); yaw 0°. museum = local + (0, −39.30, −6.00). Site derives it from the mating `rotunda.stair ↔ classical-hall.stair` (§2). |
+| Level | −1. Finished floor z 0.00 everywhere (museum −6.00), flush with the joint's threshold (the as-built 1 cm step is retired). |
+| Footprint kind | Building, below grade. |
+| Vertical extent | z −0.40 (slab underside) to 5.45 (roof top = museum −0.55, where the stages above begin). Highest inner surface: the laylight glass, 5.38. |
 
-**In the museum plan.** O stands at plan (x 0.00, y −39.30) from the Rotunda's centre, and its floor is at z −6.00
-below the Rotunda's finished floor. This is level −1.
-- Site derives this position; the room never states it. Mate solves the translation from the mating
-  `rotunda.stair ↔ classical-hall.stair`, which gives (0.00, −39.30, −6.00).
-- **Converting old numbers.** x = x_old, y = y_old + 39.30, z = h_old = z_old + 6.00. Here h_old is the height above the
-  hall's floor.
+**Footprint polygon** (clockwise on the north-up plan, from the south-east corner; a prism z −0.40 … 5.45):
+(4.200, 31.400) → (2.100, 31.400) → (2.100, 31.996) → arc r 7.600 about W = (0, 39.300), through (0.000, 31.700),
+bulging north into the hall → (−2.100, 31.996) → (−2.100, 31.400) → (−4.200, 31.400) → (−4.200, 6.691) → arc r 7.900
+about O the long way by the north, φ 122.12° → 417.88°, through (−6.842, 3.950) (−7.900, 0.000) (−6.842, −3.950)
+(−3.950, −6.842) (0.000, −7.900) (3.950, −6.842) (6.842, −3.950) (7.900, 0.000) (6.842, 3.950) → (4.200, 6.691) →
+back to (4.200, 31.400). Build the arcs at 1.5° stations (240 round).
 
-**Finished levels.**
-- The floor is at z 0.00 everywhere, and meets the joint's threshold flush. The as-built 1 cm porphyry step at the port
-  is retired.
-- The underside of the structural slab is at z −0.40.
-- The top of the roof is at z +5.45. This is museum −0.55, where the stages above begin.
-- The highest inner surfaces are the laylight diffusers, at z 5.38.
+**Site must compare volumes, not plans:** the footprint lies under the Rotunda's drum and north passage (y 31.40 to
+≈ 28.1) and under Chenghuai (its pond's west lobe over the tribune, bed at museum −0.46, 0.09 above this roof).
 
-**Footprint** (kind Building). It is a prism from z −0.40 to z 5.45. Its plan is closed, running clockwise seen from
-above (north up), starting at the south-east corner:
+| Enclosure | Kind | Bounded by |
+|---|---|---|
+| `classical-hall.interior` | Enclosed | One sealed shell: the passage, the gallery, the throat under the lintel, and the tribune (ambulatory, ring, dome, eye). ≈ 1,350 m³ (gallery ≈ 680, throat ≈ 23, tribune ≈ 645). Its only opening is Port `classical-hall.stair`. Housings: the four lantern wells and the eye well (§3.3), each holding a laylight. No Glazed, Open, Court or Outdoors. |
 
-1. (4.20, 31.40), then west along the shell's south face to (2.10, 31.40).
-2. South along the east side of the sleeve to (2.10, 31.9959), which lies on the port cylinder.
-3. Along the port cylinder (radius 7.60 about W = (0.00, 39.30)) through (0.00, 31.70) to (−2.10, 31.9959).
-4. North to (−2.10, 31.40), then west to (−4.20, 31.40).
-5. North along the gallery box's west face to (−4.20, 6.6910).
-6. Along the tribune drum (radius 7.90 about O), the long way round by the north, from φ 122.12° through 180° and 270°
-   to 360° + 57.88°, arriving at (4.20, 6.6910).
-7. South along the east face back to (4.20, 31.40).
-
-**Site.NoOverlap must compare volumes.** This footprint lies in plan under the Rotunda's drum and north passage (y
-31.40 to about 28.1) and under Chenghuai (the tribune lies under the west lobe of its pond). Site.NoOverlap must
-therefore compare volumes, each a plan polygon with a z range, and not plan polygons (see Risks).
-
-**Enclosures.** There is one enclosure, `classical-hall.interior`, of kind Enclosed.
-- It is a single sealed shell: the passage, the gallery, the throat under the lintel, and the tribune with its
-  ambulatory, ring, dome and eye.
-- It opens only at its one Port opening (section 2).
-- The five laylight wells are Housing openings. Each is a pocket in the vault that holds a luminaire; the shell closes
-  above them.
-- There are no Court or Outdoors enclosures, and no Glazed or Open openings.
-
-**Plan in words** (local frame).
-- **The passage.** It runs from the port face (the cylinder r 7.60 about W, crossing the axis at y 31.70) to the
-  gallery's south wall at y 31.10.
-- **The gallery.** Its inner faces are x = ±3.00. It is 24.00 m long, from the south wall at y 31.10 to the screen line
-  at y 7.10, in four bays of 6.00 m.
-  - The bay centres are at y 28.10, 22.10, 16.10 and 10.10.
-  - The column pairs stand on the bay lines y 25.10, 19.10 and 13.10.
-- **The throat.** North of the screen, the gallery's side walls continue as jambs under a lintel (soffit z 3.075) to
-  where they meet the tribune wall at y 5.8788.
-- **The tribune.** Its outer wall is the cylinder r 6.60 about O.
-  - A ring of twelve columns stands on r 3.40.
-  - The ambulatory lies between r 3.64 and r 6.60.
-  - The eye has radius 1.20.
-
-```
-   N (−y)
-        ___________
-      /   tribune   \          O = (0,0): tribune centre, floor z 0
-     |   ( ring 3.4 ) |        outer wall r 6.60, shell r 7.90
-      \_____  _____ /
-            ||  throat, lintel soffit 3.075, y 5.879 … 7.10
-         screen y 7.10 (two columns x ±1.10)
-          | bay 4 |  y 7.10 … 13.10
-          | bay 3 |  y 13.10 … 19.10      gallery x ±3.00, shell x ±4.20
-          | bay 2 |  y 19.10 … 25.10
-          | bay 1 |  y 25.10 … 31.10
-          |_passage_|  south wall face y 31.10 → port face y 31.70 (r 7.60 about W)
-            ( well )   W = (0, 39.30): the Rotunda's stair shaft, served by the Rotunda
-   S (+y)
-```
-
----
+**Plan.** Passage: from the port face (the cylinder r 7.60 about W, y 31.70 on the axis) to the gallery's south wall,
+y 31.10. Gallery: inner faces x = ±3.00, 24.00 long from y 31.10 to the screen line y 7.10, four bays of 6.00 (bay
+centres y 28.10, 22.10, 16.10, 10.10; column pairs on the bay lines y 25.10, 19.10, 13.10). Throat: the gallery's side
+walls continue north of the screen under a lintel (soffit 3.075) to the tribune wall at y 5.8788. Tribune: outer wall
+r 6.60, a ring of 12 columns on r 3.40, ambulatory r 3.64–6.60, eye r 1.20. Shell faces: south y 31.40, sides x ±4.20,
+tribune r 7.90.
 
 ## 2. Ports
 
-There is one port. By D-012 the stage is a leaf: its only mating is with the Rotunda's served stairwell. The Rotunda's
-ports are west, north, south, east and the stair; the Classical Hall hangs from the stair alone.
+The frame is on the port face at the threshold (z 0), on the opening's centreline, facing out, up +z.
 
-| Field | Value |
-|---|---|
-| Key | `classical-hall.stair` |
-| Kind | Stairwell. This stage is the **receiving** side of the well. |
-| Class | `stairwell.spiral.3600` (Data/Site/PortClasses.json; see below) |
-| Frame origin | (0.00, 31.70, 0.00): on the port face, on the opening's centreline, at threshold level |
-| Facing | +y, south, out of the stage towards the well |
-| Face shape | Cylindrical, radius 7.60 about the well axis W = (0.00, 39.30), convex towards the hall |
-| Wall depth | 0.60 on the centreline (the port face to the gallery's south wall face at y 31.10); 0.8162 at the clear jambs x ±1.80 (the face there is at y 31.9162) |
-| Well | A vertical cylinder of radius 7.60 about W, from z −0.40 to z +6.00 (museum −6.40 to 0.00). **Receiving:** this stage reserves the prism as a void and builds nothing inside it. The Rotunda serves it: the shaft masonry r 6.48–7.60, the drum's pocket, the spiral stair of 40 risers × 0.150, the landing at z 0.00 and the tympanum over the portal. |
-| Mates | `rotunda.stair` (the Rotunda serves the well). The passage length is 0 m: the two faces touch on the cylinder r 7.60. |
+| Key | Kind | Class | Local frame (position; facing) | Face; wall depth | Mates with | Wells |
+|---|---|---|---|---|---|---|
+| `classical-hall.stair` | stair (receiving well) | `stairwell.spiral.3600x4400.arched` | (0.000, 31.700, 0.000); +y (south, towards the well) | cylindrical R 7.60 about W (0, 39.30), convex towards the hall; 0.600 on the axis (y 31.10 → 31.70), 0.816 at the clear jambs x ±1.80 (face y 31.916) | `rotunda.stair` (the Rotunda's frame (0, −7.60, −6.00), facing −y). Passage 0.00: the faces touch on the cylinder. | **receiving**: the cylinder r 7.60 about W, z −0.40 … 6.00 (museum −6.40 … 0.00) |
 
-**What the class must hold** (Site's record, taken from the as-built evidence):
-- **Clear opening.** 3.60 wide by 4.40 high. The head is a half circle of radius 1.80 springing at z 2.60, with its crown
-  at z 4.40. The jambs are the planes x = ±1.80, and the intrados is the half-cylinder R 1.80 about the line
-  (x 0, z 2.60) running along y. These are `MuseePlan::SunClock::PortWidth/PortHeight/PortSpring`.
-- **Closure.** An open portal, with no leaves.
-- **Collar envelope.** The as-built sleeve: 4.20 wide (x ±2.10), with a round head of R 2.10 springing at z 2.60 (crown
-  z 4.70), from the slab underside at z −0.40.
-- **Rough-opening allowance.** Site's lining thickness, written *a* below. The room never invents it.
+- **The one port.** By D-012 the hall is a leaf: its only mating is the Rotunda's served stairwell. The as-built hall
+  has no other opening (checked: `ClassicalHallGeometry.cpp` builds one door, the shell is closed elsewhere).
+- `stairwell.spiral.3600x4400.arched` (the Rotunda's name; the draft wrote `stairwell.spiral.3600`): clear 3.600, jambs
+  the planes x = ±1.800; semicircular head r 1.800 about the line (x 0, z 2.600) running along y, springing 2.600 above
+  the threshold, crown 4.400 (`MuseePlan.h:143-157`; the hall's side `MuseePlan.h:480-481`). An open portal, no leaves.
+- **Museum check.** Port frame: (0, 31.70 − 39.30, 0 − 6.00) = **(0.000, −7.600, −6.000)** = the Rotunda's `rotunda.stair`
+  frame (stage = museum there); facings +y and −y are opposite. The well's axis W maps to (0, 0): the Rotunda's axis.
+  The receiving cylinder r 7.60, museum z −6.40 … 0.00, is exactly the Rotunda's well prism. As built: tribune centre
+  `TribuneCentreY` −39.3 and `FloorZ` −6.0 (`MuseePlan.h:503, 474`), shaft outer r 7.6 (`MuseePlan.h:141, 480`).
+- **Rough opening** (all this stage builds at the port): the clear opening grown by Site's lining allowance *a*
+  (0.050 proposed, as the Rotunda): jambs x ±1.850, head r 1.850 about (x 0, z 2.600), sill z −0.050, straight through
+  from the south wall's face y 31.10 to the port cylinder; faces `classical-hall.port.rough-opening`. The **sleeve**
+  (collar envelope, as built) carries it: x ±2.10, round head r 2.10 springing 2.60 (crown 4.70), from z −0.40, from the
+  shell's south face y 31.40 to the cylinder; `classical-hall.shell`. Nothing past the port cylinder.
+- **Site's joint** builds the travertine threshold through the depth, the brushed-bronze strip on the mating arc
+  (r 7.60 about W), the linings and the surround on the gallery's flat south face (y 31.10). It replaces the as-built
+  carved architrave, keystone, plinth blocks and porphyry sill (the one doorway, Story §4).
+- **The well (received).** The Rotunda serves it: shaft masonry r 6.48–7.60, pocket, rams, stair (40 × 0.150),
+  landing (museum −6.00) and rosette, and the lintel and tympanum over its portal. This stage reserves the cylinder as a
+  void and builds nothing inside it; the sleeve and the footprint stop on r 7.60.
+- **Blind doors.** Mated tonight: open portal. On the stand alone (or with the Rotunda absent): a closed pair of cast
+  bronze leaves in the class opening on the port face, meeting rail on the axis, `classical-hall.stair.blind-doors`.
 
-**What this stage builds at the port** (the rough-opening rule).
-- It builds only the structural opening, which is the clear opening grown by *a*: jambs at x ±(1.80 + *a*), and a head of
-  R 1.80 + *a* about (x 0, z 2.60). The opening runs from the gallery's south wall face (y 31.10) through the sleeve to
-  the port face.
-- It builds nothing past the port cylinder.
-- Site's joint builds the rest:
-  - the travertine threshold through both wall depths;
-  - the brushed-bronze strip on the mating plane, which here is the arc r 7.60 about W across the threshold;
-  - the lining in front of both rough faces;
-  - the surrounds;
-  - the collar.
-- On this side the surround sits on the gallery's flat south face (y 31.10). It replaces the as-built carved marble
-  architrave, keystone, plinth blocks and porphyry sill, by the one-doorway rule of principle 2 (see Risks).
+### Anchors (the stage contract)
+One `Mount` per place for a work in the round (the brief's Hang rule; the Rotunda's casts use the same kind): origin
+at the **carrier's top centre**, x = the way the work faces (horizontal), z up. Hang.json names each with its carrier
+surface (`wall`) and `centre`. The five empty consoles are listed for completeness; no schedule names them.
 
----
+| Key | Kind | Frame: origin = carrier top centre (x, y, z); x = facing | Belongs to |
+|---|---|---|---|
+| `classical-hall.gallery.niche.e1` | Mount | (3.247, 28.100, 0.57); x (−1, 0, 0) (180°) | niche-pedestal: classical-augustus-prima-porta |
+| `classical-hall.gallery.niche.e2` | Mount | (3.315, 22.100, 0.57); x (−1, 0, 0) (180°) | niche-plinth: classical-capitoline-venus |
+| `classical-hall.gallery.niche.e3` | Mount | (3.250, 16.100, 0.57); x (−1, 0, 0) (180°) | niche-pedestal: classical-minerva-giustiniani |
+| `classical-hall.gallery.niche.e4` | Mount | (3.267, 10.100, 0.57); x (−1, 0, 0) (180°) | niche-pedestal: classical-sophocles |
+| `classical-hall.gallery.niche.w1` | Mount | (−3.226, 28.100, 0.57); x (1, 0, 0) (0°) | niche-pedestal: classical-doryphoros |
+| `classical-hall.gallery.niche.w2` | Mount | (−3.229, 22.100, 0.57); x (1, 0, 0) (0°) | niche-pedestal: classical-lansdowne-heracles |
+| `classical-hall.gallery.niche.w3` | Mount | (−3.315, 16.100, 0.57); x (1, 0, 0) (0°) | niche-plinth: classical-capitoline-antinous |
+| `classical-hall.gallery.niche.w4` | Mount | (−3.315, 10.100, 0.57); x (1, 0, 0) (0°) | niche-plinth: classical-farnese-diadoumenos |
+| `classical-hall.gallery.bust.e1s` | Mount | (2.850, 29.700, 1.55); x (−1, 0, 0) (180°) | console: classical-julia-titi |
+| `classical-hall.gallery.bust.e1n` | Mount | (2.850, 26.500, 1.55); x (−1, 0, 0) (180°) | console: classical-julius-caesar |
+| `classical-hall.gallery.bust.e2s` | Mount | (2.850, 23.700, 1.55); x (−1, 0, 0) (180°) | console: classical-antoninus-pius |
+| `classical-hall.gallery.bust.e2n` | Mount | (2.850, 20.500, 1.55); x (−1, 0, 0) (180°) | console: classical-young-marcus-aurelius |
+| `classical-hall.gallery.bust.e3s` | Mount | (2.850, 17.700, 1.55); x (−1, 0, 0) (180°) | console: classical-severan-lady |
+| `classical-hall.gallery.bust.e3n` | Mount | (2.845, 14.500, 1.55); x (−1, 0, 0) (180°) | console: classical-septimius-severus |
+| `classical-hall.gallery.bust.e4s` | Mount | (2.850, 11.700, 1.55); x (−1, 0, 0) (180°) | console: classical-oxford-bust |
+| `classical-hall.gallery.bust.e4n` | Mount | (2.850, 8.500, 1.55); x (−1, 0, 0) (180°) | console: classical-philip-the-arab |
+| `classical-hall.gallery.bust.w1s` | Mount | (−2.850, 29.700, 1.55); x (1, 0, 0) (0°) | console: classical-euripides |
+| `classical-hall.gallery.bust.w1n` | Mount | (−2.850, 26.500, 1.55); x (1, 0, 0) (0°) | console: classical-plato |
+| `classical-hall.gallery.bust.w2s` | Mount | (−2.840, 23.700, 1.55); x (1, 0, 0) (0°) | console: classical-kimon |
+| `classical-hall.gallery.bust.w2n` | Mount | (−2.850, 20.500, 1.55); x (1, 0, 0) (0°) | console: classical-homer-epimenides |
+| `classical-hall.gallery.bust.w3s` | Mount | (−2.850, 17.700, 1.55); x (1, 0, 0) (0°) | console: classical-chrysippus |
+| `classical-hall.gallery.bust.w3n` | Mount | (−2.850, 14.500, 1.55); x (1, 0, 0) (0°) | console: classical-pseudo-seneca |
+| `classical-hall.gallery.bust.w4s` | Mount | (−2.850, 11.700, 1.55); x (1, 0, 0) (0°) | console: classical-sciarra-amazon |
+| `classical-hall.gallery.bust.w4n` | Mount | (−2.850, 8.500, 1.55); x (1, 0, 0) (0°) | console: classical-zeno-of-citium |
+| `classical-hall.gallery.herm.w` | Mount | (−2.450, 30.830, 1.25); x (0, −1, 0) (270°) | herm: classical-homer |
+| `classical-hall.gallery.herm.e` | Mount | (2.450, 30.830, 1.25); x (0, −1, 0) (270°) | herm: classical-socrates |
+| `classical-hall.gallery.plinth.2` | Mount | (0.000, 22.100, 0.55); x (1, 0, 0) (0°) | plinth: classical-sleeping-ariadne |
+| `classical-hall.gallery.plinth.3` | Mount | (0.000, 16.100, 0.55); x (−1, 0, 0) (180°) | plinth: classical-dying-gaul |
+| `classical-hall.tribune.niche.n` | Mount | (0.000, −6.960, 0.53); x (0, 1, 0) (90°) | niche-pedestal: classical-apollo-belvedere |
+| `classical-hall.tribune.niche.ne` | Mount | (5.807, −3.352, 0.53); x (−0.866, 0.5, 0) (150°) | niche-pedestal: classical-laocoon |
+| `classical-hall.tribune.niche.nw` | Mount | (−6.043, −3.489, 0.53); x (0.866, 0.5, 0) (30°) | niche-plinth: classical-venus-de-milo |
+| `classical-hall.tribune.niche.se` | Mount | (5.798, 3.347, 0.53); x (−0.866, −0.5, 0) (210°) | niche-pedestal: classical-barberini-faun |
+| `classical-hall.tribune.niche.sw` | Mount | (−6.029, 3.481, 0.51); x (0.866, −0.5, 0) (330°) | niche-pedestal: classical-belvedere-antinous |
+| `classical-hall.tribune.bust.n-a` | Mount | (−1.664, −6.211, 1.55); x (0.2588, 0.9659, 0) (75°) | console: classical-head-of-a-gaul |
+| `classical-hall.tribune.bust.n-b` | Mount | (1.664, −6.211, 1.55); x towards O (105°) | empty console 0.36 × 0.30 (as built) |
+| `classical-hall.tribune.bust.ne-a` | Mount | (4.511, −4.511, 1.55); x (−0.7071, 0.7071, 0) (135°) | console: classical-athena-parthenos |
+| `classical-hall.tribune.bust.ne-b` | Mount | (6.206, −1.663, 1.55); x (−0.9659, 0.2588, 0) (165°) | console: classical-apollo-giustiniani |
+| `classical-hall.tribune.bust.nw-a` | Mount | (−6.211, −1.664, 1.55); x (0.9659, 0.2588, 0) (15°) | console: classical-alexander-helios |
+| `classical-hall.tribune.bust.nw-b` | Mount | (−4.547, −4.547, 1.55); x (0.7071, 0.7071, 0) (45°) | console: classical-ptolemy-ii |
+| `classical-hall.tribune.bust.se-a` | Mount | (6.211, 1.664, 1.55); x towards O (195°) | empty console 0.36 × 0.30 (as built) |
+| `classical-hall.tribune.bust.se-b` | Mount | (4.547, 4.547, 1.55); x towards O (225°) | empty console 0.36 × 0.30 (as built) |
+| `classical-hall.tribune.bust.sw-a` | Mount | (−4.547, 4.547, 1.55); x towards O (315°) | empty console 0.36 × 0.30 (as built) |
+| `classical-hall.tribune.bust.sw-b` | Mount | (−6.211, 1.664, 1.55); x towards O (345°) | empty console 0.36 × 0.30 (as built) |
+| `classical-hall.tribune.plinth.e` | Mount | (5.100, 0.000, 0.50); x (−1, 0, 0) (180°) | plinth: classical-discobolus |
+| `classical-hall.tribune.plinth.w` | Mount | (−5.100, 0.000, 0.50); x (1, 0, 0) (0°) | plinth: classical-artemision-bronze |
+| `classical-hall.tribune.centre` | Mount | (0.000, 0.000, 0.30); x (0, 1, 0) (90°) | pedestal: classical-belvedere-torso |
+
+No Body, Use, Wall, Bed, Water or Seat anchors (nothing moves, no paintings, no planting, no seats). Luminaires use
+`point`s (Lighting.json). No channels.
 
 ## 3. Pieces by trade
 
-Every piece is one solid of one substance (Form). The shells are closed and thick. The structural masonry behind the
-revetments (the wall cores, the vault shells, the slab, the roof and the sleeve) is `travertine.sawn.aged`. It is never
-seen, and it fills from each inner finish to the shell faces in section 1.
+**Build-ups.** Every piece is one closed solid of one substance. The structural masonry behind every finish (wall
+cores, vault shells, slab, roof, sleeve) is `classical-hall.shell`, hidden; it fills from each inner finish to the
+shell faces of §1. Crema Marfil is a **laid finish** (30 mm) over that core, as in the Rotunda. Pieces meet face to
+face: the profiles below keep the as-built 0.010 sink points (A −0.010), which Form trims to the face they meet.
+Profiles are (A out from the named face, B up), traced with the solid on the left; "round to P" is a quarter circle
+(convex bulges out, concave in); "cyma to P, convex first" is a cyma reversa of two quarter rounds meeting at the
+chord's midpoint ("concave first", a cyma recta). Station counts as built: round arches 48; the tribune 240 (1.5°).
 
-### 3.1 Walls, openings and reveals
+### 3.1 Walls, niches, lintel
+- **Gallery long walls** x = ±3.00, y 31.10 → 7.10, z 0 → the ledge 3.70; north of the screen (y 7.10 → 5.8788) they
+  are the throat's jambs, z 0 → the lintel soffit 3.075. 1.20 thick to the shell (x ±4.20).
+- **South wall** y = 31.10, x ±3.00, z 0 → the vault's end arc x = 3.8284 sin(s/3.8284), z = 1.3216 + 3.8284 cos(s/3.8284),
+  |s| ≤ 3.4473; pierced by the rough opening (§2); 0.30 to the shell face y 31.40.
+- **Tribune wall** the cylinder r 6.60 about O, z 0 → 3.70, 1.30 to the shell (r 7.90). Open to the throat between
+  φ 62.964° and 117.036° (where r 6.60 meets x = ±3.00 at y 5.8788); over the opening it exists only from 3.075 to 3.70.
+- **Every wall** splits at z 0.45: **dado** `classical-hall.wall.dado` below (slabs 1.20 long, one course), **field**
+  `classical-hall.wall.field` above (courses 1.20, blocks 1.90 ± 30 % half-bond, 3 mm joints: the Rotunda's coursing
+  record, not duplicated).
+- **Lintel** `classical-hall.lintel`: soffit plane z 3.075 over the throat, x ±3.00, from y 7.10 to the tribune wall;
+  its south face the plane y 7.10 from 3.075 up to the vault's end arc (carries the lunette panel, §3.4).
+- **Gallery niches (8)** on x = ±3.00 at the bay centres, E1…E4 and W1…W4 south to north: half-round R 0.75 centred on
+  the wall plane; sill 0.45; springing 2.19; head a quarter sphere R 0.75 about (wall plane, 2.19), crown 2.94.
+- **Tribune niches (5)** at φ 30° (SE), 150° (SW), 210° (NW), 270° (N), 330° (NE): mouth the plane tangent to r 6.60 on
+  the niche axis; half-round R 0.90 centred on the mouth plane at r 6.60; sill 0.45, springing 2.05, crown 2.95 (for
+  the Apollo Belvedere); a sliver reveal joins the cylinder to the mouth plane, 0.0617 deep at the mouth's edges
+  (surface `classical-hall.wall.field`).
+- Niche backs and heads `classical-hall.niche.interior`; each niche's floor slab at 0.45, 0.05 thick,
+  `classical-hall.niche.sill`.
 
-- **Gallery long walls.** The inner faces are the planes x = ±3.00.
-  - Between the south wall (y 31.10) and the screen (y 7.10) they rise from z 0 to the cornice ledge at z 3.70, where
-    the vault springs.
-  - North of the screen, from y 7.10 to y 5.8788, they are the throat's jambs and rise only to the lintel soffit at
-    z 3.075.
-  - They are split at z 0.45: below is the dado, in `rosso-antico.polished.aged`, as slabs 1.20 long in one course.
-    Above is the field, in `cream-marble.honed.aged` ashlar in courses of 1.20 and blocks of 1.90 ± 30 % in half bond,
-    with 3 mm joints. This is the Rotunda's coursing; use the Rotunda's Data/Form coursing record and don't duplicate
-    it.
-  - The walls are 1.20 thick to the shell (x ±4.20).
-- **The south wall.** Its inner face is the plane y = 31.10, from x −3.00 to +3.00 and from z 0 up to the vault's end
-  arc: x = 3.8284 sin(s/3.8284), z = 1.3216 + 3.8284 cos(s/3.8284), for |s| ≤ 3.4473.
-  - It is split into dado and field at z 0.45.
-  - It is pierced by the port's rough opening (section 2).
-  - The wall is 0.30 thick to the shell face at y 31.40. The sleeve (x ±2.10, round head R 2.10 springing at z 2.60)
-    then continues the masonry to the port face.
-- **The passage.** It runs from y 31.10 to the port face. Its jambs, soffit and floor are the rough faces. Site lines
-  them.
-- **The tribune wall.** It is the cylinder r 6.60 about O, from z 0 to z 3.70, split into dado and field at z 0.45.
-  - It is 1.30 thick to the shell (r 7.90).
-  - It opens to the throat between φ 62.964° and φ 117.036°, where the cylinder meets x = ±3.00 at y 5.8788. Over that
-    opening the wall exists only from the lintel soffit (z 3.075) to z 3.70.
-- **The lintel.**
-  - The soffit is the plane z 3.075 over the throat, from x −3.00 to +3.00, running from the screen line (y 7.10) to the
-    tribune wall.
-  - Its face towards the gallery is the plane y = 7.10, from z 3.075 up to the vault's end arc. It carries the lunette
-    panel (3.4).
-  - Both are in `cream-marble.honed.aged`.
-- **Gallery niches (8).** They lie on x = ±3.00 at the bay centres y 28.10, 22.10, 16.10 and 10.10. They are named E1…E4
-  and W1…W4 from south to north.
-  - Each is half-round in plan with R 0.75, its centre on the wall plane.
-  - The sill is at z 0.45. The half-cylinder rises from 0.45 to the springing at 2.19. The head is a quarter sphere of
-    R 0.75 centred at (the wall plane, z 2.19), with its crown at 2.94.
-  - The interior is `pompeian-red-stucco.trowelled.aged`. The sill slab (the niche's floor at z 0.45, 0.05 thick) is
-    `statuary-marble.honed.aged`.
-- **Tribune niches (5).** They sit at φ 30° (SE), 150° (SW), 210° (NW), 270° (N) and 330° (NE).
-  - The mouth is the plane tangent to r 6.60 at the niche's axis.
-  - Each is half-round with R 0.90, centred on the mouth plane at r 6.60. The sill is at 0.45, the springing at 2.05 and
-    the crown at 2.95.
-  - A thin reveal joins the cylinder to the mouth plane. It is deepest, 0.0617, at the mouth's edges.
-  - The materials are the same as in the gallery niches.
-  - The Apollo Belvedere (2.24 m) was the reason for this height.
+### 3.2 Floors (opus sectile, 30 mm on the slab, finish z 0.00, 1.5 mm joints; each figure laid in pieces within stock)
+The porphyry discs Ø 3.10 and Ø 3.00 exceed any block: Lay() cuts them in sectors.
+- **Gallery** (after the Pantheon's floor). White border `classical-hall.floor.white`: side strips x ±2.10…±3.00 the full
+  length; south strip y 30.70–31.10; north strip y 7.10–7.50; the throat y 5.8788–7.10 on to the tribune's rim.
+  **Carpet** x ±2.10, y 7.50–30.70: end panels `classical-hall.floor.verde` y 30.20–30.70 and 7.50–8.00; per bay a square
+  4.20 × 4.20 on the bay centre: verde frame 0.15, field `classical-hall.floor.giallo`, a white ring r 1.55–1.65 round a
+  porphyry disc r 1.55 `classical-hall.floor.porphyry`. **Between the bays** (y 24.20–26.00, 18.20–20.00, 12.20–14.00):
+  a verde frame 0.15 round three white cells (x −1.95…−0.65, −0.65…0.65, 0.65…1.95; 1.50 deep), each with a centred
+  lozenge `classical-hall.floor.rosso`, half-diagonals 0.55 in x and y.
+- **Tribune** (polar about O; sector boundaries at φ 15° + 30°k; 240 stations):
 
-### 3.2 Floors (opus sectile, polished; each figure laid in pieces within Matter's stock, 1.5 mm joints)
-
-All floor stones finish at z 0.00, 0.03 thick on the slab. The large porphyry discs (Ø 3.10 and Ø 3.00) are larger than
-any porphyry block, so Lay() cuts them into sectors within stock.
-
-**The gallery** (after the Pantheon's floor):
-- **The white border** (`statuary-marble.polished.worn`):
-  - the side strips x ±2.10…±3.00, the full length;
-  - the south strip, y 30.70–31.10;
-  - the north strip, y 7.10–7.50;
-  - the throat, from y 5.8788 to 7.10, running on to the tribune pattern's rim.
-- **The carpet** (x ±2.10, y 7.50–30.70):
-  - **The end panels.** They are verde (`verde-antico.polished.worn`), at y 30.20–30.70 and 7.50–8.00.
-  - **One square per bay.** Each is 4.20 × 4.20, centred on the bay centre (y 28.10, 22.10, 16.10 and 10.10). It has a
-    verde frame 0.15 wide and inside it a giallo field (`giallo-antico.polished.worn`). In the field is a white ring
-    (r 1.55–1.65 about the bay centre) around a porphyry disc of r 1.55 (`porphyry.polished.worn`).
-  - **Between the bays**, at the column pairs, are zones 1.80 long: y 24.20–26.00, 18.20–20.00 and 12.20–14.00.
-    - Each zone has a verde frame 0.15 wide around three white cells.
-    - The cells run x −1.95…−0.65, −0.65…0.65 and 0.65…1.95, and are 1.50 deep.
-    - Each cell holds a lozenge in `rosso-antico.polished.worn`, centred in it, with half-diagonals of 0.55 along both x
-      and y.
-
-**The tribune** (polar about O; the ring boundaries are at φ 15° + 30°k):
-
-| r from | r to | Figure | Stone |
+| r from | r to | Figure | Surface |
 |---|---|---|---|
 | 0 | 1.50 | disc under the pedestal | porphyry |
 | 1.50 | 1.65 | ring | giallo |
-| 1.65 | 2.90 | 12 sectors, each with a disc r 0.22 at r 2.275 on its mid-angle | white field, porphyry discs |
+| 1.65 | 2.90 | 12 sectors, each a white field with a disc r 0.22 at r 2.275 on its mid-angle | white; porphyry discs |
 | 2.90 | 3.05 | band | giallo |
 | 3.05 | 3.80 | band (the ring columns stand on it) | white |
 | 3.80 | 3.95 | band | verde |
-| 3.95 | 6.15 | 12 sectors, each a giallo field inside a white border 0.10, with a disc r 0.80 at r 5.05 on its mid-angle | the discs alternate: porphyry at φ 30°, 90°, 150°, 210°, 270° and 330°; verde at φ 0°, 60°, 120°, 180°, 240° and 300° |
+| 3.95 | 6.15 | 12 sectors, each a giallo field in a white border 0.10, a disc r 0.80 at r 5.05 on its mid-angle | discs porphyry at φ 30°, 90° … 330°; verde at 0°, 60° … 300° |
 | 6.15 | 6.30 | band | verde |
 | 6.30 | 6.60 | border to the wall | white |
 
-### 3.3 Vaults and dome
+### 3.3 Vaults, dome, laylights (lime plaster run in place on the shells)
+- **Gallery barrel** `classical-hall.vault.gallery`: segmental, R 3.8284 about the line (x 0, z 1.3216) along y 7.10 →
+  31.10; springs from the ledge (x ±3.00, z 3.70) at a half-angle of 51.592°; crown 5.15. s = arc length from the
+  crown (+ east); springing s ±3.4473. Plain springing bands |s| 3.00–3.4473; coffer field s ∈ [−3.00, 3.00] (x ±2.7023,
+  z 4.0335 at its edges): 10 rows of 0.60. Along y (south to north): plain 31.10–30.50; bay 1 coffers 30.50–25.70
+  (8 × 0.60); pair band 25.70–24.50; bay 2 24.50–19.70; pair band 19.70–18.50; bay 3 18.50–13.70; pair band 13.70–12.50;
+  bay 4 12.50–7.70; plain 7.70–7.10. Each bay 10 × 8 cells less the lantern's 4 × 4: 64 coffers, **256** in all.
+- **Coffer** (0.60 cell): flat rib 0.06 on the vault face (0.12 between neighbours); riser 0.06 into the vault, setback
+  0.035; riser 0.06, setback 0.035; riser 0.06 to the back: depth 0.18, back 0.34 × 0.34. On the back's centre a
+  **rosette** `classical-hall.vault.rosette` (gallery, white), radius 0.3 × the back's smaller side (0.102), turned from
+  (radius fraction, height × R/0.08): (0, −0.004) (1.00, −0.004) (1.00, 0.004) (0.86, 0.014) (0.62, 0.020) (0.36, 0.023)
+  (0.20, 0.032) (0, 0.036), eight petals: on the rows 1.00 → 0.36 the radius × (0.84 + 0.16 |cos 4α|).
+- **Lanterns** (one per bay): opening s ∈ [−1.20, 1.20] (x ±1.1804, z 4.9635) × bay centre ± 1.20 along y; a flat frame
+  0.06 on the vault inside its edge (inner edge s ±1.14: x ±1.1232, z 4.9815; bay centre ± 1.14); from that inner edge
+  vertical walls `classical-hall.laylight.well` rise to z 5.38 (0.40 high at the long sides, 0.23 at mid-length).
+  **Laylight** `classical-hall.laylight.glass` 2.2464 × 2.280 at z 5.38 (underside), laminated 2 × 4 mm; the luminous
+  ceiling above it (§4) within z 5.39–5.43. The well is a Housing opening.
+- **Annular vault** `classical-hall.vault.annular`, turned about O: section a circle R 1.5009 centred (r 5.10, z 3.6491),
+  springing from the tribune entablature's ledge (r 6.60, 3.70) and the ring beam's outer ledge (r 3.60, 3.70), crown
+  (5.10, 5.15). Plain bands 0.30 of arc at both springings; coffers between section angles 13.395° and 166.605° (r 6.560 →
+  3.640): **60** round (6°, from φ 15° so cells centre on the niche axes) × **7** across (21.887°, 0.573 of arc): 420.
+  Coffer detail as the gallery's with rib 0.05 and steps × 0.85 (setbacks 0.02975); rosette `classical-hall.tribune.rosette`.
+- **Dome** `classical-hall.dome`: spherical cap R 3.9464 centred (0, 0, 1.3905), from the ring beam's inner ledge
+  (r 3.20, z 3.70) to the eye (r 1.20, z 5.15). Plain bands 0.25 of arc at the springing, 0.20 at the eye. Coffers 24
+  round (15°, from φ 7.5°) × 3 rings, ring edges (r, z) (3.047, 3.898) (2.463, 4.474) (1.893, 4.853) (1.389, 5.084): 72;
+  rib 0.05, step scale 1.0 / 0.9 / 0.8 from the lowest ring; each with a tribune rosette.
+- **Eye:** a cylindrical well r 1.20, z 5.15 → 5.38 (`classical-hall.laylight.well`, Housing), closed by a laylight disc
+  Ø 2.40 (`classical-hall.laylight.glass`) at 5.38. Bead `classical-hall.eye.bead` turned round its lower edge, (r, z):
+  (1.19, 5.17) round to (1.19, 5.09) convex, (1.22, 5.09) (1.22, 5.17).
+- **Ring beam** (the entablature turned on both faces of r 3.40, §3.4): inner ledge r 3.008–3.20 at 3.70 (the dome
+  springs at 3.20); outer ledge r 3.60–3.792 at 3.70 (the annular vault springs at 3.60).
 
-All are in `lime-plaster.run.aged`: run in place, on the masonry vault shells.
+### 3.4 The order and the mouldings (Ionic after Vignola, D 0.34, column 9 D = 3.06)
+- **Columns (26)**, turned; base and capital `classical-hall.order.carved`, shaft a separate piece. Section (r, z):
+  plinth box 0.47 × 0.47, z −0.01 … 0.055; base (0, 0.050) (0.200, 0.050) (0.200, 0.055) round to (0.200, 0.115) convex
+  (lower torus, to 0.23) (0.190, 0.115) (0.190, 0.120) round to (0.190, 0.155) concave (scotia) (0.185, 0.155)
+  (0.185, 0.160) round to (0.185, 0.195) convex (upper torus) (0.176, 0.195) (0.176, 0.200) round to (0.170, 0.215)
+  concave (apophyge); **shaft** r 0.170 from 0.215 to 1.0983, then entasis r(t) = 0.170 − 0.02833 (1 − cos(πt/2)),
+  t 0…1, to z 2.865 (r 0.14167); **capital** round to (0.14967, 2.875) concave, (0.14967, 2.878) round to
+  (0.14967, 2.900) convex (astragal), (0.14567, 2.900) round to (0.195, 2.965) convex (echinus), (0, 2.965). Canalis
+  block 0.31 across the volutes × 0.34, z 2.945–3.04; plate 0.47 × 0.32, z 3.005–3.05; two bolsters about the
+  front-to-back axis at ±0.155, z 2.945, r 0.075, ±0.19 long, waisted to r 0.056 with a belt r 0.064 for |u| ≤ 0.03; on
+  both faces of each a volute (logarithmic spiral fillet 12 × 16 mm, 2.5 turns R 0.069 → 0.0193, round an eye disc
+  R 0.018, winding outwards and down from the top, clockwise on the right seen from its face); abacus 0.37 × 0.37,
+  z 3.035–3.07, edge (0, 0) (0, 0.012) round to (0.015, 0.027) convex (0.015, 0.035).
+  - Gallery pairs (12), shafts `classical-hall.shaft.giallo`: x ±2.60 at y 25.60/24.60, 19.60/18.60, 13.60/12.60,
+    volutes facing the gallery's axis. Screen (2), giallo: x ±1.10, y 7.0283, facing south. Tribune ring (12), shafts
+    `classical-hall.shaft.pavonazzetto`: r 3.40 at φ 15° + 30°k, fronts radial.
+- **Pilasters (10)**: shaft block 0.07 proud × 0.34 wide, z 0.20–2.90, in the shaft's marble; Attic base swept round
+  three faces, (A, B): (−0.010, −0.010) (0.065, −0.010) (0.065, 0.055) (0.045, 0.055) round to (0.075, 0.085) convex,
+  round to (0.045, 0.115) convex; (0.035, 0.115) (0.035, 0.120) round to (0.020, 0.1375) concave, round to (0.035, 0.155)
+  concave; (0.030, 0.155) (0.030, 0.160) round to (0.0475, 0.1775) convex, round to (0.030, 0.195) convex; (0.005, 0.195)
+  (0.005, 0.200) round to (0, 0.215) concave; (−0.010, 0.215). Neck: (−0.01, 2.865) (0.004, 2.865) round to (0.004, 2.89)
+  convex, round to (0.03, 2.945) convex, (−0.01, 2.945). Capital: canalis block, two flat volute discs R 0.075 at
+  ±0.155, z 2.945 with the spiral fillets, abacus 0.40 wide, 0.01 proud of the canalis. Bases and capitals
+  `classical-hall.order.carved`. Gallery (giallo): x ±3.00 at y 30.85 (8 cm clear of the south wall) and the antae at
+  y 7.27. Tribune (pavonazzetto): r 6.60 at φ 0°, 61.38°, 118.62°, 180°, 240°, 300° (the two by the opening 1.58° off
+  the jambs).
+- **Entablature** `classical-hall.entablature`, 0.72 over the architrave soffit 3.06 (ledge 3.70, lip top 3.78);
+  (A out from the lowest fascia, B up from 3.06): (BackA, 0) (0, 0) (0, 0.055) (0.012, 0.055) (0.012, 0.115)
+  (0.024, 0.115) (0.024, 0.185) cyma to (0.050, 0.215) convex first; (0.050, 0.228) (0.012, 0.228) (0.012, 0.418)
+  cyma to (0.040, 0.445) convex first; (0.045, 0.445) (0.045, 0.500) (0.085, 0.500) (0.085, 0.515) round to
+  (0.125, 0.555) convex; (0.260, 0.555) (0.260, 0.620) (0.272, 0.620) (0.272, 0.630) cyma to (0.330, 0.705) concave
+  first; (0.330, 0.720) (0.250, 0.720) (0.250, 0.640) (BackA, 0.640); BackA −0.08 against a wall (architrave face 0.07
+  proud). **Dentils** 0.034 wide × 0.040 deep × 0.048 high (z 3.516–3.564), pitch 0.052, on the band 0.035–0.075 out,
+  0.06 margin at each run's end; on a ring floor(2πR/0.052). **Gallery run:** both long walls, face 0.07 proud; over each
+  column pair a ressaut, face 0.2583 off the wall for the pair's y ± 0.72, solid fillers from the wall for z 3.07–3.685
+  and y ± 0.65; across the screen with its face at y 7.17, returning into the south wall. **Tribune run:** round the
+  outer wall, face r 6.53, continuous over the opening on the lintel; round the **ring beam** on both faces (architrave
+  faces r 3.2583 and 3.5417, common soffit 3.06), dentils on both.
+- **Wall mouldings** `classical-hall.moulding`, swept round the whole perimeter from one side of the port's surround to
+  the other: **skirting** 0.14 × 0.025: (−0.010, −0.025) (0.025, −0.025) (0.025, 0.100) cyma to (0.006, 0.135) convex
+  first, (0.006, 0.140) (−0.010, 0.140). **Dado rail** (top 0.46, across the niche mouths): (−0.010, 0.350)
+  (0.008, 0.350) cyma to (0.040, 0.405) concave first, (0.045, 0.405) (0.045, 0.435) round to (0.030, 0.460) convex,
+  (−0.010, 0.460). Skirting and rail return round every floor pedestal (§8). **Niche surrounds** (0.10 band round jambs
+  and head from 0.46, in the mouth plane; on the curved wall on the plane through the jambs' wall points, sunk to meet
+  it), (A out from the opening's edge, B out of the wall): (−0.015, −0.01) (0.100, −0.01) (0.100, 0.014) cyma to
+  (0.075, 0.035) convex first, (0.012, 0.035) round to (−0.015, 0.019) convex. **Keystones** at each niche's crown, from
+  0.04 below it up into the architrave soffit (3.07), widening 0.10 → 0.15, 0.055 proud.
+- **Framed panels** `classical-hall.panel`, 0.80 × 1.90 (z 0.85–2.75), 0.02 proud, in frames (moulding):
+  (−0.012, −0.01) (0.045, −0.01) (0.045, 0.012) cyma to (0.012, 0.035) concave first, (−0.012, 0.035). Gallery 16 at bay
+  centre ± 1.60 on both walls; tribune 10 at each niche's φ ± 15°, flat, tangent at the centre, 0.02 into the wall at the
+  edges. **Lunette panel** 2.60 × 0.80 (z 3.98–4.78), framed, on the lintel's face y 7.10, centred on x 0, facing south.
+- **Consoles** `classical-hall.console` on each panel's centre line: quadrant bracket 0.36 wide × 0.30 proud × 0.41 high,
+  top 1.55; section (−0.03, 1.14) (0.06, 1.14), elliptic quarter centred (0.06, 1.50), radii 0.21 × 0.36, −90° → 0°,
+  (0.30, 1.50) (0.30, 1.55) (−0.03, 1.55). Three grow to their busts (§8): Philip 0.58 wide; Kimon 0.32 and Septimius
+  0.31 proud; in the tribune Athena 0.39 × 0.40 and Apollo Giustiniani 0.31 proud.
 
-- **The gallery barrel.** It is segmental, with radius 3.8284 about the axis line (x 0, z 1.3216) running along y from
-  7.10 to 31.10.
-  - It springs from the cornice ledge (x ±3.00, z 3.70) at a half-angle of 51.592°. The crown is at z 5.15.
-  - The coordinate s is the arc length from the crown, positive to the east. The springing is at s ±3.4473.
-  - There is a plain springing band for |s| from 3.00 to 3.4473. The coffer field covers s ∈ [−3.00, +3.00]: 10 rows of
-    0.60 along the arc (at s = ±3.00, x = ±2.7023 and z = 4.0335).
-  - **Along y**, from south to north:
-    - a plain band, 31.10–30.50;
-    - bay 1 coffers, 30.50–25.70 (8 × 0.60);
-    - a plain pair band, 25.70–24.50;
-    - bay 2, 24.50–19.70;
-    - a pair band, 19.70–18.50;
-    - bay 3, 18.50–13.70;
-    - a pair band, 13.70–12.50;
-    - bay 4, 12.50–7.70;
-    - a plain band, 7.70–7.10.
-  - **Coffers.** Each bay has 10 × 8 cells, less the lantern's 4 × 4, which leaves 64 coffers. The gallery has 256.
-  - **The lantern** in each bay:
-    - **The opening.** It spans s ∈ [−1.20, +1.20] (x ±1.1805, z 4.9635) by the bay centre ± 1.20 along y.
-    - **The frame.** A flat frame 0.06 wide runs on the vault surface inside the opening's edge, so the inner edge is at
-      s ±1.14 (x ±1.1232, z 4.9815) and the bay centre ± 1.14.
-    - **The well.** Vertical plaster walls run from that inner edge up to the diffuser plane at z 5.38. They are 0.40
-      high at the long sides and 0.23 at mid-length.
-    - **Housing pocket.** The well is a Housing opening that holds the laylight (section 4).
-- **The coffer** (a 0.60 cell in the gallery):
-  1. a flat rib 0.06 wide on the vault surface (0.12 between neighbours);
-  2. a riser 0.06 into the vault, then a setback of 0.035;
-  3. a riser of 0.06, then a setback of 0.035;
-  4. a riser of 0.06 to the back. The total depth is 0.18, and the back panel is 0.34 × 0.34.
-  - **The rosette.** On the back's centre is a gilt rosette (`plaster-of-paris.gilt.aged`) of radius 0.3 × the back's
-    smaller side (0.102 here). It has eight petals.
-  - **The rosette's section.** It is turned from (radius fraction, height × R/0.08):
-    (0, −0.004) (1.00, −0.004) (1.00, 0.004) (0.86, 0.014) (0.62, 0.020) (0.36, 0.023) (0.20, 0.032) (0, 0.036).
-  - **The petals.** On the rows from 1.00 to 0.36, the radius is multiplied by 0.84 + 0.16 |cos 4α|.
-- **The annular vault** (over the ambulatory) is turned about O.
-  - **Its section** is a circle of radius 1.5009 centred at (r 5.10, z 3.6491).
-  - **It springs** from the tribune entablature's ledge (r 6.60, z 3.70) and from the ring beam's outer ledge (r 3.60,
-    z 3.70). Its crown is at r 5.10, z 5.15.
-  - **Plain bands** 0.30 of arc run at both springings. The coffer field spans section angles 13.395° to 166.605°, from
-    r 6.560 to r 3.640.
-  - **The coffers** are 60 cells round (6°, starting at φ 15°, so that cells centre on the niche axes) by 7 rows across,
-    each 21.887°, or 0.573 of arc.
-  - **The coffer detail** is as in the gallery, with a rib of 0.05 and the steps scaled by 0.85 (setbacks 0.02975), and
-    a rosette on each.
-- **The dome** (over the ring) is a spherical cap of radius 3.9464, centred on the axis at z 1.3905.
-  - **It springs** from the ring beam's inner ledge (r 3.20, z 3.70) and rises to the eye (r 1.20, z 5.15).
-  - **Plain bands** run at both edges: 0.25 of arc at the springing and 0.20 at the eye.
-  - **Coffers.** There are 24 round (15° each, starting at φ 7.5°) in 3 rings. The ring edges (r, z) are (3.047, 3.898),
-    (2.463, 4.474), (1.893, 4.853) and (1.389, 5.084).
-  - **The coffer detail.** The rib is 0.05. The step scale is 1.0 on the lowest ring, 0.9 on the middle ring and 0.8 on
-    the top ring. Each has a rosette.
-- **The eye.**
-  - A cylindrical well of r 1.20 runs from z 5.15 to the diffuser at z 5.38. It is a Housing opening.
-  - A gilt bead (`plaster-of-paris.gilt.aged`) is turned round its lower edge. Its section, as (r, z): (1.19, 5.17),
-    round to (1.19, 5.09) convex, then (1.22, 5.09) and (1.22, 5.17).
+### 3.5 Carriers for the works (built by the room; sizes in §8)
+- **Niche plinths and pedestals** `classical-hall.plinth`, moulded: (0.015, −0.005) (0.015, 0.025) cyma to (0, 0.045)
+  convex first, (0, H − 0.03) cyma to (0.02, H − 0.005) concave first, (0.02, H). A **niche plinth** stands on the sill
+  (H 0.12 gallery, 0.08 tribune; top 0.57 / 0.53). A **niche pedestal** stands on the floor, its top at the same height,
+  running back over the sill into the niche to its back line; the dado and skirting return round its sides.
+- **Axis and ambulatory plinths** (plinth), moulded: (0.03, −0.01) (0.03, 0.06) cyma to (0, 0.10) convex first,
+  (0, H − 0.075) cyma to (0.03, H − 0.02) concave first, (0.03, H). Gallery bays 2 and 3: 2.30 (y) × 1.04 × 0.55 on the
+  axis. Ambulatory: at (±5.10, 0), 0.90 × 0.90 × 0.50; the west one 1.15 along y for the Artemision's arms.
+- **Herms** `classical-hall.herm` at (±2.45, 30.83): moulded plinth 0.40 × 0.40 × 0.14 (the plinth profile); shaft
+  widening from 0.26 square at 0.13 to 0.32 at 1.17; moulded cap 0.40 × 0.40 × 0.09 from 1.16; top 1.25.
+- **Centrepiece pedestal** `classical-hall.pedestal`, turned about O, Ø 2.20 × 0.30: (0, −0.01) (1.10, −0.01) (1.10, 0.03)
+  round to (1.08, 0.07) convex, (1.05, 0.07) (1.05, 0.24) cyma to (1.10, 0.285) convex first, (1.10, 0.30) (0, 0.30).
 
-### 3.4 The order and the mouldings
-
-**The Ionic order** (after Vignola; D 0.34; a column is 9 D = 3.06). The Ionic order is shared with the exterior dress,
-so it goes into `Data/Form/Orders.json` as `order.ionic`, parametrised by D. The hall's own cornice with its lip stays
-in `ClassicalHallPlan.h` while it is used only here.
-
-**The column (26)** is turned. The base and capital are `statuary-marble.honed.aged`. The shaft is a separate piece of
-coloured marble. The section is (r, z):
-
-```
-square plinth 0.47 × 0.47, z −0.01 … 0.055 (box)
-base   (0, 0.050) (0.200, 0.050) (0.200, 0.055) round to (0.200, 0.115) convex  [lower torus, bulging to 0.23]
-       (0.190, 0.115) (0.190, 0.120) round to (0.190, 0.155) concave                [scotia]
-       (0.185, 0.155) (0.185, 0.160) round to (0.185, 0.195) convex                 [upper torus]
-       (0.176, 0.195) (0.176, 0.200) round to (0.170, 0.215) concave                [apophyge]
-shaft  r 0.170 from z 0.215 to 1.0983 (the lower third, straight); then entasis
-       r(t) = 0.170 − 0.02833 (1 − cos(π t / 2)), t 0 … 1, up to z 2.865 (r 0.14167 = 5/6 of D/2)
-cap.   round to (0.14967, 2.875) concave [apophyge]; (0.14967, 2.878) round to (0.14967, 2.900) convex [astragal];
-       (0.14567, 2.900) round to (0.195, 2.965) convex [echinus]; (0, 2.965)
-```
-
-- **The capital** (Carving) has these parts:
-  - **Canalis block:** 0.31 across the volutes by 0.34 front to back, from z 2.945 to 3.04.
-  - **Plate:** 0.47 by 0.32, from z 3.005 to 3.05.
-  - **Bolsters.** Two bolsters are turned about the front-to-back axis, at ±0.155 from the column's axis and z 2.945.
-    Each has radius 0.075, runs ±0.19 long, and is waisted to r 0.056, with a belt of r 0.064 for |u| ≤ 0.03.
-  - **Volutes.** On both faces of each bolster is a volute: a logarithmic spiral fillet with a 12 × 16 mm section, 2.5
-    turns from R 0.069 to R 0.0193, round an eye disc of R 0.018. It winds outwards and down from the top, clockwise on
-    the right as seen from its face.
-  - **Abacus:** 0.37 × 0.37, from z 3.035 to 3.07. Its edge profile is (0, 0), (0, 0.012), round to (0.015, 0.027)
-    convex, then (0.015, 0.035).
-- **Placement:**
-  - **Gallery pairs (12, shafts `giallo-antico.polished.aged`):** x ±2.60, at y 25.60/24.60, 19.60/18.60 and
-    13.60/12.60. The volutes face the gallery's axis.
-  - **The screen (2, giallo):** x ±1.10, y 7.0283. They face south.
-  - **The tribune ring (12, shafts `pavonazzetto.polished.aged`):** r 3.40 at φ 15° + 30°k, with the fronts radial.
-
-**Pilasters (10).**
-- **Form.**
-  - The shaft block's face is 0.07 proud of the wall. It is 0.34 wide and runs from z 0.20 to 2.90, in the shaft's
-    marble.
-  - The Attic base is swept round the three faces. Its profile is (A out from the shaft's face, B up):
-
-    ```
-    (−0.010, −0.010) (0.065, −0.010) (0.065, 0.055) (0.045, 0.055) round to (0.075, 0.085) convex, round to (0.045, 0.115)
-    convex; (0.035, 0.115) (0.035, 0.120) round to (0.020, 0.1375) concave, round to (0.035, 0.155) concave; (0.030, 0.155)
-    (0.030, 0.160) round to (0.0475, 0.1775) convex, round to (0.030, 0.195) convex; (0.005, 0.195) (0.005, 0.200) round to
-    (0, 0.215) concave; (−0.010, 0.215)
-    ```
-
-  - The neck is swept round the three faces: (−0.01, 2.865) (0.004, 2.865), round to (0.004, 2.89) convex, round to
-    (0.03, 2.945) convex, then (−0.01, 2.945).
-  - The capital has a canalis block and two flat volute discs of R 0.075 at ±0.155, z 2.945, with the spiral fillets. The
-    abacus is 0.40 wide, with its face 0.01 proud of the canalis.
-- **Gallery pilasters (giallo):**
-  - at the south corners: x ±3.00, y 30.85 (8 cm clear of the south wall);
-  - the antae at the screen: x ±3.00, y 7.27.
-- **Tribune pilasters (pavonazzetto):** on r 6.60 at φ 0°, 61.38°, 118.62°, 180°, 240° and 300°.
-  - The two at 61.38° and 118.62° flank the opening: each stands 1.58° off the jamb.
-
-**The entablature** has a lip that hides the cove light. It stands 0.72 above the architrave's soffit (z 3.06), with the
-ledge at z 3.70 and the lip's top at z 3.78. The section is (A out from the lowest fascia, B up from z 3.06), in
-`statuary-marble.honed.aged`:
-
-```
-(BackA, 0) (0, 0) (0, 0.055) (0.012, 0.055) (0.012, 0.115) (0.024, 0.115) (0.024, 0.185)     three fasciae
-cyma to (0.050, 0.215) convex first; (0.050, 0.228) (0.012, 0.228)                              architrave crown
-(0.012, 0.418)                                                                                   frieze
-cyma to (0.040, 0.445) convex first; (0.045, 0.445) (0.045, 0.500) (0.085, 0.500) (0.085, 0.515) bed moulding, dentil band
-round to (0.125, 0.555) convex; (0.260, 0.555) (0.260, 0.620) (0.272, 0.620) (0.272, 0.630)      ovolo, corona
-cyma to (0.330, 0.705) concave first; (0.330, 0.720) (0.250, 0.720) (0.250, 0.640) (BackA, 0.640) sima, lip, ledge
-BackA = −0.08 against a wall (the architrave is 0.07 proud, plus 0.01 into the wall)
-```
-
-- **The dentils** are blocks 0.034 wide × 0.040 deep × 0.048 high (z 3.516–3.564) at a pitch of 0.052. They stand on the
-  dentil band, from 0.035 to 0.075 out from the architrave's face, with a 0.06 margin at each end of a run. On a ring the
-  count is floor(2πR / 0.052).
-- **The gallery run.**
-  - The entablature runs along both long walls with the architrave face 0.07 proud.
-  - Over each column pair it breaks forward in a ressaut. The architrave face there is 0.2583 from the wall, for the
-    pair's y ± 0.72.
-  - It crosses the screen with its face at y 7.17 and returns into the south wall.
-  - Solid fillers behind each ressaut run from the wall to the ressaut, for z 3.07–3.685 and the pair's y ± 0.65.
-- **The tribune run.**
-  - The entablature is turned round the outer wall with the architrave face at r 6.53, continuous over the opening,
-    where it rides on the lintel.
-  - It is also turned round **the ring beam** on both faces: the inner architrave face at r 3.2583 and the outer at
-    r 3.5417, over a common soffit at z 3.06.
-  - The ring beam's inner ledge runs r 3.008–3.20 at z 3.70; the dome springs at r 3.20.
-  - Its outer ledge runs r 3.60–3.792 at z 3.70; the annular vault springs at r 3.60.
-  - Dentils run on both faces.
-
-**Wall mouldings** (`statuary-marble.honed.aged`), swept round the whole perimeter from one side of the port's surround to
-the other: the gallery's south wall, the long walls, the throat, and round the tribune.
-- **The skirting** is 0.14 high and 0.025 proud: (−0.010, −0.025) (0.025, −0.025) (0.025, 0.100), cyma to
-  (0.006, 0.135) convex first, then (0.006, 0.140) and (−0.010, 0.140).
-- **The dado rail's** top is at 0.46, 1 cm over the niche sills; the rail runs across the niche mouths:
-  (−0.010, 0.350) (0.008, 0.350), cyma to (0.040, 0.405) concave first, then (0.045, 0.405) (0.045, 0.435), round to
-  (0.030, 0.460) convex, then (−0.010, 0.460).
-- **Niche surrounds.** A band 0.10 wide runs round each niche's jambs and head from z 0.46, in the mouth plane. On the
-  curved wall it runs on the plane through the jambs' wall points and is sunk to meet the wall. Its profile, as (A out
-  from the opening's edge in the wall plane, B out of the wall): (−0.015, −0.01) (0.100, −0.01) (0.100, 0.014), cyma to
-  (0.075, 0.035) convex first, (0.012, 0.035), round to (−0.015, 0.019) convex.
-- **Keystones.** One sits at each niche's crown. It runs from 0.04 below the crown up into the architrave's soffit at
-  z 3.07, widening from 0.10 to 0.15, and stands 0.055 proud.
-
-**Framed panels and consoles.**
-- **Panels.** A panel is a `pavonazzetto.polished.aged` slab 0.80 × 1.90, from z 0.85 to 2.75, standing 0.02 proud. It
-  sits in a frame of `statuary-marble.honed.aged` with the profile (−0.012, −0.01) (0.045, −0.01) (0.045, 0.012), cyma to
-  (0.012, 0.035) concave first, then (−0.012, 0.035).
-- **Where they go:**
-  - 16 in the gallery, at bay centre ± 1.60 on both walls;
-  - 10 in the tribune, at each niche's φ ± 15°. On the curved wall each panel is flat, tangent at its centre, and set
-    0.02 into the wall at its edges.
-- **The console** is a quadrant bracket on the panel's centre line. It is 0.36 wide, 0.30 proud and 0.41 high, with its
-  top at z 1.55. Its section is (−0.03, 1.14) (0.06, 1.14), an elliptic quarter centred (0.06, 1.50) with radii
-  0.21 × 0.36 from −90° to 0°, then (0.30, 1.50) (0.30, 1.55) (−0.03, 1.55).
-- **The lunette panel.** A pavonazzetto panel 2.60 × 0.80 (z 3.98–4.78), framed, sits on the lintel's face at y 7.10,
-  centred on x 0 and facing south.
-
-### 3.5 Carriers for the works (built by the room)
-
-- **Niche plinths.** In `statuary-marble.honed.aged`. The section is (0.015, −0.005) (0.015, 0.025), cyma to (0, 0.045)
-  convex first, then (0, H − 0.03), cyma to (0.02, H − 0.005) concave first, then (0.02, H).
-  - As built, the gallery plinths were 0.56 × 0.40 × H 0.12 (top z 0.57), and the tribune plinths 0.70 × 0.52 × H 0.08
-    (top z 0.53). Each was centred on the niche's axis 0.42 R back from the mouth.
-  - Their size now comes from the hang rule (section 8).
-- **The centrepiece pedestal** is turned about O, Ø 2.20 and 0.30 high: (0, −0.01) (1.10, −0.01) (1.10, 0.03), round to
-  (1.08, 0.07) convex, then (1.05, 0.07) (1.05, 0.24), cyma to (1.10, 0.285) convex first, then (1.10, 0.30) and
-  (0, 0.30).
-- **Consoles** (3.4) carry the busts.
-
-### 3.6 Stairs
-
-None. The spiral stair is the Rotunda's, inside the served well.
-
-### 3.7 Glazing
-
-None. The laylight diffusers are luminaires (section 4).
-
-### 3.8 Material keys and histories
-
-| Key | Where |
-|---|---|
-| `cream-marble.honed.aged` | walls above the dado, the lintel's face and soffit, the throat's jambs |
-| `rosso-antico.polished.aged` | the dado, z 0–0.45 |
-| `statuary-marble.honed.aged` | bases, capitals, entablatures, the ring beam, pilaster bases and capitals, skirting, dado rail, surrounds, keystones, frames, consoles, niche sills, plinths, the pedestal, ressaut fillers |
-| `giallo-antico.polished.aged` | the gallery and screen column shafts, the gallery pilaster shafts |
-| `pavonazzetto.polished.aged` | the tribune's ring shafts and pilaster shafts, the wall panels, the lunette panel |
-| `pompeian-red-stucco.trowelled.aged` | niche interiors |
-| `lime-plaster.run.aged` | vaults, the dome, coffers, the lantern and eye wells |
-| `plaster-of-paris.gilt.aged` | rosettes, the eye's bead (gold leaf on red bole over cast plaster) |
-| `statuary-marble.polished.worn` | white floor fields, borders, the throat |
-| `giallo-antico.polished.worn` | floor fields and rings |
-| `verde-antico.polished.worn` | floor frames, bands and discs |
-| `porphyry.polished.worn` | floor discs |
-| `rosso-antico.polished.worn` | floor lozenges |
-| `travertine.sawn.aged` | structural masonry, the slab, the roof, the sleeve (never seen) |
-| `plaster-of-paris.cast.aged` | the 41 casts (Art's objects) |
-| `opal-glass.laminated.clean` | laylight diffusers (the substance under Light's diffuser) |
-
-**History regimes.** They map to Matter's history records as follows:
-- **worn:** `stone.foot-traffic-wear` plus `stone.pore-soiling`.
-- **aged**, on stone: `stone.pore-soiling`, indoors and untrodden.
-- **aged**, on white: `white.soiling` plus `white.micro-cracking`.
-- **aged**, on gilt: `gilt.wear`.
-- **clean:** glass kept clean.
-
-Everything here is interior, so the sky exposure is 0 and there is never wetness.
-
-**New Matter records this stage needs.**
-- **Accents of the stone family** (`family: accent`, `accentOf: stone`). The colours are the boards':
-  - `statuary-marble`: Carrara statuario, #ECE8E0;
-  - `giallo-antico`: Numidian yellow from Chemtou, #D9B874;
-  - `pavonazzetto`: Docimian white with violet veins, #EBE3E8;
-  - `rosso-antico`: from Cape Tainaron, #6E2A22 with veins #2E0F0C;
-  - `verde-antico`: Thessalian serpentinite breccia, #2F3A30;
-  - `porphyry`: Imperial porphyry from Mons Porphyrites.
-- **An accent of the white family:** `pompeian-red-stucco`, lime stucco pigmented with red ochre, #8E4B3D, matt.
-- **Glass:** `opal-glass`.
-- **Existing records used:** `cream-marble`, `lime-plaster`, `plaster-of-paris`, `travertine`, and the workings
-  `stone.honed`, `stone.polished`, `run`, `trowelled`, `cast.plaster` and `gilt`.
-
----
+### 3.6 Stairs, glazing, fittings
+No stair (the spiral stair and its landing are the Rotunda's, in the well). No glazing to the sky (the laylights are
+Light's luminous ceilings behind etched glass). No seats, labels or signs (captions by gaze); the blind doors: §2. The
+Rotunda builds its **landing** in the well with the palette's "Classical Hall: landing" keys (`stone.crema-marfil`,
+`accent.rojo-alicante`, `accent.negro-marquina`, honed, foot-worn): nothing of it is this stage's.
 
 ## 4. Light
 
-**Daylight.** None. The stage is underground and has no Glazed or Open opening. The only daylight near it falls down the
-Rotunda's raised drum onto the landing, on the serving side of the well.
+**Daylight:** none (Lighting.json `daylight` empty). Underground, no Glazed or Open opening; the only daylight near is
+the Rotunda's, down its raised drum onto the landing.
 
-**Colour.** 4000 K throughout. This is one CCT for the room, the owner's choice for works. It was 3800 K as built.
+**Luminaires** (Lighting.json, 113; all 3000 K, the Rotunda's and the Salon's colour; no output values here)
 
-**Luminaires.** The TYPE is the catalogue key. Light chooses the beam and the count unless the TYPE is named. The room
-never states lumens.
+| Id | Type | Count / extent | Point and aim | Operation |
+|---|---|---|---|---|
+| `laylight.bay1…4`, `laylight.eye` | `gap.luminous-ceiling.3000k` | 5: four 2.246 × 2.28 on the bay centres, the eye's disc Ø 2.40 on O | edge-lit panel in z 5.39–5.43 over the etched glass (point z 5.41); aim straight down | always |
+| `cove.gallery.e1…e4`, `.w1…w4` | `linear-cove.3000k` | 8 runs between the ressauts: y 31.05–25.87, 24.33–19.87, 18.33–13.87, 12.33–7.15 (5.18, 4.46, 4.46, 5.18) | on the cornice ledge behind the lip, x ±2.87, z 3.72; aim up the near half of the barrel (x ±1.73, z 4.737) | always |
+| `cove.tribune.01…18` | `linear-cove.3000k` | 18 × 2.208 on the arc, midpoints φ 10° + 20°k (continuous over the lintel) | tribune ledge r 6.47, z 3.72; aim onto the annular vault (r 5.77, z 4.95) | always |
+| `cove.ring.outer.01…12`, `cove.ring.inner.01…12` | `linear-cove.3000k` | 12 × 1.887 at r 3.70 and 12 × 1.573 at r 3.10, midpoints φ 30°k (between the columns) | the ring beam's outer and inner ledges, z 3.72; aim the annular vault (r 4.30, z 4.92) and the dome's middle ring (r 2.46, z 4.48) | always |
+| `washer.000…330` | `track-wallwasher.3000k` | 11, φ 30°k except 90° (the throat) | short track on the ring beam behind its outer lip (r 3.78, z 3.86); aim out and 33° down at the outer wall (r 6.60, z 2.03) | always |
+| `accent.gallery.niche.*` (8), `accent.tribune.niche.*` (5), `accent.tribune.plinth.e.a/b`, `accent.tribune.centre.1…3` | `track-spot.3000k.20deg` | 18 | gallery: track in the vault across the gallery at (∓1.45, y + 0.9, 4.805) (the coffer row beside the lantern); tribune niches: annular vault r 4.20 at φ + 11°, z 4.790; Discobolus: r 4.25 at φ ± 28°, z 4.826; centrepiece: dome's lowest ring r 2.30 at φ 90°, 210°, 330°, z 4.537. Aim: the work's centre (carrier top + 1.10…1.15, 0.10–0.15 in front; centrepiece + 0.90) | presence |
+| `accent.gallery.plinth.2/3.w/e`, `accent.tribune.plinth.w.a/b` | `track-spot.3000k.29deg` | 6: two per reclining figure and the Artemision | reclining: (±1.45, y ∓ 0.9, 4.805), aim + 0.45 over the plinth top; Artemision: r 4.25 at 180° ± 28° | presence |
+| `accent.gallery.bust.*` (16), `accent.gallery.herm.w/e`, `accent.tribune.bust.*` (5) | `track-spot.3000k.12deg` | 23 | gallery busts (∓1.45, y + 0.9, 4.805); herms (∓1.45, 29.53, 4.805); tribune busts annular vault r 4.40 at φ + 7°, z 4.917. Aim + 0.35 over the carrier top | presence |
 
-| Mount key | Mount | TYPE | Count and position |
+Every point, aim and length is in Lighting.json. Accents are one per work as built (two per reclining or
+free-standing figure, three on the centrepiece); the five empty consoles get none.
+
+**Targets**
+
+| Surface | Class | Lux | Source |
 |---|---|---|---|
-| `classical-hall.laylight.bay1`…`bay4` | horizontal ceiling plane in each lantern well at z 5.38; the body within z 5.38–5.43 | `luminous-panel.4000k`: an edge-lit LED light-guide panel behind an opal diffuser, ≤ 50 mm deep. **Light must add this record.** | 4 panels, each 2.2464 (x) × 2.280 (y), centred (0, 28.10 / 22.10 / 16.10 / 10.10). Light modules them. |
-| `classical-hall.laylight.eye` | the same, in the eye well | `luminous-panel.4000k` | 1 disc of Ø 2.40, centred on O at z 5.38 |
-| `classical-hall.cove.gallery.e1`…`e4`, `.w1`…`w4` | on the cornice ledge (z 3.70) behind the lip, at x ±2.87 | `linear-cove.4000k`: the 4000 K sibling of the Underscore strip. **Light must add this record**; the catalogue holds only `linear-cove.3000k`. | 8 runs, 4 per wall, between the ressauts: y 31.05–25.87, 24.33–19.87, 18.33–13.87 and 12.33–7.15 (5.18, 4.46, 4.46 and 5.18 m) |
-| `classical-hall.cove.tribune.outer` | on the tribune entablature's ledge at r 6.47, z 3.70 | `linear-cove.4000k` | one continuous ring (about 40.7 m) |
-| `classical-hall.cove.ring.outer`, `.ring.inner` | on the ring beam's ledges, at r 3.70 and r 3.10, z 3.70 | `linear-cove.4000k` | two rings (about 23.2 m and 19.5 m) |
-| `classical-hall.washer.ring` | a short track on the ring beam's top behind its outer lip, at r 3.78, z 3.86, at φ 30°k between the columns, aimed out and 33° down at the outer wall | Light chooses (`track-wallwasher.4000k` is evidence-incomplete, so it can't be lit) | 12 positions |
-| `classical-hall.accent.gallery-vault.e`, `.w` | a 0.30 track section recessed in the back of each coffer in the rows flanking the lanterns: s ∈ ±[1.20, 1.80], that is x ±1.18…±1.73 and z 4.96…4.73, all along the gallery | `track-spot.4000k.12deg`, `.20deg` or `.38deg`, chosen by the Scheme | one per work, lit from across the gallery at 30–55° from the vertical. As built: 1 per place, 2 per reclining figure. |
-| `classical-hall.accent.annular` | coffer-recessed track in the annular vault's inner rows, r 3.95–4.55 (z about 4.66–5.02) | `track-spot.4000k.*` | one per tribune work, swung 7–11° aside so the light rakes. As built: 2 per ambulatory work. |
-| `classical-hall.accent.dome` | coffer-recessed track in the dome's lowest ring, r 2.46–3.05 | `track-spot.4000k.*` | the centrepiece. As built: 3, 120° apart at r 2.30. |
+| `classical-hall.floor.white` (all walking floors: gallery, throat, ambulatory, centre) | circulation | 100 | UseTargets |
+| `classical-hall.wall.field` | circulation (wall min) | 75 | UseTargets |
+| `classical-hall.vault.gallery`, `classical-hall.vault.annular`, `classical-hall.dome` | circulation (ceiling min) | 50 | UseTargets |
+| `classical-hall.cast` | stone-and-bronze (plaster: flagged §13) | 300 recommended, no maximum ([300, null]) | Care |
 
-**Targets.** Light holds each one at every reference moment.
-- **Walking floors** (gallery, throat, ambulatory and the tribune's centre): `circulation`.
-  - 100 lx maintained, with Uo ≥ 0.4.
-  - Walls ≥ 75 lx and ceilings ≥ 50 lx.
-  - UGR ≤ 28.
-- **The passage at the port:** `circulation`, in Site's joint.
-- **The works:**
-  - **Class.** They are plaster casts, unpainted gypsum with a thin shellac sheen, so they take the care class
-    `stone-and-bronze`.
-  - **Target.** The recommended 300 lx on the work's front, measured vertically at the centre of its face. There is no
-    maximum.
-  - **Nothing here is light-sensitive.** There is no paper, silk or oil, so there is no 50 lx or 150–200 lx limit in
-    this stage.
-  - **UV:** within the class's limit.
-  - **As-built evidence:** accents of 450 lx on statues, 350 on busts and 300 on the centrepiece, over the general
-    light.
-- **Night:** the same targets. The museum never closes (D-006).
-
-**Design targets**, measured as a luminance order. Light's commissioning measures them; they are never tuned.
-- In the gallery: diffuser > the lit face of each cast > the coffers round each lantern > the cream-marble wall above the
-  dado ≥ the floor fields > the Pompeian niche back behind each cast.
-- In the tribune: the eye's diffuser ≥ the gallery's diffusers; the centrepiece > the casts in the niches > the coffers
-  of the dome > the annular vault > the outer wall.
-- A ratio: the luminance of a cast's lit face over that of its niche's back at the same height must be at least 4:1.
-  This is the white-on-red reading of the Braccio Nuovo.
-- Evidence: as built, the diffusers stood at 1300 cd/m².
-
-**Operation** (D-006).
-- **Laylights, coves and washers:** control class `circulation`. They hold steady day and night, because underground
-  there is no daylight to link to. The as-built option to follow the sky is left off, as built.
-- **Accents:** control class `gallery`, linked to presence. They are on while the visitor is in this stage or in the
-  lower half of the well.
-
----
+Day and night alike: underground there is no dusk to switch at (D-006: architectural light always, gallery light by
+presence, on while the visitor is in this stage or in the lower half of the well). **Design order** (measured, never
+tuned): laylight glass ≥ lit casts > coffers round each lantern > the cream wall ≥ floor fields > the red niche backs;
+in the tribune the eye ≥ dome > annular vault > outer wall. Each niche cast's front ≥ **4 ×** its niche's back at the
+same height (the Braccio Nuovo's white on red). Not re-expressed: the as-built rect lights at 1300 cd/m² behind the
+diffusers, the 3800 K colour, the as-built lux figures.
 
 ## 5. Time and weather
-
-- **Weather places.** None. The stage has no glazed opening, so no weather place applies: museum, Giverny and London all
-  do not.
-- **The sun.** No sun, moon or sky reaches the stage. There is no dial.
-- **The Moment.** Time's Moment reaches this stage only through Light's Operation (the control classes) and Matter's
-  history. Because every surface has a sky exposure of 0, it never gets wet or snowy.
-- **Commissioning.** Nothing here depends on the sky, so commissioning needs one reference moment. Studio may run the
-  others to prove the stage's light is independent of the hour.
-
----
+No weather place applies (no Glazed opening): museum, Giverny and London do not reach it. No sun, moon, sky or dial.
+Every surface is interior (no sky): never wet or snowy. Time reaches the stage only through Light's operation and
+Matter's history. One reference moment suffices for commissioning.
 
 ## 6. Motion
-
-- **This stage has no mechanism.** The port is an open portal with no leaves. The as-built bronze angle on the sill is
-  retired; the joint's strip replaces it.
-- **The neighbouring mechanism is the Rotunda's.** It is the sun-clock drum:
-  - it lifts 3.5 m in 8 s;
-  - its wall slides in the pocket from r 6.54 to 7.00, down to museum −3.58;
-  - its balustrade panels retract;
-  - the tympanum at r 7.05 over a lintel at museum −3.68 closes the upper part of the portal.
-
-  All of this lies inside the served well, at radius 7.60 or less. Nothing of this stage enters the well, so this stage
-  sets no clearance requirement there.
-- **An interlock across the seam** (Site binds it, Motion enforces it). The drum's `lower` is refused while the visitor's
-  body is in `classical-hall`, in the joint's passage, or in the well below the dial.
-  - This keeps the rule "it never lowers while you are inside it or below".
-  - It makes Site.Reachable hold: from this dead-end stage the one way out is up the stair, and it must be open in every
-    configuration the visitor can reach.
-
----
+None: no mechanism, no channel. The port is an open portal. The neighbouring mechanism is the Rotunda's sun-clock drum
+(3.50 in 8 s, inside r 7.60 only); nothing of this stage enters the well, so this stage sets no clearance there. The
+Rotunda's "Lower" is already refused while anyone is below z −0.30 there (rotunda.md §6): a visitor anywhere in this
+hall (museum z −6.00) keeps the stair open. Site.Reachable must hold that in every configuration.
 
 ## 7. Nature
-
-There are no plants, bodies of water or ground cover in this stage. The floors are laid stone.
-
-**A constraint from the stage above.** Chenghuai's pond (its west lobe) lies over the tribune, with its bed at museum
-−0.46 above the roof top at −0.55. Its basin is Chenghuai's, and Nature.WaterContained is Chenghuai's check. This stage's
-roof is not a basin.
-
----
+None: no plants, water or ground. Constraint from above: Chenghuai's pond (west lobe) over the tribune, bed at museum
+−0.46; its basin is Chenghuai's (Nature.WaterContained is its check), this roof (museum −0.55) is not a basin.
 
 ## 8. Art
+41 plaster casts (18 statues, 23 busts) after SMK's Royal Cast Collection (public-domain scans). Catalogue
+`data/classical.json` (ids verbatim; captions: title, artist, year, collection, city, notes with the KAS number); true
+heights (length for Ariadne) from `assets/classical/SOURCES.json`; w × d × h and the base slice (z < 0.04) measured from
+`assets/classical/<id>.glb`. Not in `assets/collection.json`. Which cast stands where: `classical_art.py` PLACEMENT,
+STATUES, BUSTS (re-run, identical to the draft). All: support cast, frame none, care `stone-and-bronze` (flagged),
+finish `classical-hall.cast`. The Rotunda's four niche casts are the Rotunda's.
 
-### Sources
+**Hang rule** (the draft's, computed here; Hang.json carries each carrier):
+- A carrier's top is the scan's base slice grown 0.03 on every side, never smaller than as built (gallery niche plinth
+  0.56 × 0.40 × 0.12, tribune 0.70 × 0.52 × 0.08, console 0.36 × 0.30). The work's base slice is centred on the
+  anchor's origin (the carrier's top centre), front along the anchor's x.
+- A niche plinth keeps the as-built axis depth (0.42 R: 0.315 / 0.378 behind the mouth) if its back corners clear the
+  half-round by 0.02 and its front stays 0.01 behind the mouth; else it moves forward to that front line; where even
+  that fails it becomes a **niche pedestal**: its back corners on the 0.02 line (R − 0.02), its front out past the
+  mouth by −front (c = axis depth, − = in front of the mouth), standing on the floor.
+- A work clears the niche head, walls, columns and vaults by ≥ 0.02 (Form.NoOverlap, scan against pieces); a niche
+  carrier may be lowered to no less than 0.03 high. By the axis estimate only the Belvedere Antinous needs it: top 0.51
+  (0.06 high). Nothing else is moved by hand; findings go to the owner's walk.
+- Facing: out of the niche; busts and niche statues in the tribune face O; as listed otherwise.
 
-- **Scans.** The casts are from SMK's Royal Cast Collection, public-domain 3D scans (`assets/classical/*.stl`, converted
-  to `.glb`).
-- **Sizes.** Each is scaled to the documented height, or length for a reclining figure, in `assets/classical/SOURCES.json`.
-- **Labels.** They come from `data/classical.json`: title, artist or "after", date, the original's collection and city,
-  notes, and the SMK cast number (KAS…). Studio imports them into `Data/Art/Collection.json` under the keys
-  `classical-<id>`.
-
-### How the casts are made and shown
-
-- **Objects.** Each cast is a Form Scan drawing with provenance, at true size (Art.TrueSize), in
-  `plaster-of-paris.cast.aged`. There are no frames or cases: the casts stand free.
-- **Anchors.** Every place is a Plinth anchor. Its transform's location is the top centre of the carrier; its x axis is
-  the way the work faces, and its z axis is up.
-
-### The hang rule
-
-- **The carrier fits the work.**
-  - A carrier's top is the base footprint of the work's scan (the convex hull of the scan below 0.04 m) grown by 0.03 on
-    every side.
-  - The as-built sizes are the minimum.
-- **A niche plinth stays inside its niche.**
-  - Its front must stay 0.01 behind the mouth plane, behind the dado rail.
-  - Its back corners must clear the niche's half-round by 0.02.
-  - Where that is impossible, it becomes a pedestal standing on the floor in front of the niche. The top stays at the
-    same height, and the skirting and dado rail are returned round it.
-- **A work clears the architecture.**
-  - Its envelope must clear the niche's head and walls, the columns and the vaults by at least 0.02.
-  - A niche plinth is lowered, to no less than 0.03 high, until the head clears.
-  - Nothing is moved by hand. The check (Form.NoOverlap between a Scan and the pieces) reports what doesn't fit, for the
-    owner's walk.
-- **Facing.** A work faces out of its niche, or as listed below.
-
-### The places, as built (`windows/Scripts/classical_art.py` PLACEMENT, STATUES and BUSTS)
-
-The scan sizes are w × d, and the base is the bottom slice at z < 0.04. Positions are local, and "top z" is the
-carrier's top as built.
-
-**Gallery niches.** The carrier is centred at x ±3.315 at the bay's y, with its top at z 0.57. It faces −x on the east
-wall and +x on the west.
-
-| Anchor | y | Work | Height | Scan w × d | Base |
-|---|---|---|---|---|---|
-| `classical-hall.gallery.niche.e1` | 28.10 | classical-augustus-prima-porta | 2.08 | 1.18 × 0.99 | 0.78 × 0.64 |
-| `…niche.w1` | 28.10 | classical-doryphoros | 2.12 | 0.75 × 0.77 | 0.69 × 0.74 |
-| `…niche.e2` | 22.10 | classical-capitoline-venus | 1.93 | 0.66 × 0.77 | 0.55 × 0.48 |
-| `…niche.w2` | 22.10 | classical-lansdowne-heracles | 2.08 | 0.88 × 0.73 | 0.88 × 0.60 |
-| `…niche.e3` | 16.10 | classical-minerva-giustiniani | 2.19 | 0.91 × 0.62 | 0.90 × 0.54 |
-| `…niche.w3` | 16.10 | classical-capitoline-antinous | 1.89 | 0.66 × 0.61 | 0.55 × 0.46 |
-| `…niche.e4` | 10.10 | classical-sophocles | 2.16 | 0.84 × 0.65 | 0.82 × 0.57 |
-| `…niche.w4` | 10.10 | classical-farnese-diadoumenos | 1.85 | 0.83 × 0.44 | 0.62 × 0.44 |
-
-**Tribune niches.** The carrier's centre is at r 6.978, with its top at z 0.53. Each faces the centre.
-
-| Anchor | φ (bearing) | Position | Work | Height | Scan w × d | Base |
+| Anchor | Work (id) | Title · artist | KAS | w × d × h (m) | Base w × d | Carrier (kind, top W × D, top z; niche: axis depth c, front) |
 |---|---|---|---|---|---|---|
-| `classical-hall.tribune.niche.n` | 270° (0°) | (0.000, −6.978) | classical-apollo-belvedere | 2.24 | 1.42 × 0.98 | 0.81 × 0.75 |
-| `…niche.ne` | 330° (60°) | (6.043, −3.489) | classical-laocoon | 2.08 | 1.55 × 0.92 | 1.36 × 0.77 |
-| `…niche.nw` | 210° (300°) | (−6.043, −3.489) | classical-venus-de-milo | 2.04 | 0.67 × 0.61 | 0.58 × 0.52 |
-| `…niche.se` | 30° (120°) | (6.043, 3.489) | classical-barberini-faun | 2.15 | 1.57 × 1.34 | 1.18 × 1.00 |
-| `…niche.sw` | 150° (240°) | (−6.043, 3.489) | classical-belvedere-antinous | 2.335 | 0.93 × 0.77 | 0.82 × 0.74 |
+| `…gallery.niche.e1` | classical-augustus-prima-porta | *Augustus of Prima Porta* · Unknown Roman sculptor | KAS65 | 1.179 × 0.994 × 2.08 | 0.78 × 0.64 | niche-pedestal 0.84 × 0.70, 0.57; c 0.247, front −0.103 |
+| `…gallery.niche.e2` | classical-capitoline-venus | *Capitoline Venus* · After Praxiteles | KAS493 | 0.656 × 0.772 × 1.93 | 0.55 × 0.48 | niche-plinth 0.61 × 0.54, 0.57; c 0.315, front +0.045 |
+| `…gallery.niche.e3` | classical-minerva-giustiniani | *Minerva Giustiniani* · Unknown Roman sculptor | KAS255 | 0.908 × 0.616 × 2.19 | 0.90 × 0.54 | niche-pedestal 0.96 × 0.60, 0.57; c 0.250, front −0.050 |
+| `…gallery.niche.e4` | classical-sophocles | *Lateran Sophocles* · Unknown Roman sculptor | KAS633 | 0.844 × 0.654 × 2.16 | 0.82 × 0.57 | niche-pedestal 0.88 × 0.63, 0.57; c 0.267, front −0.048 |
+| `…gallery.niche.w1` | classical-doryphoros | *Doryphoros (The Spear Bearer)* · After Polykleitos | KAS11 | 0.751 × 0.775 × 2.12 | 0.69 × 0.74 | niche-pedestal 0.75 × 0.80, 0.57; c 0.226, front −0.174 |
+| `…gallery.niche.w2` | classical-lansdowne-heracles | *Lansdowne Heracles* · After Skopas? | KAS224 | 0.881 × 0.730 × 2.08 | 0.88 × 0.60 | niche-pedestal 0.94 × 0.66, 0.57; c 0.229, front −0.101 |
+| `…gallery.niche.w3` | classical-capitoline-antinous | *Capitoline Antinous* · Unknown Roman sculptor | KAS824 | 0.660 × 0.607 × 1.89 | 0.55 × 0.46 | niche-plinth 0.61 × 0.52, 0.57; c 0.315, front +0.055 |
+| `…gallery.niche.w4` | classical-farnese-diadoumenos | *Farnese Diadoumenos* · After Polykleitos | KAS79 | 0.832 × 0.442 × 1.85 | 0.62 × 0.44 | niche-plinth 0.68 × 0.50, 0.57; c 0.315, front +0.065 |
+| `…gallery.bust.e1s` | classical-julia-titi | *Julia Titi* · Unknown Roman sculptor | KAS866 | 0.232 × 0.310 × 0.485 | 0.16 × 0.21 | console 0.36 × 0.30, 1.55 |
+| `…gallery.bust.e1n` | classical-julius-caesar | *Julius Caesar* · Unknown Roman sculptor | KAS297 | 0.230 × 0.256 × 0.52 | 0.22 × 0.22 | console 0.36 × 0.30, 1.55 |
+| `…gallery.bust.e2s` | classical-antoninus-pius | *Antoninus Pius in a toga* · Unknown Roman sculptor | KAS596 | 0.673 × 0.335 × 0.895 | 0.24 × 0.24 | console 0.36 × 0.30, 1.55 |
+| `…gallery.bust.e2n` | classical-young-marcus-aurelius | *Marcus Aurelius as a youth* · Unknown Roman sculptor | KAS1090 | 0.521 × 0.323 × 0.75 | 0.23 × 0.23 | console 0.36 × 0.30, 1.55 |
+| `…gallery.bust.e3s` | classical-severan-lady | *A lady of the Severan court* · Unknown Roman sculptor | KAS687 | 0.489 × 0.336 × 0.81 | 0.23 × 0.23 | console 0.36 × 0.30, 1.55 |
+| `…gallery.bust.e3n` | classical-septimius-severus | *Septimius Severus in a toga* · Unknown Roman sculptor | KAS683 | 0.546 × 0.396 × 0.85 | 0.25 × 0.25 | console 0.36 × 0.31, 1.55 |
+| `…gallery.bust.e4s` | classical-oxford-bust | *The Oxford bust* · Unknown Roman sculptor | KAS106 | 0.573 × 0.314 × 0.80 | 0.22 × 0.22 | console 0.36 × 0.30, 1.55 |
+| `…gallery.bust.e4n` | classical-philip-the-arab | *Philip the Arab* · Unknown Roman sculptor | KAS2147 | 0.557 × 0.310 × 0.46 | 0.52 × 0.23 | console 0.58 × 0.30, 1.55 |
+| `…gallery.bust.w1s` | classical-euripides | *Euripides (Farnese type)* · Unknown Roman sculptor | KAS620 | 0.303 × 0.301 × 0.56 | 0.22 × 0.22 | console 0.36 × 0.30, 1.55 |
+| `…gallery.bust.w1n` | classical-plato | *Plato* · After Silanion | KAS2111 | 0.247 × 0.288 × 0.49 | 0.22 × 0.22 | console 0.36 × 0.30, 1.55 |
+| `…gallery.bust.w2s` | classical-kimon | *A general, identified as Kimon* · Unknown Roman sculptor | KAS534 | 0.303 × 0.334 × 0.66 | 0.30 × 0.26 | console 0.36 × 0.32, 1.55 |
+| `…gallery.bust.w2n` | classical-homer-epimenides | *Homer (Epimenides type)* · Unknown Roman sculptor | KAS2237 | 0.234 × 0.240 × 0.49 | 0.18 × 0.18 | console 0.36 × 0.30, 1.55 |
+| `…gallery.bust.w3s` | classical-chrysippus | *Chrysippus* · Unknown Roman sculptor | KAS602 | 0.267 × 0.261 × 0.44 | 0.18 × 0.18 | console 0.36 × 0.30, 1.55 |
+| `…gallery.bust.w3n` | classical-pseudo-seneca | *The so-called Seneca* · Unknown Hellenistic sculptor | KAS94 | 0.252 × 0.273 × 0.47 | 0.19 × 0.19 | console 0.36 × 0.30, 1.55 |
+| `…gallery.bust.w4s` | classical-sciarra-amazon | *Head of an Amazon (Sciarra type)* · After a Greek sculptor | KAS615 | 0.322 × 0.278 × 0.61 | 0.20 × 0.20 | console 0.36 × 0.30, 1.55 |
+| `…gallery.bust.w4n` | classical-zeno-of-citium | *Zeno of Citium* · Unknown Roman sculptor | KAS745 | 0.254 × 0.294 × 0.47 | 0.25 × 0.21 | console 0.36 × 0.30, 1.55 |
+| `…gallery.herm.w` | classical-homer | *Homer (the blind type)* · Unknown Hellenistic sculptor | KAS210 | 0.307 × 0.292 × 0.57 | 0.18 × 0.18 | herm 0.40 × 0.40, 1.25 |
+| `…gallery.herm.e` | classical-socrates | *Socrates* · Unknown Roman sculptor | KAS635 | 0.310 × 0.284 × 0.51 | 0.30 × 0.25 | herm 0.40 × 0.40, 1.25 |
+| `…gallery.plinth.2` | classical-sleeping-ariadne | *Sleeping Ariadne* · Unknown Roman sculptor | KAS134 | 1.950 × 0.784 × 0.904 | 1.82 × 0.70 | plinth 2.30 × 1.04, 0.55 |
+| `…gallery.plinth.3` | classical-dying-gaul | *Dying Gaul* · After Epigonos of Pergamon | KAS1312 | 1.918 × 0.954 × 0.93 | 1.92 × 0.95 | plinth 2.30 × 1.04, 0.55 |
+| `…tribune.niche.n` | classical-apollo-belvedere | *Apollo Belvedere* · After Leochares | KAS353 | 1.419 × 0.978 × 2.24 | 0.81 × 0.75 | niche-pedestal 0.87 × 0.81, 0.53; c 0.360, front −0.045 |
+| `…tribune.niche.ne` | classical-laocoon | *Laocoön and His Sons* · Agesander, Athenodoros and Polydorus | KAS385 | 1.548 × 0.918 × 2.08 | 1.36 × 0.77 | niche-pedestal 1.42 × 0.83, 0.53; c 0.105, front −0.310 |
+| `…tribune.niche.nw` | classical-venus-de-milo | *Venus de Milo* · Attributed to Alexandros of Antioch | KAS434 | 0.674 × 0.615 × 2.04 | 0.58 × 0.52 | niche-plinth 0.70 × 0.58, 0.53; c 0.378, front +0.088 |
+| `…tribune.niche.se` | classical-barberini-faun | *Barberini Faun* · Unknown Hellenistic sculptor | KAS208 | 1.568 × 1.341 × 2.15 | 1.18 × 1.00 | niche-pedestal 1.24 × 1.06, 0.53; c 0.094, front −0.436 |
+| `…tribune.niche.sw` | classical-belvedere-antinous | *Belvedere Antinous (Hermes)* · Unknown Roman sculptor | KAS1161 | 0.934 × 0.773 × 2.335 | 0.82 × 0.74 | niche-pedestal 0.88 × 0.80, **0.51**; c 0.362, front −0.038 |
+| `…tribune.bust.n-a` | classical-head-of-a-gaul | *Head of a Gaul* · Unknown sculptor | KAS796 | 0.210 × 0.244 × 0.39 | 0.19 × 0.20 | console 0.36 × 0.30, 1.55 |
+| `…tribune.bust.ne-a` | classical-athena-parthenos | *Athena Parthenos* · After Phidias | KAS2272 | 0.647 × 0.555 × 0.805 | 0.33 × 0.34 | console 0.39 × 0.40, 1.55 |
+| `…tribune.bust.ne-b` | classical-apollo-giustiniani | *Head of Apollo Giustiniani* · Unknown Roman sculptor | KAS616 | 0.348 × 0.519 × 0.58 | 0.25 × 0.25 | console 0.36 × 0.31, 1.55 |
+| `…tribune.bust.nw-a` | classical-alexander-helios | *Alexander the Great as Helios* · Unknown Hellenistic sculptor | KAS283 | 0.376 × 0.372 × 0.71 | 0.22 × 0.22 | console 0.36 × 0.30, 1.55 |
+| `…tribune.bust.nw-b` | classical-ptolemy-ii | *Ptolemy II Philadelphus* · Unknown Hellenistic sculptor | KAS752 | 0.435 × 0.287 × 0.70 | 0.23 × 0.23 | console 0.36 × 0.30, 1.55 |
+| `…tribune.plinth.e` | classical-discobolus | *Discobolus* · After Myron | KAS1074 | 0.959 × 0.467 × 1.55 | 0.70 × 0.41 | plinth 0.90 × 0.90, 0.50 |
+| `…tribune.plinth.w` | classical-artemision-bronze | *Zeus or Poseidon of Artemision* · Unknown Greek sculptor | KAS2100 | 2.233 × 0.523 × 2.09 | 1.09 × 0.28 | plinth 1.15 (along y) × 0.90, 0.50 |
+| `…tribune.centre` | classical-belvedere-torso | *Belvedere Torso* · Apollonios, son of Nestor | KAS402 | 1.047 × 1.166 × 1.59 | 0.87 × 0.51 | pedestal Ø 2.20, 0.30 |
 
-**Free-standing places.** The plinths and herms are Art's fittings in `statuary-marble.honed.aged`: moulded blocks with
-the section (0.03, −0.01) (0.03, 0.06), cyma to (0, 0.10) convex first, then (0, H − 0.075), cyma to (0.03, H − 0.02)
-concave first, then (0.03, H).
-
-| Anchor | Carrier (as built) | Position (top z) | Facing | Work | Size |
-|---|---|---|---|---|---|
-| `classical-hall.gallery.plinth.2` | plinth 2.30 × 1.04 × 0.55, long side north–south | (0, 22.10) (0.55) | +x | classical-sleeping-ariadne | length 1.95; scan 1.95 × 0.78 × 0.90 high; base 1.82 × 0.70 |
-| `classical-hall.gallery.plinth.3` | the same | (0, 16.10) (0.55) | −x | classical-dying-gaul | 0.93 high; 1.92 × 0.95; base 1.92 × 0.95 |
-| `classical-hall.tribune.plinth.e` | plinth 0.90 × 0.90 × 0.50 | (5.10, 0) (0.50) | −x | classical-discobolus | 1.55; 0.96 × 0.47; base 0.70 × 0.41 |
-| `classical-hall.tribune.plinth.w` | plinth 0.90 × 0.90 × 0.50, grows to 1.15 along the ambulatory | (−5.10, 0) (0.50) | +x, its arms along the ambulatory | classical-artemision-bronze | 2.09; 2.23 × 0.52; base 1.09 × 0.28 |
-| `classical-hall.tribune.centre` | the pedestal Ø 2.20 × 0.30 (3.5) | (0, 0) (0.30) | +y, towards the gallery and the stair | classical-belvedere-torso | 1.59; 1.05 × 1.17; base 0.87 × 0.51 |
-| `classical-hall.gallery.herm.w` | herm (below) | (−2.45, 30.83) (1.25) | −y | classical-homer | bust 0.57 |
-| `classical-hall.gallery.herm.e` | herm | (2.45, 30.83) (1.25) | −y | classical-socrates | bust 0.51 |
-
-**The herm** has three parts:
-- a moulded plinth 0.40 × 0.40 × 0.14;
-- a shaft widening upwards from 0.26 square at z 0.13 to 0.32 square at z 1.17;
-- a moulded cap 0.40 × 0.40 × 0.09 from z 1.16. The top is at z 1.25.
-
-**Gallery busts** stand on consoles at x ±2.85, with the top at z 1.55. They face −x on the east wall and +x on the west.
-The "S" places are at the bay centre + 1.60 and the "N" places at the bay centre − 1.60.
-
-| Anchor | y | Work (height) | | Anchor | y | Work (height) |
-|---|---|---|---|---|---|---|
-| `…bust.w1s` | 29.70 | classical-euripides (0.56) | | `…bust.e1s` | 29.70 | classical-julia-titi (0.485) |
-| `…bust.w1n` | 26.50 | classical-plato (0.49) | | `…bust.e1n` | 26.50 | classical-julius-caesar (0.52) |
-| `…bust.w2s` | 23.70 | classical-kimon (0.66) | | `…bust.e2s` | 23.70 | classical-antoninus-pius (0.895) |
-| `…bust.w2n` | 20.50 | classical-homer-epimenides (0.49) | | `…bust.e2n` | 20.50 | classical-young-marcus-aurelius (0.75) |
-| `…bust.w3s` | 17.70 | classical-chrysippus (0.44) | | `…bust.e3s` | 17.70 | classical-severan-lady (0.81) |
-| `…bust.w3n` | 14.50 | classical-pseudo-seneca (0.47) | | `…bust.e3n` | 14.50 | classical-septimius-severus (0.85) |
-| `…bust.w4s` | 11.70 | classical-sciarra-amazon (0.61) | | `…bust.e4s` | 11.70 | classical-oxford-bust (0.80) |
-| `…bust.w4n` | 8.50 | classical-zeno-of-citium (0.47) | | `…bust.e4n` | 8.50 | classical-philip-the-arab (0.46; base 0.52 wide) |
-
-**Tribune busts** stand on consoles at r 6.43, with the top at z 1.55, and face the centre. Place "a" is the niche's
-φ − 15° and place "b" is φ + 15°.
-
-| Anchor | φ | Position | Work |
-|---|---|---|---|
-| `classical-hall.tribune.bust.ne-a` | 315° | (4.547, −4.547) | classical-athena-parthenos (0.805; base 0.33 × 0.34) |
-| `…bust.ne-b` | 345° | (6.211, −1.664) | classical-apollo-giustiniani (0.58) |
-| `…bust.nw-a` | 195° | (−6.211, −1.664) | classical-alexander-helios (0.71) |
-| `…bust.nw-b` | 225° | (−4.547, −4.547) | classical-ptolemy-ii (0.70) |
-| `…bust.n-a` | 255° | (−1.664, −6.211) | classical-head-of-a-gaul (0.39) |
-| `…bust.n-b`, `…bust.se-a`, `…bust.se-b`, `…bust.sw-a`, `…bust.sw-b` | 285°, 15°, 45°, 135°, 165° | (1.664, −6.211), (6.211, 1.664), (4.547, 4.547), (−4.547, 4.547), (−6.211, 1.664) | empty, as built |
-
-**Totals.**
-- 41 casts: 18 statues and 23 busts.
-- 46 places: 5 consoles stand empty.
-- The Rotunda's four niche casts (Dying Slave, Rebellious Slave, Bacchus, Venere Italica) are the Rotunda's.
-
-**What the hang check will report tonight** (from the scans' bounding boxes; Art's hull test decides):
-- Most niche statues' bases are larger than the as-built plinths. The rule grows those plinths.
-- **Pedestals on the floor.** These figures pass the mouth and become pedestals on the floor:
-  - the Laocoön, by about 0.31;
-  - the Barberini Faun, by about 0.44;
-  - the Doryphoros, by about 0.17;
-  - Augustus and the Lansdowne Heracles, by about 0.10.
-- **Head clearance.** The Belvedere Antinous (2.335) leaves about 0.002 under the tribune niche's head at the as-built
-  0.08 plinth. The rule lowers its plinth to about 0.06.
-- **Too big for the carrier:**
-  - The Artemision Zeus's base (1.09) is larger than its 0.90 plinth.
-  - Philip the Arab (0.52 wide) and the Athena Parthenos (0.34 deep) are larger than their consoles (0.36 × 0.30).
-
-### Captions
-
-Captions are FMuseeText. The visitor gazes at a cast and its caption shows (IMuseeCaptioned). The credit line is
-"Cast: SMK, KASnnn; scan public domain". There are no physical wall labels tonight.
-
----
+Five tribune consoles stand empty as built (n-b, se-a, se-b, sw-a, sw-b). Scans carrying a `turn` in SOURCES.json
+(pseudo-seneca, alexander-helios, athena-parthenos) carry it in Hang.json. Captions by gaze; credit "Cast: SMK – National
+Gallery of Denmark, The Royal Cast Collection, KASnnn; scan public domain (SMK Open)". No physical labels.
 
 ## 9. Sound
-
-- **Emitters.** None, as built.
-- **Acoustic character.** The hall is one Enclosed volume of about 1350 m³: the gallery about 680, the throat about 23,
-  and the tribune about 645.
-  - It is bounded almost entirely by polished and honed marble and run lime plaster. The coffers add area and scatter.
-  - With typical absorption, a Sabine estimate gives a long, bright reverberation of about 7–9 s at 500 Hz, like a
-    marble church.
-  - Sound.ReverberationFromMatter computes the real figure from Form's made facts and Matter's absorption coefficients,
-    which the new stone records must carry. Nobody tunes it.
-- **Footfalls.** Hard and crisp, on the polished statuary and coloured marbles, by substance.
-- **Occlusion.** The port is an open portal, so the joint passes sound. The stair's footfalls, and the drum's mechanism
-  when it moves (the Rotunda's), carry down the well into the gallery. The hall is otherwise sealed.
-- **For polish, not tonight:** a real underground gallery has an air-handling system, whose faint supply noise would be
-  a real emitter.
-
----
+- **Acoustics** (from Matter, never tuned): one Enclosed ≈ 1,350 m³ of polished and honed marble and run lime plaster,
+  coffers scattering: a long, bright reverberation, roughly 7–9 s at 500 Hz by a Sabine estimate (a marble church).
+  The new stone records must carry absorption coefficients.
+- **Emitters:** footfalls by substance (polished statuario and coloured marbles, hard and crisp). The stair's footfalls
+  and the Rotunda's drum (its lift voice) carry down the well through the open port. No sound as built; an air-handling
+  hiss is polish.
 
 ## 10. Visitor
+- **Arrive** down the Rotunda's stair to its landing and through the port into the gallery facing north: four laylit
+  bays, the screen, and on the axis beyond, the Apollo Belvedere in the tribune's north niche.
+- **Walk** the 24 m gallery past statues in red niches and busts on consoles, round the Ariadne and the Dying Gaul on
+  the axis; through the screen into the tribune; the ambulatory round the ring (clear r 3.64–6.60; ≈ 1.0 either side
+  of the ambulatory plinths), or in under the eye to the Belvedere Torso. Gallery aisle ≈ 2.3–2.4 between an axis
+  plinth and the dado rail (≈ 2.0 where a niche pedestal projects). **Leave** the way you came: a dead end.
+- **Look:** gaze at a cast for its caption. **Step-to (VR):** the floors only; never a sill (0.45) or a carrier.
+  **Sit:** nowhere (no seats as built; benches are an owner's option). **Use:** nothing. Wayfinding: Site's sign at the
+  port, "Rotunda", up the stair. Collision is Form's own solids (the as-built invisible blockers are retired).
 
-1. **Arrival.** The visitor raises the sun clock (the Rotunda's) and walks down the spiral stair to the landing. They
-   pass the joint at the port into the gallery, facing north, with the whole enfilade ahead: four laylit bays, the
-   screen, and the Apollo Belvedere in the far niche of the tribune on the axis.
-2. **The gallery.** The visitor walks the 24 m gallery. Statues stand in the red niches and busts on consoles between
-   them. They pass round the reclining Ariadne and the Dying Gaul on the axis.
-3. **The tribune.** Through the screen is the tribune. The visitor can walk the ambulatory round the ring of columns, or
-   step in under the eye to the Belvedere Torso.
-4. **Back.** The visitor leaves the way they came. This is a dead end.
+## 11. The old-code map
+Paths relative to `windows\` unless marked repo. Re-express, never copy.
 
-- **What there is to do.** Walk and look. Gazing at a cast shows its caption. There are no seats as built, nothing to
-  use, and no prompts other than captions.
-- **Wayfinding.** Site places a sign at the port: "Rotunda", up the stair.
-- **The body.** The floor is flat at z 0 everywhere. By FMuseeHumanMeasure the body can't step onto a niche sill (0.45)
-  or any carrier (at least 0.30), so no hidden blockers are needed: collision is Form's own solids. The as-built
-  invisible guards are retired.
-- **Clear widths.** The ambulatory is clear from r 3.64 to 6.60. The plinths at r 5.10 leave about 1.0 on either side.
-  Between each axis plinth and the wall's dado rail the gallery's aisle is about 2.3–2.4 wide, or about 2.25 where a
-  niche pedestal projects.
-
----
-
-## 11. The old code map
-
-These files are read-only references. Re-express the geometry through Form, Matter, Light and Art; don't copy the old
-kit. Paths are relative to `C:\Users\anan9\Desktop\Projects\Musee Vision\`.
-
-| What | Where |
+| Part | Where |
 |---|---|
-| The hall's plan numbers | `windows/Source/MuseeVision/Plan/MuseePlan.h:461-509` |
-| The serving shaft and port (Rotunda side, for the mating) | `windows/Source/MuseeVision/Plan/MuseePlan.h:119-158`, `windows/Source/MuseeVision/SunClock/SunClockShaft.cpp:1-100`, `SunClock/SunClock.h:14-52` |
-| The design summary | `windows/Source/MuseeVision/ClassicalHall/ClassicalHallStructure.h:48-68` |
-| Derived dimensions (vault radius, jambs, lip, shell) | `ClassicalHall/ClassicalHallGeometry.cpp:59-143` |
-| Station lists and bay and pair centres | `ClassicalHallGeometry.cpp:145-213` |
-| Niches (flat and curved, the head, the reveal) | `ClassicalHallGeometry.cpp:215-363`, `859-875` (gallery), `1065-1083` (tribune) |
-| Profiles: entablature, skirting, dado rail, pilaster base, surround, door architrave (retired), panel frame | `ClassicalHallGeometry.cpp:365-455` |
-| Column section, volute, column, pilaster, dentils | `ClassicalHallGeometry.cpp:501-710` |
-| The coffer, rosette and surfaces | `ClassicalHallGeometry.cpp:712-847` |
-| Gallery walls, south wall, lip, passage, sleeve | `ClassicalHallGeometry.cpp:877-1061` |
-| The tribune wall | `ClassicalHallGeometry.cpp:1086-1119` |
-| The gallery vault and lanterns | `ClassicalHallGeometry.cpp:1123-1254` |
-| The annular vault | `ClassicalHallGeometry.cpp:1257-1317` |
-| The dome, the eye and the bead | `ClassicalHallGeometry.cpp:1320-1400` |
-| The ring beam | `ClassicalHallGeometry.cpp:1403-1418` |
-| Floors: the gallery carpet and the tribune pattern | `ClassicalHallGeometry.cpp:1482-1671` |
-| The lintel and soffit | `ClassicalHallGeometry.cpp:1675-1700` |
-| The shell (the footprint's evidence) | `ClassicalHallGeometry.cpp:1704-1772` |
-| The entablatures, wall mouldings and tribune entablature | `ClassicalHallGeometry.cpp:1777-1853` |
-| Plinths, herms, keystones, framed panels, niche fittings, consoles | `ClassicalHallGeometry.cpp:1858-2019` |
-| The door frame (retired: Site's joint) | `ClassicalHallGeometry.cpp:2022-2041` |
-| The pedestal | `ClassicalHallGeometry.cpp:2043-2052` |
-| Pilasters and column placement | `ClassicalHallGeometry.cpp:2057-2101` |
-| The works' places (specs, herm bases, spots, centrepiece) | `ClassicalHallGeometry.cpp:2105-2132`, `2181-2321` |
-| Hidden blockers (retired: collision comes from the solids) | `ClassicalHallGeometry.cpp:2138-2178` |
-| Lights (evidence only: laylight nits, coves, washers, accents) | `ClassicalHallGeometry.cpp:2323-2486` |
-| The assembly order and the lunette panel | `ClassicalHallGeometry.cpp:2489-2558` |
-| Material names, colours, the diffuser | `ClassicalHall/ClassicalHallStructure.cpp:147-162`, `279-319` |
-| Light placement (evidence) | `ClassicalHallStructure.cpp:322-366` |
-| The old geometry kit (don't port; Form replaces it) | `ClassicalHall/ClassicalHallKit.h:1-799` |
-| The hang (which cast goes where) | `windows/Scripts/classical_art.py:144-192` |
-| Scan scaling to true size | `windows/Scripts/classical_art.py:109-141` |
-| Cast sizes | `assets/classical/SOURCES.json` |
-| Labels | `data/classical.json` |
-| Materials: polished statuary floors, cast plaster, gilt, the coloured marbles, statuary, stucco | `windows/Scripts/materials.py:1055-1062`, `1103-1124`, `1144-1175`, `1217-1256`, `1334-1339` |
-| The cream marble's coursing | `windows/Scripts/materials.py:1063-1071`, `1336-1338` |
-| The coloured marbles' images (evidence for Matter) | `windows/Scripts/stone_textures.py:488-635` |
-| The bronze angle on the sill (retired: the joint's strip) | `windows/Source/MuseeVision/Furniture/MuseeFurniture.cpp:336-344` |
-| The pond above the tribune (a neighbour's constraint) | `windows/Source/MuseeVision/Chenghuai/ChenghuaiPlan.h:135-137`, `Chenghuai/ChenghuaiGarden.cpp:28-45` |
-| Boards | `plan/canvas/Rotunda.dc.html` (long section and plan), `plan/canvas/AsBuiltClassical.dc.html`, `plan/canvas/MaterialsStone.dc.html`, `plan/canvas/MaterialsOther.dc.html` |
+| Hall plan numbers (floor −6, roof −0.55, laylights −0.62, shell −6.4, shaft r 7.6, opening, gallery −8.2/−32.2, order, crowns, tribune −39.3) | Source/MuseeVision/Plan/MuseePlan.h:461-509 |
+| The serving shaft and port (Rotunda side) | …/Plan/MuseePlan.h:119-158; SunClock/SunClockShaft.cpp:44-93 |
+| Design summary | Source/MuseeVision/ClassicalHall/ClassicalHallStructure.h:48-68 |
+| Derived dimensions (vault R, jambs, lip, shell, sleeve) | …/ClassicalHall/ClassicalHallGeometry.cpp:59-143 |
+| Stations, bay and pair centres | …/ClassicalHallGeometry.cpp:145-213 |
+| Niches (flat and curved, head, reveal); gallery and tribune niche lists | …/ClassicalHallGeometry.cpp:215-363, 859-875, 1065-1083 |
+| Profiles (entablature, skirting, dado rail, pilaster base, surround, door architrave (retired), panel frame) | …/ClassicalHallGeometry.cpp:365-455 |
+| Column section, volute, capital, pilaster, dentils | …/ClassicalHallGeometry.cpp:501-710 |
+| Coffer, rosette | …/ClassicalHallGeometry.cpp:712-847 |
+| Walls, south wall, lip, passage, sleeve; tribune wall | …/ClassicalHallGeometry.cpp:877-1061, 1086-1119 |
+| Gallery vault and lanterns; annular vault; dome, eye, bead; ring beam | …/ClassicalHallGeometry.cpp:1123-1254, 1257-1317, 1320-1400, 1403-1418 |
+| Floors; lintel; shell (footprint evidence) | …/ClassicalHallGeometry.cpp:1482-1671, 1675-1700, 1704-1772 |
+| Entablatures and wall mouldings | …/ClassicalHallGeometry.cpp:1777-1853 |
+| Plinths, herms, keystones, panels, niche fittings, consoles; door frame (retired); pedestal | …/ClassicalHallGeometry.cpp:1858-2041, 2043-2052 |
+| Pilasters and columns; places (axis, ambulatory, herms) | …/ClassicalHallGeometry.cpp:2057-2132 |
+| Hidden blockers (retired) | …/ClassicalHallGeometry.cpp:2138-2178 |
+| Spots (places, facings); lights (evidence: laylights, coves, washers, accents, 3800 K) | …/ClassicalHallGeometry.cpp:2181-2321, 2323-2486 |
+| Assembly; lunette panel; panel and console placement | …/ClassicalHallGeometry.cpp:2489-2552 |
+| As-built materials, the diffuser | …/ClassicalHall/ClassicalHallStructure.cpp:147-162, 279-319 |
+| The hang (PLACEMENT, STATUES, BUSTS); scaling to true size | Scripts/classical_art.py:144-192, 109-141 |
+| Sizes and scans; labels | repo assets/classical/SOURCES.json, assets/classical/*.glb; repo data/classical.json |
+| Bronze angle on the sill (retired: the joint's strip) | Source/MuseeVision/Furniture/MuseeFurniture.cpp:336-344 |
+| The pond above the tribune | Source/MuseeVision/Chenghuai/ChenghuaiPlan.h:135-136 |
 
----
+**Corrections to the draft** (`r-specs/…/Stages/classical-hall.md`):
+1. **Class name** `stairwell.spiral.3600x4400.arched` (width × crown, the Rotunda's), not `stairwell.spiral.3600`.
+2. **Materials are palette keys** (D-018, Story "The Classical Hall"): cream marble → `stone.crema-marfil`; rosso antico
+   dado and lozenges → `accent.rojo-alicante`; giallo antico → `accent.giallo-siena`; statuary → `accent.statuario`;
+   pavonazzetto, verde, porphyry → the palette's (porphyry **reclaimed**); Pompeian stucco → `white.lime-plaster`
+   pigmented with red ochre, burnished; opal glass → `glass.low-iron` acid-etched, laminated. **Rosettes:** gilt only in
+   the tribune (the palette's role); the gallery's 256 are white fibrous plaster (draft: all gilt plaster of Paris).
+3. **Light, 3000 K** (draft 4000 K with two new records `luminous-panel.4000k` and `linear-cove.4000k`): the coves are
+   the catalogue's `linear-cove.3000k`, the washers `track-wallwasher.3000k` (complete), the spots
+   `track-spot.3000k.*`; one gap, `gap.luminous-ceiling.3000k`, the Salon cabinet's. Every accent is listed with its
+   point and aim (draft: "Scheme chooses"). The washer at φ 90° is dropped (it aimed through the throat opening at no
+   wall): 11, not 12. Operation `always` / `presence` (the contract's words).
+4. **Hang:** the draft's rule is computed into carriers (§8) instead of deferred findings; anchors are `Mount` (the
+   contract has no "Plinth" kind); console growth for Philip, Kimon, Septimius, Athena and Apollo Giustiniani.
+5. **Verified unchanged:** frame and conversion (+39.30, +6.00); footprint (31.40, 31.996, 6.691, 57.88°/122.12°);
+   port frame and depths (0.600 / 0.816); every wall, niche, lintel and throat number (5.8788, 62.964°); vault R 3.8284 /
+   axis 1.3216 / s 3.4473; lantern edges (1.1805, 1.1232); annular R 1.5009 at (5.10, 3.6491); dome R 3.9464 at 1.3905;
+   coffer counts 256 / 420 / 72; all profile point lists; column and capital; pilaster positions (30.85, 7.27, 61.38°,
+   118.62°); columns (2.60, 7.0283, r 3.40); ressaut 0.2583; plinths, herms, pedestal, consoles; floors; cove runs; the
+   hang assignment (re-run from classical_art.py); every cast id, height and scan bound.
 
-## 12. First-pass cut
+## 12. The first-pass cut
+**Tonight:** Site (frame, footprint volume, the receiving well, the port with its class, rough opening, sleeve and
+stand-alone blind doors, one enclosure); walls with the dado split, 13 niches with heads, reveals and sills, the throat
+and lintel; the gallery barrel with 256 stepped coffers and 4 lantern wells, the annular vault's 420, the dome's 72 and
+the eye well, the ring beam; 26 columns (turned, entasis, carved Ionic capitals) and 10 pilasters; the entablatures
+with ressauts, fillers and dentils; skirting, dado rail, surrounds, keystones, 26 framed panels with consoles, the
+lunette panel; the opus sectile floors; the carriers of §8; the 41 casts on their anchors with captions; the laylight
+glass, luminaires and targets of §4; acoustics and footfalls. If Form's Carving isn't ready, the coffer backs stay
+plain (no rosettes) and the volutes are the flat discs of the pilasters.
 
-**Built tonight.**
-1. **The frame.** The port with its receiving well; the footprint volume; one Enclosed enclosure. The shell is sealed
-   except at the port. The rough opening and the collar are built to the class.
-2. **The walls.** Walls and the dado split. The 8 gallery niches and 5 tribune niches with their heads. The throat and
-   the lintel.
-3. **The vaults.** The gallery barrel with its 256 stepped coffers and 4 lantern wells. The annular vault's 420
-   coffers. The dome's 72 coffers and the eye well. The ring beam.
-4. **The order.** 26 columns (turned, entasis, Ionic capitals with spiral volutes) and 10 pilasters. The gallery
-   entablature with its ressauts and fillers, the tribune entablature, and the dentils.
-5. **The mouldings.** Skirting, dado rail, niche surrounds and keystones. 26 framed panels with consoles and the lunette
-   panel.
-6. **The floors.** The opus sectile floors: the gallery carpet and the tribune's polar pattern.
-7. **The carriers.** Niche plinths sized by the hang rule, the centrepiece pedestal, and Art's plinths and herms.
-8. **Art.** The 41 casts at true size on their anchors, with captions. The hang check's findings go to the owner's
-   walk.
-9. **Light.** The laylights (5), the coves (8 runs and 3 rings), the washer mount and the accent mounts. Commissioned to
-   the targets at 4000 K.
-10. **Sound.** RT60 from Matter; footfalls.
+**Waits for polish:** rosettes and the eye's bead if Carving hasn't landed; physical labels; an air-handling emitter;
+benches in the tribune (owner's option); pore-soiling and wear calibrated to photographs; the owner's walk over the
+hang findings (the pedestals, the Antinous's lowered plinth, grown consoles); deeper laylight plenums if the Architect
+changes the section.
 
-**Waits for polish.**
-- The gilt rosettes on the coffer backs and the eye's bead. They are tonight only if Form's Carving (a lathe with angular
-  modulation) has landed; otherwise the coffer backs stay plain.
-- Physical wall labels.
-- An air-handling emitter.
-- Benches in the tribune (not as built; an option for the owner).
-- Pore-soiling and wear calibration against photographs.
-- Resolving the hang findings (the pedestals, Philip, the Athena, the Artemision plinth), which the owner decides on
-  Sunday.
-- Deeper laylight plenums, if the Architect changes the section (see Risks).
+## 13. Palette keys to confirm and catalogue gaps
+**Palette keys** (no `todo.` keys; roles guessed or workings outside `workingsByEra`):
+- `accent.statuario` for the **niche sills, plinths and pedestals, skirting, dado rail, niche surrounds, keystones and
+  panel frames** (roles name bases, capitals, entablatures, herms, consoles, white floor fields).
+- `accent.pavonazzetto` for the **26 wall panels, the lunette panel and the 6 tribune pilaster shafts** (role: the
+  tribune's twelve columns); `accent.giallo-siena` for the **4 gallery pilaster shafts** (role: the paired shafts).
+- `accent.rojo-alicante` polished for the **floor lozenges** (roles: the dado, the landing's red).
+- `white.fibrous-plaster` + `gilt.gold-leaf.oil` for the **eye's bead** (role: tribune rosettes); the gallery rosettes
+  white fibrous plaster, **cast**, ungilded.
+- Workings written as compound strings: `burnished.red-ochre` (niches), `acid-etched.laminated` (laylights),
+  `polished.reclaimed` (porphyry), `cast.seams-kept.sized` (casts); `stone.travertine-romano` **sawn** (hidden core, not
+  in workingsByEra); `trowelled` for the laylight wells.
+- **Care class of the casts:** plaster has no class; `stone-and-bronze` used (ruled: sized plaster). Care.json says a
+  coated surface takes its coating's class, and the Story seals the casts with size: confirm (as for the Rotunda).
+- The **landing** keys the palette gives "Classical Hall: landing floor … the landing's red / black" are used by the
+  Rotunda, which builds that landing in its served well (`rotunda.stair.landing.floor`, `.red`, `.black`).
 
----
+**Catalogue gaps** (Light): `gap.luminous-ceiling.3000k` (the Salon cabinet's gap), here an **edge-lit LED light-guide
+panel ≤ 50 mm deep** (the laylight has only 0.07 between its glass at 5.38 and the roof top 5.45), dimmable, CRI > 90,
+four 2.246 × 2.28 and one Ø 2.40 disc. No other gap.
 
-## Risks
+**Conflicts and questions for the Architect:**
+(a) **CCT.** The draft and the owner's earlier choice (Luminaires.md: "high-CRI 4000 K for the works") against the
+finished Rotunda and Salon (3000 K). This sheet follows the finished sheets (one colour through the stair into the
+hall, no new records). If the Architect rules 4000 K: spots → `track-spot.4000k.{12,20,38}deg` (no 29°: use 38°), washers
+→ `track-wallwasher.4000k` (evidence incomplete), coves and laylights → `gap.linear-cove.4000k`,
+`gap.luminous-ceiling.4000k`.
+(b) **The hang** changes the as-built look: niche pedestals project in front of 9 of the 13 niches (the Faun by 0.44,
+the Laocoön by 0.31). The as-built plinths were smaller than the casts' bases; the alternative is to accept overhanging
+bases (not physical). Owner's walk.
+(c) **Structure over the laylights:** 0.02 of roof over each lantern and 0.12 over the vault crowns; the stages above
+carry down to −0.55. Form.MinThickness may flag it; a design question, not a Room Builder patch.
+(d) The Rotunda sheet says its floor bears on this roof "north of y −8.20" (the gallery's inner face); the hall's shell
+reaches museum y −7.90 (x ±4.20) and its sleeve the r 7.60 cylinder. No volume clash (both meet at −0.55); Site should
+use the shell line.
 
-1. **The laylights have almost no depth.** There is only 0.07 between the diffusers (z 5.38) and the stage's top
-   (z 5.45, museum −0.55).
-   - Only an edge-lit luminous panel of 50 mm or less is physically real there.
-   - The catalogue has no such kind and no 4000 K cove. Without `luminous-panel.4000k` and `linear-cove.4000k` the hall
-     has no general light tonight.
-   - The roof's own thickness over the lanterns (0.02–0.07) also relies on the structure of the stages above, down to
-     −0.55.
-2. **The stage lies under other stages.** It sits under the Rotunda's drum and north passage, and under Chenghuai,
-   whose pond bed is at museum −0.46 over the tribune, 0.09 above this roof.
-   - Site.NoOverlap and Site.RoomStaysInside must test volumes (plan by z), or they will report false overlaps.
-   - The neighbours must keep their footings and basins above −0.55.
-3. **The mating face is a cylinder.** The port face is the cylinder r 7.60, while the room's own face 0.60–0.82 behind
-   it is flat.
-   - Site's joint has to lay the threshold, the bronze strip on the arc and the lining through a wall depth that varies
-     across the opening.
-   - The Rotunda must declare the identical well (r 7.60 about the same axis, museum −6.40 to 0.00) and the same class,
-     or Site.PortsMate fails.
-4. **The casts don't fit the as-built carriers.**
-   - Most niche statues' bases are larger than the plinths.
-   - The Laocoön and the Faun pass their niches' mouths by 0.3–0.44.
-   - The Belvedere Antinous leaves about 2 mm under its niche's head.
-   - The Artemision's base is larger than its plinth, and Philip and the Athena are larger than their consoles.
-
-   The hang rule makes this visible and physical, but the Sunday walk will show pedestals in front of some niches.
-5. **Matter records are missing.** Six stone accents, the Pompeian stucco and opal glass don't exist yet. With no
-   fallback material, Matter.Resolve fails and the stage can't be made until they land.
-6. **The casts have no care class.** `Data/Art/Care.json` lists no medium for a plaster cast. Art must add "plaster
-   cast" to `stone-and-bronze`, or Art.WithinCare can't resolve the 41 targets.
-7. **The doorway changes visibly.** Site's joint replaces the as-built carved architrave, keystone, plinth blocks and
-   porphyry sill with the museum's one travertine doorcase and bronze strip, following principle 2.
-8. **Residency.** The stage is visible only while the Rotunda's drum is raised. Site's residency must follow the serving
-   mechanism's state, or the hall streams in late or stays loaded.
-9. **Making cost.** The stage has about 750 coffers of 7 rings each, 26 carved capitals, and 41 scans of 0.4–2 M
-   triangles (capitoline-antinous 2.0 M, homer 0.9 M): about 18 M triangles of Nanite in the scans alone.
-   Path-traced commissioning of the coffers may be slow; one reference moment is enough (section 5).
-10. **Structure.** The vault crown behind the coffers is only 0.12 to the roof top, and the gallery passes under the
-    Rotunda's drum wall. Form.MinThickness may flag the roof over the lanterns. That is a design question for the
-    Architect, not something for the Room Builder to patch.
+## Build notes
+- **Frame.** Origin O = the tribune's centre on its floor; museum = local + (0, −39.30, −6.00), yaw 0. Old y + 39.30,
+  old z + 6.00.
+- **Nothing moves.** No body, no mechanism, no channel. The Rotunda's drum above is the only mechanism near.
+- **You receive the well.** The cylinder r 7.60 about W = (0, 39.30), z −0.40 … 6.00, is the Rotunda's: build nothing
+  inside it. The port `classical-hall.stair` at (0, 31.70, 0) facing +y mates `rotunda.stair` (0, −7.60, −6.00), class
+  `stairwell.spiral.3600x4400.arched`.
+- **Joint vs room.** The room builds only the rough opening (clear + a) through the south wall and sleeve to the
+  cylinder. Site's joint builds the threshold, bronze strip on the arc, linings and surround. Blind doors only on the
+  stand.
+- **Unusual drawings.** The port face is a cylinder while the wall behind is flat (depth 0.600 → 0.816). The tribune
+  panels are flat on a curved wall. The ring beam carries the entablature on both faces. Porphyry discs are cut into
+  sectors within stock.
+- **Carriers are sized by the works.** Build each plinth, pedestal and console at its §8 size. A niche pedestal
+  stands on the floor, and the skirting and dado rail return round it.
+- **Shared anchors.** The 46 `Mount` anchors (carrier top centres) are read by Art (the casts) and located by the
+  room's carriers. Light uses points, not anchors.
