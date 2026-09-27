@@ -18,6 +18,7 @@
 #include "MuseeCommand.h"
 #include "MuseeHumanMeasure.h"
 #include "MuseeUsable.h"
+#include "VisitorAdapter.h"
 #include "VisitorEye.h"
 #include "VisitorOverlay.h"
 #include "VisitorReach.h"
@@ -124,26 +125,50 @@ FVector AVisitorBody::EyeLocation() const
 	return EyeCamera->GetComponentLocation();
 }
 
+void AVisitorBody::BeginPlay()
+{
+	Super::BeginPlay();
+	if (const TSharedPtr<IVisitorAdapter> Adapter = Musee::Visitor::ActiveAdapter())
+	{
+		AdapterName = Adapter->Name();
+		Adapter->Adopt(*this);
+	}
+}
+
+void AVisitorBody::TurnBy(Musee::Degrees Angle)
+{
+	if (AController* Mind = GetController())
+	{
+		Mind->SetControlRotation(Mind->GetControlRotation() + FRotator(0.0, Angle.Get(), 0.0));
+	}
+}
+
 void AVisitorBody::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
 	if (IsLocallyControlled()) { Look(); }
 }
 
-void AVisitorBody::Look()
+void AVisitorBody::FindAlong(const FVector& From, const FVector& Direction, UObject*& OutUsable, UObject*& OutCaptioned) const
 {
-	const FVector From = EyeLocation();
-	const FVector To = From + GetViewRotation().Vector() * Musee::ToEngine(UseDistance());
+	const FVector To = From + Direction.GetSafeNormal() * Musee::ToEngine(UseDistance());
 	FCollisionQueryParams Query(SCENE_QUERY_STAT(MuseeVisitorLook), true, this);
 	TArray<FHitResult> Hits;
 	GetWorld()->LineTraceMultiByChannel(Hits, From, To, ECC_Visibility, Query);
-	UObject* Usable = nullptr;
-	UObject* Captioned = nullptr;
+	OutUsable = nullptr;
+	OutCaptioned = nullptr;
 	for (const FHitResult& Hit : Hits)
 	{
-		Usable = Usable ? Usable : Musee::Visitor::FindUsable(Hit.GetComponent(), Hit.GetActor());
-		Captioned = Captioned ? Captioned : Musee::Visitor::FindCaptioned(Hit.GetComponent(), Hit.GetActor());
+		OutUsable = OutUsable ? OutUsable : Musee::Visitor::FindUsable(Hit.GetComponent(), Hit.GetActor());
+		OutCaptioned = OutCaptioned ? OutCaptioned : Musee::Visitor::FindCaptioned(Hit.GetComponent(), Hit.GetActor());
 	}
+}
+
+void AVisitorBody::Look()
+{
+	UObject* Usable = nullptr;
+	UObject* Captioned = nullptr;
+	FindAlong(EyeLocation(), EyeCamera->GetForwardVector(), Usable, Captioned);
 	Looked = Usable;
 	if (Usable)
 	{
@@ -210,6 +235,7 @@ void AVisitorBody::PawnClientRestart()
 		Input->ClearAllMappings();
 		Input->AddMappingContext(Controls, 0);
 	}
+	ControlsReady.Broadcast(*this);
 }
 
 void AVisitorBody::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)

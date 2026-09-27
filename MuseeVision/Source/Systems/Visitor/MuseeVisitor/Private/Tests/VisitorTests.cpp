@@ -9,6 +9,7 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "MuseeHumanMeasure.h"
 #include "Tests/VisitorTestUsable.h"
+#include "VisitorAdapter.h"
 #include "VisitorBody.h"
 #include "VisitorEye.h"
 #include "VisitorOverlay.h"
@@ -83,6 +84,32 @@ namespace Musee::Visitor::Tests
 			TestTrue(TEXT("and the overlay is clear"), Body->Overlay()->Text().IsEmpty());
 		}
 		World->DestroyWorld(false);
+		return true;
+	}
+
+	/** An adapter for the test: active or not as it is told. */
+	class FTestAdapter final : public IVisitorAdapter
+	{
+	public:
+		explicit FTestAdapter(bool bInActive) : bActive(bInActive) {}
+		virtual FName Name() const override { return TEXT("test"); }
+		virtual bool IsActive() const override { return bActive; }
+		virtual void Adopt(AVisitorBody& Body) override {}
+		bool bActive = false;
+	};
+
+	IMPLEMENT_SIMPLE_AUTOMATION_TEST(FVisitorAdapterTest, "Musee.Visitor.Adapter", Flags)
+	bool FVisitorAdapterTest::RunTest(const FString& Parameters)
+	{
+		const TSharedPtr<IVisitorAdapter> Before = ActiveAdapter();
+		TestFalse(TEXT("In the editor no headset adapter is active"), Before.IsValid());
+		const TSharedRef<FTestAdapter> Idle = MakeShared<FTestAdapter>(false);
+		RegisterAdapter(Idle);
+		TestFalse(TEXT("An adapter whose device isn't running isn't chosen"), ActiveAdapter().IsValid());
+		Idle->bActive = true;
+		TestTrue(TEXT("One whose device runs is"), ActiveAdapter().Get() == &Idle.Get());
+		UnregisterAdapter(TEXT("test"));
+		TestFalse(TEXT("and unregistered, it is gone"), ActiveAdapter().IsValid());
 		return true;
 	}
 

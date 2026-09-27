@@ -42,16 +42,45 @@ public:
 	/** The thing under the visitor's gaze and within reach, found anew each frame: what the use key would use. */
 	[[nodiscard]] UObject* LookedAt() const { return Looked.Get(); }
 
+	/**
+	 * What lies along a ray within reach of the visitor: the first usable thing (IMuseeUsable) and the first captioned
+	 * thing (IMuseeCaptioned), each null if there is none. A thing answers the Visibility trace, by blocking or
+	 * overlapping it, on its own component, a component it hangs from, or its actor.
+	 */
+	void FindAlong(const FVector& From, const FVector& Direction, UObject*& OutUsable, UObject*& OutCaptioned) const;
+
 	/** Looks along the view now, updating what is looked at and the overlay. */
 	void Look();
 
 	/** Uses the thing looked at, if it can be used now. */
 	void UseLooked();
 
+	/** Announces that the body's controls are set up, so an adapter can add its own to them. */
+	using FControlsReady = TMulticastDelegate<void(AVisitorBody&)>;
+	FControlsReady& OnControlsReady() { return ControlsReady; }
+
+	/** The name of the adapter that adopted the body, or none for the screen's own controls. */
+	[[nodiscard]] FName Adapter() const { return AdapterName; }
+
+	/** Runs a museum command and shows what it said on the overlay. */
+	void RunCommand(const TCHAR* Name);
+
+	/** The hour key and the city key. */
+	void AnotherHour();
+	void OtherCity();
+
+	/** Striding, while the stride key is held. */
+	void StrideOn();
+	void StrideOff();
+
+	/** Turns the body about the vertical, for adapters without a mouse. */
+	void TurnBy(Musee::Degrees Angle);
+
 	UCameraComponent* Camera() const { return EyeCamera; }
 	UVisitorEye* Eye() const { return VisitorEye; }
 	UVisitorOverlay* Overlay() const { return VisitorOverlay; }
 
+	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaSeconds) override;
 	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
 	virtual void PawnClientRestart() override;
@@ -60,11 +89,6 @@ private:
 	void BuildInput();
 	void Walk(const FInputActionValue& Value);
 	void Turn(const FInputActionValue& Value);
-	void StrideOn();
-	void StrideOff();
-	void RunCommand(const TCHAR* Name);
-	void AnotherHour();
-	void OtherCity();
 	void Leave();
 
 	UPROPERTY(VisibleAnywhere, Category = "Visitor")
@@ -83,4 +107,6 @@ private:
 	TMap<FName, TObjectPtr<UInputAction>> Actions;
 
 	TWeakObjectPtr<UObject> Looked;
+	FControlsReady ControlsReady;
+	FName AdapterName;
 };
