@@ -39,6 +39,7 @@ void FMotionMechanismSpec::KeyTexts()
 	KeyText(OpenUse.Caption, Key, TEXTVIEW("open-use.caption"));
 	KeyText(CloseUse.Verb, Key, TEXTVIEW("close-use.verb"));
 	KeyText(CloseUse.Caption, Key, TEXTVIEW("close-use.caption"));
+	KeyText(GuardCaption, Key, TEXTVIEW("guard-caption"));
 	for (int32 Index = 0; Index < Rides.Num(); ++Index)
 	{
 		const FString Ride = FString::Printf(TEXT("ride-%d"), Index + 1);

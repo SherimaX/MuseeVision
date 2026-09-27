@@ -43,7 +43,7 @@ FText UMotionMechanism::WhyBusy() const
 {
 	switch (Waiting)
 	{
-	case EWait::Visitor: return NSLOCTEXT("Musee", "motion.held", "Something is in its way.");
+	case EWait::Visitor: return MechanismSpec.GuardCaption.Key.IsNone() ? NSLOCTEXT("Musee", "motion.held", "Something is in its way.") : MechanismSpec.GuardCaption.ToText();
 	case EWait::Interlock: return NSLOCTEXT("Musee", "motion.interlocked", "It waits until it is safe to move.");
 	case EWait::Group: return NSLOCTEXT("Musee", "motion.group", "It waits for the others to close.");
 	default: return NSLOCTEXT("Musee", "motion.moving", "It is moving.");

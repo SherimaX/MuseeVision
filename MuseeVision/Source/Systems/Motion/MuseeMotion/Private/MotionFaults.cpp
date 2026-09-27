@@ -187,6 +187,10 @@ namespace Musee::Motion
 		{
 			Out.Add(TEXT("its clearance is negative"));
 		}
+		if (!Spec.GuardCaption.Key.IsNone() && Spec.Guard != TEXT("body-in-travel"))
+		{
+			Out.Add(TEXT("its guard caption needs a guard that holds the body (body-in-travel)"));
+		}
 		Out.Append(StopFaults(Spec));
 		if (Spec.Follows.IsSet() && (!Spec.Control.IsNone() || !Spec.Open.IsEmpty() || !Spec.Close.IsEmpty() || !Spec.Rides.IsEmpty()))
 		{

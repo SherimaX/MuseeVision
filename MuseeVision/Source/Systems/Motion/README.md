@@ -31,11 +31,12 @@ the control's use. A ride's Use anchor on another stage (`sphere.call`) is Site'
 dresser places no control for it.
 
 The occupancy guard (D-014) sweeps the slice each solid part of the body is about to enter for the visitor's `Body`
-channel: `body-in-travel` holds, `body-in-travel-reverse` turns a door back. The stage's interlocks are asked before
+channel: `body-in-travel` holds, `body-in-travel-reverse` turns a door back. While it holds, the control says why in the
+mechanism's `guardCaption` (the Reserve's "Screen C waits: you are in its way"), or in Motion's own words without one. The stage's interlocks are asked before
 every step of travel or of a ramp: the machine waits while one forbids it, and never reverses for one.
 
 A mechanism's texts may be plain strings: `openUse.verb` of `atrium.car.lift` is keyed `atrium.car.lift.open-use.verb`,
-a ride's `…ride-<n>.verb`, a performance's `<performance>.verb`.
+a ride's `…ride-<n>.verb`, its guard's `…guard-caption`, a performance's `<performance>.verb`.
 
 `MuseeMotionMaking` draws each extent's parts with Form's lathe: a telescope's stages home (every stage's far end at the
 closed length), and one turn of a column at its anchored end. The dresser gives each stage a carriage and turns the
