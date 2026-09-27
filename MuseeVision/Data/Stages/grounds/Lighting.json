@@ -4,7 +4,7 @@
   "luminaires": [
     {
       "id": "lamp.01",
-      "type": "gap.post-top-globe.2700k",
+      "type": "post-top-globe.2700k",
       "mount": "grounds.lamp.01",
       "aim": [
         -48.95,
@@ -16,7 +16,7 @@
     },
     {
       "id": "lamp.02",
-      "type": "gap.post-top-globe.2700k",
+      "type": "post-top-globe.2700k",
       "mount": "grounds.lamp.02",
       "aim": [
         -39.05,
@@ -28,7 +28,7 @@
     },
     {
       "id": "lamp.03",
-      "type": "gap.post-top-globe.2700k",
+      "type": "post-top-globe.2700k",
       "mount": "grounds.lamp.03",
       "aim": [
         -48.95,
@@ -40,7 +40,7 @@
     },
     {
       "id": "lamp.04",
-      "type": "gap.post-top-globe.2700k",
+      "type": "post-top-globe.2700k",
       "mount": "grounds.lamp.04",
       "aim": [
         -39.05,
@@ -52,7 +52,7 @@
     },
     {
       "id": "lamp.05",
-      "type": "gap.post-top-globe.2700k",
+      "type": "post-top-globe.2700k",
       "mount": "grounds.lamp.05",
       "aim": [
         -48.95,
@@ -64,7 +64,7 @@
     },
     {
       "id": "lamp.06",
-      "type": "gap.post-top-globe.2700k",
+      "type": "post-top-globe.2700k",
       "mount": "grounds.lamp.06",
       "aim": [
         -39.05,
@@ -76,7 +76,7 @@
     },
     {
       "id": "lamp.07",
-      "type": "gap.post-top-globe.2700k",
+      "type": "post-top-globe.2700k",
       "mount": "grounds.lamp.07",
       "aim": [
         -48.95,
@@ -88,7 +88,7 @@
     },
     {
       "id": "lamp.08",
-      "type": "gap.post-top-globe.2700k",
+      "type": "post-top-globe.2700k",
       "mount": "grounds.lamp.08",
       "aim": [
         -39.05,
@@ -100,7 +100,7 @@
     },
     {
       "id": "lamp.09",
-      "type": "gap.post-top-globe.2700k",
+      "type": "post-top-globe.2700k",
       "mount": "grounds.lamp.09",
       "aim": [
         -58.5,
@@ -112,7 +112,7 @@
     },
     {
       "id": "lamp.10",
-      "type": "gap.post-top-globe.2700k",
+      "type": "post-top-globe.2700k",
       "mount": "grounds.lamp.10",
       "aim": [
         -29.5,
@@ -124,7 +124,7 @@
     },
     {
       "id": "step.side.w",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         -63.94,
         10.2,
@@ -141,7 +141,7 @@
     },
     {
       "id": "step.side.e",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         -24.06,
         10.2,
@@ -158,7 +158,7 @@
     },
     {
       "id": "step.cour.w",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         -63.94,
         60.0,
@@ -175,7 +175,7 @@
     },
     {
       "id": "step.cour.e",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         -24.06,
         60.0,
@@ -192,7 +192,7 @@
     },
     {
       "id": "step.avenue.01",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         -47.94,
         68.5,
@@ -209,7 +209,7 @@
     },
     {
       "id": "step.avenue.02",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         -40.06,
         72.5,
@@ -226,7 +226,7 @@
     },
     {
       "id": "step.avenue.03",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         -47.94,
         76.5,
@@ -243,7 +243,7 @@
     },
     {
       "id": "step.avenue.04",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         -40.06,
         80.5,
@@ -260,7 +260,7 @@
     },
     {
       "id": "step.avenue.05",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         -47.94,
         84.5,
@@ -277,7 +277,7 @@
     },
     {
       "id": "step.avenue.06",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         -40.06,
         88.5,
@@ -294,7 +294,7 @@
     },
     {
       "id": "step.avenue.07",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         -47.94,
         92.5,
@@ -311,7 +311,7 @@
     },
     {
       "id": "step.avenue.08",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         -40.06,
         96.5,
@@ -328,7 +328,7 @@
     },
     {
       "id": "step.avenue.09",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         -47.94,
         100.5,
@@ -345,7 +345,7 @@
     },
     {
       "id": "step.avenue.10",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         -40.06,
         104.5,
@@ -362,7 +362,7 @@
     },
     {
       "id": "step.avenue.11",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         -47.94,
         108.5,
@@ -379,7 +379,7 @@
     },
     {
       "id": "step.avenue.12",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         -40.06,
         112.5,
@@ -396,7 +396,7 @@
     },
     {
       "id": "step.avenue.13",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         -47.94,
         116.5,
@@ -413,7 +413,7 @@
     },
     {
       "id": "step.avenue.14",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         -40.06,
         120.5,
@@ -430,7 +430,7 @@
     },
     {
       "id": "step.avenue.15",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         -47.94,
         124.5,
@@ -447,7 +447,7 @@
     },
     {
       "id": "step.avenue.16",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         -40.06,
         128.5,
@@ -464,7 +464,7 @@
     },
     {
       "id": "step.walk-east.01",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         -22.875,
         40.06,
@@ -481,7 +481,7 @@
     },
     {
       "id": "step.walk-east.02",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         -20.625,
         40.06,
@@ -498,7 +498,7 @@
     },
     {
       "id": "step.walk-east.03",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         -17.56,
         43.8,
@@ -515,7 +515,7 @@
     },
     {
       "id": "step.walk-east.04",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         -21.44,
         47.4,
@@ -532,7 +532,7 @@
     },
     {
       "id": "step.walk-east.05",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         -17.56,
         51.0,
@@ -549,7 +549,7 @@
     },
     {
       "id": "step.walk-east.06",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         -21.44,
         54.6,
@@ -566,7 +566,7 @@
     },
     {
       "id": "step.walk-east.07",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         -17.56,
         58.2,
@@ -583,7 +583,7 @@
     },
     {
       "id": "step.walk-east.08",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         -17.55,
         61.94,
@@ -600,7 +600,7 @@
     },
     {
       "id": "step.walk-east.09",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         -13.65,
         58.06,
@@ -617,7 +617,7 @@
     },
     {
       "id": "step.walk-east.10",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         -9.75,
         61.94,
@@ -634,7 +634,7 @@
     },
     {
       "id": "step.walk-east.11",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         -5.85,
         58.06,
@@ -651,7 +651,7 @@
     },
     {
       "id": "step.walk-east.12",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         -1.95,
         61.94,
@@ -668,7 +668,7 @@
     },
     {
       "id": "step.walk-east.13",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         1.95,
         58.06,
@@ -685,7 +685,7 @@
     },
     {
       "id": "step.walk-east.14",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         5.85,
         61.94,
@@ -702,7 +702,7 @@
     },
     {
       "id": "step.walk-east.15",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         9.75,
         58.06,
@@ -719,7 +719,7 @@
     },
     {
       "id": "step.walk-east.16",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         13.65,
         61.94,
@@ -736,7 +736,7 @@
     },
     {
       "id": "step.walk-east.17",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         17.55,
         58.06,
@@ -753,7 +753,7 @@
     },
     {
       "id": "step.walk-east.18",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         21.44,
         58.2,
@@ -770,7 +770,7 @@
     },
     {
       "id": "step.walk-east.19",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         17.56,
         54.6,
@@ -787,7 +787,7 @@
     },
     {
       "id": "step.walk-east.20",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         21.44,
         51.0,
@@ -804,7 +804,7 @@
     },
     {
       "id": "step.walk-east.21",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         17.56,
         47.4,
@@ -821,7 +821,7 @@
     },
     {
       "id": "step.walk-east.22",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         17.56,
         43.8,
@@ -838,7 +838,7 @@
     },
     {
       "id": "step.walk-east.23",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         21.464,
         40.06,
@@ -855,7 +855,7 @@
     },
     {
       "id": "step.walk-east.24",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         25.393,
         43.94,
@@ -872,7 +872,7 @@
     },
     {
       "id": "step.walk-east.25",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         29.321,
         40.06,
@@ -889,7 +889,7 @@
     },
     {
       "id": "step.walk-east.26",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         33.25,
         43.94,
@@ -906,7 +906,7 @@
     },
     {
       "id": "step.walk-east.27",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         37.179,
         40.06,
@@ -923,7 +923,7 @@
     },
     {
       "id": "step.walk-east.28",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         41.107,
         43.94,
@@ -940,7 +940,7 @@
     },
     {
       "id": "step.walk-east.29",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         45.036,
         40.06,
@@ -957,7 +957,7 @@
     },
     {
       "id": "step.ring.1",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         56.772,
         43.148,
@@ -974,7 +974,7 @@
     },
     {
       "id": "step.ring.2",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         55.148,
         44.772,
@@ -991,7 +991,7 @@
     },
     {
       "id": "step.ring.3",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         52.852,
         44.772,
@@ -1008,7 +1008,7 @@
     },
     {
       "id": "step.ring.4",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         51.228,
         43.148,
@@ -1025,7 +1025,7 @@
     },
     {
       "id": "step.ring.5",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         51.228,
         40.852,
@@ -1042,7 +1042,7 @@
     },
     {
       "id": "step.ring.6",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         52.852,
         39.228,
@@ -1059,7 +1059,7 @@
     },
     {
       "id": "step.ring.7",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         55.148,
         39.228,
@@ -1076,7 +1076,7 @@
     },
     {
       "id": "step.ring.8",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         56.772,
         40.852,
@@ -1093,7 +1093,7 @@
     },
     {
       "id": "step.path.1",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         52.06,
         33.29,
@@ -1110,7 +1110,7 @@
     },
     {
       "id": "step.path.2",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         55.94,
         29.29,
@@ -1127,7 +1127,7 @@
     },
     {
       "id": "step.path.3",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         52.06,
         25.29,
@@ -1144,7 +1144,7 @@
     },
     {
       "id": "step.path.4",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         55.94,
         21.29,
@@ -1161,7 +1161,7 @@
     },
     {
       "id": "step.terrace.01",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         44.715,
         -16.966,
@@ -1178,7 +1178,7 @@
     },
     {
       "id": "step.terrace.02",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         48.646,
         -18.584,
@@ -1195,7 +1195,7 @@
     },
     {
       "id": "step.terrace.03",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         52.835,
         -19.305,
@@ -1212,7 +1212,7 @@
     },
     {
       "id": "step.terrace.04",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         57.081,
         -19.093,
@@ -1229,7 +1229,7 @@
     },
     {
       "id": "step.terrace.05",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         61.177,
         -17.959,
@@ -1246,7 +1246,7 @@
     },
     {
       "id": "step.terrace.06",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         64.927,
         -15.957,
@@ -1263,7 +1263,7 @@
     },
     {
       "id": "step.terrace.07",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         68.149,
         -13.185,
@@ -1280,7 +1280,7 @@
     },
     {
       "id": "step.terrace.08",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         70.688,
         -9.775,
@@ -1297,7 +1297,7 @@
     },
     {
       "id": "step.terrace.09",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         72.42,
         -5.893,
@@ -1314,7 +1314,7 @@
     },
     {
       "id": "step.terrace.10",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         73.263,
         -1.727,
@@ -1331,7 +1331,7 @@
     },
     {
       "id": "step.terrace.11",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         73.175,
         2.523,
@@ -1348,7 +1348,7 @@
     },
     {
       "id": "step.terrace.12",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         72.16,
         6.651,
@@ -1365,7 +1365,7 @@
     },
     {
       "id": "step.terrace.13",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         70.269,
         10.458,
@@ -1382,7 +1382,7 @@
     },
     {
       "id": "step.terrace.14",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         67.591,
         13.759,
@@ -1399,7 +1399,7 @@
     },
     {
       "id": "step.terrace.15",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         64.257,
         16.396,
@@ -1416,7 +1416,7 @@
     },
     {
       "id": "step.terrace.16",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         60.427,
         18.241,
@@ -1433,7 +1433,7 @@
     },
     {
       "id": "step.terrace.17",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         56.189,
         19.216,
@@ -1450,7 +1450,7 @@
     },
     {
       "id": "step.terrace.18",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         51.811,
         19.216,
@@ -1467,7 +1467,7 @@
     },
     {
       "id": "step.terrace.19",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         47.839,
         18.332,
@@ -1484,7 +1484,7 @@
     },
     {
       "id": "step.terrace.20",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         44.469,
         16.828,

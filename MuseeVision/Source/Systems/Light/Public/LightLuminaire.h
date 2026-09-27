@@ -25,7 +25,8 @@ struct MUSEELIGHT_API FLightLuminaire
 		Rect,
 		/** A line of near-Lambertian emitters, its length set where it is laid: a strip, a cove line, a slot. */
 		Linear,
-		/** Lamps that light all round them: a filament lamp in a lantern, the lamps of an electrolier on its ring. */
+		/** Lamps that light all round them: a filament lamp in a lantern, the lamps of an electrolier on its ring, the lamp
+	 *  in a post-top lantern's globe. */
 		Point,
 		/**
 		 * An emissive picture: an image panel whose light is the picture it shows, up to its peak white. It stands at its
@@ -72,11 +73,14 @@ struct MUSEELIGHT_API FLightLuminaire
 	int32 LampCount = 1;
 	Musee::Meters LampRingRadius;
 
-	/** Whether the room gives the face it lights (an extent or a zone), as for a luminous ceiling or an image panel. */
-	[[nodiscard]] bool IsAreal() const
-	{
-		return Emitter == EEmitter::Image || (Emitter == EEmitter::Rect && FluxPerSquareMeterLumens > 0.0);
-	}
+	/**
+	 * Whether the room gives the face it lights (an extent or a zone), as for a luminous ceiling, edge-lit panes or an
+	 * image panel. The kind decides it, so panes whose maker publishes no photometry are still laid over their face, and
+	 * stand there unlit, saying why.
+	 */
+	bool bAreal = false;
+
+	[[nodiscard]] bool IsAreal() const { return bAreal; }
 };
 
 namespace Musee::Light

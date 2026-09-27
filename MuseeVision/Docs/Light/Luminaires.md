@@ -36,6 +36,7 @@ A key names what a luminaire does, then the colour of its light, then what tells
 | `lantern` | The lamp at the centre of a lantern; the lantern's frame and silk are the room's own pieces. |
 | `electrolier` | The lamps of a hanging fitting, one in each globe on its arms' ring; the body and globes are the room's own pieces. |
 | `pendant` | The lamp at the centre of a hanging globe; the globe, its gallery and rod are the room's own pieces. |
+| `post-top` | The lamp at the centre of a globe on a lamp standard outdoors; the globe, its cup and the post are the room's own pieces. |
 | `light-field-panel` | An image panel whose light is the picture it shows, up to its peak white; the room gives the face it covers. |
 
 A **lamp luminaire** (a lantern, an electrolier) is its bare lamps. What surrounds them, a lantern's silk or an
@@ -45,8 +46,8 @@ stand on; Light lights one lamp in each globe and shares the fitting's flux equa
 
 ## The catalogue
 
-Twenty-eight luminaires from ERCO, iGuzzini, Zumtobel, Edison Price Lighting, Hogarth Lighting, Lumistrips, FX
-Luminaire, Segula, Ledstore, Spanlite, Color Kinetics and Light Field Lab. Every track spotlight
+Twenty-nine luminaires from ERCO, iGuzzini, Zumtobel, Edison Price Lighting, Hogarth Lighting, Lumistrips, FX
+Luminaire, Segula, Ledstore, LEDVANCE, Spanlite, Color Kinetics and Light Field Lab. Every track spotlight
 and wallwasher has a colour rendering index of 95 or more, at both 3000 K and 4000 K. The flux is the luminaire's own
 output (the light that leaves the housing), not the LED's.
 
@@ -77,6 +78,7 @@ output (the light that leaves the housing), not the LED's.
 | `pinspot.3000k` | ERCO Parscan 48V, size M, narrow spot | not found | not read at 3000 K | narrow spot | 3000 K | 97 | not read | gallery | incomplete |
 | `uplight.3000k` | Ledstore GU10 reflector lamp in the room's can | GU10-6W-3000 | 500 lm | 40° | 3000 K | 98 | 6 W | circulation | complete |
 | `pendant-globe.3000k` | Ledstore E27 opal lamp in the room's cased opal globe | E27-classic-milky-10W-3000 | 596 lm | all round | 3000 K | 97 | 10 W | circulation | complete |
+| `post-top-globe.2700k` | LEDVANCE HQL LED Filament Value in the room's cased opal globe, outdoors | HQL LED FILAMENT VALUE 5400LM 32W 827 E27 | 5400 lm | all round | 2700 K | 80 | 32 W | circulation | complete |
 | `light-field-panel.d65` | Light Field Lab SolidLight | made to order | 200 cd/m² at peak white | its picture | 6504 K | not published | not published | gallery | complete |
 | `downlight.3000k.31deg` | iGuzzini Laser fixed round, Super Comfort | RA18 | 1944.8 lm | 31° | 3000 K | 92 | 17 W | circulation | complete |
 | `downlight.4000k.31deg` | iGuzzini Laser fixed round, Super Comfort | RA24 | 2068 lm | 31° | 4000 K | 92 | 17 W | circulation | complete |
@@ -92,7 +94,9 @@ The unit of every number is in its field name, the way the museum writes units e
   maker's ordering code). `ledFluxLumens` is the bare LED's flux, kept only to show the optic's losses.
 - `luminousFluxLumensPerSquareMeter` is an areal luminaire's flux over each square metre of its face (a luminous
   ceiling), and `peakLuminanceCandelaPerSquareMeter` an image panel's luminance at its peak white. The room gives the
-  face each is laid over, as an `extent` or a `zone` in its Lighting.json.
+  face each is laid over, as an `extent` or a `zone` in its Lighting.json. Whether a type is areal is its kind's
+  (`laylight`, `edge-lit-glass`, `light-field-panel`), not whether its maker publishes the number: edge-lit panes whose
+  photometry is unpublished are still laid over their zone, and stand there unlit.
 - `beamAngleDegrees` is the full angle at which the intensity falls to half its peak. Framers and wallwashers have no
   single beam angle: their light is shaped by shutters or an asymmetric lens, described in `beamName`. Where a maker
   publishes a flux and a peak intensity but no beam angle (the step light), Light takes the Gaussian beam those two fix
@@ -107,6 +111,14 @@ The unit of every number is in its field name, the way the museum writes units e
 - `housing` gives the size, weight and materials, so Form can draw the luminaire as a real object in the room.
 - `photometricFile` links the maker's IES or LDT file where one is public. The files are not in the repository; the
   record names where each one is published.
+
+**Photometric files awaiting the owner's approval** (no file is downloaded without it). The track wallwashers stand
+unlit until their files are read, since only a photometric file describes an asymmetric wash:
+
+| Type | Product | File | Where the maker publishes it |
+|---|---|---|---|
+| `track-wallwasher.3000k` | iGuzzini Sipario LV ø 73, 362G | the 362G photometry, IES (and LDT) | the Downloads tab of [iguzzini.com/en/362g](https://www.iguzzini.com/en/362g/) (its links are built in the browser, so no direct address is recorded) |
+| `track-wallwasher.4000k` | Edison Price Stacklite STK-CZE, 2000L 40K XIA-95+ | the 2000L 40K file inside the family's IES archive | [epl.com/media/ies/stk-cze.zip](https://epl.com/media/ies/stk-cze.zip), linked from [epl.com/product/stk-cze](https://epl.com/product/stk-cze/) |
 - `controlClass` is the class Light's Operation uses to switch and dim the luminaire through the day: `gallery` for
   light on works, `circulation` for light on the architecture.
 - `evidenceState` is `complete` when every number the Scheme needs (flux, beam or distribution, colour, power) is
@@ -243,5 +255,6 @@ circulation and orientation, have no museum row in the standards and are taken f
 - Segula 50200, as listed by [CP Lighting](https://www.cp-lighting.co.uk/Segula-LED-Filament-2200K-Candle-3.5W-E14-240V-Frosted-Dimmable/).
 - Ledstore, [E14 candle, clear, CRI 95, 3000 K](https://ledstore.pro/product/led-bulb-e14-candle-clear-high-cri95-dimmable-4w-3000k).
 - Spanlite, [Edge Lit Glass](https://www.spanlite.com/product/edge-lit-glass/).
+- LEDVANCE, [HQL LED Filament Value 5400LM 32W 827 E27](https://www.ledvance.com/shortlink/4099854071850), read 2026-09-27.
 - ETAP, [Standards emergency lighting](https://www.etaplighting.com/sites/default/files/uploads/Normen_noodverlichting_2020_EN.pdf)
   (EN 1838's escape-route floor, for `garden.night`).

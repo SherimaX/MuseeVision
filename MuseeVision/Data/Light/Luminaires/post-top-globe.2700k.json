@@ -1,0 +1,69 @@
+{
+  "key": "post-top-globe.2700k",
+  "kind": "post-top",
+  "controlClass": "circulation",
+  "evidenceState": "complete",
+  "product": {
+    "manufacturer": "LEDVANCE",
+    "family": "HQL LED Filament Value (LED replacement for HQL lamps in design-oriented outdoor applications)",
+    "description": "the lamp of a post-top globe lantern: one LED lamp in a frosted ellipsoid full-glass bulb, E27, 2700 K, made to replace a mercury (HQL) lamp in open or closed outdoor luminaires in streets, pedestrian zones and parks; the globe (0.48 across, Lamberts cased opal), its cup and the cast post are the stage's own pieces, in Matter's glass and bronze",
+    "code": "HQL LED FILAMENT VALUE 5400LM 32W 827 E27",
+    "codeBasis": "the maker's product name (827: Ra 80, 2700 K); EAN 4099854853340",
+    "status": "current (it replaces the 38 W version, EAN 4099854071850, now discontinued)"
+  },
+  "light": {
+    "luminousFluxLumens": 5400,
+    "fluxBasis": "lamp: one bare lamp; the globe's cased opal, drawn by the stage, passes its light on",
+    "beamName": "all round, from a frosted ellipsoid bulb at the centre of its globe",
+    "cctKelvin": 2700,
+    "cri": 80,
+    "criBasis": "published value"
+  },
+  "electrical": {
+    "systemPowerWatts": 32,
+    "supplyVolts": 230,
+    "supply": "220 to 240 V mains, or the conventional control gear of the HQL lamp it replaces",
+    "control": "not dimmable: switched at dusk and dawn"
+  },
+  "housing": {
+    "diameterMillimeters": 90,
+    "lengthMillimeters": 217,
+    "dimensionBasis": "the lamp, 90 x 217 mm, as the maker lists it",
+    "weightKilograms": 0.17,
+    "materials": "frosted ellipsoid full-glass bulb, E27 cap, inside a cased opal globe",
+    "protection": "IP65",
+    "mounting": "E27 lampholder in the globe's cup on the post, cap down"
+  },
+  "photometricFile": {
+    "url": null,
+    "note": "The lamp lights all round; the cased opal globe that spreads it is Matter's glass, drawn by the stage."
+  },
+  "sources": [
+    {
+      "id": "maker-page",
+      "title": "LEDVANCE, HQL LED FILAMENT VALUE 5400LM 32W 827 E27 (EAN 4099854853340): 5400 lm, 32 W, 2700 K, Ra 80, 360 deg, 90 x 217 mm, 170 g, IP65, not dimmable, 25 000 h, -20 to +50 C; streets, area lighting, pedestrian zones, parks",
+      "url": "https://www.ledvance.com/shortlink/4099854071850",
+      "readOn": "2026-09-27",
+      "covers": [
+        "product",
+        "light",
+        "electrical",
+        "housing"
+      ]
+    },
+    {
+      "id": "reseller-page",
+      "title": "leuchtmittel-verkauf.de, LEDVANCE HQL LED FILAMENT V 5400LM 38W 827 E27 (EAN 4099854071850, discontinued): the same lamp's earlier version, 'frosted, ellipsoid full glass bulb'",
+      "url": "https://www.leuchtmittel-verkauf.de/en/led-lamps/led-lamps-socket-e27/64179/ledvance-hql-led-filament-v-5400lm-38w-827-e27",
+      "readOn": "2026-09-27",
+      "covers": [
+        "product.status",
+        "housing.materials"
+      ]
+    }
+  ],
+  "unverified": [
+    "The lamp's distribution: the maker publishes a 360 degree beam and offers photometric data on its page, which was not read; the record takes it as lighting all round.",
+    "The grounds' sheet asks 2700 K and CRI of 80 or more; the as-built lamps were 2800 K."
+  ]
+}

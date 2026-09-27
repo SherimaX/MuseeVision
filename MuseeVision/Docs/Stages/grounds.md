@@ -245,14 +245,14 @@ None of the Grounds' own.
 
 | Id | Type | Count | Mount / point | Aim |
 |---|---|---|---|---|
-| `lamp.01` … `lamp.10` | `gap.post-top-globe.2700k` | 10 | Mount `grounds.lamp.01` … `.10` (the globe's centre, z 3.62) | straight down to the foot |
-| `step.side.w`, `.e` | `gap.step-light.2700k` | 2 | kerbs x −64 / −24 (inner face), y 10.20, z 0.032 | the side walk's centre line |
-| `step.cour.w`, `.e` | `gap.step-light.2700k` | 2 | kerbs x −64 / −24, y 60.00 | the allée–cross-walk corner (x −61 / −27, y 59.50) |
-| `step.avenue.01` … `.16` | `gap.step-light.2700k` | 16 | y 68.5 + 4k, alternately in the west (x −47.94) and east (x −40.06) kerb | the axis x −44 |
-| `step.walk-east.01` … `.29` | `gap.step-light.2700k` | 29 | per leg, evenly at ≤ 4.00, alternate kerbs (inner face 1.94 off the centre line) | the centre line |
-| `step.ring.1` … `.8` | `gap.step-light.2700k` | 8 | in the basin coping's outer face r 3.00, z 0.15, α 22.5° + 45k | the ring's centre line r 5.00 |
-| `step.path.1` … `.4` | `gap.step-light.2700k` | 4 | y 33.29, 29.29, 25.29, 21.29, alternately kerbs x 52.06 / 55.94 | x 54.00 |
-| `step.terrace.01` … `.20` | `gap.step-light.2700k` | 20 | the outer kerb's inner face r 19.34, α −118.69° … 119.53° (two flank the path's gap at 83.5° and 96.5°) | the centre line r 17.36 |
+| `lamp.01` … `lamp.10` | `post-top-globe.2700k` | 10 | Mount `grounds.lamp.01` … `.10` (the globe's centre, z 3.62) | straight down to the foot |
+| `step.side.w`, `.e` | `step-light.2700k` | 2 | kerbs x −64 / −24 (inner face), y 10.20, z 0.032 | the side walk's centre line |
+| `step.cour.w`, `.e` | `step-light.2700k` | 2 | kerbs x −64 / −24, y 60.00 | the allée–cross-walk corner (x −61 / −27, y 59.50) |
+| `step.avenue.01` … `.16` | `step-light.2700k` | 16 | y 68.5 + 4k, alternately in the west (x −47.94) and east (x −40.06) kerb | the axis x −44 |
+| `step.walk-east.01` … `.29` | `step-light.2700k` | 29 | per leg, evenly at ≤ 4.00, alternate kerbs (inner face 1.94 off the centre line) | the centre line |
+| `step.ring.1` … `.8` | `step-light.2700k` | 8 | in the basin coping's outer face r 3.00, z 0.15, α 22.5° + 45k | the ring's centre line r 5.00 |
+| `step.path.1` … `.4` | `step-light.2700k` | 4 | y 33.29, 29.29, 25.29, 21.29, alternately kerbs x 52.06 / 55.94 | x 54.00 |
+| `step.terrace.01` … `.20` | `step-light.2700k` | 20 | the outer kerb's inner face r 19.34, α −118.69° … 119.53° (two flank the path's gap at 83.5° and 96.5°) | the centre line r 17.36 |
 
 Step lights have hidden sources: a louvred slot 0.20 long × 0.02 high in the kerb's inner face just over the gravel
 (or in the coping's face), grazing the walk (the ruled pattern from Chenghuai). Exact points are in Lighting.json.
@@ -402,7 +402,7 @@ Paths relative to `windows\` (read only). Re-express through the systems; never 
 7. **Materials** are palette keys (D-018): parvis **bush-hammered** (draft honed), basin beds **Belgian bluestone**
    (draft travertine), globes Lamberts cased opal, posts CuSn10 cast; the draft's `substance.working.history` specs retire.
 8. **Night:** every walk holds `garden.night` with 81 hidden step lights where the lamps fall short (draft: dark
-   beyond the canal); luminaire type `gap.post-top-globe.2700k`.
+   beyond the canal); luminaire type `post-top-globe.2700k`.
 9. **Hedges are tonight** (Nature's clipped form is built for the Hall of Light's hedges); the draft deferred them.
 10. **The façade dress** is already carried by the finished Salon and Rotunda sheets; the draft's §3.11 numbers are not
     repeated. Seat anchors are added on the copings.
@@ -421,20 +421,21 @@ dress, when it lands).
 
 ## 13. Palette keys to confirm and catalogue gaps
 **Palette keys** (no `todo.` keys; roles or workings to confirm):
-- `accent.site-geology` working **topsoil** for the Grounds' terrain and the lawn's ground (the role names only the
+- `accent.site-geology` working **topsoil.bare** for the Grounds' terrain and the lawn's ground (the role names only the
   Cube's shaft; ruled for ground beds).
 - `stone.travertine-romano`: **bush-hammered** (parvis), **sawn** (kerbs, strip edge), **honed** (copings),
   **crushed.stabilise** (all gravel, including the strips): the palette's outdoors workings and the Story.
-- `accent.pierre-bleue` **honed.submerged**; `bronze.cusn10` **cast** (outdoors); `glass.mouth-blown` **cased-opal**;
+- `accent.pierre-bleue` **honed**, **submerged** (a history); `bronze.cusn10` **cast.bronze** (outdoors); `glass.mouth-blown` **cased-opal**;
   `water.still` **still.clear**.
 - Living: `living.festuca-rubra`, `living.betula-pendula`, `living.osmanthus-fragrans`, `living.buxus-sempervirens`,
   `living.taxus-baccata`.
 
-**Catalogue gaps** (Light):
-- `gap.post-top-globe.2700k`: a post-top lamp for a Ø 0.48 cased-opal globe on a 3.41 m cast post (a heritage post-top
-  LED module): all-round symmetric distribution, 2700 K (as built 2800 K), CRI ≥ 80, dusk-switched, outdoor rated.
-- `gap.step-light.2700k` (ruled): here a kerb-integrated step light: a louvred slot 0.20 × 0.02 in a travertine kerb's
-  inner face (or a coping's face), warm white, hidden source, IP67, grazing the walk.
+**Catalogue** (Light; the gaps are filled):
+- `post-top-globe.2700k`: the lamp inside each Ø 0.48 cased-opal globe: a LEDVANCE HQL LED Filament Value, 5400 lm,
+  2700 K, Ra 80, 32 W, frosted ellipsoid, IP65, made for post-top lanterns in parks; all round, dusk-switched
+  (`Data/Light/Luminaires/post-top-globe.2700k.json`).
+- `step-light.2700k`: FX Luminaire RH, the ruled hidden-source step light (86 lm, 49 cd), set in the kerbs' inner faces
+  and the basin coping's face; its faceplate is the maker's (about 0.10 × 0.06), not the 0.20 × 0.02 slot first drawn.
 
 **Conflicts and questions:**
 (a) **Scope.** The brief lists "façade, portico" for the Grounds and the palette gives the Grounds those roles; the
@@ -466,8 +467,8 @@ it: Site must compare volumes.
 - **Materials follow the Story (D-018):** parvis bush-hammered travertine (as built honed), basin beds Belgian
   bluestone (as built a dark stone), gravel the museum's crushed travertine bound as a stabilisé, globes Lamberts cased
   opal, posts cast CuSn10 weathered.
-- **Night (ruled):** the ten lamps are a `gap.post-top-globe.2700k` (as built 2800 K point lights); every walk holds
-  `garden.night` (≥ 1 lx on the centre line), met by the lamps first and 81 hidden `gap.step-light.2700k` in kerbs and
+- **Night (ruled):** the ten lamps are a `post-top-globe.2700k` (as built 2800 K point lights); every walk holds
+  `garden.night` (≥ 1 lx on the centre line), met by the lamps first and 81 hidden `step-light.2700k` in kerbs and
   the basin's coping where they fall short (as built the walks beyond the canal were dark); `exterior-walkway` (5 lx)
   holds only on the lamp-lit canal walks; `escape-route` does not apply (no egress crosses the Grounds).
 - **The strip is the Grounds'** and runs from the outline (as built from d 0.50, under the podium); the cabinet–
