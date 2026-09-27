@@ -1,0 +1,75 @@
+{
+  "stage": "grounds",
+  "finishes": [
+    {
+      "surface": "grounds.terrain",
+      "material": "accent.site-geology",
+      "working": "topsoil",
+      "history": "weathered",
+      "note": "The ground body under the lawn: 0.30 of topsoil (z -0.33 to -0.03) over the whole footprint; its top carries the lawn (Planting grounds.lawn). Seen only where a cut shows it."
+    },
+    {
+      "surface": "grounds.parvis.paving",
+      "material": "stone.travertine-romano",
+      "working": "bush-hammered",
+      "history": "weathered",
+      "note": "Parvis slabs (Story: bush-hammered, since honed would be slippery in rain), vein-cut, voids filled (walked); bands run north-south along the axis, the way one walks to the portico; weathered, soiled in the pores, worn in the lanes."
+    },
+    {
+      "surface": "grounds.gravel",
+      "material": "stone.travertine-romano",
+      "working": "crushed.stabilise",
+      "history": "weathered",
+      "note": "The museum's own travertine offcuts crushed (0-6 mm) and bound as a Paris-garden stabilisé: the cour, allées, cross walk, avenue, walk east, rond-point ring, path north, terrace and every building strip. Darkens when wet; trodden lanes paler."
+    },
+    {
+      "surface": "grounds.gravel.canal-walks",
+      "material": "stone.travertine-romano",
+      "working": "crushed.stabilise",
+      "history": "weathered",
+      "note": "The same stabilisé, named apart only because the canal walks (|x+44| 4.50...7.50, y 27...57) carry the exterior-walkway target."
+    },
+    {
+      "surface": "grounds.kerb",
+      "material": "stone.travertine-romano",
+      "working": "sawn",
+      "history": "weathered",
+      "note": "Kerbs 0.12 wide x 0.205 deep in 1.20 lengths, sawn, top arrises chamfered 15 mm; tops worn."
+    },
+    {
+      "surface": "grounds.strip.edge",
+      "material": "stone.travertine-romano",
+      "working": "sawn",
+      "history": "weathered",
+      "note": "The stone edge (d 1.44...1.56) of the gravel strip round the stone complex (the Rotunda's drum, the Salon, the Manet cabinet, the Nymphéas oval)."
+    },
+    {
+      "surface": "grounds.coping",
+      "material": "stone.travertine-romano",
+      "working": "honed",
+      "history": "weathered",
+      "note": "Canal and rond-point copings at sitting height 0.45: honed, weathered, with the water line (the band the water wets and stains at its level, read from the water body's level)."
+    },
+    {
+      "surface": "grounds.basin.bed",
+      "material": "accent.pierre-bleue",
+      "working": "honed.submerged",
+      "history": "weathered",
+      "note": "Canal and basin floors: Belgian bluestone, honed, permanently under water with a thin biofilm and silt, so the still water reads as a mirror (palette: Grounds canal and basin beds)."
+    },
+    {
+      "surface": "grounds.lamp.post",
+      "material": "bronze.cusn10",
+      "working": "cast",
+      "history": "weathered",
+      "note": "Lamp standards (post, collar, cup, finial): sand-cast CuSn10 left to weather outdoors (palette outdoors working: cast, weathered): brown-green patina, streaked below the cup, brighter where hands rub the base."
+    },
+    {
+      "surface": "grounds.lamp.globe",
+      "material": "glass.mouth-blown",
+      "working": "cased-opal",
+      "history": "weathered",
+      "note": "The lamps' globes: Lamberts cased opal, 3 mm (palette: Grounds lamp globes), the luminaire's diffuser; dust and rain spotting outside."
+    }
+  ]
+}
