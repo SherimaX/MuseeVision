@@ -223,6 +223,31 @@ namespace Musee::Chenghuai::Tests
 				&& Again.Pieces[Index].Frame.OriginMeters == Description.Pieces[Index].Frame.OriginMeters;
 		}
 		TestTrue(TEXT("the same pieces in the same order and places"), bSame);
+
+		// Every work the stage builds (Hang.json, "built": "form") has its pieces named work.<id>, or work.<id>.<n> for the
+		// twelve stones, which Art captions; and the halls' rafters and rows of tiles are Form's repeated members.
+		auto Built = [&Description](const FString& Name)
+		{
+			return Description.Pieces.ContainsByPredicate([&Name](const FFormDrawing& D)
+			{
+				const FString Piece = D.Name.ToString();
+				return Piece == Name || Piece.StartsWith(Name + TEXT("."));
+			});
+		};
+		for (const TCHAR* Work : {TEXT("chenghuai-yingbi"), TEXT("chenghuai-altar-table"), TEXT("chenghuai-scholars-desk"), TEXT("chenghuai-painting-table")})
+		{
+			TestTrue(*FString::Printf(TEXT("the stage builds work.%s"), Work), Built(FString::Printf(TEXT("work.%s"), Work)));
+		}
+		for (int32 Stone = 1; Stone <= 12; ++Stone)
+		{
+			TestTrue(*FString::Printf(TEXT("the stage builds stone %d of the shutiao"), Stone), Built(FString::Printf(TEXT("work.chenghuai-shutiao.%d"), Stone)));
+		}
+		const auto Repeated = [&Description](const TCHAR* Part)
+		{
+			return Description.Pieces.ContainsByPredicate([Part](const FFormDrawing& D) { return D.Name.ToString().EndsWith(Part) && D.Repeats.Num() > 1; });
+		};
+		TestTrue(TEXT("rafters are laid as repeated members"), Repeated(TEXT("roof.rafters")));
+		TestTrue(TEXT("rows of tiles are laid as repeated members"), Repeated(TEXT("roof.tiles")));
 		return true;
 	}
 

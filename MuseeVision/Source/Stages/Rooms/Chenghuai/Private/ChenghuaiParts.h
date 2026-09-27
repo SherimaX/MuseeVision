@@ -24,6 +24,13 @@ namespace Musee::Chenghuai
 	FName Surface(const TCHAR* Local);
 
 	/**
+	 * The name of a piece of a work of the collection the stage builds (Hang.json, "built": "form"): work.<Work>, then the
+	 * canvas's index where the work is shown in several (the twelve engraved stones), then the part; Art captions the work
+	 * by that name.
+	 */
+	FString WorkPiece(const TCHAR* Work, const FString& Part);
+
+	/**
 	 * How a piece collides: as a wall (Solid), as a floor or a tread (Walkable), or not at all, for what the visitor can
 	 * never reach (a roof, a rafter, a ridge overhead). Collision is the visible solid itself (§3.10: no invisible guards).
 	 */

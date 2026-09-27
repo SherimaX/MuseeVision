@@ -9,10 +9,11 @@
  * end standing proud of the next; the moulded ridge with its scorpion tails, or the rolled ridge; the edge mouldings down
  * the hard gables (排山).
  *
- * The rafters, tiles, tails and gable edges are drawn as reliefs over curves of the building's section: Form draws one
- * closed solid per drawing and has no array of identical members, and its sweeps run only along paths in plan (the
- * sheet's known gaps), so a surface of rows over a curved bed, and a section swept along a curve that climbs, are carved as
- * reliefs on that curve.
+ * The rafters, tiles, tails and gable edges are drawn as reliefs over curves of the building's section: Form's sweeps run
+ * only along paths in plan (the sheet's known gap), so a section swept along a curve that climbs is carved as a relief on
+ * that curve. A rafter, and a row of tiles, is one such member, drawn once and set again at every pitch as Form's
+ * repeated members, so each is a piece of its own and Studio casts it once; only where a mitre or the run's end cuts
+ * members short are they carved as they fall.
  */
 namespace Musee::Chenghuai::Hall
 {
@@ -149,6 +150,75 @@ namespace Musee::Chenghuai::Hall
 			return FMath::Abs(U - (A + K * Pitch));
 		}
 
+		/**
+		 * Where a member laid across u over a curve of the section stands clear of the roof's mitres all along it: between the
+		 * roof's span at the curve's two ends (the mitres run straight, so the ends bound it), each drawn in by Clear.
+		 */
+		void ClearOfMitres(const FHallSpec& Spec, TConstArrayView<FVector2D> Curve, double Clear, double& OutLow, double& OutHigh)
+		{
+			OutLow = -TNumericLimits<double>::Max();
+			OutHigh = TNumericLimits<double>::Max();
+			for (const FVector2D& End : {Curve[0], Curve.Last()})
+			{
+				double MA = 0.0;
+				double MB = 0.0;
+				RoofSpan(Spec, End.X, MA, MB);
+				OutLow = FMath::Max(OutLow, MA + Clear);
+				OutHigh = FMath::Min(OutHigh, MB - Clear);
+			}
+		}
+
+		/**
+		 * Members laid across u at a pitch, from the first at First, over one curve of the section (rafters on their purlins,
+		 * rows of tiles): those whole along the curve (from the Whole-th to the Last-th) are one member drawn once and set
+		 * again at every pitch, Form's repeated members, named Part.<n>; where the run is cut short (by a mitre, or at its
+		 * ends) the rest is carved as it is, Part.end.1 before them and Part.end.2 after.
+		 */
+		struct FMemberRun
+		{
+			const FHallSpec* Spec = nullptr;
+			const TCHAR* Surface = nullptr;
+			TArray<FVector2D> Curve;
+			double Grid = 0.0;
+			double From = 0.0;
+			double To = 0.0;
+			double First = 0.0;
+			double Pitch = 0.0;
+			/** A member's extent about its own place: from First + k Pitch + Below to + Above. */
+			double Below = 0.0;
+			double Above = 0.0;
+			int32 Whole = 0;
+			int32 Last = -1;
+		};
+
+		void LayMembers(TArray<FFormDrawing>& Out, const FMemberRun& Run, const FString& Part, TFunction<double(double S, double U)> Height)
+		{
+			const FHallSpec& Spec = *Run.Spec;
+			if (Run.Last < Run.Whole)
+			{
+				ReliefAlongU(Out, Named(Spec, Part), Run.Surface, Spec.Frame, Run.Curve, Run.From, Run.To, Run.Grid, Plan::ReliefBack, Height);
+				return;
+			}
+			const double Place = Run.First + Run.Whole * Run.Pitch;
+			FFormDrawing& Member = ReliefAlongU(Out, Named(Spec, Part), Run.Surface, Spec.Frame, Run.Curve, Place + Run.Below, Place + Run.Above,
+				Run.Grid, Plan::ReliefBack, Height);
+			for (int32 K = Run.Whole; K <= Run.Last; ++K)
+			{
+				Member.Repeats.Add(FMuseeFrame(FVector(0.0, 0.0, Spec.Frame.DepthOfU((K - Run.Whole) * Run.Pitch))));
+			}
+			if (Place + Run.Below > Run.From + Plan::MemberGrid)
+			{
+				ReliefAlongU(Out, Named(Spec, Part + TEXT(".end.1")), Run.Surface, Spec.Frame, Run.Curve, Run.From, Place + Run.Below, Run.Grid,
+					Plan::ReliefBack, Height);
+			}
+			const double After = Run.First + Run.Last * Run.Pitch + Run.Above;
+			if (After < Run.To - Plan::MemberGrid)
+			{
+				ReliefAlongU(Out, Named(Spec, Part + TEXT(".end.2")), Run.Surface, Spec.Frame, Run.Curve, After, Run.To, Run.Grid, Plan::ReliefBack,
+					MoveTemp(Height));
+			}
+		}
+
 		/** Round rafters under the boarding and square flying rafters under the flying boarding, each a relief hanging down. */
 		void Rafters(TArray<FFormDrawing>& Out, const FRoofRef& Roof)
 		{
@@ -165,32 +235,37 @@ namespace Musee::Chenghuai::Hall
 			const double Fly = Plan::FlyingRafter;
 			// Walked towards the eave (-v), a curve's right is down: the rafters hang from it.
 			const double RoundEnd = S.bOpenBack ? S.BackR : Spec.BackWallV0;
-			auto Carve = [&](const TCHAR* Part, TArray<FVector2D> Curve, double Grid, TFunction<double(double)> Profile)
+			auto Carve = [&](const TCHAR* Part, TArray<FVector2D> Curve, double Grid, double Half, TFunction<double(double)> Profile)
 			{
-				TSharedRef<const FMeasuredLine> Along = MakeShared<FMeasuredLine>(Curve);
-				ReliefAlongU(Out, Named(Spec, Part), Spec.Rafters, Spec.Frame, Curve, A - R, B + R, Grid, Plan::ReliefBack,
-					[Roof, Along, A, Count, Pitch, Profile = MoveTemp(Profile)](double Distance, double AtU)
+				FMemberRun Run{&Spec, Spec.Rafters, Curve, Grid, A - Half, B + Half, A, Pitch, -Half, Half};
+				double Low = 0.0;
+				double High = 0.0;
+				ClearOfMitres(Spec, Curve, Plan::RafterClearOfMitre, Low, High);
+				Run.Whole = FMath::Max(0, FMath::CeilToInt32((Low + Half - A) / Pitch));
+				Run.Last = FMath::Min(Count, FMath::FloorToInt32((High - Half - A) / Pitch));
+				TSharedRef<const FMeasuredLine> Along = MakeShared<FMeasuredLine>(MoveTemp(Curve));
+				LayMembers(Out, Run, Part, [Roof, Along, A, Count, Pitch, Profile = MoveTemp(Profile)](double Distance, double AtU)
+				{
+					double MA = 0.0;
+					double MB = 0.0;
+					RoofSpan(Roof->Spec, Along->At(Distance).X, MA, MB);
+					if (AtU < MA + Plan::RafterClearOfMitre || AtU > MB - Plan::RafterClearOfMitre)
 					{
-						double MA = 0.0;
-						double MB = 0.0;
-						RoofSpan(Roof->Spec, Along->At(Distance).X, MA, MB);
-						if (AtU < MA + Plan::RafterClearOfMitre || AtU > MB - Plan::RafterClearOfMitre)
-						{
-							return 0.0;
-						}
-						return Profile(OffRafter(AtU, A, Count, Pitch));
-					});
+						return 0.0;
+					}
+					return Profile(OffRafter(AtU, A, Count, Pitch));
+				});
 			};
 			auto Round = [R](double D) { return D < R ? R + FMath::Sqrt(R * R - D * D) : 0.0; };
 			auto Square = [Fly](double D) { return D <= 0.5 * Fly ? Fly : 0.0; };
 			Carve(TEXT("roof.rafters"), Line(Stations(RoundEnd, S.EaveR, Plan::SlabStation, K), [&U](double V) { return U.Middle(V); }),
-				Plan::MemberGrid, Round);
+				Plan::MemberGrid, R, Round);
 			Carve(TEXT("roof.flying-rafters"), Line(Stations(S.EaveR, S.EaveF, Plan::SlabStation, K), [&U](double V) { return U.Front(V); }),
-				Plan::FlyingGrid, Square);
+				Plan::FlyingGrid, 0.5 * Fly, Square);
 			if (S.bOpenBack)
 			{
 				Carve(TEXT("roof.flying-rafters.back"), Line(Stations(S.BackEdge, S.BackR, Plan::SlabStation, K), [&U](double V) { return U.Back(V); }),
-					Plan::FlyingGrid, Square);
+					Plan::FlyingGrid, 0.5 * Fly, Square);
 			}
 		}
 
@@ -213,7 +288,14 @@ namespace Musee::Chenghuai::Hall
 			const double RidgeClear = Spec.Ridge == ERidge::Qingshui ? Plan::RowsFromRidge : 0.0;
 			const double RowsFrom = From + Style.PanHalf;
 			const bool bTong = Spec.bTong;
-			ReliefAlongU(Out, Named(Spec, TEXT("roof.tiles")), Style.Surface, Spec.Frame, Curve, From, To, Grid, Plan::ReliefBack,
+			// A row is a pitch of the tiles from a pan's edge, whole where no mitre cuts it and the run doesn't end in it.
+			FMemberRun Run{&Spec, Style.Surface, Curve, Grid, From, To, From, Style.Pitch, 0.0, Style.Pitch};
+			double Low = 0.0;
+			double High = 0.0;
+			ClearOfMitres(Spec, Curve, 0.0, Low, High);
+			Run.Whole = FMath::Max(0, FMath::CeilToInt32((Low - From) / Style.Pitch - UE_KINDA_SMALL_NUMBER));
+			Run.Last = FMath::FloorToInt32((FMath::Min(High, To) - From) / Style.Pitch + UE_KINDA_SMALL_NUMBER) - 1;
+			LayMembers(Out, Run, TEXT("roof.tiles"),
 				[Roof, Along, RidgeClear, RowsFrom, Style, bTong](double Distance, double U)
 				{
 					const double V = Along->At(Distance).X;

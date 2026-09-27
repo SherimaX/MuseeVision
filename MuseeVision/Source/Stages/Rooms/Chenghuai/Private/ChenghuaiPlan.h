@@ -634,6 +634,8 @@ namespace Musee::Chenghuai::Plan
 	};
 	inline constexpr FPlinthStage ScreenPlinth[] = {{-0.050, 0.180, 0.080}, {0.180, 0.420, 0.020}, {0.420, 0.550, 0.070}};
 	inline constexpr double ScreenBodyTop = 3.100;
+	/** The screen wall's heart (影壁心) is a work of the collection, built by the stage (Hang.json). */
+	inline constexpr const TCHAR* YingbiWork = TEXT("chenghuai-yingbi");
 	inline constexpr double ScreenHeart = 1.800;
 	inline constexpr double ScreenHeartZ = 1.800;
 	inline constexpr double ScreenFrame = 0.100;

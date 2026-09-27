@@ -205,7 +205,7 @@ namespace Musee::Chenghuai
 			{
 				for (const double Offset : Plan::StoneOffsets)
 				{
-					Block(Out, FString::Printf(TEXT("walk.stone.%d"), ++Count), TEXT("shutiao"), Stage, Plan::StoneX0, Plan::StoneX1, Bay + Offset,
+					Block(Out, WorkPiece(Plan::ShutiaoWork, FString::FromInt(++Count)), TEXT("shutiao"), Stage, Plan::StoneX0, Plan::StoneX1, Bay + Offset,
 						Bay + Offset + Plan::StoneLength, Plan::StoneZ0, Plan::StoneZ1, EHit::Solid);
 				}
 			}

@@ -160,18 +160,24 @@ namespace Musee::Chenghuai::Plan
 	inline constexpr double ScreenRail = 0.060;
 
 	// ---- the furniture (ChenghuaiDisplay.cpp:209-348) ------------------------------------------------------------------
-	/** A table: its extent on the plan, its floor and height; top 0.035, legs 0.045 set in 0.06, aprons, low stretchers. */
+	/**
+	 * A table: its extent on the plan, its floor and height; top 0.035, legs 0.045 set in 0.06, aprons, low stretchers. A
+	 * table shown as a work of the collection (Hang.json, "built": "form") names it, and its pieces are the work's.
+	 */
 	struct FTablePlan
 	{
 		const TCHAR* Local;
 		double X0, X1, Y0, Y1, Floor, Height;
 		bool bEverted;
+		const TCHAR* Work;
 	};
 	inline constexpr FTablePlan Tables[] = {
-		{TEXT("chenghuaitang.altar-table"), -10.200, -8.200, -32.960, -32.540, 0.750, 0.820, true},
-		{TEXT("linchi.desk"), -4.250, -2.750, -2.650, -1.900, 0.300, 0.820, false},
-		{TEXT("changnan.table"), -0.500, 0.100, -19.750, -18.650, 0.450, 0.800, false},
+		{TEXT("chenghuaitang.altar-table"), -10.200, -8.200, -32.960, -32.540, 0.750, 0.820, true, TEXT("chenghuai-altar-table")},
+		{TEXT("linchi.desk"), -4.250, -2.750, -2.650, -1.900, 0.300, 0.820, false, TEXT("chenghuai-scholars-desk")},
+		{TEXT("changnan.table"), -0.500, 0.100, -19.750, -18.650, 0.450, 0.800, false, nullptr},
 	};
+	/** 林泉's painting table and its pair of rose chairs are one work of the collection (Hang.json). */
+	inline constexpr const TCHAR* PaintingWork = TEXT("chenghuai-painting-table");
 	inline constexpr double TableTop = 0.035;
 	inline constexpr double TableLeg = 0.045;
 	inline constexpr double TableLegIn = 0.060;

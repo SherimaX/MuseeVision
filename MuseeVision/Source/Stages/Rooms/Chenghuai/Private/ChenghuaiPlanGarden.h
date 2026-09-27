@@ -93,6 +93,8 @@ namespace Musee::Chenghuai::Plan
 	// ---- the covered walk's engraved stones, the terrace, the water pavilion's base ----------------------------------------
 	/** Twelve 书条石 0.90 × 0.32, 0.03 proud of the wall (x 2.29 … 2.33), z 1.17 … 1.49, two to a bay: for each mark B the
 	 *  stones run y B + 0.35 … B + 1.25 and B + 1.55 … B + 2.45. */
+	/** The twelve stones are one work of the collection, shown in twelve (Hang.json), numbered from the moon gate south. */
+	inline constexpr const TCHAR* ShutiaoWork = TEXT("chenghuai-shutiao");
 	inline constexpr double StoneBays[] = {-36.250, -25.600, -22.900, -20.200, -17.500, -12.100};
 	inline constexpr double StoneX0 = 2.290;
 	inline constexpr double StoneX1 = 2.330;

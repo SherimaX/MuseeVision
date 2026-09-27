@@ -78,6 +78,11 @@ namespace Musee::Chenghuai
 		}
 	}
 
+	FString WorkPiece(const TCHAR* Work, const FString& Part)
+	{
+		return Part.IsEmpty() ? FString::Printf(TEXT("work.%s"), Work) : FString::Printf(TEXT("work.%s.%s"), Work, *Part);
+	}
+
 	FMuseeKey Key(const FString& Local)
 	{
 		return FMuseeKey(FString::Printf(TEXT("%s.%s"), Plan::Stage, *Local));

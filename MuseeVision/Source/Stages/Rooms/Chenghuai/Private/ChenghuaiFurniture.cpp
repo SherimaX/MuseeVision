@@ -68,7 +68,7 @@ namespace Musee::Chenghuai
 			const double Floor = Table.Floor;
 			const double Top = Floor + Table.Height;
 			const double Under = Top - Plan::TableTop;
-			const FString Name = FString(Table.Local);
+			const FString Name = Table.Work ? WorkPiece(Table.Work, FString()) : FString(Table.Local);
 			Block(Out, Name + TEXT(".top"), Phoebe, F, 0.0, L, 0.0, W, Under, Top, EHit::Solid);
 			if (Table.bEverted)
 			{
@@ -173,13 +173,13 @@ namespace Musee::Chenghuai
 			const double LU = HL - Plan::PaintingLegEnd;
 			const double LV = HW - Plan::PaintingLegSide;
 			const double R = Plan::PaintingLegR;
-			Block(Out, TEXT("linquan.table.top"), Huanghuali, F, -HL, HL, -HW, HW, Under, Top, EHit::Solid);
+			Block(Out, WorkPiece(Plan::PaintingWork, TEXT("table.top")), Huanghuali, F, -HL, HL, -HW, HW, Under, Top, EHit::Solid);
 			int32 Count = 0;
 			for (const double U : {-LU, LU})
 			{
 				for (const double V : {-LV, LV})
 				{
-					Turned(Out, FString::Printf(TEXT("linquan.table.leg.%d"), ++Count), Huanghuali, F.At(U, V, Floor),
+					Turned(Out, WorkPiece(Plan::PaintingWork, FString::Printf(TEXT("table.leg.%d"), ++Count)), Huanghuali, F.At(U, V, Floor),
 						Section({{0.0, 0.0}, {R, 0.0}, {R, Under - Floor}, {0.0, Under - Floor}}, false), EHit::Solid);
 				}
 			}
@@ -192,14 +192,14 @@ namespace Musee::Chenghuai
 			for (const double V : {-LV, LV})
 			{
 				const double T = 0.5 * Plan::ApronThick;
-				AlongV(Out, FString::Printf(TEXT("linquan.table.apron.%d"), V < 0.0 ? 1 : 2), Huanghuali, F, Apron, {}, V - T, V + T, EHit::Solid);
+				AlongV(Out, WorkPiece(Plan::PaintingWork, FString::Printf(TEXT("table.apron.%d"), V < 0.0 ? 1 : 2)), Huanghuali, F, Apron, {}, V - T, V + T, EHit::Solid);
 			}
 			Count = 0;
 			for (const double U : {-LU, LU})
 			{
 				for (const double Z : Plan::PaintingStretchers)
 				{
-					Rod(Out, FString::Printf(TEXT("linquan.table.stretcher.%d"), ++Count), Huanghuali, F.At(U, -LV, Floor + Z), F.At(U, LV, Floor + Z),
+					Rod(Out, WorkPiece(Plan::PaintingWork, FString::Printf(TEXT("table.stretcher.%d"), ++Count)), Huanghuali, F.At(U, -LV, Floor + Z), F.At(U, LV, Floor + Z),
 						Plan::PaintingStretcherR, EHit::Solid);
 				}
 			}
@@ -210,7 +210,7 @@ namespace Musee::Chenghuai
 		{
 			// u across, v from the front back: the chair faces south, so its back is north.
 			const FBuildingFrame F = FBuildingFrame::Of(FVector2D(X, Plan::RoseChairY), FVector2D(1.0, 0.0), FVector2D(0.0, -1.0));
-			const FString Name = FString::Printf(TEXT("linquan.rose-chair.%d"), Index);
+			const FString Name = WorkPiece(Plan::PaintingWork, FString::Printf(TEXT("rose-chair.%d"), Index));
 			const double Hw = 0.5 * Plan::RoseWide - Plan::RoseMember;
 			const double Hd = 0.5 * Plan::RoseDeep - Plan::RoseMember;
 			const double R = Plan::RoseMember;

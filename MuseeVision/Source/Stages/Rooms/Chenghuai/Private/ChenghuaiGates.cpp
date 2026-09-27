@@ -255,7 +255,7 @@ namespace Musee::Chenghuai
 			const double Frame = Plan::ScreenFrame;
 			AlongV(Out, TEXT("screen-wall.heart.frame"), TEXT("brick.rubbed"), Stage, Rectangle(-Half - Frame, Z - Half - Frame, Half + Frame, Z + Half + Frame),
 				{Heart}, Face, Face + Plan::ScreenFrameProud, EHit::Solid);
-			AlongV(Out, TEXT("screen-wall.heart"), TEXT("screen-wall.heart"), Stage, Heart, {}, Face,
+			AlongV(Out, WorkPiece(Plan::YingbiWork, FString()), TEXT("screen-wall.heart"), Stage, Heart, {}, Face,
 				Face + Plan::ScreenFrameProud - Plan::ScreenHeartBack, EHit::Solid);
 			for (int32 K = 0; K < Plan::CorniceCourses; ++K)
 			{
