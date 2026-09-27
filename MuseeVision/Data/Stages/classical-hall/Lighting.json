@@ -8,7 +8,7 @@
       "point": [
         0.0,
         28.1,
-        5.41
+        5.1
       ],
       "aim": [
         0.0,
@@ -20,7 +20,7 @@
         2.246,
         2.28
       ],
-      "note": "Edge-lit panel <= 50 mm deep over the etched laylight glass (underside 5.38)."
+      "note": "Backlit luminous-ceiling modules in the 0.20 plenum over the etched laylight glass (underside 4.940, top 4.949; slab 5.15)."
     },
     {
       "id": "laylight.bay2",
@@ -28,7 +28,7 @@
       "point": [
         0.0,
         22.1,
-        5.41
+        5.1
       ],
       "aim": [
         0.0,
@@ -40,7 +40,7 @@
         2.246,
         2.28
       ],
-      "note": "Edge-lit panel <= 50 mm deep over the etched laylight glass (underside 5.38)."
+      "note": "Backlit luminous-ceiling modules in the 0.20 plenum over the etched laylight glass (underside 4.940, top 4.949; slab 5.15)."
     },
     {
       "id": "laylight.bay3",
@@ -48,7 +48,7 @@
       "point": [
         0.0,
         16.1,
-        5.41
+        5.1
       ],
       "aim": [
         0.0,
@@ -60,7 +60,7 @@
         2.246,
         2.28
       ],
-      "note": "Edge-lit panel <= 50 mm deep over the etched laylight glass (underside 5.38)."
+      "note": "Backlit luminous-ceiling modules in the 0.20 plenum over the etched laylight glass (underside 4.940, top 4.949; slab 5.15)."
     },
     {
       "id": "laylight.bay4",
@@ -68,7 +68,7 @@
       "point": [
         0.0,
         10.1,
-        5.41
+        5.1
       ],
       "aim": [
         0.0,
@@ -80,7 +80,7 @@
         2.246,
         2.28
       ],
-      "note": "Edge-lit panel <= 50 mm deep over the etched laylight glass (underside 5.38)."
+      "note": "Backlit luminous-ceiling modules in the 0.20 plenum over the etched laylight glass (underside 4.940, top 4.949; slab 5.15)."
     },
     {
       "id": "laylight.eye",
@@ -88,7 +88,7 @@
       "point": [
         0.0,
         0.0,
-        5.41
+        5.1
       ],
       "aim": [
         0.0,
@@ -100,7 +100,7 @@
         2.4,
         2.4
       ],
-      "note": "Disc 2.40 across over the eye's etched glass."
+      "note": "Backlit luminous-ceiling modules in the 0.20 plenum over the etched laylight glass (underside 4.940, top 4.949; slab 5.15)."
     },
     {
       "id": "cove.gallery.e1",

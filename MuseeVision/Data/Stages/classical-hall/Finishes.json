@@ -146,7 +146,7 @@
       "material": "white.lime-plaster",
       "working": "trowelled",
       "history": "new",
-      "note": "The four lantern wells' vertical sides (to z 5.38) and the eye's cylindrical well r 1.20."
+      "note": "The lantern end cheeks from the laylight glass (4.94) up to the vault intrados (0.04 to 0.21 high)."
     },
     {
       "surface": "classical-hall.vault.rosette",
@@ -174,7 +174,7 @@
       "material": "glass.low-iron",
       "working": "acid-etched.laminated",
       "history": "new",
-      "note": "The five laylights at z 5.38 (four 2.246 x 2.28, one disc Ø 2.40): laminated low-iron, acid-etched face down; Light's luminous ceiling over it."
+      "note": "The five laylights at z 4.94 underside (four 2.246 x 2.28, one disc Ø 2.40): laminated low-iron, acid-etched face down; Light's luminous ceiling over it."
     },
     {
       "surface": "classical-hall.floor.white",
