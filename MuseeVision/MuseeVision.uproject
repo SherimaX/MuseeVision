@@ -101,6 +101,11 @@
 			"LoadingPhase": "Default"
 		},
 		{
+			"Name": "MuseeSalon",
+			"Type": "Editor",
+			"LoadingPhase": "Default"
+		},
+		{
 			"Name": "MuseeInstruments",
 			"Type": "Runtime",
 			"LoadingPhase": "Default",

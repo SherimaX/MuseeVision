@@ -15,6 +15,12 @@
       "b": "salon.west",
       "passageMeters": 0.0,
       "note": "The oval passage: the Salon's bay 5 far wall meets the oval's passage block."
+    },
+    {
+      "a": "salon.east",
+      "b": "rotunda.west",
+      "passageMeters": 2.2,
+      "note": "The Rotunda's west arch (doorway.3000x6000.arched): the joint's passage, 2.20 between the Salon's east port face (museum x -13.40) and the Rotunda's (museum x -11.20); Docs/Stages/salon.md section 2."
     }
   ]
 }
