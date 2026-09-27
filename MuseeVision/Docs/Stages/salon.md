@@ -485,3 +485,5 @@ if Light's measurement shows bright days over 50 lx on her, she moves to the cab
 - Bay 4's diffuser is a **fixed linen scrim**; the board shows a linen blind, and D-014 allows no blinds.
 - Materials follow the Story: the vault is run lime plaster (not fibrous panels), the lantern grid is patinated bronze (not painted steel), the strips and stele foot are brushed bronze (not brass), and the frames are oak with water gilding.
 - Light: 45 listed framing projectors at 3000 K replace the ≈ 110 coffer spots at 4000 K.
+- Hang.json, corrected to the stage contract (the room builder, ST-SALON): the Rouen series' five entries named their images in `canvas`; the contract gives each canvas an index from 0 along the image, so they are now 0 to 4 left to right along bay 5's north wall as the room sees it (images -5 to -1). Five separate images per work wait on Art, which splits one image across a work's canvases.
+- Planting.json, corrected to the stage contract (ST-SALON): the vines' beds gave `"body": ""`, which the key reader refuses; a bed that rides no body now leaves `body` out, which reads as the none key.

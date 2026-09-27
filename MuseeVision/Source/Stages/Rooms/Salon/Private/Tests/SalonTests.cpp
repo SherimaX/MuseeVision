@@ -2,7 +2,7 @@
 
 #if WITH_DEV_AUTOMATION_TESTS
 
-#include "ArtHang.h"
+#include "Internationalization/Regex.h"
 #include "Misc/FileHelper.h"
 #include "MuseeRecords.h"
 #include "NaturePlanting.h"
@@ -90,19 +90,34 @@ namespace Musee::Salon::Tests
 	bool FSalonAnchorsTest::RunTest(const FString& Parameters)
 	{
 		const FSiteDescription Description = Described();
-		const TValueOrError<FArtHang, FString> Hang = Musee::ReadRecord<FArtHang>(Schedule(TEXT("Hang.json")));
+		// The hanging schedule is read as text: its entries on mounts (the case's documents, the dancer) carry fields
+		// Art's hanging record doesn't have yet, so Art's reader can't read the file whole.
+		FString Hang;
 		const TValueOrError<FNaturePlanting, FString> Planting = Musee::ReadRecord<FNaturePlanting>(Schedule(TEXT("Planting.json")));
-		if (!TestTrue(TEXT("the hanging and planting schedules read"), Hang.HasValue() && Planting.HasValue()))
+		const bool bHang = FFileHelper::LoadFileToString(Hang, *(Musee::Records::DataRoot() / Schedule(TEXT("Hang.json"))));
+		if (!TestTrue(TEXT("the hanging and planting schedules read"), bHang && Planting.HasValue()))
 		{
-			AddError(Hang.HasError() ? Hang.GetError() : Planting.GetError());
+			AddError(Planting.HasError() ? Planting.GetError() : TEXT("Hang.json can't be read"));
 			return false;
 		}
 		// Canvases hang on walls; the case's documents and the dancer stand on mounts.
-		for (const FArtHangEntry& Work : Hang.GetValue().Works)
+		TArray<FString> Entries;
+		Hang.ParseIntoArray(Entries, TEXT("\"work\":"), true);
+		int32 Works = 0;
+		for (const FString& Entry : Entries)
 		{
-			const FName Kind = Work.Support == FName(TEXT("canvas")) ? FName(TEXT("Wall")) : FName(TEXT("Mount"));
-			TestNotNull(*FString::Printf(TEXT("%s stands on a %s anchor"), *Work.Work, *Kind.ToString()), FindAnchor(Description, Work.Anchor, Kind));
+			FRegexMatcher AnchorMatch(FRegexPattern(TEXT("\"anchor\":\\s*\"([^\"]+)\"")), Entry);
+			FRegexMatcher SupportMatch(FRegexPattern(TEXT("\"support\":\\s*\"([^\"]+)\"")), Entry);
+			if (!AnchorMatch.FindNext() || !SupportMatch.FindNext())
+			{
+				continue;
+			}
+			++Works;
+			const FName Kind = SupportMatch.GetCaptureGroup(1) == TEXT("canvas") ? FName(TEXT("Wall")) : FName(TEXT("Mount"));
+			const FString Key = AnchorMatch.GetCaptureGroup(1);
+			TestNotNull(*FString::Printf(TEXT("%s is a %s anchor"), *Key, *Kind.ToString()), FindAnchor(Description, FMuseeKey(Key), Kind));
 		}
+		TestEqual(TEXT("39 canvases, the case's two documents and the dancer"), Works, 42);
 		for (const FNatureBed& Bed : Planting.GetValue().Beds)
 		{
 			TestNotNull(*FString::Printf(TEXT("%s is a Bed anchor"), *Bed.Bed.ToString()), FindAnchor(Description, Bed.Bed, TEXT("Bed")));
@@ -111,18 +126,18 @@ namespace Musee::Salon::Tests
 		// Every hanging wall's frame: x along the face, y into the room (towards the axis or off the wall), z up.
 		int32 Walls = 0;
 		int32 Seats = 0;
-		for (const FMuseeStageAnchor& Anchor : Description.Anchors)
+		for (const FMuseeStageAnchor& Each : Description.Anchors)
 		{
-			if (Anchor.Kind == FName(TEXT("Wall")))
+			if (Each.Kind == FName(TEXT("Wall")))
 			{
 				++Walls;
-				TestTrue(*FString::Printf(TEXT("%s stands upright"), *Anchor.Key.ToString()),
-					Anchor.Frame.DirectionToParent(FVector::UpVector).Equals(FVector::UpVector, 1e-9));
+				TestTrue(*FString::Printf(TEXT("%s stands upright"), *Each.Key.ToString()),
+					Each.Frame.DirectionToParent(FVector::UpVector).Equals(FVector::UpVector, 1e-9));
 			}
-			if (Anchor.Kind == FName(TEXT("Seat")))
+			if (Each.Kind == FName(TEXT("Seat")))
 			{
 				++Seats;
-				TestEqual(*FString::Printf(TEXT("%s's seat is at 0.44"), *Anchor.Key.ToString()), Anchor.Frame.OriginMeters.Z, Plan::SeatTop);
+				TestEqual(*FString::Printf(TEXT("%s's seat is at 0.44"), *Each.Key.ToString()), Each.Frame.OriginMeters.Z, Plan::SeatTop);
 			}
 		}
 		TestEqual(TEXT("fourteen walls, the stele and the cabinet's three"), Walls, 2 * Plan::BayCount + 1 + 1 + 3);
