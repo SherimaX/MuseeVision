@@ -293,7 +293,7 @@ pond openable by clicking on the golden iris on it."
 
 ## D-020 · The Reserve is built (lifts D-019's deferral of the basement)
 **Context:** The owner (Sunday 11:40), after the first full build: "you can work on the reserve. why is it deferred".
-D-019 had deferred the basement on the owner's word ("we don't need to build the basement yet").
+D-019 had deferred the basement on the owner's word ("we don't need to build the basement yet"). That deferral was for the demo room only: "that's a decision before when we create the demo room, but now we are making the full build, let's add it in." The full build holds every room.
 **Decision:**
 - **The Reserve becomes a stage**, `reserve`, built from its sheet (`Docs/Stages/reserve.md`). Its one port,
   `reserve.stair` (`stairwell.straight.2400x3200.arched`), mates `nympheas.stair`: the oval's stair runs down to it,
