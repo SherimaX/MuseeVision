@@ -150,6 +150,7 @@ namespace Musee::ArtMaking
 		if (Support == Supports::Paper) { return TEXT("paper"); }
 		if (Support == Supports::Plate) { return TEXT("plate"); }
 		if (Support == Supports::Earthenware) { return TEXT("ware"); }
+		if (Support == Supports::Cast || Support == Supports::Ceramic) { return TEXT("cast"); }
 		return TEXT("work");
 	}
 
@@ -171,7 +172,11 @@ namespace Musee::ArtMaking
 			TArray<FMuseeFinding>& OutFindings)
 		{
 			const FArtHangEntry& Entry = *Canvas.Entry;
-			if (Entry.Support == Supports::Glass && IsTransparency(Making.Stage, Entry))
+			if (IsCast(Entry))
+			{
+				MakeCast(Making, Plan, Canvas, OutPieces, OutFindings);
+			}
+			else if (Entry.Support == Supports::Glass && IsTransparency(Making.Stage, Entry))
 			{
 				MakeTransparency(Making, Plan, Canvas, OutPieces, OutFindings);
 			}

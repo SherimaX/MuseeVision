@@ -413,7 +413,7 @@
       ],
       "height": 1.282,
       "size": [
-        0.0,
+        0.382,
         0.7
       ],
       "facing_deg": 90.0,
@@ -422,7 +422,12 @@
       "care": "ceramic-and-glass",
       "wall": "chenghuai.case.silk.ceramics",
       "stand": false,
-      "note": "On the case deck centre line; centre is the foot on the deck (a carved phoebe stand under it where stand is true: radius 1.25 x the foot, 0.028 high under 0.20 tall, else 0.04). Object: scan usd/sculptures/chinese-sancai-horse.usdc, turned 90 deg."
+      "scan": {
+        "source": "assets/sculptures/CREDITS.md",
+        "mesh": "assets/sculptures/chinese-sancai-horse.mvm",
+        "depth": 0.849
+      },
+      "note": "On the case deck centre line; centre is the foot on the deck (a carved phoebe stand under it where stand is true: radius 1.25 x the foot, 0.028 high under 0.20 tall, else 0.04). Object: cast from the collection's scan (assets/sculptures/chinese-sancai-horse.mvm, a stand-in Tang-type horse on its plinth, CC BY 4.0), its head turned 90 deg (south); 0.382 wide x 0.7 tall x 0.849 long, the scan's own size."
     },
     {
       "work": "chinese-guan-vase",

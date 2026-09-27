@@ -23,6 +23,14 @@
       "medium": "Stone high relief", "heightCm": null, "collection": "Arc de Triomphe", "city": "Paris", "gallery": "romantic-roots",
       "core": false, "rights": "public-domain", "notes": "",
       "scan": { "url": "https://example.org/scan", "license": "CC-BY", "permissive": true, "source": "A cast", "triangles": null }
+    },
+    {
+      "id": "test-cast-figure", "artist": "After Edgar Degas", "title": "A test figure", "year": "2026", "medium": "Cast after the original",
+      "collection": "The test room", "city": "Paris", "notes": "Cast in plaster from the collection's scan of the dancer."
+    },
+    {
+      "id": "test-cast-misread", "artist": "After Edgar Degas", "title": "A misread figure", "year": "2026", "medium": "Cast after the original",
+      "collection": "The test room", "city": "Paris", "notes": ""
     }
   ]
 }

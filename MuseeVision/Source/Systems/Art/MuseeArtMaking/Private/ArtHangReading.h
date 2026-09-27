@@ -33,7 +33,20 @@ namespace Musee::ArtMaking
 		inline const FName Paper(TEXT("paper"));
 		inline const FName Plate(TEXT("silvered copper plate"));
 		inline const FName Earthenware(TEXT("earthenware"));
+		/** A work in the round made from its scan (the Classical Hall's plaster casts, Degas's bronze dancer). */
+		inline const FName Cast(TEXT("cast"));
+		/** Chenghuai's ceramics: cast from a scan where the plan gives one. */
+		inline const FName Ceramic(TEXT("ceramic"));
 	}
+
+	/** Whether an object is cast from its scan: a cast, or ceramic whose plan gives a scan. */
+	[[nodiscard]] inline bool IsCast(const FArtHangEntry& Entry)
+	{
+		return Entry.Support == Supports::Cast || (Entry.Support == Supports::Ceramic && !Entry.Scan.Mesh.IsEmpty());
+	}
+
+	/** A scan's name: its mesh's file name without its extension (`augustus-prima-porta`). */
+	[[nodiscard]] FString ScanName(const FArtHangEntry& Entry);
 
 	/** A finding of Art's about a stage's hanging plan. */
 	[[nodiscard]] FMuseeFinding ArtFinding(const FMuseeStageContext& Stage, const FString& Summary);

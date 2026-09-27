@@ -98,6 +98,27 @@ namespace Musee::ArtMaking
 		}
 
 		/**
+		 * A work cast from its scan shows no image: each object is finished in the work's medium (Data/Art/Casts.json),
+		 * a fault when the record has no line for the catalogue's medium.
+		 */
+		void PlanCast(const FArtWork& Work, const TArray<const FArtHangEntry*>& Canvases, const FEntryContext& Context, FWorkPlan& OutPlan,
+			TArray<FString>& OutFaults)
+		{
+			const FArtCastMedium* Medium = Context.Casts.IsSet() ? Context.Casts->FindMedium(Work.Medium) : nullptr;
+			if (!Medium)
+			{
+				OutFaults.Add(FString::Printf(TEXT("its medium '%s' has no line in Data/%s"), *Work.Medium, FArtCasts::Record));
+				return;
+			}
+			for (const FArtHangEntry* Entry : Canvases)
+			{
+				FCanvasPlan& Canvas = OutPlan.Canvases.AddDefaulted_GetRef();
+				Canvas.Entry = Entry;
+				Canvas.Finish = { Medium->Palette, Medium->Working, Medium->History };
+			}
+		}
+
+		/**
 		 * A work's plan from its checked objects: each one's place in the one image or its own image, its layer and
 		 * finish; and the one image's size. Faults, one clause each, where an image the plan needs can't be found.
 		 */
@@ -106,6 +127,12 @@ namespace Musee::ArtMaking
 		{
 			FWorkPlan Plan;
 			Plan.bOwnImages = !Canvases[0]->Image.IsEmpty();
+			if (IsCast(*Canvases[0]))
+			{
+				PlanCast(Work, Canvases, Context, Plan, OutFaults);
+				Plan.Work = MoveTemp(Work);
+				return Plan;
+			}
 			for (const FArtHangEntry* Entry : Canvases)
 			{
 				FCanvasPlan& Canvas = Plan.Canvases.AddDefaulted_GetRef();
@@ -196,6 +223,41 @@ namespace Musee::ArtMaking
 			{
 				Context.TurnedWhy = Turned.GetError();
 			}
+		}
+
+		/** Why the palette doesn't offer a finish the casts' record names, or empty when it does. */
+		FString UnofferedFinish(const FMatterPalette& Palette, FName Key, FName Working, FName History, const FString& For)
+		{
+			const FMatterPaletteEntry* Entry = Palette.Find(FMuseeKey(Key.ToString()));
+			return Entry && Offers(*Entry, Working, History) ? FString() : FString::Printf(TEXT("the palette offers no finish %s/%s/%s that Data/%s names for %s"),
+				*Key.ToString(), *Working.ToString(), *History.ToString(), FArtCasts::Record, *For);
+		}
+
+		/** How works are cast, read once when the plan casts any, with every finish it names offered by the palette. */
+		void ReadCastsInto(const FArtHang& Hang, FEntryContext& Context)
+		{
+			if (!Hang.Works.ContainsByPredicate([](const FArtHangEntry& Entry) { return !Entry.IsBuilt() && IsCast(Entry); }))
+			{
+				return;
+			}
+			TValueOrError<FArtCasts, FString> Casts = ReadRecord<FArtCasts>(FArtCasts::Record);
+			const TValueOrError<FMatterPalette, FString> Palette = Musee::Matter::ReadPalette();
+			if (Casts.HasError() || Palette.HasError())
+			{
+				Context.CastsWhy = Casts.HasError() ? Casts.GetError() : Palette.GetError();
+				return;
+			}
+			for (const FArtCastMedium& Medium : Casts.GetValue().Media)
+			{
+				Context.CastsWhy = UnofferedFinish(Palette.GetValue(), Medium.Palette, Medium.Working, Medium.History, Medium.Medium);
+				if (!Context.CastsWhy.IsEmpty()) { return; }
+			}
+			for (const FArtCastPart& Part : Casts.GetValue().Parts)
+			{
+				Context.CastsWhy = UnofferedFinish(Palette.GetValue(), Part.Palette, Part.Working, Part.History, Part.Work + TEXT("'s ") + Part.Part.ToString());
+				if (!Context.CastsWhy.IsEmpty()) { return; }
+			}
+			Context.Casts.Emplace(Casts.StealValue());
 		}
 
 		void ReadFinishesInto(const FMuseeStageContext& Stage, const FArtHang& Hang, FEntryContext& Context)
@@ -321,6 +383,7 @@ namespace Musee::ArtMaking
 		}
 		ReadFinishesInto(Stage, Hang, Context);
 		ReadTurnedInto(Hang, Context);
+		ReadCastsInto(Hang, Context);
 		for (const TArray<const FArtHangEntry*>& Canvases : WorksOf(Hang))
 		{
 			const FString& Id = Canvases[0]->Work;
@@ -358,6 +421,11 @@ namespace Musee::ArtMaking
 		{
 			for (const FCanvasPlan& Canvas : Plan.Canvases)
 			{
+				if (IsCast(*Canvas.Entry))
+				{
+					// A cast shows no image: it is its medium's finish throughout.
+					break;
+				}
 				FArtPaintLayer& Layer = Out.AddDefaulted_GetRef();
 				Layer.Work = Plan.bOwnImages ? FString::Printf(TEXT("%s.%d"), *Plan.Work.Id, Canvas.Entry->Canvas) : Plan.Work.Id;
 				Layer.ImagePath = Plan.bOwnImages ? Canvas.OwnImagePath : Plan.Work.ImagePath;

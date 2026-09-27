@@ -605,7 +605,7 @@
     },
     {
       "work": "degas-little-dancer",
-      "source": "data/artworks.json",
+      "source": "data/sculptures.json",
       "anchor": "salon.bay2.dancer",
       "centre": [
         -20.5,
@@ -614,17 +614,19 @@
       ],
       "height": 1.0,
       "size": [
-        0.0,
+        0.37,
         0.994
       ],
       "facing_deg": 0.0,
-      "support": "bronze with cotton tulle skirt and silk-satin ribbon",
+      "support": "cast",
       "frame": "none",
       "care": "textiles.silk",
       "scan": {
-        "mesh": "assets/sculptures/degas-little-dancer.mvm"
+        "source": "assets/sculptures/CREDITS.md",
+        "mesh": "assets/sculptures/degas-little-dancer.mvm",
+        "depth": 0.417
       },
-      "note": "Feet on the plinth top (1.00) at its centre, facing +x (east, towards the arriving visitor). Height 0.994 (data/sculptures.json heightCm 99.4); width from the scan's bounds (Art measures). Scan CC BY 4.0 (assets/sculptures/CREDITS.md): credit required. Care: the most sensitive component (the silk ribbon)."
+      "note": "A bronze with a cotton tulle skirt and a silk-satin ribbon (data/sculptures.json: the wax is the original, the bronzes posthumous casts from 1922; the scan is the Metropolitan Museum's bronze). Its base slice on the plinth top (1.00) at its centre, facing +x (east, towards the arriving visitor). Size: 0.37 wide (the scan's width at its true height, 0.368 x 0.994 / 0.990) x 0.994 (heightCm 99.4); depth 0.417 likewise. Bronze, patinated, with the skirt in Matter's tulle (Data/Art/Casts.json). Scan CC BY 4.0 (assets/sculptures/CREDITS.md): credited on its label. Care: the most sensitive component (the silk ribbon)."
     }
   ]
 }

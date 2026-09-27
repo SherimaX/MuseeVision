@@ -1,7 +1,10 @@
 #include "Plan/EntryContext.h"
 
 #include "ArtWork.h"
+#include "Cast/ScanMesh.h"
+#include "HAL/FileManager.h"
 #include "MatterRecords.h"
+#include "Misc/Paths.h"
 #include "MatterWorking.h"
 #include "Support/ArtSupport.h"
 
@@ -212,6 +215,57 @@ namespace Musee::ArtMaking
 			}
 			return Out;
 		}
+
+		/**
+		 * A work cast from its scan stands at its centre on a Mount anchor (its carrier's top), unframed: its scan a glTF
+		 * binary or an `.mvm` the collection holds, and any part the casts' record names a band of heights within it.
+		 */
+		TArray<FString> CastEntryFaults(const FMuseeStageContext& Stage, const FArtHangEntry& Entry, const FEntryContext& Context)
+		{
+			TArray<FString> Out;
+			if (!HasAnchor(Stage, Entry, MountAnchorKind))
+			{
+				Out.Add(FString::Printf(TEXT("%s is not a Mount anchor of the stage (the carrier it stands on)"), *Entry.Anchor.ToString()));
+			}
+			if (Entry.Centre.Num() != PointNumbers)
+			{
+				Out.Add(TEXT("it needs its centre [x, y, z], where its base stands"));
+			}
+			if (IsFramed(Entry))
+			{
+				Out.Add(TEXT("a work in the round is unframed"));
+			}
+			const FString Extension = FPaths::GetExtension(Entry.Scan.Mesh);
+			if (!Extension.Equals(GltfExtension, ESearchCase::IgnoreCase) && !Extension.Equals(MvmExtension, ESearchCase::IgnoreCase))
+			{
+				Out.Add(FString::Printf(TEXT("its scan.mesh '%s' is neither a .%s nor an .%s"), *Entry.Scan.Mesh, GltfExtension, MvmExtension));
+			}
+			else if (!IFileManager::Get().FileExists(*Musee::Art::SourcePath(Entry.Scan.Mesh)))
+			{
+				Out.Add(FString::Printf(TEXT("its scan %s is not in the collection"), *Entry.Scan.Mesh));
+			}
+			if (!Context.Casts.IsSet())
+			{
+				Out.Add(Context.CastsWhy);
+				return Out;
+			}
+			for (const FArtCastPart& Part : Context.Casts->Parts)
+			{
+				if (Part.Work == Entry.Work && (Part.Band.Num() != 2 || Part.Band[0] < 0.0 || Part.Band[1] <= Part.Band[0] || Part.Band[1] > Entry.SizeMeters().Y))
+				{
+					Out.Add(FString::Printf(TEXT("its part %s needs a band [from, to] of heights within its own"), *Part.Part.ToString()));
+				}
+			}
+			return Out;
+		}
+
+		/** A work cast from a scan may leave its width 0, to be measured from the scan; any other object gives both. */
+		bool SizeFaulty(const FArtHangEntry& Entry)
+		{
+			const FVector2D Size = Entry.SizeMeters();
+			const bool bWidthMeasured = IsCast(Entry) && Size.X == 0.0;
+			return (Size.X <= 0.0 && !bWidthMeasured) || Size.Y <= 0.0 || Entry.Along < 0.0f || Entry.Height < 0.0f;
+		}
 	}
 
 	bool IsFramed(const FArtHangEntry& Entry)
@@ -222,12 +276,16 @@ namespace Musee::ArtMaking
 	TArray<FString> EntryFaults(const FMuseeStageContext& Stage, const FArtHangEntry& Entry, const FEntryContext& Context)
 	{
 		TArray<FString> Out;
-		const FVector2D Size = Entry.SizeMeters();
-		if (Size.X <= 0.0 || Size.Y <= 0.0 || Entry.Along < 0.0f || Entry.Height < 0.0f)
+		if (SizeFaulty(Entry))
 		{
-			Out.Add(TEXT("it needs a size [w, h] of more than zero, and an along and a height of zero or more"));
+			Out.Add(IsCast(Entry) ? TEXT("it needs a size [w, h] with its true height, its width 0 or more, and an along and a height of zero or more")
+				: TEXT("it needs a size [w, h] of more than zero, and an along and a height of zero or more"));
 		}
-		if (Entry.Support == Supports::Canvas)
+		if (IsCast(Entry))
+		{
+			Out.Append(CastEntryFaults(Stage, Entry, Context));
+		}
+		else if (Entry.Support == Supports::Canvas)
 		{
 			Out.Append(CanvasEntryFaults(Stage, Entry, Context));
 		}
@@ -249,10 +307,11 @@ namespace Musee::ArtMaking
 		}
 		else
 		{
-			Out.Add(FString::Printf(TEXT("its support '%s' isn't made yet; canvas, stained glass, paper, a daguerreotype's plate and earthenware are"),
-				*Entry.Support.ToString()));
+			Out.Add(FString::Printf(TEXT("its support '%s' isn't made yet; canvas, stained glass, paper, a daguerreotype's plate, earthenware, a "
+				"cast and ceramic with a scan are"), *Entry.Support.ToString()));
 		}
-		if (Entry.Support != Supports::Glass && Out.IsEmpty() && !FindSupport(Entry.Support))
+		// A cast's finish is its medium's (Data/Art/Casts.json), not its support's.
+		if (Entry.Support != Supports::Glass && !IsCast(Entry) && Out.IsEmpty() && !FindSupport(Entry.Support))
 		{
 			Out.Add(FString::Printf(TEXT("%s lists no support '%s'"), FArtSupports::Record, *Entry.Support.ToString()));
 		}

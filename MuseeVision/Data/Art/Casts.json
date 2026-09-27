@@ -1,0 +1,30 @@
+{
+  "$sources": [
+    "baseSliceMeters: the slice a work in the round stands on is its scan below 0.04 m, as the stages' sheets measured each cast's base (Data/Stages/classical-hall/Hang.json, the casts' notes: 'the scan's base slice (z < 0.04)').",
+    "widthToleranceMeters: the sheets write a scan's width to the millimetre (Hang.json `size`, from the same meshes); five millimetres is past any rounding, so a larger difference means the scan or the plan is not the one the other was measured from.",
+    "Media, classical: every work of data/classical.json is a plaster cast of the Royal Cast Collection, SMK (assets/classical/CREDITS.md: 3D scans of plaster casts), shown as the cast: plaster of Paris cast in piece moulds, its seams kept, sized (Data/Matter/Palette.json white.plaster-of-paris, whose roles are the Classical Hall's 41 casts and the Rotunda's four).",
+    "Media, Degas: data/sculptures.json's dancer is the wax, with 'bronzes posthumous, from 1922', and asks to label the bronzes as posthumous casts; the Salon shows a bronze (its Hang.json entry, and the collection's scan is the Metropolitan Museum's bronze, assets/sculptures/CREDITS.md), a century indoors under its patina (Palette.json bronze.cusn10 patinated, aged.patina).",
+    "Parts, the dancer's skirt: the bronzes wear a real cotton tulle skirt (the Salon's Hang.json support). Its band was measured on the collection's scan at the work's true height of 0.994 m: below 0.33 m the scan is the legs (0.16 m across), from 0.33 m it widens to the skirt (0.26 to 0.35 m across), and at 0.62 m it narrows to the bodice. The scan carries no colour, so the band also takes the hands clasped behind the back at the skirt's top."
+  ],
+  "$units": {
+    "BaseSliceMeters": "m",
+    "WidthToleranceMeters": "m"
+  },
+  "baseSliceMeters": 0.04,
+  "widthToleranceMeters": 0.005,
+  "media": [
+    { "medium": "Cast after the marble", "palette": "white.plaster-of-paris", "working": "cast.seams-kept.sized", "history": "new", "note": "An SMK plaster cast of a marble." },
+    { "medium": "Cast after the Parian marble", "palette": "white.plaster-of-paris", "working": "cast.seams-kept.sized", "history": "new", "note": "An SMK plaster cast of a marble." },
+    { "medium": "Cast after a Roman marble copy", "palette": "white.plaster-of-paris", "working": "cast.seams-kept.sized", "history": "new", "note": "An SMK plaster cast of a Roman copy." },
+    { "medium": "Cast after the bronze", "palette": "white.plaster-of-paris", "working": "cast.seams-kept.sized", "history": "new", "note": "An SMK plaster cast of a bronze: the object in the museum is the plaster." },
+    { "medium": "Cast after the original", "palette": "white.plaster-of-paris", "working": "cast.seams-kept.sized", "history": "new", "note": "An SMK plaster cast." },
+    { "medium": "Wax, silk, satin, hair (bronzes posthumous, from 1922)", "palette": "bronze.cusn10", "working": "patinated", "history": "aged.patina", "note": "Degas's dancer as the Salon shows it: a posthumous bronze." }
+  ],
+  "parts": [
+    {
+      "work": "degas-little-dancer", "part": "skirt", "band": [0.33, 0.62],
+      "palette": "accent.cotton-tulle", "working": "gathered", "history": "aged.patina",
+      "note": "The bronze's cotton tulle skirt, from its hem to the waistband."
+    }
+  ]
+}

@@ -41,7 +41,8 @@ namespace Musee::Studio
 	FString AssetToken(FName Name);
 
 	/**
-	 * Makes one stage, in the stage contract's fixed order: describe it, make its drawings (and a blind for every port
+	 * Makes one stage, in the stage contract's fixed order: import the scans its works are cast from (MakeCastScans),
+	 * describe it, make its drawings (and a blind for every port
 	 * the site plan leaves unmated), gather the pieces the systems add, check its shells, make each hung work's paint
 	 * layer (its image as a texture, its paint instance), cast every piece in the
 	 * material of its finish, write its level with a body component per moving body (hung from the body it rides), a

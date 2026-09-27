@@ -17,6 +17,7 @@
 #include "SitePortClass.h"
 #include "SiteRoom.h"
 #include "SiteVolume.h"
+#include "Stages/CastScans.h"
 #include "Stages/JointsMake.h"
 #include "Stages/MakeFinding.h"
 #include "Stages/PaintLayers.h"
@@ -121,6 +122,10 @@ namespace Musee::Studio
 		const FString Folder = StageFolder(Stage);
 		const FString ScheduleDir = ScheduleDirOf(Stage, Options);
 		const FDerivedDataTally Before = MeasureDerivedData();
+		{
+			FMakeStepTimer Timer(Report, Folder + TEXT(": scans"));
+			MakeCastScans(FMuseeStageContext{Stage, ScheduleDir, {}, nullptr, {}}, Options, Report);
+		}
 		FStageFabric Fabric;
 		{
 			FMakeStepTimer Timer(Report, Folder + TEXT(": describe and make"));

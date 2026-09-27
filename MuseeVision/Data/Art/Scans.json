@@ -1,0 +1,23 @@
+{
+  "$sources": [
+    "assets/classical/CREDITS.md: 3D scans of plaster casts in the Royal Cast Collection, SMK - National Gallery of Denmark, published by SMK in the public domain (Public Domain Mark), with the courtesy credit it asks for.",
+    "assets/sculptures/CREDITS.md: each .mvm is a derivative of a third-party scan (merged, cleaned, cropped, decimated, re-oriented and re-scaled); a CC BY scan's credit stays with the work, saying that changes were made."
+  ],
+  "scans": [
+    {
+      "mesh": "assets/classical/",
+      "credit": "Scan: SMK - National Gallery of Denmark, The Royal Cast Collection (public domain)",
+      "source": "assets/classical/CREDITS.md"
+    },
+    {
+      "mesh": "assets/sculptures/degas-little-dancer.mvm",
+      "credit": "Scan: passivactivist (Sketchfab), of the Metropolitan Museum of Art's posthumous bronze, CC BY 4.0, via the Objaverse mirror; changes were made",
+      "source": "assets/sculptures/CREDITS.md"
+    },
+    {
+      "mesh": "assets/sculptures/chinese-sancai-horse.mvm",
+      "credit": "Scan: Mixed Reality Lab (mxrlab, Sketchfab), a Tang-type pottery horse standing in for the work, CC BY 4.0, via the Objaverse mirror; changes were made",
+      "source": "assets/sculptures/CREDITS.md"
+    }
+  ]
+}

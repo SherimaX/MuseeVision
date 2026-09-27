@@ -2,6 +2,7 @@
 
 #include "ArtCare.h"
 #include "ArtCatalogue.h"
+#include "Scan/ArtScanCredits.h"
 #include "HAL/FileManager.h"
 #include "Misc/FileHelper.h"
 #include "Misc/Paths.h"
@@ -98,36 +99,54 @@ namespace Musee::Art
 			return RepositoryRoot() / AssetsFolder;
 		}
 
-		/**
-		 * A catalogue as a schedule names it, from the repository's root: assets/... in the collection; any other
-		 * (data/albion.json) in the first repository that holds it.
-		 */
-		FString CataloguePath(const FString& Source)
-		{
-			if (!FPaths::IsRelative(Source))
-			{
-				return Source;
-			}
-			const FString Assets = FString::Printf(TEXT("%s/"), AssetsFolder);
-			if (Source.StartsWith(Assets))
-			{
-				return CollectionRoot() / Source.RightChop(Assets.Len());
-			}
-			for (const FString& Root : RepositoryRoots())
-			{
-				if (IFileManager::Get().FileExists(*(Root / Source)))
-				{
-					return Root / Source;
-				}
-			}
-			return RepositoryRoot() / Source;
-		}
-
 		FName KeyName(const FString& Text, int32 Segments)
 		{
 			const TOptional<FMuseeKey> Key = FMuseeKey::Parse(Text);
 			return Key.IsSet() && Key->Segments().Num() == Segments ? Key->ToName() : NAME_None;
 		}
+
+		/**
+		 * The credit of the scan a work is made from: the record's line for its mesh, or for the folder that holds it (a
+		 * line naming a folder ends in `/`); an error when the record doesn't read or has no line for it.
+		 */
+		TValueOrError<FString, FString> ScanCreditOf(const FString& Mesh)
+		{
+			const TValueOrError<FArtScanCredits, FString> Credits = ReadRecord<FArtScanCredits>(FArtScanCredits::Record);
+			if (Credits.HasError())
+			{
+				return MakeError(Credits.GetError());
+			}
+			const FArtScanCredit* Found = Credits.GetValue().Scans.FindByPredicate([&Mesh](const FArtScanCredit& Credit)
+			{
+				return Credit.Mesh == Mesh || (Credit.Mesh.EndsWith(TEXT("/")) && Mesh.StartsWith(Credit.Mesh));
+			});
+			if (!Found)
+			{
+				return MakeError(FString::Printf(TEXT("Data/%s gives no credit for its scan %s"), FArtScanCredits::Record, *Mesh));
+			}
+			return MakeValue(Found->Credit);
+		}
+	}
+
+	FString SourcePath(const FString& Source)
+	{
+		if (!FPaths::IsRelative(Source))
+		{
+			return Source;
+		}
+		const FString Assets = FString::Printf(TEXT("%s/"), AssetsFolder);
+		if (Source.StartsWith(Assets))
+		{
+			return CollectionRoot() / Source.RightChop(Assets.Len());
+		}
+		for (const FString& Root : RepositoryRoots())
+		{
+			if (IFileManager::Get().FileExists(*(Root / Source)))
+			{
+				return Root / Source;
+			}
+		}
+		return RepositoryRoot() / Source;
 	}
 
 	FString FindImage(const FString& Root, const FString& Name)
@@ -160,7 +179,7 @@ namespace Musee::Art
 
 	TValueOrError<FArtWork, FString> ReadWork(const FArtHangEntry& Entry)
 	{
-		const FString Catalogue = CataloguePath(Entry.Source);
+		const FString Catalogue = SourcePath(Entry.Source);
 		const TValueOrError<FArtCatalogue, FString> Read = ReadRecord<FArtCatalogue>(FPaths::ConvertRelativePathToFull(Catalogue));
 		if (Read.HasError())
 		{
@@ -181,6 +200,15 @@ namespace Musee::Art
 			}
 			Work.Reproduction = Entry.Reproduction;
 			Work.ReproductionCredit = Credit.StealValue();
+		}
+		if (!Entry.Scan.Mesh.IsEmpty())
+		{
+			TValueOrError<FString, FString> Credit = ScanCreditOf(Entry.Scan.Mesh);
+			if (Credit.HasError())
+			{
+				return MakeError(Credit.StealError());
+			}
+			Work.ScanCredit = Credit.StealValue();
 		}
 		Work.Id = Found->Id;
 		Work.Title = Found->Title;
@@ -208,6 +236,7 @@ FMuseeCaption FArtWork::Caption() const
 	const FString Line = FString::Join(TArray<FString>({ Artist, Date, Medium }).FilterByPredicate([](const FString& S) { return !S.IsEmpty(); }), TEXT(", "));
 	Out.Body = FText::FromString(Notes.IsEmpty() ? Line : Line + TEXT(". ") + Notes);
 	const FString Holder = FString::Join(TArray<FString>({ Collection, City }).FilterByPredicate([](const FString& S) { return !S.IsEmpty(); }), TEXT(", "));
-	Out.Credit = FText::FromString(Reproduction.IsNone() ? Holder : FString::Printf(TEXT("%s %s"), *ReproductionCredit, *Holder));
+	const FString Held = Reproduction.IsNone() ? Holder : FString::Printf(TEXT("%s %s"), *ReproductionCredit, *Holder);
+	Out.Credit = FText::FromString(ScanCredit.IsEmpty() ? Held : FString::Printf(TEXT("%s. %s"), *Held, *ScanCredit));
 	return Out;
 }

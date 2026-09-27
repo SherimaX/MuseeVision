@@ -28,10 +28,12 @@ struct MUSEEART_API FArtWork
 	FString ReproductionCredit;
 	/** The image of the paint layer, a full path; empty when none was found. */
 	FString ImagePath;
+	/** For a work made from a scan, the scan's credit as its licence asks (Data/Art/Scans.json); empty otherwise. */
+	FString ScanCredit;
 
 	/**
 	 * The label: the title; the artist, date and medium; and where the work is held, or for a reproduction what it is
-	 * and where the original is held ("Exhibition facsimile after the original in ...").
+	 * and where the original is held ("Exhibition facsimile after the original in ..."), then the scan's credit.
 	 */
 	[[nodiscard]] FMuseeCaption Caption() const;
 };
@@ -42,11 +44,18 @@ namespace Musee::Art
 	[[nodiscard]] MUSEEART_API FString RepositoryRoot();
 
 	/**
+	 * A file a hanging plan names from the repository's root (a catalogue, a scan's mesh), as a full path: `assets/...` in
+	 * the collection, any other (data/albion.json) in the first repository that holds it; a full path as it is.
+	 */
+	[[nodiscard]] MUSEEART_API FString SourcePath(const FString& Source);
+
+	/**
 	 * Reads the work a hanging plan's entry names from the catalogue its `source` names (relative to the repository's
 	 * root, or a full path), with the entry's size, support, care and reproduction, and finds its image: the entry's own
 	 * `image` if it names one, otherwise the work's id; under the catalogue's own folder, then in the collection. Fails,
 	 * saying why, on a catalogue that doesn't read, an id it doesn't hold, or a reproduction Care.json doesn't list; a
-	 * work without an image has an empty ImagePath.
+	 * work without an image has an empty ImagePath. A work made from a scan carries the scan's credit, and fails without
+	 * one (Data/Art/Scans.json): a scan is shown only on its licence's terms.
 	 *
 	 * The collection (assets/, with its catalogues and images) and the older wings' catalogues (data/) are the museum's
 	 * reserve, kept out of a working copy that doesn't check them out. They are read from, in order, the environment's
