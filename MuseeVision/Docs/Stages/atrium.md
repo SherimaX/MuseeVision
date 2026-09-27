@@ -89,7 +89,7 @@ The canopy is not an opening: the Sphere above it is opaque; its panes are a lum
     wide with round ends, **2 mm thick at a 4 mm pitch** (the stack 26 mm deep from the top blade's face); pins at r
     3.745, plan angles 360°k/7 (k 0…6, pin 0 due east), blade k lying 4k mm below the top; it turns 52° on its pin, eased
     over **4.0 s**. Open, the blades' inner edge stands at r 2.470 in a seat r ≥ 2.460 and the blades reach r 4.010 in
-    travel. States: **shut 0**, **clamp 0.378** (round a mast head's groove r 0.195; the blades leave r 0.197), **open 1**.
+    travel; each blade's pin-end is lengthened by a **pin lug**, a round boss r 0.060 about the pin joined to the round end by a 0.120-wide web on the pin's radius, so the blade encloses its pin (as built the pin stood 25 mm outside the blade). States: **shut 0**, **clamp 0.3206** (round a mast head's groove r 0.195; the blades leave r 0.197; the channel maps linearly to the blade angle (Motion `follows`), so the as-built eased clamp 0.378 is **0.3206** here, the same blade pose), **open 1**. Checked by exact polygon union (shapely): shut, the seven cover the well r 2.300 with no gap; clamp leaves r 0.197; open, the inner edge is at r 2.470; in travel the reach is 4.009 (lug included); no blade ever passes over another blade's pin, so each pin runs through the stack to its housing.
   - **Ownership rule:** the closure belongs to the **stage below the mating plane**, at the seal depth that stage declares:
     `atrium.up`'s is the Atrium's collar iris, top blade face **0.020 below** the plane (z 7.695); `atrium.down`'s is the
     Cube's ceiling iris, top blade face **7.442 below** the plane (museum z −7.942, `CubePlan.h:62`). Each publishes
@@ -421,7 +421,7 @@ irises they form one coupling group; Site binds the channels across the seams.
 |---|---|---|
 | `atrium.call` | "Call the car" (the car isn't here or coming) | collar iris open 4.0 s → move `atrium` (≈ 7.6 s) → car and landing leaves open 1.5 s: ≈ 13 s |
 | (automatic) | home: open at the Atrium, nobody within r 3.500 (or off the floor) for 12 s | leaves shut 1.5 s → move `neck` → collar iris shut 4.0 s |
-| `atrium.car.panel` at `atrium` | "Down to the Cube" (`atrium.down` mated) | leaves shut → `cube.up.closure` → 1 (4.0 s, while descending; the car waits at −7.750 if not yet open) → move `clamp` → clamp (→ 0.378, 2.5 s) → move `cube` on the mast (≈ 14.8 s) → `atrium.car.light` → 0.03 (2.5 s): ≈ 25 s |
+| `atrium.car.panel` at `atrium` | "Down to the Cube" (`atrium.down` mated) | leaves shut → `cube.up.closure` → 1 (4.0 s, while descending; the car waits at −7.750 if not yet open) → move `clamp` → clamp (→ 0.3206, 2.49 s) → move `cube` on the mast (≈ 14.8 s) → `atrium.car.light` → 0.03 (2.5 s): ≈ 25 s |
 | `atrium.car.panel` at `atrium` | "Up to the Sphere" (requires `atrium.up` mated) | leaves shut → move `neck` → collar iris shut 4.0 s → **the Sphere leg**: `sphere.neck.closure` → 1 (4.0 s) → move `mast` → `sphere.mast.dogs` → 1 (2.0 s) → move `gate` → `sphere.platform.closure` → 1 (4.0 s) → move `sphere` → `atrium.car.light` → 0.03 (2.5 s, so the car doesn't light the sky) → car leaves open |
 | `atrium.car.panel` at `cube` | "Up to the Atrium" / "Up to the Sphere" (the light is back; no work performs) | light → 1 (2.5 s) → move `clamp` → release (→ 1, 2.5 s) → move `atrium` (leaves open) or on to `neck` and the airlock as above; `cube.up.closure` → 0 behind the car once above −7.450 |
 | `atrium.car.panel` at `sphere` | "Down to the Atrium" (leaves open) | **the Sphere's descent**: car leaves shut → move `gate` → `sphere.platform.closure` → 0 (4.0 s) → move `mast` → `sphere.mast.dogs` → 0 (2.0 s) → move `neck` → `sphere.neck.closure` → 0 → light → 1 (2.5 s); then collar iris open → move `atrium` → leaves open |
@@ -459,7 +459,7 @@ while the car is below the neck stop and shut while the car is at or above it (`
 | A-3 | Occupancy guard (`body-in-travel`): a leaf holds or reverses while a body is in its next travel slice; the car waits while a body stands in the doorway; no call opens the landing onto a moving car. |
 | A-4 | The car's head (2.940 above its floor) passes the collar iris's stack (bottom 7.669) only with `atrium.up.closure` ≥ 0.999: the car floor rises above **4.679**, or descends below **7.915** (its seat's bottom −0.160 over the stack's top 7.705 + 0.050), only with it open. |
 | A-5 | Airlock: the collar iris and the Sphere's neck iris are never both open; at `neck` the one behind shuts before the one ahead opens. |
-| A-6 | The Cube: the car floor passes below −7.750 only with `cube.up.closure` ≥ 0.999; leaves `clamp` downward only clamped (0.378 ± 0.002), upward only released (≥ 0.999). |
+| A-6 | The Cube: the car floor passes below −7.750 only with `cube.up.closure` ≥ 0.999; leaves `clamp` downward only clamped (0.3206 ± 0.002), upward only released (≥ 0.999). |
 | A-7 | The Sphere: the car passes its platform gate (floor 17.400) only with `sphere.platform.closure` ≥ 0.999 (the Sphere's guard). |
 | A-8 | The car leaves the Cube stop only with `atrium.car.light` back at 1; a work performing holds it. |
 
@@ -620,6 +620,7 @@ closure-at-declared-depth rule.
 - **Unmated states** are part of the design (§2, §6): no well, no ride that way, the iris shut.
 
 **Departures from as-built** (for the owner's review):
+- **iris.4600 corrected:** each blade gains a pin lug (r 0.060 boss on a 0.120 web) so it encloses its pin; as built the pin stood 25 mm outside the blade. The clamp value is 0.3206 on the linear channel (as built 0.378 through a smoothstep: the same blade pose, r 0.197). Shut, clamp, open and reach checked by polygon union.
 - **The Sphere leg** (ruled with the Sphere's Q-1): the car stops at `mast` while the Sphere's bearing dogs slide under its mast's foot ring, and at `gate` before the platform iris opens (never an open drop beside a visitor). The platform iris shuts behind a descending car, "Send the car down" is restored from the as-built code, and the car's light drops to a glimmer at `sphere`, so it doesn't light the sky.
 - **No memory of the visit** (first pass): "Up to the Sphere" from the Atrium no longer waits for a visit to the Cube; rides are gated only by mated ports and channels (`requires`). The Cube rides require `cube.performance.active` ≤ 0, which the Cube publishes.
 - **Stage model:** the ribs stand 5 mm clear of stone and glass (as built tucked 30 mm in); the canopy's glass lies on its

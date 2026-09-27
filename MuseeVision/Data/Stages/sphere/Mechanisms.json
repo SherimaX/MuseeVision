@@ -80,7 +80,7 @@
       },
       "guard": "body-in-travel",
       "clearance": 0.002,
-      "note": "Bearing dog 1 of 4 at bearing 45 deg: a solid CuSn10 bar 0.160 wide x 0.300 deep x 3.060 long, top face z 11.150 (the mast's foot plane), bottom 10.850. Body frame at its tip's top face, retracted: r 2.560 (10 mm behind the throat's bore), (1.81, -1.81, 11.15); slides radially in 2.260 to its tip at r 0.300, 100 mm under the foot ring (r 0.205-0.400), keeping 0.800 in its housing. Housed in a box through the throat wall and out under the flange, r 2.550-5.650, z 10.830-11.150. Driven by the car's sequences through sphere.mast.dogs (0 retracted, 1 extended); extends only with the car floor above 11.300; retracts only with the mast at 0 and the car at stop 'mast'."
+      "note": "Bearing dog 1 of 4 at bearing 45 deg: a solid CuSn10 bar 0.160 wide x 0.300 deep x 3.060 long, top face z 11.150 (the mast's foot plane), bottom 10.850. Body frame at its tip's top face, retracted: r 2.560 (10 mm behind the throat's bore), (1.81, -1.81, 11.15); slides radially in 2.260 to its tip at r 0.300, 100 mm under the foot ring (r 0.205-0.400), keeping 0.800 in its housing. Housed in sphere.mast.dogs.housing.1, a box through the throat wall and out under the flange, r 2.550-5.650, z 10.830-11.150. Driven by the car's sequences through sphere.mast.dogs (0 retracted, 1 extended); extends only with the car floor above 11.300; retracts only with the mast at 0 and the car at stop 'mast'."
     },
     {
       "key": "sphere.mast.dogs.2",
@@ -107,7 +107,7 @@
       },
       "guard": "body-in-travel",
       "clearance": 0.002,
-      "note": "Bearing dog 2 of 4 at bearing 135 deg: a solid CuSn10 bar 0.160 wide x 0.300 deep x 3.060 long, top face z 11.150 (the mast's foot plane), bottom 10.850. Body frame at its tip's top face, retracted: r 2.560 (10 mm behind the throat's bore), (1.81, 1.81, 11.15); slides radially in 2.260 to its tip at r 0.300, 100 mm under the foot ring (r 0.205-0.400), keeping 0.800 in its housing. Housed in a box through the throat wall and out under the flange, r 2.550-5.650, z 10.830-11.150. Driven by the car's sequences through sphere.mast.dogs (0 retracted, 1 extended); extends only with the car floor above 11.300; retracts only with the mast at 0 and the car at stop 'mast'."
+      "note": "Bearing dog 2 of 4 at bearing 135 deg: a solid CuSn10 bar 0.160 wide x 0.300 deep x 3.060 long, top face z 11.150 (the mast's foot plane), bottom 10.850. Body frame at its tip's top face, retracted: r 2.560 (10 mm behind the throat's bore), (1.81, 1.81, 11.15); slides radially in 2.260 to its tip at r 0.300, 100 mm under the foot ring (r 0.205-0.400), keeping 0.800 in its housing. Housed in sphere.mast.dogs.housing.2, a box through the throat wall and out under the flange, r 2.550-5.650, z 10.830-11.150. Driven by the car's sequences through sphere.mast.dogs (0 retracted, 1 extended); extends only with the car floor above 11.300; retracts only with the mast at 0 and the car at stop 'mast'."
     },
     {
       "key": "sphere.mast.dogs.3",
@@ -134,7 +134,7 @@
       },
       "guard": "body-in-travel",
       "clearance": 0.002,
-      "note": "Bearing dog 3 of 4 at bearing 225 deg: a solid CuSn10 bar 0.160 wide x 0.300 deep x 3.060 long, top face z 11.150 (the mast's foot plane), bottom 10.850. Body frame at its tip's top face, retracted: r 2.560 (10 mm behind the throat's bore), (-1.81, 1.81, 11.15); slides radially in 2.260 to its tip at r 0.300, 100 mm under the foot ring (r 0.205-0.400), keeping 0.800 in its housing. Housed in a box through the throat wall and out under the flange, r 2.550-5.650, z 10.830-11.150. Driven by the car's sequences through sphere.mast.dogs (0 retracted, 1 extended); extends only with the car floor above 11.300; retracts only with the mast at 0 and the car at stop 'mast'."
+      "note": "Bearing dog 3 of 4 at bearing 225 deg: a solid CuSn10 bar 0.160 wide x 0.300 deep x 3.060 long, top face z 11.150 (the mast's foot plane), bottom 10.850. Body frame at its tip's top face, retracted: r 2.560 (10 mm behind the throat's bore), (-1.81, 1.81, 11.15); slides radially in 2.260 to its tip at r 0.300, 100 mm under the foot ring (r 0.205-0.400), keeping 0.800 in its housing. Housed in sphere.mast.dogs.housing.3, a box through the throat wall and out under the flange, r 2.550-5.650, z 10.830-11.150. Driven by the car's sequences through sphere.mast.dogs (0 retracted, 1 extended); extends only with the car floor above 11.300; retracts only with the mast at 0 and the car at stop 'mast'."
     },
     {
       "key": "sphere.mast.dogs.4",
@@ -161,7 +161,7 @@
       },
       "guard": "body-in-travel",
       "clearance": 0.002,
-      "note": "Bearing dog 4 of 4 at bearing 315 deg: a solid CuSn10 bar 0.160 wide x 0.300 deep x 3.060 long, top face z 11.150 (the mast's foot plane), bottom 10.850. Body frame at its tip's top face, retracted: r 2.560 (10 mm behind the throat's bore), (-1.81, -1.81, 11.15); slides radially in 2.260 to its tip at r 0.300, 100 mm under the foot ring (r 0.205-0.400), keeping 0.800 in its housing. Housed in a box through the throat wall and out under the flange, r 2.550-5.650, z 10.830-11.150. Driven by the car's sequences through sphere.mast.dogs (0 retracted, 1 extended); extends only with the car floor above 11.300; retracts only with the mast at 0 and the car at stop 'mast'."
+      "note": "Bearing dog 4 of 4 at bearing 315 deg: a solid CuSn10 bar 0.160 wide x 0.300 deep x 3.060 long, top face z 11.150 (the mast's foot plane), bottom 10.850. Body frame at its tip's top face, retracted: r 2.560 (10 mm behind the throat's bore), (-1.81, -1.81, 11.15); slides radially in 2.260 to its tip at r 0.300, 100 mm under the foot ring (r 0.205-0.400), keeping 0.800 in its housing. Housed in sphere.mast.dogs.housing.4, a box through the throat wall and out under the flange, r 2.550-5.650, z 10.830-11.150. Driven by the car's sequences through sphere.mast.dogs (0 retracted, 1 extended); extends only with the car floor above 11.300; retracts only with the mast at 0 and the car at stop 'mast'."
     },
     {
       "key": "sphere.neck.iris.blade.1",
@@ -188,7 +188,7 @@
       },
       "guard": "body-in-travel",
       "clearance": 0.002,
-      "note": "Neck iris blade 1 of 7 (class iris.4600, as the Atrium's collar iris): body frame on its pin at r 3.745, plan angle 0.0000 deg (from +x towards +y), (3.745, 0.000, 11.396), its top face; 2 mm thick; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. Eased (s = 3o^2 - 2o^3) over 4.0 s. Housed open in the flange's pocket (r 2.460-4.100, z 11.369-11.397); in travel it reaches r 4.010."
+      "note": "Neck iris blade 1 of 7 (class iris.4600, as the Atrium's collar iris): body frame on its pin at r 3.745, plan angle 0.0000 deg (from +x towards +y), (3.745, 0.000, 11.396), its top face; 2 mm thick; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. The pose is the linear follows map (closure × 52 deg); the move is eased over 4.0 s. Housed open in the flange's pocket (r 2.460-4.100, z 11.369-11.397); in travel it reaches r 4.010."
     },
     {
       "key": "sphere.neck.iris.blade.2",
@@ -215,7 +215,7 @@
       },
       "guard": "body-in-travel",
       "clearance": 0.002,
-      "note": "Neck iris blade 2 of 7 (class iris.4600, as the Atrium's collar iris): body frame on its pin at r 3.745, plan angle 51.4286 deg (from +x towards +y), (2.335, 2.928, 11.392), its top face; 2 mm thick; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. Eased (s = 3o^2 - 2o^3) over 4.0 s. Housed open in the flange's pocket (r 2.460-4.100, z 11.369-11.397); in travel it reaches r 4.010."
+      "note": "Neck iris blade 2 of 7 (class iris.4600, as the Atrium's collar iris): body frame on its pin at r 3.745, plan angle 51.4286 deg (from +x towards +y), (2.335, 2.928, 11.392), its top face; 2 mm thick; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. The pose is the linear follows map (closure × 52 deg); the move is eased over 4.0 s. Housed open in the flange's pocket (r 2.460-4.100, z 11.369-11.397); in travel it reaches r 4.010."
     },
     {
       "key": "sphere.neck.iris.blade.3",
@@ -242,7 +242,7 @@
       },
       "guard": "body-in-travel",
       "clearance": 0.002,
-      "note": "Neck iris blade 3 of 7 (class iris.4600, as the Atrium's collar iris): body frame on its pin at r 3.745, plan angle 102.8571 deg (from +x towards +y), (-0.833, 3.651, 11.388), its top face; 2 mm thick; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. Eased (s = 3o^2 - 2o^3) over 4.0 s. Housed open in the flange's pocket (r 2.460-4.100, z 11.369-11.397); in travel it reaches r 4.010."
+      "note": "Neck iris blade 3 of 7 (class iris.4600, as the Atrium's collar iris): body frame on its pin at r 3.745, plan angle 102.8571 deg (from +x towards +y), (-0.833, 3.651, 11.388), its top face; 2 mm thick; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. The pose is the linear follows map (closure × 52 deg); the move is eased over 4.0 s. Housed open in the flange's pocket (r 2.460-4.100, z 11.369-11.397); in travel it reaches r 4.010."
     },
     {
       "key": "sphere.neck.iris.blade.4",
@@ -269,7 +269,7 @@
       },
       "guard": "body-in-travel",
       "clearance": 0.002,
-      "note": "Neck iris blade 4 of 7 (class iris.4600, as the Atrium's collar iris): body frame on its pin at r 3.745, plan angle 154.2857 deg (from +x towards +y), (-3.374, 1.625, 11.384), its top face; 2 mm thick; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. Eased (s = 3o^2 - 2o^3) over 4.0 s. Housed open in the flange's pocket (r 2.460-4.100, z 11.369-11.397); in travel it reaches r 4.010."
+      "note": "Neck iris blade 4 of 7 (class iris.4600, as the Atrium's collar iris): body frame on its pin at r 3.745, plan angle 154.2857 deg (from +x towards +y), (-3.374, 1.625, 11.384), its top face; 2 mm thick; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. The pose is the linear follows map (closure × 52 deg); the move is eased over 4.0 s. Housed open in the flange's pocket (r 2.460-4.100, z 11.369-11.397); in travel it reaches r 4.010."
     },
     {
       "key": "sphere.neck.iris.blade.5",
@@ -296,7 +296,7 @@
       },
       "guard": "body-in-travel",
       "clearance": 0.002,
-      "note": "Neck iris blade 5 of 7 (class iris.4600, as the Atrium's collar iris): body frame on its pin at r 3.745, plan angle 205.7143 deg (from +x towards +y), (-3.374, -1.625, 11.380), its top face; 2 mm thick; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. Eased (s = 3o^2 - 2o^3) over 4.0 s. Housed open in the flange's pocket (r 2.460-4.100, z 11.369-11.397); in travel it reaches r 4.010."
+      "note": "Neck iris blade 5 of 7 (class iris.4600, as the Atrium's collar iris): body frame on its pin at r 3.745, plan angle 205.7143 deg (from +x towards +y), (-3.374, -1.625, 11.380), its top face; 2 mm thick; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. The pose is the linear follows map (closure × 52 deg); the move is eased over 4.0 s. Housed open in the flange's pocket (r 2.460-4.100, z 11.369-11.397); in travel it reaches r 4.010."
     },
     {
       "key": "sphere.neck.iris.blade.6",
@@ -323,7 +323,7 @@
       },
       "guard": "body-in-travel",
       "clearance": 0.002,
-      "note": "Neck iris blade 6 of 7 (class iris.4600, as the Atrium's collar iris): body frame on its pin at r 3.745, plan angle 257.1429 deg (from +x towards +y), (-0.833, -3.651, 11.376), its top face; 2 mm thick; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. Eased (s = 3o^2 - 2o^3) over 4.0 s. Housed open in the flange's pocket (r 2.460-4.100, z 11.369-11.397); in travel it reaches r 4.010."
+      "note": "Neck iris blade 6 of 7 (class iris.4600, as the Atrium's collar iris): body frame on its pin at r 3.745, plan angle 257.1429 deg (from +x towards +y), (-0.833, -3.651, 11.376), its top face; 2 mm thick; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. The pose is the linear follows map (closure × 52 deg); the move is eased over 4.0 s. Housed open in the flange's pocket (r 2.460-4.100, z 11.369-11.397); in travel it reaches r 4.010."
     },
     {
       "key": "sphere.neck.iris.blade.7",
@@ -350,7 +350,7 @@
       },
       "guard": "body-in-travel",
       "clearance": 0.002,
-      "note": "Neck iris blade 7 of 7 (class iris.4600, as the Atrium's collar iris): body frame on its pin at r 3.745, plan angle 308.5714 deg (from +x towards +y), (2.335, -2.928, 11.372), its top face; 2 mm thick; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. Eased (s = 3o^2 - 2o^3) over 4.0 s. Housed open in the flange's pocket (r 2.460-4.100, z 11.369-11.397); in travel it reaches r 4.010."
+      "note": "Neck iris blade 7 of 7 (class iris.4600, as the Atrium's collar iris): body frame on its pin at r 3.745, plan angle 308.5714 deg (from +x towards +y), (2.335, -2.928, 11.372), its top face; 2 mm thick; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. The pose is the linear follows map (closure × 52 deg); the move is eased over 4.0 s. Housed open in the flange's pocket (r 2.460-4.100, z 11.369-11.397); in travel it reaches r 4.010."
     },
     {
       "key": "sphere.platform.iris.blade.1",
@@ -377,7 +377,7 @@
       },
       "guard": "body-in-travel",
       "clearance": 0.002,
-      "note": "Platform iris blade 1 of 7 (class iris.4600, as the Atrium's collar iris): body frame on its pin at r 3.745, plan angle 0.0000 deg (from +x towards +y), (3.745, 0.000, 20.396), its top face; 2 mm thick; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. Eased (s = 3o^2 - 2o^3) over 4.0 s. Housed open in the platform's pocket (r 2.460-4.100, z 20.369-20.397) under the bronze seat ring; in travel it reaches r 4.010."
+      "note": "Platform iris blade 1 of 7 (class iris.4600, as the Atrium's collar iris): body frame on its pin at r 3.745, plan angle 0.0000 deg (from +x towards +y), (3.745, 0.000, 20.396), its top face; 2 mm thick; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. The pose is the linear follows map (closure × 52 deg); the move is eased over 4.0 s. Housed open in the platform's pocket (r 2.460-4.100, z 20.369-20.397) under the bronze seat ring; in travel it reaches r 4.010."
     },
     {
       "key": "sphere.platform.iris.blade.2",
@@ -404,7 +404,7 @@
       },
       "guard": "body-in-travel",
       "clearance": 0.002,
-      "note": "Platform iris blade 2 of 7 (class iris.4600, as the Atrium's collar iris): body frame on its pin at r 3.745, plan angle 51.4286 deg (from +x towards +y), (2.335, 2.928, 20.392), its top face; 2 mm thick; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. Eased (s = 3o^2 - 2o^3) over 4.0 s. Housed open in the platform's pocket (r 2.460-4.100, z 20.369-20.397) under the bronze seat ring; in travel it reaches r 4.010."
+      "note": "Platform iris blade 2 of 7 (class iris.4600, as the Atrium's collar iris): body frame on its pin at r 3.745, plan angle 51.4286 deg (from +x towards +y), (2.335, 2.928, 20.392), its top face; 2 mm thick; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. The pose is the linear follows map (closure × 52 deg); the move is eased over 4.0 s. Housed open in the platform's pocket (r 2.460-4.100, z 20.369-20.397) under the bronze seat ring; in travel it reaches r 4.010."
     },
     {
       "key": "sphere.platform.iris.blade.3",
@@ -431,7 +431,7 @@
       },
       "guard": "body-in-travel",
       "clearance": 0.002,
-      "note": "Platform iris blade 3 of 7 (class iris.4600, as the Atrium's collar iris): body frame on its pin at r 3.745, plan angle 102.8571 deg (from +x towards +y), (-0.833, 3.651, 20.388), its top face; 2 mm thick; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. Eased (s = 3o^2 - 2o^3) over 4.0 s. Housed open in the platform's pocket (r 2.460-4.100, z 20.369-20.397) under the bronze seat ring; in travel it reaches r 4.010."
+      "note": "Platform iris blade 3 of 7 (class iris.4600, as the Atrium's collar iris): body frame on its pin at r 3.745, plan angle 102.8571 deg (from +x towards +y), (-0.833, 3.651, 20.388), its top face; 2 mm thick; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. The pose is the linear follows map (closure × 52 deg); the move is eased over 4.0 s. Housed open in the platform's pocket (r 2.460-4.100, z 20.369-20.397) under the bronze seat ring; in travel it reaches r 4.010."
     },
     {
       "key": "sphere.platform.iris.blade.4",
@@ -458,7 +458,7 @@
       },
       "guard": "body-in-travel",
       "clearance": 0.002,
-      "note": "Platform iris blade 4 of 7 (class iris.4600, as the Atrium's collar iris): body frame on its pin at r 3.745, plan angle 154.2857 deg (from +x towards +y), (-3.374, 1.625, 20.384), its top face; 2 mm thick; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. Eased (s = 3o^2 - 2o^3) over 4.0 s. Housed open in the platform's pocket (r 2.460-4.100, z 20.369-20.397) under the bronze seat ring; in travel it reaches r 4.010."
+      "note": "Platform iris blade 4 of 7 (class iris.4600, as the Atrium's collar iris): body frame on its pin at r 3.745, plan angle 154.2857 deg (from +x towards +y), (-3.374, 1.625, 20.384), its top face; 2 mm thick; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. The pose is the linear follows map (closure × 52 deg); the move is eased over 4.0 s. Housed open in the platform's pocket (r 2.460-4.100, z 20.369-20.397) under the bronze seat ring; in travel it reaches r 4.010."
     },
     {
       "key": "sphere.platform.iris.blade.5",
@@ -485,7 +485,7 @@
       },
       "guard": "body-in-travel",
       "clearance": 0.002,
-      "note": "Platform iris blade 5 of 7 (class iris.4600, as the Atrium's collar iris): body frame on its pin at r 3.745, plan angle 205.7143 deg (from +x towards +y), (-3.374, -1.625, 20.380), its top face; 2 mm thick; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. Eased (s = 3o^2 - 2o^3) over 4.0 s. Housed open in the platform's pocket (r 2.460-4.100, z 20.369-20.397) under the bronze seat ring; in travel it reaches r 4.010."
+      "note": "Platform iris blade 5 of 7 (class iris.4600, as the Atrium's collar iris): body frame on its pin at r 3.745, plan angle 205.7143 deg (from +x towards +y), (-3.374, -1.625, 20.380), its top face; 2 mm thick; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. The pose is the linear follows map (closure × 52 deg); the move is eased over 4.0 s. Housed open in the platform's pocket (r 2.460-4.100, z 20.369-20.397) under the bronze seat ring; in travel it reaches r 4.010."
     },
     {
       "key": "sphere.platform.iris.blade.6",
@@ -512,7 +512,7 @@
       },
       "guard": "body-in-travel",
       "clearance": 0.002,
-      "note": "Platform iris blade 6 of 7 (class iris.4600, as the Atrium's collar iris): body frame on its pin at r 3.745, plan angle 257.1429 deg (from +x towards +y), (-0.833, -3.651, 20.376), its top face; 2 mm thick; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. Eased (s = 3o^2 - 2o^3) over 4.0 s. Housed open in the platform's pocket (r 2.460-4.100, z 20.369-20.397) under the bronze seat ring; in travel it reaches r 4.010."
+      "note": "Platform iris blade 6 of 7 (class iris.4600, as the Atrium's collar iris): body frame on its pin at r 3.745, plan angle 257.1429 deg (from +x towards +y), (-0.833, -3.651, 20.376), its top face; 2 mm thick; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. The pose is the linear follows map (closure × 52 deg); the move is eased over 4.0 s. Housed open in the platform's pocket (r 2.460-4.100, z 20.369-20.397) under the bronze seat ring; in travel it reaches r 4.010."
     },
     {
       "key": "sphere.platform.iris.blade.7",
@@ -539,7 +539,7 @@
       },
       "guard": "body-in-travel",
       "clearance": 0.002,
-      "note": "Platform iris blade 7 of 7 (class iris.4600, as the Atrium's collar iris): body frame on its pin at r 3.745, plan angle 308.5714 deg (from +x towards +y), (2.335, -2.928, 20.372), its top face; 2 mm thick; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. Eased (s = 3o^2 - 2o^3) over 4.0 s. Housed open in the platform's pocket (r 2.460-4.100, z 20.369-20.397) under the bronze seat ring; in travel it reaches r 4.010."
+      "note": "Platform iris blade 7 of 7 (class iris.4600, as the Atrium's collar iris): body frame on its pin at r 3.745, plan angle 308.5714 deg (from +x towards +y), (2.335, -2.928, 20.372), its top face; 2 mm thick; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. The pose is the linear follows map (closure × 52 deg); the move is eased over 4.0 s. Housed open in the platform's pocket (r 2.460-4.100, z 20.369-20.397) under the bronze seat ring; in travel it reaches r 4.010."
     }
   ]
 }

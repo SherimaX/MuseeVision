@@ -111,7 +111,14 @@
       "material": "bronze.cusn10",
       "working": "gilt.gold-leaf.oil",
       "history": "new",
-      "note": "The platform's bronze: the nosing, the balustrade's shoe and 32 posts, the handrail light's channel and 32 brackets, the eight struts (tube 168 x 10) and their end plates: cast and drawn CuSn10, oil-gilt, clean."
+      "note": "The platform's bronze: the nosing, the balustrade's shoe and 32 posts, the handrail light's channel, the eight struts (tube 168 x 10) and their end plates: cast and drawn CuSn10, oil-gilt, clean."
+    },
+    {
+      "surface": "sphere.platform.bracket",
+      "material": "bronze.cusn10",
+      "working": "gilt.gold-leaf.oil",
+      "history": "new",
+      "note": "The handrail light channel's 32 brackets, one mid-pane at each bearing 11.25k: CuSn10 strap 25 wide x 6 thick bent to an L, the vertical leg r 5.292-5.298, z 21.419-21.453 saddle-brazed to the handrail tube's underside, the horizontal leg r 5.270-5.298, z 21.419-21.425 under the channel (legs 0.034 + 0.028), the channel fixed to it by one M4 CuSn screw; oil-gilt with the rail."
     },
     {
       "surface": "sphere.platform.rail",
@@ -139,7 +146,21 @@
       "material": "bronze.cusn10",
       "working": "mirror-polished",
       "history": "new",
-      "note": "The mast's four bearing dogs: solid CuSn10 bars 0.160 wide x 0.300 deep x 3.060 long (EN 1982 CC480K, the classic bearing bronze), their faces machined and polished, running on greased bronze-on-steel in their housings; each carries the mast's foot ring on its top face (z 11.150) at up to 112 kN with two dogs sharing. Unlacquered: sliding and bearing faces."
+      "note": "The mast's four bearing dogs: solid CuSn10 bars 0.160 wide x 0.300 deep x 3.060 long (EN 1982 CC480K, the classic bearing bronze), their faces machined and polished, running greased on the hard-chromed wear strips of their housings sphere.mast.dogs.housing.1-4; each carries the mast's foot ring on its top face (z 11.150) at up to 112 kN with two dogs sharing. Unlacquered: sliding and bearing faces."
+    },
+    {
+      "surface": "sphere.mast.dogs.plate",
+      "material": "white.pearl-steel",
+      "working": "pearl.satin",
+      "history": "new",
+      "note": "The dogs' four housings (openings sphere.mast.dogs.housing.1-4): S355J2 plates 20 mm, welded boxes 0.220 wide outside (0.180 inside): two side plates 0.340 tall x 3.120 long (r 2.550-5.670, z 10.810-11.150), a bottom plate 0.220 x 3.120 (z 10.810-10.830), a top plate 0.220 x 1.170 beyond the flange (r 4.500-5.670, z 11.150-11.170) and an end plate 0.220 x 0.360 carrying the ram. Welded full-penetration to both skins of the throat where they pass it; side plates bolted to the flange's underside by M20 grade 8.8 bolts at 0.250 centres through welded flats. Pearl satin, seen from the platform."
+    },
+    {
+      "surface": "sphere.mast.dogs.liner",
+      "material": "steel.hard-chrome",
+      "working": "ground.hard-chromed",
+      "history": "new",
+      "note": "The dogs' wear strips, 10 mm ground and hard-chromed steel (bronze dogs run on hard steel, the classic bearing pair): one on each housing's bottom plate at the mouth (r 2.560-3.400, 0.160 wide, z 10.830-10.840) and one inset flush in the flange's underside over each dog's rear (r 3.200-4.450, z 11.150-11.160), countersunk-screwed M8 at 0.200 centres."
     },
     {
       "surface": "sphere.down.blind-iris",

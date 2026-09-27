@@ -62,7 +62,7 @@ canopy carries nothing. Nothing bears on the Atrium's ribs.
 The car is the Atrium's moving body, not an enclosure; it stands in whichever enclosure it is in. The dome's outer face is
 outdoors (the Grounds' air; weather museum). **Openings (Form's one list):** Port `sphere.down`; Housings
 `sphere.neck.iris.pocket` (r 2.460–4.100, z 11.369–11.397), `sphere.platform.iris.pocket` (r 2.460–4.100, z
-20.369–20.397) and `sphere.mast.dogs.housing` (four, r 2.550–5.650, z 10.830–11.150, §3.6). No Glazed or Open opening: the Sphere never sees the sky; it shows it (§4).
+20.369–20.397) and `sphere.mast.dogs.housing.1` … `.4` (one per dog, inside r 2.550–5.650, z 10.830–11.150, §3.6). No Glazed or Open opening: the Sphere never sees the sky; it shows it (§4).
 
 ## 2. Ports
 
@@ -74,7 +74,7 @@ outdoors (the Grounds' air; weather museum). **Openings (Form's one list):** Por
   (tangential ±0.008) from r 2.265 to 2.300 at bearings 0° and 180°. Closure: seven blades, each a 110° arc of the middle
   circle r 3.095, 1.250 wide, round ends, **2 mm thick at a 4 mm pitch** (stack 26 mm), pins at r 3.745 on plan angles
   360°k/7 (k 0…6, pin 0 due east), blade k 4k mm below the top; each turns 52° on its pin, eased over 4.0 s; open, the
-  inner edge at r 2.470 in a seat r ≥ 2.460; in travel the blades reach r 4.010. States shut 0, clamp 0.378, open 1.
+  inner edge at r 2.470 in a seat r ≥ 2.460; in travel the blades reach r 4.010; each blade's pin-end is lengthened by a **pin lug**, a round boss r 0.060 about the pin joined to the round end by a 0.120-wide web on the pin's radius, so the blade encloses its pin (as built the pin stood 25 mm outside the blade). States shut 0, clamp 0.3206 (the channel maps linearly to the blade angle (Motion `follows`), so the as-built eased clamp 0.378 is **0.3206** here, the same blade pose), open 1.
 - **The port's closure is the Atrium's** (the stage below the plane): its collar iris, top blade face 7.695, publishing
   `atrium.up.closure`. The Sphere builds no closure at the plane. **Joint:** none; the faces touch (the throat on the
   collar's top).
@@ -98,7 +98,7 @@ Bodies are drawn closed (blades shut, dogs retracted, the mast at zero length wi
 |---|---|---|---|
 | `sphere.mast.head` | Body | (0, 0, 11.150): the mast column's top on the axis at the foot plane; axes of the stage; moves +z 0 → 9.090, following `atrium.car.height` | the mast (§3.6): the column's top, which bears on the car's under-floor seat |
 | `sphere.mast.foot` | Body | (0, 0, 11.150): the foot plane on the axis (the foot ring drawn 11.152–11.210); axes of the stage; moves along z 0 → −34.910 (riding the car below `mast`) | the mast's foot ring and the column's base |
-| `sphere.mast.dogs.1`, `sphere.mast.dogs.2`, `sphere.mast.dogs.3`, `sphere.mast.dogs.4` | Body | each at its tip's top face, retracted at r 2.560 on bearings 45°, 135°, 225°, 315°: (1.810, −1.810, 11.150), (1.810, 1.810, 11.150), (−1.810, 1.810, 11.150), (−1.810, −1.810, 11.150); axis radial inward: (−0.707, 0.707, 0), (−0.707, −0.707, 0), (0.707, −0.707, 0), (0.707, 0.707, 0) | the mast's bearing dogs |
+| `sphere.mast.dogs.1`, `sphere.mast.dogs.2`, `sphere.mast.dogs.3`, `sphere.mast.dogs.4` | Body | each at its tip's top face, retracted at r 2.560 on bearings 45°, 135°, 225°, 315°: (1.810, −1.810, 11.150), (1.810, 1.810, 11.150), (−1.810, 1.810, 11.150), (−1.810, −1.810, 11.150); axis radial inward: (−0.707, 0.707, 0), (−0.707, −0.707, 0), (0.707, −0.707, 0), (0.707, 0.707, 0) | the mast's bearing dogs, dog k in Housing `sphere.mast.dogs.housing.k` |
 | `sphere.neck.iris.blade.1`, `sphere.neck.iris.blade.2`, `sphere.neck.iris.blade.3`, `sphere.neck.iris.blade.4`, `sphere.neck.iris.blade.5`, `sphere.neck.iris.blade.6`, `sphere.neck.iris.blade.7` | Body | each at its pin on its top face: (3.745, 0.000, 11.396), (2.335, 2.928, 11.392), (−0.833, 3.651, 11.388), (−3.374, 1.625, 11.384), (−3.374, −1.625, 11.380), (−0.833, −3.651, 11.376), (2.335, −2.928, 11.372); axes of the stage; turns about z through the pin | the neck iris |
 | `sphere.platform.iris.blade.1`, `sphere.platform.iris.blade.2`, `sphere.platform.iris.blade.3`, `sphere.platform.iris.blade.4`, `sphere.platform.iris.blade.5`, `sphere.platform.iris.blade.6`, `sphere.platform.iris.blade.7` | Body | the same plan positions, top faces 20.396, 20.392, 20.388, 20.384, 20.380, 20.376, 20.372 | the platform iris |
 | `sphere.call` | Use | (0, 0, 20.420): the platform way's centre. Usable: feet on the platform (\|z − 20.420\| < 0.50, r 2.460 … 5.290), or a look at the way | the Sphere's uses of the Atrium's car (rides on `atrium.car.lift`): "Call the car" (at `neck`) and "Send the car down" (at `sphere`) |
@@ -171,7 +171,8 @@ Top **z 20.420**. Radii from the axis.
 | Posts | 32, 25 × 25, centred r 5.320 at bearings 5.625° + 11.25°k, z 20.480 … 21.442 | `sphere.platform.gilt` |
 | Glass | 32 curved panes on r 5.320 (faces 5.3136 … 5.3264), z 20.480 … 21.440, each centred on bearing 11.25°k over 10.873° (5 mm clear of each post) | `sphere.platform.glass` |
 | Handrail | tube Ø 0.056 on the circle r 5.320, centre z 21.470 (top 1.078 above the floor) | `sphere.platform.rail` |
-| Light channel | r 5.270 … 5.292, z 21.425 … 21.440, all round inside the post line, on 32 brackets under the rail (Light's strip in it, §4) | `sphere.platform.gilt` |
+| Light channel | r 5.270 … 5.292, z 21.425 … 21.440, all round inside the post line (Light's strip in it, §4) | `sphere.platform.gilt` |
+| Channel brackets | 32, mid-pane at bearings 11.25°k: CuSn10 strap 25 wide × 6 thick bent to an L, vertical leg r 5.292 … 5.298, z 21.419 … 21.453 saddle-brazed to the handrail tube's underside, horizontal leg r 5.270 … 5.298, z 21.419 … 21.425 under the channel (legs 0.034 + 0.028); the channel fixed to each by one M4 CuSn screw | `sphere.platform.bracket` |
 | Struts | 8 tubes Ø 0.168 × 10 at bearings 22.5° + 45°k, axis from (r 4.300, z 11.400) on the flange's rim to (r 5.300, z 20.170) under the deck (8.827 long, 6.5° off vertical); end plates Ø 0.300 × 0.020 (feet 11.400 … 11.420 on the flange, heads 20.150 … 20.170 under the deck) | `sphere.platform.gilt` |
 
 **Walkable:** the stone ring and the seat ring and sill, r 2.245 (at the door) / 2.460 … 5.290. The shut platform iris is
@@ -199,11 +200,17 @@ rule, never at one length; at length 0 it has no geometry, so it never meets the
   and the column (≈ 1 t): ≈ 152 kN, × 1.5 dynamic ≈ 230 kN, taken by any two of the four dogs: 115 kN each at a 2.20 m lever
   from the housing's mouth, ≈ 250 kNm; the section's modulus 2.4 × 10⁻³ m³ gives ≈ 104 MPa, under CuSn10's 0.2 % proof
   (≈ 130 MPa); tip deflection ≈ 11 mm (E ≈ 100 GPa). The back reaction (≈ 310 kN over the 0.800 engagement) goes into
-  the housing's bronze-lined pads and the flange above (Q-2 confirms).
-- **Housings** (Housing `sphere.mast.dogs.housing`, faces `sphere.throat`): four pearl steel boxes, each 0.180 wide inside
-  (10 mm running clearance each side), z 10.830 … 11.150 (their tops the flange's underside), through the throat's wall
-  (r 2.550 … 2.980) and out along the bearing under the flange to r 5.650, closed at the outer end; the drive (a hydraulic
-  ram at the outer end) inside. They stand in the Sphere below the mouth, pearl, seen from the platform 9 m down.
+  the housing's hard-chromed wear strips and the flange above (Q-2 confirms).
+- **Housings** (Housings `sphere.mast.dogs.housing.1` … `.4`, one per dog): welded boxes of S355 plate 20 mm
+  (`sphere.mast.dogs.plate`), 0.220 wide outside, 0.180 inside (10 mm running clearance each side), inside z 10.830 …
+  11.150 (the top the flange's underside), from the throat's bore r 2.550 out along the bearing to r 5.650 inside:
+  two side plates 0.340 × 3.120 (r 2.550 … 5.670, z 10.810 … 11.150); a bottom plate 0.220 × 3.120 (z 10.810 … 10.830);
+  beyond the flange a top plate 0.220 × 1.170 (r 4.500 … 5.670, z 11.150 … 11.170); an end plate 0.220 × 0.360 at r
+  5.650 … 5.670 carrying the drive (a hydraulic ram inside). Fixings: full-penetration welds to both skins of the throat
+  where they pass it; the side plates bolted to the flange's underside by M20 grade 8.8 bolts at 0.250 centres through
+  welded flats. **Wear strips** (`sphere.mast.dogs.liner`, hard-chromed steel 10 mm, M8 countersunk at 0.200): on the
+  bottom plate at the mouth (r 2.560 … 3.400, top at 10.840: 10 mm under the dog) and inset flush in the flange's
+  underside over the dog's rear (r 3.200 … 4.450). Pearl, seen from the platform 9 m down.
 
 ### 3.7 What the Sphere does not build
 The Atrium: the collar and its iris (the port's closure), the ring and its hangers, the canopy and grid, the entablature and
@@ -220,7 +227,9 @@ light). Site: the blind iris on the stand. Light: the image panels and the strip
 | `sphere.image` | `glass.low-iron` · lenslet-array.black · new |
 | `sphere.throat`, `sphere.neck.iris.under`, `sphere.platform.iris.top`, `sphere.platform.soffit`, `sphere.down.blind-iris` | `white.pearl-steel` · pearl.satin · new |
 | `sphere.neck.iris.top`, `sphere.platform.iris.under` | `white.pearl-steel` · gilt.gold-leaf.oil · new |
-| `sphere.throat.gilt`, `sphere.platform.gilt`, `sphere.mast` | `bronze.cusn10` · gilt.gold-leaf.oil · new |
+| `sphere.throat.gilt`, `sphere.platform.gilt`, `sphere.platform.bracket`, `sphere.mast` | `bronze.cusn10` · gilt.gold-leaf.oil · new |
+| `sphere.mast.dogs.plate` | `white.pearl-steel` · pearl.satin · new |
+| `sphere.mast.dogs.liner` | `steel.hard-chrome` · ground.hard-chromed · new |
 | `sphere.platform.rail` | `bronze.cusn10` · gilt.gold-leaf.oil · handled |
 | `sphere.neck.seat` | `bronze.cusn10` · mirror-polished.lacquered · new |
 | `sphere.mast.dogs` | `bronze.cusn10` · mirror-polished · new (unlacquered bearing faces) |
@@ -267,7 +276,7 @@ are never seen directly from a standing eye on the platform (the rail shields th
   the Grounds' (reserved on the Atrium's cornice).
 
 ## 6. Motion
-The Sphere owns the mast (head and foot), its four dogs and two irises (Mechanisms.json, 21). With the Atrium's car and
+The Sphere owns the mast (head and foot), its four dogs and two irises (Mechanisms.json, 20). With the Atrium's car and
 collar iris and the Cube's ceiling iris they form one coupling group; Site binds the channels across the seam. The car's
 stops in the Sphere (the Atrium's M-1, `atrium.car.height` = (z + 23.600) ÷ 44.000):
 
@@ -292,7 +301,7 @@ on the dogs at 11.150.
 **M-S7…M-S13 the neck iris** `sphere.neck.iris.blade.1` … `.7` and **M-S14…M-S20 the platform iris**
 `sphere.platform.iris.blade.1` … `.7`: revolute about each blade's pin (its body's origin), drawn shut, opening 52° towards
 decreasing plan angle (axis −z); follow `sphere.neck.closure` / `sphere.platform.closure` in [0, 1] → out [0, 52], eased
-over 4.0 s. Housed in their pockets. (21 entries with M-S1, M-S2.)
+over 4.0 s. Housed in their pockets. (20 entries: M-S1…M-S20.)
 
 **Sequences** (the car's, in `atrium.car.lift`; the Sphere's legs, steps `{channel, to, time}` and moves):
 - **Leg up** (in "Up to the Sphere" from the Atrium or the Cube, after the collar iris has shut at `neck`, and in
@@ -445,7 +454,7 @@ the Cube's panels are the flat kind.
   The mast column and nothing else is variable-length; draw it by rule from the foot plane 11.150 to the head. The one
   Sphere piece that rides the car is the foot ring below `mast` (following the car's height, latched round its seat); the
   car's pieces and light are the Atrium's.
-- **Dogs' housings** are pieces (`sphere.throat`) through the throat wall and under the flange to r 5.650 at bearings 45°,
+- **Dogs' housings** `sphere.mast.dogs.housing.1` … `.4` are pieces (`sphere.mast.dogs.plate`, wear strips `sphere.mast.dogs.liner`) through the throat wall and under the flange to r 5.650 at bearings 45°,
   135°, 225°, 315°; they clear the throat's ribs (nearest 0.49 m) and top course (0.097 below) and the struts' feet.
 - **Seats of the dome:** the drip ring lies on the Atrium's wash face to face; the skin starts on the ring (22.625). The
   plate shell never touches the canopy glass (50 mm).
@@ -454,6 +463,7 @@ the Cube's panels are the flat kind.
 - **Unmated** (the stand): Site's blind iris at 7.715, both irises shut, mast 0, no car.
 
 **Departures from as-built** (for the owner's review):
+- **iris.4600 corrected:** each blade gains a pin lug (r 0.060 boss on a 0.120 web) so it encloses its pin; as built the pin stood 25 mm outside the blade. The clamp value is 0.3206 on the linear channel (as built 0.378 through a smoothstep: the same blade pose, r 0.197). Shut, clamp, open and reach checked by polygon union.
 - **Ruled with the Atrium:** the car, its leaves, guides, crown, seat and light are the Atrium's; the port's closure is the
   Atrium's collar iris; the Sphere's mast is the Sphere's and follows the car's height.
 - **Ruled: the mast's footing** (as built it stood on nothing): a gilt foot ring carried on four CuSn10 bearing dogs that

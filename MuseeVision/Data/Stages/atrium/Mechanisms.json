@@ -143,7 +143,7 @@
             },
             {
               "channel": "cube.up.closure",
-              "to": 0.378,
+              "to": 0.3206,
               "time": 2.49
             },
             {
@@ -678,7 +678,7 @@
       },
       "guard": "body-in-travel",
       "clearance": 0.002,
-      "note": "Collar iris blade 1 of 7 (the closure of atrium.up, class iris.4600): pin at r 3.745, plan angle 0.0000 deg (from +x towards +y), its top face z 7.695; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. Eased (s = 3o^2 - 2o^3) over 4.0 s. Housed open in the collar's pocket (r <= 4.050, z 7.660-7.705); in travel it reaches r 4.01."
+      "note": "Collar iris blade 1 of 7 (the closure of atrium.up, class iris.4600): pin at r 3.745, plan angle 0.0000 deg (from +x towards +y), its top face z 7.695; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. The pose is the linear follows map (closure × 52 deg); the move is eased over 4.0 s. Housed open in the collar's pocket (r <= 4.050, z 7.660-7.705); in travel it reaches r 4.01."
     },
     {
       "key": "atrium.up.iris.blade.2",
@@ -705,7 +705,7 @@
       },
       "guard": "body-in-travel",
       "clearance": 0.002,
-      "note": "Collar iris blade 2 of 7 (the closure of atrium.up, class iris.4600): pin at r 3.745, plan angle 51.4286 deg (from +x towards +y), its top face z 7.691; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. Eased (s = 3o^2 - 2o^3) over 4.0 s. Housed open in the collar's pocket (r <= 4.050, z 7.660-7.705); in travel it reaches r 4.01."
+      "note": "Collar iris blade 2 of 7 (the closure of atrium.up, class iris.4600): pin at r 3.745, plan angle 51.4286 deg (from +x towards +y), its top face z 7.691; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. The pose is the linear follows map (closure × 52 deg); the move is eased over 4.0 s. Housed open in the collar's pocket (r <= 4.050, z 7.660-7.705); in travel it reaches r 4.01."
     },
     {
       "key": "atrium.up.iris.blade.3",
@@ -732,7 +732,7 @@
       },
       "guard": "body-in-travel",
       "clearance": 0.002,
-      "note": "Collar iris blade 3 of 7 (the closure of atrium.up, class iris.4600): pin at r 3.745, plan angle 102.8571 deg (from +x towards +y), its top face z 7.687; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. Eased (s = 3o^2 - 2o^3) over 4.0 s. Housed open in the collar's pocket (r <= 4.050, z 7.660-7.705); in travel it reaches r 4.01."
+      "note": "Collar iris blade 3 of 7 (the closure of atrium.up, class iris.4600): pin at r 3.745, plan angle 102.8571 deg (from +x towards +y), its top face z 7.687; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. The pose is the linear follows map (closure × 52 deg); the move is eased over 4.0 s. Housed open in the collar's pocket (r <= 4.050, z 7.660-7.705); in travel it reaches r 4.01."
     },
     {
       "key": "atrium.up.iris.blade.4",
@@ -759,7 +759,7 @@
       },
       "guard": "body-in-travel",
       "clearance": 0.002,
-      "note": "Collar iris blade 4 of 7 (the closure of atrium.up, class iris.4600): pin at r 3.745, plan angle 154.2857 deg (from +x towards +y), its top face z 7.683; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. Eased (s = 3o^2 - 2o^3) over 4.0 s. Housed open in the collar's pocket (r <= 4.050, z 7.660-7.705); in travel it reaches r 4.01."
+      "note": "Collar iris blade 4 of 7 (the closure of atrium.up, class iris.4600): pin at r 3.745, plan angle 154.2857 deg (from +x towards +y), its top face z 7.683; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. The pose is the linear follows map (closure × 52 deg); the move is eased over 4.0 s. Housed open in the collar's pocket (r <= 4.050, z 7.660-7.705); in travel it reaches r 4.01."
     },
     {
       "key": "atrium.up.iris.blade.5",
@@ -786,7 +786,7 @@
       },
       "guard": "body-in-travel",
       "clearance": 0.002,
-      "note": "Collar iris blade 5 of 7 (the closure of atrium.up, class iris.4600): pin at r 3.745, plan angle 205.7143 deg (from +x towards +y), its top face z 7.679; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. Eased (s = 3o^2 - 2o^3) over 4.0 s. Housed open in the collar's pocket (r <= 4.050, z 7.660-7.705); in travel it reaches r 4.01."
+      "note": "Collar iris blade 5 of 7 (the closure of atrium.up, class iris.4600): pin at r 3.745, plan angle 205.7143 deg (from +x towards +y), its top face z 7.679; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. The pose is the linear follows map (closure × 52 deg); the move is eased over 4.0 s. Housed open in the collar's pocket (r <= 4.050, z 7.660-7.705); in travel it reaches r 4.01."
     },
     {
       "key": "atrium.up.iris.blade.6",
@@ -813,7 +813,7 @@
       },
       "guard": "body-in-travel",
       "clearance": 0.002,
-      "note": "Collar iris blade 6 of 7 (the closure of atrium.up, class iris.4600): pin at r 3.745, plan angle 257.1429 deg (from +x towards +y), its top face z 7.675; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. Eased (s = 3o^2 - 2o^3) over 4.0 s. Housed open in the collar's pocket (r <= 4.050, z 7.660-7.705); in travel it reaches r 4.01."
+      "note": "Collar iris blade 6 of 7 (the closure of atrium.up, class iris.4600): pin at r 3.745, plan angle 257.1429 deg (from +x towards +y), its top face z 7.675; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. The pose is the linear follows map (closure × 52 deg); the move is eased over 4.0 s. Housed open in the collar's pocket (r <= 4.050, z 7.660-7.705); in travel it reaches r 4.01."
     },
     {
       "key": "atrium.up.iris.blade.7",
@@ -840,7 +840,7 @@
       },
       "guard": "body-in-travel",
       "clearance": 0.002,
-      "note": "Collar iris blade 7 of 7 (the closure of atrium.up, class iris.4600): pin at r 3.745, plan angle 308.5714 deg (from +x towards +y), its top face z 7.671; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. Eased (s = 3o^2 - 2o^3) over 4.0 s. Housed open in the collar's pocket (r <= 4.050, z 7.660-7.705); in travel it reaches r 4.01."
+      "note": "Collar iris blade 7 of 7 (the closure of atrium.up, class iris.4600): pin at r 3.745, plan angle 308.5714 deg (from +x towards +y), its top face z 7.671; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. The pose is the linear follows map (closure × 52 deg); the move is eased over 4.0 s. Housed open in the collar's pocket (r <= 4.050, z 7.660-7.705); in travel it reaches r 4.01."
     }
   ]
 }

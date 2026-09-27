@@ -26,7 +26,7 @@
       },
       "guard": "body-in-travel",
       "clearance": 0.002,
-      "note": "Ceiling iris blade 1 of 7 (the closure of cube.up, class iris.4600): pin at r 3.745, plan angle 0.0000 deg (from +x towards +y), its top face z -7.942; 2 mm thick; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. Eased (s = 3o^2 - 2o^3) over 4.0 s. Housed in the iris housing (r 2.450-4.300, z -7.970 ... -7.600) over the gilt soffit ring; in travel it reaches r 4.010. States: shut 0, clamp 0.378 (round the Cube mast head's groove r 0.195, the blades leave r 0.197), open 1. cube.up.closure is stepped by the Atrium's car sequences (atrium.car.lift)."
+      "note": "Ceiling iris blade 1 of 7 (the closure of cube.up, class iris.4600): pin at r 3.745, plan angle 0.0000 deg (from +x towards +y), its top face z -7.942; 2 mm thick; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. The pose is the linear follows map (closure × 52 deg); the move is eased over 4.0 s. Housed in the iris housing (r 2.450-4.300, z -7.970 ... -7.600) over the gilt soffit ring; in travel it reaches r 4.010. States: shut 0, clamp 0.3206 (round the Cube mast head's groove r 0.195, the blades leave r 0.197), open 1. cube.up.closure is stepped by the Atrium's car sequences (atrium.car.lift)."
     },
     {
       "key": "cube.up.iris.blade.2",
@@ -53,7 +53,7 @@
       },
       "guard": "body-in-travel",
       "clearance": 0.002,
-      "note": "Ceiling iris blade 2 of 7 (the closure of cube.up, class iris.4600): pin at r 3.745, plan angle 51.4286 deg (from +x towards +y), its top face z -7.946; 2 mm thick; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. Eased (s = 3o^2 - 2o^3) over 4.0 s. Housed in the iris housing (r 2.450-4.300, z -7.970 ... -7.600) over the gilt soffit ring; in travel it reaches r 4.010. States: shut 0, clamp 0.378 (round the Cube mast head's groove r 0.195, the blades leave r 0.197), open 1. cube.up.closure is stepped by the Atrium's car sequences (atrium.car.lift)."
+      "note": "Ceiling iris blade 2 of 7 (the closure of cube.up, class iris.4600): pin at r 3.745, plan angle 51.4286 deg (from +x towards +y), its top face z -7.946; 2 mm thick; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. The pose is the linear follows map (closure × 52 deg); the move is eased over 4.0 s. Housed in the iris housing (r 2.450-4.300, z -7.970 ... -7.600) over the gilt soffit ring; in travel it reaches r 4.010. States: shut 0, clamp 0.3206 (round the Cube mast head's groove r 0.195, the blades leave r 0.197), open 1. cube.up.closure is stepped by the Atrium's car sequences (atrium.car.lift)."
     },
     {
       "key": "cube.up.iris.blade.3",
@@ -80,7 +80,7 @@
       },
       "guard": "body-in-travel",
       "clearance": 0.002,
-      "note": "Ceiling iris blade 3 of 7 (the closure of cube.up, class iris.4600): pin at r 3.745, plan angle 102.8571 deg (from +x towards +y), its top face z -7.950; 2 mm thick; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. Eased (s = 3o^2 - 2o^3) over 4.0 s. Housed in the iris housing (r 2.450-4.300, z -7.970 ... -7.600) over the gilt soffit ring; in travel it reaches r 4.010. States: shut 0, clamp 0.378 (round the Cube mast head's groove r 0.195, the blades leave r 0.197), open 1. cube.up.closure is stepped by the Atrium's car sequences (atrium.car.lift)."
+      "note": "Ceiling iris blade 3 of 7 (the closure of cube.up, class iris.4600): pin at r 3.745, plan angle 102.8571 deg (from +x towards +y), its top face z -7.950; 2 mm thick; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. The pose is the linear follows map (closure × 52 deg); the move is eased over 4.0 s. Housed in the iris housing (r 2.450-4.300, z -7.970 ... -7.600) over the gilt soffit ring; in travel it reaches r 4.010. States: shut 0, clamp 0.3206 (round the Cube mast head's groove r 0.195, the blades leave r 0.197), open 1. cube.up.closure is stepped by the Atrium's car sequences (atrium.car.lift)."
     },
     {
       "key": "cube.up.iris.blade.4",
@@ -107,7 +107,7 @@
       },
       "guard": "body-in-travel",
       "clearance": 0.002,
-      "note": "Ceiling iris blade 4 of 7 (the closure of cube.up, class iris.4600): pin at r 3.745, plan angle 154.2857 deg (from +x towards +y), its top face z -7.954; 2 mm thick; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. Eased (s = 3o^2 - 2o^3) over 4.0 s. Housed in the iris housing (r 2.450-4.300, z -7.970 ... -7.600) over the gilt soffit ring; in travel it reaches r 4.010. States: shut 0, clamp 0.378 (round the Cube mast head's groove r 0.195, the blades leave r 0.197), open 1. cube.up.closure is stepped by the Atrium's car sequences (atrium.car.lift)."
+      "note": "Ceiling iris blade 4 of 7 (the closure of cube.up, class iris.4600): pin at r 3.745, plan angle 154.2857 deg (from +x towards +y), its top face z -7.954; 2 mm thick; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. The pose is the linear follows map (closure × 52 deg); the move is eased over 4.0 s. Housed in the iris housing (r 2.450-4.300, z -7.970 ... -7.600) over the gilt soffit ring; in travel it reaches r 4.010. States: shut 0, clamp 0.3206 (round the Cube mast head's groove r 0.195, the blades leave r 0.197), open 1. cube.up.closure is stepped by the Atrium's car sequences (atrium.car.lift)."
     },
     {
       "key": "cube.up.iris.blade.5",
@@ -134,7 +134,7 @@
       },
       "guard": "body-in-travel",
       "clearance": 0.002,
-      "note": "Ceiling iris blade 5 of 7 (the closure of cube.up, class iris.4600): pin at r 3.745, plan angle 205.7143 deg (from +x towards +y), its top face z -7.958; 2 mm thick; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. Eased (s = 3o^2 - 2o^3) over 4.0 s. Housed in the iris housing (r 2.450-4.300, z -7.970 ... -7.600) over the gilt soffit ring; in travel it reaches r 4.010. States: shut 0, clamp 0.378 (round the Cube mast head's groove r 0.195, the blades leave r 0.197), open 1. cube.up.closure is stepped by the Atrium's car sequences (atrium.car.lift)."
+      "note": "Ceiling iris blade 5 of 7 (the closure of cube.up, class iris.4600): pin at r 3.745, plan angle 205.7143 deg (from +x towards +y), its top face z -7.958; 2 mm thick; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. The pose is the linear follows map (closure × 52 deg); the move is eased over 4.0 s. Housed in the iris housing (r 2.450-4.300, z -7.970 ... -7.600) over the gilt soffit ring; in travel it reaches r 4.010. States: shut 0, clamp 0.3206 (round the Cube mast head's groove r 0.195, the blades leave r 0.197), open 1. cube.up.closure is stepped by the Atrium's car sequences (atrium.car.lift)."
     },
     {
       "key": "cube.up.iris.blade.6",
@@ -161,7 +161,7 @@
       },
       "guard": "body-in-travel",
       "clearance": 0.002,
-      "note": "Ceiling iris blade 6 of 7 (the closure of cube.up, class iris.4600): pin at r 3.745, plan angle 257.1429 deg (from +x towards +y), its top face z -7.962; 2 mm thick; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. Eased (s = 3o^2 - 2o^3) over 4.0 s. Housed in the iris housing (r 2.450-4.300, z -7.970 ... -7.600) over the gilt soffit ring; in travel it reaches r 4.010. States: shut 0, clamp 0.378 (round the Cube mast head's groove r 0.195, the blades leave r 0.197), open 1. cube.up.closure is stepped by the Atrium's car sequences (atrium.car.lift)."
+      "note": "Ceiling iris blade 6 of 7 (the closure of cube.up, class iris.4600): pin at r 3.745, plan angle 257.1429 deg (from +x towards +y), its top face z -7.962; 2 mm thick; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. The pose is the linear follows map (closure × 52 deg); the move is eased over 4.0 s. Housed in the iris housing (r 2.450-4.300, z -7.970 ... -7.600) over the gilt soffit ring; in travel it reaches r 4.010. States: shut 0, clamp 0.3206 (round the Cube mast head's groove r 0.195, the blades leave r 0.197), open 1. cube.up.closure is stepped by the Atrium's car sequences (atrium.car.lift)."
     },
     {
       "key": "cube.up.iris.blade.7",
@@ -188,7 +188,7 @@
       },
       "guard": "body-in-travel",
       "clearance": 0.002,
-      "note": "Ceiling iris blade 7 of 7 (the closure of cube.up, class iris.4600): pin at r 3.745, plan angle 308.5714 deg (from +x towards +y), its top face z -7.966; 2 mm thick; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. Eased (s = 3o^2 - 2o^3) over 4.0 s. Housed in the iris housing (r 2.450-4.300, z -7.970 ... -7.600) over the gilt soffit ring; in travel it reaches r 4.010. States: shut 0, clamp 0.378 (round the Cube mast head's groove r 0.195, the blades leave r 0.197), open 1. cube.up.closure is stepped by the Atrium's car sequences (atrium.car.lift)."
+      "note": "Ceiling iris blade 7 of 7 (the closure of cube.up, class iris.4600): pin at r 3.745, plan angle 308.5714 deg (from +x towards +y), its top face z -7.966; 2 mm thick; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. The pose is the linear follows map (closure × 52 deg); the move is eased over 4.0 s. Housed in the iris housing (r 2.450-4.300, z -7.970 ... -7.600) over the gilt soffit ring; in travel it reaches r 4.010. States: shut 0, clamp 0.3206 (round the Cube mast head's groove r 0.195, the blades leave r 0.197), open 1. cube.up.closure is stepped by the Atrium's car sequences (atrium.car.lift)."
     }
   ],
   "channels": [
@@ -225,11 +225,11 @@
           },
           {
             "channel": "cube.up.closure",
-            "atLeast": 0.376
+            "atLeast": 0.3186
           },
           {
             "channel": "cube.up.closure",
-            "atMost": 0.38
+            "atMost": 0.3226
           },
           {
             "channel": "atrium.car.doors",
