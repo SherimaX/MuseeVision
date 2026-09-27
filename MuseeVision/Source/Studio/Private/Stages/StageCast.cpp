@@ -18,6 +18,12 @@ namespace Musee::Studio
 		/** The tag each piece's component carries: musee.piece:<name>. */
 		const TCHAR* const PieceTagPrefix = TEXT("musee.piece:");
 
+		/**
+		 * The pieces a stage builds a work of are named work.<id>[.<index>][.<part>] (the stage contract, Hang.json's built
+		 * works). Art labels each work's pieces, so they stay components of their own and are never instanced.
+		 */
+		const TCHAR* const WorkPiecePrefix = TEXT("work.");
+
 		/** The anchor kind of a moving body (the stage contract's anchor kinds). */
 		const TCHAR* const BodyAnchorKind = TEXT("Body");
 
@@ -241,13 +247,17 @@ namespace Musee::Studio
 			}
 			Input.Description = DescribeMesh(Piece);
 			Input.bCollides = !Piece.Collision.IsNone();
-			const FString Identity = IdentityOf(Input);
-			if (const int32* Group = GroupOfIdentity.Find(Identity))
+			const bool bShares = !Piece.Name.ToString().StartsWith(WorkPiecePrefix);
+			const FString Identity = bShares ? IdentityOf(Input) : FString();
+			if (const int32* Group = bShares ? GroupOfIdentity.Find(Identity) : nullptr)
 			{
 				Groups[*Group].Members.Add(&Piece);
 				continue;
 			}
-			GroupOfIdentity.Add(Identity, Groups.Num());
+			if (bShares)
+			{
+				GroupOfIdentity.Add(Identity, Groups.Num());
+			}
 			Groups.AddDefaulted_GetRef().Members.Add(&Piece);
 			Input.PackageName = MeshPackage(Piece.Name);
 			Inputs.Add(MoveTemp(Input));
