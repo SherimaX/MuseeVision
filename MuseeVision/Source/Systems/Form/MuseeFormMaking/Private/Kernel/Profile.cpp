@@ -10,7 +10,7 @@ namespace Musee::Form
 		/** The unit normal on the right of a step: the side a profile drawn with its solid on the left faces. */
 		FVector2D RightNormal(const FVector2D& Step)
 		{
-			return FVector2D(Step.Y, -Step.X).GetSafeNormal();
+			return FVector2D(Step.Y, -Step.X).GetSafeNormal(StepSquaredMeters);
 		}
 
 		FVector2D EllipsePoint(const FVector2D& Center, double RadiusA, double RadiusB, double T)

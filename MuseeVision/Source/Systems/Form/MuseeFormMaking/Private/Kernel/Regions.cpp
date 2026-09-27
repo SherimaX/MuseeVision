@@ -204,7 +204,7 @@ namespace Musee::Form
 		auto EdgeNormal = [&Points, Count](int32 Edge)
 		{
 			const FVector2D Step = Points[(Edge + 1) % Count] - Points[Edge];
-			return FVector2D(Step.Y, -Step.X).GetSafeNormal();
+			return FVector2D(Step.Y, -Step.X).GetSafeNormal(StepSquaredMeters);
 		};
 		double Length = 0.0;
 		for (int32 Index = 0; Index < Count; ++Index)

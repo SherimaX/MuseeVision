@@ -61,6 +61,25 @@ namespace Musee::Form::Tests::Cuts
 			TestEqual(TEXT("its back lies on the wall's face"), Bounds(Rail[0]).Min.Y, 0.0, 1e-9);
 		}
 
+		// A skirting round a round room (r 3 m), its section sinking 10 mm behind the wall and 25 mm under the floor: its sinks
+		// trimmed, it keeps its 0.025 by 0.14 proud of both, on the curve.
+		FFormSweep Skirting;
+		Skirting.Section = FFormProfile::Rectangle(FVector2D(-0.01, -0.025), FVector2D(0.025, 0.14));
+		Skirting.Path = FFormProfile::Ellipse(FVector2D::ZeroVector, 3.0, 3.0, 0.0, true);
+		Skirting.bTrimSinkA = true;
+		Skirting.bTrimSinkB = true;
+		const TArray<FFormMadePiece> Round = MakeDrawing(*this, FFormDrawing::Of(TEXT("skirting"), TEXT("oak"), Skirting));
+		if (TestEqual(TEXT("the trimmed skirting is one piece"), Round.Num(), 1))
+		{
+			TestClosed(*this, TEXT("the trimmed skirting"), Round[0], 0);
+			const FBox Box = Bounds(Round[0]);
+			TestEqual(TEXT("it stands on the floor"), Box.Min.Z, 0.0, 1e-9);
+			TestEqual(TEXT("its back lies on the wall, 3 m out"), Box.Max.X, 3.0, 1e-6);
+			// The inscribed polygon's area within a millimetre of the circle's, the ring 25 mm wide.
+			TestEqual(TEXT("it holds its section round the room"), VolumeCubicMeters(Round[0]), 0.025 * 0.14 * 2.0 * UE_DOUBLE_PI * (3.0 - 0.0125),
+				0.001 * 0.025 * 0.14 * 2.0 * UE_DOUBLE_PI * 3.0);
+		}
+
 		// A ring turned about z, cut on the plane x = 0: half a ring, closed by two round cut faces.
 		FFormLathe Ring;
 		Ring.Section = FFormProfile::Ellipse(FVector2D(1.0, 0.0), 0.1, 0.1, 0.0, true);
