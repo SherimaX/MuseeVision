@@ -4,7 +4,7 @@
 #include "Engine/EngineTypes.h"
 
 /**
- * The museum's four collision classes, each an engine channel with a profile of the same name, defined once in
+ * The museum's five collision classes, each an engine channel with a profile of the same name, defined once in
  * `Config/DefaultEngine.ini` (section `/Script/Engine.CollisionProfile`). Form assigns them to the pieces it makes;
  * Motion, Visitor and Site query them. Collision comes from the same solids as what is seen, and it is used only for
  * queries and the body's movement: nothing in the museum is a free rigid body.
@@ -35,4 +35,11 @@ namespace Musee::Collision
 	 * which only overlaps the body.
 	 */
 	inline constexpr FClass Clearance{ECC_GameTraceChannel4, TEXT("Clearance")};
+
+	/**
+	 * A barrier that stops only the visitor's body, as a gallery's rail or a plinth's step keeps a visitor back from a
+	 * work while the eye passes on to it: the box of the Atrium stele's foot, 2.2 m high (atrium.md section 3.7). Sight,
+	 * the camera and every query but the body's pass through it; it is not matter, so a mechanism's clearance ignores it.
+	 */
+	inline constexpr FClass Barrier{ECC_GameTraceChannel5, TEXT("Barrier")};
 }

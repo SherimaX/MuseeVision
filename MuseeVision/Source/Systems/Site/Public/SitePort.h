@@ -20,9 +20,25 @@ enum class ESitePortKind : uint8
 	Gate,
 };
 
+/** Pieces a stage that receives a well builds inside it, as the part of the port's class they are: neck.iris. as iris. */
+USTRUCT()
+struct MUSEESITE_API FSiteWellPart
+{
+	GENERATED_BODY()
+
+	/** The start of the pieces' names: every piece whose name begins with it is this part. */
+	UPROPERTY()
+	FString PiecePrefix;
+
+	/** The part of the class's well it is (FSitePortClass::WellAdmits): rail, iris, mast, dog, sill. */
+	UPROPERTY()
+	FName Part;
+};
+
 /**
  * The prism a vertical connection runs through, in its stage's frame. The serving side owns what is in it (the stair,
- * the lift car); the receiving side reserves it as a void and builds nothing inside it.
+ * the lift car); the receiving side reserves it as a void, shaped as its port class's well section, and builds inside it
+ * only the parts the class admits.
  */
 USTRUCT()
 struct MUSEESITE_API FSiteWell
@@ -43,6 +59,13 @@ struct MUSEESITE_API FSiteWell
 	/** A round well's radius about the vertical line through the prism's centre, metres; zero for a square prism. */
 	UPROPERTY(meta = (Units = "Meters"))
 	double RadiusMeters = 0.0;
+
+	/**
+	 * On the receiving side, the pieces the stage builds inside the well's section, and the part of the class each is; the
+	 * first whose prefix a piece's name begins with names it. A piece in the well that no part names is kept out.
+	 */
+	UPROPERTY()
+	TArray<FSiteWellPart> Parts;
 };
 
 /**

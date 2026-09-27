@@ -1,0 +1,12 @@
+{
+  "$sources": "Studio's joined test plan: the specimen room anchors it, and its west door mates the specimen annex's east door with no passage, so the site make draws the joint between them.",
+  "anchor": "specimen-room",
+  "arrival": {
+    "stage": "specimen-room",
+    "pointMeters": [4.0, 0.0, 0.0],
+    "facingDegrees": 180.0
+  },
+  "matings": [
+    { "a": "specimen-room.west", "b": "specimen-annex.east", "passageMeters": 0.0, "note": "The two specimens' doors, face to face." }
+  ]
+}

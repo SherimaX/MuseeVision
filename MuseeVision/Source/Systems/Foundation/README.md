@@ -23,7 +23,7 @@ contracts and signals that cross layers, settings, commands, and the diagnostics
   `FMuseeCommand` (one registry for the console, the keyboard, the headset and Studio).
 - **Diagnostics**: `FMuseeCheck` and `MUSEE_CHECK` with `EMuseeCheckScope`; `FMuseeFinding` and `FMuseeMeasurement`;
   `IMuseeProbe` and `MUSEE_PROBE`; the log and stat-group macros (`MuseeLog.h`); the defect record, `FMuseeDefect`.
-- **Collision names**: `Musee::Collision::Solid`, `Walkable`, `Body`, `Clearance`, and their channels and profiles in
+- **Collision names**: `Musee::Collision::Solid`, `Walkable`, `Body`, `Clearance`, `Barrier`, and their channels and profiles in
   `Config/DefaultEngine.ini` (section `/Script/Engine.CollisionProfile`).
 - `MuseeModuleRules` and the admission rule: Foundation grows only by adding a standard, reviewed as a new system is.
 
@@ -64,7 +64,7 @@ Tier 1, one public type per header:
 | `MuseeProbe.h` | `MUSEE_PROBE("<System>::<Verb><Thing>", Function)`; `IMuseeProbe` (`Read(FQuery)`, `Register`, `Find`, `Names`) |
 | `MuseeDefect.h` | `FMuseeDefect` (the Journal entry: `ToMarkdown`, `ParseJournal`, `NamesExistingCheck`) |
 | `MuseeLog.h` | `MUSEE_DECLARE_LOG_CATEGORY`, `MUSEE_DEFINE_LOG_CATEGORY` (`LogMusee<System>`), `MUSEE_DECLARE_STAT_GROUP` (`STATGROUP_Musee<System>`) |
-| `MuseeCollision.h` | `Musee::Collision::Solid`, `Walkable`, `Body`, `Clearance`: each a channel and a profile name |
+| `MuseeCollision.h` | `Musee::Collision::Solid`, `Walkable`, `Body`, `Clearance`, `Barrier`: each a channel and a profile name |
 
 **A record file** is one JSON object: the struct's fields by name, or `"$records": [...]` holding several. `"$units"`
 declares the unit each named field is written in (any name or symbol of the engine's unit table), and `"$sources"` says
@@ -124,7 +124,7 @@ its listeners cost; the registries are touched on registration, lookup and publi
 - **Check**: pure maths proving one truth. **Scope**: where a check's truth must hold. **Finding**: what a check found wrong.
 - **Measurement**: one reading of an instrument. **Probe**: an owner's way of measuring its truth where the visitor stands.
 - **Defect**: a Journal entry naming the check that catches it.
-- **Collision class**: Solid, Walkable, Body or Clearance.
+- **Collision class**: Solid, Walkable, Body, Clearance or Barrier (stops only the body).
 
 ## Sources
 

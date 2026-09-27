@@ -8,14 +8,26 @@ class AActor;
 
 namespace Musee::Studio
 {
-	/** A moving body of a stage: a scene component tagged with the body's key, which Motion drives and pieces ride on. */
+	/**
+	 * A moving body of a stage: a scene component tagged with the body's key, which Motion drives and pieces ride on. A
+	 * body may ride another (the Atrium car's leaves ride the car), and then hangs from that body's component.
+	 */
 	struct FStageBody
 	{
 		/** The component's name, unique within the stage. */
 		FString Name;
 		/** The body's key, the component's tag: nympheas.basin. */
 		FName Key;
-		/** The body's frame in the stage's frame, metres. */
+		/** The body it rides on (another FStageBody's Name, listed before it), or empty for the stage's frame. */
+		FString Parent;
+		/** The body's frame in its parent's frame (the parent body's, or the stage's), metres. */
+		FVector LocationMeters = FVector::ZeroVector;
+		FQuat Rotation = FQuat::Identity;
+	};
+
+	/** One copy of an instanced mesh: where its origin sits in the placement's parent's frame, metres, and how it is turned. */
+	struct FStageInstance
+	{
 		FVector LocationMeters = FVector::ZeroVector;
 		FQuat Rotation = FQuat::Identity;
 	};
@@ -34,8 +46,25 @@ namespace Musee::Studio
 		FString Body;
 		/** The component's collision profile, or NAME_None to keep the engine's default. */
 		FName Collision;
-		/** The component's tags (musee.piece:<name>). */
+		/** The component's tags (musee.piece:<name>), one for each piece it places, in the order of its instances. */
 		TArray<FName> Tags;
+		/**
+		 * The copies of one mesh that identical pieces share (the Salon's rosettes): the component is then an instanced
+		 * static mesh component at the placement's frame, drawing the mesh once per instance. Empty: a single mesh.
+		 */
+		TArray<FStageInstance> Instances;
+	};
+
+	/** A box on the stage's frame that stops only the visitor's body (a barrier round a work): unseen, with no mesh. */
+	struct FStageBarrier
+	{
+		/** The component's name, unique within the stage. */
+		FString Name;
+		/** The barrier's key, the component's tag. */
+		FName Key;
+		FVector LocationMeters = FVector::ZeroVector;
+		FQuat Rotation = FQuat::Identity;
+		FVector HalfSizeMeters = FVector::ZeroVector;
 	};
 
 	/**
@@ -50,6 +79,7 @@ namespace Musee::Studio
 		FString PackageName;
 		TArray<FStageBody> Bodies;
 		TArray<FStagePlacement> Placements;
+		TArray<FStageBarrier> Barriers;
 		/** The hash of everything else the level is made from: the records its dressing reads. Part of its input hash. */
 		FString DependencyHash;
 		/** Furnishes the stage actor further (DressStage); false, with the reason, when it can't. */
@@ -57,9 +87,9 @@ namespace Musee::Studio
 	};
 
 	/** The revision of the stage-level writer, part of every stage level's input hash. */
-	inline constexpr int64 StageLevelRevision = 2;
+	inline constexpr int64 StageLevelRevision = 3;
 
-	/** A stage level's input hash: the writer's revision, the stage's name, its bodies, placements and dependencies. */
+	/** A stage level's input hash: the writer's revision, the stage's name, its bodies, placements, instances, barriers and dependencies. */
 	FString HashOf(const FStageLevel& Stage);
 
 	/** Writes a stage's level, unless the level on disk already carries the same input hash. */

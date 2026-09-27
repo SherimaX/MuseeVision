@@ -12,13 +12,17 @@
 #include "MuseeStageDresser.h"
 #include "SiteBlind.h"
 #include "SiteGameMode.h"
+#include "SiteJoint.h"
 #include "SitePlan.h"
 #include "SitePortClass.h"
 #include "SiteRoom.h"
+#include "SiteVolume.h"
+#include "Stages/JointsMake.h"
 #include "Stages/MakeFinding.h"
 #include "Stages/PaintLayers.h"
 #include "Stages/StageCast.h"
 #include "Stages/StageFabric.h"
+#include "StudioLog.h"
 
 namespace Musee::Studio
 {
@@ -31,19 +35,27 @@ namespace Musee::Studio
 		const TCHAR* const SiteName = TEXT("site");
 		const TCHAR* const AllName = TEXT("all");
 
+		/** The joints' Level Instance in the museum's level. */
+		const TCHAR* const JointsLevelName = TEXT("Joints");
+
 		FString ScheduleDirOf(const FMuseeKey& Stage, const FStageMakeOptions& Options)
 		{
 			return Options.ScheduleDir.IsEmpty() ? Musee::Records::DataRoot() / StagesRecords / Stage.ToString() : Options.ScheduleDir;
 		}
 
 		/**
-		 * The hash of everything a stage's level is made from besides its placements: the records the making read, every
-		 * schedule in the stage's folder (the dressers read their own), and the dressers that run, in order.
+		 * The hash of everything a stage's level is made from besides its placements: the records the making read, the
+		 * ports the site plan mates (the mechanisms' rides read them), every schedule in the stage's folder (the dressers read
+		 * their own), and the dressers that run, in order.
 		 */
-		FString LevelDependencyHash(const FMuseeDependencySet& Dependencies, const FString& ScheduleDir)
+		FString LevelDependencyHash(const FStageFabric& Fabric, const FString& ScheduleDir)
 		{
 			FInputHasher Hasher;
-			Hasher.Add(TEXT("stage-dependencies")).Add(Dependencies.Hash());
+			Hasher.Add(TEXT("stage-dependencies")).Add(Fabric.Dependencies.Hash());
+			for (const FMuseeKey& Port : Fabric.MatedPorts)
+			{
+				Hasher.Add(Port.ToString());
+			}
 			TArray<FString> Files;
 			IFileManager::Get().FindFiles(Files, *(ScheduleDir / TEXT("*.json")), true, false);
 			Files.Sort();
@@ -78,6 +90,7 @@ namespace Musee::Studio
 		, PlanRecord(Musee::Site::PlanRecord)
 		, PortClassesRecord(Musee::Site::PortClassesRecord)
 		, BlindsRecord(Musee::Site::BlindsRecord)
+		, JointsRecord(Musee::Site::JointsRecord)
 	{
 	}
 
@@ -115,12 +128,14 @@ namespace Musee::Studio
 		}
 		{
 			FMakeStepTimer Timer(Report, Folder + TEXT(": paint"));
-			MakePaintLayers(FMuseeStageContext{Stage, ScheduleDir, Fabric.Description.Anchors, nullptr}, Options, Report);
+			MakePaintLayers(FMuseeStageContext{Stage, ScheduleDir, Fabric.Description.Anchors, nullptr, Fabric.MatedPorts}, Options, Report);
 		}
 		FStageCast Cast;
 		{
 			FMakeStepTimer Timer(Report, Folder + TEXT(": cast"));
 			Cast = CastStage(Fabric, Options, ScheduleDir, Report);
+			UE_LOG(LogMuseeStudio, Display, TEXT("%s: %d of %d pieces are placed as instances of a mesh identical pieces share."), *Folder,
+				Cast.Instanced, Fabric.Pieces.Num());
 		}
 		Report.DerivedData = MeasureDerivedData() - Before;
 		{
@@ -130,11 +145,17 @@ namespace Musee::Studio
 			Level.PackageName = Options.Paths.StageLevel(Folder);
 			Level.Bodies = MoveTemp(Cast.Bodies);
 			Level.Placements = MoveTemp(Cast.Placements);
-			Level.DependencyHash = LevelDependencyHash(Fabric.Dependencies, ScheduleDir);
-			const TArray<FMuseeStageAnchor>& Anchors = Fabric.Description.Anchors;
-			Level.Dress = [&Report, &Stage, &ScheduleDir, &Anchors](AActor& Actor, FString&)
+			for (const FSiteBarrier& Barrier : Fabric.Description.Barriers)
 			{
-				const FMuseeStageContext Context{Stage, ScheduleDir, Anchors, &Actor};
+				Level.Barriers.Add({AssetToken(Barrier.Key.ToName()), Barrier.Key.ToName(), Barrier.Frame.OriginMeters, Barrier.Frame.Rotation,
+					Barrier.HalfSizeMeters});
+			}
+			Level.DependencyHash = LevelDependencyHash(Fabric, ScheduleDir);
+			const TArray<FMuseeStageAnchor>& Anchors = Fabric.Description.Anchors;
+			const TArray<FMuseeKey>& Mated = Fabric.MatedPorts;
+			Level.Dress = [&Report, &Stage, &ScheduleDir, &Anchors, &Mated](AActor& Actor, FString&)
+			{
+				const FMuseeStageContext Context{Stage, ScheduleDir, Anchors, &Actor, Mated};
 				Musee::DressStage(Context, Report.Findings);
 				return true;
 			};
@@ -155,7 +176,9 @@ namespace Musee::Studio
 			return Report;
 		}
 		FMuseeDependencySet Dependencies;
-		const FSiteLayout Layout = Musee::Site::Solve(Plan.GetValue(), PortsOfRooms(Dependencies), Report.Findings);
+		const FSiteRooms Rooms = DescribeRooms(Dependencies);
+		const FSiteLayout Layout = Musee::Site::Solve(Plan.GetValue(), Rooms.Ports, Report.Findings);
+		Report.Findings.Append(Musee::Site::CheckOverlaps(Rooms.Footprints, Layout));
 		FMuseumLevel Museum{Options.Paths.MuseumLevel(), {}};
 		TArray<FMuseeKey> Placed;
 		Layout.TranslationsMeters.GetKeys(Placed);
@@ -170,6 +193,10 @@ namespace Musee::Studio
 				continue;
 			}
 			Museum.Stages.Add({StageFolder(Stage), Level, Layout.TranslationsMeters[Stage]});
+		}
+		if (MakeJoints(Plan.GetValue(), Layout, Rooms.Ports, Options, Report))
+		{
+			Museum.Stages.Add({JointsLevelName, Options.Paths.JointsLevel(), FVector::ZeroVector});
 		}
 		if (Layout.bHasArrival)
 		{

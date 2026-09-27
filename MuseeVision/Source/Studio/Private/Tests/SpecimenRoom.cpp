@@ -18,10 +18,23 @@ namespace
 	constexpr double DoorWidthMeters = 3.0;
 	constexpr double DoorSpringingMeters = 3.3;
 
-	/** The post: a 0.15 m radius drum 1 m tall on the body 2 m in from the corner. */
+	/** The post: a 0.15 m radius drum 1 m tall on the body 2 m in from the corner, with a cap on a body riding the plinth. */
 	constexpr double PostRadiusMeters = 0.15;
 	constexpr double PostHeightMeters = 1.0;
 	const FVector PlinthMeters(2.0, -2.0, 0.0);
+	const FVector CapMeters(2.0, -2.0, PostHeightMeters);
+
+	/** Two identical studs on the floor, 2 m either side of the room's axis, cast once and placed twice. */
+	const FVector StudMeters[] = {FVector(6.0, -2.0, 0.0), FVector(6.0, 2.0, 0.0)};
+
+	/** A drum of a radius and height standing on its frame's origin. */
+	FFormLathe Drum(double Radius, double Height)
+	{
+		FFormLathe Shape;
+		Shape.Section = FFormProfile::From({0.0, 0.0});
+		Shape.Section.LineTo({Radius, 0.0}, EFormJoint::Crisp).LineTo({Radius, Height}, EFormJoint::Crisp).LineTo({0.0, Height}, EFormJoint::Crisp);
+		return Shape;
+	}
 
 	FFormDrawing Wall(const TCHAR* Name, const FVector2D& From, const FVector2D& To, TArray<FFormWallOpening> Openings)
 	{
@@ -68,14 +81,30 @@ void USpecimenRoom::Describe(FSiteDescription& Out) const
 	Floor.Frame = FMuseeFrame(FVector(0.0, 0.0, -SlabMeters));
 	Floor.Collision = Musee::Collision::Walkable.Profile();
 
-	FFormLathe Drum;
-	Drum.Section = FFormProfile::From({0.0, 0.0});
-	Drum.Section.LineTo({PostRadiusMeters, 0.0}, EFormJoint::Crisp).LineTo({PostRadiusMeters, PostHeightMeters}, EFormJoint::Crisp)
-		.LineTo({0.0, PostHeightMeters}, EFormJoint::Crisp);
-	FFormDrawing& Post = Out.Pieces.Add_GetRef(FFormDrawing::Of(TEXT("post"), TEXT("post"), MoveTemp(Drum)));
-	Post.Body = FMuseeKey(TEXT("specimen-room.plinth"));
+	const FMuseeKey Plinth(TEXT("specimen-room.plinth"));
+	FFormDrawing& Post = Out.Pieces.Add_GetRef(FFormDrawing::Of(TEXT("post"), TEXT("post"), Drum(PostRadiusMeters, PostHeightMeters)));
+	Post.Body = Plinth;
 	Post.Collision = Musee::Collision::Solid.Profile();
-	Out.Anchors.Add({FMuseeKey(TEXT("specimen-room.plinth")), TEXT("Body"), FMuseeFrame(PlinthMeters)});
+	Out.Anchors.Add({Plinth, TEXT("Body"), FMuseeFrame(PlinthMeters)});
+
+	// The cap rides the plinth: its body is declared where it is drawn, on the post's top, and hangs from the plinth's.
+	const FMuseeKey Cap(TEXT("specimen-room.plinth.cap"));
+	FFormDrawing& Top = Out.Pieces.Add_GetRef(FFormDrawing::Of(TEXT("cap"), TEXT("post"), Drum(PostRadiusMeters, 0.5 * PostRadiusMeters)));
+	Top.Body = Cap;
+	Top.Collision = Musee::Collision::Solid.Profile();
+	Out.Anchors.Add({Cap, TEXT("Body"), FMuseeFrame(CapMeters)});
+	Out.BodyParents.Add(Cap, Plinth);
+
+	// A barrier keeps the visitor 0.25 m off the post, 1.2 m high, and lets the eye through.
+	Out.Barriers.Add({FMuseeKey(TEXT("specimen-room.plinth.barrier")), FMuseeFrame(PlinthMeters + FVector(0.0, 0.0, 0.6)), FVector(0.4, 0.4, 0.6)});
+
+	for (int32 Stud = 0; Stud < UE_ARRAY_COUNT(StudMeters); ++Stud)
+	{
+		FFormDrawing& Placed = Out.Pieces.Add_GetRef(FFormDrawing::Of(FName(FString::Printf(TEXT("stud.%c"), TCHAR('a' + Stud))), TEXT("post"),
+			Drum(PostRadiusMeters, PostRadiusMeters)));
+		Placed.Frame = FMuseeFrame(StudMeters[Stud]);
+		Placed.Collision = Musee::Collision::Barrier.Profile();
+	}
 
 	FSitePort& West = Out.Ports.AddDefaulted_GetRef();
 	West.Key = FMuseeKey(TEXT("specimen-room.west"));

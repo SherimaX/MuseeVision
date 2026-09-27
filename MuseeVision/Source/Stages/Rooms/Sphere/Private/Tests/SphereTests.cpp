@@ -8,6 +8,7 @@
 #include "MuseeRecords.h"
 #include "SiteDescription.h"
 #include "SitePortClass.h"
+#include "SiteReceivedWell.h"
 #include "SpherePlan.h"
 #include "SphereRoom.h"
 
@@ -70,6 +71,19 @@ namespace Musee::Sphere::Tests
 		TestTrue(TEXT("it receives the Atrium's well"), Down.bHasWell && !Down.Well.bServing);
 		TestTrue(TEXT("the well is the class's circle r 2.300 from the plane to 23.390"), Down.Well.MinMeters.Equals(FVector(-2.3, -2.3, 7.715), 1e-9)
 			&& Down.Well.MaxMeters.Equals(FVector(2.3, 2.3, 23.39), 1e-9));
+
+		TestEqual(TEXT("the mast's dogs are dogs, before the mast"), Musee::Site::PartOf(Down.Well, TEXT("mast.dog.2")), FName(TEXT("dog")));
+		TestEqual(TEXT("the neck's blades are an iris"), Musee::Site::PartOf(Down.Well, TEXT("neck.iris.blade.3")), FName(TEXT("iris")));
+		TestTrue(TEXT("the throat is no part of the well"), Musee::Site::PartOf(Down.Well, TEXT("neck.throat.band.1")).IsNone());
+
+		// The volume turned about the axis (§1): from the plane up the neck column, to the drip ring's top, to the crown.
+		const TArray<FVector2D>& Turned = Description.Footprint.TurnedProfileMeters;
+		TestTrue(TEXT("the turned volume starts on the axis at the plane"), Turned.Num() > 8 && Turned[0].Equals(FVector2D(0.0, 7.715), 1e-9));
+		TestTrue(TEXT("it passes the drip ring's top (14.320, 22.656)"), Turned.ContainsByPredicate([](const FVector2D& P)
+		{
+			return P.Equals(FVector2D(Plan::DripEdge, Plan::DripTop), 1e-3);
+		}));
+		TestTrue(TEXT("it ends on the axis at the ball's top"), Turned.Num() > 8 && Turned.Last().Equals(FVector2D(0.0, 37.45), 1e-9));
 
 		// The port's class is the site's record; its clear opening is the well's circle.
 		const TValueOrError<FSitePortClass, FString> Class = Musee::Site::FindPortClass(Down.Class);

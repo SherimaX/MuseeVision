@@ -23,8 +23,9 @@ struct FMuseeStageAnchor
 
 /**
  * What a stage offers the systems that dress it while it is being made: which stage it is, the folder holding its
- * schedules (Data/Stages/<stage>: Finishes, Lighting, Hang, Planting), its anchors, and the actor in its level that
- * owns what they place. Studio builds one per stage and hands it to every registered dresser in turn.
+ * schedules (Data/Stages/<stage>: Finishes, Lighting, Hang, Planting), its anchors, the actor in its level that owns what
+ * they place, and which of its ports the site plan mates. Studio builds one per stage and hands it to every registered
+ * dresser in turn.
  */
 struct FMuseeStageContext
 {
@@ -32,6 +33,12 @@ struct FMuseeStageContext
 	FString ScheduleDir;
 	TArray<FMuseeStageAnchor> Anchors;
 	AActor* StageActor = nullptr;
+
+	/**
+	 * The stage's ports the site plan joins to a built neighbour (atrium.down), as Site solves the plan; every other port
+	 * is blind. Empty on the stand, where the stage stands alone.
+	 */
+	TArray<FMuseeKey> MatedPorts;
 
 	/**
 	 * The anchor with this key and kind, or nullptr. An anchor is found by both: one place may be two anchors under one

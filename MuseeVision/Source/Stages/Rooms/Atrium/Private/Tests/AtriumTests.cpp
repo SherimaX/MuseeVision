@@ -134,6 +134,15 @@ namespace Musee::Atrium::Tests
 		}
 		const FMuseeStageAnchor* Head = FindAnchor(Description, FMuseeKey(TEXT("atrium.car.mast.head")), TEXT("Body"));
 		TestTrue(TEXT("the mast's head rides on the crown's top"), Head && Head->Frame.OriginMeters.Equals(FVector(0.0, 0.0, 2.78), 1e-9));
+		for (const TCHAR* Riding : {TEXT("atrium.car.leaf.north"), TEXT("atrium.car.leaf.south"), TEXT("atrium.car.mast.head")})
+		{
+			const FMuseeKey* Carrier = Description.BodyParents.Find(FMuseeKey(Riding));
+			TestTrue(*FString::Printf(TEXT("%s rides the car"), Riding), Carrier && *Carrier == FMuseeKey(TEXT("atrium.car")));
+		}
+		TestFalse(TEXT("the landing's leaves stay on the stage's frame"), Description.BodyParents.Contains(FMuseeKey(TEXT("atrium.landing.leaf.north"))));
+		const FSiteBarrier* Barrier = Description.Barriers.FindByPredicate([](const FSiteBarrier& B) { return B.Key == FMuseeKey(TEXT("atrium.stele.barrier")); });
+		TestTrue(TEXT("the stele's barrier is the box of its foot's plan up to 2.200 (section 3.7)"), Barrier
+			&& Barrier->Frame.OriginMeters.Equals(FVector(-3.81, -1.9, 1.1), 1e-9) && Barrier->HalfSizeMeters.Equals(FVector(0.2, 0.85, 1.1), 1e-9));
 		const FMuseeStageAnchor* Call = FindAnchor(Description, FMuseeKey(TEXT("atrium.call")), TEXT("Use"));
 		TestTrue(TEXT("the call is at the waiting mark"), Call && Call->Frame.OriginMeters.Equals(FVector(-3.31, 0.0, 0.0), 1e-9));
 		TestNotNull(TEXT("the car's panel is a Use"), FindAnchor(Description, FMuseeKey(TEXT("atrium.car.panel")), TEXT("Use")));

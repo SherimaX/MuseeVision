@@ -27,6 +27,11 @@ Hang, Mechanisms), read by the systems and never restated here.
 | `AtriumLift.cpp` | the lining, rails and brackets, the landing, tube and collar, the collar iris's seven blades |
 | `AtriumCar.cpp` | the car (body `atrium.car`), its leaves, the crown and the Cube mast's head; the stele |
 
+The car's leaves and the Cube mast's head ride the car (`BodyParents`): declared where they stand with the car at the
+Atrium stop, and hung from it by Studio. The stele's barrier, the box of its foot's plan to the glass's top, stops only the
+visitor's body (`Barriers`). The volume turned about the axis keeps to the Atrium's side of the Sphere's seam, for
+Site.NoOverlap.
+
 ## Waiting on the systems
 
 - Form lays no ashlar or marble (`Lay`), cuts no rebate or recess in a slab, finishes no extrusion's faces apart, cuts
@@ -34,8 +39,6 @@ Hang, Mechanisms), read by the systems and never restated here.
   base's stones, the landing shoe's rebate, the waiting mark's recesses, the blades' gilt undersides, the canopy's
   panes, the ribs' chamfers, the portal's haunches behind its arch and the dress's ends are their nearest honest forms,
   as each file's comment says.
-- Studio hangs every body from the stage's frame: the car's leaves and the mast's head are declared where they stand
-  with the car at the Atrium stop, and ride the car only when bodies can ride bodies.
 - Site's `iris.4600` and `doorway.4000x4500.square`, and vertical ports with served wells, are KIT-2's; Motion's
   many-stop lift is KIT-2's.
 

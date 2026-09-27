@@ -130,6 +130,7 @@ namespace Musee::Motion
 			Actor.AddInstanceComponent(Mechanism);
 			Mechanism->RegisterComponent();
 			Mechanism->Configure(Spec, Body);
+			Mechanism->SetMatedPorts(Stage.MatedPorts);
 			PlaceControls(Stage, Spec, *Mechanism, OutFindings);
 		}
 	}

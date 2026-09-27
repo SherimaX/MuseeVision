@@ -9,12 +9,36 @@
 #include "SitePortClass.generated.h"
 
 /**
+ * A notch in a well's section: a radial slot cut back from the well's circle, in which a part of the receiving stage runs
+ * outside the well (the guide rails' blades in iris.4600's well). It spans a width across its bearing's ray, from an inner
+ * radius out to the circle.
+ */
+USTRUCT()
+struct MUSEESITE_API FSiteWellNotch
+{
+	GENERATED_BODY()
+
+	/** The ray it lies on, degrees clockwise from north (0 north, 90 east), in the museum's true-north frame. */
+	UPROPERTY(meta = (MuseeRequired, Units = "Degrees"))
+	double BearingDegrees = 0.0;
+
+	/** Half its width across the ray, metres. */
+	UPROPERTY(meta = (MuseeRequired, Units = "Meters"))
+	double HalfWidthMeters = 0.0;
+
+	/** Where it starts in from the well's circle, metres from the axis. */
+	UPROPERTY(meta = (MuseeRequired, Units = "Meters"))
+	double InnerRadiusMeters = 0.0;
+};
+
+/**
  * A class of port: the standard opening two stages agree on, like a door schedule's door type. It sets the clear
  * opening (width, head, and whether the head is a semicircular arch), the rough opening each stage builds round it (the
  * clear opening grown by the allowance the joint's lining fills), the room each stage keeps clear round it on its face for
  * the joint's surround, the envelope within which the joint's masonry closes any gap between two faces, the bronze strip
- * on the mating plane, and what closes the port when it is joined. A vertical port's class names its well's clear radius
- * and the iris that closes it. Read from Data/Site/PortClasses.json.
+ * on the mating plane, and what closes the port when it is joined. A vertical port's class names its well's section (a
+ * clear radius less its notches), the parts a receiving stage may build in it, and the iris that closes it. Read from
+ * Data/Site/PortClasses.json.
  */
 USTRUCT()
 struct MUSEESITE_API FSitePortClass
@@ -76,6 +100,17 @@ struct MUSEESITE_API FSitePortClass
 	/** A vertical port's well: its clear radius about the port's axis, metres. */
 	UPROPERTY(meta = (Units = "Meters"))
 	double WellRadiusMeters = 0.0;
+
+	/** The well's section is its circle less these notches. */
+	UPROPERTY()
+	TArray<FSiteWellNotch> WellNotches;
+
+	/**
+	 * The parts a stage that receives the well may build inside its section (rail, iris, mast, dog, sill): everything else
+	 * is kept out of the well, which the serving stage's car runs through.
+	 */
+	UPROPERTY()
+	TArray<FName> WellAdmits;
 
 	/** The iris that closes a port of the iris closure. */
 	UPROPERTY()

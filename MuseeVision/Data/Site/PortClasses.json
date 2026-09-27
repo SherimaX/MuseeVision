@@ -7,7 +7,8 @@
     "The surround's clearance, 0.35 past the clear opening: what each stage keeps clear on its face for the joint's surround (albion.md, chenghuai.md, hall-of-light.md section 2; atrium.md section 2, |y| < 2.350 for the 4.000 door).",
     "The strip, 0.060 wide: the museum's brushed CuSn10 threshold strip, as Albion's court door carries (Data/Stages/albion/Finishes.json albion.door.strip, 0.06 x 4.03), on the mating plane (Docs/Architecture.md, How rooms join: the joint is a doorcase).",
     "Collar envelopes: Albion's porch on the Rotunda's south door, |x| <= 3.65, z -1.20 to 7.50 (albion.md section 2; windows/Source/MuseeVision/Plan/MuseePlan.h:528, Facade::VestibuleHalf and VestibuleTop); the Rotunda's west passage to the Salon, |y| <= 1.80 to 6.30 (MuseePlan.h:526, Facade::WestPassageHalf and WestPassageTop), down to the museum's footings at -1.20 as Albion's plinth course is (albion.md section 1). Classes whose faces touch where they mate carry none.",
-    "iris.4600: the Atrium's vertical ports (atrium.md section 2): the served well's clear radius 2.300, closed by a seven-blade iris of the Elan kit, each blade a 110 degree arc of the middle circle r 3.095, 1.250 wide with round ends, 2 mm thick at a 4 mm pitch, its pin at r 3.745 (0.650 outside the middle circle), turning 52 degrees from open to shut (windows/Source/MuseeVision/Elan/ElanKit.h:73-84; the blades thinned from 5 mm at 3 mm, which interpenetrated, atrium.md correction 2)."
+    "iris.4600: the Atrium's vertical ports (atrium.md section 2): the served well's clear radius 2.300, closed by a seven-blade iris of the Elan kit, each blade a 110 degree arc of the middle circle r 3.095, 1.250 wide with round ends, 2 mm thick at a 4 mm pitch, its pin at r 3.745 (0.650 outside the middle circle), turning 52 degrees from open to shut (windows/Source/MuseeVision/Elan/ElanKit.h:73-84; the blades thinned from 5 mm at 3 mm, which interpenetrated, atrium.md correction 2).",
+    "iris.4600's well section (atrium.md section 2, well section; cube.md and sphere.md section 2): the circle r 2.300 less two notches 16 mm wide (0.008 either side of the ray) from r 2.265 out, at bearings 0 and 180 degrees, where the guide rails' blades stand. A receiving stage builds inside it only its rails, its class closures (irises), its mast, the mast's dogs and a landing's door sill (sphere.md section 2, the received well; cube.md section 2)."
   ],
   "$records": [
     {
@@ -96,6 +97,11 @@
       "arched": false,
       "closure": "iris",
       "wellRadiusMeters": 2.3,
+      "wellNotches": [
+        { "bearingDegrees": 0.0, "halfWidthMeters": 0.008, "innerRadiusMeters": 2.265 },
+        { "bearingDegrees": 180.0, "halfWidthMeters": 0.008, "innerRadiusMeters": 2.265 }
+      ],
+      "wellAdmits": [ "rail", "iris", "mast", "dog", "sill" ],
       "iris": {
         "blades": 7,
         "midRadiusMeters": 3.095,
