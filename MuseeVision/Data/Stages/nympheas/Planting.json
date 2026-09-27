@@ -14,7 +14,9 @@
       "depth": 0.32,
       "freeboard": 0.023,
       "material": "water.still",
-      "note": "Brimming, dyed black; surface pond-z 0.380, 23 mm under the lip's top face; 7.41 m³ net of the two shelves; conserved in every state (§7)."
+      "note": "Brimming, dyed black; surface pond-z 0.380, 23 mm under the lip's top face; 7.41 m³ net of the two shelves; conserved in every state (§7).",
+      "working": "still.dyed-black",
+      "history": "clean"
     }
   ],
   "beds": [
@@ -23,6 +25,9 @@
       "species": "Nymphaea × marliacea 'Carnea'",
       "count": 5,
       "spacing": 1.1,
+      "material": "living.nymphaea",
+      "working": "grown",
+      "history": "tended",
       "body": "nympheas.basin",
       "note": "Plant group pond.lilies.pink. Hardy Latour-Marliac water lily, pale pink (Monet's supplier from 1894). Plants L1, L3, L6, L8, L10 of the sheet's §7; L1 and L6 flowering. Each plant a colony of round(2 + 8 × reach) pads out to its reach, pads 0.10–0.22 radius; held inside the water's edge and clear of the shelves (|x| ≤ 3.12)."
     },
@@ -31,6 +36,9 @@
       "species": "Nymphaea × marliacea 'Albida'",
       "count": 5,
       "spacing": 1.1,
+      "material": "living.nymphaea",
+      "working": "grown",
+      "history": "tended",
       "body": "nympheas.basin",
       "note": "Plant group pond.lilies.white. Hardy Latour-Marliac water lily, white with a blush at the tips. Plants L2, L4, L5, L7, L9 of §7; L4 and L9 flowering. Colonies as the pink."
     },
@@ -39,6 +47,9 @@
       "species": "Iris laevigata",
       "count": 2,
       "spacing": 1.22,
+      "material": "living.iris-laevigata",
+      "working": "grown",
+      "history": "tended",
       "body": "nympheas.basin",
       "note": "Plant group pond.shelf.east.iris. Clumps at (+3.50, −0.60) with 2 flowers and (+3.47, +0.62) with 3 flowers, feet on the east shelf (pond-z 0.26); 5–7 fans of 4–7 sword leaves 0.62–0.78 tall; flower stalks 0.44–0.56; a bud or two."
     },
@@ -47,6 +58,9 @@
       "species": "Iris laevigata",
       "count": 2,
       "spacing": 1.22,
+      "material": "living.iris-laevigata",
+      "working": "grown",
+      "history": "tended",
       "body": "nympheas.basin",
       "note": "Plant group pond.shelf.west.iris. Clumps at (−3.50, −0.60) and (−3.47, +0.62), 2 flowers each, on the west shelf; as the east. The golden iris stands on the coping just beyond them at (−4.15, 0)."
     },
@@ -55,6 +69,9 @@
       "species": "Carex elata",
       "count": 3,
       "spacing": 0.9,
+      "material": "living.carex-elata",
+      "working": "grown",
+      "history": "tended",
       "body": "nympheas.basin",
       "note": "Plant group pond.shelf.east.sedge. Tufts at (+3.74, +0.04), (+3.33, −0.92), (+3.33, +0.93): 34–46 arching blades 0.32–0.55 long, 3–5 culms 0.30–0.44 tall with three brown spikes."
     },
@@ -63,6 +80,9 @@
       "species": "Carex elata",
       "count": 3,
       "spacing": 0.9,
+      "material": "living.carex-elata",
+      "working": "grown",
+      "history": "tended",
       "body": "nympheas.basin",
       "note": "Plant group pond.shelf.west.sedge. Tufts at (−3.74, −0.04), (−3.33, −0.92), (−3.33, +0.93); as the east."
     },
@@ -71,6 +91,9 @@
       "species": "Myosotis scorpioides",
       "count": 3,
       "spacing": 0.35,
+      "material": "living.myosotis-scorpioides",
+      "working": "grown",
+      "history": "tended",
       "body": "nympheas.basin",
       "note": "Plant group pond.shelf.east.forget-me-not. Patches at (+3.30, 0.00) r 0.14, (+3.62, −0.25) r 0.08, (+3.60, +0.30) r 0.08: 10–15 stems each, sprays of 5–9 sky-blue flowers with a yellow eye, pink buds in the coil."
     },
@@ -79,8 +102,24 @@
       "species": "Myosotis scorpioides",
       "count": 3,
       "spacing": 0.35,
+      "material": "living.myosotis-scorpioides",
+      "working": "grown",
+      "history": "tended",
       "body": "nympheas.basin",
       "note": "Plant group pond.shelf.west.forget-me-not. Patches at (−3.30, 0.00) r 0.14, (−3.62, −0.25) r 0.08, (−3.60, +0.30) r 0.08; as the east."
+    },
+    {
+      "bed": "nympheas.golden-iris",
+      "species": "Iris laevigata",
+      "count": 1,
+      "spacing": 0.0,
+      "cast": {
+        "material": "bronze.cusn10",
+        "working": "gilt.gold-leaf.oil",
+        "history": "handled"
+      },
+      "body": "nympheas.basin",
+      "note": "The golden iris (D-019): one Iris laevigata at life size, grown by Nature and cast in oil-gilt CuSn10 in place of its living parts; set on the coping's seat at the west apex (−4.150, 0.000, 0.420), a boss Ø 0.08 let flush into the seat. The gold is worn through on the falls where it is touched. The Use anchor of the same key is the control (§2)."
     }
   ]
 }

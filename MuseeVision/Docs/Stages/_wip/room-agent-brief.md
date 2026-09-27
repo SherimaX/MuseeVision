@@ -136,6 +136,14 @@ Mechanisms.json { "stage": "<room>", "mechanisms": [ { "key": "<stage>.<mech>", 
                   "open": [ { "channel": "<channel>", "to": 1.0, "time": t } | { "move": "open" } ], "close": [ ... ],
                   "guard": "body-in-travel", "clearance": <m> } ] }
 ```
+- **Field refinements (STAGE-CONTRACT.md, they win):** a luminaire has EITHER `"mount": "<Mount anchor key>"` OR
+  `"point": [x,y,z]`, never both, and never coordinates under "mount"; a linear type (linear-cove, linear-slot) also
+  has `"length"` in metres. Planting water and bed entries carry `"material"`, `"working"`, `"history"` (plants:
+  `living.<genus-species>`, working `grown`, history `tended` indoors or `weathered` outdoors; water e.g.
+  `water.still` / `still.dyed-black` / `clean`). A bed may be a cast specimen: `"cast": {"material","working","history"}`.
+  Hang `"frame"` is `"none"` or a Finishes.json surface (Art builds the frame and takes that surface's finish); a
+  work split across canvases has one entry per canvas sharing `"work"`, each with `"canvas": <index>`. Mechanisms may
+  add `"openUse"` / `"closeUse"` (verb and caption).
 - **Anchors.** Section 1 or 3 of the sheet carries an **Anchors** table: key, kind, frame (position, plus the axes
   or facing), and what it belongs to. The kinds are Body, Use, Mount, Wall, Bed, Water and Seat. Every anchor that
   any schedule names must appear in it. A Wall anchor's frame has its origin at the face, x along the wall, y out of
