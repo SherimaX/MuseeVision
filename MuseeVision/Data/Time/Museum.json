@@ -1,0 +1,31 @@
+{
+  "notes": "The museum's own decisions about time. Each is a design decision recorded in Journal/Decisions.md, or the as-built design it reproduces (Decision D-001).",
+  "defaultCity": "beijing",
+  "defaultCityDecision": "D-002",
+  "dial": {
+    "latitudeDegrees": 40.3,
+    "cityWithinDegrees": 1.0,
+    "decision": "D-002",
+    "notes": "The sun clock's lines are cut for 40.3 N, between Beijing (39.91 N) and New York (40.71 N). The museum's city is a runtime setting, restricted to cities within 1 degree of the dial's latitude; Time.DialTrue enforces it."
+  },
+  "sunModel": "idealised",
+  "sunModelDecision": "D-003",
+  "idealisedSun": {
+    "nodeHeightMeters": 20.3,
+    "hourRingRadiusMeters": 6.78,
+    "firstHour": 6,
+    "lastHour": 18,
+    "notes": "The approved sun: 15 degrees an hour from 06:00 to 18:00, always shining from the bronze node in the eye's lattice, 20.3 m above the dial, onto the hour ring of radius 6.78 m, so the point of shadow lands on the civil hour: VI due west, XII due north, VI due east. Its altitude is therefore constant, atan(20.3 / 6.78) = 71.53 degrees. The Rotunda cuts its node and ring from these numbers.",
+    "sources": [
+      { "values": "node height (the lattice and its bronze node) and shadow radius", "source": "the as-built museum: windows/Source/MuseeVision/Plan/MuseePlan.h (Rotunda::LatticeHeight 20.3, Rotunda::ShadowRadius 6.78) and Sky/MuseeSky.cpp (SunClockDirection)" },
+      { "values": "the hours and the even path", "source": "the as-built museum: Sky/MuseeSky.cpp (the sun up from 06:00 to 18:00) and SunClock/SunClockDial.cpp (hour lines from VI west through XII north to VI east); plan/canvas/Rotunda.dc.html ('15 degrees an hour in every season, so the point always lands on the hour')" }
+    ]
+  },
+  "seasonReckoning": "solar-terms",
+  "seasonNotes": "The museum shows the 24 solar terms, so its seasons begin with the four li terms (Lichun, Lixia, Liqiu, Lidong) and a term and its season always agree.",
+  "clock": {
+    "rate": 1.0,
+    "hourKeyStops": [10, 16, 21],
+    "notes": "time.rate is how fast the clock runs once an hour is set (1 is real time, 0 holds it). The hour key (T, and the headset's button) steps from live to 10:00, 16:00 and 21:00 and back to live, as the as-built museum's did (windows/Source/MuseeVision/Visitor/MuseeCharacter.cpp, NextHour)."
+  }
+}

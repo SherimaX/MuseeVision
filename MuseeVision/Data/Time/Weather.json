@@ -1,0 +1,49 @@
+{
+  "notes": "How the museum keeps its weather (Decisions D-005 and D-014). The places are keyed observers fetched together from the live feed; when a reading is not current for the museum's instant, each place's seeded generator gives weather drawn from its climate normals.",
+  "places": [
+    { "key": "museum", "followsMuseumCity": true, "notes": "the weather over the museum's own city (Museum.json defaultCity, a runtime setting)" },
+    { "key": "giverny", "city": "giverny", "followsMuseumCity": false, "notes": "falls on the Salon's lanterns" },
+    { "key": "london", "city": "london", "followsMuseumCity": false, "notes": "falls on Albion's glass" }
+  ],
+  "live": {
+    "validMinutes": 90,
+    "notes": "The feed's current conditions are refreshed every 15 minutes; a reading stands for the weather up to 90 minutes either side of its instant (six missed refreshes) before the generator takes over. A clock set far from the real hour therefore shows generated weather of its own hour."
+  },
+  "smoothing": {
+    "temperatureSeconds": 300,
+    "cloudCoverSeconds": 300,
+    "precipitationSeconds": 120,
+    "windSeconds": 180,
+    "notes": "Time constants of the easing towards each new target: a quarter-hour's reading is 95 percent reached by the next one (three time constants of 5 minutes); rain sets in and eases off over minutes, as a shower does."
+  },
+  "history": {
+    "rainMemoryHours": [1, 6, 48],
+    "snowMeltMillimetersPerDayCelsius": 3.0,
+    "longestStepSeconds": 60,
+    "respinAfterMinutes": 60,
+    "spinUpDays": 60,
+    "spinUpStepMinutes": 60,
+    "notes": "Water reaching the ground is kept with memories of an hour (a wet surface), six hours (drying stone) and two days (soaked ground and puddles); Matter's surface law weights them. Snow melts at 3 mm of water a day per degree above freezing, at the low end of the 2.5-11.6 range Hock (2003, Journal of Hydrology 282) reports for snow, as suits low-lying cities. When the museum's clock jumps by more than an hour, the ground's history is rebuilt over the 60 days before, in hourly steps."
+  },
+  "generator": {
+    "maximumSpreadCelsius": [5.72, 5.44, 5.50, 5.44, 4.83, 3.94, 3.44, 3.22, 3.61, 4.11, 4.72, 5.17],
+    "minimumSpreadCelsius": [5.50, 4.94, 4.50, 3.67, 3.22, 2.94, 2.56, 2.50, 3.28, 3.72, 4.22, 4.61],
+    "spreadNotes": "Standard deviations of the daily maximum and minimum about their normals, January to December: NOAA NCEI 1991-2020 daily normals for Central Park (DLY-TMAX-STDDEV and DLY-TMIN-STDDEV on the 15th of each month, published in degrees F and converted by 5/9). No other place's service publishes daily spreads, so this one reference serves every place; the frost-day counts kept in the London and Giverny normals check the result.",
+    "spreadSource": { "source": "NOAA NCEI data service, dataset normals-daily-1991-2020, station USW00094728", "url": "https://www.ncei.noaa.gov/access/services/data/v1?dataset=normals-daily-1991-2020&stations=USW00094728&format=json&dataTypes=DLY-TMAX-STDDEV,DLY-TMIN-STDDEV&startDate=2010-01-01&endDate=2010-12-31", "accessed": "2026-09-26" },
+    "anomalyMemoryDays": 2.5,
+    "anomalyNotes": "Day-to-day anomalies of temperature and wind fade with the passing of weather systems, which cross a mid-latitude city every few days: an e-folding time of 2.5 days, so a day keeps 67 percent of the day before's anomaly.",
+    "wetDayCloudCover": 0.85,
+    "cloudCoverPrecision": 2.0,
+    "rainingCloudCover": 0.95,
+    "rainCloudLeadHours": 2.0,
+    "cloudNotes": "A wet day's sky is mostly overcast (0.85 on average) and the dry days take the rest of the month's cloud, which follows from its sunshine. A day's cloud is drawn from a Beta distribution about its mean whose precision of 2 makes a sky of 50 percent mean cover equally likely to be anything from clear to overcast. While precipitation falls the sky is overcast (0.95), the cloud building over the two hours before and clearing over the two hours after.",
+    "rainMeanHours": 4.0,
+    "rainShortestHours": 1.0,
+    "rainLongestHours": 20.0,
+    "rainNotes": "A wet day's precipitation falls in one spell of exponentially distributed length, 4 hours on average, held between 1 and 20 hours so that a spell never overlaps the next day's.",
+    "snowToRainBandCelsius": 2.0,
+    "snowNotes": "Precipitation turns from snow to rain across a 2 degree band of air temperature, centred on the 1.0 C at which rain and snow are equally likely over Northern Hemisphere land (Jennings et al., Nature Communications 9, 1148, 2018).",
+    "windDirectionSpreadDegrees": 45,
+    "windNotes": "A day's wind direction wanders about the month's prevailing direction with a standard deviation of 45 degrees, half a quadrant: the normals give only the prevailing quadrant."
+  }
+}

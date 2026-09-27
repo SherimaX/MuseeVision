@@ -1,0 +1,160 @@
+{
+  "place": "new-york",
+  "station": "New York, Central Park (Belvedere Castle), NOAA station USW00094728",
+  "period": "1991-2020",
+  "wetDayThresholdMillimeters": 0.254,
+  "months": [
+    {
+      "month": 1,
+      "meanMaximumCelsius": 4.17,
+      "meanMinimumCelsius": -2.28,
+      "precipitationMillimeters": 92.46,
+      "wetDays": 10.8,
+      "sunshineHours": 162.7,
+      "windSpeedMetersPerSecond": 4.52,
+      "windFromDegrees": 270,
+      "snowDays": 3.7
+    },
+    {
+      "month": 2,
+      "meanMaximumCelsius": 5.67,
+      "meanMinimumCelsius": -1.39,
+      "precipitationMillimeters": 81.03,
+      "wetDays": 10.0,
+      "sunshineHours": 163.1,
+      "windSpeedMetersPerSecond": 4.56,
+      "windFromDegrees": 270,
+      "snowDays": 3.2
+    },
+    {
+      "month": 3,
+      "meanMaximumCelsius": 9.94,
+      "meanMinimumCelsius": 2.11,
+      "precipitationMillimeters": 108.97,
+      "wetDays": 11.1,
+      "sunshineHours": 212.5,
+      "windSpeedMetersPerSecond": 4.38,
+      "windFromDegrees": 270,
+      "snowDays": 2.0
+    },
+    {
+      "month": 4,
+      "meanMaximumCelsius": 16.56,
+      "meanMinimumCelsius": 7.5,
+      "precipitationMillimeters": 103.89,
+      "wetDays": 11.4,
+      "sunshineHours": 225.6,
+      "windSpeedMetersPerSecond": 3.89,
+      "windFromDegrees": 270,
+      "snowDays": 0.2
+    },
+    {
+      "month": 5,
+      "meanMaximumCelsius": 21.89,
+      "meanMinimumCelsius": 12.78,
+      "precipitationMillimeters": 100.58,
+      "wetDays": 11.5,
+      "sunshineHours": 256.6,
+      "windSpeedMetersPerSecond": 3.31,
+      "windFromDegrees": 270,
+      "snowDays": 0.0
+    },
+    {
+      "month": 6,
+      "meanMaximumCelsius": 26.5,
+      "meanMinimumCelsius": 18.0,
+      "precipitationMillimeters": 115.32,
+      "wetDays": 11.2,
+      "sunshineHours": 257.3,
+      "windSpeedMetersPerSecond": 3.0,
+      "windFromDegrees": 180,
+      "snowDays": 0.0
+    },
+    {
+      "month": 7,
+      "meanMaximumCelsius": 29.39,
+      "meanMinimumCelsius": 21.17,
+      "precipitationMillimeters": 116.84,
+      "wetDays": 10.5,
+      "sunshineHours": 268.2,
+      "windSpeedMetersPerSecond": 2.86,
+      "windFromDegrees": 180,
+      "snowDays": 0.0
+    },
+    {
+      "month": 8,
+      "meanMaximumCelsius": 28.5,
+      "meanMinimumCelsius": 20.5,
+      "precipitationMillimeters": 115.82,
+      "wetDays": 10.0,
+      "sunshineHours": 268.2,
+      "windSpeedMetersPerSecond": 2.86,
+      "windFromDegrees": 180,
+      "snowDays": 0.0
+    },
+    {
+      "month": 9,
+      "meanMaximumCelsius": 24.56,
+      "meanMinimumCelsius": 16.83,
+      "precipitationMillimeters": 109.47,
+      "wetDays": 8.8,
+      "sunshineHours": 219.3,
+      "windSpeedMetersPerSecond": 3.26,
+      "windFromDegrees": 180,
+      "snowDays": 0.0
+    },
+    {
+      "month": 10,
+      "meanMaximumCelsius": 18.06,
+      "meanMinimumCelsius": 10.78,
+      "precipitationMillimeters": 111.25,
+      "wetDays": 9.5,
+      "sunshineHours": 211.2,
+      "windSpeedMetersPerSecond": 3.76,
+      "windFromDegrees": 270,
+      "snowDays": 0.0
+    },
+    {
+      "month": 11,
+      "meanMaximumCelsius": 12.22,
+      "meanMinimumCelsius": 5.56,
+      "precipitationMillimeters": 90.93,
+      "wetDays": 9.2,
+      "sunshineHours": 151.0,
+      "windSpeedMetersPerSecond": 4.11,
+      "windFromDegrees": 270,
+      "snowDays": 0.2
+    },
+    {
+      "month": 12,
+      "meanMaximumCelsius": 6.83,
+      "meanMinimumCelsius": 1.0,
+      "precipitationMillimeters": 111.25,
+      "wetDays": 11.4,
+      "sunshineHours": 139.0,
+      "windSpeedMetersPerSecond": 4.34,
+      "windFromDegrees": 270,
+      "snowDays": 2.1
+    }
+  ],
+  "sources": [
+    {
+      "values": "temperature (published in degrees F, converted exactly), precipitation (inches, at 25.4 mm), wet days (at least 0.01 in = 0.254 mm), snowy days (at least 0.1 in of snowfall)",
+      "source": "NOAA National Centers for Environmental Information, U.S. Climate Normals 1991-2020, Central Park; NOAA NowData, as tabulated in Wikipedia's New York City weatherbox",
+      "url": "https://en.wikipedia.org/wiki/Template:New_York_City_weatherbox",
+      "accessed": "2026-09-26"
+    },
+    {
+      "values": "sunshine hours",
+      "source": "Wikipedia's New York City weatherbox (NOAA), the sunshine row",
+      "url": "https://en.wikipedia.org/wiki/Template:New_York_City_weatherbox",
+      "accessed": "2026-09-26"
+    },
+    {
+      "values": "wind speed (monthly mean of hourly 10 m wind, mph converted at 0.44704) and prevailing direction (west from 29 September to 14 March and from 21 March to 13 May, south from 14 June to 29 September; each month takes the direction that holds most of it)",
+      "source": "Weather Spark, New York City, from NASA's MERRA-2 reanalysis",
+      "url": "https://weatherspark.com/y/23912/Average-Weather-in-New-York-City-New-York-United-States-Year-Round",
+      "accessed": "2026-09-26"
+    }
+  ]
+}

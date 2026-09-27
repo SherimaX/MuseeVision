@@ -1,0 +1,127 @@
+{
+  "notes": "The places Time knows: the cities the museum may stand in (within 1 degree of the sun clock's latitude, Decision D-002) and the places whose weather falls on a room's glazing (Decision D-005). Elevations are those the live weather feed (Open-Meteo) uses for the same coordinates, so live and offline weather agree on the ground.",
+  "cities": [
+    {
+      "key": "beijing",
+      "name": "Beijing",
+      "latitudeDegrees": 39.90667,
+      "longitudeDegrees": 116.3975,
+      "elevationMeters": 47,
+      "zone": {
+        "standardOffsetHours": 8,
+        "daylightSaving": "none"
+      },
+      "climateNormals": "beijing",
+      "sources": [
+        {
+          "values": "latitude and longitude (39 54 24 N, 116 23 51 E)",
+          "source": "Wikipedia, Beijing (infobox)",
+          "url": "https://en.wikipedia.org/wiki/Beijing",
+          "accessed": "2026-09-26"
+        },
+        {
+          "values": "elevation",
+          "source": "Copernicus DEM GLO-90 through the Open-Meteo elevation API",
+          "url": "https://api.open-meteo.com/v1/elevation?latitude=39.90667&longitude=116.3975",
+          "accessed": "2026-09-26"
+        },
+        {
+          "values": "zone",
+          "source": "China Standard Time, UTC+8, with no daylight saving since 1992",
+          "url": "https://en.wikipedia.org/wiki/Time_in_China"
+        }
+      ]
+    },
+    {
+      "key": "new-york",
+      "name": "New York",
+      "latitudeDegrees": 40.7128,
+      "longitudeDegrees": -74.0061,
+      "elevationMeters": 32,
+      "zone": {
+        "standardOffsetHours": -5,
+        "daylightSaving": "united-states"
+      },
+      "climateNormals": "new-york",
+      "sources": [
+        {
+          "values": "latitude and longitude (40 42 46 N, 74 00 22 W)",
+          "source": "Wikipedia, New York City (infobox)",
+          "url": "https://en.wikipedia.org/wiki/New_York_City",
+          "accessed": "2026-09-26"
+        },
+        {
+          "values": "elevation",
+          "source": "Copernicus DEM GLO-90 through the Open-Meteo elevation API",
+          "url": "https://api.open-meteo.com/v1/elevation?latitude=40.7128&longitude=-74.0061",
+          "accessed": "2026-09-26"
+        },
+        {
+          "values": "zone",
+          "source": "Eastern Time: UTC-5, daylight saving by 15 U.S.C. 260a as amended by the Energy Policy Act of 2005",
+          "url": "https://www.law.cornell.edu/uscode/text/15/260a"
+        }
+      ]
+    },
+    {
+      "key": "giverny",
+      "name": "Giverny",
+      "latitudeDegrees": 49.0757,
+      "longitudeDegrees": 1.5337,
+      "elevationMeters": 25,
+      "zone": {
+        "standardOffsetHours": 1,
+        "daylightSaving": "european"
+      },
+      "climateNormals": "giverny",
+      "sources": [
+        {
+          "values": "latitude and longitude: Monet's garden at the Fondation Claude Monet",
+          "source": "the as-built museum, windows/Source/MuseeVision/Salon/SalonSky.cpp (the Salon's lanterns take Giverny's weather)"
+        },
+        {
+          "values": "elevation",
+          "source": "Copernicus DEM GLO-90 through the Open-Meteo elevation API",
+          "url": "https://api.open-meteo.com/v1/elevation?latitude=49.0757&longitude=1.5337",
+          "accessed": "2026-09-26"
+        },
+        {
+          "values": "zone",
+          "source": "Central European Time, UTC+1, with European summer time (Directive 2000/84/EC)",
+          "url": "https://eur-lex.europa.eu/eli/dir/2000/84/oj"
+        }
+      ]
+    },
+    {
+      "key": "london",
+      "name": "London",
+      "latitudeDegrees": 51.50722,
+      "longitudeDegrees": -0.1275,
+      "elevationMeters": 10,
+      "zone": {
+        "standardOffsetHours": 0,
+        "daylightSaving": "european"
+      },
+      "climateNormals": "london",
+      "sources": [
+        {
+          "values": "latitude and longitude (51 30 26 N, 0 07 39 W, by Charing Cross)",
+          "source": "Wikipedia, London (infobox); the as-built museum's Albion sky used the same point",
+          "url": "https://en.wikipedia.org/wiki/London",
+          "accessed": "2026-09-26"
+        },
+        {
+          "values": "elevation",
+          "source": "Copernicus DEM GLO-90 through the Open-Meteo elevation API",
+          "url": "https://api.open-meteo.com/v1/elevation?latitude=51.50722&longitude=-0.1275",
+          "accessed": "2026-09-26"
+        },
+        {
+          "values": "zone",
+          "source": "Greenwich Mean Time with British Summer Time, whose dates the Summer Time Order 2002 sets as the European rule's",
+          "url": "https://www.legislation.gov.uk/uksi/2002/262"
+        }
+      ]
+    }
+  ]
+}

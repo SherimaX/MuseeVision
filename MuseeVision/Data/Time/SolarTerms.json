@@ -1,0 +1,197 @@
+{
+  "notes": "The 24 solar terms in the museum's order, from Lichun (the Sun's apparent longitude at 315 degrees) to Dahan; each begins when the Sun reaches its longitude and lasts 15 degrees. Names as the as-built museum showed them (windows/Source/MuseeVision/Sky/Ephemeris.cpp), in traditional characters with toned pinyin.",
+  "terms": [
+    {
+      "key": "lichun",
+      "index": 0,
+      "startLongitudeDegrees": 315,
+      "hanzi": "立春",
+      "pinyin": "Lìchūn",
+      "english": "Start of Spring"
+    },
+    {
+      "key": "yushui",
+      "index": 1,
+      "startLongitudeDegrees": 330,
+      "hanzi": "雨水",
+      "pinyin": "Yǔshuǐ",
+      "english": "Rain Water"
+    },
+    {
+      "key": "jingzhe",
+      "index": 2,
+      "startLongitudeDegrees": 345,
+      "hanzi": "驚蟄",
+      "pinyin": "Jīngzhé",
+      "english": "Awakening of Insects"
+    },
+    {
+      "key": "chunfen",
+      "index": 3,
+      "startLongitudeDegrees": 0,
+      "hanzi": "春分",
+      "pinyin": "Chūnfēn",
+      "english": "Spring Equinox"
+    },
+    {
+      "key": "qingming",
+      "index": 4,
+      "startLongitudeDegrees": 15,
+      "hanzi": "清明",
+      "pinyin": "Qīngmíng",
+      "english": "Pure Brightness"
+    },
+    {
+      "key": "guyu",
+      "index": 5,
+      "startLongitudeDegrees": 30,
+      "hanzi": "穀雨",
+      "pinyin": "Gǔyǔ",
+      "english": "Grain Rain"
+    },
+    {
+      "key": "lixia",
+      "index": 6,
+      "startLongitudeDegrees": 45,
+      "hanzi": "立夏",
+      "pinyin": "Lìxià",
+      "english": "Start of Summer"
+    },
+    {
+      "key": "xiaoman",
+      "index": 7,
+      "startLongitudeDegrees": 60,
+      "hanzi": "小滿",
+      "pinyin": "Xiǎomǎn",
+      "english": "Grain Buds"
+    },
+    {
+      "key": "mangzhong",
+      "index": 8,
+      "startLongitudeDegrees": 75,
+      "hanzi": "芒種",
+      "pinyin": "Mángzhòng",
+      "english": "Grain in Ear"
+    },
+    {
+      "key": "xiazhi",
+      "index": 9,
+      "startLongitudeDegrees": 90,
+      "hanzi": "夏至",
+      "pinyin": "Xiàzhì",
+      "english": "Summer Solstice"
+    },
+    {
+      "key": "xiaoshu",
+      "index": 10,
+      "startLongitudeDegrees": 105,
+      "hanzi": "小暑",
+      "pinyin": "Xiǎoshǔ",
+      "english": "Minor Heat"
+    },
+    {
+      "key": "dashu",
+      "index": 11,
+      "startLongitudeDegrees": 120,
+      "hanzi": "大暑",
+      "pinyin": "Dàshǔ",
+      "english": "Major Heat"
+    },
+    {
+      "key": "liqiu",
+      "index": 12,
+      "startLongitudeDegrees": 135,
+      "hanzi": "立秋",
+      "pinyin": "Lìqiū",
+      "english": "Start of Autumn"
+    },
+    {
+      "key": "chushu",
+      "index": 13,
+      "startLongitudeDegrees": 150,
+      "hanzi": "處暑",
+      "pinyin": "Chǔshǔ",
+      "english": "End of Heat"
+    },
+    {
+      "key": "bailu",
+      "index": 14,
+      "startLongitudeDegrees": 165,
+      "hanzi": "白露",
+      "pinyin": "Báilù",
+      "english": "White Dew"
+    },
+    {
+      "key": "qiufen",
+      "index": 15,
+      "startLongitudeDegrees": 180,
+      "hanzi": "秋分",
+      "pinyin": "Qiūfēn",
+      "english": "Autumn Equinox"
+    },
+    {
+      "key": "hanlu",
+      "index": 16,
+      "startLongitudeDegrees": 195,
+      "hanzi": "寒露",
+      "pinyin": "Hánlù",
+      "english": "Cold Dew"
+    },
+    {
+      "key": "shuangjiang",
+      "index": 17,
+      "startLongitudeDegrees": 210,
+      "hanzi": "霜降",
+      "pinyin": "Shuāngjiàng",
+      "english": "Frost's Descent"
+    },
+    {
+      "key": "lidong",
+      "index": 18,
+      "startLongitudeDegrees": 225,
+      "hanzi": "立冬",
+      "pinyin": "Lìdōng",
+      "english": "Start of Winter"
+    },
+    {
+      "key": "xiaoxue",
+      "index": 19,
+      "startLongitudeDegrees": 240,
+      "hanzi": "小雪",
+      "pinyin": "Xiǎoxuě",
+      "english": "Minor Snow"
+    },
+    {
+      "key": "daxue",
+      "index": 20,
+      "startLongitudeDegrees": 255,
+      "hanzi": "大雪",
+      "pinyin": "Dàxuě",
+      "english": "Major Snow"
+    },
+    {
+      "key": "dongzhi",
+      "index": 21,
+      "startLongitudeDegrees": 270,
+      "hanzi": "冬至",
+      "pinyin": "Dōngzhì",
+      "english": "Winter Solstice"
+    },
+    {
+      "key": "xiaohan",
+      "index": 22,
+      "startLongitudeDegrees": 285,
+      "hanzi": "小寒",
+      "pinyin": "Xiǎohán",
+      "english": "Minor Cold"
+    },
+    {
+      "key": "dahan",
+      "index": 23,
+      "startLongitudeDegrees": 300,
+      "hanzi": "大寒",
+      "pinyin": "Dàhán",
+      "english": "Major Cold"
+    }
+  ]
+}
