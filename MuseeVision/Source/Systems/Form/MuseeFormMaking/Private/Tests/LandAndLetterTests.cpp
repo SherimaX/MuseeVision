@@ -311,6 +311,19 @@ namespace Musee::Form::Tests
 			LandClosed(*this, TEXT("a wall with a lunette over its door"), StackedPieces[0], 0);
 		}
 
+		// A slab whose two holes touch along a side and a third overlaps one (buildings side by side on a ground's soil): the
+		// holes are joined into one, and the slab round them is one closed ring.
+		FFormExtrusion Soil;
+		Soil.Outline = FFormProfile::Rectangle(FVector2D(0.0, 0.0), FVector2D(10.0, 10.0));
+		Soil.Holes = {FFormProfile::Rectangle(FVector2D(2.0, 2.0), FVector2D(5.0, 5.0)), FFormProfile::Rectangle(FVector2D(5.0, 2.0), FVector2D(8.0, 5.0)),
+			FFormProfile::Rectangle(FVector2D(6.0, 4.0), FVector2D(7.0, 7.0))};
+		Soil.DepthMeters = 0.3;
+		const TArray<FFormMadePiece> Soils = LandMake(*this, FFormDrawing::Of(TEXT("soil"), TEXT("soil"), Soil));
+		if (TestEqual(TEXT("a slab with holes that meet is one piece"), Soils.Num(), 1))
+		{
+			LandClosed(*this, TEXT("a slab round holes that meet"), Soils[0], 0);
+		}
+
 		// A strip a twentieth of a millimetre wide over the door, between two stations of a drawn top: where a curved face's
 		// chord lengths and a drawing's arc lengths part (the Hall of Light's east lining, 0.1 mm at its axis). Its soffit and
 		// top still face their sides, and the wall is made.

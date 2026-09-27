@@ -45,7 +45,11 @@ struct FFormExtrusion
 	/** The outline, closed, in the frame's (x, y), metres. */
 	FFormProfile Outline;
 
-	/** Holes through the slab, each closed and inside the outline. */
+	/**
+	 * Holes through the slab, each closed and inside the outline. Holes may touch or overlap one another (the buildings
+	 * standing side by side on a ground's soil): they are joined first, and a part of the slab they ring round is a solid
+	 * of its own within the piece.
+	 */
 	TArray<FFormProfile> Holes;
 
 	/** How far the outline is pushed along the frame's z axis, metres. */

@@ -163,6 +163,75 @@ namespace Musee::Form::Drawing
 		return true;
 	}
 
+	namespace
+	{
+		/** A plain slab: the outline less its holes, pushed its depth, with both faces and every side. */
+		bool DrawPlainExtrusion(const FFormExtrusion& Shape, const FProfileStations& Outline, TConstArrayView<FProfileStations> Holes, FMeshBuilder& Mesh)
+		{
+			Mesh.UseSlot(FFormExtrusion::SidePart);
+			TArray<TArray<FVector2D>> HolePoints;
+			for (const FProfileStations& Hole : Holes)
+			{
+				HolePoints.Add(Hole.Points());
+			}
+			const bool bUp = Shape.DepthMeters > 0.0;
+			bool bMade = Extrude(Mesh, GroundPlane(0.0), Outline, Holes, Shape.DepthMeters, false);
+			Mesh.UseSlot(FFormExtrusion::NearPart);
+			bMade = bMade && AddPlanarFace(Mesh, GroundPlane(0.0, !bUp), Outline.Points(), HolePoints);
+			Mesh.UseSlot(FFormExtrusion::FarPart);
+			return bMade && AddPlanarFace(Mesh, GroundPlane(Shape.DepthMeters, bUp), Outline.Points(), HolePoints);
+		}
+
+		/**
+		 * Holes that meet leave the slab no sliver thinner than the chord rule draws any curve to (1 mm, Stations.h): the
+		 * wedge where a flat wall stands tangent to a drum, or a joint between two buildings' outlines drawn on the same
+		 * line. The joined holes are grown by half of it and shrunk back, which closes such gaps and pinches and keeps every
+		 * other edge where it was.
+		 */
+		constexpr double ThinnestSlabMeters = 0.001;
+
+		/** The holes joined into one region, and whether any two of them met (touching, overlapping, or one in another). */
+		FRegion JoinHoles(TConstArrayView<FProfileStations> Holes, bool& bOutMet)
+		{
+			FRegion Joined;
+			double Apart = 0.0;
+			for (const FProfileStations& Hole : Holes)
+			{
+				const FRegion One = RegionOf(Hole.Points());
+				Apart += AreaSquareMeters(One);
+				Joined = Union(Joined, One);
+			}
+			bOutMet = Joined.Num() < Holes.Num() || AreaSquareMeters(Joined) < Apart - SliverSquareMeters;
+			return bOutMet ? Offset(Offset(Joined, 0.5 * ThinnestSlabMeters), -0.5 * ThinnestSlabMeters) : Joined;
+		}
+
+		/**
+		 * A slab whose holes meet one another (the buildings standing side by side on a ground's soil): the holes joined
+		 * first, and the slab what the outline keeps outside them. Where joined holes ring round a part of it (a court
+		 * between buildings) that part is a closed solid of its own within the piece.
+		 */
+		bool DrawJoinedExtrusion(const FFormExtrusion& Shape, const FProfileStations& Outline, const FRegion& Holes, FMeshBuilder& Mesh)
+		{
+			const FRegion Kept = Difference(RegionOf(Outline.Points()), Holes);
+			bool bMade = !Kept.IsEmpty();
+			for (const UE::Geometry::FGeneralPolygon2d& Polygon : Kept)
+			{
+				const TArray<TArray<FVector2D>> Loops = LoopsOf(Polygon);
+				if (Loops.IsEmpty())
+				{
+					continue;
+				}
+				TArray<FProfileStations> Inner;
+				for (int32 Index = 1; Index < Loops.Num(); ++Index)
+				{
+					Inner.Add(LoopStations(Loops[Index]));
+				}
+				bMade = bMade && DrawPlainExtrusion(Shape, LoopStations(Loops[0]), Inner, Mesh);
+			}
+			return bMade;
+		}
+	}
+
 	bool DrawExtrusion(const FFormExtrusion& Shape, FMeshBuilder& Mesh, FString& OutWhy)
 	{
 		TArray<FProfileStations> Holes;
@@ -175,18 +244,9 @@ namespace Musee::Form::Drawing
 		{
 			return DrawWorkedExtrusion(Shape, Outline, Holes, Mesh, OutWhy);
 		}
-		Mesh.UseSlot(FFormExtrusion::SidePart);
-		TArray<TArray<FVector2D>> HolePoints;
-		for (const FProfileStations& Hole : Holes)
-		{
-			HolePoints.Add(Hole.Points());
-		}
-		const bool bUp = Shape.DepthMeters > 0.0;
-		bool bMade = Extrude(Mesh, GroundPlane(0.0), Outline, Holes, Shape.DepthMeters, false);
-		Mesh.UseSlot(FFormExtrusion::NearPart);
-		bMade = bMade && AddPlanarFace(Mesh, GroundPlane(0.0, !bUp), Outline.Points(), HolePoints);
-		Mesh.UseSlot(FFormExtrusion::FarPart);
-		bMade = bMade && AddPlanarFace(Mesh, GroundPlane(Shape.DepthMeters, bUp), Outline.Points(), HolePoints);
+		bool bMet = false;
+		const FRegion Joined = Holes.Num() > 1 ? JoinHoles(Holes, bMet) : FRegion();
+		const bool bMade = bMet ? DrawJoinedExtrusion(Shape, Outline, Joined, Mesh) : DrawPlainExtrusion(Shape, Outline, Holes, Mesh);
 		if (!bMade)
 		{
 			OutWhy = TEXT("the outline or a hole crosses itself or another, or the depth is zero");
