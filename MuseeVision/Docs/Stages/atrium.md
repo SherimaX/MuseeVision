@@ -396,7 +396,7 @@ room": its own low luminance is the design.
 All mechanisms are the Atrium's (Mechanisms.json, 13). With the Cube's ceiling iris and the Sphere's neck and platform
 irises they form one coupling group; Site binds the channels across the seams.
 
-**M-1 `atrium.car.lift`** (body `atrium.car`): prismatic +z, travel **44.000** (`range` −23.600 … +20.400), publishes
+**M-1 `atrium.car.lift`** (body `atrium.car`): prismatic +z, travel **44.000** (z −23.600 … +20.400; the body frame and travel give the range), publishes
 `atrium.car.height` = (z + 23.600) ÷ 44.000.
 
 | Stop | Car floor z | Fraction | What |
@@ -420,7 +420,7 @@ irises they form one coupling group; Site binds the channels across the seams.
 | `atrium.call` | "Call the car" (the car isn't here or coming) | collar iris open 4.0 s → move `atrium` (≈ 7.6 s) → car and landing leaves open 1.5 s: ≈ 13 s |
 | (automatic) | home: open at the Atrium, nobody within r 3.500 (or off the floor) for 12 s | leaves shut 1.5 s → move `neck` → collar iris shut 4.0 s |
 | `atrium.car.panel` at `atrium` | "Down to the Cube" (`atrium.down` mated) | leaves shut → `cube.up.closure` → 1 (4.0 s, while descending; the car waits at −7.750 if not yet open) → move `clamp` → clamp (→ 0.378, 2.5 s) → move `cube` on the mast (≈ 14.8 s) → `atrium.car.light` → 0.03 (2.5 s): ≈ 25 s |
-| `atrium.car.panel` at `atrium` | "Up to the Sphere" (`atrium.up` mated; after the Cube this visit, or at once if the Cube is absent) | leaves shut → move `neck` → collar iris shut 4.0 s → `sphere.neck.closure` → 1 (4.0 s) → `sphere.platform.closure` → 1 (while rising) → move `sphere` (≈ 10 s) → car leaves open: ≈ 27 s |
+| `atrium.car.panel` at `atrium` | "Up to the Sphere" (requires `atrium.up` mated) | leaves shut → move `neck` → collar iris shut 4.0 s → `sphere.neck.closure` → 1 (4.0 s) → `sphere.platform.closure` → 1 (while rising) → move `sphere` (≈ 10 s) → car leaves open: ≈ 27 s |
 | `atrium.car.panel` at `cube` | "Up to the Atrium" / "Up to the Sphere" (the light is back; no work performs) | light → 1 (2.5 s) → move `clamp` → release (→ 1, 2.5 s) → move `atrium` (leaves open) or on to `neck` and the airlock as above; `cube.up.closure` → 0 behind the car once above −7.450 |
 | `atrium.car.panel` at `sphere` | "Down to the Atrium" (leaves open) | car leaves shut → move `neck` → `sphere.neck.closure` → 0 → collar iris open → move `atrium` → leaves open |
 | `sphere.call` (the Sphere's) | "Call the car" on the platform | the Sphere's neck and platform irises open → move `sphere` → car leaves open |
@@ -612,6 +612,7 @@ closure-at-declared-depth rule.
 - **Unmated states** are part of the design (§2, §6): no well, no ride that way, the iris shut.
 
 **Departures from as-built** (for the owner's review):
+- **No memory of the visit** (first pass): "Up to the Sphere" from the Atrium no longer waits for a visit to the Cube; rides are gated only by mated ports and channels (`requires`). The Cube rides require `cube.performance.active` ≤ 0, which the Cube publishes.
 - **Stage model:** the ribs stand 5 mm clear of stone and glass (as built tucked 30 mm in); the canopy's glass lies on its
   grid at R 14.024 (as built at R 14.000 with the grid 5 cm under it, unsupported); the wash and the order's root moved out
   to 14.080 and 14.074 (as built through the outer pane); the entablature notched round the fins and the coping band
