@@ -370,10 +370,9 @@ namespace Musee::Atrium::Plan
 	/** The stele's Wall: its glass's west face at its north end, on the floor. */
 	inline constexpr double SteleWestX = -3.840;
 	inline constexpr double SteleNorthY = -2.650;
-	/** The eleven bays A-K, centred on bearings 300° to 240° clockwise, each an arc of 7.030 on the base's inner face. */
+	/** The eleven bays A-K, centred on bearings 300° to 240° clockwise, each between its ribs' side faces on the base's inner face. */
 	inline constexpr int32 Bays = 11;
 	inline constexpr double FirstBayBearing = 300.0;
-	inline constexpr double BayArc = 7.030;
 
 	// ---- §3.7 the stele ------------------------------------------------------------------------------------------------------
 	inline constexpr double SteleGlass[2][3] = {{-3.840, -2.650, 0.060}, {-3.780, -1.150, 2.200}};

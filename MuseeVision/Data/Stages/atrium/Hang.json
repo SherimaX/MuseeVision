@@ -148,16 +148,6 @@
       "support": "canvas",
       "frame": "atrium.frame.gilt",
       "care": "oil-and-tempera",
-      "centre": [
-        -3.885,
-        -1.9,
-        1.38
-      ],
-      "frameOuter": [
-        1.036,
-        0.852
-      ],
-      "frameMoulding": 0.06,
       "note": "Oil on canvas, 73.7 x 92.1 cm (MoMA; the FutureAtrium board and assets/paintings/CREDITS.md:75; collection.json has no size). True size on a keyed pine stretcher, the back open to the glass (the unbleached linen and stretcher show through the stele). Slim gilt frame, the Salon's profile at W 0.060, outer 1.036 x 0.852; its back bears on the stele's west face through clear pads; canvas face x -3.885, 45 mm proud of the glass. Centre 1.380 as built (Elan.swift:32). The sign for the elevator: 'this car goes up to the stars' (collection.json notes)."
     }
   ]

@@ -152,13 +152,13 @@ namespace Musee::Atrium
 			Anchor(Out, Key(TEXT("stele")), TEXT("Wall"), FrameOfAxes(FVector(Plan::SteleWestX, Plan::SteleNorthY, 0.0), FVector(0.0, 1.0, 0.0),
 				FVector(-1.0, 0.0, 0.0)));
 
-			// The bays A-K, each starting at its left rib's side face: half its arc before its centre bearing.
-			const double HalfArc = FMath::RadiansToDegrees(0.5 * Plan::BayArc / Plan::BaseInner);
+			// The bays A-K, each starting at its left rib's side face on the base's inner face (the sheet's arc of 7.030 between them).
+			const double SideFace = HalfAngle(Plan::RibHalf, Plan::BaseInner);
 			for (int32 Bay = 0; Bay < Plan::Bays; ++Bay)
 			{
 				const double Centre = FMath::Fmod(Plan::FirstBayBearing + Plan::BayStep * Bay, 360.0);
 				const FString Local = FString::Printf(TEXT("bay.%c"), TCHAR('a' + Bay));
-				Anchor(Out, Key(*Local), TEXT("Wall"), OnInnerFace(Centre - HalfArc));
+				Anchor(Out, Key(*Local), TEXT("Wall"), OnInnerFace(Centre - 0.5 * Plan::BayStep + SideFace));
 			}
 		}
 

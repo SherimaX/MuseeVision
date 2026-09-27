@@ -612,6 +612,10 @@ closure-at-declared-depth rule.
 - **Unmated states** are part of the design (§2, §6): no well, no ride that way, the iris shut.
 
 **Departures from as-built** (for the owner's review):
+- **Schedule corrected to the contract (ST-ATRIUM):** Hang.json's entry for *The Starry Night* no longer carries `centre`,
+  `frameOuter` and `frameMoulding`, which the stage contract's Hang fields do not name (Art's reader refuses them). The
+  work is placed by `anchor`, `along` 0.290 and `height` 1.012 as §8 says; its centre, outer frame and moulding width stay
+  in the entry's note.
 - **No memory of the visit** (first pass): "Up to the Sphere" from the Atrium no longer waits for a visit to the Cube; rides are gated only by mated ports and channels (`requires`). The Cube rides require `cube.performance.active` ≤ 0, which the Cube publishes.
 - **Stage model:** the ribs stand 5 mm clear of stone and glass (as built tucked 30 mm in); the canopy's glass lies on its
   grid at R 14.024 (as built at R 14.000 with the grid 5 cm under it, unsupported); the wash and the order's root moved out

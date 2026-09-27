@@ -26,6 +26,9 @@ namespace Musee::Atrium::Tests
 		/** The sheet's numbers are given to the millimetre. */
 		constexpr double Millimetre = 0.001;
 
+		/** Half the thousandth of a degree the schedules give their angles to. */
+		constexpr double ScheduleHalfDegree = 0.0005;
+
 		FSiteDescription Described()
 		{
 			FSiteDescription Description;
@@ -162,12 +165,14 @@ namespace Musee::Atrium::Tests
 			{
 				continue;
 			}
-			// The schedule's angle is read as a float, good to a micrometre on the wall.
+			// The schedule gives its angle to a thousandth of a degree, so to half of one: 0.12 mm on the base's inner face.
+			const double Given = Wall.Path.Ellipse[0] * FMath::DegreesToRadians(ScheduleHalfDegree);
 			const double From = FMath::DegreesToRadians(Wall.Path.From_Deg);
 			const FVector Start(Wall.Path.Ellipse[0] * FMath::Cos(From), Wall.Path.Ellipse[1] * FMath::Sin(From), 0.0);
-			TestTrue(*FString::Printf(TEXT("%s starts where its path does"), *Wall.Anchor.ToString()), Anchor->Frame.OriginMeters.Equals(Start, 1e-5));
+			TestTrue(*FString::Printf(TEXT("%s starts where its path does"), *Wall.Anchor.ToString()),
+				Anchor->Frame.OriginMeters.Equals(Start, Given));
 			const FVector In = Anchor->Frame.DirectionToParent(FVector::RightVector);
-			TestTrue(*FString::Printf(TEXT("%s looks at the axis"), *Wall.Anchor.ToString()), In.Equals(-Start.GetSafeNormal(), 1e-6));
+			TestTrue(*FString::Printf(TEXT("%s looks at the axis"), *Wall.Anchor.ToString()), In.Equals(-Start.GetSafeNormal(), Given / Wall.Path.Ellipse[0]));
 		}
 
 		// Every body and control the mechanisms name. Motion reads the lift's many stops from KIT-2 on; until then its
@@ -258,6 +263,10 @@ namespace Musee::Atrium::Tests
 		const double Springing = Plan::PortalArchCentreZ + FMath::Sqrt(FMath::Square(Plan::PortalArchRadius) - FMath::Square(Plan::PortalJamb));
 		TestEqual(TEXT("the portal's arch springs at 5.221"), Springing, 5.221, 2.0 * Millimetre);
 		TestEqual(TEXT("and crowns at 8.000"), Plan::PortalArchCentreZ + Plan::PortalArchRadius, 8.0, 1e-9);
+
+		// §2: each bay runs 7.030 on the base's inner face between its ribs' side faces.
+		const double Bay = FMath::DegreesToRadians(Plan::BayStep) - 2.0 * FMath::Asin(Plan::RibHalf / Plan::BaseInner);
+		TestEqual(TEXT("a bay is 7.030 between its ribs"), Plan::BaseInner * Bay, 7.03, Millimetre);
 
 		// §3.4, §3.5: the canopy meets the drum at 21.180; the rib's turn runs on tangent into the canopy at (9.057, 11.293).
 		TestEqual(TEXT("the canopy's room face meets the drum at 21.180"),
