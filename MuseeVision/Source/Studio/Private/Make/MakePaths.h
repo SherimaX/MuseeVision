@@ -39,6 +39,15 @@ namespace Musee::Studio
 			return FString::Printf(TEXT("%s/Matter/%s"), *Root, *Instance);
 		}
 
+		/**
+		 * A light profile Studio imports for Light from a maker's photometric file: <Root>/Light/Profiles/<Name>, which for
+		 * the museum's root is where Light finds it (Musee::Light::ProfilePackage).
+		 */
+		FString LightProfile(const FString& Name) const
+		{
+			return FString::Printf(TEXT("%s/Light/Profiles/%s"), *Root, *Name);
+		}
+
 		/** A joint's mesh, drawn by Site in the museum's frame and named joint.<port>.<part>: <Root>/Site/Joints/SM_<Piece>. */
 		FString JointMesh(const FString& Piece) const
 		{
