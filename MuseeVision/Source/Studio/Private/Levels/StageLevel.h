@@ -70,7 +70,8 @@ namespace Musee::Studio
 	/**
 	 * A stage's level: a level without World Partition holding one actor named after the stage. The actor's root is
 	 * the stage's origin; its bodies hang from the root, and every placement is a static mesh component on its body or
-	 * on the root. Once furnished, Dress (when set) lets the systems add their components before the level is saved.
+	 * on the root. Once furnished, and every component's place in the world made current as the level will hold it, Dress
+	 * (when set) lets the systems add their components before the level is saved: a system may ask where a part stands.
 	 */
 	struct FStageLevel
 	{
@@ -87,7 +88,7 @@ namespace Musee::Studio
 	};
 
 	/** The revision of the stage-level writer, part of every stage level's input hash. */
-	inline constexpr int64 StageLevelRevision = 3;
+	inline constexpr int64 StageLevelRevision = 5;
 
 	/** A stage level's input hash: the writer's revision, the stage's name, its bodies, placements, instances, barriers and dependencies. */
 	FString HashOf(const FStageLevel& Stage);

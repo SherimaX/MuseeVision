@@ -24,6 +24,9 @@ namespace
 	const FVector PlinthMeters(2.0, -2.0, 0.0);
 	const FVector CapMeters(2.0, -2.0, PostHeightMeters);
 
+	/** The knob that turns the plinth: on the post's east face, at a hand's height, so it rides the plinth. */
+	const FVector KnobMeters = PlinthMeters + FVector(PostRadiusMeters, 0.0, 0.9);
+
 	/** Two identical studs on the floor, 2 m either side of the room's axis, cast once and placed twice. */
 	const FVector StudMeters[] = {FVector(6.0, -2.0, 0.0), FVector(6.0, 2.0, 0.0)};
 
@@ -86,6 +89,7 @@ void USpecimenRoom::Describe(FSiteDescription& Out) const
 	Post.Body = Plinth;
 	Post.Collision = Musee::Collision::Solid.Profile();
 	Out.Anchors.Add({Plinth, TEXT("Body"), FMuseeFrame(PlinthMeters)});
+	Out.Anchors.Add({FMuseeKey(TEXT("specimen-room.plinth.knob")), TEXT("Use"), FMuseeFrame(KnobMeters)});
 
 	// The cap rides the plinth: its body is declared where it is drawn, on the post's top, and hangs from the plinth's.
 	const FMuseeKey Cap(TEXT("specimen-room.plinth.cap"));

@@ -28,8 +28,9 @@
 /**
  * The stage contract end to end on Studio's specimen room: described, made, its door closed by Site's blind, cast,
  * written as a level with its bodies (one riding another), its tagged pieces (identical ones instanced) and its barrier,
- * and left alone by a second make; placed in a museum level with the arrival and the site's game mode; and joined to the
- * specimen annex, with Site's joint cast into the museum. The Atrium and the Sphere, stacked on one axis, stand apart.
+ * dressed where it stands (the knob's control rides its plinth), and left alone by a second make; placed in a museum
+ * level with the arrival and the site's game mode; and joined to the specimen annex, with Site's joint cast into the
+ * museum. The Atrium and the Sphere, stacked on one axis, stand apart.
  */
 namespace Musee::Studio::Tests
 {
@@ -153,6 +154,10 @@ namespace Musee::Studio::Tests
 		USceneComponent* Cap = Tagged(*Stage, TEXT("specimen-room.plinth.cap"));
 		TestTrue(TEXT("the cap's body rides the plinth's"), Cap && Plinth && Cap->GetAttachParent() == Plinth);
 		TestTrue(TEXT("hung where it is drawn, on the post's top"), Cap && Cap->GetRelativeLocation().Equals(FVector(0.0, 0.0, 100.0), 1e-6));
+		// Dressed where it stands: Motion finds the knob on the post's parts, so its control rides the plinth, at its anchor.
+		USceneComponent* Knob = Tagged(*Stage, TEXT("specimen-room.plinth.knob"));
+		TestTrue(TEXT("the knob's control rides the plinth it turns"), Knob && Plinth && Knob->GetAttachParent() == Plinth);
+		TestTrue(TEXT("at its anchor on the post's face"), Knob && Knob->GetRelativeLocation().Equals(FVector(15.0, 0.0, 90.0), 1e-3));
 		const UInstancedStaticMeshComponent* Studs = Cast<UInstancedStaticMeshComponent>(Tagged(*Stage, TEXT("musee.piece:stud.a")));
 		TestTrue(TEXT("the two identical studs are one instanced component"), Studs && Studs == Tagged(*Stage, TEXT("musee.piece:stud.b")));
 		if (Studs)
@@ -247,9 +252,12 @@ namespace Musee::Studio::Tests
 		Alone.PlanRecord = TestData(TEXT("Site/SitePlan.json"));
 		TestTrue(TEXT("the room is made alone"), MakeStage(*Room, Alone).Succeeded());
 		Mated.Reset();
+		// Each stage reads its own schedules: the annex has none of the room's mechanisms.
+		FStageMakeOptions AnnexOptions = Options;
+		AnnexOptions.ScheduleDir = TestData(TEXT("Stages/specimen-annex"));
 		for (const USiteRoom* Made : {Room, Annex})
 		{
-			const FMakeReport Report = MakeStage(*Made, Options);
+			const FMakeReport Report = MakeStage(*Made, Made == Annex ? AnnexOptions : Options);
 			LogFindings(*this, Report);
 			TestTrue(*FString::Printf(TEXT("%s is made with nothing found wrong"), *Made->StageKey().ToString()), Report.Succeeded());
 		}

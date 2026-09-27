@@ -1,0 +1,7 @@
+{
+  "stage": "specimen-annex",
+  "finishes": [
+    { "surface": "masonry", "material": "stone.travertine-romano", "working": "honed", "history": "stone.pore-soiling", "note": "The annex's wall, as the room's masonry." },
+    { "surface": "floor", "material": "stone.travertine-romano", "working": "honed", "history": "stone.foot-traffic-wear", "note": "" }
+  ]
+}
