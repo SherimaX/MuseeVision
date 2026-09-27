@@ -160,7 +160,7 @@ bool FArtCanvasTest::RunTest(const FString& Parameters)
 	TestEqual(TEXT("A flat canvas's face is its real size"), Tests::AreaSquareMeters(Sunrise.Mesh), 0.63 * 0.48, 1e-6);
 	// The curved face stands 40 mm inside the wall, round the oval's west end, which turns it nearly 2 radians: 80 mm shorter.
 	TestEqual(TEXT("A curved canvas's face is its size, less its offset inside the curve"), Tests::AreaSquareMeters(Willows.Mesh), 2.0 * 17.0, 0.2);
-	const UE::Geometry::FDynamicMeshAttributeSet* Attributes = Willows.Mesh.Attributes();
+	const UE::Geometry::FDynamicMeshAttributeSet* Attributes = Willows.Mesh->Attributes();
 	TestTrue(TEXT("It carries the kernel's layers"), Attributes && Attributes->NumNormalLayers() == 3 && Attributes->NumUVLayers() == 2);
 	// UV0 is metres from the image's top left as the room sees it; its left edge is the far end of the run, which goes north then west.
 	FVector2f Least(TNumericLimits<float>::Max()), Most(TNumericLimits<float>::Lowest());
@@ -172,15 +172,15 @@ bool FArtCanvasTest::RunTest(const FString& Parameters)
 		Most = FVector2f::Max(Most, UV);
 	}
 	TestTrue(TEXT("The image spans the face in metres"), Least.Equals(FVector2f(0.0f, 0.0f), 1e-4f) && Most.Equals(FVector2f(17.0f, 2.0f), 1e-3f));
-	for (const int32 T : Willows.Mesh.TriangleIndicesItr())
+	for (const int32 T : Willows.Mesh->TriangleIndicesItr())
 	{
-		const UE::Geometry::FIndex3i Corners = Willows.Mesh.GetTriangle(T);
+		const UE::Geometry::FIndex3i Corners = Willows.Mesh->GetTriangle(T);
 		const UE::Geometry::FIndex3i UVs = Attributes->GetUVLayer(0)->GetTriangle(T);
 		for (int32 K = 0; K < 3; ++K)
 		{
 			if (Attributes->GetUVLayer(0)->GetElement(UVs[K]).Equals(FVector2f(0.0f, 2.0f), 1e-4f))
 			{
-				LeftBottom = Willows.Frame.PointToParent(Musee::FromEngine(Willows.Mesh.GetVertex(Corners[K])));
+				LeftBottom = Willows.Frame.PointToParent(Musee::FromEngine(Willows.Mesh->GetVertex(Corners[K])));
 			}
 		}
 	}

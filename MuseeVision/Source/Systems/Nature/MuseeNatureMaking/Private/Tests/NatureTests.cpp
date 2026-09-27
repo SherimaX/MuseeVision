@@ -111,7 +111,7 @@ bool FNatureWaterTest::RunTest(const FString& Parameters)
 	TestEqual(TEXT("Its area is the ellipse's, pi a b, within the chord tolerance"), Tests::AreaSquareMeters(Piece.Mesh), UE_DOUBLE_PI * 3.9 * 2.0, 0.01);
 	TestTrue(TEXT("It rides on the basin, at the datum seen from the basin"), Piece.Body == Water.Body && Piece.Frame.OriginMeters.Equals(FVector(0.0, 0.0, 0.38), 1e-9));
 	TestTrue(TEXT("It brings its own material, isn't Nanite and collides with nothing"), Piece.Material == Water.Material && !Piece.bNanite && Piece.Collision.IsNone());
-	const UE::Geometry::FDynamicMeshAttributeSet* Attributes = Piece.Mesh.Attributes();
+	const UE::Geometry::FDynamicMeshAttributeSet* Attributes = Piece.Mesh->Attributes();
 	TestTrue(TEXT("It carries the kernel's layers: normal, tangent and bitangent; UV0 and the piece layout; colours"),
 		Attributes && Attributes->NumNormalLayers() == 3 && Attributes->NumUVLayers() == 2 && Attributes->HasPrimaryColors() && Attributes->HasMaterialID());
 
@@ -184,7 +184,7 @@ bool FNaturePlantingTest::RunTest(const FString& Parameters)
 		TestFalse(FString::Printf(TEXT("%s is named once"), *Piece.Name.ToString()), bAlreadyNamed);
 		TestTrue(FString::Printf(TEXT("%s rides on the basin"), *Piece.Name.ToString()), Piece.Body == FMuseeKey(TEXTVIEW("pond.basin")));
 		TestFalse(FString::Printf(TEXT("%s brings its own material"), *Piece.Name.ToString()), Piece.Material.IsNone());
-		TestTrue(FString::Printf(TEXT("%s has a surface"), *Piece.Name.ToString()), Piece.Mesh.TriangleCount() > 0);
+		TestTrue(FString::Printf(TEXT("%s has a surface"), *Piece.Name.ToString()), Piece.Mesh->TriangleCount() > 0);
 	}
 	for (const TCHAR* Expected : { TEXT("pond.lilies.nymphaea-marliacea-carnea.leaf"), TEXT("pond.lilies.nymphaea-marliacea-albida.leaf"),
 		TEXT("pond.shelf.east.iris-laevigata.leaf"), TEXT("pond.shelf.east.carex-elata.seed"), TEXT("pond.shelf.east.myosotis-scorpioides.flower") })
@@ -196,9 +196,9 @@ bool FNaturePlantingTest::RunTest(const FString& Parameters)
 	{
 		// The pads, from the bed 0.32 m under the water, float inside the water's outline.
 		bool bInside = true;
-		for (const int32 V : Pads->Mesh.VertexIndicesItr())
+		for (const int32 V : Pads->Mesh->VertexIndicesItr())
 		{
-			const FVector P = Musee::FromEngine(Pads->Mesh.GetVertex(V)) + Pads->Frame.OriginMeters - FVector(0.0, 0.0, 0.38);
+			const FVector P = Musee::FromEngine(Pads->Mesh->GetVertex(V)) + Pads->Frame.OriginMeters - FVector(0.0, 0.0, 0.38);
 			bInside &= FMath::Square(P.X / 3.9) + FMath::Square(P.Y / 2.0) <= 1.0;
 		}
 		TestTrue(TEXT("Every pad keeps inside the water"), bInside);
@@ -209,8 +209,8 @@ bool FNaturePlantingTest::RunTest(const FString& Parameters)
 	bool bSame = Again.Num() == Pieces.Num();
 	for (int32 I = 0; bSame && I < Pieces.Num(); ++I)
 	{
-		bSame &= Again[I].Name == Pieces[I].Name && Again[I].Mesh.VertexCount() == Pieces[I].Mesh.VertexCount()
-			&& (Pieces[I].Mesh.VertexCount() == 0 || Again[I].Mesh.GetVertex(0) == Pieces[I].Mesh.GetVertex(0));
+		bSame &= Again[I].Name == Pieces[I].Name && Again[I].Mesh->VertexCount() == Pieces[I].Mesh->VertexCount()
+			&& (Pieces[I].Mesh->VertexCount() == 0 || Again[I].Mesh->GetVertex(0) == Pieces[I].Mesh->GetVertex(0));
 	}
 	TestTrue(TEXT("A second make grows the same planting"), bSame);
 	return true;
