@@ -6,8 +6,10 @@
 #
 # It builds, cooks (always: a stale cook crashes a map whose classes changed), stages, paks and archives with Unreal's
 # BuildCookRun, run through the machine's Unreal lock. The cook takes the museum level and every stage level Studio
-# made; the records under Data/ that the museum reads while it runs are copied beside the game. The VR build cooks and
-# stages into its own folders, so it never touches the desktop build's.
+# made. The records under Data/ that the museum reads while it runs are staged by BuildCookRun itself, as loose non-UFS
+# files at <game>\Data (the Foundation module's runtime dependency), where Musee::Records::DataRoot() finds them; the
+# script only checks they arrived. The VR build cooks and stages into its own folders, so it never touches the desktop
+# build's.
 param(
     [switch] $VR,
     [string] $Engine = "C:\Program Files\Epic Games\UE_5.8",
@@ -42,10 +44,15 @@ $Arguments = "BuildCookRun `"-project=$Project\MuseeVision.uproject`" -noP4 -utf
 & $Lock -Exe "$Engine\Engine\Build\BatchFiles\RunUAT.bat" -Args $Arguments -WaitMinutes $WaitMinutes -RunMinutes $RunMinutes
 if ($LASTEXITCODE -ne 0) { Write-Error "BuildCookRun failed ($LASTEXITCODE)"; exit $LASTEXITCODE }
 
-# The records the museum reads while it runs (the clock's cities, the weather's normals) live beside the game.
+# The records the museum reads while it runs (the clock's cities, the weather's normals) are staged beside the game,
+# every one of them, where the game's data root resolves: <game>\Data, the project folder's Data as in the editor.
 $Game = Get-ChildItem $Out -Directory -Recurse -Filter "MuseeVision" | Where-Object { Test-Path (Join-Path $_.FullName "Content") } | Select-Object -First 1
 if (-not $Game) { Write-Error "No game folder in $Out"; exit 1 }
-Copy-Item (Join-Path $Project "Data") (Join-Path $Game.FullName "Data") -Recurse -Force
+$Source = Join-Path $Project "Data"
+$Staged = Join-Path $Game.FullName "Data"
+$Missing = @(Get-ChildItem $Source -Recurse -File | ForEach-Object { $_.FullName.Substring($Source.Length) } |
+    Where-Object { -not (Test-Path -LiteralPath (Join-Path $Staged $_)) })
+if ($Missing.Count -gt 0) { Write-Error "Data\ isn't staged beside the game: $($Missing.Count) records are missing from $Staged, first $($Missing[0])"; exit 1 }
 
 $Exe = Get-ChildItem $Out -Recurse -Filter "$Target*.exe" | Where-Object { $_.DirectoryName -notmatch 'Binaries' } | Select-Object -First 1
 if (-not $Exe) { Write-Error "No $Target executable in $Out"; exit 1 }

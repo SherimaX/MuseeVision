@@ -39,8 +39,20 @@ namespace Musee
 		/** The metadata key that makes a field required: `UPROPERTY(meta = (MuseeRequired))`. */
 		inline constexpr const TCHAR* RequiredMetadata = TEXT("MuseeRequired");
 
-		/** The folder records live in: `<Project>/Data`, as a full path. */
+		/**
+		 * The folder records live in, `<Project>/Data`, as a full path: DataRootOf this process's executable folder and
+		 * project folder. The editor and a packaged game resolve it the same way.
+		 */
 		[[nodiscard]] MUSEEFOUNDATION_API FString DataRoot();
+
+		/**
+		 * The data root of a process whose executable is in BaseDir and whose project folder is ProjectDir, as the engine
+		 * gives them (FPlatformProcess::BaseDir, FPaths::ProjectDir): ProjectDir/Data made full against BaseDir. The
+		 * editor's project folder is absolute; a packaged game's is relative to its executable (`../../../<Project>/`),
+		 * and packaging stages Data/ there as loose, non-UFS files (the Foundation module's runtime dependency), so the
+		 * game reads the same records at the same place under its project as the editor.
+		 */
+		[[nodiscard]] MUSEEFOUNDATION_API FString DataRootOf(const FString& BaseDir, const FString& ProjectDir);
 
 		/**
 		 * The untyped reader behind ReadRecords and ReadRecord. Reads the records at Path, which names a file or a
