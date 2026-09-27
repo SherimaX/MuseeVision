@@ -15,6 +15,7 @@
 #include "SitePortClass.h"
 #include "SiteRoom.h"
 #include "Stages/MakeFinding.h"
+#include "Stages/PaintLayers.h"
 #include "Stages/StageCast.h"
 #include "Stages/StageFabric.h"
 
@@ -109,6 +110,10 @@ namespace Musee::Studio
 		{
 			FMakeStepTimer Timer(Report, Folder + TEXT(": describe and make"));
 			Fabric = MakeFabric(Room, Options, ScheduleDir, Report.Findings);
+		}
+		{
+			FMakeStepTimer Timer(Report, Folder + TEXT(": paint"));
+			MakePaintLayers(FMuseeStageContext{Stage, ScheduleDir, Fabric.Description.Anchors, nullptr}, Options, Report);
 		}
 		FStageCast Cast;
 		{

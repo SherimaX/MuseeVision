@@ -24,6 +24,21 @@ namespace Musee::Studio
 			return FString::Printf(TEXT("%s/Stages/%s/L_%s"), *Root, *Stage, *Stage);
 		}
 
+		/** A work's image, as a texture: <Root>/Art/T_<Work>. */
+		FString WorkImage(const FString& Work) const
+		{
+			return FString::Printf(TEXT("%s/Art/T_%s"), *Root, *Work);
+		}
+
+		/**
+		 * A material instance Studio makes for Matter: <Root>/Matter/<Instance>, which for the museum's root is where
+		 * Musee::Matter::Resolve finds it (Musee::Matter::InstancePackage).
+		 */
+		FString MatterInstance(const FString& Instance) const
+		{
+			return FString::Printf(TEXT("%s/Matter/%s"), *Root, *Instance);
+		}
+
 		/** The museum's level: <Root>/Site/L_Museum. */
 		FString MuseumLevel() const
 		{

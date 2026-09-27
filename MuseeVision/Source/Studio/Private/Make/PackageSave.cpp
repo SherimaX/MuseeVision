@@ -1,5 +1,6 @@
 #include "Make/PackageSave.h"
 
+#include "AssetRegistry/IAssetRegistry.h"
 #include "Engine/World.h"
 #include "Misc/OutputDeviceError.h"
 #include "Misc/PackageName.h"
@@ -16,6 +17,31 @@ namespace Musee::Studio
 		// A package whose file exists counts as partially loaded until marked; this one replaces that file's content.
 		Package->MarkAsFullyLoaded();
 		return Package;
+	}
+
+	UObject* FindOrCreateMadeAsset(UClass& Class, const FString& PackageName)
+	{
+		const FString AssetName = FPackageName::GetShortName(PackageName);
+		const FString ObjectPath = PackageName + TEXT(".") + AssetName;
+		if (UObject* Loaded = StaticFindObject(&Class, nullptr, *ObjectPath); IsValid(Loaded))
+		{
+			return Loaded;
+		}
+		if (FindPackage(nullptr, *PackageName))
+		{
+			if (UObject* OnDisk = StaticLoadObject(&Class, nullptr, *ObjectPath, nullptr, LOAD_NoWarn | LOAD_Quiet))
+			{
+				return OnDisk;
+			}
+		}
+		UPackage* Package = CreateMadePackage(PackageName);
+		if (UObject* InTheWay = StaticFindObjectFast(nullptr, Package, FName(*AssetName)))
+		{
+			InTheWay->Rename(nullptr, GetTransientPackage(), REN_DontCreateRedirectors | REN_NonTransactional | REN_DoNotDirty);
+		}
+		UObject* Asset = NewObject<UObject>(Package, &Class, FName(*AssetName), RF_Public | RF_Standalone);
+		IAssetRegistry::GetChecked().AssetCreated(Asset);
+		return Asset;
 	}
 
 	bool SaveMadePackage(UObject& Asset, FString& OutWhy)
