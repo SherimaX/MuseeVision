@@ -3,6 +3,7 @@
 #include "Growth/Plant.h"
 #include "Misc/AutomationTest.h"
 #include "Misc/Paths.h"
+#include "MuseeCollision.h"
 #include "MuseeUnits.h"
 #include "NaturePieces.h"
 #include "NaturePlanting.h"
@@ -39,6 +40,7 @@ namespace Musee::NatureMaking::Tests
 			Anchor(TEXT("pond.datum"), TEXT("Water"), FVector(10.0, 0.0, 0.38)),
 			Anchor(TEXT("pond.lilies"), TEXT("Bed"), FVector(10.0, 0.0, 0.06)),
 			Anchor(TEXT("pond.shelf.east"), TEXT("Bed"), FVector(13.45, 0.0, 0.26)),
+			Anchor(TEXT("pond.golden-iris"), TEXT("Bed"), FVector(5.85, 0.0, 0.40)),
 		};
 		return Stage;
 	}
@@ -101,6 +103,8 @@ bool FNatureWaterTest::RunTest(const FString& Parameters)
 	Water.Outline.Ellipse = { 3.9, 2.0 };
 	Water.Depth = 0.32f;
 	Water.Material = TEXT("water.still");
+	Water.Working = TEXT("water.dyed-black");
+	Water.History = TEXT("clean");
 	FFormMadePiece Piece;
 	FString Why;
 	if (!TestTrue(TEXT("The water is made"), MakeWaterPiece(Stage, Water, Piece, Why)))
@@ -111,10 +115,33 @@ bool FNatureWaterTest::RunTest(const FString& Parameters)
 	TestEqual(TEXT("Its area is the ellipse's, pi a b, within the chord tolerance"), Tests::AreaSquareMeters(Piece.Mesh), UE_DOUBLE_PI * 3.9 * 2.0, 0.01);
 	TestTrue(TEXT("It rides on the basin, at the datum seen from the basin"), Piece.Body == Water.Body && Piece.Frame.OriginMeters.Equals(FVector(0.0, 0.0, 0.38), 1e-9));
 	TestTrue(TEXT("It brings its own material, isn't Nanite and collides with nothing"), Piece.Material == Water.Material && !Piece.bNanite && Piece.Collision.IsNone());
+	TestTrue(TEXT("Its material is a full spec"), Piece.Working == Water.Working && Piece.History == Water.History);
 	const UE::Geometry::FDynamicMeshAttributeSet* Attributes = Piece.Mesh->Attributes();
 	TestTrue(TEXT("It carries the kernel's layers: normal, tangent and bitangent; UV0 and the piece layout; colours"),
 		Attributes && Attributes->NumNormalLayers() == 3 && Attributes->NumUVLayers() == 2 && Attributes->HasPrimaryColors() && Attributes->HasMaterialID());
 
+	// A rill of water 2 m by 1 m with a notch cut from one corner: an L of 1.75 m^2.
+	FNatureWater Rill = Water;
+	Rill.Outline.Ellipse.Empty();
+	Rill.Outline.Polygon = { FVector2D(-1.0, -0.5), FVector2D(1.0, -0.5), FVector2D(1.0, 0.0), FVector2D(0.5, 0.0), FVector2D(0.5, 0.5), FVector2D(-1.0, 0.5) };
+	TestEqual(TEXT("A polygon's area is its shoelace sum"), Rill.Outline.Area(), 1.75, 1e-12);
+	TestTrue(TEXT("A polygon holds a point inside it"), Rill.Outline.Contains(FVector2D(0.0, 0.0), 0.2));
+	TestFalse(TEXT("but not one in its notch"), Rill.Outline.Contains(FVector2D(0.75, 0.25), 0.0));
+	TestFalse(TEXT("nor one nearer its edge than the margin"), Rill.Outline.Contains(FVector2D(0.0, 0.4), 0.2));
+	FFormMadePiece Polygon;
+	if (TestTrue(TEXT("A polygon of water is made"), MakeWaterPiece(Stage, Rill, Polygon, Why)))
+	{
+		TestEqual(TEXT("Its surface is the polygon's"), Tests::AreaSquareMeters(Polygon.Mesh), 1.75, 1e-6);
+		TestTrue(TEXT("and it is the water's piece"), Polygon.Name == Piece.Name && Polygon.Material == Water.Material && Polygon.Frame.OriginMeters.Equals(Piece.Frame.OriginMeters));
+	}
+	else
+	{
+		AddError(Why);
+	}
+
+	Water.History = NAME_None;
+	TestFalse(TEXT("Water without its history is refused"), MakeWaterPiece(Stage, Water, Piece, Why));
+	Water.History = TEXT("clean");
 	Water.Anchor = FMuseeKey(TEXTVIEW("pond.lilies"));
 	TestFalse(TEXT("A datum that isn't a Water anchor is refused"), MakeWaterPiece(Stage, Water, Piece, Why));
 	return true;
@@ -186,6 +213,23 @@ bool FNaturePlantingTest::RunTest(const FString& Parameters)
 		TestFalse(FString::Printf(TEXT("%s brings its own material"), *Piece.Name.ToString()), Piece.Material.IsNone());
 		TestTrue(FString::Printf(TEXT("%s has a surface"), *Piece.Name.ToString()), Piece.Mesh->TriangleCount() > 0);
 	}
+	for (const FFormMadePiece& Piece : Pieces)
+	{
+		const bool bCast = Piece.Name.ToString().StartsWith(TEXT("pond.golden-iris."));
+		const bool bWater = Piece.Name == TEXT("pond.water.surface");
+		if (bCast)
+		{
+			TestTrue(FString::Printf(TEXT("%s is cast in gilt bronze, and solid"), *Piece.Name.ToString()), Piece.Material == TEXT("bronze.cusn10")
+				&& Piece.Working == TEXT("gilt") && Piece.History == TEXT("handled") && Piece.Collision == Musee::Collision::Solid.Profile());
+		}
+		else if (!bWater)
+		{
+			TestTrue(FString::Printf(TEXT("%s is living tissue, as the bed works and ages it"), *Piece.Name.ToString()), Piece.Working == TEXT("living")
+				&& Piece.History == TEXT("in-season") && Piece.Collision.IsNone() && Piece.Material.ToString().StartsWith(TEXT("living.")));
+		}
+	}
+	TestTrue(TEXT("The golden iris grows the iris's leaves and flowers"), Names.Contains(TEXT("pond.golden-iris.iris-laevigata.leaf"))
+		&& Names.Contains(TEXT("pond.golden-iris.iris-laevigata.flower")));
 	for (const TCHAR* Expected : { TEXT("pond.lilies.nymphaea-marliacea-carnea.leaf"), TEXT("pond.lilies.nymphaea-marliacea-albida.leaf"),
 		TEXT("pond.shelf.east.iris-laevigata.leaf"), TEXT("pond.shelf.east.carex-elata.seed"), TEXT("pond.shelf.east.myosotis-scorpioides.flower") })
 	{

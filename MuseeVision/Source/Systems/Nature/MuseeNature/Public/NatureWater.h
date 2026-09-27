@@ -9,7 +9,8 @@
 /**
  * A body of water a stage holds, as its planting plan (Planting.json) gives it: the Water anchor at the level of its
  * surface, the body that carries it (a basin that lifts), its plan outline, its depth, the freeboard between the
- * surface and the rim that holds it, and the palette key of its water (`water.still`).
+ * surface and the rim that holds it, and its water as a full material spec: the palette key, working and history
+ * (`water.still`, `water.dyed-black`, `clean`).
  */
 USTRUCT()
 struct MUSEENATURE_API FNatureWater
@@ -40,6 +41,13 @@ struct MUSEENATURE_API FNatureWater
 	/** The palette key of the water. */
 	UPROPERTY(meta = (MuseeRequired))
 	FName Material;
+
+	/** The working (a dye, a clarity) and history the water is resolved with. */
+	UPROPERTY()
+	FName Working;
+
+	UPROPERTY()
+	FName History;
 
 	UPROPERTY()
 	FString Note;
