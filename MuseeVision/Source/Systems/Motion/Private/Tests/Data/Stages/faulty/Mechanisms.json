@@ -1,0 +1,15 @@
+{
+  "stage": "faulty",
+  "mechanisms": [
+    {
+      "key": "faulty.lift", "joint": "helical", "body": "faulty.basin", "axis": [0, 0], "travel": 0,
+      "time": 5.0, "profile": "bounce",
+      "open":  [ { "channel": "faulty.rim", "move": "open", "to": 2.0 } ],
+      "guard": "maybe"
+    },
+    {
+      "key": "faulty.missing", "joint": "prismatic", "body": "faulty.nowhere", "axis": [0, 0, 1], "travel": 1,
+      "time": 1.0, "profile": "linear"
+    }
+  ]
+}
