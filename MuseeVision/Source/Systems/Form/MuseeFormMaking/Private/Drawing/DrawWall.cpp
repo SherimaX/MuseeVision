@@ -32,6 +32,17 @@ namespace Musee::Form::Drawing
 		 */
 		constexpr double FeatherMeters = 10.0 * WeldToleranceMeters;
 
+		/**
+		 * The normal of a quad from two of its edges: each edge's direction first, normalised at the kernel's step (a strip
+		 * a tenth of a millimetre wide, where a curved face's chord lengths and a drawing's arc lengths part, has one), then
+		 * their cross, zero only where the edges run parallel. Crossing the edges themselves would square their lengths
+		 * against the engine's tolerance and lose any strip under a tenth of a millimetre.
+		 */
+		FVector QuadNormal(const FVector& EdgeA, const FVector& EdgeB)
+		{
+			return FVector::CrossProduct(EdgeA.GetSafeNormal(StepSquaredMeters), EdgeB.GetSafeNormal(StepSquaredMeters)).GetSafeNormal();
+		}
+
 		/** The value of a piecewise-linear function at X, from its knots (X ascending), held level beyond them. */
 		double Interpolate(TConstArrayView<double> Xs, TConstArrayView<double> Ys, double X)
 		{
@@ -484,7 +495,7 @@ namespace Musee::Form::Drawing
 			/** The normal of a surface standing straight across the wall at a station, turned to face Toward. */
 			FVector AcrossNormal(int32 Station, const FVector& Toward) const
 			{
-				const FVector Normal = FVector::CrossProduct(FVector::UpVector, Frame(Station).AxisA).GetSafeNormal();
+				const FVector Normal = QuadNormal(FVector::UpVector, Frame(Station).AxisA);
 				if (Normal.IsNearlyZero())
 				{
 					return Toward;
@@ -586,9 +597,9 @@ namespace Musee::Form::Drawing
 			const FVector A0 = SetOut.PointAt(Left, HL, 0.0);
 			const FVector Along = SetOut.PointAt(Right, HR, 0.0) - A0;
 			const FVector Across = SetOut.PointAt(Left, HL, SetOut.Depth) - A0;
-			const FVector2D Down = FVector2D(HR - HL, -(SetOut.Frame(Right).U - SetOut.Frame(Left).U)).GetSafeNormal();
-			const FVector Toward = (Along.GetSafeNormal2D() * Down.X + FVector::UpVector * Down.Y).GetSafeNormal();
-			const FVector Normal = FVector::CrossProduct(Along, Across).GetSafeNormal();
+			const FVector2D Down = FVector2D(HR - HL, -(SetOut.Frame(Right).U - SetOut.Frame(Left).U)).GetSafeNormal(StepSquaredMeters);
+			const FVector Toward = (Along.GetSafeNormal2D(StepSquaredMeters) * Down.X + FVector::UpVector * Down.Y).GetSafeNormal();
+			const FVector Normal = QuadNormal(Along, Across);
 			if (Normal.IsNearlyZero())
 			{
 				return Toward;
@@ -602,7 +613,7 @@ namespace Musee::Form::Drawing
 			const FVector A0 = SetOut.PointAt(Left, TL, 0.0);
 			const FVector Along = SetOut.PointAt(Left + 1, TR, 0.0) - A0;
 			const FVector Across = SetOut.PointAt(Left, TL, SetOut.Depth) - A0;
-			const FVector Normal = FVector::CrossProduct(Along, Across).GetSafeNormal();
+			const FVector Normal = QuadNormal(Along, Across);
 			if (Normal.IsNearlyZero())
 			{
 				return FVector::UpVector;

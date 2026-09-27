@@ -311,6 +311,18 @@ namespace Musee::Form::Tests
 			LandClosed(*this, TEXT("a wall with a lunette over its door"), StackedPieces[0], 0);
 		}
 
+		// A strip a twentieth of a millimetre wide over the door, between two stations of a drawn top: where a curved face's
+		// chord lengths and a drawing's arc lengths part (the Hall of Light's east lining, 0.1 mm at its axis). Its soffit and
+		// top still face their sides, and the wall is made.
+		FFormWall Sliver = Stacked;
+		Sliver.Openings = {Door};
+		Sliver.Top = FFormProfile::Polyline({FVector2D(0.0, 4.0), FVector2D(5.0, 4.2), FVector2D(5.0 + 5.0e-5, 4.2), FVector2D(10.0, 4.0)}, false);
+		const TArray<FFormMadePiece> Slivers = LandMake(*this, FFormDrawing::Of(TEXT("lining"), TEXT("lining"), Sliver));
+		if (TestEqual(TEXT("a wall with a strip 0.05 mm wide over its door is one piece"), Slivers.Num(), 1))
+		{
+			LandClosed(*this, TEXT("a wall with a strip 0.05 mm wide over its door"), Slivers[0], 2);
+		}
+
 		// A lining whose top follows a vault's arc: R 5.42 about (5.0, 2.20), from its springings at 4.1 to its crown.
 		const double Radius = 5.42;
 		const double Half = 5.0;
