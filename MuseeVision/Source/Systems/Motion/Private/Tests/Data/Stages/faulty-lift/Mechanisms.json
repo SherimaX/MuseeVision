@@ -1,0 +1,20 @@
+{
+  "$sources": "A test stage: a lift whose many-stop spec breaks each of the contract's rules once.",
+  "stage": "faulty-lift",
+  "mechanisms": [
+    {
+      "key": "faulty-lift.car", "joint": "prismatic", "body": "faulty-lift.car", "axis": [0, 0, 1], "travel": 10.0,
+      "time": 5.0,
+      "drive": { "speed": 1.0, "accel": 0.5, "jerk": 1.0, "zones": [ { "from": 0.6, "to": 0.4, "speed": 1.0, "accel": 0.5 } ] },
+      "stops": [ { "stop": "open", "at": 0.5 }, { "stop": "hall", "at": 0.2, "z": 2.0 }, { "stop": "hall", "at": 1.5 } ],
+      "drawn": "hall", "home": "attic",
+      "open": [ { "move": "cellar" } ],
+      "rides": [ {
+        "use": "faulty-lift.panel", "at": "roof",
+        "verb": { "key": "faulty-lift.car.up", "source": "Up" },
+        "requires": { "channels": [ { "channel": "faulty-lift.doors", "atLeast": 0.8, "atMost": 0.2 } ] },
+        "sequence": [ { "move": "hall" } ]
+      } ]
+    }
+  ]
+}

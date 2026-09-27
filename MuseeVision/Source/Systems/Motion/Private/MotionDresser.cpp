@@ -6,7 +6,6 @@
 #include "Misc/Paths.h"
 #include "MotionControl.h"
 #include "MotionMechanism.h"
-#include "MotionProfile.h"
 #include "MotionSchedule.h"
 #include "MuseeRecords.h"
 #include "MuseeUnits.h"
@@ -63,47 +62,57 @@ namespace Musee::Motion
 			return false;
 		}
 
-		TArray<FString> StepFaults(const TArray<FMotionStep>& Steps, const TCHAR* Sequence)
+		/** Whether a key names a place on another stage: its outermost scope is not this stage's (`sphere.call` on the Atrium). */
+		bool IsAcrossSeam(const FMuseeStageContext& Stage, const FMuseeKey& Key)
 		{
-			TArray<FString> Out;
-			for (int32 Index = 0; Index < Steps.Num(); ++Index)
-			{
-				const FMotionStep& Step = Steps[Index];
-				const FString Where = FString::Printf(TEXT("%s step %d"), Sequence, Index);
-				if (Step.IsMove() == !Step.Channel.IsNone())
-				{
-					Out.Add(Where + TEXT(" must either move or ramp a channel"));
-				}
-				if (Step.IsMove() && Step.Move != UMotionMechanism::Open && Step.Move != UMotionMechanism::Closed)
-				{
-					Out.Add(FString::Printf(TEXT("%s moves to '%s', which is neither open nor closed"), *Where, *Step.Move.ToString()));
-				}
-				if (Step.Time < 0.0f || Step.To < 0.0f || Step.To > 1.0f)
-				{
-					Out.Add(Where + TEXT(" needs a time of zero or more and a value from 0 to 1"));
-				}
-			}
-			return Out;
+			const TArray<FString> Scopes = Key.Segments();
+			const TArray<FString> StageScopes = Stage.Stage.Segments();
+			return !Scopes.IsEmpty() && !StageScopes.IsEmpty() && Scopes[0] != StageScopes[0];
 		}
 
-		void PlaceControl(const FMuseeStageContext& Stage, const FMotionMechanismSpec& Spec, UMotionMechanism& Mechanism, TArray<FMuseeFinding>& OutFindings)
+		/**
+		 * Places the control at a Use anchor: on the body when the anchor lies on it, otherwise on the stage. A ride
+		 * offered at a Use anchor of another stage (a landing call across a seam) is Site's to bind, so it is no finding.
+		 */
+		void PlaceControl(const FMuseeStageContext& Stage, const FMuseeKey& UseKey, UMotionMechanism& Mechanism, TArray<FMuseeFinding>& OutFindings)
 		{
-			const FMuseeStageAnchor* Anchor = Stage.FindAnchor(Spec.Control, UseKind);
+			const FMuseeStageAnchor* Anchor = Stage.FindAnchor(UseKey, UseKind);
 			if (!Anchor)
 			{
-				OutFindings.Add(Finding(Stage, FString::Printf(TEXT("Mechanism %s: its control %s is not a Use anchor of the stage."), *Spec.Key.ToString(), *Spec.Control.ToString())));
+				if (!IsAcrossSeam(Stage, UseKey))
+				{
+					OutFindings.Add(Finding(Stage, FString::Printf(TEXT("Mechanism %s: its control %s is not a Use anchor of the stage."), *Mechanism.Spec().Key.ToString(), *UseKey.ToString())));
+				}
 				return;
 			}
 			AActor& Actor = *Stage.StageActor;
 			const FTransform Where = ToEngine(Anchor->Frame) * Actor.GetActorTransform();
 			USceneComponent* Parent = IsOnBody(*Mechanism.Body(), Where.GetLocation()) ? Mechanism.Body() : Actor.GetRootComponent();
-			UMotionControl* Control = NewObject<UMotionControl>(&Actor, ObjectName(TEXT("Control"), Spec.Control));
+			UMotionControl* Control = NewObject<UMotionControl>(&Actor, ObjectName(TEXT("Control"), UseKey));
 			Control->SetupAttachment(Parent);
 			Control->SetRelativeTransform(Where.GetRelativeTransform(Parent->GetComponentTransform()));
-			Control->ComponentTags.Add(Spec.Control.ToName());
-			Control->Bind(&Mechanism);
+			Control->ComponentTags.Add(UseKey.ToName());
+			Control->Bind(&Mechanism, UseKey);
 			Actor.AddInstanceComponent(Control);
 			Control->RegisterComponent();
+		}
+
+		/** One control at each Use anchor the mechanism is worked from: its own control's and its rides'. */
+		void PlaceControls(const FMuseeStageContext& Stage, const FMotionMechanismSpec& Spec, UMotionMechanism& Mechanism, TArray<FMuseeFinding>& OutFindings)
+		{
+			TArray<FMuseeKey> Uses;
+			if (!Spec.Control.IsNone())
+			{
+				Uses.Add(Spec.Control);
+			}
+			for (const FMotionRide& Ride : Spec.Rides)
+			{
+				Uses.AddUnique(Ride.Use);
+			}
+			for (const FMuseeKey& UseKey : Uses)
+			{
+				PlaceControl(Stage, UseKey, Mechanism, OutFindings);
+			}
 		}
 
 		void PlaceMechanism(const FMuseeStageContext& Stage, const FMotionMechanismSpec& Spec, TArray<FMuseeFinding>& OutFindings)
@@ -121,51 +130,8 @@ namespace Musee::Motion
 			Actor.AddInstanceComponent(Mechanism);
 			Mechanism->RegisterComponent();
 			Mechanism->Configure(Spec, Body);
-			if (!Spec.Control.IsNone())
-			{
-				PlaceControl(Stage, Spec, *Mechanism, OutFindings);
-			}
+			PlaceControls(Stage, Spec, *Mechanism, OutFindings);
 		}
-	}
-
-	TArray<FString> Faults(const FMotionMechanismSpec& Spec)
-	{
-		TArray<FString> Out;
-		if (Spec.Joint != TEXT("prismatic") && Spec.Joint != TEXT("revolute"))
-		{
-			Out.Add(FString::Printf(TEXT("its joint '%s' is neither prismatic nor revolute"), *Spec.Joint.ToString()));
-		}
-		if (Spec.Axis.Num() != 3 || FVector(Spec.Axis[0], Spec.Axis[1], Spec.Axis[2]).IsNearlyZero())
-		{
-			Out.Add(TEXT("its axis is not a direction of three numbers"));
-		}
-		if (Spec.Travel <= 0.0f || Spec.Time <= 0.0f)
-		{
-			Out.Add(TEXT("its travel and its time must both be more than zero"));
-		}
-		if (!ParseProfile(Spec.Profile).IsSet())
-		{
-			Out.Add(FString::Printf(TEXT("its profile '%s' is neither linear nor ease-in-out"), *Spec.Profile.ToString()));
-		}
-		if (!Spec.Guard.IsNone() && Spec.Guard != TEXT("none") && Spec.Guard != TEXT("body-in-travel") && Spec.Guard != TEXT("body-in-travel-reverse"))
-		{
-			Out.Add(FString::Printf(TEXT("its guard '%s' is not none, body-in-travel or body-in-travel-reverse"), *Spec.Guard.ToString()));
-		}
-		if (Spec.Clearance < 0.0f)
-		{
-			Out.Add(TEXT("its clearance is negative"));
-		}
-		if (Spec.Follows.IsSet() && (!Spec.Control.IsNone() || !Spec.Open.IsEmpty() || !Spec.Close.IsEmpty()))
-		{
-			Out.Add(TEXT("it follows a channel, so it has no control and no sequences"));
-		}
-		if (Spec.Follows.IsSet() && (Spec.Follows.In.Num() != 2 || Spec.Follows.Out.Num() != 2 || Spec.Follows.In[0] == Spec.Follows.In[1]))
-		{
-			Out.Add(TEXT("it follows a channel with an input range of two different values and an output range of two"));
-		}
-		Out.Append(StepFaults(Spec.Open, TEXT("open")));
-		Out.Append(StepFaults(Spec.Close, TEXT("close")));
-		return Out;
 	}
 
 	void DressMechanisms(const FMuseeStageContext& Stage, TArray<FMuseeFinding>& OutFindings)
