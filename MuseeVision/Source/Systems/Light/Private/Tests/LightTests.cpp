@@ -51,7 +51,9 @@ namespace Musee::Light::Tests
 	IMPLEMENT_SIMPLE_AUTOMATION_TEST(FLightCatalogueTest, "Musee.Light.Catalogue", Flags)
 	bool FLightCatalogueTest::RunTest(const FString& Parameters)
 	{
-		TestEqual(TEXT("Twenty-nine luminaires in the catalogue"), LuminaireKeys().Num(), 29);
+		TestEqual(TEXT("Twenty-eight luminaires in the catalogue"), LuminaireKeys().Num(), 28);
+		TestNull(TEXT("The Stacklite, whose maker publishes no file for its variant, is retired"),
+			FindLuminaire(FMuseeKey(TEXTVIEW("track-wallwasher.4000k"))));
 		const FLightLuminaire* Spot = FindLuminaire(FMuseeKey(TEXTVIEW("track-spot.3000k.20deg")));
 		if (TestNotNull(TEXT("The 20 degree spot"), Spot))
 		{

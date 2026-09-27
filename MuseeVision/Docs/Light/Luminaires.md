@@ -46,7 +46,7 @@ stand on; Light lights one lamp in each globe and shares the fitting's flux equa
 
 ## The catalogue
 
-Twenty-nine luminaires from ERCO, iGuzzini, Zumtobel, Edison Price Lighting, Hogarth Lighting, Lumistrips, FX
+Twenty-eight luminaires from ERCO, iGuzzini, Zumtobel, Hogarth Lighting, Lumistrips, FX
 Luminaire, Segula, Ledstore, LEDVANCE, Spanlite, Color Kinetics and Light Field Lab. Every track spotlight
 and wallwasher has a colour rendering index of 95 or more, at both 3000 K and 4000 K. The flux is the luminaire's own
 output (the light that leaves the housing), not the LED's.
@@ -61,7 +61,6 @@ output (the light that leaves the housing), not the LED's.
 | `track-spot.4000k.20deg` | iGuzzini Palco ø 102 mm | QG51 | 1981.26 lm | 20° | 4000 K | 97 | 28.5 W | gallery | complete |
 | `track-spot.4000k.38deg` | iGuzzini Palco ø 102 mm | QG52 | 1921.59 lm | 38° | 4000 K | 97 | 28.5 W | gallery | complete |
 | `track-wallwasher.3000k` | iGuzzini Sipario LV ø 73 mm | 362G | 999 lm | wall wash, its IES file 362G_O25F | 3000 K | 97 | 16.1 W | gallery | complete |
-| `track-wallwasher.4000k` | Edison Price Stacklite | STK-CZE-2000L-40K-XIA-95+-DIMTR-120V-WH | 2000 lm, nominal | wall wash | 4000 K | ≥ 95 | not published | gallery | incomplete |
 | `track-framing.3000k.small` | iGuzzini Palco framer ø 99 mm | Q745 | 552 lm | flaps open: the beam its flux and peak fix | 3000 K | 97 | 24.2 W | gallery | complete |
 | `track-framing.3000k.medium` | iGuzzini Palco framer ø 115 mm | P252 | 896 lm | flaps open: the beam its flux and peak fix | 3000 K | 97 | 35 W | gallery | complete |
 | `picture-light.2700k` | Hogarth Classic Picture Light, antique bronze | #100 | not published | shuttered hood | 2700 K | 97 | not published | gallery | incomplete |
@@ -132,8 +131,9 @@ The unit of every number is in its field name, the way the museum writes units e
 Only a photometric file describes a light an asymmetric lens shapes, so a track wallwasher is lit from its maker's
 file and from nothing else. No file awaits the owner's approval: the 362G's is in the repository
 (`Data/Light/Photometry/iguzzini-362G_O25F.ies`, LUMCAT 362G_O25F, test 887A0000.RV1, issued 03/07/2025, obtained
-2026-09-27). The Stacklite's published archive holds another variant (STK-CZE-L31A-30K, 3000 K), so there is no file
-to approve for `track-wallwasher.4000k`, and no stage uses it.
+2026-09-27). `track-wallwasher.4000k`, the Edison Price Stacklite STK-CZE 2000L 40K, is retired: its maker's published
+archive holds only another variant (STK-CZE-L31A-30K, 3000 K, 1,586 lm), so no measured file describes it, and no
+stage uses it.
 
 - **The flux.** Light reads the LM-63 file and integrates its candela table over the sphere, with the symmetry the
   file declares: the 362G's Type C table (181 vertical angles, 0° to 180°, and 37 horizontal, 0° to 180°) carries
