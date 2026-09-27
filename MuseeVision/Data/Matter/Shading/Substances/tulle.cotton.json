@@ -1,0 +1,111 @@
+{
+  "schema": "musee.matter.shading.substance/1",
+  "key": "tulle.cotton",
+  "name": "Cotton tulle, aged ivory",
+  "family": "accent",
+  "accentOf": "bronze",
+  "record": "Palette.json",
+  "master": "cloth",
+  "dielectric": {
+    "diffuseAlbedo": {
+      "value": [
+        0.52,
+        0.49,
+        0.42
+      ],
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "unit": "1",
+      "grade": "design",
+      "source": "Palette.json accent.cotton-tulle: an undyed cotton net aged to ivory, as the bronzes' skirts are seen; no measured reflectance was read",
+      "note": "Lighter than the silks, darker than new white cotton: a century's yellowing and dust."
+    },
+    "refractiveIndex": {
+      "value": 1.55,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "cellulose, the fibre's substance: about 1.53 across the fibre and 1.58 along it; no document with the values was read here",
+      "note": "The mean of the two, for a cloth whose fibres lie every way."
+    },
+    "porosity": {
+      "value": 0.7,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json accent.cotton-tulle",
+      "note": "A tulle is mostly its net's openings; a first share of void until an aged specimen is measured."
+    },
+    "wettingDepth": {
+      "value": 0.15,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json accent.cotton-tulle",
+      "note": "A single layer of fine net's thickness."
+    }
+  },
+  "structure": {
+    "grain": {
+      "value": 1.0,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json accent.cotton-tulle",
+      "note": "The finest structure the cloth shows: its net's hexagonal mesh, about a millimetre."
+    },
+    "bed": {
+      "value": 40.0,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json accent.cotton-tulle",
+      "note": "The gathers' folds at the waistband, the coarsest unevenness the skirt shows."
+    },
+    "bedAspect": {
+      "value": 6.0,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json accent.cotton-tulle",
+      "note": "Gathers run down the skirt: how much longer than wide."
+    },
+    "hurst": {
+      "value": 0.6,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json accent.cotton-tulle",
+      "note": "A first self-affinity for a net's unevenness, as the museum's silks take."
+    },
+    "toneSpread": {
+      "value": 0.06,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json accent.cotton-tulle",
+      "note": "Uneven yellowing and dust across the layers."
+    },
+    "roughnessSpread": {
+      "value": 0.1,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json accent.cotton-tulle",
+      "note": "A first half-range across the cloth."
+    }
+  },
+  "fibre": {
+    "roughness": {
+      "value": 0.8,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json accent.cotton-tulle",
+      "note": "Spun cotton's twisted staple fibres scatter broadly: far rougher than a filament silk's 0.3."
+    },
+    "sheen": {
+      "value": 0.5,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json accent.cotton-tulle",
+      "note": "A staple yarn's standing fibre ends give a soft rim of sheen; a first weight."
+    },
+    "sheenRoughness": {
+      "value": 0.7,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json accent.cotton-tulle",
+      "note": "A first spread of the sheen."
+    }
+  }
+}

@@ -2068,6 +2068,39 @@
       ]
     },
     {
+      "key": "accent.cotton-tulle",
+      "family": "accent",
+      "accentOf": "bronze",
+      "substance": "tulle.cotton",
+      "realMaterial": "Cotton tulle, a fine hexagonal net, gathered at the waistband into a knee-length dancer's skirt: the real cloth Degas's bronzes wear",
+      "workingsByEra": {
+        "classical": "gathered; aged ivory",
+        "modern": "absent",
+        "future": "absent"
+      },
+      "roles": [
+        "Salon: the skirt of Degas's Little Dancer Aged Fourteen (Art/Casts.json, degas-little-dancer's skirt)"
+      ],
+      "why": "The dancer is bronze dressed in real cloth: the tulle is the one soft thing on the museum's sculpture, and it is what makes the work.",
+      "oldChoice": "",
+      "verdict": "new",
+      "verdictReason": "Named by K5's order: the dancer's skirt is Matter's tulle.",
+      "research": {
+        "records": [
+          "r-matter: Shading/Substances/tulle.cotton.json",
+          "r-matter: Shading/Workings/gathered.json"
+        ],
+        "needed": "A measured reflectance and openness of an aged cotton tulle; the net's transmission (it is shaded as an opaque cloth until then)."
+      },
+      "finishes": [
+        {
+          "working": "gathered",
+          "history": "aged.patina",
+          "note": "Art: cast.degas-little-dancer.skirt"
+        }
+      ]
+    },
+    {
       "key": "accent.silk.old-rose",
       "family": "accent",
       "accentOf": "oak",
