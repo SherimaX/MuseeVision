@@ -1,0 +1,7 @@
+{
+  "stage": "scrolls",
+  "finishes": [
+    { "surface": "scrolls.mount.silk", "material": "accent.silk", "working": "damask.mount", "history": "aged.patina", "note": "The scrolls' mount." },
+    { "surface": "scrolls.mount.knob", "material": "accent.jade", "working": "polished", "history": "handled", "note": "The scrolls' knobs." }
+  ]
+}

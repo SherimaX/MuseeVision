@@ -72,6 +72,15 @@ namespace Musee::Art
 	[[nodiscard]] MUSEEART_API FString FindImage(const FString& Root, const FString& Name);
 
 	/**
+	 * The numbered photographs of a work shown in sections (`<id>-1`, `<id>-2`...: a long handscroll photographed or cut
+	 * in parts), in number order, as full paths; looked for as ReadWork looks for the work's image, under the catalogue's
+	 * own folder, then in the collection. They come from one folder, the most preferred (as FindImage prefers) that holds
+	 * a run of two or more from 1 whose files are distinct: a folder whose numbered files are copies of one file holds no
+	 * sections. Empty when there are none.
+	 */
+	[[nodiscard]] MUSEEART_API TArray<FString> FindSectionImages(const FArtHangEntry& Entry);
+
+	/**
 	 * The palette key of a work's own paint layer, `paint.<work id>`: an instance of Matter's paint master carrying the
 	 * work's image and size. None if the id can't be a key segment.
 	 */

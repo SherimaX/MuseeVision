@@ -1,0 +1,68 @@
+{
+  "schema": "musee.matter.shading.working/1",
+  "key": "planed",
+  "name": "Planed and left bare (timber hidden in a fitting)",
+  "record": "Palette.json",
+  "kind": "face",
+  "roughness": {
+    "value": 0.6,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Workings/planed.json (a planed softwood face, its fibres cut clean and unsealed; no filtered roughness was read)",
+    "note": "Rougher than any finished face: nothing fills the cut tracheids."
+  },
+  "roughnessAcross": {
+    "value": 0.6,
+    "unit": "1",
+    "grade": "derived",
+    "source": "Workings/planed.json (no measured roughness across the grain)",
+    "derivation": "a first value: equal to the roughness along until a measurement parts them"
+  },
+  "haziness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Workings/planed.json",
+    "note": "One specular lobe until a goniometric measurement shows a second."
+  },
+  "textureDepth": {
+    "value": 0.05,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Workings/planed.json (the open tracheids of a softwood, tens of microns across)"
+  },
+  "relief": {
+    "value": 0.05,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Workings/planed.json (the earlywood worn below the latewood)"
+  },
+  "film": {
+    "refractiveIndex": {
+      "value": 1.0,
+      "unit": "1",
+      "grade": "derived",
+      "source": "No finish is laid",
+      "derivation": "no film: the face meets the air"
+    },
+    "cover": {
+      "value": 0.0,
+      "unit": "1",
+      "grade": "derived",
+      "source": "No finish is laid",
+      "derivation": "bare timber: no film covers the face"
+    }
+  },
+  "stain": {
+    "value": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "space": "linear Rec.709 (sRGB primaries), D65 white",
+    "unit": "1",
+    "grade": "derived",
+    "source": "No treatment darkens the wood",
+    "derivation": "unstained: a factor of one"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "$sources": [
+    "The fittings every handscroll's mount (手卷裝裱) shares, whatever its length (its borders, bands, lead, unrolled wrapper and rolled radius are each work's, in its stage's Hang.json). The parts are those of the Palace Museum's and the National Palace Museum's Tang and Song scrolls, many of them remounted in the Qing court with jade knobs, named as R. H. van Gulik, Chinese Pictorial Art as Viewed by the Connoisseur (Rome, 1958), names them; the sizes are first values read from museum photographs of opened scrolls and mounters' practice, and none was measured on the museum's works.",
+    "The stave (天杆): a half-round batten of Chinese fir about 12 mm across, glued under the outer end, which the wrapper is wound round; so the scroll's outer end keeps straight when rolled and tied.",
+    "The roller (軸): a round rod of Chinese fir (杉木: light, straight-grained, stable, and so the mounters' wood for rollers) about 18 mm across, on which the scroll is wound, face in; its knobs (軸頭) about 26 mm across, standing about 20 mm past the scroll's edges, of nephrite on the court's remountings (the knob is each stage's surface, `mount.knob`).",
+    "The wrapper (包首): a silk long enough to go once round the scroll rolled whole and overlap itself by a quarter turn, where its tie (帶) and toggle (別子) close it: 1.25 turns.",
+    "The proportion tolerance: a catalogue's size is rounded to the millimetre on a sheet whose edges wander by millimetres, and a scan is stitched or flattened from a scroll that never lies quite flat; within 3 % the photographs are taken to show the whole sheet, and beyond it they show more or less than it (a trimmed margin, a lost stretch, a strip of the mount), which is a finding. A first value, not a measured spread."
+  ],
+  "$units": {
+    "StaveRadiusMeters": "m",
+    "RollerRadiusMeters": "m",
+    "KnobRadiusMeters": "m",
+    "KnobLengthMeters": "m"
+  },
+  "staveRadiusMeters": 0.006,
+  "rollerRadiusMeters": 0.009,
+  "knobRadiusMeters": 0.013,
+  "knobLengthMeters": 0.02,
+  "wrapperTurns": 1.25,
+  "proportionTolerance": 0.03,
+  "stave": { "palette": "accent.chinese-fir", "working": "planed", "history": "aged.patina" },
+  "roller": { "palette": "accent.chinese-fir", "working": "planed", "history": "aged.patina" }
+}

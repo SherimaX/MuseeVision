@@ -211,6 +211,10 @@ namespace Musee::ArtMaking
 			{
 				MakeHangingScroll(Making, Plan, Canvas, OutPieces, OutFindings);
 			}
+			else if (Entry.Kind == Kinds::Handscroll)
+			{
+				MakeHandscroll(Making, Plan, Canvas, OutPieces, OutFindings);
+			}
 			else if (Entry.Kind == Kinds::Book)
 			{
 				MakeBook(Making, Plan, Canvas, OutPieces, OutFindings);

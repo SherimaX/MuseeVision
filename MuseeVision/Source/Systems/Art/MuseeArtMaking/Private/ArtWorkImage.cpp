@@ -18,6 +18,10 @@ namespace Musee::ArtMaking
 		Texture.SRGB = Image.GetGammaSpace() != EGammaSpace::Linear;
 		Texture.LODGroup = TEXTUREGROUP_World;
 		Texture.MaxTextureSize = WorkImageMaxPixels;
+		// A photograph of a bounded work, never a tile: its edges are clamped, so a face ending at the image's edge (a
+		// handscroll's panel meeting the next) takes no colour from the opposite edge.
+		Texture.AddressX = TA_Clamp;
+		Texture.AddressY = TA_Clamp;
 		return true;
 	}
 }

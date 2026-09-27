@@ -12,15 +12,16 @@ namespace Musee::ArtMaking
 		const double Front = Sheet.FrontMeters;
 		const double Back = Front - T;
 		const double U0 = Sheet.ImageLeftMeters;
+		const double V0 = Sheet.ImageTopMeters;
 		FFormMesh Mesh;
 		// The faces: the image's top-left corner, as seen from the front, is UV0's origin.
 		for (const double Side : { Front, Back })
 		{
 			const FVector Normal(0.0, Side == Front ? 1.0 : -1.0, 0.0);
-			const int32 A = Mesh.AddVertex(FVector(0.0, Side, 0.0), Normal, FVector2D(U0, H));
-			const int32 B = Mesh.AddVertex(FVector(W, Side, 0.0), Normal, FVector2D(U0 + W, H));
-			const int32 C = Mesh.AddVertex(FVector(W, Side, H), Normal, FVector2D(U0 + W, 0.0));
-			const int32 D = Mesh.AddVertex(FVector(0.0, Side, H), Normal, FVector2D(U0, 0.0));
+			const int32 A = Mesh.AddVertex(FVector(0.0, Side, 0.0), Normal, FVector2D(U0, V0 + H));
+			const int32 B = Mesh.AddVertex(FVector(W, Side, 0.0), Normal, FVector2D(U0 + W, V0 + H));
+			const int32 C = Mesh.AddVertex(FVector(W, Side, H), Normal, FVector2D(U0 + W, V0));
+			const int32 D = Mesh.AddVertex(FVector(0.0, Side, H), Normal, FVector2D(U0, V0));
 			Mesh.AddQuad(A, B, C, D);
 		}
 		// The edges: the foot and head, then the two sides.

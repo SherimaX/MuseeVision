@@ -15,10 +15,10 @@ namespace Musee::ArtMaking
 	}
 
 	FFormMadePiece SheetPiece(FName Name, FName Surface, const FLayerFinish& Material, const FMuseeFrame& Frame, const FVector2D& Size, double Thickness,
-		double Front, bool bGlass, double ImageLeftMeters)
+		double Front, bool bGlass, double ImageLeftMeters, double ImageTopMeters)
 	{
 		FFormMadePiece Piece = ArtPiece(Name, Surface, Material, Frame, !bGlass);
-		BuildSheet(FSheetSpec{ Size, Thickness, Front, ImageLeftMeters }, Piece.Mesh);
+		BuildSheet(FSheetSpec{ Size, Thickness, Front, ImageLeftMeters, ImageTopMeters }, Piece.Mesh);
 		return Piece;
 	}
 
@@ -139,6 +139,15 @@ namespace Musee::ArtMaking
 			ScrollFittings.Emplace(ReadRecord<FArtScrollFittings>(FArtScrollFittings::Record));
 		}
 		return ScrollFittings.GetValue();
+	}
+
+	const TValueOrError<FArtHandscrollFittings, FString>& FObjectMaking::Handscrolls()
+	{
+		if (!HandscrollFittings.IsSet())
+		{
+			HandscrollFittings.Emplace(ReadRecord<FArtHandscrollFittings>(FArtHandscrollFittings::Record));
+		}
+		return HandscrollFittings.GetValue();
 	}
 
 	const TValueOrError<FArtPanelConstruction, FString>& FObjectMaking::Panels()

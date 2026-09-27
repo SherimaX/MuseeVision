@@ -3507,6 +3507,70 @@
       ]
     },
     {
+      "key": "accent.jade",
+      "family": "accent",
+      "accentOf": "stone",
+      "substance": "nephrite",
+      "realMaterial": "White nephrite (和田白玉, Hetian, Xinjiang): a felt of fine tremolite fibres, turned and polished",
+      "workingsByEra": {
+        "classical": "turned and polished; worn soft by handling (Chenghuai)",
+        "modern": "absent",
+        "future": "absent"
+      },
+      "roles": [
+        "Chenghuai: the handscrolls' roller knobs (軸頭)"
+      ],
+      "why": "The court's remountings of Tang and Song scrolls end their rollers in jade; a white nephrite, the colour of the old paper and the warm silk, closes the scroll without a new colour.",
+      "oldChoice": "",
+      "verdict": "new",
+      "verdictReason": "Named for the handscrolls' knobs (K8): the jade the mounting's knobs are turned from.",
+      "research": {
+        "records": [
+          "Shading/Substances/nephrite.json"
+        ],
+        "needed": "A measured colour and translucency of Hetian white nephrite; the stone master draws it opaque, and nephrite passes light a few millimetres into its felt."
+      },
+      "finishes": [
+        {
+          "working": "polished",
+          "history": "handled",
+          "note": "Stages: chenghuai.handscroll.knob"
+        }
+      ]
+    },
+    {
+      "key": "accent.chinese-fir",
+      "family": "accent",
+      "accentOf": "oak",
+      "substance": "chinese-fir",
+      "realMaterial": "Chinese fir (杉木, Cunninghamia lanceolata), planed and left bare",
+      "workingsByEra": {
+        "classical": "planed, unfinished (the scrolls' fittings)",
+        "modern": "absent",
+        "future": "absent"
+      },
+      "roles": [
+        "Art: every handscroll's stave (天杆) and roller (軸), Data/Art/Handscroll.json"
+      ],
+      "why": "The mounters' wood for rollers and staves: light, straight-grained and stable, so a scroll rolls true and stays flat; it is left bare, hidden under the wrapper and the wound silk.",
+      "oldChoice": "",
+      "verdict": "new",
+      "verdictReason": "Named for the handscrolls' fittings (K8); the same timber as the garden's lacquered fir (accent.chinese-fir-guangqi), without its lacquer.",
+      "research": {
+        "records": [
+          "Shading/Substances/chinese-fir.json",
+          "Shading/Workings/planed.json"
+        ],
+        "needed": "A measured colour of aged, unfinished fir."
+      },
+      "finishes": [
+        {
+          "working": "planed",
+          "history": "aged.patina",
+          "note": "Art: the handscrolls' staves and rollers (Data/Art/Handscroll.json)"
+        }
+      ]
+    },    {
       "key": "accent.ink-on-silk",
       "family": "accent",
       "accentOf": "white",
@@ -3518,7 +3582,7 @@
         "future": "absent"
       },
       "roles": [
-        "Chenghuai: the three Song hanging scrolls on silk in the chenghuaitang cases"
+        "Chenghuai: the three Song hanging scrolls on silk in the chenghuaitang cases, and the handscrolls on silk in the linchi and shujuan cases"
       ],
       "why": "The works are not chosen by the story but hung in it: a painting on silk brings its own silk, darkened with age, which its photograph carries.",
       "oldChoice": "the old build's per-work image materials",
@@ -3551,7 +3615,7 @@
         "future": "absent"
       },
       "roles": [
-        "Chenghuai: the four Yuan and Ming hanging scrolls on paper in the qingbi and tingyun cases"
+        "Chenghuai: the four Yuan and Ming hanging scrolls on paper in the qingbi and tingyun cases, and the handscrolls on paper in the linchi case"
       ],
       "why": "The works are not chosen by the story but hung in it: a painting on paper brings its own paper, whose tone its photograph carries.",
       "oldChoice": "the old build's per-work image materials",

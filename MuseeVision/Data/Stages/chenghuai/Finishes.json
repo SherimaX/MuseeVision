@@ -394,6 +394,13 @@
       "note": "The hanging scrolls' roller knobs (轴头), turned from a hardwood as the furniture's."
     },
     {
+      "surface": "chenghuai.handscroll.knob",
+      "material": "accent.jade",
+      "working": "polished",
+      "history": "handled",
+      "note": "The handscrolls' roller knobs (軸頭), turned from white nephrite as the court's remountings of Tang and Song scrolls end their rollers (Data/Art/Handscroll.json)."
+    },
+    {
       "surface": "chenghuai.mount.cord",
       "material": "accent.silk",
       "working": "stretched",

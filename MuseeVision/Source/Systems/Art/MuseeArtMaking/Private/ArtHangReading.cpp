@@ -128,7 +128,7 @@ namespace Musee::ArtMaking
 		 * finish; and the one image's size. Faults, one clause each, where an image the plan needs can't be found.
 		 */
 		FWorkPlan PlanOf(const FMuseeStageContext& Stage, FArtWork&& Work, const TArray<const FArtHangEntry*>& Canvases, const FEntryContext& Context,
-			TArray<FString>& OutFaults)
+			TArray<FString>& OutFaults, TArray<FString>& OutNotes)
 		{
 			FWorkPlan Plan;
 			Plan.bOwnImages = !Canvases[0]->Image.IsEmpty();
@@ -152,6 +152,12 @@ namespace Musee::ArtMaking
 				{
 					Canvas.Ware = WareOf(*Entry, Context);
 				}
+				if (Entry->Kind == Kinds::Handscroll)
+				{
+					// A handscroll lays its photographs across its sheet itself, from its one photograph or its numbered ones.
+					PlanHandscroll(Work, *Entry, Context, Canvas, OutFaults, OutNotes);
+					continue;
+				}
 				if (Plan.bOwnImages)
 				{
 					const TValueOrError<FArtWork, FString> Own = Musee::Art::ReadWork(*Entry);
@@ -171,7 +177,7 @@ namespace Musee::ArtMaking
 				Canvas.ImageOffsetMeters = Plan.ImageMeters.X;
 				Plan.ImageMeters = FVector2D(Plan.ImageMeters.X + Entry->Size[0], Entry->Size[1]);
 			}
-			if (!Plan.bOwnImages && Work.ImagePath.IsEmpty())
+			if (!Plan.bOwnImages && Work.ImagePath.IsEmpty() && Canvases[0]->Kind != Kinds::Handscroll)
 			{
 				OutFaults.Add(TEXT("no image of it is in the collection"));
 			}
@@ -440,6 +446,7 @@ namespace Musee::ArtMaking
 		ReadTurnedInto(Hang, Context);
 		ReadRoundInto(Hang, Context);
 		ReadBooksInto(Hang, Context);
+		ReadHandscrollsInto(Hang, Context);
 		for (const TArray<const FArtHangEntry*>& Canvases : WorksOf(Hang))
 		{
 			const FString& Id = Canvases[0]->Work;
@@ -451,9 +458,15 @@ namespace Musee::ArtMaking
 			}
 			if (Faults.IsEmpty())
 			{
-				FWorkPlan Plan = PlanOf(Stage, Work.StealValue(), Canvases, Context, Faults);
+				TArray<FString> Notes;
+				FWorkPlan Plan = PlanOf(Stage, Work.StealValue(), Canvases, Context, Faults, Notes);
 				if (Faults.IsEmpty())
 				{
+					// A note is a finding about a work that is made all the same.
+					for (const FString& Note : Notes)
+					{
+						OutFindings.Add(ArtFinding(Stage, FString::Printf(TEXT("Work %s: %s."), *Id, *Note)));
+					}
 					OutWorks.Add(MoveTemp(Plan));
 					continue;
 				}
@@ -461,6 +474,25 @@ namespace Musee::ArtMaking
 			OutFindings.Add(ArtFinding(Stage, FString::Printf(TEXT("Work %s: %s."), *Id, *FString::Join(Faults, TEXT("; ")))));
 		}
 		return true;
+	}
+
+	namespace
+	{
+		/** A handscroll's layers: one for each of its photographs laid across its sheet, each at that photograph's size. */
+		void AddSectionLayers(const FCanvasPlan& Canvas, TArray<FArtPaintLayer>& Out)
+		{
+			for (const FScrollSection& Section : Canvas.Sections)
+			{
+				FArtPaintLayer& Layer = Out.AddDefaulted_GetRef();
+				Layer.Work = Section.Work;
+				Layer.ImagePath = Section.ImagePath;
+				Layer.SizeMeters = Section.Panel.ImageMeters;
+				Layer.Palette = Section.Layer;
+				Layer.Parent = Canvas.Finish.Palette;
+				Layer.Working = Canvas.Finish.Working;
+				Layer.History = Canvas.Finish.History;
+			}
+		}
 	}
 
 	TArray<FArtPaintLayer> PaintLayers(const FMuseeStageContext& Stage)
@@ -481,6 +513,11 @@ namespace Musee::ArtMaking
 				{
 					// A work in the round shows no image: it is its medium's finish throughout.
 					break;
+				}
+				if (!Canvas.Sections.IsEmpty())
+				{
+					AddSectionLayers(Canvas, Out);
+					continue;
 				}
 				FArtPaintLayer& Layer = Out.AddDefaulted_GetRef();
 				Layer.Work = Plan.bOwnImages ? FString::Printf(TEXT("%s.%d"), *Plan.Work.Id, Canvas.Entry->Canvas) : Plan.Work.Id;

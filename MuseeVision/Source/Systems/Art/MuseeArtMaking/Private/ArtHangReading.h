@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "MuseeFinding.h"
 #include "MuseeStageDresser.h"
+#include "Scroll/ScrollLayout.h"
 #include "Ware/WareMesh.h"
 
 namespace Musee::ArtMaking
@@ -68,6 +69,8 @@ namespace Musee::ArtMaking
 	{
 		/** A Chinese painting on silk or paper in its mount, hanging by its cord. */
 		inline const FName HangingScroll(TEXT("hanging-scroll"));
+		/** A Chinese painting or calligraphy on silk or paper, mounted as a handscroll and opened flat on a case's bed. */
+		inline const FName Handscroll(TEXT("handscroll"));
 		/** A bound book lying open on a case's bed or a lectern's desk. */
 		inline const FName Book(TEXT("book"));
 		/** A loose sheet (a newspaper's page) lying flat on a case's bed. */
@@ -115,10 +118,26 @@ namespace Musee::ArtMaking
 	};
 
 	/**
+	 * One photograph of a handscroll as it lies across the scroll's sheet: the layer it is shown in (`paint.<id>` for a
+	 * work shown from its one photograph, `paint.<id>.<n>` for its photograph `<id>-<n>`), what Studio names that layer's
+	 * texture for (`<id>` or `<id>.<n>`), the photograph, and where it lies.
+	 */
+	struct FScrollSection
+	{
+		FString Work;
+		FString ImagePath;
+		FName Layer;
+		FScrollPanel Panel;
+		/** The photograph's number, <id>-<n>; 1 for a work shown from its one photograph. */
+		int32 Number = 1;
+	};
+
+	/**
 	 * One object of a work the stage makes: its entry in the plan; where its left edge falls in the work's one image, or
 	 * its own image; the palette key of the layer it shows, and how that layer is finished; how its faces without the
 	 * image are finished (a dish's underside), the glass it lies under (its thickness, from the glazing's working), and,
-	 * for turned ware, its form.
+	 * for turned ware, its form; for a handscroll, its photographs laid across its sheet, left to right, and how far their
+	 * top edge stands above the sheet's.
 	 */
 	struct FCanvasPlan
 	{
@@ -133,6 +152,8 @@ namespace Musee::ArtMaking
 		double PlateMeters = 0.0;
 		double BackingMeters = 0.0;
 		FWareSpec Ware;
+		TArray<FScrollSection> Sections;
+		double ImageTopMeters = 0.0;
 	};
 
 	/**

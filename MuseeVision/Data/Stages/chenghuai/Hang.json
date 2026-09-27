@@ -243,6 +243,7 @@
         "lead": 0.06,
         "wrapper": 0.0,
         "roll_radius": 0.025,
+        "knob": "chenghuai.handscroll.knob",
         "band": 0.025,
         "border": 0.012
       },
@@ -266,6 +267,7 @@
         "lead": 0.06,
         "wrapper": 0.0,
         "roll_radius": 0.025,
+        "knob": "chenghuai.handscroll.knob",
         "band": 0.025,
         "border": 0.012
       },
@@ -289,6 +291,7 @@
         "lead": 0.06,
         "wrapper": 0.0,
         "roll_radius": 0.025,
+        "knob": "chenghuai.handscroll.knob",
         "band": 0.025,
         "border": 0.012
       },
@@ -312,6 +315,7 @@
         "lead": 0.06,
         "wrapper": 0.0,
         "roll_radius": 0.025,
+        "knob": "chenghuai.handscroll.knob",
         "band": 0.025,
         "border": 0.012
       },
@@ -335,6 +339,7 @@
         "lead": 0.06,
         "wrapper": 0.0,
         "roll_radius": 0.025,
+        "knob": "chenghuai.handscroll.knob",
         "band": 0.025,
         "border": 0.012
       },
@@ -358,6 +363,7 @@
         "lead": 0.45,
         "wrapper": 0.22,
         "roll_radius": 0.035,
+        "knob": "chenghuai.handscroll.knob",
         "band": 0.03,
         "border": 0.012
       },
@@ -381,6 +387,7 @@
         "lead": 0.23,
         "wrapper": 0.22,
         "roll_radius": 0.03,
+        "knob": "chenghuai.handscroll.knob",
         "band": 0.03,
         "border": 0.012
       },
