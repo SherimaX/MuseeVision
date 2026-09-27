@@ -1,0 +1,88 @@
+{
+  "schema": "musee.matter.shading.substance/1",
+  "key": "rag-board",
+  "name": "Museum board (acid-free, 100 % cotton, 4-ply, buffered)",
+  "family": "accent",
+  "record": "Palette.json",
+  "master": "white",
+  "accentOf": "white",
+  "dielectric": {
+    "diffuseAlbedo": {
+      "value": [
+        94.0,
+        0.0,
+        3.0
+      ],
+      "space": "CIELAB (D65, 2 deg)",
+      "unit": "CIELAB",
+      "grade": "unverified",
+      "source": "Palette.json: accent.rag-board",
+      "note": "A white museum board, faintly warm; no measured colour was read."
+    },
+    "refractiveIndex": {
+      "value": 1.53,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.rag-board",
+      "note": "Cellulose fibres have indices of about 1.53."
+    },
+    "porosity": {
+      "value": 0.5,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.rag-board",
+      "note": "A first open porosity for the material; no measurement was read."
+    },
+    "wettingDepth": {
+      "value": 0.5,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: accent.rag-board",
+      "note": "The depth whose pores govern the face's look when wet."
+    }
+  },
+  "structure": {
+    "grain": {
+      "value": 0.02,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: accent.rag-board",
+      "note": "The finest structure the face shows."
+    },
+    "bed": {
+      "value": 50,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: accent.rag-board",
+      "note": "The coarsest structure the face shows."
+    },
+    "bedAspect": {
+      "value": 1.0,
+      "unit": "1",
+      "grade": "derived",
+      "source": "An unbedded body",
+      "derivation": "unbedded"
+    },
+    "hurst": {
+      "value": 0.7,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Candela et al. 2012, Journal of Geophysical Research 117, B08409 (fault surfaces, 0.6 to 0.8; cited in Stone.ush)",
+      "note": "The middle of the range measured on rock surfaces, as the travertine's."
+    },
+    "toneSpread": {
+      "value": 0.01,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.rag-board",
+      "note": "A first half-range of ln(albedo) across one face."
+    },
+    "roughnessSpread": {
+      "value": 0.05,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.rag-board",
+      "note": "A first half-range of ln(roughness) across one face."
+    }
+  }
+}

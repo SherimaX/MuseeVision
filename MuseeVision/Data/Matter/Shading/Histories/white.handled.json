@@ -1,0 +1,79 @@
+{
+  "schema": "musee.matter.shading.history/1",
+  "key": "white.handled",
+  "name": "Handled",
+  "mechanisms": [
+    "white.soiling"
+  ],
+  "age": {
+    "value": 20.0,
+    "unit": "year",
+    "grade": "design",
+    "source": "Palette.json eras (a generation of use in the classical rooms; a new face is new)"
+  },
+  "passagesPerYear": {
+    "value": 20000.0,
+    "unit": "1/year",
+    "grade": "design",
+    "source": "the route's traffic by the face's use (as the stone and wood regimes)",
+    "note": "Site's traffic field will give each point its own."
+  },
+  "skyExposure": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "design",
+    "source": "an interior face"
+  },
+  "keptWet": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "derived",
+    "source": "the face stands clear of water",
+    "derivation": "0"
+  },
+  "deposition": {
+    "value": 0.005,
+    "unit": "1/year",
+    "grade": "unverified",
+    "source": "Histories/stone.handled.json",
+    "note": "As the handled stone: hands carry grime."
+  },
+  "washRemoval": {
+    "value": 0.0,
+    "unit": "1/year",
+    "grade": "derived",
+    "source": "an interior face: no rain reaches it",
+    "derivation": "0"
+  },
+  "soilAlbedo": {
+    "value": [
+      0.2,
+      0.17,
+      0.14
+    ],
+    "space": "linear Rec.709 (sRGB primaries), D65 white",
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Histories/stone.handled.json (skin oil and grime; no measured colour)",
+    "note": "As the handled stone."
+  },
+  "wornRoughness": {
+    "value": 0.4,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Histories/stone.handled.json (hands polish what they touch)"
+  },
+  "wornHaziness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "derived",
+    "source": "a worn face has no second lobe",
+    "derivation": "0"
+  },
+  "wearPassages": {
+    "value": 500000.0,
+    "unit": "count",
+    "grade": "unverified",
+    "source": "Histories/wood.handled.json (as the handled wood)"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "schema": "musee.matter.shading.working/1",
+  "key": "dizhang.tiehong",
+  "name": "A 一麻五灰 ground (地仗) and 铁红, iron-oxide red in tung oil, dull",
+  "record": "Palette.json",
+  "kind": "face",
+  "roughness": {
+    "value": 0.6,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Palette.json (the coat the working lays; no filtered roughness was read)"
+  },
+  "roughnessAcross": {
+    "value": 0.6,
+    "unit": "1",
+    "grade": "derived",
+    "source": "Palette.json (the coat the working lays; no filtered roughness was read)",
+    "derivation": "a face with no grain: equal to the roughness along"
+  },
+  "haziness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Palette.json (the coat the working lays; no filtered roughness was read)",
+    "note": "One specular lobe until a goniometric measurement shows a second."
+  },
+  "textureDepth": {
+    "value": 0.02,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Palette.json (the coat the working lays; no filtered roughness was read)"
+  },
+  "relief": {
+    "value": 0.1,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Palette.json (the coat the working lays; no filtered roughness was read)"
+  },
+  "lays": "paint.tiehong"
+}

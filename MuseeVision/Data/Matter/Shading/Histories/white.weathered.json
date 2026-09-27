@@ -1,0 +1,83 @@
+{
+  "schema": "musee.matter.shading.history/1",
+  "key": "white.weathered",
+  "name": "Weathered outdoors",
+  "mechanisms": [
+    "white.soiling",
+    "white.micro-cracking"
+  ],
+  "age": {
+    "value": 20.0,
+    "unit": "year",
+    "grade": "design",
+    "source": "Palette.json eras (a generation of use in the classical rooms; a new face is new)"
+  },
+  "passagesPerYear": {
+    "value": 0.0,
+    "unit": "1/year",
+    "grade": "derived",
+    "source": "the face is not walked or handled",
+    "derivation": "0"
+  },
+  "skyExposure": {
+    "value": 1.0,
+    "unit": "1",
+    "grade": "design",
+    "source": "an outer face open to the sky",
+    "note": "Form's sky exposure will give each point its own."
+  },
+  "keptWet": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "derived",
+    "source": "the face stands clear of water",
+    "derivation": "0"
+  },
+  "deposition": {
+    "value": 0.0066,
+    "unit": "1/year",
+    "grade": "derived",
+    "source": "Histories/white.soiling.json: terms.soiling.coverageRateVertical (up to 1.8e-5 per day)",
+    "derivation": "the upper rate, per year, for an outdoor face"
+  },
+  "washRemoval": {
+    "value": 0.05,
+    "unit": "1/year",
+    "grade": "unverified",
+    "source": "Histories/stone.dissolution-outdoors.json (no rate of wash removal of deposit was read)",
+    "note": "A first value: rain clears an open face slowly."
+  },
+  "soilAlbedo": {
+    "value": [
+      0.08,
+      0.07,
+      0.06
+    ],
+    "space": "linear Rec.709 (sRGB primaries), D65 white",
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Histories/stone.pore-soiling.json and white.soiling.json (black carbon; no measured deposit colour)",
+    "note": "A first dark grey for an outdoor deposit dominated by black carbon."
+  },
+  "wornRoughness": {
+    "value": 0.6708,
+    "unit": "1",
+    "grade": "derived",
+    "source": "Histories/white.clean.json: wornRoughness",
+    "derivation": "as the clean white's"
+  },
+  "wornHaziness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "derived",
+    "source": "a worn face has no second lobe",
+    "derivation": "0"
+  },
+  "wearPassages": {
+    "value": 0.0,
+    "unit": "count",
+    "grade": "derived",
+    "source": "the face is not abraded",
+    "derivation": "0"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "schema": "musee.matter.shading.working/1",
+  "key": "ground.hard-chromed",
+  "name": "Ground and hard-chromed (a machined guide rail)",
+  "record": "Workings/hard-chromed.json",
+  "kind": "face",
+  "roughness": {
+    "value": 0.12,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Workings/hard-chromed.json (Shading): hard chromium; grinding leaves a fine linear lay"
+  },
+  "roughnessAcross": {
+    "value": 0.25,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "A ground face has its grinding lines along the rail",
+    "note": "Rougher across the grinding lines than along them."
+  },
+  "haziness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Workings/hard-chromed.json (Shading): hard chromium; grinding leaves a fine linear lay",
+    "note": "One specular lobe until a goniometric measurement shows a second."
+  },
+  "textureDepth": {
+    "value": 0.001,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Workings/hard-chromed.json (Shading): hard chromium; grinding leaves a fine linear lay"
+  },
+  "relief": {
+    "value": 0.001,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Workings/hard-chromed.json (Shading): hard chromium; grinding leaves a fine linear lay"
+  }
+}

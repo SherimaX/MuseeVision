@@ -1,0 +1,57 @@
+{
+  "schema": "musee.matter.shading.substance/1",
+  "key": "pvb.diffusing",
+  "name": "Translucent white PVB interlayer (Vanceva Arctic Snow or Trosifol diffuse type)",
+  "family": "glass",
+  "record": "Palette.json",
+  "master": "sheet",
+  "dielectric": {
+    "diffuseAlbedo": {
+      "value": [
+        0.7,
+        0.7,
+        0.7
+      ],
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: glass.clear-float",
+      "note": "A white translucent interlayer reflects much of what it does not pass; a first value."
+    },
+    "refractiveIndex": {
+      "value": 1.48,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: glass.clear-float",
+      "note": "Polyvinyl butyral interlayers have indices of about 1.48, matched to the glass."
+    },
+    "porosity": {
+      "value": 0.0,
+      "unit": "1",
+      "grade": "derived",
+      "source": "Sealed inside a laminate: no open pores",
+      "derivation": "0"
+    },
+    "wettingDepth": {
+      "value": 0.0,
+      "unit": "mm",
+      "grade": "derived",
+      "source": "Sealed inside a laminate",
+      "derivation": "0"
+    }
+  },
+  "sheet": {
+    "transmittance": {
+      "value": [
+        0.25,
+        0.25,
+        0.25
+      ],
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: glass.clear-float",
+      "note": "A first diffuse transmittance for a translucent white interlayer; the makers' figures were not read."
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "schema": "musee.matter.shading.working/1",
+  "key": "damask.mount",
+  "name": "Damask (绫), mounted as a scroll's borders",
+  "record": "Palette.json",
+  "kind": "face",
+  "roughness": {
+    "value": 0.7,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Workings/stretched.json (Shading) and the sheet's working; no measured cloth roughness was read"
+  },
+  "roughnessAcross": {
+    "value": 0.7,
+    "unit": "1",
+    "grade": "derived",
+    "source": "Workings/stretched.json (Shading) and the sheet's working; no measured cloth roughness was read",
+    "derivation": "a face with no grain: equal to the roughness along"
+  },
+  "haziness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Workings/stretched.json (Shading) and the sheet's working; no measured cloth roughness was read",
+    "note": "One specular lobe until a goniometric measurement shows a second."
+  },
+  "textureDepth": {
+    "value": 0.05,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Workings/stretched.json (Shading) and the sheet's working; no measured cloth roughness was read"
+  },
+  "relief": {
+    "value": 0.03,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Workings/stretched.json (Shading) and the sheet's working; no measured cloth roughness was read"
+  }
+}

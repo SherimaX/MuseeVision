@@ -1,0 +1,39 @@
+{
+  "schema": "musee.matter.shading.working/1",
+  "key": "axe-dressed",
+  "name": "Axe-dressed (剁斧): parallel axe strokes across the face",
+  "record": "Palette.json",
+  "kind": "face",
+  "roughness": {
+    "value": 0.9,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Palette.json (the sheets' workings; no filtered roughness was read for the face)"
+  },
+  "roughnessAcross": {
+    "value": 0.95,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Palette.json (the sheets' workings; no filtered roughness was read for the face)",
+    "note": "Rougher across the strokes than along them."
+  },
+  "haziness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Palette.json (the sheets' workings; no filtered roughness was read for the face)",
+    "note": "One specular lobe until a goniometric measurement shows a second."
+  },
+  "textureDepth": {
+    "value": 0.8,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Palette.json (the sheets' workings; no filtered roughness was read for the face)"
+  },
+  "relief": {
+    "value": 1.5,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Palette.json (the sheets' workings; no filtered roughness was read for the face)"
+  }
+}

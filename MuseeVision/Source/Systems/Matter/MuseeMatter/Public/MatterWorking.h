@@ -69,6 +69,14 @@ struct MUSEEMATTER_API FMatterWorking
 	UPROPERTY()
 	TMap<FString, FMuseeKey> Hosts;
 
+	/**
+	 * For a working that coats the piece in another substance (a paint, a lacquer, a glaze, a paper sealed in a laminate):
+	 * that substance's key. The coat is what the eye meets, so its record shades the piece in place of the piece's own,
+	 * and its master draws it; the piece's own substance stays beneath, unseen.
+	 */
+	UPROPERTY()
+	FMuseeKey Lays;
+
 	/** A film the working lays: a patina or a paint on a metal; on wood, the oil or wax the finish soaks into it (its
 	 *  index and how much of the face it fills). */
 	UPROPERTY()

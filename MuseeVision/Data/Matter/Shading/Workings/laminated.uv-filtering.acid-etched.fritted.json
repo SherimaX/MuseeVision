@@ -1,0 +1,46 @@
+{
+  "schema": "musee.matter.shading.working/1",
+  "key": "laminated.uv-filtering.acid-etched.fritted",
+  "name": "Laminated 2 x 12 mm on a UV-filtering interlayer, room face acid-etched, cavity face white-fritted",
+  "record": "Workings/fritted.json",
+  "kind": "face",
+  "roughness": {
+    "value": 0.6,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Workings/acid-etched.json (Shading): an acid-etched satin face"
+  },
+  "roughnessAcross": {
+    "value": 0.6,
+    "unit": "1",
+    "grade": "derived",
+    "source": "Workings/acid-etched.json (Shading): an acid-etched satin face",
+    "derivation": "a face with no grain: equal to the roughness along"
+  },
+  "haziness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Workings/acid-etched.json (Shading): an acid-etched satin face",
+    "note": "One specular lobe until a goniometric measurement shows a second."
+  },
+  "textureDepth": {
+    "value": 0.003,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Workings/acid-etched.json (Shading): an acid-etched satin face"
+  },
+  "relief": {
+    "value": 0.0,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Workings/acid-etched.json (Shading): an acid-etched satin face"
+  },
+  "paneThickness": {
+    "value": 24.0,
+    "unit": "mm",
+    "grade": "design",
+    "source": "Docs/Stages/atrium.md: section 3.4 (the inner leaf, 2 x 12 mm laminated, acid-etched and fritted)",
+    "note": "The white ceramic frit on the cavity face scatters and cuts the light; the glass master has no scattering layer for it (a gap), so only the etched face and the glass are composed."
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "schema": "musee.matter.shading.working/1",
+  "key": "glazed.green-over-brown",
+  "name": "Green glaze over the brown body, thin at rim and foot",
+  "record": "Palette.json",
+  "kind": "face",
+  "roughness": {
+    "value": 0.05,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Palette.json (the coat the working lays; no filtered roughness was read)"
+  },
+  "roughnessAcross": {
+    "value": 0.05,
+    "unit": "1",
+    "grade": "derived",
+    "source": "Palette.json (the coat the working lays; no filtered roughness was read)",
+    "derivation": "a face with no grain: equal to the roughness along"
+  },
+  "haziness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Palette.json (the coat the working lays; no filtered roughness was read)",
+    "note": "One specular lobe until a goniometric measurement shows a second."
+  },
+  "textureDepth": {
+    "value": 0.001,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Palette.json (the coat the working lays; no filtered roughness was read)"
+  },
+  "relief": {
+    "value": 0.02,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Palette.json (the coat the working lays; no filtered roughness was read)"
+  },
+  "lays": "glaze.green"
+}

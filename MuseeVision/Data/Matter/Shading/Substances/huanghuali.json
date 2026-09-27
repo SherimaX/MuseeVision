@@ -1,0 +1,126 @@
+{
+  "schema": "musee.matter.shading.substance/1",
+  "key": "huanghuali",
+  "name": "Huanghuali (黄花梨, Dalbergia odorifera)",
+  "family": "accent",
+  "record": "Palette.json",
+  "master": "wood",
+  "accentOf": "oak",
+  "dielectric": {
+    "diffuseAlbedo": {
+      "value": [
+        48.0,
+        14.0,
+        30.0
+      ],
+      "space": "CIELAB (D65, 2 deg)",
+      "unit": "CIELAB",
+      "grade": "unverified",
+      "source": "Palette.json: accent.huanghuali",
+      "note": "Golden to reddish-brown heartwood with darker 'ghost face' figure; no measured colour was read: a first value read from trade and museum photographs of the named material."
+    },
+    "refractiveIndex": {
+      "value": 1.55,
+      "unit": "1",
+      "grade": "secondary",
+      "source": "Marschner, S.R., Westin, S.H., Arbree, A. & Moon, J.T. (2005) Measuring and modeling the appearance of finished wood, ACM Transactions on Graphics 24(3) (as cited in the timber records)"
+    },
+    "porosity": {
+      "value": 0.41,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.huanghuali",
+      "note": "A dense tropical hardwood of about 0.85 to 0.95 g/cm3; 1 - 0.88 / 1.5. No measurement was read."
+    },
+    "wettingDepth": {
+      "value": 1.0,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: accent.huanghuali",
+      "note": "As the oak: the depth a finish soaks into."
+    }
+  },
+  "structure": {
+    "grain": {
+      "value": 0.15,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: accent.huanghuali",
+      "note": "The finest structure: vessels or tracheids."
+    },
+    "bed": {
+      "value": 3.0,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: accent.huanghuali",
+      "note": "A growth ring's width."
+    },
+    "bedAspect": {
+      "value": 20.0,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.huanghuali",
+      "note": "How much coarser the figure is along the grain than across it."
+    },
+    "hurst": {
+      "value": 0.7,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Candela et al. 2012, Journal of Geophysical Research 117, B08409 (fault surfaces, 0.6 to 0.8; cited in Stone.ush)",
+      "note": "The middle of the range measured on rock surfaces, as the travertine's."
+    },
+    "toneSpread": {
+      "value": 0.1,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.huanghuali",
+      "note": "A first half-range of ln(albedo) across one face."
+    },
+    "roughnessSpread": {
+      "value": 0.15,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.huanghuali",
+      "note": "A first half-range of ln(roughness), as the oak's."
+    }
+  },
+  "wood": {
+    "latewoodFraction": {
+      "value": 0.3,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.huanghuali"
+    },
+    "latewoodTone": {
+      "value": 0.8,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.huanghuali"
+    },
+    "rayFleck": {
+      "value": 0.01,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.huanghuali",
+      "note": "How much of a quarter-sawn face the rays show."
+    },
+    "rayTone": {
+      "value": 1.0,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.huanghuali"
+    },
+    "rayLength": {
+      "value": 1.0,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: accent.huanghuali"
+    },
+    "rayWidth": {
+      "value": 0.1,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: accent.huanghuali"
+    }
+  }
+}

@@ -151,7 +151,7 @@
     {
       "surface": "hall-of-light.frame.glazing",
       "material": "glass.low-iron",
-      "working": "laminated.anti-reflective",
+      "working": "anti-reflective.laminated",
       "history": "new",
       "note": "Glazing in the photograph frames and over the four stereo cards: UV-filtering laminate with anti-reflective faces."
     },

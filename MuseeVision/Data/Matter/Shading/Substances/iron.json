@@ -1,0 +1,70 @@
+{
+  "schema": "musee.matter.shading.substance/1",
+  "key": "iron",
+  "name": "Victorian cast and wrought iron",
+  "family": "accent",
+  "record": "Substances/cast-iron.json",
+  "master": "metal",
+  "accentOf": "bronze",
+  "conductor": {
+    "f0": {
+      "value": [
+        0.529,
+        0.513,
+        0.494
+      ],
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "unit": "1",
+      "grade": "record",
+      "source": "Substances/steel.json: optics.f0 (derived from the measured spectral n and k)",
+      "note": "Iron's reflection, taken from the steel record's measured n and k: cast and wrought iron are iron with a few per cent of carbon, slag or graphite, which the paint hides."
+    },
+    "f82": {
+      "value": [
+        0.575,
+        0.571,
+        0.588
+      ],
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "unit": "1",
+      "grade": "record",
+      "source": "Substances/steel.json: optics.f82",
+      "note": "Iron's reflection, taken from the steel record's measured n and k: cast and wrought iron are iron with a few per cent of carbon, slag or graphite, which the paint hides."
+    }
+  },
+  "tarnish": {
+    "diffuseAlbedo": {
+      "value": [
+        0.12,
+        0.05,
+        0.03
+      ],
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Histories/iron.corrosion.json (rust, a hydrated iron oxide)",
+      "note": "A first rust brown; the museum's steel is always painted."
+    },
+    "refractiveIndex": {
+      "value": 2.3,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Histories/iron.corrosion.json (goethite and lepidocrocite, n 2.2 to 2.5)",
+      "note": "A first value."
+    },
+    "roughness": {
+      "value": 0.8,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Histories/iron.corrosion.json",
+      "note": "A rust crust is matte."
+    },
+    "cover": {
+      "value": 0.0,
+      "unit": "1",
+      "grade": "derived",
+      "source": "the tarnish's cover is its history's",
+      "derivation": "unused: the history gives the cover"
+    }
+  }
+}

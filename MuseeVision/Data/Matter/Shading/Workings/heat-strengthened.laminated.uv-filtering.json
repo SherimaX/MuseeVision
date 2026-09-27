@@ -1,0 +1,46 @@
+{
+  "schema": "musee.matter.shading.working/1",
+  "key": "heat-strengthened.laminated.uv-filtering",
+  "name": "Heat-strengthened, laminated on a UV-filtering PVB (8 / 1.52 / 8)",
+  "record": "Workings/heat-strengthened.json",
+  "kind": "face",
+  "roughness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Workings/toughened.laminated.json (Shading): float faces are smooth"
+  },
+  "roughnessAcross": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "derived",
+    "source": "Workings/toughened.laminated.json (Shading): float faces are smooth",
+    "derivation": "a face with no grain: equal to the roughness along"
+  },
+  "haziness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Workings/toughened.laminated.json (Shading): float faces are smooth",
+    "note": "One specular lobe until a goniometric measurement shows a second."
+  },
+  "textureDepth": {
+    "value": 0.001,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Workings/toughened.laminated.json (Shading): float faces are smooth"
+  },
+  "relief": {
+    "value": 0.0,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Workings/toughened.laminated.json (Shading): float faces are smooth"
+  },
+  "paneThickness": {
+    "value": 17.52,
+    "unit": "mm",
+    "grade": "design",
+    "source": "Docs/Stages/hall-of-light.md: section 3.3 (8 + 1.52 UV-filtering PVB + 8)",
+    "note": "The Atrium's outer leaf is 24 mm; a make-up's thickness belongs to the piece (a gap), so the Hall of Light's stands here."
+  }
+}

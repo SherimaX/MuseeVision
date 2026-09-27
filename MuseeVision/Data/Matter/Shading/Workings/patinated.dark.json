@@ -1,0 +1,72 @@
+{
+  "schema": "musee.matter.shading.working/1",
+  "key": "patinated.dark",
+  "name": "Patinated dark (a black sulfide patina, waxed)",
+  "record": "Workings/patinated.json",
+  "kind": "face",
+  "roughness": {
+    "value": 0.5,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Workings/cast.bronze.json: unverified surface.roughnessRa (the cast face beneath the film)"
+  },
+  "roughnessAcross": {
+    "value": 0.5,
+    "unit": "1",
+    "grade": "derived",
+    "source": "Workings/patinated.json: the film has no grain",
+    "derivation": "equal to the roughness along"
+  },
+  "haziness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Workings/patinated.json (no measured haze)"
+  },
+  "textureDepth": {
+    "value": 0.005,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Workings/cast.bronze.json: unverified surface.roughnessRa"
+  },
+  "relief": {
+    "value": 0.0,
+    "unit": "mm",
+    "grade": "derived",
+    "source": "Workings/patinated.json: the film follows the cast face",
+    "derivation": "below the pixel"
+  },
+  "film": {
+    "diffuseAlbedo": {
+      "value": [
+        0.02,
+        0.018,
+        0.016
+      ],
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Workings/patinated.json: unverified film.albedo",
+      "note": "The Cube's dark patina (Story): a sulfide patina taken to black, darker than the statuary brown."
+    },
+    "refractiveIndex": {
+      "value": 2.849,
+      "unit": "1",
+      "grade": "record",
+      "source": "Workings/patinated.json: film.phases[0].refractiveIndex (cuprite, the film's inner layer)"
+    },
+    "roughness": {
+      "value": 0.5,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Workings/patinated.json (no measured roughness of the film)"
+    },
+    "cover": {
+      "value": 1.0,
+      "unit": "1",
+      "grade": "derived",
+      "source": "Workings/patinated.json: steps (the whole face is patinated)",
+      "derivation": "a patinated face is covered"
+    }
+  }
+}

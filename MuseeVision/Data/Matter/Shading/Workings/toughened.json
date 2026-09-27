@@ -1,0 +1,45 @@
+{
+  "schema": "musee.matter.shading.working/1",
+  "key": "toughened",
+  "name": "Toughened glass (a solid rod, 36 mm)",
+  "record": "Workings/toughened.json",
+  "kind": "face",
+  "roughness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Workings/toughened.laminated.json (Shading): float faces are smooth"
+  },
+  "roughnessAcross": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "derived",
+    "source": "Workings/toughened.laminated.json (Shading): float faces are smooth",
+    "derivation": "a face with no grain: equal to the roughness along"
+  },
+  "haziness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Workings/toughened.laminated.json (Shading): float faces are smooth",
+    "note": "One specular lobe until a goniometric measurement shows a second."
+  },
+  "textureDepth": {
+    "value": 0.001,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Workings/toughened.laminated.json (Shading): float faces are smooth"
+  },
+  "relief": {
+    "value": 0.0,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Workings/toughened.laminated.json (Shading): float faces are smooth"
+  },
+  "paneThickness": {
+    "value": 36.0,
+    "unit": "mm",
+    "grade": "design",
+    "source": "Docs/Stages/atrium.md: section 3.6 (the car's handrail, a glass rod 36 mm across)"
+  }
+}

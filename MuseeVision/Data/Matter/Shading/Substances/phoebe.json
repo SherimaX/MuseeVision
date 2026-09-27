@@ -1,0 +1,126 @@
+{
+  "schema": "musee.matter.shading.substance/1",
+  "key": "phoebe",
+  "name": "Phoebe (楠木, Phoebe zhennan), plantation-grown",
+  "family": "accent",
+  "record": "Substances/phoebe.json",
+  "master": "wood",
+  "accentOf": "oak",
+  "dielectric": {
+    "diffuseAlbedo": {
+      "value": [
+        58.0,
+        8.0,
+        28.0
+      ],
+      "space": "CIELAB (D65, 2 deg)",
+      "unit": "CIELAB",
+      "grade": "unverified",
+      "source": "Palette.json: accent.phoebe",
+      "note": "Golden olive-brown, silky (the 金丝 chatoyance is not modelled); no measured colour was read: a first value read from trade and museum photographs of the named material."
+    },
+    "refractiveIndex": {
+      "value": 1.55,
+      "unit": "1",
+      "grade": "secondary",
+      "source": "Marschner, S.R., Westin, S.H., Arbree, A. & Moon, J.T. (2005) Measuring and modeling the appearance of finished wood, ACM Transactions on Graphics 24(3) (as cited in the timber records)"
+    },
+    "porosity": {
+      "value": 0.68,
+      "unit": "1",
+      "grade": "derived",
+      "source": "Substances/phoebe.json: physical.densityAirDry (480 kg/m3, measured)",
+      "derivation": "1 - 480 / 1500: the density over the cell wall's own (about 1500 kg/m3, Siau 1995, as the oak's)"
+    },
+    "wettingDepth": {
+      "value": 1.0,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: accent.phoebe",
+      "note": "As the oak: the depth a finish soaks into."
+    }
+  },
+  "structure": {
+    "grain": {
+      "value": 0.1,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: accent.phoebe",
+      "note": "The finest structure: vessels or tracheids."
+    },
+    "bed": {
+      "value": 4.0,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: accent.phoebe",
+      "note": "A growth ring's width."
+    },
+    "bedAspect": {
+      "value": 20.0,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.phoebe",
+      "note": "How much coarser the figure is along the grain than across it."
+    },
+    "hurst": {
+      "value": 0.7,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Candela et al. 2012, Journal of Geophysical Research 117, B08409 (fault surfaces, 0.6 to 0.8; cited in Stone.ush)",
+      "note": "The middle of the range measured on rock surfaces, as the travertine's."
+    },
+    "toneSpread": {
+      "value": 0.06,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.phoebe",
+      "note": "A first half-range of ln(albedo) across one face."
+    },
+    "roughnessSpread": {
+      "value": 0.15,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.phoebe",
+      "note": "A first half-range of ln(roughness), as the oak's."
+    }
+  },
+  "wood": {
+    "latewoodFraction": {
+      "value": 0.3,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.phoebe"
+    },
+    "latewoodTone": {
+      "value": 0.85,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.phoebe"
+    },
+    "rayFleck": {
+      "value": 0.02,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.phoebe",
+      "note": "How much of a quarter-sawn face the rays show."
+    },
+    "rayTone": {
+      "value": 1.05,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.phoebe"
+    },
+    "rayLength": {
+      "value": 1.0,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: accent.phoebe"
+    },
+    "rayWidth": {
+      "value": 0.1,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: accent.phoebe"
+    }
+  }
+}

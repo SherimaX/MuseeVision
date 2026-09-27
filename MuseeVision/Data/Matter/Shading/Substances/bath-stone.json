@@ -1,0 +1,88 @@
+{
+  "schema": "musee.matter.shading.substance/1",
+  "key": "bath-stone",
+  "name": "Bath stone (Monks Park, oolitic limestone)",
+  "family": "accent",
+  "record": "Palette.json",
+  "master": "stone",
+  "accentOf": "stone",
+  "dielectric": {
+    "diffuseAlbedo": {
+      "value": [
+        78.0,
+        3.0,
+        17.0
+      ],
+      "space": "CIELAB (D65, 2 deg)",
+      "unit": "CIELAB",
+      "grade": "unverified",
+      "source": "Palette.json: accent.bath-stone",
+      "note": "A first colour for Bath stone (Monks Park, oolitic limestone): no measured colour was read: a first value read from trade and museum photographs of the named material."
+    },
+    "refractiveIndex": {
+      "value": 1.6003,
+      "unit": "1",
+      "grade": "derived",
+      "source": "Substances/cream-marble.json: optics.specularF0 (0.0533, calcite grains in random orientations)",
+      "derivation": "n = (1 + sqrt(F0)) / (1 - sqrt(F0)), the index whose normal-incidence reflectance is the record's F0"
+    },
+    "porosity": {
+      "value": 0.25,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.bath-stone",
+      "note": "Oolitic freestones of the Great Oolite commonly hold 20 to 30 % open porosity; no measurement of Monks Park stone was read."
+    },
+    "wettingDepth": {
+      "value": 2.5,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: accent.bath-stone",
+      "note": "The depth whose pores govern the face's look when wet."
+    }
+  },
+  "structure": {
+    "grain": {
+      "value": 0.8,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: accent.bath-stone",
+      "note": "Its ooids, the sand-sized spheres an oolite is built of (under 2 mm by definition)."
+    },
+    "bed": {
+      "value": 300,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: accent.bath-stone",
+      "note": "A course of Albion's ashlar, 0.30 high."
+    },
+    "bedAspect": {
+      "value": 1.5,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.bath-stone",
+      "note": "How much longer the structure runs along its bedding than across it."
+    },
+    "hurst": {
+      "value": 0.7,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Candela et al. 2012, Journal of Geophysical Research 117, B08409 (fault surfaces, 0.6 to 0.8; cited in Stone.ush)",
+      "note": "The middle of the range measured on rock surfaces, as the travertine's."
+    },
+    "toneSpread": {
+      "value": 0.08,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.bath-stone",
+      "note": "A first half-range of ln(albedo) across one face."
+    },
+    "roughnessSpread": {
+      "value": 0.15,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.bath-stone",
+      "note": "A first half-range of ln(roughness) across one face."
+    }
+  }
+}

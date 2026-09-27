@@ -425,6 +425,84 @@ be a lie. So the board's species stay, and they tie back to the oak by **touch, 
 - **Stained glass:** the Lamberts pot-metal glass above. It ties back to the Salon's chapter silks by **hue**: the
   same deep, saturated colours, lit from behind.
 
+### Coats: what the eye meets is the last layer
+
+A painted beam is pine, but no one sees the pine. The 一麻五灰 ground (hemp and five coats of blood-lime putty) and the
+铁红 paint hide the wood completely; what reaches the eye is iron oxide bound in tung oil. The same is true of a
+lacquered gate leaf, a glazed fish bowl and a lattice pane with paper sealed inside it. So a working may **lay a coat**
+(`lays` in its typed record): the coat's own substance shades the piece, and its master draws it, while the palette
+entry still names what the piece is made of. The coats are:
+- `paint.tiehong`, iron-oxide red in tung oil: the Qing house's columns (`dizhang.tiehong`) and the fir rafters
+  (`iron-red.tung-oil`). It is the red of the gilder's bole and of Rojo Alicante once more;
+- `paint.caihua`, the Suzhou-style beam painting in azurite, malachite and gold, matt because its mineral pigments are
+  bound in glue (Liang Sicheng, *Qing shi yingzao zeli* 清式营造则例, 1934, for the orders of 彩画);
+- `lacquer.green` and `lacquer.black`, the 屏门 panels and the gate's leaves (门用黑饰), closed and glossy;
+- `glaze.celadon`, `glaze.dark` and `glaze.green` on the court's and the desk's stoneware;
+- `mulberry-paper`, sealed in the lattice's laminate (the paper is what glows);
+- `pvb.diffusing`, Albion's translucent white interlayer.
+
+A translucent finish lays no coat. The 广漆 on the garden timber is raw lacquer and tung oil, and the fir's grain shows
+through it, so it is the fir that is drawn, darkened by the lacquer's chestnut, as fumed oak is by its fuming.
+
+Gold leaf is still a layer, not a coat: it wears through to what lies beneath. Oil gilding now lies on wood too, on
+the sealed and sized face (`oil-sized`), because two real things ask for it: Albion's frames, gilded directly on oak
+so the grain shows through the gold, as Rossetti and Madox Brown had their frames made, and Chenghuai's carved lotus
+buds, gilded over the lacquer.
+
+### The materials the second round of sheets asked for
+
+Each was chosen because the room's own history used it, and each ties back to the core families.
+
+**Huanghuali** (`accent.huanghuali`), the rosewood *Dalbergia odorifera* of Hainan, is the timber of classical Ming
+furniture: 林泉's painting table and its pair of rose chairs are huanghuali because the collection records them so
+(Wang Shixiang, *Classic Chinese Furniture: Ming and Early Qing Dynasties*, 1986; Craig Clunas, *Chinese Furniture*,
+V&A, 1988). It is dense and oily, so it takes only oil and wax, and its golden-brown figure is the furniture's
+ornament. It ties to the oak by touch. The species is listed in CITES Appendix II, so real pieces are old stock; the
+room shows old furniture.
+
+**Lingbi stone** (`accent.lingbi-rock`), a black limestone from Lingbi County in Anhui, stands first in Du Wan's
+*Yunlin shipu* (云林石谱, about 1133), the scholars' catalogue of stones: it rings like bronze when struck. A scholar's
+rock is found, never carved, so its working is *as found* and its history the hands of its owners. It is calcite, the
+travertine's mineral, black where the travertine is honey.
+
+**Glazed stoneware and fired clay** (`accent.stoneware-glazed`). A glaze is a glass fused to a clay body (W. D.
+Kingery, H. K. Bowen and D. R. Uhlmann, *Introduction to Ceramics*, 2nd ed., 1976), so a glazed piece is drawn as its
+glaze, with no open pores. The court's fish bowl is green-glazed, thin at the rim over the brown body; the
+pomegranates' tubs are dark-glazed; the desk's brush pot and water dropper are celadon. Celadon's grey-green is iron
+reduced in the glaze during firing (Rose Kerr and Nigel Wood, *Ceramic Technology*, in J. Needham, *Science and
+Civilisation in China*, vol. 5 part XII, 2004): the same reduction that turns the Linqing brick grey. The inkstone is
+澄泥, levigated clay fired and polished, unglazed: the body itself.
+
+**Museum board** (`accent.rag-board`): acid-free 100 % cotton board, 4-ply and buffered, of the kind ISO 9706 calls
+permanent paper, for the Hall of Light's print mounts and the autochromes' window mats. Cotton has no lignin to yellow
+and no acid to pass to the print. It is the white family's paper.
+
+**The ten British column stones** (`accent.british-column-stones.a` to `.j`), one per shaft, as at the Oxford
+University Museum, where each column is a different British rock (H. W. Acland and J. Ruskin, *The Oxford Museum*,
+1859): A Lizard serpentine, B Peterhead granite, C Rubislaw granite, D Purbeck marble, E Frosterley marble, F Hopton
+Wood stone, G Ashburton marble, H Iona marble, I Tiree marble, J Mona marble. The calcite ones tie to the travertine
+by physics; the granites and serpentines by value.
+
+**Silks** for Chenghuai's cases: the scroll cases take a warm grey 绫 (`accent.silk`), the ceramics a paler grey
+(`accent.silk.pale-grey`), so glaze reads against it. The mounts are damask, the lanterns gauze.
+
+**Antique glass** (`glass.mouth-blown.antique`): Lamberts' mouth-blown glass for Albion's leaded lights, separate from
+the cased opal of the globes because the two are different optics: one passes an image, the other scatters it.
+
+**Clear float** (`glass.clear-float`) now has its own record: ordinary soda-lime glass whose iron gives the green edge,
+laminated with a UV-filtering interlayer in Albion's roofs and, over the aisles and in the gables, with a translucent
+white interlayer (`laminated.uv-filtering.diffusing`, of the Vanceva Arctic Snow or Trosifol diffuse kind) so the
+idealised sun lays no patch on a hanging wall.
+
+**Iron** (`accent.victorian-iron`) is drawn as iron under its paint (`painted.iron`), the iron-oxide brown-red.
+
+**The ground** (`accent.site-geology`, topsoil) and **concrete** (`accent.concrete`) are drawn as porous bodies: bare,
+potted or under moss, and cast in situ and sealed.
+
+**Retired:** the palette's `living.<species>` entries (the lily, the iris, the sedge, the forget-me-not and the vine).
+A plant is drawn by its organs' tissue (`living.leaf`, `living.petal` and the rest), and a bed names no material of
+its own.
+
 **Élan.** It needs no accent at all. Its pearl **is** the white family, its mirror **is** the Rotunda's marble
 polished to its limit, and its gilt **is** the bronze's working. The future is made only of the core families, at
 their last finish. That is the argument of the whole museum.
@@ -562,6 +640,11 @@ the choice needs one.
 | Gate leaves | `accent.qing-pine-lacquered` | black lacquer |
 | Beam paintings | `accent.qing-pine-lacquered` + `gilt.gold-leaf` | 苏式彩画: azurite, malachite, gold leaf |
 | Hall screens (花罩), case plinths | `accent.phoebe` | carved, waxed |
+| Furniture: the altar table, desks, chairs | `accent.phoebe` | waxed |
+| 林泉's painting table and rose chairs | `accent.huanghuali` | oiled and waxed |
+| The scholar's rock | `accent.lingbi-rock` | as found |
+| Fish bowl, tubs, desk things; the inkstones | `accent.stoneware-glazed` | green, dark and celadon glazes; the inkstone unglazed, polished |
+| Case silks, scroll mounts, lantern gauze | `accent.silk`, `accent.silk.pale-grey` | stretched; damask; gauze |
 | Lattice glazing | `glass.low-iron` | laminated with mulberry paper |
 | Interiors | `white.limewash` | hemp-fibre lime, whitened with whiting |
 | Garden walls (粉墙) | `white.limewash` | over paper-fibre lime render |
@@ -583,7 +666,7 @@ the choice needs one.
 | Red bands | `accent.mansfield-red` | honed; interior soot |
 | Dressings: pilasters, corbels, cornice, reveals, sills, hood moulds, bases | `accent.bath-stone` | rubbed |
 | Capitals (each with its plants) | `accent.bath-stone` | carved |
-| Column shafts A–J | `accent.british-column-stones` | polished, hand-touched |
+| Column shafts A–J | `accent.british-column-stones.a` … `.j` | polished, hand-touched |
 | Skirting | `accent.welsh-slate` | honed, bevelled |
 | Nave and porch floors and borders | `accent.encaustic-tile` | waxed, trodden |
 | Aisle flags | `accent.york-stone` | sawn, trodden |
@@ -591,7 +674,7 @@ the choice needs one.
 | Wrought-iron rings, inner arches, saddle bars | `accent.victorian-iron` | painted, as the cast iron |
 | Gutters, ridge rolls, porch flat | `accent.milled-lead` | patinated |
 | Vault and screen glass | `glass.clear-float` | laminated, UV-filtering; soiled |
-| Lancets, the Tristram and Isolde band | `glass.mouth-blown` | pot-metal and flashed, leaded |
+| Lancets, the Tristram and Isolde band | `glass.mouth-blown.antique` | pot-metal and flashed, leaded |
 | Case glass | `glass.low-iron` | anti-reflective |
 | Benches, cases, lectern, porch ceiling | `oak.sessile-french` | fumed, French-polished |
 | Case beds | `accent.wool-felt` | wool baize, dyed |
@@ -739,6 +822,14 @@ Two differences between the palette and those records need to be settled:
   design value).
 - **`bronze`** lists "patinated" for the dial's inlays and "brushed" for the collar and car rings. The palette puts
   the Élan's rings at **mirror-polished or gilt**, the future's finish.
+
+The second kit round gave every key the sheets name a typed shading record (`Data/Matter/Shading`), so every finish
+resolves. Most of their colours and porosities are first values marked `unverified`, read from photographs or from the
+rock type, and wait for the research records below and a specimen. Two gaps are in the masters, not the records:
+- the Atrium's inner leaf carries a white ceramic frit on its cavity face, and the glass master has no scattering
+  layer for it;
+- a glazing make-up's thickness is the working's in the records, but the same make-up comes in two thicknesses (the
+  Hall of Light's 17.52 mm, the Atrium's 24 mm): a pane's thickness belongs to the piece.
 
 Still needed, as records:
 - the stones: Rojo Alicante, Negro Marquina, Giallo di Siena, Pavonazzetto, verde antico, porphyry, Statuario,

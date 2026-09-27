@@ -1,0 +1,72 @@
+{
+  "schema": "musee.matter.shading.working/1",
+  "key": "pearl.fluoropolymer",
+  "name": "Painted pearl in a fluoropolymer (PVDF) topcoat, for outdoors",
+  "record": "Workings/painted.pearl.json",
+  "kind": "face",
+  "roughness": {
+    "value": 0.3,
+    "unit": "1",
+    "grade": "design",
+    "source": "Workings/painted.pearl.json: colour.asBuiltShell.baseRoughness"
+  },
+  "roughnessAcross": {
+    "value": 0.3,
+    "unit": "1",
+    "grade": "derived",
+    "source": "Workings/painted.pearl.json: colour.asBuiltShell.baseRoughness",
+    "derivation": "a face with no grain: equal to the roughness along"
+  },
+  "haziness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Workings/painted.pearl.json: colour.asBuiltShell.baseRoughness",
+    "note": "One specular lobe unless noted."
+  },
+  "textureDepth": {
+    "value": 0.001,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Workings/painted.steel.json: a paint film is smooth"
+  },
+  "relief": {
+    "value": 0.0,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Workings/painted.steel.json"
+  },
+  "film": {
+    "diffuseAlbedo": {
+      "value": [
+        0.8388,
+        0.8148,
+        0.7682
+      ],
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "unit": "1",
+      "grade": "design",
+      "source": "Workings/painted.pearl.json: colour.asBuiltRibs.albedo"
+    },
+    "refractiveIndex": {
+      "value": 1.42,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Polyvinylidene fluoride has an index of about 1.42",
+      "note": "The outdoor build's clear topcoat over the pearl."
+    },
+    "roughness": {
+      "value": 0.3,
+      "unit": "1",
+      "grade": "design",
+      "source": "Workings/painted.pearl.json: colour.asBuiltShell.baseRoughness"
+    },
+    "cover": {
+      "value": 1.0,
+      "unit": "1",
+      "grade": "derived",
+      "source": "Workings/painted.steel.json: system.totalDryFilmThickness (180 um)",
+      "derivation": "a paint system that thick hides the steel wholly"
+    }
+  }
+}

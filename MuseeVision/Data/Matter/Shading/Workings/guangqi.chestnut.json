@@ -1,0 +1,65 @@
+{
+  "schema": "musee.matter.shading.working/1",
+  "key": "guangqi.chestnut",
+  "name": "Guangqi (广漆): raw lacquer with tung oil, chestnut (栗壳色), translucent over the grain",
+  "record": "Palette.json",
+  "kind": "face",
+  "roughness": {
+    "value": 0.3,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Palette.json (the sheets' workings; no filtered roughness was read for the finished face)"
+  },
+  "roughnessAcross": {
+    "value": 0.3,
+    "unit": "1",
+    "grade": "derived",
+    "source": "Palette.json (the sheets' workings; no filtered roughness was read for the finished face)",
+    "derivation": "a face with no grain: equal to the roughness along"
+  },
+  "haziness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Palette.json (the sheets' workings; no filtered roughness was read for the finished face)",
+    "note": "One specular lobe until a goniometric measurement shows a second."
+  },
+  "textureDepth": {
+    "value": 0.01,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Palette.json (the sheets' workings; no filtered roughness was read for the finished face)"
+  },
+  "relief": {
+    "value": 0.05,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Palette.json (the sheets' workings; no filtered roughness was read for the finished face)"
+  },
+  "film": {
+    "refractiveIndex": {
+      "value": 1.52,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Raw lacquer and tung oil cure to a film of index about 1.52"
+    },
+    "cover": {
+      "value": 1.0,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Several rubbed coats close the face"
+    }
+  },
+  "stain": {
+    "value": [
+      0.26,
+      0.125,
+      0.083
+    ],
+    "space": "linear Rec.709 (sRGB primaries), D65 white",
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Palette.json: accent.chinese-fir-guangqi (栗壳色, chestnut-shell brown)",
+    "note": "The chestnut the lacquer leaves as a factor on the fir's own colour: a first value, dark red-brown over the pale fir."
+  }
+}

@@ -118,9 +118,10 @@ return Marked.DiffuseAlbedo;)");
 	}
 }
 
-FMasterRecipe WoodRecipe(UMaterialParameterCollection& Moment)
+FMasterRecipe WoodRecipe(UMaterialParameterCollection& Moment, bool bGilt)
 {
-	FMasterRecipe Recipe = StartRecipe(MasterName(FName(Masters::Wood)), Moment, OpaqueNanite());
+	const FName Layer = bGilt ? FName(Masters::Gilt) : NAME_None;
+	FMasterRecipe Recipe = StartRecipe(MasterName(FName(Masters::Wood), Layer), Moment, OpaqueNanite());
 	AddWoodParameters(Recipe);
 	Recipe.Calls = { BoardCall(), FinishCall() };
 	Recipe.Slab.DiffuseAlbedo = From(TEXT("History"));
@@ -128,6 +129,10 @@ FMasterRecipe WoodRecipe(UMaterialParameterCollection& Moment)
 	Recipe.Slab.Roughness = From(TEXT("History"), TEXT("SurfaceRoughness"));
 	Recipe.Slab.Haziness = From(TEXT("History"), TEXT("SurfaceHaziness"));
 	Recipe.Slab.Normal = From(TEXT("History"), TEXT("SurfaceNormal"));
+	if (bGilt)
+	{
+		AddGiltLayer(Recipe);
+	}
 	return Recipe;
 }
 }
