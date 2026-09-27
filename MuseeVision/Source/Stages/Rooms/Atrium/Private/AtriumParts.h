@@ -83,6 +83,13 @@ namespace Musee::Atrium
 	/** The angle, in degrees, that a chord's half-width subtends on a circle: where a notch's side meets it. */
 	double HalfAngle(double HalfWidth, double Radius);
 
+	/**
+	 * The spans (from and to bearing, clockwise) of a ring about the axis whose inner face is at radius R0, from one bearing
+	 * to another, broken to clear each rail's foot: a rail at either end starts or stops it a gap clear, one within it
+	 * breaks it in two.
+	 */
+	TArray<TPair<double, double>> SpansRoundRails(double R0, double From, double To);
+
 	/** A drawing of the stage, finished in one of its surfaces, colliding as given, standing in a frame. */
 	template <typename TShape>
 	FFormDrawing Drawn(const FString& Name, const TCHAR* LocalSurface, TShape&& Shape, const Musee::Collision::FClass* Collision,

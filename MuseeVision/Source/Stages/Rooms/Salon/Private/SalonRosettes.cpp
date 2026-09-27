@@ -6,7 +6,8 @@
  * Each is cast in staff and gilt, as the rosettes in the coffers of the Louvre's and the Petit Palais's vaults are: twelve
  * broad outer petals, twelve inner ones between them cupped up round the boss, each petal domed and sunk along its
  * midrib, and a domed boss in a bead ring. It is carved as a relief on the panel's tangent plane, its ground 2 mm into
- * the panel so each petal's edge runs into the plaster (SalonStructure.cpp:889-937, as built).
+ * the panel so each petal's edge runs into the plaster (SalonStructure.cpp:889-937, as built). All are cast from one
+ * mould: one drawing, set at every coffer's centre (rosette.1 to rosette.750, bay by bay, row by row, column by column).
  */
 namespace Musee::Salon
 {
@@ -64,32 +65,40 @@ namespace Musee::Salon
 			return Height;
 		}
 
-		/** One rosette on the panel of the coffer between column lines C and C + 1 of a bay, in row J. */
-		FFormDrawing Rosette(int32 Bay, int32 C, int32 J)
+		/** Half the side of the square ground the rosette is carved on, metres. */
+		constexpr double RosetteHalf = Plan::RosetteRadius + Plan::RosetteGrid;
+
+		/** Where the rosette stands on the panel of the coffer between column lines C and C + 1 of a bay, in row J. */
+		FMuseeFrame RosetteFrame(int32 Bay, int32 C, int32 J)
 		{
 			const double X = 0.5 * (ColumnX(Bay, C) + ColumnX(Bay, C + 1));
 			const double Phi = 0.5 * (RowAngle(J) + RowAngle(J + 1));
 			const FVector In(0.0, FMath::Cos(Phi), -FMath::Sin(Phi));
 			const FVector AlongVault = FVector::ForwardVector;
 			const FVector Across = FVector::CrossProduct(In, AlongVault);
-			const double Half = Plan::RosetteRadius + Plan::RosetteGrid;
 			const FVector Ground = VaultPoint(X, Phi, Plan::VaultRadius + Plan::CofferDepth) - In * Plan::Sink;
+			return FrameOfAxes(Ground - AlongVault * RosetteHalf - Across * RosetteHalf, AlongVault, Across);
+		}
+
+		/** The rosette's cast: a relief on its square ground. */
+		FFormRelief Rosette()
+		{
 			FFormRelief Shape;
-			Shape.SizeMeters = FVector2D(2.0 * Half, 2.0 * Half);
+			Shape.SizeMeters = FVector2D(2.0 * RosetteHalf, 2.0 * RosetteHalf);
 			Shape.GridMeters = Plan::RosetteGrid;
 			Shape.BackMeters = Plan::Sink;
-			Shape.HeightMeters = [Half](double U, double V)
+			Shape.HeightMeters = [](double U, double V)
 			{
-				const double Height = Flower(U - Half, V - Half);
+				const double Height = Flower(U - RosetteHalf, V - RosetteHalf);
 				return Height > 0.0 ? Plan::Sink + Height : 0.0;
 			};
-			return Drawn(FString::Printf(TEXT("rosette.bay%d.r%02d.c%d"), Bay + 1, J, C), TEXT("vault.rosette"), MoveTemp(Shape), nullptr,
-				FrameOfAxes(Ground - AlongVault * Half - Across * Half, AlongVault, Across));
+			return Shape;
 		}
 	}
 
 	void DrawRosettes(TArray<FFormDrawing>& Out)
 	{
+		FFormDrawing& Rosettes = Out.Add_GetRef(Drawn(TEXT("rosette"), TEXT("vault.rosette"), Rosette(), nullptr));
 		for (int32 Bay = 0; Bay < Plan::BayCount; ++Bay)
 		{
 			for (int32 J = 0; J < Plan::Rows; ++J)
@@ -99,7 +108,7 @@ namespace Musee::Salon
 					const bool bLantern = J == Plan::LanternRow && (C == Plan::LanternColumn || C == Plan::LanternColumn + 1);
 					if (!bLantern)
 					{
-						Out.Add(Rosette(Bay, C, J));
+						Rosettes.Repeats.Add(RosetteFrame(Bay, C, J));
 					}
 				}
 			}

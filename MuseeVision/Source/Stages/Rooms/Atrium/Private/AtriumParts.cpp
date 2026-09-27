@@ -140,6 +140,36 @@ namespace Musee::Atrium
 		return FMath::RadiansToDegrees(FMath::Asin(HalfWidth / Radius));
 	}
 
+	TArray<TPair<double, double>> SpansRoundRails(double R0, double From, double To)
+	{
+		const double Gap = HalfAngle(Plan::FootSlotHalf, R0);
+		const double End = To <= From ? To + 360.0 : To;
+		TArray<double> Breaks = {From, End};
+		for (const double Rail : {Plan::RailBearings[0], Plan::RailBearings[1], Plan::RailBearings[0] + 360.0, Plan::RailBearings[1] + 360.0})
+		{
+			if (FMath::IsNearlyEqual(Rail, From))
+			{
+				Breaks[0] = From + Gap;
+			}
+			else if (FMath::IsNearlyEqual(Rail, End))
+			{
+				Breaks[1] = End - Gap;
+			}
+			else if (Rail > From && Rail < End)
+			{
+				Breaks.Add(Rail - Gap);
+				Breaks.Add(Rail + Gap);
+			}
+		}
+		Breaks.Sort();
+		TArray<TPair<double, double>> Spans;
+		for (int32 Index = 0; Index + 1 < Breaks.Num(); Index += 2)
+		{
+			Spans.Emplace(Breaks[Index], Breaks[Index + 1]);
+		}
+		return Spans;
+	}
+
 	FFormDrawing& AsGlass(FFormDrawing& Drawing)
 	{
 		Drawing.bNanite = false;

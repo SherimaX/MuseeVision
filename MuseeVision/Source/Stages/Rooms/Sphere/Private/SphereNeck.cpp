@@ -119,15 +119,16 @@ namespace Musee::Sphere
 		}
 
 		/**
-		 * The neck iris, drawn shut. A blade's gilt top and pearl underside are one extrusion's faces, which Form can't yet
-		 * finish apart: it takes the top's, the face the Sphere sees.
+		 * The neck iris, drawn shut. A blade's gilt top and pearl underside are its extrusion's two faces, finished apart;
+		 * its edges are the underside's pearl.
 		 */
 		void Iris(TArray<FFormDrawing>& Out)
 		{
 			for (int32 Blade = 0; Blade < Plan::IrisBlades; ++Blade)
 			{
-				FFormDrawing& Drawing = Out.Add_GetRef(Drawn(Pieces::NeckBlade(Blade), TEXT("neck.iris.top"), Slab(IrisBladeOpen(), {}, Plan::IrisBlade),
+				FFormDrawing& Drawing = Out.Add_GetRef(Drawn(Pieces::NeckBlade(Blade), TEXT("neck.iris.under"), Slab(IrisBladeOpen(), {}, Plan::IrisBlade),
 					Solid, IrisBladeShut(Blade)));
+				Drawing.PartSurfaces.Add(FFormExtrusion::FarPart, Surface(TEXT("neck.iris.top")));
 				Drawing.Body = IrisBladeBody(TEXT("neck"), Blade);
 			}
 		}

@@ -200,8 +200,32 @@ namespace Musee::Albion
 		}
 
 		/**
-		 * The lectern, the reader facing east: its cross feet on four pads, the post (drawn square at its mean, §13), the
-		 * collar, the desk sloping 18° with its ledge, and two brackets each side from the post's head to the desk.
+		 * The lectern's post from Bottom to Top, lofted as the joiner works it: tapering as it rises, its four arrises
+		 * chamfered, each chamfer stopped at 45 degrees (the chisel's plain stop, as long as the chamfer is wide) where the
+		 * post meets the feet and the collar.
+		 */
+		FFormLoft StoppedPost(double Bottom, double Top)
+		{
+			auto Half = [](double Z) { return 0.5 * FMath::Lerp(Plan::PostFootWidth, Plan::PostHeadWidth, (Z - Plan::PostFoot) / (Plan::PostTop - Plan::PostFoot)); };
+			auto Section = [&Half](double Z, double C)
+			{
+				const double H = Half(Z);
+				const FVector2D Points[8] = {{-H + C, -H}, {H - C, -H}, {H, -H + C}, {H, H - C}, {H - C, H}, {-H + C, H}, {-H, H - C}, {-H, -H + C}};
+				FFormLoftSection Out;
+				Out.Outline = FFormProfile::Polyline(Points, true);
+				Out.AtMeters = Z;
+				Out.Joint = EFormJoint::Crisp;
+				return Out;
+			};
+			const double C = Plan::PostChamfer;
+			FFormLoft Post;
+			Post.Sections = {Section(Bottom, 0.0), Section(Bottom + C, C), Section(Top - C, C), Section(Top, 0.0)};
+			return Post;
+		}
+
+		/**
+		 * The lectern, the reader facing east: its cross feet on four pads, the post, the collar, the desk sloping 18° with its
+		 * ledge, and two brackets each side from the post's head to the desk.
 		 */
 		void Lectern(TArray<FFormDrawing>& Out)
 		{
@@ -221,9 +245,8 @@ namespace Musee::Albion
 			Cross.DepthMeters = Plan::FootHigh;
 			Out.Add(Drawn(TEXT("lectern.feet"), TEXT("lectern"), MoveTemp(Cross), Solid, FMuseeFrame(FVector(0.0, 0.0, Plan::PadMeters))));
 
-			const double Post = 0.25 * (Plan::PostFootWidth + Plan::PostHeadWidth);
 			const double FeetTop = Plan::PadMeters + Plan::FootHigh;
-			Out.Add(Box(TEXT("lectern.post"), TEXT("lectern"), FVector(C.X - Post, C.Y - Post, FeetTop), FVector(C.X + Post, C.Y + Post, Plan::CollarFoot), Solid));
+			Out.Add(Drawn(TEXT("lectern.post"), TEXT("lectern"), StoppedPost(FeetTop, Plan::CollarFoot), Solid, FMuseeFrame(FVector(C, 0.0))));
 			Out.Add(Box(TEXT("lectern.collar"), TEXT("lectern"), FVector(C.X - Plan::CollarHalf, C.Y - Plan::CollarHalf, Plan::CollarFoot),
 				FVector(C.X + Plan::CollarHalf, C.Y + Plan::CollarHalf, Plan::CollarTop), Solid));
 

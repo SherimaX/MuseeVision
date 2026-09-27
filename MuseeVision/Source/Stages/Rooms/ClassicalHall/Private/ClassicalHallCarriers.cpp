@@ -76,16 +76,22 @@ namespace Musee::ClassicalHall
 		}
 
 		/**
-		 * A herm: a moulded plinth 0.40 square × 0.14, the shaft and a moulded cap 0.09 from 1.16. Form draws no prism that
-		 * changes its section along its length, so the shaft, which widens from 0.26 at 0.13 to 0.32 at 1.17, stands square
-		 * at its mean, 0.29.
+		 * A herm: a moulded plinth 0.40 square × 0.14, the shaft and a moulded cap 0.09 from 1.16. The shaft is lofted as the
+		 * mason works it, widening from 0.26 square at 0.13 to 0.32 at 1.17.
 		 */
 		void Herm(TArray<FFormDrawing>& Out, const FString& Name, const Plan::FCarrierPlan& Carrier)
 		{
 			const FMuseeFrame Floor = FloorFrame(Carrier);
 			MouldedDie(Out, Name + TEXT(".plinth"), TEXT("herm"), Floor, Carrier.Width, Carrier.Depth, 0.0, Plan::HermPlinthHigh);
-			const double Shaft = 0.25 * (Plan::HermShaftFootSide + Plan::HermShaftTopSide);
-			Out.Add(PrismIn(Name + TEXT(".shaft"), TEXT("herm"), Floor, Rect(-Shaft, -Shaft, Shaft, Shaft), Plan::HermShaftFoot, Plan::HermShaftTop, Solid));
+			FFormLoft Shaft;
+			for (const TPair<double, double>& Station : {TPair<double, double>(Plan::HermShaftFoot, Plan::HermShaftFootSide),
+				TPair<double, double>(Plan::HermShaftTop, Plan::HermShaftTopSide)})
+			{
+				FFormLoftSection& Section = Shaft.Sections.AddDefaulted_GetRef();
+				Section.Outline = Rect(-0.5 * Station.Value, -0.5 * Station.Value, 0.5 * Station.Value, 0.5 * Station.Value);
+				Section.AtMeters = Station.Key;
+			}
+			Out.Add(Drawn(Name + TEXT(".shaft"), TEXT("herm"), MoveTemp(Shaft), Solid, Floor));
 			MouldedDie(Out, Name + TEXT(".cap"), TEXT("herm"), Floor, Carrier.Width, Carrier.Depth, Plan::HermCapFoot, Carrier.Top);
 		}
 

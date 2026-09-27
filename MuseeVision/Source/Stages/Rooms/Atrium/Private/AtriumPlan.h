@@ -377,4 +377,6 @@ namespace Musee::Atrium::Plan
 	// ---- §3.7 the stele ------------------------------------------------------------------------------------------------------
 	inline constexpr double SteleGlass[2][3] = {{-3.840, -2.650, 0.060}, {-3.780, -1.150, 2.200}};
 	inline constexpr double SteleFoot[2][3] = {{-4.010, -2.750, 0.000}, {-3.610, -1.050, 0.080}};
+	/** The foot's top edges are eased 6 mm. */
+	inline constexpr double SteleFootEase = 0.006;
 }

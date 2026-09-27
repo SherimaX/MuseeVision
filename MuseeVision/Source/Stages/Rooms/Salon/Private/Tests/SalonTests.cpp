@@ -244,7 +244,7 @@ namespace Musee::Salon::Tests
 		int32 Rosettes = 0;
 		for (const FFormDrawing& Piece : Description.Pieces)
 		{
-			Rosettes += Piece.Name.ToString().StartsWith(TEXT("rosette.")) ? 1 : 0;
+			Rosettes += Piece.Name == TEXT("rosette") ? Piece.Repeats.Num() : 0;
 		}
 		TestEqual(TEXT("750 rosettes, one on every coffer"), Rosettes, 750);
 		TestEqual(TEXT("the footprint has the sheet's eight corners"), Description.Footprint.OutlineMeters.Num(), 8);

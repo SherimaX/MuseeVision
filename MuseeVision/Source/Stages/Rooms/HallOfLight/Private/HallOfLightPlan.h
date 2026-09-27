@@ -111,6 +111,10 @@ namespace Musee::HallOfLight::Plan
 
 	// ---- sec. 3.1 masonry ----------------------------------------------------------------------------------------------------
 	inline constexpr double FloorBottom = -0.100;
+	/** The floor's slabs, 1.20 along the hall by 0.80 across, an unstaggered grid with a joint on the axis, 2.5 mm joints. */
+	inline constexpr double FloorSlabLength = 1.200;
+	inline constexpr double FloorSlabWidth = 0.800;
+	inline constexpr double FloorJoint = 0.0025;
 	/** The floor runs between the plinths' inner faces, d 0.18. */
 	inline constexpr double FloorHalf = GlassLine - 0.180;
 	/** A viewing stone: a disc R 0.450 from -0.100 to -0.030 and R 0.400 above it to the floor; its bronze ring fills the rebate. */

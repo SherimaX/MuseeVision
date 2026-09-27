@@ -560,8 +560,13 @@ namespace Musee::Albion::Plan
 	inline constexpr double PadHalf = 0.050;
 	inline constexpr double PadMeters = 0.012;
 	inline constexpr double PadReach = 0.280;
-	/** The post, stop-chamfered and tapering 0.11 to 0.085 square from 0.07 to 0.90 (drawn at its mean, §13); a collar 0.88 to 0.92. */
+	/**
+	 * The post, tapering 0.11 to 0.085 square from 0.07 to 0.90, its arrises chamfered 12 mm (as built,
+	 * AlbionChaucer.cpp:231-236) and stopped where it meets the feet and the collar; a collar 0.88 to 0.92.
+	 */
+	inline constexpr double PostFoot = 0.070;
 	inline constexpr double PostTop = 0.900;
+	inline constexpr double PostChamfer = 0.012;
 	inline constexpr double PostFootWidth = 0.110;
 	inline constexpr double PostHeadWidth = 0.085;
 	inline constexpr double CollarHalf = 0.075;

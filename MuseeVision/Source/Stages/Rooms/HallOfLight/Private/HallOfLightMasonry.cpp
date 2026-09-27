@@ -34,17 +34,28 @@ namespace Musee::HallOfLight
 			return Lathe;
 		}
 
-		/** The floor: laid between the linings' inner faces and the plinths' inner faces, round the viewing stones. */
+		/**
+		 * The floor, laid in travertine slabs between the linings' inner faces and the plinths' inner faces: an unstaggered
+		 * grid of 1.20 by 0.80 with a joint on the axis, cut to the linings' arcs and round the viewing stones, its 2.5 mm
+		 * joints filled flush with the tinted resin that fills the stone's voids (its finish, filled.polished).
+		 */
 		void Floor(TArray<FFormDrawing>& Out)
 		{
-			FFormExtrusion Shape;
+			FFormLaid Shape;
 			Shape.Outline = PlanOutline(WestLining(), EastLining(), -Plan::FloorHalf, Plan::FloorHalf);
 			for (int32 Stone = 0; Stone < Plan::ViewingStones; ++Stone)
 			{
 				Shape.Holes.Add(FFormProfile::Ellipse(FVector2D(ViewingX(Stone), 0.0), Plan::ViewingDiscRadius, Plan::ViewingDiscRadius, 0.0, true));
 			}
-			Shape.DepthMeters = -Plan::FloorBottom;
-			Out.Add(Drawn(TEXT("floor"), Surface(TEXT("floor")), MoveTemp(Shape), Walkable, FMuseeFrame(FVector(0.0, 0.0, Plan::FloorBottom))));
+			Shape.ThicknessMeters = -Plan::FloorBottom;
+			Shape.JointMeters = Plan::FloorJoint;
+			Shape.FillMeters = 0.0;
+			Shape.Module = {FFormProfile::Rectangle(FVector2D::ZeroVector, FVector2D(Plan::FloorSlabLength, Plan::FloorSlabWidth))};
+			Shape.LatticeU = FVector2D(Plan::FloorSlabLength, 0.0);
+			Shape.LatticeV = FVector2D(0.0, Plan::FloorSlabWidth);
+			FFormDrawing& Laid = Out.Add_GetRef(Drawn(TEXT("floor"), Surface(TEXT("floor")), MoveTemp(Shape), Walkable,
+				FMuseeFrame(FVector(0.0, 0.0, Plan::FloorBottom))));
+			Laid.PartSurfaces.Add(FFormLaid::JointPart, Surface(TEXT("floor")));
 		}
 
 		/** The viewing stones: a rebated disc flush with the floor, and the bronze ring that fills its rebate. */
@@ -66,55 +77,35 @@ namespace Musee::HallOfLight
 		}
 
 		/**
-		 * The course of a plinth that holds the step lights: its plan runs lining to lining, and at every post a pocket is
-		 * cut back from its inner face (x +-0.050, back to d 0.060).
-		 */
-		FFormProfile HousingCourse(int32 Side)
-		{
-			const FEndFace West = InnerFace(EHallEnd::West);
-			const FEndFace East = InnerFace(EHallEnd::East);
-			const double Inner = WallY(Side, Plan::PlinthHalf);
-			const double Outer = WallY(Side, -Plan::PlinthHalf);
-			const double Back = WallY(Side, Plan::HousingBackD);
-			FFormProfile Outline = FFormProfile::From(West.At(Inner));
-			AddFaceArc(Outline, West, Inner, Outer);
-			Outline.LineTo(East.At(Outer), EFormJoint::Crisp);
-			AddFaceArc(Outline, East, Outer, Inner);
-			for (int32 Post = Plan::Posts - 1; Post >= 0; --Post)
-			{
-				const double X = PostX(Post);
-				Outline.LineTo(FVector2D(X + Plan::HousingHalf, Inner), EFormJoint::Crisp);
-				Outline.LineTo(FVector2D(X + Plan::HousingHalf, Back), EFormJoint::Crisp);
-				Outline.LineTo(FVector2D(X - Plan::HousingHalf, Back), EFormJoint::Crisp);
-				Outline.LineTo(FVector2D(X - Plan::HousingHalf, Inner), EFormJoint::Crisp);
-			}
-			return Outline.Close();
-		}
-
-		/**
-		 * A plinth on the glass line, lining to lining. Form draws no blind pocket in a run, so it is laid in three
-		 * courses: the bed below the housings, the course the housings are cut into, and the upper course with its
-		 * chamfered arrises.
+		 * A plinth on the glass line, lining to lining, its ends cut to the linings' faces: at every post a housing for a
+		 * step light let into its inner face (x +-0.050, back to d 0.060, z 0.110 to 0.170), and its two top arrises
+		 * chamfered 10 mm, each chamfer cut on its plane along the run so it meets the linings as the mason cuts it.
 		 */
 		void Plinth(TArray<FFormDrawing>& Out, int32 Side)
 		{
-			const FString Name = FString::Printf(TEXT("plinth.%s"), SideName(Side));
-			const FName Stone = Surface(TEXT("plinth"));
 			const double Inner = WallY(Side, Plan::PlinthHalf);
 			const double Outer = WallY(Side, -Plan::PlinthHalf);
-			Out.Add(PlanRun(Name + TEXT(".bed"), Stone, WestLining(), EastLining(), Inner, Outer, Plan::PlinthBottom, Plan::HousingBottom, Solid));
-
-			FFormExtrusion Housings;
-			Housings.Outline = HousingCourse(Side);
-			Housings.DepthMeters = Plan::HousingTop - Plan::HousingBottom;
-			Out.Add(Drawn(Name + TEXT(".housings"), Stone, MoveTemp(Housings), Solid, FMuseeFrame(FVector(0.0, 0.0, Plan::HousingBottom))));
-
-			const double Half = Plan::PlinthHalf;
-			const double Arris = Plan::PlinthTop - Plan::PlinthChamfer;
-			const FVector2D Upper[] = {{WallY(Side, -Half), Plan::HousingTop}, {WallY(Side, Half), Plan::HousingTop}, {WallY(Side, Half), Arris},
-				{WallY(Side, Half - Plan::PlinthChamfer), Plan::PlinthTop}, {WallY(Side, Plan::PlinthChamfer - Half), Plan::PlinthTop},
-				{WallY(Side, -Half), Arris}};
-			SectionRun(Out, Name + TEXT(".upper"), Stone, Upper, WestLining(), EastLining(), Solid);
+			const double Back = WallY(Side, Plan::HousingBackD);
+			const double Height = Plan::PlinthTop - Plan::PlinthBottom;
+			FFormDrawing Plinth = PlanRun(FString::Printf(TEXT("plinth.%s"), SideName(Side)), Surface(TEXT("plinth")), WestLining(), EastLining(), Inner,
+				Outer, Plan::PlinthBottom, Plan::PlinthTop, Solid);
+			FFormExtrusion& Shape = Plinth.Shape.Get<FFormExtrusion>();
+			for (int32 Post = 0; Post < Plan::Posts; ++Post)
+			{
+				// Drawn from its back out past the inner face, so it opens there.
+				FFormPocket& Housing = Shape.Pockets.AddDefaulted_GetRef();
+				Housing.Outline = FFormProfile::Rectangle(FVector2D(PostX(Post) - Plan::HousingHalf, FMath::Min(Back, 2.0 * Inner - Back)),
+					FVector2D(PostX(Post) + Plan::HousingHalf, FMath::Max(Back, 2.0 * Inner - Back)));
+				Housing.CoverMeters = Plan::PlinthTop - Plan::HousingTop;
+				Housing.DepthMeters = Plan::HousingTop - Plan::HousingBottom;
+			}
+			for (const double Edge : {Inner, Outer})
+			{
+				FFormCut& Chamfer = Plinth.Cuts.AddDefaulted_GetRef();
+				Chamfer.PointMeters = FVector(0.0, Edge, Height - Plan::PlinthChamfer);
+				Chamfer.Normal = FVector(0.0, FMath::Sign(Edge - WallY(Side, 0.0)), 1.0);
+			}
+			Out.Add(MoveTemp(Plinth));
 		}
 
 		/** A planter kerb outside the glass, butting the plinth, its outer top arris chamfered. */

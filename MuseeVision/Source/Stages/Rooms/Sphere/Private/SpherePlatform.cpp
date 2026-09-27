@@ -81,7 +81,7 @@ namespace Musee::Sphere
 		/**
 		 * The platform iris, drawn shut under the seat ring, and the seven pins that tie the lid to the deck through the
 		 * pocket. Shut it is a closure, not a floor: its blades are solid, never walked. A blade's pearl top and gilt
-		 * underside are one extrusion's faces, which Form can't yet finish apart: it takes the top's.
+		 * underside are its extrusion's two faces, finished apart; its edges are pearl.
 		 */
 		void Iris(TArray<FFormDrawing>& Out)
 		{
@@ -89,6 +89,7 @@ namespace Musee::Sphere
 			{
 				FFormDrawing& Drawing = Out.Add_GetRef(Drawn(FString::Printf(TEXT("platform.iris.blade.%d"), Blade + 1), TEXT("platform.iris.top"),
 					Slab(IrisBladeOpen(), {}, Plan::IrisBlade), Solid, IrisBladeShut(Blade)));
+				Drawing.PartSurfaces.Add(FFormExtrusion::NearPart, Surface(TEXT("platform.iris.under")));
 				Drawing.Body = IrisBladeBody(TEXT("platform"), Blade);
 				const FVector Pin = IrisPinFrame(Blade, Plan::PlatformIrisTop).OriginMeters;
 				Out.Add(Drawn(FString::Printf(TEXT("platform.iris.pin.%d"), Blade + 1), TEXT("platform.seat"),
