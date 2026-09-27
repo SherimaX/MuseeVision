@@ -170,6 +170,27 @@ namespace Musee::Site::Tests
 		TestEqual(TEXT("another stage's port, a repeated name and an undrawn piece are three breaks"), CheckDescription(Description).Num(), 3);
 		return true;
 	}
+
+	IMPLEMENT_SIMPLE_AUTOMATION_TEST(FSiteRidingBodiesTest, "Musee.Site.RidingBodies", Flags)
+	bool FSiteRidingBodiesTest::RunTest(const FString& Parameters)
+	{
+		FSiteDescription Description;
+		Description.Stage = FMuseeKey(TEXT("lift"));
+		const FMuseeKey Car(TEXT("lift.car"));
+		const FMuseeKey Leaf(TEXT("lift.car.leaf"));
+		Description.Anchors.Add({Car, TEXT("Body"), FMuseeFrame()});
+		Description.Anchors.Add({Leaf, TEXT("Body"), FMuseeFrame(FVector(-2.0, 0.0, 0.0))});
+		Description.BodyParents.Add(Leaf, Car);
+		TestEqual(TEXT("a leaf riding its car is sound"), CheckDescription(Description).Num(), 0);
+
+		Description.BodyParents.Add(Car, Leaf);
+		TestEqual(TEXT("a car riding its own leaf is a loop, found once for each"), CheckDescription(Description).Num(), 2);
+
+		Description.BodyParents.Reset();
+		Description.BodyParents.Add(Leaf, FMuseeKey(TEXT("lift.shaft")));
+		TestEqual(TEXT("riding a body the stage doesn't declare is a break"), CheckDescription(Description).Num(), 1);
+		return true;
+	}
 }
 
 #endif

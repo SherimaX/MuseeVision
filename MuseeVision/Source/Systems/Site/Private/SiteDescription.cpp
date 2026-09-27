@@ -10,6 +10,31 @@ namespace
 		const FString Text = Key.ToString();
 		return Text.StartsWith(Stage.ToString() + TEXT("."));
 	}
+
+	bool IsBody(const FSiteDescription& Description, const FMuseeKey& Key)
+	{
+		return Description.Anchors.ContainsByPredicate([&Key](const FMuseeStageAnchor& A) { return A.Key == Key && A.Kind == FName(TEXT("Body")); });
+	}
+
+	/** Whether following a body's parents from Start comes back to it. */
+	bool RidesItself(const TMap<FMuseeKey, FMuseeKey>& Parents, const FMuseeKey& Start)
+	{
+		FMuseeKey At = Start;
+		for (int32 Step = 0; Step <= Parents.Num(); ++Step)
+		{
+			const FMuseeKey* Parent = Parents.Find(At);
+			if (!Parent)
+			{
+				return false;
+			}
+			if (*Parent == Start)
+			{
+				return true;
+			}
+			At = *Parent;
+		}
+		return true;
+	}
 }
 
 TArray<FMuseeFinding> Musee::Site::CheckDescription(const FSiteDescription& Description)
@@ -47,6 +72,17 @@ TArray<FMuseeFinding> Musee::Site::CheckDescription(const FSiteDescription& Desc
 	for (const FMuseeStageAnchor& Anchor : Description.Anchors)
 	{
 		CheckKey(Anchor.Key, TEXT("anchor"));
+	}
+	for (const TPair<FMuseeKey, FMuseeKey>& Riding : Description.BodyParents)
+	{
+		if (!IsBody(Description, Riding.Key) || !IsBody(Description, Riding.Value))
+		{
+			Break(FString::Printf(TEXT("body %s rides on %s, and both must be Body anchors"), *Riding.Key.ToString(), *Riding.Value.ToString()), Riding.Key);
+		}
+		else if (RidesItself(Description.BodyParents, Riding.Key))
+		{
+			Break(FString::Printf(TEXT("body %s rides round a loop back on itself"), *Riding.Key.ToString()), Riding.Key);
+		}
 	}
 	for (const FFormOpening& Opening : Description.Openings)
 	{
