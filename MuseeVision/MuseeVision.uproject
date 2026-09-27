@@ -141,6 +141,11 @@
 			"LoadingPhase": "Default"
 		},
 		{
+			"Name": "MuseeGrounds",
+			"Type": "Editor",
+			"LoadingPhase": "Default"
+		},
+		{
 			"Name": "MuseeInstruments",
 			"Type": "Runtime",
 			"LoadingPhase": "Default",
