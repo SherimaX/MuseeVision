@@ -88,8 +88,8 @@ namespace Musee::Motion
 
 		void PlaceControl(const FMuseeStageContext& Stage, const FMotionMechanismSpec& Spec, UMotionMechanism& Mechanism, TArray<FMuseeFinding>& OutFindings)
 		{
-			const FMuseeStageAnchor* Anchor = Stage.FindAnchor(Spec.Control);
-			if (!Anchor || Anchor->Kind != UseKind)
+			const FMuseeStageAnchor* Anchor = Stage.FindAnchor(Spec.Control, UseKind);
+			if (!Anchor)
 			{
 				OutFindings.Add(Finding(Stage, FString::Printf(TEXT("Mechanism %s: its control %s is not a Use anchor of the stage."), *Spec.Key.ToString(), *Spec.Control.ToString())));
 				return;
@@ -108,9 +108,9 @@ namespace Musee::Motion
 
 		void PlaceMechanism(const FMuseeStageContext& Stage, const FMotionMechanismSpec& Spec, TArray<FMuseeFinding>& OutFindings)
 		{
-			const FMuseeStageAnchor* Anchor = Stage.FindAnchor(Spec.Body);
+			const FMuseeStageAnchor* Anchor = Stage.FindAnchor(Spec.Body, BodyKind);
 			USceneComponent* Body = FindBody(*Stage.StageActor, Spec.Body);
-			if (!Anchor || Anchor->Kind != BodyKind || !Body)
+			if (!Anchor || !Body)
 			{
 				OutFindings.Add(Finding(Stage, FString::Printf(TEXT("Mechanism %s: its body %s is not a Body anchor with a tagged scene component."), *Spec.Key.ToString(), *Spec.Body.ToString())));
 				return;

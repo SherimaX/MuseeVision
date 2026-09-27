@@ -2,10 +2,31 @@
 #include "MuseeCaption.h"
 #include "MuseeCollision.h"
 #include "MuseeFoundationTests.h"
+#include "MuseeStageDresser.h"
 #include "MuseeText.h"
 #include "MuseeUse.h"
 
 #if WITH_DEV_AUTOMATION_TESTS
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FMuseeFoundationStageAnchorsTest, "Musee.Foundation.StageAnchors", Musee::Tests::Flags)
+
+bool FMuseeFoundationStageAnchorsTest::RunTest(const FString& Parameters)
+{
+	const FMuseeKey Iris(TEXTVIEW("oval.golden-iris"));
+	FMuseeStageContext Stage;
+	Stage.Anchors = {
+		{ Iris, TEXT("Use"), FMuseeFrame(FVector(-4.15, 0.0, 0.42)) },
+		{ Iris, TEXT("Bed"), FMuseeFrame(FVector(-4.15, 0.0, 0.40)) },
+		{ FMuseeKey(TEXTVIEW("oval.basin")), TEXT("Body"), FMuseeFrame(FVector::ZeroVector) },
+	};
+	const FMuseeStageAnchor* Use = Stage.FindAnchor(Iris, TEXT("Use"));
+	const FMuseeStageAnchor* Bed = Stage.FindAnchor(Iris, TEXT("Bed"));
+	TestTrue(TEXT("One key names a Use and a Bed, each found by its kind"), Use && Bed && Use->Kind == TEXT("Use") && Bed->Kind == TEXT("Bed")
+		&& FMath::IsNearlyEqual(Bed->Frame.OriginMeters.Z, 0.40));
+	TestNull(TEXT("A key is not found under a kind it doesn't have"), Stage.FindAnchor(Iris, TEXT("Body")));
+	TestNull(TEXT("Nor a kind under a key that doesn't name it"), Stage.FindAnchor(FMuseeKey(TEXTVIEW("oval.basin")), TEXT("Bed")));
+	return true;
+}
 
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FMuseeFoundationTextTest, "Musee.Foundation.Text", Musee::Tests::Flags)
 

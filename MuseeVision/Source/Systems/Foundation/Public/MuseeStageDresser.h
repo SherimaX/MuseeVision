@@ -33,10 +33,13 @@ struct FMuseeStageContext
 	TArray<FMuseeStageAnchor> Anchors;
 	AActor* StageActor = nullptr;
 
-	/** The anchor with this key, or nullptr. */
-	const FMuseeStageAnchor* FindAnchor(const FMuseeKey& Key) const
+	/**
+	 * The anchor with this key and kind, or nullptr. An anchor is found by both: one place may be two anchors under one
+	 * key (the golden iris is a Use the visitor works and a Bed Nature grows the iris in).
+	 */
+	const FMuseeStageAnchor* FindAnchor(const FMuseeKey& Key, FName Kind) const
 	{
-		return Anchors.FindByPredicate([&Key](const FMuseeStageAnchor& A) { return A.Key == Key; });
+		return Anchors.FindByPredicate([&Key, Kind](const FMuseeStageAnchor& A) { return A.Key == Key && A.Kind == Kind; });
 	}
 };
 

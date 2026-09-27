@@ -12,11 +12,15 @@
 
 namespace Musee::Motion::Tests
 {
-	/** The proof stage: the lift's basin at the origin, its iris on the block's top, the door's leaf 5 m east. */
+	/**
+	 * The proof stage: the lift's basin at the origin, its iris on the block's top (a Bed first, where the iris grows,
+	 * and the Use under the same key, as the oval's golden iris is), the door's leaf 5 m east.
+	 */
 	TArray<FMuseeStageAnchor> ProofAnchors()
 	{
 		return {
 			Anchor(TEXT("proof.basin"), TEXT("Body"), FVector::ZeroVector),
+			Anchor(TEXT("proof.iris"), TEXT("Bed"), FVector(0.3, 0.0, 0.9)),
 			Anchor(TEXT("proof.iris"), TEXT("Use"), FVector(0.3, 0.0, 1.0)),
 			Anchor(TEXT("proof.leaf"), TEXT("Body"), FVector(5.0, 0.0, 0.0)),
 			Anchor(TEXT("proof.handle"), TEXT("Use"), FVector(8.0, 0.0, 1.0)),

@@ -80,8 +80,8 @@ namespace Musee::NatureMaking
 			OutFrame = AnchorFrame;
 			return true;
 		}
-		const FMuseeStageAnchor* Carrier = Stage.FindAnchor(Body);
-		if (!Carrier || Carrier->Kind != AnchorKind::Body)
+		const FMuseeStageAnchor* Carrier = Stage.FindAnchor(Body, AnchorKind::Body);
+		if (!Carrier)
 		{
 			OutWhy = FString::Printf(TEXT("its body %s is not a Body anchor of the stage"), *Body.ToString());
 			return false;
@@ -92,8 +92,8 @@ namespace Musee::NatureMaking
 
 	bool MakeWaterPiece(const FMuseeStageContext& Stage, const FNatureWater& Water, FFormMadePiece& OutPiece, FString& OutWhy)
 	{
-		const FMuseeStageAnchor* Datum = Stage.FindAnchor(Water.Anchor);
-		if (!Datum || Datum->Kind != AnchorKind::Water)
+		const FMuseeStageAnchor* Datum = Stage.FindAnchor(Water.Anchor, AnchorKind::Water);
+		if (!Datum)
 		{
 			OutWhy = FString::Printf(TEXT("its anchor %s is not a Water anchor of the stage"), *Water.Anchor.ToString());
 			return false;

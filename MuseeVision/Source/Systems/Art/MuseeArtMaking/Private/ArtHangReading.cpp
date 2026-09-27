@@ -13,7 +13,6 @@ namespace Musee::ArtMaking
 	namespace
 	{
 		const FName ArtSystem(TEXT("Art"));
-		const FName WallKind(TEXT("Wall"));
 		const FName CanvasSupport(TEXT("canvas"));
 		const FName NoFrame(TEXT("none"));
 
@@ -39,8 +38,7 @@ namespace Musee::ArtMaking
 		TArray<FString> EntryFaults(const FMuseeStageContext& Stage, const FArtHangEntry& Entry, const FEntryContext& Context)
 		{
 			TArray<FString> Out;
-			const FMuseeStageAnchor* Anchor = Stage.FindAnchor(Entry.Anchor);
-			if (!Anchor || Anchor->Kind != WallKind)
+			if (!Stage.FindAnchor(Entry.Anchor, WallAnchorKind))
 			{
 				Out.Add(FString::Printf(TEXT("%s is not a Wall anchor of the stage"), *Entry.Anchor.ToString()));
 			}

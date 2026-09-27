@@ -8,6 +8,9 @@
 
 namespace Musee::ArtMaking
 {
+	/** The kind of stage anchor a work hangs on (the stage contract): a hanging wall. */
+	inline const FName WallAnchorKind(TEXT("Wall"));
+
 	/** A finding of Art's about a stage's hanging plan. */
 	[[nodiscard]] FMuseeFinding ArtFinding(const FMuseeStageContext& Stage, const FString& Summary);
 
