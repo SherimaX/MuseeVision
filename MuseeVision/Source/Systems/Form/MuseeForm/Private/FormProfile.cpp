@@ -57,6 +57,33 @@ FFormProfile FFormProfile::Polyline(TConstArrayView<FVector2D> PointsMeters, boo
 	return Profile;
 }
 
+FFormProfile FFormProfile::Polygon(TConstArrayView<FVector2D> PointsMeters)
+{
+	// A point closer to its neighbour than a micrometre (the kernel's weld tolerance) repeats it; one whose two edges
+	// turn by less than a microradian runs straight on or doubles back.
+	constexpr double SamePointMeters = 1.0e-6;
+	constexpr double StraightRadians = 1.0e-6;
+	TArray<FVector2D> Corners(PointsMeters.GetData(), PointsMeters.Num());
+	bool bDropped = true;
+	while (bDropped && Corners.Num() >= 3)
+	{
+		bDropped = false;
+		for (int32 Index = 0; Index < Corners.Num() && Corners.Num() >= 3; ++Index)
+		{
+			const FVector2D In = Corners[Index] - Corners[(Index + Corners.Num() - 1) % Corners.Num()];
+			const FVector2D Out = Corners[(Index + 1) % Corners.Num()] - Corners[Index];
+			const double Sine = FVector2D::CrossProduct(In, Out);
+			if (In.Size() <= SamePointMeters || Out.Size() <= SamePointMeters || FMath::Abs(Sine) <= StraightRadians * In.Size() * Out.Size())
+			{
+				Corners.RemoveAt(Index);
+				bDropped = true;
+				--Index;
+			}
+		}
+	}
+	return Polyline(Corners, true);
+}
+
 FFormProfile FFormProfile::Rectangle(const FVector2D& MinMeters, const FVector2D& MaxMeters)
 {
 	const FVector2D Corners[4] = {MinMeters, FVector2D(MaxMeters.X, MinMeters.Y), MaxMeters, FVector2D(MinMeters.X, MaxMeters.Y)};

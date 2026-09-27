@@ -3,10 +3,13 @@
 #include "CoreMinimal.h"
 #include "FormBasin.h"
 #include "FormCeiling.h"
+#include "FormCut.h"
 #include "FormDome.h"
 #include "FormExtrusion.h"
 #include "FormFace.h"
+#include "FormLaid.h"
 #include "FormLathe.h"
+#include "FormLoft.h"
 #include "FormRelief.h"
 #include "FormStair.h"
 #include "FormSweep.h"
@@ -17,7 +20,7 @@
 
 /** The shape a drawing draws: one word of Form's vocabulary. */
 using FFormShape = TVariant<FFormExtrusion, FFormSweep, FFormLathe, FFormFace, FFormWall, FFormBasin, FFormStair, FFormCeiling,
-	FFormRelief, FFormDome>;
+	FFormRelief, FFormDome, FFormLoft, FFormLaid>;
 
 /**
  * A drawing of one made thing of a stage, in Form's language: a wall, a coping, a slab, a post. It says what shape it
@@ -62,6 +65,19 @@ struct FFormDrawing
 	FName Drawer;
 
 	FFormShape Shape;
+
+	/** The face a cut leaves: part CutPart. */
+	static constexpr const TCHAR* CutPart = TEXT("cut");
+
+	/** Planes the made solid is cut on, in the shape's own frame (FFormCut): a sink trimmed, a mitred or slanted end. */
+	TArray<FFormCut> Cuts;
+
+	/**
+	 * Identical members: the shape made once and set at each of these frames, given within Frame (tiles along a roof,
+	 * rafters on their purlins, balusters, a vault's rosettes). Each is a piece of its own, named <Name>.<n> from 1, and
+	 * all are the same solid, so Studio casts one mesh and places it again. Empty: one piece at Frame, named Name.
+	 */
+	TArray<FMuseeFrame> Repeats;
 
 	/** A drawing of a shape, named and finished. */
 	template <typename TShape>

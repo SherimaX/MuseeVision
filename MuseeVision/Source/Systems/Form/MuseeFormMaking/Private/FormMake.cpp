@@ -4,6 +4,7 @@
 #include "Drawing/Draw.h"
 #include "Kernel/DynamicMeshOut.h"
 #include "Kernel/MeshBuilder.h"
+#include "Kernel/PlaneCut.h"
 #include "Kernel/ShellEdges.h"
 #include "MuseeHumanMeasure.h"
 #include "MuseeUnits.h"
@@ -115,10 +116,12 @@ namespace Musee::FormMaking
 			return Made;
 		}
 
-		bool DrawShape(const FFormDrawing& Drawing, FMeshBuilder& Mesh, FMeshBuilder& Pane, FString& OutWhy)
+		bool DrawShape(const FFormDrawing& Drawing, FMeshBuilder& Mesh, FMeshBuilder& Pane, Musee::Form::Drawing::FLaidTally& Tally, FString& OutWhy)
 		{
 			using namespace Musee::Form::Drawing;
 			const FFormShape& Shape = Drawing.Shape;
+			if (const FFormLoft* S = Shape.TryGet<FFormLoft>()) { return DrawLoft(*S, Mesh, OutWhy); }
+			if (const FFormLaid* S = Shape.TryGet<FFormLaid>()) { return DrawLaid(*S, Mesh, Pane, Tally, OutWhy); }
 			if (const FFormExtrusion* S = Shape.TryGet<FFormExtrusion>()) { return DrawExtrusion(*S, Mesh, OutWhy); }
 			if (const FFormSweep* S = Shape.TryGet<FFormSweep>()) { return DrawSweep(*S, Mesh, OutWhy); }
 			if (const FFormLathe* S = Shape.TryGet<FFormLathe>()) { return DrawLathe(*S, Mesh, OutWhy); }
@@ -155,18 +158,88 @@ namespace Musee::FormMaking
 		}
 	}
 
+	namespace
+	{
+		/** A laid surface's units stay within the stock they are cut from. */
+		void CheckStock(const FFormDrawing& Drawing, const Musee::Form::Drawing::FLaidTally& Tally, TArray<FMuseeFinding>& OutFindings)
+		{
+			if (Tally.BeyondStock > 0)
+			{
+				const FFormLaid& Laid = Drawing.Shape.Get<FFormLaid>();
+				OutFindings.Add(Finding(Drawing, TEXT("Form.WithinStock"), FString::Printf(
+					TEXT("%s lays %d of its %d units larger than their stock gives (largest %.3f x %.3f m, stock %.3f x %.3f m)"),
+					*Drawing.Name.ToString(), Tally.BeyondStock, Tally.Units, Tally.LargestMeters.X, Tally.LargestMeters.Y,
+					Laid.StockMeters.GetMax(), Laid.StockMeters.GetMin()), TEXT("units beyond their stock"), Tally.BeyondStock, 0.0, 0.0));
+			}
+		}
+
+		/** Cuts every made surface of a drawing on its planes. */
+		bool CutAll(const FFormDrawing& Drawing, FMeshBuilder& Mesh, FMeshBuilder& Second, FString& OutWhy)
+		{
+			for (const FFormCut& Cut : Drawing.Cuts)
+			{
+				if (!Musee::Form::CutMesh(Mesh, Cut.PointMeters, Cut.Normal, FFormDrawing::CutPart, OutWhy)
+					|| (Second.NumTriangles() > 0 && !Musee::Form::CutMesh(Second, Cut.PointMeters, Cut.Normal, FFormDrawing::CutPart, OutWhy)))
+				{
+					return false;
+				}
+			}
+			return true;
+		}
+
+		/** The second piece a drawing makes: a ceiling's glazing, a laid surface's filled joints. */
+		void AddSecond(const FFormDrawing& Drawing, const FMeshBuilder& Second, TArray<FFormMadePiece>& OutPieces)
+		{
+			if (const FFormCeiling* Ceiling = Drawing.Shape.TryGet<FFormCeiling>())
+			{
+				FFormMadePiece& Glass = OutPieces.Add_GetRef(Piece(Drawing, FName(Drawing.Name.ToString() + TEXT(".glazing")), Second,
+					Ceiling->GlazingSurface.IsNone() ? Drawing.Surface : Ceiling->GlazingSurface));
+				Glass.bNanite = false;
+				return;
+			}
+			OutPieces.Add(Piece(Drawing, FName(Drawing.Name.ToString() + TEXT(".joints")), Second, Drawing.SurfaceOf(FFormLaid::JointPart)));
+		}
+
+		/** Identical members: the made pieces set again at each repeat, named for it; none without repeats. */
+		void Repeat(const FFormDrawing& Drawing, TArray<FFormMadePiece>& Made, TArray<FFormMadePiece>& OutPieces)
+		{
+			if (Drawing.Repeats.IsEmpty())
+			{
+				OutPieces.Append(MoveTemp(Made));
+				return;
+			}
+			const FString Name = Drawing.Name.ToString();
+			for (int32 Index = 0; Index < Drawing.Repeats.Num(); ++Index)
+			{
+				for (const FFormMadePiece& Each : Made)
+				{
+					FFormMadePiece& Member = OutPieces.Add_GetRef(Each);
+					Member.Name = FName(FString::Printf(TEXT("%s.%d%s"), *Name, Index + 1, *Each.Name.ToString().RightChop(Name.Len())));
+					Member.Frame = Drawing.Frame.FrameToParent(Drawing.Repeats[Index]);
+				}
+			}
+		}
+	}
+
 	void Make(const FFormDrawing& Given, TArray<FFormMadePiece>& OutPieces, TArray<FMuseeFinding>& OutFindings)
 	{
 		const FFormDrawing Drawing = WithDomeSurfaces(Given);
 		FMeshBuilder Mesh;
-		FMeshBuilder Pane;
+		FMeshBuilder Second;
+		Musee::Form::Drawing::FLaidTally Tally;
 		FString Why;
 		if (Drawing.Name.IsNone() || Drawing.Surface.IsNone())
 		{
 			OutFindings.Add(Unmade(Drawing, TEXT("a drawing has a name and a surface")));
 			return;
 		}
-		if (!DrawShape(Drawing, Mesh, Pane, Why))
+		const FFormLaid* Laid = Drawing.Shape.TryGet<FFormLaid>();
+		if (Laid && Laid->FillMeters >= 0.0 && !Drawing.PartSurfaces.Contains(FFormLaid::JointPart))
+		{
+			OutFindings.Add(Unmade(Drawing, TEXT("filled joints are finished in their own surface (the part joint)")));
+			return;
+		}
+		if (!DrawShape(Drawing, Mesh, Second, Tally, Why) || !CutAll(Drawing, Mesh, Second, Why))
 		{
 			OutFindings.Add(Unmade(Drawing, Why));
 			return;
@@ -176,7 +249,7 @@ namespace Musee::FormMaking
 			OutFindings.Add(Unmade(Drawing, TEXT("it draws no surface")));
 			return;
 		}
-		if (const int32 Unfaced = Mesh.NumUnfacedVertices() + Pane.NumUnfacedVertices())
+		if (const int32 Unfaced = Mesh.NumUnfacedVertices() + Second.NumUnfacedVertices())
 		{
 			OutFindings.Add(Unmade(Drawing, FString::Printf(
 				TEXT("%d of its vertices face no side: an edge of its outline or section doubles back on itself or has no length"), Unfaced)));
@@ -186,14 +259,17 @@ namespace Musee::FormMaking
 		{
 			CheckSteps(Drawing, *Stair, OutFindings);
 		}
-		OutPieces.Add(Piece(Drawing, Drawing.Name, Mesh, NAME_None));
-		if (Pane.NumTriangles() > 0)
+		if (Laid)
 		{
-			const FFormCeiling& Ceiling = Drawing.Shape.Get<FFormCeiling>();
-			FFormMadePiece& Glass = OutPieces.Add_GetRef(Piece(Drawing, FName(Drawing.Name.ToString() + TEXT(".glazing")), Pane,
-				Ceiling.GlazingSurface.IsNone() ? Drawing.Surface : Ceiling.GlazingSurface));
-			Glass.bNanite = false;
+			CheckStock(Drawing, Tally, OutFindings);
 		}
+		TArray<FFormMadePiece> Made;
+		Made.Add(Piece(Drawing, Drawing.Name, Mesh, NAME_None));
+		if (Second.NumTriangles() > 0)
+		{
+			AddSecond(Drawing, Second, Made);
+		}
+		Repeat(Drawing, Made, OutPieces);
 	}
 
 	void Make(TConstArrayView<FFormDrawing> Drawings, TArray<FFormMadePiece>& OutPieces, TArray<FMuseeFinding>& OutFindings)

@@ -38,6 +38,22 @@ namespace Musee::Form::Drawing
 	/** The slab into Slab, and the pane (when the opening is glazed) into Pane. */
 	bool DrawCeiling(const FFormCeiling& Shape, FMeshBuilder& Slab, FMeshBuilder& Pane, FString& OutWhy);
 
+	/** A loft's side and ends. */
+	bool DrawLoft(const FFormLoft& Shape, FMeshBuilder& Mesh, FString& OutWhy);
+
+	/** How a laid surface's units stand against their stock (Form.WithinStock). */
+	struct FLaidTally
+	{
+		int32 Units = 0;
+		/** Units longer or wider than the stock gives. */
+		int32 BeyondStock = 0;
+		/** The largest unit's length and width, metres. */
+		FVector2D LargestMeters = FVector2D::ZeroVector;
+	};
+
+	/** A laid surface: its units into Units and, when its joints are filled, the filling into Joints. */
+	bool DrawLaid(const FFormLaid& Shape, FMeshBuilder& Units, FMeshBuilder& Joints, FLaidTally& OutTally, FString& OutWhy);
+
 	/** Checks that a profile is well formed and, when bClosed, closed; false with the reason naming Role. */
 	bool CheckProfile(const FFormProfile& Profile, const TCHAR* Role, bool bClosed, FString& OutWhy);
 }
