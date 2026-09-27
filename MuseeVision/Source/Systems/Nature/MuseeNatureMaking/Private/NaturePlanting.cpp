@@ -245,8 +245,9 @@ namespace Musee::NatureMaking
 			return Out;
 		}
 
+		/** The pieces of a planting's parts, one to an organ, in a frame (its bed's, or a module's), their names ending in a suffix. */
 		void AddParts(const FMuseeStageContext& Stage, const FPlanting& Planting, const FPlantParts& Parts, const FMuseeFrame& Bed, TArray<FFormMadePiece>& OutPieces,
-			TArray<FMuseeFinding>& OutFindings)
+			TArray<FMuseeFinding>& OutFindings, const FString& Suffix = FString())
 		{
 			const FNatureBed& Entry = *Planting.Entry;
 			FMuseeFrame Frame;
@@ -264,13 +265,53 @@ namespace Musee::NatureMaking
 					continue;
 				}
 				FFormMadePiece& Piece = OutPieces.AddDefaulted_GetRef();
-				Piece.Name = FName(FString::Printf(TEXT("%s.%s.%s"), *Entry.Bed.ToString(), *Planting.Species->Key.ToString(), *Organ.ToString()));
+				Piece.Name = FName(FString::Printf(TEXT("%s.%s.%s%s"), *Entry.Bed.ToString(), *Planting.Species->Key.ToString(), *Organ.ToString(), *Suffix));
 				Piece.Surface = FName(FString::Printf(TEXT("plant.%s"), *Organ.ToString()));
 				MaterialOfPart(Entry, *Planting.Species, Organ, Piece);
 				Piece.Body = Entry.Body;
 				Piece.bNanite = true;
 				Piece.Frame = Frame;
 				Surface->Write(Piece.Mesh);
+			}
+		}
+
+		/**
+		 * A hedge along its line, as a run of identical modules, one to each plant at the spacing (so the stage's casting may
+		 * place one module many times): each grown in its own frame, the line along its x, from the stream of the bed's
+		 * middle modules, its first and last from their own streams, clipped across where the hedge's ends are open.
+		 */
+		void GrowModules(const FMuseeStageContext& Stage, const FPlanting& Planting, const FMuseeFrame& Bed, const FBedRegion& Region, TArray<FFormMadePiece>& OutPieces,
+			TArray<FMuseeFinding>& OutFindings)
+		{
+			const FNatureBed& Entry = *Planting.Entry;
+			FPlantSite Line;
+			DrawnFacts(Entry, Bed, Region, Line);
+			const FVector Span = Line.Line[1] - Line.Line[0];
+			const FVector Along = FVector(Span.X, Span.Y, 0.0).GetSafeNormal();
+			const int32 Modules = FMath::Max(1, Entry.Count);
+			const double Module = FVector2D(Span.X, Span.Y).Size() / Modules;
+			const FQuat Turn = Bed.Rotation * FQuat(FVector::UpVector, FMath::Atan2(Along.Y, Along.X));
+			const bool bOpen = Entry.Clipped.Ends == TEXT("open");
+			const FMuseeKey Stream = Entry.Bed.Child(Planting.Species->Key.ToString());
+			TMap<FString, FPlantParts> Grown;
+			for (int32 Index = 0; Index < Modules; ++Index)
+			{
+				const bool bFirst = Index == 0;
+				const bool bLast = Index == Modules - 1;
+				const FString Kind = bFirst && bLast ? TEXT("whole") : bFirst ? TEXT("first") : bLast ? TEXT("last") : TEXT("module");
+				FPlantParts* Parts = Grown.Find(Kind);
+				if (!Parts)
+				{
+					FPlantSite Site = Line;
+					Site.Line = { FVector::ZeroVector, FVector(Module, 0.0, 0.0) };
+					Site.bOpenStart = bOpen && bFirst;
+					Site.bOpenEnd = bOpen && bLast;
+					FRandomStream Random(Seed(Stream.Child(Kind)));
+					Parts = &Grown.Add(Kind);
+					Planting.Form->Grow(*Planting.Species, Site, Random, *Parts);
+				}
+				const FMuseeFrame Frame(Bed.PointToParent(Line.Line[0] + Along * (Module * Index)), Turn);
+				AddParts(Stage, Planting, *Parts, Frame, OutPieces, OutFindings, FString::Printf(TEXT(".%d"), Index));
 			}
 		}
 
@@ -290,6 +331,11 @@ namespace Musee::NatureMaking
 				{
 					OutFindings.Add(Finding(Stage, FString::Printf(TEXT("Bed %s: %s."), *Entry.Bed.ToString(), *Why)));
 				}
+				return;
+			}
+			if (Planting.Form->Planting == EPlanting::AlongLine)
+			{
+				GrowModules(Stage, Planting, Bed, Region, OutPieces, OutFindings);
 				return;
 			}
 			FPlantParts Parts;

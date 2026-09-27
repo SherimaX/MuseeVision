@@ -170,6 +170,8 @@ bool FNatureGrowthTest::RunTest(const FString& Parameters)
 	Site.Clip.Shoulder = 0.06f;
 	Site.Clip.CoreInset = 0.065f;
 	Site.Clip.Ends = TEXT("open");
+	Site.bOpenStart = true;
+	Site.bOpenEnd = true;
 	Site.Region = { FVector2D(-1.0, -1.0), FVector2D(1.0, -1.0), FVector2D(1.0, 1.0), FVector2D(-1.0, 1.0) };
 	Site.Trained = { { FVector(0.0, 0.0, 0.0), FVector(0.0, 0.0, 1.8) }, { FVector(0.0, 0.0, 1.8), FVector(1.5, 0.0, 1.8) } };
 	for (const FNatureSpecies& One : Species.GetValue())
@@ -340,9 +342,16 @@ bool FNatureGardenTest::RunTest(const FString& Parameters)
 	}
 	TestNotNull(TEXT("and its leaves"), Named(TEXT("garden.birch.betula-pendula.leaf")));
 	TestNotNull(TEXT("The bamboo grows its culms at their points"), Named(TEXT("garden.bamboo.phyllostachys-aureosulcata.stem")));
-	const FFormMadePiece* Core = Named(TEXT("garden.hedge.taxus-baccata.trunk"));
+	const FFormMadePiece* Core = Named(TEXT("garden.hedge.taxus-baccata.trunk.0"));
 	TestTrue(TEXT("The hedge grows its solid core along its line"), Core && Core->Collision == Musee::Collision::Solid.Profile());
-	TestNotNull(TEXT("and its skin of needles"), Named(TEXT("garden.hedge.taxus-baccata.leaf")));
+	const FFormMadePiece* Second = Named(TEXT("garden.hedge.taxus-baccata.leaf.1"));
+	const FFormMadePiece* Third = Named(TEXT("garden.hedge.taxus-baccata.leaf.2"));
+	if (TestTrue(TEXT("and its skin of needles, a module to each of its five plants"), Second && Third && Named(TEXT("garden.hedge.taxus-baccata.leaf.4"))))
+	{
+		TestTrue(TEXT("its middle modules the same, so they can be cast once"), Second->Mesh->VertexCount() == Third->Mesh->VertexCount()
+			&& Second->Mesh->GetVertex(0) == Third->Mesh->GetVertex(0));
+		TestTrue(TEXT("each at its place along the line"), FMath::IsNearlyEqual(Third->Frame.OriginMeters.X - Second->Frame.OriginMeters.X, 0.4, 1e-6));
+	}
 	TestNotNull(TEXT("The sward grows its tufts over its region"), Named(TEXT("garden.sward.festuca-rubra.leaf")));
 	const FFormMadePiece* Soil = Named(TEXT("garden.planter.ground"));
 	TestTrue(TEXT("The planter's soil is made, potted"), Soil && Soil->Working == TEXT("topsoil.potted"));

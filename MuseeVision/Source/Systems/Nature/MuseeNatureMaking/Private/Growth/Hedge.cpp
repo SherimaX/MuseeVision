@@ -7,7 +7,8 @@
  * leaves (a yew's needles) on the clipped surface, the section its bed gives (the width at the foot, the height, the
  * batter narrowing the top, the shoulders rounded), over a dark core of bare twigs lying the core inset inside it, which
  * the visitor can't pass through. Each needle stands out of the skin, turned out to the light, its tip at the clipped
- * surface where the shears left it. An open end is clipped square across.
+ * surface where the shears left it. An open end is clipped square across. The hedge grows as a run of identical modules,
+ * one to each plant at its spacing along the line, the two at its ends clipped across where the hedge's ends are open.
  *
  * Species: leavesPerSquareMeter of clipped surface; leafLengthMeters, leafWidthMeters. Colours: LeafColours;
  * LeafAgeColours [the season's new growth at the skin]; StemColours [the core's bare twigs].
@@ -133,10 +134,10 @@ namespace Musee::NatureMaking
 				const double X = Random.FRandRange(0.0, Length);
 				Needle(Species, Site.Line[0] + Along * X + Across * P.X + FVector::UpVector * P.Y, Across * Q.X + FVector::UpVector * Q.Y, Random, Surface);
 			}
-			if (Site.Clip.Ends == TEXT("open"))
+			const double EndArea = Site.Clip.Height * (Site.Clip.Width - Site.Clip.Batter);
+			for (const double X : { 0.0, Length })
 			{
-				const double EndArea = Site.Clip.Height * (Site.Clip.Width - Site.Clip.Batter);
-				for (const double X : { 0.0, Length })
+				if ((X == 0.0 && Site.bOpenStart) || (X > 0.0 && Site.bOpenEnd))
 				{
 					for (int32 N = 0, Count = FMath::RoundToInt(Density * EndArea); N < Count; ++N)
 					{

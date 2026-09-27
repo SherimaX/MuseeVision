@@ -42,9 +42,14 @@ namespace Musee::NatureMaking
 		double CrownCentre = 0.0;
 		FVector2D CrownRadii = FVector2D::ZeroVector;
 
-		/** A hedge's line, from and to, on the soil, and its clipped section. */
+		/**
+		 * A hedge's line, from and to, on the soil, and its clipped section; whether the run's start and end are the
+		 * hedge's own open ends, clipped across (a run between two others is closed at both).
+		 */
 		TArray<FVector> Line;
 		FNatureClip Clip;
+		bool bOpenStart = false;
+		bool bOpenEnd = false;
 
 		/** A cover's region on the soil: its outline and the holes in it (the water), as plan points. */
 		TArray<FVector2D> Region;
