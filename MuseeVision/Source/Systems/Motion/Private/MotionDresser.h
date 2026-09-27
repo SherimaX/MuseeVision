@@ -14,8 +14,8 @@ namespace Musee::Motion
 	 * Motion's step in furnishing a stage: reads its Mechanisms.json (a stage without one has no machines) and places,
 	 * for each mechanism, its drive on the stage actor, driving the scene component tagged with its body's key, and a
 	 * control at each Use anchor it is worked from (its own control's and its rides'). Anything the schedule gets wrong
-	 * is a finding, and that mechanism isn't placed. The stage's context names no mated ports, so every mechanism is
-	 * placed with none mated, as on the stand.
+	 * is a finding, and that mechanism isn't placed. Each mechanism knows the ports the stage's context says the site plan
+	 * mates, so a ride that requires an unmated port is never offered.
 	 */
 	void DressMechanisms(const FMuseeStageContext& Stage, TArray<FMuseeFinding>& OutFindings);
 }
