@@ -15,6 +15,12 @@
       "b": "salon.west",
       "passageMeters": 0.0,
       "note": "The oval passage: the Salon's bay 5 far wall meets the oval's passage block."
+    },
+    {
+      "a": "albion.north",
+      "b": "rotunda.south",
+      "passageMeters": 0.0,
+      "note": "Albion's porch on the Rotunda's south door (albion.md section 2): the flat port plane tangent to the drum; the joint fills the wedges. Albion stands at museum (0, 35.200, 0)."
     }
   ]
 }
