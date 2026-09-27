@@ -181,5 +181,6 @@ struct FFormWall
 	/** Whether the top follows a drawn line. */
 	[[nodiscard]] bool HasDrawnTop() const { return !Top.Start.IsEmpty(); }
 
+	/** The openings, side by side along the face or one wholly above another (a lunette over a door), never overlapping. */
 	TArray<FFormWallOpening> Openings;
 };

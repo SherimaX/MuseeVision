@@ -288,6 +288,29 @@ namespace Musee::Form::Tests
 			TestEqual(TEXT("nothing of the course stands under the arch"), UnderArch, 0);
 		}
 
+		// A door under a lunette in the same stretch of wall: the lunette a semicircle R 1.5 springing at the door's head, 2.0,
+		// opening from a sill at 3.0 on its chord there. The door notches the wall; the lunette pierces it.
+		FFormWallOpening Door;
+		Door.CenterMeters = 5.0;
+		Door.WidthMeters = 2.0;
+		Door.HeadMeters = 2.0;
+		FFormWallOpening Lunette;
+		Lunette.CenterMeters = 5.0;
+		Lunette.WidthMeters = 3.0;
+		Lunette.SillMeters = 3.0;
+		Lunette.HeadMeters = 2.0;
+		Lunette.bArched = true;
+		FFormWall Stacked;
+		Stacked.Plan = FFormProfile::Polyline({FVector2D(0.0, 0.0), FVector2D(10.0, 0.0)}, false);
+		Stacked.ThicknessMeters = 0.3;
+		Stacked.HeightMeters = 4.0;
+		Stacked.Openings = {Door, Lunette};
+		const TArray<FFormMadePiece> StackedPieces = LandMake(*this, FFormDrawing::Of(TEXT("lining"), TEXT("lining"), Stacked));
+		if (TestEqual(TEXT("a wall with a lunette over its door is one piece"), StackedPieces.Num(), 1))
+		{
+			LandClosed(*this, TEXT("a wall with a lunette over its door"), StackedPieces[0], 0);
+		}
+
 		// A lining whose top follows a vault's arc: R 5.42 about (5.0, 2.20), from its springings at 4.1 to its crown.
 		const double Radius = 5.42;
 		const double Half = 5.0;

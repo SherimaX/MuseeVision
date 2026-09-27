@@ -8,9 +8,9 @@
  * with the rough opening of its port; every hall piece at an end bears on its lining's inner face. The east lining
  * stops at the lunette's sill, where six flat panes between five steel mullions look through to the Atrium's drum.
  *
- * Form's wall has a level top, so a lining can't follow the vault's arc (R 5.42) above the eaves: the west lining is
- * drawn to the arc's crown (7.62) and the east one to the lunette's sill (6.20), and its band round the lunette is not
- * drawn. Both are listed in the sheet's first pass as Form's gaps.
+ * Each lining's top follows the sheet's outline: level at the eaves' top out to the vault's arc (R 5.42), then over the arc
+ * to its crown; its rough opening runs straight through, jambs parallel, as its class's do; and the east lining's lunette,
+ * the arc R 5.19 above its sill, is cut through it above the door, leaving the band r 5.19 to 5.42 round it.
  */
 namespace Musee::HallOfLight
 {
@@ -45,9 +45,32 @@ namespace Musee::HallOfLight
 		}
 
 		/**
-		 * The lining over the eaves' width: a wall on the port face (its face), 50 mm thick into the hall (its back, the
-		 * inner face), from its bed at -0.120, pierced by the port's rough opening with jambs square to the face (Form
-		 * cuts a curved wall's reveals radially: KIT-BACKLOG "a straight passage through a curved wall").
+		 * The lining's top along its face from its start at From (U metres along the face, Z above its bed): level at the eaves'
+		 * top out to where the vault's arc R 5.42 rises from it, then over the arc on short chords, and level again.
+		 */
+		FFormProfile LiningTop(const FEndFace& Port, double From)
+		{
+			auto Along = [&Port, From](double Y) { return Port.Radius * FMath::DegreesToRadians(FMath::Abs(Port.AngleDegrees(Y) - Port.AngleDegrees(From))); };
+			const double Bed = Plan::LiningBottom;
+			const double Rise = Plan::EavesTop - Plan::VaultAxisZ;
+			const double Springs = FMath::Asin(FMath::Sqrt(Plan::LiningArcRadius * Plan::LiningArcRadius - Rise * Rise) / Plan::LiningArcRadius);
+			const double Sign = FMath::Sign(From);
+			TArray<FVector2D> Line = {FVector2D(0.0, Plan::EavesTop - Bed)};
+			const int32 Steps = FMath::CeilToInt32(2.0 * Springs * Plan::LiningArcRadius / Plan::LiningTopStep);
+			for (int32 Step = 0; Step <= Steps; ++Step)
+			{
+				const double Angle = Sign * FMath::Lerp(Springs, -Springs, double(Step) / Steps);
+				const double Y = Plan::LiningArcRadius * FMath::Sin(Angle);
+				Line.Add(FVector2D(Along(Y), Plan::VaultAxisZ + Plan::LiningArcRadius * FMath::Cos(Angle) - Bed));
+			}
+			Line.Add(FVector2D(Along(-From), Plan::EavesTop - Bed));
+			return FFormProfile::Polyline(Line, false);
+		}
+
+		/**
+		 * The lining over the eaves' width: a wall on the port face (its face), 50 mm thick into the hall (its back, the inner
+		 * face), from its bed at -0.120 up to its outline's top, pierced by the port's rough opening straight through, and at
+		 * the east by the lunette above it.
 		 */
 		FFormDrawing LiningWall(EHallEnd End)
 		{
@@ -60,16 +83,29 @@ namespace Musee::HallOfLight
 			Shape.Plan.ArcAbout(Port.Centre(), Port.Radius, Port.Radius, Port.AngleDegrees(From), Port.AngleDegrees(-From));
 			Shape.ThicknessMeters = Plan::LiningMeters;
 			Shape.BaseMeters = Plan::LiningBottom;
-			const double Top = End == EHallEnd::West ? Plan::LiningCrown : Plan::LunetteSill;
-			Shape.HeightMeters = Top - Plan::LiningBottom;
+			Shape.Top = LiningTop(Port, From);
+			const double Centre = Port.Radius * FMath::Asin(Reach / Port.Radius);
 			const FRoughOpening Rough = RoughOpening(End);
 			FFormWallOpening Door;
-			Door.CenterMeters = Port.Radius * FMath::Asin(Reach / Port.Radius);
-			Door.WidthMeters = 2.0 * Port.Radius * FMath::Asin(Rough.Half / Port.Radius);
+			Door.CenterMeters = Centre;
+			Door.WidthMeters = 2.0 * Rough.Half;
 			Door.SillMeters = Rough.Sill;
 			Door.HeadMeters = Rough.Head;
 			Door.bArched = Rough.bArched;
+			Door.bStraight = true;
 			Shape.Openings.Add(Door);
+			if (End == EHallEnd::East)
+			{
+				// The lunette: the semicircle R 5.19 about the vault's axis, cut above the sill at 6.20.
+				FFormWallOpening Lunette;
+				Lunette.CenterMeters = Centre;
+				Lunette.WidthMeters = 2.0 * Plan::LunetteRadius;
+				Lunette.SillMeters = Plan::LunetteSill - Plan::LiningBottom;
+				Lunette.HeadMeters = Plan::VaultAxisZ - Plan::LiningBottom;
+				Lunette.bArched = true;
+				Lunette.bStraight = true;
+				Shape.Openings.Add(Lunette);
+			}
 			const TCHAR* Name = End == EHallEnd::West ? TEXT("lining.west") : TEXT("lining.east");
 			FFormDrawing Drawing = Drawn(Name, Surface(TEXT("lining")), MoveTemp(Shape), Solid);
 			Drawing.PartSurfaces.Add(FFormWall::RevealPart, Surface(TEXT("port.rough-opening")));

@@ -148,6 +148,8 @@ namespace Musee::HallOfLight::Plan
 	/** The east lining's lunette, {z >= 6.200, r <= 5.190 about (0, 2.200)}, its sill clear of the Atrium's coping. */
 	inline constexpr double LunetteSill = 6.200;
 	inline constexpr double LunetteRadius = 5.190;
+	/** The linings' tops follow the vault's arc on chords of 2 cm, which stray from it by under 10 micrometres. */
+	inline constexpr double LiningTopStep = 0.020;
 
 	/** The stereo stones, turned: R 0.350, 1.000 high, a 15 mm chamfer round the top. */
 	inline constexpr double StereoStoneRadius = 0.350;
