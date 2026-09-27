@@ -231,7 +231,7 @@ opening on its port face, meeting rail on the axis (§2).
 
 | Id | Type | Count / extent | Mount and aim | Operation |
 |---|---|---|---|---|
-| `velarium.row.*` | `linear-slot.3000k` (opal-cover battens, surface-hung on the dome bars) | 7 rows along x at y 0, ±1.5, ±3.0, ±4.5; lengths 18.50 / 17.86 / 15.78 / 11.52 (≈ 109 m), stepped in 1.0–2.0 m battens 0.30 above the cloth | row midpoint (0, y, cloth + 0.30); aim straight down onto the cloth | presence (daylight-linked top-up by day, gallery light at night) |
+| `velarium.row.*` | `linear-cove.3000k` (continuous LED strip lines, surface-laid on the dome bars; see catalogue gap 3) | 7 rows along x at y 0, ±1.5, ±3.0, ±4.5; lengths 18.50 / 17.86 / 15.78 / 11.52 (≈ 109 m), stepped in 1.0–2.0 m battens 0.30 above the cloth | row midpoint (0, y, cloth + 0.30); aim straight down onto the cloth | presence (daylight-linked top-up by day, gallery light at night) |
 | `pond.rim.01…32` | `linear-cove.3000k` strip | 32 lengths of 0.594 on centres (8 mm gaps) round the water's edge | in the lip's slot, face d −0.010, pond-z 0.3905, each `along` the edge's tangent; aim 0.40 inward onto the water. Order: from the **west apex, clockwise (north first)**, back to the west apex | always, follows `nympheas.pond.rim`; body `nympheas.basin` |
 | `stair.rail.north/south` | `linear-cove.3000k` strip | 2 runs of 10.215, each rail's straight run down the flight (a straight strip can't turn the knee) | the rails' flat underside, `along` the flight (0.886, 0, −0.464); aim 30° in from the flat's normal onto the treads | always |
 | `stair.downlight.1/2` | `downlight.3000k.31deg`, recessed | 2 | soffit (6.30, 0, −0.40) and (10.10, 0, −0.40); aim straight down | always |
@@ -465,7 +465,10 @@ the whispering-gallery check; a per-opening cloud field so the sky seen through 
 **Catalogue gaps** (Light): (1) **fixed daylight control** under the dome: a fixed louvre (white aluminium blades,
 cut-off fixed), transmission sized so the brightest reference moment gives ≤ 200 lx on the willows (Lighting.json
 control "fixed-louvre"); (2) a **control class that follows a mechanism channel** for `pond.rim.*` (written "presence");
-(3) a surface **LED batten** type for the attic (the SLOTLIGHT channel is recessed; used as the nearest type).
+(3) a surface **LED batten** type for the attic. The recessed SLOTLIGHT channel (`linear-slot.3000k`) was the nearest
+type, but its record's evidence is incomplete (no delivered flux per metre), so Light leaves it unlit; the rows use
+the complete surface strip `linear-cove.3000k` (1420 lm/m, 3000 K, CRI 90), laid on the bars, until a batten's record
+is complete.
 
 **Questions for the Architect:** (a) "the head of the axis" read as the west apex (the far end, and the stair's head);
 confirm or move the golden iris to the east apex. (b) D-019's "8.4 × 4.6 m" is the board's first-design outline; the

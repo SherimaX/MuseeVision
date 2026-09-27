@@ -14,6 +14,8 @@ namespace Musee::Light
 	{
 		const TCHAR* const ScheduleFile = TEXT("Lighting.json");
 		const FName MountKind(TEXT("Mount"));
+		/** Whose findings these are: Light's, where the fix belongs. */
+		const FName LightSystem(TEXT("Light"));
 
 		/** The places whose weather may fall on an opening (Decision D-005, the stage contract). */
 		const TCHAR* const WeatherPlaces[] = { TEXT("museum"), TEXT("giverny"), TEXT("london") };
@@ -196,7 +198,11 @@ namespace Musee::Light
 	void DressStage(const FMuseeStageContext& Stage, TArray<FMuseeFinding>& OutFindings)
 	{
 		const FName Drawer(*Stage.Stage.ToString());
-		const auto Find = [&OutFindings, Drawer](const FString& Summary) { OutFindings.Add(FMuseeFinding::Make(Drawer, Summary, FMuseeMeasurement())); };
+		const auto Find = [&OutFindings, Drawer](const FString& Summary)
+		{
+			FMuseeFinding& Found = OutFindings.Add_GetRef(FMuseeFinding::Make(Drawer, Summary, FMuseeMeasurement()));
+			Found.Owner = LightSystem;
+		};
 		const FString Path = FindSchedule(Stage.ScheduleDir);
 		if (Path.IsEmpty() || !Stage.StageActor || !Stage.StageActor->GetRootComponent())
 		{

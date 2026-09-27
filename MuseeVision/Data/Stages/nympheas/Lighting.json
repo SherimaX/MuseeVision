@@ -11,7 +11,7 @@
   "luminaires": [
     {
       "id": "velarium.row.n45",
-      "type": "linear-slot.3000k",
+      "type": "linear-cove.3000k",
       "point": [
         0.0,
         -4.5,
@@ -27,7 +27,7 @@
     },
     {
       "id": "velarium.row.n30",
-      "type": "linear-slot.3000k",
+      "type": "linear-cove.3000k",
       "point": [
         0.0,
         -3.0,
@@ -43,7 +43,7 @@
     },
     {
       "id": "velarium.row.n15",
-      "type": "linear-slot.3000k",
+      "type": "linear-cove.3000k",
       "point": [
         0.0,
         -1.5,
@@ -59,7 +59,7 @@
     },
     {
       "id": "velarium.row.axis",
-      "type": "linear-slot.3000k",
+      "type": "linear-cove.3000k",
       "point": [
         0.0,
         0.0,
@@ -75,7 +75,7 @@
     },
     {
       "id": "velarium.row.s15",
-      "type": "linear-slot.3000k",
+      "type": "linear-cove.3000k",
       "point": [
         0.0,
         1.5,
@@ -91,7 +91,7 @@
     },
     {
       "id": "velarium.row.s30",
-      "type": "linear-slot.3000k",
+      "type": "linear-cove.3000k",
       "point": [
         0.0,
         3.0,
@@ -107,7 +107,7 @@
     },
     {
       "id": "velarium.row.s45",
-      "type": "linear-slot.3000k",
+      "type": "linear-cove.3000k",
       "point": [
         0.0,
         4.5,
