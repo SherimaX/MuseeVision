@@ -6,11 +6,12 @@
  * thick and covered in milled lead. Between 4° and 64° of elevation it is coffered in five rings of 28, each coffer sunk
  * in two steps and a bevel to its panel on R 10.45.
  *
- * Form has no relief on a surface of revolution, so the coffers are built as what a plasterer runs: the panels are the
- * shell's inner face on R 10.45, the six ring ribs are turned whole with their steps and bevels, and each meridional rib
- * is three stacked layers, each turned about a horizontal axis through the dome's centre, so the rib follows the sphere
- * and its steps mitre cleanly into the ring ribs'. A meridional rib's sides are therefore parallel, its width the sheet's
- * at the ring's mid elevation, where the sheet's rule makes its sides radial (at most 8 % off at ring 5's edges).
+ * Each coffer is what a plasterer runs round its cell: the sheet's section, from the rib's face on the inner sphere down to
+ * the panel, run round the cell's four sides and mitred at its corners. It is drawn in the dome's development (Form's
+ * ground of revolution), where the cell between two meridians and two parallels is a rectangle, true in metres on the
+ * ring's middle parallel as the sheet sets its cell out; carried onto the dome, its meridional sides lie in the meridian
+ * planes of the cell's edges and its other sides on the parallels, so neighbouring coffers meet face to face along the
+ * ribs' middle lines. The panels are the shell's inner face on R 10.45.
  */
 namespace Musee::Rotunda
 {
@@ -36,9 +37,6 @@ namespace Musee::Rotunda
 			const double Cell = 2.0 * UE_DOUBLE_PI * Plan::DomeRadius * FMath::Cos(Middle) / Plan::CofferCells;
 			return FCofferSteps{Plan::RibOfCell * Cell, Plan::StepOfCell * Cell, Plan::BevelOfCell * Cell};
 		}
-
-		/** A distance up the inner sphere, as degrees of elevation. */
-		double Up(double Meters) { return FMath::RadiansToDegrees(Meters / Plan::DomeRadius); }
 
 		/** A band between two spheres of the family, from one elevation to another. */
 		FFormProfile SphericalBand(double Inner, double Outer, double FromDeg, double ToDeg)
@@ -106,111 +104,43 @@ namespace Musee::Rotunda
 			Out.Add(Turn(TEXT("dome.outer"), TEXT("dome.outer"), MoveTemp(Sheet)));
 		}
 
-		/** A point of a coffer's section: T metres up the inner sphere from an elevation, D deep into the dome. */
-		FVector2D Sunk(double BaseDeg, double T, double D)
+		/**
+		 * A coffer's section on all four sides (§3.4), A in from the cell's edge and B out of the inner sphere towards the room:
+		 * the rib's face, its two steps and the bevel down to the panel, drawn anticlockwise so its solid is on its left.
+		 */
+		FFormProfile CofferSection(const FCofferSteps& S)
 		{
-			return OnDome(Plan::DomeRadius + D, BaseDeg + Up(T));
+			const double Panel = Plan::PanelSinking;
+			const double Width = S.Width();
+			return FFormProfile::Polyline({FVector2D(0.0, 0.0), FVector2D(0.0, -Panel), FVector2D(Width, -Panel),
+				FVector2D(S.Rib + 2.0 * S.Step, -Plan::SecondSinking), FVector2D(S.Rib + S.Step, -Plan::SecondSinking),
+				FVector2D(S.Rib + S.Step, -Plan::FirstSinking), FVector2D(S.Rib, -Plan::FirstSinking), FVector2D(S.Rib, 0.0)}, true);
 		}
 
 		/**
-		 * A ring rib at a ring boundary: its face on the inner sphere, then each side's two steps and bevel down to the
-		 * panels, the side below from the ring under it and the side above from the ring over it. The lowest and highest
-		 * ribs have only their coffered side; the plain band carries on from the other.
+		 * The coffers, ring by ring: each cell's section run round it in the development of the inner sphere, whose meridian is
+		 * drawn down from the coffers' top so the development's W faces the room and V runs down the dome from 64°.
 		 */
-		FFormProfile RingRib(double Deg, const FCofferSteps* Below, const FCofferSteps* Above)
-		{
-			const double R0 = Plan::DomeRadius;
-			const double R1 = R0 + Plan::FirstSinking;
-			const double R2 = R0 + Plan::SecondSinking;
-			const double Panel = Plan::PanelRadius;
-			const double TopT = Above ? Above->Width() : 0.0;
-			const double BottomT = Below ? -Below->Width() : 0.0;
-			FFormProfile Out = FFormProfile::From(Sunk(Deg, TopT, Plan::PanelSinking));
-			Out.ArcAbout(SphereCentre, Panel, Panel, Deg + Up(TopT), Deg + Up(BottomT), EFormJoint::Crisp);
-			double FaceFrom = 0.0;
-			if (Below)
-			{
-				const FCofferSteps& S = *Below;
-				Out.LineTo(Sunk(Deg, -(S.Rib + 2.0 * S.Step), Plan::SecondSinking), EFormJoint::Crisp)
-					.ArcAbout(SphereCentre, R2, R2, Deg - Up(S.Rib + 2.0 * S.Step), Deg - Up(S.Rib + S.Step), EFormJoint::Crisp)
-					.LineTo(Sunk(Deg, -(S.Rib + S.Step), Plan::FirstSinking), EFormJoint::Crisp)
-					.ArcAbout(SphereCentre, R1, R1, Deg - Up(S.Rib + S.Step), Deg - Up(S.Rib), EFormJoint::Crisp)
-					.LineTo(Sunk(Deg, -S.Rib, 0.0), EFormJoint::Crisp);
-				FaceFrom = -S.Rib;
-			}
-			else
-			{
-				Out.LineTo(Sunk(Deg, 0.0, 0.0), EFormJoint::Crisp);
-			}
-			const double FaceTo = Above ? Above->Rib : 0.0;
-			Out.ArcAbout(SphereCentre, R0, R0, Deg + Up(FaceFrom), Deg + Up(FaceTo), EFormJoint::Crisp);
-			if (Above)
-			{
-				const FCofferSteps& S = *Above;
-				Out.LineTo(Sunk(Deg, S.Rib, Plan::FirstSinking), EFormJoint::Crisp)
-					.ArcAbout(SphereCentre, R1, R1, Deg + Up(S.Rib), Deg + Up(S.Rib + S.Step), EFormJoint::Crisp)
-					.LineTo(Sunk(Deg, S.Rib + S.Step, Plan::SecondSinking), EFormJoint::Crisp)
-					.ArcAbout(SphereCentre, R2, R2, Deg + Up(S.Rib + S.Step), Deg + Up(S.Rib + 2.0 * S.Step), EFormJoint::Crisp);
-			}
-			// The bevel back up to the start on the panels (or, with no side above, the rib's end straight down to them).
-			return Out.Close();
-		}
-
-		/**
-		 * One meridional rib of one ring: three layers, each turned about the horizontal axis through the dome's centre
-		 * square to the rib's plane, so each follows the sphere. Each layer stops where the ring ribs' own layer of the
-		 * same depth begins, so the four sides of every coffer mitre at its corners.
-		 */
-		void MeridionalRib(TArray<FFormDrawing>& Out, int32 RingIndex, int32 Cell, const FCofferSteps& S)
-		{
-			const double From = RingFromDeg(RingIndex);
-			const double To = From + Plan::CofferRingDeg;
-			const double Theta = 360.0 * Cell / Plan::CofferCells;
-			const FMuseeFrame Frame = FrameOfAxes(FVector(0.0, 0.0, Plan::DomeCentreZ), Radial(Theta), FVector::UpVector);
-			const double R0 = Plan::DomeRadius;
-			const double R1 = R0 + Plan::FirstSinking;
-			const double R2 = R0 + Plan::SecondSinking;
-			const double Inset = S.Rib + 2.0 * S.Step;
-			struct FLayer
-			{
-				FFormProfile Section;
-				double Trim;
-			};
-			FLayer Layers[3] = {
-				{FFormProfile::Rectangle(FVector2D(R0, -S.Rib), FVector2D(R1, S.Rib)), S.Rib},
-				{FFormProfile::Rectangle(FVector2D(R1, -(S.Rib + S.Step)), FVector2D(R2, S.Rib + S.Step)), S.Rib + S.Step},
-				{FFormProfile::Polyline({FVector2D(R2, -Inset), FVector2D(Plan::PanelRadius, -S.Width()), FVector2D(Plan::PanelRadius, S.Width()),
-					FVector2D(R2, Inset)}, true), Inset}};
-			for (int32 Layer = 0; Layer < 3; ++Layer)
-			{
-				FFormLathe Shape;
-				Shape.Section = MoveTemp(Layers[Layer].Section);
-				Shape.FromDegrees = From + Up(Layers[Layer].Trim);
-				Shape.ToDegrees = To - Up(Layers[Layer].Trim);
-				Out.Add(Drawn(FString::Printf(TEXT("dome.coffer.ring-%d.rib-%02d.layer-%d"), RingIndex + 1, Cell, Layer + 1), TEXT("dome.coffer"),
-					MoveTemp(Shape), nullptr, Frame));
-			}
-		}
-
 		void Coffers(TArray<FFormDrawing>& Out)
 		{
-			FCofferSteps Steps[Plan::CofferRings];
+			const double R = Plan::DomeRadius;
+			const double Top = RingFromDeg(Plan::CofferRings);
+			FFormProfile Meridian = FFormProfile::From(OnDome(R, Top));
+			Meridian.ArcAbout(SphereCentre, R, R, Top, Plan::CofferFromDeg);
+			auto Down = [R, Top](double Deg) { return R * FMath::DegreesToRadians(Top - Deg); };
 			for (int32 Index = 0; Index < Plan::CofferRings; ++Index)
 			{
-				Steps[Index] = StepsOf(Index);
-			}
-			for (int32 Boundary = 0; Boundary <= Plan::CofferRings; ++Boundary)
-			{
-				const FCofferSteps* Below = Boundary > 0 ? &Steps[Boundary - 1] : nullptr;
-				const FCofferSteps* Above = Boundary < Plan::CofferRings ? &Steps[Boundary] : nullptr;
-				const FString Name = FString::Printf(TEXT("dome.coffer.ring-rib-%d"), Boundary + 1);
-				Out.Add(Turn(*Name, TEXT("dome.coffer"), RingRib(RingFromDeg(Boundary), Below, Above)));
-			}
-			for (int32 Index = 0; Index < Plan::CofferRings; ++Index)
-			{
-				for (int32 Cell = 0; Cell < Plan::CofferCells; ++Cell)
+				const double Middle = FMath::DegreesToRadians(RingFromDeg(Index) + 0.5 * Plan::CofferRingDeg);
+				const double Reference = R * FMath::Cos(Middle);
+				const double Cell = 2.0 * UE_DOUBLE_PI * Reference / Plan::CofferCells;
+				FFormSweep Shape;
+				Shape.Section = CofferSection(StepsOf(Index));
+				Shape.Path = FFormProfile::Rectangle(FVector2D(0.0, Down(RingFromDeg(Index + 1))), FVector2D(Cell, Down(RingFromDeg(Index))));
+				for (int32 Bay = 0; Bay < Plan::CofferCells; ++Bay)
 				{
-					MeridionalRib(Out, Index, Cell, Steps[Index]);
+					FFormDrawing& Coffer = Out.Add_GetRef(Drawn(FString::Printf(TEXT("dome.coffer.ring-%d.cell-%02d"), Index + 1, Bay + 1),
+						TEXT("dome.coffer"), FFormSweep(Shape), nullptr, Turned(360.0 * Bay / Plan::CofferCells)));
+					Coffer.Ground = FFormGround::Revolved(Meridian, Reference);
 				}
 			}
 		}

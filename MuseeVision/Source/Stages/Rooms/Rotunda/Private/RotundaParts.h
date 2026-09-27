@@ -26,6 +26,9 @@ namespace Musee::Rotunda
 	/** The body of the sun clock's lifting drum, which carries the dial, its drum and the soffit. */
 	FMuseeKey DrumBody();
 
+	/** The body the retracting balustrade's two panels ride, which follows the drum's lift. */
+	FMuseeKey PanelsBody();
+
 	/** The collision classes the pieces take: solid masonry and fittings, and the floors and treads a visitor walks. */
 	inline constexpr const Musee::Collision::FClass* Solid = &Musee::Collision::Solid;
 	inline constexpr const Musee::Collision::FClass* Walkable = &Musee::Collision::Walkable;
@@ -146,4 +149,7 @@ namespace Musee::Rotunda
 	void DrawSunClock(TArray<FFormDrawing>& Out);
 	void DrawShaft(TArray<FFormDrawing>& Out);
 	void DrawStair(TArray<FFormDrawing>& Out);
+
+	/** The stair's bronze and its housings (§3.9): the well balustrade, fixed and retracting, and the wall's rail. */
+	void DrawStairFittings(TArray<FFormDrawing>& Out);
 }

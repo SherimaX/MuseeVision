@@ -111,6 +111,27 @@ namespace Musee::Rotunda::Plan
 	};
 	inline constexpr FCourse Courses[] = {{7.00, 7.75, 48, 0.0}, {7.75, 8.95, 32, 0.0}, {8.95, RingOuter, 64, 2.8125}};
 
+	/**
+	 * The motto on the middle course: HORAS · NON · NUMERO · NISI · SERENAS in cast bronze capitals of Centaur, cap 0.26 on
+	 * the baseline r 8.53, tops towards the dial, centred on φ 90° (south) and read from the ring facing the dial; tracking
+	 * 0.16 cap, 8 mm proud, 2.5 mm bevel; each stop a gap of 1.15 cap holding a gilt triangle, point down, ±0.12 cap at 0.60
+	 * cap, its point at 0.36 cap and its apex 8 mm high.
+	 */
+	inline constexpr const TCHAR* MottoWords[] = {TEXT("HORAS"), TEXT("NON"), TEXT("NUMERO"), TEXT("NISI"), TEXT("SERENAS")};
+	inline constexpr const TCHAR* MottoFace = TEXT("centaur.capitals");
+	inline constexpr double MottoCap = 0.260;
+	inline constexpr double MottoBaseline = 8.530;
+	inline constexpr double MottoCentreDeg = 90.0;
+	inline constexpr double MottoTracking = 0.16;
+	inline constexpr double MottoWordSpace = 0.6;
+	inline constexpr double MottoProud = 0.008;
+	inline constexpr double MottoBevel = 0.0025;
+	inline constexpr double MottoStopGap = 1.15;
+	inline constexpr double MottoStopHalfWidth = 0.12;
+	inline constexpr double MottoStopTop = 0.60;
+	inline constexpr double MottoStopPoint = 0.36;
+	inline constexpr double MottoStopApex = 0.008;
+
 	/** The dial: the lifting drum's top, r 0 to 6.990, z_d 0; ring and dial meet with 10 mm clear. */
 	inline constexpr double DialRadius = 6.990;
 
@@ -412,10 +433,119 @@ namespace Musee::Rotunda::Plan
 	inline constexpr double TreadInto = 0.010;
 	/** The soffit is 0.40 under the pitch line, never below z -6.02. */
 	inline constexpr double SoffitUnderPitch = 0.400;
+	inline constexpr double SoffitFloor = -6.020;
 	/** The inner string r 2.20 to 2.35: 0.12 over the pitch line, never above z -0.14, flush with the top landing. */
 	inline constexpr double StringInner = 2.200;
 	inline constexpr double StringOverPitch = 0.120;
 	inline constexpr double StringCeiling = -0.140;
+	/** The string runs half a degree past the last riser. */
+	inline constexpr double StringPastDeg = 0.5;
 	/** The nosing (forward of the riser line, up from the tread's top). */
 	inline constexpr FStep Nosing[] = {P(0.0, -0.050), P(0.022, -0.040), Arc(0.022, -0.020, 0.020, -90.0, 90.0), P(0.0, 0.0)};
+	/**
+	 * The treads' and the string's surfaces are set out on a grid of 0.10: the soffit's helicoid, whose curvature is at most
+	 * about 0.2 per metre here, is followed within 0.10^2 x 0.2 / 8 = 0.25 mm.
+	 */
+	inline constexpr double StairGrid = 0.100;
+
+	// ---- §3.9 fittings: the well balustrade, its housings, the wall rail -----------------------------------------------
+	/** The well balustrade stands in the plane r 2.15, its heights measured plumb above the string's top. */
+	inline constexpr double BalustradeRadius = 2.150;
+	/** Three bars 25 high by 20 thick, their middles at these heights; the handrail's middle at 0.90. */
+	inline constexpr double BarHeights[] = {0.0575, 0.5325, 0.8675};
+	inline constexpr double BarHalfHigh = 0.0125;
+	inline constexpr double BarThick = 0.020;
+	inline constexpr double HandrailHeight = 0.900;
+	/** The handrail: a soft bar 60 across by 45 high, a superellipse (cos t, sin t each raised to 0.7), at 24 stations. */
+	inline constexpr double HandrailAcross = 0.060;
+	inline constexpr double HandrailHigh = 0.045;
+	inline constexpr double HandrailRoundness = 0.7;
+	inline constexpr int32 HandrailStations = 24;
+	/** Standards 30 square, at most 1.60 apart and at every kink, from 0.25 below the string's top to 10 mm under the rail. */
+	inline constexpr double StandardSide = 0.030;
+	inline constexpr double StandardPitch = 1.600;
+	inline constexpr double StandardFoot = -0.250;
+	inline constexpr double StandardUnderRail = 0.010;
+	/** Each standard's bracket to the string: 24 wide, from 0.23 to 0.17 below the string's top. */
+	inline constexpr double BracketWide = 0.024;
+	inline constexpr double BracketBottom = -0.230;
+	inline constexpr double BracketTop = -0.170;
+	/** Balusters 14 square, about 0.110 apart between the bottom and middle bars, the first 0.040 in from a standard. */
+	inline constexpr double BalusterSide = 0.014;
+	inline constexpr double BalusterPitch = 0.110;
+	inline constexpr double BalusterClear = 0.040;
+	/**
+	 * Rings between the middle and top bars, touching both on the rake (§3.9): the band's outer edge runs 2 mm into the bars,
+	 * the band 12 wide and 12 thick; a boss r 0.022, 22 thick; four spokes 7 wide, 8 thick, at 45° + 90° k, running 2 mm
+	 * into the band (SunClockRails.cpp:196-212, as built); the rings keep 10 mm clear of the standards.
+	 */
+	inline constexpr double RingBandOver = 0.002;
+	inline constexpr double RingBand = 0.012;
+	inline constexpr double RingThick = 0.012;
+	inline constexpr double RingBossRadius = 0.022;
+	inline constexpr double RingBossThick = 0.022;
+	inline constexpr double SpokeWide = 0.007;
+	inline constexpr double SpokeThick = 0.008;
+	inline constexpr double SpokeInto = 0.002;
+	inline constexpr double RingClear = 0.010;
+	/**
+	 * The run ends 1° past the last riser, at the newel: a post 56 square on the landing to 0.03 over the rail's middle, a cap
+	 * 72 by 20, a ball r 0.045 sitting 3 mm into the cap (SunClockRails.cpp:450-459, as built).
+	 */
+	inline constexpr double BalustradePastDeg = 1.0;
+	inline constexpr double NewelSide = 0.056;
+	inline constexpr double NewelOverRail = 0.030;
+	inline constexpr double NewelCapSide = 0.072;
+	inline constexpr double NewelCapHigh = 0.020;
+	inline constexpr double NewelBallRadius = 0.045;
+	inline constexpr double NewelBallSeat = 0.003;
+	/** The split: below tread 8's nosing the balustrade is fixed; above it, and behind the top landing, it retracts. */
+	inline constexpr int32 SplitTread = 8;
+	/** At home a retracting panel stands 0.94 below its place (Mechanisms.json, rotunda.stair.balustrade's travel). */
+	inline constexpr double PanelHome = 0.940;
+	/** Behind the top landing the panel's plane stands 0.07 beyond the back edge, in the middle of its 0.14 housing. */
+	inline constexpr double BackPanelBehind = 0.070;
+	inline constexpr double BackHousingBehind = 0.140;
+	/** A panel's carrier bar at its foot, 24 thick, from 0.22 to 0.18 below the string's top; its standards stop 20 mm into it. */
+	inline constexpr double CarrierBottom = -0.220;
+	inline constexpr double CarrierTop = -0.180;
+	inline constexpr double CarrierThick = 0.024;
+	inline constexpr double StemInto = 0.020;
+	/**
+	 * The housings: U channels 1.20 deep under their tops, a 30 mm floor, 40 mm end blocks, a 76 mm slot; along the string
+	 * r 2.07 to 2.20, their tops flush with the string's; a bronze cap 0.06 down round the slot and a shoe 0.05 up from the
+	 * bottom, marble sides between.
+	 */
+	inline constexpr double HousingInner = 2.070;
+	inline constexpr double HousingOuter = StringInner;
+	inline constexpr double HousingDepth = 1.200;
+	inline constexpr double HousingFloor = 0.030;
+	inline constexpr double HousingEndBlock = 0.040;
+	inline constexpr double HousingSlot = 0.076;
+	inline constexpr double HousingCap = 0.060;
+	inline constexpr double HousingShoe = 0.050;
+	/** The well's housing stops a centimetre short of the split's standard; a panel keeps 5 mm clear of its end blocks. */
+	inline constexpr double HousingShort = 0.010;
+	inline constexpr double PanelClear = 0.005;
+	/**
+	 * The wall rail: a round bar Ø 0.050 at r 6.40, its middle 0.92 over the pitch line, from tread 7's nosing (its top at
+	 * -0.18, under the lowered dial) to 4° past the last riser; returned level to the wall at its top round a bend of 0.05 and
+	 * a centimetre into it, on a rose Ø 0.090, 12 proud; brackets every 1.25 from 0.30 along it, each a 16 mm square stem from
+	 * 0.085 to 0.015 under the rail's middle and an arm 17 high from its foot a centimetre into the wall
+	 * (SunClockRails.cpp:372-410, 488-507, as built).
+	 */
+	inline constexpr double WallRailRadius = 6.400;
+	inline constexpr double WallRailDiameter = 0.050;
+	inline constexpr double WallRailOverPitch = 0.920;
+	inline constexpr int32 WallRailFromTread = 7;
+	inline constexpr double WallRailPastDeg = 4.0;
+	inline constexpr double WallReturnBend = 0.050;
+	inline constexpr double RoseRadius = 0.045;
+	inline constexpr double RoseProud = 0.012;
+	inline constexpr double WallBracketPitch = 1.250;
+	inline constexpr double WallBracketFirst = 0.300;
+	inline constexpr double WallBracketSide = 0.016;
+	inline constexpr double WallBracketFoot = -0.085;
+	inline constexpr double WallBracketStemTop = -0.015;
+	inline constexpr double WallBracketArmTop = -0.068;
 }
