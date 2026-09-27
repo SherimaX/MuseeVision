@@ -2,7 +2,7 @@
 	"FileVersion": 3,
 	"EngineAssociation": "5.8",
 	"Category": "",
-	"Description": "Musﾃｩe Vision: the museum as one work, built by eleven systems (Source/Systems) and its stages (Source/Stages).",
+	"Description": "Mus・・ｽｩe Vision: the museum as one work, built by eleven systems (Source/Systems) and its stages (Source/Stages).",
 	"Modules": [
 		{
 			"Name": "MuseeFoundation",
@@ -102,6 +102,11 @@
 		},
 		{
 			"Name": "MuseeRotunda",
+			"Type": "Editor",
+			"LoadingPhase": "Default"
+		},
+		{
+			"Name": "MuseeSalon",
 			"Type": "Editor",
 			"LoadingPhase": "Default"
 		},
