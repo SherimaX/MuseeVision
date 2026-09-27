@@ -1,0 +1,48 @@
+{
+  "schema": "musee.matter.working/1",
+  "key": "milled.lead",
+  "name": "Milled (rolled) sheet lead laid in bays",
+  "appliesTo": {
+    "families": [
+      "accent"
+    ],
+    "substances": [
+      "lead"
+    ]
+  },
+  "over": [],
+  "process": "Cast lead slabs are rolled (milled) to sheet of a standard code, BS EN 12588. On the roof the plumber lays the sheet in bays over boarding, each bay fixed at its head only so it can expand and contract freely; bays are joined across the fall by wood-cored or hollow rolls and down the fall by steps (drips). Gutters are lined in the same way, in lengths joined at drips. The fresh sheet is wiped with patination oil at the end of each day to stop uneven white carbonate staining while its natural patina forms. Design and construction of fully supported lead follows BS 6915.",
+  "processSources": [
+    "The Lead Lads, 'Leadwork: the ultimate guide to lead roofing' (BS EN 12588; BS 6915:2001+A1:2014), https://theleadlads.co.uk/leadwork-the-ultimate-guide-to-lead-roofing/",
+    "Ecobat, 'Weight Chart: Rolled Lead Sheet to BS EN 12588', https://ecobat.com/wp-content/uploads/2022/06/Ecobat-Sizing-Guide-final.pdf"
+  ],
+  "codes": {
+    "text": "Code 6 for more exposed details, flat lead roof coverings, gutters, valleys and box gutters; code 7 for high-exposure, heritage, ecclesiastical and large lead roofs; code 8 for the most demanding work.",
+    "grade": "secondary",
+    "source": "The Lead Lads, 'Leadwork: the ultimate guide to lead roofing' (BS EN 12588; BS 6915:2001+A1:2014), https://theleadlads.co.uk/leadwork-the-ultimate-guide-to-lead-roofing/"
+  },
+  "stock": {
+    "text": "Codes 3-8, 1.32-3.55 mm, 15.0-40.26 kg/m2, in 3 m and 6 m rolls, 150-1580 mm wide (see the lead substance record).",
+    "grade": "record",
+    "source": "MuseeVision/Data/Matter/Substances/lead.json (stock.sheetCodes)"
+  },
+  "patination": {
+    "text": "New lead sheet can develop uneven white carbonate staining when exposed to rain and damp; patination oil is applied at the end of each working day and on completion.",
+    "grade": "secondary",
+    "source": "The Lead Lads, 'Leadwork: the ultimate guide to lead roofing' (BS EN 12588; BS 6915:2001+A1:2014), https://theleadlads.co.uk/leadwork-the-ultimate-guide-to-lead-roofing/"
+  },
+  "photograph": [
+    "Bays with rolls and drips, gently undulating; dressed edges turned over the gutter's upstands; dull grey with paler carbonate at the drips."
+  ],
+  "unverified": [
+    {
+      "field": "bays",
+      "text": "bay width and length per code; drip height",
+      "reason": "Bay sizes and drip heights per code were not read from the Lead Sheet Association manual."
+    }
+  ],
+  "sources": [
+    "The Lead Lads, 'Leadwork: the ultimate guide to lead roofing' (BS EN 12588; BS 6915:2001+A1:2014), https://theleadlads.co.uk/leadwork-the-ultimate-guide-to-lead-roofing/",
+    "MuseeVision/Data/Matter/Substances/lead.json (stock.sheetCodes)"
+  ]
+}

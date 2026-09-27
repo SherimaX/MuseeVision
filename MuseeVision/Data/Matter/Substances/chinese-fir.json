@@ -1,0 +1,171 @@
+{
+  "schema": "musee.matter.substance/1",
+  "key": "chinese-fir",
+  "name": "Chinese fir (杉木, Cunninghamia lanceolata)",
+  "family": "accent",
+  "accentOf": "oak",
+  "aliases": [
+    "杉木",
+    "China-fir",
+    "Chinese fir"
+  ],
+  "summary": "The most important fast-growing timber of southern China: pale, light, soft, easily worked and resistant to insects. In Chenghuai it is the purlins, rafters and roof boards, painted the same iron-oxide red as the columns and darkened by age and smoke.",
+  "dossier": "Docs/Matter/chinese-fir.md",
+  "workings": [
+    "sawn.plain",
+    "dizhang",
+    "painted.tung-oil.iron-red",
+    "painted.caihua"
+  ],
+  "histories": [
+    "oak.movement",
+    "oak.coating-ageing"
+  ],
+  "identity": {
+    "class": {
+      "text": "Conifer (Cupressaceae); wood pale yellow to white, soft but durable, easily worked, resistant to insects and termites.",
+      "grade": "secondary",
+      "source": "Earle, C.J. (ed.) The Gymnosperm Database: Cunninghamia lanceolata, last modified 2026-07-30, https://www.conifers.org/cu/Cunninghamia_lanceolata.php"
+    },
+    "whyAnAccent": {
+      "text": "Principle 2 names one oak. Chenghuai is built as it would be in Beijing, and its approved Materials board names Korean pine, Chinese fir and plantation Phoebe. Each is declared an accent of the oak family (D-014): timber in the oak's role, tied to it by value and hue under its finish. The Architect may overturn this reading.",
+      "grade": "design",
+      "source": "MuseeVision/Journal/Decisions.md, D-014 (Matter: every substance carries its family; an accent names its core family); plan/proposals/chenghuai/canvas/Materials.dc.html (approved Chenghuai proposal: '營造')"
+    }
+  },
+  "formation": {
+    "how": "A conifer of the warm regions south of the Chang Jiang, grown in plantations from seed, cuttings or suckers (rare among conifers). Its light, straight timber has long been used for houses, bridges, ships and coffins.",
+    "facts": {
+      "treeHeight": {
+        "value": 50,
+        "unit": "m",
+        "grade": "secondary",
+        "source": "Earle, C.J. (ed.) The Gymnosperm Database: Cunninghamia lanceolata, last modified 2026-07-30, https://www.conifers.org/cu/Cunninghamia_lanceolata.php",
+        "note": "'can reach up to 50 m in height and 300 cm dbh'"
+      },
+      "trunkDiameter": {
+        "value": 3.0,
+        "unit": "m",
+        "grade": "secondary",
+        "source": "Earle, C.J. (ed.) The Gymnosperm Database: Cunninghamia lanceolata, last modified 2026-07-30, https://www.conifers.org/cu/Cunninghamia_lanceolata.php",
+        "asReported": "300 cm dbh"
+      },
+      "uses": {
+        "text": "House-building, bridge construction and, historically, coffins; furniture and panelling.",
+        "grade": "secondary",
+        "source": "Earle, C.J. (ed.) The Gymnosperm Database: Cunninghamia lanceolata, last modified 2026-07-30, https://www.conifers.org/cu/Cunninghamia_lanceolata.php"
+      },
+      "plantation": {
+        "text": "The most important fast-growing timber tree of the warm regions south of the Chang Jiang valley.",
+        "grade": "secondary",
+        "source": "Earle, C.J. (ed.) The Gymnosperm Database: Cunninghamia lanceolata, last modified 2026-07-30, https://www.conifers.org/cu/Cunninghamia_lanceolata.php"
+      }
+    }
+  },
+  "optics": {
+    "note": "Never seen bare in the museum (painted red).",
+    "cellWallRefractiveIndex": {
+      "value": 1.55,
+      "unit": "1",
+      "grade": "secondary",
+      "source": "Marschner, S.R., Westin, S.H., Arbree, A. & Moon, J.T. (2005) Measuring and modeling the appearance of finished wood. ACM Transactions on Graphics 24(3), 727-734, https://doi.org/10.1145/1073204.1073254 (https://www.cs.cornell.edu/~srm/publications/SG05-wood-lr.pdf)",
+      "note": "the cell wall treated as one homogeneous dielectric ('cellulose'), following Saarinen and Muinonen (2001) for paper fibres; a modelling value, not a measured index of oak"
+    }
+  },
+  "physical": {
+    "density": {
+      "value": 370,
+      "unit": "kg/m3",
+      "grade": "measured",
+      "source": "Zhan, T., Lu, J., Jiang, J., Peng, H., Li, A. & Chang, J. (2016) Viscoelastic properties of the Chinese fir (Cunninghamia lanceolata) during moisture sorption processes determined by harmonic tests. Materials 9(12), 1020, https://doi.org/10.3390/ma9121020",
+      "asReported": "0.37 ± 0.02 g/cm3",
+      "conditions": "outer heartwood, air-dried to about 12 % moisture content"
+    },
+    "densityRange": {
+      "min": 400,
+      "max": 500,
+      "unit": "kg/m3",
+      "grade": "secondary",
+      "source": "Earle, C.J. (ed.) The Gymnosperm Database: Cunninghamia lanceolata, last modified 2026-07-30, https://www.conifers.org/cu/Cunninghamia_lanceolata.php",
+      "asReported": "density 0.4-0.5"
+    }
+  },
+  "acoustic": {
+    "absorptionByOctave": {
+      "axis": "frequency",
+      "axisUnit": "Hz",
+      "axisValues": [
+        125,
+        250,
+        500,
+        1000,
+        2000,
+        4000
+      ],
+      "unit": "1",
+      "values": [
+        0.15,
+        0.11,
+        0.1,
+        0.07,
+        0.06,
+        0.07
+      ],
+      "grade": "secondary",
+      "source": "Table 'Sound Absorption Coefficients', http://usenclosure.com/Diffraction%20Graphs/Sound%20Absorption%20Coefficients.pdf (the same table the white group cites for plaster; it names no primary source) ; Sengpiel Audio, table of absorption coefficients, https://sengpielaudio.com/calculator-RT60Coeff.htm (names no primary source)",
+      "conditions": "row 'Wood' under Floors (usenclosure) = 'wood on joists' (Sengpiel): boards on joists, random incidence"
+    },
+    "note": "Roof boards on rafters, seen from below: the case the row describes."
+  },
+  "stock": {
+    "logSize": {
+      "value": 3.0,
+      "unit": "m",
+      "grade": "secondary",
+      "source": "Earle, C.J. (ed.) The Gymnosperm Database: Cunninghamia lanceolata, last modified 2026-07-30, https://www.conifers.org/cu/Cunninghamia_lanceolata.php",
+      "note": "largest trunk diameter; rafter and purlin sizes are Form's"
+    },
+    "note": "Rafter (椽) spacing and section, purlin (檩) diameter and board (望板) thickness follow the Qing rules in Form."
+  },
+  "physicalMaterial": {
+    "note": "Overhead; not walked on or touched."
+  },
+  "uses": [
+    {
+      "where": "Chenghuai: purlins (檩), rafters (椽) and roof boards (望板)",
+      "working": "dizhang",
+      "finish": "painted.tung-oil.iron-red",
+      "histories": [
+        "oak.coating-ageing"
+      ],
+      "note": "'the same red on the rafters and their boarding, darkened by age and smoke'",
+      "source": "plan/proposals/chenghuai/canvas/Materials.dc.html (approved Chenghuai proposal: '營造') ('杉木 Chinese fir: purlins, rafters, roof boards'); windows/Source/MuseeVision/Chenghuai/ChenghuaiGeometry.h, enum EChPart (frozen as-built reference) (RafterRed)",
+      "grade": "design"
+    }
+  ],
+  "photograph": [
+    "Rafters and boards in a dull, darker red than the columns; the rafter heads painted; boards' joints read as fine lines between rafters."
+  ],
+  "evidence": [],
+  "evidenceSearch": {
+    "searched": [
+      "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR (CREDITS.md, CREDITS_chenghuai.md)"
+    ],
+    "found": "Nothing for Chinese fir.",
+    "tier": "Painted over: the working's pigments and film carry the look."
+  },
+  "unverified": [
+    {
+      "field": "physical.shrinkage (radial, tangential)",
+      "value": null,
+      "unit": "1",
+      "reason": "No open measured table for clear Chinese fir was read; the MDPI study of clear versus knotty fir could not be opened."
+    },
+    {
+      "field": "physical.mechanical properties",
+      "value": null,
+      "unit": "MPa",
+      "reason": "Not read in an accessible source."
+    }
+  ]
+}

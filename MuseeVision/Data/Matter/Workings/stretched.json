@@ -1,0 +1,96 @@
+{
+  "schema": "musee.matter.working/1",
+  "key": "stretched",
+  "name": "Stretched (tenture: cloth on battens or boards)",
+  "appliesTo": {
+    "families": [
+      "accent"
+    ],
+    "substances": [
+      "silk",
+      "linen",
+      "wool-felt"
+    ]
+  },
+  "over": [],
+  "process": "The upholsterer's wall hanging (tenture murale): battens are fixed to the wall, a cotton wadding (molleton) is stapled over them, and the cloth is stretched over it from the centre of the wall outward, stapled closely along top and bottom and finished with a braid (galon); or held in clip profiles with an invisible edge. Panels and boards (case backs, screens) are covered the same way, the cloth wrapped round the edges; a blind is stretched on a frame.",
+  "steps": [
+    {
+      "step": "fix a frame of battens to the wall with mastic-adhesive",
+      "source": "Futura (la rédaction) (2020) 'Tenture murale et tissu tendu : deux types de pose', 16 November 2020, https://www.futura-sciences.com/maison/dossiers/decoration-revetement-mural-faire-bon-choix-971/page/6/"
+    },
+    {
+      "step": "staple the molleton (microperforated film on cotton wadding: acoustic and thermal comfort) every 10-15 cm",
+      "source": "Futura (la rédaction) (2020) 'Tenture murale et tissu tendu : deux types de pose', 16 November 2020, https://www.futura-sciences.com/maison/dossiers/decoration-revetement-mural-faire-bon-choix-971/page/6/"
+    },
+    {
+      "step": "cut the cloth with an 8-10 cm margin; position it loosely",
+      "source": "Futura (la rédaction) (2020) 'Tenture murale et tissu tendu : deux types de pose', 16 November 2020, https://www.futura-sciences.com/maison/dossiers/decoration-revetement-mural-faire-bon-choix-971/page/6/"
+    },
+    {
+      "step": "tension progressively from the centre of the wall outward, keeping the grain straight; staple every 2 cm, top and bottom, then the sides",
+      "source": "Futura (la rédaction) (2020) 'Tenture murale et tissu tendu : deux types de pose', 16 November 2020, https://www.futura-sciences.com/maison/dossiers/decoration-revetement-mural-faire-bon-choix-971/page/6/"
+    },
+    {
+      "step": "cover the edges with a galon or other trim; or use clip profiles for an invisible finish",
+      "source": "Futura (la rédaction) (2020) 'Tenture murale et tissu tendu : deux types de pose', 16 November 2020, https://www.futura-sciences.com/maison/dossiers/decoration-revetement-mural-faire-bon-choix-971/page/6/"
+    }
+  ],
+  "facts": {
+    "stapleSpacingMolleton": {
+      "min": 100,
+      "max": 150,
+      "unit": "mm",
+      "grade": "guidance",
+      "source": "Futura (la rédaction) (2020) 'Tenture murale et tissu tendu : deux types de pose', 16 November 2020, https://www.futura-sciences.com/maison/dossiers/decoration-revetement-mural-faire-bon-choix-971/page/6/"
+    },
+    "stapleSpacingCloth": {
+      "value": 20,
+      "unit": "mm",
+      "grade": "guidance",
+      "source": "Futura (la rédaction) (2020) 'Tenture murale et tissu tendu : deux types de pose', 16 November 2020, https://www.futura-sciences.com/maison/dossiers/decoration-revetement-mural-faire-bon-choix-971/page/6/"
+    },
+    "margin": {
+      "min": 80,
+      "max": 100,
+      "unit": "mm",
+      "grade": "guidance",
+      "source": "Futura (la rédaction) (2020) 'Tenture murale et tissu tendu : deux types de pose', 16 November 2020, https://www.futura-sciences.com/maison/dossiers/decoration-revetement-mural-faire-bon-choix-971/page/6/"
+    }
+  },
+  "museum": {
+    "salon": {
+      "text": "Each bay's silk wraps onto the faces of its piers corner to corner and stops 0.14 m short of each jamb; the jambs, arches and vault stay stone.",
+      "grade": "design",
+      "source": "plan/proposals/salon-interior/canvas/Plan.dc.html (approved Salon interior proposal); plan/proposals/salon-interior/canvas/Details.dc.html (approved Salon interior proposal)"
+    },
+    "salonSlots": {
+      "text": "A light slot under the cornice washes the silk down and one in the skirting washes it up.",
+      "grade": "design",
+      "source": "windows/Source/MuseeVision/Salon/SalonStructure.h (frozen as-built reference)"
+    },
+    "reserve": {
+      "text": "Two fields of natural linen stretched on boards in each screen's fumed-oak frame.",
+      "grade": "design",
+      "source": "windows/Source/MuseeVision/Reserve/ReserveRacks.h and ReserveStructure.h; windows/Source/MuseeVision/Plan/MuseePlan.h (frozen as-built reference)"
+    }
+  },
+  "surface": {
+    "tension": "Flat and taut with a very slight pillowing between battens; the weave straight; no seams on a pier face; seams on long walls at piece widths."
+  },
+  "photograph": [
+    "A continuous, softly padded plane of cloth; the braid or a crisp return at every edge.",
+    "A faint grid of battens under raking light."
+  ],
+  "unverified": [
+    {
+      "field": "molleton thickness",
+      "value": null,
+      "unit": "mm",
+      "reason": "Not read."
+    }
+  ],
+  "sources": [
+    "Futura (la rédaction) (2020) 'Tenture murale et tissu tendu : deux types de pose', 16 November 2020, https://www.futura-sciences.com/maison/dossiers/decoration-revetement-mural-faire-bon-choix-971/page/6/"
+  ]
+}

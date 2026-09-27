@@ -1,0 +1,43 @@
+{
+  "schema": "musee.matter.working/1",
+  "key": "upholstered",
+  "name": "Upholstered (bench, quilted and piped)",
+  "appliesTo": {
+    "families": [
+      "accent"
+    ],
+    "substances": [
+      "velvet"
+    ]
+  },
+  "over": [],
+  "process": "The bench body is built up over its frame and covered in the cloth, the top quilted into panels with piped seams and a piped edge; the pile of a velvet runs one way over every panel so the colour reads evenly.",
+  "museum": {
+    "text": "Backless, 2.4 x 0.6 m, 0.44 m high: an upholstered body in velvet of the bay's own colour, its top quilted in four panels with piped seams and a piped edge, on a dark fumed-oak plinth set back 40 mm.",
+    "grade": "design",
+    "source": "windows/Source/MuseeVision/Salon/SalonInterior.h (frozen as-built reference); plan/proposals/salon-interior/canvas/Details.dc.html (approved Salon interior proposal)"
+  },
+  "pileRule": {
+    "text": "Velvet can be cut pile up or pile down, for more shine or more saturated colour.",
+    "grade": "secondary",
+    "source": "Wikipedia, 'Velvet', https://en.wikipedia.org/wiki/Velvet (read 2026-09-26)"
+  },
+  "surface": {
+    "form": "Soft domes between quilting lines; firm piped arrises; the cloth pulled smooth at the sides."
+  },
+  "photograph": [
+    "Four soft panels on top with shadowed seams; the piping a bright line; sides smooth and dark."
+  ],
+  "unverified": [
+    {
+      "field": "filling and springing",
+      "value": null,
+      "unit": "text",
+      "reason": "The bench's inner build-up (webbing, springs or foam, wadding) is not specified by the design or a source read."
+    }
+  ],
+  "sources": [
+    "windows/Source/MuseeVision/Salon/SalonInterior.h (frozen as-built reference)",
+    "Wikipedia, 'Velvet', https://en.wikipedia.org/wiki/Velvet (read 2026-09-26)"
+  ]
+}

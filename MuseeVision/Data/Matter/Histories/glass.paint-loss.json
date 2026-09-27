@@ -1,0 +1,84 @@
+{
+  "schema": "musee.matter.history/1",
+  "key": "glass.paint-loss",
+  "name": "Loss of fired paint from 19th-century stained glass",
+  "family": "glass",
+  "appliesTo": {
+    "families": [
+      "glass"
+    ],
+    "substances": [
+      "antique-glass"
+    ],
+    "workings": [
+      "painted.vitreous"
+    ]
+  },
+  "surfaceLawTerms": [
+    "age",
+    "wetness",
+    "chemistry"
+  ],
+  "describes": "Some mid- and late-19th-century glass paint did not fuse well to its glass and has since flaked or washed away, leaving faces, hands and inscriptions as pale 'ghost images' while better-fired shading survives. The loss is worst on the inside face, which is wet with condensation on a daily cycle, and on clear glass; back-painted shading and paint on the outside of deep yellow pot-metal pieces survive best. Under the microscope the failing paint is granular, powdery, with pinholes and vertical microcracks running down to the glass. The causes studied are the recipe (much pigment, a hard lead-silicate flux, coarse iron oxide), under-firing or uneven firing of pieces of mixed glass types, and the water; Morris blamed borax, though analysis found too little sodium for that.",
+  "terms": {
+    "example": {
+      "text": "Hardman's Sherborne Abbey west window (1851) lost paint severely; the north-aisle Apostle windows failed within about 14 years (1851-1865); Beverley Minster (1859, 1865) moderately; Emscote (1889) is in good condition.",
+      "grade": "measured",
+      "source": "A. Gilchrist, ''The tears wept by our windows': severe paint loss from stained glass windows of the mid-nineteenth century', Vidimus 64, https://www.vidimus.org/issue-64/feature-83/"
+    },
+    "firmsAffected": {
+      "text": "Hardman, James Powell & Sons, Burlison & Grylls, Lavers Barraud & Westlake, C. E. Kempe & Co., Capronnier and Bethune; Heaton Butler & Bayne and Clayton & Bell less so.",
+      "grade": "secondary",
+      "source": "A. Gilchrist, ''The tears wept by our windows': severe paint loss from stained glass windows of the mid-nineteenth century', Vidimus 64, https://www.vidimus.org/issue-64/feature-83/"
+    },
+    "recipe": {
+      "text": "Pigment about 50 % by weight; lead-silicate flux (lead:silica about 3:2); coarse iron-oxide particles.",
+      "grade": "measured",
+      "source": "A. Gilchrist, ''The tears wept by our windows': severe paint loss from stained glass windows of the mid-nineteenth century', Vidimus 64, https://www.vidimus.org/issue-64/feature-83/"
+    },
+    "moisture": {
+      "text": "'the inside face ... becomes damp by condensation ... on a daily cycle'; the outside face is in better condition than the inside.",
+      "grade": "measured",
+      "source": "A. Gilchrist, ''The tears wept by our windows': severe paint loss from stained glass windows of the mid-nineteenth century', Vidimus 64, https://www.vidimus.org/issue-64/feature-83/"
+    },
+    "risk": {
+      "text": "Fired paint that is 'thinly matted, under-fired or badly ground' can fail and accelerate decay.",
+      "grade": "secondary",
+      "source": "D. Anderson, 'Stained Glass and its Decay', The Building Conservation Directory (1996), https://www.buildingconservation.com/articles/glassdecay/glassdecay.htm"
+    },
+    "firing": {
+      "min": 650,
+      "max": 700,
+      "unit": "degC",
+      "grade": "measured",
+      "source": "A. Rodrigues, M. L. Coutinho, C. Machado, L. Cerqueira Alves, A. Machado and M. Vilarigues, 'An Overview of Germanic Grisailles through the Stained-Glass Collection at Pena Palace', Heritage 5 (2022) 1003-1023, doi:10.3390/heritage5020055",
+      "note": "the normal firing range of grisaille"
+    }
+  },
+  "bySubstance": {
+    "note": "Morris, Marshall, Faulkner & Co.'s 1862 panels are not among the windows studied; how much loss to give the band is a design decision (Art and Matter), recorded in unverified."
+  },
+  "drivers": [
+    {
+      "driver": "condensation on the inside face (daily wet cycle)",
+      "owner": "Nature (condensation) and Time (weather: London's, D-005)"
+    },
+    {
+      "driver": "paint thickness and type per piece (trace, matte)",
+      "owner": "Art (the glazing atlas)"
+    }
+  ],
+  "photograph": "Faces and hands pale and blank where their trace lines have gone, outlines surviving as faint ghosts; granular, patchy mattes; losses heavier on the inside face.",
+  "unverified": [
+    {
+      "field": "bySubstance.tristramBand",
+      "text": "paint condition of the 1862 Tristram panels",
+      "reason": "The condition of the Harden Grange panels (Bradford Museums) was not read; photographs to ask of Bradford are pending (Albion Details board)."
+    }
+  ],
+  "sources": [
+    "A. Gilchrist, ''The tears wept by our windows': severe paint loss from stained glass windows of the mid-nineteenth century', Vidimus 64, https://www.vidimus.org/issue-64/feature-83/",
+    "D. Anderson, 'Stained Glass and its Decay', The Building Conservation Directory (1996), https://www.buildingconservation.com/articles/glassdecay/glassdecay.htm",
+    "A. Rodrigues, M. L. Coutinho, C. Machado, L. Cerqueira Alves, A. Machado and M. Vilarigues, 'An Overview of Germanic Grisailles through the Stained-Glass Collection at Pena Palace', Heritage 5 (2022) 1003-1023, doi:10.3390/heritage5020055"
+  ]
+}

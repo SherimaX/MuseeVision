@@ -1,0 +1,105 @@
+{
+  "schema": "musee.matter.working/1",
+  "key": "painted.tung-oil.black",
+  "name": "Oil-painted black (黑烟子油)",
+  "appliesTo": {
+    "families": [
+      "accent"
+    ],
+    "substances": [
+      "korean-pine",
+      "chinese-fir"
+    ]
+  },
+  "over": [
+    "dizhang"
+  ],
+  "process": "Oil paint in the Qing official manner (油饰), over a 地仗 ground: putty, then three coats of 光油 (boiled tung oil) — two pigmented and one clear. The film is thin, glossy when new, and chalks and dulls in weather. The board's 'lacquer' for the house is the trade's 油漆: Qing official buildings are finished in pigmented boiled tung oil (油饰), not in true lacquer (大漆); true lacquer appears in Chenghuai only as the garden's 广漆.",
+  "steps": [
+    {
+      "step": "one coat of putty (腻子), ground fine and levelled, wiped with a damp cloth",
+      "source": "周乾 Zhou Qian (2024) 故宫建筑油饰工艺里的民间智慧 [Folk wisdom in the oil-paint craft of the Palace Museum's buildings]. 北京晚报 (15 August 2024), republished by Tencent News 2024-09-21, https://news.qq.com/rain/a/20240921A07NT600"
+    },
+    {
+      "step": "first coat of pigmented 光油",
+      "source": "周乾 Zhou Qian (2024) 故宫建筑油饰工艺里的民间智慧 [Folk wisdom in the oil-paint craft of the Palace Museum's buildings]. 北京晚报 (15 August 2024), republished by Tencent News 2024-09-21, https://news.qq.com/rain/a/20240921A07NT600"
+    },
+    {
+      "step": "second coat of pigmented 光油, after rubbing with 青粉 and fine sandpaper",
+      "source": "周乾 Zhou Qian (2024) 故宫建筑油饰工艺里的民间智慧 [Folk wisdom in the oil-paint craft of the Palace Museum's buildings]. 北京晚报 (15 August 2024), republished by Tencent News 2024-09-21, https://news.qq.com/rain/a/20240921A07NT600"
+    },
+    {
+      "step": "a clear top coat of 光油 (罩面油, no pigment)",
+      "source": "周乾 Zhou Qian (2024) 故宫建筑油饰工艺里的民间智慧 [Folk wisdom in the oil-paint craft of the Palace Museum's buildings]. 北京晚报 (15 August 2024), republished by Tencent News 2024-09-21, https://news.qq.com/rain/a/20240921A07NT600"
+    }
+  ],
+  "binder": {
+    "text": "光油 (广油): tung oil boiled with a little rosin powder, 土子 (an iron mineral) and 黄丹 (a lead powder): clear, quick-drying, the least durable of the transparent finishes.",
+    "grade": "secondary",
+    "source": "雅昌艺术市场监测中心 (2018) 明清家具透明涂料的成分与鉴别 [The composition and identification of the clear finishes of Ming and Qing furniture], 2018-10-10, https://amma.artron.net/observation_shownews.php?newid=1030835"
+  },
+  "pigment": {
+    "recipe": "黑烟子 (lamp or soot black) ground into 光油.",
+    "mineral": "carbon black (amorphous carbon)",
+    "rule": {
+      "text": "门用黑饰: the gate's leaves in black.",
+      "grade": "design",
+      "source": "plan/proposals/chenghuai/canvas/Materials.dc.html (approved Chenghuai proposal: '營造')"
+    }
+  },
+  "uses": [
+    {
+      "where": "Chenghuai: the gate's leaves; the plaques' boards (with gilt characters)",
+      "source": "plan/proposals/chenghuai/canvas/Materials.dc.html (approved Chenghuai proposal: '營造'); windows/Source/MuseeVision/Chenghuai/ChenghuaiGeometry.h, enum EChPart (frozen as-built reference) (BlackLacquer)",
+      "grade": "design"
+    }
+  ],
+  "designColour": {
+    "value": [
+      0.008,
+      0.0065,
+      0.0052
+    ],
+    "unit": "1",
+    "space": "linear Rec.709 (sRGB primaries), D65 white",
+    "grade": "design",
+    "source": "windows/Scripts/chenghuai.py (frozen as-built reference) (colours of the first build)",
+    "asReported": "#161310",
+    "conditions": "black of the gate leaves",
+    "derivation": "the design's sRGB hex decoded with the sRGB transfer function; a design colour, not a measurement",
+    "note": "the first build's colour, kept as the design until a painted specimen is measured"
+  },
+  "layers": {
+    "system": {
+      "text": "地仗 layer (protects the timber) → 油皮 oil paint (decoration) → gilding where required.",
+      "grade": "secondary",
+      "source": "周乾 Zhou Qian (2024) 故宫建筑油饰工艺里的民间智慧 [Folk wisdom in the oil-paint craft of the Palace Museum's buildings]. 北京晚报 (15 August 2024), republished by Tencent News 2024-09-21, https://news.qq.com/rain/a/20240921A07NT600"
+    }
+  },
+  "surface": {
+    "new": "Glossy, smooth, deep colour.",
+    "aged": "Dull, chalky, crazed along the grain, darker with dirt on rafters and under eaves."
+  },
+  "photograph": [
+    "An even, opaque colour over a perfectly smooth rounded body; a soft gloss when new, dull and chalky after years outdoors.",
+    "Fine cracks along the grain and short cross-cracks (断纹) on old work; flakes showing grey ground beneath."
+  ],
+  "unverified": [
+    {
+      "field": "film thickness per coat",
+      "value": null,
+      "unit": "um",
+      "reason": "Not read."
+    },
+    {
+      "field": "pigment.recipe (黑烟子油)",
+      "value": null,
+      "unit": "text",
+      "reason": "Two preparations of 黑烟子油 (with spirit and water, or with kerosene, then tung oil) appear in a search summary of a Guangzhou heritage manual that could not be opened."
+    }
+  ],
+  "sources": [
+    "周乾 Zhou Qian (2024) 故宫建筑油饰工艺里的民间智慧 [Folk wisdom in the oil-paint craft of the Palace Museum's buildings]. 北京晚报 (15 August 2024), republished by Tencent News 2024-09-21, https://news.qq.com/rain/a/20240921A07NT600",
+    "雅昌艺术市场监测中心 (2018) 明清家具透明涂料的成分与鉴别 [The composition and identification of the clear finishes of Ming and Qing furniture], 2018-10-10, https://amma.artron.net/observation_shownews.php?newid=1030835"
+  ]
+}

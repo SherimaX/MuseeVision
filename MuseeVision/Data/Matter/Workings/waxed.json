@@ -1,0 +1,80 @@
+{
+  "schema": "musee.matter.working/1",
+  "key": "waxed",
+  "name": "Waxed",
+  "appliesTo": {
+    "families": [
+      "oak",
+      "accent"
+    ],
+    "substances": [
+      "oak",
+      "phoebe"
+    ]
+  },
+  "over": [
+    "sawn.quarter",
+    "sawn.plain",
+    "fumed"
+  ],
+  "process": "Wax is rubbed into the sanded wood, left to harden and buffed; coats are renewed rather than stripped, so an old waxed surface builds a soft, deep polish, dirtier in the pores. Two traditions: European paste wax (beeswax, sometimes with carnauba, softened in a solvent), rubbed on cold; and the Chinese hot-waxing of hardwoods (烫蜡), in which the wax is melted into warmed wood and the surplus scraped and rubbed off. Historic Versailles parquet was waxed; Chenghuai's phoebe is waxed, never painted.",
+  "material": {
+    "beeswaxMeltingPoint": {
+      "min": 62,
+      "max": 64,
+      "unit": "degC",
+      "grade": "secondary",
+      "source": "Wikipedia, 'Beeswax', https://en.wikipedia.org/wiki/Beeswax (read 2026-09-26; melting point cited to a Fisher Scientific MSDS)"
+    },
+    "beeswaxComposition": {
+      "text": "Hydrocarbons 14 %, monoesters 35 %, diesters 14 %, triesters 3 %, hydroxy monoesters 4 %, hydroxy polyesters 8 %, acid esters 1 %, acid polyesters 2 %, free fatty acids 12 %, free fatty alcohols 1 %, unidentified 6 %.",
+      "grade": "secondary",
+      "source": "Wikipedia, 'Beeswax', https://en.wikipedia.org/wiki/Beeswax (read 2026-09-26; melting point cited to a Fisher Scientific MSDS)"
+    }
+  },
+  "historic": {
+    "versailles": {
+      "text": "Panels were assembled by hand without glue, then waxed.",
+      "grade": "secondary",
+      "source": "Marc Maison, 'Parquet de Versailles', Architectural antiques resources, https://www.marcmaison.fr/architectural-antiques-resources/parquet-de-versailles (read 2026-09-26)"
+    },
+    "phoebe": {
+      "text": "楠木: waxed, never painted.",
+      "grade": "design",
+      "source": "plan/proposals/chenghuai/canvas/Materials.dc.html (approved Chenghuai proposal: '營造')"
+    }
+  },
+  "optics": {
+    "mechanism": {
+      "text": "As any clear finish near the cell wall's index: bare wood's surface scatter is removed and the fibre highlight appears.",
+      "grade": "measured",
+      "source": "Marschner, S.R., Westin, S.H., Arbree, A. & Moon, J.T. (2005) Measuring and modeling the appearance of finished wood. ACM Transactions on Graphics 24(3), 727-734, https://doi.org/10.1145/1073204.1073254 (https://www.cs.cornell.edu/~srm/publications/SG05-wood-lr.pdf)"
+    },
+    "surface": "A thin, soft film that polishes where rubbed and stays dull in hollows and pores."
+  },
+  "photograph": [
+    "A buttery satin polish on edges and tops, duller in carving and pores; dust and wax dark in the pores and quirks.",
+    "On phoebe, the golden thread strongest on waxed curved surfaces."
+  ],
+  "unverified": [
+    {
+      "field": "process.烫蜡 (hot waxing) method",
+      "value": null,
+      "unit": "text",
+      "reason": "The method described is the trade's; no source describing 烫蜡 could be opened."
+    },
+    {
+      "field": "optics.refractiveIndex",
+      "min": 1.443,
+      "max": 1.449,
+      "unit": "1",
+      "reason": "Beeswax about 1.443-1.449 (CRC as quoted by MFA CAMEO); page not opened."
+    }
+  ],
+  "sources": [
+    "Wikipedia, 'Beeswax', https://en.wikipedia.org/wiki/Beeswax (read 2026-09-26; melting point cited to a Fisher Scientific MSDS)",
+    "Marc Maison, 'Parquet de Versailles', Architectural antiques resources, https://www.marcmaison.fr/architectural-antiques-resources/parquet-de-versailles (read 2026-09-26)",
+    "Marschner, S.R., Westin, S.H., Arbree, A. & Moon, J.T. (2005) Measuring and modeling the appearance of finished wood. ACM Transactions on Graphics 24(3), 727-734, https://doi.org/10.1145/1073204.1073254 (https://www.cs.cornell.edu/~srm/publications/SG05-wood-lr.pdf)",
+    "plan/proposals/chenghuai/canvas/Materials.dc.html (approved Chenghuai proposal: '營造')"
+  ]
+}

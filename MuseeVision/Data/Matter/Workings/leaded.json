@@ -1,0 +1,78 @@
+{
+  "schema": "musee.matter.working/1",
+  "key": "leaded",
+  "name": "Leaded glazing (lead came)",
+  "appliesTo": {
+    "families": [
+      "glass",
+      "accent"
+    ],
+    "substances": [
+      "antique-glass",
+      "lead"
+    ]
+  },
+  "over": [
+    "blown.cylinder",
+    "flashed",
+    "painted.vitreous",
+    "silver-stained"
+  ],
+  "process": "The glazier cuts each piece to the cutline of the cartoon (the leads were marked on Morris's cartoons in brown), then builds the panel on the bench: lengths of H-section came are opened, each piece is fitted into the channels, and the came is cut and shaped around it; at every junction the cames are soldered on both faces. The panel is then cemented, a putty brushed under the came leaves to seal and stiffen it, and cleaned. In the window the panels are tied with copper wires to iron saddle bars (in Albion's lancets) or set in the iron screen's frame, because a leaded light cannot carry its own weight over a large span. The cames' width and profile are part of the design: they are the drawing's black lines.",
+  "processSources": [
+    "S. Strobl, 'Lead in Stained Glass Windows', Historic Churches (2002), via The Building Conservation Directory, https://www.buildingconservation.com/articles/leadstainedglass/lead_stained_glass.htm",
+    "Heaps, Arnold & Heaps Ltd, 'Lead came: decorative lead profiles', https://heapsarnold.com/product-catalogue/lead-came-decorative-profiles/lead-came-decorative-lead-profiles/",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/albion_glass.py (frozen reference)",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Source/MuseeVision/Albion/AlbionIron.cpp (frozen reference), header comment and constants kBarDepth, kPurlinDepth, kMainDepth, kLightDepth"
+  ],
+  "facts": {
+    "came": {
+      "text": "H-section came in 3-25 mm flat leaf (4-20 mm oval), narrow hearts 3-4 mm, wide 6-7 mm; pure lead or low-antimony lead; 1.8 m lengths.",
+      "grade": "manufacturer",
+      "source": "Heaps, Arnold & Heaps Ltd, 'Lead came: decorative lead profiles', https://heapsarnold.com/product-catalogue/lead-came-decorative-profiles/lead-came-decorative-lead-profiles/"
+    },
+    "milledCame": {
+      "text": "The lead mill (known from the later 15th century, earliest surviving from 1717) squeezes cast lead through cheeks and toothed wheels, leaving reeding on the heart; 'the further apart the reeding is, the older the cames are'.",
+      "grade": "secondary",
+      "source": "S. Strobl, 'Lead in Stained Glass Windows', Historic Churches (2002), via The Building Conservation Directory, https://www.buildingconservation.com/articles/leadstainedglass/lead_stained_glass.htm"
+    },
+    "asBuiltLeadWidth": {
+      "value": 6,
+      "unit": "mm",
+      "grade": "design",
+      "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/albion_glass.py (frozen reference)"
+    },
+    "saddleBars": {
+      "text": "Saddle bars in the lancets.",
+      "grade": "design",
+      "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Source/MuseeVision/Albion/AlbionIron.cpp (frozen reference), header comment and constants kBarDepth, kPurlinDepth, kMainDepth, kLightDepth"
+    }
+  },
+  "optics": {
+    "text": "In transmitted light the came is an opaque black line; its visible width is the leaf width. Each piece sits at its own slight angle in the came, so reflections break at every lead.",
+    "grade": "design",
+    "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/albion_materials.py (frozen reference) (build_stained: A channel = lead)"
+  },
+  "photograph": [
+    "Black lines of steady width between the pieces, soldered joints as small bright-grey lumps, saddle bars as heavier horizontal shadows every few panels."
+  ],
+  "unverified": [
+    {
+      "field": "process.solder",
+      "text": "tin-lead solder, tallow flux; linseed oil and whiting cement",
+      "reason": "Tin-lead solder with tallow as flux, and a linseed-oil and whiting cement, are standard trade practice but were seen only in search summaries."
+    },
+    {
+      "field": "facts.saddleBarSpacing",
+      "text": "saddle bar spacing",
+      "reason": "The saddle bar spacing of Victorian lancets was not read."
+    }
+  ],
+  "sources": [
+    "Heaps, Arnold & Heaps Ltd, 'Lead came: decorative lead profiles', https://heapsarnold.com/product-catalogue/lead-came-decorative-profiles/lead-came-decorative-lead-profiles/",
+    "S. Strobl, 'Lead in Stained Glass Windows', Historic Churches (2002), via The Building Conservation Directory, https://www.buildingconservation.com/articles/leadstainedglass/lead_stained_glass.htm",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/albion_glass.py (frozen reference)",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Source/MuseeVision/Albion/AlbionIron.cpp (frozen reference), header comment and constants kBarDepth, kPurlinDepth, kMainDepth, kLightDepth",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/albion_materials.py (frozen reference) (build_stained: A channel = lead)"
+  ]
+}

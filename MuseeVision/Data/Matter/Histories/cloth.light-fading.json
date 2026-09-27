@@ -1,0 +1,132 @@
+{
+  "schema": "musee.matter.history/1",
+  "key": "cloth.light-fading",
+  "family": "accent",
+  "accentOf": "oak",
+  "name": "Light-faded",
+  "appliesTo": {
+    "families": [
+      "accent"
+    ],
+    "substances": [
+      "silk",
+      "velvet",
+      "linen",
+      "wool-felt"
+    ],
+    "workings": [
+      "stretched",
+      "upholstered"
+    ]
+  },
+  "surfaceLawTerms": [
+    "age",
+    "chemistry"
+  ],
+  "describes": "Dyes fade in proportion to the light dose (lux x hours), and ultraviolet also weakens the fibres: silk, wool and cotton (and linen) yellow, weaken and eventually fragment. Most historic and many modern dyes are highly sensitive. The pattern is by exposure: the parts of a wall silk in a lantern's sun patch or a light slot's wash fade first; covered strips keep their colour with a sharp edge.",
+  "terms": {
+    "categories": {
+      "text": "High sensitivity ISO Blue Wool 1-3; medium 4-6; low 7-8 and above.",
+      "grade": "guidance",
+      "source": "Michalski, S. (2018) Agent of deterioration: light, ultraviolet and infrared. Canadian Conservation Institute, 2018-05-17, https://www.canada.ca/en/conservation-institute/services/agents-deterioration/light.html"
+    },
+    "justNoticeableFadeAt50Lux": {
+      "high": {
+        "min": 1.5,
+        "max": 20,
+        "unit": "year",
+        "grade": "guidance",
+        "source": "Michalski, S. (2018) Agent of deterioration: light, ultraviolet and infrared. Canadian Conservation Institute, 2018-05-17, https://www.canada.ca/en/conservation-institute/services/agents-deterioration/light.html"
+      },
+      "medium": {
+        "min": 20,
+        "max": 700,
+        "unit": "year",
+        "grade": "guidance",
+        "source": "Michalski, S. (2018) Agent of deterioration: light, ultraviolet and infrared. Canadian Conservation Institute, 2018-05-17, https://www.canada.ca/en/conservation-institute/services/agents-deterioration/light.html"
+      },
+      "low": {
+        "min": 300,
+        "max": 7000,
+        "unit": "year",
+        "grade": "guidance",
+        "source": "Michalski, S. (2018) Agent of deterioration: light, ultraviolet and infrared. Canadian Conservation Institute, 2018-05-17, https://www.canada.ca/en/conservation-institute/services/agents-deterioration/light.html"
+      }
+    },
+    "almostTotalFadeAt50Lux": {
+      "high": {
+        "min": 50,
+        "max": 600,
+        "unit": "year",
+        "grade": "guidance",
+        "source": "Michalski, S. (2018) Agent of deterioration: light, ultraviolet and infrared. Canadian Conservation Institute, 2018-05-17, https://www.canada.ca/en/conservation-institute/services/agents-deterioration/light.html"
+      },
+      "medium": {
+        "min": 700,
+        "max": 20000,
+        "unit": "year",
+        "grade": "guidance",
+        "source": "Michalski, S. (2018) Agent of deterioration: light, ultraviolet and infrared. Canadian Conservation Institute, 2018-05-17, https://www.canada.ca/en/conservation-institute/services/agents-deterioration/light.html"
+      }
+    },
+    "uvLimit": {
+      "value": 75,
+      "unit": "uW/lm",
+      "grade": "guidance",
+      "source": "Michalski, S. (2018) Agent of deterioration: light, ultraviolet and infrared. Canadian Conservation Institute, 2018-05-17, https://www.canada.ca/en/conservation-institute/services/agents-deterioration/light.html",
+      "note": "about 10 uW/lm for high-sensitivity materials"
+    },
+    "fibreDamage": {
+      "text": "UV causes yellowing, chalking, weakening and disintegration; prolonged exposure weakens and fragments most wool, cotton, silk and paper.",
+      "grade": "guidance",
+      "source": "Michalski, S. (2018) Agent of deterioration: light, ultraviolet and infrared. Canadian Conservation Institute, 2018-05-17, https://www.canada.ca/en/conservation-institute/services/agents-deterioration/light.html"
+    },
+    "velvetDye": {
+      "min": 4,
+      "max": 6,
+      "unit": "grade",
+      "grade": "manufacturer",
+      "source": "KOTHEA, 'Mohair Velvet Upholstery Fabric, Crib 5 and 100,000 Rubs' (product ranges and specifications), https://www.kothea.com/mohair-velvet-upholstery/",
+      "conditions": "ISO 105-B02 light fastness of a mohair velvet range: 4-5 light colours, 5-6 dark"
+    },
+    "weightedSilk": {
+      "text": "Metal-salt weighting is believed to accelerate and aggravate silk's deterioration.",
+      "grade": "measured",
+      "source": "Elrefaey, I., Mahgoub, H., Vettorazzo, C., Marinšek, M., Meden, A., Jamnik, A., Tomšič, M. & Strlič, M. (2024) Investigation of the structural changes in silk due to tin weighting. Polymers 16(17), 2481, https://doi.org/10.3390/polym16172481"
+    }
+  },
+  "bySubstance": {
+    "silk": "The wall silks face the paintings' light; bays with sun patches (1 and 5) take the largest doses at the floor, the light slots at top and base.",
+    "velvet": "Bench tops under the lanterns fade before their sides.",
+    "linen": "Unbleached, undyed: yellows and weakens rather than fades; the bay-4 blind takes the full daylight.",
+    "wool-felt": "In a closed chest or case, very little light."
+  },
+  "drivers": {
+    "up": [
+      "illuminance x hours (Light's dose)",
+      "UV fraction",
+      "a high-sensitivity dye"
+    ],
+    "down": [
+      "UV-filtering glazing",
+      "lower lux",
+      "covers"
+    ]
+  },
+  "photograph": [
+    "A softer, paler, often slightly shifted hue on exposed silk, with a crisp unfaded strip where a frame or moulding has shaded it."
+  ],
+  "unverified": [
+    {
+      "field": "terms.dye classes of the chosen silks",
+      "value": null,
+      "unit": "grade",
+      "reason": "Not known until the silks are chosen and tested."
+    }
+  ],
+  "sources": [
+    "Michalski, S. (2018) Agent of deterioration: light, ultraviolet and infrared. Canadian Conservation Institute, 2018-05-17, https://www.canada.ca/en/conservation-institute/services/agents-deterioration/light.html",
+    "KOTHEA, 'Mohair Velvet Upholstery Fabric, Crib 5 and 100,000 Rubs' (product ranges and specifications), https://www.kothea.com/mohair-velvet-upholstery/",
+    "Elrefaey, I., Mahgoub, H., Vettorazzo, C., Marinšek, M., Meden, A., Jamnik, A., Tomšič, M. & Strlič, M. (2024) Investigation of the structural changes in silk due to tin weighting. Polymers 16(17), 2481, https://doi.org/10.3390/polym16172481"
+  ]
+}

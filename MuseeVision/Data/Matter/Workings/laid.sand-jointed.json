@@ -1,0 +1,82 @@
+{
+  "schema": "musee.matter.working/1",
+  "key": "laid.sand-jointed",
+  "name": "Laid on a sand bed, sand-jointed",
+  "appliesTo": {
+    "families": [
+      "stone",
+      "accent"
+    ],
+    "substances": [
+      "travertine"
+    ],
+    "jointMaterial": "crushed-limestone"
+  },
+  "over": [],
+  "process": "Exterior stone paving laid flexibly: the ground is excavated and compacted, a densely graded crushed-stone sub-base is laid, then a bedding course of sharp limestone screenings (or concrete sand) about 38 mm deep, levelled and tamped. The stones are laid course by course and brought to level with mallets, the surface is tamped through a board, and sand is broomed and tamped into the joints so each stone is fully bedded round its perimeter.",
+  "processSources": [
+    "Marble Institute of America (now the Natural Stone Institute) (2016) Dimension Stone Design Manual, Version VIII, chapter 'Horizontal Surfaces' (excerpt), Introduction 2.4 'Width of Joints between Stones' and 'Exterior Paving Systems' 2.1-2.4, https://nsrstone.com/wp-content/uploads/2025/07/Horizontal-Surfaces.pdf"
+  ],
+  "bedding": {
+    "value": 38,
+    "unit": "mm",
+    "grade": "guidance",
+    "source": "Marble Institute of America (now the Natural Stone Institute) (2016) Dimension Stone Design Manual, Version VIII, chapter 'Horizontal Surfaces' (excerpt), Introduction 2.4 'Width of Joints between Stones' and 'Exterior Paving Systems' 2.1-2.4, https://nsrstone.com/wp-content/uploads/2025/07/Horizontal-Surfaces.pdf",
+    "conditions": "sharp, normal-weight limestone screening or concrete sand",
+    "asReported": "approximately 1 1/2 in"
+  },
+  "jointWidth": {
+    "exterior": {
+      "value": 9.5,
+      "min": 6.4,
+      "unit": "mm",
+      "grade": "guidance",
+      "source": "Marble Institute of America (now the Natural Stone Institute) (2016) Dimension Stone Design Manual, Version VIII, chapter 'Horizontal Surfaces' (excerpt), Introduction 2.4 'Width of Joints between Stones' and 'Exterior Paving Systems' 2.1-2.4, https://nsrstone.com/wp-content/uploads/2025/07/Horizontal-Surfaces.pdf",
+      "conditions": "exterior stone pavement",
+      "asReported": "minimum 1/4 in, preferably 3/8 in"
+    },
+    "largeUnits": {
+      "min": 12.7,
+      "unit": "mm",
+      "grade": "guidance",
+      "source": "Marble Institute of America (now the Natural Stone Institute) (2016) Dimension Stone Design Manual, Version VIII, chapter 'Horizontal Surfaces' (excerpt), Introduction 2.4 'Width of Joints between Stones' and 'Exterior Paving Systems' 2.1-2.4, https://nsrstone.com/wp-content/uploads/2025/07/Horizontal-Surfaces.pdf",
+      "conditions": "'frequently required for large unit size installation'",
+      "asReported": "1/2 in or larger"
+    },
+    "texturedFinishes": {
+      "min": 19,
+      "max": 25,
+      "unit": "mm",
+      "grade": "guidance",
+      "source": "Marble Institute of America (now the Natural Stone Institute) (2016) Dimension Stone Design Manual, Version VIII, chapter 'Horizontal Surfaces' (excerpt), Introduction 2.4 'Width of Joints between Stones' and 'Exterior Paving Systems' 2.1-2.4, https://nsrstone.com/wp-content/uploads/2025/07/Horizontal-Surfaces.pdf",
+      "conditions": "cleft or other non-planar finishes, to limit perceived lippage",
+      "asReported": "3/4 in or 1 in"
+    },
+    "neverTight": {
+      "text": "'IN NO CASE SHOULD NATURAL STONE BE INSTALLED WITH TIGHT JOINTS.'",
+      "grade": "guidance",
+      "source": "Marble Institute of America (now the Natural Stone Institute) (2016) Dimension Stone Design Manual, Version VIII, chapter 'Horizontal Surfaces' (excerpt), Introduction 2.4 'Width of Joints between Stones' and 'Exterior Paving Systems' 2.1-2.4, https://nsrstone.com/wp-content/uploads/2025/07/Horizontal-Surfaces.pdf"
+    },
+    "chamfer": {
+      "text": "Joints of stone with an arris or chamfer appear wider than their actual dimension when filled.",
+      "grade": "guidance",
+      "source": "Marble Institute of America (now the Natural Stone Institute) (2016) Dimension Stone Design Manual, Version VIII, chapter 'Horizontal Surfaces' (excerpt), Introduction 2.4 'Width of Joints between Stones' and 'Exterior Paving Systems' 2.1-2.4, https://nsrstone.com/wp-content/uploads/2025/07/Horizontal-Surfaces.pdf"
+    }
+  },
+  "photograph": [
+    "Joints about a centimetre wide, filled nearly flush with pale sand that darkens when damp and stays damp longer than the stone.",
+    "Slight lippage between stones; sand washed low in some joints after rain.",
+    "Over years the joints fill with fines and organic matter and green with moss (history paving.joint-infill)."
+  ],
+  "unverified": [
+    {
+      "field": "sub-base thickness",
+      "value": null,
+      "unit": "mm",
+      "reason": "The sub-base depth for pedestrian paving was not given in the excerpt read."
+    }
+  ],
+  "sources": [
+    "Marble Institute of America (now the Natural Stone Institute) (2016) Dimension Stone Design Manual, Version VIII, chapter 'Horizontal Surfaces' (excerpt), Introduction 2.4 'Width of Joints between Stones' and 'Exterior Paving Systems' 2.1-2.4, https://nsrstone.com/wp-content/uploads/2025/07/Horizontal-Surfaces.pdf"
+  ]
+}

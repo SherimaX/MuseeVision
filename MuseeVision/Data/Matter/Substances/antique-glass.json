@@ -1,0 +1,708 @@
+{
+  "schema": "musee.matter.substance/1",
+  "key": "antique-glass",
+  "name": "Antique glass: hand-made Victorian soda-lime glass, clear and coloured",
+  "family": "glass",
+  "accentOf": null,
+  "summary": "The hand-made soda-lime glass of the Victorian stained-glass and glazing trades: mouth-blown cylinder ('antique') sheet, clear with a faint green or coloured in the pot with metal oxides (pot-metal), or flashed with a thin coloured layer, and its machine-cast sibling, rolled plate. In Albion it is the glass of the Tristram and Isolde band and the twelve lancets (painted, stained and leaded), and the clear glass of the screens and vaults.",
+  "dossier": "Docs/Matter/antique-glass.md",
+  "aliases": [
+    "pot-metal glass",
+    "cylinder glass",
+    "muff glass",
+    "sheet glass (British sheet)",
+    "mouth-blown glass",
+    "white glass (the trade's word for clear)",
+    "rolled plate",
+    "cathedral glass"
+  ],
+  "workings": [
+    "blown.cylinder",
+    "rolled.glass",
+    "flashed",
+    "painted.vitreous",
+    "silver-stained",
+    "leaded"
+  ],
+  "histories": [
+    "glass.paint-loss",
+    "glass.corrosion",
+    "glass.soiling"
+  ],
+  "constituents": [
+    {
+      "material": "silica (sand)",
+      "formula": "SiO2",
+      "role": "network former"
+    },
+    {
+      "material": "soda",
+      "formula": "Na2O",
+      "role": "flux"
+    },
+    {
+      "material": "lime",
+      "formula": "CaO",
+      "role": "stabiliser"
+    },
+    {
+      "material": "iron and alumina (impurities)",
+      "formula": "Fe2O3, Al2O3",
+      "role": "iron gives clear sheet its faint green"
+    },
+    {
+      "material": "metal oxides (pot-metal colours)",
+      "formula": "Co, Cu, Mn, Fe, Cr oxides; Cu or Au for ruby",
+      "role": "colourants dissolved in the melt"
+    }
+  ],
+  "formation": {
+    "how": "The batch (sand, soda and lime, with cullet) is melted in a pot or tank; for coloured 'pot-metal' glass a colouring oxide is dissolved in the melt, so the whole thickness is coloured. For antique sheet the gaffer gathers glass on a blowpipe, blows it to a balloon, turning it in a mould that gives the surface its structure, swings it out into a long cylinder, opens the end, knocks it off the pipe, and when cool cuts it along its length, reheats it and flattens it with a block of wood. The sheet keeps the traces of its making: seeds (bubbles), reams and cords, a gentle waviness, and a thickness that varies from the middle to the natural edge. Rolled plate is ladled onto an iron table and rolled.",
+    "facts": {
+      "sheetGlassComposition": {
+        "SiO2": {
+          "value": 72,
+          "unit": "wt%",
+          "grade": "historical",
+          "source": "H. J. Powell, W. Rosenhain and A. Nesbitt, 'Glass', Encyclopaedia Britannica, 11th ed. (1911), via Wikisource, https://en.wikisource.org/wiki/1911_Encyclop%C3%A6dia_Britannica/Glass",
+          "note": "'A good quality of sheet-glass should show a composition approximating to'"
+        },
+        "CaO": {
+          "value": 13,
+          "unit": "wt%",
+          "grade": "historical",
+          "source": "H. J. Powell, W. Rosenhain and A. Nesbitt, 'Glass', Encyclopaedia Britannica, 11th ed. (1911), via Wikisource, https://en.wikisource.org/wiki/1911_Encyclop%C3%A6dia_Britannica/Glass"
+        },
+        "Na2O": {
+          "value": 14,
+          "unit": "wt%",
+          "grade": "historical",
+          "source": "H. J. Powell, W. Rosenhain and A. Nesbitt, 'Glass', Encyclopaedia Britannica, 11th ed. (1911), via Wikisource, https://en.wikisource.org/wiki/1911_Encyclop%C3%A6dia_Britannica/Glass"
+        },
+        "Fe2O3_Al2O3": {
+          "value": 1,
+          "unit": "wt%",
+          "grade": "historical",
+          "source": "H. J. Powell, W. Rosenhain and A. Nesbitt, 'Glass', Encyclopaedia Britannica, 11th ed. (1911), via Wikisource, https://en.wikisource.org/wiki/1911_Encyclop%C3%A6dia_Britannica/Glass",
+          "note": "iron and alumina together"
+        }
+      },
+      "soda19thCentury": {
+        "min": 13,
+        "max": 17,
+        "unit": "wt%",
+        "grade": "secondary",
+        "source": "D. Anderson, 'Stained Glass and its Decay', The Building Conservation Directory (1996), https://www.buildingconservation.com/articles/glassdecay/glassdecay.htm",
+        "conditions": "Na2O of soda-lime glass (the 19th-century type)"
+      },
+      "meltTemperature": {
+        "value": 1450,
+        "unit": "degC",
+        "grade": "manufacturer",
+        "source": "Glashuette Lamberts, 'Production', https://lamberts.de/production",
+        "note": "Lamberts melts its antique batch at 1450 degC for 14 hours"
+      },
+      "meltTime": {
+        "value": 14,
+        "unit": "h",
+        "grade": "manufacturer",
+        "source": "Glashuette Lamberts, 'Production', https://lamberts.de/production"
+      }
+    },
+    "colourants": [
+      {
+        "text": "'The purple-blue of cobalt', 'the chrome green or yellow of chromium', 'the violet of manganese', 'Ferrous oxide produces an olive green or pale blue', 'Copper gives a peacock-blue'; ruby from copper or gold.",
+        "grade": "historical",
+        "source": "H. J. Powell, W. Rosenhain and A. Nesbitt, 'Glass', Encyclopaedia Britannica, 11th ed. (1911), via Wikisource, https://en.wikisource.org/wiki/1911_Encyclop%C3%A6dia_Britannica/Glass"
+      },
+      {
+        "text": "Silver stain (a working, silver-stained) gives yellow to amber from silver nanoparticles in the surface; since the early 14th century.",
+        "grade": "measured",
+        "source": "G. Molina, S. Murcia, J. Molera, C. Roldan, D. Crespo and T. Pradell, 'Color and dichroism of silver-stained glasses', Journal of Nanoparticle Research 15(9) (2013) 1932, doi:10.1007/s11051-013-1932-7 (abstract, via OSTI ETDEWEB record 22209451, https://www.osti.gov/etdeweb/biblio/22209451) ; D. Anderson, 'Stained Glass and its Decay', The Building Conservation Directory (1996), https://www.buildingconservation.com/articles/glassdecay/glassdecay.htm"
+      }
+    ],
+    "flashing": {
+      "text": "In flashed glass 'the coloured sheet consists of ordinary white glass covered upon one side with a thin coating of intensely coloured glass' (ruby is flashed because in its full thickness it is too dark).",
+      "grade": "historical",
+      "source": "H. J. Powell, W. Rosenhain and A. Nesbitt, 'Glass', Encyclopaedia Britannica, 11th ed. (1911), via Wikisource, https://en.wikisource.org/wiki/1911_Encyclop%C3%A6dia_Britannica/Glass"
+    }
+  },
+  "optics": {
+    "kind": "dielectric, coloured by dissolved ions or dispersed nanoparticles",
+    "refractiveIndex": [
+      {
+        "value": 1.523,
+        "unit": "1",
+        "grade": "record",
+        "source": "MuseeVision/Data/Matter/Substances/low-iron-glass.json (optics.refractiveIndex; Pilkington Optiwhite)",
+        "conditions": "589.3 nm; a modern soda-lime-silica float of the same composition class",
+        "note": "stands for the historic sheet, whose own index was not measured"
+      },
+      {
+        "value": 1.525,
+        "unit": "1",
+        "grade": "manufacturer",
+        "source": "SCHOTT North America, 'OPALIKA' technical data sheet (970-3d/09/04-P), https://www.sydor.com/wp-content/uploads/SCHOTT-OPALIKA-Display-Glass.pdf",
+        "conditions": "ne (546.1 nm); the clear drawn soda-lime base glass of OPALIKA, annealed at 40 degC/h"
+      }
+    ],
+    "specularF0": {
+      "value": 0.043,
+      "unit": "1",
+      "grade": "derived",
+      "source": "MuseeVision/Data/Matter/Substances/low-iron-glass.json",
+      "derivation": "((n-1)/(n+1))^2 with n = 1.523",
+      "conditions": "per face, normal incidence"
+    },
+    "potMetalColour": {
+      "text": "A pot-metal colour is the glass's absorption times its path: transmittance falls as exp(-alpha d) with the thickness d, so an antique sheet, 2 mm in the middle and up to 5 mm at its natural edge, deepens in colour toward the thick parts. That variation, with the seeds and reams, is what glaziers call the glass's 'movement'; Matter should carry each colour as an absorption per millimetre and let Form give each piece its thickness, not paint one flat tint.",
+      "grade": "derived",
+      "source": "Glashuette Lamberts, 'Production', https://lamberts.de/production ; MuseeVision/Data/Matter/Substances/low-iron-glass.json (absorptionCoefficient, the Beer-Lambert form)",
+      "derivation": "Beer-Lambert internal transmittance T = exp(-alpha d); d from Lamberts' 2-5 mm"
+    },
+    "clearSheetTint": {
+      "text": "Victorian 'white' sheet carries more iron than a low-iron float (the 1911 account gives iron and alumina together at about 1 %), so its edge and its face have a faint green: the same iron physics the low-iron record holds, at a higher content (its Vogt et al. series includes 703 ppm Fe2O3).",
+      "grade": "record",
+      "source": "MuseeVision/Data/Matter/Substances/low-iron-glass.json ; H. J. Powell, W. Rosenhain and A. Nesbitt, 'Glass', Encyclopaedia Britannica, 11th ed. (1911), via Wikisource, https://en.wikisource.org/wiki/1911_Encyclop%C3%A6dia_Britannica/Glass"
+    },
+    "designPalette": {
+      "note": "The as-built palettes, in sRGB as transmitted light reads in the photographs (exposure unknown); they are Art's colours for the atlases, recorded here as design values and converted to linear. They are not absorption spectra.",
+      "morris1860s": {
+        "ruby": {
+          "value": [
+            0.305,
+            0.008,
+            0.013
+          ],
+          "unit": "1",
+          "grade": "design",
+          "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/albion_glass.py (frozen reference) (PALETTE)",
+          "space": "linear Rec.709, D65, as photographed in transmission",
+          "asReported": "sRGB (150, 22, 30)"
+        },
+        "blue": {
+          "value": [
+            0.0116,
+            0.0343,
+            0.2159
+          ],
+          "unit": "1",
+          "grade": "design",
+          "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/albion_glass.py (frozen reference) (PALETTE)",
+          "space": "linear Rec.709, D65, as photographed in transmission",
+          "asReported": "sRGB (28, 52, 128)"
+        },
+        "sky": {
+          "value": [
+            0.0887,
+            0.1878,
+            0.4342
+          ],
+          "unit": "1",
+          "grade": "design",
+          "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/albion_glass.py (frozen reference) (PALETTE)",
+          "space": "linear Rec.709, D65, as photographed in transmission",
+          "asReported": "sRGB (84, 120, 176)"
+        },
+        "green": {
+          "value": [
+            0.0296,
+            0.1384,
+            0.0343
+          ],
+          "unit": "1",
+          "grade": "design",
+          "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/albion_glass.py (frozen reference) (PALETTE)",
+          "space": "linear Rec.709, D65, as photographed in transmission",
+          "asReported": "sRGB (48, 104, 52)"
+        },
+        "olive": {
+          "value": [
+            0.1812,
+            0.2159,
+            0.0343
+          ],
+          "unit": "1",
+          "grade": "design",
+          "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/albion_glass.py (frozen reference) (PALETTE)",
+          "space": "linear Rec.709, D65, as photographed in transmission",
+          "asReported": "sRGB (118, 128, 52)"
+        },
+        "yellow": {
+          "value": [
+            0.6724,
+            0.3613,
+            0.0252
+          ],
+          "unit": "1",
+          "grade": "design",
+          "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/albion_glass.py (frozen reference) (PALETTE)",
+          "space": "linear Rec.709, D65, as photographed in transmission",
+          "asReported": "sRGB (214, 162, 44)"
+        },
+        "murrey": {
+          "value": [
+            0.1384,
+            0.0252,
+            0.0887
+          ],
+          "unit": "1",
+          "grade": "design",
+          "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/albion_glass.py (frozen reference) (PALETTE)",
+          "space": "linear Rec.709, D65, as photographed in transmission",
+          "asReported": "sRGB (104, 44, 84)"
+        },
+        "white": {
+          "value": [
+            0.7605,
+            0.7305,
+            0.552
+          ],
+          "unit": "1",
+          "grade": "design",
+          "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/albion_glass.py (frozen reference) (PALETTE)",
+          "space": "linear Rec.709, D65, as photographed in transmission",
+          "asReported": "sRGB (226, 222, 196)"
+        },
+        "flesh": {
+          "value": [
+            0.8388,
+            0.6172,
+            0.4342
+          ],
+          "unit": "1",
+          "grade": "design",
+          "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/albion_glass.py (frozen reference) (PALETTE)",
+          "space": "linear Rec.709, D65, as photographed in transmission",
+          "asReported": "sRGB (236, 206, 176)"
+        },
+        "brown": {
+          "value": [
+            0.2307,
+            0.0931,
+            0.0252
+          ],
+          "unit": "1",
+          "grade": "design",
+          "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/albion_glass.py (frozen reference) (PALETTE)",
+          "space": "linear Rec.709, D65, as photographed in transmission",
+          "asReported": "sRGB (132, 86, 44)"
+        }
+      },
+      "tristramBand": {
+        "white": {
+          "value": [
+            0.7605,
+            0.6724,
+            0.4564
+          ],
+          "unit": "1",
+          "grade": "design",
+          "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/albion_glass_band.py (frozen reference) (GLASS)",
+          "space": "linear Rec.709, D65, as photographed in transmission",
+          "asReported": "sRGB (226, 214, 180)"
+        },
+        "stain": {
+          "value": [
+            0.7305,
+            0.402,
+            0.0482
+          ],
+          "unit": "1",
+          "grade": "design",
+          "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/albion_glass_band.py (frozen reference) (GLASS)",
+          "space": "linear Rec.709, D65, as photographed in transmission",
+          "asReported": "sRGB (222, 170, 62)"
+        },
+        "ruby": {
+          "value": [
+            0.305,
+            0.013,
+            0.0116
+          ],
+          "unit": "1",
+          "grade": "design",
+          "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/albion_glass_band.py (frozen reference) (GLASS)",
+          "space": "linear Rec.709, D65, as photographed in transmission",
+          "asReported": "sRGB (150, 30, 28)"
+        },
+        "green": {
+          "value": [
+            0.0482,
+            0.1274,
+            0.0232
+          ],
+          "unit": "1",
+          "grade": "design",
+          "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/albion_glass_band.py (frozen reference) (GLASS)",
+          "space": "linear Rec.709, D65, as photographed in transmission",
+          "asReported": "sRGB (62, 100, 42)"
+        },
+        "brown": {
+          "value": [
+            0.1878,
+            0.0648,
+            0.0194
+          ],
+          "unit": "1",
+          "grade": "design",
+          "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/albion_glass_band.py (frozen reference) (GLASS)",
+          "space": "linear Rec.709, D65, as photographed in transmission",
+          "asReported": "sRGB (120, 72, 38)"
+        },
+        "blue": {
+          "value": [
+            0.0212,
+            0.0482,
+            0.1878
+          ],
+          "unit": "1",
+          "grade": "design",
+          "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/albion_glass_band.py (frozen reference) (GLASS)",
+          "space": "linear Rec.709, D65, as photographed in transmission",
+          "asReported": "sRGB (40, 62, 120)"
+        },
+        "murrey": {
+          "value": [
+            0.117,
+            0.0212,
+            0.0482
+          ],
+          "unit": "1",
+          "grade": "design",
+          "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/albion_glass_band.py (frozen reference) (GLASS)",
+          "space": "linear Rec.709, D65, as photographed in transmission",
+          "asReported": "sRGB (96, 40, 62)"
+        },
+        "ground": {
+          "value": [
+            0.013,
+            0.0232,
+            0.0091
+          ],
+          "unit": "1",
+          "grade": "design",
+          "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/albion_glass_band.py (frozen reference) (GLASS)",
+          "space": "linear Rec.709, D65, as photographed in transmission",
+          "asReported": "sRGB (30, 42, 24)"
+        },
+        "ground2": {
+          "value": [
+            0.0273,
+            0.016,
+            0.008
+          ],
+          "unit": "1",
+          "grade": "design",
+          "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/albion_glass_band.py (frozen reference) (GLASS)",
+          "space": "linear Rec.709, D65, as photographed in transmission",
+          "asReported": "sRGB (46, 34, 22)"
+        }
+      }
+    }
+  },
+  "physical": {
+    "note": "The historic sheet was not measured; a soda-lime-silica glass of the same class stands for it.",
+    "density": {
+      "min": 2500,
+      "max": 2530,
+      "unit": "kg/m3",
+      "grade": "record",
+      "source": "MuseeVision/Data/Matter/Substances/low-iron-glass.json (physical.density)"
+    },
+    "youngsModulus": {
+      "min": 70,
+      "max": 72,
+      "unit": "GPa",
+      "grade": "record",
+      "source": "MuseeVision/Data/Matter/Substances/low-iron-glass.json (physical.youngsModulus)"
+    },
+    "thermalExpansion": {
+      "value": 9e-06,
+      "unit": "1/K",
+      "grade": "manufacturer",
+      "source": "AGC Glass Europe, 'Technical Data Sheet Matelux' (08/2014), https://www.agc-yourglass.com/sites/default/files/technical_documents/original/Matelux_Technical_Data.pdf",
+      "conditions": "float glass to EN 572, 20-300 degC"
+    }
+  },
+  "surface": {
+    "structure": {
+      "text": "'Characteristic features of the mouth-blown Clear and Coloured Glasses are the distinct, yet unobtrusive surface structure and the bubbles in round or oval shape'; seeds are made to order from none to foamy (no seeds, weak, normal, medium, strong).",
+      "grade": "manufacturer",
+      "source": "Glashuette Lamberts, 'Genuine antique glass', https://lamberts.de/genuine-antique-glass"
+    },
+    "restorationSheet": {
+      "text": "Restauro window glass reproduces window glass from the Middle Ages to the early 20th century by the cylinder method: 'slight distortions ... scattered little bubbles and streaks'; the Classic grade's distortions are 'pronounced', the Light grade has a smooth surface with 'subtle, occasional reams'; clear or with a 'slight greenish coloring'.",
+      "grade": "manufacturer",
+      "source": "Glashuette Lamberts, 'Restauro window glass', https://lamberts.de/restauro-r-window-glass"
+    },
+    "thickness": {
+      "min": 2,
+      "max": 5,
+      "unit": "mm",
+      "grade": "manufacturer",
+      "source": "Glashuette Lamberts, 'Production', https://lamberts.de/production",
+      "note": "nominal 2.5-3.5 mm; 'between 2 mm in the middle and 5mm near the natural edge'"
+    },
+    "asBuilt": {
+      "clearWaviness": {
+        "value": 0.012,
+        "unit": "1",
+        "grade": "design",
+        "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/albion_materials.py (frozen reference) (build_glass: 'Waviness', a normal perturbation amplitude)",
+        "note": "'a slow ripple in each pane's normal'"
+      },
+      "stainedRipple": {
+        "value": 0.02,
+        "unit": "1",
+        "grade": "design",
+        "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/albion_materials.py (frozen reference) (build_stained: ripple amplitude)",
+        "note": "'Antique glass: seeds and a ripple'"
+      },
+      "clearTint": {
+        "value": [
+          0.9,
+          0.95,
+          0.92
+        ],
+        "unit": "1",
+        "grade": "design",
+        "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/albion_materials.py (frozen reference) (build_glass: 'Tint')",
+        "space": "linear Rec.709, D65",
+        "note": "'low-iron but Victorian (a faint green, a slow waviness in the pane)'"
+      }
+    }
+  },
+  "acoustic": {
+    "note": "Leaded lights and glazed vaults are hard, reflective surfaces; their absorption is that of glazing (see the low-iron-glass record) and was not measured for antique glass."
+  },
+  "stock": {
+    "antiqueSheet": {
+      "size": {
+        "text": "about 60 x 90 cm",
+        "grade": "manufacturer",
+        "source": "Glashuette Lamberts, 'Genuine antique glass', https://lamberts.de/genuine-antique-glass"
+      },
+      "thickness": {
+        "value": 3,
+        "unit": "mm",
+        "grade": "manufacturer",
+        "source": "Glashuette Lamberts, 'Genuine antique glass', https://lamberts.de/genuine-antique-glass",
+        "note": "'approx. 3 mm'"
+      }
+    },
+    "restauroSheet": {
+      "text": "Restauro Light 2 mm (about 85 x 100 cm); Classic 3 mm (about 60 x 90 cm).",
+      "grade": "manufacturer",
+      "source": "Glashuette Lamberts, 'Restauro window glass', https://lamberts.de/restauro-r-window-glass"
+    },
+    "flashedSheet": {
+      "text": "Flashed sheets about 60 x 90 cm, about 3 mm thick.",
+      "grade": "manufacturer",
+      "source": "Glashuette Lamberts, 'Flashed glass', https://lamberts.de/flashed-glass"
+    },
+    "roughCastPlate": {
+      "unit": "in",
+      "values": [
+        0.25,
+        0.375,
+        0.5,
+        0.75,
+        1.0
+      ],
+      "grade": "historical",
+      "source": "H. Fidler, Notes on Building Construction, 'Rough-cast Plate, or Rough Plate', via chestofbooks.com, https://chestofbooks.com/architecture/Building-Construction-3-3/Rough-cast-Plate-or-Rough-Plate.html",
+      "note": "rough-cast plate thicknesses"
+    },
+    "oxfordRoof": {
+      "text": "The Oxford Museum's roof holds about 8,500 diamond-shaped panels of sand-cast glass, cast to a nominal 10 mm but varying from 8 to 12 mm; in the 2011-2014 restoration each was removed, cleaned and resealed, and damaged ones were replaced by kiln-slumped glass moulded from the best originals.",
+      "grade": "secondary",
+      "source": "Archetech, 'Oxford University Museum of Natural History reopens to the public: Beard and Purcell's GBP 2 million roof restoration is completed' (2014), https://www.archetech.org.uk/oxford-university-museum-of-natural-history-reopens-to-the-public-beard-and-purcells-2-million-roof-restoration-is-completed/ ; Eura Conservation, 'Oxford University Museum of Natural History - Glass Roof', https://eura.co.uk/architecture-cultural-services/oxford-university-museum-of-natural-history-glass-roof/"
+    },
+    "asBuilt": {
+      "text": "Albion's panes 0.75 m wide (between glazing bars) by 0.60 m round the arc; the Tristram band's twelve panels 1.6 x 1.7 m (the 1862 originals, about 68 x 60.5 cm, enlarged about two and a half times); twelve lancets 1.4 x 4.0 m (1.42 x 4.01 m in the atlases); leads 6 mm.",
+      "grade": "design",
+      "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Source/MuseeVision/Albion/AlbionPlan.h (frozen reference) (BarPitch, PanePitch, BandPanelW) ; C:/Users/anan9/Desktop/Projects/Musee Vision/plan/proposals/albion/canvas/Details.dc.html (approved proposal, D-001) ; C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/albion_glass.py (frozen reference)"
+    }
+  },
+  "physicalMaterial": {
+    "footfallClass": "none",
+    "note": "Overhead glazing; never walked or touched."
+  },
+  "uses": [
+    {
+      "where": "Albion's south screen: the Tristram and Isolde band, twelve panels, 9.0-12.6 m",
+      "working": "leaded",
+      "histories": [
+        "glass.paint-loss",
+        "glass.corrosion",
+        "glass.soiling"
+      ],
+      "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/plan/proposals/albion/canvas/Details.dc.html (approved proposal, D-001) ; MuseeVision/Journal/Decisions.md, D-014 (Matter: families and accents; Form: joints 'welded and faired' for the Elan's pearl shell; Glazing: stained glass with lead cames)",
+      "grade": "design"
+    },
+    {
+      "where": "Albion's twelve lancets, 1.4 x 4.0 m (west: Webb's birds and Morris's flowers in diamond quarries; east: Chaucer's Good Women after Burne-Jones)",
+      "working": "leaded",
+      "histories": [
+        "glass.paint-loss",
+        "glass.corrosion",
+        "glass.soiling"
+      ],
+      "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/plan/proposals/albion/canvas/Details.dc.html (approved proposal, D-001)",
+      "grade": "design"
+    },
+    {
+      "where": "Albion's clear glass on iron bars: the three vaults and the end screens above 8.5 m",
+      "working": "blown.cylinder",
+      "histories": [
+        "glass.soiling",
+        "glass.corrosion"
+      ],
+      "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/plan/proposals/albion/canvas/Details.dc.html (approved proposal, D-001) ('CLEAR GLASS ON IRON BARS, 0.6 M') ; C:/Users/anan9/Desktop/Projects/Musee Vision/plan/proposals/albion/canvas/Main.dc.html (approved proposal, D-001)",
+      "grade": "design",
+      "note": "Oxford's own roof is cast glass (rolled.glass); the working is the Architect's choice."
+    }
+  ],
+  "precedent": {
+    "text": "Morris, Marshall, Faulkner & Co. made the thirteen Tristram and Isolde panels in 1862 for Walter Dunlop's Harden Grange near Bingley; they are owned by Bradford Museums and shown at Cliffe Castle, Keighley. Each is nearly square, about 68 x 60.5 cm.",
+    "grade": "design",
+    "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/plan/proposals/albion/canvas/Details.dc.html (approved proposal, D-001)"
+  },
+  "photograph": [
+    "In transmitted light: colour that varies within a single piece (thicker, deeper), seeds as tiny bright points, reams as faint streaks; the cames as black lines of steady width.",
+    "Paint: trace lines crisp and near-opaque, mattes and stippling as a translucent brown haze; silver-stain yellow sitting inside the same piece as white glass.",
+    "In reflected light from inside: the glass nearly black except where the sky or a lamp is mirrored; each piece at a slightly different angle, so the reflections break at the leads.",
+    "Clear Victorian sheet from the court: faint green, a slow waviness that bends the sky's lines, a film of soot at the pane edges."
+  ],
+  "evidence": [
+    {
+      "path": "C:/Users/anan9/Desktop/Projects/Musee Vision/assets/albion/glass/goodwomen-chaucer-asleep_glass-va-cc0.jpg",
+      "set": "Morris & Co., Chaucer asleep panel (Chaucer's Good Women), V&A Room 125, photograph",
+      "provider": "Wikimedia Commons",
+      "url": "https://commons.wikimedia.org/wiki/File:A_depiction_of_Chaucer_in_stained_glass.jpg",
+      "licence": "CC0",
+      "credits": "C:/Users/anan9/Desktop/Projects/Musee Vision/assets/albion/glass/CREDITS.md (row goodwomen-chaucer-asleep_glass-va-cc0.jpg)",
+      "tier": "reference",
+      "shows": "A Morris & Co. panel of the Good Women series in transmitted light: white glass and silver-stain yellow with a few pot-metal colours, brown-black grisaille line and matting, the cames as black lines. Outside SourceArt (assets/albion/glass), listed because it is the real glass."
+    },
+    {
+      "path": "C:/Users/anan9/Desktop/Projects/Musee Vision/assets/albion/glass/goodwomen-glass-constance.jpg",
+      "set": "Morris & Co., Constance roundel on flower quarries, 1863 (Birmingham 1927M1020)",
+      "provider": "Birmingham Museums Trust",
+      "url": "https://dams.birminghammuseums.org.uk/assetbank-birminghammuseums/action/viewAsset?id=60710",
+      "licence": "CC0 (web preview)",
+      "credits": "C:/Users/anan9/Desktop/Projects/Musee Vision/assets/albion/glass/CREDITS.md",
+      "tier": "reference",
+      "shows": "A Good Women roundel on a ground of painted, silver-stained flower quarries, leaded: the lancets' west-side quarry type and the east side's figures, the same firm and years."
+    },
+    {
+      "path": "C:/Users/anan9/Desktop/Projects/Musee Vision/assets/albion/glass/goodwomen-glass-dorigen.jpg",
+      "set": "Morris & Co., Dorigen roundel on flower quarries, 1863 (Birmingham 1927M1019)",
+      "provider": "Birmingham Museums Trust",
+      "url": "https://dams.birminghammuseums.org.uk/assetbank-birminghammuseums/action/viewAsset?id=60709",
+      "licence": "CC0 (web preview)",
+      "credits": "C:/Users/anan9/Desktop/Projects/Musee Vision/assets/albion/glass/CREDITS.md",
+      "tier": "reference",
+      "shows": "As Constance: quarries, silver stain, grisaille and leads of the 1860s firm."
+    },
+    {
+      "path": "C:/Users/anan9/Desktop/Projects/Musee Vision/assets/albion/glass/goodwomen-glass-penelope.jpg",
+      "set": "Morris & Co., Penelope roundel on flower quarries, 1863 (Birmingham 1927M1021)",
+      "provider": "Birmingham Museums Trust",
+      "url": "https://dams.birminghammuseums.org.uk/assetbank-birminghammuseums/action/viewAsset?id=60711",
+      "licence": "CC0 (web preview)",
+      "credits": "C:/Users/anan9/Desktop/Projects/Musee Vision/assets/albion/glass/CREDITS.md",
+      "tier": "reference",
+      "shows": "As Constance."
+    },
+    {
+      "path": "C:/Users/anan9/Desktop/Projects/Musee Vision/assets/albion/glass/quarries-1.jpg",
+      "set": "Morris flower quarries (silver-stain marigold and daisy), crop of the Dorigen panel",
+      "provider": "Birmingham Museums Trust",
+      "url": "https://dams.birminghammuseums.org.uk/assetbank-birminghammuseums/action/viewAsset?id=60709",
+      "licence": "CC0 (web preview)",
+      "credits": "C:/Users/anan9/Desktop/Projects/Musee Vision/assets/albion/glass/CREDITS.md",
+      "tier": "reference",
+      "shows": "Close detail of painted and silver-stained quarries: trace line, matting, stain density, the came's width against the glass."
+    },
+    {
+      "path": "C:/Users/anan9/Desktop/Projects/Musee Vision/assets/albion/glass/tristram-panel-T1-birth.jpg ... tristram-panel-T12-guenevere-and-isoude.jpg (twelve files)",
+      "set": "Morris, Marshall, Faulkner & Co., Tristram and Isolde panels, 1862 (Harden Grange; Bradford Museums)",
+      "provider": "Wikimedia Commons",
+      "url": "https://commons.wikimedia.org/wiki/File:Arthur_Hughes_the_Birth_of_Sir_Tristram.jpg (and the other pages in CREDITS.md)",
+      "licence": "Public domain (not CC0)",
+      "credits": "C:/Users/anan9/Desktop/Projects/Musee Vision/assets/albion/glass/CREDITS.md ; C:/Users/anan9/Desktop/Projects/Musee Vision/assets/albion/glass/STANDINS.md",
+      "tier": "reference",
+      "shows": "The band's own panels: figures in white glass and silver-stain yellow with a few pot-metal colours on grounds of deep green and brown painted with foliage, the drawing fired on in brown-black, in a border of cream quarries. Small files (about 670 px); several are catalogue scans. Art owns them as the band's image; Matter lists them as evidence of the glass."
+    }
+  ],
+  "evidenceRejected": [
+    {
+      "path": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/Albion/T_albion_tristram.png, T_albion_lancets_west.png, T_albion_lancets_east.png, T_albion_tristram_glow.png",
+      "set": "Albion's generated glass atlases (albion_glass.py, albion_glass_band.py)",
+      "reason": "Generated from the panel photographs and cartoons (RGB the glass's transmittance, A the lead): derived artwork for Art's image, not evidence of the glass's physics.",
+      "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/albion_glass.py (frozen reference) ; C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/albion_glass_band.py (frozen reference)",
+      "grade": "design"
+    }
+  ],
+  "unverified": [
+    {
+      "field": "optics.refractiveIndex (historic)",
+      "value": 1.52,
+      "unit": "1",
+      "reason": "No measured index of 19th-century English sheet or Morris pot-metal glass was read; the modern soda-lime value stands in."
+    },
+    {
+      "field": "formation.clearSheetIron",
+      "text": "Fe2O3 of Victorian sheet glass, probably 0.1-0.5 wt%",
+      "reason": "The Fe2O3 content of 19th-century English sheet was not read (a table of historic window glass compositions exists in 'The Value of Historic Window Glass', but was not readable, HTTP 403)."
+    },
+    {
+      "field": "optics.colourantBands",
+      "text": "Co2+ 525/595/650 nm; Mn3+ ~500 nm; Cu2+ ~755-800 nm",
+      "reason": "Absorption band positions of the colourants in soda-lime glass (for example Co2+ at about 525, 595 and 650 nm; Mn3+ near 500 nm; Cu2+ near 755-800 nm) were seen only in search summaries of Thiemsorn et al., 'Redox ratio and optical absorption of polyvalent ions in industrial glasses', Bull. Mater. Sci. 30 (2007) 487-495, doi:10.1007/s12034-007-0077-7; the paper was not read."
+    },
+    {
+      "field": "formation.syntheticSoda",
+      "text": "synthetic soda from 1835",
+      "reason": "A search summary says synthetic (Leblanc) soda was first used in the glass industry in 1835; not read from a source."
+    },
+    {
+      "field": "stock.cylinderSheet (1850s)",
+      "text": "Victorian cylinder-sheet pane sizes",
+      "reason": "The size and thickness of Chance Brothers' cylinder sheet of the 1850s (the Crystal Palace's) were not read."
+    }
+  ],
+  "sources": [
+    "H. J. Powell, W. Rosenhain and A. Nesbitt, 'Glass', Encyclopaedia Britannica, 11th ed. (1911), via Wikisource, https://en.wikisource.org/wiki/1911_Encyclop%C3%A6dia_Britannica/Glass",
+    "D. Anderson, 'Stained Glass and its Decay', The Building Conservation Directory (1996), https://www.buildingconservation.com/articles/glassdecay/glassdecay.htm",
+    "Glashuette Lamberts, 'Production', https://lamberts.de/production",
+    "G. Molina, S. Murcia, J. Molera, C. Roldan, D. Crespo and T. Pradell, 'Color and dichroism of silver-stained glasses', Journal of Nanoparticle Research 15(9) (2013) 1932, doi:10.1007/s11051-013-1932-7 (abstract, via OSTI ETDEWEB record 22209451, https://www.osti.gov/etdeweb/biblio/22209451)",
+    "MuseeVision/Data/Matter/Substances/low-iron-glass.json (optics.refractiveIndex; Pilkington Optiwhite)",
+    "SCHOTT North America, 'OPALIKA' technical data sheet (970-3d/09/04-P), https://www.sydor.com/wp-content/uploads/SCHOTT-OPALIKA-Display-Glass.pdf",
+    "MuseeVision/Data/Matter/Substances/low-iron-glass.json",
+    "MuseeVision/Data/Matter/Substances/low-iron-glass.json (absorptionCoefficient, the Beer-Lambert form)",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/albion_glass.py (frozen reference) (PALETTE)",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/albion_glass_band.py (frozen reference) (GLASS)",
+    "MuseeVision/Data/Matter/Substances/low-iron-glass.json (physical.density)",
+    "MuseeVision/Data/Matter/Substances/low-iron-glass.json (physical.youngsModulus)",
+    "AGC Glass Europe, 'Technical Data Sheet Matelux' (08/2014), https://www.agc-yourglass.com/sites/default/files/technical_documents/original/Matelux_Technical_Data.pdf",
+    "Glashuette Lamberts, 'Genuine antique glass', https://lamberts.de/genuine-antique-glass",
+    "Glashuette Lamberts, 'Restauro window glass', https://lamberts.de/restauro-r-window-glass",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/albion_materials.py (frozen reference) (build_glass: 'Waviness', a normal perturbation amplitude)",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/albion_materials.py (frozen reference) (build_stained: ripple amplitude)",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/albion_materials.py (frozen reference) (build_glass: 'Tint')",
+    "Glashuette Lamberts, 'Flashed glass', https://lamberts.de/flashed-glass",
+    "H. Fidler, Notes on Building Construction, 'Rough-cast Plate, or Rough Plate', via chestofbooks.com, https://chestofbooks.com/architecture/Building-Construction-3-3/Rough-cast-Plate-or-Rough-Plate.html",
+    "Archetech, 'Oxford University Museum of Natural History reopens to the public: Beard and Purcell's GBP 2 million roof restoration is completed' (2014), https://www.archetech.org.uk/oxford-university-museum-of-natural-history-reopens-to-the-public-beard-and-purcells-2-million-roof-restoration-is-completed/",
+    "Eura Conservation, 'Oxford University Museum of Natural History - Glass Roof', https://eura.co.uk/architecture-cultural-services/oxford-university-museum-of-natural-history-glass-roof/",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Source/MuseeVision/Albion/AlbionPlan.h (frozen reference) (BarPitch, PanePitch, BandPanelW)",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/plan/proposals/albion/canvas/Details.dc.html (approved proposal, D-001)",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/albion_glass.py (frozen reference)",
+    "MuseeVision/Journal/Decisions.md, D-014 (Matter: families and accents; Form: joints 'welded and faired' for the Elan's pearl shell; Glazing: stained glass with lead cames)",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/plan/proposals/albion/canvas/Details.dc.html (approved proposal, D-001) ('CLEAR GLASS ON IRON BARS, 0.6 M')",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/plan/proposals/albion/canvas/Main.dc.html (approved proposal, D-001)",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/albion_glass_band.py (frozen reference)"
+  ]
+}

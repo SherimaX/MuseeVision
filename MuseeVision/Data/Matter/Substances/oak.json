@@ -1,0 +1,687 @@
+{
+  "schema": "musee.matter.substance/1",
+  "key": "oak",
+  "name": "European oak (Quercus robur and Q. petraea)",
+  "family": "oak",
+  "accentOf": null,
+  "aliases": [
+    "European oak",
+    "English oak",
+    "French oak",
+    "pedunculate oak (Q. robur)",
+    "sessile oak (Q. petraea)",
+    "chêne"
+  ],
+  "summary": "The museum's one timber: the heartwood of European oak, a ring-porous hardwood with broad rays and a high tannin content, sawn quarter or plain, fumed or left natural, and finished in a hardwax oil or wax. It is the Salon's Versailles parquet and the plinths of its velvet benches, the 1874 case, the Reserve's picture screens, chests and easel, the oval's pond-bench seats, and Albion's cases, lectern and benches.",
+  "dossier": "Docs/Matter/oak.md",
+  "workings": [
+    "sawn.quarter",
+    "sawn.plain",
+    "fumed",
+    "oiled.hardwax",
+    "waxed",
+    "parquet.versailles",
+    "gilt"
+  ],
+  "histories": [
+    "oak.light-ageing",
+    "oak.wear",
+    "oak.movement"
+  ],
+  "identity": {
+    "species": [
+      {
+        "name": "Quercus robur L. (pedunculate oak)",
+        "source": "Meier, E. The Wood Database: English Oak (Quercus robur), https://www.wood-database.com/english-oak/ (read 2026-09-26)",
+        "grade": "secondary"
+      },
+      {
+        "name": "Quercus petraea (Matt.) Liebl. (sessile oak)",
+        "source": "Smolarek, E., Szentner, K., Jakubowicz, J., Jarzębski, M. & Wieruszewski, M. (2026) Color variability of European oak veneer packages: an exploratory colorimetric, chemical, and X-ray diffraction study. Molecules 31(15), 2712, https://doi.org/10.3390/molecules31152712 (https://pmc.ncbi.nlm.nih.gov/articles/PMC13468641/)",
+        "grade": "measured",
+        "note": "the veneer study's material is Q. robur and Q. petraea, which the European trade sells together as oak"
+      }
+    ],
+    "class": {
+      "text": "Hardwood, ring-porous: 2-4 rows of large earlywood pores, abundant tyloses, distinct growth rings, large visible rays.",
+      "grade": "secondary",
+      "source": "Meier, E. The Wood Database: English Oak (Quercus robur), https://www.wood-database.com/english-oak/ (read 2026-09-26)"
+    },
+    "whyOneOak": {
+      "text": "Principle 2 (one material language) names one oak for everything the hand touches; each era changes the finish, never the timber.",
+      "grade": "design",
+      "source": "C:/Users/anan9/.claude/projects/C--Users-anan9-Desktop-Projects-Musee-Vision/memory/design-principles.md (principle 2); plan/canvas/MaterialsOther.dc.html, section 'D · The oak, and what it carries'"
+    }
+  },
+  "formation": {
+    "how": "Oak lays down one ring a year under the bark. Each ring opens with a band of large earlywood vessels (ring-porous) and closes with dense latewood fibre; broad rays run radially from pith to bark. As the tree ages the inner sapwood dies and becomes heartwood: its vessels are plugged by tyloses and its cells fill with extractives, chiefly tannins, which colour it brown, make it durable, react with ammonia (fuming) and stain blue-black with iron when wet. The nearly white sapwood is cut away.",
+    "facts": {
+      "treeHeight": {
+        "min": 24,
+        "max": 35,
+        "unit": "m",
+        "grade": "secondary",
+        "source": "Meier, E. The Wood Database: English Oak (Quercus robur), https://www.wood-database.com/english-oak/ (read 2026-09-26)"
+      },
+      "trunkDiameter": {
+        "min": 1.0,
+        "max": 1.5,
+        "unit": "m",
+        "grade": "secondary",
+        "source": "Meier, E. The Wood Database: English Oak (Quercus robur), https://www.wood-database.com/english-oak/ (read 2026-09-26)"
+      },
+      "tanninContent": {
+        "value": 0.15,
+        "unit": "1",
+        "grade": "measured",
+        "source": "Miklečić, J., Španić, N. & Jirouš-Rajković, V. (2012) Wood color changes by ammonia fuming. BioResources 7(3), 3767-3778, https://bioresources.cnr.ncsu.edu/resources/wood-color-changes-by-ammonia-fuming/",
+        "asReported": "15 %",
+        "conditions": "radial heartwood of Q. robur; total tannin by the Tinkler (1921) titration, three samples"
+      },
+      "hotWaterExtractives": {
+        "value": 0.1272,
+        "unit": "1",
+        "grade": "measured",
+        "source": "Miklečić, J., Španić, N. & Jirouš-Rajković, V. (2012) Wood color changes by ammonia fuming. BioResources 7(3), 3767-3778, https://bioresources.cnr.ncsu.edu/resources/wood-color-changes-by-ammonia-fuming/",
+        "asReported": "12.72 %",
+        "conditions": "same oak; extractives soluble in hot water (condensed tannins among them)"
+      },
+      "ethanolBenzeneExtractives": {
+        "value": 0.019,
+        "unit": "1",
+        "grade": "measured",
+        "source": "Miklečić, J., Španić, N. & Jirouš-Rajković, V. (2012) Wood color changes by ammonia fuming. BioResources 7(3), 3767-3778, https://bioresources.cnr.ncsu.edu/resources/wood-color-changes-by-ammonia-fuming/",
+        "asReported": "1.90 %"
+      },
+      "nitrogenContent": {
+        "value": 0.00107,
+        "unit": "1",
+        "grade": "measured",
+        "source": "Miklečić, J., Španić, N. & Jirouš-Rajković, V. (2012) Wood color changes by ammonia fuming. BioResources 7(3), 3767-3778, https://bioresources.cnr.ncsu.edu/resources/wood-color-changes-by-ammonia-fuming/",
+        "asReported": "0.107 %",
+        "conditions": "unfumed; dry combustion (CHNS)"
+      },
+      "ironStain": {
+        "text": "Reacts with iron when wet, causing staining.",
+        "grade": "secondary",
+        "source": "Meier, E. The Wood Database: English Oak (Quercus robur), https://www.wood-database.com/english-oak/ (read 2026-09-26)"
+      }
+    }
+  },
+  "constituents": [
+    {
+      "material": "cell wall (cellulose, hemicelluloses, lignin)",
+      "role": "the fibres, vessels and rays; optically one dielectric of n about 1.55 in the fibre model"
+    },
+    {
+      "material": "tannins (chiefly hydrolysable ellagitannins)",
+      "role": "heartwood extractive: the brown colour, decay resistance, the ammonia reaction of fuming, the iron stain"
+    },
+    {
+      "material": "air in the cell lumens and open earlywood vessels",
+      "role": "the index contrast that scatters light in bare wood; the open pores a finish partly fills"
+    }
+  ],
+  "anatomy": {
+    "endgrain": {
+      "text": "Ring-porous with 2-4 rows of large earlywood pores; abundant tyloses; distinct growth rings; large visible rays.",
+      "grade": "secondary",
+      "source": "Meier, E. The Wood Database: English Oak (Quercus robur), https://www.wood-database.com/english-oak/ (read 2026-09-26)"
+    },
+    "texture": {
+      "text": "Grain is straight, with a coarse, uneven texture; may be irregular or interlocked depending on growing conditions.",
+      "grade": "secondary",
+      "source": "Meier, E. The Wood Database: English Oak (Quercus robur), https://www.wood-database.com/english-oak/ (read 2026-09-26)"
+    },
+    "rayFleck": {
+      "text": "Quartersawn faces show prominent ray fleck: the broad rays cut lengthwise.",
+      "grade": "secondary",
+      "source": "Meier, E. The Wood Database: English Oak (Quercus robur), https://www.wood-database.com/english-oak/ (read 2026-09-26) ; Wikipedia, 'Quarter sawing', https://en.wikipedia.org/wiki/Quarter_sawing (read 2026-09-26)"
+    }
+  },
+  "optics": {
+    "cellWallRefractiveIndex": {
+      "value": 1.55,
+      "unit": "1",
+      "grade": "secondary",
+      "source": "Marschner, S.R., Westin, S.H., Arbree, A. & Moon, J.T. (2005) Measuring and modeling the appearance of finished wood. ACM Transactions on Graphics 24(3), 727-734, https://doi.org/10.1145/1073204.1073254 (https://www.cs.cornell.edu/~srm/publications/SG05-wood-lr.pdf)",
+      "note": "the cell wall treated as one homogeneous dielectric ('cellulose'), following Saarinen and Muinonen (2001) for paper fibres; a modelling value, not a measured index of oak"
+    },
+    "specularF0BareCellWall": {
+      "value": 0.0465,
+      "unit": "1",
+      "grade": "derived",
+      "source": "Born, M. & Wolf, E. (1999) Principles of Optics, 7th ed., Cambridge University Press, section 1.5; n = 1.55 from Marschner, S.R., Westin, S.H., Arbree, A. & Moon, J.T. (2005) Measuring and modeling the appearance of finished wood. ACM Transactions on Graphics 24(3), 727-734, https://doi.org/10.1145/1073204.1073254 (https://www.cs.cornell.edu/~srm/publications/SG05-wood-lr.pdf)",
+      "derivation": "R0 = ((n-1)/(n+1))^2 with n = 1.55: the cell wall facing air, i.e. bare wood's first interface"
+    },
+    "unfinishedSurfaceScatter": {
+      "text": "Planing and sanding leave a layer of broken cells whose irregular surface scatters white light diffusely, which is why unfinished wood looks light and unsaturated; a clear finish whose index is close to the cell wall's removes that first interface, so colour deepens and the subsurface highlight appears.",
+      "grade": "measured",
+      "source": "Marschner, S.R., Westin, S.H., Arbree, A. & Moon, J.T. (2005) Measuring and modeling the appearance of finished wood. ACM Transactions on Graphics 24(3), 727-734, https://doi.org/10.1145/1073204.1073254 (https://www.cs.cornell.edu/~srm/publications/SG05-wood-lr.pdf)"
+    },
+    "fibreHighlight": {
+      "text": "Finished wood shows a subsurface highlight that no surface-anisotropy model reproduces: light enters, scatters from the aligned fibres below the surface and leaves on a cone about the local fibre axis, which can tilt out of the surface plane. The model adds a fibre term (fibre axis u, fibre colour k_f, and a Gaussian highlight width beta, one per species) to a Fresnel-corrected diffuse term and the finish's own surface specular; both subsurface terms are attenuated by Fresnel transmission in and out through the finish. On interlocked grain the highlight swings 30-40 degrees either side of the normal across the figure. Measured samples: varnished walnut, lacquered walnut, lacquered curly maple, varnished padauk; oak was not measured.",
+      "grade": "measured",
+      "source": "Marschner, S.R., Westin, S.H., Arbree, A. & Moon, J.T. (2005) Measuring and modeling the appearance of finished wood. ACM Transactions on Graphics 24(3), 727-734, https://doi.org/10.1145/1073204.1073254 (https://www.cs.cornell.edu/~srm/publications/SG05-wood-lr.pdf)"
+    },
+    "measuredColour": {
+      "unfinishedHeartwoodRadial": {
+        "L": {
+          "value": 60.9,
+          "unit": "CIELAB",
+          "grade": "measured",
+          "source": "Miklečić, J., Španić, N. & Jirouš-Rajković, V. (2012) Wood color changes by ammonia fuming. BioResources 7(3), 3767-3778, https://bioresources.cnr.ncsu.edu/resources/wood-color-changes-by-ammonia-fuming/",
+          "conditions": "Q. robur radial heartwood, unfinished, before fuming; SD 2.48; portable colorimeter, illuminant and observer not read"
+        },
+        "a": {
+          "value": 7.5,
+          "unit": "CIELAB",
+          "grade": "measured",
+          "source": "Miklečić, J., Španić, N. & Jirouš-Rajković, V. (2012) Wood color changes by ammonia fuming. BioResources 7(3), 3767-3778, https://bioresources.cnr.ncsu.edu/resources/wood-color-changes-by-ammonia-fuming/",
+          "conditions": "SD 0.33"
+        },
+        "b": {
+          "value": 23.0,
+          "unit": "CIELAB",
+          "grade": "measured",
+          "source": "Miklečić, J., Španić, N. & Jirouš-Rajković, V. (2012) Wood color changes by ammonia fuming. BioResources 7(3), 3767-3778, https://bioresources.cnr.ncsu.edu/resources/wood-color-changes-by-ammonia-fuming/",
+          "conditions": "SD 0.71"
+        },
+        "albedo": {
+          "value": [
+            0.4225,
+            0.267,
+            0.1464
+          ],
+          "unit": "1",
+          "space": "linear Rec.709 (sRGB primaries), D65 white",
+          "grade": "derived",
+          "source": "Miklečić, J., Španić, N. & Jirouš-Rajković, V. (2012) Wood color changes by ammonia fuming. BioResources 7(3), 3767-3778, https://bioresources.cnr.ncsu.edu/resources/wood-color-changes-by-ammonia-fuming/",
+          "derivation": "CIELAB (60.9, 7.5, 23.0) to XYZ with the D65 2-degree white (the paper's illuminant and observer were not read), then to linear Rec.709",
+          "note": "luminance factor Y = 0.291; bare wood, so it includes the white surface scatter a finish removes"
+        }
+      },
+      "veneerPackagesMean": {
+        "L": {
+          "value": 64.7,
+          "unit": "CIELAB",
+          "grade": "measured",
+          "source": "Smolarek, E., Szentner, K., Jakubowicz, J., Jarzębski, M. & Wieruszewski, M. (2026) Color variability of European oak veneer packages: an exploratory colorimetric, chemical, and X-ray diffraction study. Molecules 31(15), 2712, https://doi.org/10.3390/molecules31152712 (https://pmc.ncbi.nlm.nih.gov/articles/PMC13468641/)",
+          "conditions": "8 veneer packages, 80 points; PCE-XXM 30 colorimeter, 8 mm aperture; illuminant, observer and geometry not preserved in the export"
+        },
+        "a": {
+          "value": 7.5,
+          "unit": "CIELAB",
+          "grade": "measured",
+          "source": "Smolarek, E., Szentner, K., Jakubowicz, J., Jarzębski, M. & Wieruszewski, M. (2026) Color variability of European oak veneer packages: an exploratory colorimetric, chemical, and X-ray diffraction study. Molecules 31(15), 2712, https://doi.org/10.3390/molecules31152712 (https://pmc.ncbi.nlm.nih.gov/articles/PMC13468641/)"
+        },
+        "b": {
+          "value": 19.4,
+          "unit": "CIELAB",
+          "grade": "measured",
+          "source": "Smolarek, E., Szentner, K., Jakubowicz, J., Jarzębski, M. & Wieruszewski, M. (2026) Color variability of European oak veneer packages: an exploratory colorimetric, chemical, and X-ray diffraction study. Molecules 31(15), 2712, https://doi.org/10.3390/molecules31152712 (https://pmc.ncbi.nlm.nih.gov/articles/PMC13468641/)"
+        },
+        "albedo": {
+          "value": [
+            0.4715,
+            0.3107,
+            0.1973
+          ],
+          "unit": "1",
+          "space": "linear Rec.709 (sRGB primaries), D65 white",
+          "grade": "derived",
+          "source": "Smolarek, E., Szentner, K., Jakubowicz, J., Jarzębski, M. & Wieruszewski, M. (2026) Color variability of European oak veneer packages: an exploratory colorimetric, chemical, and X-ray diffraction study. Molecules 31(15), 2712, https://doi.org/10.3390/molecules31152712 (https://pmc.ncbi.nlm.nih.gov/articles/PMC13468641/)",
+          "derivation": "CIELAB (64.7, 7.5, 19.4) to XYZ with the D65 2-degree white (assumed), then to linear Rec.709",
+          "note": "luminance factor Y = 0.337"
+        }
+      },
+      "packageMeanLightnessRange": {
+        "min": 59.4,
+        "max": 69.7,
+        "unit": "CIELAB",
+        "grade": "measured",
+        "source": "Smolarek, E., Szentner, K., Jakubowicz, J., Jarzębski, M. & Wieruszewski, M. (2026) Color variability of European oak veneer packages: an exploratory colorimetric, chemical, and X-ray diffraction study. Molecules 31(15), 2712, https://doi.org/10.3390/molecules31152712 (https://pmc.ncbi.nlm.nih.gov/articles/PMC13468641/)",
+        "note": "package means differ most in lightness; within one package L* spans up to 10.7 units (mean 6.8)"
+      }
+    },
+    "wet": "Water, and any oil, fills the broken surface cells and the open earlywood pores: the white surface scatter falls, the wood darkens and saturates and the fibre highlight strengthens, as under a finish; it lightens again as it dries."
+  },
+  "physical": {
+    "density": {
+      "value": 675,
+      "unit": "kg/m3",
+      "grade": "secondary",
+      "source": "Meier, E. The Wood Database: English Oak (Quercus robur), https://www.wood-database.com/english-oak/ (read 2026-09-26)",
+      "conditions": "average dried weight, 12 % moisture content"
+    },
+    "specificGravityBasic": {
+      "value": 0.53,
+      "unit": "1",
+      "grade": "secondary",
+      "source": "Meier, E. The Wood Database: English Oak (Quercus robur), https://www.wood-database.com/english-oak/ (read 2026-09-26)"
+    },
+    "specificGravity12": {
+      "value": 0.67,
+      "unit": "1",
+      "grade": "secondary",
+      "source": "Meier, E. The Wood Database: English Oak (Quercus robur), https://www.wood-database.com/english-oak/ (read 2026-09-26)",
+      "conditions": "12 % moisture content"
+    },
+    "jankaHardness": {
+      "value": 4980,
+      "unit": "N",
+      "grade": "secondary",
+      "source": "Meier, E. The Wood Database: English Oak (Quercus robur), https://www.wood-database.com/english-oak/ (read 2026-09-26)",
+      "asReported": "1,120 lbf (4,980 N)"
+    },
+    "modulusOfRupture": {
+      "value": 97.1,
+      "unit": "MPa",
+      "grade": "secondary",
+      "source": "Meier, E. The Wood Database: English Oak (Quercus robur), https://www.wood-database.com/english-oak/ (read 2026-09-26)"
+    },
+    "elasticModulus": {
+      "value": 10.6,
+      "unit": "GPa",
+      "grade": "secondary",
+      "source": "Meier, E. The Wood Database: English Oak (Quercus robur), https://www.wood-database.com/english-oak/ (read 2026-09-26)"
+    },
+    "crushingStrength": {
+      "value": 46.3,
+      "unit": "MPa",
+      "grade": "secondary",
+      "source": "Meier, E. The Wood Database: English Oak (Quercus robur), https://www.wood-database.com/english-oak/ (read 2026-09-26)"
+    },
+    "shrinkageRadial": {
+      "value": 0.047,
+      "unit": "1",
+      "grade": "secondary",
+      "source": "Meier, E. The Wood Database: English Oak (Quercus robur), https://www.wood-database.com/english-oak/ (read 2026-09-26)",
+      "asReported": "4.7 %",
+      "conditions": "green to oven-dry"
+    },
+    "shrinkageTangential": {
+      "value": 0.084,
+      "unit": "1",
+      "grade": "secondary",
+      "source": "Meier, E. The Wood Database: English Oak (Quercus robur), https://www.wood-database.com/english-oak/ (read 2026-09-26)",
+      "asReported": "8.4 %",
+      "conditions": "green to oven-dry"
+    },
+    "shrinkageVolumetric": {
+      "value": 0.13,
+      "unit": "1",
+      "grade": "secondary",
+      "source": "Meier, E. The Wood Database: English Oak (Quercus robur), https://www.wood-database.com/english-oak/ (read 2026-09-26)",
+      "asReported": "13.0 %",
+      "conditions": "green to oven-dry"
+    },
+    "tangentialToRadialRatio": {
+      "value": 1.8,
+      "unit": "1",
+      "grade": "secondary",
+      "source": "Meier, E. The Wood Database: English Oak (Quercus robur), https://www.wood-database.com/english-oak/ (read 2026-09-26)"
+    }
+  },
+  "surface": {
+    "oiledParquetRoughness": {
+      "value": 14.0,
+      "min": 5.8,
+      "max": 24.9,
+      "unit": "um",
+      "grade": "manufacturer",
+      "source": "SATRA Technology Centre, Technical Services Report FLO0215387/1324 (1 July 2013) for Muylle Facon NV: 'Oak parquet finished with Rubio Monocoat Oil +2C (hardwaxoil)' tested to BS 7976-2:2002, https://service.rubiomonocoat.com/hubfs/Anti-slip%20test%20Oil+2C%20BS%207976-22002_Satra_2013.pdf",
+      "conditions": "Rz, ten readings on oak parquet finished with a hardwax oil (Rubio Monocoat Oil +2C)"
+    }
+  },
+  "acoustic": {
+    "absorptionByOctave": {
+      "axis": "frequency",
+      "axisUnit": "Hz",
+      "axisValues": [
+        125,
+        250,
+        500,
+        1000,
+        2000,
+        4000
+      ],
+      "unit": "1",
+      "values": [
+        0.04,
+        0.04,
+        0.07,
+        0.06,
+        0.06,
+        0.07
+      ],
+      "grade": "secondary",
+      "source": "Table 'Sound Absorption Coefficients', http://usenclosure.com/Diffraction%20Graphs/Sound%20Absorption%20Coefficients.pdf (the same table the white group cites for plaster; it names no primary source)",
+      "conditions": "row 'Wood Parquet in Asphalt on Concrete': the Salon's case, parquet laid on the slab in place of the travertine"
+    },
+    "absorptionOnJoists": {
+      "axis": "frequency",
+      "axisUnit": "Hz",
+      "axisValues": [
+        125,
+        250,
+        500,
+        1000,
+        2000,
+        4000
+      ],
+      "unit": "1",
+      "values": [
+        0.15,
+        0.11,
+        0.1,
+        0.07,
+        0.06,
+        0.07
+      ],
+      "grade": "secondary",
+      "source": "Table 'Sound Absorption Coefficients', http://usenclosure.com/Diffraction%20Graphs/Sound%20Absorption%20Coefficients.pdf (the same table the white group cites for plaster; it names no primary source) ; Sengpiel Audio, table of absorption coefficients, https://sengpielaudio.com/calculator-RT60Coeff.htm (names no primary source)",
+      "conditions": "row 'Wood' under Floors (usenclosure) = 'wood on joists' (Sengpiel): boards on joists, random incidence"
+    },
+    "note": "The historic Versailles floor is nailed to joists (lambourdes); the Salon's sits on the slab, so the first table applies there."
+  },
+  "stock": {
+    "grain": {
+      "text": "The grain runs along each member; a member is one timber, jointed where real timber is jointed.",
+      "grade": "design",
+      "source": "windows/Scripts/materials.py, OAK_BOARDS and build_wood() comments (frozen reference)"
+    },
+    "quarterSawnWidth": {
+      "text": "If a log is cut for maximum yield it gives only a few quarter-sawn boards; if cut for quarter-sawn boards only, the boards are narrower and there is considerable waste. The width is bounded by the log's radius.",
+      "grade": "secondary",
+      "source": "Wikipedia, 'Quarter sawing', https://en.wikipedia.org/wiki/Quarter_sawing (read 2026-09-26)"
+    },
+    "logDiameter": {
+      "min": 1.0,
+      "max": 1.5,
+      "unit": "m",
+      "grade": "secondary",
+      "source": "Meier, E. The Wood Database: English Oak (Quercus robur), https://www.wood-database.com/english-oak/ (read 2026-09-26)",
+      "note": "trunk diameter of the grown tree; the heartwood is less"
+    },
+    "parquetPanel": {
+      "text": "See the working parquet.versailles: square panels 97-130 cm wide, 2-3.5 cm thick (the design: 1.2 m, 22 mm).",
+      "grade": "secondary",
+      "source": "Marc Maison, 'Parquet de Versailles', Architectural antiques resources, https://www.marcmaison.fr/architectural-antiques-resources/parquet-de-versailles (read 2026-09-26)"
+    }
+  },
+  "conservation": {
+    "acidEmission": {
+      "text": "Wood and wood products, unless sealed, emit organic acids; oak and cedar are the problem woods. An enclosure built of poorly chosen wood and paint causes problems, and lead is the material most sensitive to acetic acid. Sealing the wood (acrylic latex paint with at least four weeks' drying) and basic control of RH mitigate it; low-permeability interleaves (buffered paper, PET film) separate objects from the source.",
+      "grade": "guidance",
+      "source": "Tétreault, J. (2021) Agent of deterioration: pollutants. Canadian Conservation Institute, 2021-02-17, https://www.canada.ca/en/conservation-institute/services/agents-deterioration/pollutants.html"
+    },
+    "aceticAcidLimitOneYear": {
+      "value": 1000,
+      "unit": "ug/m3",
+      "grade": "guidance",
+      "source": "Tétreault, J. (2021) Agent of deterioration: pollutants. Canadian Conservation Institute, 2021-02-17, https://www.canada.ca/en/conservation-institute/services/agents-deterioration/pollutants.html",
+      "asReported": "1000 (400) µg m-3 (ppb)",
+      "conditions": "Table 2: maximum acetic acid concentration for one year's preservation"
+    },
+    "caseRule": {
+      "text": "No oak, MDF or camphor inside a seal (they give off acids); steel-framed cases, every lining tested.",
+      "grade": "design",
+      "source": "plan/proposals/chenghuai/canvas/Materials.dc.html (approved Chenghuai proposal: '營造'), 'Clean cases'"
+    },
+    "consequence": "The 1874 case and Albion's De Morgan cases have oak carcases in the design. Their sealed interiors must be barrier-lined against the oak (Art owns the case make-up); the oak itself stays oak."
+  },
+  "physicalMaterial": {
+    "footfallClass": "wood",
+    "pendulumDry": {
+      "value": 59,
+      "unit": "PTV",
+      "grade": "manufacturer",
+      "source": "SATRA Technology Centre, Technical Services Report FLO0215387/1324 (1 July 2013) for Muylle Facon NV: 'Oak parquet finished with Rubio Monocoat Oil +2C (hardwaxoil)' tested to BS 7976-2:2002, https://service.rubiomonocoat.com/hubfs/Anti-slip%20test%20Oil+2C%20BS%207976-22002_Satra_2013.pdf",
+      "conditions": "oak parquet, hardwax oil; BS 7976-2:2002, Slider 96 (Four S), 20 degC / 65 % RH; mean of three directions (56, 60, 60): low slip potential"
+    },
+    "pendulumWet": {
+      "value": 35,
+      "unit": "PTV",
+      "grade": "manufacturer",
+      "source": "SATRA Technology Centre, Technical Services Report FLO0215387/1324 (1 July 2013) for Muylle Facon NV: 'Oak parquet finished with Rubio Monocoat Oil +2C (hardwaxoil)' tested to BS 7976-2:2002, https://service.rubiomonocoat.com/hubfs/Anti-slip%20test%20Oil+2C%20BS%207976-22002_Satra_2013.pdf",
+      "conditions": "same, wet (water); directions 34, 35, 37: moderate slip potential"
+    },
+    "note": "UPhysicalMaterial wants a friction coefficient; the conversion from PTV is in unverified."
+  },
+  "uses": [
+    {
+      "where": "the Salon's five bays and the Manet cabinet: the floor",
+      "working": "parquet.versailles",
+      "finish": "oiled.hardwax",
+      "histories": [
+        "oak.wear",
+        "oak.movement",
+        "oak.light-ageing"
+      ],
+      "note": "Versailles panels on the floor's existing 1.2 m grid, 22 mm, flush with the travertine under the arches with a brass strip between; viewing stones Ø 0.9 m set in the oak",
+      "source": "plan/proposals/salon-interior/canvas/Details.dc.html (approved Salon interior proposal) ('Oak 22 mm · brass · travertine'; 'Oak Versailles panels on the 1.2 m grid'); plan/README.md, 'Salon interior' (the plan in words); plan/proposals/salon-interior/canvas/Plan.dc.html (approved Salon interior proposal)",
+      "grade": "design"
+    },
+    {
+      "where": "the Salon's benches: the dark oak plinths",
+      "working": "fumed",
+      "finish": "oiled.hardwax",
+      "histories": [
+        "oak.wear"
+      ],
+      "note": "plinth set back 40 mm under a velvet body 2.4 x 0.6 m, 0.44 m high",
+      "source": "plan/proposals/salon-interior/canvas/Details.dc.html (approved Salon interior proposal) ('on a dark oak plinth'); windows/Source/MuseeVision/Salon/SalonInterior.h (frozen as-built reference)",
+      "grade": "design"
+    },
+    {
+      "where": "the 1874 case (bay 1): carcase, plinth and moulded top rail",
+      "working": "fumed",
+      "finish": "oiled.hardwax",
+      "histories": [
+        "oak.wear"
+      ],
+      "note": "1.6 x 0.7 m, 1.0 m high; low-iron glass hood; felt-lined floor",
+      "source": "plan/proposals/salon-interior/canvas/Details.dc.html (approved Salon interior proposal) ('1.6 x 0.7 m · oak and low-iron glass'); windows/Source/MuseeVision/Salon/SalonInterior.h (frozen as-built reference)",
+      "grade": "design"
+    },
+    {
+      "where": "the Reserve: the sliding picture screens' frames and posts",
+      "working": "fumed",
+      "finish": "oiled.hardwax",
+      "histories": [
+        "oak.wear"
+      ],
+      "note": "36 screens, 5.0 m long, 3.33 m tall, 0.10 m thick; end posts 0.16 m; linen fields",
+      "source": "windows/Source/MuseeVision/Reserve/ReserveRacks.h and ReserveStructure.h; windows/Source/MuseeVision/Plan/MuseePlan.h (frozen as-built reference)",
+      "grade": "design"
+    },
+    {
+      "where": "the Reserve: the plan chests",
+      "working": "fumed",
+      "finish": "oiled.hardwax",
+      "histories": [
+        "oak.wear"
+      ],
+      "note": "the board gives fumed oak; the as-built code calls them walnut and oak. One oak (principle 2): fumed oak",
+      "source": "plan/canvas/MaterialsOther.dc.html, section 'D · The oak, and what it carries' ('Fumed oak ... the Reserve's chests'); windows/Source/MuseeVision/Reserve/ReserveRacks.h and ReserveStructure.h; windows/Source/MuseeVision/Plan/MuseePlan.h (frozen as-built reference)",
+      "grade": "design"
+    },
+    {
+      "where": "the Reserve: the viewing easel",
+      "working": "sawn.plain",
+      "finish": "oiled.hardwax",
+      "histories": [
+        "oak.wear"
+      ],
+      "source": "plan/canvas/MaterialsOther.dc.html, section 'D · The oak, and what it carries' ('Natural oak ... the easel'); windows/Source/MuseeVision/Reserve/ReserveRacks.h and ReserveStructure.h; windows/Source/MuseeVision/Plan/MuseePlan.h (frozen as-built reference)",
+      "grade": "design"
+    },
+    {
+      "where": "the Nymphéas oval: the four pond-bench seats",
+      "working": "sawn.plain",
+      "finish": "oiled.hardwax",
+      "histories": [
+        "oak.wear",
+        "oak.light-ageing"
+      ],
+      "note": "seat slab 0.55 x 0.10 m, 10 mm radius on every edge, the grain along the arc, on honed travertine plinths",
+      "source": "plan/canvas/MaterialsOther.dc.html, section 'D · The oak, and what it carries' ('Natural oak · oiled'); windows/Source/MuseeVision/Furniture/MuseeFurniture.h (frozen as-built reference)",
+      "grade": "design"
+    },
+    {
+      "where": "Albion: four De Morgan table cases, the Kelmscott lectern, two nave benches, the tapestry batten",
+      "working": "sawn.quarter",
+      "finish": "waxed",
+      "histories": [
+        "oak.wear",
+        "oak.light-ageing"
+      ],
+      "note": "cases 2.2 x 1.0 x 0.95 m; lectern 1.2 m; benches 3.0 x 0.5 x 0.45 m. The board says only 'oak'; quarter-sawn and waxed is this record's proposal after Victorian Arts and Crafts practice (see fumed)",
+      "source": "plan/proposals/albion/canvas/Details.dc.html (approved Albion proposal: 'Furniture · oak'); windows/Source/MuseeVision/Albion/AlbionWork.h (tapestry batten)",
+      "grade": "design"
+    }
+  ],
+  "photograph": [
+    "Coarse, open texture: the earlywood pores read as fine dark dashes in bands along the grain, filled grey-brown where old wax and dirt sit in them.",
+    "On quarter-sawn faces, silvery ray flecks crossing the straight stripe, which flash light or dark as the view turns.",
+    "On plain-sawn faces, arched 'cathedral' figure and a tone that changes board to board; no two boards alike.",
+    "Under oil or wax, a warm colour with depth and a soft band of sheen that moves across the grain as you walk, not a uniform plastic gloss.",
+    "Fumed oak: a cool, even, grey-brown to chocolate brown, the rays paler than the ground; a lighter tone where a worn edge cuts through a surface-fumed layer.",
+    "On a parquet, paths of duller, paler finish where people walk, and fine gaps at panel edges in winter."
+  ],
+  "evidence": [
+    {
+      "path": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR/W2",
+      "set": "oak_veneer_01",
+      "provider": "Poly Haven",
+      "url": "https://polyhaven.com/a/oak_veneer_01",
+      "licence": "CC0 1.0",
+      "credits": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR/CREDITS.md (row W2: 'European oak, flat-sawn veneer: the museum's timber')",
+      "tier": "reference",
+      "shows": "A flat-sawn European oak veneer at 4k over 1.83 m: arched figure, pore bands, board-to-board tone; finished (it shows a sheen).",
+      "statistics": {
+        "colorMeanLinear": {
+          "value": [
+            0.3588,
+            0.21,
+            0.0971
+          ],
+          "unit": "1",
+          "space": "linear Rec.709 (sRGB primaries), D65 white",
+          "grade": "derived",
+          "derivation": "sRGB decode of every pixel of a 256 x 256 bilinear resample, then the mean",
+          "note": "mean of the set's Color map (linear, 256 x 256 resample); the photograph's exposure is unknown, so this is not an albedo",
+          "source": "computed from C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR/W2/Color.png"
+        },
+        "luminancePercentiles": {
+          "value": 0.232,
+          "unit": "1",
+          "grade": "derived",
+          "derivation": "Rec.709 luminance of the linear colour map; median, percentiles 5/50/95 = 0.1884/0.232/0.2822",
+          "note": "exposure unknown; darker and more saturated than the measured unfinished colour, consistent with a finished veneer",
+          "source": "computed from C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR/W2/Color.png"
+        },
+        "roughnessMapMedian": {
+          "value": 0.533,
+          "unit": "1",
+          "grade": "derived",
+          "derivation": "green channel of ORM.png, 256 x 256 bilinear resample; median, with percentiles 5/50/95 in the note",
+          "note": "authored roughness map, not a measurement; percentiles 5/50/95 = 0.396/0.533/0.663",
+          "source": "computed from C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR/W2/ORM.png"
+        }
+      }
+    },
+    {
+      "path": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR/W1",
+      "set": "oak_wood_planks",
+      "provider": "Poly Haven",
+      "url": "https://polyhaven.com/a/oak_wood_planks",
+      "licence": "CC0 1.0",
+      "credits": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR/CREDITS.md (row W1: 'European oak floor planks (superseded by W2: its painted plank joints)')",
+      "tier": "reference",
+      "shows": "Oak floor planks; kept only as a second look at oak's colour and pores. Its plank joints are painted into the maps, so it is not used for layout.",
+      "statistics": {
+        "colorMeanLinear": {
+          "value": [
+            0.3635,
+            0.1804,
+            0.0881
+          ],
+          "unit": "1",
+          "space": "linear Rec.709 (sRGB primaries), D65 white",
+          "grade": "derived",
+          "derivation": "sRGB decode of every pixel of a 256 x 256 bilinear resample, then the mean",
+          "note": "mean of the set's Color map (linear, 256 x 256 resample); the photograph's exposure is unknown, so this is not an albedo",
+          "source": "computed from C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR/W1/Color.png"
+        },
+        "roughnessMapMedian": {
+          "value": 0.439,
+          "unit": "1",
+          "grade": "derived",
+          "derivation": "green channel of ORM.png, 256 x 256 bilinear resample; median, with percentiles 5/50/95 in the note",
+          "note": "authored roughness map, not a measurement; percentiles 5/50/95 = 0.392/0.439/0.506",
+          "source": "computed from C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR/W1/ORM.png"
+        }
+      }
+    }
+  ],
+  "evidenceRejected": [
+    {
+      "path": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR/CREDITS.md ('Checked and not used')",
+      "what": "Poly Haven oak_veneer_02 to 05, red_oak_veneer, mocha_oak_veneer, white_oak_veneer, silver_oak_veneer_01, ambientCG Wood049",
+      "why": "paler, repeating every 0.5-1 m, or weathered sawn wood (as recorded by the first build)"
+    }
+  ],
+  "evidenceSearch": {
+    "searched": [
+      "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR (CREDITS.md, CREDITS_chenghuai.md, every SET.txt, stats.json)",
+      "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/Textures/CREDITS.md",
+      "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/Albion",
+      "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/Journeys/CREDITS.md"
+    ],
+    "found": "W2 (flat-sawn oak veneer, 4k) and W1 (oak planks). No quarter-sawn oak, no fumed oak and no photograph at known exposure.",
+    "tier": "Reference photographs of unknown exposure (figure, pores, relief). Albedo comes from the measured CIELAB above (tier a) until a ColorChecker specimen of the chosen oak and finish (tier b) is photographed."
+  },
+  "unverified": [
+    {
+      "field": "physicalMaterial.friction",
+      "min": 0.36,
+      "max": 0.65,
+      "unit": "1",
+      "reason": "Converting the SATRA PTVs with the UK Slip Resistance Group relation mu = 3 PTV / (330 - PTV) gives about 0.65 dry and 0.36 wet; the relation was not read at its source."
+    },
+    {
+      "field": "stock.installationMoistureContent",
+      "min": 0.07,
+      "max": 0.11,
+      "unit": "1",
+      "reason": "EN 13226 is widely quoted as requiring solid parquet delivered at 7-11 % moisture content; the standard was not read."
+    },
+    {
+      "field": "anatomy.multiseriateRayWidth",
+      "min": 0.15,
+      "max": 1.04,
+      "unit": "mm",
+      "reason": "Broad-ray widths of about 0.15-1.04 mm are reported for Quercus species in a search summary; no oak anatomy source was read."
+    },
+    {
+      "field": "optics.albedo of oiled or waxed oak",
+      "value": null,
+      "unit": "1",
+      "reason": "No measured L*a*b* of European oak under a hardwax oil or wax was read; a finish darkens and saturates bare wood (Marschner et al. 2005), by an amount to be measured on a tier (b) specimen."
+    },
+    {
+      "field": "optics.fibreHighlight.beta for oak",
+      "value": null,
+      "unit": "deg",
+      "reason": "Marschner et al. fitted one highlight width per species but did not measure oak and do not print the values."
+    },
+    {
+      "field": "physical.thermalConductivity",
+      "value": null,
+      "unit": "W/(m*K)",
+      "reason": "Not sourced in this search."
+    }
+  ]
+}

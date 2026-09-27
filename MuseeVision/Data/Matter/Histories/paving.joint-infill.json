@@ -1,0 +1,106 @@
+{
+  "schema": "musee.matter.history/1",
+  "key": "paving.joint-infill",
+  "name": "Joint infill (fines, organic matter, moss)",
+  "family": "stone",
+  "appliesToFamilies": [
+    "stone",
+    "accent"
+  ],
+  "describes": "An open or sand-filled joint in outdoor paving is a trap: wind-blown dust, the fines from the paving's own wear, leaf fragments and soil wash into it, and it holds water longer than the stone either side. In time the joint becomes a thin strip of soil that stays damp and dark, and mosses (in cities typically silver moss) colonise it; in the shade and on little-trodden paving the green is strongest. Trodden lanes keep their joints lower and cleaner. It acts only in the joints Form draws; the moss itself is a plant Nature places there.",
+  "terms": {
+    "colonists": {
+      "text": "Bryum argenteum is a cosmopolitan species common to urban areas, found between cracks on sidewalks, on poor soil and rocks.",
+      "grade": "secondary",
+      "source": "R. Sudan, 'Silvergreen Bryum Moss (Bryum argenteum)', USDA Forest Service, Celebrating Wildflowers, Plant of the Week, https://www.fs.usda.gov/wildflowers/plant-of-the-week/bryum_argenteum.shtml"
+    },
+    "wetDarkening": {
+      "text": "Wet porous material darkens: water lowers the index step at the grains and traps diffusely reflected light.",
+      "grade": "measured",
+      "source": "J. Lekner, M.C. Dorf (1988) 'Why some things are darker when wet', Applied Optics 27(7):1278-1280, https://doi.org/10.1364/AO.27.001278"
+    },
+    "jointWidths": {
+      "text": "Exterior stone paving has joints of 6.4 mm minimum, preferably 9.5 mm, wider for large or textured stones: wide enough to fill and to hold soil.",
+      "grade": "guidance",
+      "source": "Marble Institute of America (now the Natural Stone Institute) (2016) Dimension Stone Design Manual, Version VIII, chapter 'Horizontal Surfaces' (excerpt), Introduction 2.4 'Width of Joints between Stones' and 'Exterior Paving Systems' 2.1-2.4, https://nsrstone.com/wp-content/uploads/2025/07/Horizontal-Surfaces.pdf"
+    }
+  },
+  "surfaceLawTerms": [
+    "age",
+    "soiling",
+    "wetness"
+  ],
+  "evidence": [
+    {
+      "path": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR/CH_PAVING/Color.png",
+      "set": "ambientCG PavingStones112, 2K (key CH_PAVING: 'square grey pavers, moss in the joints', 2.1 m)",
+      "licence": "CC0 1.0",
+      "credit": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR/CREDITS_chenghuai.md, row CH_PAVING",
+      "shows": "Square grey concrete-like pavers about 0.43 m across with narrow joints filled with dark soil and green moss; moss thickest in some joints, absent in others; a few cracked units.",
+      "method": "photogrammetry per the old fetch script's description (windows/Scripts/chenghuai_pbr.py); not stated here by the provider",
+      "statistics": {
+        "jointPitch": {
+          "value": 0.427,
+          "unit": "m",
+          "grade": "derived",
+          "derivation": "column and row means of the greyscale image; joints found as runs darker than half-way from the median to the minimum",
+          "source": "Derived here (R-MATTER, group ground-water) from Color.png: mean spacing of the dark joint lines, 416 px of 2048 px across the set's stated 2.1 m"
+        },
+        "jointWidthDark": {
+          "min": 6,
+          "max": 11,
+          "unit": "mm",
+          "grade": "derived",
+          "derivation": "width of the darkened runs at half depth; includes shadow and moss, not only the gap",
+          "source": "Derived here (R-MATTER, group ground-water) from Color.png at 1.03 mm/px (2.1 m over 2048 px)"
+        }
+      },
+      "meanColour": {
+        "linearSrgb": [
+          0.2175,
+          0.2206,
+          0.2023
+        ],
+        "cieLab": [
+          53.9,
+          -1.3,
+          2.6
+        ],
+        "unit": "linear Rec.709 (sRGB primaries); CIELAB 1976 with a D65 white",
+        "source": "Derived here (R-MATTER, group ground-water): mean over all pixels of Color.png, decoded from sRGB",
+        "note": "uncalibrated"
+      },
+      "tier": "c (photograph, not calibrated)"
+    }
+  ],
+  "photograph": [
+    "Joints darker than the stone, darkest after rain; green threads of moss in shaded, little-walked joints.",
+    "Silver-grey moss cushions in sunny joints, turning bright green when wet.",
+    "Cleaner, lower joints along the lines people walk."
+  ],
+  "unverified": [
+    {
+      "field": "rate of infill",
+      "value": null,
+      "unit": "year",
+      "reason": "No measurement of how fast paving joints fill and green was read."
+    },
+    {
+      "field": "joint drying time",
+      "value": null,
+      "unit": "h",
+      "reason": "That a filled joint stays wet longer than the stone either side is observed practice, not read at a source; the surface law needs the joint's porosity and drying rate."
+    },
+    {
+      "field": "moss colour dry vs wet",
+      "value": null,
+      "unit": "",
+      "reason": "Bryum argenteum's silvery dry and green wet appearance is widely described, but the source read does not state it."
+    }
+  ],
+  "sources": [
+    "R. Sudan, 'Silvergreen Bryum Moss (Bryum argenteum)', USDA Forest Service, Celebrating Wildflowers, Plant of the Week, https://www.fs.usda.gov/wildflowers/plant-of-the-week/bryum_argenteum.shtml",
+    "Marble Institute of America (now the Natural Stone Institute) (2016) Dimension Stone Design Manual, Version VIII, chapter 'Horizontal Surfaces' (excerpt), Introduction 2.4 'Width of Joints between Stones' and 'Exterior Paving Systems' 2.1-2.4, https://nsrstone.com/wp-content/uploads/2025/07/Horizontal-Surfaces.pdf",
+    "J. Lekner, M.C. Dorf (1988) 'Why some things are darker when wet', Applied Optics 27(7):1278-1280, https://doi.org/10.1364/AO.27.001278"
+  ]
+}

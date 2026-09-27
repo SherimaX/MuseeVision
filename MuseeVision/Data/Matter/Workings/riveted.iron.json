@@ -1,0 +1,61 @@
+{
+  "schema": "musee.matter.working/1",
+  "key": "riveted.iron",
+  "name": "Riveted wrought-iron plate and angle (built-up girders and ribs)",
+  "appliesTo": {
+    "families": [
+      "accent"
+    ],
+    "substances": [
+      "wrought-iron"
+    ]
+  },
+  "over": [],
+  "process": "Rolled wrought-iron plates, angles and tees are cut, punched or drilled, and assembled into box girders and I-section ribs; red-hot rivets are driven through the holes and headed, and shrink as they cool, pulling the plates together. Every seam carries a row of domed heads. The glazing bars and purlins are rolled sections, bolted or riveted to the ribs. Wrought iron is hand-worked by heating, hammering and rolling; it is not cast.",
+  "processSources": [
+    "M. Bussell, '19th-century Structural Ironwork in Buildings: Understanding, Care and Re-use', The Building Conservation Directory (2011), https://www.buildingconservation.com/articles/structural-ironwork/structural-ironwork.htm",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Source/MuseeVision/Albion/AlbionIron.cpp (frozen reference), header comment and constants kBarDepth, kPurlinDepth, kMainDepth, kLightDepth"
+  ],
+  "asBuilt": {
+    "rivetHead": {
+      "value": 0.011,
+      "unit": "m",
+      "grade": "design",
+      "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Source/MuseeVision/Albion/AlbionIron.cpp (frozen reference), header comment and constants kBarDepth, kPurlinDepth, kMainDepth, kLightDepth (Rivet, R = 0.011)",
+      "note": "radius of the domed head"
+    },
+    "boltHead": {
+      "value": 0.016,
+      "unit": "m",
+      "grade": "design",
+      "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Source/MuseeVision/Albion/AlbionIron.cpp (frozen reference), header comment and constants kBarDepth, kPurlinDepth, kMainDepth, kLightDepth (Bolt, R = 0.016)",
+      "note": "hex head radius"
+    },
+    "members": {
+      "text": "Box girders on the arcade lines; built-up I-section main ribs 0.26 m deep on the column lines; T ribs 0.14 m; purlins 0.10 m; glazing bars 0.05 m deep every 0.75 m.",
+      "grade": "design",
+      "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Source/MuseeVision/Albion/AlbionIron.cpp (frozen reference), header comment and constants kBarDepth, kPurlinDepth, kMainDepth, kLightDepth ; C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Source/MuseeVision/Albion/AlbionPlan.h (frozen reference)"
+    }
+  },
+  "photograph": [
+    "Rows of domed rivet heads on every seam and flange; plates and angles readable as separate pieces under the paint."
+  ],
+  "unverified": [
+    {
+      "field": "rivetPitch",
+      "text": "rivet diameter and pitch along the ribs",
+      "reason": "The rivet pitch and diameter of Victorian roof ribs were not read from a source; the as-built head radius is a design value."
+    },
+    {
+      "field": "process (riveting)",
+      "text": "hot-driven rivets shrink as they cool",
+      "reason": "The description of hot riveting is standard trade knowledge but no source read in this order describes it."
+    }
+  ],
+  "sources": [
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Source/MuseeVision/Albion/AlbionIron.cpp (frozen reference), header comment and constants kBarDepth, kPurlinDepth, kMainDepth, kLightDepth (Rivet, R = 0.011)",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Source/MuseeVision/Albion/AlbionIron.cpp (frozen reference), header comment and constants kBarDepth, kPurlinDepth, kMainDepth, kLightDepth (Bolt, R = 0.016)",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Source/MuseeVision/Albion/AlbionIron.cpp (frozen reference), header comment and constants kBarDepth, kPurlinDepth, kMainDepth, kLightDepth",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Source/MuseeVision/Albion/AlbionPlan.h (frozen reference)"
+  ]
+}

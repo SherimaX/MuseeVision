@@ -1,0 +1,304 @@
+{
+  "schema": "musee.matter.substance/1",
+  "key": "wrought-iron",
+  "name": "Wrought iron: puddled bar, plate and angle",
+  "family": "accent",
+  "accentOf": "glass",
+  "summary": "Nearly pure iron with threads of glassy slag drawn through it, made by puddling pig iron and rolling the balls into bar, plate and angle: tough, fibrous, forgeable and forge-weldable. In Albion it makes everything that carries the glass above the shafts: the riveted box girders on the arcade lines, the built-up main ribs and the T ribs, purlins and glazing bars, the end screens' mullions and transoms, the lancets' saddle bars, and the forged rings in the arcade spandrels; always seen painted.",
+  "dossier": "Docs/Matter/wrought-iron.md",
+  "aliases": [
+    "puddled iron",
+    "bar iron",
+    "best iron",
+    "marked bar iron"
+  ],
+  "workings": [
+    "riveted.iron",
+    "forged.iron",
+    "painted.iron"
+  ],
+  "histories": [
+    "iron.paint-ageing",
+    "iron.corrosion"
+  ],
+  "identity": {
+    "class": "ferrous; ferrite with 1-2 % entrained siliceous slag, hot worked (not melted), fibrous",
+    "chosenBecause": [
+      {
+        "text": "It is the iron of Victorian girders, roof ribs and smiths' ornament; at Oxford the decorative spandrels of branches (sycamore, walnut, palm and others) are wrought iron.",
+        "grade": "secondary",
+        "source": "Oxford University Museum of Natural History, 'The Museum's Architecture', https://oumnh.ox.ac.uk/learn-architecture ; Oxford University Museum of Natural History, 'Design and decoration: Central Court Roof', https://oum-ox.shorthandstories.com/oumnh-design-and-decoration/central-court-roof/"
+      },
+      {
+        "text": "Wrought iron is no longer made: the last works, the Atlas Forge of Thomas Walmsley and Sons in Bolton, closed in 1973 (Engine Shed says it 'hasn't been made since the 1960s'). The museum depicts it; Matter records the real thing.",
+        "grade": "secondary",
+        "source": "Wikipedia, 'Wrought iron' (Table 2 cited to E. Oberg, F. D. Jones and H. H. Ryffel, Machinery's Handbook, 26th ed., Industrial Press 2000, p. 476; Table 1 cited to J. M. Camp and C. B. Francis, The Making, Shaping and Treating of Steel, Carnegie Steel Company 1920, pp. 173-174; the Atlas Forge closure cited to S. B. Smith and W. K. V. Gale, Historical Metallurgy 21(1) 1987, pp. 44-45), https://en.wikipedia.org/wiki/Wrought_iron ; Historic Environment Scotland, Engine Shed, 'Iron' (Building advice: building materials), https://www.engineshed.scot/building-advice/building-materials/iron/"
+      }
+    ]
+  },
+  "composition": {
+    "standard": "Camp and Francis (1920), as tabulated by Wikipedia (wt%)",
+    "Fe": {
+      "min": 99,
+      "max": 99.8,
+      "unit": "wt%",
+      "grade": "historical",
+      "source": "Wikipedia, 'Wrought iron' (Table 2 cited to E. Oberg, F. D. Jones and H. H. Ryffel, Machinery's Handbook, 26th ed., Industrial Press 2000, p. 476; Table 1 cited to J. M. Camp and C. B. Francis, The Making, Shaping and Treating of Steel, Carnegie Steel Company 1920, pp. 173-174; the Atlas Forge closure cited to S. B. Smith and W. K. V. Gale, Historical Metallurgy 21(1) 1987, pp. 44-45), https://en.wikipedia.org/wiki/Wrought_iron"
+    },
+    "C": {
+      "min": 0.05,
+      "max": 0.25,
+      "unit": "wt%",
+      "grade": "historical",
+      "source": "Wikipedia, 'Wrought iron' (Table 2 cited to E. Oberg, F. D. Jones and H. H. Ryffel, Machinery's Handbook, 26th ed., Industrial Press 2000, p. 476; Table 1 cited to J. M. Camp and C. B. Francis, The Making, Shaping and Treating of Steel, Carnegie Steel Company 1920, pp. 173-174; the Atlas Forge closure cited to S. B. Smith and W. K. V. Gale, Historical Metallurgy 21(1) 1987, pp. 44-45), https://en.wikipedia.org/wiki/Wrought_iron"
+    },
+    "Mn": {
+      "min": 0.01,
+      "max": 0.1,
+      "unit": "wt%",
+      "grade": "historical",
+      "source": "Wikipedia, 'Wrought iron' (Table 2 cited to E. Oberg, F. D. Jones and H. H. Ryffel, Machinery's Handbook, 26th ed., Industrial Press 2000, p. 476; Table 1 cited to J. M. Camp and C. B. Francis, The Making, Shaping and Treating of Steel, Carnegie Steel Company 1920, pp. 173-174; the Atlas Forge closure cited to S. B. Smith and W. K. V. Gale, Historical Metallurgy 21(1) 1987, pp. 44-45), https://en.wikipedia.org/wiki/Wrought_iron"
+    },
+    "S": {
+      "min": 0.02,
+      "max": 0.1,
+      "unit": "wt%",
+      "grade": "historical",
+      "source": "Wikipedia, 'Wrought iron' (Table 2 cited to E. Oberg, F. D. Jones and H. H. Ryffel, Machinery's Handbook, 26th ed., Industrial Press 2000, p. 476; Table 1 cited to J. M. Camp and C. B. Francis, The Making, Shaping and Treating of Steel, Carnegie Steel Company 1920, pp. 173-174; the Atlas Forge closure cited to S. B. Smith and W. K. V. Gale, Historical Metallurgy 21(1) 1987, pp. 44-45), https://en.wikipedia.org/wiki/Wrought_iron"
+    },
+    "P": {
+      "min": 0.05,
+      "max": 0.2,
+      "unit": "wt%",
+      "grade": "historical",
+      "source": "Wikipedia, 'Wrought iron' (Table 2 cited to E. Oberg, F. D. Jones and H. H. Ryffel, Machinery's Handbook, 26th ed., Industrial Press 2000, p. 476; Table 1 cited to J. M. Camp and C. B. Francis, The Making, Shaping and Treating of Steel, Carnegie Steel Company 1920, pp. 173-174; the Atlas Forge closure cited to S. B. Smith and W. K. V. Gale, Historical Metallurgy 21(1) 1987, pp. 44-45), https://en.wikipedia.org/wiki/Wrought_iron"
+    },
+    "Si": {
+      "min": 0.02,
+      "max": 0.2,
+      "unit": "wt%",
+      "grade": "historical",
+      "source": "Wikipedia, 'Wrought iron' (Table 2 cited to E. Oberg, F. D. Jones and H. H. Ryffel, Machinery's Handbook, 26th ed., Industrial Press 2000, p. 476; Table 1 cited to J. M. Camp and C. B. Francis, The Making, Shaping and Treating of Steel, Carnegie Steel Company 1920, pp. 173-174; the Atlas Forge closure cited to S. B. Smith and W. K. V. Gale, Historical Metallurgy 21(1) 1987, pp. 44-45), https://en.wikipedia.org/wiki/Wrought_iron"
+    },
+    "slag": {
+      "max": 2,
+      "unit": "wt%",
+      "grade": "secondary",
+      "source": "Wikipedia, 'Wrought iron' (Table 2 cited to E. Oberg, F. D. Jones and H. H. Ryffel, Machinery's Handbook, 26th ed., Industrial Press 2000, p. 476; Table 1 cited to J. M. Camp and C. B. Francis, The Making, Shaping and Treating of Steel, Carnegie Steel Company 1920, pp. 173-174; the Atlas Forge closure cited to S. B. Smith and W. K. V. Gale, Historical Metallurgy 21(1) 1987, pp. 44-45), https://en.wikipedia.org/wiki/Wrought_iron",
+      "note": "'up to 2% by weight' of slag inclusions"
+    },
+    "slagInclusionDensity": {
+      "text": "About 250,000 slag inclusions per square inch.",
+      "grade": "secondary",
+      "source": "Wikipedia, 'Wrought iron' (Table 2 cited to E. Oberg, F. D. Jones and H. H. Ryffel, Machinery's Handbook, 26th ed., Industrial Press 2000, p. 476; Table 1 cited to J. M. Camp and C. B. Francis, The Making, Shaping and Treating of Steel, Carnegie Steel Company 1920, pp. 173-174; the Atlas Forge closure cited to S. B. Smith and W. K. V. Gale, Historical Metallurgy 21(1) 1987, pp. 44-45), https://en.wikipedia.org/wiki/Wrought_iron"
+    }
+  },
+  "formation": {
+    "how": "Puddling (Henry Cort, 1784): pig iron is melted in a reverberatory furnace, where the fuel never touches the metal, on a hearth lined with iron oxides. The puddler stirs the bath; the carbon burns out, the iron thickens into a pasty mass, and he gathers it into balls (charges of up to about 200 kg, balls of about 50 kg). The balls are hammered (shingled) to squeeze out most of the slag and rolled to 'muck bar'; bars are cut, piled and rolled again for better grades, which draws the remaining slag into long threads. The result is nearly carbon-free iron with a grain like wood: a fresh fracture is bluish, silky and fibrous, and rust or etching brings the grain up.",
+    "facts": {
+      "puddlingInvented": {
+        "value": 1784,
+        "unit": "year CE",
+        "grade": "secondary",
+        "source": "Wikipedia, 'Wrought iron' (Table 2 cited to E. Oberg, F. D. Jones and H. H. Ryffel, Machinery's Handbook, 26th ed., Industrial Press 2000, p. 476; Table 1 cited to J. M. Camp and C. B. Francis, The Making, Shaping and Treating of Steel, Carnegie Steel Company 1920, pp. 173-174; the Atlas Forge closure cited to S. B. Smith and W. K. V. Gale, Historical Metallurgy 21(1) 1987, pp. 44-45), https://en.wikipedia.org/wiki/Wrought_iron"
+      },
+      "puddlingCharge": {
+        "value": 200,
+        "unit": "kg",
+        "grade": "secondary",
+        "source": "M. Bussell, '19th-century Structural Ironwork in Buildings: Understanding, Care and Re-use', The Building Conservation Directory (2011), https://www.buildingconservation.com/articles/structural-ironwork/structural-ironwork.htm",
+        "note": "'about 200 kg' per charge"
+      },
+      "puddledBall": {
+        "value": 50,
+        "unit": "kg",
+        "grade": "secondary",
+        "source": "M. Bussell, '19th-century Structural Ironwork in Buildings: Understanding, Care and Re-use', The Building Conservation Directory (2011), https://www.buildingconservation.com/articles/structural-ironwork/structural-ironwork.htm",
+        "note": "'about 50 kg'"
+      },
+      "meltingPoint": {
+        "value": 1540,
+        "unit": "degC",
+        "grade": "secondary",
+        "source": "Wikipedia, 'Wrought iron' (Table 2 cited to E. Oberg, F. D. Jones and H. H. Ryffel, Machinery's Handbook, 26th ed., Industrial Press 2000, p. 476; Table 1 cited to J. M. Camp and C. B. Francis, The Making, Shaping and Treating of Steel, Carnegie Steel Company 1920, pp. 173-174; the Atlas Forge closure cited to S. B. Smith and W. K. V. Gale, Historical Metallurgy 21(1) 1987, pp. 44-45), https://en.wikipedia.org/wiki/Wrought_iron",
+        "asReported": "2800 degF"
+      },
+      "fracture": {
+        "text": "'A fresh fracture shows a clear bluish color with a high silky luster and fibrous appearance'; the slag gives a wood-like grain when etched, rusted or bent to failure.",
+        "grade": "secondary",
+        "source": "Wikipedia, 'Wrought iron' (Table 2 cited to E. Oberg, F. D. Jones and H. H. Ryffel, Machinery's Handbook, 26th ed., Industrial Press 2000, p. 476; Table 1 cited to J. M. Camp and C. B. Francis, The Making, Shaping and Treating of Steel, Carnegie Steel Company 1920, pp. 173-174; the Atlas Forge closure cited to S. B. Smith and W. K. V. Gale, Historical Metallurgy 21(1) 1987, pp. 44-45), https://en.wikipedia.org/wiki/Wrought_iron"
+      },
+      "forgeWelding": {
+        "text": "The silicate slag acts as a flux, so wrought iron forge-welds readily; it is malleable hot and generally ductile.",
+        "grade": "secondary",
+        "source": "Wikipedia, 'Wrought iron' (Table 2 cited to E. Oberg, F. D. Jones and H. H. Ryffel, Machinery's Handbook, 26th ed., Industrial Press 2000, p. 476; Table 1 cited to J. M. Camp and C. B. Francis, The Making, Shaping and Treating of Steel, Carnegie Steel Company 1920, pp. 173-174; the Atlas Forge closure cited to S. B. Smith and W. K. V. Gale, Historical Metallurgy 21(1) 1987, pp. 44-45), https://en.wikipedia.org/wiki/Wrought_iron ; M. Bussell, '19th-century Structural Ironwork in Buildings: Understanding, Care and Re-use', The Building Conservation Directory (2011), https://www.buildingconservation.com/articles/structural-ironwork/structural-ironwork.htm"
+      }
+    }
+  },
+  "physical": {
+    "tensileStrength": {
+      "min": 234,
+      "max": 372,
+      "unit": "MPa",
+      "grade": "secondary",
+      "source": "Wikipedia, 'Wrought iron' (Table 2 cited to E. Oberg, F. D. Jones and H. H. Ryffel, Machinery's Handbook, 26th ed., Industrial Press 2000, p. 476; Table 1 cited to J. M. Camp and C. B. Francis, The Making, Shaping and Treating of Steel, Carnegie Steel Company 1920, pp. 173-174; the Atlas Forge closure cited to S. B. Smith and W. K. V. Gale, Historical Metallurgy 21(1) 1987, pp. 44-45), https://en.wikipedia.org/wiki/Wrought_iron",
+      "asReported": "34,000-54,000 psi"
+    },
+    "yieldStrength": {
+      "min": 159,
+      "max": 221,
+      "unit": "MPa",
+      "grade": "secondary",
+      "source": "Wikipedia, 'Wrought iron' (Table 2 cited to E. Oberg, F. D. Jones and H. H. Ryffel, Machinery's Handbook, 26th ed., Industrial Press 2000, p. 476; Table 1 cited to J. M. Camp and C. B. Francis, The Making, Shaping and Treating of Steel, Carnegie Steel Company 1920, pp. 173-174; the Atlas Forge closure cited to S. B. Smith and W. K. V. Gale, Historical Metallurgy 21(1) 1987, pp. 44-45), https://en.wikipedia.org/wiki/Wrought_iron",
+      "asReported": "23,000-32,000 psi"
+    },
+    "yieldStrengthForAppraisal": {
+      "value": 220,
+      "unit": "MPa",
+      "grade": "secondary",
+      "source": "M. Bussell, '19th-century Structural Ironwork in Buildings: Understanding, Care and Re-use', The Building Conservation Directory (2011), https://www.buildingconservation.com/articles/structural-ironwork/structural-ironwork.htm",
+      "note": "suggested value; 'similar strengths in tension and compression'"
+    },
+    "youngsModulus": {
+      "value": 193.1,
+      "unit": "GPa",
+      "grade": "secondary",
+      "source": "Wikipedia, 'Wrought iron' (Table 2 cited to E. Oberg, F. D. Jones and H. H. Ryffel, Machinery's Handbook, 26th ed., Industrial Press 2000, p. 476; Table 1 cited to J. M. Camp and C. B. Francis, The Making, Shaping and Treating of Steel, Carnegie Steel Company 1920, pp. 173-174; the Atlas Forge closure cited to S. B. Smith and W. K. V. Gale, Historical Metallurgy 21(1) 1987, pp. 44-45), https://en.wikipedia.org/wiki/Wrought_iron",
+      "asReported": "28,000,000 psi",
+      "conditions": "tension"
+    },
+    "density": {
+      "min": 7500,
+      "max": 7900,
+      "unit": "kg/m3",
+      "grade": "secondary",
+      "source": "Wikipedia, 'Wrought iron' (Table 2 cited to E. Oberg, F. D. Jones and H. H. Ryffel, Machinery's Handbook, 26th ed., Industrial Press 2000, p. 476; Table 1 cited to J. M. Camp and C. B. Francis, The Making, Shaping and Treating of Steel, Carnegie Steel Company 1920, pp. 173-174; the Atlas Forge closure cited to S. B. Smith and W. K. V. Gale, Historical Metallurgy 21(1) 1987, pp. 44-45), https://en.wikipedia.org/wiki/Wrought_iron",
+      "asReported": "specific gravity 7.6-7.9 or 7.5-7.8 (two sources)"
+    }
+  },
+  "optics": {
+    "kind": "conductor",
+    "note": "Victorian iron is never seen bare in Albion: it is always under its paint (painted.iron), whose optics are a dielectric coat. For a cut or worn-through edge, the bare metal's constants are those of iron, already recorded (Johnson and Christy 1974) in the steel record; a grey cast iron's graphite flakes and a wrought iron's slag stringers lower and darken a bare face but were not measured here.",
+    "spectral": {
+      "text": "Iron n,k (0.381-0.756 um) and the derived F0 and F82 triples are in the steel record; they are not copied here.",
+      "grade": "record",
+      "source": "MuseeVision/Data/Matter/Substances/steel.json (optics.spectral: P. B. Johnson and R. W. Christy 1974, Fe; optics.f0)"
+    }
+  },
+  "acoustic": {
+    "note": "Slender members overhead under the glass; not an absorbing surface. The rain drumming on the ribs is Sound's (see cast-iron)."
+  },
+  "stock": {
+    "forms": {
+      "text": "Rolled bar (flat, round, square), plate and angle, joined by hot rivets into girders and ribs, or forged by the smith; 'hand-worked through heating, hammering, and rolling'.",
+      "grade": "secondary",
+      "source": "M. Bussell, '19th-century Structural Ironwork in Buildings: Understanding, Care and Re-use', The Building Conservation Directory (2011), https://www.buildingconservation.com/articles/structural-ironwork/structural-ironwork.htm"
+    },
+    "asBuiltMembers": {
+      "text": "Box girders on the arcade lines, riveted, carrying the lead valley gutters at 10.0 m; built-up I-section main ribs on the column lines (0.26 m deep, with a lighter inner arch and a chain of rings), plain T ribs between (0.14 m), a rib every 1.5 m; purlins 0.10 m and glazing bars 0.05 m deep under the glass, the bars every 0.75 m; the end screens' mullions and transoms; saddle bars in the lancets; pointed arcade arches (springing 6.2 m, half-span 2.75 m) with wrought-iron rings in their spandrels.",
+      "grade": "design",
+      "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Source/MuseeVision/Albion/AlbionIron.cpp (frozen reference), header comment and constants kBarDepth, kPurlinDepth, kMainDepth, kLightDepth ; C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Source/MuseeVision/Albion/AlbionPlan.h (frozen reference) (RibPitch, BarPitch, ArcadeHalfSpan)"
+    },
+    "boardRings": {
+      "text": "WROUGHT-IRON RINGS IN THE SPANDRELS",
+      "grade": "design",
+      "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/plan/proposals/albion/canvas/Details.dc.html (approved proposal, D-001)"
+    }
+  },
+  "physicalMaterial": {
+    "footfallClass": "metal",
+    "note": "Overhead; never walked or touched."
+  },
+  "uses": [
+    {
+      "where": "Albion: box girders, main and T ribs, purlins, glazing bars (every 0.75 m), screen mullions and transoms",
+      "working": "riveted.iron",
+      "histories": [
+        "iron.paint-ageing",
+        "iron.corrosion"
+      ],
+      "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Source/MuseeVision/Albion/AlbionIron.cpp (frozen reference), header comment and constants kBarDepth, kPurlinDepth, kMainDepth, kLightDepth",
+      "grade": "design"
+    },
+    {
+      "where": "Albion: the rings in the arcade spandrels; saddle bars in the lancets",
+      "working": "forged.iron",
+      "histories": [
+        "iron.paint-ageing",
+        "iron.corrosion"
+      ],
+      "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Source/MuseeVision/Albion/AlbionIron.cpp (frozen reference), header comment and constants kBarDepth, kPurlinDepth, kMainDepth, kLightDepth ; C:/Users/anan9/Desktop/Projects/Musee Vision/plan/proposals/albion/canvas/Details.dc.html (approved proposal, D-001)",
+      "grade": "design"
+    }
+  ],
+  "asBuilt": {
+    "text": "Painted as the cast iron (MI_Albion_Iron); the paint's values are in painted.iron.",
+    "grade": "design",
+    "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/albion_materials.py (frozen reference) (metal_specs)"
+  },
+  "photograph": [
+    "Painted like the cast iron, but the members are thin and built up: plates and angles with rows of domed rivet heads along every seam, the ribs' flanges reading as crisp lines against the glass.",
+    "Forged work (the spandrel rings) has hammer-soft arrises, tapering scrolls, collars and forge-welded joints, never the parting lines of a casting.",
+    "Where it has rusted under failed paint, wrought iron swells and splits along its grain into layers, and thin members bend."
+  ],
+  "evidence": [],
+  "evidenceRejected": [
+    {
+      "path": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR/M5",
+      "set": "ambientCG Metal029 ('satin lacquer orange peel (pearl steel)' in CREDITS.md)",
+      "reason": "Procedurally generated (ambientCG creation method 'Procedural'), not a photograph of painted iron; the as-built MI_Albion_Iron used it only for relief (colour_amount 0). The steel group rejected it on the same grounds.",
+      "source": "https://ambientcg.com/view?id=Metal029 ; MuseeVision/Data/Matter/Substances/steel.json (evidenceRejected)",
+      "grade": "record"
+    }
+  ],
+  "evidenceSearch": {
+    "searched": [
+      "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt (PBR, Textures, Journeys, Albion and their CREDITS files)",
+      "C:/Users/anan9/Desktop/Projects/Musee Vision/assets/albion (glass, paintings, vessels)"
+    ],
+    "found": "No CC0 photograph of Victorian cast or wrought iron, painted or bare, is on this PC. SourceArt/PBR/M5 is procedural (see evidenceRejected).",
+    "tier": "The iron is always seen under its paint (painted.iron). A tier-(b) reference would be a photographed set of painted Victorian ironwork (Oxford's court, a train shed); none is downloaded (no downloads in this order)."
+  },
+  "familyDeclaration": {
+    "text": "D-014 admits the families stone, white, bronze, oak, accent, glass, water and living; an accent names the core family it ties back to. Albion's iron exists to carry the glass of the vaults and screens (the stone stops at the capitals; above 6.2 m everything is iron and glass), as the Rotunda's steel lattice does, so it is declared an accent of the glass family, the same reading the metal group made for steel. The Architect may overturn it.",
+    "grade": "design",
+    "source": "MuseeVision/Journal/Decisions.md, D-014 (Matter: families and accents; Form: joints 'welded and faired' for the Elan's pearl shell; Glazing: stained glass with lead cames) ; MuseeVision/Data/Matter/Substances/steel.json (familyDeclaration)"
+  },
+  "unverified": [
+    {
+      "field": "composition.slag",
+      "value": null,
+      "min": 1,
+      "max": 4,
+      "unit": "wt%",
+      "reason": "Other accounts (Britannica and trade pages) give slag at 1-4 %; only the Wikipedia 'up to 2% by weight' was read with its context."
+    },
+    {
+      "field": "physical (period tests)",
+      "text": "measured yield, tensile strength and elongation of 19th-century British wrought iron",
+      "reason": "Period tests of wrought iron (for example the 19th-century truss-bridge study in J. Mater. Civ. Eng. 23(5), 2011, and the 2026 acoustic-emission study of Salisbury, Blenheim and Topp irons) could not be read (HTTP 403); the Machinery's Handbook ranges stand in for them."
+    },
+    {
+      "field": "physical.thermalExpansion",
+      "value": 1.2e-05,
+      "unit": "1/K",
+      "reason": "Not read from a source; expected close to iron's (about 12 x 10^-6 /K)."
+    }
+  ],
+  "sources": [
+    "Oxford University Museum of Natural History, 'The Museum's Architecture', https://oumnh.ox.ac.uk/learn-architecture",
+    "Oxford University Museum of Natural History, 'Design and decoration: Central Court Roof', https://oum-ox.shorthandstories.com/oumnh-design-and-decoration/central-court-roof/",
+    "Wikipedia, 'Wrought iron' (Table 2 cited to E. Oberg, F. D. Jones and H. H. Ryffel, Machinery's Handbook, 26th ed., Industrial Press 2000, p. 476; Table 1 cited to J. M. Camp and C. B. Francis, The Making, Shaping and Treating of Steel, Carnegie Steel Company 1920, pp. 173-174; the Atlas Forge closure cited to S. B. Smith and W. K. V. Gale, Historical Metallurgy 21(1) 1987, pp. 44-45), https://en.wikipedia.org/wiki/Wrought_iron",
+    "Historic Environment Scotland, Engine Shed, 'Iron' (Building advice: building materials), https://www.engineshed.scot/building-advice/building-materials/iron/",
+    "M. Bussell, '19th-century Structural Ironwork in Buildings: Understanding, Care and Re-use', The Building Conservation Directory (2011), https://www.buildingconservation.com/articles/structural-ironwork/structural-ironwork.htm",
+    "MuseeVision/Data/Matter/Substances/steel.json (optics.spectral: P. B. Johnson and R. W. Christy 1974, Fe; optics.f0)",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Source/MuseeVision/Albion/AlbionIron.cpp (frozen reference), header comment and constants kBarDepth, kPurlinDepth, kMainDepth, kLightDepth",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Source/MuseeVision/Albion/AlbionPlan.h (frozen reference) (RibPitch, BarPitch, ArcadeHalfSpan)",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/plan/proposals/albion/canvas/Details.dc.html (approved proposal, D-001)",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/albion_materials.py (frozen reference) (metal_specs)",
+    "https://ambientcg.com/view?id=Metal029",
+    "MuseeVision/Data/Matter/Substances/steel.json (evidenceRejected)",
+    "MuseeVision/Journal/Decisions.md, D-014 (Matter: families and accents; Form: joints 'welded and faired' for the Elan's pearl shell; Glazing: stained glass with lead cames)",
+    "MuseeVision/Data/Matter/Substances/steel.json (familyDeclaration)"
+  ]
+}

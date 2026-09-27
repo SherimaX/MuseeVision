@@ -1,0 +1,114 @@
+{
+  "schema": "musee.matter.history/1",
+  "key": "ground.trodden",
+  "name": "Trodden (foot traffic on unpaved ground)",
+  "family": "accent",
+  "appliesToFamilies": [
+    "accent",
+    "living"
+  ],
+  "describes": "Feet move the ground: on a rolled walk they grind the surface grains, bring up and pack the fines along the lines people walk and push loose grit to the sides, so the lanes read smoother and paler and the edges looser; in dry weather the ground-down fines lift as dust. On soil, trampling compacts it: bulk density rises until roots are restricted and the turf thins to bare, hard ground along desire lines. It acts where Form's walkable ground meets the visitors' paths.",
+  "terms": {
+    "dust": {
+      "text": "The stabilise, designed for strollers, turns to a fine grey powder under trucks and heavy crowds.",
+      "grade": "secondary",
+      "source": "franceinfo, 'Les jardins des Tuileries recherchent 15 millions pour eradiquer la poussiere' (3 May 2013), https://www.franceinfo.fr/culture/patrimoine/les-jardins-des-tuileries-recherchent-15-millions-pour-eradiquer-la-poussiere_3310669.html"
+    },
+    "maintenance": {
+      "text": "Hollows are filled with fresh material and recompacted; the surface is watered in summer.",
+      "grade": "secondary",
+      "source": "Carriere Vila, 'Allee en sable stabilise : guide pas a pas' (12 March 2026), https://www.carriere-vila.com/guide-realiser-allee-en-sable-stabilise/"
+    },
+    "soilCompaction": {
+      "idealBulkDensity": [
+        {
+          "max": 1.6,
+          "unit": "g/cm3",
+          "grade": "secondary",
+          "source": "University of Illinois, 'Soil Quality for Environmental Health: Bulk Density', Table 1 (after M.A. Arshad, B. Lowery, B. Grossman (1996) 'Physical tests for monitoring soil quality', in J.W. Doran, A.J. Jones (eds.) Methods for Assessing Soil Quality, SSSA, pp. 123-141), https://soilquality.nres.illinois.edu/bulk-density/",
+          "conditions": "sandy soils: ideal for plant growth"
+        },
+        {
+          "max": 1.4,
+          "unit": "g/cm3",
+          "grade": "secondary",
+          "source": "University of Illinois, 'Soil Quality for Environmental Health: Bulk Density', Table 1 (after M.A. Arshad, B. Lowery, B. Grossman (1996) 'Physical tests for monitoring soil quality', in J.W. Doran, A.J. Jones (eds.) Methods for Assessing Soil Quality, SSSA, pp. 123-141), https://soilquality.nres.illinois.edu/bulk-density/",
+          "conditions": "silty soils"
+        },
+        {
+          "max": 1.1,
+          "unit": "g/cm3",
+          "grade": "secondary",
+          "source": "University of Illinois, 'Soil Quality for Environmental Health: Bulk Density', Table 1 (after M.A. Arshad, B. Lowery, B. Grossman (1996) 'Physical tests for monitoring soil quality', in J.W. Doran, A.J. Jones (eds.) Methods for Assessing Soil Quality, SSSA, pp. 123-141), https://soilquality.nres.illinois.edu/bulk-density/",
+          "conditions": "clayey soils"
+        }
+      ],
+      "restrictsRoots": [
+        {
+          "min": 1.8,
+          "unit": "g/cm3",
+          "grade": "secondary",
+          "source": "University of Illinois, 'Soil Quality for Environmental Health: Bulk Density', Table 1 (after M.A. Arshad, B. Lowery, B. Grossman (1996) 'Physical tests for monitoring soil quality', in J.W. Doran, A.J. Jones (eds.) Methods for Assessing Soil Quality, SSSA, pp. 123-141), https://soilquality.nres.illinois.edu/bulk-density/",
+          "conditions": "sandy soils: restricts root growth"
+        },
+        {
+          "min": 1.65,
+          "unit": "g/cm3",
+          "grade": "secondary",
+          "source": "University of Illinois, 'Soil Quality for Environmental Health: Bulk Density', Table 1 (after M.A. Arshad, B. Lowery, B. Grossman (1996) 'Physical tests for monitoring soil quality', in J.W. Doran, A.J. Jones (eds.) Methods for Assessing Soil Quality, SSSA, pp. 123-141), https://soilquality.nres.illinois.edu/bulk-density/",
+          "conditions": "silty soils"
+        },
+        {
+          "min": 1.47,
+          "unit": "g/cm3",
+          "grade": "secondary",
+          "source": "University of Illinois, 'Soil Quality for Environmental Health: Bulk Density', Table 1 (after M.A. Arshad, B. Lowery, B. Grossman (1996) 'Physical tests for monitoring soil quality', in J.W. Doran, A.J. Jones (eds.) Methods for Assessing Soil Quality, SSSA, pp. 123-141), https://soilquality.nres.illinois.edu/bulk-density/",
+          "conditions": "clayey soils"
+        }
+      ],
+      "note": "Nature reads these limits to thin the lawn along worn lines; Matter records the ground's state."
+    },
+    "acousticShift": {
+      "text": "Compaction moves ground from Nord2000 class C ('uncompacted, loose ground (turf, grass, loose soil)', 80 kPa s/m2) or D (200) toward E ('compacted lawns, park area', 500) and F ('gravel road, parking lot', 2000).",
+      "grade": "secondary",
+      "source": "M. Ahearn, E. Boeker, J. Rosenbaum, P. Gerbi, C. Roof (2012) 'The Analysis of Modeling Aircraft Noise with the Nord2000 Noise Model', US DOT Volpe Center, DOT/FAA/AEE/2012-5 (DOT-VNTSC-FAA-12-07), Table 4 'Classification of ground type' (the Nord2000 impedance classes; 1 cgs rayl = 1 kN s/m4 = 1 kPa s/m2), https://rosap.ntl.bts.gov/view/dot/9687/dot_9687_DS1.pdf"
+    }
+  },
+  "surfaceLawTerms": [
+    "wear",
+    "soiling",
+    "wetness"
+  ],
+  "drivers": [
+    {
+      "text": "Visitor traffic and vehicles; the Tuileries' 23 ha carry about fourteen million visitors a year.",
+      "grade": "secondary",
+      "source": "franceinfo, 'Les jardins des Tuileries recherchent 15 millions pour eradiquer la poussiere' (3 May 2013), https://www.franceinfo.fr/culture/patrimoine/les-jardins-des-tuileries-recherchent-15-millions-pour-eradiquer-la-poussiere_3310669.html"
+    }
+  ],
+  "photograph": [
+    "Paler, smoother lanes down the middle of a walk and at corners people cut; loose grit and small stones along the edges.",
+    "After rain, puddles in the trodden hollows; when they dry, a pale skin of fines.",
+    "On a lawn: a thin, yellowed line where people cut across, bare and hard at the middle."
+  ],
+  "unverified": [
+    {
+      "field": "lane contrast",
+      "value": null,
+      "unit": "1",
+      "reason": "No measurement of the reflectance difference between trodden and untrodden gravel was read; the old build's LaneAmount 0.75 and lane colour #D6CBB2 were set by eye (windows/Scripts/exterior_materials.py)."
+    },
+    {
+      "field": "Tuileries dust control",
+      "value": null,
+      "unit": "",
+      "reason": "A search summary reports automatic watering with raw water on the central walk and monthly harrowing; the article (lejdd.fr) was not readable."
+    }
+  ],
+  "sources": [
+    "franceinfo, 'Les jardins des Tuileries recherchent 15 millions pour eradiquer la poussiere' (3 May 2013), https://www.franceinfo.fr/culture/patrimoine/les-jardins-des-tuileries-recherchent-15-millions-pour-eradiquer-la-poussiere_3310669.html",
+    "Carriere Vila, 'Allee en sable stabilise : guide pas a pas' (12 March 2026), https://www.carriere-vila.com/guide-realiser-allee-en-sable-stabilise/",
+    "University of Illinois, 'Soil Quality for Environmental Health: Bulk Density', Table 1 (after M.A. Arshad, B. Lowery, B. Grossman (1996) 'Physical tests for monitoring soil quality', in J.W. Doran, A.J. Jones (eds.) Methods for Assessing Soil Quality, SSSA, pp. 123-141), https://soilquality.nres.illinois.edu/bulk-density/",
+    "M. Ahearn, E. Boeker, J. Rosenbaum, P. Gerbi, C. Roof (2012) 'The Analysis of Modeling Aircraft Noise with the Nord2000 Noise Model', US DOT Volpe Center, DOT/FAA/AEE/2012-5 (DOT-VNTSC-FAA-12-07), Table 4 'Classification of ground type' (the Nord2000 impedance classes; 1 cgs rayl = 1 kN s/m4 = 1 kPa s/m2), https://rosap.ntl.bts.gov/view/dot/9687/dot_9687_DS1.pdf"
+  ]
+}

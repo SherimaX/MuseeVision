@@ -1,0 +1,264 @@
+{
+  "schema": "musee.matter.working/1",
+  "key": "etched.glass",
+  "name": "Acid-etched (satin, frosted) glass",
+  "dossier": "Docs/Matter/misty-glass.md",
+  "appliesTo": {
+    "families": [
+      "glass"
+    ],
+    "substances": [
+      "low-iron-glass"
+    ]
+  },
+  "over": [
+    "annealed"
+  ],
+  "process": "One face of the float is exposed to a hydrofluoric-acid bath (the makers' recipes are their own) that dissolves the glass unevenly and leaves a uniform field of microscopic facets and pits: the face scatters light and loses its gloss while the glass beneath is unchanged. The etch is made on the flat sheet before any toughening, laminating or insulating, and the etched glass keeps its substrate's strength. The finish is set by the etch: from a light satin that still shows shapes behind it to an opaque, velvety white; the colour of the etch must match within Delta E* 2 between neighbouring panes, and slight 'clouds' of uneven haze are the typical defect. Walker describes its etched finishes as smooth, durable and resistant to wear and staining; sandblasting, the other way to frost glass, roughens the surface far more (see alternatives).",
+  "processSources": [
+    "Walker Glass (Gardner Walker), 'Acid-etched glass... so much more than what you thought', https://gardnerwalker.com/blog/acid-etched-glassso-much-more-than-what-you-thought/",
+    "AGC Glass Europe, 'Technical Data Sheet Matelux' (08/2014), https://www.agc-yourglass.com/sites/default/files/technical_documents/original/Matelux_Technical_Data.pdf",
+    "S. Benterki, C. Bousbaa, N. Laouar and A. Faci, 'Characterization of the sandblasted glass degradation by light scattering', Optik (2018), https://www.sciencedirect.com/science/article/abs/pii/S0030402617317734 (values from the abstract only)"
+  ],
+  "optics": {
+    "luminousTransmittance": {
+      "value": 0.91,
+      "unit": "1",
+      "grade": "manufacturer",
+      "source": "Walker Glass (Gardner Walker), 'Acid-etched glass' product page (Velour option), https://gardnerwalker.com/products/acid-etched-glass/#option-velour-acid-etched-glass",
+      "conditions": "6 mm clear float, Velour finish (high haze)",
+      "note": "'91% VLT on 6mm clear'"
+    },
+    "haze": {
+      "velour": {
+        "value": 0.89,
+        "unit": "1",
+        "grade": "manufacturer",
+        "source": "Walker Glass (Gardner Walker), 'Acid-etched glass... so much more than what you thought', https://gardnerwalker.com/blog/acid-etched-glassso-much-more-than-what-you-thought/"
+      },
+      "opaque": {
+        "value": 0.9,
+        "unit": "1",
+        "grade": "manufacturer",
+        "source": "Walker Glass (Gardner Walker), 'Acid-etched glass... so much more than what you thought', https://gardnerwalker.com/blog/acid-etched-glassso-much-more-than-what-you-thought/"
+      },
+      "definition": {
+        "text": "Haze is the share of transmitted light that deviates from the incident beam by more than 2.5 degrees on average: the diffuse transmittance divided by the total luminous transmittance.",
+        "grade": "manufacturer",
+        "source": "Walker Glass (Gardner Walker), 'Acid-etched glass... so much more than what you thought', https://gardnerwalker.com/blog/acid-etched-glassso-much-more-than-what-you-thought/"
+      }
+    },
+    "exampleTexture": {
+      "note": "AGC's patent for a 'brilliant' frosted sheet gives measured examples; they are a particular etch (faceted polyhedra), shown here as the measured scale of an etched face, not as the museum's specification.",
+      "totalTransmittance": {
+        "min": 0.883,
+        "max": 0.887,
+        "unit": "1",
+        "grade": "manufacturer",
+        "source": "AGC Glass Europe, 'Frosted glass sheet', WO 2014/012809 A1 (published 23 January 2014), https://patents.google.com/patent/WO2014012809A1/en",
+        "conditions": "4 mm glass"
+      },
+      "haze": {
+        "min": 0.756,
+        "max": 0.897,
+        "unit": "1",
+        "grade": "manufacturer",
+        "source": "AGC Glass Europe, 'Frosted glass sheet', WO 2014/012809 A1 (published 23 January 2014), https://patents.google.com/patent/WO2014012809A1/en",
+        "conditions": "4 mm glass"
+      },
+      "clarity": {
+        "min": 0.08,
+        "max": 0.136,
+        "unit": "1",
+        "grade": "manufacturer",
+        "source": "AGC Glass Europe, 'Frosted glass sheet', WO 2014/012809 A1 (published 23 January 2014), https://patents.google.com/patent/WO2014012809A1/en",
+        "conditions": "4 mm glass"
+      },
+      "gloss60": {
+        "min": 6.8,
+        "max": 8.7,
+        "unit": "GU",
+        "grade": "manufacturer",
+        "source": "AGC Glass Europe, 'Frosted glass sheet', WO 2014/012809 A1 (published 23 January 2014), https://patents.google.com/patent/WO2014012809A1/en",
+        "conditions": "60 degree specular gloss"
+      }
+    },
+    "wetness": {
+      "text": "A water film on the etched face fills its texture with a liquid of index close to glass's and makes it partly clear; the etched face should face the dry side (inside) of the Elan's drum and roof.",
+      "grade": "derived",
+      "source": "MuseeVision/Data/Matter/Substances/low-iron-glass.json (optics.refractiveIndex 1.523) ; MuseeVision/Data/Matter/Substances/water.json (optics.refractiveIndex 1.33335, Daimon and Masumura 2007)",
+      "derivation": "Index matching: the reflectance of each facet falls from ((1.523-1)/(1.523+1))^2 = 0.043 in air to ((1.523-1.333)/(1.523+1.333))^2 = 0.0044 under water, so the scattering of the facets falls about tenfold"
+    }
+  },
+  "surface": {
+    "exampleRoughness": {
+      "min": 1.5,
+      "max": 4,
+      "unit": "um",
+      "grade": "manufacturer",
+      "source": "AGC Glass Europe, 'Frosted glass sheet', WO 2014/012809 A1 (published 23 January 2014), https://patents.google.com/patent/WO2014012809A1/en",
+      "conditions": "Ra, 12 mm evaluation length, 0.8 mm Gaussian cut-off (preferred 1.8-3 um)"
+    },
+    "exampleFineRoughness": {
+      "min": 0.08,
+      "max": 0.4,
+      "unit": "um",
+      "grade": "manufacturer",
+      "source": "AGC Glass Europe, 'Frosted glass sheet', WO 2014/012809 A1 (published 23 January 2014), https://patents.google.com/patent/WO2014012809A1/en",
+      "conditions": "Ra, 200 um evaluation length, 0.035 mm cut-off"
+    },
+    "exampleSpacing": {
+      "min": 40,
+      "max": 250,
+      "unit": "um",
+      "grade": "manufacturer",
+      "source": "AGC Glass Europe, 'Frosted glass sheet', WO 2014/012809 A1 (published 23 January 2014), https://patents.google.com/patent/WO2014012809A1/en",
+      "conditions": "RSm, mean spacing of the texture's elements"
+    },
+    "facets": {
+      "text": "The frosted face of the patent's examples is covered (50 % or more) by polyhedra, pyramids and triangular prisms with planar faces, which give it sparkle.",
+      "grade": "manufacturer",
+      "source": "AGC Glass Europe, 'Frosted glass sheet', WO 2014/012809 A1 (published 23 January 2014), https://patents.google.com/patent/WO2014012809A1/en"
+    }
+  },
+  "strength": {
+    "text": "'For acid etched glass manufactured on float glass, coated glass, thermally toughened glass or laminated glass, the same value of mechanical strength shall be used as for the glass substrate.'",
+    "grade": "manufacturer",
+    "source": "AGC Glass Europe, 'Technical Data Sheet Matelux' (08/2014), https://www.agc-yourglass.com/sites/default/files/technical_documents/original/Matelux_Technical_Data.pdf"
+  },
+  "uniformity": {
+    "deltaE": {
+      "max": 2,
+      "unit": "1",
+      "grade": "manufacturer",
+      "source": "AGC Glass Europe, 'Technical Data Sheet Matelux' (08/2014), https://www.agc-yourglass.com/sites/default/files/technical_documents/original/Matelux_Technical_Data.pdf",
+      "conditions": "CIELAB Delta E*, D65 10 degrees, measured on the glass side, between panes of the same thickness",
+      "note": "panes placed side by side should come from one batch"
+    },
+    "defects": {
+      "text": "Uniformity defects: 'slight visible variation in haze effect within a pane or from pane to pane ... (e.g. clouds)'; punctual defects from cutting-oil droplets or silicone; judged at 300-600 lux from at least 50 cm.",
+      "grade": "manufacturer",
+      "source": "AGC Glass Europe, 'Technical Data Sheet Matelux' (08/2014), https://www.agc-yourglass.com/sites/default/files/technical_documents/original/Matelux_Technical_Data.pdf"
+    }
+  },
+  "stock": {
+    "text": "Matelux on float to EN 572, 3-19 mm; Walker Textures 3-19 mm.",
+    "grade": "manufacturer",
+    "source": "AGC Glass Europe, 'Technical Data Sheet Matelux' (08/2014), https://www.agc-yourglass.com/sites/default/files/technical_documents/original/Matelux_Technical_Data.pdf ; Walker Glass (Gardner Walker), 'Acid-etched glass' product page (Velour option), https://gardnerwalker.com/products/acid-etched-glass/#option-velour-acid-etched-glass"
+  },
+  "alternatives": {
+    "sandblasted": {
+      "text": "Sandblasting soda-lime glass raises its roughness Ra from 0.035 to 2.27 um as more sand is projected; the specular transmittance falls from 0.916 to 0.13 while the scattered transmittance rises to 0.81; the surface becomes visibly damaged beyond about Ra 1.5 um. It is not the museum's finish.",
+      "grade": "measured",
+      "source": "S. Benterki, C. Bousbaa, N. Laouar and A. Faci, 'Characterization of the sandblasted glass degradation by light scattering', Optik (2018), https://www.sciencedirect.com/science/article/abs/pii/S0030402617317734 (values from the abstract only)"
+    },
+    "fritted": {
+      "text": "A white ceramic frit fired on the glass (fritted) passes far less light (about 0.32) and scatters it almost evenly: a white glow rather than a bright satin.",
+      "grade": "record",
+      "source": "MuseeVision/Data/Matter/Workings/fritted.json"
+    }
+  },
+  "uses": [
+    {
+      "where": "the Atrium's drum: misty glass from the 6 m travertine base to the ring at 22 m, r 14 m",
+      "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/plan/canvas/FutureAtrium.dc.html (as-built board, D-001) ('travertine to 6 m, misty glass to 22 m') ; C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Source/MuseeVision/Elan/ElanStructure.h (frozen reference)",
+      "grade": "design"
+    },
+    {
+      "where": "the Sphere's underside, the Atrium's ceiling: 'glass on a triangulated grid of pearl-white steel'",
+      "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/plan/canvas/FutureAtrium.dc.html (as-built board, D-001)",
+      "grade": "design"
+    },
+    {
+      "where": "the Hall of Light: the misty glass above the clear walls, under the pearl vault",
+      "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Source/MuseeVision/HallOfLight/HallOfLightStructure.h (frozen reference)",
+      "grade": "design"
+    },
+    {
+      "where": "the Elan's exterior: the drum's misty layer behind a clear outer pane (3 cm outside the interior's)",
+      "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Source/MuseeVision/ElanExterior/ElanExteriorStructure.h (frozen reference), class comment",
+      "grade": "design"
+    },
+    {
+      "where": "the glass car's floor, 'lightly frosted', walked on",
+      "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Source/MuseeVision/Elan/ElanCar.cpp (frozen reference), lines 29-35 ; C:/Users/anan9/Desktop/Projects/Musee Vision/plan/canvas/ElanSphere.dc.html (as-built board, D-001) ('The frosted glass floor and the glass rail stay with you the whole way')",
+      "grade": "design"
+    }
+  ],
+  "asBuilt": {
+    "mistyGlass": {
+      "text": "M_MistyGlass: an unlit, two-sided emissive, 'milky translucent glazing lit by the sky behind it (about 450 nits at noon: a soft pearl, not a lamp)', tint #F1F4F2, a faint cloudiness 6 m across (+/-3.5 %), brighter higher up, and the panels' horizontal seams every 1.6 m (2 cm, 15 % darker); it replaced a 64 px dot frit that 'read as a grey perforated sheet'.",
+      "grade": "design",
+      "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/setup_project.py (frozen reference), make_misty()"
+    },
+    "luminanceAtNoon": {
+      "value": 450,
+      "unit": "cd/m2",
+      "grade": "design",
+      "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/setup_project.py (frozen reference), make_misty() (Luminance 450)"
+    },
+    "seamPitch": {
+      "value": 1.6,
+      "unit": "m",
+      "grade": "design",
+      "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/setup_project.py (frozen reference), make_misty()"
+    },
+    "carFloor": {
+      "text": "The car's floor: the glass instance at opacity 0.3, roughness 0.3, specular 0.5, tint (0.86, 0.90, 0.89), diffuse 0.08: 'a pale satin, so it reads as a floor you can see down through'.",
+      "grade": "design",
+      "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Source/MuseeVision/Elan/ElanCar.cpp (frozen reference), lines 29-35"
+    }
+  },
+  "asBuiltCorrection": {
+    "text": "The as-built misty glass is self-lit at a constant 450 nits scaled by a daylight factor. Physically it is glass that passes the sky's light and scatters it: an etched pane passes about 0.9 of it, spread over a wide cone; a white frit about 0.3, spread almost evenly; so its luminance follows the real sky behind it (and the sun's disc shows through an etched pane as a bright blur). Light should compute it from the sky and the record, never from a nits constant (principle 5: fix causes).",
+    "grade": "design",
+    "source": "MuseeVision/Journal/Decisions.md, D-001 (the design is the finished museum) and D-017 (port the finished rooms; the as-built material values seed the records)"
+  },
+  "photograph": [
+    "An etched pane lit by the sky is an even, bright satin with the sun as a soft glowing blur; shapes pressed against it show, those a little behind it vanish.",
+    "In reflection the etched face is matt; the smooth face still mirrors, so a pane seen from the smooth side shows a faint reflection over the milky glow.",
+    "Fingerprints and grease darken an etched face where it is touched (the car's rail height, the floor under foot)."
+  ],
+  "unverified": [
+    {
+      "field": "choice",
+      "text": "etched vs fritted vs translucent interlayer for the Atrium drum",
+      "reason": "Which misty glass the Elan takes (etched, or white frit as the as-built comment says, or a translucent interlayer) is a design decision; the as-built look ('a soft pearl, not a lamp', about 450 nits at noon) points to a strongly scattering, lower-transmission pane (frit or etched laminated with a white interlayer) rather than a clear satin etch."
+    },
+    {
+      "field": "alternatives.sandblastedStrength",
+      "text": "microcracks and strength loss from sandblasting",
+      "reason": "That sandblasting leaves microcracks that weaken the glass, and that a later acid etch restores some strength, was seen only in a search summary of 'HF etching effect on sandblasted soda-lime glass properties' (J. Eur. Ceram. Soc., 2009); not read."
+    },
+    {
+      "field": "conservation.fingerprints",
+      "text": "fingerprint marking of etched faces",
+      "reason": "That etched glass shows fingerprints and greasy marks, and that easy-clean coatings exist for it, is trade knowledge not read from a source."
+    },
+    {
+      "field": "optics.satinTransmittance",
+      "text": "T and haze of a satin etch on low-iron glass",
+      "reason": "Transmittance and haze of a satin (lighter) etch on low-iron glass were not read; the Velour figure is on clear float."
+    }
+  ],
+  "sources": [
+    "Walker Glass (Gardner Walker), 'Acid-etched glass' product page (Velour option), https://gardnerwalker.com/products/acid-etched-glass/#option-velour-acid-etched-glass",
+    "Walker Glass (Gardner Walker), 'Acid-etched glass... so much more than what you thought', https://gardnerwalker.com/blog/acid-etched-glassso-much-more-than-what-you-thought/",
+    "AGC Glass Europe, 'Frosted glass sheet', WO 2014/012809 A1 (published 23 January 2014), https://patents.google.com/patent/WO2014012809A1/en",
+    "MuseeVision/Data/Matter/Substances/low-iron-glass.json (optics.refractiveIndex 1.523)",
+    "MuseeVision/Data/Matter/Substances/water.json (optics.refractiveIndex 1.33335, Daimon and Masumura 2007)",
+    "AGC Glass Europe, 'Technical Data Sheet Matelux' (08/2014), https://www.agc-yourglass.com/sites/default/files/technical_documents/original/Matelux_Technical_Data.pdf",
+    "S. Benterki, C. Bousbaa, N. Laouar and A. Faci, 'Characterization of the sandblasted glass degradation by light scattering', Optik (2018), https://www.sciencedirect.com/science/article/abs/pii/S0030402617317734 (values from the abstract only)",
+    "MuseeVision/Data/Matter/Workings/fritted.json",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/plan/canvas/FutureAtrium.dc.html (as-built board, D-001) ('travertine to 6 m, misty glass to 22 m')",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Source/MuseeVision/Elan/ElanStructure.h (frozen reference)",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/plan/canvas/FutureAtrium.dc.html (as-built board, D-001)",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Source/MuseeVision/HallOfLight/HallOfLightStructure.h (frozen reference)",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Source/MuseeVision/ElanExterior/ElanExteriorStructure.h (frozen reference), class comment",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Source/MuseeVision/Elan/ElanCar.cpp (frozen reference), lines 29-35",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/plan/canvas/ElanSphere.dc.html (as-built board, D-001) ('The frosted glass floor and the glass rail stay with you the whole way')",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/setup_project.py (frozen reference), make_misty()",
+    "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/Scripts/setup_project.py (frozen reference), make_misty() (Luminance 450)",
+    "MuseeVision/Journal/Decisions.md, D-001 (the design is the finished museum) and D-017 (port the finished rooms; the as-built material values seed the records)"
+  ]
+}

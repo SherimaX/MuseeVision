@@ -1,0 +1,328 @@
+{
+  "schema": "musee.matter.substance/1",
+  "key": "velvet",
+  "name": "Mohair velvet (cut warp pile of mohair on a cotton or mohair-cotton ground)",
+  "family": "accent",
+  "accentOf": "oak",
+  "aliases": [
+    "velvet",
+    "mohair plush",
+    "velours"
+  ],
+  "summary": "A warp-pile cloth: an extra warp woven into a ground cloth and cut, so a dense short pile of fibre ends stands up from it. The Salon's backless benches in bays 2-5 are upholstered in velvet of each bay's colour. This record proposes mohair for the pile, the contract-seating choice for wear, lustre and inherent fire performance; the Architect may choose cotton or silk instead.",
+  "dossier": "Docs/Matter/velvet.md",
+  "workings": [
+    "upholstered"
+  ],
+  "histories": [
+    "cloth.wear",
+    "cloth.light-fading"
+  ],
+  "identity": {
+    "class": "woven warp-pile fabric, cut pile",
+    "whyAnAccent": {
+      "text": "The material-language board groups the cloths with the timber: 'D · The oak, and what it carries: timber, leather, silk, felt'. Each cloth is declared an accent of the oak family (D-014); the Architect may overturn this reading.",
+      "grade": "design",
+      "source": "MuseeVision/Journal/Decisions.md, D-014 (Matter: every substance carries its family; an accent names its core family); plan/canvas/MaterialsOther.dc.html, section 'D · The oak, and what it carries'"
+    },
+    "fibreChoice": {
+      "text": "Pile 100 % mohair; base 57 % mohair 43 % cotton (range 'One'), or base 100 % cotton (range 'Seven').",
+      "grade": "manufacturer",
+      "source": "KOTHEA, 'Mohair Velvet Upholstery Fabric, Crib 5 and 100,000 Rubs' (product ranges and specifications), https://www.kothea.com/mohair-velvet-upholstery/"
+    }
+  },
+  "formation": {
+    "how": "Velvet is woven as two cloths face to face, joined by an extra pile warp that passes between them (or over rods and wires); cutting the pile warp between the layers gives two lengths of fabric, each with a dense, even pile of cut ends. Mohair is the hair of the Angora goat: its scales are not fully developed as wool's are, so it is smooth and lustrous, takes dye well, and is durable, elastic, crease-resistant and flame-resistant.",
+    "facts": {
+      "weaving": {
+        "text": "Two thicknesses of the material are woven simultaneously, connected with an extra warp yarn woven over rods or wires, then separated by cutting.",
+        "grade": "secondary",
+        "source": "Wikipedia, 'Velvet', https://en.wikipedia.org/wiki/Velvet (read 2026-09-26)"
+      },
+      "mohairDiameter": {
+        "min": 25,
+        "max": 45,
+        "unit": "um",
+        "grade": "secondary",
+        "source": "Wikipedia, 'Mohair', https://en.wikipedia.org/wiki/Mohair (read 2026-09-26), citing Williams, B. (2007) for the diameter",
+        "note": "finer from younger animals"
+      },
+      "mohairLustre": {
+        "text": "It has scales like wool, but they are not fully developed.",
+        "grade": "secondary",
+        "source": "Wikipedia, 'Mohair', https://en.wikipedia.org/wiki/Mohair (read 2026-09-26), citing Williams, B. (2007) for the diameter"
+      }
+    }
+  },
+  "optics": {
+    "asperityScattering": {
+      "text": "A layer of sparse scatterers (hairs, dust) adds a surface lobe to the diffuse, backscatter and specular lobes: low except when the light or the view grazes the surface, so it brightens an object's outline and dominates the look of velvet.",
+      "grade": "measured",
+      "source": "Koenderink, J.J. & Pont, S.C. (2003) The secret of velvety skin. Machine Vision and Applications 14, 260-268, https://doi.org/10.1007/s00138-002-0089-7 (abstract read)"
+    },
+    "pileDirection": {
+      "text": "Velvet can be cut 'pile up' or 'pile down' for more shine or more saturated colour.",
+      "grade": "secondary",
+      "source": "Wikipedia, 'Velvet', https://en.wikipedia.org/wiki/Velvet (read 2026-09-26)"
+    },
+    "clothModelVelvet": {
+      "note": "Sadeghi et al.'s fit to a velvet (from Ashikhmin 2001), Table II row f: the pile as threads standing up from the ground (tangent offsets near -90 degrees).",
+      "eta": {
+        "value": 1.46,
+        "unit": "1",
+        "grade": "measured",
+        "source": "Sadeghi, I., Bisker, O., De Deken, J. & Jensen, H.W. (2013) A practical microcylinder appearance model for cloth rendering. ACM Transactions on Graphics 32(2), article 14, https://doi.org/10.1145/2451236.2451240 (http://graphics.ucsd.edu/~henrik/papers/practical_microcylinder_appearance_model_for_cloth_rendering.pdf), Table II"
+      },
+      "albedo": {
+        "value": [
+          0.015,
+          0.006,
+          0.0
+        ],
+        "unit": "1",
+        "space": "the paper's RGB",
+        "grade": "measured",
+        "source": "Sadeghi, I., Bisker, O., De Deken, J. & Jensen, H.W. (2013) A practical microcylinder appearance model for cloth rendering. ACM Transactions on Graphics 32(2), article 14, https://doi.org/10.1145/2451236.2451240 (http://graphics.ucsd.edu/~henrik/papers/practical_microcylinder_appearance_model_for_cloth_rendering.pdf), Table II",
+        "asReported": "(0.05, 0.02, 0) x 0.3, that sample's dye"
+      },
+      "kd": {
+        "value": 0.1,
+        "unit": "1",
+        "grade": "measured",
+        "source": "Sadeghi, I., Bisker, O., De Deken, J. & Jensen, H.W. (2013) A practical microcylinder appearance model for cloth rendering. ACM Transactions on Graphics 32(2), article 14, https://doi.org/10.1145/2451236.2451240 (http://graphics.ucsd.edu/~henrik/papers/practical_microcylinder_appearance_model_for_cloth_rendering.pdf), Table II"
+      },
+      "gammaSurface": {
+        "value": 6,
+        "unit": "deg",
+        "grade": "measured",
+        "source": "Sadeghi, I., Bisker, O., De Deken, J. & Jensen, H.W. (2013) A practical microcylinder appearance model for cloth rendering. ACM Transactions on Graphics 32(2), article 14, https://doi.org/10.1145/2451236.2451240 (http://graphics.ucsd.edu/~henrik/papers/practical_microcylinder_appearance_model_for_cloth_rendering.pdf), Table II"
+      },
+      "gammaVolume": {
+        "value": 12,
+        "unit": "deg",
+        "grade": "measured",
+        "source": "Sadeghi, I., Bisker, O., De Deken, J. & Jensen, H.W. (2013) A practical microcylinder appearance model for cloth rendering. ACM Transactions on Graphics 32(2), article 14, https://doi.org/10.1145/2451236.2451240 (http://graphics.ucsd.edu/~henrik/papers/practical_microcylinder_appearance_model_for_cloth_rendering.pdf), Table II"
+      },
+      "areaSharePerDirection": {
+        "value": 0.5,
+        "unit": "1",
+        "grade": "measured",
+        "source": "Sadeghi, I., Bisker, O., De Deken, J. & Jensen, H.W. (2013) A practical microcylinder appearance model for cloth rendering. ACM Transactions on Graphics 32(2), article 14, https://doi.org/10.1145/2451236.2451240 (http://graphics.ucsd.edu/~henrik/papers/practical_microcylinder_appearance_model_for_cloth_rendering.pdf), Table II"
+      },
+      "tangentOffsets": {
+        "unit": "deg",
+        "values": [
+          -90,
+          -50,
+          -90,
+          -55,
+          55,
+          90
+        ],
+        "grade": "measured",
+        "source": "Sadeghi, I., Bisker, O., De Deken, J. & Jensen, H.W. (2013) A practical microcylinder appearance model for cloth rendering. ACM Transactions on Graphics 32(2), article 14, https://doi.org/10.1145/2451236.2451240 (http://graphics.ucsd.edu/~henrik/papers/practical_microcylinder_appearance_model_for_cloth_rendering.pdf), Table II",
+        "note": "direction 1: -90, -50; direction 2: -90, -55, 55, 90"
+      }
+    }
+  },
+  "designColours": {
+    "salonBay2": {
+      "value": [
+        0.063,
+        0.0823,
+        0.1022
+      ],
+      "unit": "1",
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "grade": "design",
+      "source": "plan/proposals/salon-interior/canvas/Details.dc.html (approved Salon interior proposal)",
+      "asReported": "#47515A",
+      "conditions": "bay 2 (Modern Paris): zinc, Paris grey: 'the benches take the same colour in velvet'",
+      "derivation": "the design's sRGB hex decoded with the sRGB transfer function; a design colour, not a measurement"
+    },
+    "salonBay3": {
+      "value": [
+        0.1022,
+        0.1529,
+        0.0887
+      ],
+      "unit": "1",
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "grade": "design",
+      "source": "plan/proposals/salon-interior/canvas/Details.dc.html (approved Salon interior proposal)",
+      "asReported": "#5A6D54",
+      "conditions": "bay 3 (Leisure & Light): sage: 'the benches take the same colour in velvet'",
+      "derivation": "the design's sRGB hex decoded with the sRGB transfer function; a design colour, not a measurement"
+    },
+    "salonBay4": {
+      "value": [
+        0.2542,
+        0.1022,
+        0.0887
+      ],
+      "unit": "1",
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "grade": "design",
+      "source": "plan/proposals/salon-interior/canvas/Details.dc.html (approved Salon interior proposal)",
+      "asReported": "#8A5A54",
+      "conditions": "bay 4 (Women): old rose: 'the benches take the same colour in velvet'",
+      "derivation": "the design's sRGB hex decoded with the sRGB transfer function; a design colour, not a measurement"
+    },
+    "salonBay5": {
+      "value": [
+        0.3515,
+        0.1912,
+        0.0423
+      ],
+      "unit": "1",
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "grade": "design",
+      "source": "plan/proposals/salon-interior/canvas/Details.dc.html (approved Salon interior proposal)",
+      "asReported": "#A0793A",
+      "conditions": "bay 5 (Monet's Series): haystack, ochre: 'the benches take the same colour in velvet'",
+      "derivation": "the design's sRGB hex decoded with the sRGB transfer function; a design colour, not a measurement"
+    }
+  },
+  "physical": {
+    "martindale": {
+      "value": 100000,
+      "unit": "count",
+      "grade": "manufacturer",
+      "source": "KOTHEA, 'Mohair Velvet Upholstery Fabric, Crib 5 and 100,000 Rubs' (product ranges and specifications), https://www.kothea.com/mohair-velvet-upholstery/",
+      "conditions": "Martindale abrasion, rubs to end point; mohair velvet 'One'"
+    },
+    "wyzenbeek": {
+      "value": 80000,
+      "unit": "count",
+      "grade": "manufacturer",
+      "source": "KOTHEA, 'Mohair Velvet Upholstery Fabric, Crib 5 and 100,000 Rubs' (product ranges and specifications), https://www.kothea.com/mohair-velvet-upholstery/",
+      "conditions": "Wyzenbeek double rubs; mohair velvet 'Seven'"
+    },
+    "lightFastness": {
+      "min": 4,
+      "max": 6,
+      "unit": "grade",
+      "grade": "manufacturer",
+      "source": "KOTHEA, 'Mohair Velvet Upholstery Fabric, Crib 5 and 100,000 Rubs' (product ranges and specifications), https://www.kothea.com/mohair-velvet-upholstery/",
+      "conditions": "ISO 105-B02 (Blue Wool scale): 4-5 for light colours, 5-6 for dark; mohair velvet 'Seven'"
+    },
+    "fire": {
+      "text": "BS 5852 Crib 5, inherent to the fibre.",
+      "grade": "manufacturer",
+      "source": "KOTHEA, 'Mohair Velvet Upholstery Fabric, Crib 5 and 100,000 Rubs' (product ranges and specifications), https://www.kothea.com/mohair-velvet-upholstery/"
+    }
+  },
+  "acoustic": {
+    "absorptionByOctave": {
+      "axis": "frequency",
+      "axisUnit": "Hz",
+      "axisValues": [
+        125,
+        250,
+        500,
+        1000,
+        2000,
+        4000
+      ],
+      "unit": "1",
+      "values": [
+        0.49,
+        0.66,
+        0.8,
+        0.88,
+        0.82,
+        0.7
+      ],
+      "grade": "secondary",
+      "source": "Sengpiel Audio, table of absorption coefficients, https://sengpielaudio.com/calculator-RT60Coeff.htm (names no primary source)",
+      "conditions": "row 'empty - fabric upholstered' seating: per unit floor area of rows of seats"
+    },
+    "note": "For rows of seats; a free-standing bench in a stone room absorbs less per square metre of plan (see unverified)."
+  },
+  "stock": {
+    "pieceWidth": {
+      "min": 1.37,
+      "max": 1.4,
+      "unit": "m",
+      "grade": "manufacturer",
+      "source": "KOTHEA, 'Mohair Velvet Upholstery Fabric, Crib 5 and 100,000 Rubs' (product ranges and specifications), https://www.kothea.com/mohair-velvet-upholstery/",
+      "asReported": "137 cm; 140 cm"
+    },
+    "pileRun": {
+      "text": "The pile has a direction; every panel of a bench is cut with the pile running the same way.",
+      "grade": "secondary",
+      "source": "Wikipedia, 'Velvet', https://en.wikipedia.org/wiki/Velvet (read 2026-09-26)"
+    }
+  },
+  "conservation": {
+    "keratin": "Mohair is a keratin fibre like wool: it is food for clothes-moth and carpet-beetle larvae, and wool in contact has blackened brass (see wool-felt). The benches carry no metal against the cloth.",
+    "sensitivity": {
+      "text": "High light sensitivity (ISO Blue Wool 1-3) covers most plant extracts and hence most historic bright dyes, insect dyes, most early synthetic colours, and textiles; UV causes yellowing, chalking and weakening, and prolonged exposure weakens and fragments most wool, cotton, silk and paper.",
+      "grade": "guidance",
+      "source": "Michalski, S. (2018) Agent of deterioration: light, ultraviolet and infrared. Canadian Conservation Institute, 2018-05-17, https://www.canada.ca/en/conservation-institute/services/agents-deterioration/light.html"
+    },
+    "uvLimit": {
+      "value": 75,
+      "unit": "uW/lm",
+      "grade": "guidance",
+      "source": "Michalski, S. (2018) Agent of deterioration: light, ultraviolet and infrared. Canadian Conservation Institute, 2018-05-17, https://www.canada.ca/en/conservation-institute/services/agents-deterioration/light.html",
+      "note": "traditional museum limit; about 10 uW/lm gives high-sensitivity materials extra protection"
+    }
+  },
+  "physicalMaterial": {
+    "note": "Sat on, not walked on. No friction is sourced; the bench's hit box is a plain block (Visitor/Art)."
+  },
+  "uses": [
+    {
+      "where": "the Salon, bays 2-5: a pair of backless benches in each bay, 2.6 m either side of the axis",
+      "working": "upholstered",
+      "histories": [
+        "cloth.wear",
+        "cloth.light-fading"
+      ],
+      "note": "2.4 x 0.6 m, 0.44 m high; the top quilted in four panels with piped seams and a piped edge; on a dark fumed-oak plinth set back 40 mm",
+      "source": "plan/proposals/salon-interior/canvas/Details.dc.html (approved Salon interior proposal); plan/README.md, 'Salon interior' (the plan in words); windows/Source/MuseeVision/Salon/SalonInterior.h (frozen as-built reference)",
+      "grade": "design"
+    }
+  ],
+  "photograph": [
+    "Colour that deepens and saturates where you look into the pile, and turns pale and silvery at the edges and where the light grazes it.",
+    "Shading: patches lighter or darker where the pile has been pressed a different way; a sitter's mark that lingers.",
+    "Piping as a crisp, brighter line along every seam; quilting as soft valleys."
+  ],
+  "evidence": [],
+  "evidenceSearch": {
+    "searched": [
+      "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR (CREDITS.md, CREDITS_chenghuai.md, every SET.txt)"
+    ],
+    "found": "Nothing: F1 is a flat weave, F2 felt and F3 leather. No velvet photograph on this PC.",
+    "tier": "Velvet's look is its grazing lobe; it needs a turntable or multi-light capture of a specimen (tier b)."
+  },
+  "unverified": [
+    {
+      "field": "physical.pileHeight",
+      "min": 1,
+      "max": 3,
+      "unit": "mm",
+      "reason": "Pile heights of 1-3 mm are quoted for cotton velvet in trade pages; no maker's figure for the mohair velvet was read."
+    },
+    {
+      "field": "physical.weight",
+      "value": null,
+      "unit": "kg/m2",
+      "reason": "Not given on the maker's page."
+    },
+    {
+      "field": "acoustic.absorption of one bench",
+      "value": null,
+      "unit": "m2",
+      "reason": "Not read; the tabulated row is for rows of theatre seats."
+    },
+    {
+      "field": "identity.fibreChoice",
+      "value": null,
+      "unit": "text",
+      "reason": "Mohair is this record's proposal. The design says only 'velvet'."
+    }
+  ]
+}

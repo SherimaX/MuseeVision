@@ -1,0 +1,52 @@
+{
+  "schema": "musee.matter.working/1",
+  "key": "laminated.paper",
+  "name": "Laminated in glass (paper interlayer)",
+  "appliesTo": {
+    "families": [
+      "accent"
+    ],
+    "substances": [
+      "mulberry-paper"
+    ]
+  },
+  "over": [],
+  "plies": "Two plies of low-iron glass (the glass group's low-iron-glass, annealed or heat-strengthened) with the paper sealed between interlayer films; see the glass records laminated and laminated.uv-filtering.",
+  "process": "The sheet of paper is laid between interlayer films (EVA, whose flow and low curing temperature suit delicate inserts such as rice paper and silk) between two glass plies, and laminated. The paper is wetted out and fixed in place, sealed from dust, moisture and hands, and the interlayer can cut UV.",
+  "facts": {
+    "inserts": {
+      "text": "Clear EVA laminates inserts such as silk, rice paper, PET backings or metal mesh; modified EVA flows and cures at lower temperatures, protecting delicate inserts from deformation or discolouration.",
+      "grade": "manufacturer",
+      "source": "E&N (Foshan), 'Interlayers for interior & decorative glass' (EVA film maker's service page), https://www.enevaglass.com/service/interlayers-for-interior-decorative-glass.html"
+    }
+  },
+  "design": {
+    "text": "桑皮纸 夹层: mulberry paper in laminated glass, every lattice: diffuse light, UV cut.",
+    "grade": "design",
+    "source": "plan/proposals/chenghuai/canvas/Materials.dc.html (approved Chenghuai proposal: '營造')"
+  },
+  "optics": {
+    "note": "Two glass faces reflect (about 4 % each at normal incidence, from the glass record); the paper diffuses what is transmitted. Its diffuse transmittance is unverified (see mulberry-paper)."
+  },
+  "photograph": [
+    "A flat, glossy pane with the paper's cream and fibres behind it; the lattice's bars in front."
+  ],
+  "unverified": [
+    {
+      "field": "interlayer choice",
+      "value": null,
+      "unit": "text",
+      "reason": "EVA or a UV-filtering PVB; the choice and its thickness are the glass group's."
+    },
+    {
+      "field": "diffuse transmittance",
+      "value": null,
+      "unit": "1",
+      "reason": "Not measured."
+    }
+  ],
+  "sources": [
+    "E&N (Foshan), 'Interlayers for interior & decorative glass' (EVA film maker's service page), https://www.enevaglass.com/service/interlayers-for-interior-decorative-glass.html",
+    "plan/proposals/chenghuai/canvas/Materials.dc.html (approved Chenghuai proposal: '營造')"
+  ]
+}

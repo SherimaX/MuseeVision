@@ -1,0 +1,167 @@
+{
+  "schema": "musee.matter.working/1",
+  "key": "oiled.hardwax",
+  "name": "Oiled (hardwax oil)",
+  "appliesTo": {
+    "families": [
+      "oak",
+      "accent"
+    ],
+    "substances": [
+      "oak",
+      "phoebe"
+    ]
+  },
+  "over": [
+    "sawn.quarter",
+    "sawn.plain",
+    "fumed",
+    "parquet.versailles"
+  ],
+  "process": "After sanding, a hardwax oil (drying plant oils with waxes and driers) is spread very thinly along the grain, two coats, with no sanding between. It soaks into the surface cells and pores and cures to a microporous, water-repellent layer, not a film: the white scatter of the bare surface goes, the colour deepens and the fibre highlight shows, under a soft sheen. It is renewed by re-oiling where it wears.",
+  "product": {
+    "ingredients": {
+      "text": "Natural plant oils (sunflower, soybean, thistle) and waxes, paraffin, siccatives and water-repellent additives; in dearomatised white spirit.",
+      "grade": "manufacturer",
+      "source": "Osmo Holz und Color GmbH & Co. KG, Product Information | Interior: Polyx-Oil Original, https://int.osmo.com/fileadmin/media/pim_assets/pim_file_36247.pdf"
+    },
+    "sheens": {
+      "text": "Clear grades: glossy (3011), satin (3032), matt (3062), semi-matt (3065).",
+      "grade": "manufacturer",
+      "source": "Osmo Holz und Color GmbH & Co. KG, Product Information | Interior: Polyx-Oil Original, https://int.osmo.com/fileadmin/media/pim_assets/pim_file_36247.pdf"
+    },
+    "specificGravity": {
+      "min": 880,
+      "max": 950,
+      "unit": "kg/m3",
+      "grade": "manufacturer",
+      "source": "Osmo Holz und Color GmbH & Co. KG, Product Information | Interior: Polyx-Oil Original, https://int.osmo.com/fileadmin/media/pim_assets/pim_file_36247.pdf",
+      "asReported": "0,88-0,95 g/cm3"
+    },
+    "maxWoodMoisture": {
+      "value": 0.18,
+      "unit": "1",
+      "grade": "manufacturer",
+      "source": "Osmo Holz und Color GmbH & Co. KG, Product Information | Interior: Polyx-Oil Original, https://int.osmo.com/fileadmin/media/pim_assets/pim_file_36247.pdf",
+      "asReported": "moisture content max. 18 %"
+    }
+  },
+  "steps": [
+    {
+      "step": "sand; final sanding P120-150 for floors (P120-240 for furniture); remove the dust",
+      "source": "Osmo Holz und Color GmbH & Co. KG, Product Information | Interior: Polyx-Oil Original, https://int.osmo.com/fileadmin/media/pim_assets/pim_file_36247.pdf"
+    },
+    {
+      "step": "apply thinly along the grain with a microfibre roller, about 24 m2 per litre; spread well",
+      "source": "Osmo Holz und Color GmbH & Co. KG, Product Information | Interior: Polyx-Oil Original, https://int.osmo.com/fileadmin/media/pim_assets/pim_file_36247.pdf"
+    },
+    {
+      "step": "dry about 8-10 hours (clear) with good ventilation",
+      "source": "Osmo Holz und Color GmbH & Co. KG, Product Information | Interior: Polyx-Oil Original, https://int.osmo.com/fileadmin/media/pim_assets/pim_file_36247.pdf"
+    },
+    {
+      "step": "apply a second thin coat",
+      "source": "Osmo Holz und Color GmbH & Co. KG, Product Information | Interior: Polyx-Oil Original, https://int.osmo.com/fileadmin/media/pim_assets/pim_file_36247.pdf"
+    }
+  ],
+  "facts": {
+    "coveragePerCoat": {
+      "value": 24,
+      "unit": "m2",
+      "grade": "manufacturer",
+      "source": "Osmo Holz und Color GmbH & Co. KG, Product Information | Interior: Polyx-Oil Original, https://int.osmo.com/fileadmin/media/pim_assets/pim_file_36247.pdf",
+      "asReported": "approx. 24 m2/l",
+      "conditions": "per litre, microfibre roller, clear; oak sanded P120-150"
+    },
+    "wetFilmPerCoat": {
+      "value": 41.7,
+      "unit": "um",
+      "grade": "derived",
+      "source": "Osmo Holz und Color GmbH & Co. KG, Product Information | Interior: Polyx-Oil Original, https://int.osmo.com/fileadmin/media/pim_assets/pim_file_36247.pdf",
+      "derivation": "1 litre over 24 m2 = 41.7 um wet; most of it enters the wood"
+    },
+    "coats": {
+      "value": 2,
+      "unit": "coat",
+      "grade": "manufacturer",
+      "source": "Osmo Holz und Color GmbH & Co. KG, Product Information | Interior: Polyx-Oil Original, https://int.osmo.com/fileadmin/media/pim_assets/pim_file_36247.pdf"
+    },
+    "dryingTime": {
+      "min": 8,
+      "max": 10,
+      "unit": "h",
+      "grade": "manufacturer",
+      "source": "Osmo Holz und Color GmbH & Co. KG, Product Information | Interior: Polyx-Oil Original, https://int.osmo.com/fileadmin/media/pim_assets/pim_file_36247.pdf",
+      "conditions": "clear grades, normal climate"
+    },
+    "resistance": {
+      "text": "Resistant to wine, beer, cola, coffee, tea, fruit juice, milk and water to DIN 68861-1A; microporous; will not crack, peel, flake or blister.",
+      "grade": "manufacturer",
+      "source": "Osmo Holz und Color GmbH & Co. KG, Product Information | Interior: Polyx-Oil Original, https://int.osmo.com/fileadmin/media/pim_assets/pim_file_36247.pdf"
+    }
+  },
+  "optics": {
+    "mechanism": {
+      "text": "A clear finish with an index close to the cell wall's removes the first, irregular interface, so bare wood's white surface scatter goes, colour deepens and the subsurface fibre highlight appears.",
+      "grade": "measured",
+      "source": "Marschner, S.R., Westin, S.H., Arbree, A. & Moon, J.T. (2005) Measuring and modeling the appearance of finished wood. ACM Transactions on Graphics 24(3), 727-734, https://doi.org/10.1145/1073204.1073254 (https://www.cs.cornell.edu/~srm/publications/SG05-wood-lr.pdf)"
+    },
+    "surfaceSpecular": "The cured oil-wax surface gives a weak dielectric reflection (F0 of a few per cent) with a broad lobe for matt and satin grades; see unverified for its index."
+  },
+  "slip": {
+    "pendulumDry": {
+      "value": 59,
+      "unit": "PTV",
+      "grade": "manufacturer",
+      "source": "SATRA Technology Centre, Technical Services Report FLO0215387/1324 (1 July 2013) for Muylle Facon NV: 'Oak parquet finished with Rubio Monocoat Oil +2C (hardwaxoil)' tested to BS 7976-2:2002, https://service.rubiomonocoat.com/hubfs/Anti-slip%20test%20Oil+2C%20BS%207976-22002_Satra_2013.pdf",
+      "conditions": "oak parquet with a hardwax oil (Rubio Monocoat Oil +2C), Slider 96; BS 7976-2:2002"
+    },
+    "pendulumWet": {
+      "value": 35,
+      "unit": "PTV",
+      "grade": "manufacturer",
+      "source": "SATRA Technology Centre, Technical Services Report FLO0215387/1324 (1 July 2013) for Muylle Facon NV: 'Oak parquet finished with Rubio Monocoat Oil +2C (hardwaxoil)' tested to BS 7976-2:2002, https://service.rubiomonocoat.com/hubfs/Anti-slip%20test%20Oil+2C%20BS%207976-22002_Satra_2013.pdf"
+    },
+    "roughnessRz": {
+      "value": 14.0,
+      "min": 5.8,
+      "max": 24.9,
+      "unit": "um",
+      "grade": "manufacturer",
+      "source": "SATRA Technology Centre, Technical Services Report FLO0215387/1324 (1 July 2013) for Muylle Facon NV: 'Oak parquet finished with Rubio Monocoat Oil +2C (hardwaxoil)' tested to BS 7976-2:2002, https://service.rubiomonocoat.com/hubfs/Anti-slip%20test%20Oil+2C%20BS%207976-22002_Satra_2013.pdf"
+    }
+  },
+  "museumChoice": "The matt clear grade on every oak floor and furniture surface: 'warm oak, no glare' (the Salon's light board).",
+  "museumChoiceSource": "plan/proposals/salon-interior/canvas/Light.dc.html (approved Salon interior proposal) ('The floor: warm oak, no glare'); plan/canvas/MaterialsOther.dc.html, section 'D · The oak, and what it carries' ('Oiled')",
+  "photograph": [
+    "A low, soft sheen that follows the grain; no plastic film on top; pores still open to the touch.",
+    "Traffic paths duller and paler on a floor until it is re-oiled."
+  ],
+  "unverified": [
+    {
+      "field": "optics.refractiveIndex of the cured oil-wax",
+      "min": 1.44,
+      "max": 1.48,
+      "unit": "1",
+      "reason": "Drying oils and waxes lie near 1.44-1.48 in handbooks (for example linseed oil about 1.478, beeswax 1.443-1.449 in the CRC Handbook as quoted by MFA CAMEO), but those pages could not be opened."
+    },
+    {
+      "field": "optics.specularF0",
+      "min": 0.033,
+      "max": 0.038,
+      "unit": "1",
+      "reason": "Would follow as 0.033-0.038 from the unverified index."
+    },
+    {
+      "field": "optics.albedoChange",
+      "value": null,
+      "unit": "CIELAB",
+      "reason": "The darkening of oak by this oil (delta L*) was not measured in a source read."
+    }
+  ],
+  "sources": [
+    "Osmo Holz und Color GmbH & Co. KG, Product Information | Interior: Polyx-Oil Original, https://int.osmo.com/fileadmin/media/pim_assets/pim_file_36247.pdf",
+    "SATRA Technology Centre, Technical Services Report FLO0215387/1324 (1 July 2013) for Muylle Facon NV: 'Oak parquet finished with Rubio Monocoat Oil +2C (hardwaxoil)' tested to BS 7976-2:2002, https://service.rubiomonocoat.com/hubfs/Anti-slip%20test%20Oil+2C%20BS%207976-22002_Satra_2013.pdf",
+    "Marschner, S.R., Westin, S.H., Arbree, A. & Moon, J.T. (2005) Measuring and modeling the appearance of finished wood. ACM Transactions on Graphics 24(3), 727-734, https://doi.org/10.1145/1073204.1073254 (https://www.cs.cornell.edu/~srm/publications/SG05-wood-lr.pdf)"
+  ]
+}

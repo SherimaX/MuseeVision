@@ -1,0 +1,155 @@
+{
+  "schema": "musee.matter.substance/1",
+  "key": "mulberry-paper",
+  "name": "Mulberry-bark paper (桑皮纸, bast paper of the paper mulberry)",
+  "family": "accent",
+  "accentOf": "glass",
+  "aliases": [
+    "桑皮纸",
+    "皮纸",
+    "构皮纸",
+    "window paper (窗户纸)",
+    "高丽纸 (Goryeo paper, the Beijing window paper; see unverified)",
+    "kozo, hanji (its Japanese and Korean kin)"
+  ],
+  "summary": "Hand-made paper from the inner bark of the paper mulberry: long, strong fibres in a thin, tough, translucent sheet. Beijing's lattice windows were papered; in Chenghuai the paper is laminated between low-iron glass plies behind every lattice, so the sun arrives as a glow, the fibres show against the light, and the paper never needs renewing.",
+  "dossier": "Docs/Matter/mulberry-paper.md",
+  "workings": [
+    "laminated.paper"
+  ],
+  "histories": [
+    "paper.ageing",
+    "glass.soiling",
+    "glass.edge-delamination"
+  ],
+  "identity": {
+    "class": "cellulosic bast-fibre paper, hand-formed",
+    "whyAnAccent": {
+      "text": "D-014 admits paper as a Glazed opening's transmissive infill; the museum uses this paper only as glazing, so it is declared an accent of the glass family, as the steel of the glazing's structure is. The Architect may overturn this reading.",
+      "grade": "design",
+      "source": "MuseeVision/Journal/Decisions.md, D-014 (Matter: every substance carries its family; an accent names its core family); the glass group's steel record (familyDeclaration)"
+    }
+  },
+  "formation": {
+    "how": "The inner bark (bast) of the paper mulberry is stripped, cooked with an alkali (soda ash, lime or lye) to free the fibres, beaten or pounded to a paste with water, formed on a screen and dried into sheets. Its fibres are long, so the paper is strong and thin; pale yellow to greenish depending on how much outer bark is removed. It has been made in China since between the 2nd and 8th century; hanji and washi are made the same way.",
+    "facts": {
+      "fibreSource": {
+        "text": "High-quality hanji and washi are made from the inner bark of the paper mulberry, pounded and mixed with water to a paste and dried into sheets; used for papermaking in China since between the 2nd and 8th century.",
+        "grade": "secondary",
+        "source": "Wikipedia, 'Broussonetia papyrifera', https://en.wikipedia.org/wiki/Broussonetia_papyrifera (read 2026-09-26)"
+      },
+      "barkUse": {
+        "text": "The inner bark (bast) fibres are used for tapa cloth and for special papers, such as lens paper and luxurious hand-made paper.",
+        "grade": "secondary",
+        "source": "Orwa, C., Mutua, A., Kindt, R., Jamnadass, R. & Anthony, S. (2009) Agroforestree Database 4.0: Broussonetia papyrifera, https://apps.worldagroforestry.org/treedb/AFTPDFS/Broussonetia_papyrifera.PDF"
+      },
+      "processing": {
+        "text": "Cooked with soda ash, lime or lye; long fibre length; strong paper, pale green or yellow depending on whether the green bark layer is removed.",
+        "grade": "manufacturer",
+        "source": "Carriage House Paper, 'Japanese Kozo' (fibre supplier's product notes), https://carriagehousepaper.com/japanese-kozo"
+      },
+      "windowHistory": {
+        "text": "Paper windows became common from the Northern and Southern Dynasties to the Song; tung-oil-soaked paper resisted moisture; the wealthy used mica or shell (明瓦); glass became common only late in the Qing.",
+        "grade": "secondary",
+        "source": "界面新闻 JMedia, '古人用纸糊了1000多年的窗户?' [Did the ancients really paste paper on their windows for 1,000 years?], https://www.jiemian.com/article/1697159.html"
+      }
+    }
+  },
+  "optics": {
+    "role": "A diffusing transmitter: the random network of long fibres scatters light many times, so the sun comes through as a glow and the lattice's shadow lies in it. Laminated in a polymer interlayer, the fibres' air gaps fill and the paper becomes more translucent than in air; fibre bundles and thin spots read as a cloudy texture against the light.",
+    "designColour": {
+      "value": [
+        0.7913,
+        0.7157,
+        0.5647
+      ],
+      "unit": "1",
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "grade": "design",
+      "source": "windows/Scripts/chenghuai.py (frozen as-built reference) (make_paper)",
+      "asReported": "#E6DCC6",
+      "conditions": "old mulberry paper: a warm cream, not white",
+      "derivation": "the design's sRGB hex decoded with the sRGB transfer function; a design colour, not a measurement"
+    }
+  },
+  "physical": {
+    "note": "Basis weight and strength of the chosen paper are unverified; fibre facts are under formation."
+  },
+  "acoustic": {
+    "note": "Sealed inside glass: the room sees the glass. Use the glass record's absorption."
+  },
+  "stock": {
+    "note": "Sheet sizes of hand-made paper limit a panel; a lattice panel's paper is one sheet or overlapped sheets. Sheet sizes were not read."
+  },
+  "conservation": {
+    "uv": {
+      "text": "High light sensitivity (ISO Blue Wool 1-3) covers most plant extracts and hence most historic bright dyes, insect dyes, most early synthetic colours, and textiles; UV causes yellowing, chalking and weakening, and prolonged exposure weakens and fragments most wool, cotton, silk and paper.",
+      "grade": "guidance",
+      "source": "Michalski, S. (2018) Agent of deterioration: light, ultraviolet and infrared. Canadian Conservation Institute, 2018-05-17, https://www.canada.ca/en/conservation-institute/services/agents-deterioration/light.html"
+    },
+    "note": "Inside the laminate the paper is sealed from dust, moisture and hands, and the interlayer cuts UV (see laminated.uv-filtering)."
+  },
+  "physicalMaterial": {
+    "note": "Behind glass; not touched."
+  },
+  "uses": [
+    {
+      "where": "Chenghuai: every lattice panel's glazing (doors, windows, transoms), behind the bars",
+      "working": "laminated.paper",
+      "histories": [
+        "paper.ageing"
+      ],
+      "note": "'桑皮纸 夹层: mulberry paper in laminated glass, every lattice: diffuse light, UV cut'; 'paper glazing: the winter sun arrives as glow, not as a beam'",
+      "source": "plan/proposals/chenghuai/canvas/Materials.dc.html (approved Chenghuai proposal: '營造'); windows/Source/MuseeVision/Chenghuai/ChenghuaiGeometry.h, enum EChPart (frozen as-built reference) (Paper)",
+      "grade": "design"
+    }
+  ],
+  "photograph": [
+    "By day from inside: a warm, even glow with the lattice's bars dark against it and a soft cloud of fibre texture; no view through.",
+    "From outside by day: a pale, faintly glossy panel (the glass) with the paper's cream behind it.",
+    "Long fibres and small fibre knots visible against the light; slightly thinner, brighter patches."
+  ],
+  "evidence": [],
+  "evidenceSearch": {
+    "searched": [
+      "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR (CREDITS.md, CREDITS_chenghuai.md, every SET.txt)",
+      "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/Textures/CREDITS.md"
+    ],
+    "found": "Nothing: no paper photographed in transmission.",
+    "tier": "Needs a transmitted-light photograph and a transmittance measurement of the laminated specimen (tier b)."
+  },
+  "unverified": [
+    {
+      "field": "optics.diffuseTransmittance (paper alone)",
+      "value": null,
+      "unit": "1",
+      "reason": "No measurement of mulberry or window paper was read; a J-STAGE study of shoji papers' optical properties (transmittance, haze) exists but was not read."
+    },
+    {
+      "field": "optics.diffuseTransmittance (laminated)",
+      "value": null,
+      "unit": "1",
+      "reason": "No measurement of paper laminated in EVA or PVB was read."
+    },
+    {
+      "field": "formation.facts.fibreLength",
+      "value": 10,
+      "min": 6,
+      "max": 20,
+      "unit": "mm",
+      "reason": "About 10 mm (6-20 mm) is reported for paper-mulberry bast in a Korean conservation journal whose page could not be opened."
+    },
+    {
+      "field": "aliases.高丽纸",
+      "value": null,
+      "unit": "text",
+      "reason": "That Beijing's window paper was 高丽纸 made of mulberry bark comes from pages that could not be opened."
+    },
+    {
+      "field": "physical.basisWeight",
+      "value": null,
+      "unit": "kg/m2",
+      "reason": "Not read."
+    }
+  ]
+}

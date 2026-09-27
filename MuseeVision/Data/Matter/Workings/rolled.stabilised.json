@@ -1,0 +1,55 @@
+{
+  "schema": "musee.matter.working/1",
+  "key": "rolled.stabilised",
+  "name": "Rolled, stabilised with a hydraulic binder (stabilise)",
+  "appliesTo": {
+    "families": [
+      "accent"
+    ],
+    "substances": [
+      "crushed-limestone"
+    ]
+  },
+  "over": [],
+  "process": "As rolled.self-binding, but the sand is premixed with a small share of hydraulic binder (lime or cement) before it is laid, wetted and rolled, so that it sets into a weak, still-porous crust: the French 'sable stabilise'. It keeps the sand's colour and look and bears more traffic; under heavy loads it still breaks down to dust.",
+  "processSources": [
+    "Bronzo Perasso (Marseille), 'Sable naturel pour sols stabilises 0/6,3' (concasse, petrographie calcaire, for sols stabilises) and the linked product 'Sable traite pour sols stabilises (3,5%, 5%, 7%)', read 2026-09-26, https://bronzoperasso.fr/produit/sable-naturel-pour-sols-stabilises-0-63/",
+    "Koncrete, 'Sable 0/6 livre en vrac', product page read 2026-09-26, https://www.koncrete.fr/produits/sable-0-6",
+    "franceinfo, 'Les jardins des Tuileries recherchent 15 millions pour eradiquer la poussiere' (3 May 2013), https://www.franceinfo.fr/culture/patrimoine/les-jardins-des-tuileries-recherchent-15-millions-pour-eradiquer-la-poussiere_3310669.html"
+  ],
+  "binder": {
+    "min": 0.035,
+    "max": 0.07,
+    "unit": "1",
+    "grade": "manufacturer",
+    "source": "Bronzo Perasso (Marseille), 'Sable naturel pour sols stabilises 0/6,3' (concasse, petrographie calcaire, for sols stabilises) and the linked product 'Sable traite pour sols stabilises (3,5%, 5%, 7%)', read 2026-09-26, https://bronzoperasso.fr/produit/sable-naturel-pour-sols-stabilises-0-63/",
+    "conditions": "'Sable traite pour sols stabilises (3,5%, 5%, 7%)'",
+    "note": "The share's basis (by mass of dry sand) is not stated on the product listing.",
+    "asReported": "3,5 %, 5 %, 7 %"
+  },
+  "look": {
+    "text": "A mixture of sand and cement that forms a compact, lasting stabilised surface and 'conserve la couleur naturelle du sable et son aspect rustique'.",
+    "grade": "manufacturer",
+    "source": "Colas & Vous, 'Sable stabilise', product page read 2026-09-26, https://www.colasetvous.fr/produits/sable-stabilise/"
+  },
+  "failure": {
+    "text": "Under trucks and heavy crowds it breaks into a fine grey powder; the Tuileries sought 15 million euros to replace it.",
+    "grade": "secondary",
+    "source": "franceinfo, 'Les jardins des Tuileries recherchent 15 millions pour eradiquer la poussiere' (3 May 2013), https://www.franceinfo.fr/culture/patrimoine/les-jardins-des-tuileries-recherchent-15-millions-pour-eradiquer-la-poussiere_3310669.html"
+  },
+  "photograph": [
+    "Like the self-binding walk but firmer and with less loose grit; edges crumble where it is thin."
+  ],
+  "unverified": [
+    {
+      "field": "binder basis",
+      "value": null,
+      "unit": "",
+      "reason": "Whether the listed 3.5-7 % is by mass of sand or of the mix was not stated."
+    }
+  ],
+  "sources": [
+    "Bronzo Perasso (Marseille), 'Sable naturel pour sols stabilises 0/6,3' (concasse, petrographie calcaire, for sols stabilises) and the linked product 'Sable traite pour sols stabilises (3,5%, 5%, 7%)', read 2026-09-26, https://bronzoperasso.fr/produit/sable-naturel-pour-sols-stabilises-0-63/",
+    "franceinfo, 'Les jardins des Tuileries recherchent 15 millions pour eradiquer la poussiere' (3 May 2013), https://www.franceinfo.fr/culture/patrimoine/les-jardins-des-tuileries-recherchent-15-millions-pour-eradiquer-la-poussiere_3310669.html"
+  ]
+}

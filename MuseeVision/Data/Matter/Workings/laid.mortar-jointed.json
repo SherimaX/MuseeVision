@@ -1,0 +1,61 @@
+{
+  "schema": "musee.matter.working/1",
+  "key": "laid.mortar-jointed",
+  "name": "Laid on a mortar bed, mortar-pointed",
+  "appliesTo": {
+    "families": [
+      "stone",
+      "accent"
+    ],
+    "substances": [
+      "travertine"
+    ],
+    "jointMaterial": "a pointing mortar or grout (the white family's lime or a cement mortar; not researched here)"
+  },
+  "over": [],
+  "process": "Exterior stone paving laid rigidly: a full mortar bed of one part portland cement to four or five parts sand, at least 32 mm and preferably 51 mm thick, over a concrete slab with a bond coat; the joints are pointed with mortar or grout, or left open for a resilient filler and sealant. Movement joints are required in fields of paving and where paving meets a wall.",
+  "processSources": [
+    "Marble Institute of America (now the Natural Stone Institute) (2016) Dimension Stone Design Manual, Version VIII, chapter 'Horizontal Surfaces' (excerpt), Introduction 2.4 'Width of Joints between Stones' and 'Exterior Paving Systems' 2.1-2.4, https://nsrstone.com/wp-content/uploads/2025/07/Horizontal-Surfaces.pdf"
+  ],
+  "bed": {
+    "mix": {
+      "text": "one part portland cement to four to five parts sand",
+      "grade": "guidance",
+      "source": "Marble Institute of America (now the Natural Stone Institute) (2016) Dimension Stone Design Manual, Version VIII, chapter 'Horizontal Surfaces' (excerpt), Introduction 2.4 'Width of Joints between Stones' and 'Exterior Paving Systems' 2.1-2.4, https://nsrstone.com/wp-content/uploads/2025/07/Horizontal-Surfaces.pdf"
+    },
+    "thickness": {
+      "value": 51,
+      "min": 32,
+      "unit": "mm",
+      "grade": "guidance",
+      "source": "Marble Institute of America (now the Natural Stone Institute) (2016) Dimension Stone Design Manual, Version VIII, chapter 'Horizontal Surfaces' (excerpt), Introduction 2.4 'Width of Joints between Stones' and 'Exterior Paving Systems' 2.1-2.4, https://nsrstone.com/wp-content/uploads/2025/07/Horizontal-Surfaces.pdf",
+      "asReported": "minimum 1 1/4 in, recommended 2 in"
+    }
+  },
+  "jointWidth": {
+    "exterior": {
+      "value": 9.5,
+      "min": 6.4,
+      "unit": "mm",
+      "grade": "guidance",
+      "source": "Marble Institute of America (now the Natural Stone Institute) (2016) Dimension Stone Design Manual, Version VIII, chapter 'Horizontal Surfaces' (excerpt), Introduction 2.4 'Width of Joints between Stones' and 'Exterior Paving Systems' 2.1-2.4, https://nsrstone.com/wp-content/uploads/2025/07/Horizontal-Surfaces.pdf",
+      "asReported": "minimum 1/4 in, preferably 3/8 in"
+    },
+    "atWalls": {
+      "min": 9.5,
+      "unit": "mm",
+      "grade": "guidance",
+      "source": "Marble Institute of America (now the Natural Stone Institute) (2016) Dimension Stone Design Manual, Version VIII, chapter 'Horizontal Surfaces' (excerpt), Introduction 2.4 'Width of Joints between Stones' and 'Exterior Paving Systems' 2.1-2.4, https://nsrstone.com/wp-content/uploads/2025/07/Horizontal-Surfaces.pdf",
+      "conditions": "where paving meets a vertical surface: an elastomeric sealant, not grout, through to the substrate",
+      "asReported": "at least 3/8 in"
+    }
+  },
+  "photograph": [
+    "Crisp, flush joints of a uniform grey or buff mortar; hairline cracks where the mortar has shrunk or the slab moved.",
+    "Sealant joints (darker, slightly glossy, recessed) along walls and at movement joints."
+  ],
+  "unverified": [],
+  "sources": [
+    "Marble Institute of America (now the Natural Stone Institute) (2016) Dimension Stone Design Manual, Version VIII, chapter 'Horizontal Surfaces' (excerpt), Introduction 2.4 'Width of Joints between Stones' and 'Exterior Paving Systems' 2.1-2.4, https://nsrstone.com/wp-content/uploads/2025/07/Horizontal-Surfaces.pdf"
+  ]
+}

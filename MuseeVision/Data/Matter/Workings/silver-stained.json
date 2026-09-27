@@ -1,0 +1,71 @@
+{
+  "schema": "musee.matter.working/1",
+  "key": "silver-stained",
+  "name": "Silver stain (yellow stain)",
+  "appliesTo": {
+    "families": [
+      "glass"
+    ],
+    "substances": [
+      "antique-glass"
+    ]
+  },
+  "over": [
+    "blown.cylinder",
+    "painted.vitreous"
+  ],
+  "process": "A silver compound (silver nitrate or chloride with a clay or ochre carrier) is brushed on, usually on the back of the piece, and fired at a lower temperature than the paint. Silver ions exchange into the glass surface for its sodium or potassium, are reduced to metal, and grow into nanoparticles; their surface plasmon absorbs blue, so the stain transmits yellow, deepening to amber and orange with more silver or a hotter firing. The stain is inside the glass, not on it: a single piece of white glass can be clear, lemon and amber at once, which is how Morris's quarries have their yellow flowers and the band its figures' hair and haloes.",
+  "processSources": [
+    "G. Molina, S. Murcia, J. Molera, C. Roldan, D. Crespo and T. Pradell, 'Color and dichroism of silver-stained glasses', Journal of Nanoparticle Research 15(9) (2013) 1932, doi:10.1007/s11051-013-1932-7 (abstract, via OSTI ETDEWEB record 22209451, https://www.osti.gov/etdeweb/biblio/22209451)",
+    "D. Anderson, 'Stained Glass and its Decay', The Building Conservation Directory (1996), https://www.buildingconservation.com/articles/glassdecay/glassdecay.htm"
+  ],
+  "facts": {
+    "since": {
+      "text": "Silver stain has been used from about the early 14th century.",
+      "grade": "secondary",
+      "source": "D. Anderson, 'Stained Glass and its Decay', The Building Conservation Directory (1996), https://www.buildingconservation.com/articles/glassdecay/glassdecay.htm ; G. Molina, S. Murcia, J. Molera, C. Roldan, D. Crespo and T. Pradell, 'Color and dichroism of silver-stained glasses', Journal of Nanoparticle Research 15(9) (2013) 1932, doi:10.1007/s11051-013-1932-7 (abstract, via OSTI ETDEWEB record 22209451, https://www.osti.gov/etdeweb/biblio/22209451)"
+    },
+    "nanostructure": {
+      "text": "A layer about 10-20 um thick of metallic silver nanoparticles, from a few to about 100 nm across (Renaissance yellow and dichroic stains).",
+      "grade": "measured",
+      "source": "G. Molina, S. Murcia, J. Molera, C. Roldan, D. Crespo and T. Pradell, 'Color and dichroism of silver-stained glasses', Journal of Nanoparticle Research 15(9) (2013) 1932, doi:10.1007/s11051-013-1932-7 (abstract, via OSTI ETDEWEB record 22209451, https://www.osti.gov/etdeweb/biblio/22209451)"
+    },
+    "layerThickness": {
+      "min": 10,
+      "max": 20,
+      "unit": "um",
+      "grade": "measured",
+      "source": "G. Molina, S. Murcia, J. Molera, C. Roldan, D. Crespo and T. Pradell, 'Color and dichroism of silver-stained glasses', Journal of Nanoparticle Research 15(9) (2013) 1932, doi:10.1007/s11051-013-1932-7 (abstract, via OSTI ETDEWEB record 22209451, https://www.osti.gov/etdeweb/biblio/22209451)"
+    },
+    "colour": {
+      "text": "The colour is set by the particles' surface plasmon absorption and scattering; the same colour is usually seen in reflection and transmission, though some stains are dichroic (yellow and red).",
+      "grade": "measured",
+      "source": "G. Molina, S. Murcia, J. Molera, C. Roldan, D. Crespo and T. Pradell, 'Color and dichroism of silver-stained glasses', Journal of Nanoparticle Research 15(9) (2013) 1932, doi:10.1007/s11051-013-1932-7 (abstract, via OSTI ETDEWEB record 22209451, https://www.osti.gov/etdeweb/biblio/22209451)"
+    }
+  },
+  "photograph": [
+    "Yellow to amber within a clear piece, with soft edges where the stain was brushed; in reflected light the stained area may look slightly milky or different in hue."
+  ],
+  "unverified": [
+    {
+      "field": "facts.firingTemperature",
+      "value": null,
+      "min": 500,
+      "max": 650,
+      "unit": "degC",
+      "reason": "A search summary gave silver-stain firing at 500-650 degC, below grisaille; the primary source was not read."
+    },
+    {
+      "field": "optics.plasmonBand",
+      "value": null,
+      "min": 410,
+      "max": 430,
+      "unit": "nm",
+      "reason": "A silver-nanoparticle plasmon band near 410-430 nm in soda-lime glass was seen only in search summaries."
+    }
+  ],
+  "sources": [
+    "D. Anderson, 'Stained Glass and its Decay', The Building Conservation Directory (1996), https://www.buildingconservation.com/articles/glassdecay/glassdecay.htm",
+    "G. Molina, S. Murcia, J. Molera, C. Roldan, D. Crespo and T. Pradell, 'Color and dichroism of silver-stained glasses', Journal of Nanoparticle Research 15(9) (2013) 1932, doi:10.1007/s11051-013-1932-7 (abstract, via OSTI ETDEWEB record 22209451, https://www.osti.gov/etdeweb/biblio/22209451)"
+  ]
+}

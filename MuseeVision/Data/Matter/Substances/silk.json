@@ -1,0 +1,573 @@
+{
+  "schema": "musee.matter.substance/1",
+  "key": "silk",
+  "name": "Silk (Bombyx mori), degummed, dyed and woven",
+  "family": "accent",
+  "accentOf": "oak",
+  "aliases": [
+    "mulberry silk",
+    "soie",
+    "丝",
+    "shantung and dupion (slubbed plain weaves)",
+    "绫 ling (twill damask)",
+    "纱 sha (gauze)"
+  ],
+  "summary": "Cultivated silk: the fibroin filament the domesticated silkworm spins into its cocoon, degummed, dyed and woven. In the Salon it is the wall silk of the five bays, wrapped onto the faces of their piers, one colour to each bay, and the Manet cabinet's green; in Chenghuai it covers the cases' back panels and beds (a warm grey 绫) and the palace lanterns' panels, lit from within at night.",
+  "dossier": "Docs/Matter/silk.md",
+  "workings": [
+    "stretched"
+  ],
+  "histories": [
+    "cloth.light-fading",
+    "cloth.wear"
+  ],
+  "identity": {
+    "class": "protein fibre (fibroin), continuous filament",
+    "whyAnAccent": {
+      "text": "The material-language board groups the cloths with the timber: 'D · The oak, and what it carries: timber, leather, silk, felt'. Each cloth is declared an accent of the oak family (D-014); the Architect may overturn this reading.",
+      "grade": "design",
+      "source": "MuseeVision/Journal/Decisions.md, D-014 (Matter: every substance carries its family; an accent names its core family); plan/canvas/MaterialsOther.dc.html, section 'D · The oak, and what it carries'"
+    }
+  },
+  "formation": {
+    "how": "The silkworm spins its cocoon from one continuous fibre: two fibroin filaments cemented in a sheath of sericin. The cocoons are reeled; the raw silk is degummed in hot soap or alkali, which strips the sericin and takes about a quarter of the weight, leaving the lustrous fibroin. The filaments are triangular to irregular in section, which is part of silk's sparkle. It is dyed in the yarn or the piece and woven: a plain taffeta; shantung and dupion, whose uneven, slubbed weft gives a broken, lively surface; a twill damask such as 绫; or an open gauze. Nineteenth-century silks were often 'weighted' with tin salts to replace the lost weight, and weighted silk shatters.",
+    "facts": {
+      "fibroinFraction": {
+        "min": 0.7,
+        "max": 0.8,
+        "unit": "1",
+        "grade": "secondary",
+        "source": "Rehman, A.U., Koutsos, V. & Alam, P. (2026) Bombyx mori silk cocoons: structure, composition, and mechanical properties - a review. Oxford Open Materials Science 6(1), itag006, https://doi.org/10.1093/oxfmat/itag006",
+        "asReported": "approximately 70%-80% of the protein content"
+      },
+      "sericinFraction": {
+        "min": 0.2,
+        "max": 0.3,
+        "unit": "1",
+        "grade": "secondary",
+        "source": "Rehman, A.U., Koutsos, V. & Alam, P. (2026) Bombyx mori silk cocoons: structure, composition, and mechanical properties - a review. Oxford Open Materials Science 6(1), itag006, https://doi.org/10.1093/oxfmat/itag006",
+        "asReported": "20%-30%"
+      },
+      "fibroinFilamentDiameter": {
+        "min": 7,
+        "max": 14,
+        "unit": "um",
+        "grade": "secondary",
+        "source": "Rehman, A.U., Koutsos, V. & Alam, P. (2026) Bombyx mori silk cocoons: structure, composition, and mechanical properties - a review. Oxford Open Materials Science 6(1), itag006, https://doi.org/10.1093/oxfmat/itag006"
+      },
+      "sericinSheathThickness": {
+        "min": 2,
+        "max": 4,
+        "unit": "um",
+        "grade": "secondary",
+        "source": "Rehman, A.U., Koutsos, V. & Alam, P. (2026) Bombyx mori silk cocoons: structure, composition, and mechanical properties - a review. Oxford Open Materials Science 6(1), itag006, https://doi.org/10.1093/oxfmat/itag006"
+      },
+      "cocoonFibreDiameter": {
+        "min": 16,
+        "max": 26,
+        "unit": "um",
+        "grade": "secondary",
+        "source": "Rehman, A.U., Koutsos, V. & Alam, P. (2026) Bombyx mori silk cocoons: structure, composition, and mechanical properties - a review. Oxford Open Materials Science 6(1), itag006, https://doi.org/10.1093/oxfmat/itag006",
+        "note": "inner cocoon layers about 16 um, outer about 26 um"
+      },
+      "crossSection": {
+        "text": "Fibres have a triangular or irregular cross-sectional geometry.",
+        "grade": "secondary",
+        "source": "Rehman, A.U., Koutsos, V. & Alam, P. (2026) Bombyx mori silk cocoons: structure, composition, and mechanical properties - a review. Oxford Open Materials Science 6(1), itag006, https://doi.org/10.1093/oxfmat/itag006"
+      },
+      "degummingLoss": {
+        "value": 0.25,
+        "unit": "1",
+        "grade": "secondary",
+        "source": "Elrefaey, I., Mahgoub, H., Vettorazzo, C., Marinšek, M., Meden, A., Jamnik, A., Tomšič, M. & Strlič, M. (2024) Investigation of the structural changes in silk due to tin weighting. Polymers 16(17), 2481, https://doi.org/10.3390/polym16172481",
+        "asReported": "weight loss can represent a quarter of its raw weight"
+      },
+      "tinWeightingGain": {
+        "min": 0.078,
+        "max": 0.422,
+        "unit": "1",
+        "grade": "measured",
+        "source": "Elrefaey, I., Mahgoub, H., Vettorazzo, C., Marinšek, M., Meden, A., Jamnik, A., Tomšič, M. & Strlič, M. (2024) Investigation of the structural changes in silk due to tin weighting. Polymers 16(17), 2481, https://doi.org/10.3390/polym16172481",
+        "conditions": "laboratory tin weighting, 1 to 4 cycles (7.8, 18.9, 27.7 and 42.2 % weight gain)"
+      },
+      "shantung": {
+        "text": "A silk plain weave, historically from Shandong; like dupioni but slightly thinner and less irregular; its yarns may have knots and bumps (slubs); a ribbed surface from long weft yarns.",
+        "grade": "secondary",
+        "source": "Wikipedia, 'Shantung (fabric)', https://en.wikipedia.org/wiki/Shantung_(fabric) (read 2026-09-26)"
+      }
+    }
+  },
+  "optics": {
+    "refractiveIndex": [
+      {
+        "value": 1.5307,
+        "unit": "1",
+        "grade": "measured",
+        "source": "Prajzler, V., Min, K., Kim, S. & Nekvindova, P. (2018) The investigation of the waveguiding properties of silk fibroin from the visible to near-infrared spectrum. Materials 11(1), 112, https://doi.org/10.3390/ma11010112",
+        "conditions": "632.8 nm; regenerated B. mori fibroin film (methanol-treated, beta-sheet) on Si/SiO2; 1.5329 on borosilicate"
+      },
+      {
+        "value": 1.5511,
+        "unit": "1",
+        "grade": "measured",
+        "source": "Prajzler, V., Min, K., Kim, S. & Nekvindova, P. (2018) The investigation of the waveguiding properties of silk fibroin from the visible to near-infrared spectrum. Materials 11(1), 112, https://doi.org/10.3390/ma11010112",
+        "conditions": "473.0 nm; same film (1.5512 on borosilicate)"
+      }
+    ],
+    "specularF0": {
+      "min": 0.0439,
+      "max": 0.0465,
+      "unit": "1",
+      "grade": "derived",
+      "source": "Born, M. & Wolf, E. (1999) Principles of Optics, 7th ed., Cambridge University Press, section 1.5; indices from Prajzler, V., Min, K., Kim, S. & Nekvindova, P. (2018) The investigation of the waveguiding properties of silk fibroin from the visible to near-infrared spectrum. Materials 11(1), 112, https://doi.org/10.3390/ma11010112",
+      "derivation": "R0 = ((n-1)/(n+1))^2 over n = 1.531-1.551 (a fibre's facet; the cloth's sheen is the fibres' cone of reflection, below)"
+    },
+    "clothModelCrepeDeChine": {
+      "note": "Fitted to measured BRDFs of a silk crepe de chine (Table II, row b). eta is a fitted model parameter, not the fibre's index; A carries that sample's dye.",
+      "flatThread": {
+        "eta": {
+          "value": 1.345,
+          "unit": "1",
+          "grade": "measured",
+          "source": "Sadeghi, I., Bisker, O., De Deken, J. & Jensen, H.W. (2013) A practical microcylinder appearance model for cloth rendering. ACM Transactions on Graphics 32(2), article 14, https://doi.org/10.1145/2451236.2451240 (http://graphics.ucsd.edu/~henrik/papers/practical_microcylinder_appearance_model_for_cloth_rendering.pdf), Table II"
+        },
+        "albedo": {
+          "value": [
+            0.12,
+            0.114,
+            0.006
+          ],
+          "unit": "1",
+          "space": "the paper's RGB",
+          "grade": "measured",
+          "source": "Sadeghi, I., Bisker, O., De Deken, J. & Jensen, H.W. (2013) A practical microcylinder appearance model for cloth rendering. ACM Transactions on Graphics 32(2), article 14, https://doi.org/10.1145/2451236.2451240 (http://graphics.ucsd.edu/~henrik/papers/practical_microcylinder_appearance_model_for_cloth_rendering.pdf), Table II",
+          "asReported": "(1, 0.95, 0.05) x 0.12"
+        },
+        "kd": {
+          "value": 0.2,
+          "unit": "1",
+          "grade": "measured",
+          "source": "Sadeghi, I., Bisker, O., De Deken, J. & Jensen, H.W. (2013) A practical microcylinder appearance model for cloth rendering. ACM Transactions on Graphics 32(2), article 14, https://doi.org/10.1145/2451236.2451240 (http://graphics.ucsd.edu/~henrik/papers/practical_microcylinder_appearance_model_for_cloth_rendering.pdf), Table II"
+        },
+        "gammaSurface": {
+          "value": 5,
+          "unit": "deg",
+          "grade": "measured",
+          "source": "Sadeghi, I., Bisker, O., De Deken, J. & Jensen, H.W. (2013) A practical microcylinder appearance model for cloth rendering. ACM Transactions on Graphics 32(2), article 14, https://doi.org/10.1145/2451236.2451240 (http://graphics.ucsd.edu/~henrik/papers/practical_microcylinder_appearance_model_for_cloth_rendering.pdf), Table II"
+        },
+        "gammaVolume": {
+          "value": 10,
+          "unit": "deg",
+          "grade": "measured",
+          "source": "Sadeghi, I., Bisker, O., De Deken, J. & Jensen, H.W. (2013) A practical microcylinder appearance model for cloth rendering. ACM Transactions on Graphics 32(2), article 14, https://doi.org/10.1145/2451236.2451240 (http://graphics.ucsd.edu/~henrik/papers/practical_microcylinder_appearance_model_for_cloth_rendering.pdf), Table II"
+        },
+        "areaShare": {
+          "value": 0.75,
+          "unit": "1",
+          "grade": "measured",
+          "source": "Sadeghi, I., Bisker, O., De Deken, J. & Jensen, H.W. (2013) A practical microcylinder appearance model for cloth rendering. ACM Transactions on Graphics 32(2), article 14, https://doi.org/10.1145/2451236.2451240 (http://graphics.ucsd.edu/~henrik/papers/practical_microcylinder_appearance_model_for_cloth_rendering.pdf), Table II"
+        }
+      },
+      "twistedThread": {
+        "eta": {
+          "value": 1.345,
+          "unit": "1",
+          "grade": "measured",
+          "source": "Sadeghi, I., Bisker, O., De Deken, J. & Jensen, H.W. (2013) A practical microcylinder appearance model for cloth rendering. ACM Transactions on Graphics 32(2), article 14, https://doi.org/10.1145/2451236.2451240 (http://graphics.ucsd.edu/~henrik/papers/practical_microcylinder_appearance_model_for_cloth_rendering.pdf), Table II"
+        },
+        "albedo": {
+          "value": [
+            0.16,
+            0.152,
+            0.008
+          ],
+          "unit": "1",
+          "space": "the paper's RGB",
+          "grade": "measured",
+          "source": "Sadeghi, I., Bisker, O., De Deken, J. & Jensen, H.W. (2013) A practical microcylinder appearance model for cloth rendering. ACM Transactions on Graphics 32(2), article 14, https://doi.org/10.1145/2451236.2451240 (http://graphics.ucsd.edu/~henrik/papers/practical_microcylinder_appearance_model_for_cloth_rendering.pdf), Table II",
+          "asReported": "(1, 0.95, 0.05) x 0.16"
+        },
+        "kd": {
+          "value": 0.3,
+          "unit": "1",
+          "grade": "measured",
+          "source": "Sadeghi, I., Bisker, O., De Deken, J. & Jensen, H.W. (2013) A practical microcylinder appearance model for cloth rendering. ACM Transactions on Graphics 32(2), article 14, https://doi.org/10.1145/2451236.2451240 (http://graphics.ucsd.edu/~henrik/papers/practical_microcylinder_appearance_model_for_cloth_rendering.pdf), Table II"
+        },
+        "gammaSurface": {
+          "value": 18,
+          "unit": "deg",
+          "grade": "measured",
+          "source": "Sadeghi, I., Bisker, O., De Deken, J. & Jensen, H.W. (2013) A practical microcylinder appearance model for cloth rendering. ACM Transactions on Graphics 32(2), article 14, https://doi.org/10.1145/2451236.2451240 (http://graphics.ucsd.edu/~henrik/papers/practical_microcylinder_appearance_model_for_cloth_rendering.pdf), Table II"
+        },
+        "gammaVolume": {
+          "value": 32,
+          "unit": "deg",
+          "grade": "measured",
+          "source": "Sadeghi, I., Bisker, O., De Deken, J. & Jensen, H.W. (2013) A practical microcylinder appearance model for cloth rendering. ACM Transactions on Graphics 32(2), article 14, https://doi.org/10.1145/2451236.2451240 (http://graphics.ucsd.edu/~henrik/papers/practical_microcylinder_appearance_model_for_cloth_rendering.pdf), Table II"
+        },
+        "areaShare": {
+          "value": 0.25,
+          "unit": "1",
+          "grade": "measured",
+          "source": "Sadeghi, I., Bisker, O., De Deken, J. & Jensen, H.W. (2013) A practical microcylinder appearance model for cloth rendering. ACM Transactions on Graphics 32(2), article 14, https://doi.org/10.1145/2451236.2451240 (http://graphics.ucsd.edu/~henrik/papers/practical_microcylinder_appearance_model_for_cloth_rendering.pdf), Table II"
+        }
+      }
+    },
+    "clothModelShot": {
+      "note": "A silk shot fabric (after Pont and Koenderink 2003), Table II row e: two thread directions of different colour.",
+      "direction1": {
+        "eta": {
+          "value": 1.345,
+          "unit": "1",
+          "grade": "measured",
+          "source": "Sadeghi, I., Bisker, O., De Deken, J. & Jensen, H.W. (2013) A practical microcylinder appearance model for cloth rendering. ACM Transactions on Graphics 32(2), article 14, https://doi.org/10.1145/2451236.2451240 (http://graphics.ucsd.edu/~henrik/papers/practical_microcylinder_appearance_model_for_cloth_rendering.pdf), Table II"
+        },
+        "kd": {
+          "value": 0.2,
+          "unit": "1",
+          "grade": "measured",
+          "source": "Sadeghi, I., Bisker, O., De Deken, J. & Jensen, H.W. (2013) A practical microcylinder appearance model for cloth rendering. ACM Transactions on Graphics 32(2), article 14, https://doi.org/10.1145/2451236.2451240 (http://graphics.ucsd.edu/~henrik/papers/practical_microcylinder_appearance_model_for_cloth_rendering.pdf), Table II"
+        },
+        "gammaSurface": {
+          "value": 4,
+          "unit": "deg",
+          "grade": "measured",
+          "source": "Sadeghi, I., Bisker, O., De Deken, J. & Jensen, H.W. (2013) A practical microcylinder appearance model for cloth rendering. ACM Transactions on Graphics 32(2), article 14, https://doi.org/10.1145/2451236.2451240 (http://graphics.ucsd.edu/~henrik/papers/practical_microcylinder_appearance_model_for_cloth_rendering.pdf), Table II"
+        },
+        "gammaVolume": {
+          "value": 8,
+          "unit": "deg",
+          "grade": "measured",
+          "source": "Sadeghi, I., Bisker, O., De Deken, J. & Jensen, H.W. (2013) A practical microcylinder appearance model for cloth rendering. ACM Transactions on Graphics 32(2), article 14, https://doi.org/10.1145/2451236.2451240 (http://graphics.ucsd.edu/~henrik/papers/practical_microcylinder_appearance_model_for_cloth_rendering.pdf), Table II"
+        },
+        "areaShare": {
+          "value": 0.86,
+          "unit": "1",
+          "grade": "measured",
+          "source": "Sadeghi, I., Bisker, O., De Deken, J. & Jensen, H.W. (2013) A practical microcylinder appearance model for cloth rendering. ACM Transactions on Graphics 32(2), article 14, https://doi.org/10.1145/2451236.2451240 (http://graphics.ucsd.edu/~henrik/papers/practical_microcylinder_appearance_model_for_cloth_rendering.pdf), Table II"
+        }
+      },
+      "direction2": {
+        "eta": {
+          "value": 1.345,
+          "unit": "1",
+          "grade": "measured",
+          "source": "Sadeghi, I., Bisker, O., De Deken, J. & Jensen, H.W. (2013) A practical microcylinder appearance model for cloth rendering. ACM Transactions on Graphics 32(2), article 14, https://doi.org/10.1145/2451236.2451240 (http://graphics.ucsd.edu/~henrik/papers/practical_microcylinder_appearance_model_for_cloth_rendering.pdf), Table II"
+        },
+        "kd": {
+          "value": 0.6,
+          "unit": "1",
+          "grade": "measured",
+          "source": "Sadeghi, I., Bisker, O., De Deken, J. & Jensen, H.W. (2013) A practical microcylinder appearance model for cloth rendering. ACM Transactions on Graphics 32(2), article 14, https://doi.org/10.1145/2451236.2451240 (http://graphics.ucsd.edu/~henrik/papers/practical_microcylinder_appearance_model_for_cloth_rendering.pdf), Table II"
+        },
+        "gammaSurface": {
+          "value": 5,
+          "unit": "deg",
+          "grade": "measured",
+          "source": "Sadeghi, I., Bisker, O., De Deken, J. & Jensen, H.W. (2013) A practical microcylinder appearance model for cloth rendering. ACM Transactions on Graphics 32(2), article 14, https://doi.org/10.1145/2451236.2451240 (http://graphics.ucsd.edu/~henrik/papers/practical_microcylinder_appearance_model_for_cloth_rendering.pdf), Table II"
+        },
+        "gammaVolume": {
+          "value": 10,
+          "unit": "deg",
+          "grade": "measured",
+          "source": "Sadeghi, I., Bisker, O., De Deken, J. & Jensen, H.W. (2013) A practical microcylinder appearance model for cloth rendering. ACM Transactions on Graphics 32(2), article 14, https://doi.org/10.1145/2451236.2451240 (http://graphics.ucsd.edu/~henrik/papers/practical_microcylinder_appearance_model_for_cloth_rendering.pdf), Table II"
+        },
+        "areaShare": {
+          "value": 0.14,
+          "unit": "1",
+          "grade": "measured",
+          "source": "Sadeghi, I., Bisker, O., De Deken, J. & Jensen, H.W. (2013) A practical microcylinder appearance model for cloth rendering. ACM Transactions on Graphics 32(2), article 14, https://doi.org/10.1145/2451236.2451240 (http://graphics.ucsd.edu/~henrik/papers/practical_microcylinder_appearance_model_for_cloth_rendering.pdf), Table II"
+        }
+      }
+    },
+    "sheen": "Each filament reflects on a cone about its axis; smooth, untwisted filaments (flat threads) give narrow, bright highlights and twisted threads broad ones. A slubbed weave breaks the highlight into short, irregular flashes.",
+    "wet": "Not wetted in the museum."
+  },
+  "designColours": {
+    "salonBay1": {
+      "value": [
+        0.1441,
+        0.0232,
+        0.016
+      ],
+      "unit": "1",
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "grade": "design",
+      "source": "plan/README.md, 'Salon interior' (the plan in words); plan/proposals/salon-interior/canvas/Details.dc.html (approved Salon interior proposal)",
+      "asReported": "#6A2A22",
+      "conditions": "bay 1 (Birth): oxblood; one step deeper than the as-built #7A3B2E",
+      "derivation": "the design's sRGB hex decoded with the sRGB transfer function; a design colour, not a measurement"
+    },
+    "salonBay2": {
+      "value": [
+        0.063,
+        0.0823,
+        0.1022
+      ],
+      "unit": "1",
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "grade": "design",
+      "source": "plan/README.md, 'Salon interior' (the plan in words); plan/proposals/salon-interior/canvas/Details.dc.html (approved Salon interior proposal)",
+      "asReported": "#47515A",
+      "conditions": "bay 2 (Modern Paris): zinc, Paris grey; one step deeper than the as-built #626A70",
+      "derivation": "the design's sRGB hex decoded with the sRGB transfer function; a design colour, not a measurement"
+    },
+    "salonBay3": {
+      "value": [
+        0.1022,
+        0.1529,
+        0.0887
+      ],
+      "unit": "1",
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "grade": "design",
+      "source": "plan/README.md, 'Salon interior' (the plan in words); plan/proposals/salon-interior/canvas/Details.dc.html (approved Salon interior proposal)",
+      "asReported": "#5A6D54",
+      "conditions": "bay 3 (Leisure & Light): sage; one step deeper than the as-built #8C9A7B",
+      "derivation": "the design's sRGB hex decoded with the sRGB transfer function; a design colour, not a measurement"
+    },
+    "salonBay4": {
+      "value": [
+        0.2542,
+        0.1022,
+        0.0887
+      ],
+      "unit": "1",
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "grade": "design",
+      "source": "plan/README.md, 'Salon interior' (the plan in words); plan/proposals/salon-interior/canvas/Details.dc.html (approved Salon interior proposal)",
+      "asReported": "#8A5A54",
+      "conditions": "bay 4 (Women): old rose; one step deeper than the as-built #B08A80",
+      "derivation": "the design's sRGB hex decoded with the sRGB transfer function; a design colour, not a measurement"
+    },
+    "salonBay5": {
+      "value": [
+        0.3515,
+        0.1912,
+        0.0423
+      ],
+      "unit": "1",
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "grade": "design",
+      "source": "plan/README.md, 'Salon interior' (the plan in words); plan/proposals/salon-interior/canvas/Details.dc.html (approved Salon interior proposal)",
+      "asReported": "#A0793A",
+      "conditions": "bay 5 (Monet's Series): haystack, ochre; one step deeper than the as-built #B79A62",
+      "derivation": "the design's sRGB hex decoded with the sRGB transfer function; a design colour, not a measurement"
+    },
+    "manetCabinet": {
+      "value": [
+        0.0284,
+        0.0423,
+        0.0331
+      ],
+      "unit": "1",
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "grade": "design",
+      "source": "plan/canvas/SalonDetails.dc.html ('CABINET · #2F3A33'); plan/proposals/salon-interior/canvas/Plan.dc.html (approved Salon interior proposal)",
+      "asReported": "#2F3A33",
+      "conditions": "the Manet cabinet: 'cabinet green', kept by the interior update",
+      "derivation": "the design's sRGB hex decoded with the sRGB transfer function; a design colour, not a measurement"
+    }
+  },
+  "designColoursChenghuai": {
+    "text": "The cases' silk: a warm grey 绫, quiet behind ink and celadon.",
+    "grade": "design",
+    "source": "windows/Scripts/chenghuai.py (frozen as-built reference) (CaseSilk)"
+  },
+  "physical": {
+    "fibreDensity": {
+      "min": 1350,
+      "max": 1365,
+      "unit": "kg/m3",
+      "grade": "secondary",
+      "source": "Rehman, A.U., Koutsos, V. & Alam, P. (2026) Bombyx mori silk cocoons: structure, composition, and mechanical properties - a review. Oxford Open Materials Science 6(1), itag006, https://doi.org/10.1093/oxfmat/itag006",
+      "asReported": "silk fiber intrinsic density 1350 and 1365 kg/m3"
+    }
+  },
+  "acoustic": {
+    "absorptionByOctave": {
+      "axis": "frequency",
+      "axisUnit": "Hz",
+      "axisValues": [
+        125,
+        250,
+        500,
+        1000,
+        2000,
+        4000
+      ],
+      "unit": "1",
+      "values": [
+        0.03,
+        0.04,
+        0.11,
+        0.17,
+        0.24,
+        0.35
+      ],
+      "grade": "secondary",
+      "source": "Table 'Sound Absorption Coefficients', http://usenclosure.com/Diffraction%20Graphs/Sound%20Absorption%20Coefficients.pdf (the same table the white group cites for plaster; it names no primary source)",
+      "conditions": "row 'Light Velour, 10 oz/sq yd, hung straight, in contact with wall': the nearest tabulated case for a thin cloth laid flat on a hard backing"
+    },
+    "note": "The Salon's silk is stretched over cotton wadding (molleton) on battens, which absorbs more than cloth on a hard wall; no measurement of that build-up was read (see unverified)."
+  },
+  "stock": {
+    "wallCoveringLayout": {
+      "text": "On the pier faces the silk stops 0.14 m short of each jamb, leaving a travertine edge up every arch; a travertine skirting 0.18 m high with a light slot; the silk runs to the moulded cornice.",
+      "grade": "design",
+      "source": "plan/proposals/salon-interior/canvas/Details.dc.html (approved Salon interior proposal); windows/Source/MuseeVision/Salon/SalonStructure.h (frozen as-built reference)"
+    },
+    "note": "Piece widths of furnishing silk were not read (see unverified); seams fall where the stretched working places them."
+  },
+  "conservation": {
+    "sensitivity": {
+      "text": "High light sensitivity (ISO Blue Wool 1-3) covers most plant extracts and hence most historic bright dyes, insect dyes, most early synthetic colours, and textiles; UV causes yellowing, chalking and weakening, and prolonged exposure weakens and fragments most wool, cotton, silk and paper.",
+      "grade": "guidance",
+      "source": "Michalski, S. (2018) Agent of deterioration: light, ultraviolet and infrared. Canadian Conservation Institute, 2018-05-17, https://www.canada.ca/en/conservation-institute/services/agents-deterioration/light.html"
+    },
+    "justNoticeableFadeAt50Lux": {
+      "min": 1.5,
+      "max": 20,
+      "unit": "year",
+      "grade": "guidance",
+      "source": "Michalski, S. (2018) Agent of deterioration: light, ultraviolet and infrared. Canadian Conservation Institute, 2018-05-17, https://www.canada.ca/en/conservation-institute/services/agents-deterioration/light.html",
+      "conditions": "just noticeable fade at 50 lux, high sensitivity (ISO Blue Wool 1-3)"
+    },
+    "uvLimit": {
+      "value": 75,
+      "unit": "uW/lm",
+      "grade": "guidance",
+      "source": "Michalski, S. (2018) Agent of deterioration: light, ultraviolet and infrared. Canadian Conservation Institute, 2018-05-17, https://www.canada.ca/en/conservation-institute/services/agents-deterioration/light.html",
+      "note": "traditional museum limit; about 10 uW/lm gives high-sensitivity materials extra protection"
+    },
+    "weighting": {
+      "text": "Tin-weighted silks are among the most pressing problems in textile conservation; silk textiles are susceptible to deterioration from light, heat and humidity. The museum's silk is unweighted.",
+      "grade": "measured",
+      "source": "Elrefaey, I., Mahgoub, H., Vettorazzo, C., Marinšek, M., Meden, A., Jamnik, A., Tomšič, M. & Strlič, M. (2024) Investigation of the structural changes in silk due to tin weighting. Polymers 16(17), 2481, https://doi.org/10.3390/polym16172481"
+    }
+  },
+  "physicalMaterial": {
+    "note": "Not walked on; touched at most. No friction is sourced."
+  },
+  "uses": [
+    {
+      "where": "the Salon, bays 1-5: the walls and the faces of the piers that look into each bay",
+      "working": "stretched",
+      "histories": [
+        "cloth.light-fading"
+      ],
+      "source": "plan/README.md, 'Salon interior' (the plan in words); plan/proposals/salon-interior/canvas/Details.dc.html (approved Salon interior proposal)",
+      "grade": "design"
+    },
+    {
+      "where": "the Manet cabinet: its walls, cabinet green",
+      "working": "stretched",
+      "histories": [
+        "cloth.light-fading"
+      ],
+      "source": "plan/canvas/SalonDetails.dc.html ('CABINET · #2F3A33'); plan/proposals/salon-interior/canvas/Plan.dc.html (approved Salon interior proposal)",
+      "grade": "design"
+    },
+    {
+      "where": "Chenghuai: the cases' back panels and beds (a warm grey 绫)",
+      "working": "stretched",
+      "histories": [
+        "cloth.light-fading"
+      ],
+      "source": "windows/Source/MuseeVision/Chenghuai/ChenghuaiGeometry.h, enum EChPart (frozen as-built reference) (CaseSilk); windows/Scripts/chenghuai.py (frozen as-built reference)",
+      "grade": "design"
+    },
+    {
+      "where": "Chenghuai: the palace lanterns' panels (宫灯), lit from within at night",
+      "working": "stretched",
+      "histories": [
+        "cloth.light-fading"
+      ],
+      "note": "a transmissive panel: its transmittance is unverified",
+      "source": "windows/Source/MuseeVision/Chenghuai/ChenghuaiGeometry.h, enum EChPart (frozen as-built reference) (LanternSilk)",
+      "grade": "design"
+    }
+  ],
+  "notMatter": "The scrolls' mounts (装裱) are Art's: the work's own silk.",
+  "photograph": [
+    "A slubbed weave: short thicker flecks along the weft that catch the light, so a flat wall of one colour still shimmers.",
+    "Colour that shifts a little with the angle of view; a paler sheen along the threads at grazing light.",
+    "Seams and the tension of stretched cloth: faint ripples near fixings, a crisp fold at each pier arris.",
+    "Faded edges and a paler band where a light slot or daylight has fallen for years; a sharp line of unfaded colour behind a frame."
+  ],
+  "evidence": [
+    {
+      "path": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR/F1",
+      "set": "Fabric036",
+      "provider": "ambientCG",
+      "url": "https://ambientcg.com/view?id=Fabric036",
+      "licence": "CC0 1.0",
+      "credits": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR/CREDITS.md (row F1: 'slubbed silk/linen weave')",
+      "tier": "reference",
+      "shows": "A slubbed plain weave at 0.3 m: the weave's relief and slubs. The colour map is grey (no colour evidence); fibre not identified.",
+      "statistics": {
+        "colorMeanLinear": {
+          "value": [
+            0.4914,
+            0.4914,
+            0.4914
+          ],
+          "unit": "1",
+          "space": "linear Rec.709 (sRGB primaries), D65 white",
+          "grade": "derived",
+          "derivation": "sRGB decode of every pixel of a 256 x 256 bilinear resample, then the mean",
+          "note": "grey; the set carries no colour",
+          "source": "computed from C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR/F1/Color.png"
+        },
+        "roughnessMapMedian": {
+          "value": 0.827,
+          "unit": "1",
+          "grade": "derived",
+          "derivation": "green channel of ORM.png, 256 x 256 bilinear resample; median, with percentiles 5/50/95 in the note",
+          "note": "authored roughness map, not a measurement; percentiles 5/50/95 = 0.812/0.827/0.843",
+          "source": "computed from C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR/F1/ORM.png"
+        }
+      }
+    }
+  ],
+  "evidenceSearch": {
+    "searched": [
+      "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR (CREDITS.md, CREDITS_chenghuai.md, every SET.txt)",
+      "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/Textures/CREDITS.md"
+    ],
+    "found": "F1 (Fabric036): a slubbed weave of unknown fibre. No photograph of a dyed silk wall at known exposure.",
+    "tier": "Weave relief only. Colour is the design's per bay until a dyed specimen is photographed (tier b)."
+  },
+  "unverified": [
+    {
+      "field": "physical.moistureRegain",
+      "value": 0.11,
+      "unit": "1",
+      "reason": "An 11 % commercial moisture regain is widely quoted; no primary source was read."
+    },
+    {
+      "field": "acoustic.absorption of silk on molleton over battens",
+      "value": null,
+      "unit": "1",
+      "reason": "No measured octave-band absorption of a stretched wall silk over wadding was read."
+    },
+    {
+      "field": "optics.transmittance of the lantern silk",
+      "value": null,
+      "unit": "1",
+      "reason": "No measured transmittance of a silk gauze panel was read."
+    },
+    {
+      "field": "stock.pieceWidth",
+      "value": null,
+      "unit": "m",
+      "reason": "Furnishing silk widths were not read."
+    },
+    {
+      "field": "conservation.dyeLightfastness",
+      "value": null,
+      "unit": "grade",
+      "reason": "The Blue Wool rating of the chosen silk dyes is not known; CCI's high-sensitivity class is assumed for dyed silk."
+    }
+  ]
+}

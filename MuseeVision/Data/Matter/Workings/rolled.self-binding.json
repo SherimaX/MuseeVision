@@ -1,0 +1,75 @@
+{
+  "schema": "musee.matter.working/1",
+  "key": "rolled.self-binding",
+  "name": "Rolled, self-binding",
+  "appliesTo": {
+    "families": [
+      "accent"
+    ],
+    "substances": [
+      "crushed-limestone"
+    ]
+  },
+  "over": [],
+  "process": "The walk is dug out, a base of coarser crushed stone is laid, and the 0/6 limestone is spread about 5 cm thick, raked level, wetted thoroughly and compacted with a vibrating plate or a heavy roller. Compaction is never done dry: the water carries the fines into the voids between the angular grains, which lock together as it dries. Maintenance is summer watering and filling and recompacting hollows.",
+  "processSources": [
+    "Carriere Vila, 'Allee en sable stabilise : guide pas a pas' (12 March 2026), https://www.carriere-vila.com/guide-realiser-allee-en-sable-stabilise/",
+    "Via Materiaux (Annecy), 'Sable 0/6 concasse calcaire - Vrac', product page read 2026-09-26, https://viamateriaux.fr/produit/sable-0-6-concasse-calcaire/"
+  ],
+  "layers": {
+    "excavation": {
+      "value": 150,
+      "unit": "mm",
+      "grade": "secondary",
+      "source": "Carriere Vila, 'Allee en sable stabilise : guide pas a pas' (12 March 2026), https://www.carriere-vila.com/guide-realiser-allee-en-sable-stabilise/",
+      "conditions": "'environ 15 cm'",
+      "note": "approximate"
+    },
+    "base": {
+      "text": "a gravel foundation layer of 'quelques centimetres'",
+      "grade": "secondary",
+      "source": "Carriere Vila, 'Allee en sable stabilise : guide pas a pas' (12 March 2026), https://www.carriere-vila.com/guide-realiser-allee-en-sable-stabilise/"
+    },
+    "surface": {
+      "value": 50,
+      "unit": "mm",
+      "grade": "secondary",
+      "source": "Carriere Vila, 'Allee en sable stabilise : guide pas a pas' (12 March 2026), https://www.carriere-vila.com/guide-realiser-allee-en-sable-stabilise/",
+      "conditions": "'environ 5 cm d'epaisseur'"
+    },
+    "surfaceRange": {
+      "min": 30,
+      "max": 50,
+      "unit": "mm",
+      "grade": "manufacturer",
+      "source": "Via Materiaux (Annecy), 'Sable 0/6 concasse calcaire - Vrac', product page read 2026-09-26, https://viamateriaux.fr/produit/sable-0-6-concasse-calcaire/"
+    }
+  },
+  "compaction": {
+    "text": "'Le compactage ne se fait jamais a sec. Mouillez abondamment le materiau ... puis passez une plaque vibrante ou un rouleau lourd.'",
+    "grade": "secondary",
+    "source": "Carriere Vila, 'Allee en sable stabilise : guide pas a pas' (12 March 2026), https://www.carriere-vila.com/guide-realiser-allee-en-sable-stabilise/"
+  },
+  "photograph": [
+    "A firm, flat, pale surface that rings slightly underfoot, with a thin scatter of loose grit.",
+    "Straight, crisp edges against a kerb or a steel edging; a slight crown to shed water."
+  ],
+  "unverified": [
+    {
+      "field": "layers.crossfall",
+      "value": null,
+      "unit": "1",
+      "reason": "No sourced crossfall for a garden walk was read."
+    },
+    {
+      "field": "strength (bearing, surface firmness)",
+      "value": null,
+      "unit": "",
+      "reason": "No measurement of firmness or stability of a rolled limestone walk was read."
+    }
+  ],
+  "sources": [
+    "Carriere Vila, 'Allee en sable stabilise : guide pas a pas' (12 March 2026), https://www.carriere-vila.com/guide-realiser-allee-en-sable-stabilise/",
+    "Via Materiaux (Annecy), 'Sable 0/6 concasse calcaire - Vrac', product page read 2026-09-26, https://viamateriaux.fr/produit/sable-0-6-concasse-calcaire/"
+  ]
+}

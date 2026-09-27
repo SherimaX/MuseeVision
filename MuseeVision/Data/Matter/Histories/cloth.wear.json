@@ -1,0 +1,79 @@
+{
+  "schema": "musee.matter.history/1",
+  "key": "cloth.wear",
+  "family": "accent",
+  "accentOf": "oak",
+  "name": "Worn and soiled (cloth)",
+  "appliesTo": {
+    "families": [
+      "accent"
+    ],
+    "substances": [
+      "velvet",
+      "silk",
+      "linen",
+      "wool-felt"
+    ],
+    "workings": [
+      "upholstered",
+      "stretched"
+    ]
+  },
+  "surfaceLawTerms": [
+    "wear",
+    "touch",
+    "soiling"
+  ],
+  "describes": "Sitting crushes and bends a velvet's pile: pressed patches reflect differently (shading), and abrasion slowly wears the pile down at the front edge and the piping. Hands soil the edges people touch; dust settles on upward faces of cloth. Felt compresses under objects. A stretched wall silk is rarely touched but collects dust at its foot and on any ledge.",
+  "terms": {
+    "abrasion": {
+      "value": 100000,
+      "unit": "count",
+      "grade": "manufacturer",
+      "source": "KOTHEA, 'Mohair Velvet Upholstery Fabric, Crib 5 and 100,000 Rubs' (product ranges and specifications), https://www.kothea.com/mohair-velvet-upholstery/",
+      "conditions": "Martindale rubs of a mohair velvet: heavy contract"
+    },
+    "pileDirection": {
+      "text": "Velvet cut pile up or pile down gives more shine or more saturated colour; pressed pile does the same locally.",
+      "grade": "secondary",
+      "source": "Wikipedia, 'Velvet', https://en.wikipedia.org/wiki/Velvet (read 2026-09-26)"
+    },
+    "mohairResilience": {
+      "text": "Mohair is durable, naturally elastic and crease-resistant.",
+      "grade": "secondary",
+      "source": "Wikipedia, 'Mohair', https://en.wikipedia.org/wiki/Mohair (read 2026-09-26), citing Williams, B. (2007) for the diameter"
+    }
+  },
+  "drivers": {
+    "up": [
+      "sitting (the bench's use count, Site/Visitor)",
+      "touch"
+    ],
+    "down": [
+      "cleaning",
+      "brushing the pile"
+    ]
+  },
+  "photograph": [
+    "Bench tops with lighter and darker patches where the pile lies differently; a worn, shiny front edge on old velvet; grey at the foot of a wall silk."
+  ],
+  "unverified": [
+    {
+      "field": "terms.crush recovery",
+      "value": null,
+      "unit": "1",
+      "reason": "The recovery of a mohair pile after sitting was not measured in a source read."
+    },
+    {
+      "field": "terms.soiling rate of cloth",
+      "value": null,
+      "unit": "1/day",
+      "reason": "Not read; the white group's deposition figures apply to dust generally."
+    }
+  ],
+  "sources": [
+    "KOTHEA, 'Mohair Velvet Upholstery Fabric, Crib 5 and 100,000 Rubs' (product ranges and specifications), https://www.kothea.com/mohair-velvet-upholstery/",
+    "Wikipedia, 'Velvet', https://en.wikipedia.org/wiki/Velvet (read 2026-09-26)",
+    "Wikipedia, 'Mohair', https://en.wikipedia.org/wiki/Mohair (read 2026-09-26), citing Williams, B. (2007) for the diameter"
+  ]
+}

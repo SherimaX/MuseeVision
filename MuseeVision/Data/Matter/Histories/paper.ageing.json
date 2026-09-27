@@ -1,0 +1,61 @@
+{
+  "schema": "musee.matter.history/1",
+  "key": "paper.ageing",
+  "family": "accent",
+  "accentOf": "glass",
+  "name": "Aged (paper)",
+  "appliesTo": {
+    "families": [
+      "accent"
+    ],
+    "substances": [
+      "mulberry-paper"
+    ],
+    "workings": [
+      "laminated.paper"
+    ]
+  },
+  "surfaceLawTerms": [
+    "age",
+    "chemistry"
+  ],
+  "describes": "Paper yellows and weakens with light and time, faster with UV, acidity and humidity. A pasted window paper tears, soils and is renewed. Laminated in glass it is sealed from moisture, dust and hands and shielded from UV by the interlayer, so it ages very slowly; what ages instead is the glass's outer face (soiling) and the laminate's edge (delamination), which the glass family's histories describe.",
+  "terms": {
+    "uv": {
+      "text": "Prolonged exposure weakens and fragments paper; UV causes yellowing.",
+      "grade": "guidance",
+      "source": "Michalski, S. (2018) Agent of deterioration: light, ultraviolet and infrared. Canadian Conservation Institute, 2018-05-17, https://www.canada.ca/en/conservation-institute/services/agents-deterioration/light.html"
+    },
+    "sealed": {
+      "text": "Low-temperature EVA lamination protects paper inserts from deformation and discolouration.",
+      "grade": "manufacturer",
+      "source": "E&N (Foshan), 'Interlayers for interior & decorative glass' (EVA film maker's service page), https://www.enevaglass.com/service/interlayers-for-interior-decorative-glass.html"
+    },
+    "glassFace": "See glass.soiling and glass.edge-delamination (the glass group's records)."
+  },
+  "drivers": {
+    "up": [
+      "UV reaching the paper",
+      "heat"
+    ],
+    "down": [
+      "UV-cutting interlayer",
+      "shade of the eaves"
+    ]
+  },
+  "photograph": [
+    "An even, warm cream that deepens very slowly; no tears, no dirt behind the glass."
+  ],
+  "unverified": [
+    {
+      "field": "terms.yellowing rate of laminated mulberry paper",
+      "value": null,
+      "unit": "CIELAB",
+      "reason": "Not read."
+    }
+  ],
+  "sources": [
+    "Michalski, S. (2018) Agent of deterioration: light, ultraviolet and infrared. Canadian Conservation Institute, 2018-05-17, https://www.canada.ca/en/conservation-institute/services/agents-deterioration/light.html",
+    "E&N (Foshan), 'Interlayers for interior & decorative glass' (EVA film maker's service page), https://www.enevaglass.com/service/interlayers-for-interior-decorative-glass.html"
+  ]
+}

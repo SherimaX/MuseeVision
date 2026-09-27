@@ -1,0 +1,79 @@
+{
+  "schema": "musee.matter.history/1",
+  "key": "iron.corrosion",
+  "name": "Corrosion of cast and wrought iron",
+  "family": "accent",
+  "appliesTo": {
+    "families": [
+      "accent"
+    ],
+    "substances": [
+      "cast-iron",
+      "wrought-iron"
+    ]
+  },
+  "surfaceLawTerms": [
+    "chemistry",
+    "wetness",
+    "age"
+  ],
+  "describes": "Where the paint fails and water stays, iron rusts, and the two irons fail differently. Cast iron is the more resistant (its cast skin) but can corrode selectively: the iron dissolves and leaves the graphite network filled with corrosion products, so the piece keeps its shape and look while losing its strength (graphitic corrosion). Wrought iron rusts along its slag grain: it delaminates, swells into layers, and thin members bend and distort. Rust occupies more volume than the iron it replaces, so iron built into stone (cramps, the shafts' bolted shoes over the capitals) can crack the stone around it.",
+  "terms": {
+    "castVsWrought": {
+      "text": "Cast iron is 'more resistant to corrosion than wrought iron'; wrought iron is 'more resistant to corrosion than mild steel'.",
+      "grade": "guidance",
+      "source": "Historic Environment Scotland, Engine Shed, 'Iron' (Building advice: building materials), https://www.engineshed.scot/building-advice/building-materials/iron/"
+    },
+    "wroughtWater": {
+      "text": "Wrought iron is 'more vulnerable to water damage' than cast iron.",
+      "grade": "secondary",
+      "source": "M. Bussell, '19th-century Structural Ironwork in Buildings: Understanding, Care and Re-use', The Building Conservation Directory (2011), https://www.buildingconservation.com/articles/structural-ironwork/structural-ironwork.htm"
+    },
+    "delamination": {
+      "text": "'As iron corrodes and delaminates (its layers separate) it expands, i.e. rust is greater in volume than the original iron'; wrought iron 'will usually bend and distort as deterioration progresses'.",
+      "grade": "guidance",
+      "source": "Historic Environment Scotland, Engine Shed, 'Iron' (Building advice: building materials), https://www.engineshed.scot/building-advice/building-materials/iron/"
+    },
+    "graphitic": {
+      "text": "Graphitic corrosion is selective leaching of iron from grey cast iron: the graphite network remains, impregnated with corrosion products, and the casting 'retains its appearance and shape but is weaker structurally'.",
+      "grade": "secondary",
+      "source": "Corrosionpedia, 'Graphitic Corrosion', https://www.corrosionpedia.com/definition/606/graphitic-corrosion"
+    },
+    "slagEffect": {
+      "text": "In wrought iron the slag inclusions disperse corrosion into an even film and resist pitting; sulfur lowers and phosphorus raises its corrosion resistance.",
+      "grade": "secondary",
+      "source": "Wikipedia, 'Wrought iron' (Table 2 cited to E. Oberg, F. D. Jones and H. H. Ryffel, Machinery's Handbook, 26th ed., Industrial Press 2000, p. 476; Table 1 cited to J. M. Camp and C. B. Francis, The Making, Shaping and Treating of Steel, Carnegie Steel Company 1920, pp. 173-174; the Atlas Forge closure cited to S. B. Smith and W. K. V. Gale, Historical Metallurgy 21(1) 1987, pp. 44-45), https://en.wikipedia.org/wiki/Wrought_iron"
+    }
+  },
+  "drivers": [
+    {
+      "driver": "paint failure (from iron.paint-ageing)",
+      "owner": "Matter (history chain)"
+    },
+    {
+      "driver": "standing water and condensation at joints, gutters, shoes",
+      "owner": "Form (joint positions) and Nature (condensation under the glass)"
+    },
+    {
+      "driver": "iron embedded in stone",
+      "owner": "Form (joints of kind 'embedded')"
+    }
+  ],
+  "photograph": "Orange-brown rust bleeding from joints and bolt heads over grey paint; on wrought iron, paint lifting in long blisters over swollen, layered rust; on cast iron, a sound-looking surface.",
+  "unverified": [
+    {
+      "field": "terms.rustVolumeRatio",
+      "value": null,
+      "min": 2,
+      "max": 10,
+      "unit": "1",
+      "reason": "Rust is said to occupy 2 to 10 times the volume of the iron consumed, depending on the products; only secondary web summaries were read."
+    }
+  ],
+  "sources": [
+    "Historic Environment Scotland, Engine Shed, 'Iron' (Building advice: building materials), https://www.engineshed.scot/building-advice/building-materials/iron/",
+    "M. Bussell, '19th-century Structural Ironwork in Buildings: Understanding, Care and Re-use', The Building Conservation Directory (2011), https://www.buildingconservation.com/articles/structural-ironwork/structural-ironwork.htm",
+    "Corrosionpedia, 'Graphitic Corrosion', https://www.corrosionpedia.com/definition/606/graphitic-corrosion",
+    "Wikipedia, 'Wrought iron' (Table 2 cited to E. Oberg, F. D. Jones and H. H. Ryffel, Machinery's Handbook, 26th ed., Industrial Press 2000, p. 476; Table 1 cited to J. M. Camp and C. B. Francis, The Making, Shaping and Treating of Steel, Carnegie Steel Company 1920, pp. 173-174; the Atlas Forge closure cited to S. B. Smith and W. K. V. Gale, Historical Metallurgy 21(1) 1987, pp. 44-45), https://en.wikipedia.org/wiki/Wrought_iron"
+  ]
+}

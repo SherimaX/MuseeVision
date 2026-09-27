@@ -1,0 +1,133 @@
+{
+  "schema": "musee.matter.history/1",
+  "key": "oak.movement",
+  "family": "oak",
+  "name": "Seasonal movement",
+  "appliesTo": {
+    "families": [
+      "oak",
+      "accent"
+    ],
+    "substances": [
+      "oak",
+      "korean-pine",
+      "chinese-fir",
+      "phoebe"
+    ]
+  },
+  "surfaceLawTerms": [
+    "age"
+  ],
+  "describes": "Wood takes up and gives off moisture with the room's humidity and swells and shrinks across the grain, about twice as much tangentially as radially and hardly at all along it. Boards open fine gaps at their joints in a dry winter and close them in summer; plain-sawn boards cup; big timbers check (split) along the grain as they dry, and the checks telegraph through paint as hairline cracks. The trades answer it: pegged, unglued Versailles panels; quarter-sawn boards; hemp laid across the grain in a 地仗 ground.",
+  "terms": {
+    "shrinkage": {
+      "oak": {
+        "radial": {
+          "value": 0.047,
+          "unit": "1",
+          "grade": "secondary",
+          "source": "Meier, E. The Wood Database: English Oak (Quercus robur), https://www.wood-database.com/english-oak/ (read 2026-09-26)"
+        },
+        "tangential": {
+          "value": 0.084,
+          "unit": "1",
+          "grade": "secondary",
+          "source": "Meier, E. The Wood Database: English Oak (Quercus robur), https://www.wood-database.com/english-oak/ (read 2026-09-26)"
+        }
+      },
+      "koreanPine": {
+        "radial": {
+          "value": 0.0224,
+          "unit": "1",
+          "grade": "measured",
+          "source": "Park, Y., Kim, C.K., Jeong, H., Lee, H.M., Lee, I.H., Kwon, G.B., Yoon, N. & Lee, N. (2025) Evaluation of the basic properties for the Korean major domestic wood species III. Korean pine (Pinus koraiensis) in Jinan-gun, Jeollabuk-do. Journal of the Korean Wood Science and Technology 53(3), 301-310, https://doi.org/10.5658/WOOD.2025.53.3.301"
+        },
+        "tangential": {
+          "value": 0.0719,
+          "unit": "1",
+          "grade": "measured",
+          "source": "Park, Y., Kim, C.K., Jeong, H., Lee, H.M., Lee, I.H., Kwon, G.B., Yoon, N. & Lee, N. (2025) Evaluation of the basic properties for the Korean major domestic wood species III. Korean pine (Pinus koraiensis) in Jinan-gun, Jeollabuk-do. Journal of the Korean Wood Science and Technology 53(3), 301-310, https://doi.org/10.5658/WOOD.2025.53.3.301"
+        }
+      },
+      "phoebe": {
+        "radial": {
+          "value": 0.039,
+          "unit": "1",
+          "grade": "measured",
+          "source": "Wu, J., Liang, J., Chen, M., Zheng, S. & Xu, J. (2022) Study on the structural characteristics and physical and mechanical properties of Phoebe bournei thinning wood. Journal of Renewable Materials 10(11), https://doi.org/10.32604/jrm.2022.019989 (https://www.techscience.com/jrm/v10n11/48716/html)",
+          "conditions": "P. bournei, saturated to oven-dry"
+        },
+        "tangential": {
+          "value": 0.057,
+          "unit": "1",
+          "grade": "measured",
+          "source": "Wu, J., Liang, J., Chen, M., Zheng, S. & Xu, J. (2022) Study on the structural characteristics and physical and mechanical properties of Phoebe bournei thinning wood. Journal of Renewable Materials 10(11), https://doi.org/10.32604/jrm.2022.019989 (https://www.techscience.com/jrm/v10n11/48716/html)"
+        }
+      },
+      "conditions": "green (or saturated) to oven-dry; in service the change follows the moisture content's seasonal swing, a fraction of these"
+    },
+    "quarterSawn": {
+      "text": "Quarter-sawn boards have less cupping and less shrinkage across the width.",
+      "grade": "secondary",
+      "source": "Wikipedia, 'Quarter sawing', https://en.wikipedia.org/wiki/Quarter_sawing (read 2026-09-26)"
+    },
+    "nanmu": {
+      "text": "Nanmu does not react to humidity and temperature much by expansion or contraction; it dries with little splitting or warping.",
+      "grade": "secondary",
+      "source": "Wikipedia, 'Nanmu', https://en.wikipedia.org/wiki/Nanmu (read 2026-09-26)"
+    },
+    "versaillesPanels": {
+      "text": "Pieces pegged, tenoned and mortised by hand without glue.",
+      "grade": "secondary",
+      "source": "Marc Maison, 'Parquet de Versailles', Architectural antiques resources, https://www.marcmaison.fr/architectural-antiques-resources/parquet-de-versailles (read 2026-09-26)"
+    },
+    "hempAcrossGrain": {
+      "text": "The hemp is laid perpendicular to the member's grain on the 通灰 and hammered flat.",
+      "grade": "secondary",
+      "source": "周乾 Zhou Qian (2023) 解码故宫古建筑'一麻五灰地仗'技艺 [Decoding the 'one hemp, five ash' ground of the Palace Museum's buildings]. 故宫古建文化漫谈, Tencent News, 2023-11-04, https://news.qq.com/rain/a/20231104A08JWV00"
+    },
+    "museumClimate": {
+      "text": "Chenghuai's rooms are only tempered; the cases hold 50 ± 5 % RH.",
+      "grade": "design",
+      "source": "plan/proposals/chenghuai/canvas/Materials.dc.html (approved Chenghuai proposal: '營造')"
+    }
+  },
+  "drivers": {
+    "up": [
+      "the RH swing of the room (Time's weather indoors, as Light/Site condition it)",
+      "plain-sawn, wide boards",
+      "large sections"
+    ],
+    "down": [
+      "quarter-sawn stock",
+      "stable RH",
+      "pegged or floating construction"
+    ]
+  },
+  "photograph": [
+    "Hairline gaps at parquet panel edges in winter; checks running along red columns through the paint; a slight cup in wide boards."
+  ],
+  "unverified": [
+    {
+      "field": "terms.moisture coefficient (oak)",
+      "value": null,
+      "unit": "1",
+      "reason": "The change in dimension per 1 % of moisture content was not read."
+    },
+    {
+      "field": "terms.equilibrium moisture content vs RH",
+      "value": null,
+      "unit": "1",
+      "reason": "Not read."
+    }
+  ],
+  "sources": [
+    "Meier, E. The Wood Database: English Oak (Quercus robur), https://www.wood-database.com/english-oak/ (read 2026-09-26)",
+    "Park, Y., Kim, C.K., Jeong, H., Lee, H.M., Lee, I.H., Kwon, G.B., Yoon, N. & Lee, N. (2025) Evaluation of the basic properties for the Korean major domestic wood species III. Korean pine (Pinus koraiensis) in Jinan-gun, Jeollabuk-do. Journal of the Korean Wood Science and Technology 53(3), 301-310, https://doi.org/10.5658/WOOD.2025.53.3.301",
+    "Wu, J., Liang, J., Chen, M., Zheng, S. & Xu, J. (2022) Study on the structural characteristics and physical and mechanical properties of Phoebe bournei thinning wood. Journal of Renewable Materials 10(11), https://doi.org/10.32604/jrm.2022.019989 (https://www.techscience.com/jrm/v10n11/48716/html)",
+    "Wikipedia, 'Quarter sawing', https://en.wikipedia.org/wiki/Quarter_sawing (read 2026-09-26)",
+    "Wikipedia, 'Nanmu', https://en.wikipedia.org/wiki/Nanmu (read 2026-09-26)",
+    "Marc Maison, 'Parquet de Versailles', Architectural antiques resources, https://www.marcmaison.fr/architectural-antiques-resources/parquet-de-versailles (read 2026-09-26)",
+    "周乾 Zhou Qian (2023) 解码故宫古建筑'一麻五灰地仗'技艺 [Decoding the 'one hemp, five ash' ground of the Palace Museum's buildings]. 故宫古建文化漫谈, Tencent News, 2023-11-04, https://news.qq.com/rain/a/20231104A08JWV00"
+  ]
+}

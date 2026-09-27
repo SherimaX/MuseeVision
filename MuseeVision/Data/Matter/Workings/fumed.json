@@ -1,0 +1,139 @@
+{
+  "schema": "musee.matter.working/1",
+  "key": "fumed",
+  "name": "Fumed (ammonia)",
+  "appliesTo": {
+    "families": [
+      "oak"
+    ],
+    "substances": [
+      "oak"
+    ]
+  },
+  "over": [
+    "sawn.quarter",
+    "sawn.plain"
+  ],
+  "process": "The finished, unoiled timber is shut in an enclosure with ammonia; the gas reacts with the wood's tannins and other compounds in the presence of air, and the wood darkens evenly from light brown to chocolate brown or black with time. It is the Arts and Crafts colour of oak and accentuates quarter-sawn ray fleck. Traditional surface fuming colours a layer; modern vacuum-pressure fuming colours the whole depth. It is followed by oil or wax.",
+  "steps": [
+    {
+      "step": "prepare the surface (planed or sanded) and leave it free of finish",
+      "source": "Miklečić, J., Španić, N. & Jirouš-Rajković, V. (2012) Wood color changes by ammonia fuming. BioResources 7(3), 3767-3778, https://bioresources.cnr.ncsu.edu/resources/wood-color-changes-by-ammonia-fuming/"
+    },
+    {
+      "step": "expose to ammonia vapour in a closed chamber with air present; the study used 40 mL of 25 % ammonium hydroxide per chamber at 23 ± 2 degC and 50 ± 5 % RH, for 1 to 16 days",
+      "source": "Miklečić, J., Španić, N. & Jirouš-Rajković, V. (2012) Wood color changes by ammonia fuming. BioResources 7(3), 3767-3778, https://bioresources.cnr.ncsu.edu/resources/wood-color-changes-by-ammonia-fuming/"
+    },
+    {
+      "step": "air out; finish with oil or wax",
+      "source": "Miklečić, J., Španić, N. & Jirouš-Rajković, V. (2012) Wood color changes by ammonia fuming. BioResources 7(3), 3767-3778, https://bioresources.cnr.ncsu.edu/resources/wood-color-changes-by-ammonia-fuming/ (fuming is 'frequently applied in furniture and flooring')"
+    }
+  ],
+  "chemistry": {
+    "oxygen": {
+      "text": "The colour reaction of ammonia-fumed oak is possible only with atmospheric oxygen available (Tinkler 1921).",
+      "grade": "secondary",
+      "source": "Miklečić, J., Španić, N. & Jirouš-Rajković, V. (2012) Wood color changes by ammonia fuming. BioResources 7(3), 3767-3778, https://bioresources.cnr.ncsu.edu/resources/wood-color-changes-by-ammonia-fuming/"
+    },
+    "tanninBefore": {
+      "value": 0.15,
+      "unit": "1",
+      "grade": "measured",
+      "source": "Miklečić, J., Španić, N. & Jirouš-Rajković, V. (2012) Wood color changes by ammonia fuming. BioResources 7(3), 3767-3778, https://bioresources.cnr.ncsu.edu/resources/wood-color-changes-by-ammonia-fuming/",
+      "asReported": "15 %"
+    },
+    "tanninAfter16Days": {
+      "value": 0.05,
+      "unit": "1",
+      "grade": "measured",
+      "source": "Miklečić, J., Španić, N. & Jirouš-Rajković, V. (2012) Wood color changes by ammonia fuming. BioResources 7(3), 3767-3778, https://bioresources.cnr.ncsu.edu/resources/wood-color-changes-by-ammonia-fuming/",
+      "asReported": "5 %",
+      "note": "reduced about three times: the ammonia reacted with the tannin"
+    },
+    "nitrogenAfter16Days": {
+      "value": 0.01815,
+      "unit": "1",
+      "grade": "measured",
+      "source": "Miklečić, J., Španić, N. & Jirouš-Rajković, V. (2012) Wood color changes by ammonia fuming. BioResources 7(3), 3767-3778, https://bioresources.cnr.ncsu.edu/resources/wood-color-changes-by-ammonia-fuming/",
+      "asReported": "1.815 %",
+      "note": "from 0.107 %: nitrogen is taken into the wood"
+    },
+    "oakFirst": {
+      "text": "Oak reacted intensively with ammonia in a very short time; the other species changed more between day 1 and day 16.",
+      "grade": "measured",
+      "source": "Miklečić, J., Španić, N. & Jirouš-Rajković, V. (2012) Wood color changes by ammonia fuming. BioResources 7(3), 3767-3778, https://bioresources.cnr.ncsu.edu/resources/wood-color-changes-by-ammonia-fuming/"
+    }
+  },
+  "optics": {
+    "colourAfter16Days": {
+      "L": {
+        "value": 35.5,
+        "unit": "CIELAB",
+        "grade": "measured",
+        "source": "Miklečić, J., Španić, N. & Jirouš-Rajković, V. (2012) Wood color changes by ammonia fuming. BioResources 7(3), 3767-3778, https://bioresources.cnr.ncsu.edu/resources/wood-color-changes-by-ammonia-fuming/",
+        "conditions": "Q. robur radial heartwood after 16 days (from 60.9); SD 2.09"
+      },
+      "a": {
+        "value": 6.7,
+        "unit": "CIELAB",
+        "grade": "measured",
+        "source": "Miklečić, J., Španić, N. & Jirouš-Rajković, V. (2012) Wood color changes by ammonia fuming. BioResources 7(3), 3767-3778, https://bioresources.cnr.ncsu.edu/resources/wood-color-changes-by-ammonia-fuming/",
+        "conditions": "from 7.5; SD 0.20"
+      },
+      "b": {
+        "value": 14.4,
+        "unit": "CIELAB",
+        "grade": "measured",
+        "source": "Miklečić, J., Španić, N. & Jirouš-Rajković, V. (2012) Wood color changes by ammonia fuming. BioResources 7(3), 3767-3778, https://bioresources.cnr.ncsu.edu/resources/wood-color-changes-by-ammonia-fuming/",
+        "conditions": "from 23.0; SD 1.32"
+      },
+      "albedo": {
+        "value": [
+          0.1322,
+          0.0784,
+          0.0464
+        ],
+        "unit": "1",
+        "space": "linear Rec.709 (sRGB primaries), D65 white",
+        "grade": "derived",
+        "source": "Miklečić, J., Španić, N. & Jirouš-Rajković, V. (2012) Wood color changes by ammonia fuming. BioResources 7(3), 3767-3778, https://bioresources.cnr.ncsu.edu/resources/wood-color-changes-by-ammonia-fuming/",
+        "derivation": "CIELAB (35.5, 6.7, 14.4) to XYZ with the D65 2-degree white (assumed), then to linear Rec.709",
+        "note": "luminance factor Y = 0.088, bare fumed wood before any oil; about 30 % of the unfumed 0.291"
+      }
+    },
+    "uvStability": {
+      "text": "Ammonia-fumed oak had better colour resistance to UV than heat-treated oak; fuming can pre-age wood and stabilise its colour.",
+      "grade": "secondary",
+      "source": "Miklečić, J., Španić, N. & Jirouš-Rajković, V. (2012) Wood color changes by ammonia fuming. BioResources 7(3), 3767-3778, https://bioresources.cnr.ncsu.edu/resources/wood-color-changes-by-ammonia-fuming/ (citing Miklečić et al. 2012 and Weigl et al. 2007)"
+    }
+  },
+  "depth": {
+    "text": "Traditional surface fuming versus modern vacuum-pressure fuming, which gives colour over the entire depth of the wood.",
+    "grade": "secondary",
+    "source": "Miklečić, J., Španić, N. & Jirouš-Rajković, V. (2012) Wood color changes by ammonia fuming. BioResources 7(3), 3767-3778, https://bioresources.cnr.ncsu.edu/resources/wood-color-changes-by-ammonia-fuming/"
+  },
+  "museumChoice": "Full-depth (vacuum-pressure) fumed oak for the benches' plinths, the 1874 case and the Reserve's screens and chests, so wear and re-sanding never uncover pale wood; the fuming time is set to the design's dark oak.",
+  "surface": {
+    "colour": "Even, cool grey-brown to chocolate; tannin-rich rays and latewood take the colour differently, so the figure stays legible."
+  },
+  "photograph": [
+    "A deep, even brown with a faintly grey cast; ray fleck paler and silvery against it on quarter-sawn faces."
+  ],
+  "unverified": [
+    {
+      "field": "museumChoice.fumingTime",
+      "value": null,
+      "unit": "day",
+      "reason": "The fuming time that gives the design's 'dark oak' is to be set on a specimen."
+    },
+    {
+      "field": "depth.surfaceFumedLayer",
+      "value": null,
+      "unit": "mm",
+      "reason": "The depth coloured by surface fuming was not read."
+    }
+  ],
+  "sources": [
+    "Miklečić, J., Španić, N. & Jirouš-Rajković, V. (2012) Wood color changes by ammonia fuming. BioResources 7(3), 3767-3778, https://bioresources.cnr.ncsu.edu/resources/wood-color-changes-by-ammonia-fuming/"
+  ]
+}

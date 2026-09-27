@@ -1,0 +1,352 @@
+{
+  "schema": "musee.matter.substance/1",
+  "key": "topsoil",
+  "name": "Topsoil (the dark, humus-rich surface horizon under lawn and planting)",
+  "family": "living",
+  "accentOf": null,
+  "summary": "The top horizon of a garden soil: mineral grains (sand, silt, clay) mixed with humus from roots and leaf litter, worked by soil life, with pores that hold water and air. It is the ground under the grounds' mown lawn, the meadow and orchard of the Hall of Light's gardens, the hedges' feet and Chenghuai's garden beds, seen where the turf is thin, at the edge of beds and between plants. Nature grows the plants in it; Matter records the soil's own physics.",
+  "dossier": "Docs/Matter/topsoil.md",
+  "workings": {
+    "admits": [],
+    "note": "Cultivation (digging, raking, rolling) changes its structure, not its substance; no working record yet."
+  },
+  "histories": [
+    "ground.trodden"
+  ],
+  "aliases": [
+    "garden soil",
+    "loam",
+    "A horizon",
+    "earth"
+  ],
+  "constituents": [
+    {
+      "mineral": "quartz",
+      "formula": "SiO2",
+      "role": "the sand and silt grains"
+    },
+    {
+      "material": "clay minerals",
+      "formula": null,
+      "role": "the finest fraction; holds water and nutrients"
+    },
+    {
+      "material": "humus (soil organic matter)",
+      "formula": null,
+      "role": "darkens the soil and binds its crumbs"
+    },
+    {
+      "material": "water and air in the pores",
+      "formula": null,
+      "role": "the live state: wetness is the surface law's"
+    }
+  ],
+  "formation": {
+    "how": "Soil forms where rock weathers into mineral grains and plants add organic matter year on year. Under grass, dense fine roots die back into the soil each year and build a thick, dark, humus-rich surface horizon: the soil scientists' mollic epipedon, which is defined by its darkness. A lawn's topsoil is that kind of horizon, or an imported topsoil made to resemble it.",
+    "facts": {
+      "mollicColour": {
+        "text": "A horizon is mollic if, among other criteria, its moist Munsell chroma and value are both 3 or less and its organic carbon is at least 0.6 % (organic matter at least 1.0 %) throughout.",
+        "grade": "guidance",
+        "source": "University of Georgia, Soil Science, 'A Key to Common Diagnostic Horizons in Soil Taxonomy' (teaching key after the USDA Keys to Soil Taxonomy), item 2 'mollic', https://soils.uga.edu/files/2016/08/A-Key-to-Soil-Orders-and-Common-Diagnostic-Horizons-in-Soil-Taxonomy.pdf"
+      },
+      "mollicThickness": {
+        "min": 10,
+        "max": 25,
+        "unit": "cm",
+        "grade": "guidance",
+        "source": "University of Georgia, Soil Science, 'A Key to Common Diagnostic Horizons in Soil Taxonomy' (teaching key after the USDA Keys to Soil Taxonomy), item 2 'mollic', https://soils.uga.edu/files/2016/08/A-Key-to-Soil-Orders-and-Common-Diagnostic-Horizons-in-Soil-Taxonomy.pdf",
+        "conditions": "at least 10 cm over rock; 18-25 cm and a third of the solum in some cases; at least 25 cm in all other cases"
+      },
+      "baseSaturation": {
+        "min": 0.5,
+        "unit": "1",
+        "grade": "guidance",
+        "source": "University of Georgia, Soil Science, 'A Key to Common Diagnostic Horizons in Soil Taxonomy' (teaching key after the USDA Keys to Soil Taxonomy), item 2 'mollic', https://soils.uga.edu/files/2016/08/A-Key-to-Soil-Orders-and-Common-Diagnostic-Horizons-in-Soil-Taxonomy.pdf",
+        "conditions": "NH4OAc sum of bases; an umbric horizon meets the rest with less"
+      }
+    }
+  },
+  "optics": {
+    "kind": "granular, porous, strongly absorbing (humus) and scattering (mineral grains); diffuse",
+    "colour": {
+      "text": "Topsoil under grass is dark: moist Munsell value 3 or less and chroma 3 or less for a mollic horizon.",
+      "grade": "guidance",
+      "source": "University of Georgia, Soil Science, 'A Key to Common Diagnostic Horizons in Soil Taxonomy' (teaching key after the USDA Keys to Soil Taxonomy), item 2 'mollic', https://soils.uga.edu/files/2016/08/A-Key-to-Soil-Orders-and-Common-Diagnostic-Horizons-in-Soil-Taxonomy.pdf",
+      "note": "Dry, the same horizon may be lighter; the key read gives only the moist criterion."
+    },
+    "wet": [
+      {
+        "text": "Soil reflectance falls non-linearly with moisture, well described by an exponential model, similar for different soils when moisture is expressed as the degree of saturation.",
+        "grade": "measured",
+        "source": "D.B. Lobell, G.P. Asner (2002) 'Moisture effects on soil reflectance', Soil Science Society of America Journal 66(3):722-727, https://doi.org/10.2136/sssaj2002.7220 (abstract read at https://asu.elsevierpure.com/en/publications/moisture-effects-on-soil-reflectance/)"
+      },
+      {
+        "text": "Wet surfaces are darker because water fills the pores and films the grains, lowering the index step and trapping light by total internal reflection.",
+        "grade": "measured",
+        "source": "J. Lekner, M.C. Dorf (1988) 'Why some things are darker when wet', Applied Optics 27(7):1278-1280, https://doi.org/10.1364/AO.27.001278"
+      },
+      {
+        "text": "The same physics explains wet-dry reflectance differences in sands and soils.",
+        "grade": "measured",
+        "source": "S.A. Twomey, C.F. Bohren, J.L. Mergenthaler (1986) 'Reflectance and albedo differences between wet and dry surfaces', Applied Optics 25(3):431-437, https://doi.org/10.1364/AO.25.000431",
+        "note": "Qualitative summary; the paper's numbers were not read."
+      }
+    ]
+  },
+  "physical": {
+    "grainDensityQuartz": {
+      "value": 2.65,
+      "unit": "g/cm3",
+      "grade": "measured",
+      "source": "J.W. Anthony, R.A. Bideaux, K.W. Bladh, M.C. Nichols (eds.) Handbook of Mineralogy, Mineralogical Society of America, 'Quartz', http://www.handbookofmineralogy.org/pdfs/quartz.pdf",
+      "conditions": "quartz, D(meas.), the main mineral of sand and silt"
+    },
+    "hardnessQuartz": {
+      "value": 7,
+      "unit": "Mohs",
+      "grade": "measured",
+      "source": "J.W. Anthony, R.A. Bideaux, K.W. Bladh, M.C. Nichols (eds.) Handbook of Mineralogy, Mineralogical Society of America, 'Quartz', http://www.handbookofmineralogy.org/pdfs/quartz.pdf"
+    },
+    "bulkDensityIdeal": [
+      {
+        "max": 1.6,
+        "unit": "g/cm3",
+        "grade": "secondary",
+        "source": "University of Illinois, 'Soil Quality for Environmental Health: Bulk Density', Table 1 (after M.A. Arshad, B. Lowery, B. Grossman (1996) 'Physical tests for monitoring soil quality', in J.W. Doran, A.J. Jones (eds.) Methods for Assessing Soil Quality, SSSA, pp. 123-141), https://soilquality.nres.illinois.edu/bulk-density/",
+        "conditions": "sandy"
+      },
+      {
+        "max": 1.4,
+        "unit": "g/cm3",
+        "grade": "secondary",
+        "source": "University of Illinois, 'Soil Quality for Environmental Health: Bulk Density', Table 1 (after M.A. Arshad, B. Lowery, B. Grossman (1996) 'Physical tests for monitoring soil quality', in J.W. Doran, A.J. Jones (eds.) Methods for Assessing Soil Quality, SSSA, pp. 123-141), https://soilquality.nres.illinois.edu/bulk-density/",
+        "conditions": "silty"
+      },
+      {
+        "max": 1.1,
+        "unit": "g/cm3",
+        "grade": "secondary",
+        "source": "University of Illinois, 'Soil Quality for Environmental Health: Bulk Density', Table 1 (after M.A. Arshad, B. Lowery, B. Grossman (1996) 'Physical tests for monitoring soil quality', in J.W. Doran, A.J. Jones (eds.) Methods for Assessing Soil Quality, SSSA, pp. 123-141), https://soilquality.nres.illinois.edu/bulk-density/",
+        "conditions": "clayey"
+      }
+    ],
+    "bulkDensityRestrictsRoots": [
+      {
+        "min": 1.8,
+        "unit": "g/cm3",
+        "grade": "secondary",
+        "source": "University of Illinois, 'Soil Quality for Environmental Health: Bulk Density', Table 1 (after M.A. Arshad, B. Lowery, B. Grossman (1996) 'Physical tests for monitoring soil quality', in J.W. Doran, A.J. Jones (eds.) Methods for Assessing Soil Quality, SSSA, pp. 123-141), https://soilquality.nres.illinois.edu/bulk-density/",
+        "conditions": "sandy"
+      },
+      {
+        "min": 1.65,
+        "unit": "g/cm3",
+        "grade": "secondary",
+        "source": "University of Illinois, 'Soil Quality for Environmental Health: Bulk Density', Table 1 (after M.A. Arshad, B. Lowery, B. Grossman (1996) 'Physical tests for monitoring soil quality', in J.W. Doran, A.J. Jones (eds.) Methods for Assessing Soil Quality, SSSA, pp. 123-141), https://soilquality.nres.illinois.edu/bulk-density/",
+        "conditions": "silty"
+      },
+      {
+        "min": 1.47,
+        "unit": "g/cm3",
+        "grade": "secondary",
+        "source": "University of Illinois, 'Soil Quality for Environmental Health: Bulk Density', Table 1 (after M.A. Arshad, B. Lowery, B. Grossman (1996) 'Physical tests for monitoring soil quality', in J.W. Doran, A.J. Jones (eds.) Methods for Assessing Soil Quality, SSSA, pp. 123-141), https://soilquality.nres.illinois.edu/bulk-density/",
+        "conditions": "clayey"
+      }
+    ],
+    "porosity": {
+      "min": 0.4,
+      "max": 0.58,
+      "unit": "1",
+      "grade": "derived",
+      "derivation": "1 - bulk density / grain density at the ideal limits, 1.60 (sandy) and 1.10 (clayey) g/cm3, over quartz's 2.65 g/cm3; clay minerals and humus are lighter than quartz, so the clayey value is an upper estimate",
+      "source": "University of Illinois, 'Soil Quality for Environmental Health: Bulk Density', Table 1 (after M.A. Arshad, B. Lowery, B. Grossman (1996) 'Physical tests for monitoring soil quality', in J.W. Doran, A.J. Jones (eds.) Methods for Assessing Soil Quality, SSSA, pp. 123-141), https://soilquality.nres.illinois.edu/bulk-density/ ; J.W. Anthony, R.A. Bideaux, K.W. Bladh, M.C. Nichols (eds.) Handbook of Mineralogy, Mineralogical Society of America, 'Quartz', http://www.handbookofmineralogy.org/pdfs/quartz.pdf",
+      "note": "at or above these values in a soil within the ideal limits"
+    }
+  },
+  "surface": {
+    "structure": {
+      "text": "A mollic horizon's structure is not massive, or its consistence is not hard when dry: it is crumbly.",
+      "grade": "guidance",
+      "source": "University of Georgia, Soil Science, 'A Key to Common Diagnostic Horizons in Soil Taxonomy' (teaching key after the USDA Keys to Soil Taxonomy), item 2 'mollic', https://soils.uga.edu/files/2016/08/A-Key-to-Soil-Orders-and-Common-Diagnostic-Horizons-in-Soil-Taxonomy.pdf"
+    }
+  },
+  "acoustic": {
+    "groundClass": [
+      {
+        "text": "Nord2000 class C, 'uncompacted, loose ground (turf, grass, loose soil)', 80 kPa s/m2.",
+        "grade": "secondary",
+        "source": "M. Ahearn, E. Boeker, J. Rosenbaum, P. Gerbi, C. Roof (2012) 'The Analysis of Modeling Aircraft Noise with the Nord2000 Noise Model', US DOT Volpe Center, DOT/FAA/AEE/2012-5 (DOT-VNTSC-FAA-12-07), Table 4 'Classification of ground type' (the Nord2000 impedance classes; 1 cgs rayl = 1 kN s/m4 = 1 kPa s/m2), https://rosap.ntl.bts.gov/view/dot/9687/dot_9687_DS1.pdf"
+      },
+      {
+        "text": "Nord2000 class D, 'normal uncompacted ground (forest floors, pasture field)', 200 kPa s/m2.",
+        "grade": "secondary",
+        "source": "M. Ahearn, E. Boeker, J. Rosenbaum, P. Gerbi, C. Roof (2012) 'The Analysis of Modeling Aircraft Noise with the Nord2000 Noise Model', US DOT Volpe Center, DOT/FAA/AEE/2012-5 (DOT-VNTSC-FAA-12-07), Table 4 'Classification of ground type' (the Nord2000 impedance classes; 1 cgs rayl = 1 kN s/m4 = 1 kPa s/m2), https://rosap.ntl.bts.gov/view/dot/9687/dot_9687_DS1.pdf"
+      },
+      {
+        "text": "Nord2000 class E, 'compacted field and gravel (compacted lawns, park area)', 500 kPa s/m2.",
+        "grade": "secondary",
+        "source": "M. Ahearn, E. Boeker, J. Rosenbaum, P. Gerbi, C. Roof (2012) 'The Analysis of Modeling Aircraft Noise with the Nord2000 Noise Model', US DOT Volpe Center, DOT/FAA/AEE/2012-5 (DOT-VNTSC-FAA-12-07), Table 4 'Classification of ground type' (the Nord2000 impedance classes; 1 cgs rayl = 1 kN s/m4 = 1 kPa s/m2), https://rosap.ntl.bts.gov/view/dot/9687/dot_9687_DS1.pdf"
+      }
+    ],
+    "flowResistivity": {
+      "value": 200,
+      "min": 80,
+      "max": 500,
+      "unit": "kPa*s/m2",
+      "grade": "secondary",
+      "source": "M. Ahearn, E. Boeker, J. Rosenbaum, P. Gerbi, C. Roof (2012) 'The Analysis of Modeling Aircraft Noise with the Nord2000 Noise Model', US DOT Volpe Center, DOT/FAA/AEE/2012-5 (DOT-VNTSC-FAA-12-07), Table 4 'Classification of ground type' (the Nord2000 impedance classes; 1 cgs rayl = 1 kN s/m4 = 1 kPa s/m2), https://rosap.ntl.bts.gov/view/dot/9687/dot_9687_DS1.pdf",
+      "conditions": "value: class D for a garden bed; min: class C for loose turf; max: class E for a compacted lawn"
+    },
+    "absorption": {
+      "axis": "frequency",
+      "axisUnit": "Hz",
+      "axisValues": [
+        125,
+        250,
+        500,
+        1000,
+        2000,
+        4000
+      ],
+      "unit": "1",
+      "values": [
+        0.11,
+        0.177,
+        0.277,
+        0.416,
+        0.583,
+        0.745
+      ],
+      "grade": "derived",
+      "derivation": "Normal-incidence absorption 1 - |R|^2 of a semi-infinite ground, R = (Z - 1)/(Z + 1), with the Delany-Bazley normalised impedance Z = 1 + 0.0571 X^-0.754 - i 0.087 X^-0.732, X = rho0 f / sigma, rho0 = 1.204 kg/m3, at the class's representative flow resistivity sigma. The ground's X lies below the model's fitted range (about 0.01 to 1), as in every ground model that uses it; Sound should compute its own ground impedance from sigma rather than read this table.",
+      "source": "M. Ahearn, E. Boeker, J. Rosenbaum, P. Gerbi, C. Roof (2012) 'The Analysis of Modeling Aircraft Noise with the Nord2000 Noise Model', US DOT Volpe Center, DOT/FAA/AEE/2012-5 (DOT-VNTSC-FAA-12-07), Table 4 'Classification of ground type' (the Nord2000 impedance classes; 1 cgs rayl = 1 kN s/m4 = 1 kPa s/m2), https://rosap.ntl.bts.gov/view/dot/9687/dot_9687_DS1.pdf ; M.E. Delany, E.N. Bazley (1970) 'Acoustical properties of fibrous absorbent materials', Applied Acoustics 3:105-116 (the one-parameter impedance model the Nord2000 and Embleton-Piercy-Daigle ground models use)",
+      "conditions": "class D (200 kPa s/m2), normal incidence, semi-infinite ground"
+    },
+    "absorptionTurf": {
+      "axis": "frequency",
+      "axisUnit": "Hz",
+      "axisValues": [
+        125,
+        250,
+        500,
+        1000,
+        2000,
+        4000
+      ],
+      "unit": "1",
+      "values": [
+        0.205,
+        0.318,
+        0.468,
+        0.637,
+        0.79,
+        0.895
+      ],
+      "grade": "derived",
+      "derivation": "Normal-incidence absorption 1 - |R|^2 of a semi-infinite ground, R = (Z - 1)/(Z + 1), with the Delany-Bazley normalised impedance Z = 1 + 0.0571 X^-0.754 - i 0.087 X^-0.732, X = rho0 f / sigma, rho0 = 1.204 kg/m3, at the class's representative flow resistivity sigma. The ground's X lies below the model's fitted range (about 0.01 to 1), as in every ground model that uses it; Sound should compute its own ground impedance from sigma rather than read this table.",
+      "source": "M. Ahearn, E. Boeker, J. Rosenbaum, P. Gerbi, C. Roof (2012) 'The Analysis of Modeling Aircraft Noise with the Nord2000 Noise Model', US DOT Volpe Center, DOT/FAA/AEE/2012-5 (DOT-VNTSC-FAA-12-07), Table 4 'Classification of ground type' (the Nord2000 impedance classes; 1 cgs rayl = 1 kN s/m4 = 1 kPa s/m2), https://rosap.ntl.bts.gov/view/dot/9687/dot_9687_DS1.pdf ; M.E. Delany, E.N. Bazley (1970) 'Acoustical properties of fibrous absorbent materials', Applied Acoustics 3:105-116 (the one-parameter impedance model the Nord2000 and Embleton-Piercy-Daigle ground models use)",
+      "conditions": "class C (80 kPa s/m2): loose turf and grass, normal incidence"
+    },
+    "note": "A lawn is acoustically soft: Sound's outdoor ground effect reads the flow resistivity, not this table."
+  },
+  "stock": {
+    "note": "Imported and spread by volume; there is no unit stock. Form draws the ground as a heightfield (Nature's Ground)."
+  },
+  "physicalMaterial": {
+    "footfallClass": "soil",
+    "note": "Under turf the footfall is Nature's grass; bare soil is soft and silent. No friction measurement was read."
+  },
+  "uses": [
+    {
+      "where": "under the grounds' mown lawn (visible between blades and where the sward is thin)",
+      "source": "windows/Scripts/lawn.py (LAWN_GROUND, 'the soil and thatch down in the sward')"
+    },
+    {
+      "where": "the hedges' dark cores and beds (the old MI_Soil)",
+      "source": "windows/Source/MuseeVision/Facade/MuseeLandscape.cpp"
+    },
+    {
+      "where": "Chenghuai's garden ground under moss and litter",
+      "source": "windows/Scripts/chenghuai.py (GardenGround)"
+    },
+    {
+      "where": "the Hall of Light's meadow and orchard",
+      "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/plan/canvas/HallOfLight.dc.html"
+    }
+  ],
+  "photograph": [
+    "Very dark brown to near black when damp, dusty grey-brown when the top dries.",
+    "Crumbly, with fine roots, grit and bits of leaf; a paler dry crust after sun, cracked on clayey soil.",
+    "Under a lawn it shows only in thin patches and at cut edges; along a bed's edge a clean cut line.",
+    "Crumbs and clods from millimetres to centimetres, sand grains and plant litter at the surface."
+  ],
+  "evidence": [
+    {
+      "path": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR/CH_MOSSGROUND/Color.png",
+      "set": "ambientCG Ground037, 2K (key CH_MOSSGROUND: 'damp earth under moss, leaf litter', 2.0 m)",
+      "licence": "CC0 1.0",
+      "credit": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR/CREDITS_chenghuai.md, row CH_MOSSGROUND",
+      "shows": "Mostly yellow-green moss over earth, with patches of bare brown soil, twigs and leaf fragments; the soil itself shows only in the patches.",
+      "meanColour": {
+        "linearSrgb": [
+          0.3382,
+          0.3153,
+          0.1176
+        ],
+        "cieLab": [
+          62.2,
+          -6.8,
+          30.1
+        ],
+        "unit": "linear Rec.709 (sRGB primaries); CIELAB 1976 with a D65 white",
+        "source": "Derived here (R-MATTER, group ground-water): mean over all pixels of Color.png, decoded from sRGB",
+        "note": "uncalibrated and dominated by moss, so it says nothing about the soil's own colour; the bare patches show its crumb scale and litter"
+      },
+      "tier": "c (photograph, not calibrated)"
+    }
+  ],
+  "evidenceSearch": {
+    "searched": [
+      "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR (CREDITS.md, CREDITS_chenghuai.md, stats.json, every SET.txt)",
+      "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/Textures/CREDITS.md"
+    ],
+    "found": "Only CH_MOSSGROUND shows soil, and only in patches between moss. L1 (Grass004) is grass, Nature's substance.",
+    "tier": "A tier (b) specimen closes the gap: a calibrated photograph of bare garden topsoil, dry and wet, with a ColorChecker."
+  },
+  "unverified": [
+    {
+      "field": "optics.reflectance (dry and wet topsoil)",
+      "value": null,
+      "unit": "1",
+      "reason": "No measured reflectance of a humus-rich topsoil was read. Textbook albedo tables (Oke 1987, 'Boundary Layer Climates', Table 1.1) give ranges for dark wet and light dry soils; not read at the source."
+    },
+    {
+      "field": "optics.colour as reflectance",
+      "max": 0.07,
+      "unit": "1",
+      "reason": "Munsell value 3 corresponds to a luminous reflectance of roughly 6-7 % by the Munsell renotation (ASTM D1535); the conversion was not read at a source."
+    },
+    {
+      "field": "optics.wet model parameters",
+      "value": null,
+      "unit": "1",
+      "reason": "Lobell and Asner's fitted amplitude, rate and minimum for each soil were not read (abstract only)."
+    },
+    {
+      "field": "composition by volume",
+      "value": null,
+      "unit": "1",
+      "reason": "The textbook 'about 45 % mineral, 5 % organic matter, 25 % water, 25 % air' for an ideal loam was not read at a source."
+    },
+    {
+      "field": "design colour as built (2026-09)",
+      "value": [
+        0.05,
+        0.072,
+        0.026
+      ],
+      "unit": "linear RGB",
+      "reason": "The old build's lawn ground tone (0.05, 0.072, 0.026) linear (windows/Scripts/lawn.py) and GardenGround #49492F (windows/Scripts/chenghuai.py), chosen by eye: they include thatch and moss, not soil alone."
+    }
+  ]
+}
