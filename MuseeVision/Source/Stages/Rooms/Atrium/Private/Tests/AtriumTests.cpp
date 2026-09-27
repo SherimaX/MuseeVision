@@ -232,6 +232,24 @@ namespace Musee::Atrium::Tests
 			}
 		}
 
+		// §3.4: the canopy's glass is cut on its grid: 72 panes up to the drum, 144 in each band between 72-node rings (13), 108
+		// where 72 become 36, and 72 in each band between 36-node rings (5), each bent onto the Sphere's seam.
+		const TArray<FFormDrawing> Panes = Description.Pieces.FilterByPredicate([](const FFormDrawing& D)
+		{
+			return D.Name.ToString().StartsWith(TEXT("canopy.glass.band-"));
+		});
+		TestEqual(TEXT("2,412 panes"), Panes.Num(), 72 + 13 * 144 + 108 + 5 * 72);
+		TestTrue(TEXT("each on the Sphere's seam, R 14.000"), Panes.Num() > 0 && Panes[0].Ground.Kind == EFormGroundKind::Sphere
+			&& FMath::IsNearlyEqual(Panes[0].Ground.RadiusMeters, 14.0));
+		// §3.2: the portal's arch runs straight through its block and its upper course, springing 5.221 under a crown of 8.000.
+		const FFormDrawing* Front = Description.Pieces.FindByPredicate([](const FFormDrawing& D) { return D.Name == FName(TEXT("portal.front")); });
+		if (TestTrue(TEXT("the portal is a block with its opening"), Front && Front->Shape.IsType<FFormWall>() && Front->Shape.Get<FFormWall>().Openings.Num() == 1))
+		{
+			const FFormWall& Block = Front->Shape.Get<FFormWall>();
+			TestEqual(TEXT("its arch's crown at 8.000"), Block.BaseMeters + Block.Openings[0].CrownMeters(), 8.0, Millimetre);
+			TestTrue(TEXT("a segmental arch, straight through"), Block.Openings[0].bStraight && Block.Openings[0].ArchRadiusMeters == Plan::PortalArchRadius);
+		}
+
 		// The description is a plain function of the plan: the same on every call.
 		const FSiteDescription Again = Described();
 		bool bSame = Again.Pieces.Num() == Description.Pieces.Num();

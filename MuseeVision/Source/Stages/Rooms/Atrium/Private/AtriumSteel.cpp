@@ -5,9 +5,9 @@
  * compression ring round the car's way; the ring and the hangers that carry the collar from it; and outdoors, the drum's
  * order of fins on pedestals, mullions and transom rings, rooted on the outer leaf's face.
  *
- * Each rib and each vertical of the order stands in a radial plane, so it is drawn exactly as its elevation pushed across
- * its width. The ribs' 30 mm chamfers on their room-side arrises wait for Form's sweeps along paths out of plan, which is
- * what a rib's spine is; their gilt lines wait for polish (§12).
+ * Each rib and each vertical of the order stands in a radial plane. A rib is its chamfered section swept along its spine,
+ * the back line drawn in its radial plane, and cut at its foot on the floor and at its head on the ring's outer face; the
+ * order's verticals are their elevations pushed across their width. The ribs' gilt lines wait for polish (§12).
  */
 namespace Musee::Atrium
 {
@@ -16,25 +16,38 @@ namespace Musee::Atrium
 		const Musee::Collision::FClass* const Solid = &Musee::Collision::Solid;
 
 		/**
-		 * A rib's elevation in its radial plane, (r, z): up the back line, round the turn and under the Sphere to the
-		 * ring's outer face, and back along the room face 0.420 in from the back.
+		 * A rib's spine, its back line in its radial plane (r, z): up the wall, round the turn and under the Sphere past the
+		 * ring's outer face, where the rib is cut.
 		 */
-		FFormProfile RibElevation()
+		FFormProfile RibSpine()
 		{
 			const double C = Plan::SphereCentreZ;
 			const FVector2D Turn(Plan::RibTurnCentreR, Plan::RibTurnZ);
-			const double Room = Plan::CanopyRadius + Plan::RibDepth;
 			const double Under = Plan::RibTurnEndDeg - 180.0;
-			auto ToRing = [](double Radius) { return -FMath::RadiansToDegrees(FMath::Acos(Plan::RingOuter / Radius)); };
-			FFormProfile Rib = FFormProfile::From(FVector2D(Plan::RibBack, 0.0));
-			Rib.LineTo(FVector2D(Plan::RibBack, Plan::RibTurnZ), EFormJoint::Crisp)
+			const double PastRing = -FMath::RadiansToDegrees(FMath::Acos(Plan::RingOuter / Plan::CanopyRadius));
+			FFormProfile Spine = FFormProfile::From(FVector2D(Plan::RibBack, 0.0));
+			Spine.LineTo(FVector2D(Plan::RibBack, Plan::RibTurnZ), EFormJoint::Crisp)
 				.ArcAbout(Turn, Plan::RibTurnRadius, Plan::RibTurnRadius, 0.0, Plan::RibTurnEndDeg)
-				.ArcAbout(FVector2D(0.0, C), Plan::CanopyRadius, Plan::CanopyRadius, Under, ToRing(Plan::CanopyRadius))
-				.LineTo(FVector2D(Plan::RingOuter, C - FMath::Sqrt(Room * Room - Plan::RingOuter * Plan::RingOuter)), EFormJoint::Crisp)
-				.ArcAbout(FVector2D(0.0, C), Room, Room, ToRing(Room), Under, EFormJoint::Crisp)
-				.ArcAbout(Turn, Plan::RibTurnRadius - Plan::RibDepth, Plan::RibTurnRadius - Plan::RibDepth, Plan::RibTurnEndDeg, 0.0)
-				.LineTo(FVector2D(Plan::RibBack - Plan::RibDepth, 0.0));
-			return Rib.Close();
+				.ArcAbout(FVector2D(0.0, C), Plan::CanopyRadius, Plan::CanopyRadius, Under, PastRing);
+			return Spine;
+		}
+
+		/**
+		 * A rib: its section (d from the back into the room, t across it from one side), chamfered on its room-side arrises,
+		 * swept up its spine in its radial plane; its foot cut on the floor, square to the rising spine, and its head on the
+		 * ring's outer face, the vertical plane r 3.600.
+		 */
+		FFormSweep RibSweep()
+		{
+			const double D = Plan::RibDepth;
+			const double W = 2.0 * Plan::RibHalf;
+			const double K = Plan::RibChamfer;
+			FFormSweep Rib;
+			Rib.Section = FFormProfile::Polyline({FVector2D(0.0, 0.0), FVector2D(D - K, 0.0), FVector2D(D, K), FVector2D(D, W - K), FVector2D(D - K, W),
+				FVector2D(0.0, W)}, true);
+			Rib.Path = RibSpine();
+			Rib.EndCut = FVector::ForwardVector;
+			return Rib;
 		}
 
 		/** A shoe: the bronze sleeve round the rib's foot, open at its back where the rib stands 5 mm off the stone. */
@@ -52,8 +65,7 @@ namespace Musee::Atrium
 			for (int32 Rib = 0; Rib < Plan::Ribs; ++Rib)
 			{
 				const double Bearing = RibBearing(Rib);
-				Out.Add(Drawn(FString::Printf(TEXT("rib.%02d"), Rib + 1), TEXT("rib"), Prism(RibElevation(), 0.0, 2.0 * Plan::RibHalf), Solid,
-					RadialPlane(Bearing, Plan::RibHalf)));
+				Out.Add(Drawn(FString::Printf(TEXT("rib.%02d"), Rib + 1), TEXT("rib"), RibSweep(), Solid, RadialPlane(Bearing, Plan::RibHalf)));
 				Out.Add(Drawn(FString::Printf(TEXT("rib.%02d.shoe"), Rib + 1), TEXT("rib.shoe"), Prism(ShoePlan(Bearing), 0.0, Plan::ShoeTop), Solid));
 			}
 		}

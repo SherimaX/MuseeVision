@@ -101,13 +101,17 @@ namespace Musee::Form::Drawing
 				for (const double Angle : ArcStations(Radius, 0.0, Crown, DefaultChordToleranceMeters))
 				{
 					const double Offset = FMath::Max(0.0, Centre + Radius * FMath::Cos(Angle));
-					Across.Add(Offset);
-					Across.Add(-Offset);
+					if (Offset <= O.SillHalfWidthMeters())
+					{
+						Across.Add(Offset);
+						Across.Add(-Offset);
+					}
 				}
 				return Across;
 			}
-			// A round or segmental head is one arc about a centre on the axis, at or below the springing, with its crown.
-			const double Springing = FMath::Acos(FMath::Clamp(Half / Radius, -1.0, 1.0));
+			// A round or segmental head is one arc about a centre on the axis, at or below the springing, with its crown; where
+			// it springs below the sill, only the part above the sill is the opening's.
+			const double Springing = FMath::Acos(FMath::Clamp(O.SillHalfWidthMeters() / Radius, -1.0, 1.0));
 			const double Crown[1] = {UE_DOUBLE_HALF_PI};
 			for (const double Angle : ArcStations(Radius, UE_DOUBLE_PI - Springing, Springing, DefaultChordToleranceMeters, Crown))
 			{
@@ -258,7 +262,7 @@ namespace Musee::Form::Drawing
 				Span.StationU.Add((*Run)[Index].U);
 				Span.StationAcross.Add(Across((*Run)[Index]));
 			}
-			const double Half = 0.5 * O.WidthMeters;
+			const double Half = O.SillHalfWidthMeters();
 			if (Span.StationAcross[0] > -Half || Span.StationAcross.Last() < Half)
 			{
 				OutWhy = TEXT("a straight passage is wider than the stretch of wall it passes through");
@@ -278,7 +282,8 @@ namespace Musee::Form::Drawing
 				const FFormWallOpening& O = Wall.Openings[Index];
 				const double Half = O.HalfWidthMeters();
 				const double Under = FMath::Min3(Top.At(O.CenterMeters - Half), Top.At(O.CenterMeters), Top.At(O.CenterMeters + Half));
-				if (!(O.WidthMeters > 0.0 && O.SillMeters >= 0.0 && O.HeadMeters > O.SillMeters && O.CrownMeters() < Under - Same))
+				const bool bHeadAboveSill = O.HeadMeters > O.SillMeters || (O.bArched && O.CrownMeters() > O.SillMeters + Same);
+				if (!(O.WidthMeters > 0.0 && O.SillMeters >= 0.0 && bHeadAboveSill && O.CrownMeters() < Under - Same))
 				{
 					OutWhy = FString::Printf(TEXT("opening %d doesn't fit: it needs a width, a head above its sill, and a crown under the wall's top"), Index);
 					return false;
@@ -290,8 +295,8 @@ namespace Musee::Form::Drawing
 				}
 				FOpeningSpan& Span = OutSpans.AddDefaulted_GetRef();
 				Span.Opening = &O;
-				Span.Low = O.CenterMeters - 0.5 * O.WidthMeters;
-				Span.High = O.CenterMeters + 0.5 * O.WidthMeters;
+				Span.Low = O.CenterMeters - O.SillHalfWidthMeters();
+				Span.High = O.CenterMeters + O.SillHalfWidthMeters();
 				if (O.bStraight && !SetOutStraight(O, Runs, Span, OutWhy))
 				{
 					return false;

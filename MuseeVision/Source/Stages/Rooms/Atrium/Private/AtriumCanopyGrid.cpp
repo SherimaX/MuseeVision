@@ -11,6 +11,13 @@
  * A straight member under curved glass bears on it along its middle: each member's top face touches the room face at
  * mid-span, and hangs below it at the nodes by the chord's sagitta. A ring's members, all at one height, are one swept
  * polygon (a closed ring where no rib meets it, one run per bay where the ribs do); every other member is its own bar.
+ *
+ * The glass (§3.4) is cut on the grid: a pane in each triangle of members (at the change from 72 to 36, three to each node
+ * of the ring inside), and in the outermost band one between each two nodes of ring 1 up to the drum. A pane is part of the
+ * sphere between the seam (R 14.000) and the room face (R 14.024), cut on the great circles through its corners' rays, as a
+ * glazier cuts a spherical pane on planes through the centre, so its edges stand square to its glass; each edge stands
+ * back from the member's line by half the silicone joint the drum's panes take (8 mm). It is drawn on the plane tangent to
+ * the sphere at its middle, where its edges are straight, and bent onto the sphere (Form's spherical ground).
  */
 namespace Musee::Atrium
 {
@@ -308,6 +315,112 @@ namespace Musee::Atrium
 				}
 			}
 		}
+
+		/** The ray from the Sphere's centre through a point. */
+		FVector RayThrough(const FVector& Point)
+		{
+			return (Point - SphereCentre()).GetSafeNormal();
+		}
+
+		/** The ray of the canopy's edge at the drum at a bearing, where its room face meets the inner leaf. */
+		FVector DrumEdge(double Bearing)
+		{
+			const FVector2D At = Polar(Plan::BaseInner, Bearing);
+			return RayThrough(FVector(At.X, At.Y, Plan::CanopyMeetsDrum));
+		}
+
+		/** A convex polygon with every edge brought in by the same distance: the glass inside its joints. */
+		TArray<FVector2D> WithinJoints(TConstArrayView<FVector2D> Polygon, double By)
+		{
+			const int32 Count = Polygon.Num();
+			double Area = 0.0;
+			for (int32 Index = 0; Index < Count; ++Index)
+			{
+				Area += FVector2D::CrossProduct(Polygon[Index], Polygon[(Index + 1) % Count]);
+			}
+			const double Inward = Area >= 0.0 ? 1.0 : -1.0;
+			TArray<FVector2D> Out;
+			for (int32 Index = 0; Index < Count; ++Index)
+			{
+				const FVector2D& Here = Polygon[Index];
+				const FVector2D In = (Here - Polygon[(Index + Count - 1) % Count]).GetSafeNormal();
+				const FVector2D Leaving = (Polygon[(Index + 1) % Count] - Here).GetSafeNormal();
+				const FVector2D NormalIn = FVector2D(-In.Y, In.X) * Inward;
+				const FVector2D NormalLeaving = FVector2D(-Leaving.Y, Leaving.X) * Inward;
+				// The corner moves along the bisector of the two edges' inward normals, by the distance over the cosine between.
+				const FVector2D Bisector = (NormalIn + NormalLeaving).GetSafeNormal();
+				Out.Add(Here + Bisector * (By / FVector2D::DotProduct(Bisector, NormalIn)));
+			}
+			return Out;
+		}
+
+		/** One pane between its corners' rays, drawn on the plane tangent to the seam at its middle and bent onto the sphere. */
+		void CanopyPane(TArray<FFormDrawing>& Out, const FString& Name, TConstArrayView<FVector> Rays)
+		{
+			FVector Middle = FVector::ZeroVector;
+			for (const FVector& Ray : Rays)
+			{
+				Middle += Ray;
+			}
+			Middle = Middle.GetSafeNormal();
+			const FVector X = (Rays[0] - Middle * FVector::DotProduct(Rays[0], Middle)).GetSafeNormal();
+			const FVector Y = FVector::CrossProduct(Middle, X);
+			const FVector Origin = SphereCentre() + Middle * Plan::SeamRadius;
+			TArray<FVector2D> Corners;
+			for (const FVector& Ray : Rays)
+			{
+				const FVector OnPlane = SphereCentre() + Ray * (Plan::SeamRadius / FVector::DotProduct(Ray, Middle));
+				Corners.Add(FVector2D(FVector::DotProduct(OnPlane - Origin, X), FVector::DotProduct(OnPlane - Origin, Y)));
+			}
+			FFormExtrusion Glass;
+			Glass.Outline = FFormProfile::Polyline(WithinJoints(Corners, 0.5 * Plan::PaneJoint), true);
+			Glass.DepthMeters = Plan::CanopyRadius - Plan::SeamRadius;
+			FFormDrawing& Drawing = AsGlass(Out.Add_GetRef(Drawn(Name, TEXT("canopy.glass"), MoveTemp(Glass), Solid)));
+			Drawing.Ground = FFormGround::OnSphere(FrameOfAxes(Origin, X, Y), Plan::SeamRadius);
+		}
+
+		/**
+		 * The panes of the band between a ring and the ring inside it: for each inner node, the triangle it makes with the two
+		 * outer nodes it is joined to (two, or three at the change from 72 to 36, each pair a triangle), and the triangle it
+		 * makes with the next inner node and the outer node between them.
+		 */
+		void BandPanes(TArray<FFormDrawing>& Out, int32 Inner)
+		{
+			const int32 Outer = Inner - 1;
+			const bool bFan = NodesOn(Inner) != NodesOn(Outer);
+			int32 Count = 0;
+			auto Add = [&](const FVector& A, const FVector& B, const FVector& C)
+			{
+				const FVector Rays[3] = {RayThrough(A), RayThrough(B), RayThrough(C)};
+				CanopyPane(Out, FString::Printf(TEXT("%s.band-%02d.%03d"), Pieces::Canopy, Inner, ++Count), Rays);
+			};
+			for (int32 Node = 0; Node < NodesOn(Inner); ++Node)
+			{
+				const double Bearing = NodeBearing(Inner, Node);
+				const FVector Here = NodeAt(Inner, Node);
+				const FVector Next = NodeAt(Inner, Node + 1);
+				const double Reach = bFan ? StepOn(Outer) : 0.5 * StepOn(Outer);
+				const int32 First = NodeNear(Outer, Bearing - Reach);
+				const int32 Last = NodeNear(Outer, Bearing + Reach);
+				const int32 Span = (Last - First + NodesOn(Outer)) % NodesOn(Outer);
+				for (int32 Step = 0; Step < Span; ++Step)
+				{
+					Add(NodeAt(Outer, First + Step), NodeAt(Outer, First + Step + 1), Here);
+				}
+				Add(Here, Next, NodeAt(Outer, Last));
+			}
+		}
+
+		/** The outermost band: from each two nodes of ring 1 up to the drum at their bearings. */
+		void RimPanes(TArray<FFormDrawing>& Out)
+		{
+			for (int32 Node = 0; Node < NodesOn(0); ++Node)
+			{
+				const FVector Rays[4] = {RayThrough(NodeAt(0, Node)), RayThrough(NodeAt(0, Node + 1)), DrumEdge(NodeBearing(0, Node + 1)),
+					DrumEdge(NodeBearing(0, Node))};
+				CanopyPane(Out, FString::Printf(TEXT("%s.band-00.%03d"), Pieces::Canopy, Node + 1), Rays);
+			}
+		}
 	}
 
 	void DrawCanopyGrid(TArray<FFormDrawing>& Out)
@@ -320,6 +433,11 @@ namespace Musee::Atrium
 		for (int32 Inner = 1; Inner < Rings(); ++Inner)
 		{
 			Diagonals(Out, Inner);
+		}
+		RimPanes(Out);
+		for (int32 Inner = 1; Inner < Rings(); ++Inner)
+		{
+			BandPanes(Out, Inner);
 		}
 	}
 }

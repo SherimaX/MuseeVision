@@ -22,7 +22,10 @@ struct FFormWallOpening
 	/** The sill above the wall's base, metres; zero for a door, whose opening runs to the floor. */
 	double SillMeters = 0.0;
 
-	/** The head above the wall's base, metres: the lintel's soffit, or the springing of an arched head. */
+	/**
+	 * The head above the wall's base, metres: the lintel's soffit, or the springing of an arched head, which may lie below the
+	 * sill where the wall is the upper course of a block the arch passes through (SillHalfWidthMeters).
+	 */
 	double HeadMeters = 0.0;
 
 	/**
@@ -101,6 +104,28 @@ struct FFormWallOpening
 
 	/** The top of the opening above the wall's base: the crown of an arch, or the lintel's soffit. */
 	[[nodiscard]] double CrownMeters() const { return HeadMeters + RiseMeters(); }
+
+	/**
+	 * Half the opening's width at its sill: the jambs', or, where an arch springs below the sill (the upper course of a
+	 * block a segmental arch passes through, whose bed lies above the springing), the arch's half-chord at the sill, where
+	 * its intrados comes down to it.
+	 */
+	[[nodiscard]] double SillHalfWidthMeters() const
+	{
+		const double Half = HalfWidthMeters();
+		if (!bArched || HeadMeters >= SillMeters)
+		{
+			return Half;
+		}
+		const double Radius = IntradosRadiusMeters();
+		const double Below = SillMeters - HeadMeters;
+		if (bPointed)
+		{
+			return FMath::Max(0.0, FMath::Sqrt(FMath::Max(0.0, Radius * Radius - Below * Below)) - Radius + Half);
+		}
+		const double CentreBelow = FMath::Sqrt(FMath::Max(0.0, Radius * Radius - Half * Half));
+		return FMath::Sqrt(FMath::Max(0.0, Radius * Radius - FMath::Square(Below + CentreBelow)));
+	}
 };
 
 /**

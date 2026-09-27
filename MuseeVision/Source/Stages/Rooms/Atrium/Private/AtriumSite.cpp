@@ -6,9 +6,9 @@
  * Hall of Light, and the two vertical ports whose wells it serves), the openings in its shells, the anchors the systems
  * furnish, and the hall with the pieces that bound it.
  *
- * Form's openings are planes: the drum's glazing and the cove are cylindrical bands, declared by their developed size
- * about the axis at their mid-height, the nearest a plane frame can say of them. The wells are Site's boxes about the
- * axis (the class's circle r 2.300 with its rail notches is Site's to make, KIT-2).
+ * The drum's glazing and the cove are bands of the base's inner face, bent round the axis: each is declared on that face
+ * from the door's centre line, its developed width all round. The wells are Site's boxes about the axis (the class's
+ * circle r 2.300 with its rail notches is Site's to make, KIT-2).
  */
 namespace Musee::Atrium
 {
@@ -107,11 +107,16 @@ namespace Musee::Atrium
 			Opening(Out, TEXT("down"), EFormOpeningKind::Port, FrameOfAxes(FVector(0.0, 0.0, Plan::DownPlane), East, -South), Well);
 			Opening(Out, TEXT("up"), EFormOpeningKind::Port, FrameOfAxes(FVector(0.0, 0.0, Plan::UpPlane), East, South), Well);
 
+			// On the inner face at the door's centre line: x along the face the way bearings rise, y up, z out of the hall.
 			const double Round = 2.0 * UE_DOUBLE_PI * Plan::BaseInner;
+			const FVector2D Face = Polar(Plan::BaseInner, Plan::DoorBearing);
+			const FVector2D Round2 = Along(Plan::DoorBearing);
+			auto OnFace = [&Face, &Round2, &Up](double Z) { return FrameOfAxes(FVector(Face.X, Face.Y, Z), FVector(Round2.X, Round2.Y, 0.0), Up); };
 			const double DrumHeight = Plan::CanopyMeetsDrum - Plan::WallTop;
-			Opening(Out, TEXT("drum"), EFormOpeningKind::Glazed, FMuseeFrame(FVector(0.0, 0.0, Plan::WallTop + 0.5 * DrumHeight)),
-				FVector2D(Round, DrumHeight)).Glazing = Surface(TEXT("drum.inner"));
-			Opening(Out, TEXT("cove"), EFormOpeningKind::Housing, FMuseeFrame(FVector(0.0, 0.0, 0.5 * Plan::CoveTop)), FVector2D(Round, Plan::CoveTop));
+			FFormOpening& Drum = Opening(Out, TEXT("drum"), EFormOpeningKind::Glazed, OnFace(Plan::WallTop + 0.5 * DrumHeight), FVector2D(Round, DrumHeight));
+			Drum.Glazing = Surface(TEXT("drum.inner"));
+			Drum.RadiusMeters = Plan::BaseInner;
+			Opening(Out, TEXT("cove"), EFormOpeningKind::Housing, OnFace(0.5 * Plan::CoveTop), FVector2D(Round, Plan::CoveTop)).RadiusMeters = Plan::BaseInner;
 			Opening(Out, TEXT("collar.pocket"), EFormOpeningKind::Housing, FMuseeFrame(FVector(0.0, 0.0, 0.5 * (Plan::PocketBottom + Plan::PocketTop))),
 				FVector2D(2.0 * Plan::PocketOut, 2.0 * Plan::PocketOut));
 		}

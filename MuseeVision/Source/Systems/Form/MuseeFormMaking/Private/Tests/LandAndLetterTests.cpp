@@ -260,6 +260,34 @@ namespace Musee::Form::Tests
 		TestTrue(TEXT("the segmental head has its crown"), bSegmentalCrown);
 		TestTrue(TEXT("the pointed head comes to its point"), bPointedCrown);
 
+		// The upper course of the Atrium's portal (3.5 over its bed at 6.0), which a segmental arch R 5.8 about z 2.2, springing
+		// from jambs ±4.95 at 5.223, passes straight through: it opens on the arch's chord at its bed, ±4.382, up to the crown.
+		FFormWallOpening Through;
+		Through.CenterMeters = 6.05;
+		Through.WidthMeters = 9.9;
+		Through.HeadMeters = 2.2 + FMath::Sqrt(5.8 * 5.8 - 4.95 * 4.95) - 6.0;
+		Through.bArched = true;
+		Through.ArchRadiusMeters = 5.8;
+		Through.bStraight = true;
+		TestEqual(TEXT("an arch springing under the bed opens on its chord there"), Through.SillHalfWidthMeters(), FMath::Sqrt(5.8 * 5.8 - 3.8 * 3.8), 1e-9);
+		FFormWall Course;
+		Course.Plan = FFormProfile::Polyline({FVector2D(0.0, 0.0), FVector2D(12.1, 0.0)}, false);
+		Course.ThicknessMeters = 0.75;
+		Course.HeightMeters = 3.5;
+		Course.Openings = {Through};
+		const TArray<FFormMadePiece> Courses = LandMake(*this, FFormDrawing::Of(TEXT("portal.upper"), TEXT("dress"), Course));
+		if (TestEqual(TEXT("the course is one piece"), Courses.Num(), 1))
+		{
+			LandClosed(*this, TEXT("a course the arch passes through from its bed"), Courses[0], 2);
+			int32 UnderArch = 0;
+			for (const FVector& P : LandPoints(Courses[0]))
+			{
+				const double Across = P.X - Through.CenterMeters;
+				UnderArch += (FMath::Abs(Across) < Through.SillHalfWidthMeters() - LandOnChord && P.Z < Through.HeadAt(Across) - LandOnChord) ? 1 : 0;
+			}
+			TestEqual(TEXT("nothing of the course stands under the arch"), UnderArch, 0);
+		}
+
 		// A lining whose top follows a vault's arc: R 5.42 about (5.0, 2.20), from its springings at 4.1 to its crown.
 		const double Radius = 5.42;
 		const double Half = 5.0;
