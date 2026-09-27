@@ -1705,6 +1705,20 @@
       ],
       "source": "Care",
       "note": "Measured on the Starry Night's canvas face. By day the drum may exceed it (sheet 4): measured and reported, never tuned."
+    },
+    {
+      "surface": "atrium.car.floor",
+      "class": "orientation",
+      "lux": [
+        5,
+        5
+      ],
+      "source": "UseTargets",
+      "when": {
+        "mechanism": "atrium.car.lift",
+        "stop": "cube"
+      },
+      "note": "At the Cube's stop only (−23.600): the Cube's sealed shell during a performance (UseTargets: orientation). Met by the car's light ring at its glimmer (atrium.car.light 0.03), with the Cube's mast pinspots' spill while no work performs. Measured, never tuned; a shortfall is a finding. Entered from the Cube's sheet (the surface is the Atrium's)."
     }
   ],
   "design": [

@@ -194,6 +194,15 @@ def main(room):
             if w.get("material") not in palette and not str(w.get("material")).startswith("todo."):
                 errs.append(f"water {w.get('key')}: material not in palette")
     if "Mechanisms.json" in data:
+        for pf in data["Mechanisms.json"].get("performances", []):
+            for k in ("key", "use", "seconds", "publishes", "requires"):
+                if k not in pf:
+                    errs.append(f"performance {pf.get('key')}: lacks {k}")
+            anchors_used.add(pf.get("use"))
+        for chn in data["Mechanisms.json"].get("channels", []):
+            f = chn.get("follows")
+            if "key" not in chn or not isinstance(f, dict) or set(f) < {"channel", "in", "out"}:
+                errs.append(f"derived channel {chn.get('key')}: needs key and follows{{channel,in,out}}")
         for m in data["Mechanisms.json"]["mechanisms"]:
             for k in ("key", "joint", "body", "axis", "travel", "guard"):
                 if k not in m:

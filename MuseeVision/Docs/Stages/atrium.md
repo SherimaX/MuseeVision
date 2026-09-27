@@ -405,6 +405,8 @@ irises they form one coupling group; Site binds the channels across the seams.
 | `clamp` | −10.825 | 0.290341 | the Cube mast's head in the Cube's ceiling iris (`CubeWay.cpp:17-21`) |
 | `atrium` | 0.000 | 0.536364 | the landing |
 | `neck` | 8.400 | 0.727273 | **home**: in the Sphere's neck, both neck irises shut |
+| `mast` | 11.310 | 0.793409 | the Sphere's mast foot ring just above its bearing dogs (`sphere.mast.dogs`, the Sphere's) |
+| `gate` | 17.400 | 0.931818 | the car waits under the Sphere's platform iris (head 30 mm under its stack) |
 | `sphere` | 20.400 | 1.000000 | eyes at the Sphere's centre; floor top 20.420 level with the platform |
 
 - **Speeds:** on the rails 1.5 m/s, 0.75 m/s² (`MuseePlan.h:204-205`); on the Cube mast (below `clamp`) 1.0 m/s, 0.5 m/s²
@@ -420,11 +422,17 @@ irises they form one coupling group; Site binds the channels across the seams.
 | `atrium.call` | "Call the car" (the car isn't here or coming) | collar iris open 4.0 s → move `atrium` (≈ 7.6 s) → car and landing leaves open 1.5 s: ≈ 13 s |
 | (automatic) | home: open at the Atrium, nobody within r 3.500 (or off the floor) for 12 s | leaves shut 1.5 s → move `neck` → collar iris shut 4.0 s |
 | `atrium.car.panel` at `atrium` | "Down to the Cube" (`atrium.down` mated) | leaves shut → `cube.up.closure` → 1 (4.0 s, while descending; the car waits at −7.750 if not yet open) → move `clamp` → clamp (→ 0.378, 2.5 s) → move `cube` on the mast (≈ 14.8 s) → `atrium.car.light` → 0.03 (2.5 s): ≈ 25 s |
-| `atrium.car.panel` at `atrium` | "Up to the Sphere" (requires `atrium.up` mated) | leaves shut → move `neck` → collar iris shut 4.0 s → `sphere.neck.closure` → 1 (4.0 s) → `sphere.platform.closure` → 1 (while rising) → move `sphere` (≈ 10 s) → car leaves open: ≈ 27 s |
+| `atrium.car.panel` at `atrium` | "Up to the Sphere" (requires `atrium.up` mated) | leaves shut → move `neck` → collar iris shut 4.0 s → **the Sphere leg**: `sphere.neck.closure` → 1 (4.0 s) → move `mast` → `sphere.mast.dogs` → 1 (2.0 s) → move `gate` → `sphere.platform.closure` → 1 (4.0 s) → move `sphere` → `atrium.car.light` → 0.03 (2.5 s, so the car doesn't light the sky) → car leaves open |
 | `atrium.car.panel` at `cube` | "Up to the Atrium" / "Up to the Sphere" (the light is back; no work performs) | light → 1 (2.5 s) → move `clamp` → release (→ 1, 2.5 s) → move `atrium` (leaves open) or on to `neck` and the airlock as above; `cube.up.closure` → 0 behind the car once above −7.450 |
-| `atrium.car.panel` at `sphere` | "Down to the Atrium" (leaves open) | car leaves shut → move `neck` → `sphere.neck.closure` → 0 → collar iris open → move `atrium` → leaves open |
-| `sphere.call` (the Sphere's) | "Call the car" on the platform | the Sphere's neck and platform irises open → move `sphere` → car leaves open |
+| `atrium.car.panel` at `sphere` | "Down to the Atrium" (leaves open) | **the Sphere's descent**: car leaves shut → move `gate` → `sphere.platform.closure` → 0 (4.0 s) → move `mast` → `sphere.mast.dogs` → 0 (2.0 s) → move `neck` → `sphere.neck.closure` → 0 → light → 1 (2.5 s); then collar iris open → move `atrium` → leaves open |
+| `sphere.call` (the Sphere's) at `neck` | "Call the car" on the platform (requires `atrium.up` mated) | the Sphere leg as above, from `sphere.neck.closure` → 1 |
+| `sphere.call` at `sphere` | "Send the car down" (leaves open; as built `ElanElevator.cpp:368-371`) | the Sphere's descent as above, ending at home `neck` |
 
+- **The Sphere's mast foot rides the car:** the ring `sphere.mast.foot` (the Sphere's body; gilt CuSn10 annulus r 0.205–0.400,
+  58 deep) is latched round the car's under-floor seat at car frame −0.158 … −0.100, and follows `atrium.car.height`
+  [0, 0.793409] → [−34.910, 0]. At `mast` its underside is 2 mm over the Sphere's dogs, and the car's first 2 mm of rise sets
+  it on them and releases the latch. The seat carries the latch (Form: a latch ring in `atrium.car` under the floor, inside
+  the seat's −0.160). The car's lowest point is unchanged, so A-4 holds.
 - **Unmated ports:** `atrium.down` unmated: no stop below `atrium`, no "Down to the Cube", "Up to the Sphere" offered at
   once. `atrium.up` unmated: home is `atrium` with the leaves shut, the collar iris stays shut, no stop above `atrium`.
   Both unmated: the car stands at the landing; "Call the car" opens its leaves; no ride verbs.
@@ -612,6 +620,7 @@ closure-at-declared-depth rule.
 - **Unmated states** are part of the design (§2, §6): no well, no ride that way, the iris shut.
 
 **Departures from as-built** (for the owner's review):
+- **The Sphere leg** (ruled with the Sphere's Q-1): the car stops at `mast` while the Sphere's bearing dogs slide under its mast's foot ring, and at `gate` before the platform iris opens (never an open drop beside a visitor). The platform iris shuts behind a descending car, "Send the car down" is restored from the as-built code, and the car's light drops to a glimmer at `sphere`, so it doesn't light the sky.
 - **Schedule corrected to the contract (ST-ATRIUM):** Hang.json's entry for *The Starry Night* no longer carries `centre`,
   `frameOuter` and `frameMoulding`, which the stage contract's Hang fields do not name (Art's reader refuses them). The
   work is placed by `anchor`, `along` 0.290 and `height` 1.012 as §8 says; its centre, outer frame and moulding width stay

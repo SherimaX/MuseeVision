@@ -46,6 +46,16 @@
           "at": 0.727273
         },
         {
+          "stop": "mast",
+          "z": 11.31,
+          "at": 0.793409
+        },
+        {
+          "stop": "gate",
+          "z": 17.4,
+          "at": 0.931818
+        },
+        {
           "stop": "sphere",
           "z": 20.4,
           "at": 1.0
@@ -181,12 +191,28 @@
               "time": 4.0
             },
             {
+              "move": "mast"
+            },
+            {
+              "channel": "sphere.mast.dogs",
+              "to": 1.0,
+              "time": 2.0
+            },
+            {
+              "move": "gate"
+            },
+            {
               "channel": "sphere.platform.closure",
               "to": 1.0,
               "time": 4.0
             },
             {
               "move": "sphere"
+            },
+            {
+              "channel": "atrium.car.light",
+              "to": 0.03,
+              "time": 2.5
             },
             {
               "channel": "atrium.car.doors",
@@ -291,12 +317,28 @@
               "time": 4.0
             },
             {
+              "move": "mast"
+            },
+            {
+              "channel": "sphere.mast.dogs",
+              "to": 1.0,
+              "time": 2.0
+            },
+            {
+              "move": "gate"
+            },
+            {
               "channel": "sphere.platform.closure",
               "to": 1.0,
               "time": 4.0
             },
             {
               "move": "sphere"
+            },
+            {
+              "channel": "atrium.car.light",
+              "to": 0.03,
+              "time": 2.5
             },
             {
               "channel": "atrium.car.doors",
@@ -325,12 +367,33 @@
               "time": 1.5
             },
             {
+              "move": "gate"
+            },
+            {
+              "channel": "sphere.platform.closure",
+              "to": 0.0,
+              "time": 4.0
+            },
+            {
+              "move": "mast"
+            },
+            {
+              "channel": "sphere.mast.dogs",
+              "to": 0.0,
+              "time": 2.0
+            },
+            {
               "move": "neck"
             },
             {
               "channel": "sphere.neck.closure",
               "to": 0.0,
               "time": 4.0
+            },
+            {
+              "channel": "atrium.car.light",
+              "to": 1.0,
+              "time": 2.5
             },
             {
               "channel": "atrium.up.closure",
@@ -369,6 +432,17 @@
               "time": 4.0
             },
             {
+              "move": "mast"
+            },
+            {
+              "channel": "sphere.mast.dogs",
+              "to": 1.0,
+              "time": 2.0
+            },
+            {
+              "move": "gate"
+            },
+            {
               "channel": "sphere.platform.closure",
               "to": 1.0,
               "time": 4.0
@@ -377,9 +451,64 @@
               "move": "sphere"
             },
             {
+              "channel": "atrium.car.light",
+              "to": 0.03,
+              "time": 2.5
+            },
+            {
               "channel": "atrium.car.doors",
               "to": 1.0,
               "time": 1.5
+            }
+          ]
+        },
+        {
+          "use": "sphere.call",
+          "at": "sphere",
+          "verb": "Send the car down",
+          "caption": "The car sinks back into the neck, and the Sphere is yours.",
+          "requires": {
+            "channels": [
+              {
+                "channel": "atrium.car.doors",
+                "atLeast": 1.0
+              }
+            ]
+          },
+          "sequence": [
+            {
+              "channel": "atrium.car.doors",
+              "to": 0.0,
+              "time": 1.5
+            },
+            {
+              "move": "gate"
+            },
+            {
+              "channel": "sphere.platform.closure",
+              "to": 0.0,
+              "time": 4.0
+            },
+            {
+              "move": "mast"
+            },
+            {
+              "channel": "sphere.mast.dogs",
+              "to": 0.0,
+              "time": 2.0
+            },
+            {
+              "move": "neck"
+            },
+            {
+              "channel": "sphere.neck.closure",
+              "to": 0.0,
+              "time": 4.0
+            },
+            {
+              "channel": "atrium.car.light",
+              "to": 1.0,
+              "time": 2.5
             }
           ]
         }
