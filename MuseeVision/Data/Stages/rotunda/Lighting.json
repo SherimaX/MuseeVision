@@ -12,7 +12,7 @@
     {
       "id": "dome.cove.01",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         9.341,
         1.052,
         10.504
@@ -27,7 +27,7 @@
     {
       "id": "dome.cove.02",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         8.873,
         3.105,
         10.504
@@ -42,7 +42,7 @@
     {
       "id": "dome.cove.03",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         7.959,
         5.001,
         10.504
@@ -57,7 +57,7 @@
     {
       "id": "dome.cove.04",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         6.647,
         6.647,
         10.504
@@ -72,7 +72,7 @@
     {
       "id": "dome.cove.05",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         5.001,
         7.959,
         10.504
@@ -87,7 +87,7 @@
     {
       "id": "dome.cove.06",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         3.105,
         8.873,
         10.504
@@ -102,7 +102,7 @@
     {
       "id": "dome.cove.07",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         1.052,
         9.341,
         10.504
@@ -117,7 +117,7 @@
     {
       "id": "dome.cove.08",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         -1.052,
         9.341,
         10.504
@@ -132,7 +132,7 @@
     {
       "id": "dome.cove.09",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         -3.105,
         8.873,
         10.504
@@ -147,7 +147,7 @@
     {
       "id": "dome.cove.10",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         -5.001,
         7.959,
         10.504
@@ -162,7 +162,7 @@
     {
       "id": "dome.cove.11",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         -6.647,
         6.647,
         10.504
@@ -177,7 +177,7 @@
     {
       "id": "dome.cove.12",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         -7.959,
         5.001,
         10.504
@@ -192,7 +192,7 @@
     {
       "id": "dome.cove.13",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         -8.873,
         3.105,
         10.504
@@ -207,7 +207,7 @@
     {
       "id": "dome.cove.14",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         -9.341,
         1.052,
         10.504
@@ -222,7 +222,7 @@
     {
       "id": "dome.cove.15",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         -9.341,
         -1.052,
         10.504
@@ -237,7 +237,7 @@
     {
       "id": "dome.cove.16",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         -8.873,
         -3.105,
         10.504
@@ -252,7 +252,7 @@
     {
       "id": "dome.cove.17",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         -7.959,
         -5.001,
         10.504
@@ -267,7 +267,7 @@
     {
       "id": "dome.cove.18",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         -6.647,
         -6.647,
         10.504
@@ -282,7 +282,7 @@
     {
       "id": "dome.cove.19",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         -5.001,
         -7.959,
         10.504
@@ -297,7 +297,7 @@
     {
       "id": "dome.cove.20",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         -3.105,
         -8.873,
         10.504
@@ -312,7 +312,7 @@
     {
       "id": "dome.cove.21",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         -1.052,
         -9.341,
         10.504
@@ -327,7 +327,7 @@
     {
       "id": "dome.cove.22",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         1.052,
         -9.341,
         10.504
@@ -342,7 +342,7 @@
     {
       "id": "dome.cove.23",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         3.105,
         -8.873,
         10.504
@@ -357,7 +357,7 @@
     {
       "id": "dome.cove.24",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         5.001,
         -7.959,
         10.504
@@ -372,7 +372,7 @@
     {
       "id": "dome.cove.25",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         6.647,
         -6.647,
         10.504
@@ -387,7 +387,7 @@
     {
       "id": "dome.cove.26",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         7.959,
         -5.001,
         10.504
@@ -402,7 +402,7 @@
     {
       "id": "dome.cove.27",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         8.873,
         -3.105,
         10.504
@@ -417,7 +417,7 @@
     {
       "id": "dome.cove.28",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         9.341,
         -1.052,
         10.504
@@ -432,7 +432,7 @@
     {
       "id": "cast.ne.a",
       "type": "track-spot.3000k.12deg",
-      "mount": [
+      "point": [
         -3.93,
         8.429,
         10.6
@@ -447,7 +447,7 @@
     {
       "id": "cast.ne.b",
       "type": "track-spot.3000k.12deg",
-      "mount": [
+      "point": [
         -8.429,
         3.93,
         10.6
@@ -462,7 +462,7 @@
     {
       "id": "cast.se.a",
       "type": "track-spot.3000k.12deg",
-      "mount": [
+      "point": [
         -8.429,
         -3.93,
         10.6
@@ -477,7 +477,7 @@
     {
       "id": "cast.se.b",
       "type": "track-spot.3000k.12deg",
-      "mount": [
+      "point": [
         -3.93,
         -8.429,
         10.6
@@ -492,7 +492,7 @@
     {
       "id": "cast.sw.a",
       "type": "track-spot.3000k.12deg",
-      "mount": [
+      "point": [
         3.93,
         -8.429,
         10.6
@@ -507,7 +507,7 @@
     {
       "id": "cast.sw.b",
       "type": "track-spot.3000k.12deg",
-      "mount": [
+      "point": [
         8.429,
         -3.93,
         10.6
@@ -522,7 +522,7 @@
     {
       "id": "cast.nw.a",
       "type": "track-spot.3000k.12deg",
-      "mount": [
+      "point": [
         8.429,
         3.93,
         10.6
@@ -537,7 +537,7 @@
     {
       "id": "cast.nw.b",
       "type": "track-spot.3000k.12deg",
-      "mount": [
+      "point": [
         3.93,
         8.429,
         10.6
@@ -552,7 +552,7 @@
     {
       "id": "floor.spot.01",
       "type": "track-spot.3000k.38deg",
-      "mount": [
+      "point": [
         9.121,
         1.814,
         10.6
@@ -567,7 +567,7 @@
     {
       "id": "floor.spot.02",
       "type": "track-spot.3000k.38deg",
-      "mount": [
+      "point": [
         7.733,
         5.167,
         10.6
@@ -582,7 +582,7 @@
     {
       "id": "floor.spot.03",
       "type": "track-spot.3000k.38deg",
-      "mount": [
+      "point": [
         5.167,
         7.733,
         10.6
@@ -597,7 +597,7 @@
     {
       "id": "floor.spot.04",
       "type": "track-spot.3000k.38deg",
-      "mount": [
+      "point": [
         1.814,
         9.121,
         10.6
@@ -612,7 +612,7 @@
     {
       "id": "floor.spot.05",
       "type": "track-spot.3000k.38deg",
-      "mount": [
+      "point": [
         -1.814,
         9.121,
         10.6
@@ -627,7 +627,7 @@
     {
       "id": "floor.spot.06",
       "type": "track-spot.3000k.38deg",
-      "mount": [
+      "point": [
         -5.167,
         7.733,
         10.6
@@ -642,7 +642,7 @@
     {
       "id": "floor.spot.07",
       "type": "track-spot.3000k.38deg",
-      "mount": [
+      "point": [
         -7.733,
         5.167,
         10.6
@@ -657,7 +657,7 @@
     {
       "id": "floor.spot.08",
       "type": "track-spot.3000k.38deg",
-      "mount": [
+      "point": [
         -9.121,
         1.814,
         10.6
@@ -672,7 +672,7 @@
     {
       "id": "floor.spot.09",
       "type": "track-spot.3000k.38deg",
-      "mount": [
+      "point": [
         -9.121,
         -1.814,
         10.6
@@ -687,7 +687,7 @@
     {
       "id": "floor.spot.10",
       "type": "track-spot.3000k.38deg",
-      "mount": [
+      "point": [
         -7.733,
         -5.167,
         10.6
@@ -702,7 +702,7 @@
     {
       "id": "floor.spot.11",
       "type": "track-spot.3000k.38deg",
-      "mount": [
+      "point": [
         -5.167,
         -7.733,
         10.6
@@ -717,7 +717,7 @@
     {
       "id": "floor.spot.12",
       "type": "track-spot.3000k.38deg",
-      "mount": [
+      "point": [
         -1.814,
         -9.121,
         10.6
@@ -732,7 +732,7 @@
     {
       "id": "floor.spot.13",
       "type": "track-spot.3000k.38deg",
-      "mount": [
+      "point": [
         1.814,
         -9.121,
         10.6
@@ -747,7 +747,7 @@
     {
       "id": "floor.spot.14",
       "type": "track-spot.3000k.38deg",
-      "mount": [
+      "point": [
         5.167,
         -7.733,
         10.6
@@ -762,7 +762,7 @@
     {
       "id": "floor.spot.15",
       "type": "track-spot.3000k.38deg",
-      "mount": [
+      "point": [
         7.733,
         -5.167,
         10.6
@@ -777,7 +777,7 @@
     {
       "id": "floor.spot.16",
       "type": "track-spot.3000k.38deg",
-      "mount": [
+      "point": [
         9.121,
         -1.814,
         10.6
@@ -792,7 +792,7 @@
     {
       "id": "stair.soffit.01",
       "type": "downlight.3000k.31deg",
-      "mount": [
+      "point": [
         4.114,
         0.542,
         -0.108
@@ -809,7 +809,7 @@
     {
       "id": "stair.soffit.02",
       "type": "downlight.3000k.31deg",
-      "mount": [
+      "point": [
         3.292,
         2.526,
         -0.108
@@ -826,7 +826,7 @@
     {
       "id": "stair.soffit.03",
       "type": "downlight.3000k.31deg",
-      "mount": [
+      "point": [
         1.588,
         3.834,
         -0.108
@@ -843,7 +843,7 @@
     {
       "id": "stair.soffit.04",
       "type": "downlight.3000k.31deg",
-      "mount": [
+      "point": [
         -0.542,
         4.114,
         -0.108
@@ -860,7 +860,7 @@
     {
       "id": "stair.soffit.05",
       "type": "downlight.3000k.31deg",
-      "mount": [
+      "point": [
         -2.526,
         3.292,
         -0.108
@@ -877,7 +877,7 @@
     {
       "id": "stair.soffit.06",
       "type": "downlight.3000k.31deg",
-      "mount": [
+      "point": [
         -3.834,
         1.588,
         -0.108
@@ -894,7 +894,7 @@
     {
       "id": "stair.soffit.07",
       "type": "downlight.3000k.31deg",
-      "mount": [
+      "point": [
         -4.114,
         -0.542,
         -0.108
@@ -911,7 +911,7 @@
     {
       "id": "stair.soffit.08",
       "type": "downlight.3000k.31deg",
-      "mount": [
+      "point": [
         -3.292,
         -2.526,
         -0.108
@@ -928,7 +928,7 @@
     {
       "id": "stair.soffit.09",
       "type": "downlight.3000k.31deg",
-      "mount": [
+      "point": [
         -1.588,
         -3.834,
         -0.108
@@ -945,7 +945,7 @@
     {
       "id": "stair.soffit.10",
       "type": "downlight.3000k.31deg",
-      "mount": [
+      "point": [
         0.542,
         -4.114,
         -0.108
@@ -962,7 +962,7 @@
     {
       "id": "stair.soffit.11",
       "type": "downlight.3000k.31deg",
-      "mount": [
+      "point": [
         2.526,
         -3.292,
         -0.108
@@ -979,7 +979,7 @@
     {
       "id": "stair.soffit.12",
       "type": "downlight.3000k.31deg",
-      "mount": [
+      "point": [
         3.834,
         -1.588,
         -0.108
@@ -996,7 +996,7 @@
     {
       "id": "stair.well",
       "type": "downlight.3000k.31deg",
-      "mount": [
+      "point": [
         0.0,
         0.0,
         -0.29

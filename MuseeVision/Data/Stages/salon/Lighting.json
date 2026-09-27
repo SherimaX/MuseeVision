@@ -36,7 +36,7 @@
     {
       "id": "cove.bay1.north",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         -5.768,
         -6.745,
         6.27
@@ -55,7 +55,7 @@
     {
       "id": "cove.bay1.south",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         -5.768,
         6.745,
         6.27
@@ -74,7 +74,7 @@
     {
       "id": "cove.bay2.north",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         -18.0,
         -6.745,
         6.27
@@ -93,7 +93,7 @@
     {
       "id": "cove.bay2.south",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         -18.0,
         6.745,
         6.27
@@ -112,7 +112,7 @@
     {
       "id": "cove.bay3.north",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         -30.0,
         -6.745,
         6.27
@@ -131,7 +131,7 @@
     {
       "id": "cove.bay3.south",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         -30.0,
         6.745,
         6.27
@@ -150,7 +150,7 @@
     {
       "id": "cove.bay4.north",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         -42.0,
         -6.745,
         6.27
@@ -169,7 +169,7 @@
     {
       "id": "cove.bay4.south",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         -42.0,
         6.745,
         6.27
@@ -188,7 +188,7 @@
     {
       "id": "cove.bay5.north",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         -54.233,
         -6.745,
         6.27
@@ -207,7 +207,7 @@
     {
       "id": "cove.bay5.south",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         -54.233,
         6.745,
         6.27
@@ -226,7 +226,7 @@
     {
       "id": "cove.bay1.east",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         -0.255,
         0.0,
         6.27
@@ -245,7 +245,7 @@
     {
       "id": "cove.bay5.west",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         -59.745,
         0.0,
         6.27
@@ -264,7 +264,7 @@
     {
       "id": "wash.bay1.north",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         -5.65,
         -6.98,
         5.62
@@ -283,7 +283,7 @@
     {
       "id": "wash.bay1.south",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         -5.65,
         6.98,
         5.62
@@ -302,7 +302,7 @@
     {
       "id": "wash.bay2.north",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         -18.0,
         -6.98,
         5.62
@@ -321,7 +321,7 @@
     {
       "id": "wash.bay2.south",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         -18.0,
         6.98,
         5.62
@@ -340,7 +340,7 @@
     {
       "id": "wash.bay3.north",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         -30.0,
         -6.98,
         5.62
@@ -359,7 +359,7 @@
     {
       "id": "wash.bay3.south",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         -30.0,
         6.98,
         5.62
@@ -378,7 +378,7 @@
     {
       "id": "wash.bay4.north",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         -42.0,
         -6.98,
         5.62
@@ -397,7 +397,7 @@
     {
       "id": "wash.bay4.south",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         -42.0,
         6.98,
         5.62
@@ -416,7 +416,7 @@
     {
       "id": "wash.bay5.north",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         -54.35,
         -6.98,
         5.62
@@ -435,7 +435,7 @@
     {
       "id": "wash.bay5.south",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         -54.35,
         6.98,
         5.62
@@ -454,7 +454,7 @@
     {
       "id": "wash.bay1.east",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         -0.02,
         0.0,
         5.62
@@ -473,7 +473,7 @@
     {
       "id": "wash.bay5.west",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         -59.98,
         0.0,
         5.62
@@ -492,7 +492,7 @@
     {
       "id": "wash.cabinet.north",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         -6.0,
         -15.58,
         5.12
@@ -511,7 +511,7 @@
     {
       "id": "wash.cabinet.south",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         -6.0,
         -7.62,
         5.12
@@ -530,7 +530,7 @@
     {
       "id": "wash.cabinet.east",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         -2.02,
         -11.6,
         5.12
@@ -549,7 +549,7 @@
     {
       "id": "wash.cabinet.west",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         -9.98,
         -11.6,
         5.12
@@ -568,7 +568,7 @@
     {
       "id": "work.monet-the-magpie",
       "type": "track-framing.3000k.medium",
-      "mount": [
+      "point": [
         -2.4,
         6.6,
         6.65
@@ -583,7 +583,7 @@
     {
       "id": "work.monet-terrace-sainte-adresse",
       "type": "track-framing.3000k.medium",
-      "mount": [
+      "point": [
         -9.4,
         6.6,
         6.65
@@ -598,7 +598,7 @@
     {
       "id": "work.sisley-flood-port-marly",
       "type": "track-framing.3000k.medium",
-      "mount": [
+      "point": [
         -2.2,
         -6.6,
         6.65
@@ -613,7 +613,7 @@
     {
       "id": "work.monet-women-in-the-garden.a",
       "type": "track-framing.3000k.medium",
-      "mount": [
+      "point": [
         -6.213,
         -6.6,
         6.65
@@ -628,7 +628,7 @@
     {
       "id": "work.monet-women-in-the-garden.b",
       "type": "track-framing.3000k.medium",
-      "mount": [
+      "point": [
         -5.188,
         -6.6,
         6.65
@@ -643,7 +643,7 @@
     {
       "id": "work.pissarro-hoarfrost",
       "type": "track-framing.3000k.medium",
-      "mount": [
+      "point": [
         -9.2,
         -6.6,
         6.65
@@ -658,7 +658,7 @@
     {
       "id": "work.bazille-family-reunion.a",
       "type": "track-framing.3000k.medium",
-      "mount": [
+      "point": [
         -11.35,
         -5.6,
         6.62
@@ -673,7 +673,7 @@
     {
       "id": "work.bazille-family-reunion.b",
       "type": "track-framing.3000k.medium",
-      "mount": [
+      "point": [
         -11.35,
         -6.0,
         6.62
@@ -688,7 +688,7 @@
     {
       "id": "work.monet-impression-sunrise",
       "type": "track-framing.3000k.medium",
-      "mount": [
+      "point": [
         -0.4,
         1.4,
         6.65
@@ -703,7 +703,7 @@
     {
       "id": "work.manet-luncheon-on-the-grass.a",
       "type": "track-framing.3000k.small",
-      "mount": [
+      "point": [
         -6.662,
         -14.4,
         5.4
@@ -718,7 +718,7 @@
     {
       "id": "work.manet-luncheon-on-the-grass.b",
       "type": "track-framing.3000k.small",
-      "mount": [
+      "point": [
         -5.338,
         -14.4,
         5.4
@@ -733,7 +733,7 @@
     {
       "id": "work.manet-olympia",
       "type": "track-framing.3000k.small",
-      "mount": [
+      "point": [
         -3.2,
         -11.6,
         5.4
@@ -748,7 +748,7 @@
     {
       "id": "work.manet-bar-folies-bergere",
       "type": "track-framing.3000k.small",
-      "mount": [
+      "point": [
         -8.8,
         -11.6,
         5.4
@@ -763,7 +763,7 @@
     {
       "id": "work.pissarro-boulevard-montmartre-winter",
       "type": "track-framing.3000k.medium",
-      "mount": [
+      "point": [
         -14.6,
         6.6,
         6.65
@@ -778,7 +778,7 @@
     {
       "id": "work.caillebotte-paris-street-rainy-day.a",
       "type": "track-framing.3000k.medium",
-      "mount": [
+      "point": [
         -18.69,
         6.6,
         6.65
@@ -793,7 +793,7 @@
     {
       "id": "work.caillebotte-paris-street-rainy-day.b",
       "type": "track-framing.3000k.medium",
-      "mount": [
+      "point": [
         -17.31,
         6.6,
         6.65
@@ -808,7 +808,7 @@
     {
       "id": "work.pissarro-boulevard-montmartre-night",
       "type": "track-framing.3000k.medium",
-      "mount": [
+      "point": [
         -21.4,
         6.6,
         6.65
@@ -823,7 +823,7 @@
     {
       "id": "work.monet-gare-saint-lazare",
       "type": "track-framing.3000k.medium",
-      "mount": [
+      "point": [
         -14.2,
         -6.6,
         6.65
@@ -838,7 +838,7 @@
     {
       "id": "work.caillebotte-floor-scrapers",
       "type": "track-framing.3000k.medium",
-      "mount": [
+      "point": [
         -16.8,
         -6.6,
         6.65
@@ -853,7 +853,7 @@
     {
       "id": "work.degas-absinthe",
       "type": "track-framing.3000k.medium",
-      "mount": [
+      "point": [
         -19.4,
         -6.6,
         6.65
@@ -868,7 +868,7 @@
     {
       "id": "work.degas-dance-class",
       "type": "track-framing.3000k.medium",
-      "mount": [
+      "point": [
         -21.6,
         -6.6,
         6.65
@@ -883,7 +883,7 @@
     {
       "id": "work.monet-la-grenouillere",
       "type": "track-framing.3000k.medium",
-      "mount": [
+      "point": [
         -26.8,
         6.6,
         6.65
@@ -898,7 +898,7 @@
     {
       "id": "work.renoir-boating-party",
       "type": "track-framing.3000k.medium",
-      "mount": [
+      "point": [
         -30.0,
         6.6,
         6.65
@@ -913,7 +913,7 @@
     {
       "id": "work.monet-woman-with-a-parasol",
       "type": "track-framing.3000k.medium",
-      "mount": [
+      "point": [
         -33.2,
         6.6,
         6.65
@@ -928,7 +928,7 @@
     {
       "id": "work.renoir-dance-at-bougival",
       "type": "track-framing.3000k.medium",
-      "mount": [
+      "point": [
         -26.8,
         -6.6,
         6.65
@@ -943,7 +943,7 @@
     {
       "id": "work.renoir-bal-du-moulin",
       "type": "track-framing.3000k.medium",
-      "mount": [
+      "point": [
         -30.0,
         -6.6,
         6.65
@@ -958,7 +958,7 @@
     {
       "id": "work.monet-poppy-field",
       "type": "track-framing.3000k.medium",
-      "mount": [
+      "point": [
         -33.2,
         -6.6,
         6.65
@@ -973,7 +973,7 @@
     {
       "id": "work.morisot-harbor-lorient",
       "type": "track-framing.3000k.medium",
-      "mount": [
+      "point": [
         -37.9,
         6.6,
         6.65
@@ -988,7 +988,7 @@
     {
       "id": "work.morisot-summers-day",
       "type": "track-framing.3000k.medium",
-      "mount": [
+      "point": [
         -39.6,
         6.6,
         6.65
@@ -1003,7 +1003,7 @@
     {
       "id": "work.morisot-the-cradle",
       "type": "track-framing.3000k.medium",
-      "mount": [
+      "point": [
         -42.0,
         6.6,
         6.65
@@ -1018,7 +1018,7 @@
     {
       "id": "work.morisot-dining-room",
       "type": "track-framing.3000k.medium",
-      "mount": [
+      "point": [
         -44.2,
         6.6,
         6.65
@@ -1033,7 +1033,7 @@
     {
       "id": "work.cassatt-childs-bath",
       "type": "track-framing.3000k.medium",
-      "mount": [
+      "point": [
         -46.0,
         6.6,
         6.65
@@ -1048,7 +1048,7 @@
     {
       "id": "work.renoir-la-loge",
       "type": "track-framing.3000k.medium",
-      "mount": [
+      "point": [
         -38.4,
         -6.6,
         6.65
@@ -1063,7 +1063,7 @@
     {
       "id": "work.cassatt-in-the-loge",
       "type": "track-framing.3000k.medium",
-      "mount": [
+      "point": [
         -39.6,
         -6.6,
         6.65
@@ -1078,7 +1078,7 @@
     {
       "id": "work.cassatt-blue-armchair",
       "type": "track-framing.3000k.medium",
-      "mount": [
+      "point": [
         -42.4,
         -6.6,
         6.65
@@ -1093,7 +1093,7 @@
     {
       "id": "work.cassatt-boating-party",
       "type": "track-framing.3000k.medium",
-      "mount": [
+      "point": [
         -45.4,
         -6.6,
         6.65
@@ -1108,7 +1108,7 @@
     {
       "id": "work.monet-stacks-of-wheat",
       "type": "track-framing.3000k.medium",
-      "mount": [
+      "point": [
         -52.0,
         -6.6,
         6.65
@@ -1123,7 +1123,7 @@
     {
       "id": "work.monet-bridge-water-lilies",
       "type": "track-framing.3000k.medium",
-      "mount": [
+      "point": [
         -56.6,
         -6.6,
         6.65
@@ -1138,7 +1138,7 @@
     {
       "id": "work.monet-rouen-cathedral-1",
       "type": "track-framing.3000k.medium",
-      "mount": [
+      "point": [
         -52.1,
         6.6,
         6.65
@@ -1153,7 +1153,7 @@
     {
       "id": "work.monet-rouen-cathedral-2",
       "type": "track-framing.3000k.medium",
-      "mount": [
+      "point": [
         -53.2,
         6.6,
         6.65
@@ -1168,7 +1168,7 @@
     {
       "id": "work.monet-rouen-cathedral-3",
       "type": "track-framing.3000k.medium",
-      "mount": [
+      "point": [
         -54.3,
         6.6,
         6.65
@@ -1183,7 +1183,7 @@
     {
       "id": "work.monet-rouen-cathedral-4",
       "type": "track-framing.3000k.medium",
-      "mount": [
+      "point": [
         -55.4,
         6.6,
         6.65
@@ -1198,7 +1198,7 @@
     {
       "id": "work.monet-rouen-cathedral-5",
       "type": "track-framing.3000k.medium",
-      "mount": [
+      "point": [
         -56.5,
         6.6,
         6.65
@@ -1213,7 +1213,7 @@
     {
       "id": "work.salon-1874-case",
       "type": "track-framing.3000k.small",
-      "mount": [
+      "point": [
         -6.1,
         6.6,
         6.65
@@ -1228,7 +1228,7 @@
     {
       "id": "work.degas-little-dancer",
       "type": "track-framing.3000k.small",
-      "mount": [
+      "point": [
         -19.0,
         6.6,
         6.65
@@ -1243,7 +1243,7 @@
     {
       "id": "cabinet.laylight",
       "type": "gap.luminous-ceiling.3000k",
-      "mount": [
+      "point": [
         -6.0,
         -11.6,
         6.0

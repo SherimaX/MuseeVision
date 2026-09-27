@@ -11,16 +11,19 @@ All light in the museum, in real units. Module `MuseeLight` (Runtime), depending
 | `LightLuminaireComponent.h` | `ULightLuminaireComponent`: a catalogue type mounted in a stage, at its catalogue output, switched by `ELightOperation` and dimmed by the channel it follows |
 | `LightOperation.h` | `ELightOperation`: `Always`, `Dusk` (sun down), `Presence` (`Data/Light/Operation.json`) |
 
-The stage dresser (order 40) reads `Data/Stages/<stage>/Lighting.json` and places luminaires at their `Mount`
-anchors, on the moving body named by `body`, aimed by `aim` (else the mount's x axis). A linear type takes the length
-laid from the entry's `length` (metres). Findings: an unknown type, mount, body or operation, a line without length,
-an opening whose weather isn't one of Time's places, and a type that stands unlit.
+The stage dresser (order 40) reads `Data/Stages/<stage>/Lighting.json` and places each luminaire either on its `mount`
+(a Mount anchor's key) or at its `point` (`[x, y, z]` in the stage's frame), never both, on the moving body named by
+`body`. Its light leaves towards `aim`, the point `[x, y, z]` in the stage's frame it is aimed at; a luminaire on a
+mount without an aim shines along the mount's x axis, and one at a point needs its aim. A linear type lies across the
+aim, level where it can (along the stage's x axis when aimed straight up or down), and takes the length laid from the
+entry's `length` (metres). Findings: an unknown type, mount, body or operation, a mount and a point together or
+neither, a point without its aim, a line without length, an opening whose weather isn't one of Time's places, and a
+type that stands unlit.
 
 The renderer's transport stays in `Config/DefaultEngine.ini`, as it is.
 
 ## Later (tier 2, owner Light)
 
-- A `mount` given as a point `[x, y, z]` (the record reader can't read a field that is either a key or a point).
 - Emitters for wallwashers, framers and picture lights, from their photometric files.
 - `M_Light_Diffuser` driven with each luminaire, the Scheme, Commission, daylight coefficients and
   `PredictIlluminance`; targets and design ratios measured; daylight-linked dimming.
