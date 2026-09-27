@@ -24,12 +24,20 @@ namespace Musee::Studio
 		/** The level's long package name, e.g. /Game/Generated/Site/L_Museum. */
 		FString PackageName;
 		TArray<FMuseumStage> Stages;
+
+		/** Where the visit begins, in the museum's frame: a player start with this tag, at this point, facing this way. */
+		FName ArrivalTag;
+		FVector ArrivalMeters = FVector::ZeroVector;
+		double ArrivalFacingDegrees = 0.0;
+
+		/** The game mode the level plays under, or null for the project's default. */
+		UClass* GameMode = nullptr;
 	};
 
 	/** The revision of the museum-level writer, part of the museum level's input hash. */
-	inline constexpr int64 MuseumLevelRevision = 1;
+	inline constexpr int64 MuseumLevelRevision = 2;
 
-	/** The museum level's input hash: the writer's revision and every stage's level and translation. */
+	/** The museum level's input hash: the writer's revision, every stage's level and translation, the arrival and the game mode. */
 	FString HashOf(const FMuseumLevel& Museum);
 
 	/** Writes the museum level, unless the level on disk already carries the same input hash. Stage levels must exist. */

@@ -43,5 +43,28 @@ namespace Musee::Studio
 				UE_LOG(LogMuseeStudio, Error, TEXT("Make: %s failed: %s."), *Package.PackageName, *Package.Why);
 			}
 		}
+		UE_LOG(LogMuseeStudio, Display, TEXT("Make: %d findings."), Findings.Num());
+		for (const FMuseeFinding& Finding : Findings)
+		{
+			UE_LOG(LogMuseeStudio, Error, TEXT("Make: finding: %s"), *Finding.ToString());
+		}
+	}
+
+	void FMakeReport::Append(const FMakeReport& Other)
+	{
+		Packages.Append(Other.Packages);
+		Steps.Append(Other.Steps);
+		Findings.Append(Other.Findings);
+		Cast.PartsBuilt += Other.Cast.PartsBuilt;
+		Cast.TrianglesBuilt += Other.Cast.TrianglesBuilt;
+		Cast.Batches += Other.Cast.Batches;
+		Cast.PeakPhysMemoryMB = FMath::Max(Cast.PeakPhysMemoryMB, Other.Cast.PeakPhysMemoryMB);
+		DerivedData.MeshHits += Other.DerivedData.MeshHits;
+		DerivedData.MeshMisses += Other.DerivedData.MeshMisses;
+		DerivedData.FieldHits += Other.DerivedData.FieldHits;
+		DerivedData.FieldMisses += Other.DerivedData.FieldMisses;
+		DerivedData.CardHits += Other.DerivedData.CardHits;
+		DerivedData.CardMisses += Other.DerivedData.CardMisses;
+		PeakPhysMemoryMB = FMath::Max(PeakPhysMemoryMB, Other.PeakPhysMemoryMB);
 	}
 }

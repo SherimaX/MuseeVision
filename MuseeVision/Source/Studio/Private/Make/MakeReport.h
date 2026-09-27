@@ -4,6 +4,7 @@
 #include "CoreMinimal.h"
 #include "Make/MadePackage.h"
 #include "Make/MakeMeasures.h"
+#include "MuseeFinding.h"
 
 namespace Musee::Studio
 {
@@ -23,12 +24,18 @@ namespace Musee::Studio
 		/** The mesh builds' DDC traffic during the cast step: fetched (hits) against built (misses). */
 		FDerivedDataTally DerivedData;
 		double PeakPhysMemoryMB = 0.0;
+		/** What the make found wrong with what it made: unmade drawings, open shells, unresolved materials. */
+		TArray<FMuseeFinding> Findings;
 
 		int32 Count(EMadeOutcome Outcome) const;
-		bool Succeeded() const { return Count(EMadeOutcome::Failed) == 0; }
+		/** True when every package was made or left unchanged and nothing was found wrong. */
+		bool Succeeded() const { return Count(EMadeOutcome::Failed) == 0 && Findings.IsEmpty(); }
 		double Seconds() const;
 
-		/** Writes the report to LogMuseeStudio: the summary, then every package written or failed. */
+		/** Adds another make's packages, steps, casting and findings to this one. */
+		void Append(const FMakeReport& Other);
+
+		/** Writes the report to LogMuseeStudio: the summary, then every package written or failed, then every finding. */
 		void Log() const;
 	};
 }
