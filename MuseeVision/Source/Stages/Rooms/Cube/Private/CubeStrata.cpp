@@ -78,10 +78,10 @@ namespace Musee::Cube::Strata
 		}
 
 		/** How many of a length fit round the face, whole, so a pattern of that pitch closes on itself. */
-		double RoundPitch(double Pitch)
+		double RoundPitch(double Wanted)
 		{
 			const double Round = 2.0 * UE_DOUBLE_PI * GroundFace;
-			return Round / FMath::RoundToDouble(Round / Pitch);
+			return Round / FMath::RoundToDouble(Round / Wanted);
 		}
 
 		/**
