@@ -209,7 +209,7 @@
       "material": "accent.phoebe",
       "working": "waxed",
       "history": "handled",
-      "note": "Tonight's Ming tables and chairs: the altar table, the scholar's desk and chair, 昌南's table and chairs, 林泉's painting table and chairs. The painting table is huanghuali-type in the collection: phoebe until the palette has it. Role guessed."
+      "note": "Ming tables and chairs in phoebe: the altar table, the scholar's desk and chair, 昌南's table and chairs; the Lingbi rock's stand. Role guessed."
     },
     {
       "surface": "chenghuai.bronze.hardware",
@@ -336,6 +336,55 @@
       "working": "set-in-lime.trodden",
       "history": "foot-worn",
       "note": "花街铺地: river pebbles, tile shards and brick on edge set in lime mortar in patterns, 0.83 wide between bluestone kerbs."
+    },
+    {
+      "surface": "chenghuai.bridge.kerb",
+      "material": "accent.qingshi",
+      "working": "cut",
+      "history": "weathered",
+      "note": "The zigzag bridge's low kerb, 0.10 wide x 0.08 high on both edges of every run (the as-built code's own description; no rail), hosting the hidden-source step lights in its inner face (ruled night light)."
+    },
+    {
+      "surface": "chenghuai.fish-bowl",
+      "material": "accent.stoneware-glazed",
+      "working": "glazed.green-over-brown",
+      "history": "weathered",
+      "note": "The court's fish bowl (鱼缸), turned: dia 1.17, h 0.668, a rolled rim; green glaze thin over the brown body at the rim and foot (Rules board: 天棚 鱼缸 石榴树)."
+    },
+    {
+      "surface": "chenghuai.tub",
+      "material": "accent.stoneware-glazed",
+      "working": "glazed.dark",
+      "history": "weathered",
+      "note": "The pomegranates' two tubs, turned: dia 0.63, h 0.46, a dark glaze, thin at rim and foot."
+    },
+    {
+      "surface": "chenghuai.desk.stoneware",
+      "material": "accent.stoneware-glazed",
+      "working": "glazed",
+      "history": "handled",
+      "note": "The desk things on the scholar's desk and on the painting table: a glazed brush pot and a glazed water dropper (ruled material)."
+    },
+    {
+      "surface": "chenghuai.furniture.huanghuali",
+      "material": "accent.huanghuali",
+      "working": "oiled.waxed",
+      "history": "handled",
+      "note": "林泉's Ming painting table (画案, recessed legs) and its pair of rose chairs (玫瑰椅) in huanghuali (Dalbergia odorifera), as the collection records (ruled)."
+    },
+    {
+      "surface": "chenghuai.lingbi-rock",
+      "material": "accent.lingbi-rock",
+      "working": "as-found",
+      "history": "handled",
+      "note": "The Lingbi scholar's rock on the painting table, 0.32 high, on a carved phoebe stand r 0.11 x 0.03 (chenghuai-lingbi-rock)."
+    },
+    {
+      "surface": "chenghuai.desk.inkstone",
+      "material": "accent.stoneware-glazed",
+      "working": "unglazed.polished",
+      "history": "handled",
+      "note": "The fired-clay inkstone (澄泥砚) on each desk, 0.18 x 0.26 x 0.03, in a phoebe box 0.20 x 0.28 (ruled material: fired clay, unglazed, polished)."
     }
   ]
 }

@@ -134,6 +134,8 @@ Hang `height` is above that floor (for a bed: up the slope from its front edge).
 | `chenghuai.linquan.table` | Mount | (10.650, −40.600, 1.250) | the painting table and chairs (caption) |
 | `chenghuai.jianshan.seat.1`, `chenghuai.jianshan.seat.2`, `chenghuai.jianshan.seat.4`, `chenghuai.jianshan.seat.5` | Seat | seat top z 3.190 at (10.600, −10.224), (9.668, −10.762), (10.600, −12.376), (11.532, −11.838); each facing the pavilion's centre (10.600, −11.300) | the pavilion's four seats (faces k 1, 2, 4, 5) |
 | `chenghuai.pond.water` | Water | (9.603, −29.668, −0.280): the water level at the outline's centroid | the pond |
+| `chenghuai.fish-bowl.water` | Water | (−9.200, −19.200, 0.606): the bowl's water level at its axis | the court's fish bowl |
+| `chenghuai.inner-court.tub.w`, `chenghuai.inner-court.tub.e` | Bed | soil z 0.425 in the tubs at (−11.600, −25.600), (−6.800, −25.600) | the pomegranates |
 | `chenghuai.pond.lotus` | Bed | (9.603, −29.668, −0.280) | the lotus (§7) |
 | `chenghuai.inner-court.bed.nw`, `chenghuai.inner-court.bed.ne`, `chenghuai.inner-court.bed.sw`, `chenghuai.inner-court.bed.se` | Bed | soil z 0.080 at (−12.200, −22.600), (−6.200, −22.600), (−12.200, −15.800), (−6.200, −15.800) | crabapples (north pair), osmanthus (south pair) |
 | `chenghuai.rear-court.pit.w`, `chenghuai.rear-court.pit.e` | Bed | soil z 0.050 at (−16.800, −35.300), (−1.600, −35.300) | the jujubes |
@@ -414,6 +416,15 @@ Paving only in the open courts, cut round every platform's footing, 0.12 deep. C
 | Rear court path | x −20.20 … 1.80, y −36.70 … −38.00 | 0.026 | `chenghuai.brick.on-edge` |
 | Tree pits ×2 | 1.40 square centred (−16.80, −35.30), (−1.60, −35.30) | kerb 0.12 wide to 0.12; soil 0.05 | `chenghuai.stone.kerb`; soil Nature's |
 
+**The court lived in** (Rules board: 天棚 鱼缸 石榴树; `chenghuai_vessels.py:270-281`), turned solids that collide (the visitor walks round):
+- **Fish bowl (鱼缸)** `chenghuai.fish-bowl` on the inner court's crossing, foot on the path top at (−9.20, −19.20, 0.026); profile (r, z)
+  (0, 0.01) (0.34, 0.01) (0.36, 0) (0.40, 0) (0.42, 0.04) (0.50, 0.20) (0.55, 0.42) (0.56, 0.58) (0.575, 0.63) (0.585, 0.655)
+  (0.57, 0.668) (0.545, 0.66) (0.535, 0.60) (0.52, 0.42) (0.46, 0.18) (0.36, 0.06) (0, 0.05): Ø 1.17, h 0.668, rolled rim;
+  water §7.
+- **Two tubs** `chenghuai.tub` on the paving at (−11.60, −25.60) and (−6.80, −25.60), flanking the main hall's steps; profile
+  (0, 0.01) (0.20, 0.01) (0.21, 0) (0.24, 0) (0.25, 0.03) (0.28, 0.20) (0.305, 0.40) (0.315, 0.445) (0.31, 0.46) (0.29, 0.455)
+  (0.285, 0.40) (0.26, 0.22) (0.23, 0.06) (0, 0.05): Ø 0.63, h 0.46; soil at 0.405 above the foot (z 0.425), the pomegranates §7.
+
 ### 3.9 The garden (臥遊)
 - **Ground:** the garden's ground at z 0.02 over x 2.30 … 16.40, y −0.50 … −44.40 with the pond cut out is Nature's
   ground bed `chenghuai.garden.ground` (§7); Form builds the paths, kerbs, platforms, the rockery and the pond basin on it.
@@ -431,7 +442,9 @@ Paving only in the open courts, cut round every platform's footing, 0.12 deep. C
 - **Zigzag bridge** (`:187-213`): points (5.20, −27.90) (7.20, −27.90) (8.20, −26.50) (10.40, −26.50) (11.40, −27.50)
   (13.00, −27.50); slabs `chenghuai.garden.bluestone` 1.00 wide × 0.14, top **0.10**, each run 0.50 past its turns; piers
   `chenghuai.garden.bluestone.submerged` 0.50 square at ≤ 1.60 centres from 0.10 below the local bed to the slab's
-  underside (within r 8.30 of the tribune they stop on the shallow bed, never below −0.50). No rail (Suzhou).
+  underside (within r 8.30 of the tribune they stop on the shallow bed, never below −0.50). No rail (Suzhou); a low
+  kerb `chenghuai.bridge.kerb` 0.10 wide × 0.08 high on both edges of every run (the as-built code's own "low kerb
+  along each side", `ChenghuaiGarden.cpp:189`; clear 0.80 between), hosting the step lights (§4).
 - **Rockery (假山)** `chenghuai.rockery` (`ChenghuaiRockery.cpp:22-172, 289-398`): a height field made a sealed solid.
   Massing 1.2 smoothstep(−0.2, 1.8, −d_foot) + 1.05 smoothstep(−0.4, 1.3, −d_upper) + 0.5 smoothstep(0, 1.4, 3.2 − r_p)
   (d signed distance to the outlines below, r_p distance to the pavilion's centre (10.60, −11.30)); stones a jittered
@@ -573,12 +586,22 @@ path 6, rockery's east foot to walk: (3.699, −8.398) (3.958, −8.383) (4.340,
 - **Hall screens (落地罩)** `chenghuai.screen.phoebe` across the main hall on x −11.15 and −7.25, from y −28.46 to −33.35,
   floor 0.75 to 4.63: end posts 0.09; fretwork legs 0.55 (step brocade) on solid bases 0.42; a frieze 0.50 (lantern
   lattice) under a head 0.07; grid spandrels 0.42 × 0.30 in the upper corners.
-- **Furniture** `chenghuai.furniture` (Ming forms; the loans replace them in polish): altar table (翘头案) x −10.20 …
+- **Furniture** `chenghuai.furniture` (phoebe, Ming forms): altar table (翘头案) x −10.20 …
   −8.20, y −32.54 … −32.96, 0.82 high with everted ends (+0.06); scholar's desk x −4.25 … −2.75, y −1.90 … −2.65, 0.82,
   its chair at (−3.50, −1.55) facing north; 昌南's table x −0.50 … 0.10, y −18.65 … −19.75, 0.80, chairs at (−0.20,
-  −20.15) facing south and (−0.20, −18.25) facing north; 林泉's painting table centred (10.65, −40.60), 1.90 × 0.80 × 0.80,
-  chairs at (10.15, −41.35) and (11.15, −41.35) facing south. Tables: top 0.035, legs 0.045 set in 0.06, aprons, low
+  −20.15) facing south and (−0.20, −18.25) facing north. Tables: top 0.035, legs 0.045 set in 0.06, aprons, low
   stretchers. Chairs (南官帽椅): 0.58 × 0.46, seat 0.50, crest 1.03, S-splat 0.16, stepped stretchers.
+- **林泉's painting table and rose chairs** `chenghuai.furniture.huanghuali` (huanghuali, as the collection records; the
+  real type): a recessed-leg painting table (画案, 夹头榫) centred (10.65, −40.60), 1.90 × 0.80, top 0.80 (0.035 thick,
+  ice-plate edge), round legs Ø 0.05 set 0.10 in from the ends and 0.05 from the sides, a plain apron with spandrels,
+  two stretchers between the legs at each end, no drawers; a pair of rose chairs (玫瑰椅) at (10.15, −41.35) and (11.15,
+  −41.35) facing south: seat 0.57 × 0.44 at 0.50, a straight low back to 0.86 and arms to 0.72, square-framed in round
+  members Ø 0.025, a low openwork rail 0.12 over the seat round back and sides, stepped stretchers, a board seat.
+- **Desk things** on the scholar's desk (top 1.12) and on the painting table (top 1.25): a fired-clay inkstone (澄泥砚)
+  `chenghuai.desk.inkstone` 0.18 × 0.26 × 0.03 in a phoebe box 0.20 × 0.28 × 0.012 (`chenghuai.furniture`), a brush pot
+  r 0.065 × 0.16 and a water dropper r 0.04 × 0.05 `chenghuai.desk.stoneware`. Desk: inkstone at (−3.45, −2.27), pot
+  (−3.10, −2.22), dropper (−3.90, −2.27). Painting table: inkstone (10.85, −40.55), pot (10.45, −40.45), dropper (10.30,
+  −40.70); the **Lingbi rock** (§8) on a phoebe stand r 0.11 × 0.03 at (11.35, −40.45), `chenghuai.lingbi-rock`.
 - **Lanterns (纱灯)**, 17 plain hexagons (`ChenghuaiDisplay.cpp:360-443`): a bronze rod `chenghuai.bronze.hardware` from
   the hook; black-lacquered top plate (R + 0.018, 0.025) and crown (R − 0.05, 0.02), base plate and foot the same
   (`chenghuai.timber.black`); six posts 0.02 square; silk-gauze panels `chenghuai.lantern.silk` 4 mm between the posts
@@ -624,13 +647,17 @@ paving 0.40 square; lattice bars 18 × 24 mm; boards ≤ 0.30 wide. Identical ti
 | `chenghuai.gilt.bud` | the 垂花门's lotus buds | accent.qing-pine-lacquered + gilt.gold-leaf.oil |
 | `chenghuai.timber.rafter` | rafters, boarding, eave boards, unpainted purlins | accent.chinese-fir-guangqi |
 | `chenghuai.timber.garden` | all garden timber | accent.chinese-fir-guangqi |
-| `chenghuai.case.phoebe`, `chenghuai.screen.phoebe`, `chenghuai.furniture` | cases, 花罩, tables and chairs | accent.phoebe |
+| `chenghuai.case.phoebe`, `chenghuai.screen.phoebe`, `chenghuai.furniture` | cases, 花罩, the other tables and chairs, inkstone boxes, the rock's stand | accent.phoebe |
 | `chenghuai.bronze.hardware`, `chenghuai.case.bronze`, `chenghuai.fire-vat`, `chenghuai.south.blind-doors` | knockers, rods; case rails; 太平缸 (polish); the port's blind (on the stand) | bronze.cusn10 |
 | `chenghuai.lattice.paper`, `chenghuai.case.glass` | paper glazing; case glass | glass.low-iron |
 | `chenghuai.case.silk`, `chenghuai.case.silk.ceramics`, `chenghuai.mount.silk`, `chenghuai.lantern.silk` | case silks, scroll mounts, lanterns | accent.silk |
 | `chenghuai.garden.bluestone`, `chenghuai.garden.bluestone.submerged`, `chenghuai.pond.bed`, `chenghuai.shutiao`, `chenghuai.rockery` | garden stone | accent.qingshi |
 | `chenghuai.edge-rock`, `chenghuai.shixiong` | lake rocks | accent.taihu-rock |
 | `chenghuai.garden.path` | 花街铺地 | accent.pebble-mosaic |
+| `chenghuai.bridge.kerb` | the bridge's low kerb | accent.qingshi |
+| `chenghuai.fish-bowl`, `chenghuai.tub`, `chenghuai.desk.stoneware`, `chenghuai.desk.inkstone` | the court's bowl and tubs; desk things | accent.stoneware-glazed |
+| `chenghuai.furniture.huanghuali` | 林泉's painting table and chairs | accent.huanghuali |
+| `chenghuai.lingbi-rock` | the Lingbi rock | accent.lingbi-rock |
 
 ## 4. Light
 
@@ -656,26 +683,30 @@ stops ≥ 0.9 short of the lattice, in 舒卷 within 0.15 of it (the cases are 4
 never stands north of east–west). Under the `ephemeris` model (winter noon ≈ 26.6° at 40° N) sun can reach ≈ 5 m into 澄懷堂's open bay and
 the west end of 舒卷; Art.WithinCare decides, and the answer is the hang or which door pair stands open, never a blind.
 
-**Luminaires** (Lighting.json; 112; no output values are set here)
+**Luminaires** (Lighting.json; 145; no output values are set here)
 
 | Ids | Type | Count / extent | Point and aim | Operation |
 |---|---|---|---|---|
-| `case.linchi`, `case.thousand-li`, `case.qingming` | `gap.case-linear.3000k` | 3 runs of 15.08, 13.28, 6.08 | under each slanted case's rear lamp rail, z 1.474, 0.065 in from the wall; aim the bed's centre line (z 1.283) | presence |
-| `case.tianqing`, `case.changnan` | `gap.case-linear.3000k` | 2 runs of 8.26 | behind the canopy baffle (z 2.764, 0.075 inside the glass); aim the back silk at z 1.60 | presence |
-| `case.hall.west/.centre/.east` + `.low` | `gap.case-linear.3000k` | 6 runs (1.56, 1.46, 1.86) | canopy (z 4.304) and deck lip (z 0.970), y −33.875; aim the scroll's middle / lower part | presence |
-| `case.qingbi.back/.side`, `case.tingyun.back/.side` + `.low` | `gap.case-linear.3000k` | 8 runs (0.96, 1.06, 1.36, 1.06) | canopy z 3.574 and lip z 0.720; aim the scroll | presence |
+| `case.linchi`, `case.thousand-li`, `case.qingming` | `case-linear.3000k` | 3 runs of 15.08, 13.28, 6.08 | under each slanted case's rear lamp rail, z 1.474, 0.065 in from the wall; aim the bed's centre line (z 1.283) | presence |
+| `case.tianqing`, `case.changnan` | `case-linear.3000k` | 2 runs of 8.26 | behind the canopy baffle (z 2.764, 0.075 inside the glass); aim the back silk at z 1.60 | presence |
+| `case.hall.west/.centre/.east` + `.low` | `case-linear.3000k` | 6 runs (1.56, 1.46, 1.86) | canopy (z 4.304) and deck lip (z 0.970), y −33.875; aim the scroll's middle / lower part | presence |
+| `case.qingbi.back/.side`, `case.tingyun.back/.side` + `.low` | `case-linear.3000k` | 8 runs (0.96, 1.06, 1.36, 1.06) | canopy z 3.574 and lip z 0.720; aim the scroll | presence |
 | `spot.ru-basin` | `track-spot.3000k.12deg` | 1 | on the 天青 track (−16.650, −19.200, 3.170); aim the basin (−18.200, −19.200, 1.450) | presence |
-| `wash.linchi.s.01…14` | `track-wallwasher.3000k` | 14 on a black track x −19.60 … −2.90, y −4.95, z 3.02 | aim the south wall over the case (x, −0.515, 1.90) | presence |
-| `wash.linchi.n.01…07` | `track-wallwasher.3000k` | 7, same x, y −0.85, z 3.02 | aim the lattice front (x, −5.20, 1.20) | presence |
-| `wash.tianqing.01…07` / `wash.changnan.01…07` | `track-wallwasher.3000k` | 7 + 7 on x −16.65 / −1.75, y −23.30 … −15.10, z 3.17 | aim the wall case's glass (−19.60 / 1.20, y, 2.00) | presence |
-| `wash.hall.01…08` | `track-wallwasher.3000k` | 8, x −13.70 … −4.70, y −28.70, z 4.45 | aim the case wall (x, −33.80, 2.60) | presence |
-| `wash.qingbi.s.01…02`, `wash.qingbi.e.01…03` | `track-wallwasher.3000k` | 2 (x −16.90 … −15.00, y −29.25, z 3.45) + 3 (x −15.00, y −29.70 … −32.80, z 3.70) | aim the back case (x, −32.95, 2.00) / the side case (−16.75, y, 2.00) | presence |
-| `wash.tingyun.s.01…02`, `wash.tingyun.w.01…03` | `track-wallwasher.3000k` | 2 (x −3.40 … −1.50) + 3 (x −3.40) | aim (x, −32.95, 2.00) / (−1.65, y, 2.00) | presence |
-| `wash.shujuan.01…17` | `track-wallwasher.3000k` | 17, x −19.60 … 1.20, y −40.10, z 3.02 | aim the north wall (x, −44.385, 2.00) | presence |
-| `wash.linquan.01…05` | `track-wallwasher.3000k` | 5, x 7.50 … 13.80, y −38.90, z 3.25 | aim the back wall (x, −42.10, 1.80) | presence |
-| `lantern.*` | `gap.lantern.2200k` | 17 | the lamp at the lantern's centre (below); aim straight down | dusk |
+| `wash.linchi.s.01…14` | `track-wallwasher.3000k` | 14 on a black track x −19.60 … −2.90, y −4.95, z 3.02 | aim the south wall over the case (x, −0.515, 1.90) | always |
+| `wash.linchi.n.01…07` | `track-wallwasher.3000k` | 7, same x, y −0.85, z 3.02 | aim the lattice front (x, −5.20, 1.20) | always |
+| `wash.tianqing.01…07` / `wash.changnan.01…07` | `track-wallwasher.3000k` | 7 + 7 on x −16.65 / −1.75, y −23.30 … −15.10, z 3.17 | aim the wall case's glass (−19.60 / 1.20, y, 2.00) | always |
+| `wash.hall.01…08` | `track-wallwasher.3000k` | 8, x −13.70 … −4.70, y −28.70, z 4.45 | aim the case wall (x, −33.80, 2.60) | always |
+| `wash.qingbi.s.01…02`, `wash.qingbi.e.01…03` | `track-wallwasher.3000k` | 2 (x −16.90 … −15.00, y −29.25, z 3.45) + 3 (x −15.00, y −29.70 … −32.80, z 3.70) | aim the back case (x, −32.95, 2.00) / the side case (−16.75, y, 2.00) | always |
+| `wash.tingyun.s.01…02`, `wash.tingyun.w.01…03` | `track-wallwasher.3000k` | 2 (x −3.40 … −1.50) + 3 (x −3.40) | aim (x, −32.95, 2.00) / (−1.65, y, 2.00) | always |
+| `wash.shujuan.01…17` | `track-wallwasher.3000k` | 17, x −19.60 … 1.20, y −40.10, z 3.02 | aim the north wall (x, −44.385, 2.00) | always |
+| `wash.linquan.01…05` | `track-wallwasher.3000k` | 5, x 7.50 … 13.80, y −38.90, z 3.25 | aim the back wall (x, −42.10, 1.80) | always |
+| `lantern.*` | `lantern.2200k` | 17 | the lamp at the lantern's centre (below); aim straight down | dusk |
+| `step.bridge.1…5` | `gap.step-light.2700k` | 5, one per run at its midpoint, alternate sides | in the kerb's inner face 0.40 off the centre line, z 0.14 (0.04 over the tread, under the kerb's lip); aim the slab 0.20 past the centre line, z 0.10 | dusk |
+| `step.rockery.01…14` | `gap.step-light.2700k` | 14: every fourth riser of the ascent, every second of the descent, alternate sides | in the flanking stone face 0.62 off the path's centre line, 0.20 over the upper tread; aim the path 0.90 further on | dusk |
+| `step.path4.1…3`, `step.fork.1`, `step.court.1…6`, `step.gate.1…3`, `step.yard.1` | `gap.step-light.2700k` | 14 (ruled for the short walks) | flush in kerbs, bed kerbs, the drum's base, the back kerb, a side stone and a threshold (Night, below); aim across the walk's centre line | dusk |
 
-Heads on a track stand at the centres of equal divisions of it. Tracks are the luminaires' own product (black), fixed
+The washers are the rooms' architectural light: `always`, daylight-dimmed by Light (D-006); the works' case runs stay
+presence-linked (dose). Heads on a track stand at the centres of equal divisions of it. Tracks are the luminaires' own product (black), fixed
 under the lintels. **Lanterns** (hook (x, y, z); rod; R × H; lamp z): hall veranda (−10.20 / −8.20, −27.15, 4.90); 0.86;
 0.17 × 0.36; 3.81 · galleries (−13.00 / −5.40, −12.45, 3.20); 0.30; 0.12 × 0.26; 2.72 · side verandas (−15.75 / −2.65,
 −19.20, 3.60); 0.47; 0.15 × 0.32; 2.92 · 臨池 doors (−18.708 / −3.792, −5.58, 3.10); **0.40**; 0.13 × 0.26; 2.52 · 舒卷
@@ -693,8 +724,54 @@ volumes, the invisible guards (`ChenghuaiStructure.cpp:196-241, 448-486`; `cheng
 | `chenghuai.case.silk` (measured on the silk works) | textiles.silk | 50 / 50 | Care |
 | `chenghuai.case.silk` (measured on the paper works) | works-on-paper | 50 / 50 | Care |
 | `chenghuai.case.silk.ceramics` | ceramic-and-glass | 300 recommended, no max | Care |
-| `chenghuai.floor.chiqi`, `chenghuai.floor.chisi` (rooms' walking zones) | circulation.night (a low-light gallery class is asked for, §13) | 50 | UseTargets |
-| `chenghuai.court.paving`, `chenghuai.brick.on-edge`, `chenghuai.porch.paving`, `chenghuai.garden.path`, `chenghuai.garden.bluestone` (after dusk) | exterior-walkway | 5 | UseTargets |
+| `chenghuai.floor.chiqi`, `chenghuai.floor.chisi` (rooms' walking zones) | gallery.low-light (silk, paper, ink) | 50 | UseTargets |
+| `chenghuai.porch.paving`, `chenghuai.court.paving`, `chenghuai.brick.on-edge`, `chenghuai.stone.step`, `chenghuai.garden.path`, `chenghuai.garden.bluestone`, `chenghuai.rockery` (the walks' centre lines, after dusk) | garden.night (after EN 1838's escape-route floor) | ≥ 1 | UseTargets |
+
+**Night: `garden.night`** (≥ 1 lx on a walk's centre line after dusk). The walks are the loop's outdoor centre lines (§10)
+and the courts' and garden's paths (§3.8, §3.9). The design's own places meet it first. The estimate is by distance: a
+design estimate that Light measures, never a setting.
+- Each **lantern** (dusk) holds 1 lx within ≈ 4.0 in plan of its hook where it sees the walk (a small flame-warm source
+  2.5–3.8 up, falling off with the square of the distance).
+- Each **room's lit front** (the washers, `always`: the paper lattice and the open door pair lit from inside) holds 1 lx
+  within ≈ 3.5 of that front.
+- The **Rotunda's lit portal** (its cove and floor light at dusk, seen through 4.00 × 6.50) holds 1 lx within ≈ 6 of the
+  drum.
+
+| Walk | Met by | Estimate |
+|---|---|---|
+| Porch and the gate's front steps (y 5.8 → 0) | the Rotunda's portal | meets |
+| Gate hall and back steps (y 0 → −6.6) | the portal covers to y −0.2; beyond it 6–12 away | below 1 lx from y −0.3 → **step lights** (3) |
+| Entry yard (gate ↔ yard door, garden door ↔ gate) | walk lantern 1 (0.6 outside the garden door) to 4.0 through the door; the back-steps light | the garden-door route meets; the walk to the yard door (x −0.7 … −1.9, 4.2–5.1 from the lantern) is below → **step light** (1) |
+| Front court path (y −8.40) and on to the 垂花门 | 臨池's lit front 3.1 away; its door lanterns; the gallery lanterns 3.8 from the 垂花门's axis | meets (the 垂花门's steps marginally) |
+| Galleries, verandas, corner passages, cross-wall doors | gallery, veranda and hall lanterns; the lit fronts | meets |
+| Inner court cross paths | the side halls' and hall's lit fronts; gallery and hall lanterns | the N–S path from y −14 to −23 and the E–W path from x −12.8 to −5.6 are below → **step lights** (6) |
+| Rear court path (y −37.35) | 舒卷's lit front 2.35 away; its door lanterns | meets |
+| Covered walk | walk lanterns 8.1 apart | meets (≤ 4.05 from one) |
+| Path 0 (moon gate → terrace, with the fork) | walk lantern 4; the flower hall pair | the south branch meets (3.2); the north branch is 4.4–5.6 away → **step light** (1) |
+| Paths 1, 2, 3, 6 | 知魚, flower hall and walk lanterns | meets |
+| Path 4 (walk → the pond's south) | walk lantern 2 covers its first 2.91 | the remaining 8.41 is below → **step lights** (3) |
+| Path 5 and the rockery path to the pavilion | walk lantern 2 at its start; no lantern on the rockery | short → **step lights** |
+| Zigzag bridge | walk lantern 3 and 知魚 at its ends; the middle run 5.3 from both | short → **step lights** |
+
+**Step lights** `gap.step-light.2700k` (33, dusk) have hidden sources and no visible fitting: each is set flush behind a
+louvre in a kerb or edge stone and grazes the walk. Each is taken to hold 1 lx on the centre line within ±2.0 along it,
+so they stand at the fewest that cover each short stretch.
+- Bridge: 5 in the inner face of its low kerb (`chenghuai.bridge.kerb`), one per run at its midpoint on alternate sides,
+  lighting `chenghuai.garden.bluestone`.
+- Rockery: 14 in the flanking stones (`chenghuai.rockery`), at every fourth riser of the steep ascent and every second of
+  the long descent, on alternate sides, lighting the path's treads (`chenghuai.rockery`).
+- Path 4: 3 set flush in its bluestone kerbs (`chenghuai.garden.bluestone`), alternate sides, at equal spacing (2.80) over
+  the 8.41 beyond the lantern's reach, lighting `chenghuai.garden.path`.
+- The fork round 石兄: 1 in the outer kerb of its north branch at (5.30, −39.25), lighting `chenghuai.garden.path`.
+- Inner court: 6 in the faces of the four beds' kerbs (`chenghuai.stone.kerb`), z 0.08: one on each arm of the cross
+  paths and two at the bed corners that face the crossing (the fish bowl stands there), lighting `chenghuai.brick.on-edge`.
+- Gate hall: 1 in the inner face of the east stone drum's base (`chenghuai.stone.base`) for the floor and the sill; 1 flush
+  in the platform's back kerb (`chenghuai.stone.kerb`) for the floor north of the sill; 1 in the east side stone of the back
+  steps (`chenghuai.stone.step`) for the steps. None stands at, on or over the gate's door, and there is no lantern.
+- Entry yard: 1 in the yard-side face of the yard door's stone threshold (`chenghuai.stone.step`), lighting
+  `chenghuai.court.paving`.
+- Points and aims are in Lighting.json, each with its `host` and lit `surface`. With these, every walk meets 1 lx by
+  estimate; Light measures (ruled, §13 (b)).
 
 **Design order** (Lighting.json `design`; measured, never tuned): in every scroll room the works on their silk are the
 brightest reflecting surfaces, 2–5 × the plastered walls, day and night; the walls over the dark oiled floor; by day the
@@ -720,9 +797,12 @@ a walked path. Polish: the 屏门 opens on festival solar terms (Rules board), a
   −0.28; depth 0.18 … 0.57 (0.57 where deep); freeboard 0.30 (the ground at 0.02); `water.still`, still and clear over
   the bluestone bed (palette); no flow. Old optics (absorption 0.06, 0.02, 0.06 and scattering 0.006, 0.014, 0.008 per
   metre, `chenghuai.py:407-427`) are evidence, not a knob.
-- **Ground beds** (Nature makes the soil surface and grows its cover; Matter's substance `topsoil`, history
-  `ground.trodden`): `chenghuai.garden.ground` (the garden's ground at 0.02, pond cut out, under moss *Haplocladium
-  microphyllum*); the four inner-court beds (soil 0.08) and the two rear-court pits (0.05) bare under their trees.
+- **Fish bowl water** `chenghuai.fish-bowl`: anchor `chenghuai.fish-bowl.water`; a circle r 0.532 at the level z 0.606
+  (0.58 above the bowl's foot); depth 0.53; freeboard 0.088 to the rim; `water.still`, still and clear.
+- **Ground beds** (Nature makes the form; the palette owns the material): each bed entry carries `"ground"` with
+  `accent.site-geology` (topsoil) and its working and history. They are `chenghuai.garden.ground` (the garden's ground at
+  0.02 with the pond cut out, topsoil under moss *Haplocladium microphyllum*), the four inner-court beds (soil 0.08) and
+  the two rear-court pits (0.05), bare under their trees, and the two pomegranate tubs (soil 0.425, potted).
 - **Plants** (Planting.json; crown sizes as built):
 
 | Bed | Species | Count | Height / crown radii |
@@ -737,9 +817,10 @@ a walked path. Polish: the 屏门 opens on festival solar terms (Rules board), a
 | `chenghuai.garden.bamboo.east` / `chenghuai.garden.bamboo.north-west` / `chenghuai.garden.bamboo.north-east` | *Phyllostachys aureosulcata* | 14 / 18 / 21 culms | east by the pond x 15.53 … 16.07, y −23.35 … −28.14; behind the flower hall x 5.33 … 10.01 and 10.36 … 15.75, y −42.81 … −44.10 (culm points `chenghuai_works.py:454-463`, y + 17) |
 | `chenghuai.pond.lotus` | *Nelumbo nucifera* | 6 | (7.60, −33.90) Ø 0.9, (8.60, −32.80) 0.7, (6.80, −32.30) 0.8, (11.00, −24.50) 0.9, (9.80, −23.90) 0.7, (11.80, −25.50) 0.6; flowers on the first and fourth |
 | `chenghuai.garden.ground` | *Haplocladium microphyllum* (moss) | cover | the whole ground bed; growth spaces from Form's free space |
+| `chenghuai.inner-court.tub.w`, `chenghuai.inner-court.tub.e` | *Punica granatum* (石榴, in the glazed tubs of §3.8) | 1 each | 1.9 / 0.75 × 0.55 |
 
 - All outdoors: history `weathered`, museum weather, wind in the bamboo and willow. Bank plants (*Acorus calamus*,
-  *Iris sanguinea*), 石兄's and the rockery's dissolution, the Lingbi rock, the pomegranates in their tubs: polish.
+  *Iris sanguinea*) and the dissolution of 石兄 and the rockery: polish.
 - **Precipitation** through Court tops and Outdoors (§5).
 
 ## 8. Art
@@ -812,7 +893,9 @@ chenghuai-yingbi (the screen wall's heart `chenghuai.screen-wall.heart`, 1.8 × 
 south); chenghuai-altar-table, chenghuai-scholars-desk, chenghuai-painting-table (the furniture of §3.10 at their Mount
 anchors). **石兄** chenghuai-shixiong: a Taihu rock 3.00 high, grown as built by Nature's Rock (seed 731) and set by Art
 on `chenghuai.garden.shixiong` in `chenghuai.shixiong`, framed by the moon gate on its axis (care stone-and-bronze).
-The Lingbi rock waits for polish. **No wall labels** ("a literati house names itself"): captions on look.
+**The Lingbi rock** chenghuai-lingbi-rock (`chenghuai.lingbi-rock`, `accent.lingbi-rock`): 0.32 high, grown as built by
+Nature's Rock (seed 732) and set by Art on its phoebe stand at (11.35, −40.45, 1.28) on the painting table
+(`chenghuai.linquan.table`); care stone-and-bronze. **No wall labels** ("a literati house names itself"): captions on look.
 
 ## 9. Sound
 - **Rooms** (Enclosed): small and dry (臨池 ≈ 17.9 × 4.8 × 3.5; 澄懷堂 10.0 × 6.1, open to 7.75), from Matter: lime
@@ -875,15 +958,16 @@ Paths relative to `windows\`. Re-express, never copy; **y + 17.000** throughout.
    rails → `bronze.cusn10` patinated (Story: gate hardware, case frames); lantern panels silk gauze (纱灯; as built
    silk; draft oiled paper); pond bank and bed `accent.qingshi` (palette: clear over bluestone; draft puddled clay);
    gate hall floor 城砖 (Materials board; draft 尺四).
-4. **Light:** the draft's new records become catalogue gaps `gap.case-linear.3000k` and `gap.lantern.2200k`; every
-   head listed with a point and an aim point; operations presence / dusk (D-006). Care targets from Care.json:
-   ceramics 300 recommended (draft 200 from the Rooms board); rooms' floors `circulation.night` 50 (the draft's new
-   low-light class is still asked for).
+4. **Light:** the draft's new records are the ruled catalogue types `case-linear.3000k` and `lantern.2200k`; every
+   head is listed with a point and an aim point; operations always / presence / dusk (D-006). Care targets come from
+   Care.json: ceramics 300 recommended (the draft took 200 from the Rooms board). Rooms' floors use the ruled
+   `gallery.low-light` (50); the walks use the ruled `garden.night` (≥ 1), with 33 step lights at the bridge, the
+   rockery and the short walks (the draft left the night walks unlit).
 5. **Row-door lanterns' rods 0.40** (draft and as built 0.52): the lantern's foot hung 1.93 over the 0.30 platforms.
-6. **Deferred:** the fish bowl, the pomegranates' tubs and the pomegranates (the palette has no glazed stoneware), the
-   Lingbi rock and the desk things (polish). Furniture is built tonight in phoebe (the draft deferred it; 昌南's table
-   carries the handling copy).
-7. **Ground:** Nature's ground beds (soil and moss) instead of a Form sheet in "garden-soil" (no palette key).
+6. **Built tonight** (the draft deferred them): the furniture (phoebe; the painting table and chairs in huanghuali), the
+   fish bowl, tubs and pomegranates and the desk things (glazed stoneware), and the Lingbi rock (Lingbi stone). The
+   painting table's brush pot moves to (10.45, −40.45): as built it overlapped the Lingbi rock's stand.
+7. **Ground:** Nature's ground beds in `accent.site-geology` (topsoil), not a Form sheet in "garden-soil".
 8. **Path 0's fork round 石兄** given exactly (circle r 1.475 about the rock; draft "forks at x 4.3 … rejoins at 6.3").
 9. **Hang:** image positions computed from the as-built rule (hanging scrolls' `along`/`height`; handscrolls on tilted
    bed anchors).
@@ -900,21 +984,21 @@ rafters, slabs, tile rows with lips, ridges and scorpion tails, gables with 墀�
 all four lattices); the gate's joinery (drums as blocks), the 垂花门 (plain discs), the 影壁 (plain heart), every wall
 with its openings, copings and leak windows, the moon gate, the porch; courts, paths, bed kerbs and pits; the garden's
 pond basin and water, edge-rock prisms, paths with the fork, the bridge, the rockery mass (no hollows or peaks), the
-pavilion with seats, the terrace; cases, 花罩, furniture, lanterns, plaque boards; the luminaires of §4; the 14 scrolls
-in their mounts, 8 turned vessels, 5 scans and the handling copy; 石兄 if Nature's Rock is ready; trees, bamboo, lotus,
-moss; precipitation; footfalls.
+pavilion with seats, the terrace, the bridge's kerb; cases, 花罩, furniture (the painting table and chairs in
+huanghuali), desk things, the fish bowl and tubs, lanterns, plaque boards; the luminaires of §4 with the step lights;
+the 14 scrolls in their mounts, 8 turned vessels, 5 scans and the handling copy; 石兄 and the Lingbi rock if Nature's
+Rock is ready; trees, bamboo, lotus, pomegranates, moss; the pond and the fish bowl's water; precipitation; footfalls.
 
 **Waits for polish:** characters (plaques, couplet, 影壁心, 书条石, 屏门 discs), the 门墩 lions and carved aprons (Form's
 Ornament from evidence, never a flat texture); 包袱 scenes and rafter-end painting; drip and end tiles; Taihu dissolution
-(石兄, rockery peaks and hollows); the Lingbi rock and desk things; the fish bowl, tubs and pomegranates; the 天棚, the
-bronze 太平缸 `chenghuai.fire-vat`, the rear court's stone benches, bank plants, seasonal flowers; the 屏门's festival
-opening; the hold intent; recorded sound; falls on the courts.
+(石兄, rockery peaks and hollows); the goldfish; paper, brushes and paperweights on the desks; a cane seat for the rose
+chairs; the 天棚, the bronze 太平缸 `chenghuai.fire-vat`, the rear court's stone benches, bank plants, seasonal flowers;
+the 屏门's festival opening; the hold intent; recorded sound; falls on the courts.
 
 **Risks (watch tonight's checks):** light through paper needs Light's translucent transport (never a glow); annual dose
-for silk (15,000 lx·h) is tier 2: presence-linked case light must dim empty rooms; **after dusk** the rockery path, the
-bridge, the courts' middles and the porch have no luminaire (no lantern at the gate, the owner's rule): exterior-walkway
-(5) and escape-route (10.76) may fail there except by moonlight, and the answer is more lanterns at the design's
-places, never fill; flat courts pond after rain (real courts fall ≈ 1 % to drains; the owner decides); the rockery's
+for silk (15,000 lx·h) is tier 2: presence-linked case light must dim empty rooms; **after dusk** `garden.night` rests on
+distance estimates (lanterns, lit fronts, the portal, 33 step lights; §4): Light measures it, and there is no lantern at
+the gate (the owner's rule); flat courts pond after rain (real courts fall ≈ 1 % to drains; the owner decides); the rockery's
 short ascent (0.15 risers on 0.22) is Nature's ground, not a Form stair; *Osmanthus fragrans* is not hardy in Beijing
 (kept in tubs there); ≈ 50,000 tiles must be instanced for Nanite; the Rotunda must stay resident for the borrowed view.
 
@@ -930,32 +1014,34 @@ short ascent (0.15 risers on 0.22) is Nature's ground, not a Form stair; *Osmant
   the **rockery body** worked "as found" (outside workingsByEra).
 - `accent.taihu-rock` for the **pond's edge rocks** (roles: 石兄 and peaks).
 - `accent.silk` for the **case silks, scroll mounts and lantern gauze** (roles name the Salon only).
-- `accent.phoebe` for the **furniture**, including the painting table and chairs, which the collection records as
-  **huanghuali-type hardwood** (*Dalbergia odorifera*): phoebe tonight until the palette has it.
+- `accent.phoebe` for the **other furniture**, the inkstone boxes and the rock's stand (roles name the screens and case
+  plinths). Ruled keys used: `accent.huanghuali` (the painting table and rose chairs), `accent.stoneware-glazed` (the
+  fish bowl, tubs and desk things, the inkstone worked `unglazed.polished`), `accent.lingbi-rock`.
 - `accent.qing-pine-lacquered` + `gilt.gold-leaf.oil` for the **lotus buds** (as built gilt brass); `bronze.cusn10`
   patinated for **knockers, rings, lantern rods and case rails** (Story: gate hardware, case frames; the boards'
   "brass").
-- Ground: Nature's soil uses Matter's substance `topsoil` (family living), which has no palette key; confirm Nature may
-  make ground beds as it makes water.
-- **Missing from the palette:** glazed stoneware (the court's fish bowl and tubs, deferred); huanghuali (above).
-- **Care classes guessed:** the furniture works' captions use `oil-and-tempera` (waxed wood has no class); 石兄 and the
-  书条石 `stone-and-bronze`; the 影壁心 (fired brick) and the sancai horse (lead-glazed earthenware) `ceramic-and-glass`.
+- Ground beds: `accent.site-geology` (topsoil), ruled, with workings `topsoil.under-moss`, `topsoil.bare`,
+  `topsoil.potted` (its classical working is "absent": new workings for Matter).
+- `accent.qingshi` for the **bridge's low kerb** (hosting the step lights).
+- **Care classes guessed:** the furniture works' captions use `oil-and-tempera` (waxed wood has no class); 石兄, the Lingbi
+  rock and the 书条石 `stone-and-bronze`; the 影壁心 (fired brick) and the sancai horse (lead-glazed earthenware)
+  `ceramic-and-glass`.
 - Workings written as compound strings: `rubbed.dry-laid`, `hairline-jointed`, `lime-pointed`, `laid-on-edge`,
   `square.ground-joints`, `tung-oil-soaked`, `ground-joints`, `laminated.mulberry-paper.uv-filtering`,
   `laminated.anti-reflective`, `ma-hui.whiting` and others in Finishes.json.
 
 **Catalogue gaps** (Light):
-- `gap.case-linear.3000k`: a linear LED vitrine luminaire for museum cases (UV/IR-free LED, CRI > 95, dimmable, baffled
-  lens; e.g. a case-lighting strip system of the kind made for museum vitrines), in the canopies, deck lips and lamp
-  rails of the 13 cases (19 runs).
-- `gap.lantern.2200k`: a warm LED filament lamp (2200 K, dimmable) inside each silk-gauze lantern (17).
-- A **low-light gallery use class** in UseTargets.json for rooms holding 50-lx works (circulation's 100 lx would outshine
-  the silk); `circulation.night` (50) is used meanwhile.
+- `gap.step-light.2700k`: a hidden-source step light recessed behind a louvre in a stone face (a small warm-white LED
+  step/wall light with a glare-free louvre, of the kind set into stair strings and garden walls), 19: the bridge's kerb
+  (5) and the rockery path's flanking stones (14). The ruled types `case-linear.3000k` (19 runs) and `lantern.2200k`
+  (17) are used as catalogue keys.
 
 **Conflicts and questions for the Architect:**
 (a) **Porch vs door** (resolved here, no change to the Rotunda): walls moved out to |x| 2.35 … 2.95; confirm Site's
 outer surround is ≤ 0.35 wide beyond the jambs, and that the Rotunda's exterior dress (polish) stops at the walls.
-(b) The draft's 50-lx rooms need a use class (above).
+(b) **Night walks** (ruled, closed): hidden-source step lights set flush in kerbs or edge stones, at the fewest that meet
+1 lx, wherever the estimate fell short: path 4, the fork round 石兄, the inner court's cross paths, the gate hall and
+the entry yard (14 more, §4). Still no lantern at the gate.
 (c) Materials board "bamboo blinds keep direct sun off every work": no blinds (D-014); care by the hang and UV glazing.
 (d) Materials board "plank shutters close the lattice at night": not built (no mechanism tonight).
 (e) Materials board draws the garden roofs 歇山 / 攒尖; as built they are rolled (the flower hall, water pavilion) and a
@@ -974,13 +1060,18 @@ by the board's willow and pine (plums kept).
   垂花门, walls and garden are their own drawings.
 - **The Classical Hall is beneath.** Nothing below z −0.50 within x ±4.20 north of the drum or within r 8.30 of
   (0, −22.30); the pond's bed and the bridge piers obey it there.
-- **Nature makes the ground and the water.** The garden's ground, the court beds' and pits' soil (Nature's beds), the
-  pond's water (Planting.json); Form makes the pond basin, kerbs, paths, platforms and rockery.
+- **Nature makes the ground and the water.** The garden's ground, the court beds', pits' and tubs' soil (Nature's beds,
+  material `accent.site-geology` in each bed's `ground`), the pond's and the fish bowl's water (Planting.json); Form
+  makes the pond basin, kerbs, paths, platforms, rockery, the bowl and tubs.
+- **Night.** The washers are `always` (the rooms' lit fronts light the courts), the lanterns and step lights `dusk`;
+  the 33 step lights sit hidden in the bridge's new low kerb, the rockery's flanking stones and the kerbs and edge stones
+  of the short walks (points in Lighting.json).
 - **Hang.** Hanging scrolls hang from the case rails; `along`/`height` place the image, the mount (`chenghuai.mount.silk`)
   is Art's. Handscroll bed anchors are tilted 11°: their z runs up the slope. Building works (影壁心, 书条石, furniture)
   are Form's pieces; Art adds captions only.
 - **Nothing moves; no invisible guards.** The ledge rule holds the edges; collision equals the visible solids.
-- **Lanterns are architecture with a gap lamp.** None at, on or over the gate or the 垂花门; names never over doors.
+- **Lanterns are architecture with a `lantern.2200k` lamp.** None at, on or over the gate or the 垂花门; names never
+  over doors.
 
 **Departures from as-built** (for the owner's review):
 - **Porch walls** move out from |x| 1.90 … 2.50 to 2.35 … 2.95, so the Rotunda's 4.00 door and its surround stand clear
@@ -995,12 +1086,26 @@ by the board's willow and pine (plums kept).
 - **Courts' paving is cut round the platforms** (it ran under them); **no invisible guards**; no glows, post-process volumes
   or per-lamp output values.
 - **Materials follow the Story:** 青白石 porch paving (was 城砖), 城砖 gate hall floor (was 尺四 tiles, per the Materials
-  board), bronze hardware and case rails (was brass), silk-gauze lanterns, bluestone pond bed (was dark stone), phoebe
-  furniture (the painting table's huanghuali waits for a palette key).
+  board), bronze hardware and case rails (was brass, ruled `bronze.cusn10`), silk-gauze lanterns, bluestone pond bed (was
+  dark stone), phoebe furniture.
 - **Light:** listed catalogue heads (wall washers, case runs, one spot, 17 lanterns) replace the as-built soft area
   lights and window glows.
+- **Ruling 1, night light:** the walks hold the ruled `garden.night` (≥ 1 lx on the centre line after dusk). The washers
+  run `always` so the rooms' fronts light the courts at night (as built they lit the rooms day and night). 19 hidden
+  step lights (`gap.step-light.2700k`) sit in a new low kerb on the bridge (0.10 × 0.08, as the as-built code's comment
+  describes) and in the rockery's flanking stones. There is still no lantern at the gate.
+- **Ruling on §13 (b), the short night walks:** 14 more hidden step lights, set flush in kerbs and edge stones at the
+  fewest that meet 1 lx: 3 in path 4's kerbs, 1 at the fork round 石兄, 6 in the inner court's bed kerbs, 3 at the gate
+  hall (the east drum's base, the back kerb, a back-step side stone; no lantern and nothing on or over the door) and 1 in
+  the yard door's threshold. As built, none of these walks had any light.
+- **Ruling 2, ground:** the ground beds are Nature's, in `accent.site-geology` (topsoil); there is no Form earth sheet.
+- **Ruling 4, rooms:** the rooms' floors hold `gallery.low-light` (50 lx, for silk, paper and ink), not `circulation` (100).
+- **Ruling 5, objects restored:** the fish bowl (with water), the pomegranates' tubs, the pomegranates and the desk things
+  in glazed stoneware (a fired-clay inkstone); the painting table and its chairs in huanghuali, built as a recessed-leg
+  画案 and a pair of rose chairs (as built phoebe, and the chairs were official's hat chairs); the Lingbi rock in Lingbi
+  stone. The paper, brushes and paperweights are not built (the palette has no key for them).
 - **Hang:** the Qingming's lead 0.23 (was 0.25; the mount overran its case by 1.7 cm); handscroll widths from the
   catalogue, not the images; turned vessels scaled to the catalogue's sizes.
 - **Planting:** the garden's willow and pine replace the osmanthus stand-ins (plums kept); the crabapples and jujubes are
-  their real species; the fish bowl, tubs and pomegranates wait for polish (no glazed stoneware in the palette).
+  their real species; the pomegranates stand in their tubs (ruling 5).
 - **Door pins plain** (as built they carried characters) and the yard door's leaves green (Names and Plan boards).

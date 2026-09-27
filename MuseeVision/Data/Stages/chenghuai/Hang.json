@@ -919,7 +919,7 @@
       "care": "oil-and-tempera",
       "built": "form",
       "wall": "chenghuai.furniture",
-      "note": "Furniture built by Form tonight in phoebe (sheet section 3.10); Art adds the caption only; the loan replaces it in polish. Care class guessed for waxed wood (flagged in section 13)."
+      "note": "Furniture built by Form tonight in phoebe (sheet section 3.10); Art adds the caption only; Care class guessed for waxed wood (flagged in section 13)."
     },
     {
       "work": "chenghuai-scholars-desk",
@@ -940,7 +940,7 @@
       "care": "oil-and-tempera",
       "built": "form",
       "wall": "chenghuai.furniture",
-      "note": "Furniture built by Form tonight in phoebe (sheet section 3.10); Art adds the caption only; the loan replaces it in polish. Care class guessed for waxed wood (flagged in section 13)."
+      "note": "Furniture built by Form tonight in phoebe (sheet section 3.10); Art adds the caption only; Care class guessed for waxed wood (flagged in section 13)."
     },
     {
       "work": "chenghuai-painting-table",
@@ -960,8 +960,8 @@
       "frame": "none",
       "care": "oil-and-tempera",
       "built": "form",
-      "wall": "chenghuai.furniture",
-      "note": "Furniture built by Form tonight in phoebe (sheet section 3.10); Art adds the caption only; the loan replaces it in polish. Care class guessed for waxed wood (flagged in section 13)."
+      "wall": "chenghuai.furniture.huanghuali",
+      "note": "The painting table (画案) and its pair of rose chairs (玫瑰椅) in huanghuali, built by Form tonight (sheet section 3.10); Art adds the caption only. Care class guessed for oiled and waxed wood (flagged in section 13)."
     },
     {
       "work": "chenghuai-shixiong",
@@ -983,6 +983,27 @@
       "care": "stone-and-bronze",
       "wall": "chenghuai.shixiong",
       "note": "Shixiong: a Taihu rock 3.00 high grown by Nature Rock (seed 731, as built), set 3 m inside the moon gate on its axis, framed as you step through; path 0 divides round it (r 1.475). If Nature Rock is not ready tonight it waits (polish)."
+    },
+    {
+      "work": "chenghuai-lingbi-rock",
+      "source": "assets/collection.json",
+      "anchor": "chenghuai.linquan.table",
+      "centre": [
+        11.35,
+        -40.45,
+        1.28
+      ],
+      "height": 1.28,
+      "size": [
+        null,
+        0.32
+      ],
+      "support": "stone",
+      "frame": "none",
+      "care": "stone-and-bronze",
+      "wall": "chenghuai.lingbi-rock",
+      "stand": true,
+      "note": "On the painting table's east end, on a carved phoebe stand r 0.11 x 0.03 (its top 1.28); the rock 0.32 high, grown by Nature's Rock (seed 732, as built) in accent.lingbi-rock."
     }
   ]
 }

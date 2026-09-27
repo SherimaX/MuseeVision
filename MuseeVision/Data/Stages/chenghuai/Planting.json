@@ -315,6 +315,23 @@
       "working": "still.clear",
       "history": "weathered",
       "note": "Level -0.28 (0.30 under the garden ground at 0.02); area 106.6 m2, perimeter 41.7; depth 0.18 over the Classical Hall tribune (bed -0.46) to 0.57 (bed -0.85). Clear over the bluestone bed (palette). Still, no flow. Old optics (absorption 0.06/0.02/0.06, scattering 0.006/0.014/0.008 per metre) are evidence only. Outline in stage coordinates, the water pavilion notch applied."
+    },
+    {
+      "key": "chenghuai.fish-bowl",
+      "anchor": "chenghuai.fish-bowl.water",
+      "body": "",
+      "outline": {
+        "ellipse": [
+          0.532,
+          0.532
+        ]
+      },
+      "depth": 0.53,
+      "freeboard": 0.088,
+      "material": "water.still",
+      "working": "still.clear",
+      "history": "weathered",
+      "note": "The court's fish bowl on the inner court's crossing: the bowl (surface chenghuai.fish-bowl) stands on the path top 0.026 at (-9.20, -19.20); water 0.58 above its foot (z 0.606), 0.088 under the rim; inner radius 0.532 at the water. Goldfish: none (Nature grows plants)."
     }
   ],
   "beds": [
@@ -327,7 +344,12 @@
       "working": "grown",
       "history": "weathered",
       "body": "",
-      "note": "Crabapple (xifu haitang) before the main hall, at (-12.20, -22.60) in the kerbed bed x -13.80..-10.60, y -20.50..-24.70; height 4.6, crown radii 1.7 x 1.2. Soil at 0.08 (Nature makes the soil surface, bare)."
+      "note": "Crabapple (xifu haitang) before the main hall, at (-12.20, -22.60) in the kerbed bed x -13.80..-10.60, y -20.50..-24.70; height 4.6, crown radii 1.7 x 1.2. Soil at 0.08; Nature makes the bare soil surface, accent.site-geology (topsoil).",
+      "ground": {
+        "material": "accent.site-geology",
+        "history": "weathered",
+        "working": "topsoil.bare"
+      }
     },
     {
       "bed": "chenghuai.inner-court.bed.ne",
@@ -338,7 +360,12 @@
       "working": "grown",
       "history": "weathered",
       "body": "",
-      "note": "Crabapple at (-6.20, -22.60), bed x -7.80..-4.60; height 4.5, crown 1.7 x 1.2."
+      "note": "Crabapple at (-6.20, -22.60), bed x -7.80..-4.60; height 4.5, crown 1.7 x 1.2.",
+      "ground": {
+        "material": "accent.site-geology",
+        "history": "weathered",
+        "working": "topsoil.bare"
+      }
     },
     {
       "bed": "chenghuai.inner-court.bed.sw",
@@ -349,7 +376,12 @@
       "working": "grown",
       "history": "weathered",
       "body": "",
-      "note": "Osmanthus (as built) at (-12.20, -15.80), bed y -13.70..-17.90; height 3.6, crown 1.3 x 1.2. Not hardy in Beijing (kept in tubs there): Nature may flag it."
+      "note": "Osmanthus (as built) at (-12.20, -15.80), bed y -13.70..-17.90; height 3.6, crown 1.3 x 1.2. Not hardy in Beijing (kept in tubs there): Nature may flag it.",
+      "ground": {
+        "material": "accent.site-geology",
+        "history": "weathered",
+        "working": "topsoil.bare"
+      }
     },
     {
       "bed": "chenghuai.inner-court.bed.se",
@@ -360,7 +392,12 @@
       "working": "grown",
       "history": "weathered",
       "body": "",
-      "note": "Osmanthus at (-6.20, -15.80); height 3.5, crown 1.3 x 1.2."
+      "note": "Osmanthus at (-6.20, -15.80); height 3.5, crown 1.3 x 1.2.",
+      "ground": {
+        "material": "accent.site-geology",
+        "history": "weathered",
+        "working": "topsoil.bare"
+      }
     },
     {
       "bed": "chenghuai.rear-court.pit.w",
@@ -371,7 +408,12 @@
       "working": "grown",
       "history": "weathered",
       "body": "",
-      "note": "Jujube in the kerbed pit 1.40 square at (-16.80, -35.30), soil 0.05; height 5.2, crown 1.9 x 1.3 (as built a plum stood in)."
+      "note": "Jujube in the kerbed pit 1.40 square at (-16.80, -35.30), soil 0.05; height 5.2, crown 1.9 x 1.3 (as built a plum stood in).",
+      "ground": {
+        "material": "accent.site-geology",
+        "history": "weathered",
+        "working": "topsoil.bare"
+      }
     },
     {
       "bed": "chenghuai.rear-court.pit.e",
@@ -382,7 +424,12 @@
       "working": "grown",
       "history": "weathered",
       "body": "",
-      "note": "Jujube at (-1.60, -35.30); height 5.0, crown 1.9 x 1.3."
+      "note": "Jujube at (-1.60, -35.30); height 5.0, crown 1.9 x 1.3.",
+      "ground": {
+        "material": "accent.site-geology",
+        "history": "weathered",
+        "working": "topsoil.bare"
+      }
     },
     {
       "bed": "chenghuai.garden.tree.willow-1",
@@ -503,7 +550,44 @@
       "working": "grown",
       "history": "weathered",
       "body": "",
-      "note": "The garden ground: Nature makes the soil sheet at z 0.02 over x 2.30..16.40, y -0.50..-44.40, the pond cut out (Matter substance topsoil, history ground.trodden), and covers it in moss; growth spaces from Form free space; Form paths, kerbs, platforms and the rockery stand on it."
+      "note": "The garden ground: Nature makes the soil sheet at z 0.02 over x 2.30..16.40, y -0.50..-44.40, the pond cut out; its material is the palette's accent.site-geology (topsoil), and Nature covers it in moss; growth spaces from Form free space; the paths, kerbs, platforms and rockery stand on it.",
+      "ground": {
+        "material": "accent.site-geology",
+        "history": "weathered",
+        "working": "topsoil.under-moss"
+      }
+    },
+    {
+      "bed": "chenghuai.inner-court.tub.w",
+      "species": "Punica granatum",
+      "count": 1,
+      "spacing": 0.0,
+      "material": "living.punica-granatum",
+      "working": "grown",
+      "history": "weathered",
+      "body": "",
+      "ground": {
+        "material": "accent.site-geology",
+        "history": "weathered",
+        "working": "topsoil.potted"
+      },
+      "note": "Pomegranate in its glazed tub (surface chenghuai.tub; dia 0.63, h 0.46) on the court paving at (-11.60, -25.60), flanking the main hall's steps; soil 0.425; height 1.9, crown radii 0.75 x 0.55 (Rules board: 石榴树)."
+    },
+    {
+      "bed": "chenghuai.inner-court.tub.e",
+      "species": "Punica granatum",
+      "count": 1,
+      "spacing": 0.0,
+      "material": "living.punica-granatum",
+      "working": "grown",
+      "history": "weathered",
+      "body": "",
+      "ground": {
+        "material": "accent.site-geology",
+        "history": "weathered",
+        "working": "topsoil.potted"
+      },
+      "note": "Pomegranate in its glazed tub (surface chenghuai.tub; dia 0.63, h 0.46) on the court paving at (-6.80, -25.60), flanking the main hall's steps; soil 0.425; height 1.9, crown radii 0.75 x 0.55 (Rules board: 石榴树)."
     }
   ]
 }
