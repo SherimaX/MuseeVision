@@ -1,0 +1,1739 @@
+{
+  "stage": "atrium",
+  "daylight": [
+    {
+      "opening": "atrium.drum",
+      "glazing": "glass.low-iron",
+      "weather": "museum",
+      "control": "none",
+      "note": "The double-skin drum r 14.000-14.074, z 6.000-21.180: clear outer leaf, fritted and etched inner leaf; no blinds (D-014). UV filtered by the interlayers."
+    }
+  ],
+  "luminaires": [
+    {
+      "id": "cove.a1",
+      "type": "linear-cove.3000k",
+      "point": [
+        -13.16,
+        -4.978,
+        0.043
+      ],
+      "aim": [
+        -13.051,
+        -4.936,
+        0.0
+      ],
+      "along": [
+        0.354,
+        -0.935,
+        0.0
+      ],
+      "length": 2.279,
+      "operation": "dusk",
+      "note": "Bay A (centre bearing 300 deg), run 1 of 3: flexible strip bent to the cove's arc r 14.070 from bearing 286.079 to 295.360, on the cove's back face at z 0.030-0.055, facing the room tilted 20 deg down; dimmed with daylight, switched at dusk."
+    },
+    {
+      "id": "cove.a2",
+      "type": "linear-cove.3000k",
+      "point": [
+        -12.185,
+        -7.035,
+        0.043
+      ],
+      "aim": [
+        -12.084,
+        -6.977,
+        0.0
+      ],
+      "along": [
+        0.5,
+        -0.866,
+        0.0
+      ],
+      "length": 2.279,
+      "operation": "dusk",
+      "note": "Bay A (centre bearing 300 deg), run 2 of 3: flexible strip bent to the cove's arc r 14.070 from bearing 295.360 to 304.640, on the cove's back face at z 0.030-0.055, facing the room tilted 20 deg down; dimmed with daylight, switched at dusk."
+    },
+    {
+      "id": "cove.a3",
+      "type": "linear-cove.3000k",
+      "point": [
+        -10.891,
+        -8.908,
+        0.043
+      ],
+      "aim": [
+        -10.8,
+        -8.834,
+        0.0
+      ],
+      "along": [
+        0.633,
+        -0.774,
+        0.0
+      ],
+      "length": 2.279,
+      "operation": "dusk",
+      "note": "Bay A (centre bearing 300 deg), run 3 of 3: flexible strip bent to the cove's arc r 14.070 from bearing 304.640 to 313.921, on the cove's back face at z 0.030-0.055, facing the room tilted 20 deg down; dimmed with daylight, switched at dusk."
+    },
+    {
+      "id": "cove.b1",
+      "type": "linear-cove.3000k",
+      "point": [
+        -8.908,
+        -10.891,
+        0.043
+      ],
+      "aim": [
+        -8.834,
+        -10.8,
+        0.0
+      ],
+      "along": [
+        0.774,
+        -0.633,
+        0.0
+      ],
+      "length": 2.279,
+      "operation": "dusk",
+      "note": "Bay B (centre bearing 330 deg), run 1 of 3: flexible strip bent to the cove's arc r 14.070 from bearing 316.079 to 325.360, on the cove's back face at z 0.030-0.055, facing the room tilted 20 deg down; dimmed with daylight, switched at dusk."
+    },
+    {
+      "id": "cove.b2",
+      "type": "linear-cove.3000k",
+      "point": [
+        -7.035,
+        -12.185,
+        0.043
+      ],
+      "aim": [
+        -6.977,
+        -12.084,
+        0.0
+      ],
+      "along": [
+        0.866,
+        -0.5,
+        0.0
+      ],
+      "length": 2.279,
+      "operation": "dusk",
+      "note": "Bay B (centre bearing 330 deg), run 2 of 3: flexible strip bent to the cove's arc r 14.070 from bearing 325.360 to 334.640, on the cove's back face at z 0.030-0.055, facing the room tilted 20 deg down; dimmed with daylight, switched at dusk."
+    },
+    {
+      "id": "cove.b3",
+      "type": "linear-cove.3000k",
+      "point": [
+        -4.978,
+        -13.16,
+        0.043
+      ],
+      "aim": [
+        -4.936,
+        -13.051,
+        0.0
+      ],
+      "along": [
+        0.935,
+        -0.354,
+        0.0
+      ],
+      "length": 2.279,
+      "operation": "dusk",
+      "note": "Bay B (centre bearing 330 deg), run 3 of 3: flexible strip bent to the cove's arc r 14.070 from bearing 334.640 to 343.921, on the cove's back face at z 0.030-0.055, facing the room tilted 20 deg down; dimmed with daylight, switched at dusk."
+    },
+    {
+      "id": "cove.c1",
+      "type": "linear-cove.3000k",
+      "point": [
+        -2.269,
+        -13.886,
+        0.043
+      ],
+      "aim": [
+        -2.25,
+        -13.77,
+        0.0
+      ],
+      "along": [
+        0.987,
+        -0.161,
+        0.0
+      ],
+      "length": 2.279,
+      "operation": "dusk",
+      "note": "Bay C (centre bearing 0 deg), run 1 of 3: flexible strip bent to the cove's arc r 14.070 from bearing -13.921 to -4.640, on the cove's back face at z 0.030-0.055, facing the room tilted 20 deg down; dimmed with daylight, switched at dusk."
+    },
+    {
+      "id": "cove.c2",
+      "type": "linear-cove.3000k",
+      "point": [
+        -0.0,
+        -14.07,
+        0.043
+      ],
+      "aim": [
+        -0.0,
+        -13.953,
+        0.0
+      ],
+      "along": [
+        1.0,
+        -0.0,
+        0.0
+      ],
+      "length": 2.279,
+      "operation": "dusk",
+      "note": "Bay C (centre bearing 0 deg), run 2 of 3: flexible strip bent to the cove's arc r 14.070 from bearing -4.640 to 4.640, on the cove's back face at z 0.030-0.055, facing the room tilted 20 deg down; dimmed with daylight, switched at dusk."
+    },
+    {
+      "id": "cove.c3",
+      "type": "linear-cove.3000k",
+      "point": [
+        2.269,
+        -13.886,
+        0.043
+      ],
+      "aim": [
+        2.25,
+        -13.77,
+        0.0
+      ],
+      "along": [
+        0.987,
+        0.161,
+        0.0
+      ],
+      "length": 2.279,
+      "operation": "dusk",
+      "note": "Bay C (centre bearing 0 deg), run 3 of 3: flexible strip bent to the cove's arc r 14.070 from bearing 4.640 to 13.921, on the cove's back face at z 0.030-0.055, facing the room tilted 20 deg down; dimmed with daylight, switched at dusk."
+    },
+    {
+      "id": "cove.d1",
+      "type": "linear-cove.3000k",
+      "point": [
+        4.978,
+        -13.16,
+        0.043
+      ],
+      "aim": [
+        4.936,
+        -13.051,
+        0.0
+      ],
+      "along": [
+        0.935,
+        0.354,
+        0.0
+      ],
+      "length": 2.279,
+      "operation": "dusk",
+      "note": "Bay D (centre bearing 30 deg), run 1 of 3: flexible strip bent to the cove's arc r 14.070 from bearing 16.079 to 25.360, on the cove's back face at z 0.030-0.055, facing the room tilted 20 deg down; dimmed with daylight, switched at dusk."
+    },
+    {
+      "id": "cove.d2",
+      "type": "linear-cove.3000k",
+      "point": [
+        7.035,
+        -12.185,
+        0.043
+      ],
+      "aim": [
+        6.976,
+        -12.084,
+        0.0
+      ],
+      "along": [
+        0.866,
+        0.5,
+        0.0
+      ],
+      "length": 2.279,
+      "operation": "dusk",
+      "note": "Bay D (centre bearing 30 deg), run 2 of 3: flexible strip bent to the cove's arc r 14.070 from bearing 25.360 to 34.640, on the cove's back face at z 0.030-0.055, facing the room tilted 20 deg down; dimmed with daylight, switched at dusk."
+    },
+    {
+      "id": "cove.d3",
+      "type": "linear-cove.3000k",
+      "point": [
+        8.908,
+        -10.891,
+        0.043
+      ],
+      "aim": [
+        8.834,
+        -10.8,
+        0.0
+      ],
+      "along": [
+        0.774,
+        0.633,
+        0.0
+      ],
+      "length": 2.279,
+      "operation": "dusk",
+      "note": "Bay D (centre bearing 30 deg), run 3 of 3: flexible strip bent to the cove's arc r 14.070 from bearing 34.640 to 43.921, on the cove's back face at z 0.030-0.055, facing the room tilted 20 deg down; dimmed with daylight, switched at dusk."
+    },
+    {
+      "id": "cove.e1",
+      "type": "linear-cove.3000k",
+      "point": [
+        10.891,
+        -8.908,
+        0.043
+      ],
+      "aim": [
+        10.8,
+        -8.834,
+        0.0
+      ],
+      "along": [
+        0.633,
+        0.774,
+        0.0
+      ],
+      "length": 2.279,
+      "operation": "dusk",
+      "note": "Bay E (centre bearing 60 deg), run 1 of 3: flexible strip bent to the cove's arc r 14.070 from bearing 46.079 to 55.360, on the cove's back face at z 0.030-0.055, facing the room tilted 20 deg down; dimmed with daylight, switched at dusk."
+    },
+    {
+      "id": "cove.e2",
+      "type": "linear-cove.3000k",
+      "point": [
+        12.185,
+        -7.035,
+        0.043
+      ],
+      "aim": [
+        12.084,
+        -6.977,
+        0.0
+      ],
+      "along": [
+        0.5,
+        0.866,
+        0.0
+      ],
+      "length": 2.279,
+      "operation": "dusk",
+      "note": "Bay E (centre bearing 60 deg), run 2 of 3: flexible strip bent to the cove's arc r 14.070 from bearing 55.360 to 64.640, on the cove's back face at z 0.030-0.055, facing the room tilted 20 deg down; dimmed with daylight, switched at dusk."
+    },
+    {
+      "id": "cove.e3",
+      "type": "linear-cove.3000k",
+      "point": [
+        13.16,
+        -4.978,
+        0.043
+      ],
+      "aim": [
+        13.051,
+        -4.936,
+        0.0
+      ],
+      "along": [
+        0.354,
+        0.935,
+        0.0
+      ],
+      "length": 2.279,
+      "operation": "dusk",
+      "note": "Bay E (centre bearing 60 deg), run 3 of 3: flexible strip bent to the cove's arc r 14.070 from bearing 64.640 to 73.921, on the cove's back face at z 0.030-0.055, facing the room tilted 20 deg down; dimmed with daylight, switched at dusk."
+    },
+    {
+      "id": "cove.f1",
+      "type": "linear-cove.3000k",
+      "point": [
+        13.886,
+        -2.269,
+        0.043
+      ],
+      "aim": [
+        13.77,
+        -2.25,
+        0.0
+      ],
+      "along": [
+        0.161,
+        0.987,
+        0.0
+      ],
+      "length": 2.279,
+      "operation": "dusk",
+      "note": "Bay F (centre bearing 90 deg), run 1 of 3: flexible strip bent to the cove's arc r 14.070 from bearing 76.079 to 85.360, on the cove's back face at z 0.030-0.055, facing the room tilted 20 deg down; dimmed with daylight, switched at dusk."
+    },
+    {
+      "id": "cove.f2",
+      "type": "linear-cove.3000k",
+      "point": [
+        14.07,
+        -0.0,
+        0.043
+      ],
+      "aim": [
+        13.953,
+        -0.0,
+        0.0
+      ],
+      "along": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "length": 2.279,
+      "operation": "dusk",
+      "note": "Bay F (centre bearing 90 deg), run 2 of 3: flexible strip bent to the cove's arc r 14.070 from bearing 85.360 to 94.640, on the cove's back face at z 0.030-0.055, facing the room tilted 20 deg down; dimmed with daylight, switched at dusk."
+    },
+    {
+      "id": "cove.f3",
+      "type": "linear-cove.3000k",
+      "point": [
+        13.886,
+        2.269,
+        0.043
+      ],
+      "aim": [
+        13.77,
+        2.25,
+        0.0
+      ],
+      "along": [
+        -0.161,
+        0.987,
+        0.0
+      ],
+      "length": 2.279,
+      "operation": "dusk",
+      "note": "Bay F (centre bearing 90 deg), run 3 of 3: flexible strip bent to the cove's arc r 14.070 from bearing 94.640 to 103.921, on the cove's back face at z 0.030-0.055, facing the room tilted 20 deg down; dimmed with daylight, switched at dusk."
+    },
+    {
+      "id": "cove.g1",
+      "type": "linear-cove.3000k",
+      "point": [
+        13.16,
+        4.978,
+        0.043
+      ],
+      "aim": [
+        13.051,
+        4.936,
+        0.0
+      ],
+      "along": [
+        -0.354,
+        0.935,
+        0.0
+      ],
+      "length": 2.279,
+      "operation": "dusk",
+      "note": "Bay G (centre bearing 120 deg), run 1 of 3: flexible strip bent to the cove's arc r 14.070 from bearing 106.079 to 115.360, on the cove's back face at z 0.030-0.055, facing the room tilted 20 deg down; dimmed with daylight, switched at dusk."
+    },
+    {
+      "id": "cove.g2",
+      "type": "linear-cove.3000k",
+      "point": [
+        12.185,
+        7.035,
+        0.043
+      ],
+      "aim": [
+        12.084,
+        6.976,
+        0.0
+      ],
+      "along": [
+        -0.5,
+        0.866,
+        0.0
+      ],
+      "length": 2.279,
+      "operation": "dusk",
+      "note": "Bay G (centre bearing 120 deg), run 2 of 3: flexible strip bent to the cove's arc r 14.070 from bearing 115.360 to 124.640, on the cove's back face at z 0.030-0.055, facing the room tilted 20 deg down; dimmed with daylight, switched at dusk."
+    },
+    {
+      "id": "cove.g3",
+      "type": "linear-cove.3000k",
+      "point": [
+        10.891,
+        8.908,
+        0.043
+      ],
+      "aim": [
+        10.8,
+        8.834,
+        0.0
+      ],
+      "along": [
+        -0.633,
+        0.774,
+        0.0
+      ],
+      "length": 2.279,
+      "operation": "dusk",
+      "note": "Bay G (centre bearing 120 deg), run 3 of 3: flexible strip bent to the cove's arc r 14.070 from bearing 124.640 to 133.921, on the cove's back face at z 0.030-0.055, facing the room tilted 20 deg down; dimmed with daylight, switched at dusk."
+    },
+    {
+      "id": "cove.h1",
+      "type": "linear-cove.3000k",
+      "point": [
+        8.908,
+        10.891,
+        0.043
+      ],
+      "aim": [
+        8.834,
+        10.8,
+        0.0
+      ],
+      "along": [
+        -0.774,
+        0.633,
+        0.0
+      ],
+      "length": 2.279,
+      "operation": "dusk",
+      "note": "Bay H (centre bearing 150 deg), run 1 of 3: flexible strip bent to the cove's arc r 14.070 from bearing 136.079 to 145.360, on the cove's back face at z 0.030-0.055, facing the room tilted 20 deg down; dimmed with daylight, switched at dusk."
+    },
+    {
+      "id": "cove.h2",
+      "type": "linear-cove.3000k",
+      "point": [
+        7.035,
+        12.185,
+        0.043
+      ],
+      "aim": [
+        6.976,
+        12.084,
+        0.0
+      ],
+      "along": [
+        -0.866,
+        0.5,
+        0.0
+      ],
+      "length": 2.279,
+      "operation": "dusk",
+      "note": "Bay H (centre bearing 150 deg), run 2 of 3: flexible strip bent to the cove's arc r 14.070 from bearing 145.360 to 154.640, on the cove's back face at z 0.030-0.055, facing the room tilted 20 deg down; dimmed with daylight, switched at dusk."
+    },
+    {
+      "id": "cove.h3",
+      "type": "linear-cove.3000k",
+      "point": [
+        4.978,
+        13.16,
+        0.043
+      ],
+      "aim": [
+        4.936,
+        13.051,
+        0.0
+      ],
+      "along": [
+        -0.935,
+        0.354,
+        0.0
+      ],
+      "length": 2.279,
+      "operation": "dusk",
+      "note": "Bay H (centre bearing 150 deg), run 3 of 3: flexible strip bent to the cove's arc r 14.070 from bearing 154.640 to 163.921, on the cove's back face at z 0.030-0.055, facing the room tilted 20 deg down; dimmed with daylight, switched at dusk."
+    },
+    {
+      "id": "cove.i1",
+      "type": "linear-cove.3000k",
+      "point": [
+        2.269,
+        13.886,
+        0.043
+      ],
+      "aim": [
+        2.25,
+        13.77,
+        0.0
+      ],
+      "along": [
+        -0.987,
+        0.161,
+        0.0
+      ],
+      "length": 2.279,
+      "operation": "dusk",
+      "note": "Bay I (centre bearing 180 deg), run 1 of 3: flexible strip bent to the cove's arc r 14.070 from bearing 166.079 to 175.360, on the cove's back face at z 0.030-0.055, facing the room tilted 20 deg down; dimmed with daylight, switched at dusk."
+    },
+    {
+      "id": "cove.i2",
+      "type": "linear-cove.3000k",
+      "point": [
+        0.0,
+        14.07,
+        0.043
+      ],
+      "aim": [
+        0.0,
+        13.953,
+        0.0
+      ],
+      "along": [
+        -1.0,
+        0.0,
+        0.0
+      ],
+      "length": 2.279,
+      "operation": "dusk",
+      "note": "Bay I (centre bearing 180 deg), run 2 of 3: flexible strip bent to the cove's arc r 14.070 from bearing 175.360 to 184.640, on the cove's back face at z 0.030-0.055, facing the room tilted 20 deg down; dimmed with daylight, switched at dusk."
+    },
+    {
+      "id": "cove.i3",
+      "type": "linear-cove.3000k",
+      "point": [
+        -2.269,
+        13.886,
+        0.043
+      ],
+      "aim": [
+        -2.25,
+        13.77,
+        0.0
+      ],
+      "along": [
+        -0.987,
+        -0.161,
+        0.0
+      ],
+      "length": 2.279,
+      "operation": "dusk",
+      "note": "Bay I (centre bearing 180 deg), run 3 of 3: flexible strip bent to the cove's arc r 14.070 from bearing 184.640 to 193.921, on the cove's back face at z 0.030-0.055, facing the room tilted 20 deg down; dimmed with daylight, switched at dusk."
+    },
+    {
+      "id": "cove.j1",
+      "type": "linear-cove.3000k",
+      "point": [
+        -4.978,
+        13.16,
+        0.043
+      ],
+      "aim": [
+        -4.936,
+        13.051,
+        0.0
+      ],
+      "along": [
+        -0.935,
+        -0.354,
+        0.0
+      ],
+      "length": 2.279,
+      "operation": "dusk",
+      "note": "Bay J (centre bearing 210 deg), run 1 of 3: flexible strip bent to the cove's arc r 14.070 from bearing 196.079 to 205.360, on the cove's back face at z 0.030-0.055, facing the room tilted 20 deg down; dimmed with daylight, switched at dusk."
+    },
+    {
+      "id": "cove.j2",
+      "type": "linear-cove.3000k",
+      "point": [
+        -7.035,
+        12.185,
+        0.043
+      ],
+      "aim": [
+        -6.977,
+        12.084,
+        0.0
+      ],
+      "along": [
+        -0.866,
+        -0.5,
+        0.0
+      ],
+      "length": 2.279,
+      "operation": "dusk",
+      "note": "Bay J (centre bearing 210 deg), run 2 of 3: flexible strip bent to the cove's arc r 14.070 from bearing 205.360 to 214.640, on the cove's back face at z 0.030-0.055, facing the room tilted 20 deg down; dimmed with daylight, switched at dusk."
+    },
+    {
+      "id": "cove.j3",
+      "type": "linear-cove.3000k",
+      "point": [
+        -8.908,
+        10.891,
+        0.043
+      ],
+      "aim": [
+        -8.834,
+        10.8,
+        0.0
+      ],
+      "along": [
+        -0.774,
+        -0.633,
+        0.0
+      ],
+      "length": 2.279,
+      "operation": "dusk",
+      "note": "Bay J (centre bearing 210 deg), run 3 of 3: flexible strip bent to the cove's arc r 14.070 from bearing 214.640 to 223.921, on the cove's back face at z 0.030-0.055, facing the room tilted 20 deg down; dimmed with daylight, switched at dusk."
+    },
+    {
+      "id": "cove.k1",
+      "type": "linear-cove.3000k",
+      "point": [
+        -10.891,
+        8.908,
+        0.043
+      ],
+      "aim": [
+        -10.8,
+        8.834,
+        0.0
+      ],
+      "along": [
+        -0.633,
+        -0.774,
+        0.0
+      ],
+      "length": 2.279,
+      "operation": "dusk",
+      "note": "Bay K (centre bearing 240 deg), run 1 of 3: flexible strip bent to the cove's arc r 14.070 from bearing 226.079 to 235.360, on the cove's back face at z 0.030-0.055, facing the room tilted 20 deg down; dimmed with daylight, switched at dusk."
+    },
+    {
+      "id": "cove.k2",
+      "type": "linear-cove.3000k",
+      "point": [
+        -12.185,
+        7.035,
+        0.043
+      ],
+      "aim": [
+        -12.084,
+        6.977,
+        0.0
+      ],
+      "along": [
+        -0.5,
+        -0.866,
+        0.0
+      ],
+      "length": 2.279,
+      "operation": "dusk",
+      "note": "Bay K (centre bearing 240 deg), run 2 of 3: flexible strip bent to the cove's arc r 14.070 from bearing 235.360 to 244.640, on the cove's back face at z 0.030-0.055, facing the room tilted 20 deg down; dimmed with daylight, switched at dusk."
+    },
+    {
+      "id": "cove.k3",
+      "type": "linear-cove.3000k",
+      "point": [
+        -13.16,
+        4.978,
+        0.043
+      ],
+      "aim": [
+        -13.051,
+        4.936,
+        0.0
+      ],
+      "along": [
+        -0.354,
+        -0.935,
+        0.0
+      ],
+      "length": 2.279,
+      "operation": "dusk",
+      "note": "Bay K (centre bearing 240 deg), run 3 of 3: flexible strip bent to the cove's arc r 14.070 from bearing 244.640 to 253.921, on the cove's back face at z 0.030-0.055, facing the room tilted 20 deg down; dimmed with daylight, switched at dusk."
+    },
+    {
+      "id": "canopy.i01",
+      "type": "gap.edge-lit-glass.3000k",
+      "point": [
+        0.0,
+        -6.0,
+        9.324
+      ],
+      "aim": [
+        0.0,
+        -6.0,
+        0.0
+      ],
+      "operation": "always",
+      "zone": {
+        "r": [
+          3.6,
+          8.5
+        ],
+        "bearing": [
+          345,
+          15
+        ]
+      },
+      "note": "Edge-lit luminous ceiling: LED lines in the top channels of the grid members bounding the zone's panes inject light into the panes' edges; the etched room faces extract it (the canopy is the diffuser). Follows the museum observer's daylight up to its commissioned level with a night floor of 0.20 of it (as built); the Sphere hides the sky, the canopy stands in for it."
+    },
+    {
+      "id": "canopy.i02",
+      "type": "gap.edge-lit-glass.3000k",
+      "point": [
+        3.0,
+        -5.196,
+        9.324
+      ],
+      "aim": [
+        3.0,
+        -5.196,
+        0.0
+      ],
+      "operation": "always",
+      "zone": {
+        "r": [
+          3.6,
+          8.5
+        ],
+        "bearing": [
+          15,
+          45
+        ]
+      },
+      "note": "Edge-lit luminous ceiling: LED lines in the top channels of the grid members bounding the zone's panes inject light into the panes' edges; the etched room faces extract it (the canopy is the diffuser). Follows the museum observer's daylight up to its commissioned level with a night floor of 0.20 of it (as built); the Sphere hides the sky, the canopy stands in for it."
+    },
+    {
+      "id": "canopy.i03",
+      "type": "gap.edge-lit-glass.3000k",
+      "point": [
+        5.196,
+        -3.0,
+        9.324
+      ],
+      "aim": [
+        5.196,
+        -3.0,
+        0.0
+      ],
+      "operation": "always",
+      "zone": {
+        "r": [
+          3.6,
+          8.5
+        ],
+        "bearing": [
+          45,
+          75
+        ]
+      },
+      "note": "Edge-lit luminous ceiling: LED lines in the top channels of the grid members bounding the zone's panes inject light into the panes' edges; the etched room faces extract it (the canopy is the diffuser). Follows the museum observer's daylight up to its commissioned level with a night floor of 0.20 of it (as built); the Sphere hides the sky, the canopy stands in for it."
+    },
+    {
+      "id": "canopy.i04",
+      "type": "gap.edge-lit-glass.3000k",
+      "point": [
+        6.0,
+        -0.0,
+        9.324
+      ],
+      "aim": [
+        6.0,
+        -0.0,
+        0.0
+      ],
+      "operation": "always",
+      "zone": {
+        "r": [
+          3.6,
+          8.5
+        ],
+        "bearing": [
+          75,
+          105
+        ]
+      },
+      "note": "Edge-lit luminous ceiling: LED lines in the top channels of the grid members bounding the zone's panes inject light into the panes' edges; the etched room faces extract it (the canopy is the diffuser). Follows the museum observer's daylight up to its commissioned level with a night floor of 0.20 of it (as built); the Sphere hides the sky, the canopy stands in for it."
+    },
+    {
+      "id": "canopy.i05",
+      "type": "gap.edge-lit-glass.3000k",
+      "point": [
+        5.196,
+        3.0,
+        9.324
+      ],
+      "aim": [
+        5.196,
+        3.0,
+        0.0
+      ],
+      "operation": "always",
+      "zone": {
+        "r": [
+          3.6,
+          8.5
+        ],
+        "bearing": [
+          105,
+          135
+        ]
+      },
+      "note": "Edge-lit luminous ceiling: LED lines in the top channels of the grid members bounding the zone's panes inject light into the panes' edges; the etched room faces extract it (the canopy is the diffuser). Follows the museum observer's daylight up to its commissioned level with a night floor of 0.20 of it (as built); the Sphere hides the sky, the canopy stands in for it."
+    },
+    {
+      "id": "canopy.i06",
+      "type": "gap.edge-lit-glass.3000k",
+      "point": [
+        3.0,
+        5.196,
+        9.324
+      ],
+      "aim": [
+        3.0,
+        5.196,
+        0.0
+      ],
+      "operation": "always",
+      "zone": {
+        "r": [
+          3.6,
+          8.5
+        ],
+        "bearing": [
+          135,
+          165
+        ]
+      },
+      "note": "Edge-lit luminous ceiling: LED lines in the top channels of the grid members bounding the zone's panes inject light into the panes' edges; the etched room faces extract it (the canopy is the diffuser). Follows the museum observer's daylight up to its commissioned level with a night floor of 0.20 of it (as built); the Sphere hides the sky, the canopy stands in for it."
+    },
+    {
+      "id": "canopy.i07",
+      "type": "gap.edge-lit-glass.3000k",
+      "point": [
+        0.0,
+        6.0,
+        9.324
+      ],
+      "aim": [
+        0.0,
+        6.0,
+        0.0
+      ],
+      "operation": "always",
+      "zone": {
+        "r": [
+          3.6,
+          8.5
+        ],
+        "bearing": [
+          165,
+          195
+        ]
+      },
+      "note": "Edge-lit luminous ceiling: LED lines in the top channels of the grid members bounding the zone's panes inject light into the panes' edges; the etched room faces extract it (the canopy is the diffuser). Follows the museum observer's daylight up to its commissioned level with a night floor of 0.20 of it (as built); the Sphere hides the sky, the canopy stands in for it."
+    },
+    {
+      "id": "canopy.i08",
+      "type": "gap.edge-lit-glass.3000k",
+      "point": [
+        -3.0,
+        5.196,
+        9.324
+      ],
+      "aim": [
+        -3.0,
+        5.196,
+        0.0
+      ],
+      "operation": "always",
+      "zone": {
+        "r": [
+          3.6,
+          8.5
+        ],
+        "bearing": [
+          195,
+          225
+        ]
+      },
+      "note": "Edge-lit luminous ceiling: LED lines in the top channels of the grid members bounding the zone's panes inject light into the panes' edges; the etched room faces extract it (the canopy is the diffuser). Follows the museum observer's daylight up to its commissioned level with a night floor of 0.20 of it (as built); the Sphere hides the sky, the canopy stands in for it."
+    },
+    {
+      "id": "canopy.i09",
+      "type": "gap.edge-lit-glass.3000k",
+      "point": [
+        -5.196,
+        3.0,
+        9.324
+      ],
+      "aim": [
+        -5.196,
+        3.0,
+        0.0
+      ],
+      "operation": "always",
+      "zone": {
+        "r": [
+          3.6,
+          8.5
+        ],
+        "bearing": [
+          225,
+          255
+        ]
+      },
+      "note": "Edge-lit luminous ceiling: LED lines in the top channels of the grid members bounding the zone's panes inject light into the panes' edges; the etched room faces extract it (the canopy is the diffuser). Follows the museum observer's daylight up to its commissioned level with a night floor of 0.20 of it (as built); the Sphere hides the sky, the canopy stands in for it."
+    },
+    {
+      "id": "canopy.i10",
+      "type": "gap.edge-lit-glass.3000k",
+      "point": [
+        -6.0,
+        0.0,
+        9.324
+      ],
+      "aim": [
+        -6.0,
+        0.0,
+        0.0
+      ],
+      "operation": "always",
+      "zone": {
+        "r": [
+          3.6,
+          8.5
+        ],
+        "bearing": [
+          255,
+          285
+        ]
+      },
+      "note": "Edge-lit luminous ceiling: LED lines in the top channels of the grid members bounding the zone's panes inject light into the panes' edges; the etched room faces extract it (the canopy is the diffuser). Follows the museum observer's daylight up to its commissioned level with a night floor of 0.20 of it (as built); the Sphere hides the sky, the canopy stands in for it."
+    },
+    {
+      "id": "canopy.i11",
+      "type": "gap.edge-lit-glass.3000k",
+      "point": [
+        -5.196,
+        -3.0,
+        9.324
+      ],
+      "aim": [
+        -5.196,
+        -3.0,
+        0.0
+      ],
+      "operation": "always",
+      "zone": {
+        "r": [
+          3.6,
+          8.5
+        ],
+        "bearing": [
+          285,
+          315
+        ]
+      },
+      "note": "Edge-lit luminous ceiling: LED lines in the top channels of the grid members bounding the zone's panes inject light into the panes' edges; the etched room faces extract it (the canopy is the diffuser). Follows the museum observer's daylight up to its commissioned level with a night floor of 0.20 of it (as built); the Sphere hides the sky, the canopy stands in for it."
+    },
+    {
+      "id": "canopy.i12",
+      "type": "gap.edge-lit-glass.3000k",
+      "point": [
+        -3.0,
+        -5.196,
+        9.324
+      ],
+      "aim": [
+        -3.0,
+        -5.196,
+        0.0
+      ],
+      "operation": "always",
+      "zone": {
+        "r": [
+          3.6,
+          8.5
+        ],
+        "bearing": [
+          315,
+          345
+        ]
+      },
+      "note": "Edge-lit luminous ceiling: LED lines in the top channels of the grid members bounding the zone's panes inject light into the panes' edges; the etched room faces extract it (the canopy is the diffuser). Follows the museum observer's daylight up to its commissioned level with a night floor of 0.20 of it (as built); the Sphere hides the sky, the canopy stands in for it."
+    },
+    {
+      "id": "canopy.o01",
+      "type": "gap.edge-lit-glass.3000k",
+      "point": [
+        0.0,
+        -11.0,
+        13.301
+      ],
+      "aim": [
+        0.0,
+        -11.0,
+        0.0
+      ],
+      "operation": "always",
+      "zone": {
+        "r": [
+          8.5,
+          14.0
+        ],
+        "bearing": [
+          345,
+          15
+        ]
+      },
+      "note": "Edge-lit luminous ceiling: LED lines in the top channels of the grid members bounding the zone's panes inject light into the panes' edges; the etched room faces extract it (the canopy is the diffuser). Follows the museum observer's daylight up to its commissioned level with a night floor of 0.20 of it (as built); the Sphere hides the sky, the canopy stands in for it."
+    },
+    {
+      "id": "canopy.o02",
+      "type": "gap.edge-lit-glass.3000k",
+      "point": [
+        5.5,
+        -9.526,
+        13.301
+      ],
+      "aim": [
+        5.5,
+        -9.526,
+        0.0
+      ],
+      "operation": "always",
+      "zone": {
+        "r": [
+          8.5,
+          14.0
+        ],
+        "bearing": [
+          15,
+          45
+        ]
+      },
+      "note": "Edge-lit luminous ceiling: LED lines in the top channels of the grid members bounding the zone's panes inject light into the panes' edges; the etched room faces extract it (the canopy is the diffuser). Follows the museum observer's daylight up to its commissioned level with a night floor of 0.20 of it (as built); the Sphere hides the sky, the canopy stands in for it."
+    },
+    {
+      "id": "canopy.o03",
+      "type": "gap.edge-lit-glass.3000k",
+      "point": [
+        9.526,
+        -5.5,
+        13.301
+      ],
+      "aim": [
+        9.526,
+        -5.5,
+        0.0
+      ],
+      "operation": "always",
+      "zone": {
+        "r": [
+          8.5,
+          14.0
+        ],
+        "bearing": [
+          45,
+          75
+        ]
+      },
+      "note": "Edge-lit luminous ceiling: LED lines in the top channels of the grid members bounding the zone's panes inject light into the panes' edges; the etched room faces extract it (the canopy is the diffuser). Follows the museum observer's daylight up to its commissioned level with a night floor of 0.20 of it (as built); the Sphere hides the sky, the canopy stands in for it."
+    },
+    {
+      "id": "canopy.o04",
+      "type": "gap.edge-lit-glass.3000k",
+      "point": [
+        11.0,
+        -0.0,
+        13.301
+      ],
+      "aim": [
+        11.0,
+        -0.0,
+        0.0
+      ],
+      "operation": "always",
+      "zone": {
+        "r": [
+          8.5,
+          14.0
+        ],
+        "bearing": [
+          75,
+          105
+        ]
+      },
+      "note": "Edge-lit luminous ceiling: LED lines in the top channels of the grid members bounding the zone's panes inject light into the panes' edges; the etched room faces extract it (the canopy is the diffuser). Follows the museum observer's daylight up to its commissioned level with a night floor of 0.20 of it (as built); the Sphere hides the sky, the canopy stands in for it."
+    },
+    {
+      "id": "canopy.o05",
+      "type": "gap.edge-lit-glass.3000k",
+      "point": [
+        9.526,
+        5.5,
+        13.301
+      ],
+      "aim": [
+        9.526,
+        5.5,
+        0.0
+      ],
+      "operation": "always",
+      "zone": {
+        "r": [
+          8.5,
+          14.0
+        ],
+        "bearing": [
+          105,
+          135
+        ]
+      },
+      "note": "Edge-lit luminous ceiling: LED lines in the top channels of the grid members bounding the zone's panes inject light into the panes' edges; the etched room faces extract it (the canopy is the diffuser). Follows the museum observer's daylight up to its commissioned level with a night floor of 0.20 of it (as built); the Sphere hides the sky, the canopy stands in for it."
+    },
+    {
+      "id": "canopy.o06",
+      "type": "gap.edge-lit-glass.3000k",
+      "point": [
+        5.5,
+        9.526,
+        13.301
+      ],
+      "aim": [
+        5.5,
+        9.526,
+        0.0
+      ],
+      "operation": "always",
+      "zone": {
+        "r": [
+          8.5,
+          14.0
+        ],
+        "bearing": [
+          135,
+          165
+        ]
+      },
+      "note": "Edge-lit luminous ceiling: LED lines in the top channels of the grid members bounding the zone's panes inject light into the panes' edges; the etched room faces extract it (the canopy is the diffuser). Follows the museum observer's daylight up to its commissioned level with a night floor of 0.20 of it (as built); the Sphere hides the sky, the canopy stands in for it."
+    },
+    {
+      "id": "canopy.o07",
+      "type": "gap.edge-lit-glass.3000k",
+      "point": [
+        0.0,
+        11.0,
+        13.301
+      ],
+      "aim": [
+        0.0,
+        11.0,
+        0.0
+      ],
+      "operation": "always",
+      "zone": {
+        "r": [
+          8.5,
+          14.0
+        ],
+        "bearing": [
+          165,
+          195
+        ]
+      },
+      "note": "Edge-lit luminous ceiling: LED lines in the top channels of the grid members bounding the zone's panes inject light into the panes' edges; the etched room faces extract it (the canopy is the diffuser). Follows the museum observer's daylight up to its commissioned level with a night floor of 0.20 of it (as built); the Sphere hides the sky, the canopy stands in for it."
+    },
+    {
+      "id": "canopy.o08",
+      "type": "gap.edge-lit-glass.3000k",
+      "point": [
+        -5.5,
+        9.526,
+        13.301
+      ],
+      "aim": [
+        -5.5,
+        9.526,
+        0.0
+      ],
+      "operation": "always",
+      "zone": {
+        "r": [
+          8.5,
+          14.0
+        ],
+        "bearing": [
+          195,
+          225
+        ]
+      },
+      "note": "Edge-lit luminous ceiling: LED lines in the top channels of the grid members bounding the zone's panes inject light into the panes' edges; the etched room faces extract it (the canopy is the diffuser). Follows the museum observer's daylight up to its commissioned level with a night floor of 0.20 of it (as built); the Sphere hides the sky, the canopy stands in for it."
+    },
+    {
+      "id": "canopy.o09",
+      "type": "gap.edge-lit-glass.3000k",
+      "point": [
+        -9.526,
+        5.5,
+        13.301
+      ],
+      "aim": [
+        -9.526,
+        5.5,
+        0.0
+      ],
+      "operation": "always",
+      "zone": {
+        "r": [
+          8.5,
+          14.0
+        ],
+        "bearing": [
+          225,
+          255
+        ]
+      },
+      "note": "Edge-lit luminous ceiling: LED lines in the top channels of the grid members bounding the zone's panes inject light into the panes' edges; the etched room faces extract it (the canopy is the diffuser). Follows the museum observer's daylight up to its commissioned level with a night floor of 0.20 of it (as built); the Sphere hides the sky, the canopy stands in for it."
+    },
+    {
+      "id": "canopy.o10",
+      "type": "gap.edge-lit-glass.3000k",
+      "point": [
+        -11.0,
+        0.0,
+        13.301
+      ],
+      "aim": [
+        -11.0,
+        0.0,
+        0.0
+      ],
+      "operation": "always",
+      "zone": {
+        "r": [
+          8.5,
+          14.0
+        ],
+        "bearing": [
+          255,
+          285
+        ]
+      },
+      "note": "Edge-lit luminous ceiling: LED lines in the top channels of the grid members bounding the zone's panes inject light into the panes' edges; the etched room faces extract it (the canopy is the diffuser). Follows the museum observer's daylight up to its commissioned level with a night floor of 0.20 of it (as built); the Sphere hides the sky, the canopy stands in for it."
+    },
+    {
+      "id": "canopy.o11",
+      "type": "gap.edge-lit-glass.3000k",
+      "point": [
+        -9.526,
+        -5.5,
+        13.301
+      ],
+      "aim": [
+        -9.526,
+        -5.5,
+        0.0
+      ],
+      "operation": "always",
+      "zone": {
+        "r": [
+          8.5,
+          14.0
+        ],
+        "bearing": [
+          285,
+          315
+        ]
+      },
+      "note": "Edge-lit luminous ceiling: LED lines in the top channels of the grid members bounding the zone's panes inject light into the panes' edges; the etched room faces extract it (the canopy is the diffuser). Follows the museum observer's daylight up to its commissioned level with a night floor of 0.20 of it (as built); the Sphere hides the sky, the canopy stands in for it."
+    },
+    {
+      "id": "canopy.o12",
+      "type": "gap.edge-lit-glass.3000k",
+      "point": [
+        -5.5,
+        -9.526,
+        13.301
+      ],
+      "aim": [
+        -5.5,
+        -9.526,
+        0.0
+      ],
+      "operation": "always",
+      "zone": {
+        "r": [
+          8.5,
+          14.0
+        ],
+        "bearing": [
+          315,
+          345
+        ]
+      },
+      "note": "Edge-lit luminous ceiling: LED lines in the top channels of the grid members bounding the zone's panes inject light into the panes' edges; the etched room faces extract it (the canopy is the diffuser). Follows the museum observer's daylight up to its commissioned level with a night floor of 0.20 of it (as built); the Sphere hides the sky, the canopy stands in for it."
+    },
+    {
+      "id": "car.ring.01",
+      "type": "linear-slot.3000k",
+      "point": [
+        0.544,
+        -2.028,
+        2.518
+      ],
+      "aim": [
+        0.544,
+        -2.028,
+        0.02
+      ],
+      "along": [
+        0.966,
+        0.259,
+        0.0
+      ],
+      "length": 1.1,
+      "operation": "presence",
+      "body": "atrium.car",
+      "follows": "atrium.car.light",
+      "note": "Opal slot ring tucked up into the car's top ring (r 2.060-2.140, z 2.495-2.540 in the car frame), facing down; rides the car. Full while occupied or moving; 0.03 (the glimmer) once stopped at the Cube."
+    },
+    {
+      "id": "car.ring.02",
+      "type": "linear-slot.3000k",
+      "point": [
+        1.485,
+        -1.485,
+        2.518
+      ],
+      "aim": [
+        1.485,
+        -1.485,
+        0.02
+      ],
+      "along": [
+        0.707,
+        0.707,
+        0.0
+      ],
+      "length": 1.1,
+      "operation": "presence",
+      "body": "atrium.car",
+      "follows": "atrium.car.light",
+      "note": "Opal slot ring tucked up into the car's top ring (r 2.060-2.140, z 2.495-2.540 in the car frame), facing down; rides the car. Full while occupied or moving; 0.03 (the glimmer) once stopped at the Cube."
+    },
+    {
+      "id": "car.ring.03",
+      "type": "linear-slot.3000k",
+      "point": [
+        2.028,
+        -0.544,
+        2.518
+      ],
+      "aim": [
+        2.028,
+        -0.544,
+        0.02
+      ],
+      "along": [
+        0.259,
+        0.966,
+        0.0
+      ],
+      "length": 1.1,
+      "operation": "presence",
+      "body": "atrium.car",
+      "follows": "atrium.car.light",
+      "note": "Opal slot ring tucked up into the car's top ring (r 2.060-2.140, z 2.495-2.540 in the car frame), facing down; rides the car. Full while occupied or moving; 0.03 (the glimmer) once stopped at the Cube."
+    },
+    {
+      "id": "car.ring.04",
+      "type": "linear-slot.3000k",
+      "point": [
+        2.028,
+        0.544,
+        2.518
+      ],
+      "aim": [
+        2.028,
+        0.544,
+        0.02
+      ],
+      "along": [
+        -0.259,
+        0.966,
+        0.0
+      ],
+      "length": 1.1,
+      "operation": "presence",
+      "body": "atrium.car",
+      "follows": "atrium.car.light",
+      "note": "Opal slot ring tucked up into the car's top ring (r 2.060-2.140, z 2.495-2.540 in the car frame), facing down; rides the car. Full while occupied or moving; 0.03 (the glimmer) once stopped at the Cube."
+    },
+    {
+      "id": "car.ring.05",
+      "type": "linear-slot.3000k",
+      "point": [
+        1.485,
+        1.485,
+        2.518
+      ],
+      "aim": [
+        1.485,
+        1.485,
+        0.02
+      ],
+      "along": [
+        -0.707,
+        0.707,
+        0.0
+      ],
+      "length": 1.1,
+      "operation": "presence",
+      "body": "atrium.car",
+      "follows": "atrium.car.light",
+      "note": "Opal slot ring tucked up into the car's top ring (r 2.060-2.140, z 2.495-2.540 in the car frame), facing down; rides the car. Full while occupied or moving; 0.03 (the glimmer) once stopped at the Cube."
+    },
+    {
+      "id": "car.ring.06",
+      "type": "linear-slot.3000k",
+      "point": [
+        0.544,
+        2.028,
+        2.518
+      ],
+      "aim": [
+        0.544,
+        2.028,
+        0.02
+      ],
+      "along": [
+        -0.966,
+        0.259,
+        0.0
+      ],
+      "length": 1.1,
+      "operation": "presence",
+      "body": "atrium.car",
+      "follows": "atrium.car.light",
+      "note": "Opal slot ring tucked up into the car's top ring (r 2.060-2.140, z 2.495-2.540 in the car frame), facing down; rides the car. Full while occupied or moving; 0.03 (the glimmer) once stopped at the Cube."
+    },
+    {
+      "id": "car.ring.07",
+      "type": "linear-slot.3000k",
+      "point": [
+        -0.544,
+        2.028,
+        2.518
+      ],
+      "aim": [
+        -0.544,
+        2.028,
+        0.02
+      ],
+      "along": [
+        -0.966,
+        -0.259,
+        0.0
+      ],
+      "length": 1.1,
+      "operation": "presence",
+      "body": "atrium.car",
+      "follows": "atrium.car.light",
+      "note": "Opal slot ring tucked up into the car's top ring (r 2.060-2.140, z 2.495-2.540 in the car frame), facing down; rides the car. Full while occupied or moving; 0.03 (the glimmer) once stopped at the Cube."
+    },
+    {
+      "id": "car.ring.08",
+      "type": "linear-slot.3000k",
+      "point": [
+        -1.485,
+        1.485,
+        2.518
+      ],
+      "aim": [
+        -1.485,
+        1.485,
+        0.02
+      ],
+      "along": [
+        -0.707,
+        -0.707,
+        0.0
+      ],
+      "length": 1.1,
+      "operation": "presence",
+      "body": "atrium.car",
+      "follows": "atrium.car.light",
+      "note": "Opal slot ring tucked up into the car's top ring (r 2.060-2.140, z 2.495-2.540 in the car frame), facing down; rides the car. Full while occupied or moving; 0.03 (the glimmer) once stopped at the Cube."
+    },
+    {
+      "id": "car.ring.09",
+      "type": "linear-slot.3000k",
+      "point": [
+        -2.028,
+        0.544,
+        2.518
+      ],
+      "aim": [
+        -2.028,
+        0.544,
+        0.02
+      ],
+      "along": [
+        -0.259,
+        -0.966,
+        0.0
+      ],
+      "length": 1.1,
+      "operation": "presence",
+      "body": "atrium.car",
+      "follows": "atrium.car.light",
+      "note": "Opal slot ring tucked up into the car's top ring (r 2.060-2.140, z 2.495-2.540 in the car frame), facing down; rides the car. Full while occupied or moving; 0.03 (the glimmer) once stopped at the Cube."
+    },
+    {
+      "id": "car.ring.10",
+      "type": "linear-slot.3000k",
+      "point": [
+        -2.028,
+        -0.544,
+        2.518
+      ],
+      "aim": [
+        -2.028,
+        -0.544,
+        0.02
+      ],
+      "along": [
+        0.259,
+        -0.966,
+        0.0
+      ],
+      "length": 1.1,
+      "operation": "presence",
+      "body": "atrium.car",
+      "follows": "atrium.car.light",
+      "note": "Opal slot ring tucked up into the car's top ring (r 2.060-2.140, z 2.495-2.540 in the car frame), facing down; rides the car. Full while occupied or moving; 0.03 (the glimmer) once stopped at the Cube."
+    },
+    {
+      "id": "car.ring.11",
+      "type": "linear-slot.3000k",
+      "point": [
+        -1.485,
+        -1.485,
+        2.518
+      ],
+      "aim": [
+        -1.485,
+        -1.485,
+        0.02
+      ],
+      "along": [
+        0.707,
+        -0.707,
+        0.0
+      ],
+      "length": 1.1,
+      "operation": "presence",
+      "body": "atrium.car",
+      "follows": "atrium.car.light",
+      "note": "Opal slot ring tucked up into the car's top ring (r 2.060-2.140, z 2.495-2.540 in the car frame), facing down; rides the car. Full while occupied or moving; 0.03 (the glimmer) once stopped at the Cube."
+    },
+    {
+      "id": "car.ring.12",
+      "type": "linear-slot.3000k",
+      "point": [
+        -0.544,
+        -2.028,
+        2.518
+      ],
+      "aim": [
+        -0.544,
+        -2.028,
+        0.02
+      ],
+      "along": [
+        0.966,
+        -0.259,
+        0.0
+      ],
+      "length": 1.1,
+      "operation": "presence",
+      "body": "atrium.car",
+      "follows": "atrium.car.light",
+      "note": "Opal slot ring tucked up into the car's top ring (r 2.060-2.140, z 2.495-2.540 in the car frame), facing down; rides the car. Full while occupied or moving; 0.03 (the glimmer) once stopped at the Cube."
+    },
+    {
+      "id": "starry-night",
+      "type": "track-framing.3000k.medium",
+      "point": [
+        -12.968,
+        -3.475,
+        6.0
+      ],
+      "aim": [
+        -3.885,
+        -1.9,
+        1.38
+      ],
+      "operation": "presence",
+      "note": "On a bracket off the room face of the rib at bearing 285 deg (the door bay's north rib), z 6.000, just above the coping band; throw 10.3 m, 28 deg off the canvas normal (its reflection falls to the floor 2.7 m west, below every eye). Shutters framed to the frame's outer 1.036 x 0.852. Holds the canvas's care target when daylight falls short; off when daylight holds it."
+    }
+  ],
+  "targets": [
+    {
+      "surface": "atrium.floor",
+      "class": "entrance-hall",
+      "lux": [
+        100,
+        100
+      ],
+      "source": "UseTargets",
+      "note": "The walking zone r 3.060-14.000 (UseTargets names the Atrium an arrival space)."
+    },
+    {
+      "surface": "atrium.floor",
+      "class": "circulation.night",
+      "lux": [
+        50,
+        50
+      ],
+      "source": "UseTargets",
+      "note": "The same after dusk."
+    },
+    {
+      "surface": "atrium.car.floor",
+      "class": "lift",
+      "lux": [
+        100,
+        100
+      ],
+      "source": "UseTargets",
+      "note": "The car's floor at every stop but the Cube's (there the glimmer, the Cube's orientation class); and the landing floor inside r 2.450."
+    },
+    {
+      "surface": "atrium.frame.gilt",
+      "class": "oil-and-tempera",
+      "lux": [
+        150,
+        200
+      ],
+      "source": "Care",
+      "note": "Measured on the Starry Night's canvas face. By day the drum may exceed it (sheet 4): measured and reported, never tuned."
+    }
+  ],
+  "design": [
+    {
+      "brighter": "atrium.canopy.glass",
+      "darker": "atrium.drum.inner",
+      "ratio": [
+        1.0,
+        null
+      ],
+      "note": "At night and at overcast reference moments the canopy's mean luminance is at least the drum inner leaf's: a glowing ceiling (the board). Clear-sky moments exempt on the sunlit third of the drum. Measured, never tuned."
+    },
+    {
+      "brighter": "atrium.canopy.glass",
+      "darker": "atrium.rib",
+      "ratio": [
+        1.0,
+        4.0
+      ],
+      "note": "The ribs read as pearl structure against the canopy, never as silhouettes: their room faces at least 0.25 x the canopy's mean behind them."
+    },
+    {
+      "brighter": "atrium.canopy.glass",
+      "darker": "atrium.floor",
+      "ratio": [
+        1.0,
+        null
+      ],
+      "note": "At night the canopy is the brightest extended surface in the room (luminaire diffusers excepted)."
+    }
+  ]
+}
