@@ -17,7 +17,8 @@
  * linings, surrounds, masonry) and no solid of either stage share any space, so no two faces lie in one plane where they
  * overlap (they would flicker) and nothing is buried in a wall. Each joint is drawn between its stages placed as the
  * plan solves them, and made with them; every piece near it is sampled a millimetre inside each of its faces, and each
- * sample is asked whether it lies inside a piece on the other side. One test per mating: Musee.Studio.JointsClear.<A>.
+ * sample is asked whether it lies inside a piece on the other side (halfway through a solid thinner than two millimetres there).
+ * One test per mating: Musee.Studio.JointsClear.<A>.
  */
 namespace Musee::Studio::Tests
 {
@@ -44,6 +45,13 @@ namespace Musee::Studio::Tests
 			bool Contains(const FVector& Museum) const
 			{
 				return Bounds.IsInside(Museum) && Winding->IsInside(ToMuseum.InverseTransformPosition(Museum));
+			}
+
+			/** How far a point inside the solid lies from its nearest face, engine units. */
+			double Depth(const FVector& Museum) const
+			{
+				const FVector Local = ToMuseum.InverseTransformPosition(Museum);
+				return FVector::Distance(ToMuseum.TransformPosition(Tree->FindNearestPoint(Local)), Museum);
 			}
 		};
 
@@ -72,7 +80,11 @@ namespace Musee::Studio::Tests
 			Solid.Winding = MakeUnique<UE::Geometry::TFastWindingTree<UE::Geometry::FDynamicMesh3>>(Solid.Tree.Get());
 		}
 
-		/** A millimetre inside each face of a solid, in the museum. */
+		/**
+		 * A millimetre inside each face of a solid, in the museum; or, where the solid is thinner than two millimetres behind
+		 * the face (a wedge running out to its feather edge where two faces touch), halfway through it, for a sample outside
+		 * its own solid would judge its neighbour, not the face.
+		 */
 		TArray<FVector> Samples(const FSolid& Solid)
 		{
 			TArray<FVector> Points;
@@ -80,10 +92,17 @@ namespace Musee::Studio::Tests
 			for (const int32 T : Mesh.TriangleIndicesItr())
 			{
 				const FVector Normal = Mesh.GetTriNormal(T);
-				if (!Normal.IsNearlyZero())
+				if (Normal.IsNearlyZero())
 				{
-					Points.Add(Solid.ToMuseum.TransformPosition(Mesh.GetTriCentroid(T) - InsideEngine * Normal));
+					continue;
 				}
+				const FVector Centroid = Mesh.GetTriCentroid(T);
+				UE::Geometry::IMeshSpatial::FQueryOptions Behind;
+				Behind.TriangleFilterF = [T](int32 Other) { return Other != T; };
+				double Through = 0.0;
+				int32 Hit = IndexConstants::InvalidID;
+				const bool bThin = Solid.Tree->FindNearestHitTriangle(FRay3d(Centroid, -Normal), Through, Hit, Behind) && Through < 2.0 * InsideEngine;
+				Points.Add(Solid.ToMuseum.TransformPosition(Centroid - (bThin ? 0.5 * Through : InsideEngine) * Normal));
 			}
 			return Points;
 		}
@@ -243,7 +262,14 @@ namespace Musee::Studio::Tests
 		}
 
 		// Every way round: a joint's face inside a stage's solid, a stage's inside a joint's, and one stage's inside the other's.
-		TMap<FString, int32> Clashes;
+		// Each clash counts its faces and keeps the deepest: how far that face lies inside the other solid.
+		struct FClash
+		{
+			int32 Faces = 0;
+			double DeepestEngine = 0.0;
+			FVector Deepest = FVector::ZeroVector;
+		};
+		TMap<FString, FClash> Clashes;
 		auto Judge = [&Clashes, &Near](const TArray<TUniquePtr<FSolid>>& From, const TArray<TUniquePtr<FSolid>>& Into)
 		{
 			for (const TUniquePtr<FSolid>& Solid : From)
@@ -258,7 +284,14 @@ namespace Musee::Studio::Tests
 					{
 						if (Other->Contains(Point))
 						{
-							++Clashes.FindOrAdd(FString::Printf(TEXT("%s lies inside %s"), *Solid->Name, *Other->Name));
+							FClash& Clash = Clashes.FindOrAdd(FString::Printf(TEXT("%s lies inside %s"), *Solid->Name, *Other->Name));
+							++Clash.Faces;
+							const double Depth = Other->Depth(Point) + InsideEngine;
+							if (Depth > Clash.DeepestEngine)
+							{
+								Clash.DeepestEngine = Depth;
+								Clash.Deepest = Point;
+							}
 						}
 					}
 				}
@@ -270,9 +303,11 @@ namespace Musee::Studio::Tests
 			Judge(Walls[Side], Joints);
 			Judge(Walls[Side], Walls[1 - Side]);
 		}
-		for (const TPair<FString, int32>& Clash : Clashes)
+		for (const TPair<FString, FClash>& Clash : Clashes)
 		{
-			AddError(FString::Printf(TEXT("%s (%d faces)"), *Clash.Key, Clash.Value));
+			const FVector At = Clash.Value.Deepest / EngineUnitsPerMeter;
+			AddError(FString::Printf(TEXT("%s (%d faces, up to %.1f mm, at museum (%.3f, %.3f, %.3f))"), *Clash.Key, Clash.Value.Faces,
+				MetersFromEngine(Clash.Value.DeepestEngine) * 1000.0, At.X, At.Y, At.Z));
 		}
 		TestEqual(*FString::Printf(TEXT("the joint of %s and %s shares no space with them"), *Mating->A.ToString(), *Mating->B.ToString()), Clashes.Num(), 0);
 		return true;
