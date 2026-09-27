@@ -385,6 +385,20 @@
       "working": "unglazed.polished",
       "history": "handled",
       "note": "The fired-clay inkstone (澄泥砚) on each desk, 0.18 x 0.26 x 0.03, in a phoebe box 0.20 x 0.28 (ruled material: fired clay, unglazed, polished)."
+    },
+    {
+      "surface": "chenghuai.mount.knob",
+      "material": "accent.huanghuali",
+      "working": "oiled.waxed",
+      "history": "handled",
+      "note": "The hanging scrolls' roller knobs (轴头), turned from a hardwood as the furniture's."
+    },
+    {
+      "surface": "chenghuai.mount.cord",
+      "material": "accent.silk",
+      "working": "stretched",
+      "history": "new",
+      "note": "The hanging scrolls' cords (绦), silk, over the cases' bronze rails."
     }
   ]
 }

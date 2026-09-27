@@ -164,6 +164,7 @@ namespace Musee::NatureMaking
 			Site.Height = Entry.Height;
 			Site.CrownCentre = Entry.CrownCentre;
 			Site.CrownRadii = Entry.CrownRadii.Num() == 2 ? FVector2D(Entry.CrownRadii[0], Entry.CrownRadii[1]) : FVector2D::ZeroVector;
+			Site.LeafDensity = Entry.LeafDensity;
 			for (const FVector2D& End : Entry.Line)
 			{
 				Site.Line.Add(OnSoil(Bed, End));

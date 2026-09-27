@@ -1,0 +1,42 @@
+{
+  "schema": "musee.matter.shading.working/1",
+  "key": "woven",
+  "name": "Woven, weft-faced: the image in the weave",
+  "record": "Palette.json",
+  "kind": "face",
+  "roughness": {
+    "value": 0.9,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Palette.json",
+    "note": "No gloss of a tapestry was read: wool is near matte, the silk highlights carried by the image."
+  },
+  "roughnessAcross": {
+    "value": 0.9,
+    "unit": "1",
+    "grade": "derived",
+    "source": "the image carries what grain the face shows",
+    "derivation": "equal to the roughness along"
+  },
+  "haziness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Palette.json (no measured haze)",
+    "note": "One specular lobe until a goniometric measurement shows a second."
+  },
+  "textureDepth": {
+    "value": 1.0,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Palette.json: accent.tapestry",
+    "note": "A first value for the ribs the weft makes over the warp (a Morris & Co. tapestry, about seven warps a centimetre)."
+  },
+  "relief": {
+    "value": 0.0,
+    "unit": "mm",
+    "grade": "derived",
+    "source": "the image carries the weave's hatching",
+    "derivation": "no relief is drawn over the work's own image"
+  }
+}

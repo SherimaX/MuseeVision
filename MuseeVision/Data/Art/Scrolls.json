@@ -1,0 +1,24 @@
+{
+  "$sources": [
+    "The fittings every hanging scroll's mount (装裱) shares, whatever its proportions (the proportions are each work's, in its stage's Hang.json): first values from mounting practice as mounters' manuals and museum photographs of Song, Yuan and Ming scrolls show it; none was measured on the museum's works.",
+    "The mount's thickness: the silk (or the painting) laid on two or three layers of backing paper, about 0.3 mm (a mounted scroll rolls up tightly, as only a thin, flexible mount does).",
+    "The top stick (天杆): a half-round of about 16 mm across under the heaven's top fold, its flat against the mount's back, so the scroll hangs flat.",
+    "The roller (地轴): about 24 mm across, the earth wound on it, weighting the scroll so it hangs straight; its knobs (轴头) about 32 mm across, standing about 35 mm past the mount's edges, turned from a hardwood.",
+    "The cord (绦): a silk cord about 3 mm across, tied at two eyes on the stick about a quarter of its length in from each end, and hung over the case's rail or a hook."
+  ],
+  "$units": {
+    "MountMeters": "m",
+    "StickRadiusMeters": "m",
+    "RollerRadiusMeters": "m",
+    "KnobRadiusMeters": "m",
+    "KnobLengthMeters": "m",
+    "CordRadiusMeters": "m"
+  },
+  "mountMeters": 0.0003,
+  "stickRadiusMeters": 0.008,
+  "rollerRadiusMeters": 0.012,
+  "knobRadiusMeters": 0.016,
+  "knobLengthMeters": 0.035,
+  "cordRadiusMeters": 0.0015,
+  "cordEyeShare": 0.25
+}

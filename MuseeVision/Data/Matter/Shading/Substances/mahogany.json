@@ -1,0 +1,126 @@
+{
+  "schema": "musee.matter.shading.substance/1",
+  "key": "mahogany",
+  "name": "Mahogany (Swietenia), the nineteenth-century panel wood",
+  "family": "accent",
+  "record": "Palette.json",
+  "master": "wood",
+  "accentOf": "oak",
+  "dielectric": {
+    "diffuseAlbedo": {
+      "value": [
+        40.0,
+        18.0,
+        22.0
+      ],
+      "space": "CIELAB (D65, 2 deg)",
+      "unit": "CIELAB",
+      "grade": "unverified",
+      "source": "Palette.json: accent.mahogany",
+      "note": "Reddish-brown heartwood darkened with age; no measured colour was read: a first value read from museum photographs of panel backs."
+    },
+    "refractiveIndex": {
+      "value": 1.55,
+      "unit": "1",
+      "grade": "secondary",
+      "source": "Marschner, S.R., Westin, S.H., Arbree, A. & Moon, J.T. (2005) Measuring and modeling the appearance of finished wood, ACM Transactions on Graphics 24(3) (as cited in the timber records)"
+    },
+    "porosity": {
+      "value": 0.61,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.mahogany",
+      "note": "Mahogany of about 0.59 g/cm3 air-dry; 1 - 0.59 / 1.5, the cell wall's own density as the oak's. No measurement was read."
+    },
+    "wettingDepth": {
+      "value": 1.0,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: accent.mahogany",
+      "note": "As the oak: the depth a finish soaks into."
+    }
+  },
+  "structure": {
+    "grain": {
+      "value": 0.2,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: accent.mahogany",
+      "note": "The finest structure: its diffuse vessels."
+    },
+    "bed": {
+      "value": 5.0,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: accent.mahogany",
+      "note": "A growth ring's width; mahogany's rings are faint."
+    },
+    "bedAspect": {
+      "value": 25.0,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.mahogany",
+      "note": "How much coarser the figure is along the grain than across it: a straight-grained board."
+    },
+    "hurst": {
+      "value": 0.7,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Candela et al. 2012, Journal of Geophysical Research 117, B08409 (fault surfaces, 0.6 to 0.8; cited in Stone.ush)",
+      "note": "The middle of the range measured on rock surfaces, as the travertine's."
+    },
+    "toneSpread": {
+      "value": 0.08,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.mahogany",
+      "note": "A first half-range of ln(albedo) across one face."
+    },
+    "roughnessSpread": {
+      "value": 0.15,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.mahogany",
+      "note": "A first half-range of ln(roughness), as the oak's."
+    }
+  },
+  "wood": {
+    "latewoodFraction": {
+      "value": 0.2,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.mahogany"
+    },
+    "latewoodTone": {
+      "value": 0.9,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.mahogany"
+    },
+    "rayFleck": {
+      "value": 0.02,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.mahogany",
+      "note": "How much of a quarter-sawn face the rays show."
+    },
+    "rayTone": {
+      "value": 1.05,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.mahogany"
+    },
+    "rayLength": {
+      "value": 1.0,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: accent.mahogany"
+    },
+    "rayWidth": {
+      "value": 0.1,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: accent.mahogany"
+    }
+  }
+}

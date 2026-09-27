@@ -2,23 +2,25 @@
   "key": "edge-lit-glass.3000k",
   "kind": "edge-lit-glass",
   "controlClass": "circulation",
-  "evidenceState": "incomplete",
+  "evidenceState": "derived",
   "product": {
     "manufacturer": "Spanlite",
     "family": "Edge Lit Glass",
-    "description": "low-iron toughened glass lit through its edges by LEDs housed in an engineered glazing channel; the face etched (or printed with fired ceramic ink) so that the light leaves it; a choice of colour temperatures, tuneable white or RGBW, fully programmable",
+    "description": "low-iron toughened glass lit through its edges by LEDs housed in an engineered glazing channel; the face etched (or printed with fired ceramic ink) so that the light leaves it; a choice of colour temperatures, tuneable white or RGBW, fully programmable. In the Atrium's canopy the LED lines are Lumistrips LumiFlex1095 3000 K CRI 95 strips (case-linear.3000k's product), one in the top channel of every grid member, lighting the edges of the panes the member carries",
     "status": "current, made to order"
   },
   "light": {
-    "luminousFluxLumens": null,
-    "fluxBasis": "not published",
-    "beamName": "light guided along the pane and let out by the etched face: an even glow from the face",
+    "luminousFluxLumensPerSquareMeter": 1541.9,
+    "fluxBasis": "derived, since no maker publishes an edge-lit pane's photometry: the LED lines' published flux per metre, times the length of line per square metre of canopy, times the share of the injected light a light guide lets out of its face. (1) The line: LumiFlex1095 3000 K, 720 lm/m (the maker's page, as case-linear.3000k's record). (2) Its length: the canopy grid's members as Docs/Stages/atrium.md sec. 3.5 draws them (rings 1-19 on the room face R 14.024, 72 nodes 5 deg apart on rings 1-14 and 36 on rings 15-20, alternate rings offset half a step; each node to the two nearest nodes of the ring outside, three at the 72-36 change), 3432.8 m in all (the ring members of rings 1-19, 1158.4 m, and the members between rings, 2274.4 m; the compression ring and the head closer carry no line); over the canopy's room face, the spherical zone R 14.024 between z 8.446 and 21.180, 2 pi x 14.024 x 12.734 = 1122.06 m2: 3.0594 m of line a square metre. (3) The share let out: Evonik (now Polyvantis), PLEXIGLAS LED for edge lighting, technical information 212-15 (07/24): the LED light is emitted over the surface with an efficiency of 70 % to 97 %; the low end, 0.70, is taken, since the canopy's panes are acid-etched laminated glass, not the maker's particle-filled acrylic, and nothing better is published for them. 720 x 3.0594 x 0.70 = 1541.9 lm/m2.",
+    "beamName": "light guided along the pane and let out by the etched face: an even glow from the face, near Lambertian",
     "cctKelvin": 3000,
-    "cri": null
+    "cri": 95,
+    "criBasis": "the LED line's published value (LumiFlex1095 3000 K)"
   },
   "electrical": {
     "systemPowerWatts": null,
-    "control": "fully programmable (the protocol is not named)"
+    "powerWattsPerMeter": 7.2,
+    "control": "the LED lines on constant-voltage 24 V supplies, dimmable (the lines' maker names no dimming method); 7.2 W a metre of line, 22.0 W a square metre of canopy"
   },
   "housing": {
     "materials": "low-iron toughened glass 6 to 20 mm deep; LEDs in an engineered glazing channel at the edges",
@@ -27,7 +29,7 @@
   },
   "photometricFile": {
     "url": null,
-    "note": "The maker publishes no photometry: an edge-lit pane's output depends on its size, its edge lighting and its etch."
+    "note": "The maker publishes no photometry: an edge-lit pane's output depends on its size, its edge lighting and its etch. The record's flux is derived (fluxBasis)."
   },
   "sources": [
     {
@@ -39,10 +41,40 @@
         "product",
         "housing"
       ]
+    },
+    {
+      "id": "led-line",
+      "title": "Lumistrips, LumiFlex1095 Seoul LED Strip warm white CRI95 3000K 3600lm 24V (article 38672): 720 lm/m, 7.2 W/m, CRI 95",
+      "url": "https://us.lumistrips.com/flexible-led-lumistrips-us.html/lumiflex1095-3000k-cri95.html",
+      "readOn": "2026-09-27",
+      "covers": [
+        "light",
+        "electrical"
+      ]
+    },
+    {
+      "id": "extraction",
+      "title": "Evonik Performance Materials (Polyvantis), PLEXIGLAS LED for edge lighting, Technical Information Ref-No. 212-15, 07/24: the LED light emitted over the surface with an efficiency of 70 % to 97 %",
+      "url": "https://www.plexiglas.de/files/plexiglas-content/pdf/technische-informationen/212-15-EN-PLEXIGLAS-LED-edge-lighting.pdf",
+      "readOn": "2026-09-27",
+      "covers": [
+        "light"
+      ]
+    },
+    {
+      "id": "grid",
+      "title": "Docs/Stages/atrium.md, sec. 3.4 (the canopy) and sec. 3.5 (the canopy grid's nodes and members)",
+      "url": "",
+      "readOn": "2026-09-27",
+      "covers": [
+        "light"
+      ]
     }
   ],
   "unverified": [
-    "The flux or luminance of a lit pane, the LEDs' flux per metre, their power and colour rendering: the maker publishes none, so the record stands unlit until its photometry for the Atrium's zones is obtained.",
+    "The flux is derived, not measured: a lit pane of the Atrium's glass and etch was never photometered. The extraction share is a particle-filled acrylic light guide's, taken at its published low end for etched glass.",
+    "Each member's one line is taken to put all its light into the edges of the panes the member carries, and the light a pane lets out of its back to come back through its etched face off the Sphere's underside, as the guide maker's rear reflector does; neither is measured.",
+    "The canopy is lit by its grid's lines alone: the drum's head closer and the compression ring carry none.",
     "3000 K is the Atrium's choice among the maker's colour temperatures; the list of temperatures is not published.",
     "The Atrium's panes are laminated low-iron glass etched on the room face; the maker's page names toughened panes, not laminated ones.",
     "The maximum panel size as printed, 4000 mm by 1.5 mm, reads as a misprint for 4.0 by 1.5 m."

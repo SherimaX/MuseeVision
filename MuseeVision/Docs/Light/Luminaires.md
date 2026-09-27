@@ -73,7 +73,7 @@ output (the light that leaves the housing), not the LED's.
 | `electrolier.3000k` | six Ledstore LED filament candles, E14 | E14-clear-HIGH-CRI-3000 | 6 × 260 lm | all round, ring r 0.505 | 3000 K | 95 | 24 W | circulation | complete |
 | `electrolier.3000k.four-light` | four of the same lamps (Albion's porch) | E14-clear-HIGH-CRI-3000 | 4 × 260 lm | all round, ring r 0.505 | 3000 K | 95 | 16 W | circulation | complete |
 | `step-light.2700k` | FX Luminaire RH, 3 LED, RB faceplate, bronze | RH-3LED-W-RB-BZ | 86 lm (49 cd peak) | the Gaussian beam those fix, 75.6° | 2700 K | 84 | 4.0 W | circulation | complete |
-| `edge-lit-glass.3000k` | Spanlite Edge Lit Glass | made to order | not published | the etched face | 3000 K | not published | not published | circulation | incomplete |
+| `edge-lit-glass.3000k` | Spanlite Edge Lit Glass, lit by LumiFlex1095 lines in the Atrium's grid | made to order | 1541.9 lm/m², derived | the etched face | 3000 K | 95 (the lines') | 22.0 W/m² (7.2 W/m of line) | circulation | derived |
 | `luminous-ceiling.3000k` | Color Kinetics OneSpace gen2, Tunable White at 3000 K | OneSpace gen2 | 2574 lm/m² | a Lambertian plane | 3000 K | 95 | 39.5–41.1 W/m² | gallery | complete |
 | `pinspot.3000k` | ERCO Parscan 48V, size M, narrow spot | not found | not read at 3000 K | narrow spot | 3000 K | 97 | not read | gallery | incomplete |
 | `uplight.3000k` | Ledstore GU10 reflector lamp in the room's can | GU10-6W-3000 | 500 lm | 40° | 3000 K | 98 | 6 W | circulation | complete |
@@ -95,8 +95,8 @@ The unit of every number is in its field name, the way the museum writes units e
 - `luminousFluxLumensPerSquareMeter` is an areal luminaire's flux over each square metre of its face (a luminous
   ceiling), and `peakLuminanceCandelaPerSquareMeter` an image panel's luminance at its peak white. The room gives the
   face each is laid over, as an `extent` or a `zone` in its Lighting.json. Whether a type is areal is its kind's
-  (`laylight`, `edge-lit-glass`, `light-field-panel`), not whether its maker publishes the number: edge-lit panes whose
-  photometry is unpublished are still laid over their zone, and stand there unlit.
+  (`laylight`, `edge-lit-glass`, `light-field-panel`), not whether its maker publishes the number: a type whose
+  photometry is unpublished is still laid over its zone, and stands there unlit until its flux is published or derived.
 - `beamAngleDegrees` is the full angle at which the intensity falls to half its peak. Framers and wallwashers have no
   single beam angle: their light is shaped by shutters or an asymmetric lens, described in `beamName`. Where a maker
   publishes a flux and a peak intensity but no beam angle (the step light), Light takes the Gaussian beam those two fix
@@ -124,6 +124,12 @@ unlit until their files are read, since only a photometric file describes an asy
 - `evidenceState` is `complete` when every number the Scheme needs (flux, beam or distribution, colour, power) is
   published. An `incomplete` record is a real product whose maker leaves one of these unpublished. It may stand in a
   room as an object, with its real housing and finish, but it is not lit. Its `unverified` list says what is missing.
+  A `derived` record is lit on a number worked out from physics where no maker publishes it: its `fluxBasis` gives the
+  derivation step by step, from the numbers its parts' makers do publish, and its `unverified` list what the derivation
+  assumes. The Atrium's edge-lit canopy is the one: no maker publishes an edge-lit pane's photometry, so its flux per
+  square metre is its LED lines' published flux per metre, times the metres of line the grid lays per square metre of
+  canopy, times the share a light guide's maker publishes as let out of its face (Evonik's PLEXIGLAS LED, 70 to 97 %;
+  the low end is taken).
 
 ## How a room gets its light
 

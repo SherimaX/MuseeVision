@@ -300,6 +300,7 @@ bool FNatureGardenTest::RunTest(const FString& Parameters)
 		Tests::Anchor(TEXT("garden.pool"), TEXT("Water"), FVector(4.0, 4.0, -0.1)),
 		Tests::Anchor(TEXT("garden.ground"), TEXT("Bed"), FVector(5.0, 5.0, 0.02)),
 		Tests::Anchor(TEXT("garden.birch"), TEXT("Bed"), FVector(8.0, 2.0, 0.02)),
+		Tests::Anchor(TEXT("garden.airy-birch"), TEXT("Bed"), FVector(16.0, 6.0, 0.02)),
 		Tests::Anchor(TEXT("garden.bamboo"), TEXT("Bed"), FVector(1.5, 8.5, 0.02)),
 		Tests::Anchor(TEXT("garden.hedge"), TEXT("Bed"), FVector(5.0, 10.2, 0.0)),
 		Tests::Anchor(TEXT("garden.sward"), TEXT("Bed"), FVector(12.5, 1.0, 0.0)),
@@ -340,7 +341,14 @@ bool FNatureGardenTest::RunTest(const FString& Parameters)
 		}
 		TestTrue(TEXT("up to the height its bed draws"), Top > 0.9 * 9.3 * 0.97 - 0.1 && Top < 9.3);
 	}
-	TestNotNull(TEXT("and its leaves"), Named(TEXT("garden.birch.betula-pendula.leaf")));
+	const FFormMadePiece* Leaves = Named(TEXT("garden.birch.betula-pendula.leaf"));
+	const FFormMadePiece* Airy = Named(TEXT("garden.airy-birch.betula-pendula.leaf"));
+	if (TestTrue(TEXT("and its leaves"), Leaves && Airy))
+	{
+		// The leaves a crown carries go with its volume and its leaf density, whatever the twigs they are shared along.
+		const double Share = double(Airy->Mesh->TriangleCount()) / FMath::Max(1, Leaves->Mesh->TriangleCount());
+		TestTrue(FString::Printf(TEXT("A birch as big at half the leaf density carries about half the leaves (%.3f)"), Share), Share > 0.4 && Share < 0.6);
+	}
 	TestNotNull(TEXT("The bamboo grows its culms at their points"), Named(TEXT("garden.bamboo.phyllostachys-aureosulcata.stem")));
 	const FFormMadePiece* Core = Named(TEXT("garden.hedge.taxus-baccata.trunk.0"));
 	TestTrue(TEXT("The hedge grows its solid core along its line"), Core && Core->Collision == Musee::Collision::Solid.Profile());

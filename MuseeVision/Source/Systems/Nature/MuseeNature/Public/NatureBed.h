@@ -92,6 +92,14 @@ struct MUSEENATURE_API FNatureBed
 	UPROPERTY()
 	TArray<float> CrownRadii;
 
+	/**
+	 * How densely a tree is in leaf, as a share of the full leaf its species carries for a crown of its size (the
+	 * species record's leavesPerPlant): above 1 for a close, well-fed crown (the allées' osmanthus), below it for an airy
+	 * one (the birches). The species' own (1) when zero.
+	 */
+	UPROPERTY()
+	float LeafDensity = 0.0f;
+
 	/** For a clipped hedge, the section the shears keep. */
 	UPROPERTY()
 	FNatureClip Clipped;

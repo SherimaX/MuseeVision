@@ -25,9 +25,13 @@
         "earth": 0.3,
         "band": 0.06,
         "border": 0.04,
-        "roller": true
+        "roller": true,
+        "knob": "chenghuai.mount.knob",
+        "cord": "chenghuai.mount.cord",
+        "hook": 0.093
       },
-      "note": "Hanging scroll: hangs by its cords from the case rail (canopy - 0.05), the top stick 0.085 under it, the mount 0.02 off the silk; along/height/size place the image; mounted length 2.553; image assets/paintings/chinese-guo-xi-early-spring.jpg."
+      "note": "Hanging scroll: hangs by its cords from the case rail (canopy - 0.05), the top stick 0.085 under it, the mount 0.02 off the silk; along/height/size place the image; mounted length 2.553; image assets/paintings/chinese-guo-xi-early-spring.jpg.",
+      "offWall": 0.02
     },
     {
       "work": "chinese-fan-kuan-travelers",
@@ -53,9 +57,13 @@
         "earth": 0.36,
         "band": 0.06,
         "border": 0.04,
-        "roller": true
+        "roller": true,
+        "knob": "chenghuai.mount.knob",
+        "cord": "chenghuai.mount.cord",
+        "hook": 0.093
       },
-      "note": "Hanging scroll: hangs by its cords from the case rail (canopy - 0.05), the top stick 0.085 under it, the mount 0.02 off the silk; along/height/size place the image; mounted length 3.163; image assets/paintings/chinese-fan-kuan-travelers.jpg."
+      "note": "Hanging scroll: hangs by its cords from the case rail (canopy - 0.05), the top stick 0.085 under it, the mount 0.02 off the silk; along/height/size place the image; mounted length 3.163; image assets/paintings/chinese-fan-kuan-travelers.jpg.",
+      "offWall": 0.02
     },
     {
       "work": "chinese-li-tang-wind-in-pines",
@@ -81,9 +89,13 @@
         "earth": 0.32,
         "band": 0.06,
         "border": 0.04,
-        "roller": true
+        "roller": true,
+        "knob": "chenghuai.mount.knob",
+        "cord": "chenghuai.mount.cord",
+        "hook": 0.093
       },
-      "note": "Hanging scroll: hangs by its cords from the case rail (canopy - 0.05), the top stick 0.085 under it, the mount 0.02 off the silk; along/height/size place the image; mounted length 2.927; image assets/paintings/chinese-li-tang-wind-in-pines.jpg."
+      "note": "Hanging scroll: hangs by its cords from the case rail (canopy - 0.05), the top stick 0.085 under it, the mount 0.02 off the silk; along/height/size place the image; mounted length 2.927; image assets/paintings/chinese-li-tang-wind-in-pines.jpg.",
+      "offWall": 0.02
     },
     {
       "work": "chinese-ni-zan-rongxi",
@@ -109,9 +121,13 @@
         "earth": 0.2,
         "band": 0.06,
         "border": 0.04,
-        "roller": true
+        "roller": true,
+        "knob": "chenghuai.mount.knob",
+        "cord": "chenghuai.mount.cord",
+        "hook": 0.093
       },
-      "note": "Hanging scroll: hangs by its cords from the case rail (canopy - 0.05), the top stick 0.085 under it, the mount 0.02 off the silk; along/height/size place the image; mounted length 1.427; image assets/paintings/chinese-ni-zan-rongxi.jpg."
+      "note": "Hanging scroll: hangs by its cords from the case rail (canopy - 0.05), the top stick 0.085 under it, the mount 0.02 off the silk; along/height/size place the image; mounted length 1.427; image assets/paintings/chinese-ni-zan-rongxi.jpg.",
+      "offWall": 0.02
     },
     {
       "work": "chinese-wang-meng-qingbian",
@@ -137,9 +153,13 @@
         "earth": 0.22,
         "band": 0.06,
         "border": 0.04,
-        "roller": true
+        "roller": true,
+        "knob": "chenghuai.mount.knob",
+        "cord": "chenghuai.mount.cord",
+        "hook": 0.093
       },
-      "note": "Hanging scroll: hangs by its cords from the case rail (canopy - 0.05), the top stick 0.085 under it, the mount 0.02 off the silk; along/height/size place the image; mounted length 2.166; image assets/paintings/chinese-wang-meng-qingbian.jpg."
+      "note": "Hanging scroll: hangs by its cords from the case rail (canopy - 0.05), the top stick 0.085 under it, the mount 0.02 off the silk; along/height/size place the image; mounted length 2.166; image assets/paintings/chinese-wang-meng-qingbian.jpg.",
+      "offWall": 0.02
     },
     {
       "work": "chinese-shen-zhou-lushan",
@@ -165,9 +185,13 @@
         "earth": 0.22,
         "band": 0.06,
         "border": 0.04,
-        "roller": true
+        "roller": true,
+        "knob": "chenghuai.mount.knob",
+        "cord": "chenghuai.mount.cord",
+        "hook": 0.093
       },
-      "note": "Hanging scroll: hangs by its cords from the case rail (canopy - 0.05), the top stick 0.085 under it, the mount 0.02 off the silk; along/height/size place the image; mounted length 2.698; image assets/paintings/chinese-shen-zhou-lushan.jpg."
+      "note": "Hanging scroll: hangs by its cords from the case rail (canopy - 0.05), the top stick 0.085 under it, the mount 0.02 off the silk; along/height/size place the image; mounted length 2.698; image assets/paintings/chinese-shen-zhou-lushan.jpg.",
+      "offWall": 0.02
     },
     {
       "work": "chinese-wen-zhengming-living-aloft",
@@ -193,9 +217,13 @@
         "earth": 0.22,
         "band": 0.06,
         "border": 0.04,
-        "roller": true
+        "roller": true,
+        "knob": "chenghuai.mount.knob",
+        "cord": "chenghuai.mount.cord",
+        "hook": 0.093
       },
-      "note": "Hanging scroll: hangs by its cords from the case rail (canopy - 0.05), the top stick 0.085 under it, the mount 0.02 off the silk; along/height/size place the image; mounted length 1.693; image assets/paintings/chinese-wen-zhengming-living-aloft.jpg."
+      "note": "Hanging scroll: hangs by its cords from the case rail (canopy - 0.05), the top stick 0.085 under it, the mount 0.02 off the silk; along/height/size place the image; mounted length 1.693; image assets/paintings/chinese-wen-zhengming-living-aloft.jpg.",
+      "offWall": 0.02
     },
     {
       "work": "chinese-orchid-pavilion",

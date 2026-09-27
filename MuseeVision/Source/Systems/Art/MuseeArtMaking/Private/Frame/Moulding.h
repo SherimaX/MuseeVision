@@ -12,7 +12,7 @@
  * from the framed edge, B up from the face the frame's lip rests on, drawn from the outside edge inward and ending on
  * that face at the sight lip), and the rule that sizes the width to the work, as frame makers proportion a moulding to
  * the picture. The museum's moulding is the carved and gilt one, `Data/Art/Moulding.json`; a style Art draws has its own
- * record, `Data/Art/Mouldings/<style>.json` (the photograph's flat oak).
+ * record, `Data/Art/Mouldings/<style>.json` (the photograph's flat oak, the wallpapers' panel frame).
  */
 USTRUCT()
 struct FArtMoulding
@@ -22,8 +22,11 @@ struct FArtMoulding
 	/** The museum's moulding's record, under Data. */
 	static constexpr const TCHAR* Record = TEXT("Art/Moulding.json");
 
-	/** The frame styles (a plan's `frameStyle`) that have their own record, `Art/Mouldings/<style>.json`. */
-	static constexpr const TCHAR* DrawnStyles[] = { TEXT("photograph") };
+	/**
+	 * The frame styles (a plan's `frameStyle`) that have their own record, `Art/Mouldings/<style>.json`: the photograph's
+	 * flat oak, and the narrow panel frame round Morris's wallpapers.
+	 */
+	static constexpr const TCHAR* DrawnStyles[] = { TEXT("photograph"), TEXT("panel") };
 
 	/**
 	 * The record of the moulding a frame of this style is made in: the style's own, where Art draws it; the museum's

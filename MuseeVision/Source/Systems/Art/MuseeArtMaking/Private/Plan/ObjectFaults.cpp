@@ -1,5 +1,6 @@
 #include "Plan/EntryContext.h"
 
+#include "Algo/Find.h"
 #include "ArtWork.h"
 #include "Cast/ScanMesh.h"
 #include "HAL/FileManager.h"
@@ -164,18 +165,127 @@ namespace Musee::ArtMaking
 			return Out;
 		}
 
-		/** Paper is made as a print on its mount on a Wall anchor, or a card on its reader at a Mount anchor. */
+		/**
+		 * A hanging scroll hangs by its cord in front of a Wall anchor, in its mount: the mount's silk (its `frame`, a
+		 * surface of the schedule), its heaven, earth, bands and borders, its knobs' and cord's surfaces, the hook its cord
+		 * hangs from above its stick, and how far its back hangs off the wall.
+		 */
+		TArray<FString> HangingScrollFaults(const FMuseeStageContext& Stage, const FArtHangEntry& Entry, const FEntryContext& Context)
+		{
+			TArray<FString> Out;
+			if (!HasAnchor(Stage, Entry, WallAnchorKind))
+			{
+				Out.Add(FString::Printf(TEXT("%s is not a Wall anchor of the stage"), *Entry.Anchor.ToString()));
+			}
+			Out.Append(SurfaceFaults(Context, IsFramed(Entry) ? Entry.Frame : FName(), TEXT("mount")));
+			const FArtScrollMount& Mount = Entry.Mount;
+			if (Mount.Heaven < 0.0f || Mount.Earth < 0.0f || Mount.Band <= 0.0f || Mount.Border <= 0.0f || Mount.Hook <= 0.0f || Entry.OffWall <= 0.0f)
+			{
+				Out.Add(TEXT("its mount needs a heaven and an earth of zero or more, bands and borders round the painting, a hook above its stick and an "
+					"offWall, each of more than zero"));
+			}
+			if (Mount.Roller)
+			{
+				Out.Append(SurfaceFaults(Context, Mount.Knob, TEXT("knobs")));
+			}
+			Out.Append(SurfaceFaults(Context, Mount.Cord, TEXT("cord")));
+			return Out;
+		}
+
+		/**
+		 * A book or a leaf lies at its centre on a Mount anchor (a case's bed, a lectern's desk), unframed and unglazed (a
+		 * case's glass is the case's), a book bound as Data/Art/Books.json gives it.
+		 */
+		TArray<FString> LyingEntryFaults(const FMuseeStageContext& Stage, const FArtHangEntry& Entry, const FEntryContext& Context)
+		{
+			TArray<FString> Out;
+			if (!HasAnchor(Stage, Entry, MountAnchorKind))
+			{
+				Out.Add(FString::Printf(TEXT("%s is not a Mount anchor of the stage (a bed or a desk it lies on)"), *Entry.Anchor.ToString()));
+			}
+			if (Entry.Centre.Num() != PointNumbers)
+			{
+				Out.Add(TEXT("it needs its centre [x, y, z], where it lies"));
+			}
+			if (IsFramed(Entry) || Entry.Glazed)
+			{
+				Out.Add(TEXT("a book or a leaf lies in its case, unframed and unglazed"));
+			}
+			if (Entry.Kind == Kinds::Book && !FindBook(Entry.Work, Context.Books))
+			{
+				Out.Add(Context.BooksWhy.IsEmpty() ? FString::Printf(TEXT("%s gives no binding for it"), FArtBook::Record) : Context.BooksWhy);
+			}
+			return Out;
+		}
+
+		/**
+		 * Paper is made as a print on its mount on a Wall anchor, or a card on its reader at a Mount anchor; painted and
+		 * mounted as a hanging scroll; bound as a book, or a loose leaf, lying on a Mount anchor.
+		 */
 		TArray<FString> PaperEntryFaults(const FMuseeStageContext& Stage, const FArtHangEntry& Entry, const FEntryContext& Context)
 		{
+			if (Entry.Kind == Kinds::HangingScroll)
+			{
+				return HangingScrollFaults(Stage, Entry, Context);
+			}
+			if (Entry.Kind == Kinds::Book || Entry.Kind == Kinds::Leaf)
+			{
+				return LyingEntryFaults(Stage, Entry, Context);
+			}
 			if (!Entry.Kind.IsNone())
 			{
-				return { FString::Printf(TEXT("paper made as a %s isn't made yet; a print on its mount and a card on its reader are"), *Entry.Kind.ToString()) };
+				return { FString::Printf(TEXT("paper made as a %s isn't made yet; a print on its mount, a card on its reader, a hanging scroll, a book and a "
+					"leaf are"), *Entry.Kind.ToString()) };
 			}
 			if (HasAnchor(Stage, Entry, WallAnchorKind))
 			{
 				return PrintEntryFaults(Entry, Context);
 			}
 			return CardEntryFaults(Stage, Entry, Context);
+		}
+
+		/** Silk is made as a painting mounted as a hanging scroll. */
+		TArray<FString> SilkEntryFaults(const FMuseeStageContext& Stage, const FArtHangEntry& Entry, const FEntryContext& Context)
+		{
+			if (Entry.Kind != Kinds::HangingScroll)
+			{
+				return { FString::Printf(TEXT("silk made as a %s isn't made yet; a hanging scroll is"), *Entry.Kind.ToString()) };
+			}
+			return HangingScrollFaults(Stage, Entry, Context);
+		}
+
+		/** A panel hangs on a Wall anchor as a canvas does, framed or not, made of the wood its `wall` surface names. */
+		TArray<FString> PanelEntryFaults(const FMuseeStageContext& Stage, const FArtHangEntry& Entry, const FEntryContext& Context)
+		{
+			TArray<FString> Out = CanvasEntryFaults(Stage, Entry, Context);
+			if (Entry.Wall.IsNone())
+			{
+				Out.Add(TEXT("it names no wood to be made of (its `wall`, a surface of the finish schedule)"));
+			}
+			else
+			{
+				Out.Append(SurfaceFaults(Context, Entry.Wall, TEXT("wood")));
+			}
+			return Out;
+		}
+
+		/** A tapestry hangs unframed on a Wall anchor, its back the plan's offWall off the wall (on its batten and lining). */
+		TArray<FString> TapestryEntryFaults(const FMuseeStageContext& Stage, const FArtHangEntry& Entry)
+		{
+			TArray<FString> Out;
+			if (!HasAnchor(Stage, Entry, WallAnchorKind))
+			{
+				Out.Add(FString::Printf(TEXT("%s is not a Wall anchor of the stage"), *Entry.Anchor.ToString()));
+			}
+			if (IsFramed(Entry))
+			{
+				Out.Add(TEXT("a tapestry hangs on its batten, unframed"));
+			}
+			if (Entry.OffWall <= 0.0f)
+			{
+				Out.Add(TEXT("it needs its offWall, how far its back hangs off the wall, of more than zero"));
+			}
+			return Out;
 		}
 
 		const FArtTurned* FindTurned(const FArtHangEntry& Entry, const FEntryContext& Context)
@@ -341,13 +451,25 @@ namespace Musee::ArtMaking
 		{
 			Out.Append(WareEntryFaults(Stage, Entry, Context));
 		}
+		else if (Entry.Support == Supports::Silk)
+		{
+			Out.Append(SilkEntryFaults(Stage, Entry, Context));
+		}
+		else if (Entry.Support == Supports::Panel)
+		{
+			Out.Append(PanelEntryFaults(Stage, Entry, Context));
+		}
+		else if (Entry.Support == Supports::Tapestry)
+		{
+			Out.Append(TapestryEntryFaults(Stage, Entry));
+		}
 		else
 		{
-			Out.Add(FString::Printf(TEXT("its support '%s' isn't made yet; canvas, stained glass, paper, a daguerreotype's plate, earthenware, a "
-				"cast and ceramic are"), *Entry.Support.ToString()));
+			Out.Add(FString::Printf(TEXT("its support '%s' isn't made yet; canvas, panel, stained glass, paper, silk, a daguerreotype's "
+				"plate, earthenware, tapestry, a cast and ceramic are"), *Entry.Support.ToString()));
 		}
 		// A work in the round is finished in its medium (Data/Art/Media.json), not in its support's layer.
-		if (Entry.Support != Supports::Glass && !IsInMedium(Entry) && Out.IsEmpty() && !FindSupport(Entry.Support))
+		if (Entry.Support != Supports::Glass && !IsInMedium(Entry) && Out.IsEmpty() && !FindSupport(Entry.Support, Entry.Kind))
 		{
 			Out.Add(FString::Printf(TEXT("%s lists no support '%s'"), FArtSupports::Record, *Entry.Support.ToString()));
 		}
@@ -378,6 +500,11 @@ namespace Musee::ArtMaking
 	bool IsTransparency(const FMuseeStageContext& Stage, const FArtHangEntry& Entry)
 	{
 		return Entry.Support == Supports::Glass && !Entry.Mat.IsNone() && Stage.FindAnchor(Entry.Anchor, WallAnchorKind) != nullptr;
+	}
+
+	const FArtBook* FindBook(const FString& Work, TConstArrayView<FArtBook> Books)
+	{
+		return Algo::FindByPredicate(Books, [&Work](const FArtBook& Book) { return Book.Work == Work; });
 	}
 
 	FWareSpec WareOf(const FArtHangEntry& Entry, const FEntryContext& Context)

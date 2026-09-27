@@ -1,0 +1,44 @@
+{
+  "schema": "musee.matter.shading.substance/1",
+  "key": "xuan-paper",
+  "name": "A Chinese painting or calligraphy on paper (ink and light colour on a bast-fibre xuan or mulberry paper, backed in its mount): the image in the paper",
+  "family": "accent",
+  "record": "Palette.json",
+  "master": "paint",
+  "accentOf": "white",
+  "dielectric": {
+    "diffuseAlbedo": {
+      "value": [
+        0.8,
+        0.8,
+        0.8
+      ],
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.ink-on-paper",
+      "note": "The reflectance a photograph of the paper's white stands for: a first value, until an old xuan paper is measured. The paper's tone as it has aged is in the photograph itself."
+    },
+    "refractiveIndex": {
+      "value": 1.53,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Shading/Substances/mulberry-paper.json (cellulose fibres about 1.53)",
+      "note": "The paper's bast fibres and the size over them lie near the same index."
+    },
+    "porosity": {
+      "value": 0.6,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.ink-on-paper",
+      "note": "An unsized bast-fibre paper is open; no measurement was read."
+    },
+    "wettingDepth": {
+      "value": 0.3,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "the paper and its backing",
+      "note": "A mounted painting is the sheet on two or three layers of paper: water reaches all of it."
+    }
+  }
+}

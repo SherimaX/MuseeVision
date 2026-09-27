@@ -3478,7 +3478,7 @@
       "family": "accent",
       "accentOf": "white",
       "substance": "print-paper",
-      "realMaterial": "The photographs themselves: salted-paper, albumen, cyanotype and gelatin silver prints and albumen stereographs, the image in the paper's surface, whose image each work supplies",
+      "realMaterial": "Works whose image lies in the paper's surface: the photographs themselves (salted-paper, albumen, cyanotype and gelatin silver prints and albumen stereographs), the printed page and newspaper, the block-printed wallpaper and the watercolour; whose image each work supplies",
       "workingsByEra": {
         "classical": "printed and mounted",
         "modern": "printed and mounted (the Hall of Light)",
@@ -3502,7 +3502,171 @@
         {
           "working": "printed",
           "history": "clean",
-          "note": "Art: every print and stereograph on paper; each work gives the instance its own image"
+          "note": "Art: every print, stereograph, page and sheet on paper; each work gives the instance its own image"
+        }
+      ]
+    },
+    {
+      "key": "accent.ink-on-silk",
+      "family": "accent",
+      "accentOf": "white",
+      "substance": "painting-silk",
+      "realMaterial": "Chinese paintings on silk: ink and light mineral colour on a plain-woven silk, backed with paper and laid into its mount, whose image each work supplies",
+      "workingsByEra": {
+        "classical": "painted and mounted (Chenghuai's hanging scrolls)",
+        "modern": "absent",
+        "future": "absent"
+      },
+      "roles": [
+        "Chenghuai: the three Song hanging scrolls on silk in the chenghuaitang cases"
+      ],
+      "why": "The works are not chosen by the story but hung in it: a painting on silk brings its own silk, darkened with age, which its photograph carries.",
+      "oldChoice": "the old build's per-work image materials",
+      "verdict": "new",
+      "verdictReason": "A painting on silk needs a palette entry so each resolves through the same connector as a canvas; each work supplies its image.",
+      "research": {
+        "records": [
+          "Shading/Substances/painting-silk.json",
+          "Shading/Workings/ink-painted.json"
+        ],
+        "needed": "Measured gloss of an aged, mounted painting silk."
+      },
+      "finishes": [
+        {
+          "working": "ink-painted",
+          "history": "clean",
+          "note": "Art: every painting on silk; each work gives the instance its own image"
+        }
+      ]
+    },
+    {
+      "key": "accent.ink-on-paper",
+      "family": "accent",
+      "accentOf": "white",
+      "substance": "xuan-paper",
+      "realMaterial": "Chinese paintings and calligraphy on paper: ink and light colour on a bast-fibre paper (xuan, mulberry), backed and laid into its mount, whose image each work supplies",
+      "workingsByEra": {
+        "classical": "painted and mounted (Chenghuai's hanging scrolls)",
+        "modern": "absent",
+        "future": "absent"
+      },
+      "roles": [
+        "Chenghuai: the four Yuan and Ming hanging scrolls on paper in the qingbi and tingyun cases"
+      ],
+      "why": "The works are not chosen by the story but hung in it: a painting on paper brings its own paper, whose tone its photograph carries.",
+      "oldChoice": "the old build's per-work image materials",
+      "verdict": "new",
+      "verdictReason": "A painting on paper needs a palette entry so each resolves through the same connector as a canvas; each work supplies its image.",
+      "research": {
+        "records": [
+          "Shading/Substances/xuan-paper.json",
+          "Shading/Workings/ink-painted.json"
+        ],
+        "needed": "Measured whites and gloss of an old mounted xuan paper."
+      },
+      "finishes": [
+        {
+          "working": "ink-painted",
+          "history": "clean",
+          "note": "Art: every painting on paper in a scroll's mount; each work gives the instance its own image"
+        }
+      ]
+    },
+    {
+      "key": "accent.oil-on-panel",
+      "family": "accent",
+      "accentOf": "oak",
+      "substance": "oil-paint",
+      "realMaterial": "Oil paintings on wooden panels: the paint over a smooth gesso ground on the panel, varnished, whose image each work supplies",
+      "workingsByEra": {
+        "classical": "painted and varnished (Albion's Pre-Raphaelite panels)",
+        "modern": "absent",
+        "future": "absent"
+      },
+      "roles": [
+        "Albion: Mariana, The Last of England, The Pretty Baa-Lambs, Morgan le Fay and Medea"
+      ],
+      "why": "A panel's paint is the canvas's drying-oil film under varnish, laid on a ground planed and scraped smooth instead of over a weave.",
+      "oldChoice": "the old build's per-work image materials",
+      "verdict": "new",
+      "verdictReason": "A panel's face has no weave under it, so it is its own finish of the paint.",
+      "research": {
+        "records": [
+          "Shading/Substances/oil-paint.json",
+          "Shading/Workings/varnished.gesso.json"
+        ],
+        "needed": "Measured gloss of a varnished panel painting."
+      },
+      "finishes": [
+        {
+          "working": "varnished.gesso",
+          "history": "clean",
+          "note": "Art: every painting on a panel; each work gives the instance its own image"
+        }
+      ]
+    },
+    {
+      "key": "accent.tapestry",
+      "family": "accent",
+      "accentOf": "white",
+      "substance": "tapestry-weave",
+      "realMaterial": "Woven tapestry: a weft-faced weave of wool with silk highlights on a cotton warp, the image woven in, whose image each work supplies",
+      "workingsByEra": {
+        "classical": "woven (Albion's Holy Grail tapestry)",
+        "modern": "absent",
+        "future": "absent"
+      },
+      "roles": [
+        "Albion: The Attainment, Morris & Co. after Burne-Jones"
+      ],
+      "why": "The work is not chosen by the story but hung in it: a tapestry brings its own wool and silk, whose colours its photograph carries.",
+      "oldChoice": "the old build's per-work image materials",
+      "verdict": "new",
+      "verdictReason": "A tapestry needs a palette entry so it resolves through the same connector as a canvas; the work supplies its image.",
+      "research": {
+        "records": [
+          "Shading/Substances/tapestry-weave.json",
+          "Shading/Workings/woven.json"
+        ],
+        "needed": "A textile record: the weave's rib, sheen and fading."
+      },
+      "finishes": [
+        {
+          "working": "woven",
+          "history": "clean",
+          "note": "Art: every tapestry; the work gives the instance its own image"
+        }
+      ]
+    },
+    {
+      "key": "accent.mahogany",
+      "family": "accent",
+      "accentOf": "oak",
+      "substance": "mahogany",
+      "realMaterial": "Mahogany (Swietenia), the English artists' colourmen's panel wood of the nineteenth century: reddish-brown heartwood, planed, its back waxed",
+      "workingsByEra": {
+        "classical": "planed and waxed (Albion's panels and their cradles)",
+        "modern": "absent",
+        "future": "absent"
+      },
+      "roles": [
+        "Albion: the panels the Pre-Raphaelites painted on, and their cradles"
+      ],
+      "why": "The panel is the work's own wood: Millais's Mariana is on mahogany (Tate), as the colourmen's panels of its day were.",
+      "oldChoice": "(none)",
+      "verdict": "new",
+      "verdictReason": "Art makes a panel as the real object: a painted face on a wooden board, cradled.",
+      "research": {
+        "records": [
+          "Shading/Substances/mahogany.json"
+        ],
+        "needed": "A timber record with a measured density and colour of old panel mahogany."
+      },
+      "finishes": [
+        {
+          "working": "waxed",
+          "history": "aged.patina",
+          "note": "Stages: albion.panel"
         }
       ]
     },

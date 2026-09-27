@@ -1,0 +1,26 @@
+{
+  "$sources": [
+    "A painting on a wooden panel as the English artists' colourmen supplied them in the 1850s and as conservators have cradled them since: a mahogany board a quarter to three eighths of an inch thick (about 6 to 10 mm; 8 mm taken), its face grounded in gesso and painted (the ground and paint about 0.5 mm); on its back a cradle of fixed members glued along the grain, about 20 mm wide and 15 mm deep, some 12 cm apart at most, with slides about 20 by 6 mm running across them through slots, flush with the cradle's back, some 15 cm apart at most, the outermost about 20 mm in from the edges. First values from the conservation literature's descriptions of cradles; none of the museum's panels was measured, and whether each was cradled is not recorded.",
+    "The grain runs along the board's longer side, as a panel is cut along its plank."
+  ],
+  "$units": {
+    "BoardMeters": "m",
+    "GroundMeters": "m",
+    "CradleDepthMeters": "m",
+    "MemberWidthMeters": "m",
+    "MemberSpacingMeters": "m",
+    "SlideWidthMeters": "m",
+    "SlideDepthMeters": "m",
+    "SlideSpacingMeters": "m",
+    "EdgeMeters": "m"
+  },
+  "boardMeters": 0.008,
+  "groundMeters": 0.0005,
+  "cradleDepthMeters": 0.015,
+  "memberWidthMeters": 0.02,
+  "memberSpacingMeters": 0.12,
+  "slideWidthMeters": 0.02,
+  "slideDepthMeters": 0.006,
+  "slideSpacingMeters": 0.15,
+  "edgeMeters": 0.02
+}

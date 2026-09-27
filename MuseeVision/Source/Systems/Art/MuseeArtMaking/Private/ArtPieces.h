@@ -25,16 +25,19 @@ namespace Musee::ArtMaking
 	[[nodiscard]] FName GlassPieceName(const FArtHangEntry& Entry, bool bSplit);
 
 	/**
-	 * The word an object Art makes is named by, from its support: `canvas`, `glass`, `paper` (a print, a card), `plate` (a
-	 * daguerreotype), `ware` (earthenware, ceramic), `cast`; `work` for any other. An object cast from its scan is named as
-	 * a cast whatever its support.
+	 * The word an object Art makes is named by, from its support: `canvas`, `panel`, `glass`, `paper` (a print, a card, a
+	 * scroll on paper, a book, a leaf), `silk` (a scroll on silk), `plate` (a daguerreotype), `ware` (earthenware,
+	 * ceramic), `tapestry`, `cast`; `work` for any other. An object cast from its scan is named as a cast whatever its
+	 * support.
 	 */
 	[[nodiscard]] const TCHAR* ObjectWord(FName Support);
 
 	/**
 	 * The name of an object Art makes: `<word>.<id>`, or `<word>.<id>.<index>` for one of a work's several objects. Its
-	 * face (a canvas's paint, a print, a plate, ware's decorated faces) is that name; its other parts are `<name>.<part>`
-	 * (`linen`, `frame`, `mount`, `glazing`, `ground`).
+	 * face (a canvas's or a panel's paint, a print, a plate, ware's decorated faces, a scroll's painting, a book's page, a
+	 * tapestry's weave) is that name; its other parts are `<name>.<part>` (`linen`, `frame`, `mount`, `glazing`, `ground`,
+	 * `board`, `cradle`, `stick`, `roller`, `knob.left`, `cord.left`, `board.verso`, `block.recto`; an opening shown whole
+	 * names its pages `verso` and `recto`).
 	 */
 	[[nodiscard]] FString ObjectName(const FArtHangEntry& Entry, bool bSplit);
 	[[nodiscard]] FName PartName(const FArtHangEntry& Entry, bool bSplit, const TCHAR* Part);
@@ -60,6 +63,11 @@ namespace Musee::ArtMaking
 	 * - a dish or a vessel standing at its centre on its Mount anchor, turned from its photograph;
 	 * - a work in the round cast from its scan, on its carrier's top (its Mount anchor), at its true height, in its medium;
 	 * - a vessel without a scan turned on Form's lathe from its section, on its stand, in its medium's glaze.
+	 * - a panel at its Wall anchor: its painted face on its board, cradled, framed where the plan frames it;
+	 * - a tapestry at its Wall anchor, hanging on the stage's batten and lining;
+	 * - a hanging scroll at its Wall anchor, on silk or paper: the painting in its mount, with its stick, roller, knobs and
+	 *   cord;
+	 * - a book lying open, or a loose leaf lying flat, on its Mount anchor (ObjectMaking.h).
 	 * A work the stage builds (`"built": "form"`) is left to the stage. Anything the plan gets wrong is a finding and
 	 * that work isn't made.
 	 */

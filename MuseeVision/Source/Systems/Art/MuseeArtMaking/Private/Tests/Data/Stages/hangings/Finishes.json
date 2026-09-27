@@ -1,0 +1,10 @@
+{
+  "stage": "hangings",
+  "finishes": [
+    { "surface": "hangings.frame.gilt", "material": "oak.sessile-french", "working": "gilt.gold-leaf.oil", "history": "aged.patina", "note": "The panel's frame." },
+    { "surface": "hangings.panel", "material": "accent.mahogany", "working": "waxed", "history": "aged.patina", "note": "The panel's wood." },
+    { "surface": "hangings.mount.silk", "material": "accent.silk", "working": "damask.mount", "history": "aged.patina", "note": "The scroll's mount." },
+    { "surface": "hangings.mount.knob", "material": "accent.huanghuali", "working": "oiled.waxed", "history": "handled", "note": "The scroll's knobs." },
+    { "surface": "hangings.mount.cord", "material": "accent.silk", "working": "stretched", "history": "new", "note": "The scroll's cord." }
+  ]
+}

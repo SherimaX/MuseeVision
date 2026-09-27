@@ -10,6 +10,13 @@ namespace Musee::Light
 		const TCHAR* const LuminairesFolder = TEXT("Light/Luminaires");
 		const TCHAR* const CompleteEvidence = TEXT("complete");
 
+		/**
+		 * The evidence of a record whose maker publishes no photometry for it, and whose light is worked out from the
+		 * physics of what it is made of and the numbers its parts' makers do publish (an edge-lit pane: its LED line's
+		 * flux per metre and a light guide's published extraction efficiency). Its fluxBasis gives the derivation.
+		 */
+		const TCHAR* const DerivedEvidence = TEXT("derived");
+
 		/** A millimetre is a thousandth of a metre. */
 		constexpr double MillimetersPerMeter = 1000.0;
 
@@ -116,7 +123,7 @@ namespace Musee::Light
 		FString WhyUnlit(const FLightLuminaireRecord& Record, const TOptional<FLightLuminaire::EEmitter>& Emitter)
 		{
 			if (!Emitter.IsSet()) { return FString::Printf(TEXT("Light has no emitter for the kind '%s' without its photometric file"), *Record.Kind); }
-			if (Record.EvidenceState != CompleteEvidence) { return TEXT("its evidence is incomplete"); }
+			if (Record.EvidenceState != CompleteEvidence && Record.EvidenceState != DerivedEvidence) { return TEXT("its evidence is incomplete"); }
 			if (Record.Light.CctKelvin <= 0.0) { return TEXT("its colour temperature isn't published"); }
 			switch (Emitter.GetValue())
 			{

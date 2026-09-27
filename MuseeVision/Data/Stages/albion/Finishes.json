@@ -385,6 +385,20 @@
       "working": "fumed.french-polished",
       "history": "aged.patina",
       "note": "The three wallpaper panels' narrow frames (0.035), glazed (albion.frame.glazing)."
+    },
+    {
+      "surface": "albion.mount",
+      "material": "accent.rag-board",
+      "working": "faced",
+      "history": "new",
+      "note": "The boards the works on paper are laid down on in their frames' rebates (the three wallpapers, Love's Messenger, Lady Lilith, the Star of Bethlehem): museum board, the sheet's own size, 3 mm."
+    },
+    {
+      "surface": "albion.panel",
+      "material": "accent.mahogany",
+      "working": "waxed",
+      "history": "aged.patina",
+      "note": "The panels the Pre-Raphaelites painted on and their cradles (Mariana, The Last of England, The Pretty Baa-Lambs, Morgan le Fay, Medea): mahogany, as Mariana's is (Tate), its back waxed."
     }
   ]
 }

@@ -6,14 +6,15 @@
 #include "MatterFinishSchedule.h"
 #include "Support/ArtMedia.h"
 #include "Vessel/VesselRecord.h"
+#include "Objects/HangingRecords.h"
 #include "Ware/WareMesh.h"
 
 namespace Musee::ArtMaking
 {
 	/**
-	 * What the checks of a plan's entries read once: Care.json's keys, the stage's finishes, the turned forms, and for
-	 * works in the round the media, how works are cast and how vessels are turned, every finish they name offered by the
-	 * palette (RoundWhy says why they can't be read).
+	 * What the checks of a plan's entries read once: Care.json's keys, the stage's finishes, the turned forms, the books,
+	 * and for works in the round the media, how works are cast and how vessels are turned, every finish they name offered
+	 * by the palette (RoundWhy says why they can't be read).
 	 */
 	struct FEntryContext
 	{
@@ -26,6 +27,8 @@ namespace Musee::ArtMaking
 		TOptional<FArtCasts> Casts;
 		TOptional<FArtVessels> Vessels;
 		FString RoundWhy;
+		TArray<FArtBook> Books;
+		FString BooksWhy;
 	};
 
 	/** Whether the plan frames the object in a surface of the finish schedule (`"frame"` names one, not `none`). */
@@ -33,8 +36,10 @@ namespace Musee::ArtMaking
 
 	/**
 	 * What is wrong with making one object on its own, one clause each: its size and place; for its support, the anchor
-	 * it is made at and the surfaces it names (a canvas's frame; stained glass's glass; a print's mount, frame and
-	 * glazing; a card's or plate's glazing; ware's kind, place and form); and whether its id can name a layer.
+	 * it is made at and the surfaces it names (a canvas's frame; a panel's frame and wood; stained glass's glass; a
+	 * print's mount, frame and glazing; a card's or plate's glazing; ware's kind, place and form; a tapestry's place off
+	 * its wall; a hanging scroll's mount, knobs and cord; a book's or leaf's place, and a book's binding); and whether its
+	 * id can name a layer.
 	 */
 	[[nodiscard]] TArray<FString> EntryFaults(const FMuseeStageContext& Stage, const FArtHangEntry& Entry, const FEntryContext& Context);
 
@@ -52,4 +57,7 @@ namespace Musee::ArtMaking
 
 	/** A piece of turned ware's form: its kind and size from the plan, its window and outline from Data/Art/Turned.json. */
 	[[nodiscard]] FWareSpec WareOf(const FArtHangEntry& Entry, const FEntryContext& Context);
+
+	/** A book's binding, from Data/Art/Books.json, or null. */
+	[[nodiscard]] const FArtBook* FindBook(const FString& Work, TConstArrayView<FArtBook> Books);
 }
