@@ -94,6 +94,7 @@ namespace Musee::NatureMaking
 				const double Vertical = Site.CrownRadii.Y > 0.0 ? Site.CrownRadii.Y : Habit.CrownRadiusShares[1] * Height;
 				CrownRadii = FVector(Across, Across, Vertical);
 				CrownCentre = Foot + FVector(0.0, 0.0, Site.CrownCentre > 0.0 ? Site.CrownCentre : Habit.CrownCentreShare * Height);
+				LeafDensity = Site.LeafDensity > 0.0 ? Site.LeafDensity : 1.0;
 				TrunkRadius = Habit.TrunkRadiusMeters * FMath::Sqrt(Height / Middle(Species.HeightMeters));
 			}
 
@@ -118,6 +119,8 @@ namespace Musee::NatureMaking
 			double TrunkRadius = 0.0;
 			FVector CrownCentre;
 			FVector CrownRadii;
+			/** The share of the species' full leaf the crown carries. */
+			double LeafDensity = 1.0;
 			TArray<FBranch> Branches;
 
 		private:
@@ -261,7 +264,7 @@ namespace Musee::NatureMaking
 			}
 		}
 
-		/** The leaves along the leaf-bearing twigs, as many as the crown's volume holds, turned out and up to the light. */
+		/** The leaves along the leaf-bearing twigs, as many as the crown's volume holds at the tree's leaf density, turned out and up to the light. */
 		void Leaves(const FTreeGrowth& Tree, FRandomStream& Random, FPlantParts& Out)
 		{
 			const FNatureTreeHabit& Habit = Tree.Habit;
@@ -274,7 +277,7 @@ namespace Musee::NatureMaking
 			{
 				Twigs += B.Order >= Habit.LeafOrder ? B.Length * (1.0 - Habit.LeafStartShare) : 0.0;
 			}
-			const double PerMeter = Habit.LeavesPerPlant * Volume / FMath::Max(ReferenceVolume, UE_SMALL_NUMBER) / FMath::Max(Twigs, 1e-3);
+			const double PerMeter = Tree.LeafDensity * Habit.LeavesPerPlant * Volume / FMath::Max(ReferenceVolume, UE_SMALL_NUMBER) / FMath::Max(Twigs, 1e-3);
 			FNatureSurface& Surface = Out.FindOrAdd(Organ::Leaf);
 			for (const FBranch& B : Tree.Branches)
 			{

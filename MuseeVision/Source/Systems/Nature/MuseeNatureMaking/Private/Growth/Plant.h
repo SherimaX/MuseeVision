@@ -42,6 +42,9 @@ namespace Musee::NatureMaking
 		double CrownCentre = 0.0;
 		FVector2D CrownRadii = FVector2D::ZeroVector;
 
+		/** How densely a tree is in leaf, as a share of its species' full leaf for its crown; zero for the species' own. */
+		double LeafDensity = 0.0;
+
 		/**
 		 * A hedge's line, from and to, on the soil, and its clipped section; whether the run's start and end are the
 		 * hedge's own open ends, clipped across (a run between two others is closed at both).

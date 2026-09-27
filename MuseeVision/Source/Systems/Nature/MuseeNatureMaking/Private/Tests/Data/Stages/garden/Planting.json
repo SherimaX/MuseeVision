@@ -1,5 +1,5 @@
 {
-  "$sources": "A test garden after the Chenghuai garden, the Hall of Light's orchard and the Salon's pergola: a 10 m square of ground under moss with a round pool in it, a birch at its point, a few bamboo culms, a clipped yew along a line, a patch of sward, a vine trained up a post from its planter, and a bed that counts more plants than it plots.",
+  "$sources": "A test garden after the Chenghuai garden, the Hall of Light's orchard and the Salon's pergola: a 10 m square of ground under moss with a round pool in it, a birch at its point and another as big in half its leaf, a few bamboo culms, a clipped yew along a line, a patch of sward, a vine trained up a post from its planter, and a bed that counts more plants than it plots.",
   "stage": "garden",
   "water": [
     {
@@ -14,6 +14,8 @@
       "outline": { "polygon": [[0.0, 0.0], [10.0, 0.0], [10.0, 10.0], [0.0, 10.0]] } },
     { "bed": "garden.birch", "species": "Betula pendula", "count": 1, "working": "grown", "history": "weathered", "body": "",
       "point": [8.0, 2.0], "height": 9.3, "crownCentre": 6.8, "crownRadii": [1.9, 2.5] },
+    { "bed": "garden.airy-birch", "species": "Betula pendula", "count": 1, "working": "grown", "history": "weathered", "body": "",
+      "point": [16.0, 6.0], "height": 9.3, "crownCentre": 6.8, "crownRadii": [1.9, 2.5], "leafDensity": 0.5 },
     { "bed": "garden.bamboo", "species": "Phyllostachys aureosulcata", "count": 3, "spacing": 0.3, "working": "grown", "history": "weathered",
       "points": [[1.2, 8.3], [1.6, 8.7], [1.8, 8.4]] },
     { "bed": "garden.hedge", "species": "Taxus baccata", "count": 5, "spacing": 0.5, "working": "grown", "history": "weathered", "body": "",

@@ -9,7 +9,7 @@ Everything grown or formed by natural process. Modules `MuseeNature` (Runtime: t
 | --- | --- |
 | `NaturePlanting.h` | `FNaturePlanting`: a stage's `Planting.json`, its water and its beds |
 | `NatureWater.h`, `NatureOutline.h` | `FNatureWater` (anchor, body, outline, depth, freeboard, material, working, history); `FNatureOutline` (an ellipse or a polygon: `IsValid`, `Contains`, `Area`) |
-| `NatureBed.h`, `NatureCast.h` | `FNatureBed`: a species in a Bed anchor, a count at a spacing or at its `points`, its `point`, along its `line` or over its `outline`; a tree's `height`, `crownCentre` and `crownRadii`; its material spec, or `FNatureCast`: a cast specimen's material |
+| `NatureBed.h`, `NatureCast.h` | `FNatureBed`: a species in a Bed anchor, a count at a spacing or at its `points`, its `point`, along its `line` or over its `outline`; a tree's `height`, `crownCentre`, `crownRadii` and `leafDensity` (its share of its species' full leaf); its material spec, or `FNatureCast`: a cast specimen's material |
 | `NatureGround.h`, `NatureClip.h`, `NatureTraining.h` | `FNatureGround`: the soil, lawn or gravel a bed lays over its outline; `FNatureClip`: a clipped hedge's section; `FNatureTraining`: a path a climber is trained along |
 | `NatureSpecies.h`, `NatureOrgan.h` | `FNatureSpecies`: a record of `Data/Nature/Species/` (form, organs and their tissue, measures, colours, sources) |
 | `NatureTreeHabit.h`, `NatureBranching.h` | `FNatureTreeHabit`, `FNatureBranching`: a tree species' crown, trunk, orders of branching, and how its leaves and flowers are set |
