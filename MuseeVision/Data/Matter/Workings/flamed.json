@@ -1,0 +1,78 @@
+{
+  "schema": "musee.matter.working/1",
+  "key": "flamed",
+  "name": "Flamed (thermal)",
+  "kind": "finish",
+  "appliesTo": {
+    "families": [
+      "stone"
+    ],
+    "substances": []
+  },
+  "over": [
+    "sawn.vein-cut",
+    "sawn.cross-cut"
+  ],
+  "process": "An intense flame passes over the wetted face; its minerals expand at different rates and the water flashes to steam, so the surface layer fractures and flakes away in small pieces, leaving a smoothly textured, very consistent surface.",
+  "processSources": [
+    "Polycor Inc. (quarrier), 'How to add a flamed finish to granite surfaces', read 2026-09-26, https://www.polycor.com/resources/how-to-add-a-flamed-finish-to-granite-surfaces/",
+    "Connecticut Stone (supplier), 'Flaming stone process', read 2026-09-26, https://www.connecticutstone.com/flaming-stone-process/"
+  ],
+  "admits": {
+    "text": "Stones with minerals of different expansion, such as granite and bluestone.",
+    "grade": "guidance",
+    "source": "Polycor Inc. (quarrier), 'How to add a flamed finish to granite surfaces', read 2026-09-26, https://www.polycor.com/resources/how-to-add-a-flamed-finish-to-granite-surfaces/"
+  },
+  "excludes": [
+    {
+      "substance": "travertine",
+      "reason": {
+        "text": "Limestone and marble cannot be flamed: their calcium carbonate responds uniformly to heat and does not flake.",
+        "grade": "guidance",
+        "source": "Polycor Inc. (quarrier), 'How to add a flamed finish to granite surfaces', read 2026-09-26, https://www.polycor.com/resources/how-to-add-a-flamed-finish-to-granite-surfaces/"
+      }
+    },
+    {
+      "substance": "cream-marble",
+      "reason": {
+        "text": "A calcite stone, as travertine.",
+        "grade": "guidance",
+        "source": "Polycor Inc. (quarrier), 'How to add a flamed finish to granite surfaces', read 2026-09-26, https://www.polycor.com/resources/how-to-add-a-flamed-finish-to-granite-surfaces/"
+      }
+    }
+  ],
+  "dissent": {
+    "text": "Another supplier writes that certain hard limestones and marbles can withstand the process, and that a gold limestone turns pinkish when flamed.",
+    "grade": "guidance",
+    "source": "Connecticut Stone (supplier), 'Flaming stone process', read 2026-09-26, https://www.connecticutstone.com/flaming-stone-process/",
+    "note": "the records follow the quarrier's rule; a flamed calcite stone would need a specimen"
+  },
+  "quartzTransition": {
+    "value": 573,
+    "unit": "degC",
+    "grade": "measured",
+    "source": "Anthony J.W., Bideaux R.A., Bladh K.W., Nichols M.C. (eds.) Handbook of Mineralogy, Mineralogical Society of America, 'Quartz' (Mineral Data Publishing, version 1.2, 2001), http://www.handbookofmineralogy.org/pdfs/quartz.pdf",
+    "conditions": "low quartz is stable below 573 degC; a granite's quartz passes it in the flame"
+  },
+  "museumUse": {
+    "text": "The design flames Suzhou granite in the modern era (Chenghuai); that substance is not in the stone group's records.",
+    "grade": "design",
+    "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/plan/boards/MaterialsStone.png and plan/canvas/MaterialsStone.dc.html (the material language: stone), 'Polished travertine; Suzhou granite, flamed'"
+  },
+  "photograph": [
+    "An even, consistent, finely textured matt face on granite; never on travertine or cream marble."
+  ],
+  "unverified": [
+    {
+      "field": "surface.arealRoughness",
+      "value": null,
+      "unit": "mm",
+      "reason": "No measured roughness of a flamed face was read."
+    }
+  ],
+  "sources": [
+    "Polycor Inc. (quarrier), 'How to add a flamed finish to granite surfaces', read 2026-09-26, https://www.polycor.com/resources/how-to-add-a-flamed-finish-to-granite-surfaces/",
+    "Connecticut Stone (supplier), 'Flaming stone process', read 2026-09-26, https://www.connecticutstone.com/flaming-stone-process/",
+    "Anthony J.W., Bideaux R.A., Bladh K.W., Nichols M.C. (eds.) Handbook of Mineralogy, Mineralogical Society of America, 'Quartz' (Mineral Data Publishing, version 1.2, 2001), http://www.handbookofmineralogy.org/pdfs/quartz.pdf"
+  ]
+}

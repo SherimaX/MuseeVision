@@ -1,0 +1,84 @@
+{
+  "schema": "musee.matter.working/1",
+  "key": "limewashed",
+  "name": "Limewashed",
+  "appliesTo": {
+    "families": [
+      "white"
+    ],
+    "substances": [
+      "lime-plaster"
+    ]
+  },
+  "over": [
+    "trowelled",
+    "run"
+  ],
+  "lays": "limewash",
+  "process": "The surface is dampened (not wet), then limewash is scrubbed and worked in thinly with a large, rough brush. At least three or four coats are built up, each dried and the surface dampened again before the next. Laid thin it carbonates to a sound calcite skin; laid thick it crazes. Outdoors it is renewed about every five years, so an old wall carries many generations of coats.",
+  "steps": [
+    {
+      "step": "wet the surface with clean cold water and leave it until damp but not wet",
+      "source": "Bennett, B. (1997) Awash with Colour: The Decorative and Protective Roles of Limewash. The Building Conservation Directory, https://www.buildingconservation.com/articles/decorative-protective-limewash/decorative-protective-limewash.htm",
+      "grade": "guidance"
+    },
+    {
+      "step": "apply thinly and work in well with a large, rough-textured brush (scrubbed in with a circular motion)",
+      "source": "SPAB, Limewash, https://www.spab.org.uk/advice/limewash; Bennett (1997), https://www.buildingconservation.com/articles/decorative-protective-limewash/decorative-protective-limewash.htm",
+      "grade": "guidance"
+    },
+    {
+      "step": "let each coat dry, dampen, and apply the next",
+      "source": "SPAB, Limewash, https://www.spab.org.uk/advice/limewash",
+      "grade": "guidance"
+    }
+  ],
+  "facts": {
+    "coats": {
+      "min": 3,
+      "max": 4,
+      "unit": "coat",
+      "source": "SPAB, Limewash, https://www.spab.org.uk/advice/limewash",
+      "grade": "guidance"
+    },
+    "renewalIntervalExternal": {
+      "value": 5,
+      "unit": "year",
+      "source": "SPAB, Limewash, https://www.spab.org.uk/advice/limewash",
+      "grade": "guidance"
+    },
+    "crazingWhenThick": {
+      "text": "crazing occurs when it is applied more liberally",
+      "source": "Bennett (1997), https://www.buildingconservation.com/articles/decorative-protective-limewash/decorative-protective-limewash.htm",
+      "grade": "guidance"
+    },
+    "gypsumSubstrate": {
+      "text": "gauging a lime finish with gypsum can vary its suction and affect the appearance of limewash and distemper laid over it",
+      "source": "Napier, W. & Jenkins, M. (2018) Inform Guide: Plain Lime Plastering. Historic Environment Scotland, https://www.historicenvironment.scot/archives-and-research/publications/publication/?publicationId=67d4d72c-7b8c-4622-a244-a94b01090177",
+      "grade": "guidance"
+    }
+  },
+  "surface": {
+    "matt": "Dead matt: the carbonated film is a fine porous calcite layer with no binder skin.",
+    "strokes": "Brush marks and slight differences of opacity between strokes; the substrate's texture shows through.",
+    "buildUp": "Generations of coats round over arrises and fill fine relief.",
+    "drying": "Semi-transparent and darker while wet; dries many shades lighter and opaque."
+  },
+  "photograph": [
+    "Uneven, soft, chalky white with visible brushwork; the trowelled plaster below shows through thin places.",
+    "A fine craze where a coat went on thick."
+  ],
+  "unverified": [
+    {
+      "field": "surface.buildUp (thickness after n renewals)",
+      "value": null,
+      "unit": "um",
+      "reason": "No measured film thickness per coat was found."
+    }
+  ],
+  "sources": [
+    "Bennett, B. (1997) The Building Conservation Directory.",
+    "Napier, W. & Jenkins, M. (2018) Inform Guide: Plain Lime Plastering. Historic Environment Scotland.",
+    "SPAB, Limewash, https://www.spab.org.uk/advice/limewash"
+  ]
+}

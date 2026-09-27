@@ -1,0 +1,72 @@
+{
+  "schema": "musee.matter.history/1",
+  "key": "steel.coating-ageing",
+  "name": "Ageing of the painted steel lattice",
+  "family": "accent",
+  "appliesTo": {
+    "substances": [
+      "steel"
+    ],
+    "workings": [
+      "painted.steel"
+    ]
+  },
+  "surfaceLawTerms": [
+    "age",
+    "soiling"
+  ],
+  "describes": "The lattice sits under the eye's glazing, indoors, out of reach and out of the rain, so its paint ages slowly. The protective system is rated to reach its first major maintenance after more than 25 years in a C2 atmosphere; until then the steel beneath does not corrode. What does change is the surface: dust and soot settle on the upward faces of the members and on the ring, so the tops of the bars read a little lighter or greyer than their sides when seen from below against the sky; the topcoat's sheen softens slowly. Sunlight reaches the paint only through the glazing, which removes most of the ultraviolet. Where condensation forms on cold nights it can leave faint drip marks along the lower edges. Nothing here is touched or walked.",
+  "terms": {
+    "durability": {
+      "min": 25,
+      "unit": "year",
+      "source": "Sherwin-Williams Protective and Marine, 'ISO 12944 Systems Guide', 2021 edition, p. 3 ('C2 VERY HIGH DURABILITY: >25 YRS'), https://industrial.sherwin-williams.com/content/dam/pcg/sherwin-williams/protective-marine/emeai/de/de-de/pdfs/system-guides/ISO-12944-2018-Systems-Coatings-Guide-2021-English.pdf",
+      "grade": "manufacturer",
+      "note": "'The durability range is not a guarantee time.' It is the planning time to first major maintenance under ISO 12944:2018."
+    },
+    "uvThroughGlazing": {
+      "text": "The glazing's ultraviolet transmittance is recorded by the glass group (low-iron float about 0.86 at 4 mm; the UV-filtering laminate far less). The paint under it therefore sees little UV.",
+      "source": "MuseeVision/Data/Matter/Substances/low-iron-glass.json (optics.uvTransmittance) and MuseeVision/Data/Matter/Workings/laminated.uv-filtering.json",
+      "grade": "record"
+    },
+    "soiling": {
+      "text": "Dust and soot deposition indoors follows the museum air; the measured deposition rates are recorded with the white family's soiling. Upward faces collect coarse dust; the lattice's bars are upward faces seen from below only at their edges.",
+      "source": "MuseeVision/Data/Matter/Histories/white.soiling.json (Bellan, Salmon and Cass 2000, and the sources it cites)",
+      "grade": "record"
+    }
+  },
+  "drivers": [
+    {
+      "driver": "age",
+      "owner": "Matter piece table",
+      "meaning": "years the piece has been in service",
+      "source": "MuseeVision/Docs/Architecture.md, Matter (piece table: age)",
+      "grade": "design"
+    },
+    {
+      "driver": "upwardFaces",
+      "owner": "Form",
+      "meaning": "faces that look up, where dust settles; read from the piece's own surface normal, so no layout slot is needed",
+      "source": "MuseeVision/Docs/Architecture.md, Form (pieces are solids drawn by Form)",
+      "grade": "design"
+    }
+  ],
+  "photograph": [
+    "Look for an even dark grey with a soft satin sheen and a faint orange-peel texture.",
+    "Slightly lighter, dusty tops to the bars seen at a low angle.",
+    "Crisp, faired welds at the nodes.",
+    "No rust bleed anywhere while the paint is within its durability."
+  ],
+  "unverified": [
+    {
+      "field": "terms.topcoatGlossLoss",
+      "value": null,
+      "unit": "GU/year",
+      "reason": "No measured gloss retention of a polyurethane topcoat behind glass was read."
+    },
+    {
+      "field": "terms.condensationMarks",
+      "reason": "Whether condensation forms on the lattice depends on the glass's inner-face temperature and the Rotunda's dew point, which Light and Studio can compute; it is not measured here."
+    }
+  ]
+}

@@ -1,0 +1,96 @@
+{
+  "schema": "musee.matter.working/1",
+  "key": "toughened",
+  "name": "Thermally toughened",
+  "appliesTo": {
+    "families": [
+      "glass"
+    ],
+    "substances": [
+      "low-iron-glass"
+    ]
+  },
+  "over": [
+    "annealed"
+  ],
+  "process": "Heated like heat-strengthened glass and quenched hard by air (EN 12150). The faces go into high compression over a core in tension: about two and a half times annealed float's characteristic strength (120 against 45 MPa), and four times its mean breaking stress (165 against 41 MPa). It breaks into small blunt dice and cannot be cut afterwards. A rare nickel-sulphide inclusion can make it break by itself years later; a heat soak test (EN 14179) screens most of them out.",
+  "strength": {
+    "characteristicBendingStrength": {
+      "value": 120,
+      "unit": "MPa",
+      "grade": "guidance",
+      "source": "Saint-Gobain Building Glass UK, 'Glass Fundamentals GF-1B: The Strength of Glass', 2018 (Table 1 characteristic strengths to EN 572-1, EN 1863-1, EN 12150-1; Table 3 TRLV permissible stresses), https://www.saint-gobain-glass.co.uk/wp-content/uploads/2024/02/Glass-Fundamentals-1B-The-Strength-of-Glass-19-09-2018-1.pdf",
+      "conditions": "EN 12150-1, float, 5 % fractile"
+    },
+    "meanModulusOfRupture": {
+      "value": 165,
+      "unit": "MPa",
+      "grade": "manufacturer",
+      "source": "Pilkington North America, Technical Bulletin ATS-129 'Properties of soda-lime silica float glass', 04/2025, https://www.pilkington.com/-/media/pilkington/site-content/usa/window-manufacturers/technical-bulletins/ats-129---properties-of-soda-lime-silica-float-glass.pdf",
+      "conditions": "60 s load, 50 % probability of breakage"
+    },
+    "permissibleStress": {
+      "value": 50,
+      "unit": "MPa",
+      "grade": "guidance",
+      "source": "Saint-Gobain Building Glass UK, 'Glass Fundamentals GF-1B: The Strength of Glass', 2018 (Table 1 characteristic strengths to EN 572-1, EN 1863-1, EN 12150-1; Table 3 TRLV permissible stresses), https://www.saint-gobain-glass.co.uk/wp-content/uploads/2024/02/Glass-Fundamentals-1B-The-Strength-of-Glass-19-09-2018-1.pdf",
+      "conditions": "TRLV, vertical and overhead alike"
+    }
+  },
+  "flatness": {
+    "rollerWaveCentre": {
+      "value": 0.076,
+      "unit": "mm",
+      "grade": "secondary",
+      "source": "D. Lohrer, J. P. Martinez, 'Making glass flatness a standard', glassonweb.com, 2 April 2024, https://www.glassonweb.com/article/making-glass-flatness-standard",
+      "note": "0.003 in peak to valley, architectural quality"
+    },
+    "rollerWaveBorder": {
+      "value": 0.203,
+      "unit": "mm",
+      "grade": "secondary",
+      "source": "D. Lohrer, J. P. Martinez, 'Making glass flatness a standard', glassonweb.com, 2 April 2024, https://www.glassonweb.com/article/making-glass-flatness-standard",
+      "note": "0.008 in peak to valley, architectural quality"
+    }
+  },
+  "strainPattern": {
+    "description": "As heat-strengthened: quench marks visible in polarised skylight, most at oblique angles or through polarising sunglasses. They are inherent to all heat-treated glass and are not a defect.",
+    "grade": "manufacturer",
+    "source": "Viracon, Tech Talk VTT-009 'Quench pattern characteristics' (2019; quoting ASTM C1048-18 and EN 12150-1:2000), https://viracon.com/wp-content/uploads/2020/03/VTT-009_QuenchPatternCharacteristics.pdf"
+  },
+  "nickelSulphide": {
+    "heatSoakTemperature": {
+      "value": 290,
+      "unit": "degC",
+      "grade": "secondary",
+      "source": "Glazing Vision, 'Reducing the risk of spontaneous glass breakage', 30 June 2025 (heat soak at 290 degC to BS EN 14179-1; residual risk 1 in 400 tonnes), https://glazingvision.com/news-and-insights/reducing-the-risk-of-spontaneous-glass-breakage/",
+      "conditions": "BS EN 14179-1"
+    },
+    "massPerSpontaneousBreakage": {
+      "value": 400,
+      "unit": "t",
+      "grade": "secondary",
+      "source": "Glazing Vision, 'Reducing the risk of spontaneous glass breakage', 30 June 2025 (heat soak at 290 degC to BS EN 14179-1; residual risk 1 in 400 tonnes), https://glazingvision.com/news-and-insights/reducing-the-risk-of-spontaneous-glass-breakage/",
+      "note": "heat-soaked glass: '1 in 400 tonnes of glass'"
+    }
+  },
+  "photograph": [
+    "A slow ripple in reflected straight lines.",
+    "Quench marks in polarised skylight.",
+    "If broken: a web of small dice."
+  ],
+  "unverified": [
+    {
+      "field": "nickelSulphide.heatSoakDuration",
+      "value": 2,
+      "unit": "h",
+      "reason": "A search summary gives 'maintained for 2 h at 290 +/- 10 degC' (EN 14179); the source text was not read (the Springer page redirected to a sign-in)."
+    },
+    {
+      "field": "flatness.rollerWaveLimitEN12150",
+      "value": 0.5,
+      "unit": "mm",
+      "reason": "A search summary gives an EN 12150-1 limit of 0.5 mm over 300 mm; the standard itself was not read."
+    }
+  ]
+}

@@ -1,0 +1,184 @@
+{
+  "schema": "musee.matter.history/1",
+  "key": "stone.pore-soiling",
+  "name": "Dirt in the pores",
+  "family": "stone",
+  "appliesTo": {
+    "families": [
+      "stone"
+    ],
+    "substances": [
+      "travertine",
+      "cream-marble"
+    ],
+    "workings": []
+  },
+  "describes": "Dust and shoe-borne soil settle into open pores, voids, scratches and joints, most beside walking routes and at floor level, and bind in place when the air is damp.",
+  "surfaceLawTerms": [
+    "soiling",
+    "age"
+  ],
+  "terms": {
+    "sources": {
+      "text": "Visitors are the principal source of the dust in historic interiors. By number, tiny particles are 97 per cent of the deposit, but textile fibres and coarse particles from visitors' clothing are more visible and cover more of the surface.",
+      "grade": "measured",
+      "source": "Lithgow K., Lloyd H., Brimblecombe P., Yoon Y.H., Thickett D. (2005) 'Managing dust in historic houses: a visitor/conservator interface', ICOM Committee for Conservation 14th Triennial Meeting, The Hague, Preprints vol. II, pp. 662-669, https://www.english-heritage.org.uk/siteassets/home/learn/conservation/collections-advice--guidance/icom14dust.pdf"
+    },
+    "distribution": {
+      "halvingDistance": {
+        "value": 1,
+        "unit": "m",
+        "grade": "measured",
+        "source": "Lithgow K., Lloyd H., Brimblecombe P., Yoon Y.H., Thickett D. (2005) 'Managing dust in historic houses: a visitor/conservator interface', ICOM Committee for Conservation 14th Triennial Meeting, The Hague, Preprints vol. II, pp. 662-669, https://www.english-heritage.org.uk/siteassets/home/learn/conservation/collections-advice--guidance/icom14dust.pdf",
+        "conditions": "the covering rate is highest beside visitor routes and halves with every metre of distance from them"
+      },
+      "floorLevel": {
+        "text": "Dust is heaviest at floor level, where heavier particles are stirred up by feet and settle again close to the route.",
+        "grade": "measured",
+        "source": "Lithgow K., Lloyd H., Brimblecombe P., Yoon Y.H., Thickett D. (2005) 'Managing dust in historic houses: a visitor/conservator interface', ICOM Committee for Conservation 14th Triennial Meeting, The Hague, Preprints vol. II, pp. 662-669, https://www.english-heritage.org.uk/siteassets/home/learn/conservation/collections-advice--guidance/icom14dust.pdf"
+      },
+      "bodyBand": {
+        "min": 0.8,
+        "max": 1.5,
+        "unit": "m",
+        "grade": "measured",
+        "source": "Lithgow K., Lloyd H., Brimblecombe P., Yoon Y.H., Thickett D. (2005) 'Managing dust in historic houses: a visitor/conservator interface', ICOM Committee for Conservation 14th Triennial Meeting, The Hague, Preprints vol. II, pp. 662-669, https://www.english-heritage.org.uk/siteassets/home/learn/conservation/collections-advice--guidance/icom14dust.pdf",
+        "conditions": "height band of high dust and fibre deposition, between hip and shoulder"
+      }
+    },
+    "cementation": {
+      "binding": {
+        "text": "Deposited dust binds more strongly to surfaces over time and then needs harsher cleaning; salts and sugars set fine soil dust into solid lumps at high relative humidity.",
+        "grade": "measured",
+        "source": "Lithgow K., Lloyd H., Brimblecombe P., Yoon Y.H., Thickett D. (2005) 'Managing dust in historic houses: a visitor/conservator interface', ICOM Committee for Conservation 14th Triennial Meeting, The Hague, Preprints vol. II, pp. 662-669, https://www.english-heritage.org.uk/siteassets/home/learn/conservation/collections-advice--guidance/icom14dust.pdf"
+      },
+      "humidityLimit": {
+        "min": 65,
+        "unit": "%",
+        "grade": "measured",
+        "source": "Lithgow K., Lloyd H., Brimblecombe P., Yoon Y.H., Thickett D. (2005) 'Managing dust in historic houses: a visitor/conservator interface', ICOM Committee for Conservation 14th Triennial Meeting, The Hague, Preprints vol. II, pp. 662-669, https://www.english-heritage.org.uk/siteassets/home/learn/conservation/collections-advice--guidance/icom14dust.pdf",
+        "conditions": "relative humidity above which dust must be kept down to prevent cementation"
+      }
+    },
+    "pores": [
+      {
+        "text": "Open voids hold what feet and air bring. Travertine for floors is usually filled with cement or resin colour-matched to the stone, which leaves nothing open to catch dirt.",
+        "grade": "guidance",
+        "source": "Natural Stone Institute (2022) Dimension Stone Design Manual, chapter 12 'Travertine' (Specification, Product Description, Technical Data), pp. 12-1 to 12-14, https://transparencycatalog.com/assets/uploads/greener-images/12-TRAVERTINE-2022.pdf, Product Description 4.1.5 and 11"
+      },
+      {
+        "text": "Natural portland cement filler is grey; tinted cement or resin fillers are matched to the stone.",
+        "grade": "guidance",
+        "source": "Natural Stone Institute (2022) Dimension Stone Design Manual, chapter 12 'Travertine' (Specification, Product Description, Technical Data), pp. 12-1 to 12-14, https://transparencycatalog.com/assets/uploads/greener-images/12-TRAVERTINE-2022.pdf, Product Description 11.2"
+      },
+      {
+        "text": "On a resin-filled, polished travertine face the near-surface pore system is blocked.",
+        "grade": "measured",
+        "source": "Urosevic M., Sebastian-Pardo E., Cardell C. (2010) 'Rough and polished travertine building stone decay evaluated by a marine aerosol ageing test', Construction and Building Materials 24:1438-1448 (Olivillo travertine, Alhama de Almeria, Spain, sawn vein-cut), https://doi.org/10.1016/j.conbuildmat.2010.01.011, abstract and section 3.2.4"
+      }
+    ]
+  },
+  "drivers": [
+    {
+      "driver": "traffic",
+      "owner": "Site (per-stage plan-field texture: traffic density)",
+      "meaning": "where people walk, and how many",
+      "source": "MuseeVision/Docs/Architecture.md, Matter (plan-field textures: traffic density)",
+      "grade": "design"
+    },
+    {
+      "driver": "heightAboveFloor",
+      "owner": "Form (UV0: face coordinates in piece-local metres)",
+      "meaning": "each point's height above the finished floor",
+      "source": "MuseeVision/Docs/Architecture.md, Matter (UV0 in piece-local metres)",
+      "grade": "design"
+    },
+    {
+      "driver": "cavity",
+      "owner": "Form (vertex colour: cavity)",
+      "meaning": "recesses, joints and corners where dust lodges",
+      "source": "MuseeVision/Docs/Architecture.md, Matter (vertex colour: cavity)",
+      "grade": "design"
+    },
+    {
+      "driver": "openVoids",
+      "owner": "Matter (substance and working records)",
+      "meaning": "the substance's open porosity and the working's void treatment (open or filled)",
+      "source": "Substances/travertine.json (surface.voidTreatment) ; Workings/honed.json (voidTreatment)",
+      "grade": "design"
+    },
+    {
+      "driver": "relativeHumidity",
+      "owner": "none declared (no slot)",
+      "meaning": "the room air's relative humidity, which sets cementation",
+      "source": "MuseeVision/Docs/Architecture.md names no owner for an interior's relative humidity: a gap for the Register",
+      "grade": "design"
+    },
+    {
+      "driver": "age",
+      "owner": "Matter (piece table: age)",
+      "meaning": "years since the piece was set or last cleaned",
+      "source": "MuseeVision/Docs/Architecture.md, Matter (piece table: age)",
+      "grade": "design"
+    }
+  ],
+  "bySubstance": {
+    "travertine": {
+      "openPorosityMercury": {
+        "value": 8.16,
+        "unit": "%",
+        "grade": "measured",
+        "source": "Urosevic M., Sebastian-Pardo E., Cardell C. (2010) 'Rough and polished travertine building stone decay evaluated by a marine aerosol ageing test', Construction and Building Materials 24:1438-1448 (Olivillo travertine, Alhama de Almeria, Spain, sawn vein-cut), https://doi.org/10.1016/j.conbuildmat.2010.01.011, Table 3",
+        "conditions": "fresh, unpolished Olivillo travertine; 7.26 % when resin-filled and polished"
+      }
+    },
+    "cream-marble": {
+      "openPorosity": {
+        "value": 0.5,
+        "unit": "%",
+        "grade": "manufacturer",
+        "source": "Levantina, 'Crema Marfil Coto: ficha tecnica / technical file' (UNE-EN and ASTM test results), pp. 1-4, https://www.levantina.com/files/3351814979b33856c831796bdbd7340f/10004220/1/cremamarfil-2.pdf",
+        "conditions": "UNE-EN 1936"
+      }
+    }
+  },
+  "photograph": [
+    "On honed, open-pore travertine along the walking lines, voids read as dark dots and short dark dashes along the bands, fewer a metre or two away from the route.",
+    "Grey cement-filled voids sit flush and matt against the cream stone; resin-filled voids show a different sheen.",
+    "A soft grey line of grime runs at the foot of walls and in the joints near the floor.",
+    "Cream marble, with almost no open pores, shows dirt in its joints and scratches rather than in its body."
+  ],
+  "evidence": [],
+  "evidenceSearch": {
+    "searched": [
+      "the sets listed in Substances/travertine.json and Substances/cream-marble.json, evidenceSearch"
+    ],
+    "found": "No photograph on this PC shows real worn, soiled or weathered travertine or cream marble.",
+    "tier": "A tier (c) set of museum photographs at known exposure (worn thresholds, soiled open pores, weathered exterior travertine) would close the gap."
+  },
+  "unverified": [
+    {
+      "field": "terms.depositionRate",
+      "value": null,
+      "unit": "%/week",
+      "reason": "The dust-coverage rates of the National Trust studies (Lloyd et al. 2002, The Conservator 26) were not read at the source; only the distribution with distance and height was read."
+    },
+    {
+      "field": "terms.darkeningPerCoverage",
+      "value": null,
+      "unit": "1",
+      "reason": "No measured loss of stone reflectance per unit of dust coverage was found."
+    },
+    {
+      "field": "drivers.relativeHumidity",
+      "text": "The room air's relative humidity has no owner and no piece-layout slot.",
+      "reason": "No system owns an interior's relative humidity in the architecture: a gap for the Register."
+    }
+  ],
+  "sources": [
+    "Lithgow K., Lloyd H., Brimblecombe P., Yoon Y.H., Thickett D. (2005) 'Managing dust in historic houses: a visitor/conservator interface', ICOM Committee for Conservation 14th Triennial Meeting, The Hague, Preprints vol. II, pp. 662-669, https://www.english-heritage.org.uk/siteassets/home/learn/conservation/collections-advice--guidance/icom14dust.pdf",
+    "Natural Stone Institute (2022) Dimension Stone Design Manual, chapter 12 'Travertine' (Specification, Product Description, Technical Data), pp. 12-1 to 12-14, https://transparencycatalog.com/assets/uploads/greener-images/12-TRAVERTINE-2022.pdf",
+    "Urosevic M., Sebastian-Pardo E., Cardell C. (2010) 'Rough and polished travertine building stone decay evaluated by a marine aerosol ageing test', Construction and Building Materials 24:1438-1448 (Olivillo travertine, Alhama de Almeria, Spain, sawn vein-cut), https://doi.org/10.1016/j.conbuildmat.2010.01.011",
+    "Levantina, 'Crema Marfil Coto: ficha tecnica / technical file' (UNE-EN and ASTM test results), pp. 1-4, https://www.levantina.com/files/3351814979b33856c831796bdbd7340f/10004220/1/cremamarfil-2.pdf"
+  ]
+}

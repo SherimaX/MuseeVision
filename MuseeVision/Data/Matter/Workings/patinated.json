@@ -1,0 +1,455 @@
+{
+  "schema": "musee.matter.working/1",
+  "key": "patinated",
+  "name": "Patinated (the founder's brown statuary patina, waxed)",
+  "appliesTo": {
+    "families": [
+      "bronze",
+      "accent"
+    ],
+    "substances": [
+      "bronze",
+      "brass"
+    ]
+  },
+  "over": [
+    "cast.bronze"
+  ],
+  "process": "The founder colours the clean, chased bronze chemically. The piece is heated and a dilute sulfide solution (potassium, ammonium or sodium sulfide) is brushed or swabbed on; each application deepens the colour from light to dark brown. An oxide treatment of copper salts may go first to improve adhesion. The chemistry converts the surface to a thin film of cuprous oxide and copper sulfides: the 'statuary bronze' finish. The piece is rinsed and, while still warm, waxed; high points may be relieved with a fine abrasive to show the metal. The wax is renewed by hand-rubbing. On the sun clock the patina sits on the inlaid bronze of a walked floor, so the top faces lose it where feet land and the recessed parts keep it.",
+  "designation": {
+    "system": "NAAMM/NOMMA Metal Finishes Manual, as abstracted by the Copper Development Association",
+    "code": "C55 Sulfide (statuary)",
+    "text": "Apply 2%-5% aqueous solutions of ammonium sulfide, potassium sulfide or sodium sulfide by swabbing or brushing. Repeated application increases depth of color.",
+    "concentration": {
+      "min": 2,
+      "max": 5,
+      "unit": "wt%",
+      "source": "Copper Development Association, 'Copper Brass Bronze Design Handbook: Architectural Applications' (A4039), Table 17 (C55 Sulfide (statuary)), https://www.copper.org/publications/pub_list/pdf/A4039-ArchitecturalApplications.pdf",
+      "grade": "guidance",
+      "note": "The table gives '2%-5% aqueous solutions' without stating the basis; mass per cent is assumed."
+    }
+  },
+  "preTreatment": {
+    "code": "C54 Oxide (statuary)",
+    "text": "Aqueous solutions of copper sulfates and copper nitrates at 85 degC to boiling, immersion 30 s to 5 min. 'Oxide treatments may be applied as a preliminary step to improve adherence' of a sulfide finish.",
+    "temperature": {
+      "min": 85,
+      "max": 100,
+      "unit": "degC",
+      "source": "Copper Development Association, A4039, Table 17 (C54: 'at temperatures from 85 degC to boiling'), https://www.copper.org/publications/pub_list/pdf/A4039-ArchitecturalApplications.pdf",
+      "grade": "guidance",
+      "note": "Boiling taken as 100 degC at sea level."
+    },
+    "immersion": {
+      "min": 30,
+      "max": 300,
+      "unit": "s",
+      "source": "Copper Development Association, A4039, Table 17 (C54: 'immersion periods from 30 sec to 5 min'), https://www.copper.org/publications/pub_list/pdf/A4039-ArchitecturalApplications.pdf",
+      "grade": "guidance"
+    },
+    "source": "Copper Development Association, A4039, Table 17 and p. 42, https://www.copper.org/publications/pub_list/pdf/A4039-ArchitecturalApplications.pdf",
+    "grade": "guidance"
+  },
+  "hotPractice": {
+    "text": "A measured laboratory version of the founder's brown sulfide patina: the hot bronze surface brushed with a 3 wt% K2S solution, then rinsed with tap water.",
+    "concentration": {
+      "value": 3,
+      "unit": "wt%",
+      "source": "T. Kosec, M. Bajt Leban, P. Ropret, M. Finsgar, 'The impact of urban rain on the changes of bare and artificially patinated bronze during 9-year exposure', Environ. Sci. Pollut. Res. 31 (2024) 31925-31941, doi:10.1007/s11356-024-33369-9, https://pmc.ncbi.nlm.nih.gov/articles/PMC11133102/",
+      "grade": "measured"
+    },
+    "specimenAlloy": {
+      "text": "Cu 90.70, Sn 5.27, Zn 3.77, Pb 0.08 wt%",
+      "source": "T. Kosec et al. 2024, https://pmc.ncbi.nlm.nih.gov/articles/PMC11133102/",
+      "grade": "measured"
+    }
+  },
+  "hardwareEquivalents": {
+    "text": "BHMA 623 'Light oxidized statuary bronze, clear coated' (US20); BHMA 624 'Dark oxidized statuary bronze, clear coated' (US20A); BHMA 613 'Dark oxidized satin bronze, oil rubbed' (US10B).",
+    "source": "Copper Development Association, A4039, Table 15 (BHMA and U.S. Finishes for Brass and Bronze Hardware), https://www.copper.org/publications/pub_list/pdf/A4039-ArchitecturalApplications.pdf",
+    "grade": "guidance"
+  },
+  "film": {
+    "chemistry": {
+      "text": "'Oxide or statuary bronze treatments are based on cuprous oxide, sometimes combined with a mixture of copper sulfides.' Their brownish colours range from light to medium to dark, depending on the alloy, the fineness of the surface texture and the concentration and number of applications.",
+      "source": "Copper Development Association, A4039, pp. 41-42, https://www.copper.org/publications/pub_list/pdf/A4039-ArchitecturalApplications.pdf",
+      "grade": "guidance"
+    },
+    "phases": [
+      {
+        "phase": "cuprite",
+        "formula": "Cu2O",
+        "colour": "cochineal-red to ruby-red, red internal reflections; streak brownish red; lustre adamantine to submetallic",
+        "refractiveIndex": {
+          "value": 2.849,
+          "unit": "1",
+          "source": "J. W. Anthony, R. A. Bideaux, K. W. Bladh, M. C. Nichols (eds.), Handbook of Mineralogy, Mineralogical Society of America, 'Cuprite', https://www.handbookofmineralogy.org/pdfs/cuprite.pdf",
+          "grade": "measured"
+        },
+        "density": {
+          "value": 6140,
+          "unit": "kg/m3",
+          "source": "Handbook of Mineralogy, 'Cuprite' (D(meas.) = 6.14), https://www.handbookofmineralogy.org/pdfs/cuprite.pdf",
+          "grade": "measured"
+        },
+        "reflectance": {
+          "axis": "wavelength",
+          "axisUnit": "um",
+          "axisValues": [
+            0.4,
+            0.42,
+            0.44,
+            0.46,
+            0.48,
+            0.5,
+            0.52,
+            0.54,
+            0.56,
+            0.58,
+            0.6,
+            0.62,
+            0.64,
+            0.66,
+            0.68,
+            0.7
+          ],
+          "unit": "1",
+          "values": [
+            0.321,
+            0.322,
+            0.323,
+            0.317,
+            0.304,
+            0.288,
+            0.275,
+            0.263,
+            0.255,
+            0.248,
+            0.244,
+            0.239,
+            0.236,
+            0.234,
+            0.232,
+            0.231
+          ],
+          "grade": "measured",
+          "source": "Handbook of Mineralogy, 'Cuprite', R table, https://www.handbookofmineralogy.org/pdfs/cuprite.pdf",
+          "conditions": "specular reflectance of a polished face in air",
+          "note": "Specular reflectance of a polished face in air: the film's own F0 where it is smooth."
+        },
+        "f0": {
+          "value": [
+            0.23,
+            0.263,
+            0.323
+          ],
+          "unit": "1",
+          "space": "linear Rec.709, D65",
+          "grade": "derived",
+          "derivation": "The tabulated specular reflectance (a fraction) interpolated to 380-780 nm (end values held), integrated against the CIE 1931 2-degree colour-matching functions under D65 and converted to linear Rec.709.",
+          "source": "J. W. Anthony, R. A. Bideaux, K. W. Bladh, M. C. Nichols (eds.), Handbook of Mineralogy, Mineralogical Society of America, 'Cuprite', https://www.handbookofmineralogy.org/pdfs/cuprite.pdf ; CIE 018:2019 Table 6, CIE 1931 2-degree colour-matching functions, doi:10.25039/CIE.DS.xvudnb9b ; CIE standard illuminant D65, https://files.cie.co.at/Publications-datasets/CIE_std_illum_D65.csv",
+          "note": "Cuprite's mirror reflection is a cool, slightly bluish grey; its red is seen only in light that has entered the film and come back out."
+        }
+      },
+      {
+        "phase": "chalcocite",
+        "formula": "Cu2S",
+        "colour": "blackish lead-grey; metallic lustre; opaque",
+        "density": {
+          "min": 5500,
+          "max": 5800,
+          "unit": "kg/m3",
+          "source": "Handbook of Mineralogy, 'Chalcocite' (D(meas.) = 5.5-5.8), https://www.handbookofmineralogy.org/pdfs/chalcocite.pdf",
+          "grade": "measured"
+        },
+        "reflectanceR1": {
+          "axis": "wavelength",
+          "axisUnit": "um",
+          "axisValues": [
+            0.4,
+            0.42,
+            0.44,
+            0.46,
+            0.48,
+            0.5,
+            0.52,
+            0.54,
+            0.56,
+            0.58,
+            0.6,
+            0.62,
+            0.64,
+            0.66,
+            0.68,
+            0.7
+          ],
+          "unit": "1",
+          "values": [
+            0.37,
+            0.378,
+            0.377,
+            0.37,
+            0.362,
+            0.356,
+            0.347,
+            0.337,
+            0.325,
+            0.321,
+            0.313,
+            0.308,
+            0.3,
+            0.295,
+            0.292,
+            0.29
+          ],
+          "grade": "measured",
+          "source": "Handbook of Mineralogy, 'Chalcocite', R1-R2 table (R1 column), https://www.handbookofmineralogy.org/pdfs/chalcocite.pdf",
+          "conditions": "R1, specular reflectance in air"
+        },
+        "reflectanceR2": {
+          "axis": "wavelength",
+          "axisUnit": "um",
+          "axisValues": [
+            0.4,
+            0.42,
+            0.44,
+            0.46,
+            0.48,
+            0.5,
+            0.52,
+            0.54,
+            0.56,
+            0.58,
+            0.6,
+            0.62,
+            0.64,
+            0.66,
+            0.68,
+            0.7
+          ],
+          "unit": "1",
+          "values": [
+            0.368,
+            0.374,
+            0.376,
+            0.372,
+            0.362,
+            0.354,
+            0.344,
+            0.335,
+            0.325,
+            0.318,
+            0.312,
+            0.307,
+            0.3,
+            0.3,
+            0.297,
+            0.296
+          ],
+          "grade": "measured",
+          "source": "Handbook of Mineralogy, 'Chalcocite', R1-R2 table (R2 column), https://www.handbookofmineralogy.org/pdfs/chalcocite.pdf",
+          "conditions": "R2, specular reflectance in air"
+        },
+        "f0": {
+          "value": [
+            0.297,
+            0.335,
+            0.376
+          ],
+          "unit": "1",
+          "space": "linear Rec.709, D65",
+          "grade": "derived",
+          "derivation": "The tabulated specular reflectance (a fraction) interpolated to 380-780 nm (end values held), integrated against the CIE 1931 2-degree colour-matching functions under D65 and converted to linear Rec.709. The mean of R1 and R2.",
+          "source": "J. W. Anthony, R. A. Bideaux, K. W. Bladh, M. C. Nichols (eds.), Handbook of Mineralogy, Mineralogical Society of America, 'Chalcocite', https://www.handbookofmineralogy.org/pdfs/chalcocite.pdf ; CIE 018:2019 Table 6, CIE 1931 2-degree colour-matching functions, doi:10.25039/CIE.DS.xvudnb9b ; CIE standard illuminant D65, https://files.cie.co.at/Publications-datasets/CIE_std_illum_D65.csv"
+        }
+      },
+      {
+        "phase": "tenorite",
+        "formula": "CuO",
+        "colour": "steel-grey, iron-grey to black; brown in transmitted light; metallic lustre",
+        "density": {
+          "value": 6450,
+          "unit": "kg/m3",
+          "source": "Handbook of Mineralogy, 'Tenorite' (D(meas.) = 6.45, synthetic), https://www.handbookofmineralogy.org/pdfs/tenorite.pdf",
+          "grade": "measured"
+        },
+        "reflectanceR1": {
+          "axis": "wavelength",
+          "axisUnit": "um",
+          "axisValues": [
+            0.4,
+            0.42,
+            0.44,
+            0.46,
+            0.48,
+            0.5,
+            0.52,
+            0.54,
+            0.56,
+            0.58,
+            0.6,
+            0.62,
+            0.64,
+            0.66,
+            0.68,
+            0.7
+          ],
+          "unit": "1",
+          "values": [
+            0.228,
+            0.219,
+            0.21,
+            0.204,
+            0.201,
+            0.198,
+            0.197,
+            0.196,
+            0.195,
+            0.195,
+            0.194,
+            0.194,
+            0.194,
+            0.194,
+            0.193,
+            0.193
+          ],
+          "grade": "measured",
+          "source": "Handbook of Mineralogy, 'Tenorite', R1-R2 table (strongly bireflectant), https://www.handbookofmineralogy.org/pdfs/tenorite.pdf",
+          "conditions": "R1, specular reflectance in air"
+        },
+        "reflectanceR2": {
+          "axis": "wavelength",
+          "axisUnit": "um",
+          "axisValues": [
+            0.4,
+            0.42,
+            0.44,
+            0.46,
+            0.48,
+            0.5,
+            0.52,
+            0.54,
+            0.56,
+            0.58,
+            0.6,
+            0.62,
+            0.64,
+            0.66,
+            0.68,
+            0.7
+          ],
+          "unit": "1",
+          "values": [
+            0.296,
+            0.3,
+            0.304,
+            0.306,
+            0.308,
+            0.307,
+            0.304,
+            0.302,
+            0.298,
+            0.296,
+            0.294,
+            0.292,
+            0.291,
+            0.288,
+            0.286,
+            0.282
+          ],
+          "grade": "measured",
+          "source": "Handbook of Mineralogy, 'Tenorite', R1-R2 table (strongly bireflectant), https://www.handbookofmineralogy.org/pdfs/tenorite.pdf",
+          "conditions": "R2, specular reflectance in air"
+        },
+        "f0": {
+          "value": [
+            0.241,
+            0.249,
+            0.257
+          ],
+          "min": [
+            0.194,
+            0.195,
+            0.208
+          ],
+          "max": [
+            0.288,
+            0.302,
+            0.305
+          ],
+          "unit": "1",
+          "space": "linear Rec.709, D65",
+          "grade": "derived",
+          "derivation": "The tabulated specular reflectance (a fraction) interpolated to 380-780 nm (end values held), integrated against the CIE 1931 2-degree colour-matching functions under D65 and converted to linear Rec.709. value: mean of R1 and R2; min: R1; max: R2.",
+          "source": "J. W. Anthony, R. A. Bideaux, K. W. Bladh, M. C. Nichols (eds.), Handbook of Mineralogy, Mineralogical Society of America, 'Tenorite', https://www.handbookofmineralogy.org/pdfs/tenorite.pdf ; CIE 018:2019 Table 6, CIE 1931 2-degree colour-matching functions, doi:10.25039/CIE.DS.xvudnb9b ; CIE standard illuminant D65, https://files.cie.co.at/Publications-datasets/CIE_std_illum_D65.csv"
+        },
+        "note": "Black copper oxide forms in hot patination and darkens the brown toward black."
+      }
+    ],
+    "thickness": {
+      "text": "An artificial brown sulfide patina measured up to 17 um after 9 years outdoors; a natural patina on the same bronze, 5-10 um.",
+      "brownSulfideAfterNineYearsOutdoors": {
+        "max": 17,
+        "unit": "um",
+        "source": "T. Kosec et al. 2024, doi:10.1007/s11356-024-33369-9, https://pmc.ncbi.nlm.nih.gov/articles/PMC11133102/",
+        "grade": "measured",
+        "conditions": "Ljubljana, moderately polluted urban, 9 years"
+      }
+    }
+  },
+  "protection": {
+    "text": "'Statuary finishes are commonly hand-applied and hand-rubbed periodically with wax or oils to maintain a stable appearance.' Finishes are often augmented by mechanical abrasion to produce highlights.",
+    "source": "Copper Development Association, A4039, p. 42, https://www.copper.org/publications/pub_list/pdf/A4039-ArchitecturalApplications.pdf",
+    "grade": "guidance"
+  },
+  "inTraffic": {
+    "text": "Chemical patinas are normally reserved for non-traffic areas; in a traffic area a clear organic coating may protect the patina, but can alter its colour. On the dial the museum accepts the real behaviour: the patina wears from the walked top faces of the inlay to bright metal and survives in the recesses (see history bronze.wear).",
+    "source": "Copper Development Association, A4039, p. 41 ('Patinas are normally reserved for non-traffic areas ... If placed in a traffic area, a clear organic coating may provide protection, but can alter the color'), https://www.copper.org/publications/pub_list/pdf/A4039-ArchitecturalApplications.pdf",
+    "grade": "guidance"
+  },
+  "surface": {
+    "texture": "that of the working it is laid over (cast.bronze: non-directional matte), with the film following it",
+    "layers": [
+      {
+        "layer": "wax",
+        "material": "wax (or oil), renewed by hand-rubbing; the kind of wax is not specified by the source",
+        "source": "Copper Development Association, A4039, p. 42 (wax or oils), https://www.copper.org/publications/pub_list/pdf/A4039-ArchitecturalApplications.pdf",
+        "grade": "guidance"
+      },
+      {
+        "layer": "patina film",
+        "material": "cuprite with copper sulfides (and tenorite where hot)",
+        "source": "Copper Development Association, A4039, pp. 41-42, https://www.copper.org/publications/pub_list/pdf/A4039-ArchitecturalApplications.pdf",
+        "grade": "guidance"
+      },
+      {
+        "layer": "metal",
+        "material": "the substance (bronze)"
+      }
+    ]
+  },
+  "photograph": [
+    "A deep brown to near-black film with a waxy sheen, lighter on flat faces and darker in recesses.",
+    "Bright metal on the high points the founder relieved, and on whatever feet and hands have worn."
+  ],
+  "unverified": [
+    {
+      "field": "film.albedo (diffuse colour of the brown statuary patina)",
+      "value": null,
+      "unit": "1",
+      "reason": "No measured L*a*b* or spectral reflectance of a C55 sulfide patina on tin bronze was read (the studies found were paywalled or gave no colour values). The film's specular F0 is bounded above by its phases; its body colour needs a tier (b) specimen: a ColorChecker photograph of a CuSn10 coupon patinated to C55."
+    },
+    {
+      "field": "film.thickness (as applied, before weathering)",
+      "value": null,
+      "unit": "um",
+      "reason": "Only thickness after 9 years outdoors was read (Kosec et al. 2024)."
+    },
+    {
+      "field": "hotPractice.temperature",
+      "value": null,
+      "unit": "degC",
+      "reason": "Kosec et al. 2024 say 'hot surface' without a temperature in the parts read."
+    }
+  ]
+}

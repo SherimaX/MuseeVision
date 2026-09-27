@@ -1,0 +1,585 @@
+{
+  "schema": "musee.matter.working/1",
+  "key": "gilt",
+  "name": "Gilt (gold leaf laid over a substrate)",
+  "dossier": "Docs/Matter/gilt.md",
+  "appliesTo": {
+    "families": [
+      "white",
+      "bronze",
+      "oak"
+    ],
+    "substances": [
+      "bronze"
+    ],
+    "note": "Gilt is a working, not a substance (D-014): gold leaf about a tenth of a micrometre thick, laid over plaster, bronze or wood. The appearance is the leaf's; wear shows what lies under it. The white and oak groups name their plaster and timber substances; gilt applies to them by family."
+  },
+  "over": [],
+  "process": "Gold is alloyed to 23.75 carat, rolled and beaten between skins until a leaf is about 0.1 um thick, and cut into leaves of about 80 mm. The gilder lays it by one of two methods. Water gilding (for carved wood, frames and fine interior work): six to twelve coats of gesso (chalk or gypsum in rabbit-skin glue) are laid and smoothed, then four to eight coats of bole (a fine clay, red, yellow or blue-grey, in glue); the bole is wetted with gilder's liquor, the leaf is floated on, and when dry the gold is burnished with an agate to a mirror, or left matte, the two set side by side. Oil gilding (for plaster, metal and architectural work): a drying-oil size is brushed on and the leaf laid when the size is just tacky; it cannot be burnished and has a softer lustre. On bronze the historic method was fire gilding with a mercury amalgam, now abandoned for its danger; the museum's gilt bronze is oil gilt.",
+  "leaf": {
+    "carat": {
+      "value": 23.75,
+      "unit": "carat",
+      "source": "Giusto Manetti Battiloro, 'French cut leaf - 24 to 6 karats' (orange gold 23.75 kt and 23.5 kt among the alloys offered), https://www.manetti.com/en/product/french-cut-leaf/ ; K. Howell, 'Gilding', The Building Conservation Directory (1999): architectural gilding uses 'at least 22 carat purity', https://www.buildingconservation.com/articles/gilding/gilding.htm",
+      "grade": "manufacturer"
+    },
+    "goldFraction": {
+      "value": 0.9896,
+      "unit": "1",
+      "grade": "derived",
+      "derivation": "fineness = carat / 24 = 23.75 / 24",
+      "source": "Giusto Manetti Battiloro, 'French cut leaf - 24 to 6 karats', https://www.manetti.com/en/product/french-cut-leaf/ (23.75 kt leaf)",
+      "note": "The balance (about 1 wt%) is silver and copper in proportions the maker does not publish (see unverified)."
+    },
+    "thickness": {
+      "value": 0.1,
+      "unit": "um",
+      "source": "K. Howell, 'Gilding' (1999): 'Regular gold leaf is approximately 1/250,000th of an inch thick' (0.10 um), https://www.buildingconservation.com/articles/gilding/gilding.htm ; Wikipedia, 'Gold leaf' ('usually around 0.1 um thick', citing J. M. Vilfranc, 'Thickness of gold leaf', The Physics Factbook, 1999), https://en.wikipedia.org/wiki/Gold_leaf",
+      "grade": "secondary"
+    },
+    "thicknessFromMass": {
+      "min": 0.11,
+      "max": 0.146,
+      "unit": "um",
+      "grade": "derived",
+      "derivation": "thickness = booklet mass / (1000 leaves x leaf area) / gold density, with 15-18 g read as grams per 1000 leaves of 80 or 84 mm square and gold's density 19.283 g/cm3 at 20 degC.",
+      "source": "Giusto Manetti Battiloro, 'French cut leaf - 24 to 6 karats', https://www.manetti.com/en/product/french-cut-leaf/ (weights 15, 16 and 18 g; 84 x 84 mm) ; Giusto Manetti Battiloro, gold leaf catalogue (80 x 80 mm), https://www.manetti.com/en/catalogue/gold-leaf/ ; Wikipedia, 'Gold' (density 19.283 g/cm3 at 20 degC), https://en.wikipedia.org/wiki/Gold",
+      "note": "The per-1000-leaves basis of the booklet weight is the trade convention but was not stated on the page read."
+    },
+    "size": {
+      "min": 80,
+      "max": 84,
+      "unit": "mm",
+      "source": "Giusto Manetti Battiloro, French cut leaf (84 x 84 mm) and gold leaf catalogue (80 x 80 mm to 100 x 100 mm), https://www.manetti.com/en/product/french-cut-leaf/ ; https://www.manetti.com/en/catalogue/gold-leaf/",
+      "grade": "manufacturer"
+    },
+    "tarnish": {
+      "text": "The 23-23.75 kt leaves carry no tarnishing risk, and the 23.75 kt leaf is recommended for exteriors; the risk rises as the carat falls (low for most 22-23 kt alloys, high for 16-18 kt green golds, very high for white golds).",
+      "source": "Giusto Manetti Battiloro, French cut leaf, alloy table (tarnishing risk per alloy: 'NO RISK' for orange gold 23.75 kt and 23.5 kt, florin and yellow extra 23 kt; 'HIGH RISK' for green gold 18 kt and pale gold 16 kt; 'VERY HIGH RISK' for the white golds; 23.75 kt 'RECOMMENDED FOR EXTERIORS'), https://www.manetti.com/en/product/french-cut-leaf/",
+      "grade": "manufacturer"
+    },
+    "opacity": {
+      "text": "The leaf is optically thick. Light entering gold decays to 1/e in 14-21 nm across the visible, so a 100 nm leaf passes about 0.1-0.9 % of the light that enters it, most near 500 nm (why thin gold looks green by transmitted light). Reflection from the leaf is that of bulk gold; nothing of the substrate shows through an intact leaf.",
+      "absorptionLength": {
+        "min": 14.4,
+        "max": 21.2,
+        "unit": "nm",
+        "grade": "derived",
+        "derivation": "1/alpha = lambda / (4 pi k) at 450, 500, 550 and 650 nm.",
+        "source": "P. B. Johnson and R. W. Christy, 'Optical constants of the noble metals', Phys. Rev. B 6, 4370-4379 (1972), doi:10.1103/PhysRevB.6.4370"
+      },
+      "internalTransmittance": {
+        "min": 0.0009,
+        "max": 0.009,
+        "unit": "1",
+        "grade": "derived",
+        "derivation": "exp(-4 pi k d / lambda) for d = 100 nm at 450, 500, 550 and 650 nm (650 nm lowest, 500 nm highest).",
+        "source": "P. B. Johnson and R. W. Christy, 'Optical constants of the noble metals', Phys. Rev. B 6, 4370-4379 (1972), doi:10.1103/PhysRevB.6.4370"
+      }
+    }
+  },
+  "optics": {
+    "kind": "conductor",
+    "spectral": [
+      {
+        "dataset": "Johnson and Christy 1972",
+        "n": {
+          "axis": "wavelength",
+          "axisUnit": "um",
+          "axisValues": [
+            0.3815,
+            0.3974,
+            0.4133,
+            0.4305,
+            0.4509,
+            0.4714,
+            0.4959,
+            0.5209,
+            0.5486,
+            0.5821,
+            0.6168,
+            0.6595,
+            0.7045,
+            0.756
+          ],
+          "unit": "1",
+          "values": [
+            1.46,
+            1.47,
+            1.46,
+            1.45,
+            1.38,
+            1.31,
+            1.04,
+            0.62,
+            0.43,
+            0.29,
+            0.21,
+            0.14,
+            0.13,
+            0.14
+          ],
+          "grade": "measured",
+          "source": "P. B. Johnson and R. W. Christy, 'Optical constants of the noble metals', Phys. Rev. B 6, 4370-4379 (1972), doi:10.1103/PhysRevB.6.4370, via https://refractiveindex.info/?shelf=main&book=Au&page=Johnson"
+        },
+        "k": {
+          "axis": "wavelength",
+          "axisUnit": "um",
+          "axisValues": [
+            0.3815,
+            0.3974,
+            0.4133,
+            0.4305,
+            0.4509,
+            0.4714,
+            0.4959,
+            0.5209,
+            0.5486,
+            0.5821,
+            0.6168,
+            0.6595,
+            0.7045,
+            0.756
+          ],
+          "unit": "1",
+          "values": [
+            1.933,
+            1.952,
+            1.958,
+            1.948,
+            1.914,
+            1.849,
+            1.833,
+            2.081,
+            2.455,
+            2.863,
+            3.272,
+            3.697,
+            4.103,
+            4.542
+          ],
+          "grade": "measured",
+          "source": "P. B. Johnson and R. W. Christy, 'Optical constants of the noble metals', Phys. Rev. B 6, 4370-4379 (1972), doi:10.1103/PhysRevB.6.4370, via https://refractiveindex.info/?shelf=main&book=Au&page=Johnson"
+        }
+      },
+      {
+        "dataset": "Babar and Weaver 2015",
+        "n": {
+          "axis": "wavelength",
+          "axisUnit": "um",
+          "axisValues": [
+            0.3875,
+            0.3999,
+            0.4133,
+            0.4275,
+            0.4428,
+            0.4592,
+            0.4769,
+            0.4959,
+            0.5166,
+            0.5391,
+            0.5636,
+            0.5904,
+            0.6199,
+            0.6525,
+            0.6888,
+            0.7293,
+            0.7749
+          ],
+          "unit": "1",
+          "values": [
+            1.568,
+            1.569,
+            1.559,
+            1.53,
+            1.486,
+            1.457,
+            1.266,
+            0.8564,
+            0.502,
+            0.329,
+            0.2452,
+            0.1823,
+            0.1357,
+            0.1091,
+            0.08524,
+            0.07661,
+            0.07883
+          ],
+          "grade": "measured",
+          "source": "S. Babar and J. H. Weaver, 'Optical constants of Cu, Ag, and Au revisited', Appl. Opt. 54, 477-481 (2015), via https://refractiveindex.info/?shelf=main&book=Au&page=Babar"
+        },
+        "k": {
+          "axis": "wavelength",
+          "axisUnit": "um",
+          "axisValues": [
+            0.3875,
+            0.3999,
+            0.4133,
+            0.4275,
+            0.4428,
+            0.4592,
+            0.4769,
+            0.4959,
+            0.5166,
+            0.5391,
+            0.5636,
+            0.5904,
+            0.6199,
+            0.6525,
+            0.6888,
+            0.7293,
+            0.7749
+          ],
+          "unit": "1",
+          "values": [
+            1.824,
+            1.839,
+            1.825,
+            1.811,
+            1.797,
+            1.736,
+            1.56,
+            1.629,
+            1.853,
+            2.249,
+            2.569,
+            2.88,
+            3.204,
+            3.529,
+            3.871,
+            4.242,
+            4.63
+          ],
+          "grade": "measured",
+          "source": "S. Babar and J. H. Weaver, 'Optical constants of Cu, Ag, and Au revisited', Appl. Opt. 54, 477-481 (2015), via https://refractiveindex.info/?shelf=main&book=Au&page=Babar"
+        }
+      }
+    ],
+    "f0": {
+      "value": [
+        1.058,
+        0.774,
+        0.307
+      ],
+      "min": [
+        1.037,
+        0.729,
+        0.307
+      ],
+      "max": [
+        1.058,
+        0.779,
+        0.364
+      ],
+      "unit": "1",
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "grade": "derived",
+      "derivation": "Unpolarised Fresnel reflectance at normal incidence, R = ((n-1)^2 + k^2) / ((n+1)^2 + k^2), from the tabulated n,k interpolated linearly to 380-780 nm in 10 nm steps (end values held), integrated against the CIE 1931 2-degree colour-matching functions under CIE illuminant D65, normalised so that a perfect reflector has Y = 1, and converted from XYZ to linear Rec.709 with the sRGB matrix. value: Babar and Weaver 2015 (the most recent of the three). Johnson and Christy 1972: [1.037, 0.729, 0.364]. Rioux et al. 2014 pure Au (the model's 1 nm table, sampled like the others): [1.055, 0.779, 0.335]. min and max are the channel-by-channel envelope of the three.",
+      "source": "S. Babar and J. H. Weaver, 'Optical constants of Cu, Ag, and Au revisited', Appl. Opt. 54, 477-481 (2015), via https://refractiveindex.info/?shelf=main&book=Au&page=Babar ; P. B. Johnson and R. W. Christy, 'Optical constants of the noble metals', Phys. Rev. B 6, 4370-4379 (1972), doi:10.1103/PhysRevB.6.4370 ; D. Rioux, S. Vallieres, S. Besner, P. Munoz, E. Mazur, M. Meunier, 'An analytic model for the dielectric function of Au, Ag, and their alloys', Adv. Opt. Mater. 2, 176-182 (2014), via refractiveindex.info-database other/alloys/Au-Ag (Rioux-Au100Ag0, Rioux-Au90Ag10) ; CIE 018:2019 Table 6, CIE 1931 2-degree colour-matching functions, doi:10.25039/CIE.DS.xvudnb9b ; CIE standard illuminant D65, https://files.cie.co.at/Publications-datasets/CIE_std_illum_D65.csv",
+      "note": "Red above 1 is not an error: gold's reflected colour is more saturated than the Rec.709 primaries allow. A renderer working in Rec.709 must either work in a wider space or clip; that choice belongs to the Matter builder and the Eye, not to this record.",
+      "spectralCheck": {
+        "johnsonChristy": {
+          "axis": "wavelength",
+          "axisUnit": "um",
+          "axisValues": [
+            0.45,
+            0.55,
+            0.65
+          ],
+          "unit": "1",
+          "values": [
+            0.408,
+            0.792,
+            0.957
+          ],
+          "grade": "derived",
+          "derivation": "Normal-incidence Fresnel reflectance at 450, 550 and 650 nm.",
+          "source": "P. B. Johnson and R. W. Christy, 'Optical constants of the noble metals', Phys. Rev. B 6, 4370-4379 (1972), doi:10.1103/PhysRevB.6.4370"
+        },
+        "babarWeaver": {
+          "axis": "wavelength",
+          "axisUnit": "um",
+          "axisValues": [
+            0.45,
+            0.55,
+            0.65
+          ],
+          "unit": "1",
+          "values": [
+            0.363,
+            0.842,
+            0.967
+          ],
+          "grade": "derived",
+          "derivation": "Normal-incidence Fresnel reflectance at 450, 550 and 650 nm.",
+          "source": "S. Babar and J. H. Weaver, 'Optical constants of Cu, Ag, and Au revisited', Appl. Opt. 54, 477-481 (2015), via https://refractiveindex.info/?shelf=main&book=Au&page=Babar"
+        }
+      },
+      "luminance": {
+        "min": 0.768,
+        "max": 0.806,
+        "unit": "1",
+        "grade": "derived",
+        "derivation": "CIE Y of each dataset's F0 spectrum under D65 (Johnson and Christy 0.768, Babar and Weaver 0.800, Rioux 0.806).",
+        "source": "P. B. Johnson and R. W. Christy, 'Optical constants of the noble metals', Phys. Rev. B 6, 4370-4379 (1972), doi:10.1103/PhysRevB.6.4370 ; S. Babar and J. H. Weaver, 'Optical constants of Cu, Ag, and Au revisited', Appl. Opt. 54, 477-481 (2015), via https://refractiveindex.info/?shelf=main&book=Au&page=Babar ; D. Rioux, S. Vallieres, S. Besner, P. Munoz, E. Mazur, M. Meunier, 'An analytic model for the dielectric function of Au, Ag, and their alloys', Adv. Opt. Mater. 2, 176-182 (2014), via refractiveindex.info-database other/alloys/Au-Ag (Rioux-Au100Ag0, Rioux-Au90Ag10) ; CIE 018:2019 Table 6, CIE 1931 2-degree colour-matching functions, doi:10.25039/CIE.DS.xvudnb9b ; CIE standard illuminant D65, https://files.cie.co.at/Publications-datasets/CIE_std_illum_D65.csv"
+      }
+    },
+    "f82": {
+      "value": [
+        1.001,
+        0.896,
+        0.63
+      ],
+      "min": [
+        0.99,
+        0.86,
+        0.63
+      ],
+      "max": [
+        1.001,
+        0.896,
+        0.652
+      ],
+      "unit": "1",
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "grade": "derived",
+      "derivation": "As f0, but the unpolarised Fresnel reflectance of the complex index at 82 degrees incidence (the edge tint of N. Hoffman's F82 model). value: Babar and Weaver 2015; Johnson and Christy 1972 [0.990, 0.860, 0.652]; Rioux 2014 [1.000, 0.892, 0.633]. min and max are the channel-by-channel envelope of the three.",
+      "source": "S. Babar and J. H. Weaver, 'Optical constants of Cu, Ag, and Au revisited', Appl. Opt. 54, 477-481 (2015), via https://refractiveindex.info/?shelf=main&book=Au&page=Babar ; P. B. Johnson and R. W. Christy, 'Optical constants of the noble metals', Phys. Rev. B 6, 4370-4379 (1972), doi:10.1103/PhysRevB.6.4370 ; D. Rioux, S. Vallieres, S. Besner, P. Munoz, E. Mazur, M. Meunier, 'An analytic model for the dielectric function of Au, Ag, and their alloys', Adv. Opt. Mater. 2, 176-182 (2014), via refractiveindex.info-database other/alloys/Au-Ag (Rioux-Au100Ag0, Rioux-Au90Ag10) ; CIE 018:2019 Table 6, CIE 1931 2-degree colour-matching functions, doi:10.25039/CIE.DS.xvudnb9b ; CIE standard illuminant D65, https://files.cie.co.at/Publications-datasets/CIE_std_illum_D65.csv"
+    },
+    "alloyEffect": {
+      "text": "Ten per cent silver moves gold's F0 from [1.055, 0.779, 0.335] to [1.001, 0.819, 0.375] (Rioux et al. 2014 Au and Au90Ag10, same method): red down 0.05, green and blue up 0.04. The leaf's ~1 % of silver and copper moves it by about a tenth of that, below the spread between the measured datasets.",
+      "grade": "derived",
+      "derivation": "F0 of Rioux's Au and Au90Ag10 computed as for f0 and compared; scaling the change by one tenth for a 1 % addition assumes it is linear in silver content at small additions.",
+      "source": "D. Rioux, S. Vallieres, S. Besner, P. Munoz, E. Mazur, M. Meunier, 'An analytic model for the dielectric function of Au, Ag, and their alloys', Adv. Opt. Mater. 2, 176-182 (2014), via refractiveindex.info-database other/alloys/Au-Ag (Rioux-Au100Ag0, Rioux-Au90Ag10) ; CIE 018:2019 Table 6, CIE 1931 2-degree colour-matching functions, doi:10.25039/CIE.DS.xvudnb9b ; CIE standard illuminant D65, https://files.cie.co.at/Publications-datasets/CIE_std_illum_D65.csv"
+    }
+  },
+  "methods": [
+    {
+      "method": "water",
+      "use": "carved wood (frames, fittings) and fine interior ornament; the only method that burnishes to a mirror",
+      "layers": [
+        {
+          "layer": "gesso",
+          "material": "gypsum or chalk in animal (rabbit-skin) glue",
+          "coats": {
+            "min": 6,
+            "max": 12,
+            "unit": "coat",
+            "source": "K. Howell, 'Gilding' (1999) ('six to twelve coats of gesso'), https://www.buildingconservation.com/articles/gilding/gilding.htm",
+            "grade": "secondary"
+          },
+          "source": "Wikipedia, 'Gilding' (gesso of ground gypsum or chalk with glue), https://en.wikipedia.org/wiki/Gilding ; Giusto Manetti Battiloro, 'Water gilding' (rabbit-skin glue 1 part glue to 10 parts water), https://www.manetti.com/en/water-gilding/",
+          "grade": "secondary",
+          "glueToWater": {
+            "value": 0.1,
+            "unit": "1",
+            "source": "Giusto Manetti Battiloro, 'Water gilding' ('1 part glue and 10 parts water, for example: 100g of glue and 1 liter of water': the rabbit-skin glue, or colletta, used for the gesso and to prepare the bole), https://www.manetti.com/en/water-gilding/",
+            "grade": "manufacturer",
+            "note": "glue to water, by mass"
+          }
+        },
+        {
+          "layer": "bole",
+          "material": "refined clay in glue; red from iron oxide",
+          "coats": {
+            "min": 4,
+            "max": 8,
+            "unit": "coat",
+            "source": "K. Howell, 'Gilding' (1999) ('four to eight coats of bole, a refined clay available in various colours'), https://www.buildingconservation.com/articles/gilding/gilding.htm",
+            "grade": "secondary"
+          },
+          "source": "Wikipedia, 'Armenian bole' ('It is red due to the presence of iron oxide'), https://en.wikipedia.org/wiki/Armenian_bole",
+          "grade": "secondary"
+        },
+        {
+          "layer": "gilder's liquor",
+          "material": "weak glue in water that re-wets the bole so the leaf adheres"
+        },
+        {
+          "layer": "leaf",
+          "material": "23.75 carat gold leaf (above)"
+        }
+      ],
+      "burnish": {
+        "text": "When the gilding has dried, it is burnished with a polished agate: the springy bole under the leaf lets the stone compress the gold into a true mirror. Burnished and matte areas are set side by side.",
+        "dryingBeforeBurnishing": {
+          "min": 5,
+          "max": 24,
+          "unit": "h",
+          "source": "Giusto Manetti Battiloro, 'Water gilding' ('5 to 8 hours in the summer, and from 20 to 24 hours in the winter'), https://www.manetti.com/en/water-gilding/",
+          "grade": "manufacturer"
+        },
+        "source": "Wikipedia, 'Gilding' (water gilding 'allows the surface to be subsequently burnished to a mirror-like finish'), https://en.wikipedia.org/wiki/Gilding ; R. Piper, 'Oil Gilding vs. Water Gilding', https://www.rhiannonpiper.com/articles/oil-gilding-vs-water-gilding-a-comparative-study-of-technique-aesthetics-and-conservation",
+        "grade": "secondary"
+      }
+    },
+    {
+      "method": "oil",
+      "use": "plaster, stone, metal and architectural work; robust and flexible, but cannot be burnished",
+      "layers": [
+        {
+          "layer": "sealed ground",
+          "material": "a sealed, non-absorbent surface (on bronze: the clean metal or a primer)",
+          "source": "R. Piper, 'Oil Gilding vs. Water Gilding' ('a prepared surface that is typically sealed and non-absorbent'), https://www.rhiannonpiper.com/articles/oil-gilding-vs-water-gilding-a-comparative-study-of-technique-aesthetics-and-conservation",
+          "grade": "secondary"
+        },
+        {
+          "layer": "oil size",
+          "material": "boiled linseed oil with litharge (a drying oil), laid when touch-dry but tacky",
+          "source": "Wikipedia, 'Gilding' ('boiled linseed oil mixed with litharge (oil gilding, which does not ...)'), https://en.wikipedia.org/wiki/Gilding ; K. Howell, 'Gilding' (1999) (size 'touch dry but retains enough tack for the leaf to adhere'), https://www.buildingconservation.com/articles/gilding/gilding.htm",
+          "grade": "secondary"
+        },
+        {
+          "layer": "leaf",
+          "material": "23.75 carat gold leaf (above)"
+        }
+      ],
+      "look": {
+        "text": "Oil gilt lacks the brilliance of burnished water gilding and has a subdued finish.",
+        "source": "R. Piper, 'Oil Gilding vs. Water Gilding' ('lack this capacity for brilliance', 'subdued finish'), https://www.rhiannonpiper.com/articles/oil-gilding-vs-water-gilding-a-comparative-study-of-technique-aesthetics-and-conservation",
+        "grade": "secondary"
+      }
+    },
+    {
+      "method": "fire (historic, not used)",
+      "use": "gilt bronze (ormolu) before the 19th century",
+      "text": "An amalgam of gold and mercury is applied to copper, brass or bronze and heated until the mercury evaporates, leaving a gold film that retains 13-16 % mercury. The fumes cause serious illness; France legislated against it around 1830, and it has been replaced by electroplating. It is recorded here because historic gilt bronze was made this way; the museum does not imitate it.",
+      "mercuryRetained": {
+        "min": 13,
+        "max": 16,
+        "unit": "wt%",
+        "source": "Wikipedia, 'Gilding' (fire-gilding leaves 'a film of gold or an amalgam containing 13 to 16% mercury', its ref. 3), https://en.wikipedia.org/wiki/Gilding",
+        "grade": "secondary"
+      },
+      "abandoned": {
+        "value": 1830,
+        "unit": "year CE",
+        "source": "Wikipedia, 'Ormolu' ('Around 1830, legislation in France outlawed the use of mercury for health reasons, though use continued to the 1900s'), https://en.wikipedia.org/wiki/Ormolu",
+        "grade": "secondary",
+        "note": "The year of the French legislation; the practice lingered into the 1900s."
+      }
+    }
+  ],
+  "bole": {
+    "colours": [
+      {
+        "colour": "red",
+        "effect": "warms the gold; the classic 'dull rich red' under water gilding",
+        "source": "K. Howell, 'Gilding' (1999), https://www.buildingconservation.com/articles/gilding/gilding.htm ; Giusto Manetti Battiloro, 'Water gilding' (red bole: warmer gold tones), https://www.manetti.com/en/water-gilding/",
+        "grade": "secondary"
+      },
+      {
+        "colour": "yellow",
+        "effect": "paler gold",
+        "source": "K. Howell, 'Gilding' (1999), https://www.buildingconservation.com/articles/gilding/gilding.htm ; Giusto Manetti Battiloro, 'Water gilding' (yellow bole: paler tones), https://www.manetti.com/en/water-gilding/",
+        "grade": "secondary"
+      },
+      {
+        "colour": "blue-grey",
+        "effect": "used under burnished work",
+        "source": "K. Howell, 'Gilding' (1999) ('blue-grey under burnished work'), https://www.buildingconservation.com/articles/gilding/gilding.htm",
+        "grade": "secondary"
+      },
+      {
+        "colour": "black or white",
+        "effect": "under silver leaf, for a more brilliant effect",
+        "source": "Giusto Manetti Battiloro, 'Water gilding', https://www.manetti.com/en/water-gilding/",
+        "grade": "manufacturer"
+      }
+    ],
+    "museumChoice": {
+      "text": "Red bole under the museum's water gilding, the classic and the warmest; wear shows it (D-014: 'The bole shows through with wear').",
+      "source": "MuseeVision/Journal/Decisions.md, D-014 (Matter)",
+      "grade": "design"
+    }
+  },
+  "substrates": [
+    {
+      "substrate": "wood (oak)",
+      "method": "water",
+      "source": "Giusto Manetti Battiloro, gold leaf catalogue (loose leaf 'ideal for decorating both carved surfaces with the water gilding technique or smooth surfaces with the oil gilding technique'), https://www.manetti.com/en/catalogue/gold-leaf/",
+      "grade": "manufacturer"
+    },
+    {
+      "substrate": "plaster",
+      "method": "oil",
+      "source": "R. Piper, 'Oil Gilding vs. Water Gilding' (oil gilding on a sealed, non-absorbent ground), https://www.rhiannonpiper.com/articles/oil-gilding-vs-water-gilding-a-comparative-study-of-technique-aesthetics-and-conservation",
+      "grade": "secondary"
+    },
+    {
+      "substrate": "bronze",
+      "method": "oil",
+      "source": "Wikipedia, 'Gilding' and 'Ormolu' (fire gilding of copper alloys abandoned for mercury's danger), https://en.wikipedia.org/wiki/Gilding ; https://en.wikipedia.org/wiki/Ormolu",
+      "grade": "secondary",
+      "note": "Oil gilding over the clean bronze is this record's choice for gilt bronze; electroplated gold over nickel is the industrial alternative named by the sources."
+    }
+  ],
+  "surface": {
+    "burnished": "near-mirror: the leaf compressed flat on the bole; roughness has no verified measurement (see unverified)",
+    "matte": "the leaf follows the fine texture of the gesso or size; a soft, even lustre",
+    "texture": "leaf seams: faint overlaps at the leaf pitch (80-84 mm) where one leaf lies on the next"
+  },
+  "photograph": [
+    "Burnished water gilding is a gold mirror: the room is seen in it, tinted gold, with sharp highlights.",
+    "Matte water gilding and oil gilding have a soft, even, warm lustre with no mirror; the two finishes side by side are the gilder's signature.",
+    "Faint square seams where one leaf overlaps the next, about 80 mm apart on flat work.",
+    "At grazing angles gold whitens toward its edge colour."
+  ],
+  "evidence": [],
+  "evidenceRejected": [
+    {
+      "path": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR/M3",
+      "set": "ambientCG Metal048C ('aged gilt' in CREDITS.md)",
+      "reason": "Procedurally generated (ambientCG technique 'Procedural', parent asset MetalSubstance009; tags Gold, Impure, Metal, Rough), not a photograph of real gilding.",
+      "source": "https://ambientcg.com/view?id=Metal048C",
+      "grade": "manufacturer"
+    },
+    {
+      "path": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR/M4",
+      "set": "ambientCG Metal048A ('clean gilt' in CREDITS.md)",
+      "reason": "Procedurally generated (ambientCG technique 'Procedural', parent asset MetalSubstance009; tags Clean, Gold, Metal, Smooth), not a photograph of real gilding.",
+      "source": "https://ambientcg.com/view?id=Metal048A",
+      "grade": "manufacturer"
+    }
+  ],
+  "evidenceSearch": {
+    "searched": [
+      "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt (PBR, Textures, Journeys, Albion and their CREDITS)"
+    ],
+    "found": "No CC0 photograph of real gilding is on this PC; the two gilt sets of the old build are procedural and rejected.",
+    "tier": "Gold is calibrated from tier (a): three measured n,k datasets. The bole's colour and the gloss of burnished and matte gilding need a tier (b) specimen: a ColorChecker photograph of a water-gilt test board with burnished, matte and rubbed passages over red bole."
+  },
+  "unverified": [
+    {
+      "field": "leaf.alloy (silver and copper in 23.75 kt leaf)",
+      "value": null,
+      "unit": "wt%",
+      "reason": "The maker's split of the ~1 % balance between silver and copper was not published on the pages read. A retailer summary quoting '95.2 % gold, 3.6 % silver, 1.2 % copper' for 23 3/4 kt contradicts the carat itself (23.75/24 = 98.96 %) and is rejected."
+    },
+    {
+      "field": "surface.roughness (burnished and matte gilding)",
+      "value": null,
+      "unit": "um",
+      "reason": "No measured roughness or gloss of burnished water gilding or oil gilding was read."
+    },
+    {
+      "field": "methods.water.layers[gilder's liquor].ratio",
+      "value": null,
+      "unit": "1",
+      "reason": "The glue-to-water ratio of the gilder's liquor was not found in a source read. Manetti's '1 part glue and 10 parts water' is the rabbit-skin glue for the gesso and the bole (recorded there as glueToWater), not the gilder's liquor."
+    },
+    {
+      "field": "methods.oil.sizeOpenTime",
+      "value": null,
+      "unit": "h",
+      "reason": "The 3-hour and 12-hour oil sizes of the trade were not confirmed from a readable source."
+    },
+    {
+      "field": "bole colour (measured)",
+      "value": null,
+      "unit": "1",
+      "reason": "No measured reflectance or L*a*b* of a gilder's red bole was read; its albedo needs a tier (b) specimen photograph."
+    }
+  ]
+}

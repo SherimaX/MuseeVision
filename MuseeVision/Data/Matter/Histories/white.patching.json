@@ -1,0 +1,108 @@
+{
+  "schema": "musee.matter.history/1",
+  "key": "white.patching",
+  "family": "white",
+  "name": "Patched",
+  "describes": "White finishes that have been mended: plaster cut back and made good, cracks filled, fibrous panels re-tied, broken parts of casts rejoined, soiled casts repainted, limewash renewed. A repair reads because it differs from the old surface in suction, texture, whiteness and soiling age, and because its edge is a line.",
+  "surfaceLawTerms": [
+    "age"
+  ],
+  "terms": {
+    "limePatch": {
+      "state": "Loose plaster is cut back to a sound face with a slight undercut, and the patch is built in thin coats of a mix matched to the original (aggregate grading, proportions, hair, gypsum), keyed and kept from drying too fast.",
+      "source": "Napier, W. & Jenkins, M. (2018) Inform Guide: Plain Lime Plastering. Historic Environment Scotland, https://www.historicenvironment.scot/archives-and-research/publications/publication/?publicationId=67d4d72c-7b8c-4622-a244-a94b01090177",
+      "grade": "guidance"
+    },
+    "fineFills": {
+      "state": "Fine cracks, small holes and minor imperfections are filled with proprietary filler mixed with crushed chalk (whiting) and sanded flush.",
+      "source": "Napier & Jenkins (2018), Historic Environment Scotland, https://www.historicenvironment.scot/archives-and-research/publications/publication/?publicationId=67d4d72c-7b8c-4622-a244-a94b01090177",
+      "grade": "guidance"
+    },
+    "suctionMismatch": {
+      "state": "A repair gauged with gypsum sets with less shrinkage but differs in suction, which changes how limewash or distemper looks over it: the patch shows through the decoration.",
+      "source": "Napier & Jenkins (2018), Historic Environment Scotland, https://www.historicenvironment.scot/archives-and-research/publications/publication/?publicationId=67d4d72c-7b8c-4622-a244-a94b01090177",
+      "grade": "guidance"
+    },
+    "castRepairs": {
+      "state": "Slender attachments of fresh casts drop off and are replaced; old casts carry historic repairs, dents and hairline cracks, which conservators now leave where stable.",
+      "source": "Brigham, W.T. (1874), pp. 27-29, as quoted in Payne, E.M. (2020) The Conservation of Plaster Casts in the Nineteenth Century. Studies in Conservation 65(1), 37-58, https://doi.org/10.1080/00393630.2019.1610845; Puisto, J. (2014) David revealed. V&A Blog, https://www.vam.ac.uk/blog/caring-for-our-collections/david-revealed",
+      "grade": "historical"
+    },
+    "castRepainting": {
+      "state": "Casts grimed by neglect were cleaned and given a further 'refreshing' layer of paint; the coating stack stays thin.",
+      "coatingStackThickness": {
+        "min": 40,
+        "max": 280,
+        "unit": "um",
+        "asReported": "approximately 40 um to 280 um, no more than four layers",
+        "source": "Payne (2020), https://doi.org/10.1080/00393630.2019.1610845",
+        "grade": "measured"
+      },
+      "source": "Payne (2020), https://doi.org/10.1080/00393630.2019.1610845",
+      "grade": "secondary"
+    },
+    "fibrousRepair": {
+      "state": "Failed plaster is cleaned off and ties re-wadded; weak areas are backed with a reinforcing layer of hessian stuck on with casting plaster; for extensive damage, glass-reinforced gypsum is substituted.",
+      "source": "Harrison, D. (1999) Dramatic Plasterwork: Fibrous Plaster in Theatres. The Building Conservation Directory, https://www.buildingconservation.com/articles/theatre/theatre.htm",
+      "grade": "guidance"
+    },
+    "limewashRenewal": {
+      "state": "Limewash is renewed rather than patched: a fresh campaign of coats over the whole face, externally about every five years.",
+      "renewalIntervalExternal": {
+        "value": 5,
+        "unit": "year",
+        "source": "SPAB, Limewash, https://www.spab.org.uk/advice/limewash",
+        "grade": "guidance"
+      },
+      "source": "SPAB, Limewash, https://www.spab.org.uk/advice/limewash",
+      "grade": "guidance"
+    }
+  },
+  "bySubstance": {
+    "lime-plaster": "A patch of a metre or less with a slightly undercut, sometimes visible edge; a different trowel texture and a cleaner white than its soiled surround until it too soils.",
+    "fibrous-plaster": "Repairs mostly behind the face (new wads, backing hessian); on the face, a filled joint or a replaced length whose whiteness differs.",
+    "plaster-of-paris": "Rejoined fingers, noses and attributes with a fine join line; fills that are smoother or whiter than the cast; paint layers that blur fine detail.",
+    "limewash": "No patches: whole faces renewed in campaigns, each leaving a thin layer."
+  },
+  "drivers": [
+    {
+      "driver": "piece age and seed (where and when a repair happened)",
+      "owner": "Form (piece table)"
+    },
+    {
+      "driver": "arris proximity (knocks and losses at edges and projections)",
+      "owner": "Form (vertex colour: arris proximity)"
+    },
+    {
+      "driver": "soiling age of the surround versus the patch",
+      "owner": "Matter (white.soiling, evaluated per region)"
+    }
+  ],
+  "unverified": [
+    {
+      "field": "bySubstance.lime-plaster (patch size)",
+      "value": null,
+      "unit": "m",
+      "reason": "No sourced distribution of patch sizes; 'a metre or less' is a description, not a measurement."
+    },
+    {
+      "field": "terms.suctionMismatch (reflectance difference of a patch)",
+      "value": null,
+      "unit": "1",
+      "reason": "No measured colour difference between patch and original was found."
+    },
+    {
+      "field": "bySubstance.plaster-of-paris (fill whiteness)",
+      "value": null,
+      "unit": "1",
+      "reason": "Fills reading smoother or whiter is the expected trace; not measured in the sources read."
+    }
+  ],
+  "sources": [
+    "Harrison, D. (1999) Dramatic Plasterwork: Fibrous Plaster in Theatres. The Building Conservation Directory.",
+    "Napier, W. & Jenkins, M. (2018) Inform Guide: Plain Lime Plastering. Historic Environment Scotland.",
+    "Payne, E.M. (2020) Studies in Conservation 65(1), 37-58, https://doi.org/10.1080/00393630.2019.1610845 (quoting Brigham 1874)",
+    "Puisto, J. (2014) David revealed. V&A Blog.",
+    "SPAB, Limewash, https://www.spab.org.uk/advice/limewash"
+  ]
+}

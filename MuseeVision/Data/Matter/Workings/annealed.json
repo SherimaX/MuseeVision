@@ -1,0 +1,62 @@
+{
+  "schema": "musee.matter.working/1",
+  "key": "annealed",
+  "name": "Annealed float",
+  "appliesTo": {
+    "families": [
+      "glass"
+    ],
+    "substances": [
+      "low-iron-glass"
+    ]
+  },
+  "over": [],
+  "process": "Glass as it leaves the float line and the annealing lehr, cut to size. Cutting is a score and a snap; the edge is then arrised (seamed), ground or polished. Annealing relieves the stress of cooling, so the pane is optically quiet and can be cut, but it breaks into long sharp shards.",
+  "surface": {
+    "faces": "fire-finished and specular",
+    "roughnessRms": {
+      "unit": "nm",
+      "max": 0.25,
+      "grade": "measured",
+      "source": "D. Moseler, G. Heide, G. H. Frischat, 'Atomic force microscope study of the topography of float glasses and a model to explain the bloom effect', Glass Science and Technology 75(4) (2002) 174-183, https://www.osti.gov/etdeweb/biblio/20330699",
+      "conditions": "as-received air and tin sides, AFM"
+    }
+  },
+  "strength": {
+    "characteristicBendingStrength": {
+      "value": 45,
+      "unit": "MPa",
+      "grade": "guidance",
+      "source": "Saint-Gobain Building Glass UK, 'Glass Fundamentals GF-1B: The Strength of Glass', 2018 (Table 1 characteristic strengths to EN 572-1, EN 1863-1, EN 12150-1; Table 3 TRLV permissible stresses), https://www.saint-gobain-glass.co.uk/wp-content/uploads/2024/02/Glass-Fundamentals-1B-The-Strength-of-Glass-19-09-2018-1.pdf",
+      "conditions": "EN 572-1, 5 % fractile"
+    },
+    "meanModulusOfRupture": {
+      "value": 41,
+      "unit": "MPa",
+      "grade": "manufacturer",
+      "source": "Pilkington North America, Technical Bulletin ATS-129 'Properties of soda-lime silica float glass', 04/2025, https://www.pilkington.com/-/media/pilkington/site-content/usa/window-manufacturers/technical-bulletins/ats-129---properties-of-soda-lime-silica-float-glass.pdf",
+      "conditions": "weathered in-service glass, 60 s load, 50 % probability of breakage"
+    },
+    "permissibleStressOverhead": {
+      "value": 12,
+      "unit": "MPa",
+      "grade": "guidance",
+      "source": "Saint-Gobain Building Glass UK, 'Glass Fundamentals GF-1B: The Strength of Glass', 2018 (Table 1 characteristic strengths to EN 572-1, EN 1863-1, EN 12150-1; Table 3 TRLV permissible stresses), https://www.saint-gobain-glass.co.uk/wp-content/uploads/2024/02/Glass-Fundamentals-1B-The-Strength-of-Glass-19-09-2018-1.pdf",
+      "conditions": "TRLV, annealed float, overhead glazing (18 MPa vertical)"
+    }
+  },
+  "flatness": "Float flatness: no roller wave, because the glass has not been reheated on rollers.",
+  "edgeWork": {
+    "kinds": [
+      "cut",
+      "arrised",
+      "ground",
+      "polished"
+    ],
+    "note": "A polished edge shows the glass's own colour (aqua-blue for low-iron glass); an arrised edge is a narrow bevel on each arris and reads as a bright line."
+  },
+  "photograph": [
+    "A calm, undistorted reflection of straight lines.",
+    "At an edge: the cut, arrised, ground or polished finish; a polished edge glows aqua-blue."
+  ]
+}

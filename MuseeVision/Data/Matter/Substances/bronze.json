@@ -1,0 +1,611 @@
+{
+  "schema": "musee.matter.substance/1",
+  "key": "bronze",
+  "name": "Tin bronze CuSn10, the museum's one bronze",
+  "family": "bronze",
+  "accentOf": null,
+  "summary": "A lead-free tin bronze of about 90 parts copper to 10 parts tin (EN 1982 CuSn10-C, CC480K; UNS C90700; BS 1400 CT1). It is the classical casting bronze: golden when bright, it fills fine detail, it takes the founder's hot patinas, and it is made both as castings and as continuously cast bar, so every bronze piece in the museum (the sun clock's inlaid lines, numerals and letters, the doorway threshold strips, the well-collar rings, the rails) can be the one alloy. Its workings are cast.bronze, brushed and patinated; brass is its declared accent.",
+  "dossier": "Docs/Matter/bronze.md",
+  "workings": [
+    "cast.bronze",
+    "brushed",
+    "patinated",
+    "gilt"
+  ],
+  "histories": [
+    "bronze.tarnish",
+    "bronze.wear",
+    "bronze.weathering",
+    "gilt.wear"
+  ],
+  "identity": {
+    "class": "metal, copper alloy, tin bronze (alpha solid solution with some alpha+delta eutectoid in castings)",
+    "designations": [
+      {
+        "system": "EN 1982",
+        "designation": "CuSn10-C",
+        "number": "CC480K",
+        "source": "Keskipakovalu Oy, Data sheet 'Tin bronze: EN 1982: CuSn10-C (CC480K) (TP10)', https://www.keskipakovalu.fi/wp-content/uploads/2019/09/Data-sheet__TP10-Eng.pdf",
+        "grade": "manufacturer"
+      },
+      {
+        "system": "UNS",
+        "designation": "C90700",
+        "source": "Keskipakovalu Oy, Data sheet 'Tin bronze: EN 1982: CuSn10-C (CC480K) (TP10)', 'Correspondence of Standards: ASTM B505, UNS C90700, SIS 145458, BS 1400 CT1', https://www.keskipakovalu.fi/wp-content/uploads/2019/09/Data-sheet__TP10-Eng.pdf",
+        "grade": "manufacturer"
+      },
+      {
+        "system": "BS 1400",
+        "designation": "CT1",
+        "source": "Keskipakovalu Oy, Data sheet 'Tin bronze: EN 1982: CuSn10-C (CC480K) (TP10)', https://www.keskipakovalu.fi/wp-content/uploads/2019/09/Data-sheet__TP10-Eng.pdf",
+        "grade": "manufacturer"
+      },
+      {
+        "system": "ASTM",
+        "designation": "B505 (continuous castings)",
+        "source": "Keskipakovalu Oy, Data sheet 'Tin bronze: EN 1982: CuSn10-C (CC480K) (TP10)', https://www.keskipakovalu.fi/wp-content/uploads/2019/09/Data-sheet__TP10-Eng.pdf",
+        "grade": "manufacturer"
+      }
+    ],
+    "chosenBecause": [
+      {
+        "text": "It is the classical casting bronze: 'classic bronze', about 10 % tin, was used in casting; 'mild bronze', about 6 % tin, was hammered.",
+        "source": "Wikipedia, 'Bronze', section Composition, https://en.wikipedia.org/wiki/Bronze",
+        "grade": "secondary"
+      },
+      {
+        "text": "Art foundries cast statuary in tin bronze; a typical composition is about 90 % copper and 10 % tin.",
+        "source": "Kunstguss Lauchhammer (art foundry), 'Bronze' ('For the production of bronze sculptures, we usually use our own tin bronze recipes'), https://lauchhammer.com/en/worth-knowing/bronze",
+        "grade": "manufacturer"
+      },
+      {
+        "text": "Its colour is the bronze colour: tin bronzes of 5-12 % Sn are orange-brown to yellow-golden and 'at 10 % when polished distinctly golden (typical bronze color)', with good casting qualities. The measured yellowness reaches its maximum between 11 and 13 % Sn.",
+        "source": "M. Moedlinger, M. H. G. Kuijpers, D. Braekmans, D. Berger, 'Quantitative comparisons of the color of CuAs, CuSn, CuNi, and CuSb alloys', J. Archaeol. Sci. 88 (2017) 14-23, doi:10.1016/j.jas.2017.09.001, Table 2 (after Kuijpers 2014) and Discussion; accepted manuscript https://scholarlypublications.universiteitleiden.nl/access/item:2949755/download",
+        "grade": "measured"
+      },
+      {
+        "text": "Bronze expands slightly just before it sets, filling the finest detail of a mould, then shrinks a little on cooling.",
+        "source": "Wikipedia, 'Bronze', section Properties (its ref. 49), https://en.wikipedia.org/wiki/Bronze",
+        "grade": "secondary"
+      },
+      {
+        "text": "One alloy for every product form: EN 1982 CuSn10-C is supplied as centrifugal (GZ) and continuous (GC) castings as well as foundry castings, so strips and rails can be cut from continuously cast bar of the same alloy as the cast inlays. The Copper Development Association warns that not all copper alloys are made in every product form, so colour-matched pieces otherwise need different alloys.",
+        "source": "Keskipakovalu Oy data sheet CuSn10-C (GZ and GC properties), https://www.keskipakovalu.fi/wp-content/uploads/2019/09/Data-sheet__TP10-Eng.pdf ; Copper Development Association, 'Copper Brass Bronze Design Handbook: Architectural Applications' (A4039), 'Color Matching', p. 12, https://www.copper.org/publications/pub_list/pdf/A4039-ArchitecturalApplications.pdf",
+        "grade": "manufacturer"
+      },
+      {
+        "text": "Lead-free: lead is limited to 1.0 wt% (no lead addition), which matters for rails and strips that hands and feet touch.",
+        "source": "Keskipakovalu Oy data sheet CuSn10-C; Copper Alloys Ltd, 'BS EN 1982:2008 GC CC480K' ('A 10% tin bronze without the addition of phosphorus and lead'), https://copperalloys.net/alloys/bs-en-19822008-gc-cc480k/",
+        "grade": "manufacturer"
+      },
+      {
+        "text": "Tin bronze C90700 is in the architectural palette of copper alloys.",
+        "source": "Copper Development Association, A4039, Figure III-4 (the palette of alloy colours lists 'Tin Bronze C90700'), https://www.copper.org/publications/pub_list/pdf/A4039-ArchitecturalApplications.pdf",
+        "grade": "guidance"
+      }
+    ],
+    "alternativesConsidered": [
+      {
+        "designation": "UNS C83600 / BS 1400 LG2 / CuSn5Zn5Pb5 ('ounce metal', 85-5-5-5)",
+        "reason": "The traditional art-casting and hardware gunmetal, but it carries 5 % lead (handled and walked pieces) and its colour is tan-gold rather than golden.",
+        "source": "Copper Development Association, A4039, p. 5 ('C83600 Ounce Metal, 85-5-5-5 ... 85% copper, 5% tin, 5% lead, 5% zinc') and Table 7 (C83600 in the 'Tan-Gold' colour group), https://www.copper.org/publications/pub_list/pdf/A4039-ArchitecturalApplications.pdf",
+        "grade": "guidance"
+      },
+      {
+        "designation": "UNS C65500 / C87300 silicon bronze (Everdur)",
+        "reason": "Widely used for sculpture because it accepts a wide range of patinas, and lead-free, but its natural colour is 'reddish old gold', redder than the museum's golden bronze.",
+        "source": "Copper Development Association, A4039, Table 1 (C65500: 1.5 % zinc, 3.3 % silicon, 1.2 % manganese, 0.6 % nickel, remainder copper; 'Natural: reddish old gold') and Table 8 ('Color is redder than that of Architectural Bronze'), https://www.copper.org/publications/pub_list/pdf/A4039-ArchitecturalApplications.pdf ; Belmont Metals, 'Everdur Silicon Bronze for Sculpture and Jewelry Applications' ('Many sculptures may use Everdur silicon bronze for their statues and figurines due to the alloy accepting a varying range of patinas'), https://www.belmontmetals.com/everdur-silicon-bronze-for-sculpture-and-jewelry-applications/",
+        "grade": "guidance"
+      },
+      {
+        "designation": "UNS C38500 'Architectural Bronze'",
+        "reason": "Not a bronze: a leaded brass of 57 % copper, 40 % zinc, 3 % lead, extruded for architectural sections. Brass is the museum's declared accent, not its bronze.",
+        "source": "Copper Development Association, A4039, Table 1 ('C38500, Architectural Bronze, Leaded Brass: 57% copper, 40% zinc, 3% lead'), https://www.copper.org/publications/pub_list/pdf/A4039-ArchitecturalApplications.pdf",
+        "grade": "guidance"
+      }
+    ],
+    "statuaryBronzeTerm": {
+      "text": "The architectural term 'statuary bronze' names the brown-to-black surface (natural or chemical), not an alloy. In the museum that surface is the patinated working.",
+      "source": "Copper Development Association, A4039, p. 5 ('The architectural term, Statuary Bronze, does not refer to a specific alloy but instead describes the range of naturally weathered or chemically oxidized brown-to-black surfaces'), https://www.copper.org/publications/pub_list/pdf/A4039-ArchitecturalApplications.pdf",
+      "grade": "guidance"
+    }
+  },
+  "composition": {
+    "standard": "EN 1982 CuSn10-C (CC480K)",
+    "Cu": {
+      "min": 88.0,
+      "max": 90.0,
+      "unit": "wt%",
+      "source": "Keskipakovalu Oy data sheet CuSn10-C, nominal composition table, https://www.keskipakovalu.fi/wp-content/uploads/2019/09/Data-sheet__TP10-Eng.pdf",
+      "grade": "manufacturer",
+      "note": "EN 1982 counts Cu together with Ni in this band: Deutsches Kupferinstitut, data sheet 'CuSn10-C' (composition after DIN EN 1982, Cu footnote 'Einschliesslich Nickel', including nickel), https://www.kupferinstitut.de/wp-content/uploads/2019/11/CuSn10-C.pdf"
+    },
+    "Sn": {
+      "min": 9.0,
+      "max": 11.0,
+      "unit": "wt%",
+      "source": "Keskipakovalu Oy data sheet CuSn10-C, https://www.keskipakovalu.fi/wp-content/uploads/2019/09/Data-sheet__TP10-Eng.pdf",
+      "grade": "manufacturer"
+    },
+    "Pb": {
+      "max": 1.0,
+      "unit": "wt%",
+      "source": "Keskipakovalu Oy data sheet CuSn10-C, https://www.keskipakovalu.fi/wp-content/uploads/2019/09/Data-sheet__TP10-Eng.pdf",
+      "grade": "manufacturer"
+    },
+    "Zn": {
+      "max": 0.5,
+      "unit": "wt%",
+      "source": "Keskipakovalu Oy data sheet CuSn10-C, https://www.keskipakovalu.fi/wp-content/uploads/2019/09/Data-sheet__TP10-Eng.pdf",
+      "grade": "manufacturer"
+    },
+    "Ni": {
+      "max": 2.0,
+      "unit": "wt%",
+      "source": "Keskipakovalu Oy data sheet CuSn10-C, https://www.keskipakovalu.fi/wp-content/uploads/2019/09/Data-sheet__TP10-Eng.pdf",
+      "grade": "manufacturer"
+    },
+    "P": {
+      "max": 0.2,
+      "unit": "wt%",
+      "source": "Keskipakovalu Oy data sheet CuSn10-C, https://www.keskipakovalu.fi/wp-content/uploads/2019/09/Data-sheet__TP10-Eng.pdf",
+      "grade": "manufacturer"
+    },
+    "Fe": {
+      "max": 0.2,
+      "unit": "wt%",
+      "source": "Keskipakovalu Oy data sheet CuSn10-C, https://www.keskipakovalu.fi/wp-content/uploads/2019/09/Data-sheet__TP10-Eng.pdf",
+      "grade": "manufacturer"
+    },
+    "Si": {
+      "max": 0.02,
+      "unit": "wt%",
+      "source": "Keskipakovalu Oy data sheet CuSn10-C, https://www.keskipakovalu.fi/wp-content/uploads/2019/09/Data-sheet__TP10-Eng.pdf",
+      "grade": "manufacturer"
+    },
+    "Mn": {
+      "max": 0.1,
+      "unit": "wt%",
+      "source": "Keskipakovalu Oy data sheet CuSn10-C, https://www.keskipakovalu.fi/wp-content/uploads/2019/09/Data-sheet__TP10-Eng.pdf",
+      "grade": "manufacturer"
+    },
+    "Al": {
+      "max": 0.01,
+      "unit": "wt%",
+      "source": "Keskipakovalu Oy data sheet CuSn10-C, https://www.keskipakovalu.fi/wp-content/uploads/2019/09/Data-sheet__TP10-Eng.pdf",
+      "grade": "manufacturer"
+    },
+    "S": {
+      "max": 0.05,
+      "unit": "wt%",
+      "source": "Keskipakovalu Oy data sheet CuSn10-C, https://www.keskipakovalu.fi/wp-content/uploads/2019/09/Data-sheet__TP10-Eng.pdf",
+      "grade": "manufacturer"
+    },
+    "Sb": {
+      "max": 0.2,
+      "unit": "wt%",
+      "source": "Keskipakovalu Oy data sheet CuSn10-C, https://www.keskipakovalu.fi/wp-content/uploads/2019/09/Data-sheet__TP10-Eng.pdf",
+      "grade": "manufacturer"
+    }
+  },
+  "formation": {
+    "how": "Copper is melted and the tin added; the melt is poured into moulds. Statuary and inlay pieces are cast by the lost-wax (investment) process or in sand; bar, flats and hollow bar are cast continuously and then machined. Cast pieces are fettled (sprues and runners cut away) and chased (flaws removed, detail re-cut), then finished by one of the workings.",
+    "facts": {
+      "castingProcesses": {
+        "text": "EN 1982 suffixes the alloy by casting process: GS sand, GM permanent mould, GZ centrifugal, GC continuous.",
+        "source": "Deutsches Kupferinstitut, data sheet 'CuSn10-C', section 4.1.1 (properties after DIN EN 1982 for CuSn10-C - GS Sandguss, - GM Kokillenguss, - GC Strangguss, - GZ Schleuderguss), https://www.kupferinstitut.de/wp-content/uploads/2019/11/CuSn10-C.pdf ; GZ and GC with their properties also in Keskipakovalu Oy data sheet CuSn10-C, https://www.keskipakovalu.fi/wp-content/uploads/2019/09/Data-sheet__TP10-Eng.pdf",
+        "grade": "guidance"
+      },
+      "meltingRange": {
+        "min": 831,
+        "max": 999,
+        "unit": "degC",
+        "source": "Copper Alloys Ltd, 'BS EN 1982:2008 GC CC480K', https://copperalloys.net/alloys/bs-en-19822008-gc-cc480k/",
+        "grade": "manufacturer",
+        "conditions": "solidus to liquidus"
+      }
+    }
+  },
+  "physical": {
+    "density": {
+      "value": 8800,
+      "unit": "kg/m3",
+      "source": "Keskipakovalu Oy data sheet CuSn10-C ('Density 8.8 kg/dm3'), https://www.keskipakovalu.fi/wp-content/uploads/2019/09/Data-sheet__TP10-Eng.pdf",
+      "grade": "manufacturer"
+    },
+    "thermalExpansion": {
+      "value": 1.8e-05,
+      "unit": "1/K",
+      "source": "Keskipakovalu Oy data sheet CuSn10-C, https://www.keskipakovalu.fi/wp-content/uploads/2019/09/Data-sheet__TP10-Eng.pdf ; Copper Alloys Ltd CC480K (0-250 degC), https://copperalloys.net/alloys/bs-en-19822008-gc-cc480k/",
+      "grade": "manufacturer"
+    },
+    "thermalConductivity": {
+      "value": 50,
+      "unit": "W/(m*K)",
+      "source": "Keskipakovalu Oy data sheet CuSn10-C, https://www.keskipakovalu.fi/wp-content/uploads/2019/09/Data-sheet__TP10-Eng.pdf",
+      "grade": "manufacturer"
+    },
+    "electricalResistivity": {
+      "value": 160,
+      "unit": "nOhm*m",
+      "source": "Keskipakovalu Oy data sheet CuSn10-C, https://www.keskipakovalu.fi/wp-content/uploads/2019/09/Data-sheet__TP10-Eng.pdf ; Copper Alloys Ltd CC480K ('0.16 uOhm.m at 15 degC'), https://copperalloys.net/alloys/bs-en-19822008-gc-cc480k/",
+      "grade": "manufacturer"
+    },
+    "youngsModulus": {
+      "value": 102,
+      "unit": "GPa",
+      "source": "Deutsches Kupferinstitut, data sheet 'CuSn10-C', section 3.9 (Elastizitaetsmodul 102 kN/mm2 at 20 degC), https://www.kupferinstitut.de/wp-content/uploads/2019/11/CuSn10-C.pdf",
+      "grade": "manufacturer",
+      "conditions": "20 degC"
+    },
+    "hardness": {
+      "unit": "HB",
+      "source": "70: Deutsches Kupferinstitut data sheet CuSn10-C, section 4.1.1 (minimum after DIN EN 1982, GS sand casting), https://www.kupferinstitut.de/wp-content/uploads/2019/11/CuSn10-C.pdf ; 80: Keskipakovalu Oy data sheet CuSn10-C (minimum, GZ and GC), https://www.keskipakovalu.fi/wp-content/uploads/2019/09/Data-sheet__TP10-Eng.pdf ; 100: Copper Alloys Ltd CC480K (typical, GC), https://copperalloys.net/alloys/bs-en-19822008-gc-cc480k/",
+      "grade": "manufacturer",
+      "min": 70,
+      "max": 100,
+      "conditions": "70 is the specified minimum for sand castings (GS), 80 for permanent-mould, centrifugal and continuous castings (GM, GZ, GC), 100 a typical continuously cast value"
+    },
+    "tensileStrength": {
+      "unit": "MPa",
+      "source": "250: Deutsches Kupferinstitut data sheet CuSn10-C, section 4.1.1 (minimum, GS sand casting), https://www.kupferinstitut.de/wp-content/uploads/2019/11/CuSn10-C.pdf ; 280: Keskipakovalu Oy data sheet CuSn10-C (minimum, GZ and GC), https://www.keskipakovalu.fi/wp-content/uploads/2019/09/Data-sheet__TP10-Eng.pdf ; 320: Copper Alloys Ltd CC480K (typical), https://copperalloys.net/alloys/bs-en-19822008-gc-cc480k/",
+      "grade": "manufacturer",
+      "min": 250,
+      "max": 320,
+      "conditions": "250 is the specified minimum for sand castings (GS), 280 for centrifugal and continuous castings (GZ, GC), 320 a typical continuously cast value"
+    },
+    "proofStrength": {
+      "unit": "MPa",
+      "source": "130 (GS): Deutsches Kupferinstitut data sheet CuSn10-C, section 4.1.1 (minimum), https://www.kupferinstitut.de/wp-content/uploads/2019/11/CuSn10-C.pdf ; 160 (GZ) and 170 (GC): Keskipakovalu Oy data sheet CuSn10-C (minimum), https://www.keskipakovalu.fi/wp-content/uploads/2019/09/Data-sheet__TP10-Eng.pdf ; 180: Copper Alloys Ltd CC480K (typical), https://copperalloys.net/alloys/bs-en-19822008-gc-cc480k/",
+      "grade": "manufacturer",
+      "min": 130,
+      "max": 180,
+      "conditions": "0.2 % proof strength; 130 is the specified minimum for sand castings (GS)"
+    },
+    "elongation": {
+      "unit": "%",
+      "source": "10: Keskipakovalu Oy data sheet CuSn10-C (minimum); 20: Copper Alloys Ltd CC480K (typical), https://copperalloys.net/alloys/bs-en-19822008-gc-cc480k/",
+      "grade": "manufacturer",
+      "min": 10,
+      "max": 20
+    },
+    "corrosionResistance": {
+      "text": "On the maker's relative scale of copper alloys (1-5, 5 best): air and fresh water 5, sea water 5, alkaline soap solution 5, weak acids 5, strong non-oxidising acids 2.",
+      "source": "Keskipakovalu Oy data sheet CuSn10-C, https://www.keskipakovalu.fi/wp-content/uploads/2019/09/Data-sheet__TP10-Eng.pdf",
+      "grade": "manufacturer"
+    }
+  },
+  "optics": {
+    "kind": "conductor",
+    "measuredColour": {
+      "note": "CIELAB of polished bronze, specular component included. Matter reads these rows and interpolates to the museum's 10 % tin.",
+      "instrument": "Minolta CM-2600d with integrating sphere, geometry di:8 (specular included), polished with SiC to 1200 grit then diamond to 1 um, measured immediately after polishing; cold-rolled samples of electrolytic copper alloyed with tin; illuminant and observer not stated in the paper",
+      "alloys": [
+        "Cu",
+        "CuSn6",
+        "CuSn7.3",
+        "CuSn9.5",
+        "CuSn11",
+        "CuSn12.7"
+      ],
+      "L": {
+        "axis": "tin",
+        "axisUnit": "wt%",
+        "axisValues": [
+          0.0,
+          6.0,
+          7.3,
+          9.5,
+          11.0,
+          12.7
+        ],
+        "unit": "CIELAB",
+        "values": [
+          87.9,
+          89.0,
+          88.7,
+          88.7,
+          88.7,
+          84.9
+        ],
+        "grade": "measured",
+        "source": "M. Moedlinger, M. H. G. Kuijpers, D. Braekmans, D. Berger, 'Quantitative comparisons of the color of CuAs, CuSn, CuNi, and CuSb alloys', J. Archaeol. Sci. 88 (2017) 14-23, doi:10.1016/j.jas.2017.09.001, Table 1; accepted manuscript https://scholarlypublications.universiteitleiden.nl/access/item:2949755/download",
+        "conditions": "CIELAB L*, specular component included (di:8)"
+      },
+      "a": {
+        "axis": "tin",
+        "axisUnit": "wt%",
+        "axisValues": [
+          0.0,
+          6.0,
+          7.3,
+          9.5,
+          11.0,
+          12.7
+        ],
+        "unit": "CIELAB",
+        "values": [
+          14.3,
+          9.4,
+          8.0,
+          7.8,
+          5.9,
+          5.5
+        ],
+        "grade": "measured",
+        "source": "M. Moedlinger, M. H. G. Kuijpers, D. Braekmans, D. Berger, 'Quantitative comparisons of the color of CuAs, CuSn, CuNi, and CuSb alloys', J. Archaeol. Sci. 88 (2017) 14-23, doi:10.1016/j.jas.2017.09.001, Table 1; accepted manuscript https://scholarlypublications.universiteitleiden.nl/access/item:2949755/download",
+        "conditions": "CIELAB a*, specular component included (di:8)"
+      },
+      "b": {
+        "axis": "tin",
+        "axisUnit": "wt%",
+        "axisValues": [
+          0.0,
+          6.0,
+          7.3,
+          9.5,
+          11.0,
+          12.7
+        ],
+        "unit": "CIELAB",
+        "values": [
+          15.6,
+          18.6,
+          18.8,
+          19.0,
+          20.7,
+          19.7
+        ],
+        "grade": "measured",
+        "source": "M. Moedlinger, M. H. G. Kuijpers, D. Braekmans, D. Berger, 'Quantitative comparisons of the color of CuAs, CuSn, CuNi, and CuSb alloys', J. Archaeol. Sci. 88 (2017) 14-23, doi:10.1016/j.jas.2017.09.001, Table 1; accepted manuscript https://scholarlypublications.universiteitleiden.nl/access/item:2949755/download",
+        "conditions": "CIELAB b*, specular component included (di:8)"
+      }
+    },
+    "f0": {
+      "value": [
+        0.961,
+        0.693,
+        0.491
+      ],
+      "min": [
+        0.868,
+        0.669,
+        0.482
+      ],
+      "max": [
+        0.961,
+        0.694,
+        0.491
+      ],
+      "unit": "1",
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "grade": "derived",
+      "derivation": "value: CIELAB interpolated linearly in tin between CuSn9.5 and CuSn11 to 10 wt% Sn, (88.7, 7.17, 19.57); converted to XYZ with the D65 2-degree white and to linear Rec.709. The paper does not state its illuminant and observer; a 10-degree white gives [0.959, 0.694, 0.482]. Corrected: the 2-degree colour multiplied channel by channel by the ratio between copper's Fresnel F0 from Johnson and Christy's n,k ([0.931, 0.623, 0.522]) and copper's colour from the same instrument ([1.031, 0.645, 0.525]), giving [0.868, 0.669, 0.488]: the integrating sphere adds a few per cent of diffuse light from polishing marks. min and max are the channel-by-channel envelope of the 2-degree value, the 10-degree value and the corrected value. The true normal-incidence reflectance lies in the range.",
+      "source": "M. Moedlinger, M. H. G. Kuijpers, D. Braekmans, D. Berger, 'Quantitative comparisons of the color of CuAs, CuSn, CuNi, and CuSb alloys', J. Archaeol. Sci. 88 (2017) 14-23, doi:10.1016/j.jas.2017.09.001, Table 1, https://scholarlypublications.universiteitleiden.nl/access/item:2949755/download ; copper n,k: P. B. Johnson and R. W. Christy, 'Optical constants of the noble metals', Phys. Rev. B 6, 4370-4379 (1972), doi:10.1103/PhysRevB.6.4370 ; CIE 018:2019 Table 6, CIE 1931 2-degree colour-matching functions, doi:10.25039/CIE.DS.xvudnb9b ; CIE standard illuminant D65, https://files.cie.co.at/Publications-datasets/CIE_std_illum_D65.csv",
+      "luminance": {
+        "value": 0.735,
+        "unit": "1",
+        "grade": "derived",
+        "derivation": "Y = ((L*+16)/116)^3 with L* = 88.7",
+        "source": "M. Moedlinger, M. H. G. Kuijpers, D. Braekmans, D. Berger, 'Quantitative comparisons of the color of CuAs, CuSn, CuNi, and CuSb alloys', J. Archaeol. Sci. 88 (2017) 14-23, doi:10.1016/j.jas.2017.09.001, Table 1, https://scholarlypublications.universiteitleiden.nl/access/item:2949755/download"
+      }
+    },
+    "crossCheck": {
+      "note": "The same conversion applied to Moedlinger's pure copper gives [1.031, 0.645, 0.525] against [0.931, 0.623, 0.522] from Johnson and Christy's n,k through the Fresnel equations; luminance 0.719 against 0.681. The measured colour table and the optical-constant route agree to about 5 % in luminance, which is the size of the range given in f0.",
+      "grade": "derived",
+      "derivation": "Moedlinger's pure-copper CIELAB converted as for f0, compared with the Fresnel F0 of Johnson and Christy's copper n,k integrated as in the brass record's f0.",
+      "source": "M. Moedlinger, M. H. G. Kuijpers, D. Braekmans, D. Berger, 'Quantitative comparisons of the color of CuAs, CuSn, CuNi, and CuSb alloys', J. Archaeol. Sci. 88 (2017) 14-23, doi:10.1016/j.jas.2017.09.001, Table 1, https://scholarlypublications.universiteitleiden.nl/access/item:2949755/download ; P. B. Johnson and R. W. Christy, 'Optical constants of the noble metals', Phys. Rev. B 6, 4370-4379 (1972), doi:10.1103/PhysRevB.6.4370 ; CIE 018:2019 Table 6, CIE 1931 2-degree colour-matching functions, doi:10.25039/CIE.DS.xvudnb9b ; CIE standard illuminant D65, https://files.cie.co.at/Publications-datasets/CIE_std_illum_D65.csv"
+    },
+    "copperReference": {
+      "note": "Copper, the parent metal: Fresnel reflectance from measured n,k (for the tint direction of tin: tin lowers red and raises green-yellow).",
+      "n": {
+        "axis": "wavelength",
+        "axisUnit": "um",
+        "axisValues": [
+          0.3815,
+          0.3974,
+          0.4133,
+          0.4305,
+          0.4509,
+          0.4714,
+          0.4959,
+          0.5209,
+          0.5486,
+          0.5821,
+          0.6168,
+          0.6595,
+          0.7045,
+          0.756
+        ],
+        "unit": "1",
+        "values": [
+          1.33,
+          1.32,
+          1.28,
+          1.25,
+          1.24,
+          1.25,
+          1.22,
+          1.18,
+          1.02,
+          0.7,
+          0.3,
+          0.22,
+          0.21,
+          0.24
+        ],
+        "grade": "measured",
+        "source": "P. B. Johnson and R. W. Christy, Phys. Rev. B 6, 4370-4379 (1972), doi:10.1103/PhysRevB.6.4370, via https://refractiveindex.info/?shelf=main&book=Cu&page=Johnson"
+      },
+      "k": {
+        "axis": "wavelength",
+        "axisUnit": "um",
+        "axisValues": [
+          0.3815,
+          0.3974,
+          0.4133,
+          0.4305,
+          0.4509,
+          0.4714,
+          0.4959,
+          0.5209,
+          0.5486,
+          0.5821,
+          0.6168,
+          0.6595,
+          0.7045,
+          0.756
+        ],
+        "unit": "1",
+        "values": [
+          2.045,
+          2.116,
+          2.207,
+          2.305,
+          2.397,
+          2.483,
+          2.564,
+          2.608,
+          2.577,
+          2.704,
+          3.205,
+          3.747,
+          4.205,
+          4.665
+        ],
+        "grade": "measured",
+        "source": "P. B. Johnson and R. W. Christy, Phys. Rev. B 6, 4370-4379 (1972), doi:10.1103/PhysRevB.6.4370, via https://refractiveindex.info/?shelf=main&book=Cu&page=Johnson"
+      }
+    }
+  },
+  "acoustic": {
+    "note": "No measured octave-band absorption for bronze was found. A solid cast or bar bronze piece is non-porous and rigid; what it absorbs depends on its size and backing. See unverified."
+  },
+  "stock": {
+    "forms": {
+      "text": "Sand and investment castings (inlaid lines, numerals, letters, bosses, rings); centrifugal and continuously cast bar, flats and hollow bar (threshold strips, collar rings, rails).",
+      "source": "Keskipakovalu Oy data sheet CuSn10-C (GZ centrifugal and GC continuous casting), https://www.keskipakovalu.fi/wp-content/uploads/2019/09/Data-sheet__TP10-Eng.pdf ; Copper Alloys Ltd CC480K (GC), https://copperalloys.net/alloys/bs-en-19822008-gc-cc480k/",
+      "grade": "manufacturer"
+    },
+    "thermalMovement": {
+      "text": "A long strip set in stone moves more than the stone: 18e-6 per K for the bronze. Joints in long strips and rings allow for it.",
+      "source": "Keskipakovalu Oy data sheet CuSn10-C (thermal expansion 18e-6 1/K), https://www.keskipakovalu.fi/wp-content/uploads/2019/09/Data-sheet__TP10-Eng.pdf",
+      "grade": "manufacturer"
+    }
+  },
+  "physicalMaterial": {
+    "footfallClass": "metal",
+    "note": "No verified shoe-on-bronze friction coefficient was found (see unverified)."
+  },
+  "uses": [
+    {
+      "where": "the brushed-bronze strip of every doorway, on the seam between two stages",
+      "working": "brushed",
+      "histories": [
+        "bronze.tarnish",
+        "bronze.wear"
+      ],
+      "source": "MuseeVision/Docs/Architecture.md, The Museum's Trades (the brushed-bronze strip of every doorway) and How rooms join",
+      "grade": "design"
+    },
+    {
+      "where": "well collars: the bronze ring on the mating plane at the slab",
+      "working": "brushed",
+      "histories": [
+        "bronze.tarnish",
+        "bronze.wear"
+      ],
+      "source": "MuseeVision/Docs/Architecture.md, Site (well collars with the bronze ring on the mating plane)",
+      "grade": "design"
+    },
+    {
+      "where": "the sun clock: bronze lines, ticks, numerals and the motto inlaid in the polished marble dial",
+      "working": "patinated",
+      "histories": [
+        "bronze.tarnish",
+        "bronze.wear"
+      ],
+      "source": "windows/LOOK_TARGETS.md (frozen reference): 'The bronze sun clock inlaid in polished marble; the motto HORAS NON NUMERO NISI SERENAS'",
+      "grade": "design"
+    },
+    {
+      "where": "the node at the centre of the Rotunda's eye lattice",
+      "working": "cast.bronze",
+      "histories": [
+        "bronze.tarnish"
+      ],
+      "source": "windows/LOOK_TARGETS.md (frozen reference): 'A glazed triangulated oculus with a bronze node'",
+      "grade": "design"
+    },
+    {
+      "where": "the Elan car's slim rings",
+      "working": "brushed",
+      "histories": [
+        "bronze.tarnish",
+        "bronze.wear"
+      ],
+      "source": "windows/LOOK_TARGETS.md (frozen reference): 'A cylindrical all-glass car with slim bronze rings'",
+      "grade": "design"
+    }
+  ],
+  "photograph": [
+    "Bright tin bronze is a warm golden metal: less red than copper, less yellow than brass.",
+    "Bare bronze indoors darkens to golden brown and then brown unless it is waxed or lacquered; it never turns green indoors.",
+    "The founder's statuary patina is a deep brown, near black in hollows, with a soft waxy sheen and bright metal on relieved high points.",
+    "A brushed strip shows fine parallel lines along its length, and its highlight is drawn out across them.",
+    "Where feet or hands pass, a strip, a rail or the dial's inlay is bright and glossy; its edges and recesses stay brown.",
+    "Green on bronze means rain, dew or salt: the outdoor patina."
+  ],
+  "evidence": [],
+  "evidenceRejected": [
+    {
+      "path": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR/M1",
+      "set": "ambientCG Metal015 ('patinated bronze' in CREDITS.md)",
+      "reason": "Procedurally generated in Substance Designer (ambientCG creation method 'Procedural', parent MetalSubstance003), not a photograph of real bronze.",
+      "source": "https://ambientcg.com/view?id=Metal015",
+      "grade": "manufacturer"
+    },
+    {
+      "path": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR/M2",
+      "set": "ambientCG Metal009 ('brushed metal (bronze tint)' in CREDITS.md)",
+      "reason": "Procedurally generated (ambientCG creation method 'Procedural', parent MetalSubstance002), tagged silver/steel: neither a photograph nor bronze.",
+      "source": "https://ambientcg.com/view?id=Metal009",
+      "grade": "manufacturer"
+    }
+  ],
+  "evidenceSearch": {
+    "searched": [
+      "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR (CREDITS.md, CREDITS_chenghuai.md, every metal SET.txt)",
+      "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/Textures/CREDITS.md and ch_vessels.json",
+      "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/Journeys (CREDITS.md)",
+      "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/Albion",
+      "file names containing bronze, brass, gilt, gold, steel, patina or metal across the frozen repository"
+    ],
+    "found": "No CC0 photograph of real bronze is on this PC. The two bronze PBR sets of the old build (M1, M2) are procedural and are rejected above.",
+    "tier": "Bronze is calibrated from tier (a), measured tables (Architecture, Matter: 'Metals and glass are calibrated mainly from (a)'): the CIELAB table above and copper's n,k. A tier (b) specimen, a ColorChecker photograph of a polished and of a patinated CuSn10 coupon, would close the gap."
+  },
+  "unverified": [
+    {
+      "field": "optics.f82",
+      "value": [
+        0.921,
+        0.852,
+        0.732
+      ],
+      "unit": "1",
+      "reason": "No measured n,k exists for Cu-Sn bronze in the sources found (refractiveindex.info holds none). This edge tint (Fresnel at 82 degrees, linear Rec.709, D65) is computed from the nearest measured copper alloy by colour, Cu85Zn15 (M. R. Querry, 'Optical constants', Contractor Report CRDC-CR-85034 (1985), https://apps.dtic.mil/sti/citations/ADA158623 , via refractiveindex.info-database other/alloys/Cu-Zn, Querry-Cu85Zn15). It is a proxy, not a measurement of this alloy."
+    },
+    {
+      "field": "acoustic.absorptionByOctave",
+      "value": null,
+      "unit": "1",
+      "reason": "No handbook row for bronze or solid copper-alloy surfaces was read."
+    },
+    {
+      "field": "physicalMaterial.friction",
+      "value": null,
+      "unit": "1",
+      "reason": "No measured shoe-on-bronze friction was found."
+    }
+  ]
+}

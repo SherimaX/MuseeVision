@@ -1,0 +1,466 @@
+{
+  "schema": "musee.matter.substance/1",
+  "key": "lime-plaster",
+  "family": "white",
+  "accentOf": null,
+  "name": "Lime plaster (lime putty and marble dust)",
+  "aliases": [
+    "lime plaster",
+    "setting stuff",
+    "stucco (Vitruvian marble-dust finish)"
+  ],
+  "summary": "Non-hydraulic (air) lime putty laid in coats over masonry and finished with a lime-and-marble-dust setting coat that is trowelled close. It hardens by taking carbon dioxide from the air: the calcium hydroxide of the putty becomes calcite, so the finished skin is a fine calcite body bound by calcite. It is the Rotunda's coffered dome.",
+  "dossier": "Docs/Matter/lime-plaster.md",
+  "formation": {
+    "how": "Limestone is burnt to quicklime, slaked with water and sieved to lime putty, which is matured before use. Putty is mixed with sharp sand for the backing coats (coarse stuff) and with fine sand or marble dust for the finish (setting stuff). After laying, the putty carbonates: Ca(OH)2 + CO2 -> CaCO3 + H2O. Carbonation turns portlandite into calcite and changes the pore structure.",
+    "reaction": "Ca(OH)2 + CO2 -> CaCO3 + H2O",
+    "facts": {
+      "puttyMaturingTime": {
+        "min": 3,
+        "unit": "month",
+        "grade": "guidance",
+        "note": "minimum before use",
+        "source": "Napier, W. & Jenkins, M. (2018) Inform Guide: Plain Lime Plastering. Historic Environment Scotland, https://www.historicenvironment.scot/archives-and-research/publications/publication/?publicationId=67d4d72c-7b8c-4622-a244-a94b01090177"
+      }
+    }
+  },
+  "constituents": [
+    {
+      "mineral": "calcite",
+      "formula": "CaCO3",
+      "role": "binder after carbonation, and the marble-dust aggregate of the finish"
+    },
+    {
+      "mineral": "portlandite",
+      "formula": "Ca(OH)2",
+      "role": "binder before carbonation (lime putty); remains in the core while the carbonation front advances"
+    },
+    {
+      "mineral": "quartz",
+      "formula": "SiO2",
+      "role": "sharp sand of the backing coats (coarse stuff); hidden under the finish"
+    }
+  ],
+  "optics": {
+    "refractiveIndex": [
+      {
+        "phase": "calcite",
+        "direction": "omega",
+        "value": 1.658,
+        "unit": "1",
+        "grade": "measured",
+        "source": "Anthony, J.W., Bideaux, R.A., Bladh, K.W. & Nichols, M.C. (eds.) Handbook of Mineralogy: Calcite. Mineral Data Publishing, version 1 (2001-2005), Mineralogical Society of America, http://www.handbookofmineralogy.org/pdfs/calcite.pdf"
+      },
+      {
+        "phase": "calcite",
+        "direction": "epsilon",
+        "value": 1.486,
+        "unit": "1",
+        "grade": "measured",
+        "source": "Anthony, J.W., Bideaux, R.A., Bladh, K.W. & Nichols, M.C. (eds.) Handbook of Mineralogy: Calcite. Mineral Data Publishing, version 1 (2001-2005), Mineralogical Society of America, http://www.handbookofmineralogy.org/pdfs/calcite.pdf"
+      },
+      {
+        "phase": "portlandite",
+        "direction": "omega",
+        "value": 1.575,
+        "unit": "1",
+        "grade": "measured",
+        "source": "Anthony, J.W., Bideaux, R.A., Bladh, K.W. & Nichols, M.C. (eds.) Handbook of Mineralogy: Portlandite. Mineral Data Publishing, version 1 (2001-2005), Mineralogical Society of America, http://www.handbookofmineralogy.org/pdfs/portlandite.pdf"
+      },
+      {
+        "phase": "portlandite",
+        "direction": "epsilon",
+        "value": 1.547,
+        "unit": "1",
+        "grade": "measured",
+        "source": "Anthony, J.W., Bideaux, R.A., Bladh, K.W. & Nichols, M.C. (eds.) Handbook of Mineralogy: Portlandite. Mineral Data Publishing, version 1 (2001-2005), Mineralogical Society of America, http://www.handbookofmineralogy.org/pdfs/portlandite.pdf"
+      }
+    ],
+    "specularF0": {
+      "min": 0.038,
+      "max": 0.061,
+      "unit": "1",
+      "grade": "derived",
+      "derivation": "normal-incidence Fresnel reflectance R0 = ((n-1)/(n+1))^2 over calcite's epsilon (1.486) and omega (1.658) indices; a carbonated finish is a random aggregate of calcite grains, so its F0 lies in this band",
+      "source": "Born, M. & Wolf, E. (1999) Principles of Optics, 7th ed., Cambridge University Press, section 1.5 (reflection and refraction of a plane wave); indices from Handbook of Mineralogy: Calcite, http://www.handbookofmineralogy.org/pdfs/calcite.pdf"
+    },
+    "luminousReflectance": {
+      "boundUpperMarblePowder": {
+        "value": 0.95,
+        "unit": "1",
+        "grade": "manufacturer",
+        "asReported": "Brightness (Ry, C/2 deg, DIN 53163) 95 %; CIE L*a*b* (DIN 6174) 98.2/0.12/1.1",
+        "note": "loose ground white marble (98 % CaCO3, d50 2.6 um): the marble dust of the finish at its whitest; a set plaster scatters less than a loose fine powder and carries binder impurities, so it lies below this bound",
+        "source": "Omya Pars, Product Information OMYACARB 2-MH (natural calcium carbonate from very high purity white marble, Meymeh plant), edition 27/02/07, https://mychem.ir/uploads/tds/28825.pdf"
+      },
+      "boundUpperMarblePowderFromLstar": {
+        "value": 0.954,
+        "unit": "1",
+        "grade": "derived",
+        "derivation": "Y/Yn = ((L*+16)/116)^3 with L* = 98.2",
+        "source": "CIE 15:2004 Colorimetry, 3rd ed.; inverse formula as given at https://en.wikipedia.org/wiki/CIELAB_color_space; L* from Omya Pars OMYACARB 2-MH product information, https://mychem.ir/uploads/tds/28825.pdf"
+      }
+    },
+    "wet": "Water (a far better index match to calcite than air) fills the open pores, so scattering at grain boundaries falls and the surface darkens until it dries; the porosity below sets how much water it takes up."
+  },
+  "physical": {
+    "bulkDensity": {
+      "value": 1742,
+      "unit": "kg/m3",
+      "grade": "measured",
+      "conditions": "air-lime mortar of hydrated lime, sand/binder 3.0 and water/binder 1.0, 28 days; a sanded backing coat rather than the marble-dust finish",
+      "source": "Pavlíková, M., Zemanová, L., Pokorný, J., Záleská, M., Jankovský, O., Lojka, M. & Pavlík, Z. (2019) Influence of wood-based biomass ash admixing on the structural, mechanical, hygric, and thermal properties of air lime mortars. Materials 12(14), 2227, https://doi.org/10.3390/ma12142227 (reference mortar MR)"
+    },
+    "matrixDensity": {
+      "value": 2578,
+      "unit": "kg/m3",
+      "grade": "measured",
+      "conditions": "same reference mortar MR, 28 days",
+      "source": "Pavlíková et al. (2019) Materials 12(14), 2227, https://doi.org/10.3390/ma12142227"
+    },
+    "openPorosity": {
+      "value": 0.324,
+      "unit": "1",
+      "asReported": "32.4 %",
+      "grade": "measured",
+      "conditions": "same reference mortar MR, 28 days",
+      "source": "Pavlíková et al. (2019) Materials 12(14), 2227, https://doi.org/10.3390/ma12142227"
+    },
+    "compressiveStrength": {
+      "value": 1.08,
+      "unit": "MPa",
+      "grade": "measured",
+      "conditions": "same reference mortar MR, 28 days",
+      "source": "Pavlíková et al. (2019) Materials 12(14), 2227, https://doi.org/10.3390/ma12142227"
+    },
+    "thermalConductivityDry": {
+      "value": 0.88,
+      "unit": "W/(m*K)",
+      "grade": "measured",
+      "conditions": "same reference mortar MR",
+      "source": "Pavlíková et al. (2019) Materials 12(14), 2227, https://doi.org/10.3390/ma12142227"
+    },
+    "vapourDiffusionResistanceFactor": {
+      "value": 10.7,
+      "unit": "1",
+      "grade": "measured",
+      "conditions": "same reference mortar MR, wet cup (dry cup 12.2)",
+      "source": "Pavlíková et al. (2019) Materials 12(14), 2227, https://doi.org/10.3390/ma12142227"
+    },
+    "calciteDensity": {
+      "value": 2710.2,
+      "unit": "kg/m3",
+      "asReported": "D(meas.) = 2.7102(2) g/cm3",
+      "grade": "measured",
+      "source": "Handbook of Mineralogy: Calcite, http://www.handbookofmineralogy.org/pdfs/calcite.pdf"
+    },
+    "calciteHardness": {
+      "value": 3,
+      "unit": "Mohs",
+      "grade": "measured",
+      "source": "Handbook of Mineralogy: Calcite, http://www.handbookofmineralogy.org/pdfs/calcite.pdf"
+    },
+    "dryingBehaviour": {
+      "text": "lime shrinks slightly as it dries (gypsum, by contrast, expands slightly as it sets)",
+      "grade": "guidance",
+      "source": "Ratcliffe, T. (1997) The Use of Gypsum Plaster. The Building Conservation Directory, https://www.buildingconservation.com/articles/gypsum/gypsum_plaster.htm"
+    }
+  },
+  "acoustic": {
+    "absorption": {
+      "axis": "frequency",
+      "axisUnit": "Hz",
+      "axisValues": [
+        125,
+        250,
+        500,
+        1000,
+        2000,
+        4000
+      ],
+      "unit": "1",
+      "values": [
+        0.013,
+        0.015,
+        0.02,
+        0.03,
+        0.04,
+        0.05
+      ],
+      "grade": "secondary",
+      "conditions": "smooth finish on tile or brick (plaster on the hard): the dome's case",
+      "note": "random-incidence absorption coefficients; the row is widely reproduced for gypsum or lime plaster, smooth finish on tile or brick, but neither page read names its primary source",
+      "source": "Table 'Sound Absorption Coefficients', row 'Plaster - Gypsum, or Lime, Smooth Finish on Tile or Brick', http://usenclosure.com/Diffraction%20Graphs/Sound%20Absorption%20Coefficients.pdf; the same row at https://sengpielaudio.com/calculator-RT60Coeff.htm"
+    }
+  },
+  "physicalMaterial": {
+    "note": "Not walked on: the dome, its coffers and the wall faces. Visitors can touch it only at wall height. No friction or footfall class is needed; if one is, it is unverified (see unverified)."
+  },
+  "stock": {
+    "coats": [
+      {
+        "coat": "first (scratch) coat, haired coarse stuff",
+        "thickness": {
+          "min": 9,
+          "max": 12,
+          "unit": "mm",
+          "grade": "guidance",
+          "source": "Napier & Jenkins (2018) Inform Guide: Plain Lime Plastering, Historic Environment Scotland, https://www.historicenvironment.scot/archives-and-research/publications/publication/?publicationId=67d4d72c-7b8c-4622-a244-a94b01090177"
+        },
+        "thicknessLimit": {
+          "max": 15,
+          "unit": "mm",
+          "grade": "guidance",
+          "source": "Ratcliffe, T. (2006) Internal Lime-Plastering. The Building Conservation Directory, https://www.buildingconservation.com/articles/internallimeplast/lime_plaster.htm"
+        }
+      },
+      {
+        "coat": "straightening (floating) coat, haired coarse stuff",
+        "thickness": {
+          "min": 9,
+          "max": 12,
+          "unit": "mm",
+          "grade": "guidance",
+          "source": "Napier & Jenkins (2018) Inform Guide: Plain Lime Plastering, Historic Environment Scotland, https://www.historicenvironment.scot/archives-and-research/publications/publication/?publicationId=67d4d72c-7b8c-4622-a244-a94b01090177"
+        },
+        "thicknessLimit": {
+          "max": 15,
+          "unit": "mm",
+          "grade": "guidance",
+          "source": "Ratcliffe (2006) Internal Lime-Plastering, https://www.buildingconservation.com/articles/internallimeplast/lime_plaster.htm"
+        }
+      },
+      {
+        "coat": "finishing (setting) coat, laid in two or three thin coats in quick succession",
+        "thickness": {
+          "min": 2,
+          "max": 3,
+          "unit": "mm",
+          "grade": "guidance",
+          "source": "Napier & Jenkins (2018) Inform Guide: Plain Lime Plastering, Historic Environment Scotland, https://www.historicenvironment.scot/archives-and-research/publications/publication/?publicationId=67d4d72c-7b8c-4622-a244-a94b01090177"
+        },
+        "thicknessRangeTrade": {
+          "min": 2,
+          "max": 5,
+          "unit": "mm",
+          "grade": "guidance",
+          "source": "Ratcliffe (2006) Internal Lime-Plastering, https://www.buildingconservation.com/articles/internallimeplast/lime_plaster.htm"
+        }
+      }
+    ],
+    "classicalCoatCount": {
+      "sandCoats": {
+        "min": 3,
+        "unit": "coat",
+        "grade": "historical",
+        "source": "Vitruvius, De Architectura VII.3.6, trans. J. Gwilt (1826), LacusCurtius, https://penelope.uchicago.edu/Thayer/E/Roman/Texts/Vitruvius/7*.html"
+      },
+      "marbleDustCoats": {
+        "value": 3,
+        "unit": "coat",
+        "grade": "historical",
+        "source": "Vitruvius, De Architectura VII.3.6, trans. J. Gwilt (1826), https://penelope.uchicago.edu/Thayer/E/Roman/Texts/Vitruvius/7*.html"
+      }
+    },
+    "mixes": {
+      "coarseStuffLimeToSand": {
+        "value": 0.5,
+        "unit": "1",
+        "asReported": "one part lime putty to two parts coarse sand by volume, with hair",
+        "grade": "guidance",
+        "source": "Napier & Jenkins (2018) Inform Guide: Plain Lime Plastering, Historic Environment Scotland, https://www.historicenvironment.scot/archives-and-research/publications/publication/?publicationId=67d4d72c-7b8c-4622-a244-a94b01090177"
+      },
+      "settingStuffLimeToFineAggregate": {
+        "min": 0.333,
+        "max": 3.0,
+        "unit": "1",
+        "asReported": "richest 3 lime : 1 fine sand, leanest 1 : 3; 1 : 1 for standard work",
+        "grade": "guidance",
+        "source": "Ratcliffe (2006) Internal Lime-Plastering, https://www.buildingconservation.com/articles/internallimeplast/lime_plaster.htm"
+      },
+      "coarseSandTopSize": {
+        "min": 3,
+        "max": 5,
+        "unit": "mm",
+        "grade": "guidance",
+        "note": "passing sieve",
+        "source": "Napier & Jenkins (2018) Inform Guide: Plain Lime Plastering, https://www.historicenvironment.scot/archives-and-research/publications/publication/?publicationId=67d4d72c-7b8c-4622-a244-a94b01090177"
+      },
+      "fineSandTopSize": {
+        "value": 1,
+        "unit": "mm",
+        "grade": "guidance",
+        "note": "passing sieve, for setting stuff",
+        "source": "Napier & Jenkins (2018) Inform Guide: Plain Lime Plastering, https://www.historicenvironment.scot/archives-and-research/publications/publication/?publicationId=67d4d72c-7b8c-4622-a244-a94b01090177"
+      }
+    },
+    "dryingBetweenCoats": {
+      "scratchCoat": {
+        "min": 2,
+        "max": 4,
+        "unit": "week",
+        "grade": "guidance",
+        "source": "Ratcliffe (2006) Internal Lime-Plastering, https://www.buildingconservation.com/articles/internallimeplast/lime_plaster.htm"
+      },
+      "floatingCoat": {
+        "value": 1,
+        "unit": "week",
+        "grade": "guidance",
+        "source": "Ratcliffe (2006) Internal Lime-Plastering, https://www.buildingconservation.com/articles/internallimeplast/lime_plaster.htm"
+      }
+    },
+    "bayRule": {
+      "text": "The setting coat is laid in two or three thin coats in quick succession, floated as it begins to set and polished with a steel trowel as it hardens, so each field is finished in one working session; the coffers, ribs and bands of the dome bound the fields.",
+      "grade": "guidance",
+      "source": "Napier & Jenkins (2018) Inform Guide: Plain Lime Plastering, Historic Environment Scotland, https://www.historicenvironment.scot/archives-and-research/publications/publication/?publicationId=67d4d72c-7b8c-4622-a244-a94b01090177"
+    }
+  },
+  "workings": [
+    "trowelled",
+    "run",
+    "limewashed"
+  ],
+  "histories": [
+    "white.soiling",
+    "white.micro-cracking",
+    "white.patching"
+  ],
+  "photograph": [
+    "A dense, closed skin with a soft sheen where the steel trowel polished it, and broad, very low clouding where suction and drying were uneven.",
+    "Crazing (a fine web of hairline cracks) on a finish that dried too fast; single hairline cracks that follow the structure below.",
+    "Arrises of coffers and ribs slightly softened, never machine-sharp; running marks along run members.",
+    "Darker grey soiling on upward-facing ledges and in the backs of coffers; patches that read by a slightly different whiteness and texture."
+  ],
+  "evidence": [
+    {
+      "path": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR/P1",
+      "set": "Plaster001",
+      "provider": "ambientCG",
+      "url": "https://ambientcg.com/view?id=Plaster001",
+      "licence": "CC0 1.0",
+      "credits": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR/CREDITS.md (row P1: 'trowelled lime plaster', 2.0 m)",
+      "tier": "reference",
+      "shows": "A trowelled lime finish: closed skin, trowel strokes in the normal map, broad low-contrast clouding.",
+      "statistics": {
+        "colorMeanLinear": {
+          "value": [
+            0.6795,
+            0.653,
+            0.6298
+          ],
+          "unit": "1",
+          "note": "mean of the set's Color map (linear); the photograph's exposure is unknown, so this is not an albedo",
+          "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR/stats.json",
+          "derivation": "mean over a 256 x 256 resample of the set Color.png, decoded from sRGB to linear (windows/Scripts/pbr_fetch.py, stats())",
+          "grade": "derived",
+          "space": "linear, sRGB (Rec.709) primaries, D65 white, decoded from the set Color.png"
+        },
+        "roughnessMapMedian": {
+          "value": 0.792,
+          "unit": "1",
+          "note": "authored roughness map, not a measurement; percentiles 5/50/95 = 0.745/0.792/0.827",
+          "source": "computed from C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR/P1/ORM.png (green channel, 256 x 256 resample)",
+          "derivation": "percentiles of the green (roughness) channel of the set ORM.png over a 256 x 256 resample",
+          "grade": "derived"
+        }
+      }
+    },
+    {
+      "path": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR/CH_LIME",
+      "set": "white_plaster_02",
+      "provider": "Poly Haven",
+      "url": "https://polyhaven.com/a/white_plaster_02",
+      "licence": "CC0 1.0",
+      "credits": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR/CREDITS_chenghuai.md (row CH_LIME: 'white lime render', 2.0 m)",
+      "tier": "reference",
+      "shows": "An aged lime render: grey-brown soiling in broad blotches, darker in hollows, over a fine sand texture; evidence for the soiling history rather than for clean albedo.",
+      "statistics": {
+        "colorMeanLinear": {
+          "value": [
+            0.2703,
+            0.2444,
+            0.1967
+          ],
+          "unit": "1",
+          "note": "mean of the set's Color map (linear); exposure unknown",
+          "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR/chenghuai_stats.json",
+          "derivation": "mean over a 256 x 256 resample of the set Color.png, decoded from sRGB to linear (windows/Scripts/pbr_fetch.py, stats())",
+          "grade": "derived",
+          "space": "linear, sRGB (Rec.709) primaries, D65 white, decoded from the set Color.png"
+        },
+        "roughnessMapMedian": {
+          "value": 0.91,
+          "unit": "1",
+          "note": "authored map; percentiles 5/50/95 = 0.886/0.910/0.933",
+          "source": "computed from C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR/CH_LIME/ORM.png",
+          "derivation": "percentiles of the green (roughness) channel of the set ORM.png over a 256 x 256 resample",
+          "grade": "derived"
+        }
+      }
+    }
+  ],
+  "evidenceSearch": {
+    "searched": [
+      "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR (CREDITS.md, CREDITS_chenghuai.md, every SET.txt, stats.json, chenghuai_stats.json)",
+      "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/Textures/CREDITS.md",
+      "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/Journeys/CREDITS.md",
+      "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/Albion",
+      "C:/mv/third_party (no SourceArt folder present)"
+    ],
+    "found": "P1 (ambientCG Plaster001, trowelled lime plaster) and CH_LIME (Poly Haven white_plaster_02, an aged lime render). No photograph of a coffered lime dome or of marble-dust stucco at known exposure is on this PC.",
+    "tier": "The local sets are reference photographs of unknown exposure (texture, relief and ageing pattern only). Albedo needs tier (b), a ColorChecker photograph of a physical specimen; tier (a) here gives only the bounds listed under optics.luminousReflectance."
+  },
+  "unverified": [
+    {
+      "field": "formation.facts.carbonationPoreChangeDiameter",
+      "value": 0.1,
+      "unit": "um",
+      "reason": "Attributed to Lawrence, R.M., Mays, T.J., Rigby, S.P., Walker, P. & D'Ayala, D. (2007) Effects of carbonation on the pore structure of non-hydraulic lime mortars. Cement and Concrete Research 37(7), 1059-1069, https://doi.org/10.1016/j.cemconres.2007.04.011 (pore volume said to grow near this diameter as portlandite becomes calcite, by mercury intrusion porosimetry). The citation checker confirmed the paper's title, authors, volume and pages (Crossref), but its abstract and full text are closed and could not be read, so the 0.1 um figure, and whether it is a diameter or a radius, is not confirmed."
+    },
+    {
+      "field": "luminous reflectance of a clean, dry, carbonated lime-and-marble-dust finish",
+      "min": 0.8,
+      "max": 0.92,
+      "unit": "1",
+      "reason": "No measured value for set lime plaster was found. The range lies below the measured marble-powder bound (0.95) because a set body scatters less than a loose fine powder. The tier (b) ColorChecker specimen sheet must settle it."
+    },
+    {
+      "field": "specular lobe roughness of a steel-trowelled finish",
+      "min": 0.3,
+      "max": 0.6,
+      "unit": "1",
+      "reason": "No measured BRDF of trowelled lime found; Vitruvius describes well-made polished stucco as taking a mirror-like polish (VII.3.9), so a trowelled finish carries a real specular lobe. Needs a goniometric or tier (b) measurement.",
+      "conditions": "GGX (Trowbridge-Reitz) roughness alpha"
+    },
+    {
+      "field": "carbonation front advance",
+      "unit": "mm/day^0.5",
+      "reason": "The square-root-of-time law is standard for lime carbonation, but no rate for lime plaster was verified in this search.",
+      "value": null
+    },
+    {
+      "field": "area finished in one working session (bay)",
+      "unit": "m2",
+      "reason": "No sourced figure; the dome's coffers and ribs bound the fields.",
+      "value": null
+    },
+    {
+      "field": "physicalMaterial.friction",
+      "value": null,
+      "unit": "1",
+      "reason": "No measured friction coefficient for a trowelled lime finish was found; the surface is not walked on."
+    }
+  ],
+  "sources": [
+    "Anthony, J.W., Bideaux, R.A., Bladh, K.W. & Nichols, M.C. (eds.) Handbook of Mineralogy: Calcite; Portlandite. Mineral Data Publishing (2001-2005), http://www.handbookofmineralogy.org/",
+    "Born, M. & Wolf, E. (1999) Principles of Optics, 7th ed., Cambridge University Press.",
+    "Lawrence, R.M. et al. (2007) Cement and Concrete Research 37(7), 1059-1069, https://doi.org/10.1016/j.cemconres.2007.04.011",
+    "Napier, W. & Jenkins, M. (2018) Inform Guide: Plain Lime Plastering. Historic Environment Scotland.",
+    "Omya Pars, Product Information OMYACARB 2-MH (2007), https://mychem.ir/uploads/tds/28825.pdf",
+    "Pavlíková, M. et al. (2019) Materials 12(14), 2227, https://doi.org/10.3390/ma12142227",
+    "Ratcliffe, T. (1997) The Use of Gypsum Plaster; (2006) Internal Lime-Plastering. The Building Conservation Directory.",
+    "Vitruvius, De Architectura, Book VII, trans. J. Gwilt (1826), https://penelope.uchicago.edu/Thayer/E/Roman/Texts/Vitruvius/7*.html",
+    "CIE 15:2004 Colorimetry, 3rd ed.",
+    "Sound absorption table (secondary): http://usenclosure.com/Diffraction%20Graphs/Sound%20Absorption%20Coefficients.pdf"
+  ]
+}

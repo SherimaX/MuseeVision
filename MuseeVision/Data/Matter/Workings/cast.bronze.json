@@ -1,0 +1,89 @@
+{
+  "schema": "musee.matter.working/1",
+  "key": "cast.bronze",
+  "name": "Cast in bronze, fettled and chased",
+  "appliesTo": {
+    "families": [
+      "bronze"
+    ],
+    "substances": [
+      "bronze"
+    ]
+  },
+  "over": [],
+  "process": "The bronze is poured into a lost-wax (investment) or sand mould. When cold, the mould is broken away and the casting is fettled: sprues, runners and vents are cut off and ground back. It is then chased: flaws and fins are removed and the detail re-cut with chasing tools and files. Finally the skin is cleaned by a fine abrasive blast, which leaves an even, non-directional matte of bright metal, and the piece is waxed. This is the bronze as the founder hands it over before any colour is given: a warm golden metal with a soft, grainy lustre.",
+  "steps": [
+    {
+      "step": "cast",
+      "text": "As-fabricated castings carry the mould's own surface: 'as-cast surfaces will betray the nature of the foundry method employed'. The CDA/NAAMM designation of an as-cast matte is M12.",
+      "source": "Copper Development Association, 'Copper Brass Bronze Design Handbook: Architectural Applications' (A4039), Table 16 (M12 'Matte finish as fabricated: ... casting') and p. 38, https://www.copper.org/publications/pub_list/pdf/A4039-ArchitecturalApplications.pdf",
+      "grade": "guidance"
+    },
+    {
+      "step": "fettle and chase",
+      "text": "The shell is hammered or blasted away, the sprues are cut off, and the casting is chased: 'worked until the telltale signs of the casting process are removed, so that the casting now looks like the original model'; pits from air bubbles and the stubs of the sprues are filed down.",
+      "source": "Wikipedia, 'Lost-wax casting', steps Release and Metal-chasing, https://en.wikipedia.org/wiki/Lost-wax_casting",
+      "grade": "secondary"
+    },
+    {
+      "step": "clean by fine blast",
+      "text": "CDA/NAAMM M42 fine matte: air blast with #100-#200 mesh silica sand or aluminium oxide, gun 305 mm from the work at 60-90 degrees. 'The process is often used to clean castings and improve appearance of an as-cast surface.'",
+      "abrasiveMesh": {
+        "min": 100,
+        "max": 200,
+        "unit": "mesh",
+        "source": "Copper Development Association, A4039, Table 16 (M42 Fine matte), https://www.copper.org/publications/pub_list/pdf/A4039-ArchitecturalApplications.pdf",
+        "grade": "guidance"
+      },
+      "airPressure": {
+        "min": 207,
+        "max": 621,
+        "unit": "kPa",
+        "source": "Copper Development Association, A4039, Table 16 (M42: 30-90 psi (207-621 kPa)), https://www.copper.org/publications/pub_list/pdf/A4039-ArchitecturalApplications.pdf",
+        "grade": "guidance"
+      },
+      "gunDistance": {
+        "value": 305,
+        "unit": "mm",
+        "source": "Copper Development Association, A4039, Table 16 (M42: 'Gun 12 in (305 mm) away from work'), https://www.copper.org/publications/pub_list/pdf/A4039-ArchitecturalApplications.pdf",
+        "grade": "guidance"
+      },
+      "gunAngle": {
+        "min": 60,
+        "max": 90,
+        "unit": "deg",
+        "source": "Copper Development Association, A4039, Table 16 (M42: 'at an angle of 60-90 degrees'), https://www.copper.org/publications/pub_list/pdf/A4039-ArchitecturalApplications.pdf",
+        "grade": "guidance"
+      }
+    },
+    {
+      "step": "protect",
+      "text": "Blasted surfaces hold oils and dirt and show fingerprints; for an untarnished finish they need a protective treatment. Wax (or oil) is the founder's protection for statuary finishes and is renewed by hand-rubbing.",
+      "source": "Copper Development Association, A4039, p. 40 ('Even fine-grit blasted surfaces are rough enough to retain oils and dirt, and will show fingerprints. For an untarnished finish, sand blasted surfaces require protective treatment') and p. 42 ('hand-rubbed periodically with wax or oils'), https://www.copper.org/publications/pub_list/pdf/A4039-ArchitecturalApplications.pdf",
+      "grade": "guidance"
+    }
+  ],
+  "surface": {
+    "texture": "non-directional matte from the blast, over the chased form",
+    "metal": "bare: the substance's own conductor optics (bronze f0) with no dielectric layer except a thin wax film",
+    "note": "Roughness has no verified measurement for blasted bronze (see unverified). The texture is isotropic."
+  },
+  "photograph": [
+    "An even, fine, non-directional matte of golden metal over crisp chased detail; no scratch direction.",
+    "Fingerprints show as darker smudges on the matte."
+  ],
+  "unverified": [
+    {
+      "field": "surface.roughnessRa",
+      "value": null,
+      "unit": "um",
+      "reason": "No measured Ra for M42-blasted or investment-cast copper alloy was read; the Degarmo et al. chart cited by Wikipedia ('Surface finish') could not be read as text."
+    },
+    {
+      "field": "surface.waxFilm",
+      "value": null,
+      "unit": "um",
+      "reason": "No measured thickness or refractive index for a microcrystalline wax film on bronze was read."
+    }
+  ]
+}

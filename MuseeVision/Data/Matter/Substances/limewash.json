@@ -1,0 +1,279 @@
+{
+  "schema": "musee.matter.substance/1",
+  "key": "limewash",
+  "family": "white",
+  "accentOf": null,
+  "name": "Limewash",
+  "aliases": [
+    "whitewash (lime)",
+    "lime paint (traditional)"
+  ],
+  "summary": "Lime putty thinned with water to the consistency of milk and brushed onto a damp surface in several very thin coats. Each coat is semi-transparent while wet and dries many shades lighter, because the drying film fills with air and the calcium hydroxide carbonates to fine calcite. It is a matt, breathable, renewable skin over plaster, stone or brick; it wears by chalking and is renewed rather than repaired.",
+  "dossier": "Docs/Matter/limewash.md",
+  "formation": {
+    "how": "Matured lime putty (calcium hydroxide) is diluted with water; pigments, when used, are pre-mixed in hot water. Additives such as tallow or linseed oil (for water shedding) or casein (for binding) may be included, tallow only during slaking. On the wall the film loses water and carbonates to calcite.",
+    "reaction": "Ca(OH)2 + CO2 -> CaCO3 + H2O",
+    "facts": {
+      "consistency": {
+        "text": "diluted to the consistency of milk",
+        "grade": "guidance",
+        "source": "SPAB, Limewash (advice), https://www.spab.org.uk/advice/limewash; Bennett, B. (1997) Awash with Colour: The Decorative and Protective Roles of Limewash. The Building Conservation Directory, https://www.buildingconservation.com/articles/decorative-protective-limewash/decorative-protective-limewash.htm"
+      },
+      "tallowAddition": {
+        "text": "tallow can only be effectively included during the slaking process",
+        "grade": "guidance",
+        "source": "Bennett, B. (1997), https://www.buildingconservation.com/articles/decorative-protective-limewash/decorative-protective-limewash.htm"
+      },
+      "carbonationConditions": {
+        "text": "carbonation is prolonged during periods of low temperature or high relative humidity",
+        "grade": "guidance",
+        "source": "Bennett, B. (1997), https://www.buildingconservation.com/articles/decorative-protective-limewash/decorative-protective-limewash.htm"
+      },
+      "vapourPermeabilityRelativeToResinPaint": {
+        "min": 10,
+        "unit": "1",
+        "asReported": "a vapour permeability of at least ten times that of modern resin paint",
+        "grade": "guidance",
+        "source": "Hirst, E. (2002) Limewash and Distempers. The Building Conservation Directory, https://www.buildingconservation.com/articles/lwdistempers/lwdistempers.htm"
+      }
+    }
+  },
+  "constituents": [
+    {
+      "mineral": "portlandite",
+      "formula": "Ca(OH)2",
+      "role": "the wet film"
+    },
+    {
+      "mineral": "calcite",
+      "formula": "CaCO3",
+      "role": "the carbonated film"
+    },
+    {
+      "material": "tallow, linseed oil or casein (optional)",
+      "role": "organic binders that change water shedding and dusting"
+    }
+  ],
+  "optics": {
+    "refractiveIndex": [
+      {
+        "phase": "portlandite",
+        "direction": "omega",
+        "value": 1.575,
+        "unit": "1",
+        "grade": "measured",
+        "source": "Anthony, J.W., Bideaux, R.A., Bladh, K.W. & Nichols, M.C. (eds.) Handbook of Mineralogy: Portlandite. Mineral Data Publishing, version 1 (2001-2005), http://www.handbookofmineralogy.org/pdfs/portlandite.pdf"
+      },
+      {
+        "phase": "portlandite",
+        "direction": "epsilon",
+        "value": 1.547,
+        "unit": "1",
+        "grade": "measured",
+        "source": "Handbook of Mineralogy: Portlandite, http://www.handbookofmineralogy.org/pdfs/portlandite.pdf"
+      },
+      {
+        "phase": "calcite",
+        "direction": "omega",
+        "value": 1.658,
+        "unit": "1",
+        "grade": "measured",
+        "source": "Anthony, J.W., Bideaux, R.A., Bladh, K.W. & Nichols, M.C. (eds.) Handbook of Mineralogy: Calcite. Mineral Data Publishing, version 1 (2001-2005), http://www.handbookofmineralogy.org/pdfs/calcite.pdf"
+      },
+      {
+        "phase": "calcite",
+        "direction": "epsilon",
+        "value": 1.486,
+        "unit": "1",
+        "grade": "measured",
+        "source": "Handbook of Mineralogy: Calcite, http://www.handbookofmineralogy.org/pdfs/calcite.pdf"
+      }
+    ],
+    "specularF0": {
+      "min": 0.038,
+      "max": 0.061,
+      "unit": "1",
+      "grade": "derived",
+      "derivation": "normal-incidence Fresnel reflectance R0 = ((n-1)/(n+1))^2 over the carbonated film's calcite indices (1.486-1.658); the uncarbonated film (portlandite, 1.547-1.575) gives 0.046-0.050",
+      "source": "Born, M. & Wolf, E. (1999) Principles of Optics, 7th ed., Cambridge University Press, section 1.5; indices from Handbook of Mineralogy: Calcite and Portlandite, http://www.handbookofmineralogy.org/"
+    },
+    "dryingChange": {
+      "text": "semi-transparent when first applied, then dries to form an opaque coating; dries many shades lighter once applied; temporarily darkens after rain",
+      "grade": "guidance",
+      "source": "Hirst, E. (2002), https://www.buildingconservation.com/articles/lwdistempers/lwdistempers.htm; Bennett, B. (1997), https://www.buildingconservation.com/articles/decorative-protective-limewash/decorative-protective-limewash.htm; SPAB, Limewash, https://www.spab.org.uk/advice/limewash"
+    },
+    "luminousReflectance": {
+      "boundUpperCalcitePowder": {
+        "value": 0.95,
+        "unit": "1",
+        "grade": "manufacturer",
+        "asReported": "Brightness (Ry, C/2 deg, DIN 53163) 95 %",
+        "note": "fine white calcium carbonate powder; a carbonated limewash film is fine calcite and cannot exceed a clean fine calcite powder",
+        "source": "Omya Pars, Product Information OMYACARB 2-MH, edition 27/02/07, https://mychem.ir/uploads/tds/28825.pdf"
+      }
+    },
+    "hiding": "One coat does not hide the substrate: the film is thin and semi-transparent, so the ground shows through until several coats are built up; brush strokes and the substrate's texture stay visible."
+  },
+  "physical": {
+    "matt": {
+      "text": "a simple type of matt paint made from lime and water",
+      "grade": "guidance",
+      "source": "SPAB, Limewash, https://www.spab.org.uk/advice/limewash"
+    },
+    "crazingWhenThick": {
+      "text": "crazing occurs when it is applied more liberally",
+      "grade": "guidance",
+      "source": "Bennett, B. (1997), https://www.buildingconservation.com/articles/decorative-protective-limewash/decorative-protective-limewash.htm"
+    }
+  },
+  "acoustic": {
+    "note": "A thin film does not change the absorption of the surface it covers; use the substrate's record."
+  },
+  "physicalMaterial": {
+    "note": "A skin over another substance: friction and footfall are the substrate's."
+  },
+  "stock": {
+    "coats": {
+      "min": 3,
+      "max": 4,
+      "unit": "coat",
+      "asReported": "at least three or four coats are usually needed",
+      "grade": "guidance",
+      "source": "SPAB, Limewash, https://www.spab.org.uk/advice/limewash"
+    },
+    "coatsMinimumTrade": {
+      "min": 3,
+      "unit": "coat",
+      "grade": "guidance",
+      "conditions": "new work",
+      "asReported": "a minimum of three coats should be applied for new work",
+      "source": "Bennett, B. (1997), https://www.buildingconservation.com/articles/decorative-protective-limewash/decorative-protective-limewash.htm"
+    },
+    "renewalIntervalExternal": {
+      "value": 5,
+      "unit": "year",
+      "asReported": "limewash typically requires renewing every five years",
+      "grade": "guidance",
+      "source": "SPAB, Limewash, https://www.spab.org.uk/advice/limewash"
+    },
+    "continuity": {
+      "text": "A continuous finish with no bays: it is worked across a whole face, coat by coat, each coat dried and the surface dampened before the next.",
+      "grade": "guidance",
+      "source": "SPAB, Limewash, https://www.spab.org.uk/advice/limewash"
+    }
+  },
+  "workings": [
+    "limewashed"
+  ],
+  "histories": [
+    "white.soiling",
+    "white.micro-cracking",
+    "white.patching"
+  ],
+  "photograph": [
+    "A dead-matt, slightly uneven white with a soft powdery bloom; brush marks and the texture of the ground show through.",
+    "Where it is thin or worn, the substrate glimmers through in patches; where it was laid thick, a fine craze.",
+    "Built-up layers soften arrises and fill fine detail over the years.",
+    "Outdoors, darker while wet after rain; chalking and streaking below ledges; indoors, greying on upward faces."
+  ],
+  "evidence": [
+    {
+      "path": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR/P3",
+      "set": "Plaster003",
+      "provider": "ambientCG",
+      "url": "https://ambientcg.com/view?id=Plaster003",
+      "licence": "CC0 1.0",
+      "credits": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR/CREDITS.md (row P3: 'limewash over brick', 2.0 m)",
+      "tier": "reference",
+      "shows": "Layered white coats over a rough ground: brush and trowel strokes, thin places where the ground shows, crusted build-up.",
+      "statistics": {
+        "colorMeanLinear": {
+          "value": [
+            0.6805,
+            0.6564,
+            0.6342
+          ],
+          "unit": "1",
+          "note": "exposure unknown, not an albedo",
+          "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR/stats.json",
+          "derivation": "mean over a 256 x 256 resample of the set Color.png, decoded from sRGB to linear (windows/Scripts/pbr_fetch.py, stats())",
+          "grade": "derived",
+          "space": "linear, sRGB (Rec.709) primaries, D65 white, decoded from the set Color.png"
+        },
+        "roughnessMapMedian": {
+          "value": 0.839,
+          "unit": "1",
+          "note": "authored map; percentiles 5/50/95 = 0.820/0.839/0.863",
+          "source": "computed from C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR/P3/ORM.png",
+          "derivation": "percentiles of the green (roughness) channel of the set ORM.png over a 256 x 256 resample",
+          "grade": "derived"
+        }
+      }
+    },
+    {
+      "path": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR/CH_LIME",
+      "set": "white_plaster_02",
+      "provider": "Poly Haven",
+      "url": "https://polyhaven.com/a/white_plaster_02",
+      "licence": "CC0 1.0",
+      "credits": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR/CREDITS_chenghuai.md (row CH_LIME: 'white lime render', 2.0 m)",
+      "tier": "reference",
+      "shows": "A weathered, soiled lime-white wall: how an unrenewed lime finish greys and blotches.",
+      "statistics": {
+        "colorMeanLinear": {
+          "value": [
+            0.2703,
+            0.2444,
+            0.1967
+          ],
+          "unit": "1",
+          "note": "exposure unknown",
+          "source": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR/chenghuai_stats.json",
+          "derivation": "mean over a 256 x 256 resample of the set Color.png, decoded from sRGB to linear (windows/Scripts/pbr_fetch.py, stats())",
+          "grade": "derived",
+          "space": "linear, sRGB (Rec.709) primaries, D65 white, decoded from the set Color.png"
+        }
+      }
+    }
+  ],
+  "evidenceSearch": {
+    "searched": [
+      "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR (CREDITS.md, CREDITS_chenghuai.md, every SET.txt, stats.json, chenghuai_stats.json)",
+      "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/Textures/CREDITS.md",
+      "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/Journeys/CREDITS.md",
+      "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/Albion",
+      "C:/mv/third_party (no SourceArt folder present)"
+    ],
+    "found": "P3 (ambientCG Plaster003, 'limewash over brick') and CH_LIME (Poly Haven white_plaster_02, a weathered lime-white render). No photograph of fresh limewash at known exposure is on this PC.",
+    "tier": "The local sets are reference photographs of unknown exposure (texture, relief and ageing pattern only). Albedo needs tier (b), a ColorChecker photograph of a physical specimen; tier (a) here gives only the bounds listed under optics.luminousReflectance."
+  },
+  "unverified": [
+    {
+      "field": "dry film thickness per coat",
+      "unit": "um",
+      "reason": "Guidance says 'as thinly as possible' without numbers; suppliers quote coverage per litre that varies with substrate. Payne (2020) measured 40-280 um for up to four coats of lead-based paint on casts, which is a different coating.",
+      "value": null
+    },
+    {
+      "field": "luminous reflectance of a fresh, fully carbonated white limewash",
+      "min": 0.8,
+      "max": 0.93,
+      "unit": "1",
+      "reason": "No measured value found; bounded above by fine calcite powder (0.95). Tier (b) specimen needed."
+    },
+    {
+      "field": "renewal interval indoors",
+      "unit": "year",
+      "reason": "Only the external interval (about five years, SPAB) was sourced.",
+      "value": null
+    }
+  ],
+  "sources": [
+    "Anthony, J.W. et al. (eds.) Handbook of Mineralogy: Calcite; Portlandite, http://www.handbookofmineralogy.org/",
+    "Bennett, B. (1997) Awash with Colour: The Decorative and Protective Roles of Limewash. The Building Conservation Directory.",
+    "Born, M. & Wolf, E. (1999) Principles of Optics, 7th ed., Cambridge University Press.",
+    "Hirst, E. (2002) Limewash and Distempers. The Building Conservation Directory.",
+    "Omya Pars, Product Information OMYACARB 2-MH (2007), https://mychem.ir/uploads/tds/28825.pdf",
+    "SPAB, Limewash, https://www.spab.org.uk/advice/limewash"
+  ]
+}

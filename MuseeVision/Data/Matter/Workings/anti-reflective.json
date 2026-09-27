@@ -1,0 +1,112 @@
+{
+  "schema": "musee.matter.working/1",
+  "key": "anti-reflective",
+  "name": "Anti-reflective interference coating",
+  "appliesTo": {
+    "families": [
+      "glass"
+    ],
+    "substances": [
+      "low-iron-glass"
+    ]
+  },
+  "over": [
+    "annealed",
+    "heat-strengthened",
+    "toughened",
+    "laminated",
+    "laminated.uv-filtering"
+  ],
+  "process": "Thin metal-oxide layers are built up on both outer faces (SCHOTT applies them by a dip-coating process and burns the layers in), so the reflections from the layer boundaries interfere and cancel across the visible. The residual reflection is about an eighth of plain glass's, faintly coloured, and the coated faces are hard. Laid over low-iron glass for vitrines, where the visitor should see the object and not the room.",
+  "optics": {
+    "luminousReflectance": {
+      "value": 0.01,
+      "unit": "1",
+      "grade": "manufacturer",
+      "source": "SCHOTT AG, 'SCHOTT AMIRAN - Anti-Reflective Glass for Showcases', technical data sheet, version February 2022 (values to DIN EN 410; monolithic 4 mm; laminated 4/0.76/4 mm with PVB), https://media.schott.com/api/public/content/15fee70340c44e738fd4f24c40702d8c?v=35137cd2&download=true",
+      "conditions": "vD65, EN 410; plain glass about 0.08"
+    },
+    "luminousTransmittanceMonolithic": {
+      "value": 0.98,
+      "unit": "1",
+      "grade": "manufacturer",
+      "source": "SCHOTT AG, 'SCHOTT AMIRAN - Anti-Reflective Glass for Showcases', technical data sheet, version February 2022 (values to DIN EN 410; monolithic 4 mm; laminated 4/0.76/4 mm with PVB), https://media.schott.com/api/public/content/15fee70340c44e738fd4f24c40702d8c?v=35137cd2&download=true",
+      "conditions": "4 mm on extra-clear low-iron float"
+    },
+    "luminousTransmittanceLaminated": {
+      "value": 0.97,
+      "unit": "1",
+      "grade": "manufacturer",
+      "source": "SCHOTT AG, 'SCHOTT AMIRAN - Anti-Reflective Glass for Showcases', technical data sheet, version February 2022 (values to DIN EN 410; monolithic 4 mm; laminated 4/0.76/4 mm with PVB), https://media.schott.com/api/public/content/15fee70340c44e738fd4f24c40702d8c?v=35137cd2&download=true",
+      "conditions": "4 / 0.76 PVB / 4 mm"
+    },
+    "uvTransmittanceMonolithic": {
+      "value": 0.63,
+      "unit": "1",
+      "grade": "manufacturer",
+      "source": "SCHOTT AG, 'SCHOTT AMIRAN - Anti-Reflective Glass for Showcases', technical data sheet, version February 2022 (values to DIN EN 410; monolithic 4 mm; laminated 4/0.76/4 mm with PVB), https://media.schott.com/api/public/content/15fee70340c44e738fd4f24c40702d8c?v=35137cd2&download=true",
+      "conditions": "4 mm, EN 410"
+    },
+    "uvTransmittanceLaminated": {
+      "value": 0.01,
+      "unit": "1",
+      "grade": "manufacturer",
+      "source": "SCHOTT AG, 'SCHOTT AMIRAN - Anti-Reflective Glass for Showcases', technical data sheet, version February 2022 (values to DIN EN 410; monolithic 4 mm; laminated 4/0.76/4 mm with PVB), https://media.schott.com/api/public/content/15fee70340c44e738fd4f24c40702d8c?v=35137cd2&download=true",
+      "conditions": "4 / 0.76 PVB / 4 mm, EN 410"
+    },
+    "colourRenderingIndex": {
+      "value": 100,
+      "unit": "1",
+      "grade": "manufacturer",
+      "source": "SCHOTT AG, 'SCHOTT AMIRAN - Anti-Reflective Glass for Showcases', technical data sheet, version February 2022 (values to DIN EN 410; monolithic 4 mm; laminated 4/0.76/4 mm with PVB), https://media.schott.com/api/public/content/15fee70340c44e738fd4f24c40702d8c?v=35137cd2&download=true",
+      "conditions": "Ra"
+    },
+    "alternative": {
+      "text": "Pilkington OptiView Protect: coatings on faces 1 and 4 of a laminate, visible reflectance under 2 %, over 99 % of UV blocked.",
+      "luminousReflectance": {
+        "unit": "1",
+        "max": 0.02,
+        "grade": "manufacturer",
+        "source": "Pilkington, 'Pilkington OptiView Protect' product page (anti-reflective coatings on faces 1 and 4 of a laminate; visible reflectance under 2 %; over 99 % of UV blocked), https://www.pilkington.com/en/gbl/architectural-and-technical-glass/product-categories/enhanced-visibility/pilkington-optiview-protect"
+      }
+    }
+  },
+  "surface": {
+    "scratchHardness": {
+      "text": "9H pencil hardness (DIN ISO 15184)",
+      "grade": "manufacturer",
+      "source": "SCHOTT AG, 'SCHOTT AMIRAN - Anti-Reflective Glass for Showcases', technical data sheet, version February 2022 (values to DIN EN 410; monolithic 4 mm; laminated 4/0.76/4 mm with PVB), https://media.schott.com/api/public/content/15fee70340c44e738fd4f24c40702d8c?v=35137cd2&download=true"
+    }
+  },
+  "stock": {
+    "thicknesses": {
+      "unit": "mm",
+      "values": [
+        4,
+        5,
+        6,
+        8,
+        10,
+        12
+      ],
+      "grade": "manufacturer",
+      "source": "SCHOTT AG, 'SCHOTT AMIRAN - Anti-Reflective Glass for Showcases', technical data sheet, version February 2022 (values to DIN EN 410; monolithic 4 mm; laminated 4/0.76/4 mm with PVB), https://media.schott.com/api/public/content/15fee70340c44e738fd4f24c40702d8c?v=35137cd2&download=true"
+    },
+    "sheetLength": {
+      "value": 3770,
+      "unit": "mm",
+      "grade": "manufacturer",
+      "source": "SCHOTT AG, 'SCHOTT AMIRAN - Anti-Reflective Glass for Showcases', technical data sheet, version February 2022 (values to DIN EN 410; monolithic 4 mm; laminated 4/0.76/4 mm with PVB), https://media.schott.com/api/public/content/15fee70340c44e738fd4f24c40702d8c?v=35137cd2&download=true"
+    },
+    "sheetWidth": {
+      "value": 1770,
+      "unit": "mm",
+      "grade": "manufacturer",
+      "source": "SCHOTT AG, 'SCHOTT AMIRAN - Anti-Reflective Glass for Showcases', technical data sheet, version February 2022 (values to DIN EN 410; monolithic 4 mm; laminated 4/0.76/4 mm with PVB), https://media.schott.com/api/public/content/15fee70340c44e738fd4f24c40702d8c?v=35137cd2&download=true"
+    }
+  },
+  "photograph": [
+    "A dim, faintly coloured reflection instead of a mirror-bright one.",
+    "Fingerprints show more on a coated face than on plain glass."
+  ]
+}

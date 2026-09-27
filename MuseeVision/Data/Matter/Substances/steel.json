@@ -1,0 +1,371 @@
+{
+  "schema": "musee.matter.substance/1",
+  "key": "steel",
+  "name": "Structural steel S355J2, the lattice of the Rotunda's eye",
+  "family": "accent",
+  "accentOf": "glass",
+  "summary": "A weldable carbon-manganese structural steel of 355 MPa yield, tough at -20 degC (EN 10025-2 S355J2 for plate and flats; EN 10210-1 S355J2H for hot-finished hollow sections). It is the steel of the Rotunda's glazed eye, a triangulated lattice after the British Museum's Great Court roof, whose engineers chose the equivalent British grade (BS 4360 grade 50D) for toughness at the welds. The steel is never seen bare: it is always under its shop-applied paint system (the working 'painted.steel'). It is declared an accent of the glass family because it exists only to carry the glass.",
+  "dossier": "Docs/Matter/steel.md",
+  "workings": [
+    "painted.steel"
+  ],
+  "histories": [
+    "steel.coating-ageing"
+  ],
+  "identity": {
+    "class": "metal, ferrous, non-alloy structural steel (ferrite-pearlite, hot rolled or normalised)",
+    "designations": [
+      {
+        "system": "EN 10025-2 (hot rolled products of structural steels)",
+        "designation": "S355J2",
+        "number": "1.0577",
+        "source": "SteelNumber, 'S355J2 / 1.0577', citing EN 10025-2:2004, http://www.steelnumber.com/en/steel_composition_eu.php?name_id=10",
+        "grade": "guidance"
+      },
+      {
+        "system": "EN 10210-1 (hot finished structural hollow sections)",
+        "designation": "S355J2H",
+        "source": "EN 10210-1 'Hot finished structural hollow sections of non-alloy and fine grain steels' (the H suffix marks the hollow-section grade of S355J2)",
+        "grade": "guidance",
+        "note": "The text of EN 10210-1 was not read (the standard is sold, not published). No number in this record depends on it."
+      },
+      {
+        "system": "BS 4360:1990 (withdrawn)",
+        "designation": "50D",
+        "source": "AJN Steelstock, 'Grades, Properties and Nearest Equivalents' (EN 10025-2:2004, EN 10025:1993, BS 4360:1990): row S355J2 = S355K2G3/G4 = 50D, https://www.ajnsteelstock.co.uk/wp-content/uploads/2022/11/Grades-Properties-and-Nearest-Equivalents.pdf",
+        "grade": "guidance"
+      }
+    ],
+    "precedent": {
+      "text": "The Great Court roof (Foster and Partners with Buro Happold, fabricated and erected by Waagner-Biro, opened 2000) is a lattice of welded, tapering steel box sections. Buro Happold specified 'Grade D' steel, rather than a lower grade, to reduce the risk of brittle failure at the welds. The members deepen from about 3 in at the Reading Room to about 7 in at the corners.",
+      "source": "S. Hart, Architectural Record (January 2003), as quoted in 'Buro Happold: British Museum', Cantilever, https://cantilever.wordpress.com/about-innovation/buro-happold-british-museum/ ; S. Brown and M. Cook, 'The Design and Manufacture of the British Museum Great Court Roof' (2002), https://www.researchgate.net/publication/263678344",
+      "grade": "secondary"
+    },
+    "precedentFacts": {
+      "members": {
+        "value": 4878,
+        "unit": "count",
+        "source": "Waagner-Biro Steel and Glass, 'Queen Elizabeth II Great Court, British Museum' ('4,878 individual rods'), https://www.wb-sg.com/projects/britishmuseum/",
+        "grade": "manufacturer"
+      },
+      "nodes": {
+        "value": 1566,
+        "unit": "count",
+        "source": "Waagner-Biro Steel and Glass ('1,566 individual nodes'), https://www.wb-sg.com/projects/britishmuseum/",
+        "grade": "manufacturer",
+        "note": "Architectural Record (via Cantilever) gives 1826 nodes, each with six welded members; the counts differ between sources."
+      },
+      "glassPanels": {
+        "value": 3312,
+        "unit": "count",
+        "source": "Waagner-Biro Steel and Glass ('3,312 insulating glass panels'), https://www.wb-sg.com/projects/britishmuseum/",
+        "grade": "manufacturer"
+      },
+      "roofMass": {
+        "value": 800,
+        "unit": "t",
+        "source": "Waagner-Biro Steel and Glass ('total weight of about 800 tonnes'), https://www.wb-sg.com/projects/britishmuseum/ ; Buro Happold ('The glazed roof weighs 800 tonnes'), https://www.burohappold.com/projects/queen-elizabeth-ii-great-court-the-british-museum/",
+        "grade": "manufacturer"
+      },
+      "glazedArea": {
+        "value": 5900,
+        "unit": "m2",
+        "source": "Waagner-Biro Steel and Glass ('5,900 m2'), https://www.wb-sg.com/projects/britishmuseum/",
+        "grade": "manufacturer"
+      },
+      "memberDepth": {
+        "min": 3,
+        "max": 7,
+        "unit": "in",
+        "source": "S. Hart, Architectural Record (January 2003), via Cantilever, https://cantilever.wordpress.com/about-innovation/buro-happold-british-museum/",
+        "grade": "secondary"
+      },
+      "glazing": {
+        "text": "Double-glazed units, each a unique triangle: toughened glass above, laminated below, lightly tinted and fritted with screen-printed dots over 50 percent of their surface.",
+        "source": "S. Hart, Architectural Record (January 2003), via Cantilever, https://cantilever.wordpress.com/about-innovation/buro-happold-british-museum/",
+        "grade": "secondary"
+      }
+    }
+  },
+  "composition": {
+    "standard": "EN 10025-2:2004 S355J2, cast analysis maxima",
+    "C": {
+      "max": 0.2,
+      "unit": "wt%",
+      "source": "SteelNumber, S355J2 (EN 10025-2:2004): 'Nominal thickness =< 40 (mm) C max = 0.20' (0.22 above), http://www.steelnumber.com/en/steel_composition_eu.php?name_id=10",
+      "grade": "guidance",
+      "conditions": "nominal thickness up to 40 mm"
+    },
+    "Si": {
+      "max": 0.55,
+      "unit": "wt%",
+      "source": "SteelNumber, S355J2 (EN 10025-2:2004), http://www.steelnumber.com/en/steel_composition_eu.php?name_id=10",
+      "grade": "guidance"
+    },
+    "Mn": {
+      "max": 1.6,
+      "unit": "wt%",
+      "source": "SteelNumber, S355J2 (EN 10025-2:2004), http://www.steelnumber.com/en/steel_composition_eu.php?name_id=10",
+      "grade": "guidance"
+    },
+    "P": {
+      "max": 0.03,
+      "unit": "wt%",
+      "source": "SteelNumber, S355J2 (EN 10025-2:2004), http://www.steelnumber.com/en/steel_composition_eu.php?name_id=10",
+      "grade": "guidance"
+    },
+    "S": {
+      "max": 0.03,
+      "unit": "wt%",
+      "source": "SteelNumber, S355J2 (EN 10025-2:2004), http://www.steelnumber.com/en/steel_composition_eu.php?name_id=10",
+      "grade": "guidance"
+    },
+    "Cu": {
+      "max": 0.55,
+      "unit": "wt%",
+      "source": "SteelNumber, S355J2 (EN 10025-2:2004), http://www.steelnumber.com/en/steel_composition_eu.php?name_id=10",
+      "grade": "guidance"
+    },
+    "CEV": {
+      "max": 0.45,
+      "unit": "wt%",
+      "source": "SteelNumber, S355J2 (EN 10025-2:2004): 'Nominal thickness =< 30 (mm) CEV max = 0.45' (0.47 above), http://www.steelnumber.com/en/steel_composition_eu.php?name_id=10",
+      "grade": "guidance",
+      "conditions": "carbon equivalent, nominal thickness up to 30 mm"
+    }
+  },
+  "formation": {
+    "how": "Iron ore is reduced to iron in a blast furnace (or scrap is melted in an electric arc furnace), refined to steel with its carbon and manganese set, cast continuously into slabs or blooms, and hot rolled to plate, flats and sections, or formed and welded into hollow sections. For the lattice the members are cut, bevelled and welded at the nodes in the fabricator's shop, the welds ground and faired.",
+    "facts": {
+      "qualityJ2": {
+        "value": 27,
+        "unit": "J",
+        "source": "AJN Steelstock, 'Grades, Properties and Nearest Equivalents', row S355J2 (-20 degC, 27 J), https://www.ajnsteelstock.co.uk/wp-content/uploads/2022/11/Grades-Properties-and-Nearest-Equivalents.pdf",
+        "grade": "guidance",
+        "conditions": "Charpy V-notch impact energy at -20 degC"
+      }
+    }
+  },
+  "physical": {
+    "yieldStrength": {
+      "value": 355,
+      "unit": "MPa",
+      "source": "AJN Steelstock, 'Grades, Properties and Nearest Equivalents' (S355, ReH minimum), https://www.ajnsteelstock.co.uk/wp-content/uploads/2022/11/Grades-Properties-and-Nearest-Equivalents.pdf",
+      "grade": "guidance",
+      "conditions": "minimum upper yield strength at the smallest thicknesses"
+    },
+    "tensileStrength": {
+      "min": 470,
+      "max": 630,
+      "unit": "MPa",
+      "source": "AJN Steelstock, 'Grades, Properties and Nearest Equivalents' (S355, Rm 470/630), https://www.ajnsteelstock.co.uk/wp-content/uploads/2022/11/Grades-Properties-and-Nearest-Equivalents.pdf",
+      "grade": "guidance"
+    },
+    "density": {
+      "value": 7850,
+      "unit": "kg/m3",
+      "source": "EN 1993-1-2:2005 Eurocode 3, Design of steel structures, Part 1-2 (structural fire design), clause 3.2.2 Unit mass ('rho_a = 7850 kg/m3', independent of temperature)",
+      "grade": "guidance"
+    },
+    "youngsModulus": {
+      "value": 210,
+      "unit": "GPa",
+      "source": "EN 1993-1-1:2005 Eurocode 3, Part 1-1, clause 3.2.6",
+      "grade": "guidance"
+    },
+    "shearModulus": {
+      "value": 81,
+      "unit": "GPa",
+      "source": "EN 1993-1-1:2005 Eurocode 3, Part 1-1, clause 3.2.6",
+      "grade": "guidance"
+    },
+    "poissonsRatio": {
+      "value": 0.3,
+      "unit": "1",
+      "source": "EN 1993-1-1:2005 Eurocode 3, Part 1-1, clause 3.2.6",
+      "grade": "guidance"
+    },
+    "thermalExpansion": {
+      "value": 1.2e-05,
+      "unit": "1/K",
+      "source": "EN 1993-1-1:2005 Eurocode 3, Part 1-1, clause 3.2.6 (for T up to 100 degC)",
+      "grade": "guidance"
+    }
+  },
+  "optics": {
+    "kind": "conductor",
+    "note": "Bare steel is never seen in the museum: the lattice is always under its paint system, whose optics are in the working 'painted.steel'. The bare metal's constants are recorded for cut edges and for checks. They are those of pure iron; a carbon steel's differ little in the visible.",
+    "spectral": {
+      "n": {
+        "axis": "wavelength",
+        "axisUnit": "um",
+        "axisValues": [
+          0.381,
+          0.397,
+          0.413,
+          0.431,
+          0.451,
+          0.471,
+          0.496,
+          0.521,
+          0.549,
+          0.582,
+          0.617,
+          0.659,
+          0.704,
+          0.756
+        ],
+        "unit": "1",
+        "values": [
+          2.12,
+          2.24,
+          2.35,
+          2.48,
+          2.59,
+          2.67,
+          2.74,
+          2.86,
+          2.95,
+          2.94,
+          2.88,
+          2.92,
+          2.86,
+          2.87
+        ],
+        "grade": "measured",
+        "source": "P. B. Johnson and R. W. Christy, 'Optical constants of transition metals: Ti, V, Cr, Mn, Fe, Co, Ni, and Pd', Phys. Rev. B 9, 5056-5070 (1974), via https://refractiveindex.info/?shelf=main&book=Fe&page=Johnson"
+      },
+      "k": {
+        "axis": "wavelength",
+        "axisUnit": "um",
+        "axisValues": [
+          0.381,
+          0.397,
+          0.413,
+          0.431,
+          0.451,
+          0.471,
+          0.496,
+          0.521,
+          0.549,
+          0.582,
+          0.617,
+          0.659,
+          0.704,
+          0.756
+        ],
+        "unit": "1",
+        "values": [
+          2.5,
+          2.58,
+          2.65,
+          2.71,
+          2.77,
+          2.82,
+          2.88,
+          2.91,
+          2.93,
+          2.99,
+          3.05,
+          3.1,
+          3.19,
+          3.28
+        ],
+        "grade": "measured",
+        "source": "P. B. Johnson and R. W. Christy, 'Optical constants of transition metals: Ti, V, Cr, Mn, Fe, Co, Ni, and Pd', Phys. Rev. B 9, 5056-5070 (1974), via https://refractiveindex.info/?shelf=main&book=Fe&page=Johnson"
+      }
+    },
+    "f0": {
+      "value": [
+        0.529,
+        0.513,
+        0.494
+      ],
+      "unit": "1",
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "grade": "derived",
+      "derivation": "Unpolarised Fresnel reflectance at normal incidence, R = ((n-1)^2 + k^2) / ((n+1)^2 + k^2), from the tabulated n,k interpolated linearly to 380-780 nm in 10 nm steps (end values held), integrated against the CIE 1931 2-degree colour-matching functions under CIE illuminant D65, normalised so that a perfect reflector has Y = 1, and converted from XYZ to linear Rec.709 with the sRGB matrix.",
+      "source": "P. B. Johnson and R. W. Christy, 'Optical constants of transition metals: Ti, V, Cr, Mn, Fe, Co, Ni, and Pd', Phys. Rev. B 9, 5056-5070 (1974), via https://refractiveindex.info/?shelf=main&book=Fe&page=Johnson ; CIE 018:2019 Table 6, CIE 1931 2-degree colour-matching functions, doi:10.25039/CIE.DS.xvudnb9b ; CIE standard illuminant D65, https://files.cie.co.at/Publications-datasets/CIE_std_illum_D65.csv"
+    },
+    "f82": {
+      "value": [
+        0.575,
+        0.571,
+        0.588
+      ],
+      "unit": "1",
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "grade": "derived",
+      "derivation": "As f0, but the unpolarised Fresnel reflectance of the complex index at 82 degrees incidence (the edge tint of N. Hoffman's F82 model).",
+      "source": "P. B. Johnson and R. W. Christy, 'Optical constants of transition metals: Ti, V, Cr, Mn, Fe, Co, Ni, and Pd', Phys. Rev. B 9, 5056-5070 (1974), via https://refractiveindex.info/?shelf=main&book=Fe&page=Johnson ; CIE 018:2019 Table 6, CIE 1931 2-degree colour-matching functions, doi:10.25039/CIE.DS.xvudnb9b ; CIE standard illuminant D65, https://files.cie.co.at/Publications-datasets/CIE_std_illum_D65.csv"
+    }
+  },
+  "acoustic": {
+    "note": "The lattice's members are slender and lie under the glazing; they are not an acoustic surface of the Rotunda. No absorption is recorded."
+  },
+  "stock": {
+    "sections": {
+      "text": "Hot-finished rectangular hollow sections (EN 10210-2 dimensions) in S355J2H, or plates and flats in S355J2 welded into boxes where members taper, as in the Great Court.",
+      "source": "EN 10210-1/-2 (hot-finished structural hollow sections); Great Court precedent: S. Hart, Architectural Record (January 2003), via Cantilever, https://cantilever.wordpress.com/about-innovation/buro-happold-british-museum/",
+      "grade": "guidance"
+    },
+    "asBuiltMembers": {
+      "text": "The as-built eye: a ring (r 2.42-2.50 m) carrying the glass at 20.38 m, bars in three directions 60 degrees apart and 0.8 m apart, each bar 0.05 m wide and 0.10 m deep (half-extents 0.025 m and 0.05 m).",
+      "source": "windows/Source/MuseeVision/Rotunda/RotundaStructure.cpp (frozen reference), lines 57 and 1037-1053",
+      "grade": "design"
+    }
+  },
+  "physicalMaterial": {
+    "footfallClass": "metal",
+    "note": "Overhead; never walked or touched."
+  },
+  "uses": [
+    {
+      "where": "the lattice of the Rotunda's glazed eye (D-004)",
+      "working": "painted.steel",
+      "histories": [
+        "steel.coating-ageing"
+      ],
+      "source": "MuseeVision/Journal/Decisions.md, D-004 (the steel-and-glass lattice eye stays as built, after the British Museum's Great Court)",
+      "grade": "design"
+    }
+  ],
+  "photograph": [
+    "The lattice reads as slender dark grey bars against the sky, with a soft satin sheen.",
+    "The paint's faint orange-peel texture shows only close to; welded nodes are faired smooth, with no bolts and no rust bleed.",
+    "Seen from below at a low angle, the upper edges of the bars carry a slightly lighter film of dust."
+  ],
+  "evidence": [],
+  "evidenceRejected": [
+    {
+      "path": "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt/PBR/M5",
+      "set": "ambientCG Metal029 ('satin lacquer orange peel (pearl steel)' in CREDITS.md)",
+      "reason": "Procedurally generated (ambientCG technique 'Procedural', parent asset MetalSubstance005; tags Black, Covered, Metal, Painted, Powder, Steel), not a photograph of real painted steel.",
+      "source": "https://ambientcg.com/view?id=Metal029",
+      "grade": "manufacturer"
+    }
+  ],
+  "evidenceSearch": {
+    "searched": [
+      "C:/Users/anan9/Desktop/Projects/Musee Vision/windows/SourceArt (PBR, Textures, Journeys, Albion and their CREDITS)"
+    ],
+    "found": "No CC0 photograph of real structural steel or of a painted steel lattice is on this PC.",
+    "tier": "The steel itself needs no visual calibration (it is always painted). The paint is calibrated in the working 'painted.steel'."
+  },
+  "familyDeclaration": {
+    "text": "D-014 admits the families stone, white, bronze, oak, accent, glass, water and living, and an accent names the core family it ties back to. Painted structural steel belongs to none of the core families; in the museum it appears only as the structure of glazing, so it is declared an accent of the glass family. The Architect may overturn this reading with a new decision.",
+    "source": "MuseeVision/Journal/Decisions.md, D-014 (Matter); D-004 (the Rotunda's eye is glazed)",
+    "grade": "design"
+  },
+  "unverified": [
+    {
+      "field": "identity.precedent (grade of the Great Court steel)",
+      "text": "BS 4360 grade 50D (= S355J2)",
+      "reason": "Architectural Record says only 'Grade D steel'. Reading it as grade 50D (and so S355J2) assumes the common 355 MPa strength class; 43D (S275J2) would also be 'Grade D'. Brown and Cook (2002) was not readable (HTTP 403)."
+    },
+    {
+      "field": "precedentFacts (paint system and colour of the Great Court steel)",
+      "reason": "No source that could be read states the Great Court steel's coating system or colour. A secondary page says only 'a light, neutral color', without a source."
+    }
+  ]
+}

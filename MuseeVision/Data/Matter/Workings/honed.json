@@ -1,0 +1,128 @@
+{
+  "schema": "musee.matter.working/1",
+  "key": "honed",
+  "name": "Honed",
+  "kind": "finish",
+  "appliesTo": {
+    "families": [
+      "stone"
+    ],
+    "substances": [
+      "travertine",
+      "cream-marble"
+    ]
+  },
+  "over": [
+    "sawn.vein-cut",
+    "sawn.cross-cut"
+  ],
+  "process": "The sawn face is ground flat with bonded abrasives of progressively finer grit and stopped before it polishes. Travertine is filled first when a filled face is wanted; open-pore honing leaves the voids.",
+  "processSources": [
+    "Molina E., Arizzi A., Benavente D., Cultrone G. (2020) 'Influence of surface finishes and a calcium phosphate-based consolidant on the decay of sedimentary building stones due to acid attack', Frontiers in Materials 7:581979, Tables 1 and 2, https://doi.org/10.3389/fmats.2020.581979 ('abrasives with progressively finer grain size without reaching a polished finish')",
+    "Dynamic Stone Tools (trade guide, undated), 'Grit progression by stone type: polishing sequences guide', https://dynamicstonetools.com/blogs/news/grit-progression-by-stone-type-polishing-sequences-guide",
+    "Natural Stone Institute (2022) Dimension Stone Design Manual, chapter 12 'Travertine' (Specification, Product Description, Technical Data), pp. 12-1 to 12-14, https://transparencycatalog.com/assets/uploads/greener-images/12-TRAVERTINE-2022.pdf, Product Description 4.1.5 and 11"
+  ],
+  "abrasiveSequence": {
+    "values": [
+      100,
+      200,
+      400,
+      800
+    ],
+    "unit": "grit",
+    "grade": "guidance",
+    "source": "Dynamic Stone Tools (trade guide, undated), 'Grit progression by stone type: polishing sequences guide', https://dynamicstonetools.com/blogs/news/grit-progression-by-stone-type-polishing-sequences-guide",
+    "conditions": "the start of the marble sequence; trade practice; the grit scale is not named"
+  },
+  "stopsAt": {
+    "min": 400,
+    "max": 800,
+    "unit": "grit",
+    "grade": "guidance",
+    "source": "Dynamic Stone Tools (trade guide, undated), 'Grit progression by stone type: polishing sequences guide', https://dynamicstonetools.com/blogs/news/grit-progression-by-stone-type-polishing-sequences-guide",
+    "conditions": "'a honed finish ends the sequence at 400 or 800 grit'; trade practice"
+  },
+  "surface": {
+    "definition": [
+      {
+        "text": "Honed: a satin smooth surface with little or no gloss.",
+        "grade": "guidance",
+        "source": "Natural Stone Institute (2022) Dimension Stone Design Manual, chapter 12 'Travertine' (Specification, Product Description, Technical Data), pp. 12-1 to 12-14, https://transparencycatalog.com/assets/uploads/greener-images/12-TRAVERTINE-2022.pdf, Product Description 4.1.2"
+      },
+      {
+        "text": "Honed: dull sheen.",
+        "grade": "guidance",
+        "source": "Natural Stone Institute (2022) Dimension Stone Design Manual, chapter 12 'Travertine' (Specification, Product Description, Technical Data), pp. 12-1 to 12-14, https://transparencycatalog.com/assets/uploads/greener-images/12-TRAVERTINE-2022.pdf, Specification 6.2.5.2"
+      }
+    ],
+    "glossGround": {
+      "max": 5,
+      "unit": "GU",
+      "grade": "manufacturer",
+      "source": "McDonell J.A., Kyle R.C. (Minnesota Mining and Manufacturing Co.) (1994) US Patent 5,282,900 'Nonwoven surface treating articles, system including same, and method of treating calcium carbonate-containing surfaces with said system', https://patents.google.com/patent/US5282900A/en",
+      "conditions": "marble test tiles ground with a 120-grade abrasive: 'less than 5 glossmeter reading at any angle'"
+    },
+    "glossWithGrit": {
+      "text": "While the grit falls to 320 the roughness drops steeply but the gloss hardly changes; after 320 the gloss rises steeply while the roughness changes little. Gloss follows roughness well in micritic limestones and marbles, less well in travertines.",
+      "grade": "measured",
+      "source": "Yavuz H., Ozkahraman T., Demirdag S. (2011) 'Polishing experiments on surface quality of building stone tiles', Construction and Building Materials 25:1707-1711, abstract as indexed (full text not read), https://doi.org/10.1016/j.conbuildmat.2010.10.016"
+    },
+    "arealRoughness": {
+      "value": 0.22,
+      "unit": "mm",
+      "grade": "measured",
+      "source": "Molina E., Arizzi A., Benavente D., Cultrone G. (2020) 'Influence of surface finishes and a calcium phosphate-based consolidant on the decay of sedimentary building stones due to acid attack', Frontiers in Materials 7:581979, Tables 1 and 2, https://doi.org/10.3389/fmats.2020.581979, Table 2",
+      "conditions": "Sa, honed Travertino Amarillo, fresh and untreated; Leica VDM2000 videomicroscope; no filter is stated, so open pores are presumably included; Sz 1.11 mm"
+    },
+    "colour": {
+      "text": "Honing darkened and yellowed Travertino Amarillo against its saw-cut face: L* 65, a* 12, b* 31 against 69, 8, 17.",
+      "grade": "measured",
+      "source": "Molina E., Arizzi A., Benavente D., Cultrone G. (2020) 'Influence of surface finishes and a calcium phosphate-based consolidant on the decay of sedimentary building stones due to acid attack', Frontiers in Materials 7:581979, Tables 1 and 2, https://doi.org/10.3389/fmats.2020.581979, Table 1",
+      "note": "the rows are in Substances/travertine.json, optics.measuredColour"
+    }
+  },
+  "voidTreatment": [
+    {
+      "text": "Travertine for horizontal use is usually filled with cement or epoxy similar in colour to the background.",
+      "grade": "guidance",
+      "source": "Natural Stone Institute (2022) Dimension Stone Design Manual, chapter 12 'Travertine' (Specification, Product Description, Technical Data), pp. 12-1 to 12-14, https://transparencycatalog.com/assets/uploads/greener-images/12-TRAVERTINE-2022.pdf, Product Description 4.1.5"
+    },
+    {
+      "text": "Filled and honed, and open-pore honed, are both sold.",
+      "grade": "manufacturer",
+      "source": "Travertino Romano Group (Guidonia Montecelio), 'Tivoli travertine quarries' (finishes listed: filled/honed, open pore honed, brushed, brushed open pore, antique, natural split), read 2026-09-26, https://www.travertino-romano.com/en/formation/tivoli-travertine-quarries"
+    }
+  ],
+  "recommended": {
+    "text": "A honed finish is recommended for commercial travertine floors, with at least 20 mm of stone and an abrasion hardness of at least 10.",
+    "grade": "guidance",
+    "source": "Natural Stone Institute (2022) Dimension Stone Design Manual, chapter 12 'Travertine' (Specification, Product Description, Technical Data), pp. 12-1 to 12-14, https://transparencycatalog.com/assets/uploads/greener-images/12-TRAVERTINE-2022.pdf, Product Description 8.1"
+  },
+  "photograph": [
+    "Soft, broad reflections of windows and lamps, with no sharp image.",
+    "The colour a little paler and flatter than the same stone polished.",
+    "Open voids read as dark dots; filled voids as flush patches of a slightly different tone and sheen."
+  ],
+  "unverified": [
+    {
+      "field": "surface.glossAtFinalGrit",
+      "value": null,
+      "unit": "GU",
+      "reason": "No measured gloss of calcite stone honed to 400 or 800 grit was read."
+    },
+    {
+      "field": "surface.microRoughness",
+      "value": null,
+      "unit": "um",
+      "reason": "No filtered (micro-scale) roughness of honed travertine or Crema Marfil was read; the Sa values above include pores and waviness."
+    }
+  ],
+  "sources": [
+    "Natural Stone Institute (2022) Dimension Stone Design Manual, chapter 12 'Travertine' (Specification, Product Description, Technical Data), pp. 12-1 to 12-14, https://transparencycatalog.com/assets/uploads/greener-images/12-TRAVERTINE-2022.pdf",
+    "Molina E., Arizzi A., Benavente D., Cultrone G. (2020) 'Influence of surface finishes and a calcium phosphate-based consolidant on the decay of sedimentary building stones due to acid attack', Frontiers in Materials 7:581979, Tables 1 and 2, https://doi.org/10.3389/fmats.2020.581979",
+    "Dynamic Stone Tools (trade guide, undated), 'Grit progression by stone type: polishing sequences guide', https://dynamicstonetools.com/blogs/news/grit-progression-by-stone-type-polishing-sequences-guide",
+    "McDonell J.A., Kyle R.C. (Minnesota Mining and Manufacturing Co.) (1994) US Patent 5,282,900 'Nonwoven surface treating articles, system including same, and method of treating calcium carbonate-containing surfaces with said system', https://patents.google.com/patent/US5282900A/en",
+    "Yavuz H., Ozkahraman T., Demirdag S. (2011) 'Polishing experiments on surface quality of building stone tiles', Construction and Building Materials 25:1707-1711, abstract as indexed (full text not read), https://doi.org/10.1016/j.conbuildmat.2010.10.016",
+    "Travertino Romano Group (Guidonia Montecelio), 'Tivoli travertine quarries' (finishes listed: filled/honed, open pore honed, brushed, brushed open pore, antique, natural split), read 2026-09-26, https://www.travertino-romano.com/en/formation/tivoli-travertine-quarries"
+  ]
+}

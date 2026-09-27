@@ -1,0 +1,136 @@
+{
+  "schema": "musee.matter.history/1",
+  "key": "white.soiling",
+  "family": "white",
+  "name": "Soiled",
+  "describes": "Interior white plaster and limewash after years of air: dark particles (soot, black carbon) and coarser dust settle on the surface. A white surface darkens by the fraction of its area the black particles cover; coarse dust gathers on upward faces and in hollows; humidity carries fine deposits into the pores, where they cannot be washed out of a soft, soluble or porous body.",
+  "surfaceLawTerms": [
+    "soiling"
+  ],
+  "terms": {
+    "soiling": {
+      "model": "Area-coverage darkening: with a fraction c of the area covered by black particles, the luminous reflectance falls towards rho_clean x (1 - c). This is the quantity the perception studies below measure (percent surface coverage by black particles on a white ground).",
+      "modelSource": "Bellan, L.M., Salmon, L.G. & Cass, G.R. (2000) A Study on the Human Ability To Detect Soot Deposition onto Works of Art. Environmental Science & Technology 34(10), 1946-1952, https://doi.org/10.1021/es990769f (open copy: http://www.thesalmons.org/lynn/papers/A_Study_on_the_Human_Ability_To_Detect_S.pdf)",
+      "visibleCoverageEarliestReported": {
+        "value": 0.002,
+        "unit": "1",
+        "asReported": "0.2 % surface coverage of black particles on a white background would be visible to the average observer",
+        "source": "Carey, W.F. (1959) Int. J. Air Pollut. 2, 1-4, and Hancock, R.P., Esmen, N.A. & Furber, C.P. (1976) J. Air Pollut. Control Assoc. 26, 54-57, as cited in Bellan et al. (2000), https://doi.org/10.1021/es990769f",
+        "grade": "secondary"
+      },
+      "visibleCoverageEdgeOnset": {
+        "value": 0.024,
+        "unit": "1",
+        "asReported": "2.4 % when soiled and clean samples are directly adjacent (edge-to-edge)",
+        "source": "Bellan, Salmon & Cass (2000), https://doi.org/10.1021/es990769f",
+        "grade": "measured"
+      },
+      "visibleCoverageReliable": {
+        "value": 0.036,
+        "unit": "1",
+        "asReported": "about 3.6 % for greater than 90 % detection, edge-to-edge; a colour difference of about 1 on white",
+        "source": "Bellan, Salmon & Cass (2000), https://doi.org/10.1021/es990769f",
+        "grade": "measured"
+      },
+      "visibleCoverageSeparated": {
+        "value": 0.12,
+        "unit": "1",
+        "asReported": "12.0 % for 100 % detection when compared across a neutral grey gap; a colour difference of roughly 5-7",
+        "source": "Bellan, Salmon & Cass (2000), https://doi.org/10.1021/es990769f",
+        "grade": "measured"
+      },
+      "coverageRateVertical": {
+        "min": 3e-07,
+        "max": 1.8e-05,
+        "unit": "1/day",
+        "asReported": "3.0 x 10^-5 % to 1.8 x 10^-3 % per day (0.003-0.18 cm2 per m2 per day), vertical surfaces in southern California museums",
+        "source": "Bellan, Salmon & Cass (2000), citing Nazaroff, Ligocki, Salmon et al. (1992), Protection of Works of Art from Soiling Due to Airborne Particulates, J. Paul Getty Trust, https://doi.org/10.1021/es990769f",
+        "grade": "secondary"
+      },
+      "blackCarbonDepositionVertical": {
+        "min": 0.08,
+        "max": 2.7,
+        "unit": "ug/(m2*day)",
+        "asReported": "0.08-2.7 ug of black carbon per m2 of surface per day, depending on the museum and its ventilation",
+        "source": "Bellan, Salmon & Cass (2000), https://doi.org/10.1021/es990769f",
+        "grade": "secondary",
+        "note": "reported by Bellan et al. from the earlier Caltech museum studies"
+      },
+      "timeToReliablyVisible": {
+        "min": 5.4,
+        "max": 324,
+        "unit": "year",
+        "asReported": "approximately 5.4-324 years for a flat vertical work to reach 3.6 % coverage, depending on the museum",
+        "note": "a prediction Bellan et al. compute from their 3.6 % threshold and the coverage rates of Nazaroff et al. (1992) above, not a timed observation",
+        "source": "Bellan, Salmon & Cass (2000), https://doi.org/10.1021/es990769f",
+        "grade": "secondary"
+      },
+      "control": {
+        "text": "The deposition rate depends on the museum's location and the sophistication of its ventilation system; particle filtration and well-designed display cases or frames are the means of control.",
+        "source": "Bellan, Salmon & Cass (2000), introduction and conclusion, citing Nazaroff, W.W. & Cass, G.R. (1991) Protecting museum collections from soiling due to the deposition of airborne particles. Atmospheric Environment 25A(5-6), 841-852, https://doi.org/10.1016/0960-1686(91)90127-S; https://doi.org/10.1021/es990769f",
+        "grade": "secondary"
+      }
+    },
+    "orientation": {
+      "state": "Dust lies thickest on upward-facing forms: the V&A's 1856 cast of Michelangelo's David carried a thick layer of dust over its shoulders and head before cleaning.",
+      "source": "Puisto, J. (2014) David revealed. V&A Blog, 24 November 2014, https://www.vam.ac.uk/blog/caring-for-our-collections/david-revealed",
+      "driver": "surface normal against gravity (in the shader); shelter under projections (Form's cavity fact)",
+      "grade": "secondary"
+    },
+    "preferential": {
+      "state": "Heavy and preferential soiling on monumental plaster casts; dust that settles on the plaster surfaces can form a damaging 'cement', and humidity is taken through the material.",
+      "source": "Healey-Dilkes, S. & Sonntag, M. (2020) Preserving Monumental Plaster Casts in a Historic Building: A Conservation Approach at the Victoria & Albert Museum London. Objects Specialty Group Postprints 27, 75-111, https://resources.culturalheritage.org/osg-postprints/v27/healey-dilkes/",
+      "grade": "secondary"
+    },
+    "historicSources": {
+      "state": "Nineteenth-century soiling came from coal-fired heating and gas lighting; photographs of the 1920s show the David cast 'rather grubby'.",
+      "source": "Puisto, J. (2014) David revealed. V&A Blog, https://www.vam.ac.uk/blog/caring-for-our-collections/david-revealed",
+      "grade": "secondary"
+    },
+    "patternStaining": {
+      "state": "On ceilings and walls, dark lines where airborne dirt adheres to cooler, damp strips of the surface; the pattern can map joists, rafters, beams and the placement of insulation (thermal tracking or ghosting).",
+      "source": "InspectAPedia, Thermal Tracking: Wall or Ceiling Ghosting Stains, https://inspectapedia.com/interiors/Thermal_Tracking.php",
+      "driver": "a surface-temperature field over the piece; not in FMatterPieceLayout (see unverified)",
+      "grade": "secondary"
+    },
+    "cleanability": {
+      "state": "Soot can settle into the pores of stone or form a thin adhesive layer on it, and is extremely difficult, many times impossible, to remove without damaging the surface (Bellan et al.). Plaster, easily scratched and highly porous, is discoloured by dirt penetration; the grimed Perry casts were cleaned and some were given a further 'refreshing' layer of paint (Payne).",
+      "source": "Bellan, Salmon & Cass (2000), https://doi.org/10.1021/es990769f; Payne, E.M. (2020) The Conservation of Plaster Casts in the Nineteenth Century. Studies in Conservation 65(1), 37-58, https://doi.org/10.1080/00393630.2019.1610845",
+      "grade": "secondary"
+    }
+  },
+  "bySubstance": {
+    "lime-plaster": "Grey on the upper faces of coffer steps and ribs and in the sheltered backs of coffers; in the dome the coffers face down and inward, so most of the field stays clean and the steps collect.",
+    "fibrous-plaster": "Dust on the upward faces of cornices, sills and imposts; lines of dirt in quirks and fillets.",
+    "plaster-of-paris": "Thick dust on heads, shoulders and the tops of folds; fine soot driven into the open pores of bare casts.",
+    "limewash": "Greys evenly and is renewed rather than cleaned; outdoors it also chalks and streaks below ledges."
+  },
+  "unverified": [
+    {
+      "field": "terms.orientation (ratio of deposition on upward to vertical faces)",
+      "value": null,
+      "unit": "1",
+      "reason": "Qualitative evidence only (the David cast); the Nazaroff and Cass deposition models were not read in full."
+    },
+    {
+      "field": "terms.soiling.coverageRateVertical for the museum's own filtered galleries",
+      "value": null,
+      "unit": "1/day",
+      "reason": "The published range is for southern California museums of the 1980s-1990s; a modern filtered gallery lies near or below its low end, but no figure was verified."
+    },
+    {
+      "field": "terms.patternStaining",
+      "value": null,
+      "unit": "K",
+      "reason": "Needs a surface-temperature (thermal bridge) field that FMatterPieceLayout does not carry; the mechanism source is a building-inspection site, not a measurement."
+    }
+  ],
+  "sources": [
+    "Bellan, L.M., Salmon, L.G. & Cass, G.R. (2000) Environmental Science & Technology 34(10), 1946-1952, https://doi.org/10.1021/es990769f",
+    "Healey-Dilkes, S. & Sonntag, M. (2020) Objects Specialty Group Postprints 27, 75-111.",
+    "InspectAPedia, Thermal Tracking, https://inspectapedia.com/interiors/Thermal_Tracking.php",
+    "Nazaroff, W.W. & Cass, G.R. (1991) Atmospheric Environment 25A(5-6), 841-852, https://doi.org/10.1016/0960-1686(91)90127-S",
+    "Payne, E.M. (2020) Studies in Conservation 65(1), 37-58, https://doi.org/10.1080/00393630.2019.1610845",
+    "Puisto, J. (2014) David revealed. V&A Blog."
+  ]
+}

@@ -1,0 +1,117 @@
+{
+  "schema": "musee.matter.history/1",
+  "key": "bronze.tarnish",
+  "name": "Indoor tarnish of the copper alloys",
+  "family": "bronze",
+  "appliesTo": {
+    "families": [
+      "bronze",
+      "accent"
+    ],
+    "substances": [
+      "bronze",
+      "brass"
+    ],
+    "workings": [
+      "cast.bronze",
+      "brushed",
+      "patinated"
+    ]
+  },
+  "surfaceLawTerms": [
+    "chemistry",
+    "age",
+    "touch"
+  ],
+  "describes": "Indoors, bare bronze and brass darken slowly. Oxygen and moisture grow a thin film of cuprous oxide (cuprite) on the bright metal soon after polishing; traces of reduced-sulfur gases in the air add copper sulfides. The metal goes from bright golden (bronze) or yellow (brass) through golden brown to brown; the film is self-limiting and protects the metal beneath. Fingers leave skin oils that tarnish faster than the air does. Indoors the change is much slower and more even than outdoors, and it stays brown: the green basic sulfates and chlorides form outdoors, where wetting and pollutants act for years (history bronze.weathering). On a patinated piece the same process thickens and darkens the founder's patina. Waxing slows it; a lacquered piece does not tarnish until its coat fails.",
+  "terms": {
+    "indoorPace": {
+      "text": "'The color changes in indoor environments are much slower and more subtle' than the outdoor weathering, which is 'rapid at first, but then slowing to an imperceptible rate after several years' exposure'.",
+      "source": "Copper Development Association, 'Copper Brass Bronze Design Handbook: Architectural Applications' (A4039), p. 12, https://www.copper.org/publications/pub_list/pdf/A4039-ArchitecturalApplications.pdf",
+      "grade": "guidance"
+    },
+    "selfLimiting": {
+      "text": "The general corrosion reactions of copper alloys in air are slow and self-limiting: they protect the underlying metal by forming the tenacious films known as tarnishes and patinas.",
+      "source": "Copper Development Association, A4039, p. 12 (Corrosion Resistance), https://www.copper.org/publications/pub_list/pdf/A4039-ArchitecturalApplications.pdf",
+      "grade": "guidance"
+    },
+    "onsetAfterPolishing": {
+      "text": "Colour measurements of copper alloys must be made immediately after polishing 'to avoid surface alterations caused by oxidation'; freshly polished arsenical bronzes 'quickly form oxides that appear as dull brown'.",
+      "source": "M. Moedlinger, M. H. G. Kuijpers, D. Braekmans, D. Berger, J. Archaeol. Sci. 88 (2017) 14-23, doi:10.1016/j.jas.2017.09.001, Methodology, https://scholarlypublications.universiteitleiden.nl/access/item:2949755/download",
+      "grade": "measured"
+    },
+    "skinOils": {
+      "text": "'Care should be used in handling to prevent skin oils from tarnishing the metal'; fingerprints are cleaned off after installation with a copper-alloy polish.",
+      "source": "Copper Development Association, A4039, p. 26 (protection during installation), https://www.copper.org/publications/pub_list/pdf/A4039-ArchitecturalApplications.pdf",
+      "grade": "guidance"
+    },
+    "products": {
+      "text": "Cuprite Cu2O first, with copper sulfides (chalcocite Cu2S) where reduced-sulfur gases are present: the same phases as the founder's statuary patina. Their optics (reflectance tables and F0) are recorded in the working 'patinated'.",
+      "source": "Copper Development Association, A4039, pp. 41-42 (statuary finishes 'based on cuprous oxide, sometimes combined with a mixture of copper sulfides'), https://www.copper.org/publications/pub_list/pdf/A4039-ArchitecturalApplications.pdf ; Handbook of Mineralogy, 'Cuprite' and 'Chalcocite', https://www.handbookofmineralogy.org/pdfs/cuprite.pdf , https://www.handbookofmineralogy.org/pdfs/chalcocite.pdf",
+      "grade": "guidance"
+    },
+    "cleanBronzeReference": {
+      "text": "Clean polished bronze before any exposure, as a second instrument measured it: 7 % Sn bronze L* 84.07, a* 8.26, b* 14.63; 3 % Sn bronze L* 83.63, a* 10.35, b* 14.17.",
+      "L7Sn": {
+        "value": 84.07,
+        "unit": "CIELAB",
+        "source": "L. Gianni, G. E. Gigante, M. Cavallini, A. Adriaens, 'Corrosion of bronzes by extended wetting with single versus mixed acidic pollutants', Materials 7(5) (2014) 3353-3370, doi:10.3390/ma7053353, https://pmc.ncbi.nlm.nih.gov/articles/PMC5453210/",
+        "grade": "measured"
+      }
+    },
+    "alloyColour": {
+      "text": "C26000 cartridge brass weathers yellowish before it goes grey-green outdoors; C22000 commercial bronze and phosphor bronze go brown; the natural colour of each alloy tints its tarnish.",
+      "source": "Copper Development Association, A4039, Table 1 ('Natural' and 'Weathered' colours of each alloy), https://www.copper.org/publications/pub_list/pdf/A4039-ArchitecturalApplications.pdf",
+      "grade": "guidance"
+    }
+  },
+  "drivers": [
+    {
+      "driver": "age",
+      "owner": "Matter piece table",
+      "meaning": "years the piece has been in service",
+      "source": "MuseeVision/Docs/Architecture.md, Matter (piece table: age)",
+      "grade": "design"
+    },
+    {
+      "driver": "cavity",
+      "owner": "Form",
+      "meaning": "hollows and recesses, where tarnish, patina and dirt stay",
+      "source": "MuseeVision/Docs/Architecture.md, Matter (vertex colour: cavity)",
+      "grade": "design"
+    },
+    {
+      "driver": "touch",
+      "owner": "not declared",
+      "meaning": "how often hands meet a face (rails, edges, fittings at hand height)",
+      "source": "The piece-data layout in MuseeVision/Docs/Architecture.md, Matter has no touch slot (touch is named among the surface law's terms but has no carrier): a gap for the Register",
+      "grade": "design"
+    },
+    {
+      "driver": "reducedSulfur",
+      "owner": "not declared",
+      "meaning": "traces of hydrogen sulfide and other reduced-sulfur gases in the museum air, which darken copper alloys",
+      "source": "No system in MuseeVision/Docs/Architecture.md carries indoor air quality: a gap for the Register",
+      "grade": "design"
+    }
+  ],
+  "photograph": [
+    "Look for a warm brown that is darker in hollows and lettering and lighter or brighter where hands and feet pass.",
+    "Faint fingerprint marks on bare brass.",
+    "No green anywhere indoors.",
+    "A waxed patina has a soft sheen over the brown.",
+    "Lacquered brass stays yellow until the lacquer breaks, then shows brown patches at the edges of the break."
+  ],
+  "unverified": [
+    {
+      "field": "terms.rate (indoor film growth or mass gain on copper)",
+      "value": null,
+      "unit": "mg/(m2*year)",
+      "reason": "The ISO 11844-1 indoor corrosivity classes for copper were not read from a reliable text (a summary of Kouril et al., Materials 15 (2022) 639, gave copper limits identical to silver's, which could not be confirmed). The Matter builder must not invent a rate: tier (c) museum photographs of bronze of known age are the evidence to seek."
+    },
+    {
+      "field": "terms.thinFilmColours",
+      "reason": "The rose and violet interference tints of a very thin tarnish film are a known trade observation but no measured source was read."
+    }
+  ]
+}

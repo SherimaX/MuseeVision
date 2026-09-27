@@ -1,0 +1,148 @@
+{
+  "schema": "musee.matter.history/1",
+  "key": "gilt.wear",
+  "name": "Rubbed and aged gilding",
+  "family": null,
+  "appliesTo": {
+    "workings": [
+      "gilt"
+    ],
+    "families": [
+      "white",
+      "bronze",
+      "oak"
+    ]
+  },
+  "surfaceLawTerms": [
+    "wear",
+    "touch",
+    "soiling",
+    "age"
+  ],
+  "describes": "Gold does not tarnish, so gilding ages only by losing its leaf and gathering dirt. The leaf is about a tenth of a micrometre thick, so any rubbing wears through it: the high points of carving and the edges that hands and dusters pass go first. On water gilding the worn places show the bole, a dull red (or yellow, or blue-grey) glinting through the gold, then the white gesso; on oil gilding they show the size and then the substrate (the bronze, the plaster). Dust and soot settle in the hollows, darkening them against the bright raised gold. Water gilding is also hygroscopic: its glue and chalk swell and shrink with the humidity, so over decades it cracks, lifts and flakes along the gesso. Where gilt is walked on, as at the sun at the Rotunda's centre, feet wear the leaf through wherever they land.",
+  "terms": {
+    "noTarnish": {
+      "text": "The 23-23.75 kt leaves carry no tarnishing risk; the risk rises as the carat falls, to high for the 16-18 kt green golds and very high for the white golds.",
+      "source": "Giusto Manetti Battiloro, 'French cut leaf - 24 to 6 karats', alloy table (tarnishing risk per alloy), https://www.manetti.com/en/product/french-cut-leaf/",
+      "grade": "manufacturer"
+    },
+    "leafThickness": {
+      "value": 0.1,
+      "unit": "um",
+      "source": "K. Howell, 'Gilding', The Building Conservation Directory (1999) ('approximately 1/250,000th of an inch thick'), https://www.buildingconservation.com/articles/gilding/gilding.htm",
+      "grade": "secondary"
+    },
+    "boleShowsThrough": {
+      "text": "Gilt is gold leaf laid over a substrate; the bole shows through with wear.",
+      "source": "MuseeVision/Journal/Decisions.md, D-014 (Matter)",
+      "grade": "design"
+    },
+    "boleColours": {
+      "text": "Bole comes in several colours: 'dull rich red', yellow, and 'blue-grey under burnished work'.",
+      "source": "K. Howell, 'Gilding' (1999), https://www.buildingconservation.com/articles/gilding/gilding.htm",
+      "grade": "secondary"
+    },
+    "abrasion": {
+      "text": "Water gilding's leaf is 'thinner and more exposed', susceptible to abrasion; delamination of the leaf is common where mechanical stress or earlier restoration has disturbed the layers.",
+      "source": "R. Piper, 'Oil Gilding vs. Water Gilding: A Comparative Study of Technique, Aesthetics, and Conservation', https://www.rhiannonpiper.com/articles/oil-gilding-vs-water-gilding-a-comparative-study-of-technique-aesthetics-and-conservation",
+      "grade": "secondary"
+    },
+    "humidity": {
+      "text": "Water-gilded objects are 'vulnerable to fluctuations in relative humidity due to the hygroscopic nature of animal glue and chalk'; oil gilding is 'more robust and flexible ... less susceptible to delamination'. Gesso and bole can become brittle over time.",
+      "source": "R. Piper, 'Oil Gilding vs. Water Gilding', https://www.rhiannonpiper.com/articles/oil-gilding-vs-water-gilding-a-comparative-study-of-technique-aesthetics-and-conservation",
+      "grade": "secondary"
+    },
+    "oilSizeAgeing": {
+      "text": "On oil gilding, degradation of the size layer may lead to dulling or embrittlement.",
+      "source": "R. Piper, 'Oil Gilding vs. Water Gilding', https://www.rhiannonpiper.com/articles/oil-gilding-vs-water-gilding-a-comparative-study-of-technique-aesthetics-and-conservation",
+      "grade": "secondary"
+    },
+    "longevity": {
+      "text": "Protected gilding can survive millennia (Tutankhamun's couch, about 3,000 years), but gilding 'exposed to greater wear and less protected conditions will not last so long'.",
+      "age": {
+        "value": 3000,
+        "unit": "year",
+        "source": "K. Howell, 'Gilding' (1999), https://www.buildingconservation.com/articles/gilding/gilding.htm",
+        "grade": "secondary"
+      }
+    },
+    "soiling": {
+      "text": "Soot and dust settle on gilding as on the museum's other interior surfaces; the deposition rates of the museum air are recorded with the white family's soiling.",
+      "source": "MuseeVision/Data/Matter/Histories/white.soiling.json (Bellan, Salmon and Cass 2000, and the sources it cites)",
+      "grade": "record"
+    }
+  },
+  "drivers": [
+    {
+      "driver": "arrisProximity",
+      "owner": "Form",
+      "meaning": "nearness to an edge or a high point, where rubbing reaches first",
+      "source": "MuseeVision/Docs/Architecture.md, Matter (vertex colour: arris proximity)",
+      "grade": "design"
+    },
+    {
+      "driver": "cavity",
+      "owner": "Form",
+      "meaning": "hollows and recesses, where tarnish, patina and dirt stay",
+      "source": "MuseeVision/Docs/Architecture.md, Matter (vertex colour: cavity)",
+      "grade": "design"
+    },
+    {
+      "driver": "touch",
+      "owner": "not declared",
+      "meaning": "how often hands meet a face (rails, edges, fittings at hand height)",
+      "source": "The piece-data layout in MuseeVision/Docs/Architecture.md, Matter has no touch slot (touch is named among the surface law's terms but has no carrier): a gap for the Register",
+      "grade": "design"
+    },
+    {
+      "driver": "traffic",
+      "owner": "Site",
+      "meaning": "the traffic field: footfalls per square metre over the piece's life",
+      "source": "MuseeVision/Docs/Architecture.md, Matter (per stage, plan-field textures: traffic density)",
+      "grade": "design"
+    },
+    {
+      "driver": "walkable",
+      "owner": "Form",
+      "meaning": "which faces are walked on",
+      "source": "MuseeVision/Docs/Architecture.md, Matter (piece table: walkable)",
+      "grade": "design"
+    },
+    {
+      "driver": "relativeHumidity",
+      "owner": "not declared",
+      "meaning": "indoor relative humidity and its swings, which crack water gilding",
+      "source": "Time's Moment in MuseeVision/Docs/Architecture.md carries outdoor weather, not indoor humidity: a gap for the Register",
+      "grade": "design"
+    },
+    {
+      "driver": "age",
+      "owner": "Matter piece table",
+      "meaning": "years the piece has been in service",
+      "source": "MuseeVision/Docs/Architecture.md, Matter (piece table: age)",
+      "grade": "design"
+    }
+  ],
+  "photograph": [
+    "Look for red (bole) glinting through on the rubbed ridges and edges of carved water gilding, and white gesso where it is worn further.",
+    "A crackle of fine lines and small lifted flakes in old water gilding.",
+    "Darker dirt lying in the hollows against clean, bright raised gold.",
+    "Mirror-bright burnished passages next to softly matte ones.",
+    "Faint square leaf seams on flat gilding.",
+    "On oil-gilt bronze look for the brown bronze showing through where it is touched or walked."
+  ],
+  "unverified": [
+    {
+      "field": "terms.wearRate (leaf lost per visitor or per year on walked or handled gilt)",
+      "value": null,
+      "unit": "um/year",
+      "reason": "No measured abrasion rate of gold leaf was read. On a walked floor the leaf (0.1 um) is expected to wear through quickly; how quickly needs tier (c) evidence."
+    },
+    {
+      "field": "terms.crackPattern",
+      "value": null,
+      "unit": "mm",
+      "reason": "No measured crack spacing of aged gesso was read."
+    }
+  ]
+}

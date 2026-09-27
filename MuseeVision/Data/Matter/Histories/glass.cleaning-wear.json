@@ -1,0 +1,33 @@
+{
+  "schema": "musee.matter.history/1",
+  "key": "glass.cleaning-wear",
+  "name": "Cleaning wear",
+  "family": "glass",
+  "surfaceLawTerms": [
+    "wear"
+  ],
+  "describes": "Glass is cleaned for its whole life. Grit trapped under a squeegee or cloth, metal parts of cleaning tools, and razor blades dragged across the face leave hairline scratches. They are invisible looking through the glass and appear when low sun rakes the face. Coated faces show damage most.",
+  "terms": {
+    "visibility": {
+      "text": "Scratches that are not easily seen under a dark or grey sky may be very noticeable when the sun is at a certain angle or low in the sky; direct sunlight is needed to evaluate a surface.",
+      "grade": "guidance",
+      "source": "Glass Association of North America, Glass Informational Bulletin GANA 01-0300 'Proper procedures for cleaning architectural glass products', https://euroline-windows.com/wp-content/uploads/2023/04/GANA-Proper-Procedures-For-Cleaning-Glass.pdf"
+    },
+    "razorScraping": {
+      "text": "Scraping with blades is not condoned; a new 1 in blade may be used on small spots of uncoated glass only, in one direction, or it leaves hairline concentrated scratches.",
+      "grade": "guidance",
+      "source": "Glass Association of North America, Glass Informational Bulletin GANA 01-0300 'Proper procedures for cleaning architectural glass products', https://euroline-windows.com/wp-content/uploads/2023/04/GANA-Proper-Procedures-For-Cleaning-Glass.pdf"
+    }
+  },
+  "photograph": [
+    "A fine web of hairline scratches caught by low raking sun; none visible looking through the pane."
+  ],
+  "unverified": [
+    {
+      "field": "terms.scratchDensity",
+      "value": null,
+      "unit": "1/m",
+      "reason": "No measured density or width of cleaning scratches on in-service glass was found."
+    }
+  ]
+}

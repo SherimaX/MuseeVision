@@ -1,0 +1,164 @@
+{
+  "schema": "musee.matter.history/1",
+  "key": "white.micro-cracking",
+  "family": "white",
+  "name": "Micro-cracked",
+  "describes": "White finishes after drying and years of movement: lime shrinks slightly as it dries and crazes if the finish dried too fast; gypsum expands slightly as it sets, so a cast or fibrous length cracks from drying stress, movement at joints and fixings, or a corroding armature rather than from shrinkage; coatings on casts and thick limewash craze on their own. Hairline cracks open and close with the seasons.",
+  "surfaceLawTerms": [
+    "age"
+  ],
+  "terms": {
+    "crazing": {
+      "state": "A fine web of cracks in a lime finishing coat that dried too quickly; controlled at making by re-wetting, scouring and polishing.",
+      "source": "Napier, W. & Jenkins, M. (2018) Inform Guide: Plain Lime Plastering. Historic Environment Scotland, https://www.historicenvironment.scot/archives-and-research/publications/publication/?publicationId=67d4d72c-7b8c-4622-a244-a94b01090177",
+      "grade": "guidance"
+    },
+    "shrinkage": {
+      "state": "Lime shrinks slightly as it dries; shrinkage cracks are likely as a lime coat dries and are pressed back and re-worked; plaster laid thin cracks and soon decays.",
+      "source": "Ratcliffe, T. (1997) The Use of Gypsum Plaster, https://www.buildingconservation.com/articles/gypsum/gypsum_plaster.htm; Ratcliffe, T. (2006) Internal Lime-Plastering, https://www.buildingconservation.com/articles/internallimeplast/lime_plaster.htm; Vitruvius, De Architectura VII.3.9, trans. J. Gwilt (1826), https://penelope.uchicago.edu/Thayer/E/Roman/Texts/Vitruvius/7*.html",
+      "grade": "historical"
+    },
+    "gypsumExpansion": {
+      "min": 0.0015,
+      "max": 0.0021,
+      "unit": "1",
+      "asReported": "0.15 %-0.21 % setting expansion",
+      "note": "gypsum grows as it sets, so casts and fibrous lengths do not shrink-craze; their cracks come from drying stress, movement and fixings",
+      "source": "USG IG1937-USA-ENG rev. 1-20 (No. 1 Moulding Plaster), https://www.usg.com/content/dam/USG_Marketing_Communications/united_states/product_promotional_materials/finished_assets/usg-no-1-moulding-plaster-submital-southard-IG1937.pdf; USG IG1375-USA-ENG rev. 8-24 (No. 1 Casting Plaster), https://www.usg.com/content/dam/USG/pdpmovedocuments/usg-no-1-casting-plaster-data-en-IG1375.pdf",
+      "grade": "manufacturer"
+    },
+    "castDrying": {
+      "state": "Casts may crack if dried too quickly.",
+      "source": "Brigham, W.T. (1874), pp. 27-29, as quoted in Payne, E.M. (2020) The Conservation of Plaster Casts in the Nineteenth Century. Studies in Conservation 65(1), 37-58, https://doi.org/10.1080/00393630.2019.1610845",
+      "grade": "historical"
+    },
+    "armature": {
+      "state": "Humidity is taken through the plaster to the iron armatures inside casts, which corrode.",
+      "source": "Healey-Dilkes, S. & Sonntag, M. (2020) Preserving Monumental Plaster Casts in a Historic Building: A Conservation Approach at the Victoria & Albert Museum London. Objects Specialty Group Postprints 27, 75-111, https://resources.culturalheritage.org/osg-postprints/v27/healey-dilkes/",
+      "grade": "secondary"
+    },
+    "coatings": {
+      "state": "On a cast that had been painted and waxed, the old paint cracks, peels and flakes; hairline cracks, dents and historic repairs accompany it.",
+      "source": "Puisto, J. (2014) David revealed. V&A Blog, https://www.vam.ac.uk/blog/caring-for-our-collections/david-revealed",
+      "grade": "secondary"
+    },
+    "limewashCraze": {
+      "state": "Limewash crazes when applied liberally.",
+      "source": "Bennett, B. (1997) Awash with Colour: The Decorative and Protective Roles of Limewash. The Building Conservation Directory, https://www.buildingconservation.com/articles/decorative-protective-limewash/decorative-protective-limewash.htm",
+      "grade": "guidance"
+    },
+    "structural": {
+      "state": "Cracks from structural movement, loading and differential movement between dissimilar materials follow the structure and joints below; on lath, unstaggered lath joints make cracks, so joints are staggered at 600-900 mm.",
+      "lathJointStagger": {
+        "min": 600,
+        "max": 900,
+        "unit": "mm",
+        "source": "Napier & Jenkins (2018), Historic Environment Scotland, https://www.historicenvironment.scot/archives-and-research/publications/publication/?publicationId=67d4d72c-7b8c-4622-a244-a94b01090177",
+        "grade": "guidance"
+      },
+      "source": "Napier & Jenkins (2018), Historic Environment Scotland, https://www.historicenvironment.scot/archives-and-research/publications/publication/?publicationId=67d4d72c-7b8c-4622-a244-a94b01090177",
+      "grade": "guidance"
+    },
+    "seasonal": {
+      "state": "Hairline cracks can open and close through the seasons with moisture and temperature; they usually need no repair.",
+      "source": "Napier & Jenkins (2018), Historic Environment Scotland, https://www.historicenvironment.scot/archives-and-research/publications/publication/?publicationId=67d4d72c-7b8c-4622-a244-a94b01090177",
+      "grade": "guidance"
+    },
+    "fibrousFixings": {
+      "state": "Fibrous plaster ties (wads) weaken as the hessian inside decays, over a service life of about 80 years, while looking sound from outside; ceilings sag, crack and can fall.",
+      "hessianServiceLife": {
+        "value": 80,
+        "unit": "year",
+        "source": "Clifford, R. (2016) Maintaining Large Fibrous Plaster Ceilings. The Building Conservation Directory, https://www.buildingconservation.com/articles/fibrous-plaster-ceilings/fibrous-plaster-ceilings.htm; Harrison, D. (1999), https://www.buildingconservation.com/articles/theatre/theatre.htm",
+        "grade": "guidance"
+      },
+      "source": "Clifford, R. (2016), https://www.buildingconservation.com/articles/fibrous-plaster-ceilings/fibrous-plaster-ceilings.htm",
+      "grade": "guidance"
+    },
+    "widths": {
+      "hairline": {
+        "max": 0.1,
+        "unit": "mm",
+        "asReported": "Category 0: hairline cracks less than 0.1 mm; no repair needed",
+        "source": "BRE Digest 251 (revised 1995) Assessment of damage in low-rise buildings, categories as given at https://www.designingbuildings.co.uk/wiki/Cracking%20and%20building%20movement",
+        "grade": "guidance"
+      },
+      "fine": {
+        "max": 1,
+        "unit": "mm",
+        "asReported": "Category 1: fine cracks up to 1 mm, generally restricted to internal wall finishes, treated by normal decoration",
+        "source": "BRE Digest 251 (revised 1995), https://www.designingbuildings.co.uk/wiki/Cracking%20and%20building%20movement",
+        "grade": "guidance"
+      },
+      "easilyFilled": {
+        "max": 5,
+        "unit": "mm",
+        "asReported": "Category 2: up to 5 mm, easily filled",
+        "source": "BRE Digest 251 (revised 1995), https://www.designingbuildings.co.uk/wiki/Cracking%20and%20building%20movement",
+        "grade": "guidance"
+      }
+    }
+  },
+  "bySubstance": {
+    "lime-plaster": "Crazing (a closed polygonal web) on patches of finish that dried fast; single hairlines following the masonry or the coffer ribs below. Widths within categories 0-1.",
+    "fibrous-plaster": "Straight hairlines along joints between cast lengths and at fixings; no shrinkage craze.",
+    "plaster-of-paris": "Few, discrete cracks: across slender parts and at old joins; cracked, peeling paint or shellac coats; corroding armatures inside.",
+    "limewash": "A fine craze where coats were thick."
+  },
+  "drivers": [
+    {
+      "driver": "joints between pieces and substrate joints",
+      "owner": "Form (piece table, joints)"
+    },
+    {
+      "driver": "arris proximity (cracks and chips start at edges)",
+      "owner": "Form (vertex colour: arris proximity)"
+    },
+    {
+      "driver": "piece age and seed",
+      "owner": "Form (piece table)"
+    },
+    {
+      "driver": "drying rate at making",
+      "owner": "a making-time decision recorded on the piece; not in FMatterPieceLayout (see unverified)"
+    }
+  ],
+  "unverified": [
+    {
+      "field": "terms.crazing (cell size of a craze web)",
+      "value": null,
+      "unit": "mm",
+      "reason": "No measured cell size for lime crazing was found."
+    },
+    {
+      "field": "terms.armature (visible trace)",
+      "value": null,
+      "unit": "mm",
+      "reason": "Rust staining and cracking along a corroding armature are the expected trace, but the sources read only name the corrosion."
+    },
+    {
+      "field": "terms.crazing (dirt lines)",
+      "value": null,
+      "unit": "1",
+      "reason": "Cracks commonly read darker because dirt collects in them, but no source was found that measures it; the soiling history would carry it."
+    },
+    {
+      "field": "drivers (drying rate at making)",
+      "value": null,
+      "unit": "1",
+      "reason": "FMatterPieceLayout has no slot for a making-time drying condition; the spare vertex channel or the piece table would need one. Reported as a gap, not worked around."
+    }
+  ],
+  "sources": [
+    "Bennett, B. (1997) The Building Conservation Directory.",
+    "BRE Digest 251 (revised 1995), via https://www.designingbuildings.co.uk/wiki/Cracking%20and%20building%20movement",
+    "Clifford, R. (2016); Harrison, D. (1999). The Building Conservation Directory.",
+    "Healey-Dilkes, S. & Sonntag, M. (2020) Objects Specialty Group Postprints 27, 75-111.",
+    "Napier, W. & Jenkins, M. (2018) Inform Guide: Plain Lime Plastering. Historic Environment Scotland.",
+    "Payne, E.M. (2020) Studies in Conservation 65(1), 37-58 (quoting Brigham 1874).",
+    "Puisto, J. (2014) David revealed. V&A Blog.",
+    "Ratcliffe, T. (1997; 2006) The Building Conservation Directory.",
+    "USG IG1937 rev. 1-20; IG1375 rev. 8-24.",
+    "Vitruvius, De Architectura VII, trans. J. Gwilt (1826)."
+  ]
+}

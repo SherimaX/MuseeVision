@@ -1,0 +1,32 @@
+{
+  "schema": "musee.matter.history/1",
+  "key": "glass.water-stain",
+  "name": "Water and alkali stain",
+  "family": "glass",
+  "surfaceLawTerms": [
+    "chemistry"
+  ],
+  "describes": "Glass is damaged by alkaline run-off and by being kept wet: concrete or mortar slurry that runs down or splashes on glass is especially damaging and must be washed off at once, and jobsite storage conditions can stain the surface so that it needs an aggressive cleaning. The stain sits where water stands or runs: below masonry, along a gutter line, between sheets stored wet.",
+  "terms": {
+    "alkalineRunOff": {
+      "text": "Concrete or mortar slurry which runs down (or is splashed on) glass can be especially damaging and should be washed off as soon as possible.",
+      "grade": "guidance",
+      "source": "Glass Association of North America, Glass Informational Bulletin GANA 01-0300 'Proper procedures for cleaning architectural glass products', https://euroline-windows.com/wp-content/uploads/2023/04/GANA-Proper-Procedures-For-Cleaning-Glass.pdf"
+    },
+    "storageStain": {
+      "text": "Jobsite storage and construction conditions can lead to stains on the glass surface; removing them may require a more aggressive cleaning solution and procedure.",
+      "grade": "guidance",
+      "source": "Glass Association of North America, Glass Informational Bulletin GANA 01-0300 'Proper procedures for cleaning architectural glass products', https://euroline-windows.com/wp-content/uploads/2023/04/GANA-Proper-Procedures-For-Cleaning-Glass.pdf"
+    }
+  },
+  "photograph": [
+    "A milky or iridescent patch where water has stood or alkaline water has run."
+  ],
+  "unverified": [
+    {
+      "field": "describes (mechanism)",
+      "value": null,
+      "reason": "The mechanism (water leaches sodium and calcium from the surface; the alkaline film then attacks the silica network, leaving a leached, iridescent layer) was seen only in search summaries of the Corning Museum of Glass and the Conservation Wiki pages, which refused access; it is not asserted in 'describes'."
+    }
+  ]
+}

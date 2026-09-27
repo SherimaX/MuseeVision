@@ -1,0 +1,107 @@
+{
+  "schema": "musee.matter.working/1",
+  "key": "polished.stone",
+  "name": "Polished",
+  "kind": "finish",
+  "appliesTo": {
+    "families": [
+      "stone"
+    ],
+    "substances": [
+      "travertine",
+      "cream-marble"
+    ]
+  },
+  "over": [
+    "sawn.vein-cut",
+    "sawn.cross-cut"
+  ],
+  "process": "Honing is carried on through finer grits and finished with a polishing powder or an oxalic-acid compound, which leaves the face glossy. Travertine's voids are filled before polishing: for one Spanish travertine, a beige gypsum-based plaster in the large pores, then an epoxy-silicone resin dressing, then the polish.",
+  "processSources": [
+    "Dynamic Stone Tools (trade guide, undated), 'Grit progression by stone type: polishing sequences guide', https://dynamicstonetools.com/blogs/news/grit-progression-by-stone-type-polishing-sequences-guide",
+    "Urosevic M., Sebastian-Pardo E., Cardell C. (2010) 'Rough and polished travertine building stone decay evaluated by a marine aerosol ageing test', Construction and Building Materials 24:1438-1448 (Olivillo travertine, Alhama de Almeria, Spain, sawn vein-cut), https://doi.org/10.1016/j.conbuildmat.2010.01.011, section 2.1"
+  ],
+  "abrasiveSequence": {
+    "values": [
+      100,
+      200,
+      400,
+      800,
+      1500,
+      3000
+    ],
+    "unit": "grit",
+    "grade": "guidance",
+    "source": "Dynamic Stone Tools (trade guide, undated), 'Grit progression by stone type: polishing sequences guide', https://dynamicstonetools.com/blogs/news/grit-progression-by-stone-type-polishing-sequences-guide",
+    "conditions": "the full polish sequence for marble, then polishing powder or an oxalic-acid compound; trade practice; the grit scale is not named"
+  },
+  "surface": {
+    "definition": {
+      "text": "Polished: a glossy surface which brings out the full colour and character of the stone.",
+      "grade": "guidance",
+      "source": "Natural Stone Institute (2022) Dimension Stone Design Manual, chapter 12 'Travertine' (Specification, Product Description, Technical Data), pp. 12-1 to 12-14, https://transparencycatalog.com/assets/uploads/greener-images/12-TRAVERTINE-2022.pdf, Product Description 4.1.1"
+    },
+    "gloss": {
+      "min": 75,
+      "unit": "GU",
+      "grade": "manufacturer",
+      "source": "McDonell J.A., Kyle R.C. (Minnesota Mining and Manufacturing Co.) (1994) US Patent 5,282,900 'Nonwoven surface treating articles, system including same, and method of treating calcium carbonate-containing surfaces with said system', https://patents.google.com/patent/US5282900A/en",
+      "conditions": "60 degree geometry; the patent calls a marble surface of about 75 or more 'high gloss'"
+    },
+    "glossTrade": {
+      "min": 80,
+      "unit": "GU",
+      "grade": "guidance",
+      "source": "Kuhn T., Rose Restoration (trade guide, 2026-03-25), 'The GC Guide to Specifying Stone Restoration in Commercial Bids'; gloss geometry not stated, https://www.roserestoration.com/blog/gc-guide-specifying-stone-restoration-commercial-bids/",
+      "conditions": "'high-gloss polish'; geometry not stated; a satin finish is 40-50"
+    },
+    "openPorosity": {
+      "value": 7.26,
+      "unit": "%",
+      "grade": "measured",
+      "source": "Urosevic M., Sebastian-Pardo E., Cardell C. (2010) 'Rough and polished travertine building stone decay evaluated by a marine aerosol ageing test', Construction and Building Materials 24:1438-1448 (Olivillo travertine, Alhama de Almeria, Spain, sawn vein-cut), https://doi.org/10.1016/j.conbuildmat.2010.01.011, Table 3",
+      "conditions": "mercury-intrusion open porosity after filling and polishing (8.16 % before): the resin closes the near-surface pores"
+    },
+    "colour": {
+      "text": "Filling and polishing darkened and warmed a travertine: L* 69.78 to 62.00, a* 1.83 to 5.52, b* 7.31 to 15.69, measured with a Minolta CR-210 at 0 degree viewing.",
+      "grade": "measured",
+      "source": "Urosevic M., Sebastian-Pardo E., Cardell C. (2010) 'Rough and polished travertine building stone decay evaluated by a marine aerosol ageing test', Construction and Building Materials 24:1438-1448 (Olivillo travertine, Alhama de Almeria, Spain, sawn vein-cut), https://doi.org/10.1016/j.conbuildmat.2010.01.011, Table 5",
+      "note": "the rows are in Substances/travertine.json, optics.measuredColour"
+    },
+    "physics": {
+      "text": "Polishing does not change the stone's index or its F0. It removes the roughness that scattered white light from the first surface, so the reflection gathers into a sharp lobe and the body colour shows undiluted.",
+      "grade": "derived",
+      "source": "Urosevic M., Sebastian-Pardo E., Cardell C. (2010) 'Rough and polished travertine building stone decay evaluated by a marine aerosol ageing test', Construction and Building Materials 24:1438-1448 (Olivillo travertine, Alhama de Almeria, Spain, sawn vein-cut), https://doi.org/10.1016/j.conbuildmat.2010.01.011, Table 5 ; Ghosh G. (1999) 'Dispersion-equation coefficients for the refractive index and birefringence of calcite and quartz crystals', Optics Communications 163:95-102; coefficients as tabulated at https://refractiveindex.info/?shelf=main&book=CaCO3&page=Ghosh-o and https://refractiveindex.info/?shelf=main&book=CaCO3&page=Ghosh-e",
+      "derivation": "from the measured colour change and the calcite F0 (Substances/travertine.json, optics.specularF0)"
+    }
+  },
+  "photograph": [
+    "Sharp mirror images of doorways, lamps and people, softened only a little.",
+    "The stone darker and warmer in colour than its honed neighbour.",
+    "Resin-filled voids glossier than the stone around them; cement-filled voids duller.",
+    "Where people walk, lanes of lost gloss (see stone.foot-traffic-wear)."
+  ],
+  "unverified": [
+    {
+      "field": "surface.specularLobeWidth",
+      "value": null,
+      "unit": "1",
+      "reason": "No measured BRDF of polished travertine or Crema Marfil was found; a renderer's roughness must be fitted to a specimen or a measured polished marble."
+    },
+    {
+      "field": "physicalMaterial.friction (polished, wet)",
+      "value": null,
+      "unit": "PTV",
+      "reason": "A search summary cites mean values of 18 to 24 for polished limestones (Coskun, Sariisik and Sariisik 2016, Cogent Engineering 3:1217821); not read at the source."
+    }
+  ],
+  "sources": [
+    "Natural Stone Institute (2022) Dimension Stone Design Manual, chapter 12 'Travertine' (Specification, Product Description, Technical Data), pp. 12-1 to 12-14, https://transparencycatalog.com/assets/uploads/greener-images/12-TRAVERTINE-2022.pdf",
+    "Urosevic M., Sebastian-Pardo E., Cardell C. (2010) 'Rough and polished travertine building stone decay evaluated by a marine aerosol ageing test', Construction and Building Materials 24:1438-1448 (Olivillo travertine, Alhama de Almeria, Spain, sawn vein-cut), https://doi.org/10.1016/j.conbuildmat.2010.01.011",
+    "Dynamic Stone Tools (trade guide, undated), 'Grit progression by stone type: polishing sequences guide', https://dynamicstonetools.com/blogs/news/grit-progression-by-stone-type-polishing-sequences-guide",
+    "McDonell J.A., Kyle R.C. (Minnesota Mining and Manufacturing Co.) (1994) US Patent 5,282,900 'Nonwoven surface treating articles, system including same, and method of treating calcium carbonate-containing surfaces with said system', https://patents.google.com/patent/US5282900A/en",
+    "Kuhn T., Rose Restoration (trade guide, 2026-03-25), 'The GC Guide to Specifying Stone Restoration in Commercial Bids'; gloss geometry not stated, https://www.roserestoration.com/blog/gc-guide-specifying-stone-restoration-commercial-bids/",
+    "Yavuz H., Ozkahraman T., Demirdag S. (2011) 'Polishing experiments on surface quality of building stone tiles', Construction and Building Materials 25:1707-1711, abstract as indexed (full text not read), https://doi.org/10.1016/j.conbuildmat.2010.10.016",
+    "Ghosh G. (1999) 'Dispersion-equation coefficients for the refractive index and birefringence of calcite and quartz crystals', Optics Communications 163:95-102; coefficients as tabulated at https://refractiveindex.info/?shelf=main&book=CaCO3&page=Ghosh-o and https://refractiveindex.info/?shelf=main&book=CaCO3&page=Ghosh-e"
+  ]
+}
