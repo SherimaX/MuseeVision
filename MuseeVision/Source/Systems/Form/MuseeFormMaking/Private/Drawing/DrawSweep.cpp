@@ -124,8 +124,9 @@ namespace Musee::Form::Drawing
 
 		/**
 		 * A closed section clipped to the side of one of its axes at or above zero (Axis 0: A, 1: B), with a crisp edge along
-		 * the axis where it was cut, facing back across it. False when the section crosses the axis more than once each
-		 * way, or lies wholly behind it.
+		 * the axis where it was cut, facing back across it. A point where the clipped outline only touches the axis and turns
+		 * straight back (a hollow that dipped behind it) is no corner and goes. False when what is left meets the axis along
+		 * more than one edge, or nothing is left.
 		 */
 		bool TrimSink(FProfileStations& Section, int32 Axis, FString& OutWhy)
 		{
@@ -137,7 +138,6 @@ namespace Musee::Form::Drawing
 			};
 			const int32 Count = Section.Vertices.Num();
 			TArray<FProfileVertex> Kept;
-			int32 Crossings = 0;
 			for (int32 Index = 0; Index < Count; ++Index)
 			{
 				const FProfileVertex& Here = Section.Vertices[Index];
@@ -148,7 +148,6 @@ namespace Musee::Form::Drawing
 				{
 					Kept.Add(Here);
 				}
-				Crossings += (H0 >= 0.0) != (H1 >= 0.0) ? 1 : 0;
 				if ((H0 > 0.0 && H1 < 0.0) || (H0 < 0.0 && H1 > 0.0))
 				{
 					FProfileVertex Cut;
@@ -158,35 +157,51 @@ namespace Musee::Form::Drawing
 					Kept.Add(Cut);
 				}
 			}
-			if (Crossings == 0 && Kept.IsEmpty())
+			for (bool bDropped = true; bDropped && Kept.Num() >= 3;)
+			{
+				bDropped = false;
+				for (int32 Index = 0; Index < Kept.Num() && Kept.Num() >= 3; ++Index)
+				{
+					const FVector2D In = Kept[Index].Point - Kept[(Index + Kept.Num() - 1) % Kept.Num()].Point;
+					const FVector2D Out = Kept[(Index + 1) % Kept.Num()].Point - Kept[Index].Point;
+					const bool bBack = FVector2D::DotProduct(In, Out) < 0.0 && FMath::Abs(FVector2D::CrossProduct(In, Out)) <= TangentJointRadians * In.Size() * Out.Size();
+					if (In.Size() <= WeldToleranceMeters || bBack)
+					{
+						Kept.RemoveAt(Index--);
+						bDropped = true;
+					}
+				}
+			}
+			if (Kept.Num() < 3)
 			{
 				OutWhy = TEXT("the section lies wholly behind the surface its sink is trimmed to");
 				return false;
 			}
-			if (Crossings > 2)
-			{
-				OutWhy = TEXT("a trimmed section crosses the surface it is fixed to more than once each way");
-				return false;
-			}
-			// The edge along the cut runs between the two cut points; each keeps its own side's normal as it arrives or leaves.
-			const int32 Kept0 = Kept.Num();
-			for (int32 Index = 0; Index < Kept0; ++Index)
+			// The edge along the cut: each end keeps its own side's normal as it arrives or leaves.
+			int32 Along = 0;
+			for (int32 Index = 0; Index < Kept.Num(); ++Index)
 			{
 				FProfileVertex& From = Kept[Index];
-				FProfileVertex& To = Kept[(Index + 1) % Kept0];
-				if (Crossings == 2 && Height(From.Point) == 0.0 && Height(To.Point) == 0.0)
+				FProfileVertex& To = Kept[(Index + 1) % Kept.Num()];
+				if (Height(From.Point) == 0.0 && Height(To.Point) == 0.0)
 				{
 					const FVector2D Step = To.Point - From.Point;
-					From.NormalOut = To.NormalIn = FVector2D(Step.Y, -Step.X).GetSafeNormal();
+					From.NormalOut = To.NormalIn = FVector2D(Step.Y, -Step.X).GetSafeNormal(StepSquaredMeters);
 					From.bCrisp = To.bCrisp = true;
+					++Along;
 				}
+			}
+			if (Along > 1)
+			{
+				OutWhy = TEXT("a trimmed section meets the surface it is fixed to along more than one edge");
+				return false;
 			}
 			Section.Vertices = Kept;
 			double Length = 0.0;
-			for (int32 Index = 0; Index < Kept0; ++Index)
+			for (int32 Index = 0; Index < Kept.Num(); ++Index)
 			{
 				Section.Vertices[Index].LengthMeters = Length;
-				Length += FVector2D::Distance(Kept[Index].Point, Kept[(Index + 1) % Kept0].Point);
+				Length += FVector2D::Distance(Kept[Index].Point, Kept[(Index + 1) % Kept.Num()].Point);
 			}
 			Section.ClosedLengthMeters = Length;
 			return true;

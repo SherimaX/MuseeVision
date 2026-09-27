@@ -94,6 +94,24 @@ namespace Musee::Form::Tests::Cuts
 			TestClosed(*this, TEXT("a base trimmed where its section meets the face"), Moulded[0], 0);
 		}
 
+		// A cap moulding whose hollow dips a millimetre behind the die's face before it swings out (the Classical Hall's
+		// plinth cap): trimmed, it meets the face along one edge.
+		// Its hollow: a quarter circle from the face at (0, -0.075) to (0.015, -0.0475), about (0.02125, -0.06875).
+		const FVector2D Hollow(0.02125, -0.06875);
+		const FVector2D FromFace = FVector2D(0.0, -0.075) - Hollow;
+		const double HollowFrom = FMath::RadiansToDegrees(FMath::Atan2(FromFace.Y, FromFace.X));
+		FFormSweep Cap;
+		Cap.Section = FFormProfile::From(FVector2D(-0.01, -0.075)).LineTo(FVector2D(0.0, -0.075))
+			.ArcAbout(Hollow, FromFace.Size(), FromFace.Size(), HollowFrom, HollowFrom - 90.0).LineTo(FVector2D(0.03, -0.02))
+			.LineTo(FVector2D(0.03, 0.0)).LineTo(FVector2D(-0.01, 0.0)).Close();
+		Cap.Path = Base.Path;
+		Cap.bTrimSinkA = true;
+		const TArray<FFormMadePiece> Capped = MakeDrawing(*this, FFormDrawing::Of(TEXT("die.cap"), TEXT("stone"), Cap));
+		if (TestEqual(TEXT("the trimmed cap is one piece"), Capped.Num(), 1))
+		{
+			TestClosed(*this, TEXT("a cap whose hollow dipped behind the face, trimmed"), Capped[0], 0);
+		}
+
 		// A ring turned about z, cut on the plane x = 0: half a ring, closed by two round cut faces.
 		FFormLathe Ring;
 		Ring.Section = FFormProfile::Ellipse(FVector2D(1.0, 0.0), 0.1, 0.1, 0.0, true);
