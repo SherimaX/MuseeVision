@@ -105,6 +105,29 @@ bool FMatterRecordsRead::RunTest(const FString& Parameters)
 		TestTrue(TEXT("It offers finishes"), Travertine->Finishes.Num() > 0);
 	}
 
+	// Tang sancai is three lead glazes over a white body (Shen et al. 2019): its palette entry offers each as a finish,
+	// each working laying its own glaze, so the object can carry all three; none of the three is a stand-in for another.
+	const FMatterPaletteEntry* Sancai = Palette.GetValue().Find(FMuseeKey(TEXT("accent.earthenware-sancai")));
+	if (TestNotNull(TEXT("The palette names the sancai earthenware"), Sancai))
+	{
+		TSet<FString> Glazes;
+		for (const TCHAR* Working : {TEXT("glazed.sancai"), TEXT("glazed.sancai-green"), TEXT("glazed.sancai-clear")})
+		{
+			TestTrue(*FString::Printf(TEXT("It offers %s"), Working),
+				Sancai->Finishes.ContainsByPredicate([Working](const FMatterPaletteFinish& F) { return F.Working == FMuseeKey(Working); }));
+			const TValueOrError<FMatterWorking, FString> Worked = ReadWorking(FMuseeKey(Working));
+			if (TestTrue(*FString::Printf(TEXT("%s reads"), Working), Worked.HasValue()))
+			{
+				const TValueOrError<FMatterSubstance, FString> Glaze = ReadSubstance(Worked.GetValue().Lays);
+				if (TestTrue(*FString::Printf(TEXT("%s lays a glaze that reads"), Working), Glaze.HasValue()))
+				{
+					Glazes.Add(FString::JoinBy(Glaze.GetValue().Dielectric.DiffuseAlbedo.Value, TEXT(" "), [](double V) { return FString::SanitizeFloat(V); }));
+				}
+			}
+		}
+		TestEqual(TEXT("the amber, the green and the clear are three colours"), Glazes.Num(), 3);
+	}
+
 	const TValueOrError<FMatterSubstance, FString> Substance = ReadSubstance(FMuseeKey(TEXT("travertine")));
 	if (TestTrue(TEXT("The travertine's typed record reads"), Substance.HasValue()))
 	{

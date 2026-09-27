@@ -1,0 +1,41 @@
+{
+  "schema": "musee.matter.shading.working/1",
+  "key": "glazed.sancai-green",
+  "name": "Glazed sancai, green (the copper glaze, run down from where it was laid)",
+  "record": "Palette.json",
+  "kind": "face",
+  "roughness": {
+    "value": 0.05,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Palette.json (the coat the working lays; no filtered roughness was read)",
+    "note": "A lead glaze melts low and runs smooth; Shen et al. note the colours ran and mixed in the firing."
+  },
+  "roughnessAcross": {
+    "value": 0.05,
+    "unit": "1",
+    "grade": "derived",
+    "source": "Palette.json (the coat the working lays; no filtered roughness was read)",
+    "derivation": "a face with no grain: equal to the roughness along"
+  },
+  "haziness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Palette.json (the coat the working lays; no filtered roughness was read)",
+    "note": "One specular lobe until a goniometric measurement shows a second."
+  },
+  "textureDepth": {
+    "value": 0.001,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Palette.json (the coat the working lays; no filtered roughness was read)"
+  },
+  "relief": {
+    "value": 0.02,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Palette.json (the coat the working lays; no filtered roughness was read)"
+  },
+  "lays": "glaze.sancai-green"
+}

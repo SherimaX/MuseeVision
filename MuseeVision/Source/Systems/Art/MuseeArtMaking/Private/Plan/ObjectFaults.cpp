@@ -8,6 +8,7 @@
 #include "MatterRecords.h"
 #include "Misc/Paths.h"
 #include "MatterWorking.h"
+#include "Stone/StoneMesh.h"
 #include "Support/ArtSupport.h"
 
 namespace Musee::ArtMaking
@@ -411,6 +412,42 @@ namespace Musee::ArtMaking
 		}
 
 		/**
+		 * A scholar's rock stands in the round, formed as the stones' record says: its kind of rock, well recorded, and its
+		 * foot's radius, which must hold its wrinkled skin.
+		 */
+		TArray<FString> StoneEntryFaults(const FMuseeStageContext& Stage, const FArtHangEntry& Entry, const FEntryContext& Context)
+		{
+			TArray<FString> Out = RoundEntryFaults(Stage, Entry);
+			if (!Context.Stones.IsSet())
+			{
+				Out.Add(Context.RoundWhy);
+				return Out;
+			}
+			const FArtStone* Stone = Context.Stones->Find(Entry.Work);
+			const FArtStoneKind* Kind = Stone ? Context.Stones->FindKind(Stone->Kind) : nullptr;
+			if (!Stone)
+			{
+				Out.Add(FString::Printf(TEXT("Data/%s gives no rock for it"), FArtStones::Record));
+			}
+			else if (!Kind)
+			{
+				Out.Add(FString::Printf(TEXT("Data/%s gives no kind of rock '%s'"), FArtStones::Record, *Stone->Kind.ToString()));
+			}
+			else
+			{
+				for (const FString& Fault : StoneKindFaults(*Kind))
+				{
+					Out.Add(FString::Printf(TEXT("Data/%s, the %s rock: %s"), FArtStones::Record, *Kind->Kind.ToString(), *Fault));
+				}
+				if (StoneWidthMeters({ Kind, Entry.SizeMeters().Y, Stone->FootRadiusMeters, 0 }) <= 0.0)
+				{
+					Out.Add(TEXT("its foot's radius can't hold a rock of its height and kind"));
+				}
+			}
+			return Out;
+		}
+
+		/**
 		 * A work cast from its scan stands in the round: its scan a glTF binary or an `.mvm` the collection holds, and any
 		 * part the casts' record names a band of heights within it.
 		 */
@@ -456,11 +493,14 @@ namespace Musee::ArtMaking
 			return Out;
 		}
 
-		/** A work cast from a scan may leave its width 0, to be measured from the scan; any other object gives both. */
+		/**
+		 * A work cast from a scan may leave its width 0, to be measured from the scan, and a scholar's rock, whose width its
+		 * foot and kind give; any other object gives both.
+		 */
 		bool SizeFaulty(const FArtHangEntry& Entry)
 		{
 			const FVector2D Size = Entry.SizeMeters();
-			const bool bWidthMeasured = IsCast(Entry) && Size.X == 0.0;
+			const bool bWidthMeasured = (IsCast(Entry) || IsStone(Entry)) && Size.X == 0.0;
 			return (Size.X <= 0.0 && !bWidthMeasured) || Size.Y <= 0.0 || Entry.Along < 0.0f || Entry.Height < 0.0f;
 		}
 	}
@@ -475,7 +515,7 @@ namespace Musee::ArtMaking
 		TArray<FString> Out;
 		if (SizeFaulty(Entry))
 		{
-			Out.Add(IsCast(Entry) ? TEXT("it needs a size [w, h] with its true height, its width 0 or more, and an along and a height of zero or more")
+			Out.Add(IsCast(Entry) || IsStone(Entry) ? TEXT("it needs a size [w, h] with its true height, its width 0 or more, and an along and a height of zero or more")
 				: TEXT("it needs a size [w, h] of more than zero, and an along and a height of zero or more"));
 		}
 		if (IsCast(Entry))
@@ -485,6 +525,10 @@ namespace Musee::ArtMaking
 		else if (IsTurned(Entry))
 		{
 			Out.Append(VesselEntryFaults(Stage, Entry, Context));
+		}
+		else if (IsStone(Entry))
+		{
+			Out.Append(StoneEntryFaults(Stage, Entry, Context));
 		}
 		else if (Entry.Support == Supports::Canvas)
 		{
@@ -521,7 +565,7 @@ namespace Musee::ArtMaking
 		else
 		{
 			Out.Add(FString::Printf(TEXT("its support '%s' isn't made yet; canvas, panel, stained glass, paper, silk, a daguerreotype's "
-				"plate, earthenware, tapestry, a cast and ceramic are"), *Entry.Support.ToString()));
+				"plate, earthenware, tapestry, a cast, ceramic and a scholar's rock (stone) are"), *Entry.Support.ToString()));
 		}
 		// A work in the round is finished in its medium (Data/Art/Media.json), not in its support's layer.
 		if (Entry.Support != Supports::Glass && !IsInMedium(Entry) && Out.IsEmpty() && !FindSupport(Entry.Support, Entry.Kind))

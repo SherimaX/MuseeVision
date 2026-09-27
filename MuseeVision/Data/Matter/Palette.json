@@ -2946,6 +2946,51 @@
       ]
     },
     {
+      "key": "accent.earthenware-sancai",
+      "family": "accent",
+      "accentOf": "stone",
+      "substance": "earthenware.white",
+      "realMaterial": "Tang sancai: a white earthenware body (white kaolin with a little loessic clay) under low-fired lead glazes, amber from iron, green from copper, and a clear glaze where the white body shows, run together in the firing",
+      "workingsByEra": {
+        "classical": "glazed sancai (Chenghuai's Tianqing case)",
+        "modern": "absent",
+        "future": "absent"
+      },
+      "roles": [
+        "Chenghuai: the sancai horse in the Tianqing case (Art/Media.json)"
+      ],
+      "why": "Fired clay once more, now under the soft lead glass the Tang potters let run: the lowest-fired of the museum's glazes, over the whitest body they had.",
+      "oldChoice": "",
+      "verdict": "new",
+      "verdictReason": "Named by a catalogue medium, 'Earthenware with three-colour lead glazes' (Docs/Stages/chenghuai.md, section 8).",
+      "research": {
+        "records": [
+          "Shading/Substances/earthenware.white.json",
+          "Shading/Substances/glaze.sancai.json",
+          "Shading/Substances/glaze.sancai-green.json",
+          "Shading/Substances/glaze.sancai-clear.json"
+        ],
+        "needed": "Measured colours of the three glazes and the body (the first values are read from the Met's photograph of its horse 1991.253.12, uncalibrated); the object's decoration (where the green and the clear glazes lie on it)."
+      },
+      "finishes": [
+        {
+          "working": "glazed.sancai",
+          "history": "clean",
+          "note": "Art: chinese-sancai-horse, in its case (the amber stands for the three until the object carries its decoration)"
+        },
+        {
+          "working": "glazed.sancai-green",
+          "history": "clean",
+          "note": "the green glaze, for the horse's decoration"
+        },
+        {
+          "working": "glazed.sancai-clear",
+          "history": "clean",
+          "note": "the clear glaze over the white body (the cream), for the horse's decoration"
+        }
+      ]
+    },
+    {
       "key": "accent.rag-board",
       "family": "accent",
       "accentOf": "white",

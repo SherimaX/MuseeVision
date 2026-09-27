@@ -885,7 +885,11 @@ lower edge up the slope from the bed's front edge (the image centred on the bed'
 | chinese-falangcai-bowl | turned "falangcai" | 0.114 × 0.054 | same · −15.80 | yes |
 | chinese-chicken-cup (the handling copy) | scan (prim), yaw 30° | 0.083 × — | `chenghuai.changnan.table` at (−0.280, −19.080, 1.250) | none |
 
-Care: ceramic-and-glass (the sancai horse is lead-glazed earthenware: the same class). The four scans that exist only as
+Care: ceramic-and-glass (the sancai horse is lead-glazed earthenware: the same class). Its medium, "Earthenware with
+three-colour lead glazes", is `accent.earthenware-sancai` · `glazed.sancai` · `clean` (Data/Art/Media.json): Matter's
+sancai lead glaze over a white earthenware body, after Shen et al., Archaeometry 61 (2019) 358–373 (PbO 39–64 wt.%;
+amber from iron, green from copper, the "white" a clear glaze over the white kaolin body). The glaze's amber ground stands
+for the three until the object carries its decoration: its scan is a buff stand-in. The four scans that exist only as
 prims of the retired wing's export are *works' evidence*; Studio imports them to `Evidence/Art` with provenance.
 
 **Building and garden works** (built by Form or Nature; Art adds only the caption, Hang `"built": "form"`):
@@ -893,10 +897,13 @@ chenghuai-yingbi (the screen wall's heart `chenghuai.screen-wall.heart`, 1.8 × 
 `chenghuai.entry-yard.yingbi`; care ceramic-and-glass, fired brick; plain tonight); chenghuai-shutiao (12 stones on
 `chenghuai.walk.stones`, 0.90 × 0.32, height 1.02, one entry per stone as `canvas` 1…12 read from the moon gate
 south); chenghuai-altar-table, chenghuai-scholars-desk, chenghuai-painting-table (the furniture of §3.10 at their Mount
-anchors). **石兄** chenghuai-shixiong: a Taihu rock 3.00 high, grown as built by Nature's Rock (seed 731) and set by Art
-on `chenghuai.garden.shixiong` in `chenghuai.shixiong`, framed by the moon gate on its axis (care stone-and-bronze).
-**The Lingbi rock** chenghuai-lingbi-rock (`chenghuai.lingbi-rock`, `accent.lingbi-rock`): 0.32 high, grown as built by
-Nature's Rock (seed 732) and set by Art on its phoebe stand at (11.35, −40.45, 1.28) on the painting table
+anchors). **石兄** chenghuai-shixiong: a Taihu rock 3.00 high, formed by Art as a Taihu rock is (`support` `stone`,
+`Data/Art/Stones.json`, after the as-built rock: tall, waisted, twin-peaked, pierced and pitted), its base within r 0.60,
+set on `chenghuai.garden.shixiong` in `accent.taihu-rock` (its medium's line in `Data/Art/Media.json`, as
+`chenghuai.shixiong`), framed by the moon gate on its axis (care stone-and-bronze).
+**The Lingbi rock** chenghuai-lingbi-rock (`chenghuai.lingbi-rock`, `accent.lingbi-rock`): 0.32 high, formed by Art as a
+Lingbi rock is (a compact small mountain, grooved and pitted, few holes through), its foot within its stand, set on the
+phoebe stand the stage draws (`linquan.table.rock-stand`, r 0.11 × 0.03) at (11.35, −40.45, 1.28) on the painting table
 (`chenghuai.linquan.table`); care stone-and-bronze. **No wall labels** ("a literati house names itself"): captions on look.
 
 ## 9. Sound

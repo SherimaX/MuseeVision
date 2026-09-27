@@ -1,0 +1,89 @@
+{
+  "schema": "musee.matter.shading.substance/1",
+  "key": "glaze.sancai",
+  "name": "Sancai lead glaze, amber (iron)",
+  "family": "accent",
+  "record": "Palette.json",
+  "master": "white",
+  "accentOf": "stone",
+  "dielectric": {
+    "diffuseAlbedo": {
+      "value": [
+        54.0,
+        25.0,
+        34.0
+      ],
+      "space": "CIELAB (D65, 2 deg)",
+      "unit": "CIELAB",
+      "grade": "unverified",
+      "source": "Palette.json: accent.earthenware-sancai ; The Metropolitan Museum of Art, 'Horse', Tang dynasty, late 7th to first half of the 8th century, earthenware with three-color (sancai) glaze and pigment, 1991.253.12 (public domain), its open-access photograph https://images.metmuseum.org/CRDImages/as/web-large/1991_253_12.jpg , read 2026-09-27 ; J. Y. Shen, J. Henderson, J. Evans, S. Chenery and F. Y. Zhao, 'A study of the glazing techniques and provenances of Tang sancai glazes using elemental and lead isotope analyses', Archaeometry 61, 2 (2019) 358-373, doi:10.1111/arcm.12436, https://nora.nerc.ac.uk/522694/1/Shen_et_al-2019-Archaeometry.pdf",
+      "note": "The amber lead glaze, coloured by iron (FeO 1.09 to 5.35 wt.% in Shen et al.'s brown glazes). Read as the mean sRGB of lit patches of the photograph (a 470 x 624 JPEG, taken as sRGB under D65; its white balance and exposure are the photographer's, uncalibrated), converted to CIELAB: the saddle's seat (51.7, 23.1, 30.0) and its flap (56.8, 26.6, 36.8), their mean rounded. Its sisters are glaze.sancai-green and glaze.sancai-clear."
+    },
+    "refractiveIndex": {
+      "value": 1.65,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Council Directive 69/493/EEC on crystal glass, Annex I (lead crystal: PbO at least 24 %, refractive index nD at least 1.545), https://eur-lex.europa.eu/legal-content/EN/ALL/?uri=celex:31969L0493 ; Wikipedia, 'Lead glass' (ordinary glass 1.5, lead brings it to 1.7 to 1.8; the first Chinese and Roman lead glazes 45-60 % PbO), https://en.wikipedia.org/wiki/Lead_glass",
+      "note": "A lead silicate glass: its index rises with its lead, from at least 1.545 at 24 % PbO (the directive's lead crystal) towards 1.7 to 1.8. Shen et al.'s sancai glazes carry 39.45 to 64.34 wt.% PbO (Table 1), so the index lies between; 1.65 is taken inside that bracket, not measured."
+    },
+    "porosity": {
+      "value": 0.0,
+      "unit": "1",
+      "grade": "record",
+      "source": "MuseeVision/Docs/Matter/Story.md, 'Glazed stoneware and fired clay' (after Kingery, Bowen and Uhlmann 1976)",
+      "note": "The glaze is a glass with no open pores, as the other glazes."
+    },
+    "wettingDepth": {
+      "value": 0.0,
+      "unit": "mm",
+      "grade": "derived",
+      "source": "MuseeVision/Docs/Matter/Story.md (a glaze has no open pores)",
+      "note": "",
+      "derivation": "With no open pores, water cannot enter, so the wetting depth is zero."
+    }
+  },
+  "structure": {
+    "grain": {
+      "value": 0.05,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: accent.earthenware-sancai (the glazes' first values)",
+      "note": "The finest structure the face shows."
+    },
+    "bed": {
+      "value": 50,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: accent.earthenware-sancai (the glazes' first values)",
+      "note": "The coarsest structure the face shows."
+    },
+    "bedAspect": {
+      "value": 1.0,
+      "unit": "1",
+      "grade": "derived",
+      "source": "An unbedded body",
+      "derivation": "unbedded"
+    },
+    "hurst": {
+      "value": 0.7,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Candela et al. 2012, Journal of Geophysical Research 117, B08409 (fault surfaces, 0.6 to 0.8; cited in Stone.ush)",
+      "note": "The middle of the range measured on rock surfaces, as the travertine's."
+    },
+    "toneSpread": {
+      "value": 0.1,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.earthenware-sancai (the glazes' first values)",
+      "note": "A first half-range of ln(albedo) across one face."
+    },
+    "roughnessSpread": {
+      "value": 0.05,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.earthenware-sancai (the glazes' first values)",
+      "note": "A first half-range of ln(roughness) across one face."
+    }
+  }
+}

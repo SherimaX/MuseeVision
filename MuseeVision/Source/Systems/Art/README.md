@@ -72,7 +72,13 @@ but where it turns more than the record's crease angle (lip, foot ring), in its 
 Ding ivory over porcelain; Jun, Guan, hare's fur and celadon over stoneware), standing at its `centre` on its Mount anchor
 and, where its plan says `stand`, on its carved phoebe stand (`ware.<id>.stand`), both sized by the record.
 
-Every object is named `<word>.<id>[.<index>]` (`canvas`, `glass`, `paper`, `plate`, `ware`, `cast`), its parts `<name>.<part>`.
+**Scholar's rocks.** `stone` (Chenghuai's 石兄 and its Lingbi rock) is formed as its kind of rock is
+(`Data/Art/Stones.json`, `Stone/StoneMesh.h`): a signed distance field of its kind's profile of ellipses swaying as it
+rises, cut flat at its foot and under its peaks, pierced by its holes, pitted and wrinkled, found by surface nets on a grid
+of the kind's cells up its height; its plan's height, its width as wide as the record's foot radius lets it be, in its
+medium's stone (`Data/Art/Media.json`), standing at its `centre` on its Mount anchor. A rock's carved stand is its stage's.
+
+Every object is named `<word>.<id>[.<index>]` (`canvas`, `glass`, `paper`, `plate`, `ware`, `cast`, `stone`), its parts `<name>.<part>`.
 **Panels, tapestry, scrolls and books.**
 - A panel (`panel`) hangs on its Wall anchor as a canvas does: its paint `paint.<id>` over `accent.oil-on-panel` on a
   board, the board on its cradle (members along the grain, slides across them), both in the wood its `wall` surface
