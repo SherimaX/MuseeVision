@@ -70,6 +70,11 @@
 			"LoadingPhase": "Default"
 		},
 		{
+			"Name": "MuseeArtMaking",
+			"Type": "Editor",
+			"LoadingPhase": "Default"
+		},
+		{
 			"Name": "MuseeVisitor",
 			"Type": "Runtime",
 			"LoadingPhase": "Default"
