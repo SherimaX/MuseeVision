@@ -8,6 +8,6 @@ public class MuseeVisionEditorTarget : TargetRules
 		Type = TargetType.Editor;
 		DefaultBuildSettings = BuildSettingsVersion.V7;
 		IncludeOrderVersion = EngineIncludeOrderVersion.Unreal5_8;
-		ExtraModuleNames.AddRange(new string[] { "MuseeSite", "MuseeStudio", "MuseeNympheas", "MuseeRotunda", "MuseeSalon", "MuseeClassicalHall", "MuseeHallOfLight", "MuseeAlbion", "MuseeChenghuai", "MuseeAtrium", "MuseeSphere" });
+		ExtraModuleNames.AddRange(new string[] { "MuseeSite", "MuseeStudio", "MuseeNympheas", "MuseeRotunda", "MuseeSalon", "MuseeClassicalHall", "MuseeHallOfLight", "MuseeAlbion", "MuseeChenghuai", "MuseeAtrium", "MuseeSphere", "MuseeCube" });
 	}
 }

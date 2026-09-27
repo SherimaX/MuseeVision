@@ -528,3 +528,10 @@ scale.
 - **No memory of the visit:** "Up to the Sphere" no longer waits for a visit to the Cube (the Atrium's ruling).
 - **Materials follow the Story:** dark-patinated bronze for the shaft's metal and hard-chromed steel rails (as built dark and
   brushed bronze); the geology named as the ground under Élan.
+- **Schedule corrections (ST-CUBE, to the stage contract):** Mechanisms.json's `channels` entries are keyed by `key`,
+  and the performance gives `seconds` (480) and `publishes` (`cube.performance.active`) in place of `length` and the two
+  channel steps that set and cleared it. The clamp is the contract's **0.3206** under Motion's linear follow (the sheet's
+  0.378 eased, s = 3o² − 2o³), and the performance requires `cube.up.closure` 0.3178 … 0.3235 (the sheet's 0.378 ± 0.002
+  eased). §2, §6 and C-2, C-3, C-5 keep the eased figures.
+- **Panel mounts:** each `cube.panels.*` Mount's x is the way its face looks into the room, as Light reads a mount (its
+  light leaves along x); the ceiling's and the floor's keep the stage's y.
