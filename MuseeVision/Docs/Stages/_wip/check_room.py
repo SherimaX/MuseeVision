@@ -156,6 +156,11 @@ def main(room):
                 errs.append(f"hang {w['work']}: needs along+height (or centre)")
             if len(w.get("size", [])) != 2:
                 errs.append(f"hang {w['work']}: size shape")
+    if "Hang.json" in data:
+        for w in data["Hang.json"].get("walls", []):
+            anchors_used.add(w.get("anchor"))
+            if "path" not in w:
+                errs.append(f"hang wall {w.get('anchor')}: no path")
     if "Planting.json" in data:
         P = data["Planting.json"]
         for b in P.get("beds", []):
@@ -171,9 +176,13 @@ def main(room):
                 errs.append(f"water {w.get('key')}: material not in palette")
     if "Mechanisms.json" in data:
         for m in data["Mechanisms.json"]["mechanisms"]:
-            for k in ("key", "joint", "body", "axis", "travel", "time", "profile", "control", "open", "close", "guard"):
+            for k in ("key", "joint", "body", "axis", "travel", "time", "profile", "guard"):
                 if k not in m:
                     errs.append(f"mechanism {m.get('key')}: lacks {k}")
+            if not (("control" in m and "open" in m and "close" in m) or isinstance(m.get("follows"), dict)):
+                errs.append(f"mechanism {m.get('key')}: needs control+open+close, or follows{{channel,in,out}}")
+            if isinstance(m.get("follows"), dict) and set(m["follows"]) < {"channel", "in", "out"}:
+                errs.append(f"mechanism {m.get('key')}: follows lacks channel/in/out")
             anchors_used.add(m.get("body"))
             anchors_used.add(m.get("control"))
     if "Lighting.json" in data:

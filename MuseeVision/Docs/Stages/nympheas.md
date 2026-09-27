@@ -64,12 +64,12 @@ All frames are in the stage frame with the pond Down. Anchors on `nympheas.basin
 | `nympheas.pond.lilies` | Bed | (0, 0, 0.380): the water's surface, inside the edge, clear of the shelves (\|x\| ≤ 3.12) | on `nympheas.basin` |
 | `nympheas.pond.shelf.east` | Bed | (+3.500, 0, 0.260): the east shelf, x +3.12…+3.90 | on `nympheas.basin` |
 | `nympheas.pond.shelf.west` | Bed | (−3.500, 0, 0.260): the west shelf | on `nympheas.basin` |
-| `nympheas.wall.willows` | Wall | origin on the inner face at the east door's north jamb (10.778, −1.500, 0.000); x = arc length along the inner face, north side first (towards (0, −7.5) and round), to s 55.597; y out of the wall into the room; z up from the floor | the four willows (§8) |
+| `nympheas.wall.willows` | Wall | origin on the inner face at the east door's north jamb (10.778, −1.500, 0.000); x = arc length along the inner face, north side first, to s 55.597 at the south jamb; path (Hang.json `walls`): ellipse a 11.000 × b 7.500, parametric θ from +x towards +y, from −11.537°, θ decreasing (clockwise false on the north-up plan); y out of the wall into the room; z up from the floor | the four willows (§8) |
 | `nympheas.bench.b1` … `b4` | Seat | seat top z 0.450, at each centreline's midpoint: B1 (−3.98, 2.99), B2 (3.98, 2.99), B3 (3.98, −2.99), B4 (−3.98, −2.99); facing out to the willows along the wall's normal: B1 (−0.53, 0.85), B2 (0.53, 0.85), B3 (0.53, −0.85), B4 (−0.53, −0.85); seat frames every 0.70 along each curve | the benches (§3.8) |
 | `nympheas.coping.seat` | Seat | the coping's seat ring, z 0.420 at d 0.25 in from its outer edge, frames every 0.80, facing out or in; none within 0.40 of the golden iris | on `nympheas.basin` |
 
 Luminaires mount at the points given in Lighting.json. The rim lengths carry `body: nympheas.basin`. **Channels:**
-`nympheas.pond.rim` (the rim's reveal, 0…1) and `nympheas.pond.height` (the pond's height ÷ 2.600, 0…1), both
+`nympheas.pond.rim` (the rim's reveal, 0…1) and `nympheas.pond.height` (the pond's height ÷ 2.600, 0…1; the lift `publishes` it and the rails follow it), both
 published by Motion.
 
 ## 3. Pieces by trade
@@ -282,7 +282,7 @@ rim's "halo", the rect lights standing in for the cloth.
 - **Housings:** four post sleeves Ø 0.230 × 1.00. **Channels:** `nympheas.pond.rim` (rim reveal 0–1: 0 → 1 over 1.00 s while Waking, as built, PondLift.cpp:209; 0 on landing Down) and `nympheas.pond.height` (0–1). Mechanisms.json: open = rim → 1 over 1.0 s, then move; close = move, then rim → 0
   and FMuseeActuation (the pump's voice).
 
-**M-2 `nympheas.guard-rails`** (body `nympheas.guard-rails`, coupled with M-1 through `nympheas.pond.height`): the three rails (§3.6), prismatic +z, travel 0 → 1.000; rail height =
+**M-2 `nympheas.guard-rails`** (body `nympheas.guard-rails`; follows `nympheas.pond.height`, in [0.0385, 0.4231] → out [0, 1.0], linear, clamped): the three rails (§3.6), prismatic +z, travel 0 → 1.000; rail height =
 clamp(h − 0.10, 0, 1.00) for pond height h. Interlock: the pond may not enter its last 0.10 of descent unless the rails
 are housed.
 
