@@ -77,6 +77,9 @@ namespace Musee::ArtMaking
 	/** An open book's sides: its verso on the reader's left, its recto on the right. */
 	inline constexpr int32 BookSides = 2;
 
+	/** A plan's frame when the work hangs unframed. */
+	inline const FName NoFrame(TEXT("none"));
+
 	/** A finding of Art's about a stage's hanging plan. */
 	[[nodiscard]] FMuseeFinding ArtFinding(const FMuseeStageContext& Stage, const FString& Summary);
 

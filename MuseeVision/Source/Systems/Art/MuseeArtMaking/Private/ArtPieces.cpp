@@ -18,7 +18,6 @@ namespace Musee::ArtMaking
 	{
 		const FName CanvasSurface(TEXT("canvas"));
 		const FName LinenSurface(TEXT("canvas.linen"));
-		const FName NoFrame(TEXT("none"));
 
 		/**
 		 * The linen a canvas is woven of, bare where it turns round the stretcher: the palette's linen, stretched on the

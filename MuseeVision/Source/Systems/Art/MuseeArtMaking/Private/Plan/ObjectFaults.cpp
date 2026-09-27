@@ -13,7 +13,6 @@ namespace Musee::ArtMaking
 {
 	namespace
 	{
-		const FName NoFrame(TEXT("none"));
 
 		/** A millimetre is a thousandth of a metre (the glass records give a pane's thickness in mm). */
 		constexpr double MetersPerMillimeter = 0.001;
