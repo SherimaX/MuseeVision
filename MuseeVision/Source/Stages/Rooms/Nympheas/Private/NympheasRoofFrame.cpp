@@ -117,7 +117,7 @@ namespace Musee::Nympheas
 			const double Flange = 0.5 * Plan::RibFlange;
 			const double Web = 0.5 * Plan::RibMetal;
 			const double Metal = Plan::RibMetal;
-			return Polygon({FVector2D(0.0, -Flange), FVector2D(Metal, -Flange), FVector2D(Metal, -Web), FVector2D(Plan::RibDepth, -Web),
+			return FFormProfile::Polygon({FVector2D(0.0, -Flange), FVector2D(Metal, -Flange), FVector2D(Metal, -Web), FVector2D(Plan::RibDepth, -Web),
 				FVector2D(Plan::RibDepth, Web), FVector2D(Metal, Web), FVector2D(Metal, Flange), FVector2D(0.0, Flange)});
 		}
 

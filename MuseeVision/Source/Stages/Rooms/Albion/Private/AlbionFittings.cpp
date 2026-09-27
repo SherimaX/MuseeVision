@@ -192,7 +192,7 @@ namespace Musee::Albion
 			const double KX = LX - B;
 			const double KY = LY - B;
 			FFormExtrusion Baize;
-			Baize.Outline = Polygon({C + FVector2D(-KX, -BY), C + FVector2D(KX, -BY), C + FVector2D(KX, -KY), C + FVector2D(BX, -KY), C + FVector2D(BX, KY),
+			Baize.Outline = FFormProfile::Polygon({C + FVector2D(-KX, -BY), C + FVector2D(KX, -BY), C + FVector2D(KX, -KY), C + FVector2D(BX, -KY), C + FVector2D(BX, KY),
 				C + FVector2D(KX, KY), C + FVector2D(KX, BY), C + FVector2D(-KX, BY), C + FVector2D(-KX, KY), C + FVector2D(-BX, KY), C + FVector2D(-BX, -KY),
 				C + FVector2D(-KX, -KY)});
 			Baize.DepthMeters = Plan::BaizeTop - Plan::DeckTop;
@@ -216,7 +216,7 @@ namespace Musee::Albion
 			const double L = Plan::FootHalfLength;
 			const double W = Plan::FootHalfWidth;
 			FFormExtrusion Cross;
-			Cross.Outline = Polygon({C + FVector2D(-L, -W), C + FVector2D(-W, -W), C + FVector2D(-W, -L), C + FVector2D(W, -L), C + FVector2D(W, -W),
+			Cross.Outline = FFormProfile::Polygon({C + FVector2D(-L, -W), C + FVector2D(-W, -W), C + FVector2D(-W, -L), C + FVector2D(W, -L), C + FVector2D(W, -W),
 				C + FVector2D(L, -W), C + FVector2D(L, W), C + FVector2D(W, W), C + FVector2D(W, L), C + FVector2D(-W, L), C + FVector2D(-W, W), C + FVector2D(-L, W)});
 			Cross.DepthMeters = Plan::FootHigh;
 			Out.Add(Drawn(TEXT("lectern.feet"), TEXT("lectern"), MoveTemp(Cross), Solid, FMuseeFrame(FVector(0.0, 0.0, Plan::PadMeters))));

@@ -329,7 +329,7 @@ namespace Musee::Chenghuai
 				const FVector Y = FVector::CrossProduct(-Up, X);
 				auto Local = [&](const FVector& Point) { return FVector2D(FVector::DotProduct(Point - Apex, X), FVector::DotProduct(Point - Apex, Y)); };
 				FFormExtrusion Slab;
-				Slab.Outline = Polygon({FVector2D::ZeroVector, Local(B), Local(D)});
+				Slab.Outline = FFormProfile::Polygon({FVector2D::ZeroVector, Local(B), Local(D)});
 				Slab.DepthMeters = Plan::HexSoffit;
 				Draw(Out, FString::Printf(TEXT("pavilion.roof.%d"), K + 1), TEXT("roof.bed"), MoveTemp(Slab), EHit::None, FrameOfAxes(Apex, X, Y));
 				// The hip (垂脊) up this face's first edge, rising at the corner; and the corner beam (角梁) under it.

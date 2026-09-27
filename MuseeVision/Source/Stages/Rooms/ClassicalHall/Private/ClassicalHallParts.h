@@ -2,6 +2,7 @@
 
 #include "ClassicalHallPlan.h"
 #include "CoreMinimal.h"
+#include "FormAxes.h"
 #include "FormDrawing.h"
 #include "MuseeCollision.h"
 #include "MuseeKey.h"
@@ -16,6 +17,9 @@ struct FSiteDescription;
  */
 namespace Musee::ClassicalHall
 {
+	/** Frames set out by their axes are Form's (FormAxes.h). */
+	using Musee::Form::FrameOfAxes;
+
 	/** A key under the stage: classical-hall.<Local>. */
 	FMuseeKey Key(const FString& Local);
 
@@ -41,10 +45,6 @@ namespace Musee::ClassicalHall
 	inline const TCHAR* const ShellPrefix = TEXT("shell.");
 
 	// ---- frames -------------------------------------------------------------------------------------------------------
-
-	/** The stage's frame whose x and y are the given axes (and z their cross product x × y), at an origin. */
-	FMuseeFrame FrameOfAxes(const FVector& Origin, const FVector& X, const FVector& Y);
-
 	/** A frame on the plan at a point, turned about z so its x points along the plan angle φ (degrees from +x towards +y). */
 	FMuseeFrame Turned(const FVector& Origin, double Deg);
 
@@ -55,10 +55,6 @@ namespace Musee::ClassicalHall
 	FVector2D Polar(double Radius, double Deg);
 
 	// ---- profiles -----------------------------------------------------------------------------------------------------
-
-	/** A closed polygon, crisp at each corner. */
-	FFormProfile Polygon(TConstArrayView<FVector2D> Points);
-
 	/** A closed circle, run clockwise on the plan (so a sweep along it lies inside). */
 	FFormProfile Circle(const FVector2D& Centre, double Radius);
 
@@ -106,7 +102,6 @@ namespace Musee::ClassicalHall
 	FFormProfile Written(TConstArrayView<Plan::FStroke> Strokes, const FVector2D& Offset = FVector2D::ZeroVector);
 
 	// ---- solids -------------------------------------------------------------------------------------------------------
-
 	/** An extrusion of an outline (and its holes) pushed Depth along its frame's z. */
 	FFormExtrusion Prism(FFormProfile Outline, double Depth, TArray<FFormProfile> Holes = {});
 
@@ -119,7 +114,6 @@ namespace Musee::ClassicalHall
 		double Top, const Musee::Collision::FClass* Collision);
 
 	// ---- the gallery's barrel -----------------------------------------------------------------------------------------
-
 	/**
 	 * The barrel's section, (x, z): a point s along its face (from the crown, + east) at radius Rho about its axis
 	 * (x 0, z 1.3216). A frame whose x is the stage's x and whose y is up draws in this section, its z pointing north.
@@ -133,7 +127,6 @@ namespace Musee::ClassicalHall
 	FMuseeFrame BarrelFrame(double Y);
 
 	// ---- the rosettes -------------------------------------------------------------------------------------------------
-
 	/**
 	 * How far a rosette of a radius stands above the coffer's back at a distance from its centre and an angle round it:
 	 * the turned section of §3.3 at the rosette's size, its eight petals swelling the outer rows; zero off the rosette.
@@ -145,7 +138,6 @@ namespace Musee::ClassicalHall
 		double Radius);
 
 	// ---- the niches ---------------------------------------------------------------------------------------------------
-
 	/**
 	 * A niche, set out on its mouth plane: the mouth's centre on the floor, the direction into the wall, the half-round's
 	 * radius and its springing. The gallery's stand on the wall's plane x ±3.00, the tribune's on the plane tangent to
@@ -179,7 +171,6 @@ namespace Musee::ClassicalHall
 	const FNiche* NicheOf(const TCHAR* AnchorLocal);
 
 	// ---- the trades ---------------------------------------------------------------------------------------------------
-
 	void DrawWalls(TArray<FFormDrawing>& Out);
 	void DrawNiches(TArray<FFormDrawing>& Out);
 	void DrawFloors(TArray<FFormDrawing>& Out);

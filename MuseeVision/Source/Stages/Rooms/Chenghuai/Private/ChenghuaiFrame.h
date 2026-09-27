@@ -1,6 +1,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "FormAxes.h"
 #include "MuseeFrame.h"
 
 /**
@@ -12,6 +13,9 @@
  */
 namespace Musee::Chenghuai
 {
+	/** Frames set out by their axes are Form's (FormAxes.h). */
+	using Musee::Form::FrameOfAxes;
+
 	struct FBuildingFrame
 	{
 		/** The frame's origin on the plan, and its u and v directions (unit, square), in the stage's (x east, y south). */
@@ -51,7 +55,4 @@ namespace Musee::Chenghuai
 		/** Where a u given in this frame lies along a drawing's +z (AlongU's z is Hand u). */
 		double DepthOfU(double AtU) const { return Hand() * AtU; }
 	};
-
-	/** The stage's frame whose x and y are two given directions (square; z their cross product), at an origin. */
-	FMuseeFrame FrameOfAxes(const FVector& OriginMeters, const FVector& X, const FVector& Y);
 }

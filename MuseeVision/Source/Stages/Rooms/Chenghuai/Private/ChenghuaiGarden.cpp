@@ -208,7 +208,7 @@ namespace Musee::Chenghuai
 			auto Sweep = [&](const FString& Part, const TCHAR* Surface, double A0, double A1, double B0, double B1)
 			{
 				FFormSweep Shape;
-				Shape.Section = Polygon(Rectangle(A0, B0, A1, B1));
+				Shape.Section = FFormProfile::Polygon(Rectangle(A0, B0, A1, B1));
 				Shape.Path = Line;
 				Shape.ElevationMeters = Plan::GardenGround;
 				Draw(Out, Name + Part, Surface, MoveTemp(Shape), EHit::Walkable);

@@ -37,11 +37,6 @@ namespace Musee::Sphere
 		return BearingDeg - 90.0;
 	}
 
-	FMuseeFrame FrameOfAxes(const FVector& Origin, const FVector& X, const FVector& Y)
-	{
-		return FMuseeFrame(Origin, FRotationMatrix::MakeFromXY(X, Y).ToQuat());
-	}
-
 	FMuseeFrame Raised(double Z)
 	{
 		return FMuseeFrame(FVector(0.0, 0.0, Z));

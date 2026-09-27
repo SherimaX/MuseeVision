@@ -11,7 +11,7 @@
  * stepped in another, from either face), its arrises eased round or chamfered; and the public drawing's corner-only
  * polygon and frame of axes. Every one is one closed solid holding the volume the mason would cut.
  */
-namespace Musee::Form::Tests
+namespace Musee::Form::Tests::WorkedSlabs
 {
 	namespace
 	{

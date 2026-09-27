@@ -55,7 +55,7 @@ namespace Musee::Chenghuai
 				const TArray<FVector2D> Kept = Corners(Loop);
 				if (Kept.Num() >= 3 && FMath::Abs(SignedArea(Kept)) > SameCorner * SameCorner)
 				{
-					Out.Add(Polygon(Kept));
+					Out.Add(FFormProfile::Polygon(Kept));
 				}
 			}
 			return Out;
@@ -64,7 +64,7 @@ namespace Musee::Chenghuai
 		FFormExtrusion Extrusion(TConstArrayView<FVector2D> Outline, TConstArrayView<TArray<FVector2D>> Holes, double Depth)
 		{
 			FFormExtrusion Shape;
-			Shape.Outline = Polygon(Corners(Outline));
+			Shape.Outline = FFormProfile::Polygon(Corners(Outline));
 			Shape.Holes = Profiles(Holes);
 			Shape.DepthMeters = Depth;
 			return Shape;
@@ -98,11 +98,6 @@ namespace Musee::Chenghuai
 		}
 		Profile.Closed = bClosed;
 		return Profile;
-	}
-
-	FFormProfile Polygon(TConstArrayView<FVector2D> Points)
-	{
-		return FFormProfile::Polyline(Points, true);
 	}
 
 	FFormProfile SmoothPath(TConstArrayView<FVector2D> Points)

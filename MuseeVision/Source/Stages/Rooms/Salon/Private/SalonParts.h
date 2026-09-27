@@ -1,6 +1,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "FormAxes.h"
 #include "FormDrawing.h"
 #include "MuseeCollision.h"
 #include "MuseeKey.h"
@@ -16,6 +17,9 @@ struct FSiteDescription;
  */
 namespace Musee::Salon
 {
+	/** Frames set out by their axes are Form's (FormAxes.h). */
+	using Musee::Form::FrameOfAxes;
+
 	/** A key under the stage: salon.<Local>. */
 	FMuseeKey Key(const TCHAR* Local);
 
@@ -38,17 +42,11 @@ namespace Musee::Salon
 		return Drawing;
 	}
 
-	/** The stage's frame whose x and y are the given axes (and z their cross product), at an origin. */
-	FMuseeFrame FrameOfAxes(const FVector& Origin, const FVector& X, const FVector& Y);
-
 	/**
 	 * The frame of a face whose normal N looks into the room: z along N, y up, x = up × N (along the face, to the left
 	 * as the room sees it). A lathe in it turns from x over the top; an outline in it is drawn on the face.
 	 */
 	FMuseeFrame FaceFrame(const FVector& Origin, const FVector& N);
-
-	/** A closed polygon through points, crisp at each. */
-	FFormProfile Polygon(TConstArrayView<FVector2D> Points);
 
 	/** A section of the plan's steps, closed, moved by an offset in (A, B). */
 	FFormProfile Section(TConstArrayView<Plan::FStep> Steps, const FVector2D& Offset = FVector2D::ZeroVector);

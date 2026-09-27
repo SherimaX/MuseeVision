@@ -1,6 +1,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "FormAxes.h"
 #include "FormProfile.h"
 #include "MuseeFrame.h"
 
@@ -12,6 +13,9 @@
  */
 namespace Musee::Nympheas
 {
+	/** Frames set out by their axes are Form's (FormAxes.h). */
+	using Musee::Form::FrameOfAxes;
+
 	class FOvalCurve
 	{
 	public:
@@ -56,12 +60,6 @@ namespace Musee::Nympheas
 		/** The ellipse's arc length at even steps of t round one turn. */
 		TArray<double> ArcTable;
 	};
-
-	/** The stage's frame whose x and y are the given axes (and z their cross product), at an origin. */
-	FMuseeFrame FrameOfAxes(const FVector& OriginMeters, const FVector& X, const FVector& Y);
-
-	/** A closed polygon of points, as a profile with a crisp corner at each. */
-	FFormProfile Polygon(TConstArrayView<FVector2D> Points);
 
 	/** An open path through points, smooth at every joint: a curve given by its stations. */
 	FFormProfile SmoothPath(TConstArrayView<FVector2D> Points);

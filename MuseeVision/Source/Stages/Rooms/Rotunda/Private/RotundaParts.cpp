@@ -61,11 +61,6 @@ namespace Musee::Rotunda
 		return FMuseeFrame(FVector(0.0, 0.0, Z));
 	}
 
-	FMuseeFrame FrameOfAxes(const FVector& Origin, const FVector& X, const FVector& Y)
-	{
-		return FMuseeFrame(Origin, FRotationMatrix::MakeFromXY(X, Y).ToQuat());
-	}
-
 	FFormLathe Ring(double Inner, double Outer, double Bottom, double Top, double FromDeg, double ToDeg)
 	{
 		FFormLathe Shape;

@@ -54,7 +54,7 @@ namespace Musee::ClassicalHall
 			const double Half = 0.5 * Carrier.Width - C;
 			const FVector2D Section[] = {{Front, -Plan::Sink}, {0.0, -Plan::Sink}, {0.0, Plan::DadoTop}, {Back, Plan::DadoTop}, {Back, Carrier.Top}, {Front, Carrier.Top}};
 			const FMuseeFrame Across = FrameOfAxes(Niche.Origin + Niche.Lateral() * Half, Niche.In, FVector::UpVector);
-			Out.Add(Drawn(Name, TEXT("plinth"), Prism(Polygon(Section), 2.0 * Half), Solid, Across));
+			Out.Add(Drawn(Name, TEXT("plinth"), Prism(FFormProfile::Polygon(Section), 2.0 * Half), Solid, Across));
 			Out.Add(Ring(Name + TEXT(".cap"), TEXT("plinth"), Niche.PlanFrame(), Written(Plan::NicheCarrierCap), RectOutward(Front, -Half, Back, Half), Carrier.Top));
 		}
 

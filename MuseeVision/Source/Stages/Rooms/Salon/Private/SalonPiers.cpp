@@ -106,7 +106,7 @@ namespace Musee::Salon
 			const double X = Plan::PierX[Index];
 			const double Thick = 2.0 * Plan::PierHalf;
 			FFormLathe Ring;
-			Ring.Section = Polygon({{Plan::Extrados, 0.0}, {Plan::SpandrelOuter, 0.0}, {Plan::SpandrelOuter, Thick}, {Plan::Extrados, Thick}});
+			Ring.Section = FFormProfile::Polygon({{Plan::Extrados, 0.0}, {Plan::SpandrelOuter, 0.0}, {Plan::SpandrelOuter, Thick}, {Plan::Extrados, Thick}});
 			Ring.FromDegrees = 0.0;
 			Ring.ToDegrees = 180.0;
 			Out.Add(Drawn(FString::Printf(TEXT("arch.%d.spandrel"), Index + 1), TEXT("arch.spandrel"), MoveTemp(Ring), Solid,

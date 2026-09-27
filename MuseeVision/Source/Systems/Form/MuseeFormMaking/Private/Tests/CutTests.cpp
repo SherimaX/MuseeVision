@@ -8,7 +8,7 @@
  * Cuts and repeats: a block sawn on a slant, a moulding's sink trimmed to the face it meets, a turned ring cut across by
  * a plane that leaves two cut faces; and identical members, made once and set at their frames.
  */
-namespace Musee::Form::Tests
+namespace Musee::Form::Tests::Cuts
 {
 	namespace
 	{

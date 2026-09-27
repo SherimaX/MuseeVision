@@ -9,7 +9,7 @@
  * turned on their module, V-jointed units cut round a hole, and units the stock can't give. Every unit is a closed solid
  * of its own; the filling holds what the units leave.
  */
-namespace Musee::Form::Tests
+namespace Musee::Form::Tests::Laying
 {
 	namespace
 	{

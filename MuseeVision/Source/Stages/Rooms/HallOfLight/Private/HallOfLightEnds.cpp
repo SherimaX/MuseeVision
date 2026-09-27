@@ -127,7 +127,7 @@ namespace Musee::HallOfLight
 	FFormExtrusion SectionPushed(TConstArrayView<FVector2D> Section, double X0, double X1)
 	{
 		FFormExtrusion Shape;
-		Shape.Outline = Polygon(Section);
+		Shape.Outline = FFormProfile::Polygon(Section);
 		Shape.DepthMeters = X1 - X0;
 		return Shape;
 	}

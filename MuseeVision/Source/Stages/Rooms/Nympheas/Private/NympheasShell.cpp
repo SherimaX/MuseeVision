@@ -152,7 +152,7 @@ namespace Musee::Nympheas
 			const double Leg = Plan::RimAngleLeg;
 			const double Thick = Plan::RimAngleThickness;
 			FFormSweep Ring;
-			Ring.Section = Polygon({FVector2D(0.0, 0.0), FVector2D(Leg, 0.0), FVector2D(Leg, Thick), FVector2D(Thick, Thick),
+			Ring.Section = FFormProfile::Polygon({FVector2D(0.0, 0.0), FVector2D(Leg, 0.0), FVector2D(Leg, Thick), FVector2D(Thick, Thick),
 				FVector2D(Thick, Leg), FVector2D(0.0, Leg)});
 			Ring.Path = FFormProfile::Ellipse(FVector2D::ZeroVector, Plan::RimA, Plan::RimB, 180.0, true);
 			Ring.ElevationMeters = Plan::RimZ;
@@ -168,7 +168,7 @@ namespace Musee::Nympheas
 			TArray<FVector2D> Outer = Oval().Stations(Plan::WallMeters, 0.0, 2.0 * UE_DOUBLE_PI, Plan::OvalStations);
 			Outer.Pop();
 			FFormCeiling Roof;
-			Roof.Outline = Polygon(Outer);
+			Roof.Outline = FFormProfile::Polygon(Outer);
 			Roof.Opening = FFormProfile::Ellipse(FVector2D::ZeroVector, Plan::RimA, Plan::RimB, 0.0, true);
 			Roof.ThicknessMeters = Plan::RingTop - Plan::RingSoffit;
 			Out.Add(Drawn(Pieces::RoofRing, TEXT("exterior.roof"), MoveTemp(Roof), Solid, FMuseeFrame(FVector(0.0, 0.0, Plan::RingSoffit))));

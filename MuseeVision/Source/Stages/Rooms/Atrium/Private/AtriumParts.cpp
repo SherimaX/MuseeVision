@@ -112,11 +112,6 @@ namespace Musee::Atrium
 		return FMuseeFrame(FVector(0.0, 0.0, Height), FQuat(FVector::UpVector, FMath::DegreesToRadians(PlanAngle(Bearing))));
 	}
 
-	FMuseeFrame FrameOfAxes(const FVector& Origin, const FVector& X, const FVector& Y)
-	{
-		return FMuseeFrame(Origin, FRotationMatrix::MakeFromXY(X, Y).ToQuat());
-	}
-
 	FFormProfile Sector(double R0, double R1, double FromBearing, double ToBearing, double HalfJoint)
 	{
 		const double To = ToBearing <= FromBearing ? ToBearing + 360.0 : ToBearing;

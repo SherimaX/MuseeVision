@@ -29,7 +29,7 @@ namespace Musee::Salon
 				// A strip on the slope between two offsets from the glass's underside, from the kerb's edge to the ridge's plane.
 				const FVector2D Foot(Side * W, Plan::KerbTop);
 				const FVector2D Normal(Side * Up.X, Up.Y);
-				return Polygon({Foot + Normal * Below, Foot + Normal * Above, FVector2D(0.0, Ridge + Above / Up.Y), FVector2D(0.0, Ridge + Below / Up.Y)});
+				return FFormProfile::Polygon({Foot + Normal * Below, Foot + Normal * Above, FVector2D(0.0, Ridge + Above / Up.Y), FVector2D(0.0, Ridge + Below / Up.Y)});
 			};
 			const double West = L.Min.X - T;
 			const double Length = L.Max.X - L.Min.X + 2.0 * T;
@@ -48,7 +48,7 @@ namespace Musee::Salon
 						FaceFrame(FVector(X, 0.0, 0.0), FMuseeFrame::East()), Slope(Side, T, T + Plan::CapBarProud), {}, Plan::CapBarWidth, Solid));
 				}
 			}
-			const FFormProfile Gable = Polygon({{-W, Plan::KerbTop}, {W, Plan::KerbTop}, {0.0, Ridge}});
+			const FFormProfile Gable = FFormProfile::Polygon({{-W, Plan::KerbTop}, {W, Plan::KerbTop}, {0.0, Ridge}});
 			for (const bool bWest : {true, false})
 			{
 				FFormDrawing Glass = FaceSlab(Name + (bWest ? TEXT(".gable.west") : TEXT(".gable.east")), TEXT("lantern.outer.glass"),

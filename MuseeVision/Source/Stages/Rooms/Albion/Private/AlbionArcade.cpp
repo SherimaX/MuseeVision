@@ -93,7 +93,7 @@ namespace Musee::Albion
 				const double X = bWest ? -Plan::ArcadeX : Plan::ArcadeX;
 				const FString Name = bWest ? TEXT("girder.west") : TEXT("girder.east");
 				FFormExtrusion Shape;
-				Shape.Outline = Polygon({FVector2D(X - Bottom, Low), FVector2D(X + Bottom, Low), FVector2D(X + Bottom, Low + F), FVector2D(X + WebOut, Low + F),
+				Shape.Outline = FFormProfile::Polygon({FVector2D(X - Bottom, Low), FVector2D(X + Bottom, Low), FVector2D(X + Bottom, Low + F), FVector2D(X + WebOut, Low + F),
 					FVector2D(X + WebOut, High - F), FVector2D(X + Top, High - F), FVector2D(X + Top, High), FVector2D(X - Top, High), FVector2D(X - Top, High - F),
 					FVector2D(X - WebOut, High - F), FVector2D(X - WebOut, Low + F), FVector2D(X - Bottom, Low + F)});
 				Shape.Holes.Add(FFormProfile::Rectangle(FVector2D(X - WebIn, Low + F), FVector2D(X + WebIn, High - F)));

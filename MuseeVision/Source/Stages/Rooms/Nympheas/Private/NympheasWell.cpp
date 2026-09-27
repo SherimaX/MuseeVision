@@ -78,7 +78,7 @@ namespace Musee::Nympheas
 			const TArray<FVector2D> Landing = {FVector2D(Plan::OpeningWestX, -Wall), FVector2D(Plan::TopRiserX, -Wall), FVector2D(Plan::TopRiserX, -Face),
 				FVector2D(TopTread, -Face), FVector2D(TopTread, Face), FVector2D(Plan::TopRiserX, Face), FVector2D(Plan::TopRiserX, Wall),
 				FVector2D(Plan::OpeningWestX, Wall)};
-			Out.Add(Drawn(Pieces::TopLanding, TEXT("stair.tread"), Slab(Polygon(Landing), {}, Plan::StringCapZ, 0.0), Walkable,
+			Out.Add(Drawn(Pieces::TopLanding, TEXT("stair.tread"), Slab(FFormProfile::Polygon(Landing), {}, Plan::StringCapZ, 0.0), Walkable,
 				FMuseeFrame(FVector(0.0, 0.0, Plan::StringCapZ))));
 
 			// The bottom landing, from where the flight's soffit meets it, through the head wall's door to the port face.
@@ -105,7 +105,7 @@ namespace Musee::Nympheas
 			const double Thick = Plan::ShaftHalf - Plan::StringFace;
 			for (const bool bNorth : {true, false})
 			{
-				FFormExtrusion String = Slab(Polygon(Outline), {}, 0.0, Thick);
+				FFormExtrusion String = Slab(FFormProfile::Polygon(Outline), {}, 0.0, Thick);
 				// The section frame's z faces north: the north string is pushed from its face into the wall, the south from the wall to its face.
 				const double From = bNorth ? -Plan::StringFace : Plan::ShaftHalf;
 				Out.Add(Drawn(bNorth ? TEXT("stair.string.north") : TEXT("stair.string.south"), TEXT("stair.string"), MoveTemp(String), Solid, Section(From)));

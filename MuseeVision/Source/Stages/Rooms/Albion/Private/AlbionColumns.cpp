@@ -134,7 +134,7 @@ namespace Musee::Albion
 			const FVector Foot(C.At.X, C.At.Y, 0.0);
 
 			FFormExtrusion Plinth;
-			Plinth.Outline = Polygon(PlinthPlan(C));
+			Plinth.Outline = FFormProfile::Polygon(PlinthPlan(C));
 			Plinth.DepthMeters = Plan::PlinthTop;
 			Out.Add(Drawn(C.Name + TEXT(".plinth"), TEXT("dressing"), MoveTemp(Plinth), Solid, FMuseeFrame(Foot)));
 			Out.Add(Lathe(C.Name + TEXT(".base"), TEXT("dressing"), Foot, Turn(Turned(Plan::BasePoints)), Solid, From, To));

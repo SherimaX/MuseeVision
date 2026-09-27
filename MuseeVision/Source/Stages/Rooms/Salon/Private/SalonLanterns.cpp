@@ -71,7 +71,7 @@ namespace Musee::Salon
 			const double Z0 = Plan::ScrimFrameBottom;
 			const double Z1 = Plan::ScrimFrameTop;
 			FFormSweep Angle;
-			Angle.Section = Polygon({{0.0, Z0}, {Leg, Z0}, {Leg, Z0 + Thick}, {Thick, Z0 + Thick}, {Thick, Z1}, {0.0, Z1}});
+			Angle.Section = FFormProfile::Polygon({{0.0, Z0}, {Leg, Z0}, {Leg, Z0 + Thick}, {Thick, Z0 + Thick}, {Thick, Z1}, {0.0, Z1}});
 			Angle.Path = FFormProfile::Polyline({L.Min, FVector2D(L.Max.X, L.Min.Y), L.Max, FVector2D(L.Min.X, L.Max.Y)}, true);
 			Out.Add(Drawn(Name + TEXT(".scrim.frame"), TEXT("lantern.grid"), MoveTemp(Angle), nullptr));
 		}

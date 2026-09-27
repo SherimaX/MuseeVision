@@ -9,7 +9,7 @@
  * lathes (an abacus, a half abacus against its wall, an octagonal die). Each is one closed solid holding the volume of
  * the solid the trade would cut.
  */
-namespace Musee::Form::Tests
+namespace Musee::Form::Tests::Members
 {
 	namespace
 	{

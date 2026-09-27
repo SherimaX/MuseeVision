@@ -1,6 +1,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "FormAxes.h"
 #include "FormDrawing.h"
 #include "MuseeCollision.h"
 #include "MuseeKey.h"
@@ -15,6 +16,9 @@ struct FSiteDescription;
  */
 namespace Musee::HallOfLight
 {
+	/** Frames set out by their axes are Form's (FormAxes.h). */
+	using Musee::Form::FrameOfAxes;
+
 	/** A key under the stage: hall-of-light.<Local>. */
 	[[nodiscard]] FMuseeKey Key(const FString& Local);
 
@@ -31,12 +35,6 @@ namespace Musee::HallOfLight
 		Drawing.Frame = Frame;
 		return Drawing;
 	}
-
-	/** The stage's frame whose x and y are the given axes (and z their cross product), at an origin. */
-	[[nodiscard]] FMuseeFrame FrameOfAxes(const FVector& OriginMeters, const FVector& X, const FVector& Y);
-
-	/** A closed polygon of points, as a profile with a crisp corner at each. */
-	[[nodiscard]] FFormProfile Polygon(TConstArrayView<FVector2D> Points);
 
 	/** The glass walls: -1 the north wall, +1 the south. */
 	inline constexpr int32 Sides[] = {-1, 1};

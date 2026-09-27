@@ -2,6 +2,7 @@
 
 #include "AtriumPlan.h"
 #include "CoreMinimal.h"
+#include "FormAxes.h"
 #include "FormDrawing.h"
 #include "MuseeCollision.h"
 #include "MuseeKey.h"
@@ -16,6 +17,9 @@ struct FSiteDescription;
  */
 namespace Musee::Atrium
 {
+	/** Frames set out by their axes are Form's (FormAxes.h). */
+	using Musee::Form::FrameOfAxes;
+
 	/** A key under the stage: atrium.<Local>. */
 	FMuseeKey Key(const TCHAR* Local);
 
@@ -63,9 +67,6 @@ namespace Musee::Atrium
 
 	/** The frame on the axis at a height, turned so its x points out at a bearing and its y along the circle (z up). */
 	FMuseeFrame OnBearing(double Bearing, double Height = 0.0);
-
-	/** A frame from two axes: x as given, y the given direction made square to it, z = x × y. */
-	FMuseeFrame FrameOfAxes(const FVector& Origin, const FVector& X, const FVector& Y);
 
 	/**
 	 * The outline of an annular sector between two bearings (clockwise) and two radii, its radial sides moved in by

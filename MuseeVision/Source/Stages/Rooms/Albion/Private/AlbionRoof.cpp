@@ -54,7 +54,7 @@ namespace Musee::Albion
 				Outline.Add(Meet(Foot, -Outward[Pane], Stations[Pane] + Outward[Pane - 1] * T, Directions[Pane - 1]));
 			}
 			Outline.Add(Stations[0] + Outward[0] * T);
-			return Polygon(Outline);
+			return FFormProfile::Polygon(Outline);
 		}
 
 		void VaultPanes(TArray<FFormDrawing>& Out)

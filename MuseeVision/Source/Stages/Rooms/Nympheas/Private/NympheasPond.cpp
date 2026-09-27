@@ -112,7 +112,7 @@ namespace Musee::Nympheas
 		{
 			TArray<FVector2D> Toe = Pond().Stations(Plan::ToeD, 0.0, Turn, Plan::OvalStations);
 			Toe.Pop();
-			OnBasin(Out.Add_GetRef(Drawn(TEXT("pond.tray"), TEXT("pond.tray"), Slab(Polygon(Toe), {}, 0.0, Plan::TrayMeters), Solid)));
+			OnBasin(Out.Add_GetRef(Drawn(TEXT("pond.tray"), TEXT("pond.tray"), Slab(FFormProfile::Polygon(Toe), {}, 0.0, Plan::TrayMeters), Solid)));
 
 			const double A = Plan::PondA + Plan::LiningD;
 			const double B = Plan::PondB + Plan::LiningD;
