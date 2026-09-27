@@ -15,6 +15,12 @@
       "b": "salon.west",
       "passageMeters": 0.0,
       "note": "The oval passage: the Salon's bay 5 far wall meets the oval's passage block."
+    },
+    {
+      "a": "rotunda.north",
+      "b": "chenghuai.south",
+      "passageMeters": 0.0,
+      "note": "Chenghuai's porch on the Rotunda's north door (chenghuai.md section 2): the porch is open, its end on the drum's face, so the passage is nil; museum = Chenghuai's frame + (0, -17.000, 0)."
     }
   ]
 }
