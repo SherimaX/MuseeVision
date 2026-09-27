@@ -30,7 +30,8 @@ Hang, Mechanisms), read by the systems and never restated here.
 The car's leaves and the Cube mast's head ride the car (`BodyParents`): declared where they stand with the car at the
 Atrium stop, and hung from it by Studio. The stele's barrier, the box of its foot's plan to the glass's top, stops only the
 visitor's body (`Barriers`). The volume turned about the axis keeps to the Atrium's side of the Sphere's seam, for
-Site.NoOverlap.
+Site.NoOverlap; its stacked prisms (P1, P1c, P2, P3) leave out the notch the Hall of Light's end stands in, the portal
+arch's soffit in level steps.
 
 ## Waiting on the systems
 

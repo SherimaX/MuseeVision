@@ -32,9 +32,8 @@ restated here.
 
 ## Waiting on the systems
 
-- The hour ring, lines, meridian and ticks are laid from Time's dial (RotundaDialInlay); its numerals wait to be lettered
-  with Form's lettering. The doorways through the drum are still cut radially on the room's face, and the housings'
-  sunk fields are polish.
+- The housings' sunk fields are polish. The dial's inlay (ring, lines, meridian, ticks and the numerals, in Form's
+  lettering) is laid from Time's dial (RotundaDialInlay); the doorways run straight through the drum.
 
 ## Tests
 
