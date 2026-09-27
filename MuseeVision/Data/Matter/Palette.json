@@ -3006,7 +3006,9 @@
           "Shading/Substances/stoneware.json",
           "Shading/Substances/glaze.celadon.json",
           "Shading/Substances/glaze.dark.json",
-          "Shading/Substances/glaze.green.json"
+          "Shading/Substances/glaze.green.json",
+          "Shading/Substances/glaze.jun.json",
+          "Shading/Substances/glaze.guan.json"
         ],
         "needed": "Measured colours of the glazes; the body's composition."
       },
@@ -3030,6 +3032,59 @@
           "working": "unglazed.polished",
           "history": "handled",
           "note": "Stages: chenghuai.desk.inkstone"
+        },
+        {
+          "working": "glazed",
+          "history": "clean",
+          "note": "Art: chinese-longquan-vase (celadon), in its case"
+        },
+        {
+          "working": "glazed.dark",
+          "history": "clean",
+          "note": "Art: chinese-jian-bowl (hare's fur), in its case"
+        },
+        {
+          "working": "glazed.jun",
+          "history": "clean",
+          "note": "Art: chinese-jun-flowerpot, in its case"
+        },
+        {
+          "working": "glazed.guan",
+          "history": "clean",
+          "note": "Art: chinese-guan-vase, in its case"
+        }
+      ]
+    },
+    {
+      "key": "accent.porcelain-glazed",
+      "family": "accent",
+      "accentOf": "stone",
+      "substance": "porcelain",
+      "realMaterial": "Chinese porcelain, kaolin and porcelain stone fired to vitrification, under its glaze: Chenghuai's Ding basin in its ivory glaze",
+      "workingsByEra": {
+        "classical": "glazed (Chenghuai's cases)",
+        "modern": "absent",
+        "future": "absent"
+      },
+      "roles": [
+        "Chenghuai: the Ding basin in the Tianqing case (Art/Media.json)"
+      ],
+      "why": "The white body the Song kilns perfected: the glaze is what shows, the body is what it is fired on.",
+      "oldChoice": "",
+      "verdict": "new",
+      "verdictReason": "Named by a catalogue medium K5's order turns on Form's lathe (Docs/Stages/chenghuai.md, section 8).",
+      "research": {
+        "records": [
+          "Shading/Substances/porcelain.json",
+          "Shading/Substances/glaze.ding-ivory.json"
+        ],
+        "needed": "Measured colours of the glazes; the painted porcelains' decoration (their images)."
+      },
+      "finishes": [
+        {
+          "working": "glazed.ding-ivory",
+          "history": "clean",
+          "note": "Art: chinese-ding-basin, in its case"
         }
       ]
     },

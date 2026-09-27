@@ -1,0 +1,87 @@
+{
+  "schema": "musee.matter.shading.substance/1",
+  "key": "glaze.guan",
+  "name": "Guan glaze (grey-blue celadon, crackled)",
+  "family": "accent",
+  "record": "Palette.json",
+  "master": "white",
+  "accentOf": "stone",
+  "dielectric": {
+    "diffuseAlbedo": {
+      "value": [
+        70.0,
+        -3.0,
+        4.0
+      ],
+      "space": "CIELAB (D65, 2 deg)",
+      "unit": "CIELAB",
+      "grade": "unverified",
+      "source": "Palette.json: accent.porcelain-glazed and accent.stoneware-glazed (Chenghuai's ceramics, the catalogue's media)",
+      "note": "The Guan kilns' thick grey-blue celadon; its crackle is not drawn: no measured colour was read: a first value read from museum photographs of the named ware."
+    },
+    "refractiveIndex": {
+      "value": 1.52,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Substances/low-iron-glass.json (1.523 for soda-lime float); a ceramic glaze is a soda-lime-alumina-silica glass of about the same index"
+    },
+    "porosity": {
+      "value": 0.0,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.stoneware-glazed (the glazes' first values)",
+      "note": "A glaze is glass: it has no open pores."
+    },
+    "wettingDepth": {
+      "value": 0.0,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: accent.stoneware-glazed (the glazes' first values)",
+      "note": "The depth whose pores govern the face's look when wet."
+    }
+  },
+  "structure": {
+    "grain": {
+      "value": 0.05,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: accent.stoneware-glazed (the glazes' first values)",
+      "note": "The finest structure the face shows."
+    },
+    "bed": {
+      "value": 50,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: accent.stoneware-glazed (the glazes' first values)",
+      "note": "The coarsest structure the face shows."
+    },
+    "bedAspect": {
+      "value": 1.0,
+      "unit": "1",
+      "grade": "derived",
+      "source": "An unbedded body",
+      "derivation": "unbedded"
+    },
+    "hurst": {
+      "value": 0.7,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Candela et al. 2012, Journal of Geophysical Research 117, B08409 (fault surfaces, 0.6 to 0.8; cited in Stone.ush)",
+      "note": "The middle of the range measured on rock surfaces, as the travertine's."
+    },
+    "toneSpread": {
+      "value": 0.1,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.stoneware-glazed (the glazes' first values)",
+      "note": "A first half-range of ln(albedo) across one face."
+    },
+    "roughnessSpread": {
+      "value": 0.05,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.stoneware-glazed (the glazes' first values)",
+      "note": "A first half-range of ln(roughness) across one face."
+    }
+  }
+}
