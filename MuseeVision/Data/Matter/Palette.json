@@ -1,0 +1,1177 @@
+{
+  "schema": "musee.matter.palette/1",
+  "story": "Docs/Matter/Story.md",
+  "decision": "D-018",
+  "eras": {
+    "classical": "honed, patinated, oiled and waxed",
+    "modern": "polished, brushed, fumed and brushed",
+    "future": "mirror-polished and gilt; oak absent",
+    "doorway": "one detail in every era: honed travertine threshold and surround, brushed CuSn10 strip at the seam"
+  },
+  "entries": [
+    {
+      "key": "stone.travertine-romano",
+      "family": "stone",
+      "accentOf": null,
+      "realMaterial": "Travertino Romano Classico, Tivoli-Guidonia basin east of Rome (Bagni di Tivoli quarries), sawn vein-cut (across the bed); open-pore on walls, filled (tinted cement or resin) on anything walked",
+      "workingsByEra": {
+        "classical": "honed (satin, no image); open voids on walls, filled on floors and treads",
+        "modern": "filled and polished (the Hall of Light)",
+        "future": "filled and polished at the Atrium's 6 m base only: the modern's last stone under the glass",
+        "doorway": "honed in every era: the threshold is outside time",
+        "outdoors": "honed, sawn or bush-hammered, then weathered (weather sets the finish)"
+      },
+      "roles": [
+        "every doorway: threshold slab and surround",
+        "Salon: piers, jambs, transverse arches, voussoirs, keystones, skirting, floor under every arch, viewing stones",
+        "Nymphéas oval: floor, four curved benches, the pond's moulded coping and its carved lily frieze",
+        "Reserve: pier bases, imposts, long-stair treads",
+        "Hall of Light: floor, plinth, stereo stones",
+        "Atrium: 6 m base and coping",
+        "Rotunda's outer drum",
+        "Élan outside: plinth, equator entablature",
+        "Grounds: façade, portico, parvis, kerbs, canal and basin copings, crushed-offcut gravel"
+      ],
+      "why": "The one stone equally Classical and Modern: the Colosseum and St Peter's colonnade, and the Getty Center and Aulenti's Orsay. Warm under daylight and paintings; its voids read as stone at any distance; a living trade stone with two thousand years of outdoor record. Vein-cut bands run along the direction of travel, as a mason lays an enfilade.",
+      "oldChoice": "M_Travertine_Honed (#E1D6C4), M_Travertine_Polished (#E8E0D2), M_Travertine_Ashlar; ambientCG Travertine009 (procedural)",
+      "verdict": "refined",
+      "verdictReason": "Same idea, now a named quarry and cut. The old image was procedural and the old colours (L* 86-89) lighter than any measured travertine; the stone will read darker and warmer. Classical floors are honed, not polished; one rule for open and filled voids; thresholds always honed.",
+      "research": {
+        "records": [
+          "r-matter: Substances/travertine.json",
+          "Workings/sawn.vein-cut.json, sawn.cross-cut.json, honed.json, polished.stone.json, bush-hammered.json",
+          "Histories/stone.foot-traffic-wear.json, stone.pore-soiling.json, stone.dissolution-outdoors.json"
+        ],
+        "needed": "Colour of Tivoli travertine itself (only Spanish travertines measured); a tier (b) ColorChecker specimen of Travertino Romano Classico honed open, honed filled and polished; a 'crushed' working and a 'waterline' history for the Grounds."
+      }
+    },
+    {
+      "key": "stone.crema-marfil",
+      "family": "stone",
+      "accentOf": null,
+      "realMaterial": "Crema Marfil Coto, Monte Coto, Pinoso (Alicante), selected grade with an open crackle of stylolites; an Eocene limestone sold as marble",
+      "workingsByEra": {
+        "classical": "honed: low even sheen, crackle soft (the Rotunda, the Classical Hall's walls)",
+        "modern": "absent: the anchor skips the modern",
+        "future": "mirror-polished through 3000 grit and a final polishing compound (the Atrium floor, the Sphere platform)",
+        "outdoors": "never (it loses about 15 % of flexural strength after 56 freeze-thaw cycles)"
+      },
+      "roles": [
+        "Rotunda: wall ashlar, sixteen fluted pilasters, niche surrounds and sills, floor ring, dial field (two selections), lifting drum, spiral stair",
+        "Classical Hall: walls; landing floor",
+        "Atrium: floor in rings of slabs",
+        "Sphere: the platform"
+      ],
+      "why": "Its network of iron-and-clay stylolites is the design's crackle, found in a real stone. It is lighter than the travertine (light reflectance about 64 % against about 40 %) in the same warm hue, so the anchor glows; it is dense (0.5 % open porosity), so it takes a true mirror polish, which lets the anchor return as the future's floor; it is calcite like the travertine, so the two meet as one kind of matter.",
+      "oldChoice": "M_Marble_Wall (generated crackle, then ambientCG Marble014), M_SunClock_Drum, M_Elan_Mirror (#EAE2D4), M_SquareFloor",
+      "verdict": "refined",
+      "verdictReason": "The look is kept, the drawn crackle (read as cracked paint) retired; the procedural Marble014 is not evidence. Now also the dial's field, replacing the statuary white, so the anchor is one stone.",
+      "research": {
+        "records": [
+          "r-matter: Substances/cream-marble.json (alternativesConsidered: Botticino Classico)",
+          "Workings/honed.json, polished.stone.json"
+        ],
+        "needed": "a* b* of Crema Marfil; the crackle's cell size; honed and polished slip values; a mirror-polish working distinct from polished; tier (b) specimen honed and polished."
+      }
+    },
+    {
+      "key": "accent.rojo-alicante",
+      "family": "accent",
+      "accentOf": "stone",
+      "realMaterial": "Rojo Alicante, La Romana (Alicante): micritic limestone, iron-red with two generations of white calcite veins",
+      "workingsByEra": {
+        "classical": "honed on the dial; polished and worn soft as the Classical Hall's dado",
+        "modern": "absent",
+        "future": "absent"
+      },
+      "roles": [
+        "Rotunda: the dial's red band",
+        "Classical Hall: the dado; the landing's red"
+      ],
+      "why": "Calcite like the Crema Marfil, so it wears with it; quarried in the village next to Pinoso; the red of the dial is the red under the casts below. Ties back by physics (calcite) and by the iron-red thread.",
+      "oldChoice": "M_Marble_Rosso (Rosso Levanto, drawn); M_Marble_RossoAntico (generated)",
+      "verdict": "replaced",
+      "verdictReason": "Rosso Levanto is a serpentinite, harder than calcite, and would stand proud as the dial wore; rosso antico is unobtainable.",
+      "research": {
+        "records": [],
+        "needed": "Substance record: formation, optics (calcite, hematite colour), abrasion vs Crema Marfil, specimen."
+      }
+    },
+    {
+      "key": "accent.negro-marquina",
+      "family": "accent",
+      "accentOf": "stone",
+      "realMaterial": "Negro Marquina, Markina-Xemein (Bizkaia): fine black limestone with white calcite veins",
+      "workingsByEra": {
+        "classical": "honed",
+        "modern": "absent",
+        "future": "absent"
+      },
+      "roles": [
+        "Rotunda: the dial's black band",
+        "Classical Hall: the landing's black"
+      ],
+      "why": "Calcite, so it wears evenly with the cream marble; with Crema Marfil and Rojo Alicante it is the classic Spanish triad. Ties back by physics and as the dark partner of the anchor.",
+      "oldChoice": "M_Marble_Nero (Nero Marquina)",
+      "verdict": "kept",
+      "verdictReason": "The old choice was already the right real stone.",
+      "research": {
+        "records": [],
+        "needed": "Substance record and specimen."
+      }
+    },
+    {
+      "key": "accent.statuario",
+      "family": "accent",
+      "accentOf": "stone",
+      "realMaterial": "Statuario, Carrara (Apuan Alps): white statuary marble, faint grey veins",
+      "workingsByEra": {
+        "classical": "carved and honed; floor fields polished and worn",
+        "modern": "absent",
+        "future": "absent"
+      },
+      "roles": [
+        "Classical Hall: bases, capitals, entablatures, herms, consoles, white floor fields"
+      ],
+      "why": "The white round which the Pantheon's and the Braccio Nuovo's coloured marbles sit; the casts' own ancestors were carved in it. Ties back by value (the palest stone) and physics (calcite).",
+      "oldChoice": "M_Marble_Carved, M_Marble_Polished (ambientCG Marble021)",
+      "verdict": "refined",
+      "verdictReason": "Now a named quarry; carved honed, fields polished.",
+      "research": {
+        "records": [],
+        "needed": "Substance record; Jensen's marble subsurface data (already cited in the travertine record) applies."
+      }
+    },
+    {
+      "key": "accent.giallo-siena",
+      "family": "accent",
+      "accentOf": "stone",
+      "realMaterial": "Giallo di Siena, Montagnola Senese (Siena): yellow brecciated marble",
+      "workingsByEra": {
+        "classical": "polished",
+        "modern": "absent",
+        "future": "absent"
+      },
+      "roles": [
+        "Classical Hall: paired Ionic column shafts in the gallery; floor squares round the porphyry"
+      ],
+      "why": "The historical successor to Chemtou's exhausted giallo antico, still quarried. Ties back by hue (straw round the cream).",
+      "oldChoice": "M_Marble_GialloAntico (ambientCG Marble026, #D9B874)",
+      "verdict": "replaced",
+      "verdictReason": "Giallo antico cannot be had; a photo of an unnamed yellow marble is not evidence.",
+      "research": {
+        "records": [],
+        "needed": "Substance record and specimen."
+      }
+    },
+    {
+      "key": "accent.pavonazzetto",
+      "family": "accent",
+      "accentOf": "stone",
+      "realMaterial": "Pavonazzetto: violet-veined white marble from the Afyon-İscehisar district, the site of the ancient Docimium quarries (traded today as Afyon violet)",
+      "workingsByEra": {
+        "classical": "polished",
+        "modern": "absent",
+        "future": "absent"
+      },
+      "roles": [
+        "Classical Hall: the tribune's twelve columns"
+      ],
+      "why": "The Romans' own pavonazzetto came from here. Ties back by hue (violet round the cream) and physics (calcite).",
+      "oldChoice": "M_Marble_Pavonazzetto (statuary photo with veins pushed, #EBE3E8)",
+      "verdict": "replaced",
+      "verdictReason": "A tinted white marble is not a pavonazzetto.",
+      "research": {
+        "records": [],
+        "needed": "Substance record; confirm current quarry and block size for 12 shafts."
+      }
+    },
+    {
+      "key": "accent.verde-antico",
+      "family": "accent",
+      "accentOf": "stone",
+      "realMaterial": "Verde antico (marmor Thessalicum): serpentine breccia from near Larissa, Thessaly, still quarried",
+      "workingsByEra": {
+        "classical": "polished",
+        "modern": "absent",
+        "future": "absent"
+      },
+      "roles": [
+        "Classical Hall: floor bands and panels"
+      ],
+      "why": "The Roman source, still worked. Ties back by hue; it is harder than the calcite fields and will stand slightly proud, as in real opus sectile.",
+      "oldChoice": "M_Marble_VerdeAntico (ambientCG Marble009, #2F3A30)",
+      "verdict": "refined",
+      "verdictReason": "Now named at its source.",
+      "research": {
+        "records": [],
+        "needed": "Substance record and specimen."
+      }
+    },
+    {
+      "key": "accent.porphyry",
+      "family": "accent",
+      "accentOf": "stone",
+      "realMaterial": "Imperial porphyry (porfido rosso antico), Mons Porphyrites (Gebel Dokhan, Egypt): reclaimed only, sliced from ancient column stock",
+      "workingsByEra": {
+        "classical": "polished, reclaimed",
+        "modern": "absent",
+        "future": "absent"
+      },
+      "roles": [
+        "Classical Hall: the floor's roundels"
+      ],
+      "why": "The Pantheon's and every Cosmati floor's roundels are slices of ancient columns; the one stone in the museum that could only be found. Ties back by hue to the iron-red thread.",
+      "oldChoice": "M_Porphyry (generated image)",
+      "verdict": "replaced",
+      "verdictReason": "A generated image is not a stone; reclaimed porphyry is the real material.",
+      "research": {
+        "records": [],
+        "needed": "Substance record; owner to accept a reclaimed-only stone (open question)."
+      }
+    },
+    {
+      "key": "accent.pierre-bleue",
+      "family": "accent",
+      "accentOf": "stone",
+      "realMaterial": "Belgian bluestone (Petit Granit), Soignies, Hainaut: dark grey crinoidal limestone",
+      "workingsByEra": {
+        "classical": "honed",
+        "modern": "absent",
+        "future": "absent",
+        "outdoors": "honed, submerged"
+      },
+      "roles": [
+        "Reserve: floor flags",
+        "Salon oval: the pond's bed",
+        "Grounds: canal and basin beds"
+      ],
+      "why": "The Paris stone for steps, sills and cellar floors; calcite, the travertine's dark partner. A dark bed makes still water a mirror. Ties back by physics and value.",
+      "oldChoice": "MI_stone_slab_EFE6DA ground concrete, polished (#4C4A47); M_SquareFloorDark (#2E2924); the Grounds spec's travertine basin floors",
+      "verdict": "replaced",
+      "verdictReason": "Keeps the dark value, but as stone, honed, and a real Paris cellar floor; concrete read modern under the Salon.",
+      "research": {
+        "records": [],
+        "needed": "Substance record and specimen; submerged-bed history."
+      }
+    },
+    {
+      "key": "accent.brique-bourgogne",
+      "family": "accent",
+      "accentOf": "stone",
+      "realMaterial": "Burgundy pressed brick (brique de Bourgogne), the pale buff-pink brick of Paris's cellar and reservoir vaults 1860-1900 (Montchanin works; today reclaimed or matched from a Burgundy works), in lime mortar",
+      "workingsByEra": {
+        "classical": "hand-laid in lime mortar, joints slightly recessed",
+        "modern": "absent",
+        "future": "absent"
+      },
+      "roles": [
+        "Reserve: piers, arch bands, groin vaults, lunettes, the long stair's shaft"
+      ],
+      "why": "The brick that actually vaults Paris underground (the Montsouris reservoir, 1874). Fired clay: its colour is its iron, oxidised. Ties back by hue (a step deeper than the travertine) and as the fired stone.",
+      "oldChoice": "MI_Brick_Coursed buff stock (Poly Haven yellow_brick, #B89A76)",
+      "verdict": "refined",
+      "verdictReason": "Same warm brick vault; now a named brick with a history in this city.",
+      "research": {
+        "records": [],
+        "needed": "Substance record (fired clay), brick size and bond, mortar, specimen."
+      }
+    },
+    {
+      "key": "accent.encaustic-tile",
+      "family": "accent",
+      "accentOf": "stone",
+      "realMaterial": "Encaustic floor tile in red, buff and black, after Pugin and Minton for the Palace of Westminster; made today by Craven Dunnill Jackfield",
+      "workingsByEra": {
+        "classical": "waxed, trodden",
+        "modern": "absent",
+        "future": "absent"
+      },
+      "roles": [
+        "Albion: porch and nave floors and borders"
+      ],
+      "why": "The Victorian floor. Fired clay: red and buff are iron oxidised. Ties back by hue to the travertine and the iron-red thread.",
+      "oldChoice": "(Albion as built: its own tile set)",
+      "verdict": "kept",
+      "verdictReason": "The approved Albion design; now named with a real maker.",
+      "research": {
+        "records": [],
+        "needed": "Substance record; pattern from the Details sheet."
+      }
+    },
+    {
+      "key": "accent.grey-brick",
+      "family": "accent",
+      "accentOf": "stone",
+      "realMaterial": "Ming-Qing grey wall brick of the Linqing type (the kilns that shipped brick up the Grand Canal to Beijing), reduction-fired and water-quenched",
+      "workingsByEra": {
+        "classical": "rubbed and dry-laid (干摆), hairline-jointed (丝缝), lime-pointed (淌白) by rank; carved for the 影壁心; on edge (城砖) for paths",
+        "modern": "absent",
+        "future": "absent"
+      },
+      "roles": [
+        "Chenghuai: gate, spirit wall, hall bases, hall and side-hall walls, rows and enclosing walls, court cross paths"
+      ],
+      "why": "The real Beijing brick. The iron in the clay reduced instead of oxidised: the same iron-and-clay as the grey-brown stylolites in the Rotunda's marble. Ties back by hue and physics.",
+      "oldChoice": "(old Chinese Wing: none; Chenghuai as built: its own brick)",
+      "verdict": "new",
+      "verdictReason": "Chenghuai replaces the Chinese Wing.",
+      "research": {
+        "records": [],
+        "needed": "Substance record (reduction firing, water quench), brick sizes per rank, the three jointing workings."
+      }
+    },
+    {
+      "key": "accent.suzhou-fangzhuan",
+      "family": "accent",
+      "accentOf": "stone",
+      "realMaterial": "Square floor tiles (方砖, jinzhuan) from the Suzhou imperial kilns at Lumu: 54 cm (尺七) and 45 cm (尺四)",
+      "workingsByEra": {
+        "classical": "54 cm soaked in tung oil to a dark satin (钻生); 45 cm with ground joints (细墁)",
+        "modern": "absent",
+        "future": "absent"
+      },
+      "roles": [
+        "Chenghuai: floors of the main hall and side rooms (54 cm, oiled); side halls, rows, galleries (45 cm)"
+      ],
+      "why": "The tile that floored the Forbidden City. Its oiled satin is the Chinese counterpart of the oak's oil and wax. Ties back by value and by the oil finish.",
+      "oldChoice": "(none)",
+      "verdict": "new",
+      "verdictReason": "Chenghuai.",
+      "research": {
+        "records": [],
+        "needed": "Substance record; tung-oil working."
+      }
+    },
+    {
+      "key": "accent.bu-wa",
+      "family": "accent",
+      "accentOf": "stone",
+      "realMaterial": "Unglazed grey roof tiles (布瓦), reduction-fired: barrel tiles (筒瓦) and butterfly tiles (合瓦)",
+      "workingsByEra": {
+        "classical": "as laid, weathered",
+        "modern": "absent",
+        "future": "absent"
+      },
+      "roles": [
+        "Chenghuai: gate, main hall, festooned gate (筒瓦); side halls, side rooms, rows, garden (合瓦); ridges"
+      ],
+      "why": "The real Beijing and Suzhou roof. Same reduction-fired clay as the grey brick.",
+      "oldChoice": "MI_roof_tiles (ambientCG Concrete017)",
+      "verdict": "replaced",
+      "verdictReason": "A concrete photo was standing in for fired clay.",
+      "research": {
+        "records": [],
+        "needed": "Substance record, tile sizes and lap."
+      }
+    },
+    {
+      "key": "accent.qingbaishi",
+      "family": "accent",
+      "accentOf": "stone",
+      "realMaterial": "青白石: bluish-white marble from Dashiwo, Fangshan (Beijing), the Forbidden City's quarry",
+      "workingsByEra": {
+        "classical": "axe-dressed (剁斧) and honed",
+        "modern": "absent",
+        "future": "absent"
+      },
+      "roles": [
+        "Chenghuai: plinth edges, steps, column bases, the gate's 门墩"
+      ],
+      "why": "Beijing's anchor stone; answers the Rotunda's marble by value, the palest stone in its wing.",
+      "oldChoice": "(Chinese Wing: Suzhou granite, flamed)",
+      "verdict": "new",
+      "verdictReason": "Chenghuai's approved materials; granite retired.",
+      "research": {
+        "records": [],
+        "needed": "Substance record and specimen."
+      }
+    },
+    {
+      "key": "accent.taihu-rock",
+      "family": "accent",
+      "accentOf": "stone",
+      "realMaterial": "Taihu stone from Lake Tai (Jiangsu): limestone dissolved and pierced by water",
+      "workingsByEra": {
+        "classical": "as found",
+        "modern": "absent",
+        "future": "absent"
+      },
+      "roles": [
+        "Chenghuai garden: the standing rock 石兄, rockery peaks"
+      ],
+      "why": "Calcite that water took away, where travertine is calcite that water laid down.",
+      "oldChoice": "MI_taihu_rock (ambientCG Rock026)",
+      "verdict": "refined",
+      "verdictReason": "Now named; form from evidence of real rocks.",
+      "research": {
+        "records": [],
+        "needed": "Substance record; a scanned or measured rock."
+      }
+    },
+    {
+      "key": "accent.qingshi",
+      "family": "accent",
+      "accentOf": "stone",
+      "realMaterial": "青石: blue-grey limestone of the Suzhou gardens",
+      "workingsByEra": {
+        "classical": "cut, engraved, laid ice-crack (冰裂纹)",
+        "modern": "absent",
+        "future": "absent"
+      },
+      "roles": [
+        "Chenghuai garden: rockery body, twelve 书条石 after the Chunhua ge tie, ice-crack floors of the garden buildings"
+      ],
+      "why": "The Chinese kin of the Belgian bluestone; calcite.",
+      "oldChoice": "(none)",
+      "verdict": "new",
+      "verdictReason": "Chenghuai.",
+      "research": {
+        "records": [],
+        "needed": "Substance record."
+      }
+    },
+    {
+      "key": "accent.pebble-mosaic",
+      "family": "accent",
+      "accentOf": "stone",
+      "realMaterial": "花街铺地: river pebbles, tile shards and brick on edge set in patterns",
+      "workingsByEra": {
+        "classical": "set in lime mortar, trodden",
+        "modern": "absent",
+        "future": "absent"
+      },
+      "roles": [
+        "Chenghuai garden paths"
+      ],
+      "why": "The Suzhou garden's path. Ties back through its brick and tile to the fired clays.",
+      "oldChoice": "MI_gravel river gravel (ambientCG Gravel022)",
+      "verdict": "replaced",
+      "verdictReason": "Chenghuai's approved paths.",
+      "research": {
+        "records": [],
+        "needed": "Record (pebble sizes and patterns)."
+      }
+    },
+    {
+      "key": "accent.bath-stone",
+      "family": "accent",
+      "accentOf": "stone",
+      "realMaterial": "Bath stone, oolitic limestone from the Monks Park mine (Wiltshire)",
+      "workingsByEra": {
+        "classical": "honed ashlar, rubbed dressings, carved capitals; soot inside, urban weathering outside",
+        "modern": "absent",
+        "future": "absent"
+      },
+      "roles": [
+        "Albion: ashlar (buff courses), pilasters, corbels, cornice, reveals, sills, hood moulds, column bases, capitals; outer ashlar and dressings"
+      ],
+      "why": "The Victorian cream limestone; a quieter travertine. Ties back by value and hue.",
+      "oldChoice": "Albion as built (#CFB892 inside)",
+      "verdict": "kept",
+      "verdictReason": "The Albion spec's choice; now named at the mine.",
+      "research": {
+        "records": [],
+        "needed": "Substance record and specimen."
+      }
+    },
+    {
+      "key": "accent.mansfield-red",
+      "family": "accent",
+      "accentOf": "stone",
+      "realMaterial": "Mansfield red sandstone, Nottinghamshire",
+      "workingsByEra": {
+        "classical": "honed; soot inside, weathered outside",
+        "modern": "absent",
+        "future": "absent"
+      },
+      "roles": [
+        "Albion: the red bands every 1.2 m, inside and out"
+      ],
+      "why": "Victorian polychromy; iron-red, on the thread.",
+      "oldChoice": "Albion as built (#A98272)",
+      "verdict": "kept",
+      "verdictReason": "The spec's choice.",
+      "research": {
+        "records": [],
+        "needed": "Substance record."
+      }
+    },
+    {
+      "key": "accent.york-stone",
+      "family": "accent",
+      "accentOf": "stone",
+      "realMaterial": "York stone flags (hard Yorkshire sandstone)",
+      "workingsByEra": {
+        "classical": "sawn, trodden",
+        "modern": "absent",
+        "future": "absent"
+      },
+      "roles": [
+        "Albion: aisle flags, the court door's reveal"
+      ],
+      "why": "The English flag floor; warm grey, by value with the travertine.",
+      "oldChoice": "Albion as built (#9A8F7C)",
+      "verdict": "kept",
+      "verdictReason": "The spec's choice.",
+      "research": {
+        "records": [],
+        "needed": "Substance record."
+      }
+    },
+    {
+      "key": "accent.welsh-slate",
+      "family": "accent",
+      "accentOf": "stone",
+      "realMaterial": "Welsh slate, Penrhyn (Bethesda)",
+      "workingsByEra": {
+        "classical": "honed, bevelled, worn",
+        "modern": "absent",
+        "future": "absent"
+      },
+      "roles": [
+        "Albion: skirting"
+      ],
+      "why": "The Victorian skirting; the dark base line.",
+      "oldChoice": "Albion as built (#3B3F44)",
+      "verdict": "kept",
+      "verdictReason": "The spec's choice.",
+      "research": {
+        "records": [],
+        "needed": "Substance record."
+      }
+    },
+    {
+      "key": "accent.british-column-stones",
+      "family": "accent",
+      "accentOf": "stone",
+      "realMaterial": "Ten polished British decorative stones: Lizard serpentine, Peterhead granite, Rubislaw granite, Purbeck marble, Frosterley marble, Hopton Wood stone, Ashburton marble, Iona marble, Tiree marble, Mona marble",
+      "workingsByEra": {
+        "classical": "polished, hand-touched",
+        "modern": "absent",
+        "future": "absent"
+      },
+      "roles": [
+        "Albion: column shafts A-J"
+      ],
+      "why": "As at the Oxford University Museum, whose 126 columns each show a different British rock.",
+      "oldChoice": "Albion as built",
+      "verdict": "kept",
+      "verdictReason": "The approved design; several quarries are closed, so some shafts are reclaimed or old stock (open question).",
+      "research": {
+        "records": [],
+        "needed": "Ten substance records, or one record per stone under a shared working."
+      }
+    },
+    {
+      "key": "accent.site-geology",
+      "family": "accent",
+      "accentOf": "stone",
+      "realMaterial": "The ground under Élan: crushed stone, topsoil, subsoil, clay-with-flints, chalk with flint bands and fossils",
+      "workingsByEra": {
+        "classical": "absent",
+        "modern": "absent",
+        "future": "excavated, seen through the Cube's shaft glass"
+      },
+      "roles": [
+        "Cube: the shaft cavity's ground face"
+      ],
+      "why": "The chalk is calcite: the museum stands on its own mineral.",
+      "oldChoice": "M_Strata (the Square's pit)",
+      "verdict": "refined",
+      "verdictReason": "The Square's pit is retired; the Cube's shaft keeps a geological section.",
+      "research": {
+        "records": [],
+        "needed": "Records for each layer; the family of a soil is the spec's Q-7."
+      }
+    },
+    {
+      "key": "accent.concrete",
+      "family": "accent",
+      "accentOf": "stone",
+      "realMaterial": "Cast-in-situ reinforced concrete, sealed",
+      "workingsByEra": {
+        "classical": "absent",
+        "modern": "absent",
+        "future": "hidden structure only"
+      },
+      "roles": [
+        "Cube: the box (never seen)"
+      ],
+      "why": "Structure, never a finish.",
+      "oldChoice": "(none)",
+      "verdict": "new",
+      "verdictReason": "The Cube spec needs it.",
+      "research": {
+        "records": [],
+        "needed": "Substance record (the Cube spec lists it missing)."
+      }
+    },
+    {
+      "key": "white.lime-plaster",
+      "family": "white",
+      "accentOf": null,
+      "realMaterial": "Lime plaster: matured lime putty; setting coat of lime and marble dust over two haired coarse-stuff coats; profiles run in lime gauged with plaster of Paris",
+      "workingsByEra": {
+        "classical": "trowelled (faint sheen); run; burnished (marmorino) in the oval; pigmented with red ochre and burnished in the Classical Hall's niches",
+        "modern": "limewashed (see white.limewash)",
+        "future": "absent: the white is pearl steel"
+      },
+      "roles": [
+        "Rotunda: coffered dome, drum soffit",
+        "Salon: coffered barrel vault",
+        "Classical Hall: vaults, tribune dome, Pompeian niches",
+        "Salon oval: walls (burnished)"
+      ],
+      "why": "The classical vault material from Vitruvius on; carbonated, it is calcite like the stone below.",
+      "oldChoice": "M_Plaster_Coffer (#EFE8DB), MI_plaster_oval (#F1EDE4), M_Stucco_Pompeian (#8E4B3D), M_SquareCeiling",
+      "verdict": "refined",
+      "verdictReason": "Same idea, now a real making; the Pompeian red becomes red ochre in lime, on the iron thread.",
+      "research": {
+        "records": [
+          "r-matter: Substances/lime-plaster.json",
+          "Workings/trowelled.json, run.json, limewashed.json",
+          "Histories/white.soiling.json, white.micro-cracking.json, white.patching.json"
+        ],
+        "needed": "Luminous reflectance of set lime plaster (unverified 0.80-0.92); a burnished working; a pigmented (red ochre) variant."
+      }
+    },
+    {
+      "key": "white.fibrous-plaster",
+      "family": "white",
+      "accentOf": null,
+      "realMaterial": "Fibrous plaster: plaster of Paris face on hessian and timber laths, cast in lengths (about 3 m), mitres by hand",
+      "workingsByEra": {
+        "classical": "cast from run models; joints between lengths",
+        "modern": "absent",
+        "future": "absent"
+      },
+      "roles": [
+        "Rotunda: entablature and cornice at the springing",
+        "Salon: cornice with the cove",
+        "coffer rosettes (Salon, tribune), under the gilt"
+      ],
+      "why": "How nineteenth-century cornices and ornament were really made; light, above reach. Face is plaster of Paris.",
+      "oldChoice": "M_Plaster_Moulding (#E4DBCB)",
+      "verdict": "refined",
+      "verdictReason": "Now a real making. The Rotunda's niche sills and surrounds move to Crema Marfil: they carry casts over two metres tall.",
+      "research": {
+        "records": [
+          "r-matter: Substances/fibrous-plaster.json",
+          "Workings/run.json, cast.plaster.json"
+        ],
+        "needed": "None beyond the face's reflectance."
+      }
+    },
+    {
+      "key": "white.plaster-of-paris",
+      "family": "white",
+      "accentOf": null,
+      "realMaterial": "Plaster of Paris casting plaster, cast in piece moulds with seam lines kept, sealed with a thin size",
+      "workingsByEra": {
+        "classical": "cast, seams kept, sized; dust on upward forms",
+        "modern": "absent",
+        "future": "absent"
+      },
+      "roles": [
+        "Rotunda: the four casts",
+        "Classical Hall: the 41 casts",
+        "the face of every fibrous-plaster moulding"
+      ],
+      "why": "The material of the great cast collections (SMK's Royal Cast Collection, the V&A's Cast Courts).",
+      "oldChoice": "M_Plaster_Cast",
+      "verdict": "kept",
+      "verdictReason": "The old intent (an old cast's waxy sheen) is exactly a sized plaster.",
+      "research": {
+        "records": [
+          "r-matter: Substances/plaster-of-paris.json",
+          "Workings/cast.plaster.json"
+        ],
+        "needed": "Light transport inside plaster (softness of a cast's edges); the sized-surface optics."
+      }
+    },
+    {
+      "key": "white.limewash",
+      "family": "white",
+      "accentOf": null,
+      "realMaterial": "Limewash: lime putty thinned to milk, four thin coats brushed on damp; in Chenghuai over paper-fibre lime render (纸筋灰) outside and hemp-fibre lime whitened with whiting (麻刀灰, 大白) inside",
+      "workingsByEra": {
+        "classical": "(Chenghuai interiors: hemp-lime, whitened)",
+        "modern": "limewashed, dead matt: the white's garden state",
+        "future": "absent"
+      },
+      "roles": [
+        "Chenghuai: garden walls (粉墙), house interiors"
+      ],
+      "why": "The oldest white paint, dead matt and renewable; the white family's second state, where the museum meets the garden.",
+      "oldChoice": "MI_whitewash (#F4F1EA, ambientCG Plaster003)",
+      "verdict": "kept",
+      "verdictReason": "Moves from the retired Chinese Wing to Chenghuai.",
+      "research": {
+        "records": [
+          "r-matter: Substances/limewash.json",
+          "Workings/limewashed.json"
+        ],
+        "needed": "Paper-fibre and hemp-fibre lime renders as grounds."
+      }
+    },
+    {
+      "key": "white.pearl-steel",
+      "family": "white",
+      "accentOf": null,
+      "realMaterial": "EN 10025 S355J2 steel (the Great Court roof's grade), blast-cleaned Sa 2½, epoxy primer, oyster-white (RAL 1013) basecoat with a titanium-dioxide-on-mica interference pearl, satin clear coat; outdoors the same build in fluoropolymer; shells welded and faired",
+      "workingsByEra": {
+        "classical": "pearl, satin: the Rotunda's eye lattice (the future's seed in the anchor)",
+        "modern": "pearl, satin: the Hall of Light's vault and mullions",
+        "future": "pearl, satin: ribs, grid, collar, neck, iris linings, the seamless outer shell"
+      },
+      "roles": [
+        "Rotunda: eye lattice",
+        "Hall of Light: vault, mullions",
+        "Atrium: twelve ribs, collar, the Sphere's underside grid",
+        "Sphere: neck, iris blade linings",
+        "Élan outside: shell, fins"
+      ],
+      "why": "The white made in a factory: the white family's third member. One steel in one paint makes the lattice's lineage visible: Rotunda eye, Hall of Light vault, Sphere grid. The Great Court's own steel is painted light so that it recedes against the sky.",
+      "oldChoice": "M_RibPearl (RAL 1013 constant, satin); M_RibSteel (dark grey #3C3F42; Hall of Light #3B3A36)",
+      "verdict": "refined",
+      "verdictReason": "The pearl becomes a real coating; the dark lattice greys are replaced so one lineage has one colour.",
+      "research": {
+        "records": [
+          "r-matter: Substances/steel.json (declared accent of glass: to be re-declared as the substrate of white.pearl-steel)",
+          "Workings/painted.steel.json",
+          "Histories/steel.coating-ageing.json"
+        ],
+        "needed": "A pearl (mica interference) coating working with measured goniometric data; fluoropolymer exterior variant; welded-and-faired shell."
+      }
+    },
+    {
+      "key": "bronze.cusn10",
+      "family": "bronze",
+      "accentOf": null,
+      "realMaterial": "Tin bronze CuSn10 (EN 1982 CuSn10-C, CC480K; UNS C90700): about 90 Cu, 10 Sn, lead-free; lost-wax and sand castings, and continuously cast bar",
+      "workingsByEra": {
+        "classical": "patinated (hot sulfide statuary brown to near black, waxed, relieved where handled or walked)",
+        "modern": "brushed (medium satin, 180-240 grit, grain along the piece)",
+        "future": "mirror-polished and lacquered, or gilt (see gilt.gold-leaf)",
+        "doorway": "brushed, unlacquered, kept bright by feet, in every era",
+        "outdoors": "cast, weathered"
+      },
+      "roles": [
+        "every doorway's strip; the strip under each Salon arch",
+        "Rotunda: dial lines, ticks, numerals, motto, hour ring, node, drum balustrade",
+        "Salon: lantern frames, the pond's four posts, stele foot, viewing-stone and pond-lip substrates under gilt",
+        "Reserve: rack carriages, floor tracks, globe rods, handrails",
+        "Hall of Light: print stems, stereo readers, autochrome glazing bars",
+        "Chenghuai: fire vats, gate hardware, case frames",
+        "Albion: picture rail, rods, electrolier bodies",
+        "Atrium: rib shoes, the waiting ring, collar band, car rings, stele foot",
+        "Sphere: iris seat ring, mast (gilt)",
+        "Cube: dark-patinated sleeve, housing, plates",
+        "Grounds: lamp posts, the portico's blind door"
+      ],
+      "why": "The casting bronze of antiquity and of art foundries; at 10 % tin it is the golden colour meant by 'bronze'; it fills the finest detail (the dial's lettering); one alloy is made as castings and as bar, so every piece is literally one metal.",
+      "oldChoice": "M_Bronze_Patina, M_Bronze_Brushed, M_Gilt_Clean, M_Gilt_Aged ('one alloy, four states', F0 #C9A266); brass stele feet; MI_bronze_gold_r40 on the dial",
+      "verdict": "refined",
+      "verdictReason": "Now a named alloy with real workings; the future's state is mirror-polished or gilt; brass fittings that are castings or thresholds become this bronze.",
+      "research": {
+        "records": [
+          "r-matter: Substances/bronze.json",
+          "Workings/cast.bronze.json, brushed.json, patinated.json",
+          "Histories/bronze.tarnish.json, bronze.wear.json, bronze.weathering.json"
+        ],
+        "needed": "A mirror-polished-and-lacquered working; a 'dark' patina regime for the Cube; complex index (edge tint) remains a proxy."
+      }
+    },
+    {
+      "key": "gilt.gold-leaf",
+      "family": "working",
+      "accentOf": "bronze",
+      "realMaterial": "Gilt (a working, D-014): 23.75 carat gold leaf about 0.1 µm thick. Water gilding on gesso and red bole over carved oak (burnishable); oil gilding on a linseed size over bronze, plaster or lacquer",
+      "workingsByEra": {
+        "classical": "aged: water-gilt frames burnished and matt with bole on the ridges and dirt in the hollows; oil-gilt meridian, sun, rosettes, rings, worn through where walked",
+        "modern": "(rare) oil-gilt",
+        "future": "clean oil gilt, never patinated; the Starry Night's frame burnished water gilding"
+      },
+      "roles": [
+        "Rotunda: meridian line, gilt sun at the centre",
+        "Salon: coffer rosettes, viewing-stone rings, the pond's inner lip, picture frames (on oak)",
+        "Classical Hall: tribune rosettes",
+        "Chenghuai: gold in the beam paintings",
+        "Albion: gilded oak frames",
+        "Atrium: letters A-K, rib lines, collar rim, car rings",
+        "Sphere: rail, mast",
+        "Élan outside: hairline ring, gilt ball",
+        "Cube: joint lines, rings"
+      ],
+      "why": "Real gold, never tarnishing; its red bole is the iron-red thread showing through wear. Laid over the core families, so it never becomes a fifth family.",
+      "oldChoice": "M_Gilt_Aged (#D6AE68, ambientCG Metal048C), M_Gilt_Clean (#E0BC78, Metal048A), M_Gilt",
+      "verdict": "refined",
+      "verdictReason": "Gilt becomes a working over a real substrate; the procedural metal sets are rejected as evidence; frames move to oak.",
+      "research": {
+        "records": [
+          "r-matter: Workings/gilt.json",
+          "Histories/gilt.wear.json"
+        ],
+        "needed": "Tier (b) water-gilt test board (burnished, matt, rubbed over red bole); gilt-over-lacquer; a 'dusted' history (the Cube spec)."
+      }
+    },
+    {
+      "key": "accent.brass-cuzn30",
+      "family": "accent",
+      "accentOf": "bronze",
+      "realMaterial": "Cartridge brass CuZn30 (UNS C26000, EN CW505L): drawn wire woven to mesh, rolled and drawn sections, clear-lacquered (BHMA 606)",
+      "workingsByEra": {
+        "classical": "drawn, woven, lacquered",
+        "modern": "absent",
+        "future": "absent"
+      },
+      "roles": [
+        "Reserve: rack frames and woven wire mesh"
+      ],
+      "why": "Only where a wrought yellow alloy is the real material; yellower than the bronze beside it, so it stays an accent.",
+      "oldChoice": "Brass racks, brass stele feet, the Salon's brass strip",
+      "verdict": "refined",
+      "verdictReason": "Kept only for the woven mesh and frames; feet and strips become bronze.",
+      "research": {
+        "records": [
+          "r-matter: Substances/brass.json"
+        ],
+        "needed": "None."
+      }
+    },
+    {
+      "key": "accent.victorian-iron",
+      "family": "accent",
+      "accentOf": "bronze",
+      "realMaterial": "Victorian grey cast iron (clustered shafts, ribs, cast foliage) and wrought iron (rings, inner arches, saddle bars), painted in the colour of its own oxide: a deep iron-oxide brown-red, as Skidmore painted the Oxford Museum's metal",
+      "workingsByEra": {
+        "classical": "painted, aged",
+        "modern": "absent",
+        "future": "absent"
+      },
+      "roles": [
+        "Albion: iron shafts from 6.2 m, ribs, spandrel rings, screens' bars"
+      ],
+      "why": "The Oxford Museum's iron-and-glass court. Its oxide colour ties it to the patinated bronze by value and to the iron-red thread by hue.",
+      "oldChoice": "Albion as built: blue-grey (#434C50)",
+      "verdict": "replaced",
+      "verdictReason": "The grey tied to nothing; the oxide colour is the historical precedent (open question).",
+      "research": {
+        "records": [],
+        "needed": "Substance records for cast and wrought iron; the oxide paint working."
+      }
+    },
+    {
+      "key": "accent.milled-lead",
+      "family": "accent",
+      "accentOf": "bronze",
+      "realMaterial": "Milled sheet lead on boarding, laid with rolls; patinated grey-white",
+      "workingsByEra": {
+        "classical": "patinated",
+        "modern": "absent",
+        "future": "absent",
+        "outdoors": "weathered"
+      },
+      "roles": [
+        "Albion: gutters, ridge rolls, porch flat, ventilator cap",
+        "Rotunda: outer dome covering"
+      ],
+      "why": "The real covering of domes and gutters (the Pantheon since the seventh century, St Paul's).",
+      "oldChoice": "Albion as built (#7E8285); the Rotunda's outer dome was the wall marble",
+      "verdict": "new",
+      "verdictReason": "The Rotunda's outer dome cannot be Crema Marfil outdoors (freeze-thaw) and domes are leaded (open question).",
+      "research": {
+        "records": [],
+        "needed": "Substance record."
+      }
+    },
+    {
+      "key": "oak.sessile-french",
+      "family": "oak",
+      "accentOf": null,
+      "realMaterial": "European sessile oak (Quercus petraea) from French state forests (the slow-grown Tronçais oak as reference), quartersawn (and rift) for floors and joinery, showing ray fleck (maillure)",
+      "workingsByEra": {
+        "classical": "oiled and hard-waxed (parquet, seats, easel); fumed with ammonia and waxed (plinths, cases, chests); in Albion fumed and French-polished; water-gilt as frames",
+        "modern": "fumed, wire-brushed and oiled (the Hall of Light's frames)",
+        "future": "absent: nothing is handled in Élan; only the hidden core of the Starry Night's gilt frame"
+      },
+      "roles": [
+        "Salon: Versailles parquet (bays and Manet cabinet), bench plinths, oval bench seats, the 1874 case, picture frames under gilt",
+        "Reserve: plan chests, easel",
+        "Hall of Light: print frames",
+        "Albion: benches, cases, lectern, porch ceiling, battens, panels, frames under gilt",
+        "Atrium: the Starry Night frame's core"
+      ],
+      "why": "The oak of French parquet and joinery, and the Victorians' quartersawn 'wainscot'. Quartersawn for stability of 1.2 m panels and for the ray fleck no printed wood has. Rule: no bare oak inside a sealed case (acetic acid).",
+      "oldChoice": "M_Oak_Fumed (#6B5236), M_Oak_Natural (#A07A52), Poly Haven oak_wood_planks; walnut plan chests; pine frames (Albion sheet)",
+      "verdict": "refined",
+      "verdictReason": "Now a named species and sawing with real workings; walnut and pine replaced so there is one wood.",
+      "research": {
+        "records": [],
+        "needed": "Substance record (species, sawing, ray fleck, anisotropy); workings: oiled-waxed, fumed, French-polished, wire-brushed; history: foot and hand wear."
+      }
+    },
+    {
+      "key": "accent.qing-pine-lacquered",
+      "family": "accent",
+      "accentOf": "oak",
+      "realMaterial": "Korean pine (红松, Pinus koraiensis), the late-Qing structural timber of Beijing, under a 一麻五灰 ground and 铁红 (iron-oxide red in tung oil); gate leaves in black lacquer; beams with 苏式彩画 (azurite, malachite, gold leaf)",
+      "workingsByEra": {
+        "classical": "地仗 ground, 铁红 oil finish, dull; black lacquer on the gate leaves",
+        "modern": "absent",
+        "future": "absent"
+      },
+      "roles": [
+        "Chenghuai: columns, beams, all lattice, gate leaves, the painted house beams"
+      ],
+      "why": "Real Qing carpentry; a Beijing house built of oak would be false. Ties back to the oak as the timber of the hand, and by hue to the iron-red thread (the gilder's bole, Rojo Alicante).",
+      "oldChoice": "MI_timber_dark (oak in chestnut lacquer, #4A3326)",
+      "verdict": "replaced",
+      "verdictReason": "The species is the board's; the finish follows rank.",
+      "research": {
+        "records": [],
+        "needed": "Timber record; 地仗 and 铁红 workings; 彩画 as an ornament working."
+      }
+    },
+    {
+      "key": "accent.chinese-fir-guangqi",
+      "family": "accent",
+      "accentOf": "oak",
+      "realMaterial": "Chinese fir (杉木, Cunninghamia lanceolata) under 广漆 chestnut lacquer (raw urushi with tung oil)",
+      "workingsByEra": {
+        "classical": "广漆, translucent chestnut; worn thinner where hands and backs rub",
+        "modern": "absent",
+        "future": "absent"
+      },
+      "roles": [
+        "Chenghuai garden: flower hall, water pavilion, rockery pavilion, double gallery; also purlins, rafters and roof boards in the house (unfinished)"
+      ],
+      "why": "The Suzhou brown. It sits at fumed oak's value and hue, translucent over the grain as wax is over the oak.",
+      "oldChoice": "MI_timber_dark (oak in chestnut lacquer)",
+      "verdict": "replaced",
+      "verdictReason": "Real species under the real lacquer.",
+      "research": {
+        "records": [],
+        "needed": "Timber record; 广漆 working."
+      }
+    },
+    {
+      "key": "accent.phoebe",
+      "family": "accent",
+      "accentOf": "oak",
+      "realMaterial": "Phoebe (楠木, Phoebe zhennan), plantation-grown, waxed, never painted",
+      "workingsByEra": {
+        "classical": "carved, waxed",
+        "modern": "absent",
+        "future": "absent"
+      },
+      "roles": [
+        "Chenghuai: the main hall's carved 花罩 screens, every case plinth"
+      ],
+      "why": "The imperial timber, golden and silky; the natural oak's counterpart.",
+      "oldChoice": "(none)",
+      "verdict": "new",
+      "verdictReason": "Chenghuai's board.",
+      "research": {
+        "records": [],
+        "needed": "Timber record."
+      }
+    },
+    {
+      "key": "accent.silk",
+      "family": "accent",
+      "accentOf": "oak",
+      "realMaterial": "Plain-woven silk with a soft slub, stretched on battens over an interlining; dyed per chapter",
+      "workingsByEra": {
+        "classical": "stretched; bay 1 oxblood, 2 zinc, 3 sage, 4 old rose, 5 haystack; Manet cabinet green",
+        "modern": "absent",
+        "future": "absent"
+      },
+      "roles": [
+        "Salon: pier faces and walls of bays 1-5 (a 0.14 m stone edge left at each jamb), the Manet cabinet"
+      ],
+      "why": "The picture gallery's wall; each silk one step deeper than the stone and near the oak's value, so gilt frames glow against it.",
+      "oldChoice": "MI_wall_bay_* (ambientCG Fabric036, tinted)",
+      "verdict": "refined",
+      "verdictReason": "Real silk in the approved deeper colours.",
+      "research": {
+        "records": [],
+        "needed": "Textile record: weave, sheen, dye fading history."
+      }
+    },
+    {
+      "key": "accent.mohair-velvet",
+      "family": "accent",
+      "accentOf": "oak",
+      "realMaterial": "Mohair velvet, dyed in each bay's colour",
+      "workingsByEra": {
+        "classical": "upholstered on fumed oak",
+        "modern": "absent",
+        "future": "absent"
+      },
+      "roles": [
+        "Salon: backless benches in bays 2-5"
+      ],
+      "why": "The hard-wearing pile of museum and theatre seats; sheen by pile direction.",
+      "oldChoice": "M_Leather_Cognac (banquette cushions)",
+      "verdict": "replaced",
+      "verdictReason": "The approved Salon has velvet benches.",
+      "research": {
+        "records": [],
+        "needed": "Textile record (pile, sheen)."
+      }
+    },
+    {
+      "key": "accent.linen",
+      "family": "accent",
+      "accentOf": "oak",
+      "realMaterial": "Linen: muslin-weight blind and a stretched velarium cloth",
+      "workingsByEra": {
+        "classical": "stretched, translucent",
+        "modern": "absent",
+        "future": "absent"
+      },
+      "roles": [
+        "Salon: bay 4 lantern blind",
+        "Nymphéas oval: velarium under the laylight"
+      ],
+      "why": "A transmissive infill (D-014): the Orangerie's velum.",
+      "oldChoice": "(velarium as built)",
+      "verdict": "new",
+      "verdictReason": "The approved lantern glasses and oval.",
+      "research": {
+        "records": [],
+        "needed": "Textile record with transmission."
+      }
+    },
+    {
+      "key": "accent.wool-felt",
+      "family": "accent",
+      "accentOf": "oak",
+      "realMaterial": "Wool felt (undyed grey-green) and dyed wool baize",
+      "workingsByEra": {
+        "classical": "laid",
+        "modern": "absent",
+        "future": "absent"
+      },
+      "roles": [
+        "Reserve: mats under the Degas pastels",
+        "Albion: case beds (baize)"
+      ],
+      "why": "What the oak carries; soft and matt.",
+      "oldChoice": "M_Felt (#4E5A4C)",
+      "verdict": "kept",
+      "verdictReason": "As the old intent.",
+      "research": {
+        "records": [],
+        "needed": "Textile record."
+      }
+    },
+    {
+      "key": "glass.low-iron",
+      "family": "glass",
+      "accentOf": null,
+      "realMaterial": "Low-iron float glass, Pilkington Optiwhite: toughened, heat-strengthened, laminated with a UV-filtering interlayer; anti-reflective in cases; acid-etched (misty); laminated with mulberry paper (桑皮纸) in Chenghuai; a lenslet array in the Cube",
+      "workingsByEra": {
+        "classical": "laminated, UV-filtering (the Rotunda's eye, the Salon's lanterns); acid-etched laylights",
+        "modern": "clear, toughened, laminated (the Hall of Light)",
+        "future": "acid-etched (misty) drum and car floor; clear car and steles"
+      },
+      "roles": [
+        "Rotunda: eye",
+        "Classical Hall: laylights",
+        "Salon: lanterns (bays 1, 3, 5), stele, the 1874 case",
+        "Hall of Light: walls, vault",
+        "Chenghuai: lattice glazing (paper-laminated), cases",
+        "Albion: case glass",
+        "Atrium: misty drum, the car, the stele, the Sphere's underside",
+        "Cube: shaft glass, panel faces"
+      ],
+      "why": "Water-white glass: the iron taken out. The future is the one place in the museum without iron.",
+      "oldChoice": "M_Glass (Thin Translucent), M_MistyGlass",
+      "verdict": "refined",
+      "verdictReason": "Now a named make with real workings; Albion gets period glass.",
+      "research": {
+        "records": [
+          "r-matter: Substances/low-iron-glass.json",
+          "Workings/annealed, heat-strengthened, toughened, laminated, laminated.uv-filtering, anti-reflective",
+          "Histories/glass.soiling, glass.cleaning-wear, glass.water-stain, glass.edge-delamination"
+        ],
+        "needed": "Workings: acid-etched, paper-laminated, lenslet-array."
+      }
+    },
+    {
+      "key": "glass.clear-float",
+      "family": "glass",
+      "accentOf": null,
+      "realMaterial": "Ordinary soda-lime clear float glass (e.g. Pilkington Optifloat Clear), green along the edge, laminated with a UV-filtering interlayer",
+      "workingsByEra": {
+        "classical": "laminated, UV-filtering, soiled; flat facets lapping",
+        "modern": "absent",
+        "future": "absent"
+      },
+      "roles": [
+        "Albion: nave and aisle vaults, the north and south screens"
+      ],
+      "why": "A Victorian roof was never water-white: the iron in its glass is part of the period.",
+      "oldChoice": "M_Glass everywhere",
+      "verdict": "new",
+      "verdictReason": "Albion's own glass.",
+      "research": {
+        "records": [],
+        "needed": "Substance record (iron content, edge colour)."
+      }
+    },
+    {
+      "key": "glass.mouth-blown",
+      "family": "glass",
+      "accentOf": null,
+      "realMaterial": "Mouth-blown glass from Glashütte Lamberts (Waldsassen): pot-metal and flashed antique glass leaded in cames; flashed opal; cased opal globes",
+      "workingsByEra": {
+        "classical": "leaded (Albion); flashed opal (Salon bay 2); cased opal globes",
+        "modern": "absent",
+        "future": "absent"
+      },
+      "roles": [
+        "Albion: twelve lancets, the Tristram and Isolde band",
+        "Salon: bay 2 lantern",
+        "Reserve: globes",
+        "Albion: electrolier globes",
+        "Grounds: lamp globes"
+      ],
+      "why": "The glass stained glass is still made from; its colours tie to the Salon's chapter silks by hue.",
+      "oldChoice": "(Albion as built; opal globes)",
+      "verdict": "new",
+      "verdictReason": "Real glass for the approved stained glass and globes.",
+      "research": {
+        "records": [],
+        "needed": "Substance records: pot-metal, flashed, opal; a 'leaded' working."
+      }
+    },
+    {
+      "key": "water.still",
+      "family": "water",
+      "accentOf": null,
+      "realMaterial": "Still water over a dark bed; the Salon's pond dyed black with a reflecting-pool dye",
+      "workingsByEra": {
+        "classical": "still, black (Salon pond); still, clear over bluestone (Chenghuai pond, Grounds canal and basin)",
+        "modern": "absent",
+        "future": "absent"
+      },
+      "roles": [
+        "Salon oval: the lily pond",
+        "Chenghuai: the garden pond",
+        "Grounds: canal and round basin"
+      ],
+      "why": "Over a dark bed, the surface reflection dominates and the water becomes a mirror of the velarium, the panels and the sky.",
+      "oldChoice": "M_Water (Single Layer Water)",
+      "verdict": "kept",
+      "verdictReason": "Dark bed now real stone; black dye as real practice.",
+      "research": {
+        "records": [],
+        "needed": "Record for water optics and pond dye absorption."
+      }
+    }
+  ]
+}
