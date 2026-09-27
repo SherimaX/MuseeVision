@@ -5,6 +5,7 @@
 #include "Kernel/PlanRuns.h"
 #include "Kernel/Sweep.h"
 #include "Kernel/Tolerances.h"
+#include "Stations/Stations.h"
 
 /**
  * A sweep in plan runs its section along frames laid on the plan path. A sweep on a face is drawn the same way in the
@@ -18,7 +19,14 @@ namespace Musee::Form::Drawing
 	namespace
 	{
 		/** Two distances along a face closer than the weld tolerance are one. */
-		constexpr double Same = WeldToleranceMeters;
+		constexpr double SameAlongFace = WeldToleranceMeters;
+
+		/**
+		 * A face's station that falls within a chord tolerance (1 mm) of one of the path's is not added: the path's chord
+		 * already stands on the face there within a hair (the face bends by the square of that millimetre over its radius),
+		 * and a shorter chord has no direction a frame can be set by (a direction under 0.1 mm normalises to nothing).
+		 */
+		constexpr double NearStationMeters = DefaultChordToleranceMeters;
 
 		/** The frame of a sweep's end cut on a plane through its origin: the section carried along the travel onto the plane. */
 		bool CutFrame(FSweepFrame& Frame, const FVector& PlaneNormal, FString& OutWhy)
@@ -88,12 +96,16 @@ namespace Musee::Form::Drawing
 				const double ToLength = Path.LengthAtSegmentEnd(Index);
 				const double Low = FMath::Min(From.Point.X, To.Point.X);
 				const double High = FMath::Max(From.Point.X, To.Point.X);
+				// A station the face would add within a millimetre of either end stands there already (see NearStationMeters).
+				const double Chord = FVector2D::Distance(From.Point, To.Point);
 				TArray<double> Crossed;
 				for (const FSweepFrame& Station : Face.Line)
 				{
-					if (Station.U > Low + Same && Station.U < High - Same)
+					const double Alpha = Station.U > Low + SameAlongFace && Station.U < High - SameAlongFace
+						? (Station.U - From.Point.X) / (To.Point.X - From.Point.X) : -1.0;
+					if (Alpha * Chord > NearStationMeters && (1.0 - Alpha) * Chord > NearStationMeters)
 					{
-						Crossed.Add((Station.U - From.Point.X) / (To.Point.X - From.Point.X));
+						Crossed.Add(Alpha);
 					}
 				}
 				Crossed.Sort();
@@ -166,7 +178,7 @@ namespace Musee::Form::Drawing
 			const FProfileStations Path = DevelopedPath(Resolve(Shape.Path), Shape.ElevationMeters, Face);
 			for (const FProfileVertex& Vertex : Path.Vertices)
 			{
-				if (Vertex.Point.X < -Same || Vertex.Point.X > Face.Length() + Same)
+				if (Vertex.Point.X < -SameAlongFace || Vertex.Point.X > Face.Length() + SameAlongFace)
 				{
 					OutWhy = FString::Printf(TEXT("the path runs off its face (U %.4f m of %.4f m)"), Vertex.Point.X, Face.Length());
 					return false;
