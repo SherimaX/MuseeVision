@@ -28,23 +28,25 @@ namespace Musee::Nympheas
 		}
 
 		/**
-		 * The ports: the east doorway on the passage's port face, which meets the Salon's west door; and the stair's foot
-		 * at the Reserve's west door, whose well (the stair's shaft under the oval) the oval serves.
+		 * The ports: the east doorway on the passage's port face, which meets the Salon's west door (the oval draws its own
+		 * architrave round it, P6); and the stair's foot at the Reserve's west door, whose well (the stair's shaft under the
+		 * oval) the oval serves.
 		 */
 		void Ports(FSiteDescription& Out)
 		{
 			FSitePort& East = Out.Ports.AddDefaulted_GetRef();
 			East.Key = Key(TEXT("east"));
 			East.Kind = ESitePortKind::Doorway;
-			East.Class = FMuseeKey(TEXT("doorway.3000x4800.arched"));
+			East.Class = FMuseeKey(Plan::EastClass);
 			East.Frame = FMuseeFrame(FVector(Plan::PortFaceX, 0.0, 0.0));
 			East.WallDepthMeters = Plan::PortFaceX - Plan::OvalA;
 			East.Mates = FMuseeKey(TEXT("salon.west"));
+			East.bOwnSurround = true;
 
 			FSitePort& Stair = Out.Ports.AddDefaulted_GetRef();
 			Stair.Key = Key(TEXT("stair"));
 			Stair.Kind = ESitePortKind::Stairwell;
-			Stair.Class = FMuseeKey(TEXT("stairwell.straight.2400x3200.arched"));
+			Stair.Class = FMuseeKey(Plan::StairClass);
 			Stair.Frame = FMuseeFrame(FVector(Plan::PortFaceX, 0.0, Plan::WellFloor));
 			Stair.WallDepthMeters = Plan::PortFaceX - Plan::HeadWallX;
 			Stair.Mates = FMuseeKey(TEXT("reserve.stair"));

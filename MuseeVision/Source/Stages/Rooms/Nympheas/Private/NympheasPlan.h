@@ -29,6 +29,9 @@ namespace Musee::Nympheas::Plan
 	inline constexpr double DoorWidth = 3.000;
 	inline constexpr double DoorSpringing = 3.300;
 	inline constexpr double PortFaceX = 11.900;
+	/** The two ports' classes (§2), from Data/Site/PortClasses.json. */
+	inline constexpr const TCHAR* EastClass = TEXT("doorway.3000x4800.arched");
+	inline constexpr const TCHAR* StairClass = TEXT("stairwell.straight.2400x3200.arched");
 	/** The passage block fills |y| ≤ 2.100 between the port face and the oval's outer face, floor to a flat top. */
 	inline constexpr double BlockHalfWidth = 2.100;
 	inline constexpr double BlockTop = 5.200;
