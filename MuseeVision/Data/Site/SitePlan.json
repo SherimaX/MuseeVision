@@ -15,6 +15,36 @@
       "b": "salon.west",
       "passageMeters": 0.0,
       "note": "The oval passage: the Salon's bay 5 far wall meets the oval's passage block."
+    },
+    {
+      "a": "rotunda.west",
+      "b": "salon.east",
+      "passageMeters": 2.2,
+      "note": "The Rotunda's west door to the Salon's Bay 1 end wall (outer face museum x -13.40): the joint's 2.20 m passage, a plain drum-section arch (rotunda.md section 2)."
+    },
+    {
+      "a": "rotunda.north",
+      "b": "chenghuai.south",
+      "passageMeters": 0.0,
+      "note": "The Rotunda's north door onto Chenghuai's open porch on the drum face (rotunda.md section 2)."
+    },
+    {
+      "a": "rotunda.south",
+      "b": "albion.north",
+      "passageMeters": 0.0,
+      "note": "The Rotunda's south door to Albion's porch, its flat end wall tangent to the drum; the joint fills the wedges (rotunda.md section 2)."
+    },
+    {
+      "a": "rotunda.east",
+      "b": "hall-of-light.west",
+      "passageMeters": 0.0,
+      "note": "The Rotunda's east door to the Hall of Light's concave R 11.20 face, the way on (rotunda.md section 2)."
+    },
+    {
+      "a": "rotunda.stair",
+      "b": "classical-hall.stair",
+      "passageMeters": 0.0,
+      "note": "The spiral stair's portal at the landing (0, -7.60, -6.00), facing north, served by the Rotunda's well; the Classical Hall reserves the prism (rotunda.md section 2)."
     }
   ]
 }
