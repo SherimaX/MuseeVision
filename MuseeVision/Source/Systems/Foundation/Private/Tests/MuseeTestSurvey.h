@@ -1,0 +1,30 @@
+#pragma once
+
+#include "CoreMinimal.h"
+
+#include "MuseeTestSurvey.generated.h"
+
+/**
+ * A record the reader's tests read vectors into: a surveyed point, a size, a plan outline and a path, as a stage's
+ * schedules write them (`[x, y, z]`, `[x, y]`, `[[x, y], ...]`).
+ */
+USTRUCT()
+struct FMuseeTestSurvey
+{
+	GENERATED_BODY()
+
+	UPROPERTY(meta = (Units = "Meters"))
+	FVector PointMeters = FVector::ZeroVector;
+
+	UPROPERTY(meta = (Units = "Meters"))
+	FVector2D SizeMeters = FVector2D::ZeroVector;
+
+	UPROPERTY()
+	TArray<FVector2D> Outline;
+
+	UPROPERTY()
+	TArray<FVector> Path;
+
+	UPROPERTY()
+	TMap<FName, FVector2D> Marks;
+};

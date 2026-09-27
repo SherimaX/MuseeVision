@@ -93,6 +93,36 @@ namespace Musee::Records
 			return FMuseeKey::IsValid(Text, &Why) || Reading.Fail(Where, FString::Printf(TEXT("'%s' is not a key: %s"), *Text, *Why));
 		}
 
+		/** The engine's vectors a record may write as a plain array of numbers: [x, y, z] and [x, y]. */
+		int32 VectorComponents(const UScriptStruct& Type)
+		{
+			if (&Type == TBaseStructure<FVector>::Get())
+			{
+				return 3;
+			}
+			return &Type == TBaseStructure<FVector2D>::Get() ? 2 : 0;
+		}
+
+		/** The names of a vector's components, as the engine's converter reads them from an object. */
+		const TCHAR* const VectorFields[] = { TEXT("X"), TEXT("Y"), TEXT("Z") };
+
+		bool CheckVector(int32 Components, const FJsonValue& Value, FReading& Reading, const FString& Where)
+		{
+			const TArray<TSharedPtr<FJsonValue>>& Items = Value.AsArray();
+			if (Items.Num() != Components)
+			{
+				return Reading.Fail(Where, FString::Printf(TEXT("has %d numbers where a vector of %d is written"), Items.Num(), Components));
+			}
+			for (int32 Index = 0; Index < Items.Num(); ++Index)
+			{
+				if (!Items[Index].IsValid() || !Expect(*Items[Index], EJson::Number, Reading, Element(Where, Index), TEXT("a number")))
+				{
+					return false;
+				}
+			}
+			return true;
+		}
+
 		bool ValidateObject(const UStruct& Type, const FJsonObject& Object, FReading& Reading, const FString& Where);
 
 		bool ValidateElement(const FProperty& Property, const FJsonValue& Value, FReading& Reading, const FString& Where);
@@ -149,6 +179,10 @@ namespace Musee::Records
 			{
 				// The engine's own text form of the struct (a colour, a date), converted by the struct itself.
 				return true;
+			}
+			if (const int32 Components = VectorComponents(*Struct.Struct); Components > 0 && Value.Type == EJson::Array)
+			{
+				return CheckVector(Components, Value, Reading, Where);
 			}
 			return Expect(Value, EJson::Object, Reading, Where, TEXT("an object")) && ValidateObject(*Struct.Struct, *Value.AsObject(), Reading, Where);
 		}
@@ -258,6 +292,72 @@ namespace Musee::Records
 				if (const UStruct* Inner = ElementStruct(**It))
 				{
 					CollectFields(*Inner, Fields, Seen);
+				}
+			}
+		}
+
+		void ShapeObject(const UStruct& Type, FJsonObject& Object);
+
+		/**
+		 * The value the engine's converter is given for one element: a vector written as an array becomes the object of
+		 * its components, which is the only form the converter reads; nested structs and containers are shaped within.
+		 */
+		TSharedPtr<FJsonValue> Shaped(const FProperty& Property, const TSharedPtr<FJsonValue>& Value)
+		{
+			if (!Value.IsValid() || Value->IsNull())
+			{
+				return Value;
+			}
+			const FProperty* Inner = nullptr;
+			if (const FArrayProperty* Array = CastField<FArrayProperty>(&Property)) { Inner = Array->Inner; }
+			else if (const FSetProperty* Set = CastField<FSetProperty>(&Property)) { Inner = Set->ElementProp; }
+			if (Inner && Value->Type == EJson::Array)
+			{
+				TArray<TSharedPtr<FJsonValue>> Items;
+				for (const TSharedPtr<FJsonValue>& Item : Value->AsArray())
+				{
+					Items.Add(Shaped(*Inner, Item));
+				}
+				return MakeShared<FJsonValueArray>(Items);
+			}
+			if (const FMapProperty* Map = CastField<FMapProperty>(&Property); Map && Value->Type == EJson::Object)
+			{
+				for (auto& Entry : Value->AsObject()->Values)
+				{
+					Entry.Value = Shaped(*Map->ValueProp, Entry.Value);
+				}
+				return Value;
+			}
+			const FStructProperty* Struct = CastField<FStructProperty>(&Property);
+			if (!Struct)
+			{
+				return Value;
+			}
+			if (Value->Type == EJson::Object)
+			{
+				ShapeObject(*Struct->Struct, *Value->AsObject());
+				return Value;
+			}
+			const int32 Components = VectorComponents(*Struct->Struct);
+			if (Components == 0 || Value->Type != EJson::Array)
+			{
+				return Value;
+			}
+			const TSharedRef<FJsonObject> Vector = MakeShared<FJsonObject>();
+			for (int32 Index = 0; Index < Components; ++Index)
+			{
+				Vector->SetField(VectorFields[Index], Value->AsArray()[Index]);
+			}
+			return MakeShared<FJsonValueObject>(Vector);
+		}
+
+		void ShapeObject(const UStruct& Type, FJsonObject& Object)
+		{
+			for (auto& Field : Object.Values)
+			{
+				if (const FProperty* Property = Type.FindPropertyByName(FName(*Field.Key)))
+				{
+					Field.Value = Shaped(*Property, Field.Value);
 				}
 			}
 		}
@@ -450,6 +550,7 @@ namespace Musee::Records
 			}
 			for (const TPair<FString, TSharedRef<FJsonObject>>& Record : Records)
 			{
+				ShapeObject(Type, *Record.Value);
 				FText Reason;
 				if (!FJsonObjectConverter::JsonObjectToUStruct(Record.Value, &Type, Emplace(), 0, 0, false, &Reason))
 				{
