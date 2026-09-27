@@ -193,70 +193,27 @@
   ],
   "channels": [
     {
-      "channel": "cube.up.closure",
-      "declaredBy": "cube",
-      "values": "0 shut, 0.378 clamp, 1 open",
-      "setBy": "atrium.car.lift (its channel steps in open/close and rides)",
-      "followedBy": [
-        "cube.up.iris.blade.1",
-        "cube.up.iris.blade.2",
-        "cube.up.iris.blade.3",
-        "cube.up.iris.blade.4",
-        "cube.up.iris.blade.5",
-        "cube.up.iris.blade.6",
-        "cube.up.iris.blade.7"
-      ],
-      "note": "The closure of cube.up (the Cube's ceiling iris). Held by interlocks C-1...C-3 (sheet 6)."
-    },
-    {
-      "channel": "cube.performance.active",
-      "declaredBy": "cube",
-      "values": "0 or 1",
-      "setBy": "cube.sea-light (performances below; Art's work publishes it)",
-      "readBy": [
-        "atrium.car.lift rides at cube (requires atMost 0)",
-        "cube.mast.light"
-      ],
-      "note": "1 from the work's Begin until its fade-out has ended, else 0. The car may not leave the cube stop while it is above 0 (A-8, C-4)."
-    },
-    {
-      "channel": "cube.mast.light",
-      "declaredBy": "cube",
-      "values": "0 ... 1",
-      "derive": {
-        "when": {
-          "channels": [
-            {
-              "channel": "atrium.car.height",
-              "atMost": 0.301705
-            },
-            {
-              "channel": "cube.performance.active",
-              "atMost": 0.0
-            }
-          ]
-        },
-        "to": 1.0,
-        "else": 0.0,
-        "time": 2.5
+      "key": "cube.mast.light",
+      "follows": {
+        "channel": "cube.performance.active",
+        "in": [
+          0.0,
+          1.0
+        ],
+        "out": [
+          1.0,
+          0.0
+        ]
       },
-      "followedBy": [
-        "mast.1",
-        "mast.2",
-        "mast.3",
-        "mast.4"
-      ],
-      "note": "The mast pinspots: 1 while the car floor is at or below the clamp level + 0.5 (-10.325; fraction 0.301705 of the car's travel) and no work performs; else 0; ramped over 2.5 s (the car's light time)."
+      "note": "The mast pinspots: on while no work performs. Their operation 'presence' keeps them off unless the visitor's car is in the Cube."
     }
   ],
   "performances": [
     {
       "key": "cube.sea-light",
-      "work": "sea-light",
       "use": "cube.performance",
-      "at": "cube",
-      "verb": "II · Sea Light, 8 min",
-      "caption": "A sea at night, full of dinoflagellates that flash blue when the water moves. Nothing lights up unless something moves, and the first thing that moves is you.",
+      "seconds": 480,
+      "publishes": "cube.performance.active",
       "requires": {
         "mated": [
           "cube.up"
@@ -281,49 +238,14 @@
           {
             "channel": "atrium.car.light",
             "atMost": 0.03
-          },
-          {
-            "channel": "cube.performance.active",
-            "atMost": 0.0
           }
         ]
       },
-      "sequence": [
-        {
-          "channel": "cube.performance.active",
-          "to": 1.0,
-          "time": 0.0
-        }
-      ],
-      "length": 480.0,
+      "verb": "II · Sea Light, 8 min",
+      "caption": "A sea at night, full of dinoflagellates that flash blue when the water moves. Nothing lights up unless something moves, and the first thing that moves is you.",
       "fadeIn": 2.0,
       "fadeOut": 3.0,
-      "end": {
-        "verb": "End the piece",
-        "caption": "",
-        "use": "cube.performance",
-        "requires": {
-          "channels": [
-            {
-              "channel": "cube.performance.active",
-              "atLeast": 1.0
-            }
-          ]
-        },
-        "sequence": [
-          {
-            "channel": "cube.performance.active",
-            "to": 0.0,
-            "time": 3.0
-          }
-        ]
-      },
-      "endsWhen": [
-        "its score ends at 480 s (then the 3 s fade-out)",
-        "End the piece",
-        "the eyes leave the room's cube (|x|, |y| or |z + 22| > 14.000)"
-      ],
-      "note": "Sea Light performs only in the sealed Cube: the car at the cube stop, its leaves shut, its light at the glimmer, the ceiling iris clamped round the mast head. The channel steps to 1 at Begin and falls to 0 when the 3 s fade-out has ended (the step's time is the fade). The Atrium's rides from cube require it at most 0. The work draws only through the panel wall's image (Light's image source); it pushes no sky and lights no piece."
+      "note": "Sea Light performs only in the sealed Cube: the car at the cube stop, leaves shut, its light at the glimmer, the ceiling iris clamped round the mast head. Publishes 1 while it runs (480 s, fading in 2 s and out 3 s) and 0 otherwise; a second use (\"End the piece\") ends it, and it ends when the eyes leave the room (|x|, |y| or |z + 22| > 14.000). A running performance is not offered again. The Atrium's rides from cube require it at most 0. It draws only through the panel wall's image; it pushes no sky and lights no piece."
     }
   ]
 }

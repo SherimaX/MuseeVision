@@ -163,6 +163,10 @@ Mechanisms.json { "stage": "<room>", "mechanisms": [ { "key": "<stage>.<mech>", 
   atLeast|atMost}]}, sequence}]` — structured, never prose, and no memory of the visit. No `range`, no `pin` (a revolute
   body's frame origin is its pivot). Vertical ports (class `iris.4600`) are closed by the iris of the stage BELOW the
   plane, which publishes `<that stage's up port>.closure`.
+- **Performances and derived channels** (Mechanisms.json): `"performances": [{key, use, seconds, publishes,
+  requires}]` (publishes 1 while running; requires as a ride's); `"channels": [{key, follows: {channel, in, out}}]`
+  (one channel, clamped linear map; combine conditions with a luminaire's operation, not in the channel). Lighting
+  targets may carry `"when": {mechanism, stop}`.
 - **Anchors.** Section 1 or 3 of the sheet carries an **Anchors** table: key, kind, frame (position, plus the axes
   or facing), and what it belongs to. The kinds are Body, Use, Mount, Wall, Bed, Water and Seat. Every anchor that
   any schedule names must appear in it. A Wall anchor's frame has its origin at the face, x along the wall, y out of

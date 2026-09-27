@@ -293,8 +293,8 @@ drawn shut, opening 52° towards decreasing plan angle; **follow `cube.up.closur
 **Channels** (Mechanisms.json `channels`):
 - `cube.up.closure`: stepped by the Atrium's `atrium.car.lift` sequences (below); the blades follow it.
 - `cube.performance.active`: 1 from a work's Begin until its fade-out has ended, else 0 (the performance below).
-- `cube.mast.light`: 1 while `atrium.car.height` ≤ 0.301705 (car floor at or below −10.325, the clamp level + 0.5) and
-  `cube.performance.active` ≤ 0, else 0, ramped over 2.5 s.
+- `cube.mast.light` (derived; Mechanisms.json `channels`): follows `cube.performance.active` in [0, 1] → out [1, 0].
+  The pinspots' operation is `presence`, so they light only with the visitor's car in the Cube, and while no work performs.
 
 **The Atrium's sequences at the Cube (matched with `atrium.md` §6 and its Mechanisms.json):**
 - "Down to the Cube" (`atrium.car.panel` at `atrium`; requires `atrium.down` mated): leaves shut → `cube.up.closure` → 1
@@ -505,6 +505,7 @@ scale.
 - **Unmated** (the stand): Site's blind iris on the plane, the ceiling iris shut, no car, no performance.
 
 **Departures from as-built** (for the owner's review):
+- **Mast pinspots** (contract shape): as built on below the clamp + 0.5 with no work performing; now `presence` with a derived channel that follows the performance, which is equivalent because the visitor is in the Cube only in the car.
 - **Ruled with the Atrium:** the port is `cube.up` (class `iris.4600`) closed by the Cube's own ceiling iris; the car, the
   mast head and the column are the Atrium's; the clamp (−10.825) and gate (−7.750) are kept exactly.
 - **Retired (D-001):** the Matterhorn and Raja Ampat journeys, "Down: later, new art" and the journey mode that hid the

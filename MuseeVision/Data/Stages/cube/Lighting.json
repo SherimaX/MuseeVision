@@ -793,7 +793,7 @@
       ],
       "operation": "presence",
       "follows": "cube.mast.light",
-      "note": "Mast pinspot, bearing 45: a miniature 5 deg pinspot under the soffit ring's inner edge, grazing the gilt mast down to the car's crown (aim 0.6 over the crown at the stop; throw 12.46, 11.6 deg off vertical); its beam ends on the car. On while the car is in the room below the clamp level + 0.5 and no work performs (cube.mast.light)."
+      "note": "Mast pinspot, bearing 45: a miniature 5 deg pinspot under the soffit ring's inner edge, grazing the gilt mast down to the car's crown (aim 0.6 over the crown at the stop; throw 12.46, 11.6 deg off vertical); its beam ends on the car. On with the visitor's car in the Cube (presence) while no work performs (follows cube.mast.light)."
     },
     {
       "id": "mast.2",
@@ -810,7 +810,7 @@
       ],
       "operation": "presence",
       "follows": "cube.mast.light",
-      "note": "Mast pinspot, bearing 135: a miniature 5 deg pinspot under the soffit ring's inner edge, grazing the gilt mast down to the car's crown (aim 0.6 over the crown at the stop; throw 12.46, 11.6 deg off vertical); its beam ends on the car. On while the car is in the room below the clamp level + 0.5 and no work performs (cube.mast.light)."
+      "note": "Mast pinspot, bearing 135: a miniature 5 deg pinspot under the soffit ring's inner edge, grazing the gilt mast down to the car's crown (aim 0.6 over the crown at the stop; throw 12.46, 11.6 deg off vertical); its beam ends on the car. On with the visitor's car in the Cube (presence) while no work performs (follows cube.mast.light)."
     },
     {
       "id": "mast.3",
@@ -827,7 +827,7 @@
       ],
       "operation": "presence",
       "follows": "cube.mast.light",
-      "note": "Mast pinspot, bearing 225: a miniature 5 deg pinspot under the soffit ring's inner edge, grazing the gilt mast down to the car's crown (aim 0.6 over the crown at the stop; throw 12.46, 11.6 deg off vertical); its beam ends on the car. On while the car is in the room below the clamp level + 0.5 and no work performs (cube.mast.light)."
+      "note": "Mast pinspot, bearing 225: a miniature 5 deg pinspot under the soffit ring's inner edge, grazing the gilt mast down to the car's crown (aim 0.6 over the crown at the stop; throw 12.46, 11.6 deg off vertical); its beam ends on the car. On with the visitor's car in the Cube (presence) while no work performs (follows cube.mast.light)."
     },
     {
       "id": "mast.4",
@@ -844,7 +844,7 @@
       ],
       "operation": "presence",
       "follows": "cube.mast.light",
-      "note": "Mast pinspot, bearing 315: a miniature 5 deg pinspot under the soffit ring's inner edge, grazing the gilt mast down to the car's crown (aim 0.6 over the crown at the stop; throw 12.46, 11.6 deg off vertical); its beam ends on the car. On while the car is in the room below the clamp level + 0.5 and no work performs (cube.mast.light)."
+      "note": "Mast pinspot, bearing 315: a miniature 5 deg pinspot under the soffit ring's inner edge, grazing the gilt mast down to the car's crown (aim 0.6 over the crown at the stop; throw 12.46, 11.6 deg off vertical); its beam ends on the car. On with the visitor's car in the Cube (presence) while no work performs (follows cube.mast.light)."
     }
   ],
   "targets": [],
