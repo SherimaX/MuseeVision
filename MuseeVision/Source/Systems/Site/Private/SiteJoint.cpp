@@ -39,6 +39,12 @@ namespace Musee::Site
 			FJointFace InnerA;
 			FJointFace FaceB;
 			FJointFace InnerB;
+			/** Where the joint's lining ends on each side: the wall's inner face, or the face of the stage's own reveal. */
+			FJointFace LiningA;
+			FJointFace LiningB;
+			/** Whether each side's floor is its own threshold. */
+			bool bOwnThresholdA = false;
+			bool bOwnThresholdB = false;
 			double Passage = 0.0;
 			TArray<FFormDrawing>& Out;
 
@@ -101,37 +107,93 @@ namespace Musee::Site
 			return {Face.Offset(-0.5 * Width), Face.Offset(0.5 * Width)};
 		}
 
+		/** Whether a face stands strictly between two others on the opening's axis. */
+		bool Within(const FJointFace& Face, const FJointFace& From, const FJointFace& To)
+		{
+			const double X = Face.XAt(0.0);
+			return X > From.XAt(0.0) + FaceToleranceMeters && X < To.XAt(0.0) - FaceToleranceMeters;
+		}
+
 		/**
-		 * The threshold through both walls and any passage, and the bronze strips set in it flush with the floors; a stone
-		 * between two cuts on one face (a strip's edge on a wall-less port's face) has no length and isn't laid.
+		 * The threshold through both walls and any passage, and the bronze strips set in it flush with the floors, on the
+		 * mating plane. A side whose floor is its own threshold gets no stone; where a stage finishes its own reveal, the
+		 * stone is the clear opening's width, and the rough opening's in front of it, where the joint's lining stands. A
+		 * stone between two cuts on one face (a strip's edge on a wall-less port's face) has no length and isn't laid.
 		 */
 		void Threshold(FJointDraft& Draft)
 		{
 			const FSitePortClass& Class = Draft.Class;
 			const double Rough = Draft.Rough();
+			const double Half = Draft.Half();
 			TArray<FJointFace> Cuts = {Draft.InnerA};
 			int32 Strip = 0;
+			// A strip runs between the finished jambs at its face: the clear opening where a stage's own reveal reaches the
+			// face, the rough opening where the joint's lining stands on it.
+			const bool bTouching = Draft.Passage <= FaceToleranceMeters;
+			auto StripHalf = [&Draft, bTouching, Half, Rough](const FJointFace& Face)
+			{
+				const bool bOwnAtA = Draft.LiningA.SameAs(Draft.FaceA) && (bTouching || Face.SameAs(Draft.FaceA));
+				const bool bOwnAtB = Draft.LiningB.SameAs(Draft.FaceB) && (bTouching || Face.SameAs(Draft.FaceB));
+				return bOwnAtA || bOwnAtB ? Half : Rough;
+			};
 			for (const FJointFace& Face : Class.StripMeters > 0.0 ? StripFaces(Draft) : TArray<FJointFace>())
 			{
 				const auto [Near, Far] = StripEdges(Draft, Face);
-				Draft.Add(FString::Printf(TEXT("strip.%d"), Strip++), Draft.Record.Strip, SlabBetween(Near, Far, -Rough, Rough, Draft.Record.StripDepthMeters),
+				const double Across = StripHalf(Face);
+				Draft.Add(FString::Printf(TEXT("strip.%d"), Strip++), Draft.Record.Strip, SlabBetween(Near, Far, -Across, Across, Draft.Record.StripDepthMeters),
 					Musee::Collision::Walkable, FMuseeFrame(FVector(0.0, 0.0, -Draft.Record.StripDepthMeters)));
 				Cuts.Add(Near);
 				Cuts.Add(Far);
 			}
 			Cuts.Add(Draft.InnerB);
-			if (Class.AllowanceMeters <= 0.0)
+			int32 Laid = 0;
+			auto Lay = [&Draft, &Laid](const FJointFace& From, const FJointFace& To, double Across)
 			{
-				return;
-			}
-			for (int32 Index = 0; Index + 1 < Cuts.Num(); Index += 2)
+				if (!From.SameAs(To))
+				{
+					Draft.Add(FString::Printf(TEXT("threshold.%d"), Laid++), Draft.Record.Threshold, SlabBetween(From, To, -Across, Across,
+						Draft.Record.ThresholdMeters), Musee::Collision::Walkable, FMuseeFrame(FVector(0.0, 0.0, -Draft.Record.ThresholdMeters)));
+				}
+			};
+			const int32 Stones = Cuts.Num() / 2;
+			for (int32 Stone = 0; Stone < Stones; ++Stone)
 			{
-				if (Cuts[Index].SameAs(Cuts[Index + 1]))
+				const FJointFace& From = Cuts[2 * Stone];
+				const FJointFace& To = Cuts[2 * Stone + 1];
+				const bool bSideA = Stone == 0;
+				const bool bSideB = Stone == Stones - 1;
+				if ((bSideA && Draft.bOwnThresholdA) || (bSideB && Draft.bOwnThresholdB))
 				{
 					continue;
 				}
-				Draft.Add(FString::Printf(TEXT("threshold.%d"), Index / 2),Draft.Record.Threshold, SlabBetween(Cuts[Index], Cuts[Index + 1], -Rough, Rough,
-					Draft.Record.ThresholdMeters), Musee::Collision::Walkable, FMuseeFrame(FVector(0.0, 0.0, -Draft.Record.ThresholdMeters)));
+				if (bSideA && !Draft.LiningA.SameAs(Draft.InnerA))
+				{
+					if (Within(Draft.LiningA, From, To))
+					{
+						Lay(From, Draft.LiningA, Half);
+						Lay(Draft.LiningA, To, Rough);
+					}
+					else
+					{
+						Lay(From, To, Half);
+					}
+				}
+				else if (bSideB && !Draft.LiningB.SameAs(Draft.InnerB))
+				{
+					if (Within(Draft.LiningB, From, To))
+					{
+						Lay(From, Draft.LiningB, Rough);
+						Lay(Draft.LiningB, To, Half);
+					}
+					else
+					{
+						Lay(From, To, Half);
+					}
+				}
+				else
+				{
+					Lay(From, To, Rough);
+				}
 			}
 		}
 
@@ -150,9 +212,9 @@ namespace Musee::Site
 				.ArcAbout(Centre, Radius, Radius, ToDeg, FromDeg, EFormJoint::Smooth)
 				.LineTo(Centre + Outer * FVector2D(FMath::Cos(From), FMath::Sin(From)), EFormJoint::Crisp)
 				.ArcAbout(Centre, Outer, Outer, FromDeg, ToDeg, EFormJoint::Crisp).Close();
-			Shape.Path = FFormProfile::Polyline({FVector2D(Draft.InnerA.XAt(Across), Across), FVector2D(Draft.InnerB.XAt(Across), Across)}, false);
-			const FVector2D StartNormal = Draft.InnerA.NormalAt(Across);
-			const FVector2D EndNormal = Draft.InnerB.NormalAt(Across);
+			Shape.Path = FFormProfile::Polyline({FVector2D(Draft.LiningA.XAt(Across), Across), FVector2D(Draft.LiningB.XAt(Across), Across)}, false);
+			const FVector2D StartNormal = Draft.LiningA.NormalAt(Across);
+			const FVector2D EndNormal = Draft.LiningB.NormalAt(Across);
 			Shape.StartCut = FVector(StartNormal.X, StartNormal.Y, 0.0);
 			Shape.EndCut = FVector(EndNormal.X, EndNormal.Y, 0.0);
 			FFormShape Voussoir;
@@ -161,25 +223,30 @@ namespace Musee::Site
 		}
 
 		/**
-		 * The linings in front of both rough openings, through from A's inner face to B's: the jambs standing on the
-		 * threshold, and the head, a lintel stone or an arch of voussoirs short enough that each end's chamfer keeps to a
-		 * curved face.
+		 * The linings in front of the rough openings, through from where A's lining ends to where B's does (each wall's
+		 * inner face, or the face of a stage's own reveal): the jambs standing on the threshold, and the head, a lintel
+		 * stone or an arch of voussoirs short enough that each end's chamfer keeps to a curved face. None where both
+		 * stages finish their own openings to one face.
 		 */
 		void Linings(FJointDraft& Draft)
 		{
 			const FSitePortClass& Class = Draft.Class;
 			const double Half = Draft.Half();
 			const double Rough = Draft.Rough();
-			Draft.Add(TEXT("lining.jamb.north"), Draft.Record.Lining, SlabBetween(Draft.InnerA, Draft.InnerB, -Rough, -Half, Class.HeadMeters), Musee::Collision::Solid);
-			Draft.Add(TEXT("lining.jamb.south"), Draft.Record.Lining, SlabBetween(Draft.InnerA, Draft.InnerB, Half, Rough, Class.HeadMeters), Musee::Collision::Solid);
+			if (Draft.LiningA.SameAs(Draft.LiningB))
+			{
+				return;
+			}
+			Draft.Add(TEXT("lining.jamb.north"), Draft.Record.Lining, SlabBetween(Draft.LiningA, Draft.LiningB, -Rough, -Half, Class.HeadMeters), Musee::Collision::Solid);
+			Draft.Add(TEXT("lining.jamb.south"), Draft.Record.Lining, SlabBetween(Draft.LiningA, Draft.LiningB, Half, Rough, Class.HeadMeters), Musee::Collision::Solid);
 			if (!Class.Arched)
 			{
-				Draft.Add(TEXT("lining.head"), Draft.Record.Lining, SlabBetween(Draft.InnerA, Draft.InnerB, -Rough, Rough, Class.AllowanceMeters),
+				Draft.Add(TEXT("lining.head"), Draft.Record.Lining, SlabBetween(Draft.LiningA, Draft.LiningB, -Rough, Rough, Class.AllowanceMeters),
 					Musee::Collision::Solid, FMuseeFrame(FVector(0.0, 0.0, Class.HeadMeters)));
 				return;
 			}
 			// A chamfered end leaves a face of radius R by w^2 / (8 R) across a voussoir w wide.
-			const double Tightest = FMath::Max(Draft.InnerA.Tightness(), Draft.InnerB.Tightness());
+			const double Tightest = FMath::Max(Draft.LiningA.Tightness(), Draft.LiningB.Tightness());
 			const double Widest = Tightest > 0.0 ? FMath::Sqrt(8.0 * FaceToleranceMeters / Tightest) : TNumericLimits<double>::Max();
 			const int32 Stones = FMath::Max(FMath::CeilToInt32(UE_DOUBLE_PI * Rough / Draft.Record.LiningStoneMeters), FMath::CeilToInt32(UE_DOUBLE_PI * Rough / Widest));
 			for (int32 Stone = 0; Stone < Stones; ++Stone)
@@ -291,6 +358,30 @@ namespace Musee::Site
 		return ReadRecord<FSiteJointRecord>(Path);
 	}
 
+	double SurroundReachMeters(const FSiteJointRecord& Record)
+	{
+		const FFormProfile& Section = Record.SurroundSection;
+		double Reach = Section.Start.IsEmpty() ? 0.0 : Section.Start[0];
+		for (const FFormProfileStep& Step : Section.Steps)
+		{
+			if (!Step.IsArc())
+			{
+				Reach = FMath::Max(Reach, Step.Line[0]);
+			}
+			else if (!Step.Arc.CenterMeters.IsEmpty() && !Step.Arc.RadiiMeters.IsEmpty())
+			{
+				// An arc reaches furthest at an end, or where it passes angle 0 on the way.
+				const FFormArc& Arc = Step.Arc;
+				const double Low = FMath::Min(Arc.FromDegrees, Arc.ToDegrees);
+				const double High = FMath::Max(Arc.FromDegrees, Arc.ToDegrees);
+				const bool bPassesZero = FMath::FloorToDouble(High / 360.0) * 360.0 >= Low;
+				const double Furthest = bPassesZero ? 1.0 : FMath::Max(FMath::Cos(FMath::DegreesToRadians(Low)), FMath::Cos(FMath::DegreesToRadians(High)));
+				Reach = FMath::Max(Reach, Arc.CenterMeters[0] + Arc.RadiiMeters[0] * Furthest);
+			}
+		}
+		return Reach;
+	}
+
 	FSitePort Placed(const FSitePort& Port, const FVector& TranslationMeters)
 	{
 		FSitePort Out = Port;
@@ -324,9 +415,12 @@ namespace Musee::Site
 		}
 		const double Reach = 0.5 * Class.ClearWidthMeters + FMath::Max3(Class.AllowanceMeters, Class.SurroundMeters, Class.CollarHalfWidthMeters)
 			+ FaceMarginMeters;
+		// Each lining ends where the stage's own reveal begins, OwnLiningMeters out from the wall's inner face.
+		auto LiningDepth = [](const FSitePort& Port) { return FMath::Max(0.0, Port.WallDepthMeters - Port.OwnLiningMeters); };
 		FJointDraft Draft{Class, Record, JointFrame(A), TEXT("joint.") + A.Key.ToString(), FJointFace::OfPort(A, 0.0, 0.0, false),
 			FJointFace::OfPort(A, A.WallDepthMeters, 0.0, false), FJointFace::OfPort(B, 0.0, PassageMeters, true),
-			FJointFace::OfPort(B, B.WallDepthMeters, PassageMeters, true), PassageMeters, OutJoint.Drawings};
+			FJointFace::OfPort(B, B.WallDepthMeters, PassageMeters, true), FJointFace::OfPort(A, LiningDepth(A), 0.0, false),
+			FJointFace::OfPort(B, LiningDepth(B), PassageMeters, true), A.bOwnThreshold, B.bOwnThreshold, PassageMeters, OutJoint.Drawings};
 		for (const FJointFace* Face : {&Draft.FaceA, &Draft.InnerA, &Draft.FaceB, &Draft.InnerB})
 		{
 			if (!Face->Reaches(Reach))

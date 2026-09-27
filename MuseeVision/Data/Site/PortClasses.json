@@ -3,7 +3,7 @@
     "Every class a design sheet names in its ports table (Docs/Stages/*.md, section 2). Names are width x crown in millimetres (the Architect's ruling, rotunda.md section 2 note), or a vertical port's well diameter.",
     "Docs/Stages/salon.md (R-SPECS-01) section 2, class definitions: the Salon's door as built (Plan.Salon.door; windows/Source/MuseeVision/Salon/SalonStructure.cpp:41) and the Reserve's west door as built (windows/Source/MuseeVision/Reserve/ReserveStructure.cpp:37-38).",
     "Decisions D-019: the Nympheas oval's east port mates the Salon's west port through the oval passage, 3.000 m wide with a semicircular head springing at 3.300 m (salon.md section 3.1), the same opening as the Salon's door.",
-    "The rough opening's allowance, 0.050: the lining allowance a the sibling sheets adopt (rotunda.md, albion.md, hall-of-light.md, atrium.md, classical-hall.md section 2: rough widths 3.10 and 4.10, rough sill -0.05). The oval's two classes carry none: the oval finishes its own passage and the Reserve's door at the clear opening (nympheas.md section 2, rough openings).",
+    "The rough opening's allowance, 0.050: the lining allowance a the sibling sheets adopt (rotunda.md, albion.md, hall-of-light.md, atrium.md, classical-hall.md section 2: rough widths 3.10 and 4.10, rough sill -0.05). The oval finishes its own passage at the clear opening and says so at its port (its own reveal and floor, FSitePort), while the Salon cuts its west wall to the rough opening for the joint to line (salon.md section 2), so the class it shares with the Salon carries the allowance too. The Reserve's stair door carries none: both its sides finish their own openings, the oval its head wall and landing, the Reserve its door and sill (nympheas.md, reserve.md section 2).",
     "The surround's clearance, 0.35 past the clear opening: what each stage keeps clear on its face for the joint's surround (albion.md, chenghuai.md, hall-of-light.md section 2; atrium.md section 2, |y| < 2.350 for the 4.000 door).",
     "The strip, 0.060 wide: the museum's brushed CuSn10 threshold strip, as Albion's court door carries (Data/Stages/albion/Finishes.json albion.door.strip, 0.06 x 4.03), on the mating plane (Docs/Architecture.md, How rooms join: the joint is a doorcase).",
     "Collar envelopes: Albion's porch on the Rotunda's south door, |x| <= 3.65, z -1.20 to 7.50 (albion.md section 2; windows/Source/MuseeVision/Plan/MuseePlan.h:528, Facade::VestibuleHalf and VestibuleTop); the Rotunda's west passage to the Salon, |y| <= 1.80 to 6.30 (MuseePlan.h:526, Facade::WestPassageHalf and WestPassageTop), down to the museum's footings at -1.20 as Albion's plinth course is (albion.md section 1). Classes whose faces touch where they mate carry none.",
@@ -18,10 +18,10 @@
       "headMeters": 3.3,
       "arched": true,
       "closure": "open-portal",
-      "allowanceMeters": 0.0,
+      "allowanceMeters": 0.05,
       "surroundMeters": 0.35,
       "stripMeters": 0.06,
-      "source": "The Salon's west door and the oval passage: 3.000 clear, a semicircular head of radius 1.500 springing at 3.300, crown 4.800; the oval finishes its passage at the clear opening."
+      "source": "The Salon's west door and the oval passage: 3.000 clear, a semicircular head of radius 1.500 springing at 3.300, crown 4.800; the Salon's wall is cut to the rough opening (3.100, head r 1.550) and the joint lines it, while the oval finishes its passage at the clear opening."
     },
     {
       "key": "stairwell.straight.2400x3200.arched",

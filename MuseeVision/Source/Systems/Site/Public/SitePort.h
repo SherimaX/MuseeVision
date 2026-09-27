@@ -112,11 +112,31 @@ struct MUSEESITE_API FSitePort
 	bool bFlatInnerFace = false;
 
 	/**
-	 * Whether the stage draws its own surround round this port on its inner face (an archivolt, an architrave), so the
-	 * joint draws none there.
+	 * Who draws what at the port. The joint draws the port's threshold, strip, linings (their voussoirs) and surround,
+	 * unless the stage marks its own piece as the port's here; the strip on the mating plane is always the joint's.
+	 *
+	 * Whether the stage draws its own surround round this port on its inner face (the archivolt or architrave its sheet
+	 * gives it), so the joint draws none there.
 	 */
 	UPROPERTY()
 	bool bOwnSurround = false;
+
+	/**
+	 * How deep into the wall, from its inner face out, the stage finishes the opening itself at the class's clear opening
+	 * (its own reveal), metres: zero when the joint lines the whole wall depth, and the stage cuts its wall to the class's
+	 * rough opening; the wall's depth when the stage finishes all of it (the oval's passage). The joint lines the rough
+	 * opening in front of it, and lays its threshold the clear width there.
+	 */
+	UPROPERTY(meta = (Units = "Meters"))
+	double OwnLiningMeters = 0.0;
+
+	/**
+	 * Whether the stage's own floor is the port's threshold through its wall (a landing run to the port face): it stops
+	 * half the class's strip short of the mating plane, the joint lays no second stone on its side, and the joint's strip
+	 * lies on the mating plane against it.
+	 */
+	UPROPERTY()
+	bool bOwnThreshold = false;
 
 	/** The port it is designed to meet (salon.west), as the stage's own design says; the site plan decides. */
 	UPROPERTY()

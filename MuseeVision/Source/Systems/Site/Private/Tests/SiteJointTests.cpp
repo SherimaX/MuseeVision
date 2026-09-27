@@ -273,6 +273,97 @@ namespace Musee::Site::Tests
 		TestFalse(TEXT("ports that don't meet across the passage are refused"), Joint(RotundaWest, Salon, 1.0, West.GetValue(), Record.GetValue(), Apart, Why));
 		return true;
 	}
+
+	namespace
+	{
+		/** The corners a drawn outline passes through (its start and its lines' ends), in the drawing's (A, B). */
+		TArray<FVector2D> Corners(const FFormProfile& Outline)
+		{
+			TArray<FVector2D> Out = {Outline.StartPoint()};
+			for (const FFormProfileStep& Step : Outline.Steps)
+			{
+				if (!Step.IsArc())
+				{
+					Out.Add(FVector2D(Step.Line[0], Step.Line[1]));
+				}
+			}
+			return Out;
+		}
+
+		/** How far a joint's slab reaches across the opening (its outline's widest |y|), and how far along it (x), in the joint's frame. */
+		FVector2D Reach(const FSiteJoint& Joint, const FString& Name)
+		{
+			FVector2D Out(-TNumericLimits<double>::Max(), 0.0);
+			if (const FFormDrawing* Drawing = Find(Joint, Name))
+			{
+				for (const FVector2D& Corner : Corners(Drawing->Shape.Get<FFormExtrusion>().Outline))
+				{
+					Out = FVector2D(FMath::Max(Out.X, Corner.X), FMath::Max(Out.Y, FMath::Abs(Corner.Y)));
+				}
+			}
+			return Out;
+		}
+	}
+
+	IMPLEMENT_SIMPLE_AUTOMATION_TEST(FSiteJointOwnershipTest, "Musee.Site.JointOwnership", JointFlags)
+	bool FSiteJointOwnershipTest::RunTest(const FString& Parameters)
+	{
+		const TValueOrError<FSiteJointRecord, FString> Record = ReadJoints();
+		const TValueOrError<FSitePortClass, FString> West = FindPortClass(FMuseeKey(TEXT("doorway.3000x6000.arched")));
+		const TValueOrError<FSitePortClass, FString> Oval = FindPortClass(FMuseeKey(TEXT("doorway.3000x4800.arched")));
+		const TValueOrError<FSitePortClass, FString> Stair = FindPortClass(FMuseeKey(TEXT("stairwell.straight.2400x3200.arched")));
+		if (!TestTrue(TEXT("the records read"), Record.HasValue() && West.HasValue() && Oval.HasValue() && Stair.HasValue()))
+		{
+			return false;
+		}
+		FString Why;
+
+		// The Salon finishes its own door behind its step, the inner 0.300 of its 0.600 wall (salon.md section 2): the joint's
+		// lining stops against the step, and its threshold runs on to the wall's inner face the clear width.
+		const FSitePort RotundaWest = PortAt(TEXT("rotunda.west"), TEXT("doorway.3000x6000.arched"), FVector(-11.2, 0.0, 0.0), FRotator(0.0, 180.0, 0.0), 1.2, 11.2, true);
+		FSitePort Salon = PortAt(TEXT("salon.east"), TEXT("doorway.3000x6000.arched"), FVector(-13.4, 0.0, 0.0), FRotator(0.0, 0.0, 0.0), 0.6, 0.0, true);
+		Salon.OwnLiningMeters = 0.3;
+		FSiteJoint Stepped;
+		TestTrue(TEXT("the stepped door's joint is drawn"), Joint(RotundaWest, Salon, 2.2, West.GetValue(), Record.GetValue(), Stepped, Why));
+		const FString Prefix = TEXT("joint.rotunda.west.");
+		TestEqual(TEXT("its lining stops against the step, 2.20 + 0.30 on"), Reach(Stepped, Prefix + TEXT("lining.jamb.north")).X, 2.5, 1e-9);
+		TestEqual(TEXT("the threshold before the step is the rough width"), Reach(Stepped, Prefix + TEXT("threshold.2")).Y, 1.55, 1e-9);
+		TestEqual(TEXT("and behind it the clear width, to the wall's inner face"), Reach(Stepped, Prefix + TEXT("threshold.3")).Y, 1.5, 1e-9);
+		TestEqual(TEXT("which it reaches"), Reach(Stepped, Prefix + TEXT("threshold.3")).X, 2.8, 1e-9);
+
+		// The oval's passage (its own reveal, floor and architrave) against the Salon's far wall, cut to the rough opening
+		// with its own architrave: the joint lines the Salon's wall and lays its threshold there, and its strip on the mating
+		// plane runs the clear width, between the oval's finished jambs.
+		FSitePort Passage = PortAt(TEXT("nympheas.east"), TEXT("doorway.3000x4800.arched"), FVector(-74.6, 0.0, 0.0), FRotator(0.0, 0.0, 0.0), 0.9, 0.0, true);
+		Passage.OwnLiningMeters = Passage.WallDepthMeters;
+		Passage.bOwnThreshold = true;
+		const FSitePort FarWall = PortAt(TEXT("salon.west"), TEXT("doorway.3000x4800.arched"), FVector(-74.6, 0.0, 0.0), FRotator(0.0, 180.0, 0.0), 0.6, 0.0, true);
+		FSiteJoint Lined;
+		TestTrue(TEXT("the oval's joint is drawn"), Joint(Passage, FarWall, 0.0, Oval.GetValue(), Record.GetValue(), Lined, Why));
+		const FString OvalPrefix = TEXT("joint.nympheas.east.");
+		const TSet<FString> Parts = PartsOf(Lined, OvalPrefix);
+		TestTrue(TEXT("a strip, one stone on the Salon's side, the Salon's lining"), Parts.Contains(TEXT("strip.0")) && Parts.Contains(TEXT("threshold.0"))
+			&& !Parts.Contains(TEXT("threshold.1")) && Parts.Contains(TEXT("lining.jamb.south")) && Parts.Contains(TEXT("lining.voussoir.00")));
+		TestFalse(TEXT("and no surround: both stages draw their own"), Parts.Contains(TEXT("surround.a")) || Parts.Contains(TEXT("surround.b")));
+		TestEqual(TEXT("the strip runs the clear width"), Reach(Lined, OvalPrefix + TEXT("strip.0")).Y, 1.5, 1e-9);
+		TestEqual(TEXT("the stone the rough width, under the lining"), Reach(Lined, OvalPrefix + TEXT("threshold.0")).Y, 1.55, 1e-9);
+		TestEqual(TEXT("through the Salon's wall"), Reach(Lined, OvalPrefix + TEXT("threshold.0")).X, 0.6, 1e-9);
+
+		// The foot of the oval's stair at the Reserve's door: both finish their own openings and lay their own sills, so the
+		// joint lays only the strip on the plane where they touch.
+		FSitePort Foot = PortAt(TEXT("nympheas.stair"), TEXT("stairwell.straight.2400x3200.arched"), FVector(-74.6, 0.0, -5.8), FRotator(0.0, 0.0, 0.0), 0.4, 0.0, true);
+		FSitePort Door = PortAt(TEXT("reserve.stair"), TEXT("stairwell.straight.2400x3200.arched"), FVector(-74.6, 0.0, -5.8), FRotator(0.0, 180.0, 0.0), 0.6, 0.0, true);
+		for (FSitePort* Port : {&Foot, &Door})
+		{
+			Port->OwnLiningMeters = Port->WallDepthMeters;
+			Port->bOwnThreshold = true;
+		}
+		FSiteJoint Sill;
+		TestTrue(TEXT("the stair's joint is drawn"), Joint(Foot, Door, 0.0, Stair.GetValue(), Record.GetValue(), Sill, Why));
+		const TSet<FString> SillParts = PartsOf(Sill, TEXT("joint.nympheas.stair."));
+		TestTrue(TEXT("it is the strip alone"), SillParts.Num() == 1 && SillParts.Contains(TEXT("strip.0")));
+		return true;
+	}
 }
 
 #endif

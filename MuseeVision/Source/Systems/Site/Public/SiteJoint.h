@@ -72,8 +72,10 @@ struct MUSEESITE_API FSiteJointRecord
 /**
  * The joint between two mated ports: the doorcase Site draws once at every seam, in Form's language, in the museum's
  * frame. It holds the travertine threshold through both walls' depths and any passage, the bronze strip on the mating
- * plane, the linings in front of both rough openings, the surrounds on the faces the stages leave to it, and the masonry
- * that closes the gap between two faces within the class's collar envelope (the wedges between a flat face and a drum).
+ * plane, the linings in front of both rough openings, the surrounds on both inner faces, and the masonry that closes the
+ * gap between two faces within the class's collar envelope (the wedges between a flat face and a drum). A part is the
+ * joint's unless a port marks its stage's own piece as the port's (FSitePort: its surround, its reveal, its floor as the
+ * threshold): then the joint leaves that part out on that side, and the strip still lies on the mating plane.
  * A vertical port's faces touch and its iris is the lower stage's, so its joint draws nothing.
  */
 struct FSiteJoint
@@ -88,6 +90,12 @@ namespace Musee::Site
 
 	/** The joints' record (the museum's by default). */
 	[[nodiscard]] MUSEESITE_API TValueOrError<FSiteJointRecord, FString> ReadJoints(const FString& Path = JointsRecord);
+
+	/**
+	 * How far the joint's surround reaches out on a face from the clear opening's edge, metres: its section's furthest
+	 * point. A stage's mouldings on that face (a skirting, a dado rail) stop against it there.
+	 */
+	[[nodiscard]] MUSEESITE_API double SurroundReachMeters(const FSiteJointRecord& Record);
 
 	/** A port as its stage is placed: its frame and its well moved by the stage's translation, metres. */
 	[[nodiscard]] MUSEESITE_API FSitePort Placed(const FSitePort& Port, const FVector& TranslationMeters);
