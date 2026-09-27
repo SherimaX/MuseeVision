@@ -98,16 +98,16 @@ namespace Musee::ArtMaking
 		}
 
 		/**
-		 * A work cast from its scan shows no image: each object is finished in the work's medium (Data/Art/Casts.json),
-		 * a fault when the record has no line for the catalogue's medium.
+		 * A work in the round (cast from its scan, or turned) shows no image: each object is finished in the work's medium
+		 * (Data/Art/Media.json), a fault when the record has no line for the catalogue's medium.
 		 */
-		void PlanCast(const FArtWork& Work, const TArray<const FArtHangEntry*>& Canvases, const FEntryContext& Context, FWorkPlan& OutPlan,
+		void PlanInMedium(const FArtWork& Work, const TArray<const FArtHangEntry*>& Canvases, const FEntryContext& Context, FWorkPlan& OutPlan,
 			TArray<FString>& OutFaults)
 		{
-			const FArtCastMedium* Medium = Context.Casts.IsSet() ? Context.Casts->FindMedium(Work.Medium) : nullptr;
+			const FArtMedium* Medium = Context.Media.IsSet() ? Context.Media->Find(Work.Medium) : nullptr;
 			if (!Medium)
 			{
-				OutFaults.Add(FString::Printf(TEXT("its medium '%s' has no line in Data/%s"), *Work.Medium, FArtCasts::Record));
+				OutFaults.Add(FString::Printf(TEXT("its medium '%s' has no line in Data/%s"), *Work.Medium, FArtMedia::Record));
 				return;
 			}
 			for (const FArtHangEntry* Entry : Canvases)
@@ -127,9 +127,9 @@ namespace Musee::ArtMaking
 		{
 			FWorkPlan Plan;
 			Plan.bOwnImages = !Canvases[0]->Image.IsEmpty();
-			if (IsCast(*Canvases[0]))
+			if (IsInMedium(*Canvases[0]))
 			{
-				PlanCast(Work, Canvases, Context, Plan, OutFaults);
+				PlanInMedium(Work, Canvases, Context, Plan, OutFaults);
 				Plan.Work = MoveTemp(Work);
 				return Plan;
 			}
@@ -225,39 +225,71 @@ namespace Musee::ArtMaking
 			}
 		}
 
-		/** Why the palette doesn't offer a finish the casts' record names, or empty when it does. */
-		FString UnofferedFinish(const FMatterPalette& Palette, FName Key, FName Working, FName History, const FString& For)
+		/** A finish a record of works in the round names, and whose it is, for the palette to offer. */
+		struct FNamedFinish
 		{
-			const FMatterPaletteEntry* Entry = Palette.Find(FMuseeKey(Key.ToString()));
-			return Entry && Offers(*Entry, Working, History) ? FString() : FString::Printf(TEXT("the palette offers no finish %s/%s/%s that Data/%s names for %s"),
-				*Key.ToString(), *Working.ToString(), *History.ToString(), FArtCasts::Record, *For);
+			FName Palette;
+			FName Working;
+			FName History;
+			FString For;
+		};
+
+		/** Why the palette doesn't offer a finish a record names, or empty when it offers every one. */
+		FString UnofferedFinish(const FMatterPalette& Palette, TConstArrayView<FNamedFinish> Finishes, const TCHAR* Record)
+		{
+			for (const FNamedFinish& Finish : Finishes)
+			{
+				const FMatterPaletteEntry* Entry = Palette.Find(FMuseeKey(Finish.Palette.ToString()));
+				if (!Entry || !Offers(*Entry, Finish.Working, Finish.History))
+				{
+					return FString::Printf(TEXT("the palette offers no finish %s/%s/%s that Data/%s names for %s"), *Finish.Palette.ToString(),
+						*Finish.Working.ToString(), *Finish.History.ToString(), Record, *Finish.For);
+				}
+			}
+			return FString();
 		}
 
-		/** How works are cast, read once when the plan casts any, with every finish it names offered by the palette. */
-		void ReadCastsInto(const FArtHang& Hang, FEntryContext& Context)
+		/** Every finish the records of works in the round name: each medium's, each cast part's and the vessels' stand. */
+		FString RoundFinishesWhy(const FMatterPalette& Palette, const FArtMedia& Media, const FArtCasts& Casts, const FArtVessels& Vessels)
 		{
-			if (!Hang.Works.ContainsByPredicate([](const FArtHangEntry& Entry) { return !Entry.IsBuilt() && IsCast(Entry); }))
+			TArray<FNamedFinish> OfMedia;
+			for (const FArtMedium& Medium : Media.Media)
+			{
+				OfMedia.Add({ Medium.Palette, Medium.Working, Medium.History, Medium.Medium });
+			}
+			TArray<FNamedFinish> OfParts;
+			for (const FArtCastPart& Part : Casts.Parts)
+			{
+				OfParts.Add({ Part.Palette, Part.Working, Part.History, Part.Work + TEXT("'s ") + Part.Part.ToString() });
+			}
+			const FNamedFinish Stand{ Vessels.Stand.Palette, Vessels.Stand.Working, Vessels.Stand.History, TEXT("the vessels' stand") };
+			FString Why = UnofferedFinish(Palette, OfMedia, FArtMedia::Record);
+			Why = Why.IsEmpty() ? UnofferedFinish(Palette, OfParts, FArtCasts::Record) : Why;
+			return Why.IsEmpty() ? UnofferedFinish(Palette, MakeArrayView(&Stand, 1), FArtVessels::Record) : Why;
+		}
+
+		/**
+		 * How works in the round are made (their media, how they are cast and turned), read once when the plan holds any,
+		 * with every finish the records name offered by the palette.
+		 */
+		void ReadRoundInto(const FArtHang& Hang, FEntryContext& Context)
+		{
+			if (!Hang.Works.ContainsByPredicate([](const FArtHangEntry& Entry) { return !Entry.IsBuilt() && IsInMedium(Entry); }))
 			{
 				return;
 			}
+			TValueOrError<FArtMedia, FString> Media = ReadRecord<FArtMedia>(FArtMedia::Record);
 			TValueOrError<FArtCasts, FString> Casts = ReadRecord<FArtCasts>(FArtCasts::Record);
+			TValueOrError<FArtVessels, FString> Vessels = ReadRecord<FArtVessels>(FArtVessels::Record);
 			const TValueOrError<FMatterPalette, FString> Palette = Musee::Matter::ReadPalette();
-			if (Casts.HasError() || Palette.HasError())
+			Context.RoundWhy = Media.HasError() ? Media.GetError() : Casts.HasError() ? Casts.GetError() : Vessels.HasError() ? Vessels.GetError()
+				: Palette.HasError() ? Palette.GetError() : RoundFinishesWhy(Palette.GetValue(), Media.GetValue(), Casts.GetValue(), Vessels.GetValue());
+			if (Context.RoundWhy.IsEmpty())
 			{
-				Context.CastsWhy = Casts.HasError() ? Casts.GetError() : Palette.GetError();
-				return;
+				Context.Media.Emplace(Media.StealValue());
+				Context.Casts.Emplace(Casts.StealValue());
+				Context.Vessels.Emplace(Vessels.StealValue());
 			}
-			for (const FArtCastMedium& Medium : Casts.GetValue().Media)
-			{
-				Context.CastsWhy = UnofferedFinish(Palette.GetValue(), Medium.Palette, Medium.Working, Medium.History, Medium.Medium);
-				if (!Context.CastsWhy.IsEmpty()) { return; }
-			}
-			for (const FArtCastPart& Part : Casts.GetValue().Parts)
-			{
-				Context.CastsWhy = UnofferedFinish(Palette.GetValue(), Part.Palette, Part.Working, Part.History, Part.Work + TEXT("'s ") + Part.Part.ToString());
-				if (!Context.CastsWhy.IsEmpty()) { return; }
-			}
-			Context.Casts.Emplace(Casts.StealValue());
 		}
 
 		void ReadFinishesInto(const FMuseeStageContext& Stage, const FArtHang& Hang, FEntryContext& Context)
@@ -383,7 +415,7 @@ namespace Musee::ArtMaking
 		}
 		ReadFinishesInto(Stage, Hang, Context);
 		ReadTurnedInto(Hang, Context);
-		ReadCastsInto(Hang, Context);
+		ReadRoundInto(Hang, Context);
 		for (const TArray<const FArtHangEntry*>& Canvases : WorksOf(Hang))
 		{
 			const FString& Id = Canvases[0]->Work;
@@ -421,9 +453,9 @@ namespace Musee::ArtMaking
 		{
 			for (const FCanvasPlan& Canvas : Plan.Canvases)
 			{
-				if (IsCast(*Canvas.Entry))
+				if (IsInMedium(*Canvas.Entry))
 				{
-					// A cast shows no image: it is its medium's finish throughout.
+					// A work in the round shows no image: it is its medium's finish throughout.
 					break;
 				}
 				FArtPaintLayer& Layer = Out.AddDefaulted_GetRef();

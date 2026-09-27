@@ -188,7 +188,23 @@ bool FArtCastTest::RunTest(const FString& Parameters)
 		return F.ToString().Contains(TEXT("test-cast-misread")) && F.ToString().Contains(TEXT("wide"));
 	}));
 	TestFalse(TEXT("and that work isn't made"), Pieces.ContainsByPredicate([](const FFormMadePiece& P) { return P.Name == TEXT("cast.test-cast-misread"); }));
-	TestTrue(TEXT("A cast shows no image: no paint layer"), PaintLayers(CastTests::Round()).IsEmpty());
+	TestTrue(TEXT("A work in the round shows no image: no paint layer"), PaintLayers(CastTests::Round()).IsEmpty());
+
+	const FFormMadePiece* Vase = Pieces.FindByPredicate([](const FFormMadePiece& P) { return P.Name == TEXT("ware.chinese-longquan-vase"); });
+	const FFormMadePiece* Stand = Pieces.FindByPredicate([](const FFormMadePiece& P) { return P.Name == TEXT("ware.chinese-longquan-vase.stand"); });
+	if (TestTrue(TEXT("A vessel without a scan is turned from its section, on its stand"), Vase && Stand))
+	{
+		TestTrue(TEXT("in its medium's glaze: celadon over stoneware"), Vase->Material == TEXT("accent.stoneware-glazed") && Vase->Working == TEXT("glazed")
+			&& Vase->History == TEXT("clean"));
+		TestTrue(TEXT("its stand in phoebe"), Stand->Material == TEXT("accent.phoebe"));
+		const FBox VaseBox = CastTests::StageBox(*Vase);
+		const FBox StandBox = CastTests::StageBox(*Stand);
+		TestTrue(TEXT("The stand is low under a vessel under 0.20 m, on the deck"), FMath::IsNearlyEqual(StandBox.Min.Z, 1.0, 1e-6)
+			&& FMath::IsNearlyEqual(StandBox.Max.Z, 1.028, 1e-6));
+		TestTrue(TEXT("The vessel stands on it, its plan's size"), FMath::IsNearlyEqual(VaseBox.Min.Z, 1.028, 1e-6) && FMath::IsNearlyEqual(VaseBox.Max.Z, 1.174, 1e-6)
+			&& FMath::IsNearlyEqual(VaseBox.GetSize().X, 0.083, 1e-3) && FMath::IsNearlyEqual(VaseBox.GetCenter().X, 3.0, 1e-3));
+		TestTrue(TEXT("The stand is wider than the foot, narrower than the vessel"), StandBox.GetSize().X > 0.02 && StandBox.GetSize().X < VaseBox.GetSize().X);
+	}
 
 	FArtHang Hang;
 	TArray<FMuseeFinding> Read;

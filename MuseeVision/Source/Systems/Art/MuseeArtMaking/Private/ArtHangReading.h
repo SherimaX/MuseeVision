@@ -45,6 +45,18 @@ namespace Musee::ArtMaking
 		return Entry.Support == Supports::Cast || (Entry.Support == Supports::Ceramic && !Entry.Scan.Mesh.IsEmpty());
 	}
 
+	/** Whether an object is a vessel turned on Form's lathe from its section: ceramic without a scan. */
+	[[nodiscard]] inline bool IsTurned(const FArtHangEntry& Entry)
+	{
+		return Entry.Support == Supports::Ceramic && Entry.Scan.Mesh.IsEmpty();
+	}
+
+	/** Whether an object stands in the round in its medium's finish (Data/Art/Media.json): cast or turned. */
+	[[nodiscard]] inline bool IsInMedium(const FArtHangEntry& Entry)
+	{
+		return IsCast(Entry) || IsTurned(Entry);
+	}
+
 	/** A scan's name: its mesh's file name without its extension (`augustus-prima-porta`). */
 	[[nodiscard]] FString ScanName(const FArtHangEntry& Entry);
 

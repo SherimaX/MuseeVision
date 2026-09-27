@@ -26,7 +26,8 @@ namespace Musee::ArtMaking
 
 	/**
 	 * The word an object Art makes is named by, from its support: `canvas`, `glass`, `paper` (a print, a card), `plate` (a
-	 * daguerreotype), `ware`, `cast` (a cast, ceramic); `work` for any other.
+	 * daguerreotype), `ware` (earthenware, ceramic), `cast`; `work` for any other. An object cast from its scan is named as
+	 * a cast whatever its support.
 	 */
 	[[nodiscard]] const TCHAR* ObjectWord(FName Support);
 
@@ -57,7 +58,8 @@ namespace Musee::ArtMaking
 	 * - a print at its Wall anchor: the print on its mount, under its glazing, in its frame (ObjectMaking.h);
 	 * - a card or a daguerreotype's plate on its reader, a Mount anchor, under its glazing;
 	 * - a dish or a vessel standing at its centre on its Mount anchor, turned from its photograph;
-	 * - a work in the round cast from its scan, on its carrier's top (its Mount anchor), at its true height, in its medium.
+	 * - a work in the round cast from its scan, on its carrier's top (its Mount anchor), at its true height, in its medium;
+	 * - a vessel without a scan turned on Form's lathe from its section, on its stand, in its medium's glaze.
 	 * A work the stage builds (`"built": "form"`) is left to the stage. Anything the plan gets wrong is a finding and
 	 * that work isn't made.
 	 */

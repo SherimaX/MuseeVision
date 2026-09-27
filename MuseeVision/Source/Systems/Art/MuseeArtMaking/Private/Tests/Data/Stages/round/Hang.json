@@ -12,6 +12,12 @@
       "anchor": "round.plinth", "centre": [2.0, 3.0, 1.0], "height": 1.0, "size": [0.6, 0.994], "facing_deg": 0.0,
       "support": "cast", "frame": "none", "care": "stone-and-bronze", "scan": { "mesh": "assets/sculptures/degas-little-dancer.mvm" },
       "note": "A plan whose width is not the scan's: a finding, and the work isn't made."
+    },
+    {
+      "work": "chinese-longquan-vase", "source": "assets/collection.json",
+      "anchor": "round.plinth", "centre": [3.0, 3.0, 1.0], "height": 1.0, "size": [0.083, 0.146], "facing_deg": 0.0,
+      "support": "ceramic", "frame": "none", "care": "ceramic-and-glass", "stand": true,
+      "note": "The collection's Longquan vase turned from its section, on its low stand."
     }
   ]
 }

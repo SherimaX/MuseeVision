@@ -216,11 +216,8 @@ namespace Musee::ArtMaking
 			return Out;
 		}
 
-		/**
-		 * A work cast from its scan stands at its centre on a Mount anchor (its carrier's top), unframed: its scan a glTF
-		 * binary or an `.mvm` the collection holds, and any part the casts' record names a band of heights within it.
-		 */
-		TArray<FString> CastEntryFaults(const FMuseeStageContext& Stage, const FArtHangEntry& Entry, const FEntryContext& Context)
+		/** A work in the round stands at its centre on a Mount anchor (its carrier's top, a case's deck), unframed. */
+		TArray<FString> RoundEntryFaults(const FMuseeStageContext& Stage, const FArtHangEntry& Entry)
 		{
 			TArray<FString> Out;
 			if (!HasAnchor(Stage, Entry, MountAnchorKind))
@@ -235,6 +232,41 @@ namespace Musee::ArtMaking
 			{
 				Out.Add(TEXT("a work in the round is unframed"));
 			}
+			return Out;
+		}
+
+		/**
+		 * A vessel turned from its section: the vessels' record gives it a section of three points or more, [radius, height]
+		 * with no radius below the axis, starting and ending on the axis (so turned it is a closed solid).
+		 */
+		TArray<FString> VesselEntryFaults(const FMuseeStageContext& Stage, const FArtHangEntry& Entry, const FEntryContext& Context)
+		{
+			TArray<FString> Out = RoundEntryFaults(Stage, Entry);
+			if (!Context.Vessels.IsSet())
+			{
+				Out.Add(Context.RoundWhy);
+				return Out;
+			}
+			const FArtVessel* Vessel = Context.Vessels->Find(Entry.Work);
+			if (!Vessel)
+			{
+				Out.Add(FString::Printf(TEXT("Data/%s gives no section to turn it to, and the plan gives no scan"), FArtVessels::Record));
+			}
+			else if (Vessel->Section.Num() < 3 || Vessel->Section[0].X != 0.0 || Vessel->Section.Last().X != 0.0
+				|| Vessel->Section.ContainsByPredicate([](const FVector2D& Point) { return Point.X < 0.0; }))
+			{
+				Out.Add(FString::Printf(TEXT("Data/%s: its section must run from the axis round to the axis, never inside it"), FArtVessels::Record));
+			}
+			return Out;
+		}
+
+		/**
+		 * A work cast from its scan stands in the round: its scan a glTF binary or an `.mvm` the collection holds, and any
+		 * part the casts' record names a band of heights within it.
+		 */
+		TArray<FString> CastEntryFaults(const FMuseeStageContext& Stage, const FArtHangEntry& Entry, const FEntryContext& Context)
+		{
+			TArray<FString> Out = RoundEntryFaults(Stage, Entry);
 			const FString Extension = FPaths::GetExtension(Entry.Scan.Mesh);
 			if (!Extension.Equals(GltfExtension, ESearchCase::IgnoreCase) && !Extension.Equals(MvmExtension, ESearchCase::IgnoreCase))
 			{
@@ -246,7 +278,7 @@ namespace Musee::ArtMaking
 			}
 			if (!Context.Casts.IsSet())
 			{
-				Out.Add(Context.CastsWhy);
+				Out.Add(Context.RoundWhy);
 				return Out;
 			}
 			for (const FArtCastPart& Part : Context.Casts->Parts)
@@ -285,6 +317,10 @@ namespace Musee::ArtMaking
 		{
 			Out.Append(CastEntryFaults(Stage, Entry, Context));
 		}
+		else if (IsTurned(Entry))
+		{
+			Out.Append(VesselEntryFaults(Stage, Entry, Context));
+		}
 		else if (Entry.Support == Supports::Canvas)
 		{
 			Out.Append(CanvasEntryFaults(Stage, Entry, Context));
@@ -308,10 +344,10 @@ namespace Musee::ArtMaking
 		else
 		{
 			Out.Add(FString::Printf(TEXT("its support '%s' isn't made yet; canvas, stained glass, paper, a daguerreotype's plate, earthenware, a "
-				"cast and ceramic with a scan are"), *Entry.Support.ToString()));
+				"cast and ceramic are"), *Entry.Support.ToString()));
 		}
-		// A cast's finish is its medium's (Data/Art/Casts.json), not its support's.
-		if (Entry.Support != Supports::Glass && !IsCast(Entry) && Out.IsEmpty() && !FindSupport(Entry.Support))
+		// A work in the round is finished in its medium (Data/Art/Media.json), not in its support's layer.
+		if (Entry.Support != Supports::Glass && !IsInMedium(Entry) && Out.IsEmpty() && !FindSupport(Entry.Support))
 		{
 			Out.Add(FString::Printf(TEXT("%s lists no support '%s'"), FArtSupports::Record, *Entry.Support.ToString()));
 		}

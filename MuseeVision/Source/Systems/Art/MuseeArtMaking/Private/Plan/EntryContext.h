@@ -4,13 +4,16 @@
 #include "Cast/CastRecord.h"
 #include "CoreMinimal.h"
 #include "MatterFinishSchedule.h"
+#include "Support/ArtMedia.h"
+#include "Vessel/VesselRecord.h"
 #include "Ware/WareMesh.h"
 
 namespace Musee::ArtMaking
 {
 	/**
-	 * What the checks of a plan's entries read once: Care.json's keys, the stage's finishes, the turned forms, and how
-	 * works are cast (every medium's finish offered by the palette).
+	 * What the checks of a plan's entries read once: Care.json's keys, the stage's finishes, the turned forms, and for
+	 * works in the round the media, how works are cast and how vessels are turned, every finish they name offered by the
+	 * palette (RoundWhy says why they can't be read).
 	 */
 	struct FEntryContext
 	{
@@ -19,8 +22,10 @@ namespace Musee::ArtMaking
 		FString FinishesWhy;
 		TArray<FArtTurned> Turned;
 		FString TurnedWhy;
+		TOptional<FArtMedia> Media;
 		TOptional<FArtCasts> Casts;
-		FString CastsWhy;
+		TOptional<FArtVessels> Vessels;
+		FString RoundWhy;
 	};
 
 	/** Whether the plan frames the object in a surface of the finish schedule (`"frame"` names one, not `none`). */

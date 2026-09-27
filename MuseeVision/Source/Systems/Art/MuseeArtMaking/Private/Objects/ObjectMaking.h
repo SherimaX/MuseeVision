@@ -4,6 +4,7 @@
 #include "ArtHangReading.h"
 #include "Cast/CastRecord.h"
 #include "CoreMinimal.h"
+#include "Vessel/VesselRecord.h"
 #include "FormMadePiece.h"
 #include "Frame/Moulding.h"
 #include "MuseeFinding.h"
@@ -23,6 +24,7 @@ namespace Musee::ArtMaking
 		TMap<FString, TValueOrError<FArtMoulding, FString>> Mouldings;
 		TOptional<TValueOrError<FArtWareForms, FString>> WareForms;
 		TOptional<TValueOrError<FArtCasts, FString>> CastRecord;
+		TOptional<TValueOrError<FArtVessels, FString>> VesselRecord;
 
 		/** The moulding a frame of this style is made in (FArtMoulding::RecordFor), or why it can't be read. */
 		const TValueOrError<FArtMoulding, FString>& Moulding(FName FrameStyle);
@@ -32,6 +34,9 @@ namespace Musee::ArtMaking
 
 		/** How works in the round are cast (Data/Art/Casts.json), or why it can't be read. */
 		const TValueOrError<FArtCasts, FString>& Casts();
+
+		/** How vessels are turned and stood (Data/Art/Vessels.json), or why it can't be read. */
+		const TValueOrError<FArtVessels, FString>& Vessels();
 	};
 
 	/** A piece Art makes: named, finished in its surface or in a material spec, colliding as a solid, drawn by Art. */
@@ -78,5 +83,13 @@ namespace Musee::ArtMaking
 	 * its own. A scan whose width at that height strays from the plan's is a finding, and the work isn't made.
 	 */
 	void MakeCast(FObjectMaking& Making, const FWorkPlan& Plan, const FCanvasPlan& Canvas, TArray<FFormMadePiece>& OutPieces,
+		TArray<FMuseeFinding>& OutFindings);
+
+	/**
+	 * A vessel turned on Form's lathe from its section (Data/Art/Vessels.json, the stage's sheet's), scaled to its plan's
+	 * size, in its medium's glaze, standing at its centre on its Mount anchor (a case's deck); where its plan says `stand`,
+	 * on its carved stand, a drum in the stand's wood (`<name>.stand`).
+	 */
+	void MakeVessel(FObjectMaking& Making, const FWorkPlan& Plan, const FCanvasPlan& Canvas, TArray<FFormMadePiece>& OutPieces,
 		TArray<FMuseeFinding>& OutFindings);
 }

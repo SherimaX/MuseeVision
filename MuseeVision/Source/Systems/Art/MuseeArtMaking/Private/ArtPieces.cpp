@@ -149,14 +149,15 @@ namespace Musee::ArtMaking
 		if (Support == Supports::Glass) { return TEXT("glass"); }
 		if (Support == Supports::Paper) { return TEXT("paper"); }
 		if (Support == Supports::Plate) { return TEXT("plate"); }
-		if (Support == Supports::Earthenware) { return TEXT("ware"); }
-		if (Support == Supports::Cast || Support == Supports::Ceramic) { return TEXT("cast"); }
+		if (Support == Supports::Earthenware || Support == Supports::Ceramic) { return TEXT("ware"); }
+		if (Support == Supports::Cast) { return TEXT("cast"); }
 		return TEXT("work");
 	}
 
 	FString ObjectName(const FArtHangEntry& Entry, bool bSplit)
 	{
-		const TCHAR* Word = Entry.IsBuilt() ? TEXT("work") : ObjectWord(Entry.Support);
+		// Ceramic cast from its scan is named as a cast; turned, as ware.
+		const TCHAR* Word = Entry.IsBuilt() ? TEXT("work") : IsCast(Entry) ? TEXT("cast") : ObjectWord(Entry.Support);
 		return bSplit ? FString::Printf(TEXT("%s.%s.%d"), Word, *Entry.Work, Entry.Canvas) : FString::Printf(TEXT("%s.%s"), Word, *Entry.Work);
 	}
 
@@ -175,6 +176,10 @@ namespace Musee::ArtMaking
 			if (IsCast(Entry))
 			{
 				MakeCast(Making, Plan, Canvas, OutPieces, OutFindings);
+			}
+			else if (IsTurned(Entry))
+			{
+				MakeVessel(Making, Plan, Canvas, OutPieces, OutFindings);
 			}
 			else if (Entry.Support == Supports::Glass && IsTransparency(Making.Stage, Entry))
 			{

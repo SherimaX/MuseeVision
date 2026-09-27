@@ -50,12 +50,18 @@ carrier's top (its Mount anchor) at its `centre`, its front towards `facing_deg`
 - it is scaled to its true height (the plan's `size[1]`) and set by its base slice, the scan below `baseSliceMeters`
   (`Data/Art/Casts.json`): that slice's centre stands on `centre`. A plan width (`size[0]`) is checked against the scan's
   at that height; 0 leaves it to the scan;
-- its material is its medium's, by the catalogue's `medium` (`Data/Art/Casts.json`: the SMK casts are sized plaster of
+- its material is its medium's, by the catalogue's `medium` (`Data/Art/Media.json`: the SMK casts are sized plaster of
   Paris, Degas's dancer a patinated bronze), never the scan's colour; a part in another material (the dancer's cotton
-  tulle skirt) is the band of heights the record gives, a piece `cast.<id>.<part>` of its own;
+  tulle skirt) is the band of heights `Data/Art/Casts.json` gives, a piece `cast.<id>.<part>` of its own;
 - a scan's UV0 is a box projection in metres (a scan has no drawing's UVs; plaster and bronze have no grain);
 - its label credits the scan as its licence asks (`Data/Art/Scans.json`, from the collection's CREDITS.md).
 The carrier (the Classical Hall's niche pedestals, consoles, herms and plinths, the Salon's plinth) is the stage's.
+
+**Turned vessels.** `ceramic` without a scan (Chenghuai's cases) is turned on Form's lathe from its section in
+`Data/Art/Vessels.json` (the stage's sheet's traced outlines), scaled to its plan's size, smooth through its traced points
+but where it turns more than the record's crease angle (lip, foot ring), in its medium's glaze (`Data/Art/Media.json`:
+Ding ivory over porcelain; Jun, Guan, hare's fur and celadon over stoneware), standing at its `centre` on its Mount anchor
+and, where its plan says `stand`, on its carved phoebe stand (`ware.<id>.stand`), both sized by the record.
 
 Every object is named `<word>.<id>[.<index>]` (`canvas`, `glass`, `paper`, `plate`, `ware`, `cast`), its parts `<name>.<part>`.
 
@@ -76,9 +82,10 @@ holds, made by Art or built by its stage.
   mat, silk scrolls; the hairline joints between a work's canvases; the stretcher's wood and keys; frames on curved walls.
 - `Musee::Art::Targets` (FLightTarget from Care.json) and the checks `Art.TrueSize` (with `after`), `Art.WithinCare`
   (over `CareFaults`), `Art.ColorManaged`, `Art.Credited`, `Art.HangResolves`.
-- Panels, scrolls, tapestry, silk, stone, turned ceramic without a scan, books, and paper framed without a mount: the
-  supports and kinds the plans name that Art doesn't make yet. A cast's part by more than a band of heights (the
-  dancer's satin ribbon; the hands the skirt's band takes). A vessel's handles (Turned.json
+- Panels, scrolls, tapestry, silk, stone, books, and paper framed without a mount: the supports and kinds the plans name
+  that Art doesn't make yet. A cast's part by more than a band of heights (the dancer's satin ribbon; the hands the
+  skirt's band takes). Painted porcelain's decoration (its image, which the collection doesn't hold); a sancai lead glaze
+  (Matter has none); a vessel's rim band or repair (the Ding basin's copper, the Longquan vase's lacquer and gold). A vessel's handles (Turned.json
   keeps none yet); a lustre's metallic sheen (the lustre layer is the glaze's gloss over the image); a daguerreotype's
   case.
 - Wall labels as objects, fittings (benches, stanchions), vitrines; `UArtImmersiveWork`.
