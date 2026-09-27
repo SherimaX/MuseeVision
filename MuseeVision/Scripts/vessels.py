@@ -1,6 +1,6 @@
 """Derives Chenghuai's painted and monochrome vessels from their photographs (order K9).
 
-    python MuseeVision/Scripts/vessels.py [--write] [--sheets <folder>]
+    python MuseeVision/Scripts/vessels.py [--write] [--sheets <folder>] [--only <work>] [--selftest]
 
 For each vessel the collection holds photographs of (assets/ceramics/<work>/, credited in its CREDITS.md), this finds:
 
@@ -60,16 +60,32 @@ VESSELS = [
          # the neck's step and the rolled lip keep their turns
          views=[dict(image='ceramics/chinese-xuande-jar/DP-32251-001.jpg', profile=True, fine=[(0.88, 1.0)]),
                 dict(image='ceramics/chinese-xuande-jar/MET_DT5083.jpg')],
-         bands=[dict(name="the foot's lotus panels", rows=(0.0, 0.16), shortest=8.0),
-                dict(name="the neck's cloud scroll", rows=(0.89, 0.98), shortest=30.0)]),
+         bands=[dict(name="the foot's lotus panels", rows=(0.0, 0.16), count=23,
+                     read="23 panels: on DP-32251-001 seven panels' tips stand 15.6 degrees apart round the jar"),
+                dict(name="the neck's cloud scroll", rows=(0.89, 0.98), count=8,
+                     read="8 clouds: on DP-32251-001 three of the neck's clouds stand 44 degrees apart")]),
     dict(work='chinese-wucai-jar', painted=True,
          museum=dict(heightMeters=0.232, source=MET + ', 17.127.2, Jar with carp in lotus pond: H. 23.2 cm (no diameter published)'),
-         views=[dict(image='ceramics/chinese-wucai-jar/DP342697.jpg', profile=True, measure=dict(side='both'), rows=(0.12, 1.0)),
+         # below 0.12 of the height the jar's sides are lost against the grey ground in its own soft shadow: its foot and
+         # the collar's lower line are measured on the bottom view instead (ring), and the foot's front edge on the axis
+         # is read by eye where its unglazed rim meets the ground (row 3193: the shadow takes the mask 44 px lower)
+         views=[dict(image='ceramics/chinese-wucai-jar/DP342697.jpg', profile=True, measure=dict(side='both'), rows=(0.12, 1.0),
+                     foot_row=3193, fixed=dict(foot='ring')),
                 dict(image='ceramics/chinese-wucai-jar/DP342698.jpg', same_camera=True, measure=dict(side='both')),
                 dict(image='ceramics/chinese-wucai-jar/DP342700.jpg', same_camera=True, measure=dict(side='both'))],
-         bands=[dict(name="the foot's cloud collar", rows=(0.0, 0.16), shortest=15.0),
+         # the bottom, photographed from under the jar along its axis: its cloud collar and the pond above it run all
+         # round, between the collar's lower (blue) and upper (red) painted lines. It places the side views round the jar
+         # and measures the foot and the collar's lower line, which the side views lose in the shadow.
+         ring=dict(image='ceramics/chinese-wucai-jar/DP342699.jpg',
+                   lower=dict(hue='blue', rows=(0.02, 0.08), window=(0.56, 0.68), thick=(2, 14)),
+                   upper=dict(hue='red', rows=(0.12, 0.20), window=(0.64, 0.80), thick=(5, 30)),
+                   foot=dict(hue='unglazed')),
+         bands=[dict(name="the foot's cloud collar", rows=(0.0, 0.16),
+                     glaze=('13 clouds, which DP342699 shows all round the jar, their colours running yellow, blue, red, '
+                            'green four clouds at a time with one red cloud more: no whole number of repeats carries them '
+                            'round, so where no side view sees the collar it is left in the glaze')),
                 dict(name="the shoulder's lappets", rows=(0.82, 0.92), shortest=10.0),
-                dict(name="the neck's scroll", rows=(0.93, 1.0), shortest=6.0)]),
+                dict(name="the neck's scroll", rows=(0.93, 1.0), shortest=3.0)]),
     dict(work='chinese-falangcai-bowl', painted=True,
          museum=dict(heightMeters=0.054, diameterMeters=0.114, footMeters=0.044,
                      source=MET + ', 65.86.12, Bowl with flowers: H. 5.4 cm, Diam. 11.4 cm, foot 4.4 cm (the order K9 table)'),
@@ -98,7 +114,7 @@ VESSELS = [
          # eggshell-thin: the lit lip at the rim's right-hand turn, between the ground and the shaded inside
          lip=dict(rows=(1138, 1144), columns=(2204, 2215)),
          unused=[dict(image='assets/ceramics/chinese-chicken-cup/鬥彩雞缸杯.png', why='the same photograph as the TIFF, reduced')],
-         bands=[dict(name="the rim's double line", rows=(0.76, 0.92)), dict(name="the foot's double line", rows=(0.0, 0.10))]),
+         bands=[dict(name="the rim's double line", rows=(0.76, 0.92), plain=True), dict(name="the foot's double line", rows=(0.0, 0.10), plain=True)]),
     dict(work='chinese-meiping', painted=True,
          museum=dict(heightMeters=0.356, diameterMeters=0.22,
                      source='Victoria and Albert Museum, C.8-1952, meiping with scenes from The West Chamber: H. 35.6 cm, Diam. 22 cm (the order K9 table)'),
@@ -115,7 +131,10 @@ VESSELS = [
                       why=('its camera could not be fixed: fitted with its EXIF focal length, its silhouette misses the section '
                            'by 24 px rms and its painting lies on side A at a correlation of 0.34, under the 0.45 of a genuine '
                            'overlap; composed, it would double the figures where the sides meet'))],
-         bands=[dict(name="the base's lotus panels", rows=(0.0, 0.28), shortest=30.0), dict(name="the lower diaper band", rows=(0.28, 0.35)),
+         bands=[dict(name="the base's lotus panels", rows=(0.0, 0.28), count=7,
+                     read=("7 panels: on side A its three panels' emblems stand 49 and 51.5 degrees apart round the vase and "
+                           "its front panel's dividers 55 (7 panels are 51.4 degrees each, 6 would be 60)")),
+                dict(name="the lower diaper band", rows=(0.28, 0.35)),
                 dict(name="the shoulder's peony scroll", rows=(0.78, 0.92), shortest=15.0)]),
     dict(work='chinese-peachbloom', painted=False,
          museum=dict(heightMeters=0.197, source=MET + ', 14.40.377, Vase with peach-bloom glaze: H. 19.7 cm (no diameter published)'),
@@ -419,10 +438,12 @@ def fit_camera(m, H, h, radii=None, lip=None, foot=None, focal=None, max_diamete
 FINE_SMOOTHING = 2.0
 
 
-def section_through(m, cam, H, rl, rf, n, iters, profile_rows=(0.0, 1.0), lip_ring=False, fine=()):
+def section_through(m, cam, H, rl, rf, n, iters, profile_rows=(0.0, 1.0), lip_ring=False, fine=(), through=()):
     """The outside's radius at n heights from the foot to the lip: each height's ring turned until its leftmost (or
     rightmost) image point meets the silhouette's edge. Heights outside profile_rows (fractions of the height whose edge
-    is clean) are bridged by a cubic from the last clean ring to the fitted foot or rim, matching its slope. The foot's
+    is clean) are bridged by a cubic from the last clean ring to the fitted foot or rim, matching its slope, or where
+    other photographs measure rings there (`through`, [(height, radius)] below the clean heights, the foot's among them),
+    by a monotone cubic through them and the clean rings. The foot's
     ring is the fitted foot's; the lip's is the silhouette's own, unless the museum's mouth holds it (lip_ring), so the
     rim's outer edge stays where the photograph shows it. The edge's noise is smoothed over a hundredth of the samples:
     against the ground a pale glaze's edge is faint, and a painted line just inside it can pull the edge in by a few
@@ -446,7 +467,7 @@ def section_through(m, cam, H, rl, rf, n, iters, profile_rows=(0.0, 1.0), lip_ri
     # the unclean heights are bridged before the edge is smoothed, so nothing of their edge is smoothed into the clean
     lo, hi = profile_rows
     if lo > 0.0:
-        r = bridge(zs, r, lo * H, 0.0, rf, below=True)
+        r = bridge(zs, r, lo * H, 0.0, rf, below=True, through=through)
     if hi < 1.0:
         r = bridge(zs, r, hi * H, H, rl, below=False)
     # the silhouette's edge is found to a fraction of a pixel, but not without noise: smooth over a hundredth of the height
@@ -471,14 +492,24 @@ def pixel_rows(m):
     return int(min(max(m['bot'] - m['top'], 400), 3000))
 
 
-def bridge(zs, r, z_clean, z_end, r_end, below):
+def bridge(zs, r, z_clean, z_end, r_end, below, through=()):
     """A cubic from the clean ring at z_clean (its value and slope, fitted by a line to the clean rings over the next
     fiftieth of the height, on the clean side alone) to r_end at z_end, reaching it square (the slope a foot or lip
-    ring's own edge has)."""
+    ring's own edge has); or, given rings measured beyond the clean ones (through), a monotone cubic through them and the
+    clean rings over the next fiftieth of the height."""
     i = int(np.searchsorted(zs, z_clean))
     i = min(max(i, 2), len(zs) - 3)
     reach = max(3, int(0.02 * len(zs)))
     side = slice(i, min(len(zs), i + reach)) if below else slice(max(0, i - reach + 1), i + 1)
+    if through:
+        from scipy.interpolate import PchipInterpolator
+        known = sorted(through)
+        pz = np.array([z for z, _ in known] + list(zs[side]) if below else list(zs[side]) + [z for z, _ in known])
+        pr = np.array([x for _, x in known] + list(r[side]) if below else list(r[side]) + [x for _, x in known])
+        out = r.copy()
+        sel = zs <= zs[i] if below else zs >= zs[i]
+        out[sel] = PchipInterpolator(pz, pr)(zs[sel])
+        return out
     slope, intercept = np.polyfit(zs[side], r[side], 1)
     z0, r0 = zs[i], slope * zs[i] + intercept
     span = z_end - z0
@@ -892,34 +923,350 @@ def place(base, fitted, zs, r):
     return out
 
 
-def band_period(unwrapped, H, rows, shortest=6.0, longest=120.0):
-    """A band's repeat round the vessel (degrees, a whole number to the turn): the turn at which its painting, as the
-    placed views show it, best matches itself (autocorrelation of its detail along the band, where it is seen)."""
+# ---------------------------------------------------------------------------------------------------------------------
+# A view along the axis: a vessel's bottom, photographed from under it
+# ---------------------------------------------------------------------------------------------------------------------
+# A painted line by its hue in CIELAB (a*, b* about 0; L* 0..255 as OpenCV gives it): red enamel, cobalt blue, and the
+# foot's unglazed body (its iron-brown rim).
+LINE_HUES = {
+    'red': lambda L, a, b: (a > 8) & (b < 1.3 * a) & (b > -0.5 * a) & (L < 190),
+    'blue': lambda L, a, b: (b < -6) & (np.abs(a) < 12) & (L < 200),
+    'unglazed': lambda L, a, b: (b > 12) & (a > 3) & (b > 1.3 * a),
+}
+RING_ANGLES = 720
+# The ground's cast shadow: the ground darkened with its hue unchanged (within this of its a* and b*).
+RING_SHADOW_CHROMA = 4.0
+# The vessel's texture against the smooth ground: its lightness's spread (L*, 0..255) over a square of so many pixels.
+RING_TEXTURE = 4.0
+RING_TEXTURE_PX = 9
+# A painted line's circle is searched for within RING_SEARCH px of the middle, to RING_STEP px, and its ring fitted to
+# the strokes within RING_BAND px of it.
+RING_SEARCH = 80
+RING_STEP = 4
+RING_BAND = 15
+RING_SECTORS = 180
+
+
+def ring_terms(t):
+    return np.stack([np.ones_like(t), np.cos(t), np.sin(t), np.cos(2 * t), np.sin(2 * t)], 1)
+
+
+def robust_ring(t, rho):
+    """A ring's image about a centre, its radius at each angle as a mean and first and second harmonics (a ring off the
+    centre, and slightly oval), fitted to candidate points: those more than 2.5 times the fit's spread off it (another
+    line's stroke, a cloud's outline) are dropped, again and again, the first passes wide. Returns the harmonics, the
+    spread (pixels) and the share of the candidates kept."""
+    M = ring_terms(t)
+    keep = np.ones(len(t), bool)
+    for step in range(30):
+        coef = np.linalg.lstsq(M[keep], rho[keep], rcond=None)[0]
+        off = rho - M @ coef
+        spread = max(3.0, 1.4826 * float(np.median(np.abs(off[keep])))) if step > 2 else 0.05 * float(np.median(rho))
+        keep = np.abs(off) < 2.5 * spread
+    return coef, spread, float(keep.mean())
+
+
+def polar(img, centre, radii):
+    t = (np.arange(RING_ANGLES) + 0.5) / RING_ANGLES * 2 * np.pi
+    X = centre[0] + radii[:, None] * np.cos(t)[None]
+    Y = centre[1] + radii[:, None] * np.sin(t)[None]
+    return t, cv2.remap(img, X.astype(np.float32), Y.astype(np.float32), cv2.INTER_LINEAR)
+
+
+def runs_of(on):
+    """The runs of True along a column: [(start, end)]."""
+    d = np.diff(np.concatenate([[0], on.astype(int), [0]]))
+    return list(zip(np.where(d == 1)[0], np.where(d == -1)[0]))
+
+
+def read_ring(spec):
+    """The bottom view's rings, in its pixels about the silhouette's centre: the silhouette (the widest ring), the
+    collar's lower and upper painted lines (each angle's runs of the line's hue, of the line's thickness, within its
+    window of the silhouette's radius), and the foot's outer edge (the outermost edge of the unglazed rim inside the lower
+    line). Each is a robust_ring."""
+    im = load(spec['image'])
+    # the middle: the deepest point of the vessel against its ground, its cast shadow (the ground darkened, its hue
+    # unchanged) taken for ground
+    small, fg, s = mask_of(im, 1400, 14.0, True, (RING_SHADOW_CHROMA, 0.0))
+    depth = cv2.distanceTransform((fg > 0).astype(np.uint8), cv2.DIST_L2, 5)
+    centre = np.array(np.unravel_index(np.argmax(depth), depth.shape)[::-1], float) / s
+    lab = cv2.cvtColor(im, cv2.COLOR_BGR2LAB).astype(np.float32)
+    # the silhouette: along each ray from the middle, the outer end of the painted and glazed vessel's last run of
+    # texture (its lightness varying by more than RING_TEXTURE over RING_TEXTURE_PX), where the plain ground and the
+    # shadow on it are smooth
+    L = lab[..., 0]
+    k = (RING_TEXTURE_PX, RING_TEXTURE_PX)
+    texture = np.sqrt(np.maximum(cv2.blur(L * L, k) - cv2.blur(L, k) ** 2, 0))
+    rs = np.arange(0.0, 0.6 * max(im.shape[:2]), 1.0)
+    t, tex = polar(texture, centre, rs)
+    tt, outer = [], []
+    for a in range(RING_ANGLES):
+        runs = [(p, q) for p, q in runs_of(tex[:, a] > RING_TEXTURE) if q - p >= 2 * RING_TEXTURE_PX]
+        if runs:
+            tt.append(t[a])
+            outer.append(rs[runs[-1][1] - 1])
+    rings = dict(centre=centre, silhouette=robust_ring(np.array(tt), np.array(outer)))
+    R = rings['silhouette'][0][0]
+    for name in ('lower', 'upper'):
+        line = spec[name]
+        radii = np.arange(line['window'][0] * R, line['window'][1] * R)
+        t, pl = polar(lab, centre, radii)
+        on = LINE_HUES[line['hue']](pl[..., 0], pl[..., 1] - 128, pl[..., 2] - 128)
+        tt, rr = [], []
+        for k in range(RING_ANGLES):
+            for a, b in runs_of(on[:, k]):
+                if line['thick'][0] <= b - a <= line['thick'][1]:
+                    tt.append(t[k])
+                    rr.append(radii[(a + b) // 2])
+        tt, rr = np.array(tt), np.array(rr)
+        # a line runs all the way round, where a cloud's or a flower's strokes in its hue come and go: the circle that
+        # strokes cover the most of (the most of RING_SECTORS sectors round it; its centre within RING_SEARCH px of the
+        # middle, to RING_STEP px) is the line, and its ring is fitted to the strokes within RING_BAND px of that circle
+        px, py = rr * np.cos(tt), rr * np.sin(tt)
+        best = (-1, 0.0, 0.0, 0.0)
+        for dx in np.arange(-RING_SEARCH, RING_SEARCH + 1, RING_STEP):
+            for dy in np.arange(-RING_SEARCH, RING_SEARCH + 1, RING_STEP):
+                d = np.hypot(px - dx, py - dy)
+                sector = ((np.arctan2(py - dy, px - dx) + np.pi) / (2 * np.pi) * RING_SECTORS).astype(int) % RING_SECTORS
+                cells = np.unique((d / RING_STEP).astype(int) * RING_SECTORS + sector)
+                cover = np.bincount(cells // RING_SECTORS)
+                if cover.max() > best[0]:
+                    best = (cover.max(), dx, dy, (np.argmax(cover) + 0.5) * RING_STEP)
+        _, dx, dy, radius = best
+        near = np.abs(np.hypot(px - dx, py - dy) - radius) < RING_BAND
+        rings[name] = robust_ring(tt[near], rr[near])
+    lower = ring_terms(t) @ rings['lower'][0]
+    radii = np.arange(0.4 * R, lower.max())
+    t, pl = polar(lab, centre, radii)
+    on = LINE_HUES[spec['foot']['hue']](pl[..., 0], pl[..., 1] - 128, pl[..., 2] - 128)
+    tt, rr = [], []
+    for k in range(RING_ANGLES):
+        ends = [radii[min(b, len(radii) - 1)] for a, b in runs_of(on[:, k]) if b - a >= 3]
+        ends = [e for e in ends if e < lower[k] - 3]
+        if ends:
+            tt.append(t[k])
+            rr.append(max(ends))
+    rings['foot'] = robust_ring(np.array(tt), np.array(rr))
+    rings['im'] = im
+    return rings
+
+
+def line_row(pic, square, hue, rows):
+    """The row of an unwrapped side view (up the height) on which a painted line runs: of rows within `rows` (fractions of
+    the height), the one on which most of what the view sees squarely is the line's hue."""
+    lab = cv2.cvtColor(pic, cv2.COLOR_BGR2LAB).astype(np.float32)
+    on = LINE_HUES[hue](lab[..., 0], lab[..., 1] - 128, lab[..., 2] - 128)
+    w = square > 0.7
+    share = (on & w).sum(1) / np.maximum(w.sum(1), 1)
+    lo, hi = int(rows[0] * HEIGHT_STEPS), int(rows[1] * HEIGHT_STEPS)
+    return lo + int(np.argmax(share[lo:hi])) + 0.5
+
+
+def ring_camera(rings, zs, r, z_upper):
+    """The bottom view's camera, a pinhole on the axis under the foot (its rings are round to a few per cent and centred
+    within a few pixels of each other: the view is along the axis): its distance below the collar's upper line and its
+    focal length, from the upper line's radius at its height on the section and the silhouette's, the ring whose image is
+    widest."""
+    from scipy.optimize import brentq
+    rho_upper, rho_sil = rings['upper'][0][0], rings['silhouette'][0][0]
+    r_upper = float(np.interp(z_upper, zs, r))
+
+    def widest(D):
+        f = rho_upper * D / r_upper
+        return float(np.max(f * r / (D + zs - z_upper))) - rho_sil
+    D = brentq(widest, 0.3, 50.0)
+    return D, rho_upper * D / r_upper
+
+
+def ring_radius(rho, z, D, f, z_upper):
+    """The radius (metres) of a ring whose image about the axis is rho pixels, at height z, through the bottom camera."""
+    return rho * (D + z - z_upper) / f
+
+
+# The rows the collar (between its lines) and the pond above it are registered on: the collar in RING_COLLAR_ROWS shares
+# of the way between its lines (which each view finds on its own rows), the pond a cell of height at a time over
+# RING_POND metres.
+RING_COLLAR_ROWS = 28
+RING_POND = 0.05
+
+
+def ring_grid(rings, zs, r, H, D, f, z_upper):
+    """The bottom view laid out as the side views are: columns round the axis (its own angle, from the image's +x
+    towards +y), rows the collar's shares of the way from its lower line to its upper, then the pond a cell at a time
+    above the upper line, each ring's image scaled from the upper line's by the camera."""
+    t = (np.arange(AZIMUTH_STEPS) + 0.5) / AZIMUTH_STEPS * 2 * np.pi
+    M = ring_terms(t)
+    lower, upper = M @ rings['lower'][0], M @ rings['upper'][0]
+    u = (np.arange(RING_COLLAR_ROWS) + 0.5) / RING_COLLAR_ROWS
+    zp = z_upper + (np.arange(int(round(RING_POND / (H / HEIGHT_STEPS)))) + 0.5) * H / HEIGHT_STEPS
+    r_upper = np.interp(z_upper, zs, r)
+    scale = (np.interp(zp, zs, r) / (D + zp - z_upper)) / (r_upper / D)
+    rho = np.vstack([lower[None] + u[:, None] * (upper - lower)[None], upper[None] * scale[:, None]])
+    c = rings['centre']
+    X, Y = c[0] + rho * np.cos(t)[None], c[1] + rho * np.sin(t)[None]
+    return cv2.remap(rings['im'], X.astype(np.float32), Y.astype(np.float32), cv2.INTER_LINEAR), len(zp)
+
+
+def side_grid(pic, square, lower_row, upper_row, pond_rows):
+    """A side view's unwrapped picture on the ring grid's rows: the collar between its own lines, then the pond."""
+    rows = np.concatenate([lower_row + (np.arange(RING_COLLAR_ROWS) + 0.5) / RING_COLLAR_ROWS * (upper_row - lower_row),
+                           upper_row + 0.5 + np.arange(pond_rows)]) - 0.5
+    mx = np.tile(np.arange(AZIMUTH_STEPS, dtype=np.float32), (len(rows), 1))
+    my = np.repeat(rows[:, None].astype(np.float32), AZIMUTH_STEPS, 1)
+    return cv2.remap(pic, mx, my, cv2.INTER_LINEAR), cv2.remap(square.astype(np.float32), mx, my, cv2.INTER_LINEAR)
+
+
+# Registration on the ring is by the painting's colours, not its lightness: the bottom view is lit and exposed unlike the
+# side views. Each cell is a class (red, yellow, green or blue enamel, where its chroma is at least RING_CHROMA of the
+# strongest within RING_NEAR cells round, or a dark stroke, darker than RING_DARK of the white there), softened over
+# RING_SOFT cells.
+RING_CHROMA = 0.3
+RING_DARK = 0.6
+RING_SOFT = 2.0
+RING_NEAR = 60
+
+
+def colour_classes(pic, valid=None):
+    from scipy.ndimage import uniform_filter1d
+    lab = cv2.cvtColor(pic, cv2.COLOR_BGR2LAB).astype(np.float32)
+    L, a, b = lab[..., 0], lab[..., 1] - 128, lab[..., 2] - 128
+    C, h = np.hypot(a, b), np.degrees(np.arctan2(b, a)) % 360
+    Cm, Lm = C.copy(), L.copy()
+    if valid is not None:
+        Cm[~valid], Lm[~valid] = np.nan, np.nan
+    with np.errstate(all='ignore'):
+        import warnings
+        with warnings.catch_warnings():
+            warnings.simplefilter('ignore')
+            c95 = np.nan_to_num(np.nanpercentile(Cm, 95, axis=0), nan=1.0)
+            w95 = np.nan_to_num(np.nanpercentile(Lm, 95, axis=0), nan=200.0)
+    c95 = uniform_filter1d(c95, RING_NEAR, mode='wrap')
+    w95 = uniform_filter1d(w95, RING_NEAR, mode='wrap')
+    chroma = C / np.maximum(c95, 5)[None] > RING_CHROMA
+    classes = [chroma & ((h < 55) | (h >= 345)), chroma & (h >= 55) & (h < 105), chroma & (h >= 105) & (h < 200),
+               chroma & (h >= 200) & (h < 345), ~chroma & (L / np.maximum(w95, 50)[None] < RING_DARK)]
+    return [cv2.GaussianBlur(k.astype(np.float32), (0, 0), RING_SOFT) for k in classes]
+
+
+def ring_landscape(grid, pic, square):
+    """How a side view's collar and pond lie on the bottom view's at each turn of the ring (cells): the mean correlation of
+    their colour classes where the side view sees squarely."""
+    seen = square > SQUARENESS_CUT
+    ks, kb = colour_classes(pic, seen), colour_classes(grid)
+    w = seen.astype(np.float32)
+    one = np.ones_like(w)
+    return np.array([np.mean([correlation(a, w, np.roll(b, k, 1), one) for a, b in zip(ks, kb)]) for k in range(AZIMUTH_STEPS)])
+
+
+def ring_peak(L):
+    """The ring's angle (radians) under a view's front, from its landscape: the best turn, refined to the middle of the
+    cells round it within 5 per cent of it (a broad peak's middle); and its correlation and the next best peak's, further
+    than 10 degrees from it."""
+    n = AZIMUTH_STEPS
+    k = int(np.argmax(L))
+    top = L[k]
+    lo = hi = k
+    while L[(lo - 1) % n] >= 0.95 * top and hi - lo < n // 8:
+        lo -= 1
+    while L[(hi + 1) % n] >= 0.95 * top and hi - lo < n // 8:
+        hi += 1
+    cells = np.arange(lo, hi + 1)
+    mid = float((cells * L[cells % n]).sum() / L[cells % n].sum())
+    peaks = [i for i in range(n) if L[i] >= L[i - 1] and L[i] >= L[(i + 1) % n] and min(abs(i - k), n - abs(i - k)) > n // 36]
+    runner = max((L[i] for i in peaks), default=float('nan'))
+    # a turn of k cells lays the view's column c on the ring's c - k: the ring's angle at the view's front is -k
+    return (-mid / n * 2 * np.pi) % (2 * np.pi), float(top), float(runner)
+
+
+# A band's repeat is measured on its painting's colour, lightly smoothed (BAND_SMOOTH cells) with the view's shading
+# taken off (its trend over BAND_SHADING cells), both along the band: a plain line running round leaves nothing. A turn
+# is trusted where the band is seen at both ends of it over at least BAND_OVERLAP of what is seen at all, its painting
+# then lies on itself at a correlation of BAND_TRUST or more, and the correlation peaks there (not at the search's
+# bounds). Of peaks within BAND_HARMONIC of the best, the shortest is the repeat (twice the repeat matches as well).
+BAND_SMOOTH = 1.0
+BAND_SHADING = 40.0
+BAND_OVERLAP = 0.2
+BAND_TRUST = 0.5
+BAND_HARMONIC = 0.05
+
+
+def along(x, w, sigma):
+    """x smoothed along its rows (round the vessel, wrapping) where w sees it, weighted by w."""
+    pad = int(4 * sigma) + 1
+    xp = np.concatenate([x[:, -pad:], x, x[:, :pad]], 1)
+    wp = np.concatenate([w[:, -pad:], w, w[:, :pad]], 1)
+    k = (2 * pad + 1, 1)
+    bx = cv2.GaussianBlur((xp * wp).astype(np.float32), k, sigma)[:, pad:-pad]
+    bw = cv2.GaussianBlur(wp.astype(np.float32), k, sigma)[:, pad:-pad]
+    return bx / np.maximum(bw, 1e-6)
+
+
+def band_repeat(unwrapped, H, rows, shortest=6.0, longest=180.0):
+    """A band's repeat round the vessel as the placed views show it: the turn (degrees, to a tenth of a cell) at which its
+    painting best lies on itself, and that correlation; None for the turn where no turn is trusted (BAND_TRUST)."""
     z = (np.arange(HEIGHT_STEPS) + 0.5) / HEIGHT_STEPS * H
     band = (z >= rows[0] * H) & (z <= rows[1] * H)
-    signal = np.zeros(AZIMUTH_STEPS)
-    seen = np.zeros(AZIMUTH_STEPS)
+    colour = [np.zeros((band.sum(), AZIMUTH_STEPS)) for _ in range(3)]
+    seen = np.zeros((band.sum(), AZIMUTH_STEPS))
     for pic, square in unwrapped:
-        d = detail(pic)[band]
+        lab = cv2.cvtColor(pic, cv2.COLOR_BGR2LAB).astype(np.float32)[band]
         w = np.clip((square[band] - SQUARENESS_CUT) / (1 - SQUARENESS_CUT), 0, 1)
-        signal += (d * w).sum(axis=0)
-        seen += w.sum(axis=0)
-    s = np.where(seen > 0, signal / np.maximum(seen, 1e-9), 0.0)
-    best = (-2.0, 360.0)
-    # a lag is trusted only where the band is seen over at least half as much of the turn both ways as it is at all:
-    # a lag near the seen arc's own width compares its two ends alone
+        for k in range(3):
+            colour[k] += lab[..., k] * w
+        seen += w
+    detail = []
+    for c in colour:
+        c = c / np.maximum(seen, 1e-9)
+        detail.append(along(c, seen, BAND_SMOOTH) - along(c, seen, BAND_SHADING))
     whole = (seen * seen).sum()
-    for lag in range(int(shortest / 360 * AZIMUTH_STEPS), int(longest / 360 * AZIMUTH_STEPS) + 1):
-        w = seen * np.roll(seen, lag)
-        if w.sum() < 0.5 * whole:
+    C = np.full(AZIMUTH_STEPS // 2 + 1, -2.0)
+    for lag in range(1, len(C)):
+        w = seen * np.roll(seen, lag, 1)
+        if w.sum() < BAND_OVERLAP * whole:
             continue
-        a, b = s, np.roll(s, lag)
-        ma, mb = (w * a).sum() / w.sum(), (w * b).sum() / w.sum()
-        c = (w * (a - ma) * (b - mb)).sum() / math.sqrt((w * (a - ma) ** 2).sum() * (w * (b - mb) ** 2).sum() + 1e-12)
-        if c > best[0]:
-            best = (c, lag * 360.0 / AZIMUTH_STEPS)
-    repeats = max(1, int(round(360.0 / best[1])))
-    return 360.0 / repeats, float(best[0])
+        num = da = db = 0.0
+        for d in detail:
+            a, b = d, np.roll(d, lag, 1)
+            ma, mb = (w * a).sum() / w.sum(), (w * b).sum() / w.sum()
+            num += (w * (a - ma) * (b - mb)).sum()
+            da += (w * (a - ma) ** 2).sum()
+            db += (w * (b - mb) ** 2).sum()
+        C[lag] = num / math.sqrt(da * db + 1e-12)
+    lo = max(1, int(math.ceil(shortest / 360 * AZIMUTH_STEPS)))
+    hi = min(len(C) - 1, int(longest / 360 * AZIMUTH_STEPS))
+    peaks = [k for k in range(lo + 1, hi) if C[k] > -2 and C[k - 1] > -2 and C[k + 1] > -2 and C[k] > C[k - 1] and C[k] >= C[k + 1]]
+    if not peaks:
+        return None, float('nan')
+    top = max(C[k] for k in peaks)
+    k = min(k for k in peaks if C[k] >= top - BAND_HARMONIC)
+    # the peak's turn between cells, from the parabola through it and its neighbours
+    a, b, c = C[k - 1], C[k], C[k + 1]
+    den = a - 2 * b + c
+    turn = (k + (0.5 * (a - c) / den if den != 0 else 0.0)) * 360.0 / AZIMUTH_STEPS
+    return (turn if b >= BAND_TRUST else None), float(b)
+
+
+def band_of(band, unwrapped, H):
+    """A band's repeat and how it was found: a count read by eye on the photographs (its measured repeat given beside
+    it), a plain line running round unbroken (carried round as itself, PLAIN_PERIOD at a time), or the measured repeat
+    where it is trusted; otherwise None, with why, and the band is left in the glaze where no view sees it."""
+    turn, corr = band_repeat(unwrapped, H, band['rows'], band.get('shortest', 6.0))
+    measured = ('measured repeat %.1f deg (self-correlation %.2f)' % (turn, corr) if turn is not None else
+                'no measured repeat trusted (best self-correlation %.2f, under %.2f)' % (corr, BAND_TRUST))
+    if band.get('count'):
+        return 360.0 / band['count'], 'read by eye: %s; %s' % (band['read'], measured)
+    if band.get('plain'):
+        return PLAIN_PERIOD, 'a plain line running unbroken round, carried round as itself'
+    if band.get('glaze'):
+        return None, band['glaze']
+    if turn is None:
+        return None, measured + ': where no view sees it, it is left in the glaze'
+    n = max(1, int(round(360.0 / turn)))
+    return 360.0 / n, '%s, %d round' % (measured, n)
+
+
+# A plain line's repeat: any turn carries it, and the finer the turn the more of what the views see of it is averaged.
+PLAIN_PERIOD = 2.0
 
 
 def coverage(views):
@@ -952,8 +1299,11 @@ def glaze_colour(view, cam, zs, r):
 
 
 # ---------------------------------------------------------------------------------------------------------------------
-def fit_view(v, H, museum, zs=None, r=None):
+def fit_view(v, H, museum, zs=None, r=None, ring_foot=None):
     m = measure(v['image'], **v.get('measure', {}))
+    if 'foot_row' in v:
+        # the foot's front edge on the axis, read from the photograph by eye where its own shadow takes the mask lower
+        m.update(bot_u=np.array([m['uc'] - 1.0, m['uc'], m['uc'] + 1.0]), bot_v=np.full(3, float(v['foot_row'])))
     if 'axis_rows' in v:
         # where the photograph's own edges are lost (a highlight's bloom over the rim, a shelf's reflection under the
         # foot), the rim's top and the foot's bottom on the axis, read from the photograph by eye
@@ -967,6 +1317,9 @@ def fit_view(v, H, museum, zs=None, r=None):
         kw['lip'] = museum['diameterMeters'] / 2
     if fixed.get('foot') == 'foot':
         kw['foot'] = museum['footMeters'] / 2
+    if fixed.get('foot') == 'ring' and ring_foot is not None:
+        # the foot's radius as a view along the axis measures it
+        kw['foot'] = ring_foot
     if fixed.get('max') == 'diameter':
         kw['max_diameter'] = museum['diameterMeters']
     if 'focal' in fixed:
@@ -997,6 +1350,73 @@ SECTION_TOLERANCE = 0.0001
 SECTION_PIXELS = 2.0
 
 
+def lower_from_ring(spec, rings, m, cam, zs, r, H):
+    """What the bottom view measures below a side view's clean heights: the collar's lower and upper lines' heights (found
+    on the first view, unwrapped), the bottom camera (fitted to the upper line and the silhouette on the section), and
+    through it the radii of the lower line's ring and the foot's."""
+    pic, sq = unwrap(m, cam, zs, r)
+    z_lower = line_row(pic, sq, spec['lower']['hue'], spec['lower']['rows']) / HEIGHT_STEPS * H
+    z_upper = line_row(pic, sq, spec['upper']['hue'], spec['upper']['rows']) / HEIGHT_STEPS * H
+    D, f = ring_camera(rings, zs, r, z_upper)
+    return dict(z_lower=z_lower, z_upper=z_upper, D=D, f=f, lower=ring_radius(rings['lower'][0][0], z_lower, D, f, z_upper),
+                foot=ring_radius(rings['foot'][0][0], 0.0, D, f, z_upper))
+
+
+def place_on_ring(spec, rings, low, first_pic, fitted, zs, r, H):
+    """Each view's bearing from the bottom view, which sees the collar and the pond all round: every side view's collar
+    (between its own lines) and pond registered on the ring by their colours (ring_landscape), its bearing the ring's
+    angle under its front less the first view's. Returns the views' placements as place() does, and each view's
+    registration (its ring angle, correlation, and the next best peak's)."""
+    grid, pond = ring_grid(rings, zs, r, H, low['D'], low['f'], low['z_upper'])
+    pics = [first_pic] + [unwrap(mv, dict(cv, azimuth=0.0), zs, r) for _, mv, cv in fitted]
+    reg = []
+    for pic, sq in pics:
+        lower = line_row(pic, sq, spec['lower']['hue'], spec['lower']['rows'])
+        upper = line_row(pic, sq, spec['upper']['hue'], spec['upper']['rows'])
+        sp, ss = side_grid(pic, sq, lower, upper, pond)
+        reg.append(ring_peak(ring_landscape(grid, sp, ss)))
+    turns = [(reg[k + 1][0] - reg[0][0]) % (2 * np.pi) for k in range(len(fitted))]
+    allp = [first_pic] + [unwrap(mv, dict(cv, azimuth=turns[k]), zs, r) for k, (_, mv, cv) in enumerate(fitted)]
+    out = []
+    for k, (v, mv, cv) in enumerate(fitted):
+        cv['azimuth'] = turns[k]
+        overlaps = []
+        for i in range(len(allp)):
+            if i == k + 1:
+                continue
+            # the pictures are placed already: they lie on each other at no further turn (an overlap too slight to
+            # correlate, under correlation()'s share, is not listed)
+            C, O = landscape(allp[i], allp[k + 1])
+            if O[0] >= MIN_OVERLAP and C[0] > -1.0:
+                overlaps.append((i, float(O[0]), float(C[0])))
+        out.append((cv, 'registered', overlaps))
+    return out, reg
+
+
+def departure_of(first, H, museum, widest, rms):
+    """Where the section's widest diameter departs from the museum's by more than DIAMETER_TOLERANCE of it: what a camera
+    held to the museum's diameter makes of the photograph (the widest it reaches and how far its section's image strays
+    from the silhouette), so the record says why the photograph's proportion is kept."""
+    published = museum.get('diameterMeters')
+    if not published or abs(widest - published) <= DIAMETER_TOLERANCE * published:
+        return None
+    held = dict(first, fixed=dict(first.get('fixed', {}), max='diameter'))
+    rows = first.get('rows', (0.0, 1.0))
+    m, cam, rl, rf, _ = fit_view(held, H, museum)
+    zs, r = section_through(m, cam, H, rl, rf, pixel_rows(m), 12, rows, fine=first.get('fine', ()))
+    miss = silhouette_rms(m, cam, H, zs, r, rows[0] == 0.0, rows)
+    return ("its photograph gives %.1f cm across at the museum's %.1f cm height, %.1f%% %s the museum's %.1f cm; held to "
+            "the museum's diameter, the camera's best comes to %.1f cm across and its section's image misses the silhouette "
+            "by %.1f px rms (against %.1f): no camera puts the museum's diameter on the photograph, so the section keeps the "
+            "photograph's proportion" % (100 * widest, 100 * H, 100 * abs(widest - published) / published,
+                                         'under' if widest < published else 'over', 100 * published, 200 * r.max(), miss, rms))
+
+
+# How far a derived section's widest diameter may stand from its museum's before its record must say why (a departure):
+# the Data/Art/Vessels.json record's diameterTolerance, which make checks too.
+DIAMETER_TOLERANCE = json.load(open(RECORD, encoding='utf-8'))['diameterTolerance']
+
+
 def derive(vessel, ware, sheets):
     H = vessel['museum']['heightMeters']
     museum = vessel['museum']
@@ -1006,10 +1426,20 @@ def derive(vessel, ware, sheets):
     m, cam, rl, rf, rms = fit_view(first, H, museum)
     lip_ring = first.get('fixed', {}).get('lip') == 'diameter'
     zs, r = section_through(m, cam, H, rl, rf, pixel_rows(m), 12, rows, lip_ring=lip_ring, fine=first.get('fine', ()))
-    out = dict(work=vessel['work'], zs=zs, r=r, views=[], checks=[], unused=list(vessel.get('unused', [])))
-    out['checks'].append('widest diameter %.1f cm (museum %s)' % (200 * r.max(), '%.1f cm' % (100 * museum['diameterMeters']) if 'diameterMeters' in museum else 'none published'))
-    if 'footMeters' in museum:
-        out['checks'].append('foot %.1f cm (museum %.1f cm)' % (200 * r[0], 100 * museum['footMeters']))
+    out = dict(work=vessel['work'], views=[], checks=[], unused=list(vessel.get('unused', [])))
+    spec = vessel.get('ring')
+    if spec:
+        # the bottom view measures the foot and the collar's lower line, which the side views lose: the camera is held to
+        # that foot and the section runs through both, and again with the section they give
+        rings = read_ring(spec)
+        for _ in range(2):
+            low = lower_from_ring(spec, rings, m, cam, zs, r, H)
+            m, cam, rl, rf, rms = fit_view(first, H, museum, ring_foot=low['foot'])
+            zs, r = section_through(m, cam, H, rl, rf, pixel_rows(m), 12, rows, lip_ring=lip_ring, fine=first.get('fine', ()),
+                                    through=[(0.0, low['foot']), (low['z_lower'], low['lower'])])
+        low = lower_from_ring(spec, rings, m, cam, zs, r, H)
+        out['ring'] = dict(low, rings=rings)
+    out['zs'], out['r'] = zs, r
     if not lip_ring:
         out['checks'].append("the rim's outer radius %.1f mm from the silhouette (the rim's fitted ellipse %.1f)" % (1000 * r[-1], 1000 * rl))
     # the foot's edge counts where the view's silhouette is clean down to it
@@ -1018,16 +1448,21 @@ def derive(vessel, ware, sheets):
         sheet(sheets, vessel['work'] + '-0.jpg', m, cam, zs, r)
     unwrapped = [unwrap(m, cam, zs, r)]
     fitted = []
+    m0 = measure(first['image'], **first.get('measure', {}))
     for v in (vv for vv in views if vv is not first):
         if v.get('same_camera'):
             # a series taken on a turntable: the first view's camera, the vessel set down where this photograph shows it
-            # (its axis's column, and its foot and rim as far up or down the frame as they stand in it)
+            # (its axis's column, and its foot and rim as far up or down the frame as its mask shows them against the
+            # first view's)
             mv = measure(v['image'], **v.get('measure', {}))
-            cv = dict(cam, u0=mv['uc'], v0=cam['v0'] + 0.5 * (mv['top'] + mv['bot'] - m['top'] - m['bot']))
+            cv = dict(cam, u0=mv['uc'], v0=cam['v0'] + 0.5 * (mv['top'] + mv['bot'] - m0['top'] - m0['bot']))
         else:
             mv, cv, _, _, _ = fit_view(v, H, museum, zs, r)
         fitted.append([v, mv, cv])
-    placed = place(unwrapped[0], fitted, zs, r) if fitted else []
+    if spec and fitted:
+        placed, out['ring_reg'] = place_on_ring(spec, rings, low, unwrapped[0], fitted, zs, r, H)
+    else:
+        placed = place(unwrapped[0], fitted, zs, r) if fitted else []
     pics = [unwrap(mv, cv, zs, r) for (_, mv, _), (cv, _, _) in zip(fitted, placed)]
     allp = unwrapped + pics
     for k, ((v, mv, _), (cv, placement, overlaps)) in enumerate(zip(fitted, placed)):
@@ -1057,7 +1492,7 @@ def derive(vessel, ware, sheets):
         if sheets:
             sheet(sheets, vessel['work'] + '-%d.jpg' % (k + 1), mv, cv, zs, r)
     out['coverage'] = coverage(unwrapped)
-    out['periods'] = [band_period(unwrapped, H, b['rows'], b.get('shortest', 6.0)) for b in vessel['bands']]
+    out['bands'] = [band_of(b, unwrapped, H) for b in vessel['bands']]
     out['unwrapped'] = unwrapped
     if not vessel['painted']:
         out['glaze'] = glaze_colour(m, cam, zs, r)
@@ -1065,6 +1500,16 @@ def derive(vessel, ware, sheets):
     t, how = wall_of(vessel, cam, ware, r[-1])
     tolerance = max(SECTION_TOLERANCE, SECTION_PIXELS * cam['distance'] / cam['focal'])
     out['section'], out['first'], out['last'] = closed_section(zs, r, t, ware, open_form, tolerance)
+    # the checks are of the section as it is stored: its outside's widest point, and its foot's outer edge (the outside's
+    # first point)
+    outside = out['section'][out['first']:out['last']]
+    widest = 2 * max(p[0] for p in outside)
+    out['widest'] = widest
+    checks = ['widest diameter %.2f cm (museum %s)' % (100 * widest, '%.1f cm' % (100 * museum['diameterMeters']) if 'diameterMeters' in museum else 'none published')]
+    if 'footMeters' in museum:
+        checks.append('foot %.2f cm (museum %.1f cm)' % (200 * outside[0][0], 100 * museum['footMeters']))
+    out['checks'] = checks + out['checks']
+    out['departure'] = departure_of(first, H, museum, widest, out['views'][0]['rms'])
     out['open'] = open_form
     out['wall'], out['wall_how'] = t, how
     return out
@@ -1100,15 +1545,47 @@ def record_of(vessel, d):
             math.degrees(first['cam']['pitch']), first['cam']['focal'], first['rms'], 100 * museum['heightMeters'],
             1000 * max(SECTION_TOLERANCE, SECTION_PIXELS * first['cam']['distance'] / first['cam']['focal']), '; '.join(d['checks']),
             d['wall_how']))
+    if d.get('departure'):
+        derivation += ' Departure: %s.' % d['departure']
+    ring = d.get('ring')
+    if ring:
+        rr = ring['rings']
+        derivation += (
+            " Below %.0f%% of the height the side view's edge is lost in the jar's own shadow: there the section runs through "
+            "the rings the bottom view %s measures, a pinhole on the axis %.3f m under the collar's upper line with a focal "
+            "length of %.0f px (fitted to that line's ring, %.1f px about the axis, at its height %.1f mm on the section, "
+            "and to the silhouette's, %.1f px): the collar's lower line at %.1f mm up, %.1f mm from the axis (its ring %.1f "
+            "px, spread %.1f), and the foot's outer edge %.1f mm (its unglazed rim's ring %.1f px, spread %.1f); the camera "
+            "is held to that foot, and the foot's front edge on the axis read by eye (row %d), where the shadow takes the "
+            "mask lower." % (
+                100 * first['view'].get('rows', (0.0, 1.0))[0], vessel['ring']['image'].split('/')[-1], ring['D'], ring['f'],
+                rr['upper'][0][0], 1000 * ring['z_upper'], rr['silhouette'][0][0], 1000 * ring['z_lower'], 1000 * ring['lower'],
+                rr['lower'][0][0], rr['lower'][1], 1000 * ring['foot'], rr['foot'][0][0], rr['foot'][1],
+                first['view'].get('foot_row', 0)))
     if vessel['painted']:
         placed = [v for v in d['views'][1:]]
-        derivation += (' Decoration: each further view placed by registering its painting, unwrapped round the axis, on '
-                       "the others' where they overlap, its camera its own silhouette's (fitPixels), and kept only where "
-                       "its painting lies on theirs within %.1f cm in every band of height they share; a view whose "
-                       "painting overlaps none of the first view's is placed unverified. The views composed see %.0f%% "
-                       "of the outside within %.0f degrees of face on; where none does, each band's own repeat is carried "
-                       "round from where it is best seen, and elsewhere the glaze is left." % (
-                           100 * AGREEMENT_METERS, 100 * d['coverage'], math.degrees(math.acos(SQUARENESS_CUT))))
+        if ring:
+            reg = d['ring_reg']
+            derivation += (
+                ' Decoration: each view placed round the jar by the bottom view, which sees the collar and the pond above it '
+                'all round: each side view\'s collar (between its own lines) and pond laid on the ring by their colours '
+                '(red, yellow, green and blue enamel and dark strokes), its bearing the ring\'s angle under its front less the '
+                'first view\'s (' + '; '.join(
+                    '%s under %.1f deg of the ring, correlation %.2f against %.2f at the next best turn' % (
+                        v['view']['image'].split('/')[-1], math.degrees(g[0]), g[1], g[2]) for v, g in zip(d['views'], reg)) +
+                '); its camera its own silhouette\'s (fitPixels), and kept only where its painting lies on the views it '
+                'overlaps within %.1f cm in every band of height they share.' % (100 * AGREEMENT_METERS))
+        else:
+            derivation += (' Decoration: each further view placed by registering its painting, unwrapped round the axis, on '
+                           "the others' where they overlap, its camera its own silhouette's (fitPixels), and kept only where "
+                           "its painting lies on theirs within %.1f cm in every band of height they share; a view whose "
+                           "painting overlaps none of the first view's is placed unverified." % (100 * AGREEMENT_METERS))
+        derivation += (" The views composed see %.0f%% of the outside within %.0f degrees of face on; where none does, a "
+                       "band whose repeat is known is carried round from where it is seen (its `reading`), and elsewhere "
+                       "the glaze is left." % (100 * d['coverage'], math.degrees(math.acos(SQUARENESS_CUT))))
+        left = [(b['name'], how) for b, (p, how) in zip(vessel['bands'], d['bands']) if p is None]
+        if left:
+            derivation += ' Left in the glaze where no view sees them: ' + '; '.join('%s (%s)' % (n, how) for n, how in left) + '.'
         if any(v['placement'] == 'unverified' for v in placed):
             derivation += (' Unverified: ' + '; '.join(
                 '%s at %.0f deg' % (v['view']['image'].split('/')[-1], math.degrees(v['cam']['azimuth'])) for v in placed
@@ -1119,13 +1596,21 @@ def record_of(vessel, d):
     rec = dict(work=vessel['work'], source=museum['source'], grade='derived', derivation=derivation,
                museum={k: v for k, v in museum.items() if k != 'source'}, section=d['section'],
                outside=[d['first'], d['last']], wallMeters=round(d['wall'], 5))
+    if d.get('departure'):
+        rec['departure'] = d['departure']
     if vessel['painted']:
         rec['views'] = views
         rec['coverage'] = round(d['coverage'], 3)
         rec['bands'] = [dict(name=b['name'], fromMeters=round(b['rows'][0] * museum['heightMeters'], 4),
-                             toMeters=round(b['rows'][1] * museum['heightMeters'], 4), periodDegrees=p)
-                        for b, (p, _) in zip(vessel['bands'], d['periods'])]
-        rec['unused'] = d['unused']
+                             toMeters=round(b['rows'][1] * museum['heightMeters'], 4), periodDegrees=p, reading=how)
+                        for b, (p, how) in zip(vessel['bands'], d['bands']) if p is not None]
+        unused = list(d['unused'])
+        if ring:
+            unused.append(dict(image='assets/' + vessel['ring']['image'], why=(
+                "read to place the side views round the jar and to measure its foot and the collar's lower line (see the "
+                "derivation), not composed: from under the jar it sees the collar and the pond more than 60 degrees off "
+                "face on, where a view lends no colour")))
+        rec['unused'] = unused
     return rec
 
 
@@ -1243,13 +1728,75 @@ def derive_ru(ware):
     return rec, glaze, spread, pressed_foot
 
 
+# ---------------------------------------------------------------------------------------------------------------------
+# Self-test: the repeat and the ring's registration on pictures whose answers are known
+# ---------------------------------------------------------------------------------------------------------------------
+def seen_from_front(half_width_degrees=55.0):
+    """How squarely a view facing the front sees each cell: the cosine of the angle round from it, nothing past the given
+    half width."""
+    phi = (np.arange(AZIMUTH_STEPS) + 0.5) / AZIMUTH_STEPS * 360.0
+    off = (phi + 180.0) % 360.0 - 180.0
+    square = np.where(np.abs(off) <= half_width_degrees, np.cos(np.radians(off)), 0.0)
+    return np.repeat(square[None], HEIGHT_STEPS, 0)
+
+
+def panels(count, rng):
+    """A band of `count` panels round the vessel, each a dark divider at its edge and an emblem in its middle, on white;
+    hand-painted, each a little different."""
+    pic = np.full((HEIGHT_STEPS, AZIMUTH_STEPS, 3), 235, np.uint8)
+    width = AZIMUTH_STEPS / count
+    for k in range(count):
+        edge = int(round(k * width))
+        pic[:, edge:edge + 6] = (120, 60, 40)
+        mid = int(round((k + 0.5) * width))
+        size = 8 + int(rng.integers(0, 3))
+        pic[HEIGHT_STEPS // 3:2 * HEIGHT_STEPS // 3, mid - size:mid + size] = (140, 70, 50)
+    return pic
+
+
+def selftest():
+    """Checks band_repeat and the ring's registration where the answer is known. Returns the failures."""
+    rng = np.random.default_rng(0)
+    fails = []
+    square = seen_from_front()
+    # seven panels seen over 110 degrees: the repeat is a panel, 51.4 degrees, though only two fit in the seen arc
+    turn, corr = band_repeat([(panels(7, rng), square)], 1.0, (0.0, 1.0), 30.0)
+    if turn is None or abs(turn - 360.0 / 7) > 1.0:
+        fails.append('seven panels seen over 110 degrees repeat every %s degrees (correlation %.2f), not 51.4' % (turn, corr))
+    # noise has no repeat to trust
+    noise = rng.integers(0, 255, (HEIGHT_STEPS, AZIMUTH_STEPS, 3)).astype(np.uint8)
+    turn, corr = band_repeat([(noise, square)], 1.0, (0.0, 1.0), 6.0)
+    if turn is not None:
+        fails.append('noise repeats every %.1f degrees (correlation %.2f)' % (turn, corr))
+    # a ring of coloured strokes, and a side view of it turned 100 degrees: registered, the ring's angle under the view's
+    # front is 100 degrees
+    rows = RING_COLLAR_ROWS + 20
+    ring = np.full((rows, AZIMUTH_STEPS, 3), 235, np.uint8)
+    colours = [(40, 40, 200), (40, 200, 220), (40, 160, 40), (200, 60, 40)]
+    for k in range(60):
+        c = int(rng.integers(0, AZIMUTH_STEPS - 12))
+        r0 = int(rng.integers(0, rows - 8))
+        ring[r0:r0 + 8, c:c + 12] = colours[k % 4]
+    turn = 200
+    side = np.roll(ring, -turn, 1)
+    angle, top, runner = ring_peak(ring_landscape(ring, side, seen_from_front()[:rows]))
+    if abs(math.degrees(angle) - turn * 360.0 / AZIMUTH_STEPS) > 1.0:
+        fails.append('a side view turned %.0f degrees is registered at %.1f' % (turn * 360.0 / AZIMUTH_STEPS, math.degrees(angle)))
+    return fails
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument('--write', action='store_true')
     ap.add_argument('--sheets')
     ap.add_argument('--only')
+    ap.add_argument('--selftest', action='store_true')
     args = ap.parse_args()
     sys.stdout.reconfigure(encoding='utf-8')
+    if args.selftest:
+        fails = selftest()
+        print('; '.join(fails) if fails else 'selftest: the repeat and the ring registration find what they were given')
+        sys.exit(1 if fails else 0)
     ware = json.load(open(WARE, encoding='utf-8'))
     results = []
     for vessel in VESSELS:
@@ -1266,8 +1813,16 @@ def main():
                 ''.join('; on %s %.1f%% shared, correlation %.2f' % (n, 100 * s_, k) for n, s_, k in v['overlaps'])))
         print('  ' + '; '.join(d['checks']) + '; coverage %.2f; %s form; %s; section %d points' % (
             d['coverage'], 'open' if d['open'] else 'closed', d['wall_how'], len(d['section'])))
-        for b, (p, c) in zip(vessel['bands'], d.get('periods', [])):
-            print('  band %s: repeats every %.2f deg (%d round), self-correlation %.2f' % (b['name'], p, round(360 / p), c))
+        for b, (p, how) in zip(vessel['bands'], d.get('bands', [])):
+            print('  band %s: %s; %s' % (b['name'], 'repeats every %.2f deg (%d round)' % (p, round(360 / p)) if p else 'left in the glaze', how))
+        if d.get('departure'):
+            print('  departure: ' + d['departure'])
+        if d.get('ring'):
+            g = d['ring']
+            print('  ring: camera %.3f m under the upper line, focal %.0f px; lower line %.1f mm up at %.1f mm; foot %.1f mm; upper line %.1f mm up' % (
+                g['D'], g['f'], 1000 * g['z_lower'], 1000 * g['lower'], 1000 * g['foot'], 1000 * g['z_upper']))
+            for v, reg in zip(d['views'], d.get('ring_reg', [])):
+                print('  ring: %s under %.1f deg, correlation %.2f (next %.2f)' % (v['view']['image'].split('/')[-1], math.degrees(reg[0]), reg[1], reg[2]))
         if 'glaze' in d:
             print('  glaze CIELAB', d['glaze'])
     ru = None

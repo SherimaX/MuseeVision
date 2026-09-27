@@ -349,11 +349,16 @@ namespace Musee::ArtMaking
 		 * A vessel derived from its photographs: its outside runs between two of its section's points; its section turned
 		 * is a solid (it crosses itself nowhere, and its wall is nowhere thinner than half the wall it was drawn with); its
 		 * feet are outlines; a painted one's views are photographs the collection holds, each with its camera and how it
-		 * was placed; an oval one gives its mouth's two axes.
+		 * was placed; an oval one gives its mouth's two axes; and it is its museum's size, its plan the section's (SizeFault).
 		 */
-		TArray<FString> DerivedVesselFaults(const FArtVessel& Vessel)
+		TArray<FString> DerivedVesselFaults(const FArtVessel& Vessel, const FArtHangEntry& Entry, double DiameterTolerance)
 		{
 			TArray<FString> Out;
+			const FString Size = SizeFault(Vessel, Entry.SizeMeters(), DiameterTolerance);
+			if (!Size.IsEmpty())
+			{
+				Out.Add(FString::Printf(TEXT("Data/%s: %s"), FArtVessels::Record, *Size));
+			}
 			const bool bOutside = Vessel.Outside.Num() == 2 && Vessel.Outside[0] >= 0 && Vessel.Outside[0] < Vessel.Outside[1]
 				&& Vessel.Outside[1] < Vessel.Section.Num();
 			if (Vessel.IsPainted() && !bOutside)
@@ -418,7 +423,7 @@ namespace Musee::ArtMaking
 			}
 			else
 			{
-				Out.Append(DerivedVesselFaults(*Vessel));
+				Out.Append(DerivedVesselFaults(*Vessel, Entry, Context.Vessels->DiameterTolerance));
 			}
 			return Out;
 		}

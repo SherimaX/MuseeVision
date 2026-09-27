@@ -141,7 +141,9 @@ struct FArtVesselView
 
 /**
  * A band of ornament running round a painted vessel (a scroll, a row of panels): between two heights up its outside,
- * repeating every so many degrees. Where no view sees the band, its own repeat is carried round from where one does.
+ * repeating every so many degrees. Where no view sees the band, its own repeat is carried round from where one does. A
+ * band whose repeat isn't known (read on its photographs, or measured and trusted) isn't listed: where no view sees it,
+ * the glaze is left.
  */
 USTRUCT()
 struct FArtVesselBand
@@ -160,6 +162,10 @@ struct FArtVesselBand
 	/** The band's repeat round the axis: a whole number of repeats to the turn. */
 	UPROPERTY(meta = (MuseeRequired, Units = "Degrees"))
 	double PeriodDegrees = 0.0;
+
+	/** How the repeat is known: read by eye on the photographs (with the measured repeat beside it), a plain line, or measured. */
+	UPROPERTY()
+	FString Reading;
 };
 
 /** One foot, as its plan: a closed outline [across, front to back] in metres from the axis, anticlockwise from above. */
@@ -231,6 +237,13 @@ struct FArtVessel
 
 	UPROPERTY()
 	FArtVesselMuseum Museum;
+
+	/**
+	 * Why a derived section's widest diameter stands further from the museum's than the record's DiameterTolerance: what
+	 * the photographs show against the published figure. Empty where it doesn't.
+	 */
+	UPROPERTY()
+	FString Departure;
 
 	UPROPERTY(meta = (MuseeRequired))
 	TArray<FVector2D> Section;
@@ -331,6 +344,13 @@ struct FArtVessels
 	/** A section turns smoothly through a traced point where it turns less than this, and keeps an arris where it turns more. */
 	UPROPERTY(meta = (MuseeRequired, Units = "Degrees"))
 	double CreaseDegrees = 0.0;
+
+	/**
+	 * How far a derived section's widest diameter may stand from its museum's, as a share of it, before its record must
+	 * say why (its Departure): a published figure's rounding and a hand-thrown vessel's own out-of-round.
+	 */
+	UPROPERTY(meta = (MuseeRequired))
+	double DiameterTolerance = 0.0;
 
 	UPROPERTY(meta = (MuseeRequired))
 	FArtVesselStand Stand;

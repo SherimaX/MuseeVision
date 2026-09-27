@@ -6,12 +6,33 @@
 namespace Musee::ArtMaking
 {
 	/**
-	 * A vessel's section at the size its plan shows it: the record's section scaled so its widest radius is half the
-	 * plan's width and its top the plan's height above the foot's plane (the record's height 0, where the section's own
-	 * foot or its feet stand). Point for point the record's, so a point of one is the same place on the vessel as the same
-	 * point of the other.
+	 * How a vessel's section is scaled to the size its plan shows it, [across, up]. A section derived from the vessel's
+	 * own photographs (grade `derived`) is its true shape at its museum's height: it is scaled by one factor, the plan's
+	 * height over its own, so its proportion is the photographs' (the plan gives its width as the section's, which make
+	 * checks). A section traced from a photograph of a vessel of its type is scaled to the plan's width and height.
+	 */
+	[[nodiscard]] FVector2D SectionScale(const FArtVessel& Vessel, const FVector2D& SizeMeters);
+
+	/**
+	 * A vessel's section at the size its plan shows it (SectionScale), its top the plan's height above the foot's plane
+	 * (the record's height 0, where the section's own foot or its feet stand). Point for point the record's, so a point of
+	 * one is the same place on the vessel as the same point of the other.
 	 */
 	[[nodiscard]] TArray<FVector2D> SizedSection(const FArtVessel& Vessel, const FVector2D& SizeMeters);
+
+	/** How near a derived section's height, and its plan's, come to its museum's: half a millimetre (the section's rounding). */
+	inline constexpr double SectionHeightToleranceMeters = 0.0005;
+
+	/** How near a derived vessel's plan's width comes to its section's: the plan gives sizes to the millimetre. */
+	inline constexpr double PlanWidthToleranceMeters = 0.001;
+
+	/**
+	 * Whether a derived vessel is the size its museum records and its plan shows: its section's height its museum's, its
+	 * plan's height its museum's and its width its section's, and its section's widest diameter (an oval's across its
+	 * mouth's long axis) within DiameterTolerance of its museum's, or its record says why not (its Departure). Empty if
+	 * so, or if it isn't derived; else what is wrong.
+	 */
+	[[nodiscard]] FString SizeFault(const FArtVessel& Vessel, const FVector2D& PlanMeters, double DiameterTolerance);
 
 	/** The radius of a section's foot: its widest point at its lowest height. */
 	[[nodiscard]] double FootRadius(TConstArrayView<FVector2D> Points);

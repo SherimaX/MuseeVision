@@ -48,7 +48,7 @@ namespace Musee::ArtMaking
 	{
 		/**
 		 * A vessel's feet (FArtVesselFeet), each its traced outline stood up to their height in its medium's finish
-		 * (`<name>.foot.<n>`), sized as the section is: across by the plan's width against the section's, up by its height.
+		 * (`<name>.foot.<n>`), sized as the section is (SectionScale): across by its scale across, up by its scale up.
 		 */
 		void MakeFeet(const FArtVessel& Vessel, const FArtHangEntry& Entry, bool bSplit, const FLayerFinish& Finish, const FMuseeFrame& OnStand,
 			TArray<FFormMadePiece>& OutPieces, TArray<FMuseeFinding>& OutFindings)
@@ -58,13 +58,9 @@ namespace Musee::ArtMaking
 			{
 				return;
 			}
-			FVector2D Most = FVector2D::ZeroVector;
-			for (const FVector2D& Point : Vessel.Section)
-			{
-				Most = FVector2D(FMath::Max(Most.X, Point.X), FMath::Max(Most.Y, Point.Y));
-			}
-			const double Across = 0.5 * Entry.SizeMeters().X / Most.X;
-			const double Rise = Entry.SizeMeters().Y / Most.Y;
+			const FVector2D Scale = SectionScale(Vessel, Entry.SizeMeters());
+			const double Across = Scale.X;
+			const double Rise = Scale.Y;
 			for (int32 Index = 0; Index < Feet.Each.Num(); ++Index)
 			{
 				TArray<FVector2D> Outline;

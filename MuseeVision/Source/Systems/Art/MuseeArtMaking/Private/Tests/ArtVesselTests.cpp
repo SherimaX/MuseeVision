@@ -6,6 +6,7 @@
 #include "MuseeUnits.h"
 #include "Vessel/VesselDecoration.h"
 #include "Vessel/VesselMesh.h"
+#include "Vessel/VesselSection.h"
 
 #if WITH_DEV_AUTOMATION_TESTS
 
@@ -14,8 +15,18 @@ namespace Musee::ArtMaking::VesselTests
 	/** Art's making tests run in the editor, where its making twin lives, and belong to the product's own filter. */
 	inline constexpr EAutomationTestFlags Flags = EAutomationTestFlags::EditorContext | EAutomationTestFlags::ProductFilter;
 
-	/** How near a turned vessel's height and diameter come to its museum's: half a millimetre. */
-	constexpr double SizeToleranceMeters = 0.0005;
+	/** A derived cylinder 0.1 m in radius and 0.2 m tall, its museum's 0.2 m across (a section measured from the vessel). */
+	FArtVessel DerivedCylinder(double RadiusMeters, double HeightMeters)
+	{
+		FArtVessel Vessel;
+		Vessel.Work = TEXT("derived-cylinder");
+		Vessel.Grade = TEXT("derived");
+		Vessel.Museum.HeightMeters = 0.2;
+		Vessel.Museum.DiameterMeters = 0.2;
+		Vessel.Section = { FVector2D(0.0, 0.0), FVector2D(RadiusMeters, 0.0), FVector2D(RadiusMeters, HeightMeters), FVector2D(0.0, HeightMeters) };
+		Vessel.Outside = { 1, 2 };
+		return Vessel;
+	}
 
 	/** The test's photograph: square, its camera looking at the cylinder's axis from far off, level with its middle. */
 	constexpr int32 PhotoPixels = 1000;
@@ -179,22 +190,35 @@ bool FArtPaintedVesselTest::RunTest(const FString& Parameters)
 		{
 			continue;
 		}
-		const TArray<FVector2D> Sized = SizedSection(Vessel, Entry->SizeMeters());
+		// Measured on the section itself, as the record keeps it: the plan's size can't stand in for it.
 		FBox2D Box(ForceInit);
-		for (const FVector2D& Point : Sized)
+		for (const FVector2D& Point : Vessel.Section)
 		{
 			Box += Point;
 		}
 		// Its foot, or its feet, stand on the plane at 0.
-		TestTrue(FString::Printf(TEXT("%s stands its museum's %.1f cm"), *Vessel.Work, 100.0 * Vessel.Museum.HeightMeters),
-			FMath::IsNearlyEqual(Box.Max.Y, Vessel.Museum.HeightMeters, SizeToleranceMeters) && Box.Min.Y >= 0.0
+		TestTrue(FString::Printf(TEXT("%s's section stands its museum's %.1f cm (%.2f)"), *Vessel.Work, 100.0 * Vessel.Museum.HeightMeters, 100.0 * Box.Max.Y),
+			FMath::IsNearlyEqual(Box.Max.Y, Vessel.Museum.HeightMeters, SectionHeightToleranceMeters) && Box.Min.Y >= 0.0
 			&& (FMath::IsNearlyZero(Box.Min.Y) || !Vessel.Feet.Each.IsEmpty()));
 		const double Across = Vessel.Museum.IsOval() ? Vessel.Museum.MouthAxesMeters[0] : Vessel.Museum.DiameterMeters;
 		if (Across > 0.0)
 		{
-			TestTrue(FString::Printf(TEXT("%s is its museum's %.1f cm across"), *Vessel.Work, 100.0 * Across),
-				FMath::IsNearlyEqual(2.0 * Box.Max.X, Across, SizeToleranceMeters));
+			const double Off = FMath::Abs(2.0 * Box.Max.X - Across) / Across;
+			TestTrue(FString::Printf(TEXT("%s's section is its museum's %.1f cm across within %.0f%% (%.2f), or its record says why"), *Vessel.Work,
+				100.0 * Across, 100.0 * Record.GetValue().DiameterTolerance, 200.0 * Box.Max.X),
+				Off <= Record.GetValue().DiameterTolerance || !Vessel.Departure.IsEmpty());
 		}
+		const FString Size = SizeFault(Vessel, Entry->SizeMeters(), Record.GetValue().DiameterTolerance);
+		TestTrue(FString::Printf(TEXT("%s is its museum's size and its plan the section's (%s)"), *Vessel.Work, *Size), Size.IsEmpty());
+		// Turned at its plan's size, it keeps its section's proportion: one scale across and up.
+		const TArray<FVector2D> Sized = SizedSection(Vessel, Entry->SizeMeters());
+		FBox2D SizedBox(ForceInit);
+		for (const FVector2D& Point : Sized)
+		{
+			SizedBox += Point;
+		}
+		TestTrue(FString::Printf(TEXT("%s turned at its plan's size keeps its section's proportion"), *Vessel.Work),
+			FMath::IsNearlyEqual(SizedBox.Max.X / Box.Max.X, SizedBox.Max.Y / Box.Max.Y, 1e-9));
 		const FString Solid = SectionFault(Vessel.Section, Vessel.Outside, Vessel.WallMeters);
 		TestTrue(FString::Printf(TEXT("%s's section is a solid with a wall (%s)"), *Vessel.Work, *Solid), Solid.IsEmpty() && Vessel.WallMeters > 0.0);
 		for (const FArtVesselFoot& Foot : Vessel.Feet.Each)
@@ -205,15 +229,35 @@ bool FArtPaintedVesselTest::RunTest(const FString& Parameters)
 		{
 			TestTrue(FString::Printf(TEXT("%s's %s repeats a whole number of times round"), *Vessel.Work, *Band.Name), Band.PeriodDegrees > 0.0
 				&& FMath::IsNearlyEqual(360.0 / Band.PeriodDegrees, FMath::RoundToDouble(360.0 / Band.PeriodDegrees), 1e-6));
+			TestFalse(FString::Printf(TEXT("%s's %s says how its repeat is known"), *Vessel.Work, *Band.Name), Band.Reading.IsEmpty());
 		}
 		for (int32 Index = 0; Index < Vessel.Views.Num(); ++Index)
 		{
 			const FArtVesselView& View = Vessel.Views[Index];
 			TestTrue(FString::Printf(TEXT("%s's view %s is the one its section was fitted to, or placed after it"), *Vessel.Work, *View.Image),
 				Index == 0 ? View.Placement == TEXT("fitted") && View.AzimuthDegrees == 0.0 : FArtVesselView::IsPlacement(View.Placement) && View.Placement != TEXT("fitted"));
+			TestTrue(FString::Printf(TEXT("%s's view %s stands where its photographs place it, not unverified"), *Vessel.Work, *View.Image),
+				View.Placement != TEXT("unverified"));
 		}
 	}
 	TestEqual(TEXT("Seven vessels are derived from their photographs"), Derived, 7);
+
+	// A derived section is checked on itself: one too narrow for its museum's diameter is a fault unless its record says
+	// why, one of the wrong height is a fault whatever its plan, and turned at a plan wider than itself it isn't stretched.
+	{
+		const double Tolerance = 0.02;
+		TestTrue(TEXT("A derived section of its museum's size is sound"), SizeFault(DerivedCylinder(0.1, 0.2), FVector2D(0.2, 0.2), Tolerance).IsEmpty());
+		const FArtVessel Narrow = DerivedCylinder(0.093, 0.2);
+		TestFalse(TEXT("A derived section 7% narrower than its museum's diameter is a fault"), SizeFault(Narrow, FVector2D(0.186, 0.2), Tolerance).IsEmpty());
+		TestFalse(TEXT("Nor does a plan at the museum's diameter hide it"), SizeFault(Narrow, FVector2D(0.2, 0.2), Tolerance).IsEmpty());
+		FArtVessel Said = Narrow;
+		Said.Departure = TEXT("its photographs show it so");
+		TestTrue(TEXT("A departure the record explains is not a fault"), SizeFault(Said, FVector2D(0.186, 0.2), Tolerance).IsEmpty());
+		TestFalse(TEXT("A derived section of the wrong height is a fault"), SizeFault(DerivedCylinder(0.1, 0.19), FVector2D(0.2, 0.2), Tolerance).IsEmpty());
+		const TArray<FVector2D> Turned = SizedSection(Narrow, FVector2D(0.2, 0.2));
+		TestTrue(TEXT("A derived section turned at a wider plan keeps its proportion"),
+			FMath::IsNearlyEqual(Turned[1].X, 0.093, 1e-12) && FMath::IsNearlyEqual(Turned[2].Y, 0.2, 1e-12));
+	}
 
 	// A turned section that crosses itself, or whose inside comes nearer its outside than half its wall, is no solid.
 	{

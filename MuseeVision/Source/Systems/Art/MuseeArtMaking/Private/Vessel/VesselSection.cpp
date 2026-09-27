@@ -4,14 +4,60 @@
 
 namespace Musee::ArtMaking
 {
+	namespace
+	{
+		/** The section's widest radius and its top, [radius, height]. */
+		FVector2D Extent(const FArtVessel& Vessel)
+		{
+			FVector2D Most = FVector2D::ZeroVector;
+			for (const FVector2D& Point : Vessel.Section)
+			{
+				Most = FVector2D(FMath::Max(Most.X, Point.X), FMath::Max(Most.Y, Point.Y));
+			}
+			return Most;
+		}
+	}
+
+	FVector2D SectionScale(const FArtVessel& Vessel, const FVector2D& SizeMeters)
+	{
+		const FVector2D Most = Extent(Vessel);
+		const double Up = SizeMeters.Y / Most.Y;
+		return Vessel.Grade == TEXT("derived") ? FVector2D(Up, Up) : FVector2D(0.5 * SizeMeters.X / Most.X, Up);
+	}
+
+	FString SizeFault(const FArtVessel& Vessel, const FVector2D& PlanMeters, double DiameterTolerance)
+	{
+		if (Vessel.Grade != TEXT("derived"))
+		{
+			return FString();
+		}
+		const FVector2D Most = Extent(Vessel);
+		const double Height = Vessel.Museum.HeightMeters;
+		if (!FMath::IsNearlyEqual(Most.Y, Height, SectionHeightToleranceMeters))
+		{
+			return FString::Printf(TEXT("its section stands %.1f mm high, not its museum's %.1f"), 1000.0 * Most.Y, 1000.0 * Height);
+		}
+		if (!FMath::IsNearlyEqual(PlanMeters.Y, Height, SectionHeightToleranceMeters))
+		{
+			return FString::Printf(TEXT("its plan's height %.1f mm is not its museum's %.1f"), 1000.0 * PlanMeters.Y, 1000.0 * Height);
+		}
+		if (!FMath::IsNearlyEqual(PlanMeters.X, 2.0 * Most.X, PlanWidthToleranceMeters))
+		{
+			return FString::Printf(TEXT("its plan's width %.1f mm is not its section's %.1f (a derived section keeps its photographs' proportion)"),
+				1000.0 * PlanMeters.X, 2000.0 * Most.X);
+		}
+		const double Published = Vessel.Museum.IsOval() ? Vessel.Museum.MouthAxesMeters[0] : Vessel.Museum.DiameterMeters;
+		if (Published > 0.0 && FMath::Abs(2.0 * Most.X - Published) > DiameterTolerance * Published && Vessel.Departure.IsEmpty())
+		{
+			return FString::Printf(TEXT("its section is %.1f mm across, %.1f%% off its museum's %.1f, and its record gives no departure saying why"),
+				2000.0 * Most.X, 100.0 * FMath::Abs(2.0 * Most.X - Published) / Published, 1000.0 * Published);
+		}
+		return FString();
+	}
+
 	TArray<FVector2D> SizedSection(const FArtVessel& Vessel, const FVector2D& SizeMeters)
 	{
-		FBox2D Bounds(ForceInit);
-		for (const FVector2D& Point : Vessel.Section)
-		{
-			Bounds += Point;
-		}
-		const FVector2D Scale(0.5 * SizeMeters.X / Bounds.Max.X, SizeMeters.Y / Bounds.Max.Y);
+		const FVector2D Scale = SectionScale(Vessel, SizeMeters);
 		TArray<FVector2D> Out;
 		Out.Reserve(Vessel.Section.Num());
 		for (const FVector2D& Point : Vessel.Section)
