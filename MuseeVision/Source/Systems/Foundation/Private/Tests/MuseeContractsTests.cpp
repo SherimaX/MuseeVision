@@ -72,7 +72,7 @@ bool FMuseeFoundationCollisionTest::RunTest(const FString& Parameters)
 {
 	namespace Collision = Musee::Collision;
 	const UCollisionProfile* Profiles = UCollisionProfile::Get();
-	for (const Collision::FClass& Class : {Collision::Solid, Collision::Walkable, Collision::Body, Collision::Clearance})
+	for (const Collision::FClass& Class : {Collision::Solid, Collision::Walkable, Collision::Body, Collision::Clearance, Collision::Barrier})
 	{
 		TestTrue(FString::Printf(TEXT("The config names channel %d %s"), static_cast<int32>(Class.Channel), Class.ProfileName),
 			Profiles->ReturnChannelNameFromContainerIndex(Class.Channel) == Class.Profile());
@@ -92,6 +92,15 @@ bool FMuseeFoundationCollisionTest::RunTest(const FString& Parameters)
 	TestTrue(TEXT("The body blocks clearance queries"), Body.ResponseToChannels.GetResponse(Collision::Clearance.Channel) == ECR_Block);
 	TestTrue(TEXT("The body stops no sight"), Body.ResponseToChannels.GetResponse(ECC_Visibility) == ECR_Ignore);
 	TestTrue(TEXT("A clearance volume only senses"), Clearance.CollisionEnabled == ECollisionEnabled::QueryOnly);
+
+	FCollisionResponseTemplate Barrier;
+	Profiles->GetProfileTemplate(Collision::Barrier.Profile(), Barrier);
+	TestTrue(TEXT("A barrier and the body block each other"), Barrier.ResponseToChannels.GetResponse(Collision::Body.Channel) == ECR_Block
+		&& Body.ResponseToChannels.GetResponse(Collision::Barrier.Channel) == ECR_Block);
+	TestTrue(TEXT("The look and the camera pass a barrier"), Barrier.ResponseToChannels.GetResponse(ECC_Visibility) == ECR_Ignore
+		&& Barrier.ResponseToChannels.GetResponse(ECC_Camera) == ECR_Ignore);
+	TestTrue(TEXT("A mechanism's clearance and the pieces pass a barrier"), Barrier.ResponseToChannels.GetResponse(Collision::Clearance.Channel) == ECR_Ignore
+		&& Solid.ResponseToChannels.GetResponse(Collision::Barrier.Channel) == ECR_Ignore);
 	TestTrue(TEXT("It senses the body"), Clearance.ResponseToChannels.GetResponse(Collision::Body.Channel) == ECR_Overlap);
 	TestTrue(TEXT("And nothing else"), Clearance.ResponseToChannels.GetResponse(Collision::Solid.Channel) == ECR_Ignore
 		&& Clearance.ResponseToChannels.GetResponse(ECC_WorldStatic) == ECR_Ignore);
