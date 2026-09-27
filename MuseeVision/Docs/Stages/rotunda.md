@@ -595,11 +595,9 @@ foot; the drum's steel carcass; the lift's voice and rain on the eye; falls for 
 the eight floodlights. No other gap.
 
 **Conflicts and questions for the Architect:**
-(a) **West port classes differ** (as built): `rotunda.west` is the drum's 3.00 × crown 6.00 arch; `salon.east` is
-`doorway.3000x4800.arched` (springing 3.30). As built the drum's arch ran on through the 2.20 m passage and met the
-Salon's lower arch in its end wall. This sheet keeps the drum as built (D-017) and asks Site's joint to carry the
-2.20 m passage as a stepped passage (drum section, ending on the Salon's end-wall face). The Salon draft instead asks
-the drum to step down inside its 1.20 m wall. Decide.
+(a) **West port** (ruled): mated ports share one class. `salon.east` is `doorway.3000x6000.arched`, the same as
+`rotunda.west`, and the Salon steps down to its own 4.80 arch inside its east wall (salon.md §2). The joint's 2.20 m
+passage is a plain drum-section arch.
 (b) **Class naming**: width × crown (Nymphéas) vs width × springing (the Rotunda, Albion, Chenghuai and Hall-of-Light
 drafts). This sheet uses width × crown; `hall-of-light.west`, `chenghuai.south`, `albion.north` and
 `classical-hall.stair` must use the same names.
