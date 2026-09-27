@@ -26,6 +26,21 @@ Canvases that each name their own `image` (the Rouen series) each show it, in th
 A `glass` entry at a `Glazing` anchor (Albion's band, D-014) is a pane of the glass its `wall` surface names (Lamberts'
 antique glass, 3 mm), in Form's opening, its image in its own layer over that glass's finish.
 
+**Paper, plates, transparencies and ware.** Each support's layer is a palette finish (`Data/Art/Supports.json`): a print
+is `paint.<id>` over `accent.print-on-paper`, a daguerreotype over `accent.daguerreotype` (Matter's plate master: the
+image is the cover of scattering particles over a silver mirror), De Morgan's ware over `accent.lustreware` (its
+undecorated faces in the same entry's tin glaze), an autochrome over its plate's glass (the stained-glass master).
+- A print on a Wall anchor lies on its mount (`mat`, `matSize`, `matDepth`: the mount's face on the anchor's plane), under
+  its `glazing` (a pane of the surface's glass, its thickness from Matter's working), in its frame (`frameStyle`
+  `photograph`: `Data/Art/Mouldings/photograph.json`; any other style takes the museum's moulding until its own is drawn).
+- A card or a daguerreotype's plate lies centred on its reader (a Mount anchor at the plate's face), under its glazing.
+- A transparency (glass on a Wall anchor in its window mat: an autochrome) stands behind its mat's window, the diffusing
+  pane it names as `backing` behind it, glazed and framed; it is not stained glass, which is leaded in a Glazing light.
+- Ware stands at its `centre` on its Mount anchor, its front towards `facing_deg`: a dish turned to the section of
+  `Data/Art/Ware.json`, a vessel to its outline in `Data/Art/Turned.json` (traced from its photograph), the photograph
+  laid over it from above (a dish) or through it from the front (a vessel).
+Every object is named `<word>.<id>[.<index>]` (`canvas`, `glass`, `paper`, `plate`, `ware`), its parts `<name>.<part>`.
+
 A work the stage builds (`"built": "form"`) gets only its caption and care: the stage names its pieces
 `work.<id>[.<index>][.<part>]`, and the dresser hangs them from the work's label. A reproduction (`"reproduction":
 "exhibition-facsimile"`, Care.json's `reproductions`) keeps its original's care class and credits the original; care
@@ -43,5 +58,8 @@ holds, made by Art or built by its stage.
   mat, silk scrolls; the hairline joints between a work's canvases; the stretcher's wood and keys; frames on curved walls.
 - `Musee::Art::Targets` (FLightTarget from Care.json) and the checks `Art.TrueSize` (with `after`), `Art.WithinCare`
   (over `CareFaults`), `Art.ColorManaged`, `Art.Credited`, `Art.HangResolves`.
-- Papers, panels, scrolls, casts, case objects and books: the supports the plans name that Art doesn't make yet.
+- Panels, scrolls, casts, tapestry, silk, stone, ceramic in the round other than De Morgan's ware, books, and paper framed
+  without a mount: the supports and kinds the plans name that Art doesn't make yet. A vessel's handles (Turned.json
+  keeps none yet); a lustre's metallic sheen (the lustre layer is the glaze's gloss over the image); a daguerreotype's
+  case.
 - Wall labels as objects, fittings (benches, stanchions), vitrines; `UArtImmersiveWork`.

@@ -1,0 +1,15 @@
+{
+  "$sources": [
+    "Each support's layer is a palette finish of Data/Matter/Palette.json: the entry and the finish the work's own image is laid in (the paint master for a canvas, a print and lustreware; the plate master for a daguerreotype), and for ware the finish of its undecorated faces.",
+    "The thickness of a sheet a work is made on: a photographic print or a stereograph's card, as mounted, about 0.3 mm (thin card; no measured caliper of the museum's facsimiles was read); a daguerreotype's plate, a silvered copper sheet, about 0.5 mm (no measured plate was read). Both are first values: neither is seen edge on at gallery distances, and each keeps its face clear of what it lies on."
+  ],
+  "$units": {
+    "ThicknessMeters": "m"
+  },
+  "supports": [
+    { "support": "canvas", "palette": "accent.oil-on-linen", "working": "varnished", "history": "clean" },
+    { "support": "paper", "palette": "accent.print-on-paper", "working": "printed", "history": "clean", "thicknessMeters": 0.0003 },
+    { "support": "silvered copper plate", "palette": "accent.daguerreotype", "working": "developed", "history": "clean", "thicknessMeters": 0.0005 },
+    { "support": "earthenware", "palette": "accent.lustreware", "working": "lustre-painted", "history": "clean", "groundWorking": "tin-glazed", "groundHistory": "clean" }
+  ]
+}

@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "MuseeFinding.h"
 #include "MuseeStageDresser.h"
+#include "Ware/WareMesh.h"
 
 namespace Musee::ArtMaking
 {
@@ -16,6 +17,23 @@ namespace Musee::ArtMaking
 	 * the panel's lower-left seen from inside, x along the light, y out of the glass towards the viewer, z up.
 	 */
 	inline const FName GlazingAnchorKind(TEXT("Glazing"));
+
+	/**
+	 * The kind of stage anchor an object is set on (the stage contract): a reader a card or a plate lies on, its origin at
+	 * the centre of the face it lies on, x to the viewer's right, y out of the face, z up it; a case's bed, its origin on
+	 * the bed, z up, where ware stands at its `centre`.
+	 */
+	inline const FName MountAnchorKind(TEXT("Mount"));
+
+	/** The supports Art makes, as the hanging plans write them. */
+	namespace Supports
+	{
+		inline const FName Canvas(TEXT("canvas"));
+		inline const FName Glass(TEXT("glass"));
+		inline const FName Paper(TEXT("paper"));
+		inline const FName Plate(TEXT("silvered copper plate"));
+		inline const FName Earthenware(TEXT("earthenware"));
+	}
 
 	/** A finding of Art's about a stage's hanging plan. */
 	[[nodiscard]] FMuseeFinding ArtFinding(const FMuseeStageContext& Stage, const FString& Summary);
@@ -53,7 +71,9 @@ namespace Musee::ArtMaking
 
 	/**
 	 * One object of a work the stage makes: its entry in the plan; where its left edge falls in the work's one image, or
-	 * its own image; the palette key of the layer it shows, and how that layer is finished.
+	 * its own image; the palette key of the layer it shows, and how that layer is finished; how its faces without the
+	 * image are finished (a dish's underside), the glass it lies under (its thickness, from the glazing's working), and,
+	 * for turned ware, its form.
 	 */
 	struct FCanvasPlan
 	{
@@ -62,6 +82,12 @@ namespace Musee::ArtMaking
 		FString OwnImagePath;
 		FName Layer;
 		FLayerFinish Finish;
+		FLayerFinish Ground;
+		double GlazingMeters = 0.0;
+		/** A transparency's plate and the diffusing pane behind it: their thickness, from their glass's working (m). */
+		double PlateMeters = 0.0;
+		double BackingMeters = 0.0;
+		FWareSpec Ware;
 	};
 
 	/**
@@ -80,10 +106,11 @@ namespace Musee::ArtMaking
 
 	/**
 	 * Every work of a hanging plan that Art can make, checked whole: each object's entry (it resolves; its anchor, size,
-	 * support, frame and glass surfaces in the stage's finish schedule), the work's objects (each index once; sharing
-	 * one image at one height, or each showing its own) and its images; and the oil paint's finish. Works the stage
-	 * builds are left to it. What can't be made is a finding and is left out; the works point into Hang, which must
-	 * outlive them. False, with a finding, when the paint has no finish.
+	 * support, and the surfaces it names, its frame's, its mount's, its glass's and its glazing's, in the stage's finish
+	 * schedule), the work's objects (each index once; sharing one image at one height, or each showing its own) and its
+	 * images; and each support's finishes in the palette (Data/Art/Supports.json). Works the stage builds are left to
+	 * it. What can't be made is a finding and is left out; the works point into Hang, which must outlive them. False,
+	 * with a finding, when the supports' record or their finishes can't be read.
 	 */
 	[[nodiscard]] bool PlanWorks(const FMuseeStageContext& Stage, const FArtHang& Hang, TArray<FWorkPlan>& OutWorks, TArray<FMuseeFinding>& OutFindings);
 }

@@ -9,6 +9,8 @@
 #include "Glass/GlassPane.h"
 #include "MuseeCollision.h"
 #include "MuseeRecords.h"
+#include "Objects/ObjectMaking.h"
+#include "Plan/EntryContext.h"
 
 namespace Musee::ArtMaking
 {
@@ -17,7 +19,6 @@ namespace Musee::ArtMaking
 		const FName CanvasSurface(TEXT("canvas"));
 		const FName LinenSurface(TEXT("canvas.linen"));
 		const FName NoFrame(TEXT("none"));
-		const FName GlassSupport(TEXT("glass"));
 
 		/**
 		 * The linen a canvas is woven of, bare where it turns round the stretcher: the palette's linen, stretched on the
@@ -27,25 +28,8 @@ namespace Musee::ArtMaking
 		const FName LinenWorking(TEXT("stretched"));
 		const FName LinenHistory(TEXT("new"));
 
-		/** What every canvas of a stage is made with: the frame's moulding, once a canvas needs it. */
-		struct FMaking
-		{
-			const FMuseeStageContext& Stage;
-			const FArtHang& Hang;
-			TOptional<TValueOrError<FArtMoulding, FString>> Moulding;
-
-			const TValueOrError<FArtMoulding, FString>& ReadMoulding()
-			{
-				if (!Moulding.IsSet())
-				{
-					Moulding.Emplace(ReadRecord<FArtMoulding>(FArtMoulding::Record));
-				}
-				return Moulding.GetValue();
-			}
-		};
-
 		/** The wall a work hangs on: its anchor's straight face, or the curved path the plan gives it. */
-		FWallPath WallOf(const FMaking& Making, const FMuseeKey& Anchor, bool& bOutCurved)
+		FWallPath WallOf(const FObjectMaking& Making, const FMuseeKey& Anchor, bool& bOutCurved)
 		{
 			const FMuseeFrame& Frame = Making.Stage.FindAnchor(Anchor, WallAnchorKind)->Frame;
 			const FArtWall* Curved = Making.Hang.Walls.FindByPredicate([&Anchor](const FArtWall& W) { return W.Anchor == Anchor; });
@@ -70,10 +54,10 @@ namespace Musee::ArtMaking
 		}
 
 		/** The moulded frame round a canvas, in the finish of the plan's frame surface; false with a finding when it can't be. */
-		bool MakeFrame(FMaking& Making, const FArtHangEntry& Entry, bool bSplit, bool bCurved, const FMuseeFrame& Work,
+		bool MakeFrame(FObjectMaking& Making, const FArtHangEntry& Entry, bool bSplit, bool bCurved, const FMuseeFrame& Work,
 			TArray<FFormMadePiece>& OutPieces, TArray<FMuseeFinding>& OutFindings)
 		{
-			const TValueOrError<FArtMoulding, FString>& Moulding = Making.ReadMoulding();
+			const TValueOrError<FArtMoulding, FString>& Moulding = Making.Moulding(Entry.FrameStyle);
 			if (bCurved || Moulding.HasError())
 			{
 				OutFindings.Add(ArtFinding(Making.Stage, FString::Printf(TEXT("Work %s: its frame can't be made: %s."), *Entry.Work,
@@ -81,7 +65,9 @@ namespace Musee::ArtMaking
 				return false;
 			}
 			const FVector2D Size(Entry.Size[0], Entry.Size[1]);
-			FFormDrawing Drawing = FrameDrawing(Moulding.GetValue(), Size, TopLeftOf(Work, Entry.Height + Size.Y), FramePieceName(Entry, bSplit), Entry.Frame);
+			// The lip rests on the painted face; the back stands on the hanging gap, as the stretcher's does.
+			const FFrameDepth Depth{ StretcherDepthMeters, HangingGapMeters };
+			FFormDrawing Drawing = FrameDrawing(Moulding.GetValue(), Size, TopLeftOf(Work, Entry.Height + Size.Y), Depth, FramePieceName(Entry, bSplit), Entry.Frame);
 			Drawing.Collision = Collision::Solid.Profile();
 			Drawing.Drawer = TEXT("Art");
 			const int32 Before = OutPieces.Num();
@@ -90,7 +76,7 @@ namespace Musee::ArtMaking
 		}
 
 		/** One canvas of a work: its painted face, its linen and its frame, on its wall. */
-		void MakeCanvas(FMaking& Making, const FWorkPlan& Plan, const FCanvasPlan& Canvas, TArray<FFormMadePiece>& OutPieces, TArray<FMuseeFinding>& OutFindings)
+		void MakeCanvas(FObjectMaking& Making, const FWorkPlan& Plan, const FCanvasPlan& Canvas, TArray<FFormMadePiece>& OutPieces, TArray<FMuseeFinding>& OutFindings)
 		{
 			const FArtHangEntry& Entry = *Canvas.Entry;
 			bool bCurved = false;
@@ -137,7 +123,7 @@ namespace Musee::ArtMaking
 		 * One stained-glass panel of a work, set in its Glazing light: the image's glass, the image's size, standing on
 		 * the light's glass line with its lower-left corner at the plan's along and height.
 		 */
-		void MakeGlass(const FMaking& Making, const FWorkPlan& Plan, const FCanvasPlan& Canvas, TArray<FFormMadePiece>& OutPieces)
+		void MakeGlass(const FObjectMaking& Making, const FWorkPlan& Plan, const FCanvasPlan& Canvas, TArray<FFormMadePiece>& OutPieces)
 		{
 			const FArtHangEntry& Entry = *Canvas.Entry;
 			const FMuseeFrame& Light = Making.Stage.FindAnchor(Entry.Anchor, GlazingAnchorKind)->Frame;
@@ -157,9 +143,64 @@ namespace Musee::ArtMaking
 		}
 	}
 
+	const TCHAR* ObjectWord(FName Support)
+	{
+		if (Support == Supports::Canvas) { return TEXT("canvas"); }
+		if (Support == Supports::Glass) { return TEXT("glass"); }
+		if (Support == Supports::Paper) { return TEXT("paper"); }
+		if (Support == Supports::Plate) { return TEXT("plate"); }
+		if (Support == Supports::Earthenware) { return TEXT("ware"); }
+		return TEXT("work");
+	}
+
+	FString ObjectName(const FArtHangEntry& Entry, bool bSplit)
+	{
+		const TCHAR* Word = Entry.IsBuilt() ? TEXT("work") : ObjectWord(Entry.Support);
+		return bSplit ? FString::Printf(TEXT("%s.%s.%d"), Word, *Entry.Work, Entry.Canvas) : FString::Printf(TEXT("%s.%s"), Word, *Entry.Work);
+	}
+
+	FName PartName(const FArtHangEntry& Entry, bool bSplit, const TCHAR* Part)
+	{
+		return FName(ObjectName(Entry, bSplit) + TEXT(".") + Part);
+	}
+
+	namespace
+	{
+		/** One object of a work, made as its support is made. */
+		void MakeObject(FObjectMaking& Making, const FWorkPlan& Plan, const FCanvasPlan& Canvas, TArray<FFormMadePiece>& OutPieces,
+			TArray<FMuseeFinding>& OutFindings)
+		{
+			const FArtHangEntry& Entry = *Canvas.Entry;
+			if (Entry.Support == Supports::Glass && IsTransparency(Making.Stage, Entry))
+			{
+				MakeTransparency(Making, Plan, Canvas, OutPieces, OutFindings);
+			}
+			else if (Entry.Support == Supports::Glass)
+			{
+				MakeGlass(Making, Plan, Canvas, OutPieces);
+			}
+			else if (Entry.Support == Supports::Earthenware)
+			{
+				MakeWare(Making, Plan, Canvas, OutPieces, OutFindings);
+			}
+			else if (Entry.Support == Supports::Canvas)
+			{
+				MakeCanvas(Making, Plan, Canvas, OutPieces, OutFindings);
+			}
+			else if (Making.Stage.FindAnchor(Entry.Anchor, WallAnchorKind))
+			{
+				MakePrint(Making, Plan, Canvas, OutPieces, OutFindings);
+			}
+			else
+			{
+				MakeCard(Making, Plan, Canvas, OutPieces);
+			}
+		}
+	}
+
 	FString CanvasName(const FArtHangEntry& Entry, bool bSplit)
 	{
-		return bSplit ? FString::Printf(TEXT("canvas.%s.%d"), *Entry.Work, Entry.Canvas) : FString::Printf(TEXT("canvas.%s"), *Entry.Work);
+		return ObjectName(Entry, bSplit);
 	}
 
 	FName FacePieceName(const FArtHangEntry& Entry, bool bSplit)
@@ -179,12 +220,12 @@ namespace Musee::ArtMaking
 
 	FName GlassPieceName(const FArtHangEntry& Entry, bool bSplit)
 	{
-		return FName(bSplit ? FString::Printf(TEXT("glass.%s.%d"), *Entry.Work, Entry.Canvas) : FString::Printf(TEXT("glass.%s"), *Entry.Work));
+		return FName(ObjectName(Entry, bSplit));
 	}
 
 	FName BuiltPieceName(const FArtHangEntry& Entry, bool bSplit)
 	{
-		return FName(bSplit ? FString::Printf(TEXT("work.%s.%d"), *Entry.Work, Entry.Canvas) : FString::Printf(TEXT("work.%s"), *Entry.Work));
+		return FName(ObjectName(Entry, bSplit));
 	}
 
 	void GatherArt(const FMuseeStageContext& Stage, TArray<FFormMadePiece>& OutPieces, TArray<FMuseeFinding>& OutFindings)
@@ -194,7 +235,7 @@ namespace Musee::ArtMaking
 		{
 			return;
 		}
-		FMaking Making{ Stage, Hang };
+		FObjectMaking Making{ Stage, Hang };
 		TArray<FWorkPlan> Works;
 		if (!PlanWorks(Stage, Hang, Works, OutFindings))
 		{
@@ -204,14 +245,7 @@ namespace Musee::ArtMaking
 		{
 			for (const FCanvasPlan& Canvas : Plan.Canvases)
 			{
-				if (Canvas.Entry->Support == GlassSupport)
-				{
-					MakeGlass(Making, Plan, Canvas, OutPieces);
-				}
-				else
-				{
-					MakeCanvas(Making, Plan, Canvas, OutPieces, OutFindings);
-				}
+				MakeObject(Making, Plan, Canvas, OutPieces, OutFindings);
 			}
 		}
 	}

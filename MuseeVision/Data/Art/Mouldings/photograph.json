@@ -1,0 +1,29 @@
+{
+  "$sources": [
+    "The photograph frame: the as-built flat oak moulding with softened edges (windows/Source/MuseeVision/Frames/MuseeFrame.cpp, the Photograph style: its face 0.8 of its width above the glass, its sight lip 4 mm, its arrises rounded 3 mm inside and 4 mm outside) and the Hall of Light's sheet (Docs/Stages/hall-of-light.md sec. 3.5: 22 mm fumed oak frames round each mount), re-set as the museum's moulding is (Data/Art/Moulding.json): A outward from the edge of what it frames, B up from the face it rests on (the glazing's, where the work is glazed), in units of the moulding's width, drawn from the outside edge inward.",
+    "The width is the sheet's 22 mm whatever the mount's size, as a framer runs one moulding round every print of a series.",
+    "The rebate stands 2 mm clear of the mount's edge all round, as the museum's moulding stands clear of a canvas's."
+  ],
+  "$units": {
+    "WidthBaseMeters": "m",
+    "LeastWidthMeters": "m",
+    "MostWidthMeters": "m",
+    "RebateClearanceMeters": "m"
+  },
+  "face": {
+    "source": "MuseeFrame.cpp, Photograph: up the outside, round the outer arris, across the flat top, round the inner arris and down the sight edge to the glass.",
+    "start": [1.0, 0.0],
+    "steps": [
+      { "line": [1.0, 0.618], "joint": "Crisp" },
+      { "arc": { "centerMeters": [0.818, 0.618], "radiiMeters": [0.182], "fromDegrees": 0, "toDegrees": 90 } },
+      { "line": [-0.046, 0.8], "joint": "Crisp" },
+      { "arc": { "centerMeters": [-0.046, 0.664], "radiiMeters": [0.136], "fromDegrees": 90, "toDegrees": 180 } },
+      { "line": [-0.182, 0.0], "joint": "Crisp" }
+    ]
+  },
+  "widthBaseMeters": 0.022,
+  "widthPerLongerSide": 0.0,
+  "leastWidthMeters": 0.022,
+  "mostWidthMeters": 0.022,
+  "rebateClearanceMeters": 0.002
+}

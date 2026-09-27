@@ -1,0 +1,21 @@
+{
+  "$sources": [
+    "A dish's section, as the as-built dishes were turned (windows/Source/MuseeVision/Albion/AlbionWork.cpp, EAlbionWorkKind::Dish): (radius, height) as fractions of the rim's radius and the dish's height. Its face runs from the rim in to the centre (a broad rim, the well, the floor), its underside from the centre out to the rim (the base, the foot ring, the curve up to the rim); the two meet at the rim.",
+    "A vessel's mouth, as the as-built vessels were turned (AlbionWork.cpp, EAlbionWorkKind::Vase): an open mouth turns in over its lip, the wall 6 mm thick or three tenths of the lip's radius if less, and runs down its neck an eighth of the vessel's height, or 50 mm if less, to a floor. A mouth narrower than 20 mm across its radius is drawn closed.",
+    "Turned ware is divided round its axis so no chord strays more than 1 mm from the true circle: Form's own chord tolerance (MuseeFormMaking, Stations.h)."
+  ],
+  "$units": {
+    "WallMeters": "m",
+    "NeckDepthMeters": "m",
+    "OpenLipMeters": "m",
+    "ChordToleranceMeters": "m"
+  },
+  "dishFace": [ [1.0, 0.96], [0.97, 1.0], [0.80, 0.85], [0.72, 0.55], [0.55, 0.24], [0.0, 0.18] ],
+  "dishUnderside": [ [0.0, 0.12], [0.40, 0.10], [0.42, 0.0], [0.50, 0.0], [0.52, 0.10], [0.78, 0.62], [0.98, 0.88], [1.0, 0.96] ],
+  "wallMeters": 0.006,
+  "wallOfLip": 0.3,
+  "neckDepthMeters": 0.05,
+  "neckDepthOfHeight": 0.12,
+  "openLipMeters": 0.02,
+  "chordToleranceMeters": 0.001
+}

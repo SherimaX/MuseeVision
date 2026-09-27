@@ -26,8 +26,9 @@ struct FArtPaintLayer
 	FName Palette;
 
 	/**
-	 * The palette entry it derives from, with the working and history it is named with: PaintPalette's one finish for
-	 * a canvas, the finish of the glass a stained-glass panel is fired in.
+	 * The palette entry it derives from, with the working and history it is named with: its support's finish
+	 * (Data/Art/Supports.json: the oil paint on a canvas, a print's paper, a daguerreotype's silver, ware's lustre), or
+	 * the finish of the glass a stained-glass panel is fired in or a transparency's plate is made of.
 	 */
 	FName Parent;
 	FName Working;

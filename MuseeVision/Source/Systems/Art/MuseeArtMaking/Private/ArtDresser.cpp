@@ -9,8 +9,6 @@ namespace Musee::ArtMaking
 {
 	namespace
 	{
-		const FName GlassSupport(TEXT("glass"));
-
 		/** The tag Studio gives a piece's mesh component: `musee.piece:<name>` (Docs/Stages contract). */
 		FString PieceTag(FName Piece)
 		{
@@ -34,23 +32,13 @@ namespace Musee::ArtMaking
 			});
 		}
 
-		/** An object's pieces: a canvas's face, linen and frame; a panel's glass; what the stage built for the work. */
+		/**
+		 * An object's pieces: the object's own piece and its parts (a canvas's face, linen and frame; a panel's glass; a
+		 * print, its mount, glazing and frame; ware and its ground), or what the stage built for the work.
+		 */
 		TArray<UStaticMeshComponent*> PiecesOf(const AActor& Actor, const FArtHangEntry& Entry, bool bSplit)
 		{
-			if (Entry.IsBuilt())
-			{
-				return FindPieces(Actor, BuiltPieceName(Entry, bSplit), true);
-			}
-			if (Entry.Support == GlassSupport)
-			{
-				return FindPieces(Actor, GlassPieceName(Entry, bSplit), false);
-			}
-			TArray<UStaticMeshComponent*> Out;
-			for (const FName Piece : { FacePieceName(Entry, bSplit), LinenPieceName(Entry, bSplit), FramePieceName(Entry, bSplit) })
-			{
-				Out.Append(FindPieces(Actor, Piece, false));
-			}
-			return Out;
+			return FindPieces(Actor, FName(ObjectName(Entry, bSplit)), true);
 		}
 
 		/**

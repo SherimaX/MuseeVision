@@ -1,6 +1,6 @@
 {
   "title": "Test collection",
-  "description": "Two works written as assets/collection.json writes them.",
+  "description": "Works written as assets/collection.json writes them.",
   "works": [
     {
       "id": "monet-willows-two-willows",
@@ -22,6 +22,46 @@
       "medium": "Oil on canvas",
       "collection": "Musée Marmottan Monet",
       "city": "Paris",
+      "notes": ""
+    },
+    {
+      "id": "albion-de-morgan-charger",
+      "artist": "William De Morgan",
+      "title": "Charger",
+      "year": "c. 1888",
+      "medium": "Earthenware, lustre-painted",
+      "collection": "The Metropolitan Museum of Art",
+      "city": "New York",
+      "notes": ""
+    },
+    {
+      "id": "albion-de-morgan-jar",
+      "artist": "William De Morgan",
+      "title": "Jar",
+      "year": "c. 1890",
+      "medium": "Earthenware, lustre-painted",
+      "collection": "Cooper Hewitt",
+      "city": "New York",
+      "notes": ""
+    },
+    {
+      "id": "lumiere-peacock",
+      "artist": "Louis Lumière",
+      "title": "Peacock",
+      "year": "c. 1907",
+      "medium": "Autochrome",
+      "collection": "Musée Nicephore Niepce",
+      "city": "Chalon-sur-Saône",
+      "notes": ""
+    },
+    {
+      "id": "daguerre-boulevard",
+      "artist": "Louis Daguerre",
+      "title": "Boulevard du Temple",
+      "year": "1838",
+      "medium": "Daguerreotype",
+      "collection": "Bayerisches Nationalmuseum",
+      "city": "Munich",
       "notes": ""
     }
   ]
