@@ -1,0 +1,641 @@
+{
+  "stage": "hall-of-light",
+  "works": [
+    {
+      "work": "photo-talbot-leaf",
+      "source": "assets/collection.json",
+      "anchor": "hall-of-light.prints.north",
+      "along": 1.252,
+      "height": 1.56,
+      "size": [
+        0.097,
+        0.08
+      ],
+      "support": "paper",
+      "frame": "hall-of-light.frame.oak",
+      "care": "works-on-paper",
+      "centre": [
+        1.3,
+        -4.35,
+        1.6
+      ],
+      "copy": "exhibition-facsimile",
+      "mount": "hall-of-light.mount",
+      "mountSize": [
+        1.0,
+        0.9
+      ],
+      "glazed": true,
+      "note": "Bay 1. Print at true size centred on its 1.000 x 0.900 mount (z 1.15-2.05, face 0.150 inside the glass line) on two bronze stems; the 22 mm oak frame is round the mount (outer 1.044 x 0.944), glazed. Size: Met 285951 (sheet 8.0 x 9.7 cm)."
+    },
+    {
+      "work": "photo-talbot-open-door",
+      "source": "assets/collection.json",
+      "anchor": "hall-of-light.prints.south",
+      "along": 26.603,
+      "height": 1.529,
+      "size": [
+        0.194,
+        0.143
+      ],
+      "support": "paper",
+      "frame": "hall-of-light.frame.oak",
+      "care": "works-on-paper",
+      "centre": [
+        1.3,
+        4.35,
+        1.6
+      ],
+      "copy": "exhibition-facsimile",
+      "mount": "hall-of-light.mount",
+      "mountSize": [
+        1.0,
+        0.9
+      ],
+      "glazed": true,
+      "note": "Bay 1. Print at true size centred on its 1.000 x 0.900 mount (z 1.15-2.05, face 0.150 inside the glass line) on two bronze stems; the 22 mm oak frame is round the mount (outer 1.044 x 0.944), glazed. Size: Met 283068 (14.3 x 19.4 cm)."
+    },
+    {
+      "work": "photo-atkins-algae",
+      "source": "assets/collection.json",
+      "anchor": "hall-of-light.prints.north",
+      "along": 4.2,
+      "height": 1.474,
+      "size": [
+        0.2,
+        0.253
+      ],
+      "support": "paper",
+      "frame": "hall-of-light.frame.oak",
+      "care": "works-on-paper",
+      "centre": [
+        4.3,
+        -4.35,
+        1.6
+      ],
+      "copy": "exhibition-facsimile",
+      "mount": "hall-of-light.mount",
+      "mountSize": [
+        1.0,
+        0.9
+      ],
+      "glazed": true,
+      "note": "Bay 2. Print at true size centred on its 1.000 x 0.900 mount (z 1.15-2.05, face 0.150 inside the glass line) on two bronze stems; the 22 mm oak frame is round the mount (outer 1.044 x 0.944), glazed. Size: Met 291575 (25.3 x 20.0 cm)."
+    },
+    {
+      "work": "photo-atkins-algae-2",
+      "source": "assets/collection.json",
+      "anchor": "hall-of-light.prints.south",
+      "along": 23.6,
+      "height": 1.474,
+      "size": [
+        0.2,
+        0.253
+      ],
+      "support": "paper",
+      "frame": "hall-of-light.frame.oak",
+      "care": "works-on-paper",
+      "centre": [
+        4.3,
+        4.35,
+        1.6
+      ],
+      "copy": "exhibition-facsimile",
+      "mount": "hall-of-light.mount",
+      "mountSize": [
+        1.0,
+        0.9
+      ],
+      "glazed": true,
+      "note": "Bay 2. Print at true size centred on its 1.000 x 0.900 mount (z 1.15-2.05, face 0.150 inside the glass line) on two bronze stems; the 22 mm oak frame is round the mount (outer 1.044 x 0.944), glazed. Size: Met 291512 (25.3 x 20.0 cm)."
+    },
+    {
+      "work": "photo-hill-adamson-newhaven-fishwives",
+      "source": "assets/collection.json",
+      "anchor": "hall-of-light.prints.north",
+      "along": 7.191,
+      "height": 1.453,
+      "size": [
+        0.217,
+        0.295
+      ],
+      "support": "paper",
+      "frame": "hall-of-light.frame.oak",
+      "care": "works-on-paper",
+      "centre": [
+        7.3,
+        -4.35,
+        1.6
+      ],
+      "copy": "exhibition-facsimile",
+      "mount": "hall-of-light.mount",
+      "mountSize": [
+        1.0,
+        0.9
+      ],
+      "glazed": true,
+      "note": "Bay 3. Print at true size centred on its 1.000 x 0.900 mount (z 1.15-2.05, face 0.150 inside the glass line) on two bronze stems; the 22 mm oak frame is round the mount (outer 1.044 x 0.944), glazed. Size: Met 282022 (29.5 x 21.7 cm)."
+    },
+    {
+      "work": "photo-fenton-valley-shadow-of-death",
+      "source": "assets/collection.json",
+      "anchor": "hall-of-light.prints.south",
+      "along": 20.52,
+      "height": 1.46,
+      "size": [
+        0.36,
+        0.28
+      ],
+      "support": "paper",
+      "frame": "hall-of-light.frame.oak",
+      "care": "works-on-paper",
+      "centre": [
+        7.3,
+        4.35,
+        1.6
+      ],
+      "copy": "exhibition-facsimile",
+      "mount": "hall-of-light.mount",
+      "mountSize": [
+        1.0,
+        0.9
+      ],
+      "glazed": true,
+      "note": "Bay 3. Print at true size centred on its 1.000 x 0.900 mount (z 1.15-2.05, face 0.150 inside the glass line) on two bronze stems; the 22 mm oak frame is round the mount (outer 1.044 x 0.944), glazed. Size: LoC LC-DIG-ppmsca-35546 (28 x 36 cm)."
+    },
+    {
+      "work": "photo-nadar-bernhardt",
+      "source": "assets/collection.json",
+      "anchor": "hall-of-light.prints.north",
+      "along": 10.219,
+      "height": 1.495,
+      "size": [
+        0.162,
+        0.211
+      ],
+      "support": "paper",
+      "frame": "hall-of-light.frame.oak",
+      "care": "works-on-paper",
+      "centre": [
+        10.3,
+        -4.35,
+        1.6
+      ],
+      "copy": "exhibition-facsimile",
+      "mount": "hall-of-light.mount",
+      "mountSize": [
+        1.0,
+        0.9
+      ],
+      "glazed": true,
+      "note": "Bay 4. Print at true size centred on its 1.000 x 0.900 mount (z 1.15-2.05, face 0.150 inside the glass line) on two bronze stems; the 22 mm oak frame is round the mount (outer 1.044 x 0.944), glazed. Size: Getty (21.1 x 16.2 cm)."
+    },
+    {
+      "work": "photo-le-gray-great-wave",
+      "source": "assets/collection.json",
+      "anchor": "hall-of-light.prints.south",
+      "along": 17.493,
+      "height": 1.431,
+      "size": [
+        0.414,
+        0.337
+      ],
+      "support": "paper",
+      "frame": "hall-of-light.frame.oak",
+      "care": "works-on-paper",
+      "centre": [
+        10.3,
+        4.35,
+        1.6
+      ],
+      "copy": "exhibition-facsimile",
+      "mount": "hall-of-light.mount",
+      "mountSize": [
+        1.0,
+        0.9
+      ],
+      "glazed": true,
+      "note": "Bay 4. Print at true size centred on its 1.000 x 0.900 mount (z 1.15-2.05, face 0.150 inside the glass line) on two bronze stems; the 22 mm oak frame is round the mount (outer 1.044 x 0.944), glazed. Size: Met 261941 (33.7 x 41.4 cm)."
+    },
+    {
+      "work": "photo-marville-rue-traversine",
+      "source": "assets/collection.json",
+      "anchor": "hall-of-light.prints.north",
+      "along": 13.163,
+      "height": 1.426,
+      "size": [
+        0.275,
+        0.348
+      ],
+      "support": "paper",
+      "frame": "hall-of-light.frame.oak",
+      "care": "works-on-paper",
+      "centre": [
+        13.3,
+        -4.35,
+        1.6
+      ],
+      "copy": "exhibition-facsimile",
+      "mount": "hall-of-light.mount",
+      "mountSize": [
+        1.0,
+        0.9
+      ],
+      "glazed": true,
+      "note": "Bay 5. Print at true size centred on its 1.000 x 0.900 mount (z 1.15-2.05, face 0.150 inside the glass line) on two bronze stems; the 22 mm oak frame is round the mount (outer 1.044 x 0.944), glazed. Size: Met 283713 (34.8 x 27.5 cm)."
+    },
+    {
+      "work": "photo-cameron-julia-jackson",
+      "source": "assets/collection.json",
+      "anchor": "hall-of-light.prints.south",
+      "along": 14.597,
+      "height": 1.463,
+      "size": [
+        0.206,
+        0.274
+      ],
+      "support": "paper",
+      "frame": "hall-of-light.frame.oak",
+      "care": "works-on-paper",
+      "centre": [
+        13.3,
+        4.35,
+        1.6
+      ],
+      "copy": "exhibition-facsimile",
+      "mount": "hall-of-light.mount",
+      "mountSize": [
+        1.0,
+        0.9
+      ],
+      "glazed": true,
+      "note": "Bay 5. Print at true size centred on its 1.000 x 0.900 mount (z 1.15-2.05, face 0.150 inside the glass line) on two bronze stems; the 22 mm oak frame is round the mount (outer 1.044 x 0.944), glazed. Size: Met 267426 (27.4 x 20.6 cm)."
+    },
+    {
+      "work": "photo-muybridge-horse",
+      "source": "assets/collection.json",
+      "anchor": "hall-of-light.prints.north",
+      "along": 16.19,
+      "height": 1.53,
+      "size": [
+        0.22,
+        0.14
+      ],
+      "support": "paper",
+      "frame": "hall-of-light.frame.oak",
+      "care": "works-on-paper",
+      "centre": [
+        16.3,
+        -4.35,
+        1.6
+      ],
+      "copy": "exhibition-facsimile",
+      "mount": "hall-of-light.mount",
+      "mountSize": [
+        1.0,
+        0.9
+      ],
+      "glazed": true,
+      "note": "Bay 6. Print at true size centred on its 1.000 x 0.900 mount (z 1.15-2.05, face 0.150 inside the glass line) on two bronze stems; the 22 mm oak frame is round the mount (outer 1.044 x 0.944), glazed. Size: LoC card 14 x 22 cm, landscape (image 1.605:1)."
+    },
+    {
+      "work": "photo-osullivan-canyon-de-chelly",
+      "source": "assets/collection.json",
+      "anchor": "hall-of-light.prints.south",
+      "along": 11.598,
+      "height": 1.46,
+      "size": [
+        0.204,
+        0.28
+      ],
+      "support": "paper",
+      "frame": "hall-of-light.frame.oak",
+      "care": "works-on-paper",
+      "centre": [
+        16.3,
+        4.35,
+        1.6
+      ],
+      "copy": "exhibition-facsimile",
+      "mount": "hall-of-light.mount",
+      "mountSize": [
+        1.0,
+        0.9
+      ],
+      "glazed": true,
+      "note": "Bay 6. Print at true size centred on its 1.000 x 0.900 mount (z 1.15-2.05, face 0.150 inside the glass line) on two bronze stems; the 22 mm oak frame is round the mount (outer 1.044 x 0.944), glazed. Size: LoC ppmsca-10055, about 28 x 20.4 cm (unverified)."
+    },
+    {
+      "work": "photo-marey-bird-in-flight",
+      "source": "assets/collection.json",
+      "anchor": "hall-of-light.prints.north",
+      "along": 19.213,
+      "height": 1.584,
+      "size": [
+        0.173,
+        0.033
+      ],
+      "support": "paper",
+      "frame": "hall-of-light.frame.oak",
+      "care": "works-on-paper",
+      "centre": [
+        19.3,
+        -4.35,
+        1.6
+      ],
+      "copy": "exhibition-facsimile",
+      "mount": "hall-of-light.mount",
+      "mountSize": [
+        1.0,
+        0.9
+      ],
+      "glazed": true,
+      "note": "Bay 7. Print at true size centred on its 1.000 x 0.900 mount (z 1.15-2.05, face 0.150 inside the glass line) on two bronze stems; the 22 mm oak frame is round the mount (outer 1.044 x 0.944), glazed. Size: Met 286544 (3.3 x 17.3 cm)."
+    },
+    {
+      "work": "photo-atget-organ-grinder",
+      "source": "assets/collection.json",
+      "anchor": "hall-of-light.prints.south",
+      "along": 8.611,
+      "height": 1.485,
+      "size": [
+        0.178,
+        0.23
+      ],
+      "support": "paper",
+      "frame": "hall-of-light.frame.oak",
+      "care": "works-on-paper",
+      "centre": [
+        19.3,
+        4.35,
+        1.6
+      ],
+      "copy": "exhibition-facsimile",
+      "mount": "hall-of-light.mount",
+      "mountSize": [
+        1.0,
+        0.9
+      ],
+      "glazed": true,
+      "note": "Bay 7. Print at true size centred on its 1.000 x 0.900 mount (z 1.15-2.05, face 0.150 inside the glass line) on two bronze stems; the 22 mm oak frame is round the mount (outer 1.044 x 0.944), glazed. Size: AIC 55394 (23.0 x 17.8 cm)."
+    },
+    {
+      "work": "photo-stieglitz-steerage",
+      "source": "assets/collection.json",
+      "anchor": "hall-of-light.prints.north",
+      "along": 22.168,
+      "height": 1.433,
+      "size": [
+        0.264,
+        0.334
+      ],
+      "support": "paper",
+      "frame": "hall-of-light.frame.oak",
+      "care": "works-on-paper",
+      "centre": [
+        22.3,
+        -4.35,
+        1.6
+      ],
+      "copy": "exhibition-facsimile",
+      "mount": "hall-of-light.mount",
+      "mountSize": [
+        1.0,
+        0.9
+      ],
+      "glazed": true,
+      "note": "Bay 8. Print at true size centred on its 1.000 x 0.900 mount (z 1.15-2.05, face 0.150 inside the glass line) on two bronze stems; the 22 mm oak frame is round the mount (outer 1.044 x 0.944), glazed. Size: Getty (33.4 x 26.4 cm)."
+    },
+    {
+      "work": "photo-hine-sadie-pfeifer",
+      "source": "assets/collection.json",
+      "anchor": "hall-of-light.prints.south",
+      "along": 5.611,
+      "height": 1.537,
+      "size": [
+        0.178,
+        0.127
+      ],
+      "support": "paper",
+      "frame": "hall-of-light.frame.oak",
+      "care": "works-on-paper",
+      "centre": [
+        22.3,
+        4.35,
+        1.6
+      ],
+      "copy": "exhibition-facsimile",
+      "mount": "hall-of-light.mount",
+      "mountSize": [
+        1.0,
+        0.9
+      ],
+      "glazed": true,
+      "note": "Bay 8. Print at true size centred on its 1.000 x 0.900 mount (z 1.15-2.05, face 0.150 inside the glass line) on two bronze stems; the 22 mm oak frame is round the mount (outer 1.044 x 0.944), glazed. Size: LoC nclc-01455: the NCLC 5 x 7 in print (unverified; image 1.413:1)."
+    },
+    {
+      "work": "photo-lumiere-autochrome",
+      "source": "assets/collection.json",
+      "anchor": "hall-of-light.autochromes.north",
+      "along": 25.212,
+      "height": 1.535,
+      "size": [
+        0.177,
+        0.13
+      ],
+      "support": "glass",
+      "frame": "hall-of-light.frame.oak",
+      "care": "works-on-paper.fugitive",
+      "centre": [
+        25.3,
+        -4.44,
+        1.6
+      ],
+      "copy": "exhibition-facsimile",
+      "mount": "hall-of-light.autochrome.mat",
+      "mountSize": [
+        1.0,
+        0.9
+      ],
+      "glazed": true,
+      "note": "Bay 9. Autochrome in its cassette against the wall glass between the bronze glazing bars (bay x +-0.56); white window mat 1.000 x 0.900; acid-etched low-iron diffuser behind; frame outer 1.044 x 0.944. Size: Met 285665 (13.0 x 17.7 cm)."
+    },
+    {
+      "work": "photo-lumiere-autochrome-4",
+      "source": "assets/collection.json",
+      "anchor": "hall-of-light.autochromes.south",
+      "along": 2.64,
+      "height": 1.555,
+      "size": [
+        0.12,
+        0.09
+      ],
+      "support": "glass",
+      "frame": "hall-of-light.frame.oak",
+      "care": "works-on-paper.fugitive",
+      "centre": [
+        25.3,
+        4.44,
+        1.6
+      ],
+      "copy": "exhibition-facsimile",
+      "mount": "hall-of-light.autochrome.mat",
+      "mountSize": [
+        1.0,
+        0.9
+      ],
+      "glazed": true,
+      "note": "Bay 9. Autochrome in its cassette against the wall glass between the bronze glazing bars (bay x +-0.56); white window mat 1.000 x 0.900; acid-etched low-iron diffuser behind; frame outer 1.044 x 0.944. Size: 9 x 12 cm plate (unverified; image 1.339:1)."
+    },
+    {
+      "work": "photo-lumiere-autochrome-3",
+      "source": "assets/collection.json",
+      "anchor": "hall-of-light.autochromes.north",
+      "along": 27.69,
+      "height": 1.555,
+      "size": [
+        0.12,
+        0.09
+      ],
+      "support": "glass",
+      "frame": "hall-of-light.frame.oak",
+      "care": "works-on-paper.fugitive",
+      "centre": [
+        27.75,
+        -4.44,
+        1.6
+      ],
+      "copy": "exhibition-facsimile",
+      "mount": "hall-of-light.autochrome.mat",
+      "mountSize": [
+        1.0,
+        0.9
+      ],
+      "glazed": true,
+      "note": "Bay 10. Autochrome in its cassette against the wall glass between the bronze glazing bars (bay x +-0.56); white window mat 1.000 x 0.900; acid-etched low-iron diffuser behind; frame outer 1.044 x 0.944. Size: Albert-Kahn standard 9 x 12 cm plate."
+    },
+    {
+      "work": "photo-lumiere-autochrome-2",
+      "source": "assets/collection.json",
+      "anchor": "hall-of-light.autochromes.south",
+      "along": 0.161,
+      "height": 1.537,
+      "size": [
+        0.178,
+        0.127
+      ],
+      "support": "glass",
+      "frame": "hall-of-light.frame.oak",
+      "care": "works-on-paper.fugitive",
+      "centre": [
+        27.75,
+        4.44,
+        1.6
+      ],
+      "copy": "exhibition-facsimile",
+      "mount": "hall-of-light.autochrome.mat",
+      "mountSize": [
+        1.0,
+        0.9
+      ],
+      "glazed": true,
+      "note": "Bay 10. Autochrome in its cassette against the wall glass between the bronze glazing bars (bay x +-0.56); white window mat 1.000 x 0.900; acid-etched low-iron diffuser behind; frame outer 1.044 x 0.944. Size: LoC 5 x 7 in plate (12.7 x 17.8 cm)."
+    },
+    {
+      "work": "stereo-1",
+      "source": "assets/collection.json",
+      "anchor": "hall-of-light.stereo.1",
+      "wall": "hall-of-light.stereo.reader",
+      "centre": [
+        5.8,
+        -2.4,
+        1.32
+      ],
+      "size": [
+        0.171,
+        0.086
+      ],
+      "support": "silvered copper plate",
+      "frame": "none",
+      "care": "works-on-paper",
+      "copy": "exhibition-facsimile",
+      "facing": "south",
+      "facing_deg": 90.0,
+      "tilt_deg": 28.65,
+      "glazed": true,
+      "note": "Stone 1 at (5.80, -2.40): the card whole and centred on the bronze reader plate (centre z 1.320, facing south towards the axis, tilted back 0.5 rad), under anti-reflective UV glazing; stereo daguerreotype, Met 291843, mount 8.6 x 17.1 cm."
+    },
+    {
+      "work": "stereo-2",
+      "source": "assets/collection.json",
+      "anchor": "hall-of-light.stereo.2",
+      "wall": "hall-of-light.stereo.reader",
+      "centre": [
+        11.8,
+        2.4,
+        1.32
+      ],
+      "size": [
+        0.171,
+        0.083
+      ],
+      "support": "silvered copper plate",
+      "frame": "none",
+      "care": "works-on-paper",
+      "copy": "exhibition-facsimile",
+      "facing": "north",
+      "facing_deg": 270.0,
+      "tilt_deg": 28.65,
+      "glazed": true,
+      "note": "Stone 2 at (11.80, 2.40): the card whole and centred on the bronze reader plate (centre z 1.320, facing north towards the axis, tilted back 0.5 rad), under anti-reflective UV glazing; stereo daguerreotype, Met 291844, mount 8.3 x 17.1 cm."
+    },
+    {
+      "work": "stereo-3",
+      "source": "assets/collection.json",
+      "anchor": "hall-of-light.stereo.3",
+      "wall": "hall-of-light.stereo.reader",
+      "centre": [
+        17.8,
+        -2.4,
+        1.32
+      ],
+      "size": [
+        0.171,
+        0.081
+      ],
+      "support": "paper",
+      "frame": "none",
+      "care": "works-on-paper",
+      "copy": "exhibition-facsimile",
+      "facing": "south",
+      "facing_deg": 90.0,
+      "tilt_deg": 28.65,
+      "glazed": true,
+      "note": "Stone 3 at (17.80, -2.40): the card whole and centred on the bronze reader plate (centre z 1.320, facing south towards the axis, tilted back 0.5 rad), under anti-reflective UV glazing; albumen stereograph, LoC, about 8.1 x 17.1 cm (unverified; image 2.107:1)."
+    },
+    {
+      "work": "stereo-4",
+      "source": "assets/collection.json",
+      "anchor": "hall-of-light.stereo.4",
+      "wall": "hall-of-light.stereo.reader",
+      "centre": [
+        23.8,
+        2.4,
+        1.32
+      ],
+      "size": [
+        0.171,
+        0.084
+      ],
+      "support": "paper",
+      "frame": "none",
+      "care": "works-on-paper",
+      "copy": "exhibition-facsimile",
+      "facing": "north",
+      "facing_deg": 270.0,
+      "tilt_deg": 28.65,
+      "glazed": true,
+      "note": "Stone 4 at (23.80, 2.40): the card whole and centred on the bronze reader plate (centre z 1.320, facing north towards the axis, tilted back 0.5 rad), under anti-reflective UV glazing; albumen stereograph, LoC ds-04850, 8.4 x 17.1 cm."
+    }
+  ]
+}
