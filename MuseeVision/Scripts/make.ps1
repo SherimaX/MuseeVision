@@ -5,6 +5,7 @@
 #
 # <stage key> makes that stage's level (/Game/Generated/Stages/<Stage>/L_<Stage>); site makes the museum level
 # (/Game/Generated/Site/L_Museum) from Data/Site/SitePlan.json; all makes every stage of the site plan, then the museum.
+# Every make first runs Matter's make (MuseeMatterMake), so the palette's materials exist before a stage names them.
 # The make report is in Saved/Logs/make-<name>.log. Exit codes: 0 made cleanly; 1 made, with failures or findings; 2 not
 # a stage; 3 the lock or the machine never became free; 4 the run timed out.
 param(
@@ -20,8 +21,24 @@ if ($Stage -notmatch '^[a-z0-9]+(-[a-z0-9]+)*(\.[a-z0-9]+(-[a-z0-9]+)*)*$') {
     exit 2
 }
 $Project = Split-Path -Parent $PSScriptRoot
+# The collection (its catalogues and images) is the museum's reserve, kept in one place out of the code's history: the
+# owner's assets folder. Every working copy reads it there, and only reads it. MUSEE_COLLECTION names another.
+$Collection = "C:\Users\anan9\Desktop\Projects\Musee Vision\assets"
+if (-not $env:MUSEE_COLLECTION -and (Test-Path $Collection)) { $env:MUSEE_COLLECTION = $Collection }
 $Log = Join-Path $Project "Saved\Logs\make-$Stage.log"
 New-Item -ItemType Directory -Force (Split-Path -Parent $Log) | Out-Null
+
+# A stage is made of the palette's materials, so Matter makes them first: every master and instance, and MPC_Moment.
+# It is deterministic, so with nothing changed it writes nothing.
+$MatterLog = Join-Path $Project "Saved\Logs\make-matter.log"
+$MatterArguments = "`"$Project\MuseeVision.uproject`" -run=MuseeMatterMake -nullrhi -unattended -nosplash -nosound -abslog=`"$MatterLog`""
+& $Lock -Exe "$Engine\Engine\Binaries\Win64\UnrealEditor-Cmd.exe" -Args $MatterArguments -WaitMinutes $WaitMinutes -RunMinutes $RunMinutes
+if ($LASTEXITCODE -eq 3 -or $LASTEXITCODE -eq 4) { exit $LASTEXITCODE }
+$MatterReturned = Select-String -Path $MatterLog -Pattern 'Commandlet \S+ finished execution \(result (-?\d+)\)' -ErrorAction SilentlyContinue | Select-Object -Last 1
+if (-not $MatterReturned -or $MatterReturned.Matches[0].Groups[1].Value -ne '0') {
+    Write-Host "make $Stage stopped: Matter's make failed (report: $MatterLog)"
+    exit 1
+}
 
 $Arguments = "`"$Project\MuseeVision.uproject`" -run=MuseeMake -Stage=$Stage -unattended -nosplash -nosound -abslog=`"$Log`""
 & $Lock -Exe "$Engine\Engine\Binaries\Win64\UnrealEditor-Cmd.exe" -Args $Arguments -WaitMinutes $WaitMinutes -RunMinutes $RunMinutes

@@ -35,6 +35,31 @@ namespace Musee::Art
 		return FPaths::ConvertRelativePathToFull(FPaths::ProjectDir() / TEXT(".."));
 	}
 
+	namespace
+	{
+		/**
+		 * The collection: the repository's assets/ folder, its catalogues and its images. The images are the museum's
+		 * reserve, gigabytes too large for the code's history, so a working copy may keep them elsewhere and name that
+		 * folder in the environment's MUSEE_COLLECTION. The make only ever reads it.
+		 */
+		FString CollectionRoot()
+		{
+			const FString Named = FPlatformMisc::GetEnvironmentVariable(TEXT("MUSEE_COLLECTION"));
+			return FPaths::ConvertRelativePathToFull(Named.IsEmpty() ? RepositoryRoot() / TEXT("assets") : Named);
+		}
+
+		/** A catalogue as a schedule names it, from the repository's root (assets/collection.json): found in the collection. */
+		FString CataloguePath(const FString& Source)
+		{
+			if (!FPaths::IsRelative(Source))
+			{
+				return Source;
+			}
+			const FString Assets = TEXT("assets/");
+			return Source.StartsWith(Assets) ? CollectionRoot() / Source.RightChop(Assets.Len()) : RepositoryRoot() / Source;
+		}
+	}
+
 	FString FindImage(const FString& Root, const FString& WorkId)
 	{
 		TArray<FString> Found;
@@ -61,7 +86,7 @@ namespace Musee::Art
 
 	TValueOrError<FArtWork, FString> ReadWork(const FArtHangEntry& Entry)
 	{
-		const FString Catalogue = FPaths::IsRelative(Entry.Source) ? RepositoryRoot() / Entry.Source : Entry.Source;
+		const FString Catalogue = CataloguePath(Entry.Source);
 		const TValueOrError<FArtCatalogue, FString> Read = ReadRecord<FArtCatalogue>(FPaths::ConvertRelativePathToFull(Catalogue));
 		if (Read.HasError())
 		{
@@ -86,7 +111,7 @@ namespace Musee::Art
 		Work.Care = Entry.Care;
 		// A catalogue's images lie beside it (assets/collection.json and assets/paintings/), or in the assets.
 		Work.ImagePath = FindImage(FPaths::GetPath(FPaths::ConvertRelativePathToFull(Catalogue)), Work.Id);
-		Work.ImagePath = Work.ImagePath.IsEmpty() ? FindImage(RepositoryRoot() / TEXT("assets"), Work.Id) : Work.ImagePath;
+		Work.ImagePath = Work.ImagePath.IsEmpty() ? FindImage(CollectionRoot(), Work.Id) : Work.ImagePath;
 		return MakeValue(MoveTemp(Work));
 	}
 }
