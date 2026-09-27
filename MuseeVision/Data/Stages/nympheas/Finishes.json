@@ -1,0 +1,243 @@
+{
+  "stage": "nympheas",
+  "finishes": [
+    {
+      "surface": "nympheas.floor",
+      "material": "stone.travertine-romano",
+      "working": "honed",
+      "history": "foot-worn",
+      "note": "Whole oval floor and the passage floor to the port face; voids filled (tinted cement); vein-cut bands along x (the direction of travel). Classical floors are honed, not polished (Palette verdict)."
+    },
+    {
+      "surface": "nympheas.floor.viewing-stone",
+      "material": "stone.travertine-romano",
+      "working": "honed",
+      "history": "foot-worn",
+      "note": "Two flush discs r 0.40 at (±7.20, 0); voids filled."
+    },
+    {
+      "surface": "nympheas.floor.viewing-stone.ring",
+      "material": "bronze.cusn10",
+      "working": "gilt.gold-leaf.oil",
+      "history": "foot-worn",
+      "note": "Flush ring r 0.40–0.45 round each viewing stone: oil-gilt on cast bronze, worn through to the brown bronze where stood on (Story: viewing-stone rings)."
+    },
+    {
+      "surface": "nympheas.wall.plaster",
+      "material": "white.lime-plaster",
+      "working": "burnished",
+      "history": "new",
+      "note": "Oval inner face 0–5.00: lime plaster trowelled and burnished (marmorino), the one pale room; the willows hang on it."
+    },
+    {
+      "surface": "nympheas.wall.skirting",
+      "material": "stone.travertine-romano",
+      "working": "honed",
+      "history": "new",
+      "note": "P10 skirting, 0.10 high, 18 mm proud; voids open."
+    },
+    {
+      "surface": "nympheas.cove",
+      "material": "white.lime-plaster",
+      "working": "run",
+      "history": "new",
+      "note": "P9 cove, run in lime gauged with plaster of Paris, then burnished like the walls."
+    },
+    {
+      "surface": "nympheas.door.architrave",
+      "material": "stone.travertine-romano",
+      "working": "honed",
+      "history": "new",
+      "note": "P6 slim architrave round the door on the oval face (the doorway surround is honed in every era)."
+    },
+    {
+      "surface": "nympheas.passage.reveal",
+      "material": "stone.travertine-romano",
+      "working": "honed",
+      "history": "handled",
+      "note": "Jambs and arched soffit of the passage from the port face to the oval's inner face; voids open."
+    },
+    {
+      "surface": "nympheas.velarium",
+      "material": "accent.linen",
+      "working": "stretched",
+      "history": "new",
+      "note": "Linen velarium, translucent, in 1.40 m widths along x with double-stitched seams; stretched on the bronze frame under the glass dome."
+    },
+    {
+      "surface": "nympheas.velarium.frame",
+      "material": "bronze.cusn10",
+      "working": "patinated",
+      "history": "new",
+      "note": "Rim ring and eight ribs above the seam lines carrying the cloth; hidden above the cloth, seen only as soft shadows in daylight."
+    },
+    {
+      "surface": "nympheas.attic.upstand",
+      "material": "white.lime-plaster",
+      "working": "trowelled",
+      "history": "new",
+      "note": "Attic wall at the rim line, 6.35–7.20, facing the attic; white so the attic returns light onto the cloth."
+    },
+    {
+      "surface": "nympheas.roof.glass",
+      "material": "glass.low-iron",
+      "working": "laminated.uv-filtering",
+      "history": "weathered",
+      "note": "Elliptic glass dome over the velarium: Optiwhite laminated with a UV-filtering interlayer, acid-etched on the inner face (the laylight). Glazed opening nympheas.roof, weather giverny."
+    },
+    {
+      "surface": "nympheas.roof.bars",
+      "material": "bronze.cusn10",
+      "working": "patinated",
+      "history": "weathered",
+      "note": "Glazing bars 40 × 70 mm on a 1.20 m plan grid and the dome's curb, as the Salon's lantern frames."
+    },
+    {
+      "surface": "nympheas.exterior.wall",
+      "material": "stone.travertine-romano",
+      "working": "honed",
+      "history": "weathered",
+      "note": "Outer face of the oval wall (to 7.20) and the passage block's sides and top (5.20): honed ashlar, weathered (outdoors)."
+    },
+    {
+      "surface": "nympheas.exterior.roof",
+      "material": "accent.milled-lead",
+      "working": "weathered",
+      "history": "weathered",
+      "note": "Roof ring 7.00–7.20 from the outer face to the rim line: milled sheet lead on boarding, laid with rolls."
+    },
+    {
+      "surface": "nympheas.pond.coping",
+      "material": "stone.travertine-romano",
+      "working": "honed",
+      "history": "handled",
+      "note": "Moulded sitting-height coping, 16 blocks; voids filled; hand and seat contact; a faint waterline under the lip (history to add in Matter)."
+    },
+    {
+      "surface": "nympheas.pond.frieze",
+      "material": "stone.travertine-romano",
+      "working": "carved",
+      "history": "new",
+      "note": "Carved lily frieze on the die, from a close-grained filled block (voids filled, figure quieter); carved then honed."
+    },
+    {
+      "surface": "nympheas.pond.lip",
+      "material": "bronze.cusn10",
+      "working": "gilt.gold-leaf.oil",
+      "history": "handled",
+      "note": "Inner lip, one jointless ring carrying the line of warm light: oil-gilt on cast bronze, wetted at the waterline, worn through where hands rest."
+    },
+    {
+      "surface": "nympheas.pond.bed",
+      "material": "accent.pierre-bleue",
+      "working": "honed",
+      "history": "weathered",
+      "note": "Lining, bed and the two planting shelves: Belgian bluestone, honed, permanently submerged; the dark bed that makes the water a mirror."
+    },
+    {
+      "surface": "nympheas.pond.water",
+      "material": "water.still",
+      "working": "still.dyed-black",
+      "history": "new",
+      "note": "Brimming still water dyed black with a reflecting-pool dye; mirrors the velarium and the panels."
+    },
+    {
+      "surface": "nympheas.pond.tray",
+      "material": "bronze.cusn10",
+      "working": "patinated",
+      "history": "aged.patina",
+      "note": "Bronze tray under the whole pond out to the toe; the quiet bronze soffit seen from the stair when the pond is up."
+    },
+    {
+      "surface": "nympheas.pond.post",
+      "material": "bronze.cusn10",
+      "working": "patinated",
+      "history": "aged.patina",
+      "note": "Four telescopic posts (three stages each); statuary patina relieved bright where the stages slide."
+    },
+    {
+      "surface": "nympheas.golden-iris",
+      "material": "bronze.cusn10",
+      "working": "gilt.gold-leaf.oil",
+      "history": "handled",
+      "note": "The golden iris: a cast Iris laevigata at life size, oil-gilt, set on the coping's seat at the west apex; the gold worn through on the falls where it is touched."
+    },
+    {
+      "surface": "nympheas.guard.rail",
+      "material": "bronze.cusn10",
+      "working": "patinated",
+      "history": "handled",
+      "note": "The three retracting guard rails round the pond opening (M-2), rails and stanchions."
+    },
+    {
+      "surface": "nympheas.bench.seat",
+      "material": "oak.sessile-french",
+      "working": "oiled and hard-waxed",
+      "history": "handled",
+      "note": "Curved oak seat slabs of the four benches, quartersawn, grain along the arc."
+    },
+    {
+      "surface": "nympheas.bench.plinth",
+      "material": "stone.travertine-romano",
+      "working": "honed",
+      "history": "new",
+      "note": "Two plinths under each seat; voids filled."
+    },
+    {
+      "surface": "nympheas.stair.tread",
+      "material": "stone.travertine-romano",
+      "working": "honed",
+      "history": "foot-worn",
+      "note": "36 treads, risers and nosings (one stone per tread), the top and bottom landings; voids filled."
+    },
+    {
+      "surface": "nympheas.stair.string",
+      "material": "stone.travertine-romano",
+      "working": "honed",
+      "history": "new",
+      "note": "Closed strings on both walls and the 0.15 skirting on the bottom landing."
+    },
+    {
+      "surface": "nympheas.well.curb",
+      "material": "stone.travertine-romano",
+      "working": "honed",
+      "history": "foot-worn",
+      "note": "0.30 curb lining the opening's north, south and east edges and the slab edge; voids filled."
+    },
+    {
+      "surface": "nympheas.well.wall",
+      "material": "accent.brique-bourgogne",
+      "working": "hand-laid, lime mortar, joints slightly recessed",
+      "history": "new",
+      "note": "Shaft side walls, west end wall and the head wall with the port's arched opening: the Reserve's brick (Palette: the long stair's shaft)."
+    },
+    {
+      "surface": "nympheas.well.soffit",
+      "material": "white.lime-plaster",
+      "working": "trowelled",
+      "history": "new",
+      "note": "Soffit of the oval slab over the shaft, z −0.40, from the slab edge to the head wall."
+    },
+    {
+      "surface": "nympheas.stair.handrail",
+      "material": "bronze.cusn10",
+      "working": "patinated",
+      "history": "handled",
+      "note": "Two handrails with brackets and wall roses; the patina relieved bright along the top where hands run."
+    },
+    {
+      "surface": "nympheas.east.blind-doors",
+      "material": "bronze.cusn10",
+      "working": "patinated",
+      "history": "new",
+      "note": "On the stand only: closed pair of bronze doors in the east port's opening until salon.west is mated."
+    },
+    {
+      "surface": "nympheas.stair.blind-doors",
+      "material": "bronze.cusn10",
+      "working": "patinated",
+      "history": "new",
+      "note": "The Reserve's closed bronze doors: a closed pair in the stair port's arched opening, the port's blind while the Reserve is not built."
+    }
+  ]
+}
