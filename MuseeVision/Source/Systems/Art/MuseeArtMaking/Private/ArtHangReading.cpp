@@ -115,6 +115,11 @@ namespace Musee::ArtMaking
 				Canvas.PlateMeters = IsTransparency(Stage, *Entry) ? PaneMeters(Entry->Wall, Context) : 0.0;
 				Canvas.BackingMeters = PaneMeters(Entry->Backing, Context);
 				Canvas.Layer = Plan.bOwnImages ? Musee::Art::PaintMaterial(Entry->Work, Entry->Canvas) : Musee::Art::PaintMaterial(Entry->Work);
+				const bool bWare = Entry->Support == Supports::Earthenware;
+				if (bWare)
+				{
+					Canvas.Ware = WareOf(*Entry, Context);
+				}
 				if (Plan.bOwnImages)
 				{
 					const TValueOrError<FArtWork, FString> Own = Musee::Art::ReadWork(*Entry);
@@ -125,10 +130,9 @@ namespace Musee::ArtMaking
 					}
 					continue;
 				}
-				if (Entry->Support == Supports::Earthenware)
+				if (bWare)
 				{
 					// Ware shows its photograph whole: the image spans the photograph, the piece its window in it.
-					Canvas.Ware = WareOf(*Entry, Context);
 					Plan.ImageMeters = WareImageMeters(Canvas.Ware);
 					continue;
 				}
@@ -357,7 +361,8 @@ namespace Musee::ArtMaking
 				FArtPaintLayer& Layer = Out.AddDefaulted_GetRef();
 				Layer.Work = Plan.bOwnImages ? FString::Printf(TEXT("%s.%d"), *Plan.Work.Id, Canvas.Entry->Canvas) : Plan.Work.Id;
 				Layer.ImagePath = Plan.bOwnImages ? Canvas.OwnImagePath : Plan.Work.ImagePath;
-				Layer.SizeMeters = Plan.bOwnImages ? Canvas.Entry->SizeMeters() : Plan.ImageMeters;
+				const bool bWare = Canvas.Entry->Support == Supports::Earthenware;
+				Layer.SizeMeters = !Plan.bOwnImages ? Plan.ImageMeters : bWare ? WareImageMeters(Canvas.Ware) : Canvas.Entry->SizeMeters();
 				Layer.Palette = Canvas.Layer;
 				Layer.Parent = Canvas.Finish.Palette;
 				Layer.Working = Canvas.Finish.Working;
