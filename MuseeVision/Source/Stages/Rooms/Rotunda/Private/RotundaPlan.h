@@ -176,6 +176,17 @@ namespace Musee::Rotunda::Plan
 	inline constexpr double HourLineProud = 0.0025;
 	inline constexpr double HourLineBevel = 0.001;
 	inline constexpr double MeridianWidth = 0.060;
+	/**
+	 * The hours' numerals (§3.1): Roman, VI at the west by XII at the north to VI at the east, each centred on its hour
+	 * line where Time's dial lays it, set along the arc on the baseline r 6.815, cap 0.16, tops outward (read from the
+	 * dial), tracking -0.03 cap; cast bronze in the catalogue's Centaur, 5 mm proud, 2 mm bevel.
+	 */
+	inline constexpr const TCHAR* NumeralFace = TEXT("centaur.capitals");
+	inline constexpr double NumeralBaseline = 6.815;
+	inline constexpr double NumeralCap = 0.160;
+	inline constexpr double NumeralTracking = -0.03;
+	inline constexpr double NumeralProud = 0.005;
+	inline constexpr double NumeralBevel = 0.002;
 	inline constexpr int32 MeridianHour = 12;
 
 	/** The minute ticks (§3.1), every minute from VI to VI but the hours: the longest that divides its minute. */

@@ -385,6 +385,22 @@ namespace Musee::Rotunda::Tests
 			&& Ring->Shape.IsType<FFormLathe>());
 		const FFormDrawing* Meridian = FindPiece(Description, TEXT("dial.meridian"));
 		TestTrue(TEXT("the meridian is gilt"), Meridian && Meridian->Surface == FName(TEXT("rotunda.dial.meridian")));
+
+		// The thirteen numerals, lettered in Centaur on the arc, each centred on its hour's line: XII on the meridian.
+		int32 Numerals = 0;
+		for (const Musee::Time::FDialMark& Mark : Dial.GetValue().Marks(60))
+		{
+			const FFormDrawing* Numeral = Mark.IsHour() ? FindPiece(Description, *FString::Printf(TEXT("dial.numeral.%02d"), Mark.Minute / 60)) : nullptr;
+			if (Numeral && Numeral->Shape.IsType<FFormLettering>())
+			{
+				const FFormLettering& Letters = Numeral->Shape.Get<FFormLettering>();
+				Numerals += FMath::IsNearlyEqual(FMath::DegreesToRadians(Letters.CentreDegrees), FMath::Atan2(Mark.Direction.Y, Mark.Direction.X), 1e-12)
+					&& Letters.BaselineRadiusMeters == 6.815 && !Letters.bTopsInward ? 1 : 0;
+			}
+		}
+		TestEqual(TEXT("a numeral on each of the thirteen hours, on its line"), Numerals, 13);
+		const FFormDrawing* Noon = FindPiece(Description, TEXT("dial.numeral.12"));
+		TestTrue(TEXT("XII at noon"), Noon && Noon->Shape.Get<FFormLettering>().Text == TEXT("XII"));
 		return true;
 	}
 }

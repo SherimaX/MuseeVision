@@ -6,10 +6,9 @@
  * doorways' rough openings and the four niches; its footing and the plinth course under the shadow gap; the drum's top
  * course under the dome's springing; and each niche's half-round back, its quarter-sphere head and its laid floor.
  *
- * Form's wall cuts an opening's jambs radially and keeps its head's height through the wall, where the sheet's
- * doorways run straight through (jambs parallel to the axis): the known Form gap of a straight passage through a curved
- * wall. The nearest honest form sets the radial openings out on the room's face, the rough width there as the sheet
- * gives it, so the openings widen towards the outer face.
+ * The doorways run straight through the drum (§2, §3.2): their jambs are the planes parallel to the door's axis at the
+ * rough half-width, and their heads the half-cylinder about the springing line, as Form cuts a straight passage through a
+ * curved wall; the niches' jambs are radial.
  */
 namespace Musee::Rotunda
 {
@@ -25,9 +24,9 @@ namespace Musee::Rotunda
 			return Plan::DrumInner * FMath::DegreesToRadians(Swept);
 		}
 
-		/** A doorway's rough half-width on the inner face (the clear half and the lining's allowance), and its angle there. */
+		/** A doorway's rough half-width across its axis (the clear half and the lining's allowance), and its angle on the inner face. */
 		double DoorHalf(const Plan::FDoor& Door) { return 0.5 * Door.Clear + Plan::LiningAllowance; }
-		double DoorHalfDeg(const Plan::FDoor& Door) { return FMath::RadiansToDegrees(DoorHalf(Door) / Plan::DrumInner); }
+		double DoorHalfDeg(const Plan::FDoor& Door) { return FMath::RadiansToDegrees(FMath::Asin(DoorHalf(Door) / Plan::DrumInner)); }
 
 		/** A niche's half-angle: its half-width on the inner face, where its front meets the chord plane. */
 		double NicheHalfDeg() { return FMath::RadiansToDegrees(Plan::NicheHalfWidth / Plan::DrumInner); }
@@ -54,6 +53,7 @@ namespace Musee::Rotunda
 				Doorway.WidthMeters = 2.0 * DoorHalf(Door);
 				Doorway.HeadMeters = Plan::DoorSpringing - Plan::ShadowGapTop;
 				Doorway.bArched = true;
+				Doorway.bStraight = true;
 			}
 			for (const double Deg : Plan::NicheDegrees)
 			{
