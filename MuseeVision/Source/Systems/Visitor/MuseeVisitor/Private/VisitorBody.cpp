@@ -260,7 +260,8 @@ void AVisitorBody::BuildInput()
 	Button(TEXT("Use"), { EKeys::LeftMouseButton, EKeys::E });
 	Button(TEXT("Stride"), { EKeys::LeftShift });
 	Button(TEXT("Hop"), { EKeys::SpaceBar });
-	Button(TEXT("Hour"), { EKeys::H });
+	// The hour key is T, as the museum's time record (Data/Time/Museum.json, clock) and the as-built museum have it.
+	Button(TEXT("Hour"), { EKeys::T });
 	Button(TEXT("City"), { EKeys::C });
 	Button(TEXT("Leave"), { EKeys::Escape });
 }
