@@ -1,0 +1,16 @@
+{
+  "$sources": [
+    "Decisions D-019: an unbuilt neighbour's port is closed by bronze doors (the stair ends at the Reserve's closed bronze doors: the port's blind).",
+    "Data/Matter/Palette.json, bronze.cusn10: the museum's one bronze, patinated in the classical rooms (hot sulfide statuary brown, waxed, relieved where handled); Data/Matter/Workings/patinated.json and Data/Matter/Histories/bronze.wear.json.",
+    "Leaf thickness: 60 mm, a cast bronze door leaf on a steel core, as the paired leaves of museum and church doors are built (a 50 to 75 mm leaf carries panels and the leaf's own weight on its hinges).",
+    "Clearance: 3 mm round each leaf, the standard hanging gap at jambs, head and meeting stiles of a pair of doors.",
+    "Set back 100 mm from the port's face, so the reveal's first 100 mm reads as the opening's depth and the leaves sit within the wall."
+  ],
+  "material": "bronze.cusn10",
+  "working": "patinated",
+  "history": "bronze.wear",
+  "leafMeters": 0.060,
+  "clearanceMeters": 0.003,
+  "setBackMeters": 0.100,
+  "source": "The blind doors of an unmated port: two patinated bronze leaves in the rough opening."
+}

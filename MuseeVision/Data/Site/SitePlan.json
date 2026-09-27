@@ -1,0 +1,20 @@
+{
+  "$sources": [
+    "Decisions D-019: the Nympheas oval is the first stage built and anchors the plan until the Rotunda joins; its east port mates the Salon's west port, beyond bay 5.",
+    "The arrival is in the anchor's frame, whose origin is the oval's centre on the finished floor: 3 m in from the oval's east apex (the inner face at x 11.000, salon.md section 3.1), on the long axis, facing west down the room to the pond."
+  ],
+  "anchor": "nympheas",
+  "arrival": {
+    "stage": "nympheas",
+    "pointMeters": [8.000, 0.000, 0.000],
+    "facingDegrees": 180.0
+  },
+  "matings": [
+    {
+      "a": "nympheas.east",
+      "b": "salon.west",
+      "passageMeters": 0.0,
+      "note": "The oval passage: the Salon's bay 5 far wall meets the oval's passage block."
+    }
+  ]
+}
