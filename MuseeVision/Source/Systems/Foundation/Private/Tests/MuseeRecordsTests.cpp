@@ -28,6 +28,24 @@ namespace Musee::Tests
 	}
 }
 
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FMuseeFoundationRecordsDataRootTest, "Musee.Foundation.Records.DataRoot", Musee::Tests::Flags)
+
+bool FMuseeFoundationRecordsDataRootTest::RunTest(const FString& Parameters)
+{
+	using namespace Musee::Records;
+	TestEqual(TEXT("The editor's absolute project folder holds the data"),
+		DataRootOf(TEXT("C:/Program Files/Epic Games/UE_5.8/Engine/Binaries/Win64/"), TEXT("C:/mv/wt/slot/MuseeVision/")),
+		FString(TEXT("C:/mv/wt/slot/MuseeVision/Data")));
+	TestEqual(TEXT("A packaged game's relative project folder holds it too, where Data/ is staged beside the game"),
+		DataRootOf(TEXT("D:/Builds/MuseeVision-20260927-1200/Windows/MuseeVision/Binaries/Win64/"), TEXT("../../../MuseeVision/")),
+		FString(TEXT("D:/Builds/MuseeVision-20260927-1200/Windows/MuseeVision/Data")));
+	const FString Root = DataRoot();
+	TestEqual(TEXT("This process resolves its data root the same way"), Root, DataRootOf(FPlatformProcess::BaseDir(), FPaths::ProjectDir()));
+	TestFalse(TEXT("as a full path"), FPaths::IsRelative(Root) || Root.Contains(TEXT("..")));
+	TestTrue(TEXT("that holds the records the museum reads while it runs"), FPaths::DirectoryExists(Root / TEXT("Time")) && FPaths::DirectoryExists(Root / TEXT("Light")));
+	return true;
+}
+
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FMuseeFoundationRecordsReadTest, "Musee.Foundation.Records.Read", Musee::Tests::Flags)
 
 bool FMuseeFoundationRecordsReadTest::RunTest(const FString& Parameters)

@@ -37,8 +37,10 @@ namespace Musee::Light
 		struct FPlacement
 		{
 			FMuseeKey Type;
-			const FMuseeStageAnchor* Mount = nullptr;
-			FVector Aim = FVector::ZeroVector;
+			/** Where it sits: its Mount anchor's frame, or the stage's axes at its point. */
+			FMuseeFrame Seat;
+			/** The point it is aimed at, in the stage's frame, if the schedule gives one. */
+			TOptional<FVector> Aim;
 			ELightOperation Operation = ELightOperation::Always;
 			FMuseeKey Follows;
 			USceneComponent* Body = nullptr;
@@ -61,6 +63,44 @@ namespace Musee::Light
 			return Found ? *Found : nullptr;
 		}
 
+		/** Three numbers as a point, or nothing. */
+		TOptional<FVector> PointOf(const TArray<double>& Numbers)
+		{
+			return Numbers.Num() == 3 ? TOptional<FVector>(FVector(Numbers[0], Numbers[1], Numbers[2])) : TOptional<FVector>();
+		}
+
+		/**
+		 * Where the entry sits and what it is aimed at (the stage contract): on a Mount anchor or at a point in the stage's
+		 * frame, never both, aimed at a point. At a point the aim is required, since a point has no axes of its own.
+		 * The reason it can't be seated, or empty.
+		 */
+		FString SeatOf(const FMuseeStageContext& Stage, const FLightScheduleLuminaire& Entry, FPlacement& Out)
+		{
+			const bool bMount = !Entry.Mount.IsEmpty();
+			if (bMount == !Entry.Point.IsEmpty()) { return TEXT("it needs either a mount or a point, and not both"); }
+			if (bMount)
+			{
+				const TOptional<FMuseeKey> Mount = FMuseeKey::Parse(Entry.Mount);
+				const FMuseeStageAnchor* Anchor = Mount.IsSet() ? Stage.FindAnchor(Mount.GetValue()) : nullptr;
+				if (!Anchor || Anchor->Kind != MountKind) { return FString::Printf(TEXT("the stage has no Mount anchor '%s'"), *Entry.Mount); }
+				Out.Seat = Anchor->Frame;
+			}
+			else
+			{
+				const TOptional<FVector> Point = PointOf(Entry.Point);
+				if (!Point.IsSet()) { return TEXT("its point isn't [x, y, z]"); }
+				Out.Seat = FMuseeFrame(Point.GetValue());
+			}
+			if (!Entry.Aim.IsEmpty())
+			{
+				Out.Aim = PointOf(Entry.Aim);
+				if (!Out.Aim.IsSet()) { return TEXT("its aim isn't a point [x, y, z]"); }
+				if ((Out.Aim.GetValue() - Out.Seat.OriginMeters).IsNearlyZero()) { return TEXT("it is aimed at the point it sits on"); }
+			}
+			if (!bMount && !Out.Aim.IsSet()) { return TEXT("a luminaire at a point needs its aim"); }
+			return FString();
+		}
+
 		/** Checks one entry; the reason it can't be placed, or empty. */
 		FString Check(const FMuseeStageContext& Stage, const FLightScheduleLuminaire& Entry, FPlacement& Out)
 		{
@@ -68,11 +108,8 @@ namespace Musee::Light
 			const FLightLuminaire* Luminaire = Type.IsSet() ? FindLuminaire(Type.GetValue()) : nullptr;
 			if (!Luminaire) { return FString::Printf(TEXT("its type '%s' isn't in the catalogue"), *Entry.Type); }
 			Out.Type = Type.GetValue();
-			const TOptional<FMuseeKey> Mount = FMuseeKey::Parse(Entry.Mount);
-			Out.Mount = Mount.IsSet() ? Stage.FindAnchor(Mount.GetValue()) : nullptr;
-			if (!Out.Mount || Out.Mount->Kind != MountKind) { return FString::Printf(TEXT("the stage has no Mount anchor '%s'"), *Entry.Mount); }
-			if (Entry.Aim.Num() == 3) { Out.Aim = FVector(Entry.Aim[0], Entry.Aim[1], Entry.Aim[2]).GetSafeNormal(); }
-			if (Entry.Aim.Num() != 0 && Out.Aim.IsZero()) { return TEXT("its aim isn't a direction [x, y, z]"); }
+			const FString WhyUnseated = SeatOf(Stage, Entry, Out);
+			if (!WhyUnseated.IsEmpty()) { return WhyUnseated; }
 			const TOptional<ELightOperation> Operation = ParseOperation(Entry.Operation);
 			if (!Operation.IsSet()) { return FString::Printf(TEXT("its operation '%s' is none of always, dusk and presence"), *Entry.Operation); }
 			Out.Operation = Operation.GetValue();
@@ -91,13 +128,17 @@ namespace Musee::Light
 			return FString();
 		}
 
-		/** The luminaire's frame in the stage: at its mount, its light leaving along the aim, its mount's z kept up. */
+		/**
+		 * The luminaire's frame in the stage: where it sits, its light leaving towards its aim, and its seat's z kept up (its
+		 * seat's y, when it is aimed straight along z). A linear luminaire lies along the frame's y axis, so one aimed
+		 * straight up or down at a point runs along the stage's x axis.
+		 */
 		FMuseeFrame FrameOf(const FPlacement& Placement)
 		{
-			const FMuseeFrame& Mount = Placement.Mount->Frame;
-			const FVector Along = Placement.Aim.IsZero() ? Mount.Rotation.GetAxisX() : Placement.Aim;
-			const FVector Up = FMath::Abs(Along | Mount.Rotation.GetAxisZ()) < 1.0 - UE_KINDA_SMALL_NUMBER ? Mount.Rotation.GetAxisZ() : Mount.Rotation.GetAxisY();
-			return FMuseeFrame(Mount.OriginMeters, FRotationMatrix::MakeFromXZ(Along, Up).ToQuat());
+			const FMuseeFrame& Seat = Placement.Seat;
+			const FVector Along = Placement.Aim.IsSet() ? (Placement.Aim.GetValue() - Seat.OriginMeters).GetSafeNormal() : Seat.Rotation.GetAxisX();
+			const FVector Up = FMath::Abs(Along | Seat.Rotation.GetAxisZ()) < 1.0 - UE_KINDA_SMALL_NUMBER ? Seat.Rotation.GetAxisZ() : Seat.Rotation.GetAxisY();
+			return FMuseeFrame(Seat.OriginMeters, FRotationMatrix::MakeFromXZ(Along, Up).ToQuat());
 		}
 
 		void Place(const FMuseeStageContext& Stage, const FLightScheduleLuminaire& Entry, const FPlacement& Placement)

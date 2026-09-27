@@ -51,7 +51,7 @@ Tier 1, one public type per header:
 | `MuseeRegistry.h` | `UMuseeRegistry`: `Register(Key, Component)`, `Unregister(Key, Component)`, `Find(Key)`, `OnRegistered()` |
 | `MuseePose.h`, `MuseeConfiguration.h` | `FMuseePose` (key and frame in the stage's frame); `FMuseeConfiguration` (`Find`, `Set`) |
 | `MuseeHumanMeasure.h` | `FMuseeHumanMeasure`: eye height, stature, capsule radius and half-height, step, slope, headroom, reach, guard height, pace |
-| `MuseeRecords.h` | `Musee::ReadRecords<T>(Path)`, `Musee::ReadRecord<T>(Path)`, `Musee::Records::DataRoot()`, `meta = (MuseeRequired)` |
+| `MuseeRecords.h` | `Musee::ReadRecords<T>(Path)`, `Musee::ReadRecord<T>(Path)`, `Musee::Records::DataRoot()` (and `DataRootOf`, the same resolution in the editor and a packaged game, where `Data/` is staged as loose files), `meta = (MuseeRequired)` |
 | `MuseeDependencySet.h` | `FMuseeDependencySet` (`FScope`, `Files`, `Hash`) |
 | `MuseeText.h`, `MuseeCaption.h` | `FMuseeText` (`ToText`, namespace `Musee`); `FMuseeCaption` (title, body, credit) |
 | `MuseeUse.h`, `MuseeUsable.h`, `MuseeCaptioned.h` | `FMuseeUse` (`Available`, `Unavailable`, `Seating`); `IMuseeUsable` (`Usage`, `Use`); `IMuseeCaptioned` (`Caption`) |

@@ -32,9 +32,14 @@ struct FLightScheduleLuminaire
 	UPROPERTY(meta = (MuseeRequired)) FString Id;
 	/** Its catalogue key. */
 	UPROPERTY(meta = (MuseeRequired)) FString Type;
-	/** The key of the Mount anchor it sits on. */
-	UPROPERTY(meta = (MuseeRequired)) FString Mount;
-	/** The direction its light leaves along, in the stage's frame; the mount's x axis when absent. */
+	/** The key of the Mount anchor it sits on; a luminaire has either a mount or a point, never both. */
+	UPROPERTY() FString Mount;
+	/** Where it sits when it has no Mount anchor: a point [x, y, z] in the stage's frame, in metres. */
+	UPROPERTY() TArray<double> Point;
+	/**
+	 * The point [x, y, z] its light is aimed at, in the stage's frame, in metres. Required at a point; on a mount, its
+	 * light leaves along the mount's x axis when absent.
+	 */
 	UPROPERTY() TArray<double> Aim;
 	/** `always`, `dusk` or `presence`. */
 	UPROPERTY(meta = (MuseeRequired)) FString Operation;

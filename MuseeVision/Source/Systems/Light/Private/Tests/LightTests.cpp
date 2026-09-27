@@ -135,9 +135,13 @@ namespace Musee::Light::Tests
 		const FString Folder = FPaths::ConvertRelativePathToFull(FPaths::AutomationTransientDir() / TEXT("MuseeLight/Stage"));
 		const FString Schedule = TEXT(R"({ "stage": "test", "daylight": [ { "opening": "roof", "glazing": "low-iron-glass", "weather": "paris", "control": "none" } ],
 			"luminaires": [
-				{ "id": "rim.1", "type": "linear-strip.2700k.slim", "mount": "test.rim.1", "aim": [0, 0, 1], "operation": "always", "follows": "test.pond.rim", "body": "test.basin", "length": 0.594 },
+				{ "id": "rim.1", "type": "linear-strip.2700k.slim", "mount": "test.rim.1", "aim": [1, 0, 2.39], "operation": "always", "follows": "test.pond.rim", "body": "test.basin", "length": 0.594 },
+				{ "id": "row", "type": "linear-strip.2700k.slim", "point": [0, -4.5, 6.873], "aim": [0, -4.5, 6.573], "operation": "presence", "length": 1.5 },
+				{ "id": "spot", "type": "track-spot.3000k.20deg", "point": [-3.0, 4.0, 5.0], "aim": [3.0, -4.0, 5.0], "operation": "always" },
 				{ "id": "lost", "type": "no-such.lamp", "mount": "test.rim.1", "operation": "always" },
-				{ "id": "short", "type": "linear-strip.2700k.slim", "mount": "test.rim.1", "operation": "always" } ] })");
+				{ "id": "short", "type": "linear-strip.2700k.slim", "mount": "test.rim.1", "operation": "always" },
+				{ "id": "both", "type": "track-spot.3000k.20deg", "mount": "test.rim.1", "point": [0, 0, 3], "aim": [0, 0, 0], "operation": "always" },
+				{ "id": "unaimed", "type": "track-spot.3000k.20deg", "point": [0, 0, 3], "operation": "always" } ] })");
 		FFileHelper::SaveStringToFile(Schedule, *(Folder / TEXT("Lighting.json")));
 
 		const FLightTestWorld World;
@@ -156,18 +160,36 @@ namespace Musee::Light::Tests
 		TArray<FMuseeFinding> Findings;
 		DressStage(Context, Findings);
 
-		TestEqual(TEXT("An unknown weather place, an unknown type and a line without length are findings"), Findings.Num(), 3);
+		TestEqual(TEXT("An unknown weather place and type, a line without length, a mount with a point and a point without aim are findings"), Findings.Num(), 5);
 		TArray<ULightLuminaireComponent*> Placed;
 		Stage->GetComponents(Placed);
-		if (TestEqual(TEXT("One luminaire is placed"), Placed.Num(), 1))
+		TestEqual(TEXT("Three luminaires are placed"), Placed.Num(), 3);
+		const auto Placement = [&Placed](const TCHAR* Id) -> ULightLuminaireComponent*
 		{
-			ULightLuminaireComponent* Rim = Placed[0];
+			const FName Tag(FString(LuminaireTagPrefix) + Id);
+			ULightLuminaireComponent* const* Found = Placed.FindByPredicate([Tag](const ULightLuminaireComponent* C) { return C->ComponentHasTag(Tag); });
+			return Found ? *Found : nullptr;
+		};
+		if (ULightLuminaireComponent* Rim = Placement(TEXT("rim.1")); TestNotNull(TEXT("The rim, on its mount"), Rim))
+		{
 			TestTrue(TEXT("on the moving body"), Rim->GetAttachParent() == Basin);
 			TestTrue(TEXT("at its mount in the stage"), Rim->GetComponentLocation().Equals(FVector(100.0, 0.0, 139.0), 0.01));
-			TestTrue(TEXT("its light leaving along the aim"), Rim->GetForwardVector().Equals(FVector::UpVector, 1e-4));
-			TestTrue(TEXT("tagged with its id"), Rim->ComponentHasTag(TEXT("musee.luminaire:rim.1")));
+			TestTrue(TEXT("its light leaving towards the point it is aimed at"), Rim->GetForwardVector().Equals(FVector::UpVector, 1e-4));
 			TestTrue(TEXT("following its channel"), Rim->Follows() == FMuseeKey(TEXTVIEW("test.pond.rim")));
 			TestTrue(TEXT("kept with the stage"), Stage->GetInstanceComponents().Contains(Rim));
+		}
+		if (ULightLuminaireComponent* Row = Placement(TEXT("row")); TestNotNull(TEXT("A row, at its point"), Row))
+		{
+			TestTrue(TEXT("sits at the point"), Row->GetComponentLocation().Equals(FVector(0.0, -450.0, 687.3), 0.01));
+			TestTrue(TEXT("shines straight down onto its aim"), Row->GetForwardVector().Equals(FVector::DownVector, 1e-4));
+			TestTrue(TEXT("and, aimed straight down, runs along the stage's x axis"), FMath::IsNearlyEqual(FMath::Abs(Row->GetRightVector().X), 1.0, 1e-4));
+			TestTrue(TEXT("the length laid"), FMath::IsNearlyEqual(Row->Length().Get(), 1.5));
+			TestTrue(TEXT("on the stage, riding no body"), Row->GetAttachParent() == Stage->GetRootComponent());
+		}
+		if (ULightLuminaireComponent* Spot = Placement(TEXT("spot")); TestNotNull(TEXT("A spot, at its point"), Spot))
+		{
+			TestTrue(TEXT("aimed across the room at its target"), Spot->GetForwardVector().Equals(FVector(0.6, -0.8, 0.0), 1e-4));
+			TestTrue(TEXT("its up kept up"), Spot->GetUpVector().Equals(FVector::UpVector, 1e-4));
 		}
 		IFileManager::Get().DeleteDirectory(*FPaths::GetPath(Folder), false, true);
 		return true;

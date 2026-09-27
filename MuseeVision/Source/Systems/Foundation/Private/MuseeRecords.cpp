@@ -4,6 +4,7 @@
 #include "HAL/FileManager.h"
 #include "JsonObjectConverter.h"
 #include "Math/UnitConversion.h"
+#include "HAL/PlatformProcess.h"
 #include "Misc/FileHelper.h"
 #include "Misc/Paths.h"
 #include "Misc/SecureHash.h"
@@ -571,7 +572,12 @@ namespace Musee::Records
 
 	FString DataRoot()
 	{
-		return FPaths::ConvertRelativePathToFull(FPaths::ProjectDir() / TEXT("Data"));
+		return DataRootOf(FPlatformProcess::BaseDir(), FPaths::ProjectDir());
+	}
+
+	FString DataRootOf(const FString& BaseDir, const FString& ProjectDir)
+	{
+		return FPaths::ConvertRelativePathToFull(BaseDir, ProjectDir / TEXT("Data"));
 	}
 
 	bool ReadInto(const UScriptStruct& Type, const FString& Path, bool bExactlyOne, TFunctionRef<void*()> Emplace, FString& OutError)

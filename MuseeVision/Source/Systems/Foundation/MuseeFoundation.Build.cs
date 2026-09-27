@@ -21,5 +21,9 @@ public class MuseeFoundation : MuseeModuleRules
 	public MuseeFoundation(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PrivateDependencyModuleNames.AddRange(new string[] { "Json", "JsonUtilities" });
+		// The records under Data/ that the museum reads while it runs (the clock's cities, the weather's normals, the
+		// luminaire catalogue) are staged with the game as loose, non-UFS files, at the same place under the project as in
+		// the editor, so Musee::Records::DataRoot() finds them one way in both.
+		RuntimeDependencies.Add("$(ProjectDir)/Data/...", StagedFileType.NonUFS);
 	}
 }

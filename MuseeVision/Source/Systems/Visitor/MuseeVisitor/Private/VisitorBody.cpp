@@ -17,29 +17,18 @@
 #include "MuseeCollision.h"
 #include "MuseeCommand.h"
 #include "MuseeHumanMeasure.h"
+#include "MuseeSetting.h"
 #include "MuseeUsable.h"
 #include "VisitorAdapter.h"
 #include "VisitorEye.h"
 #include "VisitorOverlay.h"
+#include "VisitorPace.h"
 #include "VisitorReach.h"
 
 namespace Musee::Visitor
 {
 	namespace
 	{
-		/**
-		 * The mean free walking speed of adult pedestrians, about 1.35 m/s (J. J. Fruin, Pedestrian Planning and Design,
-		 * 1971), the pace at which a visitor walks a gallery.
-		 */
-		constexpr double WalkingMetersPerSecond = 1.35;
-
-		/**
-		 * The fastest walk: people change from walking to running at about 2.0 m/s (A. Hreljac, "Preferred and
-		 * energetically optimal gait transition speeds in human locomotion", Medicine and Science in Sports and
-		 * Exercise 25, 1993: 2.06 m/s). Striding is walking at that speed.
-		 */
-		constexpr double StridingMetersPerSecond = 2.0;
-
 		/** Standard gravity, 9.80665 m/s^2 (3rd CGPM, 1901); the project's gravity is the same. */
 		constexpr double StandardGravity = 9.80665;
 
@@ -86,7 +75,8 @@ AVisitorBody::AVisitorBody()
 	bUseControllerRotationRoll = false;
 
 	UCharacterMovementComponent* Movement = GetCharacterMovement();
-	Movement->MaxWalkSpeed = static_cast<float>(ToEngine(WalkSpeed()));
+	// The default pace until play, when the body takes the pace chosen (FollowPace).
+	Movement->MaxWalkSpeed = static_cast<float>(ToEngine(FVisitorPace::Of(FVisitorPace::AsBuilt()).Walk));
 	Movement->MaxStepHeight = static_cast<float>(ToEngine(FMuseeHumanMeasure::MaxStepHeight));
 	Movement->SetWalkableFloorAngle(static_cast<float>(FMuseeHumanMeasure::MaxWalkableSlope.Get()));
 	Movement->JumpZVelocity = static_cast<float>(ToEngine(HopSpeed()));
@@ -106,12 +96,12 @@ Musee::Meters AVisitorBody::UseDistance()
 
 Musee::MetersPerSecond AVisitorBody::WalkSpeed()
 {
-	return Musee::MetersPerSecond(Musee::Visitor::WalkingMetersPerSecond);
+	return FVisitorPace::Chosen().Walk;
 }
 
 Musee::MetersPerSecond AVisitorBody::StrideSpeed()
 {
-	return Musee::MetersPerSecond(Musee::Visitor::StridingMetersPerSecond);
+	return FVisitorPace::Chosen().Stride;
 }
 
 Musee::MetersPerSecond AVisitorBody::HopSpeed()
@@ -128,11 +118,35 @@ FVector AVisitorBody::EyeLocation() const
 void AVisitorBody::BeginPlay()
 {
 	Super::BeginPlay();
+	if (FMuseeSetting* Pace = FMuseeSetting::Find(FVisitorPace::SettingKey()))
+	{
+		PaceHandle = Pace->OnChanged().AddUObject(this, &AVisitorBody::FollowPace);
+	}
+	FollowPace();
 	if (const TSharedPtr<IVisitorAdapter> Adapter = Musee::Visitor::ActiveAdapter())
 	{
 		AdapterName = Adapter->Name();
 		Adapter->Adopt(*this);
 	}
+}
+
+void AVisitorBody::EndPlay(EEndPlayReason::Type Reason)
+{
+	if (FMuseeSetting* Pace = FMuseeSetting::Find(FVisitorPace::SettingKey()))
+	{
+		Pace->OnChanged().Remove(PaceHandle);
+	}
+	Super::EndPlay(Reason);
+}
+
+void AVisitorBody::FollowPace(const FMuseeSetting&)
+{
+	FollowPace();
+}
+
+void AVisitorBody::FollowPace()
+{
+	GetCharacterMovement()->MaxWalkSpeed = static_cast<float>(Musee::ToEngine(bStriding ? StrideSpeed() : WalkSpeed()));
 }
 
 void AVisitorBody::TurnBy(Musee::Degrees Angle)
@@ -277,12 +291,14 @@ void AVisitorBody::Turn(const FInputActionValue& Value)
 
 void AVisitorBody::StrideOn()
 {
-	GetCharacterMovement()->MaxWalkSpeed = static_cast<float>(Musee::ToEngine(StrideSpeed()));
+	bStriding = true;
+	FollowPace();
 }
 
 void AVisitorBody::StrideOff()
 {
-	GetCharacterMovement()->MaxWalkSpeed = static_cast<float>(Musee::ToEngine(WalkSpeed()));
+	bStriding = false;
+	FollowPace();
 }
 
 void AVisitorBody::RunCommand(const TCHAR* Name)

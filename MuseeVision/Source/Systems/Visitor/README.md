@@ -11,6 +11,7 @@ contracts.
 | `VisitorBody.h` | `AVisitorBody` (`/Script/MuseeVisitor.VisitorBody`): the body from `FMuseeHumanMeasure`; walk, stride, hop, look; `FindAlong`, `Look`, `UseLooked`; the hour and city keys; `OnControlsReady` for adapters |
 | `VisitorEye.h` | `UVisitorEye`: the one unbound post-process volume, camera fields only (EV100 metering, adaptation, ACES tone curve with its shoulder); `ExposureOf(Nits)` |
 | `VisitorOverlay.h` | `UVisitorOverlay`: the caption, the use offered, and a message after a key |
+| `VisitorPace.h` | `FVisitorPace`: the setting `visitor.pace`, `as-built` (the default, 2.6 m/s walking, 5.2 m/s striding) or `physical` (1.35 m/s, 2.0 m/s); the body follows it as it changes |
 | `VisitorAdapter.h` | `IVisitorAdapter`, `RegisterAdapter`, `ActiveAdapter`: the screen or the headset, exactly one active |
 
 Desktop: W A S D walk, the mouse looks, the left button or E uses, Shift strides, Space hops, H another hour, C the
@@ -29,4 +30,4 @@ and an arm's reach, down to the floor.
 
 ## Tests
 
-`Musee.Visitor.Body`, `Eye`, `Use`, `Overlay`, `Adapter`.
+`Musee.Visitor.Body`, `Eye`, `Use`, `Pace`, `Overlay`, `Adapter`.

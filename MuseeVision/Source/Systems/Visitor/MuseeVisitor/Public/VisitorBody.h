@@ -11,6 +11,7 @@ class UInputAction;
 class UInputMappingContext;
 class UVisitorEye;
 class UVisitorOverlay;
+class FMuseeSetting;
 struct FInputActionValue;
 
 /**
@@ -34,7 +35,10 @@ public:
 	/** How far from the eye the visitor can use a thing: one pace towards it and an arm's reach, down to the floor. */
 	[[nodiscard]] static Musee::Meters UseDistance();
 
-	/** The walking and striding speeds, and the take-off speed of a hop that lifts the feet one step's rise. */
+	/**
+	 * The walking and striding speeds of the pace chosen now (FVisitorPace, the setting `visitor.pace`), and the take-off
+	 * speed of a hop that lifts the feet one step's rise.
+	 */
 	[[nodiscard]] static Musee::MetersPerSecond WalkSpeed();
 	[[nodiscard]] static Musee::MetersPerSecond StrideSpeed();
 	[[nodiscard]] static Musee::MetersPerSecond HopSpeed();
@@ -81,6 +85,7 @@ public:
 	UVisitorOverlay* Overlay() const { return VisitorOverlay; }
 
 	virtual void BeginPlay() override;
+	virtual void EndPlay(EEndPlayReason::Type Reason) override;
 	virtual void Tick(float DeltaSeconds) override;
 	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
 	virtual void PawnClientRestart() override;
@@ -90,6 +95,9 @@ private:
 	void Walk(const FInputActionValue& Value);
 	void Turn(const FInputActionValue& Value);
 	void Leave();
+	/** Sets the body's speed to the chosen pace, walking or striding. */
+	void FollowPace();
+	void FollowPace(const FMuseeSetting& Changed);
 
 	UPROPERTY(VisibleAnywhere, Category = "Visitor")
 	TObjectPtr<UCameraComponent> EyeCamera;
@@ -107,6 +115,8 @@ private:
 	TMap<FName, TObjectPtr<UInputAction>> Actions;
 
 	TWeakObjectPtr<UObject> Looked;
+	bool bStriding = false;
+	FDelegateHandle PaceHandle;
 	FControlsReady ControlsReady;
 	FName AdapterName;
 };
