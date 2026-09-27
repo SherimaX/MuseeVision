@@ -11,6 +11,38 @@ namespace Musee::Sphere
 {
 	namespace
 	{
+		/**
+		 * A circle about C in the turned profile, (r, z), from one angle to another measured from its lowest point: inside
+		 * the circle with its corners on it, or outside with its sides tangent to it, within the seam tolerance.
+		 */
+		void TurnedArc(TArray<FVector2D>& Profile, double Radius, double From, double To, bool bOutside)
+		{
+			const double Widest = 2.0 * FMath::Acos(Radius / (Radius + Plan::SeamToleranceMeters));
+			const int32 Sides = FMath::CeilToInt32(FMath::Abs(To - From) / Widest);
+			const double Step = (To - From) / Sides;
+			auto On = [](double Angle, double R) { return FVector2D(R * FMath::Sin(Angle), Plan::CentreZ - R * FMath::Cos(Angle)); };
+			Profile.Add(On(From, Radius));
+			for (int32 Side = bOutside ? 0 : 1; Side < Sides; ++Side)
+			{
+				Profile.Add(bOutside ? On(From + (Side + 0.5) * Step, Radius / FMath::Cos(0.5 * Step)) : On(From + Side * Step, Radius));
+			}
+			Profile.Add(On(To, Radius));
+		}
+
+		/** The Sphere turned about its axis (§1, volume), for the check of the stages stacked on the Atrium's axis. */
+		void TurnedVolume(FSiteDescription& Out)
+		{
+			TArray<FVector2D>& Profile = Out.Footprint.TurnedProfileMeters;
+			Profile = {{0.0, Plan::PortZ}, {Plan::NeckColumn, Plan::PortZ}};
+			TurnedArc(Profile, Plan::SeamRadius, FMath::Asin(Plan::NeckColumn / Plan::SeamRadius), 0.5 * UE_DOUBLE_PI, false);
+			const double DripFoot = Plan::WashInnerZ - Plan::WashFallPerMeter * (Plan::DripEdge - Plan::WashInnerR);
+			Profile.Append({{Plan::WashInnerR, Plan::CentreZ}, {Plan::WashInnerR, Plan::WashInnerZ}, {Plan::DripEdge, DripFoot}});
+			// The dome's envelope starts on the drip ring's edge, at DripTop.
+			const double Envelope = Plan::EnvelopeRadius;
+			TurnedArc(Profile, Envelope, UE_DOUBLE_PI - FMath::Asin(Plan::DripEdge / Envelope), UE_DOUBLE_PI - FMath::Asin(Plan::EnvelopeCrown / Envelope), true);
+			Profile.Append({{Plan::EnvelopeCrown, Plan::VolumeTop}, {0.0, Plan::VolumeTop}});
+		}
+
 		/** The plan outline: the 96-gon round the drip ring, first corner at bearing 0, clockwise on the plan. */
 		void Footprint(FSiteDescription& Out)
 		{
@@ -21,12 +53,14 @@ namespace Musee::Sphere
 			}
 			Out.Footprint.BottomMeters = Plan::PortZ;
 			Out.Footprint.TopMeters = Plan::FootprintTop;
+			TurnedVolume(Out);
 		}
 
 		/**
 		 * The port: the plane z 7.715 on the axis, facing down (its x), with y east, where the throat's foot stands on the
 		 * Atrium's collar. It meets atrium.up, whose collar iris closes it; the Sphere builds no closure on it. It receives
-		 * the Atrium's well, the class's circle r 2.300 from the plane to the well's top, here its bounding prism.
+		 * the Atrium's well, from the plane to the well's top, declared by its bounding prism; Site shapes it as the class's
+		 * circle r 2.300 less its notches.
 		 */
 		void Ports(FSiteDescription& Out)
 		{
@@ -41,6 +75,10 @@ namespace Musee::Sphere
 			Down.Well.bServing = false;
 			Down.Well.MinMeters = FVector(-Plan::WellRadius, -Plan::WellRadius, Plan::PortZ);
 			Down.Well.MaxMeters = FVector(Plan::WellRadius, Plan::WellRadius, Plan::WellTop);
+			// What the class and this seam let the Sphere build in the well (§2, the received well): the rails, the neck's and
+			// the platform's irises, the mast and its dogs, and the platform's door sill.
+			Down.Well.Parts = {{TEXT("neck.rail."), TEXT("rail")}, {TEXT("neck.iris."), TEXT("iris")}, {TEXT("platform.iris."), TEXT("iris")},
+				{TEXT("mast.dog"), TEXT("dog")}, {TEXT("mast"), TEXT("mast")}, {TEXT("platform.sill"), TEXT("sill")}};
 		}
 
 		FFormOpening& Opening(FSiteDescription& Out, const FString& Local, EFormOpeningKind Kind, const TCHAR* Enclosure, const FMuseeFrame& Frame,

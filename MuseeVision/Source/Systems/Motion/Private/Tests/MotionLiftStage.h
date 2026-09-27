@@ -27,9 +27,10 @@ namespace Musee::Motion::Tests
 	/**
 	 * The Atrium's lift as its sheet draws it (section 2, the anchors; section 3.6, the car): the car drawn at the Atrium
 	 * stop carrying its two leaves and the Cube mast's head; the landing's two leaves; the collar iris's seven blades at
-	 * their pins; the call on the waiting mark and the panel in the car. Each body carries a block where its part is.
+	 * their pins; the call on the waiting mark and the panel in the car. Each body carries a block where its part is. The
+	 * context carries the ports the site plan mates, none unless given.
 	 */
-	inline void DressAtrium(FTestStage& Stage, TArray<FMuseeFinding>& OutFindings)
+	inline void DressAtrium(FTestStage& Stage, TArray<FMuseeFinding>& OutFindings, TArray<FMuseeKey> MatedPorts = {})
 	{
 		TArray<FMuseeStageAnchor> Anchors = {
 			Anchor(TEXT("atrium.car"), TEXT("Body"), FVector::ZeroVector),
@@ -54,7 +55,9 @@ namespace Musee::Motion::Tests
 			const FVector Inward = -FVector(BladePins[Blade].X, BladePins[Blade].Y, 0.0).GetSafeNormal() * 0.65;
 			Stage.AddBody(LiftKey(*BladeName), BladePins[Blade], Inward - FVector(0.0, 0.0, 0.001), FVector(0.6, 0.3, 0.001));
 		}
-		DressMechanisms(Stage.Context(LiftKey(TEXT("atrium")), TEXT("Stages/atrium"), MoveTemp(Anchors)), OutFindings);
+		FMuseeStageContext Context = Stage.Context(LiftKey(TEXT("atrium")), TEXT("Stages/atrium"), MoveTemp(Anchors));
+		Context.MatedPorts = MoveTemp(MatedPorts);
+		DressMechanisms(Context, OutFindings);
 	}
 
 	/** Every machine on the stage, in the order the dresser placed them. */

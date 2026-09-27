@@ -145,6 +145,11 @@ namespace Musee::Studio
 			Level.PackageName = Options.Paths.StageLevel(Folder);
 			Level.Bodies = MoveTemp(Cast.Bodies);
 			Level.Placements = MoveTemp(Cast.Placements);
+			for (const FSiteBarrier& Barrier : Fabric.Description.Barriers)
+			{
+				Level.Barriers.Add({AssetToken(Barrier.Key.ToName()), Barrier.Key.ToName(), Barrier.Frame.OriginMeters, Barrier.Frame.Rotation,
+					Barrier.HalfSizeMeters});
+			}
 			Level.DependencyHash = LevelDependencyHash(Fabric, ScheduleDir);
 			const TArray<FMuseeStageAnchor>& Anchors = Fabric.Description.Anchors;
 			const TArray<FMuseeKey>& Mated = Fabric.MatedPorts;

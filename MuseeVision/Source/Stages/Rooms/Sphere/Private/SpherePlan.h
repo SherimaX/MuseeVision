@@ -23,6 +23,21 @@ namespace Musee::Sphere::Plan
 	/** The mating plane (sphere.down, the throat's foot on the Atrium's collar) and the gilt ball's top. */
 	inline constexpr double PortZ = 7.715;
 	inline constexpr double FootprintTop = 37.440;
+	/**
+	 * The volume turned about the axis (§1, volume; the seams): the neck column r 3.000 from the plane up to the seam
+	 * sphere R 14.000 about C, which the Sphere keeps inside of (drawn inside it, its corners on it, to the museum's chord
+	 * tolerance of 1 mm, MuseeFormMaking's Stations.h); out to the drum's head r 14.080 at the equator and up to the wash;
+	 * down the wash to the drip ring's edge r 14.320 and up it to 22.656; the dome's envelope R 14.335 about C, drawn
+	 * outside it, up to the boss r 0.600 at its crossing; and the top 37.450.
+	 */
+	inline constexpr double NeckColumn = 3.000;
+	inline constexpr double SeamRadius = 14.000;
+	inline constexpr double SeamToleranceMeters = 0.001;
+	inline constexpr double DripEdge = 14.320;
+	inline constexpr double DripTop = 22.656;
+	inline constexpr double EnvelopeRadius = 14.335;
+	inline constexpr double EnvelopeCrown = 0.600;
+	inline constexpr double VolumeTop = 37.450;
 
 	// ---- §2 the port and the well it receives (class iris.4600, atrium.md §2) ---------------------------------------------
 	inline constexpr const TCHAR* PortClass = TEXT("iris.4600");

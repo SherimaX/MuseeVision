@@ -7,13 +7,43 @@
  * furnish, and the hall with the pieces that bound it.
  *
  * Form's openings are planes: the drum's glazing and the cove are cylindrical bands, declared by their developed size
- * about the axis at their mid-height, the nearest a plane frame can say of them. The wells are Site's boxes about the
- * axis (the class's circle r 2.300 with its rail notches is Site's to make, KIT-2).
+ * about the axis at their mid-height, the nearest a plane frame can say of them. The wells are boxes about the axis, which
+ * Site shapes as the class's circle r 2.300 less its rail notches.
  */
 namespace Musee::Atrium
 {
 	namespace
 	{
+		/**
+		 * The Atrium turned about its axis, for the check of the stages stacked on it (§1, the seams; the Sphere's sheet
+		 * draws the other side): out to the portal's corners, the farthest it reaches; up to the corona's top and in along
+		 * the wash to the drum's head, r 14.080; down to the equator; in to the seam sphere R 14.000 about C and down it,
+		 * outside it, to the neck column; and down the column to the collar's top, the Sphere's port plane.
+		 */
+		void TurnedVolume(FSiteDescription& Out)
+		{
+			const Plan::FStep& WashOuter = Plan::EntablatureUpper[UE_ARRAY_COUNT(Plan::EntablatureUpper) - 2];
+			const Plan::FStep& WashInner = Plan::EntablatureUpper[UE_ARRAY_COUNT(Plan::EntablatureUpper) - 1];
+			const double Reach = FVector2D(Plan::PortalFrontX, Plan::PortalHalfWidth).Size();
+			TArray<FVector2D>& Profile = Out.Footprint.TurnedProfileMeters;
+			Profile = {{0.0, Plan::FootprintBottom}, {Reach, Plan::FootprintBottom}, {Reach, WashOuter.B}, {WashOuter.A, WashOuter.B},
+				{WashInner.A, WashInner.B}, {WashInner.A, Plan::SphereCentreZ}};
+			// The seam, from its equator down to the neck column: angles from the sphere's lowest point, its sides tangent to it.
+			const double R = Plan::SeamRadius;
+			const double From = 0.5 * UE_DOUBLE_PI;
+			const double To = FMath::Asin(Plan::NeckColumn / R);
+			const double Widest = 2.0 * FMath::Acos(R / (R + Plan::SeamToleranceMeters));
+			const int32 Sides = FMath::CeilToInt32((From - To) / Widest);
+			const double Step = (From - To) / Sides;
+			auto On = [R](double Angle, double Radius) { return FVector2D(Radius * FMath::Sin(Angle), Plan::SphereCentreZ - Radius * FMath::Cos(Angle)); };
+			Profile.Add(On(From, R));
+			for (int32 Side = 0; Side < Sides; ++Side)
+			{
+				Profile.Add(On(From - (Side + 0.5) * Step, R / FMath::Cos(0.5 * Step)));
+			}
+			Profile.Append({On(To, R), {Plan::NeckColumn, Plan::UpPlane}, {0.0, Plan::UpPlane}});
+		}
+
 		void Footprint(FSiteDescription& Out)
 		{
 			const double Half = Plan::PortalHalfWidth;
@@ -32,6 +62,7 @@ namespace Musee::Atrium
 			Out.Footprint.Kind = ESiteFootprintKind::Building;
 			Out.Footprint.BottomMeters = Plan::FootprintBottom;
 			Out.Footprint.TopMeters = Plan::FootprintTop;
+			TurnedVolume(Out);
 		}
 
 		/** A vertical port's frame: x out of the stage along ±z. */
@@ -132,8 +163,9 @@ namespace Musee::Atrium
 
 		/**
 		 * The anchors (§2): the moving bodies, drawn closed (the car at the Atrium stop, its leaves and the landing's
-		 * shut, the iris's blades shut); the two controls; the stele's wall and the eleven bays' walls. Anchors on the car
-		 * are declared where they stand with the car at the Atrium stop, whose frame is the stage's.
+		 * shut, the iris's blades shut), the car's leaves and the mast's head riding the car; the two controls; the stele's
+		 * wall and the eleven bays' walls. Anchors on the car are declared where they stand with the car at the Atrium stop,
+		 * whose frame is the stage's.
 		 */
 		void Anchors(FSiteDescription& Out)
 		{
@@ -147,6 +179,12 @@ namespace Musee::Atrium
 			{
 				Anchor(Out, IrisBladeBody(Blade), TEXT("Body"), IrisPinFrame(Blade));
 			}
+			// The car carries its two leaves and the Cube mast's head (§3.6): each rides the car, hung from it where drawn.
+			for (const TCHAR* Leaf : {TEXT("car.leaf.north"), TEXT("car.leaf.south")})
+			{
+				Out.BodyParents.Add(Key(Leaf), CarBody());
+			}
+			Out.BodyParents.Add(MastHeadBody(), CarBody());
 			Anchor(Out, Key(TEXT("call")), TEXT("Use"), FMuseeFrame(FVector(Plan::CallX, 0.0, 0.0)));
 			Anchor(Out, Key(TEXT("car.panel")), TEXT("Use"), FMuseeFrame());
 			Anchor(Out, Key(TEXT("stele")), TEXT("Wall"), FrameOfAxes(FVector(Plan::SteleWestX, Plan::SteleNorthY, 0.0), FVector(0.0, 1.0, 0.0),
@@ -198,6 +236,11 @@ namespace Musee::Atrium
 
 	void DescribeSite(FSiteDescription& Out)
 	{
+		// The stele's barrier (§3.7): the box of the foot's plan up to the glass's top stops the body only; the look passes.
+		const double (&Foot)[2][3] = Plan::SteleFoot;
+		const FVector Low(Foot[0][0], Foot[0][1], Foot[0][2]);
+		const FVector High(Foot[1][0], Foot[1][1], Plan::SteleGlass[1][2]);
+		Out.Barriers.Add({Key(TEXT("stele.barrier")), FMuseeFrame(0.5 * (Low + High)), 0.5 * (High - Low)});
 		Footprint(Out);
 		Ports(Out);
 		Openings(Out);

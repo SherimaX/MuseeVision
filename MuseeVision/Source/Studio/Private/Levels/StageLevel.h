@@ -55,6 +55,18 @@ namespace Musee::Studio
 		TArray<FStageInstance> Instances;
 	};
 
+	/** A box on the stage's frame that stops only the visitor's body (a barrier round a work): unseen, with no mesh. */
+	struct FStageBarrier
+	{
+		/** The component's name, unique within the stage. */
+		FString Name;
+		/** The barrier's key, the component's tag. */
+		FName Key;
+		FVector LocationMeters = FVector::ZeroVector;
+		FQuat Rotation = FQuat::Identity;
+		FVector HalfSizeMeters = FVector::ZeroVector;
+	};
+
 	/**
 	 * A stage's level: a level without World Partition holding one actor named after the stage. The actor's root is
 	 * the stage's origin; its bodies hang from the root, and every placement is a static mesh component on its body or
@@ -67,6 +79,7 @@ namespace Musee::Studio
 		FString PackageName;
 		TArray<FStageBody> Bodies;
 		TArray<FStagePlacement> Placements;
+		TArray<FStageBarrier> Barriers;
 		/** The hash of everything else the level is made from: the records its dressing reads. Part of its input hash. */
 		FString DependencyHash;
 		/** Furnishes the stage actor further (DressStage); false, with the reason, when it can't. */
@@ -76,7 +89,7 @@ namespace Musee::Studio
 	/** The revision of the stage-level writer, part of every stage level's input hash. */
 	inline constexpr int64 StageLevelRevision = 3;
 
-	/** A stage level's input hash: the writer's revision, the stage's name, its bodies, placements, instances and dependencies. */
+	/** A stage level's input hash: the writer's revision, the stage's name, its bodies, placements, instances, barriers and dependencies. */
 	FString HashOf(const FStageLevel& Stage);
 
 	/** Writes a stage's level, unless the level on disk already carries the same input hash. */

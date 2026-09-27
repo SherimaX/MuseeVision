@@ -84,6 +84,14 @@ TArray<FMuseeFinding> Musee::Site::CheckDescription(const FSiteDescription& Desc
 			Break(FString::Printf(TEXT("body %s rides round a loop back on itself"), *Riding.Key.ToString()), Riding.Key);
 		}
 	}
+	for (const FSiteBarrier& Barrier : Description.Barriers)
+	{
+		CheckKey(Barrier.Key, TEXT("barrier"));
+		if (Barrier.HalfSizeMeters.GetMin() <= 0.0)
+		{
+			Break(FString::Printf(TEXT("barrier %s has no size"), *Barrier.Key.ToString()), Barrier.Key);
+		}
+	}
 	for (const FFormOpening& Opening : Description.Openings)
 	{
 		CheckKey(Opening.Key, TEXT("opening"));

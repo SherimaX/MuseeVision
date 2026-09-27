@@ -1,5 +1,6 @@
 #include "Levels/StageLevel.h"
 
+#include "Components/BoxComponent.h"
 #include "Components/InstancedStaticMeshComponent.h"
 #include "Components/SceneComponent.h"
 #include "Components/StaticMeshComponent.h"
@@ -9,6 +10,7 @@
 #include "Make/EngineUnits.h"
 #include "Make/InputHash.h"
 #include "Misc/PackageName.h"
+#include "MuseeCollision.h"
 
 namespace Musee::Studio
 {
@@ -109,7 +111,24 @@ namespace Musee::Studio
 			return true;
 		}
 
-		/** Puts the stage's actor, its bodies and every placement into the draft, then dresses it. */
+		/** A barrier's box: unseen, stopping only the body. */
+		bool AddBarrier(AActor& Actor, USceneComponent& Frame, const FStageBarrier& Barrier, FString& OutWhy)
+		{
+			if (NameTaken(Actor, Barrier.Name, OutWhy))
+			{
+				return false;
+			}
+			UBoxComponent* Box = AddComponent<UBoxComponent>(Actor, Barrier.Name, EComponentMobility::Static);
+			Box->SetupAttachment(&Frame);
+			Box->SetRelativeTransform(FTransform(Barrier.Rotation, EngineFromMeters(Barrier.LocationMeters)));
+			Box->SetBoxExtent(EngineFromMeters(Barrier.HalfSizeMeters), /*bUpdateOverlaps*/ false);
+			Box->SetCollisionProfileName(Musee::Collision::Barrier.Profile());
+			Box->SetHiddenInGame(true);
+			Box->ComponentTags.Add(Barrier.Key);
+			return true;
+		}
+
+		/** Puts the stage's actor, its bodies, every placement and every barrier into the draft, then dresses it. */
 		bool Furnish(FLevelDraft& Draft, const FStageLevel& Stage, FString& OutWhy)
 		{
 			AActor* Actor = Draft.Spawn(AActor::StaticClass(), Stage.StageName, FTransform::Identity);
@@ -128,6 +147,13 @@ namespace Musee::Studio
 			for (const FStagePlacement& Placement : Stage.Placements)
 			{
 				if (!AddPlacement(*Actor, *Frame, Bodies, Placement, OutWhy))
+				{
+					return false;
+				}
+			}
+			for (const FStageBarrier& Barrier : Stage.Barriers)
+			{
+				if (!AddBarrier(*Actor, *Frame, Barrier, OutWhy))
 				{
 					return false;
 				}
@@ -157,6 +183,10 @@ namespace Musee::Studio
 			{
 				Hasher.Add(Instance.LocationMeters).Add(Instance.Rotation);
 			}
+		}
+		for (const FStageBarrier& Barrier : Stage.Barriers)
+		{
+			Hasher.Add(Barrier.Name).Add(Barrier.Key.ToString()).Add(Barrier.LocationMeters).Add(Barrier.Rotation).Add(Barrier.HalfSizeMeters);
 		}
 		return Hasher.Finish();
 	}

@@ -46,6 +46,13 @@ namespace Musee::Atrium::Plan
 	inline constexpr double FootprintTop = 22.580;
 	/** The footprint's arc is set out at 720 stations of the full turn, as the oval's. */
 	inline constexpr int32 FootprintStations = 720;
+	/**
+	 * The volume turned about the axis (§1, the seams) keeps to the Atrium's side of the seam sphere, drawn outside it with
+	 * sides that leave it by at most the museum's chord tolerance, 1 mm (MuseeFormMaking's Stations.h). Inside the seam,
+	 * the neck column r 3.000 is the Sphere's from the collar's top (UpPlane) up to the sphere.
+	 */
+	inline constexpr double SeamToleranceMeters = 0.001;
+	inline constexpr double NeckColumn = 3.000;
 
 	// ---- §2 the ports ----------------------------------------------------------------------------------------------------
 	/** atrium.west: the base's face r 14.800 on the axis; its wall 0.800 deep (r 14.000 → 14.800). */
