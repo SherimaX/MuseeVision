@@ -26,9 +26,12 @@ New-Item -ItemType Directory -Force (Split-Path -Parent $Log) | Out-Null
 $Arguments = "`"$Project\MuseeVision.uproject`" -run=MuseeMake -Stage=$Stage -unattended -nosplash -nosound -abslog=`"$Log`""
 & $Lock -Exe "$Engine\Engine\Binaries\Win64\UnrealEditor-Cmd.exe" -Args $Arguments -WaitMinutes $WaitMinutes -RunMinutes $RunMinutes
 $Code = $LASTEXITCODE
-# The lock relays its own failures (3, 4); the commandlet's answer is the one the engine logs.
-$Returned = Select-String -Path $Log -Pattern 'Commandlet->Main return this error code: (\d+)' -ErrorAction SilentlyContinue | Select-Object -Last 1
-if ($Code -ne 3 -and $Code -ne 4) { $Code = if ($Returned) { [int]$Returned.Matches[0].Groups[1].Value } else { 1 } }
+# The lock relays its own failures (3, 4); the commandlet's answer is the one the engine logs. UE 5.8 writes it as
+# "Commandlet <name> finished execution (result N)" when the engine exits; older engines as "Commandlet->Main return
+# this error code: N".
+$Returned = Select-String -Path $Log -Pattern 'Commandlet \S+ finished execution \(result (-?\d+)\)|Commandlet->Main return this error code: (-?\d+)' -ErrorAction SilentlyContinue | Select-Object -Last 1
+$Answer = if ($Returned) { $Returned.Matches[0].Groups | Select-Object -Skip 1 | Where-Object { $_.Success } | Select-Object -First 1 } else { $null }
+if ($Code -ne 3 -and $Code -ne 4) { $Code = if ($Answer) { [int]$Answer.Value } else { 1 } }
 Get-Content $Log -ErrorAction SilentlyContinue | Select-String -Pattern 'LogMuseeStudio' | Select-Object -Last 40 | ForEach-Object { $_.Line }
 Write-Host "make $Stage finished: exit $Code (report: $Log)"
 exit $Code
