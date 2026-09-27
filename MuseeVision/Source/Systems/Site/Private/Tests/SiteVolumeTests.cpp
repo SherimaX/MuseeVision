@@ -130,6 +130,8 @@ namespace Musee::Site::Tests
 			Flat(TEXT("neck.foot"), {{2.10, 0.0}, {3.0, -1.0}, {3.0, 1.0}}, 7.0),
 			// A floor wholly outside the circle.
 			Flat(TEXT("platform.deck"), {{2.31, 0.0}, {3.0, -1.0}, {3.0, 1.0}}, 20.4),
+			// A radial end face of a ring's segment, standing on a line through the axis from r 2.4 out.
+			FSiteWellPiece{TEXT("platform.seat.02"), {FVector(2.4, 0.0, 20.37), FVector(4.1, 0.0, 20.37), FVector(2.4, 0.0, 20.42)}},
 			// The mast on the axis, a part the stage names.
 			Flat(TEXT("mast.column"), {{-0.2, 0.0}, {0.2, -0.1}, {0.2, 0.1}}, 12.0),
 		};

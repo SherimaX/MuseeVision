@@ -33,7 +33,11 @@ namespace Musee::Site
 			return Kept;
 		}
 
-		/** How near a convex polygon (or a point or a segment, when it has collapsed) comes to the axis, metres. */
+		/**
+		 * How near a convex polygon comes to the axis, metres: nothing when the axis lies inside it (on the same side of
+		 * every edge), else its nearest edge. A polygon collapsed to a segment or a point (a wall's face seen from above) has
+		 * no inside, even on a line through the axis, so only its edges count.
+		 */
 		double NearestToAxis(const FPlanPolygon& Polygon)
 		{
 			if (Polygon.IsEmpty())
@@ -54,7 +58,7 @@ namespace Musee::Site
 				const double T = Length > 0.0 ? FMath::Clamp(FVector2D::DotProduct(-A, B - A) / Length, 0.0, 1.0) : 0.0;
 				Nearest = FMath::Min(Nearest, (A + (B - A) * T).Size());
 			}
-			return bAround ? 0.0 : Nearest;
+			return bAround && Sign != 0.0 ? 0.0 : Nearest;
 		}
 
 		/** The direction of a bearing in plan: x east, y south, so north is -y. */

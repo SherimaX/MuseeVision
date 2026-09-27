@@ -169,6 +169,33 @@ namespace Musee::Studio
 			return Hasher.Add(Input.Description).Finish();
 		}
 
+		/** The casts of a stage's pieces: one input per group of identical pieces, named after the first of them. */
+		struct FCastGroups
+		{
+			TArray<FCastInput> Inputs;
+			TArray<FCastGroup> Groups;
+			TMap<FString, int32> GroupOfIdentity;
+
+			/** A piece joins the group of its identical pieces, or begins one with its own cast. */
+			void Add(const FFormMadePiece& Piece, FCastInput&& Input, TFunctionRef<FString(FName)> MeshPackage)
+			{
+				const bool bShares = !Piece.Name.ToString().StartsWith(WorkPiecePrefix);
+				const FString Identity = bShares ? IdentityOf(Input) : FString();
+				if (const int32* Group = bShares ? GroupOfIdentity.Find(Identity) : nullptr)
+				{
+					Groups[*Group].Members.Add(&Piece);
+					return;
+				}
+				if (bShares)
+				{
+					GroupOfIdentity.Add(Identity, Groups.Num());
+				}
+				Groups.AddDefaulted_GetRef().Members.Add(&Piece);
+				Input.PackageName = MeshPackage(Piece.Name);
+				Inputs.Add(MoveTemp(Input));
+			}
+		};
+
 		FStagePlacement PlacementOf(const FFormMadePiece& Piece, const FCastMesh& Mesh)
 		{
 			FStagePlacement Placement;
@@ -235,45 +262,29 @@ namespace Musee::Studio
 
 		FStageCast Cast;
 		Cast.Bodies = BodiesOf(Fabric, Report.Findings);
-		TArray<FCastInput> Inputs;
-		TArray<FCastGroup> Groups;
-		TMap<FString, int32> GroupOfIdentity;
+		FCastGroups Casts;
 		for (const FFormMadePiece& Piece : Fabric.Pieces)
 		{
 			FCastInput Input;
-			if (!SlotsOf(Piece, Finishes.HasValue() ? &Finishes.GetValue() : nullptr, Resolve, Stage, Input.Slots, Report.Findings))
+			if (SlotsOf(Piece, Finishes.HasValue() ? &Finishes.GetValue() : nullptr, Resolve, Stage, Input.Slots, Report.Findings))
 			{
-				continue;
+				Input.Description = DescribeMesh(Piece);
+				Input.bCollides = !Piece.Collision.IsNone();
+				Casts.Add(Piece, MoveTemp(Input), MeshPackage);
 			}
-			Input.Description = DescribeMesh(Piece);
-			Input.bCollides = !Piece.Collision.IsNone();
-			const bool bShares = !Piece.Name.ToString().StartsWith(WorkPiecePrefix);
-			const FString Identity = bShares ? IdentityOf(Input) : FString();
-			if (const int32* Group = bShares ? GroupOfIdentity.Find(Identity) : nullptr)
-			{
-				Groups[*Group].Members.Add(&Piece);
-				continue;
-			}
-			if (bShares)
-			{
-				GroupOfIdentity.Add(Identity, Groups.Num());
-			}
-			Groups.AddDefaulted_GetRef().Members.Add(&Piece);
-			Input.PackageName = MeshPackage(Piece.Name);
-			Inputs.Add(MoveTemp(Input));
 		}
-		const TArray<FCastResult> Results = CastMeshes(Inputs, Report.Packages, Report.Cast);
+		const TArray<FCastResult> Results = CastMeshes(Casts.Inputs, Report.Packages, Report.Cast);
 		for (int32 Index = 0; Index < Results.Num(); ++Index)
 		{
 			for (const FCastMesh& Mesh : Results[Index].Meshes)
 			{
 				if (!Report.HasFailed(Mesh.Path))
 				{
-					Place(Groups[Index], Mesh, Cast.Placements);
+					Place(Casts.Groups[Index], Mesh, Cast.Placements);
 				}
 			}
 		}
-		for (const FCastGroup& Group : Groups)
+		for (const FCastGroup& Group : Casts.Groups)
 		{
 			Cast.Instanced += Group.Members.Num() > 1 ? Group.Members.Num() : 0;
 		}
