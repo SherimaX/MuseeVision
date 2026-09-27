@@ -1,0 +1,341 @@
+{
+  "stage": "chenghuai",
+  "finishes": [
+    {
+      "surface": "chenghuai.stone.kerb",
+      "material": "accent.qingbaishi",
+      "working": "axe-dressed",
+      "history": "foot-worn",
+      "note": "Platform kerbs (阶条石) 0.34 x 0.13, corner stones (埋头), footing courses, gallery kerbs, inner-court bed and rear-court pit kerbs: 青白石 from Dashiwo, Fangshan, axe-dressed (剁斧)."
+    },
+    {
+      "surface": "chenghuai.stone.step",
+      "material": "accent.qingbaishi",
+      "working": "axe-dressed",
+      "history": "foot-worn",
+      "note": "The house's steps (踏跺) and sloping side stones (垂带), door thresholds, the moon gate's sill; worn where walked."
+    },
+    {
+      "surface": "chenghuai.stone.base",
+      "material": "accent.qingbaishi",
+      "working": "honed",
+      "history": "weathered",
+      "note": "Column base stones (柱顶石) and turned drums (鼓镜), the gate's box drums (门墩; lions polish), the screen wall's 须弥座 plinth."
+    },
+    {
+      "surface": "chenghuai.porch.paving",
+      "material": "accent.qingbaishi",
+      "working": "axe-dressed",
+      "history": "foot-worn",
+      "note": "The porch, |x| up to 2.35, from y 0 to the mating arc R 11.20, top z 0.000: 'the doorway detail, then 青白石' (Story). The joint's travertine threshold and bronze strip start on the arc. Role guessed (sheet section 13)."
+    },
+    {
+      "surface": "chenghuai.porch.coping",
+      "material": "accent.qingbaishi",
+      "working": "axe-dressed",
+      "history": "weathered",
+      "note": "The porch walls' coping, z 0.98-1.10, 0.04 proud each side, cut on the drum's cylinder."
+    },
+    {
+      "surface": "chenghuai.brick.rubbed",
+      "material": "accent.grey-brick",
+      "working": "rubbed.dry-laid",
+      "history": "weathered",
+      "note": "干摆: the gate hall's walls, every wall base (下碱), the screen wall's body and cornice, 墀头 corbels, sill walls (槛墙), sealed-eave cornices, coping corbels, the moon ring, the porch walls, the yard wall and the court wall behind the screen, gable bands (博缝), the platform bodies of the gate, main hall and 垂花门."
+    },
+    {
+      "surface": "chenghuai.brick.hairline",
+      "material": "accent.grey-brick",
+      "working": "hairline-jointed",
+      "history": "weathered",
+      "note": "丝缝: the main hall's, side halls' and ear rooms' walls above their rubbed base."
+    },
+    {
+      "surface": "chenghuai.brick.pointed",
+      "material": "accent.grey-brick",
+      "working": "lime-pointed",
+      "history": "weathered",
+      "note": "淌白: the front and rear rows' walls, the house's outer walls, the cross walls, the other platform bodies."
+    },
+    {
+      "surface": "chenghuai.brick.on-edge",
+      "material": "accent.grey-brick",
+      "working": "laid-on-edge",
+      "history": "foot-worn",
+      "note": "城砖 on edge: the courts' cross paths (top 0.026) and the gate hall's floor (Materials board: 大门 floor 城砖)."
+    },
+    {
+      "surface": "chenghuai.court.paving",
+      "material": "accent.grey-brick",
+      "working": "square.ground-joints",
+      "history": "weathered",
+      "note": "The courts' square paving bricks 0.40, 0.12 deep, top 0.020, cut round every platform's footing; moss in the joints. Role guessed (a Beijing court's 方砖)."
+    },
+    {
+      "surface": "chenghuai.screen-wall.heart",
+      "material": "accent.grey-brick",
+      "working": "carved",
+      "history": "weathered",
+      "note": "The 影壁心, 1.80 square, its face 0.02 back from its moulded frame; the carving 澄懷觀道 is polish (plain tonight). Captioned as chenghuai-yingbi."
+    },
+    {
+      "surface": "chenghuai.leak-window.lattice",
+      "material": "accent.bu-wa",
+      "working": "as-laid",
+      "history": "weathered",
+      "note": "Leak-window (漏窗) lattices of tile slips and rubbed brick, bars 0.028 x 0.06, rims 0.05 x 0.07. Role guessed (roles name roofs)."
+    },
+    {
+      "surface": "chenghuai.floor.chiqi",
+      "material": "accent.suzhou-fangzhuan",
+      "working": "tung-oil-soaked",
+      "history": "foot-worn",
+      "note": "尺七方砖 0.54 m, soaked in tung oil to a dark satin (钻生): the main hall and the ear rooms."
+    },
+    {
+      "surface": "chenghuai.floor.chisi",
+      "material": "accent.suzhou-fangzhuan",
+      "working": "ground-joints",
+      "history": "foot-worn",
+      "note": "尺四方砖 0.45 m with ground joints (细墁): the side halls, the front and rear rows, the galleries, the 垂花门."
+    },
+    {
+      "surface": "chenghuai.roof.tong",
+      "material": "accent.bu-wa",
+      "working": "as-laid",
+      "history": "weathered",
+      "note": "布筒瓦: concave pans under half-round covers, row pitch 0.26: the gate, the main hall, the 垂花门."
+    },
+    {
+      "surface": "chenghuai.roof.he",
+      "material": "accent.bu-wa",
+      "working": "as-laid",
+      "history": "weathered",
+      "note": "合瓦 butterfly tiles, row pitch 0.25: every other roof and all copings."
+    },
+    {
+      "surface": "chenghuai.roof.ridge",
+      "material": "accent.bu-wa",
+      "working": "as-laid",
+      "history": "weathered",
+      "note": "清水脊 with scorpion tails, rolled ridges, gable edges (排山), coping ridges, the pavilion's hips and finial."
+    },
+    {
+      "surface": "chenghuai.roof.bed",
+      "material": "white.lime-plaster",
+      "working": "trowelled",
+      "history": "weathered",
+      "note": "The tiles' lime bed where it shows (mitres, roof ends, coping beds)."
+    },
+    {
+      "surface": "chenghuai.wall.limewash",
+      "material": "white.limewash",
+      "working": "limewashed",
+      "history": "weathered",
+      "note": "粉墙: limewash over paper-fibre lime render on the garden walls, the court wall's body, the house east wall's garden face, the flower hall's walls; dead matt."
+    },
+    {
+      "surface": "chenghuai.room.plaster",
+      "material": "white.limewash",
+      "working": "ma-hui.whiting",
+      "history": "new",
+      "note": "The rooms' 15 mm inner skins: hemp-fibre lime (麻刀灰) whitened with whiting (大白) (Story: Chenghuai interiors)."
+    },
+    {
+      "surface": "chenghuai.timber.red",
+      "material": "accent.qing-pine-lacquered",
+      "working": "dizhang.tiehong",
+      "history": "weathered",
+      "note": "Korean pine under a 一麻五灰 ground and 铁红 (iron-oxide red in tung oil), dull: columns, unpainted lintels and beams, frames, door leaves, lattice, windows, fretwork, gable-opening frames, cross-wall leaves, the 屏门 discs."
+    },
+    {
+      "surface": "chenghuai.timber.painted",
+      "material": "accent.qing-pine-lacquered",
+      "working": "suzhou-painted",
+      "history": "aged.patina",
+      "note": "苏式彩画 in azurite, malachite and gold leaf on the 地仗 ground: painted lintels, eave boards, beams across and purlins (fully in the side halls, main hall, galleries and 垂花门; restrained in the rows). The 包袱 scenes are polish."
+    },
+    {
+      "surface": "chenghuai.timber.green",
+      "material": "accent.qing-pine-lacquered",
+      "working": "green-lacquer",
+      "history": "weathered",
+      "note": "Green lacquer: the 屏门 panels, the yard door's leaves, the 垂花门's cantilever beams, the gate's four door pins."
+    },
+    {
+      "surface": "chenghuai.timber.black",
+      "material": "accent.qing-pine-lacquered",
+      "working": "black-lacquer",
+      "history": "handled",
+      "note": "黑漆: the gate's leaves (门用黑饰), plaque and couplet boards, lantern frames, case toes."
+    },
+    {
+      "surface": "chenghuai.gilt.bud",
+      "material": "accent.qing-pine-lacquered",
+      "working": "gilt.gold-leaf.oil",
+      "history": "weathered",
+      "note": "The 垂花门's two carved lotus buds (垂头), oil-gilt over the lacquer (as built gilt brass)."
+    },
+    {
+      "surface": "chenghuai.timber.rafter",
+      "material": "accent.chinese-fir-guangqi",
+      "working": "iron-red.tung-oil",
+      "history": "aged.patina",
+      "note": "Chinese fir rafters, flying rafters, boarding, eave boards and unpainted purlins in iron-red oil darkened by age and smoke (as built red). Working outside workingsByEra (the role reads 'unfinished'): sheet section 13."
+    },
+    {
+      "surface": "chenghuai.timber.garden",
+      "material": "accent.chinese-fir-guangqi",
+      "working": "guangqi.chestnut",
+      "history": "weathered",
+      "note": "栗壳色 广漆 over Chinese fir: every garden timber (the walk, flower hall, water pavilion and pavilion, their lattice, fretwork and seats); worn thinner where hands and backs rub."
+    },
+    {
+      "surface": "chenghuai.case.phoebe",
+      "material": "accent.phoebe",
+      "working": "carved.waxed",
+      "history": "handled",
+      "note": "Phoebe (楠木), plantation-grown, waxed, never painted: every case's plinth, body, ends, canopy, mullions and lips, and the ceramics' stands."
+    },
+    {
+      "surface": "chenghuai.screen.phoebe",
+      "material": "accent.phoebe",
+      "working": "carved.waxed",
+      "history": "handled",
+      "note": "The main hall's two carved open screens (落地罩)."
+    },
+    {
+      "surface": "chenghuai.furniture",
+      "material": "accent.phoebe",
+      "working": "waxed",
+      "history": "handled",
+      "note": "Tonight's Ming tables and chairs: the altar table, the scholar's desk and chair, 昌南's table and chairs, 林泉's painting table and chairs. The painting table is huanghuali-type in the collection: phoebe until the palette has it. Role guessed."
+    },
+    {
+      "surface": "chenghuai.bronze.hardware",
+      "material": "bronze.cusn10",
+      "working": "patinated",
+      "history": "handled",
+      "note": "The gate's knocker plates (门钹) and rings, the lanterns' rods (Story: gate hardware; the boards' brass)."
+    },
+    {
+      "surface": "chenghuai.case.bronze",
+      "material": "bronze.cusn10",
+      "working": "patinated",
+      "history": "handled",
+      "note": "The cases' hanging rails and lamp rails (Story: case frames)."
+    },
+    {
+      "surface": "chenghuai.fire-vat",
+      "material": "bronze.cusn10",
+      "working": "cast",
+      "history": "weathered",
+      "note": "The bronze 太平缸 fire vats in the courts (Materials board, Story): polish, declared here."
+    },
+    {
+      "surface": "chenghuai.south.blind-doors",
+      "material": "bronze.cusn10",
+      "working": "patinated",
+      "history": "aged.patina",
+      "note": "Closed pair of cast bronze leaves in the class opening on the port cylinder of chenghuai.south, meeting rail on the axis, while the port is unmated (on the stand, or while the Rotunda is absent)."
+    },
+    {
+      "surface": "chenghuai.lattice.paper",
+      "material": "glass.low-iron",
+      "working": "laminated.mulberry-paper.uv-filtering",
+      "history": "new",
+      "note": "Every lattice's glazing: mulberry paper (桑皮纸) laminated in low-iron glass with a UV-filtering interlayer, 6 mm behind the bars; the rooms' Glazed openings; diffuse transmission recorded in Matter."
+    },
+    {
+      "surface": "chenghuai.case.glass",
+      "material": "glass.low-iron",
+      "working": "laminated.anti-reflective",
+      "history": "new",
+      "note": "The cases' glass: fronts, sloped tops, the pedestal's hood."
+    },
+    {
+      "surface": "chenghuai.case.silk",
+      "material": "accent.silk",
+      "working": "stretched",
+      "history": "new",
+      "note": "The scroll cases' silk backs and handscroll beds: a warm grey 绫. Role guessed (roles name the Salon)."
+    },
+    {
+      "surface": "chenghuai.case.silk.ceramics",
+      "material": "accent.silk",
+      "working": "stretched",
+      "history": "new",
+      "note": "The side halls' case decks and backs and the pedestal's deck: a pale grey silk. Role guessed."
+    },
+    {
+      "surface": "chenghuai.mount.silk",
+      "material": "accent.silk",
+      "working": "damask.mount",
+      "history": "aged.patina",
+      "note": "The scroll mounts (装裱): heaven, earth, bands and borders; Art builds each mount from its Hang fields and takes this finish. Role guessed."
+    },
+    {
+      "surface": "chenghuai.lantern.silk",
+      "material": "accent.silk",
+      "working": "gauze.stretched",
+      "history": "weathered",
+      "note": "The 17 lanterns' gauze panels (纱灯; as built silk). Role guessed."
+    },
+    {
+      "surface": "chenghuai.garden.bluestone",
+      "material": "accent.qingshi",
+      "working": "cut.ice-crack",
+      "history": "foot-worn",
+      "note": "青石: the garden's platforms and floors (ice-crack in the buildings), steps, the terrace, the bridge's slabs, path kerbs, the pavilion's platform and column bases."
+    },
+    {
+      "surface": "chenghuai.garden.bluestone.submerged",
+      "material": "accent.qingshi",
+      "working": "cut",
+      "history": "weathered",
+      "note": "The bridge's piers and the water pavilion's base standing in the pond."
+    },
+    {
+      "surface": "chenghuai.pond.bed",
+      "material": "accent.qingshi",
+      "working": "cut.laid",
+      "history": "weathered",
+      "note": "The pond's bank and bed: still, clear water over bluestone (palette water.still). Role guessed."
+    },
+    {
+      "surface": "chenghuai.shutiao",
+      "material": "accent.qingshi",
+      "working": "engraved",
+      "history": "weathered",
+      "note": "The twelve 书条石, 0.90 x 0.32, after the Chunhua ge tie; incised text polish. Captioned as chenghuai-shutiao."
+    },
+    {
+      "surface": "chenghuai.rockery",
+      "material": "accent.qingshi",
+      "working": "as-found",
+      "history": "weathered",
+      "note": "The rockery's body (Materials board: 青石). Working outside workingsByEra."
+    },
+    {
+      "surface": "chenghuai.edge-rock",
+      "material": "accent.taihu-rock",
+      "working": "as-found",
+      "history": "weathered",
+      "note": "The pond's edge rocks (湖石驳岸): prisms tonight, dissolution polish. Role guessed (roles: 石兄, peaks)."
+    },
+    {
+      "surface": "chenghuai.shixiong",
+      "material": "accent.taihu-rock",
+      "working": "as-found",
+      "history": "weathered",
+      "note": "石兄, the standing rock, about 3 m (chenghuai-shixiong)."
+    },
+    {
+      "surface": "chenghuai.garden.path",
+      "material": "accent.pebble-mosaic",
+      "working": "set-in-lime.trodden",
+      "history": "foot-worn",
+      "note": "花街铺地: river pebbles, tile shards and brick on edge set in lime mortar in patterns, 0.83 wide between bluestone kerbs."
+    }
+  ]
+}

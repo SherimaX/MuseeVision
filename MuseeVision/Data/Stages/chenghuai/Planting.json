@@ -1,0 +1,509 @@
+{
+  "stage": "chenghuai",
+  "water": [
+    {
+      "key": "chenghuai.pond",
+      "anchor": "chenghuai.pond.water",
+      "body": "",
+      "outline": {
+        "polygon": [
+          [
+            14.199,
+            -35.5
+          ],
+          [
+            13.896,
+            -35.745
+          ],
+          [
+            13.369,
+            -35.943
+          ],
+          [
+            12.712,
+            -36.098
+          ],
+          [
+            12.023,
+            -36.216
+          ],
+          [
+            11.398,
+            -36.301
+          ],
+          [
+            10.833,
+            -36.352
+          ],
+          [
+            10.261,
+            -36.364
+          ],
+          [
+            9.692,
+            -36.341
+          ],
+          [
+            9.136,
+            -36.285
+          ],
+          [
+            8.602,
+            -36.199
+          ],
+          [
+            8.074,
+            -36.088
+          ],
+          [
+            7.549,
+            -35.95
+          ],
+          [
+            7.047,
+            -35.778
+          ],
+          [
+            6.59,
+            -35.564
+          ],
+          [
+            6.199,
+            -35.301
+          ],
+          [
+            5.871,
+            -34.974
+          ],
+          [
+            5.59,
+            -34.589
+          ],
+          [
+            5.363,
+            -34.168
+          ],
+          [
+            5.198,
+            -33.731
+          ],
+          [
+            5.102,
+            -33.301
+          ],
+          [
+            5.116,
+            -32.877
+          ],
+          [
+            5.239,
+            -32.445
+          ],
+          [
+            5.404,
+            -32.005
+          ],
+          [
+            5.547,
+            -31.557
+          ],
+          [
+            5.602,
+            -31.102
+          ],
+          [
+            5.534,
+            -30.64
+          ],
+          [
+            5.39,
+            -30.173
+          ],
+          [
+            5.22,
+            -29.697
+          ],
+          [
+            5.073,
+            -29.207
+          ],
+          [
+            5.0,
+            -28.699
+          ],
+          [
+            4.997,
+            -28.159
+          ],
+          [
+            5.03,
+            -27.59
+          ],
+          [
+            5.105,
+            -27.011
+          ],
+          [
+            5.225,
+            -26.441
+          ],
+          [
+            5.398,
+            -25.898
+          ],
+          [
+            5.622,
+            -25.37
+          ],
+          [
+            5.895,
+            -24.842
+          ],
+          [
+            6.216,
+            -24.339
+          ],
+          [
+            6.585,
+            -23.883
+          ],
+          [
+            7.0,
+            -23.5
+          ],
+          [
+            7.485,
+            -23.185
+          ],
+          [
+            8.042,
+            -22.923
+          ],
+          [
+            8.635,
+            -22.717
+          ],
+          [
+            9.233,
+            -22.575
+          ],
+          [
+            9.801,
+            -22.5
+          ],
+          [
+            10.352,
+            -22.499
+          ],
+          [
+            10.911,
+            -22.568
+          ],
+          [
+            11.454,
+            -22.697
+          ],
+          [
+            11.958,
+            -22.878
+          ],
+          [
+            12.398,
+            -23.102
+          ],
+          [
+            12.793,
+            -23.378
+          ],
+          [
+            13.16,
+            -23.714
+          ],
+          [
+            13.469,
+            -24.092
+          ],
+          [
+            13.692,
+            -24.493
+          ],
+          [
+            13.801,
+            -24.898
+          ],
+          [
+            13.735,
+            -25.315
+          ],
+          [
+            13.516,
+            -25.759
+          ],
+          [
+            13.23,
+            -26.214
+          ],
+          [
+            12.963,
+            -26.666
+          ],
+          [
+            12.801,
+            -27.102
+          ],
+          [
+            12.767,
+            -27.474
+          ],
+          [
+            12.804,
+            -27.795
+          ],
+          [
+            12.877,
+            -28.13
+          ],
+          [
+            12.954,
+            -28.544
+          ],
+          [
+            13.221,
+            -29.102
+          ],
+          [
+            14.3,
+            -29.882
+          ],
+          [
+            14.3,
+            -30.845
+          ],
+          [
+            14.3,
+            -31.867
+          ],
+          [
+            14.3,
+            -32.827
+          ],
+          [
+            13.212,
+            -33.602
+          ],
+          [
+            13.227,
+            -34.165
+          ],
+          [
+            13.585,
+            -34.6
+          ],
+          [
+            13.95,
+            -34.943
+          ],
+          [
+            14.197,
+            -35.231
+          ]
+        ]
+      },
+      "depth": 0.57,
+      "freeboard": 0.3,
+      "material": "water.still",
+      "working": "still.clear",
+      "history": "weathered",
+      "note": "Level -0.28 (0.30 under the garden ground at 0.02); area 106.6 m2, perimeter 41.7; depth 0.18 over the Classical Hall tribune (bed -0.46) to 0.57 (bed -0.85). Clear over the bluestone bed (palette). Still, no flow. Old optics (absorption 0.06/0.02/0.06, scattering 0.006/0.014/0.008 per metre) are evidence only. Outline in stage coordinates, the water pavilion notch applied."
+    }
+  ],
+  "beds": [
+    {
+      "bed": "chenghuai.inner-court.bed.nw",
+      "species": "Malus × micromalus",
+      "count": 1,
+      "spacing": 0.0,
+      "material": "living.malus-micromalus",
+      "working": "grown",
+      "history": "weathered",
+      "body": "",
+      "note": "Crabapple (xifu haitang) before the main hall, at (-12.20, -22.60) in the kerbed bed x -13.80..-10.60, y -20.50..-24.70; height 4.6, crown radii 1.7 x 1.2. Soil at 0.08 (Nature makes the soil surface, bare)."
+    },
+    {
+      "bed": "chenghuai.inner-court.bed.ne",
+      "species": "Malus × micromalus",
+      "count": 1,
+      "spacing": 0.0,
+      "material": "living.malus-micromalus",
+      "working": "grown",
+      "history": "weathered",
+      "body": "",
+      "note": "Crabapple at (-6.20, -22.60), bed x -7.80..-4.60; height 4.5, crown 1.7 x 1.2."
+    },
+    {
+      "bed": "chenghuai.inner-court.bed.sw",
+      "species": "Osmanthus fragrans",
+      "count": 1,
+      "spacing": 0.0,
+      "material": "living.osmanthus-fragrans",
+      "working": "grown",
+      "history": "weathered",
+      "body": "",
+      "note": "Osmanthus (as built) at (-12.20, -15.80), bed y -13.70..-17.90; height 3.6, crown 1.3 x 1.2. Not hardy in Beijing (kept in tubs there): Nature may flag it."
+    },
+    {
+      "bed": "chenghuai.inner-court.bed.se",
+      "species": "Osmanthus fragrans",
+      "count": 1,
+      "spacing": 0.0,
+      "material": "living.osmanthus-fragrans",
+      "working": "grown",
+      "history": "weathered",
+      "body": "",
+      "note": "Osmanthus at (-6.20, -15.80); height 3.5, crown 1.3 x 1.2."
+    },
+    {
+      "bed": "chenghuai.rear-court.pit.w",
+      "species": "Ziziphus jujuba",
+      "count": 1,
+      "spacing": 0.0,
+      "material": "living.ziziphus-jujuba",
+      "working": "grown",
+      "history": "weathered",
+      "body": "",
+      "note": "Jujube in the kerbed pit 1.40 square at (-16.80, -35.30), soil 0.05; height 5.2, crown 1.9 x 1.3 (as built a plum stood in)."
+    },
+    {
+      "bed": "chenghuai.rear-court.pit.e",
+      "species": "Ziziphus jujuba",
+      "count": 1,
+      "spacing": 0.0,
+      "material": "living.ziziphus-jujuba",
+      "working": "grown",
+      "history": "weathered",
+      "body": "",
+      "note": "Jujube at (-1.60, -35.30); height 5.0, crown 1.9 x 1.3."
+    },
+    {
+      "bed": "chenghuai.garden.tree.willow-1",
+      "species": "Salix babylonica",
+      "count": 1,
+      "spacing": 0.0,
+      "material": "living.salix-babylonica",
+      "working": "grown",
+      "history": "weathered",
+      "body": "",
+      "note": "The board willow by the water at (6.00, -23.10) (as built an osmanthus stood in); height 4.4, crown 2.0 x 1.6."
+    },
+    {
+      "bed": "chenghuai.garden.tree.willow-2",
+      "species": "Salix babylonica",
+      "count": 1,
+      "spacing": 0.0,
+      "material": "living.salix-babylonica",
+      "working": "grown",
+      "history": "weathered",
+      "body": "",
+      "note": "Willow at (5.10, -20.90); height 3.4, crown 1.2 x 1.1."
+    },
+    {
+      "bed": "chenghuai.garden.tree.pine",
+      "species": "Pinus bungeana",
+      "count": 1,
+      "spacing": 0.0,
+      "material": "living.pinus-bungeana",
+      "working": "grown",
+      "history": "weathered",
+      "body": "",
+      "note": "The board pine on the rockery at (13.40, -15.90), rooted in the rockery ground; height 4.8, crown 2.1 x 1.7."
+    },
+    {
+      "bed": "chenghuai.garden.tree.plum-1",
+      "species": "Prunus mume",
+      "count": 1,
+      "spacing": 0.0,
+      "material": "living.prunus-mume",
+      "working": "grown",
+      "history": "weathered",
+      "body": "",
+      "note": "Plum at (15.10, -37.00); height 3.6, crown 1.2 x 0.9."
+    },
+    {
+      "bed": "chenghuai.garden.tree.plum-2",
+      "species": "Prunus mume",
+      "count": 1,
+      "spacing": 0.0,
+      "material": "living.prunus-mume",
+      "working": "grown",
+      "history": "weathered",
+      "body": "",
+      "note": "Plum at (14.70, -20.70); height 3.8, crown 1.4 x 1.0."
+    },
+    {
+      "bed": "chenghuai.garden.tree.crabapple",
+      "species": "Malus × micromalus",
+      "count": 1,
+      "spacing": 0.0,
+      "material": "living.malus-micromalus",
+      "working": "grown",
+      "history": "weathered",
+      "body": "",
+      "note": "Crabapple at (6.80, -5.30); height 4.2, crown 1.7 x 1.2."
+    },
+    {
+      "bed": "chenghuai.garden.bamboo.east",
+      "species": "Phyllostachys aureosulcata",
+      "count": 14,
+      "spacing": 0.35,
+      "material": "living.phyllostachys-aureosulcata",
+      "working": "grown",
+      "history": "weathered",
+      "body": "",
+      "note": "14 culms by the pond, x 15.53..16.07, y -23.35..-28.14 (culm points chenghuai_works.py:454-463, y + 17)."
+    },
+    {
+      "bed": "chenghuai.garden.bamboo.north-west",
+      "species": "Phyllostachys aureosulcata",
+      "count": 18,
+      "spacing": 0.35,
+      "material": "living.phyllostachys-aureosulcata",
+      "working": "grown",
+      "history": "weathered",
+      "body": "",
+      "note": "18 culms behind the flower hall, x 5.33..10.01, y -42.81..-44.02."
+    },
+    {
+      "bed": "chenghuai.garden.bamboo.north-east",
+      "species": "Phyllostachys aureosulcata",
+      "count": 21,
+      "spacing": 0.35,
+      "material": "living.phyllostachys-aureosulcata",
+      "working": "grown",
+      "history": "weathered",
+      "body": "",
+      "note": "21 culms behind the flower hall, x 10.36..15.75, y -42.95..-44.10."
+    },
+    {
+      "bed": "chenghuai.pond.lotus",
+      "species": "Nelumbo nucifera",
+      "count": 6,
+      "spacing": 0.0,
+      "material": "living.nelumbo-nucifera",
+      "working": "grown",
+      "history": "weathered",
+      "body": "",
+      "note": "Plants at (7.60, -33.90) dia 0.9 flowering, (8.60, -32.80) 0.7, (6.80, -32.30) 0.8, (11.00, -24.50) 0.9 flowering, (9.80, -23.90) 0.7, (11.80, -25.50) 0.6; rooted on the bed, leaves at the water (-0.28); held inside the edge."
+    },
+    {
+      "bed": "chenghuai.garden.ground",
+      "species": "Haplocladium microphyllum",
+      "count": 1,
+      "spacing": 0.0,
+      "material": "living.haplocladium-microphyllum",
+      "working": "grown",
+      "history": "weathered",
+      "body": "",
+      "note": "The garden ground: Nature makes the soil sheet at z 0.02 over x 2.30..16.40, y -0.50..-44.40, the pond cut out (Matter substance topsoil, history ground.trodden), and covers it in moss; growth spaces from Form free space; Form paths, kerbs, platforms and the rockery stand on it."
+    }
+  ]
+}
