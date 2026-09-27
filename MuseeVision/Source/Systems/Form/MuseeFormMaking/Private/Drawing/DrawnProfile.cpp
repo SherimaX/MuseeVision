@@ -30,13 +30,19 @@ namespace Musee::Form::Drawing
 			return FVector2D(Values[0], Values[1]);
 		}
 
+		/**
+		 * A frame part of the way from one station to the next, on the chord between them. It stands square to that chord:
+		 * a corner's mitre stretches the section across the corner alone, so a station set between two corners of a straight
+		 * run (a door's jamb in a room's wall) carries no share of their mitres, which would lean its section along the run
+		 * and splay a jamb's reveal by the wall's thickness times its distance from the run's middle over half the run.
+		 */
 		FSweepFrame Between(const FSweepFrame& A, const FSweepFrame& B, double Alpha)
 		{
 			FSweepFrame F;
 			F.Origin = FMath::Lerp(A.Origin, B.Origin, Alpha);
-			F.AxisA = FMath::Lerp(A.AxisA, B.AxisA, Alpha);
 			F.AxisB = FMath::Lerp(A.AxisB, B.AxisB, Alpha);
 			F.NormalA = FMath::Lerp(A.NormalA, B.NormalA, Alpha).GetSafeNormal();
+			F.AxisA = F.NormalA;
 			F.NormalB = FMath::Lerp(A.NormalB, B.NormalB, Alpha).GetSafeNormal();
 			F.Rake = FMath::Lerp(A.Rake, B.Rake, Alpha);
 			F.Bend = FMath::Lerp(A.Bend, B.Bend, Alpha);

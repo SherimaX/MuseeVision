@@ -7,8 +7,9 @@
 
 /**
  * Passages through walls: a straight passage through a curved wall runs its jambs parallel to its axis, as the
- * Rotunda's doorways are cut through the drum; and a wall between two faces fills the gap between a flat port face and a
- * drum, running out to a feather where the two touch, as the joint's wedge masonry does.
+ * Rotunda's doorways are cut through the drum; a door in a straight run of a room's walls is cut square through them,
+ * however far it stands from the run's corners; and a wall between two faces fills the gap between a flat port face and
+ * a drum, running out to a feather where the two touch, as the joint's wedge masonry does.
  */
 namespace Musee::Form::Tests
 {
@@ -133,6 +134,57 @@ namespace Musee::Form::Tests
 		TestEqual(TEXT("nothing of the drum stands in the clear opening"), Inside, 0);
 		TestTrue(TEXT("the door's west jamb stands on x -1.50"), bWest);
 		TestTrue(TEXT("and its east jamb on x +1.50"), bEast);
+		return true;
+	}
+
+	IMPLEMENT_SIMPLE_AUTOMATION_TEST(FFormSquareRevealsTest, "Musee.Form.Drawing.SquareReveals", PassageFlags)
+	bool FFormSquareRevealsTest::RunTest(const FString& Parameters)
+	{
+		// The Reserve's four walls as one closed wall round a 60 x 24 hall, 0.60 thick outside it, with its arched west door
+		// (2.40 clear, springing 2.00) on the axis of its 24 m west wall (reserve.md section 2). The door's jambs are cut square
+		// through the wall: at the wall's back they stand on y ±1.20 as on its face. Its jamb stations lie between the west
+		// wall's two corners; had they taken a share of the corners' mitres, the back would splay to ±1.26.
+		const double Half = 1.2;
+		const double Thickness = 0.6;
+		FFormWall Hall;
+		Hall.Plan = FFormProfile::Polygon({FVector2D(-30.0, -12.0), FVector2D(-30.0, 12.0), FVector2D(30.0, 12.0), FVector2D(30.0, -12.0)});
+		Hall.ThicknessMeters = Thickness;
+		Hall.HeightMeters = 5.0;
+		FFormWallOpening Door;
+		Door.CenterMeters = 12.0;
+		Door.WidthMeters = 2.0 * Half;
+		Door.SillMeters = 0.3;
+		Door.HeadMeters = 2.3;
+		Door.bArched = true;
+		Hall.Openings.Add(Door);
+		TArray<FFormMadePiece> Pieces;
+		const FFormMadePiece* Piece = MakeWall(*this, Hall, Pieces);
+		if (!Piece)
+		{
+			return false;
+		}
+		TestClosed(*this, TEXT("the hall's walls with their door"), *Piece, -2);
+		constexpr double Exact = 1.0e-6;
+		int32 Face = 0;
+		int32 Back = 0;
+		int32 Splayed = 0;
+		for (const FVector3d& V : Piece->Mesh->VerticesItr())
+		{
+			const FVector P = FVector(V) / Engine;
+			// The vertices round the door from its sill to its springing, on either face of the wall.
+			if (P.Z < Door.SillMeters - Exact || P.Z > Door.HeadMeters + Exact || FMath::Abs(P.Y) > Half + 0.2)
+			{
+				continue;
+			}
+			const bool bOnFace = FMath::Abs(P.X + 30.0) < Exact;
+			const bool bOnBack = FMath::Abs(P.X + 30.0 + Thickness) < Exact;
+			const bool bOnJamb = FMath::Abs(FMath::Abs(P.Y) - Half) < Exact;
+			Face += bOnFace && bOnJamb ? 1 : 0;
+			Back += bOnBack && bOnJamb ? 1 : 0;
+			Splayed += (bOnFace || bOnBack) && FMath::Abs(P.Y) > Half + Exact ? 1 : 0;
+		}
+		TestTrue(TEXT("the jambs stand on y +/-1.20 on both faces of the wall"), Face >= 4 && Back >= 4);
+		TestEqual(TEXT("and no corner of the opening stands wider, on the back or the face"), Splayed, 0);
 		return true;
 	}
 
