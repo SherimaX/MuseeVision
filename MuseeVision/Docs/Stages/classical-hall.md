@@ -21,7 +21,7 @@
 | Origin in the museum plan | (0.000, −39.300, −6.000); yaw 0°. museum = local + (0, −39.30, −6.00). Site derives it from the mating `rotunda.stair ↔ classical-hall.stair` (§2). |
 | Level | −1. Finished floor z 0.00 everywhere (museum −6.00), flush with the joint's threshold (the as-built 1 cm step is retired). |
 | Footprint kind | Building, below grade. |
-| Vertical extent | z −0.40 (slab underside) to 5.45 (roof top = museum −0.55, where the stages above begin). Highest inner surface: the laylight glass, 5.38. |
+| Vertical extent | z −0.40 (slab underside) to 5.45 (roof top = museum −0.55, where the stages above begin). Highest inner surface: the vault crowns, 5.15 (the roof slab's underside). Laylight glass 4.94 (§3.3). |
 
 **Footprint polygon** (clockwise on the north-up plan, from the south-east corner; a prism z −0.40 … 5.45):
 (4.200, 31.400) → (2.100, 31.400) → (2.100, 31.996) → arc r 7.600 about W = (0, 39.300), through (0.000, 31.700),
@@ -199,22 +199,27 @@ The porphyry discs Ø 3.10 and Ø 3.00 exceed any block: Lay() cuts them in sect
   (radius fraction, height × R/0.08): (0, −0.004) (1.00, −0.004) (1.00, 0.004) (0.86, 0.014) (0.62, 0.020) (0.36, 0.023)
   (0.20, 0.032) (0, 0.036), eight petals: on the rows 1.00 → 0.36 the radius × (0.84 + 0.16 |cos 4α|).
 - **Lanterns** (one per bay): opening s ∈ [−1.20, 1.20] (x ±1.1804, z 4.9635) × bay centre ± 1.20 along y; a flat frame
-  0.06 on the vault inside its edge (inner edge s ±1.14: x ±1.1232, z 4.9815; bay centre ± 1.14); from that inner edge
-  vertical walls `classical-hall.laylight.well` rise to z 5.38 (0.40 high at the long sides, 0.23 at mid-length).
-  **Laylight** `classical-hall.laylight.glass` 2.2464 × 2.280 at z 5.38 (underside), laminated 2 × 4 mm; the luminous
-  ceiling above it (§4) within z 5.39–5.43. The well is a Housing opening.
+  0.06 on the vault inside its edge (inner edge s ±1.14: x ±1.1232, z 4.9815; bay centre ± 1.14). Within that inner edge
+  the **laylight** `classical-hall.laylight.glass` 2.2464 × 2.280 lies flat at **z 4.940** (underside; laminated 2 × 4 mm,
+  top 4.949), just under the lantern's edge (4.9635 at s ±1.20). Cheeks `classical-hall.laylight.well` close it all round,
+  from the glass up to the frame's inner edge: 0.04 along the long sides, and at the short ends 0.04 at the corners
+  rising to 0.21 at mid-length.
+  Above the glass the **plenum** 4.949 → 5.150 (0.20) holds the luminous ceiling (§4); above that is the roof slab 5.15 → 5.45
+  (0.30). The lantern is a Housing opening. (As built the glass stood at 5.38 in a 0.23–0.40 well, with 0.02 of roof over it:
+  corrected for structure and plenum, ruled.)
 - **Annular vault** `classical-hall.vault.annular`, turned about O: section a circle R 1.5009 centred (r 5.10, z 3.6491),
   springing from the tribune entablature's ledge (r 6.60, 3.70) and the ring beam's outer ledge (r 3.60, 3.70), crown
   (5.10, 5.15). Plain bands 0.30 of arc at both springings; coffers between section angles 13.395° and 166.605° (r 6.560 →
   3.640): **60** round (6°, from φ 15° so cells centre on the niche axes) × **7** across (21.887°, 0.573 of arc): 420.
   Coffer detail as the gallery's with rib 0.05 and steps × 0.85 (setbacks 0.02975); rosette `classical-hall.tribune.rosette`.
-- **Dome** `classical-hall.dome`: spherical cap R 3.9464 centred (0, 0, 1.3905), from the ring beam's inner ledge
-  (r 3.20, z 3.70) to the eye (r 1.20, z 5.15). Plain bands 0.25 of arc at the springing, 0.20 at the eye. Coffers 24
-  round (15°, from φ 7.5°) × 3 rings, ring edges (r, z) (3.047, 3.898) (2.463, 4.474) (1.893, 4.853) (1.389, 5.084): 72;
+- **Dome** `classical-hall.dome`: spherical cap **R 4.3377 centred (0, 0, 0.7716)**, from the ring beam's inner ledge
+  (r 3.20, z 3.70) to the eye (r 1.20, **z 4.94**). Re-struck through the same springing and eye radius so that the eye's
+  laylight has its 0.20 plenum under the 0.30 roof slab (ruled); as built R 3.9464 about 1.3905, eye at 5.15. Plain bands 0.25 of arc at the springing, 0.20 at the eye. Coffers 24
+  round (15°, from φ 7.5°) × 3 rings, ring edges (r, z) (3.047, 3.859) (2.463, 4.342) (1.893, 4.674) (1.389, 4.881) (1.200, 4.940): 72;
   rib 0.05, step scale 1.0 / 0.9 / 0.8 from the lowest ring; each with a tribune rosette.
-- **Eye:** a cylindrical well r 1.20, z 5.15 → 5.38 (`classical-hall.laylight.well`, Housing), closed by a laylight disc
-  Ø 2.40 (`classical-hall.laylight.glass`) at 5.38. Bead `classical-hall.eye.bead` turned round its lower edge, (r, z):
-  (1.19, 5.17) round to (1.19, 5.09) convex, (1.22, 5.09) (1.22, 5.17).
+- **Eye:** the dome's rim r 1.20 at z 4.94, closed flush by the laylight disc Ø 2.40 (`classical-hall.laylight.glass`,
+  underside 4.940, top 4.949); plenum above to the slab at 5.15. Bead `classical-hall.eye.bead` turned round the rim, (r, z):
+  (1.19, 4.96) round to (1.19, 4.88) convex, (1.22, 4.88) (1.22, 4.96).
 - **Ring beam** (the entablature turned on both faces of r 3.40, §3.4): inner ledge r 3.008–3.20 at 3.70 (the dome
   springs at 3.20); outer ledge r 3.60–3.792 at 3.70 (the annular vault springs at 3.60).
 
@@ -302,7 +307,7 @@ the Rotunda's, down its raised drum onto the landing.
 
 | Id | Type | Count / extent | Point and aim | Operation |
 |---|---|---|---|---|
-| `laylight.bay1…4`, `laylight.eye` | `gap.luminous-ceiling.3000k` | 5: four 2.246 × 2.28 on the bay centres, the eye's disc Ø 2.40 on O | edge-lit panel in z 5.39–5.43 over the etched glass (point z 5.41); aim straight down | always |
+| `laylight.bay1…4`, `laylight.eye` | `gap.luminous-ceiling.3000k` | 5: four 2.246 × 2.28 on the bay centres, the eye's disc Ø 2.40 on O | backlit luminous-ceiling modules in the 0.20 plenum over the etched glass (glass top 4.949, slab 5.15; point z 5.10); aim straight down | always |
 | `cove.gallery.e1…e4`, `.w1…w4` | `linear-cove.3000k` | 8 runs between the ressauts: y 31.05–25.87, 24.33–19.87, 18.33–13.87, 12.33–7.15 (5.18, 4.46, 4.46, 5.18) | on the cornice ledge behind the lip, x ±2.87, z 3.72; aim up the near half of the barrel (x ±1.73, z 4.737) | always |
 | `cove.tribune.01…18` | `linear-cove.3000k` | 18 × 2.208 on the arc, midpoints φ 10° + 20°k (continuous over the lintel) | tribune ledge r 6.47, z 3.72; aim onto the annular vault (r 5.77, z 4.95) | always |
 | `cove.ring.outer.01…12`, `cove.ring.inner.01…12` | `linear-cove.3000k` | 12 × 1.887 at r 3.70 and 12 × 1.573 at r 3.10, midpoints φ 30°k (between the columns) | the ring beam's outer and inner ledges, z 3.72; aim the annular vault (r 4.30, z 4.92) and the dome's middle ring (r 2.46, z 4.48) | always |
@@ -495,8 +500,7 @@ plain (no rosettes) and the volutes are the flat discs of the pilasters.
 
 **Waits for polish:** rosettes and the eye's bead if Carving hasn't landed; physical labels; an air-handling emitter;
 benches in the tribune (owner's option); pore-soiling and wear calibrated to photographs; the owner's walk over the
-hang findings (the pedestals, the Antinous's lowered plinth, grown consoles); deeper laylight plenums if the Architect
-changes the section.
+hang findings (the pedestals, the Antinous's lowered plinth, grown consoles); nothing structural (the section is ruled, §3.3).
 
 ## 13. Palette keys to confirm and catalogue gaps
 **Palette keys** (no `todo.` keys; roles guessed or workings outside `workingsByEra`):
@@ -515,8 +519,8 @@ changes the section.
 - The **landing** keys the palette gives "Classical Hall: landing floor … the landing's red / black" are used by the
   Rotunda, which builds that landing in its served well (`rotunda.stair.landing.floor`, `.red`, `.black`).
 
-**Catalogue gaps** (Light): `gap.luminous-ceiling.3000k` (the Salon cabinet's gap), here an **edge-lit LED light-guide
-panel ≤ 50 mm deep** (the laylight has only 0.07 between its glass at 5.38 and the roof top 5.45), dimmable, CRI > 90,
+**Catalogue gaps** (Light): `gap.luminous-ceiling.3000k` (the Salon cabinet's gap), a real **backlit luminous-ceiling module**
+in a 0.20 plenum (glass top 4.949, slab underside 5.15), dimmable, CRI > 90,
 four 2.246 × 2.28 and one Ø 2.40 disc. No other gap.
 
 **Conflicts and questions for the Architect:**
@@ -528,13 +532,17 @@ hall, no new records). If the Architect rules 4000 K: spots → `track-spot.4000
 (b) **The hang** changes the as-built look: niche pedestals project in front of 9 of the 13 niches (the Faun by 0.44,
 the Laocoön by 0.31). The as-built plinths were smaller than the casts' bases; the alternative is to accept overhanging
 bases (not physical). Owner's walk.
-(c) **Structure over the laylights:** 0.02 of roof over each lantern and 0.12 over the vault crowns; the stages above
-carry down to −0.55. Form.MinThickness may flag it; a design question, not a Room Builder patch.
+(c) **Structure over the laylights (ruled):** the roof is a 0.30 slab, z 5.15 → 5.45 (museum −0.85 → −0.55), under the
+Rotunda's floor, Chenghuai's pond and the Grounds. The vault and annular crowns (5.15) meet its underside. The laylight
+glass drops from 5.38 to 4.94 so that a 0.20 plenum lies between it and the slab, and the dome is re-struck through its
+springing to meet the eye at 4.94 (R 4.3377 about 0.7716). No other stage moves.
 (d) The Rotunda sheet says its floor bears on this roof "north of y −8.20" (the gallery's inner face); the hall's shell
 reaches museum y −7.90 (x ±4.20) and its sleeve the r 7.60 cylinder. No volume clash (both meet at −0.55); Site should
 use the shell line.
 
 ## Build notes
+- **Section (ruled).** Roof slab 0.30 (z 5.15 → 5.45); plenum 0.20 over every laylight; laylight glass underside
+  4.940 in the four lanterns and the eye; the dome re-struck R 4.3377 about (0, 0, 0.7716). Nothing stands above 5.45.
 - **Frame.** Origin O = the tribune's centre on its floor; museum = local + (0, −39.30, −6.00), yaw 0. Old y + 39.30,
   old z + 6.00.
 - **Nothing moves.** No body, no mechanism, no channel. The Rotunda's drum above is the only mechanism near.
