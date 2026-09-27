@@ -122,11 +122,16 @@ def main(room):
                 errs.append(f"luminaire {l['id']}: unknown type {l['type']}")
             if l.get("operation") not in ("always", "dusk", "presence"):
                 errs.append(f"luminaire {l['id']}: operation {l.get('operation')}")
-            for k in ("mount", "aim"):
-                if k == "mount" and isinstance(l.get(k), str):
-                    continue
-                if not (isinstance(l.get(k), list) and len(l[k]) == 3):
-                    errs.append(f"luminaire {l['id']}: {k} not [x,y,z]")
+            if ("mount" in l) == ("point" in l):
+                errs.append(f"luminaire {l['id']}: needs exactly one of mount (anchor key) or point")
+            if "mount" in l and not isinstance(l["mount"], str):
+                errs.append(f"luminaire {l['id']}: mount must be an anchor key; use point for coordinates")
+            for k in ("point", "aim"):
+                if k in l or k == "aim":
+                    if not (isinstance(l.get(k), list) and len(l[k]) == 3):
+                        errs.append(f"luminaire {l['id']}: {k} not [x,y,z]")
+            if l["type"].startswith("linear") and not isinstance(l.get("length"), (int, float)):
+                errs.append(f"luminaire {l['id']}: linear type without length")
         for d in L.get("daylight", []):
             if d.get("weather") not in ("museum", "giverny", "london"):
                 errs.append(f"daylight {d.get('opening')}: weather {d.get('weather')}")
@@ -149,6 +154,8 @@ def main(room):
                 errs.append(f"hang work not in any catalogue: {w['work']}")
             if not w.get("source"):
                 errs.append(f"hang {w['work']}: no source catalogue")
+            if w.get("frame") != "none" and w.get("frame") not in surfaces:
+                errs.append(f"hang {w['work']}: frame {w.get('frame')} is neither none nor a Finishes surface")
             if w.get("care") not in care:
                 errs.append(f"hang {w['work']}: care {w.get('care')}")
             anchors_used.add(w.get("anchor"))
@@ -167,11 +174,18 @@ def main(room):
         P = data["Planting.json"]
         for b in P.get("beds", []):
             anchors_used.add(b["bed"])
+            spec = b.get("cast") or b
+            for k in ("material", "working", "history"):
+                if k not in spec:
+                    errs.append(f"bed {b['bed']}: lacks {k}")
+            m = spec.get("material", "")
+            if m not in palette and not m.startswith(("living.", "todo.")):
+                errs.append(f"bed {b['bed']}: material {m} not in palette")
             if not re.match(r"^[A-Z][a-z]+ [a-z×'-]+", b["species"]):
                 warns.append(f"species not a Latin binomial? {b['species']}")
         for w in P.get("water", []):
             anchors_used.add(w.get("anchor"))
-            for k in ("key", "anchor", "outline", "depth", "freeboard", "material"):
+            for k in ("key", "anchor", "outline", "depth", "freeboard", "material", "working", "history"):
                 if k not in w:
                     errs.append(f"water {w.get('key')}: lacks {k}")
             if w.get("material") not in palette and not str(w.get("material")).startswith("todo."):

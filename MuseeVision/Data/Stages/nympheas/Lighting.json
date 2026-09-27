@@ -12,7 +12,7 @@
     {
       "id": "velarium.row.n45",
       "type": "linear-slot.3000k",
-      "mount": [
+      "point": [
         0.0,
         -4.5,
         6.873
@@ -22,12 +22,13 @@
         -4.5,
         6.573
       ],
+      "length": 11.52,
       "operation": "presence"
     },
     {
       "id": "velarium.row.n30",
       "type": "linear-slot.3000k",
-      "mount": [
+      "point": [
         0.0,
         -3.0,
         7.027
@@ -37,12 +38,13 @@
         -3.0,
         6.727
       ],
+      "length": 15.78,
       "operation": "presence"
     },
     {
       "id": "velarium.row.n15",
       "type": "linear-slot.3000k",
-      "mount": [
+      "point": [
         0.0,
         -1.5,
         7.119
@@ -52,12 +54,13 @@
         -1.5,
         6.819
       ],
+      "length": 17.86,
       "operation": "presence"
     },
     {
       "id": "velarium.row.axis",
       "type": "linear-slot.3000k",
-      "mount": [
+      "point": [
         0.0,
         0.0,
         7.15
@@ -67,12 +70,13 @@
         0.0,
         6.85
       ],
+      "length": 18.5,
       "operation": "presence"
     },
     {
       "id": "velarium.row.s15",
       "type": "linear-slot.3000k",
-      "mount": [
+      "point": [
         0.0,
         1.5,
         7.119
@@ -82,12 +86,13 @@
         1.5,
         6.819
       ],
+      "length": 17.86,
       "operation": "presence"
     },
     {
       "id": "velarium.row.s30",
       "type": "linear-slot.3000k",
-      "mount": [
+      "point": [
         0.0,
         3.0,
         7.027
@@ -97,12 +102,13 @@
         3.0,
         6.727
       ],
+      "length": 15.78,
       "operation": "presence"
     },
     {
       "id": "velarium.row.s45",
       "type": "linear-slot.3000k",
-      "mount": [
+      "point": [
         0.0,
         4.5,
         6.873
@@ -112,12 +118,13 @@
         4.5,
         6.573
       ],
+      "length": 11.52,
       "operation": "presence"
     },
     {
       "id": "pond.rim.01",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         -3.848,
         -0.29,
         0.3905
@@ -127,6 +134,7 @@
         -0.182,
         0.38
       ],
+      "length": 0.594,
       "operation": "always",
       "follows": "nympheas.pond.rim",
       "body": "nympheas.basin"
@@ -134,7 +142,7 @@
     {
       "id": "pond.rim.02",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         -3.561,
         -0.801,
         0.3905
@@ -144,6 +152,7 @@
         -0.546,
         0.38
       ],
+      "length": 0.594,
       "operation": "always",
       "follows": "nympheas.pond.rim",
       "body": "nympheas.basin"
@@ -151,7 +160,7 @@
     {
       "id": "pond.rim.03",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         -3.117,
         -1.19,
         0.3905
@@ -161,6 +170,7 @@
         -0.868,
         0.38
       ],
+      "length": 0.594,
       "operation": "always",
       "follows": "nympheas.pond.rim",
       "body": "nympheas.basin"
@@ -168,7 +178,7 @@
     {
       "id": "pond.rim.04",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         -2.601,
         -1.479,
         0.3905
@@ -178,6 +188,7 @@
         -1.125,
         0.38
       ],
+      "length": 0.594,
       "operation": "always",
       "follows": "nympheas.pond.rim",
       "body": "nympheas.basin"
@@ -185,7 +196,7 @@
     {
       "id": "pond.rim.05",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         -2.048,
         -1.692,
         0.3905
@@ -195,6 +206,7 @@
         -1.32,
         0.38
       ],
+      "length": 0.594,
       "operation": "always",
       "follows": "nympheas.pond.rim",
       "body": "nympheas.basin"
@@ -202,7 +214,7 @@
     {
       "id": "pond.rim.06",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         -1.474,
         -1.841,
         0.3905
@@ -212,6 +224,7 @@
         -1.46,
         0.38
       ],
+      "length": 0.594,
       "operation": "always",
       "follows": "nympheas.pond.rim",
       "body": "nympheas.basin"
@@ -219,7 +232,7 @@
     {
       "id": "pond.rim.07",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         -0.888,
         -1.937,
         0.3905
@@ -229,6 +242,7 @@
         -1.55,
         0.38
       ],
+      "length": 0.594,
       "operation": "always",
       "follows": "nympheas.pond.rim",
       "body": "nympheas.basin"
@@ -236,7 +250,7 @@
     {
       "id": "pond.rim.08",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         -0.297,
         -1.984,
         0.3905
@@ -246,6 +260,7 @@
         -1.594,
         0.38
       ],
+      "length": 0.594,
       "operation": "always",
       "follows": "nympheas.pond.rim",
       "body": "nympheas.basin"
@@ -253,7 +268,7 @@
     {
       "id": "pond.rim.09",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         0.297,
         -1.984,
         0.3905
@@ -263,6 +278,7 @@
         -1.594,
         0.38
       ],
+      "length": 0.594,
       "operation": "always",
       "follows": "nympheas.pond.rim",
       "body": "nympheas.basin"
@@ -270,7 +286,7 @@
     {
       "id": "pond.rim.10",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         0.888,
         -1.937,
         0.3905
@@ -280,6 +296,7 @@
         -1.55,
         0.38
       ],
+      "length": 0.594,
       "operation": "always",
       "follows": "nympheas.pond.rim",
       "body": "nympheas.basin"
@@ -287,7 +304,7 @@
     {
       "id": "pond.rim.11",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         1.474,
         -1.841,
         0.3905
@@ -297,6 +314,7 @@
         -1.46,
         0.38
       ],
+      "length": 0.594,
       "operation": "always",
       "follows": "nympheas.pond.rim",
       "body": "nympheas.basin"
@@ -304,7 +322,7 @@
     {
       "id": "pond.rim.12",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         2.048,
         -1.692,
         0.3905
@@ -314,6 +332,7 @@
         -1.32,
         0.38
       ],
+      "length": 0.594,
       "operation": "always",
       "follows": "nympheas.pond.rim",
       "body": "nympheas.basin"
@@ -321,7 +340,7 @@
     {
       "id": "pond.rim.13",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         2.601,
         -1.479,
         0.3905
@@ -331,6 +350,7 @@
         -1.125,
         0.38
       ],
+      "length": 0.594,
       "operation": "always",
       "follows": "nympheas.pond.rim",
       "body": "nympheas.basin"
@@ -338,7 +358,7 @@
     {
       "id": "pond.rim.14",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         3.117,
         -1.19,
         0.3905
@@ -348,6 +368,7 @@
         -0.868,
         0.38
       ],
+      "length": 0.594,
       "operation": "always",
       "follows": "nympheas.pond.rim",
       "body": "nympheas.basin"
@@ -355,7 +376,7 @@
     {
       "id": "pond.rim.15",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         3.561,
         -0.801,
         0.3905
@@ -365,6 +386,7 @@
         -0.546,
         0.38
       ],
+      "length": 0.594,
       "operation": "always",
       "follows": "nympheas.pond.rim",
       "body": "nympheas.basin"
@@ -372,7 +394,7 @@
     {
       "id": "pond.rim.16",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         3.848,
         -0.29,
         0.3905
@@ -382,6 +404,7 @@
         -0.182,
         0.38
       ],
+      "length": 0.594,
       "operation": "always",
       "follows": "nympheas.pond.rim",
       "body": "nympheas.basin"
@@ -389,7 +412,7 @@
     {
       "id": "pond.rim.17",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         3.848,
         0.29,
         0.3905
@@ -399,6 +422,7 @@
         0.182,
         0.38
       ],
+      "length": 0.594,
       "operation": "always",
       "follows": "nympheas.pond.rim",
       "body": "nympheas.basin"
@@ -406,7 +430,7 @@
     {
       "id": "pond.rim.18",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         3.561,
         0.801,
         0.3905
@@ -416,6 +440,7 @@
         0.546,
         0.38
       ],
+      "length": 0.594,
       "operation": "always",
       "follows": "nympheas.pond.rim",
       "body": "nympheas.basin"
@@ -423,7 +448,7 @@
     {
       "id": "pond.rim.19",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         3.117,
         1.19,
         0.3905
@@ -433,6 +458,7 @@
         0.868,
         0.38
       ],
+      "length": 0.594,
       "operation": "always",
       "follows": "nympheas.pond.rim",
       "body": "nympheas.basin"
@@ -440,7 +466,7 @@
     {
       "id": "pond.rim.20",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         2.601,
         1.479,
         0.3905
@@ -450,6 +476,7 @@
         1.125,
         0.38
       ],
+      "length": 0.594,
       "operation": "always",
       "follows": "nympheas.pond.rim",
       "body": "nympheas.basin"
@@ -457,7 +484,7 @@
     {
       "id": "pond.rim.21",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         2.048,
         1.692,
         0.3905
@@ -467,6 +494,7 @@
         1.32,
         0.38
       ],
+      "length": 0.594,
       "operation": "always",
       "follows": "nympheas.pond.rim",
       "body": "nympheas.basin"
@@ -474,7 +502,7 @@
     {
       "id": "pond.rim.22",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         1.474,
         1.841,
         0.3905
@@ -484,6 +512,7 @@
         1.46,
         0.38
       ],
+      "length": 0.594,
       "operation": "always",
       "follows": "nympheas.pond.rim",
       "body": "nympheas.basin"
@@ -491,7 +520,7 @@
     {
       "id": "pond.rim.23",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         0.888,
         1.937,
         0.3905
@@ -501,6 +530,7 @@
         1.55,
         0.38
       ],
+      "length": 0.594,
       "operation": "always",
       "follows": "nympheas.pond.rim",
       "body": "nympheas.basin"
@@ -508,7 +538,7 @@
     {
       "id": "pond.rim.24",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         0.297,
         1.984,
         0.3905
@@ -518,6 +548,7 @@
         1.594,
         0.38
       ],
+      "length": 0.594,
       "operation": "always",
       "follows": "nympheas.pond.rim",
       "body": "nympheas.basin"
@@ -525,7 +556,7 @@
     {
       "id": "pond.rim.25",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         -0.297,
         1.984,
         0.3905
@@ -535,6 +566,7 @@
         1.594,
         0.38
       ],
+      "length": 0.594,
       "operation": "always",
       "follows": "nympheas.pond.rim",
       "body": "nympheas.basin"
@@ -542,7 +574,7 @@
     {
       "id": "pond.rim.26",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         -0.888,
         1.937,
         0.3905
@@ -552,6 +584,7 @@
         1.55,
         0.38
       ],
+      "length": 0.594,
       "operation": "always",
       "follows": "nympheas.pond.rim",
       "body": "nympheas.basin"
@@ -559,7 +592,7 @@
     {
       "id": "pond.rim.27",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         -1.474,
         1.841,
         0.3905
@@ -569,6 +602,7 @@
         1.46,
         0.38
       ],
+      "length": 0.594,
       "operation": "always",
       "follows": "nympheas.pond.rim",
       "body": "nympheas.basin"
@@ -576,7 +610,7 @@
     {
       "id": "pond.rim.28",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         -2.048,
         1.692,
         0.3905
@@ -586,6 +620,7 @@
         1.32,
         0.38
       ],
+      "length": 0.594,
       "operation": "always",
       "follows": "nympheas.pond.rim",
       "body": "nympheas.basin"
@@ -593,7 +628,7 @@
     {
       "id": "pond.rim.29",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         -2.601,
         1.479,
         0.3905
@@ -603,6 +638,7 @@
         1.125,
         0.38
       ],
+      "length": 0.594,
       "operation": "always",
       "follows": "nympheas.pond.rim",
       "body": "nympheas.basin"
@@ -610,7 +646,7 @@
     {
       "id": "pond.rim.30",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         -3.117,
         1.19,
         0.3905
@@ -620,6 +656,7 @@
         0.868,
         0.38
       ],
+      "length": 0.594,
       "operation": "always",
       "follows": "nympheas.pond.rim",
       "body": "nympheas.basin"
@@ -627,7 +664,7 @@
     {
       "id": "pond.rim.31",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         -3.561,
         0.801,
         0.3905
@@ -637,6 +674,7 @@
         0.546,
         0.38
       ],
+      "length": 0.594,
       "operation": "always",
       "follows": "nympheas.pond.rim",
       "body": "nympheas.basin"
@@ -644,7 +682,7 @@
     {
       "id": "pond.rim.32",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         -3.848,
         0.29,
         0.3905
@@ -654,6 +692,7 @@
         0.182,
         0.38
       ],
+      "length": 0.594,
       "operation": "always",
       "follows": "nympheas.pond.rim",
       "body": "nympheas.basin"
@@ -661,7 +700,7 @@
     {
       "id": "stair.rail.north",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         3.6,
         -1.115,
         -2.5
@@ -671,12 +710,13 @@
         -0.6,
         -3.383
       ],
+      "length": 13.2,
       "operation": "always"
     },
     {
       "id": "stair.rail.south",
       "type": "linear-cove.3000k",
-      "mount": [
+      "point": [
         3.6,
         1.115,
         -2.5
@@ -686,12 +726,13 @@
         0.6,
         -3.383
       ],
+      "length": 13.2,
       "operation": "always"
     },
     {
       "id": "stair.downlight.1",
       "type": "downlight.3000k.31deg",
-      "mount": [
+      "point": [
         6.3,
         0.0,
         -0.4
@@ -706,7 +747,7 @@
     {
       "id": "stair.downlight.2",
       "type": "downlight.3000k.31deg",
-      "mount": [
+      "point": [
         10.1,
         0.0,
         -0.4
