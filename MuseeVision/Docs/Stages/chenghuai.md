@@ -97,8 +97,10 @@ its own stage, so mated frames coincide and face opposite ways.
     round the gate's front steps and side stones (y 0 … 1.17, |x| ≤ 1.50), the platform's footing (to y 0.05) and the
     gables' ends (to y 0.06); top z 0.000 (the Rotunda's floor), 0.12 deep. The joint's threshold starts on that arc.
 - **Site's joint** builds the travertine threshold through the drum's 1.20, the brushed-bronze strip on the mating arc
-  (R 11.20, across the clear width), the linings, and the surrounds on the Rotunda's inner face and the drum's outer
-  face. There are no wedges (the faces are the same cylinder). Chenghuai builds no rough opening: its side has no wall.
+  (R 11.20, across the clear width), the linings, and the surround on the drum's outer face (the porch side). The
+  Rotunda's own archivolt (rotunda.md §3.3) is the dressing on its inner face, and its port says so (`rotunda.north`
+  marks its surround as its own), so the joint draws none there. There are no wedges (the faces are the same cylinder).
+  Chenghuai builds no rough opening: its side has no wall.
 - **Blinds.** Mated tonight: open portal, no leaves. On the stand alone (or with the Rotunda absent) a closed pair of
   cast bronze leaves fills the class opening on the port cylinder, meeting rail on the axis:
   `chenghuai.south.blind-doors`.
@@ -1054,7 +1056,8 @@ by the board's willow and pine (plums kept).
   0)**, yaw 0. Every old number: y + 17.000.
 - **The port.** `chenghuai.south` at (0, 5.800, 0) facing +y on the drum's cylinder R 11.20 about (0, 17.000); class
   `doorway.4000x6500.arched`; passage 0; Chenghuai has no wall there and builds no rough opening. The joint builds the
-  threshold, strip, linings and both surrounds; Chenghuai's porch walls stand at |x| 2.35 … 2.95 and end on the drum
+  threshold, strip, linings and the surround on the drum's outer face (the porch side); the Rotunda's own archivolt
+  (rotunda.md §3.3) dresses the inner face. Chenghuai's porch walls stand at |x| 2.35 … 2.95 and end on the drum
   face, the paving ends on the mating arc.
 - **One composition.** Build the Qing hall once (§3.1 rule) and instance it 14 times plus the galleries; the gate, the
   垂花门, walls and garden are their own drawings.
