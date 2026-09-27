@@ -1,0 +1,623 @@
+{
+  "stage": "salon",
+  "works": [
+    {
+      "work": "monet-the-magpie",
+      "source": "data/artworks.json",
+      "anchor": "salon.bay1.wall.north",
+      "along": 8.35,
+      "height": 1.105,
+      "size": [
+        1.3,
+        0.89
+      ],
+      "support": "canvas",
+      "frame": "frame.gilt.carved",
+      "care": "oil-and-tempera"
+    },
+    {
+      "work": "monet-terrace-sainte-adresse",
+      "source": "data/artworks.json",
+      "anchor": "salon.bay1.wall.north",
+      "along": 1.35,
+      "height": 1.06,
+      "size": [
+        1.3,
+        0.98
+      ],
+      "support": "canvas",
+      "frame": "frame.gilt.carved",
+      "care": "oil-and-tempera"
+    },
+    {
+      "work": "sisley-flood-port-marly",
+      "source": "data/artworks.json",
+      "anchor": "salon.bay1.wall.south",
+      "along": 1.795,
+      "height": 1.25,
+      "size": [
+        0.81,
+        0.6
+      ],
+      "support": "canvas",
+      "frame": "frame.gilt.carved",
+      "care": "oil-and-tempera"
+    },
+    {
+      "work": "monet-women-in-the-garden",
+      "source": "data/artworks.json",
+      "anchor": "salon.bay1.wall.south",
+      "along": 4.675,
+      "height": 0.6,
+      "size": [
+        2.05,
+        2.55
+      ],
+      "support": "canvas",
+      "frame": "frame.gilt.carved",
+      "care": "oil-and-tempera"
+    },
+    {
+      "work": "pissarro-hoarfrost",
+      "source": "data/artworks.json",
+      "anchor": "salon.bay1.wall.south",
+      "along": 8.735,
+      "height": 1.225,
+      "size": [
+        0.93,
+        0.65
+      ],
+      "support": "canvas",
+      "frame": "frame.gilt.carved",
+      "care": "oil-and-tempera"
+    },
+    {
+      "work": "bazille-family-reunion",
+      "source": "data/artworks.json",
+      "anchor": "salon.bay1.wall.east",
+      "along": 1.85,
+      "height": 0.79,
+      "size": [
+        2.3,
+        1.52
+      ],
+      "support": "canvas",
+      "frame": "frame.gilt.carved",
+      "care": "oil-and-tempera"
+    },
+    {
+      "work": "monet-impression-sunrise",
+      "source": "data/artworks.json",
+      "anchor": "salon.bay1.stele.east",
+      "along": 0.285,
+      "height": 1.31,
+      "size": [
+        0.63,
+        0.48
+      ],
+      "support": "canvas",
+      "frame": "frame.gilt.carved",
+      "care": "oil-and-tempera",
+      "note": "On the glass stele's east face, frame backed by nothing: its back (linen, stretcher) seen through the glass."
+    },
+    {
+      "work": "manet-luncheon-on-the-grass",
+      "source": "data/artworks.json",
+      "anchor": "salon.cabinet.wall.north",
+      "along": 2.675,
+      "height": 0.6,
+      "size": [
+        2.65,
+        2.08
+      ],
+      "support": "canvas",
+      "frame": "frame.gilt.carved",
+      "care": "oil-and-tempera"
+    },
+    {
+      "work": "manet-olympia",
+      "source": "data/artworks.json",
+      "anchor": "salon.cabinet.wall.east",
+      "along": 3.05,
+      "height": 0.9,
+      "size": [
+        1.9,
+        1.3
+      ],
+      "support": "canvas",
+      "frame": "frame.gilt.carved",
+      "care": "oil-and-tempera"
+    },
+    {
+      "work": "manet-bar-folies-bergere",
+      "source": "data/artworks.json",
+      "anchor": "salon.cabinet.wall.west",
+      "along": 3.35,
+      "height": 1.07,
+      "size": [
+        1.3,
+        0.96
+      ],
+      "support": "canvas",
+      "frame": "frame.gilt.carved",
+      "care": "oil-and-tempera"
+    },
+    {
+      "work": "pissarro-boulevard-montmartre-winter",
+      "source": "data/artworks.json",
+      "anchor": "salon.bay2.wall.north",
+      "along": 8.395,
+      "height": 1.225,
+      "size": [
+        0.81,
+        0.65
+      ],
+      "support": "canvas",
+      "frame": "frame.gilt.carved",
+      "care": "oil-and-tempera"
+    },
+    {
+      "work": "caillebotte-paris-street-rainy-day",
+      "source": "data/artworks.json",
+      "anchor": "salon.bay2.wall.north",
+      "along": 4.02,
+      "height": 0.6,
+      "size": [
+        2.76,
+        2.12
+      ],
+      "support": "canvas",
+      "frame": "frame.gilt.carved",
+      "care": "oil-and-tempera"
+    },
+    {
+      "work": "pissarro-boulevard-montmartre-night",
+      "source": "data/artworks.json",
+      "anchor": "salon.bay2.wall.north",
+      "along": 1.675,
+      "height": 1.285,
+      "size": [
+        0.65,
+        0.53
+      ],
+      "support": "canvas",
+      "frame": "frame.gilt.carved",
+      "care": "oil-and-tempera"
+    },
+    {
+      "work": "monet-gare-saint-lazare",
+      "source": "data/artworks.json",
+      "anchor": "salon.bay2.wall.south",
+      "along": 1.08,
+      "height": 1.175,
+      "size": [
+        1.04,
+        0.75
+      ],
+      "support": "canvas",
+      "frame": "frame.gilt.carved",
+      "care": "oil-and-tempera"
+    },
+    {
+      "work": "caillebotte-floor-scrapers",
+      "source": "data/artworks.json",
+      "anchor": "salon.bay2.wall.south",
+      "along": 3.465,
+      "height": 1.04,
+      "size": [
+        1.47,
+        1.02
+      ],
+      "support": "canvas",
+      "frame": "frame.gilt.carved",
+      "care": "oil-and-tempera"
+    },
+    {
+      "work": "degas-absinthe",
+      "source": "data/artworks.json",
+      "anchor": "salon.bay2.wall.south",
+      "along": 6.455,
+      "height": 1.09,
+      "size": [
+        0.69,
+        0.92
+      ],
+      "support": "canvas",
+      "frame": "frame.gilt.carved",
+      "care": "oil-and-tempera"
+    },
+    {
+      "work": "degas-dance-class",
+      "source": "data/artworks.json",
+      "anchor": "salon.bay2.wall.south",
+      "along": 8.615,
+      "height": 1.13,
+      "size": [
+        0.77,
+        0.84
+      ],
+      "support": "canvas",
+      "frame": "frame.gilt.carved",
+      "care": "oil-and-tempera"
+    },
+    {
+      "work": "monet-la-grenouillere",
+      "source": "data/artworks.json",
+      "anchor": "salon.bay3.wall.north",
+      "along": 8.1,
+      "height": 1.175,
+      "size": [
+        1.0,
+        0.75
+      ],
+      "support": "canvas",
+      "frame": "frame.gilt.carved",
+      "care": "oil-and-tempera"
+    },
+    {
+      "work": "renoir-boating-party",
+      "source": "data/artworks.json",
+      "anchor": "salon.bay3.wall.north",
+      "along": 4.535,
+      "height": 0.9,
+      "size": [
+        1.73,
+        1.3
+      ],
+      "support": "canvas",
+      "frame": "frame.gilt.carved",
+      "care": "oil-and-tempera"
+    },
+    {
+      "work": "monet-woman-with-a-parasol",
+      "source": "data/artworks.json",
+      "anchor": "salon.bay3.wall.north",
+      "along": 1.795,
+      "height": 1.05,
+      "size": [
+        0.81,
+        1.0
+      ],
+      "support": "canvas",
+      "frame": "frame.gilt.carved",
+      "care": "oil-and-tempera"
+    },
+    {
+      "work": "renoir-dance-at-bougival",
+      "source": "data/artworks.json",
+      "anchor": "salon.bay3.wall.south",
+      "along": 1.71,
+      "height": 0.64,
+      "size": [
+        0.98,
+        1.82
+      ],
+      "support": "canvas",
+      "frame": "frame.gilt.carved",
+      "care": "oil-and-tempera"
+    },
+    {
+      "work": "renoir-bal-du-moulin",
+      "source": "data/artworks.json",
+      "anchor": "salon.bay3.wall.south",
+      "along": 4.525,
+      "height": 0.895,
+      "size": [
+        1.75,
+        1.31
+      ],
+      "support": "canvas",
+      "frame": "frame.gilt.carved",
+      "care": "oil-and-tempera"
+    },
+    {
+      "work": "monet-poppy-field",
+      "source": "data/artworks.json",
+      "anchor": "salon.bay3.wall.south",
+      "along": 8.275,
+      "height": 1.3,
+      "size": [
+        0.65,
+        0.5
+      ],
+      "support": "canvas",
+      "frame": "frame.gilt.carved",
+      "care": "oil-and-tempera"
+    },
+    {
+      "work": "morisot-harbor-lorient",
+      "source": "data/artworks.json",
+      "anchor": "salon.bay4.wall.north",
+      "along": 9.135,
+      "height": 1.33,
+      "size": [
+        0.73,
+        0.44
+      ],
+      "support": "canvas",
+      "frame": "frame.gilt.carved",
+      "care": "oil-and-tempera"
+    },
+    {
+      "work": "morisot-summers-day",
+      "source": "data/artworks.json",
+      "anchor": "salon.bay4.wall.north",
+      "along": 7.425,
+      "height": 1.32,
+      "size": [
+        0.75,
+        0.46
+      ],
+      "support": "canvas",
+      "frame": "frame.gilt.carved",
+      "care": "oil-and-tempera"
+    },
+    {
+      "work": "morisot-the-cradle",
+      "source": "data/artworks.json",
+      "anchor": "salon.bay4.wall.north",
+      "along": 5.17,
+      "height": 1.27,
+      "size": [
+        0.46,
+        0.56
+      ],
+      "support": "canvas",
+      "frame": "frame.gilt.carved",
+      "care": "oil-and-tempera"
+    },
+    {
+      "work": "morisot-dining-room",
+      "source": "data/artworks.json",
+      "anchor": "salon.bay4.wall.north",
+      "along": 2.95,
+      "height": 1.245,
+      "size": [
+        0.5,
+        0.61
+      ],
+      "support": "canvas",
+      "frame": "frame.gilt.carved",
+      "care": "oil-and-tempera"
+    },
+    {
+      "work": "cassatt-childs-bath",
+      "source": "data/artworks.json",
+      "anchor": "salon.bay4.wall.north",
+      "along": 1.07,
+      "height": 1.05,
+      "size": [
+        0.66,
+        1.0
+      ],
+      "support": "canvas",
+      "frame": "frame.gilt.carved",
+      "care": "oil-and-tempera"
+    },
+    {
+      "work": "renoir-la-loge",
+      "source": "data/artworks.json",
+      "anchor": "salon.bay4.wall.south",
+      "along": 1.48,
+      "height": 1.15,
+      "size": [
+        0.64,
+        0.8
+      ],
+      "support": "canvas",
+      "frame": "frame.gilt.carved",
+      "care": "oil-and-tempera"
+    },
+    {
+      "work": "cassatt-in-the-loge",
+      "source": "data/artworks.json",
+      "anchor": "salon.bay4.wall.south",
+      "along": 2.67,
+      "height": 1.145,
+      "size": [
+        0.66,
+        0.81
+      ],
+      "support": "canvas",
+      "frame": "frame.gilt.carved",
+      "care": "oil-and-tempera"
+    },
+    {
+      "work": "cassatt-blue-armchair",
+      "source": "data/artworks.json",
+      "anchor": "salon.bay4.wall.south",
+      "along": 5.15,
+      "height": 1.1,
+      "size": [
+        1.3,
+        0.9
+      ],
+      "support": "canvas",
+      "frame": "frame.gilt.carved",
+      "care": "oil-and-tempera"
+    },
+    {
+      "work": "cassatt-boating-party",
+      "source": "data/artworks.json",
+      "anchor": "salon.bay4.wall.south",
+      "along": 8.215,
+      "height": 1.1,
+      "size": [
+        1.17,
+        0.9
+      ],
+      "support": "canvas",
+      "frame": "frame.gilt.carved",
+      "care": "oil-and-tempera"
+    },
+    {
+      "work": "monet-stacks-of-wheat",
+      "source": "data/artworks.json",
+      "anchor": "salon.bay5.wall.south",
+      "along": 2.9,
+      "height": 1.25,
+      "size": [
+        1.0,
+        0.6
+      ],
+      "support": "canvas",
+      "frame": "frame.gilt.carved",
+      "care": "oil-and-tempera"
+    },
+    {
+      "work": "monet-bridge-water-lilies",
+      "source": "data/artworks.json",
+      "anchor": "salon.bay5.wall.south",
+      "along": 7.63,
+      "height": 1.085,
+      "size": [
+        0.74,
+        0.93
+      ],
+      "support": "canvas",
+      "frame": "frame.gilt.carved",
+      "care": "oil-and-tempera"
+    },
+    {
+      "work": "monet-rouen-cathedral",
+      "source": "data/artworks.json",
+      "anchor": "salon.bay5.wall.north",
+      "along": 7.575,
+      "height": 1.05,
+      "size": [
+        0.65,
+        1.0
+      ],
+      "support": "canvas",
+      "frame": "frame.gilt.carved",
+      "care": "oil-and-tempera",
+      "canvas": "monet-rouen-cathedral-1",
+      "note": "One of five canvases of the one catalogue work; image assets/paintings/monet-rouen-cathedral-1.jpg."
+    },
+    {
+      "work": "monet-rouen-cathedral",
+      "source": "data/artworks.json",
+      "anchor": "salon.bay5.wall.north",
+      "along": 6.475,
+      "height": 1.05,
+      "size": [
+        0.65,
+        1.0
+      ],
+      "support": "canvas",
+      "frame": "frame.gilt.carved",
+      "care": "oil-and-tempera",
+      "canvas": "monet-rouen-cathedral-2",
+      "note": "One of five canvases of the one catalogue work; image assets/paintings/monet-rouen-cathedral-2.jpg."
+    },
+    {
+      "work": "monet-rouen-cathedral",
+      "source": "data/artworks.json",
+      "anchor": "salon.bay5.wall.north",
+      "along": 5.375,
+      "height": 1.05,
+      "size": [
+        0.65,
+        1.0
+      ],
+      "support": "canvas",
+      "frame": "frame.gilt.carved",
+      "care": "oil-and-tempera",
+      "canvas": "monet-rouen-cathedral-3",
+      "note": "One of five canvases of the one catalogue work; image assets/paintings/monet-rouen-cathedral-3.jpg."
+    },
+    {
+      "work": "monet-rouen-cathedral",
+      "source": "data/artworks.json",
+      "anchor": "salon.bay5.wall.north",
+      "along": 4.275,
+      "height": 1.05,
+      "size": [
+        0.65,
+        1.0
+      ],
+      "support": "canvas",
+      "frame": "frame.gilt.carved",
+      "care": "oil-and-tempera",
+      "canvas": "monet-rouen-cathedral-4",
+      "note": "One of five canvases of the one catalogue work; image assets/paintings/monet-rouen-cathedral-4.jpg."
+    },
+    {
+      "work": "monet-rouen-cathedral",
+      "source": "data/artworks.json",
+      "anchor": "salon.bay5.wall.north",
+      "along": 3.175,
+      "height": 1.05,
+      "size": [
+        0.65,
+        1.0
+      ],
+      "support": "canvas",
+      "frame": "frame.gilt.carved",
+      "care": "oil-and-tempera",
+      "canvas": "monet-rouen-cathedral-5",
+      "note": "One of five canvases of the one catalogue work; image assets/paintings/monet-rouen-cathedral-5.jpg."
+    },
+    {
+      "work": "salon-1874-case",
+      "source": "assets/collection.json",
+      "anchor": "salon.bay1.case",
+      "part": "catalogue",
+      "centre": [
+        -6.5,
+        -1.95,
+        0.866
+      ],
+      "height": 0.866,
+      "size": [
+        0.25,
+        0.184
+      ],
+      "support": "paper",
+      "frame": "none",
+      "care": "works-on-paper",
+      "note": "Catalogue of the first exhibition (April 1874), open at pp. 14-15, flat on the felt at case-x -0.40; size from assets/salon/manifest.json (0.25 m wide at the scan's 2540 x 1866 px)."
+    },
+    {
+      "work": "salon-1874-case",
+      "source": "assets/collection.json",
+      "anchor": "salon.bay1.case",
+      "part": "charivari",
+      "centre": [
+        -5.82,
+        -1.95,
+        0.875
+      ],
+      "height": 0.875,
+      "size": [
+        0.32,
+        0.473
+      ],
+      "support": "paper",
+      "frame": "none",
+      "care": "works-on-paper.fugitive",
+      "note": "Le Charivari, 25 April 1874, p. 2 (newsprint), on a felt board raised 10 mm at case-x +0.28; size from assets/salon/manifest.json (0.32 m wide at 2350 x 3470 px)."
+    },
+    {
+      "work": "degas-little-dancer",
+      "source": "data/artworks.json",
+      "anchor": "salon.bay2.dancer",
+      "centre": [
+        -20.5,
+        3.4,
+        1.0
+      ],
+      "height": 1.0,
+      "size": [
+        null,
+        0.994
+      ],
+      "facing_deg": 0.0,
+      "support": "bronze with cotton tulle skirt and silk-satin ribbon",
+      "frame": "none",
+      "care": "textiles.silk",
+      "scan": "assets/sculptures/degas-little-dancer.mvm",
+      "note": "Feet on the plinth top (1.00) at its centre, facing +x (east, towards the arriving visitor). Height 0.994 (data/sculptures.json heightCm 99.4); width from the scan's bounds (Art measures). Scan CC BY 4.0 (assets/sculptures/CREDITS.md): credit required. Care: the most sensitive component (the silk ribbon)."
+    }
+  ]
+}

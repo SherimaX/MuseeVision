@@ -1,0 +1,70 @@
+{
+  "stage": "nympheas",
+  "mechanisms": [
+    {
+      "key": "nympheas.pond-lift",
+      "joint": "prismatic",
+      "body": "nympheas.basin",
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "travel": 2.6,
+      "time": 5.0,
+      "profile": "ease-in-out",
+      "control": "nympheas.golden-iris",
+      "open": [
+        {
+          "channel": "nympheas.pond.rim",
+          "to": 1.0,
+          "time": 1.0
+        },
+        {
+          "move": "open"
+        }
+      ],
+      "close": [
+        {
+          "move": "closed"
+        },
+        {
+          "channel": "nympheas.pond.rim",
+          "to": 0.0,
+          "time": 0.0
+        }
+      ],
+      "guard": "body-in-travel",
+      "clearance": 0.05,
+      "publishes": "nympheas.pond.height",
+      "note": "Four synchronised hydraulic telescopic rams in the bronze posts at (±3.0, ±1.35); ≈ 22 t. Ease-in-out as a jerk-limited S-curve: a ≤ 0.70 m/s², jerk ≤ 1.2 m/s³, cruise 0.791 m/s. Rim channel 0→1 over 1.0 s as built (PondLift.cpp:209), lengths lit in order from the west apex clockwise; it drops to 0 on landing. One use toggles (Down→open, Up→close); no use while moving. Uses only from the oval floor (not over the opening when Up). Auto-close when the visitor is on level 0 more than 16.0 from the centre. The guard holds, never reverses. Interlock: the last 0.10 of descent waits for nympheas.guard-rails housed."
+    },
+    {
+      "key": "nympheas.guard-rails",
+      "joint": "prismatic",
+      "body": "nympheas.guard-rails",
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "travel": 1.0,
+      "time": 5.0,
+      "profile": "linear",
+      "follows": {
+        "channel": "nympheas.pond.height",
+        "in": [
+          0.0385,
+          0.4231
+        ],
+        "out": [
+          0,
+          1.0
+        ]
+      },
+      "guard": "body-in-travel",
+      "clearance": 0.05,
+      "note": "The three rails round the open well (§3.6) rise 0 → 1.00 m as the pond passes 0.10 → 1.10 m of its 2.6 m, and are housed before the pond's last 0.10 of descent. Driven by the pond's channel, never used directly."
+    }
+  ]
+}

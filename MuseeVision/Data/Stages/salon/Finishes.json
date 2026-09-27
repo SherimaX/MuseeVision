@@ -1,0 +1,425 @@
+{
+  "stage": "salon",
+  "finishes": [
+    {
+      "surface": "salon.floor.parquet",
+      "material": "oak.sessile-french",
+      "working": "oiled.hard-waxed",
+      "history": "foot-worn",
+      "note": "Versailles panels 1.2 m on the room's grid in every bay and the Manet cabinet, 22 mm, quartersawn (ray fleck); every frame member, lattice strip, infill and border board its own piece with its own grain; the wax worn along the axis."
+    },
+    {
+      "surface": "salon.floor.stone",
+      "material": "stone.travertine-romano",
+      "working": "honed",
+      "history": "foot-worn",
+      "note": "30 mm under every transverse arch (pier +-0.60, |y| <= 4.50); vein-cut bands along the axis; voids filled (walked)."
+    },
+    {
+      "surface": "salon.floor.strip",
+      "material": "bronze.cusn10",
+      "working": "brushed",
+      "history": "foot-worn",
+      "note": "12 x 12 mm strips flush (0.5 mm proud) where oak meets stone: the doorway detail repeated under each arch (Story: was brass on the proposal)."
+    },
+    {
+      "surface": "salon.floor.viewing-stone",
+      "material": "stone.travertine-romano",
+      "working": "honed",
+      "history": "foot-worn",
+      "note": "16 flush discs r 0.40 let into the oak; voids filled."
+    },
+    {
+      "surface": "salon.floor.viewing-stone.ring",
+      "material": "bronze.cusn10",
+      "working": "gilt.gold-leaf.oil",
+      "history": "foot-worn",
+      "note": "Flush ring r 0.40-0.45 round each viewing stone; oil-gilt on cast bronze, worn through to the brown bronze where stood on."
+    },
+    {
+      "surface": "salon.bay1.silk",
+      "material": "accent.silk",
+      "working": "stretched",
+      "history": "new",
+      "note": "Bay 1 oxblood #6A2A22 (the approved one step deeper): plain silk with a soft slub over 5 mm felt interlining on 18 mm battens, z 0.15-6.25 on the walls, and on the pier faces looking into bay 1 (12 mm proud, z 0.30-6.06, stopped 0.14 short of the jamb)."
+    },
+    {
+      "surface": "salon.bay2.silk",
+      "material": "accent.silk",
+      "working": "stretched",
+      "history": "new",
+      "note": "Bay 2 zinc #47515A (the approved one step deeper): plain silk with a soft slub over 5 mm felt interlining on 18 mm battens, z 0.15-6.25 on the walls, and on the pier faces looking into bay 2 (12 mm proud, z 0.30-6.06, stopped 0.14 short of the jamb)."
+    },
+    {
+      "surface": "salon.bay3.silk",
+      "material": "accent.silk",
+      "working": "stretched",
+      "history": "new",
+      "note": "Bay 3 sage #5A6D54 (the approved one step deeper): plain silk with a soft slub over 5 mm felt interlining on 18 mm battens, z 0.15-6.25 on the walls, and on the pier faces looking into bay 3 (12 mm proud, z 0.30-6.06, stopped 0.14 short of the jamb)."
+    },
+    {
+      "surface": "salon.bay4.silk",
+      "material": "accent.silk",
+      "working": "stretched",
+      "history": "new",
+      "note": "Bay 4 old rose #8A5A54 (the approved one step deeper): plain silk with a soft slub over 5 mm felt interlining on 18 mm battens, z 0.15-6.25 on the walls, and on the pier faces looking into bay 4 (12 mm proud, z 0.30-6.06, stopped 0.14 short of the jamb)."
+    },
+    {
+      "surface": "salon.bay5.silk",
+      "material": "accent.silk",
+      "working": "stretched",
+      "history": "new",
+      "note": "Bay 5 haystack #A0793A (the approved one step deeper): plain silk with a soft slub over 5 mm felt interlining on 18 mm battens, z 0.15-6.25 on the walls, and on the pier faces looking into bay 5 (12 mm proud, z 0.30-6.06, stopped 0.14 short of the jamb)."
+    },
+    {
+      "surface": "salon.cabinet.silk",
+      "material": "accent.silk",
+      "working": "stretched",
+      "history": "new",
+      "note": "Manet cabinet green #2F3A33, as the bays' silk, z 0.15-5.10 on all four walls."
+    },
+    {
+      "surface": "salon.pier",
+      "material": "stone.travertine-romano",
+      "working": "honed",
+      "history": "new",
+      "note": "Pier side and jamb faces (the 0.14 m stone edge at every jamb included), coursed ashlar; voids open."
+    },
+    {
+      "surface": "salon.pier.base",
+      "material": "stone.travertine-romano",
+      "working": "honed",
+      "history": "foot-worn",
+      "note": "P3 base swept round each pier's three faces, mitred."
+    },
+    {
+      "surface": "salon.pier.impost",
+      "material": "stone.travertine-romano",
+      "working": "honed",
+      "history": "new",
+      "note": "P4 impost at 6.06-6.50 round each pier's three faces; the east face of pier 1's north impost carries Bazille's two framers."
+    },
+    {
+      "surface": "salon.arch.voussoir",
+      "material": "stone.travertine-romano",
+      "working": "honed",
+      "history": "new",
+      "note": "Fifteen voussoirs per arch, each its own slice of the quarry; V-jointed 12 mm on both faces and across the soffit."
+    },
+    {
+      "surface": "salon.arch.keystone",
+      "material": "stone.travertine-romano",
+      "working": "honed",
+      "history": "new",
+      "note": "Voussoir 7, 20 mm proud, flat top at 12.30."
+    },
+    {
+      "surface": "salon.arch.archivolt",
+      "material": "stone.travertine-romano",
+      "working": "honed",
+      "history": "new",
+      "note": "P7 bead-fascia-cavetto round the extrados on both faces, stopped against the keystone."
+    },
+    {
+      "surface": "salon.arch.spandrel",
+      "material": "stone.travertine-romano",
+      "working": "honed",
+      "history": "new",
+      "note": "Coursed spandrel diaphragm from the extrados (R 5.30) to the vault's back (R 7.03) on both arch faces."
+    },
+    {
+      "surface": "salon.skirting",
+      "material": "stone.travertine-romano",
+      "working": "honed",
+      "history": "foot-worn",
+      "note": "P2 slotted skirting 0.18 high, bays and cabinet."
+    },
+    {
+      "surface": "salon.door.reveal",
+      "material": "stone.travertine-romano",
+      "working": "honed",
+      "history": "handled",
+      "note": "The cabinet door's jambs and arched soffit through the north wall (y -7.00 to -7.60)."
+    },
+    {
+      "surface": "salon.door.architrave",
+      "material": "stone.travertine-romano",
+      "working": "honed",
+      "history": "handled",
+      "note": "P5 two-fascia architrave: the cabinet door on both faces, the east door and the oval door on their bay faces."
+    },
+    {
+      "surface": "salon.east.reveal",
+      "material": "stone.travertine-romano",
+      "working": "honed",
+      "history": "handled",
+      "note": "The Salon's own east door, x 0.000 to +0.300: jambs at y +-1.500 and the round head r 1.50 springing 3.30 (crown 4.80)."
+    },
+    {
+      "surface": "salon.east.step",
+      "material": "stone.travertine-romano",
+      "working": "honed",
+      "history": "new",
+      "note": "The step face in the plane x +0.300, facing east, between the class arch (crown 6.00) and the Salon's arch (crown 4.80): a band 1.20 high, arrises eased 3 mm."
+    },
+    {
+      "surface": "salon.port.rough-opening",
+      "material": "stone.travertine-romano",
+      "working": "sawn",
+      "history": "new",
+      "note": "Rough-opening faces at both ports (hidden behind the joint's lining)."
+    },
+    {
+      "surface": "salon.cornice",
+      "material": "white.fibrous-plaster",
+      "working": "cast",
+      "history": "new",
+      "note": "P1 cornice with the vault trough, cast in lengths with hand mitres; face plaster of Paris."
+    },
+    {
+      "surface": "salon.vault.coffer",
+      "material": "white.lime-plaster",
+      "working": "run",
+      "history": "new",
+      "note": "The coffers and ribs of the barrel vault (19 rows x 8 columns per bay), three steps run in lime."
+    },
+    {
+      "surface": "salon.vault.band",
+      "material": "white.lime-plaster",
+      "working": "trowelled",
+      "history": "new",
+      "note": "Plain bands 0.7704 wide against each arch face and end wall."
+    },
+    {
+      "surface": "salon.vault.rosette",
+      "material": "white.fibrous-plaster",
+      "working": "gilt.gold-leaf.oil",
+      "history": "aged.patina",
+      "note": "750 rosettes d 0.22 on the coffers' deepest panels: cast plaster of Paris, oil-gilt, dirt in the hollows."
+    },
+    {
+      "surface": "salon.lunette",
+      "material": "white.lime-plaster",
+      "working": "trowelled",
+      "history": "new",
+      "note": "The two end walls above the springing, up to the vault."
+    },
+    {
+      "surface": "salon.lantern.shaft",
+      "material": "white.lime-plaster",
+      "working": "trowelled",
+      "history": "new",
+      "note": "The five lantern shafts' walls from the vault to the roof top."
+    },
+    {
+      "surface": "salon.lantern.grid",
+      "material": "bronze.cusn10",
+      "working": "patinated",
+      "history": "new",
+      "note": "Lantern frames: the grid under each inner pane (70 deep) and bay 4's scrim frame (25 x 25 angle)."
+    },
+    {
+      "surface": "salon.lantern.pane.clear",
+      "material": "glass.low-iron",
+      "working": "laminated",
+      "history": "new",
+      "note": "Inner panes of bays 1, 3 and 5 at 13.58."
+    },
+    {
+      "surface": "salon.lantern.pane.opal",
+      "material": "glass.mouth-blown",
+      "working": "flashed-opal",
+      "history": "new",
+      "note": "Bay 2's inner pane at 13.58: Lamberts flashed opal (the sun stopped)."
+    },
+    {
+      "surface": "salon.lantern.scrim",
+      "material": "accent.linen",
+      "working": "stretched",
+      "history": "new",
+      "note": "Bay 4: a linen scrim stretched under the grid at 13.49, sagging 30 mm: a fixed diffuser, not a blind (D-014)."
+    },
+    {
+      "surface": "salon.lantern.outer.glass",
+      "material": "glass.low-iron",
+      "working": "laminated.uv-filtering",
+      "history": "weathered",
+      "note": "The pitched weather glazing over each lantern (the Glazed openings); rain and soiling from Giverny's weather."
+    },
+    {
+      "surface": "salon.lantern.outer.bars",
+      "material": "bronze.cusn10",
+      "working": "cast",
+      "history": "weathered",
+      "note": "Glazing bars, ridge and the cap flashing on the kerb of each outer lantern."
+    },
+    {
+      "surface": "salon.lantern.kerb",
+      "material": "stone.travertine-romano",
+      "working": "honed",
+      "history": "weathered",
+      "note": "Kerb 14.05-14.20 round each lantern opening on the roof."
+    },
+    {
+      "surface": "salon.roof.paving",
+      "material": "stone.travertine-romano",
+      "working": "honed",
+      "history": "weathered",
+      "note": "The top of the Salon's roof slab (14.05) and the cabinet's (6.30), laid to falls in polish."
+    },
+    {
+      "surface": "salon.exterior.wall",
+      "material": "stone.travertine-romano",
+      "working": "honed",
+      "history": "weathered",
+      "note": "Outer faces of the Salon and the cabinet, coursed ashlar, voids open (plain tonight; the dress is polish)."
+    },
+    {
+      "surface": "salon.pergola",
+      "material": "bronze.cusn10",
+      "working": "cast",
+      "history": "weathered",
+      "note": "Bay 3's pergola on the roof: posts, beams, bars."
+    },
+    {
+      "surface": "salon.pergola.planter",
+      "material": "stone.travertine-romano",
+      "working": "honed",
+      "history": "weathered",
+      "note": "Four planters 0.70 square x 0.55 high, 60 mm walls."
+    },
+    {
+      "surface": "salon.cabinet.cornice",
+      "material": "white.fibrous-plaster",
+      "working": "cast",
+      "history": "new",
+      "note": "P8 slot-and-cove cornice, a closed loop."
+    },
+    {
+      "surface": "salon.cabinet.ceiling",
+      "material": "white.lime-plaster",
+      "working": "trowelled",
+      "history": "new",
+      "note": "Flat ceiling at 5.50 and the laylight well's four sides (5.50-5.90)."
+    },
+    {
+      "surface": "salon.cabinet.laylight",
+      "material": "glass.low-iron",
+      "working": "acid-etched",
+      "history": "new",
+      "note": "The cabinet's laylight at 5.90, 5.00 x 5.00: etched low-iron, the diffuser of the luminous ceiling above it."
+    },
+    {
+      "surface": "salon.bench.plinth",
+      "material": "oak.sessile-french",
+      "working": "fumed.waxed",
+      "history": "handled",
+      "note": "Bench plinths 75 mm high, set back 40 mm, arrises eased 4 mm."
+    },
+    {
+      "surface": "salon.bench.bay2.velvet",
+      "material": "accent.mohair-velvet",
+      "working": "upholstered",
+      "history": "handled",
+      "note": "The two benches of bay 2, mohair velvet dyed the bay's silk colour #47515A; quilted top, piped."
+    },
+    {
+      "surface": "salon.bench.bay3.velvet",
+      "material": "accent.mohair-velvet",
+      "working": "upholstered",
+      "history": "handled",
+      "note": "The two benches of bay 3, mohair velvet dyed the bay's silk colour #5A6D54; quilted top, piped."
+    },
+    {
+      "surface": "salon.bench.bay4.velvet",
+      "material": "accent.mohair-velvet",
+      "working": "upholstered",
+      "history": "handled",
+      "note": "The two benches of bay 4, mohair velvet dyed the bay's silk colour #8A5A54; quilted top, piped."
+    },
+    {
+      "surface": "salon.bench.bay5.velvet",
+      "material": "accent.mohair-velvet",
+      "working": "upholstered",
+      "history": "handled",
+      "note": "The two benches of bay 5, mohair velvet dyed the bay's silk colour #A0793A; quilted top, piped."
+    },
+    {
+      "surface": "salon.stele.glass",
+      "material": "glass.low-iron",
+      "working": "toughened.laminated",
+      "history": "handled",
+      "note": "The glass stele, 50 mm, frameless."
+    },
+    {
+      "surface": "salon.stele.foot",
+      "material": "bronze.cusn10",
+      "working": "brushed",
+      "history": "foot-worn",
+      "note": "The stele's cast foot 0.40 x 1.40 x 0.08 (was brass)."
+    },
+    {
+      "surface": "salon.case.carcase",
+      "material": "oak.sessile-french",
+      "working": "fumed.waxed",
+      "history": "handled",
+      "note": "The 1874 case: plinth, framed and panelled carcase, top rail; no bare oak inside the seal (barrier film and acid-free board under the felt)."
+    },
+    {
+      "surface": "salon.case.hood",
+      "material": "glass.low-iron",
+      "working": "anti-reflective.laminated",
+      "history": "handled",
+      "note": "The case's hood 0.864-0.990."
+    },
+    {
+      "surface": "salon.case.angles",
+      "material": "bronze.cusn10",
+      "working": "patinated",
+      "history": "handled",
+      "note": "12 mm angles on the hood's twelve edges, and the escutcheon."
+    },
+    {
+      "surface": "salon.case.felt",
+      "material": "accent.wool-felt",
+      "working": "laid",
+      "history": "new",
+      "note": "The case's floor and Le Charivari's board: undyed wool felt."
+    },
+    {
+      "surface": "salon.dancer.plinth",
+      "material": "stone.travertine-romano",
+      "working": "honed",
+      "history": "handled",
+      "note": "The Little Dancer's plinth 0.80 x 0.80 x 1.00."
+    },
+    {
+      "surface": "salon.dancer.vitrine",
+      "material": "glass.low-iron",
+      "working": "toughened.anti-reflective",
+      "history": "handled",
+      "note": "Her vitrine 0.76 x 0.76, 1.00-2.10."
+    },
+    {
+      "surface": "salon.frame.gilt",
+      "material": "oak.sessile-french",
+      "working": "gilt.gold-leaf.water",
+      "history": "aged.patina",
+      "note": "Every oil's frame (frame.gilt.carved): carved oak, gesso, water-gilt on red bole, burnished and matt, bole on the ridges; moulding 0.09 + 0.015 x the longer side, clamped 0.10-0.14. Art builds the frames; the finish is declared here."
+    },
+    {
+      "surface": "salon.east.blind-doors",
+      "material": "bronze.cusn10",
+      "working": "patinated",
+      "history": "aged.patina",
+      "note": "On the stand only: a closed pair of cast leaves in the class opening on the port face x +0.600."
+    },
+    {
+      "surface": "salon.west.blind-doors",
+      "material": "bronze.cusn10",
+      "working": "patinated",
+      "history": "aged.patina",
+      "note": "On the stand only: a closed pair of cast leaves in the class opening on the port face x -60.600."
+    }
+  ]
+}

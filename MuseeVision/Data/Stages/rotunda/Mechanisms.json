@@ -1,0 +1,70 @@
+{
+  "stage": "rotunda",
+  "mechanisms": [
+    {
+      "key": "rotunda.sun-clock.lift",
+      "joint": "prismatic",
+      "body": "rotunda.sun-clock.drum",
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "travel": 3.5,
+      "time": 8.0,
+      "profile": "ease-in-out",
+      "control": "rotunda.sun-clock.control",
+      "open": [
+        {
+          "channel": "rotunda.sun-clock.lights",
+          "to": 1.0,
+          "time": 0.0
+        },
+        {
+          "move": "open"
+        }
+      ],
+      "close": [
+        {
+          "move": "closed"
+        },
+        {
+          "channel": "rotunda.sun-clock.lights",
+          "to": 0.0,
+          "time": 0.0
+        }
+      ],
+      "guard": "body-in-travel",
+      "clearance": 0.005,
+      "publishes": "rotunda.sun-clock.height",
+      "note": "Eight synchronised three-stage telescopic hydraulic rams in bores at r 6.77, phi 22.5 + 45k (stage frame, from +x towards +y), heads on the drum's foot ring (drum frame z -3.56); closed height <= 2.30; no counterweight. Ease-in-out over 8.0 s as built (SunClock.cpp:117-121); peak about 0.66 m/s. Use from the ring only (7.35 < r < 10.00, |z| < 0.40): open from 'lowered' is refused while the user stands on the dial (r <= 7.35, -0.30 < z < 0.60) with the message 'Step off the sun clock to raise it.'; close from 'raised' only with nobody inside r 7.20 or below z -0.30. Guard: raising holds while a body is on the dial; lowering reverses to raising if a body enters r < 7.20 or goes below z -0.30 (as built). Lights channel: 1 from the start of rising, 0 on landing (as built: on above 0.30 m)."
+    },
+    {
+      "key": "rotunda.stair.balustrade",
+      "joint": "prismatic",
+      "body": "rotunda.stair.balustrade.panels",
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "travel": 0.94,
+      "time": 1.57,
+      "profile": "linear",
+      "follows": {
+        "channel": "rotunda.sun-clock.height",
+        "in": [
+          0.342857,
+          0.611429
+        ],
+        "out": [
+          0.0,
+          0.94
+        ]
+      },
+      "guard": "body-in-travel",
+      "clearance": 0.005,
+      "note": "The two retracting panels (upper flight's well side, top landing's back edge) rise 0 -> 0.94 m as the drum passes 1.20 -> 2.14 m of its 3.50 m (a cam with a dwell at each end, as built: offset = clamp(h - 1.20, 0, 0.94) - 0.94). Lowering, they are home before the drum comes within 1.07 m. 'time' is derived from the lift's cruise (0.94 / 0.60)."
+    }
+  ]
+}

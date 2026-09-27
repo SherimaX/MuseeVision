@@ -1,488 +1,207 @@
-# The Rotunda · stage sheet
+# The Rotunda · design sheet
 
-This is the design sheet the Room Builder builds the Rotunda from. It covers the drum, the order, the coffered dome,
-the glazed lattice eye with its bronze node, the four niches and their casts, the sun clock and the spiral stair.
-
-- **Sources.** The sheet is ported from the as-built museum, not redesigned (D-001, D-017):
-  - the old code (`windows/`, read-only), which gives the geometry;
-  - the `Rotunda` board and `plan/README.md`, which add the gilt meridian;
-  - the approved proposals, which give the three neighbours.
-- **Units and angles.** All numbers are metres in the stage's own frame. Angles φ are plan angles measured from east
-  (+x) towards south (+y), the old code's convention. A compass bearing is φ + 90°.
-- **As built and delta.** Where the sheet departs from the as-built code, it says so and gives the reason.
-  Everything else is as built.
-- **Schedules.** Per D-017, the designer's choices live beside the room as schedules in `Data/Stages/Rotunda/`:
-  `Finishes.json` (§3.12), `Lighting.json` (§4) and `Hang.json` (§8). The geometry lives in the module (`Private/RotundaPlan.h`
-  and the part files named in Architecture.md).
-
----
+- **Stage key** `rotunda` (module `MuseeRotunda`, `URotundaRoom : USiteRoom`). Display name "The Rotunda". Era: Classical
+  (stone honed, bronze cast and patinated or oil-gilt, plaster matt); the eye's pearl lattice is the one seed of the
+  future. **The anchor stage** (D-012): its origin is the museum plan origin; every visit begins on its gilt sun.
+- **Sources:** D-001…D-019 (D-004, D-012, D-017, D-018 binding here); Palette.json + Story.md §6 "The Rotunda"; the
+  drafter's spec `r-specs/…/Stages/rotunda.md` (verified, corrections in §11); the `Rotunda` board
+  (`plan/canvas/Rotunda.dc.html`) and `plan/README.md`; the as-built code in `windows/` (§11). Schedules:
+  `Data/Stages/rotunda/{Finishes,Lighting,Hang,Mechanisms}.json` (no Planting: nothing grows here).
+- **Units** metres. **Frame:** origin at the drum's centre on the finished floor (top of the ring and of the lowered
+  dial); x east, y south, z up, true north. **φ** = plan angle from +x towards +y (east 0°, south 90°, west 180°,
+  north 270°); a compass bearing is φ + 90°. **Drum frame z_d:** the lifting drum's own frame, z = z_d lowered,
+  z = z_d + 3.500 raised.
 
 ## 1. Identity and placement
 
 | | |
 |---|---|
-| Stage key | `rotunda` |
-| Module | `MuseeRotunda` (Editor), `Source/Stages/Rooms/Rotunda`; class `URotundaRoom : USiteRoom` |
-| Display name | FText "The Rotunda" |
-| Era | Classical. Stone is honed or polished, bronze is cast, patinated or gilt, and plaster is matt. The eye is the one touch of the future. |
+| Origin in the museum plan | (0.000, 0.000, 0.000); yaw 0°. museum = local. Not translated: Site's anchor. |
+| Arrival point | The gilt sun's top, (0, 0, 0.085) (feet on the boss), facing **west** (−x, yaw 180°) down the Salon's line (D-012; as built `MuseePlan::SpawnFeet`, `SpawnYawDegrees` 180). Declared in `SitePlan.json`. |
+| Level | 0 (ground floor). The served well descends to the landing at z −6.000 (level −1, the Classical Hall's floor). |
+| Footprint kind | Building, plus the served well below grade (§2). |
+| Vertical extent | Room: z −0.55 (floor structure's underside; north of y −8.20 it bears on the Classical Hall's roof, −0.55) to 21.00 (over the eye's curb, 20.45). Well prism: z −6.40 … 0.00. |
 
-**Frame and origin.** The local frame runs x east, y south, z up, on true north. The origin is the drum's centre on
-the finished floor. z 0 is the top of the fixed ring and of the lowered dial. The gilt boss of the sun stands 0.085
-above it.
+**Footprint polygon:** the circle r **11.200** (the drum's outer face); build it on Form's shared stations so each
+neighbour meets it vertex for vertex. Reference points every 22.5°: (11.200, 0.000) (10.347, 4.286) (7.920, 7.920)
+(4.286, 10.347) (0.000, 11.200) (−4.286, 10.347) (−7.920, 7.920) (−10.347, 4.286) (−11.200, 0.000) (−10.347, −4.286)
+(−7.920, −7.920) (−4.286, −10.347) (0.000, −11.200) (4.286, −10.347) (7.920, −7.920) (10.347, −4.286). The exterior
+dress (§3.10, polish) will stand proud of it; tonight the footprint is r 11.20.
 
-**In the museum plan.** The Rotunda is Site's anchor stage. Its origin *is* the museum plan origin: plan (0, 0, 0)
-at level 0 (the ground floor). It is not translated.
+**Well prism** (inside the footprint): the vertical cylinder r 7.600 about the z axis, z −6.400 … 0.000.
 
-**Arrival point.** The gilt sun at (0, 0, 0), facing west (−x, yaw 180°). This is D-012, and the old code's
-`MuseePlan::SpawnFeet` and `SpawnYawDegrees`.
-
-**Footprint.** Kind Building.
-- **Plan outline.** The disc r 11.20 (the drum's outer face). Where Site needs a polygon, it takes Form's shared
-  stations on r 11.20, so each neighbour's face meets the drum vertex for vertex.
-- **Vertical extent.** z −0.55 (the floor structure's underside, on the Classical Hall's roof at −0.55) to z +21.00
-  (above the eye's curb at 20.45).
-- **Plus the served well** (§2): the cylinder r 7.60, z −6.40 … −0.55.
-- **What stays outside the footprint tonight.** The exterior dress (§3.10) stands proud of r 11.20: a podium 0.54
-  proud, then a gravel strip and stone edge to r 12.76 on the free arcs (the Grounds sheet expects this). When the
-  dress is built, the footprint grows to r 12.76 on the free arcs. Tonight it is r 11.20.
-
-**Enclosures.**
-
-| Key | Kind | Bounded by | Volume |
-|---|---|---|---|
-| `rotunda.hall` | Enclosed | The drum's inner face (r 10.00, the niches to r 11.00), the dome's coffered inner surface, the eye's glass (the only opening to the sky, Glazed: D-004), and the floor at z 0 (ring and dial). It is open at the four doorway ports and, while the sun clock is raised, through the drum's door into `rotunda.stair`. | ≈ 5,240 m³: drum π·10²·10 plus a hemisphere of R 10, before the niches and coffers |
-| `rotunda.stair` | Enclosed | The stair wall (r 6.48) from the landing (z −6.00) up to the dial's soffit. Raised, it also takes in the drum's interior (r 6.545) to z 3.37. It is open at the stair port and, while raised, through the drum's west door. Lowered, it is sealed by the dial. | ≈ 774 m³ lowered, ≈ 1,250 m³ raised |
-
-**Openings** (Form's one list):
-
-| Key | Kind | Where |
+| Enclosure | Kind | Bounded by |
 |---|---|---|
-| `rotunda.eye` | Glazed | The disc r 2.50 at z 20.38–20.39 in the curb (§3.5). Weather: `museum`. |
-| `rotunda.west`, `.north`, `.south`, `.east` | Port | The four rough openings in the drum (§2, §3.2). |
-| `rotunda.stair` | Port | The north portal at the foot of the stair (§2, §3.7). |
-| `rotunda.sun-clock.door` | Open | The drum's west door between `rotunda.hall` and `rotunda.stair`. It exists in the raised configurations only. |
-| `rotunda.sun-clock.pocket` | Housing | The annulus r 6.54–7.00, z −3.58 … 0, which the drum's wall slides into (§3.7). |
-| `rotunda.sun-clock.rams` | Housing | Eight bores for the lift's rams (§3.7, §6). |
-| `rotunda.stair.balustrade-housings` | Housing | The slots of the retracting balustrade (§3.9). |
-| `rotunda.sun-clock.luminaires` | Housing | The recesses of the 13 downlights in the drum's soffit (§4). |
+| `rotunda.hall` | Enclosed | The drum's inner face (r 10.00; niches to r 11.00), the entablature, the coffered dome, the eye's glass, the floor (ring and lowered dial). ≈ 5,240 m³ (π·10²·10 + hemisphere R 10). Openings: the four doorway ports; Glazed `rotunda.eye` (D-004, its only opening to the sky); while raised, the drum's west door into `rotunda.stair`. |
+| `rotunda.stair` | Enclosed | The stair wall (r 6.48) from the landing (z −6.00) to the dial's soffit; raised, also the drum's interior (r 6.545) to z 3.37. ≈ 774 m³ lowered, ≈ 1,250 m³ raised. Openings: port `rotunda.stair`; while raised, the drum's west door. Lowered it is sealed by the dial. |
 
----
+**Openings (Form's one list):** Glazed `rotunda.eye` (disc r 2.50, z 20.38–20.39; weather `museum`); Ports
+`rotunda.west`, `.north`, `.south`, `.east`, `.stair`; Open `rotunda.sun-clock.door` (raised configurations only);
+Housings: `rotunda.sun-clock.pocket` (annulus r 6.54–7.00, z −3.58…0), `rotunda.sun-clock.rams` (8 bores),
+`rotunda.stair.balustrade-housings` (§3.9), `rotunda.sun-clock.luminaires` (13 recesses in the drum's soffit).
 
 ## 2. Ports
 
-Every port's frame sits on the outer face at the opening centreline and at threshold level, facing out. The
-Rotunda builds only the **rough opening** at each port (the clear opening plus the class allowance) and nothing
-past its port face. The doorcase is Site's joint:
-- the travertine threshold through both wall depths;
-- the brushed-bronze strip on the mating plane;
-- a lining in front of both rough faces;
-- surrounds on both mating faces;
-- passage masonry, including the wedges where a flat neighbour meets the drum.
+All frames on the port face at the threshold (z of the finished threshold), on the opening's centreline, facing out,
+up +z. Class names follow the finished Nymphéas sheet: **width × crown height** (see the note under the table).
 
-| Key | Kind | Class | Frame: origin, outward normal | Face | Wall depth | Clear opening | Mates | Passage |
-|---|---|---|---|---|---|---|---|---|
-| `rotunda.west` | Doorway | `doorway.3000x4500.arched` | (−11.200, 0, 0), (−1, 0, 0) | cylindrical, R 11.20 about the z axis | 1.20 (r 10.00 → 11.20) | 3.00 wide, springing 4.50, semicircular head, crown 6.00 | `salon.east` | 2.20 m, to the Salon's Bay 1 end wall outer face at x −13.40 |
-| `rotunda.north` | Doorway | `doorway.4000x4500.arched` | (0, −11.200, 0), (0, −1, 0) | cylindrical, R 11.20 | 1.20 | 4.00 wide, springing 4.50, crown 6.50 | `chenghuai.south` | 0 (the open porch abuts the drum) |
-| `rotunda.south` | Doorway | `doorway.4000x4500.arched` | (0, 11.200, 0), (0, 1, 0) | cylindrical, R 11.20 | 1.20 | 4.00 × springing 4.50, crown 6.50 | `albion.north` | 0 (the porch abuts the drum) |
-| `rotunda.east` | Doorway | `doorway.3000x4500.arched` | (11.200, 0, 0), (1, 0, 0) | cylindrical, R 11.20 | 1.20 | 3.00 × springing 4.50, crown 6.00 | `hall-of-light.west` | 0 (the glass hall abuts the drum) |
-| `rotunda.stair` | Stairwell | `stairwell.spiral.3600` | (0, −7.600, −6.000), (0, −1, 0) | cylindrical, R 7.60 about the z axis | 0.55 (the arched reveal, r 7.05 → 7.60). The jambs run on through the masonry to the stair wall at r 6.48 (§3.7). | 3.60 wide (jambs are the planes x = ±1.80), springing 2.60 above the threshold (z −3.40), crown 4.40 (z −1.60) | `classical-hall.stair` | 0 |
+| Key | Kind | Class | Local frame (position; facing) | Face; wall depth | Mates with | Wells |
+|---|---|---|---|---|---|---|
+| `rotunda.west` | doorway | `doorway.3000x6000.arched` | (−11.200, 0.000, 0.000); −x | cylindrical R 11.20 about the z axis; 1.20 (r 10.00 → 11.20) | `salon.east` (Bay 1's end wall, outer face museum x −13.40). **Passage 2.20** (the joint's). | none |
+| `rotunda.north` | doorway | `doorway.4000x6500.arched` | (0.000, −11.200, 0.000); −y | cylindrical R 11.20; 1.20 | `chenghuai.south` (the open porch on the drum face). Passage 0.00. | none |
+| `rotunda.south` | doorway | `doorway.4000x6500.arched` | (0.000, +11.200, 0.000); +y | cylindrical R 11.20; 1.20 | `albion.north` (the porch's flat end wall tangent to the drum). Passage 0.00; the joint fills the wedges. | none |
+| `rotunda.east` | doorway | `doorway.3000x6000.arched` | (+11.200, 0.000, 0.000); +x | cylindrical R 11.20; 1.20 | `hall-of-light.west` (concave R 11.20). Passage 0.00. | none |
+| `rotunda.stair` | stair (served well) | `stairwell.spiral.3600x4400.arched` | (0.000, −7.600, −6.000); −y | cylindrical R 7.60 about the z axis; 0.55 (the arched reveal r 7.05 → 7.60) | `classical-hall.stair` (its frame (0, 31.70, 0), facing +y). Passage 0.00. | **serving**: the well prism |
 
-**The well of `rotunda.stair`.**
-- **Prism.** The vertical cylinder r 7.60 about the z axis, from z −6.40 to −0.55: the part of the stair's shaft
-  that lies inside the Classical Hall's volume. The shaft's outer face (r 7.60) coincides with the well.
-- **Serving side: `rotunda`.** It owns everything inside the well: the shaft masonry, the stair wall, the pocket,
-  the ram housings, the landing and its rosette, the helical stair and its balustrade, and the drum's full travel.
-- **Receiving side: `classical-hall`.** It reserves the prism as a void and builds nothing inside it. Its walls meet
-  r 7.60 (as-built `ClassicalHall::ShaftOuterRadius`).
-- **On the stand.** The well is unmated there. Site gives it a blind well to z −6.40 and blinds the portal, so the
-  stair and the lift run alone.
+- `doorway.3000x6000.arched`: clear 3.000; semicircular head r 1.500 springing **4.500**; crown 6.000
+  (`MuseePlan.h:44-47`). `doorway.4000x6500.arched`: clear 4.000; head r 2.000 springing 4.500; crown 6.500.
+  `stairwell.spiral.3600x4400.arched`: clear 3.600 (jambs the planes x = ±1.800); head r 1.800 springing 2.600 above
+  the threshold (z −3.400); crown 4.400 (z −1.600) (`MuseePlan.h:147-157`). **The r-specs drafts named these by the
+  springing** (`doorway.3000x4500.arched`, `doorway.4000x4500.arched`, `stairwell.spiral.3600`); the geometry is the
+  same. Site's `PortClasses.json` must carry one name per class (§13).
+- **Jamb/face intersections:** clear jambs meet the outer face at x = ±11.099 (W, E) and y = ±11.020 (N, S); the
+  inner face at ±9.887 and ±9.798.
+- **Rough openings.** The Rotunda builds only the rough opening = clear opening + the class's lining allowance *a*
+  (Site's; the drafts propose a = 0.050: rough widths 3.10 / 4.10, head radii 1.55 / 2.05 about the springing 4.50,
+  rough sill z −0.05), straight through the drum from r 10.00 to 11.20, faces `rotunda.port.rough-opening`. Nothing
+  past a port face. **Site's joint** builds the travertine threshold through the wall depth, the brushed-bronze strip
+  on the mating plane, the linings, the surrounds at the mating faces, the passage (the west one 2.20 m, to the
+  Salon's face at x −13.40) and any wedge masonry. The **imposts** (section, lateral into the opening × height from
+  the springing: (−0.01, −0.24) (0.02, −0.24) (0.05, −0.21) (0.05, 0) (−0.01, 0), z 4.26–4.50) belong to the lining,
+  i.e. the class detail; if Site doesn't carry them tonight, the archivolts spring from the plain lining.
+- **The stair port.** At the port face r 7.60 the class opening; the arched reveal `rotunda.stair.port.reveal` runs in
+  to r 7.05; inside r 7.05 the drum's pocket passes over, so the opening is closed above z −3.68 by a lintel
+  (r 6.48 → 7.05) and a tympanum on r 7.05: the portal onto the stair is **3.60 × 2.32**, flat-headed.
+- **The well (served).** `rotunda` owns everything inside r 7.60, z −6.40 … 0.00: shaft masonry, stair wall, pocket,
+  ram bores, landing and rosette, stair, balustrade, the drum's full travel. `classical-hall` reserves the prism as a
+  void and builds nothing inside it; its walls meet r 7.60.
+- **Blinds (closed bronze doors).** Every port has a closed pair of cast bronze leaves filling its class opening on
+  its port face, meeting rail on the axis, placed while the port is unmated (on the stand, or when its neighbour is
+  absent): `rotunda.west.blind-doors`, `rotunda.north.blind-doors`, `rotunda.south.blind-doors`,
+  `rotunda.east.blind-doors`, `rotunda.stair.blind-doors` (on the stand, also a blind well to z −6.40). With all five
+  neighbours built tonight, all four doorways are open portals (no leaves, as built).
 
-**Port classes.** These are proposals to Site; `Data/Site/PortClasses.json` governs.
-- **`doorway.3000x4500.arched` and `doorway.4000x4500.arched`.** The second number is the springing height above the
-  threshold, and the head is a semicircle.
-  - Closure: open portal (the as-built doors have no leaves).
-  - Rough-opening allowance: 0.050 on each jamb and at the head, for the lining. That gives rough widths of 3.10
-    and 4.10, with head radii 1.55 and 2.05 about the same springing.
-  - Rough sill at z −0.05: the joint's 50 mm threshold stone sits there, its top flush at 0.00.
-  - Collar envelope: the south mate needs at least 7.30 × 7.50 m (Albion sheet, wedge analysis).
-  - The as-built door has **impost blocks** at the springing. Their section runs through the wall depth: 0.24 high
-    (4.26–4.50), 0.05 into the clear opening, with a 30 mm chamfer at the foot, as the point list (lateral into the
-    opening, height from the springing): (−0.01, −0.24) (0.02, −0.24) (0.05, −0.21) (0.05, 0) (−0.01, 0). That
-    reveal is now the joint's lining, so the impost belongs to the doorway class detail. The Rotunda asks Site to
-    carry it in the arched classes. The archivolt on the drum's inner face (§3.3) springs from it.
-- **`stairwell.spiral.3600`.** A 3.60 m portal with a semicircular head springing 2.60 above the threshold, an open
-  portal, and a well.
+### Anchors (the stage contract)
+Frames in the stage frame with the drum lowered. Anchors on `rotunda.sun-clock.drum` ride it: add 3.500 to z when
+raised.
 
-**D-012 topology** (Site's `SitePlan.json`: the anchor is `rotunda` at the origin, and the arrival point is the gilt
-sun, facing west):
+| Key | Kind | Frame | Belongs to |
+|---|---|---|---|
+| `rotunda.sun-clock.drum` | Body | origin (0, 0, 0) (the dial's top centre), axes of the stage; moves +z 0 → 3.500 | the dial and its inlay, the meridian, the gilt sun, the drum wall and dressings, the soffit, rim, pendant and the 13 downlights (§3.1, §3.6, §4) |
+| `rotunda.stair.balustrade.panels` | Body | origin (0, 0, 0), axes of the stage, with the panels **at home** (housed, 0.94 below standing); moves +z 0 → 0.940 | the two retracting balustrade panels (§3.9) |
+| `rotunda.sun-clock.control` | Use | origin (0, 0, 0.085), the gilt sun's top; the usable volume is the ring: feet at 7.35 < r < 10.00, \|z\| < 0.40 (prompt, click or headset trigger there) | fixed (not on the body) |
+| `rotunda.niche.ne.cast` | Mount | (7.248, −7.248, 2.000) on the NE niche's sill (φ 315°); x towards the centre (−0.7071, +0.7071, 0); z up | the Dying Slave (§8) |
+| `rotunda.niche.se.cast` | Mount | (7.248, 7.248, 2.000), φ 45°; x (−0.7071, −0.7071, 0) | the Rebellious Slave |
+| `rotunda.niche.sw.cast` | Mount | (−7.248, 7.248, 2.000), φ 135°; x (+0.7071, −0.7071, 0) | the Venere Italica |
+| `rotunda.niche.nw.cast` | Mount | (−7.248, −7.248, 2.000), φ 225°; x (+0.7071, +0.7071, 0) | the Bacchus |
 
-```
-rotunda.west  <-> salon.east            passage 2.20
-rotunda.north <-> chenghuai.south       passage 0
-rotunda.south <-> albion.north          passage 0
-rotunda.east  <-> hall-of-light.west    passage 0
-rotunda.stair <-> classical-hall.stair  passage 0, well served by rotunda
-```
-
-The Architecture's older line `rotunda.entrance <-> grounds.gate` is superseded by D-012. The Rotunda has no entrance
-port.
-
-**Neighbour mismatches, for Site and the neighbours' sheets** (as-built numbers):
-- **West.** The Salon's door in Bay 1's end wall is 3.00 wide but springs at **3.30** (`SalonStructure.cpp:41`), not
-  4.50. As built, the Rotunda's passage (springing 4.50) ran 2.20 m and stopped against that lower arch. Either the
-  2.20 m passage steps down to the Salon's arch (Site's joint detail), or `salon.east` takes this class.
-- **North.** Chenghuai's open porch is only 3.80 wide inside (`ChenghuaiPlan.h:38`, PorchHalf 1.9), 0.10 narrower
-  on each side than the 4.00 door. The joint's surround must sit within it.
-- **At the thresholds.** The as-built bronze strips lay on the sun clock's edge (r 10.30, `MuseeFurniture.cpp:305-311`).
-  They now go on each mating plane, per the joint rule.
-
----
+No Wall, Bed, Water or Seat anchors (no paintings, no planting, no seats). Luminaires mount at the points in
+Lighting.json; the 13 drum lights carry `body: rotunda.sun-clock.drum`. **Channels** (Motion publishes):
+`rotunda.sun-clock.height` (lift ÷ 3.500, 0…1) and `rotunda.sun-clock.lights` (0 or 1, §6).
 
 ## 3. Pieces by trade
 
-**Material keys.** Each piece's key is `substance.working.history`; the full finish schedule is §3.12. Workings map
-to Matter's records:
+**Build-ups.** Crema Marfil is thin-slab stock: every Crema Marfil face is a **laid finish** (30 mm) over a hidden
+travertine core (Roman revetment over travertine); visible geometry exactly as built. Pieces meet face to face (as
+built they sank 10 mm into each other: mouldings are now trimmed to the face they meet, stone cut where bronze is
+set). As-built station counts (evidence of fineness; Form's chord tolerance divides): each semicircular arch 48; drum
+faces 320 per turn; dome 280 angles (10 per coffer); every sun-clock circle 768.
 
-| Short working | Matter record |
-|---|---|
-| honed | `stone.honed` |
-| polished | `stone.polished` |
-| sawn | `stone.sawn.vein-cut` |
-| run | `run` |
-| trowelled | `trowelled` |
-| cast | `cast.bronze` or `cast.plaster` |
-| gilt | `gilt` |
-| brushed | `brushed` |
-| painted | `painted.steel` |
-| laminated | `laminated` |
+### 3.1 Floors (fixed ring; the dial rides the drum, §3.6)
+- **Fixed ring** r 7.000 → 10.040 (the back of the shadow gap), top z 0.000, finish 30 mm, core to −0.55. In each
+  doorway it stops on the arc r 10.00 across the rough opening (the joint's threshold runs on). Three courses of
+  radial slabs: r 7.00–7.75 **48** slabs; r 7.75–8.95 **32** (carries the motto); r 8.95–10.04 **64**, offset half a
+  slab (+2.8125°). Tone by parity of (slab + course): even `rotunda.floor.ring.a`, odd `rotunda.floor.ring.b`.
+- **Dial** (top of the lifting drum), r 0 → 6.990, top z_d 0.000, seven bands:
 
-History words are presets over Matter's history records:
-
-| Preset | For | Matter records |
+| r from | r to | Surface |
 |---|---|---|
-| `as-laid` | hidden pieces | none |
-| `aged` | indoors | stone: `stone.pore-soiling`; white: `white.soiling` + `white.micro-cracking`; bronze: `bronze.tarnish`; steel: `steel.coating-ageing`; glass: `glass.soiling` |
-| `worn` | underfoot | `aged` + `stone.foot-traffic-wear`, or `bronze.wear` + `gilt.wear` |
-| `handled` | handrails | `bronze.tarnish` + `bronze.wear` |
-| `weathered` | outdoors | `stone.dissolution-outdoors` + `stone.pore-soiling` |
+| 0.00 | 1.40 | `rotunda.dial.field.a` |
+| 1.40 | 1.52 | `rotunda.dial.band.red` |
+| 1.52 | 3.20 | `rotunda.dial.field.b` |
+| 3.20 | 4.90 | `rotunda.dial.field.a` |
+| 4.90 | 6.30 | `rotunda.dial.field.b` |
+| 6.30 | 6.38 | `rotunda.dial.band.black` |
+| 6.38 | 6.99 | `rotunda.dial.field.a` (to the corona's edge) |
 
-**Build-ups.** A piece is one solid of one substance, within stock. The cream marble is a thin-slab stone (10–30 mm
-stock), so every cream-marble or statuary surface is a **laid finish** over a hidden core. The core is travertine
-ashlar, as Roman revetment over travertine was built. The visible geometry is exactly as built; only the section
-is made real.
+Ring and dial meet with 10 mm clear (r 6.99 against 7.00).
 
-**Joints between pieces.** Pieces meet face to face: no piece sinks into another. As built, the pilasters' backs, the
-mouldings and the inlays sank 10 mm into their neighbours. Now:
-- the moulding is trimmed to the face it meets;
-- the stone is cut where bronze is set.
+**Dial inlay** `rotunda.dial.inlay` (cast bronze, each set in a groove 2 mm deep, proud with a bevelled top edge):
 
-**Stations.** The as-built station counts are evidence of the needed fineness, not rules. Form's chord tolerance sets
-the division. Pieces that meet share stations.
-
-| Curve | As-built stations |
-|---|---|
-| each semicircular arch | 48 |
-| the drum's faces, between openings | 320 per turn |
-| the dome | 280 angles, 10 per coffer |
-| every sun-clock circle | 768 |
-
-### 3.1 Floors
-
-**The fixed ring, r 7.00 → 10.04.**
-- **Surface.** Top at z 0.00, finish 30 mm, core to −0.55.
-- **Extent.** The outer edge is the back of the drum's shadow gap (r 10.04). In the four doorways, the ring stops on
-  the drum's inner face line (the arc r 10.00 across the rough opening), where the joint's threshold begins. *Delta:*
-  as built, the ring ran on to r 10.30 under the wall.
-- **Three courses of radial slabs, alternating in two tones** by the parity of (slab + course):
-  1. r 7.00–7.75: 48 slabs.
-  2. r 7.75–8.95: 32 slabs. This course carries the motto.
-  3. r 8.95–10.04: 64 slabs, set half a slab round from the course grid (+2.8125°).
-- **The two tones** are the same statuary marble, sawn two ways: tone A vein-cut, tone B cross-cut. Form's per-piece
-  bed frame carries the choice.
-- **The motto** (bronze, §3.1.3) is centred on the south, φ 90°.
-
-**The dial, the top of the sun-clock drum** (a moving body, §3.6). It is r 0 → 6.99, top at z_d 0 (z_d is the
-drum's own frame: z = z_d lowered, z = z_d + 3.50 raised). It has seven concentric bands:
-
-| r from | r to | Stone |
+| Mark | Where | Section (width / proud / bevel) |
 |---|---|---|
-| 0.00 | 1.40 | A: statuary, vein-cut |
-| 1.40 | 1.52 | rosso antico |
-| 1.52 | 3.20 | B: statuary, cross-cut |
-| 3.20 | 4.90 | A |
-| 4.90 | 6.30 | B |
-| 6.30 | 6.38 | nero marquina |
-| 6.38 | 6.99 | A, to the corona's edge |
+| Hour ring | r 6.76–6.80 (on the shadow circle r 6.78) | 40 / 3 / 1.5 mm |
+| Band fillets | centred on r 1.40, 1.52, 6.30, 6.38 | 10 / 2 / 0.8 mm |
+| Hour lines | 12 bars at φ_h = 180° + 15°·(h − 6), h = 6…18 except 12, radial r 1.60 → 6.77 (VI west, XII north, VI east) | 24 / 2.5 / 1 mm |
+| Minute ticks | every minute 06:00–18:00 except the hours, to r 6.77; from r 6.665 (1 min), 6.62 (5), 6.58 (15), 6.52 (30) | 3/2/0.6; 5/2.2/0.8; 7/2.5/1; 10/2.5/1 mm |
+| Numerals | Roman VI VII VIII IX X XI XII I II III IV V VI, each centred on its φ_h, laid along the arc; baseline r 6.815, cap 0.16, tops outward (read from the dial); tracking −0.03 cap | 5 mm proud, 2 mm bevel |
 
-The ring and the dial meet with 10 mm clear (r 6.99 against r 7.00): the lift's clearance (§6).
-
-#### 3.1.1 The dial's inlay
-
-Everything here is cast bronze unless stated otherwise. Each inlay is set in a groove cut 2 mm into the stone, and
-stands proud with a bevelled top edge.
-
-| Mark | Where | Section |
-|---|---|---|
-| **Hour ring** | r 6.76–6.80, centred on the circle of the node's shadow (r 6.78) | 3 mm proud, 1.5 mm bevel |
-| **Band fillets** | 10 mm wide, centred on r 1.40, 1.52, 6.30 and 6.38 | 2 mm proud, 0.8 mm bevel |
-| **Hour lines** | 13 bars at φ_h = 180° + 15°·(h − 6), h = 6 … 18 (VI in the west, XII in the north, VI in the east), radial from r 1.60 to 6.77 | 24 mm wide, 2.5 mm proud, 1 mm bevel |
-| **The meridian** | The XII line at φ 270°, from r 1.60 to r 6.80 | 60 mm wide, 2.5 mm proud, 1 mm bevel |
-| **Minute ticks** | Every minute from VI to VI except the hours, ending at r 6.77. The shadow moves 2.96 cm a minute on the hour ring. | See below |
-| **Numerals** | Roman, 13 of them: VI VII VIII IX X XI XII I II III IV V VI | See below |
-
-**The meridian is gilt bronze** (`bronze.gilt.worn`). *Delta:* the `Rotunda` board and `plan/README.md` ("gilt meridian")
-draw it at about 2.3 times the hour lines' weight. The as-built code (`SunClockDial.cpp:13`, "No meridian") made the
-XII line an ordinary 24 mm bar.
-
-**Minute ticks:**
-
-| Tick | From r | Width | Proud | Bevel |
-|---|---|---|---|---|
-| 1 min | 6.665 | 3 mm | 2 mm | 0.6 mm |
-| 5 min | 6.62 | 5 mm | 2.2 mm | 0.8 mm |
-| 15 min | 6.58 | 7 mm | 2.5 mm | 1 mm |
-| 30 min | 6.52 | 10 mm | 2.5 mm | 1 mm |
-
-**Numerals:**
-- Baseline r 6.815, cap height 0.16, tops outward. They read from the dial.
-- Each is centred on its hour's φ and laid along the arc.
-- Tracking −0.03 cap.
-- 5 mm proud, 2 mm bevel.
-
-#### 3.1.2 The gilt sun at the centre
-
-**Rays.** 32 of them, at φ = 11.25°·i, each rising from r 0.24:
-- 16 long straight rays (i even, so one points to XII) run to r 1.25. Each is 72 mm wide at the root and tapers as
-  (1 − t)^0.62. The crest is 42 mm high, falling as (1 − t)^1.2 to 4 mm at the tip.
-- 16 short flames (i odd) run to r 0.86. Each is 60 mm wide, tapering as (1 − t)^0.75, with a 30 mm crest. The crest
-  weaves sideways by 0.03·sin(3πt)·√t·(1 − t).
-- Across each flank: the foot, a hollow at 0.40 of the crest height, then the ridge.
-
-**Boss.** Gilt bronze, a lathe about the z axis. Profile (r, z):
-
-```
-(0.285, −0.002) (0.285, 0.035)
-arc to (0.265, 0.055): a 0.02 shoulder, then 20 steps up the dome
-dome: sphere R 1.1854 with its top at z 0.085, from r 0.265 in to r 0
-```
-
-- A bead ring r 0.005 at r 0.19, standing on the dome.
-- A beaded foot: a torus of section radius 0.014 at r 0.30, z 0.012.
-- This is where every visit begins (the arrival point).
-
-#### 3.1.3 The motto
-
-**Text:** HORAS · NON · NUMERO · NISI · SERENAS, in cast bronze capitals.
-- Cap height 0.26. The baseline is r 8.53, so the tops lie towards the dial (cap line r 8.27).
-- Centred on φ 90° and read by a visitor on the ring facing the dial, running west to east.
-- Tracking 0.16 cap, word gap 0.6 cap. Each "·" is a gap of 1.15 cap holding a gilt triangular stop:
-  - point down, spanning ±0.12 cap at 0.60 cap height, with the point at 0.36 cap;
-  - its apex 8 mm high.
-- Letters are 8 mm proud with a 2.5 mm bevel.
-
-**Glyphs.** As built, the outlines are Centaur capitals (Monotype), baked into `SunClockGlyphs.h`. Their licence is
-unresolved (§12).
-
-#### 3.1.4 The landing at the stair's foot
-
-The landing floor is at z −6.00, from r 0 to the stair wall (r 6.48), and through the portal out to r 7.05, where
-the joint's threshold begins. It is polished statuary with a rosette under the well:
-
-| Part | Stone |
-|---|---|
-| Pale eye, r 0–0.12 | A |
-| Disc, r 0.12–0.30, edged by a 32-gon through the rays' roots and valleys | nero |
-| 16-point star (below) | nero and rosso halves |
-| Pale field between the points, to r 1.90 | A |
-| Band, r 1.90–2.00 | nero |
-| Band, r 2.00–2.06 | rosso |
-| Landing, r 2.06 → 6.48 | A |
-
-**The star.** Long points to r 1.80 at φ = 45°·k; short points to r 1.20 at φ = 22.5° + 45°·k. Each point is split
-on its axis into a nero half and a rosso half. The long points have nero on the lower-φ side; the short points the
-other way round.
+- **The gilt meridian** `rotunda.dial.meridian`: the XII line at φ 270°, r 1.60 → 6.80, **60 mm** wide, 2.5 mm proud,
+  1 mm bevel (the board draws it 2.3 × the hour lines; as built it was an ordinary 24 mm bar).
+- **The gilt sun** `rotunda.dial.sun` (the arrival point). **Rays:** 32 at φ = 11.25°·i from r 0.24; 16 long (i even,
+  one to XII) to r 1.25, 72 mm wide at the root tapering (1 − t)^0.62, crest 42 mm falling (1 − t)^1.2 to 4 mm; 16 short
+  flames (i odd) to r 0.86, 60 mm tapering (1 − t)^0.75, crest 30 mm, weaving 0.03·sin(3πt)·√t·(1 − t); across each
+  flank: foot (−2 mm), a hollow at 0.40 of the crest height, the ridge. **Boss** (lathe, (r, z)): (0.285, −0.002)
+  (0.285, 0.035) arc(c 0.265, 0.035; r 0.020; 0→90°) then 20 steps up the dome: sphere R 1.1854 with its top at z
+  0.085, r 0.265 → 0. Bead ring r 0.005 at r 0.19 on the dome; beaded foot, torus section r 0.014 at r 0.30, z 0.012.
+- **The motto** `rotunda.floor.motto`: HORAS · NON · NUMERO · NISI · SERENAS in cast bronze capitals on the middle
+  course; cap 0.26, baseline r 8.53 (tops towards the dial, cap line r 8.27); centred on φ 90° (south), read from the
+  ring facing the dial, running west to east; tracking 0.16 cap, word gap 0.6 cap; 8 mm proud, 2.5 mm bevel. Each "·"
+  is a gap of 1.15 cap holding a triangular stop `rotunda.floor.motto.stop` (point down, ±0.12 cap at 0.60 cap height,
+  point at 0.36 cap, apex 8 mm high). Glyphs: port the as-built outlines baked from Centaur (installed at C:/Windows/Fonts/CENTAUR.TTF) in `SunClockGlyphs.h`; no download. A public release switches to an open-licence face.
 
 ### 3.2 Walls: the drum
+- **Section** 1.20: inner face r 10.00 to outer face r 11.20; travertine core, 30 mm Crema Marfil inside.
+- **Inner face** `rotunda.drum.wall.inner`, z 0.15 → 10.00 (hidden above 9.47 behind the entablature). Courses: 8 of
+  1.165 from 0.15 to 9.47, blocks ≤ 1.9 long, half-bond; datums (niche sill 2.00, springings 4.50, 4.67) on joints
+  within ±0.10.
+- **Shadow gap** `rotunda.drum.shadow-gap`: z 0 → 0.15, recessed 0.04 (back face r 10.04, soffit z 0.15). Door jambs step
+  back into it at the floor.
+- **Outer face** `rotunda.drum.wall.outer` r 11.20, z 0 → 11.00. **Drum top** `rotunda.drum.top`: annulus z 11.00,
+  r 10.553 → 11.20.
+- **Door rough openings** at φ 0° (E, 3.00), 90° (S, 4.00), 180° (W, 3.00), 270° (N, 4.00): jambs planes parallel
+  to the axis at the rough half-width, head a half-cylinder about the springing line z 4.50, straight through (§2).
+- **Niches** at φ 45° (SE), 135° (SW), 225° (NW), 315° (NE): width 2.00, sill z 2.00, springing 4.67, crown 5.67.
+  Front plane: the chord plane at r 10.00 on the niche axis; between it and the curved face the sliver reveal
+  `rotunda.niche.reveal` (0.050 deep at the jambs, 0 on the axis). Back `rotunda.niche.back`: a half-round r 1.00 about
+  the axis point at r 10.00, reaching r 11.00 (0.20 of wall behind), z 2.00 → 4.67. Head `rotunda.niche.head`: a
+  quarter sphere r 1.00 about (r 10.00, z 4.67). Floor: the sill ledge's top run back to the half-round.
 
-**Section.** The drum is 1.20 thick, from the inner face at r 10.00 to the outer face at r 11.20. It is a travertine
-ashlar core with a 30 mm cream-marble revetment inside.
-
-**Inner face**, r 10.00:
-- From z 0.15 to 10.00, hidden above 9.47 behind the entablature.
-- The revetment is laid in ashlar courses within cream-marble stock. As-built coursing: courses about 1.2 m, blocks
-  up to 1.9 m long, half-bond. Form sets the courses to divide 0.15 → 9.47 evenly (8 courses of 1.165) with the
-  datums (niche sill 2.00, springings 4.50 and 4.67) on joints where they fall within ±0.10.
-
-**Shadow gap.** At the foot of the inner face, z 0 → 0.15, recessed 0.04 to r 10.04, with its back face and soffit.
-This is as built: the floor never meets the wall on one line.
-
-**Outer face**, r 11.20, from z 0 to 11.00: travertine, honed.
-- As built, a bare face. The façade dress over it (§3.10) is for polish.
-- Wherever a neighbour abuts (the Hall of Light's vault, Albion's porch, Chenghuai's porch walls, the west passage),
-  the outer face is the port face. Site's surrounds and passage masonry close against it.
-
-**Drum top.** A flat annulus at z 11.00 from r 10.553 (the dome shell's foot) to r 11.20.
-
-**Door rough openings**, at φ 0° (east, 3.00), 90° (south, 4.00), 180° (west, 3.00) and 270° (north, 4.00):
-- The jambs are planes parallel to the door axis at the rough half-width. The head is a half-cylinder about the
-  springing line at z 4.50, running straight through the wall.
-- Where a jamb plane cuts the drum:
-  - W and E: x = ±11.092 on the rough jambs (±11.099 on the clear jambs);
-  - N and S: ±11.011 on the rough jambs (±11.020 on the clear jambs).
-
-**Niches**, at φ 45° (SE), 135° (SW), 225° (NW) and 315° (NE):
-- **Size.** 2.00 wide (half-width 1.00). Sill at z 2.00, springing 4.67, crown 5.67.
-- **In plan.** The niche's front plane is the chord plane on its axis at r 10.00. Between the curved drum face and
-  that plane there is a sliver reveal: 0.050 deep at the jambs, 0 on the axis.
-- **Back.** A half-round of radius 1.00 about the axis point at r 10.00, reaching r 11.00. That leaves 0.20 of wall
-  behind it.
-- **Head.** A half-dome (quarter sphere) of radius 1.00 about (r 10.00, z 4.67).
-- **Floor.** The niche floor is the top of the sill ledge (§3.3), running back to the half-round.
-- **Finish.** Cream marble, honed, laid.
-
-### 3.3 The order: pilasters, entablature, archivolts
-
-**Order:** `doric-roman.pilaster`, proposed for `Data/Form/Orders.json` from day one, since the anchor defines the
-language. Its parts:
-- a Tuscan torus base;
-- a shaft with 7 stopped flutes;
-- a Roman Doric capital (astragal, necking, annulet, echinus, abacus);
-- a plain-frieze entablature.
-
-Height to the abacus top is 9.47. It has no carving: the capitals are mouldings only.
-
-**The 16 pilasters.**
-- **Plan.** Each is 0.90 wide. The face stands at r 9.57 (0.43 proud of the wall face); the back stands on the wall
-  face, r 10.00. The plinth fills the shadow gap to r 10.04 beneath it.
-- **Positions.** The plan rule is 11.25° + 22.5°·k. A pilaster that would stand in a doorway steps out just enough for
-  its widest part (the abacus, 0.115 each side of the shaft) to clear the jamb. As built, the flank is 11.776° from a
-  3.00 door's axis and 14.663° from a 4.00 door's. So φ:
-
-  ```
-  11.776  33.750  56.250  75.337  104.663  123.750  146.250  168.224
-  191.776 213.750 236.250 255.337  284.663  303.750  326.250  348.224
-  ```
-
-  The flank rule, for reference: flank = max(11.25°, asin(h/ρ) + atan2(0.565, b)), where h is the door's
-  half-width, b = 10.06 the as-built back radius, and ρ = √(b² + 0.565²).
-
-**Base.** Swept round the front and both returns with mitred corners. Points are (a out from the shaft face, z):
-
-```
-(0.10, 0) (0.10, 0.18) (0.03, 0.18)
-arc c(0.03, 0.24) ρ0.06, −90°→90° (0.03, 0.30)    torus
-(0.02, 0.30)
-arc c(0.02, 0.32) ρ0.02, 270°→180° (0, 0.32)      apophyge
-```
-
-**Shaft.** z 0.32–8.90.
-- **Flutes.** z 0.60–8.62, stopped square top and bottom.
-- **Across the face:** a 0.070 margin, 7 flutes each 0.085 wide separated by 6 fillets of 0.0275, then a 0.070
-  margin. The flute section is depth 0.030·sin(πt) across its width.
-- **Returns.** The shaft's sides are plain.
-
-**Capital.** Swept like the base. Points are (a, z):
-
-```
-(0, 8.90)
-arc c(0, 8.93) ρ0.03, −90°→90° (0, 8.96)           astragal
-(0, 9.14)                                          necking
-(0.025, 9.14) (0.025, 9.17)                        annulet
-arc c(0.025, 9.26) ρ0.09, −90°→0° (0.115, 9.26)    echinus
-(0.115, 9.47)                                      abacus
-```
-
-The abacus top is flat, back to the wall.
-
-**Entablature.** A ring swept about the z axis on the dome's stations. Points are (r, z), from the dome's surface
-down to the wall; the solid is below and outboard. It is a cavetto crown, the corona, an ovolo bed moulding, a plain
-frieze, then the architrave (ovolo crown and two fasciae):
-
-```
-(9.9875, 10.500)                                   on the dome sphere at the cornice top (elevation 2.866°)
-(9.220, 10.500) (9.220, 10.460)
-arc c(9.220, 10.400) ρ0.060, 90°→0° (9.280, 10.400)     cavetto crown
-(9.280, 10.240)                                    corona face
-(9.420, 10.240) (9.420, 10.210)                    corona soffit
-arc c(9.510, 10.210) ρ0.090, 180°→270° (9.510, 10.120)  ovolo bed moulding
-(9.510, 9.840)                                     plain frieze
-(9.430, 9.840) (9.430, 9.820)
-arc c(9.480, 9.820) ρ0.050, 180°→270° (9.480, 9.770)    architrave crown
-(9.480, 9.630) (9.500, 9.630)                      upper fascia
-(9.500, 9.470)                                     lower fascia
-(10.000, 9.470)                                    soffit, back to the wall face (as built 10.01)
-```
-
-The cornice's top ledge, from r 9.22 to 9.99 at z 10.50, is the luminaire mount of §4.
-
-**Archivolts**, round each door's arch on the drum's inner face.
-- **Path.** From one springing (z 4.50) round the semicircle to the other. The band dies against the flanking
-  pilasters' sides, trimmed to them.
-- **Section.** (s out from the clear intrados, p proud of the wall along the door axis):
-
-  ```
-  (0.30, 0) (0.30, 0.10)
-  arc c(0.27, 0.10) ρ0.03, 0°→90° (0.27, 0.13)
-  (0.20, 0.13) (0.20, 0.10) (0.09, 0.10) (0.09, 0.08) (0, 0.08) (0, 0)
-  ```
-
-  That is an outer band with a rounded arris (0.13 proud), a middle fascia (0.10) and an inner fascia (0.08). Its
-  inner return (s = 0) meets the joint's lining face on the clear intrados.
-
-**Niche surrounds.** An architrave up each jamb from the sill (z 2.00) to the springing (4.67), round the head
-(radius 1.00 + s), and down the other jamb. Section (s out from the opening edge, p proud):
-
-```
-(0.20, 0) (0.20, 0.05)
-arc c(0.17, 0.05) ρ0.03, 0°→90° (0.17, 0.08)
-(0.07, 0.08) (0.07, 0.06) (0, 0.06) (0, 0)
-```
-
-**Niche sill ledges.** A ledge 0.16 proud and 0.16 high (z 1.84–2.00), running laterally ±1.26 about the niche axis
-along the drum face, with capped ends. Section (d proud, z):
-
-```
-(0, 1.84) (0.13, 1.84)
-arc c(0.13, 1.87) ρ0.03, −90°→0° (0.16, 1.87)
-(0.16, 2.00) (0, 2.00)
-```
-
-Its top continues back as the niche floor to the half-round. It carries the cast.
-
-**Imposts.** See §2: they go to the doorway class detail.
-
-**Catalogue.** The profiles above are promoted to `Data/Form/Profiles.json` under names for what they are:
-
-| Key | Profile |
-|---|---|
-| `base.torus-apophyge` | pilaster base |
-| `capital.doric-roman` | pilaster capital |
-| `entablature.plain-frieze.cavetto-crown` | entablature |
-| `archivolt.two-fascia-roll` | door archivolt |
-| `architrave.niche.two-step-roll` | niche surround |
-| `sill.rounded-ledge` | niche sill ledge |
-| `coffer.two-step-bevel` | dome coffer (§3.4) |
+### 3.3 The order: pilasters, entablature, archivolts, niche dressings (profiles (a out, z) or (s, p); metres)
+- **16 pilasters** `rotunda.pilaster` (`doric-roman.pilaster`: Tuscan torus base, 7 stopped flutes, Roman Doric
+  capital, no carving), 0.90 wide, face at r 9.57, back on the wall face (plinth fills the shadow gap). φ, stepped
+  clear of the doors so the abacus (0.115 each side) clears the jamb: **11.776, 33.750, 56.250, 75.337, 104.663,
+  123.750, 146.250, 168.224, 191.776, 213.750, 236.250, 255.337, 284.663, 303.750, 326.250, 348.224** (rule:
+  max(11.25°, asin(h/ρ) + atan2(0.565, 10.06)), h the door's half-width, ρ = √(10.06² + 0.565²)).
+  - Base (swept round front and returns, mitred): (0.10, 0) (0.10, 0.18) (0.03, 0.18) arc(c 0.03, 0.24; r 0.06;
+    −90→90°) (0.03, 0.30) (0.02, 0.30) arc(c 0.02, 0.32; r 0.02; 270→180°) (0, 0.32).
+  - Shaft z 0.32–8.90; flutes z 0.60–8.62 stopped square: margin 0.070, 7 flutes × 0.085 between 6 fillets × 0.0275,
+    margin 0.070; flute depth 0.030·sin(πt). Returns plain.
+  - Capital: (0, 8.90) arc(c 0, 8.93; r 0.03; −90→90°) (0, 8.96) (0, 9.14) (0.025, 9.14) (0.025, 9.17)
+    arc(c 0.025, 9.26; r 0.09; −90→0°) (0.115, 9.26) (0.115, 9.47); abacus top flat back to the wall.
+- **Entablature** `rotunda.entablature` (`entablature.plain-frieze.cavetto-crown`), a ring on the dome's stations,
+  (r, z) from the dome down to the wall: (9.9875, 10.500) (9.220, 10.500) (9.220, 10.460) arc(c 9.220, 10.400; r 0.060;
+  90→0°) (9.280, 10.400) (9.280, 10.240) (9.420, 10.240) (9.420, 10.210) arc(c 9.510, 10.210; r 0.090; 180→270°)
+  (9.510, 10.120) (9.510, 9.840) (9.430, 9.840) (9.430, 9.820) arc(c 9.480, 9.820; r 0.050; 180→270°) (9.480, 9.770)
+  (9.480, 9.630) (9.500, 9.630) (9.500, 9.470) (10.000, 9.470). The cornice's top ledge r 9.22–9.99 at z 10.50 carries
+  the luminaires of §4.
+- **Door archivolts** `rotunda.door.archivolt` (`archivolt.two-fascia-roll`), on the inner face from springing to
+  springing round each door's clear arch, dying against the flanking pilasters' sides; (s out from the clear intrados,
+  p proud): (0.30, 0) (0.30, 0.10) arc(c 0.27, 0.10; r 0.03; 0→90°) (0.27, 0.13) (0.20, 0.13) (0.20, 0.10) (0.09, 0.10)
+  (0.09, 0.08) (0, 0.08) (0, 0). Its inner return meets the joint's lining.
+- **Niche surrounds** `rotunda.niche.surround` (`architrave.niche.two-step-roll`): up each jamb from z 2.00 to 4.67,
+  round the head (r 1.00 + s), down: (0.20, 0) (0.20, 0.05) arc(c 0.17, 0.05; r 0.03; 0→90°) (0.17, 0.08) (0.07, 0.08)
+  (0.07, 0.06) (0, 0.06) (0, 0).
+- **Niche sill ledges** `rotunda.niche.sill` (`sill.rounded-ledge`): 0.16 proud, z 1.84–2.00, laterally ±1.26 about
+  the axis, capped ends; (d proud, z): (0, 1.84) (0.13, 1.84) arc(c 0.13, 1.87; r 0.03; −90→0°) (0.16, 1.87) (0.16, 2.00)
+  (0, 2.00); the top runs back to the half-round as the niche floor. It carries the cast.
 
 ### 3.4 The dome
-
-**Inner surface.** A sphere R 10.00 about (0, 0, 10.00), lime plaster, trowelled. From the bottom up:
-
-| Zone | Elevation | Detail |
-|---|---|---|
-| Lower plain band | 2.866° → 4° | 2.866° is the cornice top at z 10.50, r 9.9875 |
-| Coffers | 4° → 64° | five rings of 28 |
-| Upper plain band | 64° → 72.54° | z 18.988, r 4.384 up to z 19.539, r 3.000 |
-| The eye's stepped curb | | inner profile below |
-
-**The eye's stepped curb**, inner profile (r, z):
-
-```
-(3.000, 19.539) (3.000, 19.420) (2.750, 19.420) (2.750, 19.580) (2.500, 19.580) (2.500, 20.450)
-```
-
-That is a 0.12 hanging fascia, a step up, and the eye's cylindrical face (r 2.50) up to the curb top at 20.45.
-
-**Coffers:** 5 rings × 28, each ring 12° of elevation, all sharing the same angles.
+- **Inner surface** sphere R 10.00 about (0, 0, 10.00): plain band `rotunda.dome.band` 2.866° (cornice top, z 10.50,
+  r 9.9875) → 4°; **coffers** `rotunda.dome.coffer` 4° → 64°; upper plain band 64° (z 18.988, r 4.384) → 72.54° (z 19.539,
+  r 3.000); **eye curb** `rotunda.dome.eye-curb` (r, z): (3.000, 19.539) (3.000, 19.420) (2.750, 19.420) (2.750, 19.580)
+  (2.500, 19.580) (2.500, 20.450).
+- **Coffers:** 5 rings × 28, each 12° of elevation, sharing the 28 cell angles (θ = 360°/28·c).
 
 | Ring | Elevation | z | r | Cell | Rib | Step | Bevel |
 |---|---|---|---|---|---|---|---|
@@ -492,837 +211,399 @@ That is a 0.12 hanging fascia, a step up, and the eye's cylindrical face (r 2.50
 | 4 | 40°–52° | 16.428–17.880 | 7.660–6.157 | 1.559 | 0.171 | 0.070 | 0.078 |
 | 5 | 52°–64° | 17.880–18.988 | 6.157–4.384 | 1.189 | 0.131 | 0.054 | 0.059 |
 
-- **Cell** is the ring's cell width at mid-elevation: (2π/28)·10·cos(e_mid).
-- **The section** is the same on all four sides of every coffer, scaled to the ring's cell. Points are (s inward
-  from the cell edge, depth into the dome):
+  Cell = (2π/28)·10·cos(e_mid); Rib 0.11, Step 0.045, Bevel 0.05 × Cell. Section on all four sides (s in from the cell
+  edge, depth): (0, 0) (Rib, 0) (Rib, 0.12) (Rib+Step, 0.12) (Rib+Step, 0.26) (Rib+2Step, 0.26) (Rib+2Step+Bevel, 0.45);
+  panel on the sphere R 10.45. Offsets across θ: 1/(10·cos e_mid) rad per metre; up the elevation 1/10. Neighbouring
+  ribs meet on the cell edge.
+- **Shell** 0.60: outer sphere R 10.60 about (0, 0, 10.00) from its foot on the drum top (r 10.553, z 11.00) to r 2.90
+  (z 20.196), then (2.90, 20.196) → (2.90, 20.450) → (2.50, 20.450), the curb up and over. Covered in lead:
+  `rotunda.dome.outer` (milled sheet on boarding with rolls; the boarding and rolls sit on the shell line, polish may
+  thicken it outward).
 
-  ```
-  (0, 0) (Rib, 0) (Rib, 0.12) (Rib+Step, 0.12) (Rib+Step, 0.26) (Rib+2·Step, 0.26) (Rib+2·Step+Bevel, 0.45)
-  ```
+### 3.5 Glazing: the eye (Glazed `rotunda.eye`, D-004; after the Great Court)
+- **Lattice** `rotunda.eye.lattice`, one welded and faired body. Ring: r 2.42–2.50 × z 20.22–20.38 against the curb's
+  inner face. Bars in three directions φ 0°, 60°, 120°, each 7 at lateral offsets 0.80·k (k −3…3), all three k 0 bars
+  crossing at the centre; section 0.05 wide × 0.10 deep, z 20.25–20.35; each runs 0.04 into the ring: lengths 4.920
+  (k 0), 4.653 (±1), 3.737 (±2), 1.080 (±3). 21 bars; bars and ring cover ≈ 4.8 of the eye's 19.6 m² (≈ 24 %).
+- **Glass** `rotunda.eye.glass`: one disc r 2.50, laminated low-iron 2 × 5 mm + 0.76 PVB (10.76 mm), underside z 20.38
+  on the ring, top 20.39, edge against the curb. Flat inside a 60 mm upstand: it ponds (expected; falls are polish).
+- **Node** `rotunda.eye.node`: a sphere r 0.12 centred (0, 0, 20.25), enclosing the bars' crossing: the sun clock's
+  nodus.
 
-  with Rib = 0.11·Cell, Step = 0.045·Cell and Bevel = 0.05·Cell. So each coffer has a rib frame on the sphere, two
-  steps, and a bevel down to a panel 0.45 deep (on the sphere R 10.45).
-- **Measuring in.** Offsets across θ use 1/(10·cos e_mid) radians per metre; offsets up the elevation use 1/10.
-- **Ribs.** Neighbouring coffers' ribs meet on the cell edge.
-- **Stations.** The sides run the same way as the neighbours' and the bands' rings, so they share stations.
+### 3.6 The sun clock's drum (moving body `rotunda.sun-clock.drum`; coordinates z_d)
+Raised, a tempietto 13.98 across (r 6.99) with its door west, facing the Salon. Everything stays inside r 6.99.
+- **Wall** `rotunda.sun-clock.wall`: face r 6.900 from the base top (z_d −3.08) to the architrave (−0.45); inner face
+  `rotunda.sun-clock.wall.inner` r 6.545 from −3.56 to the rim groove (−0.06). **Plinth** r 6.99, z_d −3.56 → −3.50 all
+  round (under the door too); **foot** a flat annulus r 6.545–6.99 at −3.56, bearing on the rams.
+- **Base** (not across the door), (r, z_d): (6.990, −3.500) (6.990, −3.300) (6.955, −3.300) arc(c 6.955, −3.265;
+  r 0.035; −90→90°) (6.955, −3.230) (6.925, −3.230) (6.925, −3.215) (6.915, −3.215) arc(c 6.915, −3.200; r 0.015; −90→90°)
+  (6.915, −3.185) (6.905, −3.175) (6.905, −3.100) (6.900, −3.080).
+- **Entablature** (all round): (6.900, −0.450) (6.930, −0.450) (6.930, −0.395) (6.940, −0.390) (6.940, −0.335)
+  (6.952, −0.330) (6.952, −0.315) (6.915, −0.315) (6.915, −0.195) arc(c 6.915, −0.150; r 0.045; −90→0°) (6.960, −0.150)
+  (6.990, −0.150) (6.990, 0.000): the corona is the dial's edge.
+- **Door** `rotunda.sun-clock.door`, west (φ 180°): 2.60 wide at the wall face, 2.95 high above the sill (z_d −3.50 →
+  −0.55); radial jambs (half-angle 10.860°); conical head, a semicircle of radius r·sin 10.860° at each radius (1.300 at
+  the face, 1.233 at the inner face), springing z_d −1.85; sill `rotunda.sun-clock.door.sill` flat r 6.545–6.99 at −3.50.
+  Archivolt down both jambs to z_d −3.10, centre line 1.355 from the axis; (across, proud): (0.045, −0.010)
+  (0.045, 0.036) arc(c 0.033, 0.036; r 0.012; 0→180°) (0.021, 0.036) (0.010, 0.036) (0.010, 0.030) (−0.045, 0.030)
+  (−0.045, −0.010). Imposts 1.300–1.430 off the axis, springing −0.07 → +0.01, 0.06 proud. Keystone: trapezoid 0.15 wide
+  at z_d −0.545 to 0.20 at −0.440, 0.07 proud.
+- **12 pilasters** `rotunda.sun-clock.pilaster` at φ = 15° + 30°·k (165° and 195° flank the door): pedestal 0.50 wide,
+  0.075 proud, z_d −3.10 → −2.98; fluted shaft 0.44 / 0.055 / −2.99 → −0.61 (5 flutes 0.0632 between fillets 0.016,
+  margins 0.03, each a circular arc sagging 0.018); necking 0.47 / 0.064 / −0.62 → −0.56; echinus 0.49 / 0.071 / −0.56 →
+  −0.53; abacus 0.51 / 0.080 / −0.53 → −0.44.
+- **Soffit** `rotunda.sun-clock.soffit` (the stair's ceiling): ring ribs at z_d −0.13 at r 0–0.55, 1.25–1.35,
+  2.25–2.35, 3.45–3.55, 4.75–4.85; coffer rings r 0.55–1.25 (8 coffers, radial ribs 6.5625°), 1.35–2.25 (12, 2.8125°),
+  2.35–3.45 (16, 1.875°), 3.55–4.75 (24, 0.9375°), 4.85–6.20 (32, 0.9375°); each coffer sunk from the rib (−0.13) to a
+  40 mm inset frame at −0.115, then the panel at −0.100.
+- **Rim** `rotunda.sun-clock.rim` (bronze ring, (r, z_d)): (6.190, −0.090) (6.190, −0.125) arc(c 6.205, −0.125;
+  r 0.015; 180→270°) (6.205, −0.140) (6.320, −0.140) (6.330, −0.132) (6.340, −0.140) (6.460, −0.140) (6.460, −0.060)
+  (6.545, −0.060): the deep groove r 6.46–6.545 takes the sleeve's top (−0.07) when lowered.
+- **Pendant boss** `rotunda.sun-clock.pendant` over the well (lathe, (r, z_d)): (0, −0.265), low dome r = 0.11 sin t,
+  z = −0.265 + 0.04(1 − cos t), t 0→90° to (0.110, −0.225), bead arc(c 0.125, −0.225; r 0.015; 180→0°) (0.140, −0.225)
+  (0.140, −0.215) (0.240, −0.190) (0.340, −0.170) (0.400, −0.158) arc(c 0.400, −0.148; r 0.010; −90→90°) (0.400, −0.138)
+  (0.400, −0.120).
+- On top: the dial (§3.1). Real section (polish): a welded steel carcass faced in stone, tens of tonnes; tonight a
+  solid core (≈ 200 t).
 
-**Shell.** Thickness 0.60. Travertine core; inner surface lime plaster (laid); outer face travertine, honed.
+### 3.7 The shaft (fixed, in the served well)
+- **Stair wall (sleeve)** `rotunda.stair.wall`: face r 6.48, back r 6.54, landing (z −6.00) to top z −0.07; cut on
+  the north by the portal (jambs x = ±1.80, head at the lintel, z −3.68). Lintel (underside −3.68, r 6.48 → 7.05) and
+  tympanum (on r 7.05, from −3.68 to the arch) are the same surface.
+- **Pocket** `rotunda.shaft.pocket`: annulus r 6.54–7.00, floor z −3.58, open up to z 0; outer face r 7.00, −3.58 → 0;
+  includes the sleeve's top and back.
+- **Masonry:** r 7.00–7.60 above the pocket floor, r 6.54–7.60 below it; outer face r 7.60, z −6.00 → 0, cut by the
+  port's arch (reveal `rotunda.stair.port.reveal`, r 7.05 → 7.60).
+- **Ram bores** (housing `rotunda.sun-clock.rams`): 8 vertical bores Ø 0.36 centred on r 6.77 at φ = 22.5° + 45°·k,
+  pocket floor (−3.58) down to z −5.90; they clear the portal (±15.42° about 270°) and the drum's door (±10.86° about
+  180°). Rams `rotunda.sun-clock.ram` (§6).
+- **Stair-side port dressings** `rotunda.stair.port.dressing` (polish): an arch ring 0.18 wide, 0.14 proud; a moulded
+  architrave out to 0.40, crown 0.20 proud; plinth blocks 0.40 high; a keystone; moulded transoms on the lintel.
+- **Landing** `rotunda.stair.landing.floor` at z −6.000 from r 0 to the stair wall and through the portal to r 7.60.
+  Rosette: pale eye r 0–0.12; black disc r 0.12–0.30 (edge a 32-gon through the points' roots and valleys); a 16-point
+  star, long points to r 1.80 at φ = 45°·k, short to r 1.20 at φ = 22.5° + 45°·k, each split on its axis, black on the
+  lower-φ half of the long points and red on the other (the short points the other way round); pale field between the
+  points to r 1.90; band r 1.90–2.00 black `rotunda.stair.landing.black`; band r 2.00–2.06 red `rotunda.stair.landing.red`;
+  pale landing r 2.06 → 6.48.
 
-**Outer surface.** A sphere R 10.60 about (0, 0, 10.00), from its foot on the drum top (r 10.553, z 11.00) up to
-r 2.90 (z 20.196). From there, (2.90, 20.196) → (2.90, 20.450) → (2.50, 20.450): the curb, up and over.
-
-### 3.5 Glazing: the eye
-
-This is the only opening to the sky. It is Glazed (D-004), after the British Museum's Great Court.
-
-**Lattice.** Painted steel, one welded body (joint kind: welded and faired).
-- **Ring.** A rectangular section r 2.42–2.50 × z 20.22–20.38, standing against the curb's inner face.
-- **Bars.** Three directions, at φ 0°, 60° and 120°. Each direction has 7 bars at lateral offsets 0.80·k,
-  k = −3 … 3. All three k = 0 bars cross at the centre, so the grid is triangulated with the node at its heart.
-- **Bar section.** 0.05 wide × 0.10 deep, centred at z 20.30 (so z 20.25–20.35).
-- **Bar lengths.** Each bar runs 0.04 into the ring. Lengths are 4.920 (k 0), 4.653 (±1), 3.737 (±2) and
-  1.080 (±3).
-- **Paint.** As built, a dark bronze-grey, sRGB #1E1C19: the lattice reads as a dark drawing against the sky.
-  *Correction:* as built, the lattice was shaded as a bare metal (metallic 1); it is a painted dielectric coat.
-
-**Glass.** One pane of laminated low-iron glass, 2 × 5 mm with a 0.76 PVB interlayer (10.76 mm). It is a disc r 2.50,
-underside at z 20.38 on the ring and top at 20.39, its edge against the curb's inner face.
-- *Correction:* as built it was 10 mm monolithic. Overhead glass is laminated, and the PVB also cuts UV below
-  380 nm.
-
-**Node.** Gilt bronze. A sphere of radius 0.12 centred at (0, 0, 20.25), enclosing the bars' crossing. It is the
-nodus of the sun clock (§5).
-
-**Obstruction.** The bars and ring cover about 4.8 m² of the eye's 19.6 m² (about 24 %).
-
-### 3.6 The sun clock's drum (a moving body)
-
-Everything in this section moves with the lift (§6). Coordinates are z_d (z = z_d lowered, z = z_d + 3.50 raised).
-Raised, the drum is a tempietto 14 m across (r 6.99) with its door to the west, facing the Salon.
-
-**Build-up.**
-- **Wall and dial slab.** A travertine core, faced with cream marble (walls) or statuary (dial).
-- **Soffit.** Cast fibrous-plaster coffers hung under the slab.
-- **Polish.** A welded steel carcass in place of the stone core. This is the real machine's section: tens of
-  tonnes, not the ≈ 200 t of a solid core.
-
-**Wall.**
-- Face r 6.900 from the base (z_d −3.08) to the architrave (−0.45).
-- Inner face r 6.545, from −3.56 to the rim groove (−0.06).
-- Between them, 0.355 thick.
-- Everything stays inside r 6.99 (the cornice, the plinth and the dial's edge), so the drum slides into its pocket.
-
-**Plinth and foot.**
-- The plinth runs all round at r 6.99 from z_d −3.56 to the sill level −3.50, including under the door.
-- The foot is a flat annulus r 6.545–6.99 at z_d −3.56, and it bears on the rams.
-
-**Base**, above the sill. It is a plinth, a torus, a fillet, an astragal and a chamfer, and it is not run across the
-door. Points are (r, z_d):
-
-```
-(6.990, −3.500) (6.990, −3.300) (6.955, −3.300)
-arc c(6.955, −3.265) ρ0.035, −90°→90° (6.955, −3.230)
-(6.925, −3.230) (6.925, −3.215) (6.915, −3.215)
-arc c(6.915, −3.200) ρ0.015, −90°→90° (6.915, −3.185)
-(6.905, −3.175) (6.905, −3.100) (6.900, −3.080)
-```
-
-**Entablature**, all round. It is two fasciae and a crown fillet, a plain frieze, an ovolo, and a step out to the
-corona, which is the dial's edge. Points are (r, z_d):
-
-```
-(6.900, −0.450) (6.930, −0.450) (6.930, −0.395) (6.940, −0.390) (6.940, −0.335) (6.952, −0.330) (6.952, −0.315)
-(6.915, −0.315) (6.915, −0.195)
-arc c(6.915, −0.150) ρ0.045, −90°→0° (6.960, −0.150)
-(6.990, −0.150) (6.990, 0.000)
-```
-
-**Door**, to the west (φ 180°).
-- 2.60 wide at the wall face and 2.95 high above the sill (z_d −3.50 → −0.55).
-- The jambs are radial (half-angle 10.860°), so every moulding ends on them.
-- The head is conical: a semicircle of radius r·sin(10.860°) at each radius (1.300 at the face, 1.233 at the inner
-  face), springing z_d −1.85 (1.65 above the floor when raised).
-- The sill is flat from r 6.545 to 6.99 at z_d −3.50.
-
-**Door dressing.**
-- **Archivolt.** It runs down both jambs to the base top (z_d −3.10). Its centre line is 1.355 from the door axis,
-  1 cm clear of the opening. Section (across, proud): a 90 mm band 30 mm proud, with a half-round bead of r 0.012 on
-  its outer edge:
-
-  ```
-  (0.045, −0.010) (0.045, 0.036)
-  arc c(0.033, 0.036) ρ0.012, 0°→180° (0.021, 0.036)
-  (0.010, 0.036) (0.010, 0.030) (−0.045, 0.030) (−0.045, −0.010)
-  ```
-
-- **Imposts.** Blocks from 1.300 to 1.430 off the axis, z_d from the springing −0.07 to +0.01, 0.06 proud.
-- **Keystone.** A trapezoid, 0.15 wide at z_d −0.545 widening to 0.20 at −0.440, 0.07 proud.
-
-**Pilasters.** 12 of them, at φ = 15° + 30°·k. The two at 165° and 195° flank the door, clear of its archivolt.
-Each has:
-
-| Part | Width | Proud | z_d |
-|---|---|---|---|
-| Pedestal block | 0.50 | 0.075 | −3.10 → −2.98 |
-| Fluted shaft | 0.44 | 0.055 | −2.99 → −0.61 |
-| Necking | 0.47 | 0.064 | −0.62 → −0.56 |
-| Echinus | 0.49 | 0.071 | −0.56 → −0.53 |
-| Abacus | 0.51 | 0.080 | −0.53 → −0.44 |
-
-The shaft carries 5 flutes of 0.0632 between fillets of 0.016, with 0.03 margins. Each flute is a circular arc
-sagging 0.018.
-
-**Soffit**, the dial slab's underside, seen from the stair.
-- **Ring ribs** at z_d −0.13, at r 0–0.55 (the centre, under the pendant), 1.25–1.35, 2.25–2.35, 3.45–3.55 and
-  4.75–4.85.
-- **Five coffer rings**, with radial ribs between the coffers:
-
-  | r | Coffers | Radial rib |
-  |---|---|---|
-  | 0.55–1.25 | 8 | 6.5625° |
-  | 1.35–2.25 | 12 | 2.8125° |
-  | 2.35–3.45 | 16 | 1.875° |
-  | 3.55–4.75 | 24 | 0.9375° |
-  | 4.85–6.20 | 32 | 0.9375° |
-
-- **Each coffer** is sunk in two steps: from the rib (−0.13) to a 40 mm inset frame at −0.115, then to the panel at
-  −0.100.
-
-**Bronze rim.** A ring. Points are (r, z_d):
-
-```
-(6.190, −0.090) (6.190, −0.125)
-arc c(6.205, −0.125) ρ0.015, 180°→270° (6.205, −0.140)
-(6.320, −0.140) (6.330, −0.132) (6.340, −0.140) (6.460, −0.140)
-(6.460, −0.060) (6.545, −0.060)
-```
-
-That is a rounded arris, a fine groove, and the deep groove r 6.46–6.545 up to −0.06. Lowered, the stair wall's top
-(−0.07) sits in that groove, so raised there is no open slot into the pocket.
-
-**Pendant boss.** Gilt bronze, over the well. A lathe profile (r, z_d):
-
-```
-(0, −0.265)
-low dome r = 0.11·sin t, z = −0.265 + 0.04·(1 − cos t), for t = 0 → 90° (0.110, −0.225)
-bead arc c(0.125, −0.225) ρ0.015, 180°→0° (0.140, −0.225)
-(0.140, −0.215) (0.240, −0.190) (0.340, −0.170) (0.400, −0.158)
-arc c(0.400, −0.148) ρ0.010, −90°→90° (0.400, −0.138)
-(0.400, −0.120)
-```
-
-**On top of the drum:** the dial and its inlay (§3.1).
-
-### 3.7 The shaft (fixed, inside the served well)
-
-**Stair wall, the "sleeve".**
-- Face r 6.48, back r 6.54, from the landing (z −6.00) to its top at z −0.07.
-- Cut on the north by the portal: jambs x = ±1.80, head at the lintel, z −3.68.
-
-**Pocket.** The annulus r 6.54–7.00, floor at z −3.58, open up to z 0. Its outer face is r 7.00 from −3.58 to 0. The
-drum's wall slides here.
-
-**Masonry.**
-- From r 7.00 to 7.60 above the pocket floor, and from r 6.54 to 7.60 below it, down to the landing.
-- The outer face at r 7.60 runs from z −6.00 to 0. It is cut by the port's arch.
-- The core is travertine. The faces seen from the stair are cream marble, honed.
-
-**The port.**
-- **At the port face (r 7.60).** 3.60 wide (jambs x = ±1.80), sill on the landing (−6.00), a semicircular head
-  springing −3.40, crown −1.60.
-- **The arched reveal** runs from r 7.60 in to the tympanum face at r 7.05.
-- **Inside r 7.05, the drum's pocket passes over.** There the opening is closed above z −3.68 by:
-  - a **lintel** (underside −3.68) from r 6.48 to 7.05;
-  - a **tympanum** on the cylinder r 7.05, filling the arch from −3.68 up to the arch head.
-- **So the portal onto the stair is 3.60 × 2.32**, flat-headed. The lunette is solid because the lowered drum's wall
-  passes behind it.
-
-**Ram housings.** New: they house the drive the design left open (§6).
-- Eight vertical bores of Ø 0.36, centred on r 6.77 (under the drum's foot ring).
-- At φ = 22.5° + 45°·k. These positions clear both the portal (±15.42° about 270°) and the drum's door (±10.86°
-  about 180°).
-- From the pocket floor (z −3.58) down to z −5.90, all inside the well.
-
-**Port dressings on the stair side** (polish; as built in statuary):
-- an archivolt of two orders: a plain arch ring 0.18 wide, 0.14 proud, and a moulded architrave out to 0.40 with
-  its crown 0.20 proud;
-- plinth blocks 0.40 high;
-- a keystone;
-- moulded transoms on the lintel on both faces.
-
-### 3.8 The stair
-
-After Momo and Bramante: one wide helical flight round an open well Ø 4.40. It descends anticlockwise in plan, with φ
-decreasing: from the drum's door (west), round by the south and east, to a landing whose port opens north.
-
-**Layout** (the plan numbers, `SunClockKit.cpp:82-121`):
+### 3.8 The stair (after Momo and Bramante: one wide helical flight round an open well Ø 4.40)
+Descends anticlockwise in plan (φ decreasing) from the drum's west door round by the south and east to the landing,
+whose portal opens north.
 
 | | |
 |---|---|
-| Risers | 40 × 0.150 = 6.00. Riser 1 is the step from the raised drum's sill (z 0) down to the top landing. |
-| Top landing | Tread 1, z −0.15. φ 194° → 164° (30°), spanning the drum's door. |
-| Treads 2–19 | z −0.30 … −2.85. Each turns α = (214° − 20°)/37 = 5.2432° (0.091512 rad). |
-| Mid landing | Tread 20, z −3.00. β = 20°, from φ 69.622° to 49.622°. |
+| Risers | 40 × 0.150 = 6.00. Riser 1: the raised drum's sill (z 0) to the top landing. |
+| Top landing | tread 1, z −0.15, φ 194° → 164° (spans the drum's door) |
+| Treads 2–19 | z −0.30 … −2.85, each turning α = (214° − 20°)/37 = 5.2432° (0.091512 rad) |
+| Mid landing | tread 20, z −3.00, β 20°, φ 69.622° → 49.622° |
 | Treads 21–39 | z −3.15 … −5.85, each α |
-| Last riser | At φ −50° (310°), so the foot faces the port across the landing. The landing floor is at −6.00. |
-| Nosing lines | Front(1) = 164°. Front(K) = Front(K−1) − α, except Front(20) = Front(19) − β. Tread K spans from Front(K) to Front(K−1). |
+| Last riser | at φ −50° (310°) onto the landing floor z −6.00: the foot faces the portal across the landing |
+| Nosing lines | Front(1) = 164°; Front(K) = Front(K−1) − α, except Front(20) = Front(19) − β; tread K spans Front(K) → Front(K−1) |
 
-**Span.** The treads run from the inner string (r 2.35) to the stair wall (r 6.48): 4.13 wide.
-
-**Goings:**
-
-| r | Going | Note |
-|---|---|---|
-| 2.35 | 0.215 | at the string |
-| 3.61 | 0.330 | Blondel 2R + G = 0.630 exactly |
-| 4.40 | 0.403 | mid-span, 2R + G = 0.703 |
-| 6.48 | 0.593 | at the wall |
-
-The walking line is declared at **r 3.61**, 1.26 from the string (Form.StepsFitTheBody).
-
-**Treads.** Flat, flush with the nosing line.
-- **Nosing.** A rounded nosing over each riser. Section (forward from the riser line, up from the tread top):
-
-  ```
-  (0, drop − 0.01) (0, −0.050) (0.022, −0.040)
-  arc c(0.022, −0.020) ρ0.020, −90°→90° (0.022, 0.000)
-  ```
-
-- **Nosing plan.** The top edge stands 22 mm forward of the riser line.
-
-**Inner string.** r 2.20–2.35. Its top is 0.12 above the pitch line, but never above z −0.14, so it stays under the
-lowered dial. It is flush with the top landing.
-
-**Pitch line.** Through the treads' mid-going, flat on the landings.
-
-**Soffit.** A smooth helicoid 0.40 under the pitch line, never below −6.02, running into the landing floor at the foot.
-It spans from the well (r 2.20) to the wall.
-
-**Collision.** From the treads and landings themselves. The body climbs 0.150 risers within the human measure's
-step height. *Delta:* the as-built hidden ramp is not ported.
+- Treads `rotunda.stair.tread` (one stone each, flat) span r 2.35 → 6.48 (4.13), running 10 mm into the string and
+  the wall. Goings: 0.215 at r 2.35; **0.330 at r 3.61** (2R + G = 0.630: the declared walking line); 0.403 at 4.40;
+  0.593 at 6.48. Nosing over each riser, top edge 22 mm forward of the riser line; section (forward, up from the
+  tread top): (0, drop − 0.01) (0, −0.050) (0.022, −0.040) arc(c 0.022, −0.020; r 0.020; −90→90°) (0.022, 0.000).
+- **Inner string** `rotunda.stair.string` r 2.20–2.35: top 0.12 above the pitch line (through the treads' mid-going,
+  flat on the landings), never above z −0.14 (under the lowered dial); flush with the top landing; runs 0.5° past the
+  last riser.
+- **Soffit** `rotunda.stair.soffit`: a smooth helicoid 0.40 under the pitch line, never below −6.02, into the landing
+  at the foot; r 2.20 to the wall.
+- Collision from the treads and landings themselves (the as-built hidden ramp is not ported).
 
 ### 3.9 Fittings: balustrades, housings, handrails
+No benches, labels, signs or floor map ("There is no floor map"). Blind doors: §2.
+- **Well balustrade** `rotunda.stair.balustrade`, plane r 2.15, side-fixed by brackets to the string; heights above
+  the string top: bars at 0.0575, 0.5325, 0.8675 (25 × 20 mm); standards 30 × 30 at ≤ 1.6 and every kink, down to
+  −0.25 onto brackets; balusters 14 mm square ≈ 0.110 apart between the bottom and mid bars; between the mid and top
+  bars, rings touching both (radius ≈ 0.155·cos rake; 12 mm band, 12 thick, boss r 0.022, four 7 mm spokes at 45°);
+  handrail `rotunda.stair.handrail` at 0.90, a soft bar 60 × 45 (superellipse, exponent 0.7). Newel at the foot:
+  post 56 mm square to handrail + 0.03, cap 72 × 20, ball finial r 0.045. The run ends 1° past the last riser.
+- **The split** at tread 8's nosing. Below it the balustrade is **fixed** (its handrail top at −0.23 there, under the
+  lowered dial's ribs −0.13). Above it, and across the top landing's back edge (φ 194°, plane 0.07 behind it), it
+  **retracts** (body `rotunda.stair.balustrade.panels`): each run a free panel (standards, balusters, rings, handrail,
+  a carrier bar at the foot −0.22 … −0.18) in a hollow housing: a U channel 1.20 deep, 30 mm floor, 40 mm end blocks,
+  slot 76 mm; along the string r 2.07–2.20 (top flush with the string), behind the landing 0–0.14 behind its back edge
+  (top flush with it). Sides `rotunda.stair.housing.side` (sunk fields −0.10 … −1.09 where seen); cap round the slot
+  0.06, shoe 0.05 and end plates `rotunda.stair.housing.cap`. At home a panel sits 0.94 lower, wholly inside, its
+  handrail just under the slot's lips; 5 mm clear to its end blocks.
+- **Wall handrail** `rotunda.stair.handrail`: round Ø 0.050 at r 6.40, 0.92 above the pitch line, brackets every 1.25
+  (from 0.30); from tread 7's nosing (returned to the wall on a rose, top at −0.18, under the lowered dial) to 4° past
+  the last riser. The top flight's wall side has no rail (the well side guards it).
 
-The Rotunda has **no benches, labels, signs or floor map**: the board says "There is no floor map". The only fittings
-are the stair's.
-
-**Well balustrade.** In the plane r 2.15, side-fixed by brackets to the inner string. Heights are above the string
-top:
-- **Bars.** A bottom bar at 0.0575, a mid bar at 0.5325 and a top bar at 0.8675. Each is 25 mm high × 20 mm.
-- **Handrail.** At 0.90: a soft rounded bar 60 × 45 mm (superellipse, exponent 0.7).
-- **Standards.** 30 × 30 mm, at most 1.6 m apart and at every kink, running down to 0.25 below the string top onto
-  brackets.
-- **Balusters.** 14 mm square, about 0.110 apart, between the bottom and mid bars.
-- **Rings.** Between the mid and top bars, true circles on the rake touching both bars (radius about 0.155·cos
-  rake). Each has a 12 mm band, 12 mm thick, a boss r 0.022, and four spokes 7 mm wide at 45°.
-- **Newel** at the foot: a post 56 mm square to handrail height + 0.03, a cap 72 × 20 mm, and a ball finial r 0.045.
-
-**The split** is at tread 8's nosing.
-- **Below it, the balustrade is fixed.** Its handrail tops out at −0.23 there, under the lowered dial's ribs (−0.13).
-- **Above it, the balustrade retracts.** This covers the upper flight's well side, and a straight run across the
-  top landing's back edge (φ 194°, in the plane 0.07 behind it). Each run is a free panel (standards, balusters,
-  rings, handrail, and a carrier bar at the foot at −0.22 … −0.18) standing in a hollow housing.
-
-**The housings.**
-- **Section.** A U channel 1.20 deep with a 30 mm floor and 40 mm end blocks. The slot is 76 mm (the 60 mm handrail
-  passes with 4 mm to spare).
-- **Along the string:** r 2.07–2.20, top flush with the string.
-- **Behind the landing:** 0–0.14 behind its back edge, top flush with the landing.
-- **Sides:** statuary marble, with sunk fields from −0.10 to −1.09 where seen.
-- **Bronze parts:** a cap round the slot 0.06, a shoe 0.05, and end plates.
-
-While the dial is down, a panel sits 0.94 lower, wholly inside its housing, with its handrail just under the slot's
-lips. It moves by the cam in §6.
-
-**Wall handrail.**
-- A round bar Ø 0.050 at r 6.40, 0.92 above the pitch line, on brackets every 1.25 m.
-- It runs from tread 7's nosing to 4° past the last riser. At the top it returns to the wall on a rose, with its top
-  at −0.18, under the lowered dial.
-- The top flight's wall side has no rail; the well side guards it.
-
-### 3.10 The exterior dress (polish, recorded so nothing is lost)
-
-The as-built dress was the façade actor's. Each room owns both faces of its shell, so it is now the Rotunda's (the
-Grounds sheet §3.11 hands it over). Plan numbers are from `MuseePlan.h:518-561` and `MuseeFacadeStructure.cpp:600-744`.
-
-**Podium.** `podium.rusticated`, 2.00 high, 0.54 proud, then a gravel strip and stone edge to r 12.76 on the free
-arcs.
-
-**Skin.** 0.20 of travertine ashlar over r 11.20, framing the door arches down to the ground.
-
-**Order.** `order.ionic-vignola` with D 0.827:
-- entablature z 9.44–11.30, with dentils;
-- an attic to 12.15 under a small cornice;
-- a wash in to the dome.
-
-**Pilaster pairs** at φ 33.75°, 56.25°, 123.75°, 146.25°, 213.75°, 236.25°, 303.75° and 326.25°.
-
-**Blind windows**, on the four diagonals:
-- arched, 1.50 wide, sill 3.2, springing 6.2;
-- frame 0.20, transom 0.75;
-- a round tablet r 0.38 at z 8.2.
-
-**Stone cover over the dome.** R 11.10 about z 10.00.
-- Two step rings of 0.40 on the attic (outer r 11.25 and 10.98).
-- A smooth dome up to r 3.0.
-- A rolled ring round the eye, r 2.92–3.28, on the curb at 20.45.
-
-The dome is seen as "the southern mountain" from Chenghuai's 見山 pavilion.
-
-**Night floodlights.** Eight, grazing the drum pilasters from the podium cap (control class `facade`).
-
-### 3.11 What the Rotunda does not build
-
-- The doorcases, thresholds, bronze strips, linings, surrounds and passage masonry, including the west passage's
-  2.20 m shell: these are Site's joints.
-- The neighbours' floors in the doorways.
-- The Classical Hall's side of the well.
-
-### 3.12 Finish schedule (seeds `Data/Stages/Rotunda/Finishes.json`)
-
-The as-built material each key replaces seeds its Matter record (D-017).
-
-| Surface or part | Key | As built |
-|---|---|---|
-| Drum inner face, shadow gap, niche recesses and half-domes, sliver reveals | `cream-marble.honed.aged` | M_Marble_Wall |
-| Pilasters (base, shaft, capital) | `cream-marble.honed.aged` | M_Marble_Wall |
-| Entablature, archivolts, niche surrounds, niche sill ledges | `lime-plaster.run.aged` | M_Plaster_Moulding |
-| Dome inner surface: bands, coffers, eye curb | `lime-plaster.trowelled.aged` | M_Plaster_Coffer |
-| Drum core, dome shell core, floor bed, shaft core, drum-body core | `travertine.sawn.as-laid` | (solid) |
-| Drum outer face, drum top, dome outer shell | `travertine.honed.weathered` | wall material; *delta:* the exterior stone is travertine, and the cream marble stays inside |
-| Eye lattice (ring and bars) | `steel.painted.aged`, paint #1E1C19 | M_RibSteel |
-| Eye glass | `low-iron-glass.laminated.aged` | M_Glass |
-| Node | `bronze.gilt.aged` | M_Gilt |
-| Fixed ring, tones A and B | `statuary-marble.polished.worn`; A vein-cut, B cross-cut | M_SunClock_Marble, M_SunClock_MarbleAlt |
-| Dial bands A and B | `statuary-marble.polished.worn` | as above |
-| Dial band r 1.40–1.52; rosette's rosso | `rosso-antico.polished.worn` | M_Marble_Rosso |
-| Dial band r 6.30–6.38; rosette's nero | `nero-marquina.polished.worn` | M_Marble_Nero |
-| Hour ring, fillets, hour lines, minute ticks, numerals, rays, motto letters | `bronze.cast.worn` | MI_bronze_gold_r40 |
-| Meridian, gilt boss and its beads, motto stops | `bronze.gilt.worn` | M_Gilt_Aged; the meridian is new |
-| Sun-clock drum: faces, base, entablature, pilasters, door, dressing | `cream-marble.honed.aged` | M_SunClock_Drum |
-| Drum soffit coffers | `fibrous-plaster.cast.aged` | M_Plaster_Coffer |
-| Drum rim | `bronze.cast.aged` | MI_bronze_gold_r40 |
-| Pendant boss | `bronze.gilt.aged` | M_Gilt_Aged |
-| Stair wall, portal jambs, lintel, tympanum, stair soffit | `cream-marble.honed.aged` | M_Marble_Wall |
-| Treads, nosings, landings, landing floor, port dressings | `statuary-marble.polished.worn` | M_SunClock_Marble |
-| Inner string, housing sides | `statuary-marble.polished.aged` | M_SunClock_Marble |
-| Balustrade: standards, bars, balusters, rings, brackets, newel, housing caps, shoes and plates | `bronze.cast.aged` | MI_bronze_gold_r40 |
-| Handrails (well and wall) | `bronze.brushed.handled` | MI_bronze_gold_r40; *delta:* the board's "brushed bronze: handrails" |
-| Rams (hidden) | `steel.painted.as-laid` | none |
-
----
+### 3.10 The exterior dress (polish; recorded so nothing is lost)
+The Rotunda owns both faces of its shell (the Grounds hand the dress over). From `MuseePlan.h:518-561` and
+`MuseeFacadeStructure.cpp:600-744`: a rusticated podium 2.00 high, 0.54 proud, then gravel and a stone edge to r 12.76
+on the free arcs; 0.20 travertine ashlar skin over r 11.20 framing the door arches; `order.ionic-vignola` D 0.827,
+entablature z 9.44–11.30 with dentils, attic to 12.15 under a small cornice, a wash in to the dome; pilaster pairs at φ
+33.75, 56.25, 123.75, 146.25, 213.75, 236.25, 303.75, 326.25; blind arched windows on the diagonals (1.50 wide, sill
+3.2, springing 6.2, frame 0.20, transom 0.75, round tablet r 0.38 at z 8.2); dome cover R 11.10 about z 10.00 with two
+0.40 step rings (outer r 11.25, 10.98), smooth to r 3.0, a rolled ring r 2.92–3.28 on the curb at 20.45; eight night
+floodlights grazing the pilasters (a `gap.exterior-uplight` when built). Seen from Chenghuai's 見山 pavilion as "the
+southern mountain".
 
 ## 4. Light
 
-**Daylight.**
-- `rotunda.eye` is the one opening to the sky: Glazed, clear Ø 5.00 (19.6 m²), with the lattice's triangulated
-  shadow. The glass transmission, lattice included, comes from Matter and Form.
-- A first-order daylight factor on the floor is about 1.3 %: roughly 130 lx under a 10 klx overcast sky.
-- The sun patch is the eye's 5 m disc projected along the idealised sun onto the floor, centred on the node's shadow
-  point. It reaches no further than r 9.28, so it never touches the wall or the niches.
-- Borrowed light enters through the four open portals: the Hall of Light's glass, Albion's glass court, Chenghuai's
-  open porch, and the Salon passage.
-- **No blinds.** The works here are unpainted plaster casts, and D-014 forbids automatic blinds anyway.
+**Daylight**
 
-**Luminaires** (seeds `Data/Stages/Rotunda/Lighting.json`). As built, the Rotunda proper had no luminaire: it lived by
-the eye. Two things now require light at dusk and at night:
-- D-006 (the museum is always open, with dusk switching and daylight-linked dimming);
-- the use targets below.
-
-Every fitting is concealed; none may be seen from the floor.
-
-| Mount key | Where (stage frame) | Catalogue type | Count | Aim |
+| Opening | Glazing | Weather | Control | Notes |
 |---|---|---|---|---|
-| `rotunda.cornice-ledge.cove` | The cornice's top ledge, a continuous ring r 9.22–9.99 at z 10.50, hidden behind the cavetto crown's lip at r 9.22 | `linear-cove`, 4000 K wanted; the catalogue has only `linear-cove.3000k` (gap) | ≈ 59 m, the full ring at r 9.40 | up, washing coffer rings 1–3 |
-| `rotunda.cornice-ledge.spots` | The same ledge, on a concealed track at r 9.60, z 10.50 | `track-spot.4000k.*`; beam and count by Light's Scheme | Scheme; about 2 per cast and a ring for the floor | the four casts (about 30° from the vertical where the geometry allows) and the floor |
-| `rotunda.sun-clock.soffit` | The drum's soffit: alternate coffers of its 4th ring, r 4.15, φ = 7.5° + 30°·k, face at z_d −0.108 | `downlight.4000k.31deg` | 12 | straight down onto the treads |
-| `rotunda.sun-clock.pendant` | Under the pendant boss, (0, 0, z_d −0.29) | `downlight.4000k.31deg`, or a narrower beam if the catalogue gains one | 1 | down the well onto the rosette, 9.21 m below when raised |
-| `rotunda.stair.handrail` (candidate) | In the well balustrade's handrail, uplighting the soffit | `linear-slot` or `linear-cove`; Scheme | 0 unless the stair's ceiling target fails | up |
+| `rotunda.eye` (clear Ø 5.00, 19.6 m², lattice ≈ 24 %) | `glass.low-iron`, laminated UV-filtering | **museum** | none | Sun patch = the eye's disc projected along the idealised sun, centred on the node's shadow; reaches no further than r 9.28 (never the wall or niches). First-order daylight factor on the floor ≈ 1.3 %. Borrowed light through the four portals. No blinds (D-014; the works are casts). |
 
-**Operation.**
-- **Cove and cornice spots.** Control class `circulation`, daylight-linked: they hold the floor target at every
-  reference moment. They switch at dusk.
-- **The 13 drum luminaires.** They follow the channel `rotunda.sun-clock.lift` and are on while the lift is above
-  0.30 m (as built, `SunClock.cpp:303-309`). They ride on the moving body.
-- **CCT.** 4000 K throughout. The as-built stair was 3800 K, and the catalogue's nearest is 4000 K.
-- **Removed.** The as-built fill light (a point source with no fitting, `SunClock.h:145-151`) is not ported: it is
-  forbidden by Light.LuminairesFromCatalogue.
+**Luminaires** (Lighting.json; drum lights with the drum lowered, add 3.500 raised; no output values are set here)
 
-**Targets by use.** These are the use classes in `UseTargets.json` and the care classes in `Care.json`.
+| Id | Type | Count / extent | Mount and aim | Operation |
+|---|---|---|---|---|
+| `dome.cove.01…28` | `linear-cove.3000k` strip | 28 lengths of 2.10 on the cornice's top ledge, one per coffer bay, midpoints at φ = 12.857°·(c + ½) | ledge (r 9.40, z 10.504), hidden from every standable point behind the corona (r 9.22); aim straight up onto coffer rings 1–3 (r 9.40, z 13.40) | dusk (daylight-linked) |
+| `cast.<niche>.a/b` | `track-spot.3000k.12deg` | 8: two per cast, across the room at φ_n + 160° and φ_n + 200° | head on a short stem on the ledge at r 9.30, z 10.60 (beam clears the corona's edge); aim the cast's centre (r 10.25 on its axis, z 2.00 + h/2), throw 19.25, ≈ 21° down, entering its niche within 0.05 of the axis | presence |
+| `floor.spot.01…16` | `track-spot.3000k.38deg` | 16 at φ = 11.25° + 22.5°·k | ledge r 9.30, z 10.60; aim the floor at r 4.00, φ + 180° | dusk (daylight-linked; holds the floor target) |
+| `stair.soffit.01…12` | `downlight.3000k.31deg`, recessed | 12, alternate coffers of the soffit's 4th ring | (r 4.15, φ = 7.5° + 30°·k, z_d −0.108); aim straight down onto the treads | always, follows `rotunda.sun-clock.lights`; body `rotunda.sun-clock.drum` |
+| `stair.well` | `downlight.3000k.31deg` | 1 | under the pendant (0, 0, z_d −0.29); aim straight down the well onto the rosette (9.21 below when raised) | always, follows `rotunda.sun-clock.lights`; body `rotunda.sun-clock.drum` |
 
-| Surface | Target |
-|---|---|
-| Floor: dial and ring, r 0–10 | `entrance-hall`, 100 lx maintained, Uo ≥ 0.4. At night, `circulation.night` (50 lx), never below `escape-route`. |
-| Stair treads, landings and landing floor | `stairs`, 100 lx, day and night whenever raised |
-| Stair wall | 75 lx |
-| Drum soffit (the stair's ceiling) | 50 lx |
-| The four casts | Care class for unpainted plaster: `stone-and-bronze` (low responsivity, no lux maximum). The modelling aim is 150–300 lx on each cast's front. |
+The cornice spots' heads may show a few centimetres over the corona from the far side of the floor, dark against the
+lit dome, as track on a cornice does. The as-built fill light (a point with no fitting, `SunClock.h:145-151`) is not
+ported. Aim points of the drum lights are given in the lowered frame at z_d −9.50 (the landing when raised).
 
-There are no paintings and no paper or silk here, so the 150–200 lx and 50 lx limits do not arise.
+**Targets**
 
-**Design targets**, luminance order between named surfaces, measured and never tuned:
+| Surface | Class | Lux | Source |
+|---|---|---|---|
+| `rotunda.floor.ring.a`, `rotunda.dial.field.a` (the floor r 0–10) | entrance-hall / circulation.night | 100 / 50 | UseTargets |
+| `rotunda.drum.wall.inner` | entrance-hall (wall min) | 75 | UseTargets |
+| `rotunda.dome.coffer` | entrance-hall (ceiling min) | 50 | UseTargets |
+| `rotunda.stair.tread`, `rotunda.stair.landing.floor` | stairs (whenever raised, day and night) | 100 | UseTargets |
+| `rotunda.stair.wall` / `rotunda.sun-clock.soffit` | stairs (wall min / ceiling min) | 75 / 50 | UseTargets |
+| `rotunda.niche.cast` | stone-and-bronze (plaster: no class; flagged §13) | 300 recommended, no maximum (JSON [300, null]) | Care |
 
-*By day* (clear sky, 12:00, and overcast):
-1. The eye's glass (the sky through it) is the brightest surface in view. The dial inside the sun patch is next.
-2. The dial outside the patch ≥ the drum's inner face ≥ coffer ring 1 ≥ coffer ring 5. The dome reads darker than
-   the drum and darkest round the eye (the Pantheon order).
-3. Each cast ≥ 1.3 × the back of its niche.
-
-*At night:*
-1. Coffer rings 1–3 (cove-washed) ≥ the drum's inner face. The dome glows over a quieter drum.
-2. Each cast ≥ 1.3 × its niche back.
-3. The eye is dark: the real night sky. No luminaire is visible from any standable point (Light.NoGlare).
-
-*On the stair:* treads ≥ stair wall ≥ drum soffit. The rosette is pooled by the pendant light.
-
----
+No walked route in any configuration falls below `escape-route`. **Design order** (Lighting.json `design`; measured,
+never tuned): by day the eye's glass is the brightest surface in view, then the sun patch; the dial outside the patch ≥
+the drum's inner face ≥ the coffers (darkest round the eye). At night the cove-washed coffers ≥ the drum; the eye is
+dark. Each cast ≥ 1.3 × its niche back, always. On the stair: treads ≥ stair wall ≥ drum soffit.
 
 ## 5. Time and weather
-
-**Weather over the glazing.** `rotunda.eye` takes the observer `museum` (D-005). Its rain wets the eye's outer face
-and the exterior stone through Matter's surface law. The sun and the hour are always the museum's.
-
-**The sun keeps the approved idealised path (D-003).** The model is declared `idealised` in `Data/Time/Museum.json`.
-- **Nodus.** The node's centre, (0, 0, 20.25).
-- **Dial plane.** z 0, the top of the lowered dial.
-- **Shadow circle.** r 6.78, the hour ring.
-- **Elevation.** Constant, atan(20.25 / 6.78) = **71.489°**. The old sky used the lattice height 20.3 (71.531°),
-  which puts the node's shadow 1.7 cm inside the ring, still on the bronze. This sheet uses the node's true centre.
-  D-003's "20.3 m" is the rounded figure.
-- **Direction.** At civil local hour h (06:00 ≤ h ≤ 18:00, the museum city's clock, including daylight saving):
-  - the shadow point is S(h) = 6.78·(cos φ_h, sin φ_h, 0), with φ_h = 180° + 15°·(h − 6);
-  - the sun's direction is from S(h) through the node;
-  - the sun's azimuth (bearing) is 90° + 15°·(h − 6): east at 06:00, south at 12:00, west at 18:00.
-- **Outside 06:00–18:00** there is no sun. The moon and stars through the eye are the real Meeus ephemeris for the
-  observer (D-003).
-- **Evidence.** As built: `MuseeSky.cpp:109-116` and `:133-138`.
-
-**Time::Dial.** `Musee::Time::Dial(model, nodus, dial plane)` returns the hour-line angles φ_h and the shadow radius.
-The Rotunda lays its hour lines, meridian, minute ticks and numerals from that output. Nothing is typed by hand.
-
-**Time.DialTrue** checks, for every hour 6 … 18 and every minute tick, that the nodus's shadow lands on the laid mark
-within the mark's half-width. Under the idealised model the dial does not depend on latitude, so the Beijing/New York
-switch stays free (D-002).
-
-**The raised dial.** It is 3.50 m above its plane. It still shows marks but is not a dial there. The check runs on
-the lowered configuration.
-
----
+- `rotunda.eye` takes the **museum** observer (D-005): its rain wets the eye's outer face, the lead and the outer drum
+  (Matter's surface law). The sun and the hour are always the museum's.
+- **Idealised sun** (D-003, `Data/Time/Museum.json` model `idealised`): nodus = the node's centre (0, 0, 20.25); dial
+  plane z 0 (the lowered dial); shadow circle r 6.78 (the hour ring); constant elevation atan(20.25/6.78) = **71.489°**
+  (the old sky used 20.30, 71.531°: the shadow fell 1.7 cm inside the ring). At civil local hour h, 06:00 ≤ h ≤ 18:00:
+  shadow point S(h) = 6.78·(cos φ_h, sin φ_h, 0), φ_h = 180° + 15°·(h − 6); the sun's direction is from S(h) through the
+  node; its bearing 90° + 15°·(h − 6) (east at 06:00, south at noon, west at 18:00). Outside 06:00–18:00 no sun; moon
+  and stars from the Meeus ephemeris.
+- **Time::Dial** lays the hour lines, meridian, ticks and numerals from its output (nothing typed by hand);
+  **Time.DialTrue** checks every hour and minute tick on the lowered configuration. The raised dial is 3.50 up and is
+  not a dial there.
 
 ## 6. Motion
 
-**Mechanism `rotunda.sun-clock.lift`.**
-- **Body.** `rotunda.sun-clock.drum`: the dial with its inlay, the drum wall and dressings, the soffit, the rim, the
-  pendant, and the 13 downlights.
-- **Joint.** Prismatic, vertical, travel **0 → 3.50 m**. Named states: `lowered` (0) and `raised` (3.50).
+**M-1 `rotunda.sun-clock.lift`** (Mechanisms.json)
+- **Body** `rotunda.sun-clock.drum`: the dial, inlay, meridian, gilt sun, drum wall and dressings, soffit, rim, pendant,
+  13 downlights. **Joint** prismatic +z, travel **0 → 3.500**; states `lowered` (0) and `raised` (3.50).
+- **Drive:** eight synchronised three-stage telescopic hydraulic rams in the bores (r 6.77, φ 22.5° + 45°·k), from
+  z −5.90 up to the pocket floor, heads bearing on the drum's foot ring (z_d −3.56); closed height ≤ 2.30; no
+  counterweight; each rated for ⅛ of the drum with margin. **Profile** ease-in-out, **8.0 s** each way, as built
+  (`SunClock.cpp:117-121`, D-017); peak speed ≈ 0.66 m/s.
+- **Use** (Use anchor `rotunda.sun-clock.control`; the prompt shows only with the feet on the ring, 7.35 < r < 10.00,
+  |z| < 0.40):
 
-**Drive.** An S-curve profile, travel time about 8.0 s (as built: 8 s with smoothstep easing, `SunClock.cpp:117-121`),
-within these limits:
+| State | Verb | Condition | Message |
+|---|---|---|---|
+| lowered | "Raise the sun clock" | on the ring; refused while the user is on the dial (r ≤ 7.35, −0.30 < z < 0.60) | "The sun clock rises…"; refused: "Step off the sun clock to raise it."; on arrival: "Under the sun clock, a stair winds down into the earth." (cleared once the user is 1 m below) |
+| raised | "Lower the sun clock" | on the ring, and nobody inside r 7.20 or below z −0.30 | none |
 
-| Limit | Value |
-|---|---|
-| v max | 0.60 m/s |
-| a max | 0.35 m/s² |
-| jerk max | 1.0 m/s³ |
+- **Guard (Motion, D-014)** `body-in-travel`: raising **holds** while any body is on the dial; lowering **reverses** to
+  raising if a body enters r < 7.20 or goes below z −0.30 (as built). The lift never lifts a visitor and never lowers
+  onto one; there is no control at the landing, and the lowered state is unreachable with anyone below.
+- **Travel volume:** the cylinder r ≤ 6.99 from z −3.56 (lowered foot) to +3.50 (raised dial), plus the pendant and
+  downlights under the soffit.
+- **Clearances** (≥ 5 mm at every sampled phase): drum inner face 6.545 ↔ sleeve back 6.54: **5 mm**; drum's outermost
+  6.99 ↔ pocket face and ring edge 7.00: 10 mm; lowered foot −3.56 ↔ pocket floor −3.58: 20 mm; soffit ribs −0.13 ↔
+  string top ≤ −0.14: 10 mm; rim underside −0.14 ↔ top landing −0.15: 10 mm; groove roof −0.06 ↔ sleeve top −0.07:
+  10 mm; ribs ↔ fixed balustrade handrail (≤ −0.23): ≥ 100 mm; ribs ↔ wall rail top (−0.18): 50 mm; the downlight at
+  φ 187.5° (−0.108 plus trim) ↔ top landing: ≥ 30 mm.
+- **Channels:** publishes `rotunda.sun-clock.height` (0…1). Sequence: open = [`rotunda.sun-clock.lights` → 1, move
+  open]; close = [move closed, `rotunda.sun-clock.lights` → 0]. The 13 drum lights follow `rotunda.sun-clock.lights`
+  (as built on above 0.30 m of lift; they sit in the closed pocket below that).
+- **Sampled configurations:** lowered, raised, and 0.30, 1.20, 1.67, 2.14, 3.00 m (the cam's knees, the lights'
+  switch): Form.Sealed, Motion.Clears and Site.Reachable run on each.
 
-That gives about 7.9 s end to end.
-
-**The machine.** Proposed, since the design names none.
-- Eight synchronised three-stage telescopic hydraulic rams, closed height ≤ 2.30.
-- They stand in the ram housings at r 6.77, φ = 22.5° + 45°·k, from z −5.90 up to the pocket floor (−3.58).
-- Their heads bear on the drum's foot ring (z_d −3.56).
-- The mass is computed by Motion from Form's volumes × Matter's densities: about 200 t with a solid stone core, and
-  much less with the polish carcass. Each ram is rated for 1/8 of it with margin (Motion.Balanced).
-- Hydraulics need no counterweight.
-
-**Travel volume.** The cylinder r ≤ 6.99 from z −3.56 (the lowered foot) to +3.50 (the raised dial), plus the pendant
-and downlights below the soffit.
-
-**Clearances** (Motion.Clears ≥ 5 mm at every sampled phase; as built, `SunClock.h:35-51`, `SunClockBuild.h:40-54`):
-
-| Pair | Clearance |
-|---|---|
-| Drum wall inner face (r 6.545) ↔ stair wall back (6.54) | 5 mm |
-| Drum's outermost (6.99) ↔ pocket face and ring edge (7.00) | 10 mm |
-| Lowered foot (−3.56) ↔ pocket floor (−3.58) | 20 mm |
-| Soffit ribs (−0.13) ↔ string top (≤ −0.14) | 10 mm |
-| Rim underside (−0.14) ↔ top landing (−0.15) | 10 mm |
-| Rim groove roof (−0.06) ↔ sleeve top (−0.07) | 10 mm |
-| Ribs ↔ fixed balustrade's handrail (≤ −0.23) | ≥ 100 mm |
-| Ribs ↔ wall rail top (−0.18) | 50 mm |
-| Downlight at φ 187.5° (−0.108, plus its trim) ↔ top landing | ≥ 30 mm |
-
-**Mechanism `rotunda.stair.balustrade`.** A follower in the same coupling group.
-- **Bodies.** The two retracting panels.
-- **Joint.** Prismatic, vertical, travel 0.94.
-- **Coupled to the lift** by a cam with a dwell at each end: panel offset = clamp(h − 1.20, 0, 0.94) − 0.94, where h
-  is the lift (as built, `SunClockBuild.h:140-143`).
-- **So** the panels stay home until the dial is 1.20 up, rise with it over the next 0.94, then stand.
-- **Lowering**, they are home before the drum comes within 1.07 of them. Nothing rides under the moving ceiling.
-
-**Control.** IMuseeUsable on the lift. Verbs and captions are FText in the spec (as built, `SunClock.cpp:339-404`):
-
-| Verb | Available | Caption |
-|---|---|---|
-| **Raise the sun clock** | State `lowered`, the body on the ring (7.35 < r < 10.00, \|z\| < 0.40) | "The sun clock rises…"; on arrival, "Under the sun clock, a stair winds down into the earth." |
-| **Raise** (refused) | Body on the dial (r ≤ 7.35, −0.30 < z < 0.60) | "Step off the sun clock to raise it." |
-| **Lower the sun clock** | State `raised`, the body on the ring, and nobody inside r 7.20 or below z −0.30 | none |
-
-**Interlocks and the occupancy guard** (D-014: Motion owns the guard):
-- raising holds while any body is on the dial;
-- lowering reverses to raising if a body enters r < 7.20 or goes below z −0.30.
-
-The lift never lifts a visitor and never lowers onto one.
-
-**Channel.** The stage declares both ends of `rotunda.sun-clock.lift` (value: the lift in metres). Motion publishes
-it, and the drum's luminaires follow it.
-
-**Configurations.** `lowered`, `raised`, and sampled phases at 0.30, 1.20, 1.67, 2.14 and 3.00 m. These are the cam's
-knees and the lights' switch point. Form.Sealed, Motion.Clears and Site.Reachable run on each.
-
----
+**M-2 `rotunda.stair.balustrade`** (coupled): body `rotunda.stair.balustrade.panels`, prismatic +z, travel 0 → 0.940,
+**follows** `rotunda.sun-clock.height`, in [0.342857, 0.611429] (1.20 → 2.14 m of 3.50) → out [0, 0.94], clamped
+(the as-built cam: offset = clamp(h − 1.20, 0, 0.94) − 0.94). Home until the dial is 1.20 up; standing from 2.14 up;
+lowering, home before the drum comes within 1.07. Nothing rides under the moving ceiling.
 
 ## 7. Nature
+None: no plants, no water, no ground. The Rotunda is Enclosed; precipitation stops at the eye's glass and the lead
+(ponding on the flat eye inside its 60 mm upstand is Matter's surface law over Form's ponding field).
 
-None. No plants, no water, no ground.
-- Precipitation stops at the shell: the eye is glazed, and the Rotunda is Enclosed.
-- Wetness and ponding on the eye's glass, and on the exterior drum top and dome, are Matter's surface law over
-  Form's ponding field.
-- The flat glass inside its 60 mm curb upstand will pond. That is expected, and noted in §12.
+## 8. Art
+Four plaster casts, one on each diagonal niche's sill, from SMK's Royal Cast Collection (public-domain 3D scans).
+Catalogue: `data/classical.json` (ids verbatim, captions: title, artist, year, original, notes); scans and true heights
+from `assets/classical/SOURCES.json` (kind `rotunda`); widths × depths are the converted glTFs' bounds
+(`assets/classical/<id>.glb`, measured). The casts are not in `assets/collection.json`.
 
----
+**Hang rule** (as built, `classical_art.py:262-279`): each cast's vertical axis at **r 10.25 on its niche axis**, 0.25
+behind the drum's inner face, feet on the sill at **z 2.00**, front turned to the gilt sun (facing φ + 180°), scaled to
+its recorded height (Art.TrueSize). No frames, cases or plinths: the sill is the plinth. Care: unpainted plaster,
+class `stone-and-bronze` (flagged). Hang.json: anchor = the niche's Mount anchor; a Wall frame doesn't fit a cast in
+the round, so each entry carries `wall` `rotunda.niche.sill`, `centre` (the foot of the axis), `height` 2.00,
+`facing_deg`, and its `scan`.
 
-## 8. Art (seeds `Data/Stages/Rotunda/Hang.json`)
-
-**Four plaster casts**, one in each diagonal niche, from SMK's Royal Cast Collection (public domain 3D scans).
-
-| Anchor (kind Plinth) | φ | Work key | Title, artist, date | Height | Scan box w × d | Cast | Scan |
+| Anchor | φ | Work (id) | Title · artist · date (original) | Cast | w × d × h (m) | Centre (x, y, z) | Scan |
 |---|---|---|---|---|---|---|---|
-| `rotunda.niche.ne` | 315° | `classical-dying-slave` | *Dying Slave*, Michelangelo, 1513–1516 (original: Louvre) | 2.28 | 0.804 × 0.739 | SMK KAS87 | `assets/classical/dying-slave.stl` / `.glb` |
-| `rotunda.niche.se` | 45° | `classical-rebellious-slave` | *Rebellious Slave*, Michelangelo, 1513–1516 (Louvre) | 2.13 | 0.787 × 0.538 | SMK KAS86 | `rebellious-slave.*`, turn [[0,0,1],[0,1,0],[−1,0,0]] |
-| `rotunda.niche.sw` | 135° | `classical-venere-italica` | *Venere Italica*, Antonio Canova, 1804–1812 (Palazzo Pitti) | 1.73 | 0.464 × 0.528 | SMK KAS793 | `venere-italica.*` |
-| `rotunda.niche.nw` | 225° | `classical-bacchus` | *Bacchus*, Michelangelo, 1496–1497 (Bargello) | 2.08 | 0.866 × 0.541 | SMK KAS83 | `bacchus.*`, turn [[−1,0,0],[0,1,0],[0,0,−1]] |
+| `rotunda.niche.ne.cast` | 315° | classical-dying-slave | *Dying Slave* · Michelangelo · 1513–1516 (Louvre) | SMK KAS87 | 0.804 × 0.739 × 2.28 | (7.248, −7.248, 2.00) | `dying-slave` |
+| `rotunda.niche.se.cast` | 45° | classical-rebellious-slave | *Rebellious Slave* · Michelangelo · 1513–1516 (Louvre) | SMK KAS86 | 0.787 × 0.538 × 2.13 | (7.248, 7.248, 2.00) | `rebellious-slave`, turn [[0,0,1],[0,1,0],[−1,0,0]] |
+| `rotunda.niche.sw.cast` | 135° | classical-venere-italica | *Venere Italica* · Antonio Canova · 1804–1812 (Palazzo Pitti) | SMK KAS793 | 0.464 × 0.528 × 1.73 | (−7.248, 7.248, 2.00) | `venere-italica` |
+| `rotunda.niche.nw.cast` | 225° | classical-bacchus | *Bacchus* · Michelangelo · 1496–1497 (Bargello) | SMK KAS83 | 0.866 × 0.541 × 2.08 | (−7.248, −7.248, 2.00) | `bacchus`, turn [[−1,0,0],[0,1,0],[0,0,−1]] |
 
-**Sources.** Heights, casts and scan URLs are from `assets/classical/SOURCES.json` (kind `rotunda`). Captions are from
-`data/classical.json`: title, artist, year, original's collection and city, and notes. The scan boxes are the
-converted glTFs' bounds. The casts are not in `assets/collection.json`; Art's catalogue takes them from these two
-files.
-
-**The hang rule** (as built, `classical_art.py:262-279`):
-- Each cast stands on its niche's sill ledge at z 2.00.
-- Its vertical axis is at r 10.25 on the niche axis, 0.25 behind the drum's inner face.
-- Its front is turned to the gilt sun: yaw = φ + 180°.
-- The scan is scaled to its recorded height (Art.TrueSize), with its feet on the sill.
-
-**Fit.** Every cast clears its niche:
-- the deepest (the Dying Slave, 0.739) spans r 9.88–10.62, on the ledge (from r 9.84) and inside the half-round
-  (r 10.92 at its lateral ±0.40);
-- the tallest top (4.28) stays under the springing (4.67).
-
-Form.NoOverlap checks each scan against its niche.
-
-**No frames, cases or plinths.** The niche sill is the plinth.
-
-**Care.** Unpainted plaster, class `stone-and-bronze`; lighting as in §4.
-
-**Credit** (Art.Credited): "Cast: SMK – National Gallery of Denmark, The Royal Cast Collection, KAS87" (and so on).
-The scan is in the public domain (SMK Open, Public Domain Mark). Provenance is the SMK download URL in `SOURCES.json`.
-
-**Labels.** None physical. The caption appears by gaze (IMuseeCaptioned through Art; Visitor shows it).
-
-**Also Art's:** the sun clock's text is not a work. It is architecture (Form, from Time::Dial).
-
----
+**Fit:** the deepest (Dying Slave, 0.739) spans r 9.88–10.62: on the ledge (from r 9.84) and inside the half-round
+(r 10.92 at its lateral ±0.40); the tallest top (4.28) stays under the springing (4.67). Form.NoOverlap checks each
+scan against its niche. Surface `rotunda.niche.cast` (plaster of Paris) is the casts' finish. **Credit** (Art): "Cast:
+SMK – National Gallery of Denmark, The Royal Cast Collection, KAS87" (and so on); scans public domain (SMK Open). No
+physical labels; captions by gaze. The sun clock's letters are architecture, not a work.
 
 ## 9. Sound
-
-**Acoustic character.** A very live stone rotunda.
-- RT60 per octave is computed by Sound from `rotunda.hall` (about 5,240 m³, plus niches and coffers) and Matter's
-  absorption. The surfaces are polished statuary, honed cream marble, lime plaster, the glass eye, and the four open
-  portals (about 83 m² opening to the neighbours).
-- A Sabine estimate gives several seconds at 500 Hz. It is computed, never tuned.
-- `rotunda.stair` is its own enclosure: a 13 m stone cylinder, 6 m deep.
-- Occlusion and passage run through the four portals, and through the drum's door while raised.
-
-**Emitters tonight.**
-- Footfalls by substance, from FMuseeContact: statuary marble (polished) on the dial, ring, treads and landing;
-  bronze on the inlays and the gilt boss.
-
-**Emitters for polish.**
-- **The lift's voice.** A hydraulic pump and the drum's stone sliding in its pocket, from FMuseeActuation, attached by
-  key to `rotunda.sun-clock.drum`.
-- **Rain on the eye's glass.** Weather ambience on Form's exposed glass surface (19.6 m²), from the `museum`
-  observer.
-
-There was no sound as built.
-
----
+- **Acoustics** (computed from Matter, never tuned): `rotunda.hall` ≈ 5,240 m³ of honed marble, lime plaster, glass
+  and the four open portals (≈ 83 m² to the neighbours): very live, several seconds at 500 Hz. `rotunda.stair` its own
+  enclosure, a 13 m stone cylinder 6 m deep; coupled through the drum's door while raised. Occlusion through the four
+  portals.
+- **Emitters:** footfalls by substance (honed Crema Marfil on ring, dial, treads, landing; bronze on inlay and the gilt
+  sun); the lift's voice (hydraulic pump, the drum's stone sliding in its pocket) on `rotunda.sun-clock.drum`, driven by
+  FMuseeActuation; rain on the eye's glass (19.6 m²) from the **museum** observer. (No sound as built.)
 
 ## 10. Visitor
+- **Arrive** on the gilt sun facing west: four doors, four chapters: the Salon (west), Chenghuai (north), Albion
+  (south), the Hall of Light (east, "the way on").
+- **Look:** up at the coffered dome and the pearl lattice eye; at the point of shadow walking the numerals VI → XII →
+  VI. The hour key T moves the hour and the shadow with it; the city key changes nothing on the dial (D-002, D-003).
+  Gaze at a cast: its caption (title, artist, date, original, SMK cast number).
+- **Use** (§6): from the ring, "Raise the sun clock"; through the tempietto's west door and down 40 risers to the
+  Classical Hall; "Lower the sun clock", from the ring, once everyone is out.
+- **Walk:** ring, dial, treads, landings; the body climbs the real treads (0.150 risers). The raised drum's sill (z 0),
+  the sleeve's 60 mm top (−0.07) and the top landing (−0.15) make a 0.07 + 0.08 step at the door.
+- **Step-to (VR):** ring, dial, treads, landings; never the raised dial's top, the niche sills or the cornice.
+- **Sit:** nowhere (the design has no seat here).
 
-**Arrive.** On the gilt sun, facing west down the Salon's line.
-- The four doors show four chapters: the Salon (west), Chenghuai (north), Albion (south, 53 m down its nave) and the
-  Hall of Light (east, "the way on").
+## 11. The old-code map
+Paths relative to `windows\`. Re-express, never copy.
 
-**Look.**
-- Up at the coffered dome and the lattice eye.
-- At the point of shadow walking the numerals, VI in the west to VI in the east.
-- The hour key T (`musee.time.advance-hour`) moves the hour, and the shadow with it.
-- The city key changes nothing on the dial (D-002, D-003).
-
-**Captions.** Gaze at a cast shows its caption: title, artist, date, original, and the SMK cast number.
-
-**Use.** From the ring: **Raise the sun clock**, then walk through the tempietto's west door and down 40 risers to
-the Classical Hall. **Lower the sun clock**, also from the ring, once everyone is out (§6).
-
-**Sit.** Nowhere. The design has no seat in the Rotunda.
-
-**Walk.** On the ring, the dial, the treads and the landings. The body climbs the helical stair on its real treads.
-The top landing is 0.15 below the raised drum's sill, and the 6 cm stair-wall top between them is a 0.07 step.
-
-**Step-to (VR).** It may land on the ring, the dial, the treads and the landings. It never lands on the raised dial's
-top (3.50 m up), the niche sills, or the cornice.
-
----
-
-## 11. The old code map
-
-Re-express, don't copy: the builder reads these for numbers and intent, and rebuilds through Form, Matter, Light,
-Motion and Site. Paths are relative to `C:\Users\anan9\Desktop\Projects\Musee Vision`, and the tree is read-only.
-
-**Plan numbers**
-- `windows/Source/MuseeVision/Plan/MuseePlan.h:26-28`: arrival on the gilt sun, yaw 180°.
-- `MuseePlan.h:30-64`: the Rotunda: drum, doors, niches, coffers, eye, node, shadow radius, passages.
-- `MuseePlan.h:119-158`: the sun clock: drum radii, lift 3.5 m in 8 s, door, shaft, pocket, landing, port.
-- Mating evidence, the neighbours' numbers:
-  - `MuseePlan.h:258-299` (the Hall of Light meets the drum);
-  - `MuseePlan.h:461-509` (the Classical Hall meets the shaft at r 7.6);
-  - `MuseePlan.h:518-561` (the façade dress numbers: DrumD, the dome cover).
-
-**The drum, order and dome:** `windows/Source/MuseeVision/Rotunda/RotundaStructure.cpp`
-
-| Lines | What |
+| Part | Where |
 |---|---|
-| 24-60 | segment counts, shadow gap, pilaster and flute heights, cornice top, shell radius, eye curb, lattice ring |
-| 84-136 | the profile builder |
-| 281-313 | the eight openings round the drum and the north-door switch |
-| 315-455 | the drum's stations and wall faces with the shadow gap |
-| 457-533 | door reveals, niche recesses, half-domes |
-| 535-618 | archivolt, imposts, niche surround |
-| 620-653 | niche sill ledge |
-| 655-670 | passage shell (now Site's) |
-| 672-791 | flutes, base, capital, pilaster |
-| 793-815 | the door-flank rule for pilasters |
-| 817-894 | dome points, coffer elevations, entablature profile, plain bands and eye curb |
-| 896-961 | coffers |
-| 963-1015 | drum top and outer shell |
-| 1036-1081 | lattice, glass, node |
-| 1089-1135 | assembly |
-| 1166-1173 | as-built materials |
+| Arrival (gilt sun, yaw 180) | Source/MuseeVision/Plan/MuseePlan.h:24-28 |
+| Rotunda numbers (drum, doors, niches, coffers, eye, node, shadow r, passages) | …/Plan/MuseePlan.h:30-64 |
+| Sun clock numbers (radii, lift 3.5 in 8 s, door, shaft, pocket, landing, port) | …/Plan/MuseePlan.h:119-158 |
+| Neighbours: Hall of Light meets the drum; Classical Hall meets the shaft at r 7.6; façade dress | …/Plan/MuseePlan.h:258-299, 461-509, 518-561 |
+| Constants (segments, shadow gap, pilaster/flute heights, cornice top, shell R, curb, lattice ring) | Source/MuseeVision/Rotunda/RotundaStructure.cpp:24-60 |
+| Openings round the drum; north door switch | …/RotundaStructure.cpp:281-313; Chenghuai/ChenghuaiPlan.h:25, 38 |
+| Drum stations, wall faces, shadow gap | …/RotundaStructure.cpp:315-455 |
+| Reveals, niche recesses, half-domes | …/RotundaStructure.cpp:457-533 |
+| Archivolt, imposts, niche surround, niche ledge | …/RotundaStructure.cpp:535-653 |
+| Passage shell (now Site's) | …/RotundaStructure.cpp:655-670 |
+| Flutes, base, capital, pilaster; door-flank rule | …/RotundaStructure.cpp:672-791, 793-815 |
+| Dome, coffer elevations, entablature, plain bands, eye curb; coffers | …/RotundaStructure.cpp:817-894, 896-961 |
+| Drum top, outer shell | …/RotundaStructure.cpp:963-1015 |
+| Lattice, glass, node; assembly; as-built materials | …/RotundaStructure.cpp:1036-1081, 1089-1135, 1166-1173 |
+| Sun clock: description, clearances, retracting balustrade, as-built light | Source/MuseeVision/SunClock/SunClock.h:14-62, 137-206 |
+| Ring and inside zones; lift easing; lights and switching; prompts, interlocks, reversal | …/SunClock/SunClock.cpp:17-25, 117-121, 256-310, 312-404 |
+| Drum datums; stair radii and balustrade cam; luminaire positions | …/SunClock/SunClockBuild.h:40-54, 118-151, 153-160 |
+| Drum door; north port; stair layout, pitch, string, soffit lines | …/SunClock/SunClockKit.cpp:7-20, 58-79, 82-160 |
+| Dial bands; ring, fillets, hour lines, ticks; numerals; sunburst and boss; ring courses and motto | …/SunClock/SunClockDial.cpp:19-53, 55-84, 86-107, 109-165, 175-233 |
+| Drum profiles; walls and door; door dressing; pilasters; soffit coffers; rim and pendant | …/SunClock/SunClockDrum.cpp:25-45, 47-128, 160-201, 203-255, 257-346, 348-373 |
+| Shaft walls, pocket, port, tympanum, lintel; port dressings; landing and rosette | …/SunClock/SunClockShaft.cpp:44-93, 217-291, 293-337 |
+| Treads and nosings; string, soffit (ramp: **do not port**) | …/SunClock/SunClockStair.cpp:59-93, 95-145 |
+| Balustrade registers; uprights, rings, handrail; housings and panels; split, newel, wall rail | …/SunClock/SunClockRails.cpp:33-36, 105-222, 224-370, 430-517 |
+| As-built clearance, step and overlap checks at several lifts (evidence, D-017) | …/SunClock/SunClockChecks.cpp:101-526 |
+| Letter outlines and their font | …/SunClock/SunClockGlyphs.h; bake_glyphs.py:1-40 |
+| Idealised sun direction; 06:00–18:00 window | Source/MuseeVision/Sky/MuseeSky.cpp:109-116, 133-138 |
+| Thresholds (now Site's) | Source/MuseeVision/Furniture/MuseeFurniture.h:29-32; MuseeFurniture.cpp:301-311 |
+| Exterior dress (polish) | Source/MuseeVision/Facade/MuseeFacadeStructure.cpp:600-673, 702-744, 781-786 |
+| Neighbours at the ports | Salon/SalonStructure.cpp:28, 41; Chenghuai/ChenghuaiPlan.h:20-38; Albion/AlbionPlan.h:95-101; HallOfLight/HallOfLightStructure.cpp:48-83 |
+| Casts: niche hang; scaling to height | Scripts/classical_art.py:262-279, 109-140; repo assets/classical/SOURCES.json, data/classical.json |
+| Board and words | repo plan/canvas/Rotunda.dc.html (meridian drawn 3.5 px against 1.5 px hour marks), plan/README.md:75-81 |
 
-**The sun clock:** `windows/Source/MuseeVision/SunClock/`
+**Corrections to the draft** (`r-specs/…/Stages/rotunda.md`):
+1. **Materials are palette keys** (D-018, Story §6): floor ring, dial fields, treads, landing, string and housing sides
+   are **Crema Marfil in two selections** (draft: statuary vein-cut/cross-cut; statuary's roles are the Classical
+   Hall's); the red band **Rojo Alicante** (draft: rosso antico); entablature **fibrous plaster** (draft: lime plaster
+   run); niche surrounds and sills **Crema Marfil** (draft: plaster); drum soffit **lime plaster** (draft: fibrous);
+   eye lattice **pearl steel** (draft: dark paint #1E1C19); node **patinated bronze** (draft: gilt); outer dome
+   **milled lead** (draft: travertine); handrails patinated, hand-polished (draft: brushed). The whole sun (rays too) is
+   gilt.
+2. **Light:** every luminaire is a 3000 K catalogue type (the draft wanted 4000 K and flagged a cove gap; the catalogue's
+   cove is 3000 K, and the sibling Nymphéas stair is 3000 K) — no gap. The draft's cast spots on the cornice ledge "about
+   30° from vertical" cannot reach a niche: from the ledge every beam towards r > 9.58 falls onto the entablature
+   itself, so the cast spots stand across the room (φ_n ± 160°/200°). Floor spots are given explicitly (draft: "a ring,
+   by Scheme"). The draft's 150–300 lx "modelling aim" on the casts is replaced by the Care class value (300,
+   recommended). The as-built fill light is dropped (as the draft said).
+3. **Channels** are 0…1 (the contract): `rotunda.sun-clock.height` and `rotunda.sun-clock.lights` replace the draft's
+   metre-valued `rotunda.sun-clock.lift`; the balustrade follows it as in/out ranges.
+4. **Well prism** top z 0.00 (the shaft's outer face r 7.60 runs to z 0 as built, `SunClockShaft.cpp:68`, and the
+   Classical Hall draft reserves −6.40…0.00), not −0.55.
+5. **Class names** use width × crown (the Nymphéas convention): the draft's `doorway.3000x4500.arched`,
+   `doorway.4000x4500.arched`, `stairwell.spiral.3600` → `doorway.3000x6000.arched`, `doorway.4000x6500.arched`,
+   `stairwell.spiral.3600x4400.arched` (geometry unchanged).
+6. The landing floor runs through the portal to the port face **r 7.60** (as built), not to 7.05.
+7. Treads run 10 mm into the string and the wall; the string runs 0.5° past the last riser; the well balustrade ends 1°
+   past it (as built; the draft was silent).
+8. Motion's time kept at the as-built 8.0 s (the draft proposed a 7.9 s S-curve); the lights switch through a channel step at the
+   sequence ends instead of at 0.30 m (inside the closed pocket there, so unseen).
+9. **Verified unchanged:** drum 10.00/11.20, doors and flank angles (11.776°, 14.663°), niches (2.00, 2.00/4.67, sliver
+   0.050, ledge ±1.26), every profile point list, coffers table, curb, shell 10.60 (foot 10.553/11.00, 2.90/20.196),
+   lattice (bar lengths 4.920/4.653/3.737/1.080), glass 20.38–20.39, node 20.25, dial bands, inlay sections, numerals,
+   motto, sun, drum profiles, door (10.860°, springing −1.85), soffit ribs and coffers, rim, pendant, shaft radii, port,
+   rosette, stair layout (Front(39) = −50.000°), goings, balustrade registers, cam, clearances, cast ids, heights and
+   scan bounds.
 
-| File and lines | What |
-|---|---|
-| `SunClock.h:14-62` | what the mechanism is, its clearances, the retracting balustrade |
-| `SunClock.h:193-206` | as-built light levels (evidence only) |
-| `SunClock.cpp:17-25` | ring and inside zones |
-| `SunClock.cpp:117-121` | lift easing |
-| `SunClock.cpp:256-310` | lights and switching |
-| `SunClock.cpp:312-404` | prompts, interlocks, reversal |
-| `SunClockBuild.h:40-54` | the drum-frame datums |
-| `SunClockBuild.h:87-151` | stair radii and the balustrade cam |
-| `SunClockBuild.h:153-160` | luminaire positions |
-| `SunClockKit.cpp:7-20` | drum door |
-| `SunClockKit.cpp:58-79` | north port |
-| `SunClockKit.cpp:82-138` | the stair layout and its pitch, string and soffit lines |
-| `SunClockDial.cpp:19-53` | bands |
-| `SunClockDial.cpp:55-84` | ring, fillets, hour lines, ticks |
-| `SunClockDial.cpp:86-107` | numerals |
-| `SunClockDial.cpp:109-165` | sunburst and boss |
-| `SunClockDial.cpp:175-233` | ring courses and motto |
-| `SunClockDrum.cpp:25-45` | drum profiles |
-| `SunClockDrum.cpp:47-128` | walls and door |
-| `SunClockDrum.cpp:160-201` | door dressing |
-| `SunClockDrum.cpp:203-255` | pilasters |
-| `SunClockDrum.cpp:257-346` | soffit coffers |
-| `SunClockDrum.cpp:348-373` | rim and pendant |
-| `SunClockShaft.cpp:44-93` | shaft walls, pocket, port, tympanum, lintel |
-| `SunClockShaft.cpp:217-291` | port dressings |
-| `SunClockShaft.cpp:293-337` | landing and rosette |
-| `SunClockStair.cpp:59-93` | treads and nosings |
-| `SunClockStair.cpp:95-145` | string, soffit, (ramp: not ported) |
-| `SunClockRails.cpp:33-36` | balustrade registers |
-| `SunClockRails.cpp:105-222` | uprights, rings, handrail, balustrade |
-| `SunClockRails.cpp:224-370` | housings and retracting panels |
-| `SunClockRails.cpp:430-517` | assembly: split, newel, wall rail |
-| `SunClockChecks.cpp:101-526` | the as-built clearance, step and overlap checks at several lifts (evidence to reuse, D-017) |
-| `SunClockGlyphs.h`, `bake_glyphs.py:1-40` | the letter outlines and their source font |
+## 12. The first-pass cut
+**Tonight:** Site (frame, footprint, the five ports with classes, blinds and the served well, the arrival point,
+enclosures and openings); the drum with 4 rough openings, 4 niches (reveal, back, half-dome, surround, sill) and the
+shadow gap; outer face and top; 16 pilasters; the entablature; 4 archivolts; the dome (bands, 5 × 28 coffers, curb,
+shell with its lead); the eye (ring, 21 bars, laminated pane, node); the ring courses, dial bands, hour ring, fillets,
+hour lines, the gilt meridian, minute ticks, the gilt sun (rays, boss, plain beads); the lifting drum (wall, base and
+entablature, 12 pilasters, door with archivolt, soffit coffers, rim, pendant); M-1 and M-2 with the guard, prompts and
+channels; the shaft (sleeve, pocket, masonry, port with lintel and tympanum, 8 bores with plain rams); the landing and
+rosette; the stair (treads, nosings, string, soffit); the balustrade (fixed part with bars, balusters, handrail; the
+retracting panels in their housings; the wall rail; the newel); the luminaires of §4 and daylight through the eye; the
+four casts; acoustics and footfalls. Numerals and motto from the ported `SunClockGlyphs.h` outlines. If Form's Laid isn't ready, the Crema Marfil faces are solids of their visible stone
+and Form.WithinStock findings are listed, not waived.
 
-**The sky:** `windows/Source/MuseeVision/Sky/MuseeSky.cpp:109-116` (the idealised sun's direction) and `:133-138`
-(the 06:00–18:00 window). `Sky/MuseeSky.h:35-43` describes it.
+**Waits for polish:** the exterior dress (§3.10); the balustrade's rings and bosses (plain balusters full height
+tonight); the drum door's keystone and imposts; the stair-side port dressings; the flames' weave and the boss's beaded
+foot; the drum's steel carcass; the lift's voice and rain on the eye; falls for the eye's glass; path-traced daylight.
 
-**Thresholds** (now Site's): `windows/Source/MuseeVision/Furniture/MuseeFurniture.h:29-32` and
-`MuseeFurniture.cpp:301-311`.
+## 13. Palette keys to confirm and catalogue gaps
+**Palette keys** (roles guessed or workings outside `workingsByEra`):
+- `steel.hard-chrome` (ruled by the Architect; Matter adds it) → hard-chromed carbon-steel hydraulic ram rods (hidden
+  in their bores).
+- `stone.crema-marfil` **two selections** (Story: "two selections for the two tones"): A = the paler ground with sparse
+  crackle, B = the warmer ground with fuller crackle; which is which is guessed. Used also for the **door archivolts**
+  (as built plaster; roles name only niche surrounds and sills), the **stair soffit, string, landing, pocket and port
+  dressings** (extending "spiral stair" and "wall ashlar").
+- `bronze.cusn10` + `gilt.gold-leaf.oil` on the **32 rays** ("gilt sun" read as the whole sunburst; as built the rays
+  were bronze), the **motto stops** (as built gilt) and the **pendant boss** (as built gilt): guessed.
+- `bronze.cusn10` patinated for the **drum rim, housing caps and the five blind-door pairs**: by analogy (drum
+  balustrade; the Grounds' blind door).
+- `stone.travertine-romano` **sawn** for the hidden rough-opening faces (a core working, not in workingsByEra).
+- Workings written as compound strings: `pearl.satin` (white.pearl-steel), `laminated.uv-filtering` (glass.low-iron),
+  `cast.seams-kept.sized` (white.plaster-of-paris), `run` (lime plaster coffers and drum soffit).
+- Landing rosette: the palette names Crema Marfil / Rojo Alicante / Negro Marquina for "the Classical Hall's landing";
+  the Rotunda builds that landing inside its served well with the same keys.
+- **Care class of the casts:** plaster has no class; `stone-and-bronze` used (brief), but Care.json says a surface with
+  an organic coating takes its coating's class, and the Story seals the casts with size. Confirm.
 
-**The exterior dress** (polish): `windows/Source/MuseeVision/Facade/MuseeFacadeStructure.cpp:600-673` (drum),
-`:702-744` (dome cover) and `:781-786` (drum floodlights).
+**Catalogue gaps** (Light): (1) a **control class that follows a mechanism channel** for the 13 drum luminaires
+(written `always` + `follows`); (2) when the exterior dress is built, an exterior uplight (`gap.exterior-uplight`) for
+the eight floodlights. No other gap.
 
-**Neighbours at the ports:**
-- `windows/Source/MuseeVision/Salon/SalonStructure.cpp:27,41,1279-1282` (Bay 1's door, 3.0 × springing 3.3);
-- `Chenghuai/ChenghuaiPlan.h:20-38` (the north porch);
-- `Albion/AlbionPlan.h:95-101` (the south porch);
-- `HallOfLight/HallOfLightStructure.cpp:48-83` (the hall into the drum).
-
-**Materials** (seeds, D-017):
-- `windows/Scripts/materials.py:1063-1072` (M_Marble_Wall), `:1107-1112` (plaster coffer and moulding), `:1122`
-  (M_Gilt_Aged), `:1129-1145` (sun-clock marbles and drum), `:1216-1240` (the LANGUAGE rows for the Rotunda's
-  stones, white and gilt);
-- `windows/Scripts/setup_project.py:548-567` (M_RibSteel #1E1C19, M_Gilt);
-- `windows/Scripts/native.py:29-48,89-90`.
-
-**Casts:** `windows/Scripts/classical_art.py:262-279` (the niche hang), `:109-140` (scaling scans to height);
-`assets/classical/SOURCES.json` (kind `rotunda`), `assets/classical/CREDITS.md`, `data/classical.json`.
-
-**Design evidence:**
-- `plan/canvas/Rotunda.dc.html` (plan SVG at 15 px/m: meridian, doors, niches, lattice; section; long section);
-- `plan/boards/Rotunda.png`, `MaterialsStone.png`, `MaterialsOther.png`;
-- `plan/README.md` ("The plan in words").
-
----
-
-## 12. First-pass cut (tonight, D-016)
-
-**Tonight: the room reads whole from the gilt sun, and the stair works.**
-
-1. **Site.** Frame, footprint, the five ports with their classes and the served well, the arrival point, and the two
-   enclosures and all openings (§1, §2). This comes first: it is what the neighbours mate to.
-2. **Shell and order.**
-   - The drum with its 4 rough openings, 4 niches (recess, half-dome, sliver reveal, surround, sill ledge) and the
-     shadow gap.
-   - The drum top and exterior face (plain travertine).
-   - The 16 fluted pilasters with base and capital, the entablature ring, and the 4 archivolts.
-   - The dome: bands, 5 × 28 coffers, eye curb, outer shell.
-3. **The eye.** Ring, 21 bars, the laminated pane, the gilt node.
-4. **Floor and dial.**
-   - Ring courses in two tones, the 7 dial bands, the bronze hour ring and fillets.
-   - 13 hour lines, the gilt meridian, the minute ticks.
-   - The rays and the gilt boss (plain beads).
-   - Numerals and motto, only if the glyph licence (below) is cleared tonight. Otherwise they wait, and the hour
-     lines alone read the hour.
-5. **The sun clock.**
-   - The drum body: wall, base and entablature profiles, 12 pilasters, the door with its archivolt (keystone and
-     imposts may wait), the soffit coffers, rim and pendant.
-   - The lift, its S-curve, the guard, the prompts and the channel.
-   - The shaft: sleeve, pocket, masonry, port with lintel and tympanum, and the eight ram housings with plain rams.
-   - The landing with its rosette.
-   - The helical stair: treads, nosings, string, soffit.
-   - The balustrade: the fixed lower part with standards, bars, balusters and handrail; the retracting panels in
-     their housings on the cam; the wall handrail; the newel.
-6. **Light.** Daylight through the eye; the cornice ledge mounts; the 12 + 1 drum downlights on the channel; the
-   targets and the design order declared, with commissioning at the reference moments.
-7. **Art.** The four casts hung.
-8. **Sound.** Acoustics for both enclosures, and footfalls.
-
-**If Form's Laid is not ready tonight,** the cream-marble and statuary surfaces are made as solids of their visible
-substance. The resulting Form.WithinStock findings are listed, not waived, and polish lays them over their cores.
-
-**Waits for polish:**
-- the exterior dress (§3.10): podium and gravel strip, skin, Ionic order, blind windows, attic, dome cover,
-  floodlights;
-- the balustrade's rings and bosses (plain balusters full height tonight);
-- the drum door's keystone and imposts;
-- the stair-side port dressings;
-- the flames' weave and the boss's beaded foot;
-- the drum's steel carcass;
-- the lift's voice and rain on the eye;
-- falls for the eye's glass;
-- path-traced daylight coefficients (tier 2).
-
----
-
-## Risks and open points
-
-**The meridian is the one geometric delta from the as-built code.** It is a 60 mm gilt XII line, from the board.
-If the owner prefers the as-built, it is a single `Finishes.json` line plus a width back to 24 mm.
-
-**The glyph licence.** The as-built letters are Centaur (Monotype) outlines baked from the Windows font. Studio's
-evidence import will fail its licence check. An open-licence Trajan-like face (for example Cinzel, under the OFL)
-would need downloading and re-baking, which the owner must approve.
-
-**Missing substances.** Matter has no record yet for `statuary-marble`, `rosso-antico` or `nero-marquina`.
-- They are shared with the Classical Hall (rosso antico, statuary) and needed tonight.
-- The cream-marble record lists only thin-slab stock (1–3 cm). Solid pieces need quarry-block stock.
-
-**Class mismatches at the ports.**
-- `salon.east` springs at 3.30, not 4.50.
-- Chenghuai's porch is 3.80 wide against a 4.00 door.
-- `PortClasses.json` and the joint must resolve both before Site.PortsMate can pass.
-
-**Imposts.** They move into the doorway class detail (Site). If Site doesn't carry them, the archivolts spring from a
-plain lining.
-
-**Blondel.** It holds exactly only at r 3.61 (2R + G = 0.63). At mid-span it is 0.70. Form.StepsFitTheBody must
-evaluate on the declared walking line.
-
-**Ponding on the eye.** The eye's flat glass lies 60 mm below its curb, so rain will pond on it (Form.Ponding, Matter).
-That is physically right for the as-built design, and a candidate for a fall in polish.
-
-**The cove's colour temperature.** The catalogue has no `linear-cove.4000k`. If it stays so, the dome's night wash is
-3000 K against the 4000 K stair, or it waits.
-
-**Drum mass and the rams.** With a solid stone core the drum weighs about 200 t, and the eight rams are sized for it.
-The real carcass is polish.
-
-**Reachability and the lift.** Site.Reachable must read the lift's interlock and guard as part of the state graph
-(D-014). Otherwise the lowered configuration looks like a trap for the Classical Hall. The guard makes that state
-unreachable. As built, there is no raise control at the landing.
-
-**Luminaires inside the travel envelope.** The 13 drum luminaires ride on a moving body. Light and Motion must both
-accept a luminaire registered on a moving body key.
-
-**The 0.07 ledge at the drum's door.** When raised, the stair wall's 6 cm-wide top at −0.07 lies between the sill
-(0) and the top landing (−0.15). Form.StepsFitTheBody may flag it.
-
-**Stations and trims.** The coffers, archivolts and pilasters meet by trimming rather than by the as-built 10 mm
-sinks. Form needs a trim operation for a sweep ending on another piece's face.
+**Conflicts and questions for the Architect:**
+(a) **West port** (ruled): mated ports share one class. `salon.east` is `doorway.3000x6000.arched`, the same as
+`rotunda.west`, and the Salon steps down to its own 4.80 arch inside its east wall (salon.md §2). The joint's 2.20 m
+passage is a plain drum-section arch.
+(b) **Class naming**: width × crown (Nymphéas) vs width × springing (the Rotunda, Albion, Chenghuai and Hall-of-Light
+drafts). This sheet uses width × crown; `hall-of-light.west`, `chenghuai.south`, `albion.north` and
+`classical-hall.stair` must use the same names.
+(c) **North**: Chenghuai's porch is 3.80 wide inside (PorchHalf 1.9) against the 4.00 door; the joint's surround must
+sit within it.
+(d) Story choices over the as-built: pearl lattice (as built dark), lead dome (as built stone), patinated node (as built
+gilt), gilt meridian 60 mm (as built none: "No meridian", `SunClockDial.cpp:13`). Kept per D-018 and the board.
+(e) **Glyphs** (ruled): port the as-built Centaur outlines from `SunClockGlyphs.h` (Centaur is installed on this PC); a
+public release would switch to an open-licence face.
