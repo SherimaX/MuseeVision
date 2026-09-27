@@ -102,6 +102,7 @@ bool FMotionScheduleTest::RunTest(const FString& Parameters)
 	const FMotionMechanismSpec& Lift = Schedule.Mechanisms[0];
 	TestTrue(TEXT("Keys, joint and body"), Lift.Key == FMuseeKey(TEXTVIEW("proof.lift")) && Lift.Joint == TEXT("prismatic") && Lift.Body == FMuseeKey(TEXTVIEW("proof.basin")));
 	TestEqual(TEXT("Travel in metres"), Lift.Travel, 2.6f);
+	TestTrue(TEXT("Without stops, drawn and home are the travel's start"), Lift.DrawnPosition() == 0.0 && Lift.HomePosition() == 0.0 && !Lift.Drive.IsSet());
 	TestEqual(TEXT("The open sequence's steps"), Lift.Open.Num(), 2);
 	TestTrue(TEXT("A channel step, then a move"), !Lift.Open[0].IsMove() && Lift.Open[0].Channel == FMuseeKey(TEXTVIEW("proof.rim")) && Lift.Open[1].Move == UMotionMechanism::Open);
 	TestEqual(TEXT("The optional words for opening"), Lift.OpenUse.Verb.Source, FString(TEXT("Raise")));

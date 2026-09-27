@@ -8,8 +8,8 @@
 /**
  * One step of a mechanism's open or close sequence, as the stage's Mechanisms.json writes it. A step does one of two
  * things, as a lift's controller does in turn: it ramps a control point (a channel, such as the line of light round a
- * pond's lip) to a value over a time, or it drives the mechanism's body to one of its named states ("open" or
- * "closed") at the drive's own pace.
+ * pond's lip) to a value over a time, or it drives the mechanism's body to one of its named states (a stop, or
+ * "open" or "closed", the travel's ends) at the drive's own pace.
  */
 USTRUCT()
 struct MUSEEMOTION_API FMotionStep
@@ -28,7 +28,7 @@ struct MUSEEMOTION_API FMotionStep
 	UPROPERTY(meta = (Units = "Seconds"))
 	float Time = 0.0f;
 
-	/** The state a move drives to ("open" or "closed"), or none for a channel step. */
+	/** The state a move drives to (a stop, "open" or "closed"), or none for a channel step. */
 	UPROPERTY()
 	FName Move;
 

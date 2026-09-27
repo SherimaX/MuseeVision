@@ -1,0 +1,759 @@
+{
+  "$sources": "Motion's test fixture: the Atrium's Mechanisms.json (Data/Stages/atrium, Docs/Stages/atrium.md section 6) written to the stage contract's many-stop shape, as the Atrium's own schedule will be: a drive with the Cube mast's zone in place of time and profile; requires in place of the prose conditions (the visit's memory left out, as the contract rules); the verbs and captions as texts with keys; the car drawn at the Atrium stop; no range or pin. The automatic return home after 12 s is not in the first pass, so the call's closing use is written as a verb the visitor can use.",
+  "stage": "atrium",
+  "mechanisms": [
+    {
+      "key": "atrium.car.lift",
+      "joint": "prismatic",
+      "body": "atrium.car",
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "travel": 44.0,
+      "drive": {
+        "speed": 1.5,
+        "accel": 0.75,
+        "jerk": 1.0,
+        "zones": [
+          {
+            "from": 0.0,
+            "to": 0.290341,
+            "speed": 1.0,
+            "accel": 0.5
+          }
+        ]
+      },
+      "stops": [
+        {
+          "stop": "cube",
+          "z": -23.6,
+          "at": 0.0
+        },
+        {
+          "stop": "clamp",
+          "z": -10.825,
+          "at": 0.290341
+        },
+        {
+          "stop": "atrium",
+          "z": 0.0,
+          "at": 0.536364
+        },
+        {
+          "stop": "neck",
+          "z": 8.4,
+          "at": 0.727273
+        },
+        {
+          "stop": "sphere",
+          "z": 20.4,
+          "at": 1.0
+        }
+      ],
+      "drawn": "atrium",
+      "home": "neck",
+      "control": "atrium.call",
+      "openUse": {
+        "verb": {
+          "key": "atrium.car.lift.call",
+          "source": "Call the car"
+        },
+        "caption": {
+          "key": "atrium.car.lift.call-caption",
+          "source": "The car glows down through the misty glass. The wait is part of the visit."
+        }
+      },
+      "open": [
+        {
+          "channel": "atrium.up.closure",
+          "to": 1.0,
+          "time": 4.0
+        },
+        {
+          "move": "atrium"
+        },
+        {
+          "channel": "atrium.car.doors",
+          "to": 1.0,
+          "time": 1.5
+        },
+        {
+          "channel": "atrium.landing.doors",
+          "to": 1.0,
+          "time": 1.5
+        }
+      ],
+      "closeUse": {
+        "verb": {
+          "key": "atrium.car.lift.send-home",
+          "source": "Send the car home"
+        }
+      },
+      "close": [
+        {
+          "channel": "atrium.car.doors",
+          "to": 0.0,
+          "time": 1.5
+        },
+        {
+          "channel": "atrium.landing.doors",
+          "to": 0.0,
+          "time": 1.5
+        },
+        {
+          "move": "neck"
+        },
+        {
+          "channel": "atrium.up.closure",
+          "to": 0.0,
+          "time": 4.0
+        }
+      ],
+      "rides": [
+        {
+          "use": "atrium.car.panel",
+          "at": "atrium",
+          "verb": {
+            "key": "atrium.car.lift.down-to-cube",
+            "source": "Down to the Cube"
+          },
+          "caption": {
+            "key": "atrium.car.lift.down-to-cube-caption",
+            "source": "Down through the ground to the Cube: soil, clay, then chalk, then the room 22 m down."
+          },
+          "requires": {
+            "mated": [
+              "atrium.down"
+            ]
+          },
+          "sequence": [
+            {
+              "channel": "atrium.car.doors",
+              "to": 0.0,
+              "time": 1.5
+            },
+            {
+              "channel": "atrium.landing.doors",
+              "to": 0.0,
+              "time": 1.5
+            },
+            {
+              "channel": "cube.up.closure",
+              "to": 1.0,
+              "time": 4.0
+            },
+            {
+              "move": "clamp"
+            },
+            {
+              "channel": "cube.up.closure",
+              "to": 0.378,
+              "time": 2.49
+            },
+            {
+              "move": "cube"
+            },
+            {
+              "channel": "atrium.car.light",
+              "to": 0.03,
+              "time": 2.5
+            }
+          ]
+        },
+        {
+          "use": "atrium.car.panel",
+          "at": "atrium",
+          "verb": {
+            "key": "atrium.car.lift.atrium-up-to-sphere",
+            "source": "Up to the Sphere"
+          },
+          "caption": {
+            "key": "atrium.car.lift.atrium-up-to-sphere-caption",
+            "source": "Up to the stars. A steady 1.5 metres a second."
+          },
+          "requires": {
+            "mated": [
+              "atrium.up"
+            ]
+          },
+          "sequence": [
+            {
+              "channel": "atrium.car.doors",
+              "to": 0.0,
+              "time": 1.5
+            },
+            {
+              "channel": "atrium.landing.doors",
+              "to": 0.0,
+              "time": 1.5
+            },
+            {
+              "move": "neck"
+            },
+            {
+              "channel": "atrium.up.closure",
+              "to": 0.0,
+              "time": 4.0
+            },
+            {
+              "channel": "sphere.neck.closure",
+              "to": 1.0,
+              "time": 4.0
+            },
+            {
+              "channel": "sphere.platform.closure",
+              "to": 1.0,
+              "time": 4.0
+            },
+            {
+              "move": "sphere"
+            },
+            {
+              "channel": "atrium.car.doors",
+              "to": 1.0,
+              "time": 1.5
+            }
+          ]
+        },
+        {
+          "use": "atrium.car.panel",
+          "at": "cube",
+          "verb": {
+            "key": "atrium.car.lift.up-to-atrium",
+            "source": "Up to the Atrium"
+          },
+          "caption": {
+            "key": "atrium.car.lift.up-to-atrium-caption",
+            "source": "Up through the ground to the Atrium."
+          },
+          "requires": {
+            "channels": [
+              {
+                "channel": "cube.performance.active",
+                "atMost": 0.0
+              }
+            ]
+          },
+          "sequence": [
+            {
+              "channel": "atrium.car.light",
+              "to": 1.0,
+              "time": 2.5
+            },
+            {
+              "move": "clamp"
+            },
+            {
+              "channel": "cube.up.closure",
+              "to": 1.0,
+              "time": 2.49
+            },
+            {
+              "move": "atrium"
+            },
+            {
+              "channel": "cube.up.closure",
+              "to": 0.0,
+              "time": 4.0
+            },
+            {
+              "channel": "atrium.car.doors",
+              "to": 1.0,
+              "time": 1.5
+            },
+            {
+              "channel": "atrium.landing.doors",
+              "to": 1.0,
+              "time": 1.5
+            }
+          ]
+        },
+        {
+          "use": "atrium.car.panel",
+          "at": "cube",
+          "verb": {
+            "key": "atrium.car.lift.cube-up-to-sphere",
+            "source": "Up to the Sphere"
+          },
+          "caption": {
+            "key": "atrium.car.lift.cube-up-to-sphere-caption",
+            "source": "Up through the earth, then the Atrium, to the stars."
+          },
+          "requires": {
+            "mated": [
+              "atrium.up"
+            ],
+            "channels": [
+              {
+                "channel": "cube.performance.active",
+                "atMost": 0.0
+              }
+            ]
+          },
+          "sequence": [
+            {
+              "channel": "atrium.car.light",
+              "to": 1.0,
+              "time": 2.5
+            },
+            {
+              "move": "clamp"
+            },
+            {
+              "channel": "cube.up.closure",
+              "to": 1.0,
+              "time": 2.49
+            },
+            {
+              "move": "neck"
+            },
+            {
+              "channel": "cube.up.closure",
+              "to": 0.0,
+              "time": 4.0
+            },
+            {
+              "channel": "atrium.up.closure",
+              "to": 0.0,
+              "time": 4.0
+            },
+            {
+              "channel": "sphere.neck.closure",
+              "to": 1.0,
+              "time": 4.0
+            },
+            {
+              "channel": "sphere.platform.closure",
+              "to": 1.0,
+              "time": 4.0
+            },
+            {
+              "move": "sphere"
+            },
+            {
+              "channel": "atrium.car.doors",
+              "to": 1.0,
+              "time": 1.5
+            }
+          ]
+        },
+        {
+          "use": "atrium.car.panel",
+          "at": "sphere",
+          "verb": {
+            "key": "atrium.car.lift.down-to-atrium",
+            "source": "Down to the Atrium"
+          },
+          "requires": {
+            "channels": [
+              {
+                "channel": "atrium.car.doors",
+                "atLeast": 1.0
+              }
+            ]
+          },
+          "sequence": [
+            {
+              "channel": "atrium.car.doors",
+              "to": 0.0,
+              "time": 1.5
+            },
+            {
+              "move": "neck"
+            },
+            {
+              "channel": "sphere.neck.closure",
+              "to": 0.0,
+              "time": 4.0
+            },
+            {
+              "channel": "atrium.up.closure",
+              "to": 1.0,
+              "time": 4.0
+            },
+            {
+              "move": "atrium"
+            },
+            {
+              "channel": "atrium.car.doors",
+              "to": 1.0,
+              "time": 1.5
+            },
+            {
+              "channel": "atrium.landing.doors",
+              "to": 1.0,
+              "time": 1.5
+            }
+          ]
+        },
+        {
+          "use": "sphere.call",
+          "at": "neck",
+          "verb": {
+            "key": "atrium.car.lift.sphere-call",
+            "source": "Call the car"
+          },
+          "caption": {
+            "key": "atrium.car.lift.sphere-call-caption",
+            "source": "The car rises out of the neck to meet you."
+          },
+          "requires": {
+            "mated": [
+              "atrium.up"
+            ]
+          },
+          "sequence": [
+            {
+              "channel": "sphere.neck.closure",
+              "to": 1.0,
+              "time": 4.0
+            },
+            {
+              "channel": "sphere.platform.closure",
+              "to": 1.0,
+              "time": 4.0
+            },
+            {
+              "move": "sphere"
+            },
+            {
+              "channel": "atrium.car.doors",
+              "to": 1.0,
+              "time": 1.5
+            }
+          ]
+        }
+      ],
+      "publishes": "atrium.car.height",
+      "guard": "body-in-travel",
+      "clearance": 0.01,
+      "note": "The glass car on the Elan axis. Body frame = its floor datum on the axis at the Atrium stop; range = the body's offset along +z at fractions 0 and 1 (-23.600 ... +20.400), stops as fractions of 44.000 m. Drive: rack and pinion on the two guide rails above the Cube's clamp level (pinions in the roller-guide blocks, both rings; the rails' breaks at the seams and the collar are bridged by the second ring); below the clamp level the car hangs on the Cube mast its crown feeds out; above the Sphere's mouth it rides the Sphere's mast (the Sphere's, rising from its mouth). No counterweight. Jerk-limited S-curves (<= 1.0 m/s3). Leaves shut before any move (they wait while a body stands in the doorway). Interlocks A-1...A-7 in the sheet (section 6). Home: the neck stop with both neck irises shut (as built); with atrium.up unmated the home is the Atrium stop and the collar iris stays shut; with atrium.down unmated nothing goes below the Atrium stop. Left open at the Atrium with nobody within r 3.500 (or off the floor) for 12 s, the car runs 'close' (home). It never lands in the Cube (no landing, door or vestibule there): it stops with the eyes at the Cube's centre and its light falls to a glimmer. Steps {move: <stop>} name a stop."
+    },
+    {
+      "key": "atrium.cube-mast",
+      "joint": "prismatic",
+      "body": "atrium.car.mast.head",
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "travel": 12.775,
+      "time": 14.8,
+      "profile": "linear",
+      "follows": {
+        "channel": "atrium.car.height",
+        "in": [
+          0.0,
+          0.290341
+        ],
+        "out": [
+          12.775,
+          0.0
+        ]
+      },
+      "guard": "body-in-travel",
+      "clearance": 0.01,
+      "note": "The Cube mast's head (r 0.260, groove r 0.195 at 0.070-0.110 over the crown top, cap to 0.160) rides the car's crown above the clamp level; below it the Cube's ceiling iris holds the head and the crown feeds the spiral-band column (r 0.170) out between them: the head rises relative to the car by (clamp - z). The column is Motion's variable-length piece (crown top to head), never modelled by hand at one length."
+    },
+    {
+      "key": "atrium.car.leaf.north",
+      "joint": "revolute",
+      "body": "atrium.car.leaf.north",
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "travel": 24.0,
+      "time": 1.5,
+      "profile": "ease-in-out",
+      "follows": {
+        "channel": "atrium.car.doors",
+        "in": [
+          0.0,
+          1.0
+        ],
+        "out": [
+          0.0,
+          24.0
+        ]
+      },
+      "guard": "body-in-travel",
+      "clearance": 0.035,
+      "note": "Curved glass leaf r 2.135-2.150, turning about the stage's z axis (the car's axis) 24 deg away from the door's centre line (bearing 270) into its pocket: the north leaf towards increasing bearing (clockwise on a north-up plan, from +x towards +y), the south leaf towards decreasing bearing. Closed it spans 25 deg from the centre line (a degree behind its pocket pane). Eased s = 3o^2 - 2o^3 over 1.5 s. Holds or reverses while a body is in its next travel slice. Rides the car."
+    },
+    {
+      "key": "atrium.landing.leaf.north",
+      "joint": "revolute",
+      "body": "atrium.landing.leaf.north",
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "travel": 24.0,
+      "time": 1.5,
+      "profile": "ease-in-out",
+      "follows": {
+        "channel": "atrium.landing.doors",
+        "in": [
+          0.0,
+          1.0
+        ],
+        "out": [
+          0.0,
+          24.0
+        ]
+      },
+      "guard": "body-in-travel",
+      "clearance": 0.06,
+      "note": "Curved glass leaf r 2.375-2.390, turning about the stage's z axis (the landing's axis) 24 deg away from the door's centre line (bearing 270) into its pocket: the north leaf towards increasing bearing (clockwise on a north-up plan, from +x towards +y), the south leaf towards decreasing bearing. Closed it spans 25 deg from the centre line (a degree behind its pocket pane). Eased s = 3o^2 - 2o^3 over 1.5 s. Holds or reverses while a body is in its next travel slice. Fixed; opens only with the car at the Atrium stop +/- 5 mm."
+    },
+    {
+      "key": "atrium.car.leaf.south",
+      "joint": "revolute",
+      "body": "atrium.car.leaf.south",
+      "axis": [
+        0,
+        0,
+        -1
+      ],
+      "travel": 24.0,
+      "time": 1.5,
+      "profile": "ease-in-out",
+      "follows": {
+        "channel": "atrium.car.doors",
+        "in": [
+          0.0,
+          1.0
+        ],
+        "out": [
+          0.0,
+          24.0
+        ]
+      },
+      "guard": "body-in-travel",
+      "clearance": 0.035,
+      "note": "Curved glass leaf r 2.135-2.150, turning about the stage's z axis (the car's axis) 24 deg away from the door's centre line (bearing 270) into its pocket: the north leaf towards increasing bearing (clockwise on a north-up plan, from +x towards +y), the south leaf towards decreasing bearing. Closed it spans 25 deg from the centre line (a degree behind its pocket pane). Eased s = 3o^2 - 2o^3 over 1.5 s. Holds or reverses while a body is in its next travel slice. Rides the car."
+    },
+    {
+      "key": "atrium.landing.leaf.south",
+      "joint": "revolute",
+      "body": "atrium.landing.leaf.south",
+      "axis": [
+        0,
+        0,
+        -1
+      ],
+      "travel": 24.0,
+      "time": 1.5,
+      "profile": "ease-in-out",
+      "follows": {
+        "channel": "atrium.landing.doors",
+        "in": [
+          0.0,
+          1.0
+        ],
+        "out": [
+          0.0,
+          24.0
+        ]
+      },
+      "guard": "body-in-travel",
+      "clearance": 0.06,
+      "note": "Curved glass leaf r 2.375-2.390, turning about the stage's z axis (the landing's axis) 24 deg away from the door's centre line (bearing 270) into its pocket: the north leaf towards increasing bearing (clockwise on a north-up plan, from +x towards +y), the south leaf towards decreasing bearing. Closed it spans 25 deg from the centre line (a degree behind its pocket pane). Eased s = 3o^2 - 2o^3 over 1.5 s. Holds or reverses while a body is in its next travel slice. Fixed; opens only with the car at the Atrium stop +/- 5 mm."
+    },
+    {
+      "key": "atrium.up.iris.blade.1",
+      "joint": "revolute",
+      "body": "atrium.up.iris.blade.1",
+      "axis": [
+        0,
+        0,
+        -1
+      ],
+      "travel": 52.0,
+      "time": 4.0,
+      "profile": "ease-in-out",
+      "follows": {
+        "channel": "atrium.up.closure",
+        "in": [
+          0.0,
+          1.0
+        ],
+        "out": [
+          0.0,
+          52.0
+        ]
+      },
+      "guard": "body-in-travel",
+      "clearance": 0.002,
+      "note": "Collar iris blade 1 of 7 (the closure of atrium.up, class iris.4600): pin at r 3.745, plan angle 0.0000 deg (from +x towards +y), its top face z 7.695; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. Eased (s = 3o^2 - 2o^3) over 4.0 s. Housed open in the collar's pocket (r <= 4.050, z 7.660-7.705); in travel it reaches r 4.01."
+    },
+    {
+      "key": "atrium.up.iris.blade.2",
+      "joint": "revolute",
+      "body": "atrium.up.iris.blade.2",
+      "axis": [
+        0,
+        0,
+        -1
+      ],
+      "travel": 52.0,
+      "time": 4.0,
+      "profile": "ease-in-out",
+      "follows": {
+        "channel": "atrium.up.closure",
+        "in": [
+          0.0,
+          1.0
+        ],
+        "out": [
+          0.0,
+          52.0
+        ]
+      },
+      "guard": "body-in-travel",
+      "clearance": 0.002,
+      "note": "Collar iris blade 2 of 7 (the closure of atrium.up, class iris.4600): pin at r 3.745, plan angle 51.4286 deg (from +x towards +y), its top face z 7.691; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. Eased (s = 3o^2 - 2o^3) over 4.0 s. Housed open in the collar's pocket (r <= 4.050, z 7.660-7.705); in travel it reaches r 4.01."
+    },
+    {
+      "key": "atrium.up.iris.blade.3",
+      "joint": "revolute",
+      "body": "atrium.up.iris.blade.3",
+      "axis": [
+        0,
+        0,
+        -1
+      ],
+      "travel": 52.0,
+      "time": 4.0,
+      "profile": "ease-in-out",
+      "follows": {
+        "channel": "atrium.up.closure",
+        "in": [
+          0.0,
+          1.0
+        ],
+        "out": [
+          0.0,
+          52.0
+        ]
+      },
+      "guard": "body-in-travel",
+      "clearance": 0.002,
+      "note": "Collar iris blade 3 of 7 (the closure of atrium.up, class iris.4600): pin at r 3.745, plan angle 102.8571 deg (from +x towards +y), its top face z 7.687; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. Eased (s = 3o^2 - 2o^3) over 4.0 s. Housed open in the collar's pocket (r <= 4.050, z 7.660-7.705); in travel it reaches r 4.01."
+    },
+    {
+      "key": "atrium.up.iris.blade.4",
+      "joint": "revolute",
+      "body": "atrium.up.iris.blade.4",
+      "axis": [
+        0,
+        0,
+        -1
+      ],
+      "travel": 52.0,
+      "time": 4.0,
+      "profile": "ease-in-out",
+      "follows": {
+        "channel": "atrium.up.closure",
+        "in": [
+          0.0,
+          1.0
+        ],
+        "out": [
+          0.0,
+          52.0
+        ]
+      },
+      "guard": "body-in-travel",
+      "clearance": 0.002,
+      "note": "Collar iris blade 4 of 7 (the closure of atrium.up, class iris.4600): pin at r 3.745, plan angle 154.2857 deg (from +x towards +y), its top face z 7.683; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. Eased (s = 3o^2 - 2o^3) over 4.0 s. Housed open in the collar's pocket (r <= 4.050, z 7.660-7.705); in travel it reaches r 4.01."
+    },
+    {
+      "key": "atrium.up.iris.blade.5",
+      "joint": "revolute",
+      "body": "atrium.up.iris.blade.5",
+      "axis": [
+        0,
+        0,
+        -1
+      ],
+      "travel": 52.0,
+      "time": 4.0,
+      "profile": "ease-in-out",
+      "follows": {
+        "channel": "atrium.up.closure",
+        "in": [
+          0.0,
+          1.0
+        ],
+        "out": [
+          0.0,
+          52.0
+        ]
+      },
+      "guard": "body-in-travel",
+      "clearance": 0.002,
+      "note": "Collar iris blade 5 of 7 (the closure of atrium.up, class iris.4600): pin at r 3.745, plan angle 205.7143 deg (from +x towards +y), its top face z 7.679; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. Eased (s = 3o^2 - 2o^3) over 4.0 s. Housed open in the collar's pocket (r <= 4.050, z 7.660-7.705); in travel it reaches r 4.01."
+    },
+    {
+      "key": "atrium.up.iris.blade.6",
+      "joint": "revolute",
+      "body": "atrium.up.iris.blade.6",
+      "axis": [
+        0,
+        0,
+        -1
+      ],
+      "travel": 52.0,
+      "time": 4.0,
+      "profile": "ease-in-out",
+      "follows": {
+        "channel": "atrium.up.closure",
+        "in": [
+          0.0,
+          1.0
+        ],
+        "out": [
+          0.0,
+          52.0
+        ]
+      },
+      "guard": "body-in-travel",
+      "clearance": 0.002,
+      "note": "Collar iris blade 6 of 7 (the closure of atrium.up, class iris.4600): pin at r 3.745, plan angle 257.1429 deg (from +x towards +y), its top face z 7.675; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. Eased (s = 3o^2 - 2o^3) over 4.0 s. Housed open in the collar's pocket (r <= 4.050, z 7.660-7.705); in travel it reaches r 4.01."
+    },
+    {
+      "key": "atrium.up.iris.blade.7",
+      "joint": "revolute",
+      "body": "atrium.up.iris.blade.7",
+      "axis": [
+        0,
+        0,
+        -1
+      ],
+      "travel": 52.0,
+      "time": 4.0,
+      "profile": "ease-in-out",
+      "follows": {
+        "channel": "atrium.up.closure",
+        "in": [
+          0.0,
+          1.0
+        ],
+        "out": [
+          0.0,
+          52.0
+        ]
+      },
+      "guard": "body-in-travel",
+      "clearance": 0.002,
+      "note": "Collar iris blade 7 of 7 (the closure of atrium.up, class iris.4600): pin at r 3.745, plan angle 308.5714 deg (from +x towards +y), its top face z 7.671; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. Eased (s = 3o^2 - 2o^3) over 4.0 s. Housed open in the collar's pocket (r <= 4.050, z 7.660-7.705); in travel it reaches r 4.01."
+    }
+  ]
+}

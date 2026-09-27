@@ -15,20 +15,21 @@ UMotionControl::UMotionControl()
 	SetMobility(EComponentMobility::Movable);
 }
 
-void UMotionControl::Bind(UMotionMechanism* InMechanism)
+void UMotionControl::Bind(UMotionMechanism* InMechanism, const FMuseeKey& InUseAnchor)
 {
 	BoundMechanism = InMechanism;
+	UseAnchorKey = InUseAnchor;
 }
 
 FMuseeUse UMotionControl::Usage() const
 {
-	return BoundMechanism ? BoundMechanism->Usage() : FMuseeUse();
+	return BoundMechanism ? BoundMechanism->UsageAt(UseAnchorKey) : FMuseeUse();
 }
 
 void UMotionControl::Use()
 {
 	if (BoundMechanism)
 	{
-		BoundMechanism->Use();
+		BoundMechanism->UseAt(UseAnchorKey);
 	}
 }

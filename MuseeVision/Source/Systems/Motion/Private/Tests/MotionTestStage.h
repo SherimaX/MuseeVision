@@ -47,12 +47,15 @@ namespace Musee::Motion::Tests
 			World->DestroyWorld(false);
 		}
 
-		/** A body at a point of the stage (metres), carrying a solid block (its centre and half size in the body's frame). */
+		/**
+		 * A body at a point (metres) of the stage, or of the body it rides on, carrying a solid block (its centre and half
+		 * size in the body's frame).
+		 */
 		USceneComponent* AddBody(const FMuseeKey& Key, const FVector& AtMeters, const FVector& BlockCentreMeters = FVector(0.0, 0.0, 0.5),
-			const FVector& BlockHalfMeters = FVector(0.5))
+			const FVector& BlockHalfMeters = FVector(0.5), USceneComponent* RidesOn = nullptr)
 		{
 			USceneComponent* Body = NewObject<USceneComponent>(Actor, *FString::Printf(TEXT("Body_%d"), ++Count));
-			Body->SetupAttachment(Actor->GetRootComponent());
+			Body->SetupAttachment(RidesOn ? RidesOn : Actor->GetRootComponent());
 			Body->SetRelativeLocation(ToEngine(AtMeters));
 			Body->ComponentTags.Add(Key.ToName());
 			Actor->AddInstanceComponent(Body);

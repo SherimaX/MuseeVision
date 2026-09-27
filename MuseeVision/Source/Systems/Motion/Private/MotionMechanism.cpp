@@ -14,14 +14,15 @@ const FName UMotionMechanism::Open(TEXT("open"));
 
 namespace
 {
-	/** A joint's axis within this angle of the vertical is a lift, whose verbs are Raise and Lower: 30 degrees, the
-	 * steepest an inclined lift runs (EN 81-22 covers inclined lifts from 15 to 75 degrees from the horizontal). */
-	constexpr double LiftAxisCosine = 0.866;
-
-	const FName Prismatic(TEXT("prismatic"));
 	const FName Revolute(TEXT("revolute"));
 	const FName NoGuard(TEXT("none"));
 	const FName ReversingGuard(TEXT("body-in-travel-reverse"));
+
+	/**
+	 * Two drive positions are the same state within this share of the travel. A move lands exactly on its state, so it
+	 * only absorbs rounding: a billionth of the Élan car's 44 m is 44 nm.
+	 */
+	constexpr double SameShare = 1.0e-9;
 
 	FMotionStep MoveStep(FName State)
 	{
@@ -41,12 +42,12 @@ void UMotionMechanism::Configure(const FMotionMechanismSpec& InSpec, USceneCompo
 {
 	MechanismSpec = InSpec;
 	BodyComponent = InBody;
-	DrivePosition = 0.0;
+	DrivePosition = MechanismSpec.DrawnPosition();
 	if (!BodyComponent)
 	{
 		return;
 	}
-	Home = BodyComponent->GetRelativeTransform();
+	Drawn = BodyComponent->GetRelativeTransform();
 	const FVector StageAxis = MechanismSpec.Axis.Num() == 3 ? FVector(MechanismSpec.Axis[0], MechanismSpec.Axis[1], MechanismSpec.Axis[2]) : FVector::UpVector;
 	const FTransform Stage = GetOwner() ? GetOwner()->GetActorTransform() : FTransform::Identity;
 	const USceneComponent* Parent = BodyComponent->GetAttachParent();
@@ -66,49 +67,43 @@ void UMotionMechanism::Configure(const FMotionMechanismSpec& InSpec, USceneCompo
 		: 0.0f;
 }
 
+void UMotionMechanism::SetMatedPorts(const TArray<FMuseeKey>& Ports)
+{
+	MatedPorts = Ports;
+}
+
 FName UMotionMechanism::State() const
 {
-	if (DrivePosition <= 0.0)
+	for (const FMotionStop& Stop : MechanismSpec.Stops)
+	{
+		if (FMath::IsNearlyEqual(DrivePosition, Stop.At, SameShare))
+		{
+			return Stop.Stop;
+		}
+	}
+	if (DrivePosition <= SameShare)
 	{
 		return Closed;
 	}
-	return DrivePosition >= 1.0 ? Open : NAME_None;
+	return DrivePosition >= 1.0 - SameShare ? Open : NAME_None;
+}
+
+bool UMotionMechanism::IsAt(FName InState) const
+{
+	const TOptional<double> At = MechanismSpec.PositionOf(InState);
+	return At.IsSet() && FMath::IsNearlyEqual(DrivePosition, At.GetValue(), SameShare);
+}
+
+void UMotionMechanism::StandAtHome()
+{
+	Running.Reset();
+	bHeld = false;
+	SetPosition(MechanismSpec.HomePosition());
 }
 
 void UMotionMechanism::MoveTo(FName InState)
 {
 	Start({ MoveStep(InState) }, {});
-}
-
-FMuseeUse UMotionMechanism::Usage() const
-{
-	const bool bOpening = DrivePosition < 0.5;
-	const FMotionUseText& Text = bOpening ? MechanismSpec.OpenUse : MechanismSpec.CloseUse;
-	const FText Caption = Text.Caption.Key.IsNone() ? FText::GetEmpty() : Text.Caption.ToText();
-	if (IsRunning() || MechanismSpec.Follows.IsSet())
-	{
-		const FText WhyNot = bHeld
-			? NSLOCTEXT("Musee", "motion.held", "Something is in its way.")
-			: NSLOCTEXT("Musee", "motion.moving", "It is moving.");
-		return FMuseeUse::Unavailable(Verb(bOpening), Caption, WhyNot);
-	}
-	return FMuseeUse::Available(Verb(bOpening), Caption);
-}
-
-void UMotionMechanism::Use()
-{
-	if (IsRunning() || !BodyComponent || MechanismSpec.Follows.IsSet())
-	{
-		return;
-	}
-	if (DrivePosition < 0.5)
-	{
-		Start(MechanismSpec.Open, MechanismSpec.Close);
-	}
-	else
-	{
-		Start(MechanismSpec.Close, MechanismSpec.Open);
-	}
 }
 
 void UMotionMechanism::Start(const TArray<FMotionStep>& Steps, const TArray<FMotionStep>& Reverse)
@@ -164,7 +159,8 @@ TOptional<float> UMotionMechanism::RunChannelStep(const FMotionStep& Step, float
 	{
 		FMuseeChannel Point;
 		Point.Key = Step.Channel;
-		Point.Value = FMath::Lerp(Running->FromValue, Step.To, Share);
+		// A ramp that ends lands on its value exactly, as a limit switch reads a door fully open.
+		Point.Value = Share < 1.0f ? FMath::Lerp(Running->FromValue, Step.To, Share) : Step.To;
 		Signals->Publish(Point);
 	}
 	if (Share < 1.0f)
@@ -182,22 +178,22 @@ TOptional<float> UMotionMechanism::RunMoveStep(float Seconds)
 		Running->bStarted = true;
 		Running->Elapsed = 0.0f;
 		Running->FromPosition = DrivePosition;
-		Running->ToPosition = StatePosition(Step.Move);
+		Running->ToPosition = MechanismSpec.PositionOf(Step.Move).Get(DrivePosition);
+		Running->Curve = MechanismSpec.Drive.IsSet()
+			? MechanismSpec.Drive.Run(Running->FromPosition, Running->ToPosition, MechanismSpec.Travel)
+			: Musee::Motion::FSCurve();
 	}
-	const double Span = Running->ToPosition - Running->FromPosition;
-	const double Duration = FullTravelSeconds() * FMath::Abs(Span);
+	const double Duration = MoveSeconds();
 	if (Duration <= 0.0)
 	{
 		SetPosition(Running->ToPosition);
 		Moved.Broadcast(MechanismSpec.Key, Step.Move);
 		return Seconds;
 	}
-	const Musee::Motion::EProfile Profile = Musee::Motion::ParseProfile(MechanismSpec.Profile).Get(Musee::Motion::EProfile::Linear);
 	const double Before = Running->Elapsed;
 	const double Elapsed = FMath::Min(Duration, Before + Seconds);
-	const double Share = Elapsed / Duration;
-	const double Next = Running->FromPosition + Span * Musee::Motion::Covered(Profile, Share);
-	if (IsGuarded(Next))
+	const FMoveSample Next = SampleMove(Elapsed, Duration);
+	if (IsGuarded(Next.Position))
 	{
 		if (!bHeld)
 		{
@@ -213,16 +209,44 @@ TOptional<float> UMotionMechanism::RunMoveStep(float Seconds)
 	}
 	bHeld = false;
 	Running->Elapsed = static_cast<float>(Elapsed);
-	SetPosition(Next);
-	const double PositionPerSecond = Span / Duration * Musee::Motion::RelativeSpeed(Profile, Share);
-	if (Share < 1.0)
+	if (Elapsed < Duration)
 	{
-		PublishActuation(DrivenPointSpeed(PositionPerSecond));
+		SetPosition(Next.Position);
+		PublishActuation(DrivenPointSpeed(Next.Rate));
 		return {};
 	}
+	SetPosition(Running->ToPosition);
 	PublishActuation(0.0);
 	Moved.Broadcast(MechanismSpec.Key, Step.Move);
 	return static_cast<float>(Before + Seconds - Duration);
+}
+
+double UMotionMechanism::MoveSeconds() const
+{
+	if (MechanismSpec.Drive.IsSet())
+	{
+		return Running->Curve.Duration();
+	}
+	return FullTravelSeconds() * FMath::Abs(Running->ToPosition - Running->FromPosition);
+}
+
+UMotionMechanism::FMoveSample UMotionMechanism::SampleMove(double Seconds, double Duration) const
+{
+	const double Span = Running->ToPosition - Running->FromPosition;
+	FMoveSample Sample;
+	if (MechanismSpec.Drive.IsSet())
+	{
+		const Musee::Motion::FSCurve::FSample Run = Running->Curve.At(Seconds);
+		const double Direction = Span < 0.0 ? -1.0 : 1.0;
+		Sample.Position = Running->FromPosition + Direction * Run.Covered / MechanismSpec.Travel;
+		Sample.Rate = Direction * Run.Speed / MechanismSpec.Travel;
+		return Sample;
+	}
+	const Musee::Motion::EProfile Profile = Musee::Motion::ParseProfile(MechanismSpec.Profile).Get(Musee::Motion::EProfile::Linear);
+	const double Share = Seconds / Duration;
+	Sample.Position = Running->FromPosition + Span * Musee::Motion::Covered(Profile, Share);
+	Sample.Rate = Span / Duration * Musee::Motion::RelativeSpeed(Profile, Share);
+	return Sample;
 }
 
 void UMotionMechanism::Follow(float Seconds)
@@ -264,15 +288,15 @@ bool UMotionMechanism::IsGuarded(double NextPosition) const
 
 FTransform UMotionMechanism::PoseAt(double InPosition) const
 {
-	FTransform Pose = Home;
+	const double FromDrawn = double(MechanismSpec.Travel) * (InPosition - MechanismSpec.DrawnPosition());
+	FTransform Pose = Drawn;
 	if (MechanismSpec.Joint == Revolute)
 	{
-		const double Angle = FMath::DegreesToRadians(double(MechanismSpec.Travel) * InPosition);
-		Pose.SetRotation(FQuat(AxisDirection, Angle) * Home.GetRotation());
+		Pose.SetRotation(FQuat(AxisDirection, FMath::DegreesToRadians(FromDrawn)) * Drawn.GetRotation());
 	}
 	else
 	{
-		Pose.AddToTranslation(AxisDirection * Musee::ToEngine(Musee::Meters(double(MechanismSpec.Travel) * InPosition)));
+		Pose.AddToTranslation(AxisDirection * Musee::ToEngine(Musee::Meters(FromDrawn)));
 	}
 	return Pose;
 }
@@ -307,11 +331,6 @@ void UMotionMechanism::PublishActuation(double SpeedMetersPerSecond) const
 	Signals->Publish(Actuation);
 }
 
-double UMotionMechanism::StatePosition(FName InState) const
-{
-	return InState == Open ? 1.0 : 0.0;
-}
-
 double UMotionMechanism::FullTravelSeconds() const
 {
 	return FMath::Max(0.0, double(MechanismSpec.Time));
@@ -323,21 +342,6 @@ double UMotionMechanism::DrivenPointSpeed(double PositionPerSecond) const
 	return MechanismSpec.Joint == Revolute ? FMath::DegreesToRadians(Rate) * DrivenRadiusMeters : Rate;
 }
 
-FText UMotionMechanism::Verb(bool bOpening) const
-{
-	const FMotionUseText& Text = bOpening ? MechanismSpec.OpenUse : MechanismSpec.CloseUse;
-	if (!Text.Verb.Key.IsNone())
-	{
-		return Text.Verb.ToText();
-	}
-	const double Rise = FVector::DotProduct(AxisDirection, FVector::UpVector);
-	if (MechanismSpec.Joint == Prismatic && FMath::Abs(Rise) >= LiftAxisCosine)
-	{
-		return (Rise > 0.0) == bOpening ? NSLOCTEXT("Musee", "motion.raise", "Raise") : NSLOCTEXT("Musee", "motion.lower", "Lower");
-	}
-	return bOpening ? NSLOCTEXT("Musee", "motion.open", "Open") : NSLOCTEXT("Musee", "motion.close", "Close");
-}
-
 void UMotionMechanism::BeginPlay()
 {
 	Super::BeginPlay();
@@ -345,6 +349,7 @@ void UMotionMechanism::BeginPlay()
 	{
 		Registry->Register(MechanismSpec.Body, BodyComponent);
 	}
+	StandAtHome();
 }
 
 void UMotionMechanism::EndPlay(const EEndPlayReason::Type Reason)
