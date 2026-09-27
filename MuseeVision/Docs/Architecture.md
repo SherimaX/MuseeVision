@@ -767,9 +767,10 @@ room marks its own piece as the port's (FSitePort), as its sheet gives it:
   the joint lines only the rough opening in front of it, and lays its threshold the clear width there (OwnLiningMeters);
 - where the room's floor or landing is the threshold, the joint lays no second stone on that side, and the room stops it
   half the class's strip short of the mating plane, so the strip lies on the plane (bOwnThreshold). The strip is always
-  the joint's; it runs the clear width where a room's own reveal reaches the plane, the rough width where the lining does,
-  and where a clear-width strip has the joint's lining over part of it, the threshold runs on beside it under the
-  lining's feet.
+  the joint's, and always runs the class's clear width, between the finished jambs: they stand at the clear opening
+  whoever draws them (a room's own reveal, or the joint's lining, whose clear face is there), so no bronze runs under a
+  jamb's foot. Wherever the joint's lining stands over the strip's line, the threshold runs on beside the strip under the
+  lining's feet, from the clear jamb to the rough one.
 - a room's mouldings on a face the joint's surround stands on (a skirting, a dado rail) stop against the surround's side
   (Musee::Site::SurroundReachMeters). Musee.Studio.JointsClear checks that no joint shares space with its stages, and
   Musee.Studio.JointsClosed that each closes on them: every lining's back and every end of a strip or threshold stone

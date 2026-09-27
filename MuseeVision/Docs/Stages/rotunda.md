@@ -65,8 +65,9 @@ up +z. Class names follow the finished Nymphéas sheet: **width × crown height*
   (Site's; the drafts propose a = 0.050: rough widths 3.10 / 4.10, head radii 1.55 / 2.05 about the springing 4.50,
   rough sill z −0.05), straight through the drum from r 10.00 to 11.20, faces `rotunda.port.rough-opening`. Nothing
   past a port face. **Site's joint** builds the travertine threshold through the wall depth, the brushed-bronze strip
-  on the mating plane, the linings, the surrounds at the mating faces, the passage (the west one 2.20 m, to the
-  Salon's face at x −13.40) and any wedge masonry. The **imposts** (section, lateral into the opening × height from
+  on the mating plane across the clear width, the linings, the surround on the neighbour's face where the neighbour's
+  port doesn't mark its own (the Rotunda's own archivolts, §3.3, dress the drum's inner face, and its doors mark them),
+  the passage (the west one 2.20 m, to the Salon's face at x −13.40) and any wedge masonry. The **imposts** (section, lateral into the opening × height from
   the springing: (−0.01, −0.24) (0.02, −0.24) (0.05, −0.21) (0.05, 0) (−0.01, 0), z 4.26–4.50) belong to the lining,
   i.e. the class detail; if Site doesn't carry them tonight, the archivolts spring from the plain lining.
 - **The stair port.** At the port face r 7.60 the class opening; the arched reveal `rotunda.stair.port.reveal` runs in

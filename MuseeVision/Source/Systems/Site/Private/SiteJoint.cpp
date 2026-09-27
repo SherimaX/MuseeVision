@@ -118,10 +118,12 @@ namespace Musee::Site
 		 * The threshold through both walls and any passage, and the bronze strips set in it flush with the floors, on the
 		 * mating plane. A side whose floor is its own threshold gets no stone; where a stage finishes its own reveal, the
 		 * stone is the clear opening's width, and the rough opening's in front of it, where the joint's lining stands. A
-		 * stone between two cuts on one face (a strip's edge on a wall-less port's face) has no length and isn't laid. Where a
-		 * strip runs the clear width and the joint's lining stands over part of it (a stage's own reveal on one side of the
-		 * face, the joint's lining on the other), the threshold is carried beside the strip under the lining's feet, so the
-		 * lining stands on stone its whole length and the floor has no hole between the strip's end and the rough jamb.
+		 * stone between two cuts on one face (a strip's edge on a wall-less port's face) has no length and isn't laid. A
+		 * strip runs the clear width, between the finished jambs, which stand at the clear opening whoever draws them (a
+		 * stage's own reveal, or the joint's lining, whose clear face is there); so no bronze runs under a jamb's foot.
+		 * Wherever the joint's lining stands over a strip's line, the threshold is carried beside the strip under the
+		 * lining's feet, so the lining stands on stone its whole length and the floor has no hole between the strip's end
+		 * and the rough jamb.
 		 */
 		void Threshold(FJointDraft& Draft)
 		{
@@ -141,26 +143,19 @@ namespace Musee::Site
 			// The stretches of a clear-width strip that the joint's lining stands over, beside which the stone runs on.
 			TArray<TPair<FJointFace, FJointFace>> UnderLining;
 			int32 Strip = 0;
-			// A strip runs between the finished jambs at its face: the clear opening where a stage's own reveal reaches the
-			// face, the rough opening where the joint's lining stands on it.
-			const bool bTouching = Draft.Passage <= FaceToleranceMeters;
-			auto StripHalf = [&Draft, bTouching, Half, Rough](const FJointFace& Face)
-			{
-				const bool bOwnAtA = Draft.LiningA.SameAs(Draft.FaceA) && (bTouching || Face.SameAs(Draft.FaceA));
-				const bool bOwnAtB = Draft.LiningB.SameAs(Draft.FaceB) && (bTouching || Face.SameAs(Draft.FaceB));
-				return bOwnAtA || bOwnAtB ? Half : Rough;
-			};
+			// The joint draws a lining (Linings) where the class has an allowance and the two stages don't both finish their
+			// own openings to one face.
+			const bool bLined = Rough > Half && !Draft.LiningA.SameAs(Draft.LiningB);
 			for (const FJointFace& Face : Class.StripMeters > 0.0 ? StripFaces(Draft) : TArray<FJointFace>())
 			{
 				const auto [Near, Far] = StripEdges(Draft, Face);
-				const double Across = StripHalf(Face);
-				Draft.Add(FString::Printf(TEXT("strip.%d"), Strip++), Draft.Record.Strip, SlabBetween(Near, Far, -Across, Across, Draft.Record.StripDepthMeters),
+				Draft.Add(FString::Printf(TEXT("strip.%d"), Strip++), Draft.Record.Strip, SlabBetween(Near, Far, -Half, Half, Draft.Record.StripDepthMeters),
 					Musee::Collision::Walkable, FMuseeFrame(FVector(0.0, 0.0, -Draft.Record.StripDepthMeters)));
 				Cuts.Add(Near);
 				Cuts.Add(Far);
 				const FJointFace& From = Near.XAt(0.0) >= Draft.LiningA.XAt(0.0) ? Near : Draft.LiningA;
 				const FJointFace& To = Far.XAt(0.0) <= Draft.LiningB.XAt(0.0) ? Far : Draft.LiningB;
-				if (Across < Rough && !Draft.LiningA.SameAs(Draft.LiningB) && To.XAt(0.0) > From.XAt(0.0) + FaceToleranceMeters)
+				if (bLined && To.XAt(0.0) > From.XAt(0.0) + FaceToleranceMeters)
 				{
 					UnderLining.Add({From, To});
 				}

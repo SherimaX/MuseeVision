@@ -66,10 +66,11 @@ names are **width × crown**. Mated frames coincide and face opposite ways (`sal
 - **The wedges.** Between the port plane and the drum, 11.20 − √(11.20² − x²): 0 on the axis, 0.180 at the clear jambs
   (x ±2.00), 0.409 at x ±3.00, 0.594 at the porch's outer faces (±3.60), 0.611 at the copings' edge (±3.65). **Site's
   joint** builds: the travertine threshold from the drum's inner face (r 10.00) through the drum, the wedge and Albion's
-  0.10 lining to y −23.90; the brushed CuSn10 strip on the port plane across the clear width; the linings of both rough
-  openings; the surrounds; and the wedge masonry over **|x| ≤ 3.65, z −1.20 … 7.50** (the porch's outer faces, lead flat,
-  parapets and copings run into it: `Facade::VestibuleHalf` 3.65, `VestibuleTop` 7.5, `MuseePlan.h:528`). Albion builds
-  nothing past its port plane.
+  0.10 lining to y −23.90; the brushed CuSn10 strip on the port plane across the clear width, with the threshold
+  run on beside it under the lining's feet; the linings of both rough openings; the surround on the porch face of
+  Albion's lining (the Rotunda's own archivolt dresses the drum's inner face: `rotunda.south` marks it its own); and the
+  wedge masonry over **|x| ≤ 3.65, z −1.20 … 7.50** (the porch's outer faces, lead flat, parapets and copings run into
+  it: `Facade::VestibuleHalf` 3.65, `VestibuleTop` 7.5, `MuseePlan.h:528`). Albion builds nothing past its port plane.
 - **Albion builds** the rough opening only, through its 0.10 end lining: clear + the class allowance 0.050 (width 4.10,
   head r 2.05 about the springing 4.50, crown 6.55, rough sill −0.05), faces `albion.north.rough-opening`.
 - **Surround clearance (as Chenghuai's).** The joint's surround on the porch face of the lining (y −23.90) may be up to

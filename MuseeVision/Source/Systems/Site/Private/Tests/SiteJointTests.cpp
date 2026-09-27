@@ -55,6 +55,91 @@ namespace Musee::Site::Tests
 			return Joint.Drawings.FindByPredicate([&Name](const FFormDrawing& D) { return D.Name == FName(*Name); });
 		}
 
+		/**
+		 * The corners a drawn outline passes through (its start, its lines' ends and both ends of each arc, which a line
+		 * joins where it starts elsewhere), in the drawing's (A, B).
+		 */
+		TArray<FVector2D> Corners(const FFormProfile& Outline)
+		{
+			TArray<FVector2D> Out = {Outline.StartPoint()};
+			for (const FFormProfileStep& Step : Outline.Steps)
+			{
+				if (!Step.IsArc())
+				{
+					Out.Add(FVector2D(Step.Line[0], Step.Line[1]));
+					continue;
+				}
+				const FFormArc& Arc = Step.Arc;
+				const FVector2D Centre(Arc.CenterMeters[0], Arc.CenterMeters[1]);
+				const FVector2D Radii(Arc.RadiiMeters[0], Arc.RadiiMeters.Num() > 1 ? Arc.RadiiMeters[1] : Arc.RadiiMeters[0]);
+				for (const double Degrees : {Arc.FromDegrees, Arc.ToDegrees})
+				{
+					const double Angle = FMath::DegreesToRadians(Degrees);
+					Out.Add(Centre + Radii * FVector2D(FMath::Cos(Angle), FMath::Sin(Angle)));
+				}
+			}
+			return Out;
+		}
+
+		/** How far a joint's slab reaches across the opening (its outline's widest |y|), and how far along it (x), in the joint's frame. */
+		FVector2D Reach(const FSiteJoint& Joint, const FString& Name)
+		{
+			FVector2D Out(-TNumericLimits<double>::Max(), 0.0);
+			if (const FFormDrawing* Drawing = Find(Joint, Name))
+			{
+				for (const FVector2D& Corner : Corners(Drawing->Shape.Get<FFormExtrusion>().Outline))
+				{
+					Out = FVector2D(FMath::Max(Out.X, Corner.X), FMath::Max(Out.Y, FMath::Abs(Corner.Y)));
+				}
+			}
+			return Out;
+		}
+
+		/**
+		 * Every strip of a joint runs the clear width, between the finished jambs (the sheets' "across the clear width",
+		 * albion.md and chenghuai.md section 2), so no bronze lies under a jamb's foot; where the joint draws a lining, a
+		 * stone lies under each of its feet beside every strip, between the clear and the rough jamb.
+		 */
+		void TestStripsClearWidth(FAutomationTestBase& Test, const FSiteJoint& Joint, const FString& Prefix, const FSitePortClass& Class)
+		{
+			const double Half = 0.5 * Class.ClearWidthMeters;
+			const bool bLined = Joint.Drawings.ContainsByPredicate([](const FFormDrawing& D) { return D.Name.ToString().Contains(TEXT(".lining.jamb.")); });
+			int32 Strips = 0;
+			for (const FFormDrawing& Drawing : Joint.Drawings)
+			{
+				const FString Name = Drawing.Name.ToString();
+				if (Name.StartsWith(Prefix + TEXT("strip.")))
+				{
+					++Strips;
+					Test.TestEqual(*FString::Printf(TEXT("%s runs the clear width"), *Name), Reach(Joint, Name).Y, Half, 1e-9);
+				}
+			}
+			Test.TestTrue(*FString::Printf(TEXT("%s lays a strip"), *Prefix), Strips > 0);
+			if (!bLined)
+			{
+				return;
+			}
+			int32 Feet = 0;
+			for (const FFormDrawing& Drawing : Joint.Drawings)
+			{
+				const FFormExtrusion* Slab = Drawing.Name.ToString().Contains(TEXT(".threshold.")) ? Drawing.Shape.TryGet<FFormExtrusion>() : nullptr;
+				if (!Slab)
+				{
+					continue;
+				}
+				double Low = TNumericLimits<double>::Max();
+				double High = -TNumericLimits<double>::Max();
+				for (const FVector2D& Corner : Corners(Slab->Outline))
+				{
+					Low = FMath::Min(Low, Corner.Y);
+					High = FMath::Max(High, Corner.Y);
+				}
+				const bool bBeside = FMath::IsNearlyEqual(Low, Half, 1e-9) || FMath::IsNearlyEqual(High, -Half, 1e-9);
+				Feet += bBeside && FMath::IsNearlyEqual(High - Low, Class.AllowanceMeters, 1e-9) ? 1 : 0;
+			}
+			Test.TestEqual(*FString::Printf(TEXT("%s: a stone under each of the lining's feet beside each strip"), *Prefix), Feet, 2 * Strips);
+		}
+
 		/** Every class named in the ports tables of the design sheets (the third column of a row naming a port). */
 		TSet<FString> ClassesTheSheetsName()
 		{
@@ -181,7 +266,8 @@ namespace Musee::Site::Tests
 		FString Why;
 
 		// The Rotunda's south door on the drum (R 11.20, 1.20 deep, its own archivolt) and Albion's porch plane tangent to it
-		// (0.10 lining): the wedges, one strip on the port plane, the threshold either side of it, linings and Albion's surround.
+		// (0.10 lining): the wedges, one strip on the port plane across the clear width (albion.md section 2), the threshold
+		// either side of it and under the lining's feet beside it, linings and Albion's surround.
 		const FSitePort Rotunda = PortAt(TEXT("rotunda.south"), TEXT("doorway.4000x6500.arched"), FVector(0.0, 11.2, 0.0), FRotator(0.0, 90.0, 0.0), 1.2, 11.2, true);
 		const FSitePort Albion = PortAt(TEXT("albion.north"), TEXT("doorway.4000x6500.arched"), FVector(0.0, 11.2, 0.0), FRotator(0.0, -90.0, 0.0), 0.1, 0.0, false);
 		FSiteJoint Porch;
@@ -192,11 +278,14 @@ namespace Musee::Site::Tests
 		}
 		const FString Prefix = TEXT("joint.rotunda.south.");
 		const TSet<FString> Parts = PartsOf(Porch, Prefix);
-		for (const TCHAR* Part : {TEXT("strip.0"), TEXT("threshold.0"), TEXT("threshold.1"), TEXT("lining.jamb.north"), TEXT("lining.jamb.south"),
-			TEXT("lining.voussoir.00"), TEXT("masonry"), TEXT("surround.b")})
+		for (const TCHAR* Part : {TEXT("strip.0"), TEXT("threshold.0"), TEXT("threshold.1"), TEXT("threshold.2"), TEXT("threshold.3"),
+			TEXT("lining.jamb.north"), TEXT("lining.jamb.south"), TEXT("lining.voussoir.00"), TEXT("masonry"), TEXT("surround.b")})
 		{
 			TestTrue(*FString::Printf(TEXT("the porch's joint draws its %s"), Part), Parts.Contains(Part));
 		}
+		TestFalse(TEXT("and no other stone"), Parts.Contains(TEXT("threshold.4")));
+		TestEqual(TEXT("the south door's strip is 4.00 long, as the north door's"), 2.0 * Reach(Porch, Prefix + TEXT("strip.0")).Y, 4.0, 1e-9);
+		TestStripsClearWidth(*this, Porch, Prefix, South.GetValue());
 		TestFalse(TEXT("the Rotunda's own archivolt stands for its surround"), Parts.Contains(TEXT("surround.a")));
 		if (const FFormDrawing* Masonry = Find(Porch, Prefix + TEXT("masonry")))
 		{
@@ -230,8 +319,9 @@ namespace Musee::Site::Tests
 		TestTrue(TEXT("the east door's joint is drawn"), Joint(East, Hall, 0.0, West.GetValue(), Record.GetValue(), Wrapped, Why));
 		const TSet<FString> WrappedParts = PartsOf(Wrapped, TEXT("joint.rotunda.east."));
 		TestFalse(TEXT("faces on one cylinder need no masonry"), WrappedParts.Contains(TEXT("masonry")));
-		TestTrue(TEXT("one strip, the threshold either side"), WrappedParts.Contains(TEXT("strip.0")) && !WrappedParts.Contains(TEXT("strip.1"))
-			&& WrappedParts.Contains(TEXT("threshold.1")));
+		TestTrue(TEXT("one strip, the threshold either side and under the lining's feet beside it"), WrappedParts.Contains(TEXT("strip.0"))
+			&& !WrappedParts.Contains(TEXT("strip.1")) && WrappedParts.Contains(TEXT("threshold.3")) && !WrappedParts.Contains(TEXT("threshold.4")));
+		TestStripsClearWidth(*this, Wrapped, TEXT("joint.rotunda.east."), West.GetValue());
 
 		// The Rotunda's north door and Chenghuai's open porch, which ends on the drum's face with no wall of its own
 		// (chenghuai.md section 2): no wedge and no masonry, and the strip lies in the drum, its far edge on the mating arc
@@ -259,6 +349,7 @@ namespace Musee::Site::Tests
 			}
 			TestEqual(TEXT("the strip stays in the drum, its far edge on the mating arc"), Widest, 11.2, 1e-9);
 		}
+		TestStripsClearWidth(*this, Open, TEXT("joint.rotunda.north."), South.GetValue());
 
 		// The Rotunda's west door and the Salon's flat end wall 2.20 beyond it: a passage, a strip at each face, the
 		// threshold through, and the passage's masonry within the collar.
@@ -267,44 +358,15 @@ namespace Musee::Site::Tests
 		FSiteJoint Passage;
 		TestTrue(TEXT("the west passage is drawn"), Joint(RotundaWest, Salon, 2.2, West.GetValue(), Record.GetValue(), Passage, Why));
 		const TSet<FString> PassageParts = PartsOf(Passage, TEXT("joint.rotunda.west."));
-		TestTrue(TEXT("two strips and three threshold stones, and the masonry"), PassageParts.Contains(TEXT("strip.1")) && PassageParts.Contains(TEXT("threshold.2"))
+		TestTrue(TEXT("two strips, three threshold stones and two beside each strip under the lining's feet, and the masonry"),
+			PassageParts.Contains(TEXT("strip.1")) && PassageParts.Contains(TEXT("threshold.6")) && !PassageParts.Contains(TEXT("threshold.7"))
 			&& PassageParts.Contains(TEXT("masonry")));
+		TestStripsClearWidth(*this, Passage, TEXT("joint.rotunda.west."), West.GetValue());
 		TestFalse(TEXT("both stages draw their own surrounds"), PassageParts.Contains(TEXT("surround.a")) || PassageParts.Contains(TEXT("surround.b")));
 
 		FSiteJoint Apart;
 		TestFalse(TEXT("ports that don't meet across the passage are refused"), Joint(RotundaWest, Salon, 1.0, West.GetValue(), Record.GetValue(), Apart, Why));
 		return true;
-	}
-
-	namespace
-	{
-		/** The corners a drawn outline passes through (its start and its lines' ends), in the drawing's (A, B). */
-		TArray<FVector2D> Corners(const FFormProfile& Outline)
-		{
-			TArray<FVector2D> Out = {Outline.StartPoint()};
-			for (const FFormProfileStep& Step : Outline.Steps)
-			{
-				if (!Step.IsArc())
-				{
-					Out.Add(FVector2D(Step.Line[0], Step.Line[1]));
-				}
-			}
-			return Out;
-		}
-
-		/** How far a joint's slab reaches across the opening (its outline's widest |y|), and how far along it (x), in the joint's frame. */
-		FVector2D Reach(const FSiteJoint& Joint, const FString& Name)
-		{
-			FVector2D Out(-TNumericLimits<double>::Max(), 0.0);
-			if (const FFormDrawing* Drawing = Find(Joint, Name))
-			{
-				for (const FVector2D& Corner : Corners(Drawing->Shape.Get<FFormExtrusion>().Outline))
-				{
-					Out = FVector2D(FMath::Max(Out.X, Corner.X), FMath::Max(Out.Y, FMath::Abs(Corner.Y)));
-				}
-			}
-			return Out;
-		}
 	}
 
 	IMPLEMENT_SIMPLE_AUTOMATION_TEST(FSiteJointOwnershipTest, "Musee.Site.JointOwnership", JointFlags)
@@ -332,6 +394,7 @@ namespace Musee::Site::Tests
 		TestEqual(TEXT("the threshold before the step is the rough width"), Reach(Stepped, Prefix + TEXT("threshold.2")).Y, 1.55, 1e-9);
 		TestEqual(TEXT("and behind it the clear width, to the wall's inner face"), Reach(Stepped, Prefix + TEXT("threshold.3")).Y, 1.5, 1e-9);
 		TestEqual(TEXT("which it reaches"), Reach(Stepped, Prefix + TEXT("threshold.3")).X, 2.8, 1e-9);
+		TestStripsClearWidth(*this, Stepped, Prefix, West.GetValue());
 
 		// The oval's passage (its own reveal, floor and architrave) against the Salon's far wall, cut to the rough opening
 		// with its own architrave: the joint lines the Salon's wall and lays its threshold there, and its strip on the mating
@@ -349,6 +412,7 @@ namespace Musee::Site::Tests
 			&& !Parts.Contains(TEXT("threshold.3")) && Parts.Contains(TEXT("lining.jamb.south")) && Parts.Contains(TEXT("lining.voussoir.00")));
 		TestFalse(TEXT("and no surround: both stages draw their own"), Parts.Contains(TEXT("surround.a")) || Parts.Contains(TEXT("surround.b")));
 		TestEqual(TEXT("the strip runs the clear width"), Reach(Lined, OvalPrefix + TEXT("strip.0")).Y, 1.5, 1e-9);
+		TestStripsClearWidth(*this, Lined, OvalPrefix, Oval.GetValue());
 		TestEqual(TEXT("the stone the rough width, under the lining"), Reach(Lined, OvalPrefix + TEXT("threshold.0")).Y, 1.55, 1e-9);
 		TestEqual(TEXT("through the Salon's wall"), Reach(Lined, OvalPrefix + TEXT("threshold.0")).X, 0.6, 1e-9);
 		// The lining stands on the mating plane, over the Salon's half of the strip, whose ends are the clear opening's: the

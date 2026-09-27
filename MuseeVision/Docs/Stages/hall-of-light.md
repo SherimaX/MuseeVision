@@ -88,7 +88,9 @@ are **width × crown** (the Rotunda's convention). Mated frames coincide and fac
   head r 1.55 about the springing 4.50 (crown 6.05); east 4.10 wide, head 4.55; both sills −0.05; faces
   `hall-of-light.port.rough-opening`. **Site's joint** builds the travertine thresholds through both wall depths (west:
   drum 1.20 + lining 0.05; east: base 0.80 + lining 0.05), the brushed CuSn10 strip on each mating cylinder across the
-  threshold, the linings of the rough openings and the surrounds. No passage masonry: the faces touch. The hall builds
+  clear width (the threshold run on beside it under the linings' feet), the linings of the rough openings and the
+  surrounds: at the east door on both faces, at the west door on the hall's only (the Rotunda's own archivolt dresses the
+  drum's inner face: `rotunda.east` marks it its own). No passage masonry: the faces touch. The hall builds
   nothing past R 11.20 (west) or R 14.80 (east).
 - **Surround clearance (as Chenghuai's and Albion's).** The joint's surround on the hall's face of each lining may reach
   **0.35** beyond the clear opening. The hall keeps the west lining's inner face clear for **\|y\| < 1.85, z < 6.35**,
