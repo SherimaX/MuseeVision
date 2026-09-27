@@ -120,16 +120,18 @@ namespace Musee::ArtMaking::Tests
 		return Pieces.FindByPredicate([Name](const FFormMadePiece& P) { return P.Name == Name; });
 	}
 
-	/** A stage actor with a root and a mesh component per named piece, tagged as Studio tags them. */
+	/** A stage actor with a root and a mesh component per named piece, tagged and static as Studio makes them. */
 	AActor* StageActor(UWorld& World, const TArray<FString>& Pieces)
 	{
 		AActor* Actor = World.SpawnActor<AActor>();
 		USceneComponent* Root = NewObject<USceneComponent>(Actor, TEXT("Root"));
+		Root->SetMobility(EComponentMobility::Static);
 		Actor->SetRootComponent(Root);
 		Root->RegisterComponent();
 		for (const FString& Piece : Pieces)
 		{
 			UStaticMeshComponent* Mesh = NewObject<UStaticMeshComponent>(Actor, FName(Piece.Replace(TEXT("."), TEXT("_"))));
+			Mesh->SetMobility(EComponentMobility::Static);
 			Mesh->SetupAttachment(Root);
 			Mesh->ComponentTags.Add(FName(FString::Printf(TEXT("musee.piece:%s"), *Piece)));
 			Mesh->RegisterComponent();

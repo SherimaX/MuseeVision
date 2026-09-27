@@ -50,6 +50,8 @@ namespace Musee::ArtMaking
 			// Named apart from the pieces' components, whose names may spell the work's the same way.
 			const FString Name = bSplit ? FString::Printf(TEXT("Label_%s_%d"), *Work.Id, Entry.Canvas) : FString::Printf(TEXT("Label_%s"), *Work.Id);
 			UArtWorkComponent* Carrier = NewObject<UArtWorkComponent>(&Actor, MakeUniqueObjectName(&Actor, UArtWorkComponent::StaticClass(), FName(Name)));
+			// It moves as its pieces do (static on the stage, movable on a moving body), so they can hang from it.
+			Carrier->SetMobility(Pieces[0]->Mobility);
 			Carrier->SetupAttachment(Pieces[0]->GetAttachParent());
 			Carrier->Describe(Work.Id, Entry.Care, Work.Caption());
 			Actor.AddInstanceComponent(Carrier);
