@@ -118,14 +118,28 @@ namespace Musee::Site
 		 * The threshold through both walls and any passage, and the bronze strips set in it flush with the floors, on the
 		 * mating plane. A side whose floor is its own threshold gets no stone; where a stage finishes its own reveal, the
 		 * stone is the clear opening's width, and the rough opening's in front of it, where the joint's lining stands. A
-		 * stone between two cuts on one face (a strip's edge on a wall-less port's face) has no length and isn't laid.
+		 * stone between two cuts on one face (a strip's edge on a wall-less port's face) has no length and isn't laid. Where a
+		 * strip runs the clear width and the joint's lining stands over part of it (a stage's own reveal on one side of the
+		 * face, the joint's lining on the other), the threshold is carried beside the strip under the lining's feet, so the
+		 * lining stands on stone its whole length and the floor has no hole between the strip's end and the rough jamb.
 		 */
 		void Threshold(FJointDraft& Draft)
 		{
 			const FSitePortClass& Class = Draft.Class;
 			const double Rough = Draft.Rough();
 			const double Half = Draft.Half();
+			int32 Laid = 0;
+			auto Lay = [&Draft, &Laid](const FJointFace& From, const FJointFace& To, double Low, double High)
+			{
+				if (!From.SameAs(To))
+				{
+					Draft.Add(FString::Printf(TEXT("threshold.%d"), Laid++), Draft.Record.Threshold, SlabBetween(From, To, Low, High,
+						Draft.Record.ThresholdMeters), Musee::Collision::Walkable, FMuseeFrame(FVector(0.0, 0.0, -Draft.Record.ThresholdMeters)));
+				}
+			};
 			TArray<FJointFace> Cuts = {Draft.InnerA};
+			// The stretches of a clear-width strip that the joint's lining stands over, beside which the stone runs on.
+			TArray<TPair<FJointFace, FJointFace>> UnderLining;
 			int32 Strip = 0;
 			// A strip runs between the finished jambs at its face: the clear opening where a stage's own reveal reaches the
 			// face, the rough opening where the joint's lining stands on it.
@@ -144,17 +158,14 @@ namespace Musee::Site
 					Musee::Collision::Walkable, FMuseeFrame(FVector(0.0, 0.0, -Draft.Record.StripDepthMeters)));
 				Cuts.Add(Near);
 				Cuts.Add(Far);
+				const FJointFace& From = Near.XAt(0.0) >= Draft.LiningA.XAt(0.0) ? Near : Draft.LiningA;
+				const FJointFace& To = Far.XAt(0.0) <= Draft.LiningB.XAt(0.0) ? Far : Draft.LiningB;
+				if (Across < Rough && !Draft.LiningA.SameAs(Draft.LiningB) && To.XAt(0.0) > From.XAt(0.0) + FaceToleranceMeters)
+				{
+					UnderLining.Add({From, To});
+				}
 			}
 			Cuts.Add(Draft.InnerB);
-			int32 Laid = 0;
-			auto Lay = [&Draft, &Laid](const FJointFace& From, const FJointFace& To, double Across)
-			{
-				if (!From.SameAs(To))
-				{
-					Draft.Add(FString::Printf(TEXT("threshold.%d"), Laid++), Draft.Record.Threshold, SlabBetween(From, To, -Across, Across,
-						Draft.Record.ThresholdMeters), Musee::Collision::Walkable, FMuseeFrame(FVector(0.0, 0.0, -Draft.Record.ThresholdMeters)));
-				}
-			};
 			const int32 Stones = Cuts.Num() / 2;
 			for (int32 Stone = 0; Stone < Stones; ++Stone)
 			{
@@ -170,30 +181,35 @@ namespace Musee::Site
 				{
 					if (Within(Draft.LiningA, From, To))
 					{
-						Lay(From, Draft.LiningA, Half);
-						Lay(Draft.LiningA, To, Rough);
+						Lay(From, Draft.LiningA, -Half, Half);
+						Lay(Draft.LiningA, To, -Rough, Rough);
 					}
 					else
 					{
-						Lay(From, To, Half);
+						Lay(From, To, -Half, Half);
 					}
 				}
 				else if (bSideB && !Draft.LiningB.SameAs(Draft.InnerB))
 				{
 					if (Within(Draft.LiningB, From, To))
 					{
-						Lay(From, Draft.LiningB, Rough);
-						Lay(Draft.LiningB, To, Half);
+						Lay(From, Draft.LiningB, -Rough, Rough);
+						Lay(Draft.LiningB, To, -Half, Half);
 					}
 					else
 					{
-						Lay(From, To, Half);
+						Lay(From, To, -Half, Half);
 					}
 				}
 				else
 				{
-					Lay(From, To, Rough);
+					Lay(From, To, -Rough, Rough);
 				}
+			}
+			for (const TPair<FJointFace, FJointFace>& Stretch : UnderLining)
+			{
+				Lay(Stretch.Key, Stretch.Value, -Rough, -Half);
+				Lay(Stretch.Key, Stretch.Value, Half, Rough);
 			}
 		}
 

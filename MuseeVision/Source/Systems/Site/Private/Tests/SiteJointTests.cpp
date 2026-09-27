@@ -235,7 +235,8 @@ namespace Musee::Site::Tests
 
 		// The Rotunda's north door and Chenghuai's open porch, which ends on the drum's face with no wall of its own
 		// (chenghuai.md section 2): no wedge and no masonry, and the strip lies in the drum, its far edge on the mating arc
-		// where the porch's paving ends, with the threshold behind it.
+		// where the porch's paving ends, with the threshold behind it. The strip runs the clear width, for no lining reaches
+		// the porch's side, and the drum's lining stands over it: the threshold runs on beside it under the lining's feet.
 		const FSitePort North = PortAt(TEXT("rotunda.north"), TEXT("doorway.4000x6500.arched"), FVector(0.0, -11.2, 0.0), FRotator(0.0, -90.0, 0.0), 1.2, 11.2, true);
 		const FSitePort OpenPorch = PortAt(TEXT("chenghuai.south"), TEXT("doorway.4000x6500.arched"), FVector(0.0, -11.2, 0.0), FRotator(0.0, 90.0, 0.0), 0.0, -11.2, false);
 		FSiteJoint Open;
@@ -245,8 +246,9 @@ namespace Musee::Site::Tests
 		}
 		const TSet<FString> OpenParts = PartsOf(Open, TEXT("joint.rotunda.north."));
 		TestFalse(TEXT("a porch on the drum's face needs no masonry"), OpenParts.Contains(TEXT("masonry")));
-		TestTrue(TEXT("one strip, and the threshold behind it only"), OpenParts.Contains(TEXT("strip.0")) && OpenParts.Contains(TEXT("threshold.0"))
-			&& !OpenParts.Contains(TEXT("threshold.1")));
+		TestTrue(TEXT("one strip, the threshold behind it, and a stone under each of the lining's feet beside the strip"),
+			OpenParts.Contains(TEXT("strip.0")) && OpenParts.Contains(TEXT("threshold.0")) && OpenParts.Contains(TEXT("threshold.1"))
+			&& OpenParts.Contains(TEXT("threshold.2")) && !OpenParts.Contains(TEXT("threshold.3")));
 		if (const FFormDrawing* Strip = Find(Open, TEXT("joint.rotunda.north.strip.0")))
 		{
 			// Both its edges are arcs about the drum's axis, the far one the drum's face itself (R 11.20), none beyond it.
@@ -342,12 +344,33 @@ namespace Musee::Site::Tests
 		TestTrue(TEXT("the oval's joint is drawn"), Joint(Passage, FarWall, 0.0, Oval.GetValue(), Record.GetValue(), Lined, Why));
 		const FString OvalPrefix = TEXT("joint.nympheas.east.");
 		const TSet<FString> Parts = PartsOf(Lined, OvalPrefix);
-		TestTrue(TEXT("a strip, one stone on the Salon's side, the Salon's lining"), Parts.Contains(TEXT("strip.0")) && Parts.Contains(TEXT("threshold.0"))
-			&& !Parts.Contains(TEXT("threshold.1")) && Parts.Contains(TEXT("lining.jamb.south")) && Parts.Contains(TEXT("lining.voussoir.00")));
+		TestTrue(TEXT("a strip, a stone through the Salon's wall and one under each of its lining's feet beside the strip, the Salon's lining"),
+			Parts.Contains(TEXT("strip.0")) && Parts.Contains(TEXT("threshold.0")) && Parts.Contains(TEXT("threshold.1")) && Parts.Contains(TEXT("threshold.2"))
+			&& !Parts.Contains(TEXT("threshold.3")) && Parts.Contains(TEXT("lining.jamb.south")) && Parts.Contains(TEXT("lining.voussoir.00")));
 		TestFalse(TEXT("and no surround: both stages draw their own"), Parts.Contains(TEXT("surround.a")) || Parts.Contains(TEXT("surround.b")));
 		TestEqual(TEXT("the strip runs the clear width"), Reach(Lined, OvalPrefix + TEXT("strip.0")).Y, 1.5, 1e-9);
 		TestEqual(TEXT("the stone the rough width, under the lining"), Reach(Lined, OvalPrefix + TEXT("threshold.0")).Y, 1.55, 1e-9);
 		TestEqual(TEXT("through the Salon's wall"), Reach(Lined, OvalPrefix + TEXT("threshold.0")).X, 0.6, 1e-9);
+		// The lining stands on the mating plane, over the Salon's half of the strip, whose ends are the clear opening's: the
+		// stone runs on under its feet there, from the plane to the strip's far edge, between the clear and rough jambs.
+		for (const TCHAR* Foot : {TEXT("threshold.1"), TEXT("threshold.2")})
+		{
+			const FFormDrawing* Stone = Find(Lined, OvalPrefix + Foot);
+			const FFormExtrusion* Slab = Stone ? Stone->Shape.TryGet<FFormExtrusion>() : nullptr;
+			if (TestNotNull(TEXT("a stone under a foot of the lining"), Slab))
+			{
+				FVector2D Low(TNumericLimits<double>::Max()), High(-TNumericLimits<double>::Max());
+				for (const FVector2D& Corner : Corners(Slab->Outline))
+				{
+					Low = FVector2D::Min(Low, Corner);
+					High = FVector2D::Max(High, Corner);
+				}
+				TestEqual(TEXT("from the mating plane"), Low.X, 0.0, 1e-9);
+				TestEqual(TEXT("to the strip's far edge"), High.X, 0.5 * Oval.GetValue().StripMeters, 1e-9);
+				TestEqual(TEXT("between the clear and the rough jamb"), High.Y - Low.Y, Oval.GetValue().AllowanceMeters, 1e-9);
+				TestEqual(TEXT("under the lining's clear face"), FMath::Min(FMath::Abs(Low.Y), FMath::Abs(High.Y)), 1.5, 1e-9);
+			}
+		}
 
 		// The foot of the oval's stair at the Reserve's door: both finish their own openings and lay their own sills, so the
 		// joint lays only the strip on the plane where they touch.

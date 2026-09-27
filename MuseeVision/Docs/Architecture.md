@@ -760,15 +760,20 @@ The case of measuring instruments inside the running museum (editor play, Develo
 **Who draws a port's parts.** The joint draws a port's threshold, strip, linings (their voussoirs) and surround, unless the
 room marks its own piece as the port's (FSitePort), as its sheet gives it:
 - where the room draws the architrave or archivolt its sheet gives it (the oval's P6, the Salon's P5, the Rotunda's
-  archivolts and stair-side dressings), the joint draws no surround on that face (bOwnSurround);
+  archivolts; the Rotunda's stair-side dressings, which wait for polish), the joint draws no surround on that face
+  (bOwnSurround);
 - where the joint draws the lining, the room cuts its wall to the class's rough opening; where the room finishes its own
-  reveal at the clear opening (the oval's passage, the Salon's own door behind its step), the joint lines only the rough
-  opening in front of it, and lays its threshold the clear width there (OwnLiningMeters);
+  reveal at the clear opening (the oval's passage, the Salon's own door behind its step, the Rotunda's stair reveal),
+  the joint lines only the rough opening in front of it, and lays its threshold the clear width there (OwnLiningMeters);
 - where the room's floor or landing is the threshold, the joint lays no second stone on that side, and the room stops it
   half the class's strip short of the mating plane, so the strip lies on the plane (bOwnThreshold). The strip is always
-  the joint's; it runs the clear width where a room's own reveal reaches the plane, the rough width where the lining does.
+  the joint's; it runs the clear width where a room's own reveal reaches the plane, the rough width where the lining does,
+  and where a clear-width strip has the joint's lining over part of it, the threshold runs on beside it under the
+  lining's feet.
 - a room's mouldings on a face the joint's surround stands on (a skirting, a dado rail) stop against the surround's side
-  (Musee::Site::SurroundReachMeters). Musee.Studio.JointsClear checks that no joint shares space with its stages.
+  (Musee::Site::SurroundReachMeters). Musee.Studio.JointsClear checks that no joint shares space with its stages, and
+  Musee.Studio.JointsClosed that each closes on them: every lining's back and every end of a strip or threshold stone
+  across the opening has a stage's solid or the joint's right behind it (no slot beside a lining, no hole in the floor).
 
 Form.Sealed runs over each stage and over the assembled museum in every composed configuration, and every finding names its drawer.
 
