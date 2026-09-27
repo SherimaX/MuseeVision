@@ -1,0 +1,89 @@
+{
+  "schema": "musee.matter.shading.substance/1",
+  "key": "crushed-travertine",
+  "name": "The museum's own travertine offcuts crushed to a 0/6 sand and bound as a stabilised walk",
+  "family": "accent",
+  "record": "Substances/travertine.json",
+  "master": "white",
+  "accentOf": "stone",
+  "dielectric": {
+    "diffuseAlbedo": {
+      "value": [
+        69.78,
+        1.83,
+        7.31
+      ],
+      "space": "CIELAB (D65, 2 deg)",
+      "unit": "CIELAB",
+      "grade": "derived",
+      "source": "Shading/Substances/travertine.json: dielectric.diffuseAlbedo (Substances/travertine.json, optics.measuredColour[0])",
+      "derivation": "the stone's own colour: crushing shows fresh fractures of the same calcite, and the binder keeps the sand's colour (Workings/rolled.stabilised.json: look)",
+      "note": "A crushed face of a light stone reads a little paler than its sawn face; no measured colour of crushed travertine was read."
+    },
+    "refractiveIndex": {
+      "value": 1.6003,
+      "unit": "1",
+      "grade": "derived",
+      "source": "Shading/Substances/travertine.json: dielectric.refractiveIndex (calcite, from the record's F0)",
+      "derivation": "the grains are the stone's calcite"
+    },
+    "porosity": {
+      "value": 0.3,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Workings/rolled.stabilised.json: process ('sets into a weak, still-porous crust') and Shading/Substances/crushed-limestone.json (0.35 for loose angular stones)",
+      "note": "No void ratio of a stabilised walk was read: a first value a little below the loose aggregate's, the binder filling some of the voids."
+    },
+    "wettingDepth": {
+      "value": 5.0,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Shading/Substances/crushed-limestone.json (the soils' and aggregates' first wetting depth)",
+      "note": "The depth whose pores govern the face's look when wet: the stabilised crust darkens when it rains."
+    }
+  },
+  "structure": {
+    "grain": {
+      "value": 1.0,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Workings/rolled.stabilised.json: the 0/6,3 grading (Bronzo Perasso)",
+      "note": "The finest structure the face shows from a walk: the finer grains of the grading, the dust between them unresolved."
+    },
+    "bed": {
+      "value": 6.3,
+      "unit": "mm",
+      "grade": "record",
+      "source": "Workings/rolled.stabilised.json: the 0/6,3 grading (Bronzo Perasso: 'Sable naturel pour sols stabilises 0/6,3')",
+      "note": "The coarsest structure the face shows: its largest grain."
+    },
+    "bedAspect": {
+      "value": 1.0,
+      "unit": "1",
+      "grade": "derived",
+      "source": "a rolled sand",
+      "derivation": "unbedded: crushing destroys the stone's bands"
+    },
+    "hurst": {
+      "value": 0.7,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Candela et al. 2012, Journal of Geophysical Research 117, B08409 (fault surfaces, 0.6 to 0.8; cited in Stone.ush)",
+      "note": "The middle of the range measured on rock surfaces, as the crushed limestone's."
+    },
+    "toneSpread": {
+      "value": 0.1,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Shading/Substances/travertine.json: structure.toneSpread (the stone's own spread)",
+      "note": "The grains carry the stone's own variation of tone."
+    },
+    "roughnessSpread": {
+      "value": 0.15,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Shading/Substances/crushed-limestone.json (the aggregates' first spread)",
+      "note": "A first half-range of ln(roughness) across one face."
+    }
+  }
+}

@@ -105,6 +105,21 @@
           "working": "filled.polished",
           "history": "new",
           "note": "Stages: atrium.base, hall-of-light.lining, hall-of-light.plinth"
+        },
+        {
+          "working": "sawn",
+          "history": "weathered",
+          "note": "Stages: grounds.kerb, grounds.strip.edge"
+        },
+        {
+          "working": "bush-hammered",
+          "history": "weathered",
+          "note": "Stages: grounds.parvis.paving"
+        },
+        {
+          "working": "crushed.stabilise",
+          "history": "weathered",
+          "note": "Stages: grounds.gravel, grounds.gravel.canal-walks (the museum's own offcuts, crushed and stabilised)"
         }
       ]
     },
@@ -439,6 +454,11 @@
           "working": "honed",
           "history": "weathered",
           "note": "Stages: nympheas.pond.bed"
+        },
+        {
+          "working": "honed",
+          "history": "submerged",
+          "note": "Stages: grounds.basin.bed"
         }
       ]
     },
@@ -2575,6 +2595,11 @@
           "working": "cased-opal",
           "history": "new",
           "note": "Stages: albion.electrolier.globe"
+        },
+        {
+          "working": "cased-opal",
+          "history": "weathered",
+          "note": "Stages: grounds.lamp.globe"
         }
       ]
     },
