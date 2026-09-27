@@ -104,6 +104,17 @@ struct FArtHandscroll
 	UPROPERTY()
 	TArray<FArtHandscrollWindow> Windows;
 
+	/**
+	 * The mount's parts before the work, at its right end, as the museum's record measures them along the scroll: the
+	 * separator (前隔水) of damask next to the work, and the frontispiece (引首) beyond it, on its own paper. Nought where
+	 * the record gives none. What of them the stage doesn't lay open past the work's band and lead is wound on the stave.
+	 */
+	UPROPERTY(meta = (Units = "Meters"))
+	double SeparatorMeters = 0.0;
+
+	UPROPERTY(meta = (Units = "Meters"))
+	double FrontispieceMeters = 0.0;
+
 	/** How the order and the windows were established, from the photographs and the scroll's composition. */
 	UPROPERTY(meta = (MuseeRequired))
 	FString Evidence;

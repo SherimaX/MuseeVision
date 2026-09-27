@@ -93,7 +93,9 @@ Every object is named `<word>.<id>[.<index>]` (`canvas`, `glass`, `paper`, `plat
     painting's two ends, and beyond its beginning the lead (`mount.lead`) and the wrapper as far as it lies unrolled
     (`mount.wrapper`);
   - at the right, the stave (`<name>.stave`, a half-round) with the rest of the wrapper wound round it
-    (`<name>.wrapper`), as long as `wrapperTurns` takes round the scroll rolled whole;
+    (`<name>.wrapper`), as long as `wrapperTurns` takes round the scroll rolled whole, and over it what of the mount's
+    separator and frontispiece (`separatorMeters`, `frontispieceMeters` in `Data/Art/Handscrolls.json`, the museum's
+    record) the band and lead don't lay open; a wrapper laid unrolled over a front still wound is a finding;
   - at the left, the unshown length wound on the roller to `mount.roll_radius` (`<name>.roll`), the roller
     (`<name>.roller`) and its knobs (`<name>.knob.foot`, `.head`, in `mount.knob`'s surface) past the scroll's edges.
   `Data/Art/Handscroll.json` gives the fittings every handscroll shares and their wood; the silk's thickness is

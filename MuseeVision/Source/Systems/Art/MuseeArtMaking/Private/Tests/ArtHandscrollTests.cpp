@@ -280,6 +280,21 @@ bool FArtHandscrollTest::RunTest(const FString& Parameters)
 		const FBox WrapperBox = StageBox(*Wrapper);
 		TestTrue(TEXT("The wrapper wound on the stave at the right, where the lead ends"), WrapperBox.Min.X < 7.835 && WrapperBox.Max.X > 7.835
 			&& WrapperBox.Max.X - WrapperBox.Min.X > 2.0 * 0.006 && Stave->Material == TEXT("accent.chinese-fir"));
+		// The mount's front at the right, from the museum's record: the separator 10.2 cm and the frontispiece 136.3 cm, of which
+		// only the band and lead lie open; the rest is wound on the stave over the wrapper, each turn the silk's thickness.
+		const FArtHandscroll* Record = Algo::FindBy(Context.Handscrolls, FString(TEXT("chinese-huaisu-autobiography")), &FArtHandscroll::Work);
+		const TValueOrError<FArtScrollFittings, FString> Silk = Musee::ReadRecord<FArtScrollFittings>(FArtScrollFittings::Record);
+		if (TestTrue(TEXT("The Autobiography's record gives its separator and frontispiece, as the museum measures them"), Record && Silk.HasValue()
+			&& FMath::IsNearlyEqual(Record->SeparatorMeters, 0.102, Near) && FMath::IsNearlyEqual(Record->FrontispieceMeters, 1.363, Near)))
+		{
+			const double T = Silk.GetValue().MountMeters;
+			const double FrontRolled = 0.102 + 1.363 - 0.025 - 0.06;
+			const double Rolled = FMath::Sqrt(FMath::Square(0.025) + T * (7.835 - 0.175 + FrontRolled) / UE_DOUBLE_PI);
+			const double Wound = Context.Handscroll->WrapperTurns * UE_DOUBLE_TWO_PI * Rolled;
+			const double Radius = FMath::Sqrt(FMath::Square(Context.Handscroll->StaveRadiusMeters) + T * (Wound + FrontRolled) / UE_DOUBLE_PI);
+			TestTrue(TEXT("The roll at the stave holds the wrapper and, over it, the frontispiece's unshown 1.38 m"),
+				FMath::IsNearlyEqual(WrapperBox.Max.Z, 1.0 + T + 2.0 * Radius, Sag) && FMath::IsNearlyEqual(WrapperBox.Max.X - WrapperBox.Min.X, 2.0 * Radius, Sag));
+		}
 	}
 	// The Qingming's four photographs, -4 its beginning at the right, -1 its end at the left.
 	const FFormMadePiece* First = FindPiece(Pieces, TEXT("silk.chinese-qingming.section.4"));

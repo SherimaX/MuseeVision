@@ -68,12 +68,13 @@ namespace Musee::ArtMaking
 		}
 
 		/**
-		 * The length of silk wound on the stave: the wrapper, as long as its turns take round the scroll rolled whole (its
-		 * unshown length on the roller and the flat run over it, each turn the silk's thickness), less what lies unrolled.
+		 * The length of the wrapper wound on the stave: as long as its turns take round the scroll rolled whole (its unshown
+		 * length on the roller, the flat run over it and what of its front lies wound at the stave, each turn the silk's
+		 * thickness), less what lies unrolled.
 		 */
-		double WoundWrapper(const FArtHangEntry& Entry, const FHandscrollLay& Lay, const FArtHandscrollFittings& Fit, double SilkMeters)
+		double WoundWrapper(const FArtHangEntry& Entry, const FHandscrollLay& Lay, const FArtHandscrollFittings& Fit, double FrontRolled, double SilkMeters)
 		{
-			const double Rolled = FMath::Sqrt(FMath::Square(Entry.Mount.Roll_Radius) + SilkMeters * (Lay.Right - Lay.Left) / UE_DOUBLE_PI);
+			const double Rolled = FMath::Sqrt(FMath::Square(Entry.Mount.Roll_Radius) + SilkMeters * (Lay.Right - Lay.Left + FrontRolled) / UE_DOUBLE_PI);
 			return Fit.WrapperTurns * UE_DOUBLE_TWO_PI * Rolled - Entry.Mount.Wrapper;
 		}
 
@@ -119,7 +120,17 @@ namespace Musee::ArtMaking
 		const FArtHandscrollFittings& Fit = Fittings.GetValue();
 		const FScrollWall Wall(Making.Stage.FindAnchor(Entry.Anchor, WallAnchorKind)->Frame);
 		const FHandscrollLay Lay(Entry, T);
-		const double Wound = WoundWrapper(Entry, Lay, Fit, T);
+		// The separator and the frontispiece beyond the work: what of them the stage doesn't lay open past the work's band
+		// and lead lies wound on the stave, inside the wrapper, which is unrolled before them.
+		const double FrontRolled = FMath::Max(0.0, Canvas.FrontMeters - Entry.Mount.Band - Entry.Mount.Lead);
+		if (FrontRolled > 0.0 && Entry.Mount.Wrapper > 0.0)
+		{
+			OutFindings.Add(ArtFinding(Making.Stage, FString::Printf(TEXT("Work %s: its wrapper lies %.3f m unrolled, but %.3f m of its separator and "
+				"frontispiece (Data/%s) lie wound at the stave, which a scroll unrolls before its wrapper: lay them open, a lead of %.3f m or more."),
+				*Entry.Work, Entry.Mount.Wrapper, FrontRolled, FArtHandscroll::Record, Canvas.FrontMeters - Entry.Mount.Band)));
+			return;
+		}
+		const double Wound = WoundWrapper(Entry, Lay, Fit, FrontRolled, T);
 		if (Wound <= 0.0)
 		{
 			OutFindings.Add(ArtFinding(Making.Stage, FString::Printf(TEXT("Work %s: its wrapper lies %.3f m unrolled, more than the %.3f m its %.2f turns "
@@ -143,8 +154,8 @@ namespace Musee::ArtMaking
 			Fit.KnobLengthMeters, Fit.KnobRadiusMeters));
 		Drawings.Add(Rod(PartName(Entry, false, TEXT("knob.head")), Mount.Knob, Axis + Wall.Up * Lay.Height, Wall.Up, Wall.Along, Fit.KnobLengthMeters,
 			Fit.KnobRadiusMeters));
-		// At the right, the stave with the rest of its wrapper wound round it.
-		const double Wrapped = WoundRadius(Fit.StaveRadiusMeters, Wound, T);
+		// At the right, the stave with the rest of its wrapper wound round it, and over that the frontispiece's unshown rest.
+		const double Wrapped = WoundRadius(Fit.StaveRadiusMeters, Wound + FrontRolled, T);
 		Drawings.Add(Roll(PartName(Entry, false, TEXT("wrapper")), Entry.Frame, Wall, Lay, Lay.Right, Wrapped, StaveSection(Fit.StaveRadiusMeters)));
 		FFormExtrusion Stave;
 		Stave.Outline = StaveSection(Fit.StaveRadiusMeters);

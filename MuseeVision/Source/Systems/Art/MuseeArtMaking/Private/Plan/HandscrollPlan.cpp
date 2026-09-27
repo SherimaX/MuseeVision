@@ -170,10 +170,15 @@ namespace Musee::ArtMaking
 		{
 			Images.Add(ImageOf(Photograph, Record, OutFaults));
 		}
+		if (Record && (Record->SeparatorMeters < 0.0 || Record->FrontispieceMeters < 0.0))
+		{
+			OutFaults.Add(FString::Printf(TEXT("Data/%s gives its separator or frontispiece a length below nought"), FArtHandscroll::Record));
+		}
 		if (!OutFaults.IsEmpty())
 		{
 			return;
 		}
+		OutCanvas.FrontMeters = Record ? Record->SeparatorMeters + Record->FrontispieceMeters : 0.0;
 		const FScrollLayout Layout = LayScroll(Images, Entry.SizeMeters());
 		if (Layout.Panels.IsEmpty())
 		{
