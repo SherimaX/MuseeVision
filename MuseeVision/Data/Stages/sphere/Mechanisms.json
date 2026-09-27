@@ -1,0 +1,545 @@
+{
+  "stage": "sphere",
+  "mechanisms": [
+    {
+      "key": "sphere.mast",
+      "joint": "prismatic",
+      "body": "sphere.mast.head",
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "travel": 9.09,
+      "time": 7.1,
+      "profile": "linear",
+      "follows": {
+        "channel": "atrium.car.height",
+        "in": [
+          0.793409,
+          1.0
+        ],
+        "out": [
+          0.0,
+          9.09
+        ]
+      },
+      "guard": "body-in-travel",
+      "clearance": 0.01,
+      "note": "The Sphere's mast (as built, ElanElevator.cpp:682-692): a gilt column r 0.200 from its foot plane z 11.150 (the flange's underside, the mouth) to the car's under-floor seat (car floor datum - 0.160). The head's frame is the column's top on the axis at 11.150, drawn at zero length; it rises 0 -> 9.090 as the car's floor goes 11.310 -> 20.400 (atrium.car.height 0.793409 -> 1, ruled with the Atrium). Below 11.310 its length is 0 and it has no geometry. The column between the foot plane and the head is Motion's variable-length piece, never modelled at one length. Its footing: the foot ring (sphere.mast.foot) held on the four dogs (sphere.mast.dogs.1-4) from car floor 11.310 up; it leaves 0 only with the dogs at 1. Above car floor 11.410 (its base-ring guides off the rails) the car rides it alone."
+    },
+    {
+      "key": "sphere.mast.foot",
+      "joint": "prismatic",
+      "body": "sphere.mast.foot",
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "travel": 34.91,
+      "time": 44.0,
+      "profile": "linear",
+      "follows": {
+        "channel": "atrium.car.height",
+        "in": [
+          0.0,
+          0.793409
+        ],
+        "out": [
+          -34.91,
+          0.0
+        ]
+      },
+      "guard": "body-in-travel",
+      "clearance": 0.002,
+      "note": "The mast's foot ring (gilt CuSn10 annulus r 0.205-0.400, 0.058 deep; frame (0, 0, 11.150), the ring drawn at 11.152-11.210, i.e. its underside 2 mm over the dogs' top): below the car's stop 'mast' it rides the car, latched round the car's under-floor seat (car frame -0.158 ... -0.100; the car's lowest point stays the seat's -0.160), so it follows the car's height 1:1 (44.000 m per unit); from 'mast' up it rests on the four dogs and stays at 11.150 (the channel's clamp). The column's base is in its bore."
+    },
+    {
+      "key": "sphere.mast.dogs.1",
+      "joint": "prismatic",
+      "body": "sphere.mast.dogs.1",
+      "axis": [
+        -0.707,
+        0.707,
+        0.0
+      ],
+      "travel": 2.26,
+      "time": 2.0,
+      "profile": "ease-in-out",
+      "follows": {
+        "channel": "sphere.mast.dogs",
+        "in": [
+          0.0,
+          1.0
+        ],
+        "out": [
+          0.0,
+          2.26
+        ]
+      },
+      "guard": "body-in-travel",
+      "clearance": 0.002,
+      "note": "Bearing dog 1 of 4 at bearing 45 deg: a solid CuSn10 bar 0.160 wide x 0.300 deep x 3.060 long, top face z 11.150 (the mast's foot plane), bottom 10.850. Body frame at its tip's top face, retracted: r 2.560 (10 mm behind the throat's bore), (1.81, -1.81, 11.15); slides radially in 2.260 to its tip at r 0.300, 100 mm under the foot ring (r 0.205-0.400), keeping 0.800 in its housing. Housed in a box through the throat wall and out under the flange, r 2.550-5.650, z 10.830-11.150. Driven by the car's sequences through sphere.mast.dogs (0 retracted, 1 extended); extends only with the car floor above 11.300; retracts only with the mast at 0 and the car at stop 'mast'."
+    },
+    {
+      "key": "sphere.mast.dogs.2",
+      "joint": "prismatic",
+      "body": "sphere.mast.dogs.2",
+      "axis": [
+        -0.707,
+        -0.707,
+        0.0
+      ],
+      "travel": 2.26,
+      "time": 2.0,
+      "profile": "ease-in-out",
+      "follows": {
+        "channel": "sphere.mast.dogs",
+        "in": [
+          0.0,
+          1.0
+        ],
+        "out": [
+          0.0,
+          2.26
+        ]
+      },
+      "guard": "body-in-travel",
+      "clearance": 0.002,
+      "note": "Bearing dog 2 of 4 at bearing 135 deg: a solid CuSn10 bar 0.160 wide x 0.300 deep x 3.060 long, top face z 11.150 (the mast's foot plane), bottom 10.850. Body frame at its tip's top face, retracted: r 2.560 (10 mm behind the throat's bore), (1.81, 1.81, 11.15); slides radially in 2.260 to its tip at r 0.300, 100 mm under the foot ring (r 0.205-0.400), keeping 0.800 in its housing. Housed in a box through the throat wall and out under the flange, r 2.550-5.650, z 10.830-11.150. Driven by the car's sequences through sphere.mast.dogs (0 retracted, 1 extended); extends only with the car floor above 11.300; retracts only with the mast at 0 and the car at stop 'mast'."
+    },
+    {
+      "key": "sphere.mast.dogs.3",
+      "joint": "prismatic",
+      "body": "sphere.mast.dogs.3",
+      "axis": [
+        0.707,
+        -0.707,
+        0.0
+      ],
+      "travel": 2.26,
+      "time": 2.0,
+      "profile": "ease-in-out",
+      "follows": {
+        "channel": "sphere.mast.dogs",
+        "in": [
+          0.0,
+          1.0
+        ],
+        "out": [
+          0.0,
+          2.26
+        ]
+      },
+      "guard": "body-in-travel",
+      "clearance": 0.002,
+      "note": "Bearing dog 3 of 4 at bearing 225 deg: a solid CuSn10 bar 0.160 wide x 0.300 deep x 3.060 long, top face z 11.150 (the mast's foot plane), bottom 10.850. Body frame at its tip's top face, retracted: r 2.560 (10 mm behind the throat's bore), (-1.81, 1.81, 11.15); slides radially in 2.260 to its tip at r 0.300, 100 mm under the foot ring (r 0.205-0.400), keeping 0.800 in its housing. Housed in a box through the throat wall and out under the flange, r 2.550-5.650, z 10.830-11.150. Driven by the car's sequences through sphere.mast.dogs (0 retracted, 1 extended); extends only with the car floor above 11.300; retracts only with the mast at 0 and the car at stop 'mast'."
+    },
+    {
+      "key": "sphere.mast.dogs.4",
+      "joint": "prismatic",
+      "body": "sphere.mast.dogs.4",
+      "axis": [
+        0.707,
+        0.707,
+        0.0
+      ],
+      "travel": 2.26,
+      "time": 2.0,
+      "profile": "ease-in-out",
+      "follows": {
+        "channel": "sphere.mast.dogs",
+        "in": [
+          0.0,
+          1.0
+        ],
+        "out": [
+          0.0,
+          2.26
+        ]
+      },
+      "guard": "body-in-travel",
+      "clearance": 0.002,
+      "note": "Bearing dog 4 of 4 at bearing 315 deg: a solid CuSn10 bar 0.160 wide x 0.300 deep x 3.060 long, top face z 11.150 (the mast's foot plane), bottom 10.850. Body frame at its tip's top face, retracted: r 2.560 (10 mm behind the throat's bore), (-1.81, -1.81, 11.15); slides radially in 2.260 to its tip at r 0.300, 100 mm under the foot ring (r 0.205-0.400), keeping 0.800 in its housing. Housed in a box through the throat wall and out under the flange, r 2.550-5.650, z 10.830-11.150. Driven by the car's sequences through sphere.mast.dogs (0 retracted, 1 extended); extends only with the car floor above 11.300; retracts only with the mast at 0 and the car at stop 'mast'."
+    },
+    {
+      "key": "sphere.neck.iris.blade.1",
+      "joint": "revolute",
+      "body": "sphere.neck.iris.blade.1",
+      "axis": [
+        0,
+        0,
+        -1
+      ],
+      "travel": 52.0,
+      "time": 4.0,
+      "profile": "ease-in-out",
+      "follows": {
+        "channel": "sphere.neck.closure",
+        "in": [
+          0.0,
+          1.0
+        ],
+        "out": [
+          0.0,
+          52.0
+        ]
+      },
+      "guard": "body-in-travel",
+      "clearance": 0.002,
+      "note": "Neck iris blade 1 of 7 (class iris.4600, as the Atrium's collar iris): body frame on its pin at r 3.745, plan angle 0.0000 deg (from +x towards +y), (3.745, 0.000, 11.396), its top face; 2 mm thick; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. Eased (s = 3o^2 - 2o^3) over 4.0 s. Housed open in the flange's pocket (r 2.460-4.100, z 11.369-11.397); in travel it reaches r 4.010."
+    },
+    {
+      "key": "sphere.neck.iris.blade.2",
+      "joint": "revolute",
+      "body": "sphere.neck.iris.blade.2",
+      "axis": [
+        0,
+        0,
+        -1
+      ],
+      "travel": 52.0,
+      "time": 4.0,
+      "profile": "ease-in-out",
+      "follows": {
+        "channel": "sphere.neck.closure",
+        "in": [
+          0.0,
+          1.0
+        ],
+        "out": [
+          0.0,
+          52.0
+        ]
+      },
+      "guard": "body-in-travel",
+      "clearance": 0.002,
+      "note": "Neck iris blade 2 of 7 (class iris.4600, as the Atrium's collar iris): body frame on its pin at r 3.745, plan angle 51.4286 deg (from +x towards +y), (2.335, 2.928, 11.392), its top face; 2 mm thick; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. Eased (s = 3o^2 - 2o^3) over 4.0 s. Housed open in the flange's pocket (r 2.460-4.100, z 11.369-11.397); in travel it reaches r 4.010."
+    },
+    {
+      "key": "sphere.neck.iris.blade.3",
+      "joint": "revolute",
+      "body": "sphere.neck.iris.blade.3",
+      "axis": [
+        0,
+        0,
+        -1
+      ],
+      "travel": 52.0,
+      "time": 4.0,
+      "profile": "ease-in-out",
+      "follows": {
+        "channel": "sphere.neck.closure",
+        "in": [
+          0.0,
+          1.0
+        ],
+        "out": [
+          0.0,
+          52.0
+        ]
+      },
+      "guard": "body-in-travel",
+      "clearance": 0.002,
+      "note": "Neck iris blade 3 of 7 (class iris.4600, as the Atrium's collar iris): body frame on its pin at r 3.745, plan angle 102.8571 deg (from +x towards +y), (-0.833, 3.651, 11.388), its top face; 2 mm thick; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. Eased (s = 3o^2 - 2o^3) over 4.0 s. Housed open in the flange's pocket (r 2.460-4.100, z 11.369-11.397); in travel it reaches r 4.010."
+    },
+    {
+      "key": "sphere.neck.iris.blade.4",
+      "joint": "revolute",
+      "body": "sphere.neck.iris.blade.4",
+      "axis": [
+        0,
+        0,
+        -1
+      ],
+      "travel": 52.0,
+      "time": 4.0,
+      "profile": "ease-in-out",
+      "follows": {
+        "channel": "sphere.neck.closure",
+        "in": [
+          0.0,
+          1.0
+        ],
+        "out": [
+          0.0,
+          52.0
+        ]
+      },
+      "guard": "body-in-travel",
+      "clearance": 0.002,
+      "note": "Neck iris blade 4 of 7 (class iris.4600, as the Atrium's collar iris): body frame on its pin at r 3.745, plan angle 154.2857 deg (from +x towards +y), (-3.374, 1.625, 11.384), its top face; 2 mm thick; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. Eased (s = 3o^2 - 2o^3) over 4.0 s. Housed open in the flange's pocket (r 2.460-4.100, z 11.369-11.397); in travel it reaches r 4.010."
+    },
+    {
+      "key": "sphere.neck.iris.blade.5",
+      "joint": "revolute",
+      "body": "sphere.neck.iris.blade.5",
+      "axis": [
+        0,
+        0,
+        -1
+      ],
+      "travel": 52.0,
+      "time": 4.0,
+      "profile": "ease-in-out",
+      "follows": {
+        "channel": "sphere.neck.closure",
+        "in": [
+          0.0,
+          1.0
+        ],
+        "out": [
+          0.0,
+          52.0
+        ]
+      },
+      "guard": "body-in-travel",
+      "clearance": 0.002,
+      "note": "Neck iris blade 5 of 7 (class iris.4600, as the Atrium's collar iris): body frame on its pin at r 3.745, plan angle 205.7143 deg (from +x towards +y), (-3.374, -1.625, 11.380), its top face; 2 mm thick; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. Eased (s = 3o^2 - 2o^3) over 4.0 s. Housed open in the flange's pocket (r 2.460-4.100, z 11.369-11.397); in travel it reaches r 4.010."
+    },
+    {
+      "key": "sphere.neck.iris.blade.6",
+      "joint": "revolute",
+      "body": "sphere.neck.iris.blade.6",
+      "axis": [
+        0,
+        0,
+        -1
+      ],
+      "travel": 52.0,
+      "time": 4.0,
+      "profile": "ease-in-out",
+      "follows": {
+        "channel": "sphere.neck.closure",
+        "in": [
+          0.0,
+          1.0
+        ],
+        "out": [
+          0.0,
+          52.0
+        ]
+      },
+      "guard": "body-in-travel",
+      "clearance": 0.002,
+      "note": "Neck iris blade 6 of 7 (class iris.4600, as the Atrium's collar iris): body frame on its pin at r 3.745, plan angle 257.1429 deg (from +x towards +y), (-0.833, -3.651, 11.376), its top face; 2 mm thick; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. Eased (s = 3o^2 - 2o^3) over 4.0 s. Housed open in the flange's pocket (r 2.460-4.100, z 11.369-11.397); in travel it reaches r 4.010."
+    },
+    {
+      "key": "sphere.neck.iris.blade.7",
+      "joint": "revolute",
+      "body": "sphere.neck.iris.blade.7",
+      "axis": [
+        0,
+        0,
+        -1
+      ],
+      "travel": 52.0,
+      "time": 4.0,
+      "profile": "ease-in-out",
+      "follows": {
+        "channel": "sphere.neck.closure",
+        "in": [
+          0.0,
+          1.0
+        ],
+        "out": [
+          0.0,
+          52.0
+        ]
+      },
+      "guard": "body-in-travel",
+      "clearance": 0.002,
+      "note": "Neck iris blade 7 of 7 (class iris.4600, as the Atrium's collar iris): body frame on its pin at r 3.745, plan angle 308.5714 deg (from +x towards +y), (2.335, -2.928, 11.372), its top face; 2 mm thick; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. Eased (s = 3o^2 - 2o^3) over 4.0 s. Housed open in the flange's pocket (r 2.460-4.100, z 11.369-11.397); in travel it reaches r 4.010."
+    },
+    {
+      "key": "sphere.platform.iris.blade.1",
+      "joint": "revolute",
+      "body": "sphere.platform.iris.blade.1",
+      "axis": [
+        0,
+        0,
+        -1
+      ],
+      "travel": 52.0,
+      "time": 4.0,
+      "profile": "ease-in-out",
+      "follows": {
+        "channel": "sphere.platform.closure",
+        "in": [
+          0.0,
+          1.0
+        ],
+        "out": [
+          0.0,
+          52.0
+        ]
+      },
+      "guard": "body-in-travel",
+      "clearance": 0.002,
+      "note": "Platform iris blade 1 of 7 (class iris.4600, as the Atrium's collar iris): body frame on its pin at r 3.745, plan angle 0.0000 deg (from +x towards +y), (3.745, 0.000, 20.396), its top face; 2 mm thick; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. Eased (s = 3o^2 - 2o^3) over 4.0 s. Housed open in the platform's pocket (r 2.460-4.100, z 20.369-20.397) under the bronze seat ring; in travel it reaches r 4.010."
+    },
+    {
+      "key": "sphere.platform.iris.blade.2",
+      "joint": "revolute",
+      "body": "sphere.platform.iris.blade.2",
+      "axis": [
+        0,
+        0,
+        -1
+      ],
+      "travel": 52.0,
+      "time": 4.0,
+      "profile": "ease-in-out",
+      "follows": {
+        "channel": "sphere.platform.closure",
+        "in": [
+          0.0,
+          1.0
+        ],
+        "out": [
+          0.0,
+          52.0
+        ]
+      },
+      "guard": "body-in-travel",
+      "clearance": 0.002,
+      "note": "Platform iris blade 2 of 7 (class iris.4600, as the Atrium's collar iris): body frame on its pin at r 3.745, plan angle 51.4286 deg (from +x towards +y), (2.335, 2.928, 20.392), its top face; 2 mm thick; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. Eased (s = 3o^2 - 2o^3) over 4.0 s. Housed open in the platform's pocket (r 2.460-4.100, z 20.369-20.397) under the bronze seat ring; in travel it reaches r 4.010."
+    },
+    {
+      "key": "sphere.platform.iris.blade.3",
+      "joint": "revolute",
+      "body": "sphere.platform.iris.blade.3",
+      "axis": [
+        0,
+        0,
+        -1
+      ],
+      "travel": 52.0,
+      "time": 4.0,
+      "profile": "ease-in-out",
+      "follows": {
+        "channel": "sphere.platform.closure",
+        "in": [
+          0.0,
+          1.0
+        ],
+        "out": [
+          0.0,
+          52.0
+        ]
+      },
+      "guard": "body-in-travel",
+      "clearance": 0.002,
+      "note": "Platform iris blade 3 of 7 (class iris.4600, as the Atrium's collar iris): body frame on its pin at r 3.745, plan angle 102.8571 deg (from +x towards +y), (-0.833, 3.651, 20.388), its top face; 2 mm thick; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. Eased (s = 3o^2 - 2o^3) over 4.0 s. Housed open in the platform's pocket (r 2.460-4.100, z 20.369-20.397) under the bronze seat ring; in travel it reaches r 4.010."
+    },
+    {
+      "key": "sphere.platform.iris.blade.4",
+      "joint": "revolute",
+      "body": "sphere.platform.iris.blade.4",
+      "axis": [
+        0,
+        0,
+        -1
+      ],
+      "travel": 52.0,
+      "time": 4.0,
+      "profile": "ease-in-out",
+      "follows": {
+        "channel": "sphere.platform.closure",
+        "in": [
+          0.0,
+          1.0
+        ],
+        "out": [
+          0.0,
+          52.0
+        ]
+      },
+      "guard": "body-in-travel",
+      "clearance": 0.002,
+      "note": "Platform iris blade 4 of 7 (class iris.4600, as the Atrium's collar iris): body frame on its pin at r 3.745, plan angle 154.2857 deg (from +x towards +y), (-3.374, 1.625, 20.384), its top face; 2 mm thick; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. Eased (s = 3o^2 - 2o^3) over 4.0 s. Housed open in the platform's pocket (r 2.460-4.100, z 20.369-20.397) under the bronze seat ring; in travel it reaches r 4.010."
+    },
+    {
+      "key": "sphere.platform.iris.blade.5",
+      "joint": "revolute",
+      "body": "sphere.platform.iris.blade.5",
+      "axis": [
+        0,
+        0,
+        -1
+      ],
+      "travel": 52.0,
+      "time": 4.0,
+      "profile": "ease-in-out",
+      "follows": {
+        "channel": "sphere.platform.closure",
+        "in": [
+          0.0,
+          1.0
+        ],
+        "out": [
+          0.0,
+          52.0
+        ]
+      },
+      "guard": "body-in-travel",
+      "clearance": 0.002,
+      "note": "Platform iris blade 5 of 7 (class iris.4600, as the Atrium's collar iris): body frame on its pin at r 3.745, plan angle 205.7143 deg (from +x towards +y), (-3.374, -1.625, 20.380), its top face; 2 mm thick; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. Eased (s = 3o^2 - 2o^3) over 4.0 s. Housed open in the platform's pocket (r 2.460-4.100, z 20.369-20.397) under the bronze seat ring; in travel it reaches r 4.010."
+    },
+    {
+      "key": "sphere.platform.iris.blade.6",
+      "joint": "revolute",
+      "body": "sphere.platform.iris.blade.6",
+      "axis": [
+        0,
+        0,
+        -1
+      ],
+      "travel": 52.0,
+      "time": 4.0,
+      "profile": "ease-in-out",
+      "follows": {
+        "channel": "sphere.platform.closure",
+        "in": [
+          0.0,
+          1.0
+        ],
+        "out": [
+          0.0,
+          52.0
+        ]
+      },
+      "guard": "body-in-travel",
+      "clearance": 0.002,
+      "note": "Platform iris blade 6 of 7 (class iris.4600, as the Atrium's collar iris): body frame on its pin at r 3.745, plan angle 257.1429 deg (from +x towards +y), (-0.833, -3.651, 20.376), its top face; 2 mm thick; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. Eased (s = 3o^2 - 2o^3) over 4.0 s. Housed open in the platform's pocket (r 2.460-4.100, z 20.369-20.397) under the bronze seat ring; in travel it reaches r 4.010."
+    },
+    {
+      "key": "sphere.platform.iris.blade.7",
+      "joint": "revolute",
+      "body": "sphere.platform.iris.blade.7",
+      "axis": [
+        0,
+        0,
+        -1
+      ],
+      "travel": 52.0,
+      "time": 4.0,
+      "profile": "ease-in-out",
+      "follows": {
+        "channel": "sphere.platform.closure",
+        "in": [
+          0.0,
+          1.0
+        ],
+        "out": [
+          0.0,
+          52.0
+        ]
+      },
+      "guard": "body-in-travel",
+      "clearance": 0.002,
+      "note": "Platform iris blade 7 of 7 (class iris.4600, as the Atrium's collar iris): body frame on its pin at r 3.745, plan angle 308.5714 deg (from +x towards +y), (2.335, -2.928, 20.372), its top face; 2 mm thick; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. Eased (s = 3o^2 - 2o^3) over 4.0 s. Housed open in the platform's pocket (r 2.460-4.100, z 20.369-20.397) under the bronze seat ring; in travel it reaches r 4.010."
+    }
+  ]
+}

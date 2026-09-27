@@ -1,0 +1,152 @@
+{
+  "stage": "cube",
+  "finishes": [
+    {
+      "surface": "cube.box",
+      "material": "accent.concrete",
+      "working": "cast-in-situ.sealed",
+      "history": "new",
+      "note": "The concrete box, 1.000 thick all round (walls, base, roof pierced r 2.750): hidden structure, never seen (Story: the Cube's box)."
+    },
+    {
+      "surface": "cube.panels",
+      "material": "glass.low-iron",
+      "working": "lenslet-array.black",
+      "history": "new",
+      "note": "The six faces of light-field panel modules (0.700 pitch, 0.698 faces, 2 mm seams), Light's image luminaire: low-iron glass with a lenslet array over a black mask (Story: panel faces). Light draws the module housings from its record; this is their face."
+    },
+    {
+      "surface": "cube.shaft.glass",
+      "material": "glass.low-iron",
+      "working": "laminated",
+      "history": "new",
+      "note": "The shaft's glass tube r 2.450-2.510, 60 mm laminated low-iron, 16 curved panes in four tiers (Story: shaft glass, laminated). No daylight reaches it: no UV interlayer needed."
+    },
+    {
+      "surface": "cube.shaft.gilt",
+      "material": "bronze.cusn10",
+      "working": "gilt.gold-leaf.oil",
+      "history": "new",
+      "note": "The tier frames (r 2.410-2.450), the joint strips on the diagonals and the sleeve's joint line: oil gilt on CuSn10, clean (Story: joint lines, tier rings). Their upward faces take dust: the palette's 'dusted' is not a history yet (sheet 13)."
+    },
+    {
+      "surface": "cube.soffit",
+      "material": "bronze.cusn10",
+      "working": "gilt.gold-leaf.oil",
+      "history": "new",
+      "note": "The soffit ring in the ceiling (r 2.460-4.120, 30 mm, 4 mm drip) with its two beads, and the rail tails' brackets under it: oil gilt on CuSn10, clean (Story: soffit ring). The only gilt the black room shows besides the iris and the mast."
+    },
+    {
+      "surface": "cube.sleeve",
+      "material": "bronze.cusn10",
+      "working": "patinated.dark",
+      "history": "new",
+      "note": "The sleeve r 2.450-2.750 through the void and the box's roof, two courses: CuSn10 patinated dark (Story: the one room where the future is black, because a light-field room must not reflect)."
+    },
+    {
+      "surface": "cube.housing",
+      "material": "bronze.cusn10",
+      "working": "patinated.dark",
+      "history": "new",
+      "note": "The iris housing (inner wall, roof, outer wall) and the soffit ring's hangers: CuSn10 patinated dark (Story: sleeve, iris housing, cavity plates)."
+    },
+    {
+      "surface": "cube.shaft.plate",
+      "material": "bronze.cusn10",
+      "working": "patinated.dark",
+      "history": "new",
+      "note": "The cavity's top and bottom plates and the three tier webs through the glass's tier joints (the glass stands on them; the graze lines hang under them): CuSn10 patinated dark, seen only through the glass."
+    },
+    {
+      "surface": "cube.rail.bracket",
+      "material": "bronze.cusn10",
+      "working": "patinated.dark",
+      "history": "new",
+      "note": "The guide rails' brackets on the tier webs and on the sleeve: CuSn10 patinated dark (as built dark bronze)."
+    },
+    {
+      "surface": "cube.rail",
+      "material": "steel.hard-chrome",
+      "working": "ground.hard-chromed",
+      "history": "new",
+      "note": "The two guide rails and their tails below the iris (T-section, a rack on each back): machined steel, ground and hard-chromed, as the Atrium's and the Sphere's rails (ruled key)."
+    },
+    {
+      "surface": "cube.up.iris.top",
+      "material": "white.pearl-steel",
+      "working": "gilt.gold-leaf.oil",
+      "history": "new",
+      "note": "The ceiling iris's blades (class iris.4600, 2 mm pearl steel as the other two iris.4600 closures), their upper faces seen from the shaft: oil gilt over the pearl lacquer (as built gilt; Story: gilt 'dusted on upward faces', a history the palette lacks)."
+    },
+    {
+      "surface": "cube.up.iris.under",
+      "material": "white.pearl-steel",
+      "working": "gilt.gold-leaf.oil",
+      "history": "new",
+      "note": "The blades' undersides and edges, seen from the room round the mast head: oil gilt over the pearl lacquer, clean (as built gilt)."
+    },
+    {
+      "surface": "cube.up.iris.line",
+      "material": "bronze.cusn10",
+      "working": "patinated.dark",
+      "history": "new",
+      "note": "The hairline inlay along each blade's long edges on its upper face (7 mm, 0.4 mm proud): dark-patinated CuSn10, so the shut iris reads as a spiral from above (as built)."
+    },
+    {
+      "surface": "cube.up.blind-iris",
+      "material": "white.pearl-steel",
+      "working": "pearl.satin",
+      "history": "new",
+      "note": "Site's blind on the plane z -0.500 while cube.up is unmated (the stand): the class closure shut, blades facing up (as the Atrium's atrium.down.blind-iris)."
+    },
+    {
+      "surface": "cube.ground.crushed-stone",
+      "material": "accent.site-geology",
+      "working": "excavated.crushed-stone",
+      "history": "new",
+      "note": "Hardcore under the Atrium's slab, -0.510 to -0.720 (mean): angular crushed limestone, compacted, dry. The cut face is consolidated in place, as a soil monolith is; the layer is the working (the palette's one key for the ground; records per layer are sheet 13)."
+    },
+    {
+      "surface": "cube.ground.topsoil",
+      "material": "accent.site-geology",
+      "working": "excavated.topsoil.damp",
+      "history": "new",
+      "note": "Topsoil, -0.720 to -1.020 (mean): dark, crumbly, a little damp. The cut face is consolidated in place, as a soil monolith is; the layer is the working (the palette's one key for the ground; records per layer are sheet 13)."
+    },
+    {
+      "surface": "cube.ground.subsoil",
+      "material": "accent.site-geology",
+      "working": "excavated.subsoil.damp",
+      "history": "new",
+      "note": "Subsoil, -1.020 to -1.500 (mean): paler, crumbly, damp. The cut face is consolidated in place, as a soil monolith is; the layer is the working (the palette's one key for the ground; records per layer are sheet 13)."
+    },
+    {
+      "surface": "cube.ground.clay-with-flints",
+      "material": "accent.site-geology",
+      "working": "excavated.clay-with-flints.spade-cut",
+      "history": "new",
+      "note": "Clay-with-flints, -1.500 to -4.000 (mean, the solution pipe to -4.750): orange-brown clay, spade-cut, angular flints in it. The cut face is consolidated in place, as a soil monolith is; the layer is the working (the palette's one key for the ground; records per layer are sheet 13)."
+    },
+    {
+      "surface": "cube.ground.chalk",
+      "material": "accent.site-geology",
+      "working": "excavated.chalk.dry",
+      "history": "new",
+      "note": "Upper Chalk, -4.000 to -5.790: white calcite, blocky, bedding partings every 0.37 (Story: the museum stands on its own mineral). The cut face is consolidated in place, as a soil monolith is; the layer is the working (the palette's one key for the ground; records per layer are sheet 13)."
+    },
+    {
+      "surface": "cube.ground.flint",
+      "material": "accent.site-geology",
+      "working": "excavated.flint.nodular",
+      "history": "new",
+      "note": "Flint nodules in the chalk (two bands) and flints in the clay: white cortex, glassy black inside (polish). The cut face is consolidated in place, as a soil monolith is; the layer is the working (the palette's one key for the ground; records per layer are sheet 13)."
+    },
+    {
+      "surface": "cube.ground.fossil",
+      "material": "accent.site-geology",
+      "working": "excavated.chalk.fossil-stained",
+      "history": "new",
+      "note": "The ammonite and the heart urchin in the chalk: chalk with an iron stain (as built linear 0.86, 0.74, 0.58 as a history, never a colour knob). The cut face is consolidated in place, as a soil monolith is; the layer is the working (the palette's one key for the ground; records per layer are sheet 13)."
+    }
+  ]
+}
