@@ -1,5 +1,7 @@
 #include "NympheasParts.h"
 #include "NympheasPlan.h"
+#include "SiteJoint.h"
+#include "SitePortClass.h"
 
 /**
  * The well and its stair (§3.7): the foundation slab, the brick west end wall and the head wall round the Reserve's
@@ -34,6 +36,23 @@ namespace Musee::Nympheas
 		FMuseeFrame Section(double Y)
 		{
 			return FrameOfAxes(FVector(0.0, Y, 0.0), FVector(1.0, 0.0, 0.0), FVector(0.0, 0.0, 1.0));
+		}
+
+		/**
+		 * The rebate in the bottom landing's top at the port face (x across, z down): half the Reserve's door class's bronze
+		 * strip, which the joint lays astride the mating plane, and the strip's depth (the joint's record). The class has no
+		 * allowance, so the joint lays no threshold: the landing is the oval's, and the strip lies between it and the
+		 * Reserve's own threshold, as the passage's floor stops for the east door's strip. None when a record can't be read.
+		 */
+		FVector2D StripRebate()
+		{
+			const TValueOrError<FSitePortClass, FString> Door = Musee::Site::FindPortClass(FMuseeKey(Plan::StairClass));
+			const TValueOrError<FSiteJointRecord, FString> Joint = Musee::Site::ReadJoints();
+			if (Door.HasError() || Joint.HasError() || Door.GetValue().StripMeters <= 0.0)
+			{
+				return FVector2D::ZeroVector;
+			}
+			return FVector2D(0.5 * Door.GetValue().StripMeters, Joint.GetValue().StripDepthMeters);
 		}
 
 		/** The foundation under the well, the west end wall, and the head wall over the Reserve's arched door. */
@@ -81,10 +100,16 @@ namespace Musee::Nympheas
 			Out.Add(Drawn(Pieces::TopLanding, TEXT("stair.tread"), Slab(FFormProfile::Polygon(Landing), {}, Plan::StringCapZ, 0.0), Walkable,
 				FMuseeFrame(FVector(0.0, 0.0, Plan::StringCapZ))));
 
-			// The bottom landing, from where the flight's soffit meets it, through the head wall's door to the port face.
+			// The bottom landing, from where the flight's soffit meets it, through the head wall's door to the port face, drawn
+			// in section; its top rebated at the port face for the half of the joint's bronze strip on the oval's side.
 			const double Start = NosingReaches(-Plan::StringUnderNosing, Plan::WellFloor);
-			Out.Add(Drawn(Pieces::BottomLanding, TEXT("stair.tread"), Block(FVector(Start, -Wall, Plan::WallBed), FVector(Plan::PortFaceX, Wall, Plan::WellFloor)),
-				Walkable, FMuseeFrame(FVector(0.0, 0.0, Plan::WallBed))));
+			const FVector2D Rebate = StripRebate();
+			const TArray<FVector2D> Profile = {FVector2D(Start, Plan::WallBed), FVector2D(Plan::PortFaceX, Plan::WallBed),
+				FVector2D(Plan::PortFaceX, Plan::WellFloor - Rebate.Y), FVector2D(Plan::PortFaceX - Rebate.X, Plan::WellFloor - Rebate.Y),
+				FVector2D(Plan::PortFaceX - Rebate.X, Plan::WellFloor), FVector2D(Start, Plan::WellFloor)};
+			// The section frame's z faces north: pushed from the south wall to the north.
+			Out.Add(Drawn(Pieces::BottomLanding, TEXT("stair.tread"), Slab(FFormProfile::Polygon(Profile), {}, 0.0, 2.0 * Wall), Walkable,
+				Section(Wall)));
 		}
 
 		/**

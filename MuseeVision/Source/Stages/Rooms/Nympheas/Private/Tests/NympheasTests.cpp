@@ -77,6 +77,10 @@ namespace Musee::Nympheas::Tests
 			TestEqual(TEXT("the Reserve's door is the shaft's clear width"), 2.0 * Plan::ShaftHalf, Reserve.GetValue().ClearWidthMeters);
 			TestEqual(TEXT("and springs at its head"), Plan::ReserveDoorSpringing, Reserve.GetValue().HeadMeters);
 		}
+		// Both doors are finished by the oval: the passage's architrave is its own; the Reserve's door is the shaft's whole
+		// width, with no wall beside it for the joint to lay a surround on.
+		TestTrue(TEXT("the oval draws the east door's surround"), East->bOwnSurround);
+		TestTrue(TEXT("and no surround goes on the head wall's well side"), Stair->bOwnSurround);
 		return true;
 	}
 
