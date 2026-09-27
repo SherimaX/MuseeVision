@@ -24,8 +24,9 @@ namespace Musee::Studio
 	 * finding and is left uncast. The rest are cast, only what changed rebuilt, and placed on their bodies, each tagged
 	 * musee.piece:<name>. Pieces identical in drawing, materials and collision (the Salon's 750 rosettes) are cast once,
 	 * as the first of them, and placed as instances of that mesh, one instanced component per body and collision they
-	 * share; a work's pieces (work.<id>...) stay their own, for Art labels them. Each body hangs from the body it rides, when the stage says it rides one. The finish schedule is read within
-	 * the fabric's dependency set.
+	 * share. A work's pieces stay components of their own, for Art hangs each from its work's label: a stage's built work
+	 * (work.<id>...) is cast alone, and Art's pieces share a cast but are placed one by one. Each body hangs from the body
+	 * it rides, when the stage says it rides one. The finish schedule is read within the fabric's dependency set.
 	 */
 	FStageCast CastStage(FStageFabric& Fabric, const FStageMakeOptions& Options, const FString& ScheduleDir, FMakeReport& Report);
 

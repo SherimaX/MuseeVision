@@ -11,7 +11,7 @@ namespace Musee::ArtMaking
 	namespace
 	{
 		/** How close a place may come to a wire run's end, or a height to a wire, and still count as on it (metres). */
-		constexpr double Tolerance = 1e-9;
+		constexpr double PlaceTolerance = 1e-9;
 
 		/**
 		 * The hooks' section, in the wall's (out, up), from the anchor's plane out: the eye's ring touches the frame's back
@@ -23,7 +23,7 @@ namespace Musee::ArtMaking
 			/** The wires' radii: the hook's, the eye's, the mesh's; and the play where they link. */
 			double Hook = 0.0;
 			double Eye = 0.0;
-			double Mesh = 0.0;
+			double Wire = 0.0;
 			double Play = 0.0;
 			/** The eye's ring: its centreline's radius, and its centre out of the plane. */
 			double RingRadius = 0.0;
@@ -40,7 +40,7 @@ namespace Musee::ArtMaking
 			FHookSection(const FArtHooks& Hooks, const FArtMesh& Mesh)
 				: Hook(0.5 * Hooks.HookWireMeters)
 				, Eye(0.5 * Hooks.EyeWireMeters)
-				, Mesh(0.5 * Mesh.Wire)
+				, Wire(0.5 * Mesh.Wire)
 				, Play(Hooks.PlayMeters)
 			{
 				RingRadius = 0.5 * Hooks.EyeInsideMeters + Eye;
@@ -53,10 +53,10 @@ namespace Musee::ArtMaking
 			}
 
 			/** The least the upper bend's radius may be: round the level wire, with play. */
-			[[nodiscard]] double LeastUpperRadius() const { return this->Mesh + Hook + Play; }
+			[[nodiscard]] double LeastUpperRadius() const { return Wire + Hook + Play; }
 
 			/** The upper bend's centre's height over a level wire at this height: its inside rests over the wire, with play. */
-			[[nodiscard]] double UpperCentre(double WireHeight) const { return WireHeight + this->Mesh + Hook + Play - UpperRadius; }
+			[[nodiscard]] double UpperCentre(double WireHeight) const { return WireHeight + Wire + Hook + Play - UpperRadius; }
 		};
 
 		/** The place halfway between two uprights nearest a place along the anchor. */
@@ -66,7 +66,7 @@ namespace Musee::ArtMaking
 			return Uprights.From + (FMath::RoundToDouble((Along - Uprights.From) / Pitch - 0.5) + 0.5) * Pitch;
 		}
 
-		FFormProfile Round(double Radius)
+		FFormProfile RoundWire(double Radius)
 		{
 			return FFormProfile::Ellipse(FVector2D::ZeroVector, Radius, Radius, 0.0, true);
 		}
@@ -130,9 +130,9 @@ namespace Musee::ArtMaking
 		// The lowest level wire whose upper bend leaves the hook its least shank above the eye.
 		const double Least = Plan.EyeHeight + Hooks.LeastShankMeters - Section.UpperCentre(0.0);
 		const FArtWireRun& Levels = Mesh.Levels;
-		const double Steps = FMath::Max(0.0, FMath::CeilToDouble((Least - Levels.From) / Levels.Pitch - Tolerance));
+		const double Steps = FMath::Max(0.0, FMath::CeilToDouble((Least - Levels.From) / Levels.Pitch - PlaceTolerance));
 		Plan.WireHeight = Levels.From + Steps * Levels.Pitch;
-		if (Plan.WireHeight > Levels.To + Tolerance)
+		if (Plan.WireHeight > Levels.To + PlaceTolerance)
 		{
 			return MakeError(FString::Printf(TEXT("no level wire of its mesh is %.3f m up or more, over its frame's eyes"), Least));
 		}
@@ -147,8 +147,8 @@ namespace Musee::ArtMaking
 		{
 			const double Along = BetweenUprights(Mesh.Uprights, Edges[Side] + Outward[Side] * Middle);
 			const double In = Outward[Side] * (Along - Edges[Side]);
-			const bool bOnBack = In - Ring >= Moulding.RebateClearanceMeters - Tolerance && In + Ring <= Outside + Tolerance;
-			const bool bOnMesh = Along >= Mesh.Uprights.From - Tolerance && Along <= Mesh.Uprights.To + Tolerance;
+			const bool bOnBack = In - Ring >= Moulding.RebateClearanceMeters - PlaceTolerance && In + Ring <= Outside + PlaceTolerance;
+			const bool bOnMesh = Along >= Mesh.Uprights.From - PlaceTolerance && Along <= Mesh.Uprights.To + PlaceTolerance;
 			if (!bOnBack || !bOnMesh)
 			{
 				return MakeError(FString::Printf(TEXT("its frame's %s eye finds no gap between its mesh's uprights on the frame's back"),
@@ -171,7 +171,7 @@ namespace Musee::ArtMaking
 
 		// The S-hook in the wall's (out, up), its drawing's x and y; its z runs along the wall, where the two stand.
 		FFormSweep S;
-		S.Section = Round(Section.Hook);
+		S.Section = RoundWire(Section.Hook);
 		S.Path = FFormProfile::From(FVector2D(Section.WireOut - Section.UpperRadius, Upper - Hooks.EndMeters));
 		S.Path.LineTo(FVector2D(Section.WireOut - Section.UpperRadius, Upper), EFormJoint::Smooth)
 			.ArcAbout(FVector2D(Section.WireOut, Upper), Section.UpperRadius, Section.UpperRadius, 180.0, 0.0, EFormJoint::Smooth)
@@ -182,7 +182,7 @@ namespace Musee::ArtMaking
 
 		// The eye's ring, level, in the wall's (along, out).
 		FFormSweep Ring;
-		Ring.Section = Round(Section.Eye);
+		Ring.Section = RoundWire(Section.Eye);
 		Ring.Path = FFormProfile::Ellipse(FVector2D::ZeroVector, Section.RingRadius, Section.RingRadius, 0.0, true);
 		const FMuseeFrame Level = FrameAlong(Anchor.OriginMeters + Out * Section.RingOut + Up * Eye, Along, Out);
 

@@ -20,9 +20,18 @@ namespace Musee::Studio
 
 		/**
 		 * The pieces a stage builds a work of are named work.<id>[.<index>][.<part>] (the stage contract, Hang.json's built
-		 * works). Art labels each work's pieces, so they stay components of their own and are never instanced.
+		 * works); every piece Art draws is a work's. Art hangs each work's pieces from its label, so they stay components of
+		 * their own and are never instanced: a stage's built work isn't cast with anything else, and Art's identical pieces
+		 * (the screw eyes in two frames' backs) share one cast but each is placed on its own.
 		 */
 		const TCHAR* const WorkPiecePrefix = TEXT("work.");
+		const TCHAR* const ArtDrawer = TEXT("Art");
+
+		/** Whether a piece is part of a work, which Art labels. */
+		bool IsWorks(const FFormMadePiece& Piece)
+		{
+			return Piece.Name.ToString().StartsWith(WorkPiecePrefix) || Piece.Drawer == ArtDrawer;
+		}
 
 		/** The anchor kind of a moving body (the stage contract's anchor kinds). */
 		const TCHAR* const BodyAnchorKind = TEXT("Body");
@@ -206,24 +215,35 @@ namespace Musee::Studio
 			return Placement;
 		}
 
+		/** Places one piece as its own mesh component at its frame. */
+		void PlaceAlone(const FFormMadePiece& Piece, const FCastMesh& Mesh, TArray<FStagePlacement>& OutPlacements)
+		{
+			FStagePlacement& Placement = OutPlacements.Add_GetRef(PlacementOf(Piece, Mesh));
+			Placement.LocationMeters = Piece.Frame.OriginMeters;
+			Placement.Rotation = Piece.Frame.Rotation;
+			Placement.Tags.Add(FName(PieceTagPrefix + Piece.Name.ToString()));
+		}
+
 		/**
-		 * Places a cast: a single piece as one mesh at its frame; identical pieces as one instanced component for each body
-		 * and collision they share, named after the first of them, with an instance at each piece's frame.
+		 * Places a cast: a single piece, or a work's, as one mesh at its frame; other identical pieces as one instanced
+		 * component for each body and collision they share, named after the first of them, with an instance at each piece's
+		 * frame.
 		 */
 		void Place(const FCastGroup& Group, const FCastMesh& Mesh, TArray<FStagePlacement>& OutPlacements)
 		{
 			if (Group.Members.Num() == 1)
 			{
-				const FFormMadePiece& Piece = *Group.Members[0];
-				FStagePlacement& Placement = OutPlacements.Add_GetRef(PlacementOf(Piece, Mesh));
-				Placement.LocationMeters = Piece.Frame.OriginMeters;
-				Placement.Rotation = Piece.Frame.Rotation;
-				Placement.Tags.Add(FName(PieceTagPrefix + Piece.Name.ToString()));
+				PlaceAlone(*Group.Members[0], Mesh, OutPlacements);
 				return;
 			}
 			TMap<TPair<FMuseeKey, FName>, int32> Shared;
 			for (const FFormMadePiece* Piece : Group.Members)
 			{
+				if (IsWorks(*Piece))
+				{
+					PlaceAlone(*Piece, Mesh, OutPlacements);
+					continue;
+				}
 				const int32* Index = Shared.Find({Piece->Body, Piece->Collision});
 				FStagePlacement& Placement = Index ? OutPlacements[*Index] : OutPlacements.Add_GetRef(PlacementOf(*Piece, Mesh));
 				if (!Index)
@@ -286,7 +306,8 @@ namespace Musee::Studio
 		}
 		for (const FCastGroup& Group : Casts.Groups)
 		{
-			Cast.Instanced += Group.Members.Num() > 1 ? Group.Members.Num() : 0;
+			const int32 Instanced = Group.Members.FilterByPredicate([](const FFormMadePiece* Piece) { return !IsWorks(*Piece); }).Num();
+			Cast.Instanced += Instanced > 1 ? Instanced : 0;
 		}
 		return Cast;
 	}

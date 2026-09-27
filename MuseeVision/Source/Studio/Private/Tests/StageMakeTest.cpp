@@ -8,6 +8,8 @@
 #include "Components/StaticMeshComponent.h"
 #include "Engine/Level.h"
 #include "Engine/World.h"
+#include "FormLathe.h"
+#include "FormMake.h"
 #include "GameFramework/PlayerStart.h"
 #include "GameFramework/WorldSettings.h"
 #include "LevelInstance/LevelInstanceActor.h"
@@ -21,6 +23,7 @@
 #include "SitePlan.h"
 #include "SiteRoom.h"
 #include "SiteVolume.h"
+#include "Stages/StageCast.h"
 #include "Stages/StageFabric.h"
 #include "Stages/StageMake.h"
 #include "UObject/Package.h"
@@ -173,6 +176,50 @@ namespace Musee::Studio::Tests
 		const FMakeReport Again = MakeStage(*Room, Options);
 		TestEqual(TEXT("a second make writes nothing"), Again.Count(EMadeOutcome::Written), 0);
 		TestTrue(TEXT("and finds nothing wrong"), Again.Succeeded());
+		return true;
+	}
+
+	/**
+	 * Identical pieces share one cast; a stage's own are placed as one instanced component, but each of a work's pieces
+	 * (Art's: the screw eyes in two frames' backs) on its own, for Art hangs each from its work's label.
+	 */
+	IMPLEMENT_SIMPLE_AUTOMATION_TEST(FStudioWorksPlacedApartTest, "Musee.Studio.WorksPlacedApart", Flags)
+	bool FStudioWorksPlacedApartTest::RunTest(const FString& Parameters)
+	{
+		const FStageMakeOptions Options = SpecimenOptions(FString(SpecimenRoot) + TEXT("/Apart"));
+		FStageFabric Fabric;
+		Fabric.Description.Stage = FMuseeKey(TEXT("specimen-room"));
+		TArray<FMuseeFinding> Findings;
+		const TCHAR* const Names[] = {TEXT("stud.a"), TEXT("stud.b"), TEXT("canvas.a.eye"), TEXT("canvas.b.eye")};
+		for (int32 Index = 0; Index < UE_ARRAY_COUNT(Names); ++Index)
+		{
+			FFormLathe Drum;
+			Drum.Section = FFormProfile::From({0.0, 0.0});
+			Drum.Section.LineTo({0.1, 0.0}, EFormJoint::Crisp).LineTo({0.1, 0.1}, EFormJoint::Crisp).LineTo({0.0, 0.1}, EFormJoint::Crisp);
+			FFormDrawing Drawing = FFormDrawing::Of(Names[Index], TEXT("post"), MoveTemp(Drum));
+			Drawing.Frame = FMuseeFrame(FVector(Index, 0.0, 0.0));
+			Drawing.Drawer = Index < 2 ? TEXT("specimen-room") : TEXT("Art");
+			Musee::FormMaking::Make(Drawing, Fabric.Pieces, Findings);
+		}
+		FMakeReport Report;
+		const FStageCast Cast = CastPieces(Fabric, Options, Options.ScheduleDir,
+			[&Options](FName Piece) { return Options.Paths.StageMesh(TEXT("SpecimenRoom"), Piece.ToString().Replace(TEXT("."), TEXT("_"))); }, Report);
+		LogFindings(*this, Report);
+		TestEqual(TEXT("the pieces are made and cast without findings"), Findings.Num() + Report.Findings.Num(), 0);
+		const auto Tagged = [&Cast](const TCHAR* Name) { return Cast.Placements.FilterByPredicate([Name](const FStagePlacement& P)
+		{
+			return P.Tags.Contains(FName(FString(TEXT("musee.piece:")) + Name));
+		}); };
+		const TArray<FStagePlacement> StudA = Tagged(TEXT("stud.a"));
+		TestTrue(TEXT("the stage's two studs are one instanced component"), StudA.Num() == 1 && StudA[0].Instances.Num() == 2
+			&& StudA[0].Tags.Contains(FName(TEXT("musee.piece:stud.b"))));
+		const TArray<FStagePlacement> EyeA = Tagged(TEXT("canvas.a.eye"));
+		const TArray<FStagePlacement> EyeB = Tagged(TEXT("canvas.b.eye"));
+		TestTrue(TEXT("each work's eye is a component of its own"), EyeA.Num() == 1 && EyeB.Num() == 1 && EyeA[0].Instances.IsEmpty()
+			&& EyeB[0].Instances.IsEmpty() && EyeA[0].Tags.Num() == 1 && EyeB[0].Tags.Num() == 1);
+		TestTrue(TEXT("sharing the one cast, each at its own place"), EyeA.Num() == 1 && EyeB.Num() == 1 && EyeA[0].Mesh == EyeB[0].Mesh
+			&& EyeB[0].LocationMeters.Equals(FVector(3.0, 0.0, 0.0)));
+		TestEqual(TEXT("only the studs count as instanced"), Cast.Instanced, 2);
 		return true;
 	}
 

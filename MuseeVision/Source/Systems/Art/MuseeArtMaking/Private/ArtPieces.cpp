@@ -66,14 +66,16 @@ namespace Musee::ArtMaking
 				return true;
 			}
 			const TValueOrError<FArtHooks, FString>& Hooks = Making.Hooks();
-			const TValueOrError<FHookPlan, FString> Plan = Hooks.HasError() ? MakeError(Hooks.GetError()) : PlanHooks(Hooks.GetValue(), *Mesh, Moulding, Entry);
+			const TValueOrError<FHookPlan, FString> Plan = Hooks.HasError() ? MakeError(Hooks.GetError())
+				: PlanHooks(Hooks.GetValue(), *Mesh, Moulding, Entry);
 			if (Plan.HasError())
 			{
 				OutFindings.Add(ArtFinding(Making.Stage, FString::Printf(TEXT("Work %s: its hooks can't be made: %s."), *Entry.Work, *Plan.GetError())));
 				return false;
 			}
 			const FMuseeFrame& Anchor = Making.Stage.FindAnchor(Entry.Anchor, WallAnchorKind)->Frame;
-			OutDrawings = HookDrawings(Plan.GetValue(), Hooks.GetValue(), *Mesh, Anchor, PartName(Entry, bSplit, TEXT("hook")), PartName(Entry, bSplit, TEXT("eye")));
+			OutDrawings = HookDrawings(Plan.GetValue(), Hooks.GetValue(), *Mesh, Anchor, PartName(Entry, bSplit, TEXT("hook")),
+				PartName(Entry, bSplit, TEXT("eye")));
 			return true;
 		}
 
@@ -268,11 +270,17 @@ namespace Musee::ArtMaking
 		}
 
 		/**
-		 * Puts an object's pieces, made where its anchor stands at rest, on the body its entry names: each piece's frame
-		 * seen from the body's, so the body carries it (a piece with a body is placed in the body's frame).
+		 * Marks an object's pieces as Art's, so Studio places each on its own for the dresser to hang from the work's label
+		 * (it never gathers two works' pieces into one instanced component); and puts them, made where the anchor stands at
+		 * rest, on the body the entry names: each piece's frame seen from the body's, so the body carries it (a piece with a
+		 * body is placed in the body's frame).
 		 */
 		void Carry(const FMuseeStageContext& Stage, const FArtHangEntry& Entry, TArrayView<FFormMadePiece> Pieces)
 		{
+			for (FFormMadePiece& Piece : Pieces)
+			{
+				Piece.Drawer = TEXT("Art");
+			}
 			const FMuseeStageAnchor* Body = Entry.Body.IsNone() ? nullptr : Stage.FindAnchor(Entry.Body, BodyAnchorKind);
 			if (!Body)
 			{

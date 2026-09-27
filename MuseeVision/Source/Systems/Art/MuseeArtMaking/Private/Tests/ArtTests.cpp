@@ -511,8 +511,8 @@ bool FArtHooksTest::RunTest(const FString& Parameters)
 		Close.Behind = 0.006;
 		Close.Wire = 0.003;
 		FArtHangEntry Work = Tests::Entry(TEXT("monet-impression-sunrise"), TEXT("artworks.json"));
-		Work.Along = 1.0;
-		Work.Height = 1.31;
+		Work.Along = 1.0f;
+		Work.Height = 1.31f;
 		TestTrue(TEXT("A mesh too close behind the frame is refused"), PlanHooks(Hooks.GetValue(), Close, Moulding.GetValue(), Work).HasError());
 		FArtMesh Low = Close;
 		Low.Behind = 0.0105;
