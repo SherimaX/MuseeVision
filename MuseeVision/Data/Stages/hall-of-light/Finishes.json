@@ -1,0 +1,173 @@
+{
+  "stage": "hall-of-light",
+  "finishes": [
+    {
+      "surface": "hall-of-light.floor",
+      "material": "stone.travertine-romano",
+      "working": "filled.polished",
+      "history": "foot-worn",
+      "note": "Floor slabs 1.20 along the hall x 0.80 across, grid unstaggered, a joint on the axis, 2.5 mm joints (as built); vein-cut, the bands running east-west along the hall (Story: bands along the direction of travel); voids filled flush with tinted resin, polished to a soft reflection of the glass and garden; dulled in the walking line."
+    },
+    {
+      "surface": "hall-of-light.viewing-stone",
+      "material": "stone.travertine-romano",
+      "working": "filled.polished",
+      "history": "foot-worn",
+      "note": "The five flush viewing-stone discs (R 0.400 top), one piece each, cut across the floor's bands."
+    },
+    {
+      "surface": "hall-of-light.viewing-stone.ring",
+      "material": "bronze.cusn10",
+      "working": "brushed",
+      "history": "foot-worn",
+      "note": "Flush rings R 0.400-0.450 in the discs' rebates; grain round the ring; kept bright by feet."
+    },
+    {
+      "surface": "hall-of-light.plinth",
+      "material": "stone.travertine-romano",
+      "working": "filled.polished",
+      "history": "new",
+      "note": "Plinths under the glass, 0.36 x 0.40 section, ashlar up to 1.80 long; the half outside the glass line takes the outdoor surface law (wetting and soiling where it sees the sky)."
+    },
+    {
+      "surface": "hall-of-light.plinth.housing",
+      "material": "stone.travertine-romano",
+      "working": "sawn",
+      "history": "new",
+      "note": "The 20 step-light pockets in the plinths' inner faces, hidden behind the luminaires' louvres."
+    },
+    {
+      "surface": "hall-of-light.kerb",
+      "material": "stone.travertine-romano",
+      "working": "honed",
+      "history": "weathered",
+      "note": "Planter kerbs outside the glass (|y| 4.68-4.80), blocks up to 1.80: outdoors, honed, weathered by the museum's weather."
+    },
+    {
+      "surface": "hall-of-light.lining",
+      "material": "stone.travertine-romano",
+      "working": "filled.polished",
+      "history": "new",
+      "note": "The two 50 mm end linings (west R 11.20-11.25 about the Rotunda's axis, east R 14.80-14.85 about the Atrium's), cladding courses 0.60 high, slabs up to 1.80 long; the east one's band round the lunette."
+    },
+    {
+      "surface": "hall-of-light.port.rough-opening",
+      "material": "stone.travertine-romano",
+      "working": "sawn",
+      "history": "new",
+      "note": "Hidden rough-opening faces through the two linings (the joint's linings cover them)."
+    },
+    {
+      "surface": "hall-of-light.stereo-stone",
+      "material": "stone.travertine-romano",
+      "working": "filled.polished",
+      "history": "handled",
+      "note": "The four stereo drums, one block each; the top's polish dulled by hands leaning on it."
+    },
+    {
+      "surface": "hall-of-light.wall.steel",
+      "material": "white.pearl-steel",
+      "working": "pearl.satin",
+      "history": "new",
+      "note": "The walls' steel: 20 posts (the mullions), 4 end posts, glazing shoes, transoms and the box eaves. The posts' pressure caps and the eaves' outer faces take the outdoor surface law."
+    },
+    {
+      "surface": "hall-of-light.vault.steel",
+      "material": "white.pearl-steel",
+      "working": "pearl.satin",
+      "history": "new",
+      "note": "The vault's steel: 18 arches, 7 purlin lines, 136 crosses, 2 collars and the 5 lunette mullions."
+    },
+    {
+      "surface": "hall-of-light.wall.glass",
+      "material": "glass.low-iron",
+      "working": "toughened.laminated.uv-filtering",
+      "history": "weathered",
+      "note": "Wall panes: Optiwhite 8 + 1.52 UV-filtering PVB + 8 (17.52 mm), 22 panes; outer faces weathered by the museum's weather."
+    },
+    {
+      "surface": "hall-of-light.vault.glass",
+      "material": "glass.low-iron",
+      "working": "heat-strengthened.laminated.uv-filtering",
+      "history": "weathered",
+      "note": "Vault panes: the same laminate, heat-strengthened, hot-bent to R 5.30; 152 panes; rain runs and snow lies on the outer faces."
+    },
+    {
+      "surface": "hall-of-light.lunette.glass",
+      "material": "glass.low-iron",
+      "working": "toughened.laminated.uv-filtering",
+      "history": "weathered",
+      "note": "The six flat lunette panes in the east lining over the Atrium's coping."
+    },
+    {
+      "surface": "hall-of-light.print.stem",
+      "material": "bronze.cusn10",
+      "working": "brushed",
+      "history": "new",
+      "note": "The prints' flat stems (32) and their shoes on the plinth; grain vertical."
+    },
+    {
+      "surface": "hall-of-light.autochrome.bar",
+      "material": "bronze.cusn10",
+      "working": "brushed",
+      "history": "new",
+      "note": "The autochromes' glazing bars (8), shoe to transom."
+    },
+    {
+      "surface": "hall-of-light.stereo.reader",
+      "material": "bronze.cusn10",
+      "working": "brushed",
+      "history": "handled",
+      "note": "The four reader plates 0.68 x 0.40 x 0.03 and their Ø 0.030 stems; the plate's rim bright where hands rest."
+    },
+    {
+      "surface": "hall-of-light.frame.oak",
+      "material": "oak.sessile-french",
+      "working": "fumed.wire-brushed.oiled",
+      "history": "new",
+      "note": "The thin dark photograph frames, 22 mm moulding: round each print's 1.0 x 0.9 mount (outer 1.044 x 0.944) and round each autochrome's mat; also the autochrome cassettes' timber. Art builds the frames."
+    },
+    {
+      "surface": "hall-of-light.mount",
+      "material": "accent.rag-board",
+      "working": "faced",
+      "history": "new",
+      "note": "The prints' pale mounts 1.000 x 0.900 x 0.030: museum board faced on a rigid core; the print sits on it, centred, under the frame's glazing."
+    },
+    {
+      "surface": "hall-of-light.autochrome.mat",
+      "material": "accent.rag-board",
+      "working": "cut.bevelled",
+      "history": "new",
+      "note": "The autochromes' white window mats 1.000 x 0.900, bevel-cut round each plate."
+    },
+    {
+      "surface": "hall-of-light.autochrome.backing",
+      "material": "glass.low-iron",
+      "working": "acid-etched",
+      "history": "new",
+      "note": "The diffusing pane behind each autochrome (between plate and wall glass): the garden's daylight lights the plate evenly from behind."
+    },
+    {
+      "surface": "hall-of-light.frame.glazing",
+      "material": "glass.low-iron",
+      "working": "laminated.anti-reflective",
+      "history": "new",
+      "note": "Glazing in the photograph frames and over the four stereo cards: UV-filtering laminate with anti-reflective faces."
+    },
+    {
+      "surface": "hall-of-light.west.blind-doors",
+      "material": "bronze.cusn10",
+      "working": "brushed",
+      "history": "new",
+      "note": "Closed pair of cast CuSn10 leaves filling the west class opening on the port face, while hall-of-light.west is unmated (on the stand)."
+    },
+    {
+      "surface": "hall-of-light.east.blind-doors",
+      "material": "bronze.cusn10",
+      "working": "brushed",
+      "history": "new",
+      "note": "Closed pair of cast CuSn10 leaves filling the east class opening on the port face, while hall-of-light.east is unmated (tonight, until the Atrium is built)."
+    }
+  ]
+}

@@ -116,6 +116,11 @@
 			"LoadingPhase": "Default"
 		},
 		{
+			"Name": "MuseeHallOfLight",
+			"Type": "Editor",
+			"LoadingPhase": "Default"
+		},
+		{
 			"Name": "MuseeInstruments",
 			"Type": "Runtime",
 			"LoadingPhase": "Default",
