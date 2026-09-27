@@ -514,6 +514,17 @@ hang findings (the pedestals, the Antinous's lowered plinth, grown consoles); no
 - Workings written as compound strings: `burnished.red-ochre` (niches), `acid-etched.laminated` (laylights),
   `polished.reclaimed` (porphyry), `cast.seams-kept.sized` (casts); `stone.travertine-romano` **sawn** (hidden core, not
   in workingsByEra); `trowelled` for the laylight wells.
+- **Resolved by Matter (FX-JOIN):** the stones of §3 now have palette entries and typed records (`accent.statuario`,
+  `accent.giallo-siena`, `accent.pavonazzetto`, `accent.verde-antico`, `accent.porphyry`; Rojo Alicante gains its
+  polished finishes), `polished` is a working, and `glass.low-iron` offers `acid-etched.laminated`. Three keys broke the
+  Story's physics, and **the schedule was changed to the Story's material**:
+  - the niches are `white.lime-plaster.red-ochre`, **burnished**: red ochre is mixed into the setting coat, so it is in
+    the plaster's body (a variant of the substance, one key per pigment as the silks are one key per dye), not a
+    working (was `white.lime-plaster` / `burnished.red-ochre`);
+  - the porphyry roundels are **polished**: reclaimed is the stone's provenance, not a working (was
+    `polished.reclaimed`);
+  - the gallery rosettes are **`cast.plaster`**, the fibrous plaster's cast working (was `cast`, which names no
+    working).
 - **Care class of the casts:** plaster has no class; `stone-and-bronze` used (ruled: sized plaster). Care.json says a
   coated surface takes its coating's class, and the Story seals the casts with size: confirm (as for the Rotunda).
 - The **landing** keys the palette gives "Classical Hall: landing floor … the landing's red / black" are used by the
@@ -565,4 +576,5 @@ use the shell line.
 - **The section is made real** (ruled): a 0.30 roof slab and a 0.20 plenum over every laylight. The laylight glass drops from 5.38 to 4.94, and **the tribune dome is re-struck** through the same springing and eye (R 4.3377 about 0.7716), so its crown is 0.21 lower.
 - The as-built 1 cm step at the threshold is retired, so the floor is flush.
 - All light is 3000 K (as built 3800 K). The φ 90° wall-washer, which aimed at no wall, is dropped.
-- Materials follow the Story; only the tribune's rosettes are gilt.
+- Materials follow the Story; only the tribune's rosettes are gilt. The niches' red is `white.lime-plaster.red-ochre`,
+  the porphyry is `polished` and the gallery rosettes `cast.plaster` (§13: the schedule changed to the Story's material).

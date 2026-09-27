@@ -141,7 +141,9 @@ upward steps, hairlines along the structure, and matched patches.
   dome;
 - the Nymphéas oval's walls, **burnished** to a soft sheen (a marmorino), so the room at the end is the one pale
   room;
-- the Classical Hall's niches, the **same lime pigmented with red ochre**: an iron-oxide red, burnished.
+- the Classical Hall's niches, the **same lime pigmented with red ochre**: an iron-oxide red, burnished
+  (`white.lime-plaster.red-ochre`: the ochre is in the setting coat's body, so it is a variant of the lime, not a
+  working, one key per pigment as the silks are one key per dye).
 
 **Fibrous plaster** (`white.fibrous-plaster`, face `white.plaster-of-paris`). Cast in the workshop: a plaster of
 Paris face on hessian and laths, in straight lengths, with the mitres made by hand.
@@ -468,12 +470,13 @@ the choice needs one.
 | Gallery columns, paired Ionic shafts | `accent.giallo-siena` | polished |
 | Tribune columns, twelve | `accent.pavonazzetto` | polished |
 | Bases, capitals, entablatures, herms, consoles | `accent.statuario` | carved, honed |
-| Floor: roundels | `accent.porphyry` | reclaimed, polished; stands slightly proud as the calcite wears |
+| Floor: roundels | `accent.porphyry` | reclaimed (its provenance), polished; stands slightly proud as the calcite wears |
 | Floor: squares, bands, fields | `accent.giallo-siena`, `accent.verde-antico`, `accent.statuario` | polished, worn along the walking lines |
-| Niches | `white.lime-plaster` | pigmented with red ochre, burnished (Pompeian) |
+| Niches | `white.lime-plaster.red-ochre` | pigmented with red ochre, burnished (Pompeian) |
 | Coffered barrel vault, tribune dome | `white.lime-plaster` | run, trowelled |
 | Rosettes in the tribune's coffers | `white.fibrous-plaster` + `gilt.gold-leaf` | cast, oil-gilt |
-| Laylights | `glass.low-iron` | acid-etched, laminated |
+| Rosettes in the gallery's coffers | `white.fibrous-plaster` | cast (`cast.plaster`), white |
+| Laylights | `glass.low-iron` | acid-etched, laminated (`acid-etched.laminated`: overhead glass is laminated, the etched face down) |
 | Casts (41) | `white.plaster-of-paris` | as in the Rotunda |
 | Landing floor | `stone.crema-marfil`, `accent.rojo-alicante`, `accent.negro-marquina` | honed |
 | Port to the gallery | `stone.travertine-romano` + `bronze.cusn10` | the doorway detail |

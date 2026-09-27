@@ -1,0 +1,88 @@
+{
+  "schema": "musee.matter.shading.substance/1",
+  "key": "verde-antico",
+  "name": "Verde antico (marmor Thessalicum, Larissa)",
+  "family": "accent",
+  "record": "Palette.json",
+  "master": "stone",
+  "accentOf": "stone",
+  "dielectric": {
+    "diffuseAlbedo": {
+      "value": [
+        28.0,
+        -8.0,
+        5.0
+      ],
+      "space": "CIELAB (D65, 2 deg)",
+      "unit": "CIELAB",
+      "grade": "unverified",
+      "source": "Palette.json: accent.verde-antico realMaterial (serpentine breccia, Larissa, Thessaly)",
+      "note": "The dark green serpentine matrix with its pale calcite and dark clasts, averaged over a face; read from trade photographs until a specimen is measured."
+    },
+    "refractiveIndex": {
+      "value": 1.565,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.verde-antico realMaterial (serpentine breccia, Larissa, Thessaly)",
+      "note": "Antigorite serpentine, the matrix, has indices near 1.56 to 1.57; the calcite clasts are near 1.60. No measurement of the stone was read."
+    },
+    "porosity": {
+      "value": 0.005,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.verde-antico realMaterial (serpentine breccia, Larissa, Thessaly)",
+      "note": "A dense serpentinite breccia, open porosity a few tenths of a per cent; no measured value was read."
+    },
+    "wettingDepth": {
+      "value": 1.0,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: accent.verde-antico realMaterial (serpentine breccia, Larissa, Thessaly)",
+      "note": "As the Crema Marfil: a dense stone wets only its outer millimetre."
+    }
+  },
+  "structure": {
+    "grain": {
+      "value": 0.05,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: accent.verde-antico realMaterial (serpentine breccia, Larissa, Thessaly)",
+      "note": "A fine serpentine matrix; its clasts are its visible structure."
+    },
+    "bed": {
+      "value": 60,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: accent.verde-antico realMaterial (serpentine breccia, Larissa, Thessaly)",
+      "note": "The breccia's clasts, a first size read from trade photographs."
+    },
+    "bedAspect": {
+      "value": 1.0,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.verde-antico realMaterial (serpentine breccia, Larissa, Thessaly)",
+      "note": "A breccia's clasts lie every way: no drawn-out direction."
+    },
+    "hurst": {
+      "value": 0.7,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Candela et al. 2012, Journal of Geophysical Research 117, B08409 (fault surfaces, 0.6 to 0.8; cited in Stone.ush)",
+      "note": "The middle of the range measured on rock surfaces, as the travertine's."
+    },
+    "toneSpread": {
+      "value": 0.4,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.verde-antico realMaterial (serpentine breccia, Larissa, Thessaly)",
+      "note": "White calcite and near-black clasts in a dark green matrix: the widest tonal spread of the Hall's stones."
+    },
+    "roughnessSpread": {
+      "value": 0.15,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Workings/honed.json: unverified surface.microRoughness (no filtered roughness read)",
+      "note": "A first half-range of ln(roughness) across a worked face, as the travertine's."
+    }
+  }
+}

@@ -166,6 +166,16 @@
           "working": "honed",
           "history": "foot-worn",
           "note": "Stages: rotunda.dial.band.red, rotunda.stair.landing.red"
+        },
+        {
+          "working": "polished",
+          "history": "handled",
+          "note": "Stages: classical-hall.wall.dado (polished, worn soft by shoulders and hands)"
+        },
+        {
+          "working": "polished",
+          "history": "foot-worn",
+          "note": "Stages: classical-hall.floor.rosso"
         }
       ]
     },
@@ -206,6 +216,7 @@
       "key": "accent.statuario",
       "family": "accent",
       "accentOf": "stone",
+      "substance": "statuario",
       "realMaterial": "Statuario, Carrara (Apuan Alps): white statuary marble, faint grey veins",
       "workingsByEra": {
         "classical": "carved and honed; floor fields polished and worn",
@@ -220,14 +231,29 @@
       "verdict": "refined",
       "verdictReason": "Now a named quarry; carved honed, fields polished.",
       "research": {
-        "records": [],
-        "needed": "Substance record; Jensen's marble subsurface data (already cited in the travertine record) applies."
-      }
+        "records": [
+          "r-matter: Shading/Substances/statuario.json"
+        ],
+        "needed": "A specimen: its colour and veining. Its subsurface light is Jensen et al. 2001's measured white marble (Substances/cream-marble.json)."
+      },
+      "finishes": [
+        {
+          "working": "honed",
+          "history": "new",
+          "note": "Stages: classical-hall.order.carved, entablature, moulding, console, plinth, herm, pedestal, niche.sill (carved, then honed)"
+        },
+        {
+          "working": "polished",
+          "history": "foot-worn",
+          "note": "Stages: classical-hall.floor.white (polished, worn along the walking lines)"
+        }
+      ]
     },
     {
       "key": "accent.giallo-siena",
       "family": "accent",
       "accentOf": "stone",
+      "substance": "giallo-siena",
       "realMaterial": "Giallo di Siena, Montagnola Senese (Siena): yellow brecciated marble",
       "workingsByEra": {
         "classical": "polished",
@@ -242,14 +268,29 @@
       "verdict": "replaced",
       "verdictReason": "Giallo antico cannot be had; a photo of an unnamed yellow marble is not evidence.",
       "research": {
-        "records": [],
-        "needed": "Substance record and specimen."
-      }
+        "records": [
+          "r-matter: Shading/Substances/giallo-siena.json"
+        ],
+        "needed": "Substance research record and a specimen: its colour, breccia and hardness against the calcite fields."
+      },
+      "finishes": [
+        {
+          "working": "polished",
+          "history": "new",
+          "note": "Stages: classical-hall.shaft.giallo"
+        },
+        {
+          "working": "polished",
+          "history": "foot-worn",
+          "note": "Stages: classical-hall.floor.giallo"
+        }
+      ]
     },
     {
       "key": "accent.pavonazzetto",
       "family": "accent",
       "accentOf": "stone",
+      "substance": "pavonazzetto",
       "realMaterial": "Pavonazzetto: violet-veined white marble from the Afyon-İscehisar district, the site of the ancient Docimium quarries (traded today as Afyon violet)",
       "workingsByEra": {
         "classical": "polished",
@@ -264,14 +305,24 @@
       "verdict": "replaced",
       "verdictReason": "A tinted white marble is not a pavonazzetto.",
       "research": {
-        "records": [],
-        "needed": "Substance record; confirm current quarry and block size for 12 shafts."
-      }
+        "records": [
+          "r-matter: Shading/Substances/pavonazzetto.json"
+        ],
+        "needed": "Substance research record; confirm current quarry and block size for 12 shafts; a specimen of its violet veining."
+      },
+      "finishes": [
+        {
+          "working": "polished",
+          "history": "new",
+          "note": "Stages: classical-hall.shaft.pavonazzetto, classical-hall.panel"
+        }
+      ]
     },
     {
       "key": "accent.verde-antico",
       "family": "accent",
       "accentOf": "stone",
+      "substance": "verde-antico",
       "realMaterial": "Verde antico (marmor Thessalicum): serpentine breccia from near Larissa, Thessaly, still quarried",
       "workingsByEra": {
         "classical": "polished",
@@ -286,14 +337,24 @@
       "verdict": "refined",
       "verdictReason": "Now named at its source.",
       "research": {
-        "records": [],
-        "needed": "Substance record and specimen."
-      }
+        "records": [
+          "r-matter: Shading/Substances/verde-antico.json"
+        ],
+        "needed": "Substance research record and a specimen: serpentine optics and colour."
+      },
+      "finishes": [
+        {
+          "working": "polished",
+          "history": "foot-worn",
+          "note": "Stages: classical-hall.floor.verde (harder than the calcite fields: it stands slightly proud)"
+        }
+      ]
     },
     {
       "key": "accent.porphyry",
       "family": "accent",
       "accentOf": "stone",
+      "substance": "porphyry",
       "realMaterial": "Imperial porphyry (porfido rosso antico), Mons Porphyrites (Gebel Dokhan, Egypt): reclaimed only, sliced from ancient column stock",
       "workingsByEra": {
         "classical": "polished, reclaimed",
@@ -308,9 +369,18 @@
       "verdict": "replaced",
       "verdictReason": "A generated image is not a stone; reclaimed porphyry is the real material.",
       "research": {
-        "records": [],
-        "needed": "Substance record; owner to accept a reclaimed-only stone (open question)."
-      }
+        "records": [
+          "r-matter: Shading/Substances/porphyry.json"
+        ],
+        "needed": "Substance research record; owner to accept a reclaimed-only stone (open question). Reclaimed is its provenance, not a working: it is polished as any floor stone."
+      },
+      "finishes": [
+        {
+          "working": "polished",
+          "history": "foot-worn",
+          "note": "Stages: classical-hall.floor.porphyry (reclaimed column slices, polished; they stand proud as the calcite wears)"
+        }
+      ]
     },
     {
       "key": "accent.pierre-bleue",
@@ -736,7 +806,7 @@
           "Workings/trowelled.json, run.json, limewashed.json",
           "Histories/white.soiling.json, white.micro-cracking.json, white.patching.json"
         ],
-        "needed": "Luminous reflectance of set lime plaster (unverified 0.80-0.92); a burnished working; a pigmented (red ochre) variant."
+        "needed": "Luminous reflectance of set lime plaster (unverified 0.80-0.92). The red-ochre variant is white.lime-plaster.red-ochre."
       },
       "finishes": [
         {
@@ -758,6 +828,39 @@
           "working": "trowelled",
           "history": "new",
           "note": "Stages: nympheas.attic.upstand, nympheas.well.soffit, rotunda.dome.band, rotunda.dome.eye-curb, salon.vault.band, salon.lunette, salon.lantern.shaft, salon.cabinet.ceiling"
+        }
+      ]
+    },
+    {
+      "key": "white.lime-plaster.red-ochre",
+      "family": "white",
+      "accentOf": null,
+      "substance": "lime-plaster.red-ochre",
+      "realMaterial": "Lime plaster pigmented with red ochre (an iron-oxide red) in its setting coat, burnished: the Pompeian red of the Classical Hall's niches",
+      "workingsByEra": {
+        "classical": "burnished (Pompeian)",
+        "modern": "absent",
+        "future": "absent"
+      },
+      "roles": [
+        "Classical Hall: the thirteen niches behind the casts"
+      ],
+      "why": "The same lime as the vaults, with the colour in its body, not on it: the pigment is mixed into the setting coat and burnished with it, so it is a variant of the substance and the working stays burnished. The red is iron, on the museum's iron thread (Story 2.2).",
+      "oldChoice": "M_Stucco_Pompeian (#8E4B3D)",
+      "verdict": "refined",
+      "verdictReason": "The Pompeian red becomes red ochre in lime; one key per pigment, as the silks are one key per dye.",
+      "research": {
+        "records": [
+          "r-matter: Shading/Substances/lime-plaster.red-ochre.json",
+          "Substances/lime-plaster.json"
+        ],
+        "needed": "A pigmented specimen's measured colour; the ochre's share of the setting coat."
+      },
+      "finishes": [
+        {
+          "working": "burnished",
+          "history": "new",
+          "note": "Stages: classical-hall.niche.interior"
         }
       ]
     },
@@ -793,7 +896,7 @@
         {
           "working": "cast.plaster",
           "history": "new",
-          "note": "Stages: rotunda.entablature, salon.cornice, salon.cabinet.cornice"
+          "note": "Stages: rotunda.entablature, salon.cornice, salon.cabinet.cornice; classical-hall.vault.rosette"
         },
         {
           "working": "gilt.gold-leaf.oil",
@@ -1795,6 +1898,11 @@
           "working": "toughened.anti-reflective",
           "history": "handled",
           "note": "Stages: salon.dancer.vitrine"
+        },
+        {
+          "working": "acid-etched.laminated",
+          "history": "new",
+          "note": "Stages: classical-hall.laylight.glass (laminated overhead, the etched face down)"
         }
       ]
     },

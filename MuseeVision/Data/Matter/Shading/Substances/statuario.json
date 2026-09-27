@@ -1,0 +1,115 @@
+{
+  "schema": "musee.matter.shading.substance/1",
+  "key": "statuario",
+  "name": "Statuario (Carrara, Apuan Alps)",
+  "family": "accent",
+  "record": "Palette.json",
+  "master": "marble",
+  "accentOf": "stone",
+  "dielectric": {
+    "diffuseAlbedo": {
+      "value": [
+        0.83,
+        0.79,
+        0.75
+      ],
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "unit": "1",
+      "grade": "record",
+      "source": "Substances/cream-marble.json: optics.subsurfaceReference.diffuseReflectance (Jensen, Marschner, Levoy & Hanrahan 2001, a white marble, measured)",
+      "note": "A white crystalline marble measured whole: the nearest specimen to a white statuary Carrara. The camera's channels are read as the Rec.709 primaries."
+    },
+    "refractiveIndex": {
+      "value": 1.6003,
+      "unit": "1",
+      "grade": "derived",
+      "source": "Substances/cream-marble.json: optics.specularF0 (0.0533, calcite grains in random orientations)",
+      "derivation": "n = (1 + sqrt(F0)) / (1 - sqrt(F0)), the index whose normal-incidence reflectance is the record's F0"
+    },
+    "porosity": {
+      "value": 0.004,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.statuario realMaterial (white statuary marble, faint grey veins)",
+      "note": "Carrara marbles are dense crystalline calcite, open porosity a few tenths of a per cent; no measured value was read."
+    },
+    "wettingDepth": {
+      "value": 1.0,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: accent.statuario realMaterial (white statuary marble, faint grey veins)",
+      "note": "As the Crema Marfil: a dense stone wets only its outer millimetre."
+    }
+  },
+  "structure": {
+    "grain": {
+      "value": 0.2,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: accent.statuario realMaterial (white statuary marble, faint grey veins)",
+      "note": "A saccharoidal marble: interlocking calcite crystals a few tenths of a millimetre across, the sugary sparkle of a honed face."
+    },
+    "bed": {
+      "value": 400,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: accent.statuario realMaterial (white statuary marble, faint grey veins)",
+      "note": "The faint grey veins a statuary block shows, a first spacing read from trade photographs."
+    },
+    "bedAspect": {
+      "value": 2.5,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.statuario realMaterial (white statuary marble, faint grey veins)",
+      "note": "The veins are drawn out along the block's schistosity, finer across it."
+    },
+    "hurst": {
+      "value": 0.7,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Candela et al. 2012, Journal of Geophysical Research 117, B08409 (fault surfaces, 0.6 to 0.8; cited in Stone.ush)",
+      "note": "The middle of the range measured on rock surfaces, as the travertine's."
+    },
+    "toneSpread": {
+      "value": 0.06,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.statuario realMaterial (white statuary marble, faint grey veins)",
+      "note": "Statuary is the most even of the Carrara grades: a faint tonal spread."
+    },
+    "roughnessSpread": {
+      "value": 0.15,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Workings/honed.json: unverified surface.microRoughness (no filtered roughness read)",
+      "note": "A first half-range of ln(roughness) across a worked face, as the travertine's."
+    }
+  },
+  "medium": {
+    "absorption": {
+      "value": [
+        0.0021,
+        0.0041,
+        0.0071
+      ],
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "unit": "1/mm",
+      "grade": "record",
+      "source": "Substances/cream-marble.json: optics.subsurfaceReference.absorption (Jensen, Marschner, Levoy & Hanrahan 2001, a white marble, measured)",
+      "conditions": "red, green, blue",
+      "note": "The measured white marble itself: light diffuses millimetres into the calcite before it leaves."
+    },
+    "scattering": {
+      "value": [
+        2.19,
+        2.62,
+        3.0
+      ],
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "unit": "1/mm",
+      "grade": "record",
+      "source": "Substances/cream-marble.json: optics.subsurfaceReference.reducedScattering (Jensen, Marschner, Levoy & Hanrahan 2001, a white marble, measured)",
+      "conditions": "red, green, blue"
+    }
+  }
+}

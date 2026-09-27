@@ -38,10 +38,10 @@
     },
     {
       "surface": "classical-hall.niche.interior",
-      "material": "white.lime-plaster",
-      "working": "burnished.red-ochre",
+      "material": "white.lime-plaster.red-ochre",
+      "working": "burnished",
       "history": "new",
-      "note": "The 13 niches' half-round backs and quarter-sphere heads: lime pigmented with red ochre, burnished (Pompeian)."
+      "note": "The 13 niches' half-round backs and quarter-sphere heads: lime pigmented with red ochre, burnished (Pompeian). The ochre is in the plaster's body, so it is the palette's red-ochre lime, burnished (was a working, burnished.red-ochre)."
     },
     {
       "surface": "classical-hall.niche.sill",
@@ -151,9 +151,9 @@
     {
       "surface": "classical-hall.vault.rosette",
       "material": "white.fibrous-plaster",
-      "working": "cast",
+      "working": "cast.plaster",
       "history": "new",
-      "note": "The gallery coffers' rosettes (256), cast, white: the palette gilds only the tribune's."
+      "note": "The gallery coffers' rosettes (256), cast, white: the palette gilds only the tribune's. Cast is the plaster's working, cast.plaster."
     },
     {
       "surface": "classical-hall.tribune.rosette",
@@ -200,9 +200,9 @@
     {
       "surface": "classical-hall.floor.porphyry",
       "material": "accent.porphyry",
-      "working": "polished.reclaimed",
+      "working": "polished",
       "history": "foot-worn",
-      "note": "Roundels (reclaimed column slices, sectored within stock): harder than the calcite round them, they stand slightly proud as it wears."
+      "note": "Roundels (reclaimed column slices, sectored within stock): harder than the calcite round them, they stand slightly proud as it wears. Reclaimed is the stone's provenance, not a working: it is polished (was polished.reclaimed)."
     },
     {
       "surface": "classical-hall.floor.rosso",

@@ -1,0 +1,88 @@
+{
+  "schema": "musee.matter.shading.substance/1",
+  "key": "porphyry",
+  "name": "Imperial porphyry (Mons Porphyrites, reclaimed)",
+  "family": "accent",
+  "record": "Palette.json",
+  "master": "stone",
+  "accentOf": "stone",
+  "dielectric": {
+    "diffuseAlbedo": {
+      "value": [
+        30.0,
+        18.0,
+        8.0
+      ],
+      "space": "CIELAB (D65, 2 deg)",
+      "unit": "CIELAB",
+      "grade": "unverified",
+      "source": "Palette.json: accent.porphyry realMaterial (porfido rosso antico, Mons Porphyrites; reclaimed)",
+      "note": "A deep purple-red groundmass (fine hematite) flecked with pale pink plagioclase, averaged over a face; read from photographs of Roman roundels until a specimen is measured."
+    },
+    "refractiveIndex": {
+      "value": 1.55,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.porphyry realMaterial (porfido rosso antico, Mons Porphyrites; reclaimed)",
+      "note": "Its phenocrysts and groundmass are chiefly plagioclase feldspar, with indices near 1.55; no measurement of the stone was read. It is the one stone of the Hall that is not calcite."
+    },
+    "porosity": {
+      "value": 0.005,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.porphyry realMaterial (porfido rosso antico, Mons Porphyrites; reclaimed)",
+      "note": "A dense volcanic rock, under one per cent open porosity; no measured value was read."
+    },
+    "wettingDepth": {
+      "value": 0.5,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: accent.porphyry realMaterial (porfido rosso antico, Mons Porphyrites; reclaimed)",
+      "note": "A dense igneous stone takes water only into its outer half-millimetre; no measured depth was read."
+    }
+  },
+  "structure": {
+    "grain": {
+      "value": 3.0,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: accent.porphyry realMaterial (porfido rosso antico, Mons Porphyrites; reclaimed)",
+      "note": "The pale feldspar phenocrysts, a few millimetres long, that make a porphyry."
+    },
+    "bed": {
+      "value": 20,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: accent.porphyry realMaterial (porfido rosso antico, Mons Porphyrites; reclaimed)",
+      "note": "The clusters the phenocrysts gather in; a porphyry has no bedding."
+    },
+    "bedAspect": {
+      "value": 1.0,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.porphyry realMaterial (porfido rosso antico, Mons Porphyrites; reclaimed)",
+      "note": "An igneous rock is isotropic: no drawn-out direction."
+    },
+    "hurst": {
+      "value": 0.7,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Candela et al. 2012, Journal of Geophysical Research 117, B08409 (fault surfaces, 0.6 to 0.8; cited in Stone.ush)",
+      "note": "The middle of the range measured on rock surfaces, as the travertine's."
+    },
+    "toneSpread": {
+      "value": 0.35,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.porphyry realMaterial (porfido rosso antico, Mons Porphyrites; reclaimed)",
+      "note": "Pale phenocrysts on a deep purple groundmass."
+    },
+    "roughnessSpread": {
+      "value": 0.15,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Workings/honed.json: unverified surface.microRoughness (no filtered roughness read)",
+      "note": "A first half-range of ln(roughness) across a worked face, as the travertine's."
+    }
+  }
+}

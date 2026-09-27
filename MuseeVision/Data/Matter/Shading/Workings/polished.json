@@ -1,0 +1,42 @@
+{
+  "schema": "musee.matter.shading.working/1",
+  "key": "polished",
+  "name": "Polished (stone)",
+  "record": "Workings/polished.stone.json",
+  "kind": "face",
+  "roughness": {
+    "value": 0.08,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Workings/polished.stone.json: surface.gloss (75 GU or more at 60 degrees: high gloss); unverified surface.specularLobeWidth",
+    "note": "A face that holds sharp images; no measured BRDF of a polished calcite stone was read, so a first narrow lobe."
+  },
+  "roughnessAcross": {
+    "value": 0.08,
+    "unit": "1",
+    "grade": "derived",
+    "source": "Workings/polished.stone.json: surface.physics (polishing removes the roughness; a polished face has no grain)",
+    "derivation": "a face with no grain: equal to the roughness along"
+  },
+  "haziness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Workings/polished.stone.json (no measured haze)",
+    "note": "One specular lobe until a goniometric measurement shows a second."
+  },
+  "textureDepth": {
+    "value": 0.005,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Workings/polished.stone.json: surface.openPorosity (polishing and filling close the near-surface pores)",
+    "note": "A polished face holds almost no film; a first value."
+  },
+  "relief": {
+    "value": 0.005,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Workings/polished.stone.json: surface.definition (a glossy surface)",
+    "note": "A polished face is flat to the eye; a first value."
+  }
+}

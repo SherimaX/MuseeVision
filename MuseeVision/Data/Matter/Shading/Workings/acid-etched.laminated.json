@@ -1,0 +1,46 @@
+{
+  "schema": "musee.matter.shading.working/1",
+  "key": "acid-etched.laminated",
+  "name": "Acid-etched, laminated (6 / 0.76 PVB / 6)",
+  "record": "Workings/etched.glass.json",
+  "kind": "face",
+  "roughness": {
+    "value": 0.6,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Workings/etched.glass.json: optics.exampleTexture.gloss60 (6.8 to 8.7 GU)"
+  },
+  "roughnessAcross": {
+    "value": 0.6,
+    "unit": "1",
+    "grade": "derived",
+    "source": "Workings/etched.glass.json: optics.exampleTexture.gloss60 (6.8 to 8.7 GU)",
+    "derivation": "a face with no grain: equal to the roughness along"
+  },
+  "haziness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Workings/etched.glass.json: optics.exampleTexture.gloss60 (6.8 to 8.7 GU)",
+    "note": "One specular lobe unless noted."
+  },
+  "textureDepth": {
+    "value": 0.003,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Workings/etched.glass.json"
+  },
+  "relief": {
+    "value": 0.0,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Workings/etched.glass.json"
+  },
+  "paneThickness": {
+    "value": 12.0,
+    "unit": "mm",
+    "grade": "derived",
+    "source": "Workings/laminated.json: interlayer.thicknesses (0.76 mm)",
+    "note": "Two 6 mm leaves on a PVB interlayer, as the laminated pane: a laylight overhead is laminated safety glass, its etched face turned down."
+  }
+}

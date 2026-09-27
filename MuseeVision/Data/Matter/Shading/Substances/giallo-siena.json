@@ -1,0 +1,88 @@
+{
+  "schema": "musee.matter.shading.substance/1",
+  "key": "giallo-siena",
+  "name": "Giallo di Siena (Montagnola Senese)",
+  "family": "accent",
+  "record": "Palette.json",
+  "master": "stone",
+  "accentOf": "stone",
+  "dielectric": {
+    "diffuseAlbedo": {
+      "value": [
+        74.0,
+        5.0,
+        36.0
+      ],
+      "space": "CIELAB (D65, 2 deg)",
+      "unit": "CIELAB",
+      "grade": "unverified",
+      "source": "Palette.json: accent.giallo-siena realMaterial (yellow brecciated marble, Montagnola Senese)",
+      "note": "A straw yellow from the iron hydroxide (limonite) staining the calcite, read from trade photographs; to be measured on a specimen."
+    },
+    "refractiveIndex": {
+      "value": 1.6003,
+      "unit": "1",
+      "grade": "derived",
+      "source": "Substances/cream-marble.json: optics.specularF0 (0.0533, calcite grains in random orientations)",
+      "derivation": "n = (1 + sqrt(F0)) / (1 - sqrt(F0)), the index whose normal-incidence reflectance is the record's F0"
+    },
+    "porosity": {
+      "value": 0.005,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.giallo-siena realMaterial (yellow brecciated marble, Montagnola Senese)",
+      "note": "A dense marble, open porosity a few tenths of a per cent; no measured value was read."
+    },
+    "wettingDepth": {
+      "value": 1.0,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: accent.giallo-siena realMaterial (yellow brecciated marble, Montagnola Senese)",
+      "note": "As the Crema Marfil: a dense stone wets only its outer millimetre."
+    }
+  },
+  "structure": {
+    "grain": {
+      "value": 0.1,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: accent.giallo-siena realMaterial (yellow brecciated marble, Montagnola Senese)",
+      "note": "A fine-grained marble whose breccia is its visible structure."
+    },
+    "bed": {
+      "value": 150,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: accent.giallo-siena realMaterial (yellow brecciated marble, Montagnola Senese)",
+      "note": "The breccia's clasts and their darker seams, a first size read from trade photographs."
+    },
+    "bedAspect": {
+      "value": 1.5,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.giallo-siena realMaterial (yellow brecciated marble, Montagnola Senese)",
+      "note": "The clasts are little drawn out."
+    },
+    "hurst": {
+      "value": 0.7,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Candela et al. 2012, Journal of Geophysical Research 117, B08409 (fault surfaces, 0.6 to 0.8; cited in Stone.ush)",
+      "note": "The middle of the range measured on rock surfaces, as the travertine's."
+    },
+    "toneSpread": {
+      "value": 0.2,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.giallo-siena realMaterial (yellow brecciated marble, Montagnola Senese)",
+      "note": "Paler and deeper yellows between clasts and seams."
+    },
+    "roughnessSpread": {
+      "value": 0.15,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Workings/honed.json: unverified surface.microRoughness (no filtered roughness read)",
+      "note": "A first half-range of ln(roughness) across a worked face, as the travertine's."
+    }
+  }
+}
