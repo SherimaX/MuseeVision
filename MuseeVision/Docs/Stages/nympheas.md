@@ -478,3 +478,11 @@ Reserve's west door (x +11.90, z −5.80), where the stair ends at the closed br
   (Hang.json `walls`). The canvases are built curved to the wall and stand 35 mm proud.
 - **Water.** The water brims 23 mm under the lip's top and is dyed black. The velarium's glass takes Giverny's
   weather, with a fixed louvre as its daylight control (a catalogue gap).
+
+**Departures from as-built** (for the owner's review):
+- The golden lily is replaced by **the golden iris**: a gilt-bronze *Iris laevigata* on the coping at the west apex (D-019). One use toggles the pond; there is no armed state and no 5 s timeout.
+- **Retracting guard rails** round the open well replace the as-built invisible guards (ruled).
+- The **stair-foot plate** is dropped, because the pond never lowers while the visitor is below.
+- The lip carries a 10 mm band with a 13 × 5 mm slot sized to the catalogue strip. The rim light is 3000 K (as built 2700 K), and the stair lights 3000 K (as built 3800 K).
+- A **fixed louvre** under the glass dome keeps the willows within their care range (no blinds, D-014).
+- Materials follow the Story (D-018): the floor is honed, not polished; the walls are burnished lime; the velarium is linen; the pond's bed is Belgian bluestone.
