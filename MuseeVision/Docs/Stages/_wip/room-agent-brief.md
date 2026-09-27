@@ -25,9 +25,7 @@ old code. Faithful numbers and real materials matter more than prose. Be complet
 - D-017: port, don't redesign. Geometry and numbers come from the as-built museum (old code is the source). Designer
   choices live in the four schedules.
 - D-018: materials are CHOSEN as specific real materials (stone by trade name/quarry/cut, wood by species/origin/
-  sawing, alloy by composition, glass by make), never copied from `materials.py`. The palette
-  (`Data/Matter/Palette.json`) is NOT written yet, so use PROVISIONAL keys (convention below) and list every one in
-  §13 with the real material you mean.
+  sawing, alloy by composition, glass by make), never copied from `materials.py`. Use the draft palette's keys (below).
 - D-012 topology: Rotunda ports west→Salon, north→Chenghuai, south→Albion, east→Hall of Light, plus the stairwell it
   serves down to the Classical Hall. Hall of Light east→Atrium. Atrium vertical ports → Cube (below) and Sphere
   (above), closed by irises; the glass car never lands. Arrival point: the gilt sun at the Rotunda's centre.
@@ -54,27 +52,26 @@ old code. Faithful numbers and real materials matter more than prose. Be complet
   `source` "UseTargets" or "Care". (Plaster casts have no class: use stone-and-bronze and flag it.)
 - **Never per-room tuning.** No fill lights, no exposure, no fudge. The sheet records the design.
 
-## Provisional palette keys (use these so every room agrees; add new ones in the same style and flag them)
-`material` = substance key `<family>.<material>[.<variety>]`, families: stone, white, bronze, oak, accent, glass,
-water, living. `working` = how it's worked; `history` = its age/wear. Gilt is a WORKING laid on a substrate (D-014),
-never a substance: `{"material":"bronze.statuary","working":"gilt.water"}`. Brass is an accent of bronze.
-Examples to reuse verbatim where they fit:
-- stone.travertine.roman (Travertino Romano classico, Tivoli; vein-cut or cross-cut in `working`)
-- stone.marble.carrara, stone.marble.statuario, stone.marble.nero-marquina, stone.limestone.portland,
-  stone.limestone.caen, stone.limestone.jura, stone.granite.<name>, stone.slate.<name>
-- white.plaster.lime, white.plaster.gypsum, white.stucco.marmorino, white.paint.mineral (workings: matt, eggshell)
-- bronze.statuary (≈ Cu 88 Sn 10 Zn 2), bronze.architectural (architectural bronze, CuZn40Pb2 extrusion),
-  accent.brass (declared accent of bronze)
-- oak.european.quartersawn, oak.european.rift, oak.european.plain (workings: oiled, limed, fumed, waxed)
-- glass.float.low-iron, glass.laminated.low-iron.uv (UV-filtering interlayer), glass.stained.leaded,
-  glass.etched, glass.mirror
-- water.still, water.moving
-- living.<latin binomial, lowercase, hyphenated> for plants only if needed in Finishes; plants belong in Planting.json.
-Workings: honed, polished, sawn, bush-hammered, flamed, split, cast, cast.chased, patinated.brown,
-patinated.verdigris, brushed, satin, gilt.water, gilt.oil, limewash, painted.matt, oiled, waxed, fumed, lacquered,
-tempered, sandblasted. Histories: new, foot-worn, handled, weathered, aged.patina. Record in `note` why that choice.
-If the Chinese room needs non-oak timbers (e.g. nanmu, Chinese fir) or lacquer, use `accent.<material>` and say
-which core family it ties back to.
+## Palette keys (the draft palette has landed: USE ITS KEYS)
+The palette is committed on work/R-STORY-01. Read-only copies are
+`C:\Users\anan9\AppData\Local\Temp\claude\C--Users-anan9-Desktop-Projects-Musee-Vision\fe83b0c0-89f0-4a7a-aec6-d7928054970e\scratchpad\Palette.json`
+(48 entries: key, realMaterial, workingsByEra, roles) and `Story.md` in the same folder (the material story). Read the
+entries whose `roles` name your room, and use exactly those keys. The key set includes, among others:
+stone.travertine-romano, stone.crema-marfil, accent.statuario, accent.negro-marquina, accent.pierre-bleue,
+white.lime-plaster, white.fibrous-plaster, white.plaster-of-paris, white.limewash, white.pearl-steel,
+bronze.cusn10, gilt.gold-leaf, accent.brass-cuzn30, oak.sessile-french, accent.linen, accent.silk,
+accent.mohair-velvet, glass.low-iron, glass.clear-float, glass.mouth-blown and water.still.
+- `material` is a palette key. `working` is the finish that the entry's `workingsByEra` gives for your room's era
+  (for example honed, patinated, oiled and waxed, brushed, polished, or mirror-polished). `history` is one of
+  new, foot-worn, handled, weathered or aged.patina.
+- Gilt is a working (D-014, D-015). Its `material` is the substrate's key, and its `working` is
+  `gilt.gold-leaf.oil` or `gilt.gold-leaf.water`. For example:
+  `{"material":"bronze.cusn10","working":"gilt.gold-leaf.oil"}`.
+- Every material a surface needs must come from this palette. If a surface needs one the palette lacks, write
+  `todo.<family>.<material>` and list it in §13 with the real material you mean. §13 lists only those gaps, plus any
+  palette entry whose role for your room you had to guess.
+- Plants belong in Planting.json and never in Finishes.json.
+- Keep the sheet as short as completeness allows. Exact numbers and schedules matter; prose does not.
 
 ## Sources (read them; all read-only)
 1. The drafter's spec for your room: `C:\mv\wt\r-specs\MuseeVision\Docs\Stages\<room>.md` (if it exists). It has
@@ -107,12 +104,12 @@ true north, angle convention if used), then:
 5. Time and weather.
 6. Motion — mechanisms with travel, speed, clearances, interlocks (or "none").
 7. Nature — plants and water (or "none").
-8. Art — every work: collection id, title, artist, size (w×h m), wall, centre, support, frame, care class.
+8. Art — every work: catalogue id and source catalogue, title, artist, size (w×h m), wall, centre, support, frame, care class.
 9. Sound.
 10. Visitor — what one does there.
 11. The old-code map — file:line for every part (paths relative to `windows\`), plus "Corrections to the draft".
 12. The first-pass cut — what's built tonight and what waits for polish. Small and honest.
-13. Palette keys to confirm (each provisional key → the real material meant), and Catalogue gaps.
+13. Palette keys to confirm (every `todo.` key and every guessed role → the real material meant), and Catalogue gaps.
 
 ## Deliverable B: schedules in `MuseeVision/Data/Stages/<room>/` (only those the room needs; must parse as JSON)
 ```

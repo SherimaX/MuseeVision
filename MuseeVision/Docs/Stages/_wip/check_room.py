@@ -5,6 +5,7 @@ SLOT = r"C:\mv\wt\ds-sheets\MuseeVision"
 CAT = r"C:\mv\wt\r-light\MuseeVision\Data\Light\Luminaires"
 USE = r"C:\mv\wt\r-light\MuseeVision\Data\Light\UseTargets.json"
 CARE = r"C:\mv\wt\r-light\MuseeVision\Data\Art\Care.json"
+PALETTE = "C:/Users/anan9/AppData/Local/Temp/claude/C--Users-anan9-Desktop-Projects-Musee-Vision/fe83b0c0-89f0-4a7a-aec6-d7928054970e/scratchpad/Palette.json"
 COLL = r"C:\Users\anan9\Desktop\Projects\Musee Vision\assets\collection.json"
 
 HEADINGS = ["Identity and placement", "Ports", "Pieces by trade", "Light", "Time and weather", "Motion",
@@ -82,6 +83,7 @@ def main(room):
             if bad in raw:
                 errs.append(f"{name} contains '{bad}'")
     surfaces = set()
+    palette = {e["key"] for e in load(PALETTE)["entries"]}
     if "Finishes.json" not in data:
         errs.append("Finishes.json missing")
     else:
@@ -90,6 +92,11 @@ def main(room):
                 if k not in f:
                     errs.append(f"finish {f.get('surface')} lacks {k}")
             s = f.get("surface", "")
+            m = f.get("material", "")
+            if m not in palette and not m.startswith("todo."):
+                errs.append(f"finish {s}: material {m} not in palette")
+            if "gilt" in f.get("working", "") and f.get("working") not in ("gilt.gold-leaf.oil", "gilt.gold-leaf.water"):
+                errs.append(f"finish {s}: gilt working {f.get('working')}")
             if s in surfaces:
                 errs.append(f"finish surface duplicated: {s}")
             surfaces.add(s)
@@ -137,6 +144,8 @@ def main(room):
                 errs.append(f"hang work not in collection: {w['work']}")
             if w["wall"] not in surfaces:
                 errs.append(f"hang wall without finish: {w['wall']}")
+            if not w.get("source"):
+                errs.append(f"hang {w['work']}: no source catalogue")
             if w.get("care") not in care:
                 errs.append(f"hang {w['work']}: care {w.get('care')}")
             if not (len(w["centre"]) == 3 and len(w["size"]) == 2):
