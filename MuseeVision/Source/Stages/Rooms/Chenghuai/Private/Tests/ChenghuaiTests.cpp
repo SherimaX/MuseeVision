@@ -186,6 +186,15 @@ namespace Musee::Chenghuai::Tests
 				return O.Key == FMuseeKey(FString::Printf(TEXT("chenghuai.%s.top"), Court)) && O.Kind == EFormOpeningKind::Open;
 			}));
 		}
+		// A doorway between two of the stage's spaces is declared once, from one, naming the other beyond it.
+		TestTrue(TEXT("the chuihuamen opens the front court into the inner court"), Description.Openings.ContainsByPredicate([](const FFormOpening& O)
+		{
+			return O.Key == FMuseeKey(TEXT("chenghuai.front-court.chuihuamen")) && O.Beyond == FMuseeKey(TEXT("chenghuai.inner-court"));
+		}));
+		TestFalse(TEXT("and not again from the inner court"), Description.Openings.ContainsByPredicate([](const FFormOpening& O)
+		{
+			return O.Key == FMuseeKey(TEXT("chenghuai.inner-court.chuihuamen"));
+		}));
 		// Every surface a piece names is in the stage's finish schedule.
 		const FString Finishes = Schedule(TEXT("Finishes.json"));
 		TSet<FName> Checked;
@@ -299,17 +308,20 @@ namespace Musee::Chenghuai::Tests
 			{
 				TestTrue(*FString::Printf(TEXT("%s stops over the tribune"), *Name), At.Z >= Plan::HallClearZ - 1e-9);
 			}
-			if (Name == TEXT("pond.bed") && Piece.Shape.IsType<FFormLathe>())
+			if (Name == TEXT("pond.bed") && TestTrue(TEXT("the pond's basin is one landform"), Piece.Shape.IsType<FFormHeightfield>()))
 			{
-				const FFormProfile& Section = Piece.Shape.Get<FFormLathe>().Section;
-				auto Point = [&Section](int32 Index) { return Index == 0 ? Section.StartPoint() : FVector2D(Section.Steps[Index - 1].Line[0], Section.Steps[Index - 1].Line[1]); };
-				for (int32 Index = 0; Index <= Section.Steps.Num(); ++Index)
+				const FFormHeightfield& Basin = Piece.Shape.Get<FFormHeightfield>();
+				for (const Plan::FPlanPoint& Edge : Plan::PondEdge)
 				{
-					const FVector2D P = Point(Index);
-					if (P.X < Plan::TribuneClear - 1e-9)
+					// The bank's toe in from each point of the edge, towards the tribune: where it lies over the tribune, the
+					// bed's underside keeps above -0.50, and the bank's top stands at the garden's ground on the edge.
+					const FVector2D OnEdge(Edge.X, Edge.Y);
+					const FVector2D Toe = OnEdge + (Tribune - OnEdge).GetSafeNormal() * Plan::BankReach;
+					if (FVector2D::Distance(Toe, Tribune) < Plan::TribuneClear)
 					{
-						TestTrue(TEXT("the bed over the tribune keeps above -0.50"), P.Y >= Plan::HallClearZ - 1e-9);
+						TestTrue(TEXT("the bed over the tribune keeps above -0.50"), Basin.BottomMeters(Toe.X, Toe.Y) >= Plan::HallClearZ - 1e-9);
 					}
+					TestEqual(TEXT("the bank starts at the garden's ground"), Basin.TopMeters(OnEdge.X, OnEdge.Y), Plan::GardenGround, 1e-9);
 				}
 			}
 		}

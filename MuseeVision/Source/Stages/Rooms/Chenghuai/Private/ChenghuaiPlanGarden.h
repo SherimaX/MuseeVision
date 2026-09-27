@@ -27,13 +27,13 @@ namespace Musee::Chenghuai::Plan
 	inline constexpr double BedShallow = -0.460;
 	inline constexpr double BedRamp = 1.500;
 	inline constexpr double WaterLevel = -0.280;
-	/** The bed is a slab 0.10 thick under its deep part (to the footprint's -0.95), bottomed at -0.50 over the tribune; the
-	 *  bank's block runs 0.10 behind the edge. */
+	/** The bed is a slab 0.10 thick under its deep part (to the footprint's -0.95), bottomed at -0.50 over the tribune. */
 	inline constexpr double BedSlab = 0.100;
-	inline constexpr double BankBack = 0.100;
-	/** The bed is turned about the tribune's axis 5 cm and a degree of arc past the pond each way. */
-	inline constexpr double BedMargin = 0.050;
-	inline constexpr double BedMarginDegrees = 1.000;
+	/**
+	 * The basin is one landform over the pond's edge, set out on the rockery's grid of 0.10: the bank's plane falls straight to
+	 * its toe, and the bed's ramp bends by at most 0.39 / 1.50 over r, which the grid follows within a millimetre.
+	 */
+	inline constexpr double PondGrid = 0.100;
 
 	/** The edge rocks (湖石驳岸, ChenghuaiRockery.cpp:178-215): every 0.60 … 0.95 a broad stone R 0.42 (±20 %) from the water
 	 *  - 0.35 to 0.00 … +0.06; on 55 % an upper stone R 0.30 from -0.03 to +0.12 … +0.42; each a 7-sided outline, its radii
@@ -211,6 +211,11 @@ namespace Musee::Chenghuai::Plan
 	inline constexpr double HexRoofPower = 1.350;
 	inline constexpr double HexCornerLift = 0.450;
 	inline constexpr double HexSoffit = 0.140;
+	/**
+	 * The roof's bed is set out on a grid of 0.05: its sweep, (1 - f)^1.35, bends most steeply at the eave (about 3 per metre
+	 * at f 0.99), where the grid follows it within a millimetre.
+	 */
+	inline constexpr double HexRoofGrid = 0.050;
 	inline constexpr double HipLift = 0.120;
 	inline constexpr double HipOver = 0.040;
 	inline constexpr double HipFrom = 0.060;

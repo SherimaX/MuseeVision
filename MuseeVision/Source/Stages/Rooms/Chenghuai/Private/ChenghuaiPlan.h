@@ -169,9 +169,9 @@ namespace Musee::Chenghuai::Plan
 
 	// ---- §1 the openings between the stage's own enclosures ------------------------------------------------------------------
 	/**
-	 * An Open opening shared by two enclosures, declared once for each it opens (a Form opening names one enclosure): its
-	 * centre on the plan and in height, its size, and the direction it faces out of the first; the second faces the other way
-	 * (none when it opens onto the porch or the garden, which have no shell).
+	 * An Open opening between two enclosures, declared once from the first, naming the second beyond it: its centre on the
+	 * plan and in height, its size, and the direction it faces out of the first (no second when it opens onto the porch or the
+	 * garden, which have no shell).
 	 */
 	struct FSharedOpening
 	{

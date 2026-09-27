@@ -12,9 +12,9 @@
  * it standing a kerb's height over it or falling away. It is drawn as one relief over the plan.
  *
  * The hexagonal pavilion (亭 · 見山) stands on the summit: a bluestone platform, six chestnut columns with lintels, fretwork
- * and goose-neck seats on four faces, and its roof. Form has no word for a doubly curved roof, so the roof is drawn as six
- * plane faces from the eave's swept corners to the apex (its concave sweep and tiles wait for that word), with its hips,
- * corner beams and finial.
+ * and goose-neck seats on four faces, and its roof: six slabs bent both ways, each its sector's bed and the soffit 0.14
+ * under it (the sheet's sweep, concave from the apex and lifting to the corners), with its hips and corner beams following
+ * the bed along the corners, and its finial. Its tiles wait for Form's repeated members (K3-FORM-A).
  */
 namespace Musee::Chenghuai
 {
@@ -233,10 +233,23 @@ namespace Musee::Chenghuai
 			return FVector2D(Plan::HexX, Plan::HexY) + Radius * FVector2D(FMath::Cos(Angle), FMath::Sin(Angle));
 		}
 
-		/** The roof's height at an eave corner: the base with the corner's full sweep (f = 1, c = 1). */
-		double EaveCornerZ()
+		/** The pavilion's plan is a hexagon: six sectors of 60°, each face's normal half-way between its corners. */
+		constexpr double HexSectorDeg = 60.0;
+
+		/**
+		 * The roof's bed at a plan point (§3.9): z = base + (apex − base)(1 − f)^1.35 + 0.45 c³ f², f the point's fraction out
+		 * to the eave along the normal of its sector's face, and c its angle from that normal over half a sector.
+		 */
+		double RoofBed(const FVector2D& Point)
 		{
-			return Plan::HexRoofBase + Plan::HexCornerLift;
+			const FVector2D Off = Point - FVector2D(Plan::HexX, Plan::HexY);
+			const double Half = 0.5 * HexSectorDeg;
+			const double Angle = FMath::RadiansToDegrees(FMath::Atan2(Off.Y, Off.X));
+			const double FromFace = Angle - (HexSectorDeg * FMath::FloorToDouble(Angle / HexSectorDeg) + Half);
+			const double Apothem = Plan::HexEave * FMath::Cos(FMath::DegreesToRadians(Half));
+			const double F = FMath::Clamp(Off.Size() * FMath::Cos(FMath::DegreesToRadians(FromFace)) / Apothem, 0.0, 1.0);
+			const double C = FMath::Abs(FromFace) / Half;
+			return Plan::HexRoofBase + (Plan::HexApex - Plan::HexRoofBase) * FMath::Pow(1.0 - F, Plan::HexRoofPower) + Plan::HexCornerLift * C * C * C * F * F;
 		}
 
 		void Seat(TArray<FFormDrawing>& Out, int32 Face, const FVector2D& P, const FVector2D& Q)
@@ -315,24 +328,17 @@ namespace Musee::Chenghuai
 					Floor + Plan::HexFretworkZ, FVector2D::Distance(P, Q) - 2.0 * Clear, Plan::HexFretwork, ELattice::StepBrocade, false);
 				Seat(Out, K, P, Q);
 			}
-			// The roof: six plane faces, each through the apex and its two swept eave corners, the soffit under them.
-			const FVector Apex(Centre.X, Centre.Y, Plan::HexApex);
+			// The roof: a slab over each sector, its bed bent both ways and the soffit 0.14 under it.
 			for (int32 K = 0; K < 6; ++K)
 			{
 				const FVector2D P = Corner(K, Plan::HexEave);
-				const FVector2D Q = Corner(K + 1, Plan::HexEave);
-				const FVector B(P.X, P.Y, EaveCornerZ());
-				const FVector D(Q.X, Q.Y, EaveCornerZ());
-				FVector Up = FVector::CrossProduct(B - Apex, D - Apex).GetSafeNormal();
-				Up = Up.Z < 0.0 ? -Up : Up;
-				const FVector X = (B - Apex).GetSafeNormal();
-				const FVector Y = FVector::CrossProduct(-Up, X);
-				auto Local = [&](const FVector& Point) { return FVector2D(FVector::DotProduct(Point - Apex, X), FVector::DotProduct(Point - Apex, Y)); };
-				FFormExtrusion Slab;
-				Slab.Outline = Polygon({FVector2D::ZeroVector, Local(B), Local(D)});
-				Slab.DepthMeters = Plan::HexSoffit;
-				Draw(Out, FString::Printf(TEXT("pavilion.roof.%d"), K + 1), TEXT("roof.bed"), MoveTemp(Slab), EHit::None, FrameOfAxes(Apex, X, Y));
-				// The hip (垂脊) up this face's first edge, rising at the corner; and the corner beam (角梁) under it.
+				FFormHeightfield Slab;
+				Slab.Outline = FFormProfile::Polyline({Centre, P, Corner(K + 1, Plan::HexEave)}, true);
+				Slab.TopMeters = [](double X, double Y) { return RoofBed(FVector2D(X, Y)); };
+				Slab.BottomMeters = [](double X, double Y) { return RoofBed(FVector2D(X, Y)) - Plan::HexSoffit; };
+				Slab.GridMeters = Plan::HexRoofGrid;
+				Draw(Out, FString::Printf(TEXT("pavilion.roof.%d"), K + 1), TEXT("roof.bed"), MoveTemp(Slab), EHit::None);
+				// The hip (垂脊) up this sector's first corner, on the bed and rising at the corner; and the corner beam (角梁) under it.
 				const FVector2D Hip = (P - Centre).GetSafeNormal();
 				const FBuildingFrame HipFrame = FBuildingFrame::Of(Centre, Hip, FVector2D(-Hip.Y, Hip.X));
 				const double Reach = Plan::HexEave;
@@ -341,7 +347,7 @@ namespace Musee::Chenghuai
 				{
 					const double T = double(S) / (Plan::HipStations - 1);
 					const double U = Reach * FMath::Lerp(Plan::HipFrom, 1.0, T);
-					const double Z = FMath::Lerp(Plan::HexApex, EaveCornerZ(), U / Reach) + Plan::HipOver + Plan::HipLift * FMath::Pow(T, 6.0);
+					const double Z = RoofBed(Centre + Hip * U) + Plan::HipOver + Plan::HipLift * FMath::Pow(T, 6.0);
 					Line.Add(FVector2D(U, Z + Plan::HipUnder));
 				}
 				ReliefAlongV(Out, FString::Printf(TEXT("pavilion.hip.%d"), K + 1), TEXT("roof.ridge"), HipFrame, Line, Plan::HipTop[0].A, -Plan::HipTop[0].A,
@@ -349,7 +355,7 @@ namespace Musee::Chenghuai
 				auto Under = [&](double Fraction, double Drop)
 				{
 					const FVector2D At = FMath::Lerp(Centre, P, Fraction);
-					return FVector(At.X, At.Y, FMath::Lerp(Plan::HexApex, EaveCornerZ(), Fraction) - Plan::HexSoffit - Drop);
+					return FVector(At.X, At.Y, RoofBed(At) - Plan::HexSoffit - Drop);
 				};
 				Bar(Out, FString::Printf(TEXT("pavilion.corner-beam.%d"), K + 1), TEXT("timber.garden"), Under(Plan::CornerBeamFrom, Plan::CornerBeamUnder0),
 					Under(Plan::CornerBeamTo, Plan::CornerBeamUnder1), FVector(-Hip.Y, Hip.X, 0.0), Plan::CornerBeamWide, Plan::CornerBeamHigh, EHit::None);

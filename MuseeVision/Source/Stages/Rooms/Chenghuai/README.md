@@ -23,9 +23,9 @@ Lighting, Hang, Planting), read by the systems and never restated here.
 | `ChenghuaiLattice` | the fronts' lattice panels and door leaves, the leak windows' grilles |
 | `ChenghuaiBuildings.cpp`, `ChenghuaiGates.cpp` | the table drawn; the gate's joinery, the 垂花门, the screen wall |
 | `ChenghuaiWalls.cpp`, `ChenghuaiCourts.cpp` | the free-standing walls with copings, leak windows and the moon gate; flights, paving, beds, bowl, tubs, gallery floors |
-| `ChenghuaiGarden.cpp`, `ChenghuaiRockery.cpp` | the pond's basin, edge rocks, paths, bridge, terrace, engraved stones; the rockery and its pavilion |
+| `ChenghuaiGarden.cpp`, `ChenghuaiRockery.cpp` | the pond's basin (one landform: its bank and bed), edge rocks, paths, bridge, terrace, engraved stones; the rockery and its pavilion, whose roof is bent both ways |
 | `ChenghuaiCases.cpp`, `ChenghuaiFurniture.cpp` | the cases; the screens, furniture, desk things, lanterns, name boards and couplet |
-| `ChenghuaiSite.cpp` | footprint, port, openings, anchors, enclosures |
+| `ChenghuaiSite.cpp` | footprint, port, openings (each doorway between two spaces declared once, naming the space beyond), anchors, enclosures |
 
 ## Tests
 

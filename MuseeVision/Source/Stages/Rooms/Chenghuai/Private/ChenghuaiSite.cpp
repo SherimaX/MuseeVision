@@ -74,41 +74,37 @@ namespace Musee::Chenghuai
 					FMuseeFrame(FVector(0.5 * (Court.X0 + Court.X1), 0.5 * (Court.Y0 + Court.Y1), Plan::CourtTop)),
 					FVector2D(Court.X1 - Court.X0, Court.Y0 - Court.Y1));
 			}
-			// The doors between the stage's own spaces, once for each space they open.
+			// The doors between the stage's own spaces, each declared once from the space it faces out of, naming the one beyond.
 			for (const Plan::FSharedOpening& Shared : Plan::SharedOpenings)
 			{
 				const FVector Centre(Shared.X, Shared.Y, Shared.Z);
 				const FVector2D OutOf(Shared.OutX, Shared.OutY);
 				const FVector2D Size(Shared.Width, Shared.Height);
-				Opening(Out, FString(Shared.First) + TEXT(".") + Shared.Local, EFormOpeningKind::Open, Shared.First, FacingOut(Centre, OutOf), Size);
+				FFormOpening& Door = Opening(Out, FString(Shared.First) + TEXT(".") + Shared.Local, EFormOpeningKind::Open, Shared.First,
+					FacingOut(Centre, OutOf), Size);
 				if (Shared.Second)
 				{
-					Opening(Out, FString(Shared.Second) + TEXT(".") + Shared.Local, EFormOpeningKind::Open, Shared.Second, FacingOut(Centre, -OutOf), Size);
+					Door.Beyond = Key(Shared.Second);
 				}
 			}
-			// Each room's paper lattice and its open door pairs; each open pair again for the court it opens onto, facing into the room.
+			// Each room's paper lattice and its open door pairs, each pair naming the court it opens onto.
 			for (const FHallSpec& Spec : Buildings())
 			{
 				TArray<FFormOpening> Room;
 				HallOpenings(Spec, Room);
-				Out.Openings.Append(Room);
 				const Plan::FRoomCourt* Court = nullptr;
 				for (const Plan::FRoomCourt& Each : Plan::RoomCourts)
 				{
 					Court = Spec.Room == Each.Room ? &Each : Court;
 				}
-				for (const FFormOpening& Door : Room)
+				for (FFormOpening& Door : Room)
 				{
-					if (!Court || Door.Kind != EFormOpeningKind::Open)
+					if (Court && Door.Kind == EFormOpeningKind::Open)
 					{
-						continue;
+						Door.Beyond = Key(Court->Court);
 					}
-					const FString Local = Door.Key.ToString().RightChop(FCString::Strlen(Plan::Stage) + 1).Replace(TEXT("."), TEXT("-"));
-					FFormOpening& Mirror = Opening(Out, FString(Court->Court) + TEXT(".") + Local, EFormOpeningKind::Open, Court->Court, Door.Frame,
-						Door.SizeMeters);
-					// The same doorway seen from the court: turned half round about its own up.
-					Mirror.Frame.Rotation = Door.Frame.Rotation * FQuat(FVector::RightVector, UE_DOUBLE_PI);
 				}
+				Out.Openings.Append(Room);
 			}
 		}
 
