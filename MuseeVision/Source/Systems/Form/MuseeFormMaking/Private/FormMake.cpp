@@ -176,6 +176,12 @@ namespace Musee::FormMaking
 			OutFindings.Add(Unmade(Drawing, TEXT("it draws no surface")));
 			return;
 		}
+		if (const int32 Unfaced = Mesh.NumUnfacedVertices() + Pane.NumUnfacedVertices())
+		{
+			OutFindings.Add(Unmade(Drawing, FString::Printf(
+				TEXT("%d of its vertices face no side: an edge of its outline or section doubles back on itself or has no length"), Unfaced)));
+			return;
+		}
 		if (const FFormStair* Stair = Drawing.Shape.TryGet<FFormStair>())
 		{
 			CheckSteps(Drawing, *Stair, OutFindings);

@@ -30,8 +30,12 @@ namespace Musee::Form
 	int32 FMeshBuilder::AddVertex(const FVector& PositionMeters, const FVector& Normal, const FVector2D& UVMeters)
 	{
 		FVector Unit = Normal;
-		const bool bHasDirection = Unit.Normalize(UE_DOUBLE_SMALL_NUMBER);
-		ensureMsgf(bHasDirection, TEXT("A Form vertex needs a normal: the side its surface is seen from."));
+		// A vertex needs a normal, the side its surface is seen from. A drawing that gives one none (an edge that doubles
+		// back, or has no length) is the drawing's fault: it is counted, and the maker names the piece in a finding.
+		if (!Unit.Normalize(UE_DOUBLE_SMALL_NUMBER))
+		{
+			++UnfacedVertices;
+		}
 		const int32 Index = Positions.Add(PositionMeters);
 		Normals.Add(Unit);
 		UVs[0].Add(UVMeters);
@@ -113,6 +117,7 @@ namespace Musee::Form
 		ensureMsgf(Other.NumUVChannels() == NumUVChannels(),
 			TEXT("Form meshes join only with the same UV channels (%d and %d)."), NumUVChannels(), Other.NumUVChannels());
 		const int32 Base = Positions.Num();
+		UnfacedVertices += Other.UnfacedVertices;
 		Positions.Append(Other.Positions);
 		Normals.Append(Other.Normals);
 		for (int32 Channel = 0; Channel < UVs.Num(); ++Channel)

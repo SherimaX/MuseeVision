@@ -32,7 +32,8 @@ namespace Musee::Albion
 			North.Key = Key(TEXT("north"));
 			North.Kind = ESitePortKind::Doorway;
 			North.Class = FMuseeKey(Plan::PortClass);
-			North.Frame = FrameOfAxes(FVector(0.0, Plan::PortPlaneY, 0.0), FVector(0.0, -1.0, 0.0), Vertical);
+			// A port's x is its facing and its z is up, so its y is up × facing: east, for a port facing north (−y).
+			North.Frame = FrameOfAxes(FVector(0.0, Plan::PortPlaneY, 0.0), FVector(0.0, -1.0, 0.0), FVector(1.0, 0.0, 0.0));
 			North.WallDepthMeters = Plan::LiningMeters;
 			North.FaceRadiusMeters = 0.0;
 			North.Mates = FMuseeKey(TEXT("rotunda.south"));

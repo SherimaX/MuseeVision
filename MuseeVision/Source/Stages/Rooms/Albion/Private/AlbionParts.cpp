@@ -63,7 +63,29 @@ namespace Musee::Albion
 
 	FFormProfile Polygon(TConstArrayView<FVector2D> Points)
 	{
-		return FFormProfile::Polyline(Points, true);
+		// A closed outline is drawn by its corners only. A point where the outline runs straight on or turns straight back
+		// is no corner (a clipped quarry leaves them, and a loop repeating its start leaves one), so it is dropped, again
+		// and again, until every point turns.
+		TArray<FVector2D> Corners(Points.GetData(), Points.Num());
+		bool bDropped = true;
+		while (bDropped && Corners.Num() >= 3)
+		{
+			bDropped = false;
+			for (int32 Index = 0; Index < Corners.Num() && Corners.Num() >= 3; ++Index)
+			{
+				const FVector2D& Before = Corners[(Index + Corners.Num() - 1) % Corners.Num()];
+				const FVector2D& After = Corners[(Index + 1) % Corners.Num()];
+				const FVector2D In = Corners[Index] - Before;
+				const FVector2D Out = After - Corners[Index];
+				if (In.Size() <= 1e-6 || Out.Size() <= 1e-6 || FMath::Abs(FVector2D::CrossProduct(In, Out)) <= 1e-9 * In.Size() * Out.Size())
+				{
+					Corners.RemoveAt(Index);
+					bDropped = true;
+					--Index;
+				}
+			}
+		}
+		return FFormProfile::Polyline(Corners, true);
 	}
 
 	FFormProfile Section(TConstArrayView<FVector2D> Points)

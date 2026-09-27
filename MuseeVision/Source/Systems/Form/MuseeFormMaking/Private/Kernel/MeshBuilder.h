@@ -70,6 +70,8 @@ namespace Musee::Form
 		int32 NumTriangles() const { return Triangles.Num(); }
 		int32 NumUVChannels() const { return UVs.Num(); }
 		int32 NumDroppedTriangles() const { return DroppedTriangles; }
+		/** Vertices added with no normal: a drawing fault the maker reports, never a mesh to cast. */
+		int32 NumUnfacedVertices() const { return UnfacedVertices; }
 		bool HasColors() const { return Colors.Num() > 0; }
 
 		const FVector& Position(int32 Vertex) const { return Positions[Vertex]; }
@@ -94,5 +96,6 @@ namespace Musee::Form
 		TArray<FName> SlotNames;
 		int32 Slot = 0;
 		int32 DroppedTriangles = 0;
+		int32 UnfacedVertices = 0;
 	};
 }
