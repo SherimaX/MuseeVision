@@ -44,24 +44,129 @@ namespace Musee::Atrium
 			Profile.Append({On(To, R), {Plan::NeckColumn, Plan::UpPlane}, {0.0, Plan::UpPlane}});
 		}
 
-		void Footprint(FSiteDescription& Out)
+		/** The point of a circle about the axis at a plan angle, degrees. */
+		FVector2D OnCircle(double Radius, double Degrees)
 		{
-			const double Half = Plan::PortalHalfWidth;
-			const double R = Plan::FootprintRadius;
-			// G1, G2, the arc clockwise on the plan (increasing plan angle) from G2 through north, east and south to G3, G4.
-			const double Open = FMath::Atan2(Half, -FMath::Sqrt(R * R - Half * Half));
-			const int32 Stations = FMath::CeilToInt32(Plan::FootprintStations * Open / UE_DOUBLE_PI);
-			TArray<FVector2D>& Outline = Out.Footprint.OutlineMeters;
-			Outline.Add(FVector2D(Plan::PortalFrontX, -Half));
-			for (int32 Index = 0; Index <= Stations; ++Index)
+			const double Radians = FMath::DegreesToRadians(Degrees);
+			return Radius * FVector2D(FMath::Cos(Radians), FMath::Sin(Radians));
+		}
+
+		/**
+		 * A circle about the axis from one plan angle to a larger one: the footprint's stations strictly between (every
+		 * half degree of the full turn, which the Hall of Light's arcs share, so the two meet vertex for vertex), then the end.
+		 */
+		void AddArc(TArray<FVector2D>& Out, double Radius, double FromDegrees, double ToDegrees)
+		{
+			const double Step = 360.0 / Plan::FootprintStations;
+			for (int32 K = FMath::FloorToInt32(FromDegrees / Step + UE_DOUBLE_KINDA_SMALL_NUMBER) + 1; K * Step < ToDegrees - UE_DOUBLE_KINDA_SMALL_NUMBER; ++K)
 			{
-				const double Angle = -Open + 2.0 * Open * Index / Stations;
-				Outline.Add(R * FVector2D(FMath::Cos(Angle), FMath::Sin(Angle)));
+				Out.Add(OnCircle(Radius, K * Step));
+			}
+			Out.Add(OnCircle(Radius, ToDegrees));
+		}
+
+		/** One band of the footprint: its plan, as a disc outside a sector either side of west. */
+		struct FBandPlan
+		{
+			double Radius = 0.0;
+			double SectorDeg = 0.0;
+			bool bPortal = false;
+		};
+
+		/**
+		 * A band's outline in plan, clockwise from the portal's north front corner (G1): along the portal block's north side
+		 * to the disc, meeting its circle or, within the sector, the sector's radial edge; round the circle by the north, east
+		 * and south; back to the south front corner; then, when Notch is more than nothing, in along the portal's front and
+		 * round the base's face r 14.800 by the west, leaving out the notch of that half width. Without the portal block, the
+		 * disc alone.
+		 */
+		TArray<FVector2D> BandOutline(const FBandPlan& Band, double Notch)
+		{
+			TArray<FVector2D> Outline;
+			if (!Band.bPortal)
+			{
+				Outline.Add(OnCircle(Band.Radius, 0.0));
+				AddArc(Outline, Band.Radius, 0.0, 360.0);
+				Outline.Pop();
+				return Outline;
+			}
+			const double Half = Plan::PortalHalfWidth;
+			const double FromWest = FMath::RadiansToDegrees(FMath::Asin(Half / Band.Radius));
+			// The side meets the circle outside the sector, or else the sector's radial edge, which it follows out to the circle.
+			const double Leaves = FMath::Max(FromWest, Band.SectorDeg);
+			Outline.Add(FVector2D(Plan::PortalFrontX, -Half));
+			if (FromWest < Band.SectorDeg)
+			{
+				Outline.Add(FVector2D(-Half / FMath::Tan(FMath::DegreesToRadians(Band.SectorDeg)), -Half));
+			}
+			Outline.Add(OnCircle(Band.Radius, 180.0 + Leaves));
+			AddArc(Outline, Band.Radius, 180.0 + Leaves, 540.0 - Leaves);
+			if (FromWest < Band.SectorDeg)
+			{
+				Outline.Add(FVector2D(-Half / FMath::Tan(FMath::DegreesToRadians(Band.SectorDeg)), Half));
 			}
 			Outline.Add(FVector2D(Plan::PortalFrontX, Half));
+			if (Notch > 0.0)
+			{
+				const double Face = FMath::RadiansToDegrees(FMath::Asin(Notch / Plan::BaseOuter));
+				Outline.Append({FVector2D(Plan::PortalFrontX, Notch), OnCircle(Plan::BaseOuter, 180.0 - Face)});
+				AddArc(Outline, Plan::BaseOuter, 180.0 - Face, 180.0 + Face);
+				Outline.Add(FVector2D(Plan::PortalFrontX, -Notch));
+			}
+			return Outline;
+		}
+
+		/** The prisms' plan from the height of a band's bottom: P1, P1c, P2 or P3. */
+		FBandPlan BandAt(double Bottom)
+		{
+			constexpr double Level = 1.0e-9;
+			if (Bottom >= Plan::PortalTop - Level)
+			{
+				return {Plan::EntablatureRadius, 0.0, false};
+			}
+			if (Bottom >= Plan::WashTop - Level)
+			{
+				return {Plan::FinRadius, Plan::FinSectorHalfDeg, true};
+			}
+			return {Bottom >= Plan::CoronaUnderside - Level ? Plan::FootprintRadius : Plan::SocleRadius, Plan::WestSectorHalfDeg, true};
+		}
+
+		/**
+		 * The footprint (§1): the plan outline at the ground, G1 (-15.000, -6.050), G2, the arc R 15.400 by the north, east and
+		 * south, G3, G4; and the stacked prisms P1, P1c, P2 and P3, each less the notch the Hall of Light's end stands in, its
+		 * arched head in level steps.
+		 */
+		void Footprint(FSiteDescription& Out)
+		{
 			Out.Footprint.Kind = ESiteFootprintKind::Building;
+			Out.Footprint.OutlineMeters = BandOutline({Plan::FootprintRadius, Plan::WestSectorHalfDeg, true}, 0.0);
 			Out.Footprint.BottomMeters = Plan::FootprintBottom;
 			Out.Footprint.TopMeters = Plan::FootprintTop;
+			const double Arch = Plan::PortalArchRadius;
+			const double JambTop = Plan::PortalArchCentreZ + FMath::Sqrt(Arch * Arch - FMath::Square(Plan::PortalJamb));
+			const double Crown = Plan::PortalArchCentreZ + Arch;
+			TArray<double> Levels = {Plan::FootprintBottom, Plan::CoronaUnderside, Plan::WashTop, Plan::PortalTop, Plan::FootprintTop, Crown};
+			for (double Level = JambTop; Level < Crown; Level += Plan::NotchStepMeters)
+			{
+				Levels.Add(Level);
+			}
+			Levels.Sort();
+			for (int32 Index = 0; Index + 1 < Levels.Num(); ++Index)
+			{
+				const double Bottom = Levels[Index];
+				const double Top = Levels[Index + 1];
+				if (Top - Bottom < UE_DOUBLE_KINDA_SMALL_NUMBER)
+				{
+					continue;
+				}
+				// The notch under the soffit, as wide as the soffit at the band's top; none above the crown.
+				const double Notch = Top <= JambTop ? Plan::PortalJamb : (Bottom < Crown ? FMath::Sqrt(FMath::Max(0.0, Arch * Arch
+					- FMath::Square(Top - Plan::PortalArchCentreZ))) : 0.0);
+				FSitePrism& Prism = Out.Footprint.Prisms.AddDefaulted_GetRef();
+				Prism.OutlineMeters = BandOutline(BandAt(Bottom), Notch);
+				Prism.BottomMeters = Bottom;
+				Prism.TopMeters = Top;
+			}
 			TurnedVolume(Out);
 		}
 

@@ -75,7 +75,7 @@ namespace Musee::Chenghuai::Tests
 		TestTrue(TEXT("with z up"), South.Frame.DirectionToParent(FVector::UpVector).Equals(FVector::UpVector, 1e-9));
 		TestEqual(TEXT("it meets the Rotunda's north door"), South.Mates, FMuseeKey(TEXT("rotunda.north")));
 		TestEqual(TEXT("the porch is open: no wall across its mouth"), South.WallDepthMeters, 0.0);
-		TestEqual(TEXT("its face is the drum's cylinder"), South.FaceRadiusMeters, 11.2);
+		TestEqual(TEXT("its face is the drum's cylinder, the axis ahead of it"), South.FaceRadiusMeters, -11.2);
 		TestFalse(TEXT("it has no well"), South.bHasWell);
 		// museum = local + (0, -17.000, 0): the port lands on rotunda.north's frame, (0, -11.200, 0).
 		TestTrue(TEXT("in the museum it stands on the drum's north face"),

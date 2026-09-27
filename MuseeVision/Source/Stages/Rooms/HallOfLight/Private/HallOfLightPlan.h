@@ -92,10 +92,25 @@ namespace Musee::HallOfLight::Plan
 	inline constexpr double FootprintBottom = -1.000;
 	inline constexpr double FootprintTop = 12.000;
 	/**
-	 * The footprint's arcs are set out at Form's chord rule, the stations no more than 1 mm off the true circle
-	 * (FormMaking's DefaultChordToleranceMeters), so the outline lies on the curves Form draws.
+	 * The footprint's arcs lie on the neighbours' circles, so they stand on the neighbours' own stations and the footprints
+	 * meet vertex for vertex: the Rotunda's drum at 320 to the turn (rotunda.md sec. 1), the Atrium's circles at 720
+	 * (atrium.md sec. 1). Either keeps its chords within Form's chord rule, 1 mm of the true circle (FormMaking's
+	 * DefaultChordToleranceMeters).
 	 */
+	inline constexpr int32 RotundaStations = 320;
+	inline constexpr int32 AtriumStations = 720;
 	inline constexpr double ChordToleranceMeters = 0.001;
+	/**
+	 * The volume the footprint's prisms hold (sec. 1, vertical extent; atrium.md sec. 1 for the Atrium's side): the hall
+	 * band, |y| <= 4.80 from the linings' bed (-0.12) to their crown (7.62), west of the Atrium's portal front; within the
+	 * portal's notch, out to the base's face, the linings' outline (sec. 3.1) in level steps of 0.100 above the eaves, each
+	 * as wide as the lining at its bottom, which keep inside the 0.38 to the portal arch's soffit (R 5.80) the Atrium leaves;
+	 * and the gardens, from -1.00 round the Atrium's socle (R 15.30) up to its corona's underside (5.48), and above it to
+	 * 12.00 clear of its entablature's corona (R 15.70), which oversails the socle.
+	 */
+	inline constexpr double NotchStepMeters = 0.100;
+	inline constexpr double AtriumCoronaUnderside = 5.480;
+	inline constexpr double AtriumCoronaRadius = 15.700;
 
 	// ---- sec. 2 ports -------------------------------------------------------------------------------------------------------
 	inline constexpr const TCHAR* WestClass = TEXT("doorway.3000x6000.arched");

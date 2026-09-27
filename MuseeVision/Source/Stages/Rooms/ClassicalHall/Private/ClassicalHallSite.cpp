@@ -60,7 +60,10 @@ namespace Musee::ClassicalHall
 			Stair.Class = FMuseeKey(Plan::PortClass);
 			Stair.Frame = Turned(FVector(0.0, Plan::PortFaceY, 0.0), 90.0);
 			Stair.WallDepthMeters = Plan::PortFaceY - Plan::SouthFaceY;
-			Stair.FaceRadiusMeters = Plan::WellRadius;
+			// The well bulges into the hall: its axis stands ahead of the port face, a negative radius; the wall behind it is the
+			// gallery's flat south face (y 31.10), 0.600 behind on the axis (FSitePort).
+			Stair.FaceRadiusMeters = -Plan::WellRadius;
+			Stair.bFlatInnerFace = true;
 			Stair.Mates = FMuseeKey(Plan::PortMates);
 			Stair.bHasWell = true;
 			Stair.Well.bServing = false;

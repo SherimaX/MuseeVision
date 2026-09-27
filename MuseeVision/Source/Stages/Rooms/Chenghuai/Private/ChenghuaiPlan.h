@@ -51,13 +51,25 @@ namespace Musee::Chenghuai::Plan
 	/** The Rotunda's drum: its outer face, a cylinder of radius 11.20 about (0, 17.000), bulging into the porch. */
 	inline constexpr double DrumCentreY = 17.000;
 	inline constexpr double DrumRadius = 11.200;
-	/** The drum's arc of the footprint is set out at this many stations between the porch walls' outer faces. */
+	/** The porch paving's end on the drum's arc is set out at this many stations between the porch walls' outer faces. */
 	inline constexpr int32 DrumArcStations = 24;
+	/**
+	 * The footprint's arc on the drum stands on the drum's own stations, 320 to the turn from the Rotunda's east (the
+	 * Rotunda's footprint, rotunda.md §1: "build it on Form's shared stations so each neighbour meets it vertex for
+	 * vertex"), so the two footprints touch along the arc and nowhere cross.
+	 */
+	inline constexpr int32 DrumStationsPerTurn = 320;
 	/** From the footings under the bridge's piers (outside the tribune's zone) to the main hall's ridge top. */
 	inline constexpr double FootprintBottom = -0.950;
 	inline constexpr double FootprintTop = 8.463;
-	/** The Classical Hall beneath: nothing below z -0.50 inside x ±4.20 north of the drum or r 8.30 of (0, -22.30). */
+	/**
+	 * The Classical Hall beneath: nothing below z -0.50 inside x ±4.20 north of the drum (its gallery's shell) or r 8.30 of
+	 * (0, -22.30) (its tribune's), so the footprint's lower prism, from -0.95 to -0.50, leaves out that keyhole.
+	 */
 	inline constexpr double HallClearZ = -0.500;
+	inline constexpr double GalleryClearHalf = 4.200;
+	/** The keyhole's arc is set out at Form's chord rule, its chords within 1 mm of the circle (DefaultChordToleranceMeters). */
+	inline constexpr double FootprintChordMeters = 0.001;
 	inline constexpr double TribuneX = 0.000;
 	inline constexpr double TribuneY = -22.300;
 	inline constexpr double TribuneClear = 8.300;

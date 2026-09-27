@@ -1,4 +1,5 @@
 #include "Algo/AnyOf.h"
+#include "Algo/Reverse.h"
 #include "HallOfLightEnds.h"
 #include "HallOfLightParts.h"
 #include "HallOfLightPlan.h"
@@ -19,17 +20,35 @@ namespace Musee::HallOfLight
 		const FVector South(0.0, 1.0, 0.0);
 		const FVector Up(0.0, 0.0, 1.0);
 
-		/** Adds an arc's stations after its start, to its end, at Form's chord rule. */
-		void AppendArc(TArray<FVector2D>& Points, const FVector2D& Centre, double Radius, double FromDegrees, double ToDegrees)
+		FVector2D OnCircle(const FVector2D& Centre, double Radius, double Degrees)
 		{
-			const double Step = 2.0 * FMath::Acos(1.0 - Plan::ChordToleranceMeters / Radius);
-			const double Sweep = FMath::DegreesToRadians(ToDegrees - FromDegrees);
-			const int32 Count = FMath::Max(1, FMath::CeilToInt32(FMath::Abs(Sweep) / Step));
-			for (int32 Index = 1; Index <= Count; ++Index)
+			const double Angle = FMath::DegreesToRadians(Degrees);
+			return Centre + Radius * FVector2D(FMath::Cos(Angle), FMath::Sin(Angle));
+		}
+
+		/**
+		 * Adds an arc after its start, to its end, either way round: its neighbour's stations strictly between (PerTurn to the
+		 * turn about the neighbour's axis, the first on +x), then the end itself.
+		 */
+		void AppendArc(TArray<FVector2D>& Points, const FVector2D& Centre, double Radius, double FromDegrees, double ToDegrees, int32 PerTurn)
+		{
+			const double Step = 360.0 / PerTurn;
+			constexpr double Apart = UE_DOUBLE_KINDA_SMALL_NUMBER;
+			if (ToDegrees > FromDegrees)
 			{
-				const double Angle = FMath::DegreesToRadians(FromDegrees) + Sweep * Index / Count;
-				Points.Add(Centre + Radius * FVector2D(FMath::Cos(Angle), FMath::Sin(Angle)));
+				for (int32 K = FMath::FloorToInt32(FromDegrees / Step + Apart) + 1; K * Step < ToDegrees - Apart; ++K)
+				{
+					Points.Add(OnCircle(Centre, Radius, K * Step));
+				}
 			}
+			else
+			{
+				for (int32 K = FMath::CeilToInt32(FromDegrees / Step - Apart) - 1; K * Step > ToDegrees + Apart; --K)
+				{
+					Points.Add(OnCircle(Centre, Radius, K * Step));
+				}
+			}
+			Points.Add(OnCircle(Centre, Radius, ToDegrees));
 		}
 
 		/** A point's angle about a centre, degrees, taken near a given angle. */
@@ -44,31 +63,118 @@ namespace Musee::HallOfLight
 		 * its portal's front, the east port face through the axis, the same mirrored round the orchard, and back along
 		 * the orchard's south edge to the west port face on the Rotunda's drum.
 		 */
+		const FVector2D AtriumAxis(Plan::AtriumAxisX, 0.0);
+		const FVector2D RotundaAxis(Plan::RotundaAxisX, 0.0);
+
+		/**
+		 * A garden's edge by the Atrium, from its outer east corner (29.90, Side 14.25) in to the portal's side (Side 6.05):
+		 * down the east edge to a circle R about the Atrium's axis, round it, along the portal's side to its front, and in
+		 * along the front to the hall band (Side 4.80). Side is -1 for the meadow (north), +1 for the orchard (south).
+		 */
+		void AddGardenEast(TArray<FVector2D>& Points, double Side, double Radius)
+		{
+			const double AtEdge = FMath::Sqrt(Radius * Radius - FMath::Square(Plan::AtriumAxisX - Plan::FootprintEastX));
+			const double AtPortal = Plan::AtriumAxisX - FMath::Sqrt(Radius * Radius - Plan::PortalHalf * Plan::PortalHalf);
+			Points.Add({Plan::FootprintEastX, Side * AtEdge});
+			AppendArc(Points, AtriumAxis, Radius, AngleAbout(AtriumAxis, Points.Last(), 180.0), AngleAbout(AtriumAxis, {AtPortal, Side * Plan::PortalHalf}, 180.0),
+				Plan::AtriumStations);
+			Points.Append({{Plan::PortalFrontX, Side * Plan::PortalHalf}, {Plan::PortalFrontX, Side * Plan::HallHalf}});
+		}
+
+		/** One garden between two heights, its east edge on a circle about the Atrium's axis. */
+		FSitePrism Garden(double Side, double Radius, double Bottom, double Top)
+		{
+			FSitePrism Prism;
+			Prism.OutlineMeters = {{Plan::FootprintWestX, Side * Plan::FootprintHalf}, {Plan::FootprintEastX, Side * Plan::FootprintHalf}};
+			AddGardenEast(Prism.OutlineMeters, Side, Radius);
+			Prism.OutlineMeters.Add({Plan::FootprintWestX, Side * Plan::HallHalf});
+			Prism.BottomMeters = Bottom;
+			Prism.TopMeters = Top;
+			return Prism;
+		}
+
+		/** The hall band west of the portal's front: |y| <= 4.80 from the west port face on the drum. */
+		FSitePrism HallBand()
+		{
+			const FEndFace WestPort = PortFace(EHallEnd::West);
+			FSitePrism Prism;
+			Prism.OutlineMeters = {{Plan::PortalFrontX, -Plan::HallHalf}, {Plan::PortalFrontX, Plan::HallHalf}, WestPort.At(Plan::HallHalf)};
+			AppendArc(Prism.OutlineMeters, RotundaAxis, WestPort.Radius, WestPort.AngleDegrees(Plan::HallHalf), WestPort.AngleDegrees(-Plan::HallHalf),
+				Plan::RotundaStations);
+			Prism.BottomMeters = Plan::LiningBottom;
+			Prism.TopMeters = Plan::LiningCrown;
+			return Prism;
+		}
+
+		/** The hall's end in the Atrium's portal between two heights, |y| <= Half, from the portal's front to the east port face. */
+		FSitePrism EndInPortal(double Half, double Bottom, double Top)
+		{
+			const FEndFace EastPort = PortFace(EHallEnd::East);
+			FSitePrism Prism;
+			Prism.OutlineMeters = {{Plan::PortalFrontX, -Half}, EastPort.At(-Half)};
+			AppendArc(Prism.OutlineMeters, AtriumAxis, EastPort.Radius, EastPort.AngleDegrees(-Half), EastPort.AngleDegrees(Half), Plan::AtriumStations);
+			Prism.OutlineMeters.Add({Plan::PortalFrontX, Half});
+			Prism.BottomMeters = Bottom;
+			Prism.TopMeters = Top;
+			return Prism;
+		}
+
+		/**
+		 * The hall's end in the portal, stepped as the linings' outline (sec. 3.1): 4.80 wide to the kerbs' top, 4.68 to the
+		 * plinths', 4.60 to the eaves' top, then the arc R 5.42 about z 2.20 in level steps up to the crown, each step as wide
+		 * as the arc at its bottom.
+		 */
+		void AddEndInPortal(TArray<FSitePrism>& Out)
+		{
+			Out.Add(EndInPortal(Plan::LiningKerbHalf, Plan::LiningBottom, Plan::KerbTop));
+			Out.Add(EndInPortal(Plan::LiningPlinthHalf, Plan::KerbTop, Plan::PlinthTop));
+			Out.Add(EndInPortal(Plan::LiningEavesHalf, Plan::PlinthTop, Plan::EavesTop));
+			const int32 Steps = FMath::CeilToInt32((Plan::LiningCrown - Plan::EavesTop) / Plan::NotchStepMeters);
+			for (int32 Step = 0; Step < Steps; ++Step)
+			{
+				const double Bottom = Plan::EavesTop + Step * Plan::NotchStepMeters;
+				const double Top = FMath::Min(Bottom + Plan::NotchStepMeters, Plan::LiningCrown);
+				const double Half = FMath::Sqrt(FMath::Square(Plan::LiningArcRadius) - FMath::Square(Bottom - Plan::VaultAxisZ));
+				Out.Add(EndInPortal(FMath::Min(Half, Plan::LiningEavesHalf), Bottom, Top));
+			}
+		}
+
+		/**
+		 * The footprint (sec. 1). Its outline, clockwise on the north-up plan from F1: the meadow's north edge, the Atrium's
+		 * socle and its portal's front, the east port face through the axis, the same mirrored round the orchard, and back
+		 * along the orchard's south edge to the west port face on the Rotunda's drum. Its prisms: the hall band, the hall's end
+		 * in the Atrium's portal, and the two gardens under and over the Atrium's corona.
+		 */
 		void Footprint(FSiteDescription& Out)
 		{
-			const FVector2D Atrium(Plan::AtriumAxisX, 0.0);
-			const FVector2D Rotunda(Plan::RotundaAxisX, 0.0);
-			const double Socle = Plan::SocleRadius;
-			const double SocleAtEdge = FMath::Sqrt(Socle * Socle - FMath::Square(Plan::AtriumAxisX - Plan::FootprintEastX));
-			const double SocleAtPortal = Plan::AtriumAxisX - FMath::Sqrt(Socle * Socle - Plan::PortalHalf * Plan::PortalHalf);
 			const FEndFace EastPort = PortFace(EHallEnd::East);
 			const FEndFace WestPort = PortFace(EHallEnd::West);
 			const double Hall = Plan::HallHalf;
-			TArray<FVector2D> Points = {{Plan::FootprintWestX, -Plan::FootprintHalf}, {Plan::FootprintEastX, -Plan::FootprintHalf},
-				{Plan::FootprintEastX, -SocleAtEdge}};
-			AppendArc(Points, Atrium, Socle, AngleAbout(Atrium, Points.Last(), 180.0), AngleAbout(Atrium, {SocleAtPortal, -Plan::PortalHalf}, 180.0));
-			Points.Append({{Plan::PortalFrontX, -Plan::PortalHalf}, {Plan::PortalFrontX, -Hall}, EastPort.At(-Hall)});
-			AppendArc(Points, Atrium, EastPort.Radius, EastPort.AngleDegrees(-Hall), EastPort.AngleDegrees(Hall));
-			Points.Append({{Plan::PortalFrontX, Hall}, {Plan::PortalFrontX, Plan::PortalHalf}, {SocleAtPortal, Plan::PortalHalf}});
-			AppendArc(Points, Atrium, Socle, AngleAbout(Atrium, Points.Last(), 180.0), AngleAbout(Atrium, {Plan::FootprintEastX, SocleAtEdge}, 180.0));
+			TArray<FVector2D> Points = {{Plan::FootprintWestX, -Plan::FootprintHalf}, {Plan::FootprintEastX, -Plan::FootprintHalf}};
+			AddGardenEast(Points, -1.0, Plan::SocleRadius);
+			Points.Add(EastPort.At(-Hall));
+			AppendArc(Points, AtriumAxis, EastPort.Radius, EastPort.AngleDegrees(-Hall), EastPort.AngleDegrees(Hall), Plan::AtriumStations);
+			TArray<FVector2D> Orchard;
+			AddGardenEast(Orchard, 1.0, Plan::SocleRadius);
+			Algo::Reverse(Orchard);
+			Points.Append(Orchard);
 			Points.Append({{Plan::FootprintEastX, Plan::FootprintHalf}, {Plan::FootprintWestX, Plan::FootprintHalf}, {Plan::FootprintWestX, Hall},
 				WestPort.At(Hall)});
-			AppendArc(Points, Rotunda, WestPort.Radius, WestPort.AngleDegrees(Hall), WestPort.AngleDegrees(-Hall));
+			AppendArc(Points, RotundaAxis, WestPort.Radius, WestPort.AngleDegrees(Hall), WestPort.AngleDegrees(-Hall), Plan::RotundaStations);
 			Points.Add({Plan::FootprintWestX, -Hall});
 			Out.Footprint.Kind = ESiteFootprintKind::Building;
 			Out.Footprint.OutlineMeters = MoveTemp(Points);
 			Out.Footprint.BottomMeters = Plan::FootprintBottom;
 			Out.Footprint.TopMeters = Plan::FootprintTop;
+
+			TArray<FSitePrism>& Prisms = Out.Footprint.Prisms;
+			Prisms.Add(HallBand());
+			AddEndInPortal(Prisms);
+			for (const double Side : {-1.0, 1.0})
+			{
+				Prisms.Add(Garden(Side, Plan::SocleRadius, Plan::FootprintBottom, Plan::AtriumCoronaUnderside));
+				Prisms.Add(Garden(Side, Plan::AtriumCoronaRadius, Plan::AtriumCoronaUnderside, Plan::FootprintTop));
+			}
 		}
 
 		/**
@@ -84,7 +190,8 @@ namespace Musee::HallOfLight
 			WestPort.Class = FMuseeKey(Plan::WestClass);
 			WestPort.Frame = FrameOfAxes(FVector::ZeroVector, West, North);
 			WestPort.WallDepthMeters = Plan::LiningMeters;
-			WestPort.FaceRadiusMeters = Plan::WestFaceRadius;
+			// Each face wraps its neighbour's cylinder, whose axis stands ahead of it, outside the hall: a negative radius (FSitePort).
+			WestPort.FaceRadiusMeters = -Plan::WestFaceRadius;
 			WestPort.Mates = FMuseeKey(TEXT("rotunda.east"));
 
 			FSitePort& EastPort = Out.Ports.AddDefaulted_GetRef();
@@ -93,7 +200,7 @@ namespace Musee::HallOfLight
 			EastPort.Class = FMuseeKey(Plan::EastClass);
 			EastPort.Frame = FMuseeFrame(FVector(Plan::EastPortX, 0.0, 0.0));
 			EastPort.WallDepthMeters = Plan::LiningMeters;
-			EastPort.FaceRadiusMeters = Plan::EastFaceRadius;
+			EastPort.FaceRadiusMeters = -Plan::EastFaceRadius;
 			EastPort.Mates = FMuseeKey(TEXT("atrium.west"));
 		}
 

@@ -281,6 +281,17 @@ namespace Musee::Rotunda::Tests
 		TestTrue(TEXT("all on r 11.20"), bOnCircle);
 		TestTrue(TEXT("through (10.347, 4.286) at 22.5 degrees"), Outline.Num() > 20 && Outline[20].Equals(FVector2D(10.347, 4.286), 0.001));
 		TestEqual(TEXT("down to the well's floor"), Description.Footprint.BottomMeters, -6.4);
+		// Its two prisms: the well r 7.60 from -6.40 to 0.00 on the Classical Hall's 1.5° stations, and the room on the drum's
+		// circle from the floor structure's underside, -0.55, to 21.00; the hall below is outside both.
+		const TArray<FSitePrism>& Prisms = Description.Footprint.Prisms;
+		if (TestEqual(TEXT("the well and the room"), Prisms.Num(), 2))
+		{
+			TestTrue(TEXT("the well from -6.40 to 0.00"), Prisms[0].BottomMeters == -6.4 && Prisms[0].TopMeters == 0.0);
+			TestTrue(TEXT("on 240 stations of r 7.60"), Prisms[0].OutlineMeters.Num() == 240 && Prisms[0].OutlineMeters[15].Equals(FVector2D(7.6 * FMath::Cos(
+				FMath::DegreesToRadians(22.5)), 7.6 * FMath::Sin(FMath::DegreesToRadians(22.5))), 1e-9));
+			TestTrue(TEXT("the room from -0.55 to 21.00 on the drum's circle"), Prisms[1].BottomMeters == -0.55 && Prisms[1].TopMeters == 21.0
+				&& Prisms[1].OutlineMeters == Outline);
+		}
 
 		// §3.4: the coffers' steps from their cells; ring 1's rib is 0.243, its bevel 0.110; ring 5's rib 0.131.
 		TestEqual(TEXT("the dome's lower band springs from the cornice's top at 2.866 degrees"),

@@ -112,11 +112,11 @@ namespace Musee::HallOfLight::Tests
 		TestEqual(TEXT("it meets atrium.west"), East->Mates, FMuseeKey(TEXT("atrium.west")));
 		TestEqual(TEXT("its class is the Atrium's west door"), East->Class, FMuseeKey(TEXT("doorway.4000x4500.square")));
 
-		// Both faces are the neighbours' cylinders, and each port's wall is its 50 mm lining.
+		// Both faces are the neighbours' cylinders, wrapped round them (their axes ahead, a negative radius), and each port's wall is its 50 mm lining.
 		TestEqual(TEXT("the west face is the Rotunda's drum, R 11.20 about its axis"),
-			FVector2D::Distance(FVector2D(West->Frame.OriginMeters), FVector2D(-11.2, 0.0)), West->FaceRadiusMeters, 1e-9);
+			FVector2D::Distance(FVector2D(West->Frame.OriginMeters), FVector2D(-11.2, 0.0)), -West->FaceRadiusMeters, 1e-9);
 		TestEqual(TEXT("the east face is the Atrium's base, R 14.80 about its axis"),
-			FVector2D::Distance(FVector2D(East->Frame.OriginMeters), FVector2D(42.8, 0.0)), East->FaceRadiusMeters, 1e-9);
+			FVector2D::Distance(FVector2D(East->Frame.OriginMeters), FVector2D(42.8, 0.0)), -East->FaceRadiusMeters, 1e-9);
 		TestEqual(TEXT("the west wall is the lining"), West->WallDepthMeters, 0.050);
 		TestEqual(TEXT("the east wall is the lining"), East->WallDepthMeters, 0.050);
 

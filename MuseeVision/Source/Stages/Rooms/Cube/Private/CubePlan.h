@@ -31,6 +31,13 @@ namespace Musee::Cube::Plan
 	inline constexpr double FootprintHalf = 16.200;
 	inline constexpr double FootprintBottom = -38.200;
 	inline constexpr double FootprintTop = MatingPlane;
+	/**
+	 * The footprint's two stacked prisms (§1): the box, the square from its base to the roof's top (RoofTop, -5.800); and above the
+	 * roof, where the ground is the site's, only the shaft's column, the circle r 2.900 about the axis as a 96-gon of
+	 * circumradius 2.905, up to the mating plane. The Hall of Light's east end stands over the box's north-west part.
+	 */
+	inline constexpr int32 ColumnSides = 96;
+	inline constexpr double ColumnCircumradius = 2.905;
 
 	// ---- §3.1 the concrete box, 1.000 thick, round a 1.100 service void -------------------------------------------------
 	inline constexpr double BoxInner = 15.200;

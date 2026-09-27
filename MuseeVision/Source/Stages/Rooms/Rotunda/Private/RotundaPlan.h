@@ -47,12 +47,21 @@ namespace Musee::Rotunda::Plan
 	inline constexpr double DrumOuter = 11.200;
 	/** The drum's faces are built at 320 stations per turn (§3 build-ups, as built); every 22.5° reference point is one. */
 	inline constexpr int32 DrumStations = 320;
-	/** The room's vertical extent, and the well prism the stair serves (§1: r 7.60, z -6.40 to 0.00). */
+	/**
+	 * The footprint's two prisms (§1): the room, from the floor structure's underside (-0.55; north of y -8.20 it bears on
+	 * the Classical Hall's roof; FloorBed) to 21.00 over the eye's curb; and below it the well prism the stair serves, r 7.60, z -6.40
+	 * to 0.00.
+	 */
 	inline constexpr double FootprintBottom = -6.400;
 	inline constexpr double FootprintTop = 21.000;
 	inline constexpr double WellRadius = 7.600;
 	inline constexpr double WellBottom = -6.400;
 	inline constexpr double WellTop = 0.000;
+	/**
+	 * The well's cylinder is declared at the Classical Hall's stations, every 1.5° of the full round (classical-hall.md
+	 * §1), so where the hall's footprint goes round it the two meet vertex for vertex; every 22.5° point is one.
+	 */
+	inline constexpr int32 WellStations = 240;
 
 	// ---- §2 ports: the doorway classes (width x crown) and the stair's portal --------------------------------------
 	inline constexpr const TCHAR* WestEastClass = TEXT("doorway.3000x6000.arched");

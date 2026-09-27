@@ -11,15 +11,36 @@ namespace Musee::Rotunda
 {
 	namespace
 	{
+		/** A circle about the axis at a number of stations per turn, the first on +x. */
+		TArray<FVector2D> Circle(double Radius, int32 Stations)
+		{
+			TArray<FVector2D> Points;
+			for (int32 Station = 0; Station < Stations; ++Station)
+			{
+				Points.Add(Polar(Radius, 360.0 * Station / Stations));
+			}
+			return Points;
+		}
+
+		/**
+		 * The footprint (§1): the drum's circle from the floor structure's underside to the top, and under it the well the
+		 * stair serves, the cylinder r 7.60 down to the landing's foundation; the Classical Hall reserves the well's prism
+		 * and builds round it, under the room.
+		 */
 		void Footprint(FSiteDescription& Out)
 		{
 			Out.Footprint.Kind = ESiteFootprintKind::Building;
-			for (int32 Station = 0; Station < Plan::DrumStations; ++Station)
-			{
-				Out.Footprint.OutlineMeters.Add(Polar(Plan::DrumOuter, 360.0 * Station / Plan::DrumStations));
-			}
+			Out.Footprint.OutlineMeters = Circle(Plan::DrumOuter, Plan::DrumStations);
 			Out.Footprint.BottomMeters = Plan::FootprintBottom;
 			Out.Footprint.TopMeters = Plan::FootprintTop;
+			FSitePrism& Well = Out.Footprint.Prisms.AddDefaulted_GetRef();
+			Well.OutlineMeters = Circle(Plan::WellRadius, Plan::WellStations);
+			Well.BottomMeters = Plan::WellBottom;
+			Well.TopMeters = Plan::WellTop;
+			FSitePrism& Room = Out.Footprint.Prisms.AddDefaulted_GetRef();
+			Room.OutlineMeters = Out.Footprint.OutlineMeters;
+			Room.BottomMeters = Plan::FloorBed;
+			Room.TopMeters = Plan::FootprintTop;
 		}
 
 		/**

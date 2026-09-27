@@ -20,21 +20,79 @@ namespace Musee::Chenghuai
 			return FrameOfAxes(Origin, FVector::CrossProduct(FVector::UpVector, Z), FVector::UpVector);
 		}
 
+		/** A point's plan angle about a centre, degrees from +x towards +y, in [0, 360). */
+		double AngleAbout(const FVector2D& Centre, const FVector2D& Point)
+		{
+			const double Degrees = FMath::RadiansToDegrees(FMath::Atan2(Point.Y - Centre.Y, Point.X - Centre.X));
+			return Degrees < 0.0 ? Degrees + 360.0 : Degrees;
+		}
+
+		/** Adds the stations of a circle strictly between two plan angles (From < To), at a number of stations to the turn. */
+		void AddStationsBetween(TArray<FVector2D>& Out, const FVector2D& Centre, double Radius, double FromDegrees, double ToDegrees, int32 PerTurn)
+		{
+			const double Step = 360.0 / PerTurn;
+			for (int32 K = FMath::FloorToInt32(FromDegrees / Step) + 1; K * Step < ToDegrees; ++K)
+			{
+				const double Radians = FMath::DegreesToRadians(K * Step);
+				Out.Add(Centre + Radius * FVector2D(FMath::Cos(Radians), FMath::Sin(Radians)));
+			}
+		}
+
+		/**
+		 * The keyhole the Classical Hall below takes out of the lower prism, from the site's south face: the gallery's strip
+		 * x ±4.20 north to the tribune's circle r 8.30, round it by the west, north and east, and back; its arc at Form's
+		 * chord rule, the chords standing inside the circle, 0.40 clear of the hall's shell (r 7.90).
+		 */
+		void AddKeyhole(TArray<FVector2D>& Out)
+		{
+			const FVector2D Tribune(Plan::TribuneX, Plan::TribuneY);
+			const double Radius = Plan::TribuneClear;
+			const double Half = Plan::GalleryClearHalf;
+			const double Meets = Plan::TribuneY + FMath::Sqrt(Radius * Radius - Half * Half);
+			const double From = AngleAbout(Tribune, FVector2D(-Half, Meets));
+			const double To = AngleAbout(Tribune, FVector2D(Half, Meets)) + 360.0;
+			const double Step = FMath::RadiansToDegrees(2.0 * FMath::Acos(1.0 - Plan::FootprintChordMeters / Radius));
+			const int32 Stations = FMath::CeilToInt32((To - From) / Step);
+			Out.Append({FVector2D(-Half, Plan::SiteSouth), FVector2D(-Half, Meets)});
+			for (int32 K = 1; K < Stations; ++K)
+			{
+				const double Radians = FMath::DegreesToRadians(FMath::Lerp(From, To, double(K) / Stations));
+				Out.Add(Tribune + Radius * FVector2D(FMath::Cos(Radians), FMath::Sin(Radians)));
+			}
+			Out.Append({FVector2D(Half, Meets), FVector2D(Half, Plan::SiteSouth)});
+		}
+
+		/**
+		 * The footprint (§1): the site and the porch out to the drum's face, from the Classical Hall's clearance, -0.50, to
+		 * the main hall's ridge; and under it, down to the bridge piers' footings at -0.95, the site less the keyhole over the
+		 * hall below. The porch's end is the drum's arc R 11.20 about (0, 17.000) between the porch walls' outer faces, on the
+		 * drum's own stations.
+		 */
 		void Footprint(FSiteDescription& Out)
 		{
 			Out.Footprint.Kind = ESiteFootprintKind::Building;
 			TArray<FVector2D>& Outline = Out.Footprint.OutlineMeters;
-			Outline = {FVector2D(Plan::SiteWest, Plan::SiteSouth), FVector2D(-Plan::PorchOuter, Plan::SiteSouth)};
-			// The porch's end on the drum's face: the arc R 11.20 about (0, 17.000) between the porch walls' outer faces.
-			for (int32 K = 0; K <= Plan::DrumArcStations; ++K)
-			{
-				const double X = FMath::Lerp(-Plan::PorchOuter, Plan::PorchOuter, double(K) / Plan::DrumArcStations);
-				Outline.Add(FVector2D(X, Plan::DrumCentreY - FMath::Sqrt(FMath::Square(Plan::DrumRadius) - X * X)));
-			}
-			Outline.Append({FVector2D(Plan::PorchOuter, Plan::SiteSouth), FVector2D(Plan::SiteEast, Plan::SiteSouth), FVector2D(Plan::SiteEast, Plan::SiteNorth),
-				FVector2D(Plan::SiteWest, Plan::SiteNorth)});
+			const FVector2D Drum(0.0, Plan::DrumCentreY);
+			const auto OnDrum = [&Drum](double X) { return FVector2D(X, Drum.Y - FMath::Sqrt(FMath::Square(Plan::DrumRadius) - X * X)); };
+			Outline = {FVector2D(Plan::SiteWest, Plan::SiteSouth), FVector2D(-Plan::PorchOuter, Plan::SiteSouth), OnDrum(-Plan::PorchOuter)};
+			AddStationsBetween(Outline, Drum, Plan::DrumRadius, AngleAbout(Drum, OnDrum(-Plan::PorchOuter)), AngleAbout(Drum, OnDrum(Plan::PorchOuter)),
+				Plan::DrumStationsPerTurn);
+			Outline.Append({OnDrum(Plan::PorchOuter), FVector2D(Plan::PorchOuter, Plan::SiteSouth), FVector2D(Plan::SiteEast, Plan::SiteSouth),
+				FVector2D(Plan::SiteEast, Plan::SiteNorth), FVector2D(Plan::SiteWest, Plan::SiteNorth)});
 			Out.Footprint.BottomMeters = Plan::FootprintBottom;
 			Out.Footprint.TopMeters = Plan::FootprintTop;
+
+			FSitePrism& Lower = Out.Footprint.Prisms.AddDefaulted_GetRef();
+			Lower.OutlineMeters = {FVector2D(Plan::SiteWest, Plan::SiteSouth)};
+			AddKeyhole(Lower.OutlineMeters);
+			Lower.OutlineMeters.Append({FVector2D(Plan::SiteEast, Plan::SiteSouth), FVector2D(Plan::SiteEast, Plan::SiteNorth),
+				FVector2D(Plan::SiteWest, Plan::SiteNorth)});
+			Lower.BottomMeters = Plan::FootprintBottom;
+			Lower.TopMeters = Plan::HallClearZ;
+			FSitePrism& Upper = Out.Footprint.Prisms.AddDefaulted_GetRef();
+			Upper.OutlineMeters = Outline;
+			Upper.BottomMeters = Plan::HallClearZ;
+			Upper.TopMeters = Plan::FootprintTop;
 		}
 
 		/** The one port: the porch's end on the Rotunda's drum, facing south into the Rotunda's north door. */
@@ -46,7 +104,8 @@ namespace Musee::Chenghuai
 			South.Class = FMuseeKey(Plan::PortClass);
 			South.Frame = FrameOfAxes(FVector(0.0, Plan::PortY, 0.0), FVector(0.0, 1.0, 0.0), FVector(-1.0, 0.0, 0.0));
 			South.WallDepthMeters = 0.0;
-			South.FaceRadiusMeters = Plan::DrumRadius;
+			// The porch ends on the drum's face, wrapped round it: the drum's axis stands ahead of the port, a negative radius (FSitePort).
+			South.FaceRadiusMeters = -Plan::DrumRadius;
 			South.Mates = FMuseeKey(Plan::PortMates);
 		}
 

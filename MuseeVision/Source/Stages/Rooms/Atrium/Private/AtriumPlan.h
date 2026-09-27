@@ -44,6 +44,28 @@ namespace Musee::Atrium::Plan
 	inline constexpr double FootprintRadius = 15.400;
 	inline constexpr double FootprintBottom = -0.500;
 	inline constexpr double FootprintTop = 22.580;
+	/**
+	 * The stacked prisms (§1), each a disc outside a sector either side of west, the portal block (x -15.000 to the disc,
+	 * |y| <= 6.050) standing in the first three: P1 to the corona's underside (5.480), the socle r 15.300 outside 22° of
+	 * west (bearings 248° to 292°), r 14.800 within; P1c to the wash (6.200), as P1 with the corona r 15.400
+	 * (FootprintRadius); P2 to the portal's top (9.500), the fins and pedestals r 15.600 outside 25° of west, the drum's head
+	 * r 14.080 within; P3 to the entablature's top, its corona r 15.700 all round.
+	 */
+	inline constexpr double SocleRadius = 15.300;
+	inline constexpr double CoronaUnderside = 5.480;
+	inline constexpr double WashTop = 6.200;
+	inline constexpr double FinRadius = 15.600;
+	inline constexpr double EntablatureRadius = 15.700;
+	inline constexpr double WestSectorHalfDeg = 22.0;
+	inline constexpr double FinSectorHalfDeg = 25.0;
+	inline constexpr double DrumHeadRadius = 14.080;
+	/**
+	 * Every prism less the Hall of Light's end (§1, the notch): |y| < 4.950, between the portal's front and the base's face
+	 * r 14.800, under the portal arch's soffit. The soffit is declared in level steps of 0.100 from the jambs' top up to the
+	 * crown, each step's notch as wide as the soffit at its top: they keep inside the 0.38 between the soffit (R 5.80) and
+	 * the hall's lining (R 5.42) the hall declares on its side.
+	 */
+	inline constexpr double NotchStepMeters = 0.100;
 	/** The footprint's arc is set out at 720 stations of the full turn, as the oval's. */
 	inline constexpr int32 FootprintStations = 720;
 	/**

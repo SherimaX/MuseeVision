@@ -23,6 +23,18 @@ namespace Musee::Cube
 				FVector2D(FootprintHalf, FootprintHalf), FVector2D(-FootprintHalf, FootprintHalf)};
 			Out.Footprint.BottomMeters = FootprintBottom;
 			Out.Footprint.TopMeters = FootprintTop;
+			FSitePrism& Box = Out.Footprint.Prisms.AddDefaulted_GetRef();
+			Box.OutlineMeters = Out.Footprint.OutlineMeters;
+			Box.BottomMeters = FootprintBottom;
+			Box.TopMeters = RoofTop;
+			FSitePrism& Column = Out.Footprint.Prisms.AddDefaulted_GetRef();
+			for (int32 Side = 0; Side < ColumnSides; ++Side)
+			{
+				const double Angle = 2.0 * UE_DOUBLE_PI * Side / ColumnSides;
+				Column.OutlineMeters.Add(ColumnCircumradius * FVector2D(FMath::Cos(Angle), FMath::Sin(Angle)));
+			}
+			Column.BottomMeters = RoofTop;
+			Column.TopMeters = FootprintTop;
 		}
 
 		/**
@@ -44,6 +56,9 @@ namespace Musee::Cube
 			Up.Well.bServing = false;
 			Up.Well.MinMeters = FVector(-WellRadius, -WellRadius, WellBottom);
 			Up.Well.MaxMeters = FVector(WellRadius, WellRadius, MatingPlane);
+			// The ceiling iris is the class's closure of the well, built by the stage below its plane: its blades are the
+			// class's iris (PortClasses.json, wellAdmits), and nothing else of the Cube's reaches into the well.
+			Up.Well.Parts = {{Pieces::Blade, TEXT("iris")}};
 		}
 
 		FFormOpening& Opening(FSiteDescription& Out, const TCHAR* Local, EFormOpeningKind Kind, const TCHAR* Enclosure, const FMuseeFrame& Frame,

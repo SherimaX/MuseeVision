@@ -11,6 +11,7 @@
 #include "MuseeRecords.h"
 #include "SiteDescription.h"
 #include "SitePortClass.h"
+#include "SiteReceivedWell.h"
 
 /**
  * The Cube's description against its sheet and its schedules: its port, its well and its class, its anchors against the
@@ -107,6 +108,12 @@ namespace Musee::Cube::Tests
 		TestTrue(TEXT("the well runs from the plane to -23.800"), Up.Well.MinMeters.Equals(FVector(-2.3, -2.3, -23.8), 1e-9)
 			&& Up.Well.MaxMeters.Equals(FVector(2.3, 2.3, -0.5), 1e-9));
 		TestEqual(TEXT("the ceiling iris's top blade lies 7.442 under the plane"), Plan::MatingPlane - Plan::TopBlade, 7.442, 1e-9);
+		TestEqual(TEXT("the ceiling iris's blades are the class's iris in the well"), Musee::Site::PartOf(Up.Well, FName(TEXT("iris.blade.1"))),
+			FName(TEXT("iris")));
+		// The footprint's prisms: the box to the roof's top, and above it only the shaft's column to the plane.
+		const TArray<FSitePrism>& Prisms = Description.Footprint.Prisms;
+		TestTrue(TEXT("the box to -5.800, the column r 2.900 on to -0.500"), Prisms.Num() == 2 && Prisms[0].TopMeters == -5.8 && Prisms[1].BottomMeters == -5.8
+			&& Prisms[1].TopMeters == -0.5 && Prisms[1].OutlineMeters.Num() == 96 && FMath::IsNearlyEqual(Prisms[1].OutlineMeters[0].X, 2.905, 1e-9));
 
 		const TValueOrError<FSitePortClass, FString> Class = Musee::Site::FindPortClass(Up.Class);
 		if (Class.HasValue())

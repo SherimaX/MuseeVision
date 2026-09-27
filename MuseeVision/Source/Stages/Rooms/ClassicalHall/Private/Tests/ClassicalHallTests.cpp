@@ -96,7 +96,8 @@ namespace Musee::ClassicalHall::Tests
 		TestTrue(TEXT("facing south, into the well"), Stair.Facing().Equals(FVector(0.0, 1.0, 0.0), 1e-9));
 		TestTrue(TEXT("its frame in the museum is the Rotunda's rotunda.stair"), (Stair.Frame.OriginMeters + ToMuseum).Equals(FVector(0.0, -7.6, -6.0), 1e-9));
 		TestEqual(TEXT("0.600 deep on the axis"), Stair.WallDepthMeters, 0.6, 1e-9);
-		TestEqual(TEXT("its face the well's cylinder, R 7.60"), Stair.FaceRadiusMeters, 7.6, 1e-9);
+		TestEqual(TEXT("its face the well's cylinder, R 7.60, bulging into the hall (the axis ahead)"), Stair.FaceRadiusMeters, -7.6, 1e-9);
+		TestTrue(TEXT("its wall's inner face the gallery's flat south face"), Stair.bFlatInnerFace);
 		TestTrue(TEXT("the hall receives the well"), Stair.bHasWell && !Stair.Well.bServing);
 		TestTrue(TEXT("the well is the Rotunda's prism, r 7.60 about W, museum z −6.40 to 0.00"),
 			(Stair.Well.MinMeters + ToMuseum).Equals(FVector(-7.6, -7.6, -6.4), 1e-9) && (Stair.Well.MaxMeters + ToMuseum).Equals(FVector(7.6, 7.6, 0.0), 1e-9));
