@@ -559,3 +559,10 @@ use the shell line.
   stands on the floor, and the skirting and dado rail return round it.
 - **Shared anchors.** The 46 `Mount` anchors (carrier top centres) are read by Art (the casts) and located by the
   room's carriers. Light uses points, not anchors.
+
+**Departures from as-built** (for the owner's review):
+- The **cast carriers are sized to the casts** (ruled). 9 of the 13 niches get floor pedestals that project past the mouth; the Belvedere Antinous's plinth is lowered to a 0.51 top; five consoles grow to fit their busts.
+- **The section is made real** (ruled): a 0.30 roof slab and a 0.20 plenum over every laylight. The laylight glass drops from 5.38 to 4.94, and **the tribune dome is re-struck** through the same springing and eye (R 4.3377 about 0.7716), so its crown is 0.21 lower.
+- The as-built 1 cm step at the threshold is retired, so the floor is flush.
+- All light is 3000 K (as built 3800 K). The φ 90° wall-washer, which aimed at no wall, is dropped.
+- Materials follow the Story; only the tribune's rosettes are gilt.

@@ -113,6 +113,8 @@ true north, angle convention if used), then:
 Then end the sheet with `## Build notes`: a short list of anything a room builder must not miss (frame and plan
 translation, moving bodies and what rides on them, wells served or received, what the joint builds vs the room,
 unusual drawings such as true ellipses vs offsets, anchors shared between systems, what not to model by hand).
+The Build notes end with **Departures from as-built** (for the owner's review): a short list of every place the sheet
+departs from the as-built museum (geometry, materials per the Story, light, hang, mechanisms), each with its reason.
 
 ## Deliverable B: schedules in `MuseeVision/Data/Stages/<room>/`, to the STAGE CONTRACT
 The builders follow `C:\mv\briefs\STAGE-CONTRACT.md`. Read it completely: it defines the anchors, bodies, channels
