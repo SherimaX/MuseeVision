@@ -1,0 +1,6 @@
+{
+  "stage": "framed",
+  "finishes": [
+    { "surface": "framed.frame.gilt", "material": "oak.sessile-french", "working": "gilt.gold-leaf.water", "history": "aged.patina", "note": "The frames' finish." }
+  ]
+}

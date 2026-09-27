@@ -6,9 +6,11 @@
 #include "ArtHangEntry.generated.h"
 
 /**
- * One work in a stage's hanging plan: which work (its id in the catalogue that owns it, named by `source`, a path from
- * the repository's root), the Wall anchor it hangs on, where (`along` the wall to its start edge, its lower edge
+ * One canvas in a stage's hanging plan: which work (its id in the catalogue that owns it, named by `source`, a path
+ * from the repository's root), the Wall anchor it hangs on, where (`along` the wall to its start edge, its lower edge
  * `height` above the floor), its real size, its support and frame, and its care class (a key of Data/Art/Care.json).
+ * A work split across several canvases (the Orangerie's willows, the Rouen series) has one entry per canvas, sharing
+ * `work` and each with its own `canvas` index: the canvases carry the work's one image side by side in that order.
  */
 USTRUCT()
 struct MUSEEART_API FArtHangEntry
@@ -40,9 +42,16 @@ struct MUSEEART_API FArtHangEntry
 	UPROPERTY(meta = (MuseeRequired))
 	FName Support;
 
-	/** `none`. */
+	/**
+	 * `none`, or the surface in the stage's Finishes.json whose finish the canvas's moulded frame takes
+	 * (`salon.frame.gilt`).
+	 */
 	UPROPERTY()
 	FName Frame;
+
+	/** Which of the work's canvases this is, from 0 along the image; a work on one canvas leaves it 0. */
+	UPROPERTY()
+	int32 Canvas = 0;
 
 	UPROPERTY(meta = (MuseeRequired))
 	FName Care;

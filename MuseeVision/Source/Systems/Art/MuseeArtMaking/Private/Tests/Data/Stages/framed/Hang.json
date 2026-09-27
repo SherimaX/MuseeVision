@@ -1,0 +1,20 @@
+{
+  "stage": "framed",
+  "works": [
+    {
+      "work": "monet-impression-sunrise", "source": "MuseeVision/Source/Systems/Art/MuseeArtMaking/Private/Tests/Data/artworks.json",
+      "anchor": "oval.wall.flat", "along": 1.0, "height": 1.31, "size": [0.63, 0.48],
+      "support": "canvas", "frame": "framed.frame.gilt", "care": "oil-and-tempera", "note": "Framed in gilt."
+    },
+    {
+      "work": "monet-willows-two-willows", "source": "MuseeVision/Source/Systems/Art/MuseeArtMaking/Private/Tests/Data/collection.json",
+      "anchor": "oval.wall.flat", "along": 11.6, "height": 0.7, "size": [8.5, 2.0], "canvas": 1,
+      "support": "canvas", "frame": "none", "care": "oil-and-tempera", "note": "The right half, listed first: canvases are placed by their index."
+    },
+    {
+      "work": "monet-willows-two-willows", "source": "MuseeVision/Source/Systems/Art/MuseeArtMaking/Private/Tests/Data/collection.json",
+      "anchor": "oval.wall.flat", "along": 3.0, "height": 0.7, "size": [8.5, 2.0], "canvas": 0,
+      "support": "canvas", "frame": "none", "care": "oil-and-tempera", "note": "The left half."
+    }
+  ]
+}

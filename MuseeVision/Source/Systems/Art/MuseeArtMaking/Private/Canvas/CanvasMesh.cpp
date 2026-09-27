@@ -61,7 +61,10 @@ namespace Musee::ArtMaking
 		FFormMesh Face;
 		Strip(Face, Across, [&](const FWallPath::FStation& At, int32 Side) { return Height(At, StretcherDepthMeters, Side == 0 ? Bottom : Top); },
 			[](const FWallPath::FStation& At) { return At.Out; },
-			[&](double Along, int32 Side) { return FVector2D(Canvas.bReadsWithPath ? Along : Canvas.WidthMeters - Along, Side == 0 ? Canvas.HeightMeters : 0.0); });
+			[&](double Along, int32 Side)
+			{
+				return FVector2D(Canvas.ImageOffsetMeters + (Canvas.bReadsWithPath ? Along : Canvas.WidthMeters - Along), Side == 0 ? Canvas.HeightMeters : 0.0);
+			});
 		Face.Write(OutFace);
 
 		FFormMesh Linen;

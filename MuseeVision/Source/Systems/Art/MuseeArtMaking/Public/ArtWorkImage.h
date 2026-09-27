@@ -18,9 +18,9 @@ namespace Musee::ArtMaking
 	inline constexpr int32 WorkImageMaxPixels = 8192;
 
 	/**
-	 * Fills a texture Studio has made with a work's image: its source pixels, sRGB when the image is, the world's
-	 * texture group and the size above. Studio names, builds and saves the texture (D-015). Fails, saying why, when
-	 * the file can't be read as an image.
+	 * Composes a texture Studio has made from a work's image: its source pixels (whose hash is the source's id, so the
+	 * same image makes the same texture), sRGB when the image is, the world's texture group and the size above. Studio
+	 * names, builds and saves the texture (D-015). Fails, saying why, when the file can't be read as an image.
 	 */
-	[[nodiscard]] MUSEEARTMAKING_API bool FillWorkImage(const FString& ImagePath, UTexture2D& Texture, FString& OutWhy);
+	[[nodiscard]] MUSEEARTMAKING_API bool ComposeWorkImage(const FString& ImagePath, UTexture2D& Texture, FString& OutWhy);
 }

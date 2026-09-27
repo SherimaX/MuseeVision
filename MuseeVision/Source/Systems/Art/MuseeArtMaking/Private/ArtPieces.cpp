@@ -1,12 +1,11 @@
 #include "ArtPieces.h"
 
-#include "ArtCare.h"
 #include "ArtHangReading.h"
 #include "ArtWork.h"
 #include "Canvas/CanvasMesh.h"
 #include "Canvas/WallPath.h"
-#include "HAL/FileManager.h"
-#include "Misc/Paths.h"
+#include "FormMake.h"
+#include "Frame/Moulding.h"
 #include "MuseeCollision.h"
 #include "MuseeRecords.h"
 
@@ -14,53 +13,37 @@ namespace Musee::ArtMaking
 {
 	namespace
 	{
-		const FName ArtSystem(TEXT("Art"));
-		const FName WallKind(TEXT("Wall"));
-		const FName CanvasSupport(TEXT("canvas"));
-		const FName NoFrame(TEXT("none"));
 		const FName CanvasSurface(TEXT("canvas"));
 		const FName LinenSurface(TEXT("canvas.linen"));
+		const FName NoFrame(TEXT("none"));
 
 		/** The linen a canvas is woven of, bare where it turns round the stretcher: the palette's linen. */
 		const FName LinenMaterial(TEXT("accent.linen"));
 
-		/** What is wrong with a hung work's entry on its own, one sentence each. */
-		TArray<FString> EntryFaults(const FMuseeStageContext& Stage, const FArtHangEntry& Entry, const TArray<FName>& CareClasses)
+		/** What every canvas of a stage is made with: the paint's finish, and the frame's moulding once a canvas needs it. */
+		struct FMaking
 		{
-			TArray<FString> Out;
-			const FMuseeStageAnchor* Anchor = Stage.FindAnchor(Entry.Anchor);
-			if (!Anchor || Anchor->Kind != WallKind)
+			const FMuseeStageContext& Stage;
+			const FArtHang& Hang;
+			FPaintFinish Paint;
+			TOptional<TValueOrError<FArtMoulding, FString>> Moulding;
+
+			const TValueOrError<FArtMoulding, FString>& ReadMoulding()
 			{
-				Out.Add(FString::Printf(TEXT("%s is not a Wall anchor of the stage"), *Entry.Anchor.ToString()));
+				if (!Moulding.IsSet())
+				{
+					Moulding.Emplace(ReadRecord<FArtMoulding>(FArtMoulding::Record));
+				}
+				return Moulding.GetValue();
 			}
-			if (Entry.Size.Num() != 2 || Entry.Size[0] <= 0.0 || Entry.Size[1] <= 0.0 || Entry.Along < 0.0f || Entry.Height < 0.0f)
-			{
-				Out.Add(TEXT("it needs a size [w, h] of more than zero, and an along and a height of zero or more"));
-			}
-			if (Entry.Support != CanvasSupport)
-			{
-				Out.Add(FString::Printf(TEXT("its support '%s' isn't made yet; a canvas is"), *Entry.Support.ToString()));
-			}
-			if (!Entry.Frame.IsNone() && Entry.Frame != NoFrame)
-			{
-				Out.Add(FString::Printf(TEXT("its frame '%s' isn't made yet; an unframed canvas is"), *Entry.Frame.ToString()));
-			}
-			if (!CareClasses.Contains(Entry.Care))
-			{
-				Out.Add(FString::Printf(TEXT("its care class '%s' is not one of Data/Art/Care.json's"), *Entry.Care.ToString()));
-			}
-			if (Musee::Art::PaintMaterial(Entry.Work).IsNone())
-			{
-				Out.Add(TEXT("its id can't name a paint layer (it must be one key segment)"));
-			}
-			return Out;
-		}
+		};
 
 		/** The wall a work hangs on: its anchor's straight face, or the curved path the plan gives it. */
-		FWallPath WallOf(const FMuseeStageContext& Stage, const FArtHang& Hang, const FMuseeKey& Anchor)
+		FWallPath WallOf(const FMaking& Making, const FMuseeKey& Anchor, bool& bOutCurved)
 		{
-			const FMuseeFrame& Frame = Stage.FindAnchor(Anchor)->Frame;
-			const FArtWall* Curved = Hang.Walls.FindByPredicate([&Anchor](const FArtWall& W) { return W.Anchor == Anchor; });
+			const FMuseeFrame& Frame = Making.Stage.FindAnchor(Anchor)->Frame;
+			const FArtWall* Curved = Making.Hang.Walls.FindByPredicate([&Anchor](const FArtWall& W) { return W.Anchor == Anchor; });
+			bOutCurved = Curved != nullptr;
 			return Curved ? FWallPath(Frame, Curved->Path) : FWallPath(Frame);
 		}
 
@@ -71,84 +54,99 @@ namespace Musee::ArtMaking
 			return FMuseeFrame(Start.Point, FQuat(FMatrix(Right, Start.Out, FVector::UpVector, FVector::ZeroVector)));
 		}
 
-		void MakeWork(const FMuseeStageContext& Stage, const FArtHang& Hang, const FArtHangEntry& Entry, TArray<FFormMadePiece>& OutPieces, TArray<FMuseeFinding>& OutFindings)
+		/** The canvas's top-left corner on the wall's face in the stage, x along its top edge, y down, z out of the wall. */
+		FMuseeFrame TopLeftOf(const FMuseeFrame& Work, double TopMeters)
 		{
-			const TValueOrError<FArtWork, FString> Work = Musee::Art::ReadWork(Entry);
-			if (Work.HasError() || Work.GetValue().ImagePath.IsEmpty())
+			const FVector Across = Work.DirectionToParent(FVector::ForwardVector);
+			const FVector Down = Work.DirectionToParent(-FVector::UpVector);
+			const FVector Out = Work.DirectionToParent(FVector::RightVector);
+			return FMuseeFrame(Work.PointToParent(FVector(0.0, 0.0, TopMeters)), FQuat(FMatrix(Across, Down, Out, FVector::ZeroVector)));
+		}
+
+		/** The moulded frame round a canvas, in the finish of the plan's frame surface; false with a finding when it can't be. */
+		bool MakeFrame(FMaking& Making, const FArtHangEntry& Entry, bool bSplit, bool bCurved, const FMuseeFrame& Work,
+			TArray<FFormMadePiece>& OutPieces, TArray<FMuseeFinding>& OutFindings)
+		{
+			const TValueOrError<FArtMoulding, FString>& Moulding = Making.ReadMoulding();
+			if (bCurved || Moulding.HasError())
 			{
-				OutFindings.Add(ArtFinding(Stage, FString::Printf(TEXT("Work %s: %s."), *Entry.Work,
-					Work.HasError() ? *Work.GetError() : TEXT("no image of it is in the repository's assets"))));
-				return;
+				OutFindings.Add(ArtFinding(Making.Stage, FString::Printf(TEXT("Work %s: its frame can't be made: %s."), *Entry.Work,
+					bCurved ? TEXT("a moulded frame is made on a straight wall") : *Moulding.GetError())));
+				return false;
 			}
-			const FWallPath Wall = WallOf(Stage, Hang, Entry.Anchor);
+			const FVector2D Size(Entry.Size[0], Entry.Size[1]);
+			FFormDrawing Drawing = FrameDrawing(Moulding.GetValue(), Size, TopLeftOf(Work, Entry.Height + Size.Y), FramePieceName(Entry, bSplit), Entry.Frame);
+			Drawing.Collision = Collision::Solid.Profile();
+			Drawing.Drawer = TEXT("Art");
+			const int32 Before = OutPieces.Num();
+			Musee::FormMaking::Make(Drawing, OutPieces, OutFindings);
+			return OutPieces.Num() > Before;
+		}
+
+		/** One canvas of a work: its painted face, its linen and its frame, on its wall. */
+		void MakeCanvas(FMaking& Making, const FWorkPlan& Plan, const FCanvasPlan& Canvas, TArray<FFormMadePiece>& OutPieces, TArray<FMuseeFinding>& OutFindings)
+		{
+			const FArtHangEntry& Entry = *Canvas.Entry;
+			bool bCurved = false;
+			const FWallPath Wall = WallOf(Making, Entry.Anchor, bCurved);
 			const double Width = Entry.Size[0];
 			if (!Wall.Faults().IsEmpty() || Entry.Along + Width > Wall.Length())
 			{
-				OutFindings.Add(ArtFinding(Stage, FString::Printf(TEXT("Work %s: its wall %s: %s."), *Entry.Work, *Entry.Anchor.ToString(),
-					Wall.Faults().IsEmpty() ? TEXT("the work runs past the wall's end") : *Wall.Faults())));
+				OutFindings.Add(ArtFinding(Making.Stage, FString::Printf(TEXT("Work %s: its wall %s: %s."), *Entry.Work, *Entry.Anchor.ToString(),
+					Wall.Faults().IsEmpty() ? TEXT("the canvas runs past the wall's end") : *Wall.Faults())));
 				return;
 			}
 			const FWallPath::FStation Start = Wall.At(Entry.Along);
-			FCanvasSpec Canvas{ Entry.Along, Width, Entry.Height, Entry.Size[1], true };
+			FCanvasSpec Spec{ Entry.Along, Width, Entry.Height, Entry.Size[1], true, Canvas.ImageOffsetMeters };
 			// The image reads left to right as seen from the room, whichever way the wall's path runs.
-			Canvas.bReadsWithPath = FVector::DotProduct(Start.Along, FVector::CrossProduct(Start.Out, FVector::UpVector)) > 0.0;
-			const FMuseeFrame Frame = WorkFrame(Canvas.bReadsWithPath ? Start : Wall.At(Entry.Along + Width));
+			Spec.bReadsWithPath = FVector::DotProduct(Start.Along, FVector::CrossProduct(Start.Out, FVector::UpVector)) > 0.0;
+			const FMuseeFrame Frame = WorkFrame(Spec.bReadsWithPath ? Start : Wall.At(Entry.Along + Width));
+			const bool bSplit = Plan.IsSplit();
+			if (!Entry.Frame.IsNone() && Entry.Frame != NoFrame && !MakeFrame(Making, Entry, bSplit, bCurved, Frame, OutPieces, OutFindings))
+			{
+				return;
+			}
 			FFormMadePiece Face, Linen;
-			BuildCanvas(Wall, Canvas, Frame, Face.Mesh, Linen.Mesh);
-			Face.Name = FacePieceName(Entry.Work);
+			BuildCanvas(Wall, Spec, Frame, Face.Mesh, Linen.Mesh);
+			Face.Name = FacePieceName(Entry, bSplit);
 			Face.Surface = CanvasSurface;
 			Face.Material = Musee::Art::PaintMaterial(Entry.Work);
-			Linen.Name = LinenPieceName(Entry.Work);
+			Face.Working = Making.Paint.Working;
+			Face.History = Making.Paint.History;
+			Linen.Name = LinenPieceName(Entry, bSplit);
 			Linen.Surface = LinenSurface;
 			Linen.Material = LinenMaterial;
+			Linen.Working = Making.Paint.Working;
+			Linen.History = Making.Paint.History;
 			for (FFormMadePiece* Piece : { &Face, &Linen })
 			{
 				Piece->Collision = Collision::Solid.Profile();
 				Piece->bNanite = true;
 				Piece->Frame = Frame;
+				Piece->Drawer = TEXT("Art");
 				OutPieces.Add(MoveTemp(*Piece));
 			}
 		}
 	}
 
-	FName FacePieceName(const FString& WorkId)
+	FString CanvasName(const FArtHangEntry& Entry, bool bSplit)
 	{
-		return FName(FString::Printf(TEXT("canvas.%s"), *WorkId));
+		return bSplit ? FString::Printf(TEXT("canvas.%s.%d"), *Entry.Work, Entry.Canvas) : FString::Printf(TEXT("canvas.%s"), *Entry.Work);
 	}
 
-	FName LinenPieceName(const FString& WorkId)
+	FName FacePieceName(const FArtHangEntry& Entry, bool bSplit)
 	{
-		return FName(FString::Printf(TEXT("canvas.%s.linen"), *WorkId));
+		return FName(CanvasName(Entry, bSplit));
 	}
 
-	FMuseeFinding ArtFinding(const FMuseeStageContext& Stage, const FString& Summary)
+	FName LinenPieceName(const FArtHangEntry& Entry, bool bSplit)
 	{
-		FMuseeFinding Found = FMuseeFinding::Make(Stage.Stage.ToName(), Summary, FMuseeMeasurement());
-		Found.Owner = ArtSystem;
-		return Found;
+		return FName(CanvasName(Entry, bSplit) + TEXT(".linen"));
 	}
 
-	bool ReadStageHang(const FMuseeStageContext& Stage, FArtHang& OutHang, TArray<FMuseeFinding>& OutFindings)
+	FName FramePieceName(const FArtHangEntry& Entry, bool bSplit)
 	{
-		const FString Folder = FPaths::IsRelative(Stage.ScheduleDir) ? Records::DataRoot() / Stage.ScheduleDir : Stage.ScheduleDir;
-		const FString Path = Folder / FArtHang::FileName;
-		if (!IFileManager::Get().FileExists(*Path))
-		{
-			return false;
-		}
-		TValueOrError<FArtHang, FString> Hang = ReadRecord<FArtHang>(Path);
-		if (Hang.HasError())
-		{
-			OutFindings.Add(ArtFinding(Stage, Hang.GetError()));
-			return false;
-		}
-		if (!(Hang.GetValue().Stage == Stage.Stage))
-		{
-			OutFindings.Add(ArtFinding(Stage, FString::Printf(TEXT("%s names the stage %s."), *Path, *Hang.GetValue().Stage.ToString())));
-			return false;
-		}
-		OutHang = Hang.StealValue();
-		return true;
+		return FName(CanvasName(Entry, bSplit) + TEXT(".frame"));
 	}
 
 	void GatherArt(const FMuseeStageContext& Stage, TArray<FFormMadePiece>& OutPieces, TArray<FMuseeFinding>& OutFindings)
@@ -158,28 +156,18 @@ namespace Musee::ArtMaking
 		{
 			return;
 		}
-		const TValueOrError<TArray<FName>, FString> Care = Musee::Art::CareClasses();
-		if (Care.HasError())
+		FMaking Making{ Stage, Hang };
+		TArray<FWorkPlan> Works;
+		if (!PlanWorks(Stage, Hang, Works, Making.Paint, OutFindings))
 		{
-			OutFindings.Add(ArtFinding(Stage, Care.GetError()));
 			return;
 		}
-		TSet<FString> Hung;
-		for (const FArtHangEntry& Entry : Hang.Works)
+		for (const FWorkPlan& Plan : Works)
 		{
-			TArray<FString> Faults = EntryFaults(Stage, Entry, Care.GetValue());
-			bool bTwice = false;
-			Hung.Add(Entry.Work, &bTwice);
-			if (bTwice)
+			for (const FCanvasPlan& Canvas : Plan.Canvases)
 			{
-				Faults.Add(TEXT("it is hung twice; a work is one object"));
+				MakeCanvas(Making, Plan, Canvas, OutPieces, OutFindings);
 			}
-			if (!Faults.IsEmpty())
-			{
-				OutFindings.Add(ArtFinding(Stage, FString::Printf(TEXT("Work %s: %s."), *Entry.Work, *FString::Join(Faults, TEXT("; ")))));
-				continue;
-			}
-			MakeWork(Stage, Hang, Entry, OutPieces, OutFindings);
 		}
 	}
 }

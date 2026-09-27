@@ -24,16 +24,22 @@ namespace Musee::ArtMaking
 			return Found ? *Found : nullptr;
 		}
 
-		void Label(AActor& Actor, UStaticMeshComponent& Face, UStaticMeshComponent* Linen, const FArtHangEntry& Entry, const FArtWork& Work)
+		/** Tags every piece of a canvas with its work and care class. */
+		void Tag(const AActor& Actor, const FArtHangEntry& Entry, bool bSplit)
 		{
-			for (UStaticMeshComponent* Piece : { &Face, Linen })
+			for (const FName Piece : { FacePieceName(Entry, bSplit), LinenPieceName(Entry, bSplit), FramePieceName(Entry, bSplit) })
 			{
-				if (Piece)
+				if (UStaticMeshComponent* Mesh = FindPiece(Actor, Piece))
 				{
-					Piece->ComponentTags.AddUnique(UArtWorkComponent::WorkTag(Work.Id));
-					Piece->ComponentTags.AddUnique(UArtWorkComponent::CareTag(Entry.Care));
+					Mesh->ComponentTags.AddUnique(UArtWorkComponent::WorkTag(Entry.Work));
+					Mesh->ComponentTags.AddUnique(UArtWorkComponent::CareTag(Entry.Care));
 				}
 			}
+		}
+
+		/** The work's label and care class, on the face of its first canvas. */
+		void Label(AActor& Actor, UStaticMeshComponent& Face, const FArtHangEntry& Entry, const FArtWork& Work)
+		{
 			UArtWorkComponent* Carrier = NewObject<UArtWorkComponent>(&Actor, FName(FString::Printf(TEXT("Work_%s"), *Work.Id)));
 			Carrier->SetupAttachment(&Face);
 			Carrier->Describe(Work.Id, Entry.Care, Work.Caption());
@@ -51,10 +57,16 @@ namespace Musee::ArtMaking
 		}
 		for (const FArtHangEntry& Entry : Hang.Works)
 		{
-			UStaticMeshComponent* Face = FindPiece(*Stage.StageActor, FacePieceName(Entry.Work));
+			const bool bSplit = Hang.Works.ContainsByPredicate([&Entry](const FArtHangEntry& Other) { return &Other != &Entry && Other.Work == Entry.Work; });
+			UStaticMeshComponent* Face = FindPiece(*Stage.StageActor, FacePieceName(Entry, bSplit));
 			if (!Face)
 			{
-				// The piece source reported why the work wasn't made; there is nothing here to label.
+				// The piece source reported why the canvas wasn't made; there is nothing here to label.
+				continue;
+			}
+			Tag(*Stage.StageActor, Entry, bSplit);
+			if (Entry.Canvas != 0)
+			{
 				continue;
 			}
 			const TValueOrError<FArtWork, FString> Work = Musee::Art::ReadWork(Entry);
@@ -63,7 +75,7 @@ namespace Musee::ArtMaking
 				OutFindings.Add(ArtFinding(Stage, FString::Printf(TEXT("Work %s: %s."), *Entry.Work, *Work.GetError())));
 				continue;
 			}
-			Label(*Stage.StageActor, *Face, FindPiece(*Stage.StageActor, LinenPieceName(Entry.Work)), Entry, Work.GetValue());
+			Label(*Stage.StageActor, *Face, Entry, Work.GetValue());
 		}
 	}
 }
