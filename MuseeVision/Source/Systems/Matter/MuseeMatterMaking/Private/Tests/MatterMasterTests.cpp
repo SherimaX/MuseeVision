@@ -44,9 +44,15 @@ namespace Musee::Matter::Tests
 		return StoneRecipe(*TestMasters::TransientMoment());
 	}
 
+	/**
+	 * Where the tests save the masters they make: a specimens folder of their own. The museum's masters are in use
+	 * wherever a made level is open (the editor opens the museum level as it starts), so a test never saves over them.
+	 */
+	constexpr const TCHAR* SpecimenFolder = TEXT("/Game/Generated/Specimens/Matter");
+
 	/** The stone master's recipe over the museum Moment as the make step saves it (a saved master can read only a
-	 *  saved collection): the Moment already made, or made now. An unmade Moment is reported on Test and gives an empty
-	 *  recipe, which does not validate. */
+	 *  saved collection): the Moment already made, or made now, saved among the specimens. An unmade Moment is reported
+	 *  on Test and gives an empty recipe, which does not validate. */
 	FMasterRecipe SavedStoneMaster(FAutomationTestBase& Test)
 	{
 		UMaterialParameterCollection* Moment = FPackageName::DoesPackageExist(MomentCollectionPackage)
@@ -61,7 +67,13 @@ namespace Musee::Matter::Tests
 				Test.AddError(Problem);
 			}
 		}
-		return Moment ? StoneRecipe(*Moment) : FMasterRecipe();
+		if (!Moment)
+		{
+			return FMasterRecipe();
+		}
+		FMasterRecipe Recipe = StoneRecipe(*Moment);
+		Recipe.PackagePath = SpecimenFolder;
+		return Recipe;
 	}
 
 	/** A recipe whose one call reaches every function of Matter's shading library, so that compiling it compiles the
