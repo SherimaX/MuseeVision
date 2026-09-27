@@ -131,6 +131,11 @@
 			"LoadingPhase": "Default"
 		},
 		{
+			"Name": "MuseeAtrium",
+			"Type": "Editor",
+			"LoadingPhase": "Default"
+		},
+		{
 			"Name": "MuseeInstruments",
 			"Type": "Runtime",
 			"LoadingPhase": "Default",

@@ -1,0 +1,154 @@
+{
+  "stage": "atrium",
+  "walls": [
+    {
+      "anchor": "atrium.bay.a",
+      "path": {
+        "ellipse": [
+          14.0,
+          14.0
+        ],
+        "from_deg": -164.386,
+        "direction": "increasing"
+      },
+      "note": "Bay A (centre bearing 300 deg): the base's inner face r 14.000 between the two ribs' side faces, arc 7.030, hanging zone z 0.140 (cove top) ... 5.720 (coping band). Empty tonight: for new art to be commissioned."
+    },
+    {
+      "anchor": "atrium.bay.b",
+      "path": {
+        "ellipse": [
+          14.0,
+          14.0
+        ],
+        "from_deg": -134.386,
+        "direction": "increasing"
+      },
+      "note": "Bay B (centre bearing 330 deg): the base's inner face r 14.000 between the two ribs' side faces, arc 7.030, hanging zone z 0.140 (cove top) ... 5.720 (coping band). Empty tonight: for new art to be commissioned."
+    },
+    {
+      "anchor": "atrium.bay.c",
+      "path": {
+        "ellipse": [
+          14.0,
+          14.0
+        ],
+        "from_deg": -104.386,
+        "direction": "increasing"
+      },
+      "note": "Bay C (centre bearing 0 deg): the base's inner face r 14.000 between the two ribs' side faces, arc 7.030, hanging zone z 0.140 (cove top) ... 5.720 (coping band). Empty tonight: for new art to be commissioned."
+    },
+    {
+      "anchor": "atrium.bay.d",
+      "path": {
+        "ellipse": [
+          14.0,
+          14.0
+        ],
+        "from_deg": -74.386,
+        "direction": "increasing"
+      },
+      "note": "Bay D (centre bearing 30 deg): the base's inner face r 14.000 between the two ribs' side faces, arc 7.030, hanging zone z 0.140 (cove top) ... 5.720 (coping band). Empty tonight: for new art to be commissioned."
+    },
+    {
+      "anchor": "atrium.bay.e",
+      "path": {
+        "ellipse": [
+          14.0,
+          14.0
+        ],
+        "from_deg": -44.386,
+        "direction": "increasing"
+      },
+      "note": "Bay E (centre bearing 60 deg): the base's inner face r 14.000 between the two ribs' side faces, arc 7.030, hanging zone z 0.140 (cove top) ... 5.720 (coping band). Empty tonight: for new art to be commissioned."
+    },
+    {
+      "anchor": "atrium.bay.f",
+      "path": {
+        "ellipse": [
+          14.0,
+          14.0
+        ],
+        "from_deg": -14.386,
+        "direction": "increasing"
+      },
+      "note": "Bay F (centre bearing 90 deg): the base's inner face r 14.000 between the two ribs' side faces, arc 7.030, hanging zone z 0.140 (cove top) ... 5.720 (coping band). Empty tonight: for new art to be commissioned."
+    },
+    {
+      "anchor": "atrium.bay.g",
+      "path": {
+        "ellipse": [
+          14.0,
+          14.0
+        ],
+        "from_deg": 15.614,
+        "direction": "increasing"
+      },
+      "note": "Bay G (centre bearing 120 deg): the base's inner face r 14.000 between the two ribs' side faces, arc 7.030, hanging zone z 0.140 (cove top) ... 5.720 (coping band). Empty tonight: for new art to be commissioned."
+    },
+    {
+      "anchor": "atrium.bay.h",
+      "path": {
+        "ellipse": [
+          14.0,
+          14.0
+        ],
+        "from_deg": 45.614,
+        "direction": "increasing"
+      },
+      "note": "Bay H (centre bearing 150 deg): the base's inner face r 14.000 between the two ribs' side faces, arc 7.030, hanging zone z 0.140 (cove top) ... 5.720 (coping band). Empty tonight: for new art to be commissioned."
+    },
+    {
+      "anchor": "atrium.bay.i",
+      "path": {
+        "ellipse": [
+          14.0,
+          14.0
+        ],
+        "from_deg": 75.614,
+        "direction": "increasing"
+      },
+      "note": "Bay I (centre bearing 180 deg): the base's inner face r 14.000 between the two ribs' side faces, arc 7.030, hanging zone z 0.140 (cove top) ... 5.720 (coping band). Empty tonight: for new art to be commissioned."
+    },
+    {
+      "anchor": "atrium.bay.j",
+      "path": {
+        "ellipse": [
+          14.0,
+          14.0
+        ],
+        "from_deg": 105.614,
+        "direction": "increasing"
+      },
+      "note": "Bay J (centre bearing 210 deg): the base's inner face r 14.000 between the two ribs' side faces, arc 7.030, hanging zone z 0.140 (cove top) ... 5.720 (coping band). Empty tonight: for new art to be commissioned."
+    },
+    {
+      "anchor": "atrium.bay.k",
+      "path": {
+        "ellipse": [
+          14.0,
+          14.0
+        ],
+        "from_deg": 135.614,
+        "direction": "increasing"
+      },
+      "note": "Bay K (centre bearing 240 deg): the base's inner face r 14.000 between the two ribs' side faces, arc 7.030, hanging zone z 0.140 (cove top) ... 5.720 (coping band). Empty tonight: for new art to be commissioned."
+    }
+  ],
+  "works": [
+    {
+      "work": "van-gogh-starry-night",
+      "source": "assets/collection.json",
+      "anchor": "atrium.stele",
+      "along": 0.29,
+      "height": 1.012,
+      "size": [
+        0.921,
+        0.737
+      ],
+      "support": "canvas",
+      "frame": "atrium.frame.gilt",
+      "care": "oil-and-tempera",
+      "note": "Oil on canvas, 73.7 x 92.1 cm (MoMA; the FutureAtrium board and assets/paintings/CREDITS.md:75; collection.json has no size). True size on a keyed pine stretcher, the back open to the glass (the unbleached linen and stretcher show through the stele). Slim gilt frame, the Salon's profile at W 0.060, outer 1.036 x 0.852; its back bears on the stele's west face through clear pads; canvas face x -3.885, 45 mm proud of the glass. Centre 1.380 as built (Elan.swift:32). The sign for the elevator: 'this car goes up to the stars' (collection.json notes)."
+    }
+  ]
+}
