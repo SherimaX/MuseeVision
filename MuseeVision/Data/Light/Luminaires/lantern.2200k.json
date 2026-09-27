@@ -1,0 +1,57 @@
+{
+  "key": "lantern.2200k",
+  "kind": "lantern",
+  "controlClass": "circulation",
+  "evidenceState": "complete",
+  "product": {
+    "manufacturer": "Segula",
+    "family": "Vintage Line LED candle",
+    "description": "LED filament candle lamp, E14, frosted (opal) glass, 2200 K, CRI 90, dimmable, hung at the centre of a silk lantern; the lantern's frame and silk are the stage's own pieces",
+    "code": "50200",
+    "codeBasis": "the maker's article number, as CP Lighting lists it",
+    "status": "listed by CP Lighting, a UK reseller of the maker"
+  },
+  "light": {
+    "luminousFluxLumens": 200,
+    "fluxBasis": "luminaire",
+    "beamName": "a filament lamp: light all round the lamp; the silk of the lantern, drawn by the stage, passes it on",
+    "cctKelvin": 2200,
+    "cri": 90,
+    "criBasis": "published value"
+  },
+  "electrical": {
+    "systemPowerWatts": 3.5,
+    "supplyVolts": 230,
+    "control": "phase dimmable on the mains (the resellers list it as dimmable; the dimmer type is not named)"
+  },
+  "housing": {
+    "diameterMillimeters": 35,
+    "lengthMillimeters": 100,
+    "dimensionBasis": "35 mm by 100 mm as CP Lighting lists it",
+    "materials": "frosted glass bulb over LED filaments, E14 cap",
+    "mounting": "E14 lampholder at the lantern's centre"
+  },
+  "photometricFile": {
+    "url": null,
+    "note": "A lamp has no luminaire photometry; its light leaves all round it and the lantern's silk is Matter's."
+  },
+  "sources": [
+    {
+      "id": "reseller-cp",
+      "title": "CP Lighting, Segula LED Filament 2200K Candle 3.5W E14 240V Frosted Dimmable (article 50200: 200 lm, 2200 K, Ra 90, 35 x 100 mm, 20 000 h)",
+      "url": "https://www.cp-lighting.co.uk/Segula-LED-Filament-2200K-Candle-3.5W-E14-240V-Frosted-Dimmable/",
+      "readOn": "2026-09-27",
+      "covers": [
+        "product",
+        "light",
+        "electrical",
+        "housing"
+      ]
+    }
+  ],
+  "unverified": [
+    "The maker's own data sheet for article 50200 was not read; the figures are CP Lighting's listing.",
+    "CP Lighting gives a beam of '45-59 very wide', a reseller's class for a lamp; a filament candle lights all round, as the record takes it.",
+    "The spectrum's ultraviolet content is not published."
+  ]
+}

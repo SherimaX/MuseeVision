@@ -1,0 +1,69 @@
+{
+  "key": "step-light.2700k",
+  "kind": "step-light",
+  "controlClass": "circulation",
+  "evidenceState": "complete",
+  "product": {
+    "manufacturer": "FX Luminaire",
+    "family": "RH Recessed Wall/Step Light (Designer Plus)",
+    "description": "fully recessed step light for a vertical face near the ground, down-lighting position only: three integrated LEDs behind a diffusing polycarbonate lens and the RB faceplate, warm 2700 K, bronze metallic finish, 12 V",
+    "code": "RH-3LED-W-RB-BZ",
+    "codeBasis": "the ordering code: fixture RH, power 3LED, colour temperature W (warm, 2700 K), faceplate RB, finish BZ (bronze metallic)",
+    "status": "current"
+  },
+  "light": {
+    "luminousFluxLumens": 86,
+    "fluxBasis": "luminaire",
+    "beamName": "diffused downward for glare-free safety lighting, from a vertical face in the down-lighting position",
+    "peakCandela": 49,
+    "cctKelvin": 2700,
+    "cri": 84,
+    "criBasis": "published value"
+  },
+  "electrical": {
+    "systemPowerWatts": 4.0,
+    "supplyVolts": 12,
+    "supply": "10 to 15 V AC or DC from a remote transformer",
+    "control": "phase dimmable (trailing edge); zoned and dimmed by a Luxor controller in its ZD version"
+  },
+  "housing": {
+    "weightKilograms": 0.5,
+    "materials": "die-cast A380 aluminium body, stainless steel fasteners, polycarbonate lens",
+    "finish": "bronze metallic: sulfuric acid anodising under a polyester TGIC powder coat",
+    "mounting": "recessed in a vertical face, down-lighting position only, into a single-gang junction box"
+  },
+  "photometricFile": {
+    "url": null,
+    "note": "The spec sheet's photometry gives spacing to 1.1, 3.2, 5.4 and 10.7 lx at 60 mm and 0.3 m mounting heights; an IES file is on the maker's site, whose pages refuse automated reads."
+  },
+  "sources": [
+    {
+      "id": "spec-sheet",
+      "title": "FX Luminaire, RH Recessed Wall/Step Light, Designer Plus spec sheet (generated 20 May 2025): 3LED 86 lm at 2700 K, 4.0 W, CRI 84, maximum 49 cd; ordering information; materials",
+      "url": "https://www.reinders.com/media/ProductAttachment/r/h/rh-specsheet.pdf",
+      "readOn": "2026-09-27",
+      "covers": [
+        "product",
+        "light",
+        "electrical",
+        "housing",
+        "photometricFile"
+      ]
+    },
+    {
+      "id": "reseller-page",
+      "title": "Reinders, FX - RH Series 3LED Recessed Step Light - 2700K",
+      "url": "https://www.reinders.com/fx-rh-series-3led-recessed-step-light-2700k/",
+      "readOn": "2026-09-27",
+      "covers": [
+        "product",
+        "light"
+      ]
+    }
+  ],
+  "unverified": [
+    "The faceplate's size: the spec sheet gives it only in a drawing whose figures were not read; the sheets ask for a face about 0.10 by 0.06.",
+    "The RB faceplate's form: the spec sheet names it RB and shows it only in a drawing; whether it is louvred, as the sheets ask, was not read.",
+    "Its distribution beyond the peak intensity: Light has no emitter for a step light's shaped downward distribution without its photometric file, so the fitting stands unlit until the file is read."
+  ]
+}

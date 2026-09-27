@@ -789,7 +789,7 @@
     },
     {
       "id": "electrolier.w1",
-      "type": "gap.electrolier.3000k",
+      "type": "electrolier.3000k",
       "point": [
         -6.0,
         -15.0,
@@ -804,7 +804,7 @@
     },
     {
       "id": "electrolier.w2",
-      "type": "gap.electrolier.3000k",
+      "type": "electrolier.3000k",
       "point": [
         -6.0,
         -9.0,
@@ -819,7 +819,7 @@
     },
     {
       "id": "electrolier.w3",
-      "type": "gap.electrolier.3000k",
+      "type": "electrolier.3000k",
       "point": [
         -6.0,
         -3.0,
@@ -834,7 +834,7 @@
     },
     {
       "id": "electrolier.w4",
-      "type": "gap.electrolier.3000k",
+      "type": "electrolier.3000k",
       "point": [
         -6.0,
         3.0,
@@ -849,7 +849,7 @@
     },
     {
       "id": "electrolier.w5",
-      "type": "gap.electrolier.3000k",
+      "type": "electrolier.3000k",
       "point": [
         -6.0,
         9.0,
@@ -864,7 +864,7 @@
     },
     {
       "id": "electrolier.w6",
-      "type": "gap.electrolier.3000k",
+      "type": "electrolier.3000k",
       "point": [
         -6.0,
         15.0,
@@ -879,7 +879,7 @@
     },
     {
       "id": "electrolier.e1",
-      "type": "gap.electrolier.3000k",
+      "type": "electrolier.3000k",
       "point": [
         6.0,
         -15.0,
@@ -894,7 +894,7 @@
     },
     {
       "id": "electrolier.e2",
-      "type": "gap.electrolier.3000k",
+      "type": "electrolier.3000k",
       "point": [
         6.0,
         -9.0,
@@ -909,7 +909,7 @@
     },
     {
       "id": "electrolier.e3",
-      "type": "gap.electrolier.3000k",
+      "type": "electrolier.3000k",
       "point": [
         6.0,
         -3.0,
@@ -924,7 +924,7 @@
     },
     {
       "id": "electrolier.e4",
-      "type": "gap.electrolier.3000k",
+      "type": "electrolier.3000k",
       "point": [
         6.0,
         3.0,
@@ -939,7 +939,7 @@
     },
     {
       "id": "electrolier.e5",
-      "type": "gap.electrolier.3000k",
+      "type": "electrolier.3000k",
       "point": [
         6.0,
         9.0,
@@ -954,7 +954,7 @@
     },
     {
       "id": "electrolier.e6",
-      "type": "gap.electrolier.3000k",
+      "type": "electrolier.3000k",
       "point": [
         6.0,
         15.0,
@@ -969,7 +969,7 @@
     },
     {
       "id": "electrolier.porch",
-      "type": "gap.electrolier.3000k",
+      "type": "electrolier.3000k.four-light",
       "point": [
         0.0,
         -21.25,

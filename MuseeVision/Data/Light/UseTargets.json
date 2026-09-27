@@ -15,12 +15,21 @@
       "analogue": false,
       "evidence": [
         {
-          "fields": ["maintainedIlluminanceLux", "uniformityMin", "glareUgrMax", "criMin"],
+          "fields": [
+            "maintainedIlluminanceLux",
+            "uniformityMin",
+            "glareUgrMax",
+            "criMin"
+          ],
           "source": "en12464-1-2011",
           "row": "Traffic zones and general areas inside buildings: circulation areas and corridors (100 lx, UGRL 28, Uo 0.4, Ra 40)"
         },
         {
-          "fields": ["wallIlluminanceLuxMin", "ceilingIlluminanceLuxMin", "surfaceUniformityMin"],
+          "fields": [
+            "wallIlluminanceLuxMin",
+            "ceilingIlluminanceLuxMin",
+            "surfaceUniformityMin"
+          ],
           "source": "trilux-public-areas",
           "row": "Bright primary surfaces for corridors, staircases and entrance halls: walls 75 lx, ceilings 50 lx, uniformity 0.10 at minimum"
         }
@@ -38,7 +47,12 @@
       "analogueOf": "EN 12464-1 health-care premises: corridors during the night",
       "evidence": [
         {
-          "fields": ["maintainedIlluminanceLux", "uniformityMin", "glareUgrMax", "criMin"],
+          "fields": [
+            "maintainedIlluminanceLux",
+            "uniformityMin",
+            "glareUgrMax",
+            "criMin"
+          ],
           "source": "en12464-1-2011",
           "row": "Health care premises, rooms for general use: corridors during the night (50 lx, UGRL 22, Uo 0.4, Ra 80)"
         }
@@ -58,12 +72,21 @@
       "analogue": false,
       "evidence": [
         {
-          "fields": ["maintainedIlluminanceLux", "uniformityMin", "glareUgrMax", "criMin"],
+          "fields": [
+            "maintainedIlluminanceLux",
+            "uniformityMin",
+            "glareUgrMax",
+            "criMin"
+          ],
           "source": "en12464-1-2011",
           "row": "Traffic zones and general areas inside buildings: stairs, escalators, moving walkways (100 lx, UGRL 25, Uo 0.4, Ra 40)"
         },
         {
-          "fields": ["wallIlluminanceLuxMin", "ceilingIlluminanceLuxMin", "surfaceUniformityMin"],
+          "fields": [
+            "wallIlluminanceLuxMin",
+            "ceilingIlluminanceLuxMin",
+            "surfaceUniformityMin"
+          ],
           "source": "trilux-public-areas",
           "row": "Bright primary surfaces for corridors, staircases and entrance halls: walls 75 lx, ceilings 50 lx, uniformity 0.10 at minimum"
         }
@@ -80,7 +103,12 @@
       "analogue": false,
       "evidence": [
         {
-          "fields": ["maintainedIlluminanceLux", "uniformityMin", "glareUgrMax", "criMin"],
+          "fields": [
+            "maintainedIlluminanceLux",
+            "uniformityMin",
+            "glareUgrMax",
+            "criMin"
+          ],
           "source": "en12464-1-2011",
           "row": "Traffic zones and general areas inside buildings: elevators, lifts (100 lx, UGRL 25, Uo 0.4, Ra 40)"
         }
@@ -100,12 +128,21 @@
       "analogue": false,
       "evidence": [
         {
-          "fields": ["maintainedIlluminanceLux", "uniformityMin", "glareUgrMax", "criMin"],
+          "fields": [
+            "maintainedIlluminanceLux",
+            "uniformityMin",
+            "glareUgrMax",
+            "criMin"
+          ],
           "source": "en12464-1-2011",
           "row": "Places of public assembly, general areas: entrance halls (100 lx, UGRL 22, Uo 0.4, Ra 80)"
         },
         {
-          "fields": ["wallIlluminanceLuxMin", "ceilingIlluminanceLuxMin", "surfaceUniformityMin"],
+          "fields": [
+            "wallIlluminanceLuxMin",
+            "ceilingIlluminanceLuxMin",
+            "surfaceUniformityMin"
+          ],
           "source": "trilux-public-areas",
           "row": "Bright primary surfaces for corridors, staircases and entrance halls: walls 75 lx, ceilings 50 lx, uniformity 0.10 at minimum"
         }
@@ -121,7 +158,10 @@
       "analogueOf": "EN 12464-1 health-care premises: night lighting, observation lighting",
       "evidence": [
         {
-          "fields": ["maintainedIlluminanceLux", "criMin"],
+          "fields": [
+            "maintainedIlluminanceLux",
+            "criMin"
+          ],
           "source": "en12464-1-2011",
           "row": "Health care premises: night lighting, observation lighting (5 lx, Ra 80)"
         }
@@ -136,7 +176,10 @@
       "analogue": false,
       "evidence": [
         {
-          "fields": ["maintainedIlluminanceLux", "criMin"],
+          "fields": [
+            "maintainedIlluminanceLux",
+            "criMin"
+          ],
           "source": "en12464-2-2007",
           "row": "General circulation areas at outdoor workplaces: walkways exclusively for pedestrians (5 lx, Ra 20)"
         }
@@ -150,16 +193,64 @@
       "analogue": false,
       "evidence": [
         {
-          "fields": ["averageIlluminanceLux"],
+          "fields": [
+            "averageIlluminanceLux"
+          ],
           "source": "wikipedia-emergency-light",
           "row": "An average of one foot candle of light along the path of egress; 1 fc = 1 lm/ft² = 10.764 lx"
+        }
+      ]
+    },
+    {
+      "key": "gallery.low-light",
+      "use": "The walked floor of a gallery whose works are held at 50 lx (silk, paper, ink, fugitive colour): the room stays at the works' level so the eye adapts to it, and the works read as the brightest things in it",
+      "maintainedIlluminanceLux": 50,
+      "referencePlane": "floor",
+      "analogue": true,
+      "analogueOf": "the 50 lx held on light-sensitive works, applied to the room that shows them",
+      "evidence": [
+        {
+          "fields": [
+            "maintainedIlluminanceLux"
+          ],
+          "source": "cci-light",
+          "row": "50 lux is the museum benchmark: enough for the eye to work well within full colour vision, so a young viewer sees a moderately light object's detail almost as well as in full sunshine; a year of display is taken as 3000 hours"
+        },
+        {
+          "fields": [
+            "maintainedIlluminanceLux"
+          ],
+          "source": "erco-50lx",
+          "row": "50 lx is the level at which a young viewer with adapted eyes can clearly identify an object with bright colours, low detail and simple structure: a threshold of seeing, reached only when the eyes have adapted to it"
+        }
+      ]
+    },
+    {
+      "key": "garden.night",
+      "use": "The centre lines of the garden's and the courts' walks after dusk (Chenghuai): enough to find the way, as escape-route lighting does, and no more, so the lanterns and the lit rooms stay the night's light",
+      "maintainedIlluminanceLux": 1,
+      "referencePlane": "ground, on the walk's centre line",
+      "maxToMinRatioMax": 40,
+      "analogue": true,
+      "analogueOf": "EN 1838 escape-route lighting: 1 lx on the centre line of the route, highest to lowest at most 40 to 1",
+      "evidence": [
+        {
+          "fields": [
+            "maintainedIlluminanceLux",
+            "maxToMinRatioMax"
+          ],
+          "source": "etap-en1838",
+          "row": "Escape route lighting: 1 lux on the centre line; minimum uniformity of escape route lighting 1/40"
         }
       ]
     }
   ],
   "viewerAge": {
     "note": "Older visitors may need two to three times the illuminance for the same visual experience; a class is a floor, never a ceiling, for architecture.",
-    "illuminanceFactorRange": [2, 3],
+    "illuminanceFactorRange": [
+      2,
+      3
+    ],
     "source": "erco-50lx"
   },
   "sources": [
@@ -198,6 +289,18 @@
       "title": "ERCO, 'Museum lighting with 50lx': the origin of the 50 lx rule and the age of the observer",
       "url": "https://www.erco.com/en/designing-with-light/mediaassetpool/lighting-technology/museum-lighting-with-50lx-6481/",
       "readOn": "2026-09-26"
+    },
+    {
+      "id": "etap-en1838",
+      "title": "ETAP, Standards emergency lighting (2020): European standard EN 1838, required minimum horizontal illuminance on the floor by location, and minimum uniformity",
+      "url": "https://www.etaplighting.com/sites/default/files/uploads/Normen_noodverlichting_2020_EN.pdf",
+      "readOn": "2026-09-27"
+    },
+    {
+      "id": "cci-light",
+      "title": "Stefan Michalski, Agent of deterioration: Light, ultraviolet and infrared, Canadian Conservation Institute, 2018",
+      "url": "https://www.canada.ca/en/conservation-institute/services/agents-deterioration/light.html",
+      "readOn": "2026-09-27"
     }
   ],
   "unverified": [
@@ -206,6 +309,8 @@
     "IES Lighting Handbook and ANSI/IES RP-30-17 values for circulation and orientation in museums (the RP-30-17 preview refused automated reads).",
     "CIBSE SLL Code for Lighting and CIBSE LG8 values (not publicly readable).",
     "EN 1838 escape-route illuminance (1 lx on the centre line) was not read from a source.",
-    "The code behind the one foot-candle egress average (NFPA 101, Life Safety Code, is the likely origin); Wikipedia states the requirement without naming the code, and NFPA 101 itself was not read."
+    "The code behind the one foot-candle egress average (NFPA 101, Life Safety Code, is the likely origin); Wikipedia states the requirement without naming the code, and NFPA 101 itself was not read.",
+    "EN 1838's own text for the escape-route rows (1 lx on the centre line, 1/40 uniformity) was read through ETAP's summary, not the standard; its colour-rendering floor (Ra 40 in summaries) is not recorded for garden.night.",
+    "gallery.low-light is the museum's rule that a 50 lx room shows 50 lx works; no standard gives a floor level for such a gallery."
   ]
 }

@@ -1,0 +1,57 @@
+{
+  "key": "luminous-ceiling.3000k",
+  "kind": "laylight",
+  "controlClass": "gallery",
+  "evidenceState": "incomplete",
+  "product": {
+    "manufacturer": "Lumistrips",
+    "family": "BackMatrix-49 (configurable)",
+    "description": "backlight module for luminous ceilings and light boxes: 49 Nichia 757 mid-power LEDs on a 290 x 290 mm board, built to order at CRI 70 to 99 and 1800 to 7800 K; here 3000 K at CRI 95, laid in the plenum over a laylight's glass",
+    "code": "backmatrix_3080",
+    "codeBasis": "the configurator's product code; the configured variant has no article number of its own",
+    "status": "made to order"
+  },
+  "light": {
+    "luminousFluxLumens": null,
+    "fluxBasis": "not published for the configuration: the maker gives 24 lm per LED at CRI 95 and 31 lm per LED at CRI 95 H6, without their colour temperature or drive",
+    "beamName": "bare mid-power LEDs, near Lambertian, behind the laylight's diffusing face",
+    "cctKelvin": 3000,
+    "cri": 95,
+    "criBasis": "configured value"
+  },
+  "electrical": {
+    "systemPowerWatts": null,
+    "supplyVolts": 24,
+    "control": "constant-voltage 24 V, dimmable, with an onboard switch for three levels"
+  },
+  "housing": {
+    "emittingMillimeters": [
+      290,
+      290
+    ],
+    "dimensionBasis": "the module's board, 290 x 290 x 7 mm; a laylight is a field of modules, whose extent the room gives",
+    "mounting": "laid in the plenum over the laylight's glass"
+  },
+  "photometricFile": {
+    "url": null,
+    "note": "The maker publishes no LDT or IES file for the configurable module."
+  },
+  "sources": [
+    {
+      "id": "maker-page",
+      "title": "Lumistrips, BackMatrix-49-3080 Configurable Nichia LED Module White CRI 70-99 1800-7800K 24V 49 LEDs 11.42x11.42 in",
+      "url": "https://us.lumistrips.com/lumistrips-plug-play-led-us.html/custom-made-backmatrix-3080-nichia-led-module-white-int-1.html",
+      "readOn": "2026-09-27",
+      "covers": [
+        "product",
+        "light",
+        "electrical",
+        "housing"
+      ]
+    }
+  ],
+  "unverified": [
+    "The module's flux and power at 3000 K and CRI 95: the maker gives flux per LED by CRI class only, and up to 25 W per module, so the record stands unlit until the configured module's figures are obtained.",
+    "How many modules a square metre of the Salon's and the Classical Hall's laylights takes, and at what depth; the room gives the extent."
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "key": "edge-lit-glass.3000k",
+  "kind": "edge-lit-glass",
+  "controlClass": "circulation",
+  "evidenceState": "incomplete",
+  "product": {
+    "manufacturer": "Spanlite",
+    "family": "Edge Lit Glass",
+    "description": "low-iron toughened glass lit through its edges by LEDs housed in an engineered glazing channel; the face etched (or printed with fired ceramic ink) so that the light leaves it; a choice of colour temperatures, tuneable white or RGBW, fully programmable",
+    "status": "current, made to order"
+  },
+  "light": {
+    "luminousFluxLumens": null,
+    "fluxBasis": "not published",
+    "beamName": "light guided along the pane and let out by the etched face: an even glow from the face",
+    "cctKelvin": 3000,
+    "cri": null
+  },
+  "electrical": {
+    "systemPowerWatts": null,
+    "control": "fully programmable (the protocol is not named)"
+  },
+  "housing": {
+    "materials": "low-iron toughened glass 6 to 20 mm deep; LEDs in an engineered glazing channel at the edges",
+    "dimensionBasis": "single panels from 300 by 300 mm; the maker prints '4000mm x 1.5mm' as the recommended maximum",
+    "mounting": "in the canopy grid's members, which carry the LED lines along the panes' edges"
+  },
+  "photometricFile": {
+    "url": null,
+    "note": "The maker publishes no photometry: an edge-lit pane's output depends on its size, its edge lighting and its etch."
+  },
+  "sources": [
+    {
+      "id": "maker-page",
+      "title": "Spanlite, Edge Lit Glass (product page)",
+      "url": "https://www.spanlite.com/product/edge-lit-glass/",
+      "readOn": "2026-09-27",
+      "covers": [
+        "product",
+        "housing"
+      ]
+    }
+  ],
+  "unverified": [
+    "The flux or luminance of a lit pane, the LEDs' flux per metre, their power and colour rendering: the maker publishes none, so the record stands unlit until its photometry for the Atrium's zones is obtained.",
+    "3000 K is the Atrium's choice among the maker's colour temperatures; the list of temperatures is not published.",
+    "The Atrium's panes are laminated low-iron glass etched on the room face; the maker's page names toughened panes, not laminated ones.",
+    "The maximum panel size as printed, 4000 mm by 1.5 mm, reads as a misprint for 4.0 by 1.5 m."
+  ]
+}

@@ -15,7 +15,7 @@ struct FTimeMoment;
 /**
  * One luminaire in the museum: a catalogue type (Data/Light/Luminaires) mounted where a stage's lighting schedule puts
  * it, with its light leaving along the component's x axis (a linear luminaire lies along its y axis, centred on the
- * component). It lights at its catalogue output, switched by its operation (always, at dusk, on presence) and dimmed by
+ * component; the lamps of an electrolier stand on a ring about its x axis). It lights at its catalogue output, switched by its operation (always, at dusk, on presence) and dimmed by
  * the channel it follows (0 to 1), and nothing else sets how much light it gives. Light's stage dresser places it.
  */
 UCLASS(ClassGroup = (Musee))
@@ -43,8 +43,11 @@ public:
 	/** The luminous flux it emits now. */
 	[[nodiscard]] Musee::Lumens EmittedFlux() const;
 
-	/** The engine light it drives; null for a type Light doesn't light. */
-	[[nodiscard]] ULocalLightComponent* Emitter() const { return EmitterLight; }
+	/** The engine light it drives (its first lamp's, for a luminaire of several lamps); null for a type Light doesn't light. */
+	[[nodiscard]] ULocalLightComponent* Emitter() const { return EmitterLights.IsEmpty() ? nullptr : EmitterLights[0].Get(); }
+
+	/** Every engine light it drives: one, or one per lamp of a luminaire of several lamps. */
+	[[nodiscard]] const TArray<TObjectPtr<ULocalLightComponent>>& Emitters() const { return EmitterLights; }
 
 	/** Takes a moment: switches a dusk luminaire, and looks for the visitor for a presence luminaire. */
 	void FollowMoment(const FTimeMoment& Moment);
@@ -59,7 +62,8 @@ protected:
 	virtual void EndPlay(EEndPlayReason::Type Reason) override;
 
 private:
-	void MakeEmitter();
+	void MakeEmitters();
+	void DestroyEmitters();
 	void Apply();
 	void HearChannel(const FMuseeChannel& Channel);
 	bool SeesVisitor() const;
@@ -80,7 +84,7 @@ private:
 	double LengthMeters = 0.0;
 
 	UPROPERTY(Transient)
-	TObjectPtr<ULocalLightComponent> EmitterLight;
+	TArray<TObjectPtr<ULocalLightComponent>> EmitterLights;
 
 	bool bSwitchedOn = true;
 	double ChannelLevel = 1.0;

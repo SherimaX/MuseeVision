@@ -1270,7 +1270,7 @@
     },
     {
       "id": "cabinet.laylight",
-      "type": "gap.luminous-ceiling.3000k",
+      "type": "luminous-ceiling.3000k",
       "point": [
         -6.0,
         -11.6,

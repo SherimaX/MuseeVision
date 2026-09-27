@@ -738,7 +738,7 @@
     },
     {
       "id": "canopy.i01",
-      "type": "gap.edge-lit-glass.3000k",
+      "type": "edge-lit-glass.3000k",
       "point": [
         0.0,
         -6.0,
@@ -764,7 +764,7 @@
     },
     {
       "id": "canopy.i02",
-      "type": "gap.edge-lit-glass.3000k",
+      "type": "edge-lit-glass.3000k",
       "point": [
         3.0,
         -5.196,
@@ -790,7 +790,7 @@
     },
     {
       "id": "canopy.i03",
-      "type": "gap.edge-lit-glass.3000k",
+      "type": "edge-lit-glass.3000k",
       "point": [
         5.196,
         -3.0,
@@ -816,7 +816,7 @@
     },
     {
       "id": "canopy.i04",
-      "type": "gap.edge-lit-glass.3000k",
+      "type": "edge-lit-glass.3000k",
       "point": [
         6.0,
         -0.0,
@@ -842,7 +842,7 @@
     },
     {
       "id": "canopy.i05",
-      "type": "gap.edge-lit-glass.3000k",
+      "type": "edge-lit-glass.3000k",
       "point": [
         5.196,
         3.0,
@@ -868,7 +868,7 @@
     },
     {
       "id": "canopy.i06",
-      "type": "gap.edge-lit-glass.3000k",
+      "type": "edge-lit-glass.3000k",
       "point": [
         3.0,
         5.196,
@@ -894,7 +894,7 @@
     },
     {
       "id": "canopy.i07",
-      "type": "gap.edge-lit-glass.3000k",
+      "type": "edge-lit-glass.3000k",
       "point": [
         0.0,
         6.0,
@@ -920,7 +920,7 @@
     },
     {
       "id": "canopy.i08",
-      "type": "gap.edge-lit-glass.3000k",
+      "type": "edge-lit-glass.3000k",
       "point": [
         -3.0,
         5.196,
@@ -946,7 +946,7 @@
     },
     {
       "id": "canopy.i09",
-      "type": "gap.edge-lit-glass.3000k",
+      "type": "edge-lit-glass.3000k",
       "point": [
         -5.196,
         3.0,
@@ -972,7 +972,7 @@
     },
     {
       "id": "canopy.i10",
-      "type": "gap.edge-lit-glass.3000k",
+      "type": "edge-lit-glass.3000k",
       "point": [
         -6.0,
         0.0,
@@ -998,7 +998,7 @@
     },
     {
       "id": "canopy.i11",
-      "type": "gap.edge-lit-glass.3000k",
+      "type": "edge-lit-glass.3000k",
       "point": [
         -5.196,
         -3.0,
@@ -1024,7 +1024,7 @@
     },
     {
       "id": "canopy.i12",
-      "type": "gap.edge-lit-glass.3000k",
+      "type": "edge-lit-glass.3000k",
       "point": [
         -3.0,
         -5.196,
@@ -1050,7 +1050,7 @@
     },
     {
       "id": "canopy.o01",
-      "type": "gap.edge-lit-glass.3000k",
+      "type": "edge-lit-glass.3000k",
       "point": [
         0.0,
         -11.0,
@@ -1076,7 +1076,7 @@
     },
     {
       "id": "canopy.o02",
-      "type": "gap.edge-lit-glass.3000k",
+      "type": "edge-lit-glass.3000k",
       "point": [
         5.5,
         -9.526,
@@ -1102,7 +1102,7 @@
     },
     {
       "id": "canopy.o03",
-      "type": "gap.edge-lit-glass.3000k",
+      "type": "edge-lit-glass.3000k",
       "point": [
         9.526,
         -5.5,
@@ -1128,7 +1128,7 @@
     },
     {
       "id": "canopy.o04",
-      "type": "gap.edge-lit-glass.3000k",
+      "type": "edge-lit-glass.3000k",
       "point": [
         11.0,
         -0.0,
@@ -1154,7 +1154,7 @@
     },
     {
       "id": "canopy.o05",
-      "type": "gap.edge-lit-glass.3000k",
+      "type": "edge-lit-glass.3000k",
       "point": [
         9.526,
         5.5,
@@ -1180,7 +1180,7 @@
     },
     {
       "id": "canopy.o06",
-      "type": "gap.edge-lit-glass.3000k",
+      "type": "edge-lit-glass.3000k",
       "point": [
         5.5,
         9.526,
@@ -1206,7 +1206,7 @@
     },
     {
       "id": "canopy.o07",
-      "type": "gap.edge-lit-glass.3000k",
+      "type": "edge-lit-glass.3000k",
       "point": [
         0.0,
         11.0,
@@ -1232,7 +1232,7 @@
     },
     {
       "id": "canopy.o08",
-      "type": "gap.edge-lit-glass.3000k",
+      "type": "edge-lit-glass.3000k",
       "point": [
         -5.5,
         9.526,
@@ -1258,7 +1258,7 @@
     },
     {
       "id": "canopy.o09",
-      "type": "gap.edge-lit-glass.3000k",
+      "type": "edge-lit-glass.3000k",
       "point": [
         -9.526,
         5.5,
@@ -1284,7 +1284,7 @@
     },
     {
       "id": "canopy.o10",
-      "type": "gap.edge-lit-glass.3000k",
+      "type": "edge-lit-glass.3000k",
       "point": [
         -11.0,
         0.0,
@@ -1310,7 +1310,7 @@
     },
     {
       "id": "canopy.o11",
-      "type": "gap.edge-lit-glass.3000k",
+      "type": "edge-lit-glass.3000k",
       "point": [
         -9.526,
         -5.5,
@@ -1336,7 +1336,7 @@
     },
     {
       "id": "canopy.o12",
-      "type": "gap.edge-lit-glass.3000k",
+      "type": "edge-lit-glass.3000k",
       "point": [
         -5.5,
         -9.526,

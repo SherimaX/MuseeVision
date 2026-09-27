@@ -4,7 +4,7 @@
   "luminaires": [
     {
       "id": "laylight.bay1",
-      "type": "gap.luminous-ceiling.3000k",
+      "type": "luminous-ceiling.3000k",
       "point": [
         0.0,
         28.1,
@@ -24,7 +24,7 @@
     },
     {
       "id": "laylight.bay2",
-      "type": "gap.luminous-ceiling.3000k",
+      "type": "luminous-ceiling.3000k",
       "point": [
         0.0,
         22.1,
@@ -44,7 +44,7 @@
     },
     {
       "id": "laylight.bay3",
-      "type": "gap.luminous-ceiling.3000k",
+      "type": "luminous-ceiling.3000k",
       "point": [
         0.0,
         16.1,
@@ -64,7 +64,7 @@
     },
     {
       "id": "laylight.bay4",
-      "type": "gap.luminous-ceiling.3000k",
+      "type": "luminous-ceiling.3000k",
       "point": [
         0.0,
         10.1,
@@ -84,7 +84,7 @@
     },
     {
       "id": "laylight.eye",
-      "type": "gap.luminous-ceiling.3000k",
+      "type": "luminous-ceiling.3000k",
       "point": [
         0.0,
         0.0,

@@ -25,11 +25,24 @@ A key names what a luminaire does, then the colour of its light, then what tells
 | `picture-light` | A hood on an arm fixed to the frame or the wall above a picture. |
 | `linear-cove` | A continuous line of LEDs laid in a cove to light a vault or ceiling indirectly. |
 | `linear-slot` | A continuous light line recessed in a ceiling slot. |
+| `linear-strip` | A bare strip laid in a narrow slot or lip. |
+| `case-linear` | A strip laid in a vitrine's lamp rail or behind its canopy baffle, outside the sealed case. |
 | `downlight` | A luminaire recessed in the ceiling that lights the floor below it. |
+| `laylight` | A field of backlight modules in the plenum over a laylight's glass. |
+| `edge-lit-glass` | LED lines lighting etched panes through their edges, so the panes' faces glow. |
+| `step-light` | A small light set flush in a kerb, step or stone, its source hidden, grazing the walk. |
+| `lantern` | The lamp at the centre of a lantern; the lantern's frame and silk are the room's own pieces. |
+| `electrolier` | The lamps of a hanging fitting, one in each globe on its arms' ring; the body and globes are the room's own pieces. |
+
+A **lamp luminaire** (a lantern, an electrolier) is its bare lamps. What surrounds them, a lantern's silk or an
+electrolier's cased opal globes, is a piece the room draws in Matter's material, and the light reaches the room through
+it, as it does in the real fitting. An electrolier's record gives its lamp count and the radius of the ring its lamps
+stand on; Light lights one lamp in each globe and shares the fitting's flux equally between them.
 
 ## The catalogue
 
-Sixteen luminaires from ERCO, iGuzzini, Zumtobel, Edison Price Lighting and Hogarth Lighting. Every track spotlight
+Twenty-four luminaires from ERCO, iGuzzini, Zumtobel, Edison Price Lighting, Hogarth Lighting, Lumistrips, FX
+Luminaire, Segula, Ledstore and Spanlite. Every track spotlight
 and wallwasher has a colour rendering index of 95 or more, at both 3000 K and 4000 K. The flux is the luminaire's own
 output (the light that leaves the housing), not the LED's.
 
@@ -48,7 +61,15 @@ output (the light that leaves the housing), not the LED's.
 | `track-framing.3000k.medium` | iGuzzini Palco framer ø 115 mm | P252 | 896 lm | shutters | 3000 K | 97 | 35 W | gallery | complete |
 | `picture-light.2700k` | Hogarth Classic Picture Light, antique bronze | #100 | not published | shuttered hood | 2700 K | 97 | not published | gallery | incomplete |
 | `linear-cove.3000k` | iGuzzini Underscore No-Dot strip | RE18 | 1420 lm/m | general | 3000 K | ≥ 90 | 16 W/m | circulation | complete |
-| `linear-slot.3000k` | Zumtobel SLOTLIGHT infinity II, recessed | article not public | LED package 1600 lm/m | opal cover | 3000 K | > 90 | not published | circulation | incomplete |
+| `linear-strip.2700k.slim` | Lumistrips SlimFlex3090 Nichia | 56027 | 1950 lm/m | bare strip, 120° | 2700 K | ≥ 90 | 18 W/m | circulation | complete |
+| `linear-slot.3000k` | Zumtobel SLOTLIGHT LED III, recessed 4 in, flush lens | SL3R4 | 1312.3 lm/m (400 lm/ft) | diffused | 3000 K | 90 | 13.1 W/m | circulation | complete |
+| `case-linear.3000k` | Lumistrips LumiFlex1095 Seoul | 38672 | 720 lm/m | bare strip, 120° | 3000 K | 95 | 7.2 W/m | gallery | complete |
+| `lantern.2200k` | Segula Vintage Line LED candle, E14, frosted | 50200 | 200 lm | all round | 2200 K | 90 | 3.5 W | circulation | complete |
+| `electrolier.3000k` | six Ledstore LED filament candles, E14 | E14-clear-HIGH-CRI-3000 | 6 × 260 lm | all round, ring r 0.505 | 3000 K | 95 | 24 W | circulation | complete |
+| `electrolier.3000k.four-light` | four of the same lamps (Albion's porch) | E14-clear-HIGH-CRI-3000 | 4 × 260 lm | all round, ring r 0.505 | 3000 K | 95 | 16 W | circulation | complete |
+| `step-light.2700k` | FX Luminaire RH, 3 LED, RB faceplate, bronze | RH-3LED-W-RB-BZ | 86 lm (49 cd peak) | diffused down | 2700 K | 84 | 4.0 W | circulation | complete |
+| `edge-lit-glass.3000k` | Spanlite Edge Lit Glass | made to order | not published | the etched face | 3000 K | not published | not published | circulation | incomplete |
+| `luminous-ceiling.3000k` | Lumistrips BackMatrix-49, configured | backmatrix_3080 | not published at CRI 95 | behind the laylight | 3000 K | 95 | not published | gallery | incomplete |
 | `downlight.3000k.31deg` | iGuzzini Laser fixed round, Super Comfort | RA18 | 1944.8 lm | 31° | 3000 K | 92 | 17 W | circulation | complete |
 | `downlight.4000k.31deg` | iGuzzini Laser fixed round, Super Comfort | RA24 | 2068 lm | 31° | 4000 K | 92 | 17 W | circulation | complete |
 
@@ -156,7 +177,10 @@ as silk. A bronze with a lacquer or wax coating is lit as its coating. Art.Withi
 reference moment and the dose over the year.
 
 `UseTargets.json` gives, for each use class, the maintained illuminance on the reference plane, the uniformity, the
-glare limit and the colour rendering floor, with the rows of the standards they come from. Two classes, night
+glare limit and the colour rendering floor, with the rows of the standards they come from. Two classes serve rooms of
+sensitive works and gardens at night: `gallery.low-light` holds a gallery's floor at the 50 lx of its silk, paper and
+ink, so the eye adapts to the works' level; `garden.night` holds 1 lx on a walk's centre line after dusk, the floor
+EN 1838 sets for an escape route. Two classes, night
 circulation and orientation, have no museum row in the standards and are taken from the nearest row that does exist
 (corridors at night and night observation lighting in health-care buildings); each is marked `analogue`. The
 `escape-route` class is the floor under every other: no walked route falls below it in any configuration.
@@ -198,3 +222,13 @@ circulation and orientation, have no museum row in the standards and are taken f
   [Agents of deterioration](https://en.wikipedia.org/wiki/Agents_of_deterioration).
 - CIE 157:2004, [Control of damage to museum objects by optical radiation](https://cie.co.at/publications/control-damage-museum-objects-optical-radiation).
 - TRILUX, [Lighting of public areas](https://www.trilux.com/en/lighting-practice/indoor-lighting/specific-lighting-requirements/lighting-of-public-areas/corridors-entrance-halls-cloakrooms/).
+- Zumtobel SLOTLIGHT LED III: [LightAZ, SL3R4](https://lightaz.com/led-luminaire-details?f=ZTB_SL3R4) and
+  [Zumtobel Lighting Inc.](https://zumtobel.us/all-products/slotlight-led-iii/199/), read 2026-09-27.
+- Lumistrips, [LumiFlex1095 3000K CRI95](https://us.lumistrips.com/flexible-led-lumistrips-us.html/lumiflex1095-3000k-cri95.html)
+  and [BackMatrix-49 configurable](https://us.lumistrips.com/lumistrips-plug-play-led-us.html/custom-made-backmatrix-3080-nichia-led-module-white-int-1.html).
+- FX Luminaire, [RH Recessed Wall/Step Light spec sheet](https://www.reinders.com/media/ProductAttachment/r/h/rh-specsheet.pdf).
+- Segula 50200, as listed by [CP Lighting](https://www.cp-lighting.co.uk/Segula-LED-Filament-2200K-Candle-3.5W-E14-240V-Frosted-Dimmable/).
+- Ledstore, [E14 candle, clear, CRI 95, 3000 K](https://ledstore.pro/product/led-bulb-e14-candle-clear-high-cri95-dimmable-4w-3000k).
+- Spanlite, [Edge Lit Glass](https://www.spanlite.com/product/edge-lit-glass/).
+- ETAP, [Standards emergency lighting](https://www.etaplighting.com/sites/default/files/uploads/Normen_noodverlichting_2020_EN.pdf)
+  (EN 1838's escape-route floor, for `garden.night`).
