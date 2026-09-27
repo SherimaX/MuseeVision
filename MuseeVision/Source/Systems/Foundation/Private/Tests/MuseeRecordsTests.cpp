@@ -128,6 +128,34 @@ bool FMuseeFoundationRecordsRejectsTest::RunTest(const FString& Parameters)
 		RefusalOf<FMuseeContact>(TEXT("Rejects/unknown-declaration.json")).Contains(TEXT("$unit: is not a declaration")));
 	TestTrue(TEXT("Fields beside listed records are refused"),
 		RefusalOf<FMuseeContact>(TEXT("Rejects/fields-beside-records.json")).Contains(TEXT("has fields beside $records")));
+	TestTrue(TEXT("A required key written empty is refused"),
+		RefusalOf<FMuseeConfiguration>(TEXT("Rejects/required-key-empty.json")).Contains(TEXT("Name: '' is not a key")));
+	return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FMuseeFoundationRecordsRangesTest, "Musee.Foundation.Records.Ranges", Musee::Tests::Flags)
+
+bool FMuseeFoundationRecordsRangesTest::RunTest(const FString& Parameters)
+{
+	using namespace Musee::Tests;
+	const TValueOrError<FMuseeTestSurvey, FString> Read = Musee::ReadRecord<FMuseeTestSurvey>(Fixture(TEXT("Survey/survey.json")));
+	if (!TestTrue(TEXT("A survey with open ranges and an empty key is read"), Read.HasValue()))
+	{
+		AddError(Read.GetError());
+		return false;
+	}
+	const FMuseeTestSurvey& Survey = Read.GetValue();
+	TestTrue(TEXT("[50, null] is at least 50, unbounded above"), Survey.Lux.Num() == 2 && Survey.Lux[0] == 50.0 && !FMath::IsFinite(Survey.Lux[1]) && Survey.Lux[1] > 0.0);
+	TestTrue(TEXT("[null, 3] is at most 3, unbounded below"), Survey.Ratio.Num() == 2 && !FMath::IsFinite(Survey.Ratio[0]) && Survey.Ratio[0] < 0.0f && Survey.Ratio[1] == 3.0f);
+	TestTrue(TEXT("An optional key written empty names nothing"), Survey.Body.IsNone());
+	TestTrue(TEXT("A range open at both ends is refused"),
+		RefusalOf<FMuseeTestSurvey>(TEXT("Rejects/range-both-open.json")).Contains(TEXT("Lux: is open at both ends")));
+	TestTrue(TEXT("A range whose least is above its most is refused"),
+		RefusalOf<FMuseeTestSurvey>(TEXT("Rejects/range-backwards.json")).Contains(TEXT("Lux: has its least end above its most")));
+	TestTrue(TEXT("A range of three numbers is refused"),
+		RefusalOf<FMuseeTestSurvey>(TEXT("Rejects/range-three.json")).Contains(TEXT("Lux: has 3 numbers where a range [least, most] is written")));
+	TestTrue(TEXT("A null in an array that isn't a range is still refused"),
+		RefusalOf<FMuseeTestSurvey>(TEXT("Rejects/range-null-array.json")).Contains(TEXT("Outline[1]: is null; an array holds values")));
 	return true;
 }
 

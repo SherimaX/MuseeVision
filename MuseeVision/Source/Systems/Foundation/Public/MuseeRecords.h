@@ -21,7 +21,9 @@
  *   for the people who check the numbers.
  *
  * Reading fails, naming the file and the field, when:
- * - a field whose UPROPERTY carries `meta = (MuseeRequired)` is missing or null;
+ * - a field whose UPROPERTY carries `meta = (MuseeRequired)` is missing or null (a required key written empty is
+ *   not a key);
+ * - a range (`meta = (MuseeRange)`) isn't [least, most] with at most one end null;
  * - a declared unit is not the unit of the field's `Units` metadata (the same unit under another name agrees), or the
  *   field has no `Units` metadata, or no such field exists;
  * - a field doesn't exist on the struct, or its value has the wrong JSON type, or a key breaks the key rule, or a
@@ -29,6 +31,9 @@
  * - the file is missing, isn't JSON, or declares something other than the three declarations above.
  * The required and unit checks read reflection metadata, which exists where records are made (the editor and its
  * commandlets). A cooked game has no metadata; there the reader converts and checks types only.
+ *
+ * An optional key may be written `""`: it reads as the none key, which the stage contract writes for a field that names
+ * nothing (a bed that rides no body).
  *
  * Every file read, whether or not it converts, is added with the hash of its content to each FMuseeDependencySet in
  * scope on the reading thread.
@@ -41,6 +46,13 @@ namespace Musee
 	{
 		/** The metadata key that makes a field required: `UPROPERTY(meta = (MuseeRequired))`. */
 		inline constexpr const TCHAR* RequiredMetadata = TEXT("MuseeRequired");
+
+		/**
+		 * The metadata key that makes an array of numbers a range [least, most]: `UPROPERTY(meta = (MuseeRange))`. Either end
+		 * may be written null for an open end (`"lux": [50, null]`, at least 50), which reads as -infinity for the least end
+		 * and +infinity for the most (the mark is metadata, so only where records are made); both ends null, a count other than two, or the least above the most is refused.
+		 */
+		inline constexpr const TCHAR* RangeMetadata = TEXT("MuseeRange");
 
 		/**
 		 * The folder records live in, `<Project>/Data`, as a full path: DataRootOf this process's executable folder and
