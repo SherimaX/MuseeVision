@@ -323,6 +323,12 @@ namespace Musee::Albion::Tests
 		TestTrue(TEXT("under the porch's beams"), LineZ(Plan::BeamY[0]) + Radius < Plan::BeamSoffit);
 		TestTrue(TEXT("clear of the benches"), Plan::BenchX - Plan::BenchHalfDepth >= Radius);
 
+		// The lining's porch face stays clear for the joint's surround: the skirting stops at it, the wall plates and the
+		// ceiling stand beyond it, the first beam 1.30 into the porch.
+		TestTrue(TEXT("the wall plates stand outside the surround"), Plan::WallPlateX - Plan::WallPlateHalf > Plan::SurroundClearHalf);
+		TestTrue(TEXT("the ceiling over it"), Plan::PorchCeiling > Plan::SurroundClearTop);
+		TestEqual(TEXT("the first beam 1.30 from the lining"), Plan::BeamY[0] - Plan::LiningFaceY, 1.30, 1e-9);
+
 		// The footprint's envelope holds the buttresses on their base courses and the rainwater heads' lips.
 		const double Buttress = Plan::SideOuterX + Plan::ButtressDepth + Plan::BaseCourseProud;
 		TestEqual(TEXT("the side buttresses reach x 15.56"), Buttress, 15.56, 1e-9);

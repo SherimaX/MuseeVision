@@ -76,8 +76,7 @@ namespace Musee::Albion::Plan
 	inline constexpr int32 RedCourses = 9;
 
 	// ---- §3.1 the side walls -------------------------------------------------------------------------------------------
-	/** The court's face runs to 9.73 under the cornice; the inner leaf rises behind it to the springing. */
-	inline constexpr double SideFaceTop = 9.730;
+	/** The vaults' springing: the court's leaves rise to it behind the cornice (their face shows to 9.73). */
 	inline constexpr double Springing = 10.000;
 	/** The lancets, one on each bay's centre line: 1.40 wide, sill 5.00, head 9.00, two-centred of radius 0.808. */
 	inline constexpr double LancetHalf = 0.700;
@@ -562,7 +561,6 @@ namespace Musee::Albion::Plan
 	inline constexpr double PadMeters = 0.012;
 	inline constexpr double PadReach = 0.280;
 	/** The post, stop-chamfered and tapering 0.11 to 0.085 square from 0.07 to 0.90 (drawn at its mean, §13); a collar 0.88 to 0.92. */
-	inline constexpr double PostFoot = 0.070;
 	inline constexpr double PostTop = 0.900;
 	inline constexpr double PostFootWidth = 0.110;
 	inline constexpr double PostHeadWidth = 0.085;
