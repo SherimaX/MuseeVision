@@ -64,9 +64,10 @@ namespace Musee::Studio
 				Made.Outcome = EMadeOutcome::Failed;
 				return;
 			}
-			Profile->SetLightingGuid(FGuid::NewDeterministicGuid(Hash));
 			Profile->PostEditChange();
 			FAssetCompilingManager::Get().FinishAllCompilation();
+			// PostEditChange gives a texture a new random lighting GUID; the made one's derives from its inputs.
+			Profile->SetLightingGuid(FGuid::NewDeterministicGuid(Hash));
 			StoreInputHash(*Profile, Hash);
 			if (SaveMadePackage(*Profile, Made.Why))
 			{

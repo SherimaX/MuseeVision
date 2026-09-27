@@ -14,9 +14,11 @@
 #include "Misc/PackageName.h"
 #include "Misc/Paths.h"
 #include "MuseeStageDresser.h"
+#include "Serialization/MemoryReader.h"
 #include "Stages/LightProfiles.h"
 #include "Stages/StageMake.h"
 #include "UObject/Package.h"
+#include "UObject/PackageFileSummary.h"
 
 // The light profiles Studio imports from the makers' photometric files: made the same, byte for byte, from the same
 // file, and, placed as a stage's schedule places a wallwasher, throwing its wash onto the wall it is aimed at.
@@ -53,6 +55,33 @@ namespace Musee::Studio::LightProfileTests
 	FString FileOf(const FString& Package)
 	{
 		return FPackageName::LongPackageNameToFilename(Package, FPackageName::GetAssetPackageExtension());
+	}
+
+	/** Blanks every copy of Bytes' pattern in Data. */
+	void Blank(TArray<uint8>& Data, TConstArrayView<uint8> Pattern)
+	{
+		for (int32 At = 0; Pattern.Num() > 0 && At + Pattern.Num() <= Data.Num(); ++At)
+		{
+			if (FMemory::Memcmp(&Data[At], Pattern.GetData(), Pattern.Num()) == 0) { FMemory::Memzero(&Data[At], Pattern.Num()); }
+		}
+	}
+
+	/**
+	 * A made package's bytes with its texture source's payload identity (the FGuid the engine gives a new bulk payload)
+	 * and the package's saved hash (FPackageFileSummary, over all its bytes) blanked: what makes one make of the same
+	 * inputs differ from another.
+	 */
+	TArray<uint8> Masked(const TArray<uint8>& Package, const FGuid& PayloadId)
+	{
+		TArray<uint8> Data = Package;
+		const uint32 Words[4] = {PayloadId.A, PayloadId.B, PayloadId.C, PayloadId.D};
+		Blank(Data, TConstArrayView<uint8>(reinterpret_cast<const uint8*>(Words), sizeof(Words)));
+		FMemoryReader Reader(Package);
+		FPackageFileSummary Summary;
+		Reader << Summary;
+		const FIoHash Saved = Summary.GetSavedHash();
+		Blank(Data, TConstArrayView<uint8>(Saved.GetBytes(), sizeof(FIoHash::ByteArray)));
+		return Data;
 	}
 
 	int32 CountOf(const FMakeReport& Report, const FString& Package, EMadeOutcome Outcome)
@@ -211,16 +240,26 @@ bool FStudioLightProfilesTest::RunTest(const FString& Parameters)
 	TestTrue(TEXT("to the same texels"), Aside->Source.GetId() == Profile->Source.GetId() && Aside->Brightness == Profile->Brightness);
 	Aside->MarkAsGarbage();
 
-	// Made afresh from nothing, its package is the same file, byte for byte.
+	// Made afresh from nothing, its package is the same file, byte for byte, but for the identity the engine gives every
+	// newly made bulk payload (FEditorBulkData's random id, which the bulk-data registry keeps unique) and the package's
+	// hash, which covers it.
 	const FString Filename = FileOf(Package);
 	const TArray<uint8> Before = FileBytes(Filename);
+	const FGuid PayloadBefore = Profile->Source.GetPersistentId();
+	const FGuid LightingBefore = Profile->GetLightingGuid();
+	const FGuid SourceBefore = Profile->Source.GetId();
 	ReleasePackages({FindPackage(nullptr, *Package)});
 	IFileManager::Get().Delete(*Filename);
 	FMakeReport Afresh;
 	MakeLightProfiles(Options, Afresh);
 	TestEqual(TEXT("Made afresh, it is written"), CountOf(Afresh, Package, EMadeOutcome::Written), 1);
+	const UTextureLightProfile* Remade = LoadObject<UTextureLightProfile>(nullptr, *(Package + TEXT(".") + WallwasherProfile));
+	if (!TestNotNull(TEXT("and loads"), Remade)) { return false; }
+	TestTrue(TEXT("with the same texels and the same lighting GUID, derived from its inputs"),
+		Remade->Source.GetId() == SourceBefore && Remade->GetLightingGuid() == LightingBefore);
 	const TArray<uint8> After = FileBytes(Filename);
-	TestTrue(FString::Printf(TEXT("byte for byte as before (%lld bytes)"), static_cast<int64>(Before.Num())), !Before.IsEmpty() && Before == After);
+	TestTrue(FString::Printf(TEXT("its file the same, byte for byte but for its payload's identity (%lld bytes)"), static_cast<int64>(Before.Num())),
+		!Before.IsEmpty() && Masked(Before, PayloadBefore) == Masked(After, Remade->Source.GetPersistentId()));
 	return true;
 }
 
