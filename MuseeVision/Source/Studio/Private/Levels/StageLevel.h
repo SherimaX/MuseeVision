@@ -93,6 +93,9 @@ namespace Musee::Studio
 	/** A stage level's input hash: the writer's revision, the stage's name, its bodies, placements, instances, barriers and dependencies. */
 	FString HashOf(const FStageLevel& Stage);
 
-	/** Writes a stage's level, unless the level on disk already carries the same input hash. */
+	/**
+	 * Writes a stage's level, unless the level on disk already carries the same input hash. A level left as it is is still
+	 * dressed, in a draft that is never saved, so its dressers report what they find on every make.
+	 */
 	FMadePackage WriteStageLevel(const FStageLevel& Stage);
 }

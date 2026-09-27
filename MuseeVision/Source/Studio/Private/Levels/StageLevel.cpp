@@ -187,6 +187,25 @@ namespace Musee::Studio
 			Place(*Actor);
 			return !Stage.Dress || Stage.Dress(*Actor, OutWhy);
 		}
+
+		/** Where a stage whose level is current is furnished again to be dressed: a transient package, never saved. */
+		const TCHAR* const RehearsalRoot = TEXT("/Temp/Musee/Dressing/");
+
+		/**
+		 * Dresses a stage whose level on disk is already current, for what its dressers find. The systems report their
+		 * findings as they place their components (a luminaire that can't be placed, a work without its label), so a make
+		 * that writes nothing still furnishes the stage in a draft of its own, lets the systems dress it, and lets the draft
+		 * go unsaved: every make of the same inputs reports the same findings.
+		 */
+		bool Rehearse(const FStageLevel& Stage, FString& OutWhy)
+		{
+			if (!Stage.Dress)
+			{
+				return true;
+			}
+			TUniquePtr<FLevelDraft> Draft = FLevelDraft::Start(FString(RehearsalRoot) + FPackageName::GetShortName(Stage.PackageName), OutWhy);
+			return Draft && Furnish(*Draft, Stage, OutWhy);
+		}
 	}
 
 	FString HashOf(const FStageLevel& Stage)
@@ -224,7 +243,7 @@ namespace Musee::Studio
 		const FString Hash = HashOf(Stage);
 		if (StoredInputHash(Stage.PackageName, FPackageName::GetShortName(Stage.PackageName)) == Hash)
 		{
-			Made.Outcome = EMadeOutcome::Unchanged;
+			Made.Outcome = Rehearse(Stage, Made.Why) ? EMadeOutcome::Unchanged : EMadeOutcome::Failed;
 			return Made;
 		}
 		TUniquePtr<FLevelDraft> Draft = FLevelDraft::Start(Stage.PackageName, Made.Why);
