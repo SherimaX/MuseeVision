@@ -39,6 +39,10 @@ TArray<FMuseeFinding> Musee::Site::CheckDescription(const FSiteDescription& Desc
 		{
 			Break(FString::Printf(TEXT("port %s names no class"), *Port.Key.ToString()), Port.Key);
 		}
+		if (FMath::Abs(Port.Facing().Z) > 0.5 && !Port.bHasWell)
+		{
+			Break(FString::Printf(TEXT("vertical port %s declares no well"), *Port.Key.ToString()), Port.Key);
+		}
 	}
 	for (const FMuseeStageAnchor& Anchor : Description.Anchors)
 	{

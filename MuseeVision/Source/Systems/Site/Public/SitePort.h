@@ -33,12 +33,16 @@ struct MUSEESITE_API FSiteWell
 	UPROPERTY()
 	bool bServing = false;
 
-	/** The prism's lower and upper corners, metres. */
+	/** The prism's lower and upper corners, metres: a round well's bounds. */
 	UPROPERTY(meta = (Units = "Meters"))
 	FVector MinMeters = FVector::ZeroVector;
 
 	UPROPERTY(meta = (Units = "Meters"))
 	FVector MaxMeters = FVector::ZeroVector;
+
+	/** A round well's radius about the vertical line through the prism's centre, metres; zero for a square prism. */
+	UPROPERTY(meta = (Units = "Meters"))
+	double RadiusMeters = 0.0;
 };
 
 /**
@@ -71,9 +75,25 @@ struct MUSEESITE_API FSitePort
 	UPROPERTY(meta = (Units = "Meters"))
 	double WallDepthMeters = 0.0;
 
-	/** The radius of a cylindrical outer face (a drum), metres; zero for a flat face. */
+	/**
+	 * The radius of a cylindrical outer face, metres, whose axis is vertical on the port's centreline: positive when the
+	 * axis stands behind the face, inside the stage (a drum's outer face, bulging out), negative when it stands ahead of
+	 * it (a face wrapped round a neighbour's drum); zero for a flat face. The wall's inner face is the concentric cylinder
+	 * WallDepthMeters behind it, unless it is flat.
+	 */
 	UPROPERTY(meta = (Units = "Meters"))
 	double FaceRadiusMeters = 0.0;
+
+	/** Whether the wall's inner face is the plane WallDepthMeters behind the port's frame (a flat room face behind a curved port face). */
+	UPROPERTY()
+	bool bFlatInnerFace = false;
+
+	/**
+	 * Whether the stage draws its own surround round this port on its inner face (an archivolt, an architrave), so the
+	 * joint draws none there.
+	 */
+	UPROPERTY()
+	bool bOwnSurround = false;
 
 	/** The port it is designed to meet (salon.west), as the stage's own design says; the site plan decides. */
 	UPROPERTY()

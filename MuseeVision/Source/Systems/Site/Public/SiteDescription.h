@@ -42,7 +42,7 @@ namespace Musee::Site
 {
 	/**
 	 * Whether a description holds together: a stage key; every port, anchor, enclosure and opening key under it; piece
-	 * names unique; every enclosure's pieces drawn; every port's class named. Each break is a finding (Site.Described)
+	 * names unique; every enclosure's pieces drawn; every port's class named, and every vertical port's well declared. Each break is a finding (Site.Described)
 	 * drawn by the stage.
 	 */
 	[[nodiscard]] MUSEESITE_API TArray<FMuseeFinding> CheckDescription(const FSiteDescription& Description);

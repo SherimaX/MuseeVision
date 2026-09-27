@@ -34,6 +34,38 @@ namespace Musee::Site
 		}
 	}
 
+	namespace
+	{
+		/**
+		 * Whether the wells of two mated ports coincide once their stages are placed: both ports have one or neither does,
+		 * one side serves it and the other receives it, and the two prisms (and a round well's radius) agree within the loop
+		 * tolerance. Findings say why not.
+		 */
+		bool CheckWells(const FSitePort& A, const FVector& AtA, const FSitePort& B, const FVector& AtB, TArray<FMuseeFinding>& OutFindings)
+		{
+			if (!A.bHasWell && !B.bHasWell)
+			{
+				return true;
+			}
+			const FName Drawer(*StageOfPort(B.Key).ToString());
+			if (A.bHasWell != B.bHasWell || A.Well.bServing == B.Well.bServing)
+			{
+				OutFindings.Add(SiteFinding(TEXT("Site.PortsMate"), Drawer, FString::Printf(TEXT("%s and %s don't share a well that one serves and the other receives"),
+					*A.Key.ToString(), *B.Key.ToString()), TEXT("wells served"), A.Well.bServing + B.Well.bServing, 1.0, 1.0, B.Key));
+				return false;
+			}
+			const double Miss = FMath::Max3(FVector::Distance(A.Well.MinMeters + AtA, B.Well.MinMeters + AtB),
+				FVector::Distance(A.Well.MaxMeters + AtA, B.Well.MaxMeters + AtB), FMath::Abs(A.Well.RadiusMeters - B.Well.RadiusMeters));
+			if (Miss > LoopToleranceMeters)
+			{
+				OutFindings.Add(SiteFinding(TEXT("Site.PortsMate"), Drawer, FString::Printf(TEXT("the wells of %s and %s don't coincide, %.4f m apart"),
+					*A.Key.ToString(), *B.Key.ToString(), Miss), TEXT("wells apart, m"), Miss, 0.0, LoopToleranceMeters, B.Key));
+				return false;
+			}
+			return true;
+		}
+	}
+
 	TValueOrError<FSitePlan, FString> ReadPlan(const FString& Path)
 	{
 		return ReadRecord<FSitePlan>(Path);
@@ -86,6 +118,10 @@ namespace Musee::Site
 				const FVector Placed = Layout.TranslationsMeters[Here] + NearPort->Frame.OriginMeters
 					+ NearPort->Facing() * Mating.PassageMeters - FarPort->Frame.OriginMeters;
 				const FMuseeKey There = StageOfPort(Far);
+				if (!CheckWells(*NearPort, Layout.TranslationsMeters[Here], *FarPort, Placed, OutFindings))
+				{
+					continue;
+				}
 				Layout.MatedPorts.Add(Near);
 				Layout.MatedPorts.Add(Far);
 				if (const FVector* Already = Layout.TranslationsMeters.Find(There))

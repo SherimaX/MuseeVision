@@ -101,8 +101,9 @@ namespace Musee::Site
 	/**
 	 * Places the stages by translation alone, walking the matings out from the anchor. A mating whose stages are both
 	 * present joins them; one naming a stage that isn't built yet is left for later, and its present port stays blind.
-	 * Ports that disagree in kind or class, or don't face each other, are findings (Site.PortsMate); a loop that returns
-	 * more than a millimetre off is a finding (Site.LoopsClose).
+	 * Ports that disagree in kind or class, don't face each other, or whose wells don't coincide (one serving, one
+	 * receiving, the same prism) are findings (Site.PortsMate); a loop that returns more than a millimetre off is a finding
+	 * (Site.LoopsClose).
 	 */
 	[[nodiscard]] MUSEESITE_API FSiteLayout Solve(const FSitePlan& Plan, const TMap<FMuseeKey, TArray<FSitePort>>& PortsByStage,
 		TArray<FMuseeFinding>& OutFindings);
