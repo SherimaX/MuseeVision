@@ -7,7 +7,8 @@
       "time": 5.0, "profile": "ease-in-out", "control": "proof.iris",
       "open":  [ { "channel": "proof.rim", "to": 1.0, "time": 1.5 }, { "move": "open" } ],
       "close": [ { "move": "closed" }, { "channel": "proof.rim", "to": 0.0, "time": 1.5 } ],
-      "guard": "body-in-travel", "clearance": 0.05,
+      "guard": "body-in-travel", "clearance": 0.05, "publishes": "proof.height",
+      "note": "The lift publishes its height for the rails that follow it.",
       "openUse": { "verb": { "key": "proof.lift.raise", "source": "Raise" }, "caption": { "key": "proof.lift.raise-caption", "source": "Raise the block" } }
     },
     {
@@ -16,6 +17,12 @@
       "open":  [ { "move": "open" } ],
       "close": [ { "move": "closed" } ],
       "guard": "body-in-travel-reverse", "clearance": 0.05
+    },
+    {
+      "key": "proof.rails", "joint": "prismatic", "body": "proof.rails", "axis": [0, 0, 1], "travel": 1.0,
+      "time": 5.0, "profile": "linear",
+      "follows": { "channel": "proof.height", "in": [0.0385, 0.4231], "out": [0, 1.0] },
+      "guard": "body-in-travel", "clearance": 0.05
     }
   ]
 }

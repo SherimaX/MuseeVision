@@ -1,6 +1,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "MotionFollowing.h"
 #include "MotionStep.h"
 #include "MotionUseText.h"
 #include "MuseeKey.h"
@@ -17,6 +18,9 @@
  * minimum-jerk move (Flash and Hogan 1985), which starts and ends at rest with no step in acceleration. Guards: `none`;
  * `body-in-travel`, which holds the drive while the visitor's body is in its next travel slice and resumes when it is
  * clear (a lift); `body-in-travel-reverse`, which sends the body back to the state it left (a door).
+ *
+ * A mechanism may publish its position on a channel, and may instead follow another's channel (guard rails that rise
+ * with the pond they guard), in which case it has no control and no sequences.
  */
 USTRUCT()
 struct MUSEEMOTION_API FMotionMechanismSpec
@@ -71,6 +75,14 @@ struct MUSEEMOTION_API FMotionMechanismSpec
 	UPROPERTY(meta = (Units = "Meters"))
 	float Clearance = 0.0f;
 
+	/** The channel the mechanism publishes its position on, as a share of its travel from 0 to 1 (none: it publishes none). */
+	UPROPERTY()
+	FMuseeKey Publishes;
+
+	/** The channel the mechanism follows instead of a control; a following mechanism has no control and no sequences. */
+	UPROPERTY()
+	FMotionFollowing Follows;
+
 	/** What the control offers while the mechanism is closed; the joint's verb when absent (its verb's key is none). */
 	UPROPERTY()
 	FMotionUseText OpenUse;
@@ -78,4 +90,8 @@ struct MUSEEMOTION_API FMotionMechanismSpec
 	/** What the control offers while the mechanism is open; the joint's verb when absent (its verb's key is none). */
 	UPROPERTY()
 	FMotionUseText CloseUse;
+
+	/** The designer's note: the machine's sources and intent. */
+	UPROPERTY()
+	FString Note;
 };

@@ -1,0 +1,28 @@
+{
+  "$sources": [
+    "Measures and colours: the as-built pond's forget-me-not patches (windows/Source/MuseeVision/Salon/SalonPond.cpp, ForgetMeNots): 10-15 stems a patch, 3-5 oblong leaves 30-45 mm by 9-13 mm up each, sprays of 5-9 flowers 8.5-10.5 mm across, sky blue, the youngest pink buds in the coil.",
+    "The species: Myosotis scorpioides L., water forget-me-not: stems ascending from a creeping base, to about 0.45 m; flowers 4-10 mm, sky blue with a yellow eye, in a coiled (scorpioid) cyme, pink in bud (C. Stace, New Flora of the British Isles, 4th ed., Cambridge 2019, Boraginaceae)."
+  ],
+  "key": "myosotis-scorpioides",
+  "name": "Myosotis scorpioides",
+  "common": "Water forget-me-not",
+  "form": "forget-me-not",
+  "organs": [
+    { "organ": "leaf", "material": "living.leaf" },
+    { "organ": "flower", "material": "living.petal" },
+    { "organ": "stem", "material": "living.stem" }
+  ],
+  "reachMeters": [0.08, 0.14],
+  "leafLengthMeters": [0.03, 0.045],
+  "leafWidthMeters": [0.009, 0.013],
+  "flowerSizeMeters": [0.0085, 0.0105],
+  "flowerHeightMeters": [0.19, 0.31],
+  "shootsPerPlant": [10, 15],
+  "leavesPerShoot": [3, 5],
+  "flowersPerPlant": [5, 9],
+  "floweringShare": 1.0,
+  "leafColours": ["#587C38"],
+  "stemColours": ["#6A8A48", "#5E8040"],
+  "flowerColours": ["#78A8E8", "#D890B0"],
+  "note": "Stem heights are from the soil of the shelf, 0.12 m under the water: the sprays stand 0.07-0.19 m above it, as built. In flower from Lixia to Dashu."
+}

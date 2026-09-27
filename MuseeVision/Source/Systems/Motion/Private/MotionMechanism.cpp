@@ -85,7 +85,7 @@ FMuseeUse UMotionMechanism::Usage() const
 	const bool bOpening = DrivePosition < 0.5;
 	const FMotionUseText& Text = bOpening ? MechanismSpec.OpenUse : MechanismSpec.CloseUse;
 	const FText Caption = Text.Caption.Key.IsNone() ? FText::GetEmpty() : Text.Caption.ToText();
-	if (IsRunning())
+	if (IsRunning() || MechanismSpec.Follows.IsSet())
 	{
 		const FText WhyNot = bHeld
 			? NSLOCTEXT("Musee", "motion.held", "Something is in its way.")
@@ -97,7 +97,7 @@ FMuseeUse UMotionMechanism::Usage() const
 
 void UMotionMechanism::Use()
 {
-	if (IsRunning() || !BodyComponent)
+	if (IsRunning() || !BodyComponent || MechanismSpec.Follows.IsSet())
 	{
 		return;
 	}
@@ -122,6 +122,11 @@ void UMotionMechanism::Start(const TArray<FMotionStep>& Steps, const TArray<FMot
 
 void UMotionMechanism::Advance(float Seconds)
 {
+	if (MechanismSpec.Follows.IsSet())
+	{
+		Follow(Seconds);
+		return;
+	}
 	float Left = Seconds;
 	// Each pass either finishes a step (and the next begins with the time left over) or ends the advance, so steps
 	// that take no time (a channel set at once) run in the same advance as the step before them.
@@ -220,6 +225,30 @@ TOptional<float> UMotionMechanism::RunMoveStep(float Seconds)
 	return static_cast<float>(Before + Seconds - Duration);
 }
 
+void UMotionMechanism::Follow(float Seconds)
+{
+	const UMuseeSignals* Signals = GetWorld() ? GetWorld()->GetSubsystem<UMuseeSignals>() : nullptr;
+	const TOptional<float> Value = Signals ? Signals->Read(MechanismSpec.Follows.Channel) : TOptional<float>();
+	if (!Value.IsSet() || MechanismSpec.Travel <= 0.0f)
+	{
+		return;
+	}
+	const double Target = FMath::Clamp(MechanismSpec.Follows.TravelAt(Value.GetValue()) / MechanismSpec.Travel, 0.0, 1.0);
+	if (FMath::IsNearlyEqual(Target, DrivePosition))
+	{
+		return;
+	}
+	bHeld = IsGuarded(Target);
+	if (bHeld)
+	{
+		PublishActuation(0.0);
+		return;
+	}
+	const double Rate = Seconds > 0.0f ? (Target - DrivePosition) / Seconds : 0.0;
+	SetPosition(Target);
+	PublishActuation(DrivenPointSpeed(Rate));
+}
+
 bool UMotionMechanism::IsGuarded(double NextPosition) const
 {
 	const UWorld* World = GetWorld();
@@ -254,6 +283,14 @@ void UMotionMechanism::SetPosition(double InPosition)
 	if (BodyComponent)
 	{
 		BodyComponent->SetRelativeTransform(PoseAt(DrivePosition));
+	}
+	UMuseeSignals* Signals = GetWorld() ? GetWorld()->GetSubsystem<UMuseeSignals>() : nullptr;
+	if (Signals && !MechanismSpec.Publishes.IsNone())
+	{
+		FMuseeChannel Point;
+		Point.Key = MechanismSpec.Publishes;
+		Point.Value = static_cast<float>(DrivePosition);
+		Signals->Publish(Point);
 	}
 }
 

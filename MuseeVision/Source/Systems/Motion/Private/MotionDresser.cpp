@@ -155,6 +155,14 @@ namespace Musee::Motion
 		{
 			Out.Add(TEXT("its clearance is negative"));
 		}
+		if (Spec.Follows.IsSet() && (!Spec.Control.IsNone() || !Spec.Open.IsEmpty() || !Spec.Close.IsEmpty()))
+		{
+			Out.Add(TEXT("it follows a channel, so it has no control and no sequences"));
+		}
+		if (Spec.Follows.IsSet() && (Spec.Follows.In.Num() != 2 || Spec.Follows.Out.Num() != 2 || Spec.Follows.In[0] == Spec.Follows.In[1]))
+		{
+			Out.Add(TEXT("it follows a channel with an input range of two different values and an output range of two"));
+		}
 		Out.Append(StepFaults(Spec.Open, TEXT("open")));
 		Out.Append(StepFaults(Spec.Close, TEXT("close")));
 		return Out;

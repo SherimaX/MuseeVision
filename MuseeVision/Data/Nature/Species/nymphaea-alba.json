@@ -1,0 +1,28 @@
+{
+  "$sources": [
+    "The species: Nymphaea alba L., the European white water lily: leaves 10-30 cm across, flowers 10-20 cm, white, floating (C. Stace, New Flora of the British Isles, 4th ed., Cambridge 2019, Nymphaeaceae).",
+    "Colours and the colony rule: the as-built museum's lily colonies (windows/Source/MuseeVision/Nature/MuseeWaterLilies.cpp)."
+  ],
+  "key": "nymphaea-alba",
+  "name": "Nymphaea alba",
+  "common": "European white water lily",
+  "form": "water-lily",
+  "organs": [
+    { "organ": "leaf", "material": "living.leaf-floating" },
+    { "organ": "sepal", "material": "living.leaf" },
+    { "organ": "flower", "material": "living.petal" },
+    { "organ": "eye", "material": "living.stamen" }
+  ],
+  "reachMeters": [0.3, 0.6],
+  "leafLengthMeters": [0.05, 0.15],
+  "flowerSizeMeters": [0.1, 0.18],
+  "floweringShare": 0.4,
+  "leafColours": ["#3F6B2E", "#4A7632", "#557F36", "#44702C"],
+  "leafAgeColours": ["#6E5A2E", "#9A9440"],
+  "leafEdgeColour": "#6A3A2A",
+  "leafMiddleColour": "#6E9448",
+  "flowerColours": ["#FFFDF8", "#FBF6EC"],
+  "eyeColours": ["#F2BE2C", "#F8DA64", "#E0A826"],
+  "stemColours": ["#5E7A34", "#DDE6C6"],
+  "note": "The wild species the Marliac hybrids were bred from; the stage contract's example planting."
+}

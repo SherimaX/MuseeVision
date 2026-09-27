@@ -19,6 +19,7 @@ namespace Musee::Motion::Tests
 			Anchor(TEXT("proof.iris"), TEXT("Use"), FVector(0.3, 0.0, 1.0)),
 			Anchor(TEXT("proof.leaf"), TEXT("Body"), FVector(5.0, 0.0, 0.0)),
 			Anchor(TEXT("proof.handle"), TEXT("Use"), FVector(8.0, 0.0, 1.0)),
+			Anchor(TEXT("proof.rails"), TEXT("Body"), FVector(0.0, 3.0, -1.0)),
 		};
 	}
 
@@ -30,6 +31,7 @@ namespace Musee::Motion::Tests
 	{
 		Stage.AddBody(FMuseeKey(TEXTVIEW("proof.basin")), FVector::ZeroVector);
 		Stage.AddBody(FMuseeKey(TEXTVIEW("proof.leaf")), FVector(5.0, 0.0, 0.0), FVector(0.5, 0.0, 1.0), FVector(0.5, 0.025, 1.0));
+		Stage.AddBody(FMuseeKey(TEXTVIEW("proof.rails")), FVector(0.0, 3.0, -1.0), FVector(0.0, 0.0, 0.5), FVector(1.0, 0.025, 0.5));
 		DressMechanisms(Stage.Context(FMuseeKey(TEXTVIEW("proof")), TEXT("Stages/proof"), ProofAnchors()), OutFindings);
 	}
 
@@ -90,14 +92,15 @@ bool FMotionScheduleTest::RunTest(const FString& Parameters)
 		return false;
 	}
 	const FMotionSchedule& Schedule = Read.GetValue();
-	TestEqual(TEXT("Both mechanisms"), Schedule.Mechanisms.Num(), 2);
+	TestEqual(TEXT("Every mechanism"), Schedule.Mechanisms.Num(), 3);
+	TestTrue(TEXT("The rails follow the lift's height"), Schedule.Mechanisms[2].Follows.IsSet() && Schedule.Mechanisms[2].Follows.TravelAt(0.4231) == 1.0);
 	const FMotionMechanismSpec& Lift = Schedule.Mechanisms[0];
 	TestTrue(TEXT("Keys, joint and body"), Lift.Key == FMuseeKey(TEXTVIEW("proof.lift")) && Lift.Joint == TEXT("prismatic") && Lift.Body == FMuseeKey(TEXTVIEW("proof.basin")));
 	TestEqual(TEXT("Travel in metres"), Lift.Travel, 2.6f);
 	TestEqual(TEXT("The open sequence's steps"), Lift.Open.Num(), 2);
 	TestTrue(TEXT("A channel step, then a move"), !Lift.Open[0].IsMove() && Lift.Open[0].Channel == FMuseeKey(TEXTVIEW("proof.rim")) && Lift.Open[1].Move == UMotionMechanism::Open);
 	TestEqual(TEXT("The optional words"), Lift.OpenUse.Verb.Source, FString(TEXT("Raise")));
-	TestTrue(TEXT("A sound spec has no faults"), Faults(Lift).IsEmpty() && Faults(Schedule.Mechanisms[1]).IsEmpty());
+	TestTrue(TEXT("A sound spec has no faults"), Faults(Lift).IsEmpty() && Faults(Schedule.Mechanisms[1]).IsEmpty() && Faults(Schedule.Mechanisms[2]).IsEmpty());
 
 	const TValueOrError<FMotionSchedule, FString> Faulty = Musee::ReadRecord<FMotionSchedule>(Tests::Fixture(TEXT("Stages/faulty")) / FMotionSchedule::FileName);
 	if (TestTrue(TEXT("A faulty schedule still reads"), Faulty.HasValue()))
@@ -126,7 +129,7 @@ bool FMotionDresserTest::RunTest(const FString& Parameters)
 	TestEqual(TEXT("The body is made movable"), Lift->Body()->Mobility.GetValue(), EComponentMobility::Movable);
 	TArray<UMotionControl*> Controls;
 	Stage.Actor->GetComponents(Controls);
-	TestEqual(TEXT("Each mechanism has its control"), Controls.Num(), 2);
+	TestEqual(TEXT("Each mechanism worked by hand has its control"), Controls.Num(), 2);
 	for (const UMotionControl* Control : Controls)
 	{
 		const bool bIris = Control->ComponentHasTag(TEXT("proof.iris"));
@@ -178,6 +181,14 @@ bool FMotionSequenceTest::RunTest(const FString& Parameters)
 	TestEqual(TEXT("A full travel up"), Tests::HeightMeters(*Lift), 2.6, 1e-4);
 	TestTrue(TEXT("Its actuation was published, peaking at 1.875 times 2.6 m in 5 s"), Actuations > 0 && FMath::IsNearlyEqual(PeakSpeed, 1.875 * 2.6 / 5.0, 0.01));
 	TestEqual(TEXT("From open it lowers"), Lift->Usage().Verb.ToString(), FString(TEXT("Lower")));
+	TestEqual(TEXT("It publishes its position"), Signals->Read(FMuseeKey(TEXTVIEW("proof.height"))).Get(0.0f), 1.0f);
+	UMotionMechanism* Rails = Tests::Find(Stage, TEXT("proof.rails"));
+	if (TestNotNull(TEXT("The rails are placed"), Rails))
+	{
+		Rails->Advance(1.0f / 60.0f);
+		TestEqual(TEXT("The rails follow the lift up to their full travel"), Tests::HeightMeters(*Rails), -1.0 + 1.0, 1e-4);
+		TestFalse(TEXT("A following mechanism isn't used by hand"), Rails->Usage().bAvailable);
+	}
 
 	Lift->Use();
 	Tests::Run(*Lift, 7.0);

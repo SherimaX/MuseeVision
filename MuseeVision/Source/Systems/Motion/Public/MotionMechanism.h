@@ -56,7 +56,7 @@ public:
 	/** Drives the body to a named state at the drive's own pace, without the sequence's channel steps. */
 	void MoveTo(FName State);
 
-	/** How the mechanism's control can be used now: open when closed, close when open, nothing while it runs. */
+	/** How the mechanism's control can be used now: open when closed, close when open, nothing while it runs or follows. */
 	[[nodiscard]] FMuseeUse Usage() const;
 
 	/** The control's use: runs the open sequence from closed, the close sequence from open. */
@@ -88,6 +88,8 @@ private:
 	};
 
 	void Start(const TArray<FMotionStep>& Steps, const TArray<FMotionStep>& Reverse);
+	/** Follows the channel the spec names: moves straight to the travel it asks for, unless the guard forbids it. */
+	void Follow(float Seconds);
 	/** Runs the current step for up to Seconds: the seconds left over when it finishes, or nothing while it goes on. */
 	TOptional<float> RunChannelStep(const FMotionStep& Step, float Seconds);
 	TOptional<float> RunMoveStep(float Seconds);

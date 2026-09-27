@@ -1,0 +1,31 @@
+{
+  "$sources": [
+    "Measures and colours: the as-built pond's marginal irises (windows/Source/MuseeVision/Salon/SalonPond.cpp, IrisClump and IrisFlower): 5-7 fans of 4-7 sword leaves 0.62-0.78 m, flower stalks 0.44-0.56 m above the water from feet 0.12 m under it, 2-3 flowers a clump.",
+    "The species: Iris laevigata Fisch., the Japanese water iris: a marginal of shallow water, leaves to about 0.8 m, flowers blue-violet, 8-12 cm, each fall with a narrow white-to-yellow signal (B. Mathew, The Iris, Batsford 1981, series Laevigatae)."
+  ],
+  "key": "iris-laevigata",
+  "name": "Iris laevigata",
+  "common": "Japanese water iris",
+  "form": "iris",
+  "organs": [
+    { "organ": "leaf", "material": "living.leaf" },
+    { "organ": "flower", "material": "living.petal" },
+    { "organ": "stem", "material": "living.stem" }
+  ],
+  "reachMeters": [0.1, 0.13],
+  "leafLengthMeters": [0.62, 0.78],
+  "leafWidthMeters": [0.013, 0.018],
+  "flowerSizeMeters": [0.12, 0.14],
+  "flowerHeightMeters": [0.56, 0.68],
+  "shootsPerPlant": [5, 7],
+  "leavesPerShoot": [4, 7],
+  "flowersPerPlant": [2, 3],
+  "floweringShare": 1.0,
+  "leafColours": ["#5A7E3C"],
+  "leafAgeColours": ["#9A8A5A"],
+  "leafEdgeColour": "#8A7058",
+  "flowerColours": ["#4C44A8", "#2E2878", "#C8C0EC"],
+  "eyeColours": ["#E8C850", "#F6F2E4"],
+  "stemColours": ["#7A8A58", "#5E7C3A"],
+  "note": "Flower heights are from the soil of the shelf, 0.12 m under the water: 0.44-0.56 m above the water, as built. In flower from Mangzhong to Xiazhi; the oval shows it in flower."
+}
