@@ -15,6 +15,24 @@
       "b": "salon.west",
       "passageMeters": 0.0,
       "note": "The oval passage: the Salon's bay 5 far wall meets the oval's passage block."
+    },
+    {
+      "a": "atrium.west",
+      "b": "hall-of-light.east",
+      "passageMeters": 0.0,
+      "note": "The Atrium's one door, from the Hall of Light: its east end meets the base's face R 14.800 inside the portal (atrium.md section 2); the threshold, strip, linings and surrounds are the joint's."
+    },
+    {
+      "a": "atrium.down",
+      "b": "cube.up",
+      "passageMeters": 0.0,
+      "note": "The Atrium's down port on its slab's soffit (museum (54, 0, -0.500)) over the Cube's ceiling (atrium.md section 2): iris.4600, closed by the Cube's ceiling iris; the Atrium serves the well to -23.800."
+    },
+    {
+      "a": "atrium.up",
+      "b": "sphere.down",
+      "passageMeters": 0.0,
+      "note": "The Atrium's up port on the collar's top (museum (54, 0, 7.715)) under the Sphere's neck (atrium.md section 2): iris.4600, closed by the Atrium's collar iris; the Atrium serves the well to +23.390."
     }
   ]
 }
