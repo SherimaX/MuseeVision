@@ -126,6 +126,11 @@
 			"LoadingPhase": "Default"
 		},
 		{
+			"Name": "MuseeChenghuai",
+			"Type": "Editor",
+			"LoadingPhase": "Default"
+		},
+		{
 			"Name": "MuseeInstruments",
 			"Type": "Runtime",
 			"LoadingPhase": "Default",
