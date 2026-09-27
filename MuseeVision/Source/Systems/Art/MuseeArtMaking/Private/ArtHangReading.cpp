@@ -22,8 +22,8 @@ namespace Musee::ArtMaking
 		}
 
 		/**
-		 * What is wrong with a work's objects together: each index once, one support; and either they share the work's
-		 * one image, and so are one height, or each names its own.
+		 * What is wrong with a work's objects together: each index once, one support; a book is its opening whole or its
+		 * verso and recto; and either they share the work's one image, and so are one height, or each names its own.
 		 */
 		TArray<FString> CanvasFaults(const TArray<const FArtHangEntry*>& Canvases)
 		{
@@ -40,6 +40,10 @@ namespace Musee::ArtMaking
 			if (Canvases.ContainsByPredicate([&First](const FArtHangEntry* Entry) { return Entry->Support != First.Support; }))
 			{
 				Out.Add(TEXT("its objects are of one support"));
+			}
+			if (Canvases.FilterByPredicate([](const FArtHangEntry* Entry) { return Entry->Kind == Kinds::Book; }).Num() > BookSides)
+			{
+				Out.Add(TEXT("a book's objects are its opening whole, or its verso and recto"));
 			}
 			const int32 OwnImages = Canvases.FilterByPredicate([](const FArtHangEntry* Entry) { return !Entry->Image.IsEmpty(); }).Num();
 			if (OwnImages != 0 && OwnImages != Canvases.Num())
@@ -80,9 +84,10 @@ namespace Musee::ArtMaking
 		}
 
 		/**
-		 * The layer an object shows is finished as its support's record says (the oil paint on a canvas, the paper of a
-		 * print, the silver of a daguerreotype, the lustre on ware), and as its glass on stained glass; its faces without
-		 * the image, as its support's ground.
+		 * The layer an object shows is finished as its support's record says for the kind of object it is (the oil paint
+		 * on a canvas or a panel, the paper of a print, the silver of a daguerreotype, the lustre on ware, the ink on a
+		 * scroll's silk or paper, a tapestry's weave), and as its glass on stained glass; its faces without the image, as
+		 * its support's ground.
 		 */
 		void FinishOf(const FArtHangEntry& Entry, const FEntryContext& Context, FCanvasPlan& OutCanvas)
 		{
@@ -92,7 +97,7 @@ namespace Musee::ArtMaking
 				OutCanvas.Finish = { Glass.Material.ToName(), Glass.Working.ToName(), Glass.History.ToName() };
 				return;
 			}
-			const FArtSupport& Support = *FindSupport(Entry.Support);
+			const FArtSupport& Support = *FindSupport(Entry.Support, Entry.Kind);
 			OutCanvas.Finish = { Support.Palette, Support.Working, Support.History };
 			OutCanvas.Ground = { Support.Palette, Support.GroundWorking, Support.GroundHistory };
 		}
@@ -198,11 +203,29 @@ namespace Musee::ArtMaking
 			}
 		}
 
+		/** The bindings of the plan's books, read once when the plan holds a book. */
+		void ReadBooksInto(const FArtHang& Hang, FEntryContext& Context)
+		{
+			if (!Hang.Works.ContainsByPredicate([](const FArtHangEntry& Entry) { return !Entry.IsBuilt() && Entry.Kind == Kinds::Book; }))
+			{
+				return;
+			}
+			TValueOrError<TArray<FArtBook>, FString> Books = ReadRecords<FArtBook>(FArtBook::Record);
+			if (Books.HasValue())
+			{
+				Context.Books = Books.StealValue();
+			}
+			else
+			{
+				Context.BooksWhy = Books.GetError();
+			}
+		}
+
 		void ReadFinishesInto(const FMuseeStageContext& Stage, const FArtHang& Hang, FEntryContext& Context)
 		{
 			const bool bNamesSurfaces = Hang.Works.ContainsByPredicate([](const FArtHangEntry& Entry)
 			{
-				return !Entry.IsBuilt() && (IsFramed(Entry) || Entry.Support == Supports::Glass || !Entry.Mat.IsNone() || Entry.Glazed);
+				return !Entry.IsBuilt() && (IsFramed(Entry) || Entry.Support == Supports::Glass || !Entry.Mat.IsNone() || Entry.Glazed || !Entry.Wall.IsNone());
 			});
 			if (!bNamesSurfaces)
 			{
@@ -321,6 +344,7 @@ namespace Musee::ArtMaking
 		}
 		ReadFinishesInto(Stage, Hang, Context);
 		ReadTurnedInto(Hang, Context);
+		ReadBooksInto(Hang, Context);
 		for (const TArray<const FArtHangEntry*>& Canvases : WorksOf(Hang))
 		{
 			const FString& Id = Canvases[0]->Work;

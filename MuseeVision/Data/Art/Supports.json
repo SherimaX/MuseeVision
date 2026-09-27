@@ -1,7 +1,9 @@
 {
   "$sources": [
     "Each support's layer is a palette finish of Data/Matter/Palette.json: the entry and the finish the work's own image is laid in (the paint master for a canvas, a print and lustreware; the plate master for a daguerreotype), and for ware the finish of its undecorated faces.",
-    "The thickness of a sheet a work is made on: a photographic print or a stereograph's card, as mounted, about 0.3 mm (thin card; no measured caliper of the museum's facsimiles was read); a daguerreotype's plate, a silvered copper sheet, about 0.5 mm (no measured plate was read). Both are first values: neither is seen edge on at gallery distances, and each keeps its face clear of what it lies on."
+    "The thickness of a sheet a work is made on: a photographic print or a stereograph's card, as mounted, about 0.3 mm (thin card; no measured caliper of the museum's facsimiles was read); a daguerreotype's plate, a silvered copper sheet, about 0.5 mm (no measured plate was read). Both are first values: neither is seen edge on at gallery distances, and each keeps its face clear of what it lies on.",
+    "A panel's paint is laid in the paint of its own finish (accent.oil-on-panel: the canvas's oil film under varnish, over a smooth ground); its board and cradle are Data/Art/Panel.json's. A Chinese painting mounted as a hanging scroll is laid in the ink on its silk or its paper (accent.ink-on-silk, accent.ink-on-paper); its mount's thickness is Data/Art/Scrolls.json's. Paper made as any other object (a print, a card, a book's page, a leaf) is the paper's own entry.",
+    "A tapestry is a weave about 3 mm thick: Morris & Co.'s high-warp tapestries, wool weft beaten down over a cotton warp (the Albion sheet's weave, Docs/Stages/albion.md; no caliper of the Attainment was read)."
   ],
   "$units": {
     "ThicknessMeters": "m"
@@ -10,6 +12,10 @@
     { "support": "canvas", "palette": "accent.oil-on-linen", "working": "varnished", "history": "clean" },
     { "support": "paper", "palette": "accent.print-on-paper", "working": "printed", "history": "clean", "thicknessMeters": 0.0003 },
     { "support": "silvered copper plate", "palette": "accent.daguerreotype", "working": "developed", "history": "clean", "thicknessMeters": 0.0005 },
-    { "support": "earthenware", "palette": "accent.lustreware", "working": "lustre-painted", "history": "clean", "groundWorking": "tin-glazed", "groundHistory": "clean" }
+    { "support": "earthenware", "palette": "accent.lustreware", "working": "lustre-painted", "history": "clean", "groundWorking": "tin-glazed", "groundHistory": "clean" },
+    { "support": "panel", "palette": "accent.oil-on-panel", "working": "varnished.gesso", "history": "clean" },
+    { "support": "tapestry", "palette": "accent.tapestry", "working": "woven", "history": "clean", "thicknessMeters": 0.003 },
+    { "support": "silk", "palette": "accent.ink-on-silk", "working": "ink-painted", "history": "clean" },
+    { "support": "paper", "kind": "hanging-scroll", "palette": "accent.ink-on-paper", "working": "ink-painted", "history": "clean" }
   ]
 }

@@ -21,12 +21,15 @@ namespace Musee::ArtMaking
 		FVector2D SizeMeters = FVector2D::ZeroVector;
 		double ThicknessMeters = 0.0;
 		double FrontMeters = 0.0;
+		/** Where its left edge falls in the image laid over it, from the image's left edge (the recto of an opening shown whole). */
+		double ImageLeftMeters = 0.0;
 	};
 
 	/**
-	 * Builds the sheet as one closed solid to the Form kernel's mesh contract: its two faces carry UV0 in metres from its
-	 * top-left corner as seen from the front (so an image laid over it spans it at its size; the back sees the same point
-	 * of it, mirrored, as through glass), and its four edges UV0 in metres along them.
+	 * Builds the sheet as one closed solid to the Form kernel's mesh contract: its two faces carry UV0 in metres from the
+	 * top-left corner of the image laid over it as seen from the front (so the image spans it at its size, its left edge
+	 * ImageLeftMeters into the image; the back sees the same point of it, mirrored, as through glass), and its four edges
+	 * UV0 in metres along them.
 	 */
 	void BuildSheet(const FSheetSpec& Sheet, UE::Geometry::FDynamicMesh3& Out);
 }

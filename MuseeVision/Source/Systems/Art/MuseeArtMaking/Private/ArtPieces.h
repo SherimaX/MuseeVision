@@ -25,15 +25,18 @@ namespace Musee::ArtMaking
 	[[nodiscard]] FName GlassPieceName(const FArtHangEntry& Entry, bool bSplit);
 
 	/**
-	 * The word an object Art makes is named by, from its support: `canvas`, `glass`, `paper` (a print, a card), `plate` (a
-	 * daguerreotype), `ware`; `work` for any other.
+	 * The word an object Art makes is named by, from its support: `canvas`, `panel`, `glass`, `paper` (a print, a card, a
+	 * scroll on paper, a book, a leaf), `silk` (a scroll on silk), `plate` (a daguerreotype), `ware`, `tapestry`; `work`
+	 * for any other.
 	 */
 	[[nodiscard]] const TCHAR* ObjectWord(FName Support);
 
 	/**
 	 * The name of an object Art makes: `<word>.<id>`, or `<word>.<id>.<index>` for one of a work's several objects. Its
-	 * face (a canvas's paint, a print, a plate, ware's decorated faces) is that name; its other parts are `<name>.<part>`
-	 * (`linen`, `frame`, `mount`, `glazing`, `ground`).
+	 * face (a canvas's or a panel's paint, a print, a plate, ware's decorated faces, a scroll's painting, a book's page, a
+	 * tapestry's weave) is that name; its other parts are `<name>.<part>` (`linen`, `frame`, `mount`, `glazing`, `ground`,
+	 * `board`, `cradle`, `stick`, `roller`, `knob.left`, `cord.left`, `board.verso`, `block.recto`; an opening shown whole
+	 * names its pages `verso` and `recto`).
 	 */
 	[[nodiscard]] FString ObjectName(const FArtHangEntry& Entry, bool bSplit);
 	[[nodiscard]] FName PartName(const FArtHangEntry& Entry, bool bSplit, const TCHAR* Part);
@@ -56,7 +59,12 @@ namespace Musee::ArtMaking
 	 *   names, the image fired into it, its layer the work's own (`paint.<id>[.<index>]`) over that glass's finish;
 	 * - a print at its Wall anchor: the print on its mount, under its glazing, in its frame (ObjectMaking.h);
 	 * - a card or a daguerreotype's plate on its reader, a Mount anchor, under its glazing;
-	 * - a dish or a vessel standing at its centre on its Mount anchor, turned from its photograph.
+	 * - a dish or a vessel standing at its centre on its Mount anchor, turned from its photograph;
+	 * - a panel at its Wall anchor: its painted face on its board, cradled, framed where the plan frames it;
+	 * - a tapestry at its Wall anchor, hanging on the stage's batten and lining;
+	 * - a hanging scroll at its Wall anchor, on silk or paper: the painting in its mount, with its stick, roller, knobs and
+	 *   cord;
+	 * - a book lying open, or a loose leaf lying flat, on its Mount anchor (ObjectMaking.h).
 	 * A work the stage builds (`"built": "form"`) is left to the stage. Anything the plan gets wrong is a finding and
 	 * that work isn't made.
 	 */

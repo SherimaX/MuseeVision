@@ -30,16 +30,37 @@ antique glass, 3 mm), in Form's opening, its image in its own layer over that gl
 is `paint.<id>` over `accent.print-on-paper`, a daguerreotype over `accent.daguerreotype` (Matter's plate master: the
 image is the cover of scattering particles over a silver mirror), De Morgan's ware over `accent.lustreware` (its
 undecorated faces in the same entry's tin glaze), an autochrome over its plate's glass (the stained-glass master).
-- A print on a Wall anchor lies on its mount (`mat`, `matSize`, `matDepth`: the mount's face on the anchor's plane), under
-  its `glazing` (a pane of the surface's glass, its thickness from Matter's working), in its frame (`frameStyle`
-  `photograph`: `Data/Art/Mouldings/photograph.json`; any other style takes the museum's moulding until its own is drawn).
+- A print on a Wall anchor lies on its mount (`mat`, `matSize`, `matDepth`: the mount's face on the anchor's plane, or,
+  where the plan gives an `offWall`, the mount's back that far off the wall), under its `glazing` (a pane of the surface's
+  glass, its thickness from Matter's working), in its frame (`frameStyle` `photograph` or `panel`:
+  `Data/Art/Mouldings/<style>.json`; any other style takes the museum's moulding until its own is drawn).
 - A card or a daguerreotype's plate lies centred on its reader (a Mount anchor at the plate's face), under its glazing.
 - A transparency (glass on a Wall anchor in its window mat: an autochrome) stands behind its mat's window, the diffusing
   pane it names as `backing` behind it, glazed and framed; it is not stained glass, which is leaded in a Glazing light.
 - Ware stands at its `centre` on its Mount anchor, its front towards `facing_deg`: a dish turned to the section of
   `Data/Art/Ware.json`, a vessel to its outline in `Data/Art/Turned.json` (traced from its photograph), the photograph
   laid over it from above (a dish) or through it from the front (a vessel).
-Every object is named `<word>.<id>[.<index>]` (`canvas`, `glass`, `paper`, `plate`, `ware`), its parts `<name>.<part>`.
+
+**Panels, tapestry, scrolls and books.**
+- A panel (`panel`) hangs on its Wall anchor as a canvas does: its paint `paint.<id>` over `accent.oil-on-panel` on a
+  board, the board on its cradle (members along the grain, slides across them), both in the wood its `wall` surface
+  names; `Data/Art/Panel.json` gives the board, ground and cradle. Framed as a canvas is.
+- A tapestry (`tapestry`) is its weave, `paint.<id>` over `accent.tapestry`, 3 mm thick, its back `offWall` off its Wall
+  anchor on the batten and lining the stage builds.
+- A hanging scroll (`kind` `hanging-scroll`, on `silk` or `paper`) hangs by its cord `offWall` in front of its Wall
+  anchor: the painting (`accent.ink-on-silk` or `accent.ink-on-paper`) at its `along` and `height`, laid into its mount
+  (the `frame` surface's silk: `mount.border` either side, `mount.band` and `mount.earth` below, `mount.band` and
+  `mount.heaven` above); the half-round top stick behind the mount's top edge and the roller in its foot, both in the
+  mount's silk; the roller's knobs (`mount.knob`); the cord (`mount.cord`) from two eyes on the stick to its hook
+  `mount.hook` above the stick's middle. `Data/Art/Scrolls.json` gives the fittings every mount shares.
+- A book (`kind` `book`) lies open at its `centre` on a Mount anchor (a case's bed, a lectern's desk; the anchor's z out
+  of it), its foot to its reader (`facing_deg`): on each side its board (its cover, standing its square past the leaves),
+  the leaves that side holds at its `opening`, and the page on top. One object is the opening whole, showing its one
+  image across both pages; a work's two book objects are its verso and recto, each its own image. `Data/Art/Books.json`
+  gives each book's leaves, block, boards and finishes. A leaf (`kind` `leaf`) lies flat at its centre the same way.
+
+Every object is named `<word>.<id>[.<index>]` (`canvas`, `panel`, `glass`, `paper`, `silk`, `plate`, `ware`,
+`tapestry`), its parts `<name>.<part>`.
 
 A work the stage builds (`"built": "form"`) gets only its caption and care: the stage names its pieces
 `work.<id>[.<index>][.<part>]`, and the dresser hangs them from the work's label. A reproduction (`"reproduction":
@@ -54,12 +75,14 @@ holds, made by Art or built by its stage.
 
 ## Later (tier 2, owner Art)
 
-- More mouldings than the one (Albion's reeded and Watts frames), carved ornament on the moulding, panels, paper in a
-  mat, silk scrolls; the hairline joints between a work's canvases; the stretcher's wood and keys; frames on curved walls.
+- More mouldings (Albion's reeded and Watts frames and their gilt slips, the oval and arched sights), carved ornament on
+  the moulding; the hairline joints between a work's canvases; the stretcher's wood and keys; frames on curved walls.
+- Handscrolls on their beds (lead, wrapper and rolled end); an open book's leaves curving up to its spine (they lie
+  flat); a scroll's jingyan ribbons.
 - `Musee::Art::Targets` (FLightTarget from Care.json) and the checks `Art.TrueSize` (with `after`), `Art.WithinCare`
   (over `CareFaults`), `Art.ColorManaged`, `Art.Credited`, `Art.HangResolves`.
-- Panels, scrolls, casts, tapestry, silk, stone, ceramic in the round other than De Morgan's ware, books, and paper framed
-  without a mount: the supports and kinds the plans name that Art doesn't make yet. A vessel's handles (Turned.json
+- Casts, stone, ceramic in the round other than De Morgan's ware, and handscrolls: the supports and kinds the plans
+  name that Art doesn't make yet. A vessel's handles (Turned.json
   keeps none yet); a lustre's metallic sheen (the lustre layer is the glaze's gloss over the image); a daguerreotype's
   case.
 - Wall labels as objects, fittings (benches, stanchions), vitrines; `UArtImmersiveWork`.

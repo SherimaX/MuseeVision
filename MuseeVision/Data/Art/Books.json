@@ -1,0 +1,32 @@
+{
+  "$sources": [
+    "Each book as it lies open: its leaves, its text block's and boards' thickness and its boards' square, and what its covers and leaves' edges are, from the stage's sheet.",
+    "albion-kelmscott-chaucer: The Works of Geoffrey Chaucer, Kelmscott Press 1896 (Cleveland, Ingalls Library): 277 leaves in a block 66 mm thick, boards 3 mm with a 5 mm square, half holland (linen) over blue-grey paper boards (Docs/Stages/albion.md, the book; Data/Stages/albion/Hang.json's note). Its leaves' edges are handmade linen-rag paper, rough-trimmed.",
+    "salon-1874-case: the catalogue of the first exhibition, 35 boulevard des Capucines, April 1874, a stitched pamphlet in a printed paper wrapper: 16 leaves (32 pages) of about 0.1 mm, a block of about 1.6 mm, the wrapper about 0.2 mm, cut flush (no square). First values: the copy's pages were not counted or measured (Docs/Stages/salon.md, the 1874 case)."
+  ],
+  "$units": {
+    "BlockMeters": "m",
+    "BoardMeters": "m",
+    "SquareMeters": "m"
+  },
+  "$records": [
+    {
+      "work": "albion-kelmscott-chaucer",
+      "leaves": 277,
+      "blockMeters": 0.066,
+      "boardMeters": 0.003,
+      "squareMeters": 0.005,
+      "cover": { "palette": "accent.linen", "working": "stretched", "history": "new" },
+      "edges": { "palette": "accent.rag-board", "working": "faced", "history": "new" }
+    },
+    {
+      "work": "salon-1874-case",
+      "leaves": 16,
+      "blockMeters": 0.0016,
+      "boardMeters": 0.0002,
+      "squareMeters": 0.0,
+      "cover": { "palette": "accent.print-on-paper", "working": "printed", "history": "clean" },
+      "edges": { "palette": "accent.print-on-paper", "working": "printed", "history": "clean" }
+    }
+  ]
+}

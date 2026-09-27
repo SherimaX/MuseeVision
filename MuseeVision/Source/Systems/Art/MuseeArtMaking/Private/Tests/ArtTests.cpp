@@ -104,6 +104,33 @@ namespace Musee::ArtMaking::Tests
 		return Context;
 	}
 
+	/** The lectern's desk: x up its 18 degree slope, y across it, z its normal; its reader stands on its low side, facing +x. */
+	FQuat Desk()
+	{
+		const double Slope = FMath::DegreesToRadians(18.0);
+		const FVector Up(FMath::Cos(Slope), 0.0, FMath::Sin(Slope));
+		const FVector Across(0.0, 1.0, 0.0);
+		return FQuat(FMatrix(Up, Across, FVector::CrossProduct(Up, Across), FVector::ZeroVector));
+	}
+
+	/**
+	 * The test hangings: a flat wall facing south where a panel and a tapestry hang, a scroll case's back wall facing south
+	 * 0.5 m up, a case's bed facing up and a lectern's sloping desk.
+	 */
+	FMuseeStageContext Hangings()
+	{
+		FMuseeStageContext Context;
+		Context.Stage = FMuseeKey(TEXT("hangings"));
+		Context.ScheduleDir = Fixture(TEXT("Stages/hangings"));
+		Context.Anchors = {
+			Anchor(TEXT("hangings.wall"), FVector(0.0, -5.0, 0.0)),
+			Anchor(TEXT("hangings.case"), FVector(8.0, -5.0, 0.5)),
+			Anchor(TEXT("hangings.bed"), TEXT("Mount"), FVector(6.0, 0.0, 0.864)),
+			Anchor(TEXT("hangings.lectern"), TEXT("Mount"), FVector(10.0, 0.0, 1.0), Desk()),
+		};
+		return Context;
+	}
+
 	/** A piece's bounds in the stage, metres. */
 	FBox StageBox(const FFormMadePiece& Piece)
 	{
@@ -732,6 +759,166 @@ bool FArtEveryHangResolves::RunTest(const FString& Parameters)
 	}
 	TestTrue(TEXT("There are hanging plans to resolve"), Plans > 0 && Resolved > 0);
 	AddInfo(FString::Printf(TEXT("%d entries of %d hanging plans resolve to catalogue works, %d of them built by their stage."), Resolved, Plans, Built));
+	return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FArtPanelAndTapestryTest, "Musee.Art.PanelAndTapestry", Musee::ArtMaking::Tests::Flags)
+
+bool FArtPanelAndTapestryTest::RunTest(const FString& Parameters)
+{
+	using namespace Musee::ArtMaking;
+	TArray<FFormMadePiece> Pieces;
+	TArray<FMuseeFinding> Findings;
+	GatherArt(Tests::Hangings(), Pieces, Findings);
+	TestTrue(TEXT("A handscroll on silk, not made yet, is the one finding"), Findings.Num() == 1 && Findings[0].Summary.Contains(TEXT("handscroll")));
+	const FFormMadePiece* Face = Tests::FindPiece(Pieces, TEXT("panel.monet-impression-sunrise"));
+	const FFormMadePiece* Board = Tests::FindPiece(Pieces, TEXT("panel.monet-impression-sunrise.board"));
+	const FFormMadePiece* Cradle = Tests::FindPiece(Pieces, TEXT("panel.monet-impression-sunrise.cradle"));
+	const FFormMadePiece* Frame = Tests::FindPiece(Pieces, TEXT("panel.monet-impression-sunrise.frame"));
+	if (TestTrue(TEXT("A panel is made of its painted face, its board and its cradle, in its frame"), Face && Board && Cradle && Frame))
+	{
+		TestTrue(TEXT("Its face is the work's own layer over the paint on its gesso"), Face->Material == TEXT("paint.monet-impression-sunrise")
+			&& Face->Working == TEXT("varnished.gesso") && Face->History == TEXT("clean"));
+		// From the wall out: the hanging gap 2 mm, the cradle 15 mm, the board 8 mm, the ground and paint 0.5 mm.
+		const FBox FaceBox = Tests::StageBox(*Face);
+		TestTrue(TEXT("at its place and size, 25.5 mm off the wall"), FaceBox.Min.Equals(FVector(1.0, -5.0 + 0.025, 1.2), 1e-6)
+			&& FaceBox.Max.Equals(FVector(1.5, -5.0 + 0.0255, 1.6), 1e-6));
+		const FBox BoardBox = Tests::StageBox(*Board);
+		TestTrue(TEXT("The board behind it, in the wood its wall surface names"), FMath::IsNearlyEqual(BoardBox.Min.Y, -5.0 + 0.017, 1e-6)
+			&& FMath::IsNearlyEqual(BoardBox.Max.Y, -5.0 + 0.025, 1e-6) && Board->Surface == TEXT("hangings.panel") && Board->Material.IsNone());
+		// The grain runs along the landscape panel's width: four members across its height, the outermost 20 mm in.
+		const FBox CradleBox = Tests::StageBox(*Cradle);
+		TestTrue(TEXT("The cradle between the board and the hanging gap, its members and slides 20 mm in from the edges"),
+			CradleBox.Min.Equals(FVector(1.0, -5.0 + 0.002, 1.22), 1e-6) && CradleBox.Max.Equals(FVector(1.5, -5.0 + 0.017, 1.58), 1e-6));
+		TestEqual(TEXT("four members and four slides, each a box"), Cradle->Mesh->TriangleCount(), 8 * 12);
+		TestTrue(TEXT("The frame is one closed solid, its back on the hanging gap"), Musee::FormMaking::MeasureShell(*Frame).IsClosed()
+			&& FMath::IsNearlyEqual(Tests::StageBox(*Frame).Min.Y, -5.0 + 0.002, 1e-6));
+	}
+	const FFormMadePiece* Weave = Tests::FindPiece(Pieces, TEXT("tapestry.monet-willows-two-willows"));
+	if (TestNotNull(TEXT("A tapestry is its weave"), Weave))
+	{
+		TestTrue(TEXT("the work's own layer, woven"), Weave->Material == TEXT("paint.monet-willows-two-willows") && Weave->Working == TEXT("woven"));
+		const FBox WeaveBox = Tests::StageBox(*Weave);
+		TestTrue(TEXT("3 mm thick, its back 47 mm off the wall on its lining"), WeaveBox.Min.Equals(FVector(3.0, -5.0 + 0.047, 1.0), 1e-6)
+			&& WeaveBox.Max.Equals(FVector(5.0, -5.0 + 0.05, 2.5), 1e-6));
+	}
+	const TArray<FArtPaintLayer> Layers = PaintLayers(Tests::Hangings());
+	const FArtPaintLayer* Panel = Layers.FindByPredicate([](const FArtPaintLayer& L) { return L.Work == TEXT("monet-impression-sunrise"); });
+	const FArtPaintLayer* Tapestry = Layers.FindByPredicate([](const FArtPaintLayer& L) { return L.Work == TEXT("monet-willows-two-willows"); });
+	TestTrue(TEXT("A panel's layer is over the paint on panel, a tapestry's over its weave"), Panel && Panel->Parent == TEXT("accent.oil-on-panel")
+		&& Tapestry && Tapestry->Parent == TEXT("accent.tapestry") && Tapestry->SizeMeters.Equals(FVector2D(2.0, 1.5)));
+	return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FArtHangingScrollTest, "Musee.Art.HangingScroll", Musee::ArtMaking::Tests::Flags)
+
+bool FArtHangingScrollTest::RunTest(const FString& Parameters)
+{
+	using namespace Musee::ArtMaking;
+	TArray<FFormMadePiece> Pieces;
+	TArray<FMuseeFinding> Findings;
+	GatherArt(Tests::Hangings(), Pieces, Findings);
+	const FFormMadePiece* Painting = Tests::FindPiece(Pieces, TEXT("silk.lumiere-peacock"));
+	const FFormMadePiece* Mount = Tests::FindPiece(Pieces, TEXT("silk.lumiere-peacock.mount"));
+	const FFormMadePiece* Stick = Tests::FindPiece(Pieces, TEXT("silk.lumiere-peacock.stick"));
+	const FFormMadePiece* Roller = Tests::FindPiece(Pieces, TEXT("silk.lumiere-peacock.roller"));
+	const FFormMadePiece* Left = Tests::FindPiece(Pieces, TEXT("silk.lumiere-peacock.knob.left"));
+	const FFormMadePiece* Right = Tests::FindPiece(Pieces, TEXT("silk.lumiere-peacock.knob.right"));
+	const FFormMadePiece* Cord = Tests::FindPiece(Pieces, TEXT("silk.lumiere-peacock.cord.left"));
+	if (!TestTrue(TEXT("A hanging scroll is its painting in its mount, its stick, roller, knobs and cord"), Painting && Mount && Stick && Roller && Left
+		&& Right && Cord && Tests::FindPiece(Pieces, TEXT("silk.lumiere-peacock.cord.right"))))
+	{
+		return false;
+	}
+	TestTrue(TEXT("The painting is the work's own layer over the ink on its silk"), Painting->Material == TEXT("paint.lumiere-peacock")
+		&& Painting->Working == TEXT("ink-painted"));
+	// The case's wall is 0.5 m up; the mount's back 20 mm off it and 0.3 mm thick.
+	const FBox PaintingBox = Tests::StageBox(*Painting);
+	TestTrue(TEXT("The painting at its place and size, flush with its mount"), PaintingBox.Min.Equals(FVector(8.2, -5.0 + 0.02, 1.0), 1e-6)
+		&& PaintingBox.Max.Equals(FVector(8.6, -5.0 + 0.0203, 1.8), 1e-6));
+	// Borders 0.04 either side; below, a band 0.06 and the earth 0.2; above, a band and the heaven 0.3.
+	const FBox MountBox = Tests::StageBox(*Mount);
+	TestTrue(TEXT("The mount round it in the frame surface's silk"), MountBox.Min.Equals(FVector(8.16, -5.0 + 0.02, 0.74), 1e-6)
+		&& MountBox.Max.Equals(FVector(8.64, -5.0 + 0.0203, 2.16), 1e-6) && Mount->Surface == TEXT("hangings.mount.silk"));
+	TestTrue(TEXT("one closed solid with the painting's window through it"), Musee::FormMaking::MeasureShell(*Mount).IsClosed()
+		&& FMath::IsNearlyEqual(Tests::AreaSquareMeters(Mount->Mesh), 2.0 * (0.48 * 1.42 - 0.4 * 0.8) + 2.0 * (0.48 + 1.42 + 0.4 + 0.8) * 0.0003, 1e-5));
+	const FBox StickBox = Tests::StageBox(*Stick);
+	// Round parts are drawn as polygons within a chord's sag of their circles.
+	TestTrue(TEXT("The stick behind the mount's top edge, its middle on it, its round towards the wall"), FMath::IsNearlyEqual(StickBox.Max.Z, 2.168, 1e-3)
+		&& FMath::IsNearlyEqual(StickBox.Min.Z, 2.152, 1e-3) && FMath::IsNearlyEqual(StickBox.Max.Y, -5.0 + 0.02, 1e-6)
+		&& FMath::IsNearlyEqual(StickBox.Min.Y, -5.0 + 0.012, 1e-3));
+	const FBox RollerBox = Tests::StageBox(*Roller);
+	TestTrue(TEXT("The roller along the mount's foot"), FMath::IsNearlyEqual(RollerBox.Min.Z, 0.74, 1e-3) && FMath::IsNearlyEqual(RollerBox.Min.X, 8.16, 1e-6)
+		&& FMath::IsNearlyEqual(RollerBox.Max.X, 8.64, 1e-6));
+	TestTrue(TEXT("its knobs past the mount's edges, in their own surface"), FMath::IsNearlyEqual(Tests::StageBox(*Left).Min.X, 8.125, 1e-6)
+		&& FMath::IsNearlyEqual(Tests::StageBox(*Right).Max.X, 8.675, 1e-6) && Left->Surface == TEXT("hangings.mount.knob"));
+	const FBox CordBox = Tests::StageBox(*Cord);
+	TestTrue(TEXT("The cord rises from the stick to its hook 0.093 above the stick's middle"), CordBox.Max.Z > 2.16 + 0.093 - 1e-3
+		&& CordBox.Max.Z < 2.16 + 0.093 + 0.0016 && Cord->Surface == TEXT("hangings.mount.cord"));
+	const TArray<FArtPaintLayer> Layers = PaintLayers(Tests::Hangings());
+	const FArtPaintLayer* Layer = Layers.FindByPredicate([](const FArtPaintLayer& L) { return L.Work == TEXT("lumiere-peacock"); });
+	TestTrue(TEXT("Its layer is the painting's image at its size over the ink on silk"), Layer && Layer->Parent == TEXT("accent.ink-on-silk")
+		&& Layer->Working == TEXT("ink-painted") && Layer->SizeMeters.Equals(FVector2D(0.4, 0.8)));
+	return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FArtBookTest, "Musee.Art.Book", Musee::ArtMaking::Tests::Flags)
+
+bool FArtBookTest::RunTest(const FString& Parameters)
+{
+	using namespace Musee::ArtMaking;
+	TArray<FFormMadePiece> Pieces;
+	TArray<FMuseeFinding> Findings;
+	GatherArt(Tests::Hangings(), Pieces, Findings);
+	// The catalogue lies on the bed (z 0.864), its reader on the -y side, so its reader's right is -x.
+	const FFormMadePiece* Verso = Tests::FindPiece(Pieces, TEXT("paper.salon-1874-case.0.verso"));
+	const FFormMadePiece* Recto = Tests::FindPiece(Pieces, TEXT("paper.salon-1874-case.0.recto"));
+	const FFormMadePiece* Cover = Tests::FindPiece(Pieces, TEXT("paper.salon-1874-case.0.board.verso"));
+	const FFormMadePiece* Leaf = Tests::FindPiece(Pieces, TEXT("paper.salon-1874-case.1"));
+	if (TestTrue(TEXT("An opening shown whole is its two pages on their leaves and covers, beside a loose leaf"), Verso && Recto && Cover && Leaf
+		&& Tests::FindPiece(Pieces, TEXT("paper.salon-1874-case.0.block.recto"))))
+	{
+		// Of its 16 leaves (1.6 mm), the seventh opening leaves 7 on the verso's side and 9 on the recto's, on a 0.2 mm wrapper.
+		const FBox VersoBox = Tests::StageBox(*Verso);
+		const FBox RectoBox = Tests::StageBox(*Recto);
+		TestTrue(TEXT("The verso on the reader's left, as high as its leaves"), VersoBox.Min.Equals(FVector(6.0, -0.092, 0.864 + 0.0006), 1e-6)
+			&& VersoBox.Max.Equals(FVector(6.125, 0.092, 0.864 + 0.0009), 1e-6));
+		TestTrue(TEXT("the recto on the right, higher"), RectoBox.Min.Equals(FVector(5.875, -0.092, 0.864 + 0.0008), 1e-6)
+			&& FMath::IsNearlyEqual(RectoBox.Max.Z, 0.864 + 0.0011, 1e-6));
+		// Its faces' UV0 runs from 0.125 to 0.25 across the image; its edges' only along their own length.
+		const UE::Geometry::FDynamicMeshUVOverlay* UVs = Recto->Mesh->Attributes()->GetUVLayer(0);
+		float Most = TNumericLimits<float>::Lowest();
+		for (const int32 E : UVs->ElementIndicesItr())
+		{
+			Most = FMath::Max(Most, UVs->GetElement(E).X);
+		}
+		TestTrue(TEXT("the recto showing the image's right half"), FMath::IsNearlyEqual(Most, 0.25f, 1e-4f));
+		TestTrue(TEXT("Its covers in its binding's finish"), Cover->Material == TEXT("accent.print-on-paper") && Recto->Material == TEXT("paint.salon-1874-case.0"));
+		const FBox LeafBox = Tests::StageBox(*Leaf);
+		TestTrue(TEXT("The leaf lies flat at its centre, its own layer"), LeafBox.Min.Equals(FVector(6.34, -0.2365, 0.864), 1e-6)
+			&& LeafBox.Max.Equals(FVector(6.66, 0.2365, 0.864 + 0.0003), 1e-6) && Leaf->Material == TEXT("paint.salon-1874-case.1"));
+	}
+	// The Chaucer on its sloping desk, its verso and recto two objects: at its first opening one leaf lies on the verso's side.
+	const FFormMadePiece* Title = Tests::FindPiece(Pieces, TEXT("paper.albion-kelmscott-chaucer.0"));
+	const FFormMadePiece* First = Tests::FindPiece(Pieces, TEXT("paper.albion-kelmscott-chaucer.1"));
+	if (TestTrue(TEXT("A book given as its verso and recto is made of both"), Title && First && Tests::FindPiece(Pieces,
+		TEXT("paper.albion-kelmscott-chaucer.1.block.recto"))))
+	{
+		TestFalse(TEXT("the verso's one leaf is its page alone"), Pieces.ContainsByPredicate([](const FFormMadePiece& P)
+		{
+			return P.Name == TEXT("paper.albion-kelmscott-chaucer.0.block.verso");
+		}));
+		TestTrue(TEXT("its verso on the reader's left (-y), its recto on the right"), Tests::StageBox(*Title).Max.Y < 1e-6 && Tests::StageBox(*First).Min.Y > -1e-6);
+		// The recto's page stands its board and its 276 leaves off the desk, along the desk's normal.
+		const double Slope = FMath::DegreesToRadians(18.0);
+		const FVector Normal(-FMath::Sin(Slope), 0.0, FMath::Cos(Slope));
+		double Highest = -1.0;
+		for (const int32 V : First->Mesh->VertexIndicesItr())
+		{
+			Highest = FMath::Max(Highest, (First->Frame.PointToParent(Musee::FromEngine(First->Mesh->GetVertex(V))) - FVector(10.0, 0.0, 1.0)) | Normal);
+		}
+		TestEqual(TEXT("its leaves as thick as the block holds them"), Highest, 0.003 + 276.0 * 0.066 / 277.0, 1e-6);
+	}
 	return true;
 }
 

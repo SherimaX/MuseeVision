@@ -1,0 +1,47 @@
+{
+  "stage": "hangings",
+  "works": [
+    {
+      "work": "monet-impression-sunrise", "source": "MuseeVision/Source/Systems/Art/MuseeArtMaking/Private/Tests/Data/artworks.json",
+      "anchor": "hangings.wall", "along": 1.0, "height": 1.2, "size": [0.5, 0.4], "support": "panel", "care": "oil-and-tempera",
+      "frame": "hangings.frame.gilt", "wall": "hangings.panel", "note": "A panel, cradled and framed."
+    },
+    {
+      "work": "monet-willows-two-willows", "source": "MuseeVision/Source/Systems/Art/MuseeArtMaking/Private/Tests/Data/collection.json",
+      "anchor": "hangings.wall", "along": 3.0, "height": 1.0, "size": [2.0, 1.5], "support": "tapestry", "frame": "none", "care": "textiles.silk",
+      "offWall": 0.047, "note": "A tapestry on the stage's batten and lining."
+    },
+    {
+      "work": "lumiere-peacock", "source": "MuseeVision/Source/Systems/Art/MuseeArtMaking/Private/Tests/Data/collection.json",
+      "anchor": "hangings.case", "along": 0.2, "height": 0.5, "size": [0.4, 0.8], "support": "silk", "kind": "hanging-scroll",
+      "frame": "hangings.mount.silk", "care": "textiles.silk", "offWall": 0.02,
+      "mount": { "heaven": 0.3, "earth": 0.2, "band": 0.06, "border": 0.04, "roller": true, "knob": "hangings.mount.knob", "cord": "hangings.mount.cord",
+        "hook": 0.093 },
+      "note": "A hanging scroll on silk in its case."
+    },
+    {
+      "work": "salon-1874-case", "source": "assets/collection.json", "anchor": "hangings.bed", "canvas": 0, "image": "catalogue",
+      "centre": [6.0, 0.0, 0.864], "size": [0.25, 0.184], "support": "paper", "kind": "book", "opening": 6, "facing_deg": 270.0,
+      "frame": "none", "care": "works-on-paper", "note": "A catalogue lying open, its opening shown whole."
+    },
+    {
+      "work": "salon-1874-case", "source": "assets/collection.json", "anchor": "hangings.bed", "canvas": 1, "image": "charivari",
+      "centre": [6.5, 0.0, 0.864], "size": [0.32, 0.473], "support": "paper", "kind": "leaf", "facing_deg": 270.0,
+      "frame": "none", "care": "works-on-paper.fugitive", "note": "A newspaper's leaf lying beside it."
+    },
+    {
+      "work": "albion-kelmscott-chaucer", "source": "data/albion.json", "anchor": "hangings.lectern", "canvas": 0, "image": "page_000",
+      "centre": [10.0, 0.0, 1.0], "size": [0.29, 0.425], "support": "paper", "kind": "book", "opening": 0, "facing_deg": 180.0,
+      "frame": "none", "care": "works-on-paper", "note": "A book's verso on a sloping desk."
+    },
+    {
+      "work": "albion-kelmscott-chaucer", "source": "data/albion.json", "anchor": "hangings.lectern", "canvas": 1, "image": "page_001",
+      "centre": [10.0, 0.0, 1.0], "size": [0.29, 0.425], "support": "paper", "kind": "book", "opening": 0, "facing_deg": 180.0,
+      "frame": "none", "care": "works-on-paper", "note": "Its recto."
+    },
+    {
+      "work": "chinese-mi-fu-shu-su", "source": "assets/collection.json", "anchor": "hangings.case", "along": 1.0, "height": 0.5, "size": [2.708, 0.278],
+      "support": "silk", "kind": "handscroll", "frame": "hangings.mount.silk", "care": "textiles.silk", "note": "A handscroll, not made yet: a finding."
+    }
+  ]
+}

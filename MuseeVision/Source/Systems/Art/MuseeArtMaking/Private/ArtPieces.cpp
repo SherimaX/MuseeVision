@@ -150,6 +150,9 @@ namespace Musee::ArtMaking
 		if (Support == Supports::Paper) { return TEXT("paper"); }
 		if (Support == Supports::Plate) { return TEXT("plate"); }
 		if (Support == Supports::Earthenware) { return TEXT("ware"); }
+		if (Support == Supports::Silk) { return TEXT("silk"); }
+		if (Support == Supports::Panel) { return TEXT("panel"); }
+		if (Support == Supports::Tapestry) { return TEXT("tapestry"); }
 		return TEXT("work");
 	}
 
@@ -186,6 +189,26 @@ namespace Musee::ArtMaking
 			else if (Entry.Support == Supports::Canvas)
 			{
 				MakeCanvas(Making, Plan, Canvas, OutPieces, OutFindings);
+			}
+			else if (Entry.Support == Supports::Panel)
+			{
+				MakePanel(Making, Plan, Canvas, OutPieces, OutFindings);
+			}
+			else if (Entry.Support == Supports::Tapestry)
+			{
+				MakeTapestry(Making, Plan, Canvas, OutPieces, OutFindings);
+			}
+			else if (Entry.Kind == Kinds::HangingScroll)
+			{
+				MakeHangingScroll(Making, Plan, Canvas, OutPieces, OutFindings);
+			}
+			else if (Entry.Kind == Kinds::Book)
+			{
+				MakeBook(Making, Plan, Canvas, OutPieces, OutFindings);
+			}
+			else if (Entry.Kind == Kinds::Leaf)
+			{
+				MakeLeaf(Making, Plan, Canvas, OutPieces);
 			}
 			else if (Making.Stage.FindAnchor(Entry.Anchor, WallAnchorKind))
 			{

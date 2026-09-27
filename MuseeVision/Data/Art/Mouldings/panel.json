@@ -1,0 +1,29 @@
+{
+  "$sources": [
+    "The panel frame: a narrow flat fumed-oak moulding, 35 mm, round each of Morris's wallpaper panels (Docs/Stages/albion.md sec. 8, the wall works: 'in a narrow fumed-oak panel frame 0.035, glazed'; Data/Stages/albion/Finishes.json, albion.frame.oak). Its section is the museum's flat oak photograph frame's (Data/Art/Mouldings/photograph.json: its face 0.8 of its width above the glass, its arrises softened), the plain moulding a framer runs round a panel of paper, set out as the museum's moulding is: A outward from the edge of what it frames, B up from the face it rests on (the glazing's), in units of its width, drawn from the outside edge inward.",
+    "The width is the sheet's 35 mm whatever the panel's size, one moulding for the three.",
+    "The rebate stands 2 mm clear of the mount's edge all round, as the museum's moulding stands clear of a canvas's."
+  ],
+  "$units": {
+    "WidthBaseMeters": "m",
+    "LeastWidthMeters": "m",
+    "MostWidthMeters": "m",
+    "RebateClearanceMeters": "m"
+  },
+  "face": {
+    "source": "Data/Art/Mouldings/photograph.json: up the outside, round the outer arris, across the flat top, round the inner arris and down the sight edge to the glass.",
+    "start": [1.0, 0.0],
+    "steps": [
+      { "line": [1.0, 0.618], "joint": "Crisp" },
+      { "arc": { "centerMeters": [0.818, 0.618], "radiiMeters": [0.182], "fromDegrees": 0, "toDegrees": 90 } },
+      { "line": [-0.046, 0.8], "joint": "Crisp" },
+      { "arc": { "centerMeters": [-0.046, 0.664], "radiiMeters": [0.136], "fromDegrees": 90, "toDegrees": 180 } },
+      { "line": [-0.182, 0.0], "joint": "Crisp" }
+    ]
+  },
+  "widthBaseMeters": 0.035,
+  "widthPerLongerSide": 0.0,
+  "leastWidthMeters": 0.035,
+  "mostWidthMeters": 0.035,
+  "rebateClearanceMeters": 0.002
+}

@@ -101,7 +101,11 @@ struct MUSEEART_API FArtHangEntry
 	UPROPERTY()
 	FName Wall;
 
-	/** What the object is, where its support doesn't say: `hanging-scroll`, `handscroll`, `dish`, `vase`, `book`, `stained-glass`. */
+	/**
+	 * What the object is, where its support doesn't say: `hanging-scroll`, `handscroll`, `dish`, `vase`, `book` (an open
+	 * book: its opening whole, or its verso and recto as a work's objects 0 and 1), `leaf` (a loose sheet lying flat),
+	 * `stained-glass`.
+	 */
 	UPROPERTY()
 	FName Kind;
 
@@ -111,12 +115,16 @@ struct MUSEEART_API FArtHangEntry
 
 	/**
 	 * The work's centre in the stage's frame [x, y, z], as the sheet computed it: a cross-check of a work on a wall; where an
-	 * object in the round stands on its Mount anchor (the foot of a dish or vessel on a case's bed).
+	 * object in the round stands on its Mount anchor (the foot of a dish or vessel on a case's bed); where a book or a
+	 * leaf lies on it (the middle of its underside: a book's spine, on the bed or the desk).
 	 */
 	UPROPERTY()
 	TArray<double> Centre;
 
-	/** The way a work in the round or on a reader faces: a word (`south`), and its bearing from +x towards +y. */
+	/**
+	 * The way a work in the round or on a reader faces: a word (`south`), and its bearing from +x towards +y. A book or a
+	 * leaf lying on its Mount anchor faces its reader with its foot, its head away.
+	 */
 	UPROPERTY()
 	FName Facing;
 
@@ -126,6 +134,15 @@ struct MUSEEART_API FArtHangEntry
 	/** How far a work on a sloping reader tilts back from upright. */
 	UPROPERTY(meta = (Units = "Degrees"))
 	float Tilt_Deg = 0.0f;
+
+	/**
+	 * How far the back of a work that hangs against its wall stands off the Wall anchor's plane: a tapestry on the batten
+	 * and lining behind it, a scroll hanging by its cord in front of its case's silk, a mounted work's board and frame on
+	 * their hanging plates. A mounted work that gives none lies with its mount's face on the anchor's plane, a hanging
+	 * plane in the room.
+	 */
+	UPROPERTY(meta = (Units = "Meters"))
+	float OffWall = 0.0f;
 
 	/** Whether the work is glazed in its frame or case. */
 	UPROPERTY()
@@ -159,7 +176,7 @@ struct MUSEEART_API FArtHangEntry
 	UPROPERTY(meta = (Units = "Meters"))
 	float FrameMoulding = 0.0f;
 
-	/** The opening a book lies open at, counted from its first. */
+	/** The opening a book lies open at, counted from its first (0: the first leaf's verso and the second's recto). */
 	UPROPERTY()
 	int32 Opening = 0;
 

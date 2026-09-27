@@ -33,7 +33,24 @@ namespace Musee::ArtMaking
 		inline const FName Paper(TEXT("paper"));
 		inline const FName Plate(TEXT("silvered copper plate"));
 		inline const FName Earthenware(TEXT("earthenware"));
+		inline const FName Silk(TEXT("silk"));
+		inline const FName Panel(TEXT("panel"));
+		inline const FName Tapestry(TEXT("tapestry"));
 	}
+
+	/** The kinds of object (a plan's `kind`) Art makes of a support that isn't made as a sheet on a wall or a reader. */
+	namespace Kinds
+	{
+		/** A Chinese painting on silk or paper in its mount, hanging by its cord. */
+		inline const FName HangingScroll(TEXT("hanging-scroll"));
+		/** A bound book lying open on a case's bed or a lectern's desk. */
+		inline const FName Book(TEXT("book"));
+		/** A loose sheet (a newspaper's page) lying flat on a case's bed. */
+		inline const FName Leaf(TEXT("leaf"));
+	}
+
+	/** An open book's sides: its verso on the reader's left, its recto on the right. */
+	inline constexpr int32 BookSides = 2;
 
 	/** A finding of Art's about a stage's hanging plan. */
 	[[nodiscard]] FMuseeFinding ArtFinding(const FMuseeStageContext& Stage, const FString& Summary);
