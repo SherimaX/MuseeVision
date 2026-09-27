@@ -1,0 +1,41 @@
+{
+  "schema": "musee.matter.shading.working/1",
+  "key": "painted.underglaze-blue",
+  "name": "Painted in cobalt blue on the raw body, glazed clear over it and fired once",
+  "record": "Palette.json",
+  "kind": "face",
+  "roughness": {
+    "value": 0.05,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Shading/Workings/glazed.json (a glaze's first roughness)",
+    "note": "A clear glaze over the painting: the glaze's own gloss."
+  },
+  "roughnessAcross": {
+    "value": 0.05,
+    "unit": "1",
+    "grade": "derived",
+    "source": "a glaze has no grain",
+    "derivation": "equal to the roughness along"
+  },
+  "haziness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Shading/Workings/glazed.json",
+    "note": "One specular lobe until a goniometric measurement shows a second."
+  },
+  "textureDepth": {
+    "value": 0.001,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Shading/Workings/glazed.json"
+  },
+  "relief": {
+    "value": 0.0,
+    "unit": "mm",
+    "grade": "derived",
+    "source": "the painting lies under the glaze",
+    "derivation": "the cobalt is sealed under the glaze's smooth face: no relief"
+  }
+}

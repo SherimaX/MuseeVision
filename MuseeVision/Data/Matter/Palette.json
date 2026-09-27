@@ -2995,7 +2995,8 @@
       },
       "roles": [
         "Chenghuai: the court's fish bowl and the pomegranates' tubs",
-        "Chenghuai: the desk things and the inkstones"
+        "Chenghuai: the desk things and the inkstones",
+        "Chenghuai: the Ru basin on its pedestal (Art/Media.json)"
       ],
       "why": "Fired clay again, the stone that is made, now under glass: the glaze is a glass fused to the body. The fish bowl and tubs are the court's furniture in every Beijing courtyard.",
       "oldChoice": "",
@@ -3008,7 +3009,9 @@
           "Shading/Substances/glaze.dark.json",
           "Shading/Substances/glaze.green.json",
           "Shading/Substances/glaze.jun.json",
-          "Shading/Substances/glaze.guan.json"
+          "Shading/Substances/glaze.guan.json",
+          "Shading/Substances/glaze.ru.json",
+          "Shading/Workings/glazed.ru.json"
         ],
         "needed": "Measured colours of the glazes; the body's composition."
       },
@@ -3052,6 +3055,11 @@
           "working": "glazed.guan",
           "history": "clean",
           "note": "Art: chinese-guan-vase, in its case"
+        },
+        {
+          "working": "glazed.ru",
+          "history": "clean",
+          "note": "Art: chinese-ru-basin, under its hood"
         }
       ]
     },
@@ -3060,14 +3068,15 @@
       "family": "accent",
       "accentOf": "stone",
       "substance": "porcelain",
-      "realMaterial": "Chinese porcelain, kaolin and porcelain stone fired to vitrification, under its glaze: Chenghuai's Ding basin in its ivory glaze",
+      "realMaterial": "Chinese porcelain, kaolin and porcelain stone fired to vitrification, under its glaze: Chenghuai's Ding basin in its ivory glaze and the Kangxi vase in its peach-bloom",
       "workingsByEra": {
         "classical": "glazed (Chenghuai's cases)",
         "modern": "absent",
         "future": "absent"
       },
       "roles": [
-        "Chenghuai: the Ding basin in the Tianqing case (Art/Media.json)"
+        "Chenghuai: the Ding basin in the Tianqing case (Art/Media.json)",
+        "Chenghuai: the peach-bloom vase in the Changnan case (Art/Media.json)"
       ],
       "why": "The white body the Song kilns perfected: the glaze is what shows, the body is what it is fired on.",
       "oldChoice": "",
@@ -3076,15 +3085,61 @@
       "research": {
         "records": [
           "Shading/Substances/porcelain.json",
-          "Shading/Substances/glaze.ding-ivory.json"
+          "Shading/Substances/glaze.ding-ivory.json",
+          "Shading/Substances/glaze.peach-bloom.json",
+          "Shading/Workings/glazed.peach-bloom.json"
         ],
-        "needed": "Measured colours of the glazes; the painted porcelains' decoration (their images)."
+        "needed": "Measured colours of the glazes (the peach-bloom's is derived from its photograph)."
       },
       "finishes": [
         {
           "working": "glazed.ding-ivory",
           "history": "clean",
           "note": "Art: chinese-ding-basin, in its case"
+        },
+        {
+          "working": "glazed.peach-bloom",
+          "history": "clean",
+          "note": "Art: chinese-peachbloom, in its case"
+        }
+      ]
+    },
+    {
+      "key": "accent.porcelain-painted",
+      "family": "accent",
+      "accentOf": "stone",
+      "substance": "porcelain.painted",
+      "realMaterial": "Chinese porcelain painted in cobalt blue under a clear glaze, or in enamels over it and fired again: Chenghuai's Xuande jar and Yuan meiping in blue and white, the wucai jar, the doucai chicken cup and the falangcai bowl, whose painting each work's own decoration supplies",
+      "workingsByEra": {
+        "classical": "painted under or over the glaze (Chenghuai's cases)",
+        "modern": "absent",
+        "future": "absent"
+      },
+      "roles": [
+        "Chenghuai: the painted porcelains in the Changnan case and the chicken cup's handling copy (Art/Media.json)"
+      ],
+      "why": "The white body the Song kilns perfected, painted: cobalt under the glaze for the blue and white of the Yuan and Ming, enamels over it for the wucai, doucai and falangcai. The glaze is what shows; the painting is each work's own, composed round its turned form from its photographs.",
+      "oldChoice": "the old build's untextured turned vessels",
+      "verdict": "new",
+      "verdictReason": "Named by the painted vessels K9 derives from their photographs (Docs/Stages/chenghuai.md, section 8).",
+      "research": {
+        "records": [
+          "Shading/Substances/porcelain.painted.json",
+          "Shading/Workings/painted.underglaze-blue.json",
+          "Shading/Workings/painted.enamels.json"
+        ],
+        "needed": "The clear glaze's measured white over a porcelain body; the enamels' relief and gloss."
+      },
+      "finishes": [
+        {
+          "working": "painted.underglaze-blue",
+          "history": "clean",
+          "note": "Art: the Xuande jar and the meiping; each work gives the instance its own decoration"
+        },
+        {
+          "working": "painted.enamels",
+          "history": "clean",
+          "note": "Art: the wucai jar, the chicken cup and the falangcai bowl; each work gives the instance its own decoration"
         }
       ]
     },
