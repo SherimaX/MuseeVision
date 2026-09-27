@@ -141,7 +141,10 @@ namespace Musee::Light::Tests
 				{ "id": "lost", "type": "no-such.lamp", "mount": "test.rim.1", "operation": "always" },
 				{ "id": "short", "type": "linear-strip.2700k.slim", "mount": "test.rim.1", "operation": "always" },
 				{ "id": "both", "type": "track-spot.3000k.20deg", "mount": "test.rim.1", "point": [0, 0, 3], "aim": [0, 0, 0], "operation": "always" },
-				{ "id": "unaimed", "type": "track-spot.3000k.20deg", "point": [0, 0, 3], "operation": "always" } ] })");
+				{ "id": "unaimed", "type": "track-spot.3000k.20deg", "point": [0, 0, 3], "operation": "always" },
+				{ "id": "cove", "type": "linear-strip.2700k.slim", "point": [-3.848, -0.29, 0.39], "aim": [-3.474, -0.182, 0.38], "along": [0.2757, -0.9612, 0.0], "operation": "always", "length": 0.594 },
+				{ "id": "sideways", "type": "linear-strip.2700k.slim", "point": [-3.9, 0, 0.39], "aim": [-3.5, 0, 0.39], "operation": "always", "length": 0.594 },
+				{ "id": "spot.laid", "type": "track-spot.3000k.20deg", "point": [0, 0, 3], "aim": [0, 0, 0], "along": [1, 0, 0], "operation": "always" } ] })");
 		FFileHelper::SaveStringToFile(Schedule, *(Folder / TEXT("Lighting.json")));
 
 		const FLightTestWorld World;
@@ -160,10 +163,11 @@ namespace Musee::Light::Tests
 		TArray<FMuseeFinding> Findings;
 		DressStage(Context, Findings);
 
-		TestEqual(TEXT("An unknown weather place and type, a line without length, a mount with a point and a point without aim are findings"), Findings.Num(), 5);
+		TestEqual(TEXT("An unknown weather place and type, a line without length, a mount with a point, a point without aim, a line along its own light and a spot laid along a line are findings"),
+			Findings.Num(), 7);
 		TArray<ULightLuminaireComponent*> Placed;
 		Stage->GetComponents(Placed);
-		TestEqual(TEXT("Three luminaires are placed"), Placed.Num(), 3);
+		TestEqual(TEXT("Four luminaires are placed"), Placed.Num(), 4);
 		const auto Placement = [&Placed](const TCHAR* Id) -> ULightLuminaireComponent*
 		{
 			const FName Tag(FString(LuminaireTagPrefix) + Id);
@@ -190,6 +194,14 @@ namespace Musee::Light::Tests
 		{
 			TestTrue(TEXT("aimed across the room at its target"), Spot->GetForwardVector().Equals(FVector(0.6, -0.8, 0.0), 1e-4));
 			TestTrue(TEXT("its up kept up"), Spot->GetUpVector().Equals(FVector::UpVector, 1e-4));
+		}
+		if (ULightLuminaireComponent* Cove = Placement(TEXT("cove")); TestNotNull(TEXT("A cove strip, at its point"), Cove))
+		{
+			const FVector Light = FVector(0.374, 0.108, -0.01).GetSafeNormal();
+			TestTrue(TEXT("shines at its aim"), Cove->GetForwardVector().Equals(Light, 1e-4));
+			const FVector Run = Cove->GetRightVector();
+			TestTrue(TEXT("and runs along the tangent it is laid in, square to its light"), FMath::Abs(Run | Light) < 1e-4
+				&& (Run | FVector(0.2757, -0.9612, 0.0).GetSafeNormal()) > 0.999);
 		}
 		IFileManager::Get().DeleteDirectory(*FPaths::GetPath(Folder), false, true);
 		return true;

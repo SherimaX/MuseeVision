@@ -41,6 +41,8 @@ namespace Musee::Light
 			FMuseeFrame Seat;
 			/** The point it is aimed at, in the stage's frame, if the schedule gives one. */
 			TOptional<FVector> Aim;
+			/** For a linear luminaire, the direction its run lies in, square to its light. */
+			TOptional<FVector> Run;
 			ELightOperation Operation = ELightOperation::Always;
 			FMuseeKey Follows;
 			USceneComponent* Body = nullptr;
@@ -81,8 +83,8 @@ namespace Musee::Light
 			if (bMount)
 			{
 				const TOptional<FMuseeKey> Mount = FMuseeKey::Parse(Entry.Mount);
-				const FMuseeStageAnchor* Anchor = Mount.IsSet() ? Stage.FindAnchor(Mount.GetValue()) : nullptr;
-				if (!Anchor || Anchor->Kind != MountKind) { return FString::Printf(TEXT("the stage has no Mount anchor '%s'"), *Entry.Mount); }
+				const FMuseeStageAnchor* Anchor = Mount.IsSet() ? Stage.FindAnchor(Mount.GetValue(), MountKind) : nullptr;
+				if (!Anchor) { return FString::Printf(TEXT("the stage has no Mount anchor '%s'"), *Entry.Mount); }
 				Out.Seat = Anchor->Frame;
 			}
 			else
@@ -98,6 +100,35 @@ namespace Musee::Light
 				if ((Out.Aim.GetValue() - Out.Seat.OriginMeters).IsNearlyZero()) { return TEXT("it is aimed at the point it sits on"); }
 			}
 			if (!bMount && !Out.Aim.IsSet()) { return TEXT("a luminaire at a point needs its aim"); }
+			return FString();
+		}
+
+		/** The direction its light leaves in: towards its aim, else along its seat's x axis. */
+		FVector LightOf(const FPlacement& Placement)
+		{
+			const FMuseeFrame& Seat = Placement.Seat;
+			return Placement.Aim.IsSet() ? (Placement.Aim.GetValue() - Seat.OriginMeters).GetSafeNormal() : Seat.Rotation.GetAxisX();
+		}
+
+		/**
+		 * A linear luminaire's run (the stage contract): the schedule's along, else its mount's x axis on a mount, else the
+		 * stage's x axis, taken square to its light, since a strip's light leaves its face across its length. Only a linear
+		 * type is laid along a direction. The reason it has no run, or empty.
+		 */
+		FString RunOf(const FLightScheduleLuminaire& Entry, const FLightLuminaire& Luminaire, FPlacement& Out)
+		{
+			if (Luminaire.Emitter != FLightLuminaire::EEmitter::Linear)
+			{
+				return Entry.Along.IsEmpty() ? FString() : TEXT("only a linear type is laid along a direction");
+			}
+			const FVector Default = Entry.Mount.IsEmpty() ? FVector::ForwardVector : Out.Seat.Rotation.GetAxisX();
+			const TOptional<FVector> Along = Entry.Along.IsEmpty() ? TOptional<FVector>(Default) : PointOf(Entry.Along);
+			if (!Along.IsSet() || Along.GetValue().IsNearlyZero()) { return TEXT("its along isn't a direction [x, y, z]"); }
+			const FVector Light = LightOf(Out);
+			const FVector Direction = Along.GetValue().GetSafeNormal();
+			const FVector Square = Direction - (Direction | Light) * Light;
+			if (Square.IsNearlyZero(UE_KINDA_SMALL_NUMBER)) { return TEXT("its run would lie along its own light; its along must cross it"); }
+			Out.Run = Square.GetSafeNormal();
 			return FString();
 		}
 
@@ -125,20 +156,24 @@ namespace Musee::Light
 				if (!Out.Body) { return FString::Printf(TEXT("the stage has no moving body '%s'"), *Entry.Body); }
 			}
 			if (Luminaire->Emitter == FLightLuminaire::EEmitter::Linear && Entry.Length <= 0.0) { return TEXT("a linear type needs the length laid"); }
-			return FString();
+			return RunOf(Entry, *Luminaire, Out);
 		}
 
 		/**
-		 * The luminaire's frame in the stage: where it sits, its light leaving towards its aim, and its seat's z kept up (its
-		 * seat's y, when it is aimed straight along z). A linear luminaire lies along the frame's y axis, so one aimed
-		 * straight up or down at a point runs along the stage's x axis.
+		 * The luminaire's frame in the stage: where it sits, its light leaving along x towards its aim. A linear luminaire
+		 * lies along the frame's y axis, its run; any other keeps its seat's z up (its seat's y, when it is aimed straight
+		 * along z).
 		 */
 		FMuseeFrame FrameOf(const FPlacement& Placement)
 		{
 			const FMuseeFrame& Seat = Placement.Seat;
-			const FVector Along = Placement.Aim.IsSet() ? (Placement.Aim.GetValue() - Seat.OriginMeters).GetSafeNormal() : Seat.Rotation.GetAxisX();
-			const FVector Up = FMath::Abs(Along | Seat.Rotation.GetAxisZ()) < 1.0 - UE_KINDA_SMALL_NUMBER ? Seat.Rotation.GetAxisZ() : Seat.Rotation.GetAxisY();
-			return FMuseeFrame(Seat.OriginMeters, FRotationMatrix::MakeFromXZ(Along, Up).ToQuat());
+			const FVector Light = LightOf(Placement);
+			if (Placement.Run.IsSet())
+			{
+				return FMuseeFrame(Seat.OriginMeters, FRotationMatrix::MakeFromXY(Light, Placement.Run.GetValue()).ToQuat());
+			}
+			const FVector Up = FMath::Abs(Light | Seat.Rotation.GetAxisZ()) < 1.0 - UE_KINDA_SMALL_NUMBER ? Seat.Rotation.GetAxisZ() : Seat.Rotation.GetAxisY();
+			return FMuseeFrame(Seat.OriginMeters, FRotationMatrix::MakeFromXZ(Light, Up).ToQuat());
 		}
 
 		void Place(const FMuseeStageContext& Stage, const FLightScheduleLuminaire& Entry, const FPlacement& Placement)

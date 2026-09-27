@@ -49,6 +49,11 @@ struct FLightScheduleLuminaire
 	UPROPERTY() FString Body;
 	/** The length laid, for a linear type (a strip, a cove line, a slot). */
 	UPROPERTY(meta = (Units = "Meters")) double Length = 0.0;
+	/**
+	 * For a linear type, the direction [x, y, z] its run is laid in, in the stage's frame (a cove strip's tangent). Without
+	 * it, a run at a point lies along the stage's x axis, and one on a mount along the mount's x axis.
+	 */
+	UPROPERTY() TArray<double> Along;
 	UPROPERTY() FString Note;
 };
 
