@@ -191,12 +191,13 @@ namespace Musee::Rotunda
 			}
 			// The ray's frame: z out along the ray, x across it (the way φ rises), y up.
 			const FMuseeFrame Frame = FrameOfAxes(FVector::ZeroVector, Tangent(360.0 * Index / Plan::Rays), FVector::UpVector);
-			OnDrum(Out, FString::Printf(TEXT("dial.sun.ray-%02d"), Index + 1), TEXT("dial.sun"), MoveTemp(Shape), nullptr, Frame);
+			OnDrum(Out, FString::Printf(TEXT("dial.sun.ray-%02d"), Index + 1), TEXT("dial.sun"), MoveTemp(Shape), Walkable, Frame);
 		}
 
 		/**
 		 * The gilt sun: its boss (a foot in its groove, a rolled shoulder, a low dome), the plain bead ring on the dome and
-		 * the plain torus at its foot, and its 32 rays.
+		 * the plain torus at its foot, and its 32 rays. The visitor arrives standing on it and walks off across it, so the whole
+		 * casting is walkable, as the dial round it is.
 		 */
 		void Sun(TArray<FFormDrawing>& Out)
 		{
@@ -215,10 +216,10 @@ namespace Musee::Rotunda
 			const double BeadZ = DomeCentre + FMath::Sqrt(FMath::Square(Plan::BossDomeRadius) - FMath::Square(Plan::BeadAt));
 			FFormLathe Bead;
 			Bead.Section = Circle(Plan::BeadRadius, FVector2D(Plan::BeadAt, BeadZ));
-			OnDrum(Out, TEXT("dial.sun.bead"), TEXT("dial.sun"), MoveTemp(Bead), nullptr);
+			OnDrum(Out, TEXT("dial.sun.bead"), TEXT("dial.sun"), MoveTemp(Bead), Walkable);
 			FFormLathe Torus;
 			Torus.Section = Circle(Plan::FootTorusRadius, FVector2D(Plan::FootTorusAt, Plan::FootTorusZ));
-			OnDrum(Out, TEXT("dial.sun.foot"), TEXT("dial.sun"), MoveTemp(Torus), nullptr);
+			OnDrum(Out, TEXT("dial.sun.foot"), TEXT("dial.sun"), MoveTemp(Torus), Walkable);
 
 			for (int32 Index = 0; Index < Plan::Rays; ++Index)
 			{

@@ -32,6 +32,14 @@ public:
 	/** The eye's point, in the world. */
 	[[nodiscard]] FVector EyeLocation() const;
 
+	/**
+	 * Where the feet are, in the world, under the body's centre: on the floor the body stands on, or at the bottom of its
+	 * capsule while it is off the ground. Standing, the movement holds the capsule a skin above its floor (1.9 to 2.4 cm,
+	 * UCharacterMovementComponent's MIN_FLOOR_DIST and MAX_FLOOR_DIST) so that its sweeps never start inside the floor;
+	 * the feet are on the floor under that skin.
+	 */
+	[[nodiscard]] FVector FeetLocation() const;
+
 	/** How far from the eye the visitor can use a thing: one pace towards it and an arm's reach, down to the floor. */
 	[[nodiscard]] static Musee::Meters UseDistance();
 
@@ -98,6 +106,11 @@ private:
 	/** Sets the body's speed to the chosen pace, walking or striding. */
 	void FollowPace();
 	void FollowPace(const FMuseeSetting& Changed);
+	/**
+	 * The first time the body stands on a floor, logs where its feet are and what they stand on: a diagnostic of the
+	 * arrival, compiled out of Shipping.
+	 */
+	void ReportFirstStanding();
 
 	UPROPERTY(VisibleAnywhere, Category = "Visitor")
 	TObjectPtr<UCameraComponent> EyeCamera;
@@ -116,6 +129,7 @@ private:
 
 	TWeakObjectPtr<UObject> Looked;
 	bool bStriding = false;
+	bool bHasStood = false;
 	FDelegateHandle PaceHandle;
 	FControlsReady ControlsReady;
 	FName AdapterName;

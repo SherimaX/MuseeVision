@@ -21,6 +21,7 @@
 #include "MuseeUsable.h"
 #include "VisitorAdapter.h"
 #include "VisitorEye.h"
+#include "VisitorLog.h"
 #include "VisitorOverlay.h"
 #include "VisitorPace.h"
 #include "VisitorReach.h"
@@ -115,6 +116,14 @@ FVector AVisitorBody::EyeLocation() const
 	return EyeCamera->GetComponentLocation();
 }
 
+FVector AVisitorBody::FeetLocation() const
+{
+	const UCharacterMovementComponent* Movement = GetCharacterMovement();
+	const bool bStanding = Movement->IsMovingOnGround() && Movement->CurrentFloor.IsWalkableFloor();
+	const double Skin = bStanding ? Movement->CurrentFloor.FloorDist : 0.0;
+	return GetActorLocation() - FVector(0.0, 0.0, GetCapsuleComponent()->GetScaledCapsuleHalfHeight() + Skin);
+}
+
 void AVisitorBody::BeginPlay()
 {
 	Super::BeginPlay();
@@ -161,6 +170,24 @@ void AVisitorBody::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
 	if (IsLocallyControlled()) { Look(); }
+	ReportFirstStanding();
+}
+
+void AVisitorBody::ReportFirstStanding()
+{
+#if !UE_BUILD_SHIPPING
+	const UCharacterMovementComponent* Movement = GetCharacterMovement();
+	if (bHasStood || !Movement->IsMovingOnGround() || !Movement->CurrentFloor.IsWalkableFloor())
+	{
+		return;
+	}
+	bHasStood = true;
+	const FVector Feet = Musee::FromEngine(FeetLocation());
+	const FFindFloorResult& Floor = Movement->CurrentFloor;
+	UE_LOG(LogMuseeVisitor, Log, TEXT("The visitor stands, %.2f s after arriving: feet at (%.3f, %.3f, %.4f) m, on %s, the capsule %.1f mm above it."),
+		GetWorld()->GetTimeSeconds() - CreationTime, Feet.X, Feet.Y, Feet.Z, *GetNameSafe(Floor.HitResult.GetComponent()),
+		Musee::FromEngine<Musee::Meters>(Floor.FloorDist).Get() * 1000.0);
+#endif
 }
 
 void AVisitorBody::FindAlong(const FVector& From, const FVector& Direction, UObject*& OutUsable, UObject*& OutCaptioned) const
