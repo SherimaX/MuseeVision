@@ -1,0 +1,8 @@
+{
+	"$sources": [ "A fixture of the record reader: two footfalls.", "Walking speeds after the human measure's pace." ],
+	"$units": { "SpeedMetersPerSecond": "m/s", "LocationMeters": "m" },
+	"$records": [
+		{ "Body": "visitor.body", "Substance": "travertine", "SpeedMetersPerSecond": 0.35, "LocationMeters": { "X": 1.0, "Y": 2.0, "Z": 0.0 } },
+		{ "Body": "visitor.body", "Substance": "oak", "SpeedMetersPerSecond": 0.3 }
+	]
+}
