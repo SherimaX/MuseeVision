@@ -6,6 +6,7 @@ public class MuseeNatureMaking : MuseeModuleRules
 	public MuseeNatureMaking(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PublicDependencyModuleNames.AddRange(new string[] { "MuseeNature", "MuseeFormMaking", "MuseeForm", "MuseeMatter" });
-		PrivateDependencyModuleNames.AddRange(new string[] { "GeometryCore", "DynamicMesh" });
+		// FFormMadePiece holds its mesh as GeometryCore's FDynamicMesh3, which each module that makes pieces links.
+		PrivateDependencyModuleNames.Add("GeometryCore");
 	}
 }
