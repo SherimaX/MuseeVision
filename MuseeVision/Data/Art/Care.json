@@ -124,6 +124,19 @@
       ]
     }
   ],
+  "reproductions": [
+    {
+      "key": "exhibition-facsimile",
+      "what": "A true-size reproduction made for display in the original's place and credited to it: a pigment print on cotton rag for a print or a stereograph, a duplicate transparency for an autochrome. The original stays with its holder.",
+      "heldToCare": false,
+      "credit": "Exhibition facsimile after the original in",
+      "note": "Museums show facsimiles where the light would harm the original (the Hall of Light's daylight, D-014). The facsimile keeps its original's care class, so its record says what the original needs; its own fading is not conserved but answered by replacing it, from its measured dose. Care therefore accepts it under any light.",
+      "evidence": [
+        { "fields": ["heldToCare"], "source": "ccaha-light-exposure", "confirmed": true, "row": "Facsimiles may also be used to avoid overexposure of the original artifact." },
+        { "fields": ["what"], "source": "cornell-photocopy", "confirmed": true, "row": "surrogate facsimile copies of original documents and photographs for exhibition: important when the original might be damaged through too much handling or is too light sensitive to be placed on display" }
+      ]
+    }
+  ],
   "doseAccounting": {
     "note": "Annual exposure is illuminance on the work times the hours it is lit in a year. The museum never closes (D-006), so presence-linked gallery light, not opening hours, bounds the hours; the annual limit, not the hour count, is what Art.WithinCare holds.",
     "referenceHoursPerYear": 3000,
@@ -163,6 +176,18 @@
       "title": "Zumtobel, ARCOS LED spotlight system brochure, 'Potential damage' (citing TU Darmstadt photometrics test report PB289/2010)",
       "url": "https://www.zumtobel.com/PDB/Ressource/teaser/en/com/ARCOS.pdf",
       "readOn": "2026-09-26"
+    },
+    {
+      "id": "ccaha-light-exposure",
+      "title": "Conservation Center for Art & Historic Artifacts, 'Light Exposure for Artifacts on Exhibition'",
+      "url": "https://ccaha.org/resources/light-exposure-artifacts-exhibition",
+      "readOn": "2026-09-27"
+    },
+    {
+      "id": "cornell-photocopy",
+      "title": "Cornell University Library, Library Preservation and Conservation Tutorial, 'Photocopy'",
+      "url": "https://chinapreservationtutorial.library.cornell.edu/content/photocopy/",
+      "readOn": "2026-09-27"
     },
     {
       "id": "erco-culture",

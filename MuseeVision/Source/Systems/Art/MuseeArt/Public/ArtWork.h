@@ -6,8 +6,8 @@
 
 /**
  * A work as the museum hangs it: the catalogue's facts (its id, title, artist, date, medium, where it is held), the
- * hanging plan's (its real size in metres, its support, its care class), and the image of its paint layer, found in
- * the repository's assets by the work's id.
+ * hanging plan's (its real size in metres, its support, its care class, what hangs if it is a reproduction), and the
+ * image of its paint layer, found in the collection by the work's id or by the image the entry names.
  */
 struct MUSEEART_API FArtWork
 {
@@ -23,10 +23,16 @@ struct MUSEEART_API FArtWork
 	FVector2D SizeMeters = FVector2D::ZeroVector;
 	FName Support;
 	FName Care;
+	/** The kind of reproduction that hangs in the original's place, or none; and the label's words for it. */
+	FName Reproduction;
+	FString ReproductionCredit;
 	/** The image of the paint layer, a full path; empty when none was found. */
 	FString ImagePath;
 
-	/** The wall label: the title; the artist, date and medium; and where the work is held. */
+	/**
+	 * The label: the title; the artist, date and medium; and where the work is held, or for a reproduction what it is
+	 * and where the original is held ("Exhibition facsimile after the original in ...").
+	 */
 	[[nodiscard]] FMuseeCaption Caption() const;
 };
 
@@ -37,22 +43,34 @@ namespace Musee::Art
 
 	/**
 	 * Reads the work a hanging plan's entry names from the catalogue its `source` names (relative to the repository's
-	 * root, or a full path), with the entry's size, support and care, and finds its image: under the catalogue's own
-	 * folder, then under the repository's `assets`. Fails, saying why, on a catalogue that doesn't read or an id it
-	 * doesn't hold; a work without an image has an empty ImagePath.
+	 * root, or a full path), with the entry's size, support, care and reproduction, and finds its image: the entry's own
+	 * `image` if it names one, otherwise the work's id; under the catalogue's own folder, then in the collection. Fails,
+	 * saying why, on a catalogue that doesn't read, an id it doesn't hold, or a reproduction Care.json doesn't list; a
+	 * work without an image has an empty ImagePath.
+	 *
+	 * The collection (assets/, with its catalogues and images) and the older wings' catalogues (data/) are the museum's
+	 * reserve, kept out of a working copy that doesn't check them out. They are read from, in order, the environment's
+	 * MUSEE_COLLECTION (the collection's folder), this working copy, and the repository's main working tree when this
+	 * copy is one of its linked worktrees. The make only ever reads them.
 	 */
 	[[nodiscard]] MUSEEART_API TValueOrError<FArtWork, FString> ReadWork(const FArtHangEntry& Entry);
 
 	/**
-	 * The image of a work's paint layer: the file under Root named for the work's id (jpg, jpeg or png). The
-	 * high-resolution folder (`paintings_hires`) is preferred, then `paintings`, then any other in path order; empty if
-	 * there is none.
+	 * The image of a work's paint layer: the file under Root named for the work's id or an entry's image (jpg, jpeg or
+	 * png). The high-resolution folder (`paintings_hires`) is preferred, then `paintings`, then any other in path order;
+	 * empty if there is none.
 	 */
-	[[nodiscard]] MUSEEART_API FString FindImage(const FString& Root, const FString& WorkId);
+	[[nodiscard]] MUSEEART_API FString FindImage(const FString& Root, const FString& Name);
 
 	/**
 	 * The palette key of a work's own paint layer, `paint.<work id>`: an instance of Matter's paint master carrying the
 	 * work's image and size. None if the id can't be a key segment.
 	 */
 	[[nodiscard]] MUSEEART_API FName PaintMaterial(const FString& WorkId);
+
+	/**
+	 * The palette key of the layer one object of a work shows when it has its own image (a Rouen canvas, a Tristram
+	 * panel): `paint.<work id>.<canvas>`. None if the id can't be a key segment.
+	 */
+	[[nodiscard]] MUSEEART_API FName PaintMaterial(const FString& WorkId, int32 Canvas);
 }

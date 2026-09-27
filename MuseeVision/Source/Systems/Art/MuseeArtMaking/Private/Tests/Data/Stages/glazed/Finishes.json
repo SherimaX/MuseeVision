@@ -1,0 +1,6 @@
+{
+  "stage": "glazed",
+  "finishes": [
+    { "surface": "glazed.band.glass", "material": "glass.mouth-blown", "working": "leaded", "history": "aged.patina", "note": "The band's antique glass." }
+  ]
+}

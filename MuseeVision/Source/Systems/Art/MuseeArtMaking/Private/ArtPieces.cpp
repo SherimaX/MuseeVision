@@ -6,6 +6,7 @@
 #include "Canvas/WallPath.h"
 #include "FormMake.h"
 #include "Frame/Moulding.h"
+#include "Glass/GlassPane.h"
 #include "MuseeCollision.h"
 #include "MuseeRecords.h"
 
@@ -16,6 +17,7 @@ namespace Musee::ArtMaking
 		const FName CanvasSurface(TEXT("canvas"));
 		const FName LinenSurface(TEXT("canvas.linen"));
 		const FName NoFrame(TEXT("none"));
+		const FName GlassSupport(TEXT("glass"));
 
 		/**
 		 * The linen a canvas is woven of, bare where it turns round the stretcher: the palette's linen, stretched on the
@@ -25,12 +27,11 @@ namespace Musee::ArtMaking
 		const FName LinenWorking(TEXT("stretched"));
 		const FName LinenHistory(TEXT("new"));
 
-		/** What every canvas of a stage is made with: the paint's finish, and the frame's moulding once a canvas needs it. */
+		/** What every canvas of a stage is made with: the frame's moulding, once a canvas needs it. */
 		struct FMaking
 		{
 			const FMuseeStageContext& Stage;
 			const FArtHang& Hang;
-			FPaintFinish Paint;
 			TOptional<TValueOrError<FArtMoulding, FString>> Moulding;
 
 			const TValueOrError<FArtMoulding, FString>& ReadMoulding()
@@ -115,9 +116,9 @@ namespace Musee::ArtMaking
 			BuildCanvas(Wall, Spec, Frame, Face.Mesh, Linen.Mesh);
 			Face.Name = FacePieceName(Entry, bSplit);
 			Face.Surface = CanvasSurface;
-			Face.Material = Musee::Art::PaintMaterial(Entry.Work);
-			Face.Working = Making.Paint.Working;
-			Face.History = Making.Paint.History;
+			Face.Material = Canvas.Layer;
+			Face.Working = Canvas.Finish.Working;
+			Face.History = Canvas.Finish.History;
 			Linen.Name = LinenPieceName(Entry, bSplit);
 			Linen.Surface = LinenSurface;
 			Linen.Material = LinenMaterial;
@@ -131,6 +132,28 @@ namespace Musee::ArtMaking
 				Piece->Drawer = TEXT("Art");
 				OutPieces.Add(MoveTemp(*Piece));
 			}
+		}
+		/**
+		 * One stained-glass panel of a work, set in its Glazing light: the image's glass, the image's size, standing on
+		 * the light's glass line with its lower-left corner at the plan's along and height.
+		 */
+		void MakeGlass(const FMaking& Making, const FWorkPlan& Plan, const FCanvasPlan& Canvas, TArray<FFormMadePiece>& OutPieces)
+		{
+			const FArtHangEntry& Entry = *Canvas.Entry;
+			const FMuseeFrame& Light = Making.Stage.FindAnchor(Entry.Anchor, GlazingAnchorKind)->Frame;
+			FFormMadePiece Pane;
+			BuildGlassPane(FGlassPaneSpec{ Entry.SizeMeters() }, Pane.Mesh);
+			Pane.Name = GlassPieceName(Entry, Plan.IsSplit());
+			Pane.Surface = Entry.Wall;
+			Pane.Material = Canvas.Layer;
+			Pane.Working = Canvas.Finish.Working;
+			Pane.History = Canvas.Finish.History;
+			Pane.Collision = Collision::Solid.Profile();
+			// Glass is translucent, which Nanite can't render.
+			Pane.bNanite = false;
+			Pane.Frame = Light.FrameToParent(FMuseeFrame(FVector(Entry.Along, 0.0, Entry.Height)));
+			Pane.Drawer = TEXT("Art");
+			OutPieces.Add(MoveTemp(Pane));
 		}
 	}
 
@@ -154,6 +177,16 @@ namespace Musee::ArtMaking
 		return FName(CanvasName(Entry, bSplit) + TEXT(".frame"));
 	}
 
+	FName GlassPieceName(const FArtHangEntry& Entry, bool bSplit)
+	{
+		return FName(bSplit ? FString::Printf(TEXT("glass.%s.%d"), *Entry.Work, Entry.Canvas) : FString::Printf(TEXT("glass.%s"), *Entry.Work));
+	}
+
+	FName BuiltPieceName(const FArtHangEntry& Entry, bool bSplit)
+	{
+		return FName(bSplit ? FString::Printf(TEXT("work.%s.%d"), *Entry.Work, Entry.Canvas) : FString::Printf(TEXT("work.%s"), *Entry.Work));
+	}
+
 	void GatherArt(const FMuseeStageContext& Stage, TArray<FFormMadePiece>& OutPieces, TArray<FMuseeFinding>& OutFindings)
 	{
 		FArtHang Hang;
@@ -163,7 +196,7 @@ namespace Musee::ArtMaking
 		}
 		FMaking Making{ Stage, Hang };
 		TArray<FWorkPlan> Works;
-		if (!PlanWorks(Stage, Hang, Works, Making.Paint, OutFindings))
+		if (!PlanWorks(Stage, Hang, Works, OutFindings))
 		{
 			return;
 		}
@@ -171,7 +204,14 @@ namespace Musee::ArtMaking
 		{
 			for (const FCanvasPlan& Canvas : Plan.Canvases)
 			{
-				MakeCanvas(Making, Plan, Canvas, OutPieces, OutFindings);
+				if (Canvas.Entry->Support == GlassSupport)
+				{
+					MakeGlass(Making, Plan, Canvas, OutPieces);
+				}
+				else
+				{
+					MakeCanvas(Making, Plan, Canvas, OutPieces, OutFindings);
+				}
 			}
 		}
 	}
