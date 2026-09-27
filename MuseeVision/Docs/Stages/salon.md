@@ -459,3 +459,22 @@ if Light's measurement shows bright days over 50 lx on her, she moves to the cab
 (b) The Details board draws the cornice at 6.28–6.62; as built P1 runs 5.60–6.47 (kept, D-017).
 (c) The Light board calls bay 4's diffuser "a linen blind"; it is a fixed linen scrim (D-014), palette `accent.linen`.
 (d) The palette's "viewing stones (18)" counts the oval's two, now `nympheas`'s.
+
+## Build notes
+- **Frame.** The origin is on the axis at bay 1's east silk face, on the floor, at museum (−14.00, 0, 0), yaw 0.
+- **Scope.** The five bays and the Manet cabinet only. Everything beyond bay 5's far wall is `nympheas`.
+- **The east port steps down inside the Salon's own wall.**
+  - From x +0.60 to +0.30: the 3000x6000 rough opening.
+  - At x +0.30: the step face `salon.east.step`.
+  - From x +0.30 to 0.00: the Salon's own 3.00 × 4.80 door.
+  - The jambs run continuous, and the cornice at 5.60 stays whole.
+- **The west port.** Build only the rough opening through the far wall (x −60.00 → −60.60). The oval owns the
+  passage block and tunnel.
+- **The cabinet** opens off bay 1's north wall through a 3.00 × 4.80 door at x −6.00. It has no daylight, and the 1874
+  case stands in it (anchor `salon.cabinet.case`).
+- **Nothing moves.** There is no Mechanisms.json.
+- **Daylight.** The lanterns take Giverny's weather. Bay 4's diffuser is a fixed linen scrim, not a blind.
+- **Hang.** The framing projectors stand in the opposite cornice's trough, on stems at z 6.65.
+  - The Rouen series has one Hang entry per canvas.
+  - The Little Dancer's width comes from her scan.
+- **Planting.** The pergola vines on the roof are outdoors, so they take the museum's weather.
