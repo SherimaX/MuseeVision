@@ -54,6 +54,13 @@ struct MUSEEART_API FArtCatalogueEntry
 	UPROPERTY()
 	FString Rights;
 
+	/**
+	 * The credit the photographs a work is made from ask for, as their licences word it (a painted vessel's decoration,
+	 * composed from its museum's and others' photographs); shown on its label.
+	 */
+	UPROPERTY()
+	FString Credit;
+
 	UPROPERTY()
 	FArtScan Scan;
 };

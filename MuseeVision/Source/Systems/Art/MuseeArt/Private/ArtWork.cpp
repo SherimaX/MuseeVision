@@ -218,6 +218,7 @@ namespace Musee::Art
 		Work.Collection = Found->Collection;
 		Work.City = Found->City;
 		Work.Notes = Found->Notes;
+		Work.ImageCredit = Found->Credit;
 		Work.SizeMeters = Entry.SizeMeters();
 		Work.Support = Entry.Support;
 		Work.Care = Entry.Care;
@@ -237,6 +238,7 @@ FMuseeCaption FArtWork::Caption() const
 	Out.Body = FText::FromString(Notes.IsEmpty() ? Line : Line + TEXT(". ") + Notes);
 	const FString Holder = FString::Join(TArray<FString>({ Collection, City }).FilterByPredicate([](const FString& S) { return !S.IsEmpty(); }), TEXT(", "));
 	const FString Held = Reproduction.IsNone() ? Holder : FString::Printf(TEXT("%s %s"), *ReproductionCredit, *Holder);
-	Out.Credit = FText::FromString(ScanCredit.IsEmpty() ? Held : FString::Printf(TEXT("%s. %s"), *Held, *ScanCredit));
+	const FString Credits = FString::Join(TArray<FString>({ Held, ScanCredit, ImageCredit }).FilterByPredicate([](const FString& S) { return !S.IsEmpty(); }), TEXT(". "));
+	Out.Credit = FText::FromString(Credits);
 	return Out;
 }

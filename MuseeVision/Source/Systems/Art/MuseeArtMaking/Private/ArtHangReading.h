@@ -118,7 +118,7 @@ namespace Musee::ArtMaking
 	 * One object of a work the stage makes: its entry in the plan; where its left edge falls in the work's one image, or
 	 * its own image; the palette key of the layer it shows, and how that layer is finished; how its faces without the
 	 * image are finished (a dish's underside), the glass it lies under (its thickness, from the glazing's working), and,
-	 * for turned ware, its form.
+	 * for turned ware, its form; for a painted vessel, the size of its decoration.
 	 */
 	struct FCanvasPlan
 	{
@@ -133,6 +133,8 @@ namespace Musee::ArtMaking
 		double PlateMeters = 0.0;
 		double BackingMeters = 0.0;
 		FWareSpec Ware;
+		/** A painted vessel's decoration: the size of its turned surface laid out flat (metres round, metres along). */
+		FVector2D DecorationMeters = FVector2D::ZeroVector;
 	};
 
 	/**

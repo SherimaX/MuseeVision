@@ -1,0 +1,65 @@
+#include "Vessel/VesselMesh.h"
+
+#include "FormMesh.h"
+
+namespace Musee::ArtMaking
+{
+	namespace
+	{
+		/** How many chords round the axis keep every one within the tolerance of a circle of this radius. */
+		int32 SegmentsFor(double Radius, double Tolerance)
+		{
+			const double Half = FMath::Acos(FMath::Clamp(1.0 - Tolerance / FMath::Max(Radius, Tolerance), -1.0, 1.0));
+			return FMath::Max(3, FMath::CeilToInt(UE_DOUBLE_PI / FMath::Max(Half, UE_DOUBLE_KINDA_SMALL_NUMBER)));
+		}
+
+		/**
+		 * One ring of the turned surface: the section's point carried round the axis with its normal, which an oval's
+		 * scaling tilts by the inverse of the scale (a normal transforms by the inverse transpose).
+		 */
+		TArray<int32> Ring(FFormMesh& Mesh, const FVector2D& Point, const FVector2D& Normal, double V, int32 Segments, const FVesselTurning& Turning,
+			double ReferenceRadius)
+		{
+			TArray<int32> Out;
+			Out.Reserve(Segments + 1);
+			for (int32 K = 0; K <= Segments; ++K)
+			{
+				const double Angle = 2.0 * UE_DOUBLE_PI * K / Segments;
+				const double S = FMath::Sin(Angle);
+				const double C = FMath::Cos(Angle);
+				const FVector Position(Turning.Oval.X * Point.X * S, Turning.Oval.Y * Point.X * C, Point.Y);
+				const FVector Facing = FVector(Normal.X * S / Turning.Oval.X, Normal.X * C / Turning.Oval.Y, Normal.Y).GetSafeNormal();
+				Out.Add(Mesh.AddVertex(Position, Facing.IsNearlyZero() ? FVector::UpVector : Facing, FVector2D(ReferenceRadius * Angle, V)));
+			}
+			return Out;
+		}
+	}
+
+	void BuildVessel(TConstArrayView<FVector2D> Section, const FVesselLayout& Layout, const FVesselTurning& Turning, UE::Geometry::FDynamicMesh3& Out)
+	{
+		FFormMesh Mesh;
+		const int32 Count = Section.Num();
+		const double Crease = FMath::DegreesToRadians(Turning.CreaseDegrees);
+		const int32 Segments = SegmentsFor(Layout.ReferenceRadius * FMath::Max(Turning.Oval.X, Turning.Oval.Y), Turning.ChordToleranceMeters);
+		TArray<int32> Leaving;
+		for (int32 I = 0; I < Count; ++I)
+		{
+			// The normals of the segments arriving at and leaving the point; an end keeps its one segment's.
+			const FVector2D In = NormalOf(Section, FMath::Clamp(I - 1, 0, Count - 2));
+			const FVector2D Onward = NormalOf(Section, FMath::Clamp(I, 0, Count - 2));
+			const double Turn = FMath::Acos(FMath::Clamp(FVector2D::DotProduct(In, Onward), -1.0, 1.0));
+			const bool bCrisp = Turn >= Crease;
+			const TArray<int32> Arriving = Ring(Mesh, Section[I], bCrisp ? In : (In + Onward).GetSafeNormal(), Layout.Lengths[I], Segments, Turning,
+				Layout.ReferenceRadius);
+			if (I > 0)
+			{
+				for (int32 K = 0; K < Segments; ++K)
+				{
+					Mesh.AddQuad(Leaving[K], Leaving[K + 1], Arriving[K + 1], Arriving[K]);
+				}
+			}
+			Leaving = bCrisp ? Ring(Mesh, Section[I], Onward, Layout.Lengths[I], Segments, Turning, Layout.ReferenceRadius) : Arriving;
+		}
+		Mesh.Write(Out);
+	}
+}

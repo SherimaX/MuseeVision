@@ -13,7 +13,7 @@ The collection as real objects. Modules `MuseeArt` (Runtime: the catalogue, the 
 | `ArtWork.h` | `FArtWork` (the catalogue's facts, the hang's size, support, care and reproduction, its image, its scan's credit; `Caption`); `Musee::Art::ReadWork`, `FindImage`, `PaintMaterial` (`paint.<id>`, `paint.<id>.<index>`), `RepositoryRoot`, `SourcePath` |
 | `ArtCare.h`, `ArtLightDose.h` | `Musee::Art::CareClasses`, `Reproductions`, `ReproductionCredit`; `CareFaults` (a dose against a class; a reproduction not held to care is within under any light) |
 | `ArtWorkComponent.h` | `UArtWorkComponent`: a work's label (`IMuseeCaptioned`) and care class, the component its pieces hang from; the tags `musee.work:<id>`, `musee.care:<class>` |
-| `ArtWorkImage.h` (making) | `Musee::ArtMaking::ComposeWorkImage`: composes a texture Studio makes from a work's image |
+| `ArtWorkImage.h` (making) | `Musee::ArtMaking::ComposeWorkImage`, `ComposeLayerImage` and `LayerImageIdentity`: compose a texture Studio makes from a work's image, or a painted vessel's decoration from its views, and say what it is made from |
 | `ArtPaintLayer.h` (making) | `FArtPaintLayer` and `Musee::ArtMaking::PaintLayers`: each hung work's image, its size and its paint's spec (`paint.<id>` over `accent.oil-on-linen`), which Studio makes before casting |
 | `ArtCastScan.h` (making) | `FArtCastScan` and `Musee::ArtMaking::CastScans`: the glTF scans a stage's works are cast from, which Studio imports (Interchange) at `ScanPackage` (`<Root>/Art/Casts/SM_Scan_<Scan>`) before its pieces are made |
 
@@ -64,6 +64,16 @@ but where it turns more than the record's crease angle (lip, foot ring), in its 
 Ding ivory over porcelain; Jun, Guan, hare's fur and celadon over stoneware), standing at its `centre` on its Mount anchor
 and, where its plan says `stand`, on its carved phoebe stand (`ware.<id>.stand`), both sized by the record.
 
+**Vessels from their photographs** (grade `derived` in `Data/Art/Vessels.json`, made by `MuseeVision/Scripts/vessels.py`,
+each derivation in its record): the section as the vessel's own photograph shows it through its fitted camera, at its
+museum's size (`museum`); an oval one (the Ru basin) turned and pressed to its mouth's axes (`Vessel/VesselMesh.h`), on its
+feet (`ware.<id>.foot.<n>`). A painted one (`views`) wears the work's own layer `paint.<id>` over its medium's finish
+(`accent.porcelain-painted`): its decoration composed by `Vessel/VesselDecoration.h` in the layout its UV0 carries (U the
+widest parallel's metres round from the front, V the section's metres along), each view projected through its camera where
+it sees the surface within 60 degrees of face on, views blended by how squarely they see it, each photograph divided by its
+own white, and where none sees the outside a band's own repeat (`bands`) or the glaze. Its label credits its photographs
+(the catalogue's `credit`, `MuseeVision/Data/Art/Ceramics.json`).
+
 Every object is named `<word>.<id>[.<index>]` (`canvas`, `glass`, `paper`, `plate`, `ware`, `cast`), its parts `<name>.<part>`.
 **Panels, tapestry, scrolls and books.**
 - A panel (`panel`) hangs on its Wall anchor as a canvas does: its paint `paint.<id>` over `accent.oil-on-panel` on a
@@ -107,7 +117,8 @@ holds, made by Art or built by its stage.
   (over `CareFaults`), `Art.ColorManaged`, `Art.Credited`, `Art.HangResolves`.
 - Panels, scrolls, tapestry, silk, stone, books, and paper framed without a mount: the supports and kinds the plans name
   that Art doesn't make yet. A cast's part by more than a band of heights (the dancer's satin ribbon; the hands the
-  skirt's band takes). Painted porcelain's decoration (its image, which the collection doesn't hold); a sancai lead glaze
+  skirt's band takes). Painted porcelain's inside and underside (no view is composed onto them: the glaze); the far side
+  of a vessel no photograph shows (its bands carried round, its field the glaze); a sancai lead glaze
   (Matter has none); a vessel's rim band or repair (the Ding basin's copper, the Longquan vase's lacquer and gold). A vessel's handles (Turned.json
 - Casts, stone, ceramic in the round other than De Morgan's ware, and handscrolls: the supports and kinds the plans
   name that Art doesn't make yet. A vessel's handles (Turned.json

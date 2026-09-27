@@ -3,6 +3,7 @@
 #include "CoreMinimal.h"
 
 class UTexture2D;
+struct FArtPaintLayer;
 
 /**
  * The image of a work's paint layer as a texture: the photograph of the work (found by Musee::Art::FindImage), carried
@@ -23,4 +24,18 @@ namespace Musee::ArtMaking
 	 * names, builds and saves the texture (D-015). Fails, saying why, when the file can't be read as an image.
 	 */
 	[[nodiscard]] MUSEEARTMAKING_API bool ComposeWorkImage(const FString& ImagePath, UTexture2D& Texture, FString& OutWhy);
+
+	/**
+	 * Composes a texture Studio has made for a paint layer: its work's photograph (as ComposeWorkImage), or for a painted
+	 * vessel its decoration, composed from its views round its turned form in the layout its mesh's UV0 shares
+	 * (Vessel/VesselDecoration.h). Fails, saying why, when a photograph can't be read or the vessel's record can't.
+	 */
+	[[nodiscard]] MUSEEARTMAKING_API bool ComposeLayerImage(const FArtPaintLayer& Layer, UTexture2D& Texture, FString& OutWhy);
+
+	/**
+	 * What a layer's image is made from, as one hash: its photograph's bytes; or a painted vessel's views' bytes, its
+	 * record's numbers, its size and the composition's revision. The same inputs give the same identity, so Studio
+	 * remakes the texture only when one changes. Empty when a file can't be read.
+	 */
+	[[nodiscard]] MUSEEARTMAKING_API FString LayerImageIdentity(const FArtPaintLayer& Layer);
 }

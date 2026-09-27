@@ -30,10 +30,13 @@ struct MUSEEART_API FArtWork
 	FString ImagePath;
 	/** For a work made from a scan, the scan's credit as its licence asks (Data/Art/Scans.json); empty otherwise. */
 	FString ScanCredit;
+	/** For a work made from photographs, their credit as their licences ask (its catalogue's `credit`); empty otherwise. */
+	FString ImageCredit;
 
 	/**
 	 * The label: the title; the artist, date and medium; and where the work is held, or for a reproduction what it is
-	 * and where the original is held ("Exhibition facsimile after the original in ..."), then the scan's credit.
+	 * and where the original is held ("Exhibition facsimile after the original in ..."), then the scan's credit and the
+	 * photographs'.
 	 */
 	[[nodiscard]] FMuseeCaption Caption() const;
 };

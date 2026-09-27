@@ -16,8 +16,14 @@ struct FArtPaintLayer
 	/** The work's id, or `<id>.<index>` for one object's own image: what Studio names the layer's texture for. */
 	FString Work;
 
-	/** Its image, a full path (Musee::Art::FindImage). */
+	/** Its image, a full path (Musee::Art::FindImage); empty for a painted vessel, whose image is composed. */
 	FString ImagePath;
+
+	/**
+	 * For a painted vessel, the size [width, height] it is turned to (metres), round which its decoration is composed
+	 * from the views its record places (Data/Art/Vessels.json); zero for a work shown as its photograph.
+	 */
+	FVector2D VesselMeters = FVector2D::ZeroVector;
 
 	/** The image's size in metres: the canvases side by side, their widths summed. */
 	FVector2D SizeMeters = FVector2D::ZeroVector;

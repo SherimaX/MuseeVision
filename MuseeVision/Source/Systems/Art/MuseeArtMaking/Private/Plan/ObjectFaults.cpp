@@ -345,6 +345,37 @@ namespace Musee::ArtMaking
 		}
 
 		/**
+		 * A vessel derived from its photographs: its outside runs between two of its section's points; a painted one's
+		 * views are photographs the collection holds, each with its camera; an oval one gives its mouth's two axes.
+		 */
+		TArray<FString> DerivedVesselFaults(const FArtVessel& Vessel)
+		{
+			TArray<FString> Out;
+			const bool bOutside = Vessel.Outside.Num() == 2 && Vessel.Outside[0] >= 0 && Vessel.Outside[0] < Vessel.Outside[1]
+				&& Vessel.Outside[1] < Vessel.Section.Num();
+			if (Vessel.IsPainted() && !bOutside)
+			{
+				Out.Add(FString::Printf(TEXT("Data/%s: a painted vessel's outside runs [first, last] between its section's points"), FArtVessels::Record));
+			}
+			for (const FArtVesselView& View : Vessel.Views)
+			{
+				if (!IFileManager::Get().FileExists(*Musee::Art::SourcePath(View.Image)))
+				{
+					Out.Add(FString::Printf(TEXT("its view %s is not in the collection"), *View.Image));
+				}
+				else if (View.AxisPixels.Num() != 2 || !(View.FocalPixels > 0.0) || !(View.DistanceMeters > 0.0))
+				{
+					Out.Add(FString::Printf(TEXT("its view %s needs its camera: a distance, a focal length and its axis's pixel [u, v]"), *View.Image));
+				}
+			}
+			if (Vessel.Museum.IsOval() && !(Vessel.Museum.MouthAxesMeters[0] > 0.0 && Vessel.Museum.MouthAxesMeters[1] > 0.0))
+			{
+				Out.Add(FString::Printf(TEXT("Data/%s: an oval vessel's mouth has two axes of more than zero"), FArtVessels::Record));
+			}
+			return Out;
+		}
+
+		/**
 		 * A vessel turned from its section: the vessels' record gives it a section of three points or more, [radius, height]
 		 * with no radius below the axis, starting and ending on the axis (so turned it is a closed solid).
 		 */
@@ -365,6 +396,10 @@ namespace Musee::ArtMaking
 				|| Vessel->Section.ContainsByPredicate([](const FVector2D& Point) { return Point.X < 0.0; }))
 			{
 				Out.Add(FString::Printf(TEXT("Data/%s: its section must run from the axis round to the axis, never inside it"), FArtVessels::Record));
+			}
+			else
+			{
+				Out.Append(DerivedVesselFaults(*Vessel));
 			}
 			return Out;
 		}

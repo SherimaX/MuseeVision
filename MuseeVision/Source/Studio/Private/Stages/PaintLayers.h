@@ -11,8 +11,10 @@ namespace Musee::Studio
 	/**
 	 * Makes each hung work's paint layer before a stage's pieces are cast, since its face resolves to it (Art's
 	 * FArtPaintLayer, D-015: Art and Matter define, Studio writes):
-	 * - the work's image as a texture, <Root>/Art/T_<Work>, sRGB, its source's id the hash of its pixels and its
-	 *   lighting GUID derived from its inputs, so the same image makes the same bytes;
+	 * - the work's image as a texture, <Root>/Art/T_<Work>, sRGB: its photograph, or a painted vessel's decoration
+	 *   composed by Art from its views (Musee::ArtMaking::ComposeLayerImage); its source's id the hash of its pixels and
+	 *   its lighting GUID derived from its inputs (Musee::ArtMaking::LayerImageIdentity), so the same inputs make the
+	 *   same bytes;
 	 * - the work's paint instance, `paint.<id>` with the paint's working and history, at <Root>/Matter/MI_<...>, which
 	 *   for the museum is Musee::Matter::InstancePackage, where Musee::Matter::Resolve finds it. Matter composes it
 	 *   (Musee::Matter::ComposePaintLayer) over the master Matter names for its finish (the paint master for a canvas, the

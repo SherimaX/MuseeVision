@@ -9,9 +9,7 @@
 #include "Materials/MaterialInstanceConstant.h"
 #include "Make/InputHash.h"
 #include "Make/PackageSave.h"
-#include "Misc/FileHelper.h"
 #include "Misc/PackageName.h"
-#include "Misc/SecureHash.h"
 #include "Stages/MakeFinding.h"
 #include "Stages/StageMake.h"
 #include "UObject/Package.h"
@@ -23,13 +21,6 @@ namespace Musee::Studio
 		/** The revisions of these rules: raise one whenever its asset would be made differently from the same inputs. */
 		constexpr int64 WorkImageRevision = 1;
 		constexpr int64 PaintLayerRevision = 2;
-
-		/** The hash of an image file's bytes, or empty when it can't be read. */
-		FString ImageHash(const FString& Path)
-		{
-			TArray<uint8> Bytes;
-			return FFileHelper::LoadFileToArray(Bytes, *Path, FILEREAD_Silent) ? FSHA1::HashBuffer(Bytes.GetData(), Bytes.Num()).ToString() : FString();
-		}
 
 		/** The paint master a stage's paint layers are composed over, or null when it hasn't been made. */
 		UMaterialInterface* FindPaintMaster(const FString& Package)
@@ -64,7 +55,7 @@ namespace Musee::Studio
 			}
 			UTexture2D* Texture = FindOrCreateMadeAsset<UTexture2D>(Package);
 			FString Why;
-			if (!Musee::ArtMaking::ComposeWorkImage(Layer.ImagePath, *Texture, Why))
+			if (!Musee::ArtMaking::ComposeLayerImage(Layer, *Texture, Why))
 			{
 				Report.Packages.Add({Package, EMadeOutcome::Failed, Why});
 				return nullptr;
@@ -155,10 +146,12 @@ namespace Musee::Studio
 			}
 			const FString MasterPackage = Package.GetValue() == Musee::Matter::PaintMasterPackage() ? Options.PaintMaster : Package.GetValue();
 			UMaterialInterface* Master = FindPaintMaster(MasterPackage);
-			const FString Image = ImageHash(Layer.ImagePath);
+			// What the image is made from: the photograph's bytes, or a painted vessel's views and record (Art says which).
+			const FString Image = Musee::ArtMaking::LayerImageIdentity(Layer);
 			if (!Master || Image.IsEmpty())
 			{
-				Refuse(Stage, Layer, Master ? FString::Printf(TEXT("its image %s can't be read"), *Layer.ImagePath)
+				const FString Source = Layer.ImagePath.IsEmpty() ? FString::Printf(TEXT("the views of %s"), *Layer.Work) : Layer.ImagePath;
+				Refuse(Stage, Layer, Master ? FString::Printf(TEXT("its image (%s) can't be read"), *Source)
 					: FString::Printf(TEXT("its master %s has not been made (MuseeMatterMake)"), *MasterPackage), Report);
 				continue;
 			}
