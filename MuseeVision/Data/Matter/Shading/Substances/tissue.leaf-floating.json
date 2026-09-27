@@ -1,0 +1,32 @@
+{
+  "schema": "musee.matter.shading.substance/1",
+  "key": "tissue.leaf-floating",
+  "name": "A floating leaf (a water lily's pad)",
+  "family": "living",
+  "record": "Palette.json",
+  "master": "living",
+  "dielectric": {
+    "refractiveIndex": {
+      "value": 1.45,
+      "unit": "1",
+      "grade": "secondary",
+      "source": "Jacquemoud & Baret 1990, \"PROSPECT\", Remote Sensing of Environment 34:75-91 (the cuticle's wax, n about 1.4 to 1.5)"
+    }
+  },
+  "tissue": {
+    "roughness": {
+      "value": 0.25,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: living research.needed",
+      "note": "A first cuticle roughness; glossy pads are smoother, papillate petals matte."
+    },
+    "transmittanceRatio": {
+      "value": 0.5,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Woolley 1971 (thick leaves transmit less than they reflect)",
+      "note": "A first ratio of what the tissue passes to what it reflects; to be measured."
+    }
+  }
+}

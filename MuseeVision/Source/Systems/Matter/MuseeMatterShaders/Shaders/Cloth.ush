@@ -1,0 +1,50 @@
+// Cloth: woven and felted textiles, seen by their fibres: silk, mohair velvet, wool felt.
+//
+// A textile's look is its fibres'. Each fibre is a smooth dielectric cylinder that reflects a highlight at its surface
+// and scatters its dye's colour from within (Irawan & Marschner 2012, "Specular reflection from woven cloth", ACM
+// Transactions on Graphics 31(1):11, whose measured fits the substance records cite). At a room's distances the weave is
+// finer than the eye resolves: a silk's threads are a tenth of a millimetre. What shows is the yarn's unevenness, its
+// slubs drawn out along the warp, and the sheen of fibre ends that stand up from the cloth (a velvet's pile, a felt's
+// matted face), which scatter grazing light back toward the eye. Substrate carries that sheen as its fuzz layer, a
+// microfacet sheen lobe (Estevez & Kulla 2017, "Production Friendly Microfacet Sheen BRDF", Sony Imageworks).
+//
+// The cloth is cut and laid with its warp along the face's UV u, as a board's grain is (Form's mesh contract: UV0 in
+// metres, the tangent along u).
+
+#pragma once
+
+#include "/Project/Matter/Frame.ush"
+#include "/Project/Matter/Optics.ush"
+#include "/Project/Matter/History.ush"
+#include "/Project/Matter/Stone.ush"
+
+/** The cloth's face at FaceMeters (UV0, the warp along u): its tone and roughness varied over its yarn's slubs, which
+ *  its structure draws out along the warp, and the slope of its relief in the face's tangent axes. Seed is the piece's
+ *  seed. */
+FMatterStoneFace MatterClothFace(float2 FaceMeters, float Seed, FMatterStone Yarn, float Roughness)
+{
+	const float3x3 Axes = MatterAlongAxes(Yarn.BedAspect);
+	const uint PieceSeed = uint(max(Seed, 0.0));
+	const float3 Face = float3(FaceMeters, 0.0);
+	const float4 Relief = MatterStoneOctaves(Face, Axes, Yarn, 0u, PieceSeed);
+	const float4 Variation = MatterStoneOctaves(Face, Axes, Yarn, 1u, PieceSeed);
+	const float4 Slubs = MatterStoneOctaves(Face, Axes, Yarn, 2u, PieceSeed);
+
+	FMatterStoneFace Cloth;
+	Cloth.Tone = exp(Yarn.ToneSpread * Slubs.x);
+	Cloth.Roughness = saturate(Roughness * exp(Yarn.RoughnessSpread * Variation.x));
+	Cloth.ReliefSlope = (Yarn.ReliefMillimeters / MatterMillimetersPerMeter) * Relief.yzw;
+	return Cloth;
+}
+
+/** The fibres' face before its history: the dye's colour in the body, the fibre's interface over it. */
+FMatterSurface MatterClothSurface(float3 Albedo, float FibreRefractiveIndex, float FibreRoughness, float2 Slope)
+{
+	FMatterSurface Surface;
+	Surface.DiffuseAlbedo = saturate(Albedo);
+	Surface.F0 = MatterDielectricF0(FibreRefractiveIndex).xxx;
+	Surface.Roughness = FibreRoughness;
+	Surface.Haziness = 0.0;
+	Surface.Slope = Slope;
+	return Surface;
+}

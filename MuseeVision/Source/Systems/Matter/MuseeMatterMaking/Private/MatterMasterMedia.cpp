@@ -61,23 +61,23 @@ return MatterSpecularFromF0(Marked.F0.x);)");
 		return Call;
 	}
 
-	/** A painting's paint layer: the work's image laid across its canvas, under its varnish and the law. */
+	/** A painting's paint layer: the work's image laid across its canvas at the work's size, under its varnish and the
+	 *  law. The face's UV0 runs in metres from the image's top-left corner (Art's canvas). */
 	FMasterCall CanvasCall()
 	{
 		FMasterCall Call;
 		Call.Name = TEXT("Canvas");
 		Call.Includes = { LibraryPaint };
-		Call.Code = HistoryDeclarations(EPores::Open, TextureDepthMillimeters) + TEXT(R"(const float2 ImageCoordinates = MatterCanvasCoordinates(PiecePosition, BoundsMin, BoundsExtent);
+		Call.Code = HistoryDeclarations(EPores::Open, TextureDepthMillimeters) + TEXT(R"(const float2 ImageCoordinates = MatterCanvasCoordinates(FaceMeters, float2(ImageWidthMeters, ImageHeightMeters));
 const float3 ImageLinear = Texture2DSample(Image, ImageSampler, ImageCoordinates).rgb;
 const FMatterSurface Surface = MatterPaintSurface(ImageLinear, PaintWhiteAlbedo, RefractiveIndex, Roughness);
 )") + HistoryApplied() + TEXT(R"(SurfaceF0 = Marked.F0;
 SurfaceRoughness = Marked.Roughness;
 return Marked.DiffuseAlbedo;)");
 		Call.Inputs = {
-			Reads(TEXT("PiecePosition"), 3, MasterInput::LocalPosition, nullptr),
-			Reads(TEXT("BoundsMin"), 3, MasterInput::LocalBounds, TEXT("Min")),
-			Reads(TEXT("BoundsExtent"), 3, MasterInput::LocalBounds, TEXT("Extents")),
-			Reads(Image, 0), Reads(PaintWhiteAlbedo, 3), Reads(RefractiveIndex, 1), Reads(Roughness, 1),
+			Reads(TEXT("FaceMeters"), 2, MasterInput::TexCoord0, nullptr),
+			Reads(Image, 0), Reads(ImageWidthMeters, 1), Reads(ImageHeightMeters, 1),
+			Reads(PaintWhiteAlbedo, 3), Reads(RefractiveIndex, 1), Reads(Roughness, 1),
 		};
 		Call.Inputs.Append(HistoryPins(EPores::Open, TextureDepthMillimeters));
 		Call.ReturnComponents = 3;
@@ -131,7 +131,9 @@ FMasterRecipe PaintRecipe(UMaterialParameterCollection& Moment)
 	Settings.BlendMode = BLEND_Opaque;
 	Settings.bUsedWithNanite = true;
 	FMasterRecipe Recipe = StartRecipe(MasterName(FName(Masters::Paint)), Moment, Settings);
-	AddTexture(Recipe, Image, SubstanceGroup, EngineDefaultTexture, TEXT("The work's own image, a photograph of the painting, which Art gives each work's instance"));
+	AddTexture(Recipe, Image, WorkGroup, EngineDefaultTexture, TEXT("The work's own image, a photograph of the painting, which each work's paint instance carries"));
+	AddScalar(Recipe, ImageWidthMeters, WorkGroup, Unset, TEXT("m"), TEXT("The work's width, which its image spans, which each work's paint instance carries"));
+	AddScalar(Recipe, ImageHeightMeters, WorkGroup, Unset, TEXT("m"), TEXT("The work's height, which its image spans, which each work's paint instance carries"));
 	AddColour(Recipe, PaintWhiteAlbedo, SubstanceGroup, NeutralGrey, TEXT("1"), TEXT("The reflectance the image's white stands for: the painting's white, from the paint's record"));
 	AddDielectricParameters(Recipe);
 	Recipe.Calls = { CanvasCall() };

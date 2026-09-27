@@ -1,0 +1,111 @@
+{
+  "schema": "musee.matter.shading.substance/1",
+  "key": "silk.cabinet-green",
+  "name": "Silk, dyed cabinet green",
+  "family": "accent",
+  "record": "Substances/silk.json",
+  "master": "cloth",
+  "accentOf": "oak",
+  "dielectric": {
+    "diffuseAlbedo": {
+      "value": [
+        0.0284,
+        0.0423,
+        0.0331
+      ],
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "unit": "1",
+      "grade": "design",
+      "source": "Substances/silk.json: designColours.manetCabinet",
+      "note": "the Manet cabinet: cabinet green"
+    },
+    "refractiveIndex": {
+      "value": 1.54,
+      "unit": "1",
+      "grade": "derived",
+      "source": "Substances/silk.json: optics.refractiveIndex (fibroin 1.5307 at 632.8 nm, 1.5511 at 473 nm)",
+      "derivation": "the index near 550 nm between the two"
+    },
+    "porosity": {
+      "value": 0.4,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Substances/silk.json",
+      "note": "The void share of a closely woven silk; no measured porosity was read."
+    },
+    "wettingDepth": {
+      "value": 0.2,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Substances/silk.json",
+      "note": "A silk wall-hanging's thickness."
+    }
+  },
+  "structure": {
+    "grain": {
+      "value": 0.15,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Substances/silk.json",
+      "note": "The finest structure the cloth shows: its thread or fibre tufts."
+    },
+    "bed": {
+      "value": 30.0,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Substances/silk.json",
+      "note": "The length of the yarn's slubs, the coarsest unevenness the cloth shows."
+    },
+    "bedAspect": {
+      "value": 8.0,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Substances/silk.json",
+      "note": "Slubs run along the thread: how much longer than wide."
+    },
+    "hurst": {
+      "value": 0.6,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Substances/silk.json",
+      "note": "A first self-affinity for a yarn's unevenness."
+    },
+    "toneSpread": {
+      "value": 0.04,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Substances/silk.json",
+      "note": "A first half-range of the dye's tone across the cloth."
+    },
+    "roughnessSpread": {
+      "value": 0.1,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Substances/silk.json",
+      "note": "A first half-range across the cloth."
+    }
+  },
+  "fibre": {
+    "roughness": {
+      "value": 0.3,
+      "unit": "1",
+      "grade": "derived",
+      "source": "Substances/silk.json: optics.clothModelCrepeDeChine.flatThread.gammaSurface (5 deg, measured; Irawan & Marschner 2012)",
+      "derivation": "sqrt(tan 5 deg): the Slab roughness whose GGX width is the fitted surface spread"
+    },
+    "sheen": {
+      "value": 0.3,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Substances/silk.json",
+      "note": "A smooth filament silk has few standing fibre ends; a first weight."
+    },
+    "sheenRoughness": {
+      "value": 0.5,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Substances/silk.json",
+      "note": "A first spread of the sheen."
+    }
+  }
+}

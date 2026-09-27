@@ -1,0 +1,87 @@
+{
+  "schema": "musee.matter.shading.substance/1",
+  "key": "gesso",
+  "name": "Gesso (chalk in animal glue), the ground of water gilding",
+  "family": "white",
+  "record": "Workings/gilt.json",
+  "master": "white",
+  "dielectric": {
+    "diffuseAlbedo": {
+      "value": [
+        0.88,
+        0.87,
+        0.84
+      ],
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Workings/gilt.json: methods (the gesso coats under water gilding)",
+      "note": "Whiting bound in rabbit-skin glue is a bright chalk white; no measured reflectance was read."
+    },
+    "refractiveIndex": {
+      "value": 1.6003,
+      "unit": "1",
+      "grade": "derived",
+      "source": "Substances/cream-marble.json: optics.specularF0 (calcite)",
+      "derivation": "chalk is calcite: the same index"
+    },
+    "porosity": {
+      "value": 0.4,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Workings/gilt.json: methods[0].layers[0].glueToWater (a lean glue)",
+      "note": "A chalk ground in a lean glue is open; no measured porosity was read."
+    },
+    "wettingDepth": {
+      "value": 0.5,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Workings/gilt.json: methods[0].layers[0].coats (6 to 12 coats)",
+      "note": "The gesso's own thickness, about half a millimetre."
+    }
+  },
+  "structure": {
+    "grain": {
+      "value": 0.05,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Workings/gilt.json",
+      "note": "Whiting is a powder of a few micrometres; its recut face is finer than the eye resolves."
+    },
+    "bed": {
+      "value": 50,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Workings/gilt.json",
+      "note": "The reach of the recutting tools."
+    },
+    "bedAspect": {
+      "value": 1.0,
+      "unit": "1",
+      "grade": "derived",
+      "source": "A laid ground has no bedding",
+      "derivation": "unbedded"
+    },
+    "hurst": {
+      "value": 0.7,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Candela et al. 2012 (cited in Stone.ush)",
+      "note": "As the plasters."
+    },
+    "toneSpread": {
+      "value": 0.02,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Workings/gilt.json",
+      "note": "An even ground."
+    },
+    "roughnessSpread": {
+      "value": 0.1,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Workings/gilt.json",
+      "note": "A first half-range across a recut face."
+    }
+  }
+}

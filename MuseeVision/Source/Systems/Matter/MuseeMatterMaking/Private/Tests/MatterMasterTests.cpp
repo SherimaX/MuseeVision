@@ -12,7 +12,13 @@
 #include "MatterMasterCompile.h"
 #include "MatterMasterGraph.h"
 #include "MatterMasterRecipe.h"
-#include "MatterStoneProbe.h"
+#include "MatterMake.h"
+#include "MatterMasters.h"
+#include "MatterMomentCollection.h"
+#include "MatterNames.h"
+#include "Misc/PackageName.h"
+#include "Tests/MatterTestMasters.h"
+#include "Materials/MaterialParameterCollection.h"
 #include "Misc/FileHelper.h"
 #include "UObject/Package.h"
 
@@ -30,6 +36,32 @@ namespace Musee::Matter::Tests
 		TArray<uint8> Bytes;
 		FFileHelper::LoadFileToArray(Bytes, *Filename);
 		return Bytes;
+	}
+
+	/** The stone master's recipe over a museum Moment made in memory, for what needs only the recipe. */
+	FMasterRecipe StoneMaster()
+	{
+		return StoneRecipe(*TestMasters::TransientMoment());
+	}
+
+	/** The stone master's recipe over the museum Moment as the make step saves it (a saved master can read only a
+	 *  saved collection): the Moment already made, or made now. An unmade Moment is reported on Test and gives an empty
+	 *  recipe, which does not validate. */
+	FMasterRecipe SavedStoneMaster(FAutomationTestBase& Test)
+	{
+		UMaterialParameterCollection* Moment = FPackageName::DoesPackageExist(MomentCollectionPackage)
+			? LoadObject<UMaterialParameterCollection>(nullptr, *ObjectPathOf(MomentCollectionPackage))
+			: nullptr;
+		if (!Moment)
+		{
+			FMatterMakeReport Report;
+			Moment = MakeMomentCollection(Report);
+			for (const FString& Problem : Report.Problems)
+			{
+				Test.AddError(Problem);
+			}
+		}
+		return Moment ? StoneRecipe(*Moment) : FMasterRecipe();
 	}
 
 	/** A recipe whose one call reaches every function of Matter's shading library, so that compiling it compiles the
@@ -52,7 +84,8 @@ namespace Musee::Matter::Tests
 		Call.Name = TEXT("Library");
 		Call.Includes = { TEXT("/Project/Matter/Frame.ush"), TEXT("/Project/Matter/Optics.ush"), TEXT("/Project/Matter/History.ush"),
 			TEXT("/Project/Matter/Stone.ush"), TEXT("/Project/Matter/Metal.ush"), TEXT("/Project/Matter/Glass.ush"),
-			TEXT("/Project/Matter/White.ush"), TEXT("/Project/Matter/Medium.ush"), TEXT("/Project/Matter/Paint.ush") };
+			TEXT("/Project/Matter/White.ush"), TEXT("/Project/Matter/Medium.ush"), TEXT("/Project/Matter/Paint.ush"),
+			TEXT("/Project/Matter/Wood.ush"), TEXT("/Project/Matter/Cloth.ush"), TEXT("/Project/Matter/Sheet.ush"), TEXT("/Project/Matter/Living.ush") };
 		Call.Code = TEXT(R"(const float S = Probe.x;
 FMatterSurface Surface;
 Surface.DiffuseAlbedo = Probe;
@@ -116,7 +149,22 @@ const FMatterSurface Metal = MatterFilmed(MatterBareMetal(Probe, S), Probe, S, S
 const FMatterSurface Moistened = MatterMomentHistory(Metal, Moment, Open, Response, S);
 const FMatterStoneFace White = MatterWhiteFace(Probe, S, MatterWhiteStructure(S, S, S, S, S, S), S);
 const FMatterSurface Still = MatterStillSurface(S, S);
-const FMatterSurface Paint = MatterPaintSurface(Probe, Probe, S, MatterCanvasCoordinates(Probe, Probe, Probe).x);
+const FMatterSurface Paint = MatterPaintSurface(Probe, Probe, S, MatterCanvasCoordinates(Probe.xy, Probe.yz).x);
+FMatterWood Wood;
+Wood.LatewoodFraction = S;
+Wood.LatewoodTone = S;
+Wood.RayFleck = S;
+Wood.RayTone = S;
+Wood.RayLengthMillimeters = S;
+Wood.RayWidthMillimeters = S;
+const FMatterStoneFace Board = MatterWoodFace(Probe.xy, S, Stone, Wood, S);
+const FMatterStoneFace Cloth = MatterClothFace(Probe.xy, S, Stone, S);
+const FMatterSurface Fibres = MatterClothSurface(Probe, S, S, Probe.xy);
+const FMatterSurface Tissue = MatterTissueSurface(Probe, S, S);
+const float3 Crafts = Board.ReliefSlope + Board.Tone + Cloth.ReliefSlope + Fibres.DiffuseAlbedo + Tissue.F0
+	+ MatterFinishedWoodAlbedo(Probe, S, S) + MatterFinishedWoodF0(S, S, S) + MatterLatewood(S, S) + MatterRayFleck(Probe.xy, Wood, S)
+	+ MatterWrapMeanFreePathCentimeters(MatterTissueTransmittance(Probe, S)) + MatterSheetSurface(Probe, S, S).F0
+	+ mul(MatterAlongAxes(S), Probe);
 const FMatterSurface Glazing = MatterClearPane(S, S);
 const float3 Library = Moistened.F0 + White.ReliefSlope + Still.F0 + Paint.DiffuseAlbedo + Glazing.F0
 	+ MatterFilmedEdgeTint(MatterEdgeTintFromF82(Probe, Probe), MatterLeafCover(S))
@@ -127,7 +175,7 @@ return Library + Patinated.DiffuseAlbedo + Patinated.F0 + MatterSlopeNormal(Pati
 	+ MatterConductorEdgeTint(Probe, Probe) + MatterStrokeTangent(Probe, Place.NormalWorld) + Lobe.xyx
 	+ Face.Tone + Face.Roughness + Face.ReliefSlope
 	+ Pane.Transmittance + Pane.Reflectance + MatterPaneEdgeColor(Probe, S)
-	+ MatterPerpendicular(Place.NormalWorld) + MatterDielectricF0(S) + MatterInternalDiffuseReflectance(S);)");
+	+ MatterPerpendicular(Place.NormalWorld) + MatterDielectricF0(S) + MatterInternalDiffuseReflectance(S) + Crafts;)");
 		Call.Inputs = { FMasterPin{ TEXT("Probe"), 3, FMasterSource{ TEXT("Probe"), NAME_None } } };
 		Call.ReturnComponents = 3;
 
@@ -142,28 +190,28 @@ using namespace Musee::Matter::Tests;
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FMatterRecipeValidates, "Musee.Matter.RecipeValidates", TestFlags)
 bool FMatterRecipeValidates::RunTest(const FString& Parameters)
 {
-	for (const FString& Problem : Validate(StoneProbeRecipe()))
+	for (const FString& Problem : Validate(StoneMaster()))
 	{
-		AddError(FString::Printf(TEXT("The stone probe's recipe: %s"), *Problem));
+		AddError(FString::Printf(TEXT("The stone master's recipe: %s"), *Problem));
 	}
 	for (const FString& Problem : Validate(LibraryProofRecipe()))
 	{
 		AddError(FString::Printf(TEXT("The library proof's recipe: %s"), *Problem));
 	}
 
-	FMasterRecipe WithNumber = StoneProbeRecipe();
+	FMasterRecipe WithNumber = StoneMaster();
 	WithNumber.Calls[0].Code.ReplaceInline(TEXT("return Face.Tone;"), TEXT("return Face.Tone * 0.5;"));
 	TestTrue(TEXT("A number written in a call is refused"), AnyContains(Validate(WithNumber), TEXT("the number 0.5")));
 
-	FMasterRecipe Unresolved = StoneProbeRecipe();
+	FMasterRecipe Unresolved = StoneMaster();
 	Unresolved.Slab.F0 = FMasterSource{ TEXT("History"), TEXT("Nowhere") };
 	TestTrue(TEXT("A source the recipe does not define is refused"), AnyContains(Validate(Unresolved), TEXT("does not output")));
 
-	FMasterRecipe Outside = StoneProbeRecipe();
+	FMasterRecipe Outside = StoneMaster();
 	Outside.Calls[0].Includes.Add(TEXT("/Engine/Private/Common.ush"));
 	TestTrue(TEXT("An include outside Matter's library is refused"), AnyContains(Validate(Outside), TEXT("not in Matter's library")));
 
-	FMasterRecipe Twice = StoneProbeRecipe();
+	FMasterRecipe Twice = StoneMaster();
 	const FMasterParameter Repeated = Twice.Parameters[0];
 	Twice.Parameters.Add(Repeated);
 	TestTrue(TEXT("A name used twice is refused"), AnyContains(Validate(Twice), TEXT("used twice")));
@@ -173,18 +221,20 @@ bool FMatterRecipeValidates::RunTest(const FString& Parameters)
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FMatterIdentityFollowsRecipe, "Musee.Matter.IdentityFollowsRecipe", TestFlags)
 bool FMatterIdentityFollowsRecipe::RunTest(const FString& Parameters)
 {
-	const FMasterIdentity Identity = IdentityOf(StoneProbeRecipe());
-	TestTrue(TEXT("The same recipe has the same identity"), Identity.InputHash == IdentityOf(StoneProbeRecipe()).InputHash);
+	// One Moment for every recipe compared: the collection is part of a master's identity.
+	UMaterialParameterCollection& Moment = *TestMasters::TransientMoment();
+	const FMasterIdentity Identity = IdentityOf(StoneRecipe(Moment));
+	TestTrue(TEXT("The same recipe has the same identity"), Identity.InputHash == IdentityOf(StoneRecipe(Moment)).InputHash);
 
-	FMasterRecipe OtherDefault = StoneProbeRecipe();
+	FMasterRecipe OtherDefault = StoneRecipe(Moment);
 	OtherDefault.Parameters[0].Default.R += 0.01f;
 	TestTrue(TEXT("A changed default changes the identity"), IdentityOf(OtherDefault).InputHash != Identity.InputHash);
 
-	FMasterRecipe OtherCode = StoneProbeRecipe();
+	FMasterRecipe OtherCode = StoneRecipe(Moment);
 	OtherCode.Calls[1].Code += TEXT("\n");
 	TestTrue(TEXT("Changed code changes the identity"), IdentityOf(OtherCode).InputHash != Identity.InputHash);
 
-	FMasterRecipe WindowsLines = StoneProbeRecipe();
+	FMasterRecipe WindowsLines = StoneRecipe(Moment);
 	WindowsLines.Calls[1].Code.ReplaceInline(TEXT("\n"), TEXT("\r\n"));
 	TestTrue(TEXT("Line endings do not change the identity"), IdentityOf(WindowsLines).InputHash == Identity.InputHash);
 
@@ -196,7 +246,7 @@ bool FMatterIdentityFollowsRecipe::RunTest(const FString& Parameters)
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FMatterMasterBuilds, "Musee.Matter.MasterBuilds", TestFlags)
 bool FMatterMasterBuilds::RunTest(const FString& Parameters)
 {
-	const FMasterRecipe Recipe = StoneProbeRecipe();
+	const FMasterRecipe Recipe = SavedStoneMaster(*this);
 	const FMasterMade Made = MakeMasterAsset(Recipe);
 	for (const FString& Problem : Made.Problems)
 	{
@@ -242,7 +292,7 @@ bool FMatterMasterBuilds::RunTest(const FString& Parameters)
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FMatterMasterCompiles, "Musee.Matter.MasterCompiles", TestFlags)
 bool FMatterMasterCompiles::RunTest(const FString& Parameters)
 {
-	const FMasterMade Made = MakeMasterAsset(StoneProbeRecipe());
+	const FMasterMade Made = MakeMasterAsset(SavedStoneMaster(*this));
 	for (const FString& Problem : Made.Problems)
 	{
 		AddError(Problem);
@@ -257,16 +307,16 @@ bool FMatterMasterCompiles::RunTest(const FString& Parameters)
 	{
 		AddError(Error);
 	}
-	TestTrue(TEXT("The stone probe compiles for PCD3D_SM6"), Compile.bCompiled);
+	TestTrue(TEXT("The stone master compiles for PCD3D_SM6"), Compile.bCompiled);
 	TestTrue(TEXT("Its shader map holds shaders"), Compile.ShaderCount > 0);
-	AddInfo(FString::Printf(TEXT("M_Matter_Stone_Probe: %u shaders for PCD3D_SM6 in %.1f s."), Compile.ShaderCount, FPlatformTime::Seconds() - Start));
+	AddInfo(FString::Printf(TEXT("M_Matter_Stone: %u shaders for PCD3D_SM6 in %.1f s."), Compile.ShaderCount, FPlatformTime::Seconds() - Start));
 	return true;
 }
 
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FMatterMasterReproducible, "Musee.Matter.MasterReproducible", TestFlags)
 bool FMatterMasterReproducible::RunTest(const FString& Parameters)
 {
-	const FMasterRecipe Recipe = StoneProbeRecipe();
+	const FMasterRecipe Recipe = SavedStoneMaster(*this);
 	const FGuid Expected = IdentityOf(Recipe).StateId();
 
 	const FMasterMade First = MakeMasterAsset(Recipe);

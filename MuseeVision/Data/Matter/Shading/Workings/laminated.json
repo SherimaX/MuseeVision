@@ -1,0 +1,46 @@
+{
+  "schema": "musee.matter.shading.working/1",
+  "key": "laminated",
+  "name": "Laminated (6 / 0.76 PVB / 6)",
+  "record": "Workings/laminated.json",
+  "kind": "face",
+  "roughness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Workings/laminated.json: laminate.visibleReflectance (0.08, two clear faces)"
+  },
+  "roughnessAcross": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "derived",
+    "source": "Workings/laminated.json: laminate.visibleReflectance (0.08, two clear faces)",
+    "derivation": "a face with no grain: equal to the roughness along"
+  },
+  "haziness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Workings/laminated.json: laminate.visibleReflectance (0.08, two clear faces)",
+    "note": "One specular lobe unless noted."
+  },
+  "textureDepth": {
+    "value": 0.001,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Workings/laminated.json"
+  },
+  "relief": {
+    "value": 0.0,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Workings/laminated.json"
+  },
+  "paneThickness": {
+    "value": 12.0,
+    "unit": "mm",
+    "grade": "derived",
+    "source": "Workings/laminated.json: interlayer.thicknesses (0.76 mm)",
+    "note": "Two 6 mm leaves; the interlayer absorbs nothing the museum can see."
+  }
+}

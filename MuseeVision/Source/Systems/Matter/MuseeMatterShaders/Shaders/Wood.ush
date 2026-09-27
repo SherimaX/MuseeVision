@@ -1,0 +1,93 @@
+// Wood: oak as it is sawn, finished and laid.
+//
+// A hardwood is a bundle of long fibres and vessels laid down in yearly growth rings. In a ring-porous oak each ring
+// opens with earlywood, a band of large vessels that reads pale and open-grained, and closes with dense, darker
+// latewood; the rings run along the grain. Rays, ribbons of cells from the pith outward, cross the rings; on a
+// quarter-sawn face (the rings standing across it) they are cut lengthwise and show as the flakes of ray fleck, paler
+// and glossier than the wood around them (Hoadley 2000, "Understanding Wood", Taunton Press; Wiedenhoeft 2010,
+// "Structure and Function of Wood", USDA Wood Handbook, chapter 3). A finish soaks oil or wax into the face: the medium
+// fills the cells' surface layer, so less of the light scattered inside is turned back at the face, and the wood
+// darkens and deepens as a wet stone does (Lekner & Dick 1988; History.ush, MatterWetAlbedo), while the finish's own
+// interface gives the gloss. Fuming with ammonia darkens the oak's tannins through its surface.
+//
+// Every board is laid with its grain along the face's UV u (Form's mesh contract: UV0 in metres, the tangent along u),
+// so a parquet's frame members, lattice strips and infills each show their own grain, as a joiner lays them.
+
+#pragma once
+
+#include "/Project/Matter/Frame.ush"
+#include "/Project/Matter/Optics.ush"
+#include "/Project/Matter/Stone.ush"
+
+/** A wood's figure, from its record (FMatterWood). */
+struct FMatterWood
+{
+	float LatewoodFraction;       // the fraction of each ring that is latewood
+	float LatewoodTone;           // the latewood's albedo as a fraction of the earlywood's
+	float RayFleck;               // the fraction of a quarter-sawn face the rays cover
+	float RayTone;                // the rays' albedo as a fraction of the wood around them
+	float RayLengthMillimeters;   // a fleck's length along the grain
+	float RayWidthMillimeters;    // a fleck's width across it
+};
+
+/** How dense the wood is at RingPosition (in rings, across the grain): latewood forms gradually through the summer,
+ *  over the ring's last LatewoodFraction, and a ring ends abruptly where the next spring's earlywood starts. */
+float MatterLatewood(float RingPosition, float LatewoodFraction)
+{
+	const float Start = 1.0 - saturate(LatewoodFraction);
+	return smoothstep(Start, 1.0, frac(RingPosition));
+}
+
+/** Whether a point lies in a ray fleck: gradient noise at the fleck's size, its value (bounded to [-1, 1], Stone.ush)
+ *  taken as spread evenly over that range, stands above the level that leaves RayFleck of the face covered. */
+float MatterRayFleck(float2 BoardMeters, FMatterWood Wood, uint Seed)
+{
+	const float2 Size = max(float2(Wood.RayLengthMillimeters, Wood.RayWidthMillimeters), MatterTiny);
+	const float3 Cells = float3(BoardMeters * MatterMillimetersPerMeter / Size, 0.0);
+	const uint3 Key = MatterPcg3d(uint3(Seed, 3u, 0u));
+	const float Noise = MatterGradientNoise(Cells + float3(Key) * MatterHashToUnit, Key).x;
+	return step(1.0 - 2.0 * saturate(Wood.RayFleck), Noise);
+}
+
+/** A quarter-sawn board's face at BoardMeters (UV0, the grain along u): its tone from its rings, rays and fibre, its
+ *  roughness, and the slope of its open pores in the face's tangent axes. Fibre is the substance's structure: its
+ *  pores (grain) up to its ring width (bed), drawn out along the grain by its aspect. Seed is the piece's seed. */
+FMatterStoneFace MatterWoodFace(float2 BoardMeters, float Seed, FMatterStone Fibre, FMatterWood Wood, float Roughness)
+{
+	const float3x3 Axes = MatterAlongAxes(Fibre.BedAspect);
+	const uint PieceSeed = uint(max(Seed, 0.0));
+	const float3 Board = float3(BoardMeters, 0.0);
+	const float4 Pores = MatterStoneOctaves(Board, Axes, Fibre, 0u, PieceSeed);
+	const float4 Variation = MatterStoneOctaves(Board, Axes, Fibre, 1u, PieceSeed);
+	const float4 Wander = MatterStoneOctaves(Board, Axes, Fibre, 2u, PieceSeed);
+
+	// The rings run along the grain, a ring width apart across it, wandering by up to a ring as the tree grew.
+	const float RingMillimeters = max(Fibre.BedMillimeters, MatterTiny);
+	const float Ring = BoardMeters.y * MatterMillimetersPerMeter / RingMillimeters + Wander.x;
+	const float Latewood = MatterLatewood(Ring, Wood.LatewoodFraction);
+	const float Ray = MatterRayFleck(BoardMeters, Wood, PieceSeed);
+
+	FMatterStoneFace Face;
+	Face.Tone = exp(Fibre.ToneSpread * Variation.x) * lerp(1.0, Wood.LatewoodTone, Latewood) * lerp(1.0, Wood.RayTone, Ray);
+	Face.Roughness = saturate(Roughness * exp(Fibre.RoughnessSpread * Variation.y));
+	// The earlywood's vessels are open pores: the relief is theirs, and the dense latewood closes them.
+	Face.ReliefSlope = (1.0 - Latewood) * (Fibre.ReliefMillimeters / MatterMillimetersPerMeter) * Pores.yzw;
+	return Face;
+}
+
+/** A wood's albedo under a finish of index FinishIndex filling the fraction Cover of its face: the finish takes the
+ *  place of the air in the surface's cells, and diffuse light inside turns back at the finish's surface with the
+ *  probability Ri (Optics.ush), costing a bounce off the wood each time (Lekner & Dick 1988, as MatterWetAlbedo). */
+float3 MatterFinishedWoodAlbedo(float3 Albedo, float FinishIndex, float Cover)
+{
+	const float Ri = MatterInternalDiffuseReflectance(FinishIndex);
+	const float3 Soaked = (1.0 - Ri) * Albedo / (1.0 - Ri * Albedo);
+	return lerp(Albedo, Soaked, saturate(Cover));
+}
+
+/** The face's reflectance at normal incidence: the finish's interface where it fills the face, the cell wall's where
+ *  it does not. */
+float3 MatterFinishedWoodF0(float CellWallIndex, float FinishIndex, float Cover)
+{
+	return lerp(MatterDielectricF0(CellWallIndex), MatterDielectricF0(FinishIndex), saturate(Cover)).xxx;
+}

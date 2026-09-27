@@ -1,0 +1,39 @@
+{
+  "schema": "musee.matter.shading.working/1",
+  "key": "burnished",
+  "name": "Burnished lime (marmorino)",
+  "record": "Workings/trowelled.json",
+  "kind": "face",
+  "roughness": {
+    "value": 0.35,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Workings/trowelled.json: unverified (GGX alpha 0.3 to 0.6); a marmorino is burnished with a steel trowel to a soft sheen"
+  },
+  "roughnessAcross": {
+    "value": 0.35,
+    "unit": "1",
+    "grade": "derived",
+    "source": "Workings/trowelled.json: unverified (GGX alpha 0.3 to 0.6); a marmorino is burnished with a steel trowel to a soft sheen",
+    "derivation": "a face with no grain: equal to the roughness along"
+  },
+  "haziness": {
+    "value": 0.3,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Workings/trowelled.json: unverified (GGX alpha 0.3 to 0.6); a marmorino is burnished with a steel trowel to a soft sheen",
+    "note": "A burnished face shows a wide second lobe about its first."
+  },
+  "textureDepth": {
+    "value": 0.02,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Workings/trowelled.json"
+  },
+  "relief": {
+    "value": 0.02,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Workings/trowelled.json"
+  }
+}

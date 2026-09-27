@@ -1,0 +1,39 @@
+{
+  "schema": "musee.matter.shading.working/1",
+  "key": "sawn",
+  "name": "Sawn (diamond saw, as cut)",
+  "record": "Workings/sawn.vein-cut.json",
+  "kind": "face",
+  "roughness": {
+    "value": 0.8,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Workings/sawn.vein-cut.json: a saw-cut face is matte (no gloss measured)"
+  },
+  "roughnessAcross": {
+    "value": 0.8,
+    "unit": "1",
+    "grade": "derived",
+    "source": "Workings/sawn.vein-cut.json: a saw-cut face is matte (no gloss measured)",
+    "derivation": "a face with no grain: equal to the roughness along"
+  },
+  "haziness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Workings/sawn.vein-cut.json: a saw-cut face is matte (no gloss measured)",
+    "note": "One specular lobe unless noted."
+  },
+  "textureDepth": {
+    "value": 0.24,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Workings/sawn.vein-cut.json: surface.arealRoughness (Sa 0.24 mm, measured)"
+  },
+  "relief": {
+    "value": 0.24,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Workings/sawn.vein-cut.json: surface.arealRoughness (Sa 0.24 mm)"
+  }
+}

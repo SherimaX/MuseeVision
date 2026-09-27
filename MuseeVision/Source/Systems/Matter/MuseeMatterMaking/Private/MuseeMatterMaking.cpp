@@ -35,7 +35,7 @@ namespace
 }
 }
 
-/** Matter's making twin: its masters, its instance filler and its make step. */
+/** Matter's making twin: its masters, its instance composer and its make step. */
 class FMuseeMatterMakingModule : public IModuleInterface
 {
 public:

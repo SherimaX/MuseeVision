@@ -53,7 +53,8 @@ namespace
 	{
 		const FMasterSettings& S = Recipe.Settings;
 		Text << TEXT("blend ") << static_cast<int32>(S.BlendMode) << TEXT(" nanite ") << (S.bUsedWithNanite ? 1 : 0)
-			<< TEXT(" surface-translucency ") << (S.bSurfaceTranslucency ? 1 : 0) << TEXT("\n");
+			<< TEXT(" surface-translucency ") << (S.bSurfaceTranslucency ? 1 : 0) << TEXT(" two-sided ") << (S.bTwoSided ? 1 : 0)
+			<< TEXT("\n");
 		Text << TEXT("moment ") << (Recipe.Moment ? Recipe.Moment->GetPathName() : FString(TEXT("-"))) << TEXT("\n");
 	}
 
@@ -199,6 +200,8 @@ namespace
 		FNodeTable Table;
 		Table.Plain.Add(FName(MasterInput::LocalPosition));
 		Table.Plain.Add(FName(MasterInput::VertexNormalWorld));
+		Table.Plain.Add(FName(MasterInput::TexCoord0));
+		Table.Plain.Add(FName(MasterInput::VertexColor));
 		Table.MultiOutputs.Add(FName(MasterInput::LocalBounds), TSet<FName>(NamesOf(BoundsOutputs)));
 		for (const FMasterParameter& Parameter : Recipe.Parameters)
 		{
@@ -388,6 +391,7 @@ TArray<TPair<const TCHAR*, const FMasterSource*>> SlabPins(const FMasterSlab& Sl
 		{ TEXT("DiffuseAlbedo"), &Slab.DiffuseAlbedo }, { TEXT("F0"), &Slab.F0 }, { TEXT("F90"), &Slab.F90 },
 		{ TEXT("Roughness"), &Slab.Roughness }, { TEXT("Anisotropy"), &Slab.Anisotropy }, { TEXT("Haziness"), &Slab.Haziness },
 		{ TEXT("Normal"), &Slab.Normal }, { TEXT("Tangent"), &Slab.Tangent }, { TEXT("SSSMFP"), &Slab.SSSMFP },
+		{ TEXT("FuzzAmount"), &Slab.FuzzAmount }, { TEXT("FuzzColor"), &Slab.FuzzColor }, { TEXT("FuzzRoughness"), &Slab.FuzzRoughness },
 	};
 }
 

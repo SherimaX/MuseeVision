@@ -11,8 +11,8 @@
 
 /**
  * How a substance was worked, as Matter's builders read it: the face a craft leaves (honed, trowelled, brushed, cast),
- * a layer it lays over another working (gilt), a film it grows (patinated), a make-up (a laminated pane) or a treatment
- * (a pond's dye).
+ * a layer it lays over another working (gilt), a film it grows (patinated) or lays (a paint over steel, an oil or a wax
+ * soaked into wood), a make-up (a laminated pane) or a treatment (a pond's dye, the fuming that darkens oak).
  *
  * The research record at `Data/Matter/Workings/<key>.json` is the evidence; this typed record, at
  * `Data/Matter/Shading/Workings/<key>.json`, draws from it the numbers a master reads, each with its source.
@@ -69,7 +69,8 @@ struct MUSEEMATTER_API FMatterWorking
 	UPROPERTY()
 	TMap<FString, FMuseeKey> Hosts;
 
-	/** A film the working lays on a metal (a statuary patina). */
+	/** A film the working lays: a patina or a paint on a metal; on wood, the oil or wax the finish soaks into it (its
+	 *  index and how much of the face it fills). */
 	UPROPERTY()
 	FMatterFilm Film;
 
@@ -80,4 +81,8 @@ struct MUSEEMATTER_API FMatterWorking
 	/** What a treatment adds to a medium: a dye's absorption. */
 	UPROPERTY()
 	FMatterMedium Medium;
+
+	/** What a treatment leaves in a body's own colour, as a factor on its albedo (unit 1): the darkening of fumed oak. */
+	UPROPERTY()
+	FMatterTriple Stain;
 };

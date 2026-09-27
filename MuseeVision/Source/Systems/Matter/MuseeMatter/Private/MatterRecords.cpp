@@ -50,7 +50,13 @@ TValueOrError<FMatterWorking, FString> ReadWorking(const FMuseeKey& Key)
 
 TValueOrError<FMatterHistory, FString> ReadHistory(const FMuseeKey& Master, const FMuseeKey& Regime)
 {
-	return ReadKeyed<FMatterHistory>(HistoriesFolder, Master.Child(Regime.ToString()));
+	if (Master.IsNone() || Regime.IsNone())
+	{
+		return MakeError(FString::Printf(TEXT("%s: a history is read by a master and a regime"), HistoriesFolder));
+	}
+	// A regime may itself be scoped (aged.patina), so the key is joined whole rather than as one child segment.
+	const TOptional<FMuseeKey> Key = FMuseeKey::Parse(Master.ToString() + TEXT(".") + Regime.ToString());
+	return ReadKeyed<FMatterHistory>(HistoriesFolder, Key.Get(FMuseeKey()));
 }
 
 TValueOrError<FMatterFinishSchedule, FString> ReadFinishSchedule(const FString& ScheduleFolder)

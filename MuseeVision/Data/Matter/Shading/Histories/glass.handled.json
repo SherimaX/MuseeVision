@@ -1,0 +1,79 @@
+{
+  "schema": "musee.matter.shading.history/1",
+  "key": "glass.handled",
+  "name": "Handled between cleanings",
+  "mechanisms": [
+    "glass.soiling",
+    "glass.cleaning-wear"
+  ],
+  "age": {
+    "value": 1.0,
+    "unit": "year",
+    "grade": "design",
+    "source": "Histories/glass.cleaning-wear.json (a year between cleanings)"
+  },
+  "passagesPerYear": {
+    "value": 20000.0,
+    "unit": "1/year",
+    "grade": "design",
+    "source": "a vitrine or a stele touched by visitors",
+    "note": "Site's traffic field will give each point its own."
+  },
+  "skyExposure": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "design",
+    "source": "an interior face"
+  },
+  "keptWet": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "design",
+    "source": "the face stands clear of water"
+  },
+  "deposition": {
+    "value": 0.02,
+    "unit": "1/year",
+    "grade": "unverified",
+    "source": "Histories/glass.soiling.json (fingermarks on a vitrine)",
+    "note": "A first rate for the marks of hands."
+  },
+  "washRemoval": {
+    "value": 0.0,
+    "unit": "1/year",
+    "grade": "derived",
+    "source": "an interior face",
+    "derivation": "no rain wash reaches it"
+  },
+  "soilAlbedo": {
+    "value": [
+      0.35,
+      0.33,
+      0.3
+    ],
+    "space": "linear Rec.709 (sRGB primaries), D65 white",
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Histories/glass.soiling.json (skin grease)",
+    "note": "A pale smear."
+  },
+  "wornRoughness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "a glass face does not wear"
+  },
+  "wornHaziness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "derived",
+    "source": "a worn face",
+    "derivation": "no second lobe"
+  },
+  "wearPassages": {
+    "value": 0.0,
+    "unit": "count",
+    "grade": "derived",
+    "source": "a glass face does not wear"
+  }
+}

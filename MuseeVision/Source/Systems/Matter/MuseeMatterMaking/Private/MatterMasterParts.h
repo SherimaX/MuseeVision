@@ -19,12 +19,17 @@ namespace Musee::Matter::MasterParts
 	inline constexpr const TCHAR* LibraryGlass = TEXT("/Project/Matter/Glass.ush");
 	inline constexpr const TCHAR* LibraryMedium = TEXT("/Project/Matter/Medium.ush");
 	inline constexpr const TCHAR* LibraryPaint = TEXT("/Project/Matter/Paint.ush");
+	inline constexpr const TCHAR* LibraryWood = TEXT("/Project/Matter/Wood.ush");
+	inline constexpr const TCHAR* LibraryCloth = TEXT("/Project/Matter/Cloth.ush");
+	inline constexpr const TCHAR* LibrarySheet = TEXT("/Project/Matter/Sheet.ush");
+	inline constexpr const TCHAR* LibraryLiving = TEXT("/Project/Matter/Living.ush");
 
 	/** The parameter groups an instance shows, by the record each group's values come from. */
 	inline constexpr const TCHAR* SubstanceGroup = TEXT("Substance");
 	inline constexpr const TCHAR* WorkingGroup = TEXT("Working");
 	inline constexpr const TCHAR* HistoryGroup = TEXT("History");
 	inline constexpr const TCHAR* PieceGroup = TEXT("Piece");
+	inline constexpr const TCHAR* WorkGroup = TEXT("Work");
 
 	/** An uninstanced master shows Substrate's own neutral Slab (MaterialExpressionSubstrate.h): its diffuse albedo, its
 	 *  roughness, and the index whose normal-incidence reflectance is its F0 of 0.04. */

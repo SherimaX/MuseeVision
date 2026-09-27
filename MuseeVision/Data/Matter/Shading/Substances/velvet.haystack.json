@@ -1,0 +1,110 @@
+{
+  "schema": "musee.matter.shading.substance/1",
+  "key": "velvet.haystack",
+  "name": "Mohair velvet, dyed haystack, ochre",
+  "family": "accent",
+  "record": "Substances/velvet.json",
+  "master": "cloth",
+  "accentOf": "oak",
+  "dielectric": {
+    "diffuseAlbedo": {
+      "value": [
+        0.3515,
+        0.1912,
+        0.0423
+      ],
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "unit": "1",
+      "grade": "design",
+      "source": "Substances/velvet.json: designColours.salonBay5",
+      "note": "bay 5 (Monet's Series): haystack, ochre"
+    },
+    "refractiveIndex": {
+      "value": 1.46,
+      "unit": "1",
+      "grade": "record",
+      "source": "Substances/velvet.json: optics.clothModelVelvet.eta (measured fit, Irawan & Marschner 2012)"
+    },
+    "porosity": {
+      "value": 0.6,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Substances/velvet.json",
+      "note": "A pile is mostly air; no measured porosity was read."
+    },
+    "wettingDepth": {
+      "value": 1.5,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Substances/velvet.json: unverified pile height (1 to 3 mm)",
+      "note": "The pile's depth."
+    }
+  },
+  "structure": {
+    "grain": {
+      "value": 0.5,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Substances/velvet.json",
+      "note": "The finest structure the cloth shows: its thread or fibre tufts."
+    },
+    "bed": {
+      "value": 20.0,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Substances/velvet.json",
+      "note": "The length of the yarn's slubs, the coarsest unevenness the cloth shows."
+    },
+    "bedAspect": {
+      "value": 1.5,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Substances/velvet.json",
+      "note": "Slubs run along the thread: how much longer than wide."
+    },
+    "hurst": {
+      "value": 0.6,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Substances/velvet.json",
+      "note": "A first self-affinity for a yarn's unevenness."
+    },
+    "toneSpread": {
+      "value": 0.06,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Substances/velvet.json",
+      "note": "A first half-range of the dye's tone across the cloth."
+    },
+    "roughnessSpread": {
+      "value": 0.1,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Substances/velvet.json",
+      "note": "A first half-range across the cloth."
+    }
+  },
+  "fibre": {
+    "roughness": {
+      "value": 0.324,
+      "unit": "1",
+      "grade": "derived",
+      "source": "Substances/velvet.json: optics.clothModelVelvet.gammaSurface (6 deg, measured)",
+      "derivation": "sqrt(tan 6 deg): the Slab roughness whose GGX width is the fitted surface spread"
+    },
+    "sheen": {
+      "value": 1.0,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Substances/velvet.json",
+      "note": "A velvet is all pile: its sheen is at full weight."
+    },
+    "sheenRoughness": {
+      "value": 0.3,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Substances/velvet.json",
+      "note": "A cut pile sends its sheen close about grazing."
+    }
+  }
+}

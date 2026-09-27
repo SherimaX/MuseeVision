@@ -1,0 +1,79 @@
+{
+  "schema": "musee.matter.shading.history/1",
+  "key": "stone.foot-worn",
+  "name": "Worn by feet",
+  "mechanisms": [
+    "stone.foot-traffic-wear",
+    "stone.pore-soiling"
+  ],
+  "age": {
+    "value": 20.0,
+    "unit": "year",
+    "grade": "design",
+    "source": "Palette.json eras (a generation of use in the classical rooms; a new face is new)"
+  },
+  "passagesPerYear": {
+    "value": 200000.0,
+    "unit": "1/year",
+    "grade": "design",
+    "source": "a gallery floor on the museum's route (as stone.worn)",
+    "note": "Site's traffic field will give each point its own."
+  },
+  "skyExposure": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "design",
+    "source": "an interior face"
+  },
+  "keptWet": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "design",
+    "source": "the face stands clear of water"
+  },
+  "deposition": {
+    "value": 0.00085,
+    "unit": "1/year",
+    "grade": "derived",
+    "source": "Histories/white.soiling.json: terms.soiling.coverageRateVertical (3e-7 to 1.8e-5 per day)",
+    "derivation": "the geometric mean of the range, 3.1e-6 per day, per year"
+  },
+  "washRemoval": {
+    "value": 0.0,
+    "unit": "1/year",
+    "grade": "derived",
+    "source": "an interior face",
+    "derivation": "no rain wash reaches it"
+  },
+  "soilAlbedo": {
+    "value": [
+      0.3,
+      0.28,
+      0.25
+    ],
+    "space": "linear Rec.709 (sRGB primaries), D65 white",
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Histories/white.soiling.json (no measured colour of settled indoor dust)",
+    "note": "A first grey-brown for indoor dust, as stone.worn."
+  },
+  "wornRoughness": {
+    "value": 0.6,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Histories/stone.foot-traffic-wear.json: terms.glossLoss (as stone.worn)"
+  },
+  "wornHaziness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "derived",
+    "source": "a worn face",
+    "derivation": "no second lobe"
+  },
+  "wearPassages": {
+    "value": 2000000.0,
+    "unit": "count",
+    "grade": "unverified",
+    "source": "Histories/stone.foot-traffic-wear.json: bySubstance.travertine.abrasionGroove (as stone.worn)"
+  }
+}

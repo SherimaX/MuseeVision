@@ -1,0 +1,57 @@
+{
+  "schema": "musee.matter.shading.substance/1",
+  "key": "opal-glass",
+  "name": "Flashed opal glass (mouth-blown)",
+  "family": "glass",
+  "record": "Substances/opal-glass.json",
+  "master": "sheet",
+  "dielectric": {
+    "diffuseAlbedo": {
+      "value": [
+        0.6,
+        0.6,
+        0.6
+      ],
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Substances/opal-glass.json: unverified (0.6)",
+      "note": "An opal flash reflects most of what it does not pass."
+    },
+    "refractiveIndex": {
+      "value": 1.525,
+      "unit": "1",
+      "grade": "record",
+      "source": "Substances/opal-glass.json: optics.baseRefractiveIndex"
+    },
+    "porosity": {
+      "value": 0.0,
+      "unit": "1",
+      "grade": "derived",
+      "source": "glass has no open pores",
+      "derivation": "a glass is a continuous solid"
+    },
+    "wettingDepth": {
+      "value": 0.0,
+      "unit": "mm",
+      "grade": "derived",
+      "source": "glass has no open pores",
+      "derivation": "nothing is taken in"
+    }
+  },
+  "sheet": {
+    "transmittance": {
+      "value": [
+        0.335,
+        0.31,
+        0.27
+      ],
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "unit": "1",
+      "grade": "derived",
+      "source": "Substances/opal-glass.json: optics.spectralTransmittance (opal layer 0.45 mm) and luminousTransmittance (0.32)",
+      "derivation": "the spectrum read near 650, 550 and 450 nm",
+      "conditions": "red, green, blue"
+    }
+  }
+}

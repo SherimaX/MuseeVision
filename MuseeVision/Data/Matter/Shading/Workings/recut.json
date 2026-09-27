@@ -1,0 +1,39 @@
+{
+  "schema": "musee.matter.shading.working/1",
+  "key": "recut",
+  "name": "Gesso recut and smoothed for gilding",
+  "record": "Workings/gilt.json",
+  "kind": "face",
+  "roughness": {
+    "value": 0.4,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Workings/gilt.json: methods (the gesso is recut and rubbed smooth before the bole)"
+  },
+  "roughnessAcross": {
+    "value": 0.4,
+    "unit": "1",
+    "grade": "derived",
+    "source": "Workings/gilt.json: methods (the gesso is recut and rubbed smooth before the bole)",
+    "derivation": "a face with no grain: equal to the roughness along"
+  },
+  "haziness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Workings/gilt.json: methods (the gesso is recut and rubbed smooth before the bole)",
+    "note": "One specular lobe unless noted."
+  },
+  "textureDepth": {
+    "value": 0.005,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Workings/gilt.json"
+  },
+  "relief": {
+    "value": 0.005,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Workings/gilt.json"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "schema": "musee.matter.shading.working/1",
+  "key": "cast.plaster",
+  "name": "Cast in a mould",
+  "record": "Workings/cast.plaster.json",
+  "kind": "face",
+  "roughness": {
+    "value": 0.6,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Workings/cast.plaster.json (a cast face takes the mould's smoothness)"
+  },
+  "roughnessAcross": {
+    "value": 0.6,
+    "unit": "1",
+    "grade": "derived",
+    "source": "Workings/cast.plaster.json (a cast face takes the mould's smoothness)",
+    "derivation": "a face with no grain: equal to the roughness along"
+  },
+  "haziness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Workings/cast.plaster.json (a cast face takes the mould's smoothness)",
+    "note": "One specular lobe unless noted."
+  },
+  "textureDepth": {
+    "value": 0.02,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Workings/cast.plaster.json"
+  },
+  "relief": {
+    "value": 0.02,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Workings/cast.plaster.json"
+  }
+}

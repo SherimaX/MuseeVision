@@ -1,0 +1,86 @@
+{
+  "schema": "musee.matter.shading.history/1",
+  "key": "metal.weathered",
+  "name": "Weathered outdoors",
+  "mechanisms": [
+    "bronze.weathering",
+    "lead.patina",
+    "iron.corrosion"
+  ],
+  "age": {
+    "value": 20.0,
+    "unit": "year",
+    "grade": "design",
+    "source": "Palette.json eras (a generation of use in the classical rooms; a new face is new)"
+  },
+  "passagesPerYear": {
+    "value": 0.0,
+    "unit": "1/year",
+    "grade": "design",
+    "source": "the place the regime names",
+    "note": "Site's traffic field will give each point its own."
+  },
+  "skyExposure": {
+    "value": 1.0,
+    "unit": "1",
+    "grade": "design",
+    "source": "a face open to the sky"
+  },
+  "keptWet": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "design",
+    "source": "the face stands clear of water"
+  },
+  "deposition": {
+    "value": 0.0066,
+    "unit": "1/year",
+    "grade": "derived",
+    "source": "Histories/stone.pore-soiling.json (as stone.weathered)",
+    "derivation": "as stone.weathered"
+  },
+  "washRemoval": {
+    "value": 0.05,
+    "unit": "1/year",
+    "grade": "unverified",
+    "source": "Histories/stone.dissolution-outdoors.json (as stone.weathered)",
+    "note": "As stone.weathered."
+  },
+  "soilAlbedo": {
+    "value": [
+      0.08,
+      0.07,
+      0.06
+    ],
+    "space": "linear Rec.709 (sRGB primaries), D65 white",
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Histories/stone.pore-soiling.json (urban soot)",
+    "note": "As stone.weathered."
+  },
+  "wornRoughness": {
+    "value": 0.2,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Histories/bronze.weathering.json"
+  },
+  "wornHaziness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "derived",
+    "source": "a worn face",
+    "derivation": "no second lobe"
+  },
+  "wearPassages": {
+    "value": 0.0,
+    "unit": "count",
+    "grade": "derived",
+    "source": "a face that is not walked on or handled"
+  },
+  "tarnishCover": {
+    "value": 0.95,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Histories/bronze.weathering.json and Histories/lead.patina.json (twenty years outdoors cover a copper alloy or a lead sheet with its patina)"
+  }
+}

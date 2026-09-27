@@ -1,0 +1,39 @@
+{
+  "schema": "musee.matter.shading.working/1",
+  "key": "laid.mortar-jointed",
+  "name": "Hand-laid in lime mortar, joints slightly recessed",
+  "record": "Workings/laid.mortar-jointed.json",
+  "kind": "face",
+  "roughness": {
+    "value": 0.8,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Workings/laid.mortar-jointed.json (a moulded brick face is matte)"
+  },
+  "roughnessAcross": {
+    "value": 0.8,
+    "unit": "1",
+    "grade": "derived",
+    "source": "Workings/laid.mortar-jointed.json (a moulded brick face is matte)",
+    "derivation": "a face with no grain: equal to the roughness along"
+  },
+  "haziness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Workings/laid.mortar-jointed.json (a moulded brick face is matte)",
+    "note": "One specular lobe unless noted."
+  },
+  "textureDepth": {
+    "value": 0.5,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Workings/laid.mortar-jointed.json"
+  },
+  "relief": {
+    "value": 0.5,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Workings/laid.mortar-jointed.json"
+  }
+}

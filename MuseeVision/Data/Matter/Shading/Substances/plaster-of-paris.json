@@ -1,0 +1,86 @@
+{
+  "schema": "musee.matter.shading.substance/1",
+  "key": "plaster-of-paris",
+  "name": "Plaster of Paris (cast)",
+  "family": "white",
+  "record": "Substances/plaster-of-paris.json",
+  "master": "white",
+  "dielectric": {
+    "diffuseAlbedo": {
+      "value": [
+        0.85,
+        0.85,
+        0.84
+      ],
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Substances/plaster-of-paris.json: unverified luminous reflectance of a cast face (0.80 to 0.92)",
+      "note": "The middle of the unverified range, a faint warm cast of the gypsum's natural colour; the ground gypsum's 0.774 is a powder, not a cast face."
+    },
+    "refractiveIndex": {
+      "value": 1.525,
+      "unit": "1",
+      "grade": "derived",
+      "source": "Substances/plaster-of-paris.json: optics.refractiveIndex (gypsum 1.521, 1.523, 1.530)",
+      "derivation": "the mean of gypsum's three principal indices"
+    },
+    "porosity": {
+      "value": 0.5,
+      "unit": "1",
+      "grade": "record",
+      "source": "Substances/plaster-of-paris.json: physical.porosity (0.5, derived from bulk and gypsum densities)"
+    },
+    "wettingDepth": {
+      "value": 2.0,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Substances/plaster-of-paris.json: unverified",
+      "note": "A first depth of a cast face whose pores govern its look."
+    }
+  },
+  "structure": {
+    "grain": {
+      "value": 0.05,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Substances/plaster-of-paris.json",
+      "note": "Set gypsum is a felt of needles tens of micrometres long: finer than the eye resolves."
+    },
+    "bed": {
+      "value": 100,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Substances/plaster-of-paris.json",
+      "note": "The reach of the mould's face."
+    },
+    "bedAspect": {
+      "value": 1.0,
+      "unit": "1",
+      "grade": "derived",
+      "source": "A cast body has no bedding",
+      "derivation": "unbedded"
+    },
+    "hurst": {
+      "value": 0.7,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Candela et al. 2012 (cited in Stone.ush)",
+      "note": "As the lime plaster."
+    },
+    "toneSpread": {
+      "value": 0.02,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Substances/plaster-of-paris.json",
+      "note": "A cast face is nearly even."
+    },
+    "roughnessSpread": {
+      "value": 0.1,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Substances/plaster-of-paris.json",
+      "note": "A first half-range across a cast face."
+    }
+  }
+}

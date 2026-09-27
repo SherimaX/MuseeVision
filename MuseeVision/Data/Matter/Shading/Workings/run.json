@@ -1,0 +1,39 @@
+{
+  "schema": "musee.matter.shading.working/1",
+  "key": "run",
+  "name": "Run in place with a template",
+  "record": "Workings/run.json",
+  "kind": "face",
+  "roughness": {
+    "value": 0.6708,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Workings/trowelled.json: a run moulding is finished as trowelled plaster"
+  },
+  "roughnessAcross": {
+    "value": 0.6708,
+    "unit": "1",
+    "grade": "derived",
+    "source": "Workings/trowelled.json: a run moulding is finished as trowelled plaster",
+    "derivation": "a face with no grain: equal to the roughness along"
+  },
+  "haziness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Workings/trowelled.json: a run moulding is finished as trowelled plaster",
+    "note": "One specular lobe unless noted."
+  },
+  "textureDepth": {
+    "value": 0.05,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Workings/trowelled.json"
+  },
+  "relief": {
+    "value": 0.05,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Workings/run.json"
+  }
+}

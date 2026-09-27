@@ -81,7 +81,7 @@
     {
       "surface": "rotunda.entablature",
       "material": "white.fibrous-plaster",
-      "working": "cast",
+      "working": "cast.plaster",
       "history": "new",
       "note": "Entablature ring at the springing (architrave, frieze, cornice), cast in lengths about 3 m from run models, mitred by hand; plaster-of-Paris face."
     },
@@ -144,7 +144,7 @@
     {
       "surface": "rotunda.dome.outer",
       "material": "accent.milled-lead",
-      "working": "patinated",
+      "working": "milled.lead",
       "history": "weathered",
       "note": "Milled sheet lead on boarding with rolls over the shell R 10.60, dressed over the eye's curb (r 2.90 -> 2.50 at z 20.45). Replaces the as-built stone outside (Story)."
     },

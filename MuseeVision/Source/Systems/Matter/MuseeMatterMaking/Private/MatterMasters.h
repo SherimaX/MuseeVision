@@ -16,7 +16,16 @@ class UMaterialParameterCollection;
  * - metal: a conductor with its measured reflection, a brushed grain, and a patina or tarnish film (Metal.ush);
  * - glass: a thin transmitting pane, absorbing along its thickness (Glass.ush);
  * - water: a still body of water seen through its surface, as Single Layer Water (Medium.ush);
- * - paint: a painted canvas carrying the work's own image under its varnish (Paint.ush).
+ * - paint: a painted canvas carrying the work's own image under its varnish (Paint.ush);
+ * - wood: an opaque fibrous body with growth rings and rays, its grain along each board, under an oil or wax that soaks
+ *   into it (Wood.ush);
+ * - cloth: an opaque textile, its dye in its fibres and the sheen of its standing fibre ends on a fuzz layer (Cloth.ush);
+ * - sheet: a thin sheet that scatters the light it passes, lit from both faces (a linen velarium, an opal pane;
+ *   Sheet.ush);
+ * - living: a plant's thin tissue, its species' colour from its vertices, lit from both faces (Living.ush).
+ *
+ * A painted or hard-chromed steel needs no master of its own: paint is a film the working lays over the metal at full
+ * cover (worn through where it is worn), and chromium is a metal with its own measured reflection (Metal.ush).
  *
  * A layer working (gilt) is carried as a Substrate vertical layer over the masters that host it (white and metal): its
  * masters are M_Matter_WhiteGilt and M_Matter_MetalGilt. Every master applies the surface law (History.ush) to what it
@@ -33,8 +42,13 @@ namespace Musee::Matter
 		inline constexpr const TCHAR* Glass = TEXT("glass");
 		inline constexpr const TCHAR* Water = TEXT("water");
 		inline constexpr const TCHAR* Paint = TEXT("paint");
+		inline constexpr const TCHAR* Wood = TEXT("wood");
+		inline constexpr const TCHAR* Cloth = TEXT("cloth");
+		inline constexpr const TCHAR* Sheet = TEXT("sheet");
+		inline constexpr const TCHAR* Living = TEXT("living");
 
-		/** The layer working the masters carry. */
+		/** The layer working the masters carry: gilt and its variants (gilt.gold-leaf.oil, gilt.gold-leaf.water), whose
+		 *  key's first segment names the layer. */
 		inline constexpr const TCHAR* Gilt = TEXT("gilt");
 	}
 
@@ -65,6 +79,12 @@ namespace Musee::Matter
 	FMasterRecipe GlassRecipe(UMaterialParameterCollection& Moment);
 	FMasterRecipe WaterRecipe(UMaterialParameterCollection& Moment);
 	FMasterRecipe PaintRecipe(UMaterialParameterCollection& Moment);
+
+	/** The recipes of the wood, cloth, sheet and living masters. */
+	FMasterRecipe WoodRecipe(UMaterialParameterCollection& Moment);
+	FMasterRecipe ClothRecipe(UMaterialParameterCollection& Moment);
+	FMasterRecipe SheetRecipe(UMaterialParameterCollection& Moment);
+	FMasterRecipe LivingRecipe(UMaterialParameterCollection& Moment);
 
 	/** Lays gilt's leaf over a recipe's Slab: the leaf's parameters, its call through the surface law, and the layered
 	 *  surface. The recipe's own Slab becomes the base beneath the leaf. */

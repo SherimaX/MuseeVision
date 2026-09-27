@@ -1,0 +1,44 @@
+// Sheet: a thin sheet that scatters the light it passes: linen stretched as a velarium or a scrim, an opal-flashed pane.
+//
+// Such a sheet is too thin for light to travel sideways in it: light that enters one face is scattered and leaves by
+// either face. What leaves by the near face is its reflectance, what leaves by the far face its diffuse transmittance;
+// both are measured together with an integrating sphere (CIE 130-1998, "Practical methods for the measurement of
+// reflectance and transmittance"), and the sheet's record gives both at the primaries. A velarium lit from the sky
+// above it glows by its transmittance; seen from the room it reflects the room's light by its reflectance.
+//
+// Substrate lights a thin surface from behind with its two-sided wrap model. That model takes the colour it transmits
+// as a mean free path: the colour is the transmittance of a slab of fixed thickness whose mean free path it is
+// (SubstrateEvaluation.ush, the two-sided wrap). This file inverts that relation, so what shows through is the record's
+// measured transmittance.
+
+#pragma once
+
+#include "/Project/Matter/Frame.ush"
+#include "/Project/Matter/Optics.ush"
+#include "/Project/Matter/History.ush"
+
+// Substrate's two-sided wrap reads its mean free path as the transmittance, exp(-thickness / path), of a slab 100 cm
+// thick (SUBSTRATE_SIMPLEVOLUME_THICKNESS_CM, Substrate.ush).
+static const float MatterWrapSlabCentimeters = 100.0;
+
+/** The mean free path, in centimetres, under which Substrate's two-sided wrap transmits Transmittance: the path d with
+ *  exp(-100 cm / d) = T. A clear channel (T near 1) gets a path so long nothing is absorbed; an opaque one (T near 0) a
+ *  path so short nothing passes. */
+float3 MatterWrapMeanFreePathCentimeters(float3 Transmittance)
+{
+	const float3 OpticalDepth = -log(clamp(Transmittance, MatterTiny, 1.0 - MatterTiny));
+	return MatterWrapSlabCentimeters / OpticalDepth;
+}
+
+/** A thin sheet's face before its history: its reflectance as the body's diffuse albedo, the interface of its fibre or
+ *  glass over it. */
+FMatterSurface MatterSheetSurface(float3 Reflectance, float RefractiveIndex, float Roughness)
+{
+	FMatterSurface Surface;
+	Surface.DiffuseAlbedo = Reflectance;
+	Surface.F0 = MatterDielectricF0(RefractiveIndex).xxx;
+	Surface.Roughness = Roughness;
+	Surface.Haziness = 0.0;
+	Surface.Slope = float2(0.0, 0.0);
+	return Surface;
+}

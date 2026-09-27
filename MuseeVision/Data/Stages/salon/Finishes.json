@@ -38,42 +38,42 @@
     },
     {
       "surface": "salon.bay1.silk",
-      "material": "accent.silk",
+      "material": "accent.silk.oxblood",
       "working": "stretched",
       "history": "new",
       "note": "Bay 1 oxblood #6A2A22 (the approved one step deeper): plain silk with a soft slub over 5 mm felt interlining on 18 mm battens, z 0.15-6.25 on the walls, and on the pier faces looking into bay 1 (12 mm proud, z 0.30-6.06, stopped 0.14 short of the jamb)."
     },
     {
       "surface": "salon.bay2.silk",
-      "material": "accent.silk",
+      "material": "accent.silk.paris-grey",
       "working": "stretched",
       "history": "new",
       "note": "Bay 2 zinc #47515A (the approved one step deeper): plain silk with a soft slub over 5 mm felt interlining on 18 mm battens, z 0.15-6.25 on the walls, and on the pier faces looking into bay 2 (12 mm proud, z 0.30-6.06, stopped 0.14 short of the jamb)."
     },
     {
       "surface": "salon.bay3.silk",
-      "material": "accent.silk",
+      "material": "accent.silk.sage",
       "working": "stretched",
       "history": "new",
       "note": "Bay 3 sage #5A6D54 (the approved one step deeper): plain silk with a soft slub over 5 mm felt interlining on 18 mm battens, z 0.15-6.25 on the walls, and on the pier faces looking into bay 3 (12 mm proud, z 0.30-6.06, stopped 0.14 short of the jamb)."
     },
     {
       "surface": "salon.bay4.silk",
-      "material": "accent.silk",
+      "material": "accent.silk.old-rose",
       "working": "stretched",
       "history": "new",
       "note": "Bay 4 old rose #8A5A54 (the approved one step deeper): plain silk with a soft slub over 5 mm felt interlining on 18 mm battens, z 0.15-6.25 on the walls, and on the pier faces looking into bay 4 (12 mm proud, z 0.30-6.06, stopped 0.14 short of the jamb)."
     },
     {
       "surface": "salon.bay5.silk",
-      "material": "accent.silk",
+      "material": "accent.silk.haystack",
       "working": "stretched",
       "history": "new",
       "note": "Bay 5 haystack #A0793A (the approved one step deeper): plain silk with a soft slub over 5 mm felt interlining on 18 mm battens, z 0.15-6.25 on the walls, and on the pier faces looking into bay 5 (12 mm proud, z 0.30-6.06, stopped 0.14 short of the jamb)."
     },
     {
       "surface": "salon.cabinet.silk",
-      "material": "accent.silk",
+      "material": "accent.silk.cabinet-green",
       "working": "stretched",
       "history": "new",
       "note": "Manet cabinet green #2F3A33, as the bays' silk, z 0.15-5.10 on all four walls."
@@ -172,7 +172,7 @@
     {
       "surface": "salon.cornice",
       "material": "white.fibrous-plaster",
-      "working": "cast",
+      "working": "cast.plaster",
       "history": "new",
       "note": "P1 cornice with the vault trough, cast in lengths with hand mitres; face plaster of Paris."
     },
@@ -249,7 +249,7 @@
     {
       "surface": "salon.lantern.outer.bars",
       "material": "bronze.cusn10",
-      "working": "cast",
+      "working": "cast.bronze",
       "history": "weathered",
       "note": "Glazing bars, ridge and the cap flashing on the kerb of each outer lantern."
     },
@@ -277,7 +277,7 @@
     {
       "surface": "salon.pergola",
       "material": "bronze.cusn10",
-      "working": "cast",
+      "working": "cast.bronze",
       "history": "weathered",
       "note": "Bay 3's pergola on the roof: posts, beams, bars."
     },
@@ -291,7 +291,7 @@
     {
       "surface": "salon.cabinet.cornice",
       "material": "white.fibrous-plaster",
-      "working": "cast",
+      "working": "cast.plaster",
       "history": "new",
       "note": "P8 slot-and-cove cornice, a closed loop."
     },
@@ -318,28 +318,28 @@
     },
     {
       "surface": "salon.bench.bay2.velvet",
-      "material": "accent.mohair-velvet",
+      "material": "accent.mohair-velvet.paris-grey",
       "working": "upholstered",
       "history": "handled",
       "note": "The two benches of bay 2, mohair velvet dyed the bay's silk colour #47515A; quilted top, piped."
     },
     {
       "surface": "salon.bench.bay3.velvet",
-      "material": "accent.mohair-velvet",
+      "material": "accent.mohair-velvet.sage",
       "working": "upholstered",
       "history": "handled",
       "note": "The two benches of bay 3, mohair velvet dyed the bay's silk colour #5A6D54; quilted top, piped."
     },
     {
       "surface": "salon.bench.bay4.velvet",
-      "material": "accent.mohair-velvet",
+      "material": "accent.mohair-velvet.old-rose",
       "working": "upholstered",
       "history": "handled",
       "note": "The two benches of bay 4, mohair velvet dyed the bay's silk colour #8A5A54; quilted top, piped."
     },
     {
       "surface": "salon.bench.bay5.velvet",
-      "material": "accent.mohair-velvet",
+      "material": "accent.mohair-velvet.haystack",
       "working": "upholstered",
       "history": "handled",
       "note": "The two benches of bay 5, mohair velvet dyed the bay's silk colour #A0793A; quilted top, piped."
@@ -402,7 +402,7 @@
     },
     {
       "surface": "salon.frame.gilt",
-      "material": "oak.sessile-french",
+      "material": "white.gesso",
       "working": "gilt.gold-leaf.water",
       "history": "aged.patina",
       "note": "Every oil's frame (Hang frame salon.frame.gilt; Art builds a carved frame): carved oak, gesso, water-gilt on red bole, burnished and matt, bole on the ridges; moulding 0.09 + 0.015 x the longer side, clamped 0.10-0.14. Art builds the frames; the finish is declared here."

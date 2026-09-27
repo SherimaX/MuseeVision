@@ -1,0 +1,69 @@
+{
+  "schema": "musee.matter.shading.substance/1",
+  "key": "chromium",
+  "name": "Hard chromium electroplate",
+  "family": "accent",
+  "record": "Palette.json",
+  "master": "metal",
+  "accentOf": "bronze",
+  "conductor": {
+    "f0": {
+      "value": [
+        0.5515,
+        0.5515,
+        0.5515
+      ],
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "unit": "1",
+      "grade": "derived",
+      "source": "Johnson & Christy 1974, \"Optical constants of transition metals\", Physical Review B 9:5056 (chromium, n 3.18, k 3.30 near 550 nm)",
+      "derivation": "((n - 1)^2 + k^2) / ((n + 1)^2 + k^2); chromium is grey: its F0 varies under 1 % across the primaries (Hoffman 2020, \"Physically Based Shading\", SIGGRAPH course: 0.549, 0.556, 0.554)"
+    },
+    "f82": {
+      "value": [
+        0.5654,
+        0.5654,
+        0.5654
+      ],
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "unit": "1",
+      "grade": "derived",
+      "source": "Johnson & Christy 1974 (chromium, n 3.18, k 3.30)",
+      "derivation": "Fresnel's reflectance of the complex index at the incidence cosine 1/7 (Optics.ush, MatterConductorFresnel)"
+    }
+  },
+  "tarnish": {
+    "diffuseAlbedo": {
+      "value": [
+        0.05,
+        0.12,
+        0.05
+      ],
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Chromium(III) oxide, the passive film (eskolaite green)",
+      "note": "Chromium's passive film is a few nanometres of Cr2O3 and shows no colour; these numbers are the oxide's, which no museum history grows."
+    },
+    "refractiveIndex": {
+      "value": 2.55,
+      "unit": "1",
+      "grade": "secondary",
+      "source": "Anthony et al., Handbook of Mineralogy (eskolaite, Cr2O3: n 2.5 to 2.6)"
+    },
+    "roughness": {
+      "value": 0.5,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Chromium(III) oxide",
+      "note": "Unused while the cover is nil."
+    },
+    "cover": {
+      "value": 0.0,
+      "unit": "1",
+      "grade": "derived",
+      "source": "the tarnish's cover is its history's",
+      "derivation": "unused: the history gives the cover"
+    }
+  }
+}

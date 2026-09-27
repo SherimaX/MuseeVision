@@ -1,0 +1,88 @@
+{
+  "schema": "musee.matter.shading.substance/1",
+  "key": "brick",
+  "name": "Brique de Bourgogne (hand-moulded)",
+  "family": "accent",
+  "record": "Palette.json",
+  "master": "white",
+  "accentOf": "stone",
+  "dielectric": {
+    "diffuseAlbedo": {
+      "value": [
+        52.0,
+        20.0,
+        24.0
+      ],
+      "space": "CIELAB (D65, 2 deg)",
+      "unit": "CIELAB",
+      "grade": "unverified",
+      "source": "Palette.json: accent.brique-bourgogne research.needed (no substance record yet)",
+      "note": "A first iron-oxide red for a Burgundy hand-moulded brick, read from trade photographs."
+    },
+    "refractiveIndex": {
+      "value": 1.55,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.brique-bourgogne",
+      "note": "Fired clay is quartz, feldspar and glass, indices 1.5 to 1.6; the middle is taken."
+    },
+    "porosity": {
+      "value": 0.25,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.brique-bourgogne",
+      "note": "Hand-moulded clay bricks have 20 to 30 % open porosity; no measurement of this brick was read."
+    },
+    "wettingDepth": {
+      "value": 2.5,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: accent.brique-bourgogne",
+      "note": "As the lime plaster: the depth whose pores govern the face's look."
+    }
+  },
+  "structure": {
+    "grain": {
+      "value": 0.5,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: accent.brique-bourgogne",
+      "note": "The sand in a moulded brick's face."
+    },
+    "bed": {
+      "value": 220,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: accent.brique-bourgogne",
+      "note": "A brick's length: the reach of the mould that made its face."
+    },
+    "bedAspect": {
+      "value": 1.0,
+      "unit": "1",
+      "grade": "derived",
+      "source": "A moulded body has no bedding",
+      "derivation": "unbedded"
+    },
+    "hurst": {
+      "value": 0.7,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Candela et al. 2012 (cited in Stone.ush)",
+      "note": "As the stones."
+    },
+    "toneSpread": {
+      "value": 0.15,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.brique-bourgogne",
+      "note": "Hand-moulded bricks vary brick to brick with their firing."
+    },
+    "roughnessSpread": {
+      "value": 0.2,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.brique-bourgogne",
+      "note": "A first half-range across a moulded face."
+    }
+  }
+}

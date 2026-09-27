@@ -6,7 +6,6 @@
 #include "MatterMomentCollection.h"
 #include "MatterNames.h"
 #include "MatterRecords.h"
-#include "MatterStoneProbe.h"
 #include "Materials/Material.h"
 #include "Materials/MaterialInstanceConstant.h"
 #include "Materials/MaterialParameterCollection.h"
@@ -66,30 +65,43 @@ namespace
 		const FName AssetName(*InstanceName(Palette, Working, History));
 		UPackage* Package = PrepareMadePackage(InstancePackage(Palette, Working, History), AssetName);
 		UMaterialInstanceConstant* Instance = NewObject<UMaterialInstanceConstant>(Package, AssetName, MadeFlags);
-		const FInstanceFilled Filled = FillInstance(Spec, *Instance, [&Masters](const FMasterKind& Kind) -> UMaterialInterface*
+		const FInstanceComposed Composed = ComposeInstance(Spec, *Instance, [&Masters](const FMasterKind& Kind) -> UMaterialInterface*
 		{
 			const FMadeMaster* Made = Masters.FindByPredicate([&Kind](const FMadeMaster& Candidate) { return Candidate.Kind == Kind; });
 			return Made ? Made->Material : nullptr;
 		});
-		if (!Filled.Succeeded())
+		if (!Composed.Succeeded())
 		{
-			Report.Problems.Append(Filled.Problems);
+			Report.Problems.Append(Composed.Problems);
 			Retire(*Instance);
 			return;
 		}
 		const TMap<FString, FString> Tags = {
 			{ MadeTag::Made, Spec.ToString() },
-			{ MadeTag::Inputs, Filled.Inputs.Hash() },
-			{ MadeTag::Records, RecordsText(Filled.Inputs) },
-			{ MadeTag::Generator, FString::Printf(TEXT("musee.matter.instance filler=%d"), InstanceFillerVersion) },
+			{ MadeTag::Inputs, Composed.Inputs.Hash() },
+			{ MadeTag::Records, RecordsText(Composed.Inputs) },
+			{ MadeTag::Generator, FString::Printf(TEXT("musee.matter.instance composer=%d"), InstanceComposerVersion) },
 		};
-		Record(Report, Instance->GetPathName(), SaveMadeAsset(*Instance, InstanceGuid(Filled, Spec, TEXT("Package.PersistentGuid")), Tags));
+		Record(Report, Instance->GetPathName(), SaveMadeAsset(*Instance, InstanceGuid(Composed, Spec, TEXT("Package.PersistentGuid")), Tags));
 	}
 }
 
 UMaterialParameterCollection* MakeMomentCollection(FMatterMakeReport& Report)
 {
 	const FString PackageName = MomentCollectionPackage;
+	// Time loads the made collection as the editor starts, which holds its file open: a collection already made with
+	// these names is kept as it is, as a re-make of it would write the same thing.
+	if (FPackageName::DoesPackageExist(PackageName))
+	{
+		UMaterialParameterCollection* Made = LoadObject<UMaterialParameterCollection>(nullptr, *ObjectPathOf(PackageName));
+		const TArray<FName> Names = MomentParameterNames();
+		if (Made && Made->StateId == MomentStateId(Names) && Made->GetScalarParameterNames() == Names && Made->VectorParameters.IsEmpty())
+		{
+			++Report.Unchanged;
+			Report.Lines.Add(FString::Printf(TEXT("Unchanged %s: made with the Moment's names"), *Made->GetPathName()));
+			return Made;
+		}
+	}
 	const FName AssetName(*FPackageName::GetShortName(PackageName));
 	UPackage* Package = PrepareMadePackage(PackageName, AssetName);
 	UMaterialParameterCollection* Moment = NewObject<UMaterialParameterCollection>(Package, AssetName, MadeFlags);
@@ -124,14 +136,6 @@ TArray<FMadeMaster> MakeMasters(UMaterialParameterCollection& Moment, bool bComp
 		const FString Compiled = bCompile ? CompileText(*Master.Material, Report) : FString();
 		Record(Report, Master.Material->GetPathName(), Master.Save, FString::Printf(TEXT(", StateId %s%s"), *Master.Material->StateId.ToString(), *Compiled));
 		Made.Add(FMadeMaster{ Kind, Master.Material });
-	}
-	// The specimen stand's stone master, whose every input is a parameter; no palette instance uses it.
-	const FMasterMade Probe = MakeMasterAsset(StoneProbeRecipe());
-	Report.Problems.Append(Probe.Problems);
-	if (Probe.Material)
-	{
-		const FString Compiled = bCompile ? CompileText(*Probe.Material, Report) : FString();
-		Record(Report, Probe.Material->GetPathName(), Probe.Save, FString::Printf(TEXT(", StateId %s%s"), *Probe.Material->StateId.ToString(), *Compiled));
 	}
 	return Made;
 }

@@ -3,9 +3,9 @@
 #include "CoreMinimal.h"
 
 /**
- * The names of the masters' parameters: the one list the master recipes declare and the instance filler writes, so a
+ * The names of the masters' parameters: the one list the master recipes declare and the instance composer writes, so a
  * parameter cannot be declared by one and missed by the other. Each is written from one record field (see
- * MatterInstanceFill.cpp); the unit is in the name or stated in the recipe.
+ * MatterInstances.cpp); the unit is in the name or stated in the recipe.
  */
 namespace Musee::Matter::MasterParameter
 {
@@ -29,6 +29,16 @@ namespace Musee::Matter::MasterParameter
 	inline constexpr const TCHAR* FilmRoughness = TEXT("FilmRoughness");
 	inline constexpr const TCHAR* FilmCover = TEXT("FilmCover");
 	inline constexpr const TCHAR* PaintWhiteAlbedo = TEXT("PaintWhiteAlbedo");
+	inline constexpr const TCHAR* LatewoodFraction = TEXT("LatewoodFraction");
+	inline constexpr const TCHAR* LatewoodTone = TEXT("LatewoodTone");
+	inline constexpr const TCHAR* RayFleck = TEXT("RayFleck");
+	inline constexpr const TCHAR* RayTone = TEXT("RayTone");
+	inline constexpr const TCHAR* RayLengthMillimeters = TEXT("RayLengthMillimeters");
+	inline constexpr const TCHAR* RayWidthMillimeters = TEXT("RayWidthMillimeters");
+	inline constexpr const TCHAR* Sheen = TEXT("Sheen");
+	inline constexpr const TCHAR* SheenRoughness = TEXT("SheenRoughness");
+	inline constexpr const TCHAR* SheetTransmittance = TEXT("SheetTransmittance");
+	inline constexpr const TCHAR* TissueTransmittanceRatio = TEXT("TissueTransmittanceRatio");
 
 	// The working (Data/Matter/Shading/Workings).
 	inline constexpr const TCHAR* Roughness = TEXT("Roughness");
@@ -42,6 +52,9 @@ namespace Musee::Matter::MasterParameter
 	inline constexpr const TCHAR* LeafF82 = TEXT("LeafF82");
 	inline constexpr const TCHAR* LeafRoughness = TEXT("LeafRoughness");
 	inline constexpr const TCHAR* LeafTextureDepthMillimeters = TEXT("LeafTextureDepthMillimeters");
+	inline constexpr const TCHAR* FinishRefractiveIndex = TEXT("FinishRefractiveIndex");
+	inline constexpr const TCHAR* FinishCover = TEXT("FinishCover");
+	inline constexpr const TCHAR* StainTransmittance = TEXT("StainTransmittance");
 
 	// The history (Data/Matter/Shading/Histories).
 	inline constexpr const TCHAR* AgeYears = TEXT("AgeYears");
@@ -55,7 +68,10 @@ namespace Musee::Matter::MasterParameter
 	inline constexpr const TCHAR* WornHaziness = TEXT("WornHaziness");
 	inline constexpr const TCHAR* WearPassages = TEXT("WearPassages");
 
-	// A piece's own (its Custom Primitive Data, which Studio's caster sets) and a work's own (Art's image).
+	// A piece's own (its Custom Primitive Data, which Studio's caster sets) and a work's own (Art's image and its size,
+	// which a work's paint instance carries; MatterPaintLayer.h).
 	inline constexpr const TCHAR* PieceTableIndex = TEXT("PieceTableIndex");
 	inline constexpr const TCHAR* Image = TEXT("Image");
+	inline constexpr const TCHAR* ImageWidthMeters = TEXT("ImageWidthMeters");
+	inline constexpr const TCHAR* ImageHeightMeters = TEXT("ImageHeightMeters");
 }

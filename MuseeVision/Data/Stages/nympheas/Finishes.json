@@ -102,7 +102,7 @@
     {
       "surface": "nympheas.exterior.roof",
       "material": "accent.milled-lead",
-      "working": "weathered",
+      "working": "milled.lead",
       "history": "weathered",
       "note": "Roof ring 7.00–7.20 from the outer face to the rim line: milled sheet lead on boarding, laid with rolls."
     },
@@ -172,7 +172,7 @@
     {
       "surface": "nympheas.bench.seat",
       "material": "oak.sessile-french",
-      "working": "oiled and hard-waxed",
+      "working": "oiled.hard-waxed",
       "history": "handled",
       "note": "Curved oak seat slabs of the four benches, quartersawn, grain along the arc."
     },
@@ -207,7 +207,7 @@
     {
       "surface": "nympheas.well.wall",
       "material": "accent.brique-bourgogne",
-      "working": "hand-laid, lime mortar, joints slightly recessed",
+      "working": "laid.mortar-jointed",
       "history": "new",
       "note": "Shaft side walls, west end wall and the head wall with the port's arched opening: the Reserve's brick (Palette: the long stair's shaft)."
     },

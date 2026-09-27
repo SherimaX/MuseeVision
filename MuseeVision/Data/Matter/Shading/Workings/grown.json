@@ -1,0 +1,39 @@
+{
+  "schema": "musee.matter.shading.working/1",
+  "key": "grown",
+  "name": "Grown (a living plant)",
+  "record": "Palette.json",
+  "kind": "face",
+  "roughness": {
+    "value": 0.4,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Palette.json: living (the tissue's own roughness is its record's)"
+  },
+  "roughnessAcross": {
+    "value": 0.4,
+    "unit": "1",
+    "grade": "derived",
+    "source": "Palette.json: living (the tissue's own roughness is its record's)",
+    "derivation": "a face with no grain: equal to the roughness along"
+  },
+  "haziness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Palette.json: living (the tissue's own roughness is its record's)",
+    "note": "One specular lobe unless noted."
+  },
+  "textureDepth": {
+    "value": 0.02,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Palette.json: living (a leaf's wax crystals hold only a thin film before water beads)"
+  },
+  "relief": {
+    "value": 0.0,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Palette.json: living"
+  }
+}
