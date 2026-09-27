@@ -56,7 +56,7 @@ namespace Musee::Form::Tests
 		/** A closed solid of the given Euler characteristic (2 for a block, 0 for a ring or a block with one hole). */
 		void TestSolid(FAutomationTestBase& Test, const FString& What, const FFormMadePiece& Piece, int32 Euler)
 		{
-			const FShellEdges Shell = MeasureShellEdges(Piece.Mesh);
+			const FShellEdges Shell = MeasureShellEdges(*Piece.Mesh);
 			Test.TestTrue(FString::Printf(TEXT("%s is a closed solid (%d open, %d non-manifold, %d misoriented edges of %d triangles)"), *What,
 				Shell.Boundary, Shell.NonManifold, Shell.Misoriented, Shell.Faces), Shell.IsClosed());
 			Test.TestEqual(FString::Printf(TEXT("%s: Euler characteristic"), *What), Shell.EulerCharacteristic(), Euler);
@@ -67,8 +67,8 @@ namespace Musee::Form::Tests
 		TSet<int32> SlotsUsed(const FFormMadePiece& Piece)
 		{
 			TSet<int32> Used;
-			const UE::Geometry::FDynamicMeshMaterialAttribute* Materials = Piece.Mesh.Attributes()->GetMaterialID();
-			for (const int32 Triangle : Piece.Mesh.TriangleIndicesItr())
+			const UE::Geometry::FDynamicMeshMaterialAttribute* Materials = Piece.Mesh->Attributes()->GetMaterialID();
+			for (const int32 Triangle : Piece.Mesh->TriangleIndicesItr())
 			{
 				Used.Add(Materials->GetValue(Triangle));
 			}
@@ -103,7 +103,7 @@ namespace Musee::Form::Tests
 		TestEqual(TEXT("its own surface leads"), Pieces[0].Surface, FName(TEXT("wall")));
 		TestEqual(TEXT("its back and reveals take their own surfaces"), Pieces[0].SlotSurfaces, TArray<FName>{TEXT("masonry"), TEXT("reveal")});
 		TestEqual(TEXT("its triangles use all three surfaces"), SlotsUsed(Pieces[0]).Num(), 3);
-		const UE::Geometry::FAxisAlignedBox3d Bounds = Pieces[0].Mesh.GetBounds();
+		const UE::Geometry::FAxisAlignedBox3d Bounds = Pieces[0].Mesh->GetBounds();
 		TestEqual(TEXT("it stands 6 m tall, in engine units"), Bounds.Max.Z - Bounds.Min.Z, 600.0, 1e-3);
 		TestEqual(TEXT("it lies 0.6 m thick to its path's right (south)"), Bounds.Max.Y, 60.0, 1e-3);
 		return true;
@@ -124,7 +124,7 @@ namespace Musee::Form::Tests
 			TestSolid(*this, TEXT("the oval's wall, a ring"), Ring[0], 0);
 		}
 		// From the west apex the path passes the east apex at half its length (Ramanujan's perimeter of the ellipse).
-		const UE::Geometry::FAxisAlignedBox3d Bounds = Ring.Num() == 1 ? Ring[0].Mesh.GetBounds() : UE::Geometry::FAxisAlignedBox3d::Empty();
+		const UE::Geometry::FAxisAlignedBox3d Bounds = Ring.Num() == 1 ? Ring[0].Mesh->GetBounds() : UE::Geometry::FAxisAlignedBox3d::Empty();
 		TestEqual(TEXT("the ring reaches 0.6 m past the oval's east apex"), Bounds.Max.X, (OvalA + 0.6) * 100.0, 0.2);
 		const double Perimeter = UE_DOUBLE_PI * (3.0 * (OvalA + OvalB) - FMath::Sqrt((3.0 * OvalA + OvalB) * (OvalA + 3.0 * OvalB)));
 		Oval.Openings.Add(ArchedDoor(0.5 * Perimeter));
@@ -207,7 +207,7 @@ namespace Musee::Form::Tests
 			{
 				TestSolid(*this, bClockwise ? TEXT("a basin drawn clockwise") : TEXT("a basin drawn anticlockwise"), Pieces[0], 2);
 				TestEqual(TEXT("the tray is the basin's second surface"), Pieces[0].SlotSurfaces, TArray<FName>{TEXT("tray")});
-				const UE::Geometry::FAxisAlignedBox3d Bounds = Pieces[0].Mesh.GetBounds();
+				const UE::Geometry::FAxisAlignedBox3d Bounds = Pieces[0].Mesh->GetBounds();
 				TestEqual(TEXT("its sides stand outside the outline"), Bounds.Max.X, (3.9 + 0.003) * 100.0, 1e-3);
 			}
 		}
@@ -305,7 +305,7 @@ namespace Musee::Form::Tests
 		if (Ring.Num() == 1)
 		{
 			TestSolid(*this, TEXT("a frieze round an ellipse"), Ring[0], 0);
-			const UE::Geometry::FAxisAlignedBox3d Bounds = Ring[0].Mesh.GetBounds();
+			const UE::Geometry::FAxisAlignedBox3d Bounds = Ring[0].Mesh->GetBounds();
 			TestTrue(TEXT("the frieze stands out from the die"), Bounds.Max.X > (3.9 + 0.385) * 100.0);
 		}
 		return true;

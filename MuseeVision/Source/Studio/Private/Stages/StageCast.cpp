@@ -67,7 +67,7 @@ namespace Musee::Studio
 			FDynamicMeshToMeshDescription Converter;
 			// The kernel writes linear colours (Matter's per-vertex facts), never sRGB.
 			Converter.ConversionOptions.bTransformVtxColorsSRGBToLinear = false;
-			Converter.Convert(&Piece.Mesh, Description, /*bCopyTangents*/ true);
+			Converter.Convert(&*Piece.Mesh, Description, /*bCopyTangents*/ true);
 			return Description;
 		}
 
@@ -99,15 +99,6 @@ namespace Musee::Studio
 				Bodies.Add({AssetToken(Key.ToName()), Key.ToName(), Anchor->Frame.OriginMeters, Anchor->Frame.Rotation});
 			}
 			return Bodies;
-		}
-
-		bool Failed(const FMakeReport& Report, const FSoftObjectPath& Mesh)
-		{
-			const FString Package = Mesh.GetLongPackageName();
-			return Report.Packages.ContainsByPredicate([&Package](const FMadePackage& Made)
-			{
-				return Made.PackageName == Package && Made.Outcome == EMadeOutcome::Failed;
-			});
 		}
 
 		void Place(const FFormMadePiece& Piece, const FCastMesh& Mesh, TArray<FStagePlacement>& OutPlacements)
@@ -163,7 +154,7 @@ namespace Musee::Studio
 		{
 			for (const FCastMesh& Mesh : Results[Index].Meshes)
 			{
-				if (!Failed(Report, Mesh.Path))
+				if (!Report.HasFailed(Mesh.Path))
 				{
 					Place(*Owners[Index], Mesh, Cast.Placements);
 				}

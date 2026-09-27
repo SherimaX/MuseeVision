@@ -10,7 +10,10 @@
  */
 struct FFormWallOpening
 {
-	/** The opening's centre, metres along the wall's face from the start of its plan path. */
+	/**
+	 * The opening's centre, metres along the wall's face from the start of its plan path (for a closed path with
+	 * corners, from its first corner). An opening lies within one straight or smooth stretch, clear of its corners.
+	 */
 	double CenterMeters = 0.0;
 
 	/** The clear width between the jambs, metres along the face. */

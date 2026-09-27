@@ -50,6 +50,15 @@ namespace Musee::Studio
 		}
 	}
 
+	bool FMakeReport::HasFailed(const FSoftObjectPath& Object) const
+	{
+		const FString Package = Object.GetLongPackageName();
+		return Packages.ContainsByPredicate([&Package](const FMadePackage& Made)
+		{
+			return Made.PackageName == Package && Made.Outcome == EMadeOutcome::Failed;
+		});
+	}
+
 	void FMakeReport::Append(const FMakeReport& Other)
 	{
 		Packages.Append(Other.Packages);

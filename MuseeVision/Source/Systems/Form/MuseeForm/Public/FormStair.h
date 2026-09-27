@@ -17,7 +17,8 @@ struct MUSEEFORM_API FFormStairSteps
  * A straight flight of solid steps with a sloping soffit, set out by Blondel's rule: two risers and one going make one
  * pace of the body (FMuseeHumanMeasure::Pace, 0.63 m; F. Blondel, Cours d'architecture, 1675, and DIN 18065:2020,
  * which admits 0.59 to 0.65 m). It climbs along the drawing frame's x axis from its first riser at x = 0 on the lower
- * floor (z = 0), centred across y, with the soffit WaistMeters under the line of the nosings.
+ * floor (z = 0), centred across y, with the soffit WaistMeters under the line of the nosings. Past its last riser it
+ * carries one tread level with the upper floor, where the landing takes over.
  *
  * Give the risers, the run, or both. With only the risers, each going is the pace less two risers. With only the run
  * (first nosing to last), the number of risers is the one whose steps come closest to the pace without a riser taller

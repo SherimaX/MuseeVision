@@ -106,9 +106,9 @@ namespace Musee::FormMaking
 			{
 				Made.SlotSurfaces.Add(Surfaces[Index]);
 			}
-			Musee::Form::WriteDynamicMesh(Mesh, ToEngine(Meters(1.0)), Made.Mesh);
-			UE::Geometry::FDynamicMeshMaterialAttribute* Materials = Made.Mesh.Attributes()->GetMaterialID();
-			for (const int32 Triangle : Made.Mesh.TriangleIndicesItr())
+			Musee::Form::WriteDynamicMesh(Mesh, ToEngine(Meters(1.0)), *Made.Mesh);
+			UE::Geometry::FDynamicMeshMaterialAttribute* Materials = Made.Mesh->Attributes()->GetMaterialID();
+			for (const int32 Triangle : Made.Mesh->TriangleIndicesItr())
 			{
 				Materials->SetValue(Triangle, SurfaceOfSlot[Materials->GetValue(Triangle)]);
 			}
@@ -177,7 +177,7 @@ namespace Musee::FormMaking
 
 	FFormPieceShell MeasureShell(const FFormMadePiece& Piece)
 	{
-		const Musee::Form::FShellEdges Edges = Musee::Form::MeasureShellEdges(Piece.Mesh);
+		const Musee::Form::FShellEdges Edges = Musee::Form::MeasureShellEdges(*Piece.Mesh);
 		FFormPieceShell Shell;
 		Shell.Piece = Piece.Name;
 		Shell.Drawer = Piece.Drawer;

@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "DynamicMesh/DynamicMesh3.h"
+#include "FormPieceMesh.h"
 #include "MuseeFrame.h"
 #include "MuseeKey.h"
 
@@ -48,8 +49,8 @@ struct FFormMadePiece
 	/** Who drew it: the stage, or the system that added it (Site, Nature, Art), so a finding goes to its cause. */
 	FName Drawer;
 
-	/** The geometry, in engine units (Musee::ToEngine), in the piece's own frame. */
-	UE::Geometry::FDynamicMesh3 Mesh;
+	/** The geometry, in engine units (Musee::ToEngine), in the piece's own frame: an FDynamicMesh3 that never moves. */
+	FFormPieceMesh Mesh;
 
 	/** The surface of a material slot (a triangle's MaterialID), or NAME_None past the last. */
 	[[nodiscard]] FName SurfaceOfSlot(int32 Slot) const

@@ -11,9 +11,10 @@ namespace Musee::Form::Drawing
 	namespace
 	{
 		/**
-		 * The flight's side, (x along the climb, z up): the risers and treads from the first riser's foot to the top
-		 * nosing, a plumb cut down to the soffit, and the soffit back down to the lower floor. The soffit runs parallel
-		 * to the nosings' line, WaistMeters under it square to the pitch.
+		 * The flight's side, (x along the climb, z up): the risers and treads from the first riser's foot up to the last
+		 * riser and one tread level with the upper floor, a plumb cut down to the soffit, and the soffit back down to the
+		 * lower floor. The soffit runs parallel to the nosings' line, WaistMeters under it square to the pitch. The top
+		 * tread carries the flight past its last riser, so the plumb cut stands behind it rather than retracing it.
 		 */
 		TArray<FVector2D> FlightSide(const FFormStairSteps& Steps, double WaistMeters, double& OutFootMeters)
 		{
@@ -26,13 +27,11 @@ namespace Musee::Form::Drawing
 			for (int32 Step = 0; Step < Steps.Risers; ++Step)
 			{
 				Side.Add(FVector2D(Step * G, (Step + 1) * R));
-				if (Step + 1 < Steps.Risers)
-				{
-					Side.Add(FVector2D((Step + 1) * G, (Step + 1) * R));
-				}
+				Side.Add(FVector2D((Step + 1) * G, (Step + 1) * R));
 			}
-			const double Top = (Steps.Risers - 1) * G;
-			Side.Add(FVector2D(Top, Steps.Risers * R - Drop));
+			// The soffit, z = R + x R / G - Drop, under the end of the top tread.
+			const double Top = Steps.Risers * G;
+			Side.Add(FVector2D(Top, (Steps.Risers + 1) * R - Drop));
 			// The soffit, z = R + x R / G - Drop, meets the lower floor here.
 			OutFootMeters = (Drop - R) * G / R;
 			Side.Add(FVector2D(OutFootMeters, 0.0));
@@ -50,9 +49,10 @@ namespace Musee::Form::Drawing
 		}
 		double Foot = 0.0;
 		const TArray<FVector2D> Side = FlightSide(Steps, Shape.WaistMeters, Foot);
-		if (Foot <= 0.0 || Foot >= (Steps.Risers - 1) * Steps.GoingMeters)
+		// The waist must reach below the inner corners (a drop past one riser) and the soffit must meet the lower floor.
+		if (Foot <= 0.0 || Foot >= Steps.Risers * Steps.GoingMeters)
 		{
-			OutWhy = FString::Printf(TEXT("a waist of %.3f m under risers of %.4f m makes a soffit that misses the lower floor"),
+			OutWhy = FString::Printf(TEXT("a waist of %.3f m under risers of %.4f m makes a soffit that cuts the steps or misses the lower floor"),
 				Shape.WaistMeters, Steps.RiserMeters);
 			return false;
 		}

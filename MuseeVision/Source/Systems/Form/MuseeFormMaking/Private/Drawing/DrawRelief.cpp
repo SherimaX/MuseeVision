@@ -31,10 +31,11 @@ namespace Musee::Form::Drawing
 		{
 			const int32 Steps = FMath::Max(1, FMath::CeilToInt32((To - From) / Grid));
 			TArray<double> Stations;
-			for (int32 Step = 0; Step <= Steps; ++Step)
+			for (int32 Step = 0; Step < Steps; ++Step)
 			{
 				Stations.Add(FMath::Lerp(From, To, double(Step) / Steps));
 			}
+			Stations.Add(To);
 			return Stations;
 		}
 
@@ -130,7 +131,12 @@ namespace Musee::Form::Drawing
 		auto At = [](const FPatchGrid& Grid, bool bVFirst, int32 I, int32 J) { return bVFirst ? Grid.At(J, I) : Grid.At(I, J); };
 		auto NoHint = [](const FVector&) { return FVector::ZeroVector; };
 		Mesh.UseSlot(FFormRelief::FacePart);
-		const FPatchGrid Face = Sample(Vs, bFaceVFirst, [&](double U, double V) { return Ground.At(U, V, FMath::Max(0.0, Height(U, V))); });
+		// Round a loop the last column is the first again, carving and all, so the block closes on itself.
+		auto Proud = [&](double U, double V)
+		{
+			return FMath::Max(0.0, Height(Ground.bLoop && U >= Ground.Length ? 0.0 : U, V));
+		};
+		const FPatchGrid Face = Sample(Vs, bFaceVFirst, [&](double U, double V) { return Ground.At(U, V, Proud(U, V)); });
 		Patch(Mesh, Face, NoHint);
 		Mesh.UseSlot(FFormRelief::BlockPart);
 		const FPatchGrid BackGrid = Sample(BackVs, !bFaceVFirst, [&](double U, double V) { return Ground.At(U, V, -Shape.BackMeters); });

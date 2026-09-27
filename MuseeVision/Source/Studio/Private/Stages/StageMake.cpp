@@ -29,19 +29,6 @@ namespace Musee::Studio
 		const TCHAR* const SiteName = TEXT("site");
 		const TCHAR* const AllName = TEXT("all");
 
-		/** Times a step of a make into its report. */
-		class FStepTimer
-		{
-		public:
-			FStepTimer(FMakeReport& InReport, FString InName) : Report(InReport), Name(MoveTemp(InName)), Start(FPlatformTime::Seconds()) {}
-			~FStepTimer() { Report.Steps.Add({Name, FPlatformTime::Seconds() - Start}); }
-
-		private:
-			FMakeReport& Report;
-			FString Name;
-			double Start;
-		};
-
 		FString ScheduleDirOf(const FMuseeKey& Stage, const FStageMakeOptions& Options)
 		{
 			return Options.ScheduleDir.IsEmpty() ? Musee::Records::DataRoot() / StagesRecords / Stage.ToString() : Options.ScheduleDir;
@@ -120,17 +107,17 @@ namespace Musee::Studio
 		const FDerivedDataTally Before = MeasureDerivedData();
 		FStageFabric Fabric;
 		{
-			FStepTimer Timer(Report, Folder + TEXT(": describe and make"));
+			FMakeStepTimer Timer(Report, Folder + TEXT(": describe and make"));
 			Fabric = MakeFabric(Room, Options, ScheduleDir, Report.Findings);
 		}
 		FStageCast Cast;
 		{
-			FStepTimer Timer(Report, Folder + TEXT(": cast"));
+			FMakeStepTimer Timer(Report, Folder + TEXT(": cast"));
 			Cast = CastStage(Fabric, Options, ScheduleDir, Report);
 		}
 		Report.DerivedData = MeasureDerivedData() - Before;
 		{
-			FStepTimer Timer(Report, Folder + TEXT(": level"));
+			FMakeStepTimer Timer(Report, Folder + TEXT(": level"));
 			FStageLevel Level;
 			Level.StageName = Folder;
 			Level.PackageName = Options.Paths.StageLevel(Folder);
@@ -153,7 +140,7 @@ namespace Musee::Studio
 	FMakeReport MakeMuseum(const FStageMakeOptions& Options)
 	{
 		FMakeReport Report;
-		FStepTimer Timer(Report, TEXT("museum level"));
+		FMakeStepTimer Timer(Report, TEXT("museum level"));
 		const TValueOrError<FSitePlan, FString> Plan = Musee::Site::ReadPlan(Options.PlanRecord);
 		if (Plan.HasError())
 		{
