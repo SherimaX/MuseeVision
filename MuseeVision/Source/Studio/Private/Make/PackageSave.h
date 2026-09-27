@@ -14,6 +14,19 @@ namespace Musee::Studio
 	UPackage* CreateMadePackage(const FString& PackageName);
 
 	/**
+	 * The asset a make writes at a package: the one already loaded when there is one (so nothing loaded goes stale), the
+	 * one on disk when its package is in memory without it, else a fresh one in a made package that replaces the file.
+	 * The asset is named after its package.
+	 */
+	UObject* FindOrCreateMadeAsset(UClass& Class, const FString& PackageName);
+
+	template <typename T>
+	T* FindOrCreateMadeAsset(const FString& PackageName)
+	{
+		return CastChecked<T>(FindOrCreateMadeAsset(*T::StaticClass(), PackageName));
+	}
+
+	/**
 	 * Saves a made asset's package to the file its name gives, the same way every time: the package's persistent GUID
 	 * is derived from its name, and nothing time-dependent is written. Returns false with the reason in OutWhy.
 	 */

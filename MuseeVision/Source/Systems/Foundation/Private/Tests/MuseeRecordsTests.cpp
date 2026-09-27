@@ -5,6 +5,7 @@
 #include "MuseeDependencySet.h"
 #include "MuseeFoundationTests.h"
 #include "MuseeRecords.h"
+#include "MuseeTestSurvey.h"
 
 #if WITH_DEV_AUTOMATION_TESTS
 
@@ -148,6 +149,34 @@ bool FMuseeFoundationRecordsDependenciesTest::RunTest(const FString& Parameters)
 	FMuseeDependencySet Joined;
 	Joined.Append(Forward);
 	TestEqual(TEXT("A set appended holds the same files"), Joined.Hash(), Forward.Hash());
+	return true;
+}
+
+
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FMuseeFoundationRecordsVectorsTest, "Musee.Foundation.Records.Vectors", Musee::Tests::Flags)
+
+bool FMuseeFoundationRecordsVectorsTest::RunTest(const FString& Parameters)
+{
+	using namespace Musee::Tests;
+	const TValueOrError<FMuseeTestSurvey, FString> Read = Musee::ReadRecord<FMuseeTestSurvey>(Fixture(TEXT("Survey/survey.json")));
+	if (!TestTrue(TEXT("Vectors written as their numbers are read"), Read.HasValue()))
+	{
+		AddError(Read.GetError());
+		return false;
+	}
+	const FMuseeTestSurvey& Survey = Read.GetValue();
+	TestEqual(TEXT("A point is read from [x, y, z]"), Survey.PointMeters, FVector(1.5, -2.25, 0.4));
+	TestEqual(TEXT("A size is read from [x, y]"), Survey.SizeMeters, FVector2D(12.75, 2.0));
+	TestTrue(TEXT("An outline is read from [[x, y], ...]"), Survey.Outline.Num() == 4 && Survey.Outline[2] == FVector2D(3.0, 2.0));
+	TestTrue(TEXT("A path mixes both forms of a point"), Survey.Path.Num() == 2 && Survey.Path[1] == FVector(1.0, 2.0, 3.0));
+	const FVector2D* East = Survey.Marks.Find(TEXT("east"));
+	TestTrue(TEXT("A map's vectors are read"), East && *East == FVector2D(4.15, 0.0));
+
+	TestTrue(TEXT("A vector of the wrong count is refused"),
+		RefusalOf<FMuseeTestSurvey>(TEXT("Rejects/vector-short.json")).Contains(TEXT("PointMeters: has 2 numbers where a vector of 3 is written")));
+	TestTrue(TEXT("A vector's numbers are numbers"),
+		RefusalOf<FMuseeTestSurvey>(TEXT("Rejects/vector-not-numbers.json")).Contains(TEXT("Outline[1][1]: is a string where a number is expected")));
 	return true;
 }
 

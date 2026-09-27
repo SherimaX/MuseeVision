@@ -6,7 +6,7 @@
 
 namespace Musee::ArtMaking
 {
-	bool FillWorkImage(const FString& ImagePath, UTexture2D& Texture, FString& OutWhy)
+	bool ComposeWorkImage(const FString& ImagePath, UTexture2D& Texture, FString& OutWhy)
 	{
 		FImage Image;
 		if (!FImageUtils::LoadImage(*ImagePath, Image))

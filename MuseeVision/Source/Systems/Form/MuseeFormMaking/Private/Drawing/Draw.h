@@ -24,6 +24,17 @@ namespace Musee::Form::Drawing
 	bool DrawStair(const FFormStair& Shape, FMeshBuilder& Mesh, FString& OutWhy);
 	bool DrawRelief(const FFormRelief& Shape, FMeshBuilder& Mesh, FString& OutWhy);
 
+	/** The parts a dome is drawn in: its outer face and springing, its inner face (or its one sheet), its crown zone. */
+	namespace DomePart
+	{
+		inline const FName Outer(TEXT("dome.outer"));
+		inline const FName Inner(TEXT("dome.inner"));
+		inline const FName Oculus(TEXT("dome.oculus"));
+	}
+
+	/** A dome's shell (or its one sheet), placed by its own frame within the drawing's, in the parts above. */
+	bool DrawDome(const FFormDome& Shape, FMeshBuilder& Mesh, FString& OutWhy);
+
 	/** The slab into Slab, and the pane (when the opening is glazed) into Pane. */
 	bool DrawCeiling(const FFormCeiling& Shape, FMeshBuilder& Slab, FMeshBuilder& Pane, FString& OutWhy);
 

@@ -128,13 +128,36 @@ namespace Musee::FormMaking
 			if (const FFormStair* S = Shape.TryGet<FFormStair>()) { return DrawStair(*S, Mesh, OutWhy); }
 			if (const FFormCeiling* S = Shape.TryGet<FFormCeiling>()) { return DrawCeiling(*S, Mesh, Pane, OutWhy); }
 			if (const FFormRelief* S = Shape.TryGet<FFormRelief>()) { return DrawRelief(*S, Mesh, OutWhy); }
+			if (const FFormDome* S = Shape.TryGet<FFormDome>()) { return DrawDome(*S, Mesh, OutWhy); }
 			OutWhy = TEXT("its shape is none of Form's words");
 			return false;
 		}
 	}
 
-	void Make(const FFormDrawing& Drawing, TArray<FFormMadePiece>& OutPieces, TArray<FMuseeFinding>& OutFindings)
+	namespace
 	{
+		/**
+		 * A dome names its own surfaces: its parts take them, the outer face's standing in for any it leaves unnamed (and
+		 * the drawing's for an outer face it leaves unnamed).
+		 */
+		FFormDrawing WithDomeSurfaces(const FFormDrawing& Drawing)
+		{
+			FFormDrawing Out = Drawing;
+			if (const FFormDome* Dome = Drawing.Shape.TryGet<FFormDome>())
+			{
+				using namespace Musee::Form::Drawing;
+				const FName Outer = Dome->Surface.IsNone() ? Drawing.Surface : Dome->Surface;
+				Out.PartSurfaces.Add(DomePart::Outer, Outer);
+				Out.PartSurfaces.Add(DomePart::Inner, Dome->InnerSurface.IsNone() ? Outer : Dome->InnerSurface);
+				Out.PartSurfaces.Add(DomePart::Oculus, Dome->OculusSurface.IsNone() ? Outer : Dome->OculusSurface);
+			}
+			return Out;
+		}
+	}
+
+	void Make(const FFormDrawing& Given, TArray<FFormMadePiece>& OutPieces, TArray<FMuseeFinding>& OutFindings)
+	{
+		const FFormDrawing Drawing = WithDomeSurfaces(Given);
 		FMeshBuilder Mesh;
 		FMeshBuilder Pane;
 		FString Why;

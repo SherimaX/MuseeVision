@@ -3,6 +3,7 @@
 #include "CoreMinimal.h"
 #include "FormBasin.h"
 #include "FormCeiling.h"
+#include "FormDome.h"
 #include "FormExtrusion.h"
 #include "FormFace.h"
 #include "FormLathe.h"
@@ -16,7 +17,7 @@
 
 /** The shape a drawing draws: one word of Form's vocabulary. */
 using FFormShape = TVariant<FFormExtrusion, FFormSweep, FFormLathe, FFormFace, FFormWall, FFormBasin, FFormStair, FFormCeiling,
-	FFormRelief>;
+	FFormRelief, FFormDome>;
 
 /**
  * A drawing of one made thing of a stage, in Form's language: a wall, a coping, a slab, a post. It says what shape it

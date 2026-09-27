@@ -63,6 +63,9 @@ namespace Musee::Form
 		/** Adds every vertex and triangle of Other, keeping its slots by name. */
 		void Append(const FMeshBuilder& Other);
 
+		/** Moves every vertex by an offset, metres. */
+		void Translate(const FVector& OffsetMeters);
+
 		int32 NumVertices() const { return Positions.Num(); }
 		int32 NumTriangles() const { return Triangles.Num(); }
 		int32 NumUVChannels() const { return UVs.Num(); }

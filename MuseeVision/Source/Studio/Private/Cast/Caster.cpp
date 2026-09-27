@@ -1,7 +1,6 @@
 #include "Cast/Caster.h"
 
 #include "AssetCompilingManager.h"
-#include "AssetRegistry/IAssetRegistry.h"
 #include "Cast/CastParts.h"
 #include "Cast/CastRules.h"
 #include "DistanceFieldAtlas.h"
@@ -151,32 +150,6 @@ namespace Musee::Studio
 			}
 		}
 
-		/** The mesh asset a part is cast into: the loaded one when there is one, else a fresh one that replaces the file. */
-		UStaticMesh* FindOrCreateMesh(const FString& PackageName, const FString& AssetName)
-		{
-			const FString ObjectPath = PackageName + TEXT(".") + AssetName;
-			if (UStaticMesh* Loaded = FindObject<UStaticMesh>(nullptr, *ObjectPath); IsValid(Loaded))
-			{
-				return Loaded;
-			}
-			if (FindPackage(nullptr, *PackageName))
-			{
-				// The package is in memory without its mesh: recast into the mesh on disk, so nothing loaded goes stale.
-				if (UStaticMesh* OnDisk = LoadObject<UStaticMesh>(nullptr, *ObjectPath, nullptr, LOAD_NoWarn | LOAD_Quiet))
-				{
-					return OnDisk;
-				}
-			}
-			UPackage* Package = CreateMadePackage(PackageName);
-			if (UObject* InTheWay = StaticFindObjectFast(nullptr, Package, FName(*AssetName)))
-			{
-				InTheWay->Rename(nullptr, GetTransientPackage(), REN_DontCreateRedirectors | REN_NonTransactional | REN_DoNotDirty);
-			}
-			UStaticMesh* Mesh = NewObject<UStaticMesh>(Package, FName(*AssetName), RF_Public | RF_Standalone);
-			IAssetRegistry::GetChecked().AssetCreated(Mesh);
-			return Mesh;
-		}
-
 		void SetMaterials(UStaticMesh& Mesh, const FPendingPart& Pending)
 		{
 			TArray<FStaticMaterial> Materials;
@@ -209,7 +182,7 @@ namespace Musee::Studio
 		/** Commits a part's drawing and settings to its mesh asset, ready to build. */
 		void Commit(FPendingPart& Pending)
 		{
-			UStaticMesh* Mesh = FindOrCreateMesh(Pending.PackageName, Pending.AssetName);
+			UStaticMesh* Mesh = FindOrCreateMadeAsset<UStaticMesh>(Pending.PackageName);
 			Pending.Mesh = Mesh;
 			const ECastKind Kind = Pending.Part.Kind;
 			Mesh->SetNumSourceModels(1);

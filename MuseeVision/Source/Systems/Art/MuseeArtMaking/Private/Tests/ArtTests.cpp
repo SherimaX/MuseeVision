@@ -1,4 +1,5 @@
 #include "ArtHangEntry.h"
+#include "ArtPaintLayer.h"
 #include "ArtPieces.h"
 #include "ArtWallPath.h"
 #include "ArtWork.h"
@@ -8,6 +9,7 @@
 #include "Components/StaticMeshComponent.h"
 #include "DynamicMesh/DynamicMesh3.h"
 #include "DynamicMesh/DynamicMeshAttributeSet.h"
+#include "FormMake.h"
 #include "Engine/Texture2D.h"
 #include "Engine/World.h"
 #include "GameFramework/Actor.h"
@@ -156,6 +158,7 @@ bool FArtCanvasTest::RunTest(const FString& Parameters)
 	const FFormMadePiece& Sunrise = Pieces[2];
 	TestEqual(TEXT("The face is named for the work"), Willows.Name, FName(TEXT("canvas.monet-willows-two-willows")));
 	TestEqual(TEXT("It is painted in the work's own paint"), Willows.Material, FName(TEXT("paint.monet-willows-two-willows")));
+	TestTrue(TEXT("with the paint's working and history, from its palette entry"), Willows.Working == TEXT("stretched") && Willows.History == TEXT("clean"));
 	TestEqual(TEXT("Its tacking edges and back are linen"), Pieces[1].Material, FName(TEXT("accent.linen")));
 	TestEqual(TEXT("A flat canvas's face is its real size"), Tests::AreaSquareMeters(Sunrise.Mesh), 0.63 * 0.48, 1e-6);
 	// The curved face stands 40 mm inside the wall, round the oval's west end, which turns it nearly 2 radians: 80 mm shorter.
@@ -196,6 +199,62 @@ bool FArtCanvasTest::RunTest(const FString& Parameters)
 	return true;
 }
 
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FArtFrameTest, "Musee.Art.Frame", Musee::ArtMaking::Tests::Flags)
+
+bool FArtFrameTest::RunTest(const FString& Parameters)
+{
+	using namespace Musee::ArtMaking;
+	TArray<FFormMadePiece> Pieces;
+	TArray<FMuseeFinding> Findings;
+	GatherArt(Tests::Oval(TEXT("framed")), Pieces, Findings);
+	for (const FMuseeFinding& Found : Findings)
+	{
+		AddError(Found.ToString());
+	}
+	const FFormMadePiece* Frame = Pieces.FindByPredicate([](const FFormMadePiece& P) { return P.Name == TEXT("canvas.monet-impression-sunrise.frame"); });
+	if (!TestNotNull(TEXT("The framed canvas has its frame"), Frame))
+	{
+		return false;
+	}
+	TestTrue(TEXT("It takes the finish of the plan's frame surface"), Frame->Surface == TEXT("framed.frame.gilt") && Frame->Material.IsNone());
+	TestTrue(TEXT("It is one closed solid"), Musee::FormMaking::MeasureShell(*Frame).IsClosed());
+	FBox Box(ForceInit);
+	for (const int32 V : Frame->Mesh->VertexIndicesItr())
+	{
+		Box += Frame->Frame.PointToParent(Musee::FromEngine(Frame->Mesh->GetVertex(V)));
+	}
+	// The moulding is 0.10 m wide round a 0.63 m canvas (0.09 + 0.015 x 0.63, held at the least), reaching 0.957 of it out.
+	const double Out = 0.957 * 0.10;
+	TestEqual(TEXT("It runs outside the canvas, across"), Box.GetSize().X, 0.63 + 2.0 * Out, 1e-3);
+	TestEqual(TEXT("and up"), Box.GetSize().Z, 0.48 + 2.0 * Out, 1e-3);
+	TestEqual(TEXT("It frames the canvas where it hangs"), Box.Min.Z, 1.31 - Out, 1e-3);
+	TestEqual(TEXT("Its back stands on the hanging gap"), Box.Min.Y, -5.0 + 0.002, 1e-6);
+	TestTrue(TEXT("Its moulding stands proud of the canvas"), Box.Max.Y > -5.0 + 0.04 + 0.03);
+
+	const FFormMadePiece* Right = Pieces.FindByPredicate([](const FFormMadePiece& P) { return P.Name == TEXT("canvas.monet-willows-two-willows.1"); });
+	const bool bLeft = Pieces.ContainsByPredicate([](const FFormMadePiece& P) { return P.Name == TEXT("canvas.monet-willows-two-willows.0"); });
+	if (TestTrue(TEXT("A work on two canvases is two canvases, named by index"), Right && bLeft))
+	{
+		const UE::Geometry::FDynamicMeshUVOverlay* UVs = Right->Mesh->Attributes()->GetUVLayer(0);
+		float Least = TNumericLimits<float>::Max(), Most = TNumericLimits<float>::Lowest();
+		for (const int32 E : UVs->ElementIndicesItr())
+		{
+			Least = FMath::Min(Least, UVs->GetElement(E).X);
+			Most = FMath::Max(Most, UVs->GetElement(E).X);
+		}
+		TestTrue(TEXT("The second canvas shows the right half of the image"), FMath::IsNearlyEqual(Least, 8.5f, 1e-4f) && FMath::IsNearlyEqual(Most, 17.0f, 1e-4f));
+	}
+	const TArray<FArtPaintLayer> Layers = PaintLayers(Tests::Oval(TEXT("framed")));
+	if (TestEqual(TEXT("One paint layer a work"), Layers.Num(), 2))
+	{
+		const FArtPaintLayer& Willows = Layers[1];
+		TestTrue(TEXT("Its image spans its canvases"), Willows.SizeMeters.Equals(FVector2D(17.0, 2.0)));
+		TestTrue(TEXT("It is the work's own paint over the paint's palette entry"), Willows.Palette == TEXT("paint.monet-willows-two-willows")
+			&& Willows.Parent == PaintPalette && Willows.Working == TEXT("stretched") && Willows.History == TEXT("clean") && !Willows.ImagePath.IsEmpty());
+	}
+	return true;
+}
+
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FArtImageTest, "Musee.Art.Image", Musee::ArtMaking::Tests::Flags)
 
 bool FArtImageTest::RunTest(const FString& Parameters)
@@ -203,7 +262,7 @@ bool FArtImageTest::RunTest(const FString& Parameters)
 	using namespace Musee::ArtMaking;
 	UTexture2D* Texture = NewObject<UTexture2D>(GetTransientPackage());
 	FString Why;
-	if (!TestTrue(TEXT("A work's image fills a texture"), FillWorkImage(Tests::Fixture(TEXT("assets/salon/monet-willows-two-willows.png")), *Texture, Why)))
+	if (!TestTrue(TEXT("A work's image fills a texture"), ComposeWorkImage(Tests::Fixture(TEXT("assets/salon/monet-willows-two-willows.png")), *Texture, Why)))
 	{
 		AddError(Why);
 		return false;
@@ -211,7 +270,7 @@ bool FArtImageTest::RunTest(const FString& Parameters)
 	TestTrue(TEXT("At its own resolution"), Texture->Source.GetSizeX() == 4 && Texture->Source.GetSizeY() == 2);
 	TestTrue(TEXT("In its own colour space, sRGB"), Texture->SRGB);
 	TestEqual(TEXT("Shown at most at the museum's size for works"), Texture->MaxTextureSize, WorkImageMaxPixels);
-	TestFalse(TEXT("A file that isn't an image is refused"), FillWorkImage(Tests::Fixture(TEXT("collection.json")), *Texture, Why));
+	TestFalse(TEXT("A file that isn't an image is refused"), ComposeWorkImage(Tests::Fixture(TEXT("collection.json")), *Texture, Why));
 	return true;
 }
 

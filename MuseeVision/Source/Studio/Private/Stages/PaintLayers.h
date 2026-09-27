@@ -1,0 +1,22 @@
+#pragma once
+
+#include "CoreMinimal.h"
+#include "Make/MakeReport.h"
+#include "MuseeStageDresser.h"
+
+namespace Musee::Studio
+{
+	struct FStageMakeOptions;
+
+	/**
+	 * Makes each hung work's paint layer before a stage's pieces are cast, since its face resolves to it (Art's
+	 * FArtPaintLayer, D-015: Art and Matter define, Studio writes):
+	 * - the work's image as a texture, <Root>/Art/T_<Work>, sRGB, its source's id the hash of its pixels and its
+	 *   lighting GUID derived from its inputs, so the same image makes the same bytes;
+	 * - the work's paint instance, `paint.<id>` with the paint's working and history, at <Root>/Matter/MI_<...>, which
+	 *   for the museum is where Musee::Matter::Resolve finds it (Musee::Matter::InstancePackage), derived from the paint
+	 *   palette entry's own instance and carrying the texture and the image's size in metres.
+	 * Only what changed is written. A layer whose parent material is not made is a finding.
+	 */
+	void MakePaintLayers(const FMuseeStageContext& Stage, const FStageMakeOptions& Options, FMakeReport& Report);
+}

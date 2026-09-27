@@ -9,7 +9,9 @@
  * typed structs. Every number in the museum that isn't a physical constant comes through it.
  *
  * A record file is one JSON object. Its fields are the struct's properties by name; a key is written as a string;
- * nested structs are objects and arrays are arrays. Keys beginning with `$` are the file's declarations, not fields:
+ * nested structs are objects and arrays are arrays. A point or a size, an `FVector` or `FVector2D`, is written as its
+ * numbers, `[x, y, z]` or `[x, y]` (or as the object `{ "X": x, ... }`), so an outline is `[[x, y], [x, y], ...]`.
+ * Keys beginning with `$` are the file's declarations, not fields:
  * - `"$records": [ {...}, {...} ]` holds the file's records when it has more than one; otherwise the object itself is
  *   the one record.
  * - `"$units": { "HeightMeters": "m", "IlluminanceLux": "lx" }` declares the unit each named field is written in,
@@ -22,7 +24,8 @@
  * - a field whose UPROPERTY carries `meta = (MuseeRequired)` is missing or null;
  * - a declared unit is not the unit of the field's `Units` metadata (the same unit under another name agrees), or the
  *   field has no `Units` metadata, or no such field exists;
- * - a field doesn't exist on the struct, or its value has the wrong JSON type, or a key breaks the key rule;
+ * - a field doesn't exist on the struct, or its value has the wrong JSON type, or a key breaks the key rule, or a
+ *   vector written as an array has the wrong count of numbers;
  * - the file is missing, isn't JSON, or declares something other than the three declarations above.
  * The required and unit checks read reflection metadata, which exists where records are made (the editor and its
  * commandlets). A cooked game has no metadata; there the reader converts and checks types only.

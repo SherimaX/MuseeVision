@@ -26,6 +26,8 @@ namespace Musee::ArtMaking
 		double HeightMeters = 0.0;
 		/** Whether the image reads left to right as the path runs; otherwise its left edge is at the far end. */
 		bool bReadsWithPath = true;
+		/** Where the canvas's left edge falls in the work's image, from the image's left edge: the canvases before it. */
+		double ImageOffsetMeters = 0.0;
 	};
 
 	/**
@@ -39,7 +41,7 @@ namespace Musee::ArtMaking
 
 	/**
 	 * Builds a canvas's two surfaces, each in a piece frame given in the stage's frame, to the Form kernel's mesh
-	 * contract: the painted face, its UV0 in metres from the image's top left corner as seen from the room; and the
+	 * contract: the painted face, its UV0 in metres from the work's image's top left corner as seen from the room; and the
 	 * linen of its tacking edges and back, its UV0 in metres along the linen.
 	 */
 	void BuildCanvas(const FWallPath& Wall, const FCanvasSpec& Canvas, const FMuseeFrame& PieceFrame, UE::Geometry::FDynamicMesh3& OutFace,

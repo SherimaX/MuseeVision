@@ -2,6 +2,7 @@
 #include "Growth/Plant.h"
 #include "HAL/FileManager.h"
 #include "Misc/Paths.h"
+#include "MuseeCollision.h"
 #include "MuseeRecords.h"
 #include "NatureAnchors.h"
 #include "NaturePieces.h"
@@ -120,6 +121,48 @@ namespace Musee::NatureMaking
 			return Out;
 		}
 
+		/**
+		 * What a grown part is made of: a cast specimen's metal, which the visitor can't pass through; or the bed's own
+		 * material, else its species' living tissue for the organ, which nothing collides with, as the bed works and ages it.
+		 */
+		void MaterialOfPart(const FNatureBed& Entry, const FNatureSpecies& Species, FName Organ, FFormMadePiece& OutPiece)
+		{
+			if (Entry.Cast.IsSet())
+			{
+				OutPiece.Material = Entry.Cast.Material;
+				OutPiece.Working = Entry.Cast.Working;
+				OutPiece.History = Entry.Cast.History;
+				OutPiece.Collision = Collision::Solid.Profile();
+				return;
+			}
+			OutPiece.Material = Entry.Material.IsNone() ? Species.MaterialOf(Organ) : Entry.Material;
+			OutPiece.Working = Entry.Working;
+			OutPiece.History = Entry.History;
+			OutPiece.Collision = NAME_None;
+		}
+
+		/** What is wrong with a bed's count, spacing and material spec, one clause each. */
+		TArray<FString> BedFaults(const FNatureBed& Entry)
+		{
+			TArray<FString> Out;
+			if (Entry.Count <= 0 || (Entry.Count > 1 && Entry.Spacing <= 0.0f) || Entry.Spacing < 0.0f)
+			{
+				Out.Add(TEXT("it needs a count of more than zero, and a spacing of more than zero for more than one plant"));
+			}
+			if (Entry.Cast.IsSet())
+			{
+				if (Entry.Count != 1 || Entry.Cast.Working.IsNone() || Entry.Cast.History.IsNone() || !Entry.Material.IsNone())
+				{
+					Out.Add(TEXT("a cast specimen is one plant, cast in a material with its working and history, and names no other material"));
+				}
+			}
+			else if (Entry.Working.IsNone() || Entry.History.IsNone())
+			{
+				Out.Add(TEXT("it needs the working and history its plants are resolved with"));
+			}
+			return Out;
+		}
+
 		void Grow(const FMuseeStageContext& Stage, const FPlanting& Planting, const TArray<FVector>& Places, const FMuseeFrame& Bed,
 			const FBedWater& In, TArray<FFormMadePiece>& OutPieces, TArray<FMuseeFinding>& OutFindings)
 		{
@@ -148,9 +191,8 @@ namespace Musee::NatureMaking
 				FFormMadePiece& Piece = OutPieces.AddDefaulted_GetRef();
 				Piece.Name = FName(FString::Printf(TEXT("%s.%s.%s"), *Entry.Bed.ToString(), *Planting.Species->Key.ToString(), *Organ.ToString()));
 				Piece.Surface = FName(FString::Printf(TEXT("plant.%s"), *Organ.ToString()));
-				Piece.Material = Planting.Species->MaterialOf(Organ);
+				MaterialOfPart(Entry, *Planting.Species, Organ, Piece);
 				Piece.Body = Entry.Body;
-				Piece.Collision = NAME_None;
 				Piece.bNanite = true;
 				Piece.Frame = Frame;
 				Surface->Write(Piece.Mesh);
@@ -181,10 +223,7 @@ namespace Musee::NatureMaking
 				{
 					Faults.Append(SpeciesFaults(*Found));
 				}
-				if (Entry.Count <= 0 || Entry.Spacing <= 0.0f)
-				{
-					Faults.Add(TEXT("it needs a count and a spacing of more than zero"));
-				}
+				Faults.Append(BedFaults(Entry));
 				if (!Faults.IsEmpty())
 				{
 					OutFindings.Add(Finding(Stage, FString::Printf(TEXT("Bed %s (%s): %s."), *Entry.Bed.ToString(), *Entry.Species, *FString::Join(Faults, TEXT("; ")))));

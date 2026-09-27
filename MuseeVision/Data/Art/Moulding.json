@@ -1,0 +1,39 @@
+{
+  "$sources": [
+    "The museum's picture-frame moulding: the as-built Salon gilt frame, a carved Louis XV / Barbizon moulding (windows/Source/MuseeVision/Frames/MuseeFrame.cpp, SalonGilt: its profile, its width rule and its 6 mm sight lip), re-set with A outward from the canvas's edge and B up from the canvas's face, in units of the moulding's width, and drawn from the outside edge inward so its solid lies on its left.",
+    "The width rule, 0.09 m + 0.015 m per metre of the canvas's longer side, held between 0.10 and 0.14 m: Data/Stages/salon/Finishes.json, salon.frame.gilt.",
+    "The rebate stands 2 mm clear of the canvas's edge all round, so the stretcher can move with the room's humidity without binding in its frame."
+  ],
+  "$units": {
+    "WidthBaseMeters": "m",
+    "LeastWidthMeters": "m",
+    "MostWidthMeters": "m",
+    "RebateClearanceMeters": "m"
+  },
+  "face": {
+    "source": "SalonGilt: the back-edge bead, the outer cavetto, the raised ribbon, the carved ogee, the deep cove, the astragal, the sanded frieze and the sight-edge bead, ending on the canvas's face at the lip.",
+    "start": [0.957, 0.0],
+    "steps": [
+      { "line": [0.957, 0.31], "joint": "Crisp" },
+      { "arc": { "centerMeters": [0.922, 0.31], "radiiMeters": [0.035], "fromDegrees": 0, "toDegrees": 90 } },
+      { "arc": { "centerMeters": [0.922, 0.405], "radiiMeters": [0.06], "fromDegrees": 270, "toDegrees": 180 } },
+      { "line": [0.842, 0.425], "joint": "Crisp" },
+      { "arc": { "centerMeters": [0.782, 0.425], "radiiMeters": [0.06], "fromDegrees": 0, "toDegrees": 180 }, "joint": "Crisp" },
+      { "line": [0.71365, 0.45792], "joint": "Crisp" },
+      { "arc": { "centerMeters": [0.63661, 0.422], "radiiMeters": [0.085], "fromDegrees": 25, "toDegrees": 195 }, "joint": "Crisp" },
+      { "line": [0.55454, 0.36931], "joint": "Crisp" },
+      { "arc": { "centerMeters": [0.31, 0.44], "radiiMeters": [0.25, 0.34], "fromDegrees": -12, "toDegrees": -90 }, "joint": "Crisp" },
+      { "line": [0.295, 0.11098], "joint": "Crisp" },
+      { "arc": { "centerMeters": [0.28, 0.085], "radiiMeters": [0.03], "fromDegrees": 60, "toDegrees": 180 }, "joint": "Crisp" },
+      { "line": [0.25, 0.06], "joint": "Crisp" },
+      { "line": [0.025588, 0.012319], "joint": "Crisp" },
+      { "arc": { "centerMeters": [-0.012, 0.026], "radiiMeters": [0.04], "fromDegrees": -20, "toDegrees": 200 }, "joint": "Crisp" },
+      { "line": [-0.05, 0.0], "joint": "Crisp" }
+    ]
+  },
+  "widthBaseMeters": 0.09,
+  "widthPerLongerSide": 0.015,
+  "leastWidthMeters": 0.10,
+  "mostWidthMeters": 0.14,
+  "rebateClearanceMeters": 0.002
+}
