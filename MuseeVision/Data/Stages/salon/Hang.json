@@ -491,7 +491,8 @@
       "support": "canvas",
       "frame": "salon.frame.gilt",
       "care": "oil-and-tempera",
-      "canvas": "monet-rouen-cathedral-1",
+      "canvas": 1,
+      "image": "monet-rouen-cathedral-1",
       "note": "One of five canvases of the one catalogue work; image assets/paintings/monet-rouen-cathedral-1.jpg."
     },
     {
@@ -507,7 +508,8 @@
       "support": "canvas",
       "frame": "salon.frame.gilt",
       "care": "oil-and-tempera",
-      "canvas": "monet-rouen-cathedral-2",
+      "canvas": 2,
+      "image": "monet-rouen-cathedral-2",
       "note": "One of five canvases of the one catalogue work; image assets/paintings/monet-rouen-cathedral-2.jpg."
     },
     {
@@ -523,7 +525,8 @@
       "support": "canvas",
       "frame": "salon.frame.gilt",
       "care": "oil-and-tempera",
-      "canvas": "monet-rouen-cathedral-3",
+      "canvas": 3,
+      "image": "monet-rouen-cathedral-3",
       "note": "One of five canvases of the one catalogue work; image assets/paintings/monet-rouen-cathedral-3.jpg."
     },
     {
@@ -539,7 +542,8 @@
       "support": "canvas",
       "frame": "salon.frame.gilt",
       "care": "oil-and-tempera",
-      "canvas": "monet-rouen-cathedral-4",
+      "canvas": 4,
+      "image": "monet-rouen-cathedral-4",
       "note": "One of five canvases of the one catalogue work; image assets/paintings/monet-rouen-cathedral-4.jpg."
     },
     {
@@ -555,7 +559,8 @@
       "support": "canvas",
       "frame": "salon.frame.gilt",
       "care": "oil-and-tempera",
-      "canvas": "monet-rouen-cathedral-5",
+      "canvas": 5,
+      "image": "monet-rouen-cathedral-5",
       "note": "One of five canvases of the one catalogue work; image assets/paintings/monet-rouen-cathedral-5.jpg."
     },
     {
@@ -609,14 +614,16 @@
       ],
       "height": 1.0,
       "size": [
-        null,
+        0.0,
         0.994
       ],
       "facing_deg": 0.0,
       "support": "bronze with cotton tulle skirt and silk-satin ribbon",
       "frame": "none",
       "care": "textiles.silk",
-      "scan": "assets/sculptures/degas-little-dancer.mvm",
+      "scan": {
+        "mesh": "assets/sculptures/degas-little-dancer.mvm"
+      },
       "note": "Feet on the plinth top (1.00) at its centre, facing +x (east, towards the arriving visitor). Height 0.994 (data/sculptures.json heightCm 99.4); width from the scan's bounds (Art measures). Scan CC BY 4.0 (assets/sculptures/CREDITS.md): credit required. Care: the most sensitive component (the silk ribbon)."
     }
   ]

@@ -19,9 +19,9 @@
         -4.35,
         1.6
       ],
-      "copy": "exhibition-facsimile",
-      "mount": "hall-of-light.mount",
-      "mountSize": [
+      "reproduction": "exhibition-facsimile",
+      "mat": "hall-of-light.mount",
+      "matSize": [
         1.0,
         0.9
       ],
@@ -46,9 +46,9 @@
         4.35,
         1.6
       ],
-      "copy": "exhibition-facsimile",
-      "mount": "hall-of-light.mount",
-      "mountSize": [
+      "reproduction": "exhibition-facsimile",
+      "mat": "hall-of-light.mount",
+      "matSize": [
         1.0,
         0.9
       ],
@@ -73,9 +73,9 @@
         -4.35,
         1.6
       ],
-      "copy": "exhibition-facsimile",
-      "mount": "hall-of-light.mount",
-      "mountSize": [
+      "reproduction": "exhibition-facsimile",
+      "mat": "hall-of-light.mount",
+      "matSize": [
         1.0,
         0.9
       ],
@@ -100,9 +100,9 @@
         4.35,
         1.6
       ],
-      "copy": "exhibition-facsimile",
-      "mount": "hall-of-light.mount",
-      "mountSize": [
+      "reproduction": "exhibition-facsimile",
+      "mat": "hall-of-light.mount",
+      "matSize": [
         1.0,
         0.9
       ],
@@ -127,9 +127,9 @@
         -4.35,
         1.6
       ],
-      "copy": "exhibition-facsimile",
-      "mount": "hall-of-light.mount",
-      "mountSize": [
+      "reproduction": "exhibition-facsimile",
+      "mat": "hall-of-light.mount",
+      "matSize": [
         1.0,
         0.9
       ],
@@ -154,9 +154,9 @@
         4.35,
         1.6
       ],
-      "copy": "exhibition-facsimile",
-      "mount": "hall-of-light.mount",
-      "mountSize": [
+      "reproduction": "exhibition-facsimile",
+      "mat": "hall-of-light.mount",
+      "matSize": [
         1.0,
         0.9
       ],
@@ -181,9 +181,9 @@
         -4.35,
         1.6
       ],
-      "copy": "exhibition-facsimile",
-      "mount": "hall-of-light.mount",
-      "mountSize": [
+      "reproduction": "exhibition-facsimile",
+      "mat": "hall-of-light.mount",
+      "matSize": [
         1.0,
         0.9
       ],
@@ -208,9 +208,9 @@
         4.35,
         1.6
       ],
-      "copy": "exhibition-facsimile",
-      "mount": "hall-of-light.mount",
-      "mountSize": [
+      "reproduction": "exhibition-facsimile",
+      "mat": "hall-of-light.mount",
+      "matSize": [
         1.0,
         0.9
       ],
@@ -235,9 +235,9 @@
         -4.35,
         1.6
       ],
-      "copy": "exhibition-facsimile",
-      "mount": "hall-of-light.mount",
-      "mountSize": [
+      "reproduction": "exhibition-facsimile",
+      "mat": "hall-of-light.mount",
+      "matSize": [
         1.0,
         0.9
       ],
@@ -262,9 +262,9 @@
         4.35,
         1.6
       ],
-      "copy": "exhibition-facsimile",
-      "mount": "hall-of-light.mount",
-      "mountSize": [
+      "reproduction": "exhibition-facsimile",
+      "mat": "hall-of-light.mount",
+      "matSize": [
         1.0,
         0.9
       ],
@@ -289,9 +289,9 @@
         -4.35,
         1.6
       ],
-      "copy": "exhibition-facsimile",
-      "mount": "hall-of-light.mount",
-      "mountSize": [
+      "reproduction": "exhibition-facsimile",
+      "mat": "hall-of-light.mount",
+      "matSize": [
         1.0,
         0.9
       ],
@@ -316,9 +316,9 @@
         4.35,
         1.6
       ],
-      "copy": "exhibition-facsimile",
-      "mount": "hall-of-light.mount",
-      "mountSize": [
+      "reproduction": "exhibition-facsimile",
+      "mat": "hall-of-light.mount",
+      "matSize": [
         1.0,
         0.9
       ],
@@ -343,9 +343,9 @@
         -4.35,
         1.6
       ],
-      "copy": "exhibition-facsimile",
-      "mount": "hall-of-light.mount",
-      "mountSize": [
+      "reproduction": "exhibition-facsimile",
+      "mat": "hall-of-light.mount",
+      "matSize": [
         1.0,
         0.9
       ],
@@ -370,9 +370,9 @@
         4.35,
         1.6
       ],
-      "copy": "exhibition-facsimile",
-      "mount": "hall-of-light.mount",
-      "mountSize": [
+      "reproduction": "exhibition-facsimile",
+      "mat": "hall-of-light.mount",
+      "matSize": [
         1.0,
         0.9
       ],
@@ -397,9 +397,9 @@
         -4.35,
         1.6
       ],
-      "copy": "exhibition-facsimile",
-      "mount": "hall-of-light.mount",
-      "mountSize": [
+      "reproduction": "exhibition-facsimile",
+      "mat": "hall-of-light.mount",
+      "matSize": [
         1.0,
         0.9
       ],
@@ -424,9 +424,9 @@
         4.35,
         1.6
       ],
-      "copy": "exhibition-facsimile",
-      "mount": "hall-of-light.mount",
-      "mountSize": [
+      "reproduction": "exhibition-facsimile",
+      "mat": "hall-of-light.mount",
+      "matSize": [
         1.0,
         0.9
       ],
@@ -451,9 +451,9 @@
         -4.44,
         1.6
       ],
-      "copy": "exhibition-facsimile",
-      "mount": "hall-of-light.autochrome.mat",
-      "mountSize": [
+      "reproduction": "exhibition-facsimile",
+      "mat": "hall-of-light.autochrome.mat",
+      "matSize": [
         1.0,
         0.9
       ],
@@ -478,9 +478,9 @@
         4.44,
         1.6
       ],
-      "copy": "exhibition-facsimile",
-      "mount": "hall-of-light.autochrome.mat",
-      "mountSize": [
+      "reproduction": "exhibition-facsimile",
+      "mat": "hall-of-light.autochrome.mat",
+      "matSize": [
         1.0,
         0.9
       ],
@@ -505,9 +505,9 @@
         -4.44,
         1.6
       ],
-      "copy": "exhibition-facsimile",
-      "mount": "hall-of-light.autochrome.mat",
-      "mountSize": [
+      "reproduction": "exhibition-facsimile",
+      "mat": "hall-of-light.autochrome.mat",
+      "matSize": [
         1.0,
         0.9
       ],
@@ -532,9 +532,9 @@
         4.44,
         1.6
       ],
-      "copy": "exhibition-facsimile",
-      "mount": "hall-of-light.autochrome.mat",
-      "mountSize": [
+      "reproduction": "exhibition-facsimile",
+      "mat": "hall-of-light.autochrome.mat",
+      "matSize": [
         1.0,
         0.9
       ],
@@ -558,7 +558,7 @@
       "support": "silvered copper plate",
       "frame": "none",
       "care": "works-on-paper",
-      "copy": "exhibition-facsimile",
+      "reproduction": "exhibition-facsimile",
       "facing": "south",
       "facing_deg": 90.0,
       "tilt_deg": 28.65,
@@ -582,7 +582,7 @@
       "support": "silvered copper plate",
       "frame": "none",
       "care": "works-on-paper",
-      "copy": "exhibition-facsimile",
+      "reproduction": "exhibition-facsimile",
       "facing": "north",
       "facing_deg": 270.0,
       "tilt_deg": 28.65,
@@ -606,7 +606,7 @@
       "support": "paper",
       "frame": "none",
       "care": "works-on-paper",
-      "copy": "exhibition-facsimile",
+      "reproduction": "exhibition-facsimile",
       "facing": "south",
       "facing_deg": 90.0,
       "tilt_deg": 28.65,
@@ -630,7 +630,7 @@
       "support": "paper",
       "frame": "none",
       "care": "works-on-paper",
-      "copy": "exhibition-facsimile",
+      "reproduction": "exhibition-facsimile",
       "facing": "north",
       "facing_deg": 270.0,
       "tilt_deg": 28.65,
