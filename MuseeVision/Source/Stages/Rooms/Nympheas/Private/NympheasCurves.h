@@ -41,6 +41,9 @@ namespace Musee::Nympheas
 		/** The parameter in [Low, High] where the parallel at D crosses the line y = Y, found by bisection. */
 		double TWhereY(double Y, double D, double Low, double High) const;
 
+		/** The parameter in [Low, High] where the parallel at D crosses the line x = X, found by bisection. */
+		double TWhereX(double X, double D, double Low, double High) const;
+
 		/** The parallel at D sampled at Stations even steps of t from From to To, both ends included. */
 		TArray<FVector2D> Stations(double D, double From, double To, int32 Stations) const;
 

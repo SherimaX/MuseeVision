@@ -17,6 +17,7 @@ void UNympheasRoom::Describe(FSiteDescription& Out) const
 	Out.DisplayName = NSLOCTEXT("MuseeNympheas", "DisplayName", "The Nymphéas Oval");
 	DescribeSite(Out);
 	DrawShell(Out.Pieces);
+	DrawRoofFrame(Out.Pieces);
 	DrawFloors(Out.Pieces);
 	DrawWell(Out.Pieces);
 	DrawPond(Out.Pieces);

@@ -447,10 +447,15 @@ Giverny's cloud; sound; the use.
 target); each coping block's own tone and lippage beyond Matter's defaults; the waterline history; the exterior dress;
 the whispering-gallery check; a per-opening cloud field so the sky seen through the dome matches Giverny.
 
-**Waits for Form (not drawn yet, Form polish):** sweeps along paths that are not in plan. The P6 slim architrave, swept
-up the jambs and over the arch on the curved oval face; the velarium frame's eight T-ribs and their hanging rods,
-following the cloth's rise; the dome's glazing bars and curb, following the glass's rise. The rim ring, the cloth and
-the glass are drawn; the room makes without them.
+**Drawn with Form's sweeps on faces (K2-SITE-FORM):** the P6 slim architrave, drawn on the curved oval face in its
+development up the jambs and over the arch; the velarium frame's eight T-ribs lying on the cloth over the seams (lifted
+by the cloth's fall across half the flange) with their ends chamfered against the rim ring's flat leg, and their Ø 6
+hanging rods at 1.20 up to the bars; the dome's glazing bars under the glass (along x whole over the seams, along y cut
+between them, their ends chamfered against the bars' sides and the curb), bearing on a bronze curb of their own section
+round the rim line. The cloth and the glass are paraboloids, z = springing + rise (1 − ρ²), as this sheet sets them out.
+The door and the passage block are one **straight passage** through the curved wall, its jambs on y ±1.500 from the inner
+face to the port face; the block is masonry between the port face and the oval's outer face. The skirting stops against
+the architrave's outer edge (0.160 along the face from each jamb, y ±1.653), not at y ±1.630, where it would run into it.
 
 ## 13. Palette keys to confirm and catalogue gaps
 **Palette keys** (no `todo.` keys; roles guessed or workings outside `workingsByEra`):

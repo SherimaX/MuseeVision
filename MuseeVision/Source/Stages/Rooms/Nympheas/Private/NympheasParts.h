@@ -10,8 +10,9 @@ struct FSiteDescription;
 
 /**
  * The oval's parts by trade, each drawn in Form's language into the description's pieces: the shell (§3.1-3.3), the
- * floors (§3.4), the well and its stair (§3.7), the pond (§3.5), and the fittings (the guard rails, §3.6, and the
- * benches, §3.8). The site's declarations (footprint, ports, openings, anchors, enclosures) are NympheasSite's.
+ * bronze under the glass (the velarium's frame and the dome's bars and curb, §3.3), the floors (§3.4), the well and its
+ * stair (§3.7), the pond (§3.5), and the fittings (the guard rails, §3.6, and the benches, §3.8). The site's
+ * declarations (footprint, ports, openings, anchors, enclosures) are NympheasSite's.
  */
 namespace Musee::Nympheas
 {
@@ -70,9 +71,7 @@ namespace Musee::Nympheas
 	namespace Pieces
 	{
 		inline const TCHAR* const OvalWall = TEXT("oval.wall");
-		inline const TCHAR* const Portal = TEXT("passage.portal");
-		inline const TCHAR* const CheekNorth = TEXT("passage.cheek.north");
-		inline const TCHAR* const CheekSouth = TEXT("passage.cheek.south");
+		inline const TCHAR* const PassageBlock = TEXT("passage.block");
 		inline const TCHAR* const Upstand = TEXT("attic.upstand");
 		inline const TCHAR* const RoofRing = TEXT("roof.ring");
 		inline const TCHAR* const RoofGlass = TEXT("roof.glass");
@@ -92,6 +91,7 @@ namespace Musee::Nympheas
 	}
 
 	void DrawShell(TArray<FFormDrawing>& Out);
+	void DrawRoofFrame(TArray<FFormDrawing>& Out);
 	void DrawFloors(TArray<FFormDrawing>& Out);
 	void DrawWell(TArray<FFormDrawing>& Out);
 	void DrawPond(TArray<FFormDrawing>& Out);

@@ -3,7 +3,7 @@
 #include "NympheasPlan.h"
 
 /**
- * The oval's shell (§3.1-3.3): the elliptical wall with its door at the east apex, the passage's masonry out to the
+ * The oval's shell (§3.1-3.3): the elliptical wall with its door at the east apex, the passage block out to the
  * port face, the cove and skirting round the room, the linen velarium on its bronze rim ring, the attic's upstand, the
  * roof ring and the glass dome over it all.
  */
@@ -22,15 +22,17 @@ namespace Musee::Nympheas
 
 		/**
 		 * The oval's wall: its inner face drawn anticlockwise from the west apex, so its thickness lies outside the room,
-		 * with the door half-way round at the east apex, as wide on the face as the arc between its jambs.
+		 * with the door half-way round at the east apex: a straight passage 3.00 wide through the curved wall, its jambs on
+		 * y ±1.50 from the inner face to the outer, running on into the passage's masonry.
 		 */
 		FFormDrawing OvalWall()
 		{
 			FFormWallOpening Door;
 			Door.CenterMeters = 0.5 * Oval().Length(0.0);
-			Door.WidthMeters = 2.0 * Oval().ArcAt(JambT(), 0.0);
+			Door.WidthMeters = Plan::DoorWidth;
 			Door.HeadMeters = Plan::DoorSpringing;
 			Door.bArched = true;
+			Door.bStraight = true;
 			FFormWall Shape;
 			Shape.Plan = FFormProfile::Ellipse(FVector2D::ZeroVector, Plan::OvalA, Plan::OvalB, 180.0, false);
 			Shape.ThicknessMeters = Plan::WallMeters;
@@ -45,45 +47,75 @@ namespace Musee::Nympheas
 		}
 
 		/**
-		 * The passage's masonry. The portal is the port face's slab, from the port face back to the plane that touches the
-		 * oval's outer face on the axis, pierced by the passage (the port's class: 3.00 wide, arched from 3.30); the
-		 * cheeks fill between that plane and the curved outer face beside the passage, floor to the block's top.
+		 * The passage block (§3.1): masonry filling |y| ≤ 2.10 between the port face (x 11.90) and the oval's curved outer
+		 * face, floor to its flat top, pierced by the passage: the same straight passage as the oval's door, 3.00 wide and
+		 * arched from 3.30, running on from the wall's jambs to the port face. Drawn as a wall between two faces, its face on
+		 * the port face (walked south, so the block lies to its right) and its back on the oval's outer face.
 		 */
-		void Passage(TArray<FFormDrawing>& Out)
+		FFormDrawing PassageBlock()
 		{
-			const double Back = Plan::OvalA + Plan::WallMeters;
-			const double Half = 0.5 * Plan::DoorWidth;
 			const double Block = Plan::BlockHalfWidth;
-			FFormExtrusion Portal;
-			Portal.Outline = FFormProfile::From(FVector2D(-Block, 0.0));
-			Portal.Outline.LineTo(FVector2D(-Half, 0.0), EFormJoint::Crisp).LineTo(FVector2D(-Half, Plan::DoorSpringing), EFormJoint::Crisp)
-				.ArcAbout(FVector2D(0.0, Plan::DoorSpringing), Half, Half, 180.0, 0.0).LineTo(FVector2D(Half, 0.0))
-				.LineTo(FVector2D(Block, 0.0), EFormJoint::Crisp).LineTo(FVector2D(Block, Plan::BlockTop), EFormJoint::Crisp)
-				.LineTo(FVector2D(-Block, Plan::BlockTop), EFormJoint::Crisp).Close();
-			Portal.DepthMeters = Plan::PortFaceX - Back;
-			const FMuseeFrame Across = FrameOfAxes(FVector(Back, 0.0, 0.0), FVector(0.0, 1.0, 0.0), FVector(0.0, 0.0, 1.0));
-			Out.Add(Drawn(Pieces::Portal, TEXT("passage.reveal"), MoveTemp(Portal), Solid, Across));
-
-			// The north cheek, between y -2.10 and -1.50: the plane, then back along the outer face.
-			const double Near = Oval().TWhereY(-Half, Plan::WallMeters, -UE_DOUBLE_HALF_PI, 0.0);
-			const double Far = Oval().TWhereY(-Block, Plan::WallMeters, -UE_DOUBLE_HALF_PI, 0.0);
-			const int32 Stations = FMath::Max(2, FMath::CeilToInt32(Plan::OvalStations * (Near - Far) / (2.0 * UE_DOUBLE_PI)));
-			TArray<FVector2D> North = {FVector2D(Back, -Block), FVector2D(Back, -Half)};
-			North.Append(Oval().Stations(Plan::WallMeters, Near, Far, Stations));
-			Out.Add(Drawn(Pieces::CheekNorth, TEXT("passage.reveal"), Slab(Polygon(North), {}, 0.0, Plan::BlockTop), Solid));
-			Out.Add(Drawn(Pieces::CheekSouth, TEXT("passage.reveal"), Slab(Polygon(MirroredInY(North)), {}, 0.0, Plan::BlockTop), Solid));
+			const double Reach = Oval().TWhereY(Block, Plan::WallMeters, 0.0, UE_DOUBLE_HALF_PI);
+			const int32 Stations = FMath::Max(2, FMath::CeilToInt32(Plan::OvalStations * Reach / UE_DOUBLE_PI));
+			FFormWallOpening Passage;
+			Passage.CenterMeters = Block;
+			Passage.WidthMeters = Plan::DoorWidth;
+			Passage.HeadMeters = Plan::DoorSpringing;
+			Passage.bArched = true;
+			Passage.bStraight = true;
+			FFormWall Shape;
+			Shape.Plan = FFormProfile::Polyline({FVector2D(Plan::PortFaceX, -Block), FVector2D(Plan::PortFaceX, Block)}, false);
+			Shape.Back = SmoothPath(Oval().Stations(Plan::WallMeters, -Reach, Reach, Stations));
+			Shape.HeightMeters = Plan::BlockTop;
+			Shape.Openings.Add(Passage);
+			FFormDrawing Drawing = Drawn(Pieces::PassageBlock, TEXT("exterior.wall"), MoveTemp(Shape), Solid);
+			Drawing.PartSurfaces.Add(FFormWall::RevealPart, Surface(TEXT("passage.reveal")));
+			return Drawing;
 		}
 
-		/** The cove (P9) and skirting (P10), run round the inner face: the cove unbroken over the door, the skirting stopped either side of it. */
+		/** A distance along the oval's inner face from the west apex, anticlockwise (the wall's own U), where it stands at y. */
+		double AlongFace(double Y)
+		{
+			const double T = FMath::Asin(Y / Plan::OvalB);
+			return 0.5 * Oval().Length(0.0) - FMath::Sign(T) * Oval().ArcAt(FMath::Abs(T), 0.0);
+		}
+
+		/**
+		 * P6, the slim architrave round the door (§3.2), drawn on the oval's inner face in its development: up the south
+		 * jamb, over the arch at its stations and down the north jamb, its section out from the opening and proud of the face.
+		 */
+		FFormDrawing Architrave()
+		{
+			const double Half = 0.5 * Plan::DoorWidth;
+			TArray<FVector2D> Points = {FVector2D(AlongFace(Half), 0.0)};
+			for (int32 Station = 0; Station <= Plan::ArchStations; ++Station)
+			{
+				const double Angle = UE_DOUBLE_PI * Station / Plan::ArchStations;
+				Points.Add(FVector2D(AlongFace(Half * FMath::Cos(Angle)), Plan::DoorSpringing + Half * FMath::Sin(Angle)));
+			}
+			Points.Add(FVector2D(AlongFace(-Half), 0.0));
+			FFormSweep Shape;
+			Shape.Section = Moulding(Plan::ArchitraveProfile);
+			Shape.Face = FFormProfile::Ellipse(FVector2D::ZeroVector, Plan::OvalA, Plan::OvalB, 180.0, false);
+			Shape.Path = SmoothPath(Points);
+			return Drawn(TEXT("oval.door.architrave"), TEXT("door.architrave"), MoveTemp(Shape), Solid);
+		}
+
+		/**
+		 * The cove (P9) and skirting (P10), run round the inner face, and the door's architrave (P6): the cove unbroken over
+		 * the door, the skirting stopped against the architrave's outer edge either side of it.
+		 */
 		void Mouldings(TArray<FFormDrawing>& Out)
 		{
+			Out.Add(Architrave());
+
 			FFormSweep Cove;
 			Cove.Section = Moulding(Plan::CoveProfile);
 			Cove.Path = FFormProfile::Ellipse(FVector2D::ZeroVector, Plan::OvalA, Plan::OvalB, 180.0, true);
 			Cove.ElevationMeters = Plan::CoveFoot;
 			Out.Add(Drawn(TEXT("oval.cove"), TEXT("cove"), MoveTemp(Cove), nullptr));
 
-			const double From = FMath::Asin(Plan::SkirtingEndY / Plan::OvalB);
+			const double From = Oval().TAt(Oval().ArcAt(JambT(), 0.0) + Plan::ArchitraveWidth, 0.0);
 			FFormSweep Skirting;
 			Skirting.Section = Moulding(Plan::SkirtingProfile);
 			Skirting.Path = FFormProfile::From(Oval().Point(From)).ArcAbout(FVector2D::ZeroVector, Plan::OvalA, Plan::OvalB,
@@ -91,7 +123,7 @@ namespace Musee::Nympheas
 			Out.Add(Drawn(TEXT("oval.skirting"), TEXT("wall.skirting"), MoveTemp(Skirting), nullptr));
 		}
 
-		/** A dome springing from the rim line's ellipse at a height. */
+		/** A paraboloid springing from the rim line's ellipse at a height, as the cloth and the glass rise (§3.3). */
 		FFormDome RimDome(double Springing, double Rise, double Thickness, FName Outer)
 		{
 			FFormDome Dome;
@@ -99,6 +131,7 @@ namespace Musee::Nympheas
 			Dome.SemiAxisXMeters = Plan::RimA;
 			Dome.SemiAxisYMeters = Plan::RimB;
 			Dome.RiseMeters = Rise;
+			Dome.bParaboloid = true;
 			Dome.ThicknessMeters = Thickness;
 			Dome.Surface = Outer;
 			return Dome;
@@ -151,7 +184,7 @@ namespace Musee::Nympheas
 	void DrawShell(TArray<FFormDrawing>& Out)
 	{
 		Out.Add(OvalWall());
-		Passage(Out);
+		Out.Add(PassageBlock());
 		Mouldings(Out);
 		Ceiling(Out);
 	}

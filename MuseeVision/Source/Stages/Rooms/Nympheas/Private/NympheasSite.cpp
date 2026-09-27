@@ -152,7 +152,7 @@ namespace Musee::Nympheas
 		}
 
 		/**
-		 * The enclosures. The oval is bounded by its wall, the passage's masonry, its floor and the curb round the opening,
+		 * The enclosures. The oval is bounded by its wall, the passage block, its floor and the curb round the opening,
 		 * the attic's upstand, the roof ring and the glass dome. The well is bounded by the shaft's walls, its foundation,
 		 * the slab over it, the stair and its landings.
 		 */
@@ -161,7 +161,7 @@ namespace Musee::Nympheas
 			FFormEnclosure& Oval = Out.Enclosures.AddDefaulted_GetRef();
 			Oval.Key = Key(TEXT("oval"));
 			Oval.Kind = EFormEnclosureKind::Enclosed;
-			Oval.Pieces = {Pieces::OvalWall, Pieces::Portal, Pieces::CheekNorth, Pieces::CheekSouth, Pieces::Floor, Pieces::CurbNorth,
+			Oval.Pieces = {Pieces::OvalWall, Pieces::PassageBlock, Pieces::Floor, Pieces::CurbNorth,
 				Pieces::CurbSouth, Pieces::Upstand, Pieces::RoofRing, Pieces::RoofGlass};
 
 			FFormEnclosure& Well = Out.Enclosures.AddDefaulted_GetRef();

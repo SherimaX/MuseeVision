@@ -33,10 +33,18 @@ namespace Musee::Nympheas::Plan
 	inline constexpr double BlockHalfWidth = 2.100;
 	inline constexpr double BlockTop = 5.200;
 
-	// ---- §3.2 mouldings: the catalogue's cove and skirting, and where the skirting stops beside the door --------------
+	/** The door's arch is set out at 64 stations per semicircle (§3.1, as built: SalonStructure.cpp:41-42). */
+	inline constexpr int32 ArchStations = 64;
+
+	// ---- §3.2 mouldings: the catalogue's cove, skirting and architrave --------------------------------------------------
 	inline constexpr const TCHAR* CoveProfile = TEXT("cove.quarter-ellipse.1450");
 	inline constexpr const TCHAR* SkirtingProfile = TEXT("skirting.flat.100");
-	inline constexpr double SkirtingEndY = 1.630;
+	/**
+	 * P6, the slim architrave round the door on the oval face, 0.160 wide on the face. The skirting stops against its outer
+	 * edge on either side of the door.
+	 */
+	inline constexpr const TCHAR* ArchitraveProfile = TEXT("architrave.two-fascia.160");
+	inline constexpr double ArchitraveWidth = 0.160;
 
 	// ---- §3.3 velarium, attic and glass dome, all within the rim line: the cove's rim, ≈ the ellipse 9.55 × 6.05 -------
 	inline constexpr double CoveReach = 1.450;
@@ -49,7 +57,7 @@ namespace Musee::Nympheas::Plan
 	inline constexpr double RimAngleThickness = 0.006;
 	/** The attic upstand at the rim line, 0.10 thick, from the cove's top to the ring's soffit. */
 	inline constexpr double UpstandMeters = 0.100;
-	/** The glass dome springs from the ring's top. */
+	/** The glass dome springs from the ring's top. The cloth and the glass both rise as z = springing + rise (1 − ρ²). */
 	inline constexpr double DomeRise = 0.600;
 	/**
 	 * The dome's laminated glass: two 8 mm low-iron panes on a 1.52 mm PVB interlayer. Overhead glazing is laminated
@@ -57,6 +65,32 @@ namespace Musee::Nympheas::Plan
 	 * a walk-off roof light of this span.
 	 */
 	inline constexpr double DomeGlassMeters = 0.008 + 0.008 + 0.00152;
+
+	/**
+	 * The velarium's frame (§3.3): bronze tees 40 × 40 × 5 lying on the cloth over its seams, where the 1.40 widths are
+	 * double-stitched (y = ±0.70 … ±4.90), their ends on the rim ring; each hung from the dome's bar above it by Ø 6 rods
+	 * at 1.20.
+	 */
+	inline constexpr double SeamYs[] = {0.70, 2.10, 3.50, 4.90};
+	inline constexpr double RibFlange = 0.040;
+	inline constexpr double RibDepth = 0.040;
+	inline constexpr double RibMetal = 0.005;
+	inline constexpr double RodDiameter = 0.006;
+	inline constexpr double RodSpacing = 1.200;
+	/**
+	 * The dome's glazing bars (§3.3): 40 wide × 70 deep under the glass, along x over the seams and along y at x = 0,
+	 * ±1.20 … ±8.40, bearing on a bronze curb of their own section round the rim line on the ring's inner face.
+	 */
+	inline constexpr double BarWidth = 0.040;
+	inline constexpr double BarDepth = 0.070;
+	inline constexpr double BarSpacing = 1.200;
+	inline constexpr int32 BarsEachSide = 7;
+	/**
+	 * The ribs and bars follow the cloth's and the glass's rise through points this far apart along them: the rises bend
+	 * at most 2 × 0.60 / 6.05² = 0.033 per metre, so a chord of 0.25 m departs from them by under 0.3 mm, within the
+	 * museum's 1 mm chord tolerance.
+	 */
+	inline constexpr double RiseStep = 0.250;
 
 	// ---- §3.4 floors -------------------------------------------------------------------------------------------------
 	/** The honed travertine, finished level at z 0. */
