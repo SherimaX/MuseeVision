@@ -6,6 +6,7 @@
 #include "MotionTestStage.h"
 #include "MuseeRecords.h"
 #include "MuseeSignals.h"
+#include "MuseeUsable.h"
 
 #if WITH_DEV_AUTOMATION_TESTS
 
@@ -99,7 +100,9 @@ bool FMotionScheduleTest::RunTest(const FString& Parameters)
 	TestEqual(TEXT("Travel in metres"), Lift.Travel, 2.6f);
 	TestEqual(TEXT("The open sequence's steps"), Lift.Open.Num(), 2);
 	TestTrue(TEXT("A channel step, then a move"), !Lift.Open[0].IsMove() && Lift.Open[0].Channel == FMuseeKey(TEXTVIEW("proof.rim")) && Lift.Open[1].Move == UMotionMechanism::Open);
-	TestEqual(TEXT("The optional words"), Lift.OpenUse.Verb.Source, FString(TEXT("Raise")));
+	TestEqual(TEXT("The optional words for opening"), Lift.OpenUse.Verb.Source, FString(TEXT("Raise")));
+	TestEqual(TEXT("and for closing"), Lift.CloseUse.Caption.Source, FString(TEXT("Settle the block")));
+	TestTrue(TEXT("Without them, a mechanism has none"), Schedule.Mechanisms[1].OpenUse.Verb.Key.IsNone() && Schedule.Mechanisms[1].CloseUse.Verb.Key.IsNone());
 	TestTrue(TEXT("A sound spec has no faults"), Faults(Lift).IsEmpty() && Faults(Schedule.Mechanisms[1]).IsEmpty() && Faults(Schedule.Mechanisms[2]).IsEmpty());
 
 	const TValueOrError<FMotionSchedule, FString> Faulty = Musee::ReadRecord<FMotionSchedule>(Tests::Fixture(TEXT("Stages/faulty")) / FMotionSchedule::FileName);
@@ -149,6 +152,38 @@ bool FMotionDresserTest::RunTest(const FString& Parameters)
 	return true;
 }
 
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FMotionControlSightTest, "Musee.Motion.ControlSight", Musee::Motion::Tests::Flags)
+
+bool FMotionControlSightTest::RunTest(const FString& Parameters)
+{
+	using namespace Musee::Motion;
+	Tests::FTestStage Stage;
+	TArray<FMuseeFinding> Findings;
+	Tests::Dress(Stage, Findings);
+	// A gaze across the iris, 50 mm above the block's top and clear of it, as the visitor's Look traces it.
+	const FVector From = Musee::ToEngine(FVector(0.3, -2.0, 1.05));
+	const FVector To = Musee::ToEngine(FVector(0.3, 2.0, 1.05));
+	const auto Trace = [&](ECollisionChannel Channel)
+	{
+		FHitResult Hit;
+		Stage.World->LineTraceSingleByChannel(Hit, From, To, Channel, FCollisionQueryParams(SCENE_QUERY_STAT(MuseeMotionTest), true));
+		return Hit;
+	};
+	const FHitResult Seen = Trace(ECC_Visibility);
+	const UMotionControl* Control = Cast<UMotionControl>(Seen.GetComponent());
+	if (!TestNotNull(TEXT("The Visibility trace finds the control's usable volume"), Control))
+	{
+		return false;
+	}
+	TestTrue(TEXT("the iris's"), Control->ComponentHasTag(TEXT("proof.iris")));
+	TestTrue(TEXT("which the visitor can use"), Seen.GetComponent()->GetClass()->ImplementsInterface(UMuseeUsable::StaticClass()));
+	TestTrue(TEXT("and which offers its mechanism's use"), Control->Usage().bAvailable && Control->Usage().Verb.ToString() == TEXT("Raise"));
+	TestFalse(TEXT("It stops no camera"), Trace(ECC_Camera).bBlockingHit);
+	TestFalse(TEXT("nor the visitor's body"), Trace(Musee::Collision::Body.Channel).bBlockingHit);
+	TestFalse(TEXT("nor anything solid"), Trace(Musee::Collision::Solid.Channel).bBlockingHit);
+	return true;
+}
+
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FMotionSequenceTest, "Musee.Motion.Sequence", Musee::Motion::Tests::Flags)
 
 bool FMotionSequenceTest::RunTest(const FString& Parameters)
@@ -180,7 +215,7 @@ bool FMotionSequenceTest::RunTest(const FString& Parameters)
 	TestEqual(TEXT("It is open"), Lift->State(), UMotionMechanism::Open);
 	TestEqual(TEXT("A full travel up"), Tests::HeightMeters(*Lift), 2.6, 1e-4);
 	TestTrue(TEXT("Its actuation was published, peaking at 1.875 times 2.6 m in 5 s"), Actuations > 0 && FMath::IsNearlyEqual(PeakSpeed, 1.875 * 2.6 / 5.0, 0.01));
-	TestEqual(TEXT("From open it lowers"), Lift->Usage().Verb.ToString(), FString(TEXT("Lower")));
+	TestEqual(TEXT("From open it offers the spec's closing verb"), Lift->Usage().Verb.ToString(), FString(TEXT("Settle")));
 	TestEqual(TEXT("It publishes its position"), Signals->Read(FMuseeKey(TEXTVIEW("proof.height"))).Get(0.0f), 1.0f);
 	UMotionMechanism* Rails = Tests::Find(Stage, TEXT("proof.rails"));
 	if (TestNotNull(TEXT("The rails are placed"), Rails))
