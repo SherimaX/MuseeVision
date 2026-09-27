@@ -57,7 +57,7 @@ namespace Musee::Site::Tests
 		const TValueOrError<FSitePlan, FString> SitePlan = ReadPlan();
 		if (TestTrue(TEXT("the site plan reads"), SitePlan.HasValue()))
 		{
-			TestEqual(TEXT("the Nymphéas oval anchors it (D-019)"), SitePlan.GetValue().Anchor, FMuseeKey(TEXT("nympheas")));
+			TestEqual(TEXT("the Rotunda anchors it (D-012)"), SitePlan.GetValue().Anchor, FMuseeKey(TEXT("rotunda")));
 		}
 		else
 		{
