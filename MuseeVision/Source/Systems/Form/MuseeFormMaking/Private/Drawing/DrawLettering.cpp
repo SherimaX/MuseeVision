@@ -1,6 +1,7 @@
 #include "Drawing/Draw.h"
 
 #include "Kernel/MeshBuilder.h"
+#include "Kernel/Tolerances.h"
 
 /**
  * Each letter is cast as the founder casts it: its bed on the outline, plumb sides up to the bevel, the bevel's band in to
@@ -62,10 +63,14 @@ namespace Musee::Form::Drawing
 			return Place;
 		}
 
-		/** The outward normal of a letter's outline edge in the plane: the right of its travel where the solid is on its left. */
+		/**
+		 * The outward normal of a letter's outline edge in the plane: the right of its travel where the solid is on its left.
+		 * An edge has a direction however short (a serif's tip a tenth of a millimetre long at the motto's cap), so it is
+		 * normalised at the kernel's step, not the engine's tolerance.
+		 */
 		FVector2D EdgeOut(const FVector2D& From, const FVector2D& To, double Handedness)
 		{
-			const FVector2D Direction = (To - From).GetSafeNormal();
+			const FVector2D Direction = (To - From).GetSafeNormal(StepSquaredMeters);
 			return FVector2D(Direction.Y, -Direction.X) * Handedness;
 		}
 
