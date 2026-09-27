@@ -203,6 +203,38 @@ namespace Musee::NatureMaking
 			OutPiece.Collision = Organ == Organ::Trunk ? Collision::Solid.Profile() : NAME_None;
 		}
 
+		/**
+		 * What is wrong with a hedge's plan, one clause each: a clipped hedge along its line (two points or more, closed
+		 * from three) or its arc, not both, and the section it is clipped to; or a single plant clipped to a ball, at its
+		 * point.
+		 */
+		TArray<FString> HedgePlanFaults(const FNatureBed& Entry)
+		{
+			TArray<FString> Out;
+			if (Entry.Clipped.IsBall())
+			{
+				if (Entry.Point.Num() != 2 || Entry.Count != 1 || !Entry.Line.IsEmpty() || Entry.Arc.IsSet())
+				{
+					Out.Add(TEXT("a clipped ball is one plant at its point [x, y]"));
+				}
+				return Out;
+			}
+			const bool bLine = !Entry.Line.IsEmpty();
+			if (bLine == Entry.Arc.IsSet() || (bLine && Entry.Line.Num() < 2) || (Entry.Arc.IsSet() && !Entry.Arc.IsValid()))
+			{
+				Out.Add(TEXT("a hedge needs its line, [[x, y], [x, y], ...], or its arc, { centre, r, from_deg, to_deg }, and not both"));
+			}
+			if (Entry.Closed && (!bLine || Entry.Line.Num() < 3))
+			{
+				Out.Add(TEXT("a closed hedge runs round a line of three points or more"));
+			}
+			if (Entry.Clipped.Width <= 0.0f || Entry.Clipped.Height <= 0.0f)
+			{
+				Out.Add(TEXT("a hedge needs the section it is clipped to (its width and height) or a ball's diameter"));
+			}
+			return Out;
+		}
+
 		/** What is wrong with a bed's count, places, spacing and material spec for its form, one clause each. */
 		TArray<FString> BedFaults(const FNatureBed& Entry, const FForm& Form)
 		{
@@ -224,13 +256,21 @@ namespace Musee::NatureMaking
 			{
 				Out.Add(TEXT("more than one plant needs its points or a spacing of more than zero"));
 			}
-			if (Form.Planting == EPlanting::AlongLine && (Entry.Line.Num() != 2 || !Entry.Clipped.IsSet()))
+			if (Form.Planting == EPlanting::AlongLine)
 			{
-				Out.Add(TEXT("a hedge needs its line, [[x, y], [x, y]], and the section it is clipped to"));
+				Out.Append(HedgePlanFaults(Entry));
 			}
-			if (Form.Planting == EPlanting::OverRegion && !Entry.Outline.IsValid())
+			if (Entry.Mown < 0.0f || (Entry.Mown > 0.0f && Form.Planting != EPlanting::OverRegion))
 			{
-				Out.Add(TEXT("a cover needs the bed's outline to grow over"));
+				Out.Add(TEXT("only a sward is mown, to a height of more than zero"));
+			}
+			if (Form.Planting == EPlanting::OverRegion && !Entry.Outline.IsValid() && Entry.On.IsNone())
+			{
+				Out.Add(TEXT("a cover needs the bed's outline, or the stage's piece it lies on, to grow over"));
+			}
+			if (!Entry.On.IsNone() && (Form.Planting != EPlanting::OverRegion || (Form.Grow && Entry.Mown <= 0.0f)))
+			{
+				Out.Add(TEXT("only a carpet lies on a piece: a moss, or a sward mown to a height"));
 			}
 			if (Entry.Cast.IsSet())
 			{
@@ -276,10 +316,95 @@ namespace Musee::NatureMaking
 			}
 		}
 
+		/** One straight run of a hedge's line, on the soil in the bed's frame, and how its two ends are cut (Plant.h). */
+		struct FHedgeRun
+		{
+			FVector From = FVector::ZeroVector;
+			FVector To = FVector::ZeroVector;
+			double StartMitre = 0.0;
+			double EndMitre = 0.0;
+			bool bOpenStart = false;
+			bool bOpenEnd = false;
+
+			[[nodiscard]] FVector Along() const { return FVector(To.X - From.X, To.Y - From.Y, 0.0).GetSafeNormal(); }
+			[[nodiscard]] double Length() const { return FVector2D(To.X - From.X, To.Y - From.Y).Size(); }
+		};
+
 		/**
-		 * A hedge along its line, as a run of identical modules, one to each plant at the spacing (so the stage's casting may
-		 * place one module many times): each grown in its own frame, the line along its x, from the stream of the bed's
-		 * middle modules, its first and last from their own streams, clipped across where the hedge's ends are open.
+		 * The mitre of a run's end where the line turns from one run's direction to the next's: the cut lies on the plane
+		 * through the corner square to the sum of the two directions, so a point Across to the left of Along (the run's
+		 * own direction) lies along from the corner by -Across (Left . Other) / (1 + Along . Other), Other the direction
+		 * the corner turns from or to. Square where the runs are in line.
+		 */
+		double Mitre(const FVector& Along, const FVector& Other)
+		{
+			const FVector Left = FVector::CrossProduct(FVector::UpVector, Along);
+			const double Straight = 1.0 + (Along | Other);
+			return Straight > UE_KINDA_SMALL_NUMBER ? -(Left | Other) / Straight : 0.0;
+		}
+
+		/**
+		 * The points a hedge's line passes through, on the soil in the bed's frame: its line's (back to its first when it is
+		 * closed), or its arc's, one chord to each plant.
+		 */
+		TArray<FVector> HedgePath(const FNatureBed& Entry, const FMuseeFrame& Bed)
+		{
+			TArray<FVector> Out;
+			if (Entry.Arc.IsValid())
+			{
+				const int32 Chords = FMath::Max(1, Entry.Count);
+				for (int32 Index = 0; Index <= Chords; ++Index)
+				{
+					Out.Add(OnSoil(Bed, Entry.Arc.At(double(Index) / Chords)));
+				}
+				return Out;
+			}
+			for (const FVector2D& Point : Entry.Line)
+			{
+				Out.Add(OnSoil(Bed, Point));
+			}
+			if (Entry.Closed && Out.Num() > 2)
+			{
+				// A copy: adding may grow the array and move its first point.
+				const FVector First = Out[0];
+				Out.Add(First);
+			}
+			return Out;
+		}
+
+		/** A hedge's runs along its path, mitred at every corner (at its first point too, when it is closed). */
+		TArray<FHedgeRun> HedgeRuns(const TArray<FVector>& Path, bool bClosed, bool bOpenEnds)
+		{
+			TArray<FHedgeRun> Runs;
+			for (int32 Index = 0; Index + 1 < Path.Num(); ++Index)
+			{
+				Runs.Add({ Path[Index], Path[Index + 1] });
+			}
+			for (int32 Index = 0; Index < Runs.Num(); ++Index)
+			{
+				const bool bHasBefore = Index > 0 || bClosed;
+				const bool bHasAfter = Index + 1 < Runs.Num() || bClosed;
+				const FVector Along = Runs[Index].Along();
+				if (bHasBefore)
+				{
+					Runs[Index].StartMitre = Mitre(Along, Runs[(Index + Runs.Num() - 1) % Runs.Num()].Along());
+				}
+				if (bHasAfter)
+				{
+					Runs[Index].EndMitre = Mitre(Along, Runs[(Index + 1) % Runs.Num()].Along());
+				}
+				Runs[Index].bOpenStart = bOpenEnds && !bHasBefore;
+				Runs[Index].bOpenEnd = bOpenEnds && !bHasAfter;
+			}
+			return Runs;
+		}
+
+		/**
+		 * A hedge along its line, as runs of identical modules, the plants shared out among the runs by their length, one
+		 * module to each (so the stage's casting may place one module many times): each grown in its own frame, the run
+		 * along its x; the middle modules of a run from one stream, its first and last from their own, clipped across where
+		 * the hedge's ends are open and mitred where the line turns. Modules alike in length and cut (the opposite sides of
+		 * a loop, the chords of an arc) are grown once, from the stream of the first of them.
 		 */
 		void GrowModules(const FMuseeStageContext& Stage, const FPlanting& Planting, const FMuseeFrame& Bed, const FBedRegion& Region, TArray<FFormMadePiece>& OutPieces,
 			TArray<FMuseeFinding>& OutFindings)
@@ -287,32 +412,52 @@ namespace Musee::NatureMaking
 			const FNatureBed& Entry = *Planting.Entry;
 			FPlantSite Line;
 			DrawnFacts(Entry, Bed, Region, Line);
-			const FVector Span = Line.Line[1] - Line.Line[0];
-			const FVector Along = FVector(Span.X, Span.Y, 0.0).GetSafeNormal();
-			const int32 Modules = FMath::Max(1, Entry.Count);
-			const double Module = FVector2D(Span.X, Span.Y).Size() / Modules;
-			const FQuat Turn = Bed.Rotation * FQuat(FVector::UpVector, FMath::Atan2(Along.Y, Along.X));
-			const bool bOpen = Entry.Clipped.Ends == TEXT("open");
+			const TArray<FHedgeRun> Runs = HedgeRuns(HedgePath(Entry, Bed), Entry.Closed && !Entry.Arc.IsValid(), Entry.Clipped.Ends == TEXT("open"));
+			double Total = 0.0;
+			for (const FHedgeRun& Run : Runs)
+			{
+				Total += Run.Length();
+			}
+			const int32 Plants = FMath::Max(Entry.Count, Runs.Num());
 			const FMuseeKey Stream = Entry.Bed.Child(Planting.Species->Key.ToString());
 			TMap<FString, FPlantParts> Grown;
-			for (int32 Index = 0; Index < Modules; ++Index)
+			double Laid = 0.0;
+			int32 Placed = 0;
+			for (int32 R = 0; R < Runs.Num(); ++R)
 			{
-				const bool bFirst = Index == 0;
-				const bool bLast = Index == Modules - 1;
-				const FString Kind = bFirst && bLast ? TEXT("whole") : bFirst ? TEXT("first") : bLast ? TEXT("last") : TEXT("module");
-				FPlantParts* Parts = Grown.Find(Kind);
-				if (!Parts)
+				const FHedgeRun& Run = Runs[R];
+				Laid += Run.Length();
+				const int32 Through = R + 1 == Runs.Num() ? Plants : FMath::RoundToInt(Plants * Laid / FMath::Max(Total, UE_KINDA_SMALL_NUMBER));
+				const int32 Modules = FMath::Max(1, Through - Placed);
+				const double Module = Run.Length() / Modules;
+				const FVector Along = Run.Along();
+				const FQuat Turn = Bed.Rotation * FQuat(FVector::UpVector, FMath::Atan2(Along.Y, Along.X));
+				for (int32 M = 0; M < Modules; ++M)
 				{
+					const bool bFirst = M == 0;
+					const bool bLast = M == Modules - 1;
 					FPlantSite Site = Line;
 					Site.Line = { FVector::ZeroVector, FVector(Module, 0.0, 0.0) };
-					Site.bOpenStart = bOpen && bFirst;
-					Site.bOpenEnd = bOpen && bLast;
-					FRandomStream Random(Seed(Stream.Child(Kind)));
-					Parts = &Grown.Add(Kind);
-					Planting.Form->Grow(*Planting.Species, Site, Random, *Parts);
+					Site.bOpenStart = bFirst && Run.bOpenStart;
+					Site.bOpenEnd = bLast && Run.bOpenEnd;
+					Site.StartMitre = bFirst ? Run.StartMitre : 0.0;
+					Site.EndMitre = bLast ? Run.EndMitre : 0.0;
+					const FString Kind = bFirst && bLast ? TEXT("whole") : bFirst ? TEXT("first") : bLast ? TEXT("last") : TEXT("module");
+					const FString Alike = FString::Printf(TEXT("%s %.6f %.6f %.6f %d %d"), *Kind, Module, Site.StartMitre, Site.EndMitre,
+						int32(Site.bOpenStart), int32(Site.bOpenEnd));
+					FPlantParts* Parts = Grown.Find(Alike);
+					if (!Parts)
+					{
+						// A straight hedge's one run keeps the streams it always had.
+						const FString Named = Runs.Num() == 1 ? Kind : FString::Printf(TEXT("run-%d-%s"), R, *Kind);
+						FRandomStream Random(Seed(Stream.Child(Named)));
+						Parts = &Grown.Add(Alike);
+						Planting.Form->Grow(*Planting.Species, Site, Random, *Parts);
+					}
+					const FMuseeFrame Frame(Bed.PointToParent(Run.From + Along * (Module * M)), Turn);
+					AddParts(Stage, Planting, *Parts, Frame, OutPieces, OutFindings, FString::Printf(TEXT(".%d"), Placed + M));
 				}
-				const FMuseeFrame Frame(Bed.PointToParent(Line.Line[0] + Along * (Module * Index)), Turn);
-				AddParts(Stage, Planting, *Parts, Frame, OutPieces, OutFindings, FString::Printf(TEXT(".%d"), Index));
+				Placed += Modules;
 			}
 		}
 
@@ -320,11 +465,12 @@ namespace Musee::NatureMaking
 			const FBedRegion& Region, TArray<FFormMadePiece>& OutPieces, TArray<FMuseeFinding>& OutFindings)
 		{
 			const FNatureBed& Entry = *Planting.Entry;
-			if (!Planting.Form->Grow)
+			// A carpet (a moss), or a sward mown close, is laid as its surface over the region, not grown plant by plant.
+			if (!Planting.Form->Grow || Entry.Mown > 0.0f)
 			{
 				FFormMadePiece Carpet;
 				FString Why;
-				if (MakeCarpetPiece(Stage, Entry, *Planting.Species, Region, Bed, Carpet, Why))
+				if (MakeCarpetPiece(Stage, Entry, *Planting.Species, Region, Bed, OutPieces, Carpet, Why))
 				{
 					OutPieces.Add(MoveTemp(Carpet));
 				}
@@ -334,7 +480,8 @@ namespace Musee::NatureMaking
 				}
 				return;
 			}
-			if (Planting.Form->Planting == EPlanting::AlongLine)
+			// A hedge grows along its line; a single plant clipped to a ball grows at its point, as a tree does.
+			if (Planting.Form->Planting == EPlanting::AlongLine && !Entry.Clipped.IsBall())
 			{
 				GrowModules(Stage, Planting, Bed, Region, OutPieces, OutFindings);
 				return;

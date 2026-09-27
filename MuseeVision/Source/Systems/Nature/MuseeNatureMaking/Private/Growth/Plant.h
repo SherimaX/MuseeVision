@@ -47,12 +47,17 @@ namespace Musee::NatureMaking
 
 		/**
 		 * A hedge's line, from and to, on the soil, and its clipped section; whether the run's start and end are the
-		 * hedge's own open ends, clipped across (a run between two others is closed at both).
+		 * hedge's own open ends, clipped across (a run between two others is closed at both). Where the hedge turns a
+		 * corner, a run's end is mitred: its cut lies on the plane that halves the corner. At a point of its section
+		 * lying an offset across the line (to the left, facing along it), the run starts StartMitre times that offset
+		 * along from the line's start, and ends EndMitre times it along from the line's end. Zero for an end cut square.
 		 */
 		TArray<FVector> Line;
 		FNatureClip Clip;
 		bool bOpenStart = false;
 		bool bOpenEnd = false;
+		double StartMitre = 0.0;
+		double EndMitre = 0.0;
 
 		/** A cover's region on the soil: its outline and the holes in it (the water), as plan points. */
 		TArray<FVector2D> Region;

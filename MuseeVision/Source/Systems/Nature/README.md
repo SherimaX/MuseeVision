@@ -9,8 +9,8 @@ Everything grown or formed by natural process. Modules `MuseeNature` (Runtime: t
 | --- | --- |
 | `NaturePlanting.h` | `FNaturePlanting`: a stage's `Planting.json`, its water and its beds |
 | `NatureWater.h`, `NatureOutline.h` | `FNatureWater` (anchor, body, outline, depth, freeboard, material, working, history); `FNatureOutline` (an ellipse or a polygon: `IsValid`, `Contains`, `Area`) |
-| `NatureBed.h`, `NatureCast.h` | `FNatureBed`: a species in a Bed anchor, a count at a spacing or at its `points`, its `point`, along its `line` or over its `outline`; a tree's `height`, `crownCentre`, `crownRadii` and `leafDensity` (its share of its species' full leaf); its material spec, or `FNatureCast`: a cast specimen's material |
-| `NatureGround.h`, `NatureClip.h`, `NatureTraining.h` | `FNatureGround`: the soil, lawn or gravel a bed lays over its outline; `FNatureClip`: a clipped hedge's section; `FNatureTraining`: a path a climber is trained along |
+| `NatureBed.h`, `NatureCast.h`, `NatureArc.h` | `FNatureBed`: a species in a Bed anchor, a count at a spacing or at its `points`, its `point`, along its `line` (`closed` round on itself) or its `arc` (`FNatureArc`: centre, `r`, `from_deg`, `to_deg`), or over its `outline` or the top of the stage's piece it lies `on` (a sward `mown` to a height); a tree's `height`, `crownCentre`, `crownRadii` and `leafDensity` (its share of its species' full leaf); its material spec, or `FNatureCast`: a cast specimen's material |
+| `NatureGround.h`, `NatureClip.h`, `NatureTraining.h` | `FNatureGround`: the soil, lawn or gravel a bed lays over its outline; `FNatureClip`: a clipped hedge's section, or a clipped ball's diameter and sink, and the leaves to the square metre the shears keep; `FNatureTraining`: a path a climber is trained along |
 | `NatureSpecies.h`, `NatureOrgan.h` | `FNatureSpecies`: a record of `Data/Nature/Species/` (form, organs and their tissue, measures, colours, sources) |
 | `NatureTreeHabit.h`, `NatureBranching.h` | `FNatureTreeHabit`, `FNatureBranching`: a tree species' crown, trunk, orders of branching, and how its leaves and flowers are set |
 
@@ -19,8 +19,12 @@ each bed's ground (its `ground` spec over its outline, less the water lying in i
 each bed's plants, one piece per organ, seeded by `Musee::Seed` of the bed, species and place. The forms:
 `water-lily`, `iris`, `sedge` and `forget-me-not` (ported from the as-built pond); `tree` (the as-built tree grower,
 its habit now the species record's), `bamboo` (the as-built grove), `lotus`, `herb` (meadow flowers and bulbs),
-`vine` (trained along its bed's paths), each plant at its crown; `hedge`, grown once along its bed's line to its
-clipped section; `grass`, tufts over its bed's region; `moss`, a carpet laid over the region as Form's face. A living
+`vine` (trained along its bed's paths), each plant at its crown; `hedge`, grown once along its bed's line or arc to
+its clipped section, as runs of modules mitred where the line turns (an arc as a chord to each plant), or as a ball at
+its point; `grass`, tufts over its bed's region, or, mown, a carpet at its mown height; `moss`, a carpet laid over the
+region as Form's face. A carpet may lie `on` one of the stage's own pieces instead, over its faces that look straight up
+at its highest level (the grounds' lawn on its terrain, which the stage cuts round every building and every piece set into it, so the
+carpet stops at their faces). A living
 part takes its species' tissue with the bed's working and history; a trunk (a tree's, a vine's stem, a hedge's core)
 is solid, the rest collides with nothing; a cast specimen's parts (the golden iris) all take the cast's material, and
 are solid. Every grown surface is drawn on Form's `FFormMesh`.

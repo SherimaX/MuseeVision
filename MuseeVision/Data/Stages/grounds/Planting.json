@@ -59,32 +59,9 @@
       "working": "grown",
       "history": "weathered",
       "body": "",
-      "ground": {
-        "material": "accent.site-geology",
-        "working": "topsoil.bare",
-        "history": "weathered"
-      },
-      "outline": {
-        "polygon": [
-          [
-            -400.0,
-            -400.0
-          ],
-          [
-            400.0,
-            -400.0
-          ],
-          [
-            400.0,
-            400.0
-          ],
-          [
-            -400.0,
-            400.0
-          ]
-        ]
-      },
-      "note": "Mown fine lawn (tapis vert): red fescue (Chewings and strong creeping, about 80 %) with browntop bent (Agrostis capillaris, about 20 %). Soil top z -0.03. Covers the terrain's top wherever no received outline and no Grounds piece stands (the panels inside the box loops included). As built: blades 3-6 cm, about 12,000/m2, blunt mown tips, 2 m mowing stripes north-south; full sward over x -135...125, y -75...145, thinning over a 30 m fringe to 0.45 of full height; keeps 0.025 clear of anything standing on it and 0.06 of hedge cores."
+      "mown": 0.045,
+      "on": "terrain",
+      "note": "Mown fine lawn (tapis vert): red fescue (Chewings and strong creeping, about 80 %) with browntop bent (Agrostis capillaris, about 20 %). Soil top z -0.03. Covers the terrain's top wherever no received outline and no Grounds piece stands (the panels inside the box loops included): Nature lays it, mown, on the top of the terrain piece, which the stage cuts round every building; the terrain is its soil. As built: blades 3-6 cm, about 12,000/m2, blunt mown tips, 2 m mowing stripes north-south; full sward over x -135...125, y -75...145, thinning over a 30 m fringe to 0.45 of full height; keeps 0.025 clear of anything standing on it and 0.06 of hedge cores."
     },
     {
       "bed": "grounds.allee.w.01",

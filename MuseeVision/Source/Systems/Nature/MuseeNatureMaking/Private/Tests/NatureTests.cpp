@@ -1,5 +1,6 @@
 #include "DynamicMesh/DynamicMesh3.h"
 #include "DynamicMesh/DynamicMeshAttributeSet.h"
+#include "FormMesh.h"
 #include "Growth/Plant.h"
 #include "Misc/AutomationTest.h"
 #include "Misc/Paths.h"
@@ -306,8 +307,27 @@ bool FNatureGardenTest::RunTest(const FString& Parameters)
 		Tests::Anchor(TEXT("garden.sward"), TEXT("Bed"), FVector(12.5, 1.0, 0.0)),
 		Tests::Anchor(TEXT("garden.planter"), TEXT("Bed"), FVector(12.0, 8.0, 0.5)),
 		Tests::Anchor(TEXT("garden.stray"), TEXT("Bed"), FVector(1.0, 1.0, 0.02)),
+		Tests::Anchor(TEXT("garden.loop"), TEXT("Bed"), FVector(20.5, 0.3, 0.0)),
+		Tests::Anchor(TEXT("garden.exedra"), TEXT("Bed"), FVector(20.0, 5.0, 0.0)),
+		Tests::Anchor(TEXT("garden.ball"), TEXT("Bed"), FVector(22.0, 2.0, 0.0)),
+		Tests::Anchor(TEXT("garden.lawn"), TEXT("Bed"), FVector(25.0, 1.0, 0.0)),
+		Tests::Anchor(TEXT("garden.turf"), TEXT("Bed"), FVector(30.0, 0.0, 0.2)),
 	};
 	TArray<FFormMadePiece> Pieces;
+	// The stage's own slab, 2 m by 1 m, its top 0.2 m up: a turf lies on it.
+	{
+		FFormMadePiece Slab;
+		Slab.Name = TEXT("slab");
+		Slab.Frame = FMuseeFrame(FVector(30.0, 0.0, 0.2));
+		FFormMesh Top;
+		const int32 A = Top.AddVertex(FVector(0.0, 0.0, 0.0), FVector::UpVector, FVector2D(0.0, 0.0));
+		const int32 B = Top.AddVertex(FVector(2.0, 0.0, 0.0), FVector::UpVector, FVector2D(2.0, 0.0));
+		const int32 C = Top.AddVertex(FVector(2.0, 1.0, 0.0), FVector::UpVector, FVector2D(2.0, 1.0));
+		const int32 D = Top.AddVertex(FVector(0.0, 1.0, 0.0), FVector::UpVector, FVector2D(0.0, 1.0));
+		Top.AddQuad(A, B, C, D);
+		Top.Write(Slab.Mesh);
+		Pieces.Add(MoveTemp(Slab));
+	}
 	TArray<FMuseeFinding> Findings;
 	GatherNature(Stage, Pieces, Findings);
 	const auto Named = [&Pieces](const TCHAR* Name) { return Pieces.FindByPredicate([Name](const FFormMadePiece& P) { return P.Name == Name; }); };
@@ -374,6 +394,51 @@ bool FNatureGardenTest::RunTest(const FString& Parameters)
 		TestTrue(TEXT("along the canes it is trained on, up by the bar"), bHigh);
 	}
 	TestNotNull(TEXT("and its stem up the post"), Named(TEXT("garden.planter.vitis-vinifera.trunk")));
+
+	// A closed loop of box: its eight plants shared among its four runs, the runs mitred where they meet.
+	TestTrue(TEXT("The box loop grows a module to each of its eight plants"), Named(TEXT("garden.loop.buxus-sempervirens.leaf.7"))
+		&& !Named(TEXT("garden.loop.buxus-sempervirens.leaf.8")));
+	const FFormMadePiece* Corner = Named(TEXT("garden.loop.buxus-sempervirens.trunk.0"));
+	if (TestNotNull(TEXT("and its core"), Corner))
+	{
+		// The first run leaves the corner eastwards; its outside, to the north, reaches back past the corner on the mitre.
+		double Behind = 0.0;
+		for (const int32 V : Corner->Mesh->VertexIndicesItr())
+		{
+			Behind = FMath::Min(Behind, Musee::FromEngine(Corner->Mesh->GetVertex(V)).X);
+		}
+		TestTrue(TEXT("mitred at the corner it turns from, so the loop runs round it unbroken"), Behind < -0.1);
+	}
+	const FFormMadePiece* ChordB = Named(TEXT("garden.exedra.taxus-baccata.leaf.1"));
+	const FFormMadePiece* ChordC = Named(TEXT("garden.exedra.taxus-baccata.leaf.2"));
+	if (TestTrue(TEXT("The yew arc grows a chord to each of its four plants"), ChordB && ChordC && Named(TEXT("garden.exedra.taxus-baccata.leaf.3"))))
+	{
+		TestTrue(TEXT("its middle chords alike, so they can be cast once"), ChordB->Mesh->VertexCount() == ChordC->Mesh->VertexCount()
+			&& ChordB->Mesh->GetVertex(0) == ChordC->Mesh->GetVertex(0));
+		TestTrue(TEXT("each on the arc"), FMath::IsNearlyEqual(FVector2D(ChordC->Frame.OriginMeters.X - 20.0, ChordC->Frame.OriginMeters.Y - 5.0).Size(), 1.0, 1e-6));
+	}
+	const FFormMadePiece* Ball = Named(TEXT("garden.ball.buxus-sempervirens.leaf"));
+	if (TestNotNull(TEXT("The box ball grows its skin"), Ball))
+	{
+		double Top = 0.0;
+		for (const int32 V : Ball->Mesh->VertexIndicesItr())
+		{
+			Top = FMath::Max(Top, Musee::FromEngine(Ball->Mesh->GetVertex(V)).Z);
+		}
+		TestTrue(TEXT("up to its diameter less the depth it is sunk"), Top > 0.36 - 0.02 && Top < 0.36 + 0.03);
+	}
+	const FFormMadePiece* Lawn = Named(TEXT("garden.lawn.festuca-rubra.leaf"));
+	if (TestNotNull(TEXT("The mown lawn is laid as its carpet"), Lawn))
+	{
+		TestEqual(TEXT("over its region"), Tests::AreaSquareMeters(Lawn->Mesh), 4.0, 0.01);
+		TestTrue(TEXT("at the height it is mown to"), FMath::IsNearlyEqual(Lawn->Frame.OriginMeters.Z, 0.045, 1e-6));
+	}
+	const FFormMadePiece* Turf = Named(TEXT("garden.turf.festuca-rubra.leaf"));
+	if (TestNotNull(TEXT("A mown turf lies on the stage's slab"), Turf))
+	{
+		TestEqual(TEXT("over the slab's top"), Tests::AreaSquareMeters(Turf->Mesh), 2.0, 0.01);
+		TestTrue(TEXT("the height it is mown to above it"), FMath::IsNearlyEqual(Turf->Frame.OriginMeters.Z, 0.23, 1e-6));
+	}
 	return true;
 }
 

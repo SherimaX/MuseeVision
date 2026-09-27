@@ -2,9 +2,11 @@
 #include "DynamicMesh/DynamicMeshAttributeSet.h"
 #include "FormFace.h"
 #include "FormMake.h"
+#include "FormMesh.h"
 #include "Growth/Organs.h"
 #include "Growth/Plant.h"
 #include "MuseeCollision.h"
+#include "MuseeUnits.h"
 #include "NatureAnchors.h"
 #include "NaturePieces.h"
 
@@ -20,6 +22,12 @@ namespace Musee::NatureMaking
 
 		/** The ground's surface key, which Form's face takes; the piece brings its own material. */
 		const FName GroundSurface(TEXT("ground"));
+
+		/** A face of a piece is its top when it looks within a degree of straight up. */
+		const double UpwardCosine = FMath::Cos(FMath::DegreesToRadians(1.0));
+
+		/** A face lies at a piece's top when it is within a millimetre of its highest upward face (metres). */
+		constexpr double TopToleranceMeters = 0.001;
 
 		bool Inside(const TArray<FVector2D>& Corners, const FVector2D& Point)
 		{
@@ -141,26 +149,104 @@ namespace Musee::NatureMaking
 		return true;
 	}
 
-	bool MakeCarpetPiece(const FMuseeStageContext& Stage, const FNatureBed& Entry, const FNatureSpecies& Species, const FBedRegion& Region, const FMuseeFrame& Bed,
-		FFormMadePiece& OutPiece, FString& OutWhy)
+	namespace
 	{
-		if (Region.Outline.Num() < 3)
+		/**
+		 * A carpet over the top of one of the stage's own pieces (the grounds' terrain, cut round every building on it): the
+		 * piece's faces that look straight up at its highest level, laid again as a surface of their own in the bed's frame
+		 * (the piece is placed at the bed raised to the carpet's height, so it stands that high over the top), UV0 metres
+		 * across the plan, the shoots' greens varying over it. Fails, saying why, when the stage has no such piece or it has
+		 * no top.
+		 */
+		bool LayOnTop(TConstArrayView<FFormMadePiece> StagePieces, FName On, const FMuseeFrame& Bed, const FNatureSpecies& Species, FRandomStream& Random,
+			FFormMadePiece& OutPiece, FString& OutWhy)
 		{
-			OutWhy = TEXT("a carpet needs the bed's outline to grow over");
+			const FFormMadePiece* Under = StagePieces.FindByPredicate([On](const FFormMadePiece& Piece) { return Piece.Name == On; });
+			if (!Under)
+			{
+				OutWhy = FString::Printf(TEXT("the stage has no piece %s to lie on"), *On.ToString());
+				return false;
+			}
+			const UE::Geometry::FDynamicMesh3& Mesh = *Under->Mesh;
+			const auto InStage = [Under](const FVector& Engine) { return Under->Frame.PointToParent(FromEngine(Engine)); };
+			TArray<int32> Upward;
+			double Highest = -TNumericLimits<double>::Max();
+			for (const int32 Triangle : Mesh.TriangleIndicesItr())
+			{
+				if (Under->Frame.Rotation.RotateVector(Mesh.GetTriNormal(Triangle)).Z >= UpwardCosine)
+				{
+					FVector A, B, C;
+					Mesh.GetTriVertices(Triangle, A, B, C);
+					Upward.Add(Triangle);
+					Highest = FMath::Max(Highest, FMath::Max3(InStage(A).Z, InStage(B).Z, InStage(C).Z));
+				}
+			}
+			FFormMesh Top;
+			for (const int32 Triangle : Upward)
+			{
+				FVector Corners[3];
+				Mesh.GetTriVertices(Triangle, Corners[0], Corners[1], Corners[2]);
+				for (FVector& Corner : Corners)
+				{
+					Corner = InStage(Corner);
+				}
+				if (FMath::Min3(Corners[0].Z, Corners[1].Z, Corners[2].Z) < Highest - TopToleranceMeters)
+				{
+					continue;
+				}
+				int32 Indices[3];
+				for (int32 Corner = 0; Corner < 3; ++Corner)
+				{
+					const FVector Local = Bed.PointFromParent(Corners[Corner]);
+					Indices[Corner] = Top.AddVertex(Local, FVector::UpVector, FVector2D(Local.X, Local.Y));
+					Top.SetColor(Indices[Corner], Vary(AnyColour(Species.LeafColours, Random), Random, 6.0, 0.1, 0.15));
+				}
+				Top.AddTriangle(Indices[0], Indices[1], Indices[2]);
+			}
+			if (Top.IsEmpty())
+			{
+				OutWhy = FString::Printf(TEXT("the piece %s has no top to lie on"), *On.ToString());
+				return false;
+			}
+			Top.Write(OutPiece.Mesh);
+			return true;
+		}
+	}
+
+	bool MakeCarpetPiece(const FMuseeStageContext& Stage, const FNatureBed& Entry, const FNatureSpecies& Species, const FBedRegion& Region, const FMuseeFrame& Bed,
+		TConstArrayView<FFormMadePiece> StagePieces, FFormMadePiece& OutPiece, FString& OutWhy)
+	{
+		const bool bOnPiece = !Entry.On.IsNone();
+		if (!bOnPiece && Region.Outline.Num() < 3)
+		{
+			OutWhy = TEXT("a carpet needs the bed's outline, or the stage's piece it lies on, to grow over");
 			return false;
 		}
 		FRandomStream Random(Seed(Entry.Bed.Child(Species.Key.ToString())));
-		const double Depth = Draw(Species.LeafLengthMeters, Random);
+		// A mown sward stands at the height it is mown to; a moss at its shoots' length.
+		const double Depth = Entry.Mown > 0.0f ? double(Entry.Mown) : Draw(Species.LeafLengthMeters, Random);
 		FMuseeFrame Raised = Bed;
 		Raised.OriginMeters += Bed.Rotation.GetAxisZ() * Depth;
 		FMuseeFrame Frame;
-		if (!PieceFrame(Stage, Raised, Entry.Body, Frame, OutWhy)
-			|| !MakeFace(FName(FString::Printf(TEXT("%s.%s.%s"), *Entry.Bed.ToString(), *Species.Key.ToString(), *Organ::Leaf.ToString())), Region, OutPiece, OutWhy))
+		const FName Name(FString::Printf(TEXT("%s.%s.%s"), *Entry.Bed.ToString(), *Species.Key.ToString(), *Organ::Leaf.ToString()));
+		if (!PieceFrame(Stage, Raised, Entry.Body, Frame, OutWhy))
+		{
+			return false;
+		}
+		if (bOnPiece)
+		{
+			if (!LayOnTop(StagePieces, Entry.On, Bed, Species, Random, OutPiece, OutWhy))
+			{
+				return false;
+			}
+			OutPiece.Name = Name;
+		}
+		else if (!MakeFace(Name, Region, OutPiece, OutWhy))
 		{
 			return false;
 		}
 		// The shoots' greens vary from place to place over the carpet.
-		if (UE::Geometry::FDynamicMeshColorOverlay* Colours = OutPiece.Mesh->HasAttributes() ? OutPiece.Mesh->Attributes()->PrimaryColors() : nullptr)
+		else if (UE::Geometry::FDynamicMeshColorOverlay* Colours = OutPiece.Mesh->HasAttributes() ? OutPiece.Mesh->Attributes()->PrimaryColors() : nullptr)
 		{
 			for (const int32 Element : Colours->ElementIndicesItr())
 			{

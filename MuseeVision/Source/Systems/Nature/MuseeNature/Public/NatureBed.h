@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "MuseeKey.h"
+#include "NatureArc.h"
 #include "NatureCast.h"
 #include "NatureClip.h"
 #include "NatureGround.h"
@@ -17,9 +18,10 @@
  * plant grown to its species' form and cast in metal, every organ in the cast's material, working and history (the
  * golden iris, gilt bronze cast from Iris laevigata).
  *
- * Where the plants stand, in order: at each of its `points`, at its one `point`, along its `line` (a hedge), over its
- * `outline` (a ground cover: moss, a sward), or else round the anchor at the planting's spacing. The ground under them,
- * when the entry gives one, is Nature's too: the soil, lawn or gravel surface over the outline.
+ * Where the plants stand, in order: at each of its `points`, at its one `point` (a tree, a clipped ball), along its
+ * `line` or `arc` (a hedge), over its `outline` (a ground cover: moss, a sward), or else round the anchor at the
+ * planting's spacing. The ground under them, when the entry gives one, is Nature's too: the soil, lawn or gravel
+ * surface over the outline.
  *
  * Every plan point a plan writes (a point, a line, a polygon's corner) is in the stage's frame, in metres; an ellipse is
  * centred on its anchor, its axes along the anchor's. The soil lies at the bed anchor's height.
@@ -68,6 +70,13 @@ struct MUSEENATURE_API FNatureBed
 	UPROPERTY()
 	FNatureOutline Outline;
 
+	/**
+	 * The stage's own piece a carpet lies on, in place of an outline: over its top, its faces that look straight up at its
+	 * highest level (the grounds' lawn on its terrain, which the stage cuts round every building on it).
+	 */
+	UPROPERTY()
+	FName On;
+
 	/** Where each plant stands, [x, y]: count of them. */
 	UPROPERTY()
 	TArray<FVector2D> Points;
@@ -76,9 +85,20 @@ struct MUSEENATURE_API FNatureBed
 	UPROPERTY()
 	TArray<double> Point;
 
-	/** The line a hedge is planted along, [[x, y], [x, y]], its plants set out at the spacing. */
+	/**
+	 * The line a hedge is planted along, [[x, y], [x, y], ...]: straight runs from point to point, mitred where they
+	 * meet, its plants set out along it at the spacing.
+	 */
 	UPROPERTY()
 	TArray<FVector2D> Line;
+
+	/** Whether the line closes on itself (a hedge round a panel): it runs on from its last point back to its first. */
+	UPROPERTY()
+	bool Closed = false;
+
+	/** An arc a hedge is planted along, in place of a line. */
+	UPROPERTY()
+	FNatureArc Arc;
 
 	/** A tree's or a clump's height above the soil, as the plan draws it (the species' own when zero). */
 	UPROPERTY(meta = (Units = "Meters"))
@@ -100,9 +120,16 @@ struct MUSEENATURE_API FNatureBed
 	UPROPERTY()
 	float LeafDensity = 0.0f;
 
-	/** For a clipped hedge, the section the shears keep. */
+	/** For a clipped hedge, the section the shears keep; for a clipped ball, its diameter. */
 	UPROPERTY()
 	FNatureClip Clipped;
+
+	/**
+	 * For a sward, the height it is mown to: a mown lawn is a close carpet at that height over its region (as a moss is at
+	 * its shoots' length), not tufts grown blade by blade. Zero for a sward left uncut.
+	 */
+	UPROPERTY(meta = (Units = "Meters"))
+	float Mown = 0.0f;
 
 	/** For a climber, the paths it is trained along: its stem first, then its canes. */
 	UPROPERTY()
