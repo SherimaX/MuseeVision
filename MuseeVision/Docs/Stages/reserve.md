@@ -429,3 +429,4 @@ initial position; `home` stays `closed`).
 - **Pastels** glazed in window mats on their felt (as built bare on the felt).
 - **Respond imposts** are solid blocks from the wall face (as built a corbel in front of the pilaster, leaving a gap).
 - Lighting.json (K3-LIGHT-NATURE): the catalogue gaps are real types, `pendant-globe.3000k` (a 596 lm opal E27 lamp in the room's cased opal globe) and `uplight.3000k` (a 500 lm, 40 degree GU10 reflector lamp in the room's can, its face 50 mm where the sheet asks about 45).
+- Hang.json (ST-RESERVE), to §8: the pastels' window mats are named as their mats (`mat` reserve.pastel.mat, `matSize` 0.99 × 0.76 and 0.58 × 0.74), not as frames, and their glazing as `glazed` / `glazing` reserve.pastel.glass; a card lying on its reader is unframed.

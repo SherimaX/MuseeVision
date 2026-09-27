@@ -171,9 +171,16 @@
         0.6
       ],
       "support": "paper",
-      "frame": "reserve.pastel.mat",
+      "frame": "none",
       "care": "works-on-paper",
-      "note": "Pastel on card lying flat on its felt, top edge to the south, read from the north (the arcade side); window mat and UV-filtering glazing (reserve.pastel.glass) are Art's. Size from the as-built mat (ReserveStructure.cpp:1131)."
+      "note": "Pastel on card lying flat on its felt, top edge to the south, read from the north (the arcade side); window mat and UV-filtering glazing (reserve.pastel.glass) are Art's. Size from the as-built mat (ReserveStructure.cpp:1131).",
+      "mat": "reserve.pastel.mat",
+      "matSize": [
+        0.99,
+        0.76
+      ],
+      "glazed": true,
+      "glazing": "reserve.pastel.glass"
     },
     {
       "work": "degas-the-star",
@@ -190,9 +197,16 @@
         0.58
       ],
       "support": "paper",
-      "frame": "reserve.pastel.mat",
+      "frame": "none",
       "care": "works-on-paper",
-      "note": "Pastel over monotype on paper, flat on its felt as The Tub. Size from the as-built mat (ReserveStructure.cpp:1131)."
+      "note": "Pastel over monotype on paper, flat on its felt as The Tub. Size from the as-built mat (ReserveStructure.cpp:1131).",
+      "mat": "reserve.pastel.mat",
+      "matSize": [
+        0.58,
+        0.74
+      ],
+      "glazed": true,
+      "glazing": "reserve.pastel.glass"
     }
   ]
 }
