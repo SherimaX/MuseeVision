@@ -121,6 +121,11 @@
 			"LoadingPhase": "Default"
 		},
 		{
+			"Name": "MuseeCube",
+			"Type": "Editor",
+			"LoadingPhase": "Default"
+		},
+		{
 			"Name": "MuseeInstruments",
 			"Type": "Runtime",
 			"LoadingPhase": "Default",
