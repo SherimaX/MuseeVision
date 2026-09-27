@@ -43,7 +43,7 @@
     "test": "887A0000.RV1",
     "issueDate": "03/07/2025",
     "obtainedOn": "2026-09-27",
-    "note": "The maker's IES file from the Downloads tab of the 362G page (its links are built in the browser, so no direct address is recorded), downloaded and approved by the owner. LM-63-2002, Type C, absolute photometry: its candela table integrates to 999 lm. Kept in the repository byte for byte (Data/Light/Photometry/SOURCES.md)."
+    "note": "The maker's IES file from the Downloads tab of the 362G page (its links are built in the browser, so no direct address is recorded), downloaded and approved by the owner. LM-63-2002, Type C, absolute photometry: its candela table integrates to 999 lm, and its greatest intensity is 1566.3 cd (the page's peakCandela, 1567, is the page's own; Light takes the file's). Kept in the repository byte for byte (Data/Light/Photometry/SOURCES.md)."
   },
   "sources": [
     {
@@ -75,7 +75,6 @@
       "readOn": "2026-09-27",
       "covers": [
         "light.luminousFluxLumens",
-        "light.peakCandela",
         "electrical.systemPowerWatts",
         "photometricFile"
       ]
