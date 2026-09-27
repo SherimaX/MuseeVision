@@ -37,8 +37,13 @@
     "tiltDegrees": 90
   },
   "photometricFile": {
-    "url": null,
-    "note": "The maker's page has a Downloads section; its file links are built in the browser, so no direct URL is recorded."
+    "path": "Light/Photometry/iguzzini-362G_O25F.ies",
+    "url": "https://www.iguzzini.com/en/362g/",
+    "lumcat": "362G_O25F",
+    "test": "887A0000.RV1",
+    "issueDate": "03/07/2025",
+    "obtainedOn": "2026-09-27",
+    "note": "The maker's IES file from the Downloads tab of the 362G page (its links are built in the browser, so no direct address is recorded), downloaded and approved by the owner. LM-63-2002, Type C, absolute photometry: its candela table integrates to 999 lm. Kept in the repository byte for byte (Data/Light/Photometry/SOURCES.md)."
   },
   "sources": [
     {
@@ -62,10 +67,21 @@
         "electrical.dimmingRangePercent",
         "housing.materials"
       ]
+    },
+    {
+      "id": "maker-ies",
+      "title": "iGuzzini, photometric file 362G_O25F (test 887A0000.RV1, issued 03/07/2025)",
+      "url": "https://www.iguzzini.com/en/362g/",
+      "readOn": "2026-09-27",
+      "covers": [
+        "light.luminousFluxLumens",
+        "light.peakCandela",
+        "electrical.systemPowerWatts",
+        "photometricFile"
+      ]
     }
   ],
   "unverified": [
-    "Whether the Downloads section of the 362G page offers LDT and IES files (the file list was not in the page text).",
     "The housing length of 362G (the page gives only the diameter)."
   ]
 }

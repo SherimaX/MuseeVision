@@ -1,7 +1,11 @@
 #include "Catalogue/LuminaireRecords.h"
+#include "Engine/TextureLightProfile.h"
 #include "LightLog.h"
 #include "LightLuminaire.h"
+#include "Misc/PackageName.h"
+#include "Misc/Paths.h"
 #include "MuseeRecords.h"
+#include "Photometry/PhotometricFile.h"
 
 namespace Musee::Light
 {
@@ -21,15 +25,25 @@ namespace Musee::Light
 		constexpr double MillimetersPerMeter = 1000.0;
 
 		/**
-		 * How each kind's light leaves it. A wallwasher's asymmetric lens and a picture light's hood shape light in ways only
-		 * their photometric files describe, so those kinds have no emitter yet. A step light's, a pinspot's and an uplight's
-		 * light is a beam about their axis, and so is a framing projector's with its flaps open (its flaps' cut to the
-		 * frame is not drawn yet); an edge-lit pane lets its light out evenly over its etched face, as a laylight's diffusing
-		 * face does; a pendant's lamp, and a post-top lantern's, lights all round inside its globe; an image panel's light is
-		 * its picture.
+		 * The most a photometric file's integrated flux may differ from its record's, as a share of the record's: the file
+		 * and the record state the same measurement, so they agree to the rounding of the published flux.
+		 */
+		constexpr double FileFluxAgreement = 0.01;
+
+		/** LM-63's photometric type of a Type C table, the frame a light profile is imported in. */
+		constexpr int32 TypeCPhotometry = 1;
+
+		/**
+		 * How each kind's light leaves it. A wallwasher's asymmetric lens shapes light in a way only its photometric file
+		 * describes, so it is lit by that file; a picture light's hood has no file yet, so it has no emitter. A step light's, a
+		 * pinspot's and an uplight's light is a beam about their axis, and so is a framing projector's with its flaps open
+		 * (its flaps' cut to the frame is not drawn yet); an edge-lit pane lets its light out evenly over its etched face, as a
+		 * laylight's diffusing face does; a pendant's lamp, and a post-top lantern's, lights all round inside its globe; an
+		 * image panel's light is its picture.
 		 */
 		TOptional<FLightLuminaire::EEmitter> EmitterOfKind(const FString& Kind)
 		{
+			if (Kind == TEXT("track-wallwasher")) { return FLightLuminaire::EEmitter::Profile; }
 			if (Kind == TEXT("track-spot") || Kind == TEXT("track-framing") || Kind == TEXT("downlight") || Kind == TEXT("step-light") || Kind == TEXT("pinspot")
 				|| Kind == TEXT("uplight"))
 			{
@@ -119,6 +133,35 @@ namespace Musee::Light
 			return Meters(Millimeters / MillimetersPerMeter);
 		}
 
+		/** The maker's photometric file a record names under Data, read; the reason, if it names none or it can't be read. */
+		TValueOrError<FPhotometricFile, FString> PhotometryOf(const FLightLuminaireRecord& Record)
+		{
+			if (Record.PhotometricFile.Path.IsEmpty())
+			{
+				return MakeError(FString::Printf(TEXT("Light has no emitter for the kind '%s' without its photometric file"), *Record.Kind));
+			}
+			TValueOrError<FPhotometricFile, FString> File = ReadPhotometricFile(Records::DataRoot() / Record.PhotometricFile.Path);
+			if (File.HasError())
+			{
+				return MakeError(FString::Printf(TEXT("its photometric file %s can't be read: %s"), *Record.PhotometricFile.Path, *File.GetError()));
+			}
+			return File;
+		}
+
+		/** Why a type lit by its photometric file can't be lit, or empty: the file is a Type C table carrying its record's flux. */
+		FString WhyProfileUnlit(const FLightLuminaireRecord& Record, const TValueOrError<FPhotometricFile, FString>& File)
+		{
+			if (File.HasError()) { return File.GetError(); }
+			if (File.GetValue().PhotometricType != TypeCPhotometry) { return TEXT("its photometric file isn't a Type C table"); }
+			const double FileFlux = File.GetValue().FluxLumens();
+			const double RecordFlux = Record.Light.LuminousFluxLumens;
+			if (RecordFlux <= 0.0 || FMath::Abs(FileFlux - RecordFlux) > FileFluxAgreement * RecordFlux)
+			{
+				return FString::Printf(TEXT("its photometric file carries %.1f lm, not its record's flux"), FileFlux);
+			}
+			return FString();
+		}
+
 		/** Why the record can't be lit, or empty if it can: every number its emitter needs is published. */
 		FString WhyUnlit(const FLightLuminaireRecord& Record, const TOptional<FLightLuminaire::EEmitter>& Emitter)
 		{
@@ -142,6 +185,9 @@ namespace Musee::Light
 			case FLightLuminaire::EEmitter::Image:
 				if (Record.Light.PeakLuminanceCandelaPerSquareMeter <= 0.0) { return TEXT("its luminance at peak white isn't published"); }
 				return FString();
+			case FLightLuminaire::EEmitter::Profile:
+				// Its photometric file holds every number its light needs: TakePhotometry reads it and checks it.
+				return FString();
 			default:
 				if (Record.Light.LuminousFluxLumensPerSquareMeter > 0.0) { return FString(); }
 				if (IsArealKind(Record.Kind)) { return TEXT("its flux per square metre of the face it lights isn't published"); }
@@ -149,6 +195,24 @@ namespace Musee::Light
 				if (Record.Housing.EmittingMillimeters.Num() != 2) { return TEXT("its emitting face isn't published"); }
 				return FString();
 			}
+		}
+
+		/**
+		 * A type lit by its photometric file takes its light from the file: the flux its table integrates to, its greatest
+		 * intensity, and, where the file gives a round luminous opening, that opening's radius as its source's.
+		 */
+		void TakePhotometry(const FLightLuminaireRecord& Record, FLightLuminaire& Type)
+		{
+			const TValueOrError<FPhotometricFile, FString> File = PhotometryOf(Record);
+			const FString Why = WhyProfileUnlit(Record, File);
+			if (Type.WhyUnlit.IsEmpty()) { Type.WhyUnlit = Why; }
+			Type.bLit = Type.WhyUnlit.IsEmpty();
+			if (File.HasError()) { return; }
+			const FPhotometricFile& Table = File.GetValue();
+			Type.PhotometricFile = FPaths::ConvertRelativePathToFull(Records::DataRoot() / Record.PhotometricFile.Path);
+			Type.Flux = Lumens(Table.FluxLumens());
+			Type.PeakIntensity = Candela(Table.PeakCandela());
+			if (const TOptional<double> Radius = Table.RoundOpeningRadiusMeters()) { Type.SourceRadius = Meters(Radius.GetValue()); }
 		}
 
 		FLightLuminaire FromRecord(const FLightLuminaireRecord& Record, const FMuseeKey& Key)
@@ -176,6 +240,7 @@ namespace Musee::Light
 			Result.EmittingHeight = FromMillimeters(Face.Num() > 1 ? Face[1] : 0.0);
 			Result.LampCount = FMath::Max(Record.Housing.LampCount, 1);
 			Result.LampRingRadius = FromMillimeters(FMath::Max(Record.Housing.LampRingRadiusMillimeters, 0.0));
+			if (Result.Emitter == FLightLuminaire::EEmitter::Profile) { TakePhotometry(Record, Result); }
 			return Result;
 		}
 
@@ -219,5 +284,26 @@ namespace Musee::Light
 		TArray<FMuseeKey> Keys;
 		Catalogue().GetKeys(Keys);
 		return Keys;
+	}
+
+	FString ProfileName(const FLightLuminaire& Type)
+	{
+		if (Type.PhotometricFile.IsEmpty()) { return FString(); }
+		return TEXT("IES_") + FPaths::GetBaseFilename(Type.PhotometricFile).Replace(TEXT("-"), TEXT("_")).Replace(TEXT("."), TEXT("_"));
+	}
+
+	FString ProfilePackage(const FLightLuminaire& Type)
+	{
+		const FString Name = ProfileName(Type);
+		return Name.IsEmpty() ? FString() : FString(ProfilesFolder) / Name;
+	}
+
+	UTextureLightProfile* FindProfile(const FLightLuminaire& Type)
+	{
+		const FString Package = ProfilePackage(Type);
+		if (Package.IsEmpty()) { return nullptr; }
+		const FString Object = Package + TEXT(".") + FPackageName::GetShortName(Package);
+		if (UTextureLightProfile* Loaded = FindObject<UTextureLightProfile>(nullptr, *Object)) { return Loaded; }
+		return FPackageName::DoesPackageExist(Package) ? LoadObject<UTextureLightProfile>(nullptr, *Object) : nullptr;
 	}
 }

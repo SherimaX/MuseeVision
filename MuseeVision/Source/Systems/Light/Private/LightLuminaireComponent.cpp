@@ -3,6 +3,7 @@
 #include "Components/PointLightComponent.h"
 #include "Components/RectLightComponent.h"
 #include "Components/SpotLightComponent.h"
+#include "Engine/TextureLightProfile.h"
 #include "Engine/World.h"
 #include "GameFramework/Pawn.h"
 #include "GameFramework/PlayerController.h"
@@ -35,6 +36,18 @@ namespace Musee::Light
 
 		/** Seconds in a minute. */
 		constexpr double SecondsPerMinute = 60.0;
+
+		/**
+		 * A photometric file's Type C frame in the luminaire's frame. The engine reads a light profile about its light's own
+		 * axes (Engine/Shaders/Private/IESLightProfilesCommon.ush): the vertical angle from the light's x axis, and the
+		 * horizontal angle from its -y axis, turning towards -z. The file's 0° vertical is its nadir, the luminaire's optical
+		 * axis, which the luminaire carries along x towards its aim. Its 0° horizontal plane is the plane of the luminaire's
+		 * tilt, 0° on the side it tilts towards: tilting a track luminaire from hanging straight down towards the wall it
+		 * lights carries that side from level, towards the wall, to square to its light in the vertical plane through it,
+		 * which is the luminaire's +z (its seat's up, taken square to its light). So the light is turned about x until its
+		 * -y lies on the luminaire's +z: its z then lies on the luminaire's y, and the file's 90° plane on the luminaire's -y.
+		 */
+		const FQuat TypeCInLuminaire = FRotationMatrix::MakeFromXZ(FVector::ForwardVector, FVector::RightVector).ToQuat();
 
 		/**
 		 * How far a luminaire's light is followed: until its illuminance falls to a third of the full Moon's (so about
@@ -112,6 +125,26 @@ namespace Musee::Light
 		}
 
 		/**
+		 * A type's measured distribution: a source the size of its luminous opening, carrying its photometric file's candela
+		 * table through the profile Studio imported from the file. The engine takes the profile's own intensity, the file's
+		 * greatest candela value, over a table normalised to it (bUseIESBrightness), in candelas, the unit the file measures
+		 * in, so every direction gives the file's absolute candelas and the whole the file's flux; IESBrightnessScale is the
+		 * dimming level (Apply). The light is placed in the file's Type C frame.
+		 */
+		ULocalLightComponent* MakeProfileLamp(USceneComponent& Mount, const FLightLuminaire& Type, UTextureLightProfile& Profile)
+		{
+			UPointLightComponent* Lamp = NewObject<UPointLightComponent>(Mount.GetOwner(), NAME_None, RF_Transient);
+			ColourAndShadow(*Lamp, Type);
+			Lamp->SourceRadius = static_cast<float>(ToEngine(Type.SourceRadius));
+			Lamp->IntensityUnits = ELightUnits::Candelas;
+			Lamp->IESTexture = &Profile;
+			Lamp->bUseIESBrightness = true;
+			Lamp->AttenuationRadius = static_cast<float>(ToEngine(ReachOf(Type.PeakIntensity)));
+			Lamp->SetRelativeRotation(TypeCInLuminaire);
+			return Lamp;
+		}
+
+		/**
 		 * Where lamp Index stands: on the axis for a single lamp, else at equal angles round a ring of the type's radius in
 		 * the plane square to the luminaire's x axis, the first on its z axis.
 		 */
@@ -153,6 +186,8 @@ void ULightLuminaireComponent::Configure(const FMuseeKey& InType, ELightOperatio
 	FollowedChannel = InFollows;
 	LengthMeters = InLength.Get();
 	FaceMeters = InFaceMeters;
+	const FLightLuminaire* Luminaire = Musee::Light::FindLuminaire(LuminaireType);
+	Profile = Luminaire && Luminaire->Emitter == FLightLuminaire::EEmitter::Profile ? Musee::Light::FindProfile(*Luminaire) : nullptr;
 	DestroyEmitters();
 	if (IsRegistered()) { MakeEmitters(); }
 }
@@ -199,11 +234,13 @@ void ULightLuminaireComponent::MakeEmitters()
 	if (!Luminaire || !Luminaire->bLit || !GetOwner()) { return; }
 	if (Luminaire->Emitter == EEmitter::Linear && LengthMeters <= 0.0) { return; }
 	if (Luminaire->IsAreal() && FaceMeters.X * FaceMeters.Y <= 0.0) { return; }
+	if (Luminaire->Emitter == EEmitter::Profile && !Profile) { return; }
 	const int32 Count = Luminaire->Emitter == EEmitter::Point ? FMath::Max(Luminaire->LampCount, 1) : 1;
 	for (int32 Index = 0; Index < Count; ++Index)
 	{
 		ULocalLightComponent* Light = Luminaire->Emitter == EEmitter::Spot ? Musee::Light::MakeSpot(*this, *Luminaire)
 			: Luminaire->Emitter == EEmitter::Point ? Musee::Light::MakeLamp(*this, *Luminaire)
+			: Luminaire->Emitter == EEmitter::Profile ? Musee::Light::MakeProfileLamp(*this, *Luminaire, *Profile)
 			: Musee::Light::MakeFace(*this, *Luminaire, Length(), FaceMeters);
 		Light->SetupAttachment(this);
 		Light->SetRelativeLocation(Musee::Light::LampOffset(*Luminaire, Index));
@@ -217,10 +254,13 @@ void ULightLuminaireComponent::Apply()
 {
 	const FLightLuminaire* Luminaire = Musee::Light::FindLuminaire(LuminaireType);
 	if (!Luminaire) { return; }
+	const bool bByProfile = Luminaire->Emitter == FLightLuminaire::EEmitter::Profile;
 	const float Setting = static_cast<float>(Musee::Light::FullSetting(*Luminaire, LengthMeters, FaceMeters) * Level());
 	for (ULocalLightComponent* Light : EmitterLights)
 	{
-		Light->SetIntensity(Setting);
+		// A profile carries its own intensity, the file's; dimming turns its level down, as the driver's current does.
+		if (bByProfile) { Light->SetIESBrightnessScale(static_cast<float>(Level())); }
+		else { Light->SetIntensity(Setting); }
 		Light->SetVisibility(Level() > 0.0);
 	}
 }

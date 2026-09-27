@@ -317,6 +317,11 @@ namespace Musee::Light
 			{
 				Find(FString::Printf(TEXT("Luminaire '%s' stands unlit: %s."), *Entry.Id, *Luminaire->WhyUnlit));
 			}
+			else if (Luminaire->Emitter == FLightLuminaire::EEmitter::Profile && !FindProfile(*Luminaire))
+			{
+				Find(FString::Printf(TEXT("Luminaire '%s' stands unlit: its light profile %s hasn't been made from %s (Studio's make makes it)."),
+					*Entry.Id, *ProfilePackage(*Luminaire), *FPaths::GetCleanFilename(Luminaire->PhotometricFile)));
+			}
 			Place(Stage, Entry, Placement);
 		}
 	}
