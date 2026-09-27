@@ -52,3 +52,12 @@ stair once the golden iris has raised the pond. Module `MuseeReserve` (Editor): 
   0.165 are inside it, and what shows is the soffit the sheet draws.
 - **The nave's canopies' eyes come down to the chain's top loop**, so the chain is of whole links.
 - **The door's sill is the wall's brick reveal**: the port's class has no allowance, and Site lays no threshold for it.
+- **The works on the racks don't ride them** (Art's gap): Hang.json and Art have no way to put a work on a moving
+  body, so the works on a rack's faces are made where the rack stands at home, and rack C's three Renoirs stay in the
+  aisle when it starts out.
+- **The pastels' window mats are not made** (Art's gap): a card on its reader is made glazed, but its mat is read only
+  for prints on walls.
+- **The uplights' cans are the sheet's Ø 44**; the catalogue's GU10 lamp is 50 across (Light's record and the sheet
+  disagree).
+- **Site's bronze strip is laid astride the mating plane**, 30 mm into the Reserve's brick sill and the oval's landing,
+  with no rebate in either.
