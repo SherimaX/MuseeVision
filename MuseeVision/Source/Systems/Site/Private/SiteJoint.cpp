@@ -83,7 +83,28 @@ namespace Musee::Site
 			return {Draft.FaceA.SameAs(Draft.FaceB) ? Draft.FaceA : FJointFace::Plane(0.0)};
 		}
 
-		/** The threshold through both walls and any passage, and the bronze strips set in it flush with the floors. */
+		/**
+		 * A strip's two edges: astride its face, or, where a stage has no wall there (an open porch ending on the drum, its
+		 * paving on the mating arc), wholly on the side that has one, an edge on the face, so the strip stays in the joint.
+		 */
+		TPair<FJointFace, FJointFace> StripEdges(const FJointDraft& Draft, const FJointFace& Face)
+		{
+			const double Width = Draft.Class.StripMeters;
+			if (Face.SameAs(Draft.InnerB))
+			{
+				return {Face.Offset(-Width), Face};
+			}
+			if (Face.SameAs(Draft.InnerA))
+			{
+				return {Face, Face.Offset(Width)};
+			}
+			return {Face.Offset(-0.5 * Width), Face.Offset(0.5 * Width)};
+		}
+
+		/**
+		 * The threshold through both walls and any passage, and the bronze strips set in it flush with the floors; a stone
+		 * between two cuts on one face (a strip's edge on a wall-less port's face) has no length and isn't laid.
+		 */
 		void Threshold(FJointDraft& Draft)
 		{
 			const FSitePortClass& Class = Draft.Class;
@@ -92,8 +113,7 @@ namespace Musee::Site
 			int32 Strip = 0;
 			for (const FJointFace& Face : Class.StripMeters > 0.0 ? StripFaces(Draft) : TArray<FJointFace>())
 			{
-				const FJointFace Near = Face.Offset(-0.5 * Class.StripMeters);
-				const FJointFace Far = Face.Offset(0.5 * Class.StripMeters);
+				const auto [Near, Far] = StripEdges(Draft, Face);
 				Draft.Add(FString::Printf(TEXT("strip.%d"), Strip++), Draft.Record.Strip, SlabBetween(Near, Far, -Rough, Rough, Draft.Record.StripDepthMeters),
 					Musee::Collision::Walkable, FMuseeFrame(FVector(0.0, 0.0, -Draft.Record.StripDepthMeters)));
 				Cuts.Add(Near);
@@ -106,7 +126,11 @@ namespace Musee::Site
 			}
 			for (int32 Index = 0; Index + 1 < Cuts.Num(); Index += 2)
 			{
-				Draft.Add(FString::Printf(TEXT("threshold.%d"), Index / 2), Draft.Record.Threshold, SlabBetween(Cuts[Index], Cuts[Index + 1], -Rough, Rough,
+				if (Cuts[Index].SameAs(Cuts[Index + 1]))
+				{
+					continue;
+				}
+				Draft.Add(FString::Printf(TEXT("threshold.%d"), Index / 2),Draft.Record.Threshold, SlabBetween(Cuts[Index], Cuts[Index + 1], -Rough, Rough,
 					Draft.Record.ThresholdMeters), Musee::Collision::Walkable, FMuseeFrame(FVector(0.0, 0.0, -Draft.Record.ThresholdMeters)));
 			}
 		}

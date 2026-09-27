@@ -233,6 +233,31 @@ namespace Musee::Site::Tests
 		TestTrue(TEXT("one strip, the threshold either side"), WrappedParts.Contains(TEXT("strip.0")) && !WrappedParts.Contains(TEXT("strip.1"))
 			&& WrappedParts.Contains(TEXT("threshold.1")));
 
+		// The Rotunda's north door and Chenghuai's open porch, which ends on the drum's face with no wall of its own
+		// (chenghuai.md section 2): no wedge and no masonry, and the strip lies in the drum, its far edge on the mating arc
+		// where the porch's paving ends, with the threshold behind it.
+		const FSitePort North = PortAt(TEXT("rotunda.north"), TEXT("doorway.4000x6500.arched"), FVector(0.0, -11.2, 0.0), FRotator(0.0, -90.0, 0.0), 1.2, 11.2, true);
+		const FSitePort OpenPorch = PortAt(TEXT("chenghuai.south"), TEXT("doorway.4000x6500.arched"), FVector(0.0, -11.2, 0.0), FRotator(0.0, 90.0, 0.0), 0.0, -11.2, false);
+		FSiteJoint Open;
+		if (!TestTrue(TEXT("the north door's joint is drawn"), Joint(North, OpenPorch, 0.0, South.GetValue(), Record.GetValue(), Open, Why)))
+		{
+			AddError(Why);
+		}
+		const TSet<FString> OpenParts = PartsOf(Open, TEXT("joint.rotunda.north."));
+		TestFalse(TEXT("a porch on the drum's face needs no masonry"), OpenParts.Contains(TEXT("masonry")));
+		TestTrue(TEXT("one strip, and the threshold behind it only"), OpenParts.Contains(TEXT("strip.0")) && OpenParts.Contains(TEXT("threshold.0"))
+			&& !OpenParts.Contains(TEXT("threshold.1")));
+		if (const FFormDrawing* Strip = Find(Open, TEXT("joint.rotunda.north.strip.0")))
+		{
+			// Both its edges are arcs about the drum's axis, the far one the drum's face itself (R 11.20), none beyond it.
+			double Widest = 0.0;
+			for (const FFormProfileStep& Step : Strip->Shape.Get<FFormExtrusion>().Outline.Steps)
+			{
+				Widest = Step.IsArc() ? FMath::Max(Widest, Step.Arc.RadiiMeters[0]) : Widest;
+			}
+			TestEqual(TEXT("the strip stays in the drum, its far edge on the mating arc"), Widest, 11.2, 1e-9);
+		}
+
 		// The Rotunda's west door and the Salon's flat end wall 2.20 beyond it: a passage, a strip at each face, the
 		// threshold through, and the passage's masonry within the collar.
 		const FSitePort RotundaWest = PortAt(TEXT("rotunda.west"), TEXT("doorway.3000x6000.arched"), FVector(-11.2, 0.0, 0.0), FRotator(0.0, 180.0, 0.0), 1.2, 11.2, true);
