@@ -1,0 +1,222 @@
+{
+  "stage": "reserve",
+  "finishes": [
+    {
+      "surface": "reserve.wall.brick",
+      "material": "accent.brique-bourgogne",
+      "working": "hand-laid, lime mortar, joints slightly recessed",
+      "history": "new",
+      "note": "Inner faces of the four walls from the floor to the vaults' wall arches, and the 18 responds' pilasters: Burgundy pressed brick 220 x 105 x 55 in lime mortar, English bond (Story: the Reserve's piers, arches and vaults)."
+    },
+    {
+      "surface": "reserve.pier.brick",
+      "material": "accent.brique-bourgogne",
+      "working": "hand-laid, lime mortar, joints slightly recessed",
+      "history": "new",
+      "note": "The 14 piers' chamfered shafts 0.70 square, 40 mm chamfers in cut brick, 0.54-3.64."
+    },
+    {
+      "surface": "reserve.vault.web",
+      "material": "accent.brique-bourgogne",
+      "working": "hand-laid, lime mortar, joints slightly recessed",
+      "history": "new",
+      "note": "The 24 groin vaults' webs: half-brick shells 0.105 normal to the intrados, stretcher bond, courses parallel to each barrel's axis, cut brick at the groins."
+    },
+    {
+      "surface": "reserve.vault.band",
+      "material": "accent.brique-bourgogne",
+      "working": "hand-laid, lime mortar, joints slightly recessed",
+      "history": "new",
+      "note": "The 21 cross bands and 16 arcade bands (with their lunette faces): the web shell deepened 0.06, square arrises."
+    },
+    {
+      "surface": "reserve.door.reveal",
+      "material": "accent.brique-bourgogne",
+      "working": "hand-laid, lime mortar, joints slightly recessed",
+      "history": "handled",
+      "note": "The west door's jambs and semicircular soffit through the 0.60 wall: two rowlock rings, headers on the soffit."
+    },
+    {
+      "surface": "reserve.exterior.buried",
+      "material": "accent.brique-bourgogne",
+      "working": "hand-laid, lime mortar",
+      "history": "new",
+      "note": "Never seen: the haunch fill to the box's top, the box's outer faces and top (waterproofed back), and the flat brick bed under the floor flags (z -0.35 to -0.06). Solid, sealed."
+    },
+    {
+      "surface": "reserve.stone.base",
+      "material": "stone.travertine-romano",
+      "working": "honed",
+      "history": "foot-worn",
+      "note": "Pier bases (square-splayed profile) and the respond bases; vein-cut, voids filled, kicked soft at the arrises."
+    },
+    {
+      "surface": "reserve.stone.impost",
+      "material": "stone.travertine-romano",
+      "working": "honed",
+      "history": "new",
+      "note": "Pier imposts (square-splayed profile) and the respond impost blocks; the springing of every arch at 4.00; voids open."
+    },
+    {
+      "surface": "reserve.door.architrave",
+      "material": "stone.travertine-romano",
+      "working": "honed",
+      "history": "new",
+      "note": "The doorway detail's surround on the hall face of the west door: the museum's slim architrave P6 (architrave.two-fascia.160), honed in every era (Story section 4)."
+    },
+    {
+      "surface": "reserve.floor",
+      "material": "accent.pierre-bleue",
+      "working": "honed",
+      "history": "foot-worn",
+      "note": "The nave's flags (|y| <= 4.65) 0.750 x 0.750 x 0.060, 3 mm lime joints on the 0.75 grid: Belgian bluestone (Petit Granit, Soignies), honed; the Paris cellar floor (Story: replaces the dark polished concrete)."
+    },
+    {
+      "surface": "reserve.floor.aisle",
+      "material": "accent.pierre-bleue",
+      "working": "honed",
+      "history": "foot-worn",
+      "note": "The same flags in the two aisles and between the piers (|y| > 4.65); split from reserve.floor only so the aisles carry their own light target."
+    },
+    {
+      "surface": "reserve.floor.slot",
+      "material": "bronze.cusn10",
+      "working": "brushed",
+      "history": "foot-worn",
+      "note": "The 36 flush floor tracks: bronze channels lining the guide slots, 20 mm clear x 45 deep, 5 mm lips flush with the flags; brushed, walked bright (Story: rack tracks, flush)."
+    },
+    {
+      "surface": "reserve.track",
+      "material": "bronze.cusn10",
+      "working": "patinated",
+      "history": "new",
+      "note": "The 36 overhead tracks (channel, nave-end stop, wall plate and bolts, clamps) and their hanger rods, collars and canopies: statuary-brown patina, waxed."
+    },
+    {
+      "surface": "reserve.screen.frame",
+      "material": "accent.brass-cuzn30",
+      "working": "drawn, lacquered",
+      "history": "handled",
+      "note": "Each rack's frame: two end posts 0.090 x 0.160 and the top and kick rails, drawn and rolled CuZn30 hollow sections, clear-lacquered (Story: rack frames)."
+    },
+    {
+      "surface": "reserve.screen.mesh",
+      "material": "accent.brass-cuzn30",
+      "working": "woven, lacquered",
+      "history": "new",
+      "note": "The rack's face: crimped woven wire mesh of CuZn30 wire dia 3.0 mm at 25 mm pitch (22 mm square aperture), one sheet in the rack's centre plane, clamped in the frame; clear-lacquered (Story: woven wire mesh)."
+    },
+    {
+      "surface": "reserve.screen.carriage",
+      "material": "bronze.cusn10",
+      "working": "patinated",
+      "history": "handled",
+      "note": "The carriage on each rack: two trolley saddles, stems and nuts (and their wheels in the track), two guide shoes and two guide fins; relieved bright where they rub (Story: rack carriages, patinated)."
+    },
+    {
+      "surface": "reserve.screen.pull",
+      "material": "bronze.cusn10",
+      "working": "patinated",
+      "history": "handled",
+      "note": "The pull on each rack's nave-end post: bar dia 22 on two stand-offs; patina worn to bright bronze by hands."
+    },
+    {
+      "surface": "reserve.screen.lamp",
+      "material": "bronze.cusn10",
+      "working": "patinated",
+      "history": "new",
+      "note": "The picture-light troughs 64 x 44 and their two arms and rail plates on the eight lit faces."
+    },
+    {
+      "surface": "reserve.globe",
+      "material": "glass.mouth-blown",
+      "working": "cased-opal",
+      "history": "new",
+      "note": "The 24 pendants' globes: Lamberts cased opal, mouth-blown, dia 0.44 (nave) and 0.34 (aisles), neck and rolled lip (Palette: Reserve globes)."
+    },
+    {
+      "surface": "reserve.pendant.fitting",
+      "material": "bronze.cusn10",
+      "working": "patinated",
+      "history": "new",
+      "note": "Galleries (spun 1.5 mm), socket cups, canopies, the nave chains and loops, the aisle rods dia 15 with swivel balls and locknuts, thumb screws (Palette: globe rods, patinated)."
+    },
+    {
+      "surface": "reserve.uplight.body",
+      "material": "bronze.cusn10",
+      "working": "patinated",
+      "history": "new",
+      "note": "The 56 impost uplights' cans dia 44 x 75, bezels and knuckle stems, and the easel spot's canopy, stem and head."
+    },
+    {
+      "surface": "reserve.easel",
+      "material": "oak.sessile-french",
+      "working": "oiled and hard-waxed",
+      "history": "handled",
+      "note": "The viewing easel's runners, cross foot, uprights, rails, ledge and lip: quartersawn sessile oak (Story: the Reserve's easel, oiled and hard-waxed)."
+    },
+    {
+      "surface": "reserve.easel.fitting",
+      "material": "bronze.cusn10",
+      "working": "patinated",
+      "history": "handled",
+      "note": "The easel's two caps and two ledge brackets (as built brass; brass stays only for the racks' drawn and woven parts, Story 2.3)."
+    },
+    {
+      "surface": "reserve.chest",
+      "material": "oak.sessile-french",
+      "working": "fumed and waxed",
+      "history": "handled",
+      "note": "The four plan-chest islands: carcasses, tops and the 80 drawer fronts, fumed with ammonia and waxed (Story: replaces the as-built walnut)."
+    },
+    {
+      "surface": "reserve.chest.pull",
+      "material": "bronze.cusn10",
+      "working": "patinated",
+      "history": "handled",
+      "note": "The drawer pulls, bars 140 x 18, 22 proud (as built brass)."
+    },
+    {
+      "surface": "reserve.chest.plinth",
+      "material": "bronze.cusn10",
+      "working": "patinated",
+      "history": "foot-worn",
+      "note": "The chests' recessed plinths, 50 mm set back, 0.09 high; toe-scuffed."
+    },
+    {
+      "surface": "reserve.chest.mat",
+      "material": "accent.wool-felt",
+      "working": "laid",
+      "history": "new",
+      "note": "The two felt mats under the Degas pastels on the south islands, 5 mm, undyed grey-green wool felt (Palette: the Reserve's mats)."
+    },
+    {
+      "surface": "reserve.frame.gilt",
+      "material": "oak.sessile-french",
+      "working": "gilt.gold-leaf.water",
+      "history": "aged.patina",
+      "note": "Every oil's frame (Hang frame): carved oak, gesso, water-gilt on red bole, 0.090 face; the Salon's frame, bole on the worn ridges; Art builds it."
+    },
+    {
+      "surface": "reserve.pastel.mat",
+      "material": "accent.rag-board",
+      "working": "cut.bevelled",
+      "history": "new",
+      "note": "The pastels' window mats (80 mm border; Tub 0.99 x 0.76, Star 0.58 x 0.74), cotton museum board, bevel-cut; Art's mount (the Hang frame of the two pastels)."
+    },
+    {
+      "surface": "reserve.pastel.glass",
+      "material": "glass.low-iron",
+      "working": "laminated, UV-filtering",
+      "history": "new",
+      "note": "The glazing over each pastel's mat on a 6 mm spacer (a pastel is never kept bare): Optiwhite laminated with a UV-filtering interlayer."
+    },
+    {
+      "surface": "reserve.stair.blind-doors",
+      "material": "bronze.cusn10",
+      "working": "patinated",
+      "history": "new",
+      "note": "Only on the Reserve's own stand (nympheas absent): a closed pair of cast bronze leaves in the class opening on the port face. Tonight the blind is the oval's (nympheas.stair.blind-doors)."
+    }
+  ]
+}

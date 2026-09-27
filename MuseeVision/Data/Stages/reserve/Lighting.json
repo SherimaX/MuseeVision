@@ -1,0 +1,1476 @@
+{
+  "stage": "reserve",
+  "daylight": [],
+  "luminaires": [
+    {
+      "id": "pendant.nave.1",
+      "type": "gap.pendant-globe.3000k",
+      "point": [
+        -26.425,
+        0.0,
+        3.95
+      ],
+      "aim": [
+        -26.425,
+        0.0,
+        0.0
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "pendant.nave.2",
+      "type": "gap.pendant-globe.3000k",
+      "point": [
+        -18.75,
+        0.0,
+        3.95
+      ],
+      "aim": [
+        -18.75,
+        0.0,
+        0.0
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "pendant.nave.3",
+      "type": "gap.pendant-globe.3000k",
+      "point": [
+        -11.25,
+        0.0,
+        3.95
+      ],
+      "aim": [
+        -11.25,
+        0.0,
+        0.0
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "pendant.nave.4",
+      "type": "gap.pendant-globe.3000k",
+      "point": [
+        -3.75,
+        0.0,
+        3.95
+      ],
+      "aim": [
+        -3.75,
+        0.0,
+        0.0
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "pendant.nave.5",
+      "type": "gap.pendant-globe.3000k",
+      "point": [
+        3.75,
+        0.0,
+        3.95
+      ],
+      "aim": [
+        3.75,
+        0.0,
+        0.0
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "pendant.nave.6",
+      "type": "gap.pendant-globe.3000k",
+      "point": [
+        11.25,
+        0.0,
+        3.95
+      ],
+      "aim": [
+        11.25,
+        0.0,
+        0.0
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "pendant.nave.7",
+      "type": "gap.pendant-globe.3000k",
+      "point": [
+        18.75,
+        0.0,
+        3.95
+      ],
+      "aim": [
+        18.75,
+        0.0,
+        0.0
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "pendant.nave.8",
+      "type": "gap.pendant-globe.3000k",
+      "point": [
+        26.425,
+        0.0,
+        3.95
+      ],
+      "aim": [
+        26.425,
+        0.0,
+        0.0
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "pendant.aisle-n.1",
+      "type": "gap.pendant-globe.3000k",
+      "point": [
+        -26.425,
+        -8.675,
+        4.42
+      ],
+      "aim": [
+        -26.425,
+        -8.675,
+        0.0
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "pendant.aisle-n.2",
+      "type": "gap.pendant-globe.3000k",
+      "point": [
+        -18.75,
+        -8.675,
+        4.42
+      ],
+      "aim": [
+        -18.75,
+        -8.675,
+        0.0
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "pendant.aisle-n.3",
+      "type": "gap.pendant-globe.3000k",
+      "point": [
+        -11.25,
+        -8.675,
+        4.42
+      ],
+      "aim": [
+        -11.25,
+        -8.675,
+        0.0
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "pendant.aisle-n.4",
+      "type": "gap.pendant-globe.3000k",
+      "point": [
+        -3.75,
+        -8.675,
+        4.42
+      ],
+      "aim": [
+        -3.75,
+        -8.675,
+        0.0
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "pendant.aisle-n.5",
+      "type": "gap.pendant-globe.3000k",
+      "point": [
+        3.75,
+        -8.675,
+        4.42
+      ],
+      "aim": [
+        3.75,
+        -8.675,
+        0.0
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "pendant.aisle-n.6",
+      "type": "gap.pendant-globe.3000k",
+      "point": [
+        11.25,
+        -8.675,
+        4.42
+      ],
+      "aim": [
+        11.25,
+        -8.675,
+        0.0
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "pendant.aisle-n.7",
+      "type": "gap.pendant-globe.3000k",
+      "point": [
+        18.75,
+        -8.675,
+        4.42
+      ],
+      "aim": [
+        18.75,
+        -8.675,
+        0.0
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "pendant.aisle-n.8",
+      "type": "gap.pendant-globe.3000k",
+      "point": [
+        26.425,
+        -8.675,
+        4.42
+      ],
+      "aim": [
+        26.425,
+        -8.675,
+        0.0
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "pendant.aisle-s.1",
+      "type": "gap.pendant-globe.3000k",
+      "point": [
+        -26.425,
+        8.675,
+        4.42
+      ],
+      "aim": [
+        -26.425,
+        8.675,
+        0.0
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "pendant.aisle-s.2",
+      "type": "gap.pendant-globe.3000k",
+      "point": [
+        -18.75,
+        8.675,
+        4.42
+      ],
+      "aim": [
+        -18.75,
+        8.675,
+        0.0
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "pendant.aisle-s.3",
+      "type": "gap.pendant-globe.3000k",
+      "point": [
+        -11.25,
+        8.675,
+        4.42
+      ],
+      "aim": [
+        -11.25,
+        8.675,
+        0.0
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "pendant.aisle-s.4",
+      "type": "gap.pendant-globe.3000k",
+      "point": [
+        -3.75,
+        8.675,
+        4.42
+      ],
+      "aim": [
+        -3.75,
+        8.675,
+        0.0
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "pendant.aisle-s.5",
+      "type": "gap.pendant-globe.3000k",
+      "point": [
+        3.75,
+        8.675,
+        4.42
+      ],
+      "aim": [
+        3.75,
+        8.675,
+        0.0
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "pendant.aisle-s.6",
+      "type": "gap.pendant-globe.3000k",
+      "point": [
+        11.25,
+        8.675,
+        4.42
+      ],
+      "aim": [
+        11.25,
+        8.675,
+        0.0
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "pendant.aisle-s.7",
+      "type": "gap.pendant-globe.3000k",
+      "point": [
+        18.75,
+        8.675,
+        4.42
+      ],
+      "aim": [
+        18.75,
+        8.675,
+        0.0
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "pendant.aisle-s.8",
+      "type": "gap.pendant-globe.3000k",
+      "point": [
+        26.425,
+        8.675,
+        4.42
+      ],
+      "aim": [
+        26.425,
+        8.675,
+        0.0
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "uplight.p1n.nw",
+      "type": "gap.uplight.3000k",
+      "point": [
+        -22.9,
+        -5.4,
+        4.095
+      ],
+      "aim": [
+        -23.462,
+        -5.962,
+        5.367
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "uplight.p1n.sw",
+      "type": "gap.uplight.3000k",
+      "point": [
+        -22.9,
+        -4.6,
+        4.095
+      ],
+      "aim": [
+        -23.462,
+        -4.038,
+        5.367
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "uplight.p1n.ne",
+      "type": "gap.uplight.3000k",
+      "point": [
+        -22.1,
+        -5.4,
+        4.095
+      ],
+      "aim": [
+        -21.538,
+        -5.962,
+        5.367
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "uplight.p1n.se",
+      "type": "gap.uplight.3000k",
+      "point": [
+        -22.1,
+        -4.6,
+        4.095
+      ],
+      "aim": [
+        -21.538,
+        -4.038,
+        5.367
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "uplight.p1s.nw",
+      "type": "gap.uplight.3000k",
+      "point": [
+        -22.9,
+        4.6,
+        4.095
+      ],
+      "aim": [
+        -23.462,
+        4.038,
+        5.367
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "uplight.p1s.sw",
+      "type": "gap.uplight.3000k",
+      "point": [
+        -22.9,
+        5.4,
+        4.095
+      ],
+      "aim": [
+        -23.462,
+        5.962,
+        5.367
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "uplight.p1s.ne",
+      "type": "gap.uplight.3000k",
+      "point": [
+        -22.1,
+        4.6,
+        4.095
+      ],
+      "aim": [
+        -21.538,
+        4.038,
+        5.367
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "uplight.p1s.se",
+      "type": "gap.uplight.3000k",
+      "point": [
+        -22.1,
+        5.4,
+        4.095
+      ],
+      "aim": [
+        -21.538,
+        5.962,
+        5.367
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "uplight.p2n.nw",
+      "type": "gap.uplight.3000k",
+      "point": [
+        -15.4,
+        -5.4,
+        4.095
+      ],
+      "aim": [
+        -15.962,
+        -5.962,
+        5.367
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "uplight.p2n.sw",
+      "type": "gap.uplight.3000k",
+      "point": [
+        -15.4,
+        -4.6,
+        4.095
+      ],
+      "aim": [
+        -15.962,
+        -4.038,
+        5.367
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "uplight.p2n.ne",
+      "type": "gap.uplight.3000k",
+      "point": [
+        -14.6,
+        -5.4,
+        4.095
+      ],
+      "aim": [
+        -14.038,
+        -5.962,
+        5.367
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "uplight.p2n.se",
+      "type": "gap.uplight.3000k",
+      "point": [
+        -14.6,
+        -4.6,
+        4.095
+      ],
+      "aim": [
+        -14.038,
+        -4.038,
+        5.367
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "uplight.p2s.nw",
+      "type": "gap.uplight.3000k",
+      "point": [
+        -15.4,
+        4.6,
+        4.095
+      ],
+      "aim": [
+        -15.962,
+        4.038,
+        5.367
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "uplight.p2s.sw",
+      "type": "gap.uplight.3000k",
+      "point": [
+        -15.4,
+        5.4,
+        4.095
+      ],
+      "aim": [
+        -15.962,
+        5.962,
+        5.367
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "uplight.p2s.ne",
+      "type": "gap.uplight.3000k",
+      "point": [
+        -14.6,
+        4.6,
+        4.095
+      ],
+      "aim": [
+        -14.038,
+        4.038,
+        5.367
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "uplight.p2s.se",
+      "type": "gap.uplight.3000k",
+      "point": [
+        -14.6,
+        5.4,
+        4.095
+      ],
+      "aim": [
+        -14.038,
+        5.962,
+        5.367
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "uplight.p3n.nw",
+      "type": "gap.uplight.3000k",
+      "point": [
+        -7.9,
+        -5.4,
+        4.095
+      ],
+      "aim": [
+        -8.462,
+        -5.962,
+        5.367
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "uplight.p3n.sw",
+      "type": "gap.uplight.3000k",
+      "point": [
+        -7.9,
+        -4.6,
+        4.095
+      ],
+      "aim": [
+        -8.462,
+        -4.038,
+        5.367
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "uplight.p3n.ne",
+      "type": "gap.uplight.3000k",
+      "point": [
+        -7.1,
+        -5.4,
+        4.095
+      ],
+      "aim": [
+        -6.538,
+        -5.962,
+        5.367
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "uplight.p3n.se",
+      "type": "gap.uplight.3000k",
+      "point": [
+        -7.1,
+        -4.6,
+        4.095
+      ],
+      "aim": [
+        -6.538,
+        -4.038,
+        5.367
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "uplight.p3s.nw",
+      "type": "gap.uplight.3000k",
+      "point": [
+        -7.9,
+        4.6,
+        4.095
+      ],
+      "aim": [
+        -8.462,
+        4.038,
+        5.367
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "uplight.p3s.sw",
+      "type": "gap.uplight.3000k",
+      "point": [
+        -7.9,
+        5.4,
+        4.095
+      ],
+      "aim": [
+        -8.462,
+        5.962,
+        5.367
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "uplight.p3s.ne",
+      "type": "gap.uplight.3000k",
+      "point": [
+        -7.1,
+        4.6,
+        4.095
+      ],
+      "aim": [
+        -6.538,
+        4.038,
+        5.367
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "uplight.p3s.se",
+      "type": "gap.uplight.3000k",
+      "point": [
+        -7.1,
+        5.4,
+        4.095
+      ],
+      "aim": [
+        -6.538,
+        5.962,
+        5.367
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "uplight.p4n.nw",
+      "type": "gap.uplight.3000k",
+      "point": [
+        -0.4,
+        -5.4,
+        4.095
+      ],
+      "aim": [
+        -0.962,
+        -5.962,
+        5.367
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "uplight.p4n.sw",
+      "type": "gap.uplight.3000k",
+      "point": [
+        -0.4,
+        -4.6,
+        4.095
+      ],
+      "aim": [
+        -0.962,
+        -4.038,
+        5.367
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "uplight.p4n.ne",
+      "type": "gap.uplight.3000k",
+      "point": [
+        0.4,
+        -5.4,
+        4.095
+      ],
+      "aim": [
+        0.962,
+        -5.962,
+        5.367
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "uplight.p4n.se",
+      "type": "gap.uplight.3000k",
+      "point": [
+        0.4,
+        -4.6,
+        4.095
+      ],
+      "aim": [
+        0.962,
+        -4.038,
+        5.367
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "uplight.p4s.nw",
+      "type": "gap.uplight.3000k",
+      "point": [
+        -0.4,
+        4.6,
+        4.095
+      ],
+      "aim": [
+        -0.962,
+        4.038,
+        5.367
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "uplight.p4s.sw",
+      "type": "gap.uplight.3000k",
+      "point": [
+        -0.4,
+        5.4,
+        4.095
+      ],
+      "aim": [
+        -0.962,
+        5.962,
+        5.367
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "uplight.p4s.ne",
+      "type": "gap.uplight.3000k",
+      "point": [
+        0.4,
+        4.6,
+        4.095
+      ],
+      "aim": [
+        0.962,
+        4.038,
+        5.367
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "uplight.p4s.se",
+      "type": "gap.uplight.3000k",
+      "point": [
+        0.4,
+        5.4,
+        4.095
+      ],
+      "aim": [
+        0.962,
+        5.962,
+        5.367
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "uplight.p5n.nw",
+      "type": "gap.uplight.3000k",
+      "point": [
+        7.1,
+        -5.4,
+        4.095
+      ],
+      "aim": [
+        6.538,
+        -5.962,
+        5.367
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "uplight.p5n.sw",
+      "type": "gap.uplight.3000k",
+      "point": [
+        7.1,
+        -4.6,
+        4.095
+      ],
+      "aim": [
+        6.538,
+        -4.038,
+        5.367
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "uplight.p5n.ne",
+      "type": "gap.uplight.3000k",
+      "point": [
+        7.9,
+        -5.4,
+        4.095
+      ],
+      "aim": [
+        8.462,
+        -5.962,
+        5.367
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "uplight.p5n.se",
+      "type": "gap.uplight.3000k",
+      "point": [
+        7.9,
+        -4.6,
+        4.095
+      ],
+      "aim": [
+        8.462,
+        -4.038,
+        5.367
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "uplight.p5s.nw",
+      "type": "gap.uplight.3000k",
+      "point": [
+        7.1,
+        4.6,
+        4.095
+      ],
+      "aim": [
+        6.538,
+        4.038,
+        5.367
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "uplight.p5s.sw",
+      "type": "gap.uplight.3000k",
+      "point": [
+        7.1,
+        5.4,
+        4.095
+      ],
+      "aim": [
+        6.538,
+        5.962,
+        5.367
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "uplight.p5s.ne",
+      "type": "gap.uplight.3000k",
+      "point": [
+        7.9,
+        4.6,
+        4.095
+      ],
+      "aim": [
+        8.462,
+        4.038,
+        5.367
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "uplight.p5s.se",
+      "type": "gap.uplight.3000k",
+      "point": [
+        7.9,
+        5.4,
+        4.095
+      ],
+      "aim": [
+        8.462,
+        5.962,
+        5.367
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "uplight.p6n.nw",
+      "type": "gap.uplight.3000k",
+      "point": [
+        14.6,
+        -5.4,
+        4.095
+      ],
+      "aim": [
+        14.038,
+        -5.962,
+        5.367
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "uplight.p6n.sw",
+      "type": "gap.uplight.3000k",
+      "point": [
+        14.6,
+        -4.6,
+        4.095
+      ],
+      "aim": [
+        14.038,
+        -4.038,
+        5.367
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "uplight.p6n.ne",
+      "type": "gap.uplight.3000k",
+      "point": [
+        15.4,
+        -5.4,
+        4.095
+      ],
+      "aim": [
+        15.962,
+        -5.962,
+        5.367
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "uplight.p6n.se",
+      "type": "gap.uplight.3000k",
+      "point": [
+        15.4,
+        -4.6,
+        4.095
+      ],
+      "aim": [
+        15.962,
+        -4.038,
+        5.367
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "uplight.p6s.nw",
+      "type": "gap.uplight.3000k",
+      "point": [
+        14.6,
+        4.6,
+        4.095
+      ],
+      "aim": [
+        14.038,
+        4.038,
+        5.367
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "uplight.p6s.sw",
+      "type": "gap.uplight.3000k",
+      "point": [
+        14.6,
+        5.4,
+        4.095
+      ],
+      "aim": [
+        14.038,
+        5.962,
+        5.367
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "uplight.p6s.ne",
+      "type": "gap.uplight.3000k",
+      "point": [
+        15.4,
+        4.6,
+        4.095
+      ],
+      "aim": [
+        15.962,
+        4.038,
+        5.367
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "uplight.p6s.se",
+      "type": "gap.uplight.3000k",
+      "point": [
+        15.4,
+        5.4,
+        4.095
+      ],
+      "aim": [
+        15.962,
+        5.962,
+        5.367
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "uplight.p7n.nw",
+      "type": "gap.uplight.3000k",
+      "point": [
+        22.1,
+        -5.4,
+        4.095
+      ],
+      "aim": [
+        21.538,
+        -5.962,
+        5.367
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "uplight.p7n.sw",
+      "type": "gap.uplight.3000k",
+      "point": [
+        22.1,
+        -4.6,
+        4.095
+      ],
+      "aim": [
+        21.538,
+        -4.038,
+        5.367
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "uplight.p7n.ne",
+      "type": "gap.uplight.3000k",
+      "point": [
+        22.9,
+        -5.4,
+        4.095
+      ],
+      "aim": [
+        23.462,
+        -5.962,
+        5.367
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "uplight.p7n.se",
+      "type": "gap.uplight.3000k",
+      "point": [
+        22.9,
+        -4.6,
+        4.095
+      ],
+      "aim": [
+        23.462,
+        -4.038,
+        5.367
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "uplight.p7s.nw",
+      "type": "gap.uplight.3000k",
+      "point": [
+        22.1,
+        4.6,
+        4.095
+      ],
+      "aim": [
+        21.538,
+        4.038,
+        5.367
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "uplight.p7s.sw",
+      "type": "gap.uplight.3000k",
+      "point": [
+        22.1,
+        5.4,
+        4.095
+      ],
+      "aim": [
+        21.538,
+        5.962,
+        5.367
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "uplight.p7s.ne",
+      "type": "gap.uplight.3000k",
+      "point": [
+        22.9,
+        4.6,
+        4.095
+      ],
+      "aim": [
+        23.462,
+        4.038,
+        5.367
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "uplight.p7s.se",
+      "type": "gap.uplight.3000k",
+      "point": [
+        22.9,
+        5.4,
+        4.095
+      ],
+      "aim": [
+        23.462,
+        5.962,
+        5.367
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "easel.spot",
+      "type": "track-spot.3000k.12deg",
+      "point": [
+        24.4,
+        1.9,
+        4.25
+      ],
+      "aim": [
+        28.9,
+        0.0,
+        1.515
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "screen-a.west.picture",
+      "type": "linear-cove.3000k",
+      "point": [
+        -28.57,
+        -9.15,
+        3.298
+      ],
+      "aim": [
+        -28.25,
+        -9.15,
+        1.55
+      ],
+      "length": 1.19,
+      "along": [
+        0,
+        1,
+        0
+      ],
+      "operation": "presence",
+      "follows": "reserve.screen-a.lamp",
+      "body": "reserve.screen-a"
+    },
+    {
+      "id": "screen-b.west.picture",
+      "type": "linear-cove.3000k",
+      "point": [
+        -26.67,
+        -9.15,
+        3.298
+      ],
+      "aim": [
+        -26.35,
+        -9.15,
+        1.55
+      ],
+      "length": 1.56,
+      "along": [
+        0,
+        1,
+        0
+      ],
+      "operation": "presence",
+      "follows": "reserve.screen-b.lamp",
+      "body": "reserve.screen-b"
+    },
+    {
+      "id": "screen-b.east.picture",
+      "type": "linear-cove.3000k",
+      "point": [
+        -25.83,
+        -9.15,
+        3.298
+      ],
+      "aim": [
+        -26.15,
+        -9.15,
+        1.55
+      ],
+      "length": 0.84,
+      "along": [
+        0,
+        1,
+        0
+      ],
+      "operation": "presence",
+      "follows": "reserve.screen-b.lamp",
+      "body": "reserve.screen-b"
+    },
+    {
+      "id": "screen-c.west.picture",
+      "type": "linear-cove.3000k",
+      "point": [
+        -24.77,
+        -9.15,
+        3.298
+      ],
+      "aim": [
+        -24.45,
+        -9.15,
+        1.55
+      ],
+      "length": 3.8,
+      "along": [
+        0,
+        1,
+        0
+      ],
+      "operation": "presence",
+      "follows": "reserve.screen-c.lamp",
+      "body": "reserve.screen-c"
+    },
+    {
+      "id": "screen-d.west.picture",
+      "type": "linear-cove.3000k",
+      "point": [
+        -21.07,
+        -9.15,
+        3.298
+      ],
+      "aim": [
+        -20.75,
+        -9.15,
+        1.55
+      ],
+      "length": 1.04,
+      "along": [
+        0,
+        1,
+        0
+      ],
+      "operation": "presence",
+      "follows": "reserve.screen-d.lamp",
+      "body": "reserve.screen-d"
+    },
+    {
+      "id": "screen-d.east.picture",
+      "type": "linear-cove.3000k",
+      "point": [
+        -20.23,
+        -9.15,
+        3.298
+      ],
+      "aim": [
+        -20.55,
+        -9.15,
+        1.55
+      ],
+      "length": 1.19,
+      "along": [
+        0,
+        1,
+        0
+      ],
+      "operation": "presence",
+      "follows": "reserve.screen-d.lamp",
+      "body": "reserve.screen-d"
+    },
+    {
+      "id": "screen-e.west.picture",
+      "type": "linear-cove.3000k",
+      "point": [
+        -19.17,
+        -9.15,
+        3.298
+      ],
+      "aim": [
+        -18.85,
+        -9.15,
+        1.55
+      ],
+      "length": 1.03,
+      "along": [
+        0,
+        1,
+        0
+      ],
+      "operation": "presence",
+      "follows": "reserve.screen-e.lamp",
+      "body": "reserve.screen-e"
+    },
+    {
+      "id": "screen-e.east.picture",
+      "type": "linear-cove.3000k",
+      "point": [
+        -18.33,
+        -9.15,
+        3.298
+      ],
+      "aim": [
+        -18.65,
+        -9.15,
+        1.55
+      ],
+      "length": 0.89,
+      "along": [
+        0,
+        1,
+        0
+      ],
+      "operation": "presence",
+      "follows": "reserve.screen-e.lamp",
+      "body": "reserve.screen-e"
+    }
+  ],
+  "targets": [
+    {
+      "surface": "reserve.frame.gilt",
+      "class": "oil-and-tempera",
+      "lux": [
+        150,
+        200
+      ],
+      "source": "Care",
+      "note": "Measured on the faces of the works on the rack that is out, and on Le Pont de l'Europe on the easel. Works on racks at home are in store, their light off: no target."
+    },
+    {
+      "surface": "reserve.pastel.glass",
+      "class": "works-on-paper",
+      "lux": [
+        50,
+        50
+      ],
+      "source": "Care",
+      "note": "Measured on the two Degas pastels under their glazing; annual dose 150 000 lx h (Care), held because all light here is presence-linked."
+    },
+    {
+      "surface": "reserve.floor",
+      "class": "circulation",
+      "lux": [
+        100,
+        100
+      ],
+      "source": "UseTargets",
+      "note": "The nave's walking zone, x -30.00 to 30.00, |y| <= 4.65, while a visitor is in the undercroft. Empty, the store is dark."
+    },
+    {
+      "surface": "reserve.floor.aisle",
+      "class": "gallery.low-light",
+      "lux": [
+        50,
+        50
+      ],
+      "source": "UseTargets",
+      "note": "The aisles between racks and chests, where the pastels lie, while occupied (ruled class)."
+    }
+  ],
+  "design": [
+    {
+      "brighter": "reserve.frame.gilt",
+      "darker": "reserve.vault.web",
+      "ratio": [
+        3.0,
+        null
+      ],
+      "note": "In the nave with a rack out, from the door and from mid-nave: mean luminance of the lit works at least 3 x the vault webs in the same view. Measured, never tuned."
+    },
+    {
+      "brighter": "reserve.vault.web",
+      "darker": "reserve.pier.brick",
+      "ratio": [
+        1.0,
+        null
+      ],
+      "note": "The uplit webs near the groins read brighter than the piers' faces at eye height."
+    },
+    {
+      "brighter": "reserve.pier.brick",
+      "darker": "reserve.floor",
+      "ratio": [
+        1.0,
+        null
+      ],
+      "note": "The bluestone floor is the darkest surface in view and carries the globes' reflections."
+    }
+  ]
+}
