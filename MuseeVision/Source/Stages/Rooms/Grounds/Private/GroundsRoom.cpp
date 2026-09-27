@@ -15,7 +15,7 @@ void UGroundsRoom::Describe(FSiteDescription& Out) const
 	using namespace Musee::Grounds;
 	Out.Stage = StageKey();
 	Out.DisplayName = NSLOCTEXT("MuseeGrounds", "DisplayName", "The Grounds");
-	DrawTerrain(Out.Pieces);
+	DrawTerrain(Out.Pieces, Out.ReceivedPrisms);
 	DrawPaving(Out.Pieces);
 	DrawGravel(Out.Pieces);
 	DrawStrip(Out.Pieces);

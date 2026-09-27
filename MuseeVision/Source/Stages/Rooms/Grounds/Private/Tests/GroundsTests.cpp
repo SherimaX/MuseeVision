@@ -315,6 +315,28 @@ namespace Musee::Grounds::Tests
 		return true;
 	}
 
+	IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGroundsReceivedTest, "Musee.Grounds.Received", Flags)
+	bool FGroundsReceivedTest::RunTest(const FString& Parameters)
+	{
+		// Handed a building through the soil and one standing clear above it, the terrain gives way to the first only, besides
+		// its two basins.
+		FSiteDescription Description;
+		FSitePrism& Through = Description.ReceivedPrisms.AddDefaulted_GetRef();
+		Through.OutlineMeters = {FVector2D(0.0, 0.0), FVector2D(10.0, 0.0), FVector2D(10.0, 10.0), FVector2D(0.0, 10.0)};
+		Through.BottomMeters = -0.55;
+		Through.TopMeters = 21.0;
+		FSitePrism& Above = Description.ReceivedPrisms.AddDefaulted_GetRef();
+		Above.OutlineMeters = {FVector2D(20.0, 0.0), FVector2D(30.0, 0.0), FVector2D(30.0, 10.0), FVector2D(20.0, 10.0)};
+		Above.BottomMeters = 7.7;
+		Above.TopMeters = 30.0;
+		GetDefault<UGroundsRoom>()->Describe(Description);
+		const FFormDrawing* Terrain = Description.Pieces.FindByPredicate([](const FFormDrawing& D) { return D.Name == FName(TEXT("terrain")); });
+		if (TestNotNull(TEXT("the terrain is drawn"), Terrain))
+		{
+			TestEqual(TEXT("its soil gives way to the two basins and the building through it"), Terrain->Shape.Get<FFormExtrusion>().Holes.Num(), 3);
+		}
+		return true;
+	}
 	IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGroundsPlanTest, "Musee.Grounds.Plan", Flags)
 	bool FGroundsPlanTest::RunTest(const FString& Parameters)
 	{

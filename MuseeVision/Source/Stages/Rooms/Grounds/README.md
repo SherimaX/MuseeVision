@@ -19,7 +19,7 @@ museum's plan frame; it has no port, and the site plan places it at the anchor's
 | `GroundsRun` | a mason's run in plan (straight legs and arcs), set out in stones, a joint and a mitre on every corner |
 | `GroundsSettingOut` | the lines several trades work to: where the walk and the path meet the ring's and terrace's circles; the kerbs' runs |
 | `GroundsSite.cpp` | the Ground footprint, the anchors (Water, Mount, Bed, Seat) and the Outdoors enclosure |
-| `GroundsTerrain.cpp` | the soil, -0.33 to -0.03, over the 800 m square |
+| `GroundsTerrain.cpp` | the soil, -0.33 to -0.03, over the 800 m square less the buildings standing on it and the basins |
 | `GroundsPaving.cpp` | the parvis's 17 courses of travertine slabs |
 | `GroundsGravel.cpp` | the walks: side walks, allées, cross walks, canal walks, avenue, walk east, ring, path north, terrace |
 | `GroundsStrip.cpp` | the strip round the stone complex and its stone edge |
@@ -32,9 +32,9 @@ lamps' light and the 81 step lights are Light's, from Lighting.json.
 
 ## Waiting on the systems
 
-- **Site** hands a Ground stage no received outlines, and **Form** cuts no solid by another: the terrain is drawn over
-  the whole footprint (pierced only under the two basins' water), not yet cut by the buildings or by the pieces set
-  into it; the lamps at the parvis's corners stand bedded in its slabs.
+- **Form** cuts no solid by another: the terrain gives way to the buildings Site hands it (their prisms through the
+  soil) and to the two basins, but not yet to the pieces set into it (the walks, the parvis, the kerbs); the lamps at
+  the parvis's corners stand bedded in its slabs.
 - **Form** has no union of plan regions: the strip's bands are laid face by face and merged where they meet square (the
   Salon and its cabinet); its junctions with the oval's band (the Salon's west end) and the drum's (its east end) are
   left unlaid.

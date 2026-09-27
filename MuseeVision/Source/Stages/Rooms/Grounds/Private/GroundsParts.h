@@ -5,6 +5,7 @@
 #include "GroundsPlan.h"
 #include "MuseeCollision.h"
 #include "MuseeKey.h"
+#include "SiteFootprint.h"
 
 struct FSiteDescription;
 
@@ -68,7 +69,7 @@ namespace Musee::Grounds
 	/** The lamp standards' bases (r 0.27) in plan: the holes a walk's gravel leaves round them. */
 	[[nodiscard]] TArray<FFormProfile> LampBasesWithin(const FBox2D& Region);
 
-	void DrawTerrain(TArray<FFormDrawing>& Out);
+	void DrawTerrain(TArray<FFormDrawing>& Out, TConstArrayView<FSitePrism> Received);
 	void DrawPaving(TArray<FFormDrawing>& Out);
 	void DrawGravel(TArray<FFormDrawing>& Out);
 	void DrawStrip(TArray<FFormDrawing>& Out);
