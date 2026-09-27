@@ -63,12 +63,6 @@ namespace Musee::ClassicalHall::Plan
 	inline constexpr double LiningAllowance = 0.050;
 	/** The sleeve round the passage (the collar envelope): x ±2.10, a round head r 2.10 springing with the opening. */
 	inline constexpr double SleeveHalf = 2.100;
-	/**
-	 * Form cuts no passage through a curved wall, so the sleeve's head over the rough opening is laid in horizontal
-	 * courses cut in plan to the port cylinder, each course's bed the width of the arch at its foot; 150 mm courses
-	 * keep the step behind Site's lining under the lining's own allowance of 50 mm over most of the arch.
-	 */
-	inline constexpr double SleeveCourse = 0.150;
 
 	// ---- §1, §3.1 the gallery, the throat and the tribune's wall ------------------------------------------------------
 	inline constexpr double GalleryHalf = 3.000;

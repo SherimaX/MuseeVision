@@ -104,48 +104,35 @@ namespace Musee::ClassicalHall
 			Out.Add(PlanPrism(TEXT("shell.passage.base"), TEXT("shell"), PassagePlan(), {}, Plan::SlabUnderside, Sill, Solid));
 		}
 
-		/** The sleeve's plan between two plan x on one side of the axis, from the shell's south face to the port cylinder. */
-		FFormProfile SleevePlan(double From, double To)
-		{
-			FPen Pen(From, Plan::ShellSouthY);
-			Pen.To(To, Plan::ShellSouthY).To(To, PortY(To)).Arc(W, Plan::WellRadius, PortDeg(To), PortDeg(From));
-			return Pen.Closed();
-		}
-
 		/**
-		 * The sleeve that carries the rough opening from the shell's south face to the port cylinder: its jambs, and
-		 * over the springing its head, laid in courses cut in plan to the cylinder (Form cuts no straight passage
-		 * through a curved face), each cut at its foot to the arch of the opening and to the collar's arch, so the
-		 * courses close the collar's envelope and the rough opening's head steps up behind the lining.
+		 * The sleeve that carries the rough opening from the shell's south face to the port cylinder, round the collar's
+		 * envelope: one wall, its face the shell's south face y 31.40 (looking north) from x -2.10 to +2.10 and its back the
+		 * port cylinder straight behind it, standing from the rough sill with its top the collar's round head (r 2.10 about
+		 * the springing); the rough opening cut through it as the class's straight passage, jambs x ±1.85 and head r 1.85,
+		 * so the joint's lining and voussoirs lie against it all the way round, with nothing open behind them.
 		 */
 		void Sleeve(TArray<FFormDrawing>& Out)
 		{
 			const double Half = Plan::PortClearHalf + Plan::LiningAllowance;
 			const double Sill = -Plan::LiningAllowance;
-			for (const double Side : {-1.0, 1.0})
-			{
-				const FString Name = FString::Printf(TEXT("shell.sleeve.jamb.%s"), Side > 0.0 ? TEXT("east") : TEXT("west"));
-				Out.Add(PlanPrism(Name, TEXT("port.rough-opening"), SleevePlan(Side * Half, Side * Plan::SleeveHalf), {}, Sill, Plan::PortSpringing, Solid));
-			}
-			const int32 Courses = FMath::RoundToInt32(Plan::SleeveHalf / Plan::SleeveCourse);
-			for (int32 Course = 0; Course < Courses; ++Course)
-			{
-				const double Foot = Plan::PortSpringing + Course * Plan::SleeveCourse;
-				const double Head = Foot + Plan::SleeveCourse;
-				const double Opening = Foot - Plan::PortSpringing < Half ? FMath::Sqrt(Half * Half - FMath::Square(Foot - Plan::PortSpringing)) : 0.0;
-				const double Collar = FMath::Sqrt(FMath::Square(Plan::SleeveHalf) - FMath::Square(Foot - Plan::PortSpringing));
-				if (Opening <= 0.0)
-				{
-					Out.Add(PlanPrism(FString::Printf(TEXT("shell.sleeve.course.%02d"), Course + 1), TEXT("shell"), SleevePlan(-Collar, Collar), {}, Foot,
-						Head, Solid));
-					continue;
-				}
-				for (const double Side : {-1.0, 1.0})
-				{
-					const FString Name = FString::Printf(TEXT("shell.sleeve.course.%02d.%s"), Course + 1, Side > 0.0 ? TEXT("east") : TEXT("west"));
-					Out.Add(PlanPrism(Name, TEXT("port.rough-opening"), SleevePlan(Side * Opening, Side * Collar), {}, Foot, Head, Solid));
-				}
-			}
+			const double S = Plan::SleeveHalf;
+			const double Jambs = Plan::PortSpringing - Sill;
+			FFormWall Shape;
+			Shape.Plan = FFormProfile::Polyline({FVector2D(-S, Plan::ShellSouthY), FVector2D(S, Plan::ShellSouthY)}, false);
+			Shape.Back = FFormProfile::From(FVector2D(-S, PortY(-S)));
+			Shape.Back.ArcAbout(W, Plan::WellRadius, Plan::WellRadius, PortDeg(-S), PortDeg(S), EFormJoint::Smooth);
+			Shape.BaseMeters = Sill;
+			Shape.HeightMeters = Jambs + S;
+			// The collar's head on the face's development, which is the plan's x from the sleeve's west end.
+			Shape.Top = FFormProfile::From(FVector2D(0.0, Jambs));
+			Shape.Top.ArcAbout(FVector2D(S, Jambs), S, S, 180.0, 0.0, EFormJoint::Smooth);
+			FFormWallOpening& Opening = Shape.Openings.AddDefaulted_GetRef();
+			Opening.CenterMeters = S;
+			Opening.WidthMeters = 2.0 * Half;
+			Opening.HeadMeters = Jambs;
+			Opening.bArched = true;
+			Opening.bStraight = true;
+			Out.Add(Drawn(TEXT("shell.sleeve"), TEXT("port.rough-opening"), MoveTemp(Shape), Solid));
 		}
 
 		/** The stretches of a gallery wall between the niches' bays, from one y to another. */
