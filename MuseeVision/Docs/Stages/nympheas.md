@@ -447,6 +447,11 @@ Giverny's cloud; sound; the use.
 target); each coping block's own tone and lippage beyond Matter's defaults; the waterline history; the exterior dress;
 the whispering-gallery check; a per-opening cloud field so the sky seen through the dome matches Giverny.
 
+**Waits for Form (not drawn yet, Form polish):** sweeps along paths that are not in plan. The P6 slim architrave, swept
+up the jambs and over the arch on the curved oval face; the velarium frame's eight T-ribs and their hanging rods,
+following the cloth's rise; the dome's glazing bars and curb, following the glass's rise. The rim ring, the cloth and
+the glass are drawn; the room makes without them.
+
 ## 13. Palette keys to confirm and catalogue gaps
 **Palette keys** (no `todo.` keys; roles guessed or workings outside `workingsByEra`):
 - `stone.travertine-romano` working **carved** (the frieze): not in workingsByEra → a "carved (filled block)" working.
