@@ -2,7 +2,7 @@
 	"FileVersion": 3,
 	"EngineAssociation": "5.8",
 	"Category": "",
-	"Description": "Musée Vision: the museum as one work, built by eleven systems (Source/Systems) and its stages (Source/Stages).",
+	"Description": "Musﾃｩe Vision: the museum as one work, built by eleven systems (Source/Systems) and its stages (Source/Stages).",
 	"Modules": [
 		{
 			"Name": "MuseeFoundation",
@@ -141,24 +141,15 @@
 		},
 		{
 			"Name": "DLSS",
-			"Enabled": true,
-			"TargetAllowList": [
-				"Game"
-			]
+			"Enabled": true
 		},
 		{
 			"Name": "StreamlineDLSSG",
-			"Enabled": true,
-			"TargetAllowList": [
-				"Game"
-			]
+			"Enabled": true
 		},
 		{
 			"Name": "StreamlineReflex",
-			"Enabled": true,
-			"TargetAllowList": [
-				"Game"
-			]
+			"Enabled": true
 		},
 		{
 			"Name": "XRBase",
