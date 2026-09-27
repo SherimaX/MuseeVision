@@ -1,0 +1,229 @@
+{
+  "stage": "classical-hall",
+  "finishes": [
+    {
+      "surface": "classical-hall.wall.field",
+      "material": "stone.crema-marfil",
+      "working": "honed",
+      "history": "new",
+      "note": "Walls above the dado (gallery long walls, south wall, throat jambs, tribune wall), z 0.45 to the ledge 3.70: 30 mm laid finish over the travertine core, courses 1.20, blocks 1.90 +/- 30 % half-bond, 3 mm joints (the Rotunda's coursing record)."
+    },
+    {
+      "surface": "classical-hall.wall.dado",
+      "material": "accent.rojo-alicante",
+      "working": "polished",
+      "history": "handled",
+      "note": "The dado z 0-0.45 on every wall, slabs 1.20 long in one course: polished and worn soft by shoulders and hands (Story: the red you cross on the dial is the red under the casts)."
+    },
+    {
+      "surface": "classical-hall.lintel",
+      "material": "stone.crema-marfil",
+      "working": "honed",
+      "history": "new",
+      "note": "The lintel over the throat: soffit z 3.075 and its south face y 7.10 up to the vault's end arc."
+    },
+    {
+      "surface": "classical-hall.port.rough-opening",
+      "material": "stone.travertine-romano",
+      "working": "sawn",
+      "history": "new",
+      "note": "The stair port's rough opening (jambs, head, sill) from y 31.10 to the port face, hidden behind Site's lining: the travertine core as sawn."
+    },
+    {
+      "surface": "classical-hall.shell",
+      "material": "stone.travertine-romano",
+      "working": "sawn",
+      "history": "new",
+      "note": "Structural masonry never seen: wall cores, vault shells, slab (underside z -0.40), roof (top 5.45), the sleeve round the passage, the outer faces against the ground."
+    },
+    {
+      "surface": "classical-hall.niche.interior",
+      "material": "white.lime-plaster",
+      "working": "burnished.red-ochre",
+      "history": "new",
+      "note": "The 13 niches' half-round backs and quarter-sphere heads: lime pigmented with red ochre, burnished (Pompeian)."
+    },
+    {
+      "surface": "classical-hall.niche.sill",
+      "material": "accent.statuario",
+      "working": "honed",
+      "history": "new",
+      "note": "The niches' floor slab at z 0.45, 0.05 thick (role guessed, as built statuary)."
+    },
+    {
+      "surface": "classical-hall.shaft.giallo",
+      "material": "accent.giallo-siena",
+      "working": "polished",
+      "history": "new",
+      "note": "The 14 gallery and screen column shafts; the 4 gallery pilaster shafts (pilasters guessed)."
+    },
+    {
+      "surface": "classical-hall.shaft.pavonazzetto",
+      "material": "accent.pavonazzetto",
+      "working": "polished",
+      "history": "new",
+      "note": "The tribune's 12 ring column shafts; the 6 tribune pilaster shafts (pilasters guessed)."
+    },
+    {
+      "surface": "classical-hall.order.carved",
+      "material": "accent.statuario",
+      "working": "honed",
+      "history": "new",
+      "note": "Column and pilaster bases (plinths, tori, scotia), capitals (canalis, bolsters, volutes, abacus): carved and honed."
+    },
+    {
+      "surface": "classical-hall.entablature",
+      "material": "accent.statuario",
+      "working": "honed",
+      "history": "new",
+      "note": "Gallery entablature with ressauts and fillers, the screen crossing, the tribune entablature, the ring beam, dentils, the lip."
+    },
+    {
+      "surface": "classical-hall.moulding",
+      "material": "accent.statuario",
+      "working": "honed",
+      "history": "new",
+      "note": "Skirting, dado rail, niche surrounds, keystones, panel frames (roles guessed: the palette names entablatures and consoles)."
+    },
+    {
+      "surface": "classical-hall.panel",
+      "material": "accent.pavonazzetto",
+      "working": "polished",
+      "history": "new",
+      "note": "The 26 wall panels 0.80 x 1.90 and the lunette panel 2.60 x 0.80 (role guessed)."
+    },
+    {
+      "surface": "classical-hall.console",
+      "material": "accent.statuario",
+      "working": "honed",
+      "history": "new",
+      "note": "The 26 quadrant consoles carrying the busts (5 stand empty)."
+    },
+    {
+      "surface": "classical-hall.plinth",
+      "material": "accent.statuario",
+      "working": "honed",
+      "history": "new",
+      "note": "Niche plinths and pedestals, the two gallery axis plinths, the two ambulatory plinths (role guessed, with the herms)."
+    },
+    {
+      "surface": "classical-hall.herm",
+      "material": "accent.statuario",
+      "working": "honed",
+      "history": "new",
+      "note": "The two herms by the stair port (plinth, tapering shaft, cap)."
+    },
+    {
+      "surface": "classical-hall.pedestal",
+      "material": "accent.statuario",
+      "working": "honed",
+      "history": "new",
+      "note": "The centrepiece pedestal, turned, Ø 2.20 x 0.30."
+    },
+    {
+      "surface": "classical-hall.vault.gallery",
+      "material": "white.lime-plaster",
+      "working": "run",
+      "history": "new",
+      "note": "The gallery barrel (R 3.8284): springing bands, plain end and pair bands, ribs and the stepped coffers (256), run in place."
+    },
+    {
+      "surface": "classical-hall.vault.annular",
+      "material": "white.lime-plaster",
+      "working": "run",
+      "history": "new",
+      "note": "The ambulatory's annular vault and its 420 coffers."
+    },
+    {
+      "surface": "classical-hall.dome",
+      "material": "white.lime-plaster",
+      "working": "run",
+      "history": "new",
+      "note": "The tribune dome (sphere R 3.9464) and its 72 coffers."
+    },
+    {
+      "surface": "classical-hall.laylight.well",
+      "material": "white.lime-plaster",
+      "working": "trowelled",
+      "history": "new",
+      "note": "The four lantern wells' vertical sides (to z 5.38) and the eye's cylindrical well r 1.20."
+    },
+    {
+      "surface": "classical-hall.vault.rosette",
+      "material": "white.fibrous-plaster",
+      "working": "cast",
+      "history": "new",
+      "note": "The gallery coffers' rosettes (256), cast, white: the palette gilds only the tribune's."
+    },
+    {
+      "surface": "classical-hall.tribune.rosette",
+      "material": "white.fibrous-plaster",
+      "working": "gilt.gold-leaf.oil",
+      "history": "aged.patina",
+      "note": "The rosettes in the annular vault's and the dome's coffers (492): oil-gilt, soft even lustre, dirt in the hollows."
+    },
+    {
+      "surface": "classical-hall.eye.bead",
+      "material": "white.fibrous-plaster",
+      "working": "gilt.gold-leaf.oil",
+      "history": "aged.patina",
+      "note": "The bead round the eye's lower edge (role guessed: gilt with the tribune rosettes)."
+    },
+    {
+      "surface": "classical-hall.laylight.glass",
+      "material": "glass.low-iron",
+      "working": "acid-etched.laminated",
+      "history": "new",
+      "note": "The five laylights at z 5.38 (four 2.246 x 2.28, one disc Ø 2.40): laminated low-iron, acid-etched face down; Light's luminous ceiling over it."
+    },
+    {
+      "surface": "classical-hall.floor.white",
+      "material": "accent.statuario",
+      "working": "polished",
+      "history": "foot-worn",
+      "note": "White floor fields, borders, bands, cells and the throat: polished, worn along the walking lines."
+    },
+    {
+      "surface": "classical-hall.floor.giallo",
+      "material": "accent.giallo-siena",
+      "working": "polished",
+      "history": "foot-worn",
+      "note": "Gallery square fields and the tribune's giallo rings and sector fields."
+    },
+    {
+      "surface": "classical-hall.floor.verde",
+      "material": "accent.verde-antico",
+      "working": "polished",
+      "history": "foot-worn",
+      "note": "Frames, end panels, bands and the verde discs."
+    },
+    {
+      "surface": "classical-hall.floor.porphyry",
+      "material": "accent.porphyry",
+      "working": "polished.reclaimed",
+      "history": "foot-worn",
+      "note": "Roundels (reclaimed column slices, sectored within stock): harder than the calcite round them, they stand slightly proud as it wears."
+    },
+    {
+      "surface": "classical-hall.floor.rosso",
+      "material": "accent.rojo-alicante",
+      "working": "polished",
+      "history": "foot-worn",
+      "note": "The nine lozenges between the bays (role guessed: the palette's Classical Hall red)."
+    },
+    {
+      "surface": "classical-hall.cast",
+      "material": "white.plaster-of-paris",
+      "working": "cast.seams-kept.sized",
+      "history": "new",
+      "note": "The 41 casts after SMK's Royal Cast Collection: piece-mould seams kept, sealed with a thin size, dust on upward forms. Art makes the objects."
+    },
+    {
+      "surface": "classical-hall.stair.blind-doors",
+      "material": "bronze.cusn10",
+      "working": "patinated",
+      "history": "new",
+      "note": "Closed pair of cast bronze leaves in the stair port's class opening on the port face, only while the port is unmated (on the stand)."
+    }
+  ]
+}
