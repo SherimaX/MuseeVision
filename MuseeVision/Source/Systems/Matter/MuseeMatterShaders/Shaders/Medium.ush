@@ -1,0 +1,44 @@
+// Medium: light inside a body that lets it through, from the body's absorption and scattering.
+//
+// Light entering a translucent body travels some way before it is absorbed or scattered: marble glows because its
+// calcite scatters light millimetres deep before it leaves, still water looks dark because it absorbs what enters and
+// scatters little of it back, and a dye makes it darker still. A record gives the body's absorption coefficient and
+// its (reduced) scattering coefficient per millimetre at the three primaries (evidence tier (a)); this file turns them
+// into the quantities Substrate takes, in centimetres.
+
+#pragma once
+
+#include "/Project/Matter/Frame.ush"
+#include "/Project/Matter/Optics.ush"
+
+// Unreal's Specular input maps to a dielectric's reflectance at normal incidence by F0 = 0.08 Specular, so that its
+// default of 0.5 is F0 = 0.04 (the engine's DielectricSpecularToF0, ShadingCommon.ush). Single Layer Water takes its
+// surface's reflection in this form.
+static const float MatterSpecularPerF0 = 1.0 / 0.08;
+
+/** The mean free path of light in a scattering body, in centimetres: the distance over which it is absorbed or
+ *  scattered once, 1 / (absorption + reduced scattering) (Jensen, Marschner, Levoy & Hanrahan 2001, "A Practical Model
+ *  for Subsurface Light Transport", SIGGRAPH, section 2). Substrate's Slab takes it as its SSS mean free path. */
+float3 MatterMeanFreePathCentimeters(float3 AbsorptionPerMillimeter, float3 ScatteringPerMillimeter)
+{
+	const float3 Extinction = max(AbsorptionPerMillimeter + ScatteringPerMillimeter, MatterTiny);
+	return 1.0 / (Extinction * MatterMillimetersPerCentimeter);
+}
+
+/** A body's extinction per centimetre: what it absorbs and scatters out of a beam along each centimetre. */
+float3 MatterExtinctionPerCentimeter(float3 AbsorptionPerMillimeter, float3 ScatteringPerMillimeter)
+{
+	return (AbsorptionPerMillimeter + ScatteringPerMillimeter) * MatterMillimetersPerCentimeter;
+}
+
+/** A body's single-scattering albedo: of the light it takes from a beam, the fraction it scatters rather than absorbs. */
+float3 MatterSingleScatteringAlbedo(float3 AbsorptionPerMillimeter, float3 ScatteringPerMillimeter)
+{
+	return ScatteringPerMillimeter / max(AbsorptionPerMillimeter + ScatteringPerMillimeter, MatterTiny);
+}
+
+/** Unreal's Specular for a dielectric interface whose reflectance at normal incidence is F0. */
+float MatterSpecularFromF0(float F0)
+{
+	return saturate(F0 * MatterSpecularPerF0);
+}

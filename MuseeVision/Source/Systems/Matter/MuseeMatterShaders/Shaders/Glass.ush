@@ -14,6 +14,7 @@
 
 #include "/Project/Matter/Frame.ush"
 #include "/Project/Matter/Optics.ush"
+#include "/Project/Matter/History.ush"
 
 /** What a pane does to light arriving at one angle. */
 struct FMatterPane
@@ -52,4 +53,38 @@ FMatterPane MatterPane(float CosIncidence, float RefractiveIndex, float3 Absorpt
 float3 MatterPaneEdgeColor(float3 AbsorptionPerMillimeter, float EdgePathMillimeters)
 {
 	return MatterInternalTransmittance(AbsorptionPerMillimeter, EdgePathMillimeters);
+}
+
+// A pane is cast as a thin solid with two faces, and light crossing the pane crosses both, so each face carries half
+// the pane's bulk.
+static const float MatterPaneFaces = 2.0;
+
+// Glass has no open pores: water lies on it only as a film.
+static const float MatterGlassPorosity = 0.0;
+
+/** A clear pane's surface before its history: no diffuse body, the reflectance of its index, the working's roughness. */
+FMatterSurface MatterClearPane(float RefractiveIndex, float Roughness)
+{
+	const float F0 = MatterDielectricF0(RefractiveIndex);
+	FMatterSurface Pane;
+	Pane.DiffuseAlbedo = float3(0.0, 0.0, 0.0);
+	Pane.F0 = F0.xxx;
+	Pane.Roughness = Roughness;
+	Pane.Haziness = 0.0;
+	Pane.Slope = float2(0.0, 0.0);
+	return Pane;
+}
+
+/** The internal transmittance one face of a cast pane carries at normal incidence: the glass's absorption through half
+ *  the pane's thickness (the Slab's interface adds the Fresnel loss at the face itself). */
+float3 MatterPaneFaceTransmittance(float3 AbsorptionPerMillimeter, float ThicknessMillimeters)
+{
+	return MatterInternalTransmittance(AbsorptionPerMillimeter, ThicknessMillimeters / MatterPaneFaces);
+}
+
+/** Transmittance through a face whose fraction SoilCover lies under deposit: the deposit's particles absorb and scatter
+ *  what falls on them, so light passes clear only between them (Hamilton & Mansfield 1993, as in History.ush). */
+float3 MatterSoiledTransmittance(float3 Transmittance, float SoilCover)
+{
+	return Transmittance * saturate(1.0 - SoilCover);
 }
