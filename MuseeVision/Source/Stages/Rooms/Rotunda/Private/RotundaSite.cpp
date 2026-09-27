@@ -46,9 +46,12 @@ namespace Musee::Rotunda
 		/**
 		 * The ports: four doorways through the drum, their frames on the outer face at the threshold, facing out; and the
 		 * stair's portal at the landing, facing north, which serves the well under the drum. The Rotunda draws each door's
-		 * archivolt on the drum's inner face (§3.3) and the stair port's dressings on its stair side (§3.7), so the joints
-		 * draw no surround there; and the landing runs through the portal to the port face as the stair port's threshold
-		 * (§3.7), stopped half the class's strip short.
+		 * archivolt on the drum's inner face (§3.3), so the joints draw no surround there. At the stair port it finishes its
+		 * whole side itself (§2: "at the port face r 7.60 the class opening"): the reveal r 7.05 to 7.60 and the portal are
+		 * cut at the class's clear opening, so the joint lines only the Classical Hall's wall; the landing runs through the
+		 * portal to the port face as the threshold (§3.7), stopped half the class's strip short; and the surround on its stair
+		 * side is the stair-side port dressing (§3.7), the Rotunda's, which waits for polish: until then the portal's face on
+		 * the stair is plain, and the joint draws none there.
 		 */
 		void Ports(FSiteDescription& Out)
 		{
@@ -73,6 +76,7 @@ namespace Musee::Rotunda
 			Stair.WallDepthMeters = Plan::WellRadius - Plan::RevealInner;
 			Stair.FaceRadiusMeters = Plan::WellRadius;
 			Stair.bOwnSurround = true;
+			Stair.OwnLiningMeters = Stair.WallDepthMeters;
 			Stair.bOwnThreshold = true;
 			Stair.Mates = FMuseeKey(TEXT("classical-hall.stair"));
 			Stair.bHasWell = true;
@@ -100,9 +104,10 @@ namespace Musee::Rotunda
 		}
 
 		/**
-		 * The openings: the eye, the hall's one opening to the sky (D-004); the rough openings at the five ports; the
-		 * housings in the floor: the pocket the drum's wall slides into and the ram bores in its floor; and the sun clock's
-		 * door, a passage from the stair within the lifting drum to the hall, which rides the drum and opens only raised.
+		 * The openings: the eye, the hall's one opening to the sky (D-004); the rough openings at the four doors and the stair
+		 * port's clear opening, which the Rotunda finishes itself; the housings in the floor: the pocket the drum's wall slides
+		 * into and the ram bores in its floor; and the sun clock's door, a passage from the stair within the lifting drum to
+		 * the hall, which rides the drum and opens only raised.
 		 */
 		void Openings(FSiteDescription& Out)
 		{
@@ -119,7 +124,7 @@ namespace Musee::Rotunda
 				Opening(Out, Door.Name, EFormOpeningKind::Port, TEXT("hall"), FrameOfAxes(Centre, Tangent(Door.Deg), FVector::UpVector),
 					FVector2D(2.0 * Half, Crown - Plan::RoughSill));
 			}
-			const double StairHalf = 0.5 * Plan::StairPortClear + Plan::LiningAllowance;
+			const double StairHalf = 0.5 * Plan::StairPortClear;
 			const double StairCrown = Plan::StairPortSpringing + StairHalf;
 			const FVector StairCentre(0.0, -Plan::WellRadius, Plan::LandingZ + 0.5 * StairCrown);
 			Opening(Out, TEXT("stair"), EFormOpeningKind::Port, TEXT("stair"), FrameOfAxes(StairCentre, Tangent(Plan::NorthDeg), FVector::UpVector),

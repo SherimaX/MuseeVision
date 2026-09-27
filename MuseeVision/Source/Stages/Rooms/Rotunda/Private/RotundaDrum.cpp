@@ -24,9 +24,24 @@ namespace Musee::Rotunda
 			return Plan::DrumInner * FMath::DegreesToRadians(Swept);
 		}
 
-		/** A doorway's rough half-width across its axis (the clear half and the lining's allowance), and its angle on the inner face. */
+		/** A doorway's rough half-width across its axis: the clear half and the lining's allowance. */
 		double DoorHalf(const Plan::FDoor& Door) { return 0.5 * Door.Clear + Plan::LiningAllowance; }
-		double DoorHalfDeg(const Plan::FDoor& Door) { return FMath::RadiansToDegrees(FMath::Asin(DoorHalf(Door) / Plan::DrumInner)); }
+
+		/**
+		 * The ring between two radii from one doorway to the next round the drum (anticlockwise), cut square to each doorway
+		 * on its jamb plane, half its rough opening off its axis, as the wall's straight passages are.
+		 */
+		FFormProfile BetweenDoors(double Inner, double Outer, const Plan::FDoor& From, const Plan::FDoor& To)
+		{
+			const double End = To.Deg + (To.Deg <= From.Deg ? 360.0 : 0.0);
+			auto Leaving = [&From](double Radius) { return From.Deg + HalfAngleDeg(DoorHalf(From), Radius); };
+			auto Reaching = [&To, End](double Radius) { return End - HalfAngleDeg(DoorHalf(To), Radius); };
+			FFormProfile Out = FFormProfile::From(Polar(Outer, Leaving(Outer)));
+			Out.ArcAbout(FVector2D::ZeroVector, Outer, Outer, Leaving(Outer), Reaching(Outer), EFormJoint::Crisp);
+			Out.LineTo(Polar(Inner, Reaching(Inner)), EFormJoint::Crisp);
+			Out.ArcAbout(FVector2D::ZeroVector, Inner, Inner, Reaching(Inner), Leaving(Inner), EFormJoint::Crisp);
+			return Out.Close();
+		}
 
 		/** A niche's half-angle: its half-width on the inner face, where its front meets the chord plane. */
 		double NicheHalfDeg() { return FMath::RadiansToDegrees(Plan::NicheHalfWidth / Plan::DrumInner); }
@@ -74,25 +89,23 @@ namespace Musee::Rotunda
 		/**
 		 * Under the wall: the footing, r 10.00 to 11.20 from the floor's bed to the doorways' rough sill; and between the
 		 * doorways the plinth course, which carries the wall over the shadow gap (its back r 10.04, its soffit the wall's
-		 * bed at 0.15) and gives the gap its 40 mm floor.
+		 * bed at 0.15) and gives the gap its 40 mm floor: its bed, r 10.00 to 11.20 from the rough sill to the floor, and over
+		 * it the course proper from the gap's back. Each stops on the jamb planes of the doorways either side, as the wall
+		 * over it is cut, so the joint's threshold and lining stand against it all the way through the drum.
 		 */
 		void Footing(TArray<FFormDrawing>& Out)
 		{
 			Out.Add(Drawn(Pieces::DrumFooting, TEXT("port.rough-opening"), Ring(Plan::DrumInner, Plan::DrumOuter, Plan::FloorBed, Plan::RoughSill), Solid));
 			const double Gap = Plan::DrumInner + Plan::ShadowGapDepth;
-			const TArray<FVector2D> Section = {FVector2D(Plan::DrumInner, Plan::RoughSill), FVector2D(Plan::DrumOuter, Plan::RoughSill),
-				FVector2D(Plan::DrumOuter, Plan::ShadowGapTop), FVector2D(Gap, Plan::ShadowGapTop), FVector2D(Gap, 0.0), FVector2D(Plan::DrumInner, 0.0)};
 			const int32 Count = int32(UE_ARRAY_COUNT(Plan::Doors));
 			for (int32 Index = 0; Index < Count; ++Index)
 			{
 				const Plan::FDoor& From = Plan::Doors[Index];
 				const Plan::FDoor& To = Plan::Doors[(Index + 1) % Count];
-				const double End = To.Deg + (To.Deg <= From.Deg ? 360.0 : 0.0);
-				FFormLathe Plinth;
-				Plinth.Section = FFormProfile::Polyline(Section, true);
-				Plinth.FromDegrees = From.Deg + DoorHalfDeg(From);
-				Plinth.ToDegrees = End - DoorHalfDeg(To);
-				Out.Add(Drawn(FString::Printf(TEXT("drum.plinth.%s-%s"), From.Name, To.Name), TEXT("drum.shadow-gap"), MoveTemp(Plinth), Solid));
+				const FString Name = FString::Printf(TEXT("drum.plinth.%s-%s"), From.Name, To.Name);
+				Out.Add(Drawn(Name + TEXT(".bed"), TEXT("drum.shadow-gap"), Slab(BetweenDoors(Plan::DrumInner, Plan::DrumOuter, From, To), {}, -Plan::RoughSill),
+					Solid, Raised(Plan::RoughSill)));
+				Out.Add(Drawn(Name, TEXT("drum.shadow-gap"), Slab(BetweenDoors(Gap, Plan::DrumOuter, From, To), {}, Plan::ShadowGapTop), Solid));
 			}
 		}
 

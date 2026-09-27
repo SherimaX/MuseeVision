@@ -7,6 +7,7 @@
 #include "Misc/Paths.h"
 #include "MotionSchedule.h"
 #include "MuseeRecords.h"
+#include "RotundaParts.h"
 #include "RotundaPlan.h"
 #include "RotundaStairLine.h"
 #include "RotundaRoom.h"
@@ -112,6 +113,34 @@ namespace Musee::Rotunda::Tests
 		TestTrue(TEXT("the well is the prism r 7.60, z -6.40 to 0"), Stair->Well.MinMeters.Equals(FVector(-7.6, -7.6, -6.4), 1e-9)
 			&& Stair->Well.MaxMeters.Equals(FVector(7.6, 7.6, 0.0), 1e-9));
 
+		// §2: "at the port face r 7.60 the class opening". The Rotunda finishes its side of the stair port itself, so the joint
+		// lines none of it: the reveal r 7.05 to 7.60 and the portal through the pocket's masonry and the sleeve are one
+		// straight passage at the class's clear opening, its jambs the planes x = +/-1.80, the reveal arched r 1.80 at the
+		// class's springing; a cut wider than that, or radial, leaves a slot beside the joint's jambs in the Classical Hall.
+		TestEqual(TEXT("the Rotunda finishes the stair port's whole wall depth itself"), Stair->OwnLiningMeters, Stair->WallDepthMeters);
+		TestTrue(TEXT("and lays its landing as the port's threshold"), Stair->bOwnThreshold);
+		const double LandingBed = Plan::LandingZ - Plan::FinishDepth;
+		for (const TCHAR* Layer : {Pieces::Sleeve, Pieces::MasonryOuter})
+		{
+			const FFormDrawing* Drawing = FindPiece(Description, Layer);
+			const FFormWall* Wall = Drawing ? Drawing->Shape.TryGet<FFormWall>() : nullptr;
+			if (!TestTrue(*FString::Printf(TEXT("%s is a wall with the portal cut through it"), Layer), Wall && Wall->Openings.Num() == 1))
+			{
+				continue;
+			}
+			const FFormWallOpening& Portal = Wall->Openings[0];
+			TestTrue(*FString::Printf(TEXT("%s's portal is a straight passage"), Layer), Portal.bStraight);
+			TestEqual(*FString::Printf(TEXT("%s's portal is the class's clear width"), Layer), Portal.WidthMeters, Plan::StairPortClear, 1e-12);
+			const bool bReveal = FCString::Strcmp(Layer, Pieces::MasonryOuter) == 0;
+			TestEqual(*FString::Printf(TEXT("%s's portal is arched as the sheet has it"), Layer), Portal.bArched, bReveal);
+			if (bReveal)
+			{
+				TestEqual(TEXT("the reveal springs where the class does"), Wall->BaseMeters + Portal.HeadMeters, Plan::LandingZ + Plan::StairPortSpringing, 1e-9);
+				TestEqual(TEXT("in a semicircle of the class's half-width"), Portal.IntradosRadiusMeters(), 0.5 * Plan::StairPortClear, 1e-12);
+				TestEqual(TEXT("from the landing's bed"), Wall->BaseMeters, LandingBed, 1e-12);
+			}
+		}
+
 		// The rough openings the room builds are its ports' classes, where the site's records carry them.
 		TArray<FSitePort> Declared = Description.Ports;
 		for (const FSitePort& Port : Declared)
@@ -126,6 +155,10 @@ namespace Musee::Rotunda::Tests
 			const bool bStair = Port.Kind == ESitePortKind::Stairwell;
 			TestEqual(TEXT("the class springs where the sheet does"), Class.GetValue().HeadMeters, bStair ? Plan::StairPortSpringing : Plan::DoorSpringing);
 			TestTrue(TEXT("and is arched"), Class.GetValue().Arched);
+			if (bStair)
+			{
+				TestEqual(TEXT("the stair port's class is the portal's clear width"), Class.GetValue().ClearWidthMeters, 2.0 * Plan::PortalHalfWidth, 1e-12);
+			}
 		}
 		return true;
 	}

@@ -71,7 +71,11 @@ up +z. Class names follow the finished Nymphéas sheet: **width × crown height*
   i.e. the class detail; if Site doesn't carry them tonight, the archivolts spring from the plain lining.
 - **The stair port.** At the port face r 7.60 the class opening; the arched reveal `rotunda.stair.port.reveal` runs in
   to r 7.05; inside r 7.05 the drum's pocket passes over, so the opening is closed above z −3.68 by a lintel
-  (r 6.48 → 7.05) and a tympanum on r 7.05: the portal onto the stair is **3.60 × 2.32**, flat-headed.
+  (r 6.48 → 7.05) and a tympanum on r 7.05: the portal onto the stair is **3.60 × 2.32**, flat-headed. The Rotunda
+  finishes its whole side of this port itself: the reveal and the portal are one straight passage at the class's clear
+  opening (jambs the planes x = ±1.80 from the stair's face to r 7.60, the reveal's head r 1.80 about the springing), its
+  landing is the threshold (§3.7), and its surround is the stair-side dressing (§3.7). The joint lines only the Classical
+  Hall's wall, lays the strip on the mating arc, and draws nothing on this side (K10).
 - **The well (served).** `rotunda` owns everything inside r 7.60, z −6.40 … 0.00: shaft masonry, stair wall, pocket,
   ram bores, landing and rosette, stair, balustrade, the drum's full travel. `classical-hall` reserves the prism as a
   void and builds nothing inside it; its walls meet r 7.60.
@@ -156,7 +160,9 @@ Ring and dial meet with 10 mm clear (r 6.99 against 7.00).
   1.165 from 0.15 to 9.47, blocks ≤ 1.9 long, half-bond; datums (niche sill 2.00, springings 4.50, 4.67) on joints
   within ±0.10.
 - **Shadow gap** `rotunda.drum.shadow-gap`: z 0 → 0.15, recessed 0.04 (back face r 10.04, soffit z 0.15). Door jambs step
-  back into it at the floor.
+  back into it at the floor. The plinth course that carries the wall over it, from the rough sill z −0.05, stops on each
+  doorway's rough jamb planes, as the wall's straight passages do, so the joint's threshold and lining stand against it
+  through the whole drum (K10).
 - **Outer face** `rotunda.drum.wall.outer` r 11.20, z 0 → 11.00. **Drum top** `rotunda.drum.top`: annulus z 11.00,
   r 10.553 → 11.20.
 - **Door rough openings** at φ 0° (E, 3.00), 90° (S, 4.00), 180° (W, 3.00), 270° (N, 4.00): jambs planes parallel
@@ -273,12 +279,15 @@ Raised, a tempietto 13.98 across (r 6.99) with its door west, facing the Salon. 
 - **Pocket** `rotunda.shaft.pocket`: annulus r 6.54–7.00, floor z −3.58, open up to z 0; outer face r 7.00, −3.58 → 0;
   includes the sleeve's top and back.
 - **Masonry:** r 7.00–7.60 above the pocket floor, r 6.54–7.60 below it; outer face r 7.60, z −6.00 → 0, cut by the
-  port's arch (reveal `rotunda.stair.port.reveal`, r 7.05 → 7.60).
+  port's arch (reveal `rotunda.stair.port.reveal`, r 7.05 → 7.60) at the class's clear opening, straight: its jambs the
+  portal's planes x = ±1.80, not radial, so they meet the Classical Hall's lining flush at r 7.60.
 - **Ram bores** (housing `rotunda.sun-clock.rams`): 8 vertical bores Ø 0.36 centred on r 6.77 at φ = 22.5° + 45°·k,
   pocket floor (−3.58) down to z −5.90; they clear the portal (±15.42° about 270°) and the drum's door (±10.86° about
   180°). Rams `rotunda.sun-clock.ram` (§6).
 - **Stair-side port dressings** `rotunda.stair.port.dressing` (polish): an arch ring 0.18 wide, 0.14 proud; a moulded
   architrave out to 0.40, crown 0.20 proud; plinth blocks 0.40 high; a keystone; moulded transoms on the lintel.
+  They are the port's surround on the stair side, so the joint draws none there; **until polish they are not drawn**, and
+  the portal's face on the stair is the sleeve's plain cut.
 - **Landing** `rotunda.stair.landing.floor` at z −6.000 from r 0 to the stair wall and through the portal to r 7.57: it is
   the stair port's threshold, stopped half the class's 0.060 strip short of the port face, so the joint's strip lies on
   the mating arc and the joint lays no second stone on this side (K10).
@@ -624,6 +633,8 @@ public release would switch to an open-licence face.
   motto are the ported outlines in `SunClockGlyphs.h`.
 - **Ports.** Build only the rough openings (clear opening plus the lining allowance) through the drum. The joint
   builds the thresholds, linings, surrounds and the 2.20 m west passage.
+  - The stair port is finished by the Rotunda at the class's clear opening (§2): the joint lines only the Classical
+    Hall's side and lays the strip.
   - All four doorways are width × crown classes springing at 4.50.
   - Every port unmated tonight gets closed bronze doors.
 - **The eye is the only opening to the sky.** It is Glazed (D-004) and takes the museum's weather.

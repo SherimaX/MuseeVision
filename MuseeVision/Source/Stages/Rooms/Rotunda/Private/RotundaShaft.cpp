@@ -8,16 +8,17 @@
  * port face r 7.60 with the port's arched reveal and the tympanum over the portal, the foundation, and the landing with
  * its rosette.
  *
- * The portal and the port's reveal are one passage through curved masonry, which Form cuts radially: its jambs are set
- * out on the stair's face (x = ±1.80 at r 6.48) and run radially out through every layer to the port face, so the layers'
- * jambs meet flush (the known gap of a straight passage through a curved wall).
+ * The portal and the port's reveal are one straight passage through the curved masonry, as the class's opening is: its
+ * jambs are the planes x = ±1.80 (§3.7) from the stair's face out through every layer to the port face r 7.60, where the
+ * Rotunda finishes its side of the port at the class's clear opening (§2: "at the port face r 7.60 the class opening"),
+ * so the layers' jambs, the landing's edges and the joint's strip and lining in the Classical Hall all meet flush.
  */
 namespace Musee::Rotunda
 {
 	namespace
 	{
-		/** The passage's half-angle about the north axis. */
-		double PortalHalfDeg() { return HalfAngleDeg(Plan::PortalHalfWidth, Plan::SleeveFace); }
+		/** The half-angle about the north axis at which the passage's jamb plane meets a circle of a radius. */
+		double PortalHalfDeg(double Radius) { return HalfAngleDeg(Plan::PortalHalfWidth, Radius); }
 
 		/** Everything in the well stands on the foundation, under the landing's laid finish. */
 		double WellBed() { return Plan::LandingZ - Plan::FinishDepth; }
@@ -31,15 +32,34 @@ namespace Musee::Rotunda
 			return FFormProfile::Ellipse(FVector2D::ZeroVector, Radius, Radius, Plan::SouthDeg, bClockwise);
 		}
 
-		/** The portal through a wall whose face has a radius: the passage's half-angle there, from the wall's bed. */
+		/**
+		 * The portal through a wall whose face has a radius, from the wall's bed: the straight passage between the jamb planes
+		 * x = ±1.80, its axis on the north.
+		 */
 		FFormWallOpening Portal(double Radius, double Head, bool bArched)
 		{
 			FFormWallOpening Passage;
 			Passage.CenterMeters = NorthAlong(Radius);
-			Passage.WidthMeters = 2.0 * Radius * FMath::DegreesToRadians(PortalHalfDeg());
+			Passage.WidthMeters = 2.0 * Plan::PortalHalfWidth;
 			Passage.HeadMeters = Head;
 			Passage.bArched = bArched;
+			Passage.bStraight = true;
 			return Passage;
+		}
+
+		/**
+		 * The ring between two radii beside the portal: all the way round from the east jamb's plane to the west's, which cut
+		 * it square to the passage, not radially.
+		 */
+		FFormProfile BesidePortal(double Inner, double Outer)
+		{
+			const double InnerHalf = PortalHalfDeg(Inner);
+			const double OuterHalf = PortalHalfDeg(Outer);
+			FFormProfile Out = FFormProfile::From(Polar(Outer, Plan::NorthDeg + OuterHalf));
+			Out.ArcAbout(FVector2D::ZeroVector, Outer, Outer, Plan::NorthDeg + OuterHalf, Plan::NorthDeg - OuterHalf + 360.0, EFormJoint::Crisp);
+			Out.LineTo(Polar(Inner, Plan::NorthDeg - InnerHalf), EFormJoint::Crisp);
+			Out.ArcAbout(FVector2D::ZeroVector, Inner, Inner, Plan::NorthDeg - InnerHalf + 360.0, Plan::NorthDeg + InnerHalf, EFormJoint::Crisp);
+			return Out.Close();
 		}
 
 		/**
@@ -67,15 +87,14 @@ namespace Musee::Rotunda
 		 */
 		void PocketMasonry(TArray<FFormDrawing>& Out)
 		{
-			const double Half = PortalHalfDeg();
-			const FFormProfile BesidePortal = AnnularSector(Plan::SleeveBack, Plan::RevealInner, Plan::NorthDeg + Half, Plan::NorthDeg - Half + 360.0);
+			const FFormProfile Beside = BesidePortal(Plan::SleeveBack, Plan::RevealInner);
 			TArray<FFormProfile> Bores;
 			for (int32 Bore = 0; Bore < Plan::Bores; ++Bore)
 			{
 				Bores.Add(Circle(0.5 * Plan::BoreDiameter, Polar(Plan::BoreRadius, Plan::BoreFirstDeg + 360.0 * Bore / Plan::Bores)));
 			}
-			Out.Add(Drawn(TEXT("shaft.masonry.foot"), TEXT("shaft.pocket"), Slab(BesidePortal, {}, Plan::BoreBottom - WellBed()), Solid, Raised(WellBed())));
-			Out.Add(Drawn(Pieces::MasonryInner, TEXT("shaft.pocket"), Slab(BesidePortal, Bores, Plan::PortalHead - Plan::BoreBottom), Solid,
+			Out.Add(Drawn(TEXT("shaft.masonry.foot"), TEXT("shaft.pocket"), Slab(Beside, {}, Plan::BoreBottom - WellBed()), Solid, Raised(WellBed())));
+			Out.Add(Drawn(Pieces::MasonryInner, TEXT("shaft.pocket"), Slab(Beside, Bores, Plan::PortalHead - Plan::BoreBottom), Solid,
 				Raised(Plan::BoreBottom)));
 			TArray<FFormProfile> LintelHoles = Bores;
 			LintelHoles.Add(Circle(Plan::SleeveBack));
@@ -85,7 +104,8 @@ namespace Musee::Rotunda
 
 		/**
 		 * Over the pocket's floor, the tympanum course r 7.00 to 7.05, its outer face closing the port's arch; and the outer
-		 * masonry r 7.05 to the port face r 7.60, drawn from the port face inwards, cut by the port's arched reveal.
+		 * masonry r 7.05 to the port face r 7.60, drawn from the port face inwards, cut by the port's arched reveal: the class's
+		 * clear opening, its jambs the portal's and its head the class's semicircle r 1.80 springing 2.60 over the landing.
 		 */
 		void OuterMasonry(TArray<FFormDrawing>& Out)
 		{
@@ -158,13 +178,15 @@ namespace Musee::Rotunda
 		void Landing(TArray<FFormDrawing>& Out)
 		{
 			Out.Add(Drawn(Pieces::Foundation, TEXT("stair.landing.floor"), Ring(0.0, Plan::WellRadius, Plan::FoundationBottom, WellBed()), Solid));
-			const double Half = PortalHalfDeg();
+			const double Half = PortalHalfDeg(Plan::SleeveFace);
 			const double Edge = LandingEdge();
+			const double EdgeHalf = PortalHalfDeg(Edge);
 			const FMuseeFrame Bed = Raised(WellBed());
+			// Round the stair's face, and out through the portal between its jamb planes to the edge on the strip.
 			FFormProfile Field = FFormProfile::From(Polar(Plan::SleeveFace, Plan::NorthDeg + Half));
 			Field.ArcAbout(FVector2D::ZeroVector, Plan::SleeveFace, Plan::SleeveFace, Plan::NorthDeg + Half, Plan::NorthDeg - Half + 360.0, EFormJoint::Crisp)
-				.LineTo(Polar(Edge, Plan::NorthDeg - Half), EFormJoint::Crisp)
-				.ArcAbout(FVector2D::ZeroVector, Edge, Edge, Plan::NorthDeg - Half, Plan::NorthDeg + Half, EFormJoint::Crisp)
+				.LineTo(Polar(Edge, Plan::NorthDeg - EdgeHalf), EFormJoint::Crisp)
+				.ArcAbout(FVector2D::ZeroVector, Edge, Edge, Plan::NorthDeg - EdgeHalf, Plan::NorthDeg + EdgeHalf, EFormJoint::Crisp)
 				.Close();
 			Out.Add(Drawn(TEXT("stair.landing"), TEXT("stair.landing.floor"), Slab(MoveTemp(Field), {Circle(Plan::RosetteRed)}, Plan::FinishDepth),
 				Walkable, Bed));
