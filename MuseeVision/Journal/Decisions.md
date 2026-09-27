@@ -290,3 +290,14 @@ pond openable by clicking on the golden iris on it."
   stops the pond if the visitor is in its way.
 - **The basement isn't built yet.** The stair is the oval's own (it serves the well), and it ends at the Reserve's
   closed bronze doors: the port's blind.
+
+## D-020 · The Reserve is built (lifts D-019's deferral of the basement)
+**Context:** The owner (Sunday 11:40), after the first full build: "you can work on the reserve. why is it deferred".
+D-019 had deferred the basement on the owner's word ("we don't need to build the basement yet").
+**Decision:**
+- **The Reserve becomes a stage**, `reserve`, built from its sheet (`Docs/Stages/reserve.md`). Its one port,
+  `reserve.stair` (`stairwell.straight.2400x3200.arched`), mates `nympheas.stair`: the oval's stair runs down to it,
+  and the golden iris's pond lift is the way in.
+- The oval's stair port stops being blind once the Reserve's level exists: Site mates it, as it mates every port.
+- The racks are top-hung as built (D-017); at most one is drawn out at a time (their `group`). Rack C starts drawn out.
+- It joins the build after the arrival fix, so the owner's first walk isn't held for it.
