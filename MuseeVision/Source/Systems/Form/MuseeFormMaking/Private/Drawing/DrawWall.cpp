@@ -133,6 +133,57 @@ namespace Musee::Form::Drawing
 		}
 
 		/**
+		 * The face's distances as drawn (an arc measured round the arc), as a caller sets out an opening's centre or a drawn
+		 * top, beside Form's U, measured on the face's chords from where its runs start (a closed path's first corner): the
+		 * two at every station of the plan. A drawn distance lies on its segment's chord at the same fraction, so the map
+		 * between them is linear between stations. Beyond the path's ends the two run on alike. Over a long curved face the
+		 * chords fall short of the curve by a few parts in a hundred thousand: 1.7 mm round three quarters of the Rotunda's
+		 * drum, enough to set a doorway off its axis.
+		 */
+		struct FAlongFace
+		{
+			TArray<double> Drawn;
+			TArray<double> Chords;
+
+			explicit FAlongFace(const FProfileStations& Plan)
+			{
+				const int32 Count = Plan.Vertices.Num();
+				if (Count < 2)
+				{
+					return;
+				}
+				int32 Start = 0;
+				if (Plan.bClosed)
+				{
+					const int32 Corner = Plan.Vertices.IndexOfByPredicate([](const FProfileVertex& Vertex) { return Vertex.bCrisp; });
+					Start = Corner == INDEX_NONE ? 0 : Corner;
+				}
+				Drawn.Add(0.0);
+				Chords.Add(0.0);
+				for (int32 Step = 0; Step < Plan.NumSegments(); ++Step)
+				{
+					const int32 Segment = (Start + Step) % Count;
+					Drawn.Add(Drawn.Last() + Plan.SegmentDrawnMeters(Segment));
+					Chords.Add(Chords.Last() + FVector2D::Distance(Plan.Vertices[Segment].Point, Plan.Vertices[(Segment + 1) % Count].Point));
+				}
+			}
+
+			/** A distance along the face as drawn, as a U on its chords. */
+			double ToChords(double DrawnMeters) const
+			{
+				if (Drawn.Num() < 2 || DrawnMeters <= 0.0)
+				{
+					return DrawnMeters;
+				}
+				if (DrawnMeters >= Drawn.Last())
+				{
+					return Chords.Last() + DrawnMeters - Drawn.Last();
+				}
+				return Interpolate(Drawn, Chords, DrawnMeters);
+			}
+		};
+
+		/**
 		 * The wall's top along its face: level at its height, or on the drawn line's stations (U along the face, Z above the
 		 * base), held level beyond its ends.
 		 */
@@ -735,14 +786,25 @@ namespace Musee::Form::Drawing
 		}
 	}
 
-	bool DrawWall(const FFormWall& Shape, FMeshBuilder& Mesh, FString& OutWhy)
+	bool DrawWall(const FFormWall& Drawn, FMeshBuilder& Mesh, FString& OutWhy)
 	{
 		FWallTop Top;
-		if (!CheckWall(Shape, OutWhy) || !ReadTop(Shape, Top, OutWhy))
+		if (!CheckWall(Drawn, OutWhy) || !ReadTop(Drawn, Top, OutWhy))
 		{
 			return false;
 		}
-		const FProfileStations Plan = Resolve(Shape.Plan);
+		const FProfileStations Plan = Resolve(Drawn.Plan);
+		// The openings and the top are set out along the face as drawn; the wall is made on its chords.
+		const FAlongFace Along(Plan);
+		FFormWall Shape = Drawn;
+		for (FFormWallOpening& Opening : Shape.Openings)
+		{
+			Opening.CenterMeters = Along.ToChords(Opening.CenterMeters);
+		}
+		for (double& U : Top.U)
+		{
+			U = Along.ToChords(U);
+		}
 		// The openings are set out on the face's own stations first; the wall is then divided at every station they need.
 		const TArray<TArray<FSweepFrame>> FaceRuns = PathRuns(Plan, Shape.BaseMeters, {});
 		if (FaceRuns.IsEmpty())
@@ -755,7 +817,20 @@ namespace Musee::Form::Drawing
 		{
 			return false;
 		}
-		const TArray<TArray<FSweepFrame>> Runs = PathRuns(Plan, Shape.BaseMeters, RequiredStations(Shape, Top, Spans, FaceRuns));
+		TArray<TArray<FSweepFrame>> Runs = PathRuns(Plan, Shape.BaseMeters, RequiredStations(Shape, Top, Spans, FaceRuns));
+		// Where the face runs on smoothly (along a curve) the back stands the wall's thickness out along the station's normal,
+		// on the offset curve itself, as the face's station stands on its curve; a mitre stretched across the chords would
+		// set it past that curve (0.12 mm beyond the Rotunda's drum). At a corner the stretched mitre keeps the thickness.
+		for (TArray<FSweepFrame>& Run : Runs)
+		{
+			for (FSweepFrame& Frame : Run)
+			{
+				if (FVector::CrossProduct(Frame.AxisA.GetSafeNormal(), Frame.NormalA).SizeSquared() < UE_DOUBLE_SMALL_NUMBER)
+				{
+					Frame.AxisA = Frame.NormalA;
+				}
+			}
+		}
 		const double Depth = Shape.HasBack() ? 1.0 : Shape.ThicknessMeters;
 		for (int32 Index = 0; Index < Runs.Num(); ++Index)
 		{

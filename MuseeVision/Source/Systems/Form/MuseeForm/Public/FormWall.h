@@ -11,8 +11,9 @@
 struct FFormWallOpening
 {
 	/**
-	 * The opening's centre, metres along the wall's face from the start of its plan path (for a closed path with
-	 * corners, from its first corner). An opening lies within one straight or smooth stretch, clear of its corners.
+	 * The opening's centre, metres along the wall's face as it is drawn (an arc measured round the arc, not on the chords
+	 * Form divides it into) from the start of its plan path (for a closed path with corners, from its first corner). An
+	 * opening lies within one straight or smooth stretch, clear of its corners.
 	 */
 	double CenterMeters = 0.0;
 
@@ -172,7 +173,8 @@ struct FFormWall
 
 	/**
 	 * The wall's top, when it isn't level at HeightMeters: its line drawn on the face's development, (U metres along the
-	 * face from the start of its plan path, Z above the base), in lines and arcs running forward in U, one height at each
+	 * face as drawn from the start of its plan path, as an opening's centre is, Z above the base), in lines and arcs
+	 * running forward in U, one height at each
 	 * distance: a lining that follows the arc of the vault above it, a gable's rake, a tympanum under an arch. Before its
 	 * start and past its end the top runs level at that end's height. Undrawn (no start): the top is level.
 	 */

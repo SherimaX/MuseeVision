@@ -18,6 +18,26 @@ namespace Musee::Form
 			return Center + FVector2D(RadiusA * FMath::Cos(T), RadiusB * FMath::Sin(T));
 		}
 
+		/** Simpson's rule panels over one station's step of an ellipse: the step is within the chord tolerance, so a few are exact to far below it. */
+		constexpr int32 ArcLengthPanels = 8;
+
+		/** The length of the elliptical arc from t0 to t1 (either way round), metres: exact for a circle. */
+		double EllipseArcLength(double RadiusA, double RadiusB, double T0, double T1)
+		{
+			if (RadiusA == RadiusB)
+			{
+				return RadiusA * FMath::Abs(T1 - T0);
+			}
+			auto Speed = [RadiusA, RadiusB](double T) { return FMath::Sqrt(FMath::Square(RadiusA * FMath::Sin(T)) + FMath::Square(RadiusB * FMath::Cos(T))); };
+			const double Step = (T1 - T0) / ArcLengthPanels;
+			double Sum = Speed(T0) + Speed(T1);
+			for (int32 Panel = 1; Panel < ArcLengthPanels; ++Panel)
+			{
+				Sum += (Panel % 2 == 1 ? 4.0 : 2.0) * Speed(T0 + Panel * Step);
+			}
+			return FMath::Abs(Step) * Sum / 3.0;
+		}
+
 		/** The arc's own surface normal at t: the right of its exact tangent, in the direction it is drawn. */
 		FVector2D EllipseNormal(double RadiusA, double RadiusB, double T, bool bIncreasing)
 		{
@@ -41,9 +61,12 @@ namespace Musee::Form
 
 			const FVector2D& Current() const { return Vertices.Last().Point; }
 
-			/** A segment from the current station to End, with its normals at both ends, meeting the last at Joint. */
+			/**
+			 * A segment from the current station to End, with its normals at both ends, meeting the last at Joint; Drawn is
+			 * its length as drawn (its arc's, or its own for a line).
+			 */
 			void Segment(const FVector2D& End, const FVector2D& NormalAtStart, const FVector2D& NormalAtEnd,
-				EProfileJoint Joint)
+				EProfileJoint Joint, double Drawn)
 			{
 				FProfileVertex& From = Vertices.Last();
 				From.NormalOut = NormalAtStart;
@@ -52,6 +75,7 @@ namespace Musee::Form
 				To.Point = End;
 				To.NormalIn = NormalAtEnd;
 				To.LengthMeters = From.LengthMeters + FVector2D::Distance(From.Point, End);
+				To.DrawnMeters = From.DrawnMeters + Drawn;
 				Vertices.Add(To);
 				Joints.Add(EProfileJoint::Auto);
 			}
@@ -63,7 +87,7 @@ namespace Musee::Form
 				if (Step.Size() > WeldToleranceMeters)
 				{
 					const FVector2D Normal = RightNormal(Step);
-					Segment(End, Normal, Normal, Joint);
+					Segment(End, Normal, Normal, Joint, Step.Size());
 				}
 			}
 		};
@@ -90,6 +114,12 @@ namespace Musee::Form
 		return (bClosed && Segment == Vertices.Num() - 1) ? ClosedLengthMeters : Vertices[Segment + 1].LengthMeters;
 	}
 
+	double FProfileStations::SegmentDrawnMeters(int32 Segment) const
+	{
+		const double End = (bClosed && Segment == Vertices.Num() - 1) ? ClosedDrawnMeters : Vertices[Segment + 1].DrawnMeters;
+		return End - Vertices[Segment].DrawnMeters;
+	}
+
 	double FProfileStations::SignedAreaSquareMeters() const
 	{
 		double Twice = 0.0;
@@ -114,12 +144,16 @@ namespace Musee::Form
 			Vertex.NormalOut = -Source.NormalIn;
 			Vertex.LengthMeters = Index == 0 ? 0.0
 				: Result.Vertices.Last().LengthMeters + FVector2D::Distance(Result.Vertices.Last().Point, Source.Point);
+			// Run backwards, each segment keeps its drawn length: the one from this source station on to the previous one.
+			const int32 SourceIndex = bClosed ? (Count - Index) % Count : Count - 1 - Index;
+			Vertex.DrawnMeters = Index == 0 ? 0.0 : Result.Vertices.Last().DrawnMeters + SegmentDrawnMeters(SourceIndex);
 			Result.Vertices.Add(Vertex);
 		}
 		if (bClosed && Count > 0)
 		{
 			Result.ClosedLengthMeters = Result.Vertices.Last().LengthMeters
 				+ FVector2D::Distance(Result.Vertices.Last().Point, Result.Vertices[0].Point);
+			Result.ClosedDrawnMeters = Result.Vertices.Last().DrawnMeters + SegmentDrawnMeters(0);
 		}
 		return Result;
 	}
@@ -205,7 +239,7 @@ namespace Musee::Form
 				Draft.Segment(EllipsePoint(Element.Center, Element.RadiusA, Element.RadiusB, T[Index]),
 					EllipseNormal(Element.RadiusA, Element.RadiusB, T[Index - 1], bIncreasing),
 					EllipseNormal(Element.RadiusA, Element.RadiusB, T[Index], bIncreasing),
-					Index == 1 ? JointAtArc : EProfileJoint::Smooth);
+					Index == 1 ? JointAtArc : EProfileJoint::Smooth, EllipseArcLength(Element.RadiusA, Element.RadiusB, T[Index - 1], T[Index]));
 			}
 		}
 
@@ -222,6 +256,7 @@ namespace Musee::Form
 			Draft.Joints[0] = JointAtFirst;
 			Result.bClosed = true;
 			Result.ClosedLengthMeters = Last.LengthMeters;
+			Result.ClosedDrawnMeters = Last.DrawnMeters;
 			for (int32 Index = 0; Index < Vertices.Num(); ++Index)
 			{
 				Settle(Vertices[Index], Draft.Joints[Index]);

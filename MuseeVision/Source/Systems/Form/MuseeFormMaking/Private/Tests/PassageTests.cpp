@@ -20,9 +20,8 @@ namespace Musee::Form::Tests
 		constexpr double Engine = 100.0;
 
 		/**
-		 * A point between a curve's stations lies on a chord, within the museum's chord tolerance of the curve (1 mm); and a
-		 * distance along a curved face is measured on its chords, which fall short of the true arc by as much again round
-		 * half a drum.
+		 * A point between a curve's stations lies on a chord, within the museum's chord tolerance of the curve (1 mm), with
+		 * half as much again to spare.
 		 */
 		constexpr double OnChord = 1.5e-3;
 
@@ -96,6 +95,44 @@ namespace Musee::Form::Tests
 		TestEqual(TEXT("nothing stands in the clear opening below the springing"), Inside, 0);
 		TestTrue(TEXT("the jambs meet the inner face at x 9.887"), bInnerJamb);
 		TestTrue(TEXT("and the outer face at x 11.099"), bOuterJamb);
+		return true;
+	}
+
+	IMPLEMENT_SIMPLE_AUTOMATION_TEST(FFormSetOutAsDrawnTest, "Musee.Form.Drawing.SetOutAsDrawn", PassageFlags)
+	bool FFormSetOutAsDrawnTest::RunTest(const FString& Parameters)
+	{
+		// The drum drawn from 22.5 degrees the way φ falls, as the Rotunda draws it, with its south door three quarters of the
+		// way round, 51.05 m along the face as drawn: set out on the chords, which fall 1.7 mm short of the arc there, the
+		// door would stand that far off its axis. Set out as drawn, both jambs lie on the planes x ±1.50.
+		FFormWall Drum;
+		Drum.Plan = FFormProfile::Ellipse(FVector2D::ZeroVector, DrumInner, DrumInner, 22.5, false);
+		Drum.ThicknessMeters = DrumDepth;
+		Drum.HeightMeters = 9.47;
+		Drum.Openings.Add(RotundaDoor(DrumInner * FMath::DegreesToRadians(292.5)));
+		TArray<FFormMadePiece> Pieces;
+		const FFormMadePiece* Piece = MakeWall(*this, Drum, Pieces);
+		if (!Piece)
+		{
+			return false;
+		}
+		// Within a tenth of a millimetre: the axis meets the face on a chord, a hair from the arc.
+		constexpr double Exact = 1.0e-4;
+		int32 Inside = 0;
+		bool bWest = false;
+		bool bEast = false;
+		for (const FVector3d& V : Piece->Mesh->VerticesItr())
+		{
+			const FVector P = FVector(V) / Engine;
+			if (P.Y > 9.0 && P.Z > -1.0e-9 && P.Z < 4.49)
+			{
+				Inside += FMath::Abs(P.X) < 1.5 - Exact ? 1 : 0;
+				bWest |= FMath::Abs(P.X + 1.5) < Exact;
+				bEast |= FMath::Abs(P.X - 1.5) < Exact;
+			}
+		}
+		TestEqual(TEXT("nothing of the drum stands in the clear opening"), Inside, 0);
+		TestTrue(TEXT("the door's west jamb stands on x -1.50"), bWest);
+		TestTrue(TEXT("and its east jamb on x +1.50"), bEast);
 		return true;
 	}
 

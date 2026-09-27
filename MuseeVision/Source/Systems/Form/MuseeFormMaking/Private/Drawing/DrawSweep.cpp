@@ -231,20 +231,118 @@ namespace Musee::Form::Drawing
 			return true;
 		}
 
-		/** Every vertex and triangle of a development carried onto its face. The carrying keeps handedness, so windings hold. */
+		/** A corner of the development as it is cut at the face's stations: where it lies, and what it carries. */
+		struct FDevelopedCorner
+		{
+			FVector Position = FVector::ZeroVector;
+			FVector Normal = FVector::ZeroVector;
+			FVector2D UV = FVector2D::ZeroVector;
+		};
+
+		/**
+		 * Where an edge of the development crosses the line of a face's station, set out from its corner of lower U, so the
+		 * two triangles either side of the edge cut it at one point.
+		 */
+		FDevelopedCorner Crossing(const FDevelopedCorner& A, const FDevelopedCorner& B, double U)
+		{
+			const bool bFromA = A.Position.X <= B.Position.X;
+			const FDevelopedCorner& Low = bFromA ? A : B;
+			const FDevelopedCorner& High = bFromA ? B : A;
+			const double Alpha = (U - Low.Position.X) / (High.Position.X - Low.Position.X);
+			return {FMath::Lerp(Low.Position, High.Position, Alpha), FMath::Lerp(Low.Normal, High.Normal, Alpha).GetSafeNormal(),
+				FMath::Lerp(Low.UV, High.UV, Alpha)};
+		}
+
+		/**
+		 * A convex piece of the development cut along the line of a face's station, U: the part at or before it and the
+		 * part at or after it. A corner within a chord tolerance of the line lies on it (NearStationMeters), in both parts,
+		 * and only an edge from one side to the other is cut: a rule of the corners alone, so every triangle sharing an
+		 * edge cuts it alike and the carried surface stays closed.
+		 */
+		void CutAt(TConstArrayView<FDevelopedCorner> Piece, double U, TArray<FDevelopedCorner>& Before, TArray<FDevelopedCorner>& After)
+		{
+			auto Side = [U](const FDevelopedCorner& Corner)
+			{
+				const double Off = Corner.Position.X - U;
+				return Off < -NearStationMeters ? -1 : (Off > NearStationMeters ? 1 : 0);
+			};
+			for (int32 Index = 0; Index < Piece.Num(); ++Index)
+			{
+				const FDevelopedCorner& Here = Piece[Index];
+				const FDevelopedCorner& Next = Piece[(Index + 1) % Piece.Num()];
+				const int32 HereSide = Side(Here);
+				const int32 NextSide = Side(Next);
+				if (HereSide <= 0)
+				{
+					Before.Add(Here);
+				}
+				if (HereSide >= 0)
+				{
+					After.Add(Here);
+				}
+				if (HereSide * NextSide < 0)
+				{
+					const FDevelopedCorner Cut = Crossing(Here, Next, U);
+					Before.Add(Cut);
+					After.Add(Cut);
+				}
+			}
+		}
+
+		/** A convex piece carried onto the face as a fan of triangles. */
+		void CarryPiece(const FFaceDevelopment& Face, TConstArrayView<FDevelopedCorner> Piece, FMeshBuilder& Mesh)
+		{
+			if (Piece.Num() < 3)
+			{
+				return;
+			}
+			TArray<int32> Carried;
+			for (const FDevelopedCorner& Corner : Piece)
+			{
+				Carried.Add(Mesh.AddVertex(Face.Point(Corner.Position), Face.Direction(Corner.Position.X, Corner.Normal), Corner.UV));
+			}
+			for (int32 Index = 1; Index + 1 < Carried.Num(); ++Index)
+			{
+				Mesh.AddTriangle(Carried[0], Carried[Index], Carried[Index + 1]);
+			}
+		}
+
+		/**
+		 * Every triangle of a development carried onto its face, cut first along the lines of the face's stations it spans:
+		 * each piece then lies on one flat strip of the face, so a surface drawn along the face (a surround's back up a jamb)
+		 * follows it as the face's own chords do, never cutting across its curve. The carrying keeps handedness, so windings
+		 * hold.
+		 */
 		void CarryOnto(const FFaceDevelopment& Face, const FMeshBuilder& Developed, FMeshBuilder& Mesh)
 		{
-			TArray<int32> Carried;
-			for (int32 Vertex = 0; Vertex < Developed.NumVertices(); ++Vertex)
+			TArray<double> Stations;
+			for (const FSweepFrame& Station : Face.Line)
 			{
-				const FVector& P = Developed.Position(Vertex);
-				Carried.Add(Mesh.AddVertex(Face.Point(P), Face.Direction(P.X, Developed.Normal(Vertex)), Developed.UV(Vertex)));
+				Stations.Add(Station.U);
 			}
 			for (int32 Triangle = 0; Triangle < Developed.NumTriangles(); ++Triangle)
 			{
 				const FIntVector& T = Developed.Triangle(Triangle);
+				TArray<FDevelopedCorner> Rest;
+				for (const int32 Vertex : {T.X, T.Y, T.Z})
+				{
+					Rest.Add({Developed.Position(Vertex), Developed.Normal(Vertex), Developed.UV(Vertex)});
+				}
 				Mesh.UseSlot(Developed.Slots()[Developed.TriangleSlot(Triangle)]);
-				Mesh.AddTriangle(Carried[T.X], Carried[T.Y], Carried[T.Z]);
+				const double Low = FMath::Min3(Rest[0].Position.X, Rest[1].Position.X, Rest[2].Position.X);
+				const double High = FMath::Max3(Rest[0].Position.X, Rest[1].Position.X, Rest[2].Position.X);
+				for (const double U : Stations)
+				{
+					if (U <= Low + NearStationMeters || U >= High - NearStationMeters)
+					{
+						continue;
+					}
+					TArray<FDevelopedCorner> Before, After;
+					CutAt(Rest, U, Before, After);
+					CarryPiece(Face, Before, Mesh);
+					Rest = MoveTemp(After);
+				}
+				CarryPiece(Face, Rest, Mesh);
 			}
 		}
 

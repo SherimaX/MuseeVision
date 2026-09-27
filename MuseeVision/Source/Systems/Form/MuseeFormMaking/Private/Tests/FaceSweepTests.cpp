@@ -94,6 +94,36 @@ namespace Musee::Form::Tests
 		return true;
 	}
 
+	IMPLEMENT_SIMPLE_AUTOMATION_TEST(FFormFaceSweepOnStripsTest, "Musee.Form.Drawing.FaceSweepOnStrips", FaceSweepFlags)
+	bool FFormFaceSweepOnStripsTest::RunTest(const FString& Parameters)
+	{
+		// A jamb 0.60 across and 0.10 proud up a convex face of R 11.25 (the Hall of Light's west lining, seen from the hall):
+		// its back runs across the face, over two of its stations, so a single chord across it would sag 4 mm into the wall
+		// behind. Cut at the face's stations, every part of it lies on the face's own flat strips, within their tolerance.
+		constexpr double Radius = 11.25;
+		FFormSweep Jamb;
+		Jamb.Section = Bar(0.6, 0.1);
+		Jamb.Face = FFormProfile::From(FVector2D(Radius * FMath::Cos(FMath::DegreesToRadians(-20.0)), Radius * FMath::Sin(FMath::DegreesToRadians(-20.0))));
+		Jamb.Face.ArcAbout(FVector2D::ZeroVector, Radius, Radius, -20.0, 20.0);
+		const double Length = Radius * FMath::DegreesToRadians(40.0);
+		Jamb.Path = FFormProfile::Polyline({FVector2D(0.5 * Length + 0.3, 0.0), FVector2D(0.5 * Length + 0.3, 1.0)}, false);
+		TArray<FFormMadePiece> Pieces;
+		const FFormMadePiece* Piece = MakeSweep(*this, Jamb, Pieces);
+		if (!Piece)
+		{
+			return false;
+		}
+		TestSolid(*this, TEXT("the jamb on the convex face"), *Piece);
+		int32 Sunk = 0;
+		for (const int32 T : Piece->Mesh->TriangleIndicesItr())
+		{
+			const FVector C = FVector(Piece->Mesh->GetTriCentroid(T)) / EngineMeters;
+			Sunk += FVector2D(C.X, C.Y).Size() < Radius - ChordBound ? 1 : 0;
+		}
+		TestEqual(TEXT("no part of it sinks into the face past a chord's sag"), Sunk, 0);
+		return true;
+	}
+
 	IMPLEMENT_SIMPLE_AUTOMATION_TEST(FFormChamferedEndsTest, "Musee.Form.Drawing.ChamferedEnds", FaceSweepFlags)
 	bool FFormChamferedEndsTest::RunTest(const FString& Parameters)
 	{

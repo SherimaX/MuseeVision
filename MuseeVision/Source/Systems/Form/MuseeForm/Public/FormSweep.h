@@ -55,7 +55,7 @@ struct FFormSweep
 	/**
 	 * The path's rise, when it climbs as it runs (a stair's string, a handrail, a balustrade's bars): the height of the
 	 * path above ElevationMeters along it, drawn as a profile of (U, Z), U metres along the plan path from its start (on
-	 * its chords, as every distance along a drawn path is measured) and Z up, in lines and arcs, crisp or smooth at each
+	 * its chords; a wall's openings and top are set out as drawn, FFormWall) and Z up, in lines and arcs, crisp or smooth at each
 	 * joint. It runs forward in U, one height at each distance. A plan arc
 	 * under a straight rise is a helix; a rise drawn level over a landing and raked over the flights either side follows a
 	 * stair. Before its start and past its end the path runs level at that end's height. Undrawn (no start): the path is

@@ -33,6 +33,12 @@ namespace Musee::Form
 		/** Distance along the profile's chords from its first station, metres: the V of the UVs. */
 		double LengthMeters = 0.0;
 
+		/**
+		 * Distance along the profile as it is drawn from its first station, metres: an arc's own length round the arc, a
+		 * line's. What a caller means by a distance along a drawn line (an opening's centre on a curved wall).
+		 */
+		double DrawnMeters = 0.0;
+
 		/** True where the two sides keep their own normals (an arris or an end of an open profile's drawing). */
 		bool bCrisp = false;
 	};
@@ -49,10 +55,16 @@ namespace Musee::Form
 		/** A closed profile's whole length, closing segment included: the V at the end of its last segment. */
 		double ClosedLengthMeters = 0.0;
 
+		/** A closed profile's whole length as drawn, closing segment included. */
+		double ClosedDrawnMeters = 0.0;
+
 		int32 NumSegments() const { return bClosed ? Vertices.Num() : FMath::Max(0, Vertices.Num() - 1); }
 
 		/** The V of the UVs at the end of a segment. */
 		double LengthAtSegmentEnd(int32 Segment) const;
+
+		/** A segment's length as drawn (the closing segment's, for a closed profile's last). */
+		double SegmentDrawnMeters(int32 Segment) const;
 
 		/** The area the closed profile encloses in the (A, B) plane: positive when it runs counter-clockwise (A to B). */
 		double SignedAreaSquareMeters() const;
