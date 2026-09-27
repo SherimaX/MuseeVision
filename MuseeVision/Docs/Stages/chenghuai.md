@@ -825,8 +825,10 @@ a walked path. Polish: the 屏门 opens on festival solar terms (Rules board), a
 
 ## 8. Art
 **Sources:** `assets/collection.json` (every id below, verbatim). Sizes: scrolls from `chenghuai_works.py:195-215`
-(image w × h) and the catalogue's handscroll widths; ceramics from the catalogue (turned profiles
-`windows/SourceArt/Textures/ch_vessels.json` scaled to them, B-13); images `assets/paintings/<id>*.jpg` (the Thousand Li
+(image w × h) and the catalogue's handscroll widths; the Tianqing case's monochromes from the catalogue (turned profiles
+`windows/SourceArt/Textures/ch_vessels.json` scaled to them, B-13); the Changnan case's vessels and the Ru basin from their
+own photographs (`assets/ceramics/<id>/`, K9), catalogued with their museums' sizes, accessions and credits in
+`MuseeVision/Data/Art/Ceramics.json`; images `assets/paintings/<id>*.jpg` (the Thousand Li
 and Qingming in four tiles, Huai Su in two), colour-managed as the paint layer's albedo. Credits `assets/collection.json`,
 `assets/art_sources_extra.json`.
 
@@ -874,17 +876,34 @@ lower edge up the slope from the bed's front edge (the image centred on the bed'
 | chinese-guan-vase | turned "guan" | 0.206 × 0.340 | same · −17.00 | yes |
 | chinese-jian-bowl | turned "jian" | 0.121 × 0.073 | same · −16.20 | yes |
 | chinese-longquan-vase | turned "longquan" | 0.079 × 0.146 | same · −15.50 | yes |
-| chinese-ru-basin | scan (prim of `usd/wings/ChineseWing.usdc`), turned 90° | 0.230 × — | `chenghuai.tianqing.pedestal` | none |
-| chinese-meiping | scan (prim) | — × 0.441 | `chenghuai.changnan.case.deck` · −22.80 | r 0.06 |
-| chinese-xuande-jar | turned "xuande" | 0.460 × 0.483 | same · −21.70 | yes |
-| chinese-wucai-jar | turned "wucai" | 0.223 × 0.232 | same · −19.90 | yes |
-| chinese-chicken-cup | scan (prim) | 0.083 × — | same · −18.50 | r 0.03 |
-| chinese-peachbloom | scan (prim) | — × 0.159 | same · −16.90 | r 0.045 |
-| chinese-falangcai-bowl | turned "falangcai" | 0.114 × 0.054 | same · −15.80 | yes |
-| chinese-chicken-cup (the handling copy) | scan (prim), yaw 30° | 0.083 × — | `chenghuai.changnan.table` at (−0.280, −19.080, 1.250) | none |
+| chinese-ru-basin | derived (NPM 故瓷017851), oval, on four feet, turned 90° | 0.230 × 0.069 (mouth 23.0 × 16.4) | `chenghuai.tianqing.pedestal` | none |
+| chinese-meiping | derived (V&A C.8-1952), painted | 0.220 × 0.356 | `chenghuai.changnan.case.deck` · −22.80 | yes |
+| chinese-xuande-jar | derived (Met 37.191.1), painted | 0.483 × 0.483 | same · −21.70 | yes |
+| chinese-wucai-jar | derived (Met 17.127.2), painted | 0.231 × 0.232 | same · −19.90 | yes |
+| chinese-chicken-cup (object 1) | derived (NPM 故瓷005190), painted | 0.082 × 0.037 | same · −18.50 | yes |
+| chinese-peachbloom | derived (Met 14.40.377), peach-bloom glaze | 0.080 × 0.197 | same · −16.90 | yes |
+| chinese-falangcai-bowl | derived (Met 65.86.12), painted | 0.114 × 0.054 | same · −15.80 | yes |
+| chinese-chicken-cup (the handling copy, object 2) | as the cup, yaw 30° | 0.082 × 0.037 | `chenghuai.changnan.table` at (−0.280, −19.080, 1.250) | none |
 
 Care: ceramic-and-glass (the sancai horse is lead-glazed earthenware: the same class). The four scans that exist only as
 prims of the retired wing's export are *works' evidence*; Studio imports them to `Evidence/Art` with provenance.
+
+**Vessels from their photographs** (K9; `Data/Art/Vessels.json`, grade `derived`, each derivation in its record, made by
+`MuseeVision/Scripts/vessels.py`): each section is the photograph's silhouette turned through the photograph's own
+camera (a pinhole fitted to the rim's and foot's ellipses, which corrects its perspective), at the museum's height, the
+widest diameter checked against the museum's: the Xuande jar 48.5 cm against 48.3, the falangcai bowl 11.4 against 11.4
+(foot 4.4 against 4.4), the chicken cup 8.3 against 8.2 (foot 4.1 against 4.1), the meiping 20.4 against the V&A's 22.0;
+the wucai jar (23.1) and the peach-bloom vase (8.0) have no published diameter. Each is turned to its museum's size. The
+Ru basin has no side view: its section joins the museum's four sizes by the proportions its oblique photograph shows,
+turned in the round and pressed to its mouth's 23.0 × 16.4, on four feet from its base photograph.
+The painted vessels (Xuande, wucai, falangcai, chicken cup, meiping) wear their decoration, composed by Art round the
+turned form from their views: each view projected through its camera onto the surface it sees within 60° of face on,
+views blended by how squarely they see it, each photograph's white the glaze's; where no view sees the outside, each
+band of ornament (the lotus panels, the neck's scroll, the rims' lines) is carried round by its own repeat, and the
+field is left in the glaze. The Xuande jar's two photographs see 28% of it, the wucai jar's three sides 83%, the
+meiping's side A 27%, the bowl's and cup's one photograph each about a quarter. The meiping's side B (a close, soft
+gallery photograph) is read but not composed: its camera can't be fixed to better than 24 px, and its painting lies on
+side A's at a correlation of only 0.34, so composed it would double the figures where the sides meet.
 
 **Building and garden works** (built by Form or Nature; Art adds only the caption, Hang `"built": "form"`):
 chenghuai-yingbi (the screen wall's heart `chenghuai.screen-wall.heart`, 1.8 × 1.8, along 0.00, height 0.88 on
@@ -1106,6 +1125,20 @@ by the board's willow and pine (plums kept).
   stone. The paper, brushes and paperweights are not built (the palette has no key for them).
 - **Hang:** the Qingming's lead 0.23 (was 0.25; the mount overran its case by 1.7 cm); handscroll widths from the
   catalogue, not the images; turned vessels scaled to the catalogue's sizes.
+- **The vessels from their photographs (K9):** each at its museum's size, catalogued in `MuseeVision/Data/Art/Ceramics.json`
+  with its accession and its photographs' credit (the collection's `assets/collection.json` is read only): the Xuande jar
+  0.483 across (was 0.460); the peach-bloom vase its true 19.7 cm (was 15.9); the chicken cup 3.7 × 8.2 at the National
+  Palace Museum (was "museum collections", 8.3 wide) and its handling copy its second object; the Ru basin 6.9 high on
+  its feet. **The meiping is the V&A's C.8-1952**, Yuan, 1320–50, with scenes from *The West Chamber*, at its own
+  35.6 × 22 cm (was 44.1 high): it stands in for the Nanjing Museum's meiping with Xiao He pursuing Han Xin by moonlight,
+  of which no open image exists, and its label credits its photographers, Gary Todd and UK_FGR for Wikipedia Loves Art
+  (side B is read for its placement but not composed, above).
+  Its photograph gives 20.4 cm across to the V&A's 22.0: turned to the V&A's, it is 8% fuller than the photograph shows.
+- **The Ru basin's foot:** its section turned round and pressed to the mouth's axes comes to 19.3 × 13.8 at the foot
+  against the museum's 19.3 × 12.9: its wall flares more at the ends than at the sides, which a pressed round can't
+  show.
+- **Photographs left out:** the falangcai bowl's black-and-white view (it carries no colour); the chicken cup's PNG, the
+  same photograph as its TIFF.
 - **Planting:** the garden's willow and pine replace the osmanthus stand-ins (plums kept); the crabapples and jujubes are
   their real species; the pomegranates stand in their tubs (ruling 5).
 - **Door pins plain** (as built they carried characters) and the yard door's leaves green (Names and Plan boards).
