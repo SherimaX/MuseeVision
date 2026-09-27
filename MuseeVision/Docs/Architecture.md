@@ -220,6 +220,7 @@ How made things take shape. Form has two halves: the drawing, the architectural 
 **Connectors**
 
 - FFormDrawing (Sweep, Lathe, Extrude, Loft, Surface, Laid, Tubes, Heightfield, Scan), FFormProfile, FFormOrder, FFormWall, FFormOpening, FFormCoursing, FFormStair
+- As built (K3-FORM-B): a sweep's `Rise` (helices, plumb or square to the rake); `FFormGround`, the curved ground any drawing may be set out on in its development (a surface of revolution, or a sphere developed on a tangent plane), carried within the chord tolerance; `FFormHeightfield` (landforms, a roof bent both ways, a step dressed to a helicoid); `FFormLettering` with `FFormTypeface`/`FFormGlyph` in Data/Form/Typefaces.json; `FFormCloth` (a membrane's sag); a wall's drawn `Top` and segmental and pointed heads; an opening's `Passage` kind, the enclosure `Beyond` it, and its bend (`RadiusMeters`)
 - `UFormCatalogue (Data/Form profiles and orders, by key)`
 - `FFormEnclosure, UFormEnclosureComponent, Musee::Form::EnclosureAt(Point)`
 - `FFormPieceFacts, FFormExposedSurface, FFormAssembly (read-only)`

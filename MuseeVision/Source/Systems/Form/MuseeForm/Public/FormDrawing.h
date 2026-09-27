@@ -3,10 +3,14 @@
 #include "CoreMinimal.h"
 #include "FormBasin.h"
 #include "FormCeiling.h"
+#include "FormCloth.h"
 #include "FormDome.h"
 #include "FormExtrusion.h"
 #include "FormFace.h"
+#include "FormGround.h"
+#include "FormHeightfield.h"
 #include "FormLathe.h"
+#include "FormLettering.h"
 #include "FormRelief.h"
 #include "FormStair.h"
 #include "FormSweep.h"
@@ -17,7 +21,7 @@
 
 /** The shape a drawing draws: one word of Form's vocabulary. */
 using FFormShape = TVariant<FFormExtrusion, FFormSweep, FFormLathe, FFormFace, FFormWall, FFormBasin, FFormStair, FFormCeiling,
-	FFormRelief, FFormDome>;
+	FFormRelief, FFormDome, FFormHeightfield, FFormLettering, FFormCloth>;
 
 /**
  * A drawing of one made thing of a stage, in Form's language: a wall, a coping, a slab, a post. It says what shape it
@@ -57,6 +61,12 @@ struct FFormDrawing
 
 	/** Where the shape's own frame stands in its stage's frame (its body's frame when Body is set). */
 	FMuseeFrame Frame;
+
+	/**
+	 * The curved ground the shape is set out on, in the shape's frame: the shape is drawn in the ground's development and
+	 * carried onto it (FFormGround). Flat by default: the shape stands in its frame as drawn.
+	 */
+	FFormGround Ground;
 
 	/** Who drew it (the stage's key, or a system such as Site for a blind), so a finding goes to its cause. */
 	FName Drawer;

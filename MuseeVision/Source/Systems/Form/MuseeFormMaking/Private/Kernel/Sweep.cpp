@@ -44,14 +44,14 @@ namespace Musee::Form
 					const int32 Slot = Vertices.Slot(Frame, Station);
 					if (bLeaves)
 					{
-						Vertices.Leaving[Slot] = Mesh.AddVertex(P, F.NormalAt(S.NormalOut), FVector2D(U, S.LengthMeters));
+						Vertices.Leaving[Slot] = Mesh.AddVertex(P, F.NormalAt(S.Point, S.NormalOut), FVector2D(U, S.LengthMeters));
 					}
 					if (bArrives)
 					{
 						const bool bShared = bLeaves && !S.bCrisp && !bSeam;
 						const double V = bSeam ? Profile.ClosedLengthMeters : S.LengthMeters;
 						Vertices.Arriving[Slot] = bShared ? Vertices.Leaving[Slot]
-							: Mesh.AddVertex(P, F.NormalAt(S.NormalIn), FVector2D(U, V));
+							: Mesh.AddVertex(P, F.NormalAt(S.Point, S.NormalIn), FVector2D(U, V));
 					}
 				}
 			}
@@ -88,7 +88,11 @@ namespace Musee::Form
 		// A counter-clockwise profile faces out of the solid it bounds, so its cap faces away from the run; a clockwise
 		// one faces into the void it bounds, so its cap faces into the run.
 		const bool bOutward = Profile.SignedAreaSquareMeters() >= 0.0;
-		const FVector Facing = (bRunEnd == bOutward) ? Frame.Along : -Frame.Along;
+		// The cap lies in the section's plane, which leans off square to the travel where the section is plumb on a rake or
+		// cut to a chamfer: it faces along that plane's normal, on the travel's side.
+		const FVector Plane = FVector::CrossProduct(Frame.AxisA, Frame.AxisB).GetSafeNormal();
+		const FVector Travel = Plane.IsNearlyZero() ? Frame.Along : (FVector::DotProduct(Plane, Frame.Along) >= 0.0 ? Plane : -Plane);
+		const FVector Facing = (bRunEnd == bOutward) ? Travel : -Travel;
 		const FVector AxisU = Frame.AxisA.GetSafeNormal();
 		const FVector AxisV = (Frame.AxisB - AxisU * FVector::DotProduct(Frame.AxisB, AxisU)).GetSafeNormal();
 		auto Place = [&Frame](const FVector2D& Point) { return Frame.At(Point); };

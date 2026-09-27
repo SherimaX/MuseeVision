@@ -1,6 +1,7 @@
 #include "Drawing/Draw.h"
 
 #include "Drawing/DrawnProfile.h"
+#include "Drawing/RisingPath.h"
 #include "Kernel/MeshBuilder.h"
 #include "Kernel/PlanRuns.h"
 #include "Kernel/Sweep.h"
@@ -216,6 +217,12 @@ namespace Musee::Form::Drawing
 			return false;
 		}
 		const FProfileStations Section = Resolve(Shape.Section);
+		auto InPlan = [](const FSweepFrame&, const FVector& Direction) { return Direction; };
+		if (Shape.Rises())
+		{
+			TArray<TArray<FSweepFrame>> Rising;
+			return RisingRuns(Shape, Rising, OutWhy) && CutAndCap(Rising, Section, Shape.StartCut, Shape.EndCut, InPlan, Mesh, OutWhy);
+		}
 		if (Shape.IsOnFace())
 		{
 			return DrawOnFace(Shape, Section, Mesh, OutWhy);
@@ -234,7 +241,6 @@ namespace Musee::Form::Drawing
 			}
 			return true;
 		}
-		auto InPlan = [](const FSweepFrame&, const FVector& Direction) { return Direction; };
 		return CutAndCap(Runs, Section, Shape.StartCut, Shape.EndCut, InPlan, Mesh, OutWhy);
 	}
 }

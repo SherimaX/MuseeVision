@@ -26,6 +26,12 @@ namespace Musee::Form
 	bool TriangulatePolygon(TConstArrayView<FVector2D> Outer, TConstArrayView<TArray<FVector2D>> Holes,
 		TArray<FIntVector>& OutTriangles)
 	{
+		return TriangulatePolygonWithPoints(Outer, Holes, {}, OutTriangles);
+	}
+
+	bool TriangulatePolygonWithPoints(TConstArrayView<FVector2D> Outer, TConstArrayView<TArray<FVector2D>> Holes,
+		TConstArrayView<FVector2D> Inner, TArray<FIntVector>& OutTriangles)
+	{
 		OutTriangles.Reset();
 		if (Outer.Num() < 3)
 		{
@@ -41,6 +47,10 @@ namespace Musee::Form
 				return false;
 			}
 			AddLoop(Delaunay, Hole, Delaunay.HoleEdges);
+		}
+		for (const FVector2D& Point : Inner)
+		{
+			Delaunay.Vertices.Add(Point);
 		}
 		// A failed boundary edge means the loops cross; an added vertex would break the vertex-for-vertex promise.
 		if (!Delaunay.Triangulate() || Delaunay.AddedVerticesStartIndex != INDEX_NONE)

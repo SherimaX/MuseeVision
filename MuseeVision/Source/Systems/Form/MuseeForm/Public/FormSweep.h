@@ -6,10 +6,11 @@
 /**
  * A moulding run along a path: a skirting round a room, a cove under a ceiling, a coping round a pond; or, drawn on a
  * face, an architrave up a door's jambs and over its arch, a rib following a velarium's rise, a glazing bar under a dome's
- * glass. The section is drawn with its solid on its left, its A to the path's right and its B up (in plan) or out of the
- * face (on a face). The path turns crisply where it is drawn crisp and smoothly along its arcs, and every turn is mitred,
- * so the section keeps its shape. A closed section on an open path is capped at both ends, square to the path unless an
- * end is chamfered; a closed section on a closed path is a ring and needs no caps.
+ * glass; or, rising as it runs, a stair's string, a handrail and a balustrade's bars wound up a helix. The section is drawn
+ * with its solid on its left, its A to the path's right and its B up (in plan) or out of the face (on a face). The path
+ * turns crisply where it is drawn crisp and smoothly along its arcs, and every turn is mitred, so the section keeps its
+ * shape. A closed section on an open path is capped at both ends, square to the path unless an end is chamfered; a closed
+ * section on a closed path is a ring and needs no caps.
  */
 struct FFormSweep
 {
@@ -42,6 +43,28 @@ struct FFormSweep
 	/** The furthest a chamfered end may lean from square to the path, degrees: beyond it the end runs out to a feather. */
 	static constexpr double MaxCutDegrees = 75.0;
 
+	/**
+	 * The path's rise, when it climbs as it runs (a stair's string, a handrail, a balustrade's bars): the height of the
+	 * path above ElevationMeters along it, drawn as a profile of (U, Z), U metres along the plan path from its start (on
+	 * its chords, as every distance along a drawn path is measured) and Z up, in lines and arcs, crisp or smooth at each
+	 * joint. It runs forward in U, one height at each distance. A plan arc
+	 * under a straight rise is a helix; a rise drawn level over a landing and raked over the flights either side follows a
+	 * stair. Before its start and past its end the path runs level at that end's height. Undrawn (no start): the path is
+	 * level. A path on a face, or round a closed loop, doesn't rise.
+	 */
+	FFormProfile Rise;
+
+	/**
+	 * How the section stands on a rising path. Square (the default), it stands square to the path's rake, as a handrail's
+	 * or a bar's section does: its A level, its B leaning back with the rake. Plumb, it stands in the vertical plane across
+	 * the plan path, its A level and its B straight up, as a string's board is set out: a plumb section's faces stand plumb
+	 * or lie level across the flight however steeply it climbs. On a level path the two are the same.
+	 */
+	bool bPlumb = false;
+
 	/** Whether the path is drawn on a face. */
 	[[nodiscard]] bool IsOnFace() const { return !Face.Start.IsEmpty(); }
+
+	/** Whether the path climbs as it runs. */
+	[[nodiscard]] bool Rises() const { return !Rise.Start.IsEmpty(); }
 };

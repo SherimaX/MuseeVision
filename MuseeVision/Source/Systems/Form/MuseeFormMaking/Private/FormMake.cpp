@@ -129,8 +129,27 @@ namespace Musee::FormMaking
 			if (const FFormCeiling* S = Shape.TryGet<FFormCeiling>()) { return DrawCeiling(*S, Mesh, Pane, OutWhy); }
 			if (const FFormRelief* S = Shape.TryGet<FFormRelief>()) { return DrawRelief(*S, Mesh, OutWhy); }
 			if (const FFormDome* S = Shape.TryGet<FFormDome>()) { return DrawDome(*S, Mesh, OutWhy); }
+			if (const FFormHeightfield* S = Shape.TryGet<FFormHeightfield>()) { return DrawHeightfield(*S, Mesh, OutWhy); }
+			if (const FFormLettering* S = Shape.TryGet<FFormLettering>()) { return DrawLettering(*S, Mesh, OutWhy); }
+			if (const FFormCloth* S = Shape.TryGet<FFormCloth>()) { return DrawCloth(*S, Mesh, OutWhy); }
 			OutWhy = TEXT("its shape is none of Form's words");
 			return false;
+		}
+
+		/** A shape drawn in its ground's development, carried onto the ground in place. */
+		bool CarryToGround(const FFormDrawing& Drawing, FMeshBuilder& Mesh, FString& OutWhy)
+		{
+			if (Drawing.Ground.IsFlat() || Mesh.NumTriangles() == 0)
+			{
+				return true;
+			}
+			FMeshBuilder Carried(Mesh.NumUVChannels());
+			if (!Musee::Form::Drawing::SetOnGround(Drawing.Ground, Mesh, Carried, OutWhy))
+			{
+				return false;
+			}
+			Mesh = MoveTemp(Carried);
+			return true;
 		}
 	}
 
@@ -166,7 +185,7 @@ namespace Musee::FormMaking
 			OutFindings.Add(Unmade(Drawing, TEXT("a drawing has a name and a surface")));
 			return;
 		}
-		if (!DrawShape(Drawing, Mesh, Pane, Why))
+		if (!DrawShape(Drawing, Mesh, Pane, Why) || !CarryToGround(Drawing, Mesh, Why) || !CarryToGround(Drawing, Pane, Why))
 		{
 			OutFindings.Add(Unmade(Drawing, Why));
 			return;
