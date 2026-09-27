@@ -15,6 +15,18 @@
       "b": "salon.west",
       "passageMeters": 0.0,
       "note": "The oval passage: the Salon's bay 5 far wall meets the oval's passage block."
+    },
+    {
+      "a": "hall-of-light.west",
+      "b": "rotunda.east",
+      "passageMeters": 0.0,
+      "note": "The Hall of Light's west lining lies on the Rotunda's drum (hall-of-light.md section 2): the faces touch on the cylinder R 11.200 about the Rotunda's axis, and the hall stands at museum = local + (11.200, 0, 0)."
+    },
+    {
+      "a": "hall-of-light.east",
+      "b": "atrium.west",
+      "passageMeters": 0.0,
+      "note": "The Hall of Light's east lining lies on the Atrium's stone base (hall-of-light.md section 2): the faces touch on the cylinder R 14.800 about the Atrium's axis, museum (54.000, 0)."
     }
   ]
 }
