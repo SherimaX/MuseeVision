@@ -478,3 +478,10 @@ if Light's measurement shows bright days over 50 lx on her, she moves to the cab
   - The Rouen series has one Hang entry per canvas.
   - The Little Dancer's width comes from her scan.
 - **Planting.** The pergola vines on the roof are outdoors, so they take the museum's weather.
+
+**Departures from as-built** (for the owner's review):
+- The **east door steps down inside the Salon's own wall**, from the Rotunda's 6.00 crown to the Salon's 4.80 arch (ruled). As built, the drum's arch ran through the passage.
+- The **1874 case moves from bay 1 into the Manet cabinet**, where there is no daylight (ruled, care).
+- Bay 4's diffuser is a **fixed linen scrim**; the board shows a linen blind, and D-014 allows no blinds.
+- Materials follow the Story: the vault is run lime plaster (not fibrous panels), the lantern grid is patinated bronze (not painted steel), the strips and stele foot are brushed bronze (not brass), and the frames are oak with water gilding.
+- Light: 45 listed framing projectors at 3000 K replace the ≈ 110 coffer spots at 4000 K.

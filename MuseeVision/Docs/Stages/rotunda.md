@@ -626,3 +626,9 @@ public release would switch to an open-licence face.
   - Every port unmated tonight gets closed bronze doors.
 - **The eye is the only opening to the sky.** It is Glazed (D-004) and takes the museum's weather.
 - **Light.** The cast spots stand across the room, not on the cornice ledge, which the entablature shades.
+
+**Departures from as-built** (for the owner's review):
+- The Story overrides the as-built on four points (D-018): the lattice is **pearl-white** (as built dark grey), the dome is covered in **lead** (as built stone), the node is **patinated** (as built gilt), and a **60 mm gilt meridian** is added (as built none).
+- Stone and gilt: **Crema Marfil** replaces statuary on the ring, dial, treads, landing and string; **Rojo Alicante** replaces rosso antico; the sun's 32 rays are gilt (as built bronze).
+- All light is 3000 K. The cast spots stand across the room instead of on the cornice ledge, which the entablature shades.
+- The imposts belong to the doorway class's lining, not to the drum.

@@ -1,0 +1,1879 @@
+{
+  "stage": "classical-hall",
+  "daylight": [],
+  "luminaires": [
+    {
+      "id": "laylight.bay1",
+      "type": "gap.luminous-ceiling.3000k",
+      "point": [
+        0.0,
+        28.1,
+        5.1
+      ],
+      "aim": [
+        0.0,
+        28.1,
+        0.0
+      ],
+      "operation": "always",
+      "extent": [
+        2.246,
+        2.28
+      ],
+      "note": "Backlit luminous-ceiling modules in the 0.20 plenum over the etched laylight glass (underside 4.940, top 4.949; slab 5.15)."
+    },
+    {
+      "id": "laylight.bay2",
+      "type": "gap.luminous-ceiling.3000k",
+      "point": [
+        0.0,
+        22.1,
+        5.1
+      ],
+      "aim": [
+        0.0,
+        22.1,
+        0.0
+      ],
+      "operation": "always",
+      "extent": [
+        2.246,
+        2.28
+      ],
+      "note": "Backlit luminous-ceiling modules in the 0.20 plenum over the etched laylight glass (underside 4.940, top 4.949; slab 5.15)."
+    },
+    {
+      "id": "laylight.bay3",
+      "type": "gap.luminous-ceiling.3000k",
+      "point": [
+        0.0,
+        16.1,
+        5.1
+      ],
+      "aim": [
+        0.0,
+        16.1,
+        0.0
+      ],
+      "operation": "always",
+      "extent": [
+        2.246,
+        2.28
+      ],
+      "note": "Backlit luminous-ceiling modules in the 0.20 plenum over the etched laylight glass (underside 4.940, top 4.949; slab 5.15)."
+    },
+    {
+      "id": "laylight.bay4",
+      "type": "gap.luminous-ceiling.3000k",
+      "point": [
+        0.0,
+        10.1,
+        5.1
+      ],
+      "aim": [
+        0.0,
+        10.1,
+        0.0
+      ],
+      "operation": "always",
+      "extent": [
+        2.246,
+        2.28
+      ],
+      "note": "Backlit luminous-ceiling modules in the 0.20 plenum over the etched laylight glass (underside 4.940, top 4.949; slab 5.15)."
+    },
+    {
+      "id": "laylight.eye",
+      "type": "gap.luminous-ceiling.3000k",
+      "point": [
+        0.0,
+        0.0,
+        5.1
+      ],
+      "aim": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "operation": "always",
+      "extent": [
+        2.4,
+        2.4
+      ],
+      "note": "Backlit luminous-ceiling modules in the 0.20 plenum over the etched laylight glass (underside 4.940, top 4.949; slab 5.15)."
+    },
+    {
+      "id": "cove.gallery.e1",
+      "type": "linear-cove.3000k",
+      "point": [
+        2.87,
+        28.46,
+        3.72
+      ],
+      "aim": [
+        1.73,
+        28.46,
+        4.737
+      ],
+      "length": 5.18,
+      "operation": "always"
+    },
+    {
+      "id": "cove.gallery.e2",
+      "type": "linear-cove.3000k",
+      "point": [
+        2.87,
+        22.1,
+        3.72
+      ],
+      "aim": [
+        1.73,
+        22.1,
+        4.737
+      ],
+      "length": 4.46,
+      "operation": "always"
+    },
+    {
+      "id": "cove.gallery.e3",
+      "type": "linear-cove.3000k",
+      "point": [
+        2.87,
+        16.1,
+        3.72
+      ],
+      "aim": [
+        1.73,
+        16.1,
+        4.737
+      ],
+      "length": 4.46,
+      "operation": "always"
+    },
+    {
+      "id": "cove.gallery.e4",
+      "type": "linear-cove.3000k",
+      "point": [
+        2.87,
+        9.74,
+        3.72
+      ],
+      "aim": [
+        1.73,
+        9.74,
+        4.737
+      ],
+      "length": 5.18,
+      "operation": "always"
+    },
+    {
+      "id": "cove.gallery.w1",
+      "type": "linear-cove.3000k",
+      "point": [
+        -2.87,
+        28.46,
+        3.72
+      ],
+      "aim": [
+        -1.73,
+        28.46,
+        4.737
+      ],
+      "length": 5.18,
+      "operation": "always"
+    },
+    {
+      "id": "cove.gallery.w2",
+      "type": "linear-cove.3000k",
+      "point": [
+        -2.87,
+        22.1,
+        3.72
+      ],
+      "aim": [
+        -1.73,
+        22.1,
+        4.737
+      ],
+      "length": 4.46,
+      "operation": "always"
+    },
+    {
+      "id": "cove.gallery.w3",
+      "type": "linear-cove.3000k",
+      "point": [
+        -2.87,
+        16.1,
+        3.72
+      ],
+      "aim": [
+        -1.73,
+        16.1,
+        4.737
+      ],
+      "length": 4.46,
+      "operation": "always"
+    },
+    {
+      "id": "cove.gallery.w4",
+      "type": "linear-cove.3000k",
+      "point": [
+        -2.87,
+        9.74,
+        3.72
+      ],
+      "aim": [
+        -1.73,
+        9.74,
+        4.737
+      ],
+      "length": 5.18,
+      "operation": "always"
+    },
+    {
+      "id": "cove.tribune.01",
+      "type": "linear-cove.3000k",
+      "point": [
+        6.372,
+        1.124,
+        3.72
+      ],
+      "aim": [
+        5.768,
+        1.017,
+        4.945
+      ],
+      "length": 2.208,
+      "operation": "always"
+    },
+    {
+      "id": "cove.tribune.02",
+      "type": "linear-cove.3000k",
+      "point": [
+        5.603,
+        3.235,
+        3.72
+      ],
+      "aim": [
+        5.073,
+        2.929,
+        4.945
+      ],
+      "length": 2.208,
+      "operation": "always"
+    },
+    {
+      "id": "cove.tribune.03",
+      "type": "linear-cove.3000k",
+      "point": [
+        4.159,
+        4.956,
+        3.72
+      ],
+      "aim": [
+        3.765,
+        4.487,
+        4.945
+      ],
+      "length": 2.208,
+      "operation": "always"
+    },
+    {
+      "id": "cove.tribune.04",
+      "type": "linear-cove.3000k",
+      "point": [
+        2.213,
+        6.08,
+        3.72
+      ],
+      "aim": [
+        2.003,
+        5.504,
+        4.945
+      ],
+      "length": 2.208,
+      "operation": "always"
+    },
+    {
+      "id": "cove.tribune.05",
+      "type": "linear-cove.3000k",
+      "point": [
+        0.0,
+        6.47,
+        3.72
+      ],
+      "aim": [
+        0.0,
+        5.857,
+        4.945
+      ],
+      "length": 2.208,
+      "operation": "always"
+    },
+    {
+      "id": "cove.tribune.06",
+      "type": "linear-cove.3000k",
+      "point": [
+        -2.213,
+        6.08,
+        3.72
+      ],
+      "aim": [
+        -2.003,
+        5.504,
+        4.945
+      ],
+      "length": 2.208,
+      "operation": "always"
+    },
+    {
+      "id": "cove.tribune.07",
+      "type": "linear-cove.3000k",
+      "point": [
+        -4.159,
+        4.956,
+        3.72
+      ],
+      "aim": [
+        -3.765,
+        4.487,
+        4.945
+      ],
+      "length": 2.208,
+      "operation": "always"
+    },
+    {
+      "id": "cove.tribune.08",
+      "type": "linear-cove.3000k",
+      "point": [
+        -5.603,
+        3.235,
+        3.72
+      ],
+      "aim": [
+        -5.073,
+        2.929,
+        4.945
+      ],
+      "length": 2.208,
+      "operation": "always"
+    },
+    {
+      "id": "cove.tribune.09",
+      "type": "linear-cove.3000k",
+      "point": [
+        -6.372,
+        1.124,
+        3.72
+      ],
+      "aim": [
+        -5.768,
+        1.017,
+        4.945
+      ],
+      "length": 2.208,
+      "operation": "always"
+    },
+    {
+      "id": "cove.tribune.10",
+      "type": "linear-cove.3000k",
+      "point": [
+        -6.372,
+        -1.124,
+        3.72
+      ],
+      "aim": [
+        -5.768,
+        -1.017,
+        4.945
+      ],
+      "length": 2.208,
+      "operation": "always"
+    },
+    {
+      "id": "cove.tribune.11",
+      "type": "linear-cove.3000k",
+      "point": [
+        -5.603,
+        -3.235,
+        3.72
+      ],
+      "aim": [
+        -5.073,
+        -2.929,
+        4.945
+      ],
+      "length": 2.208,
+      "operation": "always"
+    },
+    {
+      "id": "cove.tribune.12",
+      "type": "linear-cove.3000k",
+      "point": [
+        -4.159,
+        -4.956,
+        3.72
+      ],
+      "aim": [
+        -3.765,
+        -4.487,
+        4.945
+      ],
+      "length": 2.208,
+      "operation": "always"
+    },
+    {
+      "id": "cove.tribune.13",
+      "type": "linear-cove.3000k",
+      "point": [
+        -2.213,
+        -6.08,
+        3.72
+      ],
+      "aim": [
+        -2.003,
+        -5.504,
+        4.945
+      ],
+      "length": 2.208,
+      "operation": "always"
+    },
+    {
+      "id": "cove.tribune.14",
+      "type": "linear-cove.3000k",
+      "point": [
+        0.0,
+        -6.47,
+        3.72
+      ],
+      "aim": [
+        0.0,
+        -5.857,
+        4.945
+      ],
+      "length": 2.208,
+      "operation": "always"
+    },
+    {
+      "id": "cove.tribune.15",
+      "type": "linear-cove.3000k",
+      "point": [
+        2.213,
+        -6.08,
+        3.72
+      ],
+      "aim": [
+        2.003,
+        -5.504,
+        4.945
+      ],
+      "length": 2.208,
+      "operation": "always"
+    },
+    {
+      "id": "cove.tribune.16",
+      "type": "linear-cove.3000k",
+      "point": [
+        4.159,
+        -4.956,
+        3.72
+      ],
+      "aim": [
+        3.765,
+        -4.487,
+        4.945
+      ],
+      "length": 2.208,
+      "operation": "always"
+    },
+    {
+      "id": "cove.tribune.17",
+      "type": "linear-cove.3000k",
+      "point": [
+        5.603,
+        -3.235,
+        3.72
+      ],
+      "aim": [
+        5.073,
+        -2.929,
+        4.945
+      ],
+      "length": 2.208,
+      "operation": "always"
+    },
+    {
+      "id": "cove.tribune.18",
+      "type": "linear-cove.3000k",
+      "point": [
+        6.372,
+        -1.124,
+        3.72
+      ],
+      "aim": [
+        5.768,
+        -1.017,
+        4.945
+      ],
+      "length": 2.208,
+      "operation": "always"
+    },
+    {
+      "id": "cove.ring.outer.01",
+      "type": "linear-cove.3000k",
+      "point": [
+        3.7,
+        0.0,
+        3.72
+      ],
+      "aim": [
+        4.3,
+        0.0,
+        4.92
+      ],
+      "length": 1.887,
+      "operation": "always"
+    },
+    {
+      "id": "cove.ring.inner.01",
+      "type": "linear-cove.3000k",
+      "point": [
+        3.1,
+        0.0,
+        3.72
+      ],
+      "aim": [
+        2.46,
+        0.0,
+        4.476
+      ],
+      "length": 1.573,
+      "operation": "always"
+    },
+    {
+      "id": "cove.ring.outer.02",
+      "type": "linear-cove.3000k",
+      "point": [
+        3.204,
+        1.85,
+        3.72
+      ],
+      "aim": [
+        3.724,
+        2.15,
+        4.92
+      ],
+      "length": 1.887,
+      "operation": "always"
+    },
+    {
+      "id": "cove.ring.inner.02",
+      "type": "linear-cove.3000k",
+      "point": [
+        2.685,
+        1.55,
+        3.72
+      ],
+      "aim": [
+        2.13,
+        1.23,
+        4.476
+      ],
+      "length": 1.573,
+      "operation": "always"
+    },
+    {
+      "id": "cove.ring.outer.03",
+      "type": "linear-cove.3000k",
+      "point": [
+        1.85,
+        3.204,
+        3.72
+      ],
+      "aim": [
+        2.15,
+        3.724,
+        4.92
+      ],
+      "length": 1.887,
+      "operation": "always"
+    },
+    {
+      "id": "cove.ring.inner.03",
+      "type": "linear-cove.3000k",
+      "point": [
+        1.55,
+        2.685,
+        3.72
+      ],
+      "aim": [
+        1.23,
+        2.13,
+        4.476
+      ],
+      "length": 1.573,
+      "operation": "always"
+    },
+    {
+      "id": "cove.ring.outer.04",
+      "type": "linear-cove.3000k",
+      "point": [
+        0.0,
+        3.7,
+        3.72
+      ],
+      "aim": [
+        0.0,
+        4.3,
+        4.92
+      ],
+      "length": 1.887,
+      "operation": "always"
+    },
+    {
+      "id": "cove.ring.inner.04",
+      "type": "linear-cove.3000k",
+      "point": [
+        0.0,
+        3.1,
+        3.72
+      ],
+      "aim": [
+        0.0,
+        2.46,
+        4.476
+      ],
+      "length": 1.573,
+      "operation": "always"
+    },
+    {
+      "id": "cove.ring.outer.05",
+      "type": "linear-cove.3000k",
+      "point": [
+        -1.85,
+        3.204,
+        3.72
+      ],
+      "aim": [
+        -2.15,
+        3.724,
+        4.92
+      ],
+      "length": 1.887,
+      "operation": "always"
+    },
+    {
+      "id": "cove.ring.inner.05",
+      "type": "linear-cove.3000k",
+      "point": [
+        -1.55,
+        2.685,
+        3.72
+      ],
+      "aim": [
+        -1.23,
+        2.13,
+        4.476
+      ],
+      "length": 1.573,
+      "operation": "always"
+    },
+    {
+      "id": "cove.ring.outer.06",
+      "type": "linear-cove.3000k",
+      "point": [
+        -3.204,
+        1.85,
+        3.72
+      ],
+      "aim": [
+        -3.724,
+        2.15,
+        4.92
+      ],
+      "length": 1.887,
+      "operation": "always"
+    },
+    {
+      "id": "cove.ring.inner.06",
+      "type": "linear-cove.3000k",
+      "point": [
+        -2.685,
+        1.55,
+        3.72
+      ],
+      "aim": [
+        -2.13,
+        1.23,
+        4.476
+      ],
+      "length": 1.573,
+      "operation": "always"
+    },
+    {
+      "id": "cove.ring.outer.07",
+      "type": "linear-cove.3000k",
+      "point": [
+        -3.7,
+        0.0,
+        3.72
+      ],
+      "aim": [
+        -4.3,
+        0.0,
+        4.92
+      ],
+      "length": 1.887,
+      "operation": "always"
+    },
+    {
+      "id": "cove.ring.inner.07",
+      "type": "linear-cove.3000k",
+      "point": [
+        -3.1,
+        0.0,
+        3.72
+      ],
+      "aim": [
+        -2.46,
+        0.0,
+        4.476
+      ],
+      "length": 1.573,
+      "operation": "always"
+    },
+    {
+      "id": "cove.ring.outer.08",
+      "type": "linear-cove.3000k",
+      "point": [
+        -3.204,
+        -1.85,
+        3.72
+      ],
+      "aim": [
+        -3.724,
+        -2.15,
+        4.92
+      ],
+      "length": 1.887,
+      "operation": "always"
+    },
+    {
+      "id": "cove.ring.inner.08",
+      "type": "linear-cove.3000k",
+      "point": [
+        -2.685,
+        -1.55,
+        3.72
+      ],
+      "aim": [
+        -2.13,
+        -1.23,
+        4.476
+      ],
+      "length": 1.573,
+      "operation": "always"
+    },
+    {
+      "id": "cove.ring.outer.09",
+      "type": "linear-cove.3000k",
+      "point": [
+        -1.85,
+        -3.204,
+        3.72
+      ],
+      "aim": [
+        -2.15,
+        -3.724,
+        4.92
+      ],
+      "length": 1.887,
+      "operation": "always"
+    },
+    {
+      "id": "cove.ring.inner.09",
+      "type": "linear-cove.3000k",
+      "point": [
+        -1.55,
+        -2.685,
+        3.72
+      ],
+      "aim": [
+        -1.23,
+        -2.13,
+        4.476
+      ],
+      "length": 1.573,
+      "operation": "always"
+    },
+    {
+      "id": "cove.ring.outer.10",
+      "type": "linear-cove.3000k",
+      "point": [
+        0.0,
+        -3.7,
+        3.72
+      ],
+      "aim": [
+        0.0,
+        -4.3,
+        4.92
+      ],
+      "length": 1.887,
+      "operation": "always"
+    },
+    {
+      "id": "cove.ring.inner.10",
+      "type": "linear-cove.3000k",
+      "point": [
+        0.0,
+        -3.1,
+        3.72
+      ],
+      "aim": [
+        0.0,
+        -2.46,
+        4.476
+      ],
+      "length": 1.573,
+      "operation": "always"
+    },
+    {
+      "id": "cove.ring.outer.11",
+      "type": "linear-cove.3000k",
+      "point": [
+        1.85,
+        -3.204,
+        3.72
+      ],
+      "aim": [
+        2.15,
+        -3.724,
+        4.92
+      ],
+      "length": 1.887,
+      "operation": "always"
+    },
+    {
+      "id": "cove.ring.inner.11",
+      "type": "linear-cove.3000k",
+      "point": [
+        1.55,
+        -2.685,
+        3.72
+      ],
+      "aim": [
+        1.23,
+        -2.13,
+        4.476
+      ],
+      "length": 1.573,
+      "operation": "always"
+    },
+    {
+      "id": "cove.ring.outer.12",
+      "type": "linear-cove.3000k",
+      "point": [
+        3.204,
+        -1.85,
+        3.72
+      ],
+      "aim": [
+        3.724,
+        -2.15,
+        4.92
+      ],
+      "length": 1.887,
+      "operation": "always"
+    },
+    {
+      "id": "cove.ring.inner.12",
+      "type": "linear-cove.3000k",
+      "point": [
+        2.685,
+        -1.55,
+        3.72
+      ],
+      "aim": [
+        2.13,
+        -1.23,
+        4.476
+      ],
+      "length": 1.573,
+      "operation": "always"
+    },
+    {
+      "id": "washer.000",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        3.78,
+        0.0,
+        3.86
+      ],
+      "aim": [
+        6.6,
+        0.0,
+        2.029
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "washer.030",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        3.274,
+        1.89,
+        3.86
+      ],
+      "aim": [
+        5.716,
+        3.3,
+        2.029
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "washer.060",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        1.89,
+        3.274,
+        3.86
+      ],
+      "aim": [
+        3.3,
+        5.716,
+        2.029
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "washer.120",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        -1.89,
+        3.274,
+        3.86
+      ],
+      "aim": [
+        -3.3,
+        5.716,
+        2.029
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "washer.150",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        -3.274,
+        1.89,
+        3.86
+      ],
+      "aim": [
+        -5.716,
+        3.3,
+        2.029
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "washer.180",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        -3.78,
+        0.0,
+        3.86
+      ],
+      "aim": [
+        -6.6,
+        0.0,
+        2.029
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "washer.210",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        -3.274,
+        -1.89,
+        3.86
+      ],
+      "aim": [
+        -5.716,
+        -3.3,
+        2.029
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "washer.240",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        -1.89,
+        -3.274,
+        3.86
+      ],
+      "aim": [
+        -3.3,
+        -5.716,
+        2.029
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "washer.270",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        0.0,
+        -3.78,
+        3.86
+      ],
+      "aim": [
+        0.0,
+        -6.6,
+        2.029
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "washer.300",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        1.89,
+        -3.274,
+        3.86
+      ],
+      "aim": [
+        3.3,
+        -5.716,
+        2.029
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "washer.330",
+      "type": "track-wallwasher.3000k",
+      "point": [
+        3.274,
+        -1.89,
+        3.86
+      ],
+      "aim": [
+        5.716,
+        -3.3,
+        2.029
+      ],
+      "operation": "always"
+    },
+    {
+      "id": "accent.gallery.niche.e1",
+      "type": "track-spot.3000k.20deg",
+      "point": [
+        -1.45,
+        29.0,
+        4.805
+      ],
+      "aim": [
+        3.147,
+        28.1,
+        1.67
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "accent.gallery.niche.e2",
+      "type": "track-spot.3000k.20deg",
+      "point": [
+        -1.45,
+        23.0,
+        4.805
+      ],
+      "aim": [
+        3.215,
+        22.1,
+        1.67
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "accent.gallery.niche.e3",
+      "type": "track-spot.3000k.20deg",
+      "point": [
+        -1.45,
+        17.0,
+        4.805
+      ],
+      "aim": [
+        3.15,
+        16.1,
+        1.67
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "accent.gallery.niche.e4",
+      "type": "track-spot.3000k.20deg",
+      "point": [
+        -1.45,
+        11.0,
+        4.805
+      ],
+      "aim": [
+        3.167,
+        10.1,
+        1.67
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "accent.gallery.niche.w1",
+      "type": "track-spot.3000k.20deg",
+      "point": [
+        1.45,
+        29.0,
+        4.805
+      ],
+      "aim": [
+        -3.126,
+        28.1,
+        1.67
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "accent.gallery.niche.w2",
+      "type": "track-spot.3000k.20deg",
+      "point": [
+        1.45,
+        23.0,
+        4.805
+      ],
+      "aim": [
+        -3.129,
+        22.1,
+        1.67
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "accent.gallery.niche.w3",
+      "type": "track-spot.3000k.20deg",
+      "point": [
+        1.45,
+        17.0,
+        4.805
+      ],
+      "aim": [
+        -3.215,
+        16.1,
+        1.67
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "accent.gallery.niche.w4",
+      "type": "track-spot.3000k.20deg",
+      "point": [
+        1.45,
+        11.0,
+        4.805
+      ],
+      "aim": [
+        -3.215,
+        10.1,
+        1.67
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "accent.gallery.bust.e1s",
+      "type": "track-spot.3000k.12deg",
+      "point": [
+        -1.45,
+        30.6,
+        4.805
+      ],
+      "aim": [
+        2.75,
+        29.7,
+        1.9
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "accent.gallery.bust.e1n",
+      "type": "track-spot.3000k.12deg",
+      "point": [
+        -1.45,
+        27.4,
+        4.805
+      ],
+      "aim": [
+        2.75,
+        26.5,
+        1.9
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "accent.gallery.bust.e2s",
+      "type": "track-spot.3000k.12deg",
+      "point": [
+        -1.45,
+        24.6,
+        4.805
+      ],
+      "aim": [
+        2.75,
+        23.7,
+        1.9
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "accent.gallery.bust.e2n",
+      "type": "track-spot.3000k.12deg",
+      "point": [
+        -1.45,
+        21.4,
+        4.805
+      ],
+      "aim": [
+        2.75,
+        20.5,
+        1.9
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "accent.gallery.bust.e3s",
+      "type": "track-spot.3000k.12deg",
+      "point": [
+        -1.45,
+        18.6,
+        4.805
+      ],
+      "aim": [
+        2.75,
+        17.7,
+        1.9
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "accent.gallery.bust.e3n",
+      "type": "track-spot.3000k.12deg",
+      "point": [
+        -1.45,
+        15.4,
+        4.805
+      ],
+      "aim": [
+        2.745,
+        14.5,
+        1.9
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "accent.gallery.bust.e4s",
+      "type": "track-spot.3000k.12deg",
+      "point": [
+        -1.45,
+        12.6,
+        4.805
+      ],
+      "aim": [
+        2.75,
+        11.7,
+        1.9
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "accent.gallery.bust.e4n",
+      "type": "track-spot.3000k.12deg",
+      "point": [
+        -1.45,
+        9.4,
+        4.805
+      ],
+      "aim": [
+        2.75,
+        8.5,
+        1.9
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "accent.gallery.bust.w1s",
+      "type": "track-spot.3000k.12deg",
+      "point": [
+        1.45,
+        30.6,
+        4.805
+      ],
+      "aim": [
+        -2.75,
+        29.7,
+        1.9
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "accent.gallery.bust.w1n",
+      "type": "track-spot.3000k.12deg",
+      "point": [
+        1.45,
+        27.4,
+        4.805
+      ],
+      "aim": [
+        -2.75,
+        26.5,
+        1.9
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "accent.gallery.bust.w2s",
+      "type": "track-spot.3000k.12deg",
+      "point": [
+        1.45,
+        24.6,
+        4.805
+      ],
+      "aim": [
+        -2.74,
+        23.7,
+        1.9
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "accent.gallery.bust.w2n",
+      "type": "track-spot.3000k.12deg",
+      "point": [
+        1.45,
+        21.4,
+        4.805
+      ],
+      "aim": [
+        -2.75,
+        20.5,
+        1.9
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "accent.gallery.bust.w3s",
+      "type": "track-spot.3000k.12deg",
+      "point": [
+        1.45,
+        18.6,
+        4.805
+      ],
+      "aim": [
+        -2.75,
+        17.7,
+        1.9
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "accent.gallery.bust.w3n",
+      "type": "track-spot.3000k.12deg",
+      "point": [
+        1.45,
+        15.4,
+        4.805
+      ],
+      "aim": [
+        -2.75,
+        14.5,
+        1.9
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "accent.gallery.bust.w4s",
+      "type": "track-spot.3000k.12deg",
+      "point": [
+        1.45,
+        12.6,
+        4.805
+      ],
+      "aim": [
+        -2.75,
+        11.7,
+        1.9
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "accent.gallery.bust.w4n",
+      "type": "track-spot.3000k.12deg",
+      "point": [
+        1.45,
+        9.4,
+        4.805
+      ],
+      "aim": [
+        -2.75,
+        8.5,
+        1.9
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "accent.gallery.herm.w",
+      "type": "track-spot.3000k.12deg",
+      "point": [
+        1.45,
+        29.53,
+        4.805
+      ],
+      "aim": [
+        -2.45,
+        30.73,
+        1.6
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "accent.gallery.herm.e",
+      "type": "track-spot.3000k.12deg",
+      "point": [
+        -1.45,
+        29.53,
+        4.805
+      ],
+      "aim": [
+        2.45,
+        30.73,
+        1.6
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "accent.gallery.plinth.2.w",
+      "type": "track-spot.3000k.29deg",
+      "point": [
+        -1.45,
+        23.0,
+        4.805
+      ],
+      "aim": [
+        0.0,
+        22.1,
+        1.0
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "accent.gallery.plinth.2.e",
+      "type": "track-spot.3000k.29deg",
+      "point": [
+        1.45,
+        21.2,
+        4.805
+      ],
+      "aim": [
+        0.0,
+        22.1,
+        1.0
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "accent.gallery.plinth.3.w",
+      "type": "track-spot.3000k.29deg",
+      "point": [
+        -1.45,
+        17.0,
+        4.805
+      ],
+      "aim": [
+        0.0,
+        16.1,
+        1.0
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "accent.gallery.plinth.3.e",
+      "type": "track-spot.3000k.29deg",
+      "point": [
+        1.45,
+        15.2,
+        4.805
+      ],
+      "aim": [
+        0.0,
+        16.1,
+        1.0
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "accent.tribune.niche.n",
+      "type": "track-spot.3000k.20deg",
+      "point": [
+        0.801,
+        -4.123,
+        4.79
+      ],
+      "aim": [
+        0.0,
+        -6.81,
+        1.68
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "accent.tribune.niche.ne",
+      "type": "track-spot.3000k.20deg",
+      "point": [
+        3.971,
+        -1.367,
+        4.79
+      ],
+      "aim": [
+        5.677,
+        -3.277,
+        1.68
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "accent.tribune.niche.nw",
+      "type": "track-spot.3000k.20deg",
+      "point": [
+        -3.17,
+        -2.755,
+        4.79
+      ],
+      "aim": [
+        -5.913,
+        -3.414,
+        1.68
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "accent.tribune.niche.se",
+      "type": "track-spot.3000k.20deg",
+      "point": [
+        3.17,
+        2.755,
+        4.79
+      ],
+      "aim": [
+        5.668,
+        3.272,
+        1.68
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "accent.tribune.niche.sw",
+      "type": "track-spot.3000k.20deg",
+      "point": [
+        -3.971,
+        1.367,
+        4.79
+      ],
+      "aim": [
+        -5.899,
+        3.406,
+        1.66
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "accent.tribune.bust.n-a",
+      "type": "track-spot.3000k.12deg",
+      "point": [
+        -0.612,
+        -4.357,
+        4.917
+      ],
+      "aim": [
+        -1.625,
+        -6.066,
+        1.9
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "accent.tribune.bust.ne-a",
+      "type": "track-spot.3000k.12deg",
+      "point": [
+        3.467,
+        -2.709,
+        4.917
+      ],
+      "aim": [
+        4.405,
+        -4.405,
+        1.9
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "accent.tribune.bust.ne-b",
+      "type": "track-spot.3000k.12deg",
+      "point": [
+        4.357,
+        -0.612,
+        4.917
+      ],
+      "aim": [
+        6.061,
+        -1.624,
+        1.9
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "accent.tribune.bust.nw-a",
+      "type": "track-spot.3000k.12deg",
+      "point": [
+        -4.08,
+        -1.648,
+        4.917
+      ],
+      "aim": [
+        -6.066,
+        -1.625,
+        1.9
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "accent.tribune.bust.nw-b",
+      "type": "track-spot.3000k.12deg",
+      "point": [
+        -2.709,
+        -3.467,
+        4.917
+      ],
+      "aim": [
+        -4.441,
+        -4.441,
+        1.9
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "accent.tribune.plinth.e.a",
+      "type": "track-spot.3000k.20deg",
+      "point": [
+        3.753,
+        -1.995,
+        4.826
+      ],
+      "aim": [
+        5.1,
+        0.0,
+        1.6
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "accent.tribune.plinth.e.b",
+      "type": "track-spot.3000k.20deg",
+      "point": [
+        3.753,
+        1.995,
+        4.826
+      ],
+      "aim": [
+        5.1,
+        0.0,
+        1.6
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "accent.tribune.plinth.w.a",
+      "type": "track-spot.3000k.29deg",
+      "point": [
+        -3.753,
+        1.995,
+        4.826
+      ],
+      "aim": [
+        -5.1,
+        0.0,
+        1.6
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "accent.tribune.plinth.w.b",
+      "type": "track-spot.3000k.29deg",
+      "point": [
+        -3.753,
+        -1.995,
+        4.826
+      ],
+      "aim": [
+        -5.1,
+        0.0,
+        1.6
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "accent.tribune.centre.1",
+      "type": "track-spot.3000k.20deg",
+      "point": [
+        0.0,
+        2.3,
+        4.537
+      ],
+      "aim": [
+        0.0,
+        0.0,
+        1.2
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "accent.tribune.centre.2",
+      "type": "track-spot.3000k.20deg",
+      "point": [
+        -1.992,
+        -1.15,
+        4.537
+      ],
+      "aim": [
+        0.0,
+        0.0,
+        1.2
+      ],
+      "operation": "presence"
+    },
+    {
+      "id": "accent.tribune.centre.3",
+      "type": "track-spot.3000k.20deg",
+      "point": [
+        1.992,
+        -1.15,
+        4.537
+      ],
+      "aim": [
+        0.0,
+        0.0,
+        1.2
+      ],
+      "operation": "presence"
+    }
+  ],
+  "targets": [
+    {
+      "surface": "classical-hall.floor.white",
+      "class": "circulation",
+      "lux": [
+        100,
+        100
+      ],
+      "source": "UseTargets"
+    },
+    {
+      "surface": "classical-hall.wall.field",
+      "class": "circulation",
+      "lux": [
+        75,
+        75
+      ],
+      "source": "UseTargets"
+    },
+    {
+      "surface": "classical-hall.vault.gallery",
+      "class": "circulation",
+      "lux": [
+        50,
+        50
+      ],
+      "source": "UseTargets"
+    },
+    {
+      "surface": "classical-hall.vault.annular",
+      "class": "circulation",
+      "lux": [
+        50,
+        50
+      ],
+      "source": "UseTargets"
+    },
+    {
+      "surface": "classical-hall.dome",
+      "class": "circulation",
+      "lux": [
+        50,
+        50
+      ],
+      "source": "UseTargets"
+    },
+    {
+      "surface": "classical-hall.cast",
+      "class": "stone-and-bronze",
+      "lux": [
+        300,
+        null
+      ],
+      "source": "Care"
+    }
+  ],
+  "design": [
+    {
+      "brighter": "classical-hall.cast",
+      "darker": "classical-hall.niche.interior",
+      "ratio": [
+        4.0,
+        10.0
+      ],
+      "note": "Each niche cast's lit front at least 4 x its niche's red back at the same height: the white-on-red reading of the Braccio Nuovo. Day and night."
+    },
+    {
+      "brighter": "classical-hall.laylight.glass",
+      "darker": "classical-hall.cast",
+      "ratio": [
+        1.0,
+        10.0
+      ],
+      "note": "The laylights are the brightest surfaces in view, then the lit casts."
+    },
+    {
+      "brighter": "classical-hall.dome",
+      "darker": "classical-hall.vault.annular",
+      "ratio": [
+        1.0,
+        3.0
+      ],
+      "note": "Tribune: dome coffers (round the lit eye) >= annular vault >= outer wall."
+    },
+    {
+      "brighter": "classical-hall.vault.annular",
+      "darker": "classical-hall.wall.field",
+      "ratio": [
+        1.0,
+        3.0
+      ],
+      "note": "Tribune: annular vault >= outer wall. Gallery: coffers round each lantern >= cream wall."
+    },
+    {
+      "brighter": "classical-hall.wall.field",
+      "darker": "classical-hall.niche.interior",
+      "ratio": [
+        1.0,
+        4.0
+      ],
+      "note": "The cream wall above the dado reads lighter than the red niches."
+    }
+  ]
+}
