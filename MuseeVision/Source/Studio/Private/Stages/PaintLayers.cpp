@@ -21,7 +21,7 @@ namespace Musee::Studio
 	namespace
 	{
 		/** The revisions of these rules: raise one whenever its asset would be made differently from the same inputs. */
-		constexpr int64 WorkImageRevision = 1;
+		constexpr int64 WorkImageRevision = 2;
 		constexpr int64 PaintLayerRevision = 2;
 
 		/** The hash of an image file's bytes, or empty when it can't be read. */

@@ -583,7 +583,7 @@ bool FArtPaperTest::RunTest(const FString& Parameters)
 	TArray<FFormMadePiece> Pieces;
 	TArray<FMuseeFinding> Findings;
 	GatherArt(Tests::Cabinet(), Pieces, Findings);
-	TestEqual(TEXT("A scroll, not made yet, is the one finding"), Findings.Num(), 1);
+	TestEqual(TEXT("A handscroll with no mount to lie in is the one finding"), Findings.Num(), 1);
 	const FFormMadePiece* Print = Tests::FindPiece(Pieces, TEXT("paper.monet-impression-sunrise"));
 	const FFormMadePiece* Mount = Tests::FindPiece(Pieces, TEXT("paper.monet-impression-sunrise.mount"));
 	const FFormMadePiece* Glazing = Tests::FindPiece(Pieces, TEXT("paper.monet-impression-sunrise.glazing"));
@@ -770,7 +770,7 @@ bool FArtPanelAndTapestryTest::RunTest(const FString& Parameters)
 	TArray<FFormMadePiece> Pieces;
 	TArray<FMuseeFinding> Findings;
 	GatherArt(Tests::Hangings(), Pieces, Findings);
-	TestTrue(TEXT("A handscroll on silk, not made yet, is the one finding"), Findings.Num() == 1 && Findings[0].Summary.Contains(TEXT("handscroll")));
+	TestEqual(TEXT("Every work of the hangings is made, without a finding"), Findings.Num(), 0);
 	const FFormMadePiece* Face = Tests::FindPiece(Pieces, TEXT("panel.monet-impression-sunrise"));
 	const FFormMadePiece* Board = Tests::FindPiece(Pieces, TEXT("panel.monet-impression-sunrise.board"));
 	const FFormMadePiece* Cradle = Tests::FindPiece(Pieces, TEXT("panel.monet-impression-sunrise.cradle"));

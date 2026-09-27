@@ -3,67 +3,41 @@
 #include "FormMake.h"
 #include "MuseeCollision.h"
 #include "Objects/ObjectMaking.h"
+#include "Objects/ScrollDrawing.h"
 #include "Plan/EntryContext.h"
 
 namespace Musee::ArtMaking
 {
+	FFormDrawing ArtDrawing(FName Name, FName Surface, FFormExtrusion&& Shape, const FMuseeFrame& Frame)
+	{
+		FFormDrawing Drawing = FFormDrawing::Of(Name, Surface, MoveTemp(Shape));
+		Drawing.Frame = Frame;
+		Drawing.Collision = Collision::Solid.Profile();
+		Drawing.Drawer = TEXT("Art");
+		return Drawing;
+	}
+
+	FFormDrawing Rod(FName Name, FName Surface, const FVector& Start, const FVector& Axis, const FVector& Across, double Length, double Radius)
+	{
+		FFormExtrusion Circle;
+		Circle.Outline = FFormProfile::Ellipse(FVector2D::ZeroVector, Radius, Radius, 0.0, false);
+		Circle.DepthMeters = Length;
+		// The drawing's z is x cross y: with x across the axis and y the axis cross x, z is the axis.
+		return ArtDrawing(Name, Surface, MoveTemp(Circle), FrameAlong(Start, Across, FVector::CrossProduct(Axis, Across)));
+	}
+
+	FFormDrawing MountSheet(FName Name, FName Surface, const FScrollWall& Wall, const FVector2D& Corner, const FVector2D& Size, const FVector2D& Window,
+		const FVector2D& Painting, double Face, double Thickness)
+	{
+		FFormExtrusion Silk;
+		Silk.Outline = FFormProfile::Rectangle(FVector2D::ZeroVector, Size);
+		Silk.Holes.Add(FFormProfile::Rectangle(Window, Window + Painting));
+		Silk.DepthMeters = Thickness;
+		return ArtDrawing(Name, Surface, MoveTemp(Silk), FrameAlong(Wall.At(Corner.X, Face, Corner.Y), Wall.Along, Wall.Up));
+	}
+
 	namespace
 	{
-		/** The wall a scroll hangs on, as the directions and points it is drawn in: along the wall, out of it, up. */
-		struct FScrollWall
-		{
-			const FMuseeFrame& Wall;
-			FVector Along;
-			FVector Out;
-			FVector Up;
-
-			explicit FScrollWall(const FMuseeFrame& InWall)
-				: Wall(InWall), Along(InWall.DirectionToParent(FVector::ForwardVector)), Out(InWall.DirectionToParent(FVector::RightVector)),
-				Up(InWall.DirectionToParent(FVector::UpVector))
-			{
-			}
-
-			/** A point so far along the wall, out of it and up. */
-			FVector At(double AlongMeters, double OutMeters, double UpMeters) const { return Wall.PointToParent(FVector(AlongMeters, OutMeters, UpMeters)); }
-		};
-
-		/** A drawing of Art's in its surface, colliding as a solid. */
-		FFormDrawing ArtDrawing(FName Name, FName Surface, FFormExtrusion&& Shape, const FMuseeFrame& Frame)
-		{
-			FFormDrawing Drawing = FFormDrawing::Of(Name, Surface, MoveTemp(Shape));
-			Drawing.Frame = Frame;
-			Drawing.Collision = Collision::Solid.Profile();
-			Drawing.Drawer = TEXT("Art");
-			return Drawing;
-		}
-
-		/**
-		 * A round rod from Start along the unit Axis for Length: a circle of its radius pushed along the axis. Across is any
-		 * direction square to the axis, the circle's x.
-		 */
-		FFormDrawing Rod(FName Name, FName Surface, const FVector& Start, const FVector& Axis, const FVector& Across, double Length, double Radius)
-		{
-			FFormExtrusion Circle;
-			Circle.Outline = FFormProfile::Ellipse(FVector2D::ZeroVector, Radius, Radius, 0.0, false);
-			Circle.DepthMeters = Length;
-			// The drawing's z is x cross y: with x across the axis and y the axis cross x, z is the axis.
-			return ArtDrawing(Name, Surface, MoveTemp(Circle), FrameAlong(Start, Across, FVector::CrossProduct(Axis, Across)));
-		}
-
-		/**
-		 * The mount: a sheet of its silk the mount's size, the painting's window cut through it, its face on Face and its back
-		 * the mount's thickness behind, drawn from its lower-left corner across the wall and up it and pushed into the wall.
-		 */
-		FFormDrawing MountSheet(FName Name, FName Surface, const FScrollWall& Wall, const FVector2D& Corner, const FVector2D& Size, const FVector2D& Window,
-			const FVector2D& Painting, double Face, double Thickness)
-		{
-			FFormExtrusion Silk;
-			Silk.Outline = FFormProfile::Rectangle(FVector2D::ZeroVector, Size);
-			Silk.Holes.Add(FFormProfile::Rectangle(Window, Window + Painting));
-			Silk.DepthMeters = Thickness;
-			return ArtDrawing(Name, Surface, MoveTemp(Silk), FrameAlong(Wall.At(Corner.X, Face, Corner.Y), Wall.Along, Wall.Up));
-		}
-
 		/**
 		 * The top stick: a half-round the mount's width, its flat against the mount's back with its middle on the mount's top
 		 * edge, its round towards the wall.

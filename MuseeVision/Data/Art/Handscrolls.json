@@ -1,0 +1,64 @@
+{
+  "$sources": [
+    "Each handscroll as the collection's photographs show it (assets/paintings, assets/paintings_hires; assets/paintings/CREDITS.md for where each came from). A handscroll is read from its beginning at the right to its end at the left, so its photographs lie before the reader, left to right, in the reverse of their reading order.",
+    "The order of a work's numbered photographs was read from the photographs themselves, not their numbers: where each begins and ends (a title, an opening line, a dated close, seals), whether one's edge continues into the next (the step in colour across the joint, full resolution, over the step between neighbouring columns within each photograph: about 1 where the joint is continuous, 1.8 or more where it is not), and, where the collection holds a whole view, where each lies in it (normalised correlation).",
+    "Proportions are width over height in pixels, against the catalogue's size in the stage's Hang.json, measured on the work's window of each photograph.",
+    "A window keeps off the sheet what a photograph caught beside the work: the mount's silk at its head and foot, a separator, a frontispiece, a neighbouring sheet. Its sides were read at full resolution from the step in colour where the work's paper or silk meets them (column and row medians, and a look at each edge). Where a photograph is not quite square to the scroll, so an edge wanders by some pixels along it, the window is the largest rectangle that holds none of the mount, and what of the work that cuts is said. Photographs cut from one whole view share one window at head and foot, so their joints stay continuous.",
+    "The mount's parts before the work at its right end, its separator (前隔水) and frontispiece (引首), are the National Palace Museum's record of each work (digitalarchive.npm.gov.tw, Painting/Content, Dept=P: pid 3 the Nephew, 14901 the Autobiography, 14714 the Cold Food, 912 the Shu Su), lengths along the scroll: the Nephew 11.8 and 59.6 cm, the Autobiography 10.2 and 136.3 cm, the Cold Food 12 and 53.2 cm, the Shu Su 14 and 58.4 cm. The Orchid Pavilion, the Thousand Li and the Qingming are the Palace Museum's, Beijing, whose record of their mounts was not read: they give none, and so wind none at the stave."
+  ],
+  "$units": {
+    "SeparatorMeters": "m",
+    "FrontispieceMeters": "m"
+  },
+  "$records": [
+    {
+      "work": "chinese-orchid-pavilion",
+      "evidence": "One photograph, the main text sheet (the seal-covered joining strip at its right was cropped off). It opens at the right with 永和九年歲在癸丑 and runs left. 4096 x 1427 px, 2.870 : 1, against 0.699 x 0.245 m, 2.853 : 1: 0.6 % long."
+    },
+    {
+      "work": "chinese-yan-zhenqing-nephew",
+      "separatorMeters": 0.118,
+      "frontispieceMeters": 0.596,
+      "windows": [ { "image": 1, "from": 0.0277, "to": 0.987, "top": 0.0464, "bottom": 0.9606 } ],
+      "evidence": "One photograph (Commons' rendering of the National Palace Museum's TIFF). It opens at the right with 維乾元元年 and runs left. Above y 45 and below y 1385 of its 1423 px lies the mount's white silk, and between it and the draft's paper a narrow tan inlay strip (y 45 to 66, 1367 to 1385), as the joining strips stand at its two ends (x 64 to 100 at the left, beyond a neighbouring sheet's edge with its seals; x 3563 to 3585 at the right, before the next sheet): the window is the draft's paper, x 100 to 3563 and y 66 to 1367. 3463 x 1301 px, 2.662 : 1, against 0.755 x 0.282 m, 2.677 : 1: 0.6 % short. The whole photograph, 2.537 : 1, was 5.2 % short only because it counted the mount's silk and the inlay in the paper's height."
+    },
+    {
+      "work": "chinese-huaisu-autobiography",
+      "separatorMeters": 0.102,
+      "frontispieceMeters": 1.363,
+      "readingOrder": [2, 1],
+      "windows": [ { "image": 1, "bottom": 0.975 }, { "image": 2, "to": 0.696, "bottom": 0.975 } ],
+      "evidence": "-2 holds the beginning: the text opens with 懷素家長沙 at about x 4400 of its 6408 px, and its paper ends at x 4460. Past it, to the right, -2 holds the mount, not the work: a gold brocade separator with an inscription and seals (x 4460 to 4617), a paper strip of seals (4617 to 4945), and the frontispiece 藏真自序 in large seal script on its own paper (4945 to 6408); so the window ends at x 4460 (0.696). -1 holds the end: at its left end the date 大曆丁巳冬十月廿八日 (777) that closes the text. -1's right edge continues into -2's left edge (edge step ratio 1.06; 6.74 the other way). Both show the mount's gold silk along their foot, below y 468 to 477 of 480 as the photographs wander: the window stops at 468 (0.975). The text so windowed is 10867 x 468 px, 23.22 : 1, against 7.55 x 0.283 m, 26.68 : 1: 13.0 % short. Faint lines about y 20 and y 449 may be the sheet's edges within an inlay, which the photographs' 480 px can't settle; were they, it would still be 4.2 % short. The shortfall is the scan's, not the catalogue's: the museum's record gives the text (本幅) 28.3 x 755 cm apart from the frontispiece (引首, 30.5 x 136.3 cm) and the separator (前隔水, 10.2 cm), so 7.55 m is the text alone; and the separator in -2, 157 px at 10.2 cm, sets the photograph's scale along the scroll at 15.4 px/cm, at which the text's 10867 px are 7.06 m, 6.5 % short of it, so the stitched scan runs short along the text itself. No better copy is on Commons: its original, File:Huaisu_-_Autobiography.jpg, is 23427 x 480 px, of which these two are the 0.418 to 0.965 cut. The photographs wanted are the museum's own: its open data holds the whole scroll in 43 photographs of 3058 x 2289 px (IIIF, https://digitalarchive.npm.gov.tw/Integrate/GetJson?cid=14901&dept=P), some 4.8 times these in height. (The collection's CREDITS.md calls these files the text only; -2 is not.)"
+    },
+    {
+      "work": "chinese-su-shi-cold-food",
+      "separatorMeters": 0.12,
+      "frontispieceMeters": 0.532,
+      "windows": [ { "image": 1, "from": 0.0168, "to": 0.9707, "top": 0.0286, "bottom": 0.9757 } ],
+      "evidence": "One photograph. From the right: the mount's pale silk and a gold silk separator with seals (x 7848 to 8085 of 8085 px); Su Shi's two poems, opening with 自我來黃州 and closing with 右黃州寒食二首 (about x 7800 to 3900); the Qianlong emperor's inscription, 東坡書豪宕秀逸 ... 乾隆戊辰清和月上澣八日御識 (about x 3440 to 2880); Huang Tingjian's colophon, 東坡此詩似李太白 (about x 2800 to 540); Dong Qichang's colophon, 余生平見東坡先生真跡 ... 董其昌觀并題 (about x 420 to 220); and at the far left the mount's gold silk (x 0 to 136). The papers' head and foot meet the mount's silk at y 16 to 41 and y 1365 to 1387, the photograph not quite square to the scroll: the window is x 136 to 7848 and y 40 to 1366, which cuts up to 24 px (6 mm) of the colophon paper's head and 18 px of its foot at the left. 7712 x 1326 px, 5.816 : 1, against 1.995 x 0.342 m, 5.833 : 1: 0.3 % short, so the catalogue's length runs from the poems to Dong Qichang's colophon."
+    },
+    {
+      "work": "chinese-mi-fu-shu-su",
+      "separatorMeters": 0.14,
+      "frontispieceMeters": 0.584,
+      "windows": [ { "image": 1, "from": 0.0231, "to": 0.9913, "top": 0.0227, "bottom": 0.9785 } ],
+      "evidence": "One photograph, the text on its ruled Sichuan silk. It opens at the right with the title 擬古 and ends at the left with the silk's own note, 慶曆甲申歲東川造, among seals. The mount is caught round it: its gold silk along the head (y 0 to 18 of 792 px) and the foot (y 775 on), a brocade strip past the silk's right edge (x 7502 on), and at the left, past the silk's edge at x 175, a patterned silk separator with an inscription of the Qianlong emperor (御製 ...). The window is x 175 to 7502 and y 18 to 775: 7327 x 757 px, 9.679 : 1, against 2.708 x 0.278 m, 9.741 : 1: 0.6 % short."
+    },
+    {
+      "work": "chinese-thousand-li",
+      "readingOrder": [4, 3, 2, 1],
+      "evidence": "The four photographs are equal cuts of the collection's whole view, chinese-thousand-li.jpg (16384 x 700 px, the same 23.41 : 1): found in it by correlation, -1 starts at 0.000 of its width, -2 at 0.250, -3 at 0.500, -4 at 0.750 (r 0.93 to 0.99), so they lie left to right as numbered. The scroll opens at -4's right end, where an inscription in several columns with its seals stands on the silk above the first mountains, and ends at -1's left, among collectors' seals. The joints 1|2 and 2|3 are continuous (edge step ratio 1.47, 1.38; 1.8 or more for every other pairing), 3|4 less clearly (1.96) where open water and mist meet. Joined, 37392 x 1598 px, 23.40 : 1, against 11.915 x 0.515 m, 23.14 : 1: 1.1 % long. paintings_hires/chinese-thousand-li-1 to -4.jpg are four copies of one file, a whole view of the mounted scroll (39974 x 1600 px, the cuts found in it from 0.047 to 0.983 of its width, with its frontispiece and colophon), not sections; they are not used."
+    },
+    {
+      "work": "chinese-qingming",
+      "readingOrder": [4, 3, 2, 1],
+      "windows": [
+        { "image": 1, "top": 0.0164, "bottom": 0.9814 },
+        { "image": 2, "top": 0.0164, "bottom": 0.9814 },
+        { "image": 3, "top": 0.0164, "bottom": 0.9814 },
+        { "image": 4, "to": 0.914, "top": 0.0164, "bottom": 0.9814 }
+      ],
+      "evidence": "-4 holds the beginning: the countryside of bare willows and scattered farmsteads where the scroll opens; past x 6684 of its 7313 px (0.914) the photograph shows the mount's pale silk with seals, not the painting. -3 and -2 carry the river, its boats and the Rainbow Bridge; -1 ends in the city gate and the streets within it. -1|-2, -2|-3 and -3|-4 are continuous (edge step ratio 1.03, 1.02, 1.03; 1.8 to 8.0 for every other pairing). All four show the mount's pale silk at the head and the foot, the painting's edge wandering along the scroll from y 3 to 23 at the head and y 1374 to 1388 at the foot of their 1400 px; cut from one whole view, they share one window, y 23 to 1374, which cuts up to 20 px (4 mm) of the painting's head in -1. Joined within their windows, 28622 x 1351 px, 21.19 : 1, against 5.287 x 0.248 m, 21.32 : 1: 0.6 % short. The whole photographs, 20.44 : 1, were 4.1 % short only because they counted the mount's silk in the painting's height."
+    }
+  ]
+}

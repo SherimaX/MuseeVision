@@ -1,0 +1,88 @@
+{
+  "schema": "musee.matter.shading.substance/1",
+  "key": "nephrite",
+  "name": "White nephrite (和田白玉, Hetian, Xinjiang)",
+  "family": "accent",
+  "record": "Palette.json",
+  "master": "stone",
+  "accentOf": "stone",
+  "dielectric": {
+    "diffuseAlbedo": {
+      "value": [
+        84.0,
+        -1.0,
+        9.0
+      ],
+      "space": "CIELAB (D65, 2 deg)",
+      "unit": "CIELAB",
+      "grade": "unverified",
+      "source": "Palette.json: accent.jade",
+      "note": "The warm white of Hetian 'mutton-fat' nephrite; no measured colour was read: a first value read from museum photographs of Qing jade scroll knobs."
+    },
+    "refractiveIndex": {
+      "value": 1.61,
+      "unit": "1",
+      "grade": "secondary",
+      "source": "Nephrite (tremolite-actinolite) has indices of 1.600 to 1.627 (GIA Gem Reference Guide; Handbook of Mineralogy, tremolite)",
+      "note": "The index read on a gemmological refractometer, the low end of the range for the iron-poor white stone."
+    },
+    "porosity": {
+      "value": 0.002,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.jade",
+      "note": "A felt of interlocking fibres, one of the toughest stones worked; a first open porosity for a dense stone, no measurement read."
+    },
+    "wettingDepth": {
+      "value": 0.1,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: accent.jade",
+      "note": "So dense a stone takes up almost nothing: the depth whose pores govern the face's look when wet."
+    }
+  },
+  "structure": {
+    "grain": {
+      "value": 0.01,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: accent.jade",
+      "note": "Its tremolite fibres, microns across and felted: finer than the eye resolves on a knob."
+    },
+    "bed": {
+      "value": 10.0,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: accent.jade",
+      "note": "The faint cloud (the stone's 'cotton') a knob shows across its turned face."
+    },
+    "bedAspect": {
+      "value": 1.2,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.jade",
+      "note": "A felt, with hardly any direction."
+    },
+    "hurst": {
+      "value": 0.7,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Candela et al. 2012, Journal of Geophysical Research 117, B08409 (fault surfaces, 0.6 to 0.8; cited in Stone.ush)",
+      "note": "The middle of the range measured on rock surfaces, as the travertine's."
+    },
+    "toneSpread": {
+      "value": 0.05,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.jade",
+      "note": "A first half-range of ln(albedo) across one face: an even white."
+    },
+    "roughnessSpread": {
+      "value": 0.1,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.jade",
+      "note": "A first half-range of ln(roughness) across one face."
+    }
+  }
+}

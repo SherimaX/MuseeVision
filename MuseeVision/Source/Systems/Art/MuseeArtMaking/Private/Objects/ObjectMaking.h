@@ -9,6 +9,7 @@
 #include "Frame/Moulding.h"
 #include "MuseeFinding.h"
 #include "MuseeStageDresser.h"
+#include "Objects/HandscrollRecords.h"
 #include "Objects/HangingRecords.h"
 #include "Ware/WareMesh.h"
 
@@ -16,7 +17,7 @@ namespace Musee::ArtMaking
 {
 	/**
 	 * What every object of a stage is made with, read once: its stage and plan, each frame style's moulding, ware's
-	 * forms, how works are cast, the scrolls' fittings, the panels' construction and the books' bindings.
+	 * forms, how works are cast, the scrolls' and handscrolls' fittings, the panels' construction and the books' bindings.
 	 */
 	struct FObjectMaking
 	{
@@ -27,6 +28,7 @@ namespace Musee::ArtMaking
 		TOptional<TValueOrError<FArtCasts, FString>> CastRecord;
 		TOptional<TValueOrError<FArtVessels, FString>> VesselRecord;
 		TOptional<TValueOrError<FArtScrollFittings, FString>> ScrollFittings;
+		TOptional<TValueOrError<FArtHandscrollFittings, FString>> HandscrollFittings;
 		TOptional<TValueOrError<FArtPanelConstruction, FString>> PanelConstruction;
 		TOptional<TValueOrError<TArray<FArtBook>, FString>> Bindings;
 
@@ -45,6 +47,9 @@ namespace Musee::ArtMaking
 		/** A hanging scroll's fittings (Data/Art/Scrolls.json), or why they can't be read. */
 		const TValueOrError<FArtScrollFittings, FString>& Scrolls();
 
+		/** A handscroll's fittings (Data/Art/Handscroll.json), or why they can't be read. */
+		const TValueOrError<FArtHandscrollFittings, FString>& Handscrolls();
+
 		/** How a panel is made (Data/Art/Panel.json), or why it can't be read. */
 		const TValueOrError<FArtPanelConstruction, FString>& Panels();
 
@@ -60,10 +65,11 @@ namespace Musee::ArtMaking
 
 	/**
 	 * A sheet as a piece, in its own frame (x to the viewer's right, y out of its face, z up it), its face at Front, its
-	 * left edge ImageLeftMeters into the image laid over it; glass is translucent and so not Nanite.
+	 * left edge ImageLeftMeters into the image laid over it and its top edge ImageTopMeters below the image's; glass is
+	 * translucent and so not Nanite.
 	 */
 	[[nodiscard]] FFormMadePiece SheetPiece(FName Name, FName Surface, const FLayerFinish& Material, const FMuseeFrame& Frame, const FVector2D& Size,
-		double Thickness, double Front, bool bGlass, double ImageLeftMeters = 0.0);
+		double Thickness, double Front, bool bGlass, double ImageLeftMeters = 0.0, double ImageTopMeters = 0.0);
 
 	/** Whether a work that hangs flat on its wall can be: on a straight wall; a finding when its wall is curved. */
 	[[nodiscard]] bool OnStraightWall(const FObjectMaking& Making, const FArtHangEntry& Entry, TArray<FMuseeFinding>& OutFindings);
@@ -140,6 +146,23 @@ namespace Musee::ArtMaking
 	 * its hook.
 	 */
 	void MakeHangingScroll(FObjectMaking& Making, const FWorkPlan& Plan, const FCanvasPlan& Canvas, TArray<FFormMadePiece>& OutPieces,
+		TArray<FMuseeFinding>& OutFindings);
+
+	/**
+	 * A handscroll opened flat on a case's bed (its Wall anchor: x along the bed, y out of its face, z up its slope), read
+	 * from right to left, its back offWall off the bed:
+	 * - the painting or writing at its `along` and `height`, at its size: its photographs laid across its sheet in its
+	 *   reading order, each a panel in its own layer over the ink on its silk or paper (Data/Art/Supports.json), joined
+	 *   without a seam, never stretched;
+	 * - the mount in the `frame` surface's silk: borders above and below, the bands at the painting's two ends, and to the
+	 *   right of its beginning the lead (the frontispiece silk) and the wrapper as far as they lie unrolled;
+	 * - at the right, the stave (a half-round in the fittings' wood) with the rest of the wrapper wound round it, as long
+	 *   as `wrapperTurns` takes round the scroll rolled whole;
+	 * - at the left, the roller (in the fittings' wood) with the unshown length wound on it to `roll_radius`, in the
+	 *   mount's silk, and its knobs (`mount.knob`) on its ends past the scroll's edges.
+	 * The fittings are Data/Art/Handscroll.json's, the silk's thickness Data/Art/Scrolls.json's.
+	 */
+	void MakeHandscroll(FObjectMaking& Making, const FWorkPlan& Plan, const FCanvasPlan& Canvas, TArray<FFormMadePiece>& OutPieces,
 		TArray<FMuseeFinding>& OutFindings);
 
 	/**

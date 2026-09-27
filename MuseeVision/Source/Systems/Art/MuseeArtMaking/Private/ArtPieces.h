@@ -67,6 +67,8 @@ namespace Musee::ArtMaking
 	 * - a tapestry at its Wall anchor, hanging on the stage's batten and lining;
 	 * - a hanging scroll at its Wall anchor, on silk or paper: the painting in its mount, with its stick, roller, knobs and
 	 *   cord;
+	 * - a handscroll opened on a case's bed (a Wall anchor), on silk or paper: its photographs laid across its sheet in its
+	 *   reading order, in its mount, its stave and wrapper rolled at the right and its roller and knobs at the left;
 	 * - a book lying open, or a loose leaf lying flat, on its Mount anchor (ObjectMaking.h).
 	 * A work the stage builds (`"built": "form"`) is left to the stage. Anything the plan gets wrong is a finding and
 	 * that work isn't made.

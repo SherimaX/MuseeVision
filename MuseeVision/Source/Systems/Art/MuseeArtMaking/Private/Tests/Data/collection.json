@@ -63,6 +63,26 @@
       "collection": "Bayerisches Nationalmuseum",
       "city": "Munich",
       "notes": ""
+    },
+    {
+      "id": "chinese-huaisu-autobiography",
+      "artist": "Huai Su",
+      "title": "Autobiography",
+      "year": "777",
+      "medium": "Handscroll, ink on paper",
+      "collection": "National Palace Museum",
+      "city": "Taipei",
+      "notes": "Its test photographs, -1 and -2, are plain stand-ins at a tenth of the collection's size."
+    },
+    {
+      "id": "chinese-qingming",
+      "artist": "Zhang Zeduan",
+      "title": "Along the River during the Qingming Festival",
+      "year": "early 12th century",
+      "medium": "Handscroll, ink and colour on silk",
+      "collection": "Palace Museum",
+      "city": "Beijing",
+      "notes": "Its test photographs, -1 to -4, are plain stand-ins at a tenth of the collection's size."
     }
   ]
 }

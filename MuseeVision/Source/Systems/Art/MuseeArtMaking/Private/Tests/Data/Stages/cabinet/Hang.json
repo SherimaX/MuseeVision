@@ -37,7 +37,7 @@
     {
       "work": "monet-impression-sunrise-2", "source": "MuseeVision/Source/Systems/Art/MuseeArtMaking/Private/Tests/Data/artworks.json",
       "anchor": "cabinet.wall", "along": 3.0, "height": 1.5, "size": [0.5, 0.2], "support": "paper", "kind": "handscroll", "frame": "none",
-      "care": "works-on-paper", "note": "A scroll, not made yet: a finding."
+      "care": "works-on-paper", "note": "A handscroll with no mount, knobs or rolled end: a finding."
     }
   ]
 }

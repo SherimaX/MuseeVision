@@ -1,0 +1,19 @@
+{
+  "stage": "scrolls",
+  "works": [
+    {
+      "work": "chinese-huaisu-autobiography", "source": "MuseeVision/Source/Systems/Art/MuseeArtMaking/Private/Tests/Data/collection.json",
+      "anchor": "scrolls.bed", "along": 0.2, "height": 0.1,
+      "size": [7.55, 0.283], "support": "paper", "kind": "handscroll", "frame": "scrolls.mount.silk", "care": "works-on-paper",
+      "mount": { "lead": 0.06, "wrapper": 0.0, "roll_radius": 0.025, "knob": "scrolls.mount.knob", "band": 0.025, "border": 0.012 },
+      "note": "A handscroll on paper in two photographs (the test's stand-ins, beside its catalogue), read -2 then -1, opened on a level bed."
+    },
+    {
+      "work": "chinese-qingming", "source": "MuseeVision/Source/Systems/Art/MuseeArtMaking/Private/Tests/Data/collection.json",
+      "anchor": "scrolls.bed", "along": 9.0, "height": 0.1,
+      "size": [5.287, 0.248], "support": "silk", "kind": "handscroll", "frame": "scrolls.mount.silk", "care": "textiles.silk",
+      "mount": { "lead": 0.23, "wrapper": 0.22, "roll_radius": 0.03, "knob": "scrolls.mount.knob", "band": 0.03, "border": 0.012 },
+      "note": "A handscroll on silk in four photographs (the test's stand-ins), each windowed as Data/Art/Handscrolls.json windows the collection's."
+    }
+  ]
+}

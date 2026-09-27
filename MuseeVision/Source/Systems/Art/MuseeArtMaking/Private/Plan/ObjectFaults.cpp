@@ -192,6 +192,38 @@ namespace Musee::ArtMaking
 		}
 
 		/**
+		 * A handscroll lies opened on a case's bed (a Wall anchor: x along the bed, y out of its face, z up its slope), in
+		 * its mount: the mount's silk (its `frame`, a surface of the schedule), its borders above and below and its bands at
+		 * the painting's two ends, the lead unrolled before its beginning and the wrapper after it (zero or more), the knobs'
+		 * surface, and its rolled end, wound round a roller the fittings' size (Data/Art/Handscroll.json).
+		 */
+		TArray<FString> HandscrollFaults(const FMuseeStageContext& Stage, const FArtHangEntry& Entry, const FEntryContext& Context)
+		{
+			TArray<FString> Out;
+			if (!HasAnchor(Stage, Entry, WallAnchorKind))
+			{
+				Out.Add(FString::Printf(TEXT("%s is not a Wall anchor of the stage (a case's bed it is opened on)"), *Entry.Anchor.ToString()));
+			}
+			Out.Append(SurfaceFaults(Context, IsFramed(Entry) ? Entry.Frame : FName(), TEXT("mount")));
+			Out.Append(SurfaceFaults(Context, Entry.Mount.Knob, TEXT("knobs")));
+			const FArtScrollMount& Mount = Entry.Mount;
+			if (Mount.Band <= 0.0f || Mount.Border <= 0.0f || Mount.Lead < 0.0f || Mount.Wrapper < 0.0f || Entry.OffWall < 0.0f)
+			{
+				Out.Add(TEXT("its mount needs borders and bands round the painting of more than zero, and a lead, a wrapper and an offWall of zero or more"));
+			}
+			if (!Context.Handscroll.IsSet())
+			{
+				Out.Add(Context.HandscrollWhy);
+			}
+			else if (Mount.Roll_Radius <= Context.Handscroll->RollerRadiusMeters)
+			{
+				Out.Add(FString::Printf(TEXT("its roll_radius must be more than its roller's %.3f m (Data/%s)"), Context.Handscroll->RollerRadiusMeters,
+					FArtHandscrollFittings::Record));
+			}
+			return Out;
+		}
+
+		/**
 		 * A book or a leaf lies at its centre on a Mount anchor (a case's bed, a lectern's desk), unframed and unglazed (a
 		 * case's glass is the case's), a book bound as Data/Art/Books.json gives it.
 		 */
@@ -227,14 +259,18 @@ namespace Musee::ArtMaking
 			{
 				return HangingScrollFaults(Stage, Entry, Context);
 			}
+			if (Entry.Kind == Kinds::Handscroll)
+			{
+				return HandscrollFaults(Stage, Entry, Context);
+			}
 			if (Entry.Kind == Kinds::Book || Entry.Kind == Kinds::Leaf)
 			{
 				return LyingEntryFaults(Stage, Entry, Context);
 			}
 			if (!Entry.Kind.IsNone())
 			{
-				return { FString::Printf(TEXT("paper made as a %s isn't made yet; a print on its mount, a card on its reader, a hanging scroll, a book and a "
-					"leaf are"), *Entry.Kind.ToString()) };
+				return { FString::Printf(TEXT("paper made as a %s isn't made yet; a print on its mount, a card on its reader, a hanging scroll, a "
+					"handscroll, a book and a leaf are"), *Entry.Kind.ToString()) };
 			}
 			if (HasAnchor(Stage, Entry, WallAnchorKind))
 			{
@@ -243,12 +279,16 @@ namespace Musee::ArtMaking
 			return CardEntryFaults(Stage, Entry, Context);
 		}
 
-		/** Silk is made as a painting mounted as a hanging scroll. */
+		/** Silk is made as a painting mounted as a hanging scroll or a handscroll. */
 		TArray<FString> SilkEntryFaults(const FMuseeStageContext& Stage, const FArtHangEntry& Entry, const FEntryContext& Context)
 		{
+			if (Entry.Kind == Kinds::Handscroll)
+			{
+				return HandscrollFaults(Stage, Entry, Context);
+			}
 			if (Entry.Kind != Kinds::HangingScroll)
 			{
-				return { FString::Printf(TEXT("silk made as a %s isn't made yet; a hanging scroll is"), *Entry.Kind.ToString()) };
+				return { FString::Printf(TEXT("silk made as a %s isn't made yet; a hanging scroll and a handscroll are"), *Entry.Kind.ToString()) };
 			}
 			return HangingScrollFaults(Stage, Entry, Context);
 		}

@@ -10,7 +10,7 @@ The collection as real objects. Modules `MuseeArt` (Runtime: the catalogue, the 
 | `ArtHang.h`, `ArtHangEntry.h`, `ArtWall.h`, `ArtWallPath.h` | `FArtHang`: a stage's `Hang.json`, its curved walls and its works; every field the stages' sheets write |
 | `ArtAfter.h`, `ArtScrollMount.h`, `ArtScanPlacement.h`, `ArtCarrier.h` | an entry's original (`after`), a scroll's mount, a cast's scan and carrier |
 | `ArtCatalogue.h`, `ArtCatalogueEntry.h`, `ArtGallery.h`, `ArtScan.h` | the museum's catalogues, read as they are written |
-| `ArtWork.h` | `FArtWork` (the catalogue's facts, the hang's size, support, care and reproduction, its image, its scan's credit; `Caption`); `Musee::Art::ReadWork`, `FindImage`, `PaintMaterial` (`paint.<id>`, `paint.<id>.<index>`), `RepositoryRoot`, `SourcePath` |
+| `ArtWork.h` | `FArtWork` (the catalogue's facts, the hang's size, support, care and reproduction, its image, its scan's credit; `Caption`); `Musee::Art::ReadWork`, `FindImage`, `FindSectionImages` (a work's numbered photographs, from one folder, distinct), `PaintMaterial` (`paint.<id>`, `paint.<id>.<index>`), `RepositoryRoot`, `SourcePath` |
 | `ArtCare.h`, `ArtLightDose.h` | `Musee::Art::CareClasses`, `Reproductions`, `ReproductionCredit`; `CareFaults` (a dose against a class; a reproduction not held to care is within under any light) |
 | `ArtWorkComponent.h` | `UArtWorkComponent`: a work's label (`IMuseeCaptioned`) and care class, the component its pieces hang from; the tags `musee.work:<id>`, `musee.care:<class>` |
 | `ArtWorkImage.h` (making) | `Musee::ArtMaking::ComposeWorkImage`: composes a texture Studio makes from a work's image |
@@ -77,6 +77,29 @@ Every object is named `<word>.<id>[.<index>]` (`canvas`, `glass`, `paper`, `plat
   `mount.heaven` above); the half-round top stick behind the mount's top edge and the roller in its foot, both in the
   mount's silk; the roller's knobs (`mount.knob`); the cord (`mount.cord`) from two eyes on the stick to its hook
   `mount.hook` above the stick's middle. `Data/Art/Scrolls.json` gives the fittings every mount shares.
+- A handscroll (`kind` `handscroll`, on `silk` or `paper`) lies opened on its case's bed (a Wall anchor: x along the bed,
+  y out of its face, z up its slope), read from right to left:
+  - its painting or writing at its `along` and `height`, at its size, from its photographs: its one photograph, or its
+    numbered ones (`<id>-1`, `-2`..., `Musee::Art::FindSectionImages`) joined in the reading order
+    `Data/Art/Handscrolls.json` gives, right to left, with the evidence it was read from (where each opens and closes,
+    the seams, a whole view's correlation); a photograph's `window` (`from`, `to` along its width, `top`, `bottom` down
+    its height) keeps off the sheet, and out of the proportion, what it caught beside the work: the mount's silk at the
+    head and foot, a separator, a frontispiece, a neighbouring sheet;
+  - each photograph a panel of the sheet (`<name>.section.<n>`) in its own layer `paint.<id>.<n>` over the ink on its
+    silk or paper, at its own proportion, never stretched: joined, they are laid to cover the sheet, what overruns it cut
+    evenly from two opposite edges; a proportion that strays from the catalogue's by more than
+    `Data/Art/Handscroll.json`'s tolerance (3 %) is a finding, and the work is made all the same;
+  - its mount in the `frame` surface's silk (`<name>.mount`): `mount.border` above and below, `mount.band` at the
+    painting's two ends, and beyond its beginning the lead (`mount.lead`) and the wrapper as far as it lies unrolled
+    (`mount.wrapper`);
+  - at the right, the stave (`<name>.stave`, a half-round) with the rest of the wrapper wound round it
+    (`<name>.wrapper`), as long as `wrapperTurns` takes round the scroll rolled whole, and over it what of the mount's
+    separator and frontispiece (`separatorMeters`, `frontispieceMeters` in `Data/Art/Handscrolls.json`, the museum's
+    record) the band and lead don't lay open; a wrapper laid unrolled over a front still wound is a finding;
+  - at the left, the unshown length wound on the roller to `mount.roll_radius` (`<name>.roll`), the roller
+    (`<name>.roller`) and its knobs (`<name>.knob.foot`, `.head`, in `mount.knob`'s surface) past the scroll's edges.
+  `Data/Art/Handscroll.json` gives the fittings every handscroll shares and their wood; the silk's thickness is
+  `Data/Art/Scrolls.json`'s. A work's image is clamped at its edges, so panels meet without a seam.
 - A book (`kind` `book`) lies open at its `centre` on a Mount anchor (a case's bed, a lectern's desk; the anchor's z out
   of it), its foot to its reader (`facing_deg`): on each side its board (its cover, standing its square past the leaves),
   the leaves that side holds at its `opening`, and the page on top. One object is the opening whole, showing its one
@@ -101,7 +124,7 @@ holds, made by Art or built by its stage.
 
 - More mouldings (Albion's reeded and Watts frames and their gilt slips, the oval and arched sights), carved ornament on
   the moulding; the hairline joints between a work's canvases; the stretcher's wood and keys; frames on curved walls.
-- Handscrolls on their beds (lead, wrapper and rolled end); an open book's leaves curving up to its spine (they lie
+- A handscroll's tie and toggle, its wrapper's own brocade and the backing paper its rolls show; an open book's leaves curving up to its spine (they lie
   flat); a scroll's jingyan ribbons.
 - `Musee::Art::Targets` (FLightTarget from Care.json) and the checks `Art.TrueSize` (with `after`), `Art.WithinCare`
   (over `CareFaults`), `Art.ColorManaged`, `Art.Credited`, `Art.HangResolves`.
@@ -109,7 +132,7 @@ holds, made by Art or built by its stage.
   that Art doesn't make yet. A cast's part by more than a band of heights (the dancer's satin ribbon; the hands the
   skirt's band takes). Painted porcelain's decoration (its image, which the collection doesn't hold); a sancai lead glaze
   (Matter has none); a vessel's rim band or repair (the Ding basin's copper, the Longquan vase's lacquer and gold). A vessel's handles (Turned.json
-- Casts, stone, ceramic in the round other than De Morgan's ware, and handscrolls: the supports and kinds the plans
+- Casts, stone, and ceramic in the round other than De Morgan's ware: the supports and kinds the plans
   name that Art doesn't make yet. A vessel's handles (Turned.json
   keeps none yet); a lustre's metallic sheen (the lustre layer is the glaze's gloss over the image); a daguerreotype's
   case.

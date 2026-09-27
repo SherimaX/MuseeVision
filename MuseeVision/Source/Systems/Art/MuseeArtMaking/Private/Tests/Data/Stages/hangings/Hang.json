@@ -38,10 +38,6 @@
       "work": "albion-kelmscott-chaucer", "source": "data/albion.json", "anchor": "hangings.lectern", "canvas": 1, "image": "page_001",
       "centre": [10.0, 0.0, 1.0], "size": [0.29, 0.425], "support": "paper", "kind": "book", "opening": 0, "facing_deg": 180.0,
       "frame": "none", "care": "works-on-paper", "note": "Its recto."
-    },
-    {
-      "work": "chinese-mi-fu-shu-su", "source": "assets/collection.json", "anchor": "hangings.case", "along": 1.0, "height": 0.5, "size": [2.708, 0.278],
-      "support": "silk", "kind": "handscroll", "frame": "hangings.mount.silk", "care": "textiles.silk", "note": "A handscroll, not made yet: a finding."
     }
   ]
 }

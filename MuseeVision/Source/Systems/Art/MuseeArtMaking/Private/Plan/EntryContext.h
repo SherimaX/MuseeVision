@@ -6,6 +6,7 @@
 #include "MatterFinishSchedule.h"
 #include "Support/ArtMedia.h"
 #include "Vessel/VesselRecord.h"
+#include "Objects/HandscrollRecords.h"
 #include "Objects/HangingRecords.h"
 #include "Ware/WareMesh.h"
 
@@ -29,6 +30,10 @@ namespace Musee::ArtMaking
 		FString RoundWhy;
 		TArray<FArtBook> Books;
 		FString BooksWhy;
+		/** A handscroll's fittings and the works' records (their photographs' reading order), and why not when unread. */
+		TOptional<FArtHandscrollFittings> Handscroll;
+		TArray<FArtHandscroll> Handscrolls;
+		FString HandscrollWhy;
 	};
 
 	/** Whether the plan frames the object in a surface of the finish schedule (`"frame"` names one, not `none`). */
@@ -60,4 +65,17 @@ namespace Musee::ArtMaking
 
 	/** A book's binding, from Data/Art/Books.json, or null. */
 	[[nodiscard]] const FArtBook* FindBook(const FString& Work, TConstArrayView<FArtBook> Books);
+
+	/** The fittings and the works' records every handscroll is made with, read once when the plan holds a handscroll. */
+	void ReadHandscrollsInto(const FArtHang& Hang, FEntryContext& Context);
+
+	/**
+	 * A handscroll's photographs laid across its sheet (Scroll/ScrollLayout.h): its one photograph, or its numbered ones
+	 * (Musee::Art::FindSectionImages) joined in the reading order Data/Art/Handscrolls.json gives, right to left, so they lie
+	 * left to right in the reverse; each at its own proportion, within the share of it that is the work. Faults, one
+	 * clause each, where they can't be laid; a note, where they can, when their proportion strays from the catalogue's by
+	 * more than the fittings' tolerance (laid to cover the sheet, what overruns it cut from its edges; never stretched).
+	 */
+	void PlanHandscroll(const FArtWork& Work, const FArtHangEntry& Entry, const FEntryContext& Context, FCanvasPlan& OutCanvas,
+		TArray<FString>& OutFaults, TArray<FString>& OutNotes);
 }

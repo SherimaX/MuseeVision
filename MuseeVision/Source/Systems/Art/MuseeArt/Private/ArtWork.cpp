@@ -6,6 +6,7 @@
 #include "HAL/FileManager.h"
 #include "Misc/FileHelper.h"
 #include "Misc/Paths.h"
+#include "Misc/SecureHash.h"
 #include "MuseeKey.h"
 #include "MuseeRecords.h"
 
@@ -21,10 +22,10 @@ namespace Musee::Art
 		/** The collection's folder under a repository's root, as a schedule's `source` spells it. */
 		const TCHAR* const AssetsFolder = TEXT("assets");
 
-		/** How well a found image's folder is preferred: lower is better. */
-		int32 Preference(const FString& Path)
+		/** How well a folder of images is preferred: lower is better. */
+		int32 FolderPreference(const FString& FolderPath)
 		{
-			const FString Folder = FPaths::GetCleanFilename(FPaths::GetPath(Path));
+			const FString Folder = FPaths::GetCleanFilename(FolderPath);
 			for (int32 Rank = 0; Rank < UE_ARRAY_COUNT(PreferredImageFolders); ++Rank)
 			{
 				if (Folder == PreferredImageFolders[Rank])
@@ -33,6 +34,12 @@ namespace Musee::Art
 				}
 			}
 			return UE_ARRAY_COUNT(PreferredImageFolders);
+		}
+
+		/** How well a found image's folder is preferred: lower is better. */
+		int32 Preference(const FString& Path)
+		{
+			return FolderPreference(FPaths::GetPath(Path));
 		}
 	}
 
@@ -165,6 +172,75 @@ namespace Musee::Art
 			return RankA != RankB ? RankA < RankB : A < B;
 		});
 		return Found.IsEmpty() ? FString() : FPaths::ConvertRelativePathToFull(Found[0]);
+	}
+
+	namespace
+	{
+		/** The numbered photographs `<Name>-<n>` under Root, by folder and then by number. */
+		TMap<FString, TMap<int32, FString>> NumberedImages(const FString& Root, const FString& Name)
+		{
+			TMap<FString, TMap<int32, FString>> Out;
+			const FString Prefix = Name + TEXT("-");
+			for (const TCHAR* Extension : ImageExtensions)
+			{
+				TArray<FString> Files;
+				IFileManager::Get().FindFilesRecursive(Files, *Root, *FString::Printf(TEXT("%s*.%s"), *Prefix, Extension), true, false);
+				for (const FString& File : Files)
+				{
+					const FString Number = FPaths::GetBaseFilename(File).RightChop(Prefix.Len());
+					if (!Number.IsEmpty() && Number.IsNumeric() && !Number.Contains(TEXT(".")))
+					{
+						Out.FindOrAdd(FPaths::GetPath(File)).Add(FCString::Atoi(*Number), FPaths::ConvertRelativePathToFull(File));
+					}
+				}
+			}
+			return Out;
+		}
+
+		/** A folder's run of photographs from 1, when it is two or more distinct files; empty otherwise. */
+		TArray<FString> DistinctRun(const TMap<int32, FString>& Numbered)
+		{
+			TArray<FString> Run;
+			TSet<FString> Hashes;
+			for (int32 Number = 1; const FString* Path = Numbered.Find(Number); ++Number)
+			{
+				bool bCopy = false;
+				Hashes.Add(LexToString(FMD5Hash::HashFile(**Path)), &bCopy);
+				if (bCopy)
+				{
+					return {};
+				}
+				Run.Add(*Path);
+			}
+			return Run.Num() >= 2 ? Run : TArray<FString>();
+		}
+	}
+
+	TArray<FString> FindSectionImages(const FArtHangEntry& Entry)
+	{
+		const FString& Name = Entry.Image.IsEmpty() ? Entry.Work : Entry.Image;
+		const FString Catalogue = FPaths::GetPath(FPaths::ConvertRelativePathToFull(SourcePath(Entry.Source)));
+		for (const FString& Root : { Catalogue, CollectionRoot() })
+		{
+			TMap<FString, TMap<int32, FString>> ByFolder = NumberedImages(Root, Name);
+			TArray<FString> Folders;
+			ByFolder.GetKeys(Folders);
+			Folders.Sort([](const FString& A, const FString& B)
+			{
+				const int32 RankA = FolderPreference(A);
+				const int32 RankB = FolderPreference(B);
+				return RankA != RankB ? RankA < RankB : A < B;
+			});
+			for (const FString& Folder : Folders)
+			{
+				TArray<FString> Run = DistinctRun(ByFolder[Folder]);
+				if (!Run.IsEmpty())
+				{
+					return Run;
+				}
+			}
+		}
+		return {};
 	}
 
 	FName PaintMaterial(const FString& WorkId)
