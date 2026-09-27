@@ -15,6 +15,12 @@
       "b": "salon.west",
       "passageMeters": 0.0,
       "note": "The oval passage: the Salon's bay 5 far wall meets the oval's passage block."
+    },
+    {
+      "a": "rotunda.stair",
+      "b": "classical-hall.stair",
+      "passageMeters": 0.0,
+      "note": "The Rotunda's spiral stair comes down its served well to the Classical Hall's port (classical-hall.md section 2): the faces touch on the well's cylinder, r 7.60 about the Rotunda's axis."
     }
   ]
 }
