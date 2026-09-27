@@ -494,7 +494,7 @@ namespace Musee::ArtMaking
 				}
 				FLinearColor Colour = FMath::Lerp(Fill, RowColours[Column], float(Whole));
 				Colour.A = 1.0f;
-				Line[Column] = Colour.GetClamp().ToFColor(true);
+				Line[Column] = Colour.GetClamped().ToFColor(true);
 				SeenTexels += Whole >= 1.0 ? 1 : 0;
 			}
 			OutsideTexels += Pixels.X;

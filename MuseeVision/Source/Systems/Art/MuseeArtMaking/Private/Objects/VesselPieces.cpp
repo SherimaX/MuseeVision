@@ -1,4 +1,5 @@
 #include "ArtPieces.h"
+#include "FormExtrusion.h"
 #include "FormMake.h"
 #include "MuseeCollision.h"
 #include "MuseeRecords.h"
@@ -46,33 +47,42 @@ namespace Musee::ArtMaking
 	namespace
 	{
 		/**
-		 * A vessel's feet (FArtVesselFeet), each a drum in its medium's finish (`<name>.foot.<n>`), at its share of the
-		 * mouth's half-axes as the plan sizes them, its height scaled as the section's is.
+		 * A vessel's feet (FArtVesselFeet), each its traced outline stood up to their height in its medium's finish
+		 * (`<name>.foot.<n>`), sized as the section is: across by the plan's width against the section's, up by its height.
 		 */
-		void MakeFeet(const FArtVessel& Vessel, const FArtHangEntry& Entry, bool bSplit, const FLayerFinish& Finish, const FVector2D& Oval,
-			const FMuseeFrame& OnStand, TArray<FFormMadePiece>& OutPieces, TArray<FMuseeFinding>& OutFindings)
+		void MakeFeet(const FArtVessel& Vessel, const FArtHangEntry& Entry, bool bSplit, const FLayerFinish& Finish, const FMuseeFrame& OnStand,
+			TArray<FFormMadePiece>& OutPieces, TArray<FMuseeFinding>& OutFindings)
 		{
 			const FArtVesselFeet& Feet = Vessel.Feet;
-			if (Feet.Positions.IsEmpty() || !(Feet.RadiusMeters > 0.0) || !(Feet.HeightMeters > 0.0))
+			if (Feet.Each.IsEmpty() || !(Feet.HeightMeters > 0.0))
 			{
 				return;
 			}
-			double Top = 0.0;
+			FVector2D Most = FVector2D::ZeroVector;
 			for (const FVector2D& Point : Vessel.Section)
 			{
-				Top = FMath::Max(Top, Point.Y);
+				Most = FVector2D(FMath::Max(Most.X, Point.X), FMath::Max(Most.Y, Point.Y));
 			}
-			const double Rise = Entry.SizeMeters().Y / Top;
-			const double HalfAcross = 0.5 * Entry.SizeMeters().X;
-			const double Height = Feet.HeightMeters * Rise;
-			const double Radius = Feet.RadiusMeters * Rise;
-			const FVector2D Drum[] = { FVector2D(0.0, 0.0), FVector2D(Radius, 0.0), FVector2D(Radius, Height), FVector2D(0.0, Height) };
-			for (int32 Index = 0; Index < Feet.Positions.Num(); ++Index)
+			const double Across = 0.5 * Entry.SizeMeters().X / Most.X;
+			const double Rise = Entry.SizeMeters().Y / Most.Y;
+			for (int32 Index = 0; Index < Feet.Each.Num(); ++Index)
 			{
-				const FVector2D At = Feet.Positions[Index] * FVector2D(HalfAcross * Oval.X, HalfAcross * Oval.Y);
-				const FString Part = FString::Printf(TEXT("foot.%d"), Index + 1);
-				Musee::FormMaking::Make(Turning(PartName(Entry, bSplit, *Part), TEXT("foot"), FFormProfile::Polyline(Drum, false), Finish,
-					OnStand.FrameToParent(FMuseeFrame(FVector(At.X, At.Y, 0.0)))), OutPieces, OutFindings);
+				TArray<FVector2D> Outline;
+				for (const FVector2D& Point : Feet.Each[Index].Outline)
+				{
+					Outline.Add(Point * Across);
+				}
+				FFormExtrusion Foot;
+				Foot.Outline = FFormProfile::Polygon(Outline);
+				Foot.DepthMeters = Feet.HeightMeters * Rise;
+				FFormDrawing Drawing = FFormDrawing::Of(PartName(Entry, bSplit, *FString::Printf(TEXT("foot.%d"), Index + 1)), TEXT("foot"), MoveTemp(Foot));
+				Drawing.Material = Finish.Palette;
+				Drawing.Working = Finish.Working;
+				Drawing.History = Finish.History;
+				Drawing.Collision = Collision::Solid.Profile();
+				Drawing.Frame = OnStand;
+				Drawing.Drawer = TEXT("Art");
+				Musee::FormMaking::Make(MoveTemp(Drawing), OutPieces, OutFindings);
 			}
 		}
 	}
@@ -133,6 +143,6 @@ namespace Musee::ArtMaking
 		FFormMadePiece Piece = ArtPiece(Name, Surface, Material, OnStand, true);
 		BuildVessel(Section, LayoutOf(Section), How, Piece.Mesh);
 		OutPieces.Add(MoveTemp(Piece));
-		MakeFeet(Vessel, Entry, bSplit, Canvas.Finish, How.Oval, OnStand, OutPieces, OutFindings);
+		MakeFeet(Vessel, Entry, bSplit, Canvas.Finish, OnStand, OutPieces, OutFindings);
 	}
 }

@@ -50,6 +50,13 @@ namespace Musee::ArtMaking
 
 	[[nodiscard]] FSectionPlace PlaceAlong(const FVesselLayout& Layout, double LengthMeters);
 
+	/**
+	 * Whether a closed section is a solid when turned: no two of its segments cross (a surface through a surface), and,
+	 * where it says where its outside runs ([first, last] points), its wall is nowhere thinner than half the wall it was
+	 * drawn with (no point of its inside nearer its underside and outside than that). Empty if so; else what is wrong.
+	 */
+	[[nodiscard]] FString SectionFault(TConstArrayView<FVector2D> Section, TConstArrayView<int32> Outside, double WallMeters);
+
 	/** The section's point at a place, and the outward normal of its segment there ([radius, height] components). */
 	[[nodiscard]] FVector2D PointAt(TConstArrayView<FVector2D> Section, const FSectionPlace& Place);
 	[[nodiscard]] FVector2D NormalOf(TConstArrayView<FVector2D> Section, int32 Segment);

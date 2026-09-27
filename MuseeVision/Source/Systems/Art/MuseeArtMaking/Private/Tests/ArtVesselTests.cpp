@@ -17,17 +17,38 @@ namespace Musee::ArtMaking::VesselTests
 	/** How near a turned vessel's height and diameter come to its museum's: half a millimetre. */
 	constexpr double SizeToleranceMeters = 0.0005;
 
-	/** A plain cylinder 0.1 m in radius and 0.2 m tall, its outside the wall from its foot's edge to its rim's. */
+	/** The test's photograph: square, its camera looking at the cylinder's axis from far off, level with its middle. */
+	constexpr int32 PhotoPixels = 1000;
+	constexpr double CameraDistanceMeters = 10.0;
+	constexpr double CameraFocalPixels = 40000.0;
+	constexpr double CameraBearingDegrees = 40.0;
+	constexpr double CylinderRadiusMeters = 0.1;
+
+	/** The two stripes painted on the photograph: one down the axis, one where the camera sees the wall 30 degrees round. */
+	constexpr double AskanceDegrees = 30.0;
+	constexpr double AxisStripePixels = 41.0;
+	constexpr double AskanceStripePixels = 21.0;
+
+	/** A plain cylinder 0.1 m in radius and 0.2 m tall, its outside the wall from its foot's edge to its rim's, and its one view. */
 	FArtVessel Cylinder()
 	{
 		FArtVessel Vessel;
 		Vessel.Work = TEXT("cylinder");
-		Vessel.Section = { FVector2D(0.0, 0.0), FVector2D(0.1, 0.0), FVector2D(0.1, 0.2), FVector2D(0.0, 0.2) };
+		Vessel.Section = { FVector2D(0.0, 0.0), FVector2D(CylinderRadiusMeters, 0.0), FVector2D(CylinderRadiusMeters, 0.2), FVector2D(0.0, 0.2) };
 		Vessel.Outside = { 1, 2 };
+		FArtVesselView View;
+		View.Image = TEXT("assets/ceramics/test/striped.png");
+		View.AzimuthDegrees = CameraBearingDegrees;
+		View.DistanceMeters = CameraDistanceMeters;
+		View.HeightMeters = 0.1;
+		View.FocalPixels = CameraFocalPixels;
+		View.AxisPixels = { 0.5 * PhotoPixels, 0.5 * PhotoPixels };
+		View.Placement = TEXT("fitted");
+		Vessel.Views.Add(View);
 		return Vessel;
 	}
 
-	/** A composition as the record's: views lend from 60 degrees off face on. */
+	/** A composition as the record's: views lend from 60 degrees off face on; 1000 pixels a metre at the finest. */
 	FArtVesselComposition Composition()
 	{
 		FArtVesselComposition How;
@@ -45,27 +66,34 @@ namespace Musee::ArtMaking::VesselTests
 		return How;
 	}
 
+	/** Where the wall at so many degrees round from the camera's bearing falls across the photograph, pixels from its centre. */
+	double ColumnOffset(double DegreesRound)
+	{
+		const double Round = FMath::DegreesToRadians(DegreesRound);
+		return CameraFocalPixels * CylinderRadiusMeters * FMath::Sin(Round) / (CameraDistanceMeters - CylinderRadiusMeters * FMath::Cos(Round));
+	}
+
 	/**
-	 * A photograph of the cylinder from far off, level with its middle, at a bearing: a white ground, and a red stripe
-	 * down its middle column, which is the cylinder's axis.
+	 * The cylinder's photograph through its view's camera: a white ground, a red stripe down its axis and another where
+	 * the camera sees the wall AskanceDegrees round to its right.
 	 */
-	FVesselPicture StripedView(double AzimuthDegrees)
+	FVesselPicture StripedView(const FArtVessel& Vessel)
 	{
 		FVesselPicture View;
-		View.Image.Init(1000, 1000, 1, ERawImageFormat::BGRA8, EGammaSpace::sRGB);
+		View.Image.Init(PhotoPixels, PhotoPixels, 1, ERawImageFormat::BGRA8, EGammaSpace::sRGB);
+		View.Camera = CameraOf(Vessel.Views[0]);
 		const TArrayView64<FColor> Pixels = View.Image.AsBGRA8();
-		for (int32 Y = 0; Y < 1000; ++Y)
+		const double Centre = 0.5 * PhotoPixels;
+		const double Askance = Centre + ColumnOffset(AskanceDegrees);
+		for (int32 Y = 0; Y < PhotoPixels; ++Y)
 		{
-			for (int32 X = 0; X < 1000; ++X)
+			for (int32 X = 0; X < PhotoPixels; ++X)
 			{
-				Pixels[int64(Y) * 1000 + X] = FMath::Abs(X - 499) <= 4 ? FColor(220, 20, 20) : FColor(240, 240, 240);
+				const double Column = X + 0.5;
+				const bool bRed = FMath::Abs(Column - Centre) < 0.5 * AxisStripePixels || FMath::Abs(Column - Askance) < 0.5 * AskanceStripePixels;
+				Pixels[int64(Y) * PhotoPixels + X] = bRed ? FColor(220, 20, 20) : FColor(240, 240, 240);
 			}
 		}
-		View.Camera.AzimuthRadians = FMath::DegreesToRadians(AzimuthDegrees);
-		View.Camera.DistanceMeters = 10.0;
-		View.Camera.HeightMeters = 0.1;
-		View.Camera.FocalPixels = 40000.0;
-		View.Camera.AxisPixels = FVector2D(500.0, 500.0);
 		return View;
 	}
 
@@ -74,23 +102,52 @@ namespace Musee::ArtMaking::VesselTests
 		return C.R > 150 && C.G < 120 && C.B < 120;
 	}
 
-	/** The column of a composed row reddest along it, and the angle it stands at (degrees from the front towards the right). */
-	double ReddestAngle(const FImage& Image, int32 Row)
+	/** A red run along a composed row: its middle and its width, in degrees round from the front towards the right. */
+	struct FRun
+	{
+		double MiddleDegrees = 0.0;
+		double WidthDegrees = 0.0;
+	};
+
+	TArray<FRun> RedRuns(const FImage& Image, int32 Row)
 	{
 		const TArrayView64<const FColor> Pixels = Image.AsBGRA8();
-		int32 Best = 0;
-		int32 BestRed = -1000;
-		for (int32 X = 0; X < Image.SizeX; ++X)
+		TArray<FRun> Out;
+		int32 Start = INDEX_NONE;
+		for (int32 X = 0; X <= Image.SizeX; ++X)
 		{
-			const FColor& C = Pixels[int64(Row) * Image.SizeX + X];
-			const int32 Red = int32(C.R) - int32(C.G);
-			if (Red > BestRed)
+			const bool bRed = X < Image.SizeX && IsRed(Pixels[int64(Row) * Image.SizeX + X]);
+			if (bRed && Start == INDEX_NONE)
 			{
-				BestRed = Red;
-				Best = X;
+				Start = X;
+			}
+			else if (!bRed && Start != INDEX_NONE)
+			{
+				Out.Add({ 360.0 * 0.5 * (Start + X) / Image.SizeX, 360.0 * (X - Start) / Image.SizeX });
+				Start = INDEX_NONE;
 			}
 		}
-		return 360.0 * (Best + 0.5) / Image.SizeX;
+		return Out;
+	}
+
+	/** The angle round the wall a stripe of so many pixels spans where the camera sees the wall so many degrees round. */
+	double StripeDegrees(double Pixels, double DegreesRound)
+	{
+		const double Half = 0.5 * Pixels;
+		const double Offset = ColumnOffset(DegreesRound);
+		// the wall's angles at the stripe's two edges, found by bisection on the (monotonic) column offset
+		auto AngleAt = [](double Target)
+		{
+			double Low = -80.0;
+			double High = 80.0;
+			for (int32 Step = 0; Step < 60; ++Step)
+			{
+				const double Mid = 0.5 * (Low + High);
+				(ColumnOffset(Mid) < Target ? Low : High) = Mid;
+			}
+			return 0.5 * (Low + High);
+		};
+		return AngleAt(Offset + Half) - AngleAt(Offset - Half);
 	}
 }
 
@@ -101,7 +158,8 @@ bool FArtPaintedVesselTest::RunTest(const FString& Parameters)
 	using namespace Musee::ArtMaking;
 	using namespace Musee::ArtMaking::VesselTests;
 
-	// The museum's vessels, as Chenghuai's plan shows them: each at its museum's height and, where published, diameter.
+	// The museum's vessels, as Chenghuai's plan shows them: each at its museum's height and, where published, diameter;
+	// each section a solid, its wall nowhere thinner than half the wall it was drawn with.
 	const TValueOrError<FArtVessels, FString> Record = Musee::ReadRecord<FArtVessels>(FArtVessels::Record);
 	const TValueOrError<FArtHang, FString> Hang = Musee::ReadRecord<FArtHang>(TEXT("Stages/chenghuai/Hang.json"));
 	if (!TestTrue(TEXT("The vessels' record and Chenghuai's plan read"), Record.HasValue() && Hang.HasValue()))
@@ -130,38 +188,81 @@ bool FArtPaintedVesselTest::RunTest(const FString& Parameters)
 		// Its foot, or its feet, stand on the plane at 0.
 		TestTrue(FString::Printf(TEXT("%s stands its museum's %.1f cm"), *Vessel.Work, 100.0 * Vessel.Museum.HeightMeters),
 			FMath::IsNearlyEqual(Box.Max.Y, Vessel.Museum.HeightMeters, SizeToleranceMeters) && Box.Min.Y >= 0.0
-			&& (FMath::IsNearlyZero(Box.Min.Y) || !Vessel.Feet.Positions.IsEmpty()));
+			&& (FMath::IsNearlyZero(Box.Min.Y) || !Vessel.Feet.Each.IsEmpty()));
 		const double Across = Vessel.Museum.IsOval() ? Vessel.Museum.MouthAxesMeters[0] : Vessel.Museum.DiameterMeters;
 		if (Across > 0.0)
 		{
 			TestTrue(FString::Printf(TEXT("%s is its museum's %.1f cm across"), *Vessel.Work, 100.0 * Across),
 				FMath::IsNearlyEqual(2.0 * Box.Max.X, Across, SizeToleranceMeters));
 		}
+		const FString Solid = SectionFault(Vessel.Section, Vessel.Outside, Vessel.WallMeters);
+		TestTrue(FString::Printf(TEXT("%s's section is a solid with a wall (%s)"), *Vessel.Work, *Solid), Solid.IsEmpty() && Vessel.WallMeters > 0.0);
+		for (const FArtVesselFoot& Foot : Vessel.Feet.Each)
+		{
+			TestTrue(FString::Printf(TEXT("%s's feet are outlines"), *Vessel.Work), Foot.Outline.Num() >= 3);
+		}
 		for (const FArtVesselBand& Band : Vessel.Bands)
 		{
 			TestTrue(FString::Printf(TEXT("%s's %s repeats a whole number of times round"), *Vessel.Work, *Band.Name), Band.PeriodDegrees > 0.0
 				&& FMath::IsNearlyEqual(360.0 / Band.PeriodDegrees, FMath::RoundToDouble(360.0 / Band.PeriodDegrees), 1e-6));
 		}
+		for (int32 Index = 0; Index < Vessel.Views.Num(); ++Index)
+		{
+			const FArtVesselView& View = Vessel.Views[Index];
+			TestTrue(FString::Printf(TEXT("%s's view %s is the one its section was fitted to, or placed after it"), *Vessel.Work, *View.Image),
+				Index == 0 ? View.Placement == TEXT("fitted") && View.AzimuthDegrees == 0.0 : FArtVesselView::IsPlacement(View.Placement) && View.Placement != TEXT("fitted"));
+		}
 	}
 	TestEqual(TEXT("Seven vessels are derived from their photographs"), Derived, 7);
 
-	// A view's painting lands where its camera saw it, and nowhere its camera saw only askance.
+	// A turned section that crosses itself, or whose inside comes nearer its outside than half its wall, is no solid.
+	{
+		const TArray<FVector2D> Folded = { FVector2D(0.0, 0.0), FVector2D(0.1, 0.0), FVector2D(0.1, 0.2), FVector2D(0.09, 0.19), FVector2D(0.11, 0.1),
+			FVector2D(0.0, 0.1) };
+		TestFalse(TEXT("A section whose inside crosses its outside is no solid"), SectionFault(Folded, { 1, 2 }, 0.005).IsEmpty());
+		const TArray<FVector2D> Thin = { FVector2D(0.0, 0.0), FVector2D(0.1, 0.0), FVector2D(0.1, 0.2), FVector2D(0.099, 0.2), FVector2D(0.099, 0.05),
+			FVector2D(0.0, 0.05) };
+		TestFalse(TEXT("A section whose wall is thinner than half the wall it was drawn with is no solid"), SectionFault(Thin, { 1, 2 }, 0.005).IsEmpty());
+		const TArray<FVector2D> Sound = { FVector2D(0.0, 0.0), FVector2D(0.1, 0.0), FVector2D(0.1, 0.2), FVector2D(0.095, 0.2), FVector2D(0.095, 0.005),
+			FVector2D(0.0, 0.005) };
+		TestTrue(TEXT("A section with its wall is a solid"), SectionFault(Sound, { 1, 2 }, 0.005).IsEmpty());
+	}
+
+	// A view's painting lands where its camera saw it, at the width it has on the vessel, and nowhere its camera saw only
+	// askance.
 	const FArtVessel Vessel = Cylinder();
 	const FArtVesselComposition How = Composition();
 	const TArray<FVector2D> Section = Vessel.Section;
 	const FVesselLayout Layout = LayoutOf(Section);
-	const FVesselPicture Views[] = { StripedView(40.0) };
+	const FVesselPicture Views[] = { StripedView(Vessel) };
+	const FIntPoint Pixels = DecorationPixels(How, Vessel, Layout);
+	TestEqual(TEXT("The decoration is composed at the finest the record allows its view to resolve"), Pixels.X,
+		FMath::RoundToInt32(Layout.SizeMeters().X * FMath::Min(CameraFocalPixels / CameraDistanceMeters, How.MostPixelsPerMeter)));
 	FImage Decoration;
 	FDecorationStats Stats;
-	ComposeDecoration(How, Vessel, Section, Views, DecorationPixels(How, Vessel, Layout), Decoration, Stats);
+	ComposeDecoration(How, Vessel, Section, Views, Pixels, Decoration, Stats);
 	// The wall's middle, 0.1 m up it, is 0.2 m along the section (0.1 across the foot, then 0.1 up).
 	const int32 Middle = FMath::FloorToInt32(0.2 / Layout.SizeMeters().Y * Decoration.SizeY);
-	TestTrue(TEXT("The stripe lands on the side its camera faced, 40 degrees round"), FMath::Abs(ReddestAngle(Decoration, Middle) - 40.0) < 1.0);
-	const TArrayView64<const FColor> Pixels = Decoration.AsBGRA8();
-	auto AtAngle = [&](double Degrees) { return Pixels[int64(Middle) * Decoration.SizeX + FMath::FloorToInt32(Degrees / 360.0 * Decoration.SizeX)]; };
-	TestFalse(TEXT("It doesn't land on the far side"), IsRed(AtAngle(220.0)));
+	const TArray<FRun> Runs = RedRuns(Decoration, Middle);
+	const double Texel = 360.0 / Decoration.SizeX;
+	if (TestEqual(TEXT("Both stripes land on the wall, and nothing else red"), Runs.Num(), 2))
+	{
+		TestTrue(FString::Printf(TEXT("The axis's stripe lands on the side its camera faced, %.0f degrees round (%.2f)"), CameraBearingDegrees,
+			Runs[0].MiddleDegrees), FMath::Abs(Runs[0].MiddleDegrees - CameraBearingDegrees) < Texel);
+		TestTrue(FString::Printf(TEXT("The other lands %.0f degrees further round (%.2f)"), AskanceDegrees, Runs[1].MiddleDegrees),
+			FMath::Abs(Runs[1].MiddleDegrees - (CameraBearingDegrees + AskanceDegrees)) < Texel);
+		// Neither is stretched nor squeezed: each spans on the decoration the angle it spans on the vessel, to a texel.
+		const double AxisWidth = StripeDegrees(AxisStripePixels, 0.0);
+		const double AskanceWidth = StripeDegrees(AskanceStripePixels, AskanceDegrees);
+		TestTrue(FString::Printf(TEXT("The axis's stripe spans its %.2f degrees of wall (%.2f)"), AxisWidth, Runs[0].WidthDegrees),
+			FMath::Abs(Runs[0].WidthDegrees - AxisWidth) <= Texel);
+		TestTrue(FString::Printf(TEXT("The stripe seen askance spans its %.2f degrees of wall, not its width in the photograph (%.2f)"), AskanceWidth,
+			Runs[1].WidthDegrees), FMath::Abs(Runs[1].WidthDegrees - AskanceWidth) <= Texel);
+	}
+	const TArrayView64<const FColor> Colours = Decoration.AsBGRA8();
+	auto AtAngle = [&](double Degrees) { return Colours[int64(Middle) * Decoration.SizeX + FMath::FloorToInt32(Degrees / 360.0 * Decoration.SizeX)]; };
 	TestTrue(TEXT("Where the view saw the wall 75 degrees askance it lends nothing: the glaze fills in"), AtAngle(115.0).R > 200 && AtAngle(115.0).G > 200);
-	TestTrue(TEXT("No view is stretched past its cut"), Stats.MostStretch <= 1.0 / How.SquarenessCut + 1e-9);
+	TestFalse(TEXT("Nor on the far side"), IsRed(AtAngle(220.0)));
 	TestTrue(TEXT("The view gave some of the outside whole, and not all of it"), Stats.Seen > 0.05 && Stats.Seen < 0.5);
 
 	// The turned mesh carries the same layout: a point of its wall 40 degrees round has the stripe's U.

@@ -1,18 +1,12 @@
 #include "Vessel/VesselMesh.h"
 
 #include "FormMesh.h"
+#include "Ware/WareMesh.h"
 
 namespace Musee::ArtMaking
 {
 	namespace
 	{
-		/** How many chords round the axis keep every one within the tolerance of a circle of this radius. */
-		int32 SegmentsFor(double Radius, double Tolerance)
-		{
-			const double Half = FMath::Acos(FMath::Clamp(1.0 - Tolerance / FMath::Max(Radius, Tolerance), -1.0, 1.0));
-			return FMath::Max(3, FMath::CeilToInt(UE_DOUBLE_PI / FMath::Max(Half, UE_DOUBLE_KINDA_SMALL_NUMBER)));
-		}
-
 		/**
 		 * One ring of the turned surface: the section's point carried round the axis with its normal, which an oval's
 		 * scaling tilts by the inverse of the scale (a normal transforms by the inverse transpose).
@@ -40,7 +34,7 @@ namespace Musee::ArtMaking
 		FFormMesh Mesh;
 		const int32 Count = Section.Num();
 		const double Crease = FMath::DegreesToRadians(Turning.CreaseDegrees);
-		const int32 Segments = SegmentsFor(Layout.ReferenceRadius * FMath::Max(Turning.Oval.X, Turning.Oval.Y), Turning.ChordToleranceMeters);
+		const int32 Segments = ChordsRound(Layout.ReferenceRadius * FMath::Max(Turning.Oval.X, Turning.Oval.Y), Turning.ChordToleranceMeters);
 		TArray<int32> Leaving;
 		for (int32 I = 0; I < Count; ++I)
 		{

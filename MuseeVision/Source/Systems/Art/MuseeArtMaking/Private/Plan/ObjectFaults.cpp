@@ -8,6 +8,7 @@
 #include "Misc/Paths.h"
 #include "MatterWorking.h"
 #include "Support/ArtSupport.h"
+#include "Vessel/VesselSection.h"
 
 namespace Musee::ArtMaking
 {
@@ -345,8 +346,10 @@ namespace Musee::ArtMaking
 		}
 
 		/**
-		 * A vessel derived from its photographs: its outside runs between two of its section's points; a painted one's
-		 * views are photographs the collection holds, each with its camera; an oval one gives its mouth's two axes.
+		 * A vessel derived from its photographs: its outside runs between two of its section's points; its section turned
+		 * is a solid (it crosses itself nowhere, and its wall is nowhere thinner than half the wall it was drawn with); its
+		 * feet are outlines; a painted one's views are photographs the collection holds, each with its camera and how it
+		 * was placed; an oval one gives its mouth's two axes.
 		 */
 		TArray<FString> DerivedVesselFaults(const FArtVessel& Vessel)
 		{
@@ -357,8 +360,24 @@ namespace Musee::ArtMaking
 			{
 				Out.Add(FString::Printf(TEXT("Data/%s: a painted vessel's outside runs [first, last] between its section's points"), FArtVessels::Record));
 			}
+			const FString Solid = SectionFault(Vessel.Section, Vessel.Outside, Vessel.WallMeters);
+			if (!Solid.IsEmpty())
+			{
+				Out.Add(FString::Printf(TEXT("Data/%s: its section turned is no solid: %s"), FArtVessels::Record, *Solid));
+			}
+			for (const FArtVesselFoot& Foot : Vessel.Feet.Each)
+			{
+				if (Foot.Outline.Num() < 3)
+				{
+					Out.Add(FString::Printf(TEXT("Data/%s: each of its feet is an outline of three points or more"), FArtVessels::Record));
+				}
+			}
 			for (const FArtVesselView& View : Vessel.Views)
 			{
+				if (!FArtVesselView::IsPlacement(View.Placement))
+				{
+					Out.Add(FString::Printf(TEXT("its view %s is placed `fitted`, `registered` or `unverified`, not `%s`"), *View.Image, *View.Placement));
+				}
 				if (!IFileManager::Get().FileExists(*Musee::Art::SourcePath(View.Image)))
 				{
 					Out.Add(FString::Printf(TEXT("its view %s is not in the collection"), *View.Image));

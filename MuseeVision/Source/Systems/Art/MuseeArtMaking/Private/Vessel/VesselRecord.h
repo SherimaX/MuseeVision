@@ -64,6 +64,24 @@ struct FArtVesselMuseum
 	[[nodiscard]] bool IsOval() const { return MouthAxesMeters.Num() == 2; }
 };
 
+/** How much of the outside a view shares with another view, and how well their paintings correlate there. */
+USTRUCT()
+struct FArtVesselOverlap
+{
+	GENERATED_BODY()
+
+	/** The other view's photograph (its file name). */
+	UPROPERTY(meta = (MuseeRequired))
+	FString Image;
+
+	/** The share of the unwrapped outside both views see (weighted by how squarely each sees it). */
+	UPROPERTY()
+	double Share = 0.0;
+
+	UPROPERTY()
+	double Correlation = 0.0;
+};
+
 /**
  * One photograph of a painted vessel, and the camera that took it as its derivation found it (MuseeVision/Scripts/
  * vessels.py): a pinhole standing at a bearing round the vessel (from its front towards its right), so far from its
@@ -99,13 +117,26 @@ struct FArtVesselView
 	UPROPERTY(meta = (MuseeRequired))
 	TArray<double> AxisPixels;
 
-	/** How far the fitted camera's picture of the silhouette strays from the photograph's (rms, pixels). */
+	/** How far the section's image through this camera strays from the photograph's silhouette (rms, pixels). */
 	UPROPERTY()
 	double FitPixels = 0.0;
 
-	/** For a view placed on another's painting: how well its painting lies on that one's where they overlap. */
+	/**
+	 * How its bearing was found: `fitted` (the view the section is derived from, at bearing 0), `registered` (its
+	 * painting laid on the first view's, directly or through others it overlaps) or `unverified` (its painting shares
+	 * nothing with the first view's, so its bearing against it is not in the photographs).
+	 */
+	UPROPERTY(meta = (MuseeRequired))
+	FString Placement;
+
+	/** The other views it overlaps, as placed. */
 	UPROPERTY()
-	double Correlation = 0.0;
+	TArray<FArtVesselOverlap> Overlaps;
+
+	[[nodiscard]] static bool IsPlacement(const FString& Word)
+	{
+		return Word == TEXT("fitted") || Word == TEXT("registered") || Word == TEXT("unverified");
+	}
 };
 
 /**
@@ -131,24 +162,31 @@ struct FArtVesselBand
 	double PeriodDegrees = 0.0;
 };
 
+/** One foot, as its plan: a closed outline [across, front to back] in metres from the axis, anticlockwise from above. */
+USTRUCT()
+struct FArtVesselFoot
+{
+	GENERATED_BODY()
+
+	UPROPERTY(meta = (MuseeRequired))
+	TArray<FVector2D> Outline;
+};
+
 /**
- * The feet a vessel stands on where it isn't thrown with a foot ring (the Ru basin's four cloud-scroll lugs): each a
- * drum of a radius and a height, its centre at a share of the mouth's half-axes [across, front to back] from the axis.
- * Its section stands on them: its lowest point is their height.
+ * The feet a vessel stands on where it isn't thrown with a foot ring (the Ru basin's four cloud-scroll feet, traced
+ * from its base's photograph): each its outline stood up to their height. Its section stands on them: its lowest point
+ * is their height.
  */
 USTRUCT()
 struct FArtVesselFeet
 {
 	GENERATED_BODY()
 
-	UPROPERTY()
-	TArray<FVector2D> Positions;
-
-	UPROPERTY(meta = (Units = "Meters"))
-	double RadiusMeters = 0.0;
-
 	UPROPERTY(meta = (Units = "Meters"))
 	double HeightMeters = 0.0;
+
+	UPROPERTY()
+	TArray<FArtVesselFoot> Each;
 };
 
 /** A photograph of a vessel its derivation read and left out, and why. */
@@ -199,6 +237,10 @@ struct FArtVessel
 
 	UPROPERTY()
 	TArray<int32> Outside;
+
+	/** The wall its section was drawn with (its inside that far in from its outside): its lip's, where read. */
+	UPROPERTY(meta = (Units = "Meters"))
+	double WallMeters = 0.0;
 
 	UPROPERTY()
 	TArray<FArtVesselView> Views;

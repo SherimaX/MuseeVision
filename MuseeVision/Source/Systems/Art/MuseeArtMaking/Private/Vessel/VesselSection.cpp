@@ -62,6 +62,66 @@ namespace Musee::ArtMaking
 		return Place;
 	}
 
+	namespace
+	{
+		/** Whether segments PQ and AB cross strictly inside both (sharing an end is not crossing). */
+		bool Cross(const FVector2D& P, const FVector2D& Q, const FVector2D& A, const FVector2D& B)
+		{
+			const double Denominator = FVector2D::CrossProduct(Q - P, B - A);
+			if (FMath::Abs(Denominator) < UE_DOUBLE_SMALL_NUMBER * UE_DOUBLE_SMALL_NUMBER)
+			{
+				return false;
+			}
+			const double S = FVector2D::CrossProduct(A - P, B - A) / Denominator;
+			const double U = FVector2D::CrossProduct(A - P, Q - P) / Denominator;
+			constexpr double Inside = 1e-9;
+			return S > Inside && S < 1.0 - Inside && U > Inside && U < 1.0 - Inside;
+		}
+
+		/** The distance from a point to the segment AB. */
+		double DistanceToSegment(const FVector2D& Point, const FVector2D& A, const FVector2D& B)
+		{
+			const FVector2D Run = B - A;
+			const double Along = Run.SizeSquared() > 0.0 ? FMath::Clamp(FVector2D::DotProduct(Point - A, Run) / Run.SizeSquared(), 0.0, 1.0) : 0.0;
+			return FVector2D::Distance(Point, A + Along * Run);
+		}
+	}
+
+	FString SectionFault(TConstArrayView<FVector2D> Section, TConstArrayView<int32> Outside, double WallMeters)
+	{
+		const int32 Count = Section.Num();
+		for (int32 I = 0; I + 1 < Count; ++I)
+		{
+			for (int32 J = I + 2; J + 1 < Count; ++J)
+			{
+				if (Cross(Section[I], Section[I + 1], Section[J], Section[J + 1]))
+				{
+					return FString::Printf(TEXT("its segments %d and %d cross"), I, J);
+				}
+			}
+		}
+		if (Outside.Num() != 2 || !(WallMeters > 0.0))
+		{
+			return FString();
+		}
+		// The outside runs to the lip's top (Outside[1]); the inside from the point after it down to the axis, whose last
+		// point (on the axis, over the base or on the neck's floor) is left out.
+		for (int32 K = Outside[1] + 1; K + 1 < Count; ++K)
+		{
+			double Nearest = TNumericLimits<double>::Max();
+			for (int32 I = 0; I < Outside[1]; ++I)
+			{
+				Nearest = FMath::Min(Nearest, DistanceToSegment(Section[K], Section[I], Section[I + 1]));
+			}
+			if (Nearest < 0.5 * WallMeters)
+			{
+				return FString::Printf(TEXT("its wall at inside point %d is %.2f mm, under half the %.2f mm it was drawn with"), K, 1000.0 * Nearest,
+					1000.0 * WallMeters);
+			}
+		}
+		return FString();
+	}
+
 	FVector2D PointAt(TConstArrayView<FVector2D> Section, const FSectionPlace& Place)
 	{
 		return FMath::Lerp(Section[Place.Segment], Section[Place.Segment + 1], Place.Along);
