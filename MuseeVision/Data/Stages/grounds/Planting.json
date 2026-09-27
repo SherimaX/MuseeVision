@@ -1,0 +1,1209 @@
+{
+  "stage": "grounds",
+  "water": [
+    {
+      "key": "grounds.canal",
+      "anchor": "grounds.canal.water",
+      "body": "",
+      "outline": {
+        "polygon": [
+          [
+            -48.04,
+            27.46
+          ],
+          [
+            -39.96,
+            27.46
+          ],
+          [
+            -39.96,
+            56.54
+          ],
+          [
+            -48.04,
+            56.54
+          ]
+        ]
+      },
+      "depth": 0.55,
+      "freeboard": 0.15,
+      "material": "water.still",
+      "working": "still.clear",
+      "history": "weathered",
+      "note": "Level z 0.30 to the wetted faces (0.04 behind the copings' nose line x -48.00/-40.00, y 27.50/56.50); bed z -0.25 (bluestone); 8.08 x 29.08 = 234.97 m2, 129.2 m3. Still: wind ripples, rain rings. Outline in stage coordinates."
+    },
+    {
+      "key": "grounds.rond-point.basin",
+      "anchor": "grounds.rond-point.water",
+      "body": "",
+      "outline": {
+        "ellipse": [
+          2.54,
+          2.54
+        ]
+      },
+      "depth": 0.55,
+      "freeboard": 0.15,
+      "material": "water.still",
+      "working": "still.clear",
+      "history": "weathered",
+      "note": "Round basin on the Élan's meridian: level z 0.30 to the wetted face r 2.54 (nose r 2.50); bed z -0.25; 20.27 m2, 11.1 m3. Still."
+    }
+  ],
+  "beds": [
+    {
+      "bed": "grounds.lawn",
+      "species": "Festuca rubra",
+      "count": 1,
+      "spacing": 0.0,
+      "material": "living.festuca-rubra",
+      "working": "grown",
+      "history": "weathered",
+      "body": "",
+      "ground": {
+        "material": "accent.site-geology",
+        "working": "topsoil",
+        "history": "weathered"
+      },
+      "outline": {
+        "polygon": [
+          [
+            -400.0,
+            -400.0
+          ],
+          [
+            400.0,
+            -400.0
+          ],
+          [
+            400.0,
+            400.0
+          ],
+          [
+            -400.0,
+            400.0
+          ]
+        ]
+      },
+      "note": "Mown fine lawn (tapis vert): red fescue (Chewings and strong creeping, about 80 %) with browntop bent (Agrostis capillaris, about 20 %). Soil top z -0.03. Covers the terrain's top wherever no received outline and no Grounds piece stands (the panels inside the box loops included). As built: blades 3-6 cm, about 12,000/m2, blunt mown tips, 2 m mowing stripes north-south; full sward over x -135...125, y -75...145, thinning over a 30 m fringe to 0.45 of full height; keeps 0.025 clear of anything standing on it and 0.06 of hedge cores."
+    },
+    {
+      "bed": "grounds.allee.w.01",
+      "species": "Osmanthus fragrans",
+      "count": 1,
+      "spacing": 0.0,
+      "material": "living.osmanthus-fragrans",
+      "working": "grown",
+      "history": "weathered",
+      "body": "",
+      "point": [
+        -62.0,
+        26.0
+      ],
+      "height": 6.4,
+      "crownCentre": 4.3,
+      "crownRadii": [
+        2.1,
+        1.9
+      ],
+      "leafDensity": 1.4,
+      "note": "Round-headed osmanthus in the west allée's gravel, every 6 m."
+    },
+    {
+      "bed": "grounds.allee.e.01",
+      "species": "Osmanthus fragrans",
+      "count": 1,
+      "spacing": 0.0,
+      "material": "living.osmanthus-fragrans",
+      "working": "grown",
+      "history": "weathered",
+      "body": "",
+      "point": [
+        -26.0,
+        26.0
+      ],
+      "height": 6.4,
+      "crownCentre": 4.3,
+      "crownRadii": [
+        2.1,
+        1.9
+      ],
+      "leafDensity": 1.4,
+      "note": "Round-headed osmanthus in the east allée's gravel, every 6 m."
+    },
+    {
+      "bed": "grounds.allee.w.02",
+      "species": "Osmanthus fragrans",
+      "count": 1,
+      "spacing": 0.0,
+      "material": "living.osmanthus-fragrans",
+      "working": "grown",
+      "history": "weathered",
+      "body": "",
+      "point": [
+        -62.0,
+        32.0
+      ],
+      "height": 6.4,
+      "crownCentre": 4.3,
+      "crownRadii": [
+        2.1,
+        1.9
+      ],
+      "leafDensity": 1.4,
+      "note": "Round-headed osmanthus in the west allée's gravel, every 6 m."
+    },
+    {
+      "bed": "grounds.allee.e.02",
+      "species": "Osmanthus fragrans",
+      "count": 1,
+      "spacing": 0.0,
+      "material": "living.osmanthus-fragrans",
+      "working": "grown",
+      "history": "weathered",
+      "body": "",
+      "point": [
+        -26.0,
+        32.0
+      ],
+      "height": 6.4,
+      "crownCentre": 4.3,
+      "crownRadii": [
+        2.1,
+        1.9
+      ],
+      "leafDensity": 1.4,
+      "note": "Round-headed osmanthus in the east allée's gravel, every 6 m."
+    },
+    {
+      "bed": "grounds.allee.w.03",
+      "species": "Osmanthus fragrans",
+      "count": 1,
+      "spacing": 0.0,
+      "material": "living.osmanthus-fragrans",
+      "working": "grown",
+      "history": "weathered",
+      "body": "",
+      "point": [
+        -62.0,
+        38.0
+      ],
+      "height": 6.4,
+      "crownCentre": 4.3,
+      "crownRadii": [
+        2.1,
+        1.9
+      ],
+      "leafDensity": 1.4,
+      "note": "Round-headed osmanthus in the west allée's gravel, every 6 m."
+    },
+    {
+      "bed": "grounds.allee.e.03",
+      "species": "Osmanthus fragrans",
+      "count": 1,
+      "spacing": 0.0,
+      "material": "living.osmanthus-fragrans",
+      "working": "grown",
+      "history": "weathered",
+      "body": "",
+      "point": [
+        -26.0,
+        38.0
+      ],
+      "height": 6.4,
+      "crownCentre": 4.3,
+      "crownRadii": [
+        2.1,
+        1.9
+      ],
+      "leafDensity": 1.4,
+      "note": "Round-headed osmanthus in the east allée's gravel, every 6 m."
+    },
+    {
+      "bed": "grounds.allee.w.04",
+      "species": "Osmanthus fragrans",
+      "count": 1,
+      "spacing": 0.0,
+      "material": "living.osmanthus-fragrans",
+      "working": "grown",
+      "history": "weathered",
+      "body": "",
+      "point": [
+        -62.0,
+        44.0
+      ],
+      "height": 6.4,
+      "crownCentre": 4.3,
+      "crownRadii": [
+        2.1,
+        1.9
+      ],
+      "leafDensity": 1.4,
+      "note": "Round-headed osmanthus in the west allée's gravel, every 6 m."
+    },
+    {
+      "bed": "grounds.allee.e.04",
+      "species": "Osmanthus fragrans",
+      "count": 1,
+      "spacing": 0.0,
+      "material": "living.osmanthus-fragrans",
+      "working": "grown",
+      "history": "weathered",
+      "body": "",
+      "point": [
+        -26.0,
+        44.0
+      ],
+      "height": 6.4,
+      "crownCentre": 4.3,
+      "crownRadii": [
+        2.1,
+        1.9
+      ],
+      "leafDensity": 1.4,
+      "note": "Round-headed osmanthus in the east allée's gravel, every 6 m."
+    },
+    {
+      "bed": "grounds.allee.w.05",
+      "species": "Osmanthus fragrans",
+      "count": 1,
+      "spacing": 0.0,
+      "material": "living.osmanthus-fragrans",
+      "working": "grown",
+      "history": "weathered",
+      "body": "",
+      "point": [
+        -62.0,
+        50.0
+      ],
+      "height": 6.4,
+      "crownCentre": 4.3,
+      "crownRadii": [
+        2.1,
+        1.9
+      ],
+      "leafDensity": 1.4,
+      "note": "Round-headed osmanthus in the west allée's gravel, every 6 m."
+    },
+    {
+      "bed": "grounds.allee.e.05",
+      "species": "Osmanthus fragrans",
+      "count": 1,
+      "spacing": 0.0,
+      "material": "living.osmanthus-fragrans",
+      "working": "grown",
+      "history": "weathered",
+      "body": "",
+      "point": [
+        -26.0,
+        50.0
+      ],
+      "height": 6.4,
+      "crownCentre": 4.3,
+      "crownRadii": [
+        2.1,
+        1.9
+      ],
+      "leafDensity": 1.4,
+      "note": "Round-headed osmanthus in the east allée's gravel, every 6 m."
+    },
+    {
+      "bed": "grounds.allee.w.06",
+      "species": "Osmanthus fragrans",
+      "count": 1,
+      "spacing": 0.0,
+      "material": "living.osmanthus-fragrans",
+      "working": "grown",
+      "history": "weathered",
+      "body": "",
+      "point": [
+        -62.0,
+        56.0
+      ],
+      "height": 6.4,
+      "crownCentre": 4.3,
+      "crownRadii": [
+        2.1,
+        1.9
+      ],
+      "leafDensity": 1.4,
+      "note": "Round-headed osmanthus in the west allée's gravel, every 6 m."
+    },
+    {
+      "bed": "grounds.allee.e.06",
+      "species": "Osmanthus fragrans",
+      "count": 1,
+      "spacing": 0.0,
+      "material": "living.osmanthus-fragrans",
+      "working": "grown",
+      "history": "weathered",
+      "body": "",
+      "point": [
+        -26.0,
+        56.0
+      ],
+      "height": 6.4,
+      "crownCentre": 4.3,
+      "crownRadii": [
+        2.1,
+        1.9
+      ],
+      "leafDensity": 1.4,
+      "note": "Round-headed osmanthus in the east allée's gravel, every 6 m."
+    },
+    {
+      "bed": "grounds.avenue.w.01",
+      "species": "Betula pendula",
+      "count": 1,
+      "spacing": 0.0,
+      "material": "living.betula-pendula",
+      "working": "grown",
+      "history": "weathered",
+      "body": "",
+      "point": [
+        -50.5,
+        80.0
+      ],
+      "height": 11.5,
+      "crownCentre": 7.6,
+      "crownRadii": [
+        2.3,
+        3.2
+      ],
+      "leafDensity": 0.8,
+      "note": "Avenue birch on the lawn, 2.5 outside the west kerb."
+    },
+    {
+      "bed": "grounds.avenue.e.01",
+      "species": "Betula pendula",
+      "count": 1,
+      "spacing": 0.0,
+      "material": "living.betula-pendula",
+      "working": "grown",
+      "history": "weathered",
+      "body": "",
+      "point": [
+        -37.5,
+        80.0
+      ],
+      "height": 11.5,
+      "crownCentre": 7.6,
+      "crownRadii": [
+        2.3,
+        3.2
+      ],
+      "leafDensity": 0.8,
+      "note": "Avenue birch on the lawn, 2.5 outside the east kerb."
+    },
+    {
+      "bed": "grounds.avenue.w.02",
+      "species": "Betula pendula",
+      "count": 1,
+      "spacing": 0.0,
+      "material": "living.betula-pendula",
+      "working": "grown",
+      "history": "weathered",
+      "body": "",
+      "point": [
+        -50.5,
+        92.0
+      ],
+      "height": 11.5,
+      "crownCentre": 7.6,
+      "crownRadii": [
+        2.3,
+        3.2
+      ],
+      "leafDensity": 0.8,
+      "note": "Avenue birch on the lawn, 2.5 outside the west kerb."
+    },
+    {
+      "bed": "grounds.avenue.e.02",
+      "species": "Betula pendula",
+      "count": 1,
+      "spacing": 0.0,
+      "material": "living.betula-pendula",
+      "working": "grown",
+      "history": "weathered",
+      "body": "",
+      "point": [
+        -37.5,
+        92.0
+      ],
+      "height": 11.5,
+      "crownCentre": 7.6,
+      "crownRadii": [
+        2.3,
+        3.2
+      ],
+      "leafDensity": 0.8,
+      "note": "Avenue birch on the lawn, 2.5 outside the east kerb."
+    },
+    {
+      "bed": "grounds.avenue.w.03",
+      "species": "Betula pendula",
+      "count": 1,
+      "spacing": 0.0,
+      "material": "living.betula-pendula",
+      "working": "grown",
+      "history": "weathered",
+      "body": "",
+      "point": [
+        -50.5,
+        104.0
+      ],
+      "height": 11.5,
+      "crownCentre": 7.6,
+      "crownRadii": [
+        2.3,
+        3.2
+      ],
+      "leafDensity": 0.8,
+      "note": "Avenue birch on the lawn, 2.5 outside the west kerb."
+    },
+    {
+      "bed": "grounds.avenue.e.03",
+      "species": "Betula pendula",
+      "count": 1,
+      "spacing": 0.0,
+      "material": "living.betula-pendula",
+      "working": "grown",
+      "history": "weathered",
+      "body": "",
+      "point": [
+        -37.5,
+        104.0
+      ],
+      "height": 11.5,
+      "crownCentre": 7.6,
+      "crownRadii": [
+        2.3,
+        3.2
+      ],
+      "leafDensity": 0.8,
+      "note": "Avenue birch on the lawn, 2.5 outside the east kerb."
+    },
+    {
+      "bed": "grounds.avenue.w.04",
+      "species": "Betula pendula",
+      "count": 1,
+      "spacing": 0.0,
+      "material": "living.betula-pendula",
+      "working": "grown",
+      "history": "weathered",
+      "body": "",
+      "point": [
+        -50.5,
+        116.0
+      ],
+      "height": 11.5,
+      "crownCentre": 7.6,
+      "crownRadii": [
+        2.3,
+        3.2
+      ],
+      "leafDensity": 0.8,
+      "note": "Avenue birch on the lawn, 2.5 outside the west kerb."
+    },
+    {
+      "bed": "grounds.avenue.e.04",
+      "species": "Betula pendula",
+      "count": 1,
+      "spacing": 0.0,
+      "material": "living.betula-pendula",
+      "working": "grown",
+      "history": "weathered",
+      "body": "",
+      "point": [
+        -37.5,
+        116.0
+      ],
+      "height": 11.5,
+      "crownCentre": 7.6,
+      "crownRadii": [
+        2.3,
+        3.2
+      ],
+      "leafDensity": 0.8,
+      "note": "Avenue birch on the lawn, 2.5 outside the east kerb."
+    },
+    {
+      "bed": "grounds.walk.s.01",
+      "species": "Betula pendula",
+      "count": 1,
+      "spacing": 0.0,
+      "material": "living.betula-pendula",
+      "working": "grown",
+      "history": "weathered",
+      "body": "",
+      "point": [
+        -12.0,
+        63.8
+      ],
+      "height": 10.5,
+      "crownCentre": 7.0,
+      "crownRadii": [
+        2.2,
+        3.0
+      ],
+      "leafDensity": 0.8,
+      "note": "Birch south of the walk east's south leg (none north of it: no room before Albion)."
+    },
+    {
+      "bed": "grounds.walk.s.02",
+      "species": "Betula pendula",
+      "count": 1,
+      "spacing": 0.0,
+      "material": "living.betula-pendula",
+      "working": "grown",
+      "history": "weathered",
+      "body": "",
+      "point": [
+        3.0,
+        63.8
+      ],
+      "height": 10.5,
+      "crownCentre": 7.0,
+      "crownRadii": [
+        2.2,
+        3.0
+      ],
+      "leafDensity": 0.8,
+      "note": "Birch south of the walk east's south leg (none north of it: no room before Albion)."
+    },
+    {
+      "bed": "grounds.walk.s.03",
+      "species": "Betula pendula",
+      "count": 1,
+      "spacing": 0.0,
+      "material": "living.betula-pendula",
+      "working": "grown",
+      "history": "weathered",
+      "body": "",
+      "point": [
+        18.0,
+        63.8
+      ],
+      "height": 10.5,
+      "crownCentre": 7.0,
+      "crownRadii": [
+        2.2,
+        3.0
+      ],
+      "leafDensity": 0.8,
+      "note": "Birch south of the walk east's south leg (none north of it: no room before Albion)."
+    },
+    {
+      "bed": "grounds.walk.n.04",
+      "species": "Betula pendula",
+      "count": 1,
+      "spacing": 0.0,
+      "material": "living.betula-pendula",
+      "working": "grown",
+      "history": "weathered",
+      "body": "",
+      "point": [
+        33.0,
+        38.2
+      ],
+      "height": 10.5,
+      "crownCentre": 7.0,
+      "crownRadii": [
+        2.2,
+        3.0
+      ],
+      "leafDensity": 0.8,
+      "note": "Birch north of the walk east."
+    },
+    {
+      "bed": "grounds.walk.s.04",
+      "species": "Betula pendula",
+      "count": 1,
+      "spacing": 0.0,
+      "material": "living.betula-pendula",
+      "working": "grown",
+      "history": "weathered",
+      "body": "",
+      "point": [
+        33.0,
+        45.8
+      ],
+      "height": 10.5,
+      "crownCentre": 7.0,
+      "crownRadii": [
+        2.2,
+        3.0
+      ],
+      "leafDensity": 0.8,
+      "note": "Birch south of the walk east."
+    },
+    {
+      "bed": "grounds.grove.01",
+      "species": "Betula pendula",
+      "count": 1,
+      "spacing": 0.0,
+      "material": "living.betula-pendula",
+      "working": "grown",
+      "history": "weathered",
+      "body": "",
+      "point": [
+        -40.0,
+        -44.0
+      ],
+      "height": 12.0,
+      "crownCentre": 8.0,
+      "crownRadii": [
+        2.6,
+        3.4
+      ],
+      "leafDensity": 0.8,
+      "note": "Grove birch north of the Salon, over its roofline."
+    },
+    {
+      "bed": "grounds.grove.02",
+      "species": "Betula pendula",
+      "count": 1,
+      "spacing": 0.0,
+      "material": "living.betula-pendula",
+      "working": "grown",
+      "history": "weathered",
+      "body": "",
+      "point": [
+        -33.0,
+        -49.0
+      ],
+      "height": 12.0,
+      "crownCentre": 8.0,
+      "crownRadii": [
+        2.6,
+        3.4
+      ],
+      "leafDensity": 0.8,
+      "note": "Grove birch north of the Salon."
+    },
+    {
+      "bed": "grounds.grove.03",
+      "species": "Osmanthus fragrans",
+      "count": 1,
+      "spacing": 0.0,
+      "material": "living.osmanthus-fragrans",
+      "working": "grown",
+      "history": "weathered",
+      "body": "",
+      "point": [
+        -47.0,
+        -51.0
+      ],
+      "height": 7.0,
+      "crownCentre": 4.4,
+      "crownRadii": [
+        2.4,
+        2.1
+      ],
+      "leafDensity": 1.4,
+      "note": "Grove osmanthus north of the Salon."
+    },
+    {
+      "bed": "grounds.grove.04",
+      "species": "Betula pendula",
+      "count": 1,
+      "spacing": 0.0,
+      "material": "living.betula-pendula",
+      "working": "grown",
+      "history": "weathered",
+      "body": "",
+      "point": [
+        -112.0,
+        -8.0
+      ],
+      "height": 12.0,
+      "crownCentre": 8.0,
+      "crownRadii": [
+        2.6,
+        3.4
+      ],
+      "leafDensity": 0.8,
+      "note": "Grove birch beyond the oval."
+    },
+    {
+      "bed": "grounds.grove.05",
+      "species": "Betula pendula",
+      "count": 1,
+      "spacing": 0.0,
+      "material": "living.betula-pendula",
+      "working": "grown",
+      "history": "weathered",
+      "body": "",
+      "point": [
+        -115.0,
+        7.0
+      ],
+      "height": 12.0,
+      "crownCentre": 8.0,
+      "crownRadii": [
+        2.6,
+        3.4
+      ],
+      "leafDensity": 0.8,
+      "note": "Grove birch beyond the oval."
+    },
+    {
+      "bed": "grounds.grove.06",
+      "species": "Betula pendula",
+      "count": 1,
+      "spacing": 0.0,
+      "material": "living.betula-pendula",
+      "working": "grown",
+      "history": "weathered",
+      "body": "",
+      "point": [
+        -92.0,
+        44.0
+      ],
+      "height": 12.0,
+      "crownCentre": 8.0,
+      "crownRadii": [
+        2.6,
+        3.4
+      ],
+      "leafDensity": 0.8,
+      "note": "Grove birch west of the parterre."
+    },
+    {
+      "bed": "grounds.grove.07",
+      "species": "Osmanthus fragrans",
+      "count": 1,
+      "spacing": 0.0,
+      "material": "living.osmanthus-fragrans",
+      "working": "grown",
+      "history": "weathered",
+      "body": "",
+      "point": [
+        -98.0,
+        56.0
+      ],
+      "height": 7.0,
+      "crownCentre": 4.4,
+      "crownRadii": [
+        2.4,
+        2.1
+      ],
+      "leafDensity": 1.4,
+      "note": "Grove osmanthus west of the parterre."
+    },
+    {
+      "bed": "grounds.grove.08",
+      "species": "Betula pendula",
+      "count": 1,
+      "spacing": 0.0,
+      "material": "living.betula-pendula",
+      "working": "grown",
+      "history": "weathered",
+      "body": "",
+      "point": [
+        88.0,
+        -18.0
+      ],
+      "height": 12.0,
+      "crownCentre": 8.0,
+      "crownRadii": [
+        2.6,
+        3.4
+      ],
+      "leafDensity": 0.8,
+      "note": "Grove birch east of the Élan."
+    },
+    {
+      "bed": "grounds.grove.09",
+      "species": "Osmanthus fragrans",
+      "count": 1,
+      "spacing": 0.0,
+      "material": "living.osmanthus-fragrans",
+      "working": "grown",
+      "history": "weathered",
+      "body": "",
+      "point": [
+        92.0,
+        10.0
+      ],
+      "height": 7.0,
+      "crownCentre": 4.4,
+      "crownRadii": [
+        2.4,
+        2.1
+      ],
+      "leafDensity": 1.4,
+      "note": "Grove osmanthus east of the Élan."
+    },
+    {
+      "bed": "grounds.grove.10",
+      "species": "Betula pendula",
+      "count": 1,
+      "spacing": 0.0,
+      "material": "living.betula-pendula",
+      "working": "grown",
+      "history": "weathered",
+      "body": "",
+      "point": [
+        30.0,
+        66.0
+      ],
+      "height": 12.0,
+      "crownCentre": 8.0,
+      "crownRadii": [
+        2.6,
+        3.4
+      ],
+      "leafDensity": 0.8,
+      "note": "Grove birch south of the walk east."
+    },
+    {
+      "bed": "grounds.grove.11",
+      "species": "Osmanthus fragrans",
+      "count": 1,
+      "spacing": 0.0,
+      "material": "living.osmanthus-fragrans",
+      "working": "grown",
+      "history": "weathered",
+      "body": "",
+      "point": [
+        -20.5,
+        18.0
+      ],
+      "height": 7.0,
+      "crownCentre": 4.4,
+      "crownRadii": [
+        2.4,
+        2.1
+      ],
+      "leafDensity": 1.4,
+      "note": "Grove osmanthus between the cour and Albion (4.9 from Albion's envelope)."
+    },
+    {
+      "bed": "grounds.grove.12",
+      "species": "Osmanthus fragrans",
+      "count": 1,
+      "spacing": 0.0,
+      "material": "living.osmanthus-fragrans",
+      "working": "grown",
+      "history": "weathered",
+      "body": "",
+      "point": [
+        -20.5,
+        30.5
+      ],
+      "height": 7.0,
+      "crownCentre": 4.4,
+      "crownRadii": [
+        2.4,
+        2.1
+      ],
+      "leafDensity": 1.4,
+      "note": "Grove osmanthus between the cour and Albion (4.9 from Albion's envelope)."
+    },
+    {
+      "bed": "grounds.hedge.panel.west",
+      "species": "Buxus sempervirens",
+      "count": 218,
+      "spacing": 0.3,
+      "material": "living.buxus-sempervirens",
+      "working": "grown",
+      "history": "weathered",
+      "body": "",
+      "line": [
+        [
+          -51.95,
+          27.45
+        ],
+        [
+          -57.55,
+          27.45
+        ],
+        [
+          -57.55,
+          54.55
+        ],
+        [
+          -51.95,
+          54.55
+        ]
+      ],
+      "closed": true,
+      "clipped": {
+        "width": 0.42,
+        "height": 0.52,
+        "batter": 0.015,
+        "shoulder": 0.045,
+        "coreInset": 0.055,
+        "leavesPerM2": 32000,
+        "ends": "closed"
+      },
+      "note": "Clipped box loop 0.45 inside the west panel's kerb, 65.4 m, convex corners; the clipped top wanders +-1.2 % over about 5.5 m as a function of position (joints never show). Lawn inside it and in the 0.18 strip to the kerb."
+    },
+    {
+      "bed": "grounds.hedge.panel.east",
+      "species": "Buxus sempervirens",
+      "count": 218,
+      "spacing": 0.3,
+      "material": "living.buxus-sempervirens",
+      "working": "grown",
+      "history": "weathered",
+      "body": "",
+      "line": [
+        [
+          -36.05,
+          27.45
+        ],
+        [
+          -30.45,
+          27.45
+        ],
+        [
+          -30.45,
+          54.55
+        ],
+        [
+          -36.05,
+          54.55
+        ]
+      ],
+      "closed": true,
+      "clipped": {
+        "width": 0.42,
+        "height": 0.52,
+        "batter": 0.015,
+        "shoulder": 0.045,
+        "coreInset": 0.055,
+        "leavesPerM2": 32000,
+        "ends": "closed"
+      },
+      "note": "Clipped box loop 0.45 inside the east panel's kerb, 65.4 m, convex corners; the clipped top wanders +-1.2 % over about 5.5 m as a function of position (joints never show). Lawn inside it and in the 0.18 strip to the kerb."
+    },
+    {
+      "bed": "grounds.hedge.ball.01",
+      "species": "Buxus sempervirens",
+      "count": 1,
+      "spacing": 0.0,
+      "material": "living.buxus-sempervirens",
+      "working": "grown",
+      "history": "weathered",
+      "body": "",
+      "point": [
+        -52.85,
+        28.35
+      ],
+      "clipped": {
+        "ball": 0.92,
+        "sink": 0.04,
+        "coreInset": 0.055,
+        "leavesPerM2": 32000
+      },
+      "note": "Clipped box ball, 0.9 in from the loop's corner lines."
+    },
+    {
+      "bed": "grounds.hedge.ball.02",
+      "species": "Buxus sempervirens",
+      "count": 1,
+      "spacing": 0.0,
+      "material": "living.buxus-sempervirens",
+      "working": "grown",
+      "history": "weathered",
+      "body": "",
+      "point": [
+        -56.65,
+        28.35
+      ],
+      "clipped": {
+        "ball": 0.92,
+        "sink": 0.04,
+        "coreInset": 0.055,
+        "leavesPerM2": 32000
+      },
+      "note": "Clipped box ball, 0.9 in from the loop's corner lines."
+    },
+    {
+      "bed": "grounds.hedge.ball.03",
+      "species": "Buxus sempervirens",
+      "count": 1,
+      "spacing": 0.0,
+      "material": "living.buxus-sempervirens",
+      "working": "grown",
+      "history": "weathered",
+      "body": "",
+      "point": [
+        -52.85,
+        53.65
+      ],
+      "clipped": {
+        "ball": 0.92,
+        "sink": 0.04,
+        "coreInset": 0.055,
+        "leavesPerM2": 32000
+      },
+      "note": "Clipped box ball, 0.9 in from the loop's corner lines."
+    },
+    {
+      "bed": "grounds.hedge.ball.04",
+      "species": "Buxus sempervirens",
+      "count": 1,
+      "spacing": 0.0,
+      "material": "living.buxus-sempervirens",
+      "working": "grown",
+      "history": "weathered",
+      "body": "",
+      "point": [
+        -56.65,
+        53.65
+      ],
+      "clipped": {
+        "ball": 0.92,
+        "sink": 0.04,
+        "coreInset": 0.055,
+        "leavesPerM2": 32000
+      },
+      "note": "Clipped box ball, 0.9 in from the loop's corner lines."
+    },
+    {
+      "bed": "grounds.hedge.ball.05",
+      "species": "Buxus sempervirens",
+      "count": 1,
+      "spacing": 0.0,
+      "material": "living.buxus-sempervirens",
+      "working": "grown",
+      "history": "weathered",
+      "body": "",
+      "point": [
+        -35.15,
+        28.35
+      ],
+      "clipped": {
+        "ball": 0.92,
+        "sink": 0.04,
+        "coreInset": 0.055,
+        "leavesPerM2": 32000
+      },
+      "note": "Clipped box ball, 0.9 in from the loop's corner lines."
+    },
+    {
+      "bed": "grounds.hedge.ball.06",
+      "species": "Buxus sempervirens",
+      "count": 1,
+      "spacing": 0.0,
+      "material": "living.buxus-sempervirens",
+      "working": "grown",
+      "history": "weathered",
+      "body": "",
+      "point": [
+        -31.35,
+        28.35
+      ],
+      "clipped": {
+        "ball": 0.92,
+        "sink": 0.04,
+        "coreInset": 0.055,
+        "leavesPerM2": 32000
+      },
+      "note": "Clipped box ball, 0.9 in from the loop's corner lines."
+    },
+    {
+      "bed": "grounds.hedge.ball.07",
+      "species": "Buxus sempervirens",
+      "count": 1,
+      "spacing": 0.0,
+      "material": "living.buxus-sempervirens",
+      "working": "grown",
+      "history": "weathered",
+      "body": "",
+      "point": [
+        -35.15,
+        53.65
+      ],
+      "clipped": {
+        "ball": 0.92,
+        "sink": 0.04,
+        "coreInset": 0.055,
+        "leavesPerM2": 32000
+      },
+      "note": "Clipped box ball, 0.9 in from the loop's corner lines."
+    },
+    {
+      "bed": "grounds.hedge.ball.08",
+      "species": "Buxus sempervirens",
+      "count": 1,
+      "spacing": 0.0,
+      "material": "living.buxus-sempervirens",
+      "working": "grown",
+      "history": "weathered",
+      "body": "",
+      "point": [
+        -31.35,
+        53.65
+      ],
+      "clipped": {
+        "ball": 0.92,
+        "sink": 0.04,
+        "coreInset": 0.055,
+        "leavesPerM2": 32000
+      },
+      "note": "Clipped box ball, 0.9 in from the loop's corner lines."
+    },
+    {
+      "bed": "grounds.exedra.east",
+      "species": "Taxus baccata",
+      "count": 34,
+      "spacing": 0.5,
+      "material": "living.taxus-baccata",
+      "working": "grown",
+      "history": "weathered",
+      "body": "",
+      "arc": {
+        "centre": [
+          -44.0,
+          62.0
+        ],
+        "r": 14.0,
+        "from_deg": 0.41,
+        "to_deg": 69.08
+      },
+      "clipped": {
+        "width": 0.9,
+        "height": 1.7,
+        "batter": 0.04,
+        "shoulder": 0.08,
+        "coreInset": 0.075,
+        "leavesPerM2": 58000,
+        "ends": "open"
+      },
+      "note": "Yew exedra closing the cross walk from the south (plan angles from +x towards +y); 16.78 m; its end on the plane y 62.10, 0.04 clear of the kerb; open +-20.92 deg about south (a 10.0 chord) for the avenue."
+    },
+    {
+      "bed": "grounds.exedra.west",
+      "species": "Taxus baccata",
+      "count": 34,
+      "spacing": 0.5,
+      "material": "living.taxus-baccata",
+      "working": "grown",
+      "history": "weathered",
+      "body": "",
+      "arc": {
+        "centre": [
+          -44.0,
+          62.0
+        ],
+        "r": 14.0,
+        "from_deg": 110.92,
+        "to_deg": 179.59
+      },
+      "clipped": {
+        "width": 0.9,
+        "height": 1.7,
+        "batter": 0.04,
+        "shoulder": 0.08,
+        "coreInset": 0.075,
+        "leavesPerM2": 58000,
+        "ends": "open"
+      },
+      "note": "Yew exedra closing the cross walk from the south (plan angles from +x towards +y); 16.78 m; its end on the plane y 62.10, 0.04 clear of the kerb; open +-20.92 deg about south (a 10.0 chord) for the avenue."
+    }
+  ]
+}
