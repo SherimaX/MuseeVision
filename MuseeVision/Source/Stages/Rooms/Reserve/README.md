@@ -29,9 +29,12 @@ stair once the golden iris has raised the pond. Module `MuseeReserve` (Editor): 
 
 ## Tests
 
-`Musee.Reserve.Ports`, `.Anchors` (every work on a rack names the rack's body), `.Described`, `.Plan`, `.Heights` (every box
-at the level the sheet gives it); its shells are proved sealed by Studio's `Musee.Studio.RoomsSealed`, and its door's joint
-clear of it and of the oval by `Musee.Studio.JointsClear.nympheas.stair`, since a room never sees FormMaking.
+`Musee.Reserve.Ports`, `.Anchors` (every work on a rack names the rack's body and hangs on its mesh, each mesh the rack's
+own wires; every rack's guard says why it waits), `.Described`, `.Plan`, `.Heights` (every box at the level the sheet
+gives it); its shells are proved sealed by Studio's `Musee.Studio.RoomsSealed`, and its door's joint
+clear of it and of the oval by `Musee.Studio.JointsClear.nympheas.stair`, since a room never sees FormMaking. That a
+rack's pull rides its rack is Studio's and Motion's to prove (`Musee.Studio.StageMake`: a control on a body's parts
+rides the body), and that its works hang from the mesh by their hooks, Art's (`Musee.Art.Hooks`).
 
 ## Make
 

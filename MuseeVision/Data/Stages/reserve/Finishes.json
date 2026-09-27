@@ -205,6 +205,13 @@
       "note": "Every oil's frame (Hang frame): carved oak, gesso, water-gilt on red bole, 0.090 face; the Salon's frame, bole on the worn ridges; Art builds it."
     },
     {
+      "surface": "reserve.frame.hook",
+      "material": "bronze.cusn10",
+      "working": "patinated",
+      "history": "handled",
+      "note": "The works' hanging hardware on the racks' mesh (§3.7, Art's): a pair of S-hooks of 2 mm wire over a level wire, through the screw eyes in the frame's back (Data/Art/Hooks.json); patina rubbed bright where hands hang them."
+    },
+    {
       "surface": "reserve.pastel.mat",
       "material": "accent.rag-board",
       "working": "cut.bevelled",

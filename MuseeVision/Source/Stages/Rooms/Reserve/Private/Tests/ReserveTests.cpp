@@ -95,6 +95,29 @@ namespace Musee::Reserve::Tests
 				return A.Kind == FName(TEXT("Body")) && Work.Anchor.ToString().StartsWith(A.Key.ToString() + TEXT("."));
 			});
 			TestEqual(*FString::Printf(TEXT("%s rides the body its wall is on"), *Work.Work), Work.Body, Rack ? Rack->Key : FMuseeKey());
+			// Works hang on the mesh by S-hooks (§3.7): every face a work hangs on is a mesh of the plan.
+			TestTrue(*FString::Printf(TEXT("%s hangs on its rack's mesh"), *Work.Work), !Rack
+				|| Hang.GetValue().Meshes.ContainsByPredicate([&Work](const FArtMesh& Mesh) { return Mesh.Anchor == Work.Anchor; }));
+		}
+		// Each mesh is the rack's own wires as its drawing lays them: level wires on the rack's west side, uprights on its
+		// east, Ø 3.0 at 25 mm, the works' back plane 0.012 off the centre plane.
+		const double R = 0.5 * Plan::WireDiameter;
+		const double Middle = 0.5 * (Plan::KickRailTop + Plan::TopRailBottom);
+		const double Levels = FMath::FloorToDouble((0.5 * (Plan::TopRailBottom - Plan::KickRailTop) - R) / Plan::WirePitch) * Plan::WirePitch;
+		const double Uprights = FMath::FloorToDouble((Plan::RailEnd - R) / Plan::WirePitch) * Plan::WirePitch;
+		const double Reach = Plan::PostY + 0.5 * Plan::PostAlong;
+		TestEqual(TEXT("a mesh for each hung face"), Hang.GetValue().Meshes.Num(), int32(UE_ARRAY_COUNT(Plan::LitFaces)));
+		for (const FArtMesh& Mesh : Hang.GetValue().Meshes)
+		{
+			const FString Face = Mesh.Anchor.ToString();
+			TestNotNull(*FString::Printf(TEXT("%s is a hung face"), *Face), FindAnchor(Description, Mesh.Anchor, TEXT("Wall")));
+			const double West = Face.EndsWith(TEXT(".west")) ? 1.0 : -1.0;
+			TestTrue(*FString::Printf(TEXT("%s's level wires are the rack's"), *Face), FMath::IsNearlyEqual(Mesh.Levels.From, Middle - Levels, 1e-9)
+				&& FMath::IsNearlyEqual(Mesh.Levels.To, Middle + Levels, 1e-9) && Mesh.Levels.Pitch == Plan::WirePitch);
+			TestTrue(*FString::Printf(TEXT("%s's uprights are the rack's"), *Face), FMath::IsNearlyEqual(Mesh.Uprights.From, Reach - Uprights, 1e-9)
+				&& FMath::IsNearlyEqual(Mesh.Uprights.To, Reach + Uprights, 1e-9) && Mesh.Uprights.Pitch == Plan::WirePitch);
+			TestEqual(*FString::Printf(TEXT("%s's level wires lie behind the works' backs"), *Face), Mesh.Behind, Plan::WorksBack - West * R, 1e-9);
+			TestEqual(*FString::Printf(TEXT("%s's wire"), *Face), Mesh.Wire, Plan::WireDiameter);
 		}
 		TestEqual(TEXT("36 racks"), Motion.GetValue().Mechanisms.Num(), 36);
 		for (const FMotionMechanismSpec& Mechanism : Motion.GetValue().Mechanisms)

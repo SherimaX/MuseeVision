@@ -391,9 +391,15 @@ racks' rolling voice; brick bond detail at the chamfers and rings; a study bench
 3. The racks' picture lights use `linear-cove.3000k` in a bronze trough; the catalogue's `picture-light.2700k` is
    2700 K and evidence-incomplete. A trough picture-light type at 3000 K would be truer.
 
-**Contract questions (for the Architect):** Mechanisms.json here uses two fields the contract lacks: `"group":
-"reserve.screens"` (at most one member out; a use sends the others home first) and `"start": "open"` (rack C's
-initial position; `home` stays `closed`).
+**Contract questions (for the Architect):** `"group"` and `"start"` are in the contract now. The Reserve's schedules
+use three fields the contract's schemas don't yet show:
+- Hang.json, a work's `"body": "<Body anchor key, optional>"` (as Lighting's and Planting's entries carry theirs): the
+  work is made where its anchor stands at rest and carried in the body's frame, so it rides its rack.
+- Hang.json, `"meshes": [ { "anchor": "<Wall anchor key>", "hooks": "<surface>", "levels": { "from", "to", "pitch" },
+  "uprights": { "from", "to", "pitch" }, "behind": <m>, "wire": <m> } ]`: the wire mesh behind a Wall anchor, which
+  its framed works hang from by S-hooks (Art's hardware, Data/Art/Hooks.json).
+- Mechanisms.json, `"guardCaption": "<text>"`: what the control says while the guard holds for the visitor (§6), keyed
+  `<mechanism>.guard-caption` when written plainly.
 
 ## Build notes
 - **Frame.** Origin at the nave's centre on the floor, museum (−44.00, 0, −5.80), yaw 0. Everything here is local.
@@ -430,5 +436,13 @@ initial position; `home` stays `closed`).
 - **Respond imposts** are solid blocks from the wall face (as built a corbel in front of the pilaster, leaving a gap).
 - Lighting.json (K3-LIGHT-NATURE): the catalogue gaps are real types, `pendant-globe.3000k` (a 596 lm opal E27 lamp in the room's cased opal globe) and `uplight.3000k` (a 500 lm, 40 degree GU10 reflector lamp in the room's can, its face 50 mm where the sheet asks about 45).
 - Hang.json (ST-RESERVE), to §8: the pastels' window mats are named as their mats (`mat` reserve.pastel.mat, `matSize` 0.99 × 0.76 and 0.58 × 0.74), not as frames, and their glazing as `glazed` / `glazing` reserve.pastel.glass; a card lying on its reader is unframed.
+- Hang.json and Finishes.json (ST-RESERVE), to §3.7 ("Works hang on the mesh by pairs of bronze S-hooks at the frames'
+  hangers"): each hung face names its mesh (`meshes`: the rack's level and upright wires, as §3.7 lays them, the level
+  wires 0.0105 behind the works' back plane on a west face and 0.0135 on an east, behind the uprights), and the hooks'
+  finish `reserve.frame.hook`, patinated bronze rubbed by hands. Art hangs each framed work from its mesh by two S-hooks
+  of 2 mm wire through screw eyes a third of the frame down its back, each over the lowest level wire that leaves the
+  hook a 20 mm shank, passing the uprights halfway between two (Data/Art/Hooks.json: framers' practice, not measured).
+- Mechanisms.json (ST-RESERVE), to §6: each rack's guard caption, "Screen C waits: you are in its way", as
+  `guardCaption`.
 - Hang.json (ST-RESERVE), to §2 ("Anchors on a rack's body ride it") and §6: the ten works on the racks' faces name their rack's body (`body` reserve.screen-<x>, the field Lighting and Planting already carry), so Art carries them on it and rack C starts out with its three Renoirs.
 - Finishes.json (ST-RESERVE), to §2: the threshold is laid by the Reserve, not the joint (the door's class carries no allowance, so Site lays none and each stage finishes its own side): `reserve.door.threshold`, honed travertine foot-worn as the museum's threshold (Data/Site/Joints.json), x −30.570 → −30.000 (the strip's half on the mating plane before it), 2.400 wide, top 0.000, on the brick sill lowered by its 30 mm. The oval's bottom landing is rebated for the strip's other half.

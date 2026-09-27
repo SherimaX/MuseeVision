@@ -1,5 +1,143 @@
 {
   "stage": "reserve",
+  "meshes": [
+    {
+      "anchor": "reserve.screen-a.west",
+      "hooks": "reserve.frame.hook",
+      "levels": {
+        "from": 0.23,
+        "to": 3.28,
+        "pitch": 0.025
+      },
+      "uprights": {
+        "from": 0.1,
+        "to": 4.9,
+        "pitch": 0.025
+      },
+      "behind": 0.0105,
+      "wire": 0.003,
+      "note": "Rack A's west face (§3.7): its level wires, z 1.755 ± 61 × 0.025, lie on the mesh's west side, facing the works, their centres 0.0105 behind the works' back plane (0.012 off the centre plane); its uprights, 2.500 ± 96 × 0.025 along the face, lie behind them. The works hang on it by pairs of bronze S-hooks through their frames' eyes (Art's hardware)."
+    },
+    {
+      "anchor": "reserve.screen-b.west",
+      "hooks": "reserve.frame.hook",
+      "levels": {
+        "from": 0.23,
+        "to": 3.28,
+        "pitch": 0.025
+      },
+      "uprights": {
+        "from": 0.1,
+        "to": 4.9,
+        "pitch": 0.025
+      },
+      "behind": 0.0105,
+      "wire": 0.003,
+      "note": "Rack B's west face (§3.7): its level wires, z 1.755 ± 61 × 0.025, lie on the mesh's west side, facing the works, their centres 0.0105 behind the works' back plane (0.012 off the centre plane); its uprights, 2.500 ± 96 × 0.025 along the face, lie behind them. The works hang on it by pairs of bronze S-hooks through their frames' eyes (Art's hardware)."
+    },
+    {
+      "anchor": "reserve.screen-b.east",
+      "hooks": "reserve.frame.hook",
+      "levels": {
+        "from": 0.23,
+        "to": 3.28,
+        "pitch": 0.025
+      },
+      "uprights": {
+        "from": 0.1,
+        "to": 4.9,
+        "pitch": 0.025
+      },
+      "behind": 0.0135,
+      "wire": 0.003,
+      "note": "Rack B's east face (§3.7): its level wires, z 1.755 ± 61 × 0.025, lie behind the uprights, their centres 0.0135 behind the works' back plane (0.012 off the centre plane); its uprights, 2.500 ± 96 × 0.025 along the face, face the works, and the hooks pass between them. The works hang on it by pairs of bronze S-hooks through their frames' eyes (Art's hardware)."
+    },
+    {
+      "anchor": "reserve.screen-c.west",
+      "hooks": "reserve.frame.hook",
+      "levels": {
+        "from": 0.23,
+        "to": 3.28,
+        "pitch": 0.025
+      },
+      "uprights": {
+        "from": 0.1,
+        "to": 4.9,
+        "pitch": 0.025
+      },
+      "behind": 0.0105,
+      "wire": 0.003,
+      "note": "Rack C's west face (§3.7): its level wires, z 1.755 ± 61 × 0.025, lie on the mesh's west side, facing the works, their centres 0.0105 behind the works' back plane (0.012 off the centre plane); its uprights, 2.500 ± 96 × 0.025 along the face, lie behind them. The works hang on it by pairs of bronze S-hooks through their frames' eyes (Art's hardware)."
+    },
+    {
+      "anchor": "reserve.screen-d.west",
+      "hooks": "reserve.frame.hook",
+      "levels": {
+        "from": 0.23,
+        "to": 3.28,
+        "pitch": 0.025
+      },
+      "uprights": {
+        "from": 0.1,
+        "to": 4.9,
+        "pitch": 0.025
+      },
+      "behind": 0.0105,
+      "wire": 0.003,
+      "note": "Rack D's west face (§3.7): its level wires, z 1.755 ± 61 × 0.025, lie on the mesh's west side, facing the works, their centres 0.0105 behind the works' back plane (0.012 off the centre plane); its uprights, 2.500 ± 96 × 0.025 along the face, lie behind them. The works hang on it by pairs of bronze S-hooks through their frames' eyes (Art's hardware)."
+    },
+    {
+      "anchor": "reserve.screen-d.east",
+      "hooks": "reserve.frame.hook",
+      "levels": {
+        "from": 0.23,
+        "to": 3.28,
+        "pitch": 0.025
+      },
+      "uprights": {
+        "from": 0.1,
+        "to": 4.9,
+        "pitch": 0.025
+      },
+      "behind": 0.0135,
+      "wire": 0.003,
+      "note": "Rack D's east face (§3.7): its level wires, z 1.755 ± 61 × 0.025, lie behind the uprights, their centres 0.0135 behind the works' back plane (0.012 off the centre plane); its uprights, 2.500 ± 96 × 0.025 along the face, face the works, and the hooks pass between them. The works hang on it by pairs of bronze S-hooks through their frames' eyes (Art's hardware)."
+    },
+    {
+      "anchor": "reserve.screen-e.west",
+      "hooks": "reserve.frame.hook",
+      "levels": {
+        "from": 0.23,
+        "to": 3.28,
+        "pitch": 0.025
+      },
+      "uprights": {
+        "from": 0.1,
+        "to": 4.9,
+        "pitch": 0.025
+      },
+      "behind": 0.0105,
+      "wire": 0.003,
+      "note": "Rack E's west face (§3.7): its level wires, z 1.755 ± 61 × 0.025, lie on the mesh's west side, facing the works, their centres 0.0105 behind the works' back plane (0.012 off the centre plane); its uprights, 2.500 ± 96 × 0.025 along the face, lie behind them. The works hang on it by pairs of bronze S-hooks through their frames' eyes (Art's hardware)."
+    },
+    {
+      "anchor": "reserve.screen-e.east",
+      "hooks": "reserve.frame.hook",
+      "levels": {
+        "from": 0.23,
+        "to": 3.28,
+        "pitch": 0.025
+      },
+      "uprights": {
+        "from": 0.1,
+        "to": 4.9,
+        "pitch": 0.025
+      },
+      "behind": 0.0135,
+      "wire": 0.003,
+      "note": "Rack E's east face (§3.7): its level wires, z 1.755 ± 61 × 0.025, lie behind the uprights, their centres 0.0135 behind the works' back plane (0.012 off the centre plane); its uprights, 2.500 ± 96 × 0.025 along the face, face the works, and the hooks pass between them. The works hang on it by pairs of bronze S-hooks through their frames' eyes (Art's hardware)."
+    }
+  ],
   "works": [
     {
       "work": "caillebotte-young-man-window",
