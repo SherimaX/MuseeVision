@@ -9,29 +9,36 @@
   "dielectric": {
     "diffuseAlbedo": {
       "value": [
-        32.0,
-        4.0,
-        12.0
+        30.8,
+        3.9,
+        12.2
       ],
       "space": "CIELAB (D65, 2 deg)",
       "unit": "CIELAB",
-      "grade": "unverified",
-      "source": "Palette.json: accent.site-geology",
-      "note": "A first colour for Topsoil (the dark, humus-rich surface horizon): no measured colour was read: a first value read from trade and museum photographs of the named material."
+      "grade": "derived",
+      "source": "Munsell renotation data, RIT MCSL real.dat (xyY, illuminant C, 2 deg), https://www.rit-mcsl.org/MunsellRenotation/real.dat: '10YR 3 2 0.3747 0.3630 6.555'; the mollic class (moist value and chroma both 3 or less) is from Substances/topsoil.json, after the University of Georgia soil-taxonomy key",
+      "note": "Checked the real.dat line and redid the conversion. 10YR 3/2 sits at the class's value limit but inside its chroma limit, not at both limits. The choice of 10YR and chroma 2 is a pick within the class, not a measurement of the site's soil. This is the moist colour.",
+      "derivation": "10YR 3/2: xyY (C) to XYZ, Bradford adaptation from C to D65, then CIELAB with a D65 white = (30.78, 3.86, 12.19). I recomputed and confirmed this."
     },
     "refractiveIndex": {
-      "value": 1.54,
+      "value": 1.547,
       "unit": "1",
-      "grade": "unverified",
-      "source": "Handbook of Mineralogy, Quartz (Anthony, Bideaux, Bladh and Nichols, Mineralogical Society of America): n omega 1.544",
-      "note": "Soil is mostly quartz grains with humus; the quartz index stands."
+      "grade": "derived",
+      "source": "webmineral.com, Quartz: 'w=1.543-1.545, e=1.552-1.554', https://www.webmineral.com/data/Quartz.shtml",
+      "note": "Corrected from 1.548. The proposal took the plain mean of w and e, but a random orientation weights the ordinary index twice. F0 changes by less than 0.0001. Humus and clay minerals are ignored.",
+      "min": 1.543,
+      "max": 1.554,
+      "derivation": "For randomly oriented uniaxial grains, the mean index is (2w + e)/3 = (2 x 1.544 + 1.553)/3 = 1.547"
     },
     "porosity": {
       "value": 0.49,
       "unit": "1",
-      "grade": "unverified",
-      "source": "Palette.json: accent.site-geology",
-      "note": "Substances/topsoil.json: physical.porosity (0.40 to 0.58, from ideal bulk densities): the middle."
+      "grade": "derived",
+      "source": "University of Illinois, 'Soil Quality for Environmental Health: Bulk Density', Table 1 (ideal bulk densities: sandy < 1.60, silty < 1.40, clayey < 1.10 g/cm3), https://soilquality.nres.illinois.edu/bulk-density/; webmineral.com, Quartz (density 2.6 to 2.65), https://www.webmineral.com/data/Quartz.shtml",
+      "note": "Checked. The ideal densities are upper limits ('<'), so each porosity is a minimum for good soil. 2.65 is the top of webmineral's quartz range (average 2.62). The clayey end overstates, because clay and humus are lighter than quartz.",
+      "min": 0.4,
+      "max": 0.58,
+      "derivation": "porosity = 1 - bulk density / 2.65: sandy 0.40, silty 0.47, clayey 0.58; the midpoint of 0.40 and 0.58 is 0.49"
     },
     "wettingDepth": {
       "value": 5.0,

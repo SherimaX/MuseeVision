@@ -20,10 +20,12 @@
       "note": "A first colour for Dark iron glaze (brown-black): no measured colour was read: a first value read from trade and museum photographs of the named material."
     },
     "refractiveIndex": {
-      "value": 1.52,
+      "value": 1.5,
       "unit": "1",
-      "grade": "unverified",
-      "source": "Substances/low-iron-glass.json (1.523 for soda-lime float); a ceramic glaze is a soda-lime-alumina-silica glass of about the same index"
+      "grade": "secondary",
+      "source": "Sang et al. 2025, npj Heritage Science s40494-025-01630-0: glass phase of a Longquan high-temperature glaze 1.500 (after Pagliari et al. 2013)",
+      "derivation": "Transferred from the same family of high-fired lime-alkali silicate glazes",
+      "note": "Not measured on an iron-black glaze. At about 5 to 8 % Fe2O3, oxide additivity suggests about +0.02, giving roughly 1.52, which is the old value. Keep an uncertainty of about +/-0.03."
     },
     "porosity": {
       "value": 0.0,

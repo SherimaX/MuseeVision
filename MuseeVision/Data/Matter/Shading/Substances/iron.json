@@ -35,22 +35,26 @@
   "tarnish": {
     "diffuseAlbedo": {
       "value": [
-        0.12,
-        0.05,
-        0.03
+        0.107,
+        0.054,
+        0.039
       ],
       "space": "linear Rec.709 (sRGB primaries), D65 white",
       "unit": "1",
-      "grade": "unverified",
-      "source": "Histories/iron.corrosion.json (rust, a hydrated iron oxide)",
-      "note": "A first rust brown; the museum's steel is always painted."
+      "grade": "derived",
+      "source": "Vacek, Krivy, Kreislova, Vlachova, Kubzova, 'Experimental Measurement of Deposition Chloride Ions in the Vicinity of Road Cut', Materials (Basel) 16(1):88, Table 23, https://pmc.ncbi.nlm.nih.gov/articles/PMC9821097/",
+      "note": "Verified as for steel (envelope green max recomputes to 0.073, not 0.074). This is a proxy. The rust measured is on a low-alloy weathering steel, not on Victorian cast or wrought iron. The first rust of any iron in air is the same lepidocrocite-goethite pair, but graphite in cast iron and slag in wrought iron may darken it. The museum's iron is painted, so this shows only where paint has failed.",
+      "derivation": "As steel.tarnish.diffuseAlbedo: mean CIELAB (30.39, 10.05, 10.65) of five rusted Corten A coupons, D65 2-degree white, linear Rec.709. Envelope min [0.093, 0.037, 0.023], max [0.119, 0.073, 0.069]."
     },
     "refractiveIndex": {
-      "value": 2.3,
+      "value": 2.26,
       "unit": "1",
-      "grade": "unverified",
-      "source": "Histories/iron.corrosion.json (goethite and lepidocrocite, n 2.2 to 2.5)",
-      "note": "A first value."
+      "grade": "derived",
+      "source": "webmineral.com Lepidocrocite and Goethite optical data, https://www.webmineral.com/data/Lepidocrocite.shtml , https://www.webmineral.com/data/Goethite.shtml ; phase fractions from Vacek et al., Materials 16(1):88 (PMC9821097), Table 31",
+      "note": "As steel.tarnish.refractiveIndex; verified against both webmineral pages. The phase fractions come from rust on weathering steel, used here as a proxy for iron's first rust.",
+      "min": 1.94,
+      "max": 2.515,
+      "derivation": "0.75 x 2.217 (lepidocrocite mean principal index) + 0.25 x 2.375 (goethite mean principal index) = 2.256."
     },
     "roughness": {
       "value": 0.8,

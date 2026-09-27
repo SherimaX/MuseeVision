@@ -9,15 +9,26 @@
   "dielectric": {
     "diffuseAlbedo": {
       "value": [
-        70.0,
-        -3.0,
-        4.0
+        60.0,
+        -5.4,
+        5.8
       ],
       "space": "CIELAB (D65, 2 deg)",
       "unit": "CIELAB",
-      "grade": "unverified",
-      "source": "Palette.json: accent.porcelain-glazed and accent.stoneware-glazed (Chenghuai's ceramics, the catalogue's media)",
-      "note": "The Guan kilns' thick grey-blue celadon; its crackle is not drawn: no measured colour was read: a first value read from museum photographs of the named ware."
+      "grade": "derived",
+      "source": "Zhao Ren et al. (2026) 'The mechanisms of color, opacifying, and cracks in celadon glazes from the Southern Song Guan Kiln', npj Heritage Science 14, https://www.nature.com/articles/s40494-026-02383-0 (text: L* 'at 60 ± 10', a* -8.49 to -2.25, b* 2.56 to 8.99, all C* below 10; six sherds G-1 to G-6; X-Rite Ci7800, 2 mm aperture, mean of three readings)",
+      "note": "Checked: the text gives these ranges and the hue groups (G-4 and G-5 yellow, from more Fe3+; G-1 and G-6 green; G-2 and G-3 tending blue). The value is the midpoint of all six sherds, yellow ones included, so it is greener and yellower than the grey-blue Guan the record names. The claim that a grey-blue sherd sits near b* 3 is a guess: the per-sherd numbers are only in Fig. 3a and were not read. The paper does not state the illuminant or observer, so D65/2 deg is an assumption.",
+      "min": [
+        50,
+        -8.49,
+        2.56
+      ],
+      "max": [
+        70,
+        -2.25,
+        8.99
+      ],
+      "derivation": "L* = 60, the stated centre (60 +/- 10); a* = (-8.49 + -2.25)/2 = -5.37; b* = (2.56 + 8.99)/2 = 5.78"
     },
     "refractiveIndex": {
       "value": 1.52,
@@ -28,16 +39,17 @@
     "porosity": {
       "value": 0.0,
       "unit": "1",
-      "grade": "unverified",
-      "source": "Palette.json: accent.stoneware-glazed (the glazes' first values)",
-      "note": "A glaze is glass: it has no open pores."
+      "grade": "record",
+      "source": "MuseeVision/Docs/Matter/Story.md, 'Glazed stoneware and fired clay' (a glaze is a glass fused to a clay body, after Kingery, Bowen and Uhlmann, Introduction to Ceramics, 2nd ed., 1976; a glazed piece is drawn as its glaze, with no open pores)",
+      "note": "Checked: Story.md says this. The glass has no open pores. The Guan crackle does open through the glaze, but it is not drawn."
     },
     "wettingDepth": {
       "value": 0.0,
       "unit": "mm",
-      "grade": "unverified",
-      "source": "Palette.json: accent.stoneware-glazed (the glazes' first values)",
-      "note": "The depth whose pores govern the face's look when wet."
+      "grade": "derived",
+      "source": "MuseeVision/Docs/Matter/Story.md (a glaze has no open pores)",
+      "note": "This follows from the zero porosity. The crackle is ignored.",
+      "derivation": "With no open pores, water cannot enter, so the wetting depth is zero."
     }
   },
   "structure": {

@@ -20,10 +20,14 @@
       "note": "bay 3 (Leisure & Light): sage"
     },
     "refractiveIndex": {
-      "value": 1.46,
+      "value": 1.55,
       "unit": "1",
-      "grade": "record",
-      "source": "Substances/velvet.json: optics.clothModelVelvet.eta (measured fit, Irawan & Marschner 2012)"
+      "grade": "derived",
+      "source": "SCAQMD Method 317-93 (approved May 1993, revised August 1996), Table 1 'Optical properties of natural fibers' (compiled from The Particle Atlas): 'Animal' (hair), length 1.55, cross 1.54; wool, length 1.556, cross 1.547; https://www.aqmd.gov/docs/default-source/laboratory-procedures/methods-procedures/317-93.pdf",
+      "min": 1.54,
+      "max": 1.556,
+      "derivation": "(n_par + 2 n_perp)/3 = 1.543 (animal hair) to 1.550 (wool)",
+      "note": "Same as velvet.haystack. The table has no mohair row; the value replaces the fitted model eta 1.46, which is not a fibre index. Outside the unverified remit."
     },
     "porosity": {
       "value": 0.6,

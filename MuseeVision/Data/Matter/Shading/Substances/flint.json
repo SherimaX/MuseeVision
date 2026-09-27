@@ -9,27 +9,32 @@
   "dielectric": {
     "diffuseAlbedo": {
       "value": [
-        30.0,
-        0.0,
-        2.0
+        20.5,
+        3.9,
+        4.2
       ],
       "space": "CIELAB (D65, 2 deg)",
       "unit": "CIELAB",
-      "grade": "unverified",
-      "source": "Munsell N3 (blue-black), the broken face of chalk flint as field descriptions give it; its white cortex is not the broken face",
-      "note": "No measured colour of the site's own ground was read: a first colour from the Munsell notation field descriptions give the layer, converted approximately."
+      "grade": "derived",
+      "source": "M. M. Aliyu, W. Murphy, J. A. Lawrence, R. Collier, 'Engineering geological characterization of flints', QJEGH 50(2), 133-147, 2017 (accepted version, https://eprints.whiterose.ac.uk/id/eprint/111092/1/aliyu%20et%20al%202017.pdf), Table 1: dark brown grey flint (DBG) 5YR 2/1; Table 2: DBG in the Seaford Chalk (East Sussex, Dieppe) and Lewes Chalk (Mesnil-Val); Munsell renotation real.dat (RIT MCSL): 5YR 2/2 x 0.3880, y 0.3476, Y 3.126",
+      "note": "real.dat has no chroma-1 entry, so the halfway interpolation is approximate. Other Table 1 classes: GF N5, LBG 5YR 6/1, BG 5G 2/1. Aliyu's grey flints are from the Northern Province Burnham Chalk. The old N3 converts to L* about 30.8. The stage calls the inside 'glassy black', which agrees with this darker value.",
+      "derivation": "Chroma 1 taken halfway in xy between illuminant C (0.3101, 0.3162) and 5YR 2/2, giving (0.3491, 0.3319) at Y 0.03126. Bradford adaptation C to D65, then CIELAB D65. I recomputed this independently and got [20.5, 3.9, 4.2]."
     },
     "refractiveIndex": {
-      "value": 1.54,
+      "value": 1.537,
       "unit": "1",
-      "grade": "unverified",
-      "source": "Handbook of Mineralogy, Quartz (Anthony, Bideaux, Bladh and Nichols, Mineralogical Society of America): n omega 1.544 (chalcedony is microcrystalline quartz)"
+      "grade": "secondary",
+      "source": "S. Md. Shahabudden, N. Sultana, 'Physical and optical properties of chalcedony gemstone - a case study from Kolluru area, Guntur District, Andhra Pradesh, India', JETIR 7(4), 2020, https://www.jetir.org/papers/JETIR2004235.pdf, Table 5.10: refractometer RI 1.534-1.540 across 23 samples, SG 2.58-2.62",
+      "derivation": "The middle of the measured 1.534 to 1.540",
+      "note": "Measured on Indian chalcedony varieties (carnelian, agate, jasper, plasma), not on chalk flint. Flint's microcrystalline quartz, moganite and water put it below quartz's 1.547, which is consistent. A low-tier journal."
     },
     "porosity": {
       "value": 0.02,
       "unit": "1",
-      "grade": "unverified",
-      "source": "Flint is a near-solid chalcedony: a first value of a few per cent micro-porosity"
+      "grade": "secondary",
+      "source": "R. Mortimore, 'Flints in the Late Cretaceous Chalk of NW Europe', Deposits Magazine, 17 July 2020, https://depositsmag.com/2020/07/17/flints-in-the-late-cretaceous-chalk-of-nw-europe/: interior of flint 'up to 1% to 5% porosity', cortex '3% to 12%' (Lautridou et al. 1986); Aliyu et al. 2017 Tables 6 and 9: DBG (Seaford/Lewes) density 2.66-2.69 Mg/m3, silica over 99 %",
+      "derivation": "A value in the lower part of the 1 to 5 % interior range, chosen for the dense, over-99 %-silica southern DBG flints",
+      "note": "Correction to the derivation: Aliyu's caliper densities of 2.66 to 2.69 exceed quartz's 2.65, so they cannot resolve porosity at the percent level. They show only that the flint is dense. 0.02 is a judgement inside Lautridou's range. This is the broken interior; the cortex is 3 to 12 %."
     },
     "wettingDepth": {
       "value": 5.0,
@@ -43,16 +48,18 @@
     "grain": {
       "value": 0.01,
       "unit": "mm",
-      "grade": "unverified",
-      "source": "Docs/Stages/cube.md section 7 (the ground rule's relief and stones)",
-      "note": "The finest structure the face shows."
+      "grade": "secondary",
+      "source": "Mortimore 2020, Deposits Magazine (URL above): flint has 'a very fine-grained structure (size of grains 0.5-20 um)'",
+      "note": "The value is unchanged, now with a source.",
+      "derivation": "10 um lies inside the 0.5 to 20 um range"
     },
     "bed": {
       "value": 120,
       "unit": "mm",
-      "grade": "unverified",
-      "source": "Docs/Stages/cube.md section 7 (the ground rule's relief and stones)",
-      "note": "The coarsest structure the face shows."
+      "grade": "design",
+      "source": "Docs/Stages/cube.md section 7, 'Flint nodule bands': 'nodules r 0.06-0.12 in a 0.24 cell' (read, line 346)",
+      "note": "A design value. It is a radius: the largest nodule is 240 mm across, the same as the cell.",
+      "derivation": "The largest nodule radius of the stage rule, 0.12 m"
     },
     "bedAspect": {
       "value": 1.0,

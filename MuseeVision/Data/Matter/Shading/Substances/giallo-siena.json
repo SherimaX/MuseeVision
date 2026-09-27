@@ -27,11 +27,12 @@
       "derivation": "n = (1 + sqrt(F0)) / (1 - sqrt(F0)), the index whose normal-incidence reflectance is the record's F0"
     },
     "porosity": {
-      "value": 0.005,
+      "value": 0.0024,
       "unit": "1",
-      "grade": "unverified",
-      "source": "Palette.json: accent.giallo-siena realMaterial (yellow brecciated marble, Montagnola Senese)",
-      "note": "A dense marble, open porosity a few tenths of a per cent; no measured value was read."
+      "grade": "manufacturer",
+      "source": "Granital Siena s.r.l., 'Cave di marmo Giallo Siena: Giallo Siena Broccatello' data sheet (A.D. Arianna Losi, Marzo 2013; tests at the Marble Laboratory, Politecnico di Torino), physical-mechanical table: EN 1936-07 open porosity 0.24 % (st. dev. 0.09); EN 13755-08 water absorption 0.10 % (0.01); EN 1936-07 apparent density 2710 kg/m3, http://www.granitalsiena.com/pdf/giallo-siena-broccatello-marmo-granital-siena.pdf",
+      "note": "Verified on the Broccatello variety from Sovicille (Siena). The macroscopic description reads 'The rock is compact but porous near the veins'. I did not open the Lithos Design listing, so it is dropped.",
+      "derivation": "0.24 % as a fraction"
     },
     "wettingDepth": {
       "value": 1.0,
@@ -43,11 +44,14 @@
   },
   "structure": {
     "grain": {
-      "value": 0.1,
+      "value": 0.23,
       "unit": "mm",
-      "grade": "unverified",
-      "source": "Palette.json: accent.giallo-siena realMaterial (yellow brecciated marble, Montagnola Senese)",
-      "note": "A fine-grained marble whose breccia is its visible structure."
+      "grade": "derived",
+      "source": "Granital Siena s.r.l., 'Giallo Siena Broccatello' data sheet (2013), microscopic description (EN 12407 and EN 12670): calcite > 95 % in straight anhedral crystals; 'The crystals vary from 60 to 900 um in some veins and patches of the mosaic'; macroscopic: 'medium-fine-grained', http://www.granitalsiena.com/pdf/giallo-siena-broccatello-marmo-granital-siena.pdf",
+      "note": "Accepted with a caveat. The sheet's sentence (Italian: 'variano da 60 a 900 um in alcune venature e plaghe del mosaico') can be read as giving the range only for some veins and patches. The size of the bulk mosaic may be narrower. The sheet calls the stone a banded, foliated calcitic crystalloblastic marble, with quartz blasts (< 0.8 mm), limonite, hematite, chlorite, acicular muscovite and tourmaline at the veins.",
+      "min": 0.06,
+      "max": 0.9,
+      "derivation": "Geometric mean of the stated crystal-size range: sqrt(0.06 mm x 0.9 mm) = 0.232 mm"
     },
     "bed": {
       "value": 150,

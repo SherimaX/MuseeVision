@@ -43,16 +43,17 @@
     },
     "scattering": {
       "value": [
-        1e-06,
-        1e-06,
-        1e-06
+        6.5e-07,
+        1.32e-06,
+        3.13e-06
       ],
       "space": "linear Rec.709 (sRGB primaries), D65 white",
       "unit": "1/mm",
-      "grade": "unverified",
-      "source": "Substances/water.json: unverified optics.scatteringCoefficient (Morel 1974, of the order of 1e-3 per metre)",
-      "note": "The order of magnitude the record names, until Morel's values are read at their source.",
-      "conditions": "components at 650, 550 and 450 nm (red, green, blue)"
+      "grade": "derived",
+      "source": "X. Zhang, L. Hu, M.-X. He, 'Scattering by pure seawater: Effect of salinity', Optics Express 17(7), 5698-5710 (2009), Fig. 4 (beta(90) at 546 nm, 20 degC, read at S = 0 where the total equals the density-fluctuation term), Table 1 (depolarisation ratio 0.039) and section 3 (power-law slope -4.286 at S = 0, anchor 450 nm); read at https://misclab.umeoce.maine.edu/ftp/classes/OO2011/incoming/zhang_et_al_2009_oe.pdf",
+      "note": "Verified: the paper was opened. delta = 0.039 (Table 1, section 3) and slope -4.286 at S = 0 (section 3) are as stated. Fig. 4's curves start at about 8.3e-5 1/m at S = 0 (a figure reading, good to perhaps 1-2 %). The integration factor and the spectral scaling reproduce. Corrections to the proposal's note. (1) The paper gives the pure-water model's agreement with Morel's measurements as -0.67 % to 1.97 % (delta 0.039-0.051), and 1 % for seawater at S = 38.4. (2) The 'Morel 1974 theoretical freshwater 2.2e-3 1/m' comparison is not in the opened source; drop it or cite Morel 1974 after reading it. The paper only says Morel's theoretical (seawater) estimates may be high. Scattering varies about 3.7 % over 0-26 degC. This is pure water only (Rayleigh-like, strongly blue); the ponds' particles and phytoplankton belong to histories. Add conditions 'components at 650, 550 and 450 nm (red, green, blue); 20 degC'.",
+      "conditions": "components at 650, 550 and 450 nm (red, green, blue)",
+      "derivation": "beta(90) = 8.3e-5 1/(m sr) for pure water at 546 nm, 20 degC (read from Fig. 4 at S = 0). For molecular scattering with depolarisation delta, beta(theta) = beta(90)[1 + p cos^2 theta], p = (1-delta)/(1+delta) = 0.9249; b = 4 pi beta(90)(1 + p/3) = (8 pi/3)(2+delta)/(1+delta) beta(90) = 16.44 beta(90) = 1.365e-3 1/m at 546 nm. b(lambda) = b(546)(lambda/546)^-4.286: 650 nm 6.46e-4, 550 nm 1.32e-3, 450 nm 3.13e-3 1/m; divided by 1000 for 1/mm. b(500) = 1.99e-3 1/m."
     }
   }
 }

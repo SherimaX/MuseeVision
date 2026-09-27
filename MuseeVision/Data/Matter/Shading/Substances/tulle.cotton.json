@@ -22,9 +22,12 @@
     "refractiveIndex": {
       "value": 1.55,
       "unit": "1",
-      "grade": "unverified",
-      "source": "cellulose, the fibre's substance: about 1.53 across the fibre and 1.58 along it; no document with the values was read here",
-      "note": "The mean of the two, for a cloth whose fibres lie every way."
+      "grade": "derived",
+      "source": "South Coast Air Quality Management District, SCAQMD Method 317-93, Qualitative Analysis of Natural or Man-Made Fiber Types (approved May 1993, revised August 1996), Table 1 'Optical properties of natural fibers' (compiled from The Particle Atlas): cotton, length 1.578, cross 1.532, birefringence 0.046; https://www.aqmd.gov/docs/default-source/laboratory-procedures/methods-procedures/317-93.pdf",
+      "note": "Checked against the PDF's Table 1; the values match. The row is native cotton. The same table gives mercerized cotton as length 1.544-1.566 and cross 1.522-1.524. If the net is mercerized, the average falls to about 1.53-1.54 and the lower bound to 1.522. Ageing and yellowing of the fibre are not covered.",
+      "min": 1.532,
+      "max": 1.578,
+      "derivation": "Orientation average of a uniaxial fibre lying every way: (n_par + 2 n_perp)/3 = (1.578 + 2 x 1.532)/3 = 1.547; the simple mean of the two is 1.555. Both round to 1.55. min and max are the fibre's two principal indices."
     },
     "porosity": {
       "value": 0.7,
@@ -43,11 +46,14 @@
   },
   "structure": {
     "grain": {
-      "value": 1.0,
+      "value": 1.4,
       "unit": "mm",
-      "grade": "unverified",
-      "source": "Palette.json accent.cotton-tulle",
-      "note": "The finest structure the cloth shows: its net's hexagonal mesh, about a millimetre."
+      "grade": "derived",
+      "source": "Corbet, M. (2013) 'Cotton Tulle - There's a Big Difference!', Needle 'n Thread, 20 Nov 2013, https://www.needlenthread.com/2013/11/cotton-tulle.html (cotton hexagon-net tulle at 18 hpi, hexagons per inch; a reader's comment reports English netting at 20 hexagons per inch); AllThreads, 'Tulle net', https://www.allthreads.com.au/products/tulle (100 % cotton hexagonal hole lace net, 14 holes per inch)",
+      "note": "Accepted with the source statement corrected. The 20-per-inch figure comes from a reader's comment under the article, not from the article, which gives only 18 hpi. The article describes a cotton machine-made hexagon net and states no fibre percentage. The count direction of 'per inch' in a bobbinet is not specified, so the pitch is approximate. The skirt's own net was not measured.",
+      "min": 1.27,
+      "max": 1.81,
+      "derivation": "mesh pitch = 25.4 mm / hexagons per inch: 25.4/18 = 1.41 mm; range 25.4/20 = 1.27 mm to 25.4/14 = 1.81 mm"
     },
     "bed": {
       "value": 40.0,

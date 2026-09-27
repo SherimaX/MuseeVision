@@ -20,10 +20,14 @@
       "note": "bay 5 (Monet's Series): haystack, ochre"
     },
     "refractiveIndex": {
-      "value": 1.46,
+      "value": 1.55,
       "unit": "1",
-      "grade": "record",
-      "source": "Substances/velvet.json: optics.clothModelVelvet.eta (measured fit, Irawan & Marschner 2012)"
+      "grade": "derived",
+      "source": "SCAQMD Method 317-93 (approved May 1993, revised August 1996), Table 1 'Optical properties of natural fibers' (compiled from The Particle Atlas): 'Animal' (hair), length 1.55, cross 1.54; wool, length 1.556, cross 1.547; https://www.aqmd.gov/docs/default-source/laboratory-procedures/methods-procedures/317-93.pdf",
+      "min": 1.54,
+      "max": 1.556,
+      "derivation": "(n_par + 2 n_perp)/3: animal hair (1.55 + 2 x 1.54)/3 = 1.543; wool (1.556 + 2 x 1.547)/3 = 1.550. Mohair is a keratin hair, so 1.55.",
+      "note": "Checked against the PDF. The table's row is headed 'Animal', generic animal hair; there is no mohair row, so mohair is taken as a keratin hair between the two rows. The present 1.46 (grade 'record') is Sadeghi et al.'s fitted model eta from velvet.json. As the silk record says of its own eta, that is a fitted model parameter, not a fibre index. It is a poor value for dielectric.refractiveIndex and should stay only in optics.clothModelVelvet. The cotton ground (about 1.53-1.58) is hidden by the pile. This is outside the 'unverified' remit."
     },
     "porosity": {
       "value": 0.6,

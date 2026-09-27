@@ -27,11 +27,12 @@
       "note": "Fired clay is quartz, feldspar and glass, indices 1.5 to 1.6; the middle is taken."
     },
     "porosity": {
-      "value": 0.25,
+      "value": 0.27,
       "unit": "1",
-      "grade": "unverified",
-      "source": "Palette.json: accent.brique-bourgogne",
-      "note": "Hand-moulded clay bricks have 20 to 30 % open porosity; no measurement of this brick was read."
+      "grade": "derived",
+      "source": "Briqueterie Dewulf, Fiche Technique B212436, https://briqueterie-dewulf.fr/wp-content/uploads/2019/01/Fiche-Technique-B212436-STD.pdf: solid brick ('Brique pleine') 22 x 10,5 x 5,5, tolerance L,l,h +/-3 %, 2,47 kg, Hoffmann-kiln fired, 'Brique compatible restauration monuments historiques'; Handbook of Mineralogy, 'Quartz': D(meas.) = 2.65",
+      "note": "This is total (open plus closed) porosity from nominal dimensions. The +/-3 % dimensional tolerance alone moves it by about +/-0.06, and a skeletal density of 2.6 to 2.7 gives 0.25 to 0.28. It is a northern French restoration brick, not a Burgundy one, and the fiche does not state where it was made. It supports the old 0.25 but is not a measurement of this brick.",
+      "derivation": "Bulk density = 2470 g / (22 x 10.5 x 5.5 = 1270.5 cm3) = 1.944 g/cm3. Porosity = 1 - 1.944/2.65 = 0.266, rounded to 0.27"
     },
     "wettingDepth": {
       "value": 2.5,
@@ -52,9 +53,10 @@
     "bed": {
       "value": 220,
       "unit": "mm",
-      "grade": "unverified",
-      "source": "Palette.json: accent.brique-bourgogne",
-      "note": "A brick's length: the reach of the mould that made its face."
+      "grade": "secondary",
+      "source": "French Wikipedia 'Brique' typology (mirror https://fr-academic.com/dic.nsf/frwiki/241394): 'Brique de Bourgogne : 22 x 11 x 6 (c'est un arrondi dans le système métrique de 8 x 4 x 2 pouces)'",
+      "note": "The value is unchanged, now with a source for the format. The Eau de Paris Montmartre brochure mentioned in the proposal was not opened by me, so leave it out of the evidence.",
+      "derivation": "The Burgundy brick's length is 22 cm = 220 mm"
     },
     "bedAspect": {
       "value": 1.0,

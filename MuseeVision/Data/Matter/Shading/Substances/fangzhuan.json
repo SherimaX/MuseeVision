@@ -20,18 +20,20 @@
       "note": "A first colour for Square floor tile (金砖, levigated clay, Suzhou imperial kilns at Lumu): no measured colour was read: a first value read from trade and museum photographs of the named material."
     },
     "refractiveIndex": {
-      "value": 1.55,
+      "value": 1.547,
       "unit": "1",
-      "grade": "unverified",
-      "source": "Substances/brick.json (Shading): fired clay is quartz, feldspar and glass, indices 1.5 to 1.6",
-      "note": "The middle of the fired body's mineral indices, as the brick's."
+      "grade": "derived",
+      "source": "He, Li & Zhou 2025 (npj Heritage Science, s40494-025-02072-4): XRD of the UNFIRED body from the drying area shows quartz as the dominant phase, with notable montmorillonite and minor feldspars. Handbook of Mineralogy, 'Quartz' (https://www.handbookofmineralogy.org/pdfs/quartz.pdf): omega = 1.544, epsilon = 1.553",
+      "note": "Correction: the XRD cited is of the unfired clay, not the fired tile. The paper gives no XRD for the fired sample and mentions no glass phase. After firing, the montmorillonite is dehydroxylated. The fired body's quartz, feldspar and amorphous phases lie between about 1.50 and 1.57, so the value holds to about +/-0.02.",
+      "derivation": "(2 x 1.544 + 1.553)/3 = 1.547 for quartz in random orientation"
     },
     "porosity": {
-      "value": 0.1,
+      "value": 0.25,
       "unit": "1",
-      "grade": "unverified",
-      "source": "Palette.json: accent.suzhou-fangzhuan",
-      "note": "A first open porosity for the material; no measurement was read."
+      "grade": "measured",
+      "source": "Y. He, Y. Li, Y. Zhou, 'Microstructural evolution of Jin Zhuan from the Ming and Qing dynasties at the Yuanhetang kiln site', npj Heritage Science, 2025, https://www.nature.com/articles/s40494-025-02072-4: fired Jin Zhuan from the kiln remains at Yuanhetang (Lumu, Suzhou), MIP total porosity 25.3 %, average pore diameter 42.8 nm; cites Yang (1989) open porosity of about 27.3 % for imperial bricks",
+      "note": "Confirmed. The sample is a real Lumu jinzhuan from the kiln remains, not a replica. The old 0.10 was far too low. Correction to the proposal's note: the paper does not tie the brick's ring or dense feel to its pore size, and it says nothing about the tung-oil working. Keep those claims out of the evidence.",
+      "derivation": "25.3 % measured by mercury intrusion on an archaeological fired jinzhuan from the Lumu kiln site"
     },
     "wettingDepth": {
       "value": 1.0,
@@ -50,11 +52,12 @@
       "note": "The levigated clay is very fine; the face shows almost no grain."
     },
     "bed": {
-      "value": 540,
+      "value": 544,
       "unit": "mm",
-      "grade": "unverified",
-      "source": "Palette.json: accent.suzhou-fangzhuan",
-      "note": "One 尺七 tile, 0.54."
+      "grade": "secondary",
+      "source": "Baidu Baike (English), 'Imperial Golden Brick', https://baike.baidu.com/en/item/Imperial%20Golden%20Brick/1470097: dimensions of '70.4 cm, 64 cm, 54.4 cm, and 44.8 cm square'; one chi is 32 cm; made at the Suzhou Lumu 'Imperial Kiln'",
+      "note": "The old value was 540. The 1.4-chi (尺四) size is 448 mm.",
+      "derivation": "The 1.7-chi (尺七) tile: 1.7 x 32 cm = 54.4 cm = 544 mm"
     },
     "bedAspect": {
       "value": 1.0,

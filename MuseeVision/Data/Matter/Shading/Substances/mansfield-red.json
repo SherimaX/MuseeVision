@@ -20,18 +20,22 @@
       "note": "A first colour for Mansfield red sandstone (Permian dolomitic sandstone, Nottinghamshire): no measured colour was read: a first value read from trade and museum photographs of the named material."
     },
     "refractiveIndex": {
-      "value": 1.544,
+      "value": 1.583,
       "unit": "1",
-      "grade": "unverified",
-      "source": "Handbook of Mineralogy, Quartz (Anthony, Bideaux, Bladh and Nichols, Mineralogical Society of America): n omega 1.544",
-      "note": "A dolomitic sandstone: quartz grains in a dolomite cement; the quartz index stands for the grains."
+      "grade": "derived",
+      "source": "Handbook of Mineralogy (Mineral Data Publishing): Quartz, Uniaxial (+), omega 1.544, epsilon 1.553, https://www.handbookofmineralogy.org/pdfs/quartz.pdf ; Dolomite, Uniaxial (-), omega 1.679, epsilon 1.500, https://www.handbookofmineralogy.org/pdfs/dolomite.pdf ; quartz sand 'up to 50%': Wikipedia 'Mansfield stone' citing Lott 2001 p. 106, https://en.wikipedia.org/wiki/Mansfield_stone ; detrital sand 'up to 80% by volume' in the Mansfield facies, carbonate mean 54.35 % CaCO3 and 45.65 % MgCO3: BGS IR/05/048 p. 12, https://nora.nerc.ac.uk/504662/1/IR05048.pdf",
+      "note": "Corrected. The value 1.583 checks out, but at 80 % sand the index is 1.562, not the proposed min of 1.560. Caveat: both sources give only a maximum sand content ('up to'). The 50 % end is therefore a chosen reading, not a measured lower bound on the sand. A less sandy block would sit above 1.583, up to about 1.619 for pure dolomite. Porosity and the red iron-oxide colouring are left out. A modal count of a Mansfield Red thin section would fix the mix.",
+      "min": 1.562,
+      "max": 1.583,
+      "derivation": "For grains in random orientations, F0 = 0.5 R(n_o) + 0.5 <R(n_e(theta))> over the sphere, with R(n) = ((n-1)/(n+1))^2 and 1/n_e(theta)^2 = cos^2/n_o^2 + sin^2/n_e^2. This gives quartz F0 = 0.04613 and dolomite F0 = 0.05581; I rechecked both by Simpson's rule. A 50:50 mix gives F0 = 0.05097, so n = (1+sqrt F0)/(1-sqrt F0) = 1.583. An 80:20 mix gives F0 = 0.04806, so n = 1.562. The same method gives F0 = 0.0533 for calcite (1.658, 1.486), which matches cream-marble.json."
     },
     "porosity": {
-      "value": 0.15,
+      "value": 0.197,
       "unit": "1",
-      "grade": "unverified",
-      "source": "Palette.json: accent.mansfield-red",
-      "note": "A first open porosity for the rock type; no measurement of this stone was read."
+      "grade": "secondary",
+      "source": "Lott G.K. & Cooper A.H. (2005) 'The building limestones of the Upper Permian, Cadeby Formation (Magnesian Limestone) of Yorkshire', British Geological Survey Internal Report IR/05/048, Table 3 'Typical porosities in Cadeby Formation limestones (BGS archive data 1931)', p. 13 (sandy Mansfield facies described on p. 12), https://nora.nerc.ac.uk/504662/1/IR05048.pdf",
+      "note": "Verified. Table 3 is on p. 13, not pp. 12-13, and lists Mansfield White at 19.7 % with a 'crystalline' fabric. It gives no figure for Mansfield Red, so the value stands in from the white variety of the same sandy facies. On p. 12 BGS says both were produced commercially as 'Mansfield Red and White stone' from the sandy facies, and that the last quarry closed in 2004. On p. 13 it says the best building limestones range from 19 % to 25 %. The data are 1931 archive values, so the grade is 'secondary'.",
+      "derivation": "19.7 % as a fraction"
     },
     "wettingDepth": {
       "value": 2.0,
@@ -52,9 +56,9 @@
     "bed": {
       "value": 300,
       "unit": "mm",
-      "grade": "unverified",
-      "source": "Palette.json: accent.mansfield-red",
-      "note": "The coarsest structure the face shows: its bedding, veining or banding."
+      "grade": "design",
+      "source": "MuseeVision/Docs/Stages/albion.md §3.1 Coursing (BandCuts): 'every 1.20 one red course of 0.30'; §3.10 maps albion.wall.red to accent.mansfield-red",
+      "note": "Verified in albion.md. The value is the height of the designed red course, graded as design. The stone's own structure is current (cross) bedding, commonly cut by greenish-grey clay seams (Wikipedia 'Mansfield stone', citing Lott 2001 p. 106), and no opened source measures it. I did not open the 'Language of Stone' blog cited in the proposal, so it is left out."
     },
     "bedAspect": {
       "value": 2.0,

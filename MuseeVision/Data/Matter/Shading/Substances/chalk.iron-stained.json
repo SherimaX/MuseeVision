@@ -20,16 +20,20 @@
       "note": "No measured colour of the site's own ground was read: a first colour from the Munsell notation field descriptions give the layer, converted approximately."
     },
     "refractiveIndex": {
-      "value": 1.6,
+      "value": 1.6007,
       "unit": "1",
-      "grade": "unverified",
-      "source": "Handbook of Mineralogy, Calcite (Anthony, Bideaux, Bladh and Nichols, Mineralogical Society of America): n omega 1.658, n epsilon 1.486; their mean"
+      "grade": "derived",
+      "source": "Handbook of Mineralogy, 'Calcite', https://www.handbookofmineralogy.org/pdfs/calcite.pdf: omega = 1.658, epsilon = 1.486",
+      "derivation": "(2 x 1.658 + 1.486)/3 = 1.6007, the random-polycrystal average",
+      "note": "The host is chalk calcite, and the iron-oxide stain is a minor phase. As for chalk, reconcile this with the 1.6003 in travertine.json and cream-marble.json."
     },
     "porosity": {
-      "value": 0.4,
+      "value": 0.41,
       "unit": "1",
-      "grade": "unverified",
-      "source": "R. A. Downing, M. Price and G. P. Jones (eds.), The Hydrogeology of the Chalk of North-West Europe (Oxford, 1993): matrix porosity of the white chalk 0.35 to 0.45; the middle"
+      "grade": "secondary",
+      "source": "Wikipedia 'Chalk' citing Hancock 1975 (porosity 35-47 %); Bloomfield et al. 1995, QJEGH 28, S131 abstract (https://nora.nerc.ac.uk/7752/, mean 34.0 %)",
+      "derivation": "Middle of 0.35 to 0.47",
+      "note": "This is the host chalk's matrix porosity. The proposal's claim that the stain 'does not change it measurably' is unsupported: iron oxide can partly fill pores. Nothing was read on this, so treat 0.41 as an upper bound for the stained zone."
     },
     "wettingDepth": {
       "value": 5.0,
@@ -43,16 +47,18 @@
     "grain": {
       "value": 0.1,
       "unit": "mm",
-      "grade": "unverified",
-      "source": "Docs/Stages/cube.md section 7 (the ground rule's relief and stones)",
-      "note": "The finest structure the face shows."
+      "grade": "secondary",
+      "source": "Wikipedia 'Chalk' citing Hancock 1975: fragments 10-100 microns, plates 0.5-4 microns",
+      "note": "The same body as the chalk.",
+      "derivation": "The largest common fragments are 0.1 mm"
     },
     "bed": {
       "value": 370,
       "unit": "mm",
-      "grade": "unverified",
-      "source": "Docs/Stages/cube.md section 7 (the ground rule's relief and stones)",
-      "note": "The coarsest structure the face shows."
+      "grade": "design",
+      "source": "Docs/Stages/cube.md section 7, row 'Chalk': 'bedding partings every 0.37' (read, line 344)",
+      "note": "A design value, as for the chalk.",
+      "derivation": "The stage rule's parting spacing, 0.37 m"
     },
     "bedAspect": {
       "value": 1.0,

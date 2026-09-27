@@ -22,9 +22,9 @@
     "refractiveIndex": {
       "value": 1.52,
       "unit": "1",
-      "grade": "unverified",
-      "source": "Tung oil dries to a film of index about 1.52 (a polymerised drying oil, as linseed's 1.48 to 1.52)",
-      "note": "The binder the pigment is bound in; the pigment sets the colour."
+      "grade": "secondary",
+      "source": "Wikipedia, 'Tung oil', infobox: refractive index 1.52 (20 C), https://en.wikipedia.org/wiki/Tung_oil; webmineral.com, Hematite ('e=2.87-2.94, w=3.15-3.22'), https://www.webmineral.com/data/Hematite.shtml",
+      "note": "This is the binder's (liquid) index, and it fits the record's tung-oil binder. The hematite indices are quoted correctly. Pigment exposed at the surface would raise F0, and an oil-rich top film keeps it near the oil's."
     },
     "porosity": {
       "value": 0.02,

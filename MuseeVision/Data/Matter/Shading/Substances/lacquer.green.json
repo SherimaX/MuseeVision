@@ -22,9 +22,9 @@
     "refractiveIndex": {
       "value": 1.52,
       "unit": "1",
-      "grade": "unverified",
-      "source": "Tung oil dries to a film of index about 1.52 (a polymerised drying oil, as linseed's 1.48 to 1.52)",
-      "note": "The binder the pigment is bound in; the pigment sets the colour."
+      "grade": "secondary",
+      "source": "Wikipedia, 'Tung oil', infobox: refractive index 1.52 (20 C), https://en.wikipedia.org/wiki/Tung_oil",
+      "note": "The record names tung oil as a binder, so the source fits. It is the liquid's index; the cured film and the urushiol part were not measured."
     },
     "porosity": {
       "value": 0.0,

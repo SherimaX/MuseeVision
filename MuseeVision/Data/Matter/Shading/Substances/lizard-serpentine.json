@@ -20,18 +20,19 @@
       "note": "Lizard serpentine, Cornwall: dark green and red serpentine veined with white; no measured colour was read: a first value read from trade and museum photographs of the named material (as the Oxford University Museum's shafts show it)."
     },
     "refractiveIndex": {
-      "value": 1.56,
+      "value": 1.551,
       "unit": "1",
-      "grade": "unverified",
-      "source": "Serpentine minerals (antigorite, lizardite) have indices of 1.55 to 1.57 (Handbook of Mineralogy)",
-      "note": "The mean index of the rock's main minerals."
+      "grade": "derived",
+      "source": "Anthony, Bideaux, Bladh & Nichols, Handbook of Mineralogy, 'Lizardite' (Mineral Data Publishing, 2001, v1.2), Optical Properties: alpha 1.538-1.554, beta 1.546-1.560, gamma 1.546-1.560; name for the type locality, the Lizard complex, Cornwall; chemical analysis (1) and X-ray pattern from Kennack Cove. https://www.handbookofmineralogy.org/pdfs/lizardite.pdf",
+      "note": "Checked against the PDF: the indices, the Kennack Cove analysis and the type-locality naming are all as stated. Corrected: the proposal gave the F0 values as 0.0468 and 0.0475. Recomputed, F0 is 0.0467 at 1.551 and 0.0479 at 1.56. The Handbook does not say the Lizard rock is mainly lizardite. That is an inference from the naming and the Kennack Cove analysis. It is reasonable, but it is not stated. Bastite, chrysotile and the hematite of the red variety are left out.",
+      "derivation": "n = mean of the mid-range principal indices = (1.546 + 1.553 + 1.553) / 3 = 1.5507, rounded 1.551. F0 = ((n-1)/(n+1))^2 = 0.0467 (was 0.0479 at 1.56)."
     },
     "porosity": {
       "value": 0.005,
       "unit": "1",
-      "grade": "unverified",
-      "source": "Palette.json: accent.british-column-stones.a",
-      "note": "A first open porosity for the rock type; no measurement of this stone was read."
+      "grade": "secondary",
+      "source": "'Decoding the nanoscale porosity in serpentinites from multidimensional electron microscopy and discrete element modelling', Contributions to Mineralogy and Petrology 178(11), published 17 Oct 2023, PMC11008076: in lizardite-dominated serpentinites, the average porosity of the FIB-SEM excavated volumes is 0.4 +/- 0.07 %, 0.7 +/- 0.08 % and 0.2 +/- 0.05 %; TEM foils average 1-3 %; nanopores are mostly under 10 nm, with some up to 100 nm. https://pmc.ncbi.nlm.nih.gov/articles/PMC11008076/",
+      "note": "Corrected: the paper is from 2023 in Contrib. Mineral. Petrol. 178(11), not 2024. 0.005 lies inside the 0.002-0.007 FIB-SEM range. This is evidence for the rock type only. The samples are from ODP Leg 209 Site 1274 on the Mid-Atlantic Ridge and the Roragen complex in Norway, not from the Lizard. The paper measures total nanoporosity and does not separate connected (open) porosity. Its models suggest the pores connect but warn that natural rock may be less connected. So as an open porosity this value is an upper-leaning estimate."
     },
     "wettingDepth": {
       "value": 1.0,

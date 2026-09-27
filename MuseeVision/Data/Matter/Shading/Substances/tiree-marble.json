@@ -43,11 +43,12 @@
   },
   "structure": {
     "grain": {
-      "value": 2.0,
+      "value": 8.5,
       "unit": "mm",
-      "grade": "unverified",
-      "source": "Palette.json: accent.british-column-stones.i",
-      "note": "The finest structure the face shows at gallery distance."
+      "grade": "derived",
+      "source": "A. F. Hallimond, 'Pyroxenes, amphibole, and mica from the Tiree marble', Mineralogical Magazine 28 (1947) 230-243. p.230: a 'fine-grained, severely crushed limestone'; dark green patches 'usually do not exceed half an inch across and are often much smaller'. p.231: pyroxene (coccolite) grains or aggregates 'usually less than 1/3 of an inch across' in pink porcellanous calcite. p.232: in the calc-gneiss, dark silicate grains up to 1/3 inch and an aggregate about 3 in long. Table I: diopside alpha 1.673, beta 1.679, gamma 1.699, sp. gr. 3.29. https://www.rruff.net/doclib/MinMag/Volume_28/28-199-230.pdf",
+      "note": "Checked: every quotation and the Table I values are as stated. Caveat: 8.5 mm is an upper bound. The paper says the grains are 'usually less than' 1/3 inch and the patches 'often much smaller'. It is not a typical size, and it is not the finest structure in the strict sense. A shader should treat it as the upper end of the visible dark-grain scale. The other records use range centres, so this one sits on a different basis. The pyroxene-marble specimen is from the NE end of the Balephetrish shore section, and the calc-gneiss specimen is from the pink marble quarry.",
+      "derivation": "1/3 in x 25.4 mm/in = 8.47 mm, rounded 8.5 mm; the stated usual upper size of the dark pyroxene grains"
     },
     "bed": {
       "value": 300,

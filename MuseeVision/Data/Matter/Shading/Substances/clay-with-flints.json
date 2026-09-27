@@ -9,21 +9,24 @@
   "dielectric": {
     "diffuseAlbedo": {
       "value": [
-        42.0,
-        17.0,
-        27.0
+        41.2,
+        18.6,
+        30.6
       ],
       "space": "CIELAB (D65, 2 deg)",
       "unit": "CIELAB",
-      "grade": "unverified",
-      "source": "Munsell 5YR 4/6 to 7.5YR 5/6 (yellowish red to strong brown), clay-with-flints as British Geological Survey descriptions give it",
-      "note": "No measured colour of the site's own ground was read: a first colour from the Munsell notation field descriptions give the layer, converted approximately."
+      "grade": "derived",
+      "source": "Colour name: Wikipedia 'Clay-with-Flints' (https://en.wikipedia.org/wiki/Clay-with-Flints), Loveday's definition 'yellowish red or red-brown clay'; BGS Lexicon, Clay-with-flints Formation (https://webapps.bgs.ac.uk/lexicon/lexicon.cfm?pub=CWF): 'orange-brown and red-brown sandy clay'. Munsell renotation real.dat (http://www.rit-mcsl.org/MunsellRenotation/real.dat): 5YR 4/6 x 0.4651, y 0.3859, Y 12.000",
+      "note": "The choice of value 4 within 'yellowish red' is a judgement, not a measurement. 'Red-brown' would be redder (2.5YR). No colour of the site's own clay was measured, and a field Munsell reading of soil is normally of moist soil, so a dry face would be lighter.",
+      "derivation": "5YR 4/6 is the Munsell soil name 'yellowish red'. xyY (C) = (0.4651, 0.3859, 0.1200) converted to XYZ, then Bradford adaptation from C (0.31006, 0.31616) to D65, then CIELAB D65. I recomputed this independently and got [41.2, 18.6, 30.6]. 7.5YR 5/6 (x 0.4440, y 0.3954, Y 19.77) gives [51.6, 14.5, 34.8], also confirmed."
     },
     "refractiveIndex": {
-      "value": 1.56,
+      "value": 1.563,
       "unit": "1",
-      "grade": "unverified",
-      "source": "Handbook of Mineralogy, Kaolinite: n about 1.56 (a clay's mean index)"
+      "grade": "derived",
+      "source": "Handbook of Mineralogy, 'Kaolinite', https://www.handbookofmineralogy.org/pdfs/kaolinite.pdf: alpha = 1.553-1.565, beta = 1.559-1.569, gamma = 1.560-1.570 (opened; confirmed)",
+      "derivation": "Mean of the three range midpoints: (1.559 + 1.564 + 1.565)/3 = 1.5627, rounded to 1.563",
+      "note": "This assumes a kaolinitic clay, and no source on the clay mineralogy of Clay-with-flints was read. If the clay fraction is rich in smectite (montmorillonite about 1.48 to 1.53), the value would be about 0.03 to 0.05 lower. The quartz sand (1.547) changes it by less than 0.02."
     },
     "porosity": {
       "value": 0.45,

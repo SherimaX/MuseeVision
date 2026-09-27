@@ -20,11 +20,14 @@
       "note": "A deep purple-red groundmass (fine hematite) flecked with pale pink plagioclase, averaged over a face; read from photographs of Roman roundels until a specimen is measured."
     },
     "refractiveIndex": {
-      "value": 1.55,
+      "value": 1.554,
       "unit": "1",
-      "grade": "unverified",
-      "source": "Palette.json: accent.porphyry realMaterial (porfido rosso antico, Mons Porphyrites; reclaimed)",
-      "note": "Its phenocrysts and groundmass are chiefly plagioclase feldspar, with indices near 1.55; no measurement of the stone was read. It is the one stone of the Hall that is not calcite."
+      "grade": "derived",
+      "source": "Handbook of Mineralogy (Mineral Data Publishing), Andesine, Biaxial (+): alpha 1.545-1.556, beta 1.548-1.558, gamma 1.552-1.563; 'widespread in igneous rocks of intermediate silica content, as syenites and andesites', https://www.handbookofmineralogy.org/pdfs/andesine.pdf ; ISPRA Museo, 'Porfido rosso antico': 'porfido andesitico-dacitico', phenocrysts 'principalmente di plagioclasio, con subordinati feldspato potassico e orneblenda', microcrystalline groundmass, secondary haematite and piemontite, https://www.isprambiente.gov.it/it/attivita/museo/collezioni-litomineralogiche/lito-reperti/porfido-rosso-antico",
+      "note": "Corrected note. ISPRA names the phenocrysts only as plagioclase. The choice of andesine rests on the rock being andesitic-dacitic, and ISPRA gives no measured anorthite content. ISPRA does not mention quartz or say what the groundmass is made of. The proposal's claims about groundmass quartz and a mostly plagioclase groundmass are therefore removed. Subordinate K-feldspar and hornblende, and the haematite and piemontite, are left out and would shift the index slightly.",
+      "min": 1.545,
+      "max": 1.563,
+      "derivation": "The mean of the three principal indices, each taken at the middle of its range: (1.5505 + 1.553 + 1.5575) / 3 = 1.554. The min and max are the lowest alpha and the highest gamma."
     },
     "porosity": {
       "value": 0.005,

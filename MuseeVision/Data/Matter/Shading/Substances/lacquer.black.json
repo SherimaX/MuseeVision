@@ -22,9 +22,9 @@
     "refractiveIndex": {
       "value": 1.52,
       "unit": "1",
-      "grade": "unverified",
-      "source": "Tung oil dries to a film of index about 1.52 (a polymerised drying oil, as linseed's 1.48 to 1.52)",
-      "note": "The binder the pigment is bound in; the pigment sets the colour."
+      "grade": "secondary",
+      "source": "Wikipedia, 'Tung oil', infobox: refractive index 1.52 (20 C), https://en.wikipedia.org/wiki/Tung_oil",
+      "note": "This is the liquid tung oil's index, a proxy. It holds for a tung-oil (光油) black finish; for a urushiol lacquer, the film's index was not found and not verified. A polymerised film is likely somewhat higher. Hou et al. 2025 (Polymers 17(11):1481, https://pmc.ncbi.nlm.nih.gov/articles/PMC12157858) confirm a closed, glossy Chinese lacquer film (88.96 to 90.96 GU at 60 deg; Ra 0.122 to 0.138 um) but give no index."
     },
     "porosity": {
       "value": 0.0,

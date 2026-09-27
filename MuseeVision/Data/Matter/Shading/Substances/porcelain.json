@@ -29,9 +29,10 @@
     "porosity": {
       "value": 0.005,
       "unit": "1",
-      "grade": "unverified",
-      "source": "Palette.json: accent.porcelain-glazed",
-      "note": "Porcelain is fired to vitrification: under half a per cent open porosity."
+      "grade": "design",
+      "source": "Wikipedia, 'Porcelain tile' ('a water absorption less 0.5 per cent'; ISO 13006, BS EN 14411), https://en.wikipedia.org/wiki/Porcelain_tile; Wikipedia, 'Porcelain' (vitrified, 'impermeable (even before glazing)', fired at 1,200 to 1,400 C), https://en.wikipedia.org/wiki/Porcelain",
+      "note": "The grade is changed from guidance to design. The source's 0.5 % limit is water absorption by mass for modern tiles, not a porosity by volume. At an assumed and unsourced bulk density of about 2.4 g/cm3, the limit is an open porosity of about 0.012, and 0.005 is a value chosen inside it. No measurement of a Ding or other historical porcelain body was read.",
+      "max": 0.012
     },
     "wettingDepth": {
       "value": 0.1,

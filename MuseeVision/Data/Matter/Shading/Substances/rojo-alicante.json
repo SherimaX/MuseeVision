@@ -27,11 +27,12 @@
       "derivation": "n = (1 + sqrt(F0)) / (1 - sqrt(F0)), the index whose normal-incidence reflectance is the record's F0"
     },
     "porosity": {
-      "value": 0.003,
+      "value": 0.006,
       "unit": "1",
-      "grade": "unverified",
-      "source": "Palette.json: accent.rojo-alicante (a dense micritic limestone)",
-      "note": "Dense Spanish marble-limestones absorb 0.1 to 0.3 % water; no measured porosity was read."
+      "grade": "secondary",
+      "source": "EuroLithos / GeoERA ornamental stone sheet 'Rojo Alicante', compiled by the Instituto Geologico y Minero de Espana (IGME); PDF metadata names J. Martinez Martinez (IGME), 2021. Physical properties page: apparent density (EN 1936) 2710 kg/m3, open porosity (EN 1936) 0.6 % vol, water absorption (EN 13755) 0.2 % wt. Sources given: IGME, RocMaquina, Levantina technical report. https://repository.europe-geology.eu/egdidocs/eurolithos/143.pdf",
+      "note": "Confirmed. The sheet gives the place of origin as Monovar, Alicante, from the Cavarrasa quarries; La Romana appears only on its map. Its other entries are Jurassic (Dogger), biomicrite with calcite veins and stylolites, 98 % calcite. As a cross-check, 0.2 % wt x 2.71 = 0.54 % vol, which agrees with the EN 1936 porosity.",
+      "derivation": "0.6 % vol as a fraction = 0.006"
     },
     "wettingDepth": {
       "value": 1.0,
@@ -66,9 +67,12 @@
     "hurst": {
       "value": 0.7,
       "unit": "1",
-      "grade": "unverified",
-      "source": "Candela et al. 2012, Journal of Geophysical Research 117, B08409 (fault surfaces, 0.6 to 0.8; cited in Stone.ush)",
-      "note": "The middle of the range measured on rock surfaces, as the travertine's."
+      "grade": "derived",
+      "source": "Candela et al. 2012, J. Geophys. Res. Solid Earth 117, B08409, doi:10.1029/2011JB009041, abstract (read via https://api.crossref.org/works/10.1029/2011JB009041).",
+      "note": "The exponents are confirmed from the abstract; the claim about limestone lithology is unverified (PDF unreadable). This is a transfer from fractures to a honed face.",
+      "min": 0.58,
+      "max": 0.81,
+      "derivation": "H = (0.58 + 0.81)/2 = 0.695, rounded to 0.70"
     },
     "toneSpread": {
       "value": 0.15,

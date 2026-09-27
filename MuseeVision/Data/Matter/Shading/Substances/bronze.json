@@ -19,14 +19,16 @@
     },
     "f82": {
       "value": [
-        0.921,
-        0.852,
-        0.732
+        0.964,
+        0.816,
+        0.727
       ],
       "space": "linear Rec.709 (sRGB primaries), D65 white",
       "unit": "1",
-      "grade": "unverified",
-      "source": "Substances/bronze.json: unverified optics.f82 (from Cu85Zn15, the nearest measured copper alloy by colour; Querry 1985)"
+      "grade": "derived",
+      "source": "Substances/bronze.json optics.f0 (Moedlinger et al., J. Archaeol. Sci. 88 (2017) 14-23, Table 1, CuSn interpolated to 10 % Sn) and optics.copperReference (Johnson & Christy 1972 Cu n,k); Substances/brass.json optics.spectral (Querry 1985, Cu70Zn30 n,k); M. R. Querry, 'Optical constants', CRDC-CR-85034 (1985), Cu85Zn15 n,k via https://raw.githubusercontent.com/polyanskiy/refractiveindex.info-database/master/database/data/other/alloys/Cu-Zn/nk/Querry-Cu85Zn15.yml ; CIE 1931 2-degree CMFs and D65 (files.cie.co.at, Publications-datasets)",
+      "derivation": "No measured n,k exists for Cu-Sn bronze. For the three measured copper-family metals, the D65/Rec.709 F0 and F82 (Fresnel at cosine 1/7) were integrated as in the brass record and the edge ratio t = (1 - F82)/(1 - F0) taken per channel: Cu (J&C) [0.794, 0.649, 0.624], Cu85Zn15 [0.912, 0.527, 0.471], Cu70Zn30 [1.044, 0.622, 0.513]. Bronze F82 = 1 - (1 - F0_bronze) x mean(t), mean(t) = [0.917, 0.599, 0.536], with F0_bronze = [0.961, 0.693, 0.491] from the record: [0.964, 0.816, 0.727]. Envelope over the three ratios and over the record's F0 range (min [0.868, 0.669, 0.482], max [0.961, 0.694, 0.491]): R 0.862-0.969, G 0.785-0.839, B 0.677-0.760.",
+      "note": "Verified by independent recomputation: the Cu85Zn15 table was opened, and the F0, F82 and edge ratios of all three metals reproduce, as does [0.9642, 0.8160, 0.7272]. Two corrections to the proposal. (1) The green envelope maximum is 0.839, not 0.838, when the record's F0 max (0.694) is used. (2) The proposal said no copper-family metal has F82 below F0 in red. Cu70Zn30 does (t = 1.044: F82 0.905 against F0 0.909). The real reason to replace the Cu85Zn15 proxy's own F82 ([0.921, 0.852, 0.732]) is different. That proxy puts the edge 0.04 below bronze's own measured red F0 (0.961), a drop 10 times larger than any measured metal here shows. Tying the edge to bronze's F0 through measured edge ratios avoids it. The value inherits the record's F0, which the record itself flags as possibly a few per cent high in red (sphere, specular included). It is still a proxy for the edge physics, not a measurement of CuSn10."
     }
   },
   "tarnish": {

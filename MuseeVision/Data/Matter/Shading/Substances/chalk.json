@@ -20,16 +20,20 @@
       "note": "No measured colour of the site's own ground was read: a first colour from the Munsell notation field descriptions give the layer, converted approximately."
     },
     "refractiveIndex": {
-      "value": 1.6,
+      "value": 1.6007,
       "unit": "1",
-      "grade": "unverified",
-      "source": "Handbook of Mineralogy, Calcite (Anthony, Bideaux, Bladh and Nichols, Mineralogical Society of America): n omega 1.658, n epsilon 1.486; their mean"
+      "grade": "derived",
+      "source": "J. W. Anthony, R. A. Bideaux, K. W. Bladh, M. C. Nichols (eds.), Handbook of Mineralogy, 'Calcite', https://www.handbookofmineralogy.org/pdfs/calcite.pdf, Optical Properties: omega = 1.658, epsilon = 1.486 (opened; values confirmed)",
+      "derivation": "Random-polycrystal orientation average of a uniaxial crystal: (2 n_omega + n_epsilon)/3 = (2 x 1.658 + 1.486)/3 = 1.6007",
+      "note": "Checked the arithmetic: 4.802/3 = 1.60067. Chalk is coccolith calcite. Correction: travertine.json and cream-marble.json carry 1.6003, not 1.6007. The same Handbook values give 1.6007, so reconcile all calcite records to one value."
     },
     "porosity": {
-      "value": 0.4,
+      "value": 0.41,
       "unit": "1",
-      "grade": "unverified",
-      "source": "R. A. Downing, M. Price and G. P. Jones (eds.), The Hydrogeology of the Chalk of North-West Europe (Oxford, 1993): matrix porosity of the white chalk 0.35 to 0.45; the middle"
+      "grade": "secondary",
+      "source": "Wikipedia, 'Chalk' (https://en.wikipedia.org/wiki/Chalk): 'typical values of porosity ranging from 35 to 47 per cent', citing J. M. Hancock, 'The petrology of the Chalk', Proc. Geol. Assoc. 86(4), 499-535, 1975. Cross-check: J. P. Bloomfield, L. J. Brewerton, D. J. Allen, QJEGH 28, S131-S142, 1995 (abstract, https://nora.nerc.ac.uk/7752/): 2045 core samples, porosity 3.3-55.5 %, mean 34.0 %, mean dry density 1790 kg/m3",
+      "derivation": "Middle of Hancock's 0.35 to 0.47 = 0.41. Cross-check: 1 - 1790/2711 (calcite D(calc.), Handbook of Mineralogy) = 0.340, which matches Bloomfield's 34.0 % mean",
+      "note": "Correction to the proposal's note: Wikipedia gives 35 to 47 % as typical of chalk in general, not of the Upper (White) Chalk in particular. Using the upper part of the range for the site's White Chalk is still reasonable, because Bloomfield reports porosity rising from north to south, but that is our inference. Downing et al. 1993 was not opened."
     },
     "wettingDepth": {
       "value": 5.0,
@@ -43,16 +47,18 @@
     "grain": {
       "value": 0.1,
       "unit": "mm",
-      "grade": "unverified",
-      "source": "Docs/Stages/cube.md section 7 (the ground rule's relief and stones)",
-      "note": "The finest structure the face shows."
+      "grade": "secondary",
+      "source": "Wikipedia, 'Chalk' (https://en.wikipedia.org/wiki/Chalk), citing Hancock 1975: calcite plates 0.5 to 4 microns; 10 % to 25 % of a typical chalk is fragments 10 to 100 microns",
+      "note": "The value is unchanged, and its evidence is now the chalk's petrology. It is the top of the fragment range, not a mean grain size.",
+      "derivation": "The coarsest common fragments are 100 um = 0.1 mm"
     },
     "bed": {
       "value": 370,
       "unit": "mm",
-      "grade": "unverified",
-      "source": "Docs/Stages/cube.md section 7 (the ground rule's relief and stones)",
-      "note": "The coarsest structure the face shows."
+      "grade": "design",
+      "source": "Docs/Stages/cube.md section 7, ground-rule table row 'Chalk': 'bedding partings every 0.37, 5 mm deep, 12 mm wide' (read, line 344)",
+      "note": "A design value from the stage rule. No bed-thickness measurement of the site's chalk was read.",
+      "derivation": "The stage rule spaces its partings 0.37 m = 370 mm apart"
     },
     "bedAspect": {
       "value": 1.0,

@@ -27,11 +27,12 @@
       "derivation": "n = (1 + sqrt(F0)) / (1 - sqrt(F0)), the index whose normal-incidence reflectance is the record's F0"
     },
     "porosity": {
-      "value": 0.004,
+      "value": 0.003,
       "unit": "1",
-      "grade": "unverified",
-      "source": "Palette.json: accent.statuario realMaterial (white statuary marble, faint grey veins)",
-      "note": "Carrara marbles are dense crystalline calcite, open porosity a few tenths of a per cent; no measured value was read."
+      "grade": "manufacturer",
+      "source": "Mandarin Stone, 'Product Specification: Calacatta Marble': EN 1936 apparent density 2680 kg/m3 and open porosity 0.30 %; EN 13755 water absorption 0.10 %. https://www.mandarinstone.com/app/uploads/2017/09/Calacatta-Marble-Mandarin-Stone-Data-Sheet-1.pdf",
+      "note": "The values match the sheet. It is a transfer: the sheet is for Calacatta, not Statuario, and it states no quarry or origin. The Apuan origin comes from the trade name only. The value is plausible for a dense Carrara-type calcite marble and agrees with the record's old 'a few tenths of a per cent'.",
+      "derivation": "0.30 % as a fraction = 0.003"
     },
     "wettingDepth": {
       "value": 1.0,
@@ -45,9 +46,10 @@
     "grain": {
       "value": 0.2,
       "unit": "mm",
-      "grade": "unverified",
-      "source": "Palette.json: accent.statuario realMaterial (white statuary marble, faint grey veins)",
-      "note": "A saccharoidal marble: interlocking calcite crystals a few tenths of a millimetre across, the sugary sparkle of a honed face."
+      "grade": "secondary",
+      "source": "Harbord, Brantut & Wallis (2023), 'Grain-size effects during semi-brittle flow of calcite rocks', arXiv:2302.01183, abstract: Carrara marble average grain size 200 µm. Read at https://arxiv.org/abs/2302.01183",
+      "note": "Confirmed. The source gives 200 µm for laboratory Carrara marble, not for a Statuario block, so the grade stays secondary.",
+      "derivation": "200 µm = 0.2 mm"
     },
     "bed": {
       "value": 400,
@@ -66,9 +68,12 @@
     "hurst": {
       "value": 0.7,
       "unit": "1",
-      "grade": "unverified",
-      "source": "Candela et al. 2012, Journal of Geophysical Research 117, B08409 (fault surfaces, 0.6 to 0.8; cited in Stone.ush)",
-      "note": "The middle of the range measured on rock surfaces, as the travertine's."
+      "grade": "derived",
+      "source": "Candela et al. 2012, J. Geophys. Res. Solid Earth 117, B08409, doi:10.1029/2011JB009041, abstract (read via https://api.crossref.org/works/10.1029/2011JB009041).",
+      "note": "The exponents are confirmed from the abstract; section 4.1 is unverified. This is a transfer from natural fault surfaces to a carved and honed marble face.",
+      "min": 0.58,
+      "max": 0.81,
+      "derivation": "H = (0.58 + 0.81)/2 = 0.695, rounded to 0.70"
     },
     "toneSpread": {
       "value": 0.06,

@@ -20,11 +20,12 @@
       "note": "Peterhead granite, Aberdeenshire: pink-red feldspar with grey quartz and black mica; no measured colour was read: a first value read from trade and museum photographs of the named material (as the Oxford University Museum's shafts show it)."
     },
     "refractiveIndex": {
-      "value": 1.55,
+      "value": 1.54,
       "unit": "1",
-      "grade": "unverified",
-      "source": "Granite is quartz (1.544 to 1.553) and feldspars (1.52 to 1.55) (Handbook of Mineralogy)",
-      "note": "The mean index of the rock's main minerals."
+      "grade": "derived",
+      "source": "Handbook of Mineralogy (Mineral Data Publishing 2001): Quartz omega 1.544, epsilon 1.553 https://www.handbookofmineralogy.org/pdfs/quartz.pdf ; Microcline alpha 1.514-1.529, beta 1.518-1.533, gamma 1.521-1.539 https://www.handbookofmineralogy.org/pdfs/microcline.pdf ; Albite alpha 1.526-1.530, beta 1.531-1.533, gamma 1.534-1.541 https://www.handbookofmineralogy.org/pdfs/albite.pdf",
+      "note": "Checked: all the Handbook indices match and the arithmetic holds. The mix is unweighted because no modal analysis was found. Plagioclase in granite is often oligoclase rather than pure albite, and oligoclase has a higher index. That also pushes the value toward 1.54 rather than 1.535, so the rounded value stands.",
+      "derivation": "quartz (2x1.544 + 1.553)/3 = 1.547; microcline (1.5215 + 1.5255 + 1.530)/3 = 1.526; albite (1.528 + 1.532 + 1.5375)/3 = 1.5325; equal weights give 1.535; a few per cent of biotite (n about 1.6) adds about 0.003, so rounded to 1.54. F0 = 0.0452 (was 0.0465 at 1.55)."
     },
     "porosity": {
       "value": 0.006,
@@ -43,11 +44,12 @@
   },
   "structure": {
     "grain": {
-      "value": 6.0,
+      "value": 5.7,
       "unit": "mm",
-      "grade": "unverified",
-      "source": "Palette.json: accent.british-column-stones.b",
-      "note": "The finest structure the face shows at gallery distance."
+      "grade": "derived",
+      "source": "British Geological Survey / Historic Environment Scotland, Building Stone Database for Scotland, 'Peterhead Granite' (record 10134): grain size 'Coarse crystalline (2 to 16 mm)', texture 'Weakly porphyritic', colour 'Medium greyish pink', water absorption 'Very low'. https://webservices.bgs.ac.uk/buildingstone/buildingstones/10134",
+      "note": "Checked: the record fields are as quoted. The value is a class centre, not a measured grain size, and the weakly porphyritic feldspar phenocrysts are larger. It confirms the old 6 mm.",
+      "derivation": "geometric centre of the BGS grain class: sqrt(2 x 16) = 5.66 mm, rounded 5.7 mm"
     },
     "bed": {
       "value": 1000,

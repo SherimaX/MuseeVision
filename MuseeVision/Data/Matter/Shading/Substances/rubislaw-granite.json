@@ -20,11 +20,12 @@
       "note": "Rubislaw granite, Aberdeen: the grey granite of Aberdeen; no measured colour was read: a first value read from trade and museum photographs of the named material (as the Oxford University Museum's shafts show it)."
     },
     "refractiveIndex": {
-      "value": 1.55,
+      "value": 1.54,
       "unit": "1",
-      "grade": "unverified",
-      "source": "Granite is quartz (1.544 to 1.553) and feldspars (1.52 to 1.55) (Handbook of Mineralogy)",
-      "note": "The mean index of the rock's main minerals."
+      "grade": "derived",
+      "source": "Handbook of Mineralogy: Quartz, Microcline, Albite PDFs (as for Peterhead). The Open University Virtual Microscope, 'Two mica granite - Aberdeen', Rubislaw quarry: quartz intergrown with altered plagioclase and microcline, with fox-brown biotite and muscovite. https://www.virtualmicroscope.org/content/two-mica-granite-aberdeen",
+      "note": "Checked: the mineral list on the Virtual Microscope page for a Rubislaw quarry specimen matches, and it gives no modal proportions. The plagioclase is described only as 'altered plagioclase', not as albite-oligoclase. The albite indices stand in for it. A more calcic plagioclase would only support rounding up to 1.54.",
+      "derivation": "Quartz 1.547, microcline 1.526 and albite 1.5325 weighted equally give 1.535. The muscovite and biotite of this two-mica granite (n about 1.56-1.60) raise it to about 1.54."
     },
     "porosity": {
       "value": 0.006,
@@ -45,9 +46,10 @@
     "grain": {
       "value": 2.0,
       "unit": "mm",
-      "grade": "unverified",
-      "source": "Palette.json: accent.british-column-stones.c",
-      "note": "The finest structure the face shows at gallery distance."
+      "grade": "derived",
+      "source": "British Geological Survey / Historic Environment Scotland, Building Stone Database for Scotland, 'Aberdeen Granite' (record 10159): grain size 'Medium crystalline (0.25 to 2 mm) to coarse crystalline (2 to 16 mm)', colour 'Medium grey to dark grey and pinkish grey to pink', key constituent muscovite, texture 'Tectonically foliated', water absorption 'Very low'. https://webservices.bgs.ac.uk/buildingstone/buildingstones/10159",
+      "note": "Checked: the fields are as quoted. The BGS record names no quarries and does not mention Rubislaw, saying only 'numerous quarries' in and near Aberdeen. The link to Rubislaw rests on the Virtual Microscope's Rubislaw specimen being this pluton's two-mica granite. The value is a range centre, not a measurement, and confirms the old 2 mm.",
+      "derivation": "geometric centre of the BGS range: sqrt(0.25 x 16) = 2.0 mm"
     },
     "bed": {
       "value": 1000,

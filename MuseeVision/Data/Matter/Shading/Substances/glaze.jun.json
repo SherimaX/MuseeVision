@@ -28,16 +28,17 @@
     "porosity": {
       "value": 0.0,
       "unit": "1",
-      "grade": "unverified",
-      "source": "Palette.json: accent.stoneware-glazed (the glazes' first values)",
-      "note": "A glaze is glass: it has no open pores."
+      "grade": "record",
+      "source": "MuseeVision/Docs/Matter/Story.md, 'Glazed stoneware and fired clay' (after Kingery, Bowen and Uhlmann 1976)",
+      "note": "Corrected note: the Yanjialiang paper (npj Heritage Science 2025, s40494-025-01711-0) does not say whether the glaze bubbles are closed, so it cannot be cited for that. The zero rests on the record alone: the glaze is a glass with no open pores."
     },
     "wettingDepth": {
       "value": 0.0,
       "unit": "mm",
-      "grade": "unverified",
-      "source": "Palette.json: accent.stoneware-glazed (the glazes' first values)",
-      "note": "The depth whose pores govern the face's look when wet."
+      "grade": "derived",
+      "source": "MuseeVision/Docs/Matter/Story.md (a glaze has no open pores)",
+      "note": "",
+      "derivation": "With no open pores, water cannot enter, so the wetting depth is zero."
     }
   },
   "structure": {
