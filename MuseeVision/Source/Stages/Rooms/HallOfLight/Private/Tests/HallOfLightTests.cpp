@@ -190,7 +190,7 @@ namespace Musee::HallOfLight::Tests
 			TestTrue(TEXT("its z is up"), Anchor->Frame.DirectionToParent(FVector::UpVector).Equals(FVector::UpVector, 1e-9));
 		}
 
-		// The stereo readers: over their stones at 1.320, facing the axis, tilted back 28.65 deg.
+		// The stereo readers: over their stones at 1.320, facing the axis, tilted back 28.65 deg; the anchor on the plate's face.
 		for (int32 Index = 0; Index < Plan::StereoStones; ++Index)
 		{
 			const FMuseeStageAnchor* Reader = FindAnchor(Description, FString::Printf(TEXT("hall-of-light.stereo.%d"), Index + 1), TEXT("Mount"));
@@ -199,8 +199,9 @@ namespace Musee::HallOfLight::Tests
 				continue;
 			}
 			const double Y = Index % 2 == 0 ? -2.4 : 2.4;
-			TestTrue(TEXT("it is centred over its stone"), Reader->Frame.OriginMeters.Equals(FVector(5.8 + 6.0 * Index, Y, 1.32), 1e-9));
 			const FVector Normal = Reader->Frame.DirectionToParent(FVector::RightVector);
+			TestTrue(TEXT("it is centred over its stone, on the plate's face"),
+				Reader->Frame.OriginMeters.Equals(FVector(5.8 + 6.0 * Index, Y, 1.32) + Normal * (0.5 * Plan::ReaderThickness), 1e-9));
 			TestTrue(TEXT("it faces the axis, tilted up 28.65 deg"), Normal.Equals(FVector(0.0, -FMath::Sign(Y) * 0.8776, 0.4794), 1e-4));
 			TestTrue(TEXT("its x is the viewer's right"), Reader->Frame.DirectionToParent(FVector::ForwardVector).Equals(FVector(-FMath::Sign(Y), 0.0, 0.0), 1e-9));
 		}

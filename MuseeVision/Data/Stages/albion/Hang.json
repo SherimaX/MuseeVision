@@ -810,6 +810,7 @@
       "frame": "none",
       "care": "ceramic-and-glass",
       "kind": "dish",
+      "facing_deg": 0.0,
       "note": "Lies on the baize bed (top z 0.550), its foot at centre; a turned disc from its photograph; image assets/albion/paintings/albion-de-morgan-charger.jpg."
     },
     {
@@ -829,6 +830,7 @@
       "frame": "none",
       "care": "ceramic-and-glass",
       "kind": "dish",
+      "facing_deg": 0.0,
       "note": "Lies on the baize bed (top z 0.550), its foot at centre; a turned disc from its photograph; image assets/albion/paintings/albion-de-morgan-dish-eagle.jpg."
     },
     {
@@ -848,6 +850,7 @@
       "frame": "none",
       "care": "ceramic-and-glass",
       "kind": "dish",
+      "facing_deg": 180.0,
       "note": "Lies on the baize bed (top z 0.550), its foot at centre; a turned disc from its photograph; image assets/albion/paintings/albion-de-morgan-peacock-dish.jpg. Diameter 0.40 unverified (SOURCES.json gives no size; the old hang's value)."
     },
     {
@@ -867,6 +870,7 @@
       "frame": "none",
       "care": "ceramic-and-glass",
       "kind": "vase",
+      "facing_deg": 180.0,
       "note": "Lies on the baize bed (top z 0.550), its foot at centre; turned from assets/albion/vessels.json's profile; image assets/albion/paintings/albion-de-morgan-vase.jpg."
     },
     {
@@ -886,6 +890,7 @@
       "frame": "none",
       "care": "ceramic-and-glass",
       "kind": "dish",
+      "facing_deg": 0.0,
       "note": "Lies on the baize bed (top z 0.550), its foot at centre; a turned disc from its photograph; image assets/albion/paintings/albion-de-morgan-rice-dish.jpg."
     },
     {
@@ -905,6 +910,7 @@
       "frame": "none",
       "care": "ceramic-and-glass",
       "kind": "dish",
+      "facing_deg": 0.0,
       "note": "Lies on the baize bed (top z 0.550), its foot at centre; a turned disc from its photograph; image assets/albion/paintings/albion-de-morgan-fish-dish.jpg."
     },
     {
@@ -924,6 +930,7 @@
       "frame": "none",
       "care": "ceramic-and-glass",
       "kind": "dish",
+      "facing_deg": 180.0,
       "note": "Lies on the baize bed (top z 0.550), its foot at centre; a turned disc from its photograph; image assets/albion/paintings/albion-de-morgan-ship-plate.jpg."
     },
     {
@@ -943,6 +950,7 @@
       "frame": "none",
       "care": "ceramic-and-glass",
       "kind": "vase",
+      "facing_deg": 180.0,
       "note": "Lies on the baize bed (top z 0.550), its foot at centre; turned from assets/albion/vessels.json's profile; image assets/albion/paintings/albion-de-morgan-jar.jpg."
     },
     {
