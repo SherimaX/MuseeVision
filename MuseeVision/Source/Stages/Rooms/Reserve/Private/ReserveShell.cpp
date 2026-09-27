@@ -19,8 +19,9 @@ namespace Musee::Reserve
 		/**
 		 * The door's sill as the joint meets it (§2): the joint's bronze strip lies astride the mating plane (its width the
 		 * port class's), and the museum's threshold stone (the joint record's depth) runs from the strip to the flags. The
-		 * door's class carries no allowance, so the joint lays no threshold and each stage finishes its own side: the oval
-		 * its landing, the Reserve this stone. Both lie on the brick sill, the stone's depth under the floor.
+		 * port marks its threshold as the Reserve's own (bOwnThreshold, §2), as the oval's marks its landing, so the joint
+		 * lays only the strip and each stage finishes its own side: the oval its landing, the Reserve this stone. Both lie on
+		 * the brick sill, the stone's depth under the floor.
 		 */
 		struct FDoorSill
 		{

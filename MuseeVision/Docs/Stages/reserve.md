@@ -44,8 +44,11 @@ x −30.600 lies `nympheas`'s well (§2): nothing of the Reserve is west of it.
   stair lights and the pond's posts. Its bottom landing (z 0.000 here) runs through its head wall to the plane. **The
   Reserve builds nothing west of x −30.600.** There is no stair of the Reserve's own.
 - **At the port** the Reserve builds the class opening through its 0.60 west wall (x −30.600 → −30.000), brick reveal
-  `reserve.door.reveal`. The joint lays the honed travertine threshold slab through the wall depth (x −30.600 →
-  −30.000, 2.400 wide, top 0.000) and the brushed bronze strip on the mating plane (doorway detail, Story §4).
+  `reserve.door.reveal`, and finishes its side of the port itself: its reveal, its architrave on the hall face, and the
+  honed travertine threshold `reserve.door.threshold` through the wall depth (x −30.570 → −30.000, from the strip's
+  half on the mating plane, 2.400 wide, top 0.000). The port marks all three as its own, so the joint lays only the
+  brushed bronze strip on the mating plane (doorway detail, Story §4), as the oval's bottom landing is its threshold on
+  the other side.
 - **Blinds.** Tonight the Reserve is absent, so the blind is the oval's (`nympheas.stair.blind-doors`: the closed bronze
   doors on the port face). On the Reserve's own stand (oval absent) it fills the class opening with its own closed pair
   of cast bronze leaves, meeting rail on the axis: `reserve.stair.blind-doors`.
@@ -341,7 +344,7 @@ Paths relative to `windows\`. Re-express, never copy. Museum → local: x + 44.0
    `nympheas.stair`. The Salon has no stair port.
 2. **The well is the oval's.** The draft's shaft limb (x −46.80…−30.60), receiving well W1/W2, post bores B1–B4, the
    collar, shaft walls, base and roof slabs and soffit are gone from the Reserve; the footprint is the hall box alone.
-3. Door clear **2.40** (the class; as built 2.38), crown 3.20 (draft 3.19). The joint's threshold runs through the
+3. Door clear **2.40** (the class; as built 2.38), crown 3.20 (draft 3.19). The Reserve's threshold runs through the
    wall depth only; the as-built 0.30 notch into the hall (to x −29.70) is dropped and the flags run to the wall.
 4. Materials per the Story: bluestone flags (draft polished concrete); brass-framed woven brass mesh racks (draft oak and
    linen screens); fumed oak chests (draft walnut); bronze pulls and easel hardware (draft brass); Burgundy brick 220 ×
@@ -405,7 +408,8 @@ use three fields the contract's schemas don't yet show:
 - **Frame.** Origin at the nave's centre on the floor, museum (−44.00, 0, −5.80), yaw 0. Everything here is local.
 - **The port is a door, not a hole in the oval's floor.** `reserve.stair` at (−30.600, 0, 0) faces −x and mates
   `nympheas.stair` (museum −74.600, 0, −5.800, facing +x). The oval serves the well; build nothing west of x −30.600.
-  The Reserve builds the class opening through its own 0.60 wall; the joint lays the threshold and the bronze strip.
+  The Reserve builds the class opening through its own 0.60 wall and lays its own threshold in it; the joint lays only
+  the bronze strip.
 - **36 moving bodies.** Each rack (frame, mesh, carriage, pull, picture light, its Wall anchors and works) hangs on
   `reserve.screen-<name>` and glides 5.650 along ±y. The overhead tracks, rods and floor tracks are fixed.
   Rack C starts out. At most one out (group).
@@ -445,4 +449,4 @@ use three fields the contract's schemas don't yet show:
 - Mechanisms.json (ST-RESERVE), to §6: each rack's guard caption, "Screen C waits: you are in its way", as
   `guardCaption`.
 - Hang.json (ST-RESERVE), to §2 ("Anchors on a rack's body ride it") and §6: the ten works on the racks' faces name their rack's body (`body` reserve.screen-<x>, the field Lighting and Planting already carry), so Art carries them on it and rack C starts out with its three Renoirs.
-- Finishes.json (ST-RESERVE), to §2: the threshold is laid by the Reserve, not the joint (the door's class carries no allowance, so Site lays none and each stage finishes its own side): `reserve.door.threshold`, honed travertine foot-worn as the museum's threshold (Data/Site/Joints.json), x −30.570 → −30.000 (the strip's half on the mating plane before it), 2.400 wide, top 0.000, on the brick sill lowered by its 30 mm. The oval's bottom landing is rebated for the strip's other half.
+- Finishes.json (ST-RESERVE), to §2: the threshold is laid by the Reserve, not the joint (the port marks its threshold, like its reveal and architrave, as its own, so the joint lays only the strip; K10): `reserve.door.threshold`, honed travertine foot-worn as the museum's threshold (Data/Site/Joints.json), x −30.570 → −30.000 (the strip's half on the mating plane before it), 2.400 wide, top 0.000, on the brick sill lowered by its 30 mm. The oval's bottom landing is rebated for the strip's other half.

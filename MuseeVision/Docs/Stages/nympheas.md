@@ -44,7 +44,10 @@ normal offset of the inner ellipse a 11.000 × b 7.500 (not an ellipse); sampled
 - **Rough openings.** At `nympheas.east` the oval builds the tunnel through the passage block and its own wall, from the
   port face x +11.900 to the oval's inner face (x +11.000 on the axis, +10.778 at the jambs y ±1.500). At
   `nympheas.stair` it builds the class opening in its 0.40 brick head wall (x +11.500…+11.900). Nothing past a port face.
-  The joint lays each threshold slab (honed travertine) and bronze strip on the mating plane.
+  At both ports the oval finishes its own side and the port marks it so (its surround, lining and threshold): the
+  passage's floor and the bottom landing are the thresholds, run to the port face and stopped half the strip short
+  (§3). The joint lays the bronze strip on the mating plane, and at `nympheas.east` the Salon's lining and threshold slab
+  (honed travertine) through the Salon's wall; at `nympheas.stair` the Reserve lays its own.
 - **Blinds.** `nympheas.stair`: the Reserve is not built tonight → **the Reserve's closed bronze doors**, a closed pair
   in the class opening on the port face (`nympheas.stair.blind-doors`). `nympheas.east`: on the stand alone, closed
   bronze doors in the class opening (`nympheas.east.blind-doors`) until `salon.west` is mated.
