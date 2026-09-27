@@ -64,8 +64,8 @@ namespace Musee::ClassicalHall
 				const double L = Plan::LozengeHalf;
 				const FVector2D Lozenge[] = {{X, Centre - L}, {X + L, Centre}, {X, Centre + L}, {X - L, Centre}};
 				Stone(Out, FString::Printf(TEXT("%s.cell%d"), *Name, Cell + 1), TEXT("floor.white"),
-					Rect(Plan::CellEdges[Cell], Centre - Inner, Plan::CellEdges[Cell + 1], Centre + Inner), {Polygon(Lozenge)});
-				Stone(Out, FString::Printf(TEXT("%s.lozenge%d"), *Name, Cell + 1), TEXT("floor.rosso"), Polygon(Lozenge));
+					Rect(Plan::CellEdges[Cell], Centre - Inner, Plan::CellEdges[Cell + 1], Centre + Inner), {FFormProfile::Polygon(Lozenge)});
+				Stone(Out, FString::Printf(TEXT("%s.lozenge%d"), *Name, Cell + 1), TEXT("floor.rosso"), FFormProfile::Polygon(Lozenge));
 			}
 		}
 

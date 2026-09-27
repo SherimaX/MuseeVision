@@ -2,6 +2,7 @@
 
 #include "AlbionPlan.h"
 #include "CoreMinimal.h"
+#include "FormAxes.h"
 #include "FormDrawing.h"
 #include "MuseeCollision.h"
 #include "MuseeKey.h"
@@ -16,6 +17,9 @@ struct FSiteDescription;
  */
 namespace Musee::Albion
 {
+	/** Frames set out by their axes are Form's (FormAxes.h). */
+	using Musee::Form::FrameOfAxes;
+
 	inline const Musee::Collision::FClass* const Solid = &Musee::Collision::Solid;
 	inline const Musee::Collision::FClass* const Walkable = &Musee::Collision::Walkable;
 	/** Nothing collides with it: the iron, glass and lead overhead, out of reach (§3.5). */
@@ -42,9 +46,6 @@ namespace Musee::Albion
 	FFormDrawing Glass(FFormDrawing Drawing);
 
 	// ---- frames ---------------------------------------------------------------------------------------------------------------
-	/** The stage's frame whose x and y are the given axes (and z their cross product), at an origin. */
-	FMuseeFrame FrameOfAxes(const FVector& Origin, const FVector& X, const FVector& Y);
-
 	/** The vertical plane x = X, drawn in (y, z) and pushed east: a side wall's leaf, an arcade's arch. */
 	FMuseeFrame AcrossX(double X);
 
@@ -58,9 +59,6 @@ namespace Musee::Albion
 	FMuseeFrame OnFace(const FVector& Origin, const FVector& Normal);
 
 	// ---- profiles --------------------------------------------------------------------------------------------------------------
-	/** A closed polygon, crisp at every corner. */
-	FFormProfile Polygon(TConstArrayView<FVector2D> Points);
-
 	/** A closed section through points, run anticlockwise whichever way they were given, so its solid is on its left. */
 	FFormProfile Section(TConstArrayView<FVector2D> Points);
 

@@ -14,11 +14,6 @@ namespace Musee::ClassicalHall
 		return FName(FString::Printf(TEXT("%s.%s"), Plan::Stage, Local));
 	}
 
-	FMuseeFrame FrameOfAxes(const FVector& Origin, const FVector& X, const FVector& Y)
-	{
-		return FMuseeFrame(Origin, FRotationMatrix::MakeFromXY(X, Y).ToQuat());
-	}
-
 	FVector Direction(double Deg)
 	{
 		const double Radians = FMath::DegreesToRadians(Deg);
@@ -34,11 +29,6 @@ namespace Musee::ClassicalHall
 	{
 		const double Radians = FMath::DegreesToRadians(Deg);
 		return FVector2D(Radius * FMath::Cos(Radians), Radius * FMath::Sin(Radians));
-	}
-
-	FFormProfile Polygon(TConstArrayView<FVector2D> Points)
-	{
-		return FFormProfile::Polyline(Points, true);
 	}
 
 	FFormProfile Circle(const FVector2D& Centre, double Radius)

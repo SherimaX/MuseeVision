@@ -19,19 +19,9 @@ namespace Musee::Salon
 		return Surface(*Local);
 	}
 
-	FMuseeFrame FrameOfAxes(const FVector& Origin, const FVector& X, const FVector& Y)
-	{
-		return FMuseeFrame(Origin, FRotationMatrix::MakeFromXY(X, Y).ToQuat());
-	}
-
 	FMuseeFrame FaceFrame(const FVector& Origin, const FVector& N)
 	{
 		return FrameOfAxes(Origin, FVector::CrossProduct(FVector::UpVector, N), FVector::UpVector);
-	}
-
-	FFormProfile Polygon(TConstArrayView<FVector2D> Points)
-	{
-		return FFormProfile::Polyline(Points, true);
 	}
 
 	FFormProfile Section(TConstArrayView<Plan::FStep> Steps, const FVector2D& Offset)

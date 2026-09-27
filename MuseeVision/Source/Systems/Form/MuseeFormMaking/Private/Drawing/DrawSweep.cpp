@@ -122,6 +122,91 @@ namespace Musee::Form::Drawing
 			return Out;
 		}
 
+		/**
+		 * A closed section clipped to the side of one of its axes at or above zero (Axis 0: A, 1: B), with a crisp edge along
+		 * the axis where it was cut, facing back across it. A point where the clipped outline only touches the axis and turns
+		 * straight back (a hollow that dipped behind it) is no corner and goes. False when what is left meets the axis along
+		 * more than one edge, or nothing is left.
+		 */
+		bool TrimSink(FProfileStations& Section, int32 Axis, FString& OutWhy)
+		{
+			// A point within the weld tolerance of the surface lies on it: the section's own point there is the cut.
+			auto Height = [Axis](const FVector2D& P)
+			{
+				const double H = Axis == 0 ? P.X : P.Y;
+				return FMath::Abs(H) <= WeldToleranceMeters ? 0.0 : H;
+			};
+			const int32 Count = Section.Vertices.Num();
+			TArray<FProfileVertex> Kept;
+			for (int32 Index = 0; Index < Count; ++Index)
+			{
+				const FProfileVertex& Here = Section.Vertices[Index];
+				const FProfileVertex& Next = Section.Vertices[(Index + 1) % Count];
+				const double H0 = Height(Here.Point);
+				const double H1 = Height(Next.Point);
+				if (H0 >= 0.0)
+				{
+					Kept.Add(Here);
+				}
+				if ((H0 > 0.0 && H1 < 0.0) || (H0 < 0.0 && H1 > 0.0))
+				{
+					FProfileVertex Cut;
+					Cut.Point = FMath::Lerp(Here.Point, Next.Point, H0 / (H0 - H1));
+					Cut.NormalIn = Cut.NormalOut = (Here.NormalOut + Next.NormalIn).GetSafeNormal();
+					Cut.bCrisp = true;
+					Kept.Add(Cut);
+				}
+			}
+			for (bool bDropped = true; bDropped && Kept.Num() >= 3;)
+			{
+				bDropped = false;
+				for (int32 Index = 0; Index < Kept.Num() && Kept.Num() >= 3; ++Index)
+				{
+					const FVector2D In = Kept[Index].Point - Kept[(Index + Kept.Num() - 1) % Kept.Num()].Point;
+					const FVector2D Out = Kept[(Index + 1) % Kept.Num()].Point - Kept[Index].Point;
+					const bool bBack = FVector2D::DotProduct(In, Out) < 0.0 && FMath::Abs(FVector2D::CrossProduct(In, Out)) <= TangentJointRadians * In.Size() * Out.Size();
+					if (In.Size() <= WeldToleranceMeters || bBack)
+					{
+						Kept.RemoveAt(Index--);
+						bDropped = true;
+					}
+				}
+			}
+			if (Kept.Num() < 3)
+			{
+				OutWhy = TEXT("the section lies wholly behind the surface its sink is trimmed to");
+				return false;
+			}
+			// The edge along the cut: each end keeps its own side's normal as it arrives or leaves.
+			int32 Along = 0;
+			for (int32 Index = 0; Index < Kept.Num(); ++Index)
+			{
+				FProfileVertex& From = Kept[Index];
+				FProfileVertex& To = Kept[(Index + 1) % Kept.Num()];
+				if (Height(From.Point) == 0.0 && Height(To.Point) == 0.0)
+				{
+					const FVector2D Step = To.Point - From.Point;
+					From.NormalOut = To.NormalIn = FVector2D(Step.Y, -Step.X).GetSafeNormal(StepSquaredMeters);
+					From.bCrisp = To.bCrisp = true;
+					++Along;
+				}
+			}
+			if (Along > 1)
+			{
+				OutWhy = TEXT("a trimmed section meets the surface it is fixed to along more than one edge");
+				return false;
+			}
+			Section.Vertices = Kept;
+			double Length = 0.0;
+			for (int32 Index = 0; Index < Kept.Num(); ++Index)
+			{
+				Section.Vertices[Index].LengthMeters = Length;
+				Length += FVector2D::Distance(Kept[Index].Point, Kept[(Index + 1) % Kept.Num()].Point);
+			}
+			Section.ClosedLengthMeters = Length;
+			return true;
+		}
+
 		/** Caps an open sweep's ends, cut where the drawing chamfers them. The runs' end frames take the cut. */
 		bool CutAndCap(TArray<TArray<FSweepFrame>>& Runs, const FProfileStations& Section, const FVector& StartCut, const FVector& EndCut,
 			TFunctionRef<FVector(const FSweepFrame&, const FVector&)> Developed, FMeshBuilder& Mesh, FString& OutWhy)
@@ -215,7 +300,15 @@ namespace Musee::Form::Drawing
 		{
 			return false;
 		}
-		const FProfileStations Section = Resolve(Shape.Section);
+		FProfileStations Section = Resolve(Shape.Section);
+		for (const int32 Axis : {0, 1})
+		{
+			if ((Axis == 0 ? Shape.bTrimSinkA : Shape.bTrimSinkB) && (!Section.bClosed || !TrimSink(Section, Axis, OutWhy)))
+			{
+				OutWhy = OutWhy.IsEmpty() ? TEXT("only a closed section's sink can be trimmed") : OutWhy;
+				return false;
+			}
+		}
 		if (Shape.IsOnFace())
 		{
 			return DrawOnFace(Shape, Section, Mesh, OutWhy);

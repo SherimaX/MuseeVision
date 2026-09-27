@@ -1,6 +1,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "FormAxes.h"
 #include "FormDrawing.h"
 #include "MuseeCollision.h"
 #include "MuseeKey.h"
@@ -22,6 +23,9 @@ namespace Musee::Time
  */
 namespace Musee::Rotunda
 {
+	/** Frames set out by their axes are Form's (FormAxes.h). */
+	using Musee::Form::FrameOfAxes;
+
 	/** A key under the stage: rotunda.<Local>. */
 	FMuseeKey Key(const TCHAR* Local);
 
@@ -65,9 +69,6 @@ namespace Musee::Rotunda
 
 	/** The stage's frame raised to a height. */
 	FMuseeFrame Raised(double Z);
-
-	/** The frame whose x and y are the given axes (and z their cross product), at an origin. */
-	FMuseeFrame FrameOfAxes(const FVector& Origin, const FVector& X, const FVector& Y);
 
 	/** A turned ring of rectangular section, r Inner to Outer and z Bottom to Top, over a turn (a full one by default). */
 	FFormLathe Ring(double Inner, double Outer, double Bottom, double Top, double FromDeg = 0.0, double ToDeg = 360.0);

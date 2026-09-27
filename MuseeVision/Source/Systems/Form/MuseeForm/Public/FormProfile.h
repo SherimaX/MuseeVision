@@ -115,6 +115,14 @@ struct MUSEEFORM_API FFormProfile
 	/** A closed polygon or an open polyline through points, crisp at every corner. */
 	[[nodiscard]] static FFormProfile Polyline(TConstArrayView<FVector2D> PointsMeters, bool bClosed);
 
+	/**
+	 * A closed polygon drawn by its corners only, crisp at each. A point that is no corner is dropped, again and again
+	 * until every point turns: one repeating its neighbour (a loop that repeats its start), one where the outline runs
+	 * straight on, and one where it turns straight back (a clipped or offset outline leaves all three). An outline of
+	 * fewer than three corners is left with what remains, which no shape will make.
+	 */
+	[[nodiscard]] static FFormProfile Polygon(TConstArrayView<FVector2D> PointsMeters);
+
 	/** The closed rectangle between two corners, drawn anticlockwise in (A, B), so its solid is inside. */
 	[[nodiscard]] static FFormProfile Rectangle(const FVector2D& MinMeters, const FVector2D& MaxMeters);
 

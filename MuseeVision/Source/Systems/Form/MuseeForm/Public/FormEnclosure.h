@@ -33,7 +33,7 @@ struct MUSEEFORM_API FFormEnclosure
 	UPROPERTY()
 	EFormEnclosureKind Kind = EFormEnclosureKind::Enclosed;
 
-	/** The names of the pieces that bound it (FFormDrawing::Name). */
+	/** The names of the drawings whose pieces bound it (FFormDrawing::Name; a repeated drawing's every member). */
 	UPROPERTY()
 	TArray<FName> Pieces;
 };

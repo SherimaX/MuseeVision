@@ -17,41 +17,14 @@ namespace Musee::Atrium
 		const Musee::Collision::FClass* const Solid = &Musee::Collision::Solid;
 		const Musee::Collision::FClass* const Walkable = &Musee::Collision::Walkable;
 
-		/** The half-angle a rail's foot takes out of a ring about the axis whose inner face is at this radius. */
-		double RailGap(double Radius)
-		{
-			return HalfAngle(Plan::FootSlotHalf, Radius);
-		}
-
 		/** A ring r0 → r1 by z0 → z1 round the axis, broken where the rails stand, from one bearing to another (clockwise). */
 		void RingRoundRails(TArray<FFormDrawing>& Out, const FString& Name, const TCHAR* LocalSurface, double R0, double R1, double Z0, double Z1,
 			double From, double To, const Musee::Collision::FClass* Collision)
 		{
-			const double Gap = RailGap(R0);
-			const double End = To <= From ? To + 360.0 : To;
-			// A rail at either end starts or stops the ring a gap clear of it; one within it breaks it in two.
-			TArray<double> Breaks = {From, End};
-			for (const double Rail : {Plan::RailBearings[0], Plan::RailBearings[1], Plan::RailBearings[0] + 360.0, Plan::RailBearings[1] + 360.0})
+			int32 Index = 0;
+			for (const TPair<double, double>& Span : SpansRoundRails(R0, From, To))
 			{
-				if (FMath::IsNearlyEqual(Rail, From))
-				{
-					Breaks[0] = From + Gap;
-				}
-				else if (FMath::IsNearlyEqual(Rail, End))
-				{
-					Breaks[1] = End - Gap;
-				}
-				else if (Rail > From && Rail < End)
-				{
-					Breaks.Add(Rail - Gap);
-					Breaks.Add(Rail + Gap);
-				}
-			}
-			Breaks.Sort();
-			for (int32 Index = 0; Index + 1 < Breaks.Num(); Index += 2)
-			{
-				Out.Add(Drawn(FString::Printf(TEXT("%s.%d"), *Name, Index / 2 + 1), LocalSurface, Band(R0, R1, Z0, Z1, Breaks[Index], Breaks[Index + 1]),
-					Collision));
+				Out.Add(Drawn(FString::Printf(TEXT("%s.%d"), *Name, ++Index), LocalSurface, Band(R0, R1, Z0, Z1, Span.Key, Span.Value), Collision));
 			}
 		}
 
@@ -146,7 +119,7 @@ namespace Musee::Atrium
 		/**
 		 * The collar with its coffers and the pocket its iris stows in; and the seven blades (bodies atrium.up.iris.blade.1
 		 * to .7, each at its pin on its top face), drawn shut: each turned 52° on its pin from its open place. A blade's
-		 * gilt underside and pearl top are one extrusion's two faces, which Form can't yet finish apart: it takes the top's.
+		 * gilt underside and pearl top are its extrusion's two faces, finished apart; its edges are pearl.
 		 */
 		void Collar(TArray<FFormDrawing>& Out)
 		{
@@ -157,6 +130,7 @@ namespace Musee::Atrium
 				const FMuseeFrame Shut(FVector(0.0, 0.0, -Plan::IrisBlade), FQuat(FVector::UpVector, FMath::DegreesToRadians(Pin + Plan::IrisSwingDeg)));
 				FFormDrawing& Drawing = Out.Add_GetRef(Drawn(FString::Printf(TEXT("collar.iris.blade.%d"), Blade + 1), TEXT("up.iris.top"),
 					Prism(BladeOutline(), 0.0, Plan::IrisBlade), Solid, Shut));
+				Drawing.PartSurfaces.Add(FFormExtrusion::NearPart, Surface(TEXT("up.iris.under")));
 				Drawing.Body = IrisBladeBody(Blade);
 			}
 		}

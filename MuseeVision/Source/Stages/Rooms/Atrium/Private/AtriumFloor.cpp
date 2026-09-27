@@ -4,10 +4,8 @@
  * The floor and its structure (§3.1, §3.3): the concrete slab under the marble; the Crema Marfil laid in eight rings of
  * radial slabs with 6 mm joints, a joint on every rib line; ring 1's lip notched for the rails and cut back for the
  * landing's sill; ring 8 running into the cove except in the door bay, where the marble stops on the base's inner face;
- * the bronze waiting ring and the waiting mark.
- *
- * Form cuts no rebate or recess in a laid slab: the landing's shoe and the waiting mark stand in the marble's thickness as
- * the sheet draws them, and the rebate and recesses under them wait for Form's laying.
+ * the bronze waiting ring and the waiting mark. The landing's shoe stands in a 10 mm rebate cut into ring 1, and the
+ * waiting mark in 10 mm recesses cut into whatever it lies over: ring 1, the waiting ring and ring 2.
  */
 namespace Musee::Atrium
 {
@@ -140,6 +138,48 @@ namespace Musee::Atrium
 			return Outline.Close();
 		}
 
+		/** A pocket sunk from the floor's face (z 0) down to a height. */
+		FFormPocket Sunk(FFormProfile Outline, double Bottom)
+		{
+			FFormPocket Pocket;
+			Pocket.Outline = MoveTemp(Outline);
+			Pocket.DepthMeters = -Bottom;
+			return Pocket;
+		}
+
+		/** The waiting mark's two outlines: the half ring west of the waiting ring, open towards the car, and the dot. */
+		TArray<FFormProfile> MarkOutlines()
+		{
+			const FVector2D Centre(Plan::MarkCentreX, 0.0);
+			FFormProfile Half = FFormProfile::From(Centre + FVector2D(0.0, Plan::MarkOuter));
+			Half.ArcAbout(Centre, Plan::MarkOuter, Plan::MarkOuter, 90.0, 270.0, EFormJoint::Crisp)
+				.LineTo(Centre + FVector2D(0.0, -Plan::MarkInner), EFormJoint::Crisp)
+				.ArcAbout(Centre, Plan::MarkInner, Plan::MarkInner, 270.0, 90.0, EFormJoint::Crisp);
+			return {Half.Close(), Circle(FVector2D(Plan::DotX, 0.0), Plan::DotRadius)};
+		}
+
+		/** The recesses the waiting mark lies in, cut into what it lies over. */
+		TArray<FFormPocket> MarkRecesses()
+		{
+			TArray<FFormPocket> Recesses;
+			for (FFormProfile& Outline : MarkOutlines())
+			{
+				Recesses.Add(Sunk(MoveTemp(Outline), Plan::MarkBottom));
+			}
+			return Recesses;
+		}
+
+		/** The rebate the landing's shoe stands in, cut into ring 1: the shoe's own plan, open across the door, broken at the rails. */
+		TArray<FFormPocket> ShoeRebate()
+		{
+			TArray<FFormPocket> Rebate;
+			for (const TPair<double, double>& Span : SpansRoundRails(Plan::LandingRingIn, FromDoor(Plan::LandingDoorHalf), FromDoor(-Plan::LandingDoorHalf)))
+			{
+				Rebate.Add(Sunk(Sector(Plan::LandingRingIn, Plan::LandingRingOut, Span.Key, Span.Value), Plan::LandingShoeBottom));
+			}
+			return Rebate;
+		}
+
 		/** The marble: eight rings of radial slabs, the radial joints on bearings 15° + k·360°/n, 6 mm joints between rings. */
 		void Marble(TArray<FFormDrawing>& Out)
 		{
@@ -170,8 +210,18 @@ namespace Musee::Atrium
 					{
 						Outline = Sector(Inner, Outer, From, To, HalfJoint);
 					}
-					Out.Add(Drawn(FString::Printf(TEXT("%sring-%d.%02d"), Pieces::Floor, Ring + 1, Slab + 1), TEXT("floor"),
-						Prism(MoveTemp(Outline), Plan::MarbleBottom, 0.0), Walkable, FMuseeFrame(FVector(0.0, 0.0, Plan::MarbleBottom))));
+					FFormExtrusion Shape = Prism(MoveTemp(Outline), Plan::MarbleBottom, 0.0);
+					// Ring 1 carries the shoe's rebate; rings 1 and 2 the mark's recesses where the mark lies over them.
+					if (Ring == 0)
+					{
+						Shape.Pockets.Append(ShoeRebate());
+					}
+					if (Ring <= 1)
+					{
+						Shape.Pockets.Append(MarkRecesses());
+					}
+					Out.Add(Drawn(FString::Printf(TEXT("%sring-%d.%02d"), Pieces::Floor, Ring + 1, Slab + 1), TEXT("floor"), MoveTemp(Shape), Walkable,
+						FMuseeFrame(FVector(0.0, 0.0, Plan::MarbleBottom))));
 				}
 			}
 		}
@@ -179,18 +229,15 @@ namespace Musee::Atrium
 		/** The bronze waiting ring, flush, and the waiting mark west of it: a half ring open towards the car, and a dot. */
 		void Waiting(TArray<FFormDrawing>& Out)
 		{
-			Out.Add(Drawn(Pieces::WaitingRing, TEXT("waiting-ring"), Prism(Circle(FVector2D::ZeroVector, Plan::RingRadii[2]), Plan::MarbleBottom, 0.0,
-				{Circle(FVector2D::ZeroVector, Plan::RingRadii[1])}), Walkable, FMuseeFrame(FVector(0.0, 0.0, Plan::MarbleBottom))));
+			FFormExtrusion Ring = Prism(Circle(FVector2D::ZeroVector, Plan::RingRadii[2]), Plan::MarbleBottom, 0.0,
+				{Circle(FVector2D::ZeroVector, Plan::RingRadii[1])});
+			Ring.Pockets = MarkRecesses();
+			Out.Add(Drawn(Pieces::WaitingRing, TEXT("waiting-ring"), MoveTemp(Ring), Walkable, FMuseeFrame(FVector(0.0, 0.0, Plan::MarbleBottom))));
 
-			const FVector2D Centre(Plan::MarkCentreX, 0.0);
-			FFormProfile Half = FFormProfile::From(Centre + FVector2D(0.0, Plan::MarkOuter));
-			Half.ArcAbout(Centre, Plan::MarkOuter, Plan::MarkOuter, 90.0, 270.0, EFormJoint::Crisp)
-				.LineTo(Centre + FVector2D(0.0, -Plan::MarkInner), EFormJoint::Crisp)
-				.ArcAbout(Centre, Plan::MarkInner, Plan::MarkInner, 270.0, 90.0, EFormJoint::Crisp);
+			const TArray<FFormProfile> Mark = MarkOutlines();
 			const FMuseeFrame Bed(FVector(0.0, 0.0, Plan::MarkBottom));
-			Out.Add(Drawn(TEXT("floor.waiting-mark.ring"), TEXT("waiting-ring"), Prism(Half.Close(), Plan::MarkBottom, Plan::MarkTop), Walkable, Bed));
-			Out.Add(Drawn(TEXT("floor.waiting-mark.dot"), TEXT("waiting-ring"), Prism(Circle(FVector2D(Plan::DotX, 0.0), Plan::DotRadius),
-				Plan::MarkBottom, Plan::MarkTop), Walkable, Bed));
+			Out.Add(Drawn(TEXT("floor.waiting-mark.ring"), TEXT("waiting-ring"), Prism(Mark[0], Plan::MarkBottom, Plan::MarkTop), Walkable, Bed));
+			Out.Add(Drawn(TEXT("floor.waiting-mark.dot"), TEXT("waiting-ring"), Prism(Mark[1], Plan::MarkBottom, Plan::MarkTop), Walkable, Bed));
 		}
 
 		/** The slab under the marble, from the lining to the base's inner face, bearing on the base's footing. */

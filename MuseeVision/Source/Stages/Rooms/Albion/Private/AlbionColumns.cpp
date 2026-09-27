@@ -67,53 +67,41 @@ namespace Musee::Albion
 		}
 
 		/**
-		 * The abacus's moulding in section, (out from the core's face, z): the cavetto from the core out to 0.415 at 6.115,
-		 * the half-round, the fillet, the face and its chamfer, and back over the top to the core.
+		 * The abacus in section, (distance from the axis square to a side, z): across its bed to the core, the cavetto out to
+		 * 0.415 at 6.115, the half-round, the fillet, the face and its chamfer, and back over the top to the axis.
 		 */
 		FFormProfile AbacusSection()
 		{
 			const double Core = Plan::AbacusCoreHalf;
-			const double Reach = Plan::CavettoHalf - Core;
 			FFormProfile P = FFormProfile::From(FVector2D(0.0, Plan::AbacusFoot));
-			P.ArcAbout(FVector2D(Reach, Plan::AbacusFoot), Reach, Plan::CavettoTop - Plan::AbacusFoot, 180.0, 90.0, EFormJoint::Crisp);
+			P.LineTo(FVector2D(Core, Plan::AbacusFoot), EFormJoint::Crisp);
+			P.ArcAbout(FVector2D(Plan::CavettoHalf, Plan::AbacusFoot), Plan::CavettoHalf - Core, Plan::CavettoTop - Plan::AbacusFoot, 180.0, 90.0, EFormJoint::Crisp);
 			const double Bead = Plan::AbacusBeadRadius;
-			P.ArcAbout(FVector2D(Reach, Plan::CavettoTop + Bead), Bead, Bead, -90.0, 90.0, EFormJoint::Crisp);
-			P.LineTo(FVector2D(Plan::AbacusFillet[0][0] - Core, Plan::AbacusFillet[0][1]), EFormJoint::Crisp);
-			P.LineTo(FVector2D(Plan::AbacusFillet[1][0] - Core, Plan::AbacusFillet[1][1]), EFormJoint::Crisp);
-			const double Face = Plan::AbacusHalf - Core;
-			P.LineTo(FVector2D(Face, Plan::AbacusFaceTop), EFormJoint::Crisp);
-			P.LineTo(FVector2D(Face - Plan::AbacusChamfer, Plan::CapitalTop), EFormJoint::Crisp);
+			P.ArcAbout(FVector2D(Plan::CavettoHalf, Plan::CavettoTop + Bead), Bead, Bead, -90.0, 90.0, EFormJoint::Crisp);
+			P.LineTo(FVector2D(Plan::AbacusFillet[0][0], Plan::AbacusFillet[0][1]), EFormJoint::Crisp);
+			P.LineTo(FVector2D(Plan::AbacusFillet[1][0], Plan::AbacusFillet[1][1]), EFormJoint::Crisp);
+			P.LineTo(FVector2D(Plan::AbacusHalf, Plan::AbacusFaceTop), EFormJoint::Crisp);
+			P.LineTo(FVector2D(Plan::AbacusHalf - Plan::AbacusChamfer, Plan::CapitalTop), EFormJoint::Crisp);
 			P.LineTo(FVector2D(0.0, Plan::CapitalTop), EFormJoint::Crisp);
-			return P.Close();
+			return P;
 		}
 
-		/** The abacus's core and the path its moulding runs round: the square, or its court half from the wall and back. */
-		void Abacus(const FColumn& C, TArray<FFormDrawing>& Out)
+		/**
+		 * The abacus, one stone worked square round the column's axis as the mason runs its moulding round the block, mitred
+		 * at the corners: the whole square, or a half-column's court half, cut on the wall's plane.
+		 */
+		void Abacus(const FColumn& C, double From, double To, TArray<FFormDrawing>& Out)
 		{
-			const double H = Plan::AbacusCoreHalf;
-			TArray<FVector2D> Path;
-			FVector Min(C.At.X - H, C.At.Y - H, Plan::AbacusFoot);
-			FVector Max(C.At.X + H, C.At.Y + H, Plan::CapitalTop);
-			if (C.Half == 0.0)
+			FFormLathe Shape;
+			Shape.Section = AbacusSection();
+			Shape.Sides = 4;
+			Shape.FromDegrees = From;
+			Shape.ToDegrees = To;
+			if (C.Half != 0.0)
 			{
-				// Anticlockwise on the plan, so the moulding lies outside the core.
-				Path = {C.At + FVector2D(H, H), C.At + FVector2D(H, -H), C.At + FVector2D(-H, -H), C.At + FVector2D(-H, H)};
+				Shape.Section.Close();
 			}
-			else if (C.Half > 0.0)
-			{
-				Min.Y = C.At.Y;
-				Path = {C.At + FVector2D(-H, 0.0), C.At + FVector2D(-H, H), C.At + FVector2D(H, H), C.At + FVector2D(H, 0.0)};
-			}
-			else
-			{
-				Max.Y = C.At.Y;
-				Path = {C.At + FVector2D(H, 0.0), C.At + FVector2D(H, -H), C.At + FVector2D(-H, -H), C.At + FVector2D(-H, 0.0)};
-			}
-			Out.Add(Box(C.Name + TEXT(".abacus"), TEXT("capital"), Min, Max, Solid));
-			FFormSweep Moulding;
-			Moulding.Section = AbacusSection();
-			Moulding.Path = FFormProfile::Polyline(Path, C.Half == 0.0);
-			Out.Add(Drawn(C.Name + TEXT(".abacus.moulding"), TEXT("capital"), MoveTemp(Moulding), Solid));
+			Out.Add(Drawn(C.Name + TEXT(".abacus"), TEXT("capital"), MoveTemp(Shape), Solid, FMuseeFrame(FVector(C.At, 0.0))));
 		}
 
 		/** A column: plinth, base, shaft, necking and bell, abacus; a half-column turns only its court half. */
@@ -134,7 +122,7 @@ namespace Musee::Albion
 			const FVector Foot(C.At.X, C.At.Y, 0.0);
 
 			FFormExtrusion Plinth;
-			Plinth.Outline = Polygon(PlinthPlan(C));
+			Plinth.Outline = FFormProfile::Polygon(PlinthPlan(C));
 			Plinth.DepthMeters = Plan::PlinthTop;
 			Out.Add(Drawn(C.Name + TEXT(".plinth"), TEXT("dressing"), MoveTemp(Plinth), Solid, FMuseeFrame(Foot)));
 			Out.Add(Lathe(C.Name + TEXT(".base"), TEXT("dressing"), Foot, Turn(Turned(Plan::BasePoints)), Solid, From, To));
@@ -144,7 +132,7 @@ namespace Musee::Albion
 				.LineTo(FVector2D(0.0, Plan::ShaftTop), EFormJoint::Crisp);
 			Out.Add(Lathe(C.Name + TEXT(".shaft"), C.Shaft, Foot, Turn(MoveTemp(Shaft)), Solid, From, To));
 			Out.Add(Lathe(C.Name + TEXT(".bell"), TEXT("capital"), Foot, Turn(BellSection()), Solid, From, To));
-			Abacus(C, Out);
+			Abacus(C, From, To, Out);
 		}
 	}
 

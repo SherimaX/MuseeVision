@@ -112,7 +112,7 @@ namespace Musee::Nympheas
 				Holes.Add(Circle(FVector2D(X, 0.0), Plan::ViewingRingRadius));
 			}
 			const FMuseeFrame Bed(FVector(0.0, 0.0, -Plan::FloorStone));
-			Out.Add(Drawn(Pieces::Floor, TEXT("floor"), Slab(Polygon(FloorOutline()), MoveTemp(Holes), -Plan::FloorStone, 0.0), Walkable, Bed));
+			Out.Add(Drawn(Pieces::Floor, TEXT("floor"), Slab(FFormProfile::Polygon(FloorOutline()), MoveTemp(Holes), -Plan::FloorStone, 0.0), Walkable, Bed));
 			for (const double X : {-Plan::ViewingStoneX, Plan::ViewingStoneX})
 			{
 				const FVector2D Centre(X, 0.0);
@@ -130,8 +130,8 @@ namespace Musee::Nympheas
 			TArray<FFormProfile> Holes = NorthChases();
 			Holes.Append(NorthSleeves());
 			const FMuseeFrame Bed(FVector(0.0, 0.0, -Plan::CurbDepth));
-			Out.Add(Drawn(Pieces::CurbNorth, TEXT("well.curb"), Slab(Polygon(NorthBand()), Holes, -Plan::CurbDepth, 0.0), Walkable, Bed));
-			Out.Add(Drawn(Pieces::CurbSouth, TEXT("well.curb"), Slab(Polygon(MirroredInY(NorthBand())), Mirrored(Holes), -Plan::CurbDepth, 0.0),
+			Out.Add(Drawn(Pieces::CurbNorth, TEXT("well.curb"), Slab(FFormProfile::Polygon(NorthBand()), Holes, -Plan::CurbDepth, 0.0), Walkable, Bed));
+			Out.Add(Drawn(Pieces::CurbSouth, TEXT("well.curb"), Slab(FFormProfile::Polygon(MirroredInY(NorthBand())), Mirrored(Holes), -Plan::CurbDepth, 0.0),
 				Walkable, Bed));
 		}
 
@@ -150,7 +150,7 @@ namespace Musee::Nympheas
 				TArray<FFormProfile> Chases = bNorth ? NorthChases() : Mirrored(NorthChases());
 				TArray<FFormProfile> Both = Chases;
 				Both.Append(bNorth ? NorthSleeves() : Mirrored(NorthSleeves()));
-				const FFormProfile Band = Polygon(bNorth ? NorthBand() : MirroredInY(NorthBand()));
+				const FFormProfile Band = FFormProfile::Polygon(bNorth ? NorthBand() : MirroredInY(NorthBand()));
 				auto Name = [Side](const TCHAR* Part) { return FString::Printf(TEXT("well.wall.%s.%s"), Side, Part); };
 				Out.Add(Drawn(*Name(TEXT("sleeves")), TEXT("well.wall"), Slab(Band, Both, SleeveFoot, -Plan::CurbDepth), Solid,
 					FMuseeFrame(FVector(0.0, 0.0, SleeveFoot))));

@@ -6,6 +6,8 @@
 #include "Kernel/MeshBuilder.h"
 #include "Kernel/PlanarFace.h"
 #include "Kernel/PlanRuns.h"
+#include "Kernel/Prism.h"
+#include "Kernel/Regions.h"
 #include "Kernel/Sweep.h"
 #include "Kernel/Tolerances.h"
 
@@ -37,10 +39,111 @@ namespace Musee::Form::Drawing
 			return true;
 		}
 
+		/** The extrusion's parts, as the kernel's worked prisms draw them. */
+		const FPrismParts ExtrusionParts{FFormExtrusion::NearPart, FFormExtrusion::FarPart, FFormExtrusion::SidePart, FFormExtrusion::PocketPart};
+
+		/** An extrusion with pockets sunk into its faces or its arrises eased. */
+		bool DrawWorkedExtrusion(const FFormExtrusion& Shape, const FProfileStations& Outline, TConstArrayView<FProfileStations> Holes,
+			FMeshBuilder& Mesh, FString& OutWhy)
+		{
+			TArray<FPrismPocket> Pockets;
+			for (const FFormPocket& Pocket : Shape.Pockets)
+			{
+				if (!CheckProfile(Pocket.Outline, TEXT("a pocket"), true, OutWhy))
+				{
+					return false;
+				}
+				Pockets.Add({RegionOf(Resolve(Pocket.Outline).Points()), Pocket.DepthMeters, Pocket.bNearFace, Pocket.CoverMeters});
+			}
+			if (!Shape.NearArris.IsSharp() || !Shape.FarArris.IsSharp())
+			{
+				TArray<FProfileStations> Loops = {Outline};
+				Loops.Append(Holes.GetData(), Holes.Num());
+				return ArrisedPrism(Mesh, Loops, Shape.DepthMeters, Shape.NearArris, Shape.FarArris, Pockets, ExtrusionParts, OutWhy);
+			}
+			TArray<TArray<FVector2D>> HolePoints;
+			for (const FProfileStations& Hole : Holes)
+			{
+				HolePoints.Add(Hole.Points());
+			}
+			return PocketedPrism(Mesh, RegionOf(Outline.Points(), HolePoints), Shape.DepthMeters, Pockets, ExtrusionParts, OutWhy);
+		}
+
 		/** A full turn, within the angle two stations can't tell apart. */
 		bool IsFullTurn(double FromDegrees, double ToDegrees)
 		{
 			return FMath::Abs(ToDegrees - FromDegrees) >= 360.0 - FMath::RadiansToDegrees(TangentJointRadians);
+		}
+
+		/**
+		 * The plan line a square lathe runs its section along: the polygon of the section's widest apothem, from ToDegrees
+		 * back to FromDegrees, so its right (where the section's A lies) looks out from the axis. Its corners are mitred.
+		 */
+		TArray<FVector2D> SquareLathePath(const FFormLathe& Shape, double Apothem, bool bFull)
+		{
+			const double Step = 2.0 * UE_DOUBLE_PI / Shape.Sides;
+			auto OnPolygon = [Step, Apothem](double Angle)
+			{
+				const double Middle = Step * FMath::RoundToDouble(Angle / Step);
+				return FVector2D(FMath::Cos(Angle), FMath::Sin(Angle)) * (Apothem / FMath::Cos(Angle - Middle));
+			};
+			TArray<FVector2D> Path;
+			if (bFull)
+			{
+				for (int32 Corner = Shape.Sides - 1; Corner >= 0; --Corner)
+				{
+					Path.Add(OnPolygon(Step * (Corner + 0.5)));
+				}
+				return Path;
+			}
+			const double From = FMath::DegreesToRadians(FMath::Min(Shape.FromDegrees, Shape.ToDegrees));
+			const double To = FMath::DegreesToRadians(FMath::Max(Shape.FromDegrees, Shape.ToDegrees));
+			Path.Add(OnPolygon(To));
+			for (double Corner = Step * (FMath::CeilToDouble(To / Step - 0.5) - 0.5); Corner > From; Corner -= Step)
+			{
+				if (Corner < To - TangentJointRadians && Corner > From + TangentJointRadians)
+				{
+					Path.Add(OnPolygon(Corner));
+				}
+			}
+			Path.Add(OnPolygon(From));
+			return Path;
+		}
+
+		/** A square lathe: the section, moved in by the apothem, swept round the polygon with mitred corners. */
+		bool DrawSquareLathe(const FFormLathe& Shape, const FProfileStations& Section, FMeshBuilder& Mesh, FString& OutWhy)
+		{
+			const double Apothem = LargestRadius(Section);
+			if (Shape.Sides < 3 || Apothem <= WeldToleranceMeters)
+			{
+				OutWhy = TEXT("a square lathe turns a section that stands off its axis round a polygon of three sides or more");
+				return false;
+			}
+			FProfileStations Moved = Section;
+			for (FProfileVertex& Vertex : Moved.Vertices)
+			{
+				Vertex.Point.X -= Apothem;
+			}
+			const bool bFull = IsFullTurn(Shape.FromDegrees, Shape.ToDegrees);
+			const TArray<FVector2D> Path = SquareLathePath(Shape, Apothem, bFull);
+			TArray<bool> Crisp;
+			Crisp.Init(true, Path.Num());
+			const TArray<TArray<FSweepFrame>> Runs = PlanRuns(Path, Crisp, bFull, 0.0);
+			if (Runs.IsEmpty())
+			{
+				OutWhy = TEXT("the square lathe's turn is too short to run");
+				return false;
+			}
+			for (const TArray<FSweepFrame>& Run : Runs)
+			{
+				Sweep(Mesh, Run, Moved);
+			}
+			if (Moved.bClosed && !bFull && !(Cap(Mesh, Runs[0][0], Moved, false) && Cap(Mesh, Runs.Last().Last(), Moved, true)))
+			{
+				OutWhy = TEXT("the section's outline crosses itself, so the turn's ends can't be capped");
+				return false;
+			}
+			return true;
 		}
 	}
 
@@ -67,12 +170,28 @@ namespace Musee::Form::Drawing
 		{
 			return false;
 		}
-		if (!Extrude(Mesh, GroundPlane(0.0), Resolve(Shape.Outline), Holes, Shape.DepthMeters, true))
+		const FProfileStations Outline = Resolve(Shape.Outline);
+		if (!Shape.NearArris.IsSharp() || !Shape.FarArris.IsSharp() || !Shape.Pockets.IsEmpty())
+		{
+			return DrawWorkedExtrusion(Shape, Outline, Holes, Mesh, OutWhy);
+		}
+		Mesh.UseSlot(FFormExtrusion::SidePart);
+		TArray<TArray<FVector2D>> HolePoints;
+		for (const FProfileStations& Hole : Holes)
+		{
+			HolePoints.Add(Hole.Points());
+		}
+		const bool bUp = Shape.DepthMeters > 0.0;
+		bool bMade = Extrude(Mesh, GroundPlane(0.0), Outline, Holes, Shape.DepthMeters, false);
+		Mesh.UseSlot(FFormExtrusion::NearPart);
+		bMade = bMade && AddPlanarFace(Mesh, GroundPlane(0.0, !bUp), Outline.Points(), HolePoints);
+		Mesh.UseSlot(FFormExtrusion::FarPart);
+		bMade = bMade && AddPlanarFace(Mesh, GroundPlane(Shape.DepthMeters, bUp), Outline.Points(), HolePoints);
+		if (!bMade)
 		{
 			OutWhy = TEXT("the outline or a hole crosses itself or another, or the depth is zero");
-			return false;
 		}
-		return true;
+		return bMade;
 	}
 
 	bool DrawLathe(const FFormLathe& Shape, FMeshBuilder& Mesh, FString& OutWhy)
@@ -89,6 +208,10 @@ namespace Musee::Form::Drawing
 				OutWhy = FString::Printf(TEXT("the section crosses the axis (radius %.4f m)"), Vertex.Point.X);
 				return false;
 			}
+		}
+		if (Shape.Sides != 0)
+		{
+			return DrawSquareLathe(Shape, Section, Mesh, OutWhy);
 		}
 		const FLatheAxis Axis;
 		const double From = FMath::DegreesToRadians(Shape.FromDegrees);

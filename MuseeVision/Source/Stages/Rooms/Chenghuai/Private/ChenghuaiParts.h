@@ -38,9 +38,6 @@ namespace Musee::Chenghuai
 	 *  diameters of its column). */
 	FFormProfile Section(TConstArrayView<FSectionPoint> Points, bool bClosed, double ScaleA = 1.0);
 
-	/** A closed polygon, crisp at every corner. */
-	FFormProfile Polygon(TConstArrayView<FVector2D> Points);
-
 	/** An open path through points, smooth at every joint: a curve given by its stations. */
 	FFormProfile SmoothPath(TConstArrayView<FVector2D> Points);
 

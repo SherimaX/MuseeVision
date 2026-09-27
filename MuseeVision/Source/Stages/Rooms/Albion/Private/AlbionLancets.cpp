@@ -108,7 +108,7 @@ namespace Musee::Albion
 					const TArray<FVector2D> Window = ClipAndInset(Diamond, Convex, 0.5 * Plan::CameMeters);
 					if (Window.Num() >= 3 && Area(Window) >= SmallestQuarry)
 					{
-						Windows.Add(Polygon(Window));
+						Windows.Add(FFormProfile::Polygon(Window));
 					}
 				}
 			}

@@ -176,7 +176,12 @@ namespace Musee::Rotunda::Plan
 	inline constexpr double FootTorusAt = 0.300;
 	inline constexpr double FootTorusZ = 0.012;
 
-	/** The sun's 32 rays at 11.25°·i from r 0.24: 16 long (i even) to r 1.25, 72 wide, and 16 short flames to r 0.86, 60 wide. */
+	/**
+	 * The sun's 32 rays at 11.25°·i from r 0.24: 16 long (i even) to r 1.25, 72 wide, and 16 short flames to r 0.86, 60
+	 * wide. Each crest (42 and 30 mm at the root) falls as (1 - t)^1.2 to 4 mm at the tip; across each flank, from its
+	 * foot 2 mm down in the dial, a hollow at 0.40 of the crest's height half way to the ridge; a flame's crest weaves
+	 * 0.03 sin(3πt) √t (1 - t) (as built, SunClockDial.cpp:111-135).
+	 */
 	inline constexpr int32 Rays = 32;
 	inline constexpr double RayRoot = 0.240;
 	inline constexpr double LongRayTip = 1.250;
@@ -185,6 +190,13 @@ namespace Musee::Rotunda::Plan
 	inline constexpr double ShortRayTip = 0.860;
 	inline constexpr double ShortRayWidth = 0.060;
 	inline constexpr double ShortRayTaper = 0.75;
+	inline constexpr double LongRayCrest = 0.042;
+	inline constexpr double ShortRayCrest = 0.030;
+	inline constexpr double RayTipCrest = 0.004;
+	inline constexpr double RayCrestFall = 1.2;
+	inline constexpr double RayHollow = 0.40;
+	inline constexpr double FlameWeave = 0.03;
+	inline constexpr double FlameWaves = 1.5;
 	/** Each ray's taper is drawn through this many stations from root to tip. */
 	inline constexpr int32 RayStations = 16;
 

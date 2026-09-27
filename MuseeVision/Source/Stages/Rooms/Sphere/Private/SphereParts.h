@@ -1,6 +1,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "FormAxes.h"
 #include "FormDrawing.h"
 #include "MuseeCollision.h"
 #include "MuseeKey.h"
@@ -16,6 +17,9 @@ struct FSiteDescription;
  */
 namespace Musee::Sphere
 {
+	/** Frames set out by their axes are Form's (FormAxes.h). */
+	using Musee::Form::FrameOfAxes;
+
 	/** A key under the stage: sphere.<Local>. */
 	FMuseeKey Key(const TCHAR* Local);
 
@@ -38,7 +42,6 @@ namespace Musee::Sphere
 	}
 
 	// ---- setting out about the axis ------------------------------------------------------------------------------------
-
 	/** The plan point at a radius and a bearing. */
 	FVector2D AtBearing(double Radius, double BearingDeg);
 
@@ -48,9 +51,6 @@ namespace Musee::Sphere
 
 	/** The plan angle (degrees from +x towards +y, the lathe's and the iris pins' measure) of a bearing. */
 	double PlanDeg(double BearingDeg);
-
-	/** The frame whose x and y are the given axes (and z their cross product), at an origin. */
-	FMuseeFrame FrameOfAxes(const FVector& Origin, const FVector& X, const FVector& Y);
 
 	/** The stage's frame raised to a height. */
 	FMuseeFrame Raised(double Z);
@@ -65,7 +65,6 @@ namespace Musee::Sphere
 	double SphereDeg(double SphereRadius, double Radius, bool bAbove);
 
 	// ---- shapes -------------------------------------------------------------------------------------------------------
-
 	/** A turned ring of rectangular section, r Inner to Outer and z Bottom to Top, between two bearings (a full turn by default). */
 	FFormLathe Ring(double Inner, double Outer, double Bottom, double Top, double FromBearing = 0.0, double ToBearing = 360.0);
 

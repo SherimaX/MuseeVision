@@ -28,6 +28,22 @@ namespace
 			TEXT("enclosure %s is bounded by %s, which the stage never made"), *Enclosure.Key.ToString(), *Piece.ToString()), Reading);
 	}
 
+	/** The pieces a drawing made: the one of its name, or each of its repeated members, <Name>.<n> (FFormDrawing::Repeats). */
+	TArray<const FFormPieceShell*> PiecesOf(const FFormShells& Shells, FName Drawing)
+	{
+		const FString Members = Drawing.ToString() + TEXT(".");
+		TArray<const FFormPieceShell*> Made;
+		for (const FFormPieceShell& Piece : Shells.Pieces)
+		{
+			const FString Name = Piece.Piece.ToString();
+			if (Piece.Piece == Drawing || (Name.StartsWith(Members) && Name.RightChop(Members.Len()).IsNumeric()))
+			{
+				Made.Add(&Piece);
+			}
+		}
+		return Made;
+	}
+
 	/**
 	 * Every piece that bounds an Enclosed or Court space is a closed, consistently oriented solid: each edge of its
 	 * skin is shared by exactly two triangles running it opposite ways, so light and water meet solid everywhere
@@ -44,14 +60,17 @@ namespace
 			}
 			for (const FName Name : Enclosure.Pieces)
 			{
-				const FFormPieceShell* Piece = Shells.Pieces.FindByPredicate([Name](const FFormPieceShell& P) { return P.Piece == Name; });
-				if (!Piece)
+				const TArray<const FFormPieceShell*> Made = PiecesOf(Shells, Name);
+				if (Made.IsEmpty())
 				{
 					Findings.Add(MissingPiece(Shells, Enclosure, Name));
 				}
-				else if (!Piece->IsClosed())
+				for (const FFormPieceShell* Piece : Made)
 				{
-					Findings.Add(OpenPiece(Shells, Enclosure, *Piece));
+					if (!Piece->IsClosed())
+					{
+						Findings.Add(OpenPiece(Shells, Enclosure, *Piece));
+					}
 				}
 			}
 		}

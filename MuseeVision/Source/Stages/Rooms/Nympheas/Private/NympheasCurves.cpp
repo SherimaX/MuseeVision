@@ -102,16 +102,6 @@ namespace Musee::Nympheas
 		return Points;
 	}
 
-	FMuseeFrame FrameOfAxes(const FVector& OriginMeters, const FVector& X, const FVector& Y)
-	{
-		return FMuseeFrame(OriginMeters, FRotationMatrix::MakeFromXY(X, Y).ToQuat());
-	}
-
-	FFormProfile Polygon(TConstArrayView<FVector2D> Points)
-	{
-		return FFormProfile::Polyline(Points, true);
-	}
-
 	FFormProfile SmoothPath(TConstArrayView<FVector2D> Points)
 	{
 		FFormProfile Path = FFormProfile::From(Points[0]);

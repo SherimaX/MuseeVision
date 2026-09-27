@@ -14,16 +14,6 @@ namespace Musee::HallOfLight
 		return FName(FString::Printf(TEXT("%s.%s"), Plan::Stage, Local));
 	}
 
-	FMuseeFrame FrameOfAxes(const FVector& OriginMeters, const FVector& X, const FVector& Y)
-	{
-		return FMuseeFrame(OriginMeters, FRotationMatrix::MakeFromXY(X, Y).ToQuat());
-	}
-
-	FFormProfile Polygon(TConstArrayView<FVector2D> Points)
-	{
-		return FFormProfile::Polyline(Points, true);
-	}
-
 	const TCHAR* SideName(int32 Side)
 	{
 		return Side < 0 ? TEXT("north") : TEXT("south");

@@ -82,7 +82,7 @@ namespace Musee::Salon
 			{
 				Points.Add(FVector2D(Plan::VaultRadius + P.Y, EastX - P.X));
 			}
-			return Polygon(Points);
+			return FFormProfile::Polygon(Points);
 		}
 
 		/** A transverse piece of a bay's vault turned about its axis between two row angles (radians). */

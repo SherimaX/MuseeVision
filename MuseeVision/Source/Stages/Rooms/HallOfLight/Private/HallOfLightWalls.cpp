@@ -44,7 +44,7 @@ namespace Musee::HallOfLight
 					Outline.Add(FVector2D(PostX(Post) + Point.A, WallY(Side, Point.B)));
 				}
 				FFormExtrusion Shape;
-				Shape.Outline = Polygon(Outline);
+				Shape.Outline = FFormProfile::Polygon(Outline);
 				Shape.DepthMeters = Plan::PostHead - Plan::PostFoot;
 				Out.Add(Drawn(FString::Printf(TEXT("post.%s.%d"), SideName(Side), Post), Surface(TEXT("wall.steel")), MoveTemp(Shape), Solid,
 					FMuseeFrame(FVector(0.0, 0.0, Plan::PostFoot))));

@@ -123,11 +123,10 @@ namespace Musee::Rotunda
 		}
 
 		/**
-		 * One of the sun's rays: long ones (i even, one to XII) to r 1.25, 72 wide at the root tapering as (1 - t)^0.62;
-		 * short flames between them to r 0.86, 60 wide tapering as (1 - t)^0.75. Form has no lofted solid, so the nearest
-		 * honest ray is round-backed: a half turn about its own axis, laid 2 mm down in its groove, its crest its half
-		 * width. A hair of a bore runs along the axis inside the dial's stone, where the half turn's ends close the ray's
-		 * flat underside.
+		 * One of the sun's rays, lofted as the founder casts it: long ones (i even, one to XII) to r 1.25, 72 wide at the root
+		 * tapering as (1 - t)^0.62; short flames between them to r 0.86, 60 wide tapering as (1 - t)^0.75, their crests
+		 * weaving. Across it, each flank rises from its foot 2 mm down in the dial through a hollow to the ridge; the crest
+		 * falls towards the tip, where the flanks close on an edge.
 		 */
 		void Ray(TArray<FFormDrawing>& Out, int32 Index)
 		{
@@ -135,22 +134,27 @@ namespace Musee::Rotunda
 			const double Tip = bLong ? Plan::LongRayTip : Plan::ShortRayTip;
 			const double HalfWidth = 0.5 * (bLong ? Plan::LongRayWidth : Plan::ShortRayWidth);
 			const double Taper = bLong ? Plan::LongRayTaper : Plan::ShortRayTaper;
-			const double Bore = 0.5 * Plan::InlayGroove;
-			const double Deg = 360.0 * Index / Plan::Rays;
-			FFormProfile Section = FFormProfile::From(FVector2D(Bore, Plan::RayRoot));
+			const double Crest = bLong ? Plan::LongRayCrest : Plan::ShortRayCrest;
+			FFormLoft Shape;
 			for (int32 Station = 0; Station < Plan::RayStations; ++Station)
 			{
 				const double T = double(Station) / (Plan::RayStations - 1);
-				const double Radius = Plan::InlayGroove + HalfWidth * FMath::Pow(1.0 - T, Taper);
-				Section.LineTo(FVector2D(Radius, FMath::Lerp(Plan::RayRoot, Tip, T)), Station == 0 ? EFormJoint::Crisp : EFormJoint::Smooth);
+				const double W = HalfWidth * FMath::Pow(1.0 - T, Taper);
+				const double H = Plan::RayTipCrest + (Crest - Plan::RayTipCrest) * FMath::Pow(1.0 - T, Plan::RayCrestFall);
+				const double Weave = bLong ? 0.0 : Plan::FlameWeave * FMath::Sin(2.0 * Plan::FlameWaves * UE_DOUBLE_PI * T) * FMath::Sqrt(T) * (1.0 - T);
+				// x across the ray, y up: the foot, the hollow and the ridge of one flank, then the other's, and the flat bed.
+				FFormLoftSection& Section = Shape.Sections.AddDefaulted_GetRef();
+				Section.Outline = FFormProfile::From(FVector2D(Weave - W, -Plan::InlayGroove));
+				Section.Outline.LineTo(FVector2D(Weave + W, -Plan::InlayGroove), EFormJoint::Crisp)
+					.LineTo(FVector2D(Weave + 0.5 * W, Plan::RayHollow * H), EFormJoint::Crisp)
+					.LineTo(FVector2D(Weave, H), EFormJoint::Smooth)
+					.LineTo(FVector2D(Weave - 0.5 * W, Plan::RayHollow * H), EFormJoint::Crisp)
+					.LineTo(FVector2D(Weave - W, -Plan::InlayGroove), EFormJoint::Smooth)
+					.Close();
+				Section.AtMeters = FMath::Lerp(Plan::RayRoot, Tip, T);
 			}
-			Section.LineTo(FVector2D(Bore, Tip), EFormJoint::Crisp).Close();
-			FFormLathe Shape;
-			Shape.Section = MoveTemp(Section);
-			Shape.FromDegrees = 0.0;
-			Shape.ToDegrees = 180.0;
-			// The ray's frame: z out along the ray, x across it (the way φ rises), y up; the half turn runs over the top.
-			const FMuseeFrame Frame = FrameOfAxes(FVector(0.0, 0.0, -Plan::InlayGroove), Tangent(Deg), FVector::UpVector);
+			// The ray's frame: z out along the ray, x across it (the way φ rises), y up.
+			const FMuseeFrame Frame = FrameOfAxes(FVector::ZeroVector, Tangent(360.0 * Index / Plan::Rays), FVector::UpVector);
 			OnDrum(Out, FString::Printf(TEXT("dial.sun.ray-%02d"), Index + 1), TEXT("dial.sun"), MoveTemp(Shape), nullptr, Frame);
 		}
 

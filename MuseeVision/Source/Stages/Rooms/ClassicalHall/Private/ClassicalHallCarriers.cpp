@@ -19,12 +19,16 @@ namespace Musee::ClassicalHall
 		}
 
 		/** A moulding ring round a plan outline (drawn so it faces out), in a frame, its section's B from a height. */
-		FFormDrawing Ring(const FString& Name, const TCHAR* LocalSurface, const FMuseeFrame& Frame, FFormProfile Section, FFormProfile Around, double From)
+		FFormDrawing Ring(const FString& Name, const TCHAR* LocalSurface, const FMuseeFrame& Frame, FFormProfile Section, FFormProfile Around, double From,
+			bool bOnBed)
 		{
 			FFormSweep Shape;
 			Shape.Section = MoveTemp(Section);
 			Shape.Path = MoveTemp(Around);
 			Shape.ElevationMeters = From;
+			// Its sink into the die is trimmed to the die's face; a base's into its bed to the bed.
+			Shape.bTrimSinkA = true;
+			Shape.bTrimSinkB = bOnBed;
 			return Drawn(Name, LocalSurface, MoveTemp(Shape), Solid, Frame);
 		}
 
@@ -36,8 +40,8 @@ namespace Musee::ClassicalHall
 			const double X = 0.5 * Depth - C;
 			const double Y = 0.5 * Width - C;
 			Out.Add(PrismIn(Name, LocalSurface, Frame, Rect(-X, -Y, X, Y), Foot - Plan::NicheCarrierBed, Top, Solid));
-			Out.Add(Ring(Name + TEXT(".base"), LocalSurface, Frame, Written(Plan::NicheCarrierBase), RectOutward(-X, -Y, X, Y), Foot));
-			Out.Add(Ring(Name + TEXT(".cap"), LocalSurface, Frame, Written(Plan::NicheCarrierCap), RectOutward(-X, -Y, X, Y), Top));
+			Out.Add(Ring(Name + TEXT(".base"), LocalSurface, Frame, Written(Plan::NicheCarrierBase), RectOutward(-X, -Y, X, Y), Foot, true));
+			Out.Add(Ring(Name + TEXT(".cap"), LocalSurface, Frame, Written(Plan::NicheCarrierCap), RectOutward(-X, -Y, X, Y), Top, false));
 		}
 
 		/**
@@ -54,8 +58,8 @@ namespace Musee::ClassicalHall
 			const double Half = 0.5 * Carrier.Width - C;
 			const FVector2D Section[] = {{Front, -Plan::Sink}, {0.0, -Plan::Sink}, {0.0, Plan::DadoTop}, {Back, Plan::DadoTop}, {Back, Carrier.Top}, {Front, Carrier.Top}};
 			const FMuseeFrame Across = FrameOfAxes(Niche.Origin + Niche.Lateral() * Half, Niche.In, FVector::UpVector);
-			Out.Add(Drawn(Name, TEXT("plinth"), Prism(Polygon(Section), 2.0 * Half), Solid, Across));
-			Out.Add(Ring(Name + TEXT(".cap"), TEXT("plinth"), Niche.PlanFrame(), Written(Plan::NicheCarrierCap), RectOutward(Front, -Half, Back, Half), Carrier.Top));
+			Out.Add(Drawn(Name, TEXT("plinth"), Prism(FFormProfile::Polygon(Section), 2.0 * Half), Solid, Across));
+			Out.Add(Ring(Name + TEXT(".cap"), TEXT("plinth"), Niche.PlanFrame(), Written(Plan::NicheCarrierCap), RectOutward(Front, -Half, Back, Half), Carrier.Top, false));
 		}
 
 		/**
@@ -76,16 +80,22 @@ namespace Musee::ClassicalHall
 		}
 
 		/**
-		 * A herm: a moulded plinth 0.40 square × 0.14, the shaft and a moulded cap 0.09 from 1.16. Form draws no prism that
-		 * changes its section along its length, so the shaft, which widens from 0.26 at 0.13 to 0.32 at 1.17, stands square
-		 * at its mean, 0.29.
+		 * A herm: a moulded plinth 0.40 square × 0.14, the shaft and a moulded cap 0.09 from 1.16. The shaft is lofted as the
+		 * mason works it, widening from 0.26 square at 0.13 to 0.32 at 1.17.
 		 */
 		void Herm(TArray<FFormDrawing>& Out, const FString& Name, const Plan::FCarrierPlan& Carrier)
 		{
 			const FMuseeFrame Floor = FloorFrame(Carrier);
 			MouldedDie(Out, Name + TEXT(".plinth"), TEXT("herm"), Floor, Carrier.Width, Carrier.Depth, 0.0, Plan::HermPlinthHigh);
-			const double Shaft = 0.25 * (Plan::HermShaftFootSide + Plan::HermShaftTopSide);
-			Out.Add(PrismIn(Name + TEXT(".shaft"), TEXT("herm"), Floor, Rect(-Shaft, -Shaft, Shaft, Shaft), Plan::HermShaftFoot, Plan::HermShaftTop, Solid));
+			FFormLoft Shaft;
+			for (const TPair<double, double>& Station : {TPair<double, double>(Plan::HermShaftFoot, Plan::HermShaftFootSide),
+				TPair<double, double>(Plan::HermShaftTop, Plan::HermShaftTopSide)})
+			{
+				FFormLoftSection& Section = Shaft.Sections.AddDefaulted_GetRef();
+				Section.Outline = Rect(-0.5 * Station.Value, -0.5 * Station.Value, 0.5 * Station.Value, 0.5 * Station.Value);
+				Section.AtMeters = Station.Key;
+			}
+			Out.Add(Drawn(Name + TEXT(".shaft"), TEXT("herm"), MoveTemp(Shaft), Solid, Floor));
 			MouldedDie(Out, Name + TEXT(".cap"), TEXT("herm"), Floor, Carrier.Width, Carrier.Depth, Plan::HermCapFoot, Carrier.Top);
 		}
 
@@ -99,8 +109,8 @@ namespace Musee::ClassicalHall
 			const double X = 0.5 * Carrier.Depth - Plan::PlinthCapProud;
 			const double Y = 0.5 * Carrier.Width - Plan::PlinthCapProud;
 			Out.Add(PrismIn(Name, TEXT("plinth"), Floor, Rect(-X, -Y, X, Y), -Plan::Sink, Carrier.Top, Solid));
-			Out.Add(Ring(Name + TEXT(".base"), TEXT("plinth"), Floor, Written(Plan::PlinthBaseProfile), RectOutward(-X, -Y, X, Y), 0.0));
-			Out.Add(Ring(Name + TEXT(".cap"), TEXT("plinth"), Floor, Written(Plan::PlinthCapProfile), RectOutward(-X, -Y, X, Y), Carrier.Top));
+			Out.Add(Ring(Name + TEXT(".base"), TEXT("plinth"), Floor, Written(Plan::PlinthBaseProfile), RectOutward(-X, -Y, X, Y), 0.0, true));
+			Out.Add(Ring(Name + TEXT(".cap"), TEXT("plinth"), Floor, Written(Plan::PlinthCapProfile), RectOutward(-X, -Y, X, Y), Carrier.Top, false));
 		}
 
 		/** The centrepiece's pedestal, turned about O: Ø 2.20 × 0.30. */

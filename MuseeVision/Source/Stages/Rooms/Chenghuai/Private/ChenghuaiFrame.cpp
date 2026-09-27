@@ -41,9 +41,4 @@ namespace Musee::Chenghuai
 	{
 		return FrameOfAxes(At(0.0, 0.0, Z), U3(), V3() * Hand());
 	}
-
-	FMuseeFrame FrameOfAxes(const FVector& OriginMeters, const FVector& X, const FVector& Y)
-	{
-		return FMuseeFrame(OriginMeters, FRotationMatrix::MakeFromXY(X, Y).ToQuat());
-	}
 }

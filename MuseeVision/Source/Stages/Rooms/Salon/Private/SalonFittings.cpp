@@ -141,7 +141,7 @@ namespace Musee::Salon
 			const double W = Plan::AngleLeg;
 			const FVector Z = FVector::CrossProduct(N1, N2);
 			const bool bForward = FVector::DotProduct(Z, Edge) > 0.0;
-			const FFormProfile L = Polygon({{T - W, 0.0}, {0.0, 0.0}, {0.0, T - W}, {T, T - W}, {T, T}, {T - W, T}});
+			const FFormProfile L = FFormProfile::Polygon({{T - W, 0.0}, {0.0, 0.0}, {0.0, T - W}, {T, T - W}, {T, T}, {T - W, T}});
 			Out.Add(FaceSlab(Name, TEXT("case.angles"), FrameOfAxes(bForward ? Corner : Corner + Edge, N1, N2), L, {}, Edge.Size(), Solid));
 		}
 

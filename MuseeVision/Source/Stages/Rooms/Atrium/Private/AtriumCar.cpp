@@ -122,12 +122,17 @@ namespace Musee::Atrium
 
 	void DrawStele(TArray<FFormDrawing>& Out)
 	{
-		// The Starry Night's stele (§3.7): its glass set 20 mm into the bronze foot. The foot's eased top edges wait for Form.
+		// The Starry Night's stele (§3.7): its glass set 20 mm into a slot in the bronze foot, whose top edges are eased.
 		const double (&Glass)[2][3] = Plan::SteleGlass;
 		const double (&Foot)[2][3] = Plan::SteleFoot;
-		AsGlass(Out.Add_GetRef(Drawn(TEXT("stele.glass"), TEXT("stele.glass"), Prism(Box(Glass[0][0], Glass[0][1], Glass[1][0], Glass[1][1]), Glass[0][2],
-			Glass[1][2]), Solid, FMuseeFrame(FVector(0.0, 0.0, Glass[0][2])))));
-		Out.Add(Drawn(TEXT("stele.foot"), TEXT("stele.foot"), Prism(Box(Foot[0][0], Foot[0][1], Foot[1][0], Foot[1][1]), Foot[0][2], Foot[1][2]), Solid,
-			FMuseeFrame(FVector(0.0, 0.0, Foot[0][2]))));
+		const FFormProfile GlassPlan = Box(Glass[0][0], Glass[0][1], Glass[1][0], Glass[1][1]);
+		AsGlass(Out.Add_GetRef(Drawn(TEXT("stele.glass"), TEXT("stele.glass"), Prism(GlassPlan, Glass[0][2], Glass[1][2]), Solid,
+			FMuseeFrame(FVector(0.0, 0.0, Glass[0][2])))));
+		FFormExtrusion Base = Prism(Box(Foot[0][0], Foot[0][1], Foot[1][0], Foot[1][1]), Foot[0][2], Foot[1][2]);
+		Base.FarArris = FFormArris::Round(Plan::SteleFootEase);
+		FFormPocket& Slot = Base.Pockets.AddDefaulted_GetRef();
+		Slot.Outline = GlassPlan;
+		Slot.DepthMeters = Foot[1][2] - Glass[0][2];
+		Out.Add(Drawn(TEXT("stele.foot"), TEXT("stele.foot"), MoveTemp(Base), Solid, FMuseeFrame(FVector(0.0, 0.0, Foot[0][2]))));
 	}
 }

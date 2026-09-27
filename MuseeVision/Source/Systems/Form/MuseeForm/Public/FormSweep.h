@@ -42,6 +42,15 @@ struct FFormSweep
 	/** The furthest a chamfered end may lean from square to the path, degrees: beyond it the end runs out to a feather. */
 	static constexpr double MaxCutDegrees = 75.0;
 
+	/**
+	 * Trims the section's sinks, where the as-built profiles' sink points draw a closed section into what the moulding is
+	 * fixed to: its part below zero on A (behind the wall a skirting runs along), on B (under the floor it stands on, or
+	 * into the face a frame is fixed to), or both, is cut away, so the moulding meets that surface face to face, on a
+	 * straight wall or a curved one.
+	 */
+	bool bTrimSinkA = false;
+	bool bTrimSinkB = false;
+
 	/** Whether the path is drawn on a face. */
 	[[nodiscard]] bool IsOnFace() const { return !Face.Start.IsEmpty(); }
 };

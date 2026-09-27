@@ -15,6 +15,12 @@ namespace Musee::Form
 	inline constexpr double WeldToleranceMeters = 1.0e-6;
 
 	/**
+	 * A step longer than the weld tolerance has a direction, however short: the square of the tolerance, to normalise a
+	 * step with (the engine's default would refuse any step under a tenth of a millimetre).
+	 */
+	inline constexpr double StepSquaredMeters = WeldToleranceMeters * WeldToleranceMeters;
+
+	/**
 	 * Two drawn elements that meet turning less than a microradian meet tangent. A turn that small is rounding in the
 	 * drawing's arithmetic, never a drawn corner.
 	 */

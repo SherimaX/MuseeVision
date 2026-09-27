@@ -123,7 +123,7 @@ namespace Musee::Salon
 			TArray<FVector2D> Corners = {{U0, V0}, {U1, V0}, {U1, V1}, {U0, V1}};
 			if (S.DoorHalf <= 0.0)
 			{
-				return FaceSlab(S.Name, S.Surface, Face, Polygon(Corners), {}, Plan::SilkBuildUp, Solid);
+				return FaceSlab(S.Name, S.Surface, Face, FFormProfile::Polygon(Corners), {}, Plan::SilkBuildUp, Solid);
 			}
 			const double C = FVector::DotProduct(S.DoorAt - S.From, Along);
 			const double W = S.DoorHalf;

@@ -33,7 +33,7 @@ namespace Musee::Form
 				const int32 Segments = bClosed ? Points.Num() : Points.Num() - 1;
 				for (int32 Segment = 0; Segment < Segments; ++Segment)
 				{
-					Directions.Add((Points[(Segment + 1) % Points.Num()] - Points[Segment]).GetSafeNormal());
+					Directions.Add((Points[(Segment + 1) % Points.Num()] - Points[Segment]).GetSafeNormal(StepSquaredMeters));
 				}
 			}
 
