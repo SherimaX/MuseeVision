@@ -16,9 +16,9 @@ stair once the golden iris has raised the pond. Module `MuseeReserve` (Editor): 
 | File | What it holds |
 | --- | --- |
 | `ReservePlan.h` | every number the undercroft is built to, from the sheet, by section |
-| `ReserveParts` | the bays, rows and racks as the sheet sets them out, and the vault's soffit over any plan point |
+| `ReserveParts` | the bays, rows and racks as the sheet sets them out, the vault's soffit over any plan point, and a box drawn standing on its own level |
 | `ReserveSite.cpp` | footprint (two prisms), the port `reserve.stair` receiving the oval's well, its opening, anchors, the enclosure |
-| `ReserveShell.cpp` | the four walls with the west door, its P6 architrave, the flags' brick bed, the top under the Salon |
+| `ReserveShell.cpp` | the four walls with the west door, its travertine threshold and P6 architrave, the flags' brick bed, the top under the Salon |
 | `ReserveFloors.cpp` | the bluestone flags (nave and aisles) cut round the bases and tracks, the 36 flush bronze tracks |
 | `ReservePiers.cpp` | fourteen piers (base, chamfered shaft, impost) and eighteen responds |
 | `ReserveVaults.cpp` | the 24 groin vaults as four webs each, cut on their diagonals; cross and arcade bands; springing blocks |
@@ -29,8 +29,9 @@ stair once the golden iris has raised the pond. Module `MuseeReserve` (Editor): 
 
 ## Tests
 
-`Musee.Reserve.Ports`, `.Anchors`, `.Described`, `.Plan`; its shells are proved sealed by Studio's
-`Musee.Studio.RoomsSealed`, since a room never sees FormMaking.
+`Musee.Reserve.Ports`, `.Anchors` (every work on a rack names the rack's body), `.Described`, `.Plan`, `.Heights` (every box
+at the level the sheet gives it); its shells are proved sealed by Studio's `Musee.Studio.RoomsSealed`, and its door's joint
+clear of it and of the oval by `Musee.Studio.JointsClear.nympheas.stair`, since a room never sees FormMaking.
 
 ## Make
 
@@ -51,13 +52,11 @@ stair once the golden iris has raised the pond. Module `MuseeReserve` (Editor): 
 - **The webs, bands and haunch fill are one brick mass** from the soffit to the top: the 0.105 shell and the bands'
   0.165 are inside it, and what shows is the soffit the sheet draws.
 - **The nave's canopies' eyes come down to the chain's top loop**, so the chain is of whole links.
-- **The door's sill is the wall's brick reveal**: the port's class has no allowance, and Site lays no threshold for it.
-- **The works on the racks don't ride them** (Art's gap): Hang.json and Art have no way to put a work on a moving
-  body, so the works on a rack's faces are made where the rack stands at home, and rack C's three Renoirs stay in the
-  aisle when it starts out.
+- **The door's threshold is the Reserve's own**, not the joint's: the port's class carries no allowance, so Site lays no
+  threshold and each stage finishes its side. The Reserve lays the sheet's honed travertine from the strip's edge
+  (x -30.570) to the flags, on the brick sill lowered by the stone's 30 mm; the joint's bronze strip lies on the mating
+  plane between it and the oval's landing, which is rebated for the strip's other half.
 - **The pastels' window mats are not made** (Art's gap): a card on its reader is made glazed, but its mat is read only
   for prints on walls.
 - **The uplights' cans are the sheet's Ø 44**; the catalogue's GU10 lamp is 50 across (Light's record and the sheet
   disagree).
-- **Site's bronze strip is laid astride the mating plane**, 30 mm into the Reserve's brick sill and the oval's landing,
-  with no rebate in either.

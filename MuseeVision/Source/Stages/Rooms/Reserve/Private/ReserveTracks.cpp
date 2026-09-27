@@ -28,7 +28,7 @@ namespace Musee::Reserve
 		}
 
 		/** A box spanning two y in either order. */
-		FFormExtrusion BoxAcross(double X, double HalfX, double YA, double YB, double Z0, double Z1)
+		FBlock BoxAcross(double X, double HalfX, double YA, double YB, double Z0, double Z1)
 		{
 			return Block(FVector(X - HalfX, FMath::Min(YA, YB), Z0), FVector(X + HalfX, FMath::Max(YA, YB), Z1));
 		}

@@ -37,8 +37,20 @@ namespace Musee::Reserve
 		return Drawing;
 	}
 
-	/** A box between two corners, as a plan extrusion. */
-	FFormExtrusion Block(const FVector& Min, const FVector& Max);
+	/**
+	 * A box between two corners: its plan rectangle extruded up its height, and the level of its lower corner. An
+	 * extrusion always rises from its frame's z 0, so a box is drawn (below) standing on that level, never at the floor.
+	 */
+	struct FBlock
+	{
+		FFormExtrusion Shape;
+		double Bottom = 0.0;
+	};
+	FBlock Block(const FVector& Min, const FVector& Max);
+
+	/** A box drawn: standing on its lower corner's level within the given frame (any repeats are given within that). */
+	FFormDrawing Drawn(const FString& Name, const TCHAR* LocalSurface, FBlock Box, const Musee::Collision::FClass* Collision,
+		const FMuseeFrame& Frame = FMuseeFrame());
 
 	/** A round bar's section of a diameter, about its path. */
 	FFormProfile Round(double Diameter);

@@ -14,12 +14,18 @@ namespace Musee::Reserve
 		return FName(FString::Printf(TEXT("%s.%s"), Plan::Stage, Local));
 	}
 
-	FFormExtrusion Block(const FVector& Min, const FVector& Max)
+	FBlock Block(const FVector& Min, const FVector& Max)
 	{
-		FFormExtrusion Shape;
-		Shape.Outline = FFormProfile::Rectangle(FVector2D(Min.X, Min.Y), FVector2D(Max.X, Max.Y));
-		Shape.DepthMeters = Max.Z - Min.Z;
-		return Shape;
+		FBlock Box;
+		Box.Shape.Outline = FFormProfile::Rectangle(FVector2D(Min.X, Min.Y), FVector2D(Max.X, Max.Y));
+		Box.Shape.DepthMeters = Max.Z - Min.Z;
+		Box.Bottom = Min.Z;
+		return Box;
+	}
+
+	FFormDrawing Drawn(const FString& Name, const TCHAR* LocalSurface, FBlock Box, const Musee::Collision::FClass* Collision, const FMuseeFrame& Frame)
+	{
+		return Drawn(Name, LocalSurface, MoveTemp(Box.Shape), Collision, Frame.FrameToParent(FMuseeFrame(FVector(0.0, 0.0, Box.Bottom))));
 	}
 
 	FFormProfile Round(double Diameter)

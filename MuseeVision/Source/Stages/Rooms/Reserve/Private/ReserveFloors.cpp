@@ -145,11 +145,11 @@ namespace Musee::Reserve
 			const double Y0 = FMath::Min(Near, Far);
 			const double Y1 = FMath::Max(Near, Far);
 			const double Lip = 0.5 * (Plan::SlotCut - Plan::SlotClear);
-			FFormExtrusion Shape = Block(FVector(Rack.X - 0.5 * Plan::SlotCut, Y0, 0.0), FVector(Rack.X + 0.5 * Plan::SlotCut, Y1, Plan::FlagThickness));
-			FFormPocket& Channel = Shape.Pockets.AddDefaulted_GetRef();
+			FBlock Cut = Block(FVector(Rack.X - 0.5 * Plan::SlotCut, Y0, -Plan::FlagThickness), FVector(Rack.X + 0.5 * Plan::SlotCut, Y1, 0.0));
+			FFormPocket& Channel = Cut.Shape.Pockets.AddDefaulted_GetRef();
 			Channel.Outline = FFormProfile::Rectangle(FVector2D(Rack.X - 0.5 * Plan::SlotClear, Y0 + Lip), FVector2D(Rack.X + 0.5 * Plan::SlotClear, Y1 - Lip));
 			Channel.DepthMeters = Plan::SlotDepth;
-			return Drawn(Rack.Piece(TEXT("floor-track")), TEXT("floor.slot"), MoveTemp(Shape), Walkable, FMuseeFrame(FVector(0.0, 0.0, -Plan::FlagThickness)));
+			return Drawn(Rack.Piece(TEXT("floor-track")), TEXT("floor.slot"), MoveTemp(Cut), Walkable);
 		}
 	}
 

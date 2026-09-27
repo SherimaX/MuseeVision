@@ -89,6 +89,12 @@ namespace Musee::Reserve::Tests
 		{
 			TestTrue(*FString::Printf(TEXT("%s hangs on a Wall or lies on a Mount anchor"), *Work.Work),
 				FindAnchor(Description, Work.Anchor, TEXT("Wall")) != nullptr || FindAnchor(Description, Work.Anchor, TEXT("Mount")) != nullptr);
+			// Anchors on a rack's body ride it (§2), and so does every work hung on them: a rack's face is keyed under its body.
+			const FMuseeStageAnchor* Rack = Description.Anchors.FindByPredicate([&Work](const FMuseeStageAnchor& A)
+			{
+				return A.Kind == FName(TEXT("Body")) && Work.Anchor.ToString().StartsWith(A.Key.ToString() + TEXT("."));
+			});
+			TestEqual(*FString::Printf(TEXT("%s rides the body its wall is on"), *Work.Work), Work.Body, Rack ? Rack->Key : FMuseeKey());
 		}
 		TestEqual(TEXT("36 racks"), Motion.GetValue().Mechanisms.Num(), 36);
 		for (const FMotionMechanismSpec& Mechanism : Motion.GetValue().Mechanisms)
@@ -242,6 +248,74 @@ namespace Musee::Reserve::Tests
 			}
 		}
 		TestEqual(TEXT("the lowest arch over a track stands at 5.018"), Lowest, 5.018, 0.001);
+		return true;
+	}
+
+	IMPLEMENT_SIMPLE_AUTOMATION_TEST(FReserveHeightsTest, "Musee.Reserve.Heights", Flags)
+	bool FReserveHeightsTest::RunTest(const FString& Parameters)
+	{
+		// An extrusion rises from its frame's z 0: every box stands at the level the sheet gives it, in the stage (or, on
+		// a rack, in the rack's frame, whose origin is on the floor), never at the floor.
+		struct FLevel
+		{
+			const TCHAR* Piece;
+			double Bottom;
+			double Top;
+		};
+		const FLevel Levels[] = {
+			{TEXT("floor.bed"), -0.350, -0.060},
+			{TEXT("door.threshold"), -0.030, 0.000},
+			{TEXT("screen-a.floor-track"), -0.060, 0.000},
+			{TEXT("vault.springing.1n"), 4.000, 5.750},
+			{TEXT("track.a.hanger.1.clamp"), 3.700, 3.742},
+			{TEXT("track.a.stop"), 3.574, 3.704},
+			{TEXT("track.a.plate"), 3.510, 3.760},
+			{TEXT("screen-a.trolley.saddle.north"), 3.400, 3.414},
+			{TEXT("screen-a.shoe.north"), 0.050, 0.070},
+			{TEXT("screen-a.fin.north"), -0.030, 0.050},
+			{TEXT("screen-a.lamp.west.trough"), 3.298, 3.342},
+			{TEXT("easel.upright.north"), 0.090, 2.350},
+			{TEXT("easel.cap.north"), 2.350, 2.380},
+			{TEXT("easel.ledge"), 0.750, 0.800},
+			{TEXT("chest.bay7-south.plinth"), 0.000, 0.090},
+			{TEXT("chest.bay7-south.top"), 0.865, 0.900},
+			{TEXT("chest.bay7-south.felt"), 0.900, 0.905},
+		};
+		const FSiteDescription Description = Described();
+		for (const FLevel& Level : Levels)
+		{
+			const FFormDrawing* Piece = Description.Pieces.FindByPredicate([&Level](const FFormDrawing& D) { return D.Name == FName(Level.Piece); });
+			if (!TestNotNull(*FString::Printf(TEXT("%s is drawn"), Level.Piece), Piece) || !TestTrue(*FString::Printf(TEXT("%s is a box"), Level.Piece),
+				Piece->Shape.IsType<FFormExtrusion>()) || !TestTrue(*FString::Printf(TEXT("%s stands upright"), Level.Piece),
+				Piece->Frame.DirectionToParent(FVector::UpVector).Equals(FVector::UpVector, 1e-9)))
+			{
+				continue;
+			}
+			const double Bottom = Piece->Frame.OriginMeters.Z;
+			TestEqual(*FString::Printf(TEXT("%s's underside"), Level.Piece), Bottom, Level.Bottom, 1e-9);
+			TestEqual(*FString::Printf(TEXT("%s's top"), Level.Piece), Bottom + Piece->Shape.Get<FFormExtrusion>().DepthMeters, Level.Top, 1e-9);
+		}
+
+		// The door's sill (§2): the brick reveal lies the threshold's depth under the floor, and the stone runs from half the
+		// joint's strip in from the port face to the hall face, so the strip lies on the mating plane between two floors.
+		const TValueOrError<FSitePortClass, FString> Class = Musee::Site::FindPortClass(FMuseeKey(Plan::PortClass));
+		const FFormDrawing* Threshold = Description.Pieces.FindByPredicate([](const FFormDrawing& D) { return D.Name == FName(TEXT("door.threshold")); });
+		const FFormDrawing* Walls = Description.Pieces.FindByPredicate([](const FFormDrawing& D) { return D.Name == FName(Pieces::Walls); });
+		if (TestTrue(TEXT("the port's class reads"), Class.HasValue()) && TestNotNull(TEXT("the threshold"), Threshold) && TestNotNull(TEXT("the walls"), Walls))
+		{
+			const FFormProfile& Outline = Threshold->Shape.Get<FFormExtrusion>().Outline;
+			FBox2D Plan2D(FVector2D(Outline.Start[0], Outline.Start[1]), FVector2D(Outline.Start[0], Outline.Start[1]));
+			for (const FFormProfileStep& Step : Outline.Steps)
+			{
+				Plan2D += FVector2D(Step.Line[0], Step.Line[1]);
+			}
+			TestEqual(TEXT("the threshold starts half the strip in from the port face"), Plan2D.Min.X, -Plan::OuterX + 0.5 * Class.GetValue().StripMeters, 1e-9);
+			TestEqual(TEXT("and ends on the hall face"), Plan2D.Max.X, -Plan::InnerX, 1e-9);
+			TestEqual(TEXT("the door's clear width"), Plan2D.GetSize().Y, Class.GetValue().ClearWidthMeters, 1e-9);
+			const FFormWall& Wall = Walls->Shape.Get<FFormWall>();
+			TestTrue(TEXT("the brick sill lies under the threshold"), Wall.Openings.Num() == 1
+				&& FMath::IsNearlyEqual(Wall.BaseMeters + Wall.Openings[0].SillMeters, Threshold->Frame.OriginMeters.Z, 1e-9));
+		}
 		return true;
 	}
 }

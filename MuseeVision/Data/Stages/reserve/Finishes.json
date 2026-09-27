@@ -37,6 +37,13 @@
       "note": "The west door's jambs and semicircular soffit through the 0.60 wall: two rowlock rings, headers on the soffit."
     },
     {
+      "surface": "reserve.door.threshold",
+      "material": "stone.travertine-romano",
+      "working": "honed",
+      "history": "foot-worn",
+      "note": "The west door's threshold through the wall's depth, from the bronze strip on the mating plane to the flags (x -30.570 to -30.000, 2.400 wide, top 0.000): the museum's threshold stone, 30 mm on its mortar bed over the brick sill (Data/Site/Joints.json threshold, as the joint lays it where a class carries an allowance), laid by the Reserve since its door's class has none."
+    },
+    {
       "surface": "reserve.exterior.buried",
       "material": "accent.brique-bourgogne",
       "working": "laid.mortar-jointed",

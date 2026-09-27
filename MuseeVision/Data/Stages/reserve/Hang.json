@@ -5,6 +5,7 @@
       "work": "caillebotte-young-man-window",
       "source": "data/artworks.json",
       "anchor": "reserve.screen-a.west",
+      "body": "reserve.screen-a",
       "along": 2.095,
       "height": 0.97,
       "size": [
@@ -19,6 +20,7 @@
       "work": "degas-place-de-la-concorde",
       "source": "data/artworks.json",
       "anchor": "reserve.screen-b.west",
+      "body": "reserve.screen-b",
       "along": 1.91,
       "height": 1.16,
       "size": [
@@ -33,6 +35,7 @@
       "work": "degas-orchestra-opera",
       "source": "data/artworks.json",
       "anchor": "reserve.screen-b.east",
+      "body": "reserve.screen-b",
       "along": 2.27,
       "height": 1.265,
       "size": [
@@ -47,6 +50,7 @@
       "work": "renoir-cirque-fernando",
       "source": "data/artworks.json",
       "anchor": "reserve.screen-c.west",
+      "body": "reserve.screen-c",
       "along": 0.705,
       "height": 0.895,
       "size": [
@@ -61,6 +65,7 @@
       "work": "renoir-two-sisters",
       "source": "data/artworks.json",
       "anchor": "reserve.screen-c.west",
+      "body": "reserve.screen-c",
       "along": 2.225,
       "height": 1.045,
       "size": [
@@ -75,6 +80,7 @@
       "work": "renoir-the-swing",
       "source": "data/artworks.json",
       "anchor": "reserve.screen-c.west",
+      "body": "reserve.screen-c",
       "along": 3.565,
       "height": 1.09,
       "size": [
@@ -89,6 +95,7 @@
       "work": "pissarro-red-roofs",
       "source": "data/artworks.json",
       "anchor": "reserve.screen-d.west",
+      "body": "reserve.screen-d",
       "along": 2.17,
       "height": 1.275,
       "size": [
@@ -103,6 +110,7 @@
       "work": "pissarro-avenue-opera-snow",
       "source": "data/artworks.json",
       "anchor": "reserve.screen-d.east",
+      "body": "reserve.screen-d",
       "along": 2.095,
       "height": 1.225,
       "size": [
@@ -117,6 +125,7 @@
       "work": "sisley-bridge-villeneuve",
       "source": "data/artworks.json",
       "anchor": "reserve.screen-e.west",
+      "body": "reserve.screen-e",
       "along": 2.175,
       "height": 1.3,
       "size": [
@@ -131,6 +140,7 @@
       "work": "sisley-snow-louveciennes",
       "source": "data/artworks.json",
       "anchor": "reserve.screen-e.east",
+      "body": "reserve.screen-e",
       "along": 2.245,
       "height": 1.245,
       "size": [
