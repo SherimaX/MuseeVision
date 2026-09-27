@@ -39,6 +39,18 @@ namespace Musee::Studio
 			return FString::Printf(TEXT("%s/Matter/%s"), *Root, *Instance);
 		}
 
+		/** A joint's mesh, drawn by Site in the museum's frame and named joint.<port>.<part>: <Root>/Site/Joints/SM_<Piece>. */
+		FString JointMesh(const FString& Piece) const
+		{
+			return FString::Printf(TEXT("%s/Site/Joints/SM_%s"), *Root, *Piece);
+		}
+
+		/** The joints' level, which the museum's level instances at its origin: <Root>/Site/L_Joints. */
+		FString JointsLevel() const
+		{
+			return FString::Printf(TEXT("%s/Site/L_Joints"), *Root);
+		}
+
 		/** The museum's level: <Root>/Site/L_Museum. */
 		FString MuseumLevel() const
 		{

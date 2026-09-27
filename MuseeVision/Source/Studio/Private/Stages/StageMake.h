@@ -29,6 +29,7 @@ namespace Musee::Studio
 		FString PlanRecord;
 		FString PortClassesRecord;
 		FString BlindsRecord;
+		FString JointsRecord;
 
 		FStageMakeOptions();
 	};
@@ -51,7 +52,8 @@ namespace Musee::Studio
 
 	/**
 	 * Makes the museum level: every stage whose level exists, placed by the site plan with a Level Instance at its
-	 * translation, the arrival marked, and the site's game mode.
+	 * translation; the joints' level (MakeJoints), made from the same solve and placed at the museum's origin; the arrival
+	 * marked; and the site's game mode. The placed stages' footprints are checked apart (Site.NoOverlap).
 	 */
 	FMakeReport MakeMuseum(const FStageMakeOptions& Options = FStageMakeOptions());
 

@@ -1,5 +1,6 @@
 #include "Levels/StageLevel.h"
 
+#include "Components/InstancedStaticMeshComponent.h"
 #include "Components/SceneComponent.h"
 #include "Components/StaticMeshComponent.h"
 #include "Engine/StaticMesh.h"
@@ -37,7 +38,10 @@ namespace Musee::Studio
 			return false;
 		}
 
-		/** Hangs every body from the stage's frame; a body moves, so it and all it carries are movable. */
+		/**
+		 * Hangs every body from the body it rides or from the stage's frame; a body moves, so it and all it carries are
+		 * movable.
+		 */
 		bool AddBodies(AActor& Actor, USceneComponent& Frame, const FStageLevel& Stage, TMap<FString, USceneComponent*>& OutBodies,
 			FString& OutWhy)
 		{
@@ -47,9 +51,15 @@ namespace Musee::Studio
 				{
 					return false;
 				}
+				USceneComponent* const* Parent = Body.Parent.IsEmpty() ? nullptr : OutBodies.Find(Body.Parent);
+				if (!Body.Parent.IsEmpty() && !Parent)
+				{
+					OutWhy = FString::Printf(TEXT("body %s rides on %s, which isn't listed before it"), *Body.Name, *Body.Parent);
+					return false;
+				}
 				USceneComponent* Component = AddComponent<USceneComponent>(Actor, Body.Name, EComponentMobility::Movable);
 				Component->ComponentTags.Add(Body.Key);
-				Component->SetupAttachment(&Frame);
+				Component->SetupAttachment(Parent ? *Parent : &Frame);
 				Component->SetRelativeTransform(FTransform(Body.Rotation, EngineFromMeters(Body.LocationMeters)));
 				OutBodies.Add(Body.Name, Component);
 			}
@@ -75,11 +85,22 @@ namespace Musee::Studio
 				OutWhy = FString::Printf(TEXT("placement %s: no mesh at %s"), *Placement.Name, *Placement.Mesh.ToString());
 				return false;
 			}
-			UStaticMeshComponent* Component = AddComponent<UStaticMeshComponent>(Actor, Placement.Name,
-				Body ? EComponentMobility::Movable : EComponentMobility::Static);
+			const EComponentMobility::Type Mobility = Body ? EComponentMobility::Movable : EComponentMobility::Static;
+			UStaticMeshComponent* Component = Placement.Instances.IsEmpty()
+				? AddComponent<UStaticMeshComponent>(Actor, Placement.Name, Mobility)
+				: AddComponent<UInstancedStaticMeshComponent>(Actor, Placement.Name, Mobility);
 			Component->SetStaticMesh(Mesh);
 			Component->SetupAttachment(Body ? *Body : &Frame);
 			Component->SetRelativeTransform(FTransform(Placement.Rotation, EngineFromMeters(Placement.LocationMeters)));
+			if (UInstancedStaticMeshComponent* Instanced = Cast<UInstancedStaticMeshComponent>(Component))
+			{
+				TArray<FTransform> Copies;
+				for (const FStageInstance& Instance : Placement.Instances)
+				{
+					Copies.Emplace(Instance.Rotation, EngineFromMeters(Instance.LocationMeters));
+				}
+				Instanced->AddInstances(Copies, /*bShouldReturnIndices*/ false, /*bWorldSpace*/ false);
+			}
 			Component->ComponentTags.Append(Placement.Tags);
 			if (!Placement.Collision.IsNone())
 			{
@@ -121,7 +142,7 @@ namespace Musee::Studio
 		Hasher.Add(TEXT("stage-level")).Add(StageLevelRevision).Add(Stage.StageName).Add(Stage.DependencyHash);
 		for (const FStageBody& Body : Stage.Bodies)
 		{
-			Hasher.Add(Body.Name).Add(Body.Key.ToString()).Add(Body.LocationMeters).Add(Body.Rotation);
+			Hasher.Add(Body.Name).Add(Body.Key.ToString()).Add(Body.Parent).Add(Body.LocationMeters).Add(Body.Rotation);
 		}
 		for (const FStagePlacement& Placement : Stage.Placements)
 		{
@@ -130,6 +151,11 @@ namespace Musee::Studio
 			for (const FName Tag : Placement.Tags)
 			{
 				Hasher.Add(Tag.ToString());
+			}
+			Hasher.Add(static_cast<int64>(Placement.Instances.Num()));
+			for (const FStageInstance& Instance : Placement.Instances)
+			{
+				Hasher.Add(Instance.LocationMeters).Add(Instance.Rotation);
 			}
 		}
 		return Hasher.Finish();

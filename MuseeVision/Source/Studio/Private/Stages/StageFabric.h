@@ -12,22 +12,34 @@ namespace Musee::Studio
 {
 	struct FStageMakeOptions;
 
-	/** A stage's fabric: its description and every piece made for it, with the records the making read. */
+	/**
+	 * A stage's fabric: its description, the ports the site plan mates, and every piece made for it, with the records the
+	 * making read.
+	 */
 	struct FStageFabric
 	{
 		FSiteDescription Description;
+		/** The stage's ports joined to a built neighbour as Site solves the plan, in the description's order; the rest are blind. */
+		TArray<FMuseeKey> MatedPorts;
 		TArray<FFormMadePiece> Pieces;
 		FMuseeDependencySet Dependencies;
 	};
 
 	/**
-	 * The stage contract's first three steps and the shell check: describe the stage, add a blind for each port the site
-	 * plan leaves unmated, make every drawing, gather the pieces the systems add, and check each enclosure's pieces are
-	 * closed solids (Form.Sealed). Everything found wrong is appended to OutFindings.
+	 * The stage contract's first three steps and the shell check: describe the stage, solve the site plan for the ports it
+	 * mates and add a blind for each it leaves unmated, make every drawing, gather the pieces the systems add, and check
+	 * each enclosure's pieces are closed solids (Form.Sealed). Everything found wrong is appended to OutFindings.
 	 */
 	FStageFabric MakeFabric(const USiteRoom& Room, const FStageMakeOptions& Options, const FString& ScheduleDir,
 		TArray<FMuseeFinding>& OutFindings);
 
-	/** The ports of every loaded room, by stage: what the site plan mates. */
-	TMap<FMuseeKey, TArray<FSitePort>> PortsOfRooms(FMuseeDependencySet& Dependencies);
+	/** What the site plan reads of every loaded room: its ports, which the plan mates, and its footprint, which it places. */
+	struct FSiteRooms
+	{
+		TMap<FMuseeKey, TArray<FSitePort>> Ports;
+		TMap<FMuseeKey, FSiteFootprint> Footprints;
+	};
+
+	/** Every loaded room's ports and footprint, by stage, each room described once. */
+	FSiteRooms DescribeRooms(FMuseeDependencySet& Dependencies);
 }
