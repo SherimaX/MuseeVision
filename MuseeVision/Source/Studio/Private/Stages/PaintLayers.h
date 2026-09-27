@@ -15,8 +15,8 @@ namespace Musee::Studio
 	 *   lighting GUID derived from its inputs, so the same image makes the same bytes;
 	 * - the work's paint instance, `paint.<id>` with the paint's working and history, at <Root>/Matter/MI_<...>, which
 	 *   for the museum is Musee::Matter::InstancePackage, where Musee::Matter::Resolve finds it. Matter composes it
-	 *   (Musee::Matter::ComposePaintLayer) over the paint master, from the paint's palette finish, the texture and the
-	 *   image's size in metres.
+	 *   (Musee::Matter::ComposePaintLayer) over the master Matter names for its finish (the paint master for a canvas, the
+	 *   stained-glass master for a stained-glass panel), from the palette finish, the texture and the image's size in metres.
 	 * Only what changed is written. A layer that can't be composed (no paint master made, an image that can't be read, a
 	 * palette finish Matter refuses) is a finding.
 	 */

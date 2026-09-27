@@ -4,42 +4,42 @@
     {
       "surface": "reserve.wall.brick",
       "material": "accent.brique-bourgogne",
-      "working": "hand-laid, lime mortar, joints slightly recessed",
+      "working": "laid.mortar-jointed",
       "history": "new",
       "note": "Inner faces of the four walls from the floor to the vaults' wall arches, and the 18 responds' pilasters: Burgundy pressed brick 220 x 105 x 55 in lime mortar, English bond (Story: the Reserve's piers, arches and vaults)."
     },
     {
       "surface": "reserve.pier.brick",
       "material": "accent.brique-bourgogne",
-      "working": "hand-laid, lime mortar, joints slightly recessed",
+      "working": "laid.mortar-jointed",
       "history": "new",
       "note": "The 14 piers' chamfered shafts 0.70 square, 40 mm chamfers in cut brick, 0.54-3.64."
     },
     {
       "surface": "reserve.vault.web",
       "material": "accent.brique-bourgogne",
-      "working": "hand-laid, lime mortar, joints slightly recessed",
+      "working": "laid.mortar-jointed",
       "history": "new",
       "note": "The 24 groin vaults' webs: half-brick shells 0.105 normal to the intrados, stretcher bond, courses parallel to each barrel's axis, cut brick at the groins."
     },
     {
       "surface": "reserve.vault.band",
       "material": "accent.brique-bourgogne",
-      "working": "hand-laid, lime mortar, joints slightly recessed",
+      "working": "laid.mortar-jointed",
       "history": "new",
       "note": "The 21 cross bands and 16 arcade bands (with their lunette faces): the web shell deepened 0.06, square arrises."
     },
     {
       "surface": "reserve.door.reveal",
       "material": "accent.brique-bourgogne",
-      "working": "hand-laid, lime mortar, joints slightly recessed",
+      "working": "laid.mortar-jointed",
       "history": "handled",
       "note": "The west door's jambs and semicircular soffit through the 0.60 wall: two rowlock rings, headers on the soffit."
     },
     {
       "surface": "reserve.exterior.buried",
       "material": "accent.brique-bourgogne",
-      "working": "hand-laid, lime mortar",
+      "working": "laid.mortar-jointed",
       "history": "new",
       "note": "Never seen: the haunch fill to the box's top, the box's outer faces and top (waterproofed back), and the flat brick bed under the floor flags (z -0.35 to -0.06). Solid, sealed."
     },
@@ -95,14 +95,14 @@
     {
       "surface": "reserve.screen.frame",
       "material": "accent.brass-cuzn30",
-      "working": "drawn, lacquered",
+      "working": "drawn.lacquered",
       "history": "handled",
       "note": "Each rack's frame: two end posts 0.090 x 0.160 and the top and kick rails, drawn and rolled CuZn30 hollow sections, clear-lacquered (Story: rack frames)."
     },
     {
       "surface": "reserve.screen.mesh",
       "material": "accent.brass-cuzn30",
-      "working": "woven, lacquered",
+      "working": "woven.lacquered",
       "history": "new",
       "note": "The rack's face: crimped woven wire mesh of CuZn30 wire dia 3.0 mm at 25 mm pitch (22 mm square aperture), one sheet in the rack's centre plane, clamped in the frame; clear-lacquered (Story: woven wire mesh)."
     },
@@ -151,7 +151,7 @@
     {
       "surface": "reserve.easel",
       "material": "oak.sessile-french",
-      "working": "oiled and hard-waxed",
+      "working": "oiled.hard-waxed",
       "history": "handled",
       "note": "The viewing easel's runners, cross foot, uprights, rails, ledge and lip: quartersawn sessile oak (Story: the Reserve's easel, oiled and hard-waxed)."
     },
@@ -165,7 +165,7 @@
     {
       "surface": "reserve.chest",
       "material": "oak.sessile-french",
-      "working": "fumed and waxed",
+      "working": "fumed.waxed",
       "history": "handled",
       "note": "The four plan-chest islands: carcasses, tops and the 80 drawer fronts, fumed with ammonia and waxed (Story: replaces the as-built walnut)."
     },
@@ -192,7 +192,7 @@
     },
     {
       "surface": "reserve.frame.gilt",
-      "material": "oak.sessile-french",
+      "material": "white.gesso",
       "working": "gilt.gold-leaf.water",
       "history": "aged.patina",
       "note": "Every oil's frame (Hang frame): carved oak, gesso, water-gilt on red bole, 0.090 face; the Salon's frame, bole on the worn ridges; Art builds it."
@@ -207,7 +207,7 @@
     {
       "surface": "reserve.pastel.glass",
       "material": "glass.low-iron",
-      "working": "laminated, UV-filtering",
+      "working": "laminated.uv-filtering",
       "history": "new",
       "note": "The glazing over each pastel's mat on a 6 mm spacer (a pastel is never kept bare): Optiwhite laminated with a UV-filtering interlayer."
     },

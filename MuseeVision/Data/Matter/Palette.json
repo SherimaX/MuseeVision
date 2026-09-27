@@ -432,6 +432,11 @@
       "finishes": [
         {
           "working": "honed",
+          "history": "foot-worn",
+          "note": "Stages: reserve.floor, reserve.floor.aisle"
+        },
+        {
+          "working": "honed",
           "history": "weathered",
           "note": "Stages: nympheas.pond.bed"
         }
@@ -462,6 +467,11 @@
       },
       "substance": "brick",
       "finishes": [
+        {
+          "working": "laid.mortar-jointed",
+          "history": "handled",
+          "note": "Stages: reserve.door.reveal"
+        },
         {
           "working": "laid.mortar-jointed",
           "history": "new",
@@ -1002,6 +1012,41 @@
       "substance": "topsoil",
       "finishes": [
         {
+          "working": "excavated.chalk.fossil-stained",
+          "history": "new",
+          "note": "Stages: cube.ground.fossil"
+        },
+        {
+          "working": "excavated.flint.nodular",
+          "history": "new",
+          "note": "Stages: cube.ground.flint"
+        },
+        {
+          "working": "excavated.chalk.dry",
+          "history": "new",
+          "note": "Stages: cube.ground.chalk"
+        },
+        {
+          "working": "excavated.clay-with-flints.spade-cut",
+          "history": "new",
+          "note": "Stages: cube.ground.clay-with-flints"
+        },
+        {
+          "working": "excavated.subsoil.damp",
+          "history": "new",
+          "note": "Stages: cube.ground.subsoil"
+        },
+        {
+          "working": "excavated.topsoil.damp",
+          "history": "new",
+          "note": "Stages: cube.ground.topsoil"
+        },
+        {
+          "working": "excavated.crushed-stone",
+          "history": "new",
+          "note": "Stages: cube.ground.crushed-stone"
+        },
+        {
           "working": "topsoil.bare",
           "history": "weathered",
           "note": "Stages: chenghuai planting, hall-of-light planting"
@@ -1322,6 +1367,11 @@
       "substance": "steel",
       "finishes": [
         {
+          "working": "blast-cleaned.primed",
+          "history": "new",
+          "note": "Stages: sphere.steel"
+        },
+        {
           "working": "pearl.satin",
           "history": "new",
           "note": "Stages: rotunda.eye.lattice"
@@ -1377,6 +1427,16 @@
         "needed": "A mirror-polished-and-lacquered working; a 'dark' patina regime for the Cube; complex index (edge tint) remains a proxy."
       },
       "finishes": [
+        {
+          "working": "mirror-polished",
+          "history": "new",
+          "note": "Stages: sphere.mast.dogs"
+        },
+        {
+          "working": "gilt.gold-leaf.oil",
+          "history": "weathered",
+          "note": "Stages: sphere.gilt.outside"
+        },
         {
           "working": "gilt",
           "history": "worn",
@@ -1531,10 +1591,24 @@
       "verdictReason": "Kept only for the woven mesh and frames; feet and strips become bronze.",
       "research": {
         "records": [
-          "r-matter: Substances/brass.json"
+          "r-matter: Substances/brass.json",
+          "Shading/Substances/brass.json"
         ],
         "needed": "None."
-      }
+      },
+      "substance": "brass",
+      "finishes": [
+        {
+          "working": "drawn.lacquered",
+          "history": "handled",
+          "note": "Stages: reserve.screen.frame"
+        },
+        {
+          "working": "woven.lacquered",
+          "history": "new",
+          "note": "Stages: reserve.screen.mesh"
+        }
+      ]
     },
     {
       "key": "accent.victorian-iron",
@@ -2329,6 +2403,11 @@
         "needed": "Workings: acid-etched, paper-laminated, lenslet-array."
       },
       "finishes": [
+        {
+          "working": "lenslet-array.black",
+          "history": "new",
+          "note": "Stages: cube.panels, sphere.image"
+        },
         {
           "working": "laminated.uv-filtering",
           "history": "soiled",

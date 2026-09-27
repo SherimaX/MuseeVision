@@ -394,4 +394,57 @@ bool FMatterPaintLayerComposes::RunTest(const FString& Parameters)
 	return true;
 }
 
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FMatterStainedLayerComposes, "Musee.Matter.StainedLayer", TestFlags)
+bool FMatterStainedLayerComposes::RunTest(const FString& Parameters)
+{
+	UMaterialParameterCollection* Moment = TestMasters::TransientMoment();
+	const TArray<FMadeMaster> Made = TestMasters::TransientMasters(*this, *Moment);
+	UMaterialInterface* Stained = TestMasters::FindIn(Made, FMasterKind{ FName(Masters::Stained), NAME_None });
+	UTexture* Image = LoadObject<UTexture>(nullptr, MasterParts::EngineDefaultTexture);
+	if (!TestNotNull(TEXT("The stained-glass master builds"), Stained) || !TestNotNull(TEXT("The engine's default texture loads"), Image))
+	{
+		return false;
+	}
+	// A panel of Albion's Tristram and Isolde band, fired in its antique glass (albion/Finishes.json albion.band.glass).
+	FMatterPaintLayer Panel;
+	Panel.Work = TEXT("paint.matter-test.1");
+	Panel.Palette = TEXT("glass.mouth-blown.antique");
+	Panel.Working = TEXT("leaded");
+	Panel.History = TEXT("aged.patina");
+	Panel.Image = Image;
+	Panel.WidthMeters = 1.6;
+	Panel.HeightMeters = 1.7;
+	const TValueOrError<FString, FString> Master = LayerMasterPackage(Panel);
+	TestTrue(TEXT("A glass's layer is composed over the stained-glass master"), Master.HasValue() && Master.GetValue() == MasterPackage(FName(Masters::Stained)));
+	FMatterPaintLayer Canvas = Panel;
+	Canvas.Palette = PaintFinish::Palette;
+	Canvas.Working = PaintFinish::Working;
+	Canvas.History = PaintFinish::History;
+	const TValueOrError<FString, FString> CanvasMaster = LayerMasterPackage(Canvas);
+	TestTrue(TEXT("a canvas's over the paint master"), CanvasMaster.HasValue() && CanvasMaster.GetValue() == PaintMasterPackage());
+	FMatterPaintLayer Stone = Panel;
+	Stone.Palette = TEXT("stone.travertine-romano");
+	Stone.Working = TEXT("honed");
+	Stone.History = TEXT("new");
+	TestTrue(TEXT("and a stone carries no image"), LayerMasterPackage(Stone).HasError());
+
+	UMaterialInstanceConstant* Instance = TestMasters::TransientInstance();
+	for (const FString& Problem : ComposePaintLayer(Panel, *Stained, *Instance))
+	{
+		AddError(Problem);
+	}
+	TestTrue(TEXT("The panel's glass is parented to the stained-glass master"), Instance->Parent == Stained);
+	float Width = 0.0f;
+	float Thickness = 0.0f;
+	UTexture* Carried = nullptr;
+	Instance->GetScalarParameterValue(FHashedMaterialParameterInfo(MasterParameter::ImageWidthMeters), Width);
+	Instance->GetScalarParameterValue(FHashedMaterialParameterInfo(MasterParameter::PaneThicknessMillimeters), Thickness);
+	Instance->GetTextureParameterValue(FHashedMaterialParameterInfo(MasterParameter::Image), Carried);
+	TestTrue(TEXT("It carries the panel's image and width"), Carried == Image && Width == 1.6f);
+	TestTrue(TEXT("and its glass's thickness, from the glass's working"), Thickness > 0.0f);
+	Instance->MarkAsGarbage();
+	TestMasters::Retire(Made);
+	return true;
+}
+
 #endif

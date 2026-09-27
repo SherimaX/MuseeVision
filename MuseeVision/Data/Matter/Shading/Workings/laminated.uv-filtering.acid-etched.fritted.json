@@ -41,6 +41,7 @@
     "unit": "mm",
     "grade": "design",
     "source": "Docs/Stages/atrium.md: section 3.4 (the inner leaf, 2 x 12 mm laminated, acid-etched and fritted)",
-    "note": "The white ceramic frit on the cavity face scatters and cuts the light; the glass master has no scattering layer for it (a gap), so only the etched face and the glass are composed."
-  }
+    "note": "The glass the make-up puts in the light's path; the frit, not the glass, decides what the pane passes."
+  },
+  "lays": "frit.white"
 }

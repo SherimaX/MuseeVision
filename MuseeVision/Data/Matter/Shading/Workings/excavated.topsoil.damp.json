@@ -1,0 +1,38 @@
+{
+  "schema": "musee.matter.shading.working/1",
+  "key": "excavated.topsoil.damp",
+  "name": "Excavated: topsoil, crumbly, in its damp ground",
+  "record": "Workings/excavated.json",
+  "kind": "face",
+  "roughness": {
+    "value": 0.95,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Docs/Stages/cube.md section 7 (the ground rule's relief) and Workings/excavated.json"
+  },
+  "roughnessAcross": {
+    "value": 0.95,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Docs/Stages/cube.md section 7 (the ground rule's relief) and Workings/excavated.json"
+  },
+  "haziness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Docs/Stages/cube.md section 7 (the ground rule's relief) and Workings/excavated.json"
+  },
+  "textureDepth": {
+    "value": 3.0,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Docs/Stages/cube.md section 7 (the ground rule's relief) and Workings/excavated.json"
+  },
+  "relief": {
+    "value": 7.0,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Docs/Stages/cube.md section 7 (the ground rule's relief) and Workings/excavated.json"
+  },
+  "lays": "topsoil"
+}

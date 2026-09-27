@@ -1,0 +1,38 @@
+{
+  "schema": "musee.matter.shading.working/1",
+  "key": "excavated.clay-with-flints.spade-cut",
+  "name": "Excavated: clay-with-flints, cut smooth by the spade",
+  "record": "Workings/excavated.json",
+  "kind": "face",
+  "roughness": {
+    "value": 0.7,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Docs/Stages/cube.md section 7 (the ground rule's relief) and Workings/excavated.json"
+  },
+  "roughnessAcross": {
+    "value": 0.7,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Docs/Stages/cube.md section 7 (the ground rule's relief) and Workings/excavated.json"
+  },
+  "haziness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Docs/Stages/cube.md section 7 (the ground rule's relief) and Workings/excavated.json"
+  },
+  "textureDepth": {
+    "value": 0.5,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Docs/Stages/cube.md section 7 (the ground rule's relief) and Workings/excavated.json"
+  },
+  "relief": {
+    "value": 1.8,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Docs/Stages/cube.md section 7 (the ground rule's relief) and Workings/excavated.json"
+  },
+  "lays": "clay-with-flints"
+}

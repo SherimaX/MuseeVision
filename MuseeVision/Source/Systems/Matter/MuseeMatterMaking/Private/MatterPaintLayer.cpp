@@ -15,6 +15,34 @@ namespace
 	{
 		return Name.IsNone() ? TOptional<FMuseeKey>() : FMuseeKey::Parse(Name.ToString());
 	}
+
+	/** The master a finish's layer is composed over: the paint master for a paint, the stained-glass master for a glass. */
+	TOptional<FName> LayerMasterOf(const FMasterKind& Finish)
+	{
+		if (!Finish.Layer.IsNone())
+		{
+			return {};
+		}
+		if (Finish.Master == FName(Masters::Paint))
+		{
+			return FName(Masters::Paint);
+		}
+		return Finish.Master == FName(Masters::Glass) ? TOptional<FName>(FName(Masters::Stained)) : TOptional<FName>();
+	}
+
+	/** The spec whose records give a layer's physics, or why it is no spec. */
+	TValueOrError<FMatterSpec, FString> FinishOf(const FMatterPaintLayer& Layer)
+	{
+		const TOptional<FMuseeKey> Palette = KeyOf(Layer.Palette);
+		const TOptional<FMuseeKey> Working = KeyOf(Layer.Working);
+		const TOptional<FMuseeKey> History = KeyOf(Layer.History);
+		if (!Palette || !Working || !History)
+		{
+			return MakeError(FString::Printf(TEXT("A layer derives from a palette finish; this one names '%s/%s/%s'."),
+				*Layer.Palette.ToString(), *Layer.Working.ToString(), *Layer.History.ToString()));
+		}
+		return MakeValue(FMatterSpec{ *Palette, *Working, *History });
+	}
 }
 
 FString PaintMasterPackage()
@@ -22,15 +50,34 @@ FString PaintMasterPackage()
 	return MasterPackage(FName(Masters::Paint));
 }
 
-TArray<FString> ComposePaintLayer(const FMatterPaintLayer& Layer, UMaterialInterface& PaintMaster, UMaterialInstanceConstant& Instance)
+TValueOrError<FString, FString> LayerMasterPackage(const FMatterPaintLayer& Layer)
+{
+	const TValueOrError<FMatterSpec, FString> Finish = FinishOf(Layer);
+	if (Finish.HasError())
+	{
+		return MakeError(Finish.GetError());
+	}
+	const TValueOrError<FSpecRecords, FString> Records = ReadSpec(Finish.GetValue());
+	if (Records.HasError())
+	{
+		return MakeError(FString::Printf(TEXT("%s: %s"), *Finish.GetValue().ToString(), *Records.GetError()));
+	}
+	const TOptional<FName> Master = LayerMasterOf(Records.GetValue().Master);
+	if (!Master)
+	{
+		return MakeError(FString::Printf(TEXT("%s is shaded by the %s master, which carries no work's image; a paint or a glass does."),
+			*Finish.GetValue().ToString(), *MasterName(Records.GetValue().Master.Master, Records.GetValue().Master.Layer)));
+	}
+	return MakeValue(MasterPackage(*Master));
+}
+
+TArray<FString> ComposePaintLayer(const FMatterPaintLayer& Layer, UMaterialInterface& LayerMaster, UMaterialInstanceConstant& Instance)
 {
 	const TOptional<FMuseeKey> Work = KeyOf(Layer.Work);
-	const TOptional<FMuseeKey> Palette = KeyOf(Layer.Palette);
-	const TOptional<FMuseeKey> Working = KeyOf(Layer.Working);
-	const TOptional<FMuseeKey> History = KeyOf(Layer.History);
-	if (!Work || !Palette || !Working || !History)
+	const TValueOrError<FMatterSpec, FString> Finish = FinishOf(Layer);
+	if (!Work || Finish.HasError())
 	{
-		return { FString::Printf(TEXT("A paint layer is named by its work's key and a palette finish; this one by '%s' and '%s/%s/%s'."),
+		return { FString::Printf(TEXT("A layer is named by its work's key and a palette finish; this one by '%s' and '%s/%s/%s'."),
 			*Layer.Work.ToString(), *Layer.Palette.ToString(), *Layer.Working.ToString(), *Layer.History.ToString()) };
 	}
 	TArray<FString> Problems;
@@ -47,11 +94,10 @@ TArray<FString> ComposePaintLayer(const FMatterPaintLayer& Layer, UMaterialInter
 		return Problems;
 	}
 
-	const FMatterSpec Paint{ *Palette, *Working, *History };
-	const FMasterKind PaintKind{ FName(Masters::Paint), NAME_None };
-	FInstanceComposed Composed = ComposeInstance(Paint, Instance, [&PaintMaster, &PaintKind](const FMasterKind& Kind) -> UMaterialInterface*
+	// The finish's own master is the plain paint or glass; its layer is composed over the master that carries the image.
+	FInstanceComposed Composed = ComposeInstance(Finish.GetValue(), Instance, [&LayerMaster](const FMasterKind& Kind) -> UMaterialInterface*
 	{
-		return Kind == PaintKind ? &PaintMaster : nullptr;
+		return LayerMasterOf(Kind).IsSet() ? &LayerMaster : nullptr;
 	});
 	if (!Composed.Succeeded())
 	{
@@ -66,8 +112,8 @@ TArray<FString> ComposePaintLayer(const FMatterPaintLayer& Layer, UMaterialInter
 	Instance.SetScalarParameterValueEditorOnly(FMaterialParameterInfo(ImageHeightMeters), Height);
 	Composed.Written += FString::Printf(TEXT(";%s=%s;%s=%.9g;%s=%.9g"), Image, *Layer.Image->GetPathName(), ImageWidthMeters, Width,
 		ImageHeightMeters, Height);
-	// The instance is the work's: its identity carries the work's key as well as the paint's records.
-	StampInstance(Composed, FMatterSpec{ *Work, *Working, *History }, Instance);
+	// The instance is the work's: its identity carries the work's key as well as the finish's records.
+	StampInstance(Composed, FMatterSpec{ *Work, Finish.GetValue().Working, Finish.GetValue().History }, Instance);
 	return {};
 }
 }

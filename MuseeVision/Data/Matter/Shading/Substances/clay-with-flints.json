@@ -1,0 +1,86 @@
+{
+  "schema": "musee.matter.shading.substance/1",
+  "key": "clay-with-flints",
+  "name": "Clay-with-flints (the stiff red-brown clay over the chalk)",
+  "family": "accent",
+  "record": "Palette.json",
+  "master": "white",
+  "accentOf": "stone",
+  "dielectric": {
+    "diffuseAlbedo": {
+      "value": [
+        42.0,
+        17.0,
+        27.0
+      ],
+      "space": "CIELAB (D65, 2 deg)",
+      "unit": "CIELAB",
+      "grade": "unverified",
+      "source": "Munsell 5YR 4/6 to 7.5YR 5/6 (yellowish red to strong brown), clay-with-flints as British Geological Survey descriptions give it",
+      "note": "No measured colour of the site's own ground was read: a first colour from the Munsell notation field descriptions give the layer, converted approximately."
+    },
+    "refractiveIndex": {
+      "value": 1.56,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Handbook of Mineralogy, Kaolinite: n about 1.56 (a clay's mean index)"
+    },
+    "porosity": {
+      "value": 0.45,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "A stiff clay's porosity, 0.40 to 0.50 (a first middle value)"
+    },
+    "wettingDepth": {
+      "value": 5.0,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Shading/Substances/topsoil.json (the soils' first wetting depth)",
+      "note": "The depth whose pores govern the face's look when wet."
+    }
+  },
+  "structure": {
+    "grain": {
+      "value": 0.05,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Docs/Stages/cube.md section 7 (the ground rule's relief and stones)",
+      "note": "The finest structure the face shows."
+    },
+    "bed": {
+      "value": 450,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Docs/Stages/cube.md section 7 (the ground rule's relief and stones)",
+      "note": "The coarsest structure the face shows."
+    },
+    "bedAspect": {
+      "value": 1.0,
+      "unit": "1",
+      "grade": "derived",
+      "source": "An unbedded body",
+      "derivation": "unbedded"
+    },
+    "hurst": {
+      "value": 0.7,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Candela et al. 2012, Journal of Geophysical Research 117, B08409 (fault surfaces, 0.6 to 0.8; cited in Stone.ush)",
+      "note": "The middle of the range measured on rock surfaces, as the topsoil's."
+    },
+    "toneSpread": {
+      "value": 0.12,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Shading/Substances/topsoil.json (the soils' first spread)",
+      "note": "A first half-range of ln(albedo) across one face."
+    },
+    "roughnessSpread": {
+      "value": 0.15,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Shading/Substances/topsoil.json (the soils' first spread)",
+      "note": "A first half-range of ln(roughness) across one face."
+    }
+  }
+}

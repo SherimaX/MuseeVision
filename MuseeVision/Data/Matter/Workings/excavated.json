@@ -1,0 +1,48 @@
+{
+  "schema": "musee.matter.working/1",
+  "key": "excavated",
+  "name": "Excavated (a ground face left as it was dug)",
+  "appliesTo": {
+    "families": [
+      "accent"
+    ],
+    "substances": [
+      "topsoil",
+      "subsoil",
+      "clay-with-flints",
+      "chalk",
+      "chalk.iron-stained",
+      "flint",
+      "crushed-limestone"
+    ]
+  },
+  "over": [],
+  "process": "A shaft is dug through the ground and its face left as the tools leave it: the made ground (hardcore, crushed stone tipped and rolled) crumbles out between its stones; topsoil and subsoil crumble; the stiff clay-with-flints is cut smooth by the spade and keeps its marks; the chalk breaks blocky along its bedding and joints; the flints in it break conchoidally; the fossils' moulds are stained by the iron that replaced their shells. Each layer is its own substance, and the working lays it: one working per layer (excavated.<layer>), as the Cube's sheet names them.",
+  "layers": {
+    "text": "Under the site: hardcore -0.510 to -0.720; topsoil to -1.020; subsoil to -1.500; clay-with-flints to -4.000 (a solution pipe to -4.750); chalk below, with flint bands at -4.580 and -5.360 and an ammonite and an urchin.",
+    "grade": "design",
+    "source": "Docs/Stages/cube.md, sections 1 and 7"
+  },
+  "faces": {
+    "text": "Crushed stone: angular stones 12 to 28 mm, up to 14 mm proud. Topsoil and subsoil: crumbly, relief 7 mm and 4 mm. Clay-with-flints: smooth, spade-cut, vertical marks 1.8 mm deep at a 0.11 pitch. Chalk: blocky, relief 10 mm and 5 mm, bedding partings every 0.37, 5 mm deep.",
+    "grade": "design",
+    "source": "Docs/Stages/cube.md, section 7 (the ground rule)"
+  },
+  "descriptions": {
+    "text": "Soils and rocks are described in the field by their colour (Munsell notation), consistency and structure; chalk by its grade of weathering and its discontinuities.",
+    "grade": "secondary",
+    "source": "BS 5930:2015+A1:2020, Code of practice for ground investigations, section 6; J. M. Hodgson (ed.), Soil Survey Field Handbook, Soil Survey Technical Monograph 5 (1997)"
+  },
+  "unverified": [
+    {
+      "field": "every layer's colour",
+      "reason": "No sample of the site's own ground was measured: each layer's colour is a first value from the Munsell notation field descriptions give it."
+    }
+  ],
+  "sources": [
+    "Docs/Stages/cube.md",
+    "BS 5930:2015+A1:2020, Code of practice for ground investigations",
+    "J. M. Hodgson (ed.), Soil Survey Field Handbook (1997)",
+    "R. A. Downing, M. Price and G. P. Jones (eds.), The Hydrogeology of the Chalk of North-West Europe (Oxford, 1993)"
+  ]
+}

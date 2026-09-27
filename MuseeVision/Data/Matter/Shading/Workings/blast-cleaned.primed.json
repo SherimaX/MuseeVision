@@ -1,0 +1,72 @@
+{
+  "schema": "musee.matter.shading.working/1",
+  "key": "blast-cleaned.primed",
+  "name": "Blast-cleaned to Sa 2 1/2 and primed (hidden structural steel)",
+  "record": "Workings/painted.steel.json",
+  "kind": "face",
+  "roughness": {
+    "value": 0.6,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Workings/painted.steel.json: a shop primer dries matt over the blast profile"
+  },
+  "roughnessAcross": {
+    "value": 0.6,
+    "unit": "1",
+    "grade": "derived",
+    "source": "Workings/painted.steel.json: a shop primer dries matt over the blast profile",
+    "derivation": "a face with no grain: equal to the roughness along"
+  },
+  "haziness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Workings/painted.steel.json",
+    "note": "One specular lobe until a goniometric measurement shows a second."
+  },
+  "textureDepth": {
+    "value": 0.05,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "ISO 8503-1: a blast profile 'medium (G)' of 50 to 85 um under the primer; its low end"
+  },
+  "relief": {
+    "value": 0.05,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "ISO 8503-1: a blast profile 'medium (G)' of 50 to 85 um; the primer follows it"
+  },
+  "film": {
+    "diffuseAlbedo": {
+      "value": [
+        0.23,
+        0.23,
+        0.22
+      ],
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "unit": "1",
+      "grade": "design",
+      "source": "Docs/Stages/sphere.md section 13 (blast-cleaned and primed for hidden steel): a mid-grey zinc-phosphate epoxy shop primer",
+      "note": "A first linear albedo for a mid-grey primer (about L* 55); the primer's own colour was not read."
+    },
+    "refractiveIndex": {
+      "value": 1.5,
+      "unit": "1",
+      "grade": "secondary",
+      "source": "Workings/painted.pearl.json: effectPigment.micaIndex (a paint binder's index)"
+    },
+    "roughness": {
+      "value": 0.6,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Workings/painted.steel.json: a matt shop primer"
+    },
+    "cover": {
+      "value": 1.0,
+      "unit": "1",
+      "grade": "derived",
+      "source": "Workings/painted.steel.json",
+      "derivation": "a primer coat hides the blast-cleaned steel wholly"
+    }
+  }
+}

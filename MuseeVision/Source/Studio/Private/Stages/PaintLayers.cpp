@@ -76,6 +76,17 @@ namespace Musee::Studio
 			return Texture;
 		}
 
+		/** The palette finish Art's layer derives from, in Matter's words, before it has an image. */
+		Musee::Matter::FMatterPaintLayer MatterFinish(const FArtPaintLayer& Layer)
+		{
+			Musee::Matter::FMatterPaintLayer Finish;
+			Finish.Work = Layer.Palette;
+			Finish.Palette = Layer.Parent;
+			Finish.Working = Layer.Working;
+			Finish.History = Layer.History;
+			return Finish;
+		}
+
 		/** Art's paint layer in Matter's words: the work's own key, the paint's palette finish, the texture and the size. */
 		Musee::Matter::FMatterPaintLayer MatterLayer(const FArtPaintLayer& Layer, UTexture2D& Texture)
 		{
@@ -132,14 +143,23 @@ namespace Musee::Studio
 	void MakePaintLayers(const FMuseeStageContext& Stage, const FStageMakeOptions& Options, FMakeReport& Report)
 	{
 		const TArray<FArtPaintLayer> Layers = Musee::ArtMaking::PaintLayers(Stage);
-		UMaterialInterface* Master = Layers.IsEmpty() ? nullptr : FindPaintMaster(Options.PaintMaster);
 		for (const FArtPaintLayer& Layer : Layers)
 		{
+			// Matter names the master a layer is composed over by its finish: the paint master (which the options may
+			// place elsewhere) for a canvas, the stained-glass master for a panel of stained glass.
+			const TValueOrError<FString, FString> Package = Musee::Matter::LayerMasterPackage(MatterFinish(Layer));
+			if (Package.HasError())
+			{
+				Refuse(Stage, Layer, Package.GetError(), Report);
+				continue;
+			}
+			const FString MasterPackage = Package.GetValue() == Musee::Matter::PaintMasterPackage() ? Options.PaintMaster : Package.GetValue();
+			UMaterialInterface* Master = FindPaintMaster(MasterPackage);
 			const FString Image = ImageHash(Layer.ImagePath);
 			if (!Master || Image.IsEmpty())
 			{
 				Refuse(Stage, Layer, Master ? FString::Printf(TEXT("its image %s can't be read"), *Layer.ImagePath)
-					: FString::Printf(TEXT("the paint master %s has not been made (MuseeMatterMake)"), *Options.PaintMaster), Report);
+					: FString::Printf(TEXT("its master %s has not been made (MuseeMatterMake)"), *MasterPackage), Report);
 				continue;
 			}
 			const FString Texture = Options.Paths.WorkImage(Musee::Matter::PascalCase(Layer.Work));

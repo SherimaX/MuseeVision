@@ -3,7 +3,8 @@
 #include "MatterMasters.h"
 #include "MatterNames.h"
 
-// The masters of what light passes into: a glass pane, still water, and a painting's paint layer.
+// The masters of what light passes into: a glass pane, a stained pane carrying its work's image, still water, and a
+// painting's paint layer.
 
 namespace Musee::Matter
 {
@@ -84,25 +85,76 @@ return Marked.DiffuseAlbedo;)");
 		Call.Outputs = { Writes(TEXT("SurfaceF0"), 3), Writes(TEXT("SurfaceRoughness"), 1) };
 		return Call;
 	}
+
+	/** A stained pane's face: a glass pane's interface under the law, passing what the work's image says its glass passes
+	 *  there. The face's UV0 runs in metres from the image's top-left corner, as a canvas's does (Art's panel). */
+	FMasterCall StainedPaneCall()
+	{
+		FMasterCall Call;
+		Call.Name = TEXT("StainedPane");
+		Call.Includes = { LibraryGlass, LibraryPaint };
+		Call.Code = HistoryDeclarations(EPores::Open, TextureDepthMillimeters) + TEXT(R"(const float2 ImageCoordinates = MatterCanvasCoordinates(FaceMeters, float2(ImageWidthMeters, ImageHeightMeters));
+const float3 ImageLinear = Texture2DSample(Image, ImageSampler, ImageCoordinates).rgb;
+const FMatterSurface Surface = MatterClearPane(RefractiveIndex, Roughness);
+)") + HistoryApplied() + TEXT(R"(Transmittance = MatterSoiledTransmittance(MatterStainedFaceTransmittance(ImageLinear, AbsorptionPerMillimeter, PaneThicknessMillimeters), MatterSoilCover(Place, Response));
+SurfaceF0 = Marked.F0;
+SurfaceRoughness = Marked.Roughness;
+return Marked.DiffuseAlbedo;)");
+		Call.Inputs = {
+			Reads(TEXT("FaceMeters"), 2, MasterInput::TexCoord0, nullptr),
+			Reads(Image, 0), Reads(ImageWidthMeters, 1), Reads(ImageHeightMeters, 1),
+			Reads(RefractiveIndex, 1), Reads(Roughness, 1), Reads(AbsorptionPerMillimeter, 3), Reads(PaneThicknessMillimeters, 1),
+		};
+		Call.Inputs.Append(HistoryPins(EPores::Open, TextureDepthMillimeters));
+		Call.ReturnComponents = 3;
+		Call.Outputs = { Writes(TEXT("Transmittance"), 3), Writes(TEXT("SurfaceF0"), 3), Writes(TEXT("SurfaceRoughness"), 1) };
+		return Call;
+	}
+
+	/** The glass master's settings: translucent, lit at its surface, and never Nanite. */
+	FMasterSettings PaneSettings()
+	{
+		FMasterSettings Settings;
+		Settings.BlendMode = BLEND_TranslucentColoredTransmittance;
+		Settings.bUsedWithNanite = false;
+		Settings.bSurfaceTranslucency = true;
+		return Settings;
+	}
+
+	/** A pane's Slab: its interface from the call, and the volume it passes through half the pane, a simple volume. */
+	void AddPaneSlab(FMasterRecipe& Recipe, const TCHAR* Call)
+	{
+		Recipe.Transmittances = { FMasterTransmittance{ TEXT("PaneVolume"), From(Call, TEXT("Transmittance")) } };
+		Recipe.Slab.DiffuseAlbedo = From(Call);
+		Recipe.Slab.F0 = From(Call, TEXT("SurfaceF0"));
+		Recipe.Slab.Roughness = From(Call, TEXT("SurfaceRoughness"));
+		Recipe.Slab.SSSMFP = From(TEXT("PaneVolume"), TEXT("MFP"));
+		Recipe.Slab.SubSurface = MSS_SimpleVolume;
+	}
+}
+
+FMasterRecipe StainedRecipe(UMaterialParameterCollection& Moment)
+{
+	FMasterRecipe Recipe = StartRecipe(MasterName(FName(Masters::Stained)), Moment, PaneSettings());
+	AddTexture(Recipe, Image, WorkGroup, EngineDefaultTexture, TEXT("The work's own image, the window photographed against the light, which each work's glass instance carries"));
+	AddScalar(Recipe, ImageWidthMeters, WorkGroup, Unset, TEXT("m"), TEXT("The work's width, which its image spans, which each work's glass instance carries"));
+	AddScalar(Recipe, ImageHeightMeters, WorkGroup, Unset, TEXT("m"), TEXT("The work's height, which its image spans, which each work's glass instance carries"));
+	AddDielectricParameters(Recipe);
+	AddColour(Recipe, AbsorptionPerMillimeter, SubstanceGroup, FLinearColor::Black, TEXT("1/mm"), TEXT("The clear glass's absorption coefficient at the primaries, from its record"));
+	AddScalar(Recipe, PaneThicknessMillimeters, WorkingGroup, Unset, TEXT("mm"), TEXT("The glass the make-up puts in the light's path, from the working's record"));
+	Recipe.Calls = { StainedPaneCall() };
+	AddPaneSlab(Recipe, TEXT("StainedPane"));
+	return Recipe;
 }
 
 FMasterRecipe GlassRecipe(UMaterialParameterCollection& Moment)
 {
-	FMasterSettings Settings;
-	Settings.BlendMode = BLEND_TranslucentColoredTransmittance;
-	Settings.bUsedWithNanite = false;
-	Settings.bSurfaceTranslucency = true;
-	FMasterRecipe Recipe = StartRecipe(MasterName(FName(Masters::Glass)), Moment, Settings);
+	FMasterRecipe Recipe = StartRecipe(MasterName(FName(Masters::Glass)), Moment, PaneSettings());
 	AddDielectricParameters(Recipe);
 	AddColour(Recipe, AbsorptionPerMillimeter, SubstanceGroup, FLinearColor::Black, TEXT("1/mm"), TEXT("The glass's absorption coefficient at the primaries, from its record"));
 	AddScalar(Recipe, PaneThicknessMillimeters, WorkingGroup, Unset, TEXT("mm"), TEXT("The glass the make-up puts in the light's path, from the working's record"));
 	Recipe.Calls = { PaneCall() };
-	Recipe.Transmittances = { FMasterTransmittance{ TEXT("PaneVolume"), From(TEXT("Pane"), TEXT("Transmittance")) } };
-	Recipe.Slab.DiffuseAlbedo = From(TEXT("Pane"));
-	Recipe.Slab.F0 = From(TEXT("Pane"), TEXT("SurfaceF0"));
-	Recipe.Slab.Roughness = From(TEXT("Pane"), TEXT("SurfaceRoughness"));
-	Recipe.Slab.SSSMFP = From(TEXT("PaneVolume"), TEXT("MFP"));
-	Recipe.Slab.SubSurface = MSS_SimpleVolume;
+	AddPaneSlab(Recipe, TEXT("Pane"));
 	return Recipe;
 }
 

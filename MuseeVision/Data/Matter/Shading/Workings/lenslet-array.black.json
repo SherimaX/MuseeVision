@@ -1,0 +1,44 @@
+{
+  "schema": "musee.matter.shading.working/1",
+  "key": "lenslet-array.black",
+  "name": "A lenslet array moulded on the pane's face over a black matrix",
+  "record": "Workings/lenslet-array.json",
+  "kind": "face",
+  "roughness": {
+    "value": 0.02,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Workings/lenslet-array.json"
+  },
+  "roughnessAcross": {
+    "value": 0.02,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Workings/lenslet-array.json"
+  },
+  "haziness": {
+    "value": 0.8,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Workings/lenslet-array.json"
+  },
+  "textureDepth": {
+    "value": 0.001,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Workings/lenslet-array.json"
+  },
+  "relief": {
+    "value": 0.05,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Workings/lenslet-array.json"
+  },
+  "paneThickness": {
+    "value": 6.0,
+    "unit": "mm",
+    "grade": "design",
+    "source": "Docs/Stages/cube.md section 3 (the panel faces: low-iron glass carrying the lenslet array)",
+    "note": "The black matrix behind the lenses is the light-field panel's (Light's light-field-panel.d65): the pane itself is clear."
+  }
+}
