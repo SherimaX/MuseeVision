@@ -2,6 +2,8 @@
 
 #if WITH_DEV_AUTOMATION_TESTS
 
+#include "FormExtrusion.h"
+#include "GroundsParts.h"
 #include "GroundsPlan.h"
 #include "GroundsRoom.h"
 #include "GroundsSettingOut.h"
@@ -127,6 +129,35 @@ namespace Musee::Grounds::Tests
 			const double T = FMath::DegreesToRadians(Step.Arc.ToDegrees);
 			return FVector2D(Step.Arc.CenterMeters[0] + Step.Arc.RadiiMeters[0] * FMath::Cos(T),
 				Step.Arc.CenterMeters[1] + Step.Arc.RadiiMeters.Last() * FMath::Sin(T));
+		}
+
+		const FFormDrawing* TerrainOf(const FSiteDescription& Description)
+		{
+			return Description.Pieces.FindByPredicate([](const FFormDrawing& D) { return D.Name == FName(TEXT("terrain")); });
+		}
+
+		/** Whether a plan point lies in one of the terrain's holes, where its soil gives way. */
+		bool IsCut(const FFormDrawing& Terrain, const FVector2D& Point)
+		{
+			for (const FFormProfile& Hole : Terrain.Shape.Get<FFormExtrusion>().Holes)
+			{
+				const TArray<FVector2D> Loop = PlanPoints(Hole);
+				bool bInside = false;
+				for (int32 Index = 0, Previous = Loop.Num() - 1; Index < Loop.Num(); Previous = Index++)
+				{
+					const FVector2D& A = Loop[Index];
+					const FVector2D& B = Loop[Previous];
+					if ((A.Y > Point.Y) != (B.Y > Point.Y) && Point.X < A.X + (B.X - A.X) * (Point.Y - A.Y) / (B.Y - A.Y))
+					{
+						bInside = !bInside;
+					}
+				}
+				if (bInside)
+				{
+					return true;
+				}
+			}
+			return false;
 		}
 
 		/** The plan box of a laid piece's straight outline. */
@@ -330,10 +361,53 @@ namespace Musee::Grounds::Tests
 		Above.BottomMeters = 7.7;
 		Above.TopMeters = 30.0;
 		GetDefault<UGroundsRoom>()->Describe(Description);
-		const FFormDrawing* Terrain = Description.Pieces.FindByPredicate([](const FFormDrawing& D) { return D.Name == FName(TEXT("terrain")); });
-		if (TestNotNull(TEXT("the terrain is drawn"), Terrain))
+		const FFormDrawing* Terrain = TerrainOf(Description);
+		const FFormDrawing* Alone = TerrainOf(Described());
+		if (TestNotNull(TEXT("the terrain is drawn"), Terrain) && TestNotNull(TEXT("and drawn with nothing received"), Alone))
 		{
-			TestEqual(TEXT("its soil gives way to the two basins and the building through it"), Terrain->Shape.Get<FFormExtrusion>().Holes.Num(), 3);
+			TestEqual(TEXT("its soil gives way to the building through it, and not to the one above"),
+				Terrain->Shape.Get<FFormExtrusion>().Holes.Num() - Alone->Shape.Get<FFormExtrusion>().Holes.Num(), 1);
+			TestTrue(TEXT("its soil under the building through it is cut"), IsCut(*Terrain, FVector2D(5.0, 5.0)));
+			TestFalse(TEXT("its soil under the one above isn't"), IsCut(*Terrain, FVector2D(25.0, 5.0)));
+		}
+		return true;
+	}
+
+	IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGroundsTerrainCutTest, "Musee.Grounds.TerrainCut", Flags)
+	bool FGroundsTerrainCutTest::RunTest(const FString& Parameters)
+	{
+		// §3.2: the soil, whose top the lawn is laid on (§7.3), gives way to every piece set into it, so no lawn lies over
+		// the strip's gravel (+0.012), a walk's (+0.018), the parvis or a kerb; and it keeps the lawn beside them.
+		const FFormDrawing* Terrain = TerrainOf(Described());
+		if (!TestNotNull(TEXT("the terrain is drawn"), Terrain))
+		{
+			return false;
+		}
+		const TPair<const TCHAR*, FVector2D> SetIn[] = {
+			{TEXT("the strip's gravel south of the Salon"), FVector2D(-44.0, 8.30)},
+			{TEXT("the strip's edge south of the Salon"), FVector2D(-44.0, 9.10)},
+			{TEXT("the strip's gravel on the drum's north-east arc"), FVector2D(6.5, -10.1)},
+			{TEXT("the parvis's paving"), FVector2D(-44.0, 15.0)},
+			{TEXT("a joint of the parvis's paving"), FVector2D(-44.0, Plan::SalonStripEdgeY + Plan::CourseDepth)},
+			{TEXT("the parvis's west kerb"), FVector2D(-60.0, 15.0)},
+			{TEXT("the west side walk's gravel"), FVector2D(-62.0, 15.0)},
+			{TEXT("the terrace's gravel"), FVector2D(71.0, 0.0)},
+			{TEXT("the west panel's north kerb"), FVector2D(-54.75, 27.0)},
+			{TEXT("the ring's kerb"), FVector2D(54.0 - Plan::RingRadius * FMath::Cos(FMath::DegreesToRadians(45.0)), 42.0 + Plan::RingRadius * FMath::Sin(FMath::DegreesToRadians(45.0)))},
+		};
+		for (const TPair<const TCHAR*, FVector2D>& Piece : SetIn)
+		{
+			TestTrue(*FString::Printf(TEXT("the soil gives way to %s"), Piece.Key), IsCut(*Terrain, Piece.Value));
+		}
+		const TPair<const TCHAR*, FVector2D> Lawn[] = {
+			{TEXT("the west panel's lawn"), FVector2D(-54.75, 41.0)},
+			{TEXT("the west panel's lawn beside its kerb"), FVector2D(-54.75, 27.10)},
+			{TEXT("the lawn beyond the strip's edge north of the Salon"), FVector2D(-60.0, -9.25)},
+			{TEXT("the open lawn"), FVector2D(100.0, 100.0)},
+		};
+		for (const TPair<const TCHAR*, FVector2D>& Place : Lawn)
+		{
+			TestFalse(*FString::Printf(TEXT("the soil keeps %s"), Place.Key), IsCut(*Terrain, Place.Value));
 		}
 		return true;
 	}

@@ -328,12 +328,21 @@ None. The water is still (no fountain, no flow); plants sway by Nature's wind re
 `grounds.hedge.ball.01`, `grounds.hedge.ball.02`, `grounds.hedge.ball.03`, `grounds.hedge.ball.04`,
 `grounds.hedge.ball.05`, `grounds.hedge.ball.06`, `grounds.hedge.ball.07`, `grounds.hedge.ball.08`; yew
 `grounds.exedra.east`, `grounds.exedra.west` (34 plants each at 0.50).
+Planting.json writes them as Nature reads them (K11): a loop is a `line` through its four corners with `"closed": true`,
+its runs mitred at the corners; the exedra an `arc` (`centre`, `r`, `from_deg`, `to_deg`, degrees from +x towards +y),
+set out as one chord to each plant; a ball a `point` with `clipped.ball` (the diameter) and `clipped.sink`; and each
+kind's `clipped.leavesPerM2` (the table's leaves to the square metre, as the shears keep them) wins over its species'.
 
 ### 7.3 Lawn
 `grounds.lawn`: mown fine sward (*Festuca rubra*, Chewings and strong creeping, with *Agrostis capillaris*) on the
 terrain's top (`accent.site-geology`, topsoil). As built: blades 3–6 cm, ≈ 12,000/m², blunt mown tips, 2 m stripes
 north–south; full sward over x −135 … 125, y −75 … 145, thinning over a 30 m fringe to 0.45 of full height; 0.025 clear
-of anything standing on it, 0.06 of hedge cores.
+of anything standing on it, 0.06 of hedge cores. Planting.json gives it `"mown": 0.045` (the middle of the as-built
+blades) and `"on": "terrain"`: Nature lays a mown sward as its carpet at that height over the top of the terrain piece,
+as it lays a moss, since 12,000 blades to the square metre over the terrain can't be grown one by one. The terrain's top
+is cut round every received building and every Grounds piece set into it (§3.2), so the sward (top +0.015) stops at the
+faces of the strip (+0.012), the walks (+0.018), the parvis, the kerbs, the edges and the copings and never lies over
+them; the as-built 0.025 clearance was its single blades', which a carpet has none of.
 
 ### 7.4 Water (Planting.json `water`; `water.still`, still, clear over bluestone)
 
@@ -485,4 +494,10 @@ it: Site must compare volumes.
   `living.buxus-sempervirens`, `living.taxus-baccata`). Those keys are retired: each bed names its `species`, and Nature's
   species record gives each organ its tissue, worked and aged as the bed's `working` and `history` say. The fifty beds'
   `material` fields are dropped (§13's Living line is superseded); the lawn's `ground` (`accent.site-geology`,
-  topsoil) stays, as it is a soil, not a plant.
+  topsoil) stayed, as it is a soil, not a plant.
+- **The lawn lies on the terrain (K11):** the lawn's `ground` and its ±400 outline are dropped. The terrain
+  (`grounds.terrain`, §3.2) is the lawn's soil, in the same topsoil, cut round every received building; a second face of
+  soil over the whole footprint lay coplanar with its top and ran into every building. The lawn names the terrain
+  (`"on": "terrain"`) and Nature lays it, mown to 0.045, over the terrain's top, which the stage cuts round the
+  walks, the strip, the parvis, the kerbs, the edges and the copings as §3.2 asks (the terrain is drawn after them, from
+  what each covers in plan; `Musee.Grounds.TerrainCut`).

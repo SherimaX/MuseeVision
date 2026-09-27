@@ -23,12 +23,18 @@ namespace Musee::Grounds
 		}
 	}
 
+	FBox2D ParvisPaving()
+	{
+		return FBox2D(FVector2D(Plan::ParvisWestX + Plan::KerbHalf, Plan::SalonStripEdgeY), FVector2D(Plan::ParvisEastX - Plan::KerbHalf, Plan::ParvisSouthY - Plan::KerbHalf));
+	}
+
 	void DrawPaving(TArray<FFormDrawing>& Out)
 	{
-		const double West = Plan::ParvisWestX + Plan::KerbHalf;
-		const double East = Plan::ParvisEastX - Plan::KerbHalf;
-		const double North = Plan::SalonStripEdgeY;
-		const double South = Plan::ParvisSouthY - Plan::KerbHalf;
+		const FBox2D Paving = ParvisPaving();
+		const double West = Paving.Min.X;
+		const double East = Paving.Max.X;
+		const double North = Paving.Min.Y;
+		const double South = Paving.Max.Y;
 		for (int32 Course = 0; Course < Plan::ParvisCourses; ++Course)
 		{
 			const double Y0 = North + Plan::CourseDepth * Course;

@@ -69,6 +69,27 @@ namespace Musee::Grounds
 	/** The lamp standards' bases (r 0.27) in plan: the holes a walk's gravel leaves round them. */
 	[[nodiscard]] TArray<FFormProfile> LampBasesWithin(const FBox2D& Region);
 
+	/** The parvis's paved rectangle (§3.3): between its kerbs' faces, from the Salon strip's edge to the south kerb's face. */
+	[[nodiscard]] FBox2D ParvisPaving();
+
+	/**
+	 * A profile's line in its own plane, its arcs divided at Form's chord tolerance (1 mm): the start, then every step's
+	 * end, with the stations of each arc between.
+	 */
+	[[nodiscard]] TArray<FVector2D> PlanPoints(const FFormProfile& Profile);
+
+	/**
+	 * What a piece set into the soil covers in plan, in the stage (§3.2): a laid piece's outline (its holes are filled by
+	 * what stands in them); a swept piece's band along its path, from the least to the greatest reach of its section across
+	 * it, one quadrilateral to each chord, mitred where the path turns and cut on the sweep's end planes; nothing for any
+	 * other piece.
+	 */
+	[[nodiscard]] TArray<TArray<FVector2D>> SetInto(const FFormDrawing& Piece);
+
+	/**
+	 * The terrain (§3.2), drawn after every piece set into it: the footprint less the received buildings through the soil,
+	 * the basins, the parvis's paving and every laid or swept piece already drawn.
+	 */
 	void DrawTerrain(TArray<FFormDrawing>& Out, TConstArrayView<FSitePrism> Received);
 	void DrawPaving(TArray<FFormDrawing>& Out);
 	void DrawGravel(TArray<FFormDrawing>& Out);
