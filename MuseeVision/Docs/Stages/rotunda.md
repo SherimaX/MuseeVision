@@ -607,3 +607,22 @@ sit within it.
 gilt), gilt meridian 60 mm (as built none: "No meridian", `SunClockDial.cpp:13`). Kept per D-018 and the board.
 (e) **Glyphs** (ruled): port the as-built Centaur outlines from `SunClockGlyphs.h` (Centaur is installed on this PC); a
 public release would switch to an open-licence face.
+
+## Build notes
+- **Frame.** The stage origin **is** the museum origin. The arrival point is the gilt sun at (0, 0, 0), facing west.
+- **The sun clock is one moving body.** The drum, dial and 13 soffit downlights rise 3.500 in 8.0 s, ease-in-out, on
+  eight rams.
+  - The drum's wall slides into the pocket annulus (r 6.54–7.00, z −3.58 … 0).
+  - The retracting balustrade follows `rotunda.sun-clock.height`.
+  - Guard: raising **holds** while someone is on the dial; lowering **reverses** if someone enters r < 7.20.
+- **The Rotunda serves the well.** It owns everything inside r 7.60, z −6.40 … 0.00: shaft, pocket, stair and
+  landing. The spiral stair lands at `rotunda.stair` (0, −7.60, −6.00), facing −y, which mates
+  `classical-hall.stair`.
+- **The dial is drawn by Time, never by hand.** Time::Dial lays the hour lines, ticks and numerals. The numerals and
+  motto are the ported outlines in `SunClockGlyphs.h`.
+- **Ports.** Build only the rough openings (clear opening plus the lining allowance) through the drum. The joint
+  builds the thresholds, linings, surrounds and the 2.20 m west passage.
+  - All four doorways are width × crown classes springing at 4.50.
+  - Every port unmated tonight gets closed bronze doors.
+- **The eye is the only opening to the sky.** It is Glazed (D-004) and takes the museum's weather.
+- **Light.** The cast spots stand across the room, not on the cornice ledge, which the entablature shades.

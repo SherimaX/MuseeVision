@@ -456,3 +456,25 @@ confirm or move the golden iris to the east apex. (b) D-019's "8.4 × 4.6 m" is 
 as-built pond-edge redesign (water 7.80 × 4.00, coping 8.68 × 4.88) is kept per D-017. (c) The Reserve draft puts
 `reserve.stair` at the oval floor's opening (a 2.40 × 7.50 stairwell facing −z); this sheet puts the mating plane at the
 Reserve's west door (x +11.90, z −5.80), where the stair ends at the closed bronze doors, as the brief says.
+
+## Build notes
+- **Frame.** The origin is the oval's centre on the floor, at museum (−86.50, 0, 0), yaw 0. Every number here is local.
+- **The inner face is a true ellipse** (a 11.000, b 7.500). The outer face is its 0.60 normal offset, which is **not**
+  an ellipse, so build it from 720 stations.
+- **One moving body.** The coping, frieze, lip, vessel, tray, water, planting, golden iris and the 32 rim lengths all
+  hang on `nympheas.basin`, which lifts 2.600 in 5.0 s (Mechanisms.json).
+  - The guard rails are a second body, `nympheas.guard-rails`. They follow `nympheas.pond.height` and are housed in
+    curb chases at y ±1.275, with the east rail at x +3.675.
+- **The oval serves the well.** The 36-riser stair runs east under the floor (x −4.30 … +11.90) and ends at the
+  Reserve's closed bronze doors at `nympheas.stair` (+11.90, 0, −5.80). When the pond is Down it is the well's lid.
+  Build nothing of the Reserve.
+- **The east passage is the oval's.** Build the passage block and tunnel from x +11.90 to the inner face. The Salon
+  builds only its rough opening.
+- **The frieze is in tonight's cut.** The carved Art Nouveau lily frieze on the coping's outer face is Form's
+  carving test.
+- **The golden iris is two anchors with one key.** It is a Use anchor, so Motion makes it the control, and a Bed
+  anchor, where Nature grows *Iris laevigata* and casts it in oil-gilt CuSn10. Do not model it by hand.
+- **The willows hang on one curved Wall anchor.** `along` is the arc length from the north jamb, with θ decreasing
+  (Hang.json `walls`). The canvases are built curved to the wall and stand 35 mm proud.
+- **Water.** The water brims 23 mm under the lip's top and is dyed black. The velarium's glass takes Giverny's
+  weather, with a fixed louvre as its daylight control (a catalogue gap).
