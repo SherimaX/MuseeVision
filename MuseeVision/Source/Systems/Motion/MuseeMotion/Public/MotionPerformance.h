@@ -42,6 +42,9 @@ public:
 	/** Its control's use: starts the piece, or ends it early. */
 	void Use();
 
+	/** Sets the piece at rest, as the museum opens: nothing performs. BeginPlay does this. */
+	void StandAtStart();
+
 	/** Runs the piece's clock for a span of time and publishes its channel. */
 	void Advance(float DeltaSeconds);
 

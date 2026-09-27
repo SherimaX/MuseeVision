@@ -3,7 +3,7 @@
 #include "Components/SceneComponent.h"
 #include "GameFramework/Actor.h"
 #include "MotionControl.h"
-#include "MotionDerivedChannel.h"
+#include "MotionChannel.h"
 #include "MotionPerformance.h"
 #include "MotionSchedule.h"
 #include "MuseeUnits.h"
@@ -114,7 +114,7 @@ namespace Musee::Motion::Dressing
 		AActor& Actor = *Stage.StageActor;
 		for (const FMotionChannelSpec& Spec : Schedule.Channels)
 		{
-			UMotionDerivedChannel* Channel = NewObject<UMotionDerivedChannel>(&Actor, ObjectName(TEXT("Channel"), Spec.Key));
+			UMotionChannel* Channel = NewObject<UMotionChannel>(&Actor, ObjectName(TEXT("Channel"), Spec.Key));
 			Channel->ComponentTags.Add(Spec.Key.ToName());
 			Actor.AddInstanceComponent(Channel);
 			Channel->RegisterComponent();

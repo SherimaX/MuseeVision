@@ -66,5 +66,111 @@
       "clearance": 0.005,
       "note": "The two retracting panels (upper flight's well side, top landing's back edge) rise 0 -> 0.94 m as the drum passes 1.20 -> 2.14 m of its 3.50 m (a cam with a dwell at each end, as built: offset = clamp(h - 1.20, 0, 0.94) - 0.94). Lowering, they are home before the drum comes within 1.07 m. 'time' is derived from the lift's cruise (0.94 / 0.60)."
     }
+  ],
+  "extents": [
+    {
+      "key": "rotunda.sun-clock.ram.1",
+      "surface": "rotunda.sun-clock.ram",
+      "at": [6.254664, 2.590767, -5.9],
+      "axis": [0.0, 0.0, 1.0],
+      "length": { "channel": "rotunda.sun-clock.height", "in": [0.0, 1.0], "out": [2.34, 5.84] },
+      "telescope": [
+        { "radius": 0.125, "bore": 0.1, "length": 2.2, "stroke": 1.1667 },
+        { "radius": 0.095, "bore": 0.07, "length": 2.2, "stroke": 1.1667 },
+        { "radius": 0.065, "length": 2.2, "stroke": 1.1666 }
+      ],
+      "note": "Ram 1 of eight in its bore at r 6.770, phi 22.5 deg (sheet sections 3.7 and 6): three stages in the room's barrel (Ø 0.300), home with their heads at the lowered drum's foot (-3.560, 2.340 above the bore's bottom -5.900) and out to 5.840 with the drum raised 3.500. The stages slide out largest first (single-acting, one pressure). Stage diameters 0.250, 0.190 and 0.130, lengths 2.200 and equal strokes are design numbers (the sheet gives three stages and the barrel only)."
+    },
+    {
+      "key": "rotunda.sun-clock.ram.2",
+      "surface": "rotunda.sun-clock.ram",
+      "at": [2.590767, 6.254664, -5.9],
+      "axis": [0.0, 0.0, 1.0],
+      "length": { "channel": "rotunda.sun-clock.height", "in": [0.0, 1.0], "out": [2.34, 5.84] },
+      "telescope": [
+        { "radius": 0.125, "bore": 0.1, "length": 2.2, "stroke": 1.1667 },
+        { "radius": 0.095, "bore": 0.07, "length": 2.2, "stroke": 1.1667 },
+        { "radius": 0.065, "length": 2.2, "stroke": 1.1666 }
+      ],
+      "note": "Ram 2 of eight in its bore at r 6.770, phi 67.5 deg (sheet sections 3.7 and 6): three stages in the room's barrel (Ø 0.300), home with their heads at the lowered drum's foot (-3.560, 2.340 above the bore's bottom -5.900) and out to 5.840 with the drum raised 3.500. The stages slide out largest first (single-acting, one pressure). Stage diameters 0.250, 0.190 and 0.130, lengths 2.200 and equal strokes are design numbers (the sheet gives three stages and the barrel only)."
+    },
+    {
+      "key": "rotunda.sun-clock.ram.3",
+      "surface": "rotunda.sun-clock.ram",
+      "at": [-2.590767, 6.254664, -5.9],
+      "axis": [0.0, 0.0, 1.0],
+      "length": { "channel": "rotunda.sun-clock.height", "in": [0.0, 1.0], "out": [2.34, 5.84] },
+      "telescope": [
+        { "radius": 0.125, "bore": 0.1, "length": 2.2, "stroke": 1.1667 },
+        { "radius": 0.095, "bore": 0.07, "length": 2.2, "stroke": 1.1667 },
+        { "radius": 0.065, "length": 2.2, "stroke": 1.1666 }
+      ],
+      "note": "Ram 3 of eight in its bore at r 6.770, phi 112.5 deg (sheet sections 3.7 and 6): three stages in the room's barrel (Ø 0.300), home with their heads at the lowered drum's foot (-3.560, 2.340 above the bore's bottom -5.900) and out to 5.840 with the drum raised 3.500. The stages slide out largest first (single-acting, one pressure). Stage diameters 0.250, 0.190 and 0.130, lengths 2.200 and equal strokes are design numbers (the sheet gives three stages and the barrel only)."
+    },
+    {
+      "key": "rotunda.sun-clock.ram.4",
+      "surface": "rotunda.sun-clock.ram",
+      "at": [-6.254664, 2.590767, -5.9],
+      "axis": [0.0, 0.0, 1.0],
+      "length": { "channel": "rotunda.sun-clock.height", "in": [0.0, 1.0], "out": [2.34, 5.84] },
+      "telescope": [
+        { "radius": 0.125, "bore": 0.1, "length": 2.2, "stroke": 1.1667 },
+        { "radius": 0.095, "bore": 0.07, "length": 2.2, "stroke": 1.1667 },
+        { "radius": 0.065, "length": 2.2, "stroke": 1.1666 }
+      ],
+      "note": "Ram 4 of eight in its bore at r 6.770, phi 157.5 deg (sheet sections 3.7 and 6): three stages in the room's barrel (Ø 0.300), home with their heads at the lowered drum's foot (-3.560, 2.340 above the bore's bottom -5.900) and out to 5.840 with the drum raised 3.500. The stages slide out largest first (single-acting, one pressure). Stage diameters 0.250, 0.190 and 0.130, lengths 2.200 and equal strokes are design numbers (the sheet gives three stages and the barrel only)."
+    },
+    {
+      "key": "rotunda.sun-clock.ram.5",
+      "surface": "rotunda.sun-clock.ram",
+      "at": [-6.254664, -2.590767, -5.9],
+      "axis": [0.0, 0.0, 1.0],
+      "length": { "channel": "rotunda.sun-clock.height", "in": [0.0, 1.0], "out": [2.34, 5.84] },
+      "telescope": [
+        { "radius": 0.125, "bore": 0.1, "length": 2.2, "stroke": 1.1667 },
+        { "radius": 0.095, "bore": 0.07, "length": 2.2, "stroke": 1.1667 },
+        { "radius": 0.065, "length": 2.2, "stroke": 1.1666 }
+      ],
+      "note": "Ram 5 of eight in its bore at r 6.770, phi 202.5 deg (sheet sections 3.7 and 6): three stages in the room's barrel (Ø 0.300), home with their heads at the lowered drum's foot (-3.560, 2.340 above the bore's bottom -5.900) and out to 5.840 with the drum raised 3.500. The stages slide out largest first (single-acting, one pressure). Stage diameters 0.250, 0.190 and 0.130, lengths 2.200 and equal strokes are design numbers (the sheet gives three stages and the barrel only)."
+    },
+    {
+      "key": "rotunda.sun-clock.ram.6",
+      "surface": "rotunda.sun-clock.ram",
+      "at": [-2.590767, -6.254664, -5.9],
+      "axis": [0.0, 0.0, 1.0],
+      "length": { "channel": "rotunda.sun-clock.height", "in": [0.0, 1.0], "out": [2.34, 5.84] },
+      "telescope": [
+        { "radius": 0.125, "bore": 0.1, "length": 2.2, "stroke": 1.1667 },
+        { "radius": 0.095, "bore": 0.07, "length": 2.2, "stroke": 1.1667 },
+        { "radius": 0.065, "length": 2.2, "stroke": 1.1666 }
+      ],
+      "note": "Ram 6 of eight in its bore at r 6.770, phi 247.5 deg (sheet sections 3.7 and 6): three stages in the room's barrel (Ø 0.300), home with their heads at the lowered drum's foot (-3.560, 2.340 above the bore's bottom -5.900) and out to 5.840 with the drum raised 3.500. The stages slide out largest first (single-acting, one pressure). Stage diameters 0.250, 0.190 and 0.130, lengths 2.200 and equal strokes are design numbers (the sheet gives three stages and the barrel only)."
+    },
+    {
+      "key": "rotunda.sun-clock.ram.7",
+      "surface": "rotunda.sun-clock.ram",
+      "at": [2.590767, -6.254664, -5.9],
+      "axis": [0.0, 0.0, 1.0],
+      "length": { "channel": "rotunda.sun-clock.height", "in": [0.0, 1.0], "out": [2.34, 5.84] },
+      "telescope": [
+        { "radius": 0.125, "bore": 0.1, "length": 2.2, "stroke": 1.1667 },
+        { "radius": 0.095, "bore": 0.07, "length": 2.2, "stroke": 1.1667 },
+        { "radius": 0.065, "length": 2.2, "stroke": 1.1666 }
+      ],
+      "note": "Ram 7 of eight in its bore at r 6.770, phi 292.5 deg (sheet sections 3.7 and 6): three stages in the room's barrel (Ø 0.300), home with their heads at the lowered drum's foot (-3.560, 2.340 above the bore's bottom -5.900) and out to 5.840 with the drum raised 3.500. The stages slide out largest first (single-acting, one pressure). Stage diameters 0.250, 0.190 and 0.130, lengths 2.200 and equal strokes are design numbers (the sheet gives three stages and the barrel only)."
+    },
+    {
+      "key": "rotunda.sun-clock.ram.8",
+      "surface": "rotunda.sun-clock.ram",
+      "at": [6.254664, -2.590767, -5.9],
+      "axis": [0.0, 0.0, 1.0],
+      "length": { "channel": "rotunda.sun-clock.height", "in": [0.0, 1.0], "out": [2.34, 5.84] },
+      "telescope": [
+        { "radius": 0.125, "bore": 0.1, "length": 2.2, "stroke": 1.1667 },
+        { "radius": 0.095, "bore": 0.07, "length": 2.2, "stroke": 1.1667 },
+        { "radius": 0.065, "length": 2.2, "stroke": 1.1666 }
+      ],
+      "note": "Ram 8 of eight in its bore at r 6.770, phi 337.5 deg (sheet sections 3.7 and 6): three stages in the room's barrel (Ø 0.300), home with their heads at the lowered drum's foot (-3.560, 2.340 above the bore's bottom -5.900) and out to 5.840 with the drum raised 3.500. The stages slide out largest first (single-acting, one pressure). Stage diameters 0.250, 0.190 and 0.130, lengths 2.200 and equal strokes are design numbers (the sheet gives three stages and the barrel only)."
+    }
   ]
 }

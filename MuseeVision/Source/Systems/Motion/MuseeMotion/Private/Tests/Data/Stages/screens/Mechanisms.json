@@ -1,0 +1,25 @@
+{
+  "$sources": "A test stage: three sliding screens sharing one aisle, after the Reserve's racks (Docs/Stages/reserve.md): a group, one starting drawn out.",
+  "stage": "screens",
+  "mechanisms": [
+    {
+      "key": "screens.a", "joint": "prismatic", "body": "screens.a", "axis": [0, 1, 0], "travel": 2.0,
+      "time": 2.0, "profile": "linear", "control": "screens.a.pull",
+      "openUse": { "verb": "Draw out screen A", "caption": "" }, "closeUse": { "verb": "Slide screen A home", "caption": "" },
+      "open": [ { "move": "open" } ], "close": [ { "move": "closed" } ],
+      "guard": "body-in-travel", "clearance": 0.05, "group": "screens.rack"
+    },
+    {
+      "key": "screens.b", "joint": "prismatic", "body": "screens.b", "axis": [0, 1, 0], "travel": 2.0,
+      "time": 2.0, "profile": "linear", "control": "screens.b.pull",
+      "open": [ { "move": "open" } ], "close": [ { "move": "closed" } ],
+      "guard": "body-in-travel", "clearance": 0.05, "group": "screens.rack", "start": "open"
+    },
+    {
+      "key": "screens.c", "joint": "prismatic", "body": "screens.c", "axis": [0, 1, 0], "travel": 2.0,
+      "time": 2.0, "profile": "linear", "control": "screens.c.pull",
+      "open": [ { "move": "open" } ], "close": [ { "move": "closed" } ],
+      "guard": "body-in-travel", "clearance": 0.05, "group": "screens.rack"
+    }
+  ]
+}

@@ -1,8 +1,11 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "MotionChannel.h"
 #include "MotionDresser.h"
+#include "MotionExtent.h"
 #include "MotionMechanism.h"
+#include "MotionPerformance.h"
 #include "MotionTestStage.h"
 #include "MuseeSignals.h"
 
@@ -25,9 +28,10 @@ namespace Musee::Motion::Tests
 	};
 
 	/**
-	 * The Atrium's lift as its sheet draws it (section 2, the anchors; section 3.6, the car): the car drawn at the Atrium
-	 * stop carrying its two leaves and the Cube mast's head; the landing's two leaves; the collar iris's seven blades at
-	 * their pins; the call on the waiting mark and the panel in the car. Each body carries a block where its part is.
+	 * The Atrium's lift as its sheet draws it (section 2, the anchors; section 3.6, the car), dressed from the Atrium's own
+	 * schedule (Data/Stages/atrium): the car drawn at the Atrium stop carrying its two leaves and the Cube mast's head
+	 * (with one turn of the mast's column, as Motion draws it); the landing's two leaves; the collar iris's seven blades
+	 * at their pins; the call on the waiting mark and the panel in the car. Each body carries a block where its part is.
 	 */
 	inline void DressAtrium(FTestStage& Stage, TArray<FMuseeFinding>& OutFindings)
 	{
@@ -42,7 +46,8 @@ namespace Musee::Motion::Tests
 			Anchor(TEXT("atrium.car.panel"), TEXT("Use"), FVector::ZeroVector),
 		};
 		USceneComponent* Car = Stage.AddBody(LiftKey(TEXT("atrium.car")), FVector::ZeroVector, FVector(0.0, 0.0, 1.3), FVector(2.2, 2.2, 1.3));
-		Stage.AddBody(LiftKey(TEXT("atrium.car.mast.head")), FVector(0.0, 0.0, 2.78), FVector(0.0, 0.0, 0.08), FVector(0.26, 0.26, 0.08), Car);
+		USceneComponent* Head = Stage.AddBody(LiftKey(TEXT("atrium.car.mast.head")), FVector(0.0, 0.0, 2.78), FVector(0.0, 0.0, 0.08), FVector(0.26, 0.26, 0.08), Car);
+		Stage.AddPiece(TEXT("atrium.cube-mast.column.turn"), Head);
 		Stage.AddBody(LiftKey(TEXT("atrium.car.leaf.north")), FVector::ZeroVector, FVector(-2.09, -0.46, 1.28), FVector(0.05, 0.45, 1.25), Car);
 		Stage.AddBody(LiftKey(TEXT("atrium.car.leaf.south")), FVector::ZeroVector, FVector(-2.09, 0.46, 1.28), FVector(0.05, 0.45, 1.25), Car);
 		Stage.AddBody(LiftKey(TEXT("atrium.landing.leaf.north")), FVector::ZeroVector, FVector(-2.33, -0.51, 1.47), FVector(0.05, 0.5, 1.46));
@@ -54,7 +59,7 @@ namespace Musee::Motion::Tests
 			const FVector Inward = -FVector(BladePins[Blade].X, BladePins[Blade].Y, 0.0).GetSafeNormal() * 0.65;
 			Stage.AddBody(LiftKey(*BladeName), BladePins[Blade], Inward - FVector(0.0, 0.0, 0.001), FVector(0.6, 0.3, 0.001));
 		}
-		DressMechanisms(Stage.Context(LiftKey(TEXT("atrium")), TEXT("Stages/atrium"), MoveTemp(Anchors)), OutFindings);
+		DressMechanisms(Stage.ContextAt(LiftKey(TEXT("atrium")), TEXT("Stages/atrium"), MoveTemp(Anchors)), OutFindings);
 	}
 
 	/** Every machine on the stage, in the order the dresser placed them. */
@@ -84,24 +89,67 @@ namespace Musee::Motion::Tests
 		return FromEngine<Meters>(Mechanism.Body()->GetRelativeLocation().Z).Get();
 	}
 
-	/** Sets every machine at its home, as the museum opens. */
+	/** Sets every machine and every point the stage keeps where the museum opens them. */
 	inline void StandAll(const FTestStage& Stage)
 	{
 		for (UMotionMechanism* Mechanism : Machines(Stage))
 		{
 			Mechanism->StandAtStart();
 		}
+		TArray<UMotionChannel*> Channels;
+		Stage.Actor->GetComponents(Channels);
+		for (UMotionChannel* Channel : Channels)
+		{
+			Channel->StandAtStart();
+		}
+		TArray<UMotionPerformance*> Performances;
+		Stage.Actor->GetComponents(Performances);
+		for (UMotionPerformance* Performance : Performances)
+		{
+			Performance->StandAtStart();
+		}
 	}
 
-	/** Runs every machine on the stage frame by frame, in the order they were placed, as the world ticks them. */
-	inline void RunAll(const FTestStage& Stage, double Seconds, double& Clock)
+	/** What a run saw: the interlocks that held any machine, by key, and for how many frames. */
+	struct FRunLog
+	{
+		TMap<FMuseeKey, int32> Held;
+	};
+
+	/**
+	 * Runs everything Motion placed on the stage frame by frame, as the world ticks it: the machines in the order they
+	 * were placed, then the timed pieces, the derived channels and the pieces of variable length.
+	 */
+	inline void RunAll(const FTestStage& Stage, double Seconds, double& Clock, FRunLog* Log = nullptr)
 	{
 		const TArray<UMotionMechanism*> Mechanisms = Machines(Stage);
+		TArray<UMotionPerformance*> Performances;
+		TArray<UMotionChannel*> Channels;
+		TArray<UMotionExtent*> Extents;
+		Stage.Actor->GetComponents(Performances);
+		Stage.Actor->GetComponents(Channels);
+		Stage.Actor->GetComponents(Extents);
 		for (double Done = 0.0; Done < Seconds; Done += LiftFrame)
 		{
 			for (UMotionMechanism* Mechanism : Mechanisms)
 			{
 				Mechanism->Advance(LiftFrame);
+				if (Log && Mechanism->WaitsFor() == UMotionMechanism::EWait::Interlock)
+				{
+					++Log->Held.FindOrAdd(Mechanism->HeldBy());
+				}
+			}
+			for (UMotionPerformance* Performance : Performances)
+			{
+				Performance->Advance(LiftFrame);
+			}
+			for (UMotionChannel* Channel : Channels)
+			{
+				Channel->Advance();
+			}
+			for (UMotionExtent* Extent : Extents)
+			{
+				Extent->Advance();
 			}
 			Clock += LiftFrame;
 		}

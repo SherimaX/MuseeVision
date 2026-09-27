@@ -50,9 +50,9 @@ namespace Musee::Time::Tests
 		TestFalse(TEXT("A set clock isn't live"), Noon.bLive);
 		TestTrue(TEXT("The sun is up at noon"), Noon.bSunUp);
 		Near(*this, TEXT("The idealised sun stands due south at noon"), Noon.SunAzimuthDegrees, 180.0, 1e-6);
-		Near(*this, TEXT("at its constant altitude, atan(20.3 / 6.78)"), Noon.SunElevationDegrees, 71.53, 0.01);
+		Near(*this, TEXT("at its constant altitude, atan(20.25 / 6.78)"), Noon.SunElevationDegrees, 71.489, 0.01);
 		Near(*this, TEXT("Full daylight"), Noon.Daylight, 1.0, 0.0);
-		Near(*this, TEXT("The direction points up at that altitude"), Noon.SunDirection.Z, FMath::Sin(FMath::DegreesToRadians(71.53)), 1e-3);
+		Near(*this, TEXT("The direction points up at that altitude"), Noon.SunDirection.Z, FMath::Sin(FMath::DegreesToRadians(71.489)), 1e-3);
 		TestTrue(TEXT("It shines from the south (+y)"), Noon.SunDirection.Y > 0.0);
 
 		Keeper.SetHour(18.2, Real);

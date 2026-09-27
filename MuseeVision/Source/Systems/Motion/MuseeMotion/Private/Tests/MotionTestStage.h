@@ -2,6 +2,7 @@
 
 #include "Components/BoxComponent.h"
 #include "Components/CapsuleComponent.h"
+#include "Components/StaticMeshComponent.h"
 #include "CoreMinimal.h"
 #include "Engine/World.h"
 #include "GameFramework/Actor.h"
@@ -86,12 +87,30 @@ namespace Musee::Motion::Tests
 		/** The stage's context for its dressers, with its schedules in a fixture folder. */
 		FMuseeStageContext Context(const FMuseeKey& Stage, const FString& FixtureFolder, TArray<FMuseeStageAnchor> Anchors) const
 		{
+			return ContextAt(Stage, Fixture(FixtureFolder), MoveTemp(Anchors));
+		}
+
+		/** The stage's context with its schedules in a folder as the museum names it (`Stages/atrium`, under Data). */
+		FMuseeStageContext ContextAt(const FMuseeKey& Stage, const FString& ScheduleDir, TArray<FMuseeStageAnchor> Anchors) const
+		{
 			FMuseeStageContext Context;
 			Context.Stage = Stage;
-			Context.ScheduleDir = Fixture(FixtureFolder);
+			Context.ScheduleDir = ScheduleDir;
 			Context.Anchors = MoveTemp(Anchors);
 			Context.StageActor = Actor;
 			return Context;
+		}
+
+		/** A made piece as Studio places it: a mesh component tagged `musee.piece:<name>`, on a body or the stage. */
+		UStaticMeshComponent* AddPiece(const FString& Name, USceneComponent* On = nullptr, const FVector& AtMeters = FVector::ZeroVector)
+		{
+			UStaticMeshComponent* Piece = NewObject<UStaticMeshComponent>(Actor, *FString::Printf(TEXT("Piece_%d"), ++Count));
+			Piece->SetupAttachment(On ? On : Actor->GetRootComponent());
+			Piece->SetRelativeLocation(ToEngine(AtMeters));
+			Piece->ComponentTags.Add(FName(TEXT("musee.piece:") + Name));
+			Actor->AddInstanceComponent(Piece);
+			Piece->RegisterComponent();
+			return Piece;
 		}
 
 		UWorld* World;

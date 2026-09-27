@@ -22,12 +22,12 @@ namespace Musee::Time
 	 * The idealised sun (the as-built design; windows/Source/MuseeVision/Sky/MuseeSky.cpp, SunClockDirection, and
 	 * plan/canvas/Rotunda.dc.html). The geometry, in the Rotunda's frame (x east, y south, z up, the dial's centre at
 	 * the origin):
-	 *  - the bronze node stands NodeHeightMeters (20.3 m) above the centre of the dial;
+	 *  - the centre of the bronze node stands NodeHeightMeters (20.25 m) above the centre of the dial;
 	 *  - its point of shadow falls on the hour ring, a circle of HourRingRadiusMeters (6.78 m) about the centre;
 	 *  - at civil hour h the point lies at bearing 270 + 15 (h - 6) degrees from true north: VI due west, XII due
 	 *    north, VI due east, 15 degrees an hour in every season, so the dial reads civil time directly;
 	 *  - the sun therefore shines from the opposite bearing, 180 + 15 (h - 12) degrees (east at 06:00, south at noon,
-	 *    west at 18:00), at a constant altitude atan(20.3 / 6.78) = 71.53 degrees: its path is a cone about the vertical
+	 *    west at 18:00), at a constant altitude atan(20.25 / 6.78) = 71.49 degrees: its path is a cone about the vertical
 	 *    through the node, with the node at its apex;
 	 *  - it is up from FirstHour (06:00) to LastHour (18:00) and down otherwise.
 	 * Nothing here depends on latitude, so the city may change at runtime without recutting the dial (D-002, D-003).

@@ -17,9 +17,13 @@ namespace Musee::Motion
 			for (const FMotionChannelSpec& Channel : Schedule.Channels)
 			{
 				const FMotionFollowing& Map = Channel.Follows;
-				if (!Map.IsSound() || FMath::Min(Map.Out[0], Map.Out[1]) < 0.0 || FMath::Max(Map.Out[0], Map.Out[1]) > 1.0)
+				if (Map.IsSet() && (!Map.IsSound() || FMath::Min(Map.Out[0], Map.Out[1]) < 0.0 || FMath::Max(Map.Out[0], Map.Out[1]) > 1.0))
 				{
 					Out.Add(FString::Printf(TEXT("Channel %s follows with two different channel values and two values from 0 to 1"), *Channel.Key.ToString()));
+				}
+				if (Channel.Rest < 0.0f || Channel.Rest > 1.0f || (Map.IsSet() && Channel.Rest != 0.0f))
+				{
+					Out.Add(FString::Printf(TEXT("Channel %s rests from 0 to 1, and only when it follows nothing"), *Channel.Key.ToString()));
 				}
 			}
 			return Out;
@@ -121,7 +125,10 @@ namespace Musee::Motion
 				{
 					Out.Add(Where + TEXT(": its turns' bore lies within their radius"));
 				}
-				Out.Append(TelescopeFaults(Extent, Where));
+				if (!Extent.Telescope.IsEmpty())
+				{
+					Out.Append(TelescopeFaults(Extent, Where));
+				}
 			}
 			return Out;
 		}

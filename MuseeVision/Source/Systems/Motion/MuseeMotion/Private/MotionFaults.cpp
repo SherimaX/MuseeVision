@@ -8,6 +8,9 @@ namespace Musee::Motion
 {
 	namespace
 	{
+		/** A travel is read as a single float: an end written to the millimetre agrees with it within this, in metres or degrees. */
+		constexpr double TravelRounding = 1.0e-4;
+
 		TArray<FString> StepFaults(const FMotionMechanismSpec& Spec, const TArray<FMotionStep>& Steps, const FString& Sequence)
 		{
 			TArray<FString> Out;
@@ -192,6 +195,10 @@ namespace Musee::Motion
 		if (Spec.Follows.IsSet() && !Spec.Follows.IsSound())
 		{
 			Out.Add(TEXT("it follows a channel with an input range of two different values and an output range of two"));
+		}
+		else if (Spec.Follows.IsSet() && (FMath::Min(Spec.Follows.Out[0], Spec.Follows.Out[1]) < 0.0 || FMath::Max(Spec.Follows.Out[0], Spec.Follows.Out[1]) > Spec.Travel + TravelRounding))
+		{
+			Out.Add(TEXT("it follows a channel to places within its travel, from 0 to its travel along its axis"));
 		}
 		Out.Append(StepFaults(Spec, Spec.Open, TEXT("open")));
 		Out.Append(StepFaults(Spec, Spec.Close, TEXT("close")));

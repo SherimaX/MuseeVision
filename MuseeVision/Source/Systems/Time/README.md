@@ -10,6 +10,7 @@ The museum's one clock, its sky's bodies and its weather. Module `MuseeTime` (Ru
 | `TimeWeather.h` | `FTimeWeather`: one place's weather (`museum`, `giverny`, `london`; D-005), with the surface wetness and snow cover it has left |
 | `TimeSubsystem.h` | `UTimeSubsystem` (world): `Now()`, `OnMoment()` (announced on change, never polled), `Refresh()` |
 | `TimeMomentParameters.h` | `MPC_Moment`'s path and its scalar parameters (the stage contract); Time writes them at every moment |
+| `TimeMuseumDial.h`, `TimeDialMark.h` | `Musee::Time::FMuseumDial`: the Rotunda's sun clock from `Museum.json` (the idealised sun): `AngleDegrees`, `ShadowPoint`, `SunDirection`, `ReadHour`, `Marks` every so many minutes (`FDialMark`), `Numeral`; what the stage lays its hour ring, hour lines, meridian, ticks and numerals from |
 
 Settings and commands: `time.hour` (-1 live, or a civil hour), `time.city` (the cities within the dial's tolerance,
 D-002), `musee.time.advance-hour` (the hour key), `musee.time.advance-city` (the city key).

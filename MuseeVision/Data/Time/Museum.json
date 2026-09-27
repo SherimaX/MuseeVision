@@ -11,13 +11,13 @@
   "sunModel": "idealised",
   "sunModelDecision": "D-003",
   "idealisedSun": {
-    "nodeHeightMeters": 20.3,
+    "nodeHeightMeters": 20.25,
     "hourRingRadiusMeters": 6.78,
     "firstHour": 6,
     "lastHour": 18,
-    "notes": "The approved sun: 15 degrees an hour from 06:00 to 18:00, always shining from the bronze node in the eye's lattice, 20.3 m above the dial, onto the hour ring of radius 6.78 m, so the point of shadow lands on the civil hour: VI due west, XII due north, VI due east. Its altitude is therefore constant, atan(20.3 / 6.78) = 71.53 degrees. The Rotunda cuts its node and ring from these numbers.",
+    "notes": "The approved sun: 15 degrees an hour from 06:00 to 18:00, always shining from the bronze node in the eye's lattice, whose centre stands 20.25 m above the dial, onto the hour ring of radius 6.78 m, so the point of shadow lands on the civil hour: VI due west, XII due north, VI due east. Its altitude is therefore constant, atan(20.25 / 6.78) = 71.489 degrees. The Rotunda lays its hour ring, hour lines, meridian, ticks and numerals from these numbers (Time's FMuseumDial).",
     "sources": [
-      { "values": "node height (the lattice and its bronze node) and shadow radius", "source": "the as-built museum: windows/Source/MuseeVision/Plan/MuseePlan.h (Rotunda::LatticeHeight 20.3, Rotunda::ShadowRadius 6.78) and Sky/MuseeSky.cpp (SunClockDirection)" },
+      { "values": "node height (the centre of the lattice's bronze node) and shadow radius", "source": "Docs/Stages/rotunda.md section 5: nodus = the node's centre (0, 0, 20.25), shadow circle r 6.78 (the as-built sky used 20.30, and its shadow fell 1.7 cm inside the ring); the as-built museum: windows/Source/MuseeVision/Plan/MuseePlan.h (Rotunda::ShadowRadius 6.78)" },
       { "values": "the hours and the even path", "source": "the as-built museum: Sky/MuseeSky.cpp (the sun up from 06:00 to 18:00) and SunClock/SunClockDial.cpp (hour lines from VI west through XII north to VI east); plan/canvas/Rotunda.dc.html ('15 degrees an hour in every season, so the point always lands on the hour')" }
     ]
   },

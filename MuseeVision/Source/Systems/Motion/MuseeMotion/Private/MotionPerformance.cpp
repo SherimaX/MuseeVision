@@ -81,12 +81,17 @@ void UMotionPerformance::Publish() const
 	Musee::Motion::PublishChannel(GetWorld(), PerformanceSpec.Publishes, IsRunning() ? 1.0f : 0.0f);
 }
 
-void UMotionPerformance::BeginPlay()
+void UMotionPerformance::StandAtStart()
 {
-	Super::BeginPlay();
 	Clock.Reset();
 	EndedAt.Reset();
 	Publish();
+}
+
+void UMotionPerformance::BeginPlay()
+{
+	Super::BeginPlay();
+	StandAtStart();
 }
 
 void UMotionPerformance::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
