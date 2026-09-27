@@ -7,7 +7,10 @@ USE = r"C:\mv\wt\r-light\MuseeVision\Data\Light\UseTargets.json"
 CARE = r"C:\mv\wt\r-light\MuseeVision\Data\Art\Care.json"
 PALETTE = "C:/Users/anan9/AppData/Local/Temp/claude/C--Users-anan9-Desktop-Projects-Musee-Vision/fe83b0c0-89f0-4a7a-aec6-d7928054970e/scratchpad/Palette.json"
 # keys the Architect has ruled in, which Matter will add to the palette
-RULED_KEYS = {"steel.hard-chrome"}
+RULED_KEYS = {"steel.hard-chrome", "accent.rag-board", "accent.stoneware-glazed", "accent.huanghuali", "accent.lingbi-rock"}
+# catalogue types and target classes the Architect has ruled in, which Light will add
+RULED_TYPES = {"case-linear.3000k", "lantern.2200k"}
+RULED_USE = {"garden.night", "gallery.low-light"}
 COLL = r"C:\Users\anan9\Desktop\Projects\Musee Vision\assets\collection.json"
 
 HEADINGS = ["Identity and placement", "Ports", "Pieces by trade", "Light", "Time and weather", "Motion",
@@ -108,8 +111,8 @@ def main(room):
                 errs.append(f"surface not lowercase: {s}")
     # surfaces named in the sheet in backticks that look like surfaces but lack a finish
     ticked = set(re.findall(r"`([a-z0-9-]+(?:\.[a-z0-9-]+)+)`", md))
-    cat = {os.path.basename(p)[:-5] for p in glob.glob(os.path.join(CAT, "*.json"))}
-    use = {c["key"] for c in load(USE)["classes"]}
+    cat = {os.path.basename(p)[:-5] for p in glob.glob(os.path.join(CAT, "*.json"))} | RULED_TYPES
+    use = {c["key"] for c in load(USE)["classes"]} | RULED_USE
     care = {c["key"] for c in load(CARE)["classes"]}
     if "Lighting.json" in data:
         L = data["Lighting.json"]
@@ -192,9 +195,27 @@ def main(room):
                 errs.append(f"water {w.get('key')}: material not in palette")
     if "Mechanisms.json" in data:
         for m in data["Mechanisms.json"]["mechanisms"]:
-            for k in ("key", "joint", "body", "axis", "travel", "time", "profile", "guard"):
+            for k in ("key", "joint", "body", "axis", "travel", "guard"):
                 if k not in m:
                     errs.append(f"mechanism {m.get('key')}: lacks {k}")
+            if not (("time" in m and "profile" in m) or isinstance(m.get("drive"), dict)):
+                errs.append(f"mechanism {m.get('key')}: needs time+profile or drive")
+            for k in ("range", "pin"):
+                if k in m:
+                    errs.append(f"mechanism {m.get('key')}: '{k}' is not read (body frame and travel give it)")
+            stops = {s["stop"] for s in m.get("stops", [])} | {"open", "closed"}
+            for r in m.get("rides", []):
+                anchors_used.add(r.get("use"))
+                if "when" in r:
+                    errs.append(f"mechanism {m.get('key')}: ride uses prose 'when'; use structured 'requires'")
+                if r.get("at") not in stops:
+                    errs.append(f"mechanism {m.get('key')}: ride at unknown stop {r.get('at')}")
+            for seq in [m.get("open", []), m.get("close", [])] + [r.get("sequence", []) for r in m.get("rides", [])]:
+                for st in seq:
+                    if "move" in st and st["move"] not in stops:
+                        errs.append(f"mechanism {m.get('key')}: move to unknown stop {st['move']}")
+            if "home" in m and m["home"] not in stops:
+                errs.append(f"mechanism {m.get('key')}: home {m['home']} is not a stop")
             if not (("control" in m and "open" in m and "close" in m) or isinstance(m.get("follows"), dict)):
                 errs.append(f"mechanism {m.get('key')}: needs control+open+close, or follows{{channel,in,out}}")
             if isinstance(m.get("follows"), dict) and set(m["follows"]) < {"channel", "in", "out"}:

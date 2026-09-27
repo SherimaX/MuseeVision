@@ -149,6 +149,20 @@ Mechanisms.json { "stage": "<room>", "mechanisms": [ { "key": "<stage>.<mech>", 
   Hang `"frame"` is `"none"` or a Finishes.json surface (Art builds the frame and takes that surface's finish); a
   work split across canvases has one entry per canvas sharing `"work"`, each with `"canvas": <index>`. Mechanisms may
   add `"openUse"` / `"closeUse"` (verb and caption).
+- **Ruled additions (the Architect's; use them, the checker accepts them):** palette `steel.hard-chrome`,
+  `accent.stoneware-glazed`, `accent.huanghuali`, `accent.lingbi-rock`; catalogue `case-linear.3000k` (vitrine LED
+  lines), `lantern.2200k` (a flame-warm lamp inside a lantern; 3000 K is for gallery light, not flame),
+  `gap.step-light.2700k` (hidden-source step light); use classes `gallery.low-light` (50 lx rooms for silk, paper,
+  ink) and `garden.night` (≥ 1 lx on a walk's centre line after dusk; meet it with the design's existing lantern
+  places first). Ground beds name `accent.site-geology`. Built-in works may carry `"built": "form"` in Hang.json
+  (Art captions only). Rule your own questions by the principles (physically real, port don't redesign, one
+  material language, care by hang and UV glazing, no per-room tuning) and list each ruling in Departures.
+- **Lifts (many stops), per STAGE-CONTRACT.md "Mechanisms.json, many stops":** `"stops": [{"stop","at"}]` (fractions
+  of travel; z only as a note), `"home"`, `{"move": "<stop>"}`; `"drive": {speed, accel, jerk, zones:[{from,to,speed,accel}]}`
+  in place of time/profile; `"rides": [{use, at, verb, caption, requires: {mated: [ports], channels: [{channel,
+  atLeast|atMost}]}, sequence}]` — structured, never prose, and no memory of the visit. No `range`, no `pin` (a revolute
+  body's frame origin is its pivot). Vertical ports (class `iris.4600`) are closed by the iris of the stage BELOW the
+  plane, which publishes `<that stage's up port>.closure`.
 - **Anchors.** Section 1 or 3 of the sheet carries an **Anchors** table: key, kind, frame (position, plus the axes
   or facing), and what it belongs to. The kinds are Body, Use, Mount, Wall, Bed, Water and Seat. Every anchor that
   any schedule names must appear in it. A Wall anchor's frame has its origin at the face, x along the wall, y out of
