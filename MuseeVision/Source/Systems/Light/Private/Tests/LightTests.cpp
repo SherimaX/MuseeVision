@@ -112,9 +112,12 @@ namespace Musee::Light::Tests
 		const FLightLuminaire* Pinspot = FindLuminaire(FMuseeKey(TEXTVIEW("pinspot.3000k")));
 		TestTrue(TEXT("A pinspot whose data sheet isn't read stands unlit, saying why"), Pinspot && !Pinspot->bLit && !Pinspot->WhyUnlit.IsEmpty());
 		const FLightLuminaire* Glass = FindLuminaire(FMuseeKey(TEXTVIEW("edge-lit-glass.3000k")));
-		TestTrue(TEXT("An edge-lit pane lets its light out as a face, once its flux is published"), Glass && !Glass->bLit
+		TestTrue(TEXT("An edge-lit pane lets its light out as a face, lit on its derived flux"), Glass && Glass->bLit
 			&& Glass->Emitter == FLightLuminaire::EEmitter::Rect);
-		TestTrue(TEXT("and it is laid over the face the room gives it, as an areal type, though unlit"), Glass && Glass->IsAreal());
+		// The canopy's LED lines (720 lm/m, 3432.8 m of them) over its 1122.06 m2, 70 % let out by the light guide.
+		TestTrue(TEXT("its flux a square metre the LED lines' over the canopy, less what the guide keeps"), Glass
+			&& FMath::IsNearlyEqual(Glass->FluxPerSquareMeterLumens, 720.0 * 3432.8 * 0.70 / 1122.06, 0.5));
+		TestTrue(TEXT("and it is laid over the face the room gives it, as an areal type"), Glass && Glass->IsAreal());
 		const FLightLuminaire* PostTop = FindLuminaire(FMuseeKey(TEXTVIEW("post-top-globe.2700k")));
 		TestTrue(TEXT("A post-top lantern is its one lamp of 5400 lm at 2700 K, lighting all round"), PostTop && PostTop->bLit
 			&& PostTop->Emitter == FLightLuminaire::EEmitter::Point && PostTop->LampCount == 1 && PostTop->Flux.Get() == 5400.0
@@ -319,8 +322,8 @@ namespace Musee::Light::Tests
 		if (ULightLuminaireComponent* Panes = Placement(TEXT("panes")); TestNotNull(TEXT("Edge-lit panes, laid over their zone"), Panes))
 		{
 			const double Area = 0.5 * FMath::DegreesToRadians(30.0) * (14.0 * 14.0 - 8.5 * 8.5);
-			TestTrue(TEXT("over a face of the zone's own area, unlit until their photometry is published"),
-				FMath::IsNearlyEqual(Panes->Face().X * Panes->Face().Y, Area, 1e-6) && Panes->Emitter() == nullptr);
+			TestTrue(TEXT("over a face of the zone's own area, lit as a face"),
+				FMath::IsNearlyEqual(Panes->Face().X * Panes->Face().Y, Area, 1e-6) && Cast<URectLightComponent>(Panes->Emitter()) != nullptr);
 		}
 		if (ULightLuminaireComponent* Eye = Placement(TEXT("eye")); TestNotNull(TEXT("A disc, a zone all round"), Eye))
 		{
