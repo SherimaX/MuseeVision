@@ -1,6 +1,8 @@
 #include "Levels/MuseumLevel.h"
 
 #include "Engine/World.h"
+#include "GameFramework/PlayerStart.h"
+#include "GameFramework/WorldSettings.h"
 #include "LevelInstance/LevelInstanceActor.h"
 #include "Levels/LevelDraft.h"
 #include "Make/EngineUnits.h"
@@ -11,6 +13,32 @@ namespace Musee::Studio
 {
 	namespace
 	{
+		/** The name of the arrival's player start in the museum level. */
+		const TCHAR* const ArrivalName = TEXT("Arrival");
+
+		/** Marks where the visit begins, and the game mode the museum plays under. */
+		bool Arrive(FLevelDraft& Draft, const FMuseumLevel& Museum, FString& OutWhy)
+		{
+			if (Museum.GameMode)
+			{
+				Draft.World().GetWorldSettings()->DefaultGameMode = Museum.GameMode;
+			}
+			if (Museum.ArrivalTag.IsNone())
+			{
+				return true;
+			}
+			const FRotator Facing(0.0, Museum.ArrivalFacingDegrees, 0.0);
+			const FTransform Placement(Facing, EngineFromMeters(Museum.ArrivalMeters));
+			APlayerStart* Start = Cast<APlayerStart>(Draft.Spawn(APlayerStart::StaticClass(), ArrivalName, Placement));
+			if (!Start)
+			{
+				OutWhy = TEXT("a stage is named Arrival, the name of the museum's arrival");
+				return false;
+			}
+			Start->PlayerStartTag = Museum.ArrivalTag;
+			return true;
+		}
+
 		/** Puts one Level Instance per stage into the draft; false with the reason when a stage level cannot be used. */
 		bool Furnish(FLevelDraft& Draft, const FMuseumLevel& Museum, FString& OutWhy)
 		{
@@ -33,7 +61,7 @@ namespace Musee::Studio
 					return false;
 				}
 			}
-			return true;
+			return Arrive(Draft, Museum, OutWhy);
 		}
 	}
 
@@ -45,6 +73,8 @@ namespace Musee::Studio
 		{
 			Hasher.Add(Stage.StageName).Add(Stage.LevelPackageName).Add(Stage.TranslationMeters);
 		}
+		Hasher.Add(Museum.ArrivalTag.ToString()).Add(Museum.ArrivalMeters).Add(Museum.ArrivalFacingDegrees);
+		Hasher.Add(Museum.GameMode ? Museum.GameMode->GetPathName() : FString());
 		return Hasher.Finish();
 	}
 

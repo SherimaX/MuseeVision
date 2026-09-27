@@ -1,0 +1,12 @@
+{
+  "$sources": "Studio's test plan: the specimen room anchors it, and its west door mates a stage that is never built, so the door stays blind.",
+  "anchor": "specimen-room",
+  "arrival": {
+    "stage": "specimen-room",
+    "pointMeters": [4.0, 0.0, 0.0],
+    "facingDegrees": 180.0
+  },
+  "matings": [
+    { "a": "specimen-room.west", "b": "unbuilt.east", "passageMeters": 0.0, "note": "A neighbour that isn't built." }
+  ]
+}

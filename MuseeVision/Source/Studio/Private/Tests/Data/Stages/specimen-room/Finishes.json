@@ -1,0 +1,9 @@
+{
+  "stage": "specimen-room",
+  "finishes": [
+    { "surface": "wall", "material": "white.lime-plaster", "working": "trowelled", "history": "white.soiling", "note": "The room's inner faces." },
+    { "surface": "masonry", "material": "stone.travertine-romano", "working": "honed", "history": "stone.pore-soiling", "note": "The walls' outer faces and reveals." },
+    { "surface": "floor", "material": "stone.travertine-romano", "working": "honed", "history": "stone.foot-traffic-wear", "note": "" },
+    { "surface": "post", "material": "bronze.cusn10", "working": "brushed", "history": "bronze.wear", "note": "" }
+  ]
+}

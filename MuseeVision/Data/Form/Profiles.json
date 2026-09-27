@@ -1,0 +1,30 @@
+{
+  "$sources": [
+    "Docs/Stages/salon.md (R-SPECS-01) section 3.4, P9 and P10: the as-built oval's cove and skirting, windows/Source/MuseeVision/Salon/SalonStructure.cpp:376-476, re-set to each moulding's own datum (A out from the wall, B up from the moulding's foot). Arc segment counts are dropped: the chord tolerance divides every arc."
+  ],
+  "$records": [
+    {
+      "key": "cove.quarter-ellipse.1450",
+      "source": "salon.md P9, the oval cove: a 30 mm bed and lip, then a quarter ellipse 1.285 m out by 1.130 m up, to a 150 mm upstand at the ceiling line.",
+      "start": [0.000, 0.000],
+      "steps": [
+        { "line": [0.030, 0.000], "joint": "Crisp" },
+        { "line": [0.030, 0.050], "joint": "Crisp" },
+        { "line": [0.015, 0.070], "joint": "Crisp" },
+        { "arc": { "centerMeters": [1.300, 0.070], "radiiMeters": [1.285, 1.130], "fromDegrees": 180, "toDegrees": 90 }, "joint": "Crisp" },
+        { "line": [1.450, 1.200], "joint": "Smooth" },
+        { "line": [1.450, 1.350], "joint": "Crisp" }
+      ]
+    },
+    {
+      "key": "skirting.flat.100",
+      "source": "salon.md P10, the oval skirting: 18 mm proud, 100 mm tall, its top edge chamfered 10 mm.",
+      "start": [0.018, 0.000],
+      "steps": [
+        { "line": [0.018, 0.090], "joint": "Crisp" },
+        { "line": [0.008, 0.100], "joint": "Crisp" },
+        { "line": [0.000, 0.100], "joint": "Crisp" }
+      ]
+    }
+  ]
+}

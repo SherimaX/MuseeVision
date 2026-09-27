@@ -1,0 +1,26 @@
+{
+  "$sources": [
+    "Docs/Stages/salon.md (R-SPECS-01) section 2, class definitions: the Salon's door as built (Plan.Salon.door; windows/Source/MuseeVision/Salon/SalonStructure.cpp:41) and the Reserve's west door as built (windows/Source/MuseeVision/Reserve/ReserveStructure.cpp:37-38).",
+    "Decisions D-019: the Nympheas oval's east port mates the Salon's west port through the oval passage, 3.000 m wide with a semicircular head springing at 3.300 m (salon.md section 3.1), the same opening as the Salon's door."
+  ],
+  "$records": [
+    {
+      "key": "doorway.3000x4800.arched",
+      "kind": "Doorway",
+      "clearWidthMeters": 3.000,
+      "headMeters": 3.300,
+      "arched": true,
+      "closure": "open-portal",
+      "source": "The Salon's east door and the oval passage: 3.000 clear, a semicircular head of radius 1.500 springing at 3.300, crown 4.800."
+    },
+    {
+      "key": "stairwell.straight.2400x3200.arched",
+      "kind": "Stairwell",
+      "clearWidthMeters": 2.400,
+      "headMeters": 2.000,
+      "arched": true,
+      "closure": "open-portal",
+      "source": "The Reserve's west door at the foot of the oval's stair: 2.400 clear, a semicircular head of radius 1.200 springing at 2.000, crown 3.200 above the landing."
+    }
+  ]
+}

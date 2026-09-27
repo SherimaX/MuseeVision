@@ -12,22 +12,9 @@ namespace Musee::Studio
 		/** Each stage's casts by piece name. */
 		using FStageCasts = TMap<FString, FCastResult>;
 
-		/** Times a step of the make into the report. */
-		class FStepTimer
-		{
-		public:
-			FStepTimer(FMakeReport& InReport, const TCHAR* InName) : Report(InReport), Name(InName), Start(FPlatformTime::Seconds()) {}
-			~FStepTimer() { Report.Steps.Add({Name, FPlatformTime::Seconds() - Start}); }
-
-		private:
-			FMakeReport& Report;
-			FString Name;
-			double Start;
-		};
-
 		TArray<FStageCasts> CastStep(FMakePlan& Plan, FMakeReport& Report)
 		{
-			FStepTimer Timer(Report, TEXT("cast"));
+			FMakeStepTimer Timer(Report, TEXT("cast"));
 			const FDerivedDataTally Before = MeasureDerivedData();
 			TArray<FCastInput> Inputs;
 			TArray<TPair<int32, FString>> Owners;
@@ -55,15 +42,6 @@ namespace Musee::Studio
 			return ByStage;
 		}
 
-		bool Failed(const FMakeReport& Report, const FSoftObjectPath& Mesh)
-		{
-			const FString PackageName = Mesh.GetLongPackageName();
-			return Report.Packages.ContainsByPredicate([&PackageName](const FMadePackage& Package)
-			{
-				return Package.PackageName == PackageName && Package.Outcome == EMadeOutcome::Failed;
-			});
-		}
-
 		/** A stage's level from its placements, one component per placed part; false with the reason if a piece failed. */
 		bool DescribeStageLevel(const FMakePlan& Plan, const FMakeStage& Stage, const FStageCasts& Casts, const FMakeReport& Report,
 			FStageLevel& OutLevel, FString& OutWhy)
@@ -79,7 +57,7 @@ namespace Musee::Studio
 				}
 				for (const FCastMesh& Mesh : Result->Meshes)
 				{
-					if (Failed(Report, Mesh.Path))
+					if (Report.HasFailed(Mesh.Path))
 					{
 						OutWhy = FString::Printf(TEXT("placement %s: mesh %s failed"), *Placement.Name, *Mesh.Path.ToString());
 						return false;
@@ -92,7 +70,7 @@ namespace Musee::Studio
 
 		void StageLevelsStep(const FMakePlan& Plan, const TArray<FStageCasts>& Casts, FMakeReport& Report)
 		{
-			FStepTimer Timer(Report, TEXT("stage levels"));
+			FMakeStepTimer Timer(Report, TEXT("stage levels"));
 			for (int32 StageIndex = 0; StageIndex < Plan.Stages.Num(); ++StageIndex)
 			{
 				FStageLevel Level;
@@ -110,7 +88,7 @@ namespace Musee::Studio
 
 		void MuseumStep(const FMakePlan& Plan, FMakeReport& Report)
 		{
-			FStepTimer Timer(Report, TEXT("museum level"));
+			FMakeStepTimer Timer(Report, TEXT("museum level"));
 			FMuseumLevel Museum{Plan.Paths.MuseumLevel(), {}};
 			for (const FMakeStage& Stage : Plan.Stages)
 			{
