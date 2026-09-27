@@ -5,6 +5,7 @@
 #include "Engine/Texture2D.h"
 #include "Materials/MaterialInstanceConstant.h"
 #include "MatterNames.h"
+#include "Misc/PackageName.h"
 #include "Misc/Paths.h"
 #include "Stages/PaintLayers.h"
 #include "Stages/StageMake.h"
@@ -19,12 +20,6 @@ namespace Musee::Studio::Tests
 	{
 		/** The specimens are made under their own root, so they never touch the museum's assets. */
 		const TCHAR* const PaintRoot = TEXT("/Game/Generated/Specimens");
-
-		/**
-		 * The engine's stock opaque surface, standing for Matter's paint master: it declares no parameters of its own, so
-		 * Matter composes over it only the work's image and size.
-		 */
-		const TCHAR* const StockMaster = TEXT("/Engine/EngineMaterials/WorldGridMaterial");
 
 		/** Art's framed test stage: a framed canvas and a work on two canvases, on a flat wall. */
 		FMuseeStageContext FramedStage()
@@ -48,14 +43,23 @@ namespace Musee::Studio::Tests
 	IMPLEMENT_SIMPLE_AUTOMATION_TEST(FStudioPaintLayersTest, "Musee.Studio.PaintLayers", EAutomationTestFlags::EditorContext | EAutomationTestFlags::ProductFilter)
 	bool FStudioPaintLayersTest::RunTest(const FString& Parameters)
 	{
+		// Matter composes every paint over its own paint master, which declares exactly the parameters Matter writes: the
+		// museum's, made by MuseeMatterMake, as every stage's make needs it.
 		FStageMakeOptions Options;
 		Options.Paths = FMakePaths{PaintRoot};
-		Options.PaintMaster = StockMaster;
+		if (!TestTrue(TEXT("Matter's paint master is made (MuseeMatterMake)"), FPackageName::DoesPackageExist(Options.PaintMaster)))
+		{
+			return false;
+		}
 		FMakeReport First;
 		MakePaintLayers(FramedStage(), Options, First);
 		for (const FMadePackage& Made : First.Packages)
 		{
 			TestTrue(FString::Printf(TEXT("%s is made (%s)"), *Made.PackageName, *Made.Why), Made.Outcome != EMadeOutcome::Failed);
+		}
+		for (const FMuseeFinding& Finding : First.Findings)
+		{
+			AddError(Finding.ToString());
 		}
 		TestEqual(TEXT("two works: two images and two paint instances, and nothing found wrong"), First.Packages.Num() * 10 + First.Findings.Num(), 40);
 
@@ -66,7 +70,7 @@ namespace Musee::Studio::Tests
 		const UMaterialInstanceConstant* Instance = LoadObject<UMaterialInstanceConstant>(nullptr, *Musee::Matter::ObjectPathOf(Paint));
 		if (TestNotNull(TEXT("the work's paint instance is made"), Instance))
 		{
-			TestTrue(TEXT("over the paint master"), Instance->Parent.Get() == LoadObject<UMaterialInterface>(nullptr, *Musee::Matter::ObjectPathOf(StockMaster)));
+			TestTrue(TEXT("over the paint master"), Instance->Parent.Get() == LoadObject<UMaterialInterface>(nullptr, *Musee::Matter::ObjectPathOf(Options.PaintMaster)));
 			TestTrue(TEXT("carrying the work's image"), Instance->TextureParameterValues.ContainsByPredicate([Texture](const FTextureParameterValue& Value)
 			{
 				return Value.ParameterValue == Texture;
