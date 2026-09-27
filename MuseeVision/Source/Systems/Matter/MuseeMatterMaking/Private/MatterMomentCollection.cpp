@@ -24,11 +24,12 @@ namespace
 
 TArray<FName> MomentParameterNames()
 {
-	using namespace MomentParameter;
-	return {
-		SunElevationDeg, SunAzimuthDeg, Daylight, RainRateMmH, Wetness, SnowCover, TemperatureC, WindSpeedMS, SolarTerm,
-		GivernyWetness, LondonWetness,
-	};
+	TArray<FName> Names;
+	for (const TCHAR* Name : Time::MomentParameters::All)
+	{
+		Names.Add(FName(Name));
+	}
+	return Names;
 }
 
 FGuid MomentStateId(const TArray<FName>& Names)

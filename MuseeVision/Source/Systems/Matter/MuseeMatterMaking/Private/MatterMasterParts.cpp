@@ -87,8 +87,8 @@ void AddHistoryInputs(FMasterRecipe& Recipe, EPores Pores)
 	AddScalar(Recipe, WornRoughness, HistoryGroup, SlabRoughness, TEXT("1"), TEXT("The steady roughness abrasion carries the face toward, from the history's record"));
 	AddScalar(Recipe, WornHaziness, HistoryGroup, Unset, TEXT("1"), TEXT("The steady haziness of the worn face, from the history's record"));
 	AddScalar(Recipe, WearPassages, HistoryGroup, Unset, TEXT("passages"), TEXT("Passages that carry the face 63 percent of the way to its worn state (0: it never wears)"));
-	Recipe.MomentReads.Add(FMasterMomentRead{ FName(MomentParameter::Wetness) });
-	Recipe.MomentReads.Add(FMasterMomentRead{ FName(MomentParameter::SnowCover) });
+	Recipe.MomentReads.Add(FMasterMomentRead{ FName(Time::MomentParameters::Wetness) });
+	Recipe.MomentReads.Add(FMasterMomentRead{ FName(Time::MomentParameters::SnowCover) });
 }
 
 TArray<FMasterPin> HistoryPins(EPores Pores, const TCHAR* TextureDepth)
@@ -98,7 +98,7 @@ TArray<FMasterPin> HistoryPins(EPores Pores, const TCHAR* TextureDepth)
 		Reads(SkyExposure, 1), Reads(PassagesPerYear, 1), Reads(AgeYears, 1), Reads(KeptWet, 1),
 		Reads(TextureDepth, 1), Reads(WornRoughness, 1), Reads(WornHaziness, 1), Reads(WearPassages, 1),
 		Reads(SoilAlbedo, 3), Reads(DepositionPerYear, 1), Reads(WashRemovalPerYear, 1),
-		Reads(MomentParameter::Wetness, 1), Reads(MomentParameter::SnowCover, 1),
+		Reads(Time::MomentParameters::Wetness, 1), Reads(Time::MomentParameters::SnowCover, 1),
 	};
 	if (Pores == EPores::Open)
 	{

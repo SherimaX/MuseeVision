@@ -1,6 +1,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "TimeMomentParameters.h"
 
 class UMaterialParameterCollection;
 
@@ -12,29 +13,14 @@ class UMaterialParameterCollection;
  * azimuth in degrees and the daylight fraction; the rain rate in mm per hour, the wetness and snow cover of a level,
  * exposed reference surface (0 to 1), the air temperature in degrees Celsius, the wind speed in metres per second and
  * the solar term (0 to 23); and, per weather place of D-005, Giverny's and London's wetness. Every value starts at
- * zero until Time sets it.
+ * zero until Time sets it. The names are Time's, from TimeMomentParameters.h.
  *
  * The collection's identifiers (its StateId, which the shaders of every master reading it are keyed by, and each
  * parameter's id) are derived from the parameter names, so a make writes the same collection every time.
  */
 namespace Musee::Matter
 {
-	namespace MomentParameter
-	{
-		inline constexpr const TCHAR* SunElevationDeg = TEXT("SunElevationDeg");
-		inline constexpr const TCHAR* SunAzimuthDeg = TEXT("SunAzimuthDeg");
-		inline constexpr const TCHAR* Daylight = TEXT("Daylight");
-		inline constexpr const TCHAR* RainRateMmH = TEXT("RainRateMmH");
-		inline constexpr const TCHAR* Wetness = TEXT("Wetness");
-		inline constexpr const TCHAR* SnowCover = TEXT("SnowCover");
-		inline constexpr const TCHAR* TemperatureC = TEXT("TemperatureC");
-		inline constexpr const TCHAR* WindSpeedMS = TEXT("WindSpeedMS");
-		inline constexpr const TCHAR* SolarTerm = TEXT("SolarTerm");
-		inline constexpr const TCHAR* GivernyWetness = TEXT("GivernyWetness");
-		inline constexpr const TCHAR* LondonWetness = TEXT("LondonWetness");
-	}
-
-	/** Every parameter of the Moment, in the contract's order. */
+	/** Every parameter of the Moment, in the contract's order (Time's MomentParameters::All). */
 	TArray<FName> MomentParameterNames();
 
 	/** Fills a new collection with the Moment's parameters and derives its identifiers from them. */
