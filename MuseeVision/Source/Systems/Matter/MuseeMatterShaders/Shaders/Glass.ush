@@ -1,0 +1,55 @@
+// Glass: glazing, from the glass's measured absorption.
+//
+// A pane is a thin slab of dielectric. At each face a fraction of the light is reflected (Fresnel's equations); inside,
+// the light is absorbed along its path by the glass's iron and other colouring oxides (Beer-Lambert). Light runs back
+// and forth between the two faces, and the pane's transmittance and reflectance are the sums of those passes; a pane is
+// many wavelengths thick, so the passes add as intensities. Through the face the path is the pane's thickness and
+// low-iron glass looks clear; light guided along the pane to its edge crosses a far longer path and shows the glass's
+// own colour, the green of soda-lime float glass or the faint aqua of low-iron glass.
+//
+// Absorption is given as the Napierian absorption coefficient per millimetre at the three primaries, from the glass's
+// record (its measured internal transmittance, evidence tier (a) in Docs/Architecture.md, Matter).
+
+#pragma once
+
+#include "/Project/Matter/Frame.ush"
+#include "/Project/Matter/Optics.ush"
+
+/** What a pane does to light arriving at one angle. */
+struct FMatterPane
+{
+	float3 Transmittance;   // fraction of the incident light that passes through the pane
+	float3 Reflectance;     // fraction reflected by the pane, both faces together
+};
+
+/** Internal transmittance along a path through the glass (Beer-Lambert). At normal incidence through a pane of
+ *  thickness d it is the Slab's transmittance colour, given to Substrate's Transmittance-To-MFP with the thickness. */
+float3 MatterInternalTransmittance(float3 AbsorptionPerMillimeter, float PathMillimeters)
+{
+	return exp(-AbsorptionPerMillimeter * PathMillimeters);
+}
+
+/** A pane in air, at the incidence cosine CosIncidence, with incoherent multiple reflection between its faces:
+ *  T = (1 - R)^2 t / (1 - R^2 t^2) and R_pane = R + (1 - R)^2 R t^2 / (1 - R^2 t^2), where R is one face's Fresnel
+ *  reflectance and t the internal transmittance along the refracted path d / cos(theta_t) (Rubin 1985, "Optical
+ *  properties of soda lime silica glasses", Solar Energy Materials 12:275; the method of ISO 9050:2003). By
+ *  reciprocity the second face reflects the same fraction R from inside. */
+FMatterPane MatterPane(float CosIncidence, float RefractiveIndex, float3 AbsorptionPerMillimeter, float ThicknessMillimeters)
+{
+	const float R = MatterDielectricFresnel(CosIncidence, RefractiveIndex);
+	const float CosInside = max(MatterRefractedCosine(CosIncidence, RefractiveIndex), MatterTiny);
+	const float3 Inside = MatterInternalTransmittance(AbsorptionPerMillimeter, ThicknessMillimeters / CosInside);
+	const float3 Returns = 1.0 - R * R * Inside * Inside;
+	FMatterPane Pane;
+	Pane.Transmittance = (1.0 - R) * (1.0 - R) * Inside / Returns;
+	Pane.Reflectance = R + (1.0 - R) * (1.0 - R) * R * Inside * Inside / Returns;
+	return Pane;
+}
+
+/** Colour of the light a pane's edge shows. Light that enters a face and is trapped between the faces by total internal
+ *  reflection runs along the pane to its edges, so an edge shows the glass's absorption over the pane's width across
+ *  it (EdgePathMillimeters, from Form's drawing of the pane) rather than over its thickness. */
+float3 MatterPaneEdgeColor(float3 AbsorptionPerMillimeter, float EdgePathMillimeters)
+{
+	return MatterInternalTransmittance(AbsorptionPerMillimeter, EdgePathMillimeters);
+}

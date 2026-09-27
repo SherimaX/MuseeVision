@@ -1,0 +1,97 @@
+// Metal: the museum's metals (the one bronze alloy and gold leaf) from their measured optics.
+//
+// A metal reflects with its free electrons: its refractive index is complex (n + ik), so its reflectance at normal
+// incidence is high and coloured, and it rises to white at grazing, dipping below Schlick's curve near 80 degrees on
+// the way. That dip carries the colour of a gilt or bronze edge. Metals are calibrated from measured optical constants
+// (evidence tier (a) in Docs/Architecture.md, Matter): a record gives n and k at the wavelengths of the three
+// primaries, and the F0 and edge tint follow here. Brushing leaves parallel grooves that stretch reflections across
+// them. A copper alloy left to the weather grows a mineral patina over the metal: History.ush gives how much of the
+// face it covers, and this file gives the layers' optics.
+
+#pragma once
+
+#include "/Project/Matter/Frame.ush"
+#include "/Project/Matter/Optics.ush"
+#include "/Project/Matter/History.ush"
+
+// Schlick's approximation departs most from a metal's exact reflectance near the incidence cosine 1/7 (81.8 degrees),
+// so a metal's edge colour is fitted there (Hoffman 2019, "Fresnel Equations Considered Harmful", Eurographics
+// Workshop on Material Appearance Modeling; Kutz et al. 2021, "Novel aspects of the Adobe Standard Material").
+// Unreal's F_AdobeF82 (BRDF.ush) uses the same angle.
+static const float MatterEdgeTintCosine = 1.0 / 7.0;
+
+/** A copper alloy's patina minerals, from its record. */
+struct FMatterPatina
+{
+	float3 CupriteAlbedo;            // diffuse albedo of the cuprite crust
+	float  CupriteRefractiveIndex;   // cuprite's refractive index in the visible
+	float3 GreenAlbedo;              // diffuse albedo of the basic sulfate (brochantite) crust
+	float  GreenRefractiveIndex;     // the basic sulfate's refractive index in the visible
+	float  Roughness;                // Slab roughness of a mineral crust
+};
+
+/** A metal's reflectance at normal incidence from its complex index n + ik at the three primaries:
+ *  ((n - 1)^2 + k^2) / ((n + 1)^2 + k^2). */
+float3 MatterConductorF0(float3 N, float3 K)
+{
+	return MatterConductorFresnel(1.0, N, K);
+}
+
+/** The Slab's F90 for a metal: the colour Schlick's curve must bend toward to meet the metal's exact reflectance at the
+ *  incidence cosine 1/7. Schlick's F = F0 + (F90 - F0) (1 - cos)^5 is solved for F90 there. The Slab keeps only the hue
+ *  of F90 and fixes its brightness at 1 (SubstrateExport.ush divides it by its largest channel), so the fit is returned
+ *  in that form: the metal's edge keeps its colour toward grazing instead of washing to white. */
+float3 MatterConductorEdgeTint(float3 N, float3 K)
+{
+	const float3 F0 = MatterConductorF0(N, K);
+	const float3 F82 = MatterConductorFresnel(MatterEdgeTintCosine, N, K);
+	const float SchlickWeight = pow(1.0 - MatterEdgeTintCosine, 5.0);
+	const float3 F90 = max(F0 + (F82 - F0) / SchlickWeight, 0.0);
+	return F90 / max(max(F90.r, max(F90.g, F90.b)), MatterTiny);
+}
+
+/** The Slab's tangent on a brushed face: the brush's stroke direction laid into the face, so the tangent runs along the
+ *  grooves. A stroke along the normal leaves no direction on the face; any tangent then serves. */
+float3 MatterStrokeTangent(float3 StrokeDirection, float3 Normal)
+{
+	const float3 Along = StrokeDirection - dot(StrokeDirection, Normal) * Normal;
+	const float Length = length(Along);
+	return Length > MatterTiny ? Along / Length : MatterPerpendicular(Normal);
+}
+
+/** A brushed face's lobe as the Slab's roughness (x) and anisotropy (y), with the Slab's tangent along the grooves.
+ *  Grooves spread reflection across themselves, so the roughness across the stroke exceeds the roughness along it and
+ *  the anisotropy is negative. Unreal's parameterisation: alpha_t = a (1 + A) along the tangent, alpha_b = a (1 - A)
+ *  across it, with a = Roughness^2 (Kulla & Conty 2017, "Revisiting Physically Based Shading at Imageworks", SIGGRAPH
+ *  course; BRDF.ush, GetAnisotropicRoughness). */
+float2 MatterBrushedLobe(float RoughnessAlongStroke, float RoughnessAcrossStroke)
+{
+	const float AlphaAlong = RoughnessAlongStroke * RoughnessAlongStroke;
+	const float AlphaAcross = RoughnessAcrossStroke * RoughnessAcrossStroke;
+	const float Alpha = 0.5 * (AlphaAlong + AlphaAcross);
+	return float2(sqrt(Alpha), (AlphaAlong - AlphaAcross) / max(AlphaAlong + AlphaAcross, MatterTiny));
+}
+
+/** A mineral crust: a dielectric of grains that scatters its own colour diffusely and reflects at its interface. */
+FMatterSurface MatterMineralCrust(float3 Albedo, float RefractiveIndex, float Roughness, float2 Slope)
+{
+	const float F0 = MatterDielectricF0(RefractiveIndex);
+	FMatterSurface Crust;
+	Crust.DiffuseAlbedo = Albedo;
+	Crust.F0 = F0.xxx;
+	Crust.Roughness = Roughness;
+	Crust.Haziness = 0.0;
+	Crust.Slope = Slope;
+	return Crust;
+}
+
+/** Bare metal under its natural patina, with Cover from MatterPatinaCover: the cuprite covers the fraction Cover.x of
+ *  the metal, and the green covers the fraction Cover.y of the cuprite. Where a crust covers, the metal's coloured
+ *  reflection is replaced by the mineral's. */
+FMatterSurface MatterPatinate(FMatterSurface Metal, float2 Cover, FMatterPatina Patina)
+{
+	const FMatterSurface Cuprite = MatterMineralCrust(Patina.CupriteAlbedo, Patina.CupriteRefractiveIndex, Patina.Roughness, Metal.Slope);
+	const FMatterSurface Green = MatterMineralCrust(Patina.GreenAlbedo, Patina.GreenRefractiveIndex, Patina.Roughness, Metal.Slope);
+	const FMatterSurface UnderCuprite = MatterLerpSurface(Metal, Cuprite, Cover.x);
+	return MatterLerpSurface(UnderCuprite, Green, Cover.x * Cover.y);
+}

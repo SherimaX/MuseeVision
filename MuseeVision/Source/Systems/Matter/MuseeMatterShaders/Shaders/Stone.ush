@@ -1,0 +1,177 @@
+// Stone: the face of a block of stone, from its substance and its bedding.
+//
+// A sedimentary stone such as travertine was laid down in beds, and its structure runs along them: pores and
+// crystals are drawn out along the bedding and packed tighter across it, and each bed has its own tone. A worked
+// face cuts through that structure, so what it shows depends on how the face lies to the beds (vein cut or cross cut).
+// Real stone faces are self-affine: their relief looks alike at every scale from the bed down to the grain, with the
+// amplitude falling by 2^-H for each halving of the scale. H is the Hurst exponent: rock fracture surfaces measure
+// about 0.6 to 0.8 over nine decades of scale (Candela et al. 2012, "Roughness of fault surfaces over nine decades of
+// length scales", Journal of Geophysical Research 117, B08409); a worked face's value is its substance record's. The
+// face's roughness varies over the same scales, multiplicatively, since it cannot go below zero.
+//
+// Positions are in the piece's own axes, in metres (each piece's mesh is cast in its local frame), so the pattern is
+// cut into the block and does not slide as the piece is placed. The bed normal is the piece table's bed frame.
+
+#pragma once
+
+#include "/Project/Matter/Frame.ush"
+
+// The octaves summed between the bed and the grain are capped to bound the shader's cost: 8 octaves span 256 to 1.
+// Structure finer than the cap is averaged into the substance's roughness, as it is below the pixel in any case.
+static const int MatterStoneMaxOctaves = 8;
+
+// Maps a 32-bit hash onto [0, 1].
+static const float MatterHashToUnit = 1.0 / 4294967295.0;
+
+// Gradient noise in three dimensions with unit gradients never exceeds sqrt(3) / 2 in magnitude (sqrt(N / 4) in N
+// dimensions), so dividing by it bounds the noise to [-1, 1] and a spread becomes a true half-range.
+static const float MatterGradientNoiseBound = 0.8660254;
+
+/** A substance's structure, from its record. */
+struct FMatterStone
+{
+	float GrainMillimeters;    // the finest structure the face shows: the grain or crystal size
+	float BedMillimeters;      // the coarsest: the thickness of a bed
+	float BedAspect;           // how many times finer the structure is across the bedding than along it (1 or more)
+	float HurstExponent;       // the face's self-affinity: each halving of scale divides the relief by 2^H (0 to 1)
+	float RoughnessSpread;     // half-range of ln(roughness) over the face
+	float ToneSpread;          // half-range of ln(albedo) over the face, from bed to bed and grain to grain
+	float ReliefMillimeters;   // amplitude of the worked face's relief
+};
+
+/** The stone's face at one point. */
+struct FMatterStoneFace
+{
+	float  Tone;          // factor on the substance's albedo where the point lies
+	float  Roughness;     // the point's roughness
+	float3 ReliefSlope;   // gradient of the relief height, in the piece's axes (dimensionless)
+};
+
+/** PCG3D, a three-lane integer hash: Jarzynski & Olano 2020, "Hash Functions for GPU Rendering", Journal of Computer
+ *  Graphics Techniques 9(3):21-38. Its first step is Numerical Recipes' linear congruential generator. */
+uint3 MatterPcg3d(uint3 V)
+{
+	V = V * 1664525u + 1013904223u;
+	V.x += V.y * V.z;
+	V.y += V.z * V.x;
+	V.z += V.x * V.y;
+	V ^= V >> 16u;
+	V.x += V.y * V.z;
+	V.y += V.z * V.x;
+	V.z += V.x * V.y;
+	return V;
+}
+
+/** A pseudo-random unit gradient at an integer lattice point, for the lattice named by Key. */
+float3 MatterLatticeGradient(int3 Cell, uint3 Key)
+{
+	const float3 Gradient = float3(MatterPcg3d(asuint(Cell) + Key)) * (2.0 * MatterHashToUnit) - 1.0;
+	return Gradient * rsqrt(max(dot(Gradient, Gradient), MatterTiny));
+}
+
+/** Gradient noise with its quintic fade (Perlin 2002, "Improving Noise", SIGGRAPH) and its analytic gradient (Quilez
+ *  2017, "Gradient noise derivatives"): x is the value in [-1, 1], yzw its gradient with respect to P. */
+float4 MatterGradientNoise(float3 P, uint3 Key)
+{
+	const float3 Cell = floor(P);
+	const float3 F = P - Cell;
+	const int3 C = int3(Cell);
+	const float3 U = F * F * F * (F * (F * 6.0 - 15.0) + 10.0);
+	const float3 DU = 30.0 * F * F * (F * (F - 2.0) + 1.0);
+
+	const float3 Ga = MatterLatticeGradient(C + int3(0, 0, 0), Key);
+	const float3 Gb = MatterLatticeGradient(C + int3(1, 0, 0), Key);
+	const float3 Gc = MatterLatticeGradient(C + int3(0, 1, 0), Key);
+	const float3 Gd = MatterLatticeGradient(C + int3(1, 1, 0), Key);
+	const float3 Ge = MatterLatticeGradient(C + int3(0, 0, 1), Key);
+	const float3 Gf = MatterLatticeGradient(C + int3(1, 0, 1), Key);
+	const float3 Gg = MatterLatticeGradient(C + int3(0, 1, 1), Key);
+	const float3 Gh = MatterLatticeGradient(C + int3(1, 1, 1), Key);
+
+	const float Va = dot(Ga, F - float3(0.0, 0.0, 0.0));
+	const float Vb = dot(Gb, F - float3(1.0, 0.0, 0.0));
+	const float Vc = dot(Gc, F - float3(0.0, 1.0, 0.0));
+	const float Vd = dot(Gd, F - float3(1.0, 1.0, 0.0));
+	const float Ve = dot(Ge, F - float3(0.0, 0.0, 1.0));
+	const float Vf = dot(Gf, F - float3(1.0, 0.0, 1.0));
+	const float Vg = dot(Gg, F - float3(0.0, 1.0, 1.0));
+	const float Vh = dot(Gh, F - float3(1.0, 1.0, 1.0));
+
+	const float K4 = Va - Vb - Vc + Vd;
+	const float K5 = Va - Vc - Ve + Vg;
+	const float K6 = Va - Vb - Ve + Vf;
+	const float K7 = -Va + Vb + Vc - Vd + Ve - Vf - Vg + Vh;
+
+	const float Value = Va + U.x * (Vb - Va) + U.y * (Vc - Va) + U.z * (Ve - Va)
+		+ U.x * U.y * K4 + U.y * U.z * K5 + U.z * U.x * K6 + U.x * U.y * U.z * K7;
+
+	const float3 Gradient = Ga + U.x * (Gb - Ga) + U.y * (Gc - Ga) + U.z * (Ge - Ga)
+		+ U.x * U.y * (Ga - Gb - Gc + Gd) + U.y * U.z * (Ga - Gc - Ge + Gg) + U.z * U.x * (Ga - Gb - Ge + Gf)
+		+ U.x * U.y * U.z * (-Ga + Gb + Gc - Gd + Ge - Gf - Gg + Gh)
+		+ DU * (float3(Vb - Va, Vc - Va, Ve - Va)
+			+ U.yzx * float3(K4, K5, K6)
+			+ U.zxy * float3(K6, K4, K5)
+			+ U.yzx * U.zxy * K7);
+
+	return float4(Value, Gradient) / MatterGradientNoiseBound;
+}
+
+/** The bedding's axes as the rows of a matrix: two along the beds, then the bed normal stretched by BedAspect, so that
+ *  structure measured in these axes is BedAspect times finer across the beds. A missing normal is taken as z, a stone
+ *  laid on its natural bed. */
+float3x3 MatterBedAxes(float3 BedNormal, float BedAspect)
+{
+	const float Length = length(BedNormal);
+	const float3 Normal = Length > MatterTiny ? BedNormal / Length : float3(0.0, 0.0, 1.0);
+	const float3 Along = MatterPerpendicular(Normal);
+	const float3 Across = cross(Normal, Along);
+	return float3x3(Along, Across, Normal * max(BedAspect, 1.0));
+}
+
+/** Self-affine sum of gradient noise over the octaves from the bed down to the grain, in the bedding's axes. x is the
+ *  value, normalised to about [-1, 1]; yzw is its gradient per metre in the piece's axes. Each octave's lattice is
+ *  shifted by its own random offset, so no point is a lattice point of every octave. */
+float4 MatterStoneOctaves(float3 PieceMeters, float3x3 BedAxes, FMatterStone Stone, uint Field, uint Seed)
+{
+	const float BedMillimeters = max(Stone.BedMillimeters, MatterTiny);
+	const float Span = BedMillimeters / max(Stone.GrainMillimeters, MatterTiny);
+	const int Octaves = clamp(int(ceil(log2(max(Span, 1.0)))), 1, MatterStoneMaxOctaves);
+	const float Decay = exp2(-Stone.HurstExponent);
+	const float3 Bedded = mul(BedAxes, PieceMeters);
+
+	float Frequency = MatterMillimetersPerMeter / BedMillimeters;
+	float Amplitude = 1.0;
+	float Total = 0.0;
+	float4 Sum = float4(0.0, 0.0, 0.0, 0.0);
+	[loop]
+	for (int Octave = 0; Octave < Octaves; ++Octave)
+	{
+		const uint3 Key = MatterPcg3d(uint3(Seed, Field, uint(Octave)));
+		const float4 Noise = MatterGradientNoise(Bedded * Frequency + float3(Key) * MatterHashToUnit, Key);
+		Sum += Amplitude * float4(Noise.x, Frequency * mul(Noise.yzw, BedAxes));
+		Total += Amplitude;
+		Frequency *= 2.0;
+		Amplitude *= Decay;
+	}
+	return Sum / Total;
+}
+
+/** The face of a stone at PieceMeters: its tone and its roughness varied over the scales of its structure (about the
+ *  substance's albedo and the working's Roughness), and the gradient of the working's relief. Each is its own field of
+ *  the structure, drawn out along the bedding. Seed is the piece's seed (an integer carried in a float), so that two
+ *  pieces of one stone never repeat. */
+FMatterStoneFace MatterStoneFace(float3 PieceMeters, float3 BedNormal, float Seed, FMatterStone Stone, float Roughness)
+{
+	const float3x3 BedAxes = MatterBedAxes(BedNormal, Stone.BedAspect);
+	const uint PieceSeed = uint(max(Seed, 0.0));
+
+	const float4 Relief = MatterStoneOctaves(PieceMeters, BedAxes, Stone, 0u, PieceSeed);
+	const float4 Variation = MatterStoneOctaves(PieceMeters, BedAxes, Stone, 1u, PieceSeed);
+	const float4 Bands = MatterStoneOctaves(PieceMeters, BedAxes, Stone, 2u, PieceSeed);
+
+	FMatterStoneFace Face;
+	Face.Tone = exp(Stone.ToneSpread * Bands.x);
+	Face.Roughness = saturate(Roughness * exp(Stone.RoughnessSpread * Variation.x));
+	Face.ReliefSlope = (Stone.ReliefMillimeters / MatterMillimetersPerMeter) * Relief.yzw;
+	return Face;
+}
