@@ -1,0 +1,22 @@
+{
+  "stage": "oval",
+  "walls": [
+    {
+      "anchor": "oval.wall.willows",
+      "path": { "ellipse": [11.0, 7.5], "from_deg": -11.537, "direction": "decreasing" },
+      "note": "The Nymphéas oval's inner face, from the east door's north jamb, running north first (the draft hanging plan)."
+    }
+  ],
+  "works": [
+    {
+      "work": "monet-willows-two-willows", "source": "MuseeVision/Source/Systems/Art/MuseeArtMaking/Private/Tests/Data/collection.json",
+      "anchor": "oval.wall.willows", "along": 14.589, "height": 0.7, "size": [17.0, 2.0],
+      "support": "canvas", "frame": "none", "care": "oil-and-tempera"
+    },
+    {
+      "work": "monet-impression-sunrise", "source": "MuseeVision/Source/Systems/Art/MuseeArtMaking/Private/Tests/Data/artworks.json",
+      "anchor": "oval.wall.flat", "along": 1.0, "height": 1.31, "size": [0.63, 0.48],
+      "support": "canvas", "frame": "none", "care": "oil-and-tempera", "note": "A flat wall."
+    }
+  ]
+}

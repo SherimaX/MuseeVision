@@ -1,0 +1,28 @@
+{
+  "$sources": [
+    "Measures and colours: the as-built pond's sedge tufts (windows/Source/MuseeVision/Salon/SalonPond.cpp, Sedge): 34-46 arching blades 0.32-0.55 m long and 4-6.5 mm wide, 3-5 culms reaching 0.30-0.44 m above the water from feet 0.12 m under it, three brown spikes a culm.",
+    "The species: Carex elata All., tufted sedge: a tussock-forming sedge of pond and lake margins, leaves 3-6 mm wide, culms to 1 m, the top spike male and the lower ones female (C. Stace, New Flora of the British Isles, 4th ed., Cambridge 2019, Cyperaceae). The museum's tufts are young ones, at the low end of its height."
+  ],
+  "key": "carex-elata",
+  "name": "Carex elata",
+  "common": "Tufted sedge",
+  "form": "sedge",
+  "organs": [
+    { "organ": "leaf", "material": "living.leaf" },
+    { "organ": "stem", "material": "living.stem" },
+    { "organ": "seed", "material": "living.seed" }
+  ],
+  "reachMeters": [0.02, 0.03],
+  "leafLengthMeters": [0.32, 0.55],
+  "leafWidthMeters": [0.004, 0.0065],
+  "flowerHeightMeters": [0.42, 0.56],
+  "shootsPerPlant": [34, 46],
+  "flowersPerPlant": [3, 5],
+  "floweringShare": 1.0,
+  "leafColours": ["#5E7436"],
+  "leafAgeColours": ["#A89A60"],
+  "leafEdgeColour": "#7C8452",
+  "stemColours": ["#7A8A50", "#6A7A40"],
+  "seedColours": ["#6A5230", "#5A4A2C"],
+  "note": "Culm heights are from the soil of the shelf, 0.12 m under the water."
+}

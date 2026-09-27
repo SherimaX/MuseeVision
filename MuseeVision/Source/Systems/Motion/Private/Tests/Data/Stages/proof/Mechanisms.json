@@ -1,0 +1,28 @@
+{
+  "$sources": "A test stage: a 1 m block lifted 2.6 m in 5 s, after the Nymphéas pond lift (Docs/Stages contract).",
+  "stage": "proof",
+  "mechanisms": [
+    {
+      "key": "proof.lift", "joint": "prismatic", "body": "proof.basin", "axis": [0, 0, 1], "travel": 2.6,
+      "time": 5.0, "profile": "ease-in-out", "control": "proof.iris",
+      "open":  [ { "channel": "proof.rim", "to": 1.0, "time": 1.5 }, { "move": "open" } ],
+      "close": [ { "move": "closed" }, { "channel": "proof.rim", "to": 0.0, "time": 1.5 } ],
+      "guard": "body-in-travel", "clearance": 0.05, "publishes": "proof.height",
+      "note": "The lift publishes its height for the rails that follow it.",
+      "openUse": { "verb": { "key": "proof.lift.raise", "source": "Raise" }, "caption": { "key": "proof.lift.raise-caption", "source": "Raise the block" } }
+    },
+    {
+      "key": "proof.door", "joint": "revolute", "body": "proof.leaf", "axis": [0, 0, 1], "travel": 90,
+      "time": 3.0, "profile": "linear", "control": "proof.handle",
+      "open":  [ { "move": "open" } ],
+      "close": [ { "move": "closed" } ],
+      "guard": "body-in-travel-reverse", "clearance": 0.05
+    },
+    {
+      "key": "proof.rails", "joint": "prismatic", "body": "proof.rails", "axis": [0, 0, 1], "travel": 1.0,
+      "time": 5.0, "profile": "linear",
+      "follows": { "channel": "proof.height", "in": [0.0385, 0.4231], "out": [0, 1.0] },
+      "guard": "body-in-travel", "clearance": 0.05
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "title": "Test artworks",
+  "description": "A work written as data/artworks.json writes it, with its galleries.",
+  "galleries": [ { "id": "birth", "name": "The Birth of Impressionism", "period": "1860s–1874" } ],
+  "artworks": [
+    {
+      "id": "monet-impression-sunrise",
+      "artist": "Claude Monet",
+      "title": "Impression, Sunrise",
+      "originalTitle": "Impression, soleil levant",
+      "year": "1872",
+      "medium": "Oil on canvas",
+      "collection": "Musée Marmottan Monet",
+      "city": "Paris",
+      "gallery": "birth",
+      "core": true,
+      "notes": "Gave the movement its name at the 1874 exhibition."
+    }
+  ],
+  "sculptures": [
+    {
+      "id": "rude-marseillaise", "artist": "François Rude", "title": "La Marseillaise", "originalTitle": "", "year": "1833–1836",
+      "medium": "Stone high relief", "heightCm": null, "collection": "Arc de Triomphe", "city": "Paris", "gallery": "romantic-roots",
+      "core": false, "rights": "public-domain", "notes": "",
+      "scan": { "url": "https://example.org/scan", "license": "CC-BY", "permissive": true, "source": "A cast", "triangles": null }
+    }
+  ]
+}

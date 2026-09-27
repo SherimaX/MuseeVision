@@ -1,0 +1,28 @@
+{
+  "title": "Test collection",
+  "description": "Two works written as assets/collection.json writes them.",
+  "works": [
+    {
+      "id": "monet-willows-two-willows",
+      "artist": "Claude Monet",
+      "title": "The Two Willows",
+      "originalTitle": "Les Deux Saules",
+      "year": "1914–1926",
+      "medium": "Oil on canvas, four panels, 2 × 17 m",
+      "collection": "Musée de l'Orangerie",
+      "city": "Paris",
+      "notes": "The longest of the cycle."
+    },
+    {
+      "id": "monet-impression-sunrise",
+      "artist": "Claude Monet",
+      "title": "Impression, Sunrise",
+      "originalTitle": "Impression, soleil levant",
+      "year": "1872",
+      "medium": "Oil on canvas",
+      "collection": "Musée Marmottan Monet",
+      "city": "Paris",
+      "notes": ""
+    }
+  ]
+}

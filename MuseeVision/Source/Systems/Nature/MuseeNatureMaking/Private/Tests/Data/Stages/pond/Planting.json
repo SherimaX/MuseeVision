@@ -1,0 +1,18 @@
+{
+  "$sources": "A test pond after the Nymphéas oval's draft planting plan: an 3.9 x 2.0 m oval of water on a lifting basin, lilies in the middle, marginals on the east shelf.",
+  "stage": "pond",
+  "water": [
+    {
+      "key": "pond.water", "anchor": "pond.datum", "body": "pond.basin",
+      "outline": { "ellipse": [3.9, 2.0] }, "depth": 0.32, "freeboard": 0.023, "material": "water.still",
+      "note": "Brimming."
+    }
+  ],
+  "beds": [
+    { "bed": "pond.lilies", "species": "Nymphaea × marliacea 'Carnea'", "count": 5, "spacing": 1.1, "body": "pond.basin" },
+    { "bed": "pond.lilies", "species": "Nymphaea × marliacea 'Albida'", "count": 5, "spacing": 1.1, "body": "pond.basin" },
+    { "bed": "pond.shelf.east", "species": "Iris laevigata", "count": 2, "spacing": 0.6, "body": "pond.basin" },
+    { "bed": "pond.shelf.east", "species": "Carex elata", "count": 2, "spacing": 0.5, "body": "pond.basin" },
+    { "bed": "pond.shelf.east", "species": "Myosotis scorpioides", "count": 2, "spacing": 0.3, "body": "pond.basin", "note": "Two patches." }
+  ]
+}

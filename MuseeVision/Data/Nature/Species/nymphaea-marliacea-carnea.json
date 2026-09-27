@@ -1,0 +1,29 @@
+{
+  "$sources": [
+    "Measures and colours: the as-built museum's lily colonies (windows/Source/MuseeVision/Nature/MuseeWaterLilies.cpp, BuildWaterLilies and AddNymphaea), which the owner approved; the colony rule round(2 + 8 x reach) pads is theirs.",
+    "The cultivar: Joseph Bory Latour-Marliac's hardy hybrid 'Marliacea Carnea' (Temple-sur-Lot, 1887), pale flesh-pink. Monet ordered his first water lilies from Latour-Marliac in 1894.",
+    "Ranges for hardy Nymphaea: pads 15-30 cm across, flowers 10-15 cm, on or just above the water (P. D. Slocum, Waterlilies and Lotuses, Timber Press 2005, the hardy hybrids). The as-built pads (radius 0.10-0.22 m) lie at the large end, as an established colony's do. To confirm against Slocum's entry for the cultivar."
+  ],
+  "key": "nymphaea-marliacea-carnea",
+  "name": "Nymphaea × marliacea 'Carnea'",
+  "common": "Latour-Marliac's pale pink hardy water lily",
+  "form": "water-lily",
+  "organs": [
+    { "organ": "leaf", "material": "living.leaf-floating" },
+    { "organ": "sepal", "material": "living.leaf" },
+    { "organ": "flower", "material": "living.petal" },
+    { "organ": "eye", "material": "living.stamen" }
+  ],
+  "reachMeters": [0.28, 0.5],
+  "leafLengthMeters": [0.1, 0.22],
+  "flowerSizeMeters": [0.085, 0.115],
+  "floweringShare": 0.4,
+  "leafColours": ["#3F6B2E", "#4A7632", "#557F36", "#44702C", "#5C8238"],
+  "leafAgeColours": ["#6E5A2E", "#9A9440"],
+  "leafEdgeColour": "#6A3A2A",
+  "leafMiddleColour": "#6E9448",
+  "flowerColours": ["#FBEFF3", "#EE94B4"],
+  "eyeColours": ["#F2BE2C", "#F8DA64", "#E0A826"],
+  "stemColours": ["#5E7A34", "#DDE6C6"],
+  "note": "Pink: the petals flush from a near-white base to pink tips. Four plants in ten in flower in the museum's warm oval, as the as-built plan flowered four of ten."
+}

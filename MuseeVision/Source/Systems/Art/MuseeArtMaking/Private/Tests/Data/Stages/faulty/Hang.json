@@ -1,0 +1,15 @@
+{
+  "stage": "faulty",
+  "works": [
+    {
+      "work": "monet-impression-sunrise", "source": "MuseeVision/Source/Systems/Art/MuseeArtMaking/Private/Tests/Data/artworks.json",
+      "anchor": "faulty.nowhere", "along": 1.0, "height": 1.31, "size": [0.63, 0.48],
+      "support": "canvas", "frame": "frame.gilt.carved", "care": "oil-paintings"
+    },
+    {
+      "work": "monet-no-such-work", "source": "MuseeVision/Source/Systems/Art/MuseeArtMaking/Private/Tests/Data/artworks.json",
+      "anchor": "faulty.wall", "along": 1.0, "height": 1.31, "size": [0.63, 0.48],
+      "support": "canvas", "frame": "none", "care": "oil-and-tempera"
+    }
+  ]
+}
