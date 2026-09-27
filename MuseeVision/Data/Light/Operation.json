@@ -1,0 +1,12 @@
+{
+  "notes": "How the museum's luminaires are operated through the day and night (Decision D-006: the museum is always open, and its light is run as a modern gallery's controls run it). A luminaire's operation in a stage's lighting schedule is 'always', 'dusk' (switched on from sunset to sunrise by an astronomical time switch, which needs no number: Time says when the museum's sun is down) or 'presence' (switched on while its presence detector sees the visitor, and off when the detector has seen nobody for the hold time).",
+  "presence": {
+    "detectionHalfWidthMeters": 10.0,
+    "holdMinutes": 20.0,
+    "notes": "The detector is taken as the Steinel IR Quattro HD, a ceiling presence detector with a square detection field of 20 m by 20 m, centred under it; a luminaire with presence operation has one beside it. It switches off 20 minutes after it last saw anyone: the longest delay ASHRAE/IES Standard 90.1 allows an occupancy sensor.",
+    "sources": [
+      { "values": "detectionHalfWidthMeters", "source": "Steinel, IR Quattro HD product pages and data sheets: detection field max. 20 x 20 m (400 m2), presence area 64 m2", "url": "https://www.steinel.net/en/products/product-overview/presence-occupancy-detectors/ir-quattro-hd-com1-24-64460.html", "accessed": "2026-09-27" },
+      { "values": "holdMinutes", "source": "ANSI/ASHRAE/IES Standard 90.1-2019, section 9.4.1.1(b): occupancy sensors turn lighting off within 20 minutes of all occupants leaving the space" }
+    ]
+  }
+}
