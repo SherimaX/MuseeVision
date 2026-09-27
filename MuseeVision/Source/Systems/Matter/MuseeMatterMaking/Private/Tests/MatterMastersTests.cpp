@@ -15,76 +15,17 @@
 #include "MatterMasters.h"
 #include "MatterMomentCollection.h"
 #include "MatterNames.h"
+#include "Tests/MatterTestMasters.h"
 #include "UObject/Package.h"
 
 namespace Musee::Matter::MastersTests
 {
 	constexpr EAutomationTestFlags TestFlags = EAutomationTestFlags::EditorContext | EAutomationTestFlags::EngineFilter;
-
-	/** The museum Moment's collection, made in memory as the make step makes it. */
-	UMaterialParameterCollection* TransientMoment()
-	{
-		const FName Name = MakeUniqueObjectName(GetTransientPackage(), UMaterialParameterCollection::StaticClass(), TEXT("MPC_Moment_Test"));
-		UMaterialParameterCollection* Moment = NewObject<UMaterialParameterCollection>(GetTransientPackage(), Name, RF_Transient);
-		BuildMomentCollection(*Moment);
-		return Moment;
-	}
-
-	FString KindText(const FMasterKind& Kind)
-	{
-		return MasterName(Kind.Master, Kind.Layer);
-	}
-
-	/** Every master, built in memory over Moment; a master that does not build is reported on Test. */
-	TArray<FMadeMaster> TransientMasters(FAutomationTestBase& Test, UMaterialParameterCollection& Moment)
-	{
-		TArray<FMadeMaster> Made;
-		for (const FMasterKind& Kind : AllMasters())
-		{
-			TValueOrError<FMasterRecipe, FString> Recipe = MasterRecipe(Kind, Moment);
-			if (Recipe.HasError())
-			{
-				Test.AddError(Recipe.GetError());
-				continue;
-			}
-			TArray<FString> Problems;
-			const FName Name = MakeUniqueObjectName(GetTransientPackage(), UMaterial::StaticClass(), FName(*KindText(Kind)));
-			UMaterial* Material = BuildMaster(Recipe.GetValue(), GetTransientPackage(), Name, RF_Transient, Problems);
-			for (const FString& Problem : Problems)
-			{
-				Test.AddError(FString::Printf(TEXT("%s: %s"), *KindText(Kind), *Problem));
-			}
-			if (Material)
-			{
-				Made.Add(FMadeMaster{ Kind, Material });
-			}
-		}
-		return Made;
-	}
-
-	UMaterialInterface* FindIn(const TArray<FMadeMaster>& Masters, const FMasterKind& Kind)
-	{
-		const FMadeMaster* Made = Masters.FindByPredicate([&Kind](const FMadeMaster& Candidate) { return Candidate.Kind == Kind; });
-		return Made ? Made->Material : nullptr;
-	}
-
-	void Retire(const TArray<FMadeMaster>& Masters)
-	{
-		for (const FMadeMaster& Made : Masters)
-		{
-			Made.Material->MarkAsGarbage();
-		}
-	}
-
-	UMaterialInstanceConstant* TransientInstance()
-	{
-		const FName Name = MakeUniqueObjectName(GetTransientPackage(), UMaterialInstanceConstant::StaticClass(), TEXT("MI_Test"));
-		return NewObject<UMaterialInstanceConstant>(GetTransientPackage(), Name, RF_Transient);
-	}
 }
 
 using namespace Musee::Matter;
 using namespace Musee::Matter::MastersTests;
+using namespace Musee::Matter::TestMasters;
 
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FMatterMomentCollection, "Musee.Matter.MomentCollection", TestFlags)
 bool FMatterMomentCollection::RunTest(const FString& Parameters)
@@ -120,7 +61,8 @@ bool FMatterMastersValidate::RunTest(const FString& Parameters)
 			for (const FString& Include : Custom ? Custom->IncludeFilePaths : TArray<FString>())
 			{
 				bHistory |= Include == TEXT("/Project/Matter/History.ush") || Include == TEXT("/Project/Matter/Metal.ush")
-					|| Include == TEXT("/Project/Matter/Glass.ush") || Include == TEXT("/Project/Matter/Medium.ush") || Include == TEXT("/Project/Matter/Paint.ush");
+					|| Include == TEXT("/Project/Matter/Glass.ush") || Include == TEXT("/Project/Matter/Medium.ush") || Include == TEXT("/Project/Matter/Paint.ush")
+					|| Include == TEXT("/Project/Matter/Sheet.ush");
 			}
 		}
 		// A master has no emissive input by construction: a recipe's surfaces have no emissive pin.
@@ -183,11 +125,11 @@ bool FMatterDeterministic::RunTest(const FString& Parameters)
 	{
 		UMaterialInstanceConstant* A = TransientInstance();
 		UMaterialInstanceConstant* B = TransientInstance();
-		const FInstanceFilled FilledA = FillInstance(Spec, *A, [&First](const FMasterKind& Kind) { return FindIn(First, Kind); });
-		const FInstanceFilled FilledB = FillInstance(Spec, *B, [&First](const FMasterKind& Kind) { return FindIn(First, Kind); });
-		TestEqual(FString::Printf(TEXT("%s: the same parameters"), *Spec.ToString()), FilledA.Written, FilledB.Written);
+		const FInstanceComposed ComposedA = ComposeInstance(Spec, *A, [&First](const FMasterKind& Kind) { return FindIn(First, Kind); });
+		const FInstanceComposed ComposedB = ComposeInstance(Spec, *B, [&First](const FMasterKind& Kind) { return FindIn(First, Kind); });
+		TestEqual(FString::Printf(TEXT("%s: the same parameters"), *Spec.ToString()), ComposedA.Written, ComposedB.Written);
 		TestEqual(FString::Printf(TEXT("%s: the same ParameterStateId"), *Spec.ToString()), A->ParameterStateId, B->ParameterStateId);
-		TestEqual(FString::Printf(TEXT("%s: the same records read"), *Spec.ToString()), FilledA.Inputs.Hash(), FilledB.Inputs.Hash());
+		TestEqual(FString::Printf(TEXT("%s: the same records read"), *Spec.ToString()), ComposedA.Inputs.Hash(), ComposedB.Inputs.Hash());
 		A->MarkAsGarbage();
 		B->MarkAsGarbage();
 	}
@@ -196,8 +138,8 @@ bool FMatterDeterministic::RunTest(const FString& Parameters)
 	return true;
 }
 
-IMPLEMENT_SIMPLE_AUTOMATION_TEST(FMatterPaletteInstancesFill, "Musee.Matter.PaletteInstancesFill", TestFlags)
-bool FMatterPaletteInstancesFill::RunTest(const FString& Parameters)
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FMatterPaletteInstancesCompose, "Musee.Matter.PaletteInstancesCompose", TestFlags)
+bool FMatterPaletteInstancesCompose::RunTest(const FString& Parameters)
 {
 	UMaterialParameterCollection* Moment = TransientMoment();
 	const TArray<FMadeMaster> Masters = TransientMasters(*this, *Moment);
@@ -211,19 +153,19 @@ bool FMatterPaletteInstancesFill::RunTest(const FString& Parameters)
 	for (const FMatterSpec& Spec : Specs.GetValue())
 	{
 		UMaterialInstanceConstant* Instance = TransientInstance();
-		const FInstanceFilled Filled = FillInstance(Spec, *Instance, [&Masters](const FMasterKind& Kind) { return FindIn(Masters, Kind); });
-		for (const FString& Problem : Filled.Problems)
+		const FInstanceComposed Composed = ComposeInstance(Spec, *Instance, [&Masters](const FMasterKind& Kind) { return FindIn(Masters, Kind); });
+		for (const FString& Problem : Composed.Problems)
 		{
 			AddError(Problem);
 		}
-		TestTrue(FString::Printf(TEXT("%s is parented to its master"), *Spec.ToString()), Instance->Parent == FindIn(Masters, Filled.Master));
-		TestFalse(FString::Printf(TEXT("%s read its records"), *Spec.ToString()), Filled.Inputs.IsEmpty());
+		TestTrue(FString::Printf(TEXT("%s is parented to its master"), *Spec.ToString()), Instance->Parent == FindIn(Masters, Composed.Master));
+		TestFalse(FString::Printf(TEXT("%s read its records"), *Spec.ToString()), Composed.Inputs.IsEmpty());
 		Instance->MarkAsGarbage();
 	}
 
 	// A spec the palette cannot shade is a problem, never a default.
 	UMaterialInstanceConstant* Unknown = TransientInstance();
-	const FInstanceFilled Refused = FillInstance(FMatterSpec{ FMuseeKey(TEXT("stone.travertine-romano")), FMuseeKey(TEXT("mirror")), FMuseeKey(TEXT("clean")) },
+	const FInstanceComposed Refused = ComposeInstance(FMatterSpec{ FMuseeKey(TEXT("stone.travertine-romano")), FMuseeKey(TEXT("mirror")), FMuseeKey(TEXT("clean")) },
 		*Unknown, [&Masters](const FMasterKind& Kind) { return FindIn(Masters, Kind); });
 	TestFalse(TEXT("A working with no record is refused"), Refused.Succeeded());
 	TestNull(TEXT("A refused instance has no parent"), Unknown->Parent.Get());

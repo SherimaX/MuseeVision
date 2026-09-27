@@ -17,6 +17,10 @@ TArray<FMasterKind> AllMasters()
 		{ FName(Masters::Glass), NAME_None },
 		{ FName(Masters::Water), NAME_None },
 		{ FName(Masters::Paint), NAME_None },
+		{ FName(Masters::Wood), NAME_None },
+		{ FName(Masters::Cloth), NAME_None },
+		{ FName(Masters::Sheet), NAME_None },
+		{ FName(Masters::Living), NAME_None },
 	};
 }
 
@@ -59,6 +63,22 @@ TValueOrError<FMasterRecipe, FString> MasterRecipe(const FMasterKind& Kind, UMat
 	if (Master == FName(Masters::Paint))
 	{
 		return MakeValue(PaintRecipe(Moment));
+	}
+	if (Master == FName(Masters::Wood))
+	{
+		return MakeValue(WoodRecipe(Moment));
+	}
+	if (Master == FName(Masters::Cloth))
+	{
+		return MakeValue(ClothRecipe(Moment));
+	}
+	if (Master == FName(Masters::Sheet))
+	{
+		return MakeValue(SheetRecipe(Moment));
+	}
+	if (Master == FName(Masters::Living))
+	{
+		return MakeValue(LivingRecipe(Moment));
 	}
 	return MakeError(FString::Printf(TEXT("There is no master '%s'."), *Master.ToString()));
 }

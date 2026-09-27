@@ -6,8 +6,9 @@
 // reflectance of the white the painting's palette holds (the paint record's), and the varnish's index and roughness
 // give the layer's gloss.
 //
-// A canvas piece is cast in its own frame with x along the canvas's width and z up its height, as Art's wall anchors
-// are (x along the wall, z up), so the image spans the piece's bounds in x and z.
+// Art builds a canvas's painted face with its UV0 in metres from the image's top-left corner as seen from the room (u
+// to the right, v down), and gives the work's instance its size in metres, so the image spans the face at its true
+// size whatever the canvas's shape: flat, or curved to its wall as the Orangerie's are.
 
 #pragma once
 
@@ -15,12 +16,11 @@
 #include "/Project/Matter/Optics.ush"
 #include "/Project/Matter/History.ush"
 
-/** Where a point of the canvas lies on the image: (0, 0) at the top left, (1, 1) at the bottom right. Position, the
- *  bounds' minimum and their extent are in the piece's own axes, in any one unit. */
-float2 MatterCanvasCoordinates(float3 PiecePosition, float3 BoundsMin, float3 BoundsExtent)
+/** Where a point of the canvas lies on the image: (0, 0) at the top left, (1, 1) at the bottom right. FaceMeters is the
+ *  face's UV0, in metres from the image's top-left corner; ImageMeters is the work's width and height in metres. */
+float2 MatterCanvasCoordinates(float2 FaceMeters, float2 ImageMeters)
 {
-	const float3 Across = (PiecePosition - BoundsMin) / max(BoundsExtent, MatterTiny);
-	return float2(saturate(Across.x), saturate(1.0 - Across.z));
+	return saturate(FaceMeters / max(ImageMeters, MatterTiny));
 }
 
 /** The paint layer's diffuse albedo where the image, decoded to linear, has the colour ImageLinear: the photograph's

@@ -7,10 +7,12 @@
 #include "Materials/MaterialExpressionCustom.h"
 #include "Materials/MaterialExpressionLocalPosition.h"
 #include "Materials/MaterialExpressionScalarParameter.h"
+#include "Materials/MaterialExpressionTextureCoordinate.h"
 #include "Materials/MaterialExpressionSubstrate.h"
 #include "Materials/MaterialExpressionTextureObjectParameter.h"
 #include "Materials/MaterialExpressionTransform.h"
 #include "Materials/MaterialExpressionVectorParameter.h"
+#include "Materials/MaterialExpressionVertexColor.h"
 #include "Materials/MaterialExpressionVertexNormalWS.h"
 #include "Materials/MaterialParameterCollection.h"
 #include "UObject/UnrealType.h"
@@ -132,6 +134,17 @@ namespace
 		const FName LocalPosition(MasterInput::LocalPosition);
 		const FName VertexNormalWorld(MasterInput::VertexNormalWorld);
 		const FName LocalBounds(MasterInput::LocalBounds);
+		const FName TexCoord0(MasterInput::TexCoord0);
+		const FName VertexColor(MasterInput::VertexColor);
+		if (Read.Contains(TexCoord0))
+		{
+			// UV channel 0, unscaled: the kernel writes it in metres.
+			Graph.Nodes.Add(TexCoord0, AddExpression<UMaterialExpressionTextureCoordinate>(Graph, TEXT("Input"), TexCoord0));
+		}
+		if (Read.Contains(VertexColor))
+		{
+			Graph.Nodes.Add(VertexColor, AddExpression<UMaterialExpressionVertexColor>(Graph, TEXT("Input"), VertexColor));
+		}
 		if (Read.Contains(LocalPosition))
 		{
 			Graph.Nodes.Add(LocalPosition, AddExpression<UMaterialExpressionLocalPosition>(Graph, TEXT("Input"), LocalPosition));
@@ -296,7 +309,8 @@ namespace
 		const TPair<FExpressionInput*, const FMasterSource*> Wires[] = {
 			{ &Slab->DiffuseAlbedo, &Pins.DiffuseAlbedo }, { &Slab->F0, &Pins.F0 }, { &Slab->F90, &Pins.F90 },
 			{ &Slab->Roughness, &Pins.Roughness }, { &Slab->Anisotropy, &Pins.Anisotropy }, { &Slab->Normal, &Pins.Normal },
-			{ &Slab->Tangent, &Pins.Tangent }, { &Slab->SSSMFP, &Pins.SSSMFP },
+			{ &Slab->Tangent, &Pins.Tangent }, { &Slab->SSSMFP, &Pins.SSSMFP }, { &Slab->FuzzAmount, &Pins.FuzzAmount },
+			{ &Slab->FuzzColor, &Pins.FuzzColor }, { &Slab->FuzzRoughness, &Pins.FuzzRoughness },
 		};
 		for (const TPair<FExpressionInput*, const FMasterSource*>& Wire : Wires)
 		{
@@ -371,6 +385,7 @@ namespace
 	{
 		Material.BlendMode = Settings.BlendMode;
 		Material.SetUsageByFlag(MATUSAGE_Nanite, Settings.bUsedWithNanite);
+		Material.TwoSided = Settings.bTwoSided;
 		if (Settings.bSurfaceTranslucency)
 		{
 			Material.TranslucencyLightingMode = TLM_SurfacePerPixelLighting;

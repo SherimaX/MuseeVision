@@ -27,7 +27,8 @@ namespace Musee::Matter
 
 	MUSEEMATTER_API TValueOrError<FMatterWorking, FString> ReadWorking(const FMuseeKey& Key);
 
-	/** The history regime for a master (or a layer working) and a regime word: stone and worn read stone.worn. */
+	/** The history regime for a master (or a layer working) and a regime: stone and worn read stone.worn, metal and
+	 *  aged.patina read metal.aged.patina. */
 	MUSEEMATTER_API TValueOrError<FMatterHistory, FString> ReadHistory(const FMuseeKey& Master, const FMuseeKey& Regime);
 
 	/** A stage's finish schedule, from the folder its stage context names (relative to Data, or absolute). */

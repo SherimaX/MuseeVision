@@ -135,6 +135,14 @@ float3x3 MatterBedAxes(float3 BedNormal, float BedAspect)
 	return float3x3(Along, Across, Normal * max(BedAspect, 1.0));
 }
 
+/** Axes, as the rows of a matrix, in which structure is drawn out Aspect times along a face's first axis: a board's
+ *  grain, a cloth's warp, laid along the face's UV u. Structure measured in them is Aspect times coarser along that
+ *  axis than across it. */
+float3x3 MatterAlongAxes(float Aspect)
+{
+	return float3x3(float3(1.0 / max(Aspect, 1.0), 0.0, 0.0), float3(0.0, 1.0, 0.0), float3(0.0, 0.0, 1.0));
+}
+
 /** Self-affine sum of gradient noise over the octaves from the bed down to the grain, in the bedding's axes. x is the
  *  value, normalised to about [-1, 1]; yzw is its gradient per metre in the piece's axes. Each octave's lattice is
  *  shifted by its own random offset, so no point is a lattice point of every octave. */

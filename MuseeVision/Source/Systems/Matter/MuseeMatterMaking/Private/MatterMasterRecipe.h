@@ -27,7 +27,7 @@ namespace Musee::Matter
 {
 	/** The version of the graph builder's output. It is part of every master's identity: raise it whenever the builder
 	 *  would make a different material from the same recipe. */
-	inline constexpr int32 MasterBuilderVersion = 2;
+	inline constexpr int32 MasterBuilderVersion = 3;
 
 	/** The engine's surface inputs a recipe may name as a source, by these node names. */
 	namespace MasterInput
@@ -38,6 +38,11 @@ namespace Musee::Matter
 		inline constexpr const TCHAR* VertexNormalWorld = TEXT("VertexNormalWorld");
 		/** The mesh's bounds in its own axes, in engine units; its outputs are the engine's (Min, Max, Extents). */
 		inline constexpr const TCHAR* LocalBounds = TEXT("LocalBounds");
+		/** The face's UV0, in metres (the kernel's mesh contract): a board's grain and a cloth's warp run along u, and a
+		 *  canvas's face runs from its image's top-left corner. Two components. */
+		inline constexpr const TCHAR* TexCoord0 = TEXT("TexCoord0");
+		/** The vertex colour's red, green and blue, linear: the species' own colour a living tissue carries (Nature). */
+		inline constexpr const TCHAR* VertexColor = TEXT("VertexColor");
 	}
 
 	/** Where a pin takes its value: a node of the recipe (a parameter, a Moment read, a call, a transform, a utility or
@@ -128,7 +133,12 @@ namespace Musee::Matter
 		FMasterSource Normal;
 		FMasterSource Tangent;
 		FMasterSource SSSMFP;
-		/** How light travels inside the slab: none for an opaque body, diffusion for marble, a simple volume for glass. */
+		/** The sheen of fibre ends standing from a cloth: Substrate's fuzz amount, colour and roughness. */
+		FMasterSource FuzzAmount;
+		FMasterSource FuzzColor;
+		FMasterSource FuzzRoughness;
+		/** How light travels inside the slab: none for an opaque body, diffusion for marble, a simple volume for glass,
+		 *  the two-sided wrap for a thin sheet or a living tissue lit from behind. */
 		EMaterialSubSurfaceType SubSurface = MSS_None;
 	};
 
@@ -162,6 +172,8 @@ namespace Musee::Matter
 		/** Translucent glass is lit per pixel at its surface and does not bend the view: a pane's two faces are
 		 *  parallel, so what is seen through it is displaced, not refracted. */
 		bool bSurfaceTranslucency = false;
+		/** A thin sheet or a leaf is seen and lit from both faces: it is drawn without back-face culling. */
+		bool bTwoSided = false;
 	};
 
 	/** One master material, completely described. */

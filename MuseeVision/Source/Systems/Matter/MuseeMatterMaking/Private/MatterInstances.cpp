@@ -5,6 +5,7 @@
 #include "MatterColour.h"
 #include "MatterMasterGraph.h"
 #include "MatterMasterParameters.h"
+#include "MatterNames.h"
 #include "MatterRecords.h"
 #include "Materials/MaterialInstanceConstant.h"
 
@@ -129,24 +130,96 @@ namespace
 		W.Scalar(TextureDepthMillimeters, Wk.TextureDepth, Millimeters, FieldOf(TEXT("Workings"), Wk.Key, TEXT("textureDepth")));
 	}
 
-	void WriteBody(FWriter& W, const FMatterSubstance& S, const FMatterWorking& Wk, bool bBedded)
+	/** A body's dielectric face: its colour and its interface. */
+	void WriteDielectric(FWriter& W, const FMatterSubstance& S)
+	{
+		W.Colour(DiffuseAlbedo, S.Dielectric.DiffuseAlbedo, Fraction, FieldOf(TEXT("Substances"), S.Key, TEXT("dielectric.diffuseAlbedo")));
+		W.Scalar(RefractiveIndex, S.Dielectric.RefractiveIndex, Fraction, FieldOf(TEXT("Substances"), S.Key, TEXT("dielectric.refractiveIndex")));
+	}
+
+	/** The structure a face shows, from its grain to its bed (a stone's bedding, a board's ring, a cloth's slubs). */
+	void WriteStructure(FWriter& W, const FMatterSubstance& S, bool bDrawnOut)
 	{
 		const auto Field = [&S](const TCHAR* Name) { return FieldOf(TEXT("Substances"), S.Key, Name); };
-		W.Colour(DiffuseAlbedo, S.Dielectric.DiffuseAlbedo, Fraction, Field(TEXT("dielectric.diffuseAlbedo")));
-		W.Scalar(RefractiveIndex, S.Dielectric.RefractiveIndex, Fraction, Field(TEXT("dielectric.refractiveIndex")));
-		WritePores(W, S);
 		W.Scalar(GrainMillimeters, S.Structure.Grain, Millimeters, Field(TEXT("structure.grain")));
 		W.Scalar(BedMillimeters, S.Structure.Bed, Millimeters, Field(TEXT("structure.bed")));
-		if (bBedded)
+		if (bDrawnOut)
 		{
 			W.Scalar(BedAspect, S.Structure.BedAspect, Fraction, Field(TEXT("structure.bedAspect")));
 		}
 		W.Scalar(HurstExponent, S.Structure.Hurst, Fraction, Field(TEXT("structure.hurst")));
 		W.Scalar(ToneSpread, S.Structure.ToneSpread, Fraction, Field(TEXT("structure.toneSpread")));
 		W.Scalar(RoughnessSpread, S.Structure.RoughnessSpread, Fraction, Field(TEXT("structure.roughnessSpread")));
-		WriteFaceRoughness(W, Wk);
+	}
+
+	/** The worked face's haze and relief. */
+	void WriteHazeAndRelief(FWriter& W, const FMatterWorking& Wk)
+	{
 		W.Scalar(Haziness, Wk.Haziness, Fraction, FieldOf(TEXT("Workings"), Wk.Key, TEXT("haziness")));
 		W.Scalar(ReliefMillimeters, Wk.Relief, Millimeters, FieldOf(TEXT("Workings"), Wk.Key, TEXT("relief")));
+	}
+
+	void WriteBody(FWriter& W, const FMatterSubstance& S, const FMatterWorking& Wk, bool bBedded)
+	{
+		WriteDielectric(W, S);
+		WritePores(W, S);
+		WriteStructure(W, S, bBedded);
+		WriteFaceRoughness(W, Wk);
+		WriteHazeAndRelief(W, Wk);
+	}
+
+	/** A board: its fibre and figure, the finish soaked into it and what a treatment left in its colour. */
+	void WriteWood(FWriter& W, const FMatterSubstance& S, const FMatterWorking& Wk)
+	{
+		const auto Field = [&S](const TCHAR* Name) { return FieldOf(TEXT("Substances"), S.Key, Name); };
+		const auto Worked = [&Wk](const TCHAR* Name) { return FieldOf(TEXT("Workings"), Wk.Key, Name); };
+		WriteDielectric(W, S);
+		WritePores(W, S);
+		WriteStructure(W, S, true);
+		W.Scalar(LatewoodFraction, S.Wood.LatewoodFraction, Fraction, Field(TEXT("wood.latewoodFraction")));
+		W.Scalar(LatewoodTone, S.Wood.LatewoodTone, Fraction, Field(TEXT("wood.latewoodTone")));
+		W.Scalar(RayFleck, S.Wood.RayFleck, Fraction, Field(TEXT("wood.rayFleck")));
+		W.Scalar(RayTone, S.Wood.RayTone, Fraction, Field(TEXT("wood.rayTone")));
+		W.Scalar(RayLengthMillimeters, S.Wood.RayLength, Millimeters, Field(TEXT("wood.rayLength")));
+		W.Scalar(RayWidthMillimeters, S.Wood.RayWidth, Millimeters, Field(TEXT("wood.rayWidth")));
+		WriteFaceRoughness(W, Wk);
+		WriteHazeAndRelief(W, Wk);
+		W.Scalar(FinishRefractiveIndex, Wk.Film.RefractiveIndex, Fraction, Worked(TEXT("film.refractiveIndex")));
+		W.Scalar(FinishCover, Wk.Film.Cover, Fraction, Worked(TEXT("film.cover")));
+		W.Colour(StainTransmittance, Wk.Stain, Fraction, Worked(TEXT("stain")));
+	}
+
+	/** A cloth: its dyed fibre, its yarn and the fibres' sheen; the working lays it and gives its texture. */
+	void WriteCloth(FWriter& W, const FMatterSubstance& S, const FMatterWorking& Wk)
+	{
+		const auto Field = [&S](const TCHAR* Name) { return FieldOf(TEXT("Substances"), S.Key, Name); };
+		WriteDielectric(W, S);
+		WritePores(W, S);
+		WriteStructure(W, S, true);
+		W.Scalar(Roughness, S.Fibre.Roughness, Fraction, Field(TEXT("fibre.roughness")));
+		W.Scalar(Sheen, S.Fibre.Sheen, Fraction, Field(TEXT("fibre.sheen")));
+		W.Scalar(SheenRoughness, S.Fibre.SheenRoughness, Fraction, Field(TEXT("fibre.sheenRoughness")));
+		W.Scalar(TextureDepthMillimeters, Wk.TextureDepth, Millimeters, FieldOf(TEXT("Workings"), Wk.Key, TEXT("textureDepth")));
+		WriteHazeAndRelief(W, Wk);
+	}
+
+	/** A thin sheet: what it reflects and what it passes; the working gives its face. */
+	void WriteSheet(FWriter& W, const FMatterSubstance& S, const FMatterWorking& Wk)
+	{
+		WriteDielectric(W, S);
+		WritePores(W, S);
+		W.Colour(SheetTransmittance, S.Sheet.Transmittance, Fraction, FieldOf(TEXT("Substances"), S.Key, TEXT("sheet.transmittance")));
+		WriteFaceRoughness(W, Wk);
+	}
+
+	/** A living tissue: its cuticle and what it passes; its colour is the species', on its vertices. */
+	void WriteLiving(FWriter& W, const FMatterSubstance& S, const FMatterWorking& Wk)
+	{
+		const auto Field = [&S](const TCHAR* Name) { return FieldOf(TEXT("Substances"), S.Key, Name); };
+		W.Scalar(RefractiveIndex, S.Dielectric.RefractiveIndex, Fraction, Field(TEXT("dielectric.refractiveIndex")));
+		W.Scalar(Roughness, S.Tissue.Roughness, Fraction, Field(TEXT("tissue.roughness")));
+		W.Scalar(TissueTransmittanceRatio, S.Tissue.TransmittanceRatio, Fraction, Field(TEXT("tissue.transmittanceRatio")));
+		W.Scalar(TextureDepthMillimeters, Wk.TextureDepth, Millimeters, FieldOf(TEXT("Workings"), Wk.Key, TEXT("textureDepth")));
 	}
 
 	void WriteMedium(FWriter& W, const FMatterSubstance& S, bool bScattering)
@@ -236,6 +309,22 @@ namespace
 		{
 			WriteMetal(W, R.Substance, Face, R.History);
 		}
+		else if (Master == FName(Masters::Wood))
+		{
+			WriteWood(W, R.Substance, Face);
+		}
+		else if (Master == FName(Masters::Cloth))
+		{
+			WriteCloth(W, R.Substance, Face);
+		}
+		else if (Master == FName(Masters::Sheet))
+		{
+			WriteSheet(W, R.Substance, Face);
+		}
+		else if (Master == FName(Masters::Living))
+		{
+			WriteLiving(W, R.Substance, Face);
+		}
 		else
 		{
 			WriteMedia(W, R);
@@ -262,17 +351,31 @@ namespace
 		{
 			Declared.Add(Info.Name);
 		}
-		// The piece's own table index comes from its primitive, never from an instance.
+		// The piece's own table index comes from its primitive, and a work's own size from the work (a paint layer's
+		// instance, MatterPaintLayer.h): never from a palette finish's records.
 		Declared.Remove(FName(PieceTableIndex));
+		Declared.Remove(FName(ImageWidthMeters));
+		Declared.Remove(FName(ImageHeightMeters));
 		return Declared;
 	}
 
 	TValueOrError<FMatterHistory, FString> ReadRegime(const FMatterSubstance& Substance, const FMatterWorking& Working, const FMuseeKey& Regime)
 	{
-		// A layer's history is the layer's own (gilt wears through); otherwise the master's.
-		const FMuseeKey Scope = Working.Kind == LayerKind ? Working.Key : Substance.Master;
+		// A layer's history is the layer's own (gilt wears through, whichever gilding laid it); otherwise the master's.
+		const FName Layer = LayerOf(Working);
+		const FMuseeKey Scope = Layer.IsNone() ? Substance.Master : FMuseeKey::Parse(Layer.ToString()).Get(FMuseeKey());
 		return ReadHistory(Scope, Regime);
 	}
+}
+
+FName LayerOf(const FMatterWorking& Working)
+{
+	if (Working.Kind != LayerKind)
+	{
+		return NAME_None;
+	}
+	const TArray<FString> Segments = Working.Key.Segments();
+	return Segments.IsEmpty() ? NAME_None : FName(*Segments[0]);
 }
 
 FString FMatterSpec::ToString() const
@@ -320,7 +423,7 @@ TValueOrError<FSpecRecords, FString> ReadSpec(const FMatterSpec& Spec)
 			return MakeError(Host.StealError());
 		}
 		Records.Host = Host.StealValue();
-		Records.Master.Layer = Records.Working.Key.ToName();
+		Records.Master.Layer = LayerOf(Records.Working);
 	}
 	if (!AllMasters().Contains(Records.Master))
 	{
@@ -335,48 +438,53 @@ TValueOrError<FSpecRecords, FString> ReadSpec(const FMatterSpec& Spec)
 	return MakeValue(MoveTemp(Records));
 }
 
-FInstanceFilled FillInstance(const FMatterSpec& Spec, UMaterialInstanceConstant& Instance, TFunctionRef<UMaterialInterface*(const FMasterKind&)> FindMaster)
+FInstanceComposed ComposeInstance(const FMatterSpec& Spec, UMaterialInstanceConstant& Instance, TFunctionRef<UMaterialInterface*(const FMasterKind&)> FindMaster)
 {
-	FInstanceFilled Filled;
-	TValueOrError<FSpecRecords, FString> Records = [&Spec, &Filled]()
+	FInstanceComposed Composed;
+	TValueOrError<FSpecRecords, FString> Records = [&Spec, &Composed]()
 	{
-		const FMuseeDependencySet::FScope Reading(Filled.Inputs);
+		const FMuseeDependencySet::FScope Reading(Composed.Inputs);
 		return ReadSpec(Spec);
 	}();
 	if (Records.HasError())
 	{
-		Filled.Problems.Add(FString::Printf(TEXT("%s: %s"), *Spec.ToString(), *Records.GetError()));
-		return Filled;
+		Composed.Problems.Add(FString::Printf(TEXT("%s: %s"), *Spec.ToString(), *Records.GetError()));
+		return Composed;
 	}
 	const FSpecRecords& R = Records.GetValue();
-	Filled.Master = R.Master;
+	Composed.Master = R.Master;
 	UMaterialInterface* Master = FindMaster(R.Master);
 	if (!Master)
 	{
-		Filled.Problems.Add(FString::Printf(TEXT("%s: the %s master has not been made."), *Spec.ToString(), *R.Master.Master.ToString()));
-		return Filled;
+		Composed.Problems.Add(FString::Printf(TEXT("%s: the %s master has not been made."), *Spec.ToString(), *MasterName(R.Master.Master, R.Master.Layer)));
+		return Composed;
 	}
 	Instance.SetParentEditorOnly(Master);
-	FWriter Writer{ Instance, DeclaredParameters(*Master), {}, Filled.Problems, {} };
+	FWriter Writer{ Instance, DeclaredParameters(*Master), {}, Composed.Problems, {} };
 	WriteAll(Writer, R);
 	for (const FName Declared : Writer.Declared)
 	{
 		if (!Writer.Written.Contains(Declared))
 		{
-			Filled.Problems.Add(FString::Printf(TEXT("%s: no record writes the master's parameter %s."), *Spec.ToString(), *Declared.ToString()));
+			Composed.Problems.Add(FString::Printf(TEXT("%s: no record writes the master's parameter %s."), *Spec.ToString(), *Declared.ToString()));
 		}
 	}
-	Filled.Written = FString::Join(Writer.Values, TEXT(";"));
-	Instance.PostEditChange();
-	Instance.ParameterStateId = InstanceGuid(Filled, Spec, TEXT("Instance.ParameterStateId"));
-	StampLightingGuid(Instance, InstanceGuid(Filled, Spec, TEXT("Instance.LightingGuid")));
-	return Filled;
+	Composed.Written = FString::Join(Writer.Values, TEXT(";"));
+	StampInstance(Composed, Spec, Instance);
+	return Composed;
 }
 
-FGuid InstanceGuid(const FInstanceFilled& Filled, const FMatterSpec& Spec, FStringView Role)
+void StampInstance(const FInstanceComposed& Composed, const FMatterSpec& Spec, UMaterialInstanceConstant& Instance)
 {
-	const FString Text = FString::Printf(TEXT("musee.matter.instance filler=%d spec=%s written=%s role=%.*s"),
-		InstanceFillerVersion, *Spec.ToString(), *Filled.Written, Role.Len(), Role.GetData());
+	Instance.PostEditChange();
+	Instance.ParameterStateId = InstanceGuid(Composed, Spec, TEXT("Instance.ParameterStateId"));
+	StampLightingGuid(Instance, InstanceGuid(Composed, Spec, TEXT("Instance.LightingGuid")));
+}
+
+FGuid InstanceGuid(const FInstanceComposed& Composed, const FMatterSpec& Spec, FStringView Role)
+{
+	const FString Text = FString::Printf(TEXT("musee.matter.instance composer=%d spec=%s written=%s role=%.*s"),
+		InstanceComposerVersion, *Spec.ToString(), *Composed.Written, Role.Len(), Role.GetData());
 	const FTCHARToUTF8 Utf8(*Text, Text.Len());
 	return FGuid::NewGuidFromHash(FBlake3::HashBuffer(Utf8.Get(), Utf8.Length()));
 }

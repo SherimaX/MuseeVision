@@ -1,0 +1,31 @@
+// Living: the tissues of plants, a leaf, a petal, a stamen or a stem.
+//
+// A leaf is a few layers of cells under a waxy cuticle. Light that crosses the cuticle is scattered among the cells'
+// walls and the air between them, and absorbed by their pigments, chlorophyll above all, until it leaves by either
+// face: a leaf reflects and transmits nearly the same spectrum, its transmittance a little under its reflectance in the
+// visible (Woolley 1971, "Reflectance and transmittance of light by leaves", Plant Physiology 47:656-662; Jacquemoud &
+// Baret 1990, "PROSPECT: a model of leaf optical properties spectra", Remote Sensing of Environment 34:75-91). A petal
+// is thinner and holds less pigment, so it passes more of what it reflects. That is why a leaf lit from behind glows
+// its own green, and a lily's petal glows white.
+//
+// The colour is the species' own: Nature draws each organ's colours from the species record into the tissue's vertex
+// colour. The tissue's record gives what the colour cannot: the ratio of what it transmits to what it reflects, and the
+// cuticle's index and roughness. Light from behind passes through Substrate's two-sided wrap (Sheet.ush).
+
+#pragma once
+
+#include "/Project/Matter/Frame.ush"
+#include "/Project/Matter/Optics.ush"
+#include "/Project/Matter/Sheet.ush"
+
+/** What a tissue whose reflectance is Albedo transmits, from the ratio its record gives. */
+float3 MatterTissueTransmittance(float3 Albedo, float TransmittanceRatio)
+{
+	return saturate(Albedo * TransmittanceRatio);
+}
+
+/** A tissue's face before its history: its species' colour under its cuticle. */
+FMatterSurface MatterTissueSurface(float3 Albedo, float CuticleRefractiveIndex, float CuticleRoughness)
+{
+	return MatterSheetSurface(saturate(Albedo), CuticleRefractiveIndex, CuticleRoughness);
+}
