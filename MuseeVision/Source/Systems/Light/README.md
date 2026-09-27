@@ -19,13 +19,19 @@ aim, level where it can (along the stage's x axis when aimed straight up or down
 entry's `length` (metres). An areal type (a luminous ceiling, edge-lit panes, an image panel) is laid over the face its
 entry gives: an `extent` [width, height] in metres, or a `zone` of a round field, `{ "r": [inner, outer], "bearing":
 [from, to] }` about the stage's vertical axis, bearings clockwise from north; a zone's face is the rectangle of its own
-area, as wide as its middle arc (or its outer chord), its height running out from the axis. A luminaire set in a piece
+area, as wide as its middle arc (or its outer chord), its height running out from the axis; or a `sphere`,
+`{ "radius": R, "opening": r }`, the inside of the sphere about its seat less the cap cut by a round opening at its foot
+(the Sphere's image): a face that encloses its luminaire, aimed at its seat (the one luminaire aimed at the point it sits
+on), 2 pi R (R + sqrt(R^2 - r^2)) as wide as its equator. No engine light stands for an enclosing face, which shines in
+from every side: it drives none, so it gives no light (its emitted flux is zero) until Light makes the emissive surface
+that shows its picture and the celestial image source that feeds it; until then the dresser reports it. A luminaire set in a piece
 names it as `host`, and the surface it lights as `surface`; they are kept as the tags `musee.host:<key>` and
 `musee.lights:<key>`. Targets may hold only `when` a mechanism stands at a stop, and a target's `lux` and a design's
 `ratio` may leave one end open (`[50, null]`). Findings: an unknown type, mount, body or operation, a mount and a point
-together or neither, a point without its aim, a line without length, an areal type without its face (or with both
-faces, or outside its zone), a face on a type that isn't areal, an opening whose weather isn't one of Time's places,
-and a type that stands unlit (a wallwasher whose light profile Studio hasn't made among them).
+together or neither, a point without its aim, a line without length, an areal type without its face (or with more than one
+face, outside its zone, or a sphere aimed off its centre), a face on a type that isn't areal, an opening whose weather isn't one of Time's places,
+a type that stands unlit (a wallwasher whose light profile Studio hasn't made among them), and an enclosing face, which
+gives no light yet.
 
 A wallwasher (`track-wallwasher`) is lit by its maker's photometric file, kept byte for byte in `Data/Light/Photometry`:
 Light reads the LM-63 file for the flux its candela table integrates to, and lights the luminaire as a point source

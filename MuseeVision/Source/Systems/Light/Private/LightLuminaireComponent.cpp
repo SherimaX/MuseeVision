@@ -187,13 +187,14 @@ ULightLuminaireComponent::ULightLuminaireComponent()
 }
 
 void ULightLuminaireComponent::Configure(const FMuseeKey& InType, ELightOperation InOperation, const FMuseeKey& InFollows, Musee::Meters InLength,
-	const FVector2D& InFaceMeters)
+	const FVector2D& InFaceMeters, bool bInFaceEncloses)
 {
 	LuminaireType = InType;
 	LuminaireOperation = InOperation;
 	FollowedChannel = InFollows;
 	LengthMeters = InLength.Get();
 	FaceMeters = InFaceMeters;
+	bFaceEncloses = bInFaceEncloses;
 	const FLightLuminaire* Luminaire = Musee::Light::FindLuminaire(LuminaireType);
 	Profile = Luminaire && Luminaire->Emitter == FLightLuminaire::EEmitter::Profile ? Musee::Light::FindProfile(*Luminaire) : nullptr;
 	DestroyEmitters();
@@ -210,6 +211,8 @@ double ULightLuminaireComponent::Level() const
 Musee::Lumens ULightLuminaireComponent::EmittedFlux() const
 {
 	const FLightLuminaire* Luminaire = Musee::Light::FindLuminaire(LuminaireType);
+	// Only the engine lights it drives give its light: a face that encloses it drives none, so it gives none (the dresser
+	// reports it), until a surface of the picture it shows gives the light itself.
 	if (!Luminaire || !Luminaire->bLit || EmitterLights.IsEmpty()) { return Musee::Lumens(0.0); }
 	return Musee::Lumens(Musee::Light::FullFlux(*Luminaire, LengthMeters, FaceMeters) * Level());
 }
@@ -241,7 +244,8 @@ void ULightLuminaireComponent::MakeEmitters()
 	const FLightLuminaire* Luminaire = Musee::Light::FindLuminaire(LuminaireType);
 	if (!Luminaire || !Luminaire->bLit || !GetOwner()) { return; }
 	if (Luminaire->Emitter == EEmitter::Linear && LengthMeters <= 0.0) { return; }
-	if (Luminaire->IsAreal() && FaceMeters.X * FaceMeters.Y <= 0.0) { return; }
+	// An enclosing face shines in from all round, which no engine light (each shining out from one place) can stand for.
+	if (Luminaire->IsAreal() && (FaceMeters.X * FaceMeters.Y <= 0.0 || bFaceEncloses)) { return; }
 	if (Luminaire->Emitter == EEmitter::Profile && !Profile) { return; }
 	const int32 Count = Luminaire->Emitter == EEmitter::Point ? FMath::Max(Luminaire->LampCount, 1) : 1;
 	for (int32 Index = 0; Index < Count; ++Index)

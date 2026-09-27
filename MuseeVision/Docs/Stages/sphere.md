@@ -253,7 +253,7 @@ Sphere's own shell, not a sky pushed into the scene: no scoped-sky machinery.
 
 | Ids | Type | Count | Point and aim | Operation |
 |---|---|---|---|---|
-| `image` | `gap.light-field-panel.d65` | 1 (the whole R 13.700 surface) | Mount `sphere.image.mount` (C), facing in; aim C | always |
+| `image` | `gap.light-field-panel.d65` | 1 (the whole R 13.700 surface) | Mount `sphere.image.mount` (C), facing in; aim C; laid over the `sphere` R 13.700 less the neck's opening r 2.980 (Light's enclosing face: 2,330.3 m², its light converging on C) | always |
 | `rail.01` … `rail.08` | `linear-cove.3000k` | 8 runs of 45° (4.148 each) | strip on r 5.281, z 21.432 in the channel under the handrail, centred on bearings 22.5° + 45°k; aim the floor at r 3.900 on the same bearing | presence (a body in the Sphere) |
 | `neck.01` … `neck.04` | `linear-cove.3000k` | 4 runs of 85° (3.761 each) | strip bent to r 2.535, z 9.600, centred on bearings 47.5°, 132.5°, 227.5°, 312.5°; aim the axis at 9.600 | presence (a body in the neck) |
 
@@ -487,4 +487,4 @@ the Cube's panels are the flat kind.
   at `orientation` 5 lx. The "building hidden" sky mode is retired: the sky is a display on the Sphere's own shell.
 - **Materials follow the Story:** Crema Marfil mirror-polished platform (as built the Future's "mirror" travertine shader);
   mirror-polished bronze seats (as built dark bronze); pearl-lined blades; fluoropolymer pearl outdoors.
-- Lighting.json (K3-LIGHT-NATURE): the image luminaire names the real type `light-field-panel.d65`. An image panel is laid over a flat extent or a plan zone; a face curved to the sphere, and the celestial image source that feeds it, wait for Light's image work, so the entry stands as a finding until then.
+- Lighting.json (K3-LIGHT-NATURE, K11): the image luminaire names the real type `light-field-panel.d65`, laid over its `sphere` (R 13.700, opening r 2.980: 2,330.3 m², aimed at C, where it sits). Light places it as an enclosing face, which no engine light can stand for, so it drives none and **gives no light**: its light waits for Light's emissive image surface and the celestial image source that feeds it. Until they are built the make reports the image as a Light finding ("gives no light"), and the Sphere is lit by its strips alone.

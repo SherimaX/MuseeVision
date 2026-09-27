@@ -40,6 +40,22 @@ struct FLightScheduleZone
 	UPROPERTY() TArray<double> Bearing;
 };
 
+/**
+ * The inside of a sphere about the luminaire's seat, facing its centre (the Sphere's image surface): its radius, and the
+ * radius of the round opening at its foot, about the vertical through its centre (the Sphere's neck), none when zero.
+ */
+USTRUCT()
+struct FLightScheduleSphere
+{
+	GENERATED_BODY()
+
+	UPROPERTY(meta = (Units = "Meters")) double Radius = 0.0;
+	UPROPERTY(meta = (Units = "Meters")) double Opening = 0.0;
+
+	/** Whether the entry gives a sphere at all. */
+	[[nodiscard]] bool IsGiven() const { return Radius != 0.0 || Opening != 0.0; }
+};
+
 USTRUCT()
 struct FLightScheduleLuminaire
 {
@@ -79,6 +95,11 @@ struct FLightScheduleLuminaire
 	UPROPERTY() TArray<double> Extent;
 	/** For an areal type, the zone of a curved or round field it lights, in place of an extent. */
 	UPROPERTY() FLightScheduleZone Zone;
+	/**
+	 * For an areal type, the sphere about its seat whose inside it lights, in place of an extent or a zone: a face that
+	 * encloses the luminaire, its light converging on the seat, so its aim is its seat or none.
+	 */
+	UPROPERTY() FLightScheduleSphere Sphere;
 	/** The piece it is set flush in (a step light's kerb or stone), by its surface key. */
 	UPROPERTY() FMuseeKey Host;
 	/** The surface its light is for (the walk a step light grazes), by its surface key. */

@@ -74,7 +74,7 @@ output (the light that leaves the housing), not the LED's.
 | `step-light.2700k` | FX Luminaire RH, 3 LED, RB faceplate, bronze | RH-3LED-W-RB-BZ | 86 lm (49 cd peak) | the Gaussian beam those fix, 75.6° | 2700 K | 84 | 4.0 W | circulation | complete |
 | `edge-lit-glass.3000k` | Spanlite Edge Lit Glass, lit by LumiFlex1095 lines in the Atrium's grid | made to order | 1541.9 lm/m², derived | the etched face | 3000 K | 95 (the lines') | 22.0 W/m² (7.2 W/m of line) | circulation | derived |
 | `luminous-ceiling.3000k` | Color Kinetics OneSpace gen2, Tunable White at 3000 K | OneSpace gen2 | 2574 lm/m² | a Lambertian plane | 3000 K | 95 | 39.5–41.1 W/m² | gallery | complete |
-| `pinspot.3000k` | ERCO Parscan 48V, size M, narrow spot | not found | not read at 3000 K | narrow spot | 3000 K | 97 | not read | gallery | incomplete |
+| `pinspot.3000k` | ERCO Optec spotlight, narrow spot, DALI-2 (the Parscan 48V's narrow spot has only On-board Dim) | 75995.000 | 642 lm (29 001 cd peak) | narrow spot, 6.1° | 3000 K | 92 | 8.7 W | gallery | complete |
 | `uplight.3000k` | Ledstore GU10 reflector lamp in the room's can | GU10-6W-3000 | 500 lm | 40° | 3000 K | 98 | 6 W | circulation | complete |
 | `pendant-globe.3000k` | Ledstore E27 opal lamp in the room's cased opal globe | E27-classic-milky-10W-3000 | 596 lm | all round | 3000 K | 97 | 10 W | circulation | complete |
 | `post-top-globe.2700k` | LEDVANCE HQL LED Filament Value in the room's cased opal globe, outdoors | HQL LED FILAMENT VALUE 5400LM 32W 827 E27 | 5400 lm | all round | 2700 K | 80 | 32 W | circulation | complete |

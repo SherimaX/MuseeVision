@@ -17,7 +17,7 @@ struct FTimeMoment;
  * One luminaire in the museum: a catalogue type (Data/Light/Luminaires) mounted where a stage's lighting schedule puts
  * it, with its light leaving along the component's x axis (a linear luminaire lies along its y axis, centred on the
  * component; the lamps of an electrolier stand on a ring about its x axis; an areal face lies square to x, its width
- * along y and its height along z). It lights at its catalogue output, switched by its operation (always, at dusk, on
+ * along y and its height along z, unless it encloses the component, a sphere's inside about it). It lights at its catalogue output, switched by its operation (always, at dusk, on
  * presence) and dimmed by the channel it follows (0 to 1); an image panel gives the light of the picture it shows, and
  * stands at its black level until one is shown. A type lit by its maker's photometric file (a wallwasher) gives that file's
  * candela table through the light profile made from it: the file's nadir, its optical axis, along x, and the file's 0°
@@ -35,10 +35,10 @@ public:
 	/**
 	 * Sets what the luminaire is and how it is run: its catalogue type, its operation, the channel it follows (the none
 	 * key for none), for a linear type the length laid, and for an areal type the face it lights, [width, height] in
-	 * metres (zero for any other).
+	 * metres (zero for any other), and whether that face encloses it (a sphere's inside about it, facing it).
 	 */
 	void Configure(const FMuseeKey& InType, ELightOperation InOperation, const FMuseeKey& InFollows, Musee::Meters InLength,
-		const FVector2D& InFaceMeters = FVector2D::ZeroVector);
+		const FVector2D& InFaceMeters = FVector2D::ZeroVector, bool bInFaceEncloses = false);
 
 	[[nodiscard]] const FMuseeKey& Type() const { return LuminaireType; }
 	[[nodiscard]] ELightOperation Operation() const { return LuminaireOperation; }
@@ -46,6 +46,14 @@ public:
 	[[nodiscard]] Musee::Meters Length() const { return Musee::Meters(LengthMeters); }
 	/** The face an areal type lights, [width, height] in metres; zero for any other. */
 	[[nodiscard]] const FVector2D& Face() const { return FaceMeters; }
+
+	/**
+	 * Whether its face encloses it: the inside of a sphere about it, its light converging from every side (the Sphere's
+	 * image). No engine light stands for such a face, since each shines out from one place, so it drives none and gives no
+	 * light (EmittedFlux is zero): its light must leave the surface it is laid over, which Light doesn't make yet, from
+	 * the celestial image source, which Light doesn't make yet either. The dresser reports both as a finding.
+	 */
+	[[nodiscard]] bool FaceEncloses() const { return bFaceEncloses; }
 
 	/** The light profile made from its type's photometric file, or null for a type lit otherwise (or not yet made). */
 	[[nodiscard]] const UTextureLightProfile* LightProfile() const { return Profile; }
@@ -105,6 +113,10 @@ private:
 	/** The face an areal type lights, [width, height] in metres. */
 	UPROPERTY(EditAnywhere, Category = "Luminaire")
 	FVector2D FaceMeters = FVector2D::ZeroVector;
+
+	/** Whether that face encloses it, facing it from every side. */
+	UPROPERTY(EditAnywhere, Category = "Luminaire")
+	bool bFaceEncloses = false;
 
 	/**
 	 * The light profile Studio made from its type's photometric file, found when it is configured and kept with the stage,

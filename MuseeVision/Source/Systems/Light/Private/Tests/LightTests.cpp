@@ -3,6 +3,7 @@
 #if WITH_DEV_AUTOMATION_TESTS
 
 #include "Components/DirectionalLightComponent.h"
+#include "Dom/JsonObject.h"
 #include "Components/ExponentialHeightFogComponent.h"
 #include "Components/PointLightComponent.h"
 #include "Components/RectLightComponent.h"
@@ -15,7 +16,10 @@
 #include "LightSky.h"
 #include "Misc/FileHelper.h"
 #include "Misc/Paths.h"
+#include "MuseeRecords.h"
 #include "Schedule/LightDresser.h"
+#include "Serialization/JsonReader.h"
+#include "Serialization/JsonSerializer.h"
 #include "Sky/SkyPhotometry.h"
 #include "TimeMoment.h"
 
@@ -112,7 +116,23 @@ namespace Musee::Light::Tests
 		TestTrue(TEXT("An image panel is lit by its picture, up to 200 cd/m2 at D65"), Panel && Panel->bLit && Panel->Emitter == FLightLuminaire::EEmitter::Image
 			&& Panel->IsAreal() && Panel->PeakLuminanceCandelaPerSquareMeter == 200.0 && Panel->ColourTemperature.Get() == 6504.0);
 		const FLightLuminaire* Pinspot = FindLuminaire(FMuseeKey(TEXTVIEW("pinspot.3000k")));
-		TestTrue(TEXT("A pinspot whose data sheet isn't read stands unlit, saying why"), Pinspot && !Pinspot->bLit && !Pinspot->WhyUnlit.IsEmpty());
+		TestTrue(TEXT("A pinspot is lit as ERCO's 75995.000 narrow spot: 29 001 cd in a 6.1 degree beam at 3000 K"), Pinspot && Pinspot->bLit
+			&& Pinspot->Emitter == FLightLuminaire::EEmitter::Spot && Pinspot->PeakIntensity.Get() == 29001.0 && Pinspot->BeamAngle.Get() == 6.1
+			&& Pinspot->ColourTemperature.Get() == 3000.0);
+		// The Cube runs its pinspots on presence, following a channel (cube.md, section 4), and its sheet asks for DALI: a
+		// fitting dimmed only by a knob on itself (ERCO's On-board Dim) can be neither switched nor followed.
+		FString PinspotText;
+		TSharedPtr<FJsonObject> PinspotRecord;
+		const TSharedPtr<FJsonObject>* Electrical = nullptr;
+		FString Control;
+		TestTrue(TEXT("and it is switched over DALI, as the Cube's presence and its channel need"),
+			FFileHelper::LoadFileToString(PinspotText, *(Records::DataRoot() / TEXT("Light/Luminaires/pinspot.3000k.json")))
+			&& FJsonSerializer::Deserialize(TJsonReaderFactory<>::Create(PinspotText), PinspotRecord) && PinspotRecord.IsValid()
+			&& PinspotRecord->TryGetObjectField(TEXT("electrical"), Electrical) && (*Electrical)->TryGetStringField(TEXT("control"), Control)
+			&& Control.Contains(TEXT("DALI")) && !Control.Contains(TEXT("On-board Dim")));
+		const FLightLuminaire* PictureLight = FindLuminaire(FMuseeKey(TEXTVIEW("picture-light.2700k")));
+		TestTrue(TEXT("A picture light whose maker publishes no flux stands unlit, saying why"), PictureLight && !PictureLight->bLit
+			&& !PictureLight->WhyUnlit.IsEmpty());
 		const FLightLuminaire* Glass = FindLuminaire(FMuseeKey(TEXTVIEW("edge-lit-glass.3000k")));
 		TestTrue(TEXT("An edge-lit pane lets its light out as a face, lit on its derived flux"), Glass && Glass->bLit
 			&& Glass->Emitter == FLightLuminaire::EEmitter::Rect);
@@ -224,6 +244,14 @@ namespace Musee::Light::Tests
 		Wall->ShowImage(0.25);
 		TestTrue(TEXT("Showing a picture of a quarter of its peak white, it gives pi L A of that picture"),
 			FMath::IsNearlyEqual(Wall->EmittedFlux().Get(), UE_DOUBLE_PI * 200.0 * 2.8 * 2.8 * 0.25, 1e-6));
+		ULightLuminaireComponent* Dome = NewObject<ULightLuminaireComponent>(Actor, TEXT("Dome"));
+		Dome->Configure(FMuseeKey(TEXTVIEW("light-field-panel.d65")), ELightOperation::Always, FMuseeKey(), Meters(0.0), FVector2D(12.0, 4.0), true);
+		Dome->SetupAttachment(Actor->GetRootComponent());
+		Dome->RegisterComponent();
+		TestTrue(TEXT("An image face that encloses its luminaire drives no engine light, which would shine out from one place"),
+			Dome->FaceEncloses() && Dome->Emitters().IsEmpty());
+		Dome->ShowImage(0.25);
+		TestEqual(TEXT("and, showing a picture, gives no light, since no surface of its picture is made to give it"), Dome->EmittedFlux().Get(), 0.0);
 
 		FTimeMoment Day;
 		Day.bSunUp = true;
@@ -258,6 +286,8 @@ namespace Musee::Light::Tests
 				{ "id": "bare", "type": "luminous-ceiling.3000k", "point": [2, 0, 5], "aim": [2, 0, 0], "operation": "always" },
 				{ "id": "astray", "type": "luminous-ceiling.3000k", "point": [0, 6, 9], "aim": [0, 6, 0], "operation": "always", "zone": { "r": [3.6, 8.5], "bearing": [345, 15] } },
 				{ "id": "spot.spread", "type": "track-spot.3000k.20deg", "point": [0, 0, 3], "aim": [0, 0, 0], "operation": "always", "extent": [1, 1] },
+				{ "id": "dome", "type": "light-field-panel.d65", "point": [0, 0, 22], "aim": [0, 0, 22], "operation": "always", "sphere": { "radius": 13.7, "opening": 2.98 } },
+				{ "id": "dome.askew", "type": "light-field-panel.d65", "point": [0, 0, 22], "aim": [0, 0, 8], "operation": "always", "sphere": { "radius": 13.7, "opening": 2.98 } },
 				{ "id": "step", "type": "step-light.2700k", "point": [6.2, -28.1, 0.14], "aim": [6.2, -27.6, 0.1], "operation": "dusk", "host": "test.bridge.kerb", "surface": "test.garden.path" } ],
 			"targets": [ { "surface": "test.floor", "class": "circulation", "lux": [50, null], "source": "UseTargets", "when": { "mechanism": "test.car", "stop": "floor" } } ],
 			"design": [ { "brighter": "test.canvas", "darker": "test.wall", "ratio": [1.5, null] } ] })");
@@ -281,11 +311,13 @@ namespace Musee::Light::Tests
 
 		// Edge-lit panes are lit now: their photometry is derived from the strip's published flux and the sheet's published
 		// extraction (Light's catalogue marks it derived), so they are no longer a finding.
-		TestEqual(TEXT("An unknown weather place and type, a line without length, a mount with a point, a point without aim, a line along its own light, a spot laid along a line, a ceiling without its face or outside its zone, and a spot over an extent are findings"),
-			Findings.Num(), 10);
+		TestEqual(TEXT("An unknown weather place and type, a line without length, a mount with a point, a point without aim, a line along its own light, a spot laid along a line, a ceiling without its face or outside its zone, a spot over an extent, a sphere aimed off its centre and a sphere that gives no light are findings"),
+			Findings.Num(), 12);
+		TestTrue(TEXT("the image sphere, placed, is reported as giving no light until its surface and source are built"),
+			Findings.ContainsByPredicate([](const FMuseeFinding& F) { return F.Summary.Contains(TEXT("'dome' gives no light")); }));
 		TArray<ULightLuminaireComponent*> Placed;
 		Stage->GetComponents(Placed);
-		TestEqual(TEXT("Nine luminaires are placed"), Placed.Num(), 9);
+		TestEqual(TEXT("Ten luminaires are placed"), Placed.Num(), 10);
 		const auto Placement = [&Placed](const TCHAR* Id) -> ULightLuminaireComponent*
 		{
 			const FName Tag(FString(LuminaireTagPrefix) + Id);
@@ -343,6 +375,13 @@ namespace Musee::Light::Tests
 		{
 			TestTrue(TEXT("over a face of the disc's area, as wide as the disc"), FMath::IsNearlyEqual(Eye->Face().X * Eye->Face().Y, UE_DOUBLE_PI * 1.44, 1e-6)
 				&& FMath::IsNearlyEqual(Eye->Face().X, 2.4, 1e-6));
+		}
+		if (ULightLuminaireComponent* Dome = Placement(TEXT("dome")); TestNotNull(TEXT("An image sphere, aimed at its centre, where it sits"), Dome))
+		{
+			const double Area = 2.0 * UE_DOUBLE_PI * 13.7 * (13.7 + FMath::Sqrt(13.7 * 13.7 - 2.98 * 2.98));
+			TestTrue(TEXT("over the sphere's inside less the cap its opening cuts, as wide as its equator"),
+				FMath::IsNearlyEqual(Dome->Face().X * Dome->Face().Y, Area, 1e-6) && FMath::IsNearlyEqual(Dome->Face().X, 2.0 * UE_DOUBLE_PI * 13.7, 1e-6));
+			TestTrue(TEXT("a face that encloses it, at its centre"), Dome->FaceEncloses() && Dome->GetComponentLocation().Equals(FVector(0.0, 0.0, 2200.0), 0.01));
 		}
 		if (ULightLuminaireComponent* Step = Placement(TEXT("step")); TestNotNull(TEXT("A step light"), Step))
 		{
