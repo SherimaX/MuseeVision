@@ -12,6 +12,7 @@
 #include "MatterMasterParameters.h"
 #include "MatterMasterParts.h"
 #include "MatterMasters.h"
+#include "MatterNames.h"
 #include "MatterPaintLayer.h"
 #include "MatterRecords.h"
 #include "Misc/FileHelper.h"
@@ -202,6 +203,7 @@ bool FMatterPaintLayerComposes::RunTest(const FString& Parameters)
 	{
 		return false;
 	}
+	TestEqual(TEXT("The paint master is made where Studio finds it"), PaintMasterPackage(), MasterPackage(FName(Masters::Paint)));
 	FMatterPaintLayer Layer;
 	Layer.Work = TEXT("paint.matter-test");
 	Layer.Image = Image;

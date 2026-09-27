@@ -4,6 +4,7 @@
 #include "MatterInstances.h"
 #include "MatterMasterParameters.h"
 #include "MatterMasters.h"
+#include "MatterNames.h"
 #include "Materials/MaterialInstanceConstant.h"
 
 namespace Musee::Matter
@@ -14,6 +15,11 @@ namespace
 	{
 		return Name.IsNone() ? TOptional<FMuseeKey>() : FMuseeKey::Parse(Name.ToString());
 	}
+}
+
+FString PaintMasterPackage()
+{
+	return MasterPackage(FName(Masters::Paint));
 }
 
 TArray<FString> ComposePaintLayer(const FMatterPaintLayer& Layer, UMaterialInterface& PaintMaster, UMaterialInstanceConstant& Instance)

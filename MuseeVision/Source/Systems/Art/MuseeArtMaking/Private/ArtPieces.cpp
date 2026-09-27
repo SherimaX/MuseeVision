@@ -17,8 +17,13 @@ namespace Musee::ArtMaking
 		const FName LinenSurface(TEXT("canvas.linen"));
 		const FName NoFrame(TEXT("none"));
 
-		/** The linen a canvas is woven of, bare where it turns round the stretcher: the palette's linen. */
+		/**
+		 * The linen a canvas is woven of, bare where it turns round the stretcher: the palette's linen, stretched on the
+		 * stretcher's bars and as new, since the tacking edges and back are out of the light and out of reach.
+		 */
 		const FName LinenMaterial(TEXT("accent.linen"));
+		const FName LinenWorking(TEXT("stretched"));
+		const FName LinenHistory(TEXT("new"));
 
 		/** What every canvas of a stage is made with: the paint's finish, and the frame's moulding once a canvas needs it. */
 		struct FMaking
@@ -41,7 +46,7 @@ namespace Musee::ArtMaking
 		/** The wall a work hangs on: its anchor's straight face, or the curved path the plan gives it. */
 		FWallPath WallOf(const FMaking& Making, const FMuseeKey& Anchor, bool& bOutCurved)
 		{
-			const FMuseeFrame& Frame = Making.Stage.FindAnchor(Anchor)->Frame;
+			const FMuseeFrame& Frame = Making.Stage.FindAnchor(Anchor, WallAnchorKind)->Frame;
 			const FArtWall* Curved = Making.Hang.Walls.FindByPredicate([&Anchor](const FArtWall& W) { return W.Anchor == Anchor; });
 			bOutCurved = Curved != nullptr;
 			return Curved ? FWallPath(Frame, Curved->Path) : FWallPath(Frame);
@@ -116,8 +121,8 @@ namespace Musee::ArtMaking
 			Linen.Name = LinenPieceName(Entry, bSplit);
 			Linen.Surface = LinenSurface;
 			Linen.Material = LinenMaterial;
-			Linen.Working = Making.Paint.Working;
-			Linen.History = Making.Paint.History;
+			Linen.Working = LinenWorking;
+			Linen.History = LinenHistory;
 			for (FFormMadePiece* Piece : { &Face, &Linen })
 			{
 				Piece->Collision = Collision::Solid.Profile();

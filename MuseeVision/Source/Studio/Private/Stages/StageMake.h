@@ -22,6 +22,9 @@ namespace Musee::Studio
 		/** How palette keys become materials; empty for Matter's resolver. */
 		FMaterialResolver Resolve;
 
+		/** The package of the master every work's paint layer is composed over: Matter's paint master. */
+		FString PaintMaster;
+
 		/** The Site records the make reads (paths under Data, or absolute). */
 		FString PlanRecord;
 		FString PortClassesRecord;

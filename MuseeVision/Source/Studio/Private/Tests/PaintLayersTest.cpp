@@ -11,7 +11,7 @@
 
 /**
  * Each hung work's paint layer is made before the stage is cast: its image as an sRGB texture under Art, its paint
- * instance over the paint's parent carrying that texture, and nothing rewritten by a second make.
+ * instance composed by Matter over the paint master carrying that texture, and nothing rewritten by a second make.
  */
 namespace Musee::Studio::Tests
 {
@@ -20,8 +20,11 @@ namespace Musee::Studio::Tests
 		/** The specimens are made under their own root, so they never touch the museum's assets. */
 		const TCHAR* const PaintRoot = TEXT("/Game/Generated/Specimens");
 
-		/** The engine's stock opaque surface, standing for the paint's palette instance. */
-		const TCHAR* const StockParent = TEXT("/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial");
+		/**
+		 * The engine's stock opaque surface, standing for Matter's paint master: it declares no parameters of its own, so
+		 * Matter composes over it only the work's image and size.
+		 */
+		const TCHAR* const StockMaster = TEXT("/Engine/EngineMaterials/WorldGridMaterial");
 
 		/** Art's framed test stage: a framed canvas and a work on two canvases, on a flat wall. */
 		FMuseeStageContext FramedStage()
@@ -47,7 +50,7 @@ namespace Musee::Studio::Tests
 	{
 		FStageMakeOptions Options;
 		Options.Paths = FMakePaths{PaintRoot};
-		Options.Resolve = [](FName, FName, FName) { return LoadObject<UMaterialInterface>(nullptr, StockParent); };
+		Options.PaintMaster = StockMaster;
 		FMakeReport First;
 		MakePaintLayers(FramedStage(), Options, First);
 		for (const FMadePackage& Made : First.Packages)
@@ -59,19 +62,20 @@ namespace Musee::Studio::Tests
 		const FString Image = Options.Paths.WorkImage(TEXT("MonetWillowsTwoWillows"));
 		const UTexture2D* Texture = LoadObject<UTexture2D>(nullptr, *Musee::Matter::ObjectPathOf(Image));
 		TestTrue(TEXT("the image is an sRGB texture under Art"), Texture && Texture->SRGB);
-		const FString Paint = Options.Paths.MatterInstance(Musee::Matter::InstanceName(TEXT("paint.monet-willows-two-willows"), TEXT("stretched"), TEXT("clean")));
+		const FString Paint = Options.Paths.MatterInstance(Musee::Matter::InstanceName(TEXT("paint.monet-willows-two-willows"), TEXT("varnished"), TEXT("clean")));
 		const UMaterialInstanceConstant* Instance = LoadObject<UMaterialInstanceConstant>(nullptr, *Musee::Matter::ObjectPathOf(Paint));
 		if (TestNotNull(TEXT("the work's paint instance is made"), Instance))
 		{
-			TestTrue(TEXT("over the paint's parent"), Instance->Parent.Get() == LoadObject<UMaterialInterface>(nullptr, StockParent));
+			TestTrue(TEXT("over the paint master"), Instance->Parent.Get() == LoadObject<UMaterialInterface>(nullptr, *Musee::Matter::ObjectPathOf(StockMaster)));
 			TestTrue(TEXT("carrying the work's image"), Instance->TextureParameterValues.ContainsByPredicate([Texture](const FTextureParameterValue& Value)
 			{
 				return Value.ParameterValue == Texture;
 			}));
-			TestTrue(TEXT("and the image's size across its two canvases"), Instance->VectorParameterValues.ContainsByPredicate([](const FVectorParameterValue& Value)
+			const auto Carries = [Instance](float Meters)
 			{
-				return FMath::IsNearlyEqual(Value.ParameterValue.R, 17.0f) && FMath::IsNearlyEqual(Value.ParameterValue.G, 2.0f);
-			}));
+				return Instance->ScalarParameterValues.ContainsByPredicate([Meters](const FScalarParameterValue& Value) { return FMath::IsNearlyEqual(Value.ParameterValue, Meters); });
+			};
+			TestTrue(TEXT("and the image's size across its two canvases"), Carries(17.0f) && Carries(2.0f));
 		}
 
 		FMakeReport Second;

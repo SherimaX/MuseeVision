@@ -158,8 +158,9 @@ bool FArtCanvasTest::RunTest(const FString& Parameters)
 	const FFormMadePiece& Sunrise = Pieces[2];
 	TestEqual(TEXT("The face is named for the work"), Willows.Name, FName(TEXT("canvas.monet-willows-two-willows")));
 	TestEqual(TEXT("It is painted in the work's own paint"), Willows.Material, FName(TEXT("paint.monet-willows-two-willows")));
-	TestTrue(TEXT("with the paint's working and history, from its palette entry"), Willows.Working == TEXT("stretched") && Willows.History == TEXT("clean"));
-	TestEqual(TEXT("Its tacking edges and back are linen"), Pieces[1].Material, FName(TEXT("accent.linen")));
+	TestTrue(TEXT("with the paint's working and history, from its palette entry"), Willows.Working == TEXT("varnished") && Willows.History == TEXT("clean"));
+	TestTrue(TEXT("Its tacking edges and back are linen, stretched and new"), Pieces[1].Material == TEXT("accent.linen") && Pieces[1].Working == TEXT("stretched")
+		&& Pieces[1].History == TEXT("new"));
 	TestEqual(TEXT("A flat canvas's face is its real size"), Tests::AreaSquareMeters(Sunrise.Mesh), 0.63 * 0.48, 1e-6);
 	// The curved face stands 40 mm inside the wall, round the oval's west end, which turns it nearly 2 radians: 80 mm shorter.
 	TestEqual(TEXT("A curved canvas's face is its size, less its offset inside the curve"), Tests::AreaSquareMeters(Willows.Mesh), 2.0 * 17.0, 0.2);
@@ -250,7 +251,7 @@ bool FArtFrameTest::RunTest(const FString& Parameters)
 		const FArtPaintLayer& Willows = Layers[1];
 		TestTrue(TEXT("Its image spans its canvases"), Willows.SizeMeters.Equals(FVector2D(17.0, 2.0)));
 		TestTrue(TEXT("It is the work's own paint over the paint's palette entry"), Willows.Palette == TEXT("paint.monet-willows-two-willows")
-			&& Willows.Parent == PaintPalette && Willows.Working == TEXT("stretched") && Willows.History == TEXT("clean") && !Willows.ImagePath.IsEmpty());
+			&& Willows.Parent == PaintPalette && Willows.Working == TEXT("varnished") && Willows.History == TEXT("clean") && !Willows.ImagePath.IsEmpty());
 	}
 	return true;
 }

@@ -5,6 +5,7 @@
 #include "Levels/StageLevel.h"
 #include "Make/InputHash.h"
 #include "Make/MakeMeasures.h"
+#include "MatterPaintLayer.h"
 #include "Misc/FileHelper.h"
 #include "Misc/PackageName.h"
 #include "MuseeRecords.h"
@@ -73,7 +74,8 @@ namespace Musee::Studio
 	}
 
 	FStageMakeOptions::FStageMakeOptions()
-		: PlanRecord(Musee::Site::PlanRecord)
+		: PaintMaster(Musee::Matter::PaintMasterPackage())
+		, PlanRecord(Musee::Site::PlanRecord)
 		, PortClassesRecord(Musee::Site::PortClassesRecord)
 		, BlindsRecord(Musee::Site::BlindsRecord)
 	{

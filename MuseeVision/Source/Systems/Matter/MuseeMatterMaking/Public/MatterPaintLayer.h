@@ -46,8 +46,11 @@ namespace Musee::Matter
 		double HeightMeters = 0.0;
 	};
 
+	/** The long package name of the paint master every paint layer is parented to, as Matter's make step makes it. */
+	[[nodiscard]] MUSEEMATTERMAKING_API FString PaintMasterPackage();
+
 	/**
-	 * Composes Instance as Layer's paint layer, parented to PaintMaster (M_Matter_Paint, MasterPackage("paint")): the
+	 * Composes Instance as Layer's paint layer, parented to PaintMaster (M_Matter_Paint, PaintMasterPackage()): the
 	 * palette finish's parameters, then the work's image and size. Its identifiers derive from all of them, so the same
 	 * work and records compose the same instance. Returns the problems; an empty list is success. A work with no image,
 	 * no size, or a palette finish the paint master does not shade is a problem, never a default.

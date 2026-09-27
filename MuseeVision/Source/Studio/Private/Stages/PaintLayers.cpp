@@ -5,6 +5,7 @@
 #include "AssetCompilingManager.h"
 #include "Engine/Texture2D.h"
 #include "MatterNames.h"
+#include "MatterPaintLayer.h"
 #include "Materials/MaterialInstanceConstant.h"
 #include "Make/InputHash.h"
 #include "Make/PackageSave.h"
@@ -13,37 +14,29 @@
 #include "Misc/SecureHash.h"
 #include "Stages/MakeFinding.h"
 #include "Stages/StageMake.h"
+#include "UObject/Package.h"
 
 namespace Musee::Studio
 {
 	namespace
 	{
-		/** The revision of these rules: raise it whenever a paint layer would be made differently from the same inputs. */
-		constexpr int64 PaintLayerRevision = 1;
-
-		/**
-		 * The paint master's parameters for a work's own (Matter's paint master, MatterMasterParameters.h): the image, and
-		 * the image's width and height in metres, against which the face's UV0 (metres from the image's top-left corner)
-		 * finds its place in the image.
-		 */
-		const FName ImageParameter(TEXT("Image"));
-		const FName ImageSizeParameter(TEXT("ImageSizeMeters"));
-
-		/** The name of UMaterialInterface's lighting GUID, which a made instance derives from its inputs. */
-		const FName LightingGuidProperty(TEXT("LightingGuid"));
-
-		void StampLightingGuid(UMaterialInterface& Material, const FGuid& Guid)
-		{
-			const FStructProperty* Lighting = FindFProperty<FStructProperty>(UMaterialInterface::StaticClass(), LightingGuidProperty);
-			checkf(Lighting && Lighting->Struct == TBaseStructure<FGuid>::Get(), TEXT("UMaterialInterface no longer reflects its LightingGuid as an FGuid."));
-			*Lighting->ContainerPtrToValuePtr<FGuid>(&Material) = Guid;
-		}
+		/** The revisions of these rules: raise one whenever its asset would be made differently from the same inputs. */
+		constexpr int64 WorkImageRevision = 1;
+		constexpr int64 PaintLayerRevision = 2;
 
 		/** The hash of an image file's bytes, or empty when it can't be read. */
 		FString ImageHash(const FString& Path)
 		{
 			TArray<uint8> Bytes;
 			return FFileHelper::LoadFileToArray(Bytes, *Path, FILEREAD_Silent) ? FSHA1::HashBuffer(Bytes.GetData(), Bytes.Num()).ToString() : FString();
+		}
+
+		/** The paint master a stage's paint layers are composed over, or null when it hasn't been made. */
+		UMaterialInterface* FindPaintMaster(const FString& Package)
+		{
+			const FString Object = Musee::Matter::ObjectPathOf(Package);
+			UMaterialInterface* Found = FindObject<UMaterialInterface>(nullptr, *Object);
+			return Found || !FPackageName::DoesPackageExist(Package) ? Found : LoadObject<UMaterialInterface>(nullptr, *Object);
 		}
 
 		/** Saves a made asset with its input hash, recording what became of its package. */
@@ -83,56 +76,86 @@ namespace Musee::Studio
 			return Texture;
 		}
 
-		/** The work's paint instance over its parent, carrying the texture and the image's size. */
-		void MakeInstance(const FArtPaintLayer& Layer, const FString& Package, UMaterialInterface& Parent, UTexture2D& Texture, const FString& Hash,
-			FMakeReport& Report)
+		/** Art's paint layer in Matter's words: the work's own key, the paint's palette finish, the texture and the size. */
+		Musee::Matter::FMatterPaintLayer MatterLayer(const FArtPaintLayer& Layer, UTexture2D& Texture)
 		{
+			Musee::Matter::FMatterPaintLayer Paint;
+			Paint.Work = Layer.Palette;
+			Paint.Palette = Layer.Parent;
+			Paint.Working = Layer.Working;
+			Paint.History = Layer.History;
+			Paint.Image = &Texture;
+			Paint.WidthMeters = Layer.SizeMeters.X;
+			Paint.HeightMeters = Layer.SizeMeters.Y;
+			return Paint;
+		}
+
+		/**
+		 * The work's paint instance, composed by Matter. It is composed aside first: the instance's identity (its parameter
+		 * state, derived from every record and value written) is its input, so one whose composition hasn't changed is left
+		 * as it is. The problems Matter finds, or none.
+		 */
+		TArray<FString> MakeInstance(const Musee::Matter::FMatterPaintLayer& Paint, const FString& Package, UMaterialInterface& Master, FMakeReport& Report)
+		{
+			UMaterialInstanceConstant* Aside = NewObject<UMaterialInstanceConstant>(GetTransientPackage());
+			TArray<FString> Problems = Musee::Matter::ComposePaintLayer(Paint, Master, *Aside);
+			FInputHasher Inputs;
+			Inputs.Add(TEXT("paint-layer")).Add(PaintLayerRevision).Add(Master.GetPathName()).Add(Aside->ParameterStateId.ToString());
+			Aside->MarkAsGarbage();
+			if (!Problems.IsEmpty())
+			{
+				return Problems;
+			}
+			const FString Hash = Inputs.Finish();
 			if (StoredInputHash(Package, FPackageName::GetShortName(Package)) == Hash)
 			{
 				Report.Packages.Add({Package, EMadeOutcome::Unchanged, FString()});
-				return;
+				return {};
 			}
 			UMaterialInstanceConstant* Instance = FindOrCreateMadeAsset<UMaterialInstanceConstant>(Package);
-			Instance->SetParentEditorOnly(&Parent);
 			Instance->ClearParameterValuesEditorOnly();
-			Instance->SetTextureParameterValueEditorOnly(FMaterialParameterInfo(ImageParameter), &Texture);
-			Instance->SetVectorParameterValueEditorOnly(FMaterialParameterInfo(ImageSizeParameter),
-				FLinearColor(static_cast<float>(Layer.SizeMeters.X), static_cast<float>(Layer.SizeMeters.Y), 0.0f, 0.0f));
-			Instance->PostEditChange();
-			Instance->ParameterStateId = FGuid::NewDeterministicGuid(Hash + TEXT(".parameters"));
-			StampLightingGuid(*Instance, FGuid::NewDeterministicGuid(Hash + TEXT(".lighting")));
-			Save(*Instance, Hash, Report);
+			Problems = Musee::Matter::ComposePaintLayer(Paint, Master, *Instance);
+			if (Problems.IsEmpty())
+			{
+				Save(*Instance, Hash, Report);
+			}
+			return Problems;
+		}
+
+		void Refuse(const FMuseeStageContext& Stage, const FArtPaintLayer& Layer, const FString& Why, FMakeReport& Report)
+		{
+			Report.Findings.Add(MakeFinding(TEXT("Matter.Resolved"), FName(*Stage.Stage.ToString()),
+				FString::Printf(TEXT("the paint of work %s can't be made: %s"), *Layer.Work, *Why), Layer.Palette.ToString()));
 		}
 	}
 
 	void MakePaintLayers(const FMuseeStageContext& Stage, const FStageMakeOptions& Options, FMakeReport& Report)
 	{
-		const FMaterialResolver Resolve = Options.Resolve ? Options.Resolve : MatterResolver();
-		for (const FArtPaintLayer& Layer : Musee::ArtMaking::PaintLayers(Stage))
+		const TArray<FArtPaintLayer> Layers = Musee::ArtMaking::PaintLayers(Stage);
+		UMaterialInterface* Master = Layers.IsEmpty() ? nullptr : FindPaintMaster(Options.PaintMaster);
+		for (const FArtPaintLayer& Layer : Layers)
 		{
-			UMaterialInterface* Parent = Resolve(Layer.Parent, Layer.Working, Layer.History);
 			const FString Image = ImageHash(Layer.ImagePath);
-			if (!Parent || Image.IsEmpty())
+			if (!Master || Image.IsEmpty())
 			{
-				Report.Findings.Add(MakeFinding(TEXT("Matter.Resolved"), FName(*Stage.Stage.ToString()), FString::Printf(
-					TEXT("the paint of work %s can't be made: %s"), *Layer.Work, Parent ? *FString::Printf(TEXT("its image %s can't be read"),
-						*Layer.ImagePath) : *FString::Printf(TEXT("its parent %s (%s, %s) resolves to no material"), *Layer.Parent.ToString(),
-						*Layer.Working.ToString(), *Layer.History.ToString())), Layer.Palette.ToString()));
+				Refuse(Stage, Layer, Master ? FString::Printf(TEXT("its image %s can't be read"), *Layer.ImagePath)
+					: FString::Printf(TEXT("the paint master %s has not been made (MuseeMatterMake)"), *Options.PaintMaster), Report);
 				continue;
 			}
 			const FString Texture = Options.Paths.WorkImage(Musee::Matter::PascalCase(Layer.Work));
 			FInputHasher ImageInputs;
-			ImageInputs.Add(TEXT("work-image")).Add(PaintLayerRevision).Add(Image);
+			ImageInputs.Add(TEXT("work-image")).Add(WorkImageRevision).Add(Image);
 			UTexture2D* Made = MakeImage(Layer, Texture, ImageInputs.Finish(), Report);
 			if (!Made)
 			{
 				continue;
 			}
-			FInputHasher PaintInputs;
-			PaintInputs.Add(TEXT("paint-layer")).Add(PaintLayerRevision).Add(Image).Add(Texture).Add(Parent->GetPathName())
-				.Add(Layer.SizeMeters.X).Add(Layer.SizeMeters.Y);
 			const FString Instance = Options.Paths.MatterInstance(Musee::Matter::InstanceName(Layer.Palette, Layer.Working, Layer.History));
-			MakeInstance(Layer, Instance, *Parent, *Made, PaintInputs.Finish(), Report);
+			const TArray<FString> Problems = MakeInstance(MatterLayer(Layer, *Made), Instance, *Master, Report);
+			if (!Problems.IsEmpty())
+			{
+				Refuse(Stage, Layer, FString::Join(Problems, TEXT(" ")), Report);
+			}
 		}
 	}
 }
