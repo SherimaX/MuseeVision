@@ -267,8 +267,10 @@ namespace Musee::Light::Tests
 		TArray<FMuseeFinding> Findings;
 		DressStage(Context, Findings);
 
-		TestEqual(TEXT("An unknown weather place and type, a line without length, a mount with a point, a point without aim, a line along its own light, a spot laid along a line, a ceiling without its face or outside its zone, a spot over an extent and panes whose photometry isn't published are findings"),
-			Findings.Num(), 11);
+		// Edge-lit panes are lit now: their photometry is derived from the strip's published flux and the sheet's published
+		// extraction (Light's catalogue marks it derived), so they are no longer a finding.
+		TestEqual(TEXT("An unknown weather place and type, a line without length, a mount with a point, a point without aim, a line along its own light, a spot laid along a line, a ceiling without its face or outside its zone, and a spot over an extent are findings"),
+			Findings.Num(), 10);
 		TArray<ULightLuminaireComponent*> Placed;
 		Stage->GetComponents(Placed);
 		TestEqual(TEXT("Nine luminaires are placed"), Placed.Num(), 9);
