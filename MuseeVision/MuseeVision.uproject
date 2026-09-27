@@ -126,15 +126,24 @@
 		},
 		{
 			"Name": "DLSS",
-			"Enabled": true
+			"Enabled": true,
+			"TargetAllowList": [
+				"Game"
+			]
 		},
 		{
 			"Name": "StreamlineDLSSG",
-			"Enabled": true
+			"Enabled": true,
+			"TargetAllowList": [
+				"Game"
+			]
 		},
 		{
 			"Name": "StreamlineReflex",
-			"Enabled": true
+			"Enabled": true,
+			"TargetAllowList": [
+				"Game"
+			]
 		},
 		{
 			"Name": "XRBase",
