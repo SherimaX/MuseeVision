@@ -7,7 +7,7 @@
       "time": 5.0, "profile": "ease-in-out", "control": "proof.iris",
       "open":  [ { "channel": "proof.rim", "to": 1.0, "time": 1.5 }, { "move": "open" } ],
       "close": [ { "move": "closed" }, { "channel": "proof.rim", "to": 0.0, "time": 1.5 } ],
-      "guard": "body-in-travel", "clearance": 0.05, "publishes": "proof.height",
+      "guard": "body-in-travel", "clearance": 0.05, "guardCaption": "The block waits: you are under it", "publishes": "proof.height",
       "note": "The lift publishes its height for the rails that follow it.",
       "openUse": { "verb": { "key": "proof.lift.raise", "source": "Raise" }, "caption": { "key": "proof.lift.raise-caption", "source": "Raise the block" } },
       "closeUse": { "verb": { "key": "proof.lift.settle", "source": "Settle" }, "caption": { "key": "proof.lift.settle-caption", "source": "Settle the block" } }

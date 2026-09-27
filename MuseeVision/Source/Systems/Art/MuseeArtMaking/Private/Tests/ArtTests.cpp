@@ -13,6 +13,7 @@
 #include "DynamicMesh/DynamicMesh3.h"
 #include "DynamicMesh/DynamicMeshAttributeSet.h"
 #include "FormMake.h"
+#include "Frame/Hooks.h"
 #include "Glass/GlassPane.h"
 #include "Engine/Texture2D.h"
 #include "Engine/World.h"
@@ -371,6 +372,154 @@ bool FArtFrameTest::RunTest(const FString& Parameters)
 		TestTrue(TEXT("Its image spans its canvases"), Willows.SizeMeters.Equals(FVector2D(17.0, 2.0)));
 		TestTrue(TEXT("It is the work's own paint over the paint's palette entry"), Willows.Palette == TEXT("paint.monet-willows-two-willows")
 			&& Willows.Parent == PaintPalette && Willows.Working == TEXT("varnished") && Willows.History == TEXT("clean") && !Willows.ImagePath.IsEmpty());
+	}
+	return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FArtBodyTest, "Musee.Art.Body", Musee::ArtMaking::Tests::Flags)
+
+/**
+ * A work whose wall rides a moving body (a store's rack) rides it: its pieces are those the work makes standing still,
+ * each carried on the body in the body's frame, and its label hangs where they hang, on the body.
+ */
+bool FArtBodyTest::RunTest(const FString& Parameters)
+{
+	using namespace Musee::ArtMaking;
+	const FMuseeFrame Rack(FVector(1.5, -4.0, 0.0), FQuat(FVector::UpVector, FMath::DegreesToRadians(30.0)));
+	FMuseeStageContext Carried = Tests::Oval(TEXT("carried"));
+	Carried.Anchors.Add(Tests::Anchor(TEXT("carried.rack"), TEXT("Body"), Rack.OriginMeters, Rack.Rotation));
+
+	TArray<FFormMadePiece> Still;
+	TArray<FMuseeFinding> StillFindings;
+	GatherArt(Tests::Oval(TEXT("framed")), Still, StillFindings);
+	TArray<FFormMadePiece> Pieces;
+	TArray<FMuseeFinding> Findings;
+	GatherArt(Carried, Pieces, Findings);
+	TestEqual(TEXT("A work on a body the stage doesn't declare is a finding"), Findings.Num(), 1);
+	TestFalse(TEXT("and nothing is made of it"), Pieces.ContainsByPredicate([](const FFormMadePiece& P) { return P.Name.ToString().Contains(TEXT("willows")); }));
+	const TArray<FName> Parts = { TEXT("canvas.monet-impression-sunrise"), TEXT("canvas.monet-impression-sunrise.linen"),
+		TEXT("canvas.monet-impression-sunrise.frame") };
+	for (const FName Part : Parts)
+	{
+		const FFormMadePiece* Moving = Tests::FindPiece(Pieces, *Part.ToString());
+		const FFormMadePiece* Standing = Tests::FindPiece(Still, *Part.ToString());
+		if (!TestNotNull(*FString::Printf(TEXT("%s is made on the rack"), *Part.ToString()), Moving) || !TestNotNull(TEXT("and standing still"), Standing))
+		{
+			continue;
+		}
+		TestEqual(*FString::Printf(TEXT("%s rides the rack"), *Part.ToString()), Moving->Body, FMuseeKey(TEXT("carried.rack")));
+		TestTrue(TEXT("A still work rides nothing"), Standing->Body.IsNone());
+		const FMuseeFrame AtRest = Rack.FrameToParent(Moving->Frame);
+		TestTrue(*FString::Printf(TEXT("%s, seen from the stage with the rack at rest, is where the still work is"), *Part.ToString()),
+			AtRest.OriginMeters.Equals(Standing->Frame.OriginMeters, 1e-9) && AtRest.Rotation.Equals(Standing->Frame.Rotation, 1e-9));
+		TestTrue(TEXT("in the rack's frame, not the stage's"), !Moving->Frame.OriginMeters.Equals(Standing->Frame.OriginMeters, 1e-3));
+	}
+
+	// The dresser hangs the label where the pieces hang: on the rack's component, so the label moves with them.
+	UWorld* World = UWorld::CreateWorld(EWorldType::Game, false);
+	AActor* Actor = Tests::StageActor(*World, {});
+	USceneComponent* Body = NewObject<USceneComponent>(Actor, TEXT("Rack"));
+	Body->SetMobility(EComponentMobility::Movable);
+	Body->SetupAttachment(Actor->GetRootComponent());
+	Body->ComponentTags.Add(TEXT("carried.rack"));
+	Body->RegisterComponent();
+	for (const FName Part : Parts)
+	{
+		UStaticMeshComponent* Mesh = NewObject<UStaticMeshComponent>(Actor, FName(Part.ToString().Replace(TEXT("."), TEXT("_"))));
+		Mesh->SetMobility(EComponentMobility::Movable);
+		Mesh->SetupAttachment(Body);
+		Mesh->ComponentTags.Add(FName(FString::Printf(TEXT("musee.piece:%s"), *Part.ToString())));
+		Mesh->RegisterComponent();
+	}
+	Carried.StageActor = Actor;
+	TArray<FMuseeFinding> Dressed;
+	DressWorks(Carried, Dressed);
+	TestEqual(TEXT("The carried work dresses without findings"), Dressed.Num(), 0);
+	TArray<UArtWorkComponent*> Works;
+	Actor->GetComponents(Works);
+	if (TestEqual(TEXT("It carries its label"), Works.Num(), 1))
+	{
+		TestTrue(TEXT("which hangs from the rack and moves with it"), Works[0]->GetAttachParent() == Body && Works[0]->Mobility == EComponentMobility::Movable);
+		const UStaticMeshComponent* Face = Tests::FindMesh(*Actor, TEXT("canvas.monet-impression-sunrise"));
+		TestTrue(TEXT("and the face hangs from the label, under the rack"), Face && Face->GetAttachParent() == Works[0]);
+	}
+	World->DestroyWorld(false);
+	return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FArtHooksTest, "Musee.Art.Hooks", Musee::ArtMaking::Tests::Flags)
+
+/**
+ * A framed canvas on a wire mesh (a store's rack) hangs by a pair of S-hooks through the screw eyes in its frame's back:
+ * each eye's ring lies level against the back a third of the frame down, halfway between two uprights; each hook rises
+ * from its eye, passes over a level wire and turns down behind it, all between the frame's back and the mesh. Where the
+ * mesh stands too close, or no wire is high enough, or the work has no frame to hang by, it is a finding.
+ */
+bool FArtHooksTest::RunTest(const FString& Parameters)
+{
+	using namespace Musee::ArtMaking;
+	TArray<FFormMadePiece> Pieces;
+	TArray<FMuseeFinding> Findings;
+	GatherArt(Tests::Oval(TEXT("meshed")), Pieces, Findings);
+	if (TestEqual(TEXT("One finding: the unframed canvas on a mesh"), Findings.Num(), 1))
+	{
+		TestTrue(TEXT("it has no eyes to hang by"), Findings[0].ToString().Contains(TEXT("hooks in its frame's back")));
+	}
+	const double Wall = -5.0;
+	const double Back = Wall + 0.002;
+	const double Mesh = Wall - 0.0105;
+	for (const TCHAR* Index : { TEXT("1"), TEXT("2") })
+	{
+		const FFormMadePiece* Hook = Tests::FindPiece(Pieces, *FString::Printf(TEXT("canvas.monet-impression-sunrise.hook.%s"), Index));
+		const FFormMadePiece* Eye = Tests::FindPiece(Pieces, *FString::Printf(TEXT("canvas.monet-impression-sunrise.eye.%s"), Index));
+		if (!TestNotNull(TEXT("Each side of the frame has its hook"), Hook) || !TestNotNull(TEXT("and its eye"), Eye))
+		{
+			continue;
+		}
+		TestTrue(TEXT("both in the mesh's hooks surface"), Hook->Surface == TEXT("meshed.hook") && Eye->Surface == TEXT("meshed.hook"));
+		TestTrue(TEXT("each a closed solid"), Musee::FormMaking::MeasureShell(*Hook).IsClosed() && Musee::FormMaking::MeasureShell(*Eye).IsClosed());
+		const FBox H = Tests::StageBox(*Hook);
+		const FBox E = Tests::StageBox(*Eye);
+		// The eye: a 4 mm ring of 2 mm wire lying level against the frame's back, a third of the 0.671 m frame down its 1.886 top.
+		// Form draws a round of wire as a polygon, whose corners stand past the round by under a millimetre.
+		const double Polygon = 0.001;
+		TestEqual(TEXT("The eye's ring touches the frame's back"), E.Max.Y, Back, Polygon);
+		TestEqual(TEXT("and stands 8 mm off it"), E.GetSize().Y, 0.008, Polygon);
+		TestEqual(TEXT("a third of the frame down"), E.GetCenter().Z, 1.3100 + 0.48 + 0.0957 - (0.48 + 2.0 * 0.0957) / 3.0, 2e-4);
+		const double Gap = (E.GetCenter().X - 0.1) / 0.025 - 0.5;
+		TestEqual(TEXT("halfway between two uprights"), Gap, FMath::RoundToDouble(Gap), 1e-6);
+		TestEqual(TEXT("and its hook with it"), H.GetCenter().X, E.GetCenter().X, 1e-6);
+		// The hook: its upper bend's inside rests over a level wire (its top 1.5 + 2 + 0.2 mm over the wire's centre).
+		const double Wire = (H.Max.Z - 0.0037 - 0.23) / 0.025;
+		TestEqual(TEXT("The hook hangs over a level wire"), Wire, FMath::RoundToDouble(Wire), Polygon / 0.025);
+		TestTrue(TEXT("with at least its least shank above the eye"), H.Max.Z - E.GetCenter().Z >= 0.02 && H.Max.Z - E.GetCenter().Z < 0.02 + 0.025 + 0.01);
+		TestTrue(TEXT("between the frame's back and the mesh's face, turning down behind the wire"), H.Max.Y < Back && H.Min.Y < Mesh - 0.0015);
+		TestTrue(TEXT("its lower bend round the eye's far wire"), H.Min.Z < E.Min.Z && H.Min.Y < E.Min.Y);
+	}
+	const FFormMadePiece* Frame = Tests::FindPiece(Pieces, TEXT("canvas.monet-impression-sunrise.frame"));
+	TestTrue(TEXT("The frame hangs where it would on a wall"), Frame && FMath::IsNearlyEqual(Tests::StageBox(*Frame).Min.Y, Back, 1e-6));
+
+	// Hung where it can't be: the mesh too close behind the frame's back for a hook's bends, no wire high enough.
+	const TValueOrError<FArtHooks, FString> Hooks = Musee::ReadRecord<FArtHooks>(FArtHooks::Record);
+	const TValueOrError<FArtMoulding, FString> Moulding = Musee::ReadRecord<FArtMoulding>(FArtMoulding::Record);
+	if (TestTrue(TEXT("The hooks' and the moulding's records read"), Hooks.HasValue() && Moulding.HasValue()))
+	{
+		FArtMesh Close;
+		Close.Anchor = FMuseeKey(TEXT("oval.wall.flat"));
+		Close.Levels = { 0.23, 3.28, 0.025 };
+		Close.Uprights = { 0.1, 4.9, 0.025 };
+		Close.Behind = 0.006;
+		Close.Wire = 0.003;
+		FArtHangEntry Work = Tests::Entry(TEXT("monet-impression-sunrise"), TEXT("artworks.json"));
+		Work.Along = 1.0f;
+		Work.Height = 1.31f;
+		TestTrue(TEXT("A mesh too close behind the frame is refused"), PlanHooks(Hooks.GetValue(), Close, Moulding.GetValue(), Work).HasError());
+		FArtMesh Low = Close;
+		Low.Behind = 0.0105;
+		Low.Levels.To = 1.5;
+		TestTrue(TEXT("and one with no wire over the eyes"), PlanHooks(Hooks.GetValue(), Low, Moulding.GetValue(), Work).HasError());
+		Low.Levels.To = 3.28;
+		TestTrue(TEXT("while the rack's own mesh hangs it"), PlanHooks(Hooks.GetValue(), Low, Moulding.GetValue(), Work).HasValue());
 	}
 	return true;
 }

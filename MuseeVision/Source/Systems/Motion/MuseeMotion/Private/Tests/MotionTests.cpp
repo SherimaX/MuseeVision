@@ -107,6 +107,7 @@ bool FMotionScheduleTest::RunTest(const FString& Parameters)
 	TestTrue(TEXT("A channel step, then a move"), !Lift.Open[0].IsMove() && Lift.Open[0].Channel == FMuseeKey(TEXTVIEW("proof.rim")) && Lift.Open[1].Move == UMotionMechanism::Open);
 	TestEqual(TEXT("The optional words for opening"), Lift.OpenUse.Verb.Source, FString(TEXT("Raise")));
 	TestEqual(TEXT("and for closing"), Lift.CloseUse.Caption.Source, FString(TEXT("Settle the block")));
+	TestEqual(TEXT("What its guard says while it holds"), Lift.GuardCaption.Source, FString(TEXT("The block waits: you are under it")));
 	TestTrue(TEXT("Without them, a mechanism has none"), Schedule.Mechanisms[1].OpenUse.Verb.Key.IsNone() && Schedule.Mechanisms[1].CloseUse.Verb.Key.IsNone());
 	TestTrue(TEXT("A sound spec has no faults"), Faults(Lift).IsEmpty() && Faults(Schedule.Mechanisms[1]).IsEmpty() && Faults(Schedule.Mechanisms[2]).IsEmpty());
 
@@ -265,6 +266,7 @@ bool FMotionGuardTest::RunTest(const FString& Parameters)
 	TestTrue(TEXT("The guard holds the lift"), Lift->IsHeld() && Lift->IsRunning());
 	TestTrue(TEXT("Clear of the head by the clearance"), Tests::HeightMeters(*Lift) >= 1.8 + 0.05 - 0.02 && Tests::HeightMeters(*Lift) < 1.9);
 	TestFalse(TEXT("Its control says why it can't be used"), Lift->Usage().bAvailable || Lift->Usage().WhyNot.IsEmpty());
+	TestEqual(TEXT("In the stage's own words, its guard caption"), Lift->Usage().WhyNot.ToString(), FString(TEXT("The block waits: you are under it")));
 
 	Visitor->SetWorldLocation(Musee::ToEngine(FVector(20.0, 0.0, 0.9)));
 	Tests::Run(*Lift, 6.0);

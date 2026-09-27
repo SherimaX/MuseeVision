@@ -1,0 +1,13 @@
+{
+  "$sources": "Studio's specimen: the plinth turns a quarter about its post, worked by the knob on the post's face, so its control rides the plinth.",
+  "stage": "specimen-room",
+  "mechanisms": [
+    {
+      "key": "specimen-room.plinth-turn", "joint": "revolute", "body": "specimen-room.plinth", "axis": [0, 0, 1], "travel": 90,
+      "time": 3.0, "profile": "ease-in-out", "control": "specimen-room.plinth.knob",
+      "open":  [ { "move": "open" } ],
+      "close": [ { "move": "closed" } ],
+      "guard": "body-in-travel", "clearance": 0.05
+    }
+  ]
+}

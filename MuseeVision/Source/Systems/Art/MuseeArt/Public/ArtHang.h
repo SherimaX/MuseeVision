@@ -1,13 +1,14 @@
 #pragma once
 
 #include "ArtHangEntry.h"
+#include "ArtMesh.h"
 #include "ArtWall.h"
 #include "CoreMinimal.h"
 #include "MuseeKey.h"
 
 #include "ArtHang.generated.h"
 
-/** A stage's hanging plan, `Data/Stages/<stage>/Hang.json`: its curved walls and its works. */
+/** A stage's hanging plan, `Data/Stages/<stage>/Hang.json`: its curved walls, the meshes works hang on, and its works. */
 USTRUCT()
 struct MUSEEART_API FArtHang
 {
@@ -21,6 +22,9 @@ struct MUSEEART_API FArtHang
 
 	UPROPERTY()
 	TArray<FArtWall> Walls;
+
+	UPROPERTY()
+	TArray<FArtMesh> Meshes;
 
 	UPROPERTY()
 	TArray<FArtHangEntry> Works;

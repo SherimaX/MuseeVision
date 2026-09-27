@@ -30,7 +30,9 @@ namespace Musee::Nympheas
 		/**
 		 * The ports: the east doorway on the passage's port face, which meets the Salon's west door (the oval draws its own
 		 * architrave round it, P6); and the stair's foot at the Reserve's west door, whose well (the stair's shaft under the
-		 * oval) the oval serves.
+		 * oval) the oval serves. The Reserve's door is the shaft's whole width, so no wall stands beside it on the well's
+		 * side to carry a surround (§3.7: the head wall is plain brick): the oval owns that face bare, and the Reserve draws
+		 * its own on the hall face.
 		 */
 		void Ports(FSiteDescription& Out)
 		{
@@ -50,6 +52,7 @@ namespace Musee::Nympheas
 			Stair.Frame = FMuseeFrame(FVector(Plan::PortFaceX, 0.0, Plan::WellFloor));
 			Stair.WallDepthMeters = Plan::PortFaceX - Plan::HeadWallX;
 			Stair.Mates = FMuseeKey(TEXT("reserve.stair"));
+			Stair.bOwnSurround = true;
 			Stair.bHasWell = true;
 			Stair.Well.bServing = true;
 			Stair.Well.MinMeters = FVector(Plan::EndWallWestX, -Plan::ShaftOuterHalf, Plan::FoundationUnderside);

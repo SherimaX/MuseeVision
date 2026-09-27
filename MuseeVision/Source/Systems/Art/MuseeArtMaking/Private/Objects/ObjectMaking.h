@@ -17,7 +17,8 @@ namespace Musee::ArtMaking
 {
 	/**
 	 * What every object of a stage is made with, read once: its stage and plan, each frame style's moulding, ware's
-	 * forms, how works are cast, the scrolls' and handscrolls' fittings, the panels' construction and the books' bindings.
+	 * forms, how works are cast, the scrolls' and handscrolls' fittings, the panels' construction, the books' bindings and the
+	 * hooks works hang on a mesh by.
 	 */
 	struct FObjectMaking
 	{
@@ -31,6 +32,7 @@ namespace Musee::ArtMaking
 		TOptional<TValueOrError<FArtHandscrollFittings, FString>> HandscrollFittings;
 		TOptional<TValueOrError<FArtPanelConstruction, FString>> PanelConstruction;
 		TOptional<TValueOrError<TArray<FArtBook>, FString>> Bindings;
+		TOptional<TValueOrError<FArtHooks, FString>> HookRecord;
 
 		/** The moulding a frame of this style is made in (FArtMoulding::RecordFor), or why it can't be read. */
 		const TValueOrError<FArtMoulding, FString>& Moulding(FName FrameStyle);
@@ -55,6 +57,9 @@ namespace Musee::ArtMaking
 
 		/** How each book is bound (Data/Art/Books.json), or why they can't be read. */
 		const TValueOrError<TArray<FArtBook>, FString>& Books();
+
+		/** The hardware a framed work hangs on a mesh by (Data/Art/Hooks.json), or why it can't be read. */
+		const TValueOrError<FArtHooks, FString>& Hooks();
 	};
 
 	/** A piece Art makes: named, finished in its surface or in a material spec, colliding as a solid, drawn by Art. */

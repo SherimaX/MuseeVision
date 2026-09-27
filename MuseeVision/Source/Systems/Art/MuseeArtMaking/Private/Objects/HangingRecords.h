@@ -139,3 +139,45 @@ struct FArtBook
 	UPROPERTY(meta = (MuseeRequired))
 	FArtFinishSpec Edges;
 };
+
+/**
+ * The hardware a framed work hangs on a wire mesh by (`Data/Art/Hooks.json`): a screw eye in the back of each of its
+ * frame's sides, its ring lying level against the frame's back, a share of the frame's height down from its top; and
+ * through each eye an S-hook bent from round wire, its lower bend round the eye's ring and its upper bend over a level
+ * wire of the mesh, its shank at least so long, its ends turned on past the bends.
+ */
+USTRUCT()
+struct FArtHooks
+{
+	GENERATED_BODY()
+
+	/** The record, under Data. */
+	static constexpr const TCHAR* Record = TEXT("Art/Hooks.json");
+
+	/** The S-hook's wire. */
+	UPROPERTY(meta = (MuseeRequired, Units = "Meters"))
+	double HookWireMeters = 0.0;
+
+	/** The screw eye's wire, and the ring's inside diameter. */
+	UPROPERTY(meta = (MuseeRequired, Units = "Meters"))
+	double EyeWireMeters = 0.0;
+
+	UPROPERTY(meta = (MuseeRequired, Units = "Meters"))
+	double EyeInsideMeters = 0.0;
+
+	/** How far down the frame's height, from its top, the eyes are set. */
+	UPROPERTY(meta = (MuseeRequired))
+	double EyeDropShare = 0.0;
+
+	/** The least straight shank between the hook's bends. */
+	UPROPERTY(meta = (MuseeRequired, Units = "Meters"))
+	double LeastShankMeters = 0.0;
+
+	/** How far each end runs on past its bend: down behind the mesh's wire, and up inside the eye. */
+	UPROPERTY(meta = (MuseeRequired, Units = "Meters"))
+	double EndMeters = 0.0;
+
+	/** The play between linked wires (a hook in its eye, over its wire), so each hangs free of the other. */
+	UPROPERTY(meta = (MuseeRequired, Units = "Meters"))
+	double PlayMeters = 0.0;
+};

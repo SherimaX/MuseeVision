@@ -7,7 +7,7 @@ The collection as real objects. Modules `MuseeArt` (Runtime: the catalogue, the 
 
 | Header | Connector |
 | --- | --- |
-| `ArtHang.h`, `ArtHangEntry.h`, `ArtWall.h`, `ArtWallPath.h` | `FArtHang`: a stage's `Hang.json`, its curved walls and its works; every field the stages' sheets write |
+| `ArtHang.h`, `ArtHangEntry.h`, `ArtWall.h`, `ArtWallPath.h`, `ArtMesh.h` | `FArtHang`: a stage's `Hang.json`, its curved walls, the meshes works hang on and its works; every field the stages' sheets write |
 | `ArtAfter.h`, `ArtScrollMount.h`, `ArtScanPlacement.h`, `ArtCarrier.h` | an entry's original (`after`), a scroll's mount, a cast's scan and carrier |
 | `ArtCatalogue.h`, `ArtCatalogueEntry.h`, `ArtGallery.h`, `ArtScan.h` | the museum's catalogues, read as they are written |
 | `ArtWork.h` | `FArtWork` (the catalogue's facts, the hang's size, support, care and reproduction, its image, its scan's credit; `Caption`); `Musee::Art::ReadWork`, `FindImage`, `FindSectionImages` (a work's numbered photographs, from one folder, distinct), `PaintMaterial` (`paint.<id>`, `paint.<id>.<index>`), `RepositoryRoot`, `SourcePath` |
@@ -22,6 +22,14 @@ stretcher, its tacking edges and back in linen; curved to the wall where the han
 on several canvases (`"canvas": <index>`) shows its one image across them, each face's UV0 in metres from the image's
 top-left corner. A canvas the plan frames (`"frame": "<surface>"`) gets the museum's moulding (`Data/Art/Moulding.json`)
 swept round it, mitred, as a closed solid in the finish of that surface.
+
+**Works on a mesh.** A Wall anchor the plan names in `meshes` (`ArtMesh.h`: a store's rack, its level and upright wires
+behind the anchor's plane) has its works hung from the mesh, never floating off it: each framed canvas there hangs by a
+pair of S-hooks (`<name>.hook.1`, `.2`) through screw eyes in its frame's back (`<name>.eye.1`, `.2`), in the mesh's
+`hooks` surface. The eyes' rings lie level against the frame's back, a third of the frame down, each moved to the gap
+between two uprights; each hook rises from its eye to the lowest level wire that leaves it its least shank, passes over
+it and turns down behind it (`Data/Art/Hooks.json`). A mesh too close behind the frame for the hooks' bends, no wire
+high enough, or a work with no frame to hang by is a finding.
 
 Canvases that each name their own `image` (the Rouen series) each show it, in their own layer `paint.<id>.<index>`.
 A `glass` entry at a `Glazing` anchor (Albion's band, D-014) is a pane of the glass its `wall` surface names (Lamberts'
@@ -108,6 +116,12 @@ Every object is named `<word>.<id>[.<index>]` (`canvas`, `glass`, `paper`, `plat
 
 Every object is named `<word>.<id>[.<index>]` (`canvas`, `panel`, `glass`, `paper`, `silk`, `plate`, `ware`,
 `tapestry`), its parts `<name>.<part>`.
+
+**Works on moving bodies.** An entry whose anchor rides a moving body (a store's rack) names it, `"body": "<Body
+anchor>"`, as Lighting's and Planting's entries do. Its pieces are made where the anchor stands at rest and carried on
+that body, each piece's frame in the body's frame, so Studio hangs them from the body's component and they move, and
+are guarded, with it; the dresser hangs the work's label where its pieces hang. A body that isn't a Body anchor of the
+stage is a finding.
 
 A work the stage builds (`"built": "form"`) gets only its caption and care: the stage names its pieces
 `work.<id>[.<index>][.<part>]`, and the dresser hangs them from the work's label. A reproduction (`"reproduction":

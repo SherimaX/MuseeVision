@@ -1,0 +1,16 @@
+{
+  "stage": "carried",
+  "works": [
+    {
+      "work": "monet-impression-sunrise", "source": "MuseeVision/Source/Systems/Art/MuseeArtMaking/Private/Tests/Data/artworks.json",
+      "anchor": "oval.wall.flat", "body": "carried.rack", "along": 1.0, "height": 1.31, "size": [0.63, 0.48],
+      "support": "canvas", "frame": "carried.frame.gilt", "care": "oil-and-tempera",
+      "note": "The framed canvas of the framed stage, hung on a wall that rides a rack: made as there, carried on the rack."
+    },
+    {
+      "work": "monet-willows-two-willows", "source": "MuseeVision/Source/Systems/Art/MuseeArtMaking/Private/Tests/Data/collection.json",
+      "anchor": "oval.wall.flat", "body": "carried.nowhere", "along": 3.0, "height": 0.7, "size": [8.5, 2.0],
+      "support": "canvas", "frame": "none", "care": "oil-and-tempera", "note": "A body the stage doesn't declare: a finding."
+    }
+  ]
+}

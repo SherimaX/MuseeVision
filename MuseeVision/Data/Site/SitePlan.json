@@ -17,6 +17,12 @@
       "note": "The oval passage: the Salon's bay 5 far wall meets the oval's passage block."
     },
     {
+      "a": "nympheas.stair",
+      "b": "reserve.stair",
+      "passageMeters": 0.0,
+      "note": "The foot of the oval's stair at the Reserve's west door (D-020; reserve.md section 2): the faces touch on the plane museum x -74.600; the oval serves the well and the Reserve receives it."
+    },
+    {
       "a": "rotunda.west",
       "b": "salon.east",
       "passageMeters": 2.2,

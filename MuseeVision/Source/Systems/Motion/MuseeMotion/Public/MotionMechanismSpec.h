@@ -25,8 +25,8 @@
  * Timing: a short move gives `time` (for the full travel) and `profile`: `linear`, or `ease-in-out`, the minimum-jerk
  * move (Flash and Hogan 1985). A long drive gives `drive` in their place: speed, acceleration and jerk limits, with
  * zones. Guards: `none`; `body-in-travel`, which holds the drive while the visitor's body is in its next travel slice
- * and resumes when it is clear (a lift); `body-in-travel-reverse`, which sends the body back to the state it left (a
- * door).
+ * and resumes when it is clear (a lift), saying why in its `guardCaption`; `body-in-travel-reverse`, which sends the
+ * body back to the state it left (a door).
  *
  * A mechanism may publish its position on a channel, and may instead follow another's channel (guard rails that rise
  * with the pond they guard, a lift's door leaves), in which case it has no control, no sequences and no rides.
@@ -107,6 +107,13 @@ struct MUSEEMOTION_API FMotionMechanismSpec
 	/** The gap the guard keeps between the moving body and the visitor. */
 	UPROPERTY(meta = (Units = "Meters"))
 	float Clearance = 0.0f;
+
+	/**
+	 * What the control says while the guard holds the body for the visitor (`Screen C waits: you are in its way`); Motion's
+	 * own words when absent (its key is none). Only a guarded mechanism has one.
+	 */
+	UPROPERTY()
+	FMuseeText GuardCaption;
 
 	/** The channel the mechanism publishes its position on, as a share of its travel from 0 to 1 (none: it publishes none). */
 	UPROPERTY()

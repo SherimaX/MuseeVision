@@ -128,7 +128,33 @@ namespace Musee::Studio
 			return true;
 		}
 
-		/** Puts the stage's actor, its bodies, every placement and every barrier into the draft, then dresses it. */
+		/**
+		 * Hangs every component on its parent and makes its place in the world current, as registering it would. The
+		 * draft's components are not registered (nothing runs in its world), so until now a parent doesn't list what hangs
+		 * from it; a dresser that asks what a body carries and where (Motion: whether a control lies on a moving body's
+		 * parts) must find the body's parts on it, where the level will hold them.
+		 */
+		void Place(AActor& Actor)
+		{
+			TInlineComponentArray<USceneComponent*> Components(&Actor);
+			for (USceneComponent* Component : Components)
+			{
+				USceneComponent* Parent = Component->GetAttachParent();
+				if (Parent && !Parent->GetAttachChildren().Contains(Component))
+				{
+					Component->AttachToComponent(Parent, FAttachmentTransformRules::KeepRelativeTransform, Component->GetAttachSocketName());
+				}
+			}
+			for (USceneComponent* Component : Components)
+			{
+				Component->UpdateComponentToWorld();
+			}
+		}
+
+		/**
+		 * Puts the stage's actor, its bodies, every placement and every barrier into the draft, places them in its world,
+		 * then dresses it.
+		 */
 		bool Furnish(FLevelDraft& Draft, const FStageLevel& Stage, FString& OutWhy)
 		{
 			AActor* Actor = Draft.Spawn(AActor::StaticClass(), Stage.StageName, FTransform::Identity);
@@ -158,6 +184,7 @@ namespace Musee::Studio
 					return false;
 				}
 			}
+			Place(*Actor);
 			return !Stage.Dress || Stage.Dress(*Actor, OutWhy);
 		}
 	}
