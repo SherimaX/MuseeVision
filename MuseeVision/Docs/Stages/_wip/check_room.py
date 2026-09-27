@@ -7,7 +7,10 @@ USE = r"C:\mv\wt\r-light\MuseeVision\Data\Light\UseTargets.json"
 CARE = r"C:\mv\wt\r-light\MuseeVision\Data\Art\Care.json"
 PALETTE = "C:/Users/anan9/AppData/Local/Temp/claude/C--Users-anan9-Desktop-Projects-Musee-Vision/fe83b0c0-89f0-4a7a-aec6-d7928054970e/scratchpad/Palette.json"
 # keys the Architect has ruled in, which Matter will add to the palette
-RULED_KEYS = {"steel.hard-chrome"}
+RULED_KEYS = {"steel.hard-chrome", "accent.rag-board", "accent.stoneware-glazed", "accent.huanghuali", "accent.lingbi-rock"}
+# catalogue types and target classes the Architect has ruled in, which Light will add
+RULED_TYPES = {"case-linear.3000k", "lantern.2200k"}
+RULED_USE = {"garden.night", "gallery.low-light"}
 COLL = r"C:\Users\anan9\Desktop\Projects\Musee Vision\assets\collection.json"
 
 HEADINGS = ["Identity and placement", "Ports", "Pieces by trade", "Light", "Time and weather", "Motion",
@@ -108,8 +111,8 @@ def main(room):
                 errs.append(f"surface not lowercase: {s}")
     # surfaces named in the sheet in backticks that look like surfaces but lack a finish
     ticked = set(re.findall(r"`([a-z0-9-]+(?:\.[a-z0-9-]+)+)`", md))
-    cat = {os.path.basename(p)[:-5] for p in glob.glob(os.path.join(CAT, "*.json"))}
-    use = {c["key"] for c in load(USE)["classes"]}
+    cat = {os.path.basename(p)[:-5] for p in glob.glob(os.path.join(CAT, "*.json"))} | RULED_TYPES
+    use = {c["key"] for c in load(USE)["classes"]} | RULED_USE
     care = {c["key"] for c in load(CARE)["classes"]}
     if "Lighting.json" in data:
         L = data["Lighting.json"]
