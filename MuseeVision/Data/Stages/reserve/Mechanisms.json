@@ -39,9 +39,10 @@
       "home": "closed",
       "guard": "body-in-travel",
       "clearance": 0.05,
+      "guardCaption": "Screen A waits: you are in its way",
       "publishes": "reserve.screen-a.position",
       "group": "reserve.screens",
-      "note": "Rack at x -28.15, north aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice (caption: Screen A waits: you are in its way); it never pushes."
+      "note": "Rack at x -28.15, north aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice; it never pushes."
     },
     {
       "key": "reserve.screen-b",
@@ -81,9 +82,10 @@
       "home": "closed",
       "guard": "body-in-travel",
       "clearance": 0.05,
+      "guardCaption": "Screen B waits: you are in its way",
       "publishes": "reserve.screen-b.position",
       "group": "reserve.screens",
-      "note": "Rack at x -26.25, north aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice (caption: Screen B waits: you are in its way); it never pushes."
+      "note": "Rack at x -26.25, north aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice; it never pushes."
     },
     {
       "key": "reserve.screen-c",
@@ -123,10 +125,11 @@
       "home": "closed",
       "guard": "body-in-travel",
       "clearance": 0.05,
+      "guardCaption": "Screen C waits: you are in its way",
       "publishes": "reserve.screen-c.position",
       "group": "reserve.screens",
       "start": "open",
-      "note": "Rack at x -24.35, north aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice (caption: Screen C waits: you are in its way); it never pushes. Starts out: the visit begins with the three Renoirs in the nave."
+      "note": "Rack at x -24.35, north aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice; it never pushes. Starts out: the visit begins with the three Renoirs in the nave."
     },
     {
       "key": "reserve.screen-d",
@@ -166,9 +169,10 @@
       "home": "closed",
       "guard": "body-in-travel",
       "clearance": 0.05,
+      "guardCaption": "Screen D waits: you are in its way",
       "publishes": "reserve.screen-d.position",
       "group": "reserve.screens",
-      "note": "Rack at x -20.65, north aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice (caption: Screen D waits: you are in its way); it never pushes."
+      "note": "Rack at x -20.65, north aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice; it never pushes."
     },
     {
       "key": "reserve.screen-e",
@@ -208,9 +212,10 @@
       "home": "closed",
       "guard": "body-in-travel",
       "clearance": 0.05,
+      "guardCaption": "Screen E waits: you are in its way",
       "publishes": "reserve.screen-e.position",
       "group": "reserve.screens",
-      "note": "Rack at x -18.75, north aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice (caption: Screen E waits: you are in its way); it never pushes."
+      "note": "Rack at x -18.75, north aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice; it never pushes."
     },
     {
       "key": "reserve.screen-f",
@@ -250,9 +255,10 @@
       "home": "closed",
       "guard": "body-in-travel",
       "clearance": 0.05,
+      "guardCaption": "Screen F waits: you are in its way",
       "publishes": "reserve.screen-f.position",
       "group": "reserve.screens",
-      "note": "Rack at x -16.85, north aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice (caption: Screen F waits: you are in its way); it never pushes."
+      "note": "Rack at x -16.85, north aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice; it never pushes."
     },
     {
       "key": "reserve.screen-n07",
@@ -292,9 +298,10 @@
       "home": "closed",
       "guard": "body-in-travel",
       "clearance": 0.05,
+      "guardCaption": "Screen N07 waits: you are in its way",
       "publishes": "reserve.screen-n07.position",
       "group": "reserve.screens",
-      "note": "Rack at x -13.15, north aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice (caption: Screen N07 waits: you are in its way); it never pushes."
+      "note": "Rack at x -13.15, north aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice; it never pushes."
     },
     {
       "key": "reserve.screen-n08",
@@ -334,9 +341,10 @@
       "home": "closed",
       "guard": "body-in-travel",
       "clearance": 0.05,
+      "guardCaption": "Screen N08 waits: you are in its way",
       "publishes": "reserve.screen-n08.position",
       "group": "reserve.screens",
-      "note": "Rack at x -11.25, north aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice (caption: Screen N08 waits: you are in its way); it never pushes."
+      "note": "Rack at x -11.25, north aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice; it never pushes."
     },
     {
       "key": "reserve.screen-n09",
@@ -376,9 +384,10 @@
       "home": "closed",
       "guard": "body-in-travel",
       "clearance": 0.05,
+      "guardCaption": "Screen N09 waits: you are in its way",
       "publishes": "reserve.screen-n09.position",
       "group": "reserve.screens",
-      "note": "Rack at x -9.35, north aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice (caption: Screen N09 waits: you are in its way); it never pushes."
+      "note": "Rack at x -9.35, north aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice; it never pushes."
     },
     {
       "key": "reserve.screen-n10",
@@ -418,9 +427,10 @@
       "home": "closed",
       "guard": "body-in-travel",
       "clearance": 0.05,
+      "guardCaption": "Screen N10 waits: you are in its way",
       "publishes": "reserve.screen-n10.position",
       "group": "reserve.screens",
-      "note": "Rack at x -5.65, north aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice (caption: Screen N10 waits: you are in its way); it never pushes."
+      "note": "Rack at x -5.65, north aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice; it never pushes."
     },
     {
       "key": "reserve.screen-n11",
@@ -460,9 +470,10 @@
       "home": "closed",
       "guard": "body-in-travel",
       "clearance": 0.05,
+      "guardCaption": "Screen N11 waits: you are in its way",
       "publishes": "reserve.screen-n11.position",
       "group": "reserve.screens",
-      "note": "Rack at x -3.75, north aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice (caption: Screen N11 waits: you are in its way); it never pushes."
+      "note": "Rack at x -3.75, north aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice; it never pushes."
     },
     {
       "key": "reserve.screen-n12",
@@ -502,9 +513,10 @@
       "home": "closed",
       "guard": "body-in-travel",
       "clearance": 0.05,
+      "guardCaption": "Screen N12 waits: you are in its way",
       "publishes": "reserve.screen-n12.position",
       "group": "reserve.screens",
-      "note": "Rack at x -1.85, north aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice (caption: Screen N12 waits: you are in its way); it never pushes."
+      "note": "Rack at x -1.85, north aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice; it never pushes."
     },
     {
       "key": "reserve.screen-n13",
@@ -544,9 +556,10 @@
       "home": "closed",
       "guard": "body-in-travel",
       "clearance": 0.05,
+      "guardCaption": "Screen N13 waits: you are in its way",
       "publishes": "reserve.screen-n13.position",
       "group": "reserve.screens",
-      "note": "Rack at x 1.85, north aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice (caption: Screen N13 waits: you are in its way); it never pushes."
+      "note": "Rack at x 1.85, north aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice; it never pushes."
     },
     {
       "key": "reserve.screen-n14",
@@ -586,9 +599,10 @@
       "home": "closed",
       "guard": "body-in-travel",
       "clearance": 0.05,
+      "guardCaption": "Screen N14 waits: you are in its way",
       "publishes": "reserve.screen-n14.position",
       "group": "reserve.screens",
-      "note": "Rack at x 3.75, north aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice (caption: Screen N14 waits: you are in its way); it never pushes."
+      "note": "Rack at x 3.75, north aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice; it never pushes."
     },
     {
       "key": "reserve.screen-n15",
@@ -628,9 +642,10 @@
       "home": "closed",
       "guard": "body-in-travel",
       "clearance": 0.05,
+      "guardCaption": "Screen N15 waits: you are in its way",
       "publishes": "reserve.screen-n15.position",
       "group": "reserve.screens",
-      "note": "Rack at x 5.65, north aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice (caption: Screen N15 waits: you are in its way); it never pushes."
+      "note": "Rack at x 5.65, north aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice; it never pushes."
     },
     {
       "key": "reserve.screen-n16",
@@ -670,9 +685,10 @@
       "home": "closed",
       "guard": "body-in-travel",
       "clearance": 0.05,
+      "guardCaption": "Screen N16 waits: you are in its way",
       "publishes": "reserve.screen-n16.position",
       "group": "reserve.screens",
-      "note": "Rack at x 9.35, north aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice (caption: Screen N16 waits: you are in its way); it never pushes."
+      "note": "Rack at x 9.35, north aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice; it never pushes."
     },
     {
       "key": "reserve.screen-n17",
@@ -712,9 +728,10 @@
       "home": "closed",
       "guard": "body-in-travel",
       "clearance": 0.05,
+      "guardCaption": "Screen N17 waits: you are in its way",
       "publishes": "reserve.screen-n17.position",
       "group": "reserve.screens",
-      "note": "Rack at x 11.25, north aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice (caption: Screen N17 waits: you are in its way); it never pushes."
+      "note": "Rack at x 11.25, north aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice; it never pushes."
     },
     {
       "key": "reserve.screen-n18",
@@ -754,9 +771,10 @@
       "home": "closed",
       "guard": "body-in-travel",
       "clearance": 0.05,
+      "guardCaption": "Screen N18 waits: you are in its way",
       "publishes": "reserve.screen-n18.position",
       "group": "reserve.screens",
-      "note": "Rack at x 13.15, north aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice (caption: Screen N18 waits: you are in its way); it never pushes."
+      "note": "Rack at x 13.15, north aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice; it never pushes."
     },
     {
       "key": "reserve.screen-s01",
@@ -796,9 +814,10 @@
       "home": "closed",
       "guard": "body-in-travel",
       "clearance": 0.05,
+      "guardCaption": "Screen S01 waits: you are in its way",
       "publishes": "reserve.screen-s01.position",
       "group": "reserve.screens",
-      "note": "Rack at x -28.15, south aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice (caption: Screen S01 waits: you are in its way); it never pushes."
+      "note": "Rack at x -28.15, south aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice; it never pushes."
     },
     {
       "key": "reserve.screen-s02",
@@ -838,9 +857,10 @@
       "home": "closed",
       "guard": "body-in-travel",
       "clearance": 0.05,
+      "guardCaption": "Screen S02 waits: you are in its way",
       "publishes": "reserve.screen-s02.position",
       "group": "reserve.screens",
-      "note": "Rack at x -26.25, south aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice (caption: Screen S02 waits: you are in its way); it never pushes."
+      "note": "Rack at x -26.25, south aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice; it never pushes."
     },
     {
       "key": "reserve.screen-s03",
@@ -880,9 +900,10 @@
       "home": "closed",
       "guard": "body-in-travel",
       "clearance": 0.05,
+      "guardCaption": "Screen S03 waits: you are in its way",
       "publishes": "reserve.screen-s03.position",
       "group": "reserve.screens",
-      "note": "Rack at x -24.35, south aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice (caption: Screen S03 waits: you are in its way); it never pushes."
+      "note": "Rack at x -24.35, south aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice; it never pushes."
     },
     {
       "key": "reserve.screen-s04",
@@ -922,9 +943,10 @@
       "home": "closed",
       "guard": "body-in-travel",
       "clearance": 0.05,
+      "guardCaption": "Screen S04 waits: you are in its way",
       "publishes": "reserve.screen-s04.position",
       "group": "reserve.screens",
-      "note": "Rack at x -20.65, south aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice (caption: Screen S04 waits: you are in its way); it never pushes."
+      "note": "Rack at x -20.65, south aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice; it never pushes."
     },
     {
       "key": "reserve.screen-s05",
@@ -964,9 +986,10 @@
       "home": "closed",
       "guard": "body-in-travel",
       "clearance": 0.05,
+      "guardCaption": "Screen S05 waits: you are in its way",
       "publishes": "reserve.screen-s05.position",
       "group": "reserve.screens",
-      "note": "Rack at x -18.75, south aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice (caption: Screen S05 waits: you are in its way); it never pushes."
+      "note": "Rack at x -18.75, south aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice; it never pushes."
     },
     {
       "key": "reserve.screen-s06",
@@ -1006,9 +1029,10 @@
       "home": "closed",
       "guard": "body-in-travel",
       "clearance": 0.05,
+      "guardCaption": "Screen S06 waits: you are in its way",
       "publishes": "reserve.screen-s06.position",
       "group": "reserve.screens",
-      "note": "Rack at x -16.85, south aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice (caption: Screen S06 waits: you are in its way); it never pushes."
+      "note": "Rack at x -16.85, south aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice; it never pushes."
     },
     {
       "key": "reserve.screen-s07",
@@ -1048,9 +1072,10 @@
       "home": "closed",
       "guard": "body-in-travel",
       "clearance": 0.05,
+      "guardCaption": "Screen S07 waits: you are in its way",
       "publishes": "reserve.screen-s07.position",
       "group": "reserve.screens",
-      "note": "Rack at x -13.15, south aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice (caption: Screen S07 waits: you are in its way); it never pushes."
+      "note": "Rack at x -13.15, south aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice; it never pushes."
     },
     {
       "key": "reserve.screen-s08",
@@ -1090,9 +1115,10 @@
       "home": "closed",
       "guard": "body-in-travel",
       "clearance": 0.05,
+      "guardCaption": "Screen S08 waits: you are in its way",
       "publishes": "reserve.screen-s08.position",
       "group": "reserve.screens",
-      "note": "Rack at x -11.25, south aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice (caption: Screen S08 waits: you are in its way); it never pushes."
+      "note": "Rack at x -11.25, south aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice; it never pushes."
     },
     {
       "key": "reserve.screen-s09",
@@ -1132,9 +1158,10 @@
       "home": "closed",
       "guard": "body-in-travel",
       "clearance": 0.05,
+      "guardCaption": "Screen S09 waits: you are in its way",
       "publishes": "reserve.screen-s09.position",
       "group": "reserve.screens",
-      "note": "Rack at x -9.35, south aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice (caption: Screen S09 waits: you are in its way); it never pushes."
+      "note": "Rack at x -9.35, south aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice; it never pushes."
     },
     {
       "key": "reserve.screen-s10",
@@ -1174,9 +1201,10 @@
       "home": "closed",
       "guard": "body-in-travel",
       "clearance": 0.05,
+      "guardCaption": "Screen S10 waits: you are in its way",
       "publishes": "reserve.screen-s10.position",
       "group": "reserve.screens",
-      "note": "Rack at x -5.65, south aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice (caption: Screen S10 waits: you are in its way); it never pushes."
+      "note": "Rack at x -5.65, south aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice; it never pushes."
     },
     {
       "key": "reserve.screen-s11",
@@ -1216,9 +1244,10 @@
       "home": "closed",
       "guard": "body-in-travel",
       "clearance": 0.05,
+      "guardCaption": "Screen S11 waits: you are in its way",
       "publishes": "reserve.screen-s11.position",
       "group": "reserve.screens",
-      "note": "Rack at x -3.75, south aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice (caption: Screen S11 waits: you are in its way); it never pushes."
+      "note": "Rack at x -3.75, south aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice; it never pushes."
     },
     {
       "key": "reserve.screen-s12",
@@ -1258,9 +1287,10 @@
       "home": "closed",
       "guard": "body-in-travel",
       "clearance": 0.05,
+      "guardCaption": "Screen S12 waits: you are in its way",
       "publishes": "reserve.screen-s12.position",
       "group": "reserve.screens",
-      "note": "Rack at x -1.85, south aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice (caption: Screen S12 waits: you are in its way); it never pushes."
+      "note": "Rack at x -1.85, south aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice; it never pushes."
     },
     {
       "key": "reserve.screen-s13",
@@ -1300,9 +1330,10 @@
       "home": "closed",
       "guard": "body-in-travel",
       "clearance": 0.05,
+      "guardCaption": "Screen S13 waits: you are in its way",
       "publishes": "reserve.screen-s13.position",
       "group": "reserve.screens",
-      "note": "Rack at x 1.85, south aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice (caption: Screen S13 waits: you are in its way); it never pushes."
+      "note": "Rack at x 1.85, south aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice; it never pushes."
     },
     {
       "key": "reserve.screen-s14",
@@ -1342,9 +1373,10 @@
       "home": "closed",
       "guard": "body-in-travel",
       "clearance": 0.05,
+      "guardCaption": "Screen S14 waits: you are in its way",
       "publishes": "reserve.screen-s14.position",
       "group": "reserve.screens",
-      "note": "Rack at x 3.75, south aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice (caption: Screen S14 waits: you are in its way); it never pushes."
+      "note": "Rack at x 3.75, south aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice; it never pushes."
     },
     {
       "key": "reserve.screen-s15",
@@ -1384,9 +1416,10 @@
       "home": "closed",
       "guard": "body-in-travel",
       "clearance": 0.05,
+      "guardCaption": "Screen S15 waits: you are in its way",
       "publishes": "reserve.screen-s15.position",
       "group": "reserve.screens",
-      "note": "Rack at x 5.65, south aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice (caption: Screen S15 waits: you are in its way); it never pushes."
+      "note": "Rack at x 5.65, south aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice; it never pushes."
     },
     {
       "key": "reserve.screen-s16",
@@ -1426,9 +1459,10 @@
       "home": "closed",
       "guard": "body-in-travel",
       "clearance": 0.05,
+      "guardCaption": "Screen S16 waits: you are in its way",
       "publishes": "reserve.screen-s16.position",
       "group": "reserve.screens",
-      "note": "Rack at x 9.35, south aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice (caption: Screen S16 waits: you are in its way); it never pushes."
+      "note": "Rack at x 9.35, south aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice; it never pushes."
     },
     {
       "key": "reserve.screen-s17",
@@ -1468,9 +1502,10 @@
       "home": "closed",
       "guard": "body-in-travel",
       "clearance": 0.05,
+      "guardCaption": "Screen S17 waits: you are in its way",
       "publishes": "reserve.screen-s17.position",
       "group": "reserve.screens",
-      "note": "Rack at x 11.25, south aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice (caption: Screen S17 waits: you are in its way); it never pushes."
+      "note": "Rack at x 11.25, south aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice; it never pushes."
     },
     {
       "key": "reserve.screen-s18",
@@ -1510,9 +1545,10 @@
       "home": "closed",
       "guard": "body-in-travel",
       "clearance": 0.05,
+      "guardCaption": "Screen S18 waits: you are in its way",
       "publishes": "reserve.screen-s18.position",
       "group": "reserve.screens",
-      "note": "Rack at x 13.15, south aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice (caption: Screen S18 waits: you are in its way); it never pushes."
+      "note": "Rack at x 13.15, south aisle: top-hung on two trolleys in its overhead track, kept upright by two fins in the flush floor track. Home centre |y| 9.15, out |y| 3.50 (its nave end 1.00 off the axis). Jerk-limited S-curve, about 7.8 s (as built 4.5 s smoothstep). Group reserve.screens: at most one rack out; drawing one sends any other home first (a sequence rule; travel volumes are disjoint). The guard holds while the visitor is in the next travel slice; it never pushes."
     }
   ],
   "channels": [

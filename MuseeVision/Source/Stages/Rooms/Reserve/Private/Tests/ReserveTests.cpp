@@ -114,6 +114,10 @@ namespace Musee::Reserve::Tests
 				1e-9);
 			TestTrue(*FString::Printf(TEXT("%s faces the nave"), *Mechanism.Key.ToString()),
 				Use->Frame.DirectionToParent(FVector::ForwardVector).Equals(Towards, 1e-9));
+			// While its guard holds for a visitor in its way, the rack says so in the sheet's words (§6).
+			const FString Name = Mechanism.OpenUse.Verb.Source.RightChop(FString(TEXT("Draw out screen ")).Len());
+			TestEqual(*FString::Printf(TEXT("%s's guard says why it waits"), *Mechanism.Key.ToString()), Mechanism.GuardCaption.Source,
+				FString::Printf(TEXT("Screen %s waits: you are in its way"), *Name));
 		}
 
 		// The sheet's Wall anchors (§2), to the millimetre.
