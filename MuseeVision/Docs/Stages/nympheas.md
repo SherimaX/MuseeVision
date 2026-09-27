@@ -459,9 +459,11 @@ round the rim line. The cloth and the glass are paraboloids, z = springing + ris
 The door and the passage block are one **straight passage** through the curved wall, its jambs on y ±1.500 from the inner
 face to the port face; the block is masonry between the port face and the oval's outer face. The skirting stops against
 the architrave's outer edge (0.160 along the face from each jamb, y ±1.653), not at y ±1.630, where it would run into it.
-The floor stops 0.030 short of the port face across the passage, so the joint's 0.060 bronze strip lies on the mating
-plane between the oval's floor and the Salon's (doorway.3000x4800.arched carries no lining allowance: the oval finishes
-its own passage, and P6 is its surround, `bOwnSurround`).
+The floor stops 0.030 short of the port face across the clear width, so the joint's 0.060 bronze strip lies on the
+mating plane. doorway.3000x4800.arched carries the 0.050 lining allowance for the Salon's side, which the joint lines,
+and under which it lays its threshold slab through the Salon's wall. The oval finishes its own passage at the clear
+opening, and its port marks its reveal, its floor and P6 as its own (`OwnLiningMeters`, `bOwnThreshold`,
+`bOwnSurround`), so the joint draws none of them.
 
 ## 13. Palette keys to confirm and catalogue gaps
 **Palette keys** (no `todo.` keys; roles guessed or workings outside `workingsByEra`):
