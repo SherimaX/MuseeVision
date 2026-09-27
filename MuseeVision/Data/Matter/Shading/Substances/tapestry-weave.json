@@ -1,0 +1,44 @@
+{
+  "schema": "musee.matter.shading.substance/1",
+  "key": "tapestry-weave",
+  "name": "A woven tapestry: wool weft with silk highlights, beaten down over a cotton warp so the weft alone shows (weft-faced); the image woven in",
+  "family": "accent",
+  "record": "Palette.json",
+  "master": "paint",
+  "accentOf": "white",
+  "dielectric": {
+    "diffuseAlbedo": {
+      "value": [
+        0.8,
+        0.8,
+        0.8
+      ],
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.tapestry",
+      "note": "The reflectance a photograph of the weave's white stands for: a first value, until a tapestry's wool is measured. The dyes' colours, faded as they are, are in the photograph itself."
+    },
+    "refractiveIndex": {
+      "value": 1.55,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "keratin (wool) about 1.55, silk fibroin about 1.54 (Shading/Substances/silk.warm-grey.json)",
+      "note": "The wool and silk of the weft lie near the same index."
+    },
+    "porosity": {
+      "value": 0.6,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.tapestry",
+      "note": "A weave's void share between its yarns and fibres; no measurement was read."
+    },
+    "wettingDepth": {
+      "value": 3.0,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "the weave's thickness (Data/Art/Supports.json: tapestry)",
+      "note": "A tapestry is a single weave: water reaches all of it."
+    }
+  }
+}

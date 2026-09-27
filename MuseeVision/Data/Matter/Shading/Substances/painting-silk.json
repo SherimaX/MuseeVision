@@ -1,0 +1,43 @@
+{
+  "schema": "musee.matter.shading.substance/1",
+  "key": "painting-silk",
+  "name": "A Chinese painting on silk (ink and light mineral colour on plain-woven silk, paper-backed in its mount): the image in the silk",
+  "family": "accent",
+  "record": "Palette.json",
+  "master": "paint",
+  "accentOf": "white",
+  "dielectric": {
+    "diffuseAlbedo": {
+      "value": [
+        0.8,
+        0.8,
+        0.8
+      ],
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.ink-on-silk",
+      "note": "The reflectance a photograph of the silk's white stands for: a first value, until an old painting silk is measured. The silk's tone, darkened with age, is in the photograph itself."
+    },
+    "refractiveIndex": {
+      "value": 1.54,
+      "unit": "1",
+      "grade": "derived",
+      "source": "Substances/silk.json: optics.refractiveIndex (fibroin 1.5307 at 632.8 nm, 1.5511 at 473 nm)",
+      "derivation": "the index near 550 nm between the two, as silk.warm-grey's"
+    },
+    "porosity": {
+      "value": 0.4,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Shading/Substances/silk.warm-grey.json (a closely woven silk's void share)"
+    },
+    "wettingDepth": {
+      "value": 0.3,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "the silk and its paper backing",
+      "note": "A mounted painting is the silk on two or three layers of paper: water reaches all of it."
+    }
+  }
+}
