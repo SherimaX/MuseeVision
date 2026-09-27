@@ -1,0 +1,20 @@
+{
+  "stage": "facsimile",
+  "works": [
+    {
+      "work": "monet-impression-sunrise", "source": "MuseeVision/Source/Systems/Art/MuseeArtMaking/Private/Tests/Data/artworks.json",
+      "anchor": "facsimile.prints", "along": 1.0, "height": 1.5, "size": [0.63, 0.48],
+      "support": "paper", "frame": "none", "care": "works-on-paper", "reproduction": "exhibition-facsimile",
+      "mat": "facsimile.mount", "matSize": [1.0, 0.9], "glazed": true
+    },
+    {
+      "work": "monet-willows-two-willows", "source": "MuseeVision/Source/Systems/Art/MuseeArtMaking/Private/Tests/Data/collection.json",
+      "anchor": "facsimile.prints", "along": 3.0, "height": 1.5, "size": [0.63, 0.48],
+      "support": "paper", "frame": "none", "care": "works-on-paper", "reproduction": "photograph-on-sale"
+    },
+    {
+      "work": "monet-willows-two-willows", "source": "MuseeVision/Source/Systems/Art/MuseeArtMaking/Private/Tests/Data/collection.json",
+      "canvas": 1, "anchor": "facsimile.stones", "size": [0.9, 0.32], "support": "stone", "care": "stone-and-bronze", "built": "carved"
+    }
+  ]
+}

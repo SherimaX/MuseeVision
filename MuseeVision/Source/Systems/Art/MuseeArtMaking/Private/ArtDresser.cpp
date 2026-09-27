@@ -9,42 +9,70 @@ namespace Musee::ArtMaking
 {
 	namespace
 	{
+		const FName GlassSupport(TEXT("glass"));
+
 		/** The tag Studio gives a piece's mesh component: `musee.piece:<name>` (Docs/Stages contract). */
-		FName PieceTag(FName Piece)
+		FString PieceTag(FName Piece)
 		{
-			return FName(FString::Printf(TEXT("musee.piece:%s"), *Piece.ToString()));
+			return FString::Printf(TEXT("musee.piece:%s"), *Piece.ToString());
 		}
 
-		UStaticMeshComponent* FindPiece(const AActor& Actor, FName Piece)
+		/** The stage actor's pieces named Piece, or, with bParts, named Piece or any of its parts `<Piece>.<part>`. */
+		TArray<UStaticMeshComponent*> FindPieces(const AActor& Actor, FName Piece, bool bParts)
 		{
 			TArray<UStaticMeshComponent*> Meshes;
 			Actor.GetComponents(Meshes);
-			const FName Tag = PieceTag(Piece);
-			UStaticMeshComponent* const* Found = Meshes.FindByPredicate([Tag](const UStaticMeshComponent* M) { return M->ComponentHasTag(Tag); });
-			return Found ? *Found : nullptr;
+			const FString Whole = PieceTag(Piece);
+			const FString Part = Whole + TEXT(".");
+			return Meshes.FilterByPredicate([&](const UStaticMeshComponent* Mesh)
+			{
+				return Mesh->ComponentTags.ContainsByPredicate([&](FName Tag)
+				{
+					const FString Text = Tag.ToString();
+					return Text == Whole || (bParts && Text.StartsWith(Part));
+				});
+			});
 		}
 
-		/** Tags every piece of a canvas with its work and care class. */
-		void Tag(const AActor& Actor, const FArtHangEntry& Entry, bool bSplit)
+		/** An object's pieces: a canvas's face, linen and frame; a panel's glass; what the stage built for the work. */
+		TArray<UStaticMeshComponent*> PiecesOf(const AActor& Actor, const FArtHangEntry& Entry, bool bSplit)
 		{
+			if (Entry.IsBuilt())
+			{
+				return FindPieces(Actor, BuiltPieceName(Entry, bSplit), true);
+			}
+			if (Entry.Support == GlassSupport)
+			{
+				return FindPieces(Actor, GlassPieceName(Entry, bSplit), false);
+			}
+			TArray<UStaticMeshComponent*> Out;
 			for (const FName Piece : { FacePieceName(Entry, bSplit), LinenPieceName(Entry, bSplit), FramePieceName(Entry, bSplit) })
 			{
-				if (UStaticMeshComponent* Mesh = FindPiece(Actor, Piece))
-				{
-					Mesh->ComponentTags.AddUnique(UArtWorkComponent::WorkTag(Entry.Work));
-					Mesh->ComponentTags.AddUnique(UArtWorkComponent::CareTag(Entry.Care));
-				}
+				Out.Append(FindPieces(Actor, Piece, false));
 			}
+			return Out;
 		}
 
-		/** The work's label and care class, on the face of its first canvas. */
-		void Label(AActor& Actor, UStaticMeshComponent& Face, const FArtHangEntry& Entry, const FArtWork& Work)
+		/**
+		 * The object's label and care class, the component its pieces hang from: set where its first piece is, on what
+		 * that piece hung from (the stage's root or its moving body), so the pieces keep their places and their motion.
+		 */
+		void Label(AActor& Actor, const TArray<UStaticMeshComponent*>& Pieces, const FArtHangEntry& Entry, bool bSplit, const FArtWork& Work)
 		{
-			UArtWorkComponent* Carrier = NewObject<UArtWorkComponent>(&Actor, FName(FString::Printf(TEXT("Work_%s"), *Work.Id)));
-			Carrier->SetupAttachment(&Face);
+			// Named apart from the pieces' components, whose names may spell the work's the same way.
+			const FString Name = bSplit ? FString::Printf(TEXT("Label_%s_%d"), *Work.Id, Entry.Canvas) : FString::Printf(TEXT("Label_%s"), *Work.Id);
+			UArtWorkComponent* Carrier = NewObject<UArtWorkComponent>(&Actor, MakeUniqueObjectName(&Actor, UArtWorkComponent::StaticClass(), FName(Name)));
+			Carrier->SetupAttachment(Pieces[0]->GetAttachParent());
 			Carrier->Describe(Work.Id, Entry.Care, Work.Caption());
 			Actor.AddInstanceComponent(Carrier);
 			Carrier->RegisterComponent();
+			Carrier->SetWorldTransform(Pieces[0]->GetComponentTransform());
+			for (UStaticMeshComponent* Piece : Pieces)
+			{
+				Piece->AttachToComponent(Carrier, FAttachmentTransformRules::KeepWorldTransform);
+				Piece->ComponentTags.AddUnique(UArtWorkComponent::WorkTag(Entry.Work));
+				Piece->ComponentTags.AddUnique(UArtWorkComponent::CareTag(Entry.Care));
+			}
 		}
 	}
 
@@ -58,15 +86,15 @@ namespace Musee::ArtMaking
 		for (const FArtHangEntry& Entry : Hang.Works)
 		{
 			const bool bSplit = Hang.Works.ContainsByPredicate([&Entry](const FArtHangEntry& Other) { return &Other != &Entry && Other.Work == Entry.Work; });
-			UStaticMeshComponent* Face = FindPiece(*Stage.StageActor, FacePieceName(Entry, bSplit));
-			if (!Face)
+			const TArray<UStaticMeshComponent*> Pieces = PiecesOf(*Stage.StageActor, Entry, bSplit);
+			if (Pieces.IsEmpty())
 			{
-				// The piece source reported why the canvas wasn't made; there is nothing here to label.
-				continue;
-			}
-			Tag(*Stage.StageActor, Entry, bSplit);
-			if (Entry.Canvas != 0)
-			{
+				// A work Art makes and didn't was reported by the piece source; a built work is the stage's to make.
+				if (Entry.IsBuilt())
+				{
+					OutFindings.Add(ArtFinding(Stage, FString::Printf(TEXT("Work %s: the stage built no piece %s for it to caption."), *Entry.Work,
+						*BuiltPieceName(Entry, bSplit).ToString())));
+				}
 				continue;
 			}
 			const TValueOrError<FArtWork, FString> Work = Musee::Art::ReadWork(Entry);
@@ -75,7 +103,7 @@ namespace Musee::ArtMaking
 				OutFindings.Add(ArtFinding(Stage, FString::Printf(TEXT("Work %s: %s."), *Entry.Work, *Work.GetError())));
 				continue;
 			}
-			Label(*Stage.StageActor, *Face, Entry, Work.GetValue());
+			Label(*Stage.StageActor, Pieces, Entry, bSplit, Work.GetValue());
 		}
 	}
 }

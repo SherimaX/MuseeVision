@@ -5,14 +5,15 @@
 
 /**
  * A hung work's paint layer, as Studio makes it (D-015): the work's image, which Studio imports as a texture, and the
- * material instance for the work's own paint, `paint.<id>` with the working and history of the paint's palette entry,
- * derived from that entry's instance and carrying the image and the image's size in metres. A work on several canvases
- * has one paint layer: each canvas's face shows its part of the one image, its UV0 in metres from the image's top-left
- * corner.
+ * material instance for the work's own layer, `paint.<id>`, derived from the palette finish it is made in (the oil
+ * paint's for a canvas, the glass's for stained glass) and carrying the image and the image's size in metres. A work on
+ * several canvases that share its one image has one layer: each canvas's face shows its part of it, its UV0 in metres
+ * from the image's top-left corner. A work whose objects each show their own image (the Rouen canvases, the Tristram
+ * panels) has one layer per object, `paint.<id>.<index>`.
  */
 struct FArtPaintLayer
 {
-	/** The work's id. */
+	/** The work's id, or `<id>.<index>` for one object's own image: what Studio names the layer's texture for. */
 	FString Work;
 
 	/** Its image, a full path (Musee::Art::FindImage). */
@@ -21,10 +22,13 @@ struct FArtPaintLayer
 	/** The image's size in metres: the canvases side by side, their widths summed. */
 	FVector2D SizeMeters = FVector2D::ZeroVector;
 
-	/** The work's own palette key, `paint.<id>` (Musee::Art::PaintMaterial). */
+	/** The layer's own palette key, `paint.<id>` or `paint.<id>.<index>` (Musee::Art::PaintMaterial). */
 	FName Palette;
 
-	/** The palette entry it derives from (PaintPalette), whose one finish gives its working and history. */
+	/**
+	 * The palette entry it derives from, with the working and history it is named with: PaintPalette's one finish for
+	 * a canvas, the finish of the glass a stained-glass panel is fired in.
+	 */
 	FName Parent;
 	FName Working;
 	FName History;

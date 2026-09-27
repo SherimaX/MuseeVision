@@ -969,6 +969,7 @@
       "work": "albion-tristram-isolde",
       "source": "data/albion.json",
       "canvas": 1,
+      "image": "tristram-panel-T1-birth",
       "anchor": "albion.band.t1",
       "along": 0.07,
       "height": 0.07,
@@ -980,12 +981,22 @@
       "frame": "none",
       "care": "ceramic-and-glass",
       "kind": "stained-glass",
-      "note": "Panel T1 leaded in glass.mouth-blown (albion.band.glass) inside a 0.07 border of cream quarries; image assets/albion/glass/tristram-panel-T1-birth.jpg; glazed about 2.3-2.4 x the 1862 panel (the approved design)."
+      "note": "Panel T1 leaded in glass.mouth-blown (albion.band.glass) inside a 0.07 border of cream quarries; image assets/albion/glass/tristram-panel-T1-birth.jpg; glazed about 2.3-2.4 x the 1862 panel (the approved design).",
+      "wall": "albion.band.glass",
+      "after": {
+        "size": [
+          0.605,
+          0.68
+        ],
+        "source": "Docs/Stages/albion.md section 8: the 1862 Harden Grange panels, about 0.68 x 0.605, glazed here about 2.3 to 2.4 times as the approved design states",
+        "note": "The sheet writes 0.68 x 0.605; only height 0.68 by width 0.605 gives its 2.3-2.4 times (1.46 / 0.605 = 2.41, 1.56 / 0.68 = 2.29). Unverified against Bradford Museums' own record."
+      }
     },
     {
       "work": "albion-tristram-isolde",
       "source": "data/albion.json",
       "canvas": 2,
+      "image": "tristram-panel-T2-marhaus",
       "anchor": "albion.band.t2",
       "along": 0.07,
       "height": 0.07,
@@ -997,12 +1008,22 @@
       "frame": "none",
       "care": "ceramic-and-glass",
       "kind": "stained-glass",
-      "note": "Panel T2 leaded in glass.mouth-blown (albion.band.glass) inside a 0.07 border of cream quarries; image assets/albion/glass/tristram-panel-T2-marhaus.jpg; glazed about 2.3-2.4 x the 1862 panel (the approved design)."
+      "note": "Panel T2 leaded in glass.mouth-blown (albion.band.glass) inside a 0.07 border of cream quarries; image assets/albion/glass/tristram-panel-T2-marhaus.jpg; glazed about 2.3-2.4 x the 1862 panel (the approved design).",
+      "wall": "albion.band.glass",
+      "after": {
+        "size": [
+          0.605,
+          0.68
+        ],
+        "source": "Docs/Stages/albion.md section 8: the 1862 Harden Grange panels, about 0.68 x 0.605, glazed here about 2.3 to 2.4 times as the approved design states",
+        "note": "The sheet writes 0.68 x 0.605; only height 0.68 by width 0.605 gives its 2.3-2.4 times (1.46 / 0.605 = 2.41, 1.56 / 0.68 = 2.29). Unverified against Bradford Museums' own record."
+      }
     },
     {
       "work": "albion-tristram-isolde",
       "source": "data/albion.json",
       "canvas": 3,
+      "image": "tristram-panel-T3-departure",
       "anchor": "albion.band.t3",
       "along": 0.07,
       "height": 0.07,
@@ -1014,12 +1035,22 @@
       "frame": "none",
       "care": "ceramic-and-glass",
       "kind": "stained-glass",
-      "note": "Panel T3 leaded in glass.mouth-blown (albion.band.glass) inside a 0.07 border of cream quarries; image assets/albion/glass/tristram-panel-T3-departure.jpg; glazed about 2.3-2.4 x the 1862 panel (the approved design)."
+      "note": "Panel T3 leaded in glass.mouth-blown (albion.band.glass) inside a 0.07 border of cream quarries; image assets/albion/glass/tristram-panel-T3-departure.jpg; glazed about 2.3-2.4 x the 1862 panel (the approved design).",
+      "wall": "albion.band.glass",
+      "after": {
+        "size": [
+          0.605,
+          0.68
+        ],
+        "source": "Docs/Stages/albion.md section 8: the 1862 Harden Grange panels, about 0.68 x 0.605, glazed here about 2.3 to 2.4 times as the approved design states",
+        "note": "The sheet writes 0.68 x 0.605; only height 0.68 by width 0.605 gives its 2.3-2.4 times (1.46 / 0.605 = 2.41, 1.56 / 0.68 = 2.29). Unverified against Bradford Museums' own record."
+      }
     },
     {
       "work": "albion-tristram-isolde",
       "source": "data/albion.json",
       "canvas": 4,
+      "image": "tristram-panel-T4-love-potion",
       "anchor": "albion.band.t4",
       "along": 0.07,
       "height": 0.07,
@@ -1031,12 +1062,22 @@
       "frame": "none",
       "care": "ceramic-and-glass",
       "kind": "stained-glass",
-      "note": "Panel T4 leaded in glass.mouth-blown (albion.band.glass) inside a 0.07 border of cream quarries; image assets/albion/glass/tristram-panel-T4-love-potion.jpg; glazed about 2.3-2.4 x the 1862 panel (the approved design)."
+      "note": "Panel T4 leaded in glass.mouth-blown (albion.band.glass) inside a 0.07 border of cream quarries; image assets/albion/glass/tristram-panel-T4-love-potion.jpg; glazed about 2.3-2.4 x the 1862 panel (the approved design).",
+      "wall": "albion.band.glass",
+      "after": {
+        "size": [
+          0.605,
+          0.68
+        ],
+        "source": "Docs/Stages/albion.md section 8: the 1862 Harden Grange panels, about 0.68 x 0.605, glazed here about 2.3 to 2.4 times as the approved design states",
+        "note": "The sheet writes 0.68 x 0.605; only height 0.68 by width 0.605 gives its 2.3-2.4 times (1.46 / 0.605 = 2.41, 1.56 / 0.68 = 2.29). Unverified against Bradford Museums' own record."
+      }
     },
     {
       "work": "albion-tristram-isolde",
       "source": "data/albion.json",
       "canvas": 5,
+      "image": "tristram-panel-T5-marriage",
       "anchor": "albion.band.t5",
       "along": 0.07,
       "height": 0.07,
@@ -1048,12 +1089,22 @@
       "frame": "none",
       "care": "ceramic-and-glass",
       "kind": "stained-glass",
-      "note": "Panel T5 leaded in glass.mouth-blown (albion.band.glass) inside a 0.07 border of cream quarries; image assets/albion/glass/tristram-panel-T5-marriage.jpg; glazed about 2.3-2.4 x the 1862 panel (the approved design)."
+      "note": "Panel T5 leaded in glass.mouth-blown (albion.band.glass) inside a 0.07 border of cream quarries; image assets/albion/glass/tristram-panel-T5-marriage.jpg; glazed about 2.3-2.4 x the 1862 panel (the approved design).",
+      "wall": "albion.band.glass",
+      "after": {
+        "size": [
+          0.605,
+          0.68
+        ],
+        "source": "Docs/Stages/albion.md section 8: the 1862 Harden Grange panels, about 0.68 x 0.605, glazed here about 2.3 to 2.4 times as the approved design states",
+        "note": "The sheet writes 0.68 x 0.605; only height 0.68 by width 0.605 gives its 2.3-2.4 times (1.46 / 0.605 = 2.41, 1.56 / 0.68 = 2.29). Unverified against Bradford Museums' own record."
+      }
     },
     {
       "work": "albion-tristram-isolde",
       "source": "data/albion.json",
       "canvas": 6,
+      "image": "tristram-panel-T6-madness",
       "anchor": "albion.band.t6",
       "along": 0.07,
       "height": 0.07,
@@ -1065,12 +1116,22 @@
       "frame": "none",
       "care": "ceramic-and-glass",
       "kind": "stained-glass",
-      "note": "Panel T6 leaded in glass.mouth-blown (albion.band.glass) inside a 0.07 border of cream quarries; image assets/albion/glass/tristram-panel-T6-madness.jpg; glazed about 2.3-2.4 x the 1862 panel (the approved design)."
+      "note": "Panel T6 leaded in glass.mouth-blown (albion.band.glass) inside a 0.07 border of cream quarries; image assets/albion/glass/tristram-panel-T6-madness.jpg; glazed about 2.3-2.4 x the 1862 panel (the approved design).",
+      "wall": "albion.band.glass",
+      "after": {
+        "size": [
+          0.605,
+          0.68
+        ],
+        "source": "Docs/Stages/albion.md section 8: the 1862 Harden Grange panels, about 0.68 x 0.605, glazed here about 2.3 to 2.4 times as the approved design states",
+        "note": "The sheet writes 0.68 x 0.605; only height 0.68 by width 0.605 gives its 2.3-2.4 times (1.46 / 0.605 = 2.41, 1.56 / 0.68 = 2.29). Unverified against Bradford Museums' own record."
+      }
     },
     {
       "work": "albion-tristram-isolde",
       "source": "data/albion.json",
       "canvas": 7,
+      "image": "tristram-panel-T7-attempted-suicide",
       "anchor": "albion.band.t7",
       "along": 0.07,
       "height": 0.07,
@@ -1082,12 +1143,22 @@
       "frame": "none",
       "care": "ceramic-and-glass",
       "kind": "stained-glass",
-      "note": "Panel T7 leaded in glass.mouth-blown (albion.band.glass) inside a 0.07 border of cream quarries; image assets/albion/glass/tristram-panel-T7-attempted-suicide.jpg; glazed about 2.3-2.4 x the 1862 panel (the approved design)."
+      "note": "Panel T7 leaded in glass.mouth-blown (albion.band.glass) inside a 0.07 border of cream quarries; image assets/albion/glass/tristram-panel-T7-attempted-suicide.jpg; glazed about 2.3-2.4 x the 1862 panel (the approved design).",
+      "wall": "albion.band.glass",
+      "after": {
+        "size": [
+          0.605,
+          0.68
+        ],
+        "source": "Docs/Stages/albion.md section 8: the 1862 Harden Grange panels, about 0.68 x 0.605, glazed here about 2.3 to 2.4 times as the approved design states",
+        "note": "The sheet writes 0.68 x 0.605; only height 0.68 by width 0.605 gives its 2.3-2.4 times (1.46 / 0.605 = 2.41, 1.56 / 0.68 = 2.29). Unverified against Bradford Museums' own record."
+      }
     },
     {
       "work": "albion-tristram-isolde",
       "source": "data/albion.json",
       "canvas": 8,
+      "image": "tristram-panel-T8-recognition",
       "anchor": "albion.band.t8",
       "along": 0.07,
       "height": 0.07,
@@ -1099,12 +1170,22 @@
       "frame": "none",
       "care": "ceramic-and-glass",
       "kind": "stained-glass",
-      "note": "Panel T8 leaded in glass.mouth-blown (albion.band.glass) inside a 0.07 border of cream quarries; image assets/albion/glass/tristram-panel-T8-recognition.jpg; glazed about 2.3-2.4 x the 1862 panel (the approved design)."
+      "note": "Panel T8 leaded in glass.mouth-blown (albion.band.glass) inside a 0.07 border of cream quarries; image assets/albion/glass/tristram-panel-T8-recognition.jpg; glazed about 2.3-2.4 x the 1862 panel (the approved design).",
+      "wall": "albion.band.glass",
+      "after": {
+        "size": [
+          0.605,
+          0.68
+        ],
+        "source": "Docs/Stages/albion.md section 8: the 1862 Harden Grange panels, about 0.68 x 0.605, glazed here about 2.3 to 2.4 times as the approved design states",
+        "note": "The sheet writes 0.68 x 0.605; only height 0.68 by width 0.605 gives its 2.3-2.4 times (1.46 / 0.605 = 2.41, 1.56 / 0.68 = 2.29). Unverified against Bradford Museums' own record."
+      }
     },
     {
       "work": "albion-tristram-isolde",
       "source": "data/albion.json",
       "canvas": 9,
+      "image": "tristram-panel-T9-arthurs-court",
       "anchor": "albion.band.t9",
       "along": 0.07,
       "height": 0.07,
@@ -1116,12 +1197,22 @@
       "frame": "none",
       "care": "ceramic-and-glass",
       "kind": "stained-glass",
-      "note": "Panel T9 leaded in glass.mouth-blown (albion.band.glass) inside a 0.07 border of cream quarries; image assets/albion/glass/tristram-panel-T9-arthurs-court.jpg; glazed about 2.3-2.4 x the 1862 panel (the approved design)."
+      "note": "Panel T9 leaded in glass.mouth-blown (albion.band.glass) inside a 0.07 border of cream quarries; image assets/albion/glass/tristram-panel-T9-arthurs-court.jpg; glazed about 2.3-2.4 x the 1862 panel (the approved design).",
+      "wall": "albion.band.glass",
+      "after": {
+        "size": [
+          0.605,
+          0.68
+        ],
+        "source": "Docs/Stages/albion.md section 8: the 1862 Harden Grange panels, about 0.68 x 0.605, glazed here about 2.3 to 2.4 times as the approved design states",
+        "note": "The sheet writes 0.68 x 0.605; only height 0.68 by width 0.605 gives its 2.3-2.4 times (1.46 / 0.605 = 2.41, 1.56 / 0.68 = 2.29). Unverified against Bradford Museums' own record."
+      }
     },
     {
       "work": "albion-tristram-isolde",
       "source": "data/albion.json",
       "canvas": 10,
+      "image": "tristram-panel-T10-king-mark-slays",
       "anchor": "albion.band.t10",
       "along": 0.07,
       "height": 0.07,
@@ -1133,12 +1224,22 @@
       "frame": "none",
       "care": "ceramic-and-glass",
       "kind": "stained-glass",
-      "note": "Panel T10 leaded in glass.mouth-blown (albion.band.glass) inside a 0.07 border of cream quarries; image assets/albion/glass/tristram-panel-T10-king-mark-slays.jpg; glazed about 2.3-2.4 x the 1862 panel (the approved design)."
+      "note": "Panel T10 leaded in glass.mouth-blown (albion.band.glass) inside a 0.07 border of cream quarries; image assets/albion/glass/tristram-panel-T10-king-mark-slays.jpg; glazed about 2.3-2.4 x the 1862 panel (the approved design).",
+      "wall": "albion.band.glass",
+      "after": {
+        "size": [
+          0.605,
+          0.68
+        ],
+        "source": "Docs/Stages/albion.md section 8: the 1862 Harden Grange panels, about 0.68 x 0.605, glazed here about 2.3 to 2.4 times as the approved design states",
+        "note": "The sheet writes 0.68 x 0.605; only height 0.68 by width 0.605 gives its 2.3-2.4 times (1.46 / 0.605 = 2.41, 1.56 / 0.68 = 2.29). Unverified against Bradford Museums' own record."
+      }
     },
     {
       "work": "albion-tristram-isolde",
       "source": "data/albion.json",
       "canvas": 11,
+      "image": "tristram-panel-T11-tomb",
       "anchor": "albion.band.t11",
       "along": 0.07,
       "height": 0.07,
@@ -1150,12 +1251,22 @@
       "frame": "none",
       "care": "ceramic-and-glass",
       "kind": "stained-glass",
-      "note": "Panel T11 leaded in glass.mouth-blown (albion.band.glass) inside a 0.07 border of cream quarries; image assets/albion/glass/tristram-panel-T11-tomb.jpg; glazed about 2.3-2.4 x the 1862 panel (the approved design)."
+      "note": "Panel T11 leaded in glass.mouth-blown (albion.band.glass) inside a 0.07 border of cream quarries; image assets/albion/glass/tristram-panel-T11-tomb.jpg; glazed about 2.3-2.4 x the 1862 panel (the approved design).",
+      "wall": "albion.band.glass",
+      "after": {
+        "size": [
+          0.605,
+          0.68
+        ],
+        "source": "Docs/Stages/albion.md section 8: the 1862 Harden Grange panels, about 0.68 x 0.605, glazed here about 2.3 to 2.4 times as the approved design states",
+        "note": "The sheet writes 0.68 x 0.605; only height 0.68 by width 0.605 gives its 2.3-2.4 times (1.46 / 0.605 = 2.41, 1.56 / 0.68 = 2.29). Unverified against Bradford Museums' own record."
+      }
     },
     {
       "work": "albion-tristram-isolde",
       "source": "data/albion.json",
       "canvas": 12,
+      "image": "tristram-panel-T12-guenevere-and-isoude",
       "anchor": "albion.band.t12",
       "along": 0.07,
       "height": 0.07,
@@ -1167,7 +1278,16 @@
       "frame": "none",
       "care": "ceramic-and-glass",
       "kind": "stained-glass",
-      "note": "Panel T12 leaded in glass.mouth-blown (albion.band.glass) inside a 0.07 border of cream quarries; image assets/albion/glass/tristram-panel-T12-guenevere-and-isoude.jpg; glazed about 2.3-2.4 x the 1862 panel (the approved design)."
+      "note": "Panel T12 leaded in glass.mouth-blown (albion.band.glass) inside a 0.07 border of cream quarries; image assets/albion/glass/tristram-panel-T12-guenevere-and-isoude.jpg; glazed about 2.3-2.4 x the 1862 panel (the approved design).",
+      "wall": "albion.band.glass",
+      "after": {
+        "size": [
+          0.605,
+          0.68
+        ],
+        "source": "Docs/Stages/albion.md section 8: the 1862 Harden Grange panels, about 0.68 x 0.605, glazed here about 2.3 to 2.4 times as the approved design states",
+        "note": "The sheet writes 0.68 x 0.605; only height 0.68 by width 0.605 gives its 2.3-2.4 times (1.46 / 0.605 = 2.41, 1.56 / 0.68 = 2.29). Unverified against Bradford Museums' own record."
+      }
     }
   ]
 }

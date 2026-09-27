@@ -21,19 +21,36 @@ namespace Musee::ArtMaking
 	[[nodiscard]] FName LinenPieceName(const FArtHangEntry& Entry, bool bSplit);
 	[[nodiscard]] FName FramePieceName(const FArtHangEntry& Entry, bool bSplit);
 
+	/** The name of a stained-glass panel's glass: `glass.<id>`, or `glass.<id>.<index>` for one of a work's several panels. */
+	[[nodiscard]] FName GlassPieceName(const FArtHangEntry& Entry, bool bSplit);
+
 	/**
-	 * Art's piece source: reads the stage's Hang.json (a stage without one hangs nothing) and makes each canvas as a real
-	 * object at its Wall anchor: a stretched canvas at its real size, its face a piece in the work's own paint
-	 * (Musee::Art::PaintMaterial, with the paint's working and history) showing its part of the work's image, its tacking
-	 * edges and back a piece of linen, and, where the plan frames it, a moulded frame in the finish of the frame's
-	 * surface. Anything the plan gets wrong is a finding and that work isn't made.
+	 * The name a stage gives the piece it builds for a work (`"built": "form"`): `work.<id>`, or `work.<id>.<index>` for
+	 * one of a work's several objects. A work built of several pieces names each `<that name>.<part>`; Art's caption is
+	 * the component they all hang from.
+	 */
+	[[nodiscard]] FName BuiltPieceName(const FArtHangEntry& Entry, bool bSplit);
+
+	/**
+	 * Art's piece source: reads the stage's Hang.json (a stage without one hangs nothing) and makes each work as a real
+	 * object at its anchor:
+	 * - a canvas at its Wall anchor: a stretched canvas at its real size, its face a piece in the work's own paint
+	 *   (Musee::Art::PaintMaterial, with the paint's working and history) showing its part of the work's image or its own,
+	 *   its tacking edges and back a piece of linen, and, where the plan frames it, a moulded frame in the finish of the
+	 *   frame's surface;
+	 * - a stained-glass panel in its Glazing anchor (D-014: in Form's opening): a pane of the glass its `wall` surface
+	 *   names, the image fired into it, its layer the work's own (`paint.<id>[.<index>]`) over that glass's finish.
+	 * A work the stage builds (`"built": "form"`) is left to the stage. Anything the plan gets wrong is a finding and
+	 * that work isn't made.
 	 */
 	void GatherArt(const FMuseeStageContext& Stage, TArray<FFormMadePiece>& OutPieces, TArray<FMuseeFinding>& OutFindings);
 
 	/**
-	 * Art's dresser: gives each hung work its label and care class (a UArtWorkComponent on the face of its first canvas,
-	 * and the tags `musee.work:<id>` and `musee.care:<class>` on every piece of every canvas), for the visitor's hands and
-	 * Light's checks.
+	 * Art's dresser: gives each work its label and care class, for the visitor's hands and Light's checks. Each object's
+	 * pieces (a canvas's face, linen and frame; a panel's glass; the pieces a stage built for the work, named by
+	 * BuiltPieceName) hang from a UArtWorkComponent carrying the label and class, set where the object's first piece is,
+	 * so a look at any of them finds the label (the visitor looks up from what it sees); each piece carries the tags
+	 * `musee.work:<id>` and `musee.care:<class>`. A built work whose pieces the stage didn't make is a finding.
 	 */
 	void DressWorks(const FMuseeStageContext& Stage, TArray<FMuseeFinding>& OutFindings);
 }

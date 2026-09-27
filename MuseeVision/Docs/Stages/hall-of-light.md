@@ -250,7 +250,7 @@ sun); the south prints never (they face north; their mounts' backs take the sun)
 on every work. So the hall **hangs exhibition facsimiles** at true size of all 24 works (pigment prints on cotton rag for
 the prints and stereographs, duplicate transparencies for the autochromes), credited to the originals, which stay with
 their holders: the practice of museums that show photographs in daylight. The catalogue ids and the originals' care
-classes stay (Hang `copy`: `exhibition-facsimile`); Art.WithinCare measures and reports the hall's daylight as a known
+classes stay (Hang `reproduction`: `exhibition-facsimile`); Art.WithinCare measures and reports the hall's daylight as a known
 finding against them, and Art sets the facsimiles' replacement from the measured dose. Nothing is dimmed or shaded.
 Under the `ephemeris` sun (a city's low winter sun) the south glass lets the sun onto the north wall too: reported alike.
 

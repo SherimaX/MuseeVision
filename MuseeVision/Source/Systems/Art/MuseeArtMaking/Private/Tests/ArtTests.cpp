@@ -1,4 +1,7 @@
+#include "ArtCare.h"
+#include "ArtHang.h"
 #include "ArtHangEntry.h"
+#include "ArtHangReading.h"
 #include "ArtPaintLayer.h"
 #include "ArtPieces.h"
 #include "ArtWallPath.h"
@@ -10,11 +13,14 @@
 #include "DynamicMesh/DynamicMesh3.h"
 #include "DynamicMesh/DynamicMeshAttributeSet.h"
 #include "FormMake.h"
+#include "Glass/GlassPane.h"
 #include "Engine/Texture2D.h"
 #include "Engine/World.h"
 #include "GameFramework/Actor.h"
+#include "HAL/FileManager.h"
 #include "Misc/AutomationTest.h"
 #include "Misc/Paths.h"
+#include "MuseeRecords.h"
 #include "MuseeUnits.h"
 #include "UObject/Package.h"
 
@@ -54,6 +60,57 @@ namespace Musee::ArtMaking::Tests
 			Anchor(TEXT("faulty.wall"), FVector(0.0, -5.0, 0.0)),
 		};
 		return Context;
+	}
+
+	FMuseeStageAnchor Anchor(const TCHAR* Key, const TCHAR* Kind, const FVector& At, const FQuat& Turn = FQuat::Identity)
+	{
+		FMuseeStageAnchor Out = Anchor(Key, At, Turn);
+		Out.Kind = Kind;
+		return Out;
+	}
+
+	/**
+	 * The test band: two Glazing lights in a screen facing north into the court (as Albion's band: x to the viewer's
+	 * right is -x, y towards the viewer is -y), and the wall a built work stands in.
+	 */
+	FMuseeStageContext Glazed()
+	{
+		FMuseeStageContext Context;
+		Context.Stage = FMuseeKey(TEXT("glazed"));
+		Context.ScheduleDir = Fixture(TEXT("Stages/glazed"));
+		const FQuat FacingNorth(FVector::UpVector, UE_DOUBLE_PI);
+		Context.Anchors = {
+			Anchor(TEXT("glazed.band.t1"), TEXT("Glazing"), FVector(4.8, 18.3, 10.9), FacingNorth),
+			Anchor(TEXT("glazed.band.t2"), TEXT("Glazing"), FVector(3.2, 18.3, 10.9), FacingNorth),
+			Anchor(TEXT("glazed.wall"), FVector(0.0, -5.0, 0.0)),
+		};
+		return Context;
+	}
+
+	/** A stage actor with a root and a mesh component per named piece, tagged as Studio tags them. */
+	AActor* StageActor(UWorld& World, const TArray<FString>& Pieces)
+	{
+		AActor* Actor = World.SpawnActor<AActor>();
+		USceneComponent* Root = NewObject<USceneComponent>(Actor, TEXT("Root"));
+		Actor->SetRootComponent(Root);
+		Root->RegisterComponent();
+		for (const FString& Piece : Pieces)
+		{
+			UStaticMeshComponent* Mesh = NewObject<UStaticMeshComponent>(Actor, FName(Piece.Replace(TEXT("."), TEXT("_"))));
+			Mesh->SetupAttachment(Root);
+			Mesh->ComponentTags.Add(FName(FString::Printf(TEXT("musee.piece:%s"), *Piece)));
+			Mesh->RegisterComponent();
+		}
+		return Actor;
+	}
+
+	UStaticMeshComponent* FindMesh(const AActor& Actor, const FString& Piece)
+	{
+		TArray<UStaticMeshComponent*> Meshes;
+		Actor.GetComponents(Meshes);
+		const FName Tag(FString::Printf(TEXT("musee.piece:%s"), *Piece));
+		UStaticMeshComponent* const* Found = Meshes.FindByPredicate([Tag](const UStaticMeshComponent* M) { return M->ComponentHasTag(Tag); });
+		return Found ? *Found : nullptr;
 	}
 
 	FArtHangEntry Entry(const TCHAR* Work, const TCHAR* Catalogue)
@@ -281,17 +338,7 @@ bool FArtDresserTest::RunTest(const FString& Parameters)
 {
 	using namespace Musee::ArtMaking;
 	UWorld* World = UWorld::CreateWorld(EWorldType::Game, false);
-	AActor* Actor = World->SpawnActor<AActor>();
-	USceneComponent* Root = NewObject<USceneComponent>(Actor, TEXT("Root"));
-	Actor->SetRootComponent(Root);
-	Root->RegisterComponent();
-	for (const TCHAR* Piece : { TEXT("canvas.monet-willows-two-willows"), TEXT("canvas.monet-willows-two-willows.linen") })
-	{
-		UStaticMeshComponent* Mesh = NewObject<UStaticMeshComponent>(Actor, FName(FString(Piece).Replace(TEXT("."), TEXT("_"))));
-		Mesh->SetupAttachment(Root);
-		Mesh->ComponentTags.Add(FName(FString::Printf(TEXT("musee.piece:%s"), Piece)));
-		Mesh->RegisterComponent();
-	}
+	AActor* Actor = Tests::StageActor(*World, { TEXT("canvas.monet-willows-two-willows"), TEXT("canvas.monet-willows-two-willows.linen") });
 	FMuseeStageContext Stage = Tests::Oval();
 	Stage.StageActor = Actor;
 	TArray<FMuseeFinding> Findings;
@@ -303,7 +350,11 @@ bool FArtDresserTest::RunTest(const FString& Parameters)
 	{
 		TestEqual(TEXT("Its label's title"), Works[0]->Caption().Title.ToString(), FString(TEXT("The Two Willows")));
 		TestEqual(TEXT("Its care class"), Works[0]->CareClass(), FName(TEXT("oil-and-tempera")));
-		TestTrue(TEXT("On its face"), Works[0]->GetAttachParent() && Works[0]->GetAttachParent()->ComponentHasTag(TEXT("musee.piece:canvas.monet-willows-two-willows")));
+		const UStaticMeshComponent* Face = Tests::FindMesh(*Actor, TEXT("canvas.monet-willows-two-willows"));
+		TestTrue(TEXT("Its pieces hang from it, so a look at the face finds the label"), Face && Face->GetAttachParent() == Works[0]
+			&& Tests::FindMesh(*Actor, TEXT("canvas.monet-willows-two-willows.linen"))->GetAttachParent() == Works[0]);
+		TestTrue(TEXT("It hangs where the face hung, and the face kept its place"), Works[0]->GetAttachParent() == Actor->GetRootComponent()
+			&& Face && Face->GetComponentLocation().Equals(FVector::ZeroVector));
 	}
 	TArray<UStaticMeshComponent*> Meshes;
 	Actor->GetComponents(Meshes);
@@ -313,6 +364,200 @@ bool FArtDresserTest::RunTest(const FString& Parameters)
 			&& Mesh->ComponentHasTag(TEXT("musee.work:monet-willows-two-willows")));
 	}
 	World->DestroyWorld(false);
+	return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FArtGlassTest, "Musee.Art.Glass", Musee::ArtMaking::Tests::Flags)
+
+bool FArtGlassTest::RunTest(const FString& Parameters)
+{
+	using namespace Musee::ArtMaking;
+	TArray<FFormMadePiece> Pieces;
+	TArray<FMuseeFinding> Findings;
+	GatherArt(Tests::Glazed(), Pieces, Findings);
+	for (const FMuseeFinding& Found : Findings)
+	{
+		AddError(Found.ToString());
+	}
+	if (!TestEqual(TEXT("Two panels of glass; nothing of the work the stage builds"), Pieces.Num(), 2))
+	{
+		return false;
+	}
+	const FFormMadePiece& First = Pieces[0];
+	TestEqual(TEXT("A panel is named for its work and index"), First.Name, FName(TEXT("glass.monet-willows-two-willows.1")));
+	TestTrue(TEXT("It is the glass its plan names, carrying its own image's layer"), First.Surface == TEXT("glazed.band.glass")
+		&& First.Material == TEXT("paint.monet-willows-two-willows.1"));
+	TestTrue(TEXT("with that glass's working and history"), First.Working == TEXT("leaded") && First.History == TEXT("aged.patina"));
+	TestFalse(TEXT("Glass is translucent, never Nanite"), First.bNanite);
+	TestTrue(TEXT("It is one closed solid"), Musee::FormMaking::MeasureShell(First).IsClosed());
+	FBox Box(ForceInit);
+	for (const int32 V : First.Mesh->VertexIndicesItr())
+	{
+		Box += First.Frame.PointToParent(Musee::FromEngine(First.Mesh->GetVertex(V)));
+	}
+	// T1's light runs from x 4.80 towards -x (the viewer's right, facing north); the image starts 0.07 in and up.
+	TestTrue(TEXT("It fills its image's place in the light"), Box.Min.X > 4.8 - 0.07 - 1.46 - 1e-6 && Box.Max.X < 4.8 - 0.07 + 1e-6
+		&& FMath::IsNearlyEqual(Box.Min.Z, 10.97, 1e-6) && FMath::IsNearlyEqual(Box.Max.Z, 12.53, 1e-6));
+	TestEqual(TEXT("It stands on the glass line, the glass's thickness through"), Box.GetSize().Y, PaneThicknessMeters, 1e-6);
+	const UE::Geometry::FDynamicMeshUVOverlay* UVs = First.Mesh->Attributes()->GetUVLayer(0);
+	FVector2f Least(TNumericLimits<float>::Max()), Most(TNumericLimits<float>::Lowest());
+	for (const int32 E : UVs->ElementIndicesItr())
+	{
+		Least = FVector2f::Min(Least, UVs->GetElement(E));
+		Most = FVector2f::Max(Most, UVs->GetElement(E));
+	}
+	TestTrue(TEXT("Its image spans it in metres"), Least.Equals(FVector2f(0.0f, 0.0f), 1e-5f) && Most.Equals(FVector2f(1.46f, 1.56f), 1e-5f));
+
+	const TArray<FArtPaintLayer> Layers = PaintLayers(Tests::Glazed());
+	if (TestEqual(TEXT("One layer a panel, each its own image"), Layers.Num(), 2))
+	{
+		TestTrue(TEXT("The first panel's layer is its own"), Layers[0].Work == TEXT("monet-willows-two-willows.1")
+			&& Layers[0].Palette == TEXT("paint.monet-willows-two-willows.1") && Layers[0].SizeMeters.Equals(FVector2D(1.46, 1.56)));
+		TestTrue(TEXT("over the glass it is fired in"), Layers[0].Parent == TEXT("glass.mouth-blown") && Layers[0].Working == TEXT("leaded")
+			&& Layers[0].History == TEXT("aged.patina"));
+		TestTrue(TEXT("and each panel shows the image its entry names"), Layers[0].ImagePath.EndsWith(TEXT("monet-willows-two-willows.png"))
+			&& Layers[1].ImagePath.EndsWith(TEXT("monet-impression-sunrise.png")));
+	}
+	FArtHang Hang;
+	TArray<FMuseeFinding> Reported;
+	if (TestTrue(TEXT("The band's plan reads"), ReadStageHang(Tests::Glazed(), Hang, Reported)))
+	{
+		const FVector2D Times = Hang.Works[0].TimesOriginal();
+		TestTrue(TEXT("A panel made after its original knows how many times its size it is"), FMath::IsNearlyEqual(Times.X, 1.46 / 0.605, 1e-9)
+			&& FMath::IsNearlyEqual(Times.Y, 1.56 / 0.68, 1e-9));
+		TestEqual(TEXT("A work at its own size is at 1"), Hang.Works[2].TimesOriginal(), FVector2D::UnitVector);
+	}
+	return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FArtBuiltTest, "Musee.Art.Built", Musee::ArtMaking::Tests::Flags)
+
+bool FArtBuiltTest::RunTest(const FString& Parameters)
+{
+	using namespace Musee::ArtMaking;
+	UWorld* World = UWorld::CreateWorld(EWorldType::Game, false);
+	AActor* Actor = Tests::StageActor(*World, { TEXT("work.monet-impression-sunrise"), TEXT("work.monet-impression-sunrise.coping"),
+		TEXT("work.monet-impression-sunrise-lantern") });
+	FMuseeStageContext Stage = Tests::Glazed();
+	Stage.StageActor = Actor;
+	TArray<FMuseeFinding> Findings;
+	DressWorks(Stage, Findings);
+	TestEqual(TEXT("The built work dresses without findings (the band's glass isn't made here, and isn't Art's to report)"), Findings.Num(), 0);
+	TArray<UArtWorkComponent*> Works;
+	Actor->GetComponents(Works);
+	if (TestEqual(TEXT("The built work carries its label"), Works.Num(), 1))
+	{
+		TestEqual(TEXT("Its label's title, from its catalogue"), Works[0]->Caption().Title.ToString(), FString(TEXT("Impression, Sunrise")));
+		TestEqual(TEXT("Its care class"), Works[0]->CareClass(), FName(TEXT("ceramic-and-glass")));
+		const UStaticMeshComponent* Whole = Tests::FindMesh(*Actor, TEXT("work.monet-impression-sunrise"));
+		const UStaticMeshComponent* Part = Tests::FindMesh(*Actor, TEXT("work.monet-impression-sunrise.coping"));
+		TestTrue(TEXT("The pieces the stage built for it hang from its label"), Whole && Part && Whole->GetAttachParent() == Works[0]
+			&& Part->GetAttachParent() == Works[0]);
+		TestTrue(TEXT("and carry its care class"), Whole && Whole->ComponentHasTag(TEXT("musee.care:ceramic-and-glass"))
+			&& Whole->ComponentHasTag(TEXT("musee.work:monet-impression-sunrise")));
+	}
+	const UStaticMeshComponent* Other = Tests::FindMesh(*Actor, TEXT("work.monet-impression-sunrise-lantern"));
+	TestTrue(TEXT("A piece whose name only begins the same is not the work's"), Other && Other->GetAttachParent() == Actor->GetRootComponent());
+
+	AActor* Bare = Tests::StageActor(*World, {});
+	Stage.StageActor = Bare;
+	TArray<FMuseeFinding> Missing;
+	DressWorks(Stage, Missing);
+	TestEqual(TEXT("A built work whose pieces the stage didn't make is a finding"), Missing.Num(), 1);
+	World->DestroyWorld(false);
+	return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FArtReproductionTest, "Musee.Art.Reproduction", Musee::ArtMaking::Tests::Flags)
+
+bool FArtReproductionTest::RunTest(const FString& Parameters)
+{
+	using namespace Musee::ArtMaking;
+	const TValueOrError<FArtHang, FString> Hang = Musee::ReadRecord<FArtHang>(Tests::Fixture(TEXT("Stages/facsimile/Hang.json")));
+	const TValueOrError<FCareKeys, FString> Care = ReadCareKeys();
+	if (!TestTrue(TEXT("The plan and Care.json read"), Hang.HasValue() && Care.HasValue()))
+	{
+		AddError(Hang.HasError() ? Hang.GetError() : Care.GetError());
+		return false;
+	}
+	const TArray<FArtHangEntry>& Works = Hang.GetValue().Works;
+	const TValueOrError<FArtWork, FString> Facsimile = ResolveEntry(Works[0], Care.GetValue());
+	if (TestTrue(TEXT("A facsimile resolves to its original's catalogue entry"), Facsimile.HasValue()))
+	{
+		TestEqual(TEXT("Its care class stays the original's"), Facsimile.GetValue().Care, FName(TEXT("works-on-paper")));
+		TestTrue(TEXT("Its label says what hangs, and where the original is"), Facsimile.GetValue().Caption().Credit.ToString().StartsWith(
+			TEXT("Exhibition facsimile after the original in Mus")) && Facsimile.GetValue().Caption().Credit.ToString().EndsWith(TEXT("Marmottan Monet, Paris")));
+	}
+	TestFalse(TEXT("A reproduction Care.json doesn't list doesn't resolve"), ResolveEntry(Works[1], Care.GetValue()).HasValue());
+	TestFalse(TEXT("Nor a work built any way but by form"), ResolveEntry(Works[2], Care.GetValue()).HasValue());
+
+	FArtLightDose Daylight;
+	Daylight.Illuminance = Musee::Lux(5000.0);
+	Daylight.AnnualLuxHours = 5000.0 * 3000.0;
+	Daylight.UvMicrowattsPerLumen = 100.0;
+	const TValueOrError<TArray<FString>, FString> Original = Musee::Art::CareFaults(TEXT("works-on-paper"), NAME_None, Daylight);
+	TestTrue(TEXT("An original print in a glass hall's daylight is over its lux, its dose and its ultraviolet"), Original.HasValue()
+		&& Original.GetValue().Num() == 3);
+	const TValueOrError<TArray<FString>, FString> Facsimiles = Musee::Art::CareFaults(TEXT("works-on-paper"), TEXT("exhibition-facsimile"), Daylight);
+	TestTrue(TEXT("Its exhibition facsimile is within care under any light"), Facsimiles.HasValue() && Facsimiles.GetValue().IsEmpty());
+	FArtLightDose Gallery;
+	Gallery.Illuminance = Musee::Lux(50.0);
+	Gallery.AnnualLuxHours = 50.0 * 3000.0;
+	Gallery.UvMicrowattsPerLumen = 10.0;
+	const TValueOrError<TArray<FString>, FString> Within = Musee::Art::CareFaults(TEXT("works-on-paper"), NAME_None, Gallery);
+	TestTrue(TEXT("The original at 50 lx for 3,000 hours is within"), Within.HasValue() && Within.GetValue().IsEmpty());
+	const TValueOrError<TArray<FString>, FString> Stone = Musee::Art::CareFaults(TEXT("stone-and-bronze"), NAME_None, Daylight);
+	TestTrue(TEXT("Stone has no lux or dose limit, only its ultraviolet"), Stone.HasValue() && Stone.GetValue().Num() == 1);
+	TestFalse(TEXT("An unknown class is refused"), Musee::Art::CareFaults(TEXT("no-such-class"), NAME_None, Daylight).HasValue());
+	TestFalse(TEXT("An unknown reproduction is refused"), Musee::Art::CareFaults(TEXT("works-on-paper"), TEXT("photograph-on-sale"), Daylight).HasValue());
+	return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FArtEveryHangResolves, "Musee.Art.EveryHangResolves", Musee::ArtMaking::Tests::Flags)
+
+bool FArtEveryHangResolves::RunTest(const FString& Parameters)
+{
+	using namespace Musee::ArtMaking;
+	const TValueOrError<FCareKeys, FString> Care = ReadCareKeys();
+	if (!TestTrue(TEXT("Care.json reads"), Care.HasValue()))
+	{
+		AddError(Care.GetError());
+		return false;
+	}
+	const FString Stages = Musee::Records::DataRoot() / TEXT("Stages");
+	TArray<FString> Folders;
+	IFileManager::Get().FindFiles(Folders, *(Stages / TEXT("*")), false, true);
+	Folders.Sort();
+	int32 Plans = 0, Resolved = 0, Built = 0;
+	for (const FString& Folder : Folders)
+	{
+		const FString Path = Stages / Folder / FArtHang::FileName;
+		if (!IFileManager::Get().FileExists(*Path))
+		{
+			continue;
+		}
+		++Plans;
+		const TValueOrError<FArtHang, FString> Hang = Musee::ReadRecord<FArtHang>(Path);
+		if (Hang.HasError())
+		{
+			AddError(FString::Printf(TEXT("%s: %s"), *Folder, *Hang.GetError()));
+			continue;
+		}
+		TestEqual(FString::Printf(TEXT("%s's plan names its stage"), *Folder), Hang.GetValue().Stage.ToString(), Folder);
+		for (const FArtHangEntry& Entry : Hang.GetValue().Works)
+		{
+			const TValueOrError<FArtWork, FString> Work = ResolveEntry(Entry, Care.GetValue());
+			if (Work.HasError())
+			{
+				AddError(FString::Printf(TEXT("%s: %s (object %d) does not resolve: %s"), *Folder, *Entry.Work, Entry.Canvas, *Work.GetError()));
+				continue;
+			}
+			++Resolved;
+			Built += Entry.IsBuilt() ? 1 : 0;
+		}
+	}
+	TestTrue(TEXT("There are hanging plans to resolve"), Plans > 0 && Resolved > 0);
+	AddInfo(FString::Printf(TEXT("%d entries of %d hanging plans resolve to catalogue works, %d of them built by their stage."), Resolved, Plans, Built));
 	return true;
 }
 

@@ -95,6 +95,36 @@ struct FArtCareSourceSpectrum
 	TArray<FArtCareEvidence> Evidence;
 };
 
+/**
+ * A kind of reproduction the museum may hang in an original's place: what it is, whether the care limits bind it, the
+ * words a label puts before the original's holder, and why.
+ */
+USTRUCT()
+struct FArtCareReproduction
+{
+	GENERATED_BODY()
+
+	UPROPERTY(meta = (MuseeRequired))
+	FName Key;
+
+	UPROPERTY()
+	FString What;
+
+	/** Whether the care class's limits bind the reproduction; false when it is replaced as it fades, not conserved. */
+	UPROPERTY()
+	bool HeldToCare = true;
+
+	/** The label's words before the original's holder: "Exhibition facsimile after the original in". */
+	UPROPERTY(meta = (MuseeRequired))
+	FString Credit;
+
+	UPROPERTY()
+	TArray<FArtCareEvidence> Evidence;
+
+	UPROPERTY()
+	FString Note;
+};
+
 /** A source the care values cite. */
 USTRUCT()
 struct FArtCareSource
@@ -125,6 +155,9 @@ struct FArtCare
 
 	UPROPERTY(meta = (MuseeRequired))
 	TArray<FArtCareClass> Classes;
+
+	UPROPERTY()
+	TArray<FArtCareReproduction> Reproductions;
 
 	UPROPERTY()
 	FArtCareDoseAccounting DoseAccounting;
