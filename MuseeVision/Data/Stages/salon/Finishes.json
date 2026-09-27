@@ -405,7 +405,7 @@
       "material": "oak.sessile-french",
       "working": "gilt.gold-leaf.water",
       "history": "aged.patina",
-      "note": "Every oil's frame (frame.gilt.carved): carved oak, gesso, water-gilt on red bole, burnished and matt, bole on the ridges; moulding 0.09 + 0.015 x the longer side, clamped 0.10-0.14. Art builds the frames; the finish is declared here."
+      "note": "Every oil's frame (Hang frame salon.frame.gilt; Art builds a carved frame): carved oak, gesso, water-gilt on red bole, burnished and matt, bole on the ridges; moulding 0.09 + 0.015 x the longer side, clamped 0.10-0.14. Art builds the frames; the finish is declared here."
     },
     {
       "surface": "salon.east.blind-doors",

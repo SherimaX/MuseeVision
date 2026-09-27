@@ -91,7 +91,7 @@ right, y out of the face into the room, z up from the floor. Hang `along` = the 
 | `salon.cabinet.wall.north` | Wall | (−10.000, −15.600, 0); x (+1,0,0); y (0,+1,0) | cabinet north silk |
 | `salon.cabinet.wall.east` | Wall | (−2.000, −15.600, 0); x (0,+1,0); y (−1,0,0) | cabinet east silk |
 | `salon.cabinet.wall.west` | Wall | (−10.000, −7.600, 0); x (0,−1,0); y (+1,0,0) | cabinet west silk |
-| `salon.bay1.case` | Mount | (−6.100, −1.950, 0.864), the felt's top centre; x (+1,0,0) the case's length; reader's side +y | the 1874 documents (§8) |
+| `salon.cabinet.case` | Mount | (−8.600, −8.450, 0.864), the felt's top centre; x (+1,0,0) the case's length; reader's side −y | the 1874 documents (§8) |
 | `salon.bay2.dancer` | Mount | (−20.500, +3.400, 1.000), the plinth's top centre; facing +x | the Little Dancer |
 | `salon.bench.bay2.n`, `salon.bench.bay2.s`, `salon.bench.bay3.n`, `salon.bench.bay3.s`, `salon.bench.bay4.n`, `salon.bench.bay4.s`, `salon.bench.bay5.n`, `salon.bench.bay5.s` | Seat | seat top z 0.440 at the bench centres (−18.000, ∓2.600), (−30.000, ∓2.600), (−42.000, ∓2.600), (−54.300, ∓2.600) (`n` at y −2.600); long axis x; two frames per face at ±0.60 along, facing +y and −y (backless) | the velvet benches |
 | `salon.pergola.planter.nw`, `salon.pergola.planter.ne`, `salon.pergola.planter.sw`, `salon.pergola.planter.se` | Bed | soil surface z 14.540 at (−32.600, −2.200), (−27.400, −2.200), (−32.600, +2.200), (−27.400, +2.200) | the vines (§7) |
@@ -222,7 +222,10 @@ y −14.100 → −9.100 (centred (−6.000, −11.600)), its sides 5.500 → 5.
 - **Glass stele** (`stele.glass.1200x2400`): `salon.stele.glass` 0.050 thick, mid-plane x −6.150, y +0.800 → +2.000,
   z 0.080 → 2.480, frameless. Foot `salon.stele.foot` x −6.350 → −5.950, y +0.700 → +2.100, 0.080 high, top edges
   eased 6. Impression, Sunrise on the east face; its back seen through the glass.
-- **The 1874 case** (centre (−6.100, −1.950), long axis x, 1.60 × 0.70, 1.00 high): `salon.case.carcase` plinth
+- **The 1874 case**, in the Manet cabinet (ruled: care, no daylight). Centre (−8.600, −8.450), long axis x, 1.60 × 0.70, 1.00
+  high: x −9.400 → −7.800, y −8.800 → −8.100. Its back is 0.50 off the south silk, 0.60 off the west silk and 0.30 clear of the
+  door's west jamb line (x −7.500). The reader stands on its north side (−y), facing south; it is clear of the Bar's wall
+  zone and of the viewing stone at (−6.00, −11.60). Parts: `salon.case.carcase` plinth
   recessed 40 to 0.090; body to 0.800, its long faces framed and panelled (bottom rail 0.110–0.170, top rail
   0.730–0.790, stiles 0.06 wide at case-x −0.80, −0.03, +0.74, all 5 proud); top rail 0.800–0.860, 12 proud. Hood
   `salon.case.hood` 0.864 → 0.990, its twelve edges in 12 mm angles `salon.case.angles` (and an escutcheon on the
@@ -256,7 +259,8 @@ the hang only. The cabinet has no daylight.
 | `wash.bay1.north` … `wash.bay5.west`, `wash.cabinet.*` | `linear-cove.3000k` (a strip in the slot) | 12 runs in the bays + 4 in the cabinet | in the silk-top slot, 0.020 off the silk, z 5.620 (cabinet 5.120); aim down the silk to z 2.50 | presence |
 | `work.<id>` (`.a`/`.b` for works over 2.00 wide) | `track-framing.3000k.medium` | 39: one per canvas in the bays and on the stele (Rouen 5), two each for Women in the Garden, Bazille and Paris Street | on a bronze track in the **opposite** cornice's trough, 0.400 off the silk (y ±6.600), head on a stem at z 6.650 (beam clears the lip's 6.47); aim at the canvas's centre at y ∓6.950, framed to the canvas. Bazille: two heads on the east face of pier 1's north impost (−11.350, −5.60/−6.00, 6.620). Impression, Sunrise: bay 1's end-wall cornice (−0.400, +1.400, 6.650) | presence |
 | `work.manet-*` | `track-framing.3000k.small` | 4 (Luncheon ×2) | ceiling track 1.20 off the hung wall at z 5.400 (y −14.400; x −3.200; x −8.800); aim at the canvas centre | presence |
-| `work.salon-1874-case`, `work.degas-little-dancer` | `track-framing.3000k.small` | 2 | south cornice (−6.100, +6.600, 6.650) → the documents (−6.100, −1.950, 0.870); (−19.000, +6.600, 6.650) → the dancer (−20.500, +3.400, 1.500) | presence |
+| `work.salon-1874-case` | `track-framing.3000k.small` | 1 | cabinet ceiling (−8.600, −9.900, 5.400) → the documents (−8.600, −8.450, 0.870) | presence |
+| `work.degas-little-dancer` | `track-framing.3000k.small` | 1 | south cornice (−19.000, +6.600, 6.650) → the dancer (−20.500, +3.400, 1.500) | presence |
 | `cabinet.laylight` | `gap.luminous-ceiling.3000k` | 1, 5.00 × 5.00 | LED modules in the void over the laylight (−6.000, −11.600, 6.000); aim down | presence |
 
 Removed as-built fakes, not re-expressed: floating accent spots 4.5 m over each work, floating wall-washers, rect
@@ -295,7 +299,7 @@ None: no mechanism in the Salon.
 
 ## 8. Art
 **Hang rule** (Hang.swift:15-17): centre at **1.55**, or **0.60 + h/2** when that would put the bottom under 0.60;
-frame's back on the silk; neighbours ≥ 0.04 apart; true size. Every oil framed `frame.gilt.carved` (finish
+frame's back on the silk; neighbours ≥ 0.04 apart; true size. Every oil framed in the carved gilt frame `salon.frame.gilt` (Hang `frame`; finish
 `salon.frame.gilt`; moulding 0.09 + 0.015 × the longer side, clamped 0.10–0.14, MuseeFrame.cpp:1031). Support canvas;
 care oil-and-tempera. **Source** `data/artworks.json` (ids verbatim) unless noted; **sizes** from `Shared/Plan/Hang.swift`
 (the SalonHang board; the catalogue has none). Hang `along` = left edge on the anchor's x; `height` = bottom.
@@ -337,7 +341,7 @@ care oil-and-tempera. **Source** `data/artworks.json` (ids verbatim) unless note
 | `salon.bay5.wall.south` | monet-stacks-of-wheat · Stacks of Wheat (End of Summer) · Monet | 1.00 × 0.60 | (−52.000, +7.000, 1.550) | 2.900 · 1.250 |
 | `salon.bay5.wall.south` | monet-bridge-water-lilies · Bridge over a Pond of Water Lilies · Monet | 0.74 × 0.93 | (−56.600, +7.000, 1.550) | 7.630 · 1.085 |
 | `salon.bay5.wall.north` | monet-rouen-cathedral · Rouen Cathedral series · Monet: five canvases `-1` … `-5` (images assets/paintings/monet-rouen-cathedral-N.jpg) | 0.65 × 1.00 each | x −52.100, −53.200, −54.300, −55.400, −56.500; y −7.000; z 1.550 | 7.575, 6.475, 5.375, 4.275, 3.175 · 1.050 |
-| `salon.bay1.case` | salon-1874-case (`assets/collection.json`) · The first exhibition, April 1874: the catalogue (pp. 14–15, open, flat at case-x −0.40) and Le Charivari 25 April 1874 p. 2 (on the felt board at case-x +0.28) | 0.250 × 0.184; 0.320 × 0.473 (assets/salon/manifest.json) | (−6.500, −1.950, 0.866); (−5.820, −1.950, 0.875) | support paper; frame none; care works-on-paper / works-on-paper.fugitive |
+| `salon.cabinet.case` | salon-1874-case (`assets/collection.json`) · The first exhibition, April 1874: the catalogue (pp. 14–15, open, flat at case-x −0.40) and Le Charivari 25 April 1874 p. 2 (on the felt board at case-x +0.28) | 0.250 × 0.184; 0.320 × 0.473 (assets/salon/manifest.json) | (−9.000, −8.450, 0.866); (−8.320, −8.450, 0.875) | support paper; frame none; care works-on-paper / works-on-paper.fugitive |
 | `salon.bay2.dancer` | degas-little-dancer · Little Dancer Aged Fourteen · Degas (the Met's posthumous bronze with cotton tulle skirt and silk-satin ribbon; scan `assets/sculptures/degas-little-dancer.mvm`, CC BY 4.0, credit required) | h 0.994 (data/sculptures.json) | feet (−20.500, +3.400, 1.000), facing +x | frame none; care textiles.silk; the caption names the NGA wax as the original |
 
 36 catalogue works (39 canvases incl. Rouen's five), the case's two documents and the dancer. Not hung here: the Water
@@ -352,10 +356,10 @@ Lilies' first room (`monet-water-lilies-orangerie`, retired) and the willows (`n
   procedural hiss with ticking drops); footfalls by substance (oiled oak; honed travertine; bronze strips). No others.
 
 ## 10. Visitor
-- **Walk:** the axis stays clear from `salon.east` to `salon.west` (≥ 2.3 between the case and the stele in bay 1;
-  the benches beside it, not on it); through the cabinet door into the cabinet. **Step-to:** the 16 viewing stones.
+- **Walk:** the axis stays clear from `salon.east` to `salon.west` (the stele stands clear of it in bay 1; the benches
+  beside it, not on it); through the cabinet door into the cabinet. **Step-to:** the 16 viewing stones.
 - **Sit:** the eight benches (seat 0.44; two frames per face at ±0.60, facing either wall).
-- **Look:** captions on every work, the case's documents (read from the axis side, +y) and the dancer. No use.
+- **Look:** captions on every work, the case's documents in the cabinet (read from its north side, −y) and the dancer. No use.
 - **Eye:** walking west, oxblood, zinc, sage, old rose, haystack on the piers, and the white oval at the end: an
   adaptation walk the Eye owns; the stage sets nothing for it.
 
@@ -450,10 +454,8 @@ luminous-ceiling product; each voussoir's own tone beyond Matter's defaults; the
 (e.g. a museum laylight system) in the 0.20 void over the etched glass, dimmable, 3000 K, CRI > 90.
 
 **Conflicts and questions for the Architect:**
-(a) **Care in bays 1 and 2.** The 1874 documents (50 lx) sit 2.0 from bay 1's clear lantern and the Little Dancer
-(50 lx) 3.7 from bay 2's opal; diffuse daylight alone will likely exceed 50 lx on bright days. D-014 allows only the
-hang and UV glazing: Art.WithinCare will name them; the fix is a move (e.g. the case into the cabinet, which has no
-daylight). Decide.
+(a) **Care (ruled).** The 1874 case is moved into the Manet cabinet (no daylight). The Little Dancer stays in bay 2;
+if Light's measurement shows bright days over 50 lx on her, she moves to the cabinet.
 (b) The Details board draws the cornice at 6.28–6.62; as built P1 runs 5.60–6.47 (kept, D-017).
 (c) The Light board calls bay 4's diffuser "a linen blind"; it is a fixed linen scrim (D-014), palette `accent.linen`.
 (d) The palette's "viewing stones (18)" counts the oval's two, now `nympheas`'s.

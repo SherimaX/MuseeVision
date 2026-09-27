@@ -60,6 +60,7 @@ All frames are in the stage frame with the pond Down. Anchors on `nympheas.basin
 | `nympheas.basin` | Body | origin (0, 0, 0), axes of the stage; moves +z 0 → 2.600 | coping, frieze, lip, vessel, tray, the golden iris, the water, the planting and the 32 rim lengths (§6) |
 | `nympheas.guard-rails` | Body | origin (0, 0, 0), axes of the stage; moves +z 0 → 1.000 | the three rails (§3.6) |
 | `nympheas.golden-iris` | Use | (−4.150, 0.000, 0.420), on the coping's seat, facing +x; usable from within 6.50 of the centre | on `nympheas.basin` |
+| `nympheas.golden-iris` | Bed | the same frame: Nature's cast specimen (Planting.json `cast`: *Iris laevigata* grown, cast in oil-gilt `bronze.cusn10`, handled) | on `nympheas.basin` |
 | `nympheas.pond.water` | Water | (0, 0, 0.380): the water level at the centre | on `nympheas.basin` |
 | `nympheas.pond.lilies` | Bed | (0, 0, 0.380): the water's surface, inside the edge, clear of the shelves (\|x\| ≤ 3.12) | on `nympheas.basin` |
 | `nympheas.pond.shelf.east` | Bed | (+3.500, 0, 0.260): the east shelf, x +3.12…+3.90 | on `nympheas.basin` |
@@ -160,7 +161,7 @@ bluestone bed). Water `nympheas.pond.water` (§7).
 0.150, each 0.95 long, overlaps 0.08; collapsed inside sleeves Ø 0.230 × 1.00 deep in the shaft walls and curb
 (y 1.235…1.465, ≥ 35 mm of brick to the shaft face), heads flush with the floor under the tray at rest.
 
-**The golden iris** `nympheas.golden-iris` (the pond's control; replaces the golden lily): a cast gilt-bronze
+**The golden iris** `nympheas.golden-iris` (the pond's control; replaces the golden lily; Nature grows it as a cast specimen, Planting.json, and Motion makes it the control, the Use anchor): a cast gilt-bronze
 *Iris laevigata* at life size, set on the coping's seat at the **west apex, (−4.150, 0.000), pond-z 0.420** (the head of
 the axis and of the stair; over the west keystone). A boss Ø 0.08 × 0.012 let flush into the seat; a stem Ø 8 mm rising
 0.34; one open flower (three falls 0.072 × 0.042 with the signal line raised, three standards 0.050 × 0.018, three
