@@ -1,0 +1,1173 @@
+{
+  "stage": "albion",
+  "works": [
+    {
+      "work": "albion-millais-mariana",
+      "source": "data/albion.json",
+      "anchor": "albion.wall.west",
+      "along": 32.752,
+      "height": 1.351,
+      "size": [
+        0.495,
+        0.597
+      ],
+      "support": "panel",
+      "frame": "albion.frame.gilt",
+      "care": "oil-and-tempera",
+      "centre": [
+        -13.95,
+        -15.0,
+        1.65
+      ],
+      "frameStyle": "watts",
+      "frameWidth": 0.11,
+      "sight": "rect",
+      "glazed": false,
+      "note": "Hung by two bronze rods from the picture rail at 4.20; face 0.05 proud of the wall; outer frame 0.715 x 0.817."
+    },
+    {
+      "work": "albion-brown-pretty-baa-lambs",
+      "source": "data/albion.json",
+      "anchor": "albion.wall.west",
+      "along": 32.619,
+      "height": 2.341,
+      "size": [
+        0.762,
+        0.61
+      ],
+      "support": "panel",
+      "frame": "albion.frame.gilt",
+      "care": "oil-and-tempera",
+      "centre": [
+        -13.95,
+        -15.0,
+        2.646
+      ],
+      "frameStyle": "reeded",
+      "frameWidth": 0.1,
+      "sight": "rect",
+      "glazed": false,
+      "note": "Hung by two bronze rods from the picture rail at 4.20; face 0.05 proud of the wall; outer frame 0.966 x 0.814."
+    },
+    {
+      "work": "albion-millais-ophelia",
+      "source": "data/albion.json",
+      "anchor": "albion.wall.west",
+      "along": 26.441,
+      "height": 1.269,
+      "size": [
+        1.118,
+        0.762
+      ],
+      "support": "canvas",
+      "frame": "albion.frame.gilt",
+      "care": "oil-and-tempera",
+      "centre": [
+        -13.95,
+        -9.0,
+        1.65
+      ],
+      "frameStyle": "watts",
+      "frameWidth": 0.14,
+      "sight": "arched",
+      "glazed": false,
+      "note": "Hung by two bronze rods from the picture rail at 4.20; face 0.05 proud of the wall; outer frame 1.398 x 1.042. A gilt oak slip fills the arched sight."
+    },
+    {
+      "work": "albion-brown-english-autumn-afternoon",
+      "source": "data/albion.json",
+      "anchor": "albion.wall.west",
+      "along": 26.327,
+      "height": 2.484,
+      "size": [
+        1.346,
+        0.717
+      ],
+      "support": "canvas",
+      "frame": "albion.frame.gilt",
+      "care": "oil-and-tempera",
+      "centre": [
+        -13.95,
+        -9.0,
+        2.842
+      ],
+      "frameStyle": "reeded",
+      "frameWidth": 0.13,
+      "sight": "oval",
+      "glazed": false,
+      "note": "Hung by two bronze rods from the picture rail at 4.20; face 0.05 proud of the wall; outer frame 1.6112 x 0.9822. A gilt oak slip fills the oval sight."
+    },
+    {
+      "work": "albion-hunt-awakening-conscience",
+      "source": "data/albion.json",
+      "anchor": "albion.wall.west",
+      "along": 21.648,
+      "height": 1.269,
+      "size": [
+        0.559,
+        0.762
+      ],
+      "support": "canvas",
+      "frame": "albion.frame.gilt",
+      "care": "oil-and-tempera",
+      "centre": [
+        -13.95,
+        -3.927,
+        1.65
+      ],
+      "frameStyle": "watts",
+      "frameWidth": 0.11,
+      "sight": "arched",
+      "glazed": false,
+      "note": "Hung by two bronze rods from the picture rail at 4.20; face 0.05 proud of the wall; outer frame 0.779 x 0.982. A gilt oak slip fills the arched sight."
+    },
+    {
+      "work": "albion-brown-last-of-england",
+      "source": "data/albion.json",
+      "anchor": "albion.wall.west",
+      "along": 19.786,
+      "height": 1.237,
+      "size": [
+        0.75,
+        0.825
+      ],
+      "support": "panel",
+      "frame": "albion.frame.gilt",
+      "care": "oil-and-tempera",
+      "centre": [
+        -13.95,
+        -2.161,
+        1.65
+      ],
+      "frameStyle": "reeded",
+      "frameWidth": 0.1,
+      "sight": "oval",
+      "glazed": false,
+      "note": "Hung by two bronze rods from the picture rail at 4.20; face 0.05 proud of the wall; outer frame 0.954 x 1.029. A gilt oak slip fills the oval sight."
+    },
+    {
+      "work": "albion-millais-blind-girl",
+      "source": "data/albion.json",
+      "anchor": "albion.wall.west",
+      "along": 15.643,
+      "height": 1.242,
+      "size": [
+        0.622,
+        0.826
+      ],
+      "support": "canvas",
+      "frame": "albion.frame.gilt",
+      "care": "oil-and-tempera",
+      "centre": [
+        -13.95,
+        2.046,
+        1.655
+      ],
+      "frameStyle": "watts",
+      "frameWidth": 0.11,
+      "sight": "rect",
+      "glazed": false,
+      "note": "Hung by two bronze rods from the picture rail at 4.20; face 0.05 proud of the wall; outer frame 0.842 x 1.046."
+    },
+    {
+      "work": "albion-wallis-stonebreaker",
+      "source": "data/albion.json",
+      "anchor": "albion.wall.west",
+      "along": 13.736,
+      "height": 1.318,
+      "size": [
+        0.787,
+        0.654
+      ],
+      "support": "canvas",
+      "frame": "albion.frame.gilt",
+      "care": "oil-and-tempera",
+      "centre": [
+        -13.95,
+        3.871,
+        1.645
+      ],
+      "frameStyle": "watts",
+      "frameWidth": 0.11,
+      "sight": "rect",
+      "glazed": false,
+      "note": "Hung by two bronze rods from the picture rail at 4.20; face 0.05 proud of the wall; outer frame 1.007 x 0.874."
+    },
+    {
+      "work": "albion-hughes-long-engagement",
+      "source": "data/albion.json",
+      "anchor": "albion.wall.west",
+      "along": 9.456,
+      "height": 1.11,
+      "size": [
+        0.533,
+        1.07
+      ],
+      "support": "canvas",
+      "frame": "albion.frame.gilt",
+      "care": "oil-and-tempera",
+      "centre": [
+        -13.95,
+        8.277,
+        1.645
+      ],
+      "frameStyle": "watts",
+      "frameWidth": 0.14,
+      "sight": "arched",
+      "glazed": false,
+      "note": "Hung by two bronze rods from the picture rail at 4.20; face 0.05 proud of the wall; outer frame 0.813 x 1.35. A gilt oak slip fills the arched sight."
+    },
+    {
+      "work": "albion-brown-walton-on-the-naze",
+      "source": "data/albion.json",
+      "anchor": "albion.wall.west",
+      "along": 7.934,
+      "height": 1.491,
+      "size": [
+        0.419,
+        0.317
+      ],
+      "support": "canvas",
+      "frame": "albion.frame.gilt",
+      "care": "oil-and-tempera",
+      "centre": [
+        -13.95,
+        9.856,
+        1.65
+      ],
+      "frameStyle": "cabinet",
+      "frameWidth": 0.07,
+      "sight": "rect",
+      "glazed": false,
+      "note": "Hung by two bronze rods from the picture rail at 4.20; face 0.05 proud of the wall; outer frame 0.545 x 0.443."
+    },
+    {
+      "work": "albion-sandys-morgan-le-fay",
+      "source": "data/albion.json",
+      "anchor": "albion.wall.west",
+      "along": 3.57,
+      "height": 1.341,
+      "size": [
+        0.437,
+        0.618
+      ],
+      "support": "panel",
+      "frame": "albion.frame.gilt",
+      "care": "oil-and-tempera",
+      "centre": [
+        -13.95,
+        14.212,
+        1.65
+      ],
+      "frameStyle": "watts",
+      "frameWidth": 0.11,
+      "sight": "rect",
+      "glazed": false,
+      "note": "Hung by two bronze rods from the picture rail at 4.20; face 0.05 proud of the wall; outer frame 0.657 x 0.838."
+    },
+    {
+      "work": "albion-sandys-medea",
+      "source": "data/albion.json",
+      "anchor": "albion.wall.west",
+      "along": 1.994,
+      "height": 1.344,
+      "size": [
+        0.456,
+        0.612
+      ],
+      "support": "panel",
+      "frame": "albion.frame.gilt",
+      "care": "oil-and-tempera",
+      "centre": [
+        -13.95,
+        15.778,
+        1.65
+      ],
+      "frameStyle": "watts",
+      "frameWidth": 0.11,
+      "sight": "rect",
+      "glazed": false,
+      "note": "Hung by two bronze rods from the picture rail at 4.20; face 0.05 proud of the wall; outer frame 0.676 x 0.832."
+    },
+    {
+      "work": "albion-morris-trellis",
+      "source": "data/albion.json",
+      "anchor": "albion.wall.east",
+      "along": 0.657,
+      "height": 0.2,
+      "size": [
+        1.2,
+        3.0
+      ],
+      "support": "paper",
+      "frame": "albion.frame.oak",
+      "care": "works-on-paper",
+      "centre": [
+        13.95,
+        -16.743,
+        1.7
+      ],
+      "frameStyle": "panel",
+      "frameWidth": 0.035,
+      "sight": "rect",
+      "glazed": true,
+      "note": "A panel of the paper, 1.20 x 3.00, block-printed in distemper, repeat [0.52, 0.52] m; in a narrow fumed-oak panel frame 0.035, glazed; image assets/albion/paintings/albion-morris-trellis.jpg."
+    },
+    {
+      "work": "albion-morris-acanthus",
+      "source": "data/albion.json",
+      "anchor": "albion.wall.east",
+      "along": 2.4,
+      "height": 0.2,
+      "size": [
+        1.2,
+        3.0
+      ],
+      "support": "paper",
+      "frame": "albion.frame.oak",
+      "care": "works-on-paper",
+      "centre": [
+        13.95,
+        -15.0,
+        1.7
+      ],
+      "frameStyle": "panel",
+      "frameWidth": 0.035,
+      "sight": "rect",
+      "glazed": true,
+      "note": "A panel of the paper, 1.20 x 3.00, block-printed in distemper, repeat [0.66, 0.53] m; in a narrow fumed-oak panel frame 0.035, glazed; image assets/albion/paintings/albion-morris-acanthus.jpg."
+    },
+    {
+      "work": "albion-morris-willow-bough",
+      "source": "data/albion.json",
+      "anchor": "albion.wall.east",
+      "along": 4.142,
+      "height": 0.2,
+      "size": [
+        1.2,
+        3.0
+      ],
+      "support": "paper",
+      "frame": "albion.frame.oak",
+      "care": "works-on-paper",
+      "centre": [
+        13.95,
+        -13.258,
+        1.7
+      ],
+      "frameStyle": "panel",
+      "frameWidth": 0.035,
+      "sight": "rect",
+      "glazed": true,
+      "note": "A panel of the paper, 1.20 x 3.00, block-printed in distemper, repeat [0.436, 0.514] m; in a narrow fumed-oak panel frame 0.035, glazed; image assets/albion/paintings/albion-morris-willow-bough.jpg."
+    },
+    {
+      "work": "albion-stillman-loves-messenger",
+      "source": "data/albion.json",
+      "anchor": "albion.wall.east",
+      "along": 6.582,
+      "height": 1.239,
+      "size": [
+        0.66,
+        0.813
+      ],
+      "support": "paper",
+      "frame": "albion.frame.gilt.glazed",
+      "care": "works-on-paper",
+      "centre": [
+        13.95,
+        -11.088,
+        1.645
+      ],
+      "frameStyle": "reeded",
+      "frameWidth": 0.1,
+      "sight": "rect",
+      "glazed": true,
+      "note": "Hung by two bronze rods from the picture rail at 4.20; face 0.05 proud of the wall; outer frame 0.864 x 1.017."
+    },
+    {
+      "work": "albion-millais-portia",
+      "source": "data/albion.json",
+      "anchor": "albion.wall.east",
+      "along": 7.814,
+      "height": 1.02,
+      "size": [
+        0.838,
+        1.251
+      ],
+      "support": "canvas",
+      "frame": "albion.frame.gilt",
+      "care": "oil-and-tempera",
+      "centre": [
+        13.95,
+        -9.767,
+        1.645
+      ],
+      "frameStyle": "watts",
+      "frameWidth": 0.14,
+      "sight": "rect",
+      "glazed": false,
+      "note": "Hung by two bronze rods from the picture rail at 4.20; face 0.05 proud of the wall; outer frame 1.118 x 1.531."
+    },
+    {
+      "work": "albion-de-morgan-flora",
+      "source": "data/albion.json",
+      "anchor": "albion.wall.east",
+      "along": 9.261,
+      "height": 0.75,
+      "size": [
+        0.88,
+        1.99
+      ],
+      "support": "canvas",
+      "frame": "albion.frame.gilt",
+      "care": "oil-and-tempera",
+      "centre": [
+        13.95,
+        -8.299,
+        1.745
+      ],
+      "frameStyle": "watts",
+      "frameWidth": 0.14,
+      "sight": "rect",
+      "glazed": false,
+      "note": "Hung by two bronze rods from the picture rail at 4.20; face 0.05 proud of the wall; outer frame 1.16 x 2.27."
+    },
+    {
+      "work": "albion-leighton-lachrymae",
+      "source": "data/albion.json",
+      "anchor": "albion.wall.east",
+      "along": 10.751,
+      "height": 0.902,
+      "size": [
+        0.629,
+        1.575
+      ],
+      "support": "canvas",
+      "frame": "albion.frame.gilt",
+      "care": "oil-and-tempera",
+      "centre": [
+        13.95,
+        -6.934,
+        1.69
+      ],
+      "frameStyle": "watts",
+      "frameWidth": 0.14,
+      "sight": "rect",
+      "glazed": false,
+      "note": "Hung by two bronze rods from the picture rail at 4.20; face 0.05 proud of the wall; outer frame 0.909 x 1.855."
+    },
+    {
+      "work": "albion-burne-jones-golden-stairs",
+      "source": "data/albion.json",
+      "anchor": "albion.wall.east",
+      "along": 13.228,
+      "height": 0.749,
+      "size": [
+        1.168,
+        2.692
+      ],
+      "support": "canvas",
+      "frame": "albion.frame.gilt",
+      "care": "oil-and-tempera",
+      "centre": [
+        13.95,
+        -4.188,
+        2.095
+      ],
+      "frameStyle": "watts",
+      "frameWidth": 0.17,
+      "sight": "rect",
+      "glazed": false,
+      "note": "Hung by two bronze rods from the picture rail at 4.20; face 0.05 proud of the wall; outer frame 1.508 x 3.032."
+    },
+    {
+      "work": "albion-moore-dreamers",
+      "source": "data/albion.json",
+      "anchor": "albion.wall.east",
+      "along": 15.599,
+      "height": 1.295,
+      "size": [
+        1.21,
+        0.7
+      ],
+      "support": "canvas",
+      "frame": "albion.frame.gilt",
+      "care": "oil-and-tempera",
+      "centre": [
+        13.95,
+        -1.796,
+        1.645
+      ],
+      "frameStyle": "reeded",
+      "frameWidth": 0.13,
+      "sight": "rect",
+      "glazed": false,
+      "note": "Hung by two bronze rods from the picture rail at 4.20; face 0.05 proud of the wall; outer frame 1.4752 x 0.9652."
+    },
+    {
+      "work": "albion-burne-jones-pygmalion-1",
+      "source": "data/albion.json",
+      "anchor": "albion.wall.east",
+      "along": 18.616,
+      "height": 1.15,
+      "size": [
+        0.76,
+        0.99
+      ],
+      "support": "canvas",
+      "frame": "albion.frame.gilt",
+      "care": "oil-and-tempera",
+      "centre": [
+        13.95,
+        0.996,
+        1.645
+      ],
+      "frameStyle": "watts",
+      "frameWidth": 0.11,
+      "sight": "rect",
+      "glazed": false,
+      "note": "Hung by two bronze rods from the picture rail at 4.20; face 0.05 proud of the wall; outer frame 0.98 x 1.21."
+    },
+    {
+      "work": "albion-burne-jones-pygmalion-2",
+      "source": "data/albion.json",
+      "anchor": "albion.wall.east",
+      "along": 19.952,
+      "height": 1.15,
+      "size": [
+        0.76,
+        0.99
+      ],
+      "support": "canvas",
+      "frame": "albion.frame.gilt",
+      "care": "oil-and-tempera",
+      "centre": [
+        13.95,
+        2.332,
+        1.645
+      ],
+      "frameStyle": "watts",
+      "frameWidth": 0.11,
+      "sight": "rect",
+      "glazed": false,
+      "note": "Hung by two bronze rods from the picture rail at 4.20; face 0.05 proud of the wall; outer frame 0.98 x 1.21."
+    },
+    {
+      "work": "albion-burne-jones-pygmalion-3",
+      "source": "data/albion.json",
+      "anchor": "albion.wall.east",
+      "along": 21.288,
+      "height": 1.15,
+      "size": [
+        0.76,
+        0.99
+      ],
+      "support": "canvas",
+      "frame": "albion.frame.gilt",
+      "care": "oil-and-tempera",
+      "centre": [
+        13.95,
+        3.668,
+        1.645
+      ],
+      "frameStyle": "watts",
+      "frameWidth": 0.11,
+      "sight": "rect",
+      "glazed": false,
+      "note": "Hung by two bronze rods from the picture rail at 4.20; face 0.05 proud of the wall; outer frame 0.98 x 1.21."
+    },
+    {
+      "work": "albion-burne-jones-pygmalion-4",
+      "source": "data/albion.json",
+      "anchor": "albion.wall.east",
+      "along": 22.624,
+      "height": 1.15,
+      "size": [
+        0.76,
+        0.99
+      ],
+      "support": "canvas",
+      "frame": "albion.frame.gilt",
+      "care": "oil-and-tempera",
+      "centre": [
+        13.95,
+        5.004,
+        1.645
+      ],
+      "frameStyle": "watts",
+      "frameWidth": 0.11,
+      "sight": "rect",
+      "glazed": false,
+      "note": "Hung by two bronze rods from the picture rail at 4.20; face 0.05 proud of the wall; outer frame 0.98 x 1.21."
+    },
+    {
+      "work": "albion-burne-jones-love-song",
+      "source": "data/albion.json",
+      "anchor": "albion.wall.east",
+      "along": 26.221,
+      "height": 1.079,
+      "size": [
+        1.559,
+        1.143
+      ],
+      "support": "canvas",
+      "frame": "albion.frame.gilt",
+      "care": "oil-and-tempera",
+      "centre": [
+        13.95,
+        9.0,
+        1.65
+      ],
+      "frameStyle": "watts",
+      "frameWidth": 0.14,
+      "sight": "rect",
+      "glazed": false,
+      "note": "Hung by two bronze rods from the picture rail at 4.20; face 0.05 proud of the wall; outer frame 1.839 x 1.423."
+    },
+    {
+      "work": "albion-rossetti-beata-beatrix",
+      "source": "data/albion.json",
+      "anchor": "albion.wall.east",
+      "along": 31.081,
+      "height": 1.218,
+      "size": [
+        0.66,
+        0.864
+      ],
+      "support": "canvas",
+      "frame": "albion.frame.gilt",
+      "care": "oil-and-tempera",
+      "centre": [
+        13.95,
+        13.411,
+        1.65
+      ],
+      "frameStyle": "reeded",
+      "frameWidth": 0.1,
+      "sight": "rect",
+      "glazed": false,
+      "note": "Hung by two bronze rods from the picture rail at 4.20; face 0.05 proud of the wall; outer frame 0.864 x 1.068."
+    },
+    {
+      "work": "albion-rossetti-lady-lilith",
+      "source": "data/albion.json",
+      "anchor": "albion.wall.east",
+      "along": 32.774,
+      "height": 1.393,
+      "size": [
+        0.44,
+        0.513
+      ],
+      "support": "paper",
+      "frame": "albion.frame.gilt.glazed",
+      "care": "works-on-paper",
+      "centre": [
+        13.95,
+        14.994,
+        1.65
+      ],
+      "frameStyle": "reeded",
+      "frameWidth": 0.1,
+      "sight": "rect",
+      "glazed": true,
+      "note": "Hung by two bronze rods from the picture rail at 4.20; face 0.05 proud of the wall; outer frame 0.644 x 0.717."
+    },
+    {
+      "work": "albion-rossetti-proserpine",
+      "source": "data/albion.json",
+      "anchor": "albion.wall.east",
+      "along": 34.278,
+      "height": 1.02,
+      "size": [
+        0.61,
+        1.251
+      ],
+      "support": "canvas",
+      "frame": "albion.frame.gilt",
+      "care": "oil-and-tempera",
+      "centre": [
+        13.95,
+        16.583,
+        1.645
+      ],
+      "frameStyle": "reeded",
+      "frameWidth": 0.13,
+      "sight": "rect",
+      "glazed": false,
+      "note": "Hung by two bronze rods from the picture rail at 4.20; face 0.05 proud of the wall; outer frame 0.8752 x 1.5162."
+    },
+    {
+      "work": "albion-waterhouse-lady-of-shalott",
+      "source": "data/albion.json",
+      "anchor": "albion.wall.south",
+      "along": 23.0,
+      "height": 1.0,
+      "size": [
+        2.0,
+        1.53
+      ],
+      "support": "canvas",
+      "frame": "albion.frame.gilt",
+      "care": "oil-and-tempera",
+      "centre": [
+        -10.0,
+        17.95,
+        1.765
+      ],
+      "frameStyle": "watts",
+      "frameWidth": 0.17,
+      "sight": "rect",
+      "glazed": false,
+      "note": "Hung on two concealed bronze plates (the end walls carry no rail, as built); face 0.05 proud of the wall; outer frame 2.34 x 1.87."
+    },
+    {
+      "work": "albion-morris-attainment",
+      "source": "data/albion.json",
+      "anchor": "albion.wall.south",
+      "along": 10.525,
+      "height": 1.0,
+      "size": [
+        6.95,
+        2.44
+      ],
+      "support": "tapestry",
+      "frame": "none",
+      "care": "textiles.silk",
+      "centre": [
+        0.0,
+        17.95,
+        2.22
+      ],
+      "frameStyle": "none",
+      "frameWidth": 0.0,
+      "sight": "rect",
+      "glazed": false,
+      "note": "Hung flat on a lined oak batten (albion.tapestry.batten) with two painted-iron brackets, its face 0.05 off the wall; lined (albion.tapestry.lining)."
+    },
+    {
+      "work": "albion-burne-jones-king-cophetua",
+      "source": "data/albion.json",
+      "anchor": "albion.wall.south",
+      "along": 3.321,
+      "height": 0.698,
+      "size": [
+        1.359,
+        2.934
+      ],
+      "support": "canvas",
+      "frame": "albion.frame.gilt",
+      "care": "oil-and-tempera",
+      "centre": [
+        10.0,
+        17.95,
+        2.165
+      ],
+      "frameStyle": "watts",
+      "frameWidth": 0.17,
+      "sight": "rect",
+      "glazed": false,
+      "note": "Hung on two concealed bronze plates (the end walls carry no rail, as built); face 0.05 proud of the wall; outer frame 1.699 x 3.274."
+    },
+    {
+      "work": "albion-burne-jones-star-of-bethlehem",
+      "source": "data/albion.json",
+      "anchor": "albion.wall.north",
+      "along": 22.565,
+      "height": 0.9,
+      "size": [
+        3.87,
+        2.56
+      ],
+      "support": "paper",
+      "frame": "albion.frame.gilt.glazed",
+      "care": "works-on-paper",
+      "centre": [
+        10.5,
+        -17.95,
+        2.18
+      ],
+      "frameStyle": "watts",
+      "frameWidth": 0.17,
+      "sight": "rect",
+      "glazed": true,
+      "note": "Hung on two concealed bronze plates (the end walls carry no rail, as built); face 0.05 proud of the wall; outer frame 4.21 x 2.9. Moved 0.5 m east of the as-built x 10.0 (sheet section 4: out of the late sun through the arcade)."
+    },
+    {
+      "work": "albion-de-morgan-charger",
+      "source": "data/albion.json",
+      "anchor": "albion.case.w3",
+      "centre": [
+        -10.4,
+        -6.45,
+        0.55
+      ],
+      "size": [
+        0.514,
+        0.07
+      ],
+      "support": "earthenware",
+      "frame": "none",
+      "care": "ceramic-and-glass",
+      "kind": "dish",
+      "note": "Lies on the baize bed (top z 0.550), its foot at centre; a turned disc from its photograph; image assets/albion/paintings/albion-de-morgan-charger.jpg."
+    },
+    {
+      "work": "albion-de-morgan-dish-eagle",
+      "source": "data/albion.json",
+      "anchor": "albion.case.w3",
+      "centre": [
+        -10.4,
+        -5.5,
+        0.55
+      ],
+      "size": [
+        0.252,
+        0.04
+      ],
+      "support": "earthenware",
+      "frame": "none",
+      "care": "ceramic-and-glass",
+      "kind": "dish",
+      "note": "Lies on the baize bed (top z 0.550), its foot at centre; a turned disc from its photograph; image assets/albion/paintings/albion-de-morgan-dish-eagle.jpg."
+    },
+    {
+      "work": "albion-de-morgan-peacock-dish",
+      "source": "data/albion.json",
+      "anchor": "albion.case.e3",
+      "centre": [
+        10.4,
+        -6.3,
+        0.55
+      ],
+      "size": [
+        0.4,
+        0.055
+      ],
+      "support": "earthenware",
+      "frame": "none",
+      "care": "ceramic-and-glass",
+      "kind": "dish",
+      "note": "Lies on the baize bed (top z 0.550), its foot at centre; a turned disc from its photograph; image assets/albion/paintings/albion-de-morgan-peacock-dish.jpg. Diameter 0.40 unverified (SOURCES.json gives no size; the old hang's value)."
+    },
+    {
+      "work": "albion-de-morgan-vase",
+      "source": "data/albion.json",
+      "anchor": "albion.case.e3",
+      "centre": [
+        10.4,
+        -5.45,
+        0.55
+      ],
+      "size": [
+        0.241,
+        0.349
+      ],
+      "support": "earthenware",
+      "frame": "none",
+      "care": "ceramic-and-glass",
+      "kind": "vase",
+      "note": "Lies on the baize bed (top z 0.550), its foot at centre; turned from assets/albion/vessels.json's profile; image assets/albion/paintings/albion-de-morgan-vase.jpg."
+    },
+    {
+      "work": "albion-de-morgan-rice-dish",
+      "source": "data/albion.json",
+      "anchor": "albion.case.w5",
+      "centre": [
+        -10.4,
+        5.55,
+        0.55
+      ],
+      "size": [
+        0.311,
+        0.044
+      ],
+      "support": "earthenware",
+      "frame": "none",
+      "care": "ceramic-and-glass",
+      "kind": "dish",
+      "note": "Lies on the baize bed (top z 0.550), its foot at centre; a turned disc from its photograph; image assets/albion/paintings/albion-de-morgan-rice-dish.jpg."
+    },
+    {
+      "work": "albion-de-morgan-fish-dish",
+      "source": "data/albion.json",
+      "anchor": "albion.case.w5",
+      "centre": [
+        -10.4,
+        6.45,
+        0.55
+      ],
+      "size": [
+        0.314,
+        0.05
+      ],
+      "support": "earthenware",
+      "frame": "none",
+      "care": "ceramic-and-glass",
+      "kind": "dish",
+      "note": "Lies on the baize bed (top z 0.550), its foot at centre; a turned disc from its photograph; image assets/albion/paintings/albion-de-morgan-fish-dish.jpg."
+    },
+    {
+      "work": "albion-de-morgan-ship-plate",
+      "source": "data/albion.json",
+      "anchor": "albion.case.e5",
+      "centre": [
+        10.4,
+        5.6,
+        0.55
+      ],
+      "size": [
+        0.2,
+        0.03
+      ],
+      "support": "earthenware",
+      "frame": "none",
+      "care": "ceramic-and-glass",
+      "kind": "dish",
+      "note": "Lies on the baize bed (top z 0.550), its foot at centre; a turned disc from its photograph; image assets/albion/paintings/albion-de-morgan-ship-plate.jpg."
+    },
+    {
+      "work": "albion-de-morgan-jar",
+      "source": "data/albion.json",
+      "anchor": "albion.case.e5",
+      "centre": [
+        10.4,
+        6.4,
+        0.55
+      ],
+      "size": [
+        0.24,
+        0.38
+      ],
+      "support": "earthenware",
+      "frame": "none",
+      "care": "ceramic-and-glass",
+      "kind": "vase",
+      "note": "Lies on the baize bed (top z 0.550), its foot at centre; turned from assets/albion/vessels.json's profile; image assets/albion/paintings/albion-de-morgan-jar.jpg."
+    },
+    {
+      "work": "albion-kelmscott-chaucer",
+      "source": "data/albion.json",
+      "anchor": "albion.lectern",
+      "centre": [
+        12.2,
+        -13.3,
+        1.107
+      ],
+      "size": [
+        0.59,
+        0.435
+      ],
+      "support": "paper",
+      "frame": "none",
+      "care": "works-on-paper",
+      "kind": "book",
+      "opening": 0,
+      "note": "Folio 0.425 x 0.290 a leaf, block 0.066 (277 leaves), boards 0.003 with a 0.005 square, half holland over blue-grey paper boards; open at the first opening (assets/albion/chaucer/page_000, page_001) on the desk sloping 18 deg, the reader facing east. Static tonight."
+    },
+    {
+      "work": "albion-tristram-isolde",
+      "source": "data/albion.json",
+      "canvas": 1,
+      "anchor": "albion.band.t1",
+      "along": 0.07,
+      "height": 0.07,
+      "size": [
+        1.46,
+        1.56
+      ],
+      "support": "glass",
+      "frame": "none",
+      "care": "ceramic-and-glass",
+      "kind": "stained-glass",
+      "note": "Panel T1 leaded in glass.mouth-blown (albion.band.glass) inside a 0.07 border of cream quarries; image assets/albion/glass/tristram-panel-T1-birth.jpg; glazed about 2.3-2.4 x the 1862 panel (the approved design)."
+    },
+    {
+      "work": "albion-tristram-isolde",
+      "source": "data/albion.json",
+      "canvas": 2,
+      "anchor": "albion.band.t2",
+      "along": 0.07,
+      "height": 0.07,
+      "size": [
+        1.46,
+        1.56
+      ],
+      "support": "glass",
+      "frame": "none",
+      "care": "ceramic-and-glass",
+      "kind": "stained-glass",
+      "note": "Panel T2 leaded in glass.mouth-blown (albion.band.glass) inside a 0.07 border of cream quarries; image assets/albion/glass/tristram-panel-T2-marhaus.jpg; glazed about 2.3-2.4 x the 1862 panel (the approved design)."
+    },
+    {
+      "work": "albion-tristram-isolde",
+      "source": "data/albion.json",
+      "canvas": 3,
+      "anchor": "albion.band.t3",
+      "along": 0.07,
+      "height": 0.07,
+      "size": [
+        1.46,
+        1.56
+      ],
+      "support": "glass",
+      "frame": "none",
+      "care": "ceramic-and-glass",
+      "kind": "stained-glass",
+      "note": "Panel T3 leaded in glass.mouth-blown (albion.band.glass) inside a 0.07 border of cream quarries; image assets/albion/glass/tristram-panel-T3-departure.jpg; glazed about 2.3-2.4 x the 1862 panel (the approved design)."
+    },
+    {
+      "work": "albion-tristram-isolde",
+      "source": "data/albion.json",
+      "canvas": 4,
+      "anchor": "albion.band.t4",
+      "along": 0.07,
+      "height": 0.07,
+      "size": [
+        1.46,
+        1.56
+      ],
+      "support": "glass",
+      "frame": "none",
+      "care": "ceramic-and-glass",
+      "kind": "stained-glass",
+      "note": "Panel T4 leaded in glass.mouth-blown (albion.band.glass) inside a 0.07 border of cream quarries; image assets/albion/glass/tristram-panel-T4-love-potion.jpg; glazed about 2.3-2.4 x the 1862 panel (the approved design)."
+    },
+    {
+      "work": "albion-tristram-isolde",
+      "source": "data/albion.json",
+      "canvas": 5,
+      "anchor": "albion.band.t5",
+      "along": 0.07,
+      "height": 0.07,
+      "size": [
+        1.46,
+        1.56
+      ],
+      "support": "glass",
+      "frame": "none",
+      "care": "ceramic-and-glass",
+      "kind": "stained-glass",
+      "note": "Panel T5 leaded in glass.mouth-blown (albion.band.glass) inside a 0.07 border of cream quarries; image assets/albion/glass/tristram-panel-T5-marriage.jpg; glazed about 2.3-2.4 x the 1862 panel (the approved design)."
+    },
+    {
+      "work": "albion-tristram-isolde",
+      "source": "data/albion.json",
+      "canvas": 6,
+      "anchor": "albion.band.t6",
+      "along": 0.07,
+      "height": 0.07,
+      "size": [
+        1.46,
+        1.56
+      ],
+      "support": "glass",
+      "frame": "none",
+      "care": "ceramic-and-glass",
+      "kind": "stained-glass",
+      "note": "Panel T6 leaded in glass.mouth-blown (albion.band.glass) inside a 0.07 border of cream quarries; image assets/albion/glass/tristram-panel-T6-madness.jpg; glazed about 2.3-2.4 x the 1862 panel (the approved design)."
+    },
+    {
+      "work": "albion-tristram-isolde",
+      "source": "data/albion.json",
+      "canvas": 7,
+      "anchor": "albion.band.t7",
+      "along": 0.07,
+      "height": 0.07,
+      "size": [
+        1.46,
+        1.56
+      ],
+      "support": "glass",
+      "frame": "none",
+      "care": "ceramic-and-glass",
+      "kind": "stained-glass",
+      "note": "Panel T7 leaded in glass.mouth-blown (albion.band.glass) inside a 0.07 border of cream quarries; image assets/albion/glass/tristram-panel-T7-attempted-suicide.jpg; glazed about 2.3-2.4 x the 1862 panel (the approved design)."
+    },
+    {
+      "work": "albion-tristram-isolde",
+      "source": "data/albion.json",
+      "canvas": 8,
+      "anchor": "albion.band.t8",
+      "along": 0.07,
+      "height": 0.07,
+      "size": [
+        1.46,
+        1.56
+      ],
+      "support": "glass",
+      "frame": "none",
+      "care": "ceramic-and-glass",
+      "kind": "stained-glass",
+      "note": "Panel T8 leaded in glass.mouth-blown (albion.band.glass) inside a 0.07 border of cream quarries; image assets/albion/glass/tristram-panel-T8-recognition.jpg; glazed about 2.3-2.4 x the 1862 panel (the approved design)."
+    },
+    {
+      "work": "albion-tristram-isolde",
+      "source": "data/albion.json",
+      "canvas": 9,
+      "anchor": "albion.band.t9",
+      "along": 0.07,
+      "height": 0.07,
+      "size": [
+        1.46,
+        1.56
+      ],
+      "support": "glass",
+      "frame": "none",
+      "care": "ceramic-and-glass",
+      "kind": "stained-glass",
+      "note": "Panel T9 leaded in glass.mouth-blown (albion.band.glass) inside a 0.07 border of cream quarries; image assets/albion/glass/tristram-panel-T9-arthurs-court.jpg; glazed about 2.3-2.4 x the 1862 panel (the approved design)."
+    },
+    {
+      "work": "albion-tristram-isolde",
+      "source": "data/albion.json",
+      "canvas": 10,
+      "anchor": "albion.band.t10",
+      "along": 0.07,
+      "height": 0.07,
+      "size": [
+        1.46,
+        1.56
+      ],
+      "support": "glass",
+      "frame": "none",
+      "care": "ceramic-and-glass",
+      "kind": "stained-glass",
+      "note": "Panel T10 leaded in glass.mouth-blown (albion.band.glass) inside a 0.07 border of cream quarries; image assets/albion/glass/tristram-panel-T10-king-mark-slays.jpg; glazed about 2.3-2.4 x the 1862 panel (the approved design)."
+    },
+    {
+      "work": "albion-tristram-isolde",
+      "source": "data/albion.json",
+      "canvas": 11,
+      "anchor": "albion.band.t11",
+      "along": 0.07,
+      "height": 0.07,
+      "size": [
+        1.46,
+        1.56
+      ],
+      "support": "glass",
+      "frame": "none",
+      "care": "ceramic-and-glass",
+      "kind": "stained-glass",
+      "note": "Panel T11 leaded in glass.mouth-blown (albion.band.glass) inside a 0.07 border of cream quarries; image assets/albion/glass/tristram-panel-T11-tomb.jpg; glazed about 2.3-2.4 x the 1862 panel (the approved design)."
+    },
+    {
+      "work": "albion-tristram-isolde",
+      "source": "data/albion.json",
+      "canvas": 12,
+      "anchor": "albion.band.t12",
+      "along": 0.07,
+      "height": 0.07,
+      "size": [
+        1.46,
+        1.56
+      ],
+      "support": "glass",
+      "frame": "none",
+      "care": "ceramic-and-glass",
+      "kind": "stained-glass",
+      "note": "Panel T12 leaded in glass.mouth-blown (albion.band.glass) inside a 0.07 border of cream quarries; image assets/albion/glass/tristram-panel-T12-guenevere-and-isoude.jpg; glazed about 2.3-2.4 x the 1862 panel (the approved design)."
+    }
+  ]
+}
