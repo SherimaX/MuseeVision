@@ -34,9 +34,9 @@ namespace Musee::Site
 		}
 
 		/**
-		 * How near a convex polygon comes to the axis, metres: nothing when the axis lies inside it (on the same side of
-		 * every edge), else its nearest edge. A polygon collapsed to a segment or a point (a wall's face seen from above) has
-		 * no inside, even on a line through the axis, so only its edges count.
+		 * How near a convex polygon comes to the axis, metres: nothing when the axis lies inside it (on the inner side of
+		 * every edge), else its nearest edge. A polygon of less than a square tolerance's area (a wall's face seen from
+		 * above, collapsed to a segment) has no inside, even on a line through the axis, so only its edges count.
 		 */
 		double NearestToAxis(const FPlanPolygon& Polygon)
 		{
@@ -44,21 +44,25 @@ namespace Musee::Site
 			{
 				return TNumericLimits<double>::Max();
 			}
-			bool bAround = Polygon.Num() >= 3;
-			double Sign = 0.0;
+			double TwiceArea = 0.0;
+			for (int32 Index = 0; Index < Polygon.Num(); ++Index)
+			{
+				TwiceArea += FVector2D::CrossProduct(Polygon[Index], Polygon[(Index + 1) % Polygon.Num()]);
+			}
+			const bool bHasInside = FMath::Abs(TwiceArea) > FMath::Square(LoopToleranceMeters);
+			bool bAround = bHasInside;
 			double Nearest = TNumericLimits<double>::Max();
 			for (int32 Index = 0; Index < Polygon.Num(); ++Index)
 			{
 				const FVector2D& A = Polygon[Index];
 				const FVector2D& B = Polygon[(Index + 1) % Polygon.Num()];
-				const double Side = FVector2D::CrossProduct(B - A, -A);
-				bAround &= Sign == 0.0 || Side == 0.0 || (Side > 0.0) == (Sign > 0.0);
-				Sign = Side != 0.0 ? Side : Sign;
+				// The axis is inside an edge when it lies to the same side of it as the polygon's turning.
+				bAround &= FVector2D::CrossProduct(B - A, -A) * TwiceArea >= 0.0;
 				const double Length = (B - A).SizeSquared();
 				const double T = Length > 0.0 ? FMath::Clamp(FVector2D::DotProduct(-A, B - A) / Length, 0.0, 1.0) : 0.0;
 				Nearest = FMath::Min(Nearest, (A + (B - A) * T).Size());
 			}
-			return bAround && Sign != 0.0 ? 0.0 : Nearest;
+			return bAround ? 0.0 : Nearest;
 		}
 
 		/** The direction of a bearing in plan: x east, y south, so north is -y. */

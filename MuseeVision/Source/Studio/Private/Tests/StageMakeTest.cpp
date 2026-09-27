@@ -241,6 +241,12 @@ namespace Musee::Studio::Tests
 		});
 		ON_SCOPE_EXIT { Musee::UnregisterStageDresser(Listener); };
 
+		// Made first with its door unmated (a blind), the room's level is written again once the plan joins it, so its
+		// dressers run with the joined plan's context.
+		FStageMakeOptions Alone = Options;
+		Alone.PlanRecord = TestData(TEXT("Site/SitePlan.json"));
+		TestTrue(TEXT("the room is made alone"), MakeStage(*Room, Alone).Succeeded());
+		Mated.Reset();
 		for (const USiteRoom* Made : {Room, Annex})
 		{
 			const FMakeReport Report = MakeStage(*Made, Options);
