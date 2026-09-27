@@ -127,7 +127,9 @@
         -0.182,
         0.38
       ],
-      "operation": "presence"
+      "operation": "always",
+      "follows": "nympheas.pond.rim",
+      "body": "nympheas.basin"
     },
     {
       "id": "pond.rim.02",
@@ -142,7 +144,9 @@
         -0.546,
         0.38
       ],
-      "operation": "presence"
+      "operation": "always",
+      "follows": "nympheas.pond.rim",
+      "body": "nympheas.basin"
     },
     {
       "id": "pond.rim.03",
@@ -157,7 +161,9 @@
         -0.868,
         0.38
       ],
-      "operation": "presence"
+      "operation": "always",
+      "follows": "nympheas.pond.rim",
+      "body": "nympheas.basin"
     },
     {
       "id": "pond.rim.04",
@@ -172,7 +178,9 @@
         -1.125,
         0.38
       ],
-      "operation": "presence"
+      "operation": "always",
+      "follows": "nympheas.pond.rim",
+      "body": "nympheas.basin"
     },
     {
       "id": "pond.rim.05",
@@ -187,7 +195,9 @@
         -1.32,
         0.38
       ],
-      "operation": "presence"
+      "operation": "always",
+      "follows": "nympheas.pond.rim",
+      "body": "nympheas.basin"
     },
     {
       "id": "pond.rim.06",
@@ -202,7 +212,9 @@
         -1.46,
         0.38
       ],
-      "operation": "presence"
+      "operation": "always",
+      "follows": "nympheas.pond.rim",
+      "body": "nympheas.basin"
     },
     {
       "id": "pond.rim.07",
@@ -217,7 +229,9 @@
         -1.55,
         0.38
       ],
-      "operation": "presence"
+      "operation": "always",
+      "follows": "nympheas.pond.rim",
+      "body": "nympheas.basin"
     },
     {
       "id": "pond.rim.08",
@@ -232,7 +246,9 @@
         -1.594,
         0.38
       ],
-      "operation": "presence"
+      "operation": "always",
+      "follows": "nympheas.pond.rim",
+      "body": "nympheas.basin"
     },
     {
       "id": "pond.rim.09",
@@ -247,7 +263,9 @@
         -1.594,
         0.38
       ],
-      "operation": "presence"
+      "operation": "always",
+      "follows": "nympheas.pond.rim",
+      "body": "nympheas.basin"
     },
     {
       "id": "pond.rim.10",
@@ -262,7 +280,9 @@
         -1.55,
         0.38
       ],
-      "operation": "presence"
+      "operation": "always",
+      "follows": "nympheas.pond.rim",
+      "body": "nympheas.basin"
     },
     {
       "id": "pond.rim.11",
@@ -277,7 +297,9 @@
         -1.46,
         0.38
       ],
-      "operation": "presence"
+      "operation": "always",
+      "follows": "nympheas.pond.rim",
+      "body": "nympheas.basin"
     },
     {
       "id": "pond.rim.12",
@@ -292,7 +314,9 @@
         -1.32,
         0.38
       ],
-      "operation": "presence"
+      "operation": "always",
+      "follows": "nympheas.pond.rim",
+      "body": "nympheas.basin"
     },
     {
       "id": "pond.rim.13",
@@ -307,7 +331,9 @@
         -1.125,
         0.38
       ],
-      "operation": "presence"
+      "operation": "always",
+      "follows": "nympheas.pond.rim",
+      "body": "nympheas.basin"
     },
     {
       "id": "pond.rim.14",
@@ -322,7 +348,9 @@
         -0.868,
         0.38
       ],
-      "operation": "presence"
+      "operation": "always",
+      "follows": "nympheas.pond.rim",
+      "body": "nympheas.basin"
     },
     {
       "id": "pond.rim.15",
@@ -337,7 +365,9 @@
         -0.546,
         0.38
       ],
-      "operation": "presence"
+      "operation": "always",
+      "follows": "nympheas.pond.rim",
+      "body": "nympheas.basin"
     },
     {
       "id": "pond.rim.16",
@@ -352,7 +382,9 @@
         -0.182,
         0.38
       ],
-      "operation": "presence"
+      "operation": "always",
+      "follows": "nympheas.pond.rim",
+      "body": "nympheas.basin"
     },
     {
       "id": "pond.rim.17",
@@ -367,7 +399,9 @@
         0.182,
         0.38
       ],
-      "operation": "presence"
+      "operation": "always",
+      "follows": "nympheas.pond.rim",
+      "body": "nympheas.basin"
     },
     {
       "id": "pond.rim.18",
@@ -382,7 +416,9 @@
         0.546,
         0.38
       ],
-      "operation": "presence"
+      "operation": "always",
+      "follows": "nympheas.pond.rim",
+      "body": "nympheas.basin"
     },
     {
       "id": "pond.rim.19",
@@ -397,7 +433,9 @@
         0.868,
         0.38
       ],
-      "operation": "presence"
+      "operation": "always",
+      "follows": "nympheas.pond.rim",
+      "body": "nympheas.basin"
     },
     {
       "id": "pond.rim.20",
@@ -412,7 +450,9 @@
         1.125,
         0.38
       ],
-      "operation": "presence"
+      "operation": "always",
+      "follows": "nympheas.pond.rim",
+      "body": "nympheas.basin"
     },
     {
       "id": "pond.rim.21",
@@ -427,7 +467,9 @@
         1.32,
         0.38
       ],
-      "operation": "presence"
+      "operation": "always",
+      "follows": "nympheas.pond.rim",
+      "body": "nympheas.basin"
     },
     {
       "id": "pond.rim.22",
@@ -442,7 +484,9 @@
         1.46,
         0.38
       ],
-      "operation": "presence"
+      "operation": "always",
+      "follows": "nympheas.pond.rim",
+      "body": "nympheas.basin"
     },
     {
       "id": "pond.rim.23",
@@ -457,7 +501,9 @@
         1.55,
         0.38
       ],
-      "operation": "presence"
+      "operation": "always",
+      "follows": "nympheas.pond.rim",
+      "body": "nympheas.basin"
     },
     {
       "id": "pond.rim.24",
@@ -472,7 +518,9 @@
         1.594,
         0.38
       ],
-      "operation": "presence"
+      "operation": "always",
+      "follows": "nympheas.pond.rim",
+      "body": "nympheas.basin"
     },
     {
       "id": "pond.rim.25",
@@ -487,7 +535,9 @@
         1.594,
         0.38
       ],
-      "operation": "presence"
+      "operation": "always",
+      "follows": "nympheas.pond.rim",
+      "body": "nympheas.basin"
     },
     {
       "id": "pond.rim.26",
@@ -502,7 +552,9 @@
         1.55,
         0.38
       ],
-      "operation": "presence"
+      "operation": "always",
+      "follows": "nympheas.pond.rim",
+      "body": "nympheas.basin"
     },
     {
       "id": "pond.rim.27",
@@ -517,7 +569,9 @@
         1.46,
         0.38
       ],
-      "operation": "presence"
+      "operation": "always",
+      "follows": "nympheas.pond.rim",
+      "body": "nympheas.basin"
     },
     {
       "id": "pond.rim.28",
@@ -532,7 +586,9 @@
         1.32,
         0.38
       ],
-      "operation": "presence"
+      "operation": "always",
+      "follows": "nympheas.pond.rim",
+      "body": "nympheas.basin"
     },
     {
       "id": "pond.rim.29",
@@ -547,7 +603,9 @@
         1.125,
         0.38
       ],
-      "operation": "presence"
+      "operation": "always",
+      "follows": "nympheas.pond.rim",
+      "body": "nympheas.basin"
     },
     {
       "id": "pond.rim.30",
@@ -562,7 +620,9 @@
         0.868,
         0.38
       ],
-      "operation": "presence"
+      "operation": "always",
+      "follows": "nympheas.pond.rim",
+      "body": "nympheas.basin"
     },
     {
       "id": "pond.rim.31",
@@ -577,7 +637,9 @@
         0.546,
         0.38
       ],
-      "operation": "presence"
+      "operation": "always",
+      "follows": "nympheas.pond.rim",
+      "body": "nympheas.basin"
     },
     {
       "id": "pond.rim.32",
@@ -592,7 +654,9 @@
         0.182,
         0.38
       ],
-      "operation": "presence"
+      "operation": "always",
+      "follows": "nympheas.pond.rim",
+      "body": "nympheas.basin"
     },
     {
       "id": "stair.rail.north",

@@ -121,6 +121,8 @@ def main(room):
             if l.get("operation") not in ("always", "dusk", "presence"):
                 errs.append(f"luminaire {l['id']}: operation {l.get('operation')}")
             for k in ("mount", "aim"):
+                if k == "mount" and isinstance(l.get(k), str):
+                    continue
                 if not (isinstance(l.get(k), list) and len(l[k]) == 3):
                     errs.append(f"luminaire {l['id']}: {k} not [x,y,z]")
         for d in L.get("daylight", []):
@@ -137,23 +139,54 @@ def main(room):
             for k in ("brighter", "darker"):
                 if d[k] not in surfaces:
                     errs.append(f"design ratio surface without finish: {d[k]}")
+    anchors_used = set()
     if "Hang.json" in data:
         cids = collection_ids()
         for w in data["Hang.json"]["works"]:
             if w["work"] not in cids:
-                errs.append(f"hang work not in collection: {w['work']}")
-            if w["wall"] not in surfaces:
-                errs.append(f"hang wall without finish: {w['wall']}")
+                errs.append(f"hang work not in any catalogue: {w['work']}")
             if not w.get("source"):
                 errs.append(f"hang {w['work']}: no source catalogue")
             if w.get("care") not in care:
                 errs.append(f"hang {w['work']}: care {w.get('care')}")
-            if not (len(w["centre"]) == 3 and len(w["size"]) == 2):
-                errs.append(f"hang {w['work']}: centre/size shape")
+            anchors_used.add(w.get("anchor"))
+            if "wall" in w and w["wall"] not in surfaces:
+                errs.append(f"hang wall without finish: {w['wall']}")
+            if not (("along" in w and "height" in w) or "centre" in w):
+                errs.append(f"hang {w['work']}: needs along+height (or centre)")
+            if len(w.get("size", [])) != 2:
+                errs.append(f"hang {w['work']}: size shape")
     if "Planting.json" in data:
-        for b in data["Planting.json"]["beds"]:
-            if not re.match(r"^[A-Z][a-z]+ [a-z×-]+", b["species"]):
+        P = data["Planting.json"]
+        for b in P.get("beds", []):
+            anchors_used.add(b["bed"])
+            if not re.match(r"^[A-Z][a-z]+ [a-z×'-]+", b["species"]):
                 warns.append(f"species not a Latin binomial? {b['species']}")
+        for w in P.get("water", []):
+            anchors_used.add(w.get("anchor"))
+            for k in ("key", "anchor", "outline", "depth", "freeboard", "material"):
+                if k not in w:
+                    errs.append(f"water {w.get('key')}: lacks {k}")
+            if w.get("material") not in palette and not str(w.get("material")).startswith("todo."):
+                errs.append(f"water {w.get('key')}: material not in palette")
+    if "Mechanisms.json" in data:
+        for m in data["Mechanisms.json"]["mechanisms"]:
+            for k in ("key", "joint", "body", "axis", "travel", "time", "profile", "control", "open", "close", "guard"):
+                if k not in m:
+                    errs.append(f"mechanism {m.get('key')}: lacks {k}")
+            anchors_used.add(m.get("body"))
+            anchors_used.add(m.get("control"))
+    if "Lighting.json" in data:
+        for l in data["Lighting.json"].get("luminaires", []):
+            if isinstance(l.get("mount"), str):
+                anchors_used.add(l["mount"])
+            if l.get("body"):
+                anchors_used.add(l["body"])
+    for a in sorted(x for x in anchors_used if x):
+        if a not in md:
+            errs.append(f"anchor/body named in a schedule but not in the sheet: {a}")
+    if "anchor" not in md.lower():
+        errs.append("sheet has no anchors table")
     print(f"{room}: {len(errs)} errors, {len(warns)} warnings; files {sorted(files)}; "
           f"{len(surfaces)} surfaces; {len(ticked - surfaces)} dotted names in sheet without a finish")
     for e in errs:

@@ -111,25 +111,47 @@ true north, angle convention if used), then:
 12. The first-pass cut — what's built tonight and what waits for polish. Small and honest.
 13. Palette keys to confirm (every `todo.` key and every guessed role → the real material meant), and Catalogue gaps.
 
-## Deliverable B: schedules in `MuseeVision/Data/Stages/<room>/` (only those the room needs; must parse as JSON)
+## Deliverable B: schedules in `MuseeVision/Data/Stages/<room>/`, to the STAGE CONTRACT
+The builders follow `C:\mv\briefs\STAGE-CONTRACT.md`. Read it completely: it defines the anchors, bodies, channels
+and dresser orders. Include only the schedules the room needs, and every file must parse as JSON.
 ```
-Finishes.json  { "stage": "<room>", "finishes": [ { "surface": "drum.wall.inner", "material": "<palette key>", "working": "<working>", "history": "<history>", "note": "why" } ] }
-Lighting.json  { "stage": "<room>",
-                 "daylight":   [ { "opening": "oculus", "glazing": "<palette key>", "weather": "museum|giverny|london", "control": "none|<device type>" } ],
-                 "luminaires": [ { "id": "cast-niche-nw", "type": "<catalogue key>", "mount": [x,y,z], "aim": [x,y,z], "operation": "always|dusk|presence" } ],
-                 "targets":    [ { "surface": "<surface>", "class": "<use or care class>", "lux": [min,max], "source": "UseTargets|Care" } ],
-                 "design":     [ { "brighter": "<surface>", "darker": "<surface>", "ratio": [min,max], "note": "" } ] }
-Hang.json      { "stage": "<room>", "works": [ { "work": "<collection id>", "anchor": "<anchor key>", "wall": "<surface>", "centre": [x,y,z], "size": [w,h], "support": "canvas|panel|paper|silk|cast|…", "frame": "<frame type or none>", "care": "<care class>", "source": "<repo-relative path of the owning catalogue>" } ] }
-Planting.json  { "stage": "<room>", "beds": [ { "bed": "<bed key>", "species": "<Latin name>", "count": n, "spacing": s, "note": "" } ] }
+Finishes.json   { "stage": "<room>", "finishes": [ { "surface": "drum.wall.inner", "material": "<palette key>", "working": "<working>", "history": "<history>", "note": "why" } ] }
+Lighting.json   { "stage": "<room>",
+                  "daylight":   [ { "opening": "<opening key>", "glazing": "<palette key>", "weather": "museum|giverny|london", "control": "none|<device type>" } ],
+                  "luminaires": [ { "id": "<id>", "type": "<catalogue key>", "mount": "<Mount anchor key>" or [x,y,z], "aim": [x,y,z],
+                                    "operation": "always|dusk|presence", "follows": "<channel key, optional>", "body": "<body key, optional>" } ],
+                  "targets":    [ { "surface": "<surface>", "class": "<use or care class>", "lux": [min,max], "source": "UseTargets|Care" } ],
+                  "design":     [ { "brighter": "<surface>", "darker": "<surface>", "ratio": [min,max], "note": "" } ] }
+Hang.json       { "stage": "<room>", "works": [ { "work": "<id>", "source": "<repo-relative path of the owning catalogue>", "anchor": "<Wall anchor key>",
+                  "along": <left edge along the wall's x, m>, "height": <lower edge above the floor, m>, "size": [w,h],
+                  "support": "canvas|panel|paper|silk|cast|…", "frame": "<frame type or none>", "care": "<care class>" } ] }
+                  (A work in the round, such as a cast or a sculpture, may instead use a Mount or Seat-like anchor. If a
+                  Wall frame doesn't fit, add a "wall" surface and a "centre": [x,y,z], and note it.)
+Planting.json   { "stage": "<room>",
+                  "water": [ { "key": "<stage>.<water>", "anchor": "<Water anchor key>", "body": "<body key or empty>",
+                               "outline": { "ellipse": [a,b] } | { "polygon": [[x,y],...] }, "depth": d, "freeboard": f, "material": "<palette key>" } ],
+                  "beds":  [ { "bed": "<Bed anchor key>", "species": "<Latin name>", "count": n, "spacing": s, "body": "<body key or empty>", "note": "" } ] }
+Mechanisms.json { "stage": "<room>", "mechanisms": [ { "key": "<stage>.<mech>", "joint": "prismatic|revolute", "body": "<Body anchor key>", "axis": [x,y,z],
+                  "travel": <m or deg>, "time": <s>, "profile": "ease-in-out|linear", "control": "<Use anchor key or channel>",
+                  "open": [ { "channel": "<channel>", "to": 1.0, "time": t } | { "move": "open" } ], "close": [ ... ],
+                  "guard": "body-in-travel", "clearance": <m> } ] }
 ```
-Hang ids come verbatim from the catalogue that owns the work (collection.json, data/*.json, assets/*/*.json); name it in
-`source` (e.g. `data/albion.json`) and never unify catalogues. A size missing from the catalogue comes from the old hang
-scripts or the boards, cited in §8. The Reserve's stair port mates `nympheas.stair`; the Salon has no stair port.
-Positions are metres in the room's frame. `aim` is a POINT in the room frame the luminaire aims at (not a vector).
-Keys lowercase, dot-scoped. Every surface named in the sheet appears in Finishes.json; every `wall` in Hang.json
-and every `surface` in Lighting targets is a surface from the sheet. Write JSON with UTF-8, 2-space indent.
+- **Anchors.** Section 1 or 3 of the sheet carries an **Anchors** table: key, kind, frame (position, plus the axes
+  or facing), and what it belongs to. The kinds are Body, Use, Mount, Wall, Bed, Water and Seat. Every anchor that
+  any schedule names must appear in it. A Wall anchor's frame has its origin at the face, x along the wall, y out of
+  the wall and z up. A Water anchor's frame is the water level at the centre.
+- **Channels** are named `<stage>.<thing>.<what>`. Motion publishes them and Light follows them (`follows`).
+- Care classes and use classes are the keys in Care.json and UseTargets.json (for example `oil-and-tempera`, not
+  the contract's example `oil-paintings`). Water material is a palette key (`water.still`).
+Hang ids come verbatim from the catalogue that owns the work (collection.json, data/*.json, assets/*/*.json). Name
+that catalogue in `source` (for example `data/albion.json`), and never unify the catalogues. A size missing from the
+catalogue comes from the old hang scripts or the boards, cited in §8. The Reserve's stair port mates
+`nympheas.stair`, and the Salon has no stair port.
+Positions are metres in the room's frame. `aim` is a POINT in the room frame that the luminaire aims at, not a
+vector. Keys are lowercase and dot-scoped. Every surface named in the sheet appears in Finishes.json, and every
+`surface` in the Lighting targets is a surface from the sheet. Write JSON in UTF-8 with a 2-space indent.
 Frame types (provisional): `frame.gilt.carved`, `frame.gilt.plain`, `frame.oak.plain`, `frame.black.lacquer`,
-`mount.scroll.silk`, `mount.album`, `none` — add and flag if needed.
+`mount.scroll.silk`, `mount.album` and `none`. Add others if you need them, and flag them.
 
 ## Before you finish: self-check
 Run a small python check (encoding utf-8) that every JSON parses, that every Finishes surface appears in the .md,

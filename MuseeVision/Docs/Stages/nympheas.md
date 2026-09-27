@@ -3,7 +3,7 @@
 - **Stage key** `nympheas` (module `MuseeNympheas`). Display name "The Nymphéas Oval". First room built (D-019).
 - **Sources:** D-001…D-019 (D-019 binding); the approved `plan/proposals/salon-interior` boards (Oval primary; Plan, Light,
   Details, Main); Palette.json + Story.md (draft palette); the Salon draft `r-specs/…/salon.md` (its oval parts, verified);
-  the as-built code in `windows/` (§11). Schedules: `Data/Stages/nympheas/{Finishes,Lighting,Hang,Planting}.json`.
+  the as-built code in `windows/` (§11). Schedules: `Data/Stages/nympheas/{Finishes,Lighting,Hang,Planting,Mechanisms}.json`, to the stage contract (`briefs/STAGE-CONTRACT.md`).
 - **Units** metres. **Frame:** origin at the oval's centre on the finished floor; x east, y south, z up, true north.
   Angles in degrees. **pond-z** = height above the pond's base; pond-z = z when the pond is Down.
 
@@ -51,6 +51,26 @@ normal offset of the inner ellipse a 11.000 × b 7.500 (not an ellipse); sampled
 - **The well (served).** Clear void x −3.900…+11.900, y ±1.200, z −5.800…0.000; soffit at z −0.400 east of the slab edge
   x +3.600. Top opening in the oval floor x −3.900…+3.600, y ±1.200, of which x −3.900…−3.500 is the stair's flush top
   landing; the pond is its lid. `nympheas` owns everything in the prism; the receiving side builds nothing west of x +11.900.
+
+### Anchors (the stage contract)
+All frames are in the stage frame with the pond Down. Anchors on `nympheas.basin` ride it: add 2.600 to z when it is Up.
+
+| Key | Kind | Frame | Belongs to |
+|---|---|---|---|
+| `nympheas.basin` | Body | origin (0, 0, 0), axes of the stage; moves +z 0 → 2.600 | coping, frieze, lip, vessel, tray, the golden iris, the water, the planting and the 32 rim lengths (§6) |
+| `nympheas.guard-rails` | Body | origin (0, 0, 0), axes of the stage; moves +z 0 → 1.000 | the three rails (§3.6) |
+| `nympheas.golden-iris` | Use | (−4.150, 0.000, 0.420), on the coping's seat, facing +x; usable from within 6.50 of the centre | on `nympheas.basin` |
+| `nympheas.pond.water` | Water | (0, 0, 0.380): the water level at the centre | on `nympheas.basin` |
+| `nympheas.pond.lilies` | Bed | (0, 0, 0.380): the water's surface, inside the edge, clear of the shelves (\|x\| ≤ 3.12) | on `nympheas.basin` |
+| `nympheas.pond.shelf.east` | Bed | (+3.500, 0, 0.260): the east shelf, x +3.12…+3.90 | on `nympheas.basin` |
+| `nympheas.pond.shelf.west` | Bed | (−3.500, 0, 0.260): the west shelf | on `nympheas.basin` |
+| `nympheas.wall.willows` | Wall | origin on the inner face at the east door's north jamb (10.778, −1.500, 0.000); x = arc length along the inner face, north side first (towards (0, −7.5) and round), to s 55.597; y out of the wall into the room; z up from the floor | the four willows (§8) |
+| `nympheas.bench.b1` … `b4` | Seat | seat top z 0.450, at each centreline's midpoint: B1 (−3.98, 2.99), B2 (3.98, 2.99), B3 (3.98, −2.99), B4 (−3.98, −2.99); facing out to the willows along the wall's normal: B1 (−0.53, 0.85), B2 (0.53, 0.85), B3 (0.53, −0.85), B4 (−0.53, −0.85); seat frames every 0.70 along each curve | the benches (§3.8) |
+| `nympheas.coping.seat` | Seat | the coping's seat ring, z 0.420 at d 0.25 in from its outer edge, frames every 0.80, facing out or in; none within 0.40 of the golden iris | on `nympheas.basin` |
+
+Luminaires mount at the points given in Lighting.json. The rim lengths carry `body: nympheas.basin`. **Channels:**
+`nympheas.pond.rim` (the rim's reveal, 0…1) and `nympheas.pond.height` (the pond's height ÷ 2.600, 0…1), both
+published by Motion.
 
 ## 3. Pieces by trade
 
@@ -150,7 +170,7 @@ flat faces to a visitor on the axis). Top ≈ pond-z 0.86. It emits nothing; the
 **Mass (for Motion):** water 7.41 m³ ≈ 7.4 t; coping and frieze ≈ 3.3 m³ travertine ≈ 8.1 t; bluestone bed, lining and
 shelves ≈ 1.6 m³ ≈ 4.5 t; bronze tray, lip, iris ≈ 2 t. **≈ 22 t**, ≈ 5.5 t per post.
 
-### 3.6 Guard rails round the opening (the retracting body `nympheas.pond.guard`)
+### 3.6 Guard rails round the opening (the retracting body `nympheas.guard-rails`)
 `nympheas.guard.rail`: three rails housed in chases in the curb when down: north and south on y = ∓1.275 (chases
 y 1.250–1.300, x −3.500…+3.600, stopped ±0.13 either side of the posts at x ±3.000), east on x +3.675 (chase
 x 3.650–3.700, y −1.300…+1.300, in the slab, with a closed bronze housing 0.10 × 0.65 below the soffit). At full
@@ -206,7 +226,7 @@ opening on its port face, meeting rail on the axis (§2).
 | Id | Type | Count / extent | Mount and aim | Operation |
 |---|---|---|---|---|
 | `velarium.row.*` | `linear-slot.3000k` (opal-cover battens, surface-hung on the dome bars) | 7 rows along x at y 0, ±1.5, ±3.0, ±4.5; lengths 18.50 / 17.86 / 15.78 / 11.52 (≈ 109 m), stepped in 1.0–2.0 m battens 0.30 above the cloth | row midpoint (0, y, cloth + 0.30); aim straight down onto the cloth | presence (daylight-linked top-up by day, gallery light at night) |
-| `pond.rim.01…32` | `linear-cove.3000k` strip | 32 lengths of 0.594 on centres (8 mm gaps) round the water's edge | in the lip's slot, face d −0.010, pond-z 0.3905; aim 0.40 inward onto the water. Order: from the **west apex, clockwise (north first)**, back to the west apex | presence (follows `nympheas.pond.state`, §6; control gap) |
+| `pond.rim.01…32` | `linear-cove.3000k` strip | 32 lengths of 0.594 on centres (8 mm gaps) round the water's edge | in the lip's slot, face d −0.010, pond-z 0.3905; aim 0.40 inward onto the water. Order: from the **west apex, clockwise (north first)**, back to the west apex | always, follows `nympheas.pond.rim`; body `nympheas.basin` |
 | `stair.rail.north/south` | `linear-cove.3000k` strip | 2 runs, the rails' full length (≈ 13.2 m each) | the rails' flat underside; aim onto the treads | always |
 | `stair.downlight.1/2` | `downlight.3000k.31deg`, recessed | 2 | soffit (6.30, 0, −0.40) and (10.10, 0, −0.40); aim straight down | always |
 
@@ -232,7 +252,7 @@ rim's "halo", the rect lights standing in for the cloth.
 
 ## 6. Motion
 
-**M-1 `nympheas.pond`** (the pond that lifts; D-019)
+**M-1 `nympheas.pond-lift`** (the pond that lifts, body `nympheas.basin`, control `nympheas.golden-iris`; D-019)
 - **Body:** coping, frieze, lip, vessel, tray, the golden iris, the planting (by key) and the water (Nature basin
   `nympheas.pond`), and the 32 rim strips.
 - **Joint:** prismatic +z, travel **0.000 → 2.600**. **Drive:** four synchronised hydraulic telescopic rams, one in each
@@ -259,15 +279,15 @@ rim's "halo", the rect lights standing in for the cloth.
   z 3.64 and the golden iris at 3.46, ≥ 2.7 under the velarium's rim (6.35); tray underside at Up 2.598 over the floor and
   the top landing, ≥ 2.6 over every tread; rails at Up 1.598 under the tray. At Down the tray's toe ring bears on the floor
   and curb round the opening.
-- **Housings:** four post sleeves Ø 0.230 × 1.00. **Channel:** `nympheas.pond.state` (state, height, rim reveal 0–1)
+- **Housings:** four post sleeves Ø 0.230 × 1.00. **Channels:** `nympheas.pond.rim` (rim reveal 0–1: 0 → 1 over 1.00 s while Waking, as built, PondLift.cpp:209; 0 on landing Down) and `nympheas.pond.height` (0–1). Mechanisms.json: open = rim → 1 over 1.0 s, then move; close = move, then rim → 0
   and FMuseeActuation (the pump's voice).
 
-**M-2 `nympheas.pond.guard`** (coupled with M-1): the three rails (§3.6), prismatic +z, travel 0 → 1.000; rail height =
+**M-2 `nympheas.guard-rails`** (body `nympheas.guard-rails`, coupled with M-1 through `nympheas.pond.height`): the three rails (§3.6), prismatic +z, travel 0 → 1.000; rail height =
 clamp(h − 0.10, 0, 1.00) for pond height h. Interlock: the pond may not enter its last 0.10 of descent unless the rails
 are housed.
 
 ## 7. Nature
-- **Water:** Nature basin `nympheas.pond`, volume **7.41 m³** (24.50 m² × 0.32, less 2 × 1.088 m² of shelf × 0.20);
+- **Water:** `nympheas.pond` (Planting.json `water`; anchor `nympheas.pond.water`; body `nympheas.basin`; ellipse a 3.90 × b 2.00, depth 0.32, freeboard 0.023, `water.still`), volume **7.41 m³** (24.50 m² × 0.32, less 2 × 1.088 m² of shelf × 0.20);
   surface pond-z 0.380, brimming 23 mm under the lip's top face; conserved in every state; still, ripples ≤ 3.5 mm; dyed
   black (the light gone within centimetres: a mirror).
 - **Water lilies** (Planting.json `pond.lilies.*`), colonies clustered as at Giverny; (x, y, reach):
@@ -304,14 +324,14 @@ the inner face (s), north side first, with five equal gaps of **0.919**. Each im
 Wall `nympheas.wall.plaster`; support canvas; frame none; care oil-and-tempera; source `assets/collection.json`
 (sizes: Scripts/salon_interior.py WILLOWS and assets/salon/manifest.json).
 
-| Anchor | Work (id) | Title · artist | w × h | s from → to | Start → end (x, y) | Canvas joints (x, y) | Centre (face, z) |
+| # | Work (id) | Title · artist | w × h | s from → to (Hang `along` = from) | Start → end (x, y) | Canvas joints (x, y) | Centre (face, z) |
 |---|---|---|---|---|---|---|---|
-| `nympheas.willows.1` | monet-willows-clear-morning | Clear Morning with Willows · Claude Monet | 12.75 × 2.00 (3) | 0.919 → 13.669 | (10.443, −2.355) → (−0.531, −7.491) | (7.586, −5.431) (3.685, −7.067) | (5.691, −6.380, 1.70) |
-| `nympheas.willows.2` | monet-willows-two-willows | The Two Willows · Claude Monet (ahead across the axis) | 17.00 × 2.00 (4) | 14.589 → 31.589 | (−1.448, −7.435) → (−9.730, 3.498) | (−5.572, −6.467) (−9.125, −4.189) (−10.979, −0.459) | (−9.100, −4.164, 1.70) |
-| `nympheas.willows.3` | monet-willows-morning | Morning with Willows · Claude Monet | 12.75 × 2.00 (3) | 32.508 → 45.258 | (−9.125, 4.189) → (2.785, 7.256) | (−5.572, 6.467) (−1.448, 7.435) | (−3.537, 7.066, 1.70) |
-| `nympheas.willows.4` | monet-willows-reflections-of-trees | Reflections of Trees · Claude Monet | 8.50 × 2.00 (2) | 46.178 → 54.678 | (3.685, 7.067) → (10.443, 2.355) | (7.586, 5.431) | (7.567, 5.402, 1.70) |
+| 1 | monet-willows-clear-morning | Clear Morning with Willows · Claude Monet | 12.75 × 2.00 (3) | 0.919 → 13.669 | (10.443, −2.355) → (−0.531, −7.491) | (7.586, −5.431) (3.685, −7.067) | (5.691, −6.380, 1.70) |
+| 2 | monet-willows-two-willows | The Two Willows · Claude Monet (ahead across the axis) | 17.00 × 2.00 (4) | 14.589 → 31.589 | (−1.448, −7.435) → (−9.730, 3.498) | (−5.572, −6.467) (−9.125, −4.189) (−10.979, −0.459) | (−9.100, −4.164, 1.70) |
+| 3 | monet-willows-morning | Morning with Willows · Claude Monet | 12.75 × 2.00 (3) | 32.508 → 45.258 | (−9.125, 4.189) → (2.785, 7.256) | (−5.572, 6.467) (−1.448, 7.435) | (−3.537, 7.066, 1.70) |
+| 4 | monet-willows-reflections-of-trees | Reflections of Trees · Claude Monet | 8.50 × 2.00 (2) | 46.178 → 54.678 | (3.685, 7.067) → (10.443, 2.355) | (7.586, 5.431) | (7.567, 5.402, 1.70) |
 
-Start/end/joint points are on the inner face (the canvas face is 0.035 in along the normal). The first room's four
+Hang.json: every work on the Wall anchor `nympheas.wall.willows`, `along` = s from, `height` 0.70. Start/end/joint points are on the inner face (the canvas face is 0.035 in along the normal). The first room's four
 panels are not hung. Captions on look (Art).
 
 ## 9. Sound

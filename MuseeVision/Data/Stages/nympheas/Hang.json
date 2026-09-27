@@ -3,75 +3,59 @@
   "works": [
     {
       "work": "monet-willows-clear-morning",
-      "anchor": "nympheas.willows.1",
-      "wall": "nympheas.wall.plaster",
-      "centre": [
-        5.691,
-        -6.38,
-        1.7
-      ],
+      "source": "assets/collection.json",
+      "anchor": "nympheas.wall.willows",
+      "along": 0.919,
+      "height": 0.7,
       "size": [
         12.75,
         2.0
       ],
       "support": "canvas",
       "frame": "none",
-      "care": "oil-and-tempera",
-      "source": "assets/collection.json"
+      "care": "oil-and-tempera"
     },
     {
       "work": "monet-willows-two-willows",
-      "anchor": "nympheas.willows.2",
-      "wall": "nympheas.wall.plaster",
-      "centre": [
-        -9.1,
-        -4.164,
-        1.7
-      ],
+      "source": "assets/collection.json",
+      "anchor": "nympheas.wall.willows",
+      "along": 14.589,
+      "height": 0.7,
       "size": [
         17.0,
         2.0
       ],
       "support": "canvas",
       "frame": "none",
-      "care": "oil-and-tempera",
-      "source": "assets/collection.json"
+      "care": "oil-and-tempera"
     },
     {
       "work": "monet-willows-morning",
-      "anchor": "nympheas.willows.3",
-      "wall": "nympheas.wall.plaster",
-      "centre": [
-        -3.537,
-        7.066,
-        1.7
-      ],
+      "source": "assets/collection.json",
+      "anchor": "nympheas.wall.willows",
+      "along": 32.508,
+      "height": 0.7,
       "size": [
         12.75,
         2.0
       ],
       "support": "canvas",
       "frame": "none",
-      "care": "oil-and-tempera",
-      "source": "assets/collection.json"
+      "care": "oil-and-tempera"
     },
     {
       "work": "monet-willows-reflections-of-trees",
-      "anchor": "nympheas.willows.4",
-      "wall": "nympheas.wall.plaster",
-      "centre": [
-        7.567,
-        5.402,
-        1.7
-      ],
+      "source": "assets/collection.json",
+      "anchor": "nympheas.wall.willows",
+      "along": 46.178,
+      "height": 0.7,
       "size": [
         8.5,
         2.0
       ],
       "support": "canvas",
       "frame": "none",
-      "care": "oil-and-tempera",
-      "source": "assets/collection.json"
+      "care": "oil-and-tempera"
     }
   ]
 }
