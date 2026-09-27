@@ -8,11 +8,13 @@
 #include "Engine/World.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "MuseeHumanMeasure.h"
+#include "MuseeSetting.h"
 #include "Tests/VisitorTestUsable.h"
 #include "VisitorAdapter.h"
 #include "VisitorBody.h"
 #include "VisitorEye.h"
 #include "VisitorOverlay.h"
+#include "VisitorPace.h"
 
 // Visitor's connectors: the body made from the human measure, the Eye's camera, and the hand that uses what it sees.
 namespace Musee::Visitor::Tests
@@ -31,7 +33,7 @@ namespace Musee::Visitor::Tests
 		const UCharacterMovementComponent* Movement = Body->GetCharacterMovement();
 		TestTrue(TEXT("It steps up the measure's rise, no more"), FMath::IsNearlyEqual(Movement->MaxStepHeight, 22.0f));
 		TestTrue(TEXT("and walks the measure's slope"), FMath::IsNearlyEqual(Movement->GetWalkableFloorAngle(), 20.0f, 1e-3f));
-		TestTrue(TEXT("It walks at a gallery pace"), FMath::IsNearlyEqual(Movement->MaxWalkSpeed, 135.0f));
+		TestTrue(TEXT("It is made at the default pace, the as-built museum's"), FMath::IsNearlyEqual(Movement->MaxWalkSpeed, 260.0f));
 		TestTrue(TEXT("and strides faster"), AVisitorBody::StrideSpeed() > AVisitorBody::WalkSpeed());
 		TestTrue(TEXT("A hop lifts the feet one step's rise: sqrt(2 g 0.22)"), FMath::IsNearlyEqual(AVisitorBody::HopSpeed().Get(), 2.0772, 1e-3));
 		TestTrue(TEXT("It reaches a pace and an arm's length"), FMath::IsNearlyEqual(AVisitorBody::UseDistance().Get(), 2.2522, 1e-3));
@@ -84,6 +86,42 @@ namespace Musee::Visitor::Tests
 			TestTrue(TEXT("and the overlay is clear"), Body->Overlay()->Text().IsEmpty());
 		}
 		World->DestroyWorld(false);
+		return true;
+	}
+
+	IMPLEMENT_SIMPLE_AUTOMATION_TEST(FVisitorPaceTest, "Musee.Visitor.Pace", Flags)
+	bool FVisitorPaceTest::RunTest(const FString& Parameters)
+	{
+		const FVisitorPace AsBuilt = FVisitorPace::Of(FVisitorPace::AsBuilt());
+		const FVisitorPace Physical = FVisitorPace::Of(FVisitorPace::Physical());
+		TestTrue(TEXT("The as-built pace walks at 2.6 m/s and strides at 5.2"), AsBuilt.Walk.Get() == 2.6 && AsBuilt.Stride.Get() == 5.2);
+		TestTrue(TEXT("The physical pace walks at 1.35 m/s and strides at 2.0"), Physical.Walk.Get() == 1.35 && Physical.Stride.Get() == 2.0);
+		FMuseeSetting* Setting = FMuseeSetting::Find(FVisitorPace::SettingKey());
+		if (!TestNotNull(TEXT("Visitor registers visitor.pace"), Setting))
+		{
+			return false;
+		}
+		TestTrue(TEXT("a choice of as-built and physical"), Setting->Choices() == TArray<FName>({ FVisitorPace::AsBuilt(), FVisitorPace::Physical() }));
+		TestTrue(TEXT("with its command"), FMuseeSetting::CommandName(Setting->Key()) == FName(TEXT("musee.visitor.set-pace")));
+		const FName Kept = Setting->Choice();
+
+		UWorld* World = UWorld::CreateWorld(EWorldType::Game, false);
+		AVisitorBody* Body = World->SpawnActor<AVisitorBody>(FVector(0.0, 0.0, 100.0), FRotator::ZeroRotator);
+		if (TestNotNull(TEXT("The body stands in the world"), Body))
+		{
+			const UCharacterMovementComponent* Movement = Body->GetCharacterMovement();
+			Setting->SetChoice(FVisitorPace::Physical());
+			Body->DispatchBeginPlay();
+			TestTrue(TEXT("At play it takes the pace chosen"), FMath::IsNearlyEqual(Movement->MaxWalkSpeed, 135.0f));
+			Body->StrideOn();
+			TestTrue(TEXT("and strides at it"), FMath::IsNearlyEqual(Movement->MaxWalkSpeed, 200.0f));
+			Setting->SetChoice(FVisitorPace::AsBuilt());
+			TestTrue(TEXT("A new pace takes effect at once, even mid-stride"), FMath::IsNearlyEqual(Movement->MaxWalkSpeed, 520.0f));
+			Body->StrideOff();
+			TestTrue(TEXT("and walking again, it walks at it"), FMath::IsNearlyEqual(Movement->MaxWalkSpeed, 260.0f));
+		}
+		World->DestroyWorld(false);
+		Setting->SetChoice(Kept);
 		return true;
 	}
 
