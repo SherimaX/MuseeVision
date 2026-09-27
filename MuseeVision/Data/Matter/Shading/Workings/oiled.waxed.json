@@ -1,0 +1,65 @@
+{
+  "schema": "musee.matter.shading.working/1",
+  "key": "oiled.waxed",
+  "name": "Oiled and waxed",
+  "record": "Workings/waxed.json",
+  "kind": "face",
+  "roughness": {
+    "value": 0.4,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Palette.json (the sheets' workings; no filtered roughness was read for the finished face)"
+  },
+  "roughnessAcross": {
+    "value": 0.4,
+    "unit": "1",
+    "grade": "derived",
+    "source": "Palette.json (the sheets' workings; no filtered roughness was read for the finished face)",
+    "derivation": "a face with no grain: equal to the roughness along"
+  },
+  "haziness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Palette.json (the sheets' workings; no filtered roughness was read for the finished face)",
+    "note": "One specular lobe until a goniometric measurement shows a second."
+  },
+  "textureDepth": {
+    "value": 0.02,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Palette.json (the sheets' workings; no filtered roughness was read for the finished face)"
+  },
+  "relief": {
+    "value": 0.05,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Palette.json (the sheets' workings; no filtered roughness was read for the finished face)"
+  },
+  "film": {
+    "refractiveIndex": {
+      "value": 1.47,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "A drying oil (linseed or tung) cures to a film of index 1.48 to 1.52; wax over it 1.446"
+    },
+    "cover": {
+      "value": 0.9,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "An oil soaked in and a wax over it fill most of the face"
+    }
+  },
+  "stain": {
+    "value": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "space": "linear Rec.709 (sRGB primaries), D65 white",
+    "unit": "1",
+    "grade": "derived",
+    "source": "No treatment darkens the wood",
+    "derivation": "unstained: a factor of one"
+  }
+}

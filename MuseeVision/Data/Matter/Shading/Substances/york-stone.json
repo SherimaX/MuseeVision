@@ -1,0 +1,88 @@
+{
+  "schema": "musee.matter.shading.substance/1",
+  "key": "york-stone",
+  "name": "York stone (Carboniferous sandstone flags, West Yorkshire)",
+  "family": "accent",
+  "record": "Palette.json",
+  "master": "stone",
+  "accentOf": "stone",
+  "dielectric": {
+    "diffuseAlbedo": {
+      "value": [
+        60.0,
+        2.0,
+        11.0
+      ],
+      "space": "CIELAB (D65, 2 deg)",
+      "unit": "CIELAB",
+      "grade": "unverified",
+      "source": "Palette.json: accent.york-stone",
+      "note": "A first colour for York stone (Carboniferous sandstone flags, West Yorkshire): no measured colour was read: a first value read from trade and museum photographs of the named material."
+    },
+    "refractiveIndex": {
+      "value": 1.544,
+      "unit": "1",
+      "grade": "secondary",
+      "source": "Handbook of Mineralogy, Quartz (Anthony, Bideaux, Bladh and Nichols, Mineralogical Society of America): n omega 1.544",
+      "note": "The ordinary index of the quartz grains that make most of a sandstone."
+    },
+    "porosity": {
+      "value": 0.07,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.york-stone",
+      "note": "A first open porosity for the rock type; no measurement of this stone was read."
+    },
+    "wettingDepth": {
+      "value": 1.5,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: accent.york-stone",
+      "note": "The depth whose pores govern the face's look when wet."
+    }
+  },
+  "structure": {
+    "grain": {
+      "value": 0.2,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: accent.york-stone",
+      "note": "The finest structure the face shows at gallery distance."
+    },
+    "bed": {
+      "value": 60,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: accent.york-stone",
+      "note": "The flags split along thin bedding planes a few centimetres apart."
+    },
+    "bedAspect": {
+      "value": 3.0,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.york-stone",
+      "note": "How much longer the structure runs along its bedding than across it."
+    },
+    "hurst": {
+      "value": 0.7,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Candela et al. 2012, Journal of Geophysical Research 117, B08409 (fault surfaces, 0.6 to 0.8; cited in Stone.ush)",
+      "note": "The middle of the range measured on rock surfaces, as the travertine's."
+    },
+    "toneSpread": {
+      "value": 0.1,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.york-stone",
+      "note": "A first half-range of ln(albedo) across one face."
+    },
+    "roughnessSpread": {
+      "value": 0.15,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.york-stone",
+      "note": "A first half-range of ln(roughness) across one face."
+    }
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "schema": "musee.matter.shading.substance/1",
+  "key": "mulberry-paper",
+  "name": "Mulberry-bark paper (桑皮纸) sealed in a laminate",
+  "family": "accent",
+  "record": "Substances/mulberry-paper.json",
+  "master": "sheet",
+  "accentOf": "white",
+  "dielectric": {
+    "diffuseAlbedo": {
+      "value": [
+        0.7913,
+        0.7157,
+        0.5647
+      ],
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "unit": "1",
+      "grade": "design",
+      "source": "Substances/mulberry-paper.json: optics.designColour (the frozen as-built reference)"
+    },
+    "refractiveIndex": {
+      "value": 1.53,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Substances/mulberry-paper.json",
+      "note": "Cellulose fibres have indices of about 1.53."
+    },
+    "porosity": {
+      "value": 0.0,
+      "unit": "1",
+      "grade": "derived",
+      "source": "Sealed inside a laminate: no open pores",
+      "derivation": "0"
+    },
+    "wettingDepth": {
+      "value": 0.0,
+      "unit": "mm",
+      "grade": "derived",
+      "source": "Sealed inside a laminate",
+      "derivation": "0"
+    }
+  },
+  "sheet": {
+    "transmittance": {
+      "value": [
+        0.4,
+        0.36,
+        0.26
+      ],
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Substances/mulberry-paper.json",
+      "note": "A first diffuse transmittance for a thin bast paper, warm as its fibres; no measurement was read."
+    }
+  }
+}

@@ -228,7 +228,7 @@
     {
       "surface": "chenghuai.fire-vat",
       "material": "bronze.cusn10",
-      "working": "cast",
+      "working": "cast.bronze",
       "history": "weathered",
       "note": "The bronze 太平缸 fire vats in the courts (Materials board, Story): polish, declared here."
     },
@@ -249,7 +249,7 @@
     {
       "surface": "chenghuai.case.glass",
       "material": "glass.low-iron",
-      "working": "laminated.anti-reflective",
+      "working": "anti-reflective.laminated",
       "history": "new",
       "note": "The cases' glass: fronts, sloped tops, the pedestal's hood."
     },
@@ -262,7 +262,7 @@
     },
     {
       "surface": "chenghuai.case.silk.ceramics",
-      "material": "accent.silk",
+      "material": "accent.silk.pale-grey",
       "working": "stretched",
       "history": "new",
       "note": "The side halls' case decks and backs and the pedestal's deck: a pale grey silk. Role guessed."

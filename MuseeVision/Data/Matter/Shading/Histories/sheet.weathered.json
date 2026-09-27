@@ -1,0 +1,82 @@
+{
+  "schema": "musee.matter.shading.history/1",
+  "key": "sheet.weathered",
+  "name": "Weathered outdoors (a laminate's outer face)",
+  "mechanisms": [
+    "glass.soiling",
+    "glass.water-stain"
+  ],
+  "age": {
+    "value": 1.0,
+    "unit": "year",
+    "grade": "design",
+    "source": "Histories/glass.weathered.json (glass is cleaned; a year's film)"
+  },
+  "passagesPerYear": {
+    "value": 0.0,
+    "unit": "1/year",
+    "grade": "derived",
+    "source": "the face is not walked or handled",
+    "derivation": "0"
+  },
+  "skyExposure": {
+    "value": 1.0,
+    "unit": "1",
+    "grade": "design",
+    "source": "an outer face open to the sky",
+    "note": "Form's sky exposure will give each point its own."
+  },
+  "keptWet": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "derived",
+    "source": "the face stands clear of water",
+    "derivation": "0"
+  },
+  "deposition": {
+    "value": 0.06,
+    "unit": "1/year",
+    "grade": "derived",
+    "source": "Histories/glass.weathered.json: deposition",
+    "derivation": "as the weathered glass"
+  },
+  "washRemoval": {
+    "value": 0.5,
+    "unit": "1/year",
+    "grade": "unverified",
+    "source": "Histories/glass.weathered.json: washRemoval"
+  },
+  "soilAlbedo": {
+    "value": [
+      0.08,
+      0.07,
+      0.06
+    ],
+    "space": "linear Rec.709 (sRGB primaries), D65 white",
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Histories/stone.pore-soiling.json and white.soiling.json (black carbon; no measured deposit colour)",
+    "note": "A first dark grey for an outdoor deposit dominated by black carbon."
+  },
+  "wornRoughness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "derived",
+    "source": "a float face stays smooth",
+    "derivation": "0"
+  },
+  "wornHaziness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "derived",
+    "source": "a worn face has no second lobe",
+    "derivation": "0"
+  },
+  "wearPassages": {
+    "value": 0.0,
+    "unit": "count",
+    "grade": "derived",
+    "source": "the face is not abraded",
+    "derivation": "0"
+  }
+}

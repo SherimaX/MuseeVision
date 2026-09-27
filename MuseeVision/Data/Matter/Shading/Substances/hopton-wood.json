@@ -1,0 +1,88 @@
+{
+  "schema": "musee.matter.shading.substance/1",
+  "key": "hopton-wood",
+  "name": "Hopton Wood stone, Derbyshire",
+  "family": "accent",
+  "record": "Palette.json",
+  "master": "stone",
+  "accentOf": "stone",
+  "dielectric": {
+    "diffuseAlbedo": {
+      "value": [
+        80.0,
+        1.0,
+        9.0
+      ],
+      "space": "CIELAB (D65, 2 deg)",
+      "unit": "CIELAB",
+      "grade": "unverified",
+      "source": "Palette.json: accent.british-column-stones.f",
+      "note": "Hopton Wood stone, Derbyshire: a pale cream crinoidal limestone; no measured colour was read: a first value read from trade and museum photographs of the named material (as the Oxford University Museum's shafts show it)."
+    },
+    "refractiveIndex": {
+      "value": 1.6003,
+      "unit": "1",
+      "grade": "derived",
+      "source": "Substances/cream-marble.json: optics.specularF0 (0.0533, calcite grains in random orientations)",
+      "derivation": "n = (1 + sqrt(F0)) / (1 - sqrt(F0)), the index whose normal-incidence reflectance is the record's F0"
+    },
+    "porosity": {
+      "value": 0.06,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.british-column-stones.f",
+      "note": "A first open porosity for the rock type; no measurement of this stone was read."
+    },
+    "wettingDepth": {
+      "value": 1.0,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: accent.british-column-stones.f",
+      "note": "The depth whose pores govern the face's look when wet."
+    }
+  },
+  "structure": {
+    "grain": {
+      "value": 1.0,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: accent.british-column-stones.f",
+      "note": "The finest structure the face shows at gallery distance."
+    },
+    "bed": {
+      "value": 500,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: accent.british-column-stones.f",
+      "note": "The coarsest structure the face shows: its bedding, veining or banding."
+    },
+    "bedAspect": {
+      "value": 1.5,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.british-column-stones.f",
+      "note": "How much longer the structure runs along its bedding than across it."
+    },
+    "hurst": {
+      "value": 0.7,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Candela et al. 2012, Journal of Geophysical Research 117, B08409 (fault surfaces, 0.6 to 0.8; cited in Stone.ush)",
+      "note": "The middle of the range measured on rock surfaces, as the travertine's."
+    },
+    "toneSpread": {
+      "value": 0.06,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.british-column-stones.f",
+      "note": "A first half-range of ln(albedo) across one face."
+    },
+    "roughnessSpread": {
+      "value": 0.15,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.british-column-stones.f",
+      "note": "A first half-range of ln(roughness) across one face."
+    }
+  }
+}

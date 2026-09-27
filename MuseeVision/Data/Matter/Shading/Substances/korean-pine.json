@@ -1,0 +1,126 @@
+{
+  "schema": "musee.matter.shading.substance/1",
+  "key": "korean-pine",
+  "name": "Korean pine (红松, Pinus koraiensis)",
+  "family": "accent",
+  "record": "Substances/korean-pine.json",
+  "master": "wood",
+  "accentOf": "oak",
+  "dielectric": {
+    "diffuseAlbedo": {
+      "value": [
+        72.0,
+        6.0,
+        24.0
+      ],
+      "space": "CIELAB (D65, 2 deg)",
+      "unit": "CIELAB",
+      "grade": "unverified",
+      "source": "Palette.json: accent.qing-pine-lacquered",
+      "note": "A first colour for Korean pine (红松, Pinus koraiensis): no measured colour was read: a first value read from trade and museum photographs of the named material."
+    },
+    "refractiveIndex": {
+      "value": 1.55,
+      "unit": "1",
+      "grade": "secondary",
+      "source": "Marschner, S.R., Westin, S.H., Arbree, A. & Moon, J.T. (2005) Measuring and modeling the appearance of finished wood, ACM Transactions on Graphics 24(3) (as cited in the timber records)"
+    },
+    "porosity": {
+      "value": 0.707,
+      "unit": "1",
+      "grade": "derived",
+      "source": "Substances/korean-pine.json: physical.densityRange (440 kg/m3)",
+      "derivation": "1 - 440 / 1500: the density over the cell wall's own (about 1500 kg/m3, Siau 1995, as the oak's)"
+    },
+    "wettingDepth": {
+      "value": 1.0,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: accent.qing-pine-lacquered",
+      "note": "As the oak: the depth a finish soaks into."
+    }
+  },
+  "structure": {
+    "grain": {
+      "value": 0.05,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: accent.qing-pine-lacquered",
+      "note": "The finest structure: vessels or tracheids."
+    },
+    "bed": {
+      "value": 4.0,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: accent.qing-pine-lacquered",
+      "note": "A growth ring's width."
+    },
+    "bedAspect": {
+      "value": 30.0,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.qing-pine-lacquered",
+      "note": "How much coarser the figure is along the grain than across it."
+    },
+    "hurst": {
+      "value": 0.7,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Candela et al. 2012, Journal of Geophysical Research 117, B08409 (fault surfaces, 0.6 to 0.8; cited in Stone.ush)",
+      "note": "The middle of the range measured on rock surfaces, as the travertine's."
+    },
+    "toneSpread": {
+      "value": 0.06,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.qing-pine-lacquered",
+      "note": "A first half-range of ln(albedo) across one face."
+    },
+    "roughnessSpread": {
+      "value": 0.15,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.qing-pine-lacquered",
+      "note": "A first half-range of ln(roughness), as the oak's."
+    }
+  },
+  "wood": {
+    "latewoodFraction": {
+      "value": 0.2,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.qing-pine-lacquered"
+    },
+    "latewoodTone": {
+      "value": 0.8,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.qing-pine-lacquered"
+    },
+    "rayFleck": {
+      "value": 0.0,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.qing-pine-lacquered",
+      "note": "How much of a quarter-sawn face the rays show."
+    },
+    "rayTone": {
+      "value": 1.0,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.qing-pine-lacquered"
+    },
+    "rayLength": {
+      "value": 0.5,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: accent.qing-pine-lacquered"
+    },
+    "rayWidth": {
+      "value": 0.05,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: accent.qing-pine-lacquered"
+    }
+  }
+}

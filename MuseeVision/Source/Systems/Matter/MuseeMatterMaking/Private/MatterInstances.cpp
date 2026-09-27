@@ -397,18 +397,24 @@ TValueOrError<FSpecRecords, FString> ReadSpec(const FMatterSpec& Spec)
 		return MakeError(FString::Printf(TEXT("The palette has no entry '%s'."), *Spec.Palette.ToString()));
 	}
 	Records.Entry = *Entry;
-	if (Entry->Substance.IsNone())
+	TValueOrError<FMatterWorking, FString> Working = ReadWorking(Spec.Working);
+	if (Working.HasError())
+	{
+		return MakeError(Working.StealError());
+	}
+	Records.Working = Working.StealValue();
+	// A working that coats the piece shows its coat's substance; any other shows the entry's own.
+	const FMuseeKey Shown = Records.Working.Lays.IsNone() ? Entry->Substance : Records.Working.Lays;
+	if (Shown.IsNone())
 	{
 		return MakeError(FString::Printf(TEXT("The palette entry '%s' names no typed substance record yet."), *Spec.Palette.ToString()));
 	}
-	TValueOrError<FMatterSubstance, FString> Substance = ReadSubstance(Entry->Substance);
-	TValueOrError<FMatterWorking, FString> Working = ReadWorking(Spec.Working);
-	if (Substance.HasError() || Working.HasError())
+	TValueOrError<FMatterSubstance, FString> Substance = ReadSubstance(Shown);
+	if (Substance.HasError())
 	{
-		return MakeError(Substance.HasError() ? Substance.StealError() : Working.StealError());
+		return MakeError(Substance.StealError());
 	}
 	Records.Substance = Substance.StealValue();
-	Records.Working = Working.StealValue();
 	Records.Master = FMasterKind{ Records.Substance.Master.ToName(), NAME_None };
 	if (Records.Working.Kind == LayerKind)
 	{

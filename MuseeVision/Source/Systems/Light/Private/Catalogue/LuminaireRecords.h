@@ -105,6 +105,10 @@ struct FLightHousingRecord
 	UPROPERTY() TArray<FString> HousingColours;
 	UPROPERTY() FString Protection;
 	UPROPERTY() FString Mounting;
+	/** A lamp luminaire's number of lamps; 0 where the record names none (one lamp). */
+	UPROPERTY() int32 LampCount = 0;
+	/** The radius of the ring its lamps stand on about its axis (an electrolier's arms' reach). */
+	UPROPERTY() double LampRingRadiusMillimeters = -1.0;
 };
 
 USTRUCT()

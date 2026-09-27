@@ -8,7 +8,9 @@
  * A luminaire type of the museum's catalogue, as Light lights it: one real product in one configuration, read from its
  * record in Data/Light/Luminaires (Docs/Light/Luminaires.md). It says how the light leaves the product (a beam from a
  * spot, a line from a strip or slot, a panel's even face) and how much light, of what colour. A record whose maker
- * leaves a number the emitter needs unpublished is a real object that isn't lit, and says why.
+ * leaves a number the emitter needs unpublished is a real object that isn't lit, and says why. A lamp luminaire (a
+ * lantern's filament lamp, an electrolier's lamps) is its bare lamps: the shade or globe around them is the stage's own
+ * piece, in Matter's glass or silk, and passes their light on.
  */
 struct MUSEELIGHT_API FLightLuminaire
 {
@@ -21,6 +23,8 @@ struct MUSEELIGHT_API FLightLuminaire
 		Rect,
 		/** A line of near-Lambertian emitters, its length set where it is laid: a strip, a cove line, a slot. */
 		Linear,
+		/** Lamps that light all round them: a filament lamp in a lantern, the lamps of an electrolier on its ring. */
+		Point,
 	};
 
 	FMuseeKey Key;
@@ -49,6 +53,10 @@ struct MUSEELIGHT_API FLightLuminaire
 	/** A linear luminaire's emitting width across its length; a panel's emitting width and height. */
 	Musee::Meters EmittingWidth;
 	Musee::Meters EmittingHeight;
+	/** A lamp luminaire's lamps, which share its flux equally, and the radius of the ring they stand on about its axis
+	 *  (zero for a single lamp on the axis). */
+	int32 LampCount = 1;
+	Musee::Meters LampRingRadius;
 };
 
 namespace Musee::Light

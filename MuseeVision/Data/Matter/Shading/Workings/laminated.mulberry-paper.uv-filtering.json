@@ -1,0 +1,46 @@
+{
+  "schema": "musee.matter.shading.working/1",
+  "key": "laminated.mulberry-paper.uv-filtering",
+  "name": "Laminated with mulberry paper in a UV-filtering interlayer",
+  "record": "Workings/laminated.paper.json",
+  "kind": "face",
+  "roughness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Workings/laminated.uv-filtering.json (Shading): float faces"
+  },
+  "roughnessAcross": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "derived",
+    "source": "Workings/laminated.uv-filtering.json (Shading): float faces",
+    "derivation": "a face with no grain: equal to the roughness along"
+  },
+  "haziness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Workings/laminated.uv-filtering.json (Shading): float faces",
+    "note": "One specular lobe until a goniometric measurement shows a second."
+  },
+  "textureDepth": {
+    "value": 0.001,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Workings/laminated.uv-filtering.json (Shading): float faces"
+  },
+  "relief": {
+    "value": 0.0,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Workings/laminated.uv-filtering.json (Shading): float faces"
+  },
+  "lays": "mulberry-paper",
+  "paneThickness": {
+    "value": 12.0,
+    "unit": "mm",
+    "grade": "design",
+    "source": "Workings/laminated.uv-filtering.json (Shading): 6 + 0.76 + 6 mm, as the museum's UV laminates"
+  }
+}

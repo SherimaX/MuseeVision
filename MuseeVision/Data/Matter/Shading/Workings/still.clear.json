@@ -1,0 +1,69 @@
+{
+  "schema": "musee.matter.shading.working/1",
+  "key": "still.clear",
+  "name": "Still and clear (no dye: the bed shows through)",
+  "record": "Substances/water.json",
+  "kind": "face",
+  "roughness": {
+    "value": 0.2341,
+    "unit": "1",
+    "grade": "derived",
+    "source": "Substances/water.json: surface.slopeVariance.beckmannRoughness (0.0548 at 0 m/s)",
+    "derivation": "the Beckmann roughness taken as GGX alpha, as they agree for smooth surfaces; Slab roughness = sqrt(alpha)"
+  },
+  "roughnessAcross": {
+    "value": 0.2341,
+    "unit": "1",
+    "grade": "derived",
+    "source": "Substances/water.json: a still surface has no grain",
+    "derivation": "equal to the roughness along"
+  },
+  "haziness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "derived",
+    "source": "Substances/water.json: a liquid surface",
+    "derivation": "no second lobe"
+  },
+  "textureDepth": {
+    "value": 0.0,
+    "unit": "mm",
+    "grade": "derived",
+    "source": "Substances/water.json: a liquid surface",
+    "derivation": "water holds no film of water"
+  },
+  "relief": {
+    "value": 0.0,
+    "unit": "mm",
+    "grade": "derived",
+    "source": "Substances/water.json: a still surface",
+    "derivation": "level"
+  },
+  "medium": {
+    "absorption": {
+      "value": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "unit": "1/mm",
+      "grade": "derived",
+      "source": "Clear water carries no dye",
+      "derivation": "no dye: the water's own absorption is the substance's"
+    },
+    "scattering": {
+      "value": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "unit": "1/mm",
+      "grade": "derived",
+      "source": "Workings/water.dyed-black.json: a dissolved dye",
+      "derivation": "a dissolved dye absorbs and does not scatter",
+      "conditions": "components at 650, 550 and 450 nm (red, green, blue)"
+    }
+  }
+}

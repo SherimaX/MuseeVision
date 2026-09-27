@@ -1,0 +1,87 @@
+{
+  "schema": "musee.matter.shading.substance/1",
+  "key": "limewash",
+  "name": "Limewash (lime putty thinned to milk, four coats)",
+  "family": "white",
+  "record": "Substances/limewash.json",
+  "master": "white",
+  "dielectric": {
+    "diffuseAlbedo": {
+      "value": [
+        93.0,
+        0.0,
+        3.0
+      ],
+      "space": "CIELAB (D65, 2 deg)",
+      "unit": "CIELAB",
+      "grade": "unverified",
+      "source": "Palette.json: white.limewash",
+      "note": "Carbonated limewash is near the calcite powder's bound (Substances/limewash.json: luminousReflectance under 0.95); a first white."
+    },
+    "refractiveIndex": {
+      "value": 1.572,
+      "unit": "1",
+      "grade": "derived",
+      "source": "Substances/limewash.json: optics.refractiveIndex (calcite 1.658 and 1.486)",
+      "derivation": "the mean of calcite's two indices, as the carbonated coat is calcite"
+    },
+    "porosity": {
+      "value": 0.4,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: white.limewash",
+      "note": "A first open porosity for the material; no measurement was read."
+    },
+    "wettingDepth": {
+      "value": 1.0,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: white.limewash",
+      "note": "The depth whose pores govern the face's look when wet."
+    }
+  },
+  "structure": {
+    "grain": {
+      "value": 0.02,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: white.limewash",
+      "note": "The finest structure the face shows."
+    },
+    "bed": {
+      "value": 200,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: white.limewash",
+      "note": "The brush strokes of the last coat."
+    },
+    "bedAspect": {
+      "value": 1.0,
+      "unit": "1",
+      "grade": "derived",
+      "source": "An unbedded body",
+      "derivation": "unbedded"
+    },
+    "hurst": {
+      "value": 0.7,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Candela et al. 2012, Journal of Geophysical Research 117, B08409 (fault surfaces, 0.6 to 0.8; cited in Stone.ush)",
+      "note": "The middle of the range measured on rock surfaces, as the travertine's."
+    },
+    "toneSpread": {
+      "value": 0.03,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: white.limewash",
+      "note": "A first half-range of ln(albedo) across one face."
+    },
+    "roughnessSpread": {
+      "value": 0.15,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: white.limewash",
+      "note": "A first half-range of ln(roughness) across one face."
+    }
+  }
+}

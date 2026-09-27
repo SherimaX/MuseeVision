@@ -45,70 +45,70 @@
     },
     {
       "surface": "albion.shaft.a",
-      "material": "accent.british-column-stones",
+      "material": "accent.british-column-stones.a",
       "working": "polished.hand-touched",
       "history": "handled",
       "note": "Shaft A: Lizard serpentine, Cornwall (column A); one monolith Ø 0.50 x 5.165 (drums at the stone's bed height if its stock is shorter). The key's selection for this stone."
     },
     {
       "surface": "albion.shaft.b",
-      "material": "accent.british-column-stones",
+      "material": "accent.british-column-stones.b",
       "working": "polished.hand-touched",
       "history": "handled",
       "note": "Shaft B: Peterhead granite, Aberdeenshire (column B); one monolith Ø 0.50 x 5.165 (drums at the stone's bed height if its stock is shorter). The key's selection for this stone."
     },
     {
       "surface": "albion.shaft.c",
-      "material": "accent.british-column-stones",
+      "material": "accent.british-column-stones.c",
       "working": "polished.hand-touched",
       "history": "handled",
       "note": "Shaft C: Rubislaw granite, Aberdeen (column C); one monolith Ø 0.50 x 5.165 (drums at the stone's bed height if its stock is shorter). The key's selection for this stone."
     },
     {
       "surface": "albion.shaft.d",
-      "material": "accent.british-column-stones",
+      "material": "accent.british-column-stones.d",
       "working": "polished.hand-touched",
       "history": "handled",
       "note": "Shaft D: Purbeck marble, Dorset (column D); one monolith Ø 0.50 x 5.165 (drums at the stone's bed height if its stock is shorter). The key's selection for this stone."
     },
     {
       "surface": "albion.shaft.e",
-      "material": "accent.british-column-stones",
+      "material": "accent.british-column-stones.e",
       "working": "polished.hand-touched",
       "history": "handled",
       "note": "Shaft E: Frosterley marble, Co. Durham (column E); one monolith Ø 0.50 x 5.165 (drums at the stone's bed height if its stock is shorter). The key's selection for this stone."
     },
     {
       "surface": "albion.shaft.f",
-      "material": "accent.british-column-stones",
+      "material": "accent.british-column-stones.f",
       "working": "polished.hand-touched",
       "history": "handled",
       "note": "Shaft F: Hopton Wood stone, Derbyshire (column F); one monolith Ø 0.50 x 5.165 (drums at the stone's bed height if its stock is shorter). The key's selection for this stone."
     },
     {
       "surface": "albion.shaft.g",
-      "material": "accent.british-column-stones",
+      "material": "accent.british-column-stones.g",
       "working": "polished.hand-touched",
       "history": "handled",
       "note": "Shaft G: Ashburton marble, Devon (column G); one monolith Ø 0.50 x 5.165 (drums at the stone's bed height if its stock is shorter). The key's selection for this stone."
     },
     {
       "surface": "albion.shaft.h",
-      "material": "accent.british-column-stones",
+      "material": "accent.british-column-stones.h",
       "working": "polished.hand-touched",
       "history": "handled",
       "note": "Shaft H: Iona marble, Inner Hebrides (column H); one monolith Ø 0.50 x 5.165 (drums at the stone's bed height if its stock is shorter). The key's selection for this stone."
     },
     {
       "surface": "albion.shaft.i",
-      "material": "accent.british-column-stones",
+      "material": "accent.british-column-stones.i",
       "working": "polished.hand-touched",
       "history": "handled",
       "note": "Shaft I: Tiree marble, Inner Hebrides (column I); one monolith Ø 0.50 x 5.165 (drums at the stone's bed height if its stock is shorter). The key's selection for this stone."
     },
     {
       "surface": "albion.shaft.j",
-      "material": "accent.british-column-stones",
+      "material": "accent.british-column-stones.j",
       "working": "polished.hand-touched",
       "history": "handled",
       "note": "Shaft J: Mona marble, Anglesey (column J); one monolith Ø 0.50 x 5.165 (drums at the stone's bed height if its stock is shorter). The key's selection for this stone."
@@ -193,21 +193,21 @@
     {
       "surface": "albion.iron.cast",
       "material": "accent.victorian-iron",
-      "working": "painted",
+      "working": "painted.iron",
       "history": "aged.patina",
       "note": "Cast iron inside: clusters, box girders, arcade arches and bosses, main and light ribs, purlins, ridge bars, glazing bars, side bearers and brackets, screens' mullions, transoms and cills, the tapestry's two brackets. Painted in the colour of its own oxide, a deep iron-oxide brown-red (Skidmore's rule at Oxford)."
     },
     {
       "surface": "albion.iron.wrought",
       "material": "accent.victorian-iron",
-      "working": "painted",
+      "working": "painted.iron",
       "history": "aged.patina",
       "note": "Wrought iron: spandrel rings and quatrefoils with their lugs, the main ribs' inner arches and ring chains, the lancets' saddle bars; painted as the cast iron."
     },
     {
       "surface": "albion.iron.ext",
       "material": "accent.victorian-iron",
-      "working": "painted",
+      "working": "painted.iron",
       "history": "weathered",
       "note": "Iron outside: rainwater heads, downpipes, shoes and holderbats; the aisles' crestings; the ventilator's standards and louvres."
     },
@@ -262,14 +262,14 @@
     },
     {
       "surface": "albion.band.glass",
-      "material": "glass.mouth-blown",
+      "material": "glass.mouth-blown.antique",
       "working": "leaded",
       "history": "aged.patina",
       "note": "The Tristram and Isolde band's pot-metal and flashed antique glass (Lamberts), painted and fired, leaded; each panel inside a 0.07 border of cream quarries."
     },
     {
       "surface": "albion.lancet.glass",
-      "material": "glass.mouth-blown",
+      "material": "glass.mouth-blown.antique",
       "working": "leaded",
       "history": "aged.patina",
       "note": "The twelve lancets' glass on the glass line x ±14.30: pot-metal and flashed, leaded (tonight plain diamond quarries; the designs wait for catalogue entries)."
@@ -277,14 +277,14 @@
     {
       "surface": "albion.case.glass",
       "material": "glass.low-iron",
-      "working": "laminated.anti-reflective",
+      "working": "anti-reflective.laminated",
       "history": "handled",
       "note": "The table cases' glazed boxes (sides and top), Optiwhite, anti-reflective."
     },
     {
       "surface": "albion.frame.glazing",
       "material": "glass.low-iron",
-      "working": "laminated.anti-reflective",
+      "working": "anti-reflective.laminated",
       "history": "new",
       "note": "Glazing of the works on paper in their frames (Lady Lilith, Love's Messenger, the Star of Bethlehem, the three wallpapers): laminated, UV-filtering, anti-reflective. Role guessed."
     },

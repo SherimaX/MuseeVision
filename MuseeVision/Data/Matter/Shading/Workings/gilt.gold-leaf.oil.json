@@ -64,6 +64,7 @@
   },
   "hosts": {
     "metal": "cast.bronze",
-    "white": "cast.plaster"
+    "white": "cast.plaster",
+    "wood": "oil-sized"
   }
 }

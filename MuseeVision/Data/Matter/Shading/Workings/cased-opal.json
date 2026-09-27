@@ -1,0 +1,39 @@
+{
+  "schema": "musee.matter.shading.working/1",
+  "key": "cased-opal",
+  "name": "Cased opal: a thin opal layer inside clear, blown as a globe (Lamberts)",
+  "record": "Workings/blown.cased.json",
+  "kind": "face",
+  "roughness": {
+    "value": 0.02,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Workings/blown.cased.json: a fire-polished blown face"
+  },
+  "roughnessAcross": {
+    "value": 0.02,
+    "unit": "1",
+    "grade": "derived",
+    "source": "Workings/blown.cased.json: a fire-polished blown face",
+    "derivation": "a face with no grain: equal to the roughness along"
+  },
+  "haziness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Workings/blown.cased.json: a fire-polished blown face",
+    "note": "One specular lobe until a goniometric measurement shows a second."
+  },
+  "textureDepth": {
+    "value": 0.001,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Workings/blown.cased.json: a fire-polished blown face"
+  },
+  "relief": {
+    "value": 0.0,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Workings/blown.cased.json: a fire-polished blown face"
+  }
+}

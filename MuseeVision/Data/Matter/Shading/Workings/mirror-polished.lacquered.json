@@ -1,0 +1,39 @@
+{
+  "schema": "musee.matter.shading.working/1",
+  "key": "mirror-polished.lacquered",
+  "name": "Mirror-polished and lacquered (a clear lacquer keeps the mirror from tarnish)",
+  "record": "Workings/brushed.json",
+  "kind": "face",
+  "roughness": {
+    "value": 0.03,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Workings/polished.json (Shading): a buffed mirror; the clear lacquer's own reflection is not composed"
+  },
+  "roughnessAcross": {
+    "value": 0.03,
+    "unit": "1",
+    "grade": "derived",
+    "source": "Workings/polished.json (Shading): a buffed mirror; the clear lacquer's own reflection is not composed",
+    "derivation": "a face with no grain: equal to the roughness along"
+  },
+  "haziness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Workings/polished.json (Shading): a buffed mirror; the clear lacquer's own reflection is not composed",
+    "note": "One specular lobe until a goniometric measurement shows a second."
+  },
+  "textureDepth": {
+    "value": 0.001,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Workings/polished.json (Shading): a buffed mirror; the clear lacquer's own reflection is not composed"
+  },
+  "relief": {
+    "value": 0.0,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Workings/polished.json (Shading): a buffed mirror; the clear lacquer's own reflection is not composed"
+  }
+}

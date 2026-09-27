@@ -18,6 +18,7 @@ TArray<FMasterKind> AllMasters()
 		{ FName(Masters::Water), NAME_None },
 		{ FName(Masters::Paint), NAME_None },
 		{ FName(Masters::Wood), NAME_None },
+		{ FName(Masters::Wood), Gilt },
 		{ FName(Masters::Cloth), NAME_None },
 		{ FName(Masters::Sheet), NAME_None },
 		{ FName(Masters::Living), NAME_None },
@@ -40,9 +41,13 @@ TValueOrError<FMasterRecipe, FString> MasterRecipe(const FMasterKind& Kind, UMat
 	{
 		return MakeValue(MetalRecipe(Moment, bGilt));
 	}
+	if (Master == FName(Masters::Wood))
+	{
+		return MakeValue(WoodRecipe(Moment, bGilt));
+	}
 	if (bGilt)
 	{
-		return MakeError(FString::Printf(TEXT("The %s master does not host gilt; the gilt record lays leaf over plaster and bronze."), *Master.ToString()));
+		return MakeError(FString::Printf(TEXT("The %s master does not host gilt; the gilt record lays leaf over plaster, bronze and wood."), *Master.ToString()));
 	}
 	if (Master == FName(Masters::Stone))
 	{
@@ -63,10 +68,6 @@ TValueOrError<FMasterRecipe, FString> MasterRecipe(const FMasterKind& Kind, UMat
 	if (Master == FName(Masters::Paint))
 	{
 		return MakeValue(PaintRecipe(Moment));
-	}
-	if (Master == FName(Masters::Wood))
-	{
-		return MakeValue(WoodRecipe(Moment));
 	}
 	if (Master == FName(Masters::Cloth))
 	{

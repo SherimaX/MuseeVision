@@ -159,6 +159,11 @@ The other families use `specularF0` or `f0` (metals: a colour triple with `space
 | working-specific blocks | no | For example `surface`, `strength`, `flatness`, `strainPattern`, `interlayer`, `laminate`, `optics`, `stock`, `film`, `leaf`, `steps`, `facts`, `finishes`, `conservation`. `steps` is a list of `{step, grade, source}`. `finishes` (in `cast.plaster`) lists the historical surface treatments a making-time decision chooses between. Every number inside follows the quantity form. |
 | `photograph`, `unverified`, `sources` | as for substances | |
 
+**The typed working's coat.** A typed working record (`Data/Matter/Shading/Workings`) may name `lays`: the key of the
+substance it coats the piece in (a paint, a lacquer, a glaze, a paper sealed in a laminate). The coat is what the eye
+meets, so the resolver shades the piece with the coat's typed substance record and its master, in place of the palette
+entry's. It is the typed form of the research record's `lays` above.
+
 **Open question: stacked workings.** A real glazing make-up stacks workings: anti-reflective coated, over a laminate with a UV-filtering interlayer, over heat-strengthened plies. `FMatterSpec` holds one working key, and `over` records which stacks are real. The Architect should decide how a spec names a stack. There are two ways:
 - **The top working names the stack.** The spec names the top working (`anti-reflective`), and the piece's make-up names the rest: the plies, their thicknesses and their treatments, which Form owns.
 - **The spec holds a list.** `FMatterSpec` holds an ordered list of working keys.

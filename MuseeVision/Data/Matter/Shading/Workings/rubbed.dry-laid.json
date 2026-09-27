@@ -1,0 +1,39 @@
+{
+  "schema": "musee.matter.shading.working/1",
+  "key": "rubbed.dry-laid",
+  "name": "Rubbed and dry-laid (干摆): ground bricks set without visible joints",
+  "record": "Palette.json",
+  "kind": "face",
+  "roughness": {
+    "value": 0.7,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Palette.json (the sheets' workings; no filtered roughness was read for the face)"
+  },
+  "roughnessAcross": {
+    "value": 0.7,
+    "unit": "1",
+    "grade": "derived",
+    "source": "Palette.json (the sheets' workings; no filtered roughness was read for the face)",
+    "derivation": "a face with no grain: equal to the roughness along"
+  },
+  "haziness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Palette.json (the sheets' workings; no filtered roughness was read for the face)",
+    "note": "One specular lobe until a goniometric measurement shows a second."
+  },
+  "textureDepth": {
+    "value": 0.05,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Palette.json (the sheets' workings; no filtered roughness was read for the face)"
+  },
+  "relief": {
+    "value": 0.1,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Palette.json (the sheets' workings; no filtered roughness was read for the face)"
+  }
+}

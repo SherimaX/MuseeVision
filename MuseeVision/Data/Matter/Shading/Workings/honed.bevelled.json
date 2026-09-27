@@ -1,0 +1,39 @@
+{
+  "schema": "musee.matter.shading.working/1",
+  "key": "honed.bevelled",
+  "name": "Honed, the top arris bevelled 4 mm",
+  "record": "Workings/honed.json",
+  "kind": "face",
+  "roughness": {
+    "value": 0.6,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Workings/honed.json (Shading): a honed face, matte, no reflected image"
+  },
+  "roughnessAcross": {
+    "value": 0.6,
+    "unit": "1",
+    "grade": "derived",
+    "source": "Workings/honed.json (Shading): a honed face, matte, no reflected image",
+    "derivation": "a face with no grain: equal to the roughness along"
+  },
+  "haziness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Workings/honed.json (Shading): a honed face, matte, no reflected image",
+    "note": "One specular lobe until a goniometric measurement shows a second."
+  },
+  "textureDepth": {
+    "value": 0.22,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Workings/honed.json (Shading): a honed face, matte, no reflected image"
+  },
+  "relief": {
+    "value": 0.22,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Workings/honed.json (Shading): a honed face, matte, no reflected image"
+  }
+}

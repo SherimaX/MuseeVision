@@ -1,0 +1,39 @@
+{
+  "schema": "musee.matter.shading.working/1",
+  "key": "filled.polished",
+  "name": "Voids filled flush with tinted resin, polished",
+  "record": "Workings/polished.stone.json",
+  "kind": "face",
+  "roughness": {
+    "value": 0.1,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Workings/polished.json (Shading): polished stone, the filled voids level with it"
+  },
+  "roughnessAcross": {
+    "value": 0.1,
+    "unit": "1",
+    "grade": "derived",
+    "source": "Workings/polished.json (Shading): polished stone, the filled voids level with it",
+    "derivation": "a face with no grain: equal to the roughness along"
+  },
+  "haziness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Workings/polished.json (Shading): polished stone, the filled voids level with it",
+    "note": "One specular lobe until a goniometric measurement shows a second."
+  },
+  "textureDepth": {
+    "value": 0.005,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Workings/polished.json (Shading): polished stone, the filled voids level with it"
+  },
+  "relief": {
+    "value": 0.005,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Workings/polished.json (Shading): polished stone, the filled voids level with it"
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "schema": "musee.matter.shading.substance/1",
+  "key": "pebble-mosaic",
+  "name": "Pebble mosaic (river pebbles, tile and brick set in lime)",
+  "family": "accent",
+  "record": "Palette.json",
+  "master": "stone",
+  "accentOf": "stone",
+  "dielectric": {
+    "diffuseAlbedo": {
+      "value": [
+        55.0,
+        1.0,
+        6.0
+      ],
+      "space": "CIELAB (D65, 2 deg)",
+      "unit": "CIELAB",
+      "grade": "unverified",
+      "source": "Palette.json: accent.pebble-mosaic",
+      "note": "A first colour for Pebble mosaic (river pebbles, tile and brick set in lime): no measured colour was read: a first value read from trade and museum photographs of the named material."
+    },
+    "refractiveIndex": {
+      "value": 1.55,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.pebble-mosaic",
+      "note": "River pebbles of mixed rock with tile shards: indices of quartz, feldspar and fired clay, 1.52 to 1.60."
+    },
+    "porosity": {
+      "value": 0.05,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.pebble-mosaic",
+      "note": "A first open porosity for the rock type; no measurement of this stone was read."
+    },
+    "wettingDepth": {
+      "value": 1.0,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: accent.pebble-mosaic",
+      "note": "The depth whose pores govern the face's look when wet."
+    }
+  },
+  "structure": {
+    "grain": {
+      "value": 30.0,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: accent.pebble-mosaic",
+      "note": "The pebbles themselves, a few centimetres across."
+    },
+    "bed": {
+      "value": 150,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: accent.pebble-mosaic",
+      "note": "The repeat of the laid pattern."
+    },
+    "bedAspect": {
+      "value": 1.0,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.pebble-mosaic",
+      "note": "How much longer the structure runs along its bedding than across it."
+    },
+    "hurst": {
+      "value": 0.7,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Candela et al. 2012, Journal of Geophysical Research 117, B08409 (fault surfaces, 0.6 to 0.8; cited in Stone.ush)",
+      "note": "The middle of the range measured on rock surfaces, as the travertine's."
+    },
+    "toneSpread": {
+      "value": 0.3,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.pebble-mosaic",
+      "note": "A first half-range of ln(albedo) across one face."
+    },
+    "roughnessSpread": {
+      "value": 0.15,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.pebble-mosaic",
+      "note": "A first half-range of ln(roughness) across one face."
+    }
+  }
+}

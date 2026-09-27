@@ -1,0 +1,57 @@
+{
+  "schema": "musee.matter.shading.substance/1",
+  "key": "clear-float",
+  "name": "Clear float glass (soda-lime, ordinary iron)",
+  "family": "glass",
+  "record": "Palette.json",
+  "master": "glass",
+  "dielectric": {
+    "refractiveIndex": {
+      "value": 1.523,
+      "unit": "1",
+      "grade": "record",
+      "source": "Substances/low-iron-glass.json: optics.refractiveIndex (soda-lime float, 589.3 nm)",
+      "note": "Clear and low-iron float are the same glass but for their iron."
+    },
+    "porosity": {
+      "value": 0.0,
+      "unit": "1",
+      "grade": "derived",
+      "source": "Glass has no pores",
+      "derivation": "0"
+    },
+    "wettingDepth": {
+      "value": 0.0,
+      "unit": "mm",
+      "grade": "derived",
+      "source": "Glass has no pores",
+      "derivation": "0"
+    }
+  },
+  "medium": {
+    "absorption": {
+      "value": [
+        0.0073,
+        0.0051,
+        0.004
+      ],
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "unit": "1/mm",
+      "grade": "unverified",
+      "source": "Palette.json: glass.clear-float (Pilkington Optifloat Clear)",
+      "note": "A first absorption for float glass of about 0.1 % Fe2O3: internal transmittance near 0.95 through 10 mm in the green, lower in the red where ferrous iron's band reaches, which is the green of the edge. The maker's spectral data were not read."
+    },
+    "scattering": {
+      "value": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "unit": "1/mm",
+      "grade": "derived",
+      "source": "Clear glass does not scatter",
+      "derivation": "0"
+    }
+  }
+}

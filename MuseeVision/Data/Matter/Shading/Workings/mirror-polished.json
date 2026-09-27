@@ -1,0 +1,39 @@
+{
+  "schema": "musee.matter.shading.working/1",
+  "key": "mirror-polished",
+  "name": "Mirror-polished (through 3000 grit and a final compound, or a metal's buffed mirror)",
+  "record": "Workings/polished.stone.json",
+  "kind": "face",
+  "roughness": {
+    "value": 0.02,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Workings/polished.json (Shading): the museum's last polish, beyond the stone's"
+  },
+  "roughnessAcross": {
+    "value": 0.02,
+    "unit": "1",
+    "grade": "derived",
+    "source": "Workings/polished.json (Shading): the museum's last polish, beyond the stone's",
+    "derivation": "a face with no grain: equal to the roughness along"
+  },
+  "haziness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Workings/polished.json (Shading): the museum's last polish, beyond the stone's",
+    "note": "One specular lobe until a goniometric measurement shows a second."
+  },
+  "textureDepth": {
+    "value": 0.001,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Workings/polished.json (Shading): the museum's last polish, beyond the stone's"
+  },
+  "relief": {
+    "value": 0.001,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Workings/polished.json (Shading): the museum's last polish, beyond the stone's"
+  }
+}

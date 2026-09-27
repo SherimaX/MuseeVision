@@ -1752,7 +1752,7 @@
     },
     {
       "id": "step.bridge.1",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         6.2,
         -27.5,
@@ -1769,7 +1769,7 @@
     },
     {
       "id": "step.bridge.2",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         8.025,
         -27.432,
@@ -1786,7 +1786,7 @@
     },
     {
       "id": "step.bridge.3",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         9.3,
         -26.1,
@@ -1803,7 +1803,7 @@
     },
     {
       "id": "step.bridge.4",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         10.617,
         -27.283,
@@ -1820,7 +1820,7 @@
     },
     {
       "id": "step.bridge.5",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         12.2,
         -27.1,
@@ -1837,7 +1837,7 @@
     },
     {
       "id": "step.rockery.01",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         5.661,
         -13.417,
@@ -1854,7 +1854,7 @@
     },
     {
       "id": "step.rockery.02",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         6.935,
         -14.266,
@@ -1871,7 +1871,7 @@
     },
     {
       "id": "step.rockery.03",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         7.261,
         -12.777,
@@ -1888,7 +1888,7 @@
     },
     {
       "id": "step.rockery.04",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         8.655,
         -13.341,
@@ -1905,7 +1905,7 @@
     },
     {
       "id": "step.rockery.05",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         8.628,
         -11.805,
@@ -1922,7 +1922,7 @@
     },
     {
       "id": "step.rockery.06",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         12.566,
         -10.62,
@@ -1939,7 +1939,7 @@
     },
     {
       "id": "step.rockery.07",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         12.734,
         -8.495,
@@ -1956,7 +1956,7 @@
     },
     {
       "id": "step.rockery.08",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         14.384,
         -7.081,
@@ -1973,7 +1973,7 @@
     },
     {
       "id": "step.rockery.09",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         12.508,
         -6.133,
@@ -1990,7 +1990,7 @@
     },
     {
       "id": "step.rockery.10",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         11.831,
         -4.163,
@@ -2007,7 +2007,7 @@
     },
     {
       "id": "step.rockery.11",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         9.898,
         -5.158,
@@ -2024,7 +2024,7 @@
     },
     {
       "id": "step.rockery.12",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         7.933,
         -4.384,
@@ -2041,7 +2041,7 @@
     },
     {
       "id": "step.rockery.13",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         7.233,
         -6.37,
@@ -2058,7 +2058,7 @@
     },
     {
       "id": "step.rockery.14",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         5.164,
         -7.017,
@@ -2075,7 +2075,7 @@
     },
     {
       "id": "step.path4.1",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         7.453,
         -20.051,
@@ -2092,7 +2092,7 @@
     },
     {
       "id": "step.path4.2",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         10.031,
         -21.398,
@@ -2109,7 +2109,7 @@
     },
     {
       "id": "step.path4.3",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         13.072,
         -21.387,
@@ -2126,7 +2126,7 @@
     },
     {
       "id": "step.fork.1",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         5.3,
         -39.25,
@@ -2143,7 +2143,7 @@
     },
     {
       "id": "step.court.1",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         -10.6,
         -15.4,
@@ -2160,7 +2160,7 @@
     },
     {
       "id": "step.court.2",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         -7.8,
         -22.0,
@@ -2177,7 +2177,7 @@
     },
     {
       "id": "step.court.3",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         -12.0,
         -17.9,
@@ -2194,7 +2194,7 @@
     },
     {
       "id": "step.court.4",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         -6.4,
         -20.5,
@@ -2211,7 +2211,7 @@
     },
     {
       "id": "step.court.5",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         -10.6,
         -20.5,
@@ -2228,7 +2228,7 @@
     },
     {
       "id": "step.court.6",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         -7.8,
         -17.9,
@@ -2245,7 +2245,7 @@
     },
     {
       "id": "step.gate.1",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         1.08,
         -2.3,
@@ -2262,7 +2262,7 @@
     },
     {
       "id": "step.gate.2",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         0.6,
         -5.25,
@@ -2279,7 +2279,7 @@
     },
     {
       "id": "step.gate.3",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         1.2,
         -6.05,
@@ -2296,7 +2296,7 @@
     },
     {
       "id": "step.yard.1",
-      "type": "gap.step-light.2700k",
+      "type": "step-light.2700k",
       "point": [
         -1.84,
         -8.4,

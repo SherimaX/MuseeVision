@@ -30,13 +30,14 @@ namespace Musee::Matter::ScheduleTests
 	constexpr const TCHAR* NoFrame = TEXT("none");
 
 	/**
-	 * The material specs a schedule other than the finish schedule names, found in its text: water, beds and cast
-	 * specimens (Planting.json) give "material", "working" and "history" together in one object. Each field's value is a
-	 * string, and nothing between them opens or closes an object. Matter reads other systems' schedules only here, to
-	 * check its own keys, so it scans their text rather than reading their records.
+	 * The fields that name a material spec in a schedule other than the finish schedule: water, beds' ground, cast
+	 * specimens (Planting.json) and the blind doors give "material", "working" and "history" together in one object, in
+	 * any order. Matter reads other systems' schedules only here, to check its own keys, so it scans their text rather
+	 * than reading their records, whose other fields are theirs.
 	 */
-	const TCHAR* const SpecPattern = TEXT("\"material\"\\s*:\\s*\"([^\"]*)\"[^{}]*?\"working\"\\s*:\\s*\"([^\"]*)\"[^{}]*?\"history\"\\s*:\\s*\"([^\"]*)\"");
-	const TCHAR* const MaterialPattern = TEXT("\"material\"\\s*:");
+	const TCHAR* const MaterialField = TEXT("material");
+	const TCHAR* const WorkingField = TEXT("working");
+	const TCHAR* const HistoryField = TEXT("history");
 	const TCHAR* const GlazingPattern = TEXT("\"glazing\"\\s*:\\s*\"([^\"]*)\"");
 	const TCHAR* const FramePattern = TEXT("\"frame\"\\s*:\\s*\"([^\"]*)\"");
 
@@ -76,25 +77,111 @@ namespace Musee::Matter::ScheduleTests
 		return Found;
 	}
 
+	/** One JSON object in a schedule's text: the keys it names itself, and those of them whose values are strings. */
+	struct FTextObject
+	{
+		TMap<FString, FString> Fields;
+		TSet<FString> Keys;
+	};
+
 	/**
-	 * The specs a record's text names, each "material" with its working and history; a "material" without them is
-	 * reported on Test.
+	 * The string at Text[Start] (a quote), unescaped only as far as a key or a key's value needs; Next is left on the
+	 * character after its closing quote.
+	 */
+	FString StringAt(const FString& Text, int32 Start, int32& Next)
+	{
+		FString Value;
+		int32 Index = Start + 1;
+		for (; Index < Text.Len() && Text[Index] != TEXT('"'); ++Index)
+		{
+			if (Text[Index] == TEXT('\\') && Index + 1 < Text.Len())
+			{
+				++Index;
+			}
+			Value.AppendChar(Text[Index]);
+		}
+		Next = Index + 1;
+		return Value;
+	}
+
+	int32 SkipSpace(const FString& Text, int32 Index)
+	{
+		while (Index < Text.Len() && FChar::IsWhitespace(Text[Index]))
+		{
+			++Index;
+		}
+		return Index;
+	}
+
+	/** Every object in a schedule's text, innermost first, with the keys it names and its own string-valued fields. */
+	TArray<FTextObject> TextObjects(const FString& Text)
+	{
+		TArray<FTextObject> Done;
+		TArray<FTextObject> Open;
+		for (int32 Index = 0; Index < Text.Len();)
+		{
+			const TCHAR Char = Text[Index];
+			if (Char == TEXT('{'))
+			{
+				Open.AddDefaulted();
+				++Index;
+			}
+			else if (Char == TEXT('}'))
+			{
+				if (!Open.IsEmpty())
+				{
+					Done.Add(Open.Pop());
+				}
+				++Index;
+			}
+			else if (Char == TEXT('"'))
+			{
+				int32 Next = Index;
+				const FString Token = StringAt(Text, Index, Next);
+				const int32 After = SkipSpace(Text, Next);
+				Index = Next;
+				if (After < Text.Len() && Text[After] == TEXT(':') && !Open.IsEmpty())
+				{
+					Open.Last().Keys.Add(Token);
+					const int32 ValueAt = SkipSpace(Text, After + 1);
+					if (ValueAt < Text.Len() && Text[ValueAt] == TEXT('"'))
+					{
+						Open.Last().Fields.Add(Token, StringAt(Text, ValueAt, Index));
+					}
+				}
+			}
+			else
+			{
+				++Index;
+			}
+		}
+		return Done;
+	}
+
+	/**
+	 * The specs a record's text names: every object that names a "material" gives its working and history beside it; one
+	 * that doesn't is reported on Test.
 	 */
 	TArray<FNamedSpec> TextSpecs(FAutomationTestBase& Test, const FString& Where, const FString& Text)
 	{
 		TArray<FNamedSpec> Specs;
-		FRegexMatcher Matcher(FRegexPattern(SpecPattern), Text);
-		while (Matcher.FindNext())
+		for (const FTextObject& Object : TextObjects(Text))
 		{
-			Specs.Add({ Where, Matcher.GetCaptureGroup(1), Matcher.GetCaptureGroup(2), Matcher.GetCaptureGroup(3) });
+			if (!Object.Keys.Contains(MaterialField))
+			{
+				continue;
+			}
+			const FString* Material = Object.Fields.Find(MaterialField);
+			const FString* Working = Object.Fields.Find(WorkingField);
+			const FString* History = Object.Fields.Find(HistoryField);
+			if (!Material || !Working || !History)
+			{
+				Test.AddError(FString::Printf(TEXT("%s: the material %s is not named with its working and history."), *Where,
+					Material ? **Material : TEXT("(not a string)")));
+				continue;
+			}
+			Specs.Add({ Where, *Material, *Working, *History });
 		}
-		int32 Materials = 0;
-		FRegexMatcher Named(FRegexPattern(MaterialPattern), Text);
-		while (Named.FindNext())
-		{
-			++Materials;
-		}
-		Test.TestEqual(FString::Printf(TEXT("%s: every material is named with its working and history"), *Where), Specs.Num(), Materials);
 		return Specs;
 	}
 
@@ -214,6 +301,40 @@ bool FMatterEveryScheduleResolves::RunTest(const FString& Parameters)
 	TestTrue(TEXT("The schedules name materials"), Checked > 0);
 	AddInfo(FString::Printf(TEXT("%d material specs checked across %d stages."), Checked, Stages.Num()));
 	TestMasters::Retire(Masters);
+	return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FMatterWorkingLays, "Musee.Matter.WorkingLays", TestFlags)
+bool FMatterWorkingLays::RunTest(const FString& Parameters)
+{
+	const auto Read = [this](const TCHAR* Palette, const TCHAR* Working, const TCHAR* History)
+	{
+		const FMatterSpec Spec{ FMuseeKey(Palette), FMuseeKey(Working), FMuseeKey(History) };
+		TValueOrError<FSpecRecords, FString> Records = ReadSpec(Spec);
+		if (Records.HasError())
+		{
+			AddError(FString::Printf(TEXT("%s: %s"), *Spec.ToString(), *Records.GetError()));
+		}
+		return Records;
+	};
+	const TValueOrError<FSpecRecords, FString> Painted = Read(TEXT("accent.qing-pine-lacquered"), TEXT("dizhang.tiehong"), TEXT("weathered"));
+	if (Painted.HasValue())
+	{
+		TestEqual(TEXT("A painted pine shows its paint, not its pine"), Painted.GetValue().Substance.Key.ToString(), FString(TEXT("paint.tiehong")));
+		TestTrue(TEXT("and the paint's master draws it"), Painted.GetValue().Master == (FMasterKind{ FName(Masters::White), NAME_None }));
+		TestEqual(TEXT("with the paint master's history"), Painted.GetValue().History.Key.ToString(), FString(TEXT("white.weathered")));
+	}
+	const TValueOrError<FSpecRecords, FString> Lacquered = Read(TEXT("accent.chinese-fir-guangqi"), TEXT("guangqi.chestnut"), TEXT("weathered"));
+	if (Lacquered.HasValue())
+	{
+		TestEqual(TEXT("A translucent lacquer lays no coat: the fir shows through"), Lacquered.GetValue().Substance.Key.ToString(), FString(TEXT("chinese-fir")));
+	}
+	const TValueOrError<FSpecRecords, FString> Gilt = Read(TEXT("oak.sessile-french"), TEXT("gilt.gold-leaf.oil"), TEXT("aged.patina"));
+	if (Gilt.HasValue())
+	{
+		TestTrue(TEXT("Leaf oil-gilt on oak is carried by the wood master"), Gilt.GetValue().Master == (FMasterKind{ FName(Masters::Wood), FName(Masters::Gilt) }));
+		TestTrue(TEXT("over the sealed, sized oak"), Gilt.GetValue().Host.IsSet() && Gilt.GetValue().Host.GetValue().Key.ToString() == TEXT("oil-sized"));
+	}
 	return true;
 }
 

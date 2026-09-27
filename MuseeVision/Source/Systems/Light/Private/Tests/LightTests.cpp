@@ -4,6 +4,7 @@
 
 #include "Components/DirectionalLightComponent.h"
 #include "Components/ExponentialHeightFogComponent.h"
+#include "Components/PointLightComponent.h"
 #include "Components/RectLightComponent.h"
 #include "Components/SpotLightComponent.h"
 #include "Engine/World.h"
@@ -50,7 +51,7 @@ namespace Musee::Light::Tests
 	IMPLEMENT_SIMPLE_AUTOMATION_TEST(FLightCatalogueTest, "Musee.Light.Catalogue", Flags)
 	bool FLightCatalogueTest::RunTest(const FString& Parameters)
 	{
-		TestEqual(TEXT("Seventeen luminaires in the catalogue"), LuminaireKeys().Num(), 17);
+		TestEqual(TEXT("Twenty-four luminaires in the catalogue"), LuminaireKeys().Num(), 24);
 		const FLightLuminaire* Spot = FindLuminaire(FMuseeKey(TEXTVIEW("track-spot.3000k.20deg")));
 		if (TestNotNull(TEXT("The 20 degree spot"), Spot))
 		{
@@ -67,7 +68,35 @@ namespace Musee::Light::Tests
 			TestEqual(TEXT("at 2700 K"), Strip->ColourTemperature.Get(), 2700.0);
 		}
 		const FLightLuminaire* Slot = FindLuminaire(FMuseeKey(TEXTVIEW("linear-slot.3000k")));
-		TestTrue(TEXT("A record without its flux stands unlit"), Slot && !Slot->bLit && !Slot->WhyUnlit.IsEmpty());
+		if (TestNotNull(TEXT("The recessed slot"), Slot))
+		{
+			TestTrue(TEXT("is lit, as a line, its delivered flux now published"), Slot->bLit && Slot->Emitter == FLightLuminaire::EEmitter::Linear);
+			TestEqual(TEXT("at 400 lm a foot"), Slot->FluxPerMeterLumens, 1312.3);
+			TestTrue(TEXT("across its 4 inch aperture"), FMath::IsNearlyEqual(Slot->EmittingWidth.Get(), 0.1016));
+		}
+		const FLightLuminaire* Case = FindLuminaire(FMuseeKey(TEXTVIEW("case-linear.3000k")));
+		TestTrue(TEXT("A case's line is lit as a line of 720 lm a metre"), Case && Case->bLit && Case->Emitter == FLightLuminaire::EEmitter::Linear
+			&& Case->FluxPerMeterLumens == 720.0);
+		const FLightLuminaire* Lantern = FindLuminaire(FMuseeKey(TEXTVIEW("lantern.2200k")));
+		if (TestNotNull(TEXT("The lantern's lamp"), Lantern))
+		{
+			TestTrue(TEXT("is lit, as one lamp on its axis"), Lantern->bLit && Lantern->Emitter == FLightLuminaire::EEmitter::Point
+				&& Lantern->LampCount == 1 && Lantern->LampRingRadius.Get() == 0.0);
+			TestTrue(TEXT("of 200 lm at 2200 K, 35 mm across"), Lantern->Flux.Get() == 200.0 && Lantern->ColourTemperature.Get() == 2200.0
+				&& FMath::IsNearlyEqual(Lantern->SourceRadius.Get(), 0.0175));
+		}
+		const FLightLuminaire* Electrolier = FindLuminaire(FMuseeKey(TEXTVIEW("electrolier.3000k")));
+		TestTrue(TEXT("An electrolier is six lamps on the arms' 0.505 ring"), Electrolier && Electrolier->bLit && Electrolier->LampCount == 6
+			&& FMath::IsNearlyEqual(Electrolier->LampRingRadius.Get(), 0.505) && Electrolier->Flux.Get() == 1560.0);
+		const FLightLuminaire* Porch = FindLuminaire(FMuseeKey(TEXTVIEW("electrolier.3000k.four-light")));
+		TestTrue(TEXT("and the porch's, four"), Porch && Porch->bLit && Porch->LampCount == 4);
+		const FLightLuminaire* Step = FindLuminaire(FMuseeKey(TEXTVIEW("step-light.2700k")));
+		TestTrue(TEXT("A step light's louvred light waits for its photometric file"), Step && !Step->bLit);
+		const FLightLuminaire* Ceiling = FindLuminaire(FMuseeKey(TEXTVIEW("luminous-ceiling.3000k")));
+		TestTrue(TEXT("A record without its flux stands unlit"), Ceiling && !Ceiling->bLit && !Ceiling->WhyUnlit.IsEmpty());
+		const FLightLuminaire* Glass = FindLuminaire(FMuseeKey(TEXTVIEW("edge-lit-glass.3000k")));
+		TestTrue(TEXT("An edge-lit pane lets its light out as a face, once its flux is published"), Glass && !Glass->bLit
+			&& Glass->Emitter == FLightLuminaire::EEmitter::Rect);
 		const FLightLuminaire* Washer = FindLuminaire(FMuseeKey(TEXTVIEW("track-wallwasher.3000k")));
 		TestTrue(TEXT("A wallwasher waits for its photometric file"), Washer && !Washer->bLit);
 		return true;
@@ -119,6 +148,24 @@ namespace Musee::Light::Tests
 		TestTrue(TEXT("at its peak intensity in candelas"), Spot->IntensityUnits == ELightUnits::Candelas && FMath::IsNearlyEqual(Spot->Intensity, 10963.0f));
 		TestTrue(TEXT("its beam's half-angle inside"), FMath::IsNearlyEqual(Spot->InnerConeAngle, 10.0f));
 		TestTrue(TEXT("its field's outside"), FMath::IsNearlyEqual(Spot->OuterConeAngle, 18.226f, 1e-2f));
+		ULightLuminaireComponent* Electrolier = NewObject<ULightLuminaireComponent>(Actor, TEXT("Electrolier"));
+		Electrolier->Configure(FMuseeKey(TEXTVIEW("electrolier.3000k")), ELightOperation::Always, FMuseeKey(), Meters(0.0));
+		Electrolier->SetupAttachment(Actor->GetRootComponent());
+		Electrolier->SetRelativeRotation(FRotator(-90.0, 0.0, 0.0));
+		Electrolier->RegisterComponent();
+		const TArray<TObjectPtr<ULocalLightComponent>>& Lamps = Electrolier->Emitters();
+		TestEqual(TEXT("An electrolier lights one lamp in each of its six globes"), Lamps.Num(), 6);
+		for (const ULocalLightComponent* Globe : Lamps)
+		{
+			const UPointLightComponent* Point = Cast<UPointLightComponent>(Globe);
+			const FVector Offset = Globe->GetComponentLocation() - Electrolier->GetComponentLocation();
+			TestTrue(TEXT("each a lamp lighting all round, a sixth of the fitting's flux"), Point && Point->IntensityUnits == ELightUnits::Lumens
+				&& FMath::IsNearlyEqual(Point->Intensity, 260.0f));
+			TestTrue(TEXT("on the arms' ring, level about the stem it hangs from"), FMath::IsNearlyEqual(Offset.Size(), 50.5, 1e-3)
+				&& FMath::Abs(Offset.Z) < 1e-3);
+		}
+		TestTrue(TEXT("It emits the fitting's flux"), FMath::IsNearlyEqual(Electrolier->EmittedFlux().Get(), 1560.0));
+
 		FTimeMoment Day;
 		Day.bSunUp = true;
 		Lamp->FollowMoment(Day);

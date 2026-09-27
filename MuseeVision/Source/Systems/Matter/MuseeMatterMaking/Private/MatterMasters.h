@@ -27,8 +27,9 @@ class UMaterialParameterCollection;
  * A painted or hard-chromed steel needs no master of its own: paint is a film the working lays over the metal at full
  * cover (worn through where it is worn), and chromium is a metal with its own measured reflection (Metal.ush).
  *
- * A layer working (gilt) is carried as a Substrate vertical layer over the masters that host it (white and metal): its
- * masters are M_Matter_WhiteGilt and M_Matter_MetalGilt. Every master applies the surface law (History.ush) to what it
+ * A layer working (gilt) is carried as a Substrate vertical layer over the masters that host it (white, metal and wood:
+ * leaf laid on gesso, on bronze, and on oak or lacquered pine sealed and sized): its masters are M_Matter_WhiteGilt,
+ * M_Matter_MetalGilt and M_Matter_WoodGilt. Every master applies the surface law (History.ush) to what it
  * shows, reading the museum Moment's weather from MPC_Moment.
  */
 namespace Musee::Matter
@@ -80,8 +81,8 @@ namespace Musee::Matter
 	FMasterRecipe WaterRecipe(UMaterialParameterCollection& Moment);
 	FMasterRecipe PaintRecipe(UMaterialParameterCollection& Moment);
 
-	/** The recipes of the wood, cloth, sheet and living masters. */
-	FMasterRecipe WoodRecipe(UMaterialParameterCollection& Moment);
+	/** The recipes of the wood (with gilt's leaf laid over it, or not), cloth, sheet and living masters. */
+	FMasterRecipe WoodRecipe(UMaterialParameterCollection& Moment, bool bGilt);
 	FMasterRecipe ClothRecipe(UMaterialParameterCollection& Moment);
 	FMasterRecipe SheetRecipe(UMaterialParameterCollection& Moment);
 	FMasterRecipe LivingRecipe(UMaterialParameterCollection& Moment);

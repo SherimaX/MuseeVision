@@ -1,0 +1,55 @@
+{
+  "key": "case-linear.3000k",
+  "kind": "case-linear",
+  "controlClass": "gallery",
+  "evidenceState": "complete",
+  "product": {
+    "manufacturer": "Lumistrips",
+    "family": "LumiFlex1095 Seoul",
+    "description": "flexible LED strip 8 mm wide - Seoul Semiconductor mid-power LEDs, 140 per metre - warm white 3000 K - CRI 95 - 24 V - 5 m reel; laid in a case's lamp rail or canopy behind its baffle",
+    "code": "38672",
+    "codeBasis": "the maker's article number of the 3000 K CRI 95 reel",
+    "status": "listed on the maker's site",
+    "makerClaim": "recommended by the maker for exhibition construction, furniture lighting and luminaire construction"
+  },
+  "light": {
+    "luminousFluxLumensPerMeter": 720,
+    "fluxBasis": "per-metre",
+    "reelFluxLumens": 3600,
+    "beamName": "bare strip without optic: each LED emits into the half space, near Lambertian",
+    "beamAngleDegrees": 120,
+    "cctKelvin": 3000,
+    "cri": 95,
+    "criBasis": "published value",
+    "ledsPerMeter": 140
+  },
+  "electrical": {
+    "powerWattsPerMeter": 7.2,
+    "reelPowerWatts": 36,
+    "supplyVolts": 24,
+    "control": "constant-voltage 24 V supply, dimmable; the dimming method is not named by the maker"
+  },
+  "housing": {
+    "sectionMillimeters": [8, 1.55],
+    "reelLengthMillimeters": 5000,
+    "mounting": "self-adhesive, laid in the case's lamp rail or behind its canopy baffle, outside the sealed case volume"
+  },
+  "photometricFile": {
+    "url": null,
+    "note": "The maker publishes no LDT or IES file for a bare strip; a bare strip is a line of near-Lambertian emitters."
+  },
+  "sources": [
+    {
+      "id": "maker-page",
+      "title": "Lumistrips, LumiFlex1095 Seoul LED Strip warm white CRI95 3000K 3600lm 24V 42 LEDs/ft 16.4ft reel (article 38672)",
+      "url": "https://us.lumistrips.com/flexible-led-lumistrips-us.html/lumiflex1095-3000k-cri95.html",
+      "readOn": "2026-09-27",
+      "covers": ["product", "light", "electrical", "housing"]
+    }
+  ],
+  "unverified": [
+    "The strip's ultraviolet and infrared content: a white LED of phosphor-converted blue emits none below 400 nm by construction, but the maker states no spectrum.",
+    "The cutting interval of 50 mm decides how closely a length can follow a drawn run; it is not recorded as a field.",
+    "Its R9 and TM-30 values are not published."
+  ]
+}

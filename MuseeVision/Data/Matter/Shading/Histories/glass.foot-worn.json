@@ -1,0 +1,78 @@
+{
+  "schema": "musee.matter.shading.history/1",
+  "key": "glass.foot-worn",
+  "name": "Walked on (a glass floor)",
+  "mechanisms": [
+    "glass.soiling",
+    "glass.cleaning-wear"
+  ],
+  "age": {
+    "value": 1.0,
+    "unit": "year",
+    "grade": "design",
+    "source": "Histories/glass.handled.json (glass is cleaned; a year's film)"
+  },
+  "passagesPerYear": {
+    "value": 200000.0,
+    "unit": "1/year",
+    "grade": "design",
+    "source": "the route's traffic by the face's use (as the stone and wood regimes)",
+    "note": "Site's traffic field will give each point its own."
+  },
+  "skyExposure": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "design",
+    "source": "an interior face"
+  },
+  "keptWet": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "derived",
+    "source": "the face stands clear of water",
+    "derivation": "0"
+  },
+  "deposition": {
+    "value": 0.02,
+    "unit": "1/year",
+    "grade": "unverified",
+    "source": "Histories/glass.handled.json (as the handled glass)"
+  },
+  "washRemoval": {
+    "value": 0.0,
+    "unit": "1/year",
+    "grade": "derived",
+    "source": "an interior face: no rain reaches it",
+    "derivation": "0"
+  },
+  "soilAlbedo": {
+    "value": [
+      0.35,
+      0.33,
+      0.3
+    ],
+    "space": "linear Rec.709 (sRGB primaries), D65 white",
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Histories/glass.handled.json (as the handled glass)"
+  },
+  "wornRoughness": {
+    "value": 0.6,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Workings/acid-etched.json (Shading): a walked etched face stays satin"
+  },
+  "wornHaziness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "derived",
+    "source": "a worn face has no second lobe",
+    "derivation": "0"
+  },
+  "wearPassages": {
+    "value": 2000000.0,
+    "unit": "count",
+    "grade": "unverified",
+    "source": "Histories/stone.foot-worn.json (as the walked stone)"
+  }
+}

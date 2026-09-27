@@ -90,6 +90,21 @@
           "working": "sawn",
           "history": "new",
           "note": "Stages: rotunda.port.rough-opening, salon.port.rough-opening"
+        },
+        {
+          "working": "filled.polished",
+          "history": "foot-worn",
+          "note": "Stages: hall-of-light.floor, hall-of-light.viewing-stone"
+        },
+        {
+          "working": "filled.polished",
+          "history": "handled",
+          "note": "Stages: hall-of-light.stereo-stone"
+        },
+        {
+          "working": "filled.polished",
+          "history": "new",
+          "note": "Stages: atrium.base, hall-of-light.lining, hall-of-light.plinth"
         }
       ]
     },
@@ -133,6 +148,11 @@
           "working": "honed",
           "history": "foot-worn",
           "note": "Stages: rotunda.floor.ring.a, rotunda.floor.ring.b, rotunda.dial.field.a, rotunda.dial.field.b, rotunda.sun-clock.door.sill, rotunda.stair.tread, rotunda.stair.landing.floor"
+        },
+        {
+          "working": "mirror-polished",
+          "history": "foot-worn",
+          "note": "Stages: atrium.floor"
         }
       ]
     },
@@ -467,9 +487,19 @@
       "verdict": "kept",
       "verdictReason": "The approved Albion design; now named with a real maker.",
       "research": {
-        "records": [],
+        "records": [
+          "Shading/Substances/encaustic-tile.json"
+        ],
         "needed": "Substance record; pattern from the Details sheet."
-      }
+      },
+      "substance": "encaustic-tile",
+      "finishes": [
+        {
+          "working": "waxed",
+          "history": "foot-worn",
+          "note": "Stages: albion.floor.nave, albion.floor.nave.border, albion.porch.floor, albion.porch.floor.border"
+        }
+      ]
     },
     {
       "key": "accent.grey-brick",
@@ -489,9 +519,44 @@
       "verdict": "new",
       "verdictReason": "Chenghuai replaces the Chinese Wing.",
       "research": {
-        "records": [],
+        "records": [
+          "Shading/Substances/grey-brick.json"
+        ],
         "needed": "Substance record (reduction firing, water quench), brick sizes per rank, the three jointing workings."
-      }
+      },
+      "substance": "grey-brick",
+      "finishes": [
+        {
+          "working": "carved",
+          "history": "weathered",
+          "note": "Stages: chenghuai.screen-wall.heart"
+        },
+        {
+          "working": "hairline-jointed",
+          "history": "weathered",
+          "note": "Stages: chenghuai.brick.hairline"
+        },
+        {
+          "working": "laid-on-edge",
+          "history": "foot-worn",
+          "note": "Stages: chenghuai.brick.on-edge"
+        },
+        {
+          "working": "lime-pointed",
+          "history": "weathered",
+          "note": "Stages: chenghuai.brick.pointed"
+        },
+        {
+          "working": "rubbed.dry-laid",
+          "history": "weathered",
+          "note": "Stages: chenghuai.brick.rubbed"
+        },
+        {
+          "working": "square.ground-joints",
+          "history": "weathered",
+          "note": "Stages: chenghuai.court.paving"
+        }
+      ]
     },
     {
       "key": "accent.suzhou-fangzhuan",
@@ -511,9 +576,24 @@
       "verdict": "new",
       "verdictReason": "Chenghuai.",
       "research": {
-        "records": [],
+        "records": [
+          "Shading/Substances/fangzhuan.json"
+        ],
         "needed": "Substance record; tung-oil working."
-      }
+      },
+      "substance": "fangzhuan",
+      "finishes": [
+        {
+          "working": "ground-joints",
+          "history": "foot-worn",
+          "note": "Stages: chenghuai.floor.chisi"
+        },
+        {
+          "working": "tung-oil-soaked",
+          "history": "foot-worn",
+          "note": "Stages: chenghuai.floor.chiqi"
+        }
+      ]
     },
     {
       "key": "accent.bu-wa",
@@ -533,9 +613,19 @@
       "verdict": "replaced",
       "verdictReason": "A concrete photo was standing in for fired clay.",
       "research": {
-        "records": [],
+        "records": [
+          "Shading/Substances/bu-wa.json"
+        ],
         "needed": "Substance record, tile sizes and lap."
-      }
+      },
+      "substance": "bu-wa",
+      "finishes": [
+        {
+          "working": "as-laid",
+          "history": "weathered",
+          "note": "Stages: chenghuai.leak-window.lattice, chenghuai.roof.he, chenghuai.roof.ridge, chenghuai.roof.tong"
+        }
+      ]
     },
     {
       "key": "accent.qingbaishi",
@@ -555,9 +645,29 @@
       "verdict": "new",
       "verdictReason": "Chenghuai's approved materials; granite retired.",
       "research": {
-        "records": [],
+        "records": [
+          "Shading/Substances/qingbaishi.json"
+        ],
         "needed": "Substance record and specimen."
-      }
+      },
+      "substance": "qingbaishi",
+      "finishes": [
+        {
+          "working": "axe-dressed",
+          "history": "foot-worn",
+          "note": "Stages: chenghuai.porch.paving, chenghuai.stone.kerb, chenghuai.stone.step"
+        },
+        {
+          "working": "axe-dressed",
+          "history": "weathered",
+          "note": "Stages: chenghuai.porch.coping"
+        },
+        {
+          "working": "honed",
+          "history": "weathered",
+          "note": "Stages: chenghuai.stone.base"
+        }
+      ]
     },
     {
       "key": "accent.taihu-rock",
@@ -577,9 +687,19 @@
       "verdict": "refined",
       "verdictReason": "Now named; form from evidence of real rocks.",
       "research": {
-        "records": [],
+        "records": [
+          "Shading/Substances/taihu-rock.json"
+        ],
         "needed": "Substance record; a scanned or measured rock."
-      }
+      },
+      "substance": "taihu-rock",
+      "finishes": [
+        {
+          "working": "as-found",
+          "history": "weathered",
+          "note": "Stages: chenghuai.edge-rock, chenghuai.shixiong"
+        }
+      ]
     },
     {
       "key": "accent.qingshi",
@@ -599,9 +719,39 @@
       "verdict": "new",
       "verdictReason": "Chenghuai.",
       "research": {
-        "records": [],
+        "records": [
+          "Shading/Substances/qingshi.json"
+        ],
         "needed": "Substance record."
-      }
+      },
+      "substance": "qingshi",
+      "finishes": [
+        {
+          "working": "as-found",
+          "history": "weathered",
+          "note": "Stages: chenghuai.rockery"
+        },
+        {
+          "working": "cut",
+          "history": "weathered",
+          "note": "Stages: chenghuai.bridge.kerb, chenghuai.garden.bluestone.submerged"
+        },
+        {
+          "working": "cut.ice-crack",
+          "history": "foot-worn",
+          "note": "Stages: chenghuai.garden.bluestone"
+        },
+        {
+          "working": "cut.laid",
+          "history": "weathered",
+          "note": "Stages: chenghuai.pond.bed"
+        },
+        {
+          "working": "engraved",
+          "history": "weathered",
+          "note": "Stages: chenghuai.shutiao"
+        }
+      ]
     },
     {
       "key": "accent.pebble-mosaic",
@@ -621,9 +771,19 @@
       "verdict": "replaced",
       "verdictReason": "Chenghuai's approved paths.",
       "research": {
-        "records": [],
+        "records": [
+          "Shading/Substances/pebble-mosaic.json"
+        ],
         "needed": "Record (pebble sizes and patterns)."
-      }
+      },
+      "substance": "pebble-mosaic",
+      "finishes": [
+        {
+          "working": "set-in-lime.trodden",
+          "history": "foot-worn",
+          "note": "Stages: chenghuai.garden.path"
+        }
+      ]
     },
     {
       "key": "accent.bath-stone",
@@ -643,9 +803,44 @@
       "verdict": "kept",
       "verdictReason": "The Albion spec's choice; now named at the mine.",
       "research": {
-        "records": [],
+        "records": [
+          "Shading/Substances/bath-stone.json"
+        ],
         "needed": "Substance record and specimen."
-      }
+      },
+      "substance": "bath-stone",
+      "finishes": [
+        {
+          "working": "carved",
+          "history": "aged.patina",
+          "note": "Stages: albion.capital"
+        },
+        {
+          "working": "honed",
+          "history": "aged.patina",
+          "note": "Stages: albion.wall.buff"
+        },
+        {
+          "working": "honed",
+          "history": "weathered",
+          "note": "Stages: albion.ext.buff"
+        },
+        {
+          "working": "rubbed",
+          "history": "aged.patina",
+          "note": "Stages: albion.dressing, albion.tablet"
+        },
+        {
+          "working": "rubbed",
+          "history": "weathered",
+          "note": "Stages: albion.ext.dressing"
+        },
+        {
+          "working": "sawn",
+          "history": "new",
+          "note": "Stages: albion.north.rough-opening"
+        }
+      ]
     },
     {
       "key": "accent.mansfield-red",
@@ -665,9 +860,24 @@
       "verdict": "kept",
       "verdictReason": "The spec's choice.",
       "research": {
-        "records": [],
+        "records": [
+          "Shading/Substances/mansfield-red.json"
+        ],
         "needed": "Substance record."
-      }
+      },
+      "substance": "mansfield-red",
+      "finishes": [
+        {
+          "working": "honed",
+          "history": "aged.patina",
+          "note": "Stages: albion.wall.red"
+        },
+        {
+          "working": "honed",
+          "history": "weathered",
+          "note": "Stages: albion.ext.red"
+        }
+      ]
     },
     {
       "key": "accent.york-stone",
@@ -687,9 +897,19 @@
       "verdict": "kept",
       "verdictReason": "The spec's choice.",
       "research": {
-        "records": [],
+        "records": [
+          "Shading/Substances/york-stone.json"
+        ],
         "needed": "Substance record."
-      }
+      },
+      "substance": "york-stone",
+      "finishes": [
+        {
+          "working": "sawn",
+          "history": "foot-worn",
+          "note": "Stages: albion.door.reveal, albion.floor.aisle"
+        }
+      ]
     },
     {
       "key": "accent.welsh-slate",
@@ -709,9 +929,19 @@
       "verdict": "kept",
       "verdictReason": "The spec's choice.",
       "research": {
-        "records": [],
+        "records": [
+          "Shading/Substances/welsh-slate.json"
+        ],
         "needed": "Substance record."
-      }
+      },
+      "substance": "welsh-slate",
+      "finishes": [
+        {
+          "working": "honed.bevelled",
+          "history": "foot-worn",
+          "note": "Stages: albion.skirting"
+        }
+      ]
     },
     {
       "key": "accent.british-column-stones",
@@ -731,7 +961,18 @@
       "verdict": "kept",
       "verdictReason": "The approved design; several quarries are closed, so some shafts are reclaimed or old stock (open question).",
       "research": {
-        "records": [],
+        "records": [
+          "Shading/Substances/lizard-serpentine.json (selection A: accent.british-column-stones.a)",
+          "Shading/Substances/peterhead-granite.json (selection B: accent.british-column-stones.b)",
+          "Shading/Substances/rubislaw-granite.json (selection C: accent.british-column-stones.c)",
+          "Shading/Substances/purbeck-marble.json (selection D: accent.british-column-stones.d)",
+          "Shading/Substances/frosterley-marble.json (selection E: accent.british-column-stones.e)",
+          "Shading/Substances/hopton-wood.json (selection F: accent.british-column-stones.f)",
+          "Shading/Substances/ashburton-marble.json (selection G: accent.british-column-stones.g)",
+          "Shading/Substances/iona-marble.json (selection H: accent.british-column-stones.h)",
+          "Shading/Substances/tiree-marble.json (selection I: accent.british-column-stones.i)",
+          "Shading/Substances/mona-marble.json (selection J: accent.british-column-stones.j)"
+        ],
         "needed": "Ten substance records, or one record per stone under a shared working."
       }
     },
@@ -753,9 +994,29 @@
       "verdict": "refined",
       "verdictReason": "The Square's pit is retired; the Cube's shaft keeps a geological section.",
       "research": {
-        "records": [],
+        "records": [
+          "Shading/Substances/topsoil.json"
+        ],
         "needed": "Records for each layer; the family of a soil is the spec's Q-7."
-      }
+      },
+      "substance": "topsoil",
+      "finishes": [
+        {
+          "working": "topsoil.bare",
+          "history": "weathered",
+          "note": "Stages: chenghuai planting, hall-of-light planting"
+        },
+        {
+          "working": "topsoil.potted",
+          "history": "weathered",
+          "note": "Stages: chenghuai planting"
+        },
+        {
+          "working": "topsoil.under-moss",
+          "history": "weathered",
+          "note": "Stages: chenghuai planting"
+        }
+      ]
     },
     {
       "key": "accent.concrete",
@@ -775,9 +1036,19 @@
       "verdict": "new",
       "verdictReason": "The Cube spec needs it.",
       "research": {
-        "records": [],
+        "records": [
+          "Shading/Substances/concrete.json"
+        ],
         "needed": "Substance record (the Cube spec lists it missing)."
-      }
+      },
+      "substance": "concrete",
+      "finishes": [
+        {
+          "working": "cast-in-situ.sealed",
+          "history": "new",
+          "note": "Stages: atrium.slab"
+        }
+      ]
     },
     {
       "key": "white.lime-plaster",
@@ -828,6 +1099,11 @@
           "working": "trowelled",
           "history": "new",
           "note": "Stages: nympheas.attic.upstand, nympheas.well.soffit, rotunda.dome.band, rotunda.dome.eye-curb, salon.vault.band, salon.lunette, salon.lantern.shaft, salon.cabinet.ceiling"
+        },
+        {
+          "working": "trowelled",
+          "history": "weathered",
+          "note": "Stages: chenghuai.roof.bed"
         }
       ]
     },
@@ -961,10 +1237,24 @@
       "research": {
         "records": [
           "r-matter: Substances/limewash.json",
-          "Workings/limewashed.json"
+          "Workings/limewashed.json",
+          "Shading/Substances/limewash.json"
         ],
         "needed": "Paper-fibre and hemp-fibre lime renders as grounds."
-      }
+      },
+      "substance": "limewash",
+      "finishes": [
+        {
+          "working": "limewashed",
+          "history": "weathered",
+          "note": "Stages: chenghuai.wall.limewash"
+        },
+        {
+          "working": "ma-hui.whiting",
+          "history": "new",
+          "note": "Stages: chenghuai.room.plaster"
+        }
+      ]
     },
     {
       "key": "white.gesso",
@@ -991,6 +1281,11 @@
           "working": "gilt.gold-leaf.water",
           "history": "aged.patina",
           "note": "Stages: salon.frame.gilt"
+        },
+        {
+          "working": "gilt.gold-leaf.water",
+          "history": "new",
+          "note": "Stages: atrium.frame.gilt"
         }
       ]
     },
@@ -1030,6 +1325,16 @@
           "working": "pearl.satin",
           "history": "new",
           "note": "Stages: rotunda.eye.lattice"
+        },
+        {
+          "working": "gilt.gold-leaf.oil",
+          "history": "new",
+          "note": "Stages: atrium.up.iris.under"
+        },
+        {
+          "working": "pearl.fluoropolymer",
+          "history": "weathered",
+          "note": "Stages: atrium.order"
         }
       ]
     },
@@ -1146,6 +1451,31 @@
           "working": "cast.bronze",
           "history": "weathered",
           "note": "Stages: salon.lantern.outer.bars, salon.pergola"
+        },
+        {
+          "working": "brushed",
+          "history": "new",
+          "note": "Stages: hall-of-light.autochrome.bar, hall-of-light.east.blind-doors, hall-of-light.print.stem, hall-of-light.west.blind-doors"
+        },
+        {
+          "working": "gilt.gold-leaf.oil",
+          "history": "new",
+          "note": "Stages: atrium.car.bronze, atrium.car.mast, atrium.collar.gilt, atrium.landing.bronze, atrium.letters, atrium.rib.line"
+        },
+        {
+          "working": "mirror-polished",
+          "history": "foot-worn",
+          "note": "Stages: atrium.landing.sill, atrium.waiting-ring"
+        },
+        {
+          "working": "mirror-polished.lacquered",
+          "history": "new",
+          "note": "Stages: atrium.rib.shoe, atrium.stele.foot, atrium.west.blind-doors"
+        },
+        {
+          "working": "patinated.dark",
+          "history": "new",
+          "note": "Stages: atrium.lining"
         }
       ]
     },
@@ -1224,9 +1554,24 @@
       "verdict": "replaced",
       "verdictReason": "The grey tied to nothing; the oxide colour is the historical precedent (open question).",
       "research": {
-        "records": [],
+        "records": [
+          "Shading/Substances/iron.json"
+        ],
         "needed": "Substance records for cast and wrought iron; the oxide paint working."
-      }
+      },
+      "substance": "iron",
+      "finishes": [
+        {
+          "working": "painted.iron",
+          "history": "aged.patina",
+          "note": "Stages: albion.iron.cast, albion.iron.wrought"
+        },
+        {
+          "working": "painted.iron",
+          "history": "weathered",
+          "note": "Stages: albion.iron.ext"
+        }
+      ]
     },
     {
       "key": "steel.hard-chrome",
@@ -1253,6 +1598,11 @@
           "working": "hard-chromed",
           "history": "new",
           "note": "Stages: rotunda.sun-clock.ram"
+        },
+        {
+          "working": "ground.hard-chromed",
+          "history": "new",
+          "note": "Stages: atrium.rail"
         }
       ]
     },
@@ -1287,6 +1637,16 @@
           "working": "milled.lead",
           "history": "weathered",
           "note": "Stages: nympheas.exterior.roof, rotunda.dome.outer"
+        },
+        {
+          "working": "patinated",
+          "history": "aged.patina",
+          "note": "Stages: albion.came"
+        },
+        {
+          "working": "patinated",
+          "history": "weathered",
+          "note": "Stages: albion.lead"
         }
       ]
     },
@@ -1333,6 +1693,31 @@
           "working": "fumed.waxed",
           "history": "handled",
           "note": "Stages: salon.bench.plinth, salon.case.carcase"
+        },
+        {
+          "working": "fumed.french-polished",
+          "history": "aged.patina",
+          "note": "Stages: albion.frame.oak, albion.porch.ceiling"
+        },
+        {
+          "working": "fumed.french-polished",
+          "history": "handled",
+          "note": "Stages: albion.bench, albion.case, albion.lectern"
+        },
+        {
+          "working": "fumed.french-polished",
+          "history": "new",
+          "note": "Stages: albion.tapestry.batten"
+        },
+        {
+          "working": "fumed.wire-brushed.oiled",
+          "history": "new",
+          "note": "Stages: hall-of-light.frame.oak"
+        },
+        {
+          "working": "gilt.gold-leaf.oil",
+          "history": "aged.patina",
+          "note": "Stages: albion.frame.gilt, albion.frame.gilt.glazed"
         }
       ]
     },
@@ -1354,9 +1739,39 @@
       "verdict": "replaced",
       "verdictReason": "The species is the board's; the finish follows rank.",
       "research": {
-        "records": [],
+        "records": [
+          "Shading/Substances/korean-pine.json"
+        ],
         "needed": "Timber record; 地仗 and 铁红 workings; 彩画 as an ornament working."
-      }
+      },
+      "substance": "korean-pine",
+      "finishes": [
+        {
+          "working": "black-lacquer",
+          "history": "handled",
+          "note": "Stages: chenghuai.timber.black"
+        },
+        {
+          "working": "dizhang.tiehong",
+          "history": "weathered",
+          "note": "Stages: chenghuai.timber.red"
+        },
+        {
+          "working": "gilt.gold-leaf.oil",
+          "history": "weathered",
+          "note": "Stages: chenghuai.gilt.bud"
+        },
+        {
+          "working": "green-lacquer",
+          "history": "weathered",
+          "note": "Stages: chenghuai.timber.green"
+        },
+        {
+          "working": "suzhou-painted",
+          "history": "aged.patina",
+          "note": "Stages: chenghuai.timber.painted"
+        }
+      ]
     },
     {
       "key": "accent.chinese-fir-guangqi",
@@ -1376,9 +1791,24 @@
       "verdict": "replaced",
       "verdictReason": "Real species under the real lacquer.",
       "research": {
-        "records": [],
+        "records": [
+          "Shading/Substances/chinese-fir.json"
+        ],
         "needed": "Timber record; 广漆 working."
-      }
+      },
+      "substance": "chinese-fir",
+      "finishes": [
+        {
+          "working": "guangqi.chestnut",
+          "history": "weathered",
+          "note": "Stages: chenghuai.timber.garden"
+        },
+        {
+          "working": "iron-red.tung-oil",
+          "history": "aged.patina",
+          "note": "Stages: chenghuai.timber.rafter"
+        }
+      ]
     },
     {
       "key": "accent.phoebe",
@@ -1398,9 +1828,24 @@
       "verdict": "new",
       "verdictReason": "Chenghuai's board.",
       "research": {
-        "records": [],
+        "records": [
+          "Shading/Substances/phoebe.json"
+        ],
         "needed": "Timber record."
-      }
+      },
+      "substance": "phoebe",
+      "finishes": [
+        {
+          "working": "carved.waxed",
+          "history": "handled",
+          "note": "Stages: chenghuai.case.phoebe, chenghuai.screen.phoebe"
+        },
+        {
+          "working": "waxed",
+          "history": "handled",
+          "note": "Stages: chenghuai.furniture"
+        }
+      ]
     },
     {
       "key": "accent.silk",
@@ -1420,9 +1865,29 @@
       "verdict": "refined",
       "verdictReason": "Real silk in the approved deeper colours.",
       "research": {
-        "records": [],
+        "records": [
+          "Shading/Substances/silk.warm-grey.json"
+        ],
         "needed": "Textile record: weave, sheen, dye fading history."
-      }
+      },
+      "substance": "silk.warm-grey",
+      "finishes": [
+        {
+          "working": "damask.mount",
+          "history": "aged.patina",
+          "note": "Stages: chenghuai.mount.silk"
+        },
+        {
+          "working": "gauze.stretched",
+          "history": "weathered",
+          "note": "Stages: chenghuai.lantern.silk"
+        },
+        {
+          "working": "stretched",
+          "history": "new",
+          "note": "Stages: chenghuai.case.silk"
+        }
+      ]
     },
     {
       "key": "accent.silk.oxblood",
@@ -1822,6 +2287,11 @@
           "working": "laid",
           "history": "new",
           "note": "Stages: salon.case.felt"
+        },
+        {
+          "working": "laid",
+          "history": "aged.patina",
+          "note": "Stages: albion.case.baize"
         }
       ]
     },
@@ -1903,6 +2373,51 @@
           "working": "acid-etched.laminated",
           "history": "new",
           "note": "Stages: classical-hall.laylight.glass (laminated overhead, the etched face down)"
+        },
+        {
+          "working": "anti-reflective.laminated",
+          "history": "new",
+          "note": "Stages: albion.frame.glazing, chenghuai.case.glass, hall-of-light.frame.glazing"
+        },
+        {
+          "working": "heat-strengthened.laminated.uv-filtering",
+          "history": "weathered",
+          "note": "Stages: atrium.drum.outer, hall-of-light.vault.glass"
+        },
+        {
+          "working": "laminated.acid-etched",
+          "history": "foot-worn",
+          "note": "Stages: atrium.car.floor"
+        },
+        {
+          "working": "laminated.acid-etched",
+          "history": "new",
+          "note": "Stages: atrium.canopy.glass"
+        },
+        {
+          "working": "laminated.mulberry-paper.uv-filtering",
+          "history": "new",
+          "note": "Stages: chenghuai.lattice.paper"
+        },
+        {
+          "working": "laminated.uv-filtering.acid-etched.fritted",
+          "history": "new",
+          "note": "Stages: atrium.drum.inner"
+        },
+        {
+          "working": "toughened",
+          "history": "handled",
+          "note": "Stages: atrium.car.handrail"
+        },
+        {
+          "working": "toughened.laminated",
+          "history": "new",
+          "note": "Stages: atrium.car.glass, atrium.landing.glass, atrium.stele.glass"
+        },
+        {
+          "working": "toughened.laminated.uv-filtering",
+          "history": "weathered",
+          "note": "Stages: hall-of-light.lunette.glass, hall-of-light.wall.glass"
         }
       ]
     },
@@ -1924,9 +2439,24 @@
       "verdict": "new",
       "verdictReason": "Albion's own glass.",
       "research": {
-        "records": [],
+        "records": [
+          "Shading/Substances/clear-float.json"
+        ],
         "needed": "Substance record (iron content, edge colour)."
-      }
+      },
+      "substance": "clear-float",
+      "finishes": [
+        {
+          "working": "laminated.uv-filtering",
+          "history": "weathered",
+          "note": "Stages: albion.guard-glazing, albion.screen.glass, albion.vault.glass.nave"
+        },
+        {
+          "working": "laminated.uv-filtering.diffusing",
+          "history": "weathered",
+          "note": "Stages: albion.screen.glass.gable, albion.vault.glass.aisle"
+        }
+      ]
     },
     {
       "key": "glass.mouth-blown",
@@ -1961,6 +2491,11 @@
           "working": "flashed-opal",
           "history": "new",
           "note": "Stages: salon.lantern.pane.opal"
+        },
+        {
+          "working": "cased-opal",
+          "history": "new",
+          "note": "Stages: albion.electrolier.globe"
         }
       ]
     },
@@ -1998,6 +2533,11 @@
           "working": "still.dyed-black",
           "history": "new",
           "note": "Stages: nympheas.pond.water"
+        },
+        {
+          "working": "still.clear",
+          "history": "weathered",
+          "note": "Stages: chenghuai planting"
         }
       ]
     },
@@ -2200,167 +2740,539 @@
       ]
     },
     {
-      "key": "living.nymphaea",
-      "family": "living",
-      "accentOf": null,
-      "substance": "tissue.leaf-floating",
-      "realMaterial": "A water lily (Nymphaea), by its pads, the most of it that shows",
-      "workingsByEra": {},
+      "key": "accent.huanghuali",
+      "family": "accent",
+      "accentOf": "oak",
+      "substance": "huanghuali",
+      "realMaterial": "Huanghuali (黄花梨, Dalbergia odorifera), the rosewood of Ming furniture: golden to reddish-brown heartwood, oiled and waxed",
+      "workingsByEra": {
+        "classical": "oiled and waxed (Chenghuai)",
+        "modern": "absent",
+        "future": "absent"
+      },
       "roles": [
-        "Nature: the plantings' living tissue"
+        "Chenghuai: 林泉's Ming painting table and its pair of rose chairs"
       ],
-      "why": "Living tissue: the species' colour travels on its vertices (Nature); the tissue's record gives its cuticle and what it passes.",
+      "why": "The collection's own furniture is huanghuali; the timber is the work. It ties to the oak by touch and by hue, a warmer, denser brown.",
       "oldChoice": "",
       "verdict": "new",
-      "verdictReason": "Plants are living matter, shaded by the living master.",
+      "verdictReason": "Named by a stage sheet of the second kit round (Docs/Matter/Story.md tells why).",
       "research": {
         "records": [
-          "r-matter: Shading/Substances/tissue.leaf-floating.json"
+          "Shading/Substances/huanghuali.json"
         ],
-        "needed": "Measured reflectance and transmittance of the species' tissue."
+        "needed": "A substance record with a measured density and colour; the species is CITES Appendix II, so old stock only."
       },
       "finishes": [
         {
-          "working": "grown",
-          "history": "tended",
-          "note": "Stages: nympheas.pond.lilies, nympheas.pond.lilies"
-        },
-        {
-          "working": "grown",
-          "history": "weathered",
-          "note": "Nature: organs and species in a tended or an outdoor bed"
+          "working": "oiled.waxed",
+          "history": "handled",
+          "note": "Stages: chenghuai.furniture.huanghuali"
         }
       ]
     },
     {
-      "key": "living.iris-laevigata",
-      "family": "living",
-      "accentOf": null,
-      "substance": "tissue.leaf",
-      "realMaterial": "Iris laevigata, by its sword leaves",
-      "workingsByEra": {},
+      "key": "accent.lingbi-rock",
+      "family": "accent",
+      "accentOf": "stone",
+      "substance": "lingbi-rock",
+      "realMaterial": "Lingbi stone (灵璧石), a dense black limestone from Lingbi County, Anhui, that rings when struck; a scholar's rock as found",
+      "workingsByEra": {
+        "classical": "as found, handled (Chenghuai)",
+        "modern": "absent",
+        "future": "absent"
+      },
       "roles": [
-        "Nature: the plantings' living tissue"
+        "Chenghuai: the scholar's rock on the painting table"
       ],
-      "why": "Living tissue: the species' colour travels on its vertices (Nature); the tissue's record gives its cuticle and what it passes.",
+      "why": "A scholar's rock is chosen, not cut: stone that time shaped. It is calcite again, the travertine's family, black where the travertine is honey.",
       "oldChoice": "",
       "verdict": "new",
-      "verdictReason": "Plants are living matter, shaded by the living master.",
+      "verdictReason": "Named by a stage sheet of the second kit round (Docs/Matter/Story.md tells why).",
       "research": {
         "records": [
-          "r-matter: Shading/Substances/tissue.leaf.json"
+          "Shading/Substances/lingbi-rock.json"
         ],
-        "needed": "Measured reflectance and transmittance of the species' tissue."
+        "needed": "A measured colour and the rock's composition."
       },
       "finishes": [
         {
-          "working": "grown",
-          "history": "tended",
-          "note": "Stages: nympheas.pond.shelf.east, nympheas.pond.shelf.west"
-        },
-        {
-          "working": "grown",
-          "history": "weathered",
-          "note": "Nature: organs and species in a tended or an outdoor bed"
+          "working": "as-found",
+          "history": "handled",
+          "note": "Stages: chenghuai.lingbi-rock"
         }
       ]
     },
     {
-      "key": "living.carex-elata",
-      "family": "living",
-      "accentOf": null,
-      "substance": "tissue.leaf",
-      "realMaterial": "Carex elata, by its leaves",
-      "workingsByEra": {},
+      "key": "accent.rag-board",
+      "family": "accent",
+      "accentOf": "white",
+      "substance": "rag-board",
+      "realMaterial": "Acid-free 100 % cotton museum board, 4-ply, buffered (as Rising Museum Board): faced on a rigid aluminium-composite core for mounts, bevel-cut as window mats",
+      "workingsByEra": {
+        "classical": "absent",
+        "modern": "faced and bevel-cut (the Hall of Light)",
+        "future": "absent"
+      },
       "roles": [
-        "Nature: the plantings' living tissue"
+        "Hall of Light: the prints' mounts and the autochromes' window mats"
       ],
-      "why": "Living tissue: the species' colour travels on its vertices (Nature); the tissue's record gives its cuticle and what it passes.",
+      "why": "Works on paper rest on board that cannot harm them: cotton, free of lignin and acid, buffered against the acids the room brings. It is the white family's paper.",
       "oldChoice": "",
       "verdict": "new",
-      "verdictReason": "Plants are living matter, shaded by the living master.",
+      "verdictReason": "Named by a stage sheet of the second kit round (Docs/Matter/Story.md tells why).",
       "research": {
         "records": [
-          "r-matter: Shading/Substances/tissue.leaf.json"
+          "Shading/Substances/rag-board.json"
         ],
-        "needed": "Measured reflectance and transmittance of the species' tissue."
+        "needed": "The board maker's data sheet: reflectance, pH, reserve."
       },
       "finishes": [
         {
-          "working": "grown",
-          "history": "tended",
-          "note": "Stages: nympheas.pond.shelf.east, nympheas.pond.shelf.west"
+          "working": "cut.bevelled",
+          "history": "new",
+          "note": "Stages: hall-of-light.autochrome.mat"
         },
         {
-          "working": "grown",
-          "history": "weathered",
-          "note": "Nature: organs and species in a tended or an outdoor bed"
+          "working": "faced",
+          "history": "new",
+          "note": "Stages: hall-of-light.mount"
         }
       ]
     },
     {
-      "key": "living.myosotis-scorpioides",
-      "family": "living",
-      "accentOf": null,
-      "substance": "tissue.leaf",
-      "realMaterial": "Myosotis scorpioides, by its leaves",
-      "workingsByEra": {},
+      "key": "accent.stoneware-glazed",
+      "family": "accent",
+      "accentOf": "stone",
+      "substance": "stoneware",
+      "realMaterial": "Chinese glazed stoneware for the court and the desk: a green-glazed fish bowl, dark-glazed tubs, a celadon brush pot and water dropper; and the fired-clay (澄泥) inkstone, unglazed and polished",
+      "workingsByEra": {
+        "classical": "glazed; the inkstone unglazed and polished (Chenghuai)",
+        "modern": "absent",
+        "future": "absent"
+      },
       "roles": [
-        "Nature: the plantings' living tissue"
+        "Chenghuai: the court's fish bowl and the pomegranates' tubs",
+        "Chenghuai: the desk things and the inkstones"
       ],
-      "why": "Living tissue: the species' colour travels on its vertices (Nature); the tissue's record gives its cuticle and what it passes.",
+      "why": "Fired clay again, the stone that is made, now under glass: the glaze is a glass fused to the body. The fish bowl and tubs are the court's furniture in every Beijing courtyard.",
       "oldChoice": "",
       "verdict": "new",
-      "verdictReason": "Plants are living matter, shaded by the living master.",
+      "verdictReason": "Named by a stage sheet of the second kit round (Docs/Matter/Story.md tells why).",
       "research": {
         "records": [
-          "r-matter: Shading/Substances/tissue.leaf.json"
+          "Shading/Substances/stoneware.json",
+          "Shading/Substances/glaze.celadon.json",
+          "Shading/Substances/glaze.dark.json",
+          "Shading/Substances/glaze.green.json"
         ],
-        "needed": "Measured reflectance and transmittance of the species' tissue."
+        "needed": "Measured colours of the glazes; the body's composition."
       },
       "finishes": [
         {
-          "working": "grown",
-          "history": "tended",
-          "note": "Stages: nympheas.pond.shelf.east, nympheas.pond.shelf.west"
+          "working": "glazed",
+          "history": "handled",
+          "note": "Stages: chenghuai.desk.stoneware"
         },
         {
-          "working": "grown",
+          "working": "glazed.dark",
           "history": "weathered",
-          "note": "Nature: organs and species in a tended or an outdoor bed"
+          "note": "Stages: chenghuai.tub"
+        },
+        {
+          "working": "glazed.green-over-brown",
+          "history": "weathered",
+          "note": "Stages: chenghuai.fish-bowl"
+        },
+        {
+          "working": "unglazed.polished",
+          "history": "handled",
+          "note": "Stages: chenghuai.desk.inkstone"
         }
       ]
     },
     {
-      "key": "living.vitis-vinifera",
-      "family": "living",
-      "accentOf": null,
-      "substance": "tissue.leaf",
-      "realMaterial": "Vitis vinifera, by its leaves",
-      "workingsByEra": {},
+      "key": "accent.silk.pale-grey",
+      "family": "accent",
+      "accentOf": "oak",
+      "substance": "silk.pale-grey",
+      "realMaterial": "Plain-woven silk, pale grey, stretched on battens over an interlining",
+      "workingsByEra": {
+        "classical": "stretched (Chenghuai)",
+        "modern": "absent",
+        "future": "absent"
+      },
       "roles": [
-        "Nature: the plantings' living tissue"
+        "Chenghuai: the ceramics cases' decks and backs"
       ],
-      "why": "Living tissue: the species' colour travels on its vertices (Nature); the tissue's record gives its cuticle and what it passes.",
+      "why": "The ceramics sit on a paler silk than the scrolls, so glaze reads against it.",
       "oldChoice": "",
       "verdict": "new",
-      "verdictReason": "Plants are living matter, shaded by the living master.",
+      "verdictReason": "Named by a stage sheet of the second kit round (Docs/Matter/Story.md tells why).",
       "research": {
         "records": [
-          "r-matter: Shading/Substances/tissue.leaf.json"
+          "Shading/Substances/silk.pale-grey.json"
         ],
-        "needed": "Measured reflectance and transmittance of the species' tissue."
+        "needed": "The dye's measured colour."
       },
       "finishes": [
         {
-          "working": "grown",
-          "history": "weathered",
-          "note": "Stages: salon.pergola.planter.nw, salon.pergola.planter.ne, salon.pergola.planter.sw, salon.pergola.planter.se"
-        },
+          "working": "stretched",
+          "history": "new",
+          "note": "Stages: chenghuai.case.silk.ceramics"
+        }
+      ]
+    },
+    {
+      "key": "glass.mouth-blown.antique",
+      "family": "glass",
+      "accentOf": null,
+      "substance": "antique-glass",
+      "realMaterial": "Mouth-blown antique glass from Glashütte Lamberts: pot-metal and flashed, painted and fired, leaded in cames",
+      "workingsByEra": {
+        "classical": "leaded (Albion)",
+        "modern": "absent",
+        "future": "absent"
+      },
+      "roles": [
+        "Albion: the Tristram and Isolde band and the twelve lancets"
+      ],
+      "why": "A Victorian window was blown, not floated: its seeds, reams and waves are the period. The coloured pieces are the works' own (Art); this is the clear glass they are cut from and leaded with.",
+      "oldChoice": "",
+      "verdict": "new",
+      "verdictReason": "Named by a stage sheet of the second kit round (Docs/Matter/Story.md tells why).",
+      "research": {
+        "records": [
+          "r-matter: Substances/antique-glass.json",
+          "Shading/Substances/antique-glass.json"
+        ],
+        "needed": "A measured spectrum of Lamberts clear antique glass."
+      },
+      "finishes": [
         {
-          "working": "grown",
-          "history": "tended",
-          "note": "Nature: organs and species in a tended or an outdoor bed"
+          "working": "leaded",
+          "history": "aged.patina",
+          "note": "Stages: albion.band.glass, albion.lancet.glass"
+        }
+      ]
+    },
+    {
+      "key": "accent.british-column-stones.a",
+      "family": "accent",
+      "accentOf": "stone",
+      "substance": "lizard-serpentine",
+      "realMaterial": "Lizard serpentine, Cornwall, polished: one monolith shaft (selection A)",
+      "workingsByEra": {
+        "classical": "polished (Albion)",
+        "modern": "absent",
+        "future": "absent"
+      },
+      "roles": [
+        "Albion: column shaft A"
+      ],
+      "why": "As at the Oxford University Museum, each column shows a different British rock; this is the rock of one shaft.",
+      "oldChoice": "",
+      "verdict": "new",
+      "verdictReason": "Named by a stage sheet of the second kit round (Docs/Matter/Story.md tells why).",
+      "research": {
+        "records": [
+          "Shading/Substances/lizard-serpentine.json"
+        ],
+        "needed": "A measured colour of the quarry's stone and its largest block (Form.WithinStock)."
+      },
+      "finishes": [
+        {
+          "working": "polished.hand-touched",
+          "history": "handled",
+          "note": "Stages: albion.shaft.a"
+        }
+      ]
+    },
+    {
+      "key": "accent.british-column-stones.b",
+      "family": "accent",
+      "accentOf": "stone",
+      "substance": "peterhead-granite",
+      "realMaterial": "Peterhead granite, Aberdeenshire, polished: one monolith shaft (selection B)",
+      "workingsByEra": {
+        "classical": "polished (Albion)",
+        "modern": "absent",
+        "future": "absent"
+      },
+      "roles": [
+        "Albion: column shaft B"
+      ],
+      "why": "As at the Oxford University Museum, each column shows a different British rock; this is the rock of one shaft.",
+      "oldChoice": "",
+      "verdict": "new",
+      "verdictReason": "Named by a stage sheet of the second kit round (Docs/Matter/Story.md tells why).",
+      "research": {
+        "records": [
+          "Shading/Substances/peterhead-granite.json"
+        ],
+        "needed": "A measured colour of the quarry's stone and its largest block (Form.WithinStock)."
+      },
+      "finishes": [
+        {
+          "working": "polished.hand-touched",
+          "history": "handled",
+          "note": "Stages: albion.shaft.b"
+        }
+      ]
+    },
+    {
+      "key": "accent.british-column-stones.c",
+      "family": "accent",
+      "accentOf": "stone",
+      "substance": "rubislaw-granite",
+      "realMaterial": "Rubislaw granite, Aberdeen, polished: one monolith shaft (selection C)",
+      "workingsByEra": {
+        "classical": "polished (Albion)",
+        "modern": "absent",
+        "future": "absent"
+      },
+      "roles": [
+        "Albion: column shaft C"
+      ],
+      "why": "As at the Oxford University Museum, each column shows a different British rock; this is the rock of one shaft.",
+      "oldChoice": "",
+      "verdict": "new",
+      "verdictReason": "Named by a stage sheet of the second kit round (Docs/Matter/Story.md tells why).",
+      "research": {
+        "records": [
+          "Shading/Substances/rubislaw-granite.json"
+        ],
+        "needed": "A measured colour of the quarry's stone and its largest block (Form.WithinStock)."
+      },
+      "finishes": [
+        {
+          "working": "polished.hand-touched",
+          "history": "handled",
+          "note": "Stages: albion.shaft.c"
+        }
+      ]
+    },
+    {
+      "key": "accent.british-column-stones.d",
+      "family": "accent",
+      "accentOf": "stone",
+      "substance": "purbeck-marble",
+      "realMaterial": "Purbeck marble, Dorset, polished: one monolith shaft (selection D)",
+      "workingsByEra": {
+        "classical": "polished (Albion)",
+        "modern": "absent",
+        "future": "absent"
+      },
+      "roles": [
+        "Albion: column shaft D"
+      ],
+      "why": "As at the Oxford University Museum, each column shows a different British rock; this is the rock of one shaft.",
+      "oldChoice": "",
+      "verdict": "new",
+      "verdictReason": "Named by a stage sheet of the second kit round (Docs/Matter/Story.md tells why).",
+      "research": {
+        "records": [
+          "Shading/Substances/purbeck-marble.json"
+        ],
+        "needed": "A measured colour of the quarry's stone and its largest block (Form.WithinStock)."
+      },
+      "finishes": [
+        {
+          "working": "polished.hand-touched",
+          "history": "handled",
+          "note": "Stages: albion.shaft.d"
+        }
+      ]
+    },
+    {
+      "key": "accent.british-column-stones.e",
+      "family": "accent",
+      "accentOf": "stone",
+      "substance": "frosterley-marble",
+      "realMaterial": "Frosterley marble, Co. Durham, polished: one monolith shaft (selection E)",
+      "workingsByEra": {
+        "classical": "polished (Albion)",
+        "modern": "absent",
+        "future": "absent"
+      },
+      "roles": [
+        "Albion: column shaft E"
+      ],
+      "why": "As at the Oxford University Museum, each column shows a different British rock; this is the rock of one shaft.",
+      "oldChoice": "",
+      "verdict": "new",
+      "verdictReason": "Named by a stage sheet of the second kit round (Docs/Matter/Story.md tells why).",
+      "research": {
+        "records": [
+          "Shading/Substances/frosterley-marble.json"
+        ],
+        "needed": "A measured colour of the quarry's stone and its largest block (Form.WithinStock)."
+      },
+      "finishes": [
+        {
+          "working": "polished.hand-touched",
+          "history": "handled",
+          "note": "Stages: albion.shaft.e"
+        }
+      ]
+    },
+    {
+      "key": "accent.british-column-stones.f",
+      "family": "accent",
+      "accentOf": "stone",
+      "substance": "hopton-wood",
+      "realMaterial": "Hopton Wood stone, Derbyshire, polished: one monolith shaft (selection F)",
+      "workingsByEra": {
+        "classical": "polished (Albion)",
+        "modern": "absent",
+        "future": "absent"
+      },
+      "roles": [
+        "Albion: column shaft F"
+      ],
+      "why": "As at the Oxford University Museum, each column shows a different British rock; this is the rock of one shaft.",
+      "oldChoice": "",
+      "verdict": "new",
+      "verdictReason": "Named by a stage sheet of the second kit round (Docs/Matter/Story.md tells why).",
+      "research": {
+        "records": [
+          "Shading/Substances/hopton-wood.json"
+        ],
+        "needed": "A measured colour of the quarry's stone and its largest block (Form.WithinStock)."
+      },
+      "finishes": [
+        {
+          "working": "polished.hand-touched",
+          "history": "handled",
+          "note": "Stages: albion.shaft.f"
+        }
+      ]
+    },
+    {
+      "key": "accent.british-column-stones.g",
+      "family": "accent",
+      "accentOf": "stone",
+      "substance": "ashburton-marble",
+      "realMaterial": "Ashburton marble, Devon, polished: one monolith shaft (selection G)",
+      "workingsByEra": {
+        "classical": "polished (Albion)",
+        "modern": "absent",
+        "future": "absent"
+      },
+      "roles": [
+        "Albion: column shaft G"
+      ],
+      "why": "As at the Oxford University Museum, each column shows a different British rock; this is the rock of one shaft.",
+      "oldChoice": "",
+      "verdict": "new",
+      "verdictReason": "Named by a stage sheet of the second kit round (Docs/Matter/Story.md tells why).",
+      "research": {
+        "records": [
+          "Shading/Substances/ashburton-marble.json"
+        ],
+        "needed": "A measured colour of the quarry's stone and its largest block (Form.WithinStock)."
+      },
+      "finishes": [
+        {
+          "working": "polished.hand-touched",
+          "history": "handled",
+          "note": "Stages: albion.shaft.g"
+        }
+      ]
+    },
+    {
+      "key": "accent.british-column-stones.h",
+      "family": "accent",
+      "accentOf": "stone",
+      "substance": "iona-marble",
+      "realMaterial": "Iona marble, Inner Hebrides, polished: one monolith shaft (selection H)",
+      "workingsByEra": {
+        "classical": "polished (Albion)",
+        "modern": "absent",
+        "future": "absent"
+      },
+      "roles": [
+        "Albion: column shaft H"
+      ],
+      "why": "As at the Oxford University Museum, each column shows a different British rock; this is the rock of one shaft.",
+      "oldChoice": "",
+      "verdict": "new",
+      "verdictReason": "Named by a stage sheet of the second kit round (Docs/Matter/Story.md tells why).",
+      "research": {
+        "records": [
+          "Shading/Substances/iona-marble.json"
+        ],
+        "needed": "A measured colour of the quarry's stone and its largest block (Form.WithinStock)."
+      },
+      "finishes": [
+        {
+          "working": "polished.hand-touched",
+          "history": "handled",
+          "note": "Stages: albion.shaft.h"
+        }
+      ]
+    },
+    {
+      "key": "accent.british-column-stones.i",
+      "family": "accent",
+      "accentOf": "stone",
+      "substance": "tiree-marble",
+      "realMaterial": "Tiree marble, Inner Hebrides, polished: one monolith shaft (selection I)",
+      "workingsByEra": {
+        "classical": "polished (Albion)",
+        "modern": "absent",
+        "future": "absent"
+      },
+      "roles": [
+        "Albion: column shaft I"
+      ],
+      "why": "As at the Oxford University Museum, each column shows a different British rock; this is the rock of one shaft.",
+      "oldChoice": "",
+      "verdict": "new",
+      "verdictReason": "Named by a stage sheet of the second kit round (Docs/Matter/Story.md tells why).",
+      "research": {
+        "records": [
+          "Shading/Substances/tiree-marble.json"
+        ],
+        "needed": "A measured colour of the quarry's stone and its largest block (Form.WithinStock)."
+      },
+      "finishes": [
+        {
+          "working": "polished.hand-touched",
+          "history": "handled",
+          "note": "Stages: albion.shaft.i"
+        }
+      ]
+    },
+    {
+      "key": "accent.british-column-stones.j",
+      "family": "accent",
+      "accentOf": "stone",
+      "substance": "mona-marble",
+      "realMaterial": "Mona marble, Anglesey, polished: one monolith shaft (selection J)",
+      "workingsByEra": {
+        "classical": "polished (Albion)",
+        "modern": "absent",
+        "future": "absent"
+      },
+      "roles": [
+        "Albion: column shaft J"
+      ],
+      "why": "As at the Oxford University Museum, each column shows a different British rock; this is the rock of one shaft.",
+      "oldChoice": "",
+      "verdict": "new",
+      "verdictReason": "Named by a stage sheet of the second kit round (Docs/Matter/Story.md tells why).",
+      "research": {
+        "records": [
+          "Shading/Substances/mona-marble.json"
+        ],
+        "needed": "A measured colour of the quarry's stone and its largest block (Form.WithinStock)."
+      },
+      "finishes": [
+        {
+          "working": "polished.hand-touched",
+          "history": "handled",
+          "note": "Stages: albion.shaft.j"
         }
       ]
     }

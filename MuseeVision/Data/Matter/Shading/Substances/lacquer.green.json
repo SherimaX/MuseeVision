@@ -1,0 +1,88 @@
+{
+  "schema": "musee.matter.shading.substance/1",
+  "key": "lacquer.green",
+  "name": "Green lacquer (tung oil and lacquer with green pigment)",
+  "family": "accent",
+  "record": "Palette.json",
+  "master": "white",
+  "accentOf": "oak",
+  "dielectric": {
+    "diffuseAlbedo": {
+      "value": [
+        30.0,
+        -18.0,
+        6.0
+      ],
+      "space": "CIELAB (D65, 2 deg)",
+      "unit": "CIELAB",
+      "grade": "unverified",
+      "source": "Palette.json: accent.qing-pine-lacquered",
+      "note": "A first colour for Green lacquer (tung oil and lacquer with green pigment): no measured colour was read: a first value read from trade and museum photographs of the named material."
+    },
+    "refractiveIndex": {
+      "value": 1.52,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Tung oil dries to a film of index about 1.52 (a polymerised drying oil, as linseed's 1.48 to 1.52)",
+      "note": "The binder the pigment is bound in; the pigment sets the colour."
+    },
+    "porosity": {
+      "value": 0.0,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.qing-pine-lacquered",
+      "note": "A cured lacquer film is closed."
+    },
+    "wettingDepth": {
+      "value": 0.0,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: accent.qing-pine-lacquered",
+      "note": "The depth whose pores govern the face's look when wet."
+    }
+  },
+  "structure": {
+    "grain": {
+      "value": 0.02,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: accent.qing-pine-lacquered",
+      "note": "The finest structure the face shows."
+    },
+    "bed": {
+      "value": 100,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: accent.qing-pine-lacquered",
+      "note": "The coarsest structure the face shows."
+    },
+    "bedAspect": {
+      "value": 1.0,
+      "unit": "1",
+      "grade": "derived",
+      "source": "An unbedded body",
+      "derivation": "unbedded"
+    },
+    "hurst": {
+      "value": 0.7,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Candela et al. 2012, Journal of Geophysical Research 117, B08409 (fault surfaces, 0.6 to 0.8; cited in Stone.ush)",
+      "note": "The middle of the range measured on rock surfaces, as the travertine's."
+    },
+    "toneSpread": {
+      "value": 0.03,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.qing-pine-lacquered",
+      "note": "A first half-range of ln(albedo) across one face."
+    },
+    "roughnessSpread": {
+      "value": 0.15,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.qing-pine-lacquered",
+      "note": "A first half-range of ln(roughness) across one face."
+    }
+  }
+}

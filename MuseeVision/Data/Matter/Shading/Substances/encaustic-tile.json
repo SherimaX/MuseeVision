@@ -1,0 +1,88 @@
+{
+  "schema": "musee.matter.shading.substance/1",
+  "key": "encaustic-tile",
+  "name": "Encaustic tile (inlaid red, buff and black clays, after Minton and Pugin)",
+  "family": "accent",
+  "record": "Palette.json",
+  "master": "white",
+  "accentOf": "stone",
+  "dielectric": {
+    "diffuseAlbedo": {
+      "value": [
+        45.0,
+        22.0,
+        20.0
+      ],
+      "space": "CIELAB (D65, 2 deg)",
+      "unit": "CIELAB",
+      "grade": "unverified",
+      "source": "Palette.json: accent.encaustic-tile",
+      "note": "The red body clay that most of the floor shows; the buff and black inlays are the laying's pattern, not this record's. no measured colour was read: a first value read from trade and museum photographs of the named material."
+    },
+    "refractiveIndex": {
+      "value": 1.55,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Substances/brick.json (Shading): fired clay is quartz, feldspar and glass, indices 1.5 to 1.6",
+      "note": "The middle of the fired body's mineral indices, as the brick's."
+    },
+    "porosity": {
+      "value": 0.03,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.encaustic-tile",
+      "note": "Dust-pressed encaustic tiles are dense; a few per cent water absorption. No measurement was read."
+    },
+    "wettingDepth": {
+      "value": 1.0,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: accent.encaustic-tile",
+      "note": "The depth whose pores govern the face's look when wet."
+    }
+  },
+  "structure": {
+    "grain": {
+      "value": 0.1,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: accent.encaustic-tile",
+      "note": "The finest structure the face shows."
+    },
+    "bed": {
+      "value": 152.4,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: accent.encaustic-tile",
+      "note": "One 6-inch tile."
+    },
+    "bedAspect": {
+      "value": 1.0,
+      "unit": "1",
+      "grade": "derived",
+      "source": "An unbedded body",
+      "derivation": "unbedded"
+    },
+    "hurst": {
+      "value": 0.7,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Candela et al. 2012, Journal of Geophysical Research 117, B08409 (fault surfaces, 0.6 to 0.8; cited in Stone.ush)",
+      "note": "The middle of the range measured on rock surfaces, as the travertine's."
+    },
+    "toneSpread": {
+      "value": 0.25,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.encaustic-tile",
+      "note": "A first half-range of ln(albedo) across one face."
+    },
+    "roughnessSpread": {
+      "value": 0.15,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.encaustic-tile",
+      "note": "A first half-range of ln(roughness) across one face."
+    }
+  }
+}

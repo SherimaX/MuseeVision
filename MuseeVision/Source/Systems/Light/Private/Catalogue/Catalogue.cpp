@@ -14,14 +14,19 @@ namespace Musee::Light
 		constexpr double MillimetersPerMeter = 1000.0;
 
 		/**
-		 * How each kind's light leaves it. A wallwasher's asymmetric lens, a framer's shutters and a picture light's hood
-		 * shape light in ways only their photometric files describe, so those kinds have no emitter yet.
+		 * How each kind's light leaves it. A wallwasher's asymmetric lens, a framer's shutters, a picture light's hood and
+		 * a step light's louvre shape light in ways only their photometric files describe, so those kinds have no emitter
+		 * yet. An edge-lit pane lets its light out evenly over its etched face, as a laylight's diffusing face does.
 		 */
 		TOptional<FLightLuminaire::EEmitter> EmitterOfKind(const FString& Kind)
 		{
 			if (Kind == TEXT("track-spot") || Kind == TEXT("downlight")) { return FLightLuminaire::EEmitter::Spot; }
-			if (Kind == TEXT("linear-cove") || Kind == TEXT("linear-slot") || Kind == TEXT("linear-strip")) { return FLightLuminaire::EEmitter::Linear; }
-			if (Kind == TEXT("laylight")) { return FLightLuminaire::EEmitter::Rect; }
+			if (Kind == TEXT("linear-cove") || Kind == TEXT("linear-slot") || Kind == TEXT("linear-strip") || Kind == TEXT("case-linear"))
+			{
+				return FLightLuminaire::EEmitter::Linear;
+			}
+			if (Kind == TEXT("laylight") || Kind == TEXT("edge-lit-glass")) { return FLightLuminaire::EEmitter::Rect; }
+			if (Kind == TEXT("lantern") || Kind == TEXT("electrolier")) { return FLightLuminaire::EEmitter::Point; }
 			return {};
 		}
 
@@ -45,6 +50,10 @@ namespace Musee::Light
 			case FLightLuminaire::EEmitter::Linear:
 				if (Record.Light.LuminousFluxLumensPerMeter <= 0.0) { return TEXT("its flux per metre isn't published"); }
 				if (Record.Housing.SectionMillimeters.IsEmpty()) { return TEXT("the width of its emitting line isn't published"); }
+				return FString();
+			case FLightLuminaire::EEmitter::Point:
+				if (Record.Light.LuminousFluxLumens <= 0.0) { return TEXT("its lamps' flux isn't published"); }
+				if (Record.Housing.LampCount > 1 && Record.Housing.LampRingRadiusMillimeters <= 0.0) { return TEXT("the ring its lamps stand on isn't given"); }
 				return FString();
 			default:
 				if (Record.Light.LuminousFluxLumens <= 0.0) { return TEXT("its flux isn't published"); }
@@ -73,6 +82,8 @@ namespace Musee::Light
 			const TArray<double>& Face = Result.Emitter == FLightLuminaire::EEmitter::Rect ? Record.Housing.EmittingMillimeters : Record.Housing.SectionMillimeters;
 			Result.EmittingWidth = FromMillimeters(Face.Num() > 0 ? Face[0] : 0.0);
 			Result.EmittingHeight = FromMillimeters(Face.Num() > 1 ? Face[1] : 0.0);
+			Result.LampCount = FMath::Max(Record.Housing.LampCount, 1);
+			Result.LampRingRadius = FromMillimeters(FMath::Max(Record.Housing.LampRingRadiusMillimeters, 0.0));
 			return Result;
 		}
 

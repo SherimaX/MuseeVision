@@ -1,0 +1,88 @@
+{
+  "schema": "musee.matter.shading.substance/1",
+  "key": "mona-marble",
+  "name": "Mona marble, Anglesey",
+  "family": "accent",
+  "record": "Palette.json",
+  "master": "stone",
+  "accentOf": "stone",
+  "dielectric": {
+    "diffuseAlbedo": {
+      "value": [
+        40.0,
+        -10.0,
+        3.0
+      ],
+      "space": "CIELAB (D65, 2 deg)",
+      "unit": "CIELAB",
+      "grade": "unverified",
+      "source": "Palette.json: accent.british-column-stones.j",
+      "note": "Mona marble, Anglesey: a green serpentinite breccia; no measured colour was read: a first value read from trade and museum photographs of the named material (as the Oxford University Museum's shafts show it)."
+    },
+    "refractiveIndex": {
+      "value": 1.56,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Serpentine minerals (antigorite, lizardite) have indices of 1.55 to 1.57 (Handbook of Mineralogy)",
+      "note": "The mean index of the rock's main minerals."
+    },
+    "porosity": {
+      "value": 0.005,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.british-column-stones.j",
+      "note": "A first open porosity for the rock type; no measurement of this stone was read."
+    },
+    "wettingDepth": {
+      "value": 1.0,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: accent.british-column-stones.j",
+      "note": "The depth whose pores govern the face's look when wet."
+    }
+  },
+  "structure": {
+    "grain": {
+      "value": 10.0,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: accent.british-column-stones.j",
+      "note": "The finest structure the face shows at gallery distance."
+    },
+    "bed": {
+      "value": 300,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: accent.british-column-stones.j",
+      "note": "The coarsest structure the face shows: its bedding, veining or banding."
+    },
+    "bedAspect": {
+      "value": 1.0,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.british-column-stones.j",
+      "note": "How much longer the structure runs along its bedding than across it."
+    },
+    "hurst": {
+      "value": 0.7,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Candela et al. 2012, Journal of Geophysical Research 117, B08409 (fault surfaces, 0.6 to 0.8; cited in Stone.ush)",
+      "note": "The middle of the range measured on rock surfaces, as the travertine's."
+    },
+    "toneSpread": {
+      "value": 0.3,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.british-column-stones.j",
+      "note": "A first half-range of ln(albedo) across one face."
+    },
+    "roughnessSpread": {
+      "value": 0.15,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.british-column-stones.j",
+      "note": "A first half-range of ln(roughness) across one face."
+    }
+  }
+}

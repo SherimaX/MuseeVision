@@ -1,0 +1,57 @@
+{
+  "key": "electrolier.3000k.four-light",
+  "kind": "electrolier",
+  "controlClass": "circulation",
+  "evidenceState": "complete",
+  "product": {
+    "manufacturer": "Ledstore",
+    "family": "LED filament candle, E14, clear, high CRI",
+    "description": "the lamps of a reproduction 1880s electrolier (four arms, the porch): 4 LED filament candle lamps, 3000 K, CRI 95, dimmable, one in each cased opal globe on the arms' ring. The fitting's turned patinated-bronze body, arms and globes are the stage's own pieces (Albion's sheet, section 3.8), in Matter's bronze and Lamberts cased opal glass.",
+    "code": "E14-clear-HIGH-CRI-3000",
+    "codeBasis": "the maker's product code of the lamp",
+    "status": "listed on the maker's site"
+  },
+  "light": {
+    "luminousFluxLumens": 1040,
+    "fluxBasis": "lamps: 4 bare lamps of 260 lm each; the globes' cased opal, drawn by the stage, passes their light on",
+    "ledFluxLumens": 260,
+    "beamName": "filament lamps lighting all round, one at the centre of each globe",
+    "cctKelvin": 3000,
+    "cri": 95,
+    "criBasis": "published value"
+  },
+  "electrical": {
+    "systemPowerWatts": 16,
+    "supplyVolts": 230,
+    "control": "phase dimmable: the maker names the Schneider 315 RC regulator and the VaLO wireless series"
+  },
+  "housing": {
+    "lampCount": 4,
+    "lampRingRadiusMillimeters": 505,
+    "dimensionBasis": "the arms' reach to the globes' centres, 0.505 from the stem, is Albion's drawing of the fitting (sheet section 3.8); the lamp's own size is not published",
+    "materials": "clear glass bulb over LED filaments, E14 cap, inside a cased opal globe of radius 0.085",
+    "mounting": "E14 lampholder in each globe's gallery on a scrolled arm"
+  },
+  "photometricFile": {
+    "url": null,
+    "note": "A lamp has no luminaire photometry; its light leaves all round it and the cased opal globe is Matter's glass."
+  },
+  "sources": [
+    {
+      "id": "maker-page",
+      "title": "Ledstore, LED bulb E14 candle, clear, high CRI95, dimmable 4W, 3000K (260 lm, 35 000 h, visible filaments)",
+      "url": "https://ledstore.pro/product/led-bulb-e14-candle-clear-high-cri95-dimmable-4w-3000k",
+      "readOn": "2026-09-27",
+      "covers": [
+        "product",
+        "light",
+        "electrical"
+      ]
+    }
+  ],
+  "unverified": [
+    "The lamp's dimensions and its distribution are not published; a filament candle lights all round, as the record takes it.",
+    "Philips' MASTER glass candles and lusters with CRI 90 (read on Signify's pages) come at 2700 K or dim-to-warm 2200 to 2700 K, not 3000 K, so a smaller maker's lamp stands here.",
+    "The fitting itself, a reproduction after the 1880s electroliers, is drawn by the stage; no maker of the whole fitting was chosen."
+  ]
+}

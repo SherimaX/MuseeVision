@@ -1,0 +1,56 @@
+{
+  "schema": "musee.matter.shading.substance/1",
+  "key": "antique-glass",
+  "name": "Antique glass (mouth-blown, Lamberts), clear",
+  "family": "glass",
+  "record": "Substances/antique-glass.json",
+  "master": "glass",
+  "dielectric": {
+    "refractiveIndex": {
+      "value": 1.525,
+      "unit": "1",
+      "grade": "manufacturer",
+      "source": "Substances/antique-glass.json: optics.refractiveIndex[1]"
+    },
+    "porosity": {
+      "value": 0.0,
+      "unit": "1",
+      "grade": "derived",
+      "source": "Glass has no pores",
+      "derivation": "0"
+    },
+    "wettingDepth": {
+      "value": 0.0,
+      "unit": "mm",
+      "grade": "derived",
+      "source": "Glass has no pores",
+      "derivation": "0"
+    }
+  },
+  "medium": {
+    "absorption": {
+      "value": [
+        0.0351,
+        0.0171,
+        0.0278
+      ],
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "unit": "1/mm",
+      "grade": "derived",
+      "source": "Substances/antique-glass.json: surface.asBuilt.clearTint (0.90, 0.95, 0.92 through a pane, design) and surface.thickness (2 to 5 mm)",
+      "derivation": "-ln(tint) / 3 mm, the middle thickness: the clear antique glass's faint green. Coloured pieces are the work's own (Art)."
+    },
+    "scattering": {
+      "value": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "unit": "1/mm",
+      "grade": "derived",
+      "source": "Clear glass does not scatter",
+      "derivation": "0"
+    }
+  }
+}
