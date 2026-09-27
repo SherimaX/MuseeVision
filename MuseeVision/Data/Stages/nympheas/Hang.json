@@ -9,9 +9,9 @@
           7.5
         ],
         "from_deg": -11.537,
-        "clockwise": false
+        "direction": "decreasing"
       },
-      "note": "The oval's inner face x = 11.0 cos θ, y = 7.5 sin θ (stage frame, y south). θ is the ellipse's parametric angle from +x towards +y. It starts at the east door's north jamb (10.778, −1.500), θ −11.537°, and runs north first (θ decreasing): counter-clockwise on a north-up plan, clockwise as seen from below. The run ends at the south jamb, s 55.597. `along` is the arc length on this face. The canvases stand 0.035 proud, built curved to the wall."
+      "note": "The oval's inner face x = 11.0 cos θ, y = 7.5 sin θ (stage frame, y south). θ is the ellipse's parametric angle from +x towards +y. It starts at the east door's north jamb (10.778, −1.500), θ −11.537°, and runs north first (θ decreasing): counter-clockwise on a north-up plan. The run ends at the south jamb, s 55.597. `along` is the arc length on this face. The canvases stand 0.035 proud, built curved to the wall."
     }
   ],
   "works": [

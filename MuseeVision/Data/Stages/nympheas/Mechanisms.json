@@ -62,16 +62,6 @@
           1.0
         ]
       },
-      "open": [
-        {
-          "move": "open"
-        }
-      ],
-      "close": [
-        {
-          "move": "closed"
-        }
-      ],
       "guard": "body-in-travel",
       "clearance": 0.05,
       "note": "The three rails round the open well (§3.6) rise 0 → 1.00 m as the pond passes 0.10 → 1.10 m of its 2.6 m, and are housed before the pond's last 0.10 of descent. Driven by the pond's channel, never used directly."

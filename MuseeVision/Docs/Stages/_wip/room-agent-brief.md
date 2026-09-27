@@ -143,10 +143,10 @@ Mechanisms.json { "stage": "<room>", "mechanisms": [ { "key": "<stage>.<mech>", 
 - **Mechanisms that publish and follow**: `"publishes": "<channel>"` (position as a fraction of travel, 0–1);
   `"follows": {"channel", "in": [c0, c1], "out": [t0, t1]}` (linear, clamped) replaces control/open/close for a
   mechanism driven by another's channel. A channel step (`{"channel", "to", "time"}`) stays in open/close sequences.
-- **Curved walls**: Hang.json gets `"walls": [{"anchor", "path": {"ellipse": [a,b], "from_deg", "clockwise"}, "note"}]`
-  (or another path shape for circles/arcs, e.g. `{"circle": r, ...}`); `along` is the arc length on the face. The
-  contract doesn't fix the angle convention: say in the wall's `note` exactly how the angle is measured (stage frame,
-  y south) and which way "clockwise" is read. Works on curved walls are built curved to the wall.
+- **Curved walls**: Hang.json gets `"walls": [{"anchor", "path": {"ellipse": [a,b], "from_deg": θ0, "direction": "increasing|decreasing"}, "note"}]`
+  (a circle is an ellipse [r, r]); θ is the PARAMETRIC angle (x = a cos θ, y = b sin θ) in the stage frame, from +x
+  towards +y (y south). `along` is the arc length on the face from θ0. Works on curved walls are built curved to it.
+- A mechanism driven by `follows` has no control/open/close.
 - **Channels** are named `<stage>.<thing>.<what>`. Motion publishes them and Light follows them (`follows`).
 - Care classes and use classes are the keys in Care.json and UseTargets.json (for example `oil-and-tempera`, not
   the contract's example `oil-paintings`). Water material is a palette key (`water.still`).
