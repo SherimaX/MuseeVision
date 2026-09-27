@@ -1,0 +1,38 @@
+{
+  "schema": "musee.matter.shading.working/1",
+  "key": "excavated.chalk.fossil-stained",
+  "name": "Excavated: chalk round a fossil, stained by the iron that replaced its shell",
+  "record": "Workings/excavated.json",
+  "kind": "face",
+  "roughness": {
+    "value": 0.8,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Docs/Stages/cube.md section 7 (the ground rule's relief) and Workings/excavated.json"
+  },
+  "roughnessAcross": {
+    "value": 0.8,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Docs/Stages/cube.md section 7 (the ground rule's relief) and Workings/excavated.json"
+  },
+  "haziness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Docs/Stages/cube.md section 7 (the ground rule's relief) and Workings/excavated.json"
+  },
+  "textureDepth": {
+    "value": 0.5,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Docs/Stages/cube.md section 7 (the ground rule's relief) and Workings/excavated.json"
+  },
+  "relief": {
+    "value": 3.0,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Docs/Stages/cube.md section 7 (the ground rule's relief) and Workings/excavated.json"
+  },
+  "lays": "chalk.iron-stained"
+}

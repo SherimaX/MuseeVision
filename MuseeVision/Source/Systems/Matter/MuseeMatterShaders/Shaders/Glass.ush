@@ -85,3 +85,16 @@ float3 MatterSoiledTransmittance(float3 Transmittance, float SoilCover)
 {
 	return Transmittance * saturate(1.0 - SoilCover);
 }
+
+// Stained glass: a pane whose colour varies across it, as a window's pot-metal and flashed glasses, painted and stained,
+// are leaded together. The work's image is the window photographed against the light behind it, so its colour, decoded
+// to linear and taken relative to its clearest glass, is the pane's transmittance relative to that glass's: the image's
+// white stands for the clear pane.
+
+/** The internal transmittance one face of a stained pane carries at normal incidence where the image, decoded to linear,
+ *  has the colour ImageLinear: the image's share of the clear pane's, split between the pane's two faces (light crosses
+ *  both), over the clear glass's own absorption through half the pane. */
+float3 MatterStainedFaceTransmittance(float3 ImageLinear, float3 AbsorptionPerMillimeter, float ThicknessMillimeters)
+{
+	return sqrt(saturate(ImageLinear)) * MatterPaneFaceTransmittance(AbsorptionPerMillimeter, ThicknessMillimeters);
+}

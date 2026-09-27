@@ -8,6 +8,11 @@
 
 struct FSiteDescription;
 
+namespace Musee::Time
+{
+	class FMuseumDial;
+}
+
 /**
  * The Rotunda's parts by trade, each drawn in Form's language into the description's pieces: the drum (§3.2), the order
  * (§3.3), the dome (§3.4), the eye (§3.5), the floors (§3.1), the sun clock's lifting drum (§3.6), the shaft and its
@@ -143,6 +148,9 @@ namespace Musee::Rotunda
 	void DrawDome(TArray<FFormDrawing>& Out);
 	void DrawEye(TArray<FFormDrawing>& Out);
 	void DrawFloors(TArray<FFormDrawing>& Out);
+
+	/** The dial's inlay laid from Time's dial: the hour ring, the hour lines, the gilt meridian and the minute ticks. */
+	void DrawDialInlay(TArray<FFormDrawing>& Out, const Time::FMuseumDial& Dial);
 	void DrawSunClock(TArray<FFormDrawing>& Out);
 	void DrawShaft(TArray<FFormDrawing>& Out);
 	void DrawStair(TArray<FFormDrawing>& Out);

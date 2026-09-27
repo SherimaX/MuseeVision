@@ -1,0 +1,32 @@
+{
+  "schema": "musee.matter.working/1",
+  "key": "lenslet-array",
+  "name": "Lenslet array (a moulded micro-lens face over a black matrix)",
+  "appliesTo": {
+    "families": [
+      "glass"
+    ],
+    "substances": [
+      "low-iron-glass"
+    ]
+  },
+  "over": [
+    "toughened"
+  ],
+  "process": "A light-field display's front: an array of small lenses, moulded or embossed in a clear layer on the pane's face, each over one group of the panel's pixels; between and behind the lenses a black matrix absorbs the light that falls on it. Each lens is an optically smooth surface, so a lamp seen in the array is repeated as one small glint in every lens: the face's reflection is spread over the lenses' range of slopes rather than blurred.",
+  "optics": {
+    "text": "Integral imaging places a lens array over an image plane at the lenses' focal distance, so each lens shows the viewer the pixel its direction selects.",
+    "grade": "secondary",
+    "source": "G. Lippmann, 'Epreuves reversibles donnant la sensation du relief', Journal de Physique Theorique et Appliquee 7 (1908) 821-825; F. Okano, H. Hoshino, J. Arai and I. Yuyama, 'Real-time pickup method for a three-dimensional image based on integral photography', Applied Optics 36(7) (1997) 1598-1603"
+  },
+  "unverified": [
+    {
+      "field": "the lenses' pitch, sag and the reflection's spread",
+      "reason": "No maker's figures were read: the working's haze stands for the spread of the lenses' slopes, and its relief for their sag, as first values."
+    }
+  ],
+  "sources": [
+    "Docs/Stages/cube.md, section 3 (the panel faces)",
+    "Docs/Stages/sphere.md, section 13 (the image surface)"
+  ]
+}

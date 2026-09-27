@@ -463,6 +463,7 @@ the Cube's panels are the flat kind.
 - **Unmated** (the stand): Site's blind iris at 7.715, both irises shut, mast 0, no car.
 
 **Departures from as-built** (for the owner's review):
+- **Schedule corrected (K3-MOTION):** `sphere.mast.foot` runs down its axis (axis −z, out [34.910, 0]); written up the axis with a negative travel it could never leave the foot plane. The mast's column is an `extent` of 50 mm turns with a 12 mm wall, hanging from the head to the foot plane (design numbers: the sheet gives neither).
 - **iris.4600 corrected:** each blade gains a pin lug (r 0.060 boss on a 0.120 web) so it encloses its pin; as built the pin stood 25 mm outside the blade. The clamp value is 0.3206 on the linear channel (as built 0.378 through a smoothstep: the same blade pose, r 0.197). Shut, clamp, open and reach checked by polygon union.
 - **Ruled with the Atrium:** the car, its leaves, guides, crown, seat and light are the Atrium's; the port's closure is the
   Atrium's collar iris; the Sphere's mast is the Sphere's and follows the car's height.

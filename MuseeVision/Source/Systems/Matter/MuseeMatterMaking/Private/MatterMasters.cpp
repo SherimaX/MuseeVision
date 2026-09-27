@@ -15,6 +15,7 @@ TArray<FMasterKind> AllMasters()
 		{ FName(Masters::Metal), NAME_None },
 		{ FName(Masters::Metal), Gilt },
 		{ FName(Masters::Glass), NAME_None },
+		{ FName(Masters::Stained), NAME_None },
 		{ FName(Masters::Water), NAME_None },
 		{ FName(Masters::Paint), NAME_None },
 		{ FName(Masters::Wood), NAME_None },
@@ -60,6 +61,10 @@ TValueOrError<FMasterRecipe, FString> MasterRecipe(const FMasterKind& Kind, UMat
 	if (Master == FName(Masters::Glass))
 	{
 		return MakeValue(GlassRecipe(Moment));
+	}
+	if (Master == FName(Masters::Stained))
+	{
+		return MakeValue(StainedRecipe(Moment));
 	}
 	if (Master == FName(Masters::Water))
 	{

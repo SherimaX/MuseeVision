@@ -1,0 +1,38 @@
+{
+  "schema": "musee.matter.shading.working/1",
+  "key": "excavated.chalk.dry",
+  "name": "Excavated: chalk, blocky, dry",
+  "record": "Workings/excavated.json",
+  "kind": "face",
+  "roughness": {
+    "value": 0.9,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Docs/Stages/cube.md section 7 (the ground rule's relief) and Workings/excavated.json"
+  },
+  "roughnessAcross": {
+    "value": 0.9,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Docs/Stages/cube.md section 7 (the ground rule's relief) and Workings/excavated.json"
+  },
+  "haziness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Docs/Stages/cube.md section 7 (the ground rule's relief) and Workings/excavated.json"
+  },
+  "textureDepth": {
+    "value": 1.0,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Docs/Stages/cube.md section 7 (the ground rule's relief) and Workings/excavated.json"
+  },
+  "relief": {
+    "value": 10.0,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Docs/Stages/cube.md section 7 (the ground rule's relief) and Workings/excavated.json"
+  },
+  "lays": "chalk"
+}

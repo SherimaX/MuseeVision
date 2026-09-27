@@ -1,9 +1,10 @@
 {
-	"$sources": "A fixture of the record reader: vectors written as their numbers.",
+	"$sources": "A fixture of the record reader: vectors written as their numbers, and texts written both ways.",
 	"$units": { "PointMeters": "m", "SizeMeters": "m" },
 	"PointMeters": [1.5, -2.25, 0.4],
 	"SizeMeters": [12.75, 2.0],
 	"Outline": [[0.0, 0.0], [3.0, 0.0], [3.0, 2.0], [0.0, 2.0]],
 	"Path": [[0.0, 0.0, 0.0], { "X": 1.0, "Y": 2.0, "Z": 3.0 }],
-	"Marks": { "east": [4.15, 0.0] }
+	"Marks": { "east": [4.15, 0.0] },
+	"Labels": ["The east mark", { "key": "survey.west", "source": "The west mark" }]
 }

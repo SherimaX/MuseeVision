@@ -133,6 +133,34 @@ namespace Musee::Rotunda::Plan
 	inline constexpr double InlayGroove = 0.002;
 
 	/**
+	 * The dial's cast-bronze inlay (§3.1), laid where Time's dial (Musee::Time::FMuseumDial, §5) puts the node's shadow:
+	 * the hour ring on the shadow circle, 40 wide, 3 proud, 1.5 bevel, in a groove 2 mm deep; the hour lines from r 1.60
+	 * to the ring, 24 wide, 2.5 proud, 1 bevel; the gilt meridian (XII) from r 1.60 to the ring, 60 wide, 2.5 proud, 1
+	 * bevel. The lines and ticks stop at the ring's inner edge, where the sheet runs them 10 mm under it.
+	 */
+	inline constexpr double HourRingWidth = 0.040;
+	inline constexpr double HourRingProud = 0.003;
+	inline constexpr double HourRingBevel = 0.0015;
+	inline constexpr double HourLineInner = 1.600;
+	inline constexpr double HourLineWidth = 0.024;
+	inline constexpr double HourLineProud = 0.0025;
+	inline constexpr double HourLineBevel = 0.001;
+	inline constexpr double MeridianWidth = 0.060;
+	inline constexpr int32 MeridianHour = 12;
+
+	/** The minute ticks (§3.1), every minute from VI to VI but the hours: the longest that divides its minute. */
+	struct FTick
+	{
+		int32 EveryMinutes;
+		double Inner;
+		double Width;
+		double Proud;
+		double Bevel;
+	};
+	inline constexpr FTick Ticks[] = {{30, 6.520, 0.010, 0.0025, 0.001}, {15, 6.580, 0.007, 0.0025, 0.001}, {5, 6.620, 0.005, 0.0022, 0.0008},
+		{1, 6.665, 0.003, 0.0020, 0.0006}};
+
+	/**
 	 * The gilt sun's boss, a lathe (r, z): a foot 2 mm in its groove, a shoulder rolled over r 0.020 about
 	 * (0.265, 0.035), then the dome, a sphere R 1.1854 whose top is z 0.085.
 	 */

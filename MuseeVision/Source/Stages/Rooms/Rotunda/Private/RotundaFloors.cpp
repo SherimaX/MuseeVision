@@ -1,11 +1,13 @@
 #include "RotundaParts.h"
 #include "RotundaPlan.h"
+#include "TimeMuseumDial.h"
 
 /**
  * The floors (§3.1): the fixed ring of radial Crema Marfil slabs in three courses, laid 30 mm over its core; and the
  * dial, the lifting drum's top, in seven bands with bronze fillets on their joints and the gilt sun at its centre,
- * the arrival point. The dial's hour ring, hour lines, meridian, minute ticks and numerals are Time's to lay from its
- * dial (§5), and the motto's letters wait for lettering in Form; neither is typed by hand here.
+ * the arrival point. The dial's hour ring, hour lines, meridian and minute ticks are laid from Time's dial (§5), in the
+ * groove its ring cuts in the outer band (RotundaDialInlay); the numerals and the motto's letters wait for lettering in
+ * Form. Nothing is typed by hand here.
  */
 namespace Musee::Rotunda
 {
@@ -45,10 +47,11 @@ namespace Musee::Rotunda
 		}
 
 		/**
-		 * A band of the dial, its section cut with the groove its fillet sits in at each edge that carries one, and the
-		 * centre band with the groove the gilt sun's boss sits in. The centre band's section ends on the axis.
+		 * A band of the dial, its section cut with the groove its fillet sits in at each edge that carries one, the groove
+		 * the hour ring sits in where the shadow circle (RingRadius) crosses it, and the centre band with the groove the
+		 * gilt sun's boss sits in. The centre band's section ends on the axis.
 		 */
-		FFormProfile BandSection(double Inner, double Outer)
+		FFormProfile BandSection(double Inner, double Outer, double RingRadius)
 		{
 			const double Half = 0.5 * Plan::FilletWidth;
 			const double Groove = -Plan::InlayGroove;
@@ -64,6 +67,14 @@ namespace Musee::Rotunda
 			else
 			{
 				Out.LineTo(FVector2D(Outer, 0.0), EFormJoint::Crisp);
+			}
+			const double RingHalf = 0.5 * Plan::HourRingWidth;
+			if (RingRadius - RingHalf > Inner && RingRadius + RingHalf < Outer)
+			{
+				Out.LineTo(FVector2D(RingRadius + RingHalf, 0.0), EFormJoint::Crisp)
+					.LineTo(FVector2D(RingRadius + RingHalf, Groove), EFormJoint::Crisp)
+					.LineTo(FVector2D(RingRadius - RingHalf, Groove), EFormJoint::Crisp)
+					.LineTo(FVector2D(RingRadius - RingHalf, 0.0), EFormJoint::Crisp);
 			}
 			if (Inner <= 0.0)
 			{
@@ -85,14 +96,17 @@ namespace Musee::Rotunda
 			return Out.Close();
 		}
 
-		/** The dial's bands, and a bronze fillet in the groove on each joint that carries one: 10 wide, 2 proud, bevelled. */
-		void Dial(TArray<FFormDrawing>& Out)
+		/**
+		 * The dial's bands, grooved for the hour ring on the shadow circle, and a bronze fillet in the groove on each joint
+		 * that carries one: 10 wide, 2 proud, bevelled.
+		 */
+		void Dial(TArray<FFormDrawing>& Out, double RingRadius)
 		{
 			for (int32 Index = 0; Index < int32(UE_ARRAY_COUNT(Plan::DialBands)); ++Index)
 			{
 				const Plan::FBand& Band = Plan::DialBands[Index];
 				FFormLathe Shape;
-				Shape.Section = BandSection(Band.Inner, Band.Outer);
+				Shape.Section = BandSection(Band.Inner, Band.Outer, RingRadius);
 				OnDrum(Out, FString::Printf(TEXT("dial.band.%d"), Index + 1), Band.Surface, MoveTemp(Shape), Walkable);
 			}
 			const double Half = 0.5 * Plan::FilletWidth;
@@ -176,7 +190,15 @@ namespace Musee::Rotunda
 	void DrawFloors(TArray<FFormDrawing>& Out)
 	{
 		FixedRing(Out);
-		Dial(Out);
+		// The dial is Time's: where its ring runs and its marks fall is where the museum's sun casts the node's shadow.
+		// Without it the dial is drawn bare, and the missing inlay is Rotunda.DialLaid's to report.
+		const TValueOrError<Time::FMuseumDial, FString> TimeDial = Time::FMuseumDial::Read();
+		ensureMsgf(TimeDial.HasValue(), TEXT("The Rotunda's dial needs Time's: %s"), TimeDial.HasError() ? *TimeDial.GetError() : TEXT(""));
+		Dial(Out, TimeDial.HasValue() ? TimeDial.GetValue().ShadowRadiusMeters() : 0.0);
+		if (TimeDial.HasValue())
+		{
+			DrawDialInlay(Out, TimeDial.GetValue());
+		}
 		Sun(Out);
 	}
 }

@@ -411,6 +411,7 @@ initial position; `home` stays `closed`).
 - **Presence**: every light is presence-linked; the empty store is dark (pastels' annual dose).
 
 **Departures from as-built** (for the owner's review):
+- **Schedule corrected to the contract (K3-MATTER):** Finishes.json names its workings by their palette keys (`laid.mortar-jointed`, `drawn.lacquered`, `woven.lacquered`, `oiled.hard-waxed`, `fumed.waxed`, `laminated.uv-filtering`) where it wrote them as prose, which the reader refused; the frames' water gilt lies on `white.gesso` (the gesso over the carved oak), as the Salon's does.
 - **Materials follow the Story (D-018):** honed Belgian bluestone flags replace the dark polished concrete; the racks'
   frames are drawn brass and their faces woven brass mesh (the Story's racks) in place of oak and linen, on the
   as-built top-hung geometry and tracks (ruled: port the geometry, D-017; the material is the Story's); fumed oak chests

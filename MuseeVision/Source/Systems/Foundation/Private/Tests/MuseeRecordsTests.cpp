@@ -190,6 +190,10 @@ bool FMuseeFoundationRecordsVectorsTest::RunTest(const FString& Parameters)
 	TestTrue(TEXT("A path mixes both forms of a point"), Survey.Path.Num() == 2 && Survey.Path[1] == FVector(1.0, 2.0, 3.0));
 	const FVector2D* East = Survey.Marks.Find(TEXT("east"));
 	TestTrue(TEXT("A map's vectors are read"), East && *East == FVector2D(4.15, 0.0));
+	TestTrue(TEXT("A text written as a plain string is its source, with no key yet"), Survey.Labels.Num() == 2
+		&& Survey.Labels[0].Source == TEXT("The east mark") && Survey.Labels[0].Key.IsNone());
+	TestTrue(TEXT("A text written as a key and a source keeps both"), Survey.Labels.Num() == 2
+		&& Survey.Labels[1].Key == FMuseeKey(TEXTVIEW("survey.west")) && Survey.Labels[1].Source == TEXT("The west mark"));
 
 	TestTrue(TEXT("A vector of the wrong count is refused"),
 		RefusalOf<FMuseeTestSurvey>(TEXT("Rejects/vector-short.json")).Contains(TEXT("PointMeters: has 2 numbers where a vector of 3 is written")));

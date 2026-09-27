@@ -15,6 +15,7 @@ class UMaterialParameterCollection;
  * - white: an opaque, porous, unbedded body (lime plaster, cast plaster, limewash; White.ush);
  * - metal: a conductor with its measured reflection, a brushed grain, and a patina or tarnish film (Metal.ush);
  * - glass: a thin transmitting pane, absorbing along its thickness (Glass.ush);
+ * - stained: a glass pane whose colour varies across it as its work's image says: a stained-glass panel (Glass.ush);
  * - water: a still body of water seen through its surface, as Single Layer Water (Medium.ush);
  * - paint: a painted canvas carrying the work's own image under its varnish (Paint.ush);
  * - wood: an opaque fibrous body with growth rings and rays, its grain along each board, under an oil or wax that soaks
@@ -41,6 +42,7 @@ namespace Musee::Matter
 		inline constexpr const TCHAR* White = TEXT("white");
 		inline constexpr const TCHAR* Metal = TEXT("metal");
 		inline constexpr const TCHAR* Glass = TEXT("glass");
+		inline constexpr const TCHAR* Stained = TEXT("stained");
 		inline constexpr const TCHAR* Water = TEXT("water");
 		inline constexpr const TCHAR* Paint = TEXT("paint");
 		inline constexpr const TCHAR* Wood = TEXT("wood");
@@ -76,8 +78,9 @@ namespace Musee::Matter
 	/** The recipe of the metal master. */
 	FMasterRecipe MetalRecipe(UMaterialParameterCollection& Moment, bool bGilt);
 
-	/** The recipes of the glass, water and paint masters. */
+	/** The recipes of the glass, stained glass, water and paint masters. */
 	FMasterRecipe GlassRecipe(UMaterialParameterCollection& Moment);
+	FMasterRecipe StainedRecipe(UMaterialParameterCollection& Moment);
 	FMasterRecipe WaterRecipe(UMaterialParameterCollection& Moment);
 	FMasterRecipe PaintRecipe(UMaterialParameterCollection& Moment);
 

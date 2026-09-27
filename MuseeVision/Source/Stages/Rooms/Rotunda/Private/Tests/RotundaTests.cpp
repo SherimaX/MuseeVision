@@ -11,6 +11,7 @@
 #include "RotundaRoom.h"
 #include "SiteDescription.h"
 #include "SitePortClass.h"
+#include "TimeMuseumDial.h"
 
 /**
  * The Rotunda's description against its sheet and its schedules: its ports and their classes, its anchors against every
@@ -291,6 +292,46 @@ namespace Musee::Rotunda::Tests
 		}
 		TestEqual(TEXT("forty risers make the 6.00 from the raised sill to the landing"), Plan::Risers * Plan::Riser, 6.0, 1e-12);
 		TestEqual(TEXT("the walking line's going makes Blondel's pace"), 2.0 * Plan::Riser + 3.61 * FMath::DegreesToRadians(Plan::TreadDeg), 0.630, 0.001);
+		return true;
+	}
+
+	IMPLEMENT_SIMPLE_AUTOMATION_TEST(FRotundaDialLaidTest, "Musee.Rotunda.DialLaid", Flags)
+	bool FRotundaDialLaidTest::RunTest(const FString& Parameters)
+	{
+		const TValueOrError<Musee::Time::FMuseumDial, FString> Dial = Musee::Time::FMuseumDial::Read();
+		if (!TestTrue(TEXT("Time's dial reads"), Dial.HasValue()))
+		{
+			return false;
+		}
+		const FSiteDescription Description = Described();
+		int32 Ticks = 0;
+		int32 Lines = 0;
+		double LargestMiss = 0.0;
+		for (const Musee::Time::FDialMark& Mark : Dial.GetValue().Marks(1))
+		{
+			const FString Name = Mark.IsHour() ? (Mark.Minute == 12 * 60 ? FString(TEXT("dial.meridian")) : FString::Printf(TEXT("dial.hour-line.%02d"), Mark.Minute / 60))
+				: FString::Printf(TEXT("dial.tick.%04d"), Mark.Minute);
+			const FFormDrawing* Piece = FindPiece(Description, *Name);
+			if (!Piece)
+			{
+				AddError(FString::Printf(TEXT("the dial has no %s"), *Name));
+				continue;
+			}
+			(Mark.IsHour() ? Lines : Ticks) += 1;
+			// Each mark runs out from the centre along the direction where Time's sun casts the shadow at its minute.
+			const FVector Along = Piece->Frame.DirectionToParent(FVector::UpVector);
+			LargestMiss = FMath::Max(LargestMiss, (FVector2D(Along) - Mark.Direction).Size());
+			LargestMiss = FMath::Max(LargestMiss, FMath::Abs(FMath::Atan2(Piece->Frame.OriginMeters.Y, Piece->Frame.OriginMeters.X)
+				- FMath::Atan2(Mark.Direction.Y, Mark.Direction.X)) * Dial.GetValue().ShadowRadiusMeters());
+		}
+		TestEqual(TEXT("an hour line or the meridian at each of the thirteen hours, VI to VI"), Lines, 13);
+		TestEqual(TEXT("a tick at every other minute"), Ticks, 12 * 60 + 1 - 13);
+		TestTrue(TEXT("every one laid where the shadow falls, within a micron"), LargestMiss < 1.0e-6);
+		const FFormDrawing* Ring = FindPiece(Description, TEXT("dial.hour-ring"));
+		TestTrue(TEXT("the hour ring rides the drum on the shadow circle"), Ring && Ring->Body == FMuseeKey(TEXT("rotunda.sun-clock.drum"))
+			&& Ring->Shape.IsType<FFormLathe>());
+		const FFormDrawing* Meridian = FindPiece(Description, TEXT("dial.meridian"));
+		TestTrue(TEXT("the meridian is gilt"), Meridian && Meridian->Surface == FName(TEXT("rotunda.dial.meridian")));
 		return true;
 	}
 }

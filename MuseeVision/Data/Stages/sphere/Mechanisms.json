@@ -35,7 +35,7 @@
       "axis": [
         0,
         0,
-        1
+        -1
       ],
       "travel": 34.91,
       "time": 44.0,
@@ -47,7 +47,7 @@
           0.793409
         ],
         "out": [
-          -34.91,
+          34.91,
           0.0
         ]
       },
@@ -540,6 +540,18 @@
       "guard": "body-in-travel",
       "clearance": 0.002,
       "note": "Platform iris blade 7 of 7 (class iris.4600, as the Atrium's collar iris): body frame on its pin at r 3.745, plan angle 308.5714 deg (from +x towards +y), (2.335, -2.928, 20.372), its top face; 2 mm thick; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. The pose is the linear follows map (closure × 52 deg); the move is eased over 4.0 s. Housed open in the platform's pocket (r 2.460-4.100, z 20.369-20.397) under the bronze seat ring; in travel it reaches r 4.010."
+    }
+  ],
+  "extents": [
+    {
+      "key": "sphere.mast.column",
+      "surface": "sphere.mast",
+      "body": "sphere.mast.head",
+      "at": [0.0, 0.0, 0.0],
+      "axis": [0.0, 0.0, -1.0],
+      "length": { "channel": "atrium.car.height", "in": [0.793409, 1.0], "out": [0.0, 9.09] },
+      "turns": { "radius": 0.2, "bore": 0.188, "pitch": 0.05 },
+      "note": "The mast's column (sheet section 3.6: gilt, r 0.200, from the foot plane 11.150 up to the head, 0 to 9.090, no geometry at zero length): it grows turn by turn out of the foot ring's bore as the car climbs from 'mast', so it is drawn as a column of turns hanging from the head's frame down to the foot plane, the last turn forming in the bore. Turn pitch 0.050 and a 12 mm wall are design numbers (the sheet gives none)."
     }
   ]
 }

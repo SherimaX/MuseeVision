@@ -628,6 +628,8 @@ public release would switch to an open-licence face.
 - **Light.** The cast spots stand across the room, not on the cornice ledge, which the entablature shades.
 
 **Departures from as-built** (for the owner's review):
+- **The rams (K3-MOTION):** each of the eight is a three-stage telescope in Mechanisms.json `extents` (stages Ø 0.250, 0.190 and 0.130, 2.200 long, 1.1667 m strokes: design numbers inside the room's Ø 0.300 barrel), 2.340 closed (bore bottom −5.900 to the lowered foot −3.560; the sheet's "closed ≤ 2.30" is 40 mm short of the drawn barrel) and 5.840 with the drum raised. The node's centre (20.25) is now the idealised sun's node in Data/Time/Museum.json (it was 20.30 there).
+- **The dial's inlay (K3-TIME):** the hour ring, the hour lines, the gilt meridian and the minute ticks are laid from Time's dial (`FMuseumDial`), the ring in a 2 mm groove of the outer band; the lines, the meridian and the ticks stop at the ring's inner edge (r 6.760) rather than running 10 mm under it (6.77, 6.80), and lie on the face (Form cuts no radial grooves yet). The numerals wait for lettering.
 - The Story overrides the as-built on four points (D-018): the lattice is **pearl-white** (as built dark grey), the dome is covered in **lead** (as built stone), the node is **patinated** (as built gilt), and a **60 mm gilt meridian** is added (as built none).
 - Stone and gilt: **Crema Marfil** replaces statuary on the ring, dial, treads, landing and string; **Rojo Alicante** replaces rosso antico; the sun's 32 rays are gilt (as built bronze).
 - All light is 3000 K. The cast spots stand across the room instead of on the cornice ledge, which the entablature shades.

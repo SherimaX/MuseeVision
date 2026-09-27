@@ -1,0 +1,37 @@
+{
+  "schema": "musee.matter.shading.working/1",
+  "key": "woven.lacquered",
+  "name": "Drawn wire woven to mesh and clear-lacquered",
+  "record": "Workings/brushed.json",
+  "kind": "face",
+  "roughness": {
+    "value": 0.2,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Substances/brass.json: working notes (drawn wire, woven); a woven face's wires turn the sheen with the angle of view, carried as haze and a relief of the wire's diameter"
+  },
+  "roughnessAcross": {
+    "value": 0.35,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Substances/brass.json: working notes (drawn wire, woven); a woven face's wires turn the sheen with the angle of view, carried as haze and a relief of the wire's diameter"
+  },
+  "haziness": {
+    "value": 0.3,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Substances/brass.json: working notes (drawn wire, woven); a woven face's wires turn the sheen with the angle of view, carried as haze and a relief of the wire's diameter"
+  },
+  "textureDepth": {
+    "value": 0.25,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Substances/brass.json: working notes (drawn wire, woven); a woven face's wires turn the sheen with the angle of view, carried as haze and a relief of the wire's diameter"
+  },
+  "relief": {
+    "value": 0.5,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Substances/brass.json: working notes (drawn wire, woven); a woven face's wires turn the sheen with the angle of view, carried as haze and a relief of the wire's diameter"
+  }
+}

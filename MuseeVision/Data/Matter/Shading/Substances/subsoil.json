@@ -1,0 +1,86 @@
+{
+  "schema": "musee.matter.shading.substance/1",
+  "key": "subsoil",
+  "name": "Subsoil (the weathered brown horizon over the clay)",
+  "family": "accent",
+  "record": "Palette.json",
+  "master": "white",
+  "accentOf": "stone",
+  "dielectric": {
+    "diffuseAlbedo": {
+      "value": [
+        50.0,
+        7.0,
+        22.0
+      ],
+      "space": "CIELAB (D65, 2 deg)",
+      "unit": "CIELAB",
+      "grade": "unverified",
+      "source": "Munsell 10YR 5/4 (yellowish brown), a weathered B horizon as the Soil Survey Field Handbook (Hodgson 1997) describes it",
+      "note": "No measured colour of the site's own ground was read: a first colour from the Munsell notation field descriptions give the layer, converted approximately."
+    },
+    "refractiveIndex": {
+      "value": 1.544,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Handbook of Mineralogy, Quartz (Anthony, Bideaux, Bladh and Nichols, Mineralogical Society of America): n omega 1.544 (the subsoil is mostly quartz grains)"
+    },
+    "porosity": {
+      "value": 0.42,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Shading/Substances/topsoil.json porosity range (0.40 to 0.58): a denser horizon towards its low end"
+    },
+    "wettingDepth": {
+      "value": 5.0,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Shading/Substances/topsoil.json (the soils' first wetting depth)",
+      "note": "The depth whose pores govern the face's look when wet."
+    }
+  },
+  "structure": {
+    "grain": {
+      "value": 0.5,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Docs/Stages/cube.md section 7 (the ground rule's relief and stones)",
+      "note": "The finest structure the face shows."
+    },
+    "bed": {
+      "value": 100,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Docs/Stages/cube.md section 7 (the ground rule's relief and stones)",
+      "note": "The coarsest structure the face shows."
+    },
+    "bedAspect": {
+      "value": 1.0,
+      "unit": "1",
+      "grade": "derived",
+      "source": "An unbedded body",
+      "derivation": "unbedded"
+    },
+    "hurst": {
+      "value": 0.7,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Candela et al. 2012, Journal of Geophysical Research 117, B08409 (fault surfaces, 0.6 to 0.8; cited in Stone.ush)",
+      "note": "The middle of the range measured on rock surfaces, as the topsoil's."
+    },
+    "toneSpread": {
+      "value": 0.12,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Shading/Substances/topsoil.json (the soils' first spread)",
+      "note": "A first half-range of ln(albedo) across one face."
+    },
+    "roughnessSpread": {
+      "value": 0.15,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Shading/Substances/topsoil.json (the soils' first spread)",
+      "note": "A first half-range of ln(roughness) across one face."
+    }
+  }
+}

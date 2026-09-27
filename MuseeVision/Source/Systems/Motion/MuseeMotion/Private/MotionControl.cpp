@@ -1,0 +1,50 @@
+#include "MotionControl.h"
+
+#include "MotionMechanism.h"
+#include "MotionPerformance.h"
+#include "MuseeUnits.h"
+
+UMotionControl::UMotionControl()
+{
+	InitSphereRadius(Musee::ToEngine(Musee::Meters(RadiusMeters)));
+	SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+	SetCollisionResponseToAllChannels(ECR_Ignore);
+	SetCollisionResponseToChannel(ECC_Visibility, ECR_Block);
+	SetGenerateOverlapEvents(false);
+	SetCanEverAffectNavigation(false);
+	SetHiddenInGame(true);
+	SetMobility(EComponentMobility::Movable);
+}
+
+void UMotionControl::Bind(UMotionMechanism* InMechanism, const FMuseeKey& InUseAnchor)
+{
+	BoundMechanism = InMechanism;
+	UseAnchorKey = InUseAnchor;
+}
+
+void UMotionControl::Bind(UMotionPerformance* InPerformance, const FMuseeKey& InUseAnchor)
+{
+	BoundPerformance = InPerformance;
+	UseAnchorKey = InUseAnchor;
+}
+
+FMuseeUse UMotionControl::Usage() const
+{
+	if (BoundPerformance)
+	{
+		return BoundPerformance->Usage();
+	}
+	return BoundMechanism ? BoundMechanism->UsageAt(UseAnchorKey) : FMuseeUse();
+}
+
+void UMotionControl::Use()
+{
+	if (BoundPerformance)
+	{
+		BoundPerformance->Use();
+	}
+	else if (BoundMechanism)
+	{
+		BoundMechanism->UseAt(UseAnchorKey);
+	}
+}

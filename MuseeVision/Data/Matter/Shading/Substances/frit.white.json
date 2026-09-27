@@ -1,0 +1,57 @@
+{
+  "schema": "musee.matter.shading.substance/1",
+  "key": "frit.white",
+  "name": "White ceramic frit (RAL 9010 enamel fired over the whole face)",
+  "family": "glass",
+  "record": "Workings/fritted.json",
+  "master": "sheet",
+  "dielectric": {
+    "diffuseAlbedo": {
+      "value": [
+        0.572,
+        0.572,
+        0.572
+      ],
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "unit": "1",
+      "grade": "record",
+      "source": "Workings/fritted.json: optics.whiteFullCoverage.luminousReflectanceGlassSide (0.572; Wilson and Elstner 2018, a 620 mm integrating sphere)",
+      "note": "Seen through the glass, as the Atrium's frit is from the room. Only the luminous value was read, so it is neutral; the frit side reflects 0.623."
+    },
+    "refractiveIndex": {
+      "value": 1.52,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Workings/fritted.json: process (an enamel is a glass flux fired onto the float); a soda-lime glass's index stands for it",
+      "note": "The face the eye meets is the glass's; the enamel's own index is not read."
+    },
+    "porosity": {
+      "value": 0.0,
+      "unit": "1",
+      "grade": "derived",
+      "source": "a fired enamel is fused to the glass",
+      "derivation": "a fused glass has no open pores"
+    },
+    "wettingDepth": {
+      "value": 0.0,
+      "unit": "mm",
+      "grade": "derived",
+      "source": "a fired enamel is fused to the glass",
+      "derivation": "nothing is taken in"
+    }
+  },
+  "sheet": {
+    "transmittance": {
+      "value": [
+        0.32,
+        0.32,
+        0.32
+      ],
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "unit": "1",
+      "grade": "record",
+      "source": "Workings/fritted.json: optics.whiteFullCoverage.luminousTransmittance (0.32, normal-hemispherical, EN 410; Wilson and Elstner 2018)",
+      "note": "All of it diffuse: a white frit passes almost no image-forming light. Only the luminous value was read, so it is neutral."
+    }
+  }
+}

@@ -505,6 +505,7 @@ scale.
 - **Unmated** (the stand): Site's blind iris on the plane, the ceiling iris shut, no car, no performance.
 
 **Departures from as-built** (for the owner's review):
+- **Ground and panels (K3-MATTER):** each ground layer is its own substance, laid by its excavated working (chalk, iron-stained chalk, flint, subsoil, clay-with-flints, crushed-limestone hardcore; colours are first values from Munsell field descriptions, unmeasured). The panels' lenslet array is a clear face working; its black matrix is the light-field panel's.
 - **iris.4600 corrected:** each blade gains a pin lug (r 0.060 boss on a 0.120 web) so it encloses its pin; as built the pin stood 25 mm outside the blade. The clamp value is 0.3206 on the linear channel (as built 0.378 through a smoothstep: the same blade pose, r 0.197). Shut, clamp, open and reach checked by polygon union.
 - **Mast pinspots** (contract shape): as built on below the clamp + 0.5 with no work performing; now `presence` with a derived channel that follows the performance, which is equivalent because the visitor is in the Cube only in the car.
 - **Ruled with the Atrium:** the port is `cube.up` (class `iris.4600`) closed by the Cube's own ceiling iris; the car, the

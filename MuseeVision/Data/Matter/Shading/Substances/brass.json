@@ -1,0 +1,65 @@
+{
+  "schema": "musee.matter.shading.substance/1",
+  "key": "brass",
+  "name": "Cartridge brass CuZn30",
+  "family": "brass",
+  "record": "Substances/brass.json",
+  "master": "metal",
+  "conductor": {
+    "f0": {
+      "value": [
+        0.909,
+        0.779,
+        0.422
+      ],
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "unit": "1",
+      "grade": "record",
+      "source": "Substances/brass.json: optics.f0 (Querry 1985, the measured n,k of Cu70Zn30, integrated under D65)"
+    },
+    "f82": {
+      "value": [
+        0.907,
+        0.865,
+        0.709
+      ],
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "unit": "1",
+      "grade": "record",
+      "source": "Substances/brass.json: optics.f82 (Querry 1985, the reflectance at 82 degrees)"
+    }
+  },
+  "tarnish": {
+    "diffuseAlbedo": {
+      "value": [
+        0.12,
+        0.04,
+        0.03
+      ],
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Shading/Substances/bronze.json: tarnish.diffuseAlbedo (cuprite, the first film on a copper alloy)",
+      "note": "Substances/brass.json names bronze.tarnish as brass's history: the copper in the alloy tarnishes to cuprite first."
+    },
+    "refractiveIndex": {
+      "value": 2.849,
+      "unit": "1",
+      "grade": "record",
+      "source": "Workings/patinated.json: film.phases[0].refractiveIndex (cuprite)"
+    },
+    "roughness": {
+      "value": 0.6,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Shading/Substances/bronze.json: tarnish.roughness (no measured roughness of a tarnish film)"
+    },
+    "cover": {
+      "value": 0.0,
+      "unit": "1",
+      "grade": "derived",
+      "source": "Histories/bronze.tarnish.json",
+      "derivation": "the substance itself carries no film; the history sets how far it has grown"
+    }
+  }
+}

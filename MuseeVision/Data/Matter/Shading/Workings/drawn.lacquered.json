@@ -1,0 +1,37 @@
+{
+  "schema": "musee.matter.shading.working/1",
+  "key": "drawn.lacquered",
+  "name": "Drawn and clear-lacquered (BHMA 606): fine draw lines along the section",
+  "record": "Workings/brushed.json",
+  "kind": "face",
+  "roughness": {
+    "value": 0.12,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Workings/brushed.json (Shading): a drawn face's longitudinal lines are a finer brushing; the clear lacquer's own reflection is not composed"
+  },
+  "roughnessAcross": {
+    "value": 0.2,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Workings/brushed.json (Shading): a drawn face's longitudinal lines are a finer brushing; the clear lacquer's own reflection is not composed"
+  },
+  "haziness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Workings/brushed.json (Shading): a drawn face's longitudinal lines are a finer brushing; the clear lacquer's own reflection is not composed"
+  },
+  "textureDepth": {
+    "value": 0.002,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Workings/brushed.json (Shading): a drawn face's longitudinal lines are a finer brushing; the clear lacquer's own reflection is not composed"
+  },
+  "relief": {
+    "value": 0.0,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Workings/brushed.json (Shading): a drawn face's longitudinal lines are a finer brushing; the clear lacquer's own reflection is not composed"
+  }
+}

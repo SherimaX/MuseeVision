@@ -11,6 +11,9 @@
  * A record file is one JSON object. Its fields are the struct's properties by name; a key is written as a string;
  * nested structs are objects and arrays are arrays. A point or a size, an `FVector` or `FVector2D`, is written as its
  * numbers, `[x, y, z]` or `[x, y]` (or as the object `{ "X": x, ... }`), so an outline is `[[x, y], [x, y], ...]`.
+ * A text the visitor reads, an `FMuseeText`, is written as `{ "key": ..., "source": ... }`, or as a plain string that
+ * is its source alone: its key is then the none key, and the record's owner gives it one (Motion keys a mechanism's
+ * texts by the mechanism's key and the field).
  * Keys beginning with `$` are the file's declarations, not fields:
  * - `"$records": [ {...}, {...} ]` holds the file's records when it has more than one; otherwise the object itself is
  *   the one record.

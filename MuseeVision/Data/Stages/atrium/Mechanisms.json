@@ -61,7 +61,13 @@
           "at": 1.0
         }
       ],
+      "drawn": "atrium",
       "home": "neck",
+      "returns": {
+        "from": "atrium",
+        "after": 12.0,
+        "radius": 3.5
+      },
       "control": "atrium.call",
       "openUse": {
         "verb": "Call the car",
@@ -87,10 +93,6 @@
           "time": 1.5
         }
       ],
-      "closeUse": {
-        "verb": "(automatic) home",
-        "caption": ""
-      },
       "close": [
         {
           "channel": "atrium.car.doors",
@@ -418,7 +420,7 @@
         {
           "use": "sphere.call",
           "at": "neck",
-          "verb": "(the Sphere's platform) Call the car",
+          "verb": "Call the car",
           "caption": "The car rises out of the neck to meet you.",
           "requires": {
             "mated": [
@@ -841,6 +843,97 @@
       "guard": "body-in-travel",
       "clearance": 0.002,
       "note": "Collar iris blade 7 of 7 (the closure of atrium.up, class iris.4600): pin at r 3.745, plan angle 308.5714 deg (from +x towards +y), its top face z 7.671; drawn shut; opening turns it 52 deg about its pin towards decreasing plan angle. The pose is the linear follows map (closure × 52 deg); the move is eased over 4.0 s. Housed open in the collar's pocket (r <= 4.050, z 7.660-7.705); in travel it reaches r 4.01."
+    }
+  ],
+  "channels": [
+    {
+      "key": "atrium.car.light",
+      "rest": 1.0,
+      "note": "The car's light ring (sheet sections 4 and 6): lit when the museum opens; the rides dim it to a glimmer (0.03) at the Cube and the Sphere and bring it back before the car leaves."
+    }
+  ],
+  "interlocks": [
+    {
+      "key": "atrium.a-1",
+      "mechanism": "atrium.car.lift",
+      "allows": [ { "channels": [ { "channel": "atrium.car.doors", "atMost": 0.0 }, { "channel": "atrium.landing.doors", "atMost": 0.0 } ] } ],
+      "note": "A-1 (sheet section 6): the car moves only with its leaves shut, and at the Atrium the landing's too."
+    },
+    {
+      "key": "atrium.a-2.landing",
+      "channel": "atrium.landing.doors",
+      "allows": [ { "channels": [ { "channel": "atrium.car.height", "atLeast": 0.53625, "atMost": 0.536478 } ] } ],
+      "note": "A-2: the landing's leaves open only with the car at the Atrium stop, 0.000 +/- 5 mm (0.536364 +/- 0.005 / 44.000)."
+    },
+    {
+      "key": "atrium.a-2.car",
+      "channel": "atrium.car.doors",
+      "allows": [
+        { "channels": [ { "channel": "atrium.car.height", "atLeast": 0.53625, "atMost": 0.536478 } ] },
+        { "channels": [ { "channel": "atrium.car.height", "atLeast": 0.999886 } ] }
+      ],
+      "note": "A-2: the car's leaves open only at the Atrium or the Sphere (each +/- 5 mm), never at the Cube, the clamp or the neck."
+    },
+    {
+      "key": "atrium.a-4",
+      "mechanism": "atrium.car.lift",
+      "above": 0.642705,
+      "below": 0.71625,
+      "allows": [ { "channels": [ { "channel": "atrium.up.closure", "atLeast": 0.999 } ] } ],
+      "note": "A-4: the car's head (2.940 above its floor) passes the collar iris's stack (bottom 7.669) only with it open: the floor between 4.679 and 7.915 ((z + 23.600) / 44.000)."
+    },
+    {
+      "key": "atrium.a-5.collar",
+      "channel": "atrium.up.closure",
+      "allows": [ { "channels": [ { "channel": "sphere.neck.closure", "atMost": 0.0 } ] } ],
+      "note": "A-5, the airlock: the collar iris opens only with the Sphere's neck iris shut."
+    },
+    {
+      "key": "atrium.a-5.neck",
+      "channel": "sphere.neck.closure",
+      "allows": [ { "channels": [ { "channel": "atrium.up.closure", "atMost": 0.0 } ] } ],
+      "note": "A-5, the airlock: the Sphere's neck iris opens only with the collar iris shut (the car's sequences ramp it; Site binds it across the seam)."
+    },
+    {
+      "key": "atrium.a-6.iris",
+      "mechanism": "atrium.car.lift",
+      "above": 0.290341,
+      "below": 0.360227,
+      "allows": [ { "channels": [ { "channel": "cube.up.closure", "atLeast": 0.999 } ] } ],
+      "note": "A-6: the car floor passes below -7.750 only with the Cube's ceiling iris open, and leaves the clamp upward only released."
+    },
+    {
+      "key": "atrium.a-6.clamp",
+      "mechanism": "atrium.car.lift",
+      "below": 0.290341,
+      "allows": [ { "channels": [ { "channel": "cube.up.closure", "atLeast": 0.3186, "atMost": 0.3226 } ] } ],
+      "note": "A-6: below the clamp the car rides the Cube mast only with the iris clamped round its head (0.3206 +/- 0.002)."
+    },
+    {
+      "key": "atrium.a-7",
+      "mechanism": "atrium.car.lift",
+      "above": 0.931818,
+      "allows": [ { "channels": [ { "channel": "sphere.platform.closure", "atLeast": 0.999 } ] } ],
+      "note": "A-7: the car passes the Sphere's platform gate (floor 17.400) only with the platform iris open."
+    },
+    {
+      "key": "atrium.a-8",
+      "mechanism": "atrium.car.lift",
+      "below": 0.290341,
+      "allows": [ { "channels": [ { "channel": "atrium.car.light", "atLeast": 1.0 }, { "channel": "cube.performance.active", "atMost": 0.0 } ] } ],
+      "note": "A-8: the car runs on the Cube mast only with its light back at 1 and no work performing."
+    }
+  ],
+  "extents": [
+    {
+      "key": "atrium.cube-mast.column",
+      "surface": "atrium.car.mast",
+      "body": "atrium.car.mast.head",
+      "at": [0.0, 0.0, 0.0],
+      "axis": [0.0, 0.0, -1.0],
+      "length": { "channel": "atrium.car.height", "in": [0.0, 0.290341], "out": [12.775, 0.0] },
+      "turns": { "radius": 0.17, "bore": 0.158, "pitch": 0.05 },
+      "note": "The Cube mast's spiral-band column (sheet section 3.6: r 0.170, from the crown's top up to the head, 0 to 12.775): the crown feeds it out as the car sinks below the clamp, so its length is (clamp - z). It hangs from the head's frame (the crown's top at zero length) down to the crown. Turn pitch 0.050 and a 12 mm wall are design numbers (the sheet gives none): the band's lead and the locked bands' depth."
     }
   ]
 }

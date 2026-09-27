@@ -1,0 +1,86 @@
+{
+  "schema": "musee.matter.shading.substance/1",
+  "key": "flint",
+  "name": "Flint (nodular chalcedony from the chalk), freshly broken",
+  "family": "accent",
+  "record": "Palette.json",
+  "master": "white",
+  "accentOf": "stone",
+  "dielectric": {
+    "diffuseAlbedo": {
+      "value": [
+        30.0,
+        0.0,
+        2.0
+      ],
+      "space": "CIELAB (D65, 2 deg)",
+      "unit": "CIELAB",
+      "grade": "unverified",
+      "source": "Munsell N3 (blue-black), the broken face of chalk flint as field descriptions give it; its white cortex is not the broken face",
+      "note": "No measured colour of the site's own ground was read: a first colour from the Munsell notation field descriptions give the layer, converted approximately."
+    },
+    "refractiveIndex": {
+      "value": 1.54,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Handbook of Mineralogy, Quartz (Anthony, Bideaux, Bladh and Nichols, Mineralogical Society of America): n omega 1.544 (chalcedony is microcrystalline quartz)"
+    },
+    "porosity": {
+      "value": 0.02,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Flint is a near-solid chalcedony: a first value of a few per cent micro-porosity"
+    },
+    "wettingDepth": {
+      "value": 5.0,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Shading/Substances/topsoil.json (the soils' first wetting depth)",
+      "note": "The depth whose pores govern the face's look when wet."
+    }
+  },
+  "structure": {
+    "grain": {
+      "value": 0.01,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Docs/Stages/cube.md section 7 (the ground rule's relief and stones)",
+      "note": "The finest structure the face shows."
+    },
+    "bed": {
+      "value": 120,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Docs/Stages/cube.md section 7 (the ground rule's relief and stones)",
+      "note": "The coarsest structure the face shows."
+    },
+    "bedAspect": {
+      "value": 1.0,
+      "unit": "1",
+      "grade": "derived",
+      "source": "An unbedded body",
+      "derivation": "unbedded"
+    },
+    "hurst": {
+      "value": 0.7,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Candela et al. 2012, Journal of Geophysical Research 117, B08409 (fault surfaces, 0.6 to 0.8; cited in Stone.ush)",
+      "note": "The middle of the range measured on rock surfaces, as the topsoil's."
+    },
+    "toneSpread": {
+      "value": 0.1,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Shading/Substances/topsoil.json (the soils' first spread)",
+      "note": "A first half-range of ln(albedo) across one face."
+    },
+    "roughnessSpread": {
+      "value": 0.15,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Shading/Substances/topsoil.json (the soils' first spread)",
+      "note": "A first half-range of ln(roughness) across one face."
+    }
+  }
+}

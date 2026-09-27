@@ -23,14 +23,15 @@ restated here.
 | `RotundaDome.cpp` | the plain bands, shell, curb and lead; the coffers' ring ribs and meridional ribs |
 | `RotundaEye.cpp` | the lattice's ring and bars, the laminated glass, the node |
 | `RotundaFloors.cpp` | the ring's core and slabs; the dial's bands and fillets and the gilt sun (body `rotunda.sun-clock.drum`) |
+| `RotundaDialInlay.cpp` | the dial's hour ring, hour lines, gilt meridian and minute ticks, laid from Time's dial (`Musee::Time::FMuseumDial`, sheet §5) |
 | `RotundaSunClock.cpp` | the lifting drum: wall, foot, base, pilasters, entablature, door archivolt, deck, soffit, rim, pendant |
 | `RotundaShaft.cpp` | the sleeve, the pocket's masonry and bores, the tympanum and the port's reveal, the rams, the foundation, the landing and rosette |
 | `RotundaStair.cpp` | the helical stair's treads, nosings and string |
 
 ## Waiting on the systems
 
-- Time lays the dial's hour ring, hour lines, gilt meridian, minute ticks and numerals from its dial (sheet §5); Form's
-  lettering sets the motto. Neither is drawn by hand here.
+- The numerals wait for Form's lettering and the ported glyphs, as the motto does; the hour ring, lines, meridian and
+  ticks are laid from Time's dial (RotundaDialInlay). Nothing is drawn by hand here.
 - Form draws straight passages through curved walls radially, sweeps only along plan paths, and has no relief on a
   surface of revolution or lofted solid: the doorways, the stair's string and soffit, the coffers' meridional ribs and
   the sun's rays are their nearest honest forms, as each file's comment says. The stair's balustrades, handrails and
