@@ -1,0 +1,1075 @@
+{
+  "stage": "hall-of-light",
+  "daylight": [
+    {
+      "opening": "hall-of-light.wall.north",
+      "glazing": "glass.low-iron",
+      "weather": "museum",
+      "control": "none",
+      "note": "11 panes, laminated UV-filtering (hall-of-light.wall.glass); the meadow behind."
+    },
+    {
+      "opening": "hall-of-light.wall.south",
+      "glazing": "glass.low-iron",
+      "weather": "museum",
+      "control": "none",
+      "note": "11 panes, laminated UV-filtering (hall-of-light.wall.glass); the orchard behind."
+    },
+    {
+      "opening": "hall-of-light.vault",
+      "glazing": "glass.low-iron",
+      "weather": "museum",
+      "control": "none",
+      "note": "152 hot-bent panes, clear (hall-of-light.vault.glass): the lattice draws its shadow on the floor."
+    },
+    {
+      "opening": "hall-of-light.lunette",
+      "glazing": "glass.low-iron",
+      "weather": "museum",
+      "control": "none",
+      "note": "6 flat panes over the Atrium's coping (hall-of-light.lunette.glass)."
+    }
+  ],
+  "luminaires": [
+    {
+      "id": "print.n1",
+      "type": "track-framing.3000k.small",
+      "point": [
+        1.3,
+        -1.1,
+        7.1
+      ],
+      "aim": [
+        1.3,
+        -4.35,
+        1.6
+      ],
+      "operation": "presence",
+      "note": "On a short track under arch 0's inner flange (z 7.23); shutters framed to the frame's outer 1.044 x 0.944; 30 deg from vertical, throw 6.4."
+    },
+    {
+      "id": "print.n2",
+      "type": "track-framing.3000k.small",
+      "point": [
+        4.3,
+        -1.1,
+        7.1
+      ],
+      "aim": [
+        4.3,
+        -4.35,
+        1.6
+      ],
+      "operation": "presence",
+      "note": "On a short track under arch 2's inner flange (z 7.23); shutters framed to the frame's outer 1.044 x 0.944; 30 deg from vertical, throw 6.4."
+    },
+    {
+      "id": "print.n3",
+      "type": "track-framing.3000k.small",
+      "point": [
+        7.3,
+        -1.1,
+        7.1
+      ],
+      "aim": [
+        7.3,
+        -4.35,
+        1.6
+      ],
+      "operation": "presence",
+      "note": "On a short track under arch 4's inner flange (z 7.23); shutters framed to the frame's outer 1.044 x 0.944; 30 deg from vertical, throw 6.4."
+    },
+    {
+      "id": "print.n4",
+      "type": "track-framing.3000k.small",
+      "point": [
+        10.3,
+        -1.1,
+        7.1
+      ],
+      "aim": [
+        10.3,
+        -4.35,
+        1.6
+      ],
+      "operation": "presence",
+      "note": "On a short track under arch 6's inner flange (z 7.23); shutters framed to the frame's outer 1.044 x 0.944; 30 deg from vertical, throw 6.4."
+    },
+    {
+      "id": "print.n5",
+      "type": "track-framing.3000k.small",
+      "point": [
+        13.3,
+        -1.1,
+        7.1
+      ],
+      "aim": [
+        13.3,
+        -4.35,
+        1.6
+      ],
+      "operation": "presence",
+      "note": "On a short track under arch 8's inner flange (z 7.23); shutters framed to the frame's outer 1.044 x 0.944; 30 deg from vertical, throw 6.4."
+    },
+    {
+      "id": "print.n6",
+      "type": "track-framing.3000k.small",
+      "point": [
+        16.3,
+        -1.1,
+        7.1
+      ],
+      "aim": [
+        16.3,
+        -4.35,
+        1.6
+      ],
+      "operation": "presence",
+      "note": "On a short track under arch 10's inner flange (z 7.23); shutters framed to the frame's outer 1.044 x 0.944; 30 deg from vertical, throw 6.4."
+    },
+    {
+      "id": "print.n7",
+      "type": "track-framing.3000k.small",
+      "point": [
+        19.3,
+        -1.1,
+        7.1
+      ],
+      "aim": [
+        19.3,
+        -4.35,
+        1.6
+      ],
+      "operation": "presence",
+      "note": "On a short track under arch 12's inner flange (z 7.23); shutters framed to the frame's outer 1.044 x 0.944; 30 deg from vertical, throw 6.4."
+    },
+    {
+      "id": "print.n8",
+      "type": "track-framing.3000k.small",
+      "point": [
+        22.3,
+        -1.1,
+        7.1
+      ],
+      "aim": [
+        22.3,
+        -4.35,
+        1.6
+      ],
+      "operation": "presence",
+      "note": "On a short track under arch 14's inner flange (z 7.23); shutters framed to the frame's outer 1.044 x 0.944; 30 deg from vertical, throw 6.4."
+    },
+    {
+      "id": "print.s1",
+      "type": "track-framing.3000k.small",
+      "point": [
+        1.3,
+        1.1,
+        7.1
+      ],
+      "aim": [
+        1.3,
+        4.35,
+        1.6
+      ],
+      "operation": "presence",
+      "note": "On a short track under arch 0's inner flange (z 7.23); shutters framed to the frame's outer 1.044 x 0.944; 30 deg from vertical, throw 6.4."
+    },
+    {
+      "id": "print.s2",
+      "type": "track-framing.3000k.small",
+      "point": [
+        4.3,
+        1.1,
+        7.1
+      ],
+      "aim": [
+        4.3,
+        4.35,
+        1.6
+      ],
+      "operation": "presence",
+      "note": "On a short track under arch 2's inner flange (z 7.23); shutters framed to the frame's outer 1.044 x 0.944; 30 deg from vertical, throw 6.4."
+    },
+    {
+      "id": "print.s3",
+      "type": "track-framing.3000k.small",
+      "point": [
+        7.3,
+        1.1,
+        7.1
+      ],
+      "aim": [
+        7.3,
+        4.35,
+        1.6
+      ],
+      "operation": "presence",
+      "note": "On a short track under arch 4's inner flange (z 7.23); shutters framed to the frame's outer 1.044 x 0.944; 30 deg from vertical, throw 6.4."
+    },
+    {
+      "id": "print.s4",
+      "type": "track-framing.3000k.small",
+      "point": [
+        10.3,
+        1.1,
+        7.1
+      ],
+      "aim": [
+        10.3,
+        4.35,
+        1.6
+      ],
+      "operation": "presence",
+      "note": "On a short track under arch 6's inner flange (z 7.23); shutters framed to the frame's outer 1.044 x 0.944; 30 deg from vertical, throw 6.4."
+    },
+    {
+      "id": "print.s5",
+      "type": "track-framing.3000k.small",
+      "point": [
+        13.3,
+        1.1,
+        7.1
+      ],
+      "aim": [
+        13.3,
+        4.35,
+        1.6
+      ],
+      "operation": "presence",
+      "note": "On a short track under arch 8's inner flange (z 7.23); shutters framed to the frame's outer 1.044 x 0.944; 30 deg from vertical, throw 6.4."
+    },
+    {
+      "id": "print.s6",
+      "type": "track-framing.3000k.small",
+      "point": [
+        16.3,
+        1.1,
+        7.1
+      ],
+      "aim": [
+        16.3,
+        4.35,
+        1.6
+      ],
+      "operation": "presence",
+      "note": "On a short track under arch 10's inner flange (z 7.23); shutters framed to the frame's outer 1.044 x 0.944; 30 deg from vertical, throw 6.4."
+    },
+    {
+      "id": "print.s7",
+      "type": "track-framing.3000k.small",
+      "point": [
+        19.3,
+        1.1,
+        7.1
+      ],
+      "aim": [
+        19.3,
+        4.35,
+        1.6
+      ],
+      "operation": "presence",
+      "note": "On a short track under arch 12's inner flange (z 7.23); shutters framed to the frame's outer 1.044 x 0.944; 30 deg from vertical, throw 6.4."
+    },
+    {
+      "id": "print.s8",
+      "type": "track-framing.3000k.small",
+      "point": [
+        22.3,
+        1.1,
+        7.1
+      ],
+      "aim": [
+        22.3,
+        4.35,
+        1.6
+      ],
+      "operation": "presence",
+      "note": "On a short track under arch 14's inner flange (z 7.23); shutters framed to the frame's outer 1.044 x 0.944; 30 deg from vertical, throw 6.4."
+    },
+    {
+      "id": "stereo.1",
+      "type": "track-framing.3000k.small",
+      "point": [
+        5.8,
+        1.19,
+        7.08
+      ],
+      "aim": [
+        5.8,
+        -2.4,
+        1.32
+      ],
+      "operation": "presence",
+      "note": "Under arch 3's inner flange across the axis; framed to the reader plate 0.68 x 0.40; about 29 deg off the plate's normal."
+    },
+    {
+      "id": "stereo.2",
+      "type": "track-framing.3000k.small",
+      "point": [
+        11.8,
+        -1.19,
+        7.08
+      ],
+      "aim": [
+        11.8,
+        2.4,
+        1.32
+      ],
+      "operation": "presence",
+      "note": "Under arch 7's inner flange across the axis; framed to the reader plate 0.68 x 0.40; about 29 deg off the plate's normal."
+    },
+    {
+      "id": "stereo.3",
+      "type": "track-framing.3000k.small",
+      "point": [
+        17.8,
+        1.19,
+        7.08
+      ],
+      "aim": [
+        17.8,
+        -2.4,
+        1.32
+      ],
+      "operation": "presence",
+      "note": "Under arch 11's inner flange across the axis; framed to the reader plate 0.68 x 0.40; about 29 deg off the plate's normal."
+    },
+    {
+      "id": "stereo.4",
+      "type": "track-framing.3000k.small",
+      "point": [
+        23.8,
+        -1.19,
+        7.08
+      ],
+      "aim": [
+        23.8,
+        2.4,
+        1.32
+      ],
+      "operation": "presence",
+      "note": "Under arch 15's inner flange across the axis; framed to the reader plate 0.68 x 0.40; about 29 deg off the plate's normal."
+    },
+    {
+      "id": "uplight.n0",
+      "type": "track-spot.3000k.38deg",
+      "point": [
+        0.55,
+        -4.25,
+        5.18
+      ],
+      "aim": [
+        0.55,
+        1.0,
+        7.4
+      ],
+      "operation": "dusk",
+      "note": "On the eaves' top at its inner edge, hidden from below by the eaves box (as built), midway in every other arch bay; washes the far half's arches and purlins."
+    },
+    {
+      "id": "uplight.n1",
+      "type": "track-spot.3000k.38deg",
+      "point": [
+        3.55,
+        -4.25,
+        5.18
+      ],
+      "aim": [
+        3.55,
+        1.0,
+        7.4
+      ],
+      "operation": "dusk",
+      "note": "On the eaves' top at its inner edge, hidden from below by the eaves box (as built), midway in every other arch bay; washes the far half's arches and purlins."
+    },
+    {
+      "id": "uplight.n2",
+      "type": "track-spot.3000k.38deg",
+      "point": [
+        6.55,
+        -4.25,
+        5.18
+      ],
+      "aim": [
+        6.55,
+        1.0,
+        7.4
+      ],
+      "operation": "dusk",
+      "note": "On the eaves' top at its inner edge, hidden from below by the eaves box (as built), midway in every other arch bay; washes the far half's arches and purlins."
+    },
+    {
+      "id": "uplight.n3",
+      "type": "track-spot.3000k.38deg",
+      "point": [
+        9.55,
+        -4.25,
+        5.18
+      ],
+      "aim": [
+        9.55,
+        1.0,
+        7.4
+      ],
+      "operation": "dusk",
+      "note": "On the eaves' top at its inner edge, hidden from below by the eaves box (as built), midway in every other arch bay; washes the far half's arches and purlins."
+    },
+    {
+      "id": "uplight.n4",
+      "type": "track-spot.3000k.38deg",
+      "point": [
+        12.55,
+        -4.25,
+        5.18
+      ],
+      "aim": [
+        12.55,
+        1.0,
+        7.4
+      ],
+      "operation": "dusk",
+      "note": "On the eaves' top at its inner edge, hidden from below by the eaves box (as built), midway in every other arch bay; washes the far half's arches and purlins."
+    },
+    {
+      "id": "uplight.n5",
+      "type": "track-spot.3000k.38deg",
+      "point": [
+        15.55,
+        -4.25,
+        5.18
+      ],
+      "aim": [
+        15.55,
+        1.0,
+        7.4
+      ],
+      "operation": "dusk",
+      "note": "On the eaves' top at its inner edge, hidden from below by the eaves box (as built), midway in every other arch bay; washes the far half's arches and purlins."
+    },
+    {
+      "id": "uplight.n6",
+      "type": "track-spot.3000k.38deg",
+      "point": [
+        18.55,
+        -4.25,
+        5.18
+      ],
+      "aim": [
+        18.55,
+        1.0,
+        7.4
+      ],
+      "operation": "dusk",
+      "note": "On the eaves' top at its inner edge, hidden from below by the eaves box (as built), midway in every other arch bay; washes the far half's arches and purlins."
+    },
+    {
+      "id": "uplight.n7",
+      "type": "track-spot.3000k.38deg",
+      "point": [
+        21.55,
+        -4.25,
+        5.18
+      ],
+      "aim": [
+        21.55,
+        1.0,
+        7.4
+      ],
+      "operation": "dusk",
+      "note": "On the eaves' top at its inner edge, hidden from below by the eaves box (as built), midway in every other arch bay; washes the far half's arches and purlins."
+    },
+    {
+      "id": "uplight.n8",
+      "type": "track-spot.3000k.38deg",
+      "point": [
+        24.55,
+        -4.25,
+        5.18
+      ],
+      "aim": [
+        24.55,
+        1.0,
+        7.4
+      ],
+      "operation": "dusk",
+      "note": "On the eaves' top at its inner edge, hidden from below by the eaves box (as built), midway in every other arch bay; washes the far half's arches and purlins."
+    },
+    {
+      "id": "uplight.n9",
+      "type": "track-spot.3000k.38deg",
+      "point": [
+        27.55,
+        -4.25,
+        5.18
+      ],
+      "aim": [
+        27.55,
+        1.0,
+        7.4
+      ],
+      "operation": "dusk",
+      "note": "On the eaves' top at its inner edge, hidden from below by the eaves box (as built), midway in every other arch bay; washes the far half's arches and purlins."
+    },
+    {
+      "id": "uplight.s0",
+      "type": "track-spot.3000k.38deg",
+      "point": [
+        0.55,
+        4.25,
+        5.18
+      ],
+      "aim": [
+        0.55,
+        -1.0,
+        7.4
+      ],
+      "operation": "dusk",
+      "note": "On the eaves' top at its inner edge, hidden from below by the eaves box (as built), midway in every other arch bay; washes the far half's arches and purlins."
+    },
+    {
+      "id": "uplight.s1",
+      "type": "track-spot.3000k.38deg",
+      "point": [
+        3.55,
+        4.25,
+        5.18
+      ],
+      "aim": [
+        3.55,
+        -1.0,
+        7.4
+      ],
+      "operation": "dusk",
+      "note": "On the eaves' top at its inner edge, hidden from below by the eaves box (as built), midway in every other arch bay; washes the far half's arches and purlins."
+    },
+    {
+      "id": "uplight.s2",
+      "type": "track-spot.3000k.38deg",
+      "point": [
+        6.55,
+        4.25,
+        5.18
+      ],
+      "aim": [
+        6.55,
+        -1.0,
+        7.4
+      ],
+      "operation": "dusk",
+      "note": "On the eaves' top at its inner edge, hidden from below by the eaves box (as built), midway in every other arch bay; washes the far half's arches and purlins."
+    },
+    {
+      "id": "uplight.s3",
+      "type": "track-spot.3000k.38deg",
+      "point": [
+        9.55,
+        4.25,
+        5.18
+      ],
+      "aim": [
+        9.55,
+        -1.0,
+        7.4
+      ],
+      "operation": "dusk",
+      "note": "On the eaves' top at its inner edge, hidden from below by the eaves box (as built), midway in every other arch bay; washes the far half's arches and purlins."
+    },
+    {
+      "id": "uplight.s4",
+      "type": "track-spot.3000k.38deg",
+      "point": [
+        12.55,
+        4.25,
+        5.18
+      ],
+      "aim": [
+        12.55,
+        -1.0,
+        7.4
+      ],
+      "operation": "dusk",
+      "note": "On the eaves' top at its inner edge, hidden from below by the eaves box (as built), midway in every other arch bay; washes the far half's arches and purlins."
+    },
+    {
+      "id": "uplight.s5",
+      "type": "track-spot.3000k.38deg",
+      "point": [
+        15.55,
+        4.25,
+        5.18
+      ],
+      "aim": [
+        15.55,
+        -1.0,
+        7.4
+      ],
+      "operation": "dusk",
+      "note": "On the eaves' top at its inner edge, hidden from below by the eaves box (as built), midway in every other arch bay; washes the far half's arches and purlins."
+    },
+    {
+      "id": "uplight.s6",
+      "type": "track-spot.3000k.38deg",
+      "point": [
+        18.55,
+        4.25,
+        5.18
+      ],
+      "aim": [
+        18.55,
+        -1.0,
+        7.4
+      ],
+      "operation": "dusk",
+      "note": "On the eaves' top at its inner edge, hidden from below by the eaves box (as built), midway in every other arch bay; washes the far half's arches and purlins."
+    },
+    {
+      "id": "uplight.s7",
+      "type": "track-spot.3000k.38deg",
+      "point": [
+        21.55,
+        4.25,
+        5.18
+      ],
+      "aim": [
+        21.55,
+        -1.0,
+        7.4
+      ],
+      "operation": "dusk",
+      "note": "On the eaves' top at its inner edge, hidden from below by the eaves box (as built), midway in every other arch bay; washes the far half's arches and purlins."
+    },
+    {
+      "id": "uplight.s8",
+      "type": "track-spot.3000k.38deg",
+      "point": [
+        24.55,
+        4.25,
+        5.18
+      ],
+      "aim": [
+        24.55,
+        -1.0,
+        7.4
+      ],
+      "operation": "dusk",
+      "note": "On the eaves' top at its inner edge, hidden from below by the eaves box (as built), midway in every other arch bay; washes the far half's arches and purlins."
+    },
+    {
+      "id": "uplight.s9",
+      "type": "track-spot.3000k.38deg",
+      "point": [
+        27.55,
+        4.25,
+        5.18
+      ],
+      "aim": [
+        27.55,
+        -1.0,
+        7.4
+      ],
+      "operation": "dusk",
+      "note": "On the eaves' top at its inner edge, hidden from below by the eaves box (as built), midway in every other arch bay; washes the far half's arches and purlins."
+    },
+    {
+      "id": "step.n0",
+      "type": "gap.step-light.2700k",
+      "point": [
+        -0.2,
+        -4.38,
+        0.14
+      ],
+      "aim": [
+        -0.2,
+        2.0,
+        0.0
+      ],
+      "operation": "dusk",
+      "note": "Recessed in hall-of-light.plinth.housing under post 0 (never under a print), louvred faceplate flush with the plinth's inner face (d 0.180); nearly level across the floor."
+    },
+    {
+      "id": "step.n1",
+      "type": "gap.step-light.2700k",
+      "point": [
+        2.8,
+        -4.38,
+        0.14
+      ],
+      "aim": [
+        2.8,
+        2.0,
+        0.0
+      ],
+      "operation": "dusk",
+      "note": "Recessed in hall-of-light.plinth.housing under post 1 (never under a print), louvred faceplate flush with the plinth's inner face (d 0.180); nearly level across the floor."
+    },
+    {
+      "id": "step.n2",
+      "type": "gap.step-light.2700k",
+      "point": [
+        5.8,
+        -4.38,
+        0.14
+      ],
+      "aim": [
+        5.8,
+        2.0,
+        0.0
+      ],
+      "operation": "dusk",
+      "note": "Recessed in hall-of-light.plinth.housing under post 2 (never under a print), louvred faceplate flush with the plinth's inner face (d 0.180); nearly level across the floor."
+    },
+    {
+      "id": "step.n3",
+      "type": "gap.step-light.2700k",
+      "point": [
+        8.8,
+        -4.38,
+        0.14
+      ],
+      "aim": [
+        8.8,
+        2.0,
+        0.0
+      ],
+      "operation": "dusk",
+      "note": "Recessed in hall-of-light.plinth.housing under post 3 (never under a print), louvred faceplate flush with the plinth's inner face (d 0.180); nearly level across the floor."
+    },
+    {
+      "id": "step.n4",
+      "type": "gap.step-light.2700k",
+      "point": [
+        11.8,
+        -4.38,
+        0.14
+      ],
+      "aim": [
+        11.8,
+        2.0,
+        0.0
+      ],
+      "operation": "dusk",
+      "note": "Recessed in hall-of-light.plinth.housing under post 4 (never under a print), louvred faceplate flush with the plinth's inner face (d 0.180); nearly level across the floor."
+    },
+    {
+      "id": "step.n5",
+      "type": "gap.step-light.2700k",
+      "point": [
+        14.8,
+        -4.38,
+        0.14
+      ],
+      "aim": [
+        14.8,
+        2.0,
+        0.0
+      ],
+      "operation": "dusk",
+      "note": "Recessed in hall-of-light.plinth.housing under post 5 (never under a print), louvred faceplate flush with the plinth's inner face (d 0.180); nearly level across the floor."
+    },
+    {
+      "id": "step.n6",
+      "type": "gap.step-light.2700k",
+      "point": [
+        17.8,
+        -4.38,
+        0.14
+      ],
+      "aim": [
+        17.8,
+        2.0,
+        0.0
+      ],
+      "operation": "dusk",
+      "note": "Recessed in hall-of-light.plinth.housing under post 6 (never under a print), louvred faceplate flush with the plinth's inner face (d 0.180); nearly level across the floor."
+    },
+    {
+      "id": "step.n7",
+      "type": "gap.step-light.2700k",
+      "point": [
+        20.8,
+        -4.38,
+        0.14
+      ],
+      "aim": [
+        20.8,
+        2.0,
+        0.0
+      ],
+      "operation": "dusk",
+      "note": "Recessed in hall-of-light.plinth.housing under post 7 (never under a print), louvred faceplate flush with the plinth's inner face (d 0.180); nearly level across the floor."
+    },
+    {
+      "id": "step.n8",
+      "type": "gap.step-light.2700k",
+      "point": [
+        23.8,
+        -4.38,
+        0.14
+      ],
+      "aim": [
+        23.8,
+        2.0,
+        0.0
+      ],
+      "operation": "dusk",
+      "note": "Recessed in hall-of-light.plinth.housing under post 8 (never under a print), louvred faceplate flush with the plinth's inner face (d 0.180); nearly level across the floor."
+    },
+    {
+      "id": "step.n9",
+      "type": "gap.step-light.2700k",
+      "point": [
+        26.8,
+        -4.38,
+        0.14
+      ],
+      "aim": [
+        26.8,
+        2.0,
+        0.0
+      ],
+      "operation": "dusk",
+      "note": "Recessed in hall-of-light.plinth.housing under post 9 (never under a print), louvred faceplate flush with the plinth's inner face (d 0.180); nearly level across the floor."
+    },
+    {
+      "id": "step.s0",
+      "type": "gap.step-light.2700k",
+      "point": [
+        -0.2,
+        4.38,
+        0.14
+      ],
+      "aim": [
+        -0.2,
+        -2.0,
+        0.0
+      ],
+      "operation": "dusk",
+      "note": "Recessed in hall-of-light.plinth.housing under post 0 (never under a print), louvred faceplate flush with the plinth's inner face (d 0.180); nearly level across the floor."
+    },
+    {
+      "id": "step.s1",
+      "type": "gap.step-light.2700k",
+      "point": [
+        2.8,
+        4.38,
+        0.14
+      ],
+      "aim": [
+        2.8,
+        -2.0,
+        0.0
+      ],
+      "operation": "dusk",
+      "note": "Recessed in hall-of-light.plinth.housing under post 1 (never under a print), louvred faceplate flush with the plinth's inner face (d 0.180); nearly level across the floor."
+    },
+    {
+      "id": "step.s2",
+      "type": "gap.step-light.2700k",
+      "point": [
+        5.8,
+        4.38,
+        0.14
+      ],
+      "aim": [
+        5.8,
+        -2.0,
+        0.0
+      ],
+      "operation": "dusk",
+      "note": "Recessed in hall-of-light.plinth.housing under post 2 (never under a print), louvred faceplate flush with the plinth's inner face (d 0.180); nearly level across the floor."
+    },
+    {
+      "id": "step.s3",
+      "type": "gap.step-light.2700k",
+      "point": [
+        8.8,
+        4.38,
+        0.14
+      ],
+      "aim": [
+        8.8,
+        -2.0,
+        0.0
+      ],
+      "operation": "dusk",
+      "note": "Recessed in hall-of-light.plinth.housing under post 3 (never under a print), louvred faceplate flush with the plinth's inner face (d 0.180); nearly level across the floor."
+    },
+    {
+      "id": "step.s4",
+      "type": "gap.step-light.2700k",
+      "point": [
+        11.8,
+        4.38,
+        0.14
+      ],
+      "aim": [
+        11.8,
+        -2.0,
+        0.0
+      ],
+      "operation": "dusk",
+      "note": "Recessed in hall-of-light.plinth.housing under post 4 (never under a print), louvred faceplate flush with the plinth's inner face (d 0.180); nearly level across the floor."
+    },
+    {
+      "id": "step.s5",
+      "type": "gap.step-light.2700k",
+      "point": [
+        14.8,
+        4.38,
+        0.14
+      ],
+      "aim": [
+        14.8,
+        -2.0,
+        0.0
+      ],
+      "operation": "dusk",
+      "note": "Recessed in hall-of-light.plinth.housing under post 5 (never under a print), louvred faceplate flush with the plinth's inner face (d 0.180); nearly level across the floor."
+    },
+    {
+      "id": "step.s6",
+      "type": "gap.step-light.2700k",
+      "point": [
+        17.8,
+        4.38,
+        0.14
+      ],
+      "aim": [
+        17.8,
+        -2.0,
+        0.0
+      ],
+      "operation": "dusk",
+      "note": "Recessed in hall-of-light.plinth.housing under post 6 (never under a print), louvred faceplate flush with the plinth's inner face (d 0.180); nearly level across the floor."
+    },
+    {
+      "id": "step.s7",
+      "type": "gap.step-light.2700k",
+      "point": [
+        20.8,
+        4.38,
+        0.14
+      ],
+      "aim": [
+        20.8,
+        -2.0,
+        0.0
+      ],
+      "operation": "dusk",
+      "note": "Recessed in hall-of-light.plinth.housing under post 7 (never under a print), louvred faceplate flush with the plinth's inner face (d 0.180); nearly level across the floor."
+    },
+    {
+      "id": "step.s8",
+      "type": "gap.step-light.2700k",
+      "point": [
+        23.8,
+        4.38,
+        0.14
+      ],
+      "aim": [
+        23.8,
+        -2.0,
+        0.0
+      ],
+      "operation": "dusk",
+      "note": "Recessed in hall-of-light.plinth.housing under post 8 (never under a print), louvred faceplate flush with the plinth's inner face (d 0.180); nearly level across the floor."
+    },
+    {
+      "id": "step.s9",
+      "type": "gap.step-light.2700k",
+      "point": [
+        26.8,
+        4.38,
+        0.14
+      ],
+      "aim": [
+        26.8,
+        -2.0,
+        0.0
+      ],
+      "operation": "dusk",
+      "note": "Recessed in hall-of-light.plinth.housing under post 9 (never under a print), louvred faceplate flush with the plinth's inner face (d 0.180); nearly level across the floor."
+    }
+  ],
+  "targets": [
+    {
+      "surface": "hall-of-light.mount",
+      "class": "works-on-paper",
+      "lux": [
+        50,
+        50
+      ],
+      "source": "Care",
+      "note": "Measured on the 16 prints (on their mounts) behind the frames' UV glazing. By day the glass hall exceeds it (sheet section 4); measured, never tuned."
+    },
+    {
+      "surface": "hall-of-light.stereo.reader",
+      "class": "works-on-paper",
+      "lux": [
+        50,
+        50
+      ],
+      "source": "Care",
+      "note": "Measured on the four stereo cards on their readers."
+    },
+    {
+      "surface": "hall-of-light.autochrome.mat",
+      "class": "works-on-paper.fugitive",
+      "lux": [
+        50,
+        50
+      ],
+      "source": "Care",
+      "note": "Measured on the four autochromes (dyed starch-grain screens: highly fugitive colorants), lit only by transmitted daylight; 15,000 lx h a year."
+    },
+    {
+      "surface": "hall-of-light.floor",
+      "class": "gallery.low-light",
+      "lux": [
+        50,
+        50
+      ],
+      "source": "UseTargets",
+      "note": "The hall holds 50 lx works (ruled class). By day the glass gives far more; this is the electric floor after dusk (step lights and the vault's reflected wash). No walked line below escape-route."
+    }
+  ],
+  "design": [
+    {
+      "brighter": "hall-of-light.vault.steel",
+      "darker": "hall-of-light.floor",
+      "ratio": [
+        1.5,
+        null
+      ],
+      "note": "At night the washed pearl lattice is the hall's brightest surface, at least 1.5 x the floor (the board: the uplights wash the pearl vault)."
+    },
+    {
+      "brighter": "hall-of-light.mount",
+      "darker": "hall-of-light.floor",
+      "ratio": [
+        1.0,
+        null
+      ],
+      "note": "At night each framed print reads above the floor."
+    },
+    {
+      "brighter": "hall-of-light.vault.glass",
+      "darker": "hall-of-light.wall.glass",
+      "ratio": [
+        1.0,
+        null
+      ],
+      "note": "By day the sky through the vault is brighter than the gardens through the walls."
+    },
+    {
+      "brighter": "hall-of-light.autochrome.backing",
+      "darker": "hall-of-light.mount",
+      "ratio": [
+        1.0,
+        null
+      ],
+      "note": "By day the autochromes glow by transmitted light, brighter than the prints' mounts."
+    }
+  ]
+}

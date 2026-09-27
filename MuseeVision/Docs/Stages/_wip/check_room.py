@@ -7,7 +7,7 @@ USE = r"C:\mv\wt\r-light\MuseeVision\Data\Light\UseTargets.json"
 CARE = r"C:\mv\wt\r-light\MuseeVision\Data\Art\Care.json"
 PALETTE = "C:/Users/anan9/AppData/Local/Temp/claude/C--Users-anan9-Desktop-Projects-Musee-Vision/fe83b0c0-89f0-4a7a-aec6-d7928054970e/scratchpad/Palette.json"
 # keys the Architect has ruled in, which Matter will add to the palette
-RULED_KEYS = {"steel.hard-chrome", "accent.stoneware-glazed", "accent.huanghuali", "accent.lingbi-rock"}
+RULED_KEYS = {"steel.hard-chrome", "accent.rag-board", "accent.stoneware-glazed", "accent.huanghuali", "accent.lingbi-rock"}
 # catalogue types and target classes the Architect has ruled in, which Light will add
 RULED_TYPES = {"case-linear.3000k", "lantern.2200k"}
 RULED_USE = {"garden.night", "gallery.low-light"}
