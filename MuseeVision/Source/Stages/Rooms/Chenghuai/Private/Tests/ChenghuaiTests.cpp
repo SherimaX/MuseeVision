@@ -165,6 +165,7 @@ namespace Musee::Chenghuai::Tests
 			AddError(Finding.Summary);
 		}
 		TestEqual(TEXT("the stage contract holds"), Findings.Num(), 0);
+		AddInfo(FString::Printf(TEXT("%d pieces, %d anchors, %d openings"), Description.Pieces.Num(), Description.Anchors.Num(), Description.Openings.Num()));
 		TestEqual(TEXT("fifteen enclosures"), Description.Enclosures.Num(), 15);
 		for (const FFormEnclosure& Enclosure : Description.Enclosures)
 		{

@@ -271,9 +271,10 @@ namespace Musee::Chenghuai
 					const FVector2D At = FMath::Lerp(A, B, double(K) / Piers);
 					const double Radius = FVector2D::Distance(At, Tribune);
 					const double Foot = FMath::Max(BedAt(Radius) - Plan::BridgePierUnderBed, Radius < Plan::TribuneClear ? Plan::HallClearZ : -TNumericLimits<double>::Max());
+					// Each pier drawn about its own centre, square to its run.
 					const double P = 0.5 * Plan::BridgePier;
-					Block(Out, FString::Printf(TEXT("%s.pier.%d"), *Name, K), TEXT("garden.bluestone.submerged"), F, Length * K / Piers - P,
-						Length * K / Piers + P, -P, P, Foot, Slab, EHit::Solid);
+					const FBuildingFrame Pier = FBuildingFrame::Of(At, Along, FVector2D(-Along.Y, Along.X));
+					Block(Out, FString::Printf(TEXT("%s.pier.%d"), *Name, K), TEXT("garden.bluestone.submerged"), Pier, -P, P, -P, P, Foot, Slab, EHit::Solid);
 				}
 			}
 		}

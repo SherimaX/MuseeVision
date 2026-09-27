@@ -10,12 +10,53 @@ namespace Musee::Chenghuai
 		/** Two stations nearer than a tenth of a millimetre are one: far below any drawn detail, far above rounding. */
 		constexpr double StationMergeMeters = 1.0e-4;
 
+		/** Two corners nearer than a micrometre are one (Form's weld tolerance); a corner on a straight run is none. */
+		constexpr double SameCorner = 1.0e-6;
+
+		/**
+		 * A loop as its corners: each point nearer than a micrometre to the last kept dropped, and each point on a straight run
+		 * between its neighbours, so no side of the solid is drawn with no length or no turn.
+		 */
+		TArray<FVector2D> Corners(TConstArrayView<FVector2D> Loop)
+		{
+			TArray<FVector2D> Kept;
+			for (const FVector2D& Point : Loop)
+			{
+				if (Kept.IsEmpty() || FVector2D::Distance(Point, Kept.Last()) > SameCorner)
+				{
+					Kept.Add(Point);
+				}
+			}
+			while (Kept.Num() > 1 && FVector2D::Distance(Kept[0], Kept.Last()) <= SameCorner)
+			{
+				Kept.Pop();
+			}
+			TArray<FVector2D> Out;
+			for (int32 Index = 0; Index < Kept.Num(); ++Index)
+			{
+				const FVector2D& Prev = Kept[(Index + Kept.Num() - 1) % Kept.Num()];
+				const FVector2D& Next = Kept[(Index + 1) % Kept.Num()];
+				const FVector2D In = (Kept[Index] - Prev).GetSafeNormal();
+				const FVector2D Onward = (Next - Kept[Index]).GetSafeNormal();
+				if (FMath::Abs(FVector2D::CrossProduct(In, Onward)) > SameCorner || FVector2D::DotProduct(In, Onward) < 0.0)
+				{
+					Out.Add(Kept[Index]);
+				}
+			}
+			return Out;
+		}
+
+		/** The holes as profiles; a loop left with no area once its corners are found is no hole. */
 		TArray<FFormProfile> Profiles(TConstArrayView<TArray<FVector2D>> Loops)
 		{
 			TArray<FFormProfile> Out;
 			for (const TArray<FVector2D>& Loop : Loops)
 			{
-				Out.Add(Polygon(Loop));
+				const TArray<FVector2D> Kept = Corners(Loop);
+				if (Kept.Num() >= 3 && FMath::Abs(SignedArea(Kept)) > SameCorner * SameCorner)
+				{
+					Out.Add(Polygon(Kept));
+				}
 			}
 			return Out;
 		}
@@ -23,7 +64,7 @@ namespace Musee::Chenghuai
 		FFormExtrusion Extrusion(TConstArrayView<FVector2D> Outline, TConstArrayView<TArray<FVector2D>> Holes, double Depth)
 		{
 			FFormExtrusion Shape;
-			Shape.Outline = Polygon(Outline);
+			Shape.Outline = Polygon(Corners(Outline));
 			Shape.Holes = Profiles(Holes);
 			Shape.DepthMeters = Depth;
 			return Shape;
