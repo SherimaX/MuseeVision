@@ -79,6 +79,9 @@ namespace Musee::Sphere
 			// the platform's irises, the mast and its dogs, and the platform's door sill.
 			Down.Well.Parts = {{TEXT("neck.rail."), TEXT("rail")}, {TEXT("neck.iris."), TEXT("iris")}, {TEXT("platform.iris."), TEXT("iris")},
 				{TEXT("mast.dog"), TEXT("dog")}, {TEXT("mast"), TEXT("mast")}, {TEXT("platform.sill"), TEXT("sill")}};
+			// The mast's column is Motion's piece, named by its mechanism's key (sphere.mast.column.turn), not by the
+			// Sphere's own drawing names: it is the mast too.
+			Down.Well.Parts.Add({Key(TEXT("mast.column")).ToString() + TEXT("."), TEXT("mast")});
 		}
 
 		FFormOpening& Opening(FSiteDescription& Out, const FString& Local, EFormOpeningKind Kind, const TCHAR* Enclosure, const FMuseeFrame& Frame,

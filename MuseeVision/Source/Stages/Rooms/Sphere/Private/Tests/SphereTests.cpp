@@ -74,6 +74,8 @@ namespace Musee::Sphere::Tests
 
 		TestEqual(TEXT("the mast's dogs are dogs, before the mast"), Musee::Site::PartOf(Down.Well, TEXT("mast.dog.2")), FName(TEXT("dog")));
 		TestEqual(TEXT("the neck's blades are an iris"), Musee::Site::PartOf(Down.Well, TEXT("neck.iris.blade.3")), FName(TEXT("iris")));
+		TestEqual(TEXT("the column Motion makes, named by its mechanism's key, is the mast"),
+			Musee::Site::PartOf(Down.Well, TEXT("sphere.mast.column.turn")), FName(TEXT("mast")));
 		TestTrue(TEXT("the throat is no part of the well"), Musee::Site::PartOf(Down.Well, TEXT("neck.throat.band.1")).IsNone());
 
 		// The volume turned about the axis (§1): from the plane up the neck column, to the drip ring's top, to the crown.
