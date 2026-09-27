@@ -150,4 +150,12 @@ namespace Musee::Form
 		}
 		DroppedTriangles += Other.DroppedTriangles;
 	}
+
+	void FMeshBuilder::Translate(const FVector& OffsetMeters)
+	{
+		for (FVector& Position : Positions)
+		{
+			Position += OffsetMeters;
+		}
+	}
 }
