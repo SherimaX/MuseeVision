@@ -224,7 +224,7 @@ namespace Musee::Rotunda
 		}
 
 		/** The balusters of the panel between two standards' faces: evenly, about their pitch apart, clear of the standards. */
-		void Balusters(TArray<FFormDrawing>& Out, const FRailRun& Run, int32 Panel, double From, double To)
+		void Balusters(TArray<FFormDrawing>& Out, const FRailRun& Run, int32 Bay, double From, double To)
 		{
 			const double Half = 0.5 * Plan::BalusterSide;
 			const double First = From + Plan::BalusterClear;
@@ -238,7 +238,7 @@ namespace Musee::Rotunda
 			for (int32 Step = 0; Step <= Count; ++Step)
 			{
 				const double S = FMath::Lerp(First, Last, double(Step) / Count);
-				AddInPlane(Out, Run, FString::Printf(TEXT("%s.panel.%02d.baluster.%02d"), *Run.Name, Panel + 1, Step + 1), TEXT("stair.balustrade"),
+				AddInPlane(Out, Run, FString::Printf(TEXT("%s.bay.%02d.baluster.%02d"), *Run.Name, Bay + 1, Step + 1), TEXT("stair.balustrade"),
 					Block(FVector2D(-Half, 0.0), FVector2D(Half, Height), Plan::BalusterSide), -Half, S, Run.Base(S) + Plan::BarHeights[BottomBar]);
 			}
 		}
@@ -280,7 +280,7 @@ namespace Musee::Rotunda
 		 * The rings of the panel between two standards' faces, touching both bars across the rake: the band's outer edge is
 		 * the circle through the two bars' inner faces (run in by RingBandOver), and along the rake each touches the next.
 		 */
-		void Rings(TArray<FFormDrawing>& Out, const FRailRun& Run, int32 Panel, double From, double To)
+		void Rings(TArray<FFormDrawing>& Out, const FRailRun& Run, int32 Bay, double From, double To)
 		{
 			const double Span = To - From;
 			const double Rake = (Run.Base(To) - Run.Base(From)) / Span;
@@ -293,7 +293,7 @@ namespace Musee::Rotunda
 			for (int32 Index = 0; Index < Count; ++Index)
 			{
 				const double S = First + Index * Step;
-				RailRing(Out, Run, FString::Printf(TEXT("%s.panel.%02d.ring.%02d"), *Run.Name, Panel + 1, Index + 1), Rho, S, Run.Base(S) + Middle);
+				RailRing(Out, Run, FString::Printf(TEXT("%s.bay.%02d.ring.%02d"), *Run.Name, Bay + 1, Index + 1), Rho, S, Run.Base(S) + Middle);
 			}
 		}
 
@@ -310,10 +310,10 @@ namespace Musee::Rotunda
 				}
 			}
 			const double Half = 0.5 * Plan::StandardSide;
-			for (int32 Panel = 0; Panel + 1 < Posts.Num(); ++Panel)
+			for (int32 Bay = 0; Bay + 1 < Posts.Num(); ++Bay)
 			{
-				Balusters(Out, Run, Panel, Posts[Panel] + Half, Posts[Panel + 1] - Half);
-				Rings(Out, Run, Panel, Posts[Panel] + Half, Posts[Panel + 1] - Half);
+				Balusters(Out, Run, Bay, Posts[Bay] + Half, Posts[Bay + 1] - Half);
+				Rings(Out, Run, Bay, Posts[Bay] + Half, Posts[Bay + 1] - Half);
 			}
 			for (int32 Bar = 0; Bar < int32(UE_ARRAY_COUNT(Plan::BarHeights)); ++Bar)
 			{
