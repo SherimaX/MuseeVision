@@ -131,6 +131,11 @@ VESSELS = [
                       why=('its camera could not be fixed: fitted with its EXIF focal length, its silhouette misses the section '
                            'by 24 px rms and its painting lies on side A at a correlation of 0.34, under the 0.45 of a genuine '
                            'overlap; composed, it would double the figures where the sides meet'))],
+         # side B's panels, to settle their count with side A's: its two whole panels' emblems' rings (the small circles
+         # under them) read by eye on its pixel grid, on row 1250 at columns 450 and 655, and turned into bearings through
+         # the cameras its silhouette allows, fitted with its EXIF focal length to the section's upper and lower sides
+         side_b=dict(image='ceramics/chinese-meiping/WLA_vanda_Vase_6.jpg', focal=2022.0, axis_rows=(108, 1415),
+                     band="the base's lotus panels", row=1250, columns=(450, 655), sides=((0.15, 0.92), (0.05, 0.5))),
          bands=[dict(name="the base's lotus panels", rows=(0.0, 0.28), count=7,
                      read=("7 panels: on side A its three panels' emblems stand 49 and 51.5 degrees apart round the vase and "
                            "its front panel's dividers 55 (7 panels are 51.4 degrees each, 6 would be 60)")),
@@ -145,11 +150,17 @@ VESSELS = [
          bands=[]),
 ]
 
-# The view registration and the unwrapped pictures: the grid round the axis and up the outside.
-AZIMUTH_STEPS = 720
-HEIGHT_STEPS = 240
-# A view contributes where it sees the surface at least this squarely (the cosine of the angle between the surface's
-# normal and the line of sight): beyond 60 degrees a photograph's pixel covers twice the surface it does face on.
+# The view registration and the unwrapped pictures (Data/Art/Vessels.json's `registration`, which Art's check of each
+# view's placement measures by too): the grid round the axis and up the outside.
+_RECORD = json.load(open(RECORD, encoding='utf-8'))
+REGISTRATION = _RECORD['registration']
+COMPOSITION = _RECORD['composition']
+AZIMUTH_STEPS = REGISTRATION['azimuthSteps']
+HEIGHT_STEPS = REGISTRATION['heightSteps']
+# A band's repeat, a glaze's colour and a side view's collar on the bottom view's ring are measured where a view sees
+# the surface at least this squarely (the cosine of the angle between the surface's normal and the line of sight):
+# beyond 60 degrees a photograph's pixel covers twice the surface it does face on, too coarse to measure by. (Art
+# composes from every view wherever it sees the surface: Data/Art/Vessels.json's `composition`.)
 SQUARENESS_CUT = 0.5
 
 
@@ -703,15 +714,15 @@ def unwrap(view, cam, zs, r):
 
 
 def detail(pic):
-    """The decoration's own detail for registration: lightness band-passed (3 to 15 cells), so shading, exposure and a
-    photograph's grain don't count."""
+    """The decoration's own detail for registration: lightness band-passed (the record's fineCells to coarseCells), so
+    shading, exposure and a photograph's grain don't count."""
     g = cv2.cvtColor(pic, cv2.COLOR_BGR2LAB)[..., 0].astype(np.float32)
-    return cv2.GaussianBlur(g, (0, 0), 3) - cv2.GaussianBlur(g, (0, 0), 15)
+    return cv2.GaussianBlur(g, (0, 0), REGISTRATION['fineCells']) - cv2.GaussianBlur(g, (0, 0), REGISTRATION['coarseCells'])
 
 
-# Registration looks further round than composition does: to 78 degrees off face on, where a view's picture is
-# stretched fivefold but its coarse detail still lines up with a neighbour's.
-REGISTRATION_CUT = 0.2
+# Registration looks as far round as its detail still lines up with a neighbour's: to 78 degrees off face on, where a
+# view's picture is stretched fivefold (the record's registration squarenessCut).
+REGISTRATION_CUT = REGISTRATION['squarenessCut']
 
 
 def weights(square, cut=None):
@@ -722,7 +733,7 @@ def weights(square, cut=None):
 def correlation(da, wa, db, wb):
     w = wa * wb
     tot = w.sum()
-    if tot < 0.02 * w.size:
+    if tot < REGISTRATION['leastShare'] * w.size:
         return -1.0
     mx, my = (w * da).sum() / tot, (w * db).sum() / tot
     return float((w * (da - mx) * (db - my)).sum() / math.sqrt((w * (da - mx) ** 2).sum() * (w * (db - my) ** 2).sum() + 1e-9))
@@ -836,14 +847,15 @@ def describe(bands):
 
 # Two views of the same stretch of painting correlate at 0.5 or better once registered (the Xuande jar's pair, 0.76);
 # a repeat of the design elsewhere round the vessel, fish for fish, at 0.4 or less. A turn is scored by how far each
-# overlap's correlation stands above the line between them, weighted by the overlap.
-GENUINE = 0.45
+# overlap's correlation stands above the line between them (the record's registration genuine), weighted by the overlap.
+GENUINE = REGISTRATION['genuine']
 MIN_OVERLAP = 0.005
 
 
-def landscape(a, b):
-    """For each turn of b against a (in cells, two at a time): their correlation and their overlap."""
-    da, db, wa, wb = detail(a[0]), detail(b[0]), weights(a[1]), weights(b[1])
+def landscape(a, b, cut=None):
+    """For each turn of b against a (in cells, two at a time): their correlation and their overlap, each view weighted
+    from the cut (the registration's, unless given)."""
+    da, db, wa, wb = detail(a[0]), detail(b[0]), weights(a[1], cut), weights(b[1], cut)
     C = np.full(AZIMUTH_STEPS, -1.0)
     O = np.zeros(AZIMUTH_STEPS)
     for shift in range(0, AZIMUTH_STEPS, 2):
@@ -852,6 +864,18 @@ def landscape(a, b):
         if O[shift] >= MIN_OVERLAP:
             C[shift] = correlation(da, wa, rb, rw)
     return C, O
+
+
+# A placed view's overlaps with the others are recorded as the composition sees them: wherever both see the surface at
+# all (the record's registration overlapCut), so a view along the axis, which sees the vessel obliquely, has its own.
+OVERLAP_CUT = REGISTRATION['overlapCut']
+
+
+def overlap_of(a, b):
+    """Two placed views' overlap as recorded: their share of the outside and their correlation there (-1 where too
+    slight to correlate), at no further turn."""
+    C, O = landscape(a, b, OVERLAP_CUT)
+    return float(O[0]), float(C[0])
 
 
 def score(C, O, shift):
@@ -874,8 +898,7 @@ def place(base, fitted, zs, r):
         turn, _, _ = register(base, pics[0])
         cv['azimuth'] = turn
         cv, corr = refine_turn(base, mv, cv, zs, r)
-        C, O = landscape(base, unwrap(mv, cv, zs, r))
-        return [(cv, 'registered', [(0, float(O[0]), corr)])]
+        return [(cv, 'registered', [(0,) + overlap_of(base, unwrap(mv, cv, zs, r))])]
     allp = [base] + pics
     n = len(allp)
     land = {(i, j): landscape(allp[i], allp[j]) for i in range(n) for j in range(i + 1, n)}
@@ -918,7 +941,10 @@ def place(base, fitted, zs, r):
     out = []
     for k, (v, mv, cv) in enumerate(fitted):
         cv['azimuth'] = t[k + 1] / AZIMUTH_STEPS * 2 * np.pi
-        overlaps = [(i,) + pair(i, k + 1) for i in range(n) if i != k + 1 and pair(i, k + 1)[0] >= MIN_OVERLAP]
+    placed = [base] + [unwrap(mv, cv, zs, r) for _, mv, cv in fitted]
+    for k, (v, mv, cv) in enumerate(fitted):
+        seen = [(i,) + overlap_of(placed[i], placed[k + 1]) for i in range(n) if i != k + 1]
+        overlaps = [o for o in seen if o[1] >= MIN_OVERLAP and o[2] > -1.0]
         out.append((cv, 'registered' if root(k + 1) == root(0) else 'unverified', overlaps))
     return out
 
@@ -1246,34 +1272,62 @@ def band_repeat(unwrapped, H, rows, shortest=6.0, longest=180.0):
     return (turn if b >= BAND_TRUST else None), float(b)
 
 
-def band_of(band, unwrapped, H):
-    """A band's repeat and how it was found: a count read by eye on the photographs (its measured repeat given beside
-    it), a plain line running round unbroken (carried round as itself, PLAIN_PERIOD at a time), or the measured repeat
-    where it is trusted; otherwise None, with why, and the band is left in the glaze where no view sees it."""
+# A count is settled where the measured repeat, if trusted, gives the same whole number of repeats a turn to within this
+# share of one; a measured repeat alone is trusted as a count where it comes so near a whole number. Halfway between two
+# counts, the photographs choose neither.
+BAND_WHOLE = 0.25
+
+
+def band_of(band, unwrapped, H, also=None):
+    """A band's repeat and how it was found: a count read by eye on the photographs where its measured repeat, if
+    trusted, gives the same count (within BAND_WHOLE of a repeat), a plain line running round unbroken (carried round as
+    itself, PLAIN_PERIOD at a time), or the measured repeat where it is trusted and near a whole count; otherwise None,
+    with why, and the band is left in the glaze where no view sees it. `also`: further evidence on the count, said
+    beside it."""
     turn, corr = band_repeat(unwrapped, H, band['rows'], band.get('shortest', 6.0))
     measured = ('measured repeat %.1f deg (self-correlation %.2f)' % (turn, corr) if turn is not None else
                 'no measured repeat trusted (best self-correlation %.2f, under %.2f)' % (corr, BAND_TRUST))
+    extra = '; ' + also if also else ''
+    left = ': where no view sees it, it is left in the glaze'
     if band.get('count'):
-        return 360.0 / band['count'], 'read by eye: %s; %s' % (band['read'], measured)
+        if turn is not None and abs(360.0 / turn - band['count']) > BAND_WHOLE:
+            return None, ('not settled: read by eye, %s; but the %s gives %.2f repeats a turn, %.2f of a repeat off %d%s%s'
+                          % (band['read'], measured, 360.0 / turn, abs(360.0 / turn - band['count']), band['count'], extra, left))
+        return 360.0 / band['count'], 'read by eye: %s; %s%s' % (band['read'], measured, extra)
     if band.get('plain'):
         return PLAIN_PERIOD, 'a plain line running unbroken round, carried round as itself'
     if band.get('glaze'):
         return None, band['glaze']
     if turn is None:
-        return None, measured + ': where no view sees it, it is left in the glaze'
+        return None, measured + extra + left
     n = max(1, int(round(360.0 / turn)))
-    return 360.0 / n, '%s, %d round' % (measured, n)
+    if abs(360.0 / turn - n) > BAND_WHOLE:
+        return None, '%s, %.2f repeats a turn, no whole count%s%s' % (measured, 360.0 / turn, extra, left)
+    return 360.0 / n, '%s, %d round%s' % (measured, n, extra)
 
 
 # A plain line's repeat: any turn carries it, and the finer the turn the more of what the views see of it is averaged.
 PLAIN_PERIOD = 2.0
 
 
-def coverage(views):
-    """The share of the outside some view sees at least as squarely as the cut."""
+def sees(square, cam, fit, zs, r):
+    """Where a view lends its colour as Art composes (Data/Art/Vessels.json's composition): wherever it sees the surface,
+    obliquely too, the place inside the silhouette by its camera's miss and edgePixels (a place that faces the camera
+    by the cosine s lies about s^2 / 2 of its ring's radius inside it). Art also leaves out what another part of the
+    vessel hides, which none of these vessels' views has."""
+    z = (np.arange(HEIGHT_STEPS) + 0.5) / HEIGHT_STEPS * zs[-1]
+    rr = np.interp(z, zs, r)
+    eye = np.array([cam['distance'] * math.sin(cam.get('azimuth', 0.0)), cam['distance'] * math.cos(cam.get('azimuth', 0.0)), cam['height']])
+    far = np.linalg.norm(eye - np.array([0.0, 0.0, 0.5 * zs[-1]]))
+    inside = 0.5 * square ** 2 * (rr * cam['focal'] / far)[:, None]
+    return (square > 0) & (inside >= fit + COMPOSITION['edgePixels'])
+
+
+def coverage(views, sights):
+    """The share of the outside some view lends its colour to (sees)."""
     seen = np.zeros((HEIGHT_STEPS, AZIMUTH_STEPS), bool)
-    for pic, square in views:
-        seen |= square >= SQUARENESS_CUT
+    for (pic, square), (cam, fit, zs, r) in zip(views, sights):
+        seen |= sees(square, cam, fit, zs, r)
     return float(seen.mean())
 
 
@@ -1362,11 +1416,29 @@ def lower_from_ring(spec, rings, m, cam, zs, r, H):
                 foot=ring_radius(rings['foot'][0][0], 0.0, D, f, z_upper))
 
 
+def bottom_camera(rings, low, first_turn):
+    """The bottom view's camera in the side views' terms: the pinhole on the axis that measured the foot (low['D'] under
+    the collar's upper line, focal low['f']), pitched up 90 degrees, its optical axis the rings' centre (a pixel's centre
+    at +0.5), and turned so the ring's angle first_turn (image x towards image y) lies under the first view's front. Such
+    a camera sees the point at bearing phi at the ring's angle phi - azimuth - 90 deg, so its bearing is -first_turn -
+    90 deg."""
+    c = rings['centre']
+    return dict(azimuth=(-first_turn - 0.5 * np.pi) % (2 * np.pi), distance=0.0, height=low['z_upper'] - low['D'], pitch=-0.5 * np.pi,
+                focal=low['f'], u0=float(c[0]) + 0.5, v0=float(c[1]) + 0.5)
+
+
+def bottom_fit(rings):
+    """How far the bottom view's painted rings stray from their fitted ellipses (px, the largest spread): its camera's
+    miss, as a side view's silhouette's is."""
+    return max(rings[name][1] for name in ('lower', 'upper', 'foot'))
+
+
 def place_on_ring(spec, rings, low, first_pic, fitted, zs, r, H):
     """Each view's bearing from the bottom view, which sees the collar and the pond all round: every side view's collar
     (between its own lines) and pond registered on the ring by their colours (ring_landscape), its bearing the ring's
-    angle under its front less the first view's. Returns the views' placements as place() does, and each view's
-    registration (its ring angle, correlation, and the next best peak's)."""
+    angle under its front less the first view's. Returns the views' placements as place() does (their overlaps' indices
+    counting the bottom view last), each view's registration (its ring angle, correlation, and the next best peak's), and
+    the bottom view placed (its camera, its fit, its picture and its overlaps)."""
     grid, pond = ring_grid(rings, zs, r, H, low['D'], low['f'], low['z_upper'])
     pics = [first_pic] + [unwrap(mv, dict(cv, azimuth=0.0), zs, r) for _, mv, cv in fitted]
     reg = []
@@ -1376,7 +1448,9 @@ def place_on_ring(spec, rings, low, first_pic, fitted, zs, r, H):
         sp, ss = side_grid(pic, sq, lower, upper, pond)
         reg.append(ring_peak(ring_landscape(grid, sp, ss)))
     turns = [(reg[k + 1][0] - reg[0][0]) % (2 * np.pi) for k in range(len(fitted))]
-    allp = [first_pic] + [unwrap(mv, dict(cv, azimuth=turns[k]), zs, r) for k, (_, mv, cv) in enumerate(fitted)]
+    cam_b = bottom_camera(rings, low, reg[0][0])
+    pic_b = unwrap(dict(im=rings['im']), cam_b, zs, r)
+    allp = [first_pic] + [unwrap(mv, dict(cv, azimuth=turns[k]), zs, r) for k, (_, mv, cv) in enumerate(fitted)] + [pic_b]
     out = []
     for k, (v, mv, cv) in enumerate(fitted):
         cv['azimuth'] = turns[k]
@@ -1386,11 +1460,56 @@ def place_on_ring(spec, rings, low, first_pic, fitted, zs, r, H):
                 continue
             # the pictures are placed already: they lie on each other at no further turn (an overlap too slight to
             # correlate, under correlation()'s share, is not listed)
-            C, O = landscape(allp[i], allp[k + 1])
-            if O[0] >= MIN_OVERLAP and C[0] > -1.0:
-                overlaps.append((i, float(O[0]), float(C[0])))
+            share, corr = overlap_of(allp[i], allp[k + 1])
+            if share >= MIN_OVERLAP and corr > -1.0:
+                overlaps.append((i, share, corr))
         out.append((cv, 'registered', overlaps))
-    return out, reg
+    b = len(allp) - 1
+    bottom_overlaps = []
+    for i in range(b):
+        share, corr = overlap_of(allp[i], pic_b)
+        if share >= MIN_OVERLAP and corr > -1.0:
+            bottom_overlaps.append((i, share, corr))
+    bottom = dict(cam=cam_b, fit=bottom_fit(rings), pic=pic_b, overlaps=bottom_overlaps, turn=reg[0][0])
+    return out, reg, bottom
+
+
+def bearing_at(cam, zs, r, u, v, reach=0.4):
+    """The bearing (degrees from the camera's front towards the right) of the outside's point a photograph shows at the
+    pixel (u, v) (centres at +0.5), on the near side, within `reach` of the height: the height whose ring's image passes
+    nearest it, and that ring's angle there."""
+    best = None
+    t = np.radians(np.linspace(-90.0, 90.0, 3601))
+    for z in np.linspace(0.0, reach * zs[-1], 801):
+        rr = float(np.interp(z, zs, r))
+        P = np.stack([rr * np.sin(t), rr * np.cos(t), np.full_like(t, z)], -1)
+        pu, pv, _ = project(P, dict(cam, azimuth=0.0))
+        i = int(np.argmin(np.abs(pu - u)))
+        if abs(pu[i] - u) < 1.0 and (best is None or abs(pv[i] - v) < best[0]):
+            best = (abs(pv[i] - v), math.degrees(t[i]))
+    return best[1] if best else float('nan')
+
+
+def side_b_counts(spec, H, museum, zs, r):
+    """What a photograph whose camera can't be fixed says of a band's count: for each camera its silhouette allows (fitted
+    with its known focal length to the section's sides over each span of height), its two whole panels' turn apart and
+    that camera's miss. Returns {band name: the evidence, said}."""
+    turns = []
+    for sides in spec['sides']:
+        v = dict(image=spec['image'], fixed=dict(focal=spec['focal']), axis_rows=spec['axis_rows'], sides=sides)
+        m, cam, _, _, rms = fit_view(v, H, museum, zs, r)
+        a, b = (bearing_at(cam, zs, r, c + 0.5, spec['row'] + 0.5) for c in spec['columns'])
+        turns.append((abs(b - a), rms))
+    said = ("side B (%s), whose camera can't be fixed, gives no count: its two whole panels' emblems stand %s apart through "
+            "the cameras its silhouette allows (%s px rms)" % (
+                spec['image'].split('/')[-1], ' and '.join('%.0f deg' % t for t, _ in turns), ' and '.join('%.0f' % e for _, e in turns)))
+    return {spec['band']: said}
+
+
+def widest_of(section):
+    """A stored section's widest diameter: twice its widest point's radius, over every point (as Art's SizeFault and
+    Musee.Art.PaintedVessel measure it)."""
+    return 2 * max(p[0] for p in section)
 
 
 def departure_of(first, H, museum, widest, rms):
@@ -1459,12 +1578,28 @@ def derive(vessel, ware, sheets):
         else:
             mv, cv, _, _, _ = fit_view(v, H, museum, zs, r)
         fitted.append([v, mv, cv])
+    bottom = None
     if spec and fitted:
-        placed, out['ring_reg'] = place_on_ring(spec, rings, low, unwrapped[0], fitted, zs, r, H)
+        placed, out['ring_reg'], bottom = place_on_ring(spec, rings, low, unwrapped[0], fitted, zs, r, H)
     else:
         placed = place(unwrapped[0], fitted, zs, r) if fitted else []
     pics = [unwrap(mv, cv, zs, r) for (_, mv, _), (cv, _, _) in zip(fitted, placed)]
     allp = unwrapped + pics
+    names = [first['image'].split('/')[-1]] + [v['image'].split('/')[-1] for v, _, _ in fitted]
+    sights = [(cam, out['views'][0]['rms'], zs, r)]
+    if bottom:
+        # the bottom view is composed as the side views are, where its painting lies on theirs band by band
+        allp.append(bottom['pic'])
+        names.append(spec['image'].split('/')[-1])
+        wrong = [(i, bands) for i, bands in ((i, agreement(allp[i], bottom['pic'], H)) for i, _, _ in bottom['overlaps']) if disagreement(bands)]
+        if wrong:
+            why = "placed by its rings, its painting lies off %s band by band up the height (%s; over %.1f cm)" % (
+                ', '.join(names[i] for i, _ in wrong), '; '.join(describe(bands) for _, bands in wrong), 100 * AGREEMENT_METERS)
+            out['unused'].append(dict(image='assets/' + spec['image'], why=why + ': composed, it would double the painting'))
+            print('  %s left out: %s' % (names[-1], why))
+            b = len(allp) - 1
+            placed = [(cv, placement, [o for o in overlaps if o[0] != b]) for cv, placement, overlaps in placed]
+            bottom = None
     for k, ((v, mv, _), (cv, placement, overlaps)) in enumerate(zip(fitted, placed)):
         fit = silhouette_rms(mv, cv, H, zs, r, False, v.get('rows', (0.0, 1.0)))
         fit_meters = fit * cv['distance'] / cv['focal']
@@ -1482,17 +1617,27 @@ def derive(vessel, ware, sheets):
                     fit, 1000 * fit_meters, 1000 * SILHOUETTE_LIMIT))
             for i, bands in wrong:
                 why.append("placed on %s's painting, its painting lies off it band by band up the height (%s; over %.1f cm)" % (
-                    allp_name(views, first, fitted, i), describe(bands), 100 * AGREEMENT_METERS))
+                    names[i], describe(bands), 100 * AGREEMENT_METERS))
             out['unused'].append(dict(image='assets/' + v['image'], why='; '.join(why) + ': composed, it would double the painting'))
             print('  %s left out: %s' % (name, '; '.join(why)))
             continue
         out['views'].append(dict(view=v, m=mv, cam=cv, rms=fit, placement=placement,
-                                 overlaps=[(allp_name(views, first, fitted, i), share, corr) for i, share, corr in overlaps]))
+                                 overlaps=[(names[i], share, corr) for i, share, corr in overlaps]))
         unwrapped.append(allp[k + 1])
+        sights.append((cv, fit, zs, r))
         if sheets:
             sheet(sheets, vessel['work'] + '-%d.jpg' % (k + 1), mv, cv, zs, r)
-    out['coverage'] = coverage(unwrapped)
-    out['bands'] = [band_of(b, unwrapped, H) for b in vessel['bands']]
+    if bottom:
+        out['views'].append(dict(view=dict(image=spec['image']), m=None, cam=bottom['cam'], rms=bottom['fit'], placement='registered',
+                                 overlaps=[(names[i], share, corr) for i, share, corr in bottom['overlaps']]))
+        out['bottom'] = bottom
+        unwrapped.append(bottom['pic'])
+        sights.append((bottom['cam'], bottom['fit'], zs, r))
+    out['coverage'] = coverage(unwrapped, sights)
+    also = {}
+    if vessel.get('side_b'):
+        also = side_b_counts(vessel['side_b'], H, museum, zs, r)
+    out['bands'] = [band_of(b, unwrapped, H, also.get(b['name'])) for b in vessel['bands']]
     out['unwrapped'] = unwrapped
     if not vessel['painted']:
         out['glaze'] = glaze_colour(m, cam, zs, r)
@@ -1500,10 +1645,10 @@ def derive(vessel, ware, sheets):
     t, how = wall_of(vessel, cam, ware, r[-1])
     tolerance = max(SECTION_TOLERANCE, SECTION_PIXELS * cam['distance'] / cam['focal'])
     out['section'], out['first'], out['last'] = closed_section(zs, r, t, ware, open_form, tolerance)
-    # the checks are of the section as it is stored: its outside's widest point, and its foot's outer edge (the outside's
-    # first point)
+    # the checks are of the section as it is stored, as Art measures it: its widest point anywhere (a flared lip's turn
+    # too), and its foot's outer edge (the outside's first point)
     outside = out['section'][out['first']:out['last']]
-    widest = 2 * max(p[0] for p in outside)
+    widest = widest_of(out['section'])
     out['widest'] = widest
     checks = ['widest diameter %.2f cm (museum %s)' % (100 * widest, '%.1f cm' % (100 * museum['diameterMeters']) if 'diameterMeters' in museum else 'none published')]
     if 'footMeters' in museum:
@@ -1513,11 +1658,6 @@ def derive(vessel, ware, sheets):
     out['open'] = open_form
     out['wall'], out['wall_how'] = t, how
     return out
-
-
-def allp_name(views, first, fitted, i):
-    """The photograph of the i-th placed view (0 the first)."""
-    return (first if i == 0 else fitted[i - 1][0])['image'].split('/')[-1]
 
 
 def record_of(vessel, d):
@@ -1575,14 +1715,22 @@ def record_of(vessel, d):
                         v['view']['image'].split('/')[-1], math.degrees(g[0]), g[1], g[2]) for v, g in zip(d['views'], reg)) +
                 '); its camera its own silhouette\'s (fitPixels), and kept only where its painting lies on the views it '
                 'overlaps within %.1f cm in every band of height they share.' % (100 * AGREEMENT_METERS))
+            if d.get('bottom'):
+                g = d['bottom']
+                derivation += (
+                    ' The bottom view is composed too, as it sees the collar and the pond obliquely from under the jar: its '
+                    'camera the pinhole on the axis that measures the foot (pitched up 90 deg), turned so the first view\'s '
+                    'front lies under %.1f deg of its ring (bearing %.1f deg), its fit its painted rings\' largest spread '
+                    '(%.1f px).' % (math.degrees(g['turn']), math.degrees(g['cam']['azimuth']), g['fit']))
         else:
             derivation += (' Decoration: each further view placed by registering its painting, unwrapped round the axis, on '
                            "the others' where they overlap, its camera its own silhouette's (fitPixels), and kept only where "
                            "its painting lies on theirs within %.1f cm in every band of height they share; a view whose "
                            "painting overlaps none of the first view's is placed unverified." % (100 * AGREEMENT_METERS))
-        derivation += (" The views composed see %.0f%% of the outside within %.0f degrees of face on; where none does, a "
-                       "band whose repeat is known is carried round from where it is seen (its `reading`), and elsewhere "
-                       "the glaze is left." % (100 * d['coverage'], math.degrees(math.acos(SQUARENESS_CUT))))
+        derivation += (" The views composed see %.0f%% of the outside (all they see of it, obliquely too, inside their "
+                       "silhouettes by their cameras' misses and %.0f px); where none does, a band whose repeat is known is "
+                       "carried round from where it is seen (its `reading`), and elsewhere the glaze is left." % (
+                           100 * d['coverage'], COMPOSITION['edgePixels']))
         left = [(b['name'], how) for b, (p, how) in zip(vessel['bands'], d['bands']) if p is None]
         if left:
             derivation += ' Left in the glaze where no view sees them: ' + '; '.join('%s (%s)' % (n, how) for n, how in left) + '.'
@@ -1604,13 +1752,7 @@ def record_of(vessel, d):
         rec['bands'] = [dict(name=b['name'], fromMeters=round(b['rows'][0] * museum['heightMeters'], 4),
                              toMeters=round(b['rows'][1] * museum['heightMeters'], 4), periodDegrees=p, reading=how)
                         for b, (p, how) in zip(vessel['bands'], d['bands']) if p is not None]
-        unused = list(d['unused'])
-        if ring:
-            unused.append(dict(image='assets/' + vessel['ring']['image'], why=(
-                "read to place the side views round the jar and to measure its foot and the collar's lower line (see the "
-                "derivation), not composed: from under the jar it sees the collar and the pond more than 60 degrees off "
-                "face on, where a view lends no colour")))
-        rec['unused'] = unused
+        rec['unused'] = list(d['unused'])
     return rec
 
 
@@ -1674,8 +1816,9 @@ def ru_feet(pressed_half_axes):
 
 
 def derive_ru(ware):
-    """The Ru basin's section in the round, its long half-axis the radius (Art presses it to the mouth's short axis),
-    its feet, and its glaze's colour from its photograph's lit outside wall, face on."""
+    """The Ru basin's section in the round, its long half-axis the radius (Art presses it front to back to the foot's
+    oval at the flange's face and the mouth's at the lip, evenly between: Vessel/VesselSection.h, PressOf), its feet,
+    and its glaze's colour from its photograph's lit outside wall, face on."""
     H = RU['museum']['heightMeters']
     a = RU['museum']['mouthAxesMeters'][0] / 2
     foot = RU['museum']['footAxesMeters'][0] / 2
@@ -1701,22 +1844,29 @@ def derive_ru(ware):
              round(float(np.median(region[:, 2]) - 128), 1)]
     spread = round(float(np.std(np.log(region[:, 0] + 1.0))), 3)
     mouth = RU['museum']['mouthAxesMeters']
-    pressed_foot = [2 * foot, 2 * foot * mouth[1] / mouth[0]]
-    offset_foot = mouth[1] - (mouth[0] - RU['museum']['footAxesMeters'][0])
+    foot_axes = RU['museum']['footAxesMeters']
+    # a pressed round of the mouth's ratio all the way down, and a wall flaring as far at the ends as at the sides: the
+    # two readings the museum's foot lies between
+    uniform_foot = 2 * foot * mouth[1] / mouth[0]
+    offset_foot = mouth[1] - (mouth[0] - foot_axes[0])
+    pressed_foot = [2 * foot, 2 * foot * foot_axes[1] / foot_axes[0]]
     derivation = (
         "Section derived from the museum's sizes and the proportions the oblique photograph %s shows at the basin's "
         "left end, read by eye on its pixel grid (MuseeVision/Scripts/vessels.py, RU): feet %.2f, flange %.2f and wall "
         "%.2f of the height; the flange's face the museum's foot, the wall stepping in %.1f mm above it and flaring to "
         "the mouth; the wall Data/Art/Ware.json's. No photograph shows the section edge on, so no camera is fitted: the "
         "photograph's foreshortening falls on every height alike and cancels in the shares. Turned in the round on the "
-        "long half-axis and pressed front to back to the mouth's %.1f x %.1f cm, its foot comes to %.1f x %.1f cm against "
-        "the museum's %.1f x %.1f (a wall that flared as far at the ends as at the sides would give %.1f across the short "
-        "axis). Four cloud-scroll feet traced from the base photograph %s, each hugging a corner of the base, %.1f mm high. Glaze colour from the lit outside wall, face on (pixels %d..%d x "
-        "%d..%d), relative to the photograph's white." % (
+        "long half-axis and pressed front to back, as a potter presses a thrown round to an oval: at the lip to the "
+        "mouth's %.1f x %.1f cm and at the flange's face to the foot's %.1f x %.1f, the pressing running evenly up the "
+        "wall between them (pressed to the mouth's ratio all the way down, the foot would be %.1f across its short axis; a "
+        "wall that flared as far at the ends as at the sides would give %.1f; the museum's %.1f lies between, and no "
+        "photograph shows how the wall's flare changes round the oval). Four cloud-scroll feet traced from the base "
+        "photograph %s, each hugging a corner of the base, %.1f mm high. Glaze colour from the lit outside wall, face on "
+        "(pixels %d..%d x %d..%d), relative to the photograph's white." % (
             RU['image'].split('/')[-1], RU['shares']['feet'], RU['shares']['flange'],
             1 - RU['shares']['feet'] - RU['shares']['flange'], 1000 * RU['step_in'], 100 * mouth[0], 100 * mouth[1],
-            100 * pressed_foot[0], 100 * pressed_foot[1], 100 * RU['museum']['footAxesMeters'][0],
-            100 * RU['museum']['footAxesMeters'][1], 100 * offset_foot, '北宋汝窯青瓷無紋水仙盆_底部.jpg', 1000 * hf, x0, x1, y0, y1))
+            100 * foot_axes[0], 100 * foot_axes[1], 100 * uniform_foot, 100 * offset_foot, 100 * foot_axes[1],
+            '北宋汝窯青瓷無紋水仙盆_底部.jpg', 1000 * hf, x0, x1, y0, y1))
     section = [[round(r, 5), round(z, 5)] for r, z in section]
     faults = section_faults(section, first, last, t)
     if faults:
@@ -1724,7 +1874,7 @@ def derive_ru(ware):
     rec = dict(work=RU['work'], source=RU['museum']['source'], grade='derived', derivation=derivation,
                museum={k: v for k, v in RU['museum'].items() if k != 'source'},
                section=section, outside=[first, last + 1], wallMeters=round(t, 5),
-               feet=dict(heightMeters=round(hf, 5), each=ru_feet((foot, foot * mouth[1] / mouth[0]))))
+               feet=dict(heightMeters=round(hf, 5), each=ru_feet((foot, 0.5 * foot_axes[1]))))
     return rec, glaze, spread, pressed_foot
 
 
@@ -1777,6 +1927,28 @@ def selftest():
         c = int(rng.integers(0, AZIMUTH_STEPS - 12))
         r0 = int(rng.integers(0, rows - 8))
         ring[r0:r0 + 8, c:c + 12] = colours[k % 4]
+    # a count read by eye stands where the measured repeat gives it, and not where the repeat falls between two counts
+    square55 = seen_from_front()
+    p, how = band_of(dict(name='seven', rows=(0.0, 1.0), count=7, read='7'), [(panels(7, rng), square55)], 1.0)
+    if p is None or abs(p - 360.0 / 7) > 1e-9:
+        fails.append('seven panels read and measured as seven are not carried round as seven (%s)' % how)
+    halfway = np.full((HEIGHT_STEPS, AZIMUTH_STEPS, 3), 235, np.uint8)
+    for k in range(13):
+        edge = int(round(k * AZIMUTH_STEPS / 6.5))
+        halfway[:, edge % AZIMUTH_STEPS:(edge + 6) % AZIMUTH_STEPS or AZIMUTH_STEPS] = (120, 60, 40)
+    turn, corr = band_repeat([(halfway, square55)], 1.0, (0.0, 1.0), 30.0)
+    p, how = band_of(dict(name='between', rows=(0.0, 1.0), count=7, read='7'), [(halfway, square55)], 1.0)
+    if turn is None or p is not None:
+        fails.append('a band repeating 6.5 times a turn (measured %s), read as 7, is carried round as %s (%s)' % (
+            turn, p and round(360.0 / p), how))
+    # the record's stated widest diameters are its sections' as stored, the lip's turn too
+    for rec in json.load(open(RECORD, encoding='utf-8'))['vessels']:
+        said = rec.get('derivation', '')
+        if 'widest diameter ' in said:
+            stated = float(said.split('widest diameter ')[1].split(' cm')[0])
+            if abs(stated - 100 * widest_of(rec['section'])) > 0.005:
+                fails.append("%s's derivation says its widest diameter is %.2f cm, its section %.2f" % (
+                    rec['work'], stated, 100 * widest_of(rec['section'])))
     turn = 200
     side = np.roll(ring, -turn, 1)
     angle, top, runner = ring_peak(ring_landscape(ring, side, seen_from_front()[:rows]))
@@ -1829,7 +2001,7 @@ def main():
     if not args.only or args.only == RU['work']:
         ru, glaze, spread, pressed_foot = derive_ru(ware)
         print(RU['work'])
-        print('  foot pressed to the mouth: %.1f x %.1f cm (museum 19.3 x 12.9); glaze CIELAB %s, spread %.3f' % (
+        print('  foot pressed to its own oval: %.1f x %.1f cm (museum 19.3 x 12.9); glaze CIELAB %s, spread %.3f' % (
             100 * pressed_foot[0], 100 * pressed_foot[1], glaze, spread))
     if args.write:
         record = json.load(open(RECORD, encoding='utf-8'))

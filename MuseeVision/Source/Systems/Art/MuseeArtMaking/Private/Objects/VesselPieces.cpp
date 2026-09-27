@@ -127,13 +127,13 @@ namespace Musee::ArtMaking
 			return;
 		}
 		// A painted vessel wears its decoration, composed in its turned surface's layout, the layout its UV0 carries; an
-		// oval one is its turned section pressed across and front to back to its mouth's axes.
+		// oval one is its turned section pressed front to back to its foot's and its mouth's ovals.
 		FVesselTurning How;
-		How.CreaseDegrees = Vessels.GetValue().CreaseDegrees;
-		How.ChordToleranceMeters = Forms.GetValue().ChordToleranceMeters;
-		if (Vessel.Museum.IsOval())
+		const FString Unpressed = TurningOf(Vessel, Entry.SizeMeters(), Vessels.GetValue().CreaseDegrees, Forms.GetValue().ChordToleranceMeters, How);
+		if (!Unpressed.IsEmpty())
 		{
-			How.Oval = FVector2D(1.0, Vessel.Museum.MouthAxesMeters[1] / Vessel.Museum.MouthAxesMeters[0]);
+			OutFindings.Add(ArtFinding(Making.Stage, FString::Printf(TEXT("Work %s: it can't be pressed to its oval: %s."), *Entry.Work, *Unpressed)));
+			return;
 		}
 		const FLayerFinish Material = Vessel.IsPainted() ? FLayerFinish{ Canvas.Layer, Canvas.Finish.Working, Canvas.Finish.History } : Canvas.Finish;
 		FFormMadePiece Piece = ArtPiece(Name, Surface, Material, OnStand, true);

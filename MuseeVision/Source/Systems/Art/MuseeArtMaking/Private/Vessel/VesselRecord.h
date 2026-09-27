@@ -101,7 +101,8 @@ struct FArtVesselView
 	UPROPERTY(meta = (Units = "Degrees"))
 	double AzimuthDegrees = 0.0;
 
-	UPROPERTY(meta = (MuseeRequired, Units = "Meters"))
+	/** Its distance from the axis: none for a view along it (a bottom photographed from under the vessel, pitched up 90). */
+	UPROPERTY(meta = (Units = "Meters"))
 	double DistanceMeters = 0.0;
 
 	UPROPERTY(meta = (MuseeRequired, Units = "Meters"))
@@ -109,6 +110,12 @@ struct FArtVesselView
 
 	UPROPERTY(meta = (Units = "Degrees"))
 	double PitchDegrees = 0.0;
+
+	/** Whether it stands on the axis, looking along it (up or down). */
+	[[nodiscard]] bool IsAlongAxis() const
+	{
+		return DistanceMeters == 0.0 && FMath::IsNearlyEqual(FMath::Abs(PitchDegrees), 90.0);
+	}
 
 	UPROPERTY(meta = (MuseeRequired))
 	double FocalPixels = 0.0;
@@ -284,13 +291,25 @@ struct FArtVesselComposition
 	GENERATED_BODY()
 
 	/**
-	 * The least cosine between the surface's normal and a view's line of sight at which the view lends its colour: its
-	 * weight rises from nothing there, as the square of how far past it the view sees, to one face on.
+	 * How far inside its silhouette, past its camera's own miss (its view's FitPixels), a place must show in a view's
+	 * photograph for the view to lend it its colour, pixels: an edge's blur, so no view lends the ground beyond the vessel.
+	 * A view lends wherever else it sees the surface at all, obliquely too, its weight the square of the cosine between
+	 * the surface's normal and its line of sight.
 	 */
 	UPROPERTY(meta = (MuseeRequired))
-	double SquarenessCut = 0.0;
+	double EdgePixels = 0.0;
 
-	/** The cosine past which a view sees the surface squarely enough to measure its white there. */
+	/**
+	 * How far, metres, a line of sight's weight takes to come in as it clears the vessel: past the silhouette's margin
+	 * (the line through the place EdgePixels further out must pass this far into the vessel), and past any other part of
+	 * the vessel between the place and the camera (the line must pass it clear by this), so where a view's sight ends
+	 * its colour fades out rather than stopping at a seam.
+	 */
+	UPROPERTY(meta = (MuseeRequired, Units = "Meters"))
+	double ClearanceMeters = 0.0;
+
+	/** The cosine past which a view sees the surface squarely enough to measure its white there (all it sees, where it sees
+	 * too little so squarely). */
 	UPROPERTY(meta = (MuseeRequired))
 	double WhiteSquareness = 0.0;
 
@@ -332,6 +351,55 @@ struct FArtVesselComposition
 	int32 MostPixels = 0;
 };
 
+/**
+ * How a painted vessel's placed views are checked against the evidence that placed them (Data/Art/Vessels.json, as
+ * MuseeVision/Scripts/vessels.py registers them): each photograph unwrapped round the axis on a grid of so many angles
+ * and heights, weighted where it sees the outside past a squareness (SquarenessCut to register a view's painting on
+ * another's, OverlapCut to record a placed view's overlaps), its detail its lightness band-passed between two blurs
+ * (cells); two views overlap where both see, their share the mean of their weights' product over the grid, their
+ * correlation that of their detail there (none under LeastShare of the grid).
+ */
+USTRUCT()
+struct FArtVesselRegistration
+{
+	GENERATED_BODY()
+
+	UPROPERTY(meta = (MuseeRequired))
+	int32 AzimuthSteps = 0;
+
+	UPROPERTY(meta = (MuseeRequired))
+	int32 HeightSteps = 0;
+
+	UPROPERTY(meta = (MuseeRequired))
+	double SquarenessCut = 0.0;
+
+	UPROPERTY(meta = (MuseeRequired))
+	double OverlapCut = 0.0;
+
+	UPROPERTY(meta = (MuseeRequired))
+	double FineCells = 0.0;
+
+	UPROPERTY(meta = (MuseeRequired))
+	double CoarseCells = 0.0;
+
+	UPROPERTY(meta = (MuseeRequired))
+	double LeastShare = 0.0;
+
+	/** The correlation a genuine overlap reaches: two views whose paintings lie on each other so well show the same place. */
+	UPROPERTY(meta = (MuseeRequired))
+	double Genuine = 0.0;
+
+	/**
+	 * How near a view's overlaps, recomputed from its record's camera and its photographs, come to those its record
+	 * gives: the share within this part of it, the correlation within CorrelationTolerance.
+	 */
+	UPROPERTY(meta = (MuseeRequired))
+	double ShareTolerance = 0.0;
+
+	UPROPERTY(meta = (MuseeRequired))
+	double CorrelationTolerance = 0.0;
+};
+
 /** Every turned vessel's section, the stand they stand on and how painted ones are composed (`Data/Art/Vessels.json`). */
 USTRUCT()
 struct FArtVessels
@@ -357,6 +425,9 @@ struct FArtVessels
 
 	UPROPERTY(meta = (MuseeRequired))
 	FArtVesselComposition Composition;
+
+	UPROPERTY(meta = (MuseeRequired))
+	FArtVesselRegistration Registration;
 
 	UPROPERTY(meta = (MuseeRequired))
 	TArray<FArtVessel> Vessels;

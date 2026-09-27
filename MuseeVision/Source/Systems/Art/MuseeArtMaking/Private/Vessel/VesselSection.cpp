@@ -46,13 +46,136 @@ namespace Musee::ArtMaking
 			return FString::Printf(TEXT("its plan's width %.1f mm is not its section's %.1f (a derived section keeps its photographs' proportion)"),
 				1000.0 * PlanMeters.X, 2000.0 * Most.X);
 		}
-		const double Published = Vessel.Museum.IsOval() ? Vessel.Museum.MouthAxesMeters[0] : Vessel.Museum.DiameterMeters;
-		if (Published > 0.0 && FMath::Abs(2.0 * Most.X - Published) > DiameterTolerance * Published && Vessel.Departure.IsEmpty())
+		// Each measure of the section as turned, against the one its museum publishes.
+		struct FMeasure
 		{
-			return FString::Printf(TEXT("its section is %.1f mm across, %.1f%% off its museum's %.1f, and its record gives no departure saying why"),
-				2000.0 * Most.X, 100.0 * FMath::Abs(2.0 * Most.X - Published) / Published, 1000.0 * Published);
+			const TCHAR* What;
+			double Section;
+			double Published;
+		};
+		TArray<FMeasure> Measures;
+		if (Vessel.Museum.IsOval())
+		{
+			FVesselPress Press;
+			const FString Why = PressOf(Vessel, FVector2D(1.0, 1.0), Press);
+			if (!Why.IsEmpty())
+			{
+				return Why;
+			}
+			const TArray<double>& Mouth = Vessel.Museum.MouthAxesMeters;
+			Measures.Add({ TEXT("its mouth across"), 2.0 * Most.X, Mouth[0] });
+			Measures.Add({ TEXT("its mouth front to back"), 2.0 * Most.X * Press.RatioAt(Press.MouthHeightMeters), Mouth[1] });
+			if (Vessel.Museum.FootAxesMeters.Num() == 2)
+			{
+				const double Foot = RadiusAt(Vessel.Section, Press.FootHeightMeters);
+				Measures.Add({ TEXT("its foot across"), 2.0 * Foot, Vessel.Museum.FootAxesMeters[0] });
+				Measures.Add({ TEXT("its foot front to back"), 2.0 * Foot * Press.RatioAt(Press.FootHeightMeters), Vessel.Museum.FootAxesMeters[1] });
+			}
+		}
+		else
+		{
+			Measures.Add({ TEXT("its section across"), 2.0 * Most.X, Vessel.Museum.DiameterMeters });
+		}
+		for (const FMeasure& Measure : Measures)
+		{
+			const double Off = Measure.Published > 0.0 ? FMath::Abs(Measure.Section - Measure.Published) / Measure.Published : 0.0;
+			if (Off > DiameterTolerance && Vessel.Departure.IsEmpty())
+			{
+				return FString::Printf(TEXT("%s is %.1f mm, %.1f%% off its museum's %.1f, and its record gives no departure saying why"), Measure.What,
+					1000.0 * Measure.Section, 100.0 * Off, 1000.0 * Measure.Published);
+			}
 		}
 		return FString();
+	}
+
+	double FVesselPress::RatioAt(double HeightMeters) const
+	{
+		if (MouthHeightMeters <= FootHeightMeters)
+		{
+			return MouthRatio;
+		}
+		const double Share = FMath::Clamp((HeightMeters - FootHeightMeters) / (MouthHeightMeters - FootHeightMeters), 0.0, 1.0);
+		return FMath::Lerp(FootRatio, MouthRatio, Share);
+	}
+
+	double FVesselPress::SlopeAt(double HeightMeters) const
+	{
+		if (MouthHeightMeters <= FootHeightMeters || HeightMeters < FootHeightMeters || HeightMeters > MouthHeightMeters)
+		{
+			return 0.0;
+		}
+		return (MouthRatio - FootRatio) / (MouthHeightMeters - FootHeightMeters);
+	}
+
+	FString PressOf(const FArtVessel& Vessel, const FVector2D& Scale, FVesselPress& Out)
+	{
+		Out = FVesselPress();
+		const FArtVesselMuseum& Museum = Vessel.Museum;
+		if (!Museum.IsOval() || Vessel.Section.IsEmpty())
+		{
+			return FString();
+		}
+		if (!(Museum.MouthAxesMeters[0] > 0.0 && Museum.MouthAxesMeters[1] > 0.0))
+		{
+			return TEXT("an oval's mouth has two axes of more than zero");
+		}
+		// The mouth: the section's widest point (the highest, where several are as wide).
+		int32 Widest = 0;
+		for (int32 Index = 1; Index < Vessel.Section.Num(); ++Index)
+		{
+			const FVector2D& Point = Vessel.Section[Index];
+			const FVector2D& Best = Vessel.Section[Widest];
+			Widest = Point.X > Best.X || (Point.X == Best.X && Point.Y > Best.Y) ? Index : Widest;
+		}
+		Out.MouthHeightMeters = Vessel.Section[Widest].Y * Scale.Y;
+		Out.MouthRatio = Museum.MouthAxesMeters[1] / Museum.MouthAxesMeters[0];
+		if (Museum.FootAxesMeters.Num() != 2)
+		{
+			Out.FootHeightMeters = Out.MouthHeightMeters;
+			Out.FootRatio = Out.MouthRatio;
+			return FString();
+		}
+		if (!(Museum.FootAxesMeters[0] > 0.0 && Museum.FootAxesMeters[1] > 0.0))
+		{
+			return TEXT("an oval's foot has two axes of more than zero");
+		}
+		// The foot: the highest point of the outside, below the mouth, at the museum's foot's long half-axis.
+		const double Half = 0.5 * Museum.FootAxesMeters[0];
+		int32 Foot = INDEX_NONE;
+		if (Vessel.Outside.Num() == 2)
+		{
+			for (int32 Index = FMath::Max(Vessel.Outside[0], 0); Index <= FMath::Min(Vessel.Outside[1], Vessel.Section.Num() - 1); ++Index)
+			{
+				const FVector2D& Point = Vessel.Section[Index];
+				if (FMath::Abs(Point.X - Half) <= FootToleranceMeters && Point.Y < Vessel.Section[Widest].Y
+					&& (Foot == INDEX_NONE || Point.Y > Vessel.Section[Foot].Y))
+				{
+					Foot = Index;
+				}
+			}
+		}
+		if (Foot == INDEX_NONE)
+		{
+			return FString::Printf(TEXT("its outside comes nowhere to its museum's foot, %.1f mm across"), 1000.0 * Museum.FootAxesMeters[0]);
+		}
+		Out.FootHeightMeters = Vessel.Section[Foot].Y * Scale.Y;
+		Out.FootRatio = Museum.FootAxesMeters[1] / Museum.FootAxesMeters[0];
+		return FString();
+	}
+
+	double RadiusAt(TConstArrayView<FVector2D> Section, double HeightMeters)
+	{
+		double Most = 0.0;
+		for (int32 Index = 1; Index < Section.Num(); ++Index)
+		{
+			const FVector2D& A = Section[Index - 1];
+			const FVector2D& B = Section[Index];
+			if (FMath::Min(A.Y, B.Y) <= HeightMeters && HeightMeters <= FMath::Max(A.Y, B.Y))
+			{
+				Most = FMath::Max(Most, A.Y == B.Y ? FMath::Max(A.X, B.X) : FMath::Lerp(A.X, B.X, (HeightMeters - A.Y) / (B.Y - A.Y)));
+			}
+		}
+		return Most;
 	}
 
 	TArray<FVector2D> SizedSection(const FArtVessel& Vessel, const FVector2D& SizeMeters)

@@ -349,7 +349,8 @@ namespace Musee::ArtMaking
 		 * A vessel derived from its photographs: its outside runs between two of its section's points; its section turned
 		 * is a solid (it crosses itself nowhere, and its wall is nowhere thinner than half the wall it was drawn with); its
 		 * feet are outlines; a painted one's views are photographs the collection holds, each with its camera and how it
-		 * was placed; an oval one gives its mouth's two axes; and it is its museum's size, its plan the section's (SizeFault).
+		 * was placed; an oval one gives its mouth's two axes; and it is its museum's size (an oval's mouth and foot, both axes
+		 * of each, as it is pressed), its plan the section's (SizeFault).
 		 */
 		TArray<FString> DerivedVesselFaults(const FArtVessel& Vessel, const FArtHangEntry& Entry, double DiameterTolerance)
 		{
@@ -387,9 +388,10 @@ namespace Musee::ArtMaking
 				{
 					Out.Add(FString::Printf(TEXT("its view %s is not in the collection"), *View.Image));
 				}
-				else if (View.AxisPixels.Num() != 2 || !(View.FocalPixels > 0.0) || !(View.DistanceMeters > 0.0))
+				else if (View.AxisPixels.Num() != 2 || !(View.FocalPixels > 0.0) || !(View.DistanceMeters > 0.0 || View.IsAlongAxis()))
 				{
-					Out.Add(FString::Printf(TEXT("its view %s needs its camera: a distance, a focal length and its axis's pixel [u, v]"), *View.Image));
+					Out.Add(FString::Printf(TEXT("its view %s needs its camera: a distance (or none, on the axis looking along it), a focal length and its axis's pixel [u, v]"),
+						*View.Image));
 				}
 			}
 			if (Vessel.Museum.IsOval() && !(Vessel.Museum.MouthAxesMeters[0] > 0.0 && Vessel.Museum.MouthAxesMeters[1] > 0.0))

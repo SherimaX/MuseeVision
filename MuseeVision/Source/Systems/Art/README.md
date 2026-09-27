@@ -66,12 +66,16 @@ and, where its plan says `stand`, on its carved phoebe stand (`ware.<id>.stand`)
 
 **Vessels from their photographs** (grade `derived` in `Data/Art/Vessels.json`, made by `MuseeVision/Scripts/vessels.py`,
 each derivation in its record): the section as the vessel's own photograph shows it through its fitted camera, at its
-museum's size (`museum`); an oval one (the Ru basin) turned and pressed to its mouth's axes (`Vessel/VesselMesh.h`), on its
-feet (`ware.<id>.foot.<n>`). A painted one (`views`) wears the work's own layer `paint.<id>` over its medium's finish
-(`accent.porcelain-painted`): its decoration composed by `Vessel/VesselDecoration.h` in the layout its UV0 carries (U the
-widest parallel's metres round from the front, V the section's metres along), each view projected through its camera where
-it sees the surface within 60 degrees of face on, views blended by how squarely they see it, each photograph divided by its
-own white, and where none sees the outside a band's own repeat (`bands`) or the glaze. Its label credits its photographs
+museum's size (`museum`); an oval one (the Ru basin) turned and pressed front to back to its foot's oval and its
+mouth's, evenly between (`Vessel/VesselSection.h` `PressOf`, `Vessel/VesselMesh.h`), on its feet (`ware.<id>.foot.<n>`).
+A painted one (`views`) wears the work's own layer `paint.<id>` over its medium's finish (`accent.porcelain-painted`): its
+decoration composed by `Vessel/VesselDecoration.h` in the layout its UV0 carries (U the widest parallel's metres round
+from the front, V the section's metres along), each view projected through its camera onto all the surface it sees,
+obliquely too (where no other part of the vessel hides it, inside its silhouette by the camera's miss and an edge's blur),
+views blended by the square of how squarely they see it and fading into the glaze over the last 12 degrees to their
+silhouettes, each photograph divided by its own white, and where none sees the outside a band's own repeat (`bands`) or
+the glaze. Its registered views are checked against the overlaps that placed them (`PlacementFaults`), measured again
+from their cameras and photographs. Its label credits its photographs
 (the catalogue's `credit`, `MuseeVision/Data/Art/Ceramics.json`).
 
 Every object is named `<word>.<id>[.<index>]` (`canvas`, `glass`, `paper`, `plate`, `ware`, `cast`), its parts `<name>.<part>`.

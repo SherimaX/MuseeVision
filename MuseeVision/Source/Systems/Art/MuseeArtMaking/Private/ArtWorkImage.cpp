@@ -15,7 +15,7 @@ namespace Musee::ArtMaking
 	namespace
 	{
 		/** The revision of a vessel's composition: raise it whenever the same record and views would compose differently. */
-		constexpr int32 DecorationRevision = 1;
+		constexpr int32 DecorationRevision = 2;
 
 		void Fill(const FImage& Image, UTexture2D& Texture)
 		{
@@ -52,9 +52,10 @@ namespace Musee::ArtMaking
 		FString CompositionText(const FArtVessels& Record, const FArtVessel& Vessel, const FVector2D& SizeMeters)
 		{
 			const FArtVesselComposition& How = Record.Composition;
-			FString Text = FString::Printf(TEXT("vessel-decoration;%d;%.9g;%.9g;%.9g;%.9g;%.9g;%.9g;%.9g;%.9g;%.9g;%.9g;%.9g;%.9g;%d"),
-				DecorationRevision, SizeMeters.X, SizeMeters.Y, How.SquarenessCut, How.WhiteSquareness, How.WhiteQuantile, How.GlazeChroma,
-				How.GlazeLightness, How.ShadeFloor, How.HighlightOverWhite, How.HighlightWeight, How.FullWeight, How.MostPixelsPerMeter, How.MostPixels);
+			FString Text = FString::Printf(TEXT("vessel-decoration;%d;%.9g;%.9g;%.9g;%.9g;%.9g;%.9g;%.9g;%.9g;%.9g;%.9g;%.9g;%.9g;%.9g;%d"),
+				DecorationRevision, SizeMeters.X, SizeMeters.Y, How.EdgePixels, How.ClearanceMeters, How.WhiteSquareness, How.WhiteQuantile,
+				How.GlazeChroma, How.GlazeLightness, How.ShadeFloor, How.HighlightOverWhite, How.HighlightWeight, How.FullWeight, How.MostPixelsPerMeter,
+				How.MostPixels);
 			for (const FVector2D& Point : Vessel.Section)
 			{
 				Text += FString::Printf(TEXT(";%.9g,%.9g"), Point.X, Point.Y);
@@ -69,8 +70,8 @@ namespace Musee::ArtMaking
 			}
 			for (const FArtVesselView& View : Vessel.Views)
 			{
-				Text += FString::Printf(TEXT(";v%s,%.9g,%.9g,%.9g,%.9g,%.9g"), *View.Image, View.AzimuthDegrees, View.DistanceMeters, View.HeightMeters,
-					View.PitchDegrees, View.FocalPixels);
+				Text += FString::Printf(TEXT(";v%s,%.9g,%.9g,%.9g,%.9g,%.9g,%.9g"), *View.Image, View.AzimuthDegrees, View.DistanceMeters, View.HeightMeters,
+					View.PitchDegrees, View.FocalPixels, View.FitPixels);
 				for (const double Axis : View.AxisPixels)
 				{
 					Text += FString::Printf(TEXT(",%.9g"), Axis);

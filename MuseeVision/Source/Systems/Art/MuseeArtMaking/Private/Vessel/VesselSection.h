@@ -28,11 +28,43 @@ namespace Musee::ArtMaking
 
 	/**
 	 * Whether a derived vessel is the size its museum records and its plan shows: its section's height its museum's, its
-	 * plan's height its museum's and its width its section's, and its section's widest diameter (an oval's across its
-	 * mouth's long axis) within DiameterTolerance of its museum's, or its record says why not (its Departure). Empty if
-	 * so, or if it isn't derived; else what is wrong.
+	 * plan's height its museum's and its width its section's, and its section's widest diameter within DiameterTolerance
+	 * of its museum's, or its record says why not (its Departure); an oval's mouth and foot so, both axes of each, as its
+	 * pressing (PressOf) turns them. Empty if so, or if it isn't derived; else what is wrong.
 	 */
 	[[nodiscard]] FString SizeFault(const FArtVessel& Vessel, const FVector2D& PlanMeters, double DiameterTolerance);
+
+	/**
+	 * How an oval vessel's turned section is pressed front to back (y) to its plan: the ratio of its plan's short axis to
+	 * its long at its foot and at its mouth, as its museum records both, each at its height on the section, and running
+	 * evenly between them up the wall (a potter's oval is thrown round and pressed, its foot and its mouth each to its
+	 * own oval); below the foot the foot's, above the mouth the mouth's. A round vessel's ratio is one everywhere.
+	 */
+	struct FVesselPress
+	{
+		double FootHeightMeters = 0.0;
+		double FootRatio = 1.0;
+		double MouthHeightMeters = 0.0;
+		double MouthRatio = 1.0;
+
+		/** The ratio at a height, and how fast it changes with height there (per metre). */
+		[[nodiscard]] double RatioAt(double HeightMeters) const;
+		[[nodiscard]] double SlopeAt(double HeightMeters) const;
+	};
+
+	/** How near a section point must come to the museum's foot to be it: half the millimetre the museum gives it to. */
+	inline constexpr double FootToleranceMeters = 0.0005;
+
+	/**
+	 * An oval vessel's pressing for its section scaled by Scale (SectionScale): its mouth the section's widest point, its
+	 * foot the highest point of its outside at the museum's foot's long half-axis (within FootToleranceMeters); a museum
+	 * that gives the mouth's axes only presses the whole to the mouth's ratio. Empty if found (a round vessel's is one
+	 * everywhere); else why not.
+	 */
+	[[nodiscard]] FString PressOf(const FArtVessel& Vessel, const FVector2D& Scale, FVesselPress& Out);
+
+	/** The widest radius a section reaches at a height, over all its segments there (zero where none reaches it). */
+	[[nodiscard]] double RadiusAt(TConstArrayView<FVector2D> Section, double HeightMeters);
 
 	/** The radius of a section's foot: its widest point at its lowest height. */
 	[[nodiscard]] double FootRadius(TConstArrayView<FVector2D> Points);

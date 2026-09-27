@@ -8,8 +8,9 @@ namespace Musee::ArtMaking
 	namespace
 	{
 		/**
-		 * One ring of the turned surface: the section's point carried round the axis with its normal, which an oval's
-		 * scaling tilts by the inverse of the scale (a normal transforms by the inverse transpose).
+		 * One ring of the turned surface: the section's point carried round the axis with its normal. An oval's pressing,
+		 * (x, y, z) to (x, k(z) y, z), tilts the normal by the inverse transpose of its Jacobian: n to (n.x, n.y / k,
+		 * n.z - k'(z) y n.y / k), y the point's unpressed y.
 		 */
 		TArray<int32> Ring(FFormMesh& Mesh, const FVector2D& Point, const FVector2D& Normal, double V, int32 Segments, const FVesselTurning& Turning,
 			double ReferenceRadius)
@@ -21,12 +22,22 @@ namespace Musee::ArtMaking
 				const double Angle = 2.0 * UE_DOUBLE_PI * K / Segments;
 				const double S = FMath::Sin(Angle);
 				const double C = FMath::Cos(Angle);
-				const FVector Position(Turning.Oval.X * Point.X * S, Turning.Oval.Y * Point.X * C, Point.Y);
-				const FVector Facing = FVector(Normal.X * S / Turning.Oval.X, Normal.X * C / Turning.Oval.Y, Normal.Y).GetSafeNormal();
+				const double Ratio = Turning.Press.RatioAt(Point.Y);
+				const double Slope = Turning.Press.SlopeAt(Point.Y);
+				const FVector Position(Point.X * S, Ratio * Point.X * C, Point.Y);
+				const FVector Facing = FVector(Normal.X * S, Normal.X * C / Ratio, Normal.Y - Slope * Point.X * C * Normal.X * C / Ratio).GetSafeNormal();
 				Out.Add(Mesh.AddVertex(Position, Facing.IsNearlyZero() ? FVector::UpVector : Facing, FVector2D(ReferenceRadius * Angle, V)));
 			}
 			return Out;
 		}
+	}
+
+	FString TurningOf(const FArtVessel& Vessel, const FVector2D& PlanMeters, double CreaseDegrees, double ChordToleranceMeters, FVesselTurning& Out)
+	{
+		Out = FVesselTurning();
+		Out.CreaseDegrees = CreaseDegrees;
+		Out.ChordToleranceMeters = ChordToleranceMeters;
+		return PressOf(Vessel, SectionScale(Vessel, PlanMeters), Out.Press);
 	}
 
 	void BuildVessel(TConstArrayView<FVector2D> Section, const FVesselLayout& Layout, const FVesselTurning& Turning, UE::Geometry::FDynamicMesh3& Out)
@@ -34,7 +45,8 @@ namespace Musee::ArtMaking
 		FFormMesh Mesh;
 		const int32 Count = Section.Num();
 		const double Crease = FMath::DegreesToRadians(Turning.CreaseDegrees);
-		const int32 Segments = ChordsRound(Layout.ReferenceRadius * FMath::Max(Turning.Oval.X, Turning.Oval.Y), Turning.ChordToleranceMeters);
+		const int32 Segments = ChordsRound(Layout.ReferenceRadius * FMath::Max3(Turning.Press.FootRatio, Turning.Press.MouthRatio, 1.0),
+			Turning.ChordToleranceMeters);
 		TArray<int32> Leaving;
 		for (int32 I = 0; I < Count; ++I)
 		{
