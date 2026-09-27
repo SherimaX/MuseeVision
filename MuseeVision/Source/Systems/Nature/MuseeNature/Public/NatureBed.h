@@ -8,9 +8,10 @@
 
 /**
  * One planting in a stage's planting plan: a species grown in a Bed anchor, so many plants set out at a spacing
- * around the anchor, on the body that carries the bed (if it moves). Its plants are made of their species' living
- * tissues, worked and aged as the entry says; or of one material in place of them all. A cast specimen is a single
- * plant grown to its species' form and cast in metal (the golden iris, gilt bronze cast from Iris laevigata).
+ * around the anchor, on the body that carries the bed (if it moves). Each organ is made of its own living tissue (the
+ * species record's palette key for it: a lily's pad `living.leaf-floating`, its petals `living.petal`), worked and aged
+ * as the entry says. A cast specimen is a single plant grown to its species' form and cast in metal, every organ in the
+ * cast's material, working and history (the golden iris, gilt bronze cast from Iris laevigata).
  */
 USTRUCT()
 struct MUSEENATURE_API FNatureBed
@@ -33,11 +34,7 @@ struct MUSEENATURE_API FNatureBed
 	UPROPERTY(meta = (Units = "Meters"))
 	float Spacing = 0.0f;
 
-	/** A palette key the plants are made of in place of their species' tissues; empty for the tissues themselves. */
-	UPROPERTY()
-	FName Material;
-
-	/** The working and history the plants' material or tissues are resolved with (Data/Matter/Shading). */
+	/** The working and history the plants' tissues are resolved with (Data/Matter/Shading); none for a cast specimen. */
 	UPROPERTY()
 	FName Working;
 

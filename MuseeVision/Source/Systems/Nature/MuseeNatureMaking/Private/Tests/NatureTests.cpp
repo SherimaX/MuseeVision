@@ -230,6 +230,15 @@ bool FNaturePlantingTest::RunTest(const FString& Parameters)
 	}
 	TestTrue(TEXT("The golden iris grows the iris's leaves and flowers"), Names.Contains(TEXT("pond.golden-iris.iris-laevigata.leaf"))
 		&& Names.Contains(TEXT("pond.golden-iris.iris-laevigata.flower")));
+	const auto MaterialOf = [&Pieces](const TCHAR* Name)
+	{
+		const FFormMadePiece* Found = Pieces.FindByPredicate([Name](const FFormMadePiece& P) { return P.Name == Name; });
+		return Found ? Found->Material : NAME_None;
+	};
+	TestTrue(TEXT("Each organ is its own tissue: a lily's pad a floating leaf, an iris's swords leaf, a forget-me-not's flowers petal"),
+		MaterialOf(TEXT("pond.lilies.nymphaea-marliacea-carnea.leaf")) == TEXT("living.leaf-floating")
+		&& MaterialOf(TEXT("pond.shelf.east.iris-laevigata.leaf")) == TEXT("living.leaf")
+		&& MaterialOf(TEXT("pond.shelf.east.myosotis-scorpioides.flower")) == TEXT("living.petal"));
 	for (const TCHAR* Expected : { TEXT("pond.lilies.nymphaea-marliacea-carnea.leaf"), TEXT("pond.lilies.nymphaea-marliacea-albida.leaf"),
 		TEXT("pond.shelf.east.iris-laevigata.leaf"), TEXT("pond.shelf.east.carex-elata.seed"), TEXT("pond.shelf.east.myosotis-scorpioides.flower") })
 	{

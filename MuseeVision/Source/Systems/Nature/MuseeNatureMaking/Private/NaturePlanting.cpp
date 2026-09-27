@@ -50,8 +50,8 @@ namespace Musee::NatureMaking
 		{
 			for (const FNatureWater& Water : Plan.Water)
 			{
-				const FMuseeStageAnchor* Datum = Stage.FindAnchor(Water.Anchor);
-				if (!Datum || Datum->Kind != AnchorKind::Water)
+				const FMuseeStageAnchor* Datum = Stage.FindAnchor(Water.Anchor, AnchorKind::Water);
+				if (!Datum)
 				{
 					continue;
 				}
@@ -122,8 +122,9 @@ namespace Musee::NatureMaking
 		}
 
 		/**
-		 * What a grown part is made of: a cast specimen's metal, which the visitor can't pass through; or the bed's own
-		 * material, else its species' living tissue for the organ, which nothing collides with, as the bed works and ages it.
+		 * What a grown part is made of: a cast specimen's metal, which the visitor can't pass through; or its organ's own
+		 * living tissue (a lily's pad a floating leaf, its petal a thin translucent sheet), which nothing collides with,
+		 * worked and aged as its bed says.
 		 */
 		void MaterialOfPart(const FNatureBed& Entry, const FNatureSpecies& Species, FName Organ, FFormMadePiece& OutPiece)
 		{
@@ -135,7 +136,7 @@ namespace Musee::NatureMaking
 				OutPiece.Collision = Collision::Solid.Profile();
 				return;
 			}
-			OutPiece.Material = Entry.Material.IsNone() ? Species.MaterialOf(Organ) : Entry.Material;
+			OutPiece.Material = Species.MaterialOf(Organ);
 			OutPiece.Working = Entry.Working;
 			OutPiece.History = Entry.History;
 			OutPiece.Collision = NAME_None;
@@ -151,9 +152,9 @@ namespace Musee::NatureMaking
 			}
 			if (Entry.Cast.IsSet())
 			{
-				if (Entry.Count != 1 || Entry.Cast.Working.IsNone() || Entry.Cast.History.IsNone() || !Entry.Material.IsNone())
+				if (Entry.Count != 1 || Entry.Cast.Working.IsNone() || Entry.Cast.History.IsNone() || !Entry.Working.IsNone() || !Entry.History.IsNone())
 				{
-					Out.Add(TEXT("a cast specimen is one plant, cast in a material with its working and history, and names no other material"));
+					Out.Add(TEXT("a cast specimen is one plant, cast in a material with its working and history, which are the cast's alone"));
 				}
 			}
 			else if (Entry.Working.IsNone() || Entry.History.IsNone())
@@ -209,9 +210,8 @@ namespace Musee::NatureMaking
 			for (const FNatureBed& Entry : Plan.Beds)
 			{
 				const FNatureSpecies* Found = Species.FindByPredicate([&Entry](const FNatureSpecies& S) { return S.Name == Entry.Species; });
-				const FMuseeStageAnchor* Anchor = Stage.FindAnchor(Entry.Bed);
 				TArray<FString> Faults;
-				if (!Anchor || Anchor->Kind != AnchorKind::Bed)
+				if (!Stage.FindAnchor(Entry.Bed, AnchorKind::Bed))
 				{
 					Faults.Add(FString::Printf(TEXT("%s is not a Bed anchor of the stage"), *Entry.Bed.ToString()));
 				}
@@ -240,7 +240,7 @@ namespace Musee::NatureMaking
 			TArray<FVector2D> Out;
 			for (const FNatureBed& Other : Plan.Beds)
 			{
-				const FMuseeStageAnchor* Anchor = Stage.FindAnchor(Other.Bed);
+				const FMuseeStageAnchor* Anchor = Stage.FindAnchor(Other.Bed, AnchorKind::Bed);
 				if (Other.Bed == Own || !Anchor || WaterAt(Stage, Plan, Anchor->Frame).Water != In.Water)
 				{
 					continue;
@@ -261,7 +261,7 @@ namespace Musee::NatureMaking
 			}
 			for (const FMuseeKey& Key : Beds)
 			{
-				const FMuseeFrame& Bed = Stage.FindAnchor(Key)->Frame;
+				const FMuseeFrame& Bed = Stage.FindAnchor(Key, AnchorKind::Bed)->Frame;
 				const FBedWater In = WaterAt(Stage, Plan, Bed);
 				const TArray<FVector2D> Neighbours = NeighbourBeds(Stage, Plan, Key, Bed, In);
 				TArray<const FPlanting*> Here;
