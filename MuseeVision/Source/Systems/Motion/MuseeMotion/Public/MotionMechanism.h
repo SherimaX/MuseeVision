@@ -2,6 +2,7 @@
 
 #include "Components/ActorComponent.h"
 #include "CoreMinimal.h"
+#include "MotionInterlock.h"
 #include "MotionMechanismSpec.h"
 #include "MotionSCurve.h"
 #include "MuseeUse.h"
@@ -16,7 +17,9 @@ class USceneComponent;
  * names between. A control's use runs the open or the close sequence of its spec, and a ride offered at a stop runs its
  * own: channel ramps and moves, in order. While the body travels, its actuation is published for Sound, and before each
  * step of travel the guard sweeps the slice the body is about to enter for the visitor's body: the drive holds (a lift)
- * or turns back (a door) rather than move into anyone.
+ * or turns back (a door) rather than move into anyone. Before each step of travel or of a ramp the stage's interlocks
+ * are asked too, and the machine waits while one forbids the step. A machine of a group opens only once the rest of
+ * its group is closed, and a machine that returns goes home by itself when it is left.
  *
  * Motion is kinematic and deterministic: the body's pose is a function of the drive's position, never of physics.
  * The dresser places one per mechanism on the stage actor at making time, with the body's drawn pose as its reference.
@@ -35,6 +38,19 @@ public:
 	/** Heard when the body reaches a named state. */
 	using FMoved = TMulticastDelegate<void(const FMuseeKey& Mechanism, FName State)>;
 
+	/** Why a running machine waits instead of moving. */
+	enum class EWait : uint8
+	{
+		/** It isn't waiting. */
+		None,
+		/** The visitor is in the body's way (the guard). */
+		Visitor,
+		/** An interlock forbids its next step. */
+		Interlock,
+		/** Others of its group are not yet closed. */
+		Group,
+	};
+
 	UMotionMechanism();
 
 	/** Sets the mechanism up to drive Body from its present pose, the pose its spec says it is drawn in. Making time only. */
@@ -42,6 +58,9 @@ public:
 
 	/** The ports the site plan mates, which rides require. None are mated until they are given. Making time only. */
 	void SetMatedPorts(const TArray<FMuseeKey>& Ports);
+
+	/** The stage's interlocks; the machine keeps those that guard it or a channel it ramps. Making time only. */
+	void SetInterlocks(const TArray<FMotionInterlock>& Interlocks);
 
 	[[nodiscard]] const FMotionMechanismSpec& Spec() const { return MechanismSpec; }
 	[[nodiscard]] USceneComponent* Body() const { return BodyComponent; }
@@ -59,21 +78,27 @@ public:
 	[[nodiscard]] bool IsRunning() const { return Running.IsSet(); }
 
 	/** Whether the guard is holding the drive because the visitor is in the body's way. */
-	[[nodiscard]] bool IsHeld() const { return bHeld; }
+	[[nodiscard]] bool IsHeld() const { return Waiting == EWait::Visitor; }
 
-	/** Sets the body at its home at once, as the machine stands when the museum opens. BeginPlay does this. */
-	void StandAtHome();
+	/** Why the machine waits, if it does. */
+	[[nodiscard]] EWait WaitsFor() const { return Waiting; }
+
+	/** The interlock that last held it, or the none key. */
+	[[nodiscard]] const FMuseeKey& HeldBy() const { return HoldingInterlock; }
+
+	/** Sets the body where the museum opens it, at once: its start (its home unless it names one). BeginPlay does this. */
+	void StandAtStart();
 
 	/** Drives the body to a named state at the drive's own pace, without the sequence's channel steps. */
 	void MoveTo(FName State);
 
 	/**
 	 * How the mechanism's own control can be used now: its open sequence from anywhere but the state that sequence ends
-	 * in, its close sequence from there; nothing while it runs or follows.
+	 * in, its close sequence from there (nothing, where the machine returns by itself); nothing while it runs or follows.
 	 */
 	[[nodiscard]] FMuseeUse Usage() const;
 
-	/** The own control's use: runs the sequence its usage offers. */
+	/** The own control's use: runs the sequence its usage offers, first closing the rest of its group to open. */
 	void Use();
 
 	/**
@@ -89,7 +114,10 @@ public:
 	/** Whether a requirement holds now: every port it names is mated and every channel lies within its bounds. */
 	[[nodiscard]] bool Holds(const FMotionRequirement& Requirement) const;
 
-	/** Runs the mechanism for a span of time: its sequence, its drive, its guard and its signals. */
+	/** Runs its close sequence from wherever it is, as its group asks of it when another of the group opens. */
+	void CloseForGroup();
+
+	/** Runs the mechanism for a span of time: its sequence, its drive, its guard, its interlocks and its signals. */
 	void Advance(float Seconds);
 
 	/** Heard when the body reaches a named state. */
@@ -114,6 +142,8 @@ private:
 		Musee::Motion::FSCurve Curve;
 		/** The sequence a reversing guard runs instead when it turns the body back. */
 		TArray<FMotionStep> Reverse;
+		/** Whether it waits for the rest of its group to close before its first step. */
+		bool bAfterGroup = false;
 	};
 
 	/** Where a move is a time into it: the drive's position and its rate (shares of the travel a second). */
@@ -134,6 +164,14 @@ private:
 	[[nodiscard]] FMoveSample SampleMove(double Seconds, double Duration) const;
 	/** Whether the guard stops the body from moving on to a drive position. */
 	[[nodiscard]] bool IsGuarded(double NextPosition) const;
+	/** The interlock that forbids the guarded thing (this mechanism, or a channel) its next value, if one does. */
+	[[nodiscard]] const FMotionInterlock* Forbidding(const FMuseeKey& Mechanism, const FMuseeKey& Channel, double NextValue) const;
+	/** Whether the rest of its group stands closed and still. */
+	[[nodiscard]] bool IsGroupClosed() const;
+	/** The others of its group on the stage. */
+	[[nodiscard]] TArray<UMotionMechanism*> GroupPeers() const;
+	/** Counts the time it has been left where it returns from, and runs its close sequence when the time is up. */
+	void WaitToReturn(float Seconds);
 	/** The body's pose relative to its parent at a drive position. */
 	[[nodiscard]] FTransform PoseAt(double InPosition) const;
 	void SetPosition(double InPosition);
@@ -145,11 +183,10 @@ private:
 	/** Whether the own control's use now runs the open sequence. */
 	[[nodiscard]] bool IsOpening() const;
 	[[nodiscard]] FText Verb(bool bOpening) const;
-	/** Why nothing can be used while the mechanism runs: it is moving, or held. */
+	/** Why nothing can be used while the mechanism runs: it is moving, or waits and why. */
 	[[nodiscard]] FText WhyBusy() const;
 	/** The usage of the rides at a Use anchor, and the ride it would run (null when none is available). */
 	[[nodiscard]] FMuseeUse RideUsage(const FMuseeKey& UseAnchor, const FMotionRide*& OutRide) const;
-	[[nodiscard]] bool IsMated(const FMotionRequirement& Requirement) const;
 
 	UPROPERTY()
 	FMotionMechanismSpec MechanismSpec;
@@ -176,11 +213,18 @@ private:
 	UPROPERTY()
 	TArray<FMuseeKey> MatedPorts;
 
+	/** The stage's interlocks that guard this machine or a channel it ramps. */
+	UPROPERTY()
+	TArray<FMotionInterlock> Interlocks;
+
 	/** Where the drive is; saved with the level, so the body and its drive agree where it is drawn. */
 	UPROPERTY()
 	double DrivePosition = 0.0;
 
 	TOptional<FRun> Running;
-	bool bHeld = false;
+	EWait Waiting = EWait::None;
+	FMuseeKey HoldingInterlock;
+	/** How long it has been left, with nobody near, where it returns from. */
+	float LeftSeconds = 0.0f;
 	FMoved Moved;
 };

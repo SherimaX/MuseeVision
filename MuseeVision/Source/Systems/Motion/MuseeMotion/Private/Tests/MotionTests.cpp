@@ -98,7 +98,7 @@ bool FMotionScheduleTest::RunTest(const FString& Parameters)
 	}
 	const FMotionSchedule& Schedule = Read.GetValue();
 	TestEqual(TEXT("Every mechanism"), Schedule.Mechanisms.Num(), 3);
-	TestTrue(TEXT("The rails follow the lift's height"), Schedule.Mechanisms[2].Follows.IsSet() && Schedule.Mechanisms[2].Follows.TravelAt(0.4231) == 1.0);
+	TestTrue(TEXT("The rails follow the lift's height"), Schedule.Mechanisms[2].Follows.IsSet() && Schedule.Mechanisms[2].Follows.At(0.4231) == 1.0);
 	const FMotionMechanismSpec& Lift = Schedule.Mechanisms[0];
 	TestTrue(TEXT("Keys, joint and body"), Lift.Key == FMuseeKey(TEXTVIEW("proof.lift")) && Lift.Joint == TEXT("prismatic") && Lift.Body == FMuseeKey(TEXTVIEW("proof.basin")));
 	TestEqual(TEXT("Travel in metres"), Lift.Travel, 2.6f);

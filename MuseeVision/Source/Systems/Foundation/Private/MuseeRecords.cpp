@@ -10,6 +10,7 @@
 #include "Misc/SecureHash.h"
 #include "MuseeDependencySet.h"
 #include "MuseeKey.h"
+#include "MuseeText.h"
 #include "Serialization/JsonReader.h"
 #include "Serialization/JsonSerializer.h"
 #include "UObject/UnrealType.h"
@@ -103,6 +104,9 @@ namespace Musee::Records
 			}
 			return &Type == TBaseStructure<FVector2D>::Get() ? 2 : 0;
 		}
+
+		/** The field of a text that holds its source, which a text written as a plain string fills. */
+		const TCHAR* const TextSourceField = TEXT("Source");
 
 		/** The names of a vector's components, as the engine's converter reads them from an object. */
 		const TCHAR* const VectorFields[] = { TEXT("X"), TEXT("Y"), TEXT("Z") };
@@ -338,6 +342,13 @@ namespace Musee::Records
 			{
 				ShapeObject(*Struct->Struct, *Value->AsObject());
 				return Value;
+			}
+			if (Struct->Struct == FMuseeText::StaticStruct() && Value->Type == EJson::String)
+			{
+				// A text written as a plain string is its source; its owner gives it its key.
+				const TSharedRef<FJsonObject> Text = MakeShared<FJsonObject>();
+				Text->SetField(TextSourceField, Value);
+				return MakeShared<FJsonValueObject>(Text);
 			}
 			const int32 Components = VectorComponents(*Struct->Struct);
 			if (Components == 0 || Value->Type != EJson::Array)

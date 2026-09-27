@@ -1,17 +1,18 @@
 #include "Engine/World.h"
+#include "GameFramework/Actor.h"
+#include "MotionConditions.h"
+#include "MotionGuard.h"
 #include "MotionMechanism.h"
-#include "MuseeSignals.h"
+#include "MuseeHumanMeasure.h"
 
-// The mechanism's uses: its own control's open and close, and the rides a lift offers at its stops.
+// The mechanism's uses: its own control's open and close, the rides a lift offers at its stops, its group, and its
+// return home when it is left.
 
 namespace
 {
 	/** A joint's axis within this angle of the vertical is a lift, whose verbs are Raise and Lower: 30 degrees, the
 	 * steepest an inclined lift runs (EN 81-22 covers inclined lifts from 15 to 75 degrees from the horizontal). */
 	constexpr double LiftAxisCosine = 0.866;
-
-	/** A channel point nobody has published on stands at its rest, 0 (a door shut, an iris closed, no work performing). */
-	constexpr float UnpublishedValue = 0.0f;
 
 	const FName Prismatic(TEXT("prismatic"));
 
@@ -40,14 +41,23 @@ bool UMotionMechanism::IsOpening() const
 
 FText UMotionMechanism::WhyBusy() const
 {
-	return bHeld
-		? NSLOCTEXT("Musee", "motion.held", "Something is in its way.")
-		: NSLOCTEXT("Musee", "motion.moving", "It is moving.");
+	switch (Waiting)
+	{
+	case EWait::Visitor: return NSLOCTEXT("Musee", "motion.held", "Something is in its way.");
+	case EWait::Interlock: return NSLOCTEXT("Musee", "motion.interlocked", "It waits until it is safe to move.");
+	case EWait::Group: return NSLOCTEXT("Musee", "motion.group", "It waits for the others to close.");
+	default: return NSLOCTEXT("Musee", "motion.moving", "It is moving.");
+	}
 }
 
 FMuseeUse UMotionMechanism::Usage() const
 {
 	const bool bOpening = IsOpening();
+	if (!bOpening && MechanismSpec.Returns.IsSet() && !IsRunning())
+	{
+		// Left open, it goes home by itself: its control has nothing to offer.
+		return FMuseeUse();
+	}
 	const FMotionUseText& Text = bOpening ? MechanismSpec.OpenUse : MechanismSpec.CloseUse;
 	const FText Caption = CaptionOf(Text.Caption);
 	if (IsRunning() || MechanismSpec.Follows.IsSet())
@@ -59,17 +69,76 @@ FMuseeUse UMotionMechanism::Usage() const
 
 void UMotionMechanism::Use()
 {
-	if (IsRunning() || !BodyComponent || MechanismSpec.Follows.IsSet())
+	if (!Usage().bAvailable || !BodyComponent)
 	{
 		return;
 	}
-	if (IsOpening())
-	{
-		Start(MechanismSpec.Open, MechanismSpec.Close);
-	}
-	else
+	if (!IsOpening())
 	{
 		Start(MechanismSpec.Close, MechanismSpec.Open);
+		return;
+	}
+	const TArray<UMotionMechanism*> Peers = GroupPeers();
+	for (UMotionMechanism* Peer : Peers)
+	{
+		Peer->CloseForGroup();
+	}
+	Start(MechanismSpec.Open, MechanismSpec.Close);
+	Running->bAfterGroup = !Peers.IsEmpty();
+}
+
+void UMotionMechanism::CloseForGroup()
+{
+	if (MechanismSpec.Follows.IsSet() || MechanismSpec.Close.IsEmpty() || (IsAt(Closed) && !IsRunning()))
+	{
+		return;
+	}
+	Start(MechanismSpec.Close, MechanismSpec.Open);
+}
+
+TArray<UMotionMechanism*> UMotionMechanism::GroupPeers() const
+{
+	TArray<UMotionMechanism*> Peers;
+	if (MechanismSpec.Group.IsNone() || !GetOwner())
+	{
+		return Peers;
+	}
+	GetOwner()->GetComponents(Peers);
+	return Peers.FilterByPredicate([this](const UMotionMechanism* Peer) { return Peer != this && Peer->Spec().Group == MechanismSpec.Group; });
+}
+
+bool UMotionMechanism::IsGroupClosed() const
+{
+	for (const UMotionMechanism* Peer : GroupPeers())
+	{
+		if (Peer->IsRunning() || !Peer->IsAt(Closed))
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
+void UMotionMechanism::WaitToReturn(float Seconds)
+{
+	const FMotionReturn& Return = MechanismSpec.Returns;
+	if (!Return.IsSet() || !BodyComponent || !IsAt(Return.From) || IsOpening())
+	{
+		LeftSeconds = 0.0f;
+		return;
+	}
+	const USceneComponent* Parent = BodyComponent->GetAttachParent();
+	const FVector Axis = Parent ? Parent->GetComponentTransform().TransformVectorNoScale(AxisDirection) : AxisDirection;
+	const UWorld* World = GetWorld();
+	if (World && Musee::Motion::IsVisitorWithin(*World, BodyComponent->GetComponentLocation(), Axis, Return.Radius, FMuseeHumanMeasure::Stature.Get()))
+	{
+		LeftSeconds = 0.0f;
+		return;
+	}
+	LeftSeconds += Seconds;
+	if (LeftSeconds >= Return.After)
+	{
+		Start(MechanismSpec.Close, {});
 	}
 }
 
@@ -102,11 +171,11 @@ FMuseeUse UMotionMechanism::RideUsage(const FMuseeKey& UseAnchor, const FMotionR
 	OutRide = nullptr;
 	// A panel's buttons: the rides at the anchor whose ports are mated. At rest, it offers the first at the body's stop
 	// whose channels hold, or names the first there and why it waits; while the body runs it says so.
-	const FMotionRide* Waiting = nullptr;
+	const FMotionRide* WaitingRide = nullptr;
 	bool bServes = false;
 	for (const FMotionRide& Ride : MechanismSpec.Rides)
 	{
-		if (!(Ride.Use == UseAnchor) || !IsMated(Ride.Requires))
+		if (!(Ride.Use == UseAnchor) || !Musee::Motion::IsMated(MatedPorts, Ride.Requires))
 		{
 			continue;
 		}
@@ -120,11 +189,11 @@ FMuseeUse UMotionMechanism::RideUsage(const FMuseeKey& UseAnchor, const FMotionR
 			OutRide = &Ride;
 			return FMuseeUse::Available(Ride.Verb.ToText(), CaptionOf(Ride.Caption));
 		}
-		Waiting = Waiting ? Waiting : &Ride;
+		WaitingRide = WaitingRide ? WaitingRide : &Ride;
 	}
-	if (Waiting)
+	if (WaitingRide)
 	{
-		return FMuseeUse::Unavailable(Waiting->Verb.ToText(), CaptionOf(Waiting->Caption), NSLOCTEXT("Musee", "motion.not-ready", "It is not ready."));
+		return FMuseeUse::Unavailable(WaitingRide->Verb.ToText(), CaptionOf(WaitingRide->Caption), NSLOCTEXT("Musee", "motion.not-ready", "It is not ready."));
 	}
 	if (bServes && IsRunning())
 	{
@@ -133,34 +202,9 @@ FMuseeUse UMotionMechanism::RideUsage(const FMuseeKey& UseAnchor, const FMotionR
 	return FMuseeUse();
 }
 
-bool UMotionMechanism::IsMated(const FMotionRequirement& Requirement) const
-{
-	for (const FMuseeKey& Port : Requirement.Mated)
-	{
-		if (!MatedPorts.Contains(Port))
-		{
-			return false;
-		}
-	}
-	return true;
-}
-
 bool UMotionMechanism::Holds(const FMotionRequirement& Requirement) const
 {
-	if (!IsMated(Requirement))
-	{
-		return false;
-	}
-	const UMuseeSignals* Signals = GetWorld() ? GetWorld()->GetSubsystem<UMuseeSignals>() : nullptr;
-	for (const FMotionChannelCondition& Condition : Requirement.Channels)
-	{
-		const float Value = Signals ? Signals->Read(Condition.Channel).Get(UnpublishedValue) : UnpublishedValue;
-		if (!Condition.Holds(Value))
-		{
-			return false;
-		}
-	}
-	return true;
+	return Musee::Motion::Holds(GetWorld(), MatedPorts, Requirement);
 }
 
 FText UMotionMechanism::Verb(bool bOpening) const

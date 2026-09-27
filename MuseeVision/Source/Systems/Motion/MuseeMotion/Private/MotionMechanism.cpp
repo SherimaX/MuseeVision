@@ -3,6 +3,7 @@
 #include "Components/SceneComponent.h"
 #include "Engine/World.h"
 #include "GameFramework/Actor.h"
+#include "MotionConditions.h"
 #include "MotionGuard.h"
 #include "MotionProfile.h"
 #include "MuseeRegistry.h"
@@ -72,6 +73,15 @@ void UMotionMechanism::SetMatedPorts(const TArray<FMuseeKey>& Ports)
 	MatedPorts = Ports;
 }
 
+void UMotionMechanism::SetInterlocks(const TArray<FMotionInterlock>& InInterlocks)
+{
+	// Its own interlocks, and every channel's: any sequence of its may ramp any channel.
+	Interlocks = InInterlocks.FilterByPredicate([this](const FMotionInterlock& Interlock)
+	{
+		return Interlock.Mechanism == MechanismSpec.Key || !Interlock.Channel.IsNone();
+	});
+}
+
 FName UMotionMechanism::State() const
 {
 	for (const FMotionStop& Stop : MechanismSpec.Stops)
@@ -94,11 +104,13 @@ bool UMotionMechanism::IsAt(FName InState) const
 	return At.IsSet() && FMath::IsNearlyEqual(DrivePosition, At.GetValue(), SameShare);
 }
 
-void UMotionMechanism::StandAtHome()
+void UMotionMechanism::StandAtStart()
 {
 	Running.Reset();
-	bHeld = false;
-	SetPosition(MechanismSpec.HomePosition());
+	Waiting = EWait::None;
+	HoldingInterlock = FMuseeKey();
+	LeftSeconds = 0.0f;
+	SetPosition(MechanismSpec.StartPosition());
 }
 
 void UMotionMechanism::MoveTo(FName InState)
@@ -112,7 +124,9 @@ void UMotionMechanism::Start(const TArray<FMotionStep>& Steps, const TArray<FMot
 	Run.Steps = Steps;
 	Run.Reverse = MechanismSpec.Guard == ReversingGuard ? Reverse : TArray<FMotionStep>();
 	Running = MoveTemp(Run);
-	bHeld = false;
+	Waiting = EWait::None;
+	HoldingInterlock = FMuseeKey();
+	LeftSeconds = 0.0f;
 }
 
 void UMotionMechanism::Advance(float Seconds)
@@ -121,6 +135,21 @@ void UMotionMechanism::Advance(float Seconds)
 	{
 		Follow(Seconds);
 		return;
+	}
+	if (!Running.IsSet())
+	{
+		WaitToReturn(Seconds);
+		return;
+	}
+	if (Running->bAfterGroup)
+	{
+		if (!IsGroupClosed())
+		{
+			Waiting = EWait::Group;
+			return;
+		}
+		Running->bAfterGroup = false;
+		Waiting = EWait::None;
 	}
 	float Left = Seconds;
 	// Each pass either finishes a step (and the next begins with the time left over) or ends the advance, so steps
@@ -134,7 +163,7 @@ void UMotionMechanism::Advance(float Seconds)
 		}
 		const FMotionStep Step = Running->Steps[Running->Index];
 		const TOptional<float> Leftover = Step.IsMove() ? RunMoveStep(Left) : RunChannelStep(Step, Left);
-		if (!Leftover.IsSet())
+		if (!Leftover.IsSet() || !Running.IsSet())
 		{
 			break;
 		}
@@ -146,23 +175,25 @@ void UMotionMechanism::Advance(float Seconds)
 
 TOptional<float> UMotionMechanism::RunChannelStep(const FMotionStep& Step, float Seconds)
 {
-	UMuseeSignals* Signals = GetWorld() ? GetWorld()->GetSubsystem<UMuseeSignals>() : nullptr;
 	if (!Running->bStarted)
 	{
 		Running->bStarted = true;
 		Running->Elapsed = 0.0f;
-		Running->FromValue = Signals ? Signals->Read(Step.Channel).Get(0.0f) : 0.0f;
+		Running->FromValue = Musee::Motion::ChannelValue(GetWorld(), Step.Channel);
 	}
-	Running->Elapsed += Seconds;
-	const float Share = Step.Time > 0.0f ? FMath::Min(1.0f, Running->Elapsed / Step.Time) : 1.0f;
-	if (Signals)
+	const float Elapsed = Running->Elapsed + Seconds;
+	const float Share = Step.Time > 0.0f ? FMath::Min(1.0f, Elapsed / Step.Time) : 1.0f;
+	// A ramp that ends lands on its value exactly, as a limit switch reads a door fully open.
+	const float Value = Share < 1.0f ? FMath::Lerp(Running->FromValue, Step.To, Share) : Step.To;
+	if (const FMotionInterlock* Forbids = Forbidding(FMuseeKey(), Step.Channel, Value))
 	{
-		FMuseeChannel Point;
-		Point.Key = Step.Channel;
-		// A ramp that ends lands on its value exactly, as a limit switch reads a door fully open.
-		Point.Value = Share < 1.0f ? FMath::Lerp(Running->FromValue, Step.To, Share) : Step.To;
-		Signals->Publish(Point);
+		Waiting = EWait::Interlock;
+		HoldingInterlock = Forbids->Key;
+		return {};
 	}
+	Waiting = EWait::None;
+	Running->Elapsed = Elapsed;
+	Musee::Motion::PublishChannel(GetWorld(), Step.Channel, Value);
 	if (Share < 1.0f)
 	{
 		return {};
@@ -193,21 +224,23 @@ TOptional<float> UMotionMechanism::RunMoveStep(float Seconds)
 	const double Before = Running->Elapsed;
 	const double Elapsed = FMath::Min(Duration, Before + Seconds);
 	const FMoveSample Next = SampleMove(Elapsed, Duration);
-	if (IsGuarded(Next.Position))
+	const FMotionInterlock* Forbids = Forbidding(MechanismSpec.Key, FMuseeKey(), Next.Position);
+	if (Forbids || IsGuarded(Next.Position))
 	{
-		if (!bHeld)
+		if (Waiting == EWait::None)
 		{
 			PublishActuation(0.0);
 		}
-		bHeld = true;
-		if (Running->Reverse.Num() > 0)
+		Waiting = Forbids ? EWait::Interlock : EWait::Visitor;
+		HoldingInterlock = Forbids ? Forbids->Key : FMuseeKey();
+		if (!Forbids && Running->Reverse.Num() > 0)
 		{
 			// A door turns back to the state it left: its other sequence runs from here, and holds if it too is blocked.
 			Start(Running->Reverse, {});
 		}
 		return {};
 	}
-	bHeld = false;
+	Waiting = EWait::None;
 	Running->Elapsed = static_cast<float>(Elapsed);
 	if (Elapsed < Duration)
 	{
@@ -257,13 +290,13 @@ void UMotionMechanism::Follow(float Seconds)
 	{
 		return;
 	}
-	const double Target = FMath::Clamp(MechanismSpec.Follows.TravelAt(Value.GetValue()) / MechanismSpec.Travel, 0.0, 1.0);
+	const double Target = FMath::Clamp(MechanismSpec.Follows.At(Value.GetValue()) / MechanismSpec.Travel, 0.0, 1.0);
 	if (FMath::IsNearlyEqual(Target, DrivePosition))
 	{
 		return;
 	}
-	bHeld = IsGuarded(Target);
-	if (bHeld)
+	Waiting = IsGuarded(Target) ? EWait::Visitor : EWait::None;
+	if (Waiting != EWait::None)
 	{
 		PublishActuation(0.0);
 		return;
@@ -284,6 +317,24 @@ bool UMotionMechanism::IsGuarded(double NextPosition) const
 	const FTransform ParentPose = Parent ? Parent->GetComponentTransform() : FTransform::Identity;
 	return Musee::Motion::IsTravelOccupied(*World, *BodyComponent, PoseAt(DrivePosition) * ParentPose, PoseAt(NextPosition) * ParentPose,
 		MechanismSpec.Clearance);
+}
+
+const FMotionInterlock* UMotionMechanism::Forbidding(const FMuseeKey& Mechanism, const FMuseeKey& Channel, double NextValue) const
+{
+	for (const FMotionInterlock& Interlock : Interlocks)
+	{
+		const bool bGuards = Mechanism.IsNone() ? Interlock.Channel == Channel : Interlock.Mechanism == Mechanism;
+		if (!bGuards || !Interlock.Guards(NextValue))
+		{
+			continue;
+		}
+		const bool bAllowed = Interlock.Allows.ContainsByPredicate([this](const FMotionRequirement& Allowed) { return Holds(Allowed); });
+		if (!bAllowed)
+		{
+			return &Interlock;
+		}
+	}
+	return nullptr;
 }
 
 FTransform UMotionMechanism::PoseAt(double InPosition) const
@@ -308,13 +359,9 @@ void UMotionMechanism::SetPosition(double InPosition)
 	{
 		BodyComponent->SetRelativeTransform(PoseAt(DrivePosition));
 	}
-	UMuseeSignals* Signals = GetWorld() ? GetWorld()->GetSubsystem<UMuseeSignals>() : nullptr;
-	if (Signals && !MechanismSpec.Publishes.IsNone())
+	if (!MechanismSpec.Publishes.IsNone())
 	{
-		FMuseeChannel Point;
-		Point.Key = MechanismSpec.Publishes;
-		Point.Value = static_cast<float>(DrivePosition);
-		Signals->Publish(Point);
+		Musee::Motion::PublishChannel(GetWorld(), MechanismSpec.Publishes, static_cast<float>(DrivePosition));
 	}
 }
 
@@ -349,7 +396,7 @@ void UMotionMechanism::BeginPlay()
 	{
 		Registry->Register(MechanismSpec.Body, BodyComponent);
 	}
-	StandAtHome();
+	StandAtStart();
 }
 
 void UMotionMechanism::EndPlay(const EEndPlayReason::Type Reason)

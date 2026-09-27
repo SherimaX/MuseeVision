@@ -1,6 +1,7 @@
 #include "MotionGuard.h"
 
 #include "Components/PrimitiveComponent.h"
+#include "Engine/OverlapResult.h"
 #include "Engine/World.h"
 #include "MotionControl.h"
 #include "MuseeCollision.h"
@@ -129,5 +130,36 @@ namespace Musee::Motion
 			}
 		}
 		return FromEngine<Meters>(Reach).Get();
+	}
+}
+
+namespace Musee::Motion
+{
+	bool IsVisitorWithin(const UWorld& World, const FVector& Base, const FVector& Axis, double RadiusMeters, double HeightMeters)
+	{
+		const FVector Up = Axis.GetSafeNormal();
+		const double Radius = ToEngine(Meters(RadiusMeters));
+		const double Height = ToEngine(Meters(HeightMeters));
+		// The box round the cylinder finds the candidates; each is then judged by its centre.
+		const FVector Centre = Base + Up * (0.5 * Height);
+		const FQuat Turn = FQuat::FindBetweenNormals(FVector::UpVector, Up);
+		TArray<FOverlapResult> Found;
+		World.OverlapMultiByObjectType(Found, Centre, Turn, FCollisionObjectQueryParams(Collision::Body.Channel),
+			FCollisionShape::MakeBox(FVector(Radius, Radius, 0.5 * Height)));
+		for (const FOverlapResult& Overlap : Found)
+		{
+			const UPrimitiveComponent* Visitor = Overlap.GetComponent();
+			if (!Visitor)
+			{
+				continue;
+			}
+			const FVector Offset = Visitor->Bounds.Origin - Base;
+			const double Along = FVector::DotProduct(Offset, Up);
+			if (Along >= 0.0 && Along <= Height && (Offset - Up * Along).Size() <= Radius)
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 }

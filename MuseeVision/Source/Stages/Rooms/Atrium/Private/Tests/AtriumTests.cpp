@@ -175,13 +175,12 @@ namespace Musee::Atrium::Tests
 			TestTrue(*FString::Printf(TEXT("%s looks at the axis"), *Wall.Anchor.ToString()), In.Equals(-Start.GetSafeNormal(), Given / Wall.Path.Ellipse[0]));
 		}
 
-		// Every body and control the mechanisms name. Motion reads the lift's many stops from KIT-2 on; until then its
-		// reader can't take the schedule, and that is Motion's to say.
-		const TValueOrError<FMotionSchedule, FString> Motion = Musee::ReadRecord<FMotionSchedule>(Schedule(TEXT("Mechanisms.json")));
-		if (Motion.HasError())
+		// Every body and control the mechanisms name, as Motion reads them.
+		const TValueOrError<FMotionSchedule, FString> Motion = FMotionSchedule::Read(Schedule(TEXT("Mechanisms.json")));
+		if (!TestTrue(TEXT("the mechanisms schedule reads"), Motion.HasValue()))
 		{
-			AddWarning(FString::Printf(TEXT("Motion can't yet read the Atrium's mechanisms (KIT-2's many-stop lift): %s"), *Motion.GetError()));
-			return true;
+			AddError(Motion.GetError());
+			return false;
 		}
 		TestEqual(TEXT("thirteen mechanisms"), Motion.GetValue().Mechanisms.Num(), 13);
 		for (const FMotionMechanismSpec& Mechanism : Motion.GetValue().Mechanisms)

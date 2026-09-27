@@ -19,4 +19,11 @@ namespace Musee::Motion
 
 	/** The farthest any solid part of the body reaches from a line through Origin along Axis (world units), in metres. */
 	[[nodiscard]] double ReachFromAxis(const USceneComponent& Body, const FVector& Origin, const FVector& Axis);
+
+	/**
+	 * Whether the visitor's body stands within a cylinder: RadiusMeters about a line through Base (world) along Axis, from
+	 * Base up to HeightMeters along it. A body counts by its centre, as a lift's presence sensor sees a person on the
+	 * floor it watches; one off that floor (above or below the cylinder) is not there.
+	 */
+	[[nodiscard]] bool IsVisitorWithin(const UWorld& World, const FVector& Base, const FVector& Axis, double RadiusMeters, double HeightMeters);
 }

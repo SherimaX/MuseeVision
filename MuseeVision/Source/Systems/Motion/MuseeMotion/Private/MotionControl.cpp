@@ -1,6 +1,7 @@
 #include "MotionControl.h"
 
 #include "MotionMechanism.h"
+#include "MotionPerformance.h"
 #include "MuseeUnits.h"
 
 UMotionControl::UMotionControl()
@@ -21,14 +22,28 @@ void UMotionControl::Bind(UMotionMechanism* InMechanism, const FMuseeKey& InUseA
 	UseAnchorKey = InUseAnchor;
 }
 
+void UMotionControl::Bind(UMotionPerformance* InPerformance, const FMuseeKey& InUseAnchor)
+{
+	BoundPerformance = InPerformance;
+	UseAnchorKey = InUseAnchor;
+}
+
 FMuseeUse UMotionControl::Usage() const
 {
+	if (BoundPerformance)
+	{
+		return BoundPerformance->Usage();
+	}
 	return BoundMechanism ? BoundMechanism->UsageAt(UseAnchorKey) : FMuseeUse();
 }
 
 void UMotionControl::Use()
 {
-	if (BoundMechanism)
+	if (BoundPerformance)
+	{
+		BoundPerformance->Use();
+	}
+	else if (BoundMechanism)
 	{
 		BoundMechanism->UseAt(UseAnchorKey);
 	}

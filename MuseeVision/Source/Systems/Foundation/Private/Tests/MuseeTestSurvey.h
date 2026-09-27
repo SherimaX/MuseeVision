@@ -1,6 +1,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "MuseeText.h"
 
 #include "MuseeTestSurvey.generated.h"
 
@@ -27,4 +28,8 @@ struct FMuseeTestSurvey
 
 	UPROPERTY()
 	TMap<FName, FVector2D> Marks;
+
+	/** The survey's labels: texts written as a plain string and as a key with its source. */
+	UPROPERTY()
+	TArray<FMuseeText> Labels;
 };

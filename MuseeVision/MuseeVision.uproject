@@ -55,6 +55,11 @@
 			"LoadingPhase": "Default"
 		},
 		{
+			"Name": "MuseeMotionMaking",
+			"Type": "Editor",
+			"LoadingPhase": "Default"
+		},
+		{
 			"Name": "MuseeNature",
 			"Type": "Runtime",
 			"LoadingPhase": "Default"

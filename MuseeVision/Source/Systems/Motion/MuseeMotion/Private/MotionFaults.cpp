@@ -114,17 +114,50 @@ namespace Musee::Motion
 				{
 					Out.Add(FString::Printf(TEXT("its %s has no steps"), *Where));
 				}
-				for (const FMotionChannelCondition& Condition : Ride.Requires.Channels)
-				{
-					if (Condition.AtLeast < 0.0f || Condition.AtMost > 1.0f || Condition.AtLeast > Condition.AtMost)
-					{
-						Out.Add(FString::Printf(TEXT("its %s requires %s between bounds from 0 to 1, the least first"), *Where, *Condition.Channel.ToString()));
-					}
-				}
+				Out.Append(RequirementFaults(Ride.Requires, TEXT("its ") + Where));
 				Out.Append(StepFaults(Spec, Ride.Sequence, Where));
 			}
 			return Out;
 		}
+
+		TArray<FString> StartAndReturnFaults(const FMotionMechanismSpec& Spec)
+		{
+			TArray<FString> Out;
+			if (!Spec.Start.IsNone() && !Spec.PositionOf(Spec.Start).IsSet())
+			{
+				Out.Add(FString::Printf(TEXT("its start state '%s' is none of its states"), *Spec.Start.ToString()));
+			}
+			if (!Spec.Returns.IsSet())
+			{
+				return Out;
+			}
+			if (!Spec.PositionOf(Spec.Returns.From).IsSet())
+			{
+				Out.Add(FString::Printf(TEXT("it returns from '%s', which is none of its states"), *Spec.Returns.From.ToString()));
+			}
+			if (Spec.Returns.After <= 0.0f || Spec.Returns.Radius <= 0.0f)
+			{
+				Out.Add(TEXT("it returns after a wait of more than zero, kept by a visitor within a radius of more than zero"));
+			}
+			if (Spec.Close.IsEmpty())
+			{
+				Out.Add(TEXT("it returns by itself, so it has a close sequence to return by"));
+			}
+			return Out;
+		}
+	}
+
+	TArray<FString> RequirementFaults(const FMotionRequirement& Requirement, const FString& Where)
+	{
+		TArray<FString> Out;
+		for (const FMotionChannelCondition& Condition : Requirement.Channels)
+		{
+			if (Condition.AtLeast < 0.0f || Condition.AtMost > 1.0f || Condition.AtLeast > Condition.AtMost)
+			{
+				Out.Add(FString::Printf(TEXT("%s requires %s between bounds from 0 to 1, the least first"), *Where, *Condition.Channel.ToString()));
+			}
+		}
+		return Out;
 	}
 
 	TArray<FString> Faults(const FMotionMechanismSpec& Spec)
@@ -156,13 +189,14 @@ namespace Musee::Motion
 		{
 			Out.Add(TEXT("it follows a channel, so it has no control, no sequences and no rides"));
 		}
-		if (Spec.Follows.IsSet() && (Spec.Follows.In.Num() != 2 || Spec.Follows.Out.Num() != 2 || Spec.Follows.In[0] == Spec.Follows.In[1]))
+		if (Spec.Follows.IsSet() && !Spec.Follows.IsSound())
 		{
 			Out.Add(TEXT("it follows a channel with an input range of two different values and an output range of two"));
 		}
 		Out.Append(StepFaults(Spec, Spec.Open, TEXT("open")));
 		Out.Append(StepFaults(Spec, Spec.Close, TEXT("close")));
 		Out.Append(RideFaults(Spec));
+		Out.Append(StartAndReturnFaults(Spec));
 		return Out;
 	}
 }

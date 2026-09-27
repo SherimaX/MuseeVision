@@ -21,7 +21,7 @@ namespace Musee::Motion::Tests
 	/** A fixture folder under Private/Tests/Data, as a full path. */
 	inline FString Fixture(const FString& Name)
 	{
-		return FPaths::ConvertRelativePathToFull(FPaths::GameSourceDir() / TEXT("Systems/Motion/Private/Tests/Data") / Name);
+		return FPaths::ConvertRelativePathToFull(FPaths::GameSourceDir() / TEXT("Systems/Motion/MuseeMotion/Private/Tests/Data") / Name);
 	}
 
 	/**

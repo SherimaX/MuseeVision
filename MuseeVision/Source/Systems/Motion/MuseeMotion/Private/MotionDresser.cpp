@@ -5,6 +5,7 @@
 #include "HAL/FileManager.h"
 #include "Misc/Paths.h"
 #include "MotionControl.h"
+#include "MotionDressing.h"
 #include "MotionMechanism.h"
 #include "MotionSchedule.h"
 #include "MuseeRecords.h"
@@ -14,35 +15,15 @@ namespace Musee::Motion
 {
 	namespace
 	{
+		using namespace Dressing;
+
 		const FName BodyKind(TEXT("Body"));
 		const FName UseKind(TEXT("Use"));
-		const FName MotionSystem(TEXT("Motion"));
-
-		FMuseeFinding Finding(const FMuseeStageContext& Stage, const FString& Summary)
-		{
-			FMuseeFinding Found = FMuseeFinding::Make(Stage.Stage.ToName(), Summary, FMuseeMeasurement());
-			Found.Owner = MotionSystem;
-			return Found;
-		}
-
-		/** An engine object name for a key: its dots, which object paths reserve, become underscores. */
-		FName ObjectName(const TCHAR* Prefix, const FMuseeKey& Key)
-		{
-			return FName(FString::Printf(TEXT("%s_%s"), Prefix, *Key.ToString().Replace(TEXT("."), TEXT("_"))));
-		}
 
 		FString SchedulePath(const FMuseeStageContext& Stage)
 		{
 			const FString Folder = FPaths::IsRelative(Stage.ScheduleDir) ? Records::DataRoot() / Stage.ScheduleDir : Stage.ScheduleDir;
 			return Folder / FMotionSchedule::FileName;
-		}
-
-		USceneComponent* FindBody(const AActor& Actor, const FMuseeKey& Key)
-		{
-			TArray<USceneComponent*> Components;
-			Actor.GetComponents(Components);
-			USceneComponent* const* Found = Components.FindByPredicate([&Key](const USceneComponent* C) { return C->ComponentHasTag(Key.ToName()); });
-			return Found ? *Found : nullptr;
 		}
 
 		/** Whether a point (world) lies on the body: within its solid parts' bounds, grown by a control's reach. */
@@ -89,12 +70,10 @@ namespace Musee::Motion
 			const FTransform Where = ToEngine(Anchor->Frame) * Actor.GetActorTransform();
 			USceneComponent* Parent = IsOnBody(*Mechanism.Body(), Where.GetLocation()) ? Mechanism.Body() : Actor.GetRootComponent();
 			UMotionControl* Control = NewObject<UMotionControl>(&Actor, ObjectName(TEXT("Control"), UseKey));
-			Control->SetupAttachment(Parent);
 			Control->SetRelativeTransform(Where.GetRelativeTransform(Parent->GetComponentTransform()));
 			Control->ComponentTags.Add(UseKey.ToName());
 			Control->Bind(&Mechanism, UseKey);
-			Actor.AddInstanceComponent(Control);
-			Control->RegisterComponent();
+			Adopt(Actor, *Control, *Parent);
 		}
 
 		/** One control at each Use anchor the mechanism is worked from: its own control's and its rides'. */
@@ -115,10 +94,10 @@ namespace Musee::Motion
 			}
 		}
 
-		void PlaceMechanism(const FMuseeStageContext& Stage, const FMotionMechanismSpec& Spec, TArray<FMuseeFinding>& OutFindings)
+		void PlaceMechanism(const FMuseeStageContext& Stage, const FMotionSchedule& Schedule, const FMotionMechanismSpec& Spec, TArray<FMuseeFinding>& OutFindings)
 		{
 			const FMuseeStageAnchor* Anchor = Stage.FindAnchor(Spec.Body, BodyKind);
-			USceneComponent* Body = FindBody(*Stage.StageActor, Spec.Body);
+			USceneComponent* Body = FindTagged(*Stage.StageActor, Spec.Body.ToName());
 			if (!Anchor || !Body)
 			{
 				OutFindings.Add(Finding(Stage, FString::Printf(TEXT("Mechanism %s: its body %s is not a Body anchor with a tagged scene component."), *Spec.Key.ToString(), *Spec.Body.ToString())));
@@ -130,6 +109,7 @@ namespace Musee::Motion
 			Actor.AddInstanceComponent(Mechanism);
 			Mechanism->RegisterComponent();
 			Mechanism->Configure(Spec, Body);
+			Mechanism->SetInterlocks(Schedule.Interlocks);
 			PlaceControls(Stage, Spec, *Mechanism, OutFindings);
 		}
 	}
@@ -141,18 +121,23 @@ namespace Musee::Motion
 		{
 			return;
 		}
-		const TValueOrError<FMotionSchedule, FString> Schedule = ReadRecord<FMotionSchedule>(Path);
-		if (Schedule.HasError())
+		const TValueOrError<FMotionSchedule, FString> Read = FMotionSchedule::Read(Path);
+		if (Read.HasError())
 		{
-			OutFindings.Add(Finding(Stage, Schedule.GetError()));
+			OutFindings.Add(Finding(Stage, Read.GetError()));
 			return;
 		}
-		if (!(Schedule.GetValue().Stage == Stage.Stage))
+		const FMotionSchedule& Schedule = Read.GetValue();
+		if (!(Schedule.Stage == Stage.Stage))
 		{
-			OutFindings.Add(Finding(Stage, FString::Printf(TEXT("%s names the stage %s."), *Path, *Schedule.GetValue().Stage.ToString())));
+			OutFindings.Add(Finding(Stage, FString::Printf(TEXT("%s names the stage %s."), *Path, *Schedule.Stage.ToString())));
 			return;
 		}
-		for (const FMotionMechanismSpec& Spec : Schedule.GetValue().Mechanisms)
+		for (const FString& Fault : ScheduleFaults(Schedule))
+		{
+			OutFindings.Add(Finding(Stage, Fault + TEXT(".")));
+		}
+		for (const FMotionMechanismSpec& Spec : Schedule.Mechanisms)
 		{
 			const TArray<FString> SpecFaults = Faults(Spec);
 			if (!SpecFaults.IsEmpty())
@@ -160,7 +145,9 @@ namespace Musee::Motion
 				OutFindings.Add(Finding(Stage, FString::Printf(TEXT("Mechanism %s: %s."), *Spec.Key.ToString(), *FString::Join(SpecFaults, TEXT("; ")))));
 				continue;
 			}
-			PlaceMechanism(Stage, Spec, OutFindings);
+			PlaceMechanism(Stage, Schedule, Spec, OutFindings);
 		}
+		DressPerformancesAndChannels(Stage, Schedule, OutFindings);
+		DressExtents(Stage, Schedule, OutFindings);
 	}
 }

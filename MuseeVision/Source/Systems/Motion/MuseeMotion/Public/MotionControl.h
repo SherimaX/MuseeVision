@@ -8,12 +8,14 @@
 #include "MotionControl.generated.h"
 
 class UMotionMechanism;
+class UMotionPerformance;
 
 /**
  * The part of a machine the visitor works: a push-plate, a handle, the golden iris on the pond's coping. It is a small
  * sensed volume at the stage's Use anchor that the visitor's hands find by sight (it answers the Visibility channel
  * and nothing else, so it stops neither the body nor the camera). Its use and its words are its mechanism's at its
- * anchor: the mechanism's own control, or the rides the mechanism offers there. A control on a moving body rides with it.
+ * anchor (the mechanism's own control, or the rides the mechanism offers there), or a timed piece's that it starts and
+ * ends. A control on a moving body rides with it.
  */
 UCLASS(ClassGroup = Musee)
 class MUSEEMOTION_API UMotionControl : public USphereComponent, public IMuseeUsable
@@ -33,7 +35,12 @@ public:
 	/** Joins the control at a Use anchor to the mechanism it works. Making time only. */
 	void Bind(UMotionMechanism* InMechanism, const FMuseeKey& InUseAnchor);
 
+	/** Joins the control at a Use anchor to the timed piece it starts and ends. Making time only. */
+	void Bind(UMotionPerformance* InPerformance, const FMuseeKey& InUseAnchor);
+
 	[[nodiscard]] UMotionMechanism* Mechanism() const { return BoundMechanism; }
+
+	[[nodiscard]] UMotionPerformance* Performance() const { return BoundPerformance; }
 
 	/** The Use anchor the control stands at. */
 	[[nodiscard]] const FMuseeKey& UseAnchor() const { return UseAnchorKey; }
@@ -44,6 +51,9 @@ public:
 private:
 	UPROPERTY()
 	TObjectPtr<UMotionMechanism> BoundMechanism;
+
+	UPROPERTY()
+	TObjectPtr<UMotionPerformance> BoundPerformance;
 
 	UPROPERTY()
 	FMuseeKey UseAnchorKey;

@@ -6,6 +6,7 @@
 #include "MotionRide.h"
 #include "MotionStep.h"
 #include "MotionStop.h"
+#include "MotionReturn.h"
 #include "MotionUseText.h"
 #include "MuseeKey.h"
 
@@ -29,6 +30,10 @@
  *
  * A mechanism may publish its position on a channel, and may instead follow another's channel (guard rails that rise
  * with the pond they guard, a lift's door leaves), in which case it has no control, no sequences and no rides.
+ *
+ * Mechanisms of one `group` share a space, as the Reserve's sliding screens share the aisle: at most one stands away
+ * from closed at a time, and opening one first runs the others' close. A mechanism `start`s where the museum opens it
+ * (its home by default). One that `returns` goes home by itself when it is left open with nobody near.
  */
 USTRUCT()
 struct MUSEEMOTION_API FMotionMechanismSpec
@@ -75,7 +80,7 @@ struct MUSEEMOTION_API FMotionMechanismSpec
 	UPROPERTY()
 	FName Drawn;
 
-	/** The state the mechanism starts in, and where its close sequence leaves it; where it is drawn when none is named. */
+	/** Where its close sequence leaves it, and where it starts unless it names a start; where it is drawn when none is named. */
 	UPROPERTY()
 	FName Home;
 
@@ -119,6 +124,18 @@ struct MUSEEMOTION_API FMotionMechanismSpec
 	UPROPERTY()
 	FMotionUseText CloseUse;
 
+	/** The group whose mechanisms share one space, at most one of them away from closed; none for a mechanism alone. */
+	UPROPERTY()
+	FMuseeKey Group;
+
+	/** The state it stands in when the museum opens: `closed`, `open` or a stop; its home when none is named. */
+	UPROPERTY()
+	FName Start;
+
+	/** How it goes home by itself when it is left; unset for a mechanism that waits to be used. */
+	UPROPERTY()
+	FMotionReturn Returns;
+
 	/** The designer's note: the machine's sources and intent. */
 	UPROPERTY()
 	FString Note;
@@ -129,6 +146,13 @@ struct MUSEEMOTION_API FMotionMechanismSpec
 	/** Where the stage draws the body, as a share of the travel. */
 	[[nodiscard]] double DrawnPosition() const;
 
-	/** Where the mechanism starts, as a share of the travel: its home, or where it is drawn. */
+	/** Where its close sequence leaves it, as a share of the travel: its home, or where it is drawn. */
 	[[nodiscard]] double HomePosition() const;
+
+	/** Where it stands when the museum opens, as a share of the travel: its start, or its home. */
+	[[nodiscard]] double StartPosition() const;
+
+	/** Gives every text that has a source but no key the key its place implies: `<mechanism>.open-use.verb`,
+	 *  `<mechanism>.ride-2.caption` (the contract: a plain string is the source, keyed by the mechanism and the field). */
+	void KeyTexts();
 };

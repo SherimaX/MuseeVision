@@ -89,7 +89,7 @@ namespace Musee::Motion::Tests
 	{
 		for (UMotionMechanism* Mechanism : Machines(Stage))
 		{
-			Mechanism->StandAtHome();
+			Mechanism->StandAtStart();
 		}
 	}
 
