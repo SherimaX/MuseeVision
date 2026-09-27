@@ -3,10 +3,12 @@
 #if WITH_DEV_AUTOMATION_TESTS
 
 #include "Camera/CameraComponent.h"
+#include "Components/BoxComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/PostProcessComponent.h"
 #include "Engine/World.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "MuseeCollision.h"
 #include "MuseeHumanMeasure.h"
 #include "MuseeSetting.h"
 #include "Tests/VisitorTestUsable.h"
@@ -16,7 +18,7 @@
 #include "VisitorOverlay.h"
 #include "VisitorPace.h"
 
-// Visitor's connectors: the body made from the human measure, the Eye's camera, and the hand that uses what it sees.
+// Visitor's connectors: the body made from the human measure, its feet, the Eye's camera, and the hand that uses what it sees.
 namespace Musee::Visitor::Tests
 {
 	inline constexpr EAutomationTestFlags Flags = EAutomationTestFlags_ApplicationContextMask | EAutomationTestFlags::ProductFilter;
@@ -122,6 +124,36 @@ namespace Musee::Visitor::Tests
 		}
 		World->DestroyWorld(false);
 		Setting->SetChoice(Kept);
+		return true;
+	}
+
+	IMPLEMENT_SIMPLE_AUTOMATION_TEST(FVisitorFeetTest, "Musee.Visitor.Feet", Flags)
+	bool FVisitorFeetTest::RunTest(const FString& Parameters)
+	{
+		UWorld* World = UWorld::CreateWorld(EWorldType::Game, false);
+		// A walkable floor whose top is the world's z 0, and a body whose capsule stands a centimetre over it.
+		AActor* Slab = World->SpawnActor<AActor>();
+		UBoxComponent* Floor = NewObject<UBoxComponent>(Slab, TEXT("Floor"));
+		Slab->SetRootComponent(Floor);
+		Floor->SetBoxExtent(FVector(200.0, 200.0, 10.0));
+		Floor->SetRelativeLocation(FVector(0.0, 0.0, -10.0));
+		Floor->SetCollisionProfileName(Collision::Walkable.Profile());
+		Floor->RegisterComponent();
+		const double HalfHeight = ToEngine(FMuseeHumanMeasure::CapsuleHalfHeight);
+		AVisitorBody* Body = World->SpawnActor<AVisitorBody>(FVector(0.0, 0.0, HalfHeight + 1.0), FRotator::ZeroRotator);
+		if (TestNotNull(TEXT("The body stands in the world"), Body))
+		{
+			UCharacterMovementComponent* Movement = Body->GetCharacterMovement();
+			Movement->SetMovementMode(MOVE_Falling);
+			TestTrue(TEXT("Off the ground, the feet are the bottom of the capsule"), FMath::IsNearlyEqual(Body->FeetLocation().Z, 1.0, 1e-3));
+			// Walking finds the floor and holds the capsule the movement's skin above it.
+			Movement->SetMovementMode(MOVE_Walking);
+			const double Capsule = Body->GetActorLocation().Z - HalfHeight;
+			TestTrue(FString::Printf(TEXT("Standing, the capsule is held a skin of 1.9 to 2.4 cm over the floor (%.2f cm)"), Capsule),
+				Capsule >= UCharacterMovementComponent::MIN_FLOOR_DIST - 1e-3 && Capsule <= UCharacterMovementComponent::MAX_FLOOR_DIST + 1e-3);
+			TestTrue(FString::Printf(TEXT("and the feet are on the floor (z %.3f cm)"), Body->FeetLocation().Z), FMath::IsNearlyEqual(Body->FeetLocation().Z, 0.0, 1e-2));
+		}
+		World->DestroyWorld(false);
 		return true;
 	}
 
