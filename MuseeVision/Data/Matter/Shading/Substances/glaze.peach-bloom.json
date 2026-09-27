@@ -10,8 +10,8 @@
     "diffuseAlbedo": {
       "value": [
         48.8,
-        31.0,
-        16.0
+        30.0,
+        15.0
       ],
       "space": "CIELAB (D65, 2 deg)",
       "unit": "CIELAB",

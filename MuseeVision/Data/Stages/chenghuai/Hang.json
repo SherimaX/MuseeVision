@@ -543,7 +543,7 @@
       "care": "ceramic-and-glass",
       "wall": "chenghuai.case.silk.ceramics",
       "stand": true,
-      "note": "On the case deck centre line; centre is the foot on the deck (a carved phoebe stand under it where stand is true: radius 1.25 x the foot, 0.028 high under 0.20 tall, else 0.04). Object: turned from its section derived from its own photographs (Data/Art/Vessels.json), at the V&A's 35.6 x 22 cm (C.8-1952, standing in for the Nanjing Museum's Xiao He meiping); its decoration composed from its two sides."
+      "note": "On the case deck centre line; centre is the foot on the deck (a carved phoebe stand under it where stand is true: radius 1.25 x the foot, 0.028 high under 0.20 tall, else 0.04). Object: turned from its section derived from its own photographs (Data/Art/Vessels.json), at the V&A's 35.6 x 22 cm (C.8-1952, standing in for the Nanjing Museum's Xiao He meiping); its decoration composed from its side A; side B is left out (Data/Art/Vessels.json unused; the sheet's Departures)."
     },
     {
       "work": "chinese-xuande-jar",
@@ -565,7 +565,7 @@
       "care": "ceramic-and-glass",
       "wall": "chenghuai.case.silk.ceramics",
       "stand": true,
-      "note": "On the case deck centre line; centre is the foot on the deck (a carved phoebe stand under it where stand is true: radius 1.25 x the foot, 0.028 high under 0.20 tall, else 0.04). Object: turned from its section derived from its own photographs (Data/Art/Vessels.json), at the Metropolitan Museum's 48.3 x 48.3 cm, its decoration composed from its two photographs."
+      "note": "On the case deck centre line; centre is the foot on the deck (a carved phoebe stand under it where stand is true: radius 1.25 x the foot, 0.028 high under 0.20 tall, else 0.04). Object: turned from its section derived from its own photographs (Data/Art/Vessels.json), at the Metropolitan Museum's 48.3 x 48.3 cm, its decoration composed from its photograph DP-32251-001; the older MET_DT5083 is left out, its painting not lying on the first's (Data/Art/Vessels.json unused; the sheet's Departures)."
     },
     {
       "work": "chinese-wucai-jar",
@@ -578,7 +578,7 @@
       ],
       "height": 1.282,
       "size": [
-        0.231,
+        0.233,
         0.232
       ],
       "facing_deg": 180.0,
@@ -587,7 +587,7 @@
       "care": "ceramic-and-glass",
       "wall": "chenghuai.case.silk.ceramics",
       "stand": true,
-      "note": "On the case deck centre line; centre is the foot on the deck (a carved phoebe stand under it where stand is true: radius 1.25 x the foot, 0.028 high under 0.20 tall, else 0.04). Object: turned from its section derived from its own photographs (Data/Art/Vessels.json), at the Metropolitan Museum's 23.2 cm high; 23.1 cm across as its photograph shows (no diameter published); its decoration composed from its three sides."
+      "note": "On the case deck centre line; centre is the foot on the deck (a carved phoebe stand under it where stand is true: radius 1.25 x the foot, 0.028 high under 0.20 tall, else 0.04). Object: turned from its section derived from its own photographs (Data/Art/Vessels.json), at the Metropolitan Museum's 23.2 cm high; 23.3 cm across as its photograph shows (no diameter published); its decoration composed from its three sides, the two further sides placed on each other's painting but unverified against the first's (the sheet's Departures)."
     },
     {
       "work": "chinese-chicken-cup",
