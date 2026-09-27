@@ -1,0 +1,119 @@
+{
+  "$sources": [
+    "Docs/Architecture.md, How rooms join: the joint is a doorcase, drawn once by Site: the travertine threshold through both wall depths and the passage, the brushed-bronze strip on the mating plane, a travertine lining in front of both rough faces, surrounds on both faces, and passage masonry closing the gap between two faces within the collar envelope (the wedges where a flat face meets the drum).",
+    "Threshold: honed Travertino Romano, foot-worn, as the museum's floors and the oval's passage (Data/Stages/nympheas/Finishes.json nympheas.floor), 30 mm, laid flush on a mortar bed over the rough sill (nympheas.md section 3.4, the floor's 30 mm stone).",
+    "Strip: CuSn10, brushed, foot-worn, as Albion's court door strip (Data/Stages/albion/Finishes.json albion.door.strip), a bar as deep as the stone it is set between.",
+    "Lining: honed Travertino Romano, handled, as the oval's passage reveal (nympheas.passage.reveal); an arch's voussoirs at most 0.60 round the arch, the linings' courses (Data/Stages/hall-of-light/Finishes.json hall-of-light.lining).",
+    "Surround: honed Travertino Romano, new (the doorway surround is honed in every era, nympheas.door.architrave). Its section is the as-built doorcase round the Rotunda's east door and the Atrium's west door (windows/Source/MuseeVision/HallOfLight/HallOfLightStructure.cpp:644-652; hall-of-light.md section 2: evidence for Site's surround): a quirk, two fasciae, a quarter-round ovolo and a back band, 0.290 wide and 0.094 proud, less the 15 mm it was let into the plaster, since here it lies on stone.",
+    "Masonry: honed Travertino Romano, weathered, as the oval's exterior walls (nympheas.exterior.wall): the wedges and passage walls stand outside."
+  ],
+  "threshold": {
+    "material": "stone.travertine-romano",
+    "working": "honed",
+    "history": "foot-worn"
+  },
+  "strip": {
+    "material": "bronze.cusn10",
+    "working": "brushed",
+    "history": "foot-worn"
+  },
+  "lining": {
+    "material": "stone.travertine-romano",
+    "working": "honed",
+    "history": "handled"
+  },
+  "surround": {
+    "material": "stone.travertine-romano",
+    "working": "honed",
+    "history": "new"
+  },
+  "masonry": {
+    "material": "stone.travertine-romano",
+    "working": "honed",
+    "history": "weathered"
+  },
+  "thresholdMeters": 0.03,
+  "stripDepthMeters": 0.03,
+  "surroundSection": {
+    "start": [
+      0.29,
+      0.0
+    ],
+    "steps": [
+      {
+        "line": [
+          0.29,
+          0.094
+        ],
+        "joint": "Crisp"
+      },
+      {
+        "line": [
+          0.245,
+          0.094
+        ],
+        "joint": "Crisp"
+      },
+      {
+        "arc": {
+          "centerMeters": [
+            0.245,
+            0.054
+          ],
+          "radiiMeters": [
+            0.04
+          ],
+          "fromDegrees": 90,
+          "toDegrees": 180
+        },
+        "joint": "Smooth"
+      },
+      {
+        "line": [
+          0.19,
+          0.054
+        ],
+        "joint": "Crisp"
+      },
+      {
+        "line": [
+          0.19,
+          0.046
+        ],
+        "joint": "Crisp"
+      },
+      {
+        "line": [
+          0.1,
+          0.04
+        ],
+        "joint": "Crisp"
+      },
+      {
+        "line": [
+          0.1,
+          0.03
+        ],
+        "joint": "Crisp"
+      },
+      {
+        "line": [
+          0.012,
+          0.024
+        ],
+        "joint": "Crisp"
+      },
+      {
+        "line": [
+          0.012,
+          0.0
+        ],
+        "joint": "Crisp"
+      }
+    ],
+    "closed": true,
+    "source": "The as-built doorcase: (s out from the opening's edge, p proud) (0.012, 0.024) (0.10, 0.030) (0.10, 0.040) (0.19, 0.046) (0.19, 0.054) (0.205, 0.054), an ovolo r 0.04 about (0.245, 0.054), (0.29, 0.094)."
+  },
+  "liningStoneMeters": 0.6,
+  "source": "The museum's doorcase: travertine threshold, bronze strip, travertine linings and surround, travertine masonry."
+}

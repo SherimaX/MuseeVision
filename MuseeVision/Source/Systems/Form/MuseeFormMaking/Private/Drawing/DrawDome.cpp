@@ -22,13 +22,40 @@ namespace Musee::Form::Drawing
 			FName Part;
 		};
 
-		/** The point on the outer face at a latitude and longitude, and the outward unit normal there. */
+		/**
+		 * The point on the outer face at a latitude and longitude, and the outward unit normal there. The paraboloid's
+		 * normal is the gradient of z - rise (1 - x^2/a^2 - y^2/b^2); the ellipsoid's, of x^2/a^2 + y^2/b^2 + z^2/rise^2.
+		 */
 		void OuterAt(const FFormDome& Dome, double Latitude, double Longitude, FVector& OutPoint, FVector& OutNormal)
 		{
+			const double A = Dome.SemiAxisXMeters;
+			const double B = Dome.SemiAxisYMeters;
+			const double Rise = Dome.RiseMeters;
 			const double Across = FMath::Cos(Latitude);
-			const FVector Unit(Across * FMath::Cos(Longitude), Across * FMath::Sin(Longitude), FMath::Sin(Latitude));
-			OutPoint = FVector(Dome.SemiAxisXMeters * Unit.X, Dome.SemiAxisYMeters * Unit.Y, Dome.RiseMeters * Unit.Z);
-			OutNormal = FVector(Unit.X / Dome.SemiAxisXMeters, Unit.Y / Dome.SemiAxisYMeters, Unit.Z / Dome.RiseMeters).GetSafeNormal();
+			const FVector2D Round(FMath::Cos(Longitude), FMath::Sin(Longitude));
+			if (Dome.bParaboloid)
+			{
+				OutPoint = FVector(A * Across * Round.X, B * Across * Round.Y, Rise * (1.0 - Across * Across));
+				OutNormal = FVector(2.0 * Rise * OutPoint.X / (A * A), 2.0 * Rise * OutPoint.Y / (B * B), 1.0).GetSafeNormal();
+				return;
+			}
+			const FVector Unit(Across * Round.X, Across * Round.Y, FMath::Sin(Latitude));
+			OutPoint = FVector(A * Unit.X, B * Unit.Y, Rise * Unit.Z);
+			OutNormal = FVector(Unit.X / A, Unit.Y / B, Unit.Z / Rise).GetSafeNormal();
+		}
+
+		/**
+		 * The way out of the shell across its springing: down for the ellipsoid, whose faces stand vertical there; for the
+		 * paraboloid, on out along its meridian (the derivative of its point by rho at rho = 1), outwards and down.
+		 */
+		FVector SpringingOutward(const FFormDome& Dome, double Longitude)
+		{
+			if (!Dome.bParaboloid)
+			{
+				return -FVector::UpVector;
+			}
+			return FVector(Dome.SemiAxisXMeters * FMath::Cos(Longitude), Dome.SemiAxisYMeters * FMath::Sin(Longitude), -2.0 * Dome.RiseMeters)
+				.GetSafeNormal();
 		}
 
 		/** The arc length at each point of a row, measured along its chords from the first. */
@@ -111,11 +138,10 @@ namespace Musee::Form::Drawing
 			}
 		}
 
-		/** The flat ring the shell springs from, between its two faces, facing down; UV0 its plan in metres. */
+		/** The ring the shell springs from, between its two faces, facing out of the shell; UV0 its plan in metres. */
 		void DrawSpringing(const FFormDome& Dome, TConstArrayView<double> Longitudes, FMeshBuilder& Mesh)
 		{
 			Mesh.UseSlot(DomePart::Outer);
-			const FVector Down = Dome.Frame.DirectionToParent(-FVector::UpVector);
 			TArray<int32> Outer;
 			TArray<int32> Inner;
 			for (const double Longitude : Longitudes)
@@ -123,8 +149,9 @@ namespace Musee::Form::Drawing
 				FVector Point, Normal;
 				OuterAt(Dome, 0.0, Longitude, Point, Normal);
 				const FVector Within = Point - Normal * Dome.ThicknessMeters;
-				Outer.Add(Mesh.AddVertex(Dome.Frame.PointToParent(Point), Down, FVector2D(Point.X, Point.Y)));
-				Inner.Add(Mesh.AddVertex(Dome.Frame.PointToParent(Within), Down, FVector2D(Within.X, Within.Y)));
+				const FVector Out = Dome.Frame.DirectionToParent(SpringingOutward(Dome, Longitude));
+				Outer.Add(Mesh.AddVertex(Dome.Frame.PointToParent(Point), Out, FVector2D(Point.X, Point.Y)));
+				Inner.Add(Mesh.AddVertex(Dome.Frame.PointToParent(Within), Out, FVector2D(Within.X, Within.Y)));
 			}
 			for (int32 Column = 0; Column + 1 < Longitudes.Num(); ++Column)
 			{
@@ -132,20 +159,31 @@ namespace Musee::Form::Drawing
 			}
 		}
 
+		/** The radius of the dome's tightest curve: (least)^2 / (largest) for the ellipsoid, (least plan)^2 / (2 rise) at a paraboloid's crown. */
+		double TightestRadius(const FFormDome& Dome)
+		{
+			if (Dome.bParaboloid)
+			{
+				const double Least = FMath::Min(Dome.SemiAxisXMeters, Dome.SemiAxisYMeters);
+				return Least * Least / (2.0 * Dome.RiseMeters);
+			}
+			const double Least = FMath::Min3(Dome.SemiAxisXMeters, Dome.SemiAxisYMeters, Dome.RiseMeters);
+			const double Largest = FMath::Max3(Dome.SemiAxisXMeters, Dome.SemiAxisYMeters, Dome.RiseMeters);
+			return Least * Least / Largest;
+		}
+
 		/** What is wrong with a dome's numbers, or empty. */
 		FString DomeFaults(const FFormDome& Dome)
 		{
-			const double Least = FMath::Min3(Dome.SemiAxisXMeters, Dome.SemiAxisYMeters, Dome.RiseMeters);
-			const double Largest = FMath::Max3(Dome.SemiAxisXMeters, Dome.SemiAxisYMeters, Dome.RiseMeters);
-			if (Least <= 0.0)
+			if (FMath::Min3(Dome.SemiAxisXMeters, Dome.SemiAxisYMeters, Dome.RiseMeters) <= 0.0)
 			{
 				return TEXT("a dome needs two plan semi-axes and a rise of more than zero");
 			}
-			// An ellipsoid's tightest curve has the radius (least semi-axis)^2 / (largest); a thicker shell folds there.
-			if (Dome.ThicknessMeters < 0.0 || Dome.ThicknessMeters >= Least * Least / Largest)
+			// A shell thicker than its tightest curve's radius folds there.
+			if (Dome.ThicknessMeters < 0.0 || Dome.ThicknessMeters >= TightestRadius(Dome))
 			{
 				return FString::Printf(TEXT("its thickness %.4f m must be zero or more and less than its tightest curve's radius, %.4f m"),
-					Dome.ThicknessMeters, Least * Least / Largest);
+					Dome.ThicknessMeters, TightestRadius(Dome));
 			}
 			if (Dome.OculusFraction < 0.0 || Dome.OculusFraction >= 1.0)
 			{
@@ -162,12 +200,14 @@ namespace Musee::Form::Drawing
 		{
 			return false;
 		}
-		// The second derivative of a parallel never exceeds its larger semi-axis, nor a meridian's the largest of all three.
+		// The second derivative of a parallel never exceeds its larger semi-axis, nor a meridian's the largest of all three
+		// (twice the rise on a paraboloid, whose height rise sin^2 p bends by 2 rise cos 2p).
 		const double Plan = FMath::Max(Shape.SemiAxisXMeters, Shape.SemiAxisYMeters);
+		const double Meridian = FMath::Max(Plan, Shape.bParaboloid ? 2.0 * Shape.RiseMeters : Shape.RiseMeters);
 		const TArray<double> Longitudes = CurveStations(0.0, TurnRadians, Plan, DefaultChordToleranceMeters, AxisRadians);
 		const bool bOculus = Shape.OculusFraction > 0.0;
 		const double OculusLatitude = bOculus ? FMath::Acos(Shape.OculusFraction) : CrownRadians;
-		const TArray<double> Latitudes = CurveStations(0.0, CrownRadians, FMath::Max(Plan, Shape.RiseMeters), DefaultChordToleranceMeters,
+		const TArray<double> Latitudes = CurveStations(0.0, CrownRadians, Meridian, DefaultChordToleranceMeters,
 			bOculus ? TArray<double>{ OculusLatitude } : TArray<double>());
 		int32 OculusRow = INDEX_NONE;
 		for (int32 Row = 0; bOculus && Row < Latitudes.Num(); ++Row)

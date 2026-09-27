@@ -1,26 +1,112 @@
 {
   "$sources": [
+    "Every class a design sheet names in its ports table (Docs/Stages/*.md, section 2). Names are width x crown in millimetres (the Architect's ruling, rotunda.md section 2 note), or a vertical port's well diameter.",
     "Docs/Stages/salon.md (R-SPECS-01) section 2, class definitions: the Salon's door as built (Plan.Salon.door; windows/Source/MuseeVision/Salon/SalonStructure.cpp:41) and the Reserve's west door as built (windows/Source/MuseeVision/Reserve/ReserveStructure.cpp:37-38).",
-    "Decisions D-019: the Nympheas oval's east port mates the Salon's west port through the oval passage, 3.000 m wide with a semicircular head springing at 3.300 m (salon.md section 3.1), the same opening as the Salon's door."
+    "Decisions D-019: the Nympheas oval's east port mates the Salon's west port through the oval passage, 3.000 m wide with a semicircular head springing at 3.300 m (salon.md section 3.1), the same opening as the Salon's door.",
+    "The rough opening's allowance, 0.050: the lining allowance a the sibling sheets adopt (rotunda.md, albion.md, hall-of-light.md, atrium.md, classical-hall.md section 2: rough widths 3.10 and 4.10, rough sill -0.05). The oval's two classes carry none: the oval finishes its own passage and the Reserve's door at the clear opening (nympheas.md section 2, rough openings).",
+    "The surround's clearance, 0.35 past the clear opening: what each stage keeps clear on its face for the joint's surround (albion.md, chenghuai.md, hall-of-light.md section 2; atrium.md section 2, |y| < 2.350 for the 4.000 door).",
+    "The strip, 0.060 wide: the museum's brushed CuSn10 threshold strip, as Albion's court door carries (Data/Stages/albion/Finishes.json albion.door.strip, 0.06 x 4.03), on the mating plane (Docs/Architecture.md, How rooms join: the joint is a doorcase).",
+    "Collar envelopes: Albion's porch on the Rotunda's south door, |x| <= 3.65, z -1.20 to 7.50 (albion.md section 2; windows/Source/MuseeVision/Plan/MuseePlan.h:528, Facade::VestibuleHalf and VestibuleTop); the Rotunda's west passage to the Salon, |y| <= 1.80 to 6.30 (MuseePlan.h:526, Facade::WestPassageHalf and WestPassageTop), down to the museum's footings at -1.20 as Albion's plinth course is (albion.md section 1). Classes whose faces touch where they mate carry none.",
+    "iris.4600: the Atrium's vertical ports (atrium.md section 2): the served well's clear radius 2.300, closed by a seven-blade iris of the Elan kit, each blade a 110 degree arc of the middle circle r 3.095, 1.250 wide with round ends, 2 mm thick at a 4 mm pitch, its pin at r 3.745 (0.650 outside the middle circle), turning 52 degrees from open to shut (windows/Source/MuseeVision/Elan/ElanKit.h:73-84; the blades thinned from 5 mm at 3 mm, which interpenetrated, atrium.md correction 2)."
   ],
   "$records": [
     {
       "key": "doorway.3000x4800.arched",
       "kind": "Doorway",
-      "clearWidthMeters": 3.000,
-      "headMeters": 3.300,
+      "clearWidthMeters": 3.0,
+      "headMeters": 3.3,
       "arched": true,
       "closure": "open-portal",
-      "source": "The Salon's east door and the oval passage: 3.000 clear, a semicircular head of radius 1.500 springing at 3.300, crown 4.800."
+      "allowanceMeters": 0.0,
+      "surroundMeters": 0.35,
+      "stripMeters": 0.06,
+      "source": "The Salon's west door and the oval passage: 3.000 clear, a semicircular head of radius 1.500 springing at 3.300, crown 4.800; the oval finishes its passage at the clear opening."
     },
     {
       "key": "stairwell.straight.2400x3200.arched",
       "kind": "Stairwell",
-      "clearWidthMeters": 2.400,
-      "headMeters": 2.000,
+      "clearWidthMeters": 2.4,
+      "headMeters": 2.0,
       "arched": true,
       "closure": "open-portal",
-      "source": "The Reserve's west door at the foot of the oval's stair: 2.400 clear, a semicircular head of radius 1.200 springing at 2.000, crown 3.200 above the landing."
+      "allowanceMeters": 0.0,
+      "surroundMeters": 0.35,
+      "stripMeters": 0.06,
+      "source": "The Reserve's west door at the foot of the oval's stair: 2.400 clear, a semicircular head of radius 1.200 springing at 2.000, crown 3.200 above the landing; the oval builds it finished in its head wall."
+    },
+    {
+      "key": "doorway.3000x6000.arched",
+      "kind": "Doorway",
+      "clearWidthMeters": 3.0,
+      "headMeters": 4.5,
+      "arched": true,
+      "closure": "open-portal",
+      "allowanceMeters": 0.05,
+      "surroundMeters": 0.35,
+      "stripMeters": 0.06,
+      "collarHalfWidthMeters": 1.8,
+      "collarBottomMeters": -1.2,
+      "collarTopMeters": 6.3,
+      "source": "The Rotunda's west and east doors (MuseePlan.h:44-47): 3.000 clear, a semicircular head of radius 1.500 springing at 4.500, crown 6.000; the west passage's shell 3.60 wide to 6.30."
+    },
+    {
+      "key": "doorway.4000x6500.arched",
+      "kind": "Doorway",
+      "clearWidthMeters": 4.0,
+      "headMeters": 4.5,
+      "arched": true,
+      "closure": "open-portal",
+      "allowanceMeters": 0.05,
+      "surroundMeters": 0.35,
+      "stripMeters": 0.06,
+      "collarHalfWidthMeters": 3.65,
+      "collarBottomMeters": -1.2,
+      "collarTopMeters": 7.5,
+      "source": "The Rotunda's north and south doors (MuseePlan.h:44-47): 4.000 clear, a semicircular head of radius 2.000 springing at 4.500, crown 6.500; the wedges to Albion's porch plane within |x| <= 3.65, z -1.20 to 7.50."
+    },
+    {
+      "key": "doorway.4000x4500.square",
+      "kind": "Doorway",
+      "clearWidthMeters": 4.0,
+      "headMeters": 4.5,
+      "arched": false,
+      "closure": "open-portal",
+      "allowanceMeters": 0.05,
+      "surroundMeters": 0.35,
+      "stripMeters": 0.06,
+      "source": "The Atrium's west door as built (MuseePlan.h:171, AtriumBaseStructure.cpp:66-67; hall-of-light.md and atrium.md section 2): 4.000 clear, a square head at 4.500, jambs parallel."
+    },
+    {
+      "key": "stairwell.spiral.3600x4400.arched",
+      "kind": "Stairwell",
+      "clearWidthMeters": 3.6,
+      "headMeters": 2.6,
+      "arched": true,
+      "closure": "open-portal",
+      "allowanceMeters": 0.05,
+      "surroundMeters": 0.35,
+      "stripMeters": 0.06,
+      "source": "The Rotunda's stair port to the Classical Hall (MuseePlan.h:143-157; rotunda.md and classical-hall.md section 2): 3.600 clear, jambs the planes x = +/-1.800, a semicircular head of radius 1.800 springing 2.600 above the threshold, crown 4.400."
+    },
+    {
+      "key": "iris.4600",
+      "kind": "Shaft",
+      "clearWidthMeters": 4.6,
+      "headMeters": 0.0,
+      "arched": false,
+      "closure": "iris",
+      "wellRadiusMeters": 2.3,
+      "iris": {
+        "blades": 7,
+        "midRadiusMeters": 3.095,
+        "widthMeters": 1.25,
+        "arcDegrees": 110.0,
+        "pinOutsetMeters": 0.65,
+        "swingDegrees": 52.0,
+        "bladeMeters": 0.002,
+        "pitchMeters": 0.004
+      },
+      "source": "The Atrium's vertical ports to the Cube and the Sphere (atrium.md section 2): a well 4.600 clear across, closed by the stage below its plane with its seven-blade iris."
     }
   ]
 }

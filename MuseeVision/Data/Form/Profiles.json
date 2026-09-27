@@ -1,6 +1,7 @@
 {
   "$sources": [
-    "Docs/Stages/salon.md (R-SPECS-01) section 3.4, P9 and P10: the as-built oval's cove and skirting, windows/Source/MuseeVision/Salon/SalonStructure.cpp:376-476, re-set to each moulding's own datum (A out from the wall, B up from the moulding's foot). Arc segment counts are dropped: the chord tolerance divides every arc."
+    "Docs/Stages/salon.md (R-SPECS-01) section 3.4, P9 and P10: the as-built oval's cove and skirting, windows/Source/MuseeVision/Salon/SalonStructure.cpp:376-476, re-set to each moulding's own datum (A out from the wall, B up from the moulding's foot). Arc segment counts are dropped: the chord tolerance divides every arc.",
+    "Docs/Stages/nympheas.md section 3.2, P6: the as-built oval door's slim architrave, windows/Source/MuseeVision/Salon/SalonStructure.cpp:441-450, A out from the opening's edge and B proud of the face, closed along its back on the wall."
   ],
   "$records": [
     {
@@ -15,6 +16,22 @@
         { "line": [1.450, 1.200], "joint": "Smooth" },
         { "line": [1.450, 1.350], "joint": "Crisp" }
       ]
+    },
+    {
+      "key": "architrave.two-fascia.160",
+      "source": "nympheas.md P6, the slim architrave round the oval's door: 0.160 wide and 0.075 proud, a back band with a small ovolo, a fillet, a fascia falling to the opening and a 30 mm chamfer at its arris.",
+      "start": [0.160, 0.000],
+      "steps": [
+        { "line": [0.160, 0.075], "joint": "Crisp" },
+        { "line": [0.145, 0.075], "joint": "Crisp" },
+        { "arc": { "centerMeters": [0.145, 0.058], "radiiMeters": [0.017], "fromDegrees": 90, "toDegrees": 180 }, "joint": "Smooth" },
+        { "line": [0.100, 0.058], "joint": "Crisp" },
+        { "line": [0.100, 0.052], "joint": "Crisp" },
+        { "line": [0.020, 0.046], "joint": "Crisp" },
+        { "line": [0.000, 0.030], "joint": "Crisp" },
+        { "line": [0.000, 0.000], "joint": "Crisp" }
+      ],
+      "closed": true
     },
     {
       "key": "skirting.flat.100",

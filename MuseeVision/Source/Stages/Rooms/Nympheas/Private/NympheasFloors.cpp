@@ -1,5 +1,6 @@
 #include "NympheasParts.h"
 #include "NympheasPlan.h"
+#include "SitePortClass.h"
 
 /**
  * The floors (§3.4) and the well's head (§3.7): the honed travertine over the whole oval and the passage, with the two
@@ -84,6 +85,23 @@ namespace Musee::Nympheas
 			return FFormProfile::Rectangle(FVector2D(Plan::EastRailX - Half, -Plan::EastRailHalf), FVector2D(Plan::EastRailX + Half, Plan::EastRailHalf));
 		}
 
+		/**
+		 * The floor's outline: the footprint, stopped at the port face across the passage half the class's strip short, so the
+		 * joint's bronze strip lies on the mating plane between the two stages' floors.
+		 */
+		TArray<FVector2D> FloorOutline()
+		{
+			const TValueOrError<FSitePortClass, FString> Door = Musee::Site::FindPortClass(FMuseeKey(Plan::EastClass));
+			TArray<FVector2D> Outline = FootprintOutline();
+			if (Door.HasValue() && Door.GetValue().StripMeters > 0.0)
+			{
+				const double Half = 0.5 * Door.GetValue().ClearWidthMeters + Door.GetValue().AllowanceMeters;
+				const double Short = Plan::PortFaceX - 0.5 * Door.GetValue().StripMeters;
+				Outline.Append({FVector2D(Plan::PortFaceX, -Half), FVector2D(Short, -Half), FVector2D(Short, Half), FVector2D(Plan::PortFaceX, Half)});
+			}
+			return Outline;
+		}
+
 		/** The finished floor: the travertine over the footprint, round the opening, the viewing stones and the east chase. */
 		void Floor(TArray<FFormDrawing>& Out)
 		{
@@ -94,7 +112,7 @@ namespace Musee::Nympheas
 				Holes.Add(Circle(FVector2D(X, 0.0), Plan::ViewingRingRadius));
 			}
 			const FMuseeFrame Bed(FVector(0.0, 0.0, -Plan::FloorStone));
-			Out.Add(Drawn(Pieces::Floor, TEXT("floor"), Slab(Polygon(FootprintOutline()), MoveTemp(Holes), -Plan::FloorStone, 0.0), Walkable, Bed));
+			Out.Add(Drawn(Pieces::Floor, TEXT("floor"), Slab(Polygon(FloorOutline()), MoveTemp(Holes), -Plan::FloorStone, 0.0), Walkable, Bed));
 			for (const double X : {-Plan::ViewingStoneX, Plan::ViewingStoneX})
 			{
 				const FVector2D Centre(X, 0.0);

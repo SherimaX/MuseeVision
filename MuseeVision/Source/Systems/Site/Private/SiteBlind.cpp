@@ -49,6 +49,61 @@ namespace Musee::Site
 		}
 	}
 
+	namespace
+	{
+		/**
+		 * One iris blade's outline in its pin's frame, open: the inner arc of the ring out along the blade, its far end's
+		 * half-circle, the outer arc back, and the half-circle at the pin's end, as the Élan kit's blades are cut
+		 * (windows/Source/MuseeVision/Elan/ElanSphereTop.cpp:54-92).
+		 */
+		FFormProfile BladeOutline(const FSiteIris& Iris)
+		{
+			const double Mid = Iris.MidRadiusMeters;
+			const double Half = 0.5 * Iris.WidthMeters;
+			const double Arc = Iris.ArcDegrees;
+			const FVector2D Axis(-(Mid + Iris.PinOutsetMeters), 0.0);
+			auto OnMid = [&](double Degrees)
+			{
+				const double Radians = FMath::DegreesToRadians(Degrees);
+				return Axis + Mid * FVector2D(FMath::Cos(Radians), FMath::Sin(Radians));
+			};
+			return FFormProfile::From(Axis + FVector2D(Mid - Half, 0.0))
+				.ArcAbout(Axis, Mid - Half, Mid - Half, 0.0, Arc, EFormJoint::Smooth)
+				.ArcAbout(OnMid(Arc), Half, Half, Arc + 180.0, Arc, EFormJoint::Smooth)
+				.ArcAbout(Axis, Mid + Half, Mid + Half, Arc, 0.0, EFormJoint::Smooth)
+				.ArcAbout(OnMid(0.0), Half, Half, 0.0, -180.0, EFormJoint::Smooth)
+				.Close();
+		}
+
+		/**
+		 * The iris shut on the port's plane: each blade on its pin round the port's axis (pin 0 due east), turned its swing
+		 * from open, the top blade's face on the plane and the rest stacked below it at the pitch.
+		 */
+		void ShutIris(const FSitePort& Port, const FSiteIris& Iris, const FSiteBlindDoors& Doors, TArray<FFormDrawing>& OutDrawings)
+		{
+			const FString PortName = Port.Key.Segments().Last();
+			const double PinRadius = Iris.MidRadiusMeters + Iris.PinOutsetMeters;
+			for (int32 Blade = 0; Blade < Iris.Blades; ++Blade)
+			{
+				const double Around = 360.0 * Blade / Iris.Blades;
+				const double Radians = FMath::DegreesToRadians(Around);
+				const double Top = -Iris.PitchMeters * Blade;
+				const FVector Pin = Port.Frame.OriginMeters + FVector(PinRadius * FMath::Cos(Radians), PinRadius * FMath::Sin(Radians), Top - Iris.BladeMeters);
+				FFormExtrusion Shape;
+				Shape.Outline = BladeOutline(Iris);
+				Shape.DepthMeters = Iris.BladeMeters;
+				FFormDrawing& Drawing = OutDrawings.Add_GetRef(FFormDrawing::Of(FName(FString::Printf(TEXT("blind.%s.iris.%d"), *PortName, Blade)),
+					TEXT("blind.iris"), MoveTemp(Shape)));
+				Drawing.Material = Doors.IrisMaterial;
+				Drawing.Working = Doors.IrisWorking;
+				Drawing.History = Doors.IrisHistory;
+				Drawing.Collision = Musee::Collision::Solid.Profile();
+				Drawing.Frame = FMuseeFrame(Pin, FRotator(0.0, Around + Iris.SwingDegrees, 0.0).Quaternion());
+				Drawing.Drawer = TEXT("Site");
+			}
+		}
+	}
+
 	TValueOrError<FSiteBlindDoors, FString> ReadBlindDoors(const FString& Path)
 	{
 		return ReadRecord<FSiteBlindDoors>(Path);
@@ -57,6 +112,21 @@ namespace Musee::Site
 	bool Blind(const FSitePort& Port, const FSitePortClass& Class, const FSiteBlindDoors& Doors, TArray<FFormDrawing>& OutDrawings,
 		FString& OutWhy)
 	{
+		const double Upward = Port.Facing().Z;
+		if (Class.IsIris() || FMath::Abs(Upward) > 0.5)
+		{
+			if (!Class.IsIris() || !Class.Iris.IsStacked() || FMath::Abs(Upward) < 0.5)
+			{
+				OutWhy = FString::Printf(TEXT("port %s: a vertical port is closed by an iris, stacked in its plane"), *Port.Key.ToString());
+				return false;
+			}
+			// Facing up, the port's own stage lies below its plane and shuts it with its own iris.
+			if (Upward < 0.0)
+			{
+				ShutIris(Port, Class.Iris, Doors, OutDrawings);
+			}
+			return true;
+		}
 		const double Gap = Doors.ClearanceMeters;
 		const bool bFits = Class.ClearWidthMeters > 4.0 * Gap && Class.HeadMeters > 2.0 * Gap && Doors.LeafMeters > 0.0
 			&& Doors.SetBackMeters + Doors.LeafMeters <= Port.WallDepthMeters;

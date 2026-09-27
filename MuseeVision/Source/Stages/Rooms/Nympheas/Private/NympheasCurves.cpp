@@ -81,6 +81,17 @@ namespace Musee::Nympheas
 		return 0.5 * (Low + High);
 	}
 
+	double FOvalCurve::TWhereX(double X, double D, double Low, double High) const
+	{
+		const bool bRising = Parallel(High, D).X > Parallel(Low, D).X;
+		while (High - Low > BisectionRadians)
+		{
+			const double Mid = 0.5 * (Low + High);
+			((Parallel(Mid, D).X < X) == bRising ? Low : High) = Mid;
+		}
+		return 0.5 * (Low + High);
+	}
+
 	TArray<FVector2D> FOvalCurve::Stations(double D, double From, double To, int32 Count) const
 	{
 		TArray<FVector2D> Points;
