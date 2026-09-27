@@ -50,6 +50,19 @@ namespace Musee::Light
 		/** The greatest intensity in the table, in candelas. */
 		[[nodiscard]] double PeakCandela() const;
 
+		/** A direction in the table's Type C frame: its vertical angle from the nadir and its horizontal angle, in degrees. */
+		struct FDirection
+		{
+			double VerticalDegrees = 0.0;
+			double HorizontalDegrees = 0.0;
+		};
+
+		/**
+		 * The direction of the table's greatest intensity (the first the table lists, where several are equal): where the
+		 * luminaire throws its light, the direction a designer aims.
+		 */
+		[[nodiscard]] FDirection PeakDirection() const;
+
 		/**
 		 * The luminous flux the table carries, in lumens: its intensity integrated over the whole sphere, cell by cell of
 		 * the measured grid (the mean of each cell's four corners over the cell's solid angle), the horizontal range the file

@@ -137,6 +137,24 @@ namespace Musee::Light
 		return Peak;
 	}
 
+	FPhotometricFile::FDirection FPhotometricFile::PeakDirection() const
+	{
+		FDirection Peak;
+		double Greatest = -1.0;
+		for (int32 H = 0; H < HorizontalDegrees.Num(); ++H)
+		{
+			for (int32 V = 0; V < VerticalDegrees.Num(); ++V)
+			{
+				if (At(H, V) > Greatest)
+				{
+					Greatest = At(H, V);
+					Peak = FDirection{VerticalDegrees[V], HorizontalDegrees[H]};
+				}
+			}
+		}
+		return Peak;
+	}
+
 	double FPhotometricFile::FluxLumens() const
 	{
 		return FluxWhere(*this, [](double) { return true; });

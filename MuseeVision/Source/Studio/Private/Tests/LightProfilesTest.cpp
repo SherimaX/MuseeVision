@@ -150,27 +150,59 @@ namespace Musee::Studio::LightProfileTests
 			return CandelaTowards(Ray) * Cosine / Ray.SizeSquared();
 		}
 
-		/** The flux the placed light gives, in lumens: its intensity integrated over the sphere about it. */
-		double FluxLumens() const
+		/**
+		 * Calls Visit with every direction of a grid over the sphere about the light (Polar by Azimuth cells, about its x
+		 * axis) and the solid angle of its cell, in steradians.
+		 */
+		void ForEachDirection(int32 Polar, int32 Azimuth, TFunctionRef<void(const FVector&, double)> Visit) const
 		{
-			constexpr int32 Polar = 720;
-			constexpr int32 Azimuth = 720;
 			const FVector X = Light.GetUnitAxis(EAxis::X);
 			const FVector Y = Light.GetUnitAxis(EAxis::Y);
 			const FVector Z = Light.GetUnitAxis(EAxis::Z);
-			double Lumens = 0.0;
+			const double Cell = (UE_DOUBLE_PI / Polar) * (2.0 * UE_DOUBLE_PI / Azimuth);
 			for (int32 I = 0; I < Polar; ++I)
 			{
 				const double Theta = (I + 0.5) * UE_DOUBLE_PI / Polar;
 				for (int32 J = 0; J < Azimuth; ++J)
 				{
 					const double Phi = (J + 0.5) * 2.0 * UE_DOUBLE_PI / Azimuth;
-					const FVector Direction = X * FMath::Cos(Theta) + (Y * FMath::Cos(Phi) + Z * FMath::Sin(Phi)) * FMath::Sin(Theta);
-					Lumens += CandelaTowards(Direction) * FMath::Sin(Theta);
+					Visit(X * FMath::Cos(Theta) + (Y * FMath::Cos(Phi) + Z * FMath::Sin(Phi)) * FMath::Sin(Theta), FMath::Sin(Theta) * Cell);
 				}
 			}
-			return Lumens * (UE_DOUBLE_PI / Polar) * (2.0 * UE_DOUBLE_PI / Azimuth);
 		}
+
+		/** The flux the placed light gives, in lumens: its intensity integrated over the sphere about it. */
+		double FluxLumens() const
+		{
+			double Lumens = 0.0;
+			ForEachDirection(720, 720, [&](const FVector& Direction, double SolidAngle) { Lumens += CandelaTowards(Direction) * SolidAngle; });
+			return Lumens;
+		}
+
+		/** The direction the placed light is brightest in, found on a grid of a quarter of a degree. */
+		FVector PeakDirection() const
+		{
+			FVector Peak = Light.GetUnitAxis(EAxis::X);
+			double Greatest = -1.0;
+			ForEachDirection(720, 1440, [&](const FVector& Direction, double)
+			{
+				const double Intensity = CandelaTowards(Direction);
+				if (Intensity > Greatest) { Greatest = Intensity; Peak = Direction; }
+			});
+			return Peak;
+		}
+	};
+
+	/**
+	 * A washer as a stage's schedule places it, in stage metres: its seat, its aim on the wall it washes, and that wall's
+	 * top above the floor (z = 0) at the aim, taken from the stage's drawing.
+	 */
+	struct FWasher
+	{
+		const TCHAR* Id;
+		FVector Seat;
+		FVector Aim;
+		double WallTop;
 	};
 
 	/** The wash a placed wallwasher lays: on the wall it is aimed at, on the floor at that wall's foot, and the other way. */
@@ -179,29 +211,102 @@ namespace Musee::Studio::LightProfileTests
 		double WallLux = 0.0;
 		double FloorLux = 0.0;
 		double OppositeLux = 0.0;
+		/** The greatest and least illuminance up the wall's plumb line through the aim, from 0.15 m to its top. */
+		double WallBrightestLux = 0.0;
+		double WallDimmestLux = 0.0;
+	};
+
+	/** Where the wall's plumb line is read from: the height of a skirting, below which the floor's own light dominates. */
+	constexpr double PlumbLineFromMeters = 0.15;
+
+	/** The wall's plane: through the aim, square to the plan's line from the seat to it. */
+	FVector TowardsWallOf(const FWasher& Washer)
+	{
+		return FVector(Washer.Aim.X - Washer.Seat.X, Washer.Aim.Y - Washer.Seat.Y, 0.0).GetSafeNormal();
+	}
+
+	/**
+	 * Measures the wash of a washer over a floor at z = 0: the mean illuminance on the wall's face up the plumb line through
+	 * the aim, from the floor to the wall's top, with its brightest and dimmest; on the floor at the wall's foot; and on a
+	 * wall as far the other way, facing it.
+	 */
+	FWash MeasureWash(const FPlacedProfile& Placed, const FWasher& Washer)
+	{
+		const FVector TowardsWall = TowardsWallOf(Washer);
+		const FVector Across = FVector(Washer.Aim.X - Washer.Seat.X, Washer.Aim.Y - Washer.Seat.Y, 0.0);
+		const FVector Opposite = FVector(Washer.Seat.X, Washer.Seat.Y, 0.0) - Across;
+		constexpr int32 Steps = 64;
+		FWash Wash;
+		Wash.WallDimmestLux = TNumericLimits<double>::Max();
+		for (int32 Step = 0; Step < Steps; ++Step)
+		{
+			const double Height = (Step + 0.5) * Washer.WallTop / Steps;
+			const double Lux = Placed.LuxAt(FVector(Washer.Aim.X, Washer.Aim.Y, Height), -TowardsWall);
+			Wash.WallLux += Lux / Steps;
+			Wash.OppositeLux += Placed.LuxAt(FVector(Opposite.X, Opposite.Y, Height), TowardsWall) / Steps;
+			if (Height >= PlumbLineFromMeters)
+			{
+				Wash.WallBrightestLux = FMath::Max(Wash.WallBrightestLux, Lux);
+				Wash.WallDimmestLux = FMath::Min(Wash.WallDimmestLux, Lux);
+			}
+		}
+		Wash.FloorLux = Placed.LuxAt(FVector(Washer.Aim.X, Washer.Aim.Y, 0.0), FVector::UpVector);
+		return Wash;
+	}
+
+	/** Where a ray from the washer's seat along Direction meets the wall's plane: its height there, or unset if it runs away from the wall. */
+	TOptional<double> HeightOnWall(const FWasher& Washer, const FVector& Direction)
+	{
+		const FVector TowardsWall = TowardsWallOf(Washer);
+		const double Closing = Direction | TowardsWall;
+		if (Closing <= 0.0) { return {}; }
+		const double Distance = (Washer.Aim - Washer.Seat) | TowardsWall;
+		return Washer.Seat.Z + Direction.Z * Distance / Closing;
+	}
+
+	/** How a placed washer's flux divides: onto the wall below its top, past the wall's top, and onto the floor before the wall. */
+	struct FShares
+	{
+		double Wall = 0.0;
+		double AboveWall = 0.0;
+		double FloorFirst = 0.0;
 	};
 
 	/**
-	 * Measures the wash of a wallwasher at Seat aimed at Aim, a point on a vertical wall square to the plan's line between
-	 * them, over a floor at z = 0: the mean illuminance on the wall's face up the plumb line through the aim, from the floor
-	 * to the luminaire's height; on the floor at the wall's foot; and on a wall as far the other way, facing it.
+	 * The shares of the placed washer's flux that meet the wall's plane between the floor and the wall's top, above the top
+	 * (onto the ceiling or the roof, past the wall), and the floor before the wall. The wall is taken as long as the room
+	 * along it, so a share runs a little high for a short wall.
 	 */
-	FWash MeasureWash(const FPlacedProfile& Placed, const FVector& Seat, const FVector& Aim)
+	FShares SharesOf(const FPlacedProfile& Placed, const FWasher& Washer)
 	{
-		const FVector Across = FVector(Aim.X - Seat.X, Aim.Y - Seat.Y, 0.0);
-		const FVector TowardsWall = Across.GetSafeNormal();
-		const FVector Opposite = FVector(Seat.X, Seat.Y, 0.0) - Across;
-		constexpr int32 Steps = 64;
-		FWash Wash;
-		for (int32 Step = 0; Step < Steps; ++Step)
+		FShares Lumens;
+		double Total = 0.0;
+		Placed.ForEachDirection(360, 720, [&](const FVector& Direction, double SolidAngle)
 		{
-			const double Height = (Step + 0.5) * Seat.Z / Steps;
-			Wash.WallLux += Placed.LuxAt(FVector(Aim.X, Aim.Y, Height), -TowardsWall) / Steps;
-			Wash.OppositeLux += Placed.LuxAt(FVector(Opposite.X, Opposite.Y, Height), TowardsWall) / Steps;
-		}
-		Wash.FloorLux = Placed.LuxAt(FVector(Aim.X, Aim.Y, 0.0), FVector::UpVector);
-		return Wash;
+			const double Flux = Placed.CandelaTowards(Direction) * SolidAngle;
+			Total += Flux;
+			const TOptional<double> Height = HeightOnWall(Washer, Direction);
+			if (!Height.IsSet()) { return; }
+			if (Height.GetValue() < 0.0) { Lumens.FloorFirst += Flux; }
+			else if (Height.GetValue() <= Washer.WallTop) { Lumens.Wall += Flux; }
+			else { Lumens.AboveWall += Flux; }
+		});
+		return Total > 0.0 ? FShares{Lumens.Wall / Total, Lumens.AboveWall / Total, Lumens.FloorFirst / Total} : FShares();
 	}
+
+	/**
+	 * What a wallwasher is for (Docs/Light/Luminaires.md: an even wash down a whole wall): most of its light, over half its
+	 * flux, on the wall below the wall's top, and at most a tenth past the top, onto a ceiling or roof it isn't meant for.
+	 */
+	constexpr double LeastWallShare = 0.5;
+	constexpr double MostShareAboveWall = 0.1;
+
+	/**
+	 * How close the placed light's brightest direction lies to its aim, in degrees: the profile's texels are 0.7° apart
+	 * in the vertical angle and 1.4° in the horizontal (256 over 180° and 360°), so the brightest texel lies within half
+	 * a texel diagonal, under 1°, of the file's peak.
+	 */
+	constexpr double ThrowOnAimDegrees = 1.0;
 }
 
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FStudioLightProfilesTest, "Musee.Studio.LightProfiles", Musee::Studio::LightProfileTests::Flags)
@@ -274,12 +379,17 @@ bool FStudioWallwasherWashesWallTest::RunTest(const FString& Parameters)
 	MakeLightProfiles(FStageMakeOptions(), Made);
 	TestTrue(TEXT("The museum's profiles are made"), Made.Succeeded());
 
-	// Two washers as the stages' schedules place them: the Classical Hall's washer.000, 2.82 m from its wall and aimed
-	// 1.83 m down it, and Chenghuai's wash.linchi.s.01, 4.44 m across the room and 1.12 m down.
-	struct FWasher { const TCHAR* Id; FVector Seat; FVector Aim; };
+	// Washers as the stages' schedules place them, each with the top of the wall it washes:
+	// - the Classical Hall's washer.000, 2.82 m from the tribune wall and aimed 1.83 m down it; the wall rises to the
+	//   entablature's ledge at 3.70 (Docs/Stages/classical-hall.md, 3.1 and the luminaires);
+	// - Chenghuai's wash.linchi.s.01, 4.44 m across the front row and 1.12 m down its south wall, and wash.shujuan.01,
+	//   4.29 m across the rear row and 1.02 m down its north wall. Both rows' back walls stand under a sealed eave: the
+	//   wall's inner face (v 4.80 and 4.70) meets the rafters' underside 0.25 in front of the back purlin, whose seat is
+	//   3.154, on the last step's rise of 0.5, at 3.279 (Docs/Stages/chenghuai.md, 3.1: the derived heights and the halls).
 	const FWasher Washers[] = {
-		{TEXT("hall"), FVector(3.78, 0.0, 3.86), FVector(6.6, 0.0, 2.029)},
-		{TEXT("scrolls"), FVector(-19.004, -4.95, 3.02), FVector(-19.004, -0.515, 1.9)},
+		{TEXT("hall"), FVector(3.78, 0.0, 3.86), FVector(6.6, 0.0, 2.029), 3.70},
+		{TEXT("linchi"), FVector(-19.004, -4.95, 3.02), FVector(-19.004, -0.515, 1.9), 3.279},
+		{TEXT("shujuan"), FVector(-18.988, -40.10, 3.02), FVector(-18.988, -44.385, 2.0), 3.279},
 	};
 	const FString Folder = FPaths::ConvertRelativePathToFull(FPaths::AutomationTransientDir() / TEXT("MuseeStudio/Wallwashers"));
 	FString Entries;
@@ -303,7 +413,7 @@ bool FStudioWallwasherWashesWallTest::RunTest(const FString& Parameters)
 	Context.StageActor = Stage;
 	TArray<FMuseeFinding> Findings;
 	Musee::DressStage(Context, Findings);
-	TestEqual(TEXT("Light places both washers lit, with nothing to find"),
+	TestEqual(TEXT("Light places every washer lit, with nothing to find"),
 		Findings.FilterByPredicate([](const FMuseeFinding& Finding) { return Finding.Owner == FName(TEXT("Light")); }).Num(), 0);
 
 	const FLightLuminaire* Type = Musee::Light::FindLuminaire(WallwasherType);
@@ -322,9 +432,28 @@ bool FStudioWallwasherWashesWallTest::RunTest(const FString& Parameters)
 		const double Flux = Profile.FluxLumens();
 		TestTrue(FString::Printf(TEXT("%s gives the file's 999 lm as the renderer reads its profile, to within 2 %% (%.1f lm)"), Washer.Id, Flux),
 			FMath::Abs(Flux - RatedFluxLumens) <= 0.02 * RatedFluxLumens);
-		const FWash Wash = MeasureWash(Profile, Washer.Seat, Washer.Aim);
-		AddInfo(FString::Printf(TEXT("%s: %.1f lx on the wall, %.1f lx on the floor at its foot, %.2f lx the other way."), Washer.Id,
-			Wash.WallLux, Wash.FloorLux, Wash.OppositeLux));
+		// Its light, not its housing, is aimed: the brightest direction of the profile as placed runs to the aim, and meets
+		// the wall between the floor and the wall's top. Turned about its axis (a roll) or left on its nadir, it would not.
+		const FVector Peak = Profile.PeakDirection();
+		const FVector ToAim = (Washer.Aim - Washer.Seat).GetSafeNormal();
+		const double OffAim = FMath::RadiansToDegrees(FMath::Acos(FMath::Clamp(Peak | ToAim, -1.0, 1.0)));
+		const TOptional<double> PeakHeight = HeightOnWall(Washer, Peak);
+		AddInfo(FString::Printf(TEXT("%s: its peak runs %.2f deg from its aim and meets the wall's plane at z %.3f (the wall's top %.3f)."),
+			Washer.Id, OffAim, PeakHeight.Get(TNumericLimits<double>::Max()), Washer.WallTop));
+		TestTrue(FString::Printf(TEXT("%s throws its peak on its aim, within %.1f deg (%.2f deg)"), Washer.Id, ThrowOnAimDegrees, OffAim),
+			OffAim <= ThrowOnAimDegrees);
+		TestTrue(FString::Printf(TEXT("%s: its peak meets the wall below the wall's top"), Washer.Id),
+			PeakHeight.IsSet() && PeakHeight.GetValue() >= 0.0 && PeakHeight.GetValue() <= Washer.WallTop);
+		const FShares Shares = SharesOf(Profile, Washer);
+		AddInfo(FString::Printf(TEXT("%s: %.1f %% of its flux on the wall, %.1f %% past its top, %.1f %% on the floor first."), Washer.Id,
+			100.0 * Shares.Wall, 100.0 * Shares.AboveWall, 100.0 * Shares.FloorFirst));
+		TestTrue(FString::Printf(TEXT("%s lays most of its light on the wall below its top (%.1f %%)"), Washer.Id, 100.0 * Shares.Wall),
+			Shares.Wall >= LeastWallShare);
+		TestTrue(FString::Printf(TEXT("%s sends at most a tenth past the wall's top (%.1f %%)"), Washer.Id, 100.0 * Shares.AboveWall),
+			Shares.AboveWall <= MostShareAboveWall);
+		const FWash Wash = MeasureWash(Profile, Washer);
+		AddInfo(FString::Printf(TEXT("%s: %.1f lx on the wall (%.1f to %.1f up its plumb line), %.1f lx on the floor at its foot, %.2f lx the other way."),
+			Washer.Id, Wash.WallLux, Wash.WallDimmestLux, Wash.WallBrightestLux, Wash.FloorLux, Wash.OppositeLux));
 		TestTrue(FString::Printf(TEXT("%s washes its wall: over twice the floor at its foot"), Washer.Id), Wash.WallLux > 2.0 * Wash.FloorLux);
 		TestTrue(FString::Printf(TEXT("%s throws nothing the other way"), Washer.Id), Wash.WallLux > 0.0 && Wash.OppositeLux < 0.01 * Wash.WallLux);
 		(*Found)->FollowChannel(0.5f);

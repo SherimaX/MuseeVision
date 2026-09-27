@@ -30,9 +30,9 @@ and a type that stands unlit (a wallwasher whose light profile Studio hasn't mad
 A wallwasher (`track-wallwasher`) is lit by its maker's photometric file, kept byte for byte in `Data/Light/Photometry`:
 Light reads the LM-63 file for the flux its candela table integrates to, and lights the luminaire as a point source
 carrying the light profile Studio imports from the same file, its intensity the profile's own (`bUseIESBrightness`, in
-candelas) and dimmed through `IESBrightnessScale`. The file's Type C frame is turned into the luminaire's: its nadir along
-x, towards the aim, and its 0° plane on +z, the side the luminaire tilts towards, its wall (`Docs/Light/Luminaires.md`,
-"Photometric files").
+candelas) and dimmed through `IESBrightnessScale`. The file's Type C frame is turned into the luminaire's so its throw, the
+direction of its greatest intensity, lies on x, towards the aim: its nadir below, in the luminaire's vertical plane, and the
+throw's plane on +z, towards the wall (`Docs/Light/Luminaires.md`, "Photometric files").
 
 The renderer's transport stays in `Config/DefaultEngine.ini`, as it is.
 

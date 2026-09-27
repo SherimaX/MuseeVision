@@ -72,6 +72,13 @@ struct MUSEELIGHT_API FLightLuminaire
 	 */
 	Musee::Candela PeakIntensity;
 	/**
+	 * For a type lit by its photometric file, the direction of that greatest intensity in the file's Type C frame: its
+	 * vertical angle from the nadir and its horizontal angle. It is the luminaire's throw, which Light carries onto the
+	 * schedule's aim; zero for any other type, whose peak lies on its axis.
+	 */
+	Musee::Degrees PeakVertical;
+	Musee::Degrees PeakHorizontal;
+	/**
 	 * A spot's beam angle: the full angle at which the intensity falls to half its peak. Where the maker publishes only
 	 * the flux and the peak (a step light), it is the beam of the Gaussian distribution those two fix.
 	 */

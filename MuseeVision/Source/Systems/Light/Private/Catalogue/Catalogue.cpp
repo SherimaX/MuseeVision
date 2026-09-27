@@ -199,7 +199,7 @@ namespace Musee::Light
 
 		/**
 		 * A type lit by its photometric file takes its light from the file: the flux its table integrates to, its greatest
-		 * intensity, and, where the file gives a round luminous opening, that opening's radius as its source's.
+		 * intensity and the direction it lies in, and, where the file gives a round luminous opening, that opening's radius as its source's.
 		 */
 		void TakePhotometry(const FLightLuminaireRecord& Record, FLightLuminaire& Type)
 		{
@@ -212,6 +212,9 @@ namespace Musee::Light
 			Type.PhotometricFile = FPaths::ConvertRelativePathToFull(Records::DataRoot() / Record.PhotometricFile.Path);
 			Type.Flux = Lumens(Table.FluxLumens());
 			Type.PeakIntensity = Candela(Table.PeakCandela());
+			const FPhotometricFile::FDirection Throw = Table.PeakDirection();
+			Type.PeakVertical = Degrees(Throw.VerticalDegrees);
+			Type.PeakHorizontal = Degrees(Throw.HorizontalDegrees);
 			if (const TOptional<double> Radius = Table.RoundOpeningRadiusMeters()) { Type.SourceRadius = Meters(Radius.GetValue()); }
 		}
 

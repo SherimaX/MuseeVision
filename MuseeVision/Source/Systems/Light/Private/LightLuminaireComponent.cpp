@@ -38,16 +38,24 @@ namespace Musee::Light
 		constexpr double SecondsPerMinute = 60.0;
 
 		/**
-		 * A photometric file's Type C frame in the luminaire's frame. The engine reads a light profile about its light's own
-		 * axes (Engine/Shaders/Private/IESLightProfilesCommon.ush): the vertical angle from the light's x axis, and the
-		 * horizontal angle from its -y axis, turning towards -z. The file's 0° vertical is its nadir, the luminaire's optical
-		 * axis, which the luminaire carries along x towards its aim. Its 0° horizontal plane is the plane of the luminaire's
-		 * tilt, 0° on the side it tilts towards: tilting a track luminaire from hanging straight down towards the wall it
-		 * lights carries that side from level, towards the wall, to square to its light in the vertical plane through it,
-		 * which is the luminaire's +z (its seat's up, taken square to its light). So the light is turned about x until its
-		 * -y lies on the luminaire's +z: its z then lies on the luminaire's y, and the file's 90° plane on the luminaire's -y.
+		 * A photometric file's Type C frame in the luminaire's frame, its throw on the luminaire's aim. The engine reads a
+		 * light profile about its light's own axes (Engine/Shaders/Private/IESLightProfilesCommon.ush): the vertical angle
+		 * from the light's x axis, and the horizontal angle from its -y axis, turning towards -z (a right-handed turn about
+		 * x). The luminaire's x points at the schedule's aim, and a designer aims a luminaire's light, not its housing: so
+		 * the direction of the file's greatest intensity, its throw, is carried onto x. The file's nadir lies below the throw
+		 * in the vertical plane through it (the luminaire's x-z plane, z its seat's up taken square to its light), the throw's
+		 * vertical angle down from x; the throw's horizontal plane is the side of the nadir towards the throw, which is up,
+		 * towards +z. A track wallwasher tilted towards its wall so carries its asymmetric lens's brighter half onto the wall,
+		 * its peak on the aim; a file whose peak is on its nadir (a spot's) keeps its nadir on x.
 		 */
-		const FQuat TypeCInLuminaire = FRotationMatrix::MakeFromXZ(FVector::ForwardVector, FVector::RightVector).ToQuat();
+		FQuat TypeCInLuminaire(const FLightLuminaire& Type)
+		{
+			const double Tilt = FMath::DegreesToRadians(Type.PeakVertical.Get());
+			const FVector Nadir(FMath::Cos(Tilt), 0.0, -FMath::Sin(Tilt));
+			const FVector ThrowSide(FMath::Sin(Tilt), 0.0, FMath::Cos(Tilt));
+			const FQuat ThrowPlaneUp = FRotationMatrix::MakeFromXY(Nadir, -ThrowSide).ToQuat();
+			return ThrowPlaneUp * FQuat(FVector::ForwardVector, -FMath::DegreesToRadians(Type.PeakHorizontal.Get()));
+		}
 
 		/**
 		 * How far a luminaire's light is followed: until its illuminance falls to a third of the full Moon's (so about
@@ -129,7 +137,7 @@ namespace Musee::Light
 		 * table through the profile Studio imported from the file. The engine takes the profile's own intensity, the file's
 		 * greatest candela value, over a table normalised to it (bUseIESBrightness), in candelas, the unit the file measures
 		 * in, so every direction gives the file's absolute candelas and the whole the file's flux; IESBrightnessScale is the
-		 * dimming level (Apply). The light is placed in the file's Type C frame.
+		 * dimming level (Apply). The light is placed in the file's Type C frame, its throw on the aim.
 		 */
 		ULocalLightComponent* MakeProfileLamp(USceneComponent& Mount, const FLightLuminaire& Type, UTextureLightProfile& Profile)
 		{
@@ -140,7 +148,7 @@ namespace Musee::Light
 			Lamp->IESTexture = &Profile;
 			Lamp->bUseIESBrightness = true;
 			Lamp->AttenuationRadius = static_cast<float>(ToEngine(ReachOf(Type.PeakIntensity)));
-			Lamp->SetRelativeRotation(TypeCInLuminaire);
+			Lamp->SetRelativeRotation(TypeCInLuminaire(Type));
 			return Lamp;
 		}
 

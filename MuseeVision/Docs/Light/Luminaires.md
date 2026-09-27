@@ -150,16 +150,21 @@ to approve for `track-wallwasher.4000k`, and no stage uses it.
   cone and ignore the profile. Every direction then gives the file's absolute candelas, and the whole the file's 999 lm.
   `IESBrightnessScale` is the dimming level, 1 at full output: it scales the whole table, as the driver's current does.
   No invented number stands between the file and the light.
-- **The orientation.** The engine reads a profile about its light's axes: the vertical angle from the light's x axis,
-  the horizontal from its -y axis, turning towards -z. The file's 0° vertical is its nadir, the luminaire's optical
-  axis, which Light carries along the luminaire's x towards the schedule's `aim` (a point on the washed wall). Its 0°
-  horizontal plane is the plane the luminaire tilts in, 0° on the side it tilts towards: tilting a track head from
-  hanging straight down towards its wall carries that side from level, towards the wall, to square to the light in the
-  vertical plane through it, which is the luminaire's +z (its seat's up, taken square to its light). The emitter is
-  turned about x so its -y lies on that +z, and the lens's brighter half, two thirds of the flux, throws towards the
-  wall. `Musee.Studio.WallwasherWashesWall` places the Classical Hall's and Chenghuai's washers from their schedules'
-  geometry and reads the profile as the renderer does: the wall receives 51 lx and 16 lx on average up its height,
-  against 6 lx and 4 lx on the floor at its foot and nothing the other way.
+- **The orientation.** A designer aims a luminaire's light, not its housing, so a luminaire lit by its file puts the
+  file's **throw**, the direction of its greatest intensity, on the schedule's `aim` (a point on the washed wall). The
+  362G's throw is 21° from the nadir in its 0° plane. The engine reads a profile about its light's axes: the vertical
+  angle from the light's x axis, the horizontal from its -y axis, turning towards -z. The luminaire's x points at the
+  aim and its +z is its seat's up, taken square to its light. The file's nadir lies in that vertical plane, the throw's
+  vertical angle below x, and the throw's horizontal plane on the upper side, towards +z: the emitter's x is the nadir
+  and its -y that upper side, so the file's (21°, 0°) lies on the aim and the lens's brighter half, two thirds of the
+  flux, falls on the wall below it. (Carrying the nadir on the aim instead would lift the peak 21° over it: past the
+  top of the walls under Chenghuai's sealed eaves, and into a hot band under the Classical Hall's entablature.)
+  `Musee.Studio.WallwasherWashesWall` places the Classical Hall's washer.000 and Chenghuai's wash.linchi.s.01 and
+  wash.shujuan.01 from their schedules' geometry, with the top of each wall from the stage's drawing (3.70 at the
+  tribune's ledge; 3.279 where the sealed eave's rafters meet the back walls), and reads the profile as the renderer
+  does: each peak lies within 0.4° of its aim; 66 %, 62 % and 64 % of the flux falls on the wall below its top, 1 %,
+  4 % and 4 % past it; the wall receives 45, 35 and 37 lx on average up its height, against 12, 7 and 7 lx on the floor
+  at its foot, and nothing the other way.
 
 ## How a room gets its light
 
