@@ -1,0 +1,41 @@
+{
+  "schema": "musee.matter.shading.working/1",
+  "key": "brushed",
+  "name": "Brushed (satin, 180 to 240 grit)",
+  "record": "Workings/brushed.json",
+  "kind": "face",
+  "roughness": {
+    "value": 0.3,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Workings/brushed.json: unverified surface.anisotropy and surface.roughnessRa (M32 on bronze)",
+    "note": "Along the grain: a first value; the record asks for a measured slope distribution (tier a) or a specimen (tier b)."
+  },
+  "roughnessAcross": {
+    "value": 0.5,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Workings/brushed.json: unverified surface.anisotropy",
+    "note": "Across the grain, where the grooves spread the reflection."
+  },
+  "haziness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Workings/brushed.json (no measured haze)"
+  },
+  "textureDepth": {
+    "value": 0.001,
+    "unit": "mm",
+    "grade": "derived",
+    "source": "Workings/brushed.json: surface.roughnessNote.RaStudied (0.03 to 1.0 um)",
+    "derivation": "the largest Ra studied, 1 um, as the depth a film fills"
+  },
+  "relief": {
+    "value": 0.0,
+    "unit": "mm",
+    "grade": "derived",
+    "source": "Workings/brushed.json: the grooves are below the pixel",
+    "derivation": "their effect is carried by the anisotropic roughness"
+  }
+}

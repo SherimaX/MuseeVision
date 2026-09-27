@@ -1,0 +1,38 @@
+// White: the face of a lime or gypsum body, the museum's white family (lime plaster, cast plaster, limewash).
+//
+// A plaster or a limewash is a fine aggregate bound by the crystals that grow as it sets: calcite as lime carbonates,
+// gypsum as plaster of Paris rehydrates. Unlike a sedimentary stone it has no bedding; its structure is the same in
+// every direction, from its finest aggregate up to the widest reach of the tool that laid it (a trowel's pass, a brush's
+// stroke, a mould's face). Its face is still self-affine over those scales, so it is drawn with the stone's octaves, in
+// axes with no preferred direction. Every number comes from the substance's and the working's records.
+
+#pragma once
+
+#include "/Project/Matter/Frame.ush"
+#include "/Project/Matter/Stone.ush"
+
+// Structure as fine in one direction as in any other: an unbedded body.
+static const float MatterUnbedded = 1.0;
+
+/** A white body's structure, from its record: its finest aggregate, the reach of the tool that laid it, its
+ *  self-affinity and its spreads of tone and roughness, and the working's relief. */
+FMatterStone MatterWhiteStructure(float GrainMillimeters, float ReachMillimeters, float HurstExponent, float ToneSpread,
+	float RoughnessSpread, float ReliefMillimeters)
+{
+	FMatterStone Structure;
+	Structure.GrainMillimeters = GrainMillimeters;
+	Structure.BedMillimeters = ReachMillimeters;
+	Structure.BedAspect = MatterUnbedded;
+	Structure.HurstExponent = HurstExponent;
+	Structure.ToneSpread = ToneSpread;
+	Structure.RoughnessSpread = RoughnessSpread;
+	Structure.ReliefMillimeters = ReliefMillimeters;
+	return Structure;
+}
+
+/** The face of a white body at PieceMeters: its tone, its roughness and the gradient of its relief, varied over the
+ *  scales of its structure, which MatterWhiteStructure gives with no bedding. */
+FMatterStoneFace MatterWhiteFace(float3 PieceMeters, float Seed, FMatterStone Structure, float Roughness)
+{
+	return MatterStoneFace(PieceMeters, MatterNaturalBed(), Seed, Structure, Roughness);
+}

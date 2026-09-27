@@ -1,0 +1,82 @@
+{
+  "schema": "musee.matter.shading.history/1",
+  "key": "stone.weathered",
+  "name": "Weathered outdoors",
+  "mechanisms": [
+    "stone.dissolution-outdoors",
+    "stone.pore-soiling"
+  ],
+  "age": {
+    "value": 20.0,
+    "unit": "year",
+    "grade": "design",
+    "source": "Palette.json eras: \"classical: honed, patinated, oiled and waxed\" and \"worn soft\"",
+    "note": "The age the museum's classical rooms show: a generation of use."
+  },
+  "passagesPerYear": {
+    "value": 0.0,
+    "unit": "1/year",
+    "grade": "design",
+    "source": "the face is not walked or handled"
+  },
+  "skyExposure": {
+    "value": 1.0,
+    "unit": "1",
+    "grade": "design",
+    "source": "an outer face open to the sky",
+    "note": "Form's sky exposure will give each point its own."
+  },
+  "keptWet": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "design",
+    "source": "the face stands clear of water"
+  },
+  "deposition": {
+    "value": 0.0066,
+    "unit": "1/year",
+    "grade": "derived",
+    "source": "Histories/white.soiling.json: terms.soiling.coverageRateVertical (up to 1.8e-5 per day)",
+    "derivation": "the upper rate, per year, for an outdoor face"
+  },
+  "washRemoval": {
+    "value": 0.05,
+    "unit": "1/year",
+    "grade": "unverified",
+    "source": "Histories/stone.dissolution-outdoors.json (no rate of wash removal of deposit was read)",
+    "note": "A first value: rain clears an open face slowly."
+  },
+  "soilAlbedo": {
+    "value": [
+      0.08,
+      0.07,
+      0.06
+    ],
+    "space": "linear Rec.709 (sRGB primaries), D65 white",
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Histories/stone.pore-soiling.json and white.soiling.json (black carbon; no measured deposit colour)",
+    "note": "A first dark grey for an outdoor deposit dominated by black carbon."
+  },
+  "wornRoughness": {
+    "value": 0.6,
+    "unit": "1",
+    "grade": "derived",
+    "source": "Histories/stone.foot-traffic-wear.json: terms.glossLoss (worn floors fall under 5 GU)",
+    "derivation": "the worn face is as matte as the honed face (Workings/honed.json)"
+  },
+  "wornHaziness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "derived",
+    "source": "a worn matte face",
+    "derivation": "no second lobe"
+  },
+  "wearPassages": {
+    "value": 0.0,
+    "unit": "count",
+    "grade": "derived",
+    "source": "the face is not abraded",
+    "derivation": "0: it never wears"
+  }
+}

@@ -1,0 +1,83 @@
+{
+  "schema": "musee.matter.shading.history/1",
+  "key": "stone.worn",
+  "name": "Worn by feet",
+  "mechanisms": [
+    "stone.foot-traffic-wear",
+    "stone.pore-soiling"
+  ],
+  "age": {
+    "value": 20.0,
+    "unit": "year",
+    "grade": "design",
+    "source": "Palette.json eras: \"classical: honed, patinated, oiled and waxed\" and \"worn soft\"",
+    "note": "The age the museum's classical rooms show: a generation of use."
+  },
+  "passagesPerYear": {
+    "value": 200000.0,
+    "unit": "1/year",
+    "grade": "design",
+    "source": "a gallery floor on the museum's route",
+    "note": "Site's traffic field will give each point its own; a first value for a main route."
+  },
+  "skyExposure": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "design",
+    "source": "an interior face",
+    "derivation": "no precipitation reaches it"
+  },
+  "keptWet": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "design",
+    "source": "the face stands clear of water"
+  },
+  "deposition": {
+    "value": 0.00085,
+    "unit": "1/year",
+    "grade": "derived",
+    "source": "Histories/white.soiling.json: terms.soiling.coverageRateVertical (3e-7 to 1.8e-5 per day)",
+    "derivation": "the geometric mean of the range, 3.1e-6 per day, per year"
+  },
+  "washRemoval": {
+    "value": 0.0,
+    "unit": "1/year",
+    "grade": "derived",
+    "source": "an interior face",
+    "derivation": "no rain wash reaches it"
+  },
+  "soilAlbedo": {
+    "value": [
+      0.3,
+      0.28,
+      0.25
+    ],
+    "space": "linear Rec.709 (sRGB primaries), D65 white",
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Histories/white.soiling.json (no measured colour of settled indoor dust)",
+    "note": "A first grey-brown for indoor dust, a mix of mineral dust and fibres."
+  },
+  "wornRoughness": {
+    "value": 0.6,
+    "unit": "1",
+    "grade": "derived",
+    "source": "Histories/stone.foot-traffic-wear.json: terms.glossLoss (worn floors fall under 5 GU)",
+    "derivation": "the worn face is as matte as the honed face (Workings/honed.json)"
+  },
+  "wornHaziness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "derived",
+    "source": "a worn matte face",
+    "derivation": "no second lobe"
+  },
+  "wearPassages": {
+    "value": 2000000.0,
+    "unit": "count",
+    "grade": "unverified",
+    "source": "Histories/stone.foot-traffic-wear.json: bySubstance.travertine.abrasionGroove (21.3 mm, EN 14157)",
+    "note": "No passage count to the worn state was read; a first value for a soft calcite stone."
+  }
+}

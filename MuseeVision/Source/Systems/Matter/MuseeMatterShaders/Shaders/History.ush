@@ -10,8 +10,10 @@
 // itself, deposit settles on it, water wets it and stands in its hollows, and snow lies over all of it.
 //
 // Who supplies the inputs (see Docs/Architecture.md, Matter):
-//   - FMatterWeather: Time, through the museum Moment (MPC_Moment), for the observer whose weather the surface
-//     receives (D-005: a glazed opening may declare another observer's weather).
+//   - FMatterMoment: Time, through the museum Moment (/Game/Generated/Time/MPC_Moment), whose Wetness and SnowCover
+//     describe a level, fully exposed reference surface; MatterMomentHistory is the law in those terms, and every
+//     master applies it. FMatterWeather carries the same weather as depths of water, for the specimen probe, which
+//     sets them by hand.
 //   - FMatterPlace: Form's made facts (sky exposure, cavity, wash exposure, ponding) and Site's traffic field.
 //   - FMatterResponse and FMatterSnow: Matter's records in Data/Matter, for the substance as worked and for snow.
 // Every Matter master includes this law, and so do Light's diffuser and Nature's foliage and ground shaders, so wet
@@ -42,6 +44,24 @@ static const float MatterDepositRoughness = 1.0;
 // A still water surface is smooth far below the wavelength of light: it reflects as a mirror. The rings rain draws on
 // it belong to Nature, which owns water in the air.
 static const float MatterCalmWaterRoughness = 0.0;
+
+// Lying snow reflects 0.96 to 0.98 of the light across the ultraviolet and the visible: Grenfell, Warren & Mullen
+// 1994, "Reflection of solar radiation by the Antarctic snow surface at ultraviolet, visible, and near-infrared
+// wavelengths", Journal of Geophysical Research 99(D9):18669-18684. The middle of that range is taken.
+static const float MatterSnowAlbedo = 0.97;
+
+// Snow's surface is a jumble of ice grains with no facets aligned with the face, so, like a deposit, it scatters as the
+// roughest face the Slab can describe.
+static const float MatterSnowRoughness = 1.0;
+
+// A sealed face (a metal, a glass, a varnished film) has no open pores, and so no depth of pores either: water lies
+// on it only as a film.
+static const float MatterNoPores = 0.0;
+
+// A place Form has not described is an open face: no recess, no hollow, and a hollow gathers only its own rain.
+static const float MatterOpenCavity = 0.0;
+static const float MatterNoHollowMillimeters = 0.0;
+static const float MatterOwnRainOnly = 1.0;
 
 // Snow on slopes: slopes steeper than about 60 degrees shed snow as it falls, and slab avalanches seldom release on
 // slopes under about 25 degrees, where snow lies undisturbed. McClung & Schaerer 2006, The Avalanche Handbook, 3rd ed.
@@ -93,6 +113,13 @@ struct FMatterResponse
 	float3 SoilAlbedo;                // diffuse albedo of the deposit the place lays down (soot, dust)
 	float  DepositionPerYear;         // first-order rate at which deposit covers bare area, per year
 	float  WashRemovalPerYear;        // first-order rate at which a full rain wash clears deposit, per year
+};
+
+/** The museum Moment's weather over the point, as Time sets it in MPC_Moment for the surface's observer. */
+struct FMatterMoment
+{
+	float Wetness;     // a level, fully exposed reference surface's water, as a fraction of what it holds before water stands
+	float SnowCover;   // the fraction of that reference surface under lying snow
 };
 
 /** Lying snow's own optics (the snow record). */
@@ -250,17 +277,34 @@ float MatterStandingCover(float DepthMillimeters, FMatterResponse Response)
 	return saturate(DepthMillimeters / max(Response.TextureDepthMillimeters, MatterTiny)) * step(MatterTiny, DepthMillimeters);
 }
 
+/** Reflectance at normal incidence of a face under a water film whose own reflectance in air is F0. The film's top
+ *  surface reflects water's 0.020; the light that enters the film meets the face beneath with the index step from
+ *  water to the face (the face's index, from F0 by inverting Fresnel's normal-incidence formula, divided by water's),
+ *  and what it reflects crosses the film's surface again, with the multiple reflections between the two interfaces
+ *  summed as intensities: F = Rw + (1 - Rw)^2 Rb / (1 - Rw Rb) (the two-interface sum of Rubin 1985, as in Glass.ush).
+ *  A dielectric face nearly vanishes under water (travertine's 0.053 falls to about 0.009 beneath the film), while a
+ *  metal's large index keeps nearly all its reflection, so a wet bronze stays bright. */
+float3 MatterFilmF0(float3 F0)
+{
+	const float Rw = MatterDielectricF0(MatterWaterRefractiveIndex);
+	const float3 Amplitude = sqrt(saturate(F0));
+	const float3 FaceIndex = (1.0 + Amplitude) / max(1.0 - Amplitude, MatterTiny);
+	const float3 Relative = FaceIndex / MatterWaterRefractiveIndex;
+	const float3 Step = (Relative - 1.0) / (Relative + 1.0);
+	const float3 Rb = Step * Step;
+	return Rw + (1.0 - Rw) * (1.0 - Rw) * Rb / (1.0 - Rw * Rb);
+}
+
 /** A face wetted by Wetting and, where it lies in a hollow, covered by standing water to the fraction StandCover.
- *  The body darkens where its pores or its face hold water. A film replaces the face's interface with water's: its
- *  reflectance at normal incidence becomes water's (0.020) and its roughness a calm water surface's, and it fills the
- *  scratches whose scatter is the haze. Standing water also buries the relief, so its surface is level. */
+ *  The body darkens where its pores or its face hold water. A film puts water's interface over the face (MatterFilmF0),
+ *  its roughness becomes a calm water surface's, and it fills the scratches whose scatter is the haze. Standing water
+ *  also buries the relief, so its surface is level. */
 FMatterSurface MatterWet(FMatterSurface Surface, FMatterWetting Wetting, float StandCover)
 {
 	const float Film = max(Wetting.FilmCover, StandCover);
 	const float Wetness = max(Wetting.PoreSaturation, Film);
-	const float WaterF0 = MatterDielectricF0(MatterWaterRefractiveIndex);
 	Surface.DiffuseAlbedo = lerp(Surface.DiffuseAlbedo, MatterWetAlbedo(Surface.DiffuseAlbedo), Wetness);
-	Surface.F0 = lerp(Surface.F0, WaterF0.xxx, Film);
+	Surface.F0 = lerp(Surface.F0, MatterFilmF0(Surface.F0), Film);
 	Surface.Roughness = lerp(Surface.Roughness, MatterCalmWaterRoughness, Film);
 	Surface.Haziness = lerp(Surface.Haziness, 0.0, Film);
 	Surface.Slope = lerp(Surface.Slope, float2(0.0, 0.0), StandCover);
@@ -269,16 +313,21 @@ FMatterSurface MatterWet(FMatterSurface Surface, FMatterWetting Wetting, float S
 
 // ---- Snow ----------------------------------------------------------------------------------------------------------
 
-/** Fraction of the face hidden by lying snow. Snow settles where the sky reaches and stays on faces flat enough to hold
- *  it (between the shed and hold slopes above it thins linearly in the slope's cosine). The cover hides the face beneath
- *  it exponentially with its water equivalent, as light is attenuated through a scattering layer (Warren 1982, "Optical
- *  properties of snow", Reviews of Geophysics 20(1):67); the e-folding water equivalent is the snow record's. */
-float MatterSnowCover(FMatterWeather Weather, FMatterPlace Place, FMatterSnow Snow)
+/** How well a face holds lying snow: snow settles where the sky reaches and stays on faces flat enough to hold it
+ *  (between the shed and hold slopes above it thins linearly in the slope's cosine). */
+float MatterSnowHolding(FMatterPlace Place)
 {
 	const float CosShed = cos(radians(MatterSnowShedSlopeDegrees));
 	const float CosHold = cos(radians(MatterSnowHoldSlopeDegrees));
-	const float Holding = saturate((Place.NormalWorld.z - CosShed) / (CosHold - CosShed));
-	const float Water = Weather.SnowWaterMillimeters * Place.SkyExposure * Holding;
+	return saturate((Place.NormalWorld.z - CosShed) / (CosHold - CosShed));
+}
+
+/** Fraction of the face hidden by lying snow of a known water equivalent. The cover hides the face beneath it
+ *  exponentially with its water equivalent, as light is attenuated through a scattering layer (Warren 1982, "Optical
+ *  properties of snow", Reviews of Geophysics 20(1):67); the e-folding water equivalent is the snow record's. */
+float MatterSnowCover(FMatterWeather Weather, FMatterPlace Place, FMatterSnow Snow)
+{
+	const float Water = Weather.SnowWaterMillimeters * Place.SkyExposure * MatterSnowHolding(Place);
 	return step(MatterTiny, Water) * (1.0 - exp(-Water / max(Snow.OpticalWaterMillimeters, MatterTiny)));
 }
 
@@ -315,16 +364,83 @@ float2 MatterPatinaCover(float WetYears, float SkyExposure, float CupriteWetYear
 
 // ---- The law ---------------------------------------------------------------------------------------------------------
 
+/** Wear and deposit, the marks the face's years leave: wear abrades the face itself, and deposit settles on what the
+ *  wear has left. */
+FMatterSurface MatterWearAndSoil(FMatterSurface Surface, FMatterPlace Place, FMatterResponse Response)
+{
+	Surface = MatterWear(Surface, MatterWornFraction(Place, Response), Response);
+	return MatterSoil(Surface, MatterSoilCover(Place, Response), Response);
+}
+
+/** The face holding WaterMillimeters of water: its pores fill first, then a film forms, and in a hollow the film's
+ *  runoff stands. */
+FMatterSurface MatterWaterOver(FMatterSurface Surface, float WaterMillimeters, FMatterPlace Place, FMatterResponse Response)
+{
+	const FMatterWetting Wetting = MatterWetting(WaterMillimeters, Response);
+	const float StandingMillimeters = MatterStandingWaterMillimeters(Wetting.FilmMillimeters, Place);
+	return MatterWet(Surface, Wetting, MatterStandingCover(StandingMillimeters, Response));
+}
+
 /** The surface as its history has left it: the worked surface Surface, marked in the order the physics layers it. */
 FMatterSurface MatterHistory(FMatterSurface Surface, FMatterWeather Weather, FMatterPlace Place, FMatterResponse Response, FMatterSnow Snow)
 {
-	Surface = MatterWear(Surface, MatterWornFraction(Place, Response), Response);
-	Surface = MatterSoil(Surface, MatterSoilCover(Place, Response), Response);
-
+	Surface = MatterWearAndSoil(Surface, Place, Response);
 	const float CaughtMillimeters = MatterRainCatch(Weather, Place) * Weather.RainHistoryMillimeters;
-	const FMatterWetting Wetting = MatterWetting(CaughtMillimeters, Response);
-	const float StandingMillimeters = MatterStandingWaterMillimeters(Wetting.FilmMillimeters, Place);
-	Surface = MatterWet(Surface, Wetting, MatterStandingCover(StandingMillimeters, Response));
-
+	Surface = MatterWaterOver(Surface, CaughtMillimeters, Place, Response);
 	return MatterSnowOver(Surface, MatterSnowCover(Weather, Place, Snow), Snow);
+}
+
+// ---- The law in the museum Moment's terms ---------------------------------------------------------------------------
+
+/** A place Form has not described: an open face, washed wherever the sky reaches it, in no recess and no hollow. Its
+ *  exposure, its traffic and its age are the history record's. */
+FMatterPlace MatterOpenPlace(float3 NormalWorld, float SkyExposure, float PassagesPerYear, float AgeYears)
+{
+	FMatterPlace Place;
+	Place.NormalWorld = NormalWorld;
+	Place.SkyExposure = SkyExposure;
+	Place.Cavity = MatterOpenCavity;
+	Place.WashExposure = SkyExposure;
+	Place.PondingDepthMillimeters = MatterNoHollowMillimeters;
+	Place.HollowDepthMillimeters = MatterNoHollowMillimeters;
+	Place.RunoffConcentration = MatterOwnRainOnly;
+	Place.PassagesPerYear = PassagesPerYear;
+	Place.AgeYears = AgeYears;
+	return Place;
+}
+
+/** Water the face holds in the Moment's weather. The Moment gives the reference surface's water as a fraction of what
+ *  it holds before water stands on it: its pores' capacity, then a film as deep as its texture (the two regimes of
+ *  MatterWetting). A face in the same weather holds the same fraction of its own capacity, in proportion to the rain
+ *  it catches relative to the reference surface (MatterRainCatch with the rain falling straight: the Moment carries no
+ *  wind direction). A face kept wet by standing water beside it, such as a pond's lip, holds at least the fraction
+ *  KeptWet whatever the weather. */
+float MatterMomentWaterMillimeters(FMatterMoment Moment, FMatterPlace Place, FMatterResponse Response, float KeptWet)
+{
+	FMatterWeather Straight;
+	Straight.RainHistoryMillimeters = 0.0;
+	Straight.RainVelocityMetersPerSecond = float3(0.0, 0.0, 0.0);
+	Straight.SnowWaterMillimeters = 0.0;
+	const float Catch = saturate(MatterRainCatch(Straight, Place));
+	const float Held = max(saturate(Moment.Wetness) * Catch, saturate(KeptWet));
+	const float Capacity = Response.Porosity * Response.WettingDepthMillimeters + Response.TextureDepthMillimeters;
+	return Held * Capacity;
+}
+
+/** Fraction of the face under lying snow: the reference surface's cover, where the sky reaches and the face holds it. */
+float MatterMomentSnowCover(FMatterMoment Moment, FMatterPlace Place)
+{
+	return saturate(Moment.SnowCover) * Place.SkyExposure * MatterSnowHolding(Place);
+}
+
+/** The surface as its history and the Moment's weather have left it. Every master applies this law. */
+FMatterSurface MatterMomentHistory(FMatterSurface Surface, FMatterMoment Moment, FMatterPlace Place, FMatterResponse Response, float KeptWet)
+{
+	Surface = MatterWearAndSoil(Surface, Place, Response);
+	Surface = MatterWaterOver(Surface, MatterMomentWaterMillimeters(Moment, Place, Response, KeptWet), Place, Response);
+	FMatterSnow Snow;
+	Snow.Albedo = MatterSnowAlbedo.xxx;
+	Snow.Roughness = MatterSnowRoughness;
+	Snow.OpticalWaterMillimeters = MatterTiny;
+	return MatterSnowOver(Surface, MatterMomentSnowCover(Moment, Place), Snow);
 }

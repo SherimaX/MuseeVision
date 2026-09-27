@@ -13,6 +13,9 @@ static const float MatterMetersPerEngineUnit = 0.01;
 // Millimetres in a metre: the library states small depths (water, texture, relief, grain) in millimetres.
 static const float MatterMillimetersPerMeter = 1000.0;
 
+// Millimetres in a centimetre: Substrate states mean free paths and extinctions in centimetres.
+static const float MatterMillimetersPerCentimeter = 10.0;
+
 // Guards divisions whose denominator is an input that may be zero when a record leaves a quantity unset. It lies far
 // below any quantity the library measures in its units (the smallest, a polished face's texture depth, is ~1e-3 mm).
 static const float MatterTiny = 1e-6;

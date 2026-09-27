@@ -1,0 +1,44 @@
+// Paint: a painting's paint layer on its canvas, carrying the work's own image.
+//
+// A painting is a layer of pigments in oil laid on a primed canvas, usually under a varnish. Its colour is the work's:
+// Art supplies the image, a photograph of the painting, and this file lays it across the canvas. What the image cannot
+// give is the paint's physics. A photograph records reflectance relative to its own white, so its white is mapped to the
+// reflectance of the white the painting's palette holds (the paint record's), and the varnish's index and roughness
+// give the layer's gloss.
+//
+// A canvas piece is cast in its own frame with x along the canvas's width and z up its height, as Art's wall anchors
+// are (x along the wall, z up), so the image spans the piece's bounds in x and z.
+
+#pragma once
+
+#include "/Project/Matter/Frame.ush"
+#include "/Project/Matter/Optics.ush"
+#include "/Project/Matter/History.ush"
+
+/** Where a point of the canvas lies on the image: (0, 0) at the top left, (1, 1) at the bottom right. Position, the
+ *  bounds' minimum and their extent are in the piece's own axes, in any one unit. */
+float2 MatterCanvasCoordinates(float3 PiecePosition, float3 BoundsMin, float3 BoundsExtent)
+{
+	const float3 Across = (PiecePosition - BoundsMin) / max(BoundsExtent, MatterTiny);
+	return float2(saturate(Across.x), saturate(1.0 - Across.z));
+}
+
+/** The paint layer's diffuse albedo where the image, decoded to linear, has the colour ImageLinear: the photograph's
+ *  white stands for the reflectance of the painting's white. */
+float3 MatterPaintAlbedo(float3 ImageLinear, float3 WhiteAlbedo)
+{
+	return saturate(ImageLinear) * WhiteAlbedo;
+}
+
+/** The paint layer's surface before its history: the image's colour in the body, and the varnish's interface over it. */
+FMatterSurface MatterPaintSurface(float3 ImageLinear, float3 WhiteAlbedo, float VarnishRefractiveIndex, float Roughness)
+{
+	const float F0 = MatterDielectricF0(VarnishRefractiveIndex);
+	FMatterSurface Surface;
+	Surface.DiffuseAlbedo = MatterPaintAlbedo(ImageLinear, WhiteAlbedo);
+	Surface.F0 = F0.xxx;
+	Surface.Roughness = Roughness;
+	Surface.Haziness = 0.0;
+	Surface.Slope = float2(0.0, 0.0);
+	return Surface;
+}

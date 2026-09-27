@@ -1,0 +1,41 @@
+{
+  "schema": "musee.matter.shading.working/1",
+  "key": "trowelled",
+  "name": "Trowelled",
+  "record": "Workings/trowelled.json",
+  "kind": "face",
+  "roughness": {
+    "value": 0.6708,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Workings/trowelled.json: unverified surface.sheen (GGX alpha 0.3 to 0.6)",
+    "derivation": "Slab roughness = sqrt(alpha) at the middle of the range, alpha 0.45"
+  },
+  "roughnessAcross": {
+    "value": 0.6708,
+    "unit": "1",
+    "grade": "derived",
+    "source": "Workings/trowelled.json: a trowelled face has no grain",
+    "derivation": "equal to the roughness along"
+  },
+  "haziness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Workings/trowelled.json (no measured haze)"
+  },
+  "textureDepth": {
+    "value": 0.05,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Workings/trowelled.json: unverified surface.texture (trowel mark relief)",
+    "note": "A first value for a closed, trowelled finish."
+  },
+  "relief": {
+    "value": 0.1,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Workings/trowelled.json: unverified surface.texture (trowel mark relief)",
+    "note": "A first value until the marks are measured."
+  }
+}

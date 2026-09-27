@@ -1,0 +1,58 @@
+{
+  "schema": "musee.matter.shading.substance/1",
+  "key": "low-iron-glass",
+  "name": "Low-iron float glass (Pilkington Optiwhite)",
+  "family": "glass",
+  "record": "Substances/low-iron-glass.json",
+  "master": "glass",
+  "dielectric": {
+    "refractiveIndex": {
+      "value": 1.523,
+      "unit": "1",
+      "grade": "record",
+      "source": "Substances/low-iron-glass.json: optics.refractiveIndex[0] (Pilkington, 589.3 nm)"
+    },
+    "porosity": {
+      "value": 0.0,
+      "unit": "1",
+      "grade": "derived",
+      "source": "Substances/low-iron-glass.json: formation (a glass has no open pores)",
+      "derivation": "a melt-formed glass is non-porous"
+    },
+    "wettingDepth": {
+      "value": 0.0,
+      "unit": "mm",
+      "grade": "derived",
+      "source": "Substances/low-iron-glass.json: formation",
+      "derivation": "with no pores, water lies on glass only as a film"
+    }
+  },
+  "medium": {
+    "absorption": {
+      "value": [
+        0.003463,
+        0.001057,
+        0.001183
+      ],
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "unit": "1/mm",
+      "grade": "derived",
+      "source": "Substances/low-iron-glass.json: optics.edgeColour.lowIron (internal transmittance along 12 mm at 650, 550 and 450 nm: 0.9593, 0.9874, 0.9859)",
+      "derivation": "alpha = -ln(T) / 12 mm",
+      "conditions": "components at 650, 550 and 450 nm (red, green, blue)"
+    },
+    "scattering": {
+      "value": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "unit": "1/mm",
+      "grade": "derived",
+      "source": "Substances/low-iron-glass.json: optics (a clear glass; its luminous transmittance is its absorption and reflection alone)",
+      "derivation": "float glass does not scatter measurably",
+      "conditions": "components at 650, 550 and 450 nm (red, green, blue)"
+    }
+  }
+}

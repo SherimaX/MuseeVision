@@ -1,0 +1,87 @@
+{
+  "schema": "musee.matter.shading.substance/1",
+  "key": "travertine",
+  "name": "Travertine (Travertino Romano Classico)",
+  "family": "stone",
+  "record": "Substances/travertine.json",
+  "master": "stone",
+  "dielectric": {
+    "diffuseAlbedo": {
+      "value": [
+        69.78,
+        1.83,
+        7.31
+      ],
+      "space": "CIELAB (D65, 2 deg)",
+      "unit": "CIELAB",
+      "grade": "record",
+      "source": "Substances/travertine.json: optics.measuredColour[0].cieLab (Olivillo travertine, sawn vein-cut; Urosevic, Sebastian-Pardo & Cardell 2010)",
+      "note": "A Spanish travertine stands in for Tivoli's until a specimen is measured (the record's unverified optics.measuredColour)."
+    },
+    "refractiveIndex": {
+      "value": 1.6003,
+      "unit": "1",
+      "grade": "derived",
+      "source": "Substances/travertine.json: optics.specularF0 (0.0533, calcite grains in random orientations)",
+      "derivation": "n = (1 + sqrt(F0)) / (1 - sqrt(F0)), the index whose normal-incidence reflectance is the record's F0"
+    },
+    "porosity": {
+      "value": 0.0816,
+      "unit": "1",
+      "grade": "record",
+      "source": "Substances/travertine.json: physical.openPorosityMercury (8.16 %)",
+      "derivation": "8.16 % as a fraction"
+    },
+    "wettingDepth": {
+      "value": 2.5,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Substances/travertine.json: unverified surface.voidDepth (2.5 mm)",
+      "note": "The depth open voids reach, taken as the depth whose pores govern the face's look; the record calls it a procedural value, not a measurement."
+    }
+  },
+  "structure": {
+    "grain": {
+      "value": 0.7,
+      "unit": "mm",
+      "grade": "record",
+      "source": "Substances/travertine.json: surface.voids.poreSizes (max 0.7 mm)",
+      "note": "The largest pores of the matrix: the finest structure a face shows at gallery distances."
+    },
+    "bed": {
+      "value": 100,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Substances/travertine.json: unverified surface.bandSpacing (no measured band spacing)",
+      "note": "A first value for the band a vein-cut face shows, until a specimen of Travertino Romano is measured."
+    },
+    "bedAspect": {
+      "value": 2.0,
+      "unit": "1",
+      "grade": "derived",
+      "source": "Substances/travertine.json: surface.voids.elongatedPoreLength (2 mm) and elongatedPoreWidth (1 mm)",
+      "derivation": "length / width"
+    },
+    "hurst": {
+      "value": 0.7,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Candela et al. 2012, Journal of Geophysical Research 117, B08409 (fault surfaces, 0.6 to 0.8; cited in Stone.ush)",
+      "note": "The middle of the range measured on rock fracture surfaces; no measurement of a worked travertine face was read."
+    },
+    "toneSpread": {
+      "value": 0.1,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Substances/travertine.json: optics.measuredColour (rows L* 62 to 70 between specimens)",
+      "note": "A first half-range of ln(albedo) across a face; the measured rows are specimen means, not the spread within one face."
+    },
+    "roughnessSpread": {
+      "value": 0.2,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Workings/honed.json: unverified surface.microRoughness (no filtered roughness read)",
+      "note": "A first half-range of ln(roughness) across a honed face."
+    }
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "schema": "musee.matter.shading.working/1",
+  "key": "water.dyed-black",
+  "name": "Dyed black (a reflecting-pool dye)",
+  "record": "Workings/water.dyed-black.json",
+  "kind": "face",
+  "roughness": {
+    "value": 0.2341,
+    "unit": "1",
+    "grade": "derived",
+    "source": "Substances/water.json: surface.slopeVariance.beckmannRoughness (0.0548 at 0 m/s)",
+    "derivation": "the Beckmann roughness taken as GGX alpha, as they agree for smooth surfaces; Slab roughness = sqrt(alpha)"
+  },
+  "roughnessAcross": {
+    "value": 0.2341,
+    "unit": "1",
+    "grade": "derived",
+    "source": "Substances/water.json: a still surface has no grain",
+    "derivation": "equal to the roughness along"
+  },
+  "haziness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "derived",
+    "source": "Substances/water.json: a liquid surface",
+    "derivation": "no second lobe"
+  },
+  "textureDepth": {
+    "value": 0.0,
+    "unit": "mm",
+    "grade": "derived",
+    "source": "Substances/water.json: a liquid surface",
+    "derivation": "water holds no film of water"
+  },
+  "relief": {
+    "value": 0.0,
+    "unit": "mm",
+    "grade": "derived",
+    "source": "Substances/water.json: a still surface",
+    "derivation": "level"
+  },
+  "medium": {
+    "absorption": {
+      "value": [
+        0.0072,
+        0.0072,
+        0.0072
+      ],
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "unit": "1/mm",
+      "grade": "unverified",
+      "source": "Workings/water.dyed-black.json: unverified extinction (at least 7.2 per metre)",
+      "derivation": "7.2 per metre as per millimetre, the same in every primary for a black dye",
+      "conditions": "components at 650, 550 and 450 nm (red, green, blue)"
+    },
+    "scattering": {
+      "value": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "unit": "1/mm",
+      "grade": "derived",
+      "source": "Workings/water.dyed-black.json: a dissolved dye",
+      "derivation": "a dissolved dye absorbs and does not scatter",
+      "conditions": "components at 650, 550 and 450 nm (red, green, blue)"
+    }
+  }
+}

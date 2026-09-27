@@ -13,6 +13,7 @@
       "key": "stone.travertine-romano",
       "family": "stone",
       "accentOf": null,
+      "substance": "travertine",
       "realMaterial": "Travertino Romano Classico, Tivoli-Guidonia basin east of Rome (Bagni di Tivoli quarries), sawn vein-cut (across the bed); open-pore on walls, filled (tinted cement or resin) on anything walked",
       "workingsByEra": {
         "classical": "honed (satin, no image); open voids on walls, filled on floors and treads",
@@ -43,7 +44,29 @@
           "Histories/stone.foot-traffic-wear.json, stone.pore-soiling.json, stone.dissolution-outdoors.json"
         ],
         "needed": "Colour of Tivoli travertine itself (only Spanish travertines measured); a tier (b) ColorChecker specimen of Travertino Romano Classico honed open, honed filled and polished; a 'crushed' working and a 'waterline' history for the Grounds."
-      }
+      },
+      "finishes": [
+        {
+          "working": "honed",
+          "history": "clean",
+          "note": "Nymphéas oval: skirting, bench plinths, the carved lily frieze"
+        },
+        {
+          "working": "honed",
+          "history": "worn",
+          "note": "Nymphéas oval: floor (filled, honed: classical floors are honed), viewing stones"
+        },
+        {
+          "working": "honed",
+          "history": "touched",
+          "note": "Nymphéas oval: the pond's sitting-height coping"
+        },
+        {
+          "working": "honed",
+          "history": "weathered",
+          "note": "Nymphéas oval: outer masonry, the passage block's top"
+        }
+      ]
     },
     {
       "key": "stone.crema-marfil",
@@ -611,6 +634,7 @@
       "key": "white.lime-plaster",
       "family": "white",
       "accentOf": null,
+      "substance": "lime-plaster",
       "realMaterial": "Lime plaster: matured lime putty; setting coat of lime and marble dust over two haired coarse-stuff coats; profiles run in lime gauged with plaster of Paris",
       "workingsByEra": {
         "classical": "trowelled (faint sheen); run; burnished (marmorino) in the oval; pigmented with red ochre and burnished in the Classical Hall's niches",
@@ -634,7 +658,14 @@
           "Histories/white.soiling.json, white.micro-cracking.json, white.patching.json"
         ],
         "needed": "Luminous reflectance of set lime plaster (unverified 0.80-0.92); a burnished working; a pigmented (red ochre) variant."
-      }
+      },
+      "finishes": [
+        {
+          "working": "trowelled",
+          "history": "clean",
+          "note": "Nymphéas oval: walls and cove (the burnished marmorino the story names awaits its working record)"
+        }
+      ]
     },
     {
       "key": "white.fibrous-plaster",
@@ -749,6 +780,7 @@
       "key": "bronze.cusn10",
       "family": "bronze",
       "accentOf": null,
+      "substance": "bronze",
       "realMaterial": "Tin bronze CuSn10 (EN 1982 CuSn10-C, CC480K; UNS C90700): about 90 Cu, 10 Sn, lead-free; lost-wax and sand castings, and continuously cast bar",
       "workingsByEra": {
         "classical": "patinated (hot sulfide statuary brown to near black, waxed, relieved where handled or walked)",
@@ -781,7 +813,34 @@
           "Histories/bronze.tarnish.json, bronze.wear.json, bronze.weathering.json"
         ],
         "needed": "A mirror-polished-and-lacquered working; a 'dark' patina regime for the Cube; complex index (edge tint) remains a proxy."
-      }
+      },
+      "finishes": [
+        {
+          "working": "gilt",
+          "history": "worn",
+          "note": "Nymphéas oval: the golden iris; the viewing stones' rings"
+        },
+        {
+          "working": "gilt",
+          "history": "wet",
+          "note": "Nymphéas oval: the pond's inner lip"
+        },
+        {
+          "working": "patinated",
+          "history": "wet",
+          "note": "Nymphéas oval: the basin vessel"
+        },
+        {
+          "working": "brushed",
+          "history": "tarnished",
+          "note": "Nymphéas oval: the tray under the pond and its four posts"
+        },
+        {
+          "working": "brushed",
+          "history": "handled",
+          "note": "Nymphéas oval: the guard rails round the opening"
+        }
+      ]
     },
     {
       "key": "gilt.gold-leaf",
@@ -1046,6 +1105,39 @@
       }
     },
     {
+      "key": "accent.oil-on-linen",
+      "family": "accent",
+      "accentOf": "oak",
+      "substance": "oil-paint",
+      "realMaterial": "Oil paint on a primed linen canvas, under a natural-resin picture varnish: the paint layer of the works themselves, whose image each work supplies",
+      "workingsByEra": {
+        "classical": "stretched and varnished (the Salon's and the oval's canvases)",
+        "modern": "stretched and varnished",
+        "future": "stretched and varnished"
+      },
+      "roles": [
+        "Nymphéas oval: the four willow panels of the Orangerie's second room (twelve canvases)",
+        "Salon: the thirty-nine framed canvases"
+      ],
+      "why": "The works are not chosen by the story but hung in it: a painting brings its own paint. It is linen, the textiles' fibre, so it ties back to oak with them; the master lays the work's own image on its canvas and gives the paint layer its varnish.",
+      "oldChoice": "the old build's per-work image materials",
+      "verdict": "new",
+      "verdictReason": "The paint layer needs a palette entry so every canvas resolves through the same connector; each work supplies its image.",
+      "research": {
+        "records": [
+          "r-matter: Substances/linen.json (the canvas)"
+        ],
+        "needed": "A paint and varnish record: the reflectance of lead white in oil, a picture varnish's index and gloss, the canvas weave's relief."
+      },
+      "finishes": [
+        {
+          "working": "stretched",
+          "history": "clean",
+          "note": "Nymphéas oval and Salon: every canvas; each work gives the instance its own image"
+        }
+      ]
+    },
+    {
       "key": "accent.wool-felt",
       "family": "accent",
       "accentOf": "oak",
@@ -1072,6 +1164,7 @@
       "key": "glass.low-iron",
       "family": "glass",
       "accentOf": null,
+      "substance": "low-iron-glass",
       "realMaterial": "Low-iron float glass, Pilkington Optiwhite: toughened, heat-strengthened, laminated with a UV-filtering interlayer; anti-reflective in cases; acid-etched (misty); laminated with mulberry paper (桑皮纸) in Chenghuai; a lenslet array in the Cube",
       "workingsByEra": {
         "classical": "laminated, UV-filtering (the Rotunda's eye, the Salon's lanterns); acid-etched laylights",
@@ -1099,7 +1192,14 @@
           "Histories/glass.soiling, glass.cleaning-wear, glass.water-stain, glass.edge-delamination"
         ],
         "needed": "Workings: acid-etched, paper-laminated, lenslet-array."
-      }
+      },
+      "finishes": [
+        {
+          "working": "laminated.uv-filtering",
+          "history": "soiled",
+          "note": "Nymphéas oval: the glass roof over the velarium"
+        }
+      ]
     },
     {
       "key": "glass.clear-float",
@@ -1153,6 +1253,7 @@
       "key": "water.still",
       "family": "water",
       "accentOf": null,
+      "substance": "water",
       "realMaterial": "Still water over a dark bed; the Salon's pond dyed black with a reflecting-pool dye",
       "workingsByEra": {
         "classical": "still, black (Salon pond); still, clear over bluestone (Chenghuai pond, Grounds canal and basin)",
@@ -1171,7 +1272,14 @@
       "research": {
         "records": [],
         "needed": "Record for water optics and pond dye absorption."
-      }
+      },
+      "finishes": [
+        {
+          "working": "water.dyed-black",
+          "history": "clean",
+          "note": "Nymphéas oval: the lily pond, dyed black"
+        }
+      ]
     }
   ]
 }

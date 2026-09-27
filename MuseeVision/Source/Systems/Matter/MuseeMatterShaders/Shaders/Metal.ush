@@ -37,17 +37,23 @@ float3 MatterConductorF0(float3 N, float3 K)
 	return MatterConductorFresnel(1.0, N, K);
 }
 
-/** The Slab's F90 for a metal: the colour Schlick's curve must bend toward to meet the metal's exact reflectance at the
- *  incidence cosine 1/7. Schlick's F = F0 + (F90 - F0) (1 - cos)^5 is solved for F90 there. The Slab keeps only the hue
- *  of F90 and fixes its brightness at 1 (SubstrateExport.ush divides it by its largest channel), so the fit is returned
- *  in that form: the metal's edge keeps its colour toward grazing instead of washing to white. */
-float3 MatterConductorEdgeTint(float3 N, float3 K)
+/** The Slab's F90 for a metal whose reflectance is F0 at normal incidence and F82 at the incidence cosine 1/7: the
+ *  colour Schlick's curve must bend toward to meet F82 there. Schlick's F = F0 + (F90 - F0) (1 - cos)^5 is solved for
+ *  F90. The Slab keeps only the hue of F90 and fixes its brightness at 1 (SubstrateExport.ush divides it by its largest
+ *  channel), so the fit is returned in that form: the metal's edge keeps its colour toward grazing instead of washing
+ *  to white. A record that gives F0 and F82 (integrated from the complex index against the CIE observer) is read here
+ *  directly. */
+float3 MatterEdgeTintFromF82(float3 F0, float3 F82)
 {
-	const float3 F0 = MatterConductorF0(N, K);
-	const float3 F82 = MatterConductorFresnel(MatterEdgeTintCosine, N, K);
 	const float SchlickWeight = pow(1.0 - MatterEdgeTintCosine, 5.0);
 	const float3 F90 = max(F0 + (F82 - F0) / SchlickWeight, 0.0);
 	return F90 / max(max(F90.r, max(F90.g, F90.b)), MatterTiny);
+}
+
+/** The Slab's F90 for a metal from its complex index n + ik at the three primaries: its edge tint at 82 degrees. */
+float3 MatterConductorEdgeTint(float3 N, float3 K)
+{
+	return MatterEdgeTintFromF82(MatterConductorF0(N, K), MatterConductorFresnel(MatterEdgeTintCosine, N, K));
 }
 
 /** The Slab's tangent on a brushed face: the brush's stroke direction laid into the face, so the tangent runs along the
@@ -83,6 +89,49 @@ FMatterSurface MatterMineralCrust(float3 Albedo, float RefractiveIndex, float Ro
 	Crust.Haziness = 0.0;
 	Crust.Slope = Slope;
 	return Crust;
+}
+
+// A dielectric film's edge is white: Fresnel's reflectance of a real index rises to 1 at grazing in every colour.
+static const float3 MatterDielectricEdge = float3(1.0, 1.0, 1.0);
+
+/** A metal face before its history: its coloured reflection, no diffuse body, the working's roughness. */
+FMatterSurface MatterBareMetal(float3 F0, float Roughness)
+{
+	FMatterSurface Metal;
+	Metal.DiffuseAlbedo = float3(0.0, 0.0, 0.0);
+	Metal.F0 = F0;
+	Metal.Roughness = Roughness;
+	Metal.Haziness = 0.0;
+	Metal.Slope = float2(0.0, 0.0);
+	return Metal;
+}
+
+/** A metal under a mineral film (a working's patina, or the tarnish its history has grown) covering the fraction Cover:
+ *  the film's own diffuse colour and dielectric reflection replace the metal's where it lies. */
+FMatterSurface MatterFilmed(FMatterSurface Metal, float3 FilmAlbedo, float FilmRefractiveIndex, float FilmRoughness, float Cover)
+{
+	const FMatterSurface Film = MatterMineralCrust(FilmAlbedo, FilmRefractiveIndex, FilmRoughness, Metal.Slope);
+	return MatterLerpSurface(Metal, Film, saturate(Cover));
+}
+
+/** The Slab's F90 where a film covers the fraction Cover of a metal whose own edge tint is EdgeTint. */
+float3 MatterFilmedEdgeTint(float3 EdgeTint, float Cover)
+{
+	return lerp(EdgeTint, MatterDielectricEdge, saturate(Cover));
+}
+
+/** The fraction of a metal a film still covers where passages have worn the fraction Worn of the face: abrasion
+ *  keeps worn and handled places bright (as in MatterPatinaCover). */
+float MatterWornFilmCover(float Cover, float Worn)
+{
+	return saturate(Cover) * saturate(1.0 - Worn);
+}
+
+/** The fraction of a face still under its leaf: gilding wears through where passages have worn the face, exposing what
+ *  it was laid on (gilt.wear). */
+float MatterLeafCover(float Worn)
+{
+	return saturate(1.0 - Worn);
 }
 
 /** Bare metal under its natural patina, with Cover from MatterPatinaCover: the cuprite covers the fraction Cover.x of

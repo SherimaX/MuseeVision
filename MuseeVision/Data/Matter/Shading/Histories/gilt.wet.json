@@ -1,0 +1,89 @@
+{
+  "schema": "musee.matter.shading.history/1",
+  "key": "gilt.wet",
+  "name": "Wet at the water",
+  "mechanisms": [
+    "gilt.wear"
+  ],
+  "age": {
+    "value": 20.0,
+    "unit": "year",
+    "grade": "design",
+    "source": "Palette.json eras: \"classical: honed, patinated, oiled and waxed\" and \"worn soft\"",
+    "note": "The age the museum's classical rooms show: a generation of use."
+  },
+  "passagesPerYear": {
+    "value": 1000.0,
+    "unit": "1/year",
+    "grade": "design",
+    "source": "a pond lip touched now and then"
+  },
+  "skyExposure": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "design",
+    "source": "an interior face",
+    "derivation": "no precipitation reaches it"
+  },
+  "keptWet": {
+    "value": 1.0,
+    "unit": "1",
+    "grade": "design",
+    "source": "Docs/Stages/salon.md §3.8: the lip and basin at the brimming water",
+    "derivation": "held wet by the pond beside it"
+  },
+  "deposition": {
+    "value": 0.00085,
+    "unit": "1/year",
+    "grade": "derived",
+    "source": "Histories/white.soiling.json: terms.soiling.coverageRateVertical (3e-7 to 1.8e-5 per day)",
+    "derivation": "the geometric mean of the range, 3.1e-6 per day, per year"
+  },
+  "washRemoval": {
+    "value": 0.0,
+    "unit": "1/year",
+    "grade": "derived",
+    "source": "an interior face",
+    "derivation": "no rain wash reaches it"
+  },
+  "soilAlbedo": {
+    "value": [
+      0.3,
+      0.28,
+      0.25
+    ],
+    "space": "linear Rec.709 (sRGB primaries), D65 white",
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Histories/white.soiling.json (no measured colour of settled indoor dust)",
+    "note": "A first grey-brown for indoor dust, a mix of mineral dust and fibres."
+  },
+  "wornRoughness": {
+    "value": 0.25,
+    "unit": "1",
+    "grade": "derived",
+    "source": "Workings/gilt.json",
+    "derivation": "the leaf's roughness: wear removes the leaf rather than polishing it"
+  },
+  "wornHaziness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "derived",
+    "source": "leaf",
+    "derivation": "no second lobe"
+  },
+  "wearPassages": {
+    "value": 200000.0,
+    "unit": "count",
+    "grade": "unverified",
+    "source": "Histories/gilt.wear.json: unverified wear rate (a leaf 0.1 um thick)",
+    "note": "A first value: leaf wears through quickly where it is touched."
+  },
+  "tarnishCover": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "derived",
+    "source": "no tarnish film",
+    "derivation": "none grows"
+  }
+}

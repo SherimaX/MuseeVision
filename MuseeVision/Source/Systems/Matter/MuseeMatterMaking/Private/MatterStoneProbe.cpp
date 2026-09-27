@@ -219,7 +219,7 @@ FMasterRecipe StoneProbeRecipe()
 	FMasterRecipe Recipe;
 	Recipe.PackagePath = TEXT("/Game/Generated/Matter");
 	Recipe.AssetName = TEXT("M_Matter_Stone_Probe");
-	Recipe.bUsedWithNanite = true;
+	Recipe.Settings.bUsedWithNanite = true;
 	AddSubstanceAndWorking(Recipe);
 	AddHistory(Recipe);
 	Recipe.Calls = { StoneFaceCall(), HistoryCall() };

@@ -116,6 +116,13 @@ float4 MatterGradientNoise(float3 P, uint3 Key)
 	return float4(Value, Gradient) / MatterGradientNoiseBound;
 }
 
+/** The bed normal of a stone laid on its natural bed, the mason's rule for ashlar: its bedding is the piece's own
+ *  horizontal plane. The piece table's bed frame (Form) gives a piece its own, where it is cut otherwise. */
+float3 MatterNaturalBed()
+{
+	return float3(0.0, 0.0, 1.0);
+}
+
 /** The bedding's axes as the rows of a matrix: two along the beds, then the bed normal stretched by BedAspect, so that
  *  structure measured in these axes is BedAspect times finer across the beds. A missing normal is taken as z, a stone
  *  laid on its natural bed. */
