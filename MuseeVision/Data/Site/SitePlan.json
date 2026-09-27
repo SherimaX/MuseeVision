@@ -15,6 +15,12 @@
       "b": "salon.west",
       "passageMeters": 0.0,
       "note": "The oval passage: the Salon's bay 5 far wall meets the oval's passage block."
+    },
+    {
+      "a": "sphere.down",
+      "b": "atrium.up",
+      "passageMeters": 0.0,
+      "note": "The Elan axis (D-012): the Sphere's neck stands on the Atrium's collar top, the vertical port iris.4600 at museum (54.000, 0.000, 7.715); the Atrium's collar iris closes it (sphere.md section 2)."
     }
   ]
 }
