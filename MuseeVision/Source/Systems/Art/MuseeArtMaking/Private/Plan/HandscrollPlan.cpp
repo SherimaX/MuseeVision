@@ -12,9 +12,9 @@ namespace Musee::ArtMaking
 {
 	namespace
 	{
-		/** The window of a photograph that is the whole work. */
-		constexpr double WholeFrom = 0.0;
-		constexpr double WholeTo = 1.0;
+		/** A window's sides lie within the photograph: shares of its width and height, from 0 to 1. */
+		constexpr double EdgeShare = 0.0;
+		constexpr double WholeShare = 1.0;
 
 		/** A share written as a percentage. */
 		constexpr double PercentPerShare = 100.0;
@@ -98,10 +98,16 @@ namespace Musee::ArtMaking
 			return Out;
 		}
 
-		/** A photograph's size and the share of it that is the work; a fault when either is wrong. */
+		/** Whether a window's two sides lie in order within the photograph. */
+		bool Within(double Near, double Far)
+		{
+			return Near >= EdgeShare && Far <= WholeShare && Far > Near;
+		}
+
+		/** A photograph's size and the window of it that is the work; a fault when either is wrong. */
 		FScrollImage ImageOf(const FNumbered& Photograph, const FArtHandscroll* Record, TArray<FString>& OutFaults)
 		{
-			FScrollImage Image{ FIntPoint::ZeroValue, WholeFrom, WholeTo };
+			FScrollImage Image;
 			if (!ReadPixels(Photograph.Path, Image.Pixels))
 			{
 				OutFaults.Add(FString::Printf(TEXT("its photograph %s can't be read as an image"), *Photograph.Path));
@@ -111,11 +117,13 @@ namespace Musee::ArtMaking
 			{
 				Image.From = Window->From;
 				Image.To = Window->To;
+				Image.Top = Window->Top;
+				Image.Bottom = Window->Bottom;
 			}
-			if (Image.From < WholeFrom || Image.To > WholeTo || Image.To <= Image.From)
+			if (!Within(Image.From, Image.To) || !Within(Image.Top, Image.Bottom))
 			{
-				OutFaults.Add(FString::Printf(TEXT("Data/%s: photograph %d's window must run from 0 or more to 1 or less"), FArtHandscroll::Record,
-					Photograph.Number));
+				OutFaults.Add(FString::Printf(TEXT("Data/%s: photograph %d's window must run from 0 or more to 1 or less, from and to, top and bottom"),
+					FArtHandscroll::Record, Photograph.Number));
 			}
 			return Image;
 		}
@@ -123,7 +131,7 @@ namespace Musee::ArtMaking
 		/** The note of photographs whose proportion strays from the sheet's: by how much, and what laying them cuts. */
 		FString StrayNote(const FArtHangEntry& Entry, const FScrollLayout& Layout, double Tolerance)
 		{
-			return FString::Printf(TEXT("its photographs, joined at their own proportion, are %.1f %% %s than its %.3f x %.3f m (the tolerance is %.1f %%): "
+			return FString::Printf(TEXT("its photographs' windows on the work, joined at their own proportion, are %.1f %% %s than its %.3f x %.3f m (the tolerance is %.1f %%): "
 				"they are laid to cover it, %.1f mm cut from %s, never stretched"), FMath::Abs(Layout.Stray) * PercentPerShare,
 				Layout.Stray > 0.0 ? TEXT("longer") : TEXT("shorter"), Entry.SizeMeters().X, Entry.SizeMeters().Y, Tolerance * PercentPerShare,
 				Layout.CutMeters * MillimetersPerMeter, Layout.Stray > 0.0 ? TEXT("each end") : TEXT("its head and its foot"));
@@ -183,7 +191,6 @@ namespace Musee::ArtMaking
 			Section.Panel = Panel;
 			Section.Number = Photograph.Number;
 		}
-		OutCanvas.ImageTopMeters = Layout.ImageTopMeters;
 		const double Tolerance = Context.Handscroll->ProportionTolerance;
 		if (FMath::Abs(Layout.Stray) > Tolerance)
 		{

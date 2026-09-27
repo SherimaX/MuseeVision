@@ -95,7 +95,7 @@ namespace Musee::ArtMaking
 				const FMuseeFrame Corner(Wall.At(Entry.Along + Section.Panel.AlongMeters, Lay.Back, Entry.Height), Wall.Wall.Rotation);
 				const FVector2D Size(Section.Panel.LengthMeters, Entry.SizeMeters().Y);
 				OutPieces.Add(SheetPiece(FName(Name), Surface, { Section.Layer, Canvas.Finish.Working, Canvas.Finish.History }, Corner, Size, SilkMeters,
-					SilkMeters, false, Section.Panel.ImageLeftMeters, Canvas.ImageTopMeters));
+					SilkMeters, false, Section.Panel.ImageLeftMeters, Section.Panel.ImageTopMeters));
 			}
 		}
 	}

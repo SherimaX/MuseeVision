@@ -53,21 +53,31 @@ struct FArtHandscrollFittings
 	FArtFinishSpec Roller;
 };
 
-/** The share of one photograph's width that shows the work (the rest is its mount, caught in the photograph). */
+/**
+ * The window of one photograph that shows the work, the rest being what the photograph caught beside it (the mount's
+ * silk, a separator, a frontispiece, a neighbouring sheet): shares of its width from its left edge, and of its height from
+ * its top edge. A side left out is the photograph's own edge.
+ */
 USTRUCT()
 struct FArtHandscrollWindow
 {
 	GENERATED_BODY()
 
-	/** The photograph's number, `<work>-<image>`. */
+	/** The photograph's number, `<work>-<image>` (1 for a work shown from its one photograph). */
 	UPROPERTY(meta = (MuseeRequired))
 	int32 Image = 0;
 
-	UPROPERTY(meta = (MuseeRequired))
+	UPROPERTY()
 	double From = 0.0;
 
-	UPROPERTY(meta = (MuseeRequired))
+	UPROPERTY()
 	double To = 1.0;
+
+	UPROPERTY()
+	double Top = 0.0;
+
+	UPROPERTY()
+	double Bottom = 1.0;
 };
 
 /**

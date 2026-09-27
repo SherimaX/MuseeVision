@@ -136,8 +136,7 @@ namespace Musee::ArtMaking
 	 * One object of a work the stage makes: its entry in the plan; where its left edge falls in the work's one image, or
 	 * its own image; the palette key of the layer it shows, and how that layer is finished; how its faces without the
 	 * image are finished (a dish's underside), the glass it lies under (its thickness, from the glazing's working), and,
-	 * for turned ware, its form; for a handscroll, its photographs laid across its sheet, left to right, and how far their
-	 * top edge stands above the sheet's.
+	 * for turned ware, its form; for a handscroll, its photographs laid across its sheet, left to right.
 	 */
 	struct FCanvasPlan
 	{
@@ -153,7 +152,6 @@ namespace Musee::ArtMaking
 		double BackingMeters = 0.0;
 		FWareSpec Ware;
 		TArray<FScrollSection> Sections;
-		double ImageTopMeters = 0.0;
 	};
 
 	/**

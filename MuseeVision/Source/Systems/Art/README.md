@@ -82,7 +82,9 @@ Every object is named `<word>.<id>[.<index>]` (`canvas`, `glass`, `paper`, `plat
   - its painting or writing at its `along` and `height`, at its size, from its photographs: its one photograph, or its
     numbered ones (`<id>-1`, `-2`..., `Musee::Art::FindSectionImages`) joined in the reading order
     `Data/Art/Handscrolls.json` gives, right to left, with the evidence it was read from (where each opens and closes,
-    the seams, a whole view's correlation); a `window` keeps the mount a photograph caught off the sheet;
+    the seams, a whole view's correlation); a photograph's `window` (`from`, `to` along its width, `top`, `bottom` down
+    its height) keeps off the sheet, and out of the proportion, what it caught beside the work: the mount's silk at the
+    head and foot, a separator, a frontispiece, a neighbouring sheet;
   - each photograph a panel of the sheet (`<name>.section.<n>`) in its own layer `paint.<id>.<n>` over the ink on its
     silk or paper, at its own proportion, never stretched: joined, they are laid to cover the sheet, what overruns it cut
     evenly from two opposite edges; a proportion that strays from the catalogue's by more than
