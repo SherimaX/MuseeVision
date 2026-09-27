@@ -1,0 +1,390 @@
+{
+  "stage": "albion",
+  "finishes": [
+    {
+      "surface": "albion.wall.buff",
+      "material": "accent.bath-stone",
+      "working": "honed",
+      "history": "aged.patina",
+      "note": "Inner ashlar, the buff courses of every banded face inside (court walls, the porch's walls and its end lining): Bath stone from the Monks Park mine, honed; blocks 0.75 long, half bond, 4 mm lime joints; interior soot in the joints and on the upper courses."
+    },
+    {
+      "surface": "albion.wall.red",
+      "material": "accent.mansfield-red",
+      "working": "honed",
+      "history": "aged.patina",
+      "note": "Inner red bands (one 0.30 course every 1.20 from 0.90): Mansfield red sandstone, honed; blocks 0.95 long; interior soot."
+    },
+    {
+      "surface": "albion.dressing",
+      "material": "accent.bath-stone",
+      "working": "rubbed",
+      "history": "aged.patina",
+      "note": "Inner dressings: pilasters, corbels, the aisle cornice and corner corbels, chamfers, reveals and sills of the lancets and the court door, the nave cills, the returns and aisle wall tops, the hood mould and label stops, the tablets' edges, column bases, half-column shafts."
+    },
+    {
+      "surface": "albion.tablet",
+      "material": "accent.bath-stone",
+      "working": "rubbed",
+      "history": "aged.patina",
+      "note": "The faces of Ruskin's tablet and the ALBION tablet (lettering V-cut: polish)."
+    },
+    {
+      "surface": "albion.capital",
+      "material": "accent.bath-stone",
+      "working": "carved",
+      "history": "aged.patina",
+      "note": "The fourteen capital blocks (necking, bell, abacus; boasted tonight, carved in polish), one block 0.90 x 0.90 x 0.70 each."
+    },
+    {
+      "surface": "albion.skirting",
+      "material": "accent.welsh-slate",
+      "working": "honed.bevelled",
+      "history": "foot-worn",
+      "note": "Skirting 0.20 high, 0.015 proud, 4 mm bevel on the top arris, in 1.2 m lengths: Penrhyn slate, honed."
+    },
+    {
+      "surface": "albion.shaft.a",
+      "material": "accent.british-column-stones",
+      "working": "polished.hand-touched",
+      "history": "handled",
+      "note": "Shaft A: Lizard serpentine, Cornwall (column A); one monolith Ø 0.50 x 5.165 (drums at the stone's bed height if its stock is shorter). The key's selection for this stone."
+    },
+    {
+      "surface": "albion.shaft.b",
+      "material": "accent.british-column-stones",
+      "working": "polished.hand-touched",
+      "history": "handled",
+      "note": "Shaft B: Peterhead granite, Aberdeenshire (column B); one monolith Ø 0.50 x 5.165 (drums at the stone's bed height if its stock is shorter). The key's selection for this stone."
+    },
+    {
+      "surface": "albion.shaft.c",
+      "material": "accent.british-column-stones",
+      "working": "polished.hand-touched",
+      "history": "handled",
+      "note": "Shaft C: Rubislaw granite, Aberdeen (column C); one monolith Ø 0.50 x 5.165 (drums at the stone's bed height if its stock is shorter). The key's selection for this stone."
+    },
+    {
+      "surface": "albion.shaft.d",
+      "material": "accent.british-column-stones",
+      "working": "polished.hand-touched",
+      "history": "handled",
+      "note": "Shaft D: Purbeck marble, Dorset (column D); one monolith Ø 0.50 x 5.165 (drums at the stone's bed height if its stock is shorter). The key's selection for this stone."
+    },
+    {
+      "surface": "albion.shaft.e",
+      "material": "accent.british-column-stones",
+      "working": "polished.hand-touched",
+      "history": "handled",
+      "note": "Shaft E: Frosterley marble, Co. Durham (column E); one monolith Ø 0.50 x 5.165 (drums at the stone's bed height if its stock is shorter). The key's selection for this stone."
+    },
+    {
+      "surface": "albion.shaft.f",
+      "material": "accent.british-column-stones",
+      "working": "polished.hand-touched",
+      "history": "handled",
+      "note": "Shaft F: Hopton Wood stone, Derbyshire (column F); one monolith Ø 0.50 x 5.165 (drums at the stone's bed height if its stock is shorter). The key's selection for this stone."
+    },
+    {
+      "surface": "albion.shaft.g",
+      "material": "accent.british-column-stones",
+      "working": "polished.hand-touched",
+      "history": "handled",
+      "note": "Shaft G: Ashburton marble, Devon (column G); one monolith Ø 0.50 x 5.165 (drums at the stone's bed height if its stock is shorter). The key's selection for this stone."
+    },
+    {
+      "surface": "albion.shaft.h",
+      "material": "accent.british-column-stones",
+      "working": "polished.hand-touched",
+      "history": "handled",
+      "note": "Shaft H: Iona marble, Inner Hebrides (column H); one monolith Ø 0.50 x 5.165 (drums at the stone's bed height if its stock is shorter). The key's selection for this stone."
+    },
+    {
+      "surface": "albion.shaft.i",
+      "material": "accent.british-column-stones",
+      "working": "polished.hand-touched",
+      "history": "handled",
+      "note": "Shaft I: Tiree marble, Inner Hebrides (column I); one monolith Ø 0.50 x 5.165 (drums at the stone's bed height if its stock is shorter). The key's selection for this stone."
+    },
+    {
+      "surface": "albion.shaft.j",
+      "material": "accent.british-column-stones",
+      "working": "polished.hand-touched",
+      "history": "handled",
+      "note": "Shaft J: Mona marble, Anglesey (column J); one monolith Ø 0.50 x 5.165 (drums at the stone's bed height if its stock is shorter). The key's selection for this stone."
+    },
+    {
+      "surface": "albion.ext.buff",
+      "material": "accent.bath-stone",
+      "working": "honed",
+      "history": "weathered",
+      "note": "Outer ashlar (buff courses), buttress faces, parapets' inner faces: Bath stone, honed; urban weathering (London's rain darkens it)."
+    },
+    {
+      "surface": "albion.ext.red",
+      "material": "accent.mansfield-red",
+      "working": "honed",
+      "history": "weathered",
+      "note": "Outer red bands, including 10.50-10.80."
+    },
+    {
+      "surface": "albion.ext.dressing",
+      "material": "accent.bath-stone",
+      "working": "rubbed",
+      "history": "weathered",
+      "note": "Outer dressings: the plinth course, buttress base courses and weatherings, outer lancet sills and drip blocks, copings."
+    },
+    {
+      "surface": "albion.north.rough-opening",
+      "material": "accent.bath-stone",
+      "working": "sawn",
+      "history": "new",
+      "note": "The port's rough opening through the porch's 0.10 end lining (hidden behind the joint's lining)."
+    },
+    {
+      "surface": "albion.floor.nave",
+      "material": "accent.encaustic-tile",
+      "working": "waxed",
+      "history": "foot-worn",
+      "note": "Nave field x ±5.70, y ±17.70: 6-inch (152.4 mm) encaustic tiles in red, buff and black on the 45° diagonal, 2 mm dark joints, roundel pattern after Minton and Pugin (repeat 2.586 m); worn along the axis and the aisles' edges."
+    },
+    {
+      "surface": "albion.floor.nave.border",
+      "material": "accent.encaustic-tile",
+      "working": "waxed",
+      "history": "foot-worn",
+      "note": "Nave border 0.30 wide, mitred: 1½-inch black fillet, 6-inch running-trefoil border tiles (buff on red), a buff fillet, 3-inch black and red chequer."
+    },
+    {
+      "surface": "albion.porch.floor",
+      "material": "accent.encaustic-tile",
+      "working": "waxed",
+      "history": "foot-worn",
+      "note": "Porch field x ±2.70, y -23.60 … -18.90, as the nave."
+    },
+    {
+      "surface": "albion.porch.floor.border",
+      "material": "accent.encaustic-tile",
+      "working": "waxed",
+      "history": "foot-worn",
+      "note": "Porch border 0.30 wide round the field, black, as the nave's border."
+    },
+    {
+      "surface": "albion.floor.aisle",
+      "material": "accent.york-stone",
+      "working": "sawn",
+      "history": "foot-worn",
+      "note": "Aisles x ±6.0 … ±14.0 (1 cm under the walls): York stone flags in 0.60 courses along the aisle, random lengths 0.6-1.2 (mean 0.90), broken bond, 5 mm lime joints."
+    },
+    {
+      "surface": "albion.door.reveal",
+      "material": "accent.york-stone",
+      "working": "sawn",
+      "history": "foot-worn",
+      "note": "The court door's reveal floor, x ±2.00, y -18.60 … -18.00."
+    },
+    {
+      "surface": "albion.door.strip",
+      "material": "bronze.cusn10",
+      "working": "brushed",
+      "history": "foot-worn",
+      "note": "The court door's threshold strip 0.06 x 4.03 on the wall's middle line (y -18.30), 0.5 mm proud: brushed, unlacquered, kept bright by feet (the doorway working)."
+    },
+    {
+      "surface": "albion.iron.cast",
+      "material": "accent.victorian-iron",
+      "working": "painted",
+      "history": "aged.patina",
+      "note": "Cast iron inside: clusters, box girders, arcade arches and bosses, main and light ribs, purlins, ridge bars, glazing bars, side bearers and brackets, screens' mullions, transoms and cills, the tapestry's two brackets. Painted in the colour of its own oxide, a deep iron-oxide brown-red (Skidmore's rule at Oxford)."
+    },
+    {
+      "surface": "albion.iron.wrought",
+      "material": "accent.victorian-iron",
+      "working": "painted",
+      "history": "aged.patina",
+      "note": "Wrought iron: spandrel rings and quatrefoils with their lugs, the main ribs' inner arches and ring chains, the lancets' saddle bars; painted as the cast iron."
+    },
+    {
+      "surface": "albion.iron.ext",
+      "material": "accent.victorian-iron",
+      "working": "painted",
+      "history": "weathered",
+      "note": "Iron outside: rainwater heads, downpipes, shoes and holderbats; the aisles' crestings; the ventilator's standards and louvres."
+    },
+    {
+      "surface": "albion.lead",
+      "material": "accent.milled-lead",
+      "working": "patinated",
+      "history": "weathered",
+      "note": "Milled sheet lead on boarding, with rolls: valley and side gutters, ridge rolls, the ventilator's cap, the porch's flat."
+    },
+    {
+      "surface": "albion.came",
+      "material": "accent.milled-lead",
+      "working": "patinated",
+      "history": "aged.patina",
+      "note": "The lead cames of the lancets (and the band's, which are part of the panels' leading)."
+    },
+    {
+      "surface": "albion.vault.glass.nave",
+      "material": "glass.clear-float",
+      "working": "laminated.uv-filtering",
+      "history": "weathered",
+      "note": "The nave vault: clear soda-lime float (green edge), laminated with a UV-filtering interlayer, flat panes 0.747 x 0.60 lapping 10 mm; London's soot along the bars."
+    },
+    {
+      "surface": "albion.vault.glass.aisle",
+      "material": "glass.clear-float",
+      "working": "laminated.uv-filtering.diffusing",
+      "history": "weathered",
+      "note": "The two aisle vaults: the same float laminated with a translucent, diffusing UV-filtering interlayer, so the idealised sun lays no patch on a hanging wall (sheet section 4). Working outside workingsByEra: confirm."
+    },
+    {
+      "surface": "albion.screen.glass",
+      "material": "glass.clear-float",
+      "working": "laminated.uv-filtering",
+      "history": "weathered",
+      "note": "The nave's north and south screens' clear panes (round the band on the south)."
+    },
+    {
+      "surface": "albion.screen.glass.gable",
+      "material": "glass.clear-float",
+      "working": "laminated.uv-filtering.diffusing",
+      "history": "weathered",
+      "note": "The four aisle gables above 10.00, diffusing as the aisle vaults."
+    },
+    {
+      "surface": "albion.guard-glazing",
+      "material": "glass.clear-float",
+      "working": "laminated.uv-filtering",
+      "history": "weathered",
+      "note": "Protective glazing 0.05 outside every lancet and every band panel (as historic stained glass is protected), cutting the UV the leaded glass passes. Role guessed."
+    },
+    {
+      "surface": "albion.band.glass",
+      "material": "glass.mouth-blown",
+      "working": "leaded",
+      "history": "aged.patina",
+      "note": "The Tristram and Isolde band's pot-metal and flashed antique glass (Lamberts), painted and fired, leaded; each panel inside a 0.07 border of cream quarries."
+    },
+    {
+      "surface": "albion.lancet.glass",
+      "material": "glass.mouth-blown",
+      "working": "leaded",
+      "history": "aged.patina",
+      "note": "The twelve lancets' glass on the glass line x ±14.30: pot-metal and flashed, leaded (tonight plain diamond quarries; the designs wait for catalogue entries)."
+    },
+    {
+      "surface": "albion.case.glass",
+      "material": "glass.low-iron",
+      "working": "laminated.anti-reflective",
+      "history": "handled",
+      "note": "The table cases' glazed boxes (sides and top), Optiwhite, anti-reflective."
+    },
+    {
+      "surface": "albion.frame.glazing",
+      "material": "glass.low-iron",
+      "working": "laminated.anti-reflective",
+      "history": "new",
+      "note": "Glazing of the works on paper in their frames (Lady Lilith, Love's Messenger, the Star of Bethlehem, the three wallpapers): laminated, UV-filtering, anti-reflective. Role guessed."
+    },
+    {
+      "surface": "albion.electrolier.globe",
+      "material": "glass.mouth-blown",
+      "working": "cased-opal",
+      "history": "new",
+      "note": "The electroliers' cased opal globes Ø 0.17 (Lamberts)."
+    },
+    {
+      "surface": "albion.electrolier.body",
+      "material": "bronze.cusn10",
+      "working": "patinated",
+      "history": "new",
+      "note": "The electroliers' clamps, chains, stems, bodies, arms, corona rings and galleries; the porch fitting's rose."
+    },
+    {
+      "surface": "albion.picture-rail",
+      "material": "bronze.cusn10",
+      "working": "patinated",
+      "history": "handled",
+      "note": "The picture rail (rod Ø 0.022 at 4.20, ball ends, brackets) and the hanging rods Ø 0.006; brushed bright where handled."
+    },
+    {
+      "surface": "albion.north.blind-doors",
+      "material": "bronze.cusn10",
+      "working": "patinated",
+      "history": "handled",
+      "note": "The port's closed pair of cast bronze leaves, placed only while albion.north is unmated (on the stand)."
+    },
+    {
+      "surface": "albion.porch.ceiling",
+      "material": "oak.sessile-french",
+      "working": "fumed.french-polished",
+      "history": "aged.patina",
+      "note": "The porch's boarded ceiling at 6.90, its three moulded beams and two wall plates: quartersawn oak, fumed, French-polished."
+    },
+    {
+      "surface": "albion.bench",
+      "material": "oak.sessile-french",
+      "working": "fumed.french-polished",
+      "history": "handled",
+      "note": "The two benches."
+    },
+    {
+      "surface": "albion.case",
+      "material": "oak.sessile-french",
+      "working": "fumed.french-polished",
+      "history": "handled",
+      "note": "The four table cases' legs, stretchers, aprons, decks, corner posts and top rails."
+    },
+    {
+      "surface": "albion.lectern",
+      "material": "oak.sessile-french",
+      "working": "fumed.french-polished",
+      "history": "handled",
+      "note": "The lectern (the Chaucer's desk)."
+    },
+    {
+      "surface": "albion.tapestry.batten",
+      "material": "oak.sessile-french",
+      "working": "fumed.french-polished",
+      "history": "new",
+      "note": "The Attainment's hanging batten (7.0 x 0.10 x 0.03)."
+    },
+    {
+      "surface": "albion.tapestry.lining",
+      "material": "accent.linen",
+      "working": "stretched",
+      "history": "new",
+      "note": "The Attainment's linen lining and sleeve (the Lighting target surface for the tapestry). Role guessed."
+    },
+    {
+      "surface": "albion.case.baize",
+      "material": "accent.wool-felt",
+      "working": "laid",
+      "history": "aged.patina",
+      "note": "The case beds: dyed wool baize, faded, 0.535-0.550."
+    },
+    {
+      "surface": "albion.frame.gilt",
+      "material": "oak.sessile-french",
+      "working": "gilt.gold-leaf.oil",
+      "history": "aged.patina",
+      "note": "The oils' frames (reeded, Watts and cabinet patterns; gilt slips in the arched and oval sights): oak, oil-gilt on a size so the grain shows through the gold, as Rossetti's and Madox Brown's frames."
+    },
+    {
+      "surface": "albion.frame.gilt.glazed",
+      "material": "oak.sessile-french",
+      "working": "gilt.gold-leaf.oil",
+      "history": "aged.patina",
+      "note": "The works on paper's gilt frames (Lady Lilith, Love's Messenger reeded; the Star of Bethlehem Watts), each with a gilt slip and glazed (albion.frame.glazing)."
+    },
+    {
+      "surface": "albion.frame.oak",
+      "material": "oak.sessile-french",
+      "working": "fumed.french-polished",
+      "history": "aged.patina",
+      "note": "The three wallpaper panels' narrow frames (0.035), glazed (albion.frame.glazing)."
+    }
+  ]
+}

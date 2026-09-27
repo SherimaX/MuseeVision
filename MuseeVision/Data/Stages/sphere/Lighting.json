@@ -1,0 +1,305 @@
+{
+  "stage": "sphere",
+  "daylight": [],
+  "luminaires": [
+    {
+      "id": "image",
+      "type": "gap.light-field-panel.d65",
+      "mount": "sphere.image.mount",
+      "aim": [
+        0.0,
+        0.0,
+        22.0
+      ],
+      "operation": "always",
+      "note": "The image luminaire: the whole inner surface R 13.700 about the centre (0, 0, 22.000), light-field panels facing in, less the neck's hole (edge r 2.980, z 8.628). Its source is Light's image of the real sky over the museum's city now (Time's sky for the museum's observer: the stars to V 6.5, the Moon at its true size, place and phase, the Milky Way; no Sun, no atmosphere). Always on, day and night (D-006). Content at infinity (a light field), so the stars hold still as the car rises."
+    },
+    {
+      "id": "rail.01",
+      "type": "linear-cove.3000k",
+      "point": [
+        2.021,
+        -4.879,
+        21.432
+      ],
+      "aim": [
+        1.492,
+        -3.603,
+        20.42
+      ],
+      "along": [
+        0.924,
+        0.383,
+        0.0
+      ],
+      "length": 4.148,
+      "operation": "presence",
+      "note": "Handrail light, run 1 of 8: the flexible strip in a gilt channel under the handrail (r 5.270-5.292, z 21.425-21.440) from bearing 0 to 45, inside the post line, shielded by the 56 mm rail above it; facing down and in, grazing the platform. On while a body is in the Sphere."
+    },
+    {
+      "id": "rail.02",
+      "type": "linear-cove.3000k",
+      "point": [
+        4.879,
+        -2.021,
+        21.432
+      ],
+      "aim": [
+        3.603,
+        -1.492,
+        20.42
+      ],
+      "along": [
+        0.383,
+        0.924,
+        0.0
+      ],
+      "length": 4.148,
+      "operation": "presence",
+      "note": "Handrail light, run 2 of 8: the flexible strip in a gilt channel under the handrail (r 5.270-5.292, z 21.425-21.440) from bearing 45 to 90, inside the post line, shielded by the 56 mm rail above it; facing down and in, grazing the platform. On while a body is in the Sphere."
+    },
+    {
+      "id": "rail.03",
+      "type": "linear-cove.3000k",
+      "point": [
+        4.879,
+        2.021,
+        21.432
+      ],
+      "aim": [
+        3.603,
+        1.492,
+        20.42
+      ],
+      "along": [
+        -0.383,
+        0.924,
+        0.0
+      ],
+      "length": 4.148,
+      "operation": "presence",
+      "note": "Handrail light, run 3 of 8: the flexible strip in a gilt channel under the handrail (r 5.270-5.292, z 21.425-21.440) from bearing 90 to 135, inside the post line, shielded by the 56 mm rail above it; facing down and in, grazing the platform. On while a body is in the Sphere."
+    },
+    {
+      "id": "rail.04",
+      "type": "linear-cove.3000k",
+      "point": [
+        2.021,
+        4.879,
+        21.432
+      ],
+      "aim": [
+        1.492,
+        3.603,
+        20.42
+      ],
+      "along": [
+        -0.924,
+        0.383,
+        0.0
+      ],
+      "length": 4.148,
+      "operation": "presence",
+      "note": "Handrail light, run 4 of 8: the flexible strip in a gilt channel under the handrail (r 5.270-5.292, z 21.425-21.440) from bearing 135 to 180, inside the post line, shielded by the 56 mm rail above it; facing down and in, grazing the platform. On while a body is in the Sphere."
+    },
+    {
+      "id": "rail.05",
+      "type": "linear-cove.3000k",
+      "point": [
+        -2.021,
+        4.879,
+        21.432
+      ],
+      "aim": [
+        -1.492,
+        3.603,
+        20.42
+      ],
+      "along": [
+        -0.924,
+        -0.383,
+        0.0
+      ],
+      "length": 4.148,
+      "operation": "presence",
+      "note": "Handrail light, run 5 of 8: the flexible strip in a gilt channel under the handrail (r 5.270-5.292, z 21.425-21.440) from bearing 180 to 225, inside the post line, shielded by the 56 mm rail above it; facing down and in, grazing the platform. On while a body is in the Sphere."
+    },
+    {
+      "id": "rail.06",
+      "type": "linear-cove.3000k",
+      "point": [
+        -4.879,
+        2.021,
+        21.432
+      ],
+      "aim": [
+        -3.603,
+        1.492,
+        20.42
+      ],
+      "along": [
+        -0.383,
+        -0.924,
+        0.0
+      ],
+      "length": 4.148,
+      "operation": "presence",
+      "note": "Handrail light, run 6 of 8: the flexible strip in a gilt channel under the handrail (r 5.270-5.292, z 21.425-21.440) from bearing 225 to 270, inside the post line, shielded by the 56 mm rail above it; facing down and in, grazing the platform. On while a body is in the Sphere."
+    },
+    {
+      "id": "rail.07",
+      "type": "linear-cove.3000k",
+      "point": [
+        -4.879,
+        -2.021,
+        21.432
+      ],
+      "aim": [
+        -3.603,
+        -1.492,
+        20.42
+      ],
+      "along": [
+        0.383,
+        -0.924,
+        0.0
+      ],
+      "length": 4.148,
+      "operation": "presence",
+      "note": "Handrail light, run 7 of 8: the flexible strip in a gilt channel under the handrail (r 5.270-5.292, z 21.425-21.440) from bearing 270 to 315, inside the post line, shielded by the 56 mm rail above it; facing down and in, grazing the platform. On while a body is in the Sphere."
+    },
+    {
+      "id": "rail.08",
+      "type": "linear-cove.3000k",
+      "point": [
+        -2.021,
+        -4.879,
+        21.432
+      ],
+      "aim": [
+        -1.492,
+        -3.603,
+        20.42
+      ],
+      "along": [
+        0.924,
+        -0.383,
+        0.0
+      ],
+      "length": 4.148,
+      "operation": "presence",
+      "note": "Handrail light, run 8 of 8: the flexible strip in a gilt channel under the handrail (r 5.270-5.292, z 21.425-21.440) from bearing 315 to 360, inside the post line, shielded by the 56 mm rail above it; facing down and in, grazing the platform. On while a body is in the Sphere."
+    },
+    {
+      "id": "neck.01",
+      "type": "linear-cove.3000k",
+      "point": [
+        1.869,
+        -1.713,
+        9.6
+      ],
+      "aim": [
+        0.0,
+        0.0,
+        9.6
+      ],
+      "along": [
+        0.676,
+        0.737,
+        0.0
+      ],
+      "length": 3.761,
+      "operation": "presence",
+      "note": "The neck's ring of light, run 1 of 4: flexible strip bent to the throat's bore in an opal channel r 2.520-2.550, z 9.550-9.650 (the eyes of a rider at the neck stop), bearings 5-90 (clear of the rails at 0 and 180); facing the axis. On while a body is in the neck (the car there or passing)."
+    },
+    {
+      "id": "neck.02",
+      "type": "linear-cove.3000k",
+      "point": [
+        1.869,
+        1.713,
+        9.6
+      ],
+      "aim": [
+        0.0,
+        0.0,
+        9.6
+      ],
+      "along": [
+        -0.676,
+        0.737,
+        0.0
+      ],
+      "length": 3.761,
+      "operation": "presence",
+      "note": "The neck's ring of light, run 2 of 4: flexible strip bent to the throat's bore in an opal channel r 2.520-2.550, z 9.550-9.650 (the eyes of a rider at the neck stop), bearings 90-175 (clear of the rails at 0 and 180); facing the axis. On while a body is in the neck (the car there or passing)."
+    },
+    {
+      "id": "neck.03",
+      "type": "linear-cove.3000k",
+      "point": [
+        -1.869,
+        1.713,
+        9.6
+      ],
+      "aim": [
+        0.0,
+        0.0,
+        9.6
+      ],
+      "along": [
+        -0.676,
+        -0.737,
+        0.0
+      ],
+      "length": 3.761,
+      "operation": "presence",
+      "note": "The neck's ring of light, run 3 of 4: flexible strip bent to the throat's bore in an opal channel r 2.520-2.550, z 9.550-9.650 (the eyes of a rider at the neck stop), bearings 185-270 (clear of the rails at 0 and 180); facing the axis. On while a body is in the neck (the car there or passing)."
+    },
+    {
+      "id": "neck.04",
+      "type": "linear-cove.3000k",
+      "point": [
+        -1.869,
+        -1.713,
+        9.6
+      ],
+      "aim": [
+        0.0,
+        0.0,
+        9.6
+      ],
+      "along": [
+        0.676,
+        -0.737,
+        0.0
+      ],
+      "length": 3.761,
+      "operation": "presence",
+      "note": "The neck's ring of light, run 4 of 4: flexible strip bent to the throat's bore in an opal channel r 2.520-2.550, z 9.550-9.650 (the eyes of a rider at the neck stop), bearings 270-355 (clear of the rails at 0 and 180); facing the axis. On while a body is in the neck (the car there or passing)."
+    }
+  ],
+  "targets": [
+    {
+      "surface": "sphere.platform.floor",
+      "class": "orientation",
+      "lux": [
+        5,
+        5
+      ],
+      "source": "UseTargets",
+      "note": "The walkable ring r 2.460-5.290 at z 20.420 (the stone and the bronze seat ring): low light that shows the way in a darkened space. The way out is the car (lift, the Atrium's). Met by the handrail strips alone."
+    }
+  ],
+  "design": [
+    {
+      "brighter": "sphere.platform.floor",
+      "darker": "sphere.image",
+      "ratio": [
+        1000.0,
+        null
+      ],
+      "note": "The sky stays dark behind the lit floor: the image surface's background (its black level plus every luminaire's spill, measured with the Moon below the horizon and no work performing) at most 1/1000 of the lit stone's mean luminance, so the Milky Way's band stands above it. Measured, never tuned; a failure is a finding (the strips' cut-off, the panels' reflectance, the class)."
+    }
+  ]
+}

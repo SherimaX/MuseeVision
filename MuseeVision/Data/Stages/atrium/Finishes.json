@@ -1,0 +1,243 @@
+{
+  "stage": "atrium",
+  "finishes": [
+    {
+      "surface": "atrium.floor",
+      "material": "stone.crema-marfil",
+      "working": "mirror-polished",
+      "history": "foot-worn",
+      "note": "Crema Marfil Coto, selected grade, 30 mm, laid in eight rings of radial slabs (sheet 3.3), mirror-polished through 3000 grit and a final compound (the Future's working); 6 mm joints, grouted in the stone's own dust in resin; the polish dulled in the walking lanes (door to landing, the ring round the landing). Includes the 30 mm lip at r 2.290."
+    },
+    {
+      "surface": "atrium.base",
+      "material": "stone.travertine-romano",
+      "working": "filled.polished",
+      "history": "new",
+      "note": "The 6 m base: inner face r 14.000, the cove recess, the coping band, the wall top and the footing. Travertino Romano vein-cut, voids filled with tinted resin, polished (the palette's Future working for the Atrium's base only: the modern's last stone, under the glass). Ashlar coursed by Form, vertical joints on the rib lines and bay centres."
+    },
+    {
+      "surface": "atrium.dress",
+      "material": "stone.travertine-romano",
+      "working": "honed",
+      "history": "weathered",
+      "note": "Outdoors: the plinth's exterior dress (base moulding, ashlar face r 14.880, coping cornice and wash), the equator entablature and the portal (block, opening, socle, cornice, architrave, keystone). Every exterior surface is travertine (Story: outdoors honed, then weathered)."
+    },
+    {
+      "surface": "atrium.port.rough-opening",
+      "material": "stone.travertine-romano",
+      "working": "sawn",
+      "history": "new",
+      "note": "The west door's rough opening through the base (hidden behind the joint's lining)."
+    },
+    {
+      "surface": "atrium.slab",
+      "material": "accent.concrete",
+      "working": "cast-in-situ.sealed",
+      "history": "new",
+      "note": "The floor slab r 2.560 ... 14.000, z -0.500 ... -0.030 (hidden structure; the palette's Future role for concrete)."
+    },
+    {
+      "surface": "atrium.drum.inner",
+      "material": "glass.low-iron",
+      "working": "laminated.uv-filtering.acid-etched.fritted",
+      "history": "new",
+      "note": "The misty glass: inner leaf r 14.000 ... 14.024, 2 x 12 mm Optiwhite laminated on a UV-filtering interlayer; the room face acid-etched to a satin, the cavity face a white ceramic frit. Its visible transmittance is the Matter record's (measured), never a knob."
+    },
+    {
+      "surface": "atrium.drum.outer",
+      "material": "glass.low-iron",
+      "working": "heat-strengthened.laminated.uv-filtering",
+      "history": "weathered",
+      "note": "Outer leaf r 14.050 ... 14.074, clear heat-strengthened laminated Optiwhite; takes the museum's weather."
+    },
+    {
+      "surface": "atrium.canopy.glass",
+      "material": "glass.low-iron",
+      "working": "laminated.acid-etched",
+      "history": "new",
+      "note": "The Sphere's underside as seen from the Atrium: triangular panes, 2 x 12 mm laminated Optiwhite, the room face acid-etched in a light-extraction pattern; the diffusers of the edge-lit luminous ceiling (sheet 4). Room face R 14.024, upper face R 14.000."
+    },
+    {
+      "surface": "atrium.rib",
+      "material": "white.pearl-steel",
+      "working": "pearl.satin",
+      "history": "new",
+      "note": "The twelve ribs: S355J2, blast-cleaned, epoxy primer, oyster-white (RAL 1013) basecoat, mica interference pearl, satin clear coat."
+    },
+    {
+      "surface": "atrium.canopy.grid",
+      "material": "white.pearl-steel",
+      "working": "pearl.satin",
+      "history": "new",
+      "note": "The canopy grid (60 x 120 members), the compression ring round the car's way, its twelve hanger plates and the drum's head closer ring."
+    },
+    {
+      "surface": "atrium.collar",
+      "material": "white.pearl-steel",
+      "working": "pearl.satin",
+      "history": "new",
+      "note": "The collar round the car's way (the iris's housing): lathed body, coffered band and 24 spokes; 8.2 m across."
+    },
+    {
+      "surface": "atrium.order",
+      "material": "white.pearl-steel",
+      "working": "pearl.fluoropolymer",
+      "history": "weathered",
+      "note": "Outdoors: the drum's order (12 fins, 12 pedestals, 12 mullions, 3 transom rings); the same pearl build in fluoropolymer (Story: outdoors)."
+    },
+    {
+      "surface": "atrium.rib.shoe",
+      "material": "bronze.cusn10",
+      "working": "mirror-polished.lacquered",
+      "history": "new",
+      "note": "The rib shoes, sleeves 15 mm proud to z 0.360 (Story: rib shoes mirror-polished, lacquered)."
+    },
+    {
+      "surface": "atrium.rib.line",
+      "material": "bronze.cusn10",
+      "working": "gilt.gold-leaf.oil",
+      "history": "new",
+      "note": "The 24 mm line up each rib's face from the shoe to the ring (polish)."
+    },
+    {
+      "surface": "atrium.waiting-ring",
+      "material": "bronze.cusn10",
+      "working": "mirror-polished",
+      "history": "foot-worn",
+      "note": "The ring you wait on (r 2.940 ... 3.060, flush) and the waiting mark west of it (half ring and dot, 2 mm proud in 10 mm recesses): mirror-polished, dulled where people stand (Story)."
+    },
+    {
+      "surface": "atrium.letters",
+      "material": "bronze.cusn10",
+      "working": "gilt.gold-leaf.oil",
+      "history": "new",
+      "note": "The bay letters A-K in the floor at r 13.100, 0.300 high, 2 mm proud in 10 mm recesses (polish); clean oil gilt."
+    },
+    {
+      "surface": "atrium.collar.gilt",
+      "material": "bronze.cusn10",
+      "working": "gilt.gold-leaf.oil",
+      "history": "new",
+      "note": "The collar's gilt: the hub liner, the four tori at the rings' arrises and the lip band at the rim (Story: collar, gilt rim)."
+    },
+    {
+      "surface": "atrium.up.iris.under",
+      "material": "white.pearl-steel",
+      "working": "gilt.gold-leaf.oil",
+      "history": "new",
+      "note": "The collar iris's blades, their undersides as the Atrium sees them: oil gilt over the pearl coat (gilt on lacquer)."
+    },
+    {
+      "surface": "atrium.up.iris.top",
+      "material": "white.pearl-steel",
+      "working": "pearl.satin",
+      "history": "new",
+      "note": "The collar iris's blades, their upper faces (seen from the Sphere's neck): pearl, as the palette's iris linings."
+    },
+    {
+      "surface": "atrium.landing.bronze",
+      "material": "bronze.cusn10",
+      "working": "gilt.gold-leaf.oil",
+      "history": "new",
+      "note": "The landing's shoe and head ring and the tube's ring frame (cast CuSn10, oil gilt)."
+    },
+    {
+      "surface": "atrium.landing.sill",
+      "material": "bronze.cusn10",
+      "working": "mirror-polished",
+      "history": "foot-worn",
+      "note": "The curved sill across the landing door, set into the marble, bridging to the car's base ring: walked, so mirror-polished bronze, not gilt."
+    },
+    {
+      "surface": "atrium.landing.glass",
+      "material": "glass.low-iron",
+      "working": "toughened.laminated",
+      "history": "new",
+      "note": "The landing enclosure (panes and leaves) and the tube to the collar: 15 mm toughened laminated Optiwhite, the edges' pale aqua showing at every joint."
+    },
+    {
+      "surface": "atrium.car.glass",
+      "material": "glass.low-iron",
+      "working": "toughened.laminated",
+      "history": "new",
+      "note": "The car's panes, leaves and clear roof: 15 mm toughened laminated Optiwhite."
+    },
+    {
+      "surface": "atrium.car.floor",
+      "material": "glass.low-iron",
+      "working": "laminated.acid-etched",
+      "history": "foot-worn",
+      "note": "The car's floor disc r <= 2.135, laminated, acid-etched anti-slip (Story: the car's frosted floor)."
+    },
+    {
+      "surface": "atrium.car.handrail",
+      "material": "glass.low-iron",
+      "working": "toughened",
+      "history": "handled",
+      "note": "The car's glass handrail rod, 36 mm, ball ends."
+    },
+    {
+      "surface": "atrium.car.bronze",
+      "material": "bronze.cusn10",
+      "working": "gilt.gold-leaf.oil",
+      "history": "new",
+      "note": "The car's base and top rings, leaf fins, roller-guide blocks, crown and its four arms, handrail brackets (Story: gilt rings)."
+    },
+    {
+      "surface": "atrium.car.mast",
+      "material": "bronze.cusn10",
+      "working": "gilt.gold-leaf.oil",
+      "history": "new",
+      "note": "The Cube mast (spiral-band column clad in gilt), its head, and the under-floor seat where the Sphere's mast meets the car (Story: mast oil-gilt)."
+    },
+    {
+      "surface": "atrium.lining",
+      "material": "bronze.cusn10",
+      "working": "patinated.dark",
+      "history": "new",
+      "note": "The lining through the slab r 2.300 ... 2.560, seen only from the shaft: the Cube's dark patina (Story: the one place the future is black, a light-field room must not reflect)."
+    },
+    {
+      "surface": "atrium.rail",
+      "material": "steel.hard-chrome",
+      "working": "ground.hard-chromed",
+      "history": "new",
+      "note": "The two guide rails with the racks on their backs and their brackets: machined steel, ground and hard-chromed (ruled palette key); the lift's working steel, as real guide rails are."
+    },
+    {
+      "surface": "atrium.stele.glass",
+      "material": "glass.low-iron",
+      "working": "toughened.laminated",
+      "history": "new",
+      "note": "The Starry Night's stele: 60 mm Optiwhite laminated from toughened plies, 1.500 x 2.140 visible."
+    },
+    {
+      "surface": "atrium.stele.foot",
+      "material": "bronze.cusn10",
+      "working": "mirror-polished.lacquered",
+      "history": "new",
+      "note": "The stele's foot, cast CuSn10 (Story: the stele foot mirror-polished, was brass)."
+    },
+    {
+      "surface": "atrium.frame.gilt",
+      "material": "oak.sessile-french",
+      "working": "gilt.gold-leaf.water",
+      "history": "new",
+      "note": "The Starry Night's slim frame: the Salon's gilt profile at W 0.060, carved on a quartersawn oak core, gesso and red bole, burnished water gilding, clean (Story: the one oak in Élan, invisible). Art builds it."
+    },
+    {
+      "surface": "atrium.west.blind-doors",
+      "material": "bronze.cusn10",
+      "working": "mirror-polished.lacquered",
+      "history": "new",
+      "note": "Site's closed pair of cast CuSn10 leaves in the west class opening while atrium.west is unmated (the stand)."
+    },
+    {
+      "surface": "atrium.down.blind-iris",
+      "material": "white.pearl-steel",
+      "working": "pearl.satin",
+      "history": "new",
+      "note": "Site's blind for atrium.down while unmated: the class closure (iris.4600) shut on the mating plane z -0.500."
+    }
+  ]
+}

@@ -1,0 +1,152 @@
+{
+  "stage": "sphere",
+  "finishes": [
+    {
+      "surface": "sphere.skin",
+      "material": "white.pearl-steel",
+      "working": "pearl.fluoropolymer",
+      "history": "weathered",
+      "note": "The Elan's outer dome: a 60 mm stiffened S355 steel skin (outer face R 14.300, inner R 14.240 about the Sphere's centre), welded and faired seamless, oyster-white basecoat with the interference pearl under a fluoropolymer clear (the palette's outdoor build). Seams welded and ground: hairlines on meridians every 7.5 deg to latitude 60, every 15 deg above, and on parallels every 6 deg, read only in grazing light. Outdoors: museum weather."
+    },
+    {
+      "surface": "sphere.gilt.outside",
+      "material": "bronze.cusn10",
+      "working": "gilt.gold-leaf.oil",
+      "history": "weathered",
+      "note": "The hairline drip ring at the dome's foot (bedded on the Atrium's entablature wash), the boss and the ball at the crown: cast CuSn10, oil-gilt with 23.75 ct leaf, outdoors; clean gold, rain-streaked, never patinated."
+    },
+    {
+      "surface": "sphere.steel",
+      "material": "white.pearl-steel",
+      "working": "blast-cleaned.primed",
+      "history": "new",
+      "note": "Hidden structural steel: the Sphere's 10 mm welded plate shell (R 13.940-13.950), the skin's standoffs and the platform's deck box. S355J2 blast-cleaned Sa 2 1/2 with the pearl system's epoxy primer only; never seen."
+    },
+    {
+      "surface": "sphere.image",
+      "material": "glass.low-iron",
+      "working": "lenslet-array.black",
+      "history": "new",
+      "note": "The image surface R 13.700 about the centre: the faces of the light-field panels (Light's image luminaire), low-iron glass with a lenslet array over a black mask, as the Cube's panel faces. Tonight one continuous surface; the 0.7 m tiling is polish. Its black level and reflectance are the luminaire record's."
+    },
+    {
+      "surface": "sphere.throat",
+      "material": "white.pearl-steel",
+      "working": "pearl.satin",
+      "history": "new",
+      "note": "The neck's throat: welded double-skin steel cylinder r 2.550-2.980, z 7.715-11.150, pearl satin inside and out (the palette's 'Sphere: neck')."
+    },
+    {
+      "surface": "sphere.throat.gilt",
+      "material": "bronze.cusn10",
+      "working": "gilt.gold-leaf.oil",
+      "history": "new",
+      "note": "The throat's trellis: six gilt courses and sixteen ribs on the bore, one gilt CuSn10 lattice fixed to the pearl; clean oil gilt."
+    },
+    {
+      "surface": "sphere.neck.seat",
+      "material": "bronze.cusn10",
+      "working": "mirror-polished.lacquered",
+      "history": "new",
+      "note": "The flange at the mouth (z 11.150-11.400, the neck iris's seat ring, bore a 96-gon of circumradius 2.460, out to r 4.500), its pocket's 3 mm top plate and the seven pins: cast CuSn10 mirror-polished and lacquered (the palette's mirror-polished seat ring). Not walked."
+    },
+    {
+      "surface": "sphere.rail",
+      "material": "steel.hard-chrome",
+      "working": "ground.hard-chromed",
+      "history": "new",
+      "note": "The neck's two guide rails with their racks and brackets, as the Atrium's atrium.rail (one rail across the seam): machined steel T-rail, ground and hard-chromed."
+    },
+    {
+      "surface": "sphere.neck.iris.top",
+      "material": "white.pearl-steel",
+      "working": "gilt.gold-leaf.oil",
+      "history": "new",
+      "note": "The neck iris's blades, upper faces (seen from the Sphere, 9 m down through the platform's way): oil gilt over the pearl lacquer, as the Atrium's collar iris shows gilt to its room."
+    },
+    {
+      "surface": "sphere.neck.iris.under",
+      "material": "white.pearl-steel",
+      "working": "pearl.satin",
+      "history": "new",
+      "note": "The neck iris's blades, undersides and edges (into the throat): pearl satin, the iris blade lining."
+    },
+    {
+      "surface": "sphere.platform.iris.top",
+      "material": "white.pearl-steel",
+      "working": "pearl.satin",
+      "history": "new",
+      "note": "The platform iris's blades, upper faces: pearl satin (the palette's iris blade lining). Shut, a pale disc 24 mm under the platform, its blade edges a spiral; a closure, not a floor."
+    },
+    {
+      "surface": "sphere.platform.iris.under",
+      "material": "white.pearl-steel",
+      "working": "gilt.gold-leaf.oil",
+      "history": "new",
+      "note": "The platform iris's blades, undersides (seen by a rider coming up the mast): oil gilt over the pearl lacquer."
+    },
+    {
+      "surface": "sphere.platform.floor",
+      "material": "stone.crema-marfil",
+      "working": "mirror-polished",
+      "history": "foot-worn",
+      "note": "The platform's stone ring r 4.100-5.498, 30 mm, in 24 slabs of 15 deg (1 mm joints on bearings 7.5 + 15k): Crema Marfil Coto mirror-polished through 3000 grit and a final compound (the museum ends on its first stone); dulled where people walk the ring."
+    },
+    {
+      "surface": "sphere.platform.seat",
+      "material": "bronze.cusn10",
+      "working": "mirror-polished",
+      "history": "foot-worn",
+      "note": "The platform iris's seat ring and pocket lid (r 2.460-4.100, 23 mm, 16 cast segments) and the door sill (r 2.245-2.460 across +/-26 deg of west): cast CuSn10 mirror-polished, unlacquered, walked (as the Atrium's waiting ring and landing sill)."
+    },
+    {
+      "surface": "sphere.platform.soffit",
+      "material": "white.pearl-steel",
+      "working": "pearl.satin",
+      "history": "new",
+      "note": "The platform deck's underside (z 20.170) and its outer fascia r 5.498 under the nosing: pearl satin, seen from the neck and from below."
+    },
+    {
+      "surface": "sphere.platform.gilt",
+      "material": "bronze.cusn10",
+      "working": "gilt.gold-leaf.oil",
+      "history": "new",
+      "note": "The platform's bronze: the nosing, the balustrade's shoe and 32 posts, the handrail light's channel and 32 brackets, the eight struts (tube 168 x 10) and their end plates: cast and drawn CuSn10, oil-gilt, clean."
+    },
+    {
+      "surface": "sphere.platform.rail",
+      "material": "bronze.cusn10",
+      "working": "gilt.gold-leaf.oil",
+      "history": "handled",
+      "note": "The handrail: drawn CuSn10 tube 56 mm on r 5.320 at z 21.470, oil-gilt; the gold worn bright where hands slide (the palette's 'Sphere: rail')."
+    },
+    {
+      "surface": "sphere.platform.glass",
+      "material": "glass.low-iron",
+      "working": "toughened.laminated",
+      "history": "new",
+      "note": "The balustrade's 32 curved panes, 12.76 mm Optiwhite toughened and laminated, faces r 5.3136-5.3264, z 20.480-21.440."
+    },
+    {
+      "surface": "sphere.mast",
+      "material": "bronze.cusn10",
+      "working": "gilt.gold-leaf.oil",
+      "history": "new",
+      "note": "The Sphere's mast: a gilt column r 0.200 (as built, 0.40 across) from the mouth (z 11.150) up to the car's under-floor seat: CuSn10, oil-gilt (the palette's 'Sphere: mast'). Motion's variable-length piece."
+    },
+    {
+      "surface": "sphere.mast.dogs",
+      "material": "bronze.cusn10",
+      "working": "mirror-polished",
+      "history": "new",
+      "note": "The mast's four bearing dogs: solid CuSn10 bars 0.160 wide x 0.300 deep x 3.060 long (EN 1982 CC480K, the classic bearing bronze), their faces machined and polished, running on greased bronze-on-steel in their housings; each carries the mast's foot ring on its top face (z 11.150) at up to 112 kN with two dogs sharing. Unlacquered: sliding and bearing faces."
+    },
+    {
+      "surface": "sphere.down.blind-iris",
+      "material": "white.pearl-steel",
+      "working": "pearl.satin",
+      "history": "new",
+      "note": "Stand only (sphere.down unmated): Site's blind closure, the class's seven blades shut on the mating plane z 7.715, their faces down. As the Atrium's atrium.down.blind-iris."
+    }
+  ]
+}
