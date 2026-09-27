@@ -1,0 +1,41 @@
+{
+  "schema": "musee.matter.shading.working/1",
+  "key": "honed",
+  "name": "Honed",
+  "record": "Workings/honed.json",
+  "kind": "face",
+  "roughness": {
+    "value": 0.6,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Workings/honed.json: surface.glossGround (under 5 GU at 60 degrees) and unverified surface.glossAtFinalGrit",
+    "note": "A matte face with no reflected image; no conversion from gloss units to a slope distribution was read."
+  },
+  "roughnessAcross": {
+    "value": 0.6,
+    "unit": "1",
+    "grade": "derived",
+    "source": "Workings/honed.json: a honed face has no grain",
+    "derivation": "equal to the roughness along"
+  },
+  "haziness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Workings/honed.json (no measured haze)",
+    "note": "One specular lobe until a goniometric measurement shows a second."
+  },
+  "textureDepth": {
+    "value": 0.22,
+    "unit": "mm",
+    "grade": "derived",
+    "source": "Workings/honed.json: surface.arealRoughness (Sa 0.22 mm, measured; it includes pores and waviness)",
+    "derivation": "the areal roughness taken as the mean texture depth the face holds as a film"
+  },
+  "relief": {
+    "value": 0.22,
+    "unit": "mm",
+    "grade": "record",
+    "source": "Workings/honed.json: surface.arealRoughness (Sa 0.22 mm)"
+  }
+}

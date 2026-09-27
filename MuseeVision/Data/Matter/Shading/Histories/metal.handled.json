@@ -1,0 +1,90 @@
+{
+  "schema": "musee.matter.shading.history/1",
+  "key": "metal.handled",
+  "name": "Handled: kept bright by hands",
+  "mechanisms": [
+    "bronze.wear",
+    "bronze.tarnish"
+  ],
+  "age": {
+    "value": 20.0,
+    "unit": "year",
+    "grade": "design",
+    "source": "Palette.json eras: \"classical: honed, patinated, oiled and waxed\" and \"worn soft\"",
+    "note": "The age the museum's classical rooms show: a generation of use."
+  },
+  "passagesPerYear": {
+    "value": 50000.0,
+    "unit": "1/year",
+    "grade": "design",
+    "source": "a guard rail at an opening",
+    "note": "A first value for hands on a rail."
+  },
+  "skyExposure": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "design",
+    "source": "an interior face",
+    "derivation": "no precipitation reaches it"
+  },
+  "keptWet": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "design",
+    "source": "the face stands clear of water"
+  },
+  "deposition": {
+    "value": 0.00085,
+    "unit": "1/year",
+    "grade": "derived",
+    "source": "Histories/white.soiling.json: terms.soiling.coverageRateVertical (3e-7 to 1.8e-5 per day)",
+    "derivation": "the geometric mean of the range, 3.1e-6 per day, per year"
+  },
+  "washRemoval": {
+    "value": 0.0,
+    "unit": "1/year",
+    "grade": "derived",
+    "source": "an interior face",
+    "derivation": "no rain wash reaches it"
+  },
+  "soilAlbedo": {
+    "value": [
+      0.3,
+      0.28,
+      0.25
+    ],
+    "space": "linear Rec.709 (sRGB primaries), D65 white",
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Histories/white.soiling.json (no measured colour of settled indoor dust)",
+    "note": "A first grey-brown for indoor dust, a mix of mineral dust and fibres."
+  },
+  "wornRoughness": {
+    "value": 0.2,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Histories/bronze.wear.json: unverified wear rate (handled bronze burnishes)",
+    "note": "A first value for a face polished by hands."
+  },
+  "wornHaziness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "derived",
+    "source": "a burnished face",
+    "derivation": "no second lobe"
+  },
+  "wearPassages": {
+    "value": 100000.0,
+    "unit": "count",
+    "grade": "unverified",
+    "source": "Histories/bronze.wear.json: unverified wear rate",
+    "note": "A first value: handled bronze brightens within a few years."
+  },
+  "tarnishCover": {
+    "value": 0.6,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Histories/bronze.tarnish.json: unverified tarnish rate",
+    "note": "Tarnish where hands do not reach; the law keeps worn places bright."
+  }
+}

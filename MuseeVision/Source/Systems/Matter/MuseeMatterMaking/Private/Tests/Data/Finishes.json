@@ -1,0 +1,7 @@
+{
+  "stage": "matter-test",
+  "finishes": [
+    { "surface": "coping", "material": "matter-test.resolve", "working": "honed", "history": "touched", "note": "A surface whose material the test makes in memory." },
+    { "surface": "nowhere", "material": "matter-test.never-made", "working": "honed", "history": "clean", "note": "A surface whose material was never made." }
+  ]
+}

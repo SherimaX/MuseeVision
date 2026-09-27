@@ -1,0 +1,66 @@
+{
+  "schema": "musee.matter.shading.substance/1",
+  "key": "bronze",
+  "name": "Tin bronze CuSn10",
+  "family": "bronze",
+  "record": "Substances/bronze.json",
+  "master": "metal",
+  "conductor": {
+    "f0": {
+      "value": [
+        0.961,
+        0.693,
+        0.491
+      ],
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "unit": "1",
+      "grade": "record",
+      "source": "Substances/bronze.json: optics.f0 (derived from the measured CIELAB colour of Cu-Sn alloys)"
+    },
+    "f82": {
+      "value": [
+        0.921,
+        0.852,
+        0.732
+      ],
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Substances/bronze.json: unverified optics.f82 (from Cu85Zn15, the nearest measured copper alloy by colour; Querry 1985)"
+    }
+  },
+  "tarnish": {
+    "diffuseAlbedo": {
+      "value": [
+        0.12,
+        0.04,
+        0.03
+      ],
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Workings/patinated.json: film.phases[0] (cuprite, \"cochineal-red to ruby-red\", streak brownish red)",
+      "note": "No measured diffuse colour of a tarnish film on CuSn10 was read; a first dark red-brown for cuprite, the first film to form (Graedel 1987, in History.ush)."
+    },
+    "refractiveIndex": {
+      "value": 2.849,
+      "unit": "1",
+      "grade": "record",
+      "source": "Workings/patinated.json: film.phases[0].refractiveIndex (cuprite)"
+    },
+    "roughness": {
+      "value": 0.6,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Histories/bronze.tarnish.json (no measured roughness of a tarnish film)",
+      "note": "A first value: a thin film follows the metal's own texture, dulled."
+    },
+    "cover": {
+      "value": 0.0,
+      "unit": "1",
+      "grade": "derived",
+      "source": "Histories/bronze.tarnish.json",
+      "derivation": "the substance itself carries no film; the history sets how far it has grown"
+    }
+  }
+}

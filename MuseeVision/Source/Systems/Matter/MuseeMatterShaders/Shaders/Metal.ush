@@ -94,9 +94,6 @@ FMatterSurface MatterMineralCrust(float3 Albedo, float RefractiveIndex, float Ro
 // A dielectric film's edge is white: Fresnel's reflectance of a real index rises to 1 at grazing in every colour.
 static const float3 MatterDielectricEdge = float3(1.0, 1.0, 1.0);
 
-// A metal has no open pores: water lies on it only as a film, and nothing wets its body.
-static const float MatterSealedPorosity = 0.0;
-
 /** A metal face before its history: its coloured reflection, no diffuse body, the working's roughness. */
 FMatterSurface MatterBareMetal(float3 F0, float Roughness)
 {
@@ -121,6 +118,13 @@ FMatterSurface MatterFilmed(FMatterSurface Metal, float3 FilmAlbedo, float FilmR
 float3 MatterFilmedEdgeTint(float3 EdgeTint, float Cover)
 {
 	return lerp(EdgeTint, MatterDielectricEdge, saturate(Cover));
+}
+
+/** The fraction of a metal a film still covers where passages have worn the fraction Worn of the face: abrasion
+ *  keeps worn and handled places bright (as in MatterPatinaCover). */
+float MatterWornFilmCover(float Cover, float Worn)
+{
+	return saturate(Cover) * saturate(1.0 - Worn);
 }
 
 /** The fraction of a face still under its leaf: gilding wears through where passages have worn the face, exposing what

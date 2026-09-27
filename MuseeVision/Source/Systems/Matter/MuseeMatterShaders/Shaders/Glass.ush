@@ -59,9 +59,6 @@ float3 MatterPaneEdgeColor(float3 AbsorptionPerMillimeter, float EdgePathMillime
 // the pane's bulk.
 static const float MatterPaneFaces = 2.0;
 
-// Glass has no open pores: water lies on it only as a film.
-static const float MatterGlassPorosity = 0.0;
-
 /** A clear pane's surface before its history: no diffuse body, the reflectance of its index, the working's roughness. */
 FMatterSurface MatterClearPane(float RefractiveIndex, float Roughness)
 {

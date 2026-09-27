@@ -54,6 +54,10 @@ static const float MatterSnowAlbedo = 0.97;
 // roughest face the Slab can describe.
 static const float MatterSnowRoughness = 1.0;
 
+// A sealed face (a metal, a glass, a varnished film) has no open pores, and so no depth of pores either: water lies
+// on it only as a film.
+static const float MatterNoPores = 0.0;
+
 // A place Form has not described is an open face: no recess, no hollow, and a hollow gathers only its own rain.
 static const float MatterOpenCavity = 0.0;
 static const float MatterNoHollowMillimeters = 0.0;

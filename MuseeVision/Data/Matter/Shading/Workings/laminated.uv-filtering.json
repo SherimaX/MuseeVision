@@ -1,0 +1,49 @@
+{
+  "schema": "musee.matter.shading.working/1",
+  "key": "laminated.uv-filtering",
+  "name": "Laminated with a UV-filtering interlayer",
+  "record": "Workings/laminated.uv-filtering.json",
+  "kind": "face",
+  "roughness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Substances/low-iron-glass.json: formation (a fire-polished float surface)",
+    "note": "A float surface is flat far below the wavelength of light; no measurement was read."
+  },
+  "roughnessAcross": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "derived",
+    "source": "Substances/low-iron-glass.json: a float surface has no grain",
+    "derivation": "equal to the roughness along"
+  },
+  "haziness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "record",
+    "source": "Workings/laminated.uv-filtering.json: interlayer.haze (under 1 %)",
+    "derivation": "below 1 %, taken as none"
+  },
+  "textureDepth": {
+    "value": 0.001,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Substances/low-iron-glass.json (a float surface)",
+    "note": "The film a clean pane holds before it runs."
+  },
+  "relief": {
+    "value": 0.0,
+    "unit": "mm",
+    "grade": "derived",
+    "source": "Substances/low-iron-glass.json: a float surface",
+    "derivation": "no relief"
+  },
+  "paneThickness": {
+    "value": 12.0,
+    "unit": "mm",
+    "grade": "record",
+    "source": "Workings/laminated.json: overhead.precedent.innerPlies (6 + 0.76 + 6 mm)",
+    "derivation": "the glass plies, 6 + 6 mm; the interlayer's absorption in the visible is not modelled"
+  }
+}

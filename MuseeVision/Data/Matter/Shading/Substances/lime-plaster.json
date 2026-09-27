@@ -1,0 +1,85 @@
+{
+  "schema": "musee.matter.shading.substance/1",
+  "key": "lime-plaster",
+  "name": "Lime plaster",
+  "family": "white",
+  "record": "Substances/lime-plaster.json",
+  "master": "white",
+  "dielectric": {
+    "diffuseAlbedo": {
+      "value": [
+        0.86,
+        0.86,
+        0.86
+      ],
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Substances/lime-plaster.json: unverified luminous reflectance of a clean, dry, carbonated lime-and-marble-dust finish (0.80 to 0.92)",
+      "derivation": "the middle of the unverified range, as a neutral white",
+      "note": "The tier (b) ColorChecker specimen sheet must settle it."
+    },
+    "refractiveIndex": {
+      "value": 1.5723,
+      "unit": "1",
+      "grade": "derived",
+      "source": "Substances/lime-plaster.json: optics.specularF0 (0.038 to 0.061)",
+      "derivation": "n = (1 + sqrt(F0)) / (1 - sqrt(F0)) at the middle of the F0 range, 0.0495"
+    },
+    "porosity": {
+      "value": 0.324,
+      "unit": "1",
+      "grade": "record",
+      "source": "Substances/lime-plaster.json: physical.openPorosity"
+    },
+    "wettingDepth": {
+      "value": 2.5,
+      "unit": "mm",
+      "grade": "derived",
+      "source": "Substances/lime-plaster.json: stock.coats[2].thickness (2 to 3 mm, the setting coat)",
+      "derivation": "the middle of the setting coat's thickness: the body light and water reach in the finish"
+    }
+  },
+  "structure": {
+    "grain": {
+      "value": 1.0,
+      "unit": "mm",
+      "grade": "record",
+      "source": "Substances/lime-plaster.json: stock.mixes.fineSandTopSize (1 mm)"
+    },
+    "bed": {
+      "value": 300,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Workings/trowelled.json: unverified surface.texture (trowel stroke length)",
+      "note": "The reach of one trowel pass, a first value until the trowel marks are measured."
+    },
+    "bedAspect": {
+      "value": 1.0,
+      "unit": "1",
+      "grade": "derived",
+      "source": "Substances/lime-plaster.json: formation (a mixed aggregate with no bedding)",
+      "derivation": "an unbedded body is isotropic"
+    },
+    "hurst": {
+      "value": 0.7,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Candela et al. 2012 (as for stone); no measurement of a plaster face was read"
+    },
+    "toneSpread": {
+      "value": 0.03,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Substances/lime-plaster.json: unverified luminous reflectance",
+      "note": "A set white varies little in tone; a first value."
+    },
+    "roughnessSpread": {
+      "value": 0.15,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Workings/trowelled.json: unverified surface.sheen",
+      "note": "A first value for the sheen's variation between trowel passes."
+    }
+  }
+}

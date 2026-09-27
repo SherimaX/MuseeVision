@@ -1,0 +1,69 @@
+{
+  "schema": "musee.matter.shading.working/1",
+  "key": "gilt",
+  "name": "Gilt (23.75 carat leaf, oil gilding)",
+  "record": "Workings/gilt.json",
+  "kind": "layer",
+  "roughness": {
+    "value": 0.25,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Workings/gilt.json: unverified surface.roughness (burnished and matte gilding)",
+    "note": "A first value for oil gilding, which cannot be burnished."
+  },
+  "roughnessAcross": {
+    "value": 0.25,
+    "unit": "1",
+    "grade": "derived",
+    "source": "Workings/gilt.json: leaf has no grain",
+    "derivation": "equal to the roughness along"
+  },
+  "haziness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Workings/gilt.json (no measured haze)"
+  },
+  "textureDepth": {
+    "value": 0.005,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Workings/gilt.json: unverified surface.roughness",
+    "note": "The leaf follows its host's texture."
+  },
+  "relief": {
+    "value": 0.0,
+    "unit": "mm",
+    "grade": "derived",
+    "source": "Workings/gilt.json: leaf.thickness (0.1 um)",
+    "derivation": "the leaf adds no relief of its own"
+  },
+  "leaf": {
+    "f0": {
+      "value": [
+        1.058,
+        0.774,
+        0.307
+      ],
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "unit": "1",
+      "grade": "record",
+      "source": "Workings/gilt.json: optics.f0 (gold, from its measured complex index)"
+    },
+    "f82": {
+      "value": [
+        1.001,
+        0.896,
+        0.63
+      ],
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "unit": "1",
+      "grade": "record",
+      "source": "Workings/gilt.json: optics.f82"
+    }
+  },
+  "hosts": {
+    "metal": "cast.bronze",
+    "white": "cast.plaster"
+  }
+}

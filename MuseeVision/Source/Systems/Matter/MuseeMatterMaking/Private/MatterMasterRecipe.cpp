@@ -1,6 +1,7 @@
 #include "MatterMasterRecipe.h"
 
 #include "Containers/StringConv.h"
+#include "Materials/MaterialParameterCollection.h"
 #include "Misc/Char.h"
 
 namespace Musee::Matter
@@ -11,9 +12,21 @@ namespace
 	constexpr const TCHAR* LibraryFolder = TEXT("/Project/Matter/");
 	constexpr const TCHAR* LibraryExtension = TEXT(".ush");
 
-	/** The widths a Custom expression's pins can take: a scalar up to a four-component vector. */
+	/** The widths a Custom expression's pins can take: a texture object, or a scalar up to a four-component vector. */
+	constexpr int32 TexturePin = 0;
 	constexpr int32 NarrowestPin = 1;
 	constexpr int32 WidestPin = 4;
+
+	/** The widths a parameter can take: a texture, a scalar, or a colour of three. */
+	constexpr int32 ScalarParameter = 1;
+	constexpr int32 ColourParameter = 3;
+
+	/** The outputs of the engine's nodes a recipe may read by name, as MaterialExpressions.cpp and
+	 *  MaterialExpressionSubstrate.cpp name them. */
+	const TCHAR* const BoundsOutputs[] = { TEXT("Half Extents"), TEXT("Extents"), TEXT("Min"), TEXT("Max") };
+	const TCHAR* const TransmittanceOutputs[] = { TEXT("MFP"), TEXT("Thickness") };
+
+	using FTextBuilder = TStringBuilder<8192>;
 
 	FString SourceText(const FMasterSource& Source)
 	{
@@ -36,7 +49,15 @@ namespace
 		return Line;
 	}
 
-	void AppendParameters(const FMasterRecipe& Recipe, TStringBuilder<4096>& Text)
+	void AppendSettings(const FMasterRecipe& Recipe, FTextBuilder& Text)
+	{
+		const FMasterSettings& S = Recipe.Settings;
+		Text << TEXT("blend ") << static_cast<int32>(S.BlendMode) << TEXT(" nanite ") << (S.bUsedWithNanite ? 1 : 0)
+			<< TEXT(" surface-translucency ") << (S.bSurfaceTranslucency ? 1 : 0) << TEXT("\n");
+		Text << TEXT("moment ") << (Recipe.Moment ? Recipe.Moment->GetPathName() : FString(TEXT("-"))) << TEXT("\n");
+	}
+
+	void AppendParameters(const FMasterRecipe& Recipe, FTextBuilder& Text)
 	{
 		for (const FMasterParameter& Parameter : Recipe.Parameters)
 		{
@@ -44,11 +65,16 @@ namespace
 			Text << TEXT("parameter ") << Parameter.Name.ToString() << TEXT(" group=") << Parameter.Group.ToString()
 				<< TEXT(" components=") << Parameter.Components
 				<< TEXT(" default=") << NumberText(D.R) << TEXT(",") << NumberText(D.G) << TEXT(",") << NumberText(D.B)
+				<< TEXT(" texture=") << Parameter.Texture << TEXT(" primitive=") << Parameter.PrimitiveDataIndex
 				<< TEXT(" unit=") << OneLine(Parameter.Unit) << TEXT(" meaning=") << OneLine(Parameter.Meaning) << TEXT("\n");
+		}
+		for (const FMasterMomentRead& Read : Recipe.MomentReads)
+		{
+			Text << TEXT("moment-read ") << Read.Name.ToString() << TEXT("\n");
 		}
 	}
 
-	void AppendCalls(const FMasterRecipe& Recipe, TStringBuilder<4096>& Text)
+	void AppendCalls(const FMasterRecipe& Recipe, FTextBuilder& Text)
 	{
 		for (const FMasterCall& Call : Recipe.Calls)
 		{
@@ -69,29 +95,45 @@ namespace
 		}
 	}
 
-	void AppendTransformsAndSlab(const FMasterRecipe& Recipe, TStringBuilder<4096>& Text)
+	void AppendPins(const TCHAR* Kind, const TArray<TPair<const TCHAR*, const FMasterSource*>>& Pins, FTextBuilder& Text)
+	{
+		for (const TPair<const TCHAR*, const FMasterSource*>& Pin : Pins)
+		{
+			Text << Kind << TEXT(" ") << Pin.Key << TEXT(" <- ") << (Pin.Value->IsSet() ? SourceText(*Pin.Value) : FString(TEXT("-"))) << TEXT("\n");
+		}
+	}
+
+	void AppendNodesAndSurface(const FMasterRecipe& Recipe, FTextBuilder& Text)
 	{
 		for (const FMasterTransform& Transform : Recipe.Transforms)
 		{
 			Text << TEXT("transform ") << Transform.Name.ToString() << TEXT(" <- ") << SourceText(Transform.Input)
 				<< TEXT(" from=") << static_cast<int32>(Transform.From) << TEXT(" to=") << static_cast<int32>(Transform.To) << TEXT("\n");
 		}
-		const TPair<const TCHAR*, const FMasterSource*> Pins[] = {
-			{ TEXT("DiffuseAlbedo"), &Recipe.Slab.DiffuseAlbedo }, { TEXT("F0"), &Recipe.Slab.F0 }, { TEXT("F90"), &Recipe.Slab.F90 },
-			{ TEXT("Roughness"), &Recipe.Slab.Roughness }, { TEXT("Anisotropy"), &Recipe.Slab.Anisotropy },
-			{ TEXT("Haziness"), &Recipe.Slab.Haziness }, { TEXT("Normal"), &Recipe.Slab.Normal }, { TEXT("Tangent"), &Recipe.Slab.Tangent },
-		};
-		for (const TPair<const TCHAR*, const FMasterSource*>& Pin : Pins)
+		for (const FMasterTransmittance& Transmittance : Recipe.Transmittances)
 		{
-			Text << TEXT("slab ") << Pin.Key << TEXT(" <- ") << (Pin.Value->IsSet() ? SourceText(*Pin.Value) : FString(TEXT("-"))) << TEXT("\n");
+			Text << TEXT("transmittance ") << Transmittance.Name.ToString() << TEXT(" <- ") << SourceText(Transmittance.Transmittance) << TEXT("\n");
+		}
+		Text << TEXT("surface ") << static_cast<int32>(Recipe.Surface) << TEXT("\n");
+		Text << TEXT("slab subsurface=") << static_cast<int32>(Recipe.Slab.SubSurface) << TEXT("\n");
+		AppendPins(TEXT("slab"), SlabPins(Recipe.Slab), Text);
+		if (Recipe.Surface == EMasterSurface::LayeredSlab)
+		{
+			Text << TEXT("layer subsurface=") << static_cast<int32>(Recipe.Layer.SubSurface) << TEXT(" coverage <- ") << SourceText(Recipe.LayerCoverage) << TEXT("\n");
+			AppendPins(TEXT("layer"), SlabPins(Recipe.Layer), Text);
+		}
+		if (Recipe.Surface == EMasterSurface::Water)
+		{
+			AppendPins(TEXT("water"), WaterPins(Recipe.Water), Text);
 		}
 	}
 
-	/** Every node name of the recipe, with the call outputs each call offers. */
+	/** Every node name of the recipe, with the outputs each node of several outputs offers. */
 	struct FNodeTable
 	{
-		TMap<FName, TSet<FName>> CallOutputs;
+		TMap<FName, TSet<FName>> MultiOutputs;
 		TSet<FName> Plain;
+		TSet<FName> Textures;
 		TArray<FString> Problems;
 
 		void Add(FName Name, const TCHAR* Kind)
@@ -100,10 +142,22 @@ namespace
 			{
 				Problems.Add(FString::Printf(TEXT("A %s has no name."), Kind));
 			}
-			else if (Plain.Contains(Name) || CallOutputs.Contains(Name))
+			else if (Plain.Contains(Name) || MultiOutputs.Contains(Name))
 			{
 				Problems.Add(FString::Printf(TEXT("The name %s is used twice; the %s needs its own."), *Name.ToString(), Kind));
 			}
+		}
+
+		void AddPlain(FName Name, const TCHAR* Kind)
+		{
+			Add(Name, Kind);
+			Plain.Add(Name);
+		}
+
+		void AddOutputs(FName Name, const TCHAR* Kind, const TArray<FName>& Outputs)
+		{
+			Add(Name, Kind);
+			MultiOutputs.Add(Name, TSet<FName>(Outputs));
 		}
 
 		void Check(const FMasterSource& Source, const FString& Where)
@@ -112,11 +166,11 @@ namespace
 			{
 				Problems.Add(FString::Printf(TEXT("%s has no source."), *Where));
 			}
-			else if (const TSet<FName>* Outputs = CallOutputs.Find(Source.Node))
+			else if (const TSet<FName>* Outputs = MultiOutputs.Find(Source.Node))
 			{
 				if (!Source.Output.IsNone() && !Outputs->Contains(Source.Output))
 				{
-					Problems.Add(FString::Printf(TEXT("%s reads %s, which the call does not output."), *Where, *SourceText(Source)));
+					Problems.Add(FString::Printf(TEXT("%s reads %s, which the node does not output."), *Where, *SourceText(Source)));
 				}
 			}
 			else if (!Plain.Contains(Source.Node))
@@ -130,31 +184,50 @@ namespace
 		}
 	};
 
+	TArray<FName> NamesOf(TArrayView<const TCHAR* const> Texts)
+	{
+		TArray<FName> Names;
+		for (const TCHAR* Text : Texts)
+		{
+			Names.Add(FName(Text));
+		}
+		return Names;
+	}
+
 	FNodeTable TableOf(const FMasterRecipe& Recipe)
 	{
 		FNodeTable Table;
-		for (const TCHAR* Input : { MasterInput::LocalPosition, MasterInput::VertexNormalWorld })
-		{
-			Table.Plain.Add(FName(Input));
-		}
+		Table.Plain.Add(FName(MasterInput::LocalPosition));
+		Table.Plain.Add(FName(MasterInput::VertexNormalWorld));
+		Table.MultiOutputs.Add(FName(MasterInput::LocalBounds), TSet<FName>(NamesOf(BoundsOutputs)));
 		for (const FMasterParameter& Parameter : Recipe.Parameters)
 		{
-			Table.Add(Parameter.Name, TEXT("parameter"));
-			Table.Plain.Add(Parameter.Name);
+			Table.AddPlain(Parameter.Name, TEXT("parameter"));
+			if (Parameter.IsTexture())
+			{
+				Table.Textures.Add(Parameter.Name);
+			}
+		}
+		for (const FMasterMomentRead& Read : Recipe.MomentReads)
+		{
+			Table.AddPlain(Read.Name, TEXT("Moment read"));
 		}
 		for (const FMasterTransform& Transform : Recipe.Transforms)
 		{
-			Table.Add(Transform.Name, TEXT("transform"));
-			Table.Plain.Add(Transform.Name);
+			Table.AddPlain(Transform.Name, TEXT("transform"));
+		}
+		for (const FMasterTransmittance& Transmittance : Recipe.Transmittances)
+		{
+			Table.AddOutputs(Transmittance.Name, TEXT("transmittance"), NamesOf(TransmittanceOutputs));
 		}
 		for (const FMasterCall& Call : Recipe.Calls)
 		{
-			Table.Add(Call.Name, TEXT("call"));
-			TSet<FName>& Outputs = Table.CallOutputs.Add(Call.Name);
+			TArray<FName> Outputs;
 			for (const FMasterPin& Pin : Call.Outputs)
 			{
 				Outputs.Add(Pin.Name);
 			}
+			Table.AddOutputs(Call.Name, TEXT("call"), Outputs);
 		}
 		return Table;
 	}
@@ -189,6 +262,37 @@ namespace
 		return FString();
 	}
 
+	void ValidatePins(const FMasterCall& Call, FNodeTable& Table)
+	{
+		const FString CallName = Call.Name.ToString();
+		TSet<FName> PinNames;
+		for (const TArray<FMasterPin>* Pins : { &Call.Inputs, &Call.Outputs })
+		{
+			for (const FMasterPin& Pin : *Pins)
+			{
+				bool bAlreadyNamed = false;
+				PinNames.Add(Pin.Name, &bAlreadyNamed);
+				if (bAlreadyNamed || Pin.Name.IsNone())
+				{
+					Table.Problems.Add(FString::Printf(TEXT("Call %s has a pin without its own name (%s)."), *CallName, *Pin.Name.ToString()));
+				}
+				const bool bTexture = Pins == &Call.Inputs && Pin.Components == TexturePin;
+				if (!bTexture && (Pin.Components < NarrowestPin || Pin.Components > WidestPin))
+				{
+					Table.Problems.Add(FString::Printf(TEXT("Call %s pin %s has %d components; a pin has 1 to 4, or 0 for a texture input."), *CallName, *Pin.Name.ToString(), Pin.Components));
+				}
+			}
+		}
+		for (const FMasterPin& Pin : Call.Inputs)
+		{
+			Table.Check(Pin.Source, FString::Printf(TEXT("Call %s input %s"), *CallName, *Pin.Name.ToString()));
+			if ((Pin.Components == TexturePin) != Table.Textures.Contains(Pin.Source.Node))
+			{
+				Table.Problems.Add(FString::Printf(TEXT("Call %s input %s: a texture input reads a texture parameter, and only it does."), *CallName, *Pin.Name.ToString()));
+			}
+		}
+	}
+
 	void ValidateCall(const FMasterCall& Call, FNodeTable& Table)
 	{
 		const FString CallName = Call.Name.ToString();
@@ -208,48 +312,91 @@ namespace
 		{
 			Table.Problems.Add(FString::Printf(TEXT("Call %s returns %d components; a call returns 1 to 4."), *CallName, Call.ReturnComponents));
 		}
-		TSet<FName> PinNames;
-		for (const TArray<FMasterPin>* Pins : { &Call.Inputs, &Call.Outputs })
-		{
-			for (const FMasterPin& Pin : *Pins)
-			{
-				bool bAlreadyNamed = false;
-				PinNames.Add(Pin.Name, &bAlreadyNamed);
-				if (bAlreadyNamed || Pin.Name.IsNone())
-				{
-					Table.Problems.Add(FString::Printf(TEXT("Call %s has a pin without its own name (%s)."), *CallName, *Pin.Name.ToString()));
-				}
-				if (Pin.Components < NarrowestPin || Pin.Components > WidestPin)
-				{
-					Table.Problems.Add(FString::Printf(TEXT("Call %s pin %s has %d components; a pin has 1 to 4."), *CallName, *Pin.Name.ToString(), Pin.Components));
-				}
-			}
-		}
-		for (const FMasterPin& Pin : Call.Inputs)
-		{
-			Table.Check(Pin.Source, FString::Printf(TEXT("Call %s input %s"), *CallName, *Pin.Name.ToString()));
-		}
+		ValidatePins(Call, Table);
 	}
 
-	void ValidateSlab(const FMasterSlab& Slab, FNodeTable& Table)
+	void ValidatePinSet(const TArray<TPair<const TCHAR*, const FMasterSource*>>& Pins, const TCHAR* Where, FNodeTable& Table)
 	{
-		const TPair<const TCHAR*, const FMasterSource*> Pins[] = {
-			{ TEXT("DiffuseAlbedo"), &Slab.DiffuseAlbedo }, { TEXT("F0"), &Slab.F0 }, { TEXT("F90"), &Slab.F90 },
-			{ TEXT("Roughness"), &Slab.Roughness }, { TEXT("Anisotropy"), &Slab.Anisotropy }, { TEXT("Haziness"), &Slab.Haziness },
-			{ TEXT("Normal"), &Slab.Normal }, { TEXT("Tangent"), &Slab.Tangent },
-		};
 		for (const TPair<const TCHAR*, const FMasterSource*>& Pin : Pins)
 		{
 			if (Pin.Value->IsSet())
 			{
-				Table.Check(*Pin.Value, FString::Printf(TEXT("The Slab's %s"), Pin.Key));
+				Table.Check(*Pin.Value, FString::Printf(TEXT("%s's %s"), Where, Pin.Key));
 			}
 		}
+	}
+
+	void ValidateSlab(const FMasterSlab& Slab, const TCHAR* Where, FNodeTable& Table)
+	{
+		ValidatePinSet(SlabPins(Slab), Where, Table);
 		if (Slab.Haziness.IsSet() && !Slab.Roughness.IsSet())
 		{
-			Table.Problems.Add(TEXT("The Slab's Haziness is set without its Roughness; haze is a second lobe about the first."));
+			Table.Problems.Add(FString::Printf(TEXT("%s's Haziness is set without its Roughness; haze is a second lobe about the first."), Where));
+		}
+		if (Slab.SSSMFP.IsSet() != (Slab.SubSurface != MSS_None))
+		{
+			Table.Problems.Add(FString::Printf(TEXT("%s has a mean free path without a sub-surface type, or the other way round."), Where));
 		}
 	}
+
+	void ValidateSurface(const FMasterRecipe& Recipe, FNodeTable& Table)
+	{
+		ValidateSlab(Recipe.Slab, TEXT("The Slab"), Table);
+		if (Recipe.Surface == EMasterSurface::LayeredSlab)
+		{
+			ValidateSlab(Recipe.Layer, TEXT("The layer"), Table);
+			Table.Check(Recipe.LayerCoverage, TEXT("The layer's coverage"));
+		}
+		if (Recipe.Surface == EMasterSurface::Water)
+		{
+			ValidatePinSet(WaterPins(Recipe.Water), TEXT("The water"), Table);
+		}
+	}
+
+	void ValidateParameters(const FMasterRecipe& Recipe, FNodeTable& Table)
+	{
+		for (const FMasterParameter& Parameter : Recipe.Parameters)
+		{
+			const FString Name = Parameter.Name.ToString();
+			if (Parameter.Components != TexturePin && Parameter.Components != ScalarParameter && Parameter.Components != ColourParameter)
+			{
+				Table.Problems.Add(FString::Printf(TEXT("Parameter %s has %d components; a parameter is a texture (0), a scalar (1) or a colour (3)."), *Name, Parameter.Components));
+			}
+			if (Parameter.IsTexture() == Parameter.Texture.IsEmpty())
+			{
+				Table.Problems.Add(FString::Printf(TEXT("Parameter %s: a texture parameter names its starting texture, and only it does."), *Name));
+			}
+			if (Parameter.PrimitiveDataIndex != INDEX_NONE && Parameter.Components != ScalarParameter)
+			{
+				Table.Problems.Add(FString::Printf(TEXT("Parameter %s: only a scalar comes from a primitive's data."), *Name));
+			}
+			if (Parameter.Unit.IsEmpty() || Parameter.Meaning.IsEmpty())
+			{
+				Table.Problems.Add(FString::Printf(TEXT("Parameter %s does not state its unit and meaning."), *Name));
+			}
+		}
+		if (!Recipe.MomentReads.IsEmpty() && !Recipe.Moment)
+		{
+			Table.Problems.Add(TEXT("The recipe reads the museum Moment but names no parameter collection."));
+		}
+	}
+}
+
+TArray<TPair<const TCHAR*, const FMasterSource*>> SlabPins(const FMasterSlab& Slab)
+{
+	return {
+		{ TEXT("DiffuseAlbedo"), &Slab.DiffuseAlbedo }, { TEXT("F0"), &Slab.F0 }, { TEXT("F90"), &Slab.F90 },
+		{ TEXT("Roughness"), &Slab.Roughness }, { TEXT("Anisotropy"), &Slab.Anisotropy }, { TEXT("Haziness"), &Slab.Haziness },
+		{ TEXT("Normal"), &Slab.Normal }, { TEXT("Tangent"), &Slab.Tangent }, { TEXT("SSSMFP"), &Slab.SSSMFP },
+	};
+}
+
+TArray<TPair<const TCHAR*, const FMasterSource*>> WaterPins(const FMasterWater& Water)
+{
+	return {
+		{ TEXT("Specular"), &Water.Specular }, { TEXT("Roughness"), &Water.Roughness }, { TEXT("Normal"), &Water.Normal },
+		{ TEXT("WaterAlbedo"), &Water.WaterAlbedo }, { TEXT("WaterExtinction"), &Water.WaterExtinction },
+	};
 }
 
 FGuid FMasterIdentity::Derive(FStringView Role) const
@@ -268,14 +415,14 @@ FGuid FMasterIdentity::StateId() const
 
 FString CanonicalText(const FMasterRecipe& Recipe)
 {
-	TStringBuilder<4096> Text;
+	FTextBuilder Text;
 	Text << TEXT("musee.matter.master builder=") << MasterBuilderVersion << TEXT("\n");
 	Text << TEXT("package ") << Recipe.PackagePath << TEXT("\n");
 	Text << TEXT("asset ") << Recipe.AssetName.ToString() << TEXT("\n");
-	Text << TEXT("nanite ") << (Recipe.bUsedWithNanite ? 1 : 0) << TEXT("\n");
+	AppendSettings(Recipe, Text);
 	AppendParameters(Recipe, Text);
 	AppendCalls(Recipe, Text);
-	AppendTransformsAndSlab(Recipe, Text);
+	AppendNodesAndSurface(Recipe, Text);
 	return FString(Text.ToView());
 }
 
@@ -295,17 +442,7 @@ TArray<FString> Validate(const FMasterRecipe& Recipe)
 	{
 		Table.Problems.Add(TEXT("The recipe names no package path or asset."));
 	}
-	for (const FMasterParameter& Parameter : Recipe.Parameters)
-	{
-		if (Parameter.Components != 1 && Parameter.Components != 3)
-		{
-			Table.Problems.Add(FString::Printf(TEXT("Parameter %s has %d components; a parameter is a scalar or a colour of 3."), *Parameter.Name.ToString(), Parameter.Components));
-		}
-		if (Parameter.Unit.IsEmpty() || Parameter.Meaning.IsEmpty())
-		{
-			Table.Problems.Add(FString::Printf(TEXT("Parameter %s does not state its unit and meaning."), *Parameter.Name.ToString()));
-		}
-	}
+	ValidateParameters(Recipe, Table);
 	for (const FMasterCall& Call : Recipe.Calls)
 	{
 		ValidateCall(Call, Table);
@@ -314,7 +451,11 @@ TArray<FString> Validate(const FMasterRecipe& Recipe)
 	{
 		Table.Check(Transform.Input, FString::Printf(TEXT("Transform %s"), *Transform.Name.ToString()));
 	}
-	ValidateSlab(Recipe.Slab, Table);
+	for (const FMasterTransmittance& Transmittance : Recipe.Transmittances)
+	{
+		Table.Check(Transmittance.Transmittance, FString::Printf(TEXT("Transmittance %s"), *Transmittance.Name.ToString()));
+	}
+	ValidateSurface(Recipe, Table);
 	return MoveTemp(Table.Problems);
 }
 

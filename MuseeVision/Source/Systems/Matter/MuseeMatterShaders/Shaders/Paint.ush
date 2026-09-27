@@ -12,6 +12,8 @@
 #pragma once
 
 #include "/Project/Matter/Frame.ush"
+#include "/Project/Matter/Optics.ush"
+#include "/Project/Matter/History.ush"
 
 /** Where a point of the canvas lies on the image: (0, 0) at the top left, (1, 1) at the bottom right. Position, the
  *  bounds' minimum and their extent are in the piece's own axes, in any one unit. */
@@ -23,7 +25,20 @@ float2 MatterCanvasCoordinates(float3 PiecePosition, float3 BoundsMin, float3 Bo
 
 /** The paint layer's diffuse albedo where the image, decoded to linear, has the colour ImageLinear: the photograph's
  *  white stands for the reflectance of the painting's white. */
-float3 MatterPaintAlbedo(float3 ImageLinear, float WhiteAlbedo)
+float3 MatterPaintAlbedo(float3 ImageLinear, float3 WhiteAlbedo)
 {
 	return saturate(ImageLinear) * WhiteAlbedo;
+}
+
+/** The paint layer's surface before its history: the image's colour in the body, and the varnish's interface over it. */
+FMatterSurface MatterPaintSurface(float3 ImageLinear, float3 WhiteAlbedo, float VarnishRefractiveIndex, float Roughness)
+{
+	const float F0 = MatterDielectricF0(VarnishRefractiveIndex);
+	FMatterSurface Surface;
+	Surface.DiffuseAlbedo = MatterPaintAlbedo(ImageLinear, WhiteAlbedo);
+	Surface.F0 = F0.xxx;
+	Surface.Roughness = Roughness;
+	Surface.Haziness = 0.0;
+	Surface.Slope = float2(0.0, 0.0);
+	return Surface;
 }

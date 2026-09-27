@@ -1,0 +1,58 @@
+{
+  "schema": "musee.matter.shading.substance/1",
+  "key": "water",
+  "name": "Still water",
+  "family": "water",
+  "record": "Substances/water.json",
+  "master": "water",
+  "dielectric": {
+    "refractiveIndex": {
+      "value": 1.33335,
+      "unit": "1",
+      "grade": "record",
+      "source": "Substances/water.json: optics.refractiveIndex[0]"
+    },
+    "porosity": {
+      "value": 0.0,
+      "unit": "1",
+      "grade": "derived",
+      "source": "Substances/water.json: a liquid",
+      "derivation": "a liquid has no pores"
+    },
+    "wettingDepth": {
+      "value": 0.0,
+      "unit": "mm",
+      "grade": "derived",
+      "source": "Substances/water.json: a liquid",
+      "derivation": "a liquid is not wetted"
+    }
+  },
+  "medium": {
+    "absorption": {
+      "value": [
+        0.00033996,
+        5.646e-05,
+        9.24e-06
+      ],
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "unit": "1/mm",
+      "grade": "derived",
+      "source": "Substances/water.json: optics.internalTransmittance1m (0.7118, 0.9451 and 0.9908 at 650, 550 and 450 nm)",
+      "derivation": "alpha = -ln(T) / 1000 mm",
+      "conditions": "components at 650, 550 and 450 nm (red, green, blue)"
+    },
+    "scattering": {
+      "value": [
+        1e-06,
+        1e-06,
+        1e-06
+      ],
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "unit": "1/mm",
+      "grade": "unverified",
+      "source": "Substances/water.json: unverified optics.scatteringCoefficient (Morel 1974, of the order of 1e-3 per metre)",
+      "note": "The order of magnitude the record names, until Morel's values are read at their source.",
+      "conditions": "components at 650, 550 and 450 nm (red, green, blue)"
+    }
+  }
+}

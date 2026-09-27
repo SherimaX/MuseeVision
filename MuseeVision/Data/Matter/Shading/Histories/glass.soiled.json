@@ -1,0 +1,80 @@
+{
+  "schema": "musee.matter.shading.history/1",
+  "key": "glass.soiled",
+  "name": "Soiled between cleanings",
+  "mechanisms": [
+    "glass.soiling"
+  ],
+  "age": {
+    "value": 1.0,
+    "unit": "year",
+    "grade": "design",
+    "source": "Histories/glass.soiling.json: a roof pane cleaned once a year",
+    "note": "The age of the deposit since the last cleaning."
+  },
+  "passagesPerYear": {
+    "value": 0.0,
+    "unit": "1/year",
+    "grade": "design",
+    "source": "the face is not walked or handled"
+  },
+  "skyExposure": {
+    "value": 1.0,
+    "unit": "1",
+    "grade": "design",
+    "source": "a roof pane open to the sky"
+  },
+  "keptWet": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "design",
+    "source": "the face stands clear of water"
+  },
+  "deposition": {
+    "value": 0.06,
+    "unit": "1/year",
+    "grade": "derived",
+    "source": "Histories/glass.soiling.json: terms.lossCommercialCleanAir (0.04 to 0.08)",
+    "derivation": "the middle of the transmittance loss over a year, as a covered fraction per year"
+  },
+  "washRemoval": {
+    "value": 0.5,
+    "unit": "1/year",
+    "grade": "unverified",
+    "source": "Histories/glass.soiling.json (no wash rate was read)",
+    "note": "A first value: rain clears a sloped pane readily."
+  },
+  "soilAlbedo": {
+    "value": [
+      0.08,
+      0.07,
+      0.06
+    ],
+    "space": "linear Rec.709 (sRGB primaries), D65 white",
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Histories/stone.pore-soiling.json and white.soiling.json (black carbon; no measured deposit colour)",
+    "note": "A first dark grey for an outdoor deposit dominated by black carbon."
+  },
+  "wornRoughness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "derived",
+    "source": "not abraded",
+    "derivation": "the float surface"
+  },
+  "wornHaziness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "derived",
+    "source": "not abraded",
+    "derivation": "none"
+  },
+  "wearPassages": {
+    "value": 0.0,
+    "unit": "count",
+    "grade": "derived",
+    "source": "the face is not abraded",
+    "derivation": "0: it never wears"
+  }
+}

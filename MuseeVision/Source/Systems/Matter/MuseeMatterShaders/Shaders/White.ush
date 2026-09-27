@@ -14,11 +14,25 @@
 // Structure as fine in one direction as in any other: an unbedded body.
 static const float MatterUnbedded = 1.0;
 
+/** A white body's structure, from its record: its finest aggregate, the reach of the tool that laid it, its
+ *  self-affinity and its spreads of tone and roughness, and the working's relief. */
+FMatterStone MatterWhiteStructure(float GrainMillimeters, float ReachMillimeters, float HurstExponent, float ToneSpread,
+	float RoughnessSpread, float ReliefMillimeters)
+{
+	FMatterStone Structure;
+	Structure.GrainMillimeters = GrainMillimeters;
+	Structure.BedMillimeters = ReachMillimeters;
+	Structure.BedAspect = MatterUnbedded;
+	Structure.HurstExponent = HurstExponent;
+	Structure.ToneSpread = ToneSpread;
+	Structure.RoughnessSpread = RoughnessSpread;
+	Structure.ReliefMillimeters = ReliefMillimeters;
+	return Structure;
+}
+
 /** The face of a white body at PieceMeters: its tone, its roughness and the gradient of its relief, varied over the
- *  scales of its structure (Structure.GrainMillimeters is its finest aggregate, Structure.BedMillimeters the reach of
- *  the tool that laid it; BedAspect is ignored, since the body has no bedding). */
+ *  scales of its structure, which MatterWhiteStructure gives with no bedding. */
 FMatterStoneFace MatterWhiteFace(float3 PieceMeters, float Seed, FMatterStone Structure, float Roughness)
 {
-	Structure.BedAspect = MatterUnbedded;
 	return MatterStoneFace(PieceMeters, MatterNaturalBed(), Seed, Structure, Roughness);
 }

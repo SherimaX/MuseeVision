@@ -51,7 +51,8 @@ namespace Musee::Matter::Tests
 		FMasterCall& Call = Recipe.Calls.AddDefaulted_GetRef();
 		Call.Name = TEXT("Library");
 		Call.Includes = { TEXT("/Project/Matter/Frame.ush"), TEXT("/Project/Matter/Optics.ush"), TEXT("/Project/Matter/History.ush"),
-			TEXT("/Project/Matter/Stone.ush"), TEXT("/Project/Matter/Metal.ush"), TEXT("/Project/Matter/Glass.ush") };
+			TEXT("/Project/Matter/Stone.ush"), TEXT("/Project/Matter/Metal.ush"), TEXT("/Project/Matter/Glass.ush"),
+			TEXT("/Project/Matter/White.ush"), TEXT("/Project/Matter/Medium.ush"), TEXT("/Project/Matter/Paint.ush") };
 		Call.Code = TEXT(R"(const float S = Probe.x;
 FMatterSurface Surface;
 Surface.DiffuseAlbedo = Probe;
@@ -107,7 +108,22 @@ const float Worn = MatterWornFraction(Place, Response);
 const FMatterSurface Patinated = MatterPatinate(Marked, MatterPatinaCover(S, S, S, S, Worn), Patina);
 const float2 Lobe = MatterBrushedLobe(S, S);
 const FMatterPane Pane = MatterPane(S, S, Probe, S);
-return Patinated.DiffuseAlbedo + Patinated.F0 + MatterSlopeNormal(Patinated.Slope)
+FMatterMoment Moment;
+Moment.Wetness = S;
+Moment.SnowCover = S;
+const FMatterPlace Open = MatterOpenPlace(Place.NormalWorld, S, S, S);
+const FMatterSurface Metal = MatterFilmed(MatterBareMetal(Probe, S), Probe, S, S, MatterWornFilmCover(S, Worn));
+const FMatterSurface Moistened = MatterMomentHistory(Metal, Moment, Open, Response, S);
+const FMatterStoneFace White = MatterWhiteFace(Probe, S, MatterWhiteStructure(S, S, S, S, S, S), S);
+const FMatterSurface Still = MatterStillSurface(S, S);
+const FMatterSurface Paint = MatterPaintSurface(Probe, Probe, S, MatterCanvasCoordinates(Probe, Probe, Probe).x);
+const FMatterSurface Glazing = MatterClearPane(S, S);
+const float3 Library = Moistened.F0 + White.ReliefSlope + Still.F0 + Paint.DiffuseAlbedo + Glazing.F0
+	+ MatterFilmedEdgeTint(MatterEdgeTintFromF82(Probe, Probe), MatterLeafCover(S))
+	+ MatterSoiledTransmittance(MatterPaneFaceTransmittance(Probe, S), S) + MatterNaturalBed()
+	+ MatterMeanFreePathCentimeters(Probe, Probe) + MatterExtinctionPerCentimeter(Probe, Probe)
+	+ MatterSingleScatteringAlbedo(Probe, Probe) + MatterSpecularFromF0(S) + MatterFilmF0(Probe);
+return Library + Patinated.DiffuseAlbedo + Patinated.F0 + MatterSlopeNormal(Patinated.Slope)
 	+ MatterConductorEdgeTint(Probe, Probe) + MatterStrokeTangent(Probe, Place.NormalWorld) + Lobe.xyx
 	+ Face.Tone + Face.Roughness + Face.ReliefSlope
 	+ Pane.Transmittance + Pane.Reflectance + MatterPaneEdgeColor(Probe, S)
@@ -190,7 +206,7 @@ bool FMatterMasterBuilds::RunTest(const FString& Parameters)
 	{
 		return false;
 	}
-	TestTrue(TEXT("The package is saved"), IFileManager::Get().FileSize(*Made.Filename) > 0);
+	TestTrue(TEXT("The package is saved"), IFileManager::Get().FileSize(*Made.Save.Filename) > 0);
 	UMaterial* Material = Made.Material;
 	TestEqual(TEXT("The master is made at its path"), Material->GetPathName(), PackageNameOf(Recipe) + TEXT(".") + Recipe.AssetName.ToString());
 
@@ -259,18 +275,19 @@ bool FMatterMasterReproducible::RunTest(const FString& Parameters)
 		return false;
 	}
 	const FGuid FirstState = First.Material->StateId;
-	const TArray<uint8> FirstBytes = ReadPackage(First.Filename);
+	const TArray<uint8> FirstBytes = ReadPackage(First.Save.Filename);
 
 	const FMasterMade Second = MakeMasterAsset(Recipe);
 	if (!TestTrue(TEXT("The second make succeeds"), Second.Succeeded()))
 	{
 		return false;
 	}
-	const TArray<uint8> SecondBytes = ReadPackage(Second.Filename);
+	const TArray<uint8> SecondBytes = ReadPackage(Second.Save.Filename);
 
 	TestEqual(TEXT("The StateId is the recipe's"), FirstState, Expected);
 	TestEqual(TEXT("A re-make keeps the StateId"), Second.Material->StateId, Expected);
 	TestTrue(TEXT("A re-make builds a fresh material"), First.Material != Second.Material);
+	TestFalse(TEXT("A re-make of the same recipe writes nothing"), Second.Save.bWritten);
 	TestTrue(TEXT("The package is not empty"), FirstBytes.Num() > 0);
 	if (FirstBytes != SecondBytes)
 	{
@@ -306,7 +323,7 @@ bool FMatterLibraryCompiles::RunTest(const FString& Parameters)
 	{
 		AddError(Error);
 	}
-	TestTrue(TEXT("Every function of Frame, Optics, History, Stone, Metal and Glass compiles for PCD3D_SM6"), Compile.bCompiled);
+	TestTrue(TEXT("Every function of Matter's shading library compiles for PCD3D_SM6"), Compile.bCompiled);
 	AddInfo(FString::Printf(TEXT("The library proof: %u shaders for PCD3D_SM6 in %.1f s."), Compile.ShaderCount, FPlatformTime::Seconds() - Start));
 	Proof->MarkAsGarbage();
 	return true;

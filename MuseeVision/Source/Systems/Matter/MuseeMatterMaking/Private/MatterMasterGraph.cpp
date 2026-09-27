@@ -1,14 +1,18 @@
 #include "MatterMasterGraph.h"
 
 #include "MaterialEditingLibrary.h"
+#include "Engine/Texture.h"
 #include "Materials/Material.h"
+#include "Materials/MaterialExpressionCollectionParameter.h"
 #include "Materials/MaterialExpressionCustom.h"
 #include "Materials/MaterialExpressionLocalPosition.h"
 #include "Materials/MaterialExpressionScalarParameter.h"
 #include "Materials/MaterialExpressionSubstrate.h"
+#include "Materials/MaterialExpressionTextureObjectParameter.h"
 #include "Materials/MaterialExpressionTransform.h"
 #include "Materials/MaterialExpressionVectorParameter.h"
 #include "Materials/MaterialExpressionVertexNormalWS.h"
+#include "Materials/MaterialParameterCollection.h"
 #include "UObject/UnrealType.h"
 
 namespace Musee::Matter
@@ -22,6 +26,9 @@ namespace
 	/** UMaterialInterface keeps its lighting guid in this private reflected property. */
 	constexpr const TCHAR* LightingGuidProperty = TEXT("LightingGuid");
 
+	/** The engine's object-bounds node, whose class the engine does not export; it is made by its reflected class. */
+	constexpr const TCHAR* LocalBoundsClass = TEXT("/Script/Engine.MaterialExpressionObjectLocalBounds");
+
 	/** The graph under construction: the material, its identity, and each recipe node's expression. */
 	struct FGraph
 	{
@@ -31,12 +38,11 @@ namespace
 		TMap<FName, UMaterialExpression*> Nodes;
 	};
 
-	/** Adds an expression named <Kind>_<Node>, with identifiers derived from that name and the recipe's hash. */
-	template <typename TExpression>
-	TExpression* AddExpression(FGraph& Graph, const TCHAR* Kind, FName Node)
+	/** Adds an expression of Class named <Kind>_<Node>, with identifiers derived from that name and the recipe's hash. */
+	UMaterialExpression* AddExpressionOf(FGraph& Graph, UClass* Class, const TCHAR* Kind, FName Node)
 	{
 		const FString ObjectName = FString::Printf(TEXT("%s_%s"), Kind, *Node.ToString());
-		TExpression* Expression = NewObject<TExpression>(&Graph.Material, FName(*ObjectName), RF_Transactional);
+		UMaterialExpression* Expression = NewObject<UMaterialExpression>(&Graph.Material, Class, FName(*ObjectName), RF_Transactional);
 		Graph.Material.GetExpressionCollection().AddExpression(Expression);
 		Expression->Material = &Graph.Material;
 		Expression->GetMaterialExpressionId() = Graph.Identity.Derive(TEXT("Expression.") + ObjectName);
@@ -45,6 +51,12 @@ namespace
 			Expression->GetParameterExpressionId() = Graph.Identity.Derive(TEXT("Parameter.") + ObjectName);
 		}
 		return Expression;
+	}
+
+	template <typename TExpression>
+	TExpression* AddExpression(FGraph& Graph, const TCHAR* Kind, FName Node)
+	{
+		return CastChecked<TExpression>(AddExpressionOf(Graph, TExpression::StaticClass(), Kind, Node));
 	}
 
 	ECustomMaterialOutputType OutputTypeOf(int32 Components)
@@ -95,11 +107,22 @@ namespace
 		{
 			Read.Add(Transform.Input.Node);
 		}
-		for (const FMasterSource* Pin : { &Recipe.Slab.DiffuseAlbedo, &Recipe.Slab.F0, &Recipe.Slab.F90, &Recipe.Slab.Roughness,
-				&Recipe.Slab.Anisotropy, &Recipe.Slab.Haziness, &Recipe.Slab.Normal, &Recipe.Slab.Tangent })
+		for (const FMasterTransmittance& Transmittance : Recipe.Transmittances)
 		{
-			Read.Add(Pin->Node);
+			Read.Add(Transmittance.Transmittance.Node);
 		}
+		for (const FMasterSlab* Slab : { &Recipe.Slab, &Recipe.Layer })
+		{
+			for (const TPair<const TCHAR*, const FMasterSource*>& Pin : SlabPins(*Slab))
+			{
+				Read.Add(Pin.Value->Node);
+			}
+		}
+		for (const TPair<const TCHAR*, const FMasterSource*>& Pin : WaterPins(Recipe.Water))
+		{
+			Read.Add(Pin.Value->Node);
+		}
+		Read.Add(Recipe.LayerCoverage.Node);
 		return Read;
 	}
 
@@ -108,6 +131,7 @@ namespace
 		const TSet<FName> Read = ReadNodes(Recipe);
 		const FName LocalPosition(MasterInput::LocalPosition);
 		const FName VertexNormalWorld(MasterInput::VertexNormalWorld);
+		const FName LocalBounds(MasterInput::LocalBounds);
 		if (Read.Contains(LocalPosition))
 		{
 			Graph.Nodes.Add(LocalPosition, AddExpression<UMaterialExpressionLocalPosition>(Graph, TEXT("Input"), LocalPosition));
@@ -116,6 +140,46 @@ namespace
 		{
 			Graph.Nodes.Add(VertexNormalWorld, AddExpression<UMaterialExpressionVertexNormalWS>(Graph, TEXT("Input"), VertexNormalWorld));
 		}
+		if (Read.Contains(LocalBounds))
+		{
+			UClass* BoundsClass = FindObject<UClass>(nullptr, LocalBoundsClass);
+			if (!BoundsClass)
+			{
+				Graph.Problems.Add(FString::Printf(TEXT("The engine has no class %s."), LocalBoundsClass));
+				return;
+			}
+			Graph.Nodes.Add(LocalBounds, AddExpressionOf(Graph, BoundsClass, TEXT("Input"), LocalBounds));
+		}
+	}
+
+	void AddScalarParameter(FGraph& Graph, const FMasterParameter& Parameter, const FString& Description)
+	{
+		UMaterialExpressionScalarParameter* Scalar = AddExpression<UMaterialExpressionScalarParameter>(Graph, TEXT("Parameter"), Parameter.Name);
+		Scalar->ParameterName = Parameter.Name;
+		Scalar->Group = Parameter.Group;
+		Scalar->DefaultValue = Parameter.Default.R;
+		Scalar->Desc = Description;
+		if (Parameter.PrimitiveDataIndex != INDEX_NONE)
+		{
+			Scalar->bUseCustomPrimitiveData = true;
+			Scalar->PrimitiveDataIndex = static_cast<uint8>(Parameter.PrimitiveDataIndex);
+		}
+		Graph.Nodes.Add(Parameter.Name, Scalar);
+	}
+
+	void AddTextureParameter(FGraph& Graph, const FMasterParameter& Parameter, const FString& Description)
+	{
+		UMaterialExpressionTextureObjectParameter* Texture = AddExpression<UMaterialExpressionTextureObjectParameter>(Graph, TEXT("Parameter"), Parameter.Name);
+		Texture->ParameterName = Parameter.Name;
+		Texture->Group = Parameter.Group;
+		Texture->Desc = Description;
+		Texture->Texture = LoadObject<UTexture>(nullptr, *Parameter.Texture);
+		Texture->SamplerType = SAMPLERTYPE_Color;
+		if (!Texture->Texture)
+		{
+			Graph.Problems.Add(FString::Printf(TEXT("Parameter %s: there is no texture %s."), *Parameter.Name.ToString(), *Parameter.Texture));
+		}
+		Graph.Nodes.Add(Parameter.Name, Texture);
 	}
 
 	void AddParameters(FGraph& Graph, const FMasterRecipe& Recipe)
@@ -123,25 +187,39 @@ namespace
 		for (const FMasterParameter& Parameter : Recipe.Parameters)
 		{
 			const FString Description = FString::Printf(TEXT("%s [%s]"), *Parameter.Meaning, *Parameter.Unit);
-			const FLinearColor& Default = Parameter.Default;
-			if (Parameter.Components == 1)
+			if (Parameter.IsTexture())
 			{
-				UMaterialExpressionScalarParameter* Scalar = AddExpression<UMaterialExpressionScalarParameter>(Graph, TEXT("Parameter"), Parameter.Name);
-				Scalar->ParameterName = Parameter.Name;
-				Scalar->Group = Parameter.Group;
-				Scalar->DefaultValue = Default.R;
-				Scalar->Desc = Description;
-				Graph.Nodes.Add(Parameter.Name, Scalar);
+				AddTextureParameter(Graph, Parameter, Description);
+			}
+			else if (Parameter.Components == 1)
+			{
+				AddScalarParameter(Graph, Parameter, Description);
 			}
 			else
 			{
 				UMaterialExpressionVectorParameter* Vector = AddExpression<UMaterialExpressionVectorParameter>(Graph, TEXT("Parameter"), Parameter.Name);
 				Vector->ParameterName = Parameter.Name;
 				Vector->Group = Parameter.Group;
-				Vector->DefaultValue = FLinearColor(Default.R, Default.G, Default.B);
+				Vector->DefaultValue = FLinearColor(Parameter.Default.R, Parameter.Default.G, Parameter.Default.B);
 				Vector->Desc = Description;
 				Graph.Nodes.Add(Parameter.Name, Vector);
 			}
+		}
+	}
+
+	void AddMomentReads(FGraph& Graph, const FMasterRecipe& Recipe)
+	{
+		for (const FMasterMomentRead& Read : Recipe.MomentReads)
+		{
+			UMaterialExpressionCollectionParameter* Expression = AddExpression<UMaterialExpressionCollectionParameter>(Graph, TEXT("Moment"), Read.Name);
+			Expression->Collection = Recipe.Moment;
+			Expression->ParameterName = Read.Name;
+			Expression->ParameterId = Recipe.Moment->GetParameterId(Read.Name);
+			if (!Expression->ParameterId.IsValid())
+			{
+				Graph.Problems.Add(FString::Printf(TEXT("The Moment's collection %s has no parameter %s."), *Recipe.Moment->GetPathName(), *Read.Name.ToString()));
+			}
+			Graph.Nodes.Add(Read.Name, Expression);
 		}
 	}
 
@@ -171,7 +249,7 @@ namespace
 		}
 	}
 
-	void AddTransforms(FGraph& Graph, const FMasterRecipe& Recipe)
+	void AddTransformsAndUtilities(FGraph& Graph, const FMasterRecipe& Recipe)
 	{
 		for (const FMasterTransform& Transform : Recipe.Transforms)
 		{
@@ -180,9 +258,13 @@ namespace
 			Expression->TransformType = Transform.To;
 			Graph.Nodes.Add(Transform.Name, Expression);
 		}
+		for (const FMasterTransmittance& Transmittance : Recipe.Transmittances)
+		{
+			Graph.Nodes.Add(Transmittance.Name, AddExpression<UMaterialExpressionSubstrateTransmittanceToMFP>(Graph, TEXT("Transmittance"), Transmittance.Name));
+		}
 	}
 
-	/** Wires every call's inputs and every transform's input, once all nodes exist, so a recipe lists them in any order. */
+	/** Wires every call's, transform's and utility's inputs, once all nodes exist, so a recipe lists them in any order. */
 	void ConnectNodes(FGraph& Graph, const FMasterRecipe& Recipe)
 	{
 		for (const FMasterCall& Call : Recipe.Calls)
@@ -199,29 +281,34 @@ namespace
 			UMaterialExpressionTransform* Expression = CastChecked<UMaterialExpressionTransform>(Graph.Nodes[Transform.Name]);
 			Connect(Graph, Expression->Input, Transform.Input, FString::Printf(TEXT("Transform %s"), *Transform.Name.ToString()));
 		}
+		for (const FMasterTransmittance& Transmittance : Recipe.Transmittances)
+		{
+			UMaterialExpressionSubstrateTransmittanceToMFP* Expression = CastChecked<UMaterialExpressionSubstrateTransmittanceToMFP>(Graph.Nodes[Transmittance.Name]);
+			Connect(Graph, Expression->TransmittanceColor, Transmittance.Transmittance, FString::Printf(TEXT("Transmittance %s"), *Transmittance.Name.ToString()));
+		}
 	}
 
-	/** The Slab the master ends in, with haze resolved onto its second specular lobe. */
-	UMaterialExpressionSubstrateSlabBSDF* AddSlab(FGraph& Graph, const FMasterSlab& Pins)
+	/** A Slab named Role, with haze resolved onto its second specular lobe. */
+	UMaterialExpressionSubstrateSlabBSDF* AddSlab(FGraph& Graph, const FMasterSlab& Pins, FName Role)
 	{
-		const FName Front(TEXT("Front"));
-		UMaterialExpressionSubstrateSlabBSDF* Slab = AddExpression<UMaterialExpressionSubstrateSlabBSDF>(Graph, TEXT("Slab"), Front);
+		UMaterialExpressionSubstrateSlabBSDF* Slab = AddExpression<UMaterialExpressionSubstrateSlabBSDF>(Graph, TEXT("Slab"), Role);
+		Slab->SubSurfaceType = Pins.SubSurface;
 		const TPair<FExpressionInput*, const FMasterSource*> Wires[] = {
 			{ &Slab->DiffuseAlbedo, &Pins.DiffuseAlbedo }, { &Slab->F0, &Pins.F0 }, { &Slab->F90, &Pins.F90 },
 			{ &Slab->Roughness, &Pins.Roughness }, { &Slab->Anisotropy, &Pins.Anisotropy }, { &Slab->Normal, &Pins.Normal },
-			{ &Slab->Tangent, &Pins.Tangent },
+			{ &Slab->Tangent, &Pins.Tangent }, { &Slab->SSSMFP, &Pins.SSSMFP },
 		};
 		for (const TPair<FExpressionInput*, const FMasterSource*>& Wire : Wires)
 		{
 			if (Wire.Value->IsSet())
 			{
-				Connect(Graph, *Wire.Key, *Wire.Value, TEXT("The Slab"));
+				Connect(Graph, *Wire.Key, *Wire.Value, FString::Printf(TEXT("The %s Slab"), *Role.ToString()));
 			}
 		}
 		if (Pins.Haziness.IsSet())
 		{
 			UMaterialExpressionSubstrateHazinessToSecondaryRoughness* Haze =
-				AddExpression<UMaterialExpressionSubstrateHazinessToSecondaryRoughness>(Graph, TEXT("Haze"), Front);
+				AddExpression<UMaterialExpressionSubstrateHazinessToSecondaryRoughness>(Graph, TEXT("Haze"), Role);
 			Connect(Graph, Haze->BaseRoughness, Pins.Roughness, TEXT("The haze's base roughness"));
 			Connect(Graph, Haze->Haziness, Pins.Haziness, TEXT("The haze's haziness"));
 			const int32 SecondRoughness = OutputIndexOf(*Haze, SecondRoughnessOutput);
@@ -236,6 +323,60 @@ namespace
 		}
 		return Slab;
 	}
+
+	/** The layer's Slab, weighted by its coverage, laid vertically over the base Slab. */
+	UMaterialExpression* AddLayered(FGraph& Graph, const FMasterRecipe& Recipe)
+	{
+		UMaterialExpressionSubstrateSlabBSDF* Base = AddSlab(Graph, Recipe.Slab, TEXT("Base"));
+		UMaterialExpressionSubstrateSlabBSDF* Top = AddSlab(Graph, Recipe.Layer, TEXT("Layer"));
+		const FName Role(TEXT("Layer"));
+		UMaterialExpressionSubstrateWeight* Weight = AddExpression<UMaterialExpressionSubstrateWeight>(Graph, TEXT("Coverage"), Role);
+		Weight->A.Connect(0, Top);
+		Connect(Graph, Weight->Weight, Recipe.LayerCoverage, TEXT("The layer's coverage"));
+		UMaterialExpressionSubstrateVerticalLayering* Layering = AddExpression<UMaterialExpressionSubstrateVerticalLayering>(Graph, TEXT("Vertical"), Role);
+		Layering->Top.Connect(0, Weight);
+		Layering->Base.Connect(0, Base);
+		return Layering;
+	}
+
+	UMaterialExpression* AddWater(FGraph& Graph, const FMasterWater& Pins)
+	{
+		const FName Role(TEXT("Water"));
+		UMaterialExpressionSubstrateSingleLayerWaterBSDF* Water = AddExpression<UMaterialExpressionSubstrateSingleLayerWaterBSDF>(Graph, TEXT("Surface"), Role);
+		const TPair<FExpressionInput*, const FMasterSource*> Wires[] = {
+			{ &Water->Specular, &Pins.Specular }, { &Water->Roughness, &Pins.Roughness }, { &Water->Normal, &Pins.Normal },
+			{ &Water->WaterAlbedo, &Pins.WaterAlbedo }, { &Water->WaterExtinction, &Pins.WaterExtinction },
+		};
+		for (const TPair<FExpressionInput*, const FMasterSource*>& Wire : Wires)
+		{
+			if (Wire.Value->IsSet())
+			{
+				Connect(Graph, *Wire.Key, *Wire.Value, TEXT("The water"));
+			}
+		}
+		return Water;
+	}
+
+	UMaterialExpression* AddSurface(FGraph& Graph, const FMasterRecipe& Recipe)
+	{
+		switch (Recipe.Surface)
+		{
+		case EMasterSurface::LayeredSlab: return AddLayered(Graph, Recipe);
+		case EMasterSurface::Water: return AddWater(Graph, Recipe.Water);
+		default: return AddSlab(Graph, Recipe.Slab, TEXT("Front"));
+		}
+	}
+
+	void ApplySettings(UMaterial& Material, const FMasterSettings& Settings)
+	{
+		Material.BlendMode = Settings.BlendMode;
+		Material.SetUsageByFlag(MATUSAGE_Nanite, Settings.bUsedWithNanite);
+		if (Settings.bSurfaceTranslucency)
+		{
+			Material.TranslucencyLightingMode = TLM_SurfacePerPixelLighting;
+			Material.RefractionMethod = RM_None;
+		}
+	}
 }
 
 UMaterial* BuildMaster(const FMasterRecipe& Recipe, UObject* Outer, FName Name, EObjectFlags Flags, TArray<FString>& OutProblems)
@@ -247,18 +388,19 @@ UMaterial* BuildMaster(const FMasterRecipe& Recipe, UObject* Outer, FName Name, 
 	}
 	const FMasterIdentity Identity = IdentityOf(Recipe);
 	UMaterial* Material = NewObject<UMaterial>(Outer, Name, Flags);
-	Material->SetUsageByFlag(MATUSAGE_Nanite, Recipe.bUsedWithNanite);
+	ApplySettings(*Material, Recipe.Settings);
 
 	FGraph Graph{ *Material, Identity, OutProblems, {} };
 	AddEngineInputs(Graph, Recipe);
 	AddParameters(Graph, Recipe);
+	AddMomentReads(Graph, Recipe);
 	AddCalls(Graph, Recipe);
-	AddTransforms(Graph, Recipe);
+	AddTransformsAndUtilities(Graph, Recipe);
 	ConnectNodes(Graph, Recipe);
-	UMaterialExpressionSubstrateSlabBSDF* Slab = AddSlab(Graph, Recipe.Slab);
-	if (!UMaterialEditingLibrary::ConnectMaterialProperty(Slab, FString(), MP_FrontMaterial))
+	UMaterialExpression* Surface = AddSurface(Graph, Recipe);
+	if (!UMaterialEditingLibrary::ConnectMaterialProperty(Surface, FString(), MP_FrontMaterial))
 	{
-		OutProblems.Add(TEXT("The Slab could not be connected to the material's front material; is Substrate enabled (r.Substrate)?"));
+		OutProblems.Add(TEXT("The surface could not be connected to the material's front material; is Substrate enabled (r.Substrate)?"));
 	}
 	UMaterialEditingLibrary::LayoutMaterialExpressions(Material);
 	if (!OutProblems.IsEmpty())
@@ -280,9 +422,14 @@ UMaterial* BuildMaster(const FMasterRecipe& Recipe, UObject* Outer, FName Name, 
 void StampMaterialIdentity(UMaterial& Material, const FMasterIdentity& Identity)
 {
 	Material.StateId = Identity.StateId();
+	StampLightingGuid(Material, Identity.Derive(TEXT("Material.LightingGuid")));
+}
+
+void StampLightingGuid(UMaterialInterface& Material, const FGuid& Guid)
+{
 	const FStructProperty* Lighting = FindFProperty<FStructProperty>(UMaterialInterface::StaticClass(), LightingGuidProperty);
 	checkf(Lighting && Lighting->Struct == TBaseStructure<FGuid>::Get(),
-		TEXT("UMaterialInterface no longer reflects its LightingGuid as an FGuid; the master's identity cannot be stamped."));
-	*Lighting->ContainerPtrToValuePtr<FGuid>(&Material) = Identity.Derive(TEXT("Material.LightingGuid"));
+		TEXT("UMaterialInterface no longer reflects its LightingGuid as an FGuid; a made material's identity cannot be stamped."));
+	*Lighting->ContainerPtrToValuePtr<FGuid>(&Material) = Guid;
 }
 }

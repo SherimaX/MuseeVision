@@ -10,6 +10,7 @@
 
 #include "/Project/Matter/Frame.ush"
 #include "/Project/Matter/Optics.ush"
+#include "/Project/Matter/History.ush"
 
 // Unreal's Specular input maps to a dielectric's reflectance at normal incidence by F0 = 0.08 Specular, so that its
 // default of 0.5 is F0 = 0.04 (the engine's DielectricSpecularToF0, ShadingCommon.ush). Single Layer Water takes its
@@ -35,6 +36,20 @@ float3 MatterExtinctionPerCentimeter(float3 AbsorptionPerMillimeter, float3 Scat
 float3 MatterSingleScatteringAlbedo(float3 AbsorptionPerMillimeter, float3 ScatteringPerMillimeter)
 {
 	return ScatteringPerMillimeter / max(AbsorptionPerMillimeter + ScatteringPerMillimeter, MatterTiny);
+}
+
+/** A still liquid's surface before its history: no diffuse body at its interface (what it scatters, it scatters from
+ *  its volume), the reflectance of its index, and its surface's roughness. */
+FMatterSurface MatterStillSurface(float RefractiveIndex, float Roughness)
+{
+	const float F0 = MatterDielectricF0(RefractiveIndex);
+	FMatterSurface Surface;
+	Surface.DiffuseAlbedo = float3(0.0, 0.0, 0.0);
+	Surface.F0 = F0.xxx;
+	Surface.Roughness = Roughness;
+	Surface.Haziness = 0.0;
+	Surface.Slope = float2(0.0, 0.0);
+	return Surface;
 }
 
 /** Unreal's Specular for a dielectric interface whose reflectance at normal incidence is F0. */

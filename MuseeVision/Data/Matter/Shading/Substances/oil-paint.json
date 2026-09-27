@@ -1,0 +1,44 @@
+{
+  "schema": "musee.matter.shading.substance/1",
+  "key": "oil-paint",
+  "name": "Oil paint on primed linen, varnished",
+  "family": "accent",
+  "accentOf": "oak",
+  "record": "Substances/linen.json",
+  "master": "paint",
+  "dielectric": {
+    "diffuseAlbedo": {
+      "value": [
+        0.8,
+        0.8,
+        0.8
+      ],
+      "space": "linear Rec.709 (sRGB primaries), D65 white",
+      "unit": "1",
+      "grade": "unverified",
+      "source": "no research record of oil paint yet (the canvas support is Substances/linen.json)",
+      "note": "The reflectance a photograph's white stands for: a first value for a lead-white oil paint, until a paint record is researched."
+    },
+    "refractiveIndex": {
+      "value": 1.54,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "no research record of picture varnish yet",
+      "note": "The index usually quoted for natural-resin picture varnishes (dammar, mastic); to be read at its source."
+    },
+    "porosity": {
+      "value": 0.0,
+      "unit": "1",
+      "grade": "derived",
+      "source": "a drying-oil film under varnish",
+      "derivation": "a continuous varnished film has no open pores"
+    },
+    "wettingDepth": {
+      "value": 0.0,
+      "unit": "mm",
+      "grade": "derived",
+      "source": "a drying-oil film under varnish",
+      "derivation": "with no pores, nothing wets its body"
+    }
+  }
+}
