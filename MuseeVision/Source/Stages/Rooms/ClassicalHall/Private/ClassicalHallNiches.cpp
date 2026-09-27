@@ -112,6 +112,8 @@ namespace Musee::ClassicalHall
 			const FMuseeFrame Face = FrameOfAxes(Niche.Origin, -Niche.Lateral(), FVector::UpVector);
 			FFormSweep Surround;
 			Surround.Section = Written(Plan::NicheSurround);
+			// Its sink into the wall is trimmed to the wall's face.
+			Surround.bTrimSinkB = true;
 			Surround.Path = FFormProfile::From(FVector2D(-Niche.Radius, RailTop));
 			Surround.Path.LineTo(FVector2D(-Niche.Radius, Niche.Springing), EFormJoint::Crisp)
 				.ArcAbout(FVector2D(0.0, Niche.Springing), Niche.Radius, Niche.Radius, 180.0, 0.0, EFormJoint::Smooth)

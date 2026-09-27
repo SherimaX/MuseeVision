@@ -135,10 +135,14 @@ namespace Musee::ClassicalHall
 			FFormSweep Skirting;
 			Skirting.Section = Written(Plan::Skirting);
 			Skirting.Path = Path;
+			// Its sinks into the wall and the floor are trimmed to their faces.
+			Skirting.bTrimSinkA = true;
+			Skirting.bTrimSinkB = true;
 			Out.Add(Drawn(TEXT("wall.skirting"), TEXT("moulding"), MoveTemp(Skirting), nullptr));
 			FFormSweep Rail;
 			Rail.Section = Written(Plan::DadoRail);
 			Rail.Path = Path;
+			Rail.bTrimSinkA = true;
 			Out.Add(Drawn(TEXT("wall.dado-rail"), TEXT("moulding"), MoveTemp(Rail), nullptr));
 		}
 
@@ -155,6 +159,8 @@ namespace Musee::ClassicalHall
 			FFormSweep Moulding;
 			Moulding.Section = Written(Plan::PanelFrame);
 			Moulding.Path = RectOutward(-Half, Foot, Half, Top);
+			// Its sink into the wall is trimmed to the wall's face.
+			Moulding.bTrimSinkB = true;
 			Out.Add(Drawn(Name + TEXT(".frame"), TEXT("moulding"), MoveTemp(Moulding), nullptr, Frame));
 		}
 

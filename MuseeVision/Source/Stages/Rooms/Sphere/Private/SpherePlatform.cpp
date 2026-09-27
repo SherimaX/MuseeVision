@@ -126,8 +126,8 @@ namespace Musee::Sphere
 
 		/**
 		 * The eight struts, tubes on the line from the flange's rim (r 4.300, z 11.400) to under the deck (r 5.300,
-		 * z 20.170), between their end plates. A tube's ends are square to it and the plates are level, so each end meets
-		 * its plate on a 6.5° slant, which Form can't yet cut: the tube runs to where its axis meets the plate.
+		 * z 20.170), between their end plates. The plates are level and the tubes lean 6.5°, so each tube's end is cut on
+		 * its plate's plane, as the fabricator cuts a raking tube to sit on its plate.
 		 */
 		void Struts(TArray<FFormDrawing>& Out)
 		{
@@ -141,12 +141,21 @@ namespace Musee::Sphere
 				const FVector Foot(FootAt.X, FootAt.Y, Plan::NeckTop);
 				const FVector Head(HeadAt.X, HeadAt.Y, Plan::DeckSoffit);
 				const FVector Along = (Head - Foot).GetSafeNormal();
-				const FVector Start = Foot + Along * (Plan::StrutPlate / Along.Z);
-				const FVector End = Head - Along * (Plan::StrutPlate / Along.Z);
+				// The tube runs on past each plate's face far enough for its whole rim to reach it, and is cut there.
+				const double Rake = Outer * FVector2D(Along.X, Along.Y).Size() / Along.Z;
+				const FVector Start = Foot + Along * ((Plan::StrutPlate - Rake) / Along.Z);
+				const FVector End = Head - Along * ((Plan::StrutPlate - Rake) / Along.Z);
 				const FVector Side = Tangent(Bearing);
 				const FString Name = FString::Printf(TEXT("platform.strut.%d"), Index + 1);
-				Out.Add(Drawn(Name, TEXT("platform.gilt"), Ring(Outer - Plan::StrutWall, Outer, 0.0, FVector::Distance(Start, End)), Solid,
-					FrameOfAxes(Start, Side, FVector::CrossProduct(Along, Side))));
+				FFormDrawing& Tube = Out.Add_GetRef(Drawn(Name, TEXT("platform.gilt"), Ring(Outer - Plan::StrutWall, Outer, 0.0, FVector::Distance(Start, End)),
+					Solid, FrameOfAxes(Start, Side, FVector::CrossProduct(Along, Side))));
+				for (const TPair<double, double>& Plate : {TPair<double, double>(Plan::NeckTop + Plan::StrutPlate, -1.0),
+					TPair<double, double>(Plan::DeckSoffit - Plan::StrutPlate, 1.0)})
+				{
+					FFormCut& Cut = Tube.Cuts.AddDefaulted_GetRef();
+					Cut.PointMeters = Tube.Frame.PointFromParent(FVector(FootAt.X, FootAt.Y, Plate.Key));
+					Cut.Normal = Tube.Frame.DirectionFromParent(FVector::UpVector * Plate.Value);
+				}
 				Out.Add(Drawn(Name + TEXT(".foot"), TEXT("platform.gilt"), Rod(PlateRadius, Plan::NeckTop, Plan::NeckTop + Plan::StrutPlate), Solid,
 					FMuseeFrame(FVector(FootAt.X, FootAt.Y, 0.0))));
 				Out.Add(Drawn(Name + TEXT(".head"), TEXT("platform.gilt"), Rod(PlateRadius, Plan::DeckSoffit - Plan::StrutPlate, Plan::DeckSoffit), Solid,
