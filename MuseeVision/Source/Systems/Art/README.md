@@ -94,7 +94,6 @@ medium's stone (`Data/Art/Media.json`), standing at its `centre` on its Mount an
 stand (座) Art carves to it (`Stone/StoneStand.cpp`, the record's `stand`): its top recessed to the rock's own foot, the
 rock sitting down into it, an even lip, a bead round its side and short feet, in phoebe; its part is `<name>.stand`.
 
-Every object is named `<word>.<id>[.<index>]` (`canvas`, `glass`, `paper`, `plate`, `ware`, `cast`, `stone`), its parts `<name>.<part>`.
 **Panels, tapestry, scrolls and books.**
 - A panel (`panel`) hangs on its Wall anchor as a canvas does: its paint `paint.<id>` over `accent.oil-on-panel` on a
   board, the board on its cradle (members along the grain, slides across them), both in the wood its `wall` surface
@@ -137,7 +136,7 @@ Every object is named `<word>.<id>[.<index>]` (`canvas`, `glass`, `paper`, `plat
   gives each book's leaves, block, boards and finishes. A leaf (`kind` `leaf`) lies flat at its centre the same way.
 
 Every object is named `<word>.<id>[.<index>]` (`canvas`, `panel`, `glass`, `paper`, `silk`, `plate`, `ware`,
-`tapestry`), its parts `<name>.<part>`.
+`tapestry`, `cast`, `stone`), its parts `<name>.<part>`.
 
 **Works on moving bodies.** An entry whose anchor rides a moving body (a store's rack) names it, `"body": "<Body
 anchor>"`, as Lighting's and Planting's entries do. Its pieces are made where the anchor stands at rest and carried on
