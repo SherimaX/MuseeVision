@@ -259,9 +259,6 @@ namespace Musee::Chenghuai
 					Section({{0.0, 0.0}, {D, 0.0, true}, {D, 0.5 * Plan::DropperHigh, true}, {0.5 * D, Plan::DropperHigh, true}, {0.0, Plan::DropperHigh}}, false),
 					EHit::Solid);
 			}
-			const Plan::FDeskThings& Table = Plan::DeskThings[1];
-			Turned(Out, TEXT("linquan.table.rock-stand"), Phoebe, FVector(Plan::RockStandX, Plan::RockStandY, Table.Top),
-				Section({{0.0, 0.0}, {Plan::RockStandR, 0.0}, {Plan::RockStandR, Plan::RockStandHigh}, {0.0, Plan::RockStandHigh}}, false), EHit::Solid);
 		}
 
 		/** A plain hexagonal silk lantern (纱灯) hung from its hook on a bronze rod: black plates, posts and a rail, silk panels. */

@@ -7,8 +7,9 @@
 class UMaterial;
 
 /**
- * Compiling a master's shaders for one shader platform, to prove the master and the shading library it includes
- * compile, and to report the compiler's errors when they do not.
+ * Compiling a made material's shaders for one shader platform (a master's, or another system's made material's, such as
+ * Light's image), to prove the material and the shading library it includes compile, and to report the compiler's
+ * errors when they do not.
  *
  * It asks the material for every shader type it needs on the platform (UMaterial::GetShaderTypes) and compiles exactly
  * those, blocking, through the engine's cook path (UMaterial::CacheGivenTypesForCooking). That path does not depend on
@@ -34,5 +35,5 @@ namespace Musee::Matter
 	};
 
 	/** Compiles every shader Material needs on Platform, whose feature level is FeatureLevel, blocking until done. */
-	FMasterCompile CompileMasterShaders(UMaterial& Material, EShaderPlatform Platform, ERHIFeatureLevel::Type FeatureLevel);
+	MUSEEMATTERMAKING_API FMasterCompile CompileMasterShaders(UMaterial& Material, EShaderPlatform Platform, ERHIFeatureLevel::Type FeatureLevel);
 }

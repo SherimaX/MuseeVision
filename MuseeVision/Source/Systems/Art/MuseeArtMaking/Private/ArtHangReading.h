@@ -44,6 +44,8 @@ namespace Musee::ArtMaking
 		inline const FName Cast(TEXT("cast"));
 		/** Chenghuai's ceramics: cast from a scan where the plan gives one. */
 		inline const FName Ceramic(TEXT("ceramic"));
+		/** A scholar's rock (Chenghuai's 石兄 and its Lingbi rock): formed as its kind of rock is. */
+		inline const FName Stone(TEXT("stone"));
 	}
 
 	/** Whether an object is cast from its scan: a cast, or ceramic whose plan gives a scan. */
@@ -58,10 +60,16 @@ namespace Musee::ArtMaking
 		return Entry.Support == Supports::Ceramic && Entry.Scan.Mesh.IsEmpty();
 	}
 
-	/** Whether an object stands in the round in its medium's finish (Data/Art/Media.json): cast or turned. */
+	/** Whether an object is a scholar's rock, formed as its kind of rock is. */
+	[[nodiscard]] inline bool IsStone(const FArtHangEntry& Entry)
+	{
+		return Entry.Support == Supports::Stone;
+	}
+
+	/** Whether an object stands in the round in its medium's finish (Data/Art/Media.json): cast, turned or a rock. */
 	[[nodiscard]] inline bool IsInMedium(const FArtHangEntry& Entry)
 	{
-		return IsCast(Entry) || IsTurned(Entry);
+		return IsCast(Entry) || IsTurned(Entry) || IsStone(Entry);
 	}
 
 	/** A scan's name: its mesh's file name without its extension (`augustus-prima-porta`). */

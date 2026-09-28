@@ -195,6 +195,7 @@ namespace Musee::ArtMaking
 		if (Support == Supports::Silk) { return TEXT("silk"); }
 		if (Support == Supports::Panel) { return TEXT("panel"); }
 		if (Support == Supports::Tapestry) { return TEXT("tapestry"); }
+		if (Support == Supports::Stone) { return TEXT("stone"); }
 		return TEXT("work");
 	}
 
@@ -224,6 +225,10 @@ namespace Musee::ArtMaking
 			else if (IsTurned(Entry))
 			{
 				MakeVessel(Making, Plan, Canvas, OutPieces, OutFindings);
+			}
+			else if (IsStone(Entry))
+			{
+				MakeStone(Making, Plan, Canvas, OutPieces, OutFindings);
 			}
 			else if (Entry.Support == Supports::Glass && IsTransparency(Making.Stage, Entry))
 			{

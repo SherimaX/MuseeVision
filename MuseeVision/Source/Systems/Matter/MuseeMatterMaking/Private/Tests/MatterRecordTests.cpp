@@ -78,6 +78,18 @@ bool FMatterColourFromCieLab::RunTest(const FString& Parameters)
 	Near(*this, TEXT("Mid grey"), LinearRec709FromCieLab(50.0, 0.0, 0.0), FLinearColor(0.18419f, 0.18419f, 0.18419f));
 	Near(*this, TEXT("The red primary"), LinearRec709FromCieLab(53.2408, 80.0925, 67.2032), FLinearColor(1.0f, 0.0f, 0.0f));
 
+	// The way back, for colours derived from a photograph: the red primary returns to its CIELAB, and a warm white, a
+	// dark amber and a near-black make the round trip (to 0.05, the four decimals of IEC 61966-2-1's two matrices).
+	const FVector3d Red = CieLabFromLinearRec709(1.0, 0.0, 0.0);
+	TestTrue(TEXT("The red primary as CIELAB"), Red.Equals(FVector3d(53.2408, 80.0925, 67.2032), 0.05));
+	for (const FVector3d& Colour : { FVector3d(86.0, 1.0, 8.0), FVector3d(46.0, 30.0, 50.0), FVector3d(5.0, -3.0, 2.0) })
+	{
+		const FLinearColor Rgb = LinearRec709FromCieLab(Colour.X, Colour.Y, Colour.Z);
+		const FVector3d Back = CieLabFromLinearRec709(Rgb.R, Rgb.G, Rgb.B);
+		TestTrue(*FString::Printf(TEXT("(%g, %g, %g) makes the round trip, as (%.3f, %.3f, %.3f)"), Colour.X, Colour.Y, Colour.Z,
+			Back.X, Back.Y, Back.Z), Back.Equals(Colour, 0.05));
+	}
+
 	FMatterTriple Lab;
 	Lab.Value = { 50.0, 0.0, 0.0 };
 	Lab.Space = CieLabSpace;
@@ -103,6 +115,54 @@ bool FMatterRecordsRead::RunTest(const FString& Parameters)
 	{
 		TestEqual(TEXT("Its substance"), Travertine->Substance.ToString(), FString(TEXT("travertine")));
 		TestTrue(TEXT("It offers finishes"), Travertine->Finishes.Num() > 0);
+	}
+
+	// Tang sancai is three lead glazes over a white body (Shen et al. 2019): its palette entry offers each as a finish,
+	// each working laying its own glaze, so the object can carry all three; none of the three is a stand-in for another.
+	const FMatterPaletteEntry* Sancai = Palette.GetValue().Find(FMuseeKey(TEXT("accent.earthenware-sancai")));
+	if (TestNotNull(TEXT("The palette names the sancai earthenware"), Sancai))
+	{
+		TSet<FString> Glazes;
+		TMap<FString, TArray<double>> Albedos;
+		for (const TCHAR* Working : {TEXT("glazed.sancai"), TEXT("glazed.sancai-green"), TEXT("glazed.sancai-clear")})
+		{
+			TestTrue(*FString::Printf(TEXT("It offers %s"), Working),
+				Sancai->Finishes.ContainsByPredicate([Working](const FMatterPaletteFinish& F) { return F.Working == FMuseeKey(Working); }));
+			const TValueOrError<FMatterWorking, FString> Worked = ReadWorking(FMuseeKey(Working));
+			if (TestTrue(*FString::Printf(TEXT("%s reads"), Working), Worked.HasValue()))
+			{
+				const TValueOrError<FMatterSubstance, FString> Glaze = ReadSubstance(Worked.GetValue().Lays);
+				if (TestTrue(*FString::Printf(TEXT("%s lays a glaze that reads"), Working), Glaze.HasValue()))
+				{
+					const auto& Albedo = Glaze.GetValue().Dielectric.DiffuseAlbedo;
+					Glazes.Add(FString::JoinBy(Albedo.Value, TEXT(" "), [](double V) { return FString::SanitizeFloat(V); }));
+					// The collection holds its own photograph of the horse it shows; its glazes are read from that horse, not
+					// from another museum's, whose glazes lie differently (the Met's 1991.253.12 is cream with an amber saddle).
+					TestTrue(*FString::Printf(TEXT("%s is read from the work's own reference photograph"), Working),
+						Albedo.Source.Contains(TEXT("assets/reference/chinese-ref-sancai-horse.jpg")));
+					// An uncalibrated photograph's pixels are no albedo: each glaze is derived from it, normalised against the
+					// white body in the same light, and says how (Musee.Matter.SancaiFromPhotograph re-derives them).
+					TestTrue(*FString::Printf(TEXT("%s is derived, its derivation written out"), Working),
+						Albedo.Grade == TEXT("derived") && !Albedo.Derivation.IsEmpty());
+					Albedos.Add(Working, Albedo.Value);
+				}
+			}
+		}
+		TestEqual(TEXT("the amber, the green and the clear are three colours"), Glazes.Num(), 3);
+
+		// Checks that hold whatever the photograph's exposure: how the glazes stand to one another and to their body.
+		const TArray<double>* Amber = Albedos.Find(TEXT("glazed.sancai"));
+		const TArray<double>* Clear = Albedos.Find(TEXT("glazed.sancai-clear"));
+		const TValueOrError<FMatterSubstance, FString> Body = ReadSubstance(Sancai->Substance);
+		if (TestTrue(TEXT("the amber, the clear and their body are colours"), Amber && Clear && Amber->Num() == 3 && Clear->Num() == 3
+			&& Body.HasValue() && Body.GetValue().Dielectric.DiffuseAlbedo.Value.Num() == 3))
+		{
+			// Iron colours the amber: it takes light the clear glaze passes, most of it at the blue end.
+			TestTrue(TEXT("the amber is darker than the clear glaze"), (*Amber)[0] < (*Clear)[0]);
+			TestTrue(TEXT("and redder"), (*Amber)[1] > (*Clear)[1]);
+			// A colourless glass over the body shows the body and adds no light to it.
+			TestTrue(TEXT("the clear glaze is no brighter than its body"), (*Clear)[0] <= Body.GetValue().Dielectric.DiffuseAlbedo.Value[0]);
+		}
 	}
 
 	const TValueOrError<FMatterSubstance, FString> Substance = ReadSubstance(FMuseeKey(TEXT("travertine")));

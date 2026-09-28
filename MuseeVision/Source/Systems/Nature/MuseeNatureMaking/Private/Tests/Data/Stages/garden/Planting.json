@@ -1,5 +1,5 @@
 {
-  "$sources": "A test garden after the Chenghuai garden, the Hall of Light's orchard and the Salon's pergola: a 10 m square of ground under moss with a round pool in it, a birch at its point and another as big in half its leaf, a few bamboo culms, a clipped yew along a line, a patch of sward, a vine trained up a post from its planter, and a bed that counts more plants than it plots.",
+  "$sources": "A test garden after the Chenghuai garden, the Hall of Light's orchard, the Salon's pergola and the grounds' parterre: a 10 m square of ground under moss with a round pool in it, a birch at its point and another as big in half its leaf, a few bamboo culms, a clipped yew along a line, a patch of sward, a vine trained up a post from its planter, a closed loop of box round a panel, a yew along an arc, a box ball, a mown lawn, and a bed that counts more plants than it plots.",
   "stage": "garden",
   "water": [
     {
@@ -30,6 +30,17 @@
         { "path": [[12.0, 8.0, 0.46], [12.0, 8.3, 1.0], [12.0, 8.3, 2.3]] },
         { "path": [[12.0, 8.3, 2.3], [13.5, 8.3, 2.3]] }
       ] },
+    { "bed": "garden.loop", "species": "Buxus sempervirens", "count": 8, "spacing": 0.4, "working": "grown", "history": "weathered", "body": "",
+      "line": [[20.0, 0.0], [21.0, 0.0], [21.0, 0.6], [20.0, 0.6]], "closed": true,
+      "clipped": { "width": 0.42, "height": 0.52, "batter": 0.015, "shoulder": 0.045, "coreInset": 0.055, "leavesPerM2": 32000, "ends": "closed" } },
+    { "bed": "garden.exedra", "species": "Taxus baccata", "count": 4, "spacing": 0.4, "working": "grown", "history": "weathered", "body": "",
+      "arc": { "centre": [20.0, 5.0], "r": 1.0, "from_deg": 0.0, "to_deg": 90.0 },
+      "clipped": { "width": 0.45, "height": 1.0, "batter": 0.02, "shoulder": 0.06, "coreInset": 0.065, "ends": "open" } },
+    { "bed": "garden.ball", "species": "Buxus sempervirens", "count": 1, "working": "grown", "history": "weathered", "body": "",
+      "point": [22.0, 2.0], "clipped": { "ball": 0.4, "sink": 0.04, "coreInset": 0.055, "leavesPerM2": 32000 } },
+    { "bed": "garden.lawn", "species": "Festuca rubra", "count": 1, "working": "grown", "history": "weathered", "body": "", "mown": 0.045,
+      "outline": { "polygon": [[24.0, 0.0], [26.0, 0.0], [26.0, 2.0], [24.0, 2.0]] } },
+    { "bed": "garden.turf", "species": "Festuca rubra", "count": 1, "working": "grown", "history": "weathered", "body": "", "mown": 0.03, "on": "slab" },
     { "bed": "garden.stray", "species": "Knautia arvensis", "count": 3, "working": "grown", "history": "weathered", "body": "",
       "points": [[1.0, 1.0], [1.3, 1.2]] }
   ]

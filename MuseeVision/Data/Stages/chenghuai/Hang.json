@@ -1024,7 +1024,7 @@
       "frame": "none",
       "care": "stone-and-bronze",
       "wall": "chenghuai.shixiong",
-      "note": "Shixiong: a Taihu rock 3.00 high grown by Nature Rock (seed 731, as built), set 3 m inside the moon gate on its axis, framed as you step through; path 0 divides round it (r 1.475). If Nature Rock is not ready tonight it waits (polish)."
+      "note": "Shixiong: a Taihu rock 3.00 high, formed by Art as a Taihu rock is (Data/Art/Stones.json, after the as-built rock), its base within r 0.60, in accent.taihu-rock (its medium's line in Data/Art/Media.json); set 3 m inside the moon gate on its axis, framed as you step through; path 0 divides round it (r 1.475)."
     },
     {
       "work": "chenghuai-lingbi-rock",
@@ -1033,9 +1033,9 @@
       "centre": [
         11.35,
         -40.45,
-        1.28
+        1.25
       ],
-      "height": 1.28,
+      "height": 1.25,
       "size": [
         0.0,
         0.32
@@ -1045,7 +1045,7 @@
       "care": "stone-and-bronze",
       "wall": "chenghuai.lingbi-rock",
       "stand": true,
-      "note": "On the painting table's east end, on a carved phoebe stand r 0.11 x 0.03 (its top 1.28); the rock 0.32 high, grown by Nature's Rock (seed 732, as built) in accent.lingbi-rock."
+      "note": "On the painting table's east end (its top 1.25), on its carved phoebe stand 0.03 high, which Art carves to the rock (Data/Art/Stones.json stand): its top recessed to the rock's foot, the rock sitting down into it; the rock 0.32 high, formed by Art as a Lingbi rock is (Data/Art/Stones.json), its foot within r 0.11, in accent.lingbi-rock (its medium's line in Data/Art/Media.json)."
     }
   ]
 }

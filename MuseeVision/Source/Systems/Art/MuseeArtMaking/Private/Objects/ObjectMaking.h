@@ -11,14 +11,15 @@
 #include "MuseeStageDresser.h"
 #include "Objects/HandscrollRecords.h"
 #include "Objects/HangingRecords.h"
+#include "Stone/StoneRecord.h"
 #include "Ware/WareMesh.h"
 
 namespace Musee::ArtMaking
 {
 	/**
 	 * What every object of a stage is made with, read once: its stage and plan, each frame style's moulding, ware's
-	 * forms, how works are cast, the scrolls' and handscrolls' fittings, the panels' construction, the books' bindings and the
-	 * hooks works hang on a mesh by.
+	 * forms, how works are cast, how scholar's rocks are formed, the scrolls' and handscrolls' fittings, the panels'
+	 * construction, the books' bindings and the hooks works hang on a mesh by.
 	 */
 	struct FObjectMaking
 	{
@@ -28,6 +29,7 @@ namespace Musee::ArtMaking
 		TOptional<TValueOrError<FArtWareForms, FString>> WareForms;
 		TOptional<TValueOrError<FArtCasts, FString>> CastRecord;
 		TOptional<TValueOrError<FArtVessels, FString>> VesselRecord;
+		TOptional<TValueOrError<FArtStones, FString>> StoneRecord;
 		TOptional<TValueOrError<FArtScrollFittings, FString>> ScrollFittings;
 		TOptional<TValueOrError<FArtHandscrollFittings, FString>> HandscrollFittings;
 		TOptional<TValueOrError<FArtPanelConstruction, FString>> PanelConstruction;
@@ -45,6 +47,9 @@ namespace Musee::ArtMaking
 
 		/** How vessels are turned and stood (Data/Art/Vessels.json), or why it can't be read. */
 		const TValueOrError<FArtVessels, FString>& Vessels();
+
+		/** How scholar's rocks are formed, and each rock (Data/Art/Stones.json), or why it can't be read. */
+		const TValueOrError<FArtStones, FString>& Stones();
 
 		/** A hanging scroll's fittings (Data/Art/Scrolls.json), or why they can't be read. */
 		const TValueOrError<FArtScrollFittings, FString>& Scrolls();
@@ -131,6 +136,14 @@ namespace Musee::ArtMaking
 	 * carries (Vessel/VesselMesh.h).
 	 */
 	void MakeVessel(FObjectMaking& Making, const FWorkPlan& Plan, const FCanvasPlan& Canvas, TArray<FFormMadePiece>& OutPieces,
+		TArray<FMuseeFinding>& OutFindings);
+
+	/**
+	 * A scholar's rock standing at its centre on its Mount anchor (the garden's ground, or the carved stand its stage sets
+	 * on a table), its front towards its facing: formed as its kind of rock is (Data/Art/Stones.json, Stone/StoneMesh.h) to
+	 * its plan's height, its foot within the record's radius, in its medium's finish (Data/Art/Media.json).
+	 */
+	void MakeStone(FObjectMaking& Making, const FWorkPlan& Plan, const FCanvasPlan& Canvas, TArray<FFormMadePiece>& OutPieces,
 		TArray<FMuseeFinding>& OutFindings);
 
 	/**

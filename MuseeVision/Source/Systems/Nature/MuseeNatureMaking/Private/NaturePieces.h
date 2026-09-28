@@ -59,9 +59,10 @@ namespace Musee::NatureMaking
 		FFormMadePiece& OutPiece, FString& OutWhy);
 
 	/**
-	 * A carpet (a moss) over a bed's region: its upper surface, the shoots' length above the soil, in its leaves' tissue,
-	 * its greens varying over it, colliding with nothing.
+	 * A carpet (a moss, or a sward mown close) over a bed's region, or over the top of the stage's piece the bed lies on
+	 * (one of StagePieces, the pieces made so far): its upper surface, the shoots' length above the soil (the mown height,
+	 * for a sward), in its leaves' tissue, its greens varying over it, colliding with nothing.
 	 */
 	[[nodiscard]] bool MakeCarpetPiece(const FMuseeStageContext& Stage, const FNatureBed& Entry, const FNatureSpecies& Species, const FBedRegion& Region,
-		const FMuseeFrame& Bed, FFormMadePiece& OutPiece, FString& OutWhy);
+		const FMuseeFrame& Bed, TConstArrayView<FFormMadePiece> StagePieces, FFormMadePiece& OutPiece, FString& OutWhy);
 }

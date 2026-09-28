@@ -19,6 +19,7 @@
 #include "SiteVolume.h"
 #include "Stages/CastScans.h"
 #include "Stages/JointsMake.h"
+#include "Stages/LightImageMake.h"
 #include "Stages/LightProfiles.h"
 #include "Stages/MakeFinding.h"
 #include "Stages/PaintLayers.h"
@@ -146,8 +147,8 @@ namespace Musee::Studio
 		Report.DerivedData = MeasureDerivedData() - Before;
 		FString Profiles;
 		{
-			FMakeStepTimer Timer(Report, Folder + TEXT(": light profiles"));
-			Profiles = MakeLightProfiles(Options, Report);
+			FMakeStepTimer Timer(Report, Folder + TEXT(": light profiles and image"));
+			Profiles = MakeLightProfiles(Options, Report) + MakeLightImage(Options, Report);
 		}
 		{
 			FMakeStepTimer Timer(Report, Folder + TEXT(": level"));

@@ -1,0 +1,135 @@
+{
+  "$sources": [
+    "The rocks: scholar's rocks (gongshi) are limestones worn by water; Taihu stone from Lake Tai (Jiangsu) is dissolved by water into cavities and perforations, Lingbi stone (Anhui) is dark and resonant; they are prized for thinness (shou), openness (tou), perforation (lou) and wrinkling (zhou), and shown on a wooden stand carved for the stone (Wikipedia, 'Scholar's rock', https://en.wikipedia.org/wiki/Scholar%27s_rock ; 'Taihu stone', https://en.wikipedia.org/wiki/Taihu_stone : 'due to long-term surging by water, this kind of stone features pores and holes'; read 2026-09-27). Docs/Matter's Palette.json accent.taihu-rock and accent.lingbi-rock name their stone.",
+    "The Taihu kind: the as-built museum's standing rock (windows/Source/MuseeVision/Nature/MuseeTaihuRock.cpp, after Shared/Wings/ChineseWing.swift: 'tall, waisted, twin-peaked, pitted'): its north-south silhouette 2.0 m across at the foot, 1.48 at 0.93 m, 1.84 at 1.77 m, waisted to 1.08 at 2.52 m, 1.52 at 3.27 m, and two peaks at 4.08 and 4.20 m over a saddle at 3.78 m, taken here as shares of its height and widest; four through-holes and about nine more at full erosion, 0.08 to 0.20 m in radius on a rock 4.1 m high; about 55 pits 0.05 to 0.17 m in radius; wrinkles about 0.09 m deep; its form bent by up to 0.14 m; cells of 0.04 m.",
+    "The Lingbi kind: Chenghuai's sheet (Docs/Stages/chenghuai.md, section 8): a Lingbi rock 0.32 high on the painting table, on its carved phoebe stand 0.03 high. Its form is a design value after the type: a compact small mountain, grooved up its height and pitted, with few holes through, a little wider at its shoulders than its foot and three peaks along its top.",
+    "Each rock's foot: 石兄's base keeps within r 0.60 of its centre, the path dividing round it at r 1.475 (chenghuai.md, section 3.9 and Build notes item 8); the Lingbi rock's foot within r 0.11, the round the sheet gave its stand.",
+    "The stand (座, zuo): a scholar's rock is shown on a wooden stand carved for the stone (Wikipedia, 'Scholar's rock', above): its top recessed to the stone's own foot so the stone sits down into it, a lip round it, a moulded side and short carved feet. Art carves it to the rock it holds (Stone/StoneStand.cpp): the recess follows the rock's outline up its depth, a cell of the rock's surface and the clearance out from it. Its 0.03 height is the sheet's; the recess, lip, bead and feet are design values at the scale of a hand-sized stand; in phoebe, as the ceramics' stands (Data/Art/Vessels.json stand, Data/Stages/chenghuai/Finishes.json chenghuai.case.phoebe)."
+  ],
+  "$units": {
+    "FootRadiusMeters": "m",
+    "HeightMeters": "m",
+    "RecessMeters": "m",
+    "ClearanceMeters": "m",
+    "LipMeters": "m",
+    "BeadMeters": "m",
+    "FootHeightMeters": "m",
+    "FootInsetMeters": "m"
+  },
+  "stand": {
+    "heightMeters": 0.03,
+    "recessMeters": 0.008,
+    "clearanceMeters": 0.001,
+    "lipMeters": 0.008,
+    "beadMeters": 0.003,
+    "feet": 5,
+    "footHeightMeters": 0.006,
+    "footRadiusMeters": 0.007,
+    "footInsetMeters": 0.004,
+    "palette": "accent.phoebe",
+    "working": "carved.waxed",
+    "history": "handled"
+  },
+  "kinds": [
+    {
+      "kind": "taihu",
+      "depthPerWidth": 0.8,
+      "profile": [
+        [
+          0.0,
+          1.0
+        ],
+        [
+          0.23,
+          0.74
+        ],
+        [
+          0.43,
+          0.92
+        ],
+        [
+          0.62,
+          0.54
+        ],
+        [
+          0.8,
+          0.76
+        ],
+        [
+          1.0,
+          0.45
+        ]
+      ],
+      "peaks": 2,
+      "saddle": 0.9,
+      "holes": 8,
+      "holeRadius": [
+        0.02,
+        0.05
+      ],
+      "pits": 50,
+      "pitRadius": [
+        0.012,
+        0.04
+      ],
+      "wrinkle": 0.015,
+      "warp": 0.03,
+      "cells": 100
+    },
+    {
+      "kind": "lingbi",
+      "depthPerWidth": 0.55,
+      "profile": [
+        [
+          0.0,
+          0.85
+        ],
+        [
+          0.3,
+          1.0
+        ],
+        [
+          0.6,
+          0.9
+        ],
+        [
+          0.85,
+          0.6
+        ],
+        [
+          1.0,
+          0.3
+        ]
+      ],
+      "peaks": 3,
+      "saddle": 0.7,
+      "holes": 1,
+      "holeRadius": [
+        0.03,
+        0.05
+      ],
+      "pits": 30,
+      "pitRadius": [
+        0.02,
+        0.05
+      ],
+      "wrinkle": 0.02,
+      "warp": 0.04,
+      "cells": 100
+    }
+  ],
+  "stones": [
+    {
+      "work": "chenghuai-shixiong",
+      "kind": "taihu",
+      "footRadiusMeters": 0.6,
+      "source": "Docs/Stages/chenghuai.md: 3.00 high, its base within r 0.60, the path dividing round it at r 1.475"
+    },
+    {
+      "work": "chenghuai-lingbi-rock",
+      "kind": "lingbi",
+      "footRadiusMeters": 0.11,
+      "source": "Docs/Stages/chenghuai.md: 0.32 high, on its carved phoebe stand 0.03 high, its foot within r 0.11"
+    }
+  ]
+}

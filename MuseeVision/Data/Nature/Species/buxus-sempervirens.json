@@ -1,0 +1,50 @@
+{
+  "$sources": [
+    "The species: Buxus sempervirens L., common box: an evergreen shrub, the young stems square and slightly winged; the leaves opposite, ovate, oval or oblong, notched at the apex, 1/2 to 1 in. (13 to 25 mm) long and about half as wide, very dark green above, pale below, shining on both sides; long used for box-edging and hedges (Trees and Shrubs Online, 'Buxus sempervirens', after W. J. Bean, Trees and Shrubs Hardy in the British Isles, https://www.treesandshrubsonline.org/articles/buxus/buxus-sempervirens/, read 2026-09-27).",
+    "The clipped hedge: the as-built museum's box (windows/Source/MuseeVision/Nature/MuseeHedge.cpp: BoxRun, BoxCorner, BoxEnd, BoxBall, 32 000 leaves to a square metre of clipped surface; MuseeHedge.h: leaves 1-2 cm, elliptic, cupped, glossy dark green above and paler below) and the grounds' sheet, section 3.8. The colours are first values read from photographs of clipped box in early summer, the season's flush paler at the skin."
+  ],
+  "key": "buxus-sempervirens",
+  "name": "Buxus sempervirens",
+  "common": "Box",
+  "form": "hedge",
+  "organs": [
+    {
+      "organ": "trunk",
+      "material": "living.stem"
+    },
+    {
+      "organ": "leaf",
+      "material": "living.leaf"
+    }
+  ],
+  "reachMeters": [
+    0.1,
+    0.2
+  ],
+  "leavesPerSquareMeter": [
+    30000,
+    34000
+  ],
+  "leafLengthMeters": [
+    0.013,
+    0.025
+  ],
+  "leafWidthMeters": [
+    0.006,
+    0.012
+  ],
+  "floweringShare": 0.0,
+  "leafColours": [
+    "#26401F",
+    "#2C4A24",
+    "#223A1C",
+    "#30502A"
+  ],
+  "leafAgeColours": [
+    "#6E8E3C"
+  ],
+  "stemColours": [
+    "#5A5238"
+  ],
+  "note": "Clipped to the section or the ball its bed gives; its core, the bare twigs inside, takes living.stem. The museum shows it in early summer, Mangzhong to Xiazhi (June), the new flush paler at the skin."
+}

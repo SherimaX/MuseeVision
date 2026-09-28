@@ -251,7 +251,7 @@ onto the shut iris and stays out of the sealed room.
 |---|---|---|---|---|
 | `panel.ceiling`, `panel.floor`, `panel.north`, `panel.south`, `panel.east`, `panel.west` | `gap.light-field-panel.d65` (flat 0.7 m modules) | 6 faces, 9,512 modules | Mounts `cube.panels.*`, facing the centre; aim (0, 0, −22.000) | always: at rest the standby image (the black level and the faint 2 mm seam grid); while `cube.performance.active` = 1 the performing work's image and the seams off |
 | `graze.1.1` … `graze.4.8` | `linear-cove.3000k` | 32 (4 rings × 8), each 1.700 long | strip bent to r 2.585 at bearings 22.5° + 45°k, z −0.550, −1.875, −3.200, −4.525 (50 mm under each tier's top), under the head plate or a web in a dark channel, facing down; aim the cut face (r 2.660) at mid-tier | presence: a body in the shaft, the car between the Atrium stop and `clamp`, or someone at the Atrium's landing |
-| `mast.1` … `mast.4` | `gap.pinspot.3000k` (5°) | 4 | under the soffit ring's inner edge at r 2.500 on bearings 45°, 135°, 225°, 315°, z −8.012; aim (0, 0, −20.220), 0.6 over the crown at the stop (throw 12.46, 11.6° off vertical); the beams end on the car | presence, following `cube.mast.light` (the car in the room, no work performing) |
+| `mast.1` … `mast.4` | `pinspot.3000k` (6.1°, DALI-2) | 4 | under the soffit ring's inner edge at r 2.500 on bearings 45°, 135°, 225°, 315°, z −8.012; aim (0, 0, −20.220), 0.6 over the crown at the stop (throw 12.46, 11.6° off vertical); the beams end on the car | presence, following `cube.mast.light` (the car in the room, no work performing) |
 
 The graze lines light the ground only (their light reaches the car through the glass, never the room). The pinspots light
 the gilt mast and the crown, and through the car's clear roof its floor; nothing lights the panel faces. Sea Light's light
@@ -328,7 +328,7 @@ contact; rail foot (−7.937) ↔ top blade (−7.942) 5 mm; stack bottom (−7.
 (−7.970) 2 mm; top blade ↔ housing inner wall's foot (−7.938) 4 mm; blades in travel (r ≤ 4.010) ↔ hangers (4.040) 30 mm,
 ↔ the ceiling modules' cut edges (4.130) 120, ↔ outer wall (4.300) 290; stack (26 mm) ↔ the head's groove (40 mm, 0.070 …
 0.110 over the crown) 7 mm above and below at `clamp`; clamped blades (0.197) ↔ groove (0.195) 2 mm: a designed clamp
-contact; car's top ring at `clamp` (−8.225) ↔ ceiling (−8.000) 225 mm; pinspots (r 2.480 … 2.520) ↔ guides (2.290) 190 mm;
+contact; car's top ring at `clamp` (−8.225) ↔ ceiling (−8.000) 225 mm; pinspots (heads Ø 0.105 about r 2.500: r 2.448 … 2.553) ↔ guides (2.290) 158 mm;
 car's lowest point at `cube` (−23.760) ↔ well bottom (−23.800) 40 mm; the car ↔ the panels ≥ 11.8 m.
 
 ## 7. Nature
@@ -482,7 +482,11 @@ scale.
   reflectance ≤ 1 %), volumetric (points where the rays cross), fed by a work's image source; 9,512 in six faces.
 - `gap.pinspot.3000k`: a miniature pinspot, 5° beam (2° core), 3000 K, CRI ≥ 90, DALI (e.g. an ERCO Parscan or Mike Stoane
   pinspot class), its body under the soffit ring; the catalogue's narrowest (`track-spot.3000k.12deg`) would spill past the car
-  onto the room.
+  onto the room. **Closed (K11):** `pinspot.3000k` is ERCO's Optec spotlight, narrow spot, 3000 K CRI 92, DALI-2, article
+  75995.000 (data sheet 28.04.2026: 642 lm, 29 001 cd, a 6.1° cone, 8.7 W, 0.73 kg, head Ø 105), on ERCO's DALI track or a
+  DALI singlet. The Parscan 48V narrow spot at 3000 K (A1014621, 4.4°) was set aside: its only control is On-board Dim, a
+  knob on the fitting, which can't follow presence or `cube.mast.light`, and no Casambi narrow spot article was found. The
+  6.1° beam is a little wider than the sheet's 5°: at the 12.46 m throw it spreads 1.33 m, so it still ends on the car.
 
 **Site:** `PortClasses.json` needs **`iris.4600`** (as `atrium.md` §2) with the closure-at-declared-depth rule: the Cube's at
 7.442 below the plane.
@@ -536,4 +540,4 @@ scale.
   eased). §2, §6 and C-2, C-3, C-5 keep the eased figures.
 - **Panel mounts:** each `cube.panels.*` Mount's x is the way its face looks into the room, as Light reads a mount (its
   light leaves along x); the ceiling's and the floor's keep the stage's y.
-- Lighting.json, to the contract (K3-LIGHT-NATURE): the catalogue gaps are real types now, `light-field-panel.d65` (Light Field Lab SolidLight, an image panel lit by its picture, dark at its standby black level) and `pinspot.3000k` (ERCO Parscan 48V narrow spot, standing unlit until its 3000 K data sheet is read); each panel wall gives its face as an `extent`, 28.0 x 28.0 (40 x 40 modules at 0.700), the ceiling 28.0 x 26.46 (its 1,512 modules' area).
+- Lighting.json, to the contract (K3-LIGHT-NATURE): the catalogue gaps are real types now, `light-field-panel.d65` (Light Field Lab SolidLight, an image panel lit by its picture, dark at its standby black level) and `pinspot.3000k` (ERCO Parscan 48V narrow spot, standing unlit until its 3000 K data sheet is read; K11: ERCO's Optec narrow spot on DALI-2, 75995.000, lit); each panel wall gives its face as an `extent`, 28.0 x 28.0 (40 x 40 modules at 0.700), the ceiling 28.0 x 26.46 (its 1,512 modules' area).

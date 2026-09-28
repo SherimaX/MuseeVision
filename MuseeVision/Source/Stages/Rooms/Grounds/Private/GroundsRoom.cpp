@@ -15,13 +15,14 @@ void UGroundsRoom::Describe(FSiteDescription& Out) const
 	using namespace Musee::Grounds;
 	Out.Stage = StageKey();
 	Out.DisplayName = NSLOCTEXT("MuseeGrounds", "DisplayName", "The Grounds");
-	DrawTerrain(Out.Pieces, Out.ReceivedPrisms);
 	DrawPaving(Out.Pieces);
 	DrawGravel(Out.Pieces);
 	DrawStrip(Out.Pieces);
 	DrawKerbs(Out.Pieces);
 	DrawBasins(Out.Pieces);
 	DrawLamps(Out.Pieces);
+	// The terrain after what is set into it: its soil gives way to each of them.
+	DrawTerrain(Out.Pieces, Out.ReceivedPrisms);
 	// The site's declarations come last: the enclosure names the terrain just drawn.
 	DescribeSite(Out);
 }

@@ -248,6 +248,46 @@ namespace Musee::Studio::Tests
 		return true;
 	}
 
+	/**
+	 * What the systems find as they dress a stage is reported by every make: a second make finds the level current and
+	 * writes nothing, and still reports its dressing's findings, the same as the first.
+	 */
+	IMPLEMENT_SIMPLE_AUTOMATION_TEST(FStudioStageMakeDressedFindingsTest, "Musee.Studio.StageMakeDressedFindings", Flags)
+	bool FStudioStageMakeDressedFindingsTest::RunTest(const FString& Parameters)
+	{
+		const USiteRoom* Room = Specimen(*this);
+		if (!Room)
+		{
+			return false;
+		}
+		// A dresser that always finds one standing fault on the stage it dresses, as Light does with a luminaire it can't place.
+		const FName Tester(TEXT("StudioSpecimen"));
+		const FString Standing(TEXT("The specimen's dresser finds its standing fault."));
+		Musee::RegisterStageDresser(Tester, 50, [&Standing](const FMuseeStageContext& Stage, TArray<FMuseeFinding>& OutFindings)
+		{
+			if (Stage.StageActor)
+			{
+				OutFindings.Add(FMuseeFinding::Make(FName(*Stage.Stage.ToString()), Standing, FMuseeMeasurement()));
+			}
+		});
+		ON_SCOPE_EXIT { Musee::UnregisterStageDresser(Tester); };
+		const auto Standings = [&Standing](const FMakeReport& Report)
+		{
+			return Report.Findings.FilterByPredicate([&Standing](const FMuseeFinding& Finding) { return Finding.Summary == Standing; }).Num();
+		};
+		const FStageMakeOptions Options = SpecimenOptions(FString(SpecimenRoot) + TEXT("/Dressed"));
+		const FMakeReport First = MakeStage(*Room, Options);
+		LogFindings(*this, First);
+		const FMakeReport Again = MakeStage(*Room, Options);
+		LogFindings(*this, Again);
+		TestEqual(TEXT("the first make reports its dressing's finding"), Standings(First), 1);
+		TestEqual(TEXT("a second make writes nothing"), Again.Count(EMadeOutcome::Written), 0);
+		TestEqual(TEXT("and fails nothing"), Again.Count(EMadeOutcome::Failed), 0);
+		TestEqual(TEXT("yet reports the same finding"), Standings(Again), 1);
+		TestEqual(TEXT("and as many findings as the first"), Again.Findings.Num(), First.Findings.Num());
+		return true;
+	}
+
 	IMPLEMENT_SIMPLE_AUTOMATION_TEST(FStudioMuseumMakeTest, "Musee.Studio.MuseumMake", Flags)
 	bool FStudioMuseumMakeTest::RunTest(const FString& Parameters)
 	{

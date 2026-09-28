@@ -2,50 +2,81 @@
   "key": "pinspot.3000k",
   "kind": "pinspot",
   "controlClass": "gallery",
-  "evidenceState": "incomplete",
+  "evidenceState": "complete",
   "product": {
     "manufacturer": "ERCO",
-    "family": "Parscan 48V spotlight, construction size M, narrow spot",
-    "description": "a spotlight on the Minirail 48V system with a narrow spot Spherolit lens (the 5 degree class), 3000 K CRI 97, On-board Dim; its body under the Cube's soffit ring",
-    "codeBasis": "the 3000 K CRI 97 narrow spot article's number was not found; its 3500 K CRI 92 sibling is A1014612",
+    "family": "Optec spotlight, narrow spot, DALI",
+    "description": "an Optec spotlight on ERCO's DALI 220-240 V track with a narrow spot Spherolit lens, 3000 K CRI 92, DALI-2 control gear in the fitting, white (RAL 9002); its head under the Cube's soffit ring",
+    "code": "75995.000",
+    "codeBasis": "the maker's data sheet 75995.000 (edition 28.04.2026, version 7), read: Optec Spotlight, Spherolit lens narrow spot, LED module 6.2 W 725 lm 3000 K warm white, DALI-2",
     "status": "current"
   },
   "light": {
-    "luminousFluxLumens": null,
-    "fluxBasis": "not read for 3000 K CRI 97; the 3500 K CRI 92 sibling A1014612 gives 348 lm and 27 525 cd from a 4.3 W, 417 lm module",
+    "luminousFluxLumens": 642,
+    "fluxBasis": "luminaire: the data sheet's luminous flux of the luminaire (the 6.2 W LED module gives 725 lm)",
+    "ledFluxLumens": 725,
     "beamName": "narrow spot, Spherolit lens",
-    "beamAngleDegrees": null,
-    "peakCandela": null,
+    "beamAngleDegrees": 6.1,
+    "peakCandela": 29001,
     "cctKelvin": 3000,
-    "cri": 97
+    "cri": 92,
+    "colourDeviationSdcm": 1.5
   },
   "electrical": {
-    "control": "On-board Dim (a rotary control), 1 to 100 %"
+    "systemPowerWatts": 8.7,
+    "ledPowerWatts": 6.2,
+    "efficacyLumensPerWatt": 74,
+    "control": "DALI-2: ERCO DALI control gear in the fitting, addressed over the DALI track, dimmed by constant current reduction 1 to 100 %",
+    "mounting": "ERCO DALI track, Hi-trac DALI track or DALI singlet",
+    "dimmingRangePercent": [
+      1,
+      100
+    ]
   },
   "housing": {
-    "weightKilograms": 0.55,
-    "materials": "cast aluminium housing, polymer upper cover and lens unit, Spherolit lens of optical polymer",
-    "mounting": "Minirail 48V track or singlet"
+    "diameterMillimeters": 105,
+    "drawingDimensionsMillimeters": [
+      105,
+      159,
+      176,
+      70
+    ],
+    "dimensionBasis": "the data sheet's drawing: the head d 105, and 159, 176 and 70 unlabelled in its text layer",
+    "weightKilograms": 0.73,
+    "materials": "cylindrical light head of powder-coated cast aluminium; housing of polymer; collimating lens of optical polymer",
+    "rotationDegrees": 360,
+    "tiltDegrees": 270,
+    "mounting": "ERCO DALI track, Hi-trac DALI track or DALI singlet"
   },
   "photometricFile": {
-    "url": "https://download.erco.com/en/planning_luminaire/ies/",
-    "note": "ERCO publishes a data sheet and an IES file per article; the 3000 K article's were not found."
+    "url": "https://www.erco.com/75995.000",
+    "note": "ERCO publishes an IES and LDT file per article at the article's page; the data sheet's cone diagram and illuminance table (29 001 lx at 1 m under a cone of 6.1 degrees, 0.11 m across) are what the record is lit by."
   },
   "sources": [
     {
-      "id": "sibling-data-sheet",
-      "title": "ERCO, data sheet A1014612 Parscan 48V Spotlight, size M, narrow spot, 3500 K CRI 92, edition 28.04.2026 (348 lm, Imax 27 525 cd, 6.0 W, 0.55 kg)",
-      "url": "https://download-service.erco.com/download/A1014612/en?types=15&formattedId=&productType=article",
+      "id": "data-sheet",
+      "title": "ERCO, data sheet 75995.000 Optec Spotlight, narrow spot, 3000 K CRI 92, DALI-2, edition 28.04.2026 (642 lm, Imax 29 001 cd, cone 6.1 degrees, 8.7 W, 0.73 kg)",
+      "url": "https://download-service.erco.com/download/75995.000/en?types=15&formattedId=&productType=article",
       "readOn": "2026-09-27",
       "covers": [
         "product",
-        "housing",
-        "electrical"
+        "light",
+        "electrical",
+        "housing"
       ]
     },
     {
-      "id": "maker-page",
-      "title": "ERCO, Parscan 48V (product page): Spherolit lenses narrow spot, spot, flood, wide flood, oval flood, wallwash; 2700 to 4000 K, CRI up to 97 at 3000 K",
+      "id": "parscan-data-sheet",
+      "title": "ERCO, data sheet A1014621 Parscan 48V Spotlight, size M, narrow spot, 3000 K CRI 97, edition 28.04.2026 (299 lm, Imax 23 631 cd, cone 4.4 degrees, 6.0 W): the narrower Parscan, set aside because its control is On-board Dim, a rotary control on the fitting that no presence sensor or channel can switch",
+      "url": "https://download-service.erco.com/download/A1014621/en?types=15&formattedId=&productType=article",
+      "readOn": "2026-09-27",
+      "covers": [
+        "product"
+      ]
+    },
+    {
+      "id": "parscan-page",
+      "title": "ERCO, Parscan 48V (product page): On-board Dim or Casambi Bluetooth; no Casambi narrow spot article at 3000 K was found among the published data sheets",
       "url": "https://www.erco.com/en/products/indoor/spotlights-for-track/parscan-new-48v-7334/",
       "readOn": "2026-09-27",
       "covers": [
@@ -54,7 +85,7 @@
     }
   ],
   "unverified": [
-    "The flux, peak intensity and beam angle of the 3000 K CRI 97 narrow spot article: its article number was not found, so the record stands unlit until its data sheet is read.",
-    "The Cube's sheet asks for a 5 degree beam with a 2 degree core; the sibling's data sheet draws its cone at 4.4 degrees."
+    "The cone of 6.1 degrees is read as the beam angle (half the peak): the data sheet's table gives it 0.11 m across at 1 m with the peak illuminance at its centre; ERCO's symbols page defining the cone was not read.",
+    "The Cube's sheet asks for a 5 degree beam with a 2 degree core; the maker's narrow spot is 6.1 degrees, which the record keeps: at the 12.46 m throw it spreads 1.33 m, so it still ends on the car (its guides at r 2.29)."
   ]
 }

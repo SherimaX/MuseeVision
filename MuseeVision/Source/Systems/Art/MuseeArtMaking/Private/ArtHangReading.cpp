@@ -289,8 +289,8 @@ namespace Musee::ArtMaking
 		}
 
 		/**
-		 * How works in the round are made (their media, how they are cast and turned), read once when the plan holds any,
-		 * with every finish the records name offered by the palette.
+		 * How works in the round are made (their media, how they are cast and turned, how rocks are formed), read once when
+		 * the plan holds any, with every finish the records name offered by the palette.
 		 */
 		void ReadRoundInto(const FArtHang& Hang, FEntryContext& Context)
 		{
@@ -301,14 +301,17 @@ namespace Musee::ArtMaking
 			TValueOrError<FArtMedia, FString> Media = ReadRecord<FArtMedia>(FArtMedia::Record);
 			TValueOrError<FArtCasts, FString> Casts = ReadRecord<FArtCasts>(FArtCasts::Record);
 			TValueOrError<FArtVessels, FString> Vessels = ReadRecord<FArtVessels>(FArtVessels::Record);
+			TValueOrError<FArtStones, FString> Stones = ReadRecord<FArtStones>(FArtStones::Record);
 			const TValueOrError<FMatterPalette, FString> Palette = Musee::Matter::ReadPalette();
 			Context.RoundWhy = Media.HasError() ? Media.GetError() : Casts.HasError() ? Casts.GetError() : Vessels.HasError() ? Vessels.GetError()
-				: Palette.HasError() ? Palette.GetError() : RoundFinishesWhy(Palette.GetValue(), Media.GetValue(), Casts.GetValue(), Vessels.GetValue());
+				: Stones.HasError() ? Stones.GetError() : Palette.HasError() ? Palette.GetError()
+				: RoundFinishesWhy(Palette.GetValue(), Media.GetValue(), Casts.GetValue(), Vessels.GetValue());
 			if (Context.RoundWhy.IsEmpty())
 			{
 				Context.Media.Emplace(Media.StealValue());
 				Context.Casts.Emplace(Casts.StealValue());
 				Context.Vessels.Emplace(Vessels.StealValue());
+				Context.Stones.Emplace(Stones.StealValue());
 			}
 		}
 

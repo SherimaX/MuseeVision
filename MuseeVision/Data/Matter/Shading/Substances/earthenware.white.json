@@ -1,0 +1,88 @@
+{
+  "schema": "musee.matter.shading.substance/1",
+  "key": "earthenware.white",
+  "name": "White earthenware body (Tang sancai: white kaolin with a little loessic clay, low-fired)",
+  "family": "accent",
+  "record": "Palette.json",
+  "master": "white",
+  "accentOf": "stone",
+  "dielectric": {
+    "diffuseAlbedo": {
+      "value": [
+        86.0,
+        1.0,
+        8.0
+      ],
+      "space": "CIELAB (D65, 2 deg)",
+      "unit": "CIELAB",
+      "grade": "unverified",
+      "source": "Palette.json: accent.earthenware-sancai ; J. Y. Shen, J. Henderson, J. Evans, S. Chenery and F. Y. Zhao, 'A study of the glazing techniques and provenances of Tang sancai glazes using elemental and lead isotope analyses', Archaeometry 61, 2 (2019) 358-373, doi:10.1111/arcm.12436, https://nora.nerc.ac.uk/522694/1/Shen_et_al-2019-Archaeometry.pdf",
+      "note": "Shen et al.: the sancai 'white' is a colourless glaze on a white body, white kaolin (Al2O3 about 30 %, FeO under 2.5 %, TiO2 about 1 %). No photograph of a bare body was read: a first value, a faintly warm white, for a kaolin body low-fired; under the glazes it shows only as glaze.sancai-clear."
+    },
+    "refractiveIndex": {
+      "value": 1.55,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Substances/brick.json (Shading): fired clay is quartz, feldspar and glass, indices 1.5 to 1.6",
+      "note": "The middle of the fired body's mineral indices, as the brick's and the porcelain's."
+    },
+    "porosity": {
+      "value": 0.15,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.earthenware-sancai",
+      "note": "A low-fired earthenware body stays open (it is fired below vitrification); no measurement of a Tang sancai body's porosity was read."
+    },
+    "wettingDepth": {
+      "value": 1.0,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: accent.earthenware-sancai",
+      "note": "The depth whose pores govern the face's look when wet; under the glaze it never wets."
+    }
+  },
+  "structure": {
+    "grain": {
+      "value": 0.05,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: accent.earthenware-sancai (the glazes' first values)",
+      "note": "The finest structure the face shows."
+    },
+    "bed": {
+      "value": 50,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: accent.earthenware-sancai (the glazes' first values)",
+      "note": "The coarsest structure the face shows."
+    },
+    "bedAspect": {
+      "value": 1.0,
+      "unit": "1",
+      "grade": "derived",
+      "source": "An unbedded body",
+      "derivation": "unbedded"
+    },
+    "hurst": {
+      "value": 0.7,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Candela et al. 2012, Journal of Geophysical Research 117, B08409 (fault surfaces, 0.6 to 0.8; cited in Stone.ush)",
+      "note": "The middle of the range measured on rock surfaces, as the travertine's."
+    },
+    "toneSpread": {
+      "value": 0.1,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.earthenware-sancai (the glazes' first values)",
+      "note": "A first half-range of ln(albedo) across one face."
+    },
+    "roughnessSpread": {
+      "value": 0.05,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.earthenware-sancai (the glazes' first values)",
+      "note": "A first half-range of ln(roughness) across one face."
+    }
+  }
+}

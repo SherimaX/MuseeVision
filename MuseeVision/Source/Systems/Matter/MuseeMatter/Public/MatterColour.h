@@ -22,6 +22,13 @@ namespace Musee::Matter
 	 */
 	MUSEEMATTER_API FLinearColor LinearRec709FromCieLab(double L, double A, double B);
 
+	/**
+	 * Linear Rec.709 as CIELAB (D65 white, 2-degree observer), LinearRec709FromCieLab's inverse: linear Rec.709 to CIE
+	 * XYZ by IEC 61966-2-1:1999's matrix, then CIE 15:2004's CIELAB. X is L*, Y is a*, Z is b*. For a colour derived
+	 * rather than measured (a photograph's pixels, scaled), to be written as a record writes a measured one.
+	 */
+	MUSEEMATTER_API FVector3d CieLabFromLinearRec709(double R, double G, double B);
+
 	/** A triple as linear Rec.709, converting a CIELAB colour; an error names a triple without three numbers or with a
 	 *  space it cannot read. */
 	MUSEEMATTER_API TValueOrError<FLinearColor, FString> LinearRec709(const FMatterTriple& Triple);

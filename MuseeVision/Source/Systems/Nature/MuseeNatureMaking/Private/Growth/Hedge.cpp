@@ -8,7 +8,10 @@
  * batter narrowing the top, the shoulders rounded), over a dark core of bare twigs lying the core inset inside it, which
  * the visitor can't pass through. Each needle stands out of the skin, turned out to the light, its tip at the clipped
  * surface where the shears left it. An open end is clipped square across. The hedge grows as a run of identical modules,
- * one to each plant at its spacing along the line, the two at its ends clipped across where the hedge's ends are open.
+ * one to each plant at its spacing along the line, the two at its ends clipped across where the hedge's ends are open;
+ * where the line turns a corner, the modules either side of it are mitred on the plane that halves the corner, so the
+ * clipped surface runs round it unbroken. A single plant clipped to a ball (a box ball) is the same skin over a sphere
+ * sunk into the soil, round a core of bare twigs.
  *
  * Species: leavesPerSquareMeter of clipped surface; leafLengthMeters, leafWidthMeters. Colours: LeafColours;
  * LeafAgeColours [the season's new growth at the skin]; StemColours [the core's bare twigs].
@@ -23,6 +26,27 @@ namespace Musee::NatureMaking
 		constexpr int32 ShoulderStations = 4;
 		/** The clipped surface's stations along the line, a metre apart at most. */
 		constexpr double StationMeters = 0.5;
+		/** The segments round and the rings up a ball's core, a sphere of bare twigs. */
+		constexpr int32 BallCoreSegments = 16;
+		constexpr int32 BallCoreRings = 8;
+
+		/** How densely the shears keep the skin: the clip's own leaves to the square metre, else its species'. */
+		double SkinDensity(const FNatureSpecies& Species, const FNatureClip& Clip, FRandomStream& Random)
+		{
+			return Clip.LeavesPerM2 > 0.0f ? double(Clip.LeavesPerM2) : Draw(Species.LeavesPerSquareMeter, Random);
+		}
+
+		/** Where a run starts along its line at an offset across it: at 0, or on its mitre. */
+		double StartAt(const FPlantSite& Site, double Across)
+		{
+			return Site.StartMitre * Across;
+		}
+
+		/** Where a run of this length ends along its line at an offset across it: at its length, or on its mitre. */
+		double EndAt(const FPlantSite& Site, double Length, double Across)
+		{
+			return Length + Site.EndMitre * Across;
+		}
 
 		/**
 		 * The section of a surface Inset inside the clipped one, as points (across, up) from the foot's left to its right
@@ -53,7 +77,7 @@ namespace Musee::NatureMaking
 			OutNormals.Add(FVector2D(Clip.Height, Clip.Batter).GetSafeNormal());
 		}
 
-		/** The core: the inset section swept along the line and closed at its ends, its twigs' colour. */
+		/** The core: the inset section swept along the line and closed at its ends (square, or on their mitres), its twigs' colour. */
 		void Core(const FNatureSpecies& Species, const FPlantSite& Site, const FVector& Along, const FVector& Across, double Length, FPlantParts& Out)
 		{
 			TArray<FVector2D> Points, Normals;
@@ -66,21 +90,27 @@ namespace Musee::NatureMaking
 			{
 				const FVector NA = Across * Normals[I].X + FVector::UpVector * Normals[I].Y;
 				const FVector NB = Across * Normals[I + 1].X + FVector::UpVector * Normals[I + 1].Y;
-				const int32 A0 = Surface.Vertex(At(Points[I], 0.0), NA, FVector2D(0.0, I), Twigs, 0.3);
-				const int32 A1 = Surface.Vertex(At(Points[I], Length), NA, FVector2D(Length, I), Twigs, 0.3);
-				const int32 B1 = Surface.Vertex(At(Points[I + 1], Length), NB, FVector2D(Length, I + 1), Twigs, 0.3);
-				const int32 B0 = Surface.Vertex(At(Points[I + 1], 0.0), NB, FVector2D(0.0, I + 1), Twigs, 0.3);
+				const double A0X = StartAt(Site, Points[I].X);
+				const double A1X = EndAt(Site, Length, Points[I].X);
+				const double B0X = StartAt(Site, Points[I + 1].X);
+				const double B1X = EndAt(Site, Length, Points[I + 1].X);
+				const int32 A0 = Surface.Vertex(At(Points[I], A0X), NA, FVector2D(A0X, I), Twigs, 0.3);
+				const int32 A1 = Surface.Vertex(At(Points[I], A1X), NA, FVector2D(A1X, I), Twigs, 0.3);
+				const int32 B1 = Surface.Vertex(At(Points[I + 1], B1X), NB, FVector2D(B1X, I + 1), Twigs, 0.3);
+				const int32 B0 = Surface.Vertex(At(Points[I + 1], B0X), NB, FVector2D(B0X, I + 1), Twigs, 0.3);
 				Surface.Quad(A0, A1, B1, B0);
 			}
-			for (const double X : { 0.0, Length })
+			for (const bool bEnd : { false, true })
 			{
-				const FVector Normal = X == 0.0 ? -Along : Along;
-				const int32 Middle = Surface.Vertex(At(FVector2D(0.0, 0.5 * Site.Clip.Height), X), Normal, FVector2D::ZeroVector, Twigs, 0.3);
+				// The cut's face lies on its plane: along = the mitre times the offset across (plus the length, at the end).
+				const FVector Normal = bEnd ? (Along - Across * Site.EndMitre).GetSafeNormal() : (Across * Site.StartMitre - Along).GetSafeNormal();
+				const auto On = [&](const FVector2D& P) { return At(P, bEnd ? EndAt(Site, Length, P.X) : StartAt(Site, P.X)); };
+				const int32 Middle = Surface.Vertex(On(FVector2D(0.0, 0.5 * Site.Clip.Height)), Normal, FVector2D::ZeroVector, Twigs, 0.3);
 				for (int32 I = 0; I + 1 < Points.Num(); ++I)
 				{
-					Surface.Triangle(Middle, Surface.Vertex(At(Points[I], X), Normal, Points[I], Twigs, 0.3), Surface.Vertex(At(Points[I + 1], X), Normal, Points[I + 1], Twigs, 0.3));
+					Surface.Triangle(Middle, Surface.Vertex(On(Points[I]), Normal, Points[I], Twigs, 0.3), Surface.Vertex(On(Points[I + 1]), Normal, Points[I + 1], Twigs, 0.3));
 				}
-				Surface.Triangle(Middle, Surface.Vertex(At(Points.Last(), X), Normal, Points.Last(), Twigs, 0.3), Surface.Vertex(At(Points[0], X), Normal, Points[0], Twigs, 0.3));
+				Surface.Triangle(Middle, Surface.Vertex(On(Points.Last()), Normal, Points.Last(), Twigs, 0.3), Surface.Vertex(On(Points[0]), Normal, Points[0], Twigs, 0.3));
 			}
 		}
 
@@ -97,8 +127,42 @@ namespace Musee::NatureMaking
 				Tint, 0.85);
 		}
 
+		/**
+		 * A clipped ball: a sphere of the clip's diameter, sunk its depth into the soil at the plant's crown, its skin of
+		 * needles over the part above the soil (a zone of the sphere, 2 pi R times its height, its points spread evenly by
+		 * Archimedes' rule: evenly in height and round the axis), round a core of bare twigs the core inset inside it.
+		 */
+		void GrowBall(const FNatureSpecies& Species, const FPlantSite& Site, FRandomStream& Random, FPlantParts& Out)
+		{
+			const double Radius = 0.5 * Site.Clip.Ball;
+			const FVector Centre = Site.Crown + FVector(0.0, 0.0, Radius - Site.Clip.Sink);
+			const double CoreRadius = Radius - Site.Clip.CoreInset;
+			if (CoreRadius > 0.0)
+			{
+				AddEllipsoid(Out.FindOrAdd(Organ::Trunk), Centre, FVector::UpVector, CoreRadius, CoreRadius, BallCoreSegments, BallCoreRings, Colour(Species.StemColours, 0), 0.3);
+			}
+			// The soil cuts the sphere this far below its centre (a negative height).
+			const double Lowest = Site.Clip.Sink - Radius;
+			const double Density = SkinDensity(Species, Site.Clip, Random);
+			const int32 Needles = FMath::RoundToInt(Density * 2.0 * UE_DOUBLE_PI * Radius * (Radius - Lowest));
+			FNatureSurface& Surface = Out.FindOrAdd(Organ::Leaf);
+			for (int32 N = 0; N < Needles; ++N)
+			{
+				const double Up = Random.FRandRange(Lowest, Radius);
+				const double Azimuth = Random.FRandRange(0.0, Tau);
+				const double Ring = FMath::Sqrt(FMath::Max(0.0, Radius * Radius - Up * Up));
+				const FVector Normal = FVector(Ring * FMath::Cos(Azimuth), Ring * FMath::Sin(Azimuth), Up) / Radius;
+				Needle(Species, Centre + Normal * Radius, Normal, Random, Surface);
+			}
+		}
+
 		void GrowHedge(const FNatureSpecies& Species, const FPlantSite& Site, FRandomStream& Random, FPlantParts& Out)
 		{
+			if (Site.Clip.IsBall())
+			{
+				GrowBall(Species, Site, Random, Out);
+				return;
+			}
 			if (Site.Line.Num() != 2 || !Site.Clip.IsSet())
 			{
 				return;
@@ -117,7 +181,7 @@ namespace Musee::NatureMaking
 				Perimeter += FVector2D::Distance(Points[I], Points[I + 1]);
 				Runs.Add(Perimeter);
 			}
-			const double Density = Draw(Species.LeavesPerSquareMeter, Random);
+			const double Density = SkinDensity(Species, Site.Clip, Random);
 			const int32 Needles = FMath::RoundToInt(Density * Perimeter * Length);
 			FNatureSurface& Surface = Out.FindOrAdd(Organ::Leaf);
 			for (int32 N = 0; N < Needles; ++N)
@@ -131,7 +195,7 @@ namespace Musee::NatureMaking
 				const double T = (S - Runs[I]) / FMath::Max(UE_SMALL_NUMBER, Runs[I + 1] - Runs[I]);
 				const FVector2D P = FMath::Lerp(Points[I], Points[I + 1], T);
 				const FVector2D Q = FMath::Lerp(Normals[I], Normals[I + 1], T).GetSafeNormal();
-				const double X = Random.FRandRange(0.0, Length);
+				const double X = Random.FRandRange(StartAt(Site, P.X), EndAt(Site, Length, P.X));
 				Needle(Species, Site.Line[0] + Along * X + Across * P.X + FVector::UpVector * P.Y, Across * Q.X + FVector::UpVector * Q.Y, Random, Surface);
 			}
 			const double EndArea = Site.Clip.Height * (Site.Clip.Width - Site.Clip.Batter);

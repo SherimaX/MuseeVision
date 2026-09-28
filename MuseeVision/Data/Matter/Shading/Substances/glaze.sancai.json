@@ -1,0 +1,90 @@
+{
+  "schema": "musee.matter.shading.substance/1",
+  "key": "glaze.sancai",
+  "name": "Sancai lead glaze, amber (iron)",
+  "family": "accent",
+  "record": "Palette.json",
+  "master": "white",
+  "accentOf": "stone",
+  "dielectric": {
+    "diffuseAlbedo": {
+      "value": [
+        46.0,
+        30.0,
+        50.0
+      ],
+      "space": "CIELAB (D65, 2 deg)",
+      "unit": "CIELAB",
+      "grade": "derived",
+      "source": "Palette.json: accent.earthenware-sancai ; assets/reference/chinese-ref-sancai-horse.jpg, the collection's reference photograph of this work (assets/reference/CREDITS.md: 'Caparisoned horse', Shaanxi or Henan province, China, Tang dynasty, 675-750, earthenware with sancai glaze, Portland Art Museum, gallery photograph by Daderot, public domain, https://commons.wikimedia.org/wiki/File:Caparisoned_horse,_Shaanxi_or_Henan_province,_China,_Tang_dynasty,_675-750_AD,_earthenware_with_sancai_glaze_-_Portland_Art_Museum_-_Portland,_Oregon_-_DSC08396.jpg ), read 2026-09-27 ; Substances/earthenware.white.json (the body's diffuse albedo, the photograph's scale) ; J. Y. Shen, J. Henderson, J. Evans, S. Chenery and F. Y. Zhao, 'A study of the glazing techniques and provenances of Tang sancai glazes using elemental and lead isotope analyses', Archaeometry 61, 2 (2019) 358-373, doi:10.1111/arcm.12436, https://nora.nerc.ac.uk/522694/1/Shen_et_al-2019-Archaeometry.pdf",
+      "derivation": "The photograph (a 1024 x 728 JPEG, its white balance and exposure the photographer's, uncalibrated) is normalised against the white body in the same light: the cream of the saddle's hanging flap x 505-540 by y 300-330 (1,116 pixels), the white body under its clear glaze, or bare where the glaze has weathered from it (either shows the body's colour), whose diffuse albedo is the body's (glaze.sancai-clear: earthenware.white's (86, 1, 8)). The JPEG is decoded as sRGB to linear Rec.709, and each patch is the median of its pixels, channel by channel, so specks, silvering and drip edges inside it don't pull it. The flap's median sRGB is (227, 218, 205), linear (0.7682, 0.7011, 0.6105), CIELAB as photographed (87.4, 0.9, 7.5), 1 % of its pixels near the top of the JPEG. The reference is checked against the photograph's other creams before it is used: a reference with a cast of its own would carry it, reversed, into every colour it scales. Its chromaticity as photographed agrees with the saddle's other creams, its pommel x 478-492 by y 205-235 (76.9, 2.0, 7.0), its seat x 500-540 by y 240-270 (79.8, 3.1, 12.3) and the flap's lower half x 510-540 by y 340-380 (80.5, 3.3, 10.2): a* within 3 of each, b* within 6. The glazed cream border of the saddle cloth x 451-457 by y 265-344 is rejected: it reads (95.8, -8.1, 10.2), a* -8 where every other cream reads +1 to +3, green cast by the copper glaze it borders (copper in its glaze, or the green light the cloth throws on it), and 29 % of its pixels stand at 250 or more in green. Scaled to the body, it would push the whole photograph towards magenta: the white shelf the horse stands on would read a* +5.6. The body's linear Rec.709 is (0.7423, 0.6716, 0.5781); so each linear channel of a patch is multiplied by the body's over the flap's, (0.9663, 0.9579, 0.9469), which takes out the light's colour and the exposure together (a von Kries scaling to a known white). Scaled so, the white shelf x 100-250 by y 600-700 reads (70.1, -1.2, 5.2), neutral on the red-green axis as a white shelf is. The glaze is sampled only where it is lit, unweathered and free of drips: the chest x 385-409 by y 325-364 and the orange flank beside the saddle cloth x 602-611 by y 345-399 (1,550 pixels), median sRGB (174, 89, 20), linear (0.4233, 0.0999, 0.0070); scaled, the linear albedo (0.4090, 0.0957, 0.0066), CIELAB (46.4, 30.3, 50.3), rounded (46, 30, 50).",
+      "note": "The amber lead glaze, coloured by iron (FeO 1.09 to 5.35 wt.% in Shen et al.'s brown glazes), the horse's dominant glaze: its body, neck and legs are amber-brown, orange where the light falls on the chest and flank and darker where the neck and far flank turn from it. Left out: the neck and the flank behind the saddle cloth (in shade, where the glaze's colour can't be told from the light it misses), the silvered, weathered patches on the hindquarter and legs, and the green and yellow drips. Its strength is the body's, whose albedo is a first value (grade unverified), and the photograph's exposure, taken from the flap, whose channels stand clear of the top of the JPEG; the cream border is lit brighter (L* 95.8 as photographed, with its green near clipping), and an exposure taken from it (the colour balanced on the white shelf) gives glazes about 5 L* darker, amber (41.5, 27.4, 45.7) and green (46.9, -15.7, 21.3). A camera's JPEG is sRGB only approximately. A spectrophotometer reading of the glazes and of the bare body would replace it. Musee.Matter.SancaiFromPhotograph re-derives it from the photograph and checks the reference against the other creams. The Met's horse 1991.253.12 is a cream horse with an amber saddle, whose pale amber is not this horse's. Its sisters are glaze.sancai-green and glaze.sancai-clear."
+    },
+    "refractiveIndex": {
+      "value": 1.65,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Council Directive 69/493/EEC on crystal glass, Annex I (lead crystal: PbO at least 24 %, refractive index nD at least 1.545), https://eur-lex.europa.eu/legal-content/EN/ALL/?uri=celex:31969L0493 ; Wikipedia, 'Lead glass' (ordinary glass 1.5, lead brings it to 1.7 to 1.8; the first Chinese and Roman lead glazes 45-60 % PbO), https://en.wikipedia.org/wiki/Lead_glass",
+      "note": "A lead silicate glass: its index rises with its lead, from at least 1.545 at 24 % PbO (the directive's lead crystal) towards 1.7 to 1.8. Shen et al.'s sancai glazes carry 39.45 to 64.34 wt.% PbO (Table 1), so the index lies between; 1.65 is taken inside that bracket, not measured."
+    },
+    "porosity": {
+      "value": 0.0,
+      "unit": "1",
+      "grade": "record",
+      "source": "MuseeVision/Docs/Matter/Story.md, 'Glazed stoneware and fired clay' (after Kingery, Bowen and Uhlmann 1976)",
+      "note": "The glaze is a glass with no open pores, as the other glazes."
+    },
+    "wettingDepth": {
+      "value": 0.0,
+      "unit": "mm",
+      "grade": "derived",
+      "source": "MuseeVision/Docs/Matter/Story.md (a glaze has no open pores)",
+      "note": "",
+      "derivation": "With no open pores, water cannot enter, so the wetting depth is zero."
+    }
+  },
+  "structure": {
+    "grain": {
+      "value": 0.05,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: accent.earthenware-sancai (the glazes' first values)",
+      "note": "The finest structure the face shows."
+    },
+    "bed": {
+      "value": 50,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: accent.earthenware-sancai (the glazes' first values)",
+      "note": "The coarsest structure the face shows."
+    },
+    "bedAspect": {
+      "value": 1.0,
+      "unit": "1",
+      "grade": "derived",
+      "source": "An unbedded body",
+      "derivation": "unbedded"
+    },
+    "hurst": {
+      "value": 0.7,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Candela et al. 2012, Journal of Geophysical Research 117, B08409 (fault surfaces, 0.6 to 0.8; cited in Stone.ush)",
+      "note": "The middle of the range measured on rock surfaces, as the travertine's."
+    },
+    "toneSpread": {
+      "value": 0.1,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.earthenware-sancai (the glazes' first values)",
+      "note": "A first half-range of ln(albedo) across one face."
+    },
+    "roughnessSpread": {
+      "value": 0.05,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.earthenware-sancai (the glazes' first values)",
+      "note": "A first half-range of ln(roughness) across one face."
+    }
+  }
+}

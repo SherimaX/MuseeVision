@@ -137,7 +137,9 @@ Every piece is one solid of one substance meeting its neighbour face to face.
 ### 3.3 The image surface (`sphere.image`)
 The sphere **R 13.700 about C** (Ø 27.40), facing in, less the neck's hole (edge r 2.980, z 8.628). Light's image panels
 (light-field, 0.7 m, 60 mm deep, R 13.700 … 13.760, perforated for sound) are drawn by Light from its record; tonight one
-continuous surface.
+continuous surface. R 13.700 is the inner face of the panels' glass (the pane of `lenslet-array.black`, whose thickness is
+Matter's record's); the emitters stand behind it by that thickness, and Light's image surface is theirs, its chords held
+outside the emitters' sphere, so the picture never crosses the glass in front of it.
 
 ### 3.4 The neck (the airlock; `ElanSphereTop.cpp:191-256`)
 | Piece | Geometry | Surface |
@@ -253,7 +255,7 @@ Sphere's own shell, not a sky pushed into the scene: no scoped-sky machinery.
 
 | Ids | Type | Count | Point and aim | Operation |
 |---|---|---|---|---|
-| `image` | `gap.light-field-panel.d65` | 1 (the whole R 13.700 surface) | Mount `sphere.image.mount` (C), facing in; aim C | always |
+| `image` | `gap.light-field-panel.d65` | 1 (the whole R 13.700 surface) | Mount `sphere.image.mount` (C), facing in; aim C; laid over the `sphere` R 13.700 less the neck's opening r 2.980, behind the glass of `sphere.image` (Light's enclosing face: the emitters' sphere, R 13.700 plus the pane's 6 mm, 2,332.4 m², its light converging on C) | always |
 | `rail.01` … `rail.08` | `linear-cove.3000k` | 8 runs of 45° (4.148 each) | strip on r 5.281, z 21.432 in the channel under the handrail, centred on bearings 22.5° + 45°k; aim the floor at r 3.900 on the same bearing | presence (a body in the Sphere) |
 | `neck.01` … `neck.04` | `linear-cove.3000k` | 4 runs of 85° (3.761 each) | strip bent to r 2.535, z 9.600, centred on bearings 47.5°, 132.5°, 227.5°, 312.5°; aim the axis at 9.600 | presence (a body in the neck) |
 
@@ -487,4 +489,4 @@ the Cube's panels are the flat kind.
   at `orientation` 5 lx. The "building hidden" sky mode is retired: the sky is a display on the Sphere's own shell.
 - **Materials follow the Story:** Crema Marfil mirror-polished platform (as built the Future's "mirror" travertine shader);
   mirror-polished bronze seats (as built dark bronze); pearl-lined blades; fluoropolymer pearl outdoors.
-- Lighting.json (K3-LIGHT-NATURE): the image luminaire names the real type `light-field-panel.d65`. An image panel is laid over a flat extent or a plan zone; a face curved to the sphere, and the celestial image source that feeds it, wait for Light's image work, so the entry stands as a finding until then.
+- Lighting.json (K3-LIGHT-NATURE, K11): the image luminaire names the real type `light-field-panel.d65`, laid over its `sphere` (R 13.700, opening r 2.980, aimed at C, where it sits) behind the glass of `sphere.image`: R 13.700 is the glass's inner face, and the emitters stand behind it by the pane's thickness from Matter's record of `lenslet-array.black` (6 mm), 2,332.4 m², Light's image surface held outside their sphere (Musee.Light.ImageBehindGlass). Light places it as an enclosing face, which no engine light can stand for, so it drives none: Light shows its picture on a surface of the sphere's inside down to the neck's opening, emissive in Light's image material (`M_Light_Image`, which Studio makes with the star field from `assets/sky/stars.bin`), and its light leaves that surface, pi times the picture's mean luminance times 2,332.4 m² (at night with no Moon about 1.6 × 10⁻⁵ cd/m² of stars: almost none). The picture is Time's sky for the museum's observer (`Musee::Light::Image::SkyPicture`): the 8,404 stars to V 6.5 at their places, brightnesses (2.08 µlx at V 0) and colours (B−V by Ballesteros), the Moon at its size, place and phase, clipped at the panel's 200 cd/m² peak white, each point showing the sky along the eye's line of sight (content at infinity). **Departures:** the Milky Way isn't drawn (the collection holds no map of it; NASA SVS Deep Star Maps would be the source); the image panels' tiling, black mask and perforation wait for polish (one continuous surface tonight); the design order's black-level check isn't measured yet.
