@@ -907,7 +907,7 @@ Lingbi rock is (a compact small mountain, grooved and pitted, few holes through)
 −40.45, 1.25) on the painting table (`chenghuai.linquan.table`), on its stand (Hang `"stand": true`): a phoebe zuo 0.03
 high that Art carves to the rock (`Data/Art/Stones.json` stand), its top recessed 8 mm to the rock's own foot so the rock
 sits down into it, a lip 8 mm round the recess, a bead round its side and five short feet, so its plan is the rock's
-foot grown by its lip (about 0.25 × 0.16), not a disc; care stone-and-bronze. **No wall labels** ("a literati house names itself"): captions on look.
+foot grown by its lip (0.230 × 0.138 at the lip), not a disc; care stone-and-bronze. **No wall labels** ("a literati house names itself"): captions on look.
 
 ## 9. Sound
 - **Rooms** (Enclosed): small and dry (臨池 ≈ 17.9 × 4.8 × 3.5; 澄懷堂 10.0 × 6.1, open to 7.75), from Matter: lime

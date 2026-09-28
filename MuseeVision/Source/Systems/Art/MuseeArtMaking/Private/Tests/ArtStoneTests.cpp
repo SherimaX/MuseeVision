@@ -152,6 +152,7 @@ bool FArtStoneStandTest::RunTest(const FString& Parameters)
 		Shortest = FMath::Min(Shortest, Stand.OutlineRadiiMeters[Index]);
 		bEvenLip &= FMath::IsNearlyEqual(Stand.OutlineRadiiMeters[Index] - Stand.RecessRadiiMeters[Index], Record.LipMeters, 1e-9);
 	}
+	AddInfo(FString::Printf(TEXT("The Lingbi rock's stand: its lip reaches %.3f from the rock's axis at most and %.3f at least."), Longest, Shortest));
 	TestTrue(*FString::Printf(TEXT("Its plan follows the rock's foot, not a disc (%.3f by %.3f)"), 2.0 * Longest, 2.0 * Shortest),
 		Longest > 1.3 * Shortest);
 	TestTrue(TEXT("with an even lip round the recess"), bEvenLip);
