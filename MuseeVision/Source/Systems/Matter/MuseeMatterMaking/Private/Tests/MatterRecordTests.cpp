@@ -78,6 +78,18 @@ bool FMatterColourFromCieLab::RunTest(const FString& Parameters)
 	Near(*this, TEXT("Mid grey"), LinearRec709FromCieLab(50.0, 0.0, 0.0), FLinearColor(0.18419f, 0.18419f, 0.18419f));
 	Near(*this, TEXT("The red primary"), LinearRec709FromCieLab(53.2408, 80.0925, 67.2032), FLinearColor(1.0f, 0.0f, 0.0f));
 
+	// The way back, for colours derived from a photograph: the red primary returns to its CIELAB, and a warm white, a
+	// dark amber and a near-black make the round trip (to 0.05, the four decimals of IEC 61966-2-1's two matrices).
+	const FVector3d Red = CieLabFromLinearRec709(1.0, 0.0, 0.0);
+	TestTrue(TEXT("The red primary as CIELAB"), Red.Equals(FVector3d(53.2408, 80.0925, 67.2032), 0.05));
+	for (const FVector3d& Colour : { FVector3d(86.0, 1.0, 8.0), FVector3d(46.0, 30.0, 50.0), FVector3d(5.0, -3.0, 2.0) })
+	{
+		const FLinearColor Rgb = LinearRec709FromCieLab(Colour.X, Colour.Y, Colour.Z);
+		const FVector3d Back = CieLabFromLinearRec709(Rgb.R, Rgb.G, Rgb.B);
+		TestTrue(*FString::Printf(TEXT("(%g, %g, %g) makes the round trip, as (%.3f, %.3f, %.3f)"), Colour.X, Colour.Y, Colour.Z,
+			Back.X, Back.Y, Back.Z), Back.Equals(Colour, 0.05));
+	}
+
 	FMatterTriple Lab;
 	Lab.Value = { 50.0, 0.0, 0.0 };
 	Lab.Space = CieLabSpace;
@@ -128,8 +140,8 @@ bool FMatterRecordsRead::RunTest(const FString& Parameters)
 					// from another museum's, whose glazes lie differently (the Met's 1991.253.12 is cream with an amber saddle).
 					TestTrue(*FString::Printf(TEXT("%s is read from the work's own reference photograph"), Working),
 						Albedo.Source.Contains(TEXT("assets/reference/chinese-ref-sancai-horse.jpg")));
-					// An uncalibrated photograph's pixels are no albedo: each glaze is derived from it, normalised against a
-					// neutral in the same light, and says how.
+					// An uncalibrated photograph's pixels are no albedo: each glaze is derived from it, normalised against the
+					// white body in the same light, and says how (Musee.Matter.SancaiFromPhotograph re-derives them).
 					TestTrue(*FString::Printf(TEXT("%s is derived, its derivation written out"), Working),
 						Albedo.Grade == TEXT("derived") && !Albedo.Derivation.IsEmpty());
 					Albedos.Add(Working, Albedo.Value);

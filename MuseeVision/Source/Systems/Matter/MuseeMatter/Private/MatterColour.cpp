@@ -26,6 +26,13 @@ namespace
 		{ 0.0557, -0.2040, 1.0570 },
 	};
 
+	/** Linear Rec.709 to CIE XYZ (D65): IEC 61966-2-1:1999 (sRGB), section 5.2. */
+	constexpr double Rec709ToXyz[3][3] = {
+		{ 0.4124, 0.3576, 0.1805 },
+		{ 0.2126, 0.7152, 0.0722 },
+		{ 0.0193, 0.1192, 0.9505 },
+	};
+
 	constexpr int32 TripleComponents = 3;
 
 	/** The inverse of CIELAB's f. */
@@ -33,6 +40,26 @@ namespace
 	{
 		return T > Delta ? T * T * T : LinearSlope * (T - LinearOffset);
 	}
+
+	/** CIELAB's f: a cube root, linear below (6/29)^3. */
+	double LabF(double T)
+	{
+		return T > Delta * Delta * Delta ? FMath::Pow(T, 1.0 / 3.0) : T / LinearSlope + LinearOffset;
+	}
+}
+
+FVector3d CieLabFromLinearRec709(double R, double G, double B)
+{
+	const double Rgb[TripleComponents] = { R, G, B };
+	double Xyz[TripleComponents];
+	for (int32 Row = 0; Row < TripleComponents; ++Row)
+	{
+		Xyz[Row] = Rec709ToXyz[Row][0] * Rgb[0] + Rec709ToXyz[Row][1] * Rgb[1] + Rec709ToXyz[Row][2] * Rgb[2];
+	}
+	const double Fx = LabF(Xyz[0] / WhiteX);
+	const double Fy = LabF(Xyz[1] / WhiteY);
+	const double Fz = LabF(Xyz[2] / WhiteZ);
+	return FVector3d(LightnessSlope * Fy - LightnessOffset, RedGreenSlope * (Fx - Fy), YellowBlueSlope * (Fy - Fz));
 }
 
 FLinearColor LinearRec709FromCieLab(double L, double A, double B)

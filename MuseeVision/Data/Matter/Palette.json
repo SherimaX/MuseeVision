@@ -2970,7 +2970,7 @@
           "Shading/Substances/glaze.sancai-green.json",
           "Shading/Substances/glaze.sancai-clear.json"
         ],
-        "needed": "Measured colours of the three glazes and the body (the glazes' values are derived from the collection's reference photograph of the horse, assets/reference/chinese-ref-sancai-horse.jpg, normalised against its glazed cream border as the white body under the clear glaze, so they rest on the body's first value); the object's decoration (where the green and the clear glazes lie on it)."
+        "needed": "Measured colours of the three glazes and the body (the glazes' values are derived from the collection's reference photograph of the horse, assets/reference/chinese-ref-sancai-horse.jpg, normalised against the cream of its saddle as the white body, checked against the photograph's other creams, so they rest on the body's first value); the object's decoration (where the green and the clear glazes lie on it)."
       },
       "finishes": [
         {
