@@ -111,6 +111,7 @@ bool FMatterRecordsRead::RunTest(const FString& Parameters)
 	if (TestNotNull(TEXT("The palette names the sancai earthenware"), Sancai))
 	{
 		TSet<FString> Glazes;
+		TMap<FString, TArray<double>> Albedos;
 		for (const TCHAR* Working : {TEXT("glazed.sancai"), TEXT("glazed.sancai-green"), TEXT("glazed.sancai-clear")})
 		{
 			TestTrue(*FString::Printf(TEXT("It offers %s"), Working),
@@ -127,16 +128,29 @@ bool FMatterRecordsRead::RunTest(const FString& Parameters)
 					// from another museum's, whose glazes lie differently (the Met's 1991.253.12 is cream with an amber saddle).
 					TestTrue(*FString::Printf(TEXT("%s is read from the work's own reference photograph"), Working),
 						Albedo.Source.Contains(TEXT("assets/reference/chinese-ref-sancai-horse.jpg")));
-					if (FCString::Strcmp(Working, TEXT("glazed.sancai")) == 0 && Albedo.Value.Num() == 3)
-					{
-						// The reference's body, neck and legs are amber-brown, Shen et al.'s dark brown: under L* 40, where the
-						// same photograph's cream reads near 89.
-						TestTrue(TEXT("the amber, the horse's dominant glaze, is its dark amber-brown"), Albedo.Value[0] < 40.0);
-					}
+					// An uncalibrated photograph's pixels are no albedo: each glaze is derived from it, normalised against a
+					// neutral in the same light, and says how.
+					TestTrue(*FString::Printf(TEXT("%s is derived, its derivation written out"), Working),
+						Albedo.Grade == TEXT("derived") && !Albedo.Derivation.IsEmpty());
+					Albedos.Add(Working, Albedo.Value);
 				}
 			}
 		}
 		TestEqual(TEXT("the amber, the green and the clear are three colours"), Glazes.Num(), 3);
+
+		// Checks that hold whatever the photograph's exposure: how the glazes stand to one another and to their body.
+		const TArray<double>* Amber = Albedos.Find(TEXT("glazed.sancai"));
+		const TArray<double>* Clear = Albedos.Find(TEXT("glazed.sancai-clear"));
+		const TValueOrError<FMatterSubstance, FString> Body = ReadSubstance(Sancai->Substance);
+		if (TestTrue(TEXT("the amber, the clear and their body are colours"), Amber && Clear && Amber->Num() == 3 && Clear->Num() == 3
+			&& Body.HasValue() && Body.GetValue().Dielectric.DiffuseAlbedo.Value.Num() == 3))
+		{
+			// Iron colours the amber: it takes light the clear glaze passes, most of it at the blue end.
+			TestTrue(TEXT("the amber is darker than the clear glaze"), (*Amber)[0] < (*Clear)[0]);
+			TestTrue(TEXT("and redder"), (*Amber)[1] > (*Clear)[1]);
+			// A colourless glass over the body shows the body and adds no light to it.
+			TestTrue(TEXT("the clear glaze is no brighter than its body"), (*Clear)[0] <= Body.GetValue().Dielectric.DiffuseAlbedo.Value[0]);
+		}
 	}
 
 	const TValueOrError<FMatterSubstance, FString> Substance = ReadSubstance(FMuseeKey(TEXT("travertine")));

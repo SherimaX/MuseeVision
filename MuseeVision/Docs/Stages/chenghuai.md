@@ -888,8 +888,9 @@ lower edge up the slope from the bed's front edge (the image centred on the bed'
 Care: ceramic-and-glass (the sancai horse is lead-glazed earthenware: the same class). Its medium, "Earthenware with
 three-colour lead glazes", is `accent.earthenware-sancai` · `glazed.sancai` · `clean` (Data/Art/Media.json): Matter's
 sancai lead glaze over a white earthenware body, after Shen et al., Archaeometry 61 (2019) 358–373 (PbO 39–64 wt.%;
-amber from iron, green from copper, the "white" a clear glaze over the white kaolin body), their colours read from the
-work's reference photograph (`assets/reference/chinese-ref-sancai-horse.jpg`). The horse shows its dominant amber-brown
+amber from iron, green from copper, the "white" a clear glaze over the white kaolin body), their colours derived from the
+work's reference photograph (`assets/reference/chinese-ref-sancai-horse.jpg`), normalised against its glazed cream border
+as the white body under the clear glaze and sampled only where the glaze is lit, unweathered and free of drips. The horse shows its dominant amber-brown
 all over, the green and cream decoration missing until the object carries it. The four scans that exist only as
 prims of the retired wing's export are *works' evidence*; Studio imports them to `Evidence/Art` with provenance.
 
