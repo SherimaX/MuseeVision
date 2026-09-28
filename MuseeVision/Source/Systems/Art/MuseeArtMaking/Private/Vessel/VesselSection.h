@@ -35,21 +35,35 @@ namespace Musee::ArtMaking
 	[[nodiscard]] FString SizeFault(const FArtVessel& Vessel, const FVector2D& PlanMeters, double DiameterTolerance);
 
 	/**
-	 * How an oval vessel's turned section is pressed front to back (y) to its plan: the ratio of its plan's short axis to
-	 * its long at its foot and at its mouth, as its museum records both, each at its height on the section, and running
+	 * How an oval vessel's turned section is pressed to its plan: front to back (y) by the ratio of its plan's short axis
+	 * to its long at its foot and at its mouth, as its museum records both, each at its height on the section, and running
 	 * evenly between them up the wall (a potter's oval is thrown round and pressed, its foot and its mouth each to its
-	 * own oval); below the foot the foot's, above the mouth the mouth's. A round vessel's ratio is one everywhere.
+	 * own oval); and round, from a circle to the superellipse |x/a|^n + |y/b|^n = 1 its photographs show at the foot and
+	 * at the mouth (FArtVesselPlan: n two an ellipse, more a rounded oblong), n running evenly between them likewise.
+	 * Below the foot the foot's, above the mouth the mouth's. A round vessel's ratio is one and its exponent two
+	 * everywhere.
 	 */
 	struct FVesselPress
 	{
 		double FootHeightMeters = 0.0;
 		double FootRatio = 1.0;
+		double FootExponent = 2.0;
 		double MouthHeightMeters = 0.0;
 		double MouthRatio = 1.0;
+		double MouthExponent = 2.0;
 
 		/** The ratio at a height, and how fast it changes with height there (per metre). */
 		[[nodiscard]] double RatioAt(double HeightMeters) const;
 		[[nodiscard]] double SlopeAt(double HeightMeters) const;
+
+		/** The plan's exponent at a height. */
+		[[nodiscard]] double ExponentAt(double HeightMeters) const;
+
+		/**
+		 * Where a turned point (Radius from the axis at Height, Angle round from the front towards the right) lands pressed:
+		 * on its height's superellipse along the same bearing of the unpressed plan, then pressed front to back.
+		 */
+		[[nodiscard]] FVector Pressed(double Radius, double Height, double Angle) const;
 	};
 
 	/** How near a section point must come to the museum's foot to be it: half the millimetre the museum gives it to. */
@@ -62,6 +76,16 @@ namespace Musee::ArtMaking
 	 * everywhere); else why not.
 	 */
 	[[nodiscard]] FString PressOf(const FArtVessel& Vessel, const FVector2D& Scale, FVesselPress& Out);
+
+	/** How far past its underside's edge a foot may reach, as a share of the underside's plan: the outlines' rounding. */
+	inline constexpr double FeetToleranceShare = 0.001;
+
+	/**
+	 * Whether a vessel's feet stand under it: every point of every foot's outline within the plan of its underside at the
+	 * feet's height (its section's widest radius there, pressed as its pressing presses that height), as a foot is joined
+	 * to the base above it. Empty if so, or if it has no feet; else how far they reach past it.
+	 */
+	[[nodiscard]] FString FeetFault(const FArtVessel& Vessel, const FVesselPress& Press);
 
 	/** The widest radius a section reaches at a height, over all its segments there (zero where none reaches it). */
 	[[nodiscard]] double RadiusAt(TConstArrayView<FVector2D> Section, double HeightMeters);

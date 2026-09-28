@@ -911,17 +911,33 @@ itself or thins its wall under half of it (checked by the script, by make and by
 has no side view: its section joins the museum's four sizes by the proportions its oblique photograph shows, turned in
 the round and pressed front to back as a potter presses a thrown round to an oval: at the lip to the mouth's
 23.0 × 16.4 and at the flange's face to the foot's 19.3 × 12.9, the pressing running evenly up the wall between them
-(make and Musee.Art.PaintedVessel check both axes of the mouth and the foot, the test on the turned mesh itself); it
-stands on its four cloud-scroll feet, each traced from the base photograph as it hugs a corner of the base, 9 mm high.
+(make and Musee.Art.PaintedVessel check both axes of the mouth and the foot, the test on the turned mesh itself). Its
+plan is the rounded oblong its photographs show, not an ellipse: a superellipse of exponent 2.35 at the flange's face,
+fitted to the flange's outer edge on the base photograph (611 of 720 rays; the rest are hidden by the feet), and 2.36
+at the lip, fitted to the white lip on the oblique photograph through a pinhole fitted with it (an ellipse misses the lip
+by 7.6 px rms, exponent 3 by 9.9, 2.36 by 2.0). Musee.Art.PaintedVessel checks the turned mesh's plan against both
+traced outlines all round, across the diagonals too, within 3%. Its underside runs out to the flange's face over a 1 mm
+arris, and it stands on its four cloud-scroll feet, each traced from the base photograph as it hugs a corner of the base,
+9 mm high, within the underside (make checks it).
 The painted vessels (Xuande, wucai, falangcai, chicken cup, meiping) wear their decoration, composed by Art round the
 turned form from their views: each view projected through its camera onto all the surface it sees, obliquely too (the
 Xuande jar's reign mark and the meiping's shoulder, tilted up and away, the wucai jar's lappets round its shoulder),
 wherever no other part of the vessel hides it and it shows inside the silhouette by its camera's miss and 2 px more;
 views blended by the square of how squarely they see it, each fading into the glaze over the last 12° before its
 silhouette (where a pixel of it covers five times the surface and the glaze's shading falls away steeply) and over a
-millimetre where another part hides the surface, each photograph's white the glaze's. Where no view sees the outside, each band of ornament whose repeat is known is carried
-round by it, and elsewhere the glaze is left: the Xuande jar's 23 lotus panels and 8 neck clouds, counted on its
-photograph; the chicken cup's two plain lines. The rest have no whole repeat to carry (the wucai jar's collar, below), a
+millimetre where another part hides the surface. Each photograph is divided by its white: the glaze's hue, at the
+lightness the glaze itself shows round each place (the 90th percentile of its glaze's samples there, the glaze being the
+samples of little colour once that hue is divided out), so the light falling off down the meiping in its gallery, or the
+chicken cup's wall darkening as it turns under, is taken off and the painting keeps its darkness against its own ground
+(Musee.Art.PaintedVessel compares it with each photograph's, window by window up the outside, and counts the texels
+clipped to white). Where two views' paintings lie more than 5 mm apart where they overlap (the wucai jar's sides, 6.5 to
+7.0 mm, measured block by block as the composition weighs them), they are not blended, which showed its carp twice: each
+keeps its own side of the overlap, and they meet at a seam run where their paintings agree best, cross-faded over 2 mm;
+where a carp crosses the seam its line steps by those millimetres. Where no view sees the outside, each band of ornament
+whose repeat is known is carried round by it, and elsewhere the glaze is left: the Xuande jar's 23 lotus panels and 8
+neck clouds, counted on its photograph (the neck's band read between the neck's lower and upper double lines, 43.66 to
+48.06 cm up, so it no longer reaches down onto the shoulder, where the reign mark stands once: the record says so, and
+the test composes the jar and finds the mark nowhere else round it); the chicken cup's two plain lines. The rest have no whole repeat to carry (the wucai jar's collar, below), a
 count the photographs don't settle (the meiping's lotus panels, below) or no repeat the photographs trust (the wucai
 jar's lappets and neck scroll, the meiping's diaper band and peony scroll: their painting lies on itself at a
 correlation under 0.5 at every turn), and are left in the glaze where no view sees them. A further view keeps the camera
@@ -1176,8 +1192,12 @@ by the board's willow and pine (plums kept).
   way down, the foot came to 19.3 × 13.8; a wall flaring as far at the ends as at the sides would give 12.7). No
   photograph shows how the wall's flare changes round the oval between the two.
 - **The Ru basin's feet** are traced from its base photograph and mirrored to the four corners, as the photograph shows
-  them alike; the base's rounded oblong is an ellipse on the turned basin, so each foot keeps its share of the way to the
-  base's edge in its direction rather than its exact place.
+  them alike, laid in shares of the flange's fitted outline. The tracing reaches 1.066 of the flange at the corners, where
+  the feet's own faces show beyond its edge; a foot stands under the base, so its outer edge is brought within the
+  underside there.
+- **The Xuande jar's lotus panels** are carried round only to 7.73 cm: their tips reach 9.27 cm. Taken to the tips, the
+  band's measured repeat is trusted at 15.1 to 15.4 degrees (23.3 to 23.8 panels), which settles neither the 23 panels
+  read on the photograph nor 24, so the band keeps its reading and its height.
 - **Photographs left out:**
   - the Xuande jar's older photograph MET_DT5083: through the camera its own silhouette fixes, its painting lies 1.0 to
     3.8 cm higher than DP-32251-001's, band by band up the height (correlation 0.64 to 0.79), and a camera moved to make

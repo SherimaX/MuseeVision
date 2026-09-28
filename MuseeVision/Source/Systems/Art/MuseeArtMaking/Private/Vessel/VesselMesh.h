@@ -33,7 +33,8 @@ namespace Musee::ArtMaking
 	/**
 	 * Builds a vessel in its own frame (the foot's centre at the origin, x its right, y its front, z up), to the Form
 	 * kernel's mesh contract: its closed section turned about z, a point (r, z) at the angle phi from the front towards
-	 * the right landing at (r sin phi, k(z) r cos phi, z), k its pressing's ratio (one for a round vessel); UV0 its
+	 * the right landing at (r s sin phi, k(z) r s cos phi, z), k its pressing's ratio (one for a round vessel) and s the
+	 * way out along that bearing to its plan's superellipse (one for an ellipse: FVesselPress::Pressed); UV0 its
 	 * layout's (U the widest parallel's metres round from the front, V the section's metres along), so a decoration
 	 * composed in that layout lies where it was photographed. A full turn keeps its UV seam at the front, its points
 	 * shared.

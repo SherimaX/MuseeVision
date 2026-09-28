@@ -19,10 +19,6 @@ namespace Musee::ArtMaking
 		/** The share of a view's white a sample's lightness may stray from it and still count towards its white's colour. */
 		constexpr double WhiteBand = 0.05;
 
-		/** The grid a view's white is sampled on: so many angles round the outside, so many places along it. */
-		constexpr int32 WhiteAngles = 256;
-		constexpr int32 WhitePlaces = 128;
-
 		double Luminance(const FLinearColor& Colour)
 		{
 			return LuminanceR * Colour.R + LuminanceG * Colour.G + LuminanceB * Colour.B;
@@ -321,284 +317,673 @@ namespace Musee::ArtMaking
 		}
 
 		/**
-		 * A photograph's white: the glaze's colour as it shows it (its hue, at a lightness of 1), and the glaze's lightness
-		 * over the vessel as its light falls and as the view sees it: a plane in the surface's normal and in how squarely the
-		 * view sees it (a glaze darkens or brightens towards the silhouette as the lamps round the camera light it and its
-		 * surface reflects them), fitted where the photograph shows plain glaze, so dividing by it takes the photograph's
-		 * shading off and leaves the painting.
+		 * A view's white is known on a grid over the outside, each cell so many of the sight grid's cells each way; the
+		 * white at a cell is its glaze's quantile over the cells round it, so many each side.
+		 */
+		constexpr int32 WhiteCellSamples = 4;
+		constexpr int32 WhiteRows = SightRows / WhiteCellSamples;
+		constexpr int32 WhiteColumns = SightColumns / WhiteCellSamples;
+		constexpr int32 WhiteWindow = 1;
+
+		/** The fewest samples of glaze a cell's white is taken from: a sixth of its window's. */
+		constexpr int32 WhiteLeastSamples = (2 * WhiteWindow + 1) * (2 * WhiteWindow + 1) * WhiteCellSamples * WhiteCellSamples / 6;
+
+		/**
+		 * Where no cell nearby shows glaze (a band painted solid), its white is spread from the cells that do, by blurs of
+		 * so many cells, finer first; and the whole is then smoothed by the finest.
+		 */
+		constexpr double WhiteSpreads[] = { 1.0, 2.0, 4.0, 8.0, 16.0, 32.0 };
+
+		/**
+		 * A photograph's white: the glaze's colour as it shows it (its hue, at a lightness of 1), its lightness overall, and
+		 * its lightness at each place of the outside as its light falls there and as the view sees it, read on the glaze
+		 * itself round that place (WhiteOf); dividing by it takes the photograph's light off and leaves the painting.
 		 */
 		struct FViewWhite
 		{
 			FLinearColor Colour = FLinearColor::White;
-			double Constant = 1.0;
-			FVector Slope = FVector::ZeroVector;
-			double Askance = 0.0;
-			double Least = 0.0;
+			double Lightness = 1.0;
 
-			/** The glaze's plane at a normal and a squareness, and its lightness there (never under Least). */
-			double PlaneAt(const FVector& Normal, double Square) const
-			{
-				return Constant + FVector::DotProduct(Slope, Normal) + Askance * Square;
-			}
+			/** The outside's first and last lengths along the layout, and the white's lightness on its grid (none: Lightness). */
+			double From = 0.0;
+			double To = 0.0;
+			TArray<float> Field;
 
-			double LightnessAt(const FVector& Normal, double Square) const
+			/** The white's lightness at a share of the turn from the front and a length along the layout, bilinear. */
+			double LightnessAt(double Turn, double Length) const
 			{
-				return FMath::Max(PlaneAt(Normal, Square), Least);
+				if (Field.Num() != WhiteRows * WhiteColumns)
+				{
+					return Lightness;
+				}
+				const double X = Turn * WhiteColumns - 0.5;
+				const double Y = FMath::Clamp((Length - From) / FMath::Max(To - From, UE_DOUBLE_SMALL_NUMBER) * WhiteRows - 0.5, 0.0, WhiteRows - 1.0);
+				const int32 X0 = FMath::FloorToInt32(X);
+				const int32 Y0 = FMath::Min(FMath::FloorToInt32(Y), WhiteRows - 2);
+				const double Fx = X - X0;
+				const double Fy = Y - Y0;
+				auto Cell = [this](int32 Column, int32 Row) { return double(Field[Row * WhiteColumns + ((Column % WhiteColumns) + WhiteColumns) % WhiteColumns]); };
+				return FMath::Lerp(FMath::Lerp(Cell(X0, Y0), Cell(X0 + 1, Y0), Fx), FMath::Lerp(Cell(X0, Y0 + 1), Cell(X0 + 1, Y0 + 1), Fx), Fy);
 			}
 		};
 
-		/** A sample of a photograph on the vessel: its colour, the surface's normal there, and how squarely the view sees it. */
+		/** A grid of the white's cells blurred by a Gaussian of Sigma cells, round the turn wrapping and along the outside held. */
+		TArray<float> BlurCells(const TArray<float>& Grid, double Sigma)
+		{
+			const int32 Half = FMath::CeilToInt32(3.0 * Sigma);
+			TArray<double> Kernel;
+			for (int32 K = -Half; K <= Half; ++K)
+			{
+				Kernel.Add(FMath::Exp(-double(K * K) / (2.0 * Sigma * Sigma)));
+			}
+			TArray<float> Across;
+			Across.SetNumZeroed(Grid.Num());
+			for (int32 Row = 0; Row < WhiteRows; ++Row)
+			{
+				for (int32 Column = 0; Column < WhiteColumns; ++Column)
+				{
+					double Sum = 0.0;
+					for (int32 K = -Half; K <= Half; ++K)
+					{
+						Sum += Kernel[K + Half] * Grid[Row * WhiteColumns + (((Column + K) % WhiteColumns) + WhiteColumns) % WhiteColumns];
+					}
+					Across[Row * WhiteColumns + Column] = float(Sum);
+				}
+			}
+			TArray<float> Out;
+			Out.SetNumZeroed(Grid.Num());
+			for (int32 Row = 0; Row < WhiteRows; ++Row)
+			{
+				for (int32 Column = 0; Column < WhiteColumns; ++Column)
+				{
+					double Sum = 0.0;
+					for (int32 K = -Half; K <= Half; ++K)
+					{
+						Sum += Kernel[K + Half] * Across[FMath::Clamp(Row + K, 0, WhiteRows - 1) * WhiteColumns + Column];
+					}
+					Out[Row * WhiteColumns + Column] = float(Sum);
+				}
+			}
+			return Out;
+		}
+
+		/**
+		 * The white's grid from each cell's known lightness (negative where unknown): where unknown, spread from the known
+		 * cells round it (WhiteSpreads, normalised by the known cells' weight), finest first; then smoothed by the finest
+		 * spread. False where no cell is known.
+		 */
+		bool SpreadCells(TArray<float>& Grid)
+		{
+			TArray<float> Values;
+			TArray<float> Known;
+			Values.SetNumZeroed(Grid.Num());
+			Known.SetNumZeroed(Grid.Num());
+			bool bAny = false;
+			for (int32 Index = 0; Index < Grid.Num(); ++Index)
+			{
+				if (Grid[Index] >= 0.0f)
+				{
+					Values[Index] = Grid[Index];
+					Known[Index] = 1.0f;
+					bAny = true;
+				}
+			}
+			if (!bAny)
+			{
+				return false;
+			}
+			for (const double Sigma : WhiteSpreads)
+			{
+				const TArray<float> Sum = BlurCells(Values, Sigma);
+				const TArray<float> Weight = BlurCells(Known, Sigma);
+				for (int32 Index = 0; Index < Grid.Num(); ++Index)
+				{
+					if (Grid[Index] < 0.0f && Weight[Index] > 1e-3f)
+					{
+						Grid[Index] = Sum[Index] / Weight[Index];
+					}
+				}
+			}
+			for (float& Value : Grid)
+			{
+				// what even the widest spread didn't reach (a grid known in one place alone) takes the known cells' mean
+				if (Value < 0.0f)
+				{
+					double Sum = 0.0;
+					int32 Count = 0;
+					for (int32 Index = 0; Index < Values.Num(); ++Index)
+					{
+						Sum += Known[Index] > 0.0f ? Values[Index] : 0.0;
+						Count += Known[Index] > 0.0f ? 1 : 0;
+					}
+					Value = float(Sum / FMath::Max(Count, 1));
+				}
+			}
+			Grid = BlurCells(Grid, WhiteSpreads[0]);
+			TArray<float> Ones;
+			Ones.Init(1.0f, Grid.Num());
+			const TArray<float> Norm = BlurCells(Ones, WhiteSpreads[0]);
+			for (int32 Index = 0; Index < Grid.Num(); ++Index)
+			{
+				Grid[Index] /= FMath::Max(Norm[Index], 1e-6f);
+			}
+			return true;
+		}
+
+		/** A sample of a photograph on the vessel: its colour, its lightness, and how squarely the view sees it. */
 		struct FWhiteSample
 		{
 			FLinearColor Colour;
-			FVector Normal;
-			double Square = 0.0;
+			float Light = 0.0f;
+			float Square = 0.0f;
+			bool bSeen = false;
 		};
 
-		/** The fits of the glaze's lightness: this many rounds, each leaving out the samples the painting darkens. */
-		constexpr int32 ShadeRounds = 3;
-
-		/** The plane's terms: one, the normal's three components, and the squareness. */
-		constexpr int32 ShadeTerms = 5;
-
-		/** The fewest plain-glaze samples the plane's terms are fitted to: four for each, as a surveyor's rule. */
-		constexpr int32 ShadeLeastSamples = 4 * ShadeTerms;
-
-		/**
-		 * The plane's slopes are held towards level by this share of the samples' weight, so a view that sees the vessel
-		 * from one side only (its normals all alike) keeps a flat white rather than an unfounded tilt.
-		 */
-		constexpr double ShadeRidge = 1e-3;
-
-		/** Solves the N x N system A x = B by Gaussian elimination with partial pivoting; false when it has no solution. */
-		template <int32 N>
-		bool Solve(double (&A)[N][N], double (&B)[N], double (&Out)[N])
+		/** The quantile of some lightnesses (sorted in place). */
+		double QuantileOf(TArray<float>& Lights, double Quantile)
 		{
-			for (int32 Column = 0; Column < N; ++Column)
-			{
-				int32 Pivot = Column;
-				for (int32 Row = Column + 1; Row < N; ++Row)
-				{
-					Pivot = FMath::Abs(A[Row][Column]) > FMath::Abs(A[Pivot][Column]) ? Row : Pivot;
-				}
-				if (FMath::Abs(A[Pivot][Column]) < UE_DOUBLE_SMALL_NUMBER)
-				{
-					return false;
-				}
-				for (int32 K = 0; K < N; ++K)
-				{
-					Swap(A[Column][K], A[Pivot][K]);
-				}
-				Swap(B[Column], B[Pivot]);
-				for (int32 Row = Column + 1; Row < N; ++Row)
-				{
-					const double Factor = A[Row][Column] / A[Column][Column];
-					for (int32 K = Column; K < N; ++K)
-					{
-						A[Row][K] -= Factor * A[Column][K];
-					}
-					B[Row] -= Factor * B[Column];
-				}
-			}
-			for (int32 Row = N - 1; Row >= 0; --Row)
-			{
-				double Sum = B[Row];
-				for (int32 K = Row + 1; K < N; ++K)
-				{
-					Sum -= A[Row][K] * Out[K];
-				}
-				Out[Row] = Sum / A[Row][Row];
-			}
-			return true;
+			Lights.Sort();
+			return Lights[FMath::Clamp(int32(Quantile * Lights.Num()), 0, Lights.Num() - 1)];
 		}
 
 		/**
-		 * The glaze's lightness as a plane, Constant + Slope . Normal + Askance * Square, fitted to the plain-glaze samples
-		 * by least squares; each round leaves out the samples more than a standard deviation below the plane (the painting
-		 * darkens the glaze; nothing lightens it but a highlight, which the white's quantile keeps out). False with too few.
-		 */
-		bool FitShade(TArray<FWhiteSample> Plain, FViewWhite& White)
-		{
-			for (int32 Round = 0; Round < ShadeRounds; ++Round)
-			{
-				if (Plain.Num() < ShadeLeastSamples)
-				{
-					return Round > 0;
-				}
-				double A[ShadeTerms][ShadeTerms] = {};
-				double B[ShadeTerms] = {};
-				for (const FWhiteSample& Glaze : Plain)
-				{
-					const double X[ShadeTerms] = { 1.0, Glaze.Normal.X, Glaze.Normal.Y, Glaze.Normal.Z, Glaze.Square };
-					const double Y = Luminance(Glaze.Colour);
-					for (int32 I = 0; I < ShadeTerms; ++I)
-					{
-						for (int32 J = 0; J < ShadeTerms; ++J)
-						{
-							A[I][J] += X[I] * X[J];
-						}
-						B[I] += X[I] * Y;
-					}
-				}
-				for (int32 I = 1; I < ShadeTerms; ++I)
-				{
-					A[I][I] += ShadeRidge * Plain.Num();
-				}
-				double Coefficients[ShadeTerms] = {};
-				if (!Solve(A, B, Coefficients))
-				{
-					return Round > 0;
-				}
-				White.Constant = Coefficients[0];
-				White.Slope = FVector(Coefficients[1], Coefficients[2], Coefficients[3]);
-				White.Askance = Coefficients[4];
-				double Squares = 0.0;
-				for (const FWhiteSample& Glaze : Plain)
-				{
-					Squares += FMath::Square(Luminance(Glaze.Colour) - White.PlaneAt(Glaze.Normal, Glaze.Square));
-				}
-				const double Deviation = FMath::Sqrt(Squares / Plain.Num());
-				Plain.RemoveAll([&White, Deviation](const FWhiteSample& Glaze)
-				{
-					return Luminance(Glaze.Colour) - White.PlaneAt(Glaze.Normal, Glaze.Square) < -Deviation;
-				});
-			}
-			return true;
-		}
-
-		/**
-		 * A view's white, from what its photograph shows where it sees the outside whole (its sight map's factor 1). Its
-		 * lightness: the WhiteQuantile of what it shows where it sees the outside at least WhiteSquareness squarely (a
-		 * painted porcelain's ground is its glaze, and most of what a view sees face on), or of all it sees whole where it
-		 * sees too little so squarely (a view from under the vessel); its colour the mean of those samples within WhiteBand
-		 * of that. Its shading: the plane fitted where the view shows plain glaze (samples no more saturated than
-		 * GlazeChroma and no darker than GlazeLightness of its white), never below ShadeFloor of its white; flat at its
-		 * white where too few samples show glaze to fit.
+		 * A view's white, from what its photograph shows where it sees the outside whole (its sight map's factor 1), on the
+		 * sight grid. Overall: the WhiteQuantile of the lightness it shows where it sees the outside at least
+		 * WhiteSquareness squarely (a painted porcelain's ground is its glaze, and most of what a view sees face on), or of
+		 * all it sees whole where it sees too little so squarely (a view from under the vessel); its hue the mean of those
+		 * samples within WhiteBand of that. At each place: the WhiteQuantile of the glaze's samples round it (no more
+		 * saturated than GlazeChroma relative to that hue and no darker than ShadeFloor of the white; then, the white round
+		 * them known, no darker than GlazeLightness of it), spread where too few samples show glaze (SpreadCells), never
+		 * under ShadeFloor of the white. A gallery's light falling off down a vase, or a cup's wall darkening as it turns
+		 * under, is the glaze's own shading, and follows it.
 		 */
 		FViewWhite WhiteOf(const FArtVesselComposition& How, const FArtVessel& Vessel, TConstArrayView<FVector2D> Normals, const FVesselLayout& Layout,
 			const FSightMap& Sight, const FVesselPicture& View)
 		{
-			TArray<FWhiteSample> Seen;
-			TArray<double> Square;
-			const FVector2D Size = Layout.SizeMeters();
-			for (int32 Along = 0; Along < WhitePlaces; ++Along)
+			FViewWhite White;
+			White.From = Sight.From;
+			White.To = Sight.To;
+			TArray<FWhiteSample> Samples;
+			Samples.SetNum(SightRows * SightColumns);
+			if (Sight.To <= Sight.From)
 			{
-				const double Length = (Along + 0.5) / WhitePlaces * Size.Y;
-				const FSectionPlace Place = PlaceAlong(Layout, Length);
-				if (!IsOutside(Vessel, Place.Segment))
+				return White;
+			}
+			ParallelFor(SightRows, [&](int32 Row)
+			{
+				const FSectionPlace Place = PlaceAlong(Layout, Sight.From + (Row + 0.5) / SightRows * (Sight.To - Sight.From));
+				for (int32 Column = 0; Column < SightColumns; ++Column)
 				{
-					continue;
-				}
-				for (int32 Round = 0; Round < WhiteAngles; ++Round)
-				{
-					const double Turn = (Round + 0.5) / WhiteAngles;
-					const FSurfacePoint At = Surface(Vessel.Section, Normals, Place, 2.0 * UE_DOUBLE_PI * Turn);
+					FWhiteSample& Taken = Samples[Row * SightColumns + Column];
+					const FSurfacePoint At = Surface(Vessel.Section, Normals, Place, 2.0 * UE_DOUBLE_PI * (Column + 0.5) / SightColumns);
 					const double Facing = Squareness(View.Camera, At);
 					FVector2D Pixel;
-					FLinearColor Colour;
-					double Fully = 0.0;
-					if (Facing > 0.0 && Sight.Agreed(Turn, Length, Fully) && Fully >= 1.0 && View.Camera.Project(At.Point, Pixel) && Sample(View.Image, Pixel, Colour))
+					if (Facing > 0.0 && Sight.Factor[Row * SightColumns + Column] >= 1.0f && View.Camera.Project(At.Point, Pixel)
+						&& Sample(View.Image, Pixel, Taken.Colour))
 					{
-						Seen.Add(FWhiteSample{ Colour, At.Normal, Facing });
-						Square.Add(Facing);
+						Taken.Light = float(Luminance(Taken.Colour));
+						Taken.Square = float(Facing);
+						Taken.bSeen = true;
 					}
 				}
-			}
-			FViewWhite White;
+			});
 			double Squarely = How.WhiteSquareness;
-			TArray<double> Lights;
-			for (int32 Index = 0; Index < Seen.Num(); ++Index)
+			TArray<float> Lights;
+			for (const FWhiteSample& Taken : Samples)
 			{
-				if (Square[Index] >= Squarely)
+				if (Taken.bSeen && Taken.Square >= Squarely)
 				{
-					Lights.Add(Luminance(Seen[Index].Colour));
+					Lights.Add(Taken.Light);
 				}
 			}
-			if (Lights.Num() < ShadeLeastSamples)
+			if (Lights.Num() < WhiteLeastSamples)
 			{
 				Squarely = 0.0;
 				Lights.Reset();
-				for (const FWhiteSample& Glaze : Seen)
+				for (const FWhiteSample& Taken : Samples)
 				{
-					Lights.Add(Luminance(Glaze.Colour));
+					if (Taken.bSeen)
+					{
+						Lights.Add(Taken.Light);
+					}
 				}
 			}
 			if (Lights.IsEmpty())
 			{
 				return White;
 			}
-			Lights.Sort();
-			const double Lightness = FMath::Max(Lights[FMath::Clamp(int32(How.WhiteQuantile * Lights.Num()), 0, Lights.Num() - 1)], UE_DOUBLE_SMALL_NUMBER);
+			const double Lightness = FMath::Max(QuantileOf(Lights, How.WhiteQuantile), UE_DOUBLE_SMALL_NUMBER);
 			FLinearColor Sum(0.0f, 0.0f, 0.0f, 0.0f);
 			int32 Count = 0;
-			TArray<FWhiteSample> Plain;
-			for (int32 Index = 0; Index < Seen.Num(); ++Index)
+			for (const FWhiteSample& Taken : Samples)
 			{
-				const FLinearColor& Colour = Seen[Index].Colour;
-				const double Light = Luminance(Colour);
-				if (Square[Index] >= Squarely && FMath::Abs(Light / Lightness - 1.0) <= WhiteBand)
+				if (Taken.bSeen && Taken.Square >= Squarely && FMath::Abs(Taken.Light / Lightness - 1.0) <= WhiteBand)
 				{
-					Sum += Colour;
+					Sum += Taken.Colour;
 					++Count;
-				}
-				const float Most = FMath::Max3(Colour.R, Colour.G, Colour.B);
-				const float Least = FMath::Min3(Colour.R, Colour.G, Colour.B);
-				if (Most > 0.0f && (Most - Least) / Most <= How.GlazeChroma && Light >= How.GlazeLightness * Lightness)
-				{
-					Plain.Add(Seen[Index]);
 				}
 			}
 			const FLinearColor Mean = Count > 0 ? Sum / float(Count) : FLinearColor(float(Lightness), float(Lightness), float(Lightness), 1.0f);
 			White.Colour = Mean / float(FMath::Max(Luminance(Mean), UE_DOUBLE_SMALL_NUMBER));
 			White.Colour.A = 1.0f;
-			White.Constant = Lightness;
-			White.Least = How.ShadeFloor * Lightness;
-			if (!FitShade(MoveTemp(Plain), White))
+			White.Lightness = Lightness;
+
+			// The glaze: no more saturated than GlazeChroma once the white's hue is divided out, and not in deep shade.
+			TArray<uint8> Glaze;
+			Glaze.SetNumZeroed(Samples.Num());
+			for (int32 Index = 0; Index < Samples.Num(); ++Index)
 			{
-				White.Constant = Lightness;
-				White.Slope = FVector::ZeroVector;
-				White.Askance = 0.0;
+				const FWhiteSample& Taken = Samples[Index];
+				if (!Taken.bSeen || Taken.Light < How.ShadeFloor * Lightness)
+				{
+					continue;
+				}
+				const float R = Taken.Colour.R / FMath::Max(White.Colour.R, UE_SMALL_NUMBER);
+				const float G = Taken.Colour.G / FMath::Max(White.Colour.G, UE_SMALL_NUMBER);
+				const float B = Taken.Colour.B / FMath::Max(White.Colour.B, UE_SMALL_NUMBER);
+				const float Most = FMath::Max3(R, G, B);
+				Glaze[Index] = Most > 0.0f && (Most - FMath::Min3(R, G, B)) / Most <= How.GlazeChroma ? 1 : 0;
 			}
+			// Each cell's white: the quantile of the glaze round it; twice, the second time leaving out what is darker than
+			// GlazeLightness of the first (a dark stroke of low colour is painting, not glaze in shade).
+			auto CellsOf = [&](const TArray<float>* First)
+			{
+				TArray<float> Grid;
+				Grid.Init(-1.0f, WhiteRows * WhiteColumns);
+				ParallelFor(WhiteRows, [&](int32 CellRow)
+				{
+					TArray<float> Round;
+					for (int32 CellColumn = 0; CellColumn < WhiteColumns; ++CellColumn)
+					{
+						Round.Reset();
+						for (int32 Row = (CellRow - WhiteWindow) * WhiteCellSamples; Row < (CellRow + WhiteWindow + 1) * WhiteCellSamples; ++Row)
+						{
+							if (Row < 0 || Row >= SightRows)
+							{
+								continue;
+							}
+							for (int32 Step = (CellColumn - WhiteWindow) * WhiteCellSamples; Step < (CellColumn + WhiteWindow + 1) * WhiteCellSamples; ++Step)
+							{
+								const int32 Column = ((Step % SightColumns) + SightColumns) % SightColumns;
+								const int32 Index = Row * SightColumns + Column;
+								if (!Glaze[Index])
+								{
+									continue;
+								}
+								if (First)
+								{
+									const double Near = (*First)[(Row / WhiteCellSamples) * WhiteColumns + Column / WhiteCellSamples];
+									if (Samples[Index].Light < How.GlazeLightness * Near)
+									{
+										continue;
+									}
+								}
+								Round.Add(Samples[Index].Light);
+							}
+						}
+						if (Round.Num() >= WhiteLeastSamples)
+						{
+							Grid[CellRow * WhiteColumns + CellColumn] = float(QuantileOf(Round, How.WhiteQuantile));
+						}
+					}
+				});
+				return Grid;
+			};
+			TArray<float> First = CellsOf(nullptr);
+			if (!SpreadCells(First))
+			{
+				return White;
+			}
+			TArray<float> Field = CellsOf(&First);
+			if (!SpreadCells(Field))
+			{
+				Field = MoveTemp(First);
+			}
+			for (float& Value : Field)
+			{
+				Value = FMath::Max(Value, float(How.ShadeFloor * Lightness));
+			}
+			White.Field = MoveTemp(Field);
 			return White;
 		}
 
 		/**
-		 * The views' colour at a place of the outside, each divided channel by channel by its photograph's white there (its
-		 * glaze's hue, at the lightness its light gives the glaze facing that way), so the glaze is white in every
-		 * photograph, whatever its light and white balance: the glaze's own colour is Matter's. Each view that sees the
-		 * place lends by the square of how squarely it sees it, times how fully (its sight map); and their summed weight.
+		 * What one view lends a place of the outside: its colour there divided channel by channel by its photograph's white
+		 * there (its glaze's hue, at the lightness its light gives the glaze there), so the glaze is white in every
+		 * photograph, whatever its light and white balance (the glaze's own colour is Matter's); and its weight, the square
+		 * of how squarely it sees the place times how fully (its sight map), a highlight's by HighlightWeight. Zero where it
+		 * doesn't see the place.
 		 */
-		void Gather(const FArtVesselComposition& How, TConstArrayView<FVesselPicture> Views, TConstArrayView<FViewWhite> Whites,
-			TConstArrayView<FSightMap> Sights, const FEnvelope& Envelope, const FSurfacePoint& At, double Turn, double Length, FLinearColor& OutColour,
-			double& OutWeight)
+		double Lend(const FArtVesselComposition& How, const FVesselPicture& View, const FViewWhite& White, const FSightMap& Sight,
+			const FEnvelope& Envelope, const FSurfacePoint& At, double Turn, double Length, FLinearColor& OutColour)
+		{
+			const double Square = Squareness(View.Camera, At);
+			if (Square <= 0.0)
+			{
+				return 0.0;
+			}
+			double Fully = 0.0;
+			if (!Sight.Agreed(Turn, Length, Fully))
+			{
+				Fully = SightFactor(How, Envelope, View.Camera, At);
+			}
+			FVector2D Pixel;
+			FLinearColor Colour;
+			if (Fully <= 0.0 || !View.Camera.Project(At.Point, Pixel) || !Sample(View.Image, Pixel, Colour))
+			{
+				return 0.0;
+			}
+			const float Lightness = float(White.LightnessAt(Turn, Length));
+			OutColour = FLinearColor(Colour.R / FMath::Max(White.Colour.R * Lightness, UE_SMALL_NUMBER),
+				Colour.G / FMath::Max(White.Colour.G * Lightness, UE_SMALL_NUMBER), Colour.B / FMath::Max(White.Colour.B * Lightness, UE_SMALL_NUMBER), 1.0f);
+			return Square * Square * Fully * (Luminance(OutColour) > How.HighlightOverWhite ? How.HighlightWeight : 1.0);
+		}
+
+		/** A seam's grid round the turn: finer than the sight grid's, so it runs where the two paintings agree. */
+		constexpr int32 SeamColumns = 2048;
+
+		/** How far a seam may move round from one row of the sight grid to the next, columns. */
+		constexpr int32 SeamStep = 3;
+
+		/**
+		 * How a seam is drawn to where the two views see the surface alike squarely, as a share of the colours' full
+		 * difference: where the paintings agree as well either way, it runs between the two views, each keeping the side it
+		 * sees the more squarely.
+		 */
+		constexpr double SeamPull = 0.05;
+
+		/** A share of the turn, 0 to 1. */
+		double Turned(double Turn)
+		{
+			return Turn - FMath::FloorToDouble(Turn);
+		}
+
+		/**
+		 * Where two views that aren't blended meet (their overlap's paintings further apart than the composition's
+		 * BlendMeters): on each row of the sight grid, the overlap's run round the turn, where both lend, and the seam's
+		 * place in it; First keeps its side of the seam (the side of its own bearing), Second the other. Its columns count
+		 * round from Start, opposite the two views' bearings, so an overlap never wraps.
+		 */
+		struct FViewSeam
+		{
+			int32 First = INDEX_NONE;
+			int32 Second = INDEX_NONE;
+			double Start = 0.0;
+			double From = 0.0;
+			double To = 0.0;
+			TArray<int32> Lo;
+			TArray<int32> Hi;
+			TArray<double> At;
+
+			/**
+			 * The share of its weight a view keeps at a place (at RadiusMeters from the axis): all of it off the seam's
+			 * overlap; else, across the seam, cross-faded over SeamMeters from its own side to the other's.
+			 */
+			double KeptBy(int32 View, double Turn, double Length, double RadiusMeters, double SeamMeters) const
+			{
+				if ((View != First && View != Second) || At.Num() != SightRows)
+				{
+					return 1.0;
+				}
+				const double Place = (Length - From) / FMath::Max(To - From, UE_DOUBLE_SMALL_NUMBER) * SightRows - 0.5;
+				const int32 Below = FMath::Clamp(FMath::FloorToInt32(Place), 0, SightRows - 1);
+				const int32 Above = FMath::Min(Below + 1, SightRows - 1);
+				const int32 Nearest = Place - Below < 0.5 ? Below : Above;
+				if (Lo[Nearest] == INDEX_NONE || (At[Below] < 0.0 && At[Above] < 0.0))
+				{
+					return 1.0;
+				}
+				const double Seam = At[Below] >= 0.0 && At[Above] >= 0.0 ? FMath::Lerp(At[Below], At[Above], FMath::Clamp(Place - Below, 0.0, 1.0))
+					: FMath::Max(At[Below], At[Above]);
+				const double Column = Turned(Turn - Start) * SeamColumns;
+				const double MetersPerColumn = 2.0 * UE_DOUBLE_PI * FMath::Max(RadiusMeters, UE_DOUBLE_SMALL_NUMBER) / SeamColumns;
+				const double Margin = SeamMeters / MetersPerColumn;
+				if (Column < Lo[Nearest] - Margin || Column > Hi[Nearest] + 1 + Margin)
+				{
+					return 1.0;
+				}
+				// how far past the seam towards Second's side, metres; First keeps what lies before it
+				const double Past = (Column - Seam) * MetersPerColumn;
+				const double Share = FMath::Clamp(0.5 - Past / FMath::Max(SeamMeters, UE_DOUBLE_SMALL_NUMBER), 0.0, 1.0);
+				const double Kept = Share * Share * (3.0 - 2.0 * Share);
+				return View == First ? Kept : 1.0 - Kept;
+			}
+		};
+
+		/**
+		 * The seam between two views: on each row of the sight grid, over the run where both lend, the place where their
+		 * colours differ least (and, as SeamPull draws it, where they see the surface alike squarely), and where both lend at
+		 * least FullWeight (so the seam's cross-fade has both views whole); moving at most SeamStep columns from row to row,
+		 * the least costly path through the rows (by dynamic programming), a run of rows at a time.
+		 */
+		FViewSeam SeamOf(const FArtVesselComposition& How, const FArtVessel& Vessel, TConstArrayView<FVector2D> Normals, const FVesselLayout& Layout,
+			const FEnvelope& Envelope, TConstArrayView<FVesselPicture> Views, TConstArrayView<FViewWhite> Whites, TConstArrayView<FSightMap> Sights,
+			int32 A, int32 B)
+		{
+			FViewSeam Seam;
+			Seam.Lo.Init(INDEX_NONE, SightRows);
+			Seam.Hi.Init(INDEX_NONE, SightRows);
+			Seam.At.Init(-1.0, SightRows);
+			Seam.From = Sights[A].From;
+			Seam.To = Sights[A].To;
+			const double BearingA = Views[A].Camera.AzimuthRadians;
+			const double BearingB = Views[B].Camera.AzimuthRadians;
+			const double Middle = FMath::Atan2(FMath::Sin(BearingA) + FMath::Sin(BearingB), FMath::Cos(BearingA) + FMath::Cos(BearingB));
+			Seam.Start = Turned(Middle / (2.0 * UE_DOUBLE_PI) + 0.5);
+			const bool bAFirst = Turned(BearingA / (2.0 * UE_DOUBLE_PI) - Seam.Start) < Turned(BearingB / (2.0 * UE_DOUBLE_PI) - Seam.Start);
+			Seam.First = bAFirst ? A : B;
+			Seam.Second = bAFirst ? B : A;
+			if (Seam.To <= Seam.From)
+			{
+				return Seam;
+			}
+			TArray<TArray<double>> Costs;
+			Costs.SetNum(SightRows);
+			ParallelFor(SightRows, [&](int32 Row)
+			{
+				const double Length = Seam.From + (Row + 0.5) / SightRows * (Seam.To - Seam.From);
+				const FSectionPlace Place = PlaceAlong(Layout, Length);
+				TArray<double> Cost;
+				Cost.Init(-1.0, SeamColumns);
+				int32 BestLo = INDEX_NONE;
+				int32 BestHi = INDEX_NONE;
+				int32 RunLo = INDEX_NONE;
+				for (int32 Column = 0; Column <= SeamColumns; ++Column)
+				{
+					bool bBoth = false;
+					if (Column < SeamColumns)
+					{
+						const double Turn = Turned(Seam.Start + (Column + 0.5) / SeamColumns);
+						const FSurfacePoint At = Surface(Vessel.Section, Normals, Place, 2.0 * UE_DOUBLE_PI * Turn);
+						FLinearColor First;
+						FLinearColor Second;
+						const double WeightFirst = Lend(How, Views[Seam.First], Whites[Seam.First], Sights[Seam.First], Envelope, At, Turn, Length, First);
+						const double WeightSecond = WeightFirst > 0.0
+							? Lend(How, Views[Seam.Second], Whites[Seam.Second], Sights[Seam.Second], Envelope, At, Turn, Length, Second) : 0.0;
+						bBoth = WeightFirst > 0.0 && WeightSecond > 0.0;
+						if (bBoth)
+						{
+							const FLinearColor P = First.GetClamped(0.0f, 1.2f);
+							const FLinearColor Q = Second.GetClamped(0.0f, 1.2f);
+							const double Least = FMath::Min(WeightFirst, WeightSecond);
+							Cost[Column] = FMath::Abs(P.R - Q.R) + FMath::Abs(P.G - Q.G) + FMath::Abs(P.B - Q.B)
+								+ SeamPull * FMath::Abs(WeightFirst - WeightSecond) / (WeightFirst + WeightSecond)
+								+ (1.0 - FMath::Clamp(Least / How.FullWeight, 0.0, 1.0));
+						}
+					}
+					if (bBoth && RunLo == INDEX_NONE)
+					{
+						RunLo = Column;
+					}
+					else if (!bBoth && RunLo != INDEX_NONE)
+					{
+						if (BestLo == INDEX_NONE || Column - 1 - RunLo > BestHi - BestLo)
+						{
+							BestLo = RunLo;
+							BestHi = Column - 1;
+						}
+						RunLo = INDEX_NONE;
+					}
+				}
+				Seam.Lo[Row] = BestLo;
+				Seam.Hi[Row] = BestHi;
+				Costs[Row] = MoveTemp(Cost);
+			});
+			// The path: the least cost to reach each column of each row's run, and the column it came from.
+			TArray<TArray<double>> Reached;
+			TArray<TArray<int32> > Came;
+			TArray<uint8> Fresh;
+			Reached.SetNum(SightRows);
+			Came.SetNum(SightRows);
+			Fresh.SetNumZeroed(SightRows);
+			for (int32 Row = 0; Row < SightRows; ++Row)
+			{
+				if (Seam.Lo[Row] == INDEX_NONE)
+				{
+					continue;
+				}
+				const int32 Width = Seam.Hi[Row] - Seam.Lo[Row] + 1;
+				Reached[Row].Init(TNumericLimits<double>::Max(), Width);
+				Came[Row].Init(INDEX_NONE, Width);
+				const bool bAfter = Row > 0 && Seam.Lo[Row - 1] != INDEX_NONE;
+				bool bAny = false;
+				for (int32 K = 0; K < Width; ++K)
+				{
+					const int32 Column = Seam.Lo[Row] + K;
+					double Best = TNumericLimits<double>::Max();
+					int32 From = INDEX_NONE;
+					if (bAfter)
+					{
+						for (int32 Prior = FMath::Max(Column - SeamStep, Seam.Lo[Row - 1]); Prior <= FMath::Min(Column + SeamStep, Seam.Hi[Row - 1]); ++Prior)
+						{
+							const double Before = Reached[Row - 1][Prior - Seam.Lo[Row - 1]];
+							if (Before < Best)
+							{
+								Best = Before;
+								From = Prior;
+							}
+						}
+					}
+					if (From != INDEX_NONE)
+					{
+						Reached[Row][K] = Best + Costs[Row][Column];
+						Came[Row][K] = From;
+						bAny = true;
+					}
+				}
+				if (!bAny)
+				{
+					// a run of rows begins here: no column of it follows on from the row before
+					Fresh[Row] = 1;
+					for (int32 K = 0; K < Width; ++K)
+					{
+						Reached[Row][K] = Costs[Row][Seam.Lo[Row] + K];
+						Came[Row][K] = INDEX_NONE;
+					}
+				}
+			}
+			int32 Next = INDEX_NONE;
+			for (int32 Row = SightRows - 1; Row >= 0; --Row)
+			{
+				if (Seam.Lo[Row] == INDEX_NONE)
+				{
+					Next = INDEX_NONE;
+					continue;
+				}
+				const bool bLast = Row == SightRows - 1 || Seam.Lo[Row + 1] == INDEX_NONE || Fresh[Row + 1] || Next == INDEX_NONE;
+				int32 Column = INDEX_NONE;
+				if (!bLast)
+				{
+					Column = Came[Row + 1][Next - Seam.Lo[Row + 1]];
+				}
+				if (Column == INDEX_NONE)
+				{
+					double Best = TNumericLimits<double>::Max();
+					for (int32 K = 0; K < Reached[Row].Num(); ++K)
+					{
+						if (Reached[Row][K] < Best)
+						{
+							Best = Reached[Row][K];
+							Column = Seam.Lo[Row] + K;
+						}
+					}
+				}
+				Seam.At[Row] = Column + 0.5;
+				Next = Column;
+			}
+			return Seam;
+		}
+
+		/** Everything a composition needs of its views: each one's sight, its white, and the seams where two aren't blended. */
+		struct FComposing
+		{
+			FVesselLayout Layout;
+			TArray<FVector2D> Normals;
+			FEnvelope Envelope;
+			TArray<FSightMap> Sights;
+			TArray<FViewWhite> Whites;
+			TArray<FViewSeam> Seams;
+
+			FComposing(const FArtVesselComposition& How, const FArtVessel& Vessel, TConstArrayView<FVector2D> Sized, TConstArrayView<FVesselPicture> Views,
+				bool bSeams)
+				: Layout(LayoutOf(Sized))
+				, Normals(PointNormals(Vessel.Section))
+				, Envelope(Vessel.Section, How.ClearanceMeters)
+			{
+				for (const FVesselPicture& View : Views)
+				{
+					Sights.Add(SightMapOf(How, Vessel, Normals, Layout, Envelope, View.Camera));
+					Whites.Add(WhiteOf(How, Vessel, Normals, Layout, Sights.Last(), View));
+				}
+				if (!bSeams || Views.Num() != Vessel.Views.Num())
+				{
+					return;
+				}
+				// A pair of views is seamed where either's record gives their overlap's paintings further apart than BlendMeters.
+				for (int32 I = 0; I < Vessel.Views.Num(); ++I)
+				{
+					for (const FArtVesselOverlap& Overlap : Vessel.Views[I].Overlaps)
+					{
+						const int32 J = Vessel.Views.IndexOfByPredicate([&Overlap](const FArtVesselView& Other)
+						{
+							return FPaths::GetCleanFilename(Other.Image) == Overlap.Image;
+						});
+						const bool bKnown = Seams.ContainsByPredicate([I, J](const FViewSeam& Seam)
+						{
+							return (Seam.First == I && Seam.Second == J) || (Seam.First == J && Seam.Second == I);
+						});
+						if (J != INDEX_NONE && J != I && !bKnown && Overlap.OffsetMeters > How.BlendMeters)
+						{
+							Seams.Add(SeamOf(How, Vessel, Normals, Layout, Envelope, Views, Whites, Sights, I, J));
+						}
+					}
+				}
+			}
+		};
+
+		/**
+		 * The views' colour at a place of the outside (each view's as Lend gives it, and as much of its weight as its seams
+		 * leave it), and their summed weight.
+		 */
+		void Gather(const FArtVesselComposition& How, TConstArrayView<FVesselPicture> Views, const FComposing& With, const FSurfacePoint& At, double Turn,
+			double Length, FLinearColor& OutColour, double& OutWeight)
 		{
 			FLinearColor Sum(0.0f, 0.0f, 0.0f, 0.0f);
 			OutWeight = 0.0;
+			const double Radius = FVector2D(At.Point.X, At.Point.Y).Size();
 			for (int32 Index = 0; Index < Views.Num(); ++Index)
 			{
-				const double Square = Squareness(Views[Index].Camera, At);
-				if (Square <= 0.0)
-				{
-					continue;
-				}
-				double Fully = 0.0;
-				if (!Sights[Index].Agreed(Turn, Length, Fully))
-				{
-					Fully = SightFactor(How, Envelope, Views[Index].Camera, At);
-				}
-				FVector2D Pixel;
 				FLinearColor Colour;
-				if (Fully <= 0.0 || !Views[Index].Camera.Project(At.Point, Pixel) || !Sample(Views[Index].Image, Pixel, Colour))
+				double Weight = Lend(How, Views[Index], With.Whites[Index], With.Sights[Index], With.Envelope, At, Turn, Length, Colour);
+				for (const FViewSeam& Seam : With.Seams)
 				{
-					continue;
+					Weight *= Weight > 0.0 ? Seam.KeptBy(Index, Turn, Length, Radius, How.SeamMeters) : 1.0;
 				}
-				const FViewWhite& White = Whites[Index];
-				const float Lightness = float(White.LightnessAt(At.Normal, Square));
-				Colour = FLinearColor(Colour.R / FMath::Max(White.Colour.R * Lightness, UE_SMALL_NUMBER),
-					Colour.G / FMath::Max(White.Colour.G * Lightness, UE_SMALL_NUMBER), Colour.B / FMath::Max(White.Colour.B * Lightness, UE_SMALL_NUMBER), 1.0f);
-				const double Weight = Square * Square * Fully * (Luminance(Colour) > How.HighlightOverWhite ? How.HighlightWeight : 1.0);
-				Sum += Colour * float(Weight);
-				OutWeight += Weight;
+				if (Weight > 0.0)
+				{
+					Sum += Colour * float(Weight);
+					OutWeight += Weight;
+				}
 			}
 			OutColour = OutWeight > 0.0 ? Sum / float(OutWeight) : FLinearColor::Black;
 		}
@@ -743,6 +1128,31 @@ namespace Musee::ArtMaking
 			}
 			return Out;
 		}
+
+		/**
+		 * How far apart two views' paintings lie where the composition blends them (BlendOffsets), as the derivation measures
+		 * their overlap (MuseeVision/Scripts/vessels.py, offset_of): blocks of OffsetBlock cells of the registration's grid,
+		 * each laid on the other view by the rise and turn (within OffsetReach cells) at which its detail correlates best,
+		 * trusted at OffsetTrust or better (the same stretch of painting); a block is measured where the composition blends
+		 * the two there, the lesser weight at least OffsetBlended of the greater and OffsetLeast of a cell's own.
+		 */
+		constexpr int32 OffsetBlock = 24;
+		constexpr int32 OffsetReach = 10;
+		constexpr double OffsetTrust = 0.8;
+		constexpr double OffsetLeast = 0.01;
+		constexpr double OffsetBlended = 0.25;
+
+		/**
+		 * A painting's darkness against its white (PaintingContrast): the ContrastDark quantile of its lightness over the
+		 * ContrastWhite, in windows of a band ContrastSectors round (each of ContrastWindowSamples or more), their median.
+		 */
+		constexpr double ContrastDark = 0.2;
+		constexpr double ContrastWhite = 0.9;
+		constexpr int32 ContrastSectors = 30;
+		constexpr int32 ContrastWindowSamples = 64;
+
+		/** A photograph's own white is saturated where every channel is at this 8-bit level or over. */
+		constexpr int32 SaturatedLevel = 250;
 
 		/** A view's picture of the outside unwrapped as the derivation registers it: its detail and its weight in each cell. */
 		struct FUnwrapped
@@ -942,16 +1352,8 @@ namespace Musee::ArtMaking
 		TConstArrayView<FVesselPicture> Views, FIntPoint Pixels, FImage& Out, FDecorationStats& OutStats)
 	{
 		OutStats = FDecorationStats();
-		const FVesselLayout Layout = LayoutOf(Sized);
-		const TArray<FVector2D> Normals = PointNormals(Vessel.Section);
-		const FEnvelope Envelope(Vessel.Section, How.ClearanceMeters);
-		TArray<FSightMap> Sights;
-		TArray<FViewWhite> Whites;
-		for (const FVesselPicture& View : Views)
-		{
-			Sights.Add(SightMapOf(How, Vessel, Normals, Layout, Envelope, View.Camera));
-			Whites.Add(WhiteOf(How, Vessel, Normals, Layout, Sights.Last(), View));
-		}
+		const FComposing With(How, Vessel, Sized, Views, true);
+		const FVesselLayout& Layout = With.Layout;
 		// Every photograph's white is the glaze's: where no view lends its colour, the glaze.
 		const FLinearColor Glaze = FLinearColor::White;
 		const FColor GlazePixel = Glaze.ToFColor(true);
@@ -985,8 +1387,8 @@ namespace Musee::ArtMaking
 			for (int32 Column = 0; Column < Pixels.X; ++Column)
 			{
 				const double Turn = (Column + 0.5) / Pixels.X;
-				const FSurfacePoint At = Surface(Vessel.Section, Normals, Place, 2.0 * UE_DOUBLE_PI * Turn);
-				Gather(How, Views, Whites, Sights, Envelope, At, Turn, Length, RowColours[Column], RowWeights[Column]);
+				const FSurfacePoint At = Surface(Vessel.Section, With.Normals, Place, 2.0 * UE_DOUBLE_PI * Turn);
+				Gather(How, Views, With, At, Turn, Length, RowColours[Column], RowWeights[Column]);
 			}
 			const FArtVesselBand* Band = BandAt(Vessel, PointAt(Vessel.Section, Place).Y);
 			for (int32 Column = 0; Column < Pixels.X; ++Column)
@@ -1018,6 +1420,234 @@ namespace Musee::ArtMaking
 		}
 		OutStats.Seen = OutsideTexels > 0 ? double(SeenTexels) / OutsideTexels : 0.0;
 		OutStats.Repeated = OutsideTexels > 0 ? double(RepeatedTexels) / OutsideTexels : 0.0;
+	}
+
+	TArray<FBlendOffset> BlendOffsets(const FArtVesselComposition& How, const FArtVesselRegistration& Registration, const FArtVessel& Vessel,
+		TConstArrayView<FVesselPicture> Views, bool bSeams)
+	{
+		TArray<FBlendOffset> Out;
+		const int32 Width = Registration.AzimuthSteps;
+		const int32 Height = Registration.HeightSteps;
+		if (Views.Num() < 2 || Views.Num() != Vessel.Views.Num() || Vessel.Outside.Num() != 2 || Width < 2 * OffsetBlock || Height < 2 * OffsetBlock + 2 * OffsetReach)
+		{
+			return Out;
+		}
+		const FComposing With(How, Vessel, Vessel.Section, Views, bSeams);
+		// The outside's rising points (as the registration unwraps it) and their lengths along the layout.
+		TArray<double> Heights;
+		TArray<double> Radii;
+		TArray<double> Lengths;
+		for (int32 Index = Vessel.Outside[0]; Index <= FMath::Min(Vessel.Outside[1], Vessel.Section.Num() - 1); ++Index)
+		{
+			const FVector2D& Point = Vessel.Section[Index];
+			if (Heights.IsEmpty() || Point.Y > Heights.Last())
+			{
+				Heights.Add(Point.Y);
+				Radii.Add(Point.X);
+				Lengths.Add(With.Layout.Lengths[Index]);
+			}
+		}
+		if (Heights.Num() < 2)
+		{
+			return Out;
+		}
+		// Each view's detail as the registration unwraps it, and its weight in each cell as the composition gives it.
+		TArray<FUnwrapped> Unwrapped;
+		TArray<TArray<float>> Weights;
+		for (int32 View = 0; View < Views.Num(); ++View)
+		{
+			Unwrapped.Add(UnwrapFor(Registration, Heights, Radii, Views[View]));
+			TArray<float>& Weight = Weights.AddDefaulted_GetRef();
+			Weight.SetNumZeroed(Width * Height);
+			ParallelFor(Height, [&](int32 Row)
+			{
+				const double Length = Interpolate(Heights, Lengths, (Row + 0.5) / Height * Heights.Last());
+				const FSectionPlace Place = PlaceAlong(With.Layout, Length);
+				for (int32 Column = 0; Column < Width; ++Column)
+				{
+					const double Turn = (Column + 0.5) / Width;
+					const FSurfacePoint At = Surface(Vessel.Section, With.Normals, Place, 2.0 * UE_DOUBLE_PI * Turn);
+					FLinearColor Colour;
+					double Lent = Lend(How, Views[View], With.Whites[View], With.Sights[View], With.Envelope, At, Turn, Length, Colour);
+					for (const FViewSeam& Seam : With.Seams)
+					{
+						Lent *= Lent > 0.0 ? Seam.KeptBy(View, Turn, Length, FVector2D(At.Point.X, At.Point.Y).Size(), How.SeamMeters) : 1.0;
+					}
+					Weight[Row * Width + Column] = float(Lent);
+				}
+			});
+		}
+		const double CellHeight = Heights.Last() / Height;
+		const double CellTurn = 2.0 * UE_DOUBLE_PI / Width;
+		for (int32 I = 0; I < Views.Num(); ++I)
+		{
+			for (int32 J = I + 1; J < Views.Num(); ++J)
+			{
+				TArray<double> Found;
+				for (int32 Row0 = OffsetReach; Row0 + OffsetBlock + OffsetReach <= Height; Row0 += OffsetBlock / 2)
+				{
+					for (int32 Column0 = 0; Column0 < Width; Column0 += OffsetBlock / 2)
+					{
+						// what the composition blends here: the lesser of the two weights, against the greater
+						double Blended = 0.0;
+						double Greater = 0.0;
+						for (int32 R = Row0; R < Row0 + OffsetBlock; ++R)
+						{
+							for (int32 C = Column0; C < Column0 + OffsetBlock; ++C)
+							{
+								const int32 Index = R * Width + C % Width;
+								Blended += FMath::Min(Weights[I][Index], Weights[J][Index]);
+								Greater += FMath::Max(Weights[I][Index], Weights[J][Index]);
+							}
+						}
+						if (Blended < OffsetLeast * OffsetBlock * OffsetBlock || Blended < OffsetBlended * Greater)
+						{
+							continue;
+						}
+						double Best = -2.0;
+						int32 BestRise = 0;
+						int32 BestTurn = 0;
+						for (int32 Rise = -OffsetReach; Rise <= OffsetReach; ++Rise)
+						{
+							for (int32 Round = -OffsetReach; Round <= OffsetReach; ++Round)
+							{
+								double Total = 0.0;
+								double MeanA = 0.0;
+								double MeanB = 0.0;
+								auto Each = [&](auto&& Visit)
+								{
+									for (int32 R = Row0; R < Row0 + OffsetBlock; ++R)
+									{
+										for (int32 C = Column0; C < Column0 + OffsetBlock; ++C)
+										{
+											const int32 Here = R * Width + C % Width;
+											const int32 There = (R + Rise) * Width + ((C + Round) % Width + Width) % Width;
+											const double W = FMath::Min(Weights[I][Here], Weights[J][Here]) * (Unwrapped[J].Weight[There] > 0.0f ? 1.0 : 0.0);
+											Visit(W, Unwrapped[I].Detail[Here], Unwrapped[J].Detail[There]);
+										}
+									}
+								};
+								Each([&](double W, double A, double B) { Total += W; MeanA += W * A; MeanB += W * B; });
+								if (Total <= 0.0)
+								{
+									continue;
+								}
+								MeanA /= Total;
+								MeanB /= Total;
+								double Product = 0.0;
+								double SquaresA = 0.0;
+								double SquaresB = 0.0;
+								Each([&](double W, double A, double B)
+								{
+									Product += W * (A - MeanA) * (B - MeanB);
+									SquaresA += W * (A - MeanA) * (A - MeanA);
+									SquaresB += W * (B - MeanB) * (B - MeanB);
+								});
+								const double Correlation = Product / FMath::Sqrt(SquaresA * SquaresB + 1e-9);
+								if (Correlation > Best)
+								{
+									Best = Correlation;
+									BestRise = Rise;
+									BestTurn = Round;
+								}
+							}
+						}
+						if (Best >= OffsetTrust)
+						{
+							const double Radius = Interpolate(Heights, Radii, (Row0 + 0.5 * OffsetBlock) / Height * Heights.Last());
+							Found.Add(FMath::Sqrt(FMath::Square(BestRise * CellHeight) + FMath::Square(BestTurn * CellTurn * Radius)));
+						}
+					}
+				}
+				if (!Found.IsEmpty())
+				{
+					Found.Sort();
+					Out.Add({ I, J, Found[Found.Num() / 2], Found.Num() });
+				}
+			}
+		}
+		return Out;
+	}
+
+	TArray<FContrastBand> PaintingContrast(const FArtVesselComposition& How, const FArtVessel& Vessel, const FVesselPicture& View,
+		TConstArrayView<FVector2D> Sized, const FImage& Decoration, int32 Bands)
+	{
+		TArray<FContrastBand> Out;
+		const FVesselLayout Layout = LayoutOf(Sized);
+		if (Vessel.Outside.Num() != 2 || Bands < 1 || Decoration.SizeX < 2 || Decoration.SizeY < 2)
+		{
+			return Out;
+		}
+		const TArray<FVector2D> Normals = PointNormals(Vessel.Section);
+		const double From = Layout.Lengths[Vessel.Outside[0]];
+		const double To = Layout.Lengths[Vessel.Outside[1]];
+		const FVector2D Size = Layout.SizeMeters();
+		const TArrayView64<const FColor> Texels = Decoration.AsBGRA8();
+		const TArray<float>& Levels = LinearLevels();
+		for (int32 Band = 0; Band < Bands; ++Band)
+		{
+			FContrastBand& Found = Out.AddDefaulted_GetRef();
+			Found.FromMeters = FMath::Lerp(From, To, double(Band) / Bands);
+			Found.ToMeters = FMath::Lerp(From, To, double(Band + 1) / Bands);
+			// each window of the band (ContrastSectors round) on its own, so the photograph's light falling across the band
+			// isn't taken for its painting
+			TArray<TArray<float>> Photograph;
+			TArray<TArray<float>> Composed;
+			Photograph.SetNum(ContrastSectors);
+			Composed.SetNum(ContrastSectors);
+			int32 Clipped = 0;
+			int32 Saturated = 0;
+			const int32 First = FMath::CeilToInt32(Found.FromMeters / Size.Y * Decoration.SizeY - 0.5);
+			const int32 Last = FMath::FloorToInt32(Found.ToMeters / Size.Y * Decoration.SizeY - 0.5);
+			for (int32 Row = FMath::Max(First, 0); Row <= FMath::Min(Last, Decoration.SizeY - 1); ++Row)
+			{
+				const double Length = (Row + 0.5) / Decoration.SizeY * Size.Y;
+				const FSectionPlace Place = PlaceAlong(Layout, Length);
+				if (!IsOutside(Vessel, Place.Segment))
+				{
+					continue;
+				}
+				for (int32 Column = 0; Column < Decoration.SizeX; ++Column)
+				{
+					const double Turn = (Column + 0.5) / Decoration.SizeX;
+					const FSurfacePoint At = Surface(Vessel.Section, Normals, Place, 2.0 * UE_DOUBLE_PI * Turn);
+					FVector2D Pixel;
+					FLinearColor Colour;
+					if (Squareness(View.Camera, At) < How.WhiteSquareness || !View.Camera.Project(At.Point, Pixel) || !Sample(View.Image, Pixel, Colour))
+					{
+						continue;
+					}
+					const FColor& Texel = Texels[int64(Row) * Decoration.SizeX + Column];
+					const int32 Sector = FMath::Min(FMath::FloorToInt32(Turn * ContrastSectors), ContrastSectors - 1);
+					Photograph[Sector].Add(float(Luminance(Colour)));
+					Composed[Sector].Add(float(Luminance(FLinearColor(Levels[Texel.R], Levels[Texel.G], Levels[Texel.B], 1.0f))));
+					Clipped += Texel.R == 255 && Texel.G == 255 && Texel.B == 255 ? 1 : 0;
+					Saturated += FMath::Min3(Colour.R, Colour.G, Colour.B) >= Levels[SaturatedLevel] ? 1 : 0;
+					++Found.Samples;
+				}
+			}
+			TArray<float> PhotographRatios;
+			TArray<float> ComposedRatios;
+			for (int32 Sector = 0; Sector < ContrastSectors; ++Sector)
+			{
+				if (Photograph[Sector].Num() < ContrastWindowSamples)
+				{
+					continue;
+				}
+				PhotographRatios.Add(float(QuantileOf(Photograph[Sector], ContrastDark) / FMath::Max(QuantileOf(Photograph[Sector], ContrastWhite), UE_DOUBLE_SMALL_NUMBER)));
+				ComposedRatios.Add(float(QuantileOf(Composed[Sector], ContrastDark) / FMath::Max(QuantileOf(Composed[Sector], ContrastWhite), UE_DOUBLE_SMALL_NUMBER)));
+			}
+			Found.Windows = PhotographRatios.Num();
+			if (Found.Windows == 0)
+			{
+				continue;
+			}
+			Found.Photograph = QuantileOf(PhotographRatios, 0.5);
+			Found.Composed = QuantileOf(ComposedRatios, 0.5);
+			Found.Clipped = double(Clipped) / FMath::Max(Found.Samples, 1);
+			Found.Saturated = double(Saturated) / FMath::Max(Found.Samples, 1);
+		}
+		return Out;
 	}
 
 	TArray<TArray<FViewOverlap>> ViewOverlaps(const FArtVesselRegistration& How, const FArtVessel& Vessel, TConstArrayView<FVesselPicture> Views)

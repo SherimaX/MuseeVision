@@ -60,10 +60,18 @@ VESSELS = [
          # the neck's step and the rolled lip keep their turns
          views=[dict(image='ceramics/chinese-xuande-jar/DP-32251-001.jpg', profile=True, fine=[(0.88, 1.0)]),
                 dict(image='ceramics/chinese-xuande-jar/MET_DT5083.jpg')],
+         # The neck's clouds are read on DP-32251-001 unwrapped round the jar (half a millimetre a row) between the neck's
+         # lower double line (from 43.66 cm) and its upper (to 48.06 cm). Below the neck, the shoulder carries the reign mark
+         # once, over the front (`once`): a band reaching down onto it would carry the mark round the jar with its repeat.
+         # The lotus panels' tips reach 9.27 cm up, above the band's 7.73: taken to them, the band's measured repeat is
+         # trusted, at 15.1 to 15.4 degrees (23.3 to 23.8 panels), which settles neither 23 nor 24.
          bands=[dict(name="the foot's lotus panels", rows=(0.0, 0.16), count=23,
                      read="23 panels: on DP-32251-001 seven panels' tips stand 15.6 degrees apart round the jar"),
-                dict(name="the neck's cloud scroll", rows=(0.89, 0.98), count=8,
-                     read="8 clouds: on DP-32251-001 three of the neck's clouds stand 44 degrees apart")]),
+                dict(name="the neck's cloud scroll", rows=(0.904, 0.995), count=8,
+                     read="8 clouds: on DP-32251-001 three of the neck's clouds stand 44 degrees apart")],
+         once=[dict(name='the reign mark', rows=(0.8882, 0.8954), degrees=(-9.0, 9.5),
+                    read=("宣德年製 in a line on the shoulder under the neck, read on DP-32251-001 unwrapped: 42.90 to 43.25 cm up, "
+                          "from 9.0 degrees left of the front to 9.5 right; the Met's jar carries it once"))]),
     dict(work='chinese-wucai-jar', painted=True,
          museum=dict(heightMeters=0.232, source=MET + ', 17.127.2, Jar with carp in lotus pond: H. 23.2 cm (no diameter published)'),
          # below 0.12 of the height the jar's sides are lost against the grey ground in its own soft shadow: its foot and
@@ -838,6 +846,57 @@ def disagreement(bands):
     where their paintings correlate as a genuine overlap does (GENUINE): a plain band, or a sliver seen by both, has
     nothing to register."""
     return [b for b in bands if b['correlation'] >= GENUINE and abs(b['rise']) > AGREEMENT_METERS]
+
+
+# Where two placed views overlap, the composition blends them (Data/Art/Vessels.json's composition blendMeters) only
+# where their paintings lie on each other within AGREEMENT_METERS; further apart, blended, the painting shows twice (the
+# wucai jar's carp with two heads), so each view keeps its own side of the overlap, meeting the other at a seam. How far
+# apart they lie is measured as the composition weighs them (each by the square of how squarely it sees the surface):
+# blocks of OFFSET_BLOCK cells over the overlap, each laid on the other view by the rise and turn (within OFFSET_REACH
+# cells) at which its detail correlates best; a block whose painting lies on the other's at OFFSET_TRUST or better (the
+# same stretch of painting, not a repeat or the plain glaze) gives its offset, and the overlap's is their median.
+OFFSET_BLOCK = 24
+OFFSET_REACH = 10
+OFFSET_TRUST = 0.8
+OFFSET_LEAST = 0.01
+
+
+def weighted_correlation(da, wa, db, wb):
+    """The correlation of two pictures' detail, each weighted, where both are (-1 where they share no weight)."""
+    w = wa * wb
+    tot = w.sum()
+    if tot <= 1e-12:
+        return -1.0
+    mx, my = (w * da).sum() / tot, (w * db).sum() / tot
+    return float((w * (da - mx) * (db - my)).sum() / math.sqrt((w * (da - mx) ** 2).sum() * (w * (db - my) ** 2).sum() + 1e-9))
+
+
+def offset_of(a, b, zs, r):
+    """How far apart two placed views' paintings lie where both lend them (metres): the median of their trusted blocks'
+    offsets, and how many blocks were trusted; None where no block is (too slight an overlap, or plain glaze)."""
+    da, db = detail(a[0]), detail(b[0])
+    wa, wb = a[1] ** 2, b[1] ** 2
+    ring_r = np.interp((np.arange(HEIGHT_STEPS) + 0.5) / HEIGHT_STEPS * zs[-1], zs, r)
+    cell_z, cell_t = zs[-1] / HEIGHT_STEPS, 2 * np.pi / AZIMUTH_STEPS
+    found = []
+    for r0 in range(OFFSET_REACH, HEIGHT_STEPS - OFFSET_BLOCK - OFFSET_REACH, OFFSET_BLOCK // 2):
+        rows = slice(r0, r0 + OFFSET_BLOCK)
+        for c0 in range(0, AZIMUTH_STEPS, OFFSET_BLOCK // 2):
+            cols = np.arange(c0, c0 + OFFSET_BLOCK) % AZIMUTH_STEPS
+            A, WA = da[rows][:, cols], wa[rows][:, cols]
+            if (WA * wb[rows][:, cols]).mean() < OFFSET_LEAST:
+                continue
+            best = (-2.0, 0, 0)
+            for dv in range(-OFFSET_REACH, OFFSET_REACH + 1):
+                moved = slice(r0 + dv, r0 + dv + OFFSET_BLOCK)
+                for dc in range(-OFFSET_REACH, OFFSET_REACH + 1):
+                    cc = (cols + dc) % AZIMUTH_STEPS
+                    c = weighted_correlation(A, WA, db[moved][:, cc], wb[moved][:, cc])
+                    if c > best[0]:
+                        best = (c, dv, dc)
+            if best[0] >= OFFSET_TRUST:
+                found.append(math.hypot(best[1] * cell_z, best[2] * cell_t * ring_r[r0 + OFFSET_BLOCK // 2]))
+    return (float(np.median(found)) if found else None), len(found)
 
 
 def describe(bands):
@@ -1622,14 +1681,15 @@ def derive(vessel, ware, sheets):
             print('  %s left out: %s' % (name, '; '.join(why)))
             continue
         out['views'].append(dict(view=v, m=mv, cam=cv, rms=fit, placement=placement,
-                                 overlaps=[(names[i], share, corr) for i, share, corr in overlaps]))
+                                 overlaps=[(names[i], share, corr, offset_of(allp[i], allp[k + 1], zs, r)[0]) for i, share, corr in overlaps]))
         unwrapped.append(allp[k + 1])
         sights.append((cv, fit, zs, r))
         if sheets:
             sheet(sheets, vessel['work'] + '-%d.jpg' % (k + 1), mv, cv, zs, r)
     if bottom:
         out['views'].append(dict(view=dict(image=spec['image']), m=None, cam=bottom['cam'], rms=bottom['fit'], placement='registered',
-                                 overlaps=[(names[i], share, corr) for i, share, corr in bottom['overlaps']]))
+                                 overlaps=[(names[i], share, corr, offset_of(allp[i], bottom['pic'], zs, r)[0])
+                                           for i, share, corr in bottom['overlaps']]))
         out['bottom'] = bottom
         unwrapped.append(bottom['pic'])
         sights.append((bottom['cam'], bottom['fit'], zs, r))
@@ -1637,6 +1697,12 @@ def derive(vessel, ware, sheets):
     also = {}
     if vessel.get('side_b'):
         also = side_b_counts(vessel['side_b'], H, museum, zs, r)
+    for b in vessel['bands']:
+        for m in vessel.get('once', []):
+            if b['rows'][0] < m['rows'][1] and m['rows'][0] < b['rows'][1]:
+                raise SystemExit("%s: %s (%.4f to %.4f m) reaches over %s (%.4f to %.4f m), which the vessel carries once: its "
+                                 "repeat would carry it round" % (vessel['work'], b['name'], b['rows'][0] * H, b['rows'][1] * H,
+                                                                  m['name'], m['rows'][0] * H, m['rows'][1] * H))
     out['bands'] = [band_of(b, unwrapped, H, also.get(b['name'])) for b in vessel['bands']]
     out['unwrapped'] = unwrapped
     if not vessel['painted']:
@@ -1670,7 +1736,12 @@ def record_of(vessel, d):
                     pitchDegrees=round(math.degrees(c['pitch']), 4), focalPixels=round(c['focal'], 2),
                     axisPixels=[round(c['u0'], 2), round(c['v0'], 2)], fitPixels=round(v['rms'], 2), placement=v['placement'])
         if v['overlaps']:
-            view['overlaps'] = [dict(image=name, share=round(share, 4), correlation=round(corr, 3)) for name, share, corr in v['overlaps']]
+            view['overlaps'] = []
+            for name, share, corr, offset in v['overlaps']:
+                o = dict(image=name, share=round(share, 4), correlation=round(corr, 3))
+                if offset is not None:
+                    o['offsetMeters'] = round(offset, 4)
+                view['overlaps'].append(o)
         views.append(view)
     first = d['views'][0]
     derivation = (
@@ -1731,6 +1802,18 @@ def record_of(vessel, d):
                        "silhouettes by their cameras' misses and %.0f px); where none does, a band whose repeat is known is "
                        "carried round from where it is seen (its `reading`), and elsewhere the glaze is left." % (
                            100 * d['coverage'], COMPOSITION['edgePixels']))
+        seamed = [(v['view']['image'].split('/')[-1], name, offset) for v in d['views'] for name, _, _, offset in v['overlaps']
+                  if offset is not None and offset > COMPOSITION['blendMeters']]
+        blended = [(v['view']['image'].split('/')[-1], name, offset) for v in d['views'] for name, _, _, offset in v['overlaps']
+                   if offset is not None and offset <= COMPOSITION['blendMeters']]
+        if seamed or blended:
+            derivation += (" Where two views overlap, their paintings' offset is measured as the composition weighs them "
+                           '(the median of the blocks that lie on the other view at a correlation of %.1f or better): %s. %s' % (
+                               OFFSET_TRUST, '; '.join('%s on %s %.1f mm' % (a, b, 1000 * o) for a, b, o in seamed + blended),
+                               ('Further apart than %.1f cm, blended they would show the painting twice, so each keeps its own side '
+                                'of the overlap and they meet at a seam run where their paintings agree best, cross-faded over %.0f '
+                                'mm.' % (100 * COMPOSITION['blendMeters'], 1000 * COMPOSITION['seamMeters'])) if seamed else
+                               'Within %.1f cm, they are blended.' % (100 * COMPOSITION['blendMeters'])))
         left = [(b['name'], how) for b, (p, how) in zip(vessel['bands'], d['bands']) if p is None]
         if left:
             derivation += ' Left in the glaze where no view sees them: ' + '; '.join('%s (%s)' % (n, how) for n, how in left) + '.'
@@ -1753,6 +1836,10 @@ def record_of(vessel, d):
                              toMeters=round(b['rows'][1] * museum['heightMeters'], 4), periodDegrees=p, reading=how)
                         for b, (p, how) in zip(vessel['bands'], d['bands']) if p is not None]
         rec['unused'] = list(d['unused'])
+        if vessel.get('once'):
+            rec['once'] = [dict(name=m['name'], fromMeters=round(m['rows'][0] * museum['heightMeters'], 4),
+                                toMeters=round(m['rows'][1] * museum['heightMeters'], 4), fromDegrees=m['degrees'][0],
+                                toDegrees=m['degrees'][1], reading=m['read']) for m in vessel['once']]
     return rec
 
 
@@ -1768,20 +1855,187 @@ def record_of(vessel, d):
 # feet 0.13, the flange 0.20, the wall 0.67. The flange's face is the museum's foot (19.3 x 12.9 cm); the wall steps in
 # from it by 18 px at the flange's top, 2.2 mm at the rim's scale (about 8100 px a metre: 934 px to the 11.5 cm
 # half-axis). The wall's flare, its inset from the rim at shares of its height, is read along the same edge.
-# The feet are four cloud-scroll feet, each a long curved foot hugging a corner of the base: on the base photograph
-# (北宋汝窯青瓷無紋水仙盆_底部.jpg, 3066 x 2281, taken from under it and all but square to it) the flange's outer edge,
-# the museum's 19.3 x 12.9 cm foot, spans columns 800..2390 and rows 620..1700 (centre 1595, 1160). The upper right foot
-# is traced by eye on its pixel grid, round from its outer end along the long side, over the corner and down the short
-# side, and back along its inner edge (FOOT_OUTLINE); the other three are its mirror images, as the four are in the
-# photograph. The base's plan is a rounded oblong, a superellipse of exponent 3 through the traced foot's outer edge
-# (FOOT_PLAN), where the basin turned round and pressed to its mouth is an ellipse: each point of the outline keeps its
-# share of the way from the centre to the base's edge in its direction, so the feet hug the turned base's edge as they
-# hug the real one's.
+# The feet are four cloud-scroll feet, each a long curved foot hugging a corner of the base. The upper right foot is
+# traced by eye on the pixel grid of the base photograph (北宋汝窯青瓷無紋水仙盆_底部.jpg, 3066 x 2281, taken from under the
+# basin and all but square to it), round from its outer end along the long side, over the corner and down the short side,
+# and back along its inner edge (FOOT_OUTLINE); the other three are its mirror images, as the four are in the photograph.
+#
+# The basin's plan is read on its photographs, not assumed (RU_PLAN). Its base: the flange's outer edge, where the pale
+# flange meets the darker wall seen beyond it, traced along rays from the base's middle (inward from the wall's band, to
+# where the lightness first rises PLAN_RISE over the wall's), and a superellipse |x/a|^n + |y/b|^n = 1 fitted to it,
+# robustly: the rays where the feet hide the edge are left out as they stray. Its mouth: the white lip, traced on the
+# oblique photograph as the brightest thin line near a rough oval, and a superellipse of the museum's mouth, 23.0 x 16.4
+# cm, fitted to it through a pinhole (its distance, elevation, focal length, optical axis, roll and yaw fitted too). Each
+# outline is kept in shares of its half-axes (the lip's traced points carried back through the fitted camera onto the
+# lip's plane), for Art's check of the turned mesh against the photographs.
 FOOT_OUTLINE = [(1925.0, 647.5), (2045.0, 650.0), (2100.0, 656.0), (2150.0, 670.0), (2195.0, 695.0), (2230.0, 725.0),
                 (2250.0, 760.0), (2270.0, 772.5), (2317.5, 857.5), (2315.0, 870.0), (2260.0, 900.0), (2170.0, 805.0),
                 (2130.0, 775.0), (2090.0, 750.0), (2045.0, 737.5), (1925.0, 712.5), (1920.0, 700.0)]
-FOOT_FLANGE = dict(columns=(800, 2390), rows=(620, 1700))
-FOOT_PLAN = 3.0
+RU_PLAN = dict(
+    base='ceramics/chinese-ru-basin/北宋汝窯青瓷無紋水仙盆_底部.jpg',
+    # the base's middle and half-axes, rough, read by eye: where the rays start
+    base_rough=(1575.0, 1160.0, 830.0, 555.0),
+    lip='ceramics/chinese-ru-basin/汝窯_青瓷無紋水仙盆.png',
+    # the lip's rough oval on the oblique photograph, read by eye: its middle and half-axes
+    lip_rough=(1415.0, 1026.0, 928.0, 320.0),
+)
+# A ray's wall is its lightness's median over the first 8 px inside the wall's band (from PLAN_WALL_SHARE beyond the
+# rough oval); the flange's edge, where the lightness first rises PLAN_RISE above it, at the half-way level.
+PLAN_WALL_SHARE = 1.07
+PLAN_RISE = 12.0
+# The lip is the brightest thin line (a 15 px top-hat of the lightness, at least LIP_LEAST) within LIP_REACH of the rough oval.
+LIP_LEAST = 6.0
+LIP_REACH = 0.1
+# A fit leaves out the traced points that stray from it more than PLAN_OUTLIER times the median stray (and 2 px), again
+# and again (PLAN_ROUNDS): the rays the feet hide, a speck of glaze.
+PLAN_OUTLIER = 3.0
+PLAN_ROUNDS = 5
+# Each outline is kept at so many points, evenly round.
+PLAN_POINTS = 72
+
+
+def superellipse_share(X, Y, n):
+    """How far a point lies to a superellipse of exponent n and half-axes 1 along its ray from the middle (1 on it)."""
+    return (np.abs(X) ** n + np.abs(Y) ** n) ** (1.0 / n)
+
+
+def fit_superellipse(x, y, q0):
+    """A superellipse's middle, half-axes and exponent fitted to traced points (pixels, y down): each point's stray along
+    its ray from the middle, robustly; again leaving out the points that stray (PLAN_OUTLIER). Returns (cx, cy, a, b, n),
+    the kept points' rms stray and which were kept."""
+    keep = np.ones(len(x), bool)
+    q = np.array(q0, float)
+
+    def stray(q, xs, ys):
+        cx, cy, a, b, n = q
+        X, Y = (xs - cx) / a, (ys - cy) / b
+        return (1 - 1 / superellipse_share(X, Y, n)) * np.hypot(xs - cx, ys - cy)
+    for _ in range(PLAN_ROUNDS):
+        q = least_squares(stray, q, args=(x[keep], y[keep]), loss='soft_l1', f_scale=2.0).x
+        d = np.abs(stray(q, x, y))
+        keep = d < PLAN_OUTLIER * np.median(d) + 2.0
+    return q, float(np.sqrt(np.mean(stray(q, x[keep], y[keep]) ** 2))), keep
+
+
+def even_outline(X, Y):
+    """Points [X, Y] (shares of the half-axes) thinned to PLAN_POINTS, evenly by their angle round the middle."""
+    t = np.arctan2(Y, X) % (2 * np.pi)
+    out = []
+    for k in range(PLAN_POINTS):
+        lo, hi = 2 * np.pi * k / PLAN_POINTS, 2 * np.pi * (k + 1) / PLAN_POINTS
+        sel = np.where((t >= lo) & (t < hi))[0]
+        if len(sel):
+            i = sel[np.argmin(np.abs(t[sel] - 0.5 * (lo + hi)))]
+            out.append([round(float(X[i]), 4), round(float(Y[i]), 4)])
+    return out
+
+
+def base_plan():
+    """The base's plan from the base photograph: the flange's outer edge traced and fitted (fit_superellipse). Returns the
+    fit (cx, cy, a, b, n in its pixels), its rms stray, how many rays were kept of how many, and its outline in shares."""
+    im = load(RU_PLAN['base'])
+    L = cv2.GaussianBlur(cv2.cvtColor(im, cv2.COLOR_BGR2LAB)[..., 0].astype(np.float32), (0, 0), 2.0)
+    cx, cy, a, b = RU_PLAN['base_rough']
+    pts = []
+    step = 0.5
+    for k in range(720):
+        t = math.radians((k + 0.5) / 2)
+        c, s = math.cos(t), math.sin(t)
+        r_out = PLAN_WALL_SHARE / math.hypot(c / a, s / b)
+        rs = np.arange(r_out, 0.6 * r_out, -step)
+        xs, ys = cx + rs * c, cy - rs * s
+        vals = cv2.remap(L, xs.astype(np.float32)[None], ys.astype(np.float32)[None], cv2.INTER_LINEAR)[0]
+        wall = float(np.median(vals[:int(8 / step)]))
+        above = np.where(vals > wall + PLAN_RISE)[0]
+        if not len(above):
+            continue
+        i = int(above[0])
+        inner = vals[min(len(vals) - 1, i + int(6 / step))]
+        mid = 0.5 * (wall + max(inner, wall + PLAN_RISE))
+        j = i
+        while j > 0 and vals[j - 1] > mid:
+            j -= 1
+        while j < len(vals) - 1 and vals[j] < mid:
+            j += 1
+        pts.append((xs[j], ys[j]))
+    pts = np.array(pts)
+    q, rms, keep = fit_superellipse(pts[:, 0], pts[:, 1], (cx, cy, a, b, 2.5))
+    X, Y = (pts[keep, 0] - q[0]) / q[2], (q[1] - pts[keep, 1]) / q[3]
+    return q, rms, int(keep.sum()), len(pts), even_outline(X, Y)
+
+
+def lip_camera_curve(q, A, B, t):
+    """The lip's image through the oblique photograph's pinhole: a superellipse of half-axes A, B and exponent n on the
+    lip's plane, yawed, seen from D off at elevation e (in front of it, looking at its middle), focal f, optical axis
+    (u0, v0), rolled."""
+    D, e, f, u0, v0, roll, yaw, n = q
+    s = superellipse_share(np.cos(t), np.sin(t), n) ** -1
+    X, Y = A * np.cos(t) * s, B * np.sin(t) * s
+    X, Y = X * math.cos(yaw) - Y * math.sin(yaw), X * math.sin(yaw) + Y * math.cos(yaw)
+    ce, se = math.cos(e), math.sin(e)
+    C = np.array([0.0, -D * ce, D * se])
+    fwd, right = np.array([0.0, ce, -se]), np.array([1.0, 0.0, 0.0])
+    up = np.cross(right, fwd)
+    P = np.stack([X, Y, np.zeros_like(X)], 1) - C
+    u, v = f * (P @ right) / (P @ fwd), -f * (P @ up) / (P @ fwd)
+    cr, sr = math.cos(roll), math.sin(roll)
+    return np.stack([u0 + u * cr - v * sr, v0 + u * sr + v * cr], 1)
+
+
+def lip_to_plan(q, px):
+    """Pixels of the oblique photograph carried back through its fitted pinhole onto the lip's plane, un-yawed: metres."""
+    D, e, f, u0, v0, roll, yaw, n = q
+    cr, sr = math.cos(roll), math.sin(roll)
+    du, dv = px[:, 0] - u0, px[:, 1] - v0
+    u, v = du * cr + dv * sr, -du * sr + dv * cr
+    ce, se = math.cos(e), math.sin(e)
+    C = np.array([0.0, -D * ce, D * se])
+    fwd, right = np.array([0.0, ce, -se]), np.array([1.0, 0.0, 0.0])
+    up = np.cross(right, fwd)
+    d = right[None] * (u / f)[:, None] - up[None] * (v / f)[:, None] + fwd[None]
+    t = -C[2] / d[:, 2]
+    P = C[None] + d * t[:, None]
+    return P[:, 0] * math.cos(-yaw) - P[:, 1] * math.sin(-yaw), P[:, 0] * math.sin(-yaw) + P[:, 1] * math.cos(-yaw)
+
+
+def mouth_plan(A, B):
+    """The mouth's plan from the oblique photograph: the white lip traced and a superellipse of the museum's mouth fitted
+    to it through a pinhole. Returns the camera and exponent fitted, its rms stray (px), the points kept of those traced,
+    its outline in shares of the half-axes, and the points kept (pixels)."""
+    from scipy.spatial import cKDTree
+    im = load(RU_PLAN['lip'])
+    L = cv2.cvtColor(im, cv2.COLOR_BGR2LAB)[..., 0]
+    hat = cv2.GaussianBlur(cv2.morphologyEx(L, cv2.MORPH_TOPHAT, np.ones((15, 15), np.uint8)).astype(np.float32), (0, 0), 1.5)
+    cx, cy, a, b = RU_PLAN['lip_rough']
+    pts = []
+    for k in range(720):
+        t = math.radians((k + 0.5) / 2)
+        c, s = math.cos(t), math.sin(t)
+        r0 = 1 / math.hypot(c / a, s / b)
+        rs = np.arange((1 - LIP_REACH) * r0, (1 + LIP_REACH) * r0, 0.5)
+        xs, ys = cx + rs * c, cy - rs * s
+        vals = cv2.remap(hat, xs.astype(np.float32)[None], ys.astype(np.float32)[None], cv2.INTER_LINEAR)[0]
+        i = int(np.argmax(vals))
+        if vals[i] > LIP_LEAST:
+            pts.append((xs[i], ys[i]))
+    pts = np.array(pts)
+    t = np.linspace(0, 2 * np.pi, 4000, endpoint=False)
+
+    def stray(q, P):
+        return cKDTree(lip_camera_curve(q, A, B, t)).query(P)[0]
+    # a first guess: 1.5 m off, 28 degrees up (the museum's view), the focal length that gives the rough oval's width
+    q = np.array([1.5, math.radians(28.0), 1.5 * a / A, cx, cy, 0.0, 0.0, 2.5])
+    keep = np.ones(len(pts), bool)
+    for _ in range(PLAN_ROUNDS):
+        q = least_squares(stray, q, args=(pts[keep],), loss='soft_l1', f_scale=3.0,
+                          x_scale=[0.5, 0.1, 1000.0, 50.0, 50.0, 0.05, 0.05, 0.5]).x
+        d = stray(q, pts)
+        keep = d < max(6.0, PLAN_OUTLIER * np.median(d))
+    rms = float(np.sqrt(np.mean(stray(q, pts[keep]) ** 2)))
+    X, Y = lip_to_plan(q, pts[keep])
+    return q, rms, int(keep.sum()), len(pts), even_outline(X / A, Y / B), pts[keep]
+
+
 RU = dict(
     work='chinese-ru-basin',
     museum=dict(heightMeters=0.069, mouthAxesMeters=[0.230, 0.164], footAxesMeters=[0.193, 0.129],
@@ -1794,25 +2048,44 @@ RU = dict(
 )
 
 
-def ru_feet(pressed_half_axes):
-    """The four feet's outlines in the basin's plan (metres, x across, y front to back), from FOOT_OUTLINE: each point's
-    share of the way to the real base's edge (a superellipse of FOOT_PLAN) kept on the turned base's (an ellipse of
-    these half-axes), and mirrored to the other three corners."""
-    (c0, c1), (r0, r1) = FOOT_FLANGE['columns'], FOOT_FLANGE['rows']
-    cx, cy, a, b = 0.5 * (c0 + c1), 0.5 * (r0 + r1), 0.5 * (c1 - c0), 0.5 * (r1 - r0)
+# The underside meets the flange's face over a rounded arris this wide: the base photograph shows the pale underside
+# running out to the flange's edge, where the feet stand.
+RU_ARRIS = 0.001
+
+
+def ru_feet(half_axes, base, underside):
+    """The four feet's outlines in the basin's plan (metres, x across, y front to back), from FOOT_OUTLINE: each point in
+    shares of the base photograph's fitted flange (base: its middle, half-axes and exponent in its pixels), laid on the
+    turned base's half-axes, which Art presses to the same superellipse; a point the photograph shows beyond the
+    underside's edge (its share, `underside`, of the flange's) is brought in to it along its ray, as a foot stands under
+    the base; and mirrored to the other three corners. Returns the feet and the furthest share the tracing reached."""
+    cx, cy, a, b, n = base
     one = []
+    furthest = 0.0
     for x, y in FOOT_OUTLINE:
         X, Y = (x - cx) / a, (cy - y) / b
-        share = (abs(X) ** FOOT_PLAN + abs(Y) ** FOOT_PLAN) ** (1.0 / FOOT_PLAN)
-        k = share / math.hypot(X, Y)
-        one.append((X * k * pressed_half_axes[0], Y * k * pressed_half_axes[1]))
+        share = float(superellipse_share(X, Y, n))
+        furthest = max(furthest, share)
+        k = min(1.0, underside / share)
+        one.append((X * k * half_axes[0], Y * k * half_axes[1]))
     feet = []
     for sx, sy in ((1, 1), (-1, 1), (-1, -1), (1, -1)):
         outline = [[round(sx * x, 5), round(sy * y, 5)] for x, y in one]
         # every outline anticlockwise in the plan, its solid inside (a mirror image runs the other way round)
         area = sum(a[0] * b[1] - b[0] * a[1] for a, b in zip(outline, outline[1:] + outline[:1]))
         feet.append(dict(outline=outline if area > 0 else outline[::-1]))
-    return feet
+    return feet, furthest
+
+
+def lip_misfit(q, pts, mouth, n):
+    """How far the lip's kept points (pixels) stray (rms, px) from the best superellipse of exponent n through the
+    oblique photograph's pinhole, its camera refitted: what another plan would make of the photograph."""
+    from scipy.spatial import cKDTree
+    A, B = mouth[0] / 2, mouth[1] / 2
+    t = np.linspace(0, 2 * np.pi, 4000, endpoint=False)
+    fixed = least_squares(lambda qq: cKDTree(lip_camera_curve(list(qq) + [n], A, B, t)).query(pts)[0], q[:7], loss='soft_l1',
+                          f_scale=3.0, x_scale=[0.5, 0.1, 1000.0, 50.0, 50.0, 0.05, 0.05])
+    return float(np.sqrt(np.mean(cKDTree(lip_camera_curve(list(fixed.x) + [n], A, B, t)).query(pts)[0] ** 2)))
 
 
 def derive_ru(ware):
@@ -1825,7 +2098,7 @@ def derive_ru(ware):
     hf = RU['shares']['feet'] * H
     zf = hf + RU['shares']['flange'] * H
     wall_bottom = foot - RU['step_in']
-    outside = [[foot - 0.004, hf], [foot, hf + 0.003], [foot, zf - 0.002], [wall_bottom, zf]]
+    outside = [[foot - RU_ARRIS, hf], [foot, hf + RU_ARRIS], [foot, zf - 0.002], [wall_bottom, zf]]
     for share, inset in RU['wall'][1:]:
         z = zf + share * (H - zf)
         r = wall_bottom + (a - wall_bottom) * inset / RU['wall'][-1][1]
@@ -1850,6 +2123,9 @@ def derive_ru(ware):
     uniform_foot = 2 * foot * mouth[1] / mouth[0]
     offset_foot = mouth[1] - (mouth[0] - foot_axes[0])
     pressed_foot = [2 * foot, 2 * foot * foot_axes[1] / foot_axes[0]]
+    base, base_rms, base_kept, base_rays, base_outline = base_plan()
+    lip_q, lip_rms, lip_kept, lip_traced, lip_outline, lip_points = mouth_plan(mouth[0] / 2, mouth[1] / 2)
+    feet, furthest = ru_feet((foot, 0.5 * foot_axes[1]), base, (foot - RU_ARRIS) / foot)
     derivation = (
         "Section derived from the museum's sizes and the proportions the oblique photograph %s shows at the basin's "
         "left end, read by eye on its pixel grid (MuseeVision/Scripts/vessels.py, RU): feet %.2f, flange %.2f and wall "
@@ -1860,13 +2136,24 @@ def derive_ru(ware):
         "mouth's %.1f x %.1f cm and at the flange's face to the foot's %.1f x %.1f, the pressing running evenly up the "
         "wall between them (pressed to the mouth's ratio all the way down, the foot would be %.1f across its short axis; a "
         "wall that flared as far at the ends as at the sides would give %.1f; the museum's %.1f lies between, and no "
-        "photograph shows how the wall's flare changes round the oval). Four cloud-scroll feet traced from the base "
-        "photograph %s, each hugging a corner of the base, %.1f mm high. Glaze colour from the lit outside wall, face on "
-        "(pixels %d..%d x %d..%d), relative to the photograph's white." % (
+        "photograph shows how the wall's flare changes round the oval). Its plan is a rounded oblong, as its photographs "
+        "show it: a superellipse |x/a|^n + |y/b|^n = 1, pressed so at every height. At the flange's face n = %.2f, fitted "
+        "to the flange's outer edge on the base photograph %s (%d of %d rays; the rest are where the feet hide the edge; "
+        "%.1f px rms, the flange %.0f x %.0f px, %.3f to 1 against the museum's %.3f); at the lip n = %.2f, fitted to the "
+        "white lip on %s through a pinhole %.2f m off, %.1f deg up (%d of %d points, %.1f px rms); an ellipse (n = 2) "
+        "misses the lip by %.1f px rms, and n = 3 by %.1f. The exponent runs evenly up the wall between them. The "
+        "underside runs out to the flange's face over a %.0f mm arris. Four cloud-scroll feet traced from the base "
+        "photograph, each hugging a corner of the base, %.1f mm high, laid in shares of the fitted flange (the tracing "
+        "reaches %.3f of it at the corners, where the feet's own faces show beyond the flange's edge; a foot stands under "
+        "the base, so they are brought within its underside). Glaze colour from the lit outside wall, face on (pixels "
+        "%d..%d x %d..%d), relative to the photograph's white." % (
             RU['image'].split('/')[-1], RU['shares']['feet'], RU['shares']['flange'],
             1 - RU['shares']['feet'] - RU['shares']['flange'], 1000 * RU['step_in'], 100 * mouth[0], 100 * mouth[1],
             100 * foot_axes[0], 100 * foot_axes[1], 100 * uniform_foot, 100 * offset_foot, 100 * foot_axes[1],
-            '北宋汝窯青瓷無紋水仙盆_底部.jpg', 1000 * hf, x0, x1, y0, y1))
+            base[4], RU_PLAN['base'].split('/')[-1], base_kept, base_rays, base_rms, 2 * base[2], 2 * base[3], base[2] / base[3],
+            foot_axes[0] / foot_axes[1], lip_q[7], RU_PLAN['lip'].split('/')[-1], lip_q[0], math.degrees(lip_q[1]), lip_kept,
+            lip_traced, lip_rms, lip_misfit(lip_q, lip_points, mouth, 2.0), lip_misfit(lip_q, lip_points, mouth, 3.0), 1000 * RU_ARRIS, 1000 * hf,
+            furthest, x0, x1, y0, y1))
     section = [[round(r, 5), round(z, 5)] for r, z in section]
     faults = section_faults(section, first, last, t)
     if faults:
@@ -1874,7 +2161,9 @@ def derive_ru(ware):
     rec = dict(work=RU['work'], source=RU['museum']['source'], grade='derived', derivation=derivation,
                museum={k: v for k, v in RU['museum'].items() if k != 'source'},
                section=section, outside=[first, last + 1], wallMeters=round(t, 5),
-               feet=dict(heightMeters=round(hf, 5), each=ru_feet((foot, 0.5 * foot_axes[1]))))
+               feet=dict(heightMeters=round(hf, 5), each=feet),
+               plan=dict(footExponent=round(float(base[4]), 3), mouthExponent=round(float(lip_q[7]), 3),
+                         footOutline=base_outline, mouthOutline=lip_outline))
     return rec, glaze, spread, pressed_foot
 
 
@@ -1949,6 +2238,32 @@ def selftest():
             if abs(stated - 100 * widest_of(rec['section'])) > 0.005:
                 fails.append("%s's derivation says its widest diameter is %.2f cm, its section %.2f" % (
                     rec['work'], stated, 100 * widest_of(rec['section'])))
+    # two views of one painting: laid 8 mm apart round a 0.1 m cylinder their offset is measured so; laid true, none
+    zs_c, r_c = np.array([0.0, 0.2]), np.array([0.1, 0.1])
+    painting = np.full((HEIGHT_STEPS, AZIMUTH_STEPS, 3), 235, np.uint8)
+    for k in range(400):
+        c, r0 = int(rng.integers(0, AZIMUTH_STEPS - 10)), int(rng.integers(0, HEIGHT_STEPS - 10))
+        painting[r0:r0 + int(rng.integers(3, 10)), c:c + int(rng.integers(3, 10))] = colours[k % 4]
+    shift = int(round(0.008 / (2 * np.pi * 0.1 / AZIMUTH_STEPS)))
+    both = np.full((HEIGHT_STEPS, AZIMUTH_STEPS), 0.7)
+    moved, _ = offset_of((painting, both), (np.roll(painting, shift, 1), both), zs_c, r_c)
+    true, _ = offset_of((painting, both), (painting, both), zs_c, r_c)
+    if moved is None or abs(moved - 0.008) > 0.001 or true is None or true > 0.0005:
+        fails.append('two views of a painting laid 8 mm apart are measured %s apart, and laid true %s' % (moved, true))
+    # a band never reaches over what a vessel carries once (the Xuande jar's reign mark)
+    for vessel in VESSELS:
+        for band in vessel['bands']:
+            for m in vessel.get('once', []):
+                if band['rows'][0] < m['rows'][1] and m['rows'][0] < band['rows'][1]:
+                    fails.append("%s's %s reaches over %s, which it carries once" % (vessel['work'], band['name'], m['name']))
+    # a superellipse traced with noise gives back its exponent
+    t = np.linspace(0, 2 * np.pi, 720, endpoint=False)
+    sq = superellipse_share(np.cos(t), np.sin(t), 2.35) ** -1
+    x = 1500 + 800 * np.cos(t) * sq + rng.normal(0, 1.0, len(t))
+    y = 1100 - 530 * np.sin(t) * sq + rng.normal(0, 1.0, len(t))
+    q, rms, _ = fit_superellipse(x, y, (1480, 1120, 780, 520, 2.8))
+    if abs(q[4] - 2.35) > 0.03:
+        fails.append('a superellipse of exponent 2.35 is fitted at %.3f' % q[4])
     turn = 200
     side = np.roll(ring, -turn, 1)
     angle, top, runner = ring_peak(ring_landscape(ring, side, seen_from_front()[:rows]))
@@ -1982,7 +2297,8 @@ def main():
             print('  %s: camera %.2f m off, %.3f m up, pitch %.1f deg, focal %.0f px, azimuth %.1f deg, silhouette %.2f px, %s%s' % (
                 v['view']['image'].split('/')[-1], c['distance'], c['height'], math.degrees(c['pitch']), c['focal'],
                 math.degrees(c.get('azimuth', 0.0)), v['rms'], v['placement'],
-                ''.join('; on %s %.1f%% shared, correlation %.2f' % (n, 100 * s_, k) for n, s_, k in v['overlaps'])))
+                ''.join('; on %s %.1f%% shared, correlation %.2f, %s' % (n, 100 * s_, k, 'offset %.1f mm' % (1000 * o) if o is not None else 'no offset measured')
+                        for n, s_, k, o in v['overlaps'])))
         print('  ' + '; '.join(d['checks']) + '; coverage %.2f; %s form; %s; section %d points' % (
             d['coverage'], 'open' if d['open'] else 'closed', d['wall_how'], len(d['section'])))
         for b, (p, how) in zip(vessel['bands'], d.get('bands', [])):

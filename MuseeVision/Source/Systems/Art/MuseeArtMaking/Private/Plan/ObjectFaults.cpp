@@ -378,6 +378,13 @@ namespace Musee::ArtMaking
 					Out.Add(FString::Printf(TEXT("Data/%s: each of its feet is an outline of three points or more"), FArtVessels::Record));
 				}
 			}
+			FVesselPress Press;
+			const FString Pressing = PressOf(Vessel, FVector2D(1.0, 1.0), Press);
+			const FString Standing = Pressing.IsEmpty() ? FeetFault(Vessel, Press) : FString();
+			if (!Standing.IsEmpty())
+			{
+				Out.Add(FString::Printf(TEXT("Data/%s: %s"), FArtVessels::Record, *Standing));
+			}
 			for (const FArtVesselView& View : Vessel.Views)
 			{
 				if (!FArtVesselView::IsPlacement(View.Placement))

@@ -8,13 +8,21 @@ namespace Musee::ArtMaking
 	namespace
 	{
 		/**
-		 * One ring of the turned surface: the section's point carried round the axis with its normal. An oval's pressing,
-		 * (x, y, z) to (x, k(z) y, z), tilts the normal by the inverse transpose of its Jacobian: n to (n.x, n.y / k,
-		 * n.z - k'(z) y n.y / k), y the point's unpressed y.
+		 * One ring of the turned surface: the section's point carried round the axis with its normal, and pressed
+		 * (FVesselPress::Pressed). An oval's pressing to an ellipse, (x, y, z) to (x, k(z) y, z), tilts the normal by the
+		 * inverse transpose of its Jacobian: n to (n.x, n.y / k, n.z - k'(z) y n.y / k), y the point's unpressed y. A plan
+		 * pressed to a superellipse takes its normal from the pressed surface itself: the cross of its tangents round the
+		 * ring and along the section, each by central differences.
 		 */
 		TArray<int32> Ring(FFormMesh& Mesh, const FVector2D& Point, const FVector2D& Normal, double V, int32 Segments, const FVesselTurning& Turning,
 			double ReferenceRadius)
 		{
+			constexpr double Step = 1e-5;
+			const FVesselPress& Press = Turning.Press;
+			const bool bEllipse = FMath::IsNearlyEqual(Press.ExponentAt(Point.Y), 2.0, 1e-12)
+				&& FMath::IsNearlyEqual(Press.ExponentAt(Point.Y + Step), 2.0, 1e-12) && FMath::IsNearlyEqual(Press.ExponentAt(Point.Y - Step), 2.0, 1e-12);
+			// along the section, its solid on the left: the outward normal turned a quarter back
+			const FVector2D Along(-Normal.Y, Normal.X);
 			TArray<int32> Out;
 			Out.Reserve(Segments + 1);
 			for (int32 K = 0; K <= Segments; ++K)
@@ -22,10 +30,23 @@ namespace Musee::ArtMaking
 				const double Angle = 2.0 * UE_DOUBLE_PI * K / Segments;
 				const double S = FMath::Sin(Angle);
 				const double C = FMath::Cos(Angle);
-				const double Ratio = Turning.Press.RatioAt(Point.Y);
-				const double Slope = Turning.Press.SlopeAt(Point.Y);
-				const FVector Position(Point.X * S, Ratio * Point.X * C, Point.Y);
-				const FVector Facing = FVector(Normal.X * S, Normal.X * C / Ratio, Normal.Y - Slope * Point.X * C * Normal.X * C / Ratio).GetSafeNormal();
+				const double Ratio = Press.RatioAt(Point.Y);
+				const double Slope = Press.SlopeAt(Point.Y);
+				const FVector Position = Press.Pressed(Point.X, Point.Y, Angle);
+				FVector Facing = FVector(Normal.X * S, Normal.X * C / Ratio, Normal.Y - Slope * Point.X * C * Normal.X * C / Ratio).GetSafeNormal();
+				if (!bEllipse)
+				{
+					const FVector Round = Press.Pressed(Point.X, Point.Y, Angle + Step) - Press.Pressed(Point.X, Point.Y, Angle - Step);
+					const FVector Up = Press.Pressed(Point.X + Step * Along.X, Point.Y + Step * Along.Y, Angle)
+						- Press.Pressed(Point.X - Step * Along.X, Point.Y - Step * Along.Y, Angle);
+					const FVector Cross = FVector::CrossProduct(Round, Up);
+					if (!Cross.IsNearlyZero(1e-20))
+					{
+						const FVector Found = Cross.GetSafeNormal();
+						// the side the turned surface's own normal faces
+						Facing = FVector::DotProduct(Found, FVector(Normal.X * S, Normal.X * C, Normal.Y)) >= 0.0 ? Found : -Found;
+					}
+				}
 				Out.Add(Mesh.AddVertex(Position, Facing.IsNearlyZero() ? FVector::UpVector : Facing, FVector2D(ReferenceRadius * Angle, V)));
 			}
 			return Out;

@@ -1,11 +1,11 @@
 {
   "$sources": [
     "Sections of the Tianqing case's monochromes (Ding, Jun, Guan, Jian, Longquan): the turned outlines as the stage's sheet gives them (Docs/Stages/chenghuai.md, section 8: 'ceramics from the catalogue, turned profiles windows/SourceArt/Textures/ch_vessels.json scaled to them'), each traced from the Metropolitan Museum's open-access photograph of a vessel of its type (windows/Scripts/chenghuai_vessels.py): [radius, height] in metres from the centre of the foot, out along the underside, up the outside, over the lip and down the inside to the axis, the solid on the left. Art scales each to the plan's size (the catalogue's).",
-    "Sections of the Changnan case's vessels and the Ru basin (grade 'derived'): derived from each vessel's own photographs in the collection (assets/ceramics/<work>/, credited in its CREDITS.md) by MuseeVision/Scripts/vessels.py, each vessel's derivation written in its record: the silhouette against its plain ground, the camera fitted to the rim's and foot's ellipses (correcting the photograph's perspective), scaled to the museum's height and checked against its published diameter (turned by Art at one scale, the plan's height over its own, so it keeps its photographs' proportion: the plan gives its width as the section's; a widest diameter further than diameterTolerance, 2 per cent, from the museum's is a departure its record explains, `departure`, or make and Musee.Art.PaintedVessel find it), a ring for each row of the photograph, kept within two pixels of it (so fillets and lips keep their shape); the inside a wall's thickness in from the outside along its normal (`wallMeters`: a thin-potted vessel's its lip's, read from its photograph; any other's Data/Art/Ware.json's rule), the section checked to cross itself nowhere and its wall nowhere thinner than half of it. `museum` is the museum's record of the vessel's size; `outside` the section's first and last points of its outside. The wucai jar's foot and the collar's lower line, lost against the ground in its own shadow, are measured on its bottom view (a camera on its axis). The Ru basin's `feet` are its four cloud-scroll feet traced from its base's photograph, each an outline [across, front to back] stood up to their height.",
+    "Sections of the Changnan case's vessels and the Ru basin (grade 'derived'): derived from each vessel's own photographs in the collection (assets/ceramics/<work>/, credited in its CREDITS.md) by MuseeVision/Scripts/vessels.py, each vessel's derivation written in its record: the silhouette against its plain ground, the camera fitted to the rim's and foot's ellipses (correcting the photograph's perspective), scaled to the museum's height and checked against its published diameter (turned by Art at one scale, the plan's height over its own, so it keeps its photographs' proportion: the plan gives its width as the section's; a widest diameter further than diameterTolerance, 2 per cent, from the museum's is a departure its record explains, `departure`, or make and Musee.Art.PaintedVessel find it), a ring for each row of the photograph, kept within two pixels of it (so fillets and lips keep their shape); the inside a wall's thickness in from the outside along its normal (`wallMeters`: a thin-potted vessel's its lip's, read from its photograph; any other's Data/Art/Ware.json's rule), the section checked to cross itself nowhere and its wall nowhere thinner than half of it. `museum` is the museum's record of the vessel's size; `outside` the section's first and last points of its outside. The wucai jar's foot and the collar's lower line, lost against the ground in its own shadow, are measured on its bottom view (a camera on its axis). The Ru basin's `feet` are its four cloud-scroll feet traced from its base's photograph, each an outline [across, front to back] stood up to their height, within its underside. Its `plan` is the rounded oblong its photographs show: a superellipse's exponent at the foot and at the mouth, each fitted to the outline its photograph shows (the base's flange, the oblique photograph's lip), and each outline as traced in shares of its half-axes, which Art's pressing follows and Musee.Art.PaintedVessel checks the turned mesh against. A painted vessel's `once` is what it carries once (the Xuande jar's reign mark), over which no band's repeat may reach.",
     "Views (a painted vessel's): each photograph's camera as the derivation found it (bearing from the vessel's front towards its right, distance from its axis and height above its foot in metres, pitch down, focal length and optical axis in the photograph's pixels; a view along the axis, a bottom photographed from under the vessel, stands at distance 0 pitched -90, its bearing its photograph's turn about the axis); a further view is placed by registering its painting on the others' where they overlap, or where a bottom view sees a band all round (the wucai jar's DP342699), by registering each view's band on the bottom view's, its camera the one its own silhouette fixes (fitPixels, the rms of its silhouette's miss; the bottom view's, the spread of its rings), and composed only where its painting lies on theirs within 5 mm in every band of height they share (a view that doesn't is listed under `unused`, with the numbers); `placement` says how its bearing was found (fitted, registered, or unverified where its painting shares nothing with the first view's) and `overlaps` the share of the outside it sees with each other view and their correlation there, as `registration` measures them: Musee.Art.PaintedVessel measures them again from the record's cameras and the photographs (Art, Vessel/VesselDecoration.h, PlacementFaults), so a view turned from where its evidence placed it is found. Bands: the painted bands of ornament whose repeat is known, carried round where no view sees them: a count read by eye on the photographs, where the measured repeat (the autocorrelation of the band's colour where the views see it, at a peak, not the search's bound, over at least a fifth of what is seen, at a correlation of 0.5 or more) is not trusted or gives the same count to within a quarter of a repeat; a plain line; or the measured repeat alone where it comes within a quarter of a whole number of repeats a turn; `reading` says which. A band whose repeat isn't known, or whose count the photographs don't settle (the eye's count and the measured repeat disagreeing), is not listed, and where no view sees it the glaze is left (each derivation names them).",
     "Stand: the carved phoebe stand a vessel stands on where its plan says `stand`, as the sheet gives it (Data/Stages/chenghuai/Hang.json, the cases' notes: radius 1.25 x the foot, 0.028 high under a vessel 0.20 tall, else 0.04), in the case's phoebe (Data/Stages/chenghuai/Finishes.json chenghuai.case.phoebe).",
     "creaseDegrees: a section known only by its traced points turns smoothly where it turns less than 20 degrees from one point to the next and keeps an arris where it turns more (the lip's and the foot ring's edges): the museum's rule for a path known only by its points (Form's kernel, Tolerances.h, CreaseAngleRadians, from the as-built museum).",
-    "Composition (Art, Vessel/VesselDecoration.h): a view lends its colour wherever it sees the surface, obliquely too: where the surface faces its camera, its line of sight passes no other part of the vessel, and the place shows inside the vessel's silhouette in its photograph by its camera's miss (its fitPixels) and 2 px more (edgePixels, an edge's blur), so no view lends the ground beyond the vessel; its weight the square of the cosine between the surface's normal and its line of sight, coming in over 1 mm (clearanceMeters) as its sight clears the silhouette's margin and the vessel, so where a view's sight ends it fades rather than stopping at a seam. Each photograph is divided by its white: its hue that of the samples within 5 per cent of the 0.9 quantile of the lightness it shows where it sees the outside within 37 degrees of face on (whiteSquareness 0.8: a painted porcelain's ground is its glaze, most of what a view sees there; all it sees, where it sees too little so squarely), its lightness a plane in the surface's normal and in how squarely the view sees it (the glaze darkening or brightening towards the silhouette as the lamps round the camera light it), fitted to the plain glaze it shows wherever it sees it (samples whose channels spread no more than a quarter of their largest, glazeChroma 0.25, and no darker than 0.4 of its white, glazeLightness), taking off the photograph's shading, never below 0.2 of the white (shadeFloor). A sample 1.15 times its white is the lamp's reflection in the glaze, lent at 0.05 of its weight. The views alone give the colour from a summed weight of 0.04 (one view within 78 degrees of face on, fullWeight, as far round as a view's detail still lines up with a neighbour's: registration's squarenessCut): over the last 12 degrees to the silhouette, where one of its pixels covers more than five times the surface and the glaze's own shading falls away steeply, a view's colour fades into a band's repeats or the glaze, so its sight ends without a seam; the glaze is left whole only where no view sees the surface. The decoration is composed at up to 16000 px a metre, the finest the collection's photographs resolve (the chicken cup's), and at most 8192 px across (Art's WorkImageMaxPixels).",
+    "Composition (Art, Vessel/VesselDecoration.h): a view lends its colour wherever it sees the surface, obliquely too: where the surface faces its camera, its line of sight passes no other part of the vessel, and the place shows inside the vessel's silhouette in its photograph by its camera's miss (its fitPixels) and 2 px more (edgePixels, an edge's blur), so no view lends the ground beyond the vessel; its weight the square of the cosine between the surface's normal and its line of sight, coming in over 1 mm (clearanceMeters) as its sight clears the silhouette's margin and the vessel, so where a view's sight ends it fades rather than stopping at a seam. Each photograph is divided by its white: its hue that of the samples within 5 per cent of the 0.9 quantile of the lightness it shows where it sees the outside within 37 degrees of face on (whiteSquareness 0.8: a painted porcelain's ground is its glaze, most of what a view sees there; all it sees, where it sees too little so squarely); its lightness at each place the 0.9 quantile (whiteQuantile) of the glaze it shows round that place, read on a grid over the outside (a gallery's light falling off down a vase, a cup's wall darkening as it turns under, are the glaze's own shading): the glaze the samples whose channels, that hue divided out, spread no more than a quarter of their largest (glazeChroma 0.25), no darker than 0.15 of its white (shadeFloor) and, the white round them once known, no darker than 0.6 of it (glazeLightness: a dark stroke is painting), the white spread from the glaze nearby where a band is painted solid, never below shadeFloor of the white; so the painting keeps its darkness against its own ground. Two views whose paintings lie more than 5 mm apart where they overlap (their overlap's offsetMeters over blendMeters) are not blended, which would show the painting twice: each keeps its own side, and they meet at a seam run where their paintings agree best, cross-faded over 2 mm (seamMeters). A sample 1.15 times its white is the lamp's reflection in the glaze, lent at 0.05 of its weight. The views alone give the colour from a summed weight of 0.04 (one view within 78 degrees of face on, fullWeight, as far round as a view's detail still lines up with a neighbour's: registration's squarenessCut): over the last 12 degrees to the silhouette, where one of its pixels covers more than five times the surface and the glaze's own shading falls away steeply, a view's colour fades into a band's repeats or the glaze, so its sight ends without a seam; the glaze is left whole only where no view sees the surface. The decoration is composed at up to 16000 px a metre, the finest the collection's photographs resolve (the chicken cup's), and at most 8192 px across (Art's WorkImageMaxPixels).",
     "Registration (MuseeVision/Scripts/vessels.py, which reads it; Art's PlacementFaults): a view is unwrapped on a grid of 720 angles round and 240 heights up the outside (azimuthSteps, heightSteps), weighted from nothing where it sees a cell 78 degrees off face on to one face on (squarenessCut 0.2: its coarse detail still lines up with a neighbour's there, stretched fivefold), a placed view's overlaps with the others measured wherever both see the surface at all (overlapCut 0, as the composition sees it), its detail its lightness (CIE L*) band-passed between blurs of 3 and 15 cells (fineCells, coarseCells: the painting's strokes, not its shading or the photograph's grain); two views' correlation is measured where they share at least 0.02 of the grid (leastShare), and 0.45 is a genuine overlap's (genuine). Measured again from the record's cameras and photographs, a view's overlaps stand within a tenth of their recorded share (shareTolerance 0.1) and 0.05 of their recorded correlation (correlationTolerance 0.05): the stored section's rounding and the photographs' resampling move them by a few thousandths of share and a hundredth or two of correlation; a view turned a quarter turn from its place overlaps its neighbours by shares several times off, or none, or its painting no longer lies on theirs."
   ],
   "$units": {
@@ -41,11 +41,13 @@
     "whiteSquareness": 0.8,
     "whiteQuantile": 0.9,
     "glazeChroma": 0.25,
-    "glazeLightness": 0.4,
-    "shadeFloor": 0.2,
+    "glazeLightness": 0.6,
+    "shadeFloor": 0.15,
     "highlightOverWhite": 1.15,
     "highlightWeight": 0.05,
     "fullWeight": 0.04,
+    "blendMeters": 0.005,
+    "seamMeters": 0.002,
     "mostPixelsPerMeter": 16000.0,
     "mostPixels": 8192
   },
@@ -1461,302 +1463,10 @@
       ]
     },
     {
-      "work": "chinese-xuande-jar",
-      "source": "The Metropolitan Museum of Art, 37.191.1, Jar with dragon: H. 48.3 cm, Diam. 48.3 cm (the order K9 table)",
-      "grade": "derived",
-      "derivation": "Section derived from DP-32251-001.jpg: the silhouette against its plain ground, its edges on the photograph's strongest steps; the camera (2.19 m off, 0.78 m up, pitched 13.5 deg, focal 9621 px) fitted so the rim's back edge, the foot's front edge and their widths fall where the photograph shows them (the section's image strays from the silhouette by 1.8 px rms), which corrects the photograph's perspective; each height's ring turned until its image meets the silhouette, a ring for each row of the photograph, scaled so the height is the museum's 48.3 cm; the outside kept within 0.45 mm of it, so its fillets and its lip keep their shape. Check: widest diameter 48.65 cm (museum 48.3 cm); the rim's outer radius 107.0 mm from the silhouette (the rim's fitted ellipse 107.5). Underside and inside a wall's thickness in from the outside, the wall Data/Art/Ware.json's, 6.0 mm. MuseeVision/Scripts/vessels.py. Decoration: each further view placed by registering its painting, unwrapped round the axis, on the others' where they overlap, its camera its own silhouette's (fitPixels), and kept only where its painting lies on theirs within 0.5 cm in every band of height they share; a view whose painting overlaps none of the first view's is placed unverified. The views composed see 42% of the outside (all they see of it, obliquely too, inside their silhouettes by their cameras' misses and 2 px); where none does, a band whose repeat is known is carried round from where it is seen (its `reading`), and elsewhere the glaze is left.",
-      "museum": {
-        "heightMeters": 0.483,
-        "diameterMeters": 0.483
-      },
-      "section": [
-        [
-          0.0,
-          0.006
-        ],
-        [
-          0.10839,
-          0.006
-        ],
-        [
-          0.10839,
-          0.0
-        ],
-        [
-          0.11439,
-          0.0
-        ],
-        [
-          0.12456,
-          0.00022
-        ],
-        [
-          0.12526,
-          0.00585
-        ],
-        [
-          0.13421,
-          0.03509
-        ],
-        [
-          0.13868,
-          0.04635
-        ],
-        [
-          0.14637,
-          0.06216
-        ],
-        [
-          0.19236,
-          0.1332
-        ],
-        [
-          0.20031,
-          0.15118
-        ],
-        [
-          0.21093,
-          0.16808
-        ],
-        [
-          0.21942,
-          0.18605
-        ],
-        [
-          0.2224,
-          0.1945
-        ],
-        [
-          0.22482,
-          0.20706
-        ],
-        [
-          0.23105,
-          0.22114
-        ],
-        [
-          0.23733,
-          0.23825
-        ],
-        [
-          0.23932,
-          0.2506
-        ],
-        [
-          0.24278,
-          0.26143
-        ],
-        [
-          0.24325,
-          0.26684
-        ],
-        [
-          0.24205,
-          0.27854
-        ],
-        [
-          0.24298,
-          0.29543
-        ],
-        [
-          0.24244,
-          0.3041
-        ],
-        [
-          0.23931,
-          0.31644
-        ],
-        [
-          0.23786,
-          0.32965
-        ],
-        [
-          0.2335,
-          0.34481
-        ],
-        [
-          0.22145,
-          0.36799
-        ],
-        [
-          0.20071,
-          0.39333
-        ],
-        [
-          0.19332,
-          0.40026
-        ],
-        [
-          0.1853,
-          0.40611
-        ],
-        [
-          0.15622,
-          0.42214
-        ],
-        [
-          0.14104,
-          0.42842
-        ],
-        [
-          0.12528,
-          0.43318
-        ],
-        [
-          0.12024,
-          0.43557
-        ],
-        [
-          0.10855,
-          0.43817
-        ],
-        [
-          0.10413,
-          0.44076
-        ],
-        [
-          0.10411,
-          0.4438
-        ],
-        [
-          0.103,
-          0.44531
-        ],
-        [
-          0.10226,
-          0.449
-        ],
-        [
-          0.10194,
-          0.45614
-        ],
-        [
-          0.10392,
-          0.45874
-        ],
-        [
-          0.10372,
-          0.46156
-        ],
-        [
-          0.10466,
-          0.46567
-        ],
-        [
-          0.1039,
-          0.47282
-        ],
-        [
-          0.10713,
-          0.4778
-        ],
-        [
-          0.10762,
-          0.47978
-        ],
-        [
-          0.10486,
-          0.483
-        ],
-        [
-          0.10163,
-          0.48024
-        ],
-        [
-          0.0981,
-          0.47435
-        ],
-        [
-          0.09865,
-          0.46589
-        ],
-        [
-          0.09769,
-          0.46074
-        ],
-        [
-          0.09617,
-          0.45789
-        ],
-        [
-          0.09595,
-          0.45338
-        ],
-        [
-          0.09639,
-          0.44769
-        ],
-        [
-          0.09832,
-          0.43916
-        ],
-        [
-          0.10039,
-          0.43602
-        ],
-        [
-          0.10425,
-          0.43366
-        ],
-        [
-          0.10425,
-          0.433
-        ],
-        [
-          0.0,
-          0.433
-        ]
-      ],
-      "outside": [
-        3,
-        46
-      ],
-      "wallMeters": 0.006,
-      "views": [
-        {
-          "image": "assets/ceramics/chinese-xuande-jar/DP-32251-001.jpg",
-          "azimuthDegrees": 0.0,
-          "distanceMeters": 2.18878,
-          "heightMeters": 0.77578,
-          "pitchDegrees": 13.4609,
-          "focalPixels": 9621.06,
-          "axisPixels": [
-            1497.14,
-            2000.0
-          ],
-          "fitPixels": 1.82,
-          "placement": "fitted"
-        }
-      ],
-      "coverage": 0.424,
-      "bands": [
-        {
-          "name": "the foot's lotus panels",
-          "fromMeters": 0.0,
-          "toMeters": 0.0773,
-          "periodDegrees": 15.652173913043478,
-          "reading": "read by eye: 23 panels: on DP-32251-001 seven panels' tips stand 15.6 degrees apart round the jar; no measured repeat trusted (best self-correlation 0.48, under 0.50)"
-        },
-        {
-          "name": "the neck's cloud scroll",
-          "fromMeters": 0.4299,
-          "toMeters": 0.4733,
-          "periodDegrees": 45.0,
-          "reading": "read by eye: 8 clouds: on DP-32251-001 three of the neck's clouds stand 44 degrees apart; no measured repeat trusted (best self-correlation 0.49, under 0.50)"
-        }
-      ],
-      "unused": [
-        {
-          "image": "assets/ceramics/chinese-xuande-jar/MET_DT5083.jpg",
-          "why": "placed on DP-32251-001.jpg's painting, its painting lies off it band by band up the height (0.0-0.2 H -1.4 cm (correlation 0.77), 0.2-0.4 H -3.8 cm (correlation 0.77), 0.4-0.6 H -3.6 cm (correlation 0.70), 0.6-0.8 H -2.6 cm (correlation 0.79), 0.8-1.0 H -1.0 cm (correlation 0.64); over 0.5 cm): composed, it would double the painting"
-        }
-      ]
-    },
-    {
       "work": "chinese-wucai-jar",
       "source": "The Metropolitan Museum of Art, 17.127.2, Jar with carp in lotus pond: H. 23.2 cm (no diameter published)",
       "grade": "derived",
-      "derivation": "Section derived from DP342697.jpg: the silhouette against its plain ground, its edges on the photograph's strongest steps; the camera (1.72 m off, 0.42 m up, pitched 9.1 deg, focal 14140 px) fitted so the rim's back edge, the foot's front edge and their widths fall where the photograph shows them (the section's image strays from the silhouette by 3.2 px rms), which corrects the photograph's perspective; each height's ring turned until its image meets the silhouette, a ring for each row of the photograph, scaled so the height is the museum's 23.2 cm; the outside kept within 0.24 mm of it, so its fillets and its lip keep their shape. Check: widest diameter 23.67 cm (museum none published); the rim's outer radius 70.9 mm from the silhouette (the rim's fitted ellipse 68.5). Underside and inside a wall's thickness in from the outside, the wall Data/Art/Ware.json's, 6.0 mm. MuseeVision/Scripts/vessels.py. Below 12% of the height the side view's edge is lost in the jar's own shadow: there the section runs through the rings the bottom view DP342699.jpg measures, a pinhole on the axis 0.590 m under the collar's upper line with a focal length of 6113 px (fitted to that line's ring, 762.3 px about the axis, at its height 37.2 mm on the section, and to the silhouette's, 1037.5 px): the collar's lower line at 7.2 mm up, 61.3 mm from the axis (its ring 669.5 px, spread 3.0), and the foot's outer edge 57.6 mm (its unglazed rim's ring 637.8 px, spread 3.0); the camera is held to that foot, and the foot's front edge on the axis read by eye (row 3193), where the shadow takes the mask lower. Decoration: each view placed round the jar by the bottom view, which sees the collar and the pond above it all round: each side view's collar (between its own lines) and pond laid on the ring by their colours (red, yellow, green and blue enamel and dark strokes), its bearing the ring's angle under its front less the first view's (DP342697.jpg under 1.0 deg of the ring, correlation 0.53 against 0.26 at the next best turn; DP342698.jpg under 186.0 deg of the ring, correlation 0.58 against 0.19 at the next best turn; DP342700.jpg under 97.3 deg of the ring, correlation 0.48 against 0.28 at the next best turn); its camera its own silhouette's (fitPixels), and kept only where its painting lies on the views it overlaps within 0.5 cm in every band of height they share. The views composed see 93% of the outside (all they see of it, obliquely too, inside their silhouettes by their cameras' misses and 2 px); where none does, a band whose repeat is known is carried round from where it is seen (its `reading`), and elsewhere the glaze is left. Left in the glaze where no view sees them: the foot's cloud collar (13 clouds, which DP342699 shows all round the jar, their colours running yellow, blue, red, green four clouds at a time with one red cloud more: no whole number of repeats carries them round, so where no side view sees the collar it is left in the glaze); the shoulder's lappets (no measured repeat trusted (best self-correlation 0.44, under 0.50): where no view sees it, it is left in the glaze); the neck's scroll (no measured repeat trusted (best self-correlation 0.31, under 0.50): where no view sees it, it is left in the glaze).",
+      "derivation": "Section derived from DP342697.jpg: the silhouette against its plain ground, its edges on the photograph's strongest steps; the camera (1.72 m off, 0.42 m up, pitched 9.1 deg, focal 14140 px) fitted so the rim's back edge, the foot's front edge and their widths fall where the photograph shows them (the section's image strays from the silhouette by 3.2 px rms), which corrects the photograph's perspective; each height's ring turned until its image meets the silhouette, a ring for each row of the photograph, scaled so the height is the museum's 23.2 cm; the outside kept within 0.24 mm of it, so its fillets and its lip keep their shape. Check: widest diameter 23.67 cm (museum none published); the rim's outer radius 70.9 mm from the silhouette (the rim's fitted ellipse 68.5). Underside and inside a wall's thickness in from the outside, the wall Data/Art/Ware.json's, 6.0 mm. MuseeVision/Scripts/vessels.py. Below 12% of the height the side view's edge is lost in the jar's own shadow: there the section runs through the rings the bottom view DP342699.jpg measures, a pinhole on the axis 0.590 m under the collar's upper line with a focal length of 6113 px (fitted to that line's ring, 762.3 px about the axis, at its height 37.2 mm on the section, and to the silhouette's, 1037.5 px): the collar's lower line at 7.2 mm up, 61.3 mm from the axis (its ring 669.5 px, spread 3.0), and the foot's outer edge 57.6 mm (its unglazed rim's ring 637.8 px, spread 3.0); the camera is held to that foot, and the foot's front edge on the axis read by eye (row 3193), where the shadow takes the mask lower. Decoration: each view placed round the jar by the bottom view, which sees the collar and the pond above it all round: each side view's collar (between its own lines) and pond laid on the ring by their colours (red, yellow, green and blue enamel and dark strokes), its bearing the ring's angle under its front less the first view's (DP342697.jpg under 1.0 deg of the ring, correlation 0.53 against 0.26 at the next best turn; DP342698.jpg under 186.0 deg of the ring, correlation 0.58 against 0.19 at the next best turn; DP342700.jpg under 97.3 deg of the ring, correlation 0.48 against 0.28 at the next best turn); its camera its own silhouette's (fitPixels), and kept only where its painting lies on the views it overlaps within 0.5 cm in every band of height they share. The views composed see 93% of the outside (all they see of it, obliquely too, inside their silhouettes by their cameras' misses and 2 px); where none does, a band whose repeat is known is carried round from where it is seen (its `reading`), and elsewhere the glaze is left. Where two views overlap, their paintings' offset is measured as the composition weighs them (the median of the blocks that lie on the other view at a correlation of 0.8 or better): DP342698.jpg on DP342700.jpg 6.9 mm; DP342700.jpg on DP342697.jpg 6.5 mm; DP342700.jpg on DP342698.jpg 7.0 mm. Further apart than 0.5 cm, blended they would show the painting twice, so each keeps its own side of the overlap and they meet at a seam run where their paintings agree best, cross-faded over 2 mm. Left in the glaze where no view sees them: the foot's cloud collar (13 clouds, which DP342699 shows all round the jar, their colours running yellow, blue, red, green four clouds at a time with one red cloud more: no whole number of repeats carries them round, so where no side view sees the collar it is left in the glaze); the shoulder's lappets (no measured repeat trusted (best self-correlation 0.44, under 0.50): where no view sees it, it is left in the glaze); the neck's scroll (no measured repeat trusted (best self-correlation 0.31, under 0.50): where no view sees it, it is left in the glaze).",
       "museum": {
         "heightMeters": 0.232
       },
@@ -2003,7 +1713,8 @@
             {
               "image": "DP342700.jpg",
               "share": 0.0488,
-              "correlation": 0.491
+              "correlation": 0.491,
+              "offsetMeters": 0.0069
             }
           ]
         },
@@ -2024,12 +1735,14 @@
             {
               "image": "DP342697.jpg",
               "share": 0.0381,
-              "correlation": 0.378
+              "correlation": 0.378,
+              "offsetMeters": 0.0065
             },
             {
               "image": "DP342698.jpg",
               "share": 0.0488,
-              "correlation": 0.491
+              "correlation": 0.491,
+              "offsetMeters": 0.007
             }
           ]
         }
@@ -2984,7 +2697,7 @@
       "work": "chinese-ru-basin",
       "source": "National Palace Museum, Taipei, 故瓷017851, narcissus basin, Ru ware: H. 6.9 cm; mouth 23.0 x 16.4 cm; foot 19.3 x 12.9 cm (the order K9 table)",
       "grade": "derived",
-      "derivation": "Section derived from the museum's sizes and the proportions the oblique photograph 汝窯_青瓷無紋水仙盆.png shows at the basin's left end, read by eye on its pixel grid (MuseeVision/Scripts/vessels.py, RU): feet 0.13, flange 0.20 and wall 0.67 of the height; the flange's face the museum's foot, the wall stepping in 2.2 mm above it and flaring to the mouth; the wall Data/Art/Ware.json's. No photograph shows the section edge on, so no camera is fitted: the photograph's foreshortening falls on every height alike and cancels in the shares. Turned in the round on the long half-axis and pressed front to back, as a potter presses a thrown round to an oval: at the lip to the mouth's 23.0 x 16.4 cm and at the flange's face to the foot's 19.3 x 12.9, the pressing running evenly up the wall between them (pressed to the mouth's ratio all the way down, the foot would be 13.8 across its short axis; a wall that flared as far at the ends as at the sides would give 12.7; the museum's 12.9 lies between, and no photograph shows how the wall's flare changes round the oval). Four cloud-scroll feet traced from the base photograph 北宋汝窯青瓷無紋水仙盆_底部.jpg, each hugging a corner of the base, 9.0 mm high. Glaze colour from the lit outside wall, face on (pixels 1100..1500 x 1350..1500), relative to the photograph's white.",
+      "derivation": "Section derived from the museum's sizes and the proportions the oblique photograph 汝窯_青瓷無紋水仙盆.png shows at the basin's left end, read by eye on its pixel grid (MuseeVision/Scripts/vessels.py, RU): feet 0.13, flange 0.20 and wall 0.67 of the height; the flange's face the museum's foot, the wall stepping in 2.2 mm above it and flaring to the mouth; the wall Data/Art/Ware.json's. No photograph shows the section edge on, so no camera is fitted: the photograph's foreshortening falls on every height alike and cancels in the shares. Turned in the round on the long half-axis and pressed front to back, as a potter presses a thrown round to an oval: at the lip to the mouth's 23.0 x 16.4 cm and at the flange's face to the foot's 19.3 x 12.9, the pressing running evenly up the wall between them (pressed to the mouth's ratio all the way down, the foot would be 13.8 across its short axis; a wall that flared as far at the ends as at the sides would give 12.7; the museum's 12.9 lies between, and no photograph shows how the wall's flare changes round the oval). Its plan is a rounded oblong, as its photographs show it: a superellipse |x/a|^n + |y/b|^n = 1, pressed so at every height. At the flange's face n = 2.35, fitted to the flange's outer edge on the base photograph 北宋汝窯青瓷無紋水仙盆_底部.jpg (611 of 720 rays; the rest are where the feet hide the edge; 3.6 px rms, the flange 1674 x 1118 px, 1.498 to 1 against the museum's 1.496); at the lip n = 2.36, fitted to the white lip on 汝窯_青瓷無紋水仙盆.png through a pinhole 0.52 m off, 26.4 deg up (404 of 546 points, 2.0 px rms); an ellipse (n = 2) misses the lip by 7.6 px rms, and n = 3 by 9.9. The exponent runs evenly up the wall between them. The underside runs out to the flange's face over a 1 mm arris. Four cloud-scroll feet traced from the base photograph, each hugging a corner of the base, 9.0 mm high, laid in shares of the fitted flange (the tracing reaches 1.066 of it at the corners, where the feet's own faces show beyond the flange's edge; a foot stands under the base, so they are brought within its underside). Glaze colour from the lit outside wall, face on (pixels 1100..1500 x 1350..1500), relative to the photograph's white.",
       "museum": {
         "heightMeters": 0.069,
         "mouthAxesMeters": [
@@ -3002,12 +2715,12 @@
           0.00897
         ],
         [
-          0.0925,
+          0.0955,
           0.00897
         ],
         [
           0.0965,
-          0.01197
+          0.00997
         ],
         [
           0.0965,
@@ -3093,293 +2806,1075 @@
           {
             "outline": [
               [
-                0.03683,
-                0.0513
+                0.04034,
+                0.05324
               ],
               [
-                0.03726,
-                0.04971
+                0.04092,
+                0.0518
               ],
               [
-                0.04926,
-                0.04551
+                0.05475,
+                0.04891
               ],
               [
-                0.05379,
-                0.04384
+                0.05994,
+                0.04747
               ],
               [
-                0.05788,
-                0.04099
+                0.06455,
+                0.04459
               ],
               [
-                0.06225,
-                0.03782
+                0.06916,
+                0.04112
               ],
               [
-                0.07415,
-                0.02853
+                0.07954,
+                0.03016
               ],
               [
-                0.08007,
-                0.03174
+                0.08583,
+                0.0336
               ],
               [
-                0.08008,
-                0.03299
+                0.08507,
+                0.03462
               ],
               [
-                0.07325,
-                0.04138
+                0.07717,
+                0.04291
               ],
               [
-                0.07093,
-                0.04262
+                0.07527,
+                0.04447
               ],
               [
-                0.06867,
-                0.04629
+                0.07143,
+                0.04728
               ],
               [
-                0.06502,
-                0.04959
+                0.067,
+                0.05005
               ],
               [
-                0.06051,
-                0.05257
+                0.06208,
+                0.05265
               ],
               [
-                0.05552,
-                0.05453
+                0.05736,
+                0.05476
               ],
               [
-                0.05,
-                0.05576
+                0.05252,
+                0.05661
               ],
               [
-                0.0377,
-                0.05761
+                0.04092,
+                0.0593
               ]
             ]
           },
           {
             "outline": [
               [
-                -0.0377,
-                0.05761
+                -0.04092,
+                0.0593
               ],
               [
-                -0.05,
-                0.05576
+                -0.05252,
+                0.05661
               ],
               [
-                -0.05552,
-                0.05453
+                -0.05736,
+                0.05476
               ],
               [
-                -0.06051,
-                0.05257
+                -0.06208,
+                0.05265
               ],
               [
-                -0.06502,
-                0.04959
+                -0.067,
+                0.05005
               ],
               [
-                -0.06867,
-                0.04629
+                -0.07143,
+                0.04728
               ],
               [
-                -0.07093,
-                0.04262
+                -0.07527,
+                0.04447
               ],
               [
-                -0.07325,
-                0.04138
+                -0.07717,
+                0.04291
               ],
               [
-                -0.08008,
-                0.03299
+                -0.08507,
+                0.03462
               ],
               [
-                -0.08007,
-                0.03174
+                -0.08583,
+                0.0336
               ],
               [
-                -0.07415,
-                0.02853
+                -0.07954,
+                0.03016
               ],
               [
-                -0.06225,
-                0.03782
+                -0.06916,
+                0.04112
               ],
               [
-                -0.05788,
-                0.04099
+                -0.06455,
+                0.04459
               ],
               [
-                -0.05379,
-                0.04384
+                -0.05994,
+                0.04747
               ],
               [
-                -0.04926,
-                0.04551
+                -0.05475,
+                0.04891
               ],
               [
-                -0.03726,
-                0.04971
+                -0.04092,
+                0.0518
               ],
               [
-                -0.03683,
-                0.0513
+                -0.04034,
+                0.05324
               ]
             ]
           },
           {
             "outline": [
               [
-                -0.03683,
-                -0.0513
+                -0.04034,
+                -0.05324
               ],
               [
-                -0.03726,
-                -0.04971
+                -0.04092,
+                -0.0518
               ],
               [
-                -0.04926,
-                -0.04551
+                -0.05475,
+                -0.04891
               ],
               [
-                -0.05379,
-                -0.04384
+                -0.05994,
+                -0.04747
               ],
               [
-                -0.05788,
-                -0.04099
+                -0.06455,
+                -0.04459
               ],
               [
-                -0.06225,
-                -0.03782
+                -0.06916,
+                -0.04112
               ],
               [
-                -0.07415,
-                -0.02853
+                -0.07954,
+                -0.03016
               ],
               [
-                -0.08007,
-                -0.03174
+                -0.08583,
+                -0.0336
               ],
               [
-                -0.08008,
-                -0.03299
+                -0.08507,
+                -0.03462
               ],
               [
-                -0.07325,
-                -0.04138
+                -0.07717,
+                -0.04291
               ],
               [
-                -0.07093,
-                -0.04262
+                -0.07527,
+                -0.04447
               ],
               [
-                -0.06867,
-                -0.04629
+                -0.07143,
+                -0.04728
               ],
               [
-                -0.06502,
-                -0.04959
+                -0.067,
+                -0.05005
               ],
               [
-                -0.06051,
-                -0.05257
+                -0.06208,
+                -0.05265
               ],
               [
-                -0.05552,
-                -0.05453
+                -0.05736,
+                -0.05476
               ],
               [
-                -0.05,
-                -0.05576
+                -0.05252,
+                -0.05661
               ],
               [
-                -0.0377,
-                -0.05761
+                -0.04092,
+                -0.0593
               ]
             ]
           },
           {
             "outline": [
               [
-                0.0377,
-                -0.05761
+                0.04092,
+                -0.0593
               ],
               [
-                0.05,
-                -0.05576
+                0.05252,
+                -0.05661
               ],
               [
-                0.05552,
-                -0.05453
+                0.05736,
+                -0.05476
               ],
               [
-                0.06051,
-                -0.05257
+                0.06208,
+                -0.05265
               ],
               [
-                0.06502,
-                -0.04959
+                0.067,
+                -0.05005
               ],
               [
-                0.06867,
-                -0.04629
+                0.07143,
+                -0.04728
               ],
               [
-                0.07093,
-                -0.04262
+                0.07527,
+                -0.04447
               ],
               [
-                0.07325,
-                -0.04138
+                0.07717,
+                -0.04291
               ],
               [
-                0.08008,
-                -0.03299
+                0.08507,
+                -0.03462
               ],
               [
-                0.08007,
-                -0.03174
+                0.08583,
+                -0.0336
               ],
               [
-                0.07415,
-                -0.02853
+                0.07954,
+                -0.03016
               ],
               [
-                0.06225,
-                -0.03782
+                0.06916,
+                -0.04112
               ],
               [
-                0.05788,
-                -0.04099
+                0.06455,
+                -0.04459
               ],
               [
-                0.05379,
-                -0.04384
+                0.05994,
+                -0.04747
               ],
               [
-                0.04926,
-                -0.04551
+                0.05475,
+                -0.04891
               ],
               [
-                0.03726,
-                -0.04971
+                0.04092,
+                -0.0518
               ],
               [
-                0.03683,
-                -0.0513
+                0.04034,
+                -0.05324
               ]
             ]
           }
         ]
+      },
+      "plan": {
+        "footExponent": 2.348,
+        "mouthExponent": 2.357,
+        "footOutline": [
+          [
+            0.9995,
+            0.0478
+          ],
+          [
+            0.9963,
+            0.1255
+          ],
+          [
+            0.9866,
+            0.2153
+          ],
+          [
+            0.9693,
+            0.3024
+          ],
+          [
+            0.9572,
+            0.3908
+          ],
+          [
+            0.9232,
+            0.4821
+          ],
+          [
+            0.8766,
+            0.5626
+          ],
+          [
+            0.8337,
+            0.6409
+          ],
+          [
+            0.7898,
+            0.7009
+          ],
+          [
+            0.5643,
+            0.8914
+          ],
+          [
+            0.4791,
+            0.9177
+          ],
+          [
+            0.3946,
+            0.9618
+          ],
+          [
+            0.3062,
+            0.978
+          ],
+          [
+            0.2165,
+            0.9878
+          ],
+          [
+            0.1312,
+            0.9915
+          ],
+          [
+            0.0435,
+            0.9945
+          ],
+          [
+            -0.0434,
+            0.995
+          ],
+          [
+            -0.1318,
+            0.9935
+          ],
+          [
+            -0.2171,
+            0.9861
+          ],
+          [
+            -0.3071,
+            0.9742
+          ],
+          [
+            -0.3964,
+            0.9572
+          ],
+          [
+            -0.4845,
+            0.9339
+          ],
+          [
+            -0.5604,
+            0.8883
+          ],
+          [
+            -0.6677,
+            0.812
+          ],
+          [
+            -0.7065,
+            0.7705
+          ],
+          [
+            -0.7691,
+            0.7067
+          ],
+          [
+            -0.8252,
+            0.6434
+          ],
+          [
+            -0.8859,
+            0.5624
+          ],
+          [
+            -0.9125,
+            0.4692
+          ],
+          [
+            -0.949,
+            0.3922
+          ],
+          [
+            -0.971,
+            0.3066
+          ],
+          [
+            -0.9832,
+            0.2171
+          ],
+          [
+            -0.9917,
+            0.1264
+          ],
+          [
+            -0.9991,
+            0.0483
+          ],
+          [
+            -1.0015,
+            -0.0438
+          ],
+          [
+            -0.9977,
+            -0.1358
+          ],
+          [
+            -0.9891,
+            -0.2138
+          ],
+          [
+            -0.9751,
+            -0.3034
+          ],
+          [
+            -0.9559,
+            -0.3905
+          ],
+          [
+            -0.9233,
+            -0.4838
+          ],
+          [
+            -0.8931,
+            -0.5349
+          ],
+          [
+            -0.7845,
+            -0.6881
+          ],
+          [
+            -0.7121,
+            -0.7578
+          ],
+          [
+            -0.636,
+            -0.8262
+          ],
+          [
+            -0.5575,
+            -0.8792
+          ],
+          [
+            -0.4778,
+            -0.9167
+          ],
+          [
+            -0.3999,
+            -0.961
+          ],
+          [
+            -0.311,
+            -0.9817
+          ],
+          [
+            -0.2194,
+            -0.9917
+          ],
+          [
+            -0.133,
+            -0.9977
+          ],
+          [
+            -0.0439,
+            -1.0002
+          ],
+          [
+            0.0439,
+            -0.9998
+          ],
+          [
+            0.1325,
+            -0.9966
+          ],
+          [
+            0.2172,
+            -0.9866
+          ],
+          [
+            0.3052,
+            -0.9702
+          ],
+          [
+            0.3927,
+            -0.9526
+          ],
+          [
+            0.4666,
+            -0.9389
+          ],
+          [
+            0.5597,
+            -0.8643
+          ],
+          [
+            0.638,
+            -0.8281
+          ],
+          [
+            0.7131,
+            -0.7745
+          ],
+          [
+            0.777,
+            -0.7125
+          ],
+          [
+            0.8326,
+            -0.6355
+          ],
+          [
+            0.8809,
+            -0.5609
+          ],
+          [
+            0.9232,
+            -0.4776
+          ],
+          [
+            0.9467,
+            -0.3952
+          ],
+          [
+            0.9683,
+            -0.3107
+          ],
+          [
+            0.9867,
+            -0.2239
+          ],
+          [
+            0.9981,
+            -0.1343
+          ],
+          [
+            1.0031,
+            -0.0434
+          ]
+        ],
+        "mouthOutline": [
+          [
+            0.9998,
+            0.0457
+          ],
+          [
+            0.9964,
+            0.1255
+          ],
+          [
+            0.9821,
+            0.2267
+          ],
+          [
+            0.9668,
+            0.3239
+          ],
+          [
+            0.9505,
+            0.3918
+          ],
+          [
+            0.9213,
+            0.4736
+          ],
+          [
+            0.8853,
+            0.5445
+          ],
+          [
+            0.8446,
+            0.6267
+          ],
+          [
+            0.7816,
+            0.6772
+          ],
+          [
+            0.7123,
+            0.764
+          ],
+          [
+            0.6171,
+            0.8245
+          ],
+          [
+            0.5541,
+            0.8973
+          ],
+          [
+            0.3948,
+            0.9615
+          ],
+          [
+            0.3097,
+            0.978
+          ],
+          [
+            0.2235,
+            1.0085
+          ],
+          [
+            0.1328,
+            1.0028
+          ],
+          [
+            0.0489,
+            1.0082
+          ],
+          [
+            -0.0058,
+            1.0252
+          ],
+          [
+            -0.8677,
+            0.6139
+          ],
+          [
+            -0.8907,
+            0.5514
+          ],
+          [
+            -0.9559,
+            0.3755
+          ],
+          [
+            -0.9712,
+            0.3007
+          ],
+          [
+            -1.0027,
+            0.0938
+          ],
+          [
+            -0.9992,
+            0.0395
+          ],
+          [
+            -0.9971,
+            -0.04
+          ],
+          [
+            -1.0002,
+            -0.1441
+          ],
+          [
+            -0.984,
+            -0.2197
+          ],
+          [
+            -0.5565,
+            -0.8736
+          ],
+          [
+            -0.4845,
+            -0.925
+          ],
+          [
+            -0.3967,
+            -0.9531
+          ],
+          [
+            -0.3082,
+            -0.9736
+          ],
+          [
+            -0.2179,
+            -0.9893
+          ],
+          [
+            -0.1319,
+            -0.9954
+          ],
+          [
+            -0.0439,
+            -0.9991
+          ],
+          [
+            0.045,
+            -0.9974
+          ],
+          [
+            0.1296,
+            -1.0046
+          ],
+          [
+            0.4776,
+            -0.924
+          ],
+          [
+            0.5617,
+            -0.8764
+          ],
+          [
+            0.6325,
+            -0.8268
+          ],
+          [
+            0.7055,
+            -0.7823
+          ],
+          [
+            0.774,
+            -0.716
+          ],
+          [
+            0.8408,
+            -0.6325
+          ],
+          [
+            0.8885,
+            -0.552
+          ],
+          [
+            0.9215,
+            -0.4851
+          ],
+          [
+            0.9528,
+            -0.386
+          ],
+          [
+            0.9745,
+            -0.3082
+          ],
+          [
+            0.9891,
+            -0.2274
+          ],
+          [
+            1.0022,
+            -0.1452
+          ],
+          [
+            0.9996,
+            -0.0355
+          ]
+        ]
       }
+    },
+    {
+      "work": "chinese-xuande-jar",
+      "source": "The Metropolitan Museum of Art, 37.191.1, Jar with dragon: H. 48.3 cm, Diam. 48.3 cm (the order K9 table)",
+      "grade": "derived",
+      "derivation": "Section derived from DP-32251-001.jpg: the silhouette against its plain ground, its edges on the photograph's strongest steps; the camera (2.19 m off, 0.78 m up, pitched 13.5 deg, focal 9621 px) fitted so the rim's back edge, the foot's front edge and their widths fall where the photograph shows them (the section's image strays from the silhouette by 1.8 px rms), which corrects the photograph's perspective; each height's ring turned until its image meets the silhouette, a ring for each row of the photograph, scaled so the height is the museum's 48.3 cm; the outside kept within 0.45 mm of it, so its fillets and its lip keep their shape. Check: widest diameter 48.65 cm (museum 48.3 cm); the rim's outer radius 107.0 mm from the silhouette (the rim's fitted ellipse 107.5). Underside and inside a wall's thickness in from the outside, the wall Data/Art/Ware.json's, 6.0 mm. MuseeVision/Scripts/vessels.py. Decoration: each further view placed by registering its painting, unwrapped round the axis, on the others' where they overlap, its camera its own silhouette's (fitPixels), and kept only where its painting lies on theirs within 0.5 cm in every band of height they share; a view whose painting overlaps none of the first view's is placed unverified. The views composed see 42% of the outside (all they see of it, obliquely too, inside their silhouettes by their cameras' misses and 2 px); where none does, a band whose repeat is known is carried round from where it is seen (its `reading`), and elsewhere the glaze is left.",
+      "museum": {
+        "heightMeters": 0.483,
+        "diameterMeters": 0.483
+      },
+      "section": [
+        [
+          0.0,
+          0.006
+        ],
+        [
+          0.10839,
+          0.006
+        ],
+        [
+          0.10839,
+          0.0
+        ],
+        [
+          0.11439,
+          0.0
+        ],
+        [
+          0.12456,
+          0.00022
+        ],
+        [
+          0.12526,
+          0.00585
+        ],
+        [
+          0.13421,
+          0.03509
+        ],
+        [
+          0.13868,
+          0.04635
+        ],
+        [
+          0.14637,
+          0.06216
+        ],
+        [
+          0.19236,
+          0.1332
+        ],
+        [
+          0.20031,
+          0.15118
+        ],
+        [
+          0.21093,
+          0.16808
+        ],
+        [
+          0.21942,
+          0.18605
+        ],
+        [
+          0.2224,
+          0.1945
+        ],
+        [
+          0.22482,
+          0.20706
+        ],
+        [
+          0.23105,
+          0.22114
+        ],
+        [
+          0.23733,
+          0.23825
+        ],
+        [
+          0.23932,
+          0.2506
+        ],
+        [
+          0.24278,
+          0.26143
+        ],
+        [
+          0.24325,
+          0.26684
+        ],
+        [
+          0.24205,
+          0.27854
+        ],
+        [
+          0.24298,
+          0.29543
+        ],
+        [
+          0.24244,
+          0.3041
+        ],
+        [
+          0.23931,
+          0.31644
+        ],
+        [
+          0.23786,
+          0.32965
+        ],
+        [
+          0.2335,
+          0.34481
+        ],
+        [
+          0.22145,
+          0.36799
+        ],
+        [
+          0.20071,
+          0.39333
+        ],
+        [
+          0.19332,
+          0.40026
+        ],
+        [
+          0.1853,
+          0.40611
+        ],
+        [
+          0.15622,
+          0.42214
+        ],
+        [
+          0.14104,
+          0.42842
+        ],
+        [
+          0.12528,
+          0.43318
+        ],
+        [
+          0.12024,
+          0.43557
+        ],
+        [
+          0.10855,
+          0.43817
+        ],
+        [
+          0.10413,
+          0.44076
+        ],
+        [
+          0.10411,
+          0.4438
+        ],
+        [
+          0.103,
+          0.44531
+        ],
+        [
+          0.10226,
+          0.449
+        ],
+        [
+          0.10194,
+          0.45614
+        ],
+        [
+          0.10392,
+          0.45874
+        ],
+        [
+          0.10372,
+          0.46156
+        ],
+        [
+          0.10466,
+          0.46567
+        ],
+        [
+          0.1039,
+          0.47282
+        ],
+        [
+          0.10713,
+          0.4778
+        ],
+        [
+          0.10762,
+          0.47978
+        ],
+        [
+          0.10486,
+          0.483
+        ],
+        [
+          0.10163,
+          0.48024
+        ],
+        [
+          0.0981,
+          0.47435
+        ],
+        [
+          0.09865,
+          0.46589
+        ],
+        [
+          0.09769,
+          0.46074
+        ],
+        [
+          0.09617,
+          0.45789
+        ],
+        [
+          0.09595,
+          0.45338
+        ],
+        [
+          0.09639,
+          0.44769
+        ],
+        [
+          0.09832,
+          0.43916
+        ],
+        [
+          0.10039,
+          0.43602
+        ],
+        [
+          0.10425,
+          0.43366
+        ],
+        [
+          0.10425,
+          0.433
+        ],
+        [
+          0.0,
+          0.433
+        ]
+      ],
+      "outside": [
+        3,
+        46
+      ],
+      "wallMeters": 0.006,
+      "views": [
+        {
+          "image": "assets/ceramics/chinese-xuande-jar/DP-32251-001.jpg",
+          "azimuthDegrees": 0.0,
+          "distanceMeters": 2.18878,
+          "heightMeters": 0.77578,
+          "pitchDegrees": 13.4609,
+          "focalPixels": 9621.06,
+          "axisPixels": [
+            1497.14,
+            2000.0
+          ],
+          "fitPixels": 1.82,
+          "placement": "fitted"
+        }
+      ],
+      "coverage": 0.424,
+      "bands": [
+        {
+          "name": "the foot's lotus panels",
+          "fromMeters": 0.0,
+          "toMeters": 0.0773,
+          "periodDegrees": 15.652173913043478,
+          "reading": "read by eye: 23 panels: on DP-32251-001 seven panels' tips stand 15.6 degrees apart round the jar; no measured repeat trusted (best self-correlation 0.48, under 0.50)"
+        },
+        {
+          "name": "the neck's cloud scroll",
+          "fromMeters": 0.4366,
+          "toMeters": 0.4806,
+          "periodDegrees": 45.0,
+          "reading": "read by eye: 8 clouds: on DP-32251-001 three of the neck's clouds stand 44 degrees apart; no measured repeat trusted (best self-correlation 0.49, under 0.50)"
+        }
+      ],
+      "unused": [
+        {
+          "image": "assets/ceramics/chinese-xuande-jar/MET_DT5083.jpg",
+          "why": "placed on DP-32251-001.jpg's painting, its painting lies off it band by band up the height (0.0-0.2 H -1.4 cm (correlation 0.77), 0.2-0.4 H -3.8 cm (correlation 0.77), 0.4-0.6 H -3.6 cm (correlation 0.70), 0.6-0.8 H -2.6 cm (correlation 0.79), 0.8-1.0 H -1.0 cm (correlation 0.64); over 0.5 cm): composed, it would double the painting"
+        }
+      ],
+      "once": [
+        {
+          "name": "the reign mark",
+          "fromMeters": 0.429,
+          "toMeters": 0.4325,
+          "fromDegrees": -9.0,
+          "toDegrees": 9.5,
+          "reading": "宣德年製 in a line on the shoulder under the neck, read on DP-32251-001 unwrapped: 42.90 to 43.25 cm up, from 9.0 degrees left of the front to 9.5 right; the Met's jar carries it once"
+        }
+      ]
     }
   ]
 }

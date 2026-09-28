@@ -80,6 +80,14 @@ struct FArtVesselOverlap
 
 	UPROPERTY()
 	double Correlation = 0.0;
+
+	/**
+	 * How far apart the two views' paintings lie where both lend them, as the composition weighs them (the median offset
+	 * of the blocks of one that lie on the other); none where no block does. Further apart than the composition's
+	 * BlendMeters, the two are not blended: each keeps its own side of the overlap, and they meet at a seam.
+	 */
+	UPROPERTY(meta = (Units = "Meters"))
+	double OffsetMeters = 0.0;
 };
 
 /**
@@ -173,6 +181,59 @@ struct FArtVesselBand
 	/** How the repeat is known: read by eye on the photographs (with the measured repeat beside it), a plain line, or measured. */
 	UPROPERTY()
 	FString Reading;
+};
+
+/**
+ * Something a painted vessel carries once, not repeated round it (the Xuande jar's reign mark): between two heights up its
+ * outside and two bearings round it (degrees from the front towards the right), as its photograph shows it. No band's
+ * repeat reaches over it, so it is never carried round.
+ */
+USTRUCT()
+struct FArtVesselMotif
+{
+	GENERATED_BODY()
+
+	UPROPERTY(meta = (MuseeRequired))
+	FString Name;
+
+	UPROPERTY(meta = (MuseeRequired, Units = "Meters"))
+	double FromMeters = 0.0;
+
+	UPROPERTY(meta = (MuseeRequired, Units = "Meters"))
+	double ToMeters = 0.0;
+
+	UPROPERTY(meta = (Units = "Degrees"))
+	double FromDegrees = 0.0;
+
+	UPROPERTY(meta = (Units = "Degrees"))
+	double ToDegrees = 0.0;
+
+	/** How it was read on the photographs. */
+	UPROPERTY()
+	FString Reading;
+};
+
+/**
+ * An oval vessel's plan as its photographs show it: at its foot and at its mouth a superellipse |x/a|^n + |y/b|^n = 1 of
+ * its museum's axes, each exponent fitted to the outline its photograph shows (2 an ellipse, more a rounded oblong), and
+ * each outline as traced, in shares of its half-axes [across, front to back]. Its pressing (PressOf) follows them.
+ */
+USTRUCT()
+struct FArtVesselPlan
+{
+	GENERATED_BODY()
+
+	UPROPERTY()
+	double FootExponent = 0.0;
+
+	UPROPERTY()
+	double MouthExponent = 0.0;
+
+	UPROPERTY()
+	TArray<FVector2D> FootOutline;
+
+	UPROPERTY()
+	TArray<FVector2D> MouthOutline;
 };
 
 /** One foot, as its plan: a closed outline [across, front to back] in metres from the axis, anticlockwise from above. */
@@ -277,6 +338,14 @@ struct FArtVessel
 	UPROPERTY()
 	FArtVesselFeet Feet;
 
+	/** What its painting carries once, which no band's repeat may carry round. */
+	UPROPERTY()
+	TArray<FArtVesselMotif> Once;
+
+	/** An oval's plan, as its photographs show it (none for a round vessel). */
+	UPROPERTY()
+	FArtVesselPlan Plan;
+
 	/** Whether its decoration is composed from its views: a painted vessel. */
 	[[nodiscard]] bool IsPainted() const { return !Views.IsEmpty(); }
 };
@@ -308,19 +377,27 @@ struct FArtVesselComposition
 	UPROPERTY(meta = (MuseeRequired, Units = "Meters"))
 	double ClearanceMeters = 0.0;
 
-	/** The cosine past which a view sees the surface squarely enough to measure its white there (all it sees, where it sees
-	 * too little so squarely). */
+	/**
+	 * The cosine past which a view sees the surface squarely enough to measure its white there (all it sees, where it sees
+	 * too little so squarely): its white's hue and its lightness overall.
+	 */
 	UPROPERTY(meta = (MuseeRequired))
 	double WhiteSquareness = 0.0;
 
-	/** The share of those samples darker than the view's white: its white is that quantile of their lightness. */
+	/**
+	 * The share of the glaze's samples darker than its white: a view's white overall, and its white at each place (over
+	 * the glaze's samples round it), are that quantile of their lightness.
+	 */
 	UPROPERTY(meta = (MuseeRequired))
 	double WhiteQuantile = 0.0;
 
 	/**
-	 * Where a view shows plain glaze, to which its shading is fitted: a sample no more saturated than this (the spread of
-	 * its channels over its largest) and no darker than GlazeLightness of the view's white; the shading never below
-	 * ShadeFloor of the white.
+	 * Which samples of a photograph are its glaze, whose lightness its white follows over the vessel as the light falls
+	 * on it (a gallery's lamps light a vase's shoulder and leave its foot in shade; a cup's wall darkens as it turns
+	 * under): a sample no more saturated than GlazeChroma relative to the white's hue (the spread of its channels over its
+	 * largest, each divided by the white's), no darker than ShadeFloor of the view's white, and, once the white round it
+	 * is known, no darker than GlazeLightness of it (a dark stroke is painting). Its white is never under ShadeFloor of
+	 * the view's white.
 	 */
 	UPROPERTY(meta = (MuseeRequired))
 	double GlazeChroma = 0.0;
@@ -342,6 +419,17 @@ struct FArtVesselComposition
 	/** The summed weight at which the views alone give the surface's colour; below it a band's repeat or the glaze fills in. */
 	UPROPERTY(meta = (MuseeRequired))
 	double FullWeight = 0.0;
+
+	/**
+	 * Two views whose paintings lie further apart than this where they overlap (their overlap's OffsetMeters) are not
+	 * blended there, which would show the painting twice: each keeps its own side of the overlap, and they meet at a seam
+	 * run where their paintings agree best, cross-faded over SeamMeters.
+	 */
+	UPROPERTY(meta = (MuseeRequired, Units = "Meters"))
+	double BlendMeters = 0.0;
+
+	UPROPERTY(meta = (MuseeRequired, Units = "Meters"))
+	double SeamMeters = 0.0;
 
 	/** The finest the decoration is composed at, pixels a metre, and the most pixels it spans either way. */
 	UPROPERTY(meta = (MuseeRequired))

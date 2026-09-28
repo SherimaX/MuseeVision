@@ -242,6 +242,174 @@ namespace Musee::ArtMaking::VesselTests
 		return FMath::Abs(Measured - Published) / Published;
 	}
 
+	/** A texel's lightness: its linear light's relative luminance (Rec. 709's weights). */
+	double LightOf(const FColor& Colour)
+	{
+		const FLinearColor Linear = FLinearColor::FromSRGBColor(Colour);
+		return 0.2126 * Linear.R + 0.7152 * Linear.G + 0.0722 * Linear.B;
+	}
+
+	/** The length along a vessel's layout at which its outside first reaches a height (its first crossing, rising from the foot). */
+	double LengthAtHeight(const FArtVessel& Vessel, const FVesselLayout& Layout, double Height)
+	{
+		for (int32 Index = Vessel.Outside[0]; Index < Vessel.Outside[1]; ++Index)
+		{
+			const FVector2D& A = Vessel.Section[Index];
+			const FVector2D& B = Vessel.Section[Index + 1];
+			if (A.Y <= Height && Height <= B.Y && B.Y > A.Y)
+			{
+				return FMath::Lerp(Layout.Lengths[Index], Layout.Lengths[Index + 1], (Height - A.Y) / (B.Y - A.Y));
+			}
+		}
+		return -1.0;
+	}
+
+	/**
+	 * How well a patch of a composed decoration's lightness (rows First to Last, Width columns from Column) lies anywhere
+	 * else round the same rows, at least its own width from itself: the best normalised correlation (a plain patch
+	 * correlates with nothing, 0).
+	 */
+	double RepeatedElsewhere(const FImage& Decoration, int32 First, int32 Last, int32 Column, int32 Width)
+	{
+		const TArrayView64<const FColor> Texels = Decoration.AsBGRA8();
+		auto Patch = [&](int32 From)
+		{
+			TArray<double> Out;
+			for (int32 Row = First; Row <= Last; ++Row)
+			{
+				for (int32 K = 0; K < Width; ++K)
+				{
+					Out.Add(LightOf(Texels[int64(Row) * Decoration.SizeX + ((From + K) % Decoration.SizeX + Decoration.SizeX) % Decoration.SizeX]));
+				}
+			}
+			return Out;
+		};
+		auto Centred = [](TArray<double>& Values)
+		{
+			double Mean = 0.0;
+			for (const double Value : Values)
+			{
+				Mean += Value / Values.Num();
+			}
+			double Squares = 0.0;
+			for (double& Value : Values)
+			{
+				Value -= Mean;
+				Squares += Value * Value;
+			}
+			return FMath::Sqrt(Squares);
+		};
+		TArray<double> Mark = Patch(Column);
+		const double MarkSpread = Centred(Mark);
+		double Best = 0.0;
+		for (int32 Shift = Width; Shift <= Decoration.SizeX - Width; ++Shift)
+		{
+			TArray<double> Other = Patch(Column + Shift);
+			const double Spread = Centred(Other);
+			if (Spread <= 1e-9 || MarkSpread <= 1e-9)
+			{
+				continue;
+			}
+			double Product = 0.0;
+			for (int32 K = 0; K < Mark.Num(); ++K)
+			{
+				Product += Mark[K] * Other[K];
+			}
+			Best = FMath::Max(Best, Product / (MarkSpread * Spread));
+		}
+		return Best;
+	}
+
+	/** Once motifs are sought round a composed decoration as a patch correlating so well elsewhere, or better. */
+	constexpr double RepeatedMotif = 0.5;
+
+	/**
+	 * How far a turned mesh's plan at a height strays from an outline as traced (shares of HalfAxes [across, front to
+	 * back]): the worst share by which the mesh's ring, along each traced point's bearing, stands off it; and how many of
+	 * the traced points lie within 10 degrees of the plan's diagonal (45 degrees in shares of the half-axes).
+	 */
+	double PlanMiss(const UE::Geometry::FDynamicMesh3& Mesh, double HeightMeters, TConstArrayView<FVector2D> Outline, const FVector2D& HalfAxes,
+		int32& OutDiagonal)
+	{
+		TArray<FVector2D> Ring;
+		for (const int32 Vertex : Mesh.VertexIndicesItr())
+		{
+			const FVector Point = Musee::FromEngine(FVector(Mesh.GetVertex(Vertex)));
+			if (FMath::IsNearlyEqual(Point.Z, HeightMeters, 1e-6))
+			{
+				Ring.Add(FVector2D(Point.X, Point.Y));
+			}
+		}
+		Ring.Sort([](const FVector2D& A, const FVector2D& B) { return FMath::Atan2(A.Y, A.X) < FMath::Atan2(B.Y, B.X); });
+		// a height the section passes twice (a lip's outer and inner points) gives two rings on the same bearings: the
+		// plan is the outer
+		TArray<FVector2D> Outer;
+		for (const FVector2D& Point : Ring)
+		{
+			if (!Outer.IsEmpty() && FMath::Abs(FMath::Atan2(Point.Y, Point.X) - FMath::Atan2(Outer.Last().Y, Outer.Last().X)) < 1e-6)
+			{
+				Outer.Last() = Point.SizeSquared() > Outer.Last().SizeSquared() ? Point : Outer.Last();
+				continue;
+			}
+			Outer.Add(Point);
+		}
+		Ring = MoveTemp(Outer);
+		double Worst = 0.0;
+		OutDiagonal = 0;
+		if (Ring.Num() < 3)
+		{
+			return TNumericLimits<double>::Max();
+		}
+		for (const FVector2D& Share : Outline)
+		{
+			const FVector2D Expected(Share.X * HalfAxes.X, Share.Y * HalfAxes.Y);
+			const FVector2D Along = Expected.GetSafeNormal();
+			double Radius = -1.0;
+			for (int32 K = 0; K < Ring.Num() && Radius < 0.0; ++K)
+			{
+				const FVector2D& A = Ring[K];
+				const FVector2D& B = Ring[(K + 1) % Ring.Num()];
+				// where the ray along the traced point's bearing crosses the ring's chord from A to B
+				const FVector2D Chord = B - A;
+				const double Across = Along.X * Chord.Y - Along.Y * Chord.X;
+				if (FMath::Abs(Across) < 1e-15)
+				{
+					continue;
+				}
+				const double Reach = (A.X * Chord.Y - A.Y * Chord.X) / Across;
+				const double T = (A.X * Along.Y - A.Y * Along.X) / Across;
+				if (Reach > 0.0 && T >= -1e-9 && T <= 1.0 + 1e-9)
+				{
+					Radius = Reach;
+				}
+			}
+			Worst = FMath::Max(Worst, Radius > 0.0 ? FMath::Abs(Radius / Expected.Size() - 1.0) : 1.0);
+			OutDiagonal += FMath::Abs(FMath::RadiansToDegrees(FMath::Atan2(FMath::Abs(Share.Y), FMath::Abs(Share.X))) - 45.0) <= 10.0 ? 1 : 0;
+		}
+		return Worst;
+	}
+
+	/** How near the turned plan comes to its photographs' outlines, as a share of the radius: their traces' own spread. */
+	constexpr double PlanToleranceShare = 0.03;
+
+	/** A decoration is composed for the tests at most so many pixels either way. */
+	constexpr int32 TestPixels = 1536;
+
+	/**
+	 * A composed painting's darkness against its white stays within ContrastTolerance of its photograph's (a share of it,
+	 * or of ContrastFloor where the painting is fainter), band by band (ContrastBands along the outside, each measured over
+	 * ContrastLeastSamples texels or more); and at most ClippedShare of what its view sees squarely is pure white, beyond
+	 * what its photograph shows saturated.
+	 */
+	constexpr int32 ContrastBands = 8;
+	constexpr int32 ContrastLeastSamples = 200;
+	constexpr double ContrastTolerance = 0.35;
+	constexpr double ContrastFloor = 0.1;
+	constexpr double ClippedShare = 0.05;
+
+	/** A plain line's band is mostly glaze: its median lightness, composed, at least this (white is 1). */
+	constexpr double PlainGlazeLight = 0.75;
+
 	/** A painted vessel's photographs, as the record names them, each with its record's camera; false where one won't read. */
 	bool LoadViews(const FArtVessel& Vessel, TArray<FVesselPicture>& Out)
 	{
@@ -257,6 +425,116 @@ namespace Musee::ArtMaking::VesselTests
 			Picture.Camera = CameraOf(View);
 		}
 		return true;
+	}
+}
+
+namespace Musee::ArtMaking::VesselTests
+{
+	/**
+	 * A painted vessel composed from its photographs (at TestPixels, the record's composition otherwise) is true to them:
+	 * - its painting keeps its darkness against its white, band by band up the outside, as its first photograph shows it
+	 *   (the white fitted to the glaze itself, not clipping it: few texels it sees squarely are pure white);
+	 * - a plain line's band composes its glaze between the lines white, shaded as the photograph's wall is or not;
+	 * - what it carries once (its reign mark) is composed once: its patch lies nowhere else round its rows; and with a band
+	 *   stretched down over it, it would be, and is found;
+	 * - two views are blended only where their paintings lie within BlendMeters of each other; blended everywhere they
+	 *   overlap, a pair further apart would show the painting twice, and is found.
+	 */
+	void ComposedChecks(FAutomationTestBase& Test, const FArtVessels& Record, const FArtVessel& Vessel, const FArtHangEntry& Entry,
+		TConstArrayView<FVesselPicture> Pictures)
+	{
+		FArtVesselComposition How = Record.Composition;
+		How.MostPixels = TestPixels;
+		const TArray<FVector2D> Sized = SizedSection(Vessel, Entry.SizeMeters());
+		const FVesselLayout Layout = LayoutOf(Sized);
+		const FIntPoint Pixels = DecorationPixels(How, Vessel, Layout);
+		FImage Composed;
+		FDecorationStats Stats;
+		ComposeDecoration(How, Vessel, Sized, Pictures, Pixels, Composed, Stats);
+
+		for (const FContrastBand& Band : PaintingContrast(How, Vessel, Pictures[0], Sized, Composed, ContrastBands))
+		{
+			if (Band.Samples < ContrastLeastSamples || Band.Windows == 0)
+			{
+				continue;
+			}
+			Test.AddInfo(FString::Printf(TEXT("%s from %.3f to %.3f m along: its painting's darkness against its white %.3f in the photograph, %.3f composed; "
+				"%.1f%% pure white; %d windows"), *Vessel.Work, Band.FromMeters, Band.ToMeters, Band.Photograph, Band.Composed, 100.0 * Band.Clipped, Band.Windows));
+			Test.TestTrue(FString::Printf(TEXT("%s's painting from %.3f to %.3f m along keeps its darkness against its white (%.3f composed, %.3f in its photograph)"),
+				*Vessel.Work, Band.FromMeters, Band.ToMeters, Band.Composed, Band.Photograph),
+				FMath::Abs(Band.Composed - Band.Photograph) <= ContrastTolerance * FMath::Max(Band.Photograph, ContrastFloor));
+			Test.TestTrue(FString::Printf(TEXT("%s's glaze from %.3f to %.3f m along isn't clipped to white (%.1f%% pure white; its photograph %.1f%% saturated)"),
+				*Vessel.Work, Band.FromMeters, Band.ToMeters, 100.0 * Band.Clipped, 100.0 * Band.Saturated), Band.Clipped <= ClippedShare + Band.Saturated);
+		}
+
+		const TArrayView64<const FColor> Texels = Composed.AsBGRA8();
+		for (const FArtVesselBand& Band : Vessel.Bands)
+		{
+			if (!Band.Reading.StartsWith(TEXT("a plain line")))
+			{
+				continue;
+			}
+			const double From = LengthAtHeight(Vessel, Layout, Band.FromMeters);
+			const double To = LengthAtHeight(Vessel, Layout, Band.ToMeters);
+			TArray<double> Lights;
+			for (int32 Row = FMath::CeilToInt32(FMath::Max(From, 0.0) / Layout.SizeMeters().Y * Composed.SizeY); Row < To / Layout.SizeMeters().Y * Composed.SizeY; ++Row)
+			{
+				for (int32 Column = 0; Column < Composed.SizeX; ++Column)
+				{
+					Lights.Add(LightOf(Texels[int64(Row) * Composed.SizeX + Column]));
+				}
+			}
+			Lights.Sort();
+			const double Median = Lights.IsEmpty() ? 0.0 : Lights[Lights.Num() / 2];
+			Test.TestTrue(FString::Printf(TEXT("%s's %s composes the glaze between its lines white all round (median lightness %.2f)"), *Vessel.Work, *Band.Name,
+				Median), !Lights.IsEmpty() && Median >= PlainGlazeLight);
+		}
+
+		for (const FArtVesselMotif& Motif : Vessel.Once)
+		{
+			const double From = LengthAtHeight(Vessel, Layout, Motif.FromMeters);
+			const double To = LengthAtHeight(Vessel, Layout, Motif.ToMeters);
+			const int32 First = FMath::FloorToInt32(From / Layout.SizeMeters().Y * Composed.SizeY);
+			const int32 Last = FMath::CeilToInt32(To / Layout.SizeMeters().Y * Composed.SizeY);
+			const int32 Column = FMath::FloorToInt32(FMath::Fmod(Motif.FromDegrees + 360.0, 360.0) / 360.0 * Composed.SizeX);
+			const int32 Width = FMath::Max(2, FMath::CeilToInt32((Motif.ToDegrees - Motif.FromDegrees) / 360.0 * Composed.SizeX));
+			const double Elsewhere = RepeatedElsewhere(Composed, First, Last, Column, Width);
+			Test.TestTrue(FString::Printf(TEXT("%s's %s is composed once: its patch lies nowhere else round it (best %.2f)"), *Vessel.Work, *Motif.Name, Elsewhere),
+				From >= 0.0 && To > From && Elsewhere < RepeatedMotif);
+			// a band stretched down over it carries it round, and that is found
+			const FArtVesselBand* Above = Vessel.Bands.FindByPredicate([&Motif](const FArtVesselBand& Band) { return Band.FromMeters >= Motif.ToMeters; });
+			if (Above)
+			{
+				FArtVessel Stretched = Vessel;
+				FArtVesselBand& Band = Stretched.Bands[int32(Above - Vessel.Bands.GetData())];
+				Band.FromMeters = Motif.FromMeters - 0.001;
+				FImage Carried;
+				ComposeDecoration(How, Stretched, Sized, Pictures, Pixels, Carried, Stats);
+				const double Found = RepeatedElsewhere(Carried, First, Last, Column, Width);
+				Test.TestTrue(FString::Printf(TEXT("With %s stretched down over %s, the mark is carried round, and found (%.2f)"), *Above->Name, *Motif.Name, Found),
+					Found >= RepeatedMotif);
+			}
+		}
+
+		if (Pictures.Num() > 1)
+		{
+			for (const FBlendOffset& Offset : BlendOffsets(How, Record.Registration, Vessel, Pictures))
+			{
+				Test.TestTrue(FString::Printf(TEXT("%s: where %s and %s are blended their paintings lie within %.1f mm (%.1f mm over %d blocks)"), *Vessel.Work,
+					*FPaths::GetCleanFilename(Vessel.Views[Offset.First].Image), *FPaths::GetCleanFilename(Vessel.Views[Offset.Second].Image), 1000.0 * How.BlendMeters,
+					1000.0 * Offset.Meters, Offset.Blocks), Offset.Meters <= How.BlendMeters);
+			}
+			const bool bSeamed = Vessel.Views.ContainsByPredicate([&How](const FArtVesselView& View)
+			{
+				return View.Overlaps.ContainsByPredicate([&How](const FArtVesselOverlap& Overlap) { return Overlap.OffsetMeters > How.BlendMeters; });
+			});
+			if (bSeamed)
+			{
+				const TArray<FBlendOffset> Unseamed = BlendOffsets(How, Record.Registration, Vessel, Pictures, false);
+				Test.TestTrue(FString::Printf(TEXT("%s's views blended everywhere they overlap would show its painting twice, and are found"), *Vessel.Work),
+					Unseamed.ContainsByPredicate([&How](const FBlendOffset& Offset) { return Offset.Meters > How.BlendMeters; }));
+			}
+		}
 	}
 }
 
@@ -346,6 +624,19 @@ bool FArtPaintedVesselTest::RunTest(const FString& Parameters)
 			TestTrue(FString::Printf(TEXT("%s's %s repeats a whole number of times round"), *Vessel.Work, *Band.Name), Band.PeriodDegrees > 0.0
 				&& FMath::IsNearlyEqual(360.0 / Band.PeriodDegrees, FMath::RoundToDouble(360.0 / Band.PeriodDegrees), 1e-6));
 			TestFalse(FString::Printf(TEXT("%s's %s says how its repeat is known"), *Vessel.Work, *Band.Name), Band.Reading.IsEmpty());
+			for (const FArtVesselMotif& Motif : Vessel.Once)
+			{
+				TestFalse(FString::Printf(TEXT("%s's %s (%.4f to %.4f m) reaches over %s (%.4f to %.4f m), which it carries once"), *Vessel.Work, *Band.Name,
+					Band.FromMeters, Band.ToMeters, *Motif.Name, Motif.FromMeters, Motif.ToMeters), Band.FromMeters < Motif.ToMeters && Motif.FromMeters < Band.ToMeters);
+			}
+		}
+		{
+			FVesselPress Press;
+			if (TestTrue(FString::Printf(TEXT("%s is pressed to its plan"), *Vessel.Work), PressOf(Vessel, FVector2D(1.0, 1.0), Press).IsEmpty()))
+			{
+				const FString Standing = FeetFault(Vessel, Press);
+				TestTrue(FString::Printf(TEXT("%s's feet stand under its base (%s)"), *Vessel.Work, *Standing), Standing.IsEmpty());
+			}
 		}
 		for (int32 Index = 0; Index < Vessel.Views.Num(); ++Index)
 		{
@@ -355,12 +646,16 @@ bool FArtPaintedVesselTest::RunTest(const FString& Parameters)
 			TestTrue(FString::Printf(TEXT("%s's view %s stands where its photographs place it, not unverified"), *Vessel.Work, *View.Image),
 				View.Placement != TEXT("unverified"));
 		}
+		TArray<FVesselPicture> Pictures;
+		if (Vessel.IsPainted() && TestTrue(FString::Printf(TEXT("%s's photographs read"), *Vessel.Work), LoadViews(Vessel, Pictures)))
+		{
+			ComposedChecks(*this, Record.GetValue(), Vessel, *Entry, Pictures);
+		}
 		// Each registered view stands where the evidence that placed it puts it; turned a quarter turn either way, it doesn't.
 		if (Vessel.Views.ContainsByPredicate([](const FArtVesselView& View) { return View.Placement == TEXT("registered"); }))
 		{
 			const FArtVesselRegistration& Registration = Record.GetValue().Registration;
-			TArray<FVesselPicture> Pictures;
-			if (TestTrue(FString::Printf(TEXT("%s's photographs read"), *Vessel.Work), LoadViews(Vessel, Pictures)))
+			if (Pictures.Num() == Vessel.Views.Num())
 			{
 				const TArray<TArray<FViewOverlap>> Overlaps = ViewOverlaps(Registration, Vessel, Pictures);
 				for (int32 I = 0; I < Pictures.Num(); ++I)
@@ -440,6 +735,41 @@ bool FArtPaintedVesselTest::RunTest(const FString& Parameters)
 			BuildVessel(Sized, LayoutOf(Sized), MouthOnly, Pressed);
 			TestTrue(TEXT("Pressed to its mouth's ratio alone, its foot is too deep front to back, and found"),
 				Off(AxesAt(Pressed, Turning.Press.FootHeightMeters).Y, FootAxes[1]) > Tolerance);
+			// Its plan is the rounded oblong its photographs show, all round, across its diagonals too: at the flange's face
+			// the base photograph's flange, at the lip the oblique photograph's lip, each as traced.
+			const FVector2D FootHalf(0.5 * FootAxes[0], 0.5 * FootAxes[1]);
+			const FVector2D MouthHalf(0.5 * MouthAxes[0], 0.5 * MouthAxes[1]);
+			int32 FootDiagonal = 0;
+			int32 MouthDiagonal = 0;
+			const double FootMiss = PlanMiss(Mesh, Turning.Press.FootHeightMeters, Ru->Plan.FootOutline, FootHalf, FootDiagonal);
+			const double MouthMiss = PlanMiss(Mesh, Turning.Press.MouthHeightMeters, Ru->Plan.MouthOutline, MouthHalf, MouthDiagonal);
+			TestTrue(FString::Printf(TEXT("The Ru basin's plan at the flange's face is its base photograph's outline within %.0f%% at %d traced points, %d of them "
+				"on its diagonals (%.3f)"), 100.0 * PlanToleranceShare, Ru->Plan.FootOutline.Num(), FootDiagonal, FootMiss),
+				Ru->Plan.FootOutline.Num() >= 36 && FootDiagonal >= 2 && FootMiss <= PlanToleranceShare);
+			TestTrue(FString::Printf(TEXT("And at the lip, the oblique photograph's lip within %.0f%% at %d traced points, %d of them on its diagonals (%.3f)"),
+				100.0 * PlanToleranceShare, Ru->Plan.MouthOutline.Num(), MouthDiagonal, MouthMiss),
+				Ru->Plan.MouthOutline.Num() >= 36 && MouthDiagonal >= 2 && MouthMiss <= PlanToleranceShare);
+			FVesselTurning Elliptic = Turning;
+			Elliptic.Press.FootExponent = 2.0;
+			Elliptic.Press.MouthExponent = 2.0;
+			UE::Geometry::FDynamicMesh3 Oval;
+			BuildVessel(Sized, LayoutOf(Sized), Elliptic, Oval);
+			int32 Unused = 0;
+			TestTrue(TEXT("Pressed to an ellipse, its plan misses its photographs' outlines across the diagonals, and is found"),
+				PlanMiss(Oval, Turning.Press.FootHeightMeters, Ru->Plan.FootOutline, FootHalf, Unused) > PlanToleranceShare
+				&& PlanMiss(Oval, Turning.Press.MouthHeightMeters, Ru->Plan.MouthOutline, MouthHalf, Unused) > PlanToleranceShare);
+			// Its feet stand under its underside; traced as the photograph shows them, reaching past its edge, they don't.
+			FArtVessel Splayed = *Ru;
+			for (FArtVesselFoot& Splay : Splayed.Feet.Each)
+			{
+				for (FVector2D& Point : Splay.Outline)
+				{
+					Point *= 1.06;
+				}
+			}
+			FVesselPress Press;
+			TestTrue(TEXT("Feet reaching 6% past the Ru basin's underside are found"), PressOf(Splayed, FVector2D(1.0, 1.0), Press).IsEmpty()
+				&& !FeetFault(Splayed, Press).IsEmpty());
 		}
 	}
 

@@ -55,20 +55,69 @@ namespace Musee::ArtMaking
 	 * Composes a painted vessel's decoration in its layout (the sized section's, which its mesh's UV0 shares), 8-bit sRGB:
 	 * - each texel of the outside is the point of the vessel's own section (the record's, at the museum's size, where its
 	 *   views were fitted) at the same place, turned to its angle; every view that sees it lends the colour its
-	 *   photograph shows there, divided channel by channel by that photograph's white there (its glaze's hue, at the
-	 *   lightness a plane in the normal and in the view's squareness, fitted to its plain glaze, gives: its shading taken
-	 *   off; the glaze is white in the image, and its colour is Matter's). A view sees a place where it faces the camera at all, obliquely too, its line
-	 *   of sight passes no other part of the vessel, and it shows in the photograph inside the vessel's silhouette by the
-	 *   camera's own miss and an edge's blur (EdgePixels); its weight is the square of how squarely it sees it, coming in
-	 *   over ClearanceMeters as its sight clears the silhouette's margin and the vessel (a highlight lends little);
+	 *   photograph shows there, divided channel by channel by that photograph's white there: the glaze's hue, at the
+	 *   lightness the glaze itself shows round that place (the WhiteQuantile of the photograph's glaze there, so a
+	 *   gallery's light falling off down a vase, or a cup's wall darkening as it turns under, is taken off and the
+	 *   painting keeps its darkness against its own ground); the glaze is white in the image, and its colour is Matter's.
+	 *   A view sees a place where it faces the camera at all, obliquely too, its line of sight passes no other part of the
+	 *   vessel, and it shows in the photograph inside the vessel's silhouette by the camera's own miss and an edge's blur
+	 *   (EdgePixels); its weight is the square of how squarely it sees it, coming in over ClearanceMeters as its sight
+	 *   clears the silhouette's margin and the vessel (a highlight lends little);
+	 * - two views whose paintings lie further apart where they overlap than BlendMeters (the record's OffsetMeters) are not
+	 *   blended, which would show the painting twice: each keeps its own side of the overlap, meeting the other at a seam
+	 *   run where their paintings agree best, cross-faded over SeamMeters;
 	 * - where the views' summed weight falls short of FullWeight (only towards the edge of what they see, as they see it
-	 *   more and more askance), the colour runs smoothly to the fill: where a band of ornament runs, the band's own repeats carried round, cross-faded by how well
-	 *   each is seen; elsewhere the glaze, white; so there is no seam;
+	 *   more and more askance), the colour runs smoothly to the fill: where a band of ornament runs, the band's own repeats
+	 *   carried round, cross-faded by how well each is seen; elsewhere the glaze, white; so there is no seam;
 	 * - the underside and the inside, which no view is composed onto, are the glaze.
 	 * Deterministic: the same views and record give the same pixels.
 	 */
 	void ComposeDecoration(const FArtVesselComposition& How, const FArtVessel& Vessel, TConstArrayView<FVector2D> Sized,
 		TConstArrayView<FVesselPicture> Views, FIntPoint Pixels, FImage& Out, FDecorationStats& OutStats);
+
+	/** How far apart two views' paintings lie where the composition blends them, and over how many blocks it was measured. */
+	struct FBlendOffset
+	{
+		int32 First = INDEX_NONE;
+		int32 Second = INDEX_NONE;
+		double Meters = 0.0;
+		int32 Blocks = 0;
+	};
+
+	/**
+	 * Where a painted vessel's composition blends two of its views (Views in the record's order, each at its record's
+	 * camera), how far apart their paintings lie there: over the registration's grid, each view weighted as the
+	 * composition weighs it (with its seams, unless bSeams is false), blocks where the lesser of the two weights is at least
+	 * a quarter of the greater, each laid on the other view by the rise and turn at which its detail correlates best; the
+	 * median offset of the blocks that lie on the other at 0.8 or better. A pair not listed is blended nowhere measurable.
+	 * Blended further apart than BlendMeters, the painting shows twice.
+	 */
+	[[nodiscard]] TArray<FBlendOffset> BlendOffsets(const FArtVesselComposition& How, const FArtVesselRegistration& Registration, const FArtVessel& Vessel,
+		TConstArrayView<FVesselPicture> Views, bool bSeams = true);
+
+	/**
+	 * How dark a view's painting is against its white, in the photograph and as composed, band by band along the outside
+	 * (Bands of equal length): over the texels the view sees at least WhiteSquareness squarely, in windows of the band a
+	 * thirtieth of the turn wide (so the light falling across the photograph is not taken for its painting), the 20th
+	 * percentile of their lightness over the 90th, the photograph's and the decoration's, each the median over the band's
+	 * windows; the share of those texels the decoration gives pure white (a white fitted too dark clips the glaze and
+	 * pales the painting), and the share the photograph itself shows saturated (every channel at 250 or over: its own
+	 * white clipped, which no division brings back).
+	 */
+	struct FContrastBand
+	{
+		double FromMeters = 0.0;
+		double ToMeters = 0.0;
+		double Photograph = 0.0;
+		double Composed = 0.0;
+		double Clipped = 0.0;
+		double Saturated = 0.0;
+		int32 Samples = 0;
+		int32 Windows = 0;
+	};
+
+	[[nodiscard]] TArray<FContrastBand> PaintingContrast(const FArtVesselComposition& How, const FArtVessel& Vessel, const FVesselPicture& View,
+		TConstArrayView<FVector2D> Sized, const FImage& Decoration, int32 Bands);
 
 	/** How much of the outside two placed views share, and how well their paintings correlate there (-1 where too little). */
 	struct FViewOverlap

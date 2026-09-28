@@ -15,7 +15,7 @@ namespace Musee::ArtMaking
 	namespace
 	{
 		/** The revision of a vessel's composition: raise it whenever the same record and views would compose differently. */
-		constexpr int32 DecorationRevision = 2;
+		constexpr int32 DecorationRevision = 3;
 
 		void Fill(const FImage& Image, UTexture2D& Texture)
 		{
@@ -52,10 +52,10 @@ namespace Musee::ArtMaking
 		FString CompositionText(const FArtVessels& Record, const FArtVessel& Vessel, const FVector2D& SizeMeters)
 		{
 			const FArtVesselComposition& How = Record.Composition;
-			FString Text = FString::Printf(TEXT("vessel-decoration;%d;%.9g;%.9g;%.9g;%.9g;%.9g;%.9g;%.9g;%.9g;%.9g;%.9g;%.9g;%.9g;%.9g;%d"),
+			FString Text = FString::Printf(TEXT("vessel-decoration;%d;%.9g;%.9g;%.9g;%.9g;%.9g;%.9g;%.9g;%.9g;%.9g;%.9g;%.9g;%.9g;%.9g;%.9g;%.9g;%d"),
 				DecorationRevision, SizeMeters.X, SizeMeters.Y, How.EdgePixels, How.ClearanceMeters, How.WhiteSquareness, How.WhiteQuantile,
-				How.GlazeChroma, How.GlazeLightness, How.ShadeFloor, How.HighlightOverWhite, How.HighlightWeight, How.FullWeight, How.MostPixelsPerMeter,
-				How.MostPixels);
+				How.GlazeChroma, How.GlazeLightness, How.ShadeFloor, How.HighlightOverWhite, How.HighlightWeight, How.FullWeight, How.BlendMeters,
+				How.SeamMeters, How.MostPixelsPerMeter, How.MostPixels);
 			for (const FVector2D& Point : Vessel.Section)
 			{
 				Text += FString::Printf(TEXT(";%.9g,%.9g"), Point.X, Point.Y);
@@ -75,6 +75,10 @@ namespace Musee::ArtMaking
 				for (const double Axis : View.AxisPixels)
 				{
 					Text += FString::Printf(TEXT(",%.9g"), Axis);
+				}
+				for (const FArtVesselOverlap& Overlap : View.Overlaps)
+				{
+					Text += FString::Printf(TEXT(",o%s,%.9g"), *Overlap.Image, Overlap.OffsetMeters);
 				}
 			}
 			return Text;

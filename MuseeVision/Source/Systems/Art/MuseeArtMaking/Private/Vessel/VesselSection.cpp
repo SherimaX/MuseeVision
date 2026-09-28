@@ -107,6 +107,27 @@ namespace Musee::ArtMaking
 		return (MouthRatio - FootRatio) / (MouthHeightMeters - FootHeightMeters);
 	}
 
+	double FVesselPress::ExponentAt(double HeightMeters) const
+	{
+		if (MouthHeightMeters <= FootHeightMeters)
+		{
+			return MouthExponent;
+		}
+		const double Share = FMath::Clamp((HeightMeters - FootHeightMeters) / (MouthHeightMeters - FootHeightMeters), 0.0, 1.0);
+		return FMath::Lerp(FootExponent, MouthExponent, Share);
+	}
+
+	FVector FVesselPress::Pressed(double Radius, double Height, double Angle) const
+	{
+		const double S = FMath::Sin(Angle);
+		const double C = FMath::Cos(Angle);
+		const double Exponent = ExponentAt(Height);
+		// a circle's point carried along its ray to the superellipse of the same half-axes: (|s|^n + |c|^n)^(-1/n)
+		const double Out = FMath::IsNearlyEqual(Exponent, 2.0, 1e-12) ? 1.0
+			: FMath::Pow(FMath::Pow(FMath::Abs(S), Exponent) + FMath::Pow(FMath::Abs(C), Exponent), -1.0 / Exponent);
+		return FVector(Radius * Out * S, RatioAt(Height) * Radius * Out * C, Height);
+	}
+
 	FString PressOf(const FArtVessel& Vessel, const FVector2D& Scale, FVesselPress& Out)
 	{
 		Out = FVesselPress();
@@ -129,10 +150,18 @@ namespace Musee::ArtMaking
 		}
 		Out.MouthHeightMeters = Vessel.Section[Widest].Y * Scale.Y;
 		Out.MouthRatio = Museum.MouthAxesMeters[1] / Museum.MouthAxesMeters[0];
+		// the plan's exponents as its photographs show them; an ellipse where they show none
+		Out.MouthExponent = Vessel.Plan.MouthExponent > 0.0 ? Vessel.Plan.MouthExponent : 2.0;
+		Out.FootExponent = Vessel.Plan.FootExponent > 0.0 ? Vessel.Plan.FootExponent : Out.MouthExponent;
+		if (Out.MouthExponent < 1.0 || Out.FootExponent < 1.0)
+		{
+			return TEXT("an oval's plan has exponents of one or more (a superellipse's, bulging outward)");
+		}
 		if (Museum.FootAxesMeters.Num() != 2)
 		{
 			Out.FootHeightMeters = Out.MouthHeightMeters;
 			Out.FootRatio = Out.MouthRatio;
+			Out.FootExponent = Out.MouthExponent;
 			return FString();
 		}
 		if (!(Museum.FootAxesMeters[0] > 0.0 && Museum.FootAxesMeters[1] > 0.0))
@@ -160,6 +189,38 @@ namespace Musee::ArtMaking
 		}
 		Out.FootHeightMeters = Vessel.Section[Foot].Y * Scale.Y;
 		Out.FootRatio = Museum.FootAxesMeters[1] / Museum.FootAxesMeters[0];
+		return FString();
+	}
+
+	FString FeetFault(const FArtVessel& Vessel, const FVesselPress& Press)
+	{
+		if (Vessel.Feet.Each.IsEmpty())
+		{
+			return FString();
+		}
+		const double Height = Vessel.Feet.HeightMeters;
+		const double Radius = RadiusAt(Vessel.Section, Height);
+		if (!(Radius > 0.0))
+		{
+			return FString::Printf(TEXT("its feet stand %.1f mm high, where its section has no underside"), 1000.0 * Height);
+		}
+		const double Across = Radius;
+		const double Deep = Radius * Press.RatioAt(Height);
+		const double Exponent = Press.ExponentAt(Height);
+		double Furthest = 0.0;
+		for (const FArtVesselFoot& Foot : Vessel.Feet.Each)
+		{
+			for (const FVector2D& Point : Foot.Outline)
+			{
+				Furthest = FMath::Max(Furthest, FMath::Pow(FMath::Pow(FMath::Abs(Point.X) / Across, Exponent) + FMath::Pow(FMath::Abs(Point.Y) / Deep, Exponent),
+					1.0 / Exponent));
+			}
+		}
+		if (Furthest > 1.0 + FeetToleranceShare)
+		{
+			return FString::Printf(TEXT("its feet reach %.3f of its underside's plan at their height (%.1f x %.1f mm), up to %.1f mm past its edge, into the air"),
+				Furthest, 2000.0 * Across, 2000.0 * Deep, 1000.0 * (Furthest - 1.0) * Radius);
+		}
 		return FString();
 	}
 
