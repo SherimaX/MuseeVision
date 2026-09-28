@@ -1,6 +1,7 @@
 #include "Schedule/LightDresser.h"
 
 #include "GameFramework/Actor.h"
+#include "LightImage.h"
 #include "LightLuminaire.h"
 #include "LightLuminaireComponent.h"
 #include "Misc/Paths.h"
@@ -56,7 +57,11 @@ namespace Musee::Light
 			FVector2D Face = FVector2D::ZeroVector;
 			/** For a zone, the direction the face's height runs in: out from the axis, through the zone's middle. */
 			TOptional<FVector> FaceHeight;
-			/** Whether the face encloses the luminaire (a sphere's inside about its seat), its light converging on the seat. */
+			/**
+			 * The sphere whose inside the face is, [radius, opening], when it encloses the luminaire (a sphere's inside about
+			 * its seat), its light converging on the seat; zero otherwise.
+			 */
+			FVector2D Sphere = FVector2D::ZeroVector;
 			bool bEncloses = false;
 			ELightOperation Operation = ELightOperation::Always;
 			FMuseeKey Follows;
@@ -204,6 +209,7 @@ namespace Musee::Light
 			const double Area = Equator * (Radius + FMath::Sqrt(Radius * Radius - Opening * Opening));
 			Out.Face = FVector2D(Equator, Area / Equator);
 			Out.bEncloses = true;
+			Out.Sphere = FVector2D(Radius, Opening);
 			return FString();
 		}
 
@@ -224,7 +230,12 @@ namespace Musee::Light
 			{
 				return TEXT("an areal type needs one of the extent, the zone or the sphere of the face it lights");
 			}
-			if (bSphere) { return SphereFaceOf(Entry.Sphere, Out); }
+			if (bSphere)
+			{
+				// Only a picture can be shown over a sphere's inside, on the surface Light makes for it.
+				return Luminaire.Emitter == FLightLuminaire::EEmitter::Image ? SphereFaceOf(Entry.Sphere, Out)
+					: TEXT("only an image panel is laid over a sphere, its picture shown on the sphere's inside");
+			}
 			if (bZone) { return ZoneFaceOf(Entry.Zone, Out); }
 			if (Entry.Extent.Num() != 2 || Entry.Extent[0] <= 0.0 || Entry.Extent[1] <= 0.0) { return TEXT("its extent isn't [width, height] in metres"); }
 			Out.Face = FVector2D(Entry.Extent[0], Entry.Extent[1]);
@@ -293,7 +304,7 @@ namespace Musee::Light
 			USceneComponent* Parent = Placement.Body ? Placement.Body : Root;
 			const FName Name = MakeUniqueObjectName(Actor, ULightLuminaireComponent::StaticClass(), FName(*(TEXT("Luminaire_") + Entry.Id.Replace(TEXT("."), TEXT("_")))));
 			ULightLuminaireComponent* Component = NewObject<ULightLuminaireComponent>(Actor, Name);
-			Component->Configure(Placement.Type, Placement.Operation, Placement.Follows, Meters(Entry.Length), Placement.Face, Placement.bEncloses);
+			Component->Configure(Placement.Type, Placement.Operation, Placement.Follows, Meters(Entry.Length), Placement.Face, Placement.Sphere);
 			Component->ComponentTags.Add(FName(FString(LuminaireTagPrefix) + Entry.Id));
 			if (!Entry.Host.IsNone()) { Component->ComponentTags.Add(FName(FString(HostTagPrefix) + Entry.Host.ToString())); }
 			if (!Entry.Surface.IsNone()) { Component->ComponentTags.Add(FName(FString(LitSurfaceTagPrefix) + Entry.Surface.ToString())); }
@@ -357,10 +368,10 @@ namespace Musee::Light
 					*Entry.Id, *ProfilePackage(*Luminaire), *FPaths::GetCleanFilename(Luminaire->PhotometricFile)));
 			}
 			Place(Stage, Entry, Placement);
-			if (Placement.bEncloses && Luminaire->bLit)
+			if (Placement.bEncloses && Luminaire->bLit && !Image::FindMaterial())
 			{
-				Find(FString::Printf(TEXT("Luminaire '%s' gives no light: its face encloses it, which no engine light can stand for, and Light's emissive image surface and celestial image source aren't built."),
-					*Entry.Id));
+				Find(FString::Printf(TEXT("Luminaire '%s' stands dark: Light's image material %s, which its sphere's surface shows the sky in, hasn't been made (Studio's make makes it)."),
+					*Entry.Id, *Image::MaterialPackage()));
 			}
 		}
 	}

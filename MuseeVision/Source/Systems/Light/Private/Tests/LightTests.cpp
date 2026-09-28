@@ -11,6 +11,7 @@
 #include "Engine/World.h"
 #include "GameFramework/Actor.h"
 #include "HAL/FileManager.h"
+#include "LightImage.h"
 #include "LightLuminaire.h"
 #include "LightLuminaireComponent.h"
 #include "LightSky.h"
@@ -245,13 +246,19 @@ namespace Musee::Light::Tests
 		TestTrue(TEXT("Showing a picture of a quarter of its peak white, it gives pi L A of that picture"),
 			FMath::IsNearlyEqual(Wall->EmittedFlux().Get(), UE_DOUBLE_PI * 200.0 * 2.8 * 2.8 * 0.25, 1e-6));
 		ULightLuminaireComponent* Dome = NewObject<ULightLuminaireComponent>(Actor, TEXT("Dome"));
-		Dome->Configure(FMuseeKey(TEXTVIEW("light-field-panel.d65")), ELightOperation::Always, FMuseeKey(), Meters(0.0), FVector2D(12.0, 4.0), true);
+		Dome->Configure(FMuseeKey(TEXTVIEW("light-field-panel.d65")), ELightOperation::Always, FMuseeKey(), Meters(0.0), FVector2D(12.0, 4.0),
+			FVector2D(13.7, 2.98));
 		Dome->SetupAttachment(Actor->GetRootComponent());
 		Dome->RegisterComponent();
 		TestTrue(TEXT("An image face that encloses its luminaire drives no engine light, which would shine out from one place"),
 			Dome->FaceEncloses() && Dome->Emitters().IsEmpty());
+		// Its light leaves the surface its picture is shown on, made wherever Light's image material is (Studio makes it;
+		// Musee.Studio.LightImage makes it and places the Sphere's image on it).
+		const bool bImageMade = Image::FindMaterial() != nullptr;
+		TestEqual(TEXT("It shows its picture on a surface of its sphere wherever Light's image material is made"), Dome->ImageSurface() != nullptr, bImageMade);
 		Dome->ShowImage(0.25);
-		TestEqual(TEXT("and, showing a picture, gives no light, since no surface of its picture is made to give it"), Dome->EmittedFlux().Get(), 0.0);
+		TestTrue(TEXT("and, showing a picture, gives pi L A of it from that surface"),
+			FMath::IsNearlyEqual(Dome->EmittedFlux().Get(), bImageMade ? UE_DOUBLE_PI * 200.0 * 12.0 * 4.0 * 0.25 : 0.0, 1e-6));
 
 		FTimeMoment Day;
 		Day.bSunUp = true;
@@ -288,6 +295,7 @@ namespace Musee::Light::Tests
 				{ "id": "spot.spread", "type": "track-spot.3000k.20deg", "point": [0, 0, 3], "aim": [0, 0, 0], "operation": "always", "extent": [1, 1] },
 				{ "id": "dome", "type": "light-field-panel.d65", "point": [0, 0, 22], "aim": [0, 0, 22], "operation": "always", "sphere": { "radius": 13.7, "opening": 2.98 } },
 				{ "id": "dome.askew", "type": "light-field-panel.d65", "point": [0, 0, 22], "aim": [0, 0, 8], "operation": "always", "sphere": { "radius": 13.7, "opening": 2.98 } },
+				{ "id": "dome.ceiling", "type": "luminous-ceiling.3000k", "point": [0, 0, 22], "aim": [0, 0, 22], "operation": "always", "sphere": { "radius": 13.7, "opening": 2.98 } },
 				{ "id": "step", "type": "step-light.2700k", "point": [6.2, -28.1, 0.14], "aim": [6.2, -27.6, 0.1], "operation": "dusk", "host": "test.bridge.kerb", "surface": "test.garden.path" } ],
 			"targets": [ { "surface": "test.floor", "class": "circulation", "lux": [50, null], "source": "UseTargets", "when": { "mechanism": "test.car", "stop": "floor" } } ],
 			"design": [ { "brighter": "test.canvas", "darker": "test.wall", "ratio": [1.5, null] } ] })");
@@ -311,10 +319,17 @@ namespace Musee::Light::Tests
 
 		// Edge-lit panes are lit now: their photometry is derived from the strip's published flux and the sheet's published
 		// extraction (Light's catalogue marks it derived), so they are no longer a finding.
-		TestEqual(TEXT("An unknown weather place and type, a line without length, a mount with a point, a point without aim, a line along its own light, a spot laid along a line, a ceiling without its face or outside its zone, a spot over an extent, a sphere aimed off its centre and a sphere that gives no light are findings"),
-			Findings.Num(), 12);
-		TestTrue(TEXT("the image sphere, placed, is reported as giving no light until its surface and source are built"),
-			Findings.ContainsByPredicate([](const FMuseeFinding& F) { return F.Summary.Contains(TEXT("'dome' gives no light")); }));
+		// The image sphere is placed, and gives its light from its surface; it is a finding only where Light's image
+		// material, which Studio makes, isn't made.
+		const bool bImageMade = Image::FindMaterial() != nullptr;
+		TestEqual(TEXT("An unknown weather place and type, a line without length, a mount with a point, a point without aim, a line along its own light, a spot laid along a line, a ceiling without its face or outside its zone, a spot over an extent, a sphere aimed off its centre and a ceiling over a sphere are findings"),
+			Findings.Num(), bImageMade ? 12 : 13);
+		TestFalse(TEXT("the image sphere is never reported as giving no light"),
+			Findings.ContainsByPredicate([](const FMuseeFinding& F) { return F.Summary.Contains(TEXT("gives no light")); }));
+		TestEqual(TEXT("and only as dark while its image material isn't made"),
+			Findings.ContainsByPredicate([](const FMuseeFinding& F) { return F.Summary.Contains(TEXT("'dome' stands dark")); }), !bImageMade);
+		TestTrue(TEXT("only an image panel is laid over a sphere"),
+			Findings.ContainsByPredicate([](const FMuseeFinding& F) { return F.Summary.Contains(TEXT("'dome.ceiling' isn't placed: only an image panel")); }));
 		TArray<ULightLuminaireComponent*> Placed;
 		Stage->GetComponents(Placed);
 		TestEqual(TEXT("Ten luminaires are placed"), Placed.Num(), 10);
@@ -419,6 +434,86 @@ namespace Musee::Light::Tests
 		Moment.SunElevationDegrees = -12.0;
 		Sky->Follow(Moment);
 		TestFalse(TEXT("After civil twilight the sun is out"), Sky->Sun()->IsVisible());
+		return true;
+	}
+	/** A star catalogue in the collection's format (assets/sky/CREDITS.md): MVS1, a count, then RA, Dec (radians), V, B-V. */
+	TArray<uint8> Catalogue(TConstArrayView<FVector4f> Stars)
+	{
+		TArray<uint8> Bytes = { 'M', 'V', 'S', '1' };
+		const uint32 Count = Stars.Num();
+		Bytes.Append(reinterpret_cast<const uint8*>(&Count), sizeof(Count));
+		for (const FVector4f& Star : Stars)
+		{
+			Bytes.Append(reinterpret_cast<const uint8*>(&Star), sizeof(Star));
+		}
+		return Bytes;
+	}
+
+	/**
+	 * Light's celestial image source: stars as bright as their magnitudes and as coloured as their B-V, drawn into a field
+	 * whose luminance gives their light back; and the sky of a moment turned into the world, the Moon lit from the Sun's
+	 * side by its phase and its bright limb, as bright as its phase law makes it over its lit disc.
+	 */
+	IMPLEMENT_SIMPLE_AUTOMATION_TEST(FLightImageTest, "Musee.Light.Image", Flags)
+
+	bool FLightImageTest::RunTest(const FString& Parameters)
+	{
+		TestTrue(TEXT("A star of V 0 gives 2.08 microlux, and one five magnitudes fainter a hundredth of it"),
+			FMath::IsNearlyEqual(Image::StarIlluminanceLux(0.0), 2.08e-6, 1e-12) && FMath::IsNearlyEqual(Image::StarIlluminanceLux(5.0), 2.08e-8, 1e-14));
+		const auto Luminance = [](const FLinearColor& C) { return 0.2126 * C.R + 0.7152 * C.G + 0.0722 * C.B; };
+		const FLinearColor Sunlike = Image::StarColour(0.65);
+		const FLinearColor Blue = Image::StarColour(-0.3);
+		TestTrue(TEXT("A star's colour is of unit luminance, a Sun-like star warm and a hot one blue"),
+			FMath::IsNearlyEqual(Luminance(Sunlike), 1.0, 1e-4) && FMath::IsNearlyEqual(Luminance(Blue), 1.0, 1e-4) && Sunlike.R > Sunlike.B && Blue.B > Blue.R);
+
+		const FVector4f Stars[] = { FVector4f(0.0f, 0.0f, 0.0f, 0.65f), FVector4f(1.5707963f, 1.0471976f, 2.0f, -0.2f), FVector4f(3.0f, -0.5f, 7.0f, 1.0f) };
+		const TValueOrError<Image::FStarField, FString> Field = Image::DrawStarField(Catalogue(Stars), 256, 128);
+		if (TestTrue(TEXT("A catalogue draws"), Field.HasValue()))
+		{
+			TestEqual(TEXT("its stars to V 6.5, not fainter"), Field.GetValue().Stars, 2);
+			const double Lux = Image::StarIlluminanceLux(0.0) + Image::StarIlluminanceLux(2.0);
+			double Integrated = 0.0;
+			const double Texel = (2.0 * UE_DOUBLE_PI / 256) * (UE_DOUBLE_PI / 128);
+			for (int32 Row = 0; Row < 128; ++Row)
+			{
+				for (int32 Column = 0; Column < 256; ++Column)
+				{
+					Integrated += Luminance(Field.GetValue().Luminance[Row * 256 + Column]) * Texel * FMath::Sin(UE_DOUBLE_PI * (Row + 0.5) / 128);
+				}
+			}
+			TestTrue(TEXT("its luminance over the sky gives back their illuminance"), FMath::IsNearlyEqual(Integrated, Lux, 1e-4 * Lux));
+			TestTrue(TEXT("its mean over the whole sky theirs over 4 pi"), FMath::IsNearlyEqual(Field.GetValue().MeanLuminance, Lux / (4.0 * UE_DOUBLE_PI), 1e-15));
+		}
+		TestTrue(TEXT("A file not in the format is refused"), Image::DrawStarField(TArray<uint8>{ 'M', 'V', 'S', '1', 9, 0, 0, 0 }, 256, 128).HasError());
+
+		// A sky whose star field turns the equator's x to south, its y to east and its pole to the zenith (a left-handed
+		// horizon frame, as Time's), in a world that is the horizon frame.
+		FTimeMoment Moment;
+		Moment.StarFieldOrientation = FMatrix(FPlane(0.0, 1.0, 0.0, 0.0), FPlane(1.0, 0.0, 0.0, 0.0), FPlane(0.0, 0.0, 1.0, 0.0), FPlane(0.0, 0.0, 0.0, 1.0));
+		Moment.MoonDirection = FVector(0.0, 1.0, 0.0);
+		Moment.MoonDistanceKilometers = 384400.0;
+		Moment.MoonIlluminatedFraction = 1.0;
+		Moment.MoonPhaseAngleDegrees = 0.0;
+		const Image::FSkyPicture Full = Image::SkyPicture(Moment, FTransform::Identity, 200.0);
+		TestTrue(TEXT("The sky turns the world back into the equator's frame"), Full.SkyRowX.Equals(FVector(0.0, 1.0, 0.0), 1e-9)
+			&& Full.SkyRowY.Equals(FVector(1.0, 0.0, 0.0), 1e-9) && Full.SkyRowZ.Equals(FVector(0.0, 0.0, 1.0), 1e-9));
+		TestTrue(TEXT("The full Moon is where it is seen, lit from behind us"), Full.MoonDirection.Equals(FVector(0.0, 1.0, 0.0), 1e-9)
+			&& Full.MoonSunward.Equals(FVector(0.0, -1.0, 0.0), 1e-9));
+		const double Radius = 0.5 * FMath::DegreesToRadians(SkyPhotometry::MoonAngularDiameter(384400.0).Get());
+		const double Disc = 2.0 * UE_DOUBLE_PI * (1.0 - FMath::Cos(Radius));
+		const double FullLux = SkyPhotometry::MoonIlluminance(Degrees(0.0), 384400.0).Get();
+		TestTrue(TEXT("its face as bright as its light over its disc"), FMath::IsNearlyEqual(Full.MoonCosRadius, FMath::Cos(Radius), 1e-12)
+			&& FMath::IsNearlyEqual(Full.MoonLuminance, FullLux / Disc, 1e-6 * FullLux / Disc));
+		TestTrue(TEXT("and the picture's mean the stars' and the Moon's, clipped at the peak white"),
+			FMath::IsNearlyEqual(Full.MeanLuminance, Image::StarFieldMeanLuminance + FMath::Min(FullLux / Disc, 200.0) * Disc / (4.0 * UE_DOUBLE_PI), 1e-12));
+		Moment.MoonIlluminatedFraction = 0.5;
+		Moment.MoonPhaseAngleDegrees = 90.0;
+		Moment.MoonBrightLimbDegrees = 90.0;
+		TestTrue(TEXT("A quarter Moon whose bright limb is east is lit from the east"),
+			Image::SkyPicture(Moment, FTransform::Identity, 200.0).MoonSunward.Equals(FVector(1.0, 0.0, 0.0), 1e-9));
+		Moment.MoonBrightLimbDegrees = 0.0;
+		TestTrue(TEXT("and one whose bright limb is north, from the celestial pole's side"),
+			Image::SkyPicture(Moment, FTransform::Identity, 200.0).MoonSunward.Equals(FVector(0.0, 0.0, 1.0), 1e-9));
 		return true;
 	}
 }

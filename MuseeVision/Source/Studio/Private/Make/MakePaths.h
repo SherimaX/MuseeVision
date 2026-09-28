@@ -48,6 +48,15 @@ namespace Musee::Studio
 			return FString::Printf(TEXT("%s/Light/Profiles/%s"), *Root, *Name);
 		}
 
+		/**
+		 * Light's image material or its star field, which Studio makes for Light: <Root>/Light/<Name>, which for the
+		 * museum's root is where Light finds them (Musee::Light::Image::Folder).
+		 */
+		FString LightImage(const FString& Name) const
+		{
+			return FString::Printf(TEXT("%s/Light/%s"), *Root, *Name);
+		}
+
 		/** A joint's mesh, drawn by Site in the museum's frame and named joint.<port>.<part>: <Root>/Site/Joints/SM_<Piece>. */
 		FString JointMesh(const FString& Piece) const
 		{

@@ -8,6 +8,8 @@ public class MuseeStudio : MuseeModuleRules
 		PrivateDependencyModuleNames.AddRange(new string[] { "UnrealEd", "MeshDescription", "StaticMeshDescription", "MeshConversion", "GeometryCore", "AssetTools", "LevelInstanceEditor", "Localization", "PythonScriptPlugin" });
 		// The makers' photometric files come in through the engine's own IES import (its IES converter).
 		PrivateDependencyModuleNames.Add("IESFile");
+		// Light's image material is built as a material graph (the material editor's library connects its output).
+		PrivateDependencyModuleNames.Add("MaterialEditor");
 		// The collection's glTF scans come in through the engine's own glTF import (the Interchange plugin).
 		PrivateDependencyModuleNames.AddRange(new string[] { "InterchangeCore", "InterchangeEngine", "InterchangePipelines" });
 	}

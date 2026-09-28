@@ -1,5 +1,6 @@
 #include "LightLuminaireComponent.h"
 
+#include "Components/DynamicMeshComponent.h"
 #include "Components/PointLightComponent.h"
 #include "Components/RectLightComponent.h"
 #include "Components/SpotLightComponent.h"
@@ -7,8 +8,11 @@
 #include "Engine/World.h"
 #include "GameFramework/Pawn.h"
 #include "GameFramework/PlayerController.h"
+#include "Image/ImageSphere.h"
+#include "LightImage.h"
 #include "LightLog.h"
 #include "LightLuminaire.h"
+#include "Materials/MaterialInstanceDynamic.h"
 #include "MuseeSignals.h"
 #include "Operation/OperationRecords.h"
 #include "Sky/SkyPhotometry.h"
@@ -187,16 +191,18 @@ ULightLuminaireComponent::ULightLuminaireComponent()
 }
 
 void ULightLuminaireComponent::Configure(const FMuseeKey& InType, ELightOperation InOperation, const FMuseeKey& InFollows, Musee::Meters InLength,
-	const FVector2D& InFaceMeters, bool bInFaceEncloses)
+	const FVector2D& InFaceMeters, const FVector2D& InSphereMeters)
 {
 	LuminaireType = InType;
 	LuminaireOperation = InOperation;
 	FollowedChannel = InFollows;
 	LengthMeters = InLength.Get();
 	FaceMeters = InFaceMeters;
-	bFaceEncloses = bInFaceEncloses;
+	SphereMeters = InSphereMeters;
 	const FLightLuminaire* Luminaire = Musee::Light::FindLuminaire(LuminaireType);
 	Profile = Luminaire && Luminaire->Emitter == FLightLuminaire::EEmitter::Profile ? Musee::Light::FindProfile(*Luminaire) : nullptr;
+	const bool bEnclosingImage = Luminaire && Luminaire->Emitter == FLightLuminaire::EEmitter::Image && FaceEncloses();
+	ImageMaterial = bEnclosingImage ? Musee::Light::Image::FindMaterial() : nullptr;
 	DestroyEmitters();
 	if (IsRegistered()) { MakeEmitters(); }
 }
@@ -204,16 +210,16 @@ void ULightLuminaireComponent::Configure(const FMuseeKey& InType, ELightOperatio
 double ULightLuminaireComponent::Level() const
 {
 	const FLightLuminaire* Luminaire = Musee::Light::FindLuminaire(LuminaireType);
-	const double Picture = Luminaire && Luminaire->Emitter == FLightLuminaire::EEmitter::Image ? ImageLevel : 1.0;
-	return bSwitchedOn ? ChannelLevel * Picture : 0.0;
+	const double Shown = Luminaire && Luminaire->Emitter == FLightLuminaire::EEmitter::Image ? ImageLevel : 1.0;
+	return bSwitchedOn ? ChannelLevel * Shown : 0.0;
 }
 
 Musee::Lumens ULightLuminaireComponent::EmittedFlux() const
 {
 	const FLightLuminaire* Luminaire = Musee::Light::FindLuminaire(LuminaireType);
-	// Only the engine lights it drives give its light: a face that encloses it drives none, so it gives none (the dresser
-	// reports it), until a surface of the picture it shows gives the light itself.
-	if (!Luminaire || !Luminaire->bLit || EmitterLights.IsEmpty()) { return Musee::Lumens(0.0); }
+	// Its light leaves the engine lights it drives, or, for a face that encloses it, the surface its picture is shown on.
+	const bool bGiving = FaceEncloses() ? Surface != nullptr : !EmitterLights.IsEmpty();
+	if (!Luminaire || !Luminaire->bLit || !bGiving) { return Musee::Lumens(0.0); }
 	return Musee::Lumens(Musee::Light::FullFlux(*Luminaire, LengthMeters, FaceMeters) * Level());
 }
 
@@ -236,6 +242,9 @@ void ULightLuminaireComponent::DestroyEmitters()
 		if (Light) { Light->DestroyComponent(); }
 	}
 	EmitterLights.Reset();
+	if (Surface) { Surface->DestroyComponent(); }
+	Surface = nullptr;
+	Picture = nullptr;
 }
 
 void ULightLuminaireComponent::MakeEmitters()
@@ -244,8 +253,14 @@ void ULightLuminaireComponent::MakeEmitters()
 	const FLightLuminaire* Luminaire = Musee::Light::FindLuminaire(LuminaireType);
 	if (!Luminaire || !Luminaire->bLit || !GetOwner()) { return; }
 	if (Luminaire->Emitter == EEmitter::Linear && LengthMeters <= 0.0) { return; }
-	// An enclosing face shines in from all round, which no engine light (each shining out from one place) can stand for.
-	if (Luminaire->IsAreal() && (FaceMeters.X * FaceMeters.Y <= 0.0 || bFaceEncloses)) { return; }
+	// An enclosing face shines in from all round, which no engine light (each shining out from one place) can stand for:
+	// an image's light leaves the surface it is shown on.
+	if (FaceEncloses())
+	{
+		MakeImageSurface();
+		return;
+	}
+	if (Luminaire->IsAreal() && FaceMeters.X * FaceMeters.Y <= 0.0) { return; }
 	if (Luminaire->Emitter == EEmitter::Profile && !Profile) { return; }
 	const int32 Count = Luminaire->Emitter == EEmitter::Point ? FMath::Max(Luminaire->LampCount, 1) : 1;
 	for (int32 Index = 0; Index < Count; ++Index)
@@ -262,10 +277,54 @@ void ULightLuminaireComponent::MakeEmitters()
 	Apply();
 }
 
+void ULightLuminaireComponent::MakeImageSurface()
+{
+	const FLightLuminaire* Luminaire = Musee::Light::FindLuminaire(LuminaireType);
+	if (!Luminaire || Luminaire->Emitter != FLightLuminaire::EEmitter::Image || !ImageMaterial) { return; }
+	UDynamicMeshComponent* Sphere = NewObject<UDynamicMeshComponent>(GetOwner(), NAME_None, RF_Transient);
+	UE::Geometry::FDynamicMesh3 Mesh;
+	Musee::Light::BuildImageSphere(Musee::ToEngine(Musee::Meters(SphereMeters.X)), Musee::ToEngine(Musee::Meters(SphereMeters.Y)), Mesh);
+	Sphere->SetMesh(MoveTemp(Mesh));
+	Sphere->SetMobility(EComponentMobility::Movable);
+	Sphere->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	// The picture is the light: the surface is lit by nothing and shades nothing.
+	Sphere->SetCastShadow(false);
+	Picture = UMaterialInstanceDynamic::Create(ImageMaterial, this);
+	Sphere->SetMaterial(0, Picture);
+	Sphere->SetupAttachment(this);
+	Sphere->RegisterComponent();
+	Surface = Sphere;
+	Apply();
+}
+
+void ULightLuminaireComponent::FollowSky(const FTimeMoment& Moment)
+{
+	const FLightLuminaire* Luminaire = Musee::Light::FindLuminaire(LuminaireType);
+	if (!Picture || !Luminaire) { return; }
+	namespace Image = Musee::Light::Image;
+	const double Peak = Luminaire->PeakLuminanceCandelaPerSquareMeter;
+	const Image::FSkyPicture Sky = Image::SkyPicture(Moment, GetComponentTransform(), Peak);
+	Picture->SetVectorParameterValue(Image::Parameter::SkyRowX, FLinearColor(Sky.SkyRowX));
+	Picture->SetVectorParameterValue(Image::Parameter::SkyRowY, FLinearColor(Sky.SkyRowY));
+	Picture->SetVectorParameterValue(Image::Parameter::SkyRowZ, FLinearColor(Sky.SkyRowZ));
+	Picture->SetVectorParameterValue(Image::Parameter::MoonDirection, FLinearColor(Sky.MoonDirection));
+	Picture->SetVectorParameterValue(Image::Parameter::MoonSunward, FLinearColor(Sky.MoonSunward));
+	Picture->SetScalarParameterValue(Image::Parameter::MoonCosRadius, static_cast<float>(Sky.MoonCosRadius));
+	Picture->SetScalarParameterValue(Image::Parameter::MoonLuminance, static_cast<float>(Sky.MoonLuminance));
+	// The picture's mean over its peak white is how much of its full light the panel gives.
+	ImageLevel = Peak > 0.0 ? FMath::Clamp(Sky.MeanLuminance / Peak, 0.0, 1.0) : 0.0;
+}
+
 void ULightLuminaireComponent::Apply()
 {
 	const FLightLuminaire* Luminaire = Musee::Light::FindLuminaire(LuminaireType);
 	if (!Luminaire) { return; }
+	if (Picture)
+	{
+		// The surface shows its picture itself, at the panel's peak white, run by its switch and its channel.
+		Picture->SetScalarParameterValue(Musee::Light::Image::Parameter::PeakLuminance, static_cast<float>(Luminaire->PeakLuminanceCandelaPerSquareMeter));
+		Picture->SetScalarParameterValue(Musee::Light::Image::Parameter::Level, static_cast<float>(bSwitchedOn ? ChannelLevel : 0.0));
+	}
 	const bool bByProfile = Luminaire->Emitter == FLightLuminaire::EEmitter::Profile;
 	const float Setting = static_cast<float>(Musee::Light::FullSetting(*Luminaire, LengthMeters, FaceMeters) * Level());
 	for (ULocalLightComponent* Light : EmitterLights)
@@ -281,7 +340,7 @@ void ULightLuminaireComponent::BeginPlay()
 {
 	Super::BeginPlay();
 	UWorld* World = GetWorld();
-	if (LuminaireOperation != ELightOperation::Always)
+	if (LuminaireOperation != ELightOperation::Always || Picture)
 	{
 		if (UTimeSubsystem* Time = World->GetSubsystem<UTimeSubsystem>())
 		{
@@ -326,6 +385,7 @@ void ULightLuminaireComponent::ShowImage(double MeanLuminanceShare)
 
 void ULightLuminaireComponent::FollowMoment(const FTimeMoment& Moment)
 {
+	FollowSky(Moment);
 	if (LuminaireOperation == ELightOperation::Dusk)
 	{
 		bSwitchedOn = !Moment.bSunUp;
