@@ -412,8 +412,8 @@ namespace Musee::ArtMaking
 		}
 
 		/**
-		 * A scholar's rock stands in the round, formed as the stones' record says: its kind of rock, well recorded, and its
-		 * foot's radius, which must hold its wrinkled skin.
+		 * A scholar's rock stands in the round, formed as the stones' record says: its kind of rock, well recorded, its
+		 * foot's radius, which must hold its wrinkled skin, and on a stand, the stand the record carves to it.
 		 */
 		TArray<FString> StoneEntryFaults(const FMuseeStageContext& Stage, const FArtHangEntry& Entry, const FEntryContext& Context)
 		{
@@ -442,6 +442,14 @@ namespace Musee::ArtMaking
 				if (StoneWidthMeters({ Kind, Entry.SizeMeters().Y, Stone->FootRadiusMeters, 0 }) <= 0.0)
 				{
 					Out.Add(TEXT("its foot's radius can't hold a rock of its height and kind"));
+				}
+			}
+			// A rock on a stand stands on the one the record carves to it (座).
+			if (Entry.Stand)
+			{
+				for (const FString& Fault : StoneStandFaults(Context.Stones->Stand))
+				{
+					Out.Add(FString::Printf(TEXT("Data/%s, its stand: %s"), FArtStones::Record, *Fault));
 				}
 			}
 			return Out;

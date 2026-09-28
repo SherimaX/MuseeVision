@@ -418,6 +418,11 @@ namespace Musee::ArtMaking
 		return Foot > 0.0 ? 2.0 * Foot / Spec.Kind->Profile[0].Y : 0.0;
 	}
 
+	double StoneCellMeters(const FStoneSpec& Spec)
+	{
+		return Spec.Kind && Spec.Kind->Cells > 0 ? Spec.HeightMeters / Spec.Kind->Cells : 0.0;
+	}
+
 	void BuildStone(const FStoneSpec& Spec, FFormMesh& Out)
 	{
 		const double Width = StoneWidthMeters(Spec);

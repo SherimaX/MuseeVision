@@ -9,15 +9,15 @@
   "dielectric": {
     "diffuseAlbedo": {
       "value": [
-        54.0,
-        25.0,
-        34.0
+        29.0,
+        24.0,
+        27.0
       ],
       "space": "CIELAB (D65, 2 deg)",
       "unit": "CIELAB",
       "grade": "unverified",
-      "source": "Palette.json: accent.earthenware-sancai ; The Metropolitan Museum of Art, 'Horse', Tang dynasty, late 7th to first half of the 8th century, earthenware with three-color (sancai) glaze and pigment, 1991.253.12 (public domain), its open-access photograph https://images.metmuseum.org/CRDImages/as/web-large/1991_253_12.jpg , read 2026-09-27 ; J. Y. Shen, J. Henderson, J. Evans, S. Chenery and F. Y. Zhao, 'A study of the glazing techniques and provenances of Tang sancai glazes using elemental and lead isotope analyses', Archaeometry 61, 2 (2019) 358-373, doi:10.1111/arcm.12436, https://nora.nerc.ac.uk/522694/1/Shen_et_al-2019-Archaeometry.pdf",
-      "note": "The amber lead glaze, coloured by iron (FeO 1.09 to 5.35 wt.% in Shen et al.'s brown glazes). Read as the mean sRGB of lit patches of the photograph (a 470 x 624 JPEG, taken as sRGB under D65; its white balance and exposure are the photographer's, uncalibrated), converted to CIELAB: the saddle's seat (51.7, 23.1, 30.0) and its flap (56.8, 26.6, 36.8), their mean rounded. Its sisters are glaze.sancai-green and glaze.sancai-clear."
+      "source": "Palette.json: accent.earthenware-sancai ; assets/reference/chinese-ref-sancai-horse.jpg, the collection's reference photograph of this work (assets/reference/CREDITS.md: 'Caparisoned horse', Shaanxi or Henan province, China, Tang dynasty, 675-750, earthenware with sancai glaze, Portland Art Museum, gallery photograph by Daderot, public domain, https://commons.wikimedia.org/wiki/File:Caparisoned_horse,_Shaanxi_or_Henan_province,_China,_Tang_dynasty,_675-750_AD,_earthenware_with_sancai_glaze_-_Portland_Art_Museum_-_Portland,_Oregon_-_DSC08396.jpg ), read 2026-09-27 ; second witness: The Metropolitan Museum of Art, 'Horse', Tang dynasty, 1991.253.12 (public domain), https://images.metmuseum.org/CRDImages/as/web-large/1991_253_12.jpg ; J. Y. Shen, J. Henderson, J. Evans, S. Chenery and F. Y. Zhao, 'A study of the glazing techniques and provenances of Tang sancai glazes using elemental and lead isotope analyses', Archaeometry 61, 2 (2019) 358-373, doi:10.1111/arcm.12436, https://nora.nerc.ac.uk/522694/1/Shen_et_al-2019-Archaeometry.pdf",
+      "note": "The amber lead glaze, coloured by iron (FeO 1.09 to 5.35 wt.% in Shen et al.'s brown glazes), the horse's dominant glaze: its body, neck and legs are amber-brown, running from orange on the lit chest to Shen et al.'s dark brown on the neck. Read as the mean sRGB of lit patches of the reference (a 1024 x 728 JPEG, taken as sRGB under D65; the photographer's white balance, which leaves the white plinth under the horse near neutral at (65.3, -1.2, 5.5), and exposure, uncalibrated), pixel boxes x0-x1 by y0-y1, converted to CIELAB: the chest 375-420 by 365-400 (36.6, 32.9, 40.1), the hindquarter between the drips 640-655 by 300-345 (36.2, 20.7, 25.1) and 700-720 by 310-345 (32.0, 19.0, 21.0), the flank under the saddle cloth 655-685 by 380-410 (25.6, 24.3, 24.5) and the neck 300-340 by 150-200 (21.9, 19.1, 18.6); the mean of their 5,850 pixels (29.3, 23.8, 26.7), rounded. The Met's horse 1991.253.12 is a cream horse with an amber saddle, whose pale amber (about L* 54) is not this horse's. Its sisters are glaze.sancai-green and glaze.sancai-clear."
     },
     "refractiveIndex": {
       "value": 1.65,

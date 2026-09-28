@@ -9,15 +9,15 @@
   "dielectric": {
     "diffuseAlbedo": {
       "value": [
-        42.0,
-        -10.0,
-        12.0
+        55.0,
+        -15.0,
+        21.0
       ],
       "space": "CIELAB (D65, 2 deg)",
       "unit": "CIELAB",
       "grade": "unverified",
-      "source": "Palette.json: accent.earthenware-sancai ; The Metropolitan Museum of Art, 'Horse', Tang dynasty, late 7th to first half of the 8th century, earthenware with three-color (sancai) glaze and pigment, 1991.253.12 (public domain), its open-access photograph https://images.metmuseum.org/CRDImages/as/web-large/1991_253_12.jpg , read 2026-09-27 ; J. Y. Shen, J. Henderson, J. Evans, S. Chenery and F. Y. Zhao, 'A study of the glazing techniques and provenances of Tang sancai glazes using elemental and lead isotope analyses', Archaeometry 61, 2 (2019) 358-373, doi:10.1111/arcm.12436, https://nora.nerc.ac.uk/522694/1/Shen_et_al-2019-Archaeometry.pdf",
-      "note": "The green lead glaze, coloured by copper (CuO 1.22 to 3.70 wt.% in Shen et al.'s green glazes). Read as the mean sRGB of lit patches of the photograph (a 470 x 624 JPEG, taken as sRGB under D65; its white balance and exposure are the photographer's, uncalibrated), converted to CIELAB: the sixty greenest pixels of the drips run down the flank from the saddle cloth (43.8, -8.2, 11.3) and the 21 whose green exceeds their red by more than 8 (40.7, -10.9, 12.4), their mean rounded. The drips are narrow, so their pixels carry some of the cream beside them."
+      "source": "Palette.json: accent.earthenware-sancai ; assets/reference/chinese-ref-sancai-horse.jpg, the collection's reference photograph of this work (assets/reference/CREDITS.md: 'Caparisoned horse', Shaanxi or Henan province, China, Tang dynasty, 675-750, earthenware with sancai glaze, Portland Art Museum, gallery photograph by Daderot, public domain, https://commons.wikimedia.org/wiki/File:Caparisoned_horse,_Shaanxi_or_Henan_province,_China,_Tang_dynasty,_675-750_AD,_earthenware_with_sancai_glaze_-_Portland_Art_Museum_-_Portland,_Oregon_-_DSC08396.jpg ), read 2026-09-27 ; second witness: The Metropolitan Museum of Art, 'Horse', Tang dynasty, 1991.253.12 (public domain), https://images.metmuseum.org/CRDImages/as/web-large/1991_253_12.jpg ; J. Y. Shen, J. Henderson, J. Evans, S. Chenery and F. Y. Zhao, 'A study of the glazing techniques and provenances of Tang sancai glazes using elemental and lead isotope analyses', Archaeometry 61, 2 (2019) 358-373, doi:10.1111/arcm.12436, https://nora.nerc.ac.uk/522694/1/Shen_et_al-2019-Archaeometry.pdf",
+      "note": "The green lead glaze, coloured by copper (CuO 1.22 to 3.70 wt.% in Shen et al.'s green glazes): the saddle cloth, the medallions on the breast strap and crupper and the drips below them. Read as the mean sRGB of lit patches of the reference (a 1024 x 728 JPEG, taken as sRGB under D65; the photographer's white balance, which leaves the white plinth under the horse near neutral at (65.3, -1.2, 5.5), and exposure, uncalibrated), pixel boxes x0-x1 by y0-y1, converted to CIELAB: the saddle cloth left of the saddle 467-487 by 315-360 (52.1, -16.3, 25.1) and right of it 548-572 by 305-350 (58.1, -14.4, 17.9); the mean of their 1,980 pixels (55.3, -15.3, 21.1), rounded."
     },
     "refractiveIndex": {
       "value": 1.65,

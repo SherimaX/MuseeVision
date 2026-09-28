@@ -2970,13 +2970,13 @@
           "Shading/Substances/glaze.sancai-green.json",
           "Shading/Substances/glaze.sancai-clear.json"
         ],
-        "needed": "Measured colours of the three glazes and the body (the first values are read from the Met's photograph of its horse 1991.253.12, uncalibrated); the object's decoration (where the green and the clear glazes lie on it)."
+        "needed": "Measured colours of the three glazes and the body (the first values are read from the collection's reference photograph of the horse, assets/reference/chinese-ref-sancai-horse.jpg, uncalibrated); the object's decoration (where the green and the clear glazes lie on it)."
       },
       "finishes": [
         {
           "working": "glazed.sancai",
           "history": "clean",
-          "note": "Art: chinese-sancai-horse, in its case (the amber stands for the three until the object carries its decoration)"
+          "note": "Art: chinese-sancai-horse, in its case (its dominant amber-brown, over the whole horse until the object carries its decoration)"
         },
         {
           "working": "glazed.sancai-green",

@@ -28,15 +28,35 @@ namespace Musee::ArtMaking
 			OutFindings.Add(ArtFinding(Making.Stage, FString::Printf(TEXT("Work %s: it can't be formed: %s."), *Entry.Work, *Why)));
 			return;
 		}
+		const FStoneSpec Spec{ Kind, Entry.SizeMeters().Y, Stone->FootRadiusMeters, Musee::Seed(FMuseeKey(Entry.Work)) };
 		FFormMesh Mesh;
-		BuildStone({ Kind, Entry.SizeMeters().Y, Stone->FootRadiusMeters, Musee::Seed(FMuseeKey(Entry.Work)) }, Mesh);
+		BuildStone(Spec, Mesh);
 		if (Mesh.IsEmpty())
 		{
 			OutFindings.Add(ArtFinding(Making.Stage, FString::Printf(TEXT("Work %s: its rock leaves no surface."), *Entry.Work)));
 			return;
 		}
-		const FMuseeFrame Frame = RoundFrame(Entry, Making.Stage.FindAnchor(Entry.Anchor, MountAnchorKind)->Frame);
-		FFormMadePiece Piece = ArtPiece(FName(ObjectName(Entry, Plan.IsSplit())), Supports::Stone, Canvas.Finish, Frame, true);
+		const bool bSplit = Plan.IsSplit();
+		const FMuseeFrame Ground = RoundFrame(Entry, Making.Stage.FindAnchor(Entry.Anchor, MountAnchorKind)->Frame);
+		double Raised = 0.0;
+		if (Entry.Stand)
+		{
+			// Its stand is carved to it (座): the rock sits down into the recess cut to its foot.
+			const FArtStoneStand& StandRecord = Stones.GetValue().Stand;
+			FStoneStandForm Stand = CarveStoneStand(Mesh, StoneCellMeters(Spec), StandRecord);
+			if (Stand.Mesh.IsEmpty())
+			{
+				OutFindings.Add(ArtFinding(Making.Stage, FString::Printf(TEXT("Work %s: its stand can't be carved to it."), *Entry.Work)));
+				return;
+			}
+			Raised = Stand.RecessFloorMeters;
+			FFormMadePiece StandPiece = ArtPiece(PartName(Entry, bSplit, TEXT("stand")), TEXT("stand"),
+				{ StandRecord.Palette, StandRecord.Working, StandRecord.History }, Ground, true);
+			Stand.Mesh.Write(StandPiece.Mesh);
+			OutPieces.Add(MoveTemp(StandPiece));
+		}
+		const FMuseeFrame OnStand = Ground.FrameToParent(FMuseeFrame(FVector(0.0, 0.0, Raised)));
+		FFormMadePiece Piece = ArtPiece(FName(ObjectName(Entry, bSplit)), Supports::Stone, Canvas.Finish, OnStand, true);
 		Mesh.Write(Piece.Mesh);
 		OutPieces.Add(MoveTemp(Piece));
 	}

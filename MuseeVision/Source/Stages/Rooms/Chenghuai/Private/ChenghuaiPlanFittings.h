@@ -296,11 +296,6 @@ namespace Musee::Chenghuai::Plan
 	inline constexpr double PotBed = 0.010;
 	inline constexpr double DropperR = 0.040;
 	inline constexpr double DropperHigh = 0.050;
-	/** The Lingbi rock's stand: phoebe, r 0.11 × 0.03 at (11.35, -40.45) on the painting table. */
-	inline constexpr double RockStandX = 11.350;
-	inline constexpr double RockStandY = -40.450;
-	inline constexpr double RockStandR = 0.110;
-	inline constexpr double RockStandHigh = 0.030;
 
 	// ---- the lanterns (纱灯, ChenghuaiDisplay.cpp:360-443) -----------------------------------------------------------------
 	/** A lantern: its hook, its rod, its hexagon's radius and height. From the rod down: the crown (R - 0.05, 0.02), the top

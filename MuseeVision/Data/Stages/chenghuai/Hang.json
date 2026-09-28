@@ -1031,9 +1031,9 @@
       "centre": [
         11.35,
         -40.45,
-        1.28
+        1.25
       ],
-      "height": 1.28,
+      "height": 1.25,
       "size": [
         0.0,
         0.32
@@ -1042,7 +1042,8 @@
       "frame": "none",
       "care": "stone-and-bronze",
       "wall": "chenghuai.lingbi-rock",
-      "note": "On the painting table's east end, on its carved phoebe stand r 0.11 x 0.03 (its top 1.28), which the stage draws (linquan.table.rock-stand), so Art sets the rock on it and draws no stand; the rock 0.32 high, formed by Art as a Lingbi rock is (Data/Art/Stones.json), its foot within the stand, in accent.lingbi-rock (its medium's line in Data/Art/Media.json)."
+      "stand": true,
+      "note": "On the painting table's east end (its top 1.25), on its carved phoebe stand 0.03 high, which Art carves to the rock (Data/Art/Stones.json stand): its top recessed to the rock's foot, the rock sitting down into it; the rock 0.32 high, formed by Art as a Lingbi rock is (Data/Art/Stones.json), its foot within r 0.11, in accent.lingbi-rock (its medium's line in Data/Art/Media.json)."
     }
   ]
 }

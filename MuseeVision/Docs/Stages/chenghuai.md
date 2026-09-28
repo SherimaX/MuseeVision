@@ -603,7 +603,7 @@ path 6, rockery's east foot to walk: (3.699, −8.398) (3.958, −8.383) (4.340,
   `chenghuai.desk.inkstone` 0.18 × 0.26 × 0.03 in a phoebe box 0.20 × 0.28 × 0.012 (`chenghuai.furniture`), a brush pot
   r 0.065 × 0.16 and a water dropper r 0.04 × 0.05 `chenghuai.desk.stoneware`. Desk: inkstone at (−3.45, −2.27), pot
   (−3.10, −2.22), dropper (−3.90, −2.27). Painting table: inkstone (10.85, −40.55), pot (10.45, −40.45), dropper (10.30,
-  −40.70); the **Lingbi rock** (§8) on a phoebe stand r 0.11 × 0.03 at (11.35, −40.45), `chenghuai.lingbi-rock`.
+  −40.70); the **Lingbi rock** (§8) on its carved phoebe stand at (11.35, −40.45), `chenghuai.lingbi-rock`.
 - **Lanterns (纱灯)**, 17 plain hexagons (`ChenghuaiDisplay.cpp:360-443`): a bronze rod `chenghuai.bronze.hardware` from
   the hook; black-lacquered top plate (R + 0.018, 0.025) and crown (R − 0.05, 0.02), base plate and foot the same
   (`chenghuai.timber.black`); six posts 0.02 square; silk-gauze panels `chenghuai.lantern.silk` 4 mm between the posts
@@ -888,8 +888,9 @@ lower edge up the slope from the bed's front edge (the image centred on the bed'
 Care: ceramic-and-glass (the sancai horse is lead-glazed earthenware: the same class). Its medium, "Earthenware with
 three-colour lead glazes", is `accent.earthenware-sancai` · `glazed.sancai` · `clean` (Data/Art/Media.json): Matter's
 sancai lead glaze over a white earthenware body, after Shen et al., Archaeometry 61 (2019) 358–373 (PbO 39–64 wt.%;
-amber from iron, green from copper, the "white" a clear glaze over the white kaolin body). The glaze's amber ground stands
-for the three until the object carries its decoration: its scan is a buff stand-in. The four scans that exist only as
+amber from iron, green from copper, the "white" a clear glaze over the white kaolin body), their colours read from the
+work's reference photograph (`assets/reference/chinese-ref-sancai-horse.jpg`). The horse shows its dominant amber-brown
+all over, the green and cream decoration missing until the object carries it. The four scans that exist only as
 prims of the retired wing's export are *works' evidence*; Studio imports them to `Evidence/Art` with provenance.
 
 **Building and garden works** (built by Form or Nature; Art adds only the caption, Hang `"built": "form"`):
@@ -902,9 +903,11 @@ anchors). **石兄** chenghuai-shixiong: a Taihu rock 3.00 high, formed by Art a
 set on `chenghuai.garden.shixiong` in `accent.taihu-rock` (its medium's line in `Data/Art/Media.json`, as
 `chenghuai.shixiong`), framed by the moon gate on its axis (care stone-and-bronze).
 **The Lingbi rock** chenghuai-lingbi-rock (`chenghuai.lingbi-rock`, `accent.lingbi-rock`): 0.32 high, formed by Art as a
-Lingbi rock is (a compact small mountain, grooved and pitted, few holes through), its foot within its stand, set on the
-phoebe stand the stage draws (`linquan.table.rock-stand`, r 0.11 × 0.03) at (11.35, −40.45, 1.28) on the painting table
-(`chenghuai.linquan.table`); care stone-and-bronze. **No wall labels** ("a literati house names itself"): captions on look.
+Lingbi rock is (a compact small mountain, grooved and pitted, few holes through), its foot within r 0.11, at (11.35,
+−40.45, 1.25) on the painting table (`chenghuai.linquan.table`), on its stand (Hang `"stand": true`): a phoebe zuo 0.03
+high that Art carves to the rock (`Data/Art/Stones.json` stand), its top recessed 8 mm to the rock's own foot so the rock
+sits down into it, a lip 8 mm round the recess, a bead round its side and five short feet, so its plan is the rock's
+foot grown by its lip (about 0.25 × 0.16), not a disc; care stone-and-bronze. **No wall labels** ("a literati house names itself"): captions on look.
 
 ## 9. Sound
 - **Rooms** (Enclosed): small and dry (臨池 ≈ 17.9 × 4.8 × 3.5; 澄懷堂 10.0 × 6.1, open to 7.75), from Matter: lime
@@ -975,7 +978,8 @@ Paths relative to `windows\`. Re-express, never copy; **y + 17.000** throughout.
 5. **Row-door lanterns' rods 0.40** (draft and as built 0.52): the lantern's foot hung 1.93 over the 0.30 platforms.
 6. **Built tonight** (the draft deferred them): the furniture (phoebe; the painting table and chairs in huanghuali), the
    fish bowl, tubs and pomegranates and the desk things (glazed stoneware), and the Lingbi rock (Lingbi stone). The
-   painting table's brush pot moves to (10.45, −40.45): as built it overlapped the Lingbi rock's stand.
+   painting table's brush pot moves to (10.45, −40.45): as built it overlapped the Lingbi rock's stand. The stand is
+   carved to the rock by Art (§8), not a turned disc of the stage's.
 7. **Ground:** Nature's ground beds in `accent.site-geology` (topsoil), not a Form sheet in "garden-soil".
 8. **Path 0's fork round 石兄** given exactly (circle r 1.475 about the rock; draft "forks at x 4.3 … rejoins at 6.3").
 9. **Hang:** image positions computed from the as-built rule (hanging scrolls' `along`/`height`; handscrolls on tilted

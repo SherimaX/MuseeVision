@@ -1,3 +1,4 @@
+#include "ArtHang.h"
 #include "FormMesh.h"
 #include "Misc/AutomationTest.h"
 #include "MuseeRecords.h"
@@ -86,6 +87,93 @@ bool FArtStoneTest::RunTest(const FString& Parameters)
 		TestTrue(*FString::Printf(TEXT("%s is the same every time it is formed"), Case.Work), Again.NumVertices() == Rock.NumVertices()
 			&& Again.NumTriangles() == Rock.NumTriangles() && Again.Position(0) == Rock.Position(0));
 	}
+	return true;
+}
+
+/**
+ * The Lingbi rock's stand (座), carved to the rock as a scholar's-rock stand is: the rock sits down into a recess cut to
+ * its own foot, which no part of it passes through; the stand's plan is the rock's foot grown by an even lip, not a
+ * turned disc; and it stands on short feet, its body clear of the table.
+ */
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FArtStoneStandTest, "Musee.Art.StoneStand", Musee::ArtMaking::StoneTests::Flags)
+
+bool FArtStoneStandTest::RunTest(const FString& Parameters)
+{
+	using namespace Musee::ArtMaking;
+	const TValueOrError<FArtStones, FString> Stones = Musee::ReadRecord<FArtStones>(FArtStones::Record);
+	if (!TestTrue(TEXT("The stones' record reads"), Stones.HasValue()))
+	{
+		AddError(Stones.GetError());
+		return false;
+	}
+	const FArtStoneStand& Record = Stones.GetValue().Stand;
+	for (const FString& Fault : StoneStandFaults(Record))
+	{
+		AddError(FString::Printf(TEXT("The stand: %s"), *Fault));
+	}
+	const TValueOrError<FArtHang, FString> Hang = Musee::ReadRecord<FArtHang>(TEXT("Stages/chenghuai/Hang.json"));
+	const FArtHangEntry* Entry = Hang.HasValue()
+		? Hang.GetValue().Works.FindByPredicate([](const FArtHangEntry& Each) { return Each.Work == TEXT("chenghuai-lingbi-rock"); }) : nullptr;
+	if (!TestNotNull(TEXT("Chenghuai's plan stands the Lingbi rock"), Entry))
+	{
+		return false;
+	}
+	TestTrue(TEXT("on its stand, which Art carves"), Entry->Stand);
+	const FStoneSpec Spec = StoneTests::SpecOf(Stones.GetValue(), TEXT("chenghuai-lingbi-rock"), Entry->SizeMeters().Y);
+	FFormMesh Rock;
+	BuildStone(Spec, Rock);
+	const FStoneStandForm Stand = CarveStoneStand(Rock, StoneCellMeters(Spec), Record);
+	if (!TestFalse(TEXT("Its stand is carved"), Stand.Mesh.IsEmpty()) || !TestEqual(TEXT("all round"), Stand.RecessRadiiMeters.Num(), StandAngles))
+	{
+		return false;
+	}
+	TestEqual(TEXT("The rock sits down into the recess: its foot on the recess's floor"), Stand.RecessFloorMeters, Record.HeightMeters - Record.RecessMeters, 1e-9);
+
+	// No part of the rock within the recess's depth reaches the recess's wall at its angle.
+	int32 Through = 0;
+	for (const FVector& Point : Rock.AllPositions())
+	{
+		if (Point.Z <= Record.RecessMeters)
+		{
+			const double Angle = FMath::Atan2(Point.Y, Point.X);
+			const int32 Index = (FMath::RoundToInt(Angle / (2.0 * UE_DOUBLE_PI) * StandAngles) % StandAngles + StandAngles) % StandAngles;
+			Through += FVector2D(Point.X, Point.Y).Size() >= Stand.RecessRadiiMeters[Index] ? 1 : 0;
+		}
+	}
+	TestEqual(TEXT("and no part of it passes through the recess's wall"), Through, 0);
+
+	// Carved to the rock: its plan as long and narrow as the rock's foot, with an even lip; a turned disc is as wide every way.
+	double Longest = 0.0;
+	double Shortest = TNumericLimits<double>::Max();
+	bool bEvenLip = true;
+	for (int32 Index = 0; Index < StandAngles; ++Index)
+	{
+		Longest = FMath::Max(Longest, Stand.OutlineRadiiMeters[Index]);
+		Shortest = FMath::Min(Shortest, Stand.OutlineRadiiMeters[Index]);
+		bEvenLip &= FMath::IsNearlyEqual(Stand.OutlineRadiiMeters[Index] - Stand.RecessRadiiMeters[Index], Record.LipMeters, 1e-9);
+	}
+	TestTrue(*FString::Printf(TEXT("Its plan follows the rock's foot, not a disc (%.3f by %.3f)"), 2.0 * Longest, 2.0 * Shortest),
+		Longest > 1.3 * Shortest);
+	TestTrue(TEXT("with an even lip round the recess"), bEvenLip);
+
+	// It stands on its feet: they reach the table, and its side, all round, stands their height clear of it.
+	int32 OnGround = 0;
+	int32 BodyLow = 0;
+	int32 Below = 0;
+	for (const FVector& Point : Stand.Mesh.AllPositions())
+	{
+		if (Point.Z < Record.FootHeightMeters - UE_KINDA_SMALL_NUMBER)
+		{
+			OnGround += Point.Z < UE_KINDA_SMALL_NUMBER ? 1 : 0;
+			const double Angle = FMath::Atan2(Point.Y, Point.X);
+			const int32 Index = (FMath::RoundToInt(Angle / (2.0 * UE_DOUBLE_PI) * StandAngles) % StandAngles + StandAngles) % StandAngles;
+			BodyLow += FVector2D(Point.X, Point.Y).Size() >= Stand.OutlineRadiiMeters[Index] - 1e-4 ? 1 : 0;
+		}
+		Below += Point.Z < -UE_KINDA_SMALL_NUMBER ? 1 : 0;
+	}
+	TestEqual(TEXT("Nothing of it is below the table"), Below, 0);
+	TestTrue(TEXT("It stands on the table on its feet"), OnGround > 0);
+	TestEqual(TEXT("which stand in from its side, its side clear of the table by their height"), BodyLow, 0);
 	return true;
 }
 

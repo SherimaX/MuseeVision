@@ -76,7 +76,9 @@ and, where its plan says `stand`, on its carved phoebe stand (`ware.<id>.stand`)
 (`Data/Art/Stones.json`, `Stone/StoneMesh.h`): a signed distance field of its kind's profile of ellipses swaying as it
 rises, cut flat at its foot and under its peaks, pierced by its holes, pitted and wrinkled, found by surface nets on a grid
 of the kind's cells up its height; its plan's height, its width as wide as the record's foot radius lets it be, in its
-medium's stone (`Data/Art/Media.json`), standing at its `centre` on its Mount anchor. A rock's carved stand is its stage's.
+medium's stone (`Data/Art/Media.json`), standing at its `centre` on its Mount anchor. A rock whose plan says `stand` stands on the carved
+stand (座) Art carves to it (`Stone/StoneStand.cpp`, the record's `stand`): its top recessed to the rock's own foot, the
+rock sitting down into it, an even lip, a bead round its side and short feet, in phoebe; its part is `<name>.stand`.
 
 Every object is named `<word>.<id>[.<index>]` (`canvas`, `glass`, `paper`, `plate`, `ware`, `cast`, `stone`), its parts `<name>.<part>`.
 **Panels, tapestry, scrolls and books.**

@@ -121,7 +121,18 @@ bool FMatterRecordsRead::RunTest(const FString& Parameters)
 				const TValueOrError<FMatterSubstance, FString> Glaze = ReadSubstance(Worked.GetValue().Lays);
 				if (TestTrue(*FString::Printf(TEXT("%s lays a glaze that reads"), Working), Glaze.HasValue()))
 				{
-					Glazes.Add(FString::JoinBy(Glaze.GetValue().Dielectric.DiffuseAlbedo.Value, TEXT(" "), [](double V) { return FString::SanitizeFloat(V); }));
+					const auto& Albedo = Glaze.GetValue().Dielectric.DiffuseAlbedo;
+					Glazes.Add(FString::JoinBy(Albedo.Value, TEXT(" "), [](double V) { return FString::SanitizeFloat(V); }));
+					// The collection holds its own photograph of the horse it shows; its glazes are read from that horse, not
+					// from another museum's, whose glazes lie differently (the Met's 1991.253.12 is cream with an amber saddle).
+					TestTrue(*FString::Printf(TEXT("%s is read from the work's own reference photograph"), Working),
+						Albedo.Source.Contains(TEXT("assets/reference/chinese-ref-sancai-horse.jpg")));
+					if (FCString::Strcmp(Working, TEXT("glazed.sancai")) == 0 && Albedo.Value.Num() == 3)
+					{
+						// The reference's body, neck and legs are amber-brown, Shen et al.'s dark brown: under L* 40, where the
+						// same photograph's cream reads near 89.
+						TestTrue(TEXT("the amber, the horse's dominant glaze, is its dark amber-brown"), Albedo.Value[0] < 40.0);
+					}
 				}
 			}
 		}

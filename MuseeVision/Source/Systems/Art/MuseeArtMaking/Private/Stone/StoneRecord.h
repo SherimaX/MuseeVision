@@ -85,6 +85,60 @@ struct FArtStone
 	FString Source;
 };
 
+/**
+ * The carved wooden stand (座, zuo) a rock stands on where its plan says `stand`: carved to the rock, its top recessed to
+ * the rock's own foot so the rock sits down into it, a lip round the recess, a bead moulded round its side, and short
+ * feet under it. Every length is metres.
+ */
+USTRUCT()
+struct FArtStoneStand
+{
+	GENERATED_BODY()
+
+	/** From the ground under its feet to the top of its lip. */
+	UPROPERTY(meta = (MuseeRequired, Units = "Meters"))
+	double HeightMeters = 0.0;
+
+	/** How deep the recess the rock sits in is cut into its top. */
+	UPROPERTY(meta = (MuseeRequired, Units = "Meters"))
+	double RecessMeters = 0.0;
+
+	/** The gap the carver leaves between the rock and the recess's wall. */
+	UPROPERTY(meta = (MuseeRequired, Units = "Meters"))
+	double ClearanceMeters = 0.0;
+
+	/** The lip's width round the recess, from the recess's wall to the stand's side. */
+	UPROPERTY(meta = (MuseeRequired, Units = "Meters"))
+	double LipMeters = 0.0;
+
+	/** How far the bead moulded round its side stands out of it (the bead's radius). */
+	UPROPERTY(meta = (MuseeRequired, Units = "Meters"))
+	double BeadMeters = 0.0;
+
+	/** Its feet: how many, how high (the gap under its body), their radius, and how far in from its side they stand. */
+	UPROPERTY(meta = (MuseeRequired))
+	int32 Feet = 0;
+
+	UPROPERTY(meta = (MuseeRequired, Units = "Meters"))
+	double FootHeightMeters = 0.0;
+
+	UPROPERTY(meta = (MuseeRequired, Units = "Meters"))
+	double FootRadiusMeters = 0.0;
+
+	UPROPERTY(meta = (MuseeRequired, Units = "Meters"))
+	double FootInsetMeters = 0.0;
+
+	/** Its wood, as Matter finishes it. */
+	UPROPERTY(meta = (MuseeRequired))
+	FName Palette;
+
+	UPROPERTY(meta = (MuseeRequired))
+	FName Working;
+
+	UPROPERTY(meta = (MuseeRequired))
+	FName History;
+};
+
 /** How the museum's scholar's rocks are formed, and each rock (`Data/Art/Stones.json`). */
 USTRUCT()
 struct FArtStones
@@ -93,6 +147,10 @@ struct FArtStones
 
 	/** The record, under Data. */
 	static constexpr const TCHAR* Record = TEXT("Art/Stones.json");
+
+	/** The carved stand a rock stands on where its plan says `stand`. */
+	UPROPERTY(meta = (MuseeRequired))
+	FArtStoneStand Stand;
 
 	UPROPERTY(meta = (MuseeRequired))
 	TArray<FArtStoneKind> Kinds;
