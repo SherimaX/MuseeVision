@@ -1,0 +1,90 @@
+{
+  "title": "Chenghuai's vessels from their photographs",
+  "description": "The ceramics the museum makes from their own photographs (order K9): each as its museum records it, with its accession, and the credit its photographs ask for (assets/ceramics/CREDITS.md). Their sections and views are Data/Art/Vessels.json's.",
+  "works": [
+    {
+      "id": "chinese-xuande-jar",
+      "artist": "Jingdezhen imperial kilns",
+      "title": "Jar with dragon",
+      "originalTitle": "青花龍紋罐",
+      "year": "Ming, Xuande mark and period (1426–35)",
+      "medium": "Porcelain painted with cobalt blue under clear glaze; H. 48.3 cm, Diam. 48.3 cm",
+      "collection": "The Metropolitan Museum of Art",
+      "city": "New York",
+      "notes": "37.191.1.",
+      "credit": "Photographs: The Metropolitan Museum of Art, Open Access (CC0)"
+    },
+    {
+      "id": "chinese-wucai-jar",
+      "artist": "Jingdezhen imperial kilns",
+      "title": "Jar with carp in lotus pond",
+      "originalTitle": "五彩魚藻紋罐",
+      "year": "Ming, Jiajing mark and period (1522–66)",
+      "medium": "Porcelain painted in underglaze cobalt blue and overglaze enamels (wucai); H. 23.2 cm",
+      "collection": "The Metropolitan Museum of Art",
+      "city": "New York",
+      "notes": "17.127.2.",
+      "credit": "Photographs: The Metropolitan Museum of Art, Open Access (CC0)"
+    },
+    {
+      "id": "chinese-falangcai-bowl",
+      "artist": "Jingdezhen imperial kilns",
+      "title": "Bowl with flowers",
+      "originalTitle": "琺瑯彩花卉碗",
+      "year": "Qing, Yongzheng mark and period (1723–35)",
+      "medium": "Porcelain painted in overglaze enamels (falangcai); H. 5.4 cm, Diam. 11.4 cm",
+      "collection": "The Metropolitan Museum of Art",
+      "city": "New York",
+      "notes": "65.86.12.",
+      "credit": "Photographs: The Metropolitan Museum of Art, Open Access (CC0)"
+    },
+    {
+      "id": "chinese-chicken-cup",
+      "artist": "Jingdezhen imperial kilns",
+      "title": "Chicken cup",
+      "originalTitle": "鬥彩雞缸杯",
+      "year": "Ming, Chenghua reign (1465–87)",
+      "medium": "Porcelain painted in underglaze cobalt blue and overglaze enamels (doucai); H. 3.7 cm, mouth 8.2 cm",
+      "collection": "National Palace Museum",
+      "city": "Taipei",
+      "notes": "故瓷005190. The one you may hold.",
+      "credit": "Photographs: © National Palace Museum (www.npm.gov.tw), CC BY 4.0"
+    },
+    {
+      "id": "chinese-meiping",
+      "artist": "Jingdezhen",
+      "title": "Meiping with scenes from The West Chamber",
+      "originalTitle": "青花西廂記圖梅瓶",
+      "year": "Yuan, 1320–50",
+      "medium": "Porcelain painted with cobalt blue under clear glaze; H. 35.6 cm, Diam. 22 cm",
+      "collection": "Victoria and Albert Museum",
+      "city": "London",
+      "notes": "C.8-1952. It stands in for the Nanjing Museum's meiping with Xiao He pursuing Han Xin by moonlight (青花蕭何月下追韓信圖梅瓶), of which no open photograph exists.",
+      "credit": "Photographs: Gary Todd (CC0); UK_FGR for Wikipedia Loves Art (CC BY 2.5)"
+    },
+    {
+      "id": "chinese-peachbloom",
+      "artist": "Jingdezhen imperial kilns",
+      "title": "Vase with peach-bloom glaze",
+      "originalTitle": "豇豆紅柳葉瓶",
+      "year": "Qing, Kangxi mark and period (1662–1722)",
+      "medium": "Porcelain with peach-bloom glaze; H. 19.7 cm",
+      "collection": "The Metropolitan Museum of Art",
+      "city": "New York",
+      "notes": "14.40.377.",
+      "credit": "Photographs: The Metropolitan Museum of Art, Open Access (CC0)"
+    },
+    {
+      "id": "chinese-ru-basin",
+      "artist": "Ru kilns",
+      "title": "Narcissus basin",
+      "originalTitle": "汝窯青瓷無紋水仙盆",
+      "year": "Northern Song, late 11th–early 12th century",
+      "medium": "Stoneware with Ru celadon glaze; H. 6.9 cm, mouth 23.0 × 16.4 cm",
+      "collection": "National Palace Museum",
+      "city": "Taipei",
+      "notes": "故瓷017851.",
+      "credit": "Photographs: © National Palace Museum (www.npm.gov.tw), CC BY 4.0; the base, CC0"
+    }
+  ]
+}

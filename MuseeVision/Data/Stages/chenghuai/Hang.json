@@ -532,7 +532,7 @@
     },
     {
       "work": "chinese-meiping",
-      "source": "assets/collection.json",
+      "source": "MuseeVision/Data/Art/Ceramics.json",
       "anchor": "chenghuai.changnan.case.deck",
       "centre": [
         1.5,
@@ -541,8 +541,8 @@
       ],
       "height": 1.282,
       "size": [
-        0.0,
-        0.441
+        0.206,
+        0.356
       ],
       "facing_deg": 180.0,
       "support": "ceramic",
@@ -550,11 +550,11 @@
       "care": "ceramic-and-glass",
       "wall": "chenghuai.case.silk.ceramics",
       "stand": true,
-      "note": "On the case deck centre line; centre is the foot on the deck (a carved phoebe stand under it where stand is true: radius 1.25 x the foot, 0.028 high under 0.20 tall, else 0.04). Object: scan (prim of usd/wings/ChineseWing.usdc; evidence for the work only), stand r 0.06."
+      "note": "On the case deck centre line; centre is the foot on the deck (a carved phoebe stand under it where stand is true: radius 1.25 x the foot, 0.028 high under 0.20 tall, else 0.04). Object: turned from its section derived from its own photographs (Data/Art/Vessels.json), at the V&A's 35.6 cm high and 20.6 cm across as both its photographs show it (the V&A gives 22; the record's departure and the sheet's Departures) (C.8-1952, standing in for the Nanjing Museum's Xiao He meiping); its decoration composed from its side A; side B is left out (Data/Art/Vessels.json unused; the sheet's Departures)."
     },
     {
       "work": "chinese-xuande-jar",
-      "source": "assets/collection.json",
+      "source": "MuseeVision/Data/Art/Ceramics.json",
       "anchor": "chenghuai.changnan.case.deck",
       "centre": [
         1.5,
@@ -563,7 +563,7 @@
       ],
       "height": 1.282,
       "size": [
-        0.46,
+        0.487,
         0.483
       ],
       "facing_deg": 180.0,
@@ -572,11 +572,11 @@
       "care": "ceramic-and-glass",
       "wall": "chenghuai.case.silk.ceramics",
       "stand": true,
-      "note": "On the case deck centre line; centre is the foot on the deck (a carved phoebe stand under it where stand is true: radius 1.25 x the foot, 0.028 high under 0.20 tall, else 0.04). Object: turned: xuande (0.506 -> 0.483)."
+      "note": "On the case deck centre line; centre is the foot on the deck (a carved phoebe stand under it where stand is true: radius 1.25 x the foot, 0.028 high under 0.20 tall, else 0.04). Object: turned from its section derived from its own photographs (Data/Art/Vessels.json), at the Metropolitan Museum's 48.3 cm high, 48.7 across as its photograph shows (the museum's 48.3), its decoration composed from its photograph DP-32251-001; the older MET_DT5083 is left out, its painting not lying on the first's (Data/Art/Vessels.json unused; the sheet's Departures)."
     },
     {
       "work": "chinese-wucai-jar",
-      "source": "assets/collection.json",
+      "source": "MuseeVision/Data/Art/Ceramics.json",
       "anchor": "chenghuai.changnan.case.deck",
       "centre": [
         1.5,
@@ -585,7 +585,7 @@
       ],
       "height": 1.282,
       "size": [
-        0.223,
+        0.237,
         0.232
       ],
       "facing_deg": 180.0,
@@ -594,11 +594,11 @@
       "care": "ceramic-and-glass",
       "wall": "chenghuai.case.silk.ceramics",
       "stand": true,
-      "note": "On the case deck centre line; centre is the foot on the deck (a carved phoebe stand under it where stand is true: radius 1.25 x the foot, 0.028 high under 0.20 tall, else 0.04). Object: turned: wucai."
+      "note": "On the case deck centre line; centre is the foot on the deck (a carved phoebe stand under it where stand is true: radius 1.25 x the foot, 0.028 high under 0.20 tall, else 0.04). Object: turned from its section derived from its own photographs (Data/Art/Vessels.json), at the Metropolitan Museum's 23.2 cm high; 23.7 cm across as its photograph shows (no diameter published), its foot 11.5 cm as its bottom view DP342699 shows; its decoration composed from its three sides, each placed round the jar by its collar and pond registered on the bottom view's."
     },
     {
       "work": "chinese-chicken-cup",
-      "source": "assets/collection.json",
+      "source": "MuseeVision/Data/Art/Ceramics.json",
       "anchor": "chenghuai.changnan.case.deck",
       "centre": [
         1.5,
@@ -608,7 +608,7 @@
       "height": 1.282,
       "size": [
         0.083,
-        0.0
+        0.037
       ],
       "facing_deg": 180.0,
       "support": "ceramic",
@@ -616,11 +616,12 @@
       "care": "ceramic-and-glass",
       "wall": "chenghuai.case.silk.ceramics",
       "stand": true,
-      "note": "On the case deck centre line; centre is the foot on the deck (a carved phoebe stand under it where stand is true: radius 1.25 x the foot, 0.028 high under 0.20 tall, else 0.04). Object: scan (prim), stand r 0.03."
+      "note": "On the case deck centre line; centre is the foot on the deck (a carved phoebe stand under it where stand is true: radius 1.25 x the foot, 0.028 high under 0.20 tall, else 0.04). Object: turned from its section derived from its own photographs (Data/Art/Vessels.json), at the National Palace Museum's 3.7 cm high, mouth 8.2 (8.3 as its photograph shows), foot 4.1; its decoration composed from its photograph.",
+      "canvas": 1
     },
     {
       "work": "chinese-peachbloom",
-      "source": "assets/collection.json",
+      "source": "MuseeVision/Data/Art/Ceramics.json",
       "anchor": "chenghuai.changnan.case.deck",
       "centre": [
         1.5,
@@ -629,8 +630,8 @@
       ],
       "height": 1.282,
       "size": [
-        0.0,
-        0.159
+        0.08,
+        0.197
       ],
       "facing_deg": 180.0,
       "support": "ceramic",
@@ -638,11 +639,11 @@
       "care": "ceramic-and-glass",
       "wall": "chenghuai.case.silk.ceramics",
       "stand": true,
-      "note": "On the case deck centre line; centre is the foot on the deck (a carved phoebe stand under it where stand is true: radius 1.25 x the foot, 0.028 high under 0.20 tall, else 0.04). Object: scan (prim), stand r 0.045."
+      "note": "On the case deck centre line; centre is the foot on the deck (a carved phoebe stand under it where stand is true: radius 1.25 x the foot, 0.028 high under 0.20 tall, else 0.04). Object: turned from its section derived from its own photographs (Data/Art/Vessels.json), at the Metropolitan Museum's 19.7 cm high; 8.0 cm across as its photograph shows (no diameter published)."
     },
     {
       "work": "chinese-falangcai-bowl",
-      "source": "assets/collection.json",
+      "source": "MuseeVision/Data/Art/Ceramics.json",
       "anchor": "chenghuai.changnan.case.deck",
       "centre": [
         1.5,
@@ -651,7 +652,7 @@
       ],
       "height": 1.282,
       "size": [
-        0.114,
+        0.113,
         0.054
       ],
       "facing_deg": 180.0,
@@ -660,11 +661,11 @@
       "care": "ceramic-and-glass",
       "wall": "chenghuai.case.silk.ceramics",
       "stand": true,
-      "note": "On the case deck centre line; centre is the foot on the deck (a carved phoebe stand under it where stand is true: radius 1.25 x the foot, 0.028 high under 0.20 tall, else 0.04). Object: turned: falangcai."
+      "note": "On the case deck centre line; centre is the foot on the deck (a carved phoebe stand under it where stand is true: radius 1.25 x the foot, 0.028 high under 0.20 tall, else 0.04). Object: turned from its section derived from its own photographs (Data/Art/Vessels.json), at the Metropolitan Museum's 5.4 cm high, 11.3 across as its photograph shows (the museum's 11.4), foot 4.4; its decoration composed from its colour photograph."
     },
     {
       "work": "chinese-ru-basin",
-      "source": "assets/collection.json",
+      "source": "MuseeVision/Data/Art/Ceramics.json",
       "anchor": "chenghuai.tianqing.pedestal",
       "centre": [
         -18.2,
@@ -674,7 +675,7 @@
       "height": 1.412,
       "size": [
         0.23,
-        0.0
+        0.069
       ],
       "facing_deg": 90.0,
       "support": "ceramic",
@@ -682,11 +683,11 @@
       "care": "ceramic-and-glass",
       "wall": "chenghuai.case.silk.ceramics",
       "stand": false,
-      "note": "Alone on the pedestal opposite the door, under its glass hood; scan (prim of usd/wings/ChineseWing.usdc; evidence for the work only), turned 90 deg; 23 x 16.4 cm mouth (NPM)."
+      "note": "Alone on the pedestal opposite the door, under its glass hood, its long axis across the door's view (facing 90 deg); turned from its section derived from its photographs (Data/Art/Vessels.json) and pressed front to back to the National Palace Museum's mouth, 23.0 x 16.4 cm, and its foot, 19.3 x 12.9 cm, evenly between, 6.9 cm high on its four feet."
     },
     {
       "work": "chinese-chicken-cup",
-      "source": "assets/collection.json",
+      "source": "MuseeVision/Data/Art/Ceramics.json",
       "part": "handling-copy",
       "anchor": "chenghuai.changnan.table",
       "centre": [
@@ -697,7 +698,7 @@
       "height": 1.25,
       "size": [
         0.083,
-        0.0
+        0.037
       ],
       "facing_deg": 30.0,
       "support": "ceramic",
@@ -705,7 +706,8 @@
       "care": "ceramic-and-glass",
       "wall": "chenghuai.furniture",
       "stand": false,
-      "note": "The handling copy made at Jingdezhen, on the table: the one piece you may hold (the hold intent is polish). Same scan as the cup."
+      "note": "The handling copy made at Jingdezhen, on the table: the one piece you may hold (the hold intent is polish). Turned and decorated as the cup is (Data/Art/Vessels.json), the work's second object.",
+      "canvas": 2
     },
     {
       "work": "chenghuai-yingbi",

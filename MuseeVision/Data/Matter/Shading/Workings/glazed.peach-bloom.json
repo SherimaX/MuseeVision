@@ -1,0 +1,42 @@
+{
+  "schema": "musee.matter.shading.working/1",
+  "key": "glazed.peach-bloom",
+  "name": "Glazed peach-bloom: a copper glaze fired in reduction at the imperial kilns",
+  "record": "Palette.json",
+  "kind": "face",
+  "roughness": {
+    "value": 0.05,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Shading/Workings/glazed.json (a glaze's first roughness)",
+    "note": "The glaze's gloss; the photograph shows a mirror-like highlight."
+  },
+  "roughnessAcross": {
+    "value": 0.05,
+    "unit": "1",
+    "grade": "derived",
+    "source": "a glaze has no grain",
+    "derivation": "equal to the roughness along"
+  },
+  "haziness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Shading/Workings/glazed.json",
+    "note": "One specular lobe until a goniometric measurement shows a second."
+  },
+  "textureDepth": {
+    "value": 0.001,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Shading/Workings/glazed.json"
+  },
+  "relief": {
+    "value": 0.02,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Shading/Workings/glazed.json",
+    "note": "The glaze's own ripple."
+  },
+  "lays": "glaze.peach-bloom"
+}

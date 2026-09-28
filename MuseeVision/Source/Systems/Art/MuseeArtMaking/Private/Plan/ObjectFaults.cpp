@@ -9,6 +9,7 @@
 #include "Misc/Paths.h"
 #include "MatterWorking.h"
 #include "Support/ArtSupport.h"
+#include "Vessel/VesselSection.h"
 
 namespace Musee::ArtMaking
 {
@@ -386,6 +387,69 @@ namespace Musee::ArtMaking
 		}
 
 		/**
+		 * A vessel derived from its photographs: its outside runs between two of its section's points; its section turned
+		 * is a solid (it crosses itself nowhere, and its wall is nowhere thinner than half the wall it was drawn with); its
+		 * feet are outlines; a painted one's views are photographs the collection holds, each with its camera and how it
+		 * was placed; an oval one gives its mouth's two axes; and it is its museum's size (an oval's mouth and foot, both axes
+		 * of each, as it is pressed), its plan the section's (SizeFault).
+		 */
+		TArray<FString> DerivedVesselFaults(const FArtVessel& Vessel, const FArtHangEntry& Entry, double DiameterTolerance)
+		{
+			TArray<FString> Out;
+			const FString Size = SizeFault(Vessel, Entry.SizeMeters(), DiameterTolerance);
+			if (!Size.IsEmpty())
+			{
+				Out.Add(FString::Printf(TEXT("Data/%s: %s"), FArtVessels::Record, *Size));
+			}
+			const bool bOutside = Vessel.Outside.Num() == 2 && Vessel.Outside[0] >= 0 && Vessel.Outside[0] < Vessel.Outside[1]
+				&& Vessel.Outside[1] < Vessel.Section.Num();
+			if (Vessel.IsPainted() && !bOutside)
+			{
+				Out.Add(FString::Printf(TEXT("Data/%s: a painted vessel's outside runs [first, last] between its section's points"), FArtVessels::Record));
+			}
+			const FString Solid = SectionFault(Vessel.Section, Vessel.Outside, Vessel.WallMeters);
+			if (!Solid.IsEmpty())
+			{
+				Out.Add(FString::Printf(TEXT("Data/%s: its section turned is no solid: %s"), FArtVessels::Record, *Solid));
+			}
+			for (const FArtVesselFoot& Foot : Vessel.Feet.Each)
+			{
+				if (Foot.Outline.Num() < 3)
+				{
+					Out.Add(FString::Printf(TEXT("Data/%s: each of its feet is an outline of three points or more"), FArtVessels::Record));
+				}
+			}
+			FVesselPress Press;
+			const FString Pressing = PressOf(Vessel, FVector2D(1.0, 1.0), Press);
+			const FString Standing = Pressing.IsEmpty() ? FeetFault(Vessel, Press) : FString();
+			if (!Standing.IsEmpty())
+			{
+				Out.Add(FString::Printf(TEXT("Data/%s: %s"), FArtVessels::Record, *Standing));
+			}
+			for (const FArtVesselView& View : Vessel.Views)
+			{
+				if (!FArtVesselView::IsPlacement(View.Placement))
+				{
+					Out.Add(FString::Printf(TEXT("its view %s is placed `fitted`, `registered` or `unverified`, not `%s`"), *View.Image, *View.Placement));
+				}
+				if (!IFileManager::Get().FileExists(*Musee::Art::SourcePath(View.Image)))
+				{
+					Out.Add(FString::Printf(TEXT("its view %s is not in the collection"), *View.Image));
+				}
+				else if (View.AxisPixels.Num() != 2 || !(View.FocalPixels > 0.0) || !(View.DistanceMeters > 0.0 || View.IsAlongAxis()))
+				{
+					Out.Add(FString::Printf(TEXT("its view %s needs its camera: a distance (or none, on the axis looking along it), a focal length and its axis's pixel [u, v]"),
+						*View.Image));
+				}
+			}
+			if (Vessel.Museum.IsOval() && !(Vessel.Museum.MouthAxesMeters[0] > 0.0 && Vessel.Museum.MouthAxesMeters[1] > 0.0))
+			{
+				Out.Add(FString::Printf(TEXT("Data/%s: an oval vessel's mouth has two axes of more than zero"), FArtVessels::Record));
+			}
+			return Out;
+		}
+
+		/**
 		 * A vessel turned from its section: the vessels' record gives it a section of three points or more, [radius, height]
 		 * with no radius below the axis, starting and ending on the axis (so turned it is a closed solid).
 		 */
@@ -406,6 +470,10 @@ namespace Musee::ArtMaking
 				|| Vessel->Section.ContainsByPredicate([](const FVector2D& Point) { return Point.X < 0.0; }))
 			{
 				Out.Add(FString::Printf(TEXT("Data/%s: its section must run from the axis round to the axis, never inside it"), FArtVessels::Record));
+			}
+			else
+			{
+				Out.Append(DerivedVesselFaults(*Vessel, Entry, Context.Vessels->DiameterTolerance));
 			}
 			return Out;
 		}

@@ -97,6 +97,12 @@ namespace Musee::ArtMaking
 		TArray<FVector2D> Profile;
 	};
 
+	/**
+	 * How many chords round the axis a turned form of this radius is divided into, so none strays from the true circle by
+	 * more than the tolerance (Ware.json's ChordToleranceMeters): every turned piece of Art's, ware and vessels alike.
+	 */
+	[[nodiscard]] int32 ChordsRound(double Radius, double Tolerance);
+
 	/** The size in metres of the image its photograph spans: the piece's box fills its window. */
 	[[nodiscard]] FVector2D WareImageMeters(const FWareSpec& Ware);
 

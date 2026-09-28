@@ -139,8 +139,9 @@ namespace Musee::ArtMaking
 	 * One object of a work the stage makes: its entry in the plan; where its left edge falls in the work's one image, or
 	 * its own image; the palette key of the layer it shows, and how that layer is finished; how its faces without the
 	 * image are finished (a dish's underside), the glass it lies under (its thickness, from the glazing's working), and,
-	 * for turned ware, its form; for a handscroll, its photographs laid across its sheet, left to right, and the length of
-	 * its mount's separator and frontispiece before the work at its right end (m), from Data/Art/Handscrolls.json.
+	 * for turned ware, its form; for a painted vessel, the size of its decoration; for a handscroll, its photographs laid
+	 * across its sheet, left to right, and the length of its mount's separator and frontispiece before the work at its
+	 * right end (m), from Data/Art/Handscrolls.json.
 	 */
 	struct FCanvasPlan
 	{
@@ -157,6 +158,8 @@ namespace Musee::ArtMaking
 		FWareSpec Ware;
 		TArray<FScrollSection> Sections;
 		double FrontMeters = 0.0;
+		/** A painted vessel's decoration: the size of its turned surface laid out flat (metres round, metres along). */
+		FVector2D DecorationMeters = FVector2D::ZeroVector;
 	};
 
 	/**

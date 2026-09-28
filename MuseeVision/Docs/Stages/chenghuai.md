@@ -827,8 +827,10 @@ a walked path. Polish: the 屏门 opens on festival solar terms (Rules board), a
 
 ## 8. Art
 **Sources:** `assets/collection.json` (every id below, verbatim). Sizes: scrolls from `chenghuai_works.py:195-215`
-(image w × h) and the catalogue's handscroll widths; ceramics from the catalogue (turned profiles
-`windows/SourceArt/Textures/ch_vessels.json` scaled to them, B-13); images `assets/paintings/<id>*.jpg` (the Thousand Li
+(image w × h) and the catalogue's handscroll widths; the Tianqing case's monochromes from the catalogue (turned profiles
+`windows/SourceArt/Textures/ch_vessels.json` scaled to them, B-13); the Changnan case's vessels and the Ru basin from their
+own photographs (`assets/ceramics/<id>/`, K9), catalogued with their museums' sizes, accessions and credits in
+`MuseeVision/Data/Art/Ceramics.json`; images `assets/paintings/<id>*.jpg` (the Thousand Li
 and Qingming in four tiles, Huai Su in two), colour-managed as the paint layer's albedo. Credits `assets/collection.json`,
 `assets/art_sources_extra.json`.
 
@@ -876,17 +878,81 @@ lower edge up the slope from the bed's front edge (the image centred on the bed'
 | chinese-guan-vase | turned "guan" | 0.206 × 0.340 | same · −17.00 | yes |
 | chinese-jian-bowl | turned "jian" | 0.121 × 0.073 | same · −16.20 | yes |
 | chinese-longquan-vase | turned "longquan" | 0.079 × 0.146 | same · −15.50 | yes |
-| chinese-ru-basin | scan (prim of `usd/wings/ChineseWing.usdc`), turned 90° | 0.230 × — | `chenghuai.tianqing.pedestal` | none |
-| chinese-meiping | scan (prim) | — × 0.441 | `chenghuai.changnan.case.deck` · −22.80 | r 0.06 |
-| chinese-xuande-jar | turned "xuande" | 0.460 × 0.483 | same · −21.70 | yes |
-| chinese-wucai-jar | turned "wucai" | 0.223 × 0.232 | same · −19.90 | yes |
-| chinese-chicken-cup | scan (prim) | 0.083 × — | same · −18.50 | r 0.03 |
-| chinese-peachbloom | scan (prim) | — × 0.159 | same · −16.90 | r 0.045 |
-| chinese-falangcai-bowl | turned "falangcai" | 0.114 × 0.054 | same · −15.80 | yes |
-| chinese-chicken-cup (the handling copy) | scan (prim), yaw 30° | 0.083 × — | `chenghuai.changnan.table` at (−0.280, −19.080, 1.250) | none |
+| chinese-ru-basin | derived (NPM 故瓷017851), oval, on four feet, turned 90° | 0.230 × 0.069 (mouth 23.0 × 16.4) | `chenghuai.tianqing.pedestal` | none |
+| chinese-meiping | derived (V&A C.8-1952), painted | 0.206 × 0.356 | `chenghuai.changnan.case.deck` · −22.80 | yes |
+| chinese-xuande-jar | derived (Met 37.191.1), painted | 0.487 × 0.483 | same · −21.70 | yes |
+| chinese-wucai-jar | derived (Met 17.127.2), painted | 0.237 × 0.232 | same · −19.90 | yes |
+| chinese-chicken-cup (object 1) | derived (NPM 故瓷005190), painted | 0.083 × 0.037 | same · −18.50 | yes |
+| chinese-peachbloom | derived (Met 14.40.377), peach-bloom glaze | 0.080 × 0.197 | same · −16.90 | yes |
+| chinese-falangcai-bowl | derived (Met 65.86.12), painted | 0.113 × 0.054 | same · −15.80 | yes |
+| chinese-chicken-cup (the handling copy, object 2) | as the cup, yaw 30° | 0.083 × 0.037 | `chenghuai.changnan.table` at (−0.280, −19.080, 1.250) | none |
 
 Care: ceramic-and-glass (the sancai horse is lead-glazed earthenware: the same class). The four scans that exist only as
 prims of the retired wing's export are *works' evidence*; Studio imports them to `Evidence/Art` with provenance.
+
+**Vessels from their photographs** (K9; `Data/Art/Vessels.json`, grade `derived`, each derivation in its record, made by
+`MuseeVision/Scripts/vessels.py`): each section is the photograph's silhouette turned through the photograph's own
+camera (a pinhole fitted to the rim's and foot's ellipses, which corrects its perspective), a ring for each row of the
+photograph, at the museum's height, the widest diameter of the section as stored checked against the museum's: the
+Xuande jar 48.7 cm against 48.3, the falangcai bowl 11.3 against 11.4 (foot 4.4 against 4.4), the chicken cup 8.3 against
+8.2 (foot 4.1 against 4.1), the meiping 20.6 against the V&A's 22.0 (a departure, below); the wucai jar (23.7) and the
+peach-bloom vase (8.0) have no published diameter. Each figure is the section's as stored, every point of it (the bowl's
+flared lip is its widest), as make and Musee.Art.PaintedVessel measure it, and the test holds each derivation's figure to
+its section's. Each is turned at its museum's height by one scale, so it keeps its
+photographs' proportion, and its plan gives the section's width: a widest diameter more than 2% from the museum's must be
+a departure its record explains, or make and Musee.Art.PaintedVessel find it. Below 12% of its height the wucai jar's
+side is lost against the ground in its own soft shadow: there its section runs through the rings its bottom view DP342699
+measures (a pinhole on the axis, fitted to the collar's upper line and the silhouette): the collar's lower line 61.3 mm
+from the axis at 7.2 mm up, and the foot's outer edge 57.6 mm (11.5 cm across; the side view's shadow had made it 13.3). The outside keeps the fine turns its photograph shows where its edge is
+crisp (the peach-bloom's two fillets at the neck's foot and its everted lip, the Xuande jar's neck step and rolled lip),
+and is smoothed over a hundredth of its height elsewhere, where a pale glaze's faint edge against the ground is pulled
+in by the painting just inside it. The inside is a wall's thickness in from the outside along its normal: the thin-potted
+chicken cup's 0.65 mm, the falangcai bowl's 0.79 and the peach-bloom's 1.28, each its lip's thickness read on its
+photograph where the rim turns at its side; the jars' and the meiping's Data/Art/Ware.json's 6 mm. No section crosses
+itself or thins its wall under half of it (checked by the script, by make and by Musee.Art.PaintedVessel). The Ru basin
+has no side view: its section joins the museum's four sizes by the proportions its oblique photograph shows, turned in
+the round and pressed front to back as a potter presses a thrown round to an oval: at the lip to the mouth's
+23.0 × 16.4 and at the flange's face to the foot's 19.3 × 12.9, the pressing running evenly up the wall between them
+(make and Musee.Art.PaintedVessel check both axes of the mouth and the foot, the test on the turned mesh itself). Its
+plan is the rounded oblong its photographs show, not an ellipse: a superellipse of exponent 2.35 at the flange's face,
+fitted to the flange's outer edge on the base photograph (611 of 720 rays; the rest are hidden by the feet), and 2.36
+at the lip, fitted to the white lip on the oblique photograph through a pinhole fitted with it (an ellipse misses the lip
+by 7.6 px rms, exponent 3 by 9.9, 2.36 by 2.0). Musee.Art.PaintedVessel checks the turned mesh's plan against both
+traced outlines all round, across the diagonals too, within 3%. Its underside runs out to the flange's face over a 1 mm
+arris, and it stands on its four cloud-scroll feet, each traced from the base photograph as it hugs a corner of the base,
+9 mm high, within the underside (make checks it).
+The painted vessels (Xuande, wucai, falangcai, chicken cup, meiping) wear their decoration, composed by Art round the
+turned form from their views: each view projected through its camera onto all the surface it sees, obliquely too (the
+Xuande jar's reign mark and the meiping's shoulder, tilted up and away, the wucai jar's lappets round its shoulder),
+wherever no other part of the vessel hides it and it shows inside the silhouette by its camera's miss and 2 px more;
+views blended by the square of how squarely they see it, each fading into the glaze over the last 12° before its
+silhouette (where a pixel of it covers five times the surface and the glaze's shading falls away steeply) and over a
+millimetre where another part hides the surface. Each photograph is divided by its white: the glaze's hue, at the
+lightness the glaze itself shows round each place (the 90th percentile of its glaze's samples there, the glaze being the
+samples of little colour once that hue is divided out), so the light falling off down the meiping in its gallery, or the
+chicken cup's wall darkening as it turns under, is taken off and the painting keeps its darkness against its own ground
+(Musee.Art.PaintedVessel compares it with each photograph's, window by window up the outside, and counts the texels
+clipped to white). Where two views' paintings lie more than 5 mm apart where they overlap (the wucai jar's sides, 6.5 to
+7.0 mm, measured block by block as the composition weighs them), they are not blended, which showed its carp twice: each
+keeps its own side of the overlap, and they meet at a seam run where their paintings agree best, cross-faded over 2 mm;
+where a carp crosses the seam its line steps by those millimetres. Where no view sees the outside, each band of ornament
+whose repeat is known is carried round by it, and elsewhere the glaze is left: the Xuande jar's 23 lotus panels and 8
+neck clouds, counted on its photograph (the neck's band read between the neck's lower and upper double lines, 43.66 to
+48.06 cm up, so it no longer reaches down onto the shoulder, where the reign mark stands once: the record says so, and
+the test composes the jar and finds the mark nowhere else round it); the chicken cup's two plain lines. The rest have no whole repeat to carry (the wucai jar's collar, below), a
+count the photographs don't settle (the meiping's lotus panels, below) or no repeat the photographs trust (the wucai
+jar's lappets and neck scroll, the meiping's diaper band and peony scroll: their painting lies on itself at a
+correlation under 0.5 at every turn), and are left in the glaze where no view sees them. A further view keeps the camera
+its own silhouette fixes, and is composed only where its painting lies on the views it overlaps within 5 mm in every
+fifth of the height they share. The wucai jar's three sides are placed round it by its bottom view, which sees the collar
+and the pond above it all round: each side's collar and pond laid on the bottom view's by their enamels' colours
+(DP342698 at 185°, DP342700 at 96° from DP342697; correlations 0.53 to 0.58 against 0.19 to 0.28 at the next best turn),
+and the sides lie on each other's painting where they meet (DP342698 and DP342700 at 0.49, DP342700 and DP342697 at
+0.38). Musee.Art.PaintedVessel measures every placed view's overlaps again from its recorded camera and its photographs,
+and finds a view turned a quarter turn from its place. The Xuande jar's photograph sees 42% of it, the wucai jar's three
+sides 93%, the meiping's side A 42%, the bowl's and cup's one photograph each 43 to 44%. Left out (Departures): the
+Xuande jar's older photograph, the meiping's side B, and the wucai jar's bottom view, which places its sides and measures
+its foot but is not composed (its painting lies 9 mm off DP342700's in the pond).
 
 **Building and garden works** (built by Form or Nature; Art adds only the caption, Hang `"built": "form"`):
 chenghuai-yingbi (the screen wall's heart `chenghuai.screen-wall.heart`, 1.8 × 1.8, along 0.00, height 0.88 on
@@ -1108,7 +1174,69 @@ by the board's willow and pine (plums kept).
   画案 and a pair of rose chairs (as built phoebe, and the chairs were official's hat chairs); the Lingbi rock in Lingbi
   stone. The paper, brushes and paperweights are not built (the palette has no key for them).
 - **Hang:** the Qingming's lead 0.23 (was 0.25; the mount overran its case by 1.7 cm); handscroll widths from the
-  catalogue, not the images; turned vessels scaled to the catalogue's sizes.
+  catalogue, not the images; turned vessels scaled to the catalogue's sizes, and those derived from their photographs to
+  the catalogue's heights only, their widths their sections' (below).
+- **The vessels from their photographs (K9):** each at its museum's size, catalogued in `MuseeVision/Data/Art/Ceramics.json`
+  with its accession and its photographs' credit (the collection's `assets/collection.json` is read only): the Xuande jar
+  0.483 across (was 0.460); the peach-bloom vase its true 19.7 cm (was 15.9); the chicken cup 3.7 × 8.2 at the National
+  Palace Museum (was "museum collections", 8.3 wide) and its handling copy its second object; the Ru basin 6.9 high on
+  its feet. **The meiping is the V&A's C.8-1952**, Yuan, 1320–50, with scenes from *The West Chamber*, at its own
+  35.6 cm high (was 44.1) and 20.6 cm across (below): it stands in for the Nanjing Museum's meiping with Xiao He pursuing Han Xin by moonlight,
+  of which no open image exists, and its label credits its photographers, Gary Todd and UK_FGR for Wikipedia Loves Art
+  (side B is left out: below).
+  **It stands 20.6 cm across, not the V&A's 22** (the V&A's record, C.8-1952, gives height 35.6 cm and diameter 22 cm,
+  with no note of where either is measured). Both photographs give the narrower vase: side A's section, through the camera
+  its EXIF focal length and its silhouette fix (4.1 px rms), is 20.6 cm across at 35.6 cm high (height over diameter
+  1.73), and side B, an independent photograph from another camera, spans 1.77 times as high as it is wide. Held to 22 cm,
+  side A's camera reaches 21.3 cm at best and its section's image misses the silhouette by 50 px rms. The section keeps
+  the photographs' proportion and is turned at the V&A's height by one scale (before, it was stretched 7% across alone).
+- **The Ru basin's pressing between its foot and its mouth:** its foot is pressed to the museum's 19.3 × 12.9 and its
+  mouth to its 23.0 × 16.4, and the pressing runs evenly up the wall between them (pressed to the mouth's ratio all the
+  way down, the foot came to 19.3 × 13.8; a wall flaring as far at the ends as at the sides would give 12.7). No
+  photograph shows how the wall's flare changes round the oval between the two.
+- **The Ru basin's feet** are traced from its base photograph and mirrored to the four corners, as the photograph shows
+  them alike, laid in shares of the flange's fitted outline. The tracing reaches 1.066 of the flange at the corners, where
+  the feet's own faces show beyond its edge; a foot stands under the base, so its outer edge is brought within the
+  underside there.
+- **The Xuande jar's lotus panels** are carried round only to 7.73 cm: their tips reach 9.27 cm. Taken to the tips, the
+  band's measured repeat is trusted at 15.1 to 15.4 degrees (23.3 to 23.8 panels), which settles neither the 23 panels
+  read on the photograph nor 24, so the band keeps its reading and its height.
+- **Photographs left out:**
+  - the Xuande jar's older photograph MET_DT5083: through the camera its own silhouette fixes, its painting lies 1.0 to
+    3.8 cm higher than DP-32251-001's, band by band up the height (correlation 0.64 to 0.79), and a camera moved to make
+    the two agree misses its silhouette by centimetres; composed, it would double the lotus panels, the dragon and the
+    neck's lines. The jar is composed from DP-32251-001 alone, its far side from its bands' repeats and the glaze;
+  - the meiping's side B (a close, soft gallery photograph): its camera can't be fixed (its silhouette missed by 24 px
+    rms with its EXIF focal length), and its painting lies on side A's at a correlation of only 0.34; composed, it would
+    double the figures where the sides meet;
+  - the wucai jar's bottom view DP342699: it places the side views and measures the foot and the collar's lower line,
+    and sees the lower body obliquely all round, but through the camera its rings fix its painting lies 9 mm higher than
+    DP342700's in the pond (0.2 to 0.4 of the height, correlation 0.81); composed, it would double the fish and lotus
+    there;
+  - the falangcai bowl's black-and-white view MET_201714: it carries no colour, but it shows what no colour view does,
+    the bowl's inside painted with a peony and flowering branches and a chrysanthemum on the far side of its outside.
+    **The real bowl is painted inside and on its far side; here both are the glaze** (the far side where no band
+    repeats), for want of a colour photograph of them;
+  - the chicken cup's PNG, the same photograph as its TIFF.
+- **The wucai jar's sides are placed by its bottom view:** DP342699 is taken from under the jar along its axis (its
+  painted rings are round and centred on each other within a few pixels), and shows the collar's 13 clouds and the pond
+  above them all round. Each side's collar and pond, laid on it by their enamels' colours, places DP342698 at 185° and
+  DP342700 at 96° from DP342697 (before, they stood where a turn guessed them, at 224° and 136°). Composed wherever they
+  see the jar, obliquely too, the three sides leave 7% of its outside unseen.
+- **The wucai jar's collar is left in the glaze where no side view sees it:** its 13 clouds run yellow, blue, red, green
+  four at a time with one red cloud more (DP342699), so no whole number of repeats carries them round (90° anticorrelates;
+  120° would put clouds up to a third of a cloud off and blend them). Its lappets and neck scroll show no repeat the
+  photographs trust, and are left in the glaze there too.
+- **The meiping's lotus panels are left in the glaze where side A doesn't see them:** their count isn't settled. On side
+  A the three panels' emblems stand 49 and 51.5° apart and its front panel's dividers 55° (7 panels are 51.4° each, 6
+  would be 60°), but the panels' measured repeat, 55.4° (self-correlation 0.74), is 6.5 to the turn, halfway between the
+  two; side B, whose camera can't be fixed, puts its two whole panels' emblems 67° or 43° apart through the cameras its
+  silhouette allows (15 and 39 px rms), no count at all. Its diaper band and shoulder scroll show no repeat the
+  photographs trust, and are left in the glaze too, on the 58% of the vase side A doesn't see.
+- **The wucai jar's foot** is 11.5 cm across as its bottom view shows (the side view, whose foot is lost in its shadow, had
+  made it 13.3), and the jar 23.7 cm across (was 23.3) now that the foot's front edge is read where the unglazed rim meets
+  the ground (the shadow had taken the silhouette's bottom 44 px lower: the jar spanned 2% more of the photograph than it
+  does, and so was turned 2% narrow).
 - **Planting:** the garden's willow and pine replace the osmanthus stand-ins (plums kept); the crabapples and jujubes are
   their real species; the pomegranates stand in their tubs (ruling 5).
 - **Door pins plain** (as built they carried characters) and the yard door's leaves green (Names and Plan boards).

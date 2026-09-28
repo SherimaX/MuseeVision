@@ -5,6 +5,7 @@
 #include "ArtPaintLayer.h"
 #include "Plan/EntryContext.h"
 #include "Support/ArtSupport.h"
+#include "Vessel/VesselSection.h"
 #include "HAL/FileManager.h"
 #include "MatterRecords.h"
 #include "Misc/Paths.h"
@@ -103,8 +104,10 @@ namespace Musee::ArtMaking
 		}
 
 		/**
-		 * A work in the round (cast from its scan, or turned) shows no image: each object is finished in the work's medium
-		 * (Data/Art/Media.json), a fault when the record has no line for the catalogue's medium.
+		 * A work in the round (cast from its scan, or turned) is finished in the work's medium (Data/Art/Media.json), a
+		 * fault when the record has no line for the catalogue's medium. It shows no image, but for a painted vessel: its
+		 * decoration, composed round its turned form from the views its record places, is the work's own layer over its
+		 * medium's finish, laid out as its turned surface is (Vessel/VesselSection.h).
 		 */
 		void PlanInMedium(const FArtWork& Work, const TArray<const FArtHangEntry*>& Canvases, const FEntryContext& Context, FWorkPlan& OutPlan,
 			TArray<FString>& OutFaults)
@@ -115,11 +118,17 @@ namespace Musee::ArtMaking
 				OutFaults.Add(FString::Printf(TEXT("its medium '%s' has no line in Data/%s"), *Work.Medium, FArtMedia::Record));
 				return;
 			}
+			const FArtVessel* Vessel = Context.Vessels.IsSet() ? Context.Vessels->Find(Work.Id) : nullptr;
 			for (const FArtHangEntry* Entry : Canvases)
 			{
 				FCanvasPlan& Canvas = OutPlan.Canvases.AddDefaulted_GetRef();
 				Canvas.Entry = Entry;
 				Canvas.Finish = { Medium->Palette, Medium->Working, Medium->History };
+				if (Vessel && Vessel->IsPainted() && IsTurned(*Entry))
+				{
+					Canvas.Layer = Musee::Art::PaintMaterial(Work.Id);
+					Canvas.DecorationMeters = LayoutOf(SizedSection(*Vessel, Entry->SizeMeters())).SizeMeters();
+				}
 			}
 		}
 
@@ -512,7 +521,19 @@ namespace Musee::ArtMaking
 			{
 				if (IsInMedium(*Canvas.Entry))
 				{
-					// A work in the round shows no image: it is its medium's finish throughout.
+					// A work in the round shows no image, it is its medium's finish throughout, but for a painted vessel: its
+					// objects share its one decoration, composed round the form they are turned to.
+					if (!Canvas.Layer.IsNone())
+					{
+						FArtPaintLayer& Layer = Out.AddDefaulted_GetRef();
+						Layer.Work = Plan.Work.Id;
+						Layer.VesselMeters = Canvas.Entry->SizeMeters();
+						Layer.SizeMeters = Canvas.DecorationMeters;
+						Layer.Palette = Canvas.Layer;
+						Layer.Parent = Canvas.Finish.Palette;
+						Layer.Working = Canvas.Finish.Working;
+						Layer.History = Canvas.Finish.History;
+					}
 					break;
 				}
 				if (!Canvas.Sections.IsEmpty())

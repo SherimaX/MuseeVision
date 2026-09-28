@@ -7,8 +7,9 @@ public class MuseeArtMaking : MuseeModuleRules
 	{
 		PublicDependencyModuleNames.AddRange(new string[] { "MuseeArt", "MuseeFormMaking", "MuseeForm", "MuseeMatter" });
 		// FFormMadePiece holds its mesh as GeometryCore's FDynamicMesh3, which each module that makes pieces links. A cast
-		// reads the scan Studio imported from the static mesh's description.
-		PrivateDependencyModuleNames.AddRange(new string[] { "GeometryCore", "MeshDescription", "StaticMeshDescription" });
+		// reads the scan Studio imported from the static mesh's description. A painted vessel's decoration is composed
+		// in ImageCore's FImage.
+		PrivateDependencyModuleNames.AddRange(new string[] { "GeometryCore", "ImageCore", "MeshDescription", "StaticMeshDescription" });
 		// A handscroll's photographs are laid at their own proportion, read from their files' headers.
 		PrivateDependencyModuleNames.Add("ImageWrapper");
 	}

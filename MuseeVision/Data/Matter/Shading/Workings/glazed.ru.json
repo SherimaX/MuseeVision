@@ -1,0 +1,42 @@
+{
+  "schema": "musee.matter.shading.working/1",
+  "key": "glazed.ru",
+  "name": "Glazed Ru: a thick celadon glaze, its sheen soft, over a buff body, fired on spurs",
+  "record": "Palette.json",
+  "kind": "face",
+  "roughness": {
+    "value": 0.05,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Shading/Workings/glazed.json (a glaze's first roughness)",
+    "note": "The Ru glaze is famed for its soft, unctuous sheen rather than a mirror's; its roughness is not measured."
+  },
+  "roughnessAcross": {
+    "value": 0.05,
+    "unit": "1",
+    "grade": "derived",
+    "source": "a glaze has no grain",
+    "derivation": "equal to the roughness along"
+  },
+  "haziness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Shading/Workings/glazed.json",
+    "note": "One specular lobe until a goniometric measurement shows a second."
+  },
+  "textureDepth": {
+    "value": 0.001,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Shading/Workings/glazed.json"
+  },
+  "relief": {
+    "value": 0.02,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Shading/Workings/glazed.json",
+    "note": "The glaze's own ripple."
+  },
+  "lays": "glaze.ru"
+}

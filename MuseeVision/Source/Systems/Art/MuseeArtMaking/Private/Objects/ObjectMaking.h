@@ -123,9 +123,12 @@ namespace Musee::ArtMaking
 		TArray<FMuseeFinding>& OutFindings);
 
 	/**
-	 * A vessel turned on Form's lathe from its section (Data/Art/Vessels.json, the stage's sheet's), scaled to its plan's
-	 * size, in its medium's glaze, standing at its centre on its Mount anchor (a case's deck); where its plan says `stand`,
-	 * on its carved stand, a drum in the stand's wood (`<name>.stand`).
+	 * A vessel turned from its section (Data/Art/Vessels.json: traced by the stage's sheet, or derived from the vessel's
+	 * own photographs), scaled to its plan's size, standing at its centre on its Mount anchor (a case's deck); where its
+	 * plan says `stand`, on its carved stand, a drum in the stand's wood (`<name>.stand`). A plain vessel is turned on
+	 * Form's lathe in its medium's glaze; an oval one (its museum's mouth axes) is its turned section pressed to them; a
+	 * painted one wears the work's own layer over its medium's finish, its decoration composed in the layout its UV0
+	 * carries (Vessel/VesselMesh.h).
 	 */
 	void MakeVessel(FObjectMaking& Making, const FWorkPlan& Plan, const FCanvasPlan& Canvas, TArray<FFormMadePiece>& OutPieces,
 		TArray<FMuseeFinding>& OutFindings);

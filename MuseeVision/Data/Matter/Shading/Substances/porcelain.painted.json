@@ -1,0 +1,44 @@
+{
+  "schema": "musee.matter.shading.substance/1",
+  "key": "porcelain.painted",
+  "name": "Porcelain painted in cobalt under a clear glaze, or in enamels over it (the painted porcelains of Jingdezhen)",
+  "family": "accent",
+  "record": "Palette.json",
+  "master": "paint",
+  "accentOf": "stone",
+  "dielectric": {
+    "diffuseAlbedo": {
+      "value": [
+        90.0,
+        -2.0,
+        -1.0
+      ],
+      "space": "CIELAB (D65, 2 deg)",
+      "unit": "CIELAB",
+      "grade": "derived",
+      "source": "Palette.json: accent.porcelain-painted; MuseeVision/Scripts/vessels.py",
+      "derivation": "The white a painted vessel's decoration composes its glaze to (Art divides each photograph by its own white): porcelain under its clear glaze. Its hue is the median of the glaze's white in the four studio photographs (the Xuande, wucai and falangcai jars' and bowl's at the Metropolitan Museum, the chicken cup's at the National Palace Museum: a* -1 to -4, b* -2 to 0, where each sees the glaze within 37 degrees of face on); the meiping's gallery photograph, lit warm (b* 14), is left out. Its lightness is the porcelain body's first value (Shading/Substances/porcelain.json, L* 90), unmeasured: a photograph's exposure sets its own.",
+      "note": "The painting over or under the glaze is each work's own image."
+    },
+    "refractiveIndex": {
+      "value": 1.52,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Substances/low-iron-glass.json (1.523 for soda-lime float); a ceramic glaze is a soda-lime-alumina-silica glass of about the same index"
+    },
+    "porosity": {
+      "value": 0.0,
+      "unit": "1",
+      "grade": "derived",
+      "source": "a glaze is glass",
+      "derivation": "a fired glaze has no open pores"
+    },
+    "wettingDepth": {
+      "value": 0.0,
+      "unit": "mm",
+      "grade": "derived",
+      "source": "a glaze is glass",
+      "derivation": "with no pores, nothing wets its body"
+    }
+  }
+}

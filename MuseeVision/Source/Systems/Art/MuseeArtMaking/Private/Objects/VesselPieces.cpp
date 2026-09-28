@@ -1,30 +1,15 @@
 #include "ArtPieces.h"
+#include "FormExtrusion.h"
 #include "FormMake.h"
 #include "MuseeCollision.h"
 #include "MuseeRecords.h"
 #include "Objects/ObjectMaking.h"
+#include "Vessel/VesselMesh.h"
 
 namespace Musee::ArtMaking
 {
 	namespace
 	{
-		/** The section scaled to the plan's size: its widest radius to half the width, its height to the height, its foot on 0. */
-		TArray<FVector2D> SizedSection(const FArtVessel& Vessel, const FVector2D& SizeMeters)
-		{
-			FBox2D Bounds(ForceInit);
-			for (const FVector2D& Point : Vessel.Section)
-			{
-				Bounds += Point;
-			}
-			const FVector2D Scale(0.5 * SizeMeters.X / Bounds.Max.X, SizeMeters.Y / (Bounds.Max.Y - Bounds.Min.Y));
-			TArray<FVector2D> Out;
-			for (const FVector2D& Point : Vessel.Section)
-			{
-				Out.Add(FVector2D(Point.X * Scale.X, (Point.Y - Bounds.Min.Y) * Scale.Y));
-			}
-			return Out;
-		}
-
 		/**
 		 * The section as Form's profile through its traced points: smooth through a point where it turns less than the
 		 * crease angle, an arris where it turns more.
@@ -43,19 +28,6 @@ namespace Musee::ArtMaking
 			return Profile;
 		}
 
-		/** The radius of a section's foot: its widest point at its lowest height. */
-		double FootRadius(TConstArrayView<FVector2D> Points)
-		{
-			double Lowest = TNumericLimits<double>::Max();
-			double Radius = 0.0;
-			for (const FVector2D& Point : Points)
-			{
-				Radius = Point.Y < Lowest ? Point.X : (Point.Y == Lowest ? FMath::Max(Radius, Point.X) : Radius);
-				Lowest = FMath::Min(Lowest, Point.Y);
-			}
-			return Radius;
-		}
-
 		/** A turned drawing of Art's at a frame, in a finish, colliding as a solid. */
 		FFormDrawing Turning(FName Name, FName Surface, FFormProfile&& Section, const FLayerFinish& Finish, const FMuseeFrame& Frame)
 		{
@@ -72,6 +44,45 @@ namespace Musee::ArtMaking
 		}
 	}
 
+	namespace
+	{
+		/**
+		 * A vessel's feet (FArtVesselFeet), each its traced outline stood up to their height in its medium's finish
+		 * (`<name>.foot.<n>`), sized as the section is (SectionScale): across by its scale across, up by its scale up.
+		 */
+		void MakeFeet(const FArtVessel& Vessel, const FArtHangEntry& Entry, bool bSplit, const FLayerFinish& Finish, const FMuseeFrame& OnStand,
+			TArray<FFormMadePiece>& OutPieces, TArray<FMuseeFinding>& OutFindings)
+		{
+			const FArtVesselFeet& Feet = Vessel.Feet;
+			if (Feet.Each.IsEmpty() || !(Feet.HeightMeters > 0.0))
+			{
+				return;
+			}
+			const FVector2D Scale = SectionScale(Vessel, Entry.SizeMeters());
+			const double Across = Scale.X;
+			const double Rise = Scale.Y;
+			for (int32 Index = 0; Index < Feet.Each.Num(); ++Index)
+			{
+				TArray<FVector2D> Outline;
+				for (const FVector2D& Point : Feet.Each[Index].Outline)
+				{
+					Outline.Add(Point * Across);
+				}
+				FFormExtrusion Foot;
+				Foot.Outline = FFormProfile::Polygon(Outline);
+				Foot.DepthMeters = Feet.HeightMeters * Rise;
+				FFormDrawing Drawing = FFormDrawing::Of(PartName(Entry, bSplit, *FString::Printf(TEXT("foot.%d"), Index + 1)), TEXT("foot"), MoveTemp(Foot));
+				Drawing.Material = Finish.Palette;
+				Drawing.Working = Finish.Working;
+				Drawing.History = Finish.History;
+				Drawing.Collision = Collision::Solid.Profile();
+				Drawing.Frame = OnStand;
+				Drawing.Drawer = TEXT("Art");
+				Musee::FormMaking::Make(MoveTemp(Drawing), OutPieces, OutFindings);
+			}
+		}
+	}
+
 	const TValueOrError<FArtVessels, FString>& FObjectMaking::Vessels()
 	{
 		if (!VesselRecord.IsSet())
@@ -85,13 +96,16 @@ namespace Musee::ArtMaking
 	{
 		const FArtHangEntry& Entry = *Canvas.Entry;
 		const TValueOrError<FArtVessels, FString>& Vessels = Making.Vessels();
-		if (Vessels.HasError())
+		const TValueOrError<FArtWareForms, FString>& Forms = Making.Forms();
+		if (Vessels.HasError() || Forms.HasError())
 		{
-			OutFindings.Add(ArtFinding(Making.Stage, FString::Printf(TEXT("Work %s: it can't be turned: %s."), *Entry.Work, *Vessels.GetError())));
+			OutFindings.Add(ArtFinding(Making.Stage, FString::Printf(TEXT("Work %s: it can't be turned: %s."), *Entry.Work,
+				Vessels.HasError() ? *Vessels.GetError() : *Forms.GetError())));
 			return;
 		}
+		const FArtVessel& Vessel = *Vessels.GetValue().Find(Entry.Work);
 		const FArtVesselStand& Stand = Vessels.GetValue().Stand;
-		const TArray<FVector2D> Section = SizedSection(*Vessels.GetValue().Find(Entry.Work), Entry.SizeMeters());
+		const TArray<FVector2D> Section = SizedSection(Vessel, Entry.SizeMeters());
 		const bool bSplit = Plan.IsSplit();
 		const FMuseeFrame Foot = RoundFrame(Entry, Making.Stage.FindAnchor(Entry.Anchor, MountAnchorKind)->Frame);
 		double Raised = 0.0;
@@ -105,7 +119,26 @@ namespace Musee::ArtMaking
 				{ Stand.Palette, Stand.Working, Stand.History }, Foot), OutPieces, OutFindings);
 		}
 		const FMuseeFrame OnStand = Foot.FrameToParent(FMuseeFrame(FVector(0.0, 0.0, Raised)));
-		Musee::FormMaking::Make(Turning(FName(ObjectName(Entry, bSplit)), FName(ObjectWord(Entry.Support)), Traced(Section, Vessels.GetValue().CreaseDegrees),
-			Canvas.Finish, OnStand), OutPieces, OutFindings);
+		const FName Name(ObjectName(Entry, bSplit));
+		const FName Surface(ObjectWord(Entry.Support));
+		if (!Vessel.IsPainted() && !Vessel.Museum.IsOval())
+		{
+			Musee::FormMaking::Make(Turning(Name, Surface, Traced(Section, Vessels.GetValue().CreaseDegrees), Canvas.Finish, OnStand), OutPieces, OutFindings);
+			return;
+		}
+		// A painted vessel wears its decoration, composed in its turned surface's layout, the layout its UV0 carries; an
+		// oval one is its turned section pressed front to back to its foot's and its mouth's ovals.
+		FVesselTurning How;
+		const FString Unpressed = TurningOf(Vessel, Entry.SizeMeters(), Vessels.GetValue().CreaseDegrees, Forms.GetValue().ChordToleranceMeters, How);
+		if (!Unpressed.IsEmpty())
+		{
+			OutFindings.Add(ArtFinding(Making.Stage, FString::Printf(TEXT("Work %s: it can't be pressed to its oval: %s."), *Entry.Work, *Unpressed)));
+			return;
+		}
+		const FLayerFinish Material = Vessel.IsPainted() ? FLayerFinish{ Canvas.Layer, Canvas.Finish.Working, Canvas.Finish.History } : Canvas.Finish;
+		FFormMadePiece Piece = ArtPiece(Name, Surface, Material, OnStand, true);
+		BuildVessel(Section, LayoutOf(Section), How, Piece.Mesh);
+		OutPieces.Add(MoveTemp(Piece));
+		MakeFeet(Vessel, Entry, bSplit, Canvas.Finish, OnStand, OutPieces, OutFindings);
 	}
 }

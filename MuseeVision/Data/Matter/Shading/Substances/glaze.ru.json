@@ -1,0 +1,87 @@
+{
+  "schema": "musee.matter.shading.substance/1",
+  "key": "glaze.ru",
+  "name": "Ru glaze (a pale blue-green celadon, opalescent, over a buff stoneware body)",
+  "family": "accent",
+  "record": "Palette.json",
+  "master": "white",
+  "accentOf": "stone",
+  "dielectric": {
+    "diffuseAlbedo": {
+      "value": [
+        75.0,
+        -8.0,
+        -1.0
+      ],
+      "space": "CIELAB (D65, 2 deg)",
+      "unit": "CIELAB",
+      "grade": "derived",
+      "source": "National Palace Museum, 故瓷017851, photograph 汝窯_青瓷無紋水仙盆.png (CC BY 4.0); MuseeVision/Scripts/vessels.py derive_ru",
+      "derivation": "The median of the basin's lit outside wall, face on (pixels 1100..1500 x 1350..1500), relative to the photograph's own white (its 99.5th percentile of lightness, the rim's white edge where the glaze runs thin, taken as L* 100)."
+    },
+    "refractiveIndex": {
+      "value": 1.52,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Substances/low-iron-glass.json (1.523 for soda-lime float); a ceramic glaze is a soda-lime-alumina-silica glass of about the same index"
+    },
+    "porosity": {
+      "value": 0.0,
+      "unit": "1",
+      "grade": "derived",
+      "source": "a glaze is glass",
+      "derivation": "a fired glaze has no open pores"
+    },
+    "wettingDepth": {
+      "value": 0.0,
+      "unit": "mm",
+      "grade": "derived",
+      "source": "a glaze is glass",
+      "derivation": "with no pores, nothing wets its body"
+    }
+  },
+  "structure": {
+    "grain": {
+      "value": 0.05,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: accent.stoneware-glazed (the glazes' first values)",
+      "note": "The bubbles that make the glaze's sheen soft."
+    },
+    "bed": {
+      "value": 50,
+      "unit": "mm",
+      "grade": "unverified",
+      "source": "Palette.json: accent.stoneware-glazed (the glazes' first values)",
+      "note": "The coarsest structure the face shows."
+    },
+    "bedAspect": {
+      "value": 1.0,
+      "unit": "1",
+      "grade": "derived",
+      "source": "An unbedded body",
+      "derivation": "unbedded"
+    },
+    "hurst": {
+      "value": 0.7,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Candela et al. 2012, Journal of Geophysical Research 117, B08409 (fault surfaces, 0.6 to 0.8; cited in Stone.ush)",
+      "note": "The middle of the range measured on rock surfaces, as the travertine's."
+    },
+    "toneSpread": {
+      "value": 0.031,
+      "unit": "1",
+      "grade": "derived",
+      "source": "汝窯_青瓷無紋水仙盆.png; MuseeVision/Scripts/vessels.py derive_ru",
+      "derivation": "The standard deviation of ln(lightness) over the same lit wall: a glaze even to the eye."
+    },
+    "roughnessSpread": {
+      "value": 0.05,
+      "unit": "1",
+      "grade": "unverified",
+      "source": "Palette.json: accent.stoneware-glazed (the glazes' first values)",
+      "note": "A first half-range of ln(roughness) across one face."
+    }
+  }
+}

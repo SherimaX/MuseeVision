@@ -1,0 +1,41 @@
+{
+  "schema": "musee.matter.shading.working/1",
+  "key": "painted.enamels",
+  "name": "Painted in enamels over the fired glaze and fired again at a lower heat (wucai, doucai, falangcai)",
+  "record": "Palette.json",
+  "kind": "face",
+  "roughness": {
+    "value": 0.05,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Shading/Workings/glazed.json (a glaze's first roughness)",
+    "note": "An enamel is a coloured glass fired onto the glaze: glossy as it is; its slight relief is not drawn."
+  },
+  "roughnessAcross": {
+    "value": 0.05,
+    "unit": "1",
+    "grade": "derived",
+    "source": "a glaze has no grain",
+    "derivation": "equal to the roughness along"
+  },
+  "haziness": {
+    "value": 0.0,
+    "unit": "1",
+    "grade": "unverified",
+    "source": "Shading/Workings/glazed.json",
+    "note": "One specular lobe until a goniometric measurement shows a second."
+  },
+  "textureDepth": {
+    "value": 0.001,
+    "unit": "mm",
+    "grade": "unverified",
+    "source": "Shading/Workings/glazed.json"
+  },
+  "relief": {
+    "value": 0.0,
+    "unit": "mm",
+    "grade": "derived",
+    "source": "the image carries the painting",
+    "derivation": "no relief is drawn over the work's own image: an enamel stands about a tenth of a millimetre proud, finer than the eye reads at a case's distance"
+  }
+}

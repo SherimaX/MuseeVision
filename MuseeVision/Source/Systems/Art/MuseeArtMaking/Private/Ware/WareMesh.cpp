@@ -22,13 +22,6 @@ namespace Musee::ArtMaking
 			}
 		};
 
-		/** How many chords round the axis keep every one within the tolerance of a circle of this radius. */
-		int32 SegmentsFor(double Radius, double Tolerance)
-		{
-			const double Half = FMath::Acos(FMath::Clamp(1.0 - Tolerance / FMath::Max(Radius, Tolerance), -1.0, 1.0));
-			return FMath::Max(3, FMath::CeilToInt(UE_DOUBLE_PI / FMath::Max(Half, UE_DOUBLE_KINDA_SMALL_NUMBER)));
-		}
-
 		/**
 		 * Turns a section (radius, height; metres) about z. Each point's normal is the section's own, square to its run
 		 * (the run's right, turning up for a section drawn inward and out for one drawn upward), smoothed along the run.
@@ -109,7 +102,7 @@ namespace Musee::ArtMaking
 		Projection.Radius = Radius;
 		Projection.Height = Ware.HeightMeters;
 		Projection.Origin = FVector2D(Ware.Window.X * Image.X, Ware.Window.Z * Image.Y);
-		const int32 Segments = SegmentsFor(Radius, Forms.ChordToleranceMeters);
+		const int32 Segments = ChordsRound(Radius, Forms.ChordToleranceMeters);
 		FFormMesh Decorated, Ground;
 		if (Ware.Kind == DishKind)
 		{
@@ -128,5 +121,11 @@ namespace Musee::ArtMaking
 		}
 		Decorated.Write(OutDecorated);
 		Ground.Write(OutGround);
+	}
+
+	int32 ChordsRound(double Radius, double Tolerance)
+	{
+		const double Half = FMath::Acos(FMath::Clamp(1.0 - Tolerance / FMath::Max(Radius, Tolerance), -1.0, 1.0));
+		return FMath::Max(3, FMath::CeilToInt(UE_DOUBLE_PI / FMath::Max(Half, UE_DOUBLE_KINDA_SMALL_NUMBER)));
 	}
 }

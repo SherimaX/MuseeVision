@@ -37,9 +37,254 @@ struct FArtVesselStand
 };
 
 /**
- * A vessel's turned section, as the stage's sheet traced it from a photograph of the real vessel: [radius, height] in
- * metres from the centre of its foot, out along its underside, up its outside, over its lip and down its inside to the
- * axis again, the solid on the left. Turned about its axis it is the vessel's closed solid.
+ * A vessel's size as its museum records it: its height, and where published its widest diameter, its foot's diameter,
+ * and for an oval vessel its mouth's and foot's two axes [across, front to back]. Zero where the museum publishes none.
+ */
+USTRUCT()
+struct FArtVesselMuseum
+{
+	GENERATED_BODY()
+
+	UPROPERTY(meta = (Units = "Meters"))
+	double HeightMeters = 0.0;
+
+	UPROPERTY(meta = (Units = "Meters"))
+	double DiameterMeters = 0.0;
+
+	UPROPERTY(meta = (Units = "Meters"))
+	double FootMeters = 0.0;
+
+	UPROPERTY()
+	TArray<double> MouthAxesMeters;
+
+	UPROPERTY()
+	TArray<double> FootAxesMeters;
+
+	/** Whether the museum records an oval's mouth, whose two axes the turned section is scaled to. */
+	[[nodiscard]] bool IsOval() const { return MouthAxesMeters.Num() == 2; }
+};
+
+/** How much of the outside a view shares with another view, and how well their paintings correlate there. */
+USTRUCT()
+struct FArtVesselOverlap
+{
+	GENERATED_BODY()
+
+	/** The other view's photograph (its file name). */
+	UPROPERTY(meta = (MuseeRequired))
+	FString Image;
+
+	/** The share of the unwrapped outside both views see (weighted by how squarely each sees it). */
+	UPROPERTY()
+	double Share = 0.0;
+
+	UPROPERTY()
+	double Correlation = 0.0;
+
+	/**
+	 * How far apart the two views' paintings lie where both lend them, as the composition weighs them (the median offset
+	 * of the blocks of one that lie on the other); none where no block does. Further apart than the composition's
+	 * BlendMeters, the two are not blended: each keeps its own side of the overlap, and they meet at a seam.
+	 */
+	UPROPERTY(meta = (Units = "Meters"))
+	double OffsetMeters = 0.0;
+};
+
+/**
+ * One photograph of a painted vessel, and the camera that took it as its derivation found it (MuseeVision/Scripts/
+ * vessels.py): a pinhole standing at a bearing round the vessel (from its front towards its right), so far from its
+ * axis and so high above its foot, pitched down by so much, with its focal length and its optical axis's place in the
+ * photograph in pixels. A point of the vessel's frame (x its right, y its front, z up from its foot, metres) falls on
+ * the photograph where that camera sees it.
+ */
+USTRUCT()
+struct FArtVesselView
+{
+	GENERATED_BODY()
+
+	/** The photograph, from the repository's root (`assets/ceramics/<work>/<file>`), read from the collection. */
+	UPROPERTY(meta = (MuseeRequired))
+	FString Image;
+
+	UPROPERTY(meta = (Units = "Degrees"))
+	double AzimuthDegrees = 0.0;
+
+	/** Its distance from the axis: none for a view along it (a bottom photographed from under the vessel, pitched up 90). */
+	UPROPERTY(meta = (Units = "Meters"))
+	double DistanceMeters = 0.0;
+
+	UPROPERTY(meta = (MuseeRequired, Units = "Meters"))
+	double HeightMeters = 0.0;
+
+	UPROPERTY(meta = (Units = "Degrees"))
+	double PitchDegrees = 0.0;
+
+	/** Whether it stands on the axis, looking along it (up or down). */
+	[[nodiscard]] bool IsAlongAxis() const
+	{
+		return DistanceMeters == 0.0 && FMath::IsNearlyEqual(FMath::Abs(PitchDegrees), 90.0);
+	}
+
+	UPROPERTY(meta = (MuseeRequired))
+	double FocalPixels = 0.0;
+
+	/** The optical axis's place in the photograph [u, v], pixels from its top-left corner. */
+	UPROPERTY(meta = (MuseeRequired))
+	TArray<double> AxisPixels;
+
+	/** How far the section's image through this camera strays from the photograph's silhouette (rms, pixels). */
+	UPROPERTY()
+	double FitPixels = 0.0;
+
+	/**
+	 * How its bearing was found: `fitted` (the view the section is derived from, at bearing 0), `registered` (its
+	 * painting laid on the first view's, directly or through others it overlaps) or `unverified` (its painting shares
+	 * nothing with the first view's, so its bearing against it is not in the photographs).
+	 */
+	UPROPERTY(meta = (MuseeRequired))
+	FString Placement;
+
+	/** The other views it overlaps, as placed. */
+	UPROPERTY()
+	TArray<FArtVesselOverlap> Overlaps;
+
+	[[nodiscard]] static bool IsPlacement(const FString& Word)
+	{
+		return Word == TEXT("fitted") || Word == TEXT("registered") || Word == TEXT("unverified");
+	}
+};
+
+/**
+ * A band of ornament running round a painted vessel (a scroll, a row of panels): between two heights up its outside,
+ * repeating every so many degrees. Where no view sees the band, its own repeat is carried round from where one does. A
+ * band whose repeat isn't known (read on its photographs, or measured and trusted) isn't listed: where no view sees it,
+ * the glaze is left.
+ */
+USTRUCT()
+struct FArtVesselBand
+{
+	GENERATED_BODY()
+
+	UPROPERTY()
+	FString Name;
+
+	UPROPERTY(meta = (Units = "Meters"))
+	double FromMeters = 0.0;
+
+	UPROPERTY(meta = (MuseeRequired, Units = "Meters"))
+	double ToMeters = 0.0;
+
+	/** The band's repeat round the axis: a whole number of repeats to the turn. */
+	UPROPERTY(meta = (MuseeRequired, Units = "Degrees"))
+	double PeriodDegrees = 0.0;
+
+	/** How the repeat is known: read by eye on the photographs (with the measured repeat beside it), a plain line, or measured. */
+	UPROPERTY()
+	FString Reading;
+};
+
+/**
+ * Something a painted vessel carries once, not repeated round it (the Xuande jar's reign mark): between two heights up its
+ * outside and two bearings round it (degrees from the front towards the right), as its photograph shows it. No band's
+ * repeat reaches over it, so it is never carried round.
+ */
+USTRUCT()
+struct FArtVesselMotif
+{
+	GENERATED_BODY()
+
+	UPROPERTY(meta = (MuseeRequired))
+	FString Name;
+
+	UPROPERTY(meta = (MuseeRequired, Units = "Meters"))
+	double FromMeters = 0.0;
+
+	UPROPERTY(meta = (MuseeRequired, Units = "Meters"))
+	double ToMeters = 0.0;
+
+	UPROPERTY(meta = (Units = "Degrees"))
+	double FromDegrees = 0.0;
+
+	UPROPERTY(meta = (Units = "Degrees"))
+	double ToDegrees = 0.0;
+
+	/** How it was read on the photographs. */
+	UPROPERTY()
+	FString Reading;
+};
+
+/**
+ * An oval vessel's plan as its photographs show it: at its foot and at its mouth a superellipse |x/a|^n + |y/b|^n = 1 of
+ * its museum's axes, each exponent fitted to the outline its photograph shows (2 an ellipse, more a rounded oblong), and
+ * each outline as traced, in shares of its half-axes [across, front to back]. Its pressing (PressOf) follows them.
+ */
+USTRUCT()
+struct FArtVesselPlan
+{
+	GENERATED_BODY()
+
+	UPROPERTY()
+	double FootExponent = 0.0;
+
+	UPROPERTY()
+	double MouthExponent = 0.0;
+
+	UPROPERTY()
+	TArray<FVector2D> FootOutline;
+
+	UPROPERTY()
+	TArray<FVector2D> MouthOutline;
+};
+
+/** One foot, as its plan: a closed outline [across, front to back] in metres from the axis, anticlockwise from above. */
+USTRUCT()
+struct FArtVesselFoot
+{
+	GENERATED_BODY()
+
+	UPROPERTY(meta = (MuseeRequired))
+	TArray<FVector2D> Outline;
+};
+
+/**
+ * The feet a vessel stands on where it isn't thrown with a foot ring (the Ru basin's four cloud-scroll feet, traced
+ * from its base's photograph): each its outline stood up to their height. Its section stands on them: its lowest point
+ * is their height.
+ */
+USTRUCT()
+struct FArtVesselFeet
+{
+	GENERATED_BODY()
+
+	UPROPERTY(meta = (Units = "Meters"))
+	double HeightMeters = 0.0;
+
+	UPROPERTY()
+	TArray<FArtVesselFoot> Each;
+};
+
+/** A photograph of a vessel its derivation read and left out, and why. */
+USTRUCT()
+struct FArtVesselUnused
+{
+	GENERATED_BODY()
+
+	UPROPERTY()
+	FString Image;
+
+	UPROPERTY()
+	FString Why;
+};
+
+/**
+ * A vessel's turned section: [radius, height] in metres from the centre of its foot, out along its underside, up its
+ * outside, over its lip and down its inside to the axis again, the solid on the left. Turned about its axis it is the
+ * vessel's closed solid.
+ *
+ * A section the stage's sheet traced from a photograph of a vessel of its type gives only that. One derived from the
+ * vessel's own photographs (grade `derived`) says how (its derivation), what the museum records of its size and where
+ * its outside runs in the section ([first, last] points); a painted vessel's also gives the views its decoration is
+ * composed from, how much of its outside they see, its bands of ornament, and the photographs left out.
  */
 USTRUCT()
 struct FArtVessel
@@ -52,11 +297,198 @@ struct FArtVessel
 	UPROPERTY()
 	FString Source;
 
+	UPROPERTY()
+	FString Grade;
+
+	UPROPERTY()
+	FString Derivation;
+
+	UPROPERTY()
+	FArtVesselMuseum Museum;
+
+	/**
+	 * Why a derived section's widest diameter stands further from the museum's than the record's DiameterTolerance: what
+	 * the photographs show against the published figure. Empty where it doesn't.
+	 */
+	UPROPERTY()
+	FString Departure;
+
 	UPROPERTY(meta = (MuseeRequired))
 	TArray<FVector2D> Section;
+
+	UPROPERTY()
+	TArray<int32> Outside;
+
+	/** The wall its section was drawn with (its inside that far in from its outside): its lip's, where read. */
+	UPROPERTY(meta = (Units = "Meters"))
+	double WallMeters = 0.0;
+
+	UPROPERTY()
+	TArray<FArtVesselView> Views;
+
+	UPROPERTY()
+	double Coverage = 0.0;
+
+	UPROPERTY()
+	TArray<FArtVesselBand> Bands;
+
+	UPROPERTY()
+	TArray<FArtVesselUnused> Unused;
+
+	UPROPERTY()
+	FArtVesselFeet Feet;
+
+	/** What its painting carries once, which no band's repeat may carry round. */
+	UPROPERTY()
+	TArray<FArtVesselMotif> Once;
+
+	/** An oval's plan, as its photographs show it (none for a round vessel). */
+	UPROPERTY()
+	FArtVesselPlan Plan;
+
+	/** Whether its decoration is composed from its views: a painted vessel. */
+	[[nodiscard]] bool IsPainted() const { return !Views.IsEmpty(); }
 };
 
-/** Every turned vessel's section and the stand they stand on (`Data/Art/Vessels.json`). */
+/**
+ * How a painted vessel's views are composed round it (Data/Art/Vessels.json): how squarely a view must see the surface
+ * to lend it its colour, how a photograph's white and its highlights are known, and how finely the whole is composed.
+ */
+USTRUCT()
+struct FArtVesselComposition
+{
+	GENERATED_BODY()
+
+	/**
+	 * How far inside its silhouette, past its camera's own miss (its view's FitPixels), a place must show in a view's
+	 * photograph for the view to lend it its colour, pixels: an edge's blur, so no view lends the ground beyond the vessel.
+	 * A view lends wherever else it sees the surface at all, obliquely too, its weight the square of the cosine between
+	 * the surface's normal and its line of sight.
+	 */
+	UPROPERTY(meta = (MuseeRequired))
+	double EdgePixels = 0.0;
+
+	/**
+	 * How far, metres, a line of sight's weight takes to come in as it clears the vessel: past the silhouette's margin
+	 * (the line through the place EdgePixels further out must pass this far into the vessel), and past any other part of
+	 * the vessel between the place and the camera (the line must pass it clear by this), so where a view's sight ends
+	 * its colour fades out rather than stopping at a seam.
+	 */
+	UPROPERTY(meta = (MuseeRequired, Units = "Meters"))
+	double ClearanceMeters = 0.0;
+
+	/**
+	 * The cosine past which a view sees the surface squarely enough to measure its white there (all it sees, where it sees
+	 * too little so squarely): its white's hue and its lightness overall.
+	 */
+	UPROPERTY(meta = (MuseeRequired))
+	double WhiteSquareness = 0.0;
+
+	/**
+	 * The share of the glaze's samples darker than its white: a view's white overall, and its white at each place (over
+	 * the glaze's samples round it), are that quantile of their lightness.
+	 */
+	UPROPERTY(meta = (MuseeRequired))
+	double WhiteQuantile = 0.0;
+
+	/**
+	 * Which samples of a photograph are its glaze, whose lightness its white follows over the vessel as the light falls
+	 * on it (a gallery's lamps light a vase's shoulder and leave its foot in shade; a cup's wall darkens as it turns
+	 * under): a sample no more saturated than GlazeChroma relative to the white's hue (the spread of its channels over its
+	 * largest, each divided by the white's), no darker than ShadeFloor of the view's white, and, once the white round it
+	 * is known, no darker than GlazeLightness of it (a dark stroke is painting). Its white is never under ShadeFloor of
+	 * the view's white.
+	 */
+	UPROPERTY(meta = (MuseeRequired))
+	double GlazeChroma = 0.0;
+
+	UPROPERTY(meta = (MuseeRequired))
+	double GlazeLightness = 0.0;
+
+	UPROPERTY(meta = (MuseeRequired))
+	double ShadeFloor = 0.0;
+
+	/** A sample so many times its view's white is a highlight: the lamp's reflection in the glaze, not the painting. */
+	UPROPERTY(meta = (MuseeRequired))
+	double HighlightOverWhite = 0.0;
+
+	/** A highlight's weight, as a share of a sample's, so another view that sees the surface without it wins. */
+	UPROPERTY(meta = (MuseeRequired))
+	double HighlightWeight = 0.0;
+
+	/** The summed weight at which the views alone give the surface's colour; below it a band's repeat or the glaze fills in. */
+	UPROPERTY(meta = (MuseeRequired))
+	double FullWeight = 0.0;
+
+	/**
+	 * Two views whose paintings lie further apart than this where they overlap (their overlap's OffsetMeters) are not
+	 * blended there, which would show the painting twice: each keeps its own side of the overlap, and they meet at a seam
+	 * run where their paintings agree best, cross-faded over SeamMeters.
+	 */
+	UPROPERTY(meta = (MuseeRequired, Units = "Meters"))
+	double BlendMeters = 0.0;
+
+	UPROPERTY(meta = (MuseeRequired, Units = "Meters"))
+	double SeamMeters = 0.0;
+
+	/** The finest the decoration is composed at, pixels a metre, and the most pixels it spans either way. */
+	UPROPERTY(meta = (MuseeRequired))
+	double MostPixelsPerMeter = 0.0;
+
+	UPROPERTY(meta = (MuseeRequired))
+	int32 MostPixels = 0;
+};
+
+/**
+ * How a painted vessel's placed views are checked against the evidence that placed them (Data/Art/Vessels.json, as
+ * MuseeVision/Scripts/vessels.py registers them): each photograph unwrapped round the axis on a grid of so many angles
+ * and heights, weighted where it sees the outside past a squareness (SquarenessCut to register a view's painting on
+ * another's, OverlapCut to record a placed view's overlaps), its detail its lightness band-passed between two blurs
+ * (cells); two views overlap where both see, their share the mean of their weights' product over the grid, their
+ * correlation that of their detail there (none under LeastShare of the grid).
+ */
+USTRUCT()
+struct FArtVesselRegistration
+{
+	GENERATED_BODY()
+
+	UPROPERTY(meta = (MuseeRequired))
+	int32 AzimuthSteps = 0;
+
+	UPROPERTY(meta = (MuseeRequired))
+	int32 HeightSteps = 0;
+
+	UPROPERTY(meta = (MuseeRequired))
+	double SquarenessCut = 0.0;
+
+	UPROPERTY(meta = (MuseeRequired))
+	double OverlapCut = 0.0;
+
+	UPROPERTY(meta = (MuseeRequired))
+	double FineCells = 0.0;
+
+	UPROPERTY(meta = (MuseeRequired))
+	double CoarseCells = 0.0;
+
+	UPROPERTY(meta = (MuseeRequired))
+	double LeastShare = 0.0;
+
+	/** The correlation a genuine overlap reaches: two views whose paintings lie on each other so well show the same place. */
+	UPROPERTY(meta = (MuseeRequired))
+	double Genuine = 0.0;
+
+	/**
+	 * How near a view's overlaps, recomputed from its record's camera and its photographs, come to those its record
+	 * gives: the share within this part of it, the correlation within CorrelationTolerance.
+	 */
+	UPROPERTY(meta = (MuseeRequired))
+	double ShareTolerance = 0.0;
+
+	UPROPERTY(meta = (MuseeRequired))
+	double CorrelationTolerance = 0.0;
+};
+
+/** Every turned vessel's section, the stand they stand on and how painted ones are composed (`Data/Art/Vessels.json`). */
 USTRUCT()
 struct FArtVessels
 {
@@ -69,8 +501,21 @@ struct FArtVessels
 	UPROPERTY(meta = (MuseeRequired, Units = "Degrees"))
 	double CreaseDegrees = 0.0;
 
+	/**
+	 * How far a derived section's widest diameter may stand from its museum's, as a share of it, before its record must
+	 * say why (its Departure): a published figure's rounding and a hand-thrown vessel's own out-of-round.
+	 */
+	UPROPERTY(meta = (MuseeRequired))
+	double DiameterTolerance = 0.0;
+
 	UPROPERTY(meta = (MuseeRequired))
 	FArtVesselStand Stand;
+
+	UPROPERTY(meta = (MuseeRequired))
+	FArtVesselComposition Composition;
+
+	UPROPERTY(meta = (MuseeRequired))
+	FArtVesselRegistration Registration;
 
 	UPROPERTY(meta = (MuseeRequired))
 	TArray<FArtVessel> Vessels;
