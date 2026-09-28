@@ -27,7 +27,7 @@ namespace Musee::ArtMaking
 	 * How a vessel is turned at the size its plan shows it (SizedSection): the record's crease angle, the chord tolerance,
 	 * and its pressing at that size (PressOf). Empty if so; else why it can't be pressed.
 	 */
-	[[nodiscard]] FString TurningOf(const FArtVessel& Vessel, const FVector2D& PlanMeters, double CreaseDegrees, double ChordToleranceMeters,
+	[[nodiscard]] FString TurningOf(const FArtVessel& Vessel, const FVector2D& PlanMeters, double CreaseDegrees, double ChordTolerance,
 		FVesselTurning& Out);
 
 	/**

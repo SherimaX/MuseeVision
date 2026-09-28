@@ -53,11 +53,11 @@ namespace Musee::ArtMaking
 		}
 	}
 
-	FString TurningOf(const FArtVessel& Vessel, const FVector2D& PlanMeters, double CreaseDegrees, double ChordToleranceMeters, FVesselTurning& Out)
+	FString TurningOf(const FArtVessel& Vessel, const FVector2D& PlanMeters, double CreaseDegrees, double ChordTolerance, FVesselTurning& Out)
 	{
 		Out = FVesselTurning();
 		Out.CreaseDegrees = CreaseDegrees;
-		Out.ChordToleranceMeters = ChordToleranceMeters;
+		Out.ChordToleranceMeters = ChordTolerance;
 		return PressOf(Vessel, SectionScale(Vessel, PlanMeters), Out.Press);
 	}
 
