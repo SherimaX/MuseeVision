@@ -51,6 +51,12 @@ struct FLightScheduleSphere
 
 	UPROPERTY(meta = (Units = "Meters")) double Radius = 0.0;
 	UPROPERTY(meta = (Units = "Meters")) double Opening = 0.0;
+	/**
+	 * The stage's surface whose glass the panels shine through (the Sphere's `sphere.image`), when they have one: the
+	 * sphere's radius is then the glass's inner face, and the panels' emitters stand behind it by the pane's thickness,
+	 * which Matter's record of the surface's working gives. None: the picture is shown on the sphere itself.
+	 */
+	UPROPERTY() FString Behind;
 
 	/** Whether the entry gives a sphere at all. */
 	[[nodiscard]] bool IsGiven() const { return Radius != 0.0 || Opening != 0.0; }

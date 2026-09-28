@@ -14,9 +14,10 @@
       "operation": "always",
       "sphere": {
         "radius": 13.7,
-        "opening": 2.98
+        "opening": 2.98,
+        "behind": "sphere.image"
       },
-      "note": "The image luminaire: the whole inner surface R 13.700 about the centre (0, 0, 22.000), light-field panels facing in, less the neck's hole (edge r 2.980, z 8.628). Its source is Light's image of the real sky over the museum's city now (Time's sky for the museum's observer: the stars to V 6.5, the Moon at its true size, place and phase, the Milky Way; no Sun, no atmosphere). Always on, day and night (D-006). Content at infinity (a light field), so the stars hold still as the car rises."
+      "note": "The image luminaire: the whole inner surface R 13.700 about the centre (0, 0, 22.000), light-field panels facing in, less the neck's hole (edge r 2.980, z 8.628). R 13.700 is the inner face of the panels' glass (the finish of sphere.image); their emitters stand behind it by the pane's thickness, which Light takes from Matter's record of that finish's working, never written here. Its source is Light's image of the real sky over the museum's city now (Time's sky for the museum's observer: the stars to V 6.5, the Moon at its true size, place and phase, the Milky Way; no Sun, no atmosphere). Always on, day and night (D-006). Content at infinity (a light field), so the stars hold still as the car rises."
     },
     {
       "id": "rail.01",

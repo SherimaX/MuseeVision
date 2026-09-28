@@ -3,7 +3,9 @@
 #if WITH_DEV_AUTOMATION_TESTS
 
 #include "Components/DirectionalLightComponent.h"
+#include "Components/DynamicMeshComponent.h"
 #include "Dom/JsonObject.h"
+#include "DynamicMesh/DynamicMesh3.h"
 #include "Components/ExponentialHeightFogComponent.h"
 #include "Components/PointLightComponent.h"
 #include "Components/RectLightComponent.h"
@@ -11,14 +13,17 @@
 #include "Engine/World.h"
 #include "GameFramework/Actor.h"
 #include "HAL/FileManager.h"
+#include "Image/ImageSphere.h"
 #include "LightImage.h"
 #include "LightLuminaire.h"
 #include "LightLuminaireComponent.h"
 #include "LightSky.h"
+#include "MatterRecords.h"
 #include "Misc/FileHelper.h"
 #include "Misc/Paths.h"
 #include "MuseeRecords.h"
 #include "Schedule/LightDresser.h"
+#include "Schedule/LightingRecords.h"
 #include "Serialization/JsonReader.h"
 #include "Serialization/JsonSerializer.h"
 #include "Sky/SkyPhotometry.h"
@@ -41,6 +46,9 @@ namespace Musee::Light::Tests
 	private:
 		UWorld* World;
 	};
+
+	/** Matter's panes are measured in millimetres. */
+	constexpr double MetersPerMillimeter = 0.001;
 
 	/** An actor with a root, as a stage actor is made. */
 	AActor* SpawnRootedActor(UWorld& World)
@@ -293,13 +301,17 @@ namespace Musee::Light::Tests
 				{ "id": "bare", "type": "luminous-ceiling.3000k", "point": [2, 0, 5], "aim": [2, 0, 0], "operation": "always" },
 				{ "id": "astray", "type": "luminous-ceiling.3000k", "point": [0, 6, 9], "aim": [0, 6, 0], "operation": "always", "zone": { "r": [3.6, 8.5], "bearing": [345, 15] } },
 				{ "id": "spot.spread", "type": "track-spot.3000k.20deg", "point": [0, 0, 3], "aim": [0, 0, 0], "operation": "always", "extent": [1, 1] },
-				{ "id": "dome", "type": "light-field-panel.d65", "point": [0, 0, 22], "aim": [0, 0, 22], "operation": "always", "sphere": { "radius": 13.7, "opening": 2.98 } },
+				{ "id": "dome", "type": "light-field-panel.d65", "point": [0, 0, 22], "aim": [0, 0, 22], "operation": "always", "sphere": { "radius": 13.7, "opening": 2.98, "behind": "test.image" } },
+				{ "id": "dome.unfinished", "type": "light-field-panel.d65", "point": [0, 0, 22], "aim": [0, 0, 22], "operation": "always", "sphere": { "radius": 13.7, "opening": 2.98, "behind": "test.nowhere" } },
 				{ "id": "dome.askew", "type": "light-field-panel.d65", "point": [0, 0, 22], "aim": [0, 0, 8], "operation": "always", "sphere": { "radius": 13.7, "opening": 2.98 } },
 				{ "id": "dome.ceiling", "type": "luminous-ceiling.3000k", "point": [0, 0, 22], "aim": [0, 0, 22], "operation": "always", "sphere": { "radius": 13.7, "opening": 2.98 } },
 				{ "id": "step", "type": "step-light.2700k", "point": [6.2, -28.1, 0.14], "aim": [6.2, -27.6, 0.1], "operation": "dusk", "host": "test.bridge.kerb", "surface": "test.garden.path" } ],
 			"targets": [ { "surface": "test.floor", "class": "circulation", "lux": [50, null], "source": "UseTargets", "when": { "mechanism": "test.car", "stop": "floor" } } ],
 			"design": [ { "brighter": "test.canvas", "darker": "test.wall", "ratio": [1.5, null] } ] })");
 		FFileHelper::SaveStringToFile(Schedule, *(Folder / TEXT("Lighting.json")));
+		// The glass the dome's panels shine through, finished as the Sphere's image surface is.
+		FFileHelper::SaveStringToFile(FString(TEXT(R"({ "stage": "test", "finishes": [
+			{ "surface": "test.image", "material": "glass.low-iron", "working": "lenslet-array.black", "history": "new" } ] })")), *(Folder / TEXT("Finishes.json")));
 
 		const FLightTestWorld World;
 		AActor* Stage = SpawnRootedActor(*World.Get());
@@ -322,8 +334,10 @@ namespace Musee::Light::Tests
 		// The image sphere is placed, and gives its light from its surface; it is a finding only where Light's image
 		// material, which Studio makes, isn't made.
 		const bool bImageMade = Image::FindMaterial() != nullptr;
-		TestEqual(TEXT("An unknown weather place and type, a line without length, a mount with a point, a point without aim, a line along its own light, a spot laid along a line, a ceiling without its face or outside its zone, a spot over an extent, a sphere aimed off its centre and a ceiling over a sphere are findings"),
-			Findings.Num(), bImageMade ? 12 : 13);
+		TestEqual(TEXT("An unknown weather place and type, a line without length, a mount with a point, a point without aim, a line along its own light, a spot laid along a line, a ceiling without its face or outside its zone, a spot over an extent, a sphere aimed off its centre, a sphere behind a surface the stage doesn't finish and a ceiling over a sphere are findings"),
+			Findings.Num(), bImageMade ? 13 : 14);
+		TestTrue(TEXT("a sphere behind a surface the stage doesn't finish isn't placed"),
+			Findings.ContainsByPredicate([](const FMuseeFinding& F) { return F.Summary.Contains(TEXT("'dome.unfinished' isn't placed: the stage's finish schedule has no surface 'test.nowhere'")); }));
 		TestFalse(TEXT("the image sphere is never reported as giving no light"),
 			Findings.ContainsByPredicate([](const FMuseeFinding& F) { return F.Summary.Contains(TEXT("gives no light")); }));
 		TestEqual(TEXT("and only as dark while its image material isn't made"),
@@ -393,9 +407,16 @@ namespace Musee::Light::Tests
 		}
 		if (ULightLuminaireComponent* Dome = Placement(TEXT("dome")); TestNotNull(TEXT("An image sphere, aimed at its centre, where it sits"), Dome))
 		{
-			const double Area = 2.0 * UE_DOUBLE_PI * 13.7 * (13.7 + FMath::Sqrt(13.7 * 13.7 - 2.98 * 2.98));
-			TestTrue(TEXT("over the sphere's inside less the cap its opening cuts, as wide as its equator"),
-				FMath::IsNearlyEqual(Dome->Face().X * Dome->Face().Y, Area, 1e-6) && FMath::IsNearlyEqual(Dome->Face().X, 2.0 * UE_DOUBLE_PI * 13.7, 1e-6));
+			// Its panels shine through the glass of the surface they stand behind: their emitters stand the pane's thickness,
+			// from Matter's record of the surface's working, outside the glass's inner face, the sphere the schedule gives.
+			const TValueOrError<FMatterWorking, FString> Glass = Musee::Matter::ReadWorking(FMuseeKey(TEXTVIEW("lenslet-array.black")));
+			TestTrue(TEXT("its panels behind a pane Matter records"), Glass.HasValue() && Glass.GetValue().PaneThickness.Unit == TEXT("mm") && Glass.GetValue().PaneThickness.Value > 0.0);
+			const double Emitters = 13.7 + (Glass.HasValue() ? Glass.GetValue().PaneThickness.Value * MetersPerMillimeter : 0.0);
+			TestTrue(TEXT("their emitters the pane's thickness outside the glass's inner face"), FMath::IsNearlyEqual(Dome->Sphere().X, Emitters, 1e-9)
+				&& FMath::IsNearlyEqual(Dome->Sphere().Y, 2.98, 1e-9));
+			const double Area = 2.0 * UE_DOUBLE_PI * Emitters * (Emitters + FMath::Sqrt(Emitters * Emitters - 2.98 * 2.98));
+			TestTrue(TEXT("over the emitters' sphere less the cap its opening cuts, as wide as its equator"),
+				FMath::IsNearlyEqual(Dome->Face().X * Dome->Face().Y, Area, 1e-6) && FMath::IsNearlyEqual(Dome->Face().X, 2.0 * UE_DOUBLE_PI * Emitters, 1e-6));
 			TestTrue(TEXT("a face that encloses it, at its centre"), Dome->FaceEncloses() && Dome->GetComponentLocation().Equals(FVector(0.0, 0.0, 2200.0), 0.01));
 		}
 		if (ULightLuminaireComponent* Step = Placement(TEXT("step")); TestNotNull(TEXT("A step light"), Step))
@@ -405,6 +426,70 @@ namespace Musee::Light::Tests
 			TestTrue(TEXT("and lights as a spot"), Cast<USpotLightComponent>(Step->Emitter()) != nullptr);
 		}
 		IFileManager::Get().DeleteDirectory(*FPaths::GetPath(Folder), false, true);
+		return true;
+	}
+
+	IMPLEMENT_SIMPLE_AUTOMATION_TEST(FLightImageBehindGlassTest, "Musee.Light.ImageBehindGlass", Flags)
+	bool FLightImageBehindGlassTest::RunTest(const FString& Parameters)
+	{
+		// The Sphere's image, placed from its own schedules: its sphere is the inner face of the panels' glass, and the glass
+		// is the finish of the surface its panels stand behind, whose pane Matter records.
+		const FString Folder = Records::DataRoot() / TEXT("Stages/sphere");
+		const TValueOrError<FLightSchedule, FString> Schedule = ReadRecord<FLightSchedule>(Folder / TEXT("Lighting.json"));
+		if (!TestTrue(TEXT("The Sphere's lighting schedule reads"), Schedule.HasValue())) { return false; }
+		const FLightScheduleLuminaire* Entry = Schedule.GetValue().Luminaires.FindByPredicate([](const FLightScheduleLuminaire& E) { return E.Sphere.IsGiven(); });
+		if (!TestNotNull(TEXT("and lays an image over its sphere"), Entry)) { return false; }
+		TestEqual(TEXT("whose panels stand behind the image surface's glass"), Entry->Sphere.Behind, FString(TEXT("sphere.image")));
+		const TValueOrError<FMatterFinishSchedule, FString> Finishes = Musee::Matter::ReadFinishSchedule(Folder);
+		const FMatterFinish* Finish = Finishes.HasValue() ? Finishes.GetValue().Find(FName(*Entry->Sphere.Behind)) : nullptr;
+		if (!TestNotNull(TEXT("which the Sphere's finish schedule finishes"), Finish)) { return false; }
+		const TValueOrError<FMatterWorking, FString> Working = Musee::Matter::ReadWorking(Finish->Working);
+		if (!TestTrue(TEXT("in a working Matter records with its pane"), Working.HasValue() && Working.GetValue().PaneThickness.HasValue()
+			&& Working.GetValue().PaneThickness.Unit == TEXT("mm") && Working.GetValue().PaneThickness.Value > 0.0))
+		{
+			return false;
+		}
+		const double InnerFace = ToEngine(Meters(Entry->Sphere.Radius));
+		const double Pane = ToEngine(Meters(Working.GetValue().PaneThickness.Value * MetersPerMillimeter));
+
+		const FLightTestWorld World;
+		AActor* Stage = SpawnRootedActor(*World.Get());
+		FMuseeStageContext Context;
+		Context.Stage = FMuseeKey(TEXTVIEW("sphere"));
+		Context.ScheduleDir = Folder;
+		Context.StageActor = Stage;
+		// The mount stands at the sphere's centre, where the schedule aims the image (its light converges there).
+		if (!TestEqual(TEXT("aimed at a point"), Entry->Aim.Num(), 3)) { return false; }
+		Context.Anchors.Add({ FMuseeKey(*Entry->Mount), TEXT("Mount"), FMuseeFrame(FVector(Entry->Aim[0], Entry->Aim[1], Entry->Aim[2])) });
+		TArray<FMuseeFinding> Findings;
+		DressStage(Context, Findings);
+		const FName Tag(FString(LuminaireTagPrefix) + Entry->Id);
+		TArray<ULightLuminaireComponent*> Placed;
+		Stage->GetComponents(Placed);
+		ULightLuminaireComponent* const* Found = Placed.FindByPredicate([Tag](const ULightLuminaireComponent* C) { return C->ComponentHasTag(Tag); });
+		if (!TestTrue(TEXT("The image is placed"), Found != nullptr)) { return false; }
+		const ULightLuminaireComponent& Image = **Found;
+
+		// The surface its light leaves: the one Light made, where its image material is made, else the same built here.
+		UE::Geometry::FDynamicMesh3 Built;
+		const UDynamicMeshComponent* Made = Cast<UDynamicMeshComponent>(Image.ImageSurface());
+		if (!Made)
+		{
+			BuildImageSphere(ToEngine(Meters(Image.Sphere().X)), ToEngine(Meters(Image.Sphere().Y)), Built);
+		}
+		const UE::Geometry::FDynamicMesh3& Surface = Made ? *Made->GetMesh() : Built;
+		TestTrue(*FString::Printf(TEXT("It has faces (%d, %s, over the emitters' sphere R %.4f m less its opening r %.4f m)"), Surface.TriangleCount(),
+			Made ? TEXT("the surface Light made") : TEXT("built as Light builds it"), Image.Sphere().X, Image.Sphere().Y), Surface.TriangleCount() > 0);
+		double Nearest = TNumericLimits<double>::Max();
+		for (const int32 Face : Surface.TriangleIndicesItr())
+		{
+			FVector3d A, B, C;
+			Surface.GetTriVertices(Face, A, B, C);
+			Nearest = FMath::Min(Nearest, NearestToCentre(A, B, C));
+		}
+		// Every point of every face, not only its corners: a flat face between points of a sphere cuts inside it.
+		TestTrue(*FString::Printf(TEXT("Every point of the image surface stands at least one pane thickness (%.2f cm) outside the glass's inner face (R %.2f cm): nearest R %.2f cm"),
+			Pane, InnerFace, Nearest), Nearest >= InnerFace + Pane - 1e-6);
 		return true;
 	}
 

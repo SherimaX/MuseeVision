@@ -4,6 +4,7 @@
 #include "LightImage.h"
 #include "LightLuminaire.h"
 #include "LightLuminaireComponent.h"
+#include "MatterRecords.h"
 #include "Misc/Paths.h"
 #include "MuseeRecords.h"
 #include "Schedule/LightingRecords.h"
@@ -24,6 +25,9 @@ namespace Musee::Light
 
 		/** A full turn, in degrees of bearing. */
 		constexpr double FullTurnDegrees = 360.0;
+
+		/** Matter's panes are measured in millimetres. */
+		constexpr double MetersPerMillimeter = 0.001;
 
 		/** The places whose weather may fall on an opening (Decision D-005, the stage contract). */
 		const TCHAR* const WeatherPlaces[] = { TEXT("museum"), TEXT("giverny"), TEXT("london") };
@@ -196,15 +200,46 @@ namespace Musee::Light
 		}
 
 		/**
+		 * The thickness, in metres, of the glass the panels of a sphere shine through: the pane of the working the stage's
+		 * finish schedule gives the surface they stand behind, as Matter's record of it has it. The reason there is none, or
+		 * the thickness.
+		 */
+		TValueOrError<double, FString> PaneBehind(const FMuseeStageContext& Stage, const FString& Behind)
+		{
+			const TOptional<FMuseeKey> Surface = FMuseeKey::Parse(Behind);
+			if (!Surface.IsSet()) { return MakeError(FString::Printf(TEXT("the surface it stands behind, '%s', isn't a key"), *Behind)); }
+			const TValueOrError<FMatterFinishSchedule, FString> Finishes = Matter::ReadFinishSchedule(Stage.ScheduleDir);
+			if (Finishes.HasError()) { return MakeError(FString::Printf(TEXT("the stage's finish schedule, which gives the surface it stands behind, can't be read: %s"), *Finishes.GetError())); }
+			const FMatterFinish* Finish = Finishes.GetValue().Find(Surface.GetValue().ToName());
+			if (!Finish) { return MakeError(FString::Printf(TEXT("the stage's finish schedule has no surface '%s' for it to stand behind"), *Behind)); }
+			const TValueOrError<FMatterWorking, FString> Working = Matter::ReadWorking(Finish->Working);
+			if (Working.HasError()) { return MakeError(FString::Printf(TEXT("the working of the surface it stands behind can't be read: %s"), *Working.GetError())); }
+			const FMatterQuantity& Pane = Working.GetValue().PaneThickness;
+			if (!Pane.HasValue() || Pane.Unit != TEXT("mm") || Pane.Value <= 0.0)
+			{
+				return MakeError(FString::Printf(TEXT("the working '%s' of the surface it stands behind gives no pane thickness in mm"), *Finish->Working.ToString()));
+			}
+			return MakeValue(Pane.Value * MetersPerMillimeter);
+		}
+
+		/**
 		 * The face a sphere's inside is, about the luminaire's seat: the whole sphere less the cap its opening cuts at its
 		 * foot, 2 pi R (R + sqrt(R^2 - r^2)) for an opening of radius r, as the rectangle of its own area as wide as the
-		 * sphere's equator. Its light converges on the seat from every side. The reason it has none, or empty.
+		 * sphere's equator. Its light converges on the seat from every side. Behind glass, the sphere given is the glass's
+		 * inner face and the face is the panels' emitters, the pane's thickness outside it. The reason it has none, or
+		 * empty.
 		 */
-		FString SphereFaceOf(const FLightScheduleSphere& Sphere, FPlacement& Out)
+		FString SphereFaceOf(const FMuseeStageContext& Stage, const FLightScheduleSphere& Sphere, FPlacement& Out)
 		{
-			const double Radius = Sphere.Radius;
 			const double Opening = Sphere.Opening;
-			if (Radius <= 0.0 || Opening < 0.0 || Opening >= Radius) { return TEXT("its sphere's radius isn't more than zero, with an opening of zero or more inside it"); }
+			if (Sphere.Radius <= 0.0 || Opening < 0.0 || Opening >= Sphere.Radius) { return TEXT("its sphere's radius isn't more than zero, with an opening of zero or more inside it"); }
+			double Radius = Sphere.Radius;
+			if (!Sphere.Behind.IsEmpty())
+			{
+				const TValueOrError<double, FString> Pane = PaneBehind(Stage, Sphere.Behind);
+				if (Pane.HasError()) { return Pane.GetError(); }
+				Radius += Pane.GetValue();
+			}
 			const double Equator = 2.0 * UE_DOUBLE_PI * Radius;
 			const double Area = Equator * (Radius + FMath::Sqrt(Radius * Radius - Opening * Opening));
 			Out.Face = FVector2D(Equator, Area / Equator);
@@ -217,7 +252,7 @@ namespace Musee::Light
 		 * The face an areal type lights (the stage contract): its extent, its zone or its sphere, exactly one; only an areal
 		 * type is laid over a face. The reason it has none, or empty.
 		 */
-		FString FaceOf(const FLightScheduleLuminaire& Entry, const FLightLuminaire& Luminaire, FPlacement& Out)
+		FString FaceOf(const FMuseeStageContext& Stage, const FLightScheduleLuminaire& Entry, const FLightLuminaire& Luminaire, FPlacement& Out)
 		{
 			const bool bExtent = !Entry.Extent.IsEmpty();
 			const bool bZone = !Entry.Zone.R.IsEmpty() || !Entry.Zone.Bearing.IsEmpty();
@@ -233,7 +268,7 @@ namespace Musee::Light
 			if (bSphere)
 			{
 				// Only a picture can be shown over a sphere's inside, on the surface Light makes for it.
-				return Luminaire.Emitter == FLightLuminaire::EEmitter::Image ? SphereFaceOf(Entry.Sphere, Out)
+				return Luminaire.Emitter == FLightLuminaire::EEmitter::Image ? SphereFaceOf(Stage, Entry.Sphere, Out)
 					: TEXT("only an image panel is laid over a sphere, its picture shown on the sphere's inside");
 			}
 			if (bZone) { return ZoneFaceOf(Entry.Zone, Out); }
@@ -266,7 +301,7 @@ namespace Musee::Light
 				if (!Out.Body) { return FString::Printf(TEXT("the stage has no moving body '%s'"), *Entry.Body); }
 			}
 			if (Luminaire->Emitter == FLightLuminaire::EEmitter::Linear && Entry.Length <= 0.0) { return TEXT("a linear type needs the length laid"); }
-			const FString WhyNoFace = FaceOf(Entry, *Luminaire, Out);
+			const FString WhyNoFace = FaceOf(Stage, Entry, *Luminaire, Out);
 			if (!WhyNoFace.IsEmpty()) { return WhyNoFace; }
 			return RunOf(Entry, *Luminaire, Out);
 		}

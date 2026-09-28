@@ -23,9 +23,14 @@ entry gives: an `extent` [width, height] in metres, or a `zone` of a round field
 area, as wide as its middle arc (or its outer chord), its height running out from the axis; or a `sphere`,
 `{ "radius": R, "opening": r }`, the inside of the sphere about its seat less the cap cut by a round opening at its foot
 (the Sphere's image, only an image panel): a face that encloses its luminaire, aimed at its seat (the one luminaire aimed
-at the point it sits on), 2 pi R (R + sqrt(R^2 - r^2)) as wide as its equator. No engine light stands for an enclosing
+at the point it sits on), 2 pi R (R + sqrt(R^2 - r^2)) as wide as its equator. A sphere's `behind` names the stage's
+surface whose glass its panels shine through (the Sphere's `sphere.image`): R is then the glass's inner face, and the
+panels' emitters, the face, stand behind it by the pane's thickness, which the dresser reads from Matter's record of the
+working that surface's finish names (never written in the schedule). No engine light stands for an enclosing
 face, which shines in from every side: its picture is shown on a surface Light makes of the sphere's inside down to its
-opening, emissive in Light's image material, and its light leaves that surface (Lumen carries it), its emitted flux pi
+opening, emissive in Light's image material, its chords held outside that sphere (each point at the radius over the
+cosine of the angle from its face's plane to its corners), so no point of it comes nearer the centre than the emitters'
+sphere and none crosses the glass in front of it; its light leaves that surface (Lumen carries it), its emitted flux pi
 times its picture's mean luminance times its area. The picture is the sky of Time's moment (`LightImage.h`): the stars
 to V 6.5 and the Moon, seen as a light field, clipped at the panel's peak white. Where Studio hasn't made the image
 material, the dresser reports the image dark. A luminaire set in a piece
@@ -33,7 +38,8 @@ names it as `host`, and the surface it lights as `surface`; they are kept as the
 `musee.lights:<key>`. Targets may hold only `when` a mechanism stands at a stop, and a target's `lux` and a design's
 `ratio` may leave one end open (`[50, null]`). Findings: an unknown type, mount, body or operation, a mount and a point
 together or neither, a point without its aim, a line without length, an areal type without its face (or with more than one
-face, outside its zone, or a sphere aimed off its centre, or a sphere under a type that isn't an image panel), a face on a type that isn't areal, an opening whose weather isn't one of Time's places,
+face, outside its zone, or a sphere aimed off its centre, or a sphere under a type that isn't an image panel, or a sphere
+behind a surface the stage doesn't finish or whose working records no pane), a face on a type that isn't areal, an opening whose weather isn't one of Time's places,
 a type that stands unlit (a wallwasher whose light profile Studio hasn't made among them), and an enclosing image whose
 material Studio hasn't made.
 
