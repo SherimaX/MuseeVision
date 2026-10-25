@@ -10,15 +10,21 @@ The sets (each checked by eye and by its normal's tilt before use, LESSONS §2):
 - CH_BRICK      Bricks061: reduction-fired grey brick in lime-pointed courses (淌白), about 6.9 cm a course;
 - CH_BRICKRUB   derived from it: the same bricks rubbed and laid dry (干摆, 丝缝): the joints filled with the brick's own
                 face (inpainted) and left as a hairline, 0.6 mm deep;
-- CH_PAVING     PavingStones112: square grey pavers, photogrammetry, moss and dirt in the joints (the courts' 方砖);
+- CH_PAVING     PavingStones112, 4K: square grey pavers, photogrammetry, moss and dirt in the joints (the courts' 方砖;
+                worn_tile_floor, 50 cm dark grey squares, was tried and read stained and oily in the courts);
 - CH_LIME       white_plaster_02: mottled white lime render (粉墙);
-- CH_TAIHU      Rock042L: weathered grey limestone, photogrammetry (the rockery, the standing rock);
-- CH_LICHEN     Rock046L: grey stone with lichen (the roofs' fired clay as it weathers: tiles, ridges);
+- CH_TAIHU      rock_boulder_dry: a pale, dry, water-worn boulder, pitted and eroded, 4K over 1.8 m (the rockery, the
+                standing rock; Rock042L was a buff, flaky cliff face at 2K over 2.4 m);
+- CH_ROOFCLAY   derived from grey_roof_tiles: weathered grey fired-clay roof tiles with lichen, their layout taken out (the
+                gaps inpainted, the tiles' own shading and steps filtered away), so only the clay's grain, soot and lichen
+                lie on the modelled 小青瓦 and 筒瓦 (Rock046L was a lichened rock);
 - CH_MOSSGROUND Ground037: damp earth under moss and litter, as under a Suzhou garden's trees and in the courts' beds;
-- CH_NANMU      rosewood_veneer_02: a fine straight grain with a quiet wavy figure (its tone only), tinted to nanmu's gold by the
-                instance (dark_wood's coarse streaks read as bamboo slats);
+- CH_NANMU      angli_veneer: anigre, a fine, even, straight-grained hardwood with a soft silky figure (its tone only),
+                tinted to nanmu's gold by the instance (rosewood_veneer_02's cathedral eyes read as a figured veneer);
 - CH_CRAZE      derived from mud_cracked_dry_riverbed_002's relief: the fine crazing (断纹) of old lacquer over its
-                lime-and-hemp ground, cells 5-20 mm, the cracks 0.1-0.3 mm and dirty.
+                lime-and-hemp ground, cells 5-20 mm, the cracks 0.1-0.3 mm and dirty. No CC0 scan of crazed lacquer
+                exists; worn_cracked_plaster's crazed coat was tried (its cracks traced from its colour) and its fine
+                broken network read as grit on the columns, the 断纹 lost.
 """
 import io
 import json
@@ -39,17 +45,18 @@ UA = {"User-Agent": "MuseeVision texture fetch (github.com/SherimaX/MuseeVision)
 # name: (source, asset, resolution, metres per repeat, what it stands for)
 SETS = {
     "CH_BRICK": ("ambientcg", "Bricks061", "2K", 1.10, "grey brick, lime-pointed courses (淌白)"),
-    "CH_PAVING": ("ambientcg", "PavingStones112", "2K", 2.10, "square grey pavers, moss in the joints (the courts' 方砖)"),
+    "CH_PAVING": ("ambientcg", "PavingStones112", "4K", 2.10, "square grey pavers, moss in the joints (the courts' 方砖)"),
     "CH_LIME": ("polyhaven", "white_plaster_02", "2k", 2.0, "white lime render (粉墙)"),
-    "CH_TAIHU": ("ambientcg", "Rock042L", "2K", 2.4, "weathered grey limestone (太湖石, the rockery)"),
-    "CH_LICHEN": ("ambientcg", "Rock046L", "2K", 2.0, "grey stone with lichen (the roofs' weathered clay)"),
-    "CH_NANMU": ("polyhaven", "rosewood_veneer_02", "2k", 1.0, "fine straight-grained veneer, a quiet wavy figure (nanmu's)"),
+    "CH_TAIHU": ("polyhaven", "rock_boulder_dry", "4k", 1.8, "pale water-worn boulder, pitted and eroded (太湖石, the rockery)"),
+    "CH_ROOFSRC": ("polyhaven", "grey_roof_tiles", "4k", 3.0, "weathered grey clay roof tiles with lichen (source of CH_ROOFCLAY)"),
+    "CH_NANMU": ("polyhaven", "angli_veneer", "2k", 1.0, "anigre: a fine, even, straight grain with a silky figure (nanmu's)"),
     "CH_MOSSGROUND": ("ambientcg", "Ground037", "2K", 2.0, "damp earth under moss, leaf litter (the garden's ground and the courts' beds)"),
     "CH_CRAZESRC": ("polyhaven", "mud_cracked_dry_riverbed_002", "2k", 2.0, "crack network (source of CH_CRAZE)"),
 }
 DERIVED = {
     "CH_BRICKRUB": ("CH_BRICK", 1.10, "rubbed dry-laid grey brick (干摆, 丝缝): Bricks061's joints filled flush, a hairline left"),
     "CH_CRAZE": ("CH_CRAZESRC", 0.30, "fine crazing of old lacquer (断纹), from mud_cracked_dry_riverbed_002's relief"),
+    "CH_ROOFCLAY": ("CH_ROOFSRC", 3.0, "weathered grey fired clay with lichen (小青瓦), grey_roof_tiles with its layout taken out"),
 }
 
 
@@ -88,12 +95,31 @@ def load(data, mode):
     return Image.open(io.BytesIO(data)).convert(mode)
 
 
+def grey8(data):
+    """A grey map at 8 bits: Poly Haven's newer roughness and AO come as 16-bit PNGs, which convert("L") clips to white."""
+    a = np.asarray(Image.open(io.BytesIO(data)))
+    if a.ndim == 3:
+        a = a[..., 0]
+    a = a.astype(np.float32) / (65535.0 if a.dtype == np.uint16 or a.max() > 255 else 255.0)
+    return Image.fromarray((np.clip(a, 0, 1) * 255 + 0.5).astype(np.uint8))
+
+
 def fetch(name):
     src, asset, res, scale, what = SETS[name]
     d = os.path.join(OUT, name)
     if os.path.exists(os.path.join(d, "ORM.png")):
-        print(f"{name} {asset}: already here")
-        return
+        # Here already, unless SETS now names another asset or resolution for it (a set replaced): then fetched afresh.
+        try:
+            with open(os.path.join(d, "SET.txt"), encoding="utf-8") as f:
+                had = f.read().split("\t")
+        except OSError:
+            had = []
+        if had[2:4] == [asset, res]:
+            print(f"{name} {asset}: already here")
+            return
+        for n in ("Color.png", "Normal.png", "ORM.png", "Height.png"):
+            if os.path.exists(os.path.join(d, n)):
+                os.remove(os.path.join(d, n))
     os.makedirs(d, exist_ok=True)
     maps = ambientcg(asset, res) if src == "ambientcg" else polyhaven(asset, res)
     if "color" not in maps or "normal" not in maps:
@@ -102,7 +128,7 @@ def fetch(name):
     size = color.size
     color.save(os.path.join(d, "Color.png"))
     load(maps["normal"], "RGB").resize(size).save(os.path.join(d, "Normal.png"))
-    grey = lambda k, v: load(maps[k], "L").resize(size) if k in maps else Image.new("L", size, v)  # noqa: E731
+    grey = lambda k, v: grey8(maps[k]).resize(size) if k in maps else Image.new("L", size, v)  # noqa: E731
     Image.merge("RGB", (grey("ao", 255), grey("rough", 160), Image.new("L", size, 0))).save(os.path.join(d, "ORM.png"))
     if "height" in maps:
         h = Image.open(io.BytesIO(maps["height"]))
@@ -266,6 +292,56 @@ def derive_craze():
     print(f"CH_CRAZE: {cells.max()} cells, crack lines {line.mean() * 100:.2f} % of the face")
 
 
+def derive_roofclay():
+    """小青瓦: grey_roof_tiles' clay without its tiles. The roofs model every pan and cover tile, so a photographed roof's
+    own courses would print a second, misaligned layout on them: the gaps between its tiles (low in its height) are
+    inpainted from the faces round them, and the scales of a tile (its shading down the slope, its step onto the next)
+    are filtered out of the colour, the occlusion and the relief, leaving what is finer than a tile (the clay's grain,
+    soot, chips, lichen) and what is coarser (the roof's slow drift of tone)."""
+    import cv2
+    src = os.path.join(OUT, "CH_ROOFSRC")
+    d = os.path.join(OUT, "CH_ROOFCLAY")
+    os.makedirs(d, exist_ok=True)
+    col = (arr(os.path.join(src, "Color.png")) * 255).astype(np.uint8)
+    h = arr(os.path.join(src, "Height.png"), "L")
+    orm = arr(os.path.join(src, "ORM.png"))
+    n_px = h.shape[0]
+    mm = DERIVED["CH_ROOFCLAY"][1] * 1000.0 / n_px
+    tile = 150.0 / mm                                     # a tile is 15-19 cm in the photograph
+    # The gaps: well below the faces round them (the shadowed lap of one course under the next).
+    gap = (h < cv2.GaussianBlur(h, (0, 0), tile / 4) - 0.1).astype(np.uint8)
+    gap = cv2.morphologyEx(gap, cv2.MORPH_OPEN, np.ones((3, 3), np.uint8))
+    gap = cv2.dilate(gap, np.ones((5, 5), np.uint8))
+    fill = cv2.inpaint(col, gap * 255, 7, cv2.INPAINT_TELEA).astype(np.float32)
+    # The courses repeat: their period stands out of the spectrum as peaks above its smooth fall-off. Notched out
+    # (the same notches for every channel), the courses go and the unrepeating grain, soot and lichen stay.
+    lum0 = fill.mean(2)
+    spec = np.log1p(np.abs(np.fft.fftshift(np.fft.fft2(lum0 - lum0.mean()))))
+    peaks = (spec - cv2.GaussianBlur(spec.astype(np.float32), (0, 0), 6)) > 1.2
+    cy, cx = n_px // 2, n_px // 2
+    yy, xx = np.mgrid[:n_px, :n_px]
+    peaks &= np.hypot(yy - cy, xx - cx) > 4                 # the slow drift of tone kept
+    notch = 1.0 - np.clip(cv2.GaussianBlur(peaks.astype(np.float32), (0, 0), 2.0) * 6.0, 0, 1)
+    notch = np.fft.ifftshift(notch)
+    unrepeat = lambda a: np.real(np.fft.ifft2(np.fft.fft2(a) * notch)).astype(np.float32)   # noqa: E731
+    c = np.clip(np.dstack([unrepeat(fill[..., i]) for i in range(3)]), 0, 255)
+    fine = tile / 4
+    blur = lambda a, s: cv2.GaussianBlur(a, (0, 0), s)   # noqa: E731
+    ao = cv2.inpaint((orm[..., 0] * 255).astype(np.uint8), gap * 255, 6, cv2.INPAINT_TELEA).astype(np.float32) / 255.0
+    ao = np.clip(ao / np.maximum(blur(ao, fine), 1e-3), 0, 1)
+    rough = cv2.inpaint((orm[..., 1] * 255).astype(np.uint8), gap * 255, 6, cv2.INPAINT_TELEA).astype(np.float32) / 255.0
+    hh = cv2.inpaint((h * 255).astype(np.uint8), gap * 255, 6, cv2.INPAINT_TELEA).astype(np.float32) / 255.0
+    h_mm = (hh - blur(hh, fine)) * 4.0                   # the grain only: a few tenths of a millimetre to a millimetre
+    nrm = normal_from_height(blur(h_mm, 0.8), mm)
+    save8(c / 255.0, os.path.join(d, "Color.png"))
+    save8(nrm * 0.5 + 0.5, os.path.join(d, "Normal.png"))
+    Image.merge("RGB", [Image.fromarray((np.clip(x, 0, 1) * 255 + 0.5).astype(np.uint8)) for x in (ao, rough, np.zeros_like(ao))]).save(
+        os.path.join(d, "ORM.png"))
+    save8((h_mm - h_mm.min()) / max(1e-6, h_mm.max() - h_mm.min()), os.path.join(d, "Height.png"))
+    write_set("CH_ROOFCLAY", "derived", "grey_roof_tiles (Poly Haven)", "4k", DERIVED["CH_ROOFCLAY"][1], DERIVED["CH_ROOFCLAY"][2])
+    print(f"CH_ROOFCLAY: gaps {gap.mean() * 100:.1f} % of the face inpainted")
+
+
 def srgb_to_linear(c):
     c = c / 255.0
     return np.where(c > 0.04045, ((c + 0.055) / 1.055) ** 2.4, c / 12.92)
@@ -318,5 +394,7 @@ if __name__ == "__main__":
         derive_brickrub()
     if "--derive" in sys.argv or not os.path.exists(os.path.join(OUT, "CH_CRAZE", "ORM.png")):
         derive_craze()
+    if "--derive" in sys.argv or not os.path.exists(os.path.join(OUT, "CH_ROOFCLAY", "ORM.png")):
+        derive_roofclay()
     credits()
     stats()

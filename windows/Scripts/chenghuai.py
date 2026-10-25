@@ -296,12 +296,13 @@ def specs():
     out["Knob"] = MAT.spec("M_Stone", MAT.merged(NJ, UB, StrataAmount=0.0, PoreAmount=0.0, VeinAmount=0.0, BlockTone=0.0, MacroVariation=0.04,
                                                 Roughness=0.36, ClearCoat=0.3, ClearCoatRoughness=0.2, Specular=0.5),
                            {"BaseColor": lin(0xE2D6BC)})
-    # ---- Roofs: reduction-fired grey clay tiles (小青瓦, 筒瓦) weathered as old roofs are (CH_LICHEN: lichen and moss
-    #      in patches, heavier where the slope faces the sky), their lime bed, the ridges' darker brick.
+    # ---- Roofs: reduction-fired grey clay tiles (小青瓦, 筒瓦) weathered as old roofs are (CH_ROOFCLAY: a photographed
+    #      grey clay roof's grain, soot and lichen with its own courses taken out, at its own 3 m; the modelled tiles
+    #      give the layout), their lime bed, the ridges' darker brick.
     roof = MAT.merged(NJ, UB, StrataAmount=0.0, PoreAmount=0.06, PoreSize=0.003, BlockTone=0.0, MacroScale=3.0, MacroVariation=0.14, Roughness=0.82,
                       RoughnessVariation=0.08, ClearCoat=0.0, Specular=0.5, DustUp=0.0, MossCover=0.09, MossUp=0.4, MossFoot=0.0)
     out["Tiles"] = MAT.spec("M_Ch_Stone", roof, {"BaseColor": lin(0x4D4F4D)},
-                            photo=("CH_LICHEN", dict(colour_amount=0.55, contrast=0.9, normal=0.7, rough_influence=0.6, scale=1.4)))
+                            photo=("CH_ROOFCLAY", dict(colour_amount=0.55, contrast=0.9, normal=0.7, rough_influence=0.6)))
     out["RoofMortar"] = MAT.spec("M_Ch_Plaster", {"Roughness": 0.93, "Variation": 0.06, "GrainAmount": 0.04, "RainStreaks": 0.2},
                                  {"BaseColor": lin(0x8A877F)}, photo=("CH_LIME", dict(colour_amount=0.5, normal=0.6, rough_influence=0.3)))
     out["Ridges"] = MAT.spec("M_Ch_Stone", MAT.merged(roof, MossCover=0.06, RainStreaks=0.1), {"BaseColor": lin(0x484A48)},
@@ -309,7 +310,7 @@ def specs():
     # ---- 石兄: the standing Taihu rock (AMuseeTaihuRock's mesh, its RockMaterial): the same photographed limestone, paler
     #      where the rain washes it, dark in its hollows and streaks, moss on its ledges.
     out["Taihu"] = MAT.spec("M_Ch_Stone", MAT.merged(rock, RainStreaks=0.4, MossCover=0.3), {"BaseColor": lin(0x7E7C76)},
-                            photo=("CH_TAIHU", dict(colour_amount=0.85, contrast=1.1, normal=1.0, rough_influence=0.5, scale=1.6)))
+                            photo=("CH_TAIHU", dict(colour_amount=0.85, contrast=1.1, normal=1.0, rough_influence=0.5)))
     return out
 
 
