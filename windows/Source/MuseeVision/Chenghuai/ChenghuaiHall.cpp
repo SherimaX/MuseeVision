@@ -727,7 +727,7 @@ namespace ChenghuaiHall
 					{
 						const double TW = 0.6 * H.ColD, TH = 0.8 * H.ColD, TZ = G.Zc - 0.75;
 						ChenghuaiPaint::Box(Out[CB::PaintedBeam], TEXT("Tie"), FLocal{H.L.Plan(U, 0.0), H.L.V, H.L.U}, -0.05, H.PurlinV[A], -0.5 * TW, 0.5 * TW,
-											TZ - 0.5 * TH, TZ + 0.5 * TH, 5, 0.1, 0.9);   // the purlin's fret row: no medallion on a short tie (round 7)
+											TZ - 0.5 * TH, TZ + 0.5 * TH, H.bBackColumns ? 4 : 5, 0.1, 0.9);   // a hall's short tie the fret row (round 7); a gallery's cross beam its framed panel (round 8)
 					}
 					else
 					{
