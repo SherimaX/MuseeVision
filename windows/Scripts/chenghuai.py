@@ -178,16 +178,18 @@ def floor_tile(size, colour, rough, coat, joint, coat_rough=0.3, normal=0.7):
                     photo=("K1", dict(block_shift=1.0, contrast=0.9, normal=normal, rough_influence=0.5)), switches=MAT.MACRO)
 
 
-def paint(colour, rough, coat, coat_rough=0.2, outdoor=True):
+def paint(colour, rough, coat, coat_rough=0.2, outdoor=True, wear=0.3, variation=0.05, tone=0.03, craze=None):
     """Paint on the lime-and-hemp ground (一麻五灰 地仗) under a coat of boiled tung oil (光油): no grain shows; the oil's
     gloss, a little orange peel, and the fine crazing of an old coat (断纹, CH_CRAZE: the cracks' dirt, each cell its
-    own fade); worn thinner where hands and shoulders rub; dust and the foot's dirt outdoors."""
-    s = MAT.merged(MAT.OAK_BOARDS, GrainAmount=0.0, FigureAmount=0.0, BoardWidth=1.0, BoardLength=40.0, BoardTone=0.03, BoardHue=0.01,
-                   BoardJoint=0.0, Variation=0.05, Roughness=rough, ClearCoat=coat, ClearCoatRoughness=coat_rough, LacquerWear=0.3,
+    own fade); worn thinner where hands and shoulders rub; dust and the foot's dirt outdoors. `wear` and `variation`
+    drive M_Ch_Wood's 1.5 m drift (LacquerWear lightens its high side), `tone` the per-board tint, `craze` overrides the
+    crazing's photo settings."""
+    s = MAT.merged(MAT.OAK_BOARDS, GrainAmount=0.0, FigureAmount=0.0, BoardWidth=1.0, BoardLength=40.0, BoardTone=tone, BoardHue=0.01,
+                   BoardJoint=0.0, Variation=variation, Roughness=rough, ClearCoat=coat, ClearCoatRoughness=coat_rough, LacquerWear=wear,
                    Anisotropy=0.0, Specular=0.5, PBRBlockShift=0.0,
                    **({"FootDirt": 0.06, "DustUp": 0.06, "SplashZone": 0.15} if outdoor else {}))
     return MAT.spec("M_Ch_Wood", s, {"BaseColor": lin(colour)},
-                    photo=("CH_CRAZE", dict(colour_amount=0.3, contrast=0.8, normal=0.7, rough_influence=0.6, use_uv0=False)))
+                    photo=("CH_CRAZE", dict(dict(colour_amount=0.3, contrast=0.8, normal=0.7, rough_influence=0.6, use_uv0=False), **(craze or {}))))
 
 
 def image(texture, rough, coat=0.0, spec=0.5, craze=0.0):
@@ -249,15 +251,21 @@ def specs():
                                    {"BaseColor": lin(0x49492F)}, photo=("CH_MOSSGROUND", dict(contrast=1.0, normal=1.0, rough_influence=0.5)))
     rock = MAT.merged(NJ, UB, StrataAmount=0.0, PoreAmount=0.0, BlockTone=0.0, MacroScale=2.5, MacroVariation=0.14, Roughness=0.84, ClearCoat=0.0,
                       Specular=0.55, RainStreaks=0.35, SplashZone=0.25, MossCover=0.42, MossUp=1.0, MossFoot=0.8, DustUp=0.0)
+    # (Tuned live 2026-10-25: rock_boulder_dry read flat and washed at 0.6 / 1.1 / 1.0; more of its colour, contrast and
+    # relief bring out the water-worn pits. The standing rock below likewise.)
     out["Rockery"] = MAT.spec("M_Ch_StoneRelief", rock, {"BaseColor": lin(0x6D6C68)},
-                              photo=("CH_TAIHU", dict(colour_amount=0.6, contrast=1.1, normal=1.0, rough_influence=0.5, relief_cm=3.0)))
+                              photo=("CH_TAIHU", dict(colour_amount=0.75, contrast=1.35, normal=1.4, rough_influence=0.5, relief_cm=3.0)))
     out["PondBed"] = MAT.spec("M_Stone", MAT.merged(NJ, UB, StrataAmount=0.0, PoreAmount=0.0, BlockTone=0.0, MacroVariation=0.1, Roughness=0.45,
                                                    ClearCoat=0.0, Specular=0.5),
                               {"BaseColor": lin(0x2A2A22)}, photo=("G5", dict(contrast=0.8, normal=0.7, rough_influence=0.4)))
     # ---- Timber: iron-oxide red (铁红) on the lime-and-hemp ground, green and black lacquer (all crazed, oiled), waxed nanmu,
     #      chestnut lacquer.
     # (Old tung oil is a satin, not a mirror: a coat of 0.6 at 0.10 turned the red pink and milky, plastic in the path tracer.)
-    out["RedLacquer"] = paint(0x64251F, 0.52, 0.4, 0.15)
+    # (Tuned live 2026-10-25: 0x64251F read orange and saturated, one flat value on every member, the 1.5 m wear drift
+    # as pale blotches and the crazing as a black web; now a deeper, greyer iron red under a little more oil, the drift
+    # damped, the 断纹 smaller (0.18 m a repeat) and faint.)
+    out["RedLacquer"] = paint(0x582422, 0.52, 0.5, 0.18, wear=0.08, variation=0.02,
+                              craze=dict(colour_amount=0.2, contrast=0.55, normal=0.45, scale=0.18))
     out["GreenLacquer"] = paint(0x284A3D, 0.5, 0.45, 0.15)
     out["BlackLacquer"] = paint(0x161310, 0.42, 0.6, 0.1)
     # 楠木, waxed, never painted: golden brown, a fine straight grain (CH_NANMU along each member), the silk of its
@@ -269,7 +277,10 @@ def specs():
                                                     scale=1.2)))
     # The rafters and the boarding over them (椽, 望板): the same iron red, darkened by a century of lamp smoke and dust
     # (the renderings' dark ceilings; the bright red bounced pink onto every wall under it).
-    out["RafterRed"] = paint(0x4A1E19, 0.62, 0.15, outdoor=False)
+    # (Tuned live 2026-10-25: darker and greyer, with no drift, wear or board tint: those read as camouflage blotches. The
+    # cloudy patches left in the shade under the eaves are Lumen's GI noise there, not this material.)
+    out["RafterRed"] = paint(0x3E1D19, 0.62, 0.15, outdoor=False, wear=0.0, variation=0.0, tone=0.0,
+                             craze=dict(colour_amount=0.05, contrast=0.4, normal=0.3, scale=0.18))
     out["Chestnut"] = MAT.spec("M_Ch_Wood", MAT.merged(MAT.CHESTNUT_LACQUER, FootDirt=0.06, DustUp=0.06, SplashZone=0.15), {"BaseColor": lin(0x47301F)},
                                photo=("W2", MAT.OAK_PHOTO))
     out["PaintedBeam"] = image("ch_suhua", 0.62, 0.08, craze=0.25)
@@ -296,20 +307,25 @@ def specs():
     out["Knob"] = MAT.spec("M_Stone", MAT.merged(NJ, UB, StrataAmount=0.0, PoreAmount=0.0, VeinAmount=0.0, BlockTone=0.0, MacroVariation=0.04,
                                                 Roughness=0.36, ClearCoat=0.3, ClearCoatRoughness=0.2, Specular=0.5),
                            {"BaseColor": lin(0xE2D6BC)})
-    # ---- Roofs: reduction-fired grey clay tiles (小青瓦, 筒瓦) weathered as old roofs are (CH_LICHEN: lichen and moss
-    #      in patches, heavier where the slope faces the sky), their lime bed, the ridges' darker brick.
+    # ---- Roofs: reduction-fired grey clay tiles (小青瓦, 筒瓦) weathered as old roofs are (CH_ROOFCLAY: a photographed
+    #      grey clay roof's grain, soot and lichen with its own courses taken out, at its own 3 m; the modelled tiles
+    #      give the layout), their lime bed, the ridges' darker brick.
     roof = MAT.merged(NJ, UB, StrataAmount=0.0, PoreAmount=0.06, PoreSize=0.003, BlockTone=0.0, MacroScale=3.0, MacroVariation=0.14, Roughness=0.82,
                       RoughnessVariation=0.08, ClearCoat=0.0, Specular=0.5, DustUp=0.0, MossCover=0.09, MossUp=0.4, MossFoot=0.0)
-    out["Tiles"] = MAT.spec("M_Ch_Stone", roof, {"BaseColor": lin(0x4D4F4D)},
-                            photo=("CH_LICHEN", dict(colour_amount=0.55, contrast=0.9, normal=0.7, rough_influence=0.6, scale=1.4)))
+    # (Tuned live 2026-10-25: 0x4D4F4D read paler than the brick walls, near white where a roof is seen at a grazing
+    # angle; now a darker blue-grey, rougher and drier (less specular, the photograph's polish damped), with the
+    # photograph's contrast and relief lowered, which also hides the faint rows left in CH_ROOFCLAY.)
+    out["Tiles"] = MAT.spec("M_Ch_Stone", MAT.merged(roof, Roughness=0.92, Specular=0.3), {"BaseColor": lin(0x373A3C)},
+                            photo=("CH_ROOFCLAY", dict(colour_amount=0.55, contrast=0.75, normal=0.4, rough_influence=0.3)))
     out["RoofMortar"] = MAT.spec("M_Ch_Plaster", {"Roughness": 0.93, "Variation": 0.06, "GrainAmount": 0.04, "RainStreaks": 0.2},
                                  {"BaseColor": lin(0x8A877F)}, photo=("CH_LIME", dict(colour_amount=0.5, normal=0.6, rough_influence=0.3)))
-    out["Ridges"] = MAT.spec("M_Ch_Stone", MAT.merged(roof, MossCover=0.06, RainStreaks=0.1), {"BaseColor": lin(0x484A48)},
-                             photo=("CH_BRICKRUB", dict(contrast=0.9, normal=0.8, rough_influence=0.5)))
+    # (Tuned live 2026-10-25: darker than the tiles now, the ridge a crisp dark line along the top; as dry as they are.)
+    out["Ridges"] = MAT.spec("M_Ch_Stone", MAT.merged(roof, MossCover=0.06, RainStreaks=0.1, Roughness=0.92, Specular=0.3), {"BaseColor": lin(0x313537)},
+                             photo=("CH_BRICKRUB", dict(contrast=0.75, normal=0.6, rough_influence=0.5)))
     # ---- 石兄: the standing Taihu rock (AMuseeTaihuRock's mesh, its RockMaterial): the same photographed limestone, paler
     #      where the rain washes it, dark in its hollows and streaks, moss on its ledges.
     out["Taihu"] = MAT.spec("M_Ch_Stone", MAT.merged(rock, RainStreaks=0.4, MossCover=0.3), {"BaseColor": lin(0x7E7C76)},
-                            photo=("CH_TAIHU", dict(colour_amount=0.85, contrast=1.1, normal=1.0, rough_influence=0.5, scale=1.6)))
+                            photo=("CH_TAIHU", dict(colour_amount=0.85, contrast=1.3, normal=1.3, rough_influence=0.5)))
     return out
 
 
