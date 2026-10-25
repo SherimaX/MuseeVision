@@ -115,6 +115,29 @@ FVector AMuseeSky::SunClockDirection(double LocalHour)
 	return (Point - Node).GetSafeNormal();
 }
 
+FLinearColor AMuseeSky::SunColour(double AltitudeDegrees)
+{
+	// The sun's colour follows the real sun's height for the city and the moment (the ephemeris): the warm white of the
+	// day from 35° up, golden as it sinks through the air (5200 K at 20°, 4300 K at 10°, 3500 K at 3° and below). Only
+	// the colour: the light still comes from the sun clock's idealised direction (SunClockDirection), and at 6500 K the
+	// colour is exactly the day's.
+	static const double Altitude[] = {3.0, 10.0, 20.0, 35.0};
+	static const double Kelvin[] = {3500.0, 4300.0, 5200.0, 6500.0};
+	double K = AltitudeDegrees <= Altitude[0] ? Kelvin[0] : Kelvin[3];
+	for (int32 I = 0; I < 3; ++I)
+	{
+		if (AltitudeDegrees > Altitude[I] && AltitudeDegrees < Altitude[I + 1])
+		{
+			const double T = FMath::SmoothStep(Altitude[I], Altitude[I + 1], AltitudeDegrees);
+			K = FMath::Lerp(Kelvin[I], Kelvin[I + 1], T);
+		}
+	}
+	const FLinearColor Day(FColor(0xFF, 0xF6, 0xEC));   // a warm white, not amber
+	if (K >= Kelvin[3]) { return Day; }
+	const FLinearColor Shift = FLinearColor::MakeFromColorTemperature(static_cast<float>(K)) / FLinearColor::MakeFromColorTemperature(6500.f);
+	return FLinearColor(Day.R * Shift.R, Day.G * Shift.G, Day.B * Shift.B, 1.f);
+}
+
 void AMuseeSky::SetSphereMode(bool bInSphere)
 {
 	if (bSphereMode == bInSphere) { return; }
@@ -194,6 +217,7 @@ void AMuseeSky::UpdateMoonAndStars(const FDateTime& Utc)
 	// The stars show at night, and always inside the Sphere.
 	const MuseeEphemeris::FSun RealSun = MuseeEphemeris::Sun(Utc, Observer);
 	const bool bNight = FMath::RadiansToDegrees(RealSun.Altitude) < -6.0;
+	if (!bSphereMode) { Sun->SetLightColor(SunColour(FMath::RadiansToDegrees(RealSun.Altitude))); }
 	Stars->SetVisibility(bNight || bSphereMode);
 
 	// The star mesh is built in the equatorial frame with y and z swapped (Unreal is
