@@ -1,0 +1,162 @@
+[
+ {
+  "file": "ch-inner_before.jpg",
+  "round": 2,
+  "caption": "Round-2 before (round 1's real scans, untuned). Inner court at 14:00: the main hall's roof is a darker, cooler blue-grey 小青瓦 instead of reading paler than the brick walls."
+ },
+ {
+  "file": "ch-inner_after.jpg",
+  "round": 2,
+  "caption": "Round-2 after (tuned). Inner court at 14:00: the main hall's roof is a darker, cooler blue-grey 小青瓦 instead of reading paler than the brick walls."
+ },
+ {
+  "file": "rockery_before.jpg",
+  "round": 2,
+  "caption": "Round-2 before (round 1's real scans, untuned). Rockery at 14:00: more of the scan's colour, contrast and relief; look for the water-worn pits and hollows standing out."
+ },
+ {
+  "file": "rockery_after.jpg",
+  "round": 2,
+  "caption": "Round-2 after (tuned). Rockery at 14:00: more of the scan's colour, contrast and relief; look for the water-worn pits and hollows standing out."
+ },
+ {
+  "file": "shixiong_before.jpg",
+  "round": 2,
+  "caption": "Round-2 before (round 1's real scans, untuned). 石兄 standing rock by the pond at 14:00: crisper pits and holes; the side hall's roof is darker grey too."
+ },
+ {
+  "file": "shixiong_after.jpg",
+  "round": 2,
+  "caption": "Round-2 after (tuned). 石兄 standing rock by the pond at 14:00: crisper pits and holes; the side hall's roof is darker grey too."
+ },
+ {
+  "file": "eave2_before.jpg",
+  "round": 2,
+  "caption": "Round-2 before (round 1's real scans, untuned). Eave from the inner court: the side roof seen at a grazing angle is less chalky-white and its faint banding is calmer."
+ },
+ {
+  "file": "eave2_after.jpg",
+  "round": 2,
+  "caption": "Round-2 after (tuned). Eave from the inner court: the side roof seen at a grazing angle is less chalky-white and its faint banding is calmer."
+ },
+ {
+  "file": "hallfloor_before.jpg",
+  "round": 2,
+  "caption": "Round-2 before (round 1's real scans, untuned). Hall floor: unchanged on purpose (control view); nanmu table and oiled floor as in round 1."
+ },
+ {
+  "file": "hallfloor_after.jpg",
+  "round": 2,
+  "caption": "Round-2 after (tuned). Hall floor: unchanged on purpose (control view); nanmu table and oiled floor as in round 1."
+ },
+ {
+  "file": "gallery2_before.jpg",
+  "round": 2,
+  "caption": "Round-2 before (round 1's real scans, untuned). Gallery lacquer: unchanged on purpose (control view); the crazed satin red stays as it was."
+ },
+ {
+  "file": "gallery2_after.jpg",
+  "round": 2,
+  "caption": "Round-2 after (tuned). Gallery lacquer: unchanged on purpose (control view); the crazed satin red stays as it was."
+ },
+ {
+  "file": "ch-inner_hour10.jpg",
+  "round": 2,
+  "caption": "ch-inner at 10:00 with the tuned values: check the roof and rock hold up in this light."
+ },
+ {
+  "file": "rockery_hour10.jpg",
+  "round": 2,
+  "caption": "rockery at 10:00 with the tuned values: check the roof and rock hold up in this light."
+ },
+ {
+  "file": "ch-inner_hour16.jpg",
+  "round": 2,
+  "caption": "ch-inner at 16:00 with the tuned values: check the roof and rock hold up in this light."
+ },
+ {
+  "file": "rockery_hour16.jpg",
+  "round": 2,
+  "caption": "rockery at 16:00 with the tuned values: check the roof and rock hold up in this light."
+ },
+ {
+  "file": "ch-inner_hournight.jpg",
+  "round": 2,
+  "caption": "ch-inner at 21:30 with the tuned values: check the roof and rock hold up in this light (the speckled sky and grey block at night are not from these materials)."
+ },
+ {
+  "file": "rockery_hournight.jpg",
+  "round": 2,
+  "caption": "rockery at 21:30 with the tuned values: check the roof and rock hold up in this light (the speckled sky and grey block at night are not from these materials)."
+ },
+ {
+  "file": "hallfloor_lumen045.jpg",
+  "round": 2,
+  "caption": "hallfloor, Lumen reflections traced up to roughness 0.45 (kept): clean lacquer, the floor's reflections of the table and columns."
+ },
+ {
+  "file": "hallfloor_lumen060.jpg",
+  "round": 2,
+  "caption": "hallfloor, roughness cutoff 0.6 (rejected): blotchy patches on the lacquer columns, the floor no better; costs about 0.4 ms GPU in the gallery."
+ },
+ {
+  "file": "ch-gallery_lumen045.jpg",
+  "round": 2,
+  "caption": "ch-gallery, Lumen reflections traced up to roughness 0.45 (kept): clean lacquer, the floor's reflections of the table and columns."
+ },
+ {
+  "file": "ch-gallery_lumen060.jpg",
+  "round": 2,
+  "caption": "ch-gallery, roughness cutoff 0.6 (rejected): blotchy patches on the lacquer columns, the floor no better; costs about 0.4 ms GPU in the gallery."
+ },
+ {
+  "file": "r1_rockery_before.jpg",
+  "round": 1,
+  "caption": "Round 1 before (stand-in photo sets): the rock was a buff, flaky cliff-face photo; now a pale, water-worn, pitted boulder scan."
+ },
+ {
+  "file": "r1_rockery_after.jpg",
+  "round": 1,
+  "caption": "Round 1 after (real scans): the rock was a buff, flaky cliff-face photo; now a pale, water-worn, pitted boulder scan."
+ },
+ {
+  "file": "r1_shixiong_before.jpg",
+  "round": 1,
+  "caption": "Round 1 before (stand-in photo sets): the standing 石兄 rock: the same new limestone scan, paler, its holes reading clearly."
+ },
+ {
+  "file": "r1_shixiong_after.jpg",
+  "round": 1,
+  "caption": "Round 1 after (real scans): the standing 石兄 rock: the same new limestone scan, paler, its holes reading clearly."
+ },
+ {
+  "file": "r1_ch-inner_before.jpg",
+  "round": 1,
+  "caption": "Round 1 before (stand-in photo sets): the roofs lose the whitish rock-and-moss crust; real grey fired clay with a little lichen."
+ },
+ {
+  "file": "r1_ch-inner_after.jpg",
+  "round": 1,
+  "caption": "Round 1 after (real scans): the roofs lose the whitish rock-and-moss crust; real grey fired clay with a little lichen."
+ },
+ {
+  "file": "r1_eave2_before.jpg",
+  "round": 1,
+  "caption": "Round 1 before (stand-in photo sets): close roof: calmer clay with faint lichen instead of a stony mottle."
+ },
+ {
+  "file": "r1_eave2_after.jpg",
+  "round": 1,
+  "caption": "Round 1 after (real scans): close roof: calmer clay with faint lichen instead of a stony mottle."
+ },
+ {
+  "file": "r1_hallfloor_before.jpg",
+  "round": 1,
+  "caption": "Round 1 before (stand-in photo sets): the scroll table's nanmu: a fine, even, straight grain instead of rosewood's arcs."
+ },
+ {
+  "file": "r1_hallfloor_after.jpg",
+  "round": 1,
+  "caption": "Round 1 after (real scans): the scroll table's nanmu: a fine, even, straight grain instead of rosewood's arcs."
+ }
+]
