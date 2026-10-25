@@ -40,6 +40,7 @@ GOLD = (178, 136, 48)       # leaf gold over raised putty lines (沥粉贴金, r
 BLACK = (24, 22, 20)
 WHITE = (214, 208, 192)     # the linework's white, dusted
 CREAM = (220, 208, 180)
+GOLD_LEAF = (222, 176, 64)  # (round 10) fresh leaf gold for the frets, so dense gilt reads as gold, not brown
 
 
 def lerp(a, b, t):
@@ -242,7 +243,7 @@ def beam_row(style, crop, seed, band_top=0.42):
     d = ImageDraw.Draw(img)
     board_h = int(H * band_top)
     d.rectangle([0, 0, W, board_h], fill=lerp(other, BLACK, 0.15))
-    fret(d, 0, 14, W, board_h - 14, board_h - 28, GOLD, 7)   # (round 9: the board's fret in gold, as the references' dense gilt)
+    fret(d, 0, 14, W, board_h - 14, board_h - 28, GOLD_LEAF, 6)   # (round 9: the board's fret in gold; round 10: brighter leaf gold, finer)
     brocade(d, 0, board_h + 18, W, H - 18, 30, lerp(lintel_col, WHITE, 0.16), lerp(GOLD, BLACK, 0.25))
     for y, c, wd in ((board_h + 3, BLACK, 4), (board_h + 10, GOLD, 8), (H - 12, GOLD, 8), (H - 4, BLACK, 4), (4, BLACK, 4), (board_h - 7, GOLD, 7)):
         d.line([(0, y), (W, y)], fill=c, width=wd)
@@ -285,7 +286,7 @@ def purlin_row(seed):
     W, H = 2970, 512
     img = Image.new("RGB", (W, H), BLUE)
     d = ImageDraw.Draw(img)
-    fret(d, 0, 30, W, H - 30, 112, GOLD, 8)
+    fret(d, 0, 40, W, H - 40, 150, GOLD_LEAF, 6)   # (round 10: fewer, finer lines of bright leaf gold on the azurite; round 9's read brown)
     hoop(d, 0, 150, H, GREEN, BLUE)
     hoop(d, W - 150, W, H, GREEN, BLUE, flip=True)
     return age(img, seed, dust=0.05, fade=0.02).resize((4096, 512), Image.LANCZOS)
