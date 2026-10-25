@@ -70,7 +70,7 @@ namespace ChenghuaiHouse
 		H.Rise = {0.5, 0.72, -0.72, -0.5};
 		H.Tiles = ChenghuaiRoof::ETiles::He; H.Ridge = ERidge::Qingshui;
 		H.FacadeV = 0.0; H.bBackWall = true; H.BackWallV0 = 4.8; H.BackWallV1 = 5.3; H.bSealedBack = true;
-		H.EaveFront = 0.75; H.EaveBack = 0.28;
+		H.EaveFront = 0.9; H.EaveBack = 0.28;
 		H.Bays = {EBay::DoorsOpen, EBay::Windows, EBay::Windows, EBay::Windows, EBay::Windows, EBay::DoorsOpen};
 		// Painted, restrained (the renderings: dark green lintels, one white panel with a small ink landscape a bay).
 		H.bPainted = true; H.PaintRow = 2; H.bRafterEnds = false;
@@ -93,7 +93,7 @@ namespace ChenghuaiHouse
 		H.PurlinV = {0.0, 1.225, 2.45, 3.675, 4.9};
 		H.Rise = {0.5, 0.72, -0.72, -0.5};
 		H.Tiles = ChenghuaiRoof::ETiles::Tong; H.Ridge = ERidge::Qingshui;
-		H.bBackWall = false; H.bSealedBack = false; H.EaveFront = 0.9; H.EaveBack = 0.9;
+		H.bBackWall = false; H.bSealedBack = false; H.EaveFront = 1.08; H.EaveBack = 1.08;
 		H.Bays = {EBay::Open};
 		H.bPainted = false; H.bRafterEnds = false; H.bColumns = false; H.bFrames = false;
 		H.WallPart = CB::BrickFine; H.BaseCourse = CB::BrickFine; H.bInteriorPlaster = false; H.FloorPart = CB::FloorSmall;
@@ -115,7 +115,7 @@ namespace ChenghuaiHouse
 		H.Rise = {0.5, 0.7, 0.0, -0.7, -0.45};
 		H.bRolled = true; H.Tiles = ChenghuaiRoof::ETiles::He; H.Ridge = ERidge::Rolled;
 		H.FacadeV = 1.1; H.bBackWall = true; H.BackWallV0 = 5.0; H.BackWallV1 = 5.5; H.bSealedBack = true;
-		H.EaveFront = 0.85; H.EaveBack = 0.3;
+		H.EaveFront = 1.02; H.EaveBack = 0.3;
 		H.Bays = {EBay::Windows, EBay::DoorsOpen, EBay::Windows};
 		H.bPainted = true; H.PaintRow = 0;
 		H.WallPart = CB::BrickHairline; H.BaseCourse = CB::BrickFine; H.FloorPart = CB::FloorSmall;
@@ -139,7 +139,7 @@ namespace ChenghuaiHouse
 		H.Tiles = ChenghuaiRoof::ETiles::Tong; H.Ridge = ERidge::Qingshui;
 		H.FacadeV = 1.3; H.InnerColV = {6.36};
 		H.bBackWall = true; H.BackWallV0 = 7.4; H.BackWallV1 = 7.9; H.bSealedBack = true;
-		H.EaveFront = 1.1; H.EaveBack = 0.32;
+		H.EaveFront = 1.32; H.EaveBack = 0.32;
 		H.Bays = {EBay::Windows, EBay::DoorsOpen, EBay::Windows};
 		H.bPainted = true; H.PaintRow = 1;
 		H.WallPart = CB::BrickHairline; H.BaseCourse = CB::BrickFine; H.FloorPart = CB::FloorLarge;
@@ -163,7 +163,7 @@ namespace ChenghuaiHouse
 		H.Rise = {0.5, 0.72, -0.72, -0.5};
 		H.Tiles = ChenghuaiRoof::ETiles::He; H.Ridge = ERidge::Qingshui;
 		H.bBackWall = true; H.BackWallV0 = 4.5; H.BackWallV1 = 5.0; H.bSealedBack = true;
-		H.EaveFront = 0.8; H.EaveBack = 0.25;
+		H.EaveFront = 0.96; H.EaveBack = 0.25;
 		H.Bays = {EBay::Doors};
 		H.bPainted = false; H.bRafterEnds = false;
 		H.WallPart = CB::BrickHairline; H.BaseCourse = CB::BrickFine; H.FloorPart = CB::FloorLarge;
@@ -184,7 +184,7 @@ namespace ChenghuaiHouse
 		H.Rise = {0.5, 0.72, -0.72, -0.5};
 		H.Tiles = ChenghuaiRoof::ETiles::He; H.Ridge = ERidge::Qingshui;
 		H.bBackWall = true; H.BackWallV0 = 4.7; H.BackWallV1 = 5.2; H.bSealedBack = true;
-		H.EaveFront = 0.75; H.EaveBack = 0.28;
+		H.EaveFront = 0.9; H.EaveBack = 0.28;
 		H.Bays = {EBay::DoorsOpen, EBay::Windows, EBay::Windows, EBay::Doors, EBay::Windows, EBay::Windows, EBay::DoorsOpen};
 		H.bPainted = true; H.PaintRow = 0; H.bRafterEnds = false;   // restrained painting, as the front row
 
@@ -372,14 +372,14 @@ namespace ChenghuaiHouse
 				H.PurlinV = {0.0, 0.55, 1.1};
 				H.Rise = {0.8, -0.8};
 				H.Ridge = ERidge::Qingshui; H.Tiles = ChenghuaiRoof::ETiles::Tong;
-				H.EaveFront = 0.75; H.EaveBack = 0.04;
+				H.EaveFront = 0.9; H.EaveBack = 0.04;
 			}
 			else
 			{
 				H.PurlinV = {0.0, 0.42, 0.72, 1.1};
 				H.Rise = {0.65, 0.0, -0.9};
 				H.bRolled = true; H.Ridge = ERidge::Rolled; H.Tiles = ChenghuaiRoof::ETiles::Tong;
-				H.EaveFront = 0.04; H.EaveBack = 0.7;
+				H.EaveFront = 0.04; H.EaveBack = 0.84;
 			}
 			H.bBackWall = false; H.bSealedBack = false;
 			H.Bays = {EBay::Open};

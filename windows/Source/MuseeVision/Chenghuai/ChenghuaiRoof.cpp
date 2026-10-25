@@ -251,16 +251,16 @@ namespace ChenghuaiRoof
 			for (int32 j = 0; j < NP; ++j) { if (Shape.bTop[j]) { Drip.Add(FVector2D(Shape.P[j].X * Wider, Shape.P[j].Y + 0.004)); } }
 			const double HL = Drip.Last().Y, HR = Drip[0].Y, W = Style.PanHalf * Wider;
 			// the drip's hanging lip: its sides' drop, its shoulders' and its point's (tunable: drip.*)
-			const double Side = ChenghuaiTune::Num(TEXT("drip.Side"), 0.038), Shoulder = ChenghuaiTune::Num(TEXT("drip.Shoulder"), 0.035);
-			const double Point = ChenghuaiTune::Num(TEXT("drip.Point"), 0.08), Thick = ChenghuaiTune::Num(TEXT("drip.Thickness"), 0.010);
+			const double Side = ChenghuaiTune::Num(TEXT("drip.Side"), 0.048), Shoulder = ChenghuaiTune::Num(TEXT("drip.Shoulder"), 0.045);
+			const double Point = ChenghuaiTune::Num(TEXT("drip.Point"), 0.10), Thick = ChenghuaiTune::Num(TEXT("drip.Thickness"), 0.013);
 			Drip.Append({FVector2D(-W, HL - Side), FVector2D(-0.45 * W, -Shoulder), FVector2D(0.0, -Point), FVector2D(0.45 * W, -Shoulder), FVector2D(W, HR - Side)});
 			Kit::Extrude(Part, TEXT("Drip tile"), Drip, Slope.At(Slope.To, Centre, 0.0), AcrossDir, Kit::Zenith, D3, -0.004, Thick);
 		}
 		else if (Style.Kind == ETiles::Tong)
 		{
 			FProfile Disc;
-			const double R = Style.TopHalf + ChenghuaiTune::Num(TEXT("endtile.Over"), 0.004);
-			const double T = ChenghuaiTune::Num(TEXT("endtile.Thickness"), 0.016);
+			const double R = Style.TopHalf + ChenghuaiTune::Num(TEXT("endtile.Over"), 0.010);
+			const double T = ChenghuaiTune::Num(TEXT("endtile.Thickness"), 0.022);
 			Disc.Add(0.0, 0.0).Add(R, 0.0).Add(R, T).Add(0.0, T);
 			Kit::Lathe(Part, TEXT("End tile"), Slope.At(Slope.To + 0.006, Centre, 0.045), D3, Disc, 16, R);
 		}

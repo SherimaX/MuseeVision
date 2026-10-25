@@ -233,9 +233,9 @@ namespace ChenghuaiRockery
 			{
 				TArray<FHole> H;
 				const TArray<FVector2D> Foot = Poly(GP::RockeryFoot, GP::RockeryFootCount);
-				const int32 Count = FMath::RoundToInt32(ChenghuaiTune::Num(TEXT("rockery.Hollows"), 110));
+				const int32 Count = FMath::RoundToInt32(ChenghuaiTune::Num(TEXT("rockery.Hollows"), 220));
 				const int32 Seed = 1400 * FMath::RoundToInt32(ChenghuaiTune::Num(TEXT("rockery.HollowSeed"), 0));
-				const double R0 = ChenghuaiTune::Num(TEXT("rockery.HollowR"), 0.26), R1 = ChenghuaiTune::Num(TEXT("rockery.HollowRRange"), 0.26);
+				const double R0 = ChenghuaiTune::Num(TEXT("rockery.HollowR"), 0.34), R1 = ChenghuaiTune::Num(TEXT("rockery.HollowRRange"), 0.26);
 				for (int32 i = 0; i < 1400 && H.Num() < Count; ++i)
 				{
 					const int32 k = i + Seed;
@@ -265,12 +265,12 @@ namespace ChenghuaiRockery
 			{
 				TArray<FPeak> P;
 				const TArray<FVector2D> Foot = Poly(GP::RockeryFoot, GP::RockeryFootCount);
-				const int32 Count = FMath::RoundToInt32(ChenghuaiTune::Num(TEXT("rockery.Peaks"), 6));
+				const int32 Count = FMath::RoundToInt32(ChenghuaiTune::Num(TEXT("rockery.Peaks"), 8));
 				const int32 Seed = 600 * FMath::RoundToInt32(ChenghuaiTune::Num(TEXT("rockery.PeakSeed"), 0));
 				const double Spacing = ChenghuaiTune::Num(TEXT("rockery.PeakSpacing"), 2.6);
-				const double Tall0 = ChenghuaiTune::Num(TEXT("rockery.PeakTall"), 1.3), Tall1 = ChenghuaiTune::Num(TEXT("rockery.PeakTallRange"), 0.8);
+				const double Tall0 = ChenghuaiTune::Num(TEXT("rockery.PeakTall"), 1.8), Tall1 = ChenghuaiTune::Num(TEXT("rockery.PeakTallRange"), 1.0);
 				const double R0 = ChenghuaiTune::Num(TEXT("rockery.PeakR"), 0.36), R1 = ChenghuaiTune::Num(TEXT("rockery.PeakRRange"), 0.2);
-				const double Narrow = ChenghuaiTune::Num(TEXT("rockery.PeakNarrow"), 0.38), Waist = ChenghuaiTune::Num(TEXT("rockery.PeakWaist"), 0.2);
+				const double Narrow = ChenghuaiTune::Num(TEXT("rockery.PeakNarrow"), 0.5), Waist = ChenghuaiTune::Num(TEXT("rockery.PeakWaist"), 0.32);
 				const double Lean = ChenghuaiTune::Num(TEXT("rockery.PeakLean"), 0.25);
 				for (int32 i = 0; i < 600 && P.Num() < Count; ++i)
 				{

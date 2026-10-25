@@ -871,10 +871,10 @@ namespace ChenghuaiHall
 				// round), a tail of lime-bedded tiles rising outwards from 30° to nearly 60°, round in section, tapering to its tip.
 				const double Inset = ChenghuaiTune::Num(TEXT("tail.Inset"), 0.35);
 				const double TrayHalf = ChenghuaiTune::Num(TEXT("tail.TrayHalf"), 0.30), PlateHalf = ChenghuaiTune::Num(TEXT("tail.PlateHalf"), 0.24);
-				const double TailLen = ChenghuaiTune::Num(TEXT("tail.Length"), 0.6);
-				const double TailRise = ChenghuaiTune::Num(TEXT("tail.Rise"), 0.26), TailCurl = ChenghuaiTune::Num(TEXT("tail.Curl"), 0.24);
-				const double TailTip = ChenghuaiTune::Num(TEXT("tail.Tip"), 0.32);
-				const double TailW = ChenghuaiTune::Num(TEXT("tail.Width"), 0.055), TailH = ChenghuaiTune::Num(TEXT("tail.Height"), 0.05);
+				const double TailLen = ChenghuaiTune::Num(TEXT("tail.Length"), 0.85);
+				const double TailRise = ChenghuaiTune::Num(TEXT("tail.Rise"), 0.35), TailCurl = ChenghuaiTune::Num(TEXT("tail.Curl"), 0.42);
+				const double TailTip = ChenghuaiTune::Num(TEXT("tail.Tip"), 0.45);
+				const double TailW = ChenghuaiTune::Num(TEXT("tail.Width"), 0.08), TailH = ChenghuaiTune::Num(TEXT("tail.Height"), 0.08);
 				for (const int32 End : {0, 1})
 				{
 					const double UE = End == 0 ? A + Inset : B - Inset;

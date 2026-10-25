@@ -160,11 +160,13 @@ def brick(key, rough, colour, weather=True):
     """Grey brick (青砖), reduction-fired, from the photographed set: each brick its own tone and face, the joints the set's
     (CH_BRICK: lime-pointed, 淌白; CH_BRICKRUB: rubbed and dry-laid, a hairline, 干摆 and 丝缝), the wall's slow waviness,
     the weather on the outside faces."""
-    s = MAT.merged(NJ, UB, StrataAmount=0.0, PoreAmount=0.0, VeinAmount=0.0, BlockTone=0.0, MacroScale=3.0, MacroVariation=0.06,
+    # (Round 3, from the painted references: the old walls' bricks vary much more, one to the next and across the wall;
+    # the photograph's contrast 1.0 -> 1.4 and the slow drift 0.06 -> 0.15.)
+    s = MAT.merged(NJ, UB, StrataAmount=0.0, PoreAmount=0.0, VeinAmount=0.0, BlockTone=0.0, MacroScale=3.0, MacroVariation=0.15,
                    Roughness=rough, RoughnessVariation=0.05, ClearCoat=0.0, Specular=0.5, Waviness=0.15, WaveScale=0.6,
                    FootDirt=0.04, **(WEATHER_WALL if weather else {}))
     return MAT.spec("M_Ch_Stone", s, {"BaseColor": lin(colour)},
-                    photo=(key, dict(contrast=1.0, normal=1.0, rough_influence=0.7)), switches=MAT.MACRO)
+                    photo=(key, dict(contrast=1.4, normal=1.0, rough_influence=0.7)), switches=MAT.MACRO)
 
 
 def floor_tile(size, colour, rough, coat, joint, coat_rough=0.3, normal=0.7):
@@ -192,12 +194,13 @@ def paint(colour, rough, coat, coat_rough=0.2, outdoor=True, wear=0.3, variation
                     photo=("CH_CRAZE", dict(dict(colour_amount=0.3, contrast=0.8, normal=0.7, rough_influence=0.6, use_uv0=False), **(craze or {}))))
 
 
-def image(texture, rough, coat=0.0, spec=0.5, craze=0.0):
-    """An atlas painted or lettered (UV0): the painted beams, the plaques; `craze` lays the old paint's crazing over it."""
+def image(texture, rough, coat=0.0, spec=0.5, craze=0.0, tint=(1.0, 1.0, 1.0), craze_contrast=1.2):
+    """An atlas painted or lettered (UV0): the painted beams, the plaques; `craze` lays the old paint's crazing over it,
+    `tint` (linear) darkens or cools the atlas as old paint under soot."""
     s = MAT.merged(NJ, UB, StrataAmount=0.0, PoreAmount=0.0, VeinAmount=0.0, BlockTone=0.0, MacroVariation=0.03, Roughness=rough,
                    RoughnessVariation=0.05, ClearCoat=coat, ClearCoatRoughness=0.2, TexScale=1.0, TexAspect=1.0, Specular=spec)
-    photo = ("CH_CRAZE", dict(colour_amount=craze, contrast=1.2, normal=craze, rough_influence=0.6)) if craze else None
-    return MAT.spec("M_Ch_Stone", s, {"BaseColor": (1.0, 1.0, 1.0)}, textures={"Texture": texture}, switches={"UseTexture": True}, photo=photo)
+    photo = ("CH_CRAZE", dict(colour_amount=craze, contrast=craze_contrast, normal=craze, rough_influence=0.6)) if craze else None
+    return MAT.spec("M_Ch_Stone", s, {"BaseColor": tuple(tint)}, textures={"Texture": texture}, switches={"UseTexture": True}, photo=photo)
 
 
 def specs():
@@ -220,9 +223,12 @@ def specs():
     # ---- Stone: 青白石 (Fangshan's grey-white marble) honed and weathered; bluestone (青石) darker, sawn.
     kerb = MAT.merged(NJ, SW, StrataAmount=0.0, VeinAmount=0.04, PoreAmount=0.05, CourseHeight=60.0, BlockLength=1.4, WallJoints=1.0, FloorJoints=1.0,
                       FloorSlab=1.2, JointWidth=0.002, JointDarkness=0.6, BlockTone=0.1, Roughness=0.45, ClearCoat=0.0, Specular=0.58,
-                      RainStreaks=0.06, SplashZone=0.1, MossCover=0.08, MossUp=0.18, MossFoot=0.35, TrafficWear=0.5)
+                      RainStreaks=0.14, SplashZone=0.1, MossCover=0.08, MossUp=0.18, MossFoot=0.35, TrafficWear=0.5, FootDirt=0.14,
+                      MacroVariation=0.12)
+    # (Round 3: the steps and kerbs worn, stained and uneven as in the references: dirt at the foot, rain streaks, more
+    # of the photograph's contrast.)
     out["StoneKerb"] = MAT.spec("M_Ch_Stone", kerb, {"BaseColor": lin(0x9FA09A), "VeinColor": lin(0x8C8E89)},
-                                photo=("S3", dict(block_shift=1.0, contrast=1.35, normal=0.9, rough_influence=0.5)))
+                                photo=("S3", dict(block_shift=1.0, contrast=1.6, normal=0.9, rough_influence=0.5)))
     blue = MAT.merged(MAT.QUIET_DRAWN, MAT.STONE_FLOOR, StrataAmount=0.03, PoreAmount=0.05, VeinAmount=0.0, FloorSlab=0.6, FloorAspect=1.5,
                       FloorStagger=0.5, CourseHeight=0.35, BlockLength=0.9, JointWidth=0.003, JointDarkness=0.6, BlockTone=0.14, Roughness=0.62,
                       ClearCoat=0.0, Specular=0.52, TrafficWear=0.5, SplashZone=0.1, MossCover=0.1, MossUp=0.15, MossFoot=0.4)
@@ -234,11 +240,13 @@ def specs():
     # bricks' relief halved under it. A coat of 0.6 at 0.12 over the full relief only smeared the reflections.)
     out["FloorLarge"] = floor_tile(0.54, 0x4F5153, 0.28, 0.85, 0.0015, coat_rough=0.07, normal=0.35)
     out["FloorSmall"] = floor_tile(0.45, 0x585B5C, 0.64, 0.0, 0.002)
-    court = MAT.merged(NJ, UB, StrataAmount=0.0, PoreAmount=0.0, BlockTone=0.0, MacroScale=4.0, MacroVariation=0.08, Roughness=0.82,
-                       RoughnessVariation=0.06, ClearCoat=0.0, TrafficWear=0.6, RoughWear=0.08, Specular=0.5, Waviness=0.12, WaveScale=0.7,
-                       MossCover=0.07, MossUp=0.12, MossFoot=0.0)
+    # (Round 3: the courts' paving worn and patchy as in the references: the drift 0.08 -> 0.2, the traffic's polish and
+    # the photograph's contrast up, a little more moss.)
+    court = MAT.merged(NJ, UB, StrataAmount=0.0, PoreAmount=0.0, BlockTone=0.0, MacroScale=4.0, MacroVariation=0.2, Roughness=0.82,
+                       RoughnessVariation=0.06, ClearCoat=0.0, TrafficWear=0.85, RoughWear=0.08, Specular=0.5, Waviness=0.12, WaveScale=0.7,
+                       MossCover=0.14, MossUp=0.12, MossFoot=0.0)
     out["CourtPaving"] = MAT.spec("M_Ch_Stone", court, {"BaseColor": lin(0x6E6F6B)},
-                                  photo=("CH_PAVING", dict(contrast=1.0, normal=1.0, rough_influence=0.7)), switches=MAT.MACRO)
+                                  photo=("CH_PAVING", dict(contrast=1.3, normal=1.0, rough_influence=0.7)), switches=MAT.MACRO)
     out["CourtPath"] = MAT.spec("M_Ch_Stone", MAT.merged(court, MossCover=0.05, Roughness=0.8), {"BaseColor": lin(0x6A6C69)},
                                 photo=("CH_BRICKRUB", dict(contrast=1.0, normal=1.0, rough_influence=0.7)), switches=MAT.MACRO)
     # ---- The garden's ground: pebble mosaic (花街铺地), earth under moss, the rockery's Taihu limestone (photographed,
@@ -264,8 +272,10 @@ def specs():
     # (Tuned live 2026-10-25: 0x64251F read orange and saturated, one flat value on every member, the 1.5 m wear drift
     # as pale blotches and the crazing as a black web; now a deeper, greyer iron red under a little more oil, the drift
     # damped, the 断纹 smaller (0.18 m a repeat) and faint.)
-    out["RedLacquer"] = paint(0x582422, 0.52, 0.5, 0.18, wear=0.08, variation=0.02,
-                              craze=dict(colour_amount=0.2, contrast=0.55, normal=0.45, scale=0.18))
+    # (Round 3, from the painted references: an aged oxblood, darker and browner (0x582422 -> 0x3F1F1B), a little less
+    # oil, the crazing a touch more visible, each member a breath of its own tone (BoardTone 0.08).)
+    out["RedLacquer"] = paint(0x3F1F1B, 0.6, 0.35, 0.18, wear=0.12, variation=0.04, tone=0.08,
+                              craze=dict(colour_amount=0.3, contrast=0.95, normal=0.6, scale=0.18))
     out["GreenLacquer"] = paint(0x284A3D, 0.5, 0.45, 0.15)
     out["BlackLacquer"] = paint(0x161310, 0.42, 0.6, 0.1)
     # 楠木, waxed, never painted: golden brown, a fine straight grain (CH_NANMU along each member), the silk of its
@@ -279,11 +289,12 @@ def specs():
     # (the renderings' dark ceilings; the bright red bounced pink onto every wall under it).
     # (Tuned live 2026-10-25: darker and greyer, with no drift, wear or board tint: those read as camouflage blotches. The
     # cloudy patches left in the shade under the eaves are Lumen's GI noise there, not this material.)
-    out["RafterRed"] = paint(0x3E1D19, 0.62, 0.15, outdoor=False, wear=0.0, variation=0.0, tone=0.0,
+    out["RafterRed"] = paint(0x321916, 0.62, 0.15, outdoor=False, wear=0.0, variation=0.0, tone=0.0,
                              craze=dict(colour_amount=0.05, contrast=0.4, normal=0.3, scale=0.18))
     out["Chestnut"] = MAT.spec("M_Ch_Wood", MAT.merged(MAT.CHESTNUT_LACQUER, FootDirt=0.06, DustUp=0.06, SplashZone=0.15), {"BaseColor": lin(0x47301F)},
                                photo=("W2", MAT.OAK_PHOTO))
-    out["PaintedBeam"] = image("ch_suhua", 0.62, 0.08, craze=0.25)
+    # (Round 3: the 苏式 paint aged as in the references: darker, a cooler and quieter blue-green under soot, rougher.)
+    out["PaintedBeam"] = image("ch_suhua", 0.75, 0.08, craze=0.4, tint=(0.48, 0.58, 0.62), craze_contrast=1.4)
     out["Engraved"] = image("ch_shutiao", 0.6, 0.0, spec=0.5)
     out["Plaques"] = image("ch_plaques", 0.35, 0.45, craze=0.25)
     out["Brass"] = MAT.spec("M_Metal", {"Roughness": 0.36, "Metallic": 1.0, "Variation": 0.14, "NoiseScale": 0.1, "PatinaAmount": 0.25},
@@ -346,7 +357,7 @@ def make_paper():
         pass
     wp = MEL.create_material_expression(m, unreal.MaterialExpressionWorldPosition, -1100, 0)
     MEL.connect_material_expressions(wp, "", tone, "Position")
-    base = S.constant3(m, lin(0xE6DCC6), -900, -200)     # old mulberry paper: a warm cream, not white
+    base = S.constant3(m, lin(0xCBBFA5), -900, -200)     # old mulberry paper, aged: a warm, darker cream (round 3; 0xE6DCC6 read white)
     var = S.multiply(m, tone, S.scalar_param(m, "Variation", 0.04, -900, 150), -700, 100)
     one = MEL.create_material_expression(m, unreal.MaterialExpressionConstant, -700, 250)
     one.set_editor_property("r", 1.0)
@@ -355,13 +366,13 @@ def make_paper():
     MEL.connect_material_expressions(one, "", add, "B")
     col = S.multiply(m, base, add, -400, -100)
     MEL.connect_material_property(col, "", unreal.MaterialProperty.MP_BASE_COLOR)
-    sss = S.multiply(m, S.constant3(m, lin(0xEFE7D6), -700, 400), S.scalar_param(m, "Transmission", 0.85, -700, 500), -450, 400)
+    sss = S.multiply(m, S.constant3(m, lin(0xEFE7D6), -700, 400), S.scalar_param(m, "Transmission", 0.3, -700, 500), -450, 400)
     MEL.connect_material_property(sss, "", unreal.MaterialProperty.MP_SUBSURFACE_COLOR)
     rough = MEL.create_material_expression(m, unreal.MaterialExpressionConstant, -400, 300)
     rough.set_editor_property("r", 0.42)
     MEL.connect_material_property(rough, "", unreal.MaterialProperty.MP_ROUGHNESS)
     mpc = unreal.load_asset(f"{P.MATERIALS}/MPC_Musee")
-    glow = S.multiply(m, S.multiply(m, base, S.scalar_param(m, "Glow", 750.0, -700, 700), -450, 650), S.daylight_factor(m, mpc, 0.0, -700, 800), -250, 650)
+    glow = S.multiply(m, S.multiply(m, base, S.scalar_param(m, "Glow", 90.0, -700, 700), -450, 650), S.daylight_factor(m, mpc, 0.0, -700, 800), -250, 650)
     MEL.connect_material_property(glow, "", unreal.MaterialProperty.MP_EMISSIVE_COLOR)
     MEL.recompile_material(m)
     EAL.save_loaded_asset(m)
