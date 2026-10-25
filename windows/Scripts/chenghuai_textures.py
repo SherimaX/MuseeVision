@@ -33,7 +33,7 @@ FONT = "C:/Windows/Fonts/simkai.ttf"
 # the pigments sixty years faded and dusted, not a palace's fresh blue and green.
 BLUE = (28, 52, 82)         # azurite, a deep blue (round 6: bluer, the references' azurite against the malachite)
 BLUE_L = (78, 100, 112)
-GREEN = (34, 62, 52)        # malachite, dark
+GREEN = (26, 68, 58)        # malachite, dark (round 7: more saturated, the references' deep blue-green)
 GREEN_L = (84, 116, 100)
 RED = (112, 50, 40)         # iron red (铁红) / 章丹, dulled: accents only since round 4
 GOLD = (162, 132, 76)       # ochre-gold linework (matt), thin lines only
@@ -72,14 +72,23 @@ def age(img, seed, dust=0.07, fade=0.1, edges=True):
     # Wear where it happens: the paint rubbed thin along the arrises (a face's top and bottom edges), the lime ground
     # showing through in a ragged band, not scattered dots.
     if edges:
-        ew = max(3, h // 60)
+        ew = max(4, h // 40)   # (round 7: wider, the arrises' wear read at a distance)
         band = Image.new("L", (w, h), 0)
         db = ImageDraw.Draw(band)
         db.rectangle([0, 0, w, ew], fill=255)
         db.rectangle([0, h - ew, w, h], fill=255)
         rag = Image.effect_noise((w, h), 90).point(lambda v: 255 if v > 150 else 0)
         band = ImageChops.multiply(band.filter(ImageFilter.GaussianBlur(ew * 0.8)), rag).filter(ImageFilter.GaussianBlur(0.8))
-        base = Image.composite(Image.new("RGB", (w, h), (176, 166, 146)), base, band.point(lambda v: int(v * 0.55)))
+        base = Image.composite(Image.new("RGB", (w, h), (176, 166, 146)), base, band.point(lambda v: int(v * 0.8)))
+        # Chips: small flakes of the paint gone to the lime ground and the wood under it, near the arrises.
+        chips = Image.new("L", (w, h), 0)
+        dc = ImageDraw.Draw(chips)
+        for _ in range(int(w / 40)):
+            x = rnd.uniform(0, w)
+            y = rnd.choice((rnd.uniform(0, h * 0.12), rnd.uniform(h * 0.88, h)))
+            r = rnd.uniform(2, 7)
+            dc.ellipse([x - r * 1.6, y - r, x + r * 1.6, y + r], fill=255)
+        base = Image.composite(Image.new("RGB", (w, h), (120, 92, 70)), base, chips.filter(ImageFilter.GaussianBlur(0.7)))
     return base
 
 

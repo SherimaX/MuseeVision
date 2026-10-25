@@ -260,7 +260,7 @@ namespace ChenghuaiHall
 		/** A corner bracket (雀替) under a lintel's end at a column: a carved board in the frame's u-z plane, from the
 		 *  column's face (u = Face) out along the bay (Dir ±1) and down from the lintel's underside (ZTop), its lower edge a
 		 *  long curve ending in a scroll (卷草) near the column, Thick across. */
-		void Bracket(FPart& Part, const FLocal& L, double Face, double Dir, double ZTop, double Len, double Hq, double Thick)
+		void Bracket(FPart& Part, const FLocal& L, double Face, double Dir, double ZTop, double Len, double Hq, double Thick, FPart* Relief = nullptr)
 		{
 			TArray<FVector2D> O;
 			O.Add(FVector2D(0.0, 0.0));
@@ -280,11 +280,45 @@ namespace ChenghuaiHall
 			O.Add(FVector2D(0.0, -Hq));
 			if (Dir < 0.0) { for (FVector2D& P : O) { P.X = -P.X; } Algo::Reverse(O); }
 			Kit::Extrude(Part, TEXT("Bracket"), O, L.P(Face, 0.0, ZTop), L.U3(), FVector::UpVector, L.V3(), -0.5 * Thick, 0.5 * Thick);
+			// The carving (round 6/7): a painted scroll panel standing proud of both faces, the bracket's own outline drawn in
+			// towards its heart, so a rim of the green body frames it (the references' blue-green 雀替 with gilt scrolls).
+			if (Relief)
+			{
+				FVector2D C = FVector2D::ZeroVector;
+				for (const FVector2D& P : O) { C += P; }
+				C /= O.Num();
+				TArray<FVector2D> I;
+				for (const FVector2D& P : O) { I.Add(C + (P - C) * 0.72); }
+				Kit::Extrude(*Relief, TEXT("Bracket carving"), I, L.P(Face, 0.0, ZTop), L.U3(), FVector::UpVector, L.V3(), -0.5 * Thick - 0.012, 0.5 * Thick + 0.012);
+			}
 		}
 
 		/** A beam across (along v) at u, from Va to Vb, its top at Top: a W × Hb section, the arrises eased (抹角). */
 		void CrossBeam(FChMeshes& Out, const FHallSpec& H, double U, double Va, double Vb, double Top, double W, double Hb)
 		{
+			if (H.bPainted && Va < -0.1)
+			{
+				// The end through the eave column (round 7): a carved 霸王拳 head, the beam's end cut in three convex lobes
+				// seen from the side, in the rafters' blue-green; the painted beam runs from the column. (A painted box with
+				// a big medallion stuck out there and read as a floating crate.)
+				ChenghuaiPaint::Box(Out[CB::PaintedBeam], TEXT("Beam"), FLocal{H.L.Plan(U, 0.0), H.L.V, H.L.U}, -0.02, Vb, -0.5 * W, 0.5 * W, Top - Hb, Top, 4, 0.1, 0.9);
+				const double E = -0.02 - Va;   // the head's length past the column's line
+				TArray<FVector2D> O;            // (outward along -v from the column, up from the beam's foot)
+				O.Add(FVector2D(0.0, 0.0));
+				const int32 NL = 3;
+				for (int32 k = 0; k <= 24; ++k)
+				{
+					const double T = double(k) / 24;
+					const double Z = Hb * (0.08 + 0.84 * T);
+					const double Lobe = FMath::Abs(FMath::Sin(UE_DOUBLE_PI * NL * T));
+					O.Add(FVector2D(E * (0.62 + 0.38 * Lobe), Z));
+				}
+				O.Add(FVector2D(E * 0.5, Hb));
+				O.Add(FVector2D(0.0, Hb));
+				const FVector Origin = H.L.P(U, -0.02, Top - Hb);
+				Kit::Extrude(Out[CB::GreenLacquer], TEXT("Beam head (霸王拳)"), O, Origin, -H.L.V3(), FVector::UpVector, H.L.U3(), -0.5 * W, 0.5 * W);
+				return;
+			}
 			if (H.bPainted)
 			{
 				ChenghuaiPaint::Box(Out[CB::PaintedBeam], TEXT("Beam"), FLocal{H.L.Plan(U, 0.0), H.L.V, H.L.U}, Va, Vb, -0.5 * W, 0.5 * W, Top - Hb, Top, 4, 0.1, 0.9);
@@ -596,6 +630,17 @@ namespace ChenghuaiHall
 					Kit::LBox(Out[H.TimberPart], TEXT("Eave board"), L, A, B, -0.03, 0.03, G.Zc, BoardTop);
 					Kit::LBox(Out[H.TimberPart], TEXT("Eave lintel"), L, A, B, -0.5 * LintelT, 0.5 * LintelT, G.Zc - LintelH, G.Zc);
 				}
+				// A cap block (坐斗, round 7) on the lintel over each column, into the board's tier: the column read as running
+				// into one band; the references break the eave into tiers at every column.
+				if (H.bPainted)
+				{
+					const double CW = 0.55 * H.ColD, CD = 0.62 * LintelT, CH = FMath::Min(0.16, BoardTop - G.Zc - 0.01);
+					for (const double Uc : {A, B})
+					{
+						if (Uc == B && i + 2 < H.ColU.Num()) { continue; }   // each column once
+						ChenghuaiPaint::Box(Out[CB::PaintedBeam], TEXT("Cap block"), L, Uc - CW, Uc + CW, -CD, CD, G.Zc, G.Zc + CH, 4, 0.0, 0.12);
+					}
+				}
 				// The corner brackets (雀替) under the lintel's ends, at both columns of the bay (round 5: the references').
 				{
 					const double Span = B - A, R = 0.5 * H.ColD;
@@ -623,8 +668,9 @@ namespace ChenghuaiHall
 					}
 					else if (Span > 1.2)
 					{
-						Bracket(Out[CB::GreenLacquer], L, A + R, 1.0, G.Zc - LintelH, Len, Hq, 0.42 * LintelT);
-						Bracket(Out[CB::GreenLacquer], L, B - R, -1.0, G.Zc - LintelH, Len, Hq, 0.42 * LintelT);
+						FPart* Carve = H.bPainted ? &Out[CB::PaintedBeam] : nullptr;
+						Bracket(Out[CB::GreenLacquer], L, A + R, 1.0, G.Zc - LintelH, Len, Hq, 0.42 * LintelT, Carve);
+						Bracket(Out[CB::GreenLacquer], L, B - R, -1.0, G.Zc - LintelH, Len, Hq, 0.42 * LintelT, Carve);
 					}
 				}
 				// The facade line's lintel (金枋) over the lattice, in a veranda.
@@ -681,7 +727,7 @@ namespace ChenghuaiHall
 					{
 						const double TW = 0.6 * H.ColD, TH = 0.8 * H.ColD, TZ = G.Zc - 0.75;
 						ChenghuaiPaint::Box(Out[CB::PaintedBeam], TEXT("Tie"), FLocal{H.L.Plan(U, 0.0), H.L.V, H.L.U}, -0.05, H.PurlinV[A], -0.5 * TW, 0.5 * TW,
-											TZ - 0.5 * TH, TZ + 0.5 * TH, 4, 0.1, 0.9);
+											TZ - 0.5 * TH, TZ + 0.5 * TH, 5, 0.1, 0.9);   // the purlin's fret row: no medallion on a short tie (round 7)
 					}
 					else
 					{
@@ -773,7 +819,7 @@ namespace ChenghuaiHall
 					const FVector T1 = G.P(U, VR, G.FlyUnder(VR, bBack) + 0.5 * FlyD);
 					const FVector T2 = G.P(U, VF, G.FlyUnder(VF, bBack) + 0.5 * FlyD);
 					Kit::Member(Out[RafterShaftOf(H)], TEXT("Flying rafter tail"), T0, T1 + (T1 - T0).GetSafeNormal() * 0.03, L.U3(), FlyD, FlyD);
-					Kit::Member(Out[RafterShaftOf(H)], TEXT("Flying rafter"), T1, T2, L.U3(), FlyD, FlyD);
+					Kit::Member(Out[RafterShaftOf(H)], TEXT("Flying rafter"), T1, T2, L.U3(), FlyD, FlyD, 0.012);   // arrises eased (round 7)
 					if (H.bRafterEnds) { ChenghuaiPaint::EndCap(Out[CB::PaintedBeam], T2 + (T2 - T1).GetSafeNormal() * 0.002, (T2 - T1).GetSafeNormal(), FVector::UpVector, 0.5 * FlyD, false, 8 + (Seq % 4)); }
 				};
 				Eave(false);

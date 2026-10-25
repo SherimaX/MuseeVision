@@ -248,6 +248,10 @@ AChenghuaiStructure::AChenghuaiStructure()
 		PP->Settings.ColorGamma = FVector4(0.8, 0.8, 0.8, 1.0);
 		PP->Settings.bOverride_ColorContrast = true;
 		PP->Settings.ColorContrast = FVector4(1.06, 1.06, 1.06, 1.0);
+		// (Round 7: the toe lifted a little, the 10th percentile 20 -> about 30 of 255 as the references', the mid-tones
+		// kept dark.)
+		PP->Settings.bOverride_ColorGammaShadows = true;
+		PP->Settings.ColorGammaShadows = FVector4(1.14, 1.14, 1.14, 1.0);
 	}
 
 	const TArray<CB::FChLight> L = CB::Lights();
