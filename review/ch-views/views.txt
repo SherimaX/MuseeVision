@@ -1,0 +1,24 @@
+Chenghuai (澄懷) wing, Musée Vision, 2026-10-25. Live game at 14:00, raster (Lumen), 1920x1080, no HUD, default FOV 84 unless noted.
+Poses are plan metres and degrees (yaw 0 east, 90 south, -90 north), as -MuseePose. No high overview: the visitor can't be lifted above the roofs.
+
+01_gate-outside.jpg	pose (x, y, feet, yaw, pitch): 0, -5.5, 0, -90, 8; fov 70	The wing's entry gate seen from the museum side: green leaves under the red frame between white walls.
+02_gate-inside.jpg	pose (x, y, feet, yaw, pitch): 0, -19.8, 0, 90, 8; fov 70	Looking back south through the entry gate's red posts to the museum's stone arch.
+03_chuihua-gate.jpg	pose (x, y, feet, yaw, pitch): -9.2, -23.6, 0, -90, 9; fov 70	The hanging-flower gate (垂花门) from the front court, its painted beam and green doors.
+04_court-south.jpg	pose (x, y, feet, yaw, pitch): -9.2, -30.6, 0, -90, 9; fov 70	The inner court from its south end: the main hall ahead, side halls left and right, two trees and a fish bowl.
+05_court-north.jpg	pose (x, y, feet, yaw, pitch): -9.2, -41.6, 0.75, 90, 4; fov 70	The inner court from the main hall's platform, looking south to the hanging-flower gate.
+06_hall-front.jpg	pose (x, y, feet, yaw, pitch): -9.2, -34.8, 0, -90, 13	The main hall (澄懷堂) straight on: platform, steps, red columns, lattice front, grey tile roof.
+07_hall-three-quarter.jpg	pose (x, y, feet, yaw, pitch): -3.4, -34.4, 0, -128, 12	The main hall at three-quarters from the east, showing the roof's curve and the platform's depth.
+08_ridge-end.jpg	pose (x, y, feet, yaw, pitch): -9.2, -30.8, 0, -70, 20; fov 22	Close-up of the main hall's east ridge end: carved-brick courses and the curved scorpion tail (蝎子尾).
+09_eave.jpg	pose (x, y, feet, yaw, pitch): -4.5, -36.0, 0, -60, 30	Under the eave: round rafters, painted beams (苏式彩画), red columns and lattice.
+10_side-hall-east.jpg	pose (x, y, feet, yaw, pitch): -9.2, -36.5, 0, 0, 9; fov 70	The east side hall across the court, straight on.
+11_side-hall-west.jpg	pose (x, y, feet, yaw, pitch): -9.2, -36.5, 0, 180, 9; fov 70	The west side hall across the court, straight on.
+12_gallery.jpg	pose (x, y, feet, yaw, pitch): -15.65, -30.9, 0.45, -90, 2	Looking along the covered corridor (游廊): lattice wall on the left, red columns, the court on the right.
+13_lattice-window.jpg	pose (x, y, feet, yaw, pitch): -14.6, -31.6, 0.45, 180, 4	Close-up of a lattice window and door frame with paper panels, beside the grey brick wall.
+14_door-leaf.jpg	pose (x, y, feet, yaw, pitch): -9.2, -40.9, 0.75, -90, 2	The main hall's open door leaves and couplet boards, with the hall's scroll visible inside.
+15_column-base-floor.jpg	pose (x, y, feet, yaw, pitch): -9.2, -40.6, 0.75, -145, -25	The hall platform's stone steps, paving and column bases, looking down to the west.
+16_hall-interior.jpg	pose (x, y, feet, yaw, pitch): -9.2, -46.2, 0.75, -90, 8	Inside the main hall: the hanging scrolls in their cases and the nanmu table under the name board.
+17_garden-pond.jpg	pose (x, y, feet, yaw, pitch): 3.9, -47.0, 0.15, 20, -4; fov 70	The garden pond and its zigzag stone bridge, the white wall with a round window and bamboo.
+18_rockery.jpg	pose (x, y, feet, yaw, pitch): 3.0, -24.0, 0.15, -30, 0; fov 70	The Taihu rockery from below, with the pavilion on top.
+19_from-pavilion.jpg	pose (x, y, feet, yaw, pitch): 10.6, -28.9, 2.75, -95, -14; fov 70	From the rockery pavilion looking over the garden: standing rocks, the pond and the waterside hall.
+20_shixiong-pond.jpg	pose (x, y, feet, yaw, pitch): 3.9, -40.0, 0.15, -60, 10	The standing Taihu rock (石兄) by the pond, the side hall and the waterside pavilion behind.
+21_back-garden.jpg	pose (x, y, feet, yaw, pitch): 6.0, -50.0, 0.15, -90, 6; fov 70	The back garden: a standing rock in front of a lattice-doored garden building.
