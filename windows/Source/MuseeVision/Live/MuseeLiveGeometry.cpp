@@ -1,4 +1,5 @@
 #include "Live/MuseeLiveGeometry.h"
+#include "Live/MuseeLiveBake.h"
 #include "Live/MuseeLiveLook.h"
 #include "Chenghuai/ChenghuaiStructure.h"
 #include "Chenghuai/ChenghuaiTune.h"
@@ -24,6 +25,8 @@ void UMuseeLiveGeometry::OnWorldBeginPlay(UWorld& InWorld)
 	Super::OnWorldBeginPlay(InWorld);
 	bActive = true;
 	Key = TEXT("missing");   // no file at the start: the wing stays as it was built (and baked)
+	const FFileStatData B = IFileManager::Get().GetStatData(*FPaths::ConvertRelativePathToFull(FPaths::ProjectSavedDir() / TEXT("Live/geo_bake.txt")));
+	BakeKey = B.bIsValid ? FString::Printf(TEXT("%lld:%lld"), B.ModificationTime.GetTicks(), B.FileSize) : TEXT("missing");   // an old request isn't taken
 }
 
 void UMuseeLiveGeometry::Tick(float DeltaTime)
@@ -32,28 +35,55 @@ void UMuseeLiveGeometry::Tick(float DeltaTime)
 	const double Now = FPlatformTime::Seconds();
 	if (Now < NextPoll) { return; }
 	NextPoll = Now + 0.25;
-	const FString Path = ChenghuaiTune::Path();
-	const FFileStatData S = IFileManager::Get().GetStatData(*Path);
-	const FString K = S.bIsValid ? FString::Printf(TEXT("%lld:%lld"), S.ModificationTime.GetTicks(), S.FileSize) : TEXT("missing");
-	if (K == Key) { return; }
-	Key = K;
-	ChenghuaiTune::Load();
-	double Ms = 0.0;
-	int32 Built = 0;
-	for (TActorIterator<AChenghuaiStructure> It(GetWorld()); It; ++It)
+	auto StatKey = [](const FString& P)
 	{
-		Ms += It->RebuildLive();
-		++Built;
+		const FFileStatData S = IFileManager::Get().GetStatData(*P);
+		return S.bIsValid ? FString::Printf(TEXT("%lld:%lld"), S.ModificationTime.GetTicks(), S.FileSize) : FString(TEXT("missing"));
+	};
+	const FString K = StatKey(ChenghuaiTune::Path());
+	if (K != Key)
+	{
+		Key = K;
+		ChenghuaiTune::Load();
+		LastMs = 0.0;
+		int32 Built = 0;
+		for (TActorIterator<AChenghuaiStructure> It(GetWorld()); It; ++It)
+		{
+			MuseeLiveBake::Unbake(*It);   // the last live bake's meshes are of the old shapes
+			LastMs += It->RebuildLive();
+			++Built;
+		}
+		Baked = 0;
+		Unused = ChenghuaiTune::WriteKeys();
+		if (UMuseeLiveLook* Look = GetWorld()->GetSubsystem<UMuseeLiveLook>()) { Look->Reapply(); }   // its copies on the new sections
+		++Applied;
+		UE_LOG(LogMusee, Display, TEXT("live: Chenghuai rebuilt in %.0f ms (%d actor%s)%s"), LastMs, Built, Built == 1 ? TEXT("") : TEXT("s"),
+			Unused.Num() ? *FString::Printf(TEXT("; not used: %s"), *FString::Join(Unused, TEXT(", "))) : TEXT(""));
+		WriteState();
+		return;
 	}
-	const TArray<FString> Unused = ChenghuaiTune::WriteKeys();
-	if (UMuseeLiveLook* Look = GetWorld()->GetSubsystem<UMuseeLiveLook>()) { Look->Reapply(); }   // its copies on the new sections
-	++Applied;
-	UE_LOG(LogMusee, Display, TEXT("live: Chenghuai rebuilt in %.0f ms (%d actor%s)%s"), Ms, Built, Built == 1 ? TEXT("") : TEXT("s"),
-		Unused.Num() ? *FString::Printf(TEXT("; not used: %s"), *FString::Join(Unused, TEXT(", "))) : TEXT(""));
+	const FString BK = StatKey(FPaths::ConvertRelativePathToFull(FPaths::ProjectSavedDir() / TEXT("Live/geo_bake.txt")));
+	if (BK != BakeKey)
+	{
+		BakeKey = BK;
+		const double T0 = FPlatformTime::Seconds();
+		Baked = 0;
+		for (TActorIterator<AChenghuaiStructure> It(GetWorld()); It; ++It) { Baked += MuseeLiveBake::Bake(*It); }
+		BakeMs = (FPlatformTime::Seconds() - T0) * 1000.0;
+		if (UMuseeLiveLook* Look = GetWorld()->GetSubsystem<UMuseeLiveLook>()) { Look->Reapply(); }   // its copies on the baked meshes
+		++Applied;
+		UE_LOG(LogMusee, Display, TEXT("live: Chenghuai baked live in %.0f ms (%d meshes, distance fields and cards)"), BakeMs, Baked);
+		WriteState();
+	}
+}
+
+void UMuseeLiveGeometry::WriteState()
+{
 	TSharedRef<FJsonObject> State = MakeShared<FJsonObject>();
 	State->SetNumberField(TEXT("applied"), Applied);
-	State->SetNumberField(TEXT("ms"), FMath::RoundToDouble(Ms));
-	State->SetNumberField(TEXT("actors"), Built);
+	State->SetNumberField(TEXT("ms"), FMath::RoundToDouble(LastMs));
+	State->SetNumberField(TEXT("baked"), Baked);
+	State->SetNumberField(TEXT("bake_ms"), FMath::RoundToDouble(BakeMs));
 	TArray<TSharedPtr<FJsonValue>> U;
 	for (const FString& N : Unused) { U.Add(MakeShared<FJsonValueString>(N)); }
 	State->SetArrayField(TEXT("unused"), U);

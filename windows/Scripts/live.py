@@ -17,10 +17,13 @@ A change shows within a fraction of a second: no editor step, no relaunch. Witho
         and GPU times at each view for N s (printed, and in done.json). Eye adaptation is fast during a request so
         an A/B has settled; --slow-exposure keeps the museum's speed.
     python windows/Scripts/live.py geo tail.Length=0.7 "hall.Main hall.EaveFront=1.2" rockery.PeakSeed=3
-    python windows/Scripts/live.py geo --unset tail.Length ...   |   geo --show   |   geo --keys [text]
+    python windows/Scripts/live.py geo --unset tail.Length ...   |   geo --show   |   geo --keys [text]   |   geo --bake
         Chenghuai's geometry, rebuilt in the running game with these numbers (Saved/Live/chenghuai.json); waits for the
         rebuild and prints its time. --keys lists every tunable number with its default (after a first rebuild).
-        A baked wing turns procedural for the run. Write a value that's right into its default in the code.
+        A baked wing turns procedural for the run, and procedural meshes give Lumen no surface cards: shapes are right,
+        light under the roofs and indoors is not. --bake (alone or with edits) bakes the rebuilt wing live with
+        distance fields and cards, so it is lit as the cooked bake; the next edit drops it. Write a value that's
+        right into its default in the code.
     python windows/Scripts/live.py compare <runA> <runB> [--crop x,y,w,h] [--out dir]
         side-by-side JPEGs (A left, B right) of the views both shot folders have, to <runB>/compare/ by default;
         a run is a folder under Saved/Live/shots or a path, and a unique part of a name is enough
@@ -229,27 +232,44 @@ def geo(args):
             if text.lower() in k.lower():
                 print(f"{k} = {e['default']:g}" + (f"   (now {e['value']:g})" if "value" in e else ""))
         return
+    bake = "--bake" in args
     unset = "--unset" in args
-    before = load(GEO_STATE, {}).get("applied", 0)
-    for a in (a for a in args if not a.startswith("--")):
-        key, eq, text = a.partition("=")
-        if unset:
-            data.pop(key, None)
-            continue
-        if not eq:
-            sys.exit(f"{a}: expected key=value")
-        data[key] = float(text)
-    save(GEO, data)
+    edits = [a for a in args if not a.startswith("--")]
+    if edits:
+        for a in edits:
+            key, eq, text = a.partition("=")
+            if unset:
+                data.pop(key, None)
+                continue
+            if not eq:
+                sys.exit(f"{a}: expected key=value")
+            data[key] = float(text)
+        before = load(GEO_STATE, {}).get("applied", 0)
+        save(GEO, data)
+        st = wait_geo(before, 60)
+        if not st:
+            return
+        print(f"live: Chenghuai rebuilt in {st.get('ms')} ms")
+        for u in st.get("unused", []):
+            print(f"error: {u}: no build asked for it (geo --keys lists them)")
+    if bake:
+        before = load(GEO_STATE, {}).get("applied", 0)
+        with open(os.path.join(LIVE, "geo_bake.txt"), "w", encoding="utf-8") as f:
+            f.write(time.strftime("%H:%M:%S"))
+        st = wait_geo(before, 600)
+        if st:
+            print(f"live: Chenghuai baked live in {st.get('bake_ms')} ms ({st.get('baked')} meshes)")
+
+
+def wait_geo(before, limit):
     t0 = time.time()
-    while time.time() - t0 < 60:
+    while time.time() - t0 < limit:
         st = load(GEO_STATE, {})
         if st.get("applied", 0) > before:
-            print(f"live: Chenghuai rebuilt in {st.get('ms')} ms")
-            for u in st.get("unused", []):
-                print(f"error: {u}: no build asked for it (geo --keys lists them)")
-            return
+            return st
         time.sleep(0.1)
-    print("live: no game answered in 60 s (start one with: live.py start)")
+    print(f"live: no game answered in {limit} s (start one with: live.py start)")
+    return None
 
 
 def no_live_coding():
