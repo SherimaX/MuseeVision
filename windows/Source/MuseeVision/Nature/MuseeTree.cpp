@@ -581,7 +581,8 @@ namespace MuseeTreeGen
 	};
 
 	void GrowTree(EMuseeTreeSpecies Kind, int32 Variant, EMuseeNatureSeason Now, int32 Term, int32 Seed, double Height, double CrownZ,
-				  const FVector2D& Radii, double Density, const FBox2D& Keep, double KeepFrom, FOutput& Out)
+				  const FVector2D& Radii, double Density, const FBox2D& Keep, double KeepFrom, FOutput& Out,
+				  const FLinearColor& LeafTint = FLinearColor::White, double LeafVariation = 0.0)
 	{
 		const bool bApple = Variant == 1;
 		FSpec Spec;
@@ -653,6 +654,9 @@ namespace MuseeTreeGen
 			for (const FBranch& B : G.Branches)
 			{
 				if (B.Level < Spec.LeafLevel) { continue; }
+				// The twig's own shade (LeafVariation): its leaves a little darker or lighter together, as light and age
+				// leave a real crown, not one even colour.
+				const float TwigShade = LeafVariation > 0.0 ? static_cast<float>(1.0 + LeafVariation * Rng.FRandRange(-1.0, 1.0)) : 1.f;   // (no draw at 0: every other tree grows as before)
 				const int32 N = FMath::FloorToInt(PerMetre * B.Length * (1.0 - Spec.LeafStart) + Rng.FRand());
 				for (int32 k = 0; k < N; ++k)
 				{
@@ -682,7 +686,8 @@ namespace MuseeTreeGen
 					FNatureWind Tip = Base;
 					Tip.Flutter = 1.0;
 					Tip.Bend = PB + 0.04;
-					const FLinearColor Colour = MN::Vary(Look.LeafColours[Rng.RandRange(0, Look.LeafColours.Num() - 1)], Rng, 5.0, 0.1, 0.14);
+					FLinearColor Colour = MN::Vary(Look.LeafColours[Rng.RandRange(0, Look.LeafColours.Num() - 1)], Rng, 5.0, 0.1, 0.14);
+					Colour = FLinearColor(Colour.R * LeafTint.R * TwigShade, Colour.G * LeafTint.G * TwigShade, Colour.B * LeafTint.B * TwigShade, Colour.A);
 					if (!G.Allowed(P + Radial * PR + LeafDir * Len, G.Keep)) { continue; }
 					MN::AddCard(Out.Leaves, P + Radial * PR, LeafDir, Normal, Len, Wid, Spec.LeafFold, Spec.LeafCurl, Spec.LeafRows, Base, Tip,
 								Colour, CrownOcclusion(P, CrownCentre, CrownRadii, 0.45), Outward * 0.5);
@@ -1071,7 +1076,7 @@ void AMuseeTree::BuildPlant()
 	else
 	{
 		MuseeTreeGen::GrowTree(Species, FruitVariant, EffectiveSeason(), EffectiveTerm(), Seed, TreeHeight, CrownHeight, CrownRadii, LeafDensity, Keep,
-								 KeepFromHeight, Out);
+								 KeepFromHeight, Out, LeafTint, LeafVariation);
 	}
 	WriteSection(0, Out.Bark, Out.BarkMaterial);
 	WriteSection(1, Out.Leaves, Out.LeafMaterial);
