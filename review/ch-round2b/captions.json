@@ -1,0 +1,200 @@
+[
+ {
+  "file": "ridges_ch-inner_before.jpg",
+  "round": "2b",
+  "topic": "ridges",
+  "caption": "Ridges before (lighter than the tuned tiles). Main hall: the ridge along the top is now a darker line that sits with the darker tiles."
+ },
+ {
+  "file": "ridges_ch-inner_after.jpg",
+  "round": "2b",
+  "topic": "ridges",
+  "caption": "Ridges after. Main hall: the ridge along the top is now a darker line that sits with the darker tiles."
+ },
+ {
+  "file": "ridges_eave2_before.jpg",
+  "round": "2b",
+  "topic": "ridges",
+  "caption": "Ridges before (lighter than the tuned tiles). Side roof from the court: the ridge's lighter grey band is gone; it reads as one roof."
+ },
+ {
+  "file": "ridges_eave2_after.jpg",
+  "round": "2b",
+  "topic": "ridges",
+  "caption": "Ridges after. Side roof from the court: the ridge's lighter grey band is gone; it reads as one roof."
+ },
+ {
+  "file": "ridges_shixiong_before.jpg",
+  "round": "2b",
+  "topic": "ridges",
+  "caption": "Ridges before (lighter than the tuned tiles). Side hall by the pond: ridge and tiles now one quiet grey."
+ },
+ {
+  "file": "ridges_shixiong_after.jpg",
+  "round": "2b",
+  "topic": "ridges",
+  "caption": "Ridges after. Side hall by the pond: ridge and tiles now one quiet grey."
+ },
+ {
+  "file": "red_eave2-14_before.jpg",
+  "round": "2b",
+  "topic": "red",
+  "caption": "Red before. Eave at 14:00: deeper iron red, less orange; the rafters' camouflage blotches calmed (what remains is Lumen's shade noise)."
+ },
+ {
+  "file": "red_eave2-14_after.jpg",
+  "round": "2b",
+  "topic": "red",
+  "caption": "Red after. Eave at 14:00: deeper iron red, less orange; the rafters' camouflage blotches calmed (what remains is Lumen's shade noise)."
+ },
+ {
+  "file": "red_gallery2-14_before.jpg",
+  "round": "2b",
+  "topic": "red",
+  "caption": "Red before. Gallery at 14:00: the column's crazing is a fine faint web, no longer black cracks; the red deeper and greyer."
+ },
+ {
+  "file": "red_gallery2-14_after.jpg",
+  "round": "2b",
+  "topic": "red",
+  "caption": "Red after. Gallery at 14:00: the column's crazing is a fine faint web, no longer black cracks; the red deeper and greyer."
+ },
+ {
+  "file": "red_gallery2-16_before.jpg",
+  "round": "2b",
+  "topic": "red",
+  "caption": "Red before. Gallery at 16:00: the deeper red holds in the warmer light; a little more tung-oil sheen."
+ },
+ {
+  "file": "red_gallery2-16_after.jpg",
+  "round": "2b",
+  "topic": "red",
+  "caption": "Red after. Gallery at 16:00: the deeper red holds in the warmer light; a little more tung-oil sheen."
+ },
+ {
+  "file": "red_ch-inner-14_before.jpg",
+  "round": "2b",
+  "topic": "red",
+  "caption": "Red before. Inner court: the woodwork reads as old 铁红 under oil, not fresh orange paint."
+ },
+ {
+  "file": "red_ch-inner-14_after.jpg",
+  "round": "2b",
+  "topic": "red",
+  "caption": "Red after. Inner court: the woodwork reads as old 铁红 under oil, not fresh orange paint."
+ },
+ {
+  "file": "red_hallfloor-14_before.jpg",
+  "round": "2b",
+  "topic": "red",
+  "caption": "Red before. Hall floor: control view; only the red columns at the edges change."
+ },
+ {
+  "file": "red_hallfloor-14_after.jpg",
+  "round": "2b",
+  "topic": "red",
+  "caption": "Red after. Hall floor: control view; only the red columns at the edges change."
+ },
+ {
+  "file": "geo_ridgeend-w_before.jpg",
+  "round": "2b",
+  "topic": "geometry",
+  "caption": "Geometry before. West ridge end: the square bar on a box becomes a round, tapering 蝎子尾 that steepens as it rises, on rounded carved-brick courses."
+ },
+ {
+  "file": "geo_ridgeend-w_after.jpg",
+  "round": "2b",
+  "topic": "geometry",
+  "caption": "Geometry after. West ridge end: the square bar on a box becomes a round, tapering 蝎子尾 that steepens as it rises, on rounded carved-brick courses."
+ },
+ {
+  "file": "geo_ridgeend-e_before.jpg",
+  "round": "2b",
+  "topic": "geometry",
+  "caption": "Geometry before. East ridge end: the same; check the tail sits on the ridge, not floating or sunk."
+ },
+ {
+  "file": "geo_ridgeend-e_after.jpg",
+  "round": "2b",
+  "topic": "geometry",
+  "caption": "Geometry after. East ridge end: the same; check the tail sits on the ridge, not floating or sunk."
+ },
+ {
+  "file": "geo_eave2_before.jpg",
+  "round": "2b",
+  "topic": "geometry",
+  "caption": "Geometry before. Rafters: 16-sided instead of 8, so their ends and sides read round."
+ },
+ {
+  "file": "geo_eave2_after.jpg",
+  "round": "2b",
+  "topic": "geometry",
+  "caption": "Geometry after. Rafters: 16-sided instead of 8, so their ends and sides read round."
+ },
+ {
+  "file": "geo_gallery2_before.jpg",
+  "round": "2b",
+  "topic": "geometry",
+  "caption": "Geometry before. Gallery lattice and frames: rounded long edges catch a soft highlight like planed wood."
+ },
+ {
+  "file": "geo_gallery2_after.jpg",
+  "round": "2b",
+  "topic": "geometry",
+  "caption": "Geometry after. Gallery lattice and frames: rounded long edges catch a soft highlight like planed wood."
+ },
+ {
+  "file": "geo_lattice_before.jpg",
+  "round": "2b",
+  "topic": "geometry",
+  "caption": "Geometry before. Close lattice: rounded bars, rims, stiles and rails; no gaps or flipped faces at the joints."
+ },
+ {
+  "file": "geo_lattice_after.jpg",
+  "round": "2b",
+  "topic": "geometry",
+  "caption": "Geometry after. Close lattice: rounded bars, rims, stiles and rails; no gaps or flipped faces at the joints."
+ },
+ {
+  "file": "geo_lattice2_before.jpg",
+  "round": "2b",
+  "topic": "geometry",
+  "caption": "Geometry before. Main hall front: door stiles, rails and window members rounded."
+ },
+ {
+  "file": "geo_lattice2_after.jpg",
+  "round": "2b",
+  "topic": "geometry",
+  "caption": "Geometry after. Main hall front: door stiles, rails and window members rounded."
+ },
+ {
+  "file": "pt_ch-inner.jpg",
+  "round": "2b",
+  "topic": "check",
+  "caption": "Path-traced preview of the inner court with the red, ridge and geometry changes: it agrees with the Lumen view."
+ },
+ {
+  "file": "pt_gallery2.jpg",
+  "round": "2b",
+  "topic": "check",
+  "caption": "Path-traced preview of the gallery: the rounded edges and the deeper red under oil."
+ },
+ {
+  "file": "night_sky_base.jpg",
+  "round": "2b",
+  "topic": "night",
+  "caption": "Night sky at 21:30, unchanged: the Milky Way map's dense point stars shimmer as noise, and the grey slab above the hall is geometry beyond it lit by the atmosphere's haze."
+ },
+ {
+  "file": "night_sky_noatmos.jpg",
+  "round": "2b",
+  "topic": "night",
+  "caption": "Diagnosis: with the sky atmosphere off the grey slab turns black (it is distant geometry catching the haze); the speckle stays (it is the star texture)."
+ },
+ {
+  "file": "night_sky_mipbias2.jpg",
+  "round": "2b",
+  "topic": "night",
+  "caption": "Diagnosis: a texture mip bias smooths the speckle, so it is the 8K Milky Way texture undersampled; the fix is in its material and texture, not the scene."
+ }
+]
