@@ -248,7 +248,7 @@ namespace ChenghuaiGardenBuild
 		H.PurlinV = {0.0, 1.15, 1.625, 2.125, 2.6, 3.75};
 		H.Rise = {0.5, 0.75, 0.0, -0.75, -0.5};
 		H.bRolled = true; H.Tiles = ChenghuaiRoof::ETiles::He; H.Ridge = ERidge::Rolled;
-		H.bBackWall = true; H.BackWallV0 = 3.6; H.BackWallV1 = 3.9; H.bSealedBack = false; H.EaveFront = 0.8; H.EaveBack = 0.7;
+		H.bBackWall = true; H.BackWallV0 = 3.6; H.BackWallV1 = 3.9; H.bSealedBack = false; H.EaveFront = 0.96; H.EaveBack = 0.84;
 		H.Bays = {EBay::Doors, EBay::DoorsOpen, EBay::Doors};
 		// Its 长窗 in the gardens' own lattice: cracked ice in the side bays, the lantern (灯景) in the open middle one.
 		H.Lattice = int32(ELattice::IceCrack); H.LatticeOpenBay = int32(ELattice::Lantern);
@@ -269,7 +269,7 @@ namespace ChenghuaiGardenBuild
 		H.PurlinV = {0.0, 1.05, 1.75, 2.8};
 		H.Rise = {0.55, 0.0, -0.55};
 		H.bRolled = true; H.Tiles = ChenghuaiRoof::ETiles::He; H.Ridge = ERidge::Rolled;
-		H.bBackWall = false; H.bSealedBack = false; H.bBackColumns = true; H.EaveFront = 0.75; H.EaveBack = 0.1;
+		H.bBackWall = false; H.bSealedBack = false; H.bBackColumns = true; H.EaveFront = 0.9; H.EaveBack = 0.1;
 		H.Bays = {EBay::Open};
 		H.bPainted = false; H.bRafterEnds = false; H.TimberPart = CB::Chestnut; H.FloorPart = CB::BlueStone; H.PlatformPart = CB::BlueStone;
 		H.PlatformFront = -0.3; H.PlatformBack = 3.1; H.PlatformU0 = -0.05; H.PlatformU1 = 4.55;
