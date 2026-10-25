@@ -167,7 +167,7 @@ def brick(key, rough, colour, weather=True):
                     photo=(key, dict(contrast=1.0, normal=1.0, rough_influence=0.7)), switches=MAT.MACRO)
 
 
-def floor_tile(size, colour, rough, coat, joint, coat_rough=0.3):
+def floor_tile(size, colour, rough, coat, joint, coat_rough=0.3, normal=0.7):
     """Square floor bricks (方砖): ground smooth, laid on the square with fine joints; the hall's soaked in tung oil."""
     s = MAT.merged(MAT.QUIET_DRAWN, MAT.STONE_FLOOR, StrataAmount=0.0, PoreAmount=0.1, PoreSize=0.004, VeinAmount=0.0,
                    CourseHeight=size, BlockLength=size, FloorSlab=size, FloorAspect=1.0, FloorStagger=0.0, WallJoints=1.0,
@@ -175,7 +175,7 @@ def floor_tile(size, colour, rough, coat, joint, coat_rough=0.3):
                    RoughnessVariation=0.07, ClearCoat=coat, ClearCoatRoughness=coat_rough, SlabTilt=0.2, TrafficWear=0.9, RoughWear=0.12,
                    Specular=0.5)
     return MAT.spec("M_Ch_Stone", s, {"BaseColor": lin(colour)},
-                    photo=("K1", dict(block_shift=1.0, contrast=0.9, normal=0.7, rough_influence=0.5)), switches=MAT.MACRO)
+                    photo=("K1", dict(block_shift=1.0, contrast=0.9, normal=normal, rough_influence=0.5)), switches=MAT.MACRO)
 
 
 def paint(colour, rough, coat, coat_rough=0.2, outdoor=True):
@@ -228,8 +228,9 @@ def specs():
                                 photo=("S3", dict(block_shift=1.0, contrast=0.8, normal=0.8, rough_influence=0.5)), switches=MAT.MACRO)
     # ---- Floors: 尺七方砖 soaked in tung oil (the hall, the ear rooms); 尺四 ground-jointed (the rest); the courts' paving
     #      (photographed: moss and dirt in its joints); city bricks on edge for the paths.
-    # (The hall's oiled 金砖 hold dark, near-mirror reflections in life: under Lumen's 0.45 trace cut-off, a real coat of oil.)
-    out["FloorLarge"] = floor_tile(0.54, 0x4F5153, 0.30, 0.6, 0.0015, coat_rough=0.12)
+    # (The hall's oiled 金砖 hold dark, near-mirror reflections in life: the Salon's polished floor's coat (0.85 at 0.08), the
+    # bricks' relief halved under it. A coat of 0.6 at 0.12 over the full relief only smeared the reflections.)
+    out["FloorLarge"] = floor_tile(0.54, 0x4F5153, 0.28, 0.85, 0.0015, coat_rough=0.07, normal=0.35)
     out["FloorSmall"] = floor_tile(0.45, 0x585B5C, 0.64, 0.0, 0.002)
     court = MAT.merged(NJ, UB, StrataAmount=0.0, PoreAmount=0.0, BlockTone=0.0, MacroScale=4.0, MacroVariation=0.08, Roughness=0.82,
                        RoughnessVariation=0.06, ClearCoat=0.0, TrafficWear=0.6, RoughWear=0.08, Specular=0.5, Waviness=0.12, WaveScale=0.7,
@@ -255,10 +256,10 @@ def specs():
                               {"BaseColor": lin(0x2A2A22)}, photo=("G5", dict(contrast=0.8, normal=0.7, rough_influence=0.4)))
     # ---- Timber: iron-oxide red (铁红) on the lime-and-hemp ground, green and black lacquer (all crazed, oiled), waxed nanmu,
     #      chestnut lacquer.
-    # (The tung oil's gloss reflects the courts and the sky, as on the columns of a real hall: a coat of 0.3-0.55 at 0.12-0.2 read matt.)
-    out["RedLacquer"] = paint(0x64251F, 0.52, 0.6, 0.10)
-    out["GreenLacquer"] = paint(0x284A3D, 0.5, 0.6, 0.10)
-    out["BlackLacquer"] = paint(0x161310, 0.42, 0.65, 0.08)
+    # (Old tung oil is a satin, not a mirror: a coat of 0.6 at 0.10 turned the red pink and milky, plastic in the path tracer.)
+    out["RedLacquer"] = paint(0x64251F, 0.52, 0.4, 0.15)
+    out["GreenLacquer"] = paint(0x284A3D, 0.5, 0.45, 0.15)
+    out["BlackLacquer"] = paint(0x161310, 0.42, 0.6, 0.1)
     # 楠木, waxed, never painted: golden brown, a fine straight grain (CH_NANMU along each member), the silk of its
     # interlocked grain in the wax's anisotropic sheen (Chatoyance), F0 0.036.
     out["Nanmu"] = MAT.spec("M_Ch_Wood", MAT.merged(MAT.OAK_BOARDS, Roughness=0.36, BoardWidth=0.18, BoardTone=0.05, BoardHue=0.015, BoardJoint=0.1,
