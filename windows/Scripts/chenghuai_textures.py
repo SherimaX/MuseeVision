@@ -31,12 +31,12 @@ FONT = "C:/Windows/Fonts/simkai.ttf"
 
 # The palette (aged mineral pigments, sRGB): a scholar's house, restrained (the renderings' dark green and slate beams),
 # the pigments sixty years faded and dusted, not a palace's fresh blue and green.
-BLUE = (28, 52, 82)         # azurite, a deep blue (round 6: bluer, the references' azurite against the malachite)
+BLUE = (22, 44, 76)         # azurite, a deep blue (round 8: deeper still, the references' azurite in sun)
 BLUE_L = (78, 100, 112)
-GREEN = (26, 68, 58)        # malachite, dark (round 7: more saturated, the references' deep blue-green)
+GREEN = (18, 56, 54)        # malachite, a deep teal (round 8: the references' blue-green, not mint, in sun)
 GREEN_L = (84, 116, 100)
 RED = (112, 50, 40)         # iron red (铁红) / 章丹, dulled: accents only since round 4
-GOLD = (162, 132, 76)       # ochre-gold linework (matt), thin lines only
+GOLD = (178, 136, 48)       # leaf gold over raised putty lines (沥粉贴金, round 8): saturated, so M_Ch_Stone's Inlay makes it metal
 BLACK = (24, 22, 20)
 WHITE = (214, 208, 192)     # the linework's white, dusted
 CREAM = (220, 208, 180)
@@ -320,6 +320,23 @@ def rafter_heads(seed):
     return row6, row7
 
 
+def raised_gold(img):
+    """沥粉贴金 (round 8): the gold lines stand on raised putty. The beams' material makes the gold metal (Inlay); the
+    relief is drawn into the paint as a painter's light would fall on it: a lit edge up and left of each gold line, a
+    soft shadow down and right, so the lines read proud from the court."""
+    import numpy as np
+    a = np.asarray(img, np.float32)
+    r, b = a[..., 0], a[..., 2]
+    gold = np.clip(((r - b) / np.maximum(r, 5.0) - 0.5) * 6.0, 0, 1) * (r > 90)
+    g = Image.fromarray((gold * 255).astype(np.uint8)).filter(ImageFilter.GaussianBlur(1.0))
+    m = np.asarray(g, np.float32) / 255.0
+    sh = np.roll(np.roll(m, 3, 0), 3, 1) - m          # down-right of the line, off it
+    hi = np.roll(np.roll(m, -2, 0), -2, 1) - m        # up-left
+    sh = np.clip(sh, 0, 1)[..., None]; hi = np.clip(hi, 0, 1)[..., None]
+    a = a * (1.0 - 0.55 * sh) + (255.0 - a) * 0.25 * hi
+    return Image.fromarray(np.clip(a, 0, 255).astype(np.uint8))
+
+
 def make_suhua():
     crops = landscape_crops()
     rows = []
@@ -332,6 +349,7 @@ def make_suhua():
     atlas = Image.new("RGB", (4096, 4096))
     for i, r in enumerate(rows):
         atlas.paste(r, (0, 512 * i))
+    atlas = raised_gold(atlas)
     p = os.path.join(OUT, "T_ch_suhua.png")
     atlas.save(p)
     print("wrote", p)
