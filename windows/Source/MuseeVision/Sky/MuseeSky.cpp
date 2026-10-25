@@ -217,7 +217,20 @@ void AMuseeSky::UpdateMoonAndStars(const FDateTime& Utc)
 	// The stars show at night, and always inside the Sphere.
 	const MuseeEphemeris::FSun RealSun = MuseeEphemeris::Sun(Utc, Observer);
 	const bool bNight = FMath::RadiansToDegrees(RealSun.Altitude) < -6.0;
-	if (!bSphereMode) { Sun->SetLightColor(SunColour(FMath::RadiansToDegrees(RealSun.Altitude))); }
+	if (!bSphereMode)
+	{
+		const double SunDegrees = FMath::RadiansToDegrees(RealSun.Altitude);
+		const FLinearColor Colour = SunColour(SunDegrees);
+		Sun->SetLightColor(Colour);
+		// The atmosphere scatters the sun's light colour too: a golden sun turned the sky and the haze teal. The sky and
+		// the aerial perspective (and so the sky light's capture) are given the colour's inverse, so they stay the day's
+		// blue while the sunlit surfaces turn golden; eased back to neutral through twilight (0° to -6°), the moon's.
+		const FLinearColor Day(FColor(0xFF, 0xF6, 0xEC));
+		const float Keep = static_cast<float>(FMath::SmoothStep(-6.0, 0.0, SunDegrees));
+		const FLinearColor Inverse(Day.R / Colour.R, Day.G / Colour.G, Day.B / Colour.B, 1.f);
+		Atmosphere->SetSkyAndAerialPerspectiveLuminanceFactor(
+			FLinearColor(FMath::Lerp(1.f, Inverse.R, Keep), FMath::Lerp(1.f, Inverse.G, Keep), FMath::Lerp(1.f, Inverse.B, Keep), 1.f));
+	}
 	Stars->SetVisibility(bNight || bSphereMode);
 
 	// The star mesh is built in the equatorial frame with y and z swapped (Unreal is
@@ -409,6 +422,7 @@ void AMuseeSky::UpdateJourneySky()
 	Sun->SetWorldRotation((-ToSun).Rotation());
 	Sun->SetIntensity(J.SunLux);
 	Sun->SetLightColor(J.SunTint);
+	Atmosphere->SetSkyAndAerialPerspectiveLuminanceFactor(FLinearColor::White);   // a journey's sky is its own
 	if (Sun->LightFunctionMaterial != J.LightFunction) { Sun->SetLightFunctionMaterial(J.LightFunction); }
 	const MuseeEphemeris::FMoon Moon = MuseeEphemeris::Moon(J.Utc, J.Observer);
 	MoonLight->SetWorldRotation((-Turn.RotateVector(Moon.Direction)).Rotation());
