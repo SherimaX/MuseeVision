@@ -124,6 +124,9 @@ public:
 	/** The idealised sun's direction of travel for a local hour (towards the clock). */
 	static FVector SunClockDirection(double LocalHour);
 
+	/** The sun's colour for the real sun's altitude (degrees): the day's warm white from 35° up, golden below. */
+	static FLinearColor SunColour(double AltitudeDegrees);
+
 private:
 	void BuildStars();
 	void UpdateSun(const FDateTime& Local);
