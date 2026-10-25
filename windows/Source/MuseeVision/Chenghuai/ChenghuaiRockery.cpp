@@ -181,6 +181,9 @@ namespace ChenghuaiRockery
 		const int32 N = Edge.Num();
 		double Carry = 0.0;
 		int32 Id = 0;
+		FVector2D Mid = FVector2D::ZeroVector;
+		for (const FVector2D& E : Edge) { Mid += E; }
+		Mid /= FMath::Max(1, N);
 		for (int32 i = 0; i < N; ++i)
 		{
 			const FVector2D A = Edge[i], B = Edge[(i + 1) % N];
@@ -190,21 +193,27 @@ namespace ChenghuaiRockery
 			{
 				const FVector2D P = A + (B - A) * (S / Len);
 				const FVector2D Along = (B - A) / Len;
-				// Two stacked stones: a broad one at the water, a smaller one over it, each an irregular outline.
-				for (int32 Layer = 0; Layer < 2; ++Layer)
+				// Stacked stones: a broad one at the water, a smaller one over it, and now and then a thin slab jutting out
+				// over the water (round 9: the references' banks are weathered, uneven and overhang; ours read as a
+				// clean ring of equal stones). Outlines rougher, sizes and heights more varied.
+				const FVector2D ToWater = (Mid - P).GetSafeNormal();
+				for (int32 Layer = 0; Layer < 3; ++Layer)
 				{
-					const double R = (Layer == 0 ? 0.42 : 0.3) * (0.8 + 0.4 * Kit::Hash01(Id, 1 + Layer));
+					if (Layer == 2 && Kit::Hash01(Id, 21) > 0.4) { continue; }
+					const double R = (Layer == 0 ? 0.46 : (Layer == 1 ? 0.32 : 0.36)) * (0.6 + 0.8 * Kit::Hash01(Id, 1 + Layer));
+					const FVector2D C = Layer == 2 ? P + ToWater * (0.22 + 0.15 * Kit::Hash01(Id, 23)) : P;
 					TArray<FVector2D> Outline;
-					const int32 NS = 7;
+					const int32 NS = 11;
 					const double Rot = Kit::Hash01(Id, 9 + Layer) * 6.28;
 					for (int32 k = 0; k < NS; ++k)
 					{
 						const double T = Rot + 6.2831853 * k / NS;
-						const double Rr = R * (0.7 + 0.45 * Kit::Hash01(Id * 13 + k, 3 + Layer));
-						Outline.Add(P + FVector2D(FMath::Cos(T) * Rr * 1.3, FMath::Sin(T) * Rr) .GetRotated(FMath::RadiansToDegrees(FMath::Atan2(Along.Y, Along.X))));
+						const double Rr = R * (0.55 + 0.7 * Kit::Hash01(Id * 13 + k, 3 + Layer));
+						Outline.Add(C + FVector2D(FMath::Cos(T) * Rr * 1.3, FMath::Sin(T) * Rr) .GetRotated(FMath::RadiansToDegrees(FMath::Atan2(Along.Y, Along.X))));
 					}
-					const double Z0 = Layer == 0 ? Water - 0.35 : Ground - 0.05;
-					const double Z1 = Layer == 0 ? Ground - 0.02 + 0.08 * Kit::Hash01(Id, 5) : Ground + 0.1 + 0.3 * Kit::Hash01(Id, 7);
+					double Z0 = Layer == 0 ? Water - 0.35 : Ground - 0.05;
+					double Z1 = Layer == 0 ? Ground - 0.06 + 0.16 * Kit::Hash01(Id, 5) : Ground + 0.05 + 0.45 * Kit::Hash01(Id, 7);
+					if (Layer == 2) { Z0 = Ground - 0.04 + 0.05 * Kit::Hash01(Id, 25); Z1 = Z0 + 0.09 + 0.06 * Kit::Hash01(Id, 27); }
 					if (Layer == 1 && Kit::Hash01(Id, 11) < 0.45) { continue; }   // not every stone has a second
 					Kit::Prism(Part, TEXT("Edge rock"), Outline, Z0, Z1, true);
 				}

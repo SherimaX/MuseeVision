@@ -301,7 +301,7 @@ namespace ChenghuaiHall
 				// The end through the eave column (round 7): a carved 霸王拳 head, the beam's end cut in three convex lobes
 				// seen from the side, in the rafters' blue-green; the painted beam runs from the column. (A painted box with
 				// a big medallion stuck out there and read as a floating crate.)
-				ChenghuaiPaint::Box(Out[CB::PaintedBeam], TEXT("Beam"), FLocal{H.L.Plan(U, 0.0), H.L.V, H.L.U}, -0.02, Vb, -0.5 * W, 0.5 * W, Top - Hb, Top, 4, 0.1, 0.9);
+				ChenghuaiPaint::RoundBox(Out[CB::PaintedBeam], TEXT("Beam"), FLocal{H.L.Plan(U, 0.0), H.L.V, H.L.U}, -0.02, Vb, -0.5 * W, 0.5 * W, Top - Hb, Top, 4, 0.1, 0.9, 0.03);
 				const double E = -0.02 - Va;   // the head's length past the column's line
 				TArray<FVector2D> O;            // (outward along -v from the column, up from the beam's foot)
 				O.Add(FVector2D(0.0, 0.0));
@@ -321,7 +321,7 @@ namespace ChenghuaiHall
 			}
 			if (H.bPainted)
 			{
-				ChenghuaiPaint::Box(Out[CB::PaintedBeam], TEXT("Beam"), FLocal{H.L.Plan(U, 0.0), H.L.V, H.L.U}, Va, Vb, -0.5 * W, 0.5 * W, Top - Hb, Top, 4, 0.1, 0.9);
+				ChenghuaiPaint::RoundBox(Out[CB::PaintedBeam], TEXT("Beam"), FLocal{H.L.Plan(U, 0.0), H.L.V, H.L.U}, Va, Vb, -0.5 * W, 0.5 * W, Top - Hb, Top, 4, 0.1, 0.9, 0.03);
 			}
 			else
 			{
@@ -623,7 +623,7 @@ namespace ChenghuaiHall
 				if (H.bPainted)
 				{
 					ChenghuaiPaint::Box(Out[CB::PaintedBeam], TEXT("Eave board"), L, A, B, -0.03, 0.03, G.Zc, BoardTop, Row, 0.0, 0.42);
-					ChenghuaiPaint::Box(Out[CB::PaintedBeam], TEXT("Eave lintel"), L, A, B, -0.5 * LintelT, 0.5 * LintelT, G.Zc - LintelH, G.Zc, Row, 0.42, 1.0);
+					ChenghuaiPaint::RoundBox(Out[CB::PaintedBeam], TEXT("Eave lintel"), L, A, B, -0.5 * LintelT, 0.5 * LintelT, G.Zc - LintelH, G.Zc, Row, 0.42, 1.0, 0.025);
 				}
 				else
 				{
@@ -680,7 +680,7 @@ namespace ChenghuaiHall
 					const double Zt = I != INDEX_NONE ? G.Seat[I] - SeatOver - 2.0 * Pr - 0.05 : G.Zc + 0.3;
 					if (H.bPainted)
 					{
-						ChenghuaiPaint::Box(Out[CB::PaintedBeam], TEXT("Inner lintel"), L, A, B, H.FacadeV - 0.5 * LintelT, H.FacadeV + 0.5 * LintelT, Zt - LintelH, Zt, 4, 0.1, 0.9);
+						ChenghuaiPaint::RoundBox(Out[CB::PaintedBeam], TEXT("Inner lintel"), L, A, B, H.FacadeV - 0.5 * LintelT, H.FacadeV + 0.5 * LintelT, Zt - LintelH, Zt, 4, 0.1, 0.9, 0.025);
 						ChenghuaiPaint::Box(Out[CB::PaintedBeam], TEXT("Inner board"), L, A, B, H.FacadeV - 0.03, H.FacadeV + 0.03, Zt, G.Seat[I != INDEX_NONE ? I : 1] - 2.0 * Pr + 0.02, 4, 0.1, 0.9);
 					}
 					else
@@ -699,7 +699,7 @@ namespace ChenghuaiHall
 					const double A = H.ColU[i], B = H.ColU[i + 1];
 					if (H.bPainted)
 					{
-						ChenghuaiPaint::Box(Out[CB::PaintedBeam], TEXT("Back lintel"), L, A, B, VBk - 0.5 * LintelT, VBk + 0.5 * LintelT, G.Zc - LintelH, G.Zc, 4, 0.1, 0.9);
+						ChenghuaiPaint::RoundBox(Out[CB::PaintedBeam], TEXT("Back lintel"), L, A, B, VBk - 0.5 * LintelT, VBk + 0.5 * LintelT, G.Zc - LintelH, G.Zc, 4, 0.1, 0.9, 0.025);
 					}
 					else
 					{
@@ -726,8 +726,8 @@ namespace ChenghuaiHall
 					if (H.bPainted)
 					{
 						const double TW = 0.6 * H.ColD, TH = 0.8 * H.ColD, TZ = G.Zc - 0.75;
-						ChenghuaiPaint::Box(Out[CB::PaintedBeam], TEXT("Tie"), FLocal{H.L.Plan(U, 0.0), H.L.V, H.L.U}, -0.05, H.PurlinV[A], -0.5 * TW, 0.5 * TW,
-											TZ - 0.5 * TH, TZ + 0.5 * TH, H.bBackColumns ? 4 : 5, 0.1, 0.9);   // a hall's short tie the fret row (round 7); a gallery's cross beam its framed panel (round 8)
+						ChenghuaiPaint::RoundBox(Out[CB::PaintedBeam], TEXT("Tie"), FLocal{H.L.Plan(U, 0.0), H.L.V, H.L.U}, -0.05, H.PurlinV[A], -0.5 * TW, 0.5 * TW,
+											TZ - 0.5 * TH, TZ + 0.5 * TH, H.bBackColumns ? 4 : 5, 0.1, 0.9, 0.02);   // a hall's short tie the fret row (round 7); a gallery's cross beam its framed panel (round 8)
 					}
 					else
 					{
@@ -997,25 +997,34 @@ namespace ChenghuaiHall
 				const double TrayHalf = ChenghuaiTune::Num(TEXT("tail.TrayHalf"), 0.30), PlateHalf = ChenghuaiTune::Num(TEXT("tail.PlateHalf"), 0.24);
 				const double TailLen = ChenghuaiTune::Num(TEXT("tail.Length"), 0.85);
 				const double TailRise = ChenghuaiTune::Num(TEXT("tail.Rise"), 0.35), TailCurl = ChenghuaiTune::Num(TEXT("tail.Curl"), 0.42);
-				const double TailTip = ChenghuaiTune::Num(TEXT("tail.Tip"), 0.45);
-				const double TailW = ChenghuaiTune::Num(TEXT("tail.Width"), 0.08), TailH = ChenghuaiTune::Num(TEXT("tail.Height"), 0.08);
+				const double TailTip = ChenghuaiTune::Num(TEXT("tail.Tip"), 0.62);
+				const double TailW = ChenghuaiTune::Num(TEXT("tail.Width"), 0.11), TailH = ChenghuaiTune::Num(TEXT("tail.Height"), 0.12);
 				for (const int32 End : {0, 1})
 				{
 					const double UE = End == 0 ? A + Inset : B - Inset;
 					const double Out1 = End == 0 ? -1.0 : 1.0;
 					Kit::LRoundBox(Out[CB::Ridges], TEXT("Tail tray"), L, UE - TrayHalf, UE + TrayHalf, G.RidgeV - 0.165, G.RidgeV + 0.165, ZR + 0.40, ZR + 0.45, 0.012);
 					Kit::LRoundBox(Out[CB::Ridges], TEXT("Tail plate"), L, UE - PlateHalf, UE + PlateHalf, G.RidgeV - 0.13, G.RidgeV + 0.13, ZR + 0.45, ZR + 0.51, 0.025);
+					// (Round 9: the scroll sits on stepped courses of carved brick, as the references': two more, each a
+					// little shorter and narrower, rising under the tail's root.)
+					for (int32 c = 0; c < 2; ++c)
+					{
+						const double Hc = 0.05, In = 0.05 * (c + 1);
+						const double Z0c = ZR + 0.51 + Hc * c;
+						const double Ua = End == 0 ? UE - PlateHalf + In : UE - PlateHalf + 0.5 * In, Ub = End == 0 ? UE + PlateHalf - 0.5 * In : UE + PlateHalf - In;
+						Kit::LRoundBox(Out[CB::Ridges], TEXT("Tail course"), L, Ua, Ub, G.RidgeV - 0.12 + 0.02 * c, G.RidgeV + 0.12 - 0.02 * c, Z0c, Z0c + Hc, 0.018);
+					}
 					// The tail rises outward, then curls back over itself into a scroll (卷尾) as the references' (round 5: it
 					// ended in a point, a horn): the rising run, then a spiral turning up and back towards the ridge, its
 					// radius closing from Scroll to a third over ScrollTurn degrees.
-					const double Scroll = ChenghuaiTune::Num(TEXT("tail.Scroll"), 0.13), ScrollTurn = ChenghuaiTune::Num(TEXT("tail.ScrollTurn"), 300.0);
+					const double Scroll = ChenghuaiTune::Num(TEXT("tail.Scroll"), 0.19), ScrollTurn = ChenghuaiTune::Num(TEXT("tail.ScrollTurn"), 300.0);
 					constexpr int32 Rise = 10, Curl = 18;
 					const int32 Steps = Rise + (Scroll > 0.005 ? Curl : 0);
 					TArray<FVector2D> SZ;   // (outward, up)
 					for (int32 k = 0; k <= Rise; ++k)
 					{
 						const double T = double(k) / Rise;
-						SZ.Add(FVector2D(0.02 + TailLen * T, 0.47 + TailRise * T + TailCurl * T * T));
+						SZ.Add(FVector2D(0.02 + TailLen * T, 0.57 + TailRise * T + TailCurl * T * T));   // (round 9: from the top course)
 					}
 					if (Scroll > 0.005)
 					{

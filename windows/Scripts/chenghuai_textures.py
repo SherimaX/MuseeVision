@@ -136,7 +136,7 @@ def scroll_clasp(d, cx, y0, y1, colour, flip):
     """A scrollwork clasp (卡子, round 6): two pairs of thin C-scrolls curling away from a short stem, gold as outline
     only; the old heavy clasp read as a printed logo."""
     h = y1 - y0
-    w = max(2, int(h * 0.025))
+    w = max(3, int(h * 0.045))   # (round 9: bolder, to read at the court's distance)
     cy = 0.5 * (y0 + y1)
     for sx in (-1, 1):
         for sy in (-1, 1):
@@ -201,8 +201,8 @@ def hoop(d, x0, x1, H, main, other, flip=False):
         xa, xb = (x0 + w * a, x0 + w * b) if not flip else (x1 - w * b, x1 - w * a)
         d.rectangle([xa, 0, xb, H], fill=c)
     beads(d, x0 + w * 0.4, 16, x0 + w * 0.6, H - 16, 11, WHITE, lerp(main, WHITE, 0.4))
-    for x in (x0 + w * 0.1, x0 + w * 0.9):
-        d.line([(x, 0), (x, H)], fill=GOLD, width=3)
+    for x in (x0 + w * 0.1, x0 + w * 0.9, x0 + w * 0.34, x0 + w * 0.66):
+        d.line([(x, 0), (x, H)], fill=GOLD, width=7)
 
 
 def wrapper(img, cx, pw, ph, crop, ground, other):
@@ -210,8 +210,8 @@ def wrapper(img, cx, pw, ph, crop, ground, other):
     ink landscape inside."""
     W, H = img.size
     d = ImageDraw.Draw(img)
-    rings = [(18, BLACK), (16, other), (12, lerp(other, WHITE, 0.3)), (10, lerp(other, WHITE, 0.55)),
-             (8, lerp(other, WHITE, 0.8)), (6, GOLD)]
+    rings = [(18, BLACK), (14, GOLD), (14, other), (12, lerp(other, WHITE, 0.3)), (10, lerp(other, WHITE, 0.55)),
+             (8, lerp(other, WHITE, 0.8)), (14, GOLD)]
     grow = sum(r for r, _ in rings) + 22
     d.pieslice([cx - pw / 2 - grow, -ph - grow, cx + pw / 2 + grow, ph + grow], 0, 180, fill=lerp(ground, BLACK, 0.3))
     off = grow
@@ -242,9 +242,9 @@ def beam_row(style, crop, seed, band_top=0.42):
     d = ImageDraw.Draw(img)
     board_h = int(H * band_top)
     d.rectangle([0, 0, W, board_h], fill=lerp(other, BLACK, 0.15))
-    fret(d, 0, 14, W, board_h - 14, board_h - 28, lerp(other, WHITE, 0.22), 5)
+    fret(d, 0, 14, W, board_h - 14, board_h - 28, GOLD, 7)   # (round 9: the board's fret in gold, as the references' dense gilt)
     brocade(d, 0, board_h + 18, W, H - 18, 30, lerp(lintel_col, WHITE, 0.16), lerp(GOLD, BLACK, 0.25))
-    for y, c, wd in ((board_h + 3, BLACK, 4), (board_h + 9, WHITE, 4), (H - 11, WHITE, 4), (H - 4, BLACK, 4), (4, BLACK, 4), (board_h - 6, GOLD, 3)):
+    for y, c, wd in ((board_h + 3, BLACK, 4), (board_h + 10, GOLD, 8), (H - 12, GOLD, 8), (H - 4, BLACK, 4), (4, BLACK, 4), (board_h - 7, GOLD, 7)):
         d.line([(0, y), (W, y)], fill=c, width=wd)
     band = int(W * 0.07)
     hoop(d, 0, band, H, lintel_col, other)
@@ -285,7 +285,7 @@ def purlin_row(seed):
     W, H = 2970, 512
     img = Image.new("RGB", (W, H), BLUE)
     d = ImageDraw.Draw(img)
-    fret(d, 0, 30, W, H - 30, 112, lerp(BLUE, WHITE, 0.2), 6)
+    fret(d, 0, 30, W, H - 30, 112, GOLD, 8)
     hoop(d, 0, 150, H, GREEN, BLUE)
     hoop(d, W - 150, W, H, GREEN, BLUE, flip=True)
     return age(img, seed, dust=0.05, fade=0.02).resize((4096, 512), Image.LANCZOS)

@@ -32,6 +32,11 @@ namespace ChenghuaiPaint
 	void Box(FPart& Part, const FString& Name, const FLocal& L, double U0, double U1, double V0, double V1, double Z0, double Z1,
 			 int32 Row, double B0 = 0.0, double B1 = 1.0);
 
+	/** As Box with its four long arrises rounded (radius Arris, round 9: the references' eased beams), the underside
+	 *  painted with the row's band across its width when bPaintedUnder (a soffit seen from below), else the plain row. */
+	void RoundBox(FPart& Part, const FString& Name, const FLocal& L, double U0, double U1, double V0, double V1, double Z0, double Z1,
+				  int32 Row, double B0, double B1, double Arris, bool bPaintedUnder = true);
+
 	/** A painted round member A → B (a purlin): the row's band round it, repeated every Repeat metres along it. */
 	void Rod(FPart& Part, const FString& Name, const FVector& A, const FVector& B, double R, int32 Segments, int32 Row, double Repeat);
 
