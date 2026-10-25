@@ -1,0 +1,90 @@
+{
+ "hour": 15.75,
+ "note": "Round 4: new 苏式 beam painting, matt beam material, green deciduous trees, low shrubs. Sheets: round 3 | round 4 | reference.",
+ "views": [
+  {
+   "file": "01_gate-outside.jpg",
+   "sheet": "sheets/01_gate-outside.jpg"
+  },
+  {
+   "file": "02_gate-inside.jpg",
+   "sheet": "sheets/02_gate-inside.jpg"
+  },
+  {
+   "file": "03_chuihua-gate.jpg",
+   "sheet": "sheets/03_chuihua-gate.jpg"
+  },
+  {
+   "file": "04_court-south.jpg",
+   "sheet": "sheets/04_court-south.jpg"
+  },
+  {
+   "file": "05_court-north.jpg",
+   "sheet": "sheets/05_court-north.jpg"
+  },
+  {
+   "file": "06_hall-front.jpg",
+   "sheet": "sheets/06_hall-front.jpg"
+  },
+  {
+   "file": "07_hall-three-quarter.jpg",
+   "sheet": "sheets/07_hall-three-quarter.jpg"
+  },
+  {
+   "file": "08_ridge-end.jpg",
+   "sheet": "sheets/08_ridge-end.jpg"
+  },
+  {
+   "file": "09_eave.jpg",
+   "sheet": "sheets/09_eave.jpg"
+  },
+  {
+   "file": "10_side-hall-east.jpg",
+   "sheet": "sheets/10_side-hall-east.jpg"
+  },
+  {
+   "file": "11_side-hall-west.jpg",
+   "sheet": "sheets/11_side-hall-west.jpg"
+  },
+  {
+   "file": "12_gallery.jpg",
+   "sheet": "sheets/12_gallery.jpg"
+  },
+  {
+   "file": "13_lattice-window.jpg",
+   "sheet": "sheets/13_lattice-window.jpg"
+  },
+  {
+   "file": "14_door-leaf.jpg",
+   "sheet": "sheets/14_door-leaf.jpg"
+  },
+  {
+   "file": "15_column-base-floor.jpg",
+   "sheet": "sheets/15_column-base-floor.jpg"
+  },
+  {
+   "file": "16_hall-interior.jpg",
+   "sheet": "sheets/16_hall-interior.jpg"
+  },
+  {
+   "file": "17_garden-pond.jpg",
+   "sheet": "sheets/17_garden-pond.jpg"
+  },
+  {
+   "file": "18_rockery.jpg",
+   "sheet": "sheets/18_rockery.jpg"
+  },
+  {
+   "file": "19_from-pavilion.jpg",
+   "sheet": "sheets/19_from-pavilion.jpg"
+  },
+  {
+   "file": "20_shixiong-pond.jpg",
+   "sheet": "sheets/20_shixiong-pond.jpg"
+  },
+  {
+   "file": "21_back-garden.jpg",
+   "sheet": "sheets/21_back-garden.jpg"
+  }
+ ]
+}
