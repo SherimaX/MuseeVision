@@ -249,8 +249,10 @@ def specs():
                                    {"BaseColor": lin(0x49492F)}, photo=("CH_MOSSGROUND", dict(contrast=1.0, normal=1.0, rough_influence=0.5)))
     rock = MAT.merged(NJ, UB, StrataAmount=0.0, PoreAmount=0.0, BlockTone=0.0, MacroScale=2.5, MacroVariation=0.14, Roughness=0.84, ClearCoat=0.0,
                       Specular=0.55, RainStreaks=0.35, SplashZone=0.25, MossCover=0.42, MossUp=1.0, MossFoot=0.8, DustUp=0.0)
+    # (Tuned live 2026-10-25: rock_boulder_dry read flat and washed at 0.6 / 1.1 / 1.0; more of its colour, contrast and
+    # relief bring out the water-worn pits. The standing rock below likewise.)
     out["Rockery"] = MAT.spec("M_Ch_StoneRelief", rock, {"BaseColor": lin(0x6D6C68)},
-                              photo=("CH_TAIHU", dict(colour_amount=0.6, contrast=1.1, normal=1.0, rough_influence=0.5, relief_cm=3.0)))
+                              photo=("CH_TAIHU", dict(colour_amount=0.75, contrast=1.35, normal=1.4, rough_influence=0.5, relief_cm=3.0)))
     out["PondBed"] = MAT.spec("M_Stone", MAT.merged(NJ, UB, StrataAmount=0.0, PoreAmount=0.0, BlockTone=0.0, MacroVariation=0.1, Roughness=0.45,
                                                    ClearCoat=0.0, Specular=0.5),
                               {"BaseColor": lin(0x2A2A22)}, photo=("G5", dict(contrast=0.8, normal=0.7, rough_influence=0.4)))
@@ -301,8 +303,11 @@ def specs():
     #      give the layout), their lime bed, the ridges' darker brick.
     roof = MAT.merged(NJ, UB, StrataAmount=0.0, PoreAmount=0.06, PoreSize=0.003, BlockTone=0.0, MacroScale=3.0, MacroVariation=0.14, Roughness=0.82,
                       RoughnessVariation=0.08, ClearCoat=0.0, Specular=0.5, DustUp=0.0, MossCover=0.09, MossUp=0.4, MossFoot=0.0)
-    out["Tiles"] = MAT.spec("M_Ch_Stone", roof, {"BaseColor": lin(0x4D4F4D)},
-                            photo=("CH_ROOFCLAY", dict(colour_amount=0.55, contrast=0.9, normal=0.7, rough_influence=0.6)))
+    # (Tuned live 2026-10-25: 0x4D4F4D read paler than the brick walls, near white where a roof is seen at a grazing
+    # angle; now a darker blue-grey, rougher and drier (less specular, the photograph's polish damped), with the
+    # photograph's contrast and relief lowered, which also hides the faint rows left in CH_ROOFCLAY.)
+    out["Tiles"] = MAT.spec("M_Ch_Stone", MAT.merged(roof, Roughness=0.92, Specular=0.3), {"BaseColor": lin(0x373A3C)},
+                            photo=("CH_ROOFCLAY", dict(colour_amount=0.55, contrast=0.75, normal=0.4, rough_influence=0.3)))
     out["RoofMortar"] = MAT.spec("M_Ch_Plaster", {"Roughness": 0.93, "Variation": 0.06, "GrainAmount": 0.04, "RainStreaks": 0.2},
                                  {"BaseColor": lin(0x8A877F)}, photo=("CH_LIME", dict(colour_amount=0.5, normal=0.6, rough_influence=0.3)))
     out["Ridges"] = MAT.spec("M_Ch_Stone", MAT.merged(roof, MossCover=0.06, RainStreaks=0.1), {"BaseColor": lin(0x484A48)},
@@ -310,7 +315,7 @@ def specs():
     # ---- 石兄: the standing Taihu rock (AMuseeTaihuRock's mesh, its RockMaterial): the same photographed limestone, paler
     #      where the rain washes it, dark in its hollows and streaks, moss on its ledges.
     out["Taihu"] = MAT.spec("M_Ch_Stone", MAT.merged(rock, RainStreaks=0.4, MossCover=0.3), {"BaseColor": lin(0x7E7C76)},
-                            photo=("CH_TAIHU", dict(colour_amount=0.85, contrast=1.1, normal=1.0, rough_influence=0.5)))
+                            photo=("CH_TAIHU", dict(colour_amount=0.85, contrast=1.3, normal=1.3, rough_influence=0.5)))
     return out
 
 
