@@ -450,6 +450,13 @@ TREES = [
     ("Garden_Osmanthus_2", (5.1, -37.9), "OSMANTHUS", dict(tree_height=3.4, crown_height=2.2, crown_radii=(1.2, 1.1)), 710),
     ("Garden_Osmanthus_3", (13.4, -32.9), "OSMANTHUS", dict(tree_height=4.8, crown_height=3.2, crown_radii=(2.1, 1.7)), 711),
     ("Garden_Crabapple", (6.8, -22.3), "ORCHARD_FRUIT", dict(fruit_variant=1, tree_height=4.2, crown_height=3.0, crown_radii=(1.7, 1.2)), 712),
+    # (Round 4: low evergreen shrubs at the rockery's foot and by the garden walls, the references' dark green under the
+    # stone: young osmanthus kept low and dense.)
+    ("Shrub_Rockery_1", (2.2, -27.4), "OSMANTHUS", dict(tree_height=1.5, crown_height=1.2, crown_radii=(0.8, 0.7), leaf_density=1.6), 713),
+    ("Shrub_Rockery_2", (8.6, -25.6), "OSMANTHUS", dict(tree_height=1.3, crown_height=1.0, crown_radii=(0.7, 0.6), leaf_density=1.6), 714),
+    ("Shrub_Rockery_3", (4.6, -31.0), "OSMANTHUS", dict(tree_height=1.6, crown_height=1.3, crown_radii=(0.9, 0.7), leaf_density=1.6), 715),
+    ("Shrub_Wall_1", (16.2, -48.0), "OSMANTHUS", dict(tree_height=1.8, crown_height=1.4, crown_radii=(0.9, 0.8), leaf_density=1.6), 716),
+    ("Shrub_Wall_2", (3.6, -56.8), "OSMANTHUS", dict(tree_height=1.5, crown_height=1.2, crown_radii=(0.8, 0.7), leaf_density=1.6), 717),
 ]
 BAMBOO_CLUMPS = {
     "East": [(15.87, -44.6), (16.05, -42.28), (15.8, -45.08), (15.8, -40.54), (15.95, -41.74), (15.69, -43.12), (16.07, -40.35), (16.0, -44.8),
@@ -467,6 +474,9 @@ ROCK = (5.3, -54.3)       # 石兄: 3 m inside the moon gate, on its axis (Garde
 WATER = -0.28
 
 
+LATE_GREEN = {"ORCHARD_FRUIT": 10, "CHINESE_PLUM": 10}
+
+
 def plants(eas):
     import nature as N
     sp = N.Spawner(True)
@@ -476,6 +486,12 @@ def plants(eas):
         for k, v in props.items():
             p[k] = N.v2(*v) if isinstance(v, tuple) else v
         a = sp.spawn("MuseeTree", label, "Chenghuai", N.cm(x, y), p)
+        if a and species in LATE_GREEN:
+            # (Round 4: today's term (Shuangjiang) turned the crabapples and plums all yellow and orange, a Hall of Light
+            # orchard's autumn; the references' courts are green. The deciduous trees here hold late summer's leaves and
+            # fruit (term 10, Dashu: terms 12 on are autumn); the evergreens keep following the day.)
+            N.set_prop(a, "follow_today", False)
+            N.set_prop(a, "solar_term", LATE_GREEN[species])
         if a:
             a.tags = list(a.tags) + [unreal.Name(TAG)]
             n += 1
