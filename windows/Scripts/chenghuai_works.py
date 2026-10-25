@@ -469,7 +469,12 @@ BAMBOO_CLUMPS = {
                 (14.89, -60.63), (13.25, -60.65), (14.66, -59.99), (10.92, -60.47), (10.36, -60.64), (12.41, -60.81), (15.69, -60.74)],
 }
 LOTUS = [((7.6, -50.9), 0.9, 0.28), ((8.6, -49.8), 0.7, 0.0), ((6.8, -49.3), 0.8, 0.0), ((11.0, -41.5), 0.9, 0.3), ((9.8, -40.9), 0.7, 0.0),
-         ((11.8, -42.5), 0.6, 0.0)]
+         ((11.8, -42.5), 0.6, 0.0),
+         # (round 9: fuller stands, as the references' pond: more leaves and a few flowers)
+         ((7.9, -48.6), 0.75, 0.0), ((9.2, -50.6), 0.85, 0.25), ((6.3, -50.4), 0.6, 0.0), ((10.6, -42.9), 0.8, 0.0), ((12.4, -41.4), 0.7, 0.26),
+         ((9.3, -42.0), 0.6, 0.0), ((8.4, -51.6), 0.55, 0.0)]
+# The court's fish bowl (round 9): a few lotus leaves and one flower on its water, as reference 04.
+BOWL_LOTUS = [((-0.18, 0.12), 0.34, 0.0), ((0.2, -0.05), 0.3, 0.2), ((-0.05, -0.22), 0.26, 0.0), ((0.12, 0.25), 0.22, 0.0)]
 ROCK = (5.3, -54.3)       # 石兄: 3 m inside the moon gate, on its axis (Garden board)
 WATER = -0.28
 
@@ -478,8 +483,8 @@ LATE_GREEN = {"ORCHARD_FRUIT": 10, "CHINESE_PLUM": 10}
 # (Round 5: the references' trees are older and darker, their crowns uneven in tone: each species' leaves tinted down
 # and cooled a little, each twig's leaves a shade of their own (AMuseeTree.LeafTint, LeafVariation); a breath of
 # difference per tree from its seed so no two crowns match.)
-LEAF_TINT = {"ORCHARD_FRUIT": (0.62, 0.66, 0.6), "CHINESE_PLUM": (0.66, 0.7, 0.62), "OSMANTHUS": (0.82, 0.86, 0.8)}
-LEAF_VARIATION = 0.28
+LEAF_TINT = {"ORCHARD_FRUIT": (0.56, 0.6, 0.54), "CHINESE_PLUM": (0.6, 0.64, 0.56), "OSMANTHUS": (0.76, 0.8, 0.74)}   # (round 9: a touch darker)
+LEAF_VARIATION = 0.38
 # The four beds of the inner court (as ChenghuaiHouse.cpp lays them, inside their kerbs): mondo grass (沿阶草), not lawn.
 COURT_BEDS = [(-13.66, -41.56, -10.74, -37.64), (-7.66, -41.56, -4.74, -37.64), (-13.66, -34.76, -10.74, -30.84), (-7.66, -34.76, -4.74, -30.84)]
 
@@ -540,6 +545,63 @@ def plants(eas):
     if a:
         a.tags = list(a.tags) + [unreal.Name(TAG)]
         n += 1
+    bowl = []
+    for (x, y), d, f in BOWL_LOTUS:
+        s_ = unreal.MuseeLilySpec()
+        N.set_prop(s_, "position", N.v2(x, y))
+        N.set_prop(s_, "radius", d / 2)
+        N.set_prop(s_, "flower", f > 0)
+        N.set_prop(s_, "flower_size", f)
+        bowl.append(s_)
+    a = sp.spawn("MuseeWaterLilies", "Bowl lotus", "Chenghuai", N.cm(AXIS, -36.2, 0.585),
+                 {"kind": N.enum("MuseeWaterPlant", "LOTUS"), "seed": 735, "plants": bowl})
+    if a:
+        a.set_actor_scale3d(unreal.Vector(1.0, 1.0, 0.4))                # the pads on the water, stalks low, as a bowl's
+        N.set_prop(a, "follow_today", False)
+        N.set_prop(a, "solar_term", 10)
+        a.tags = list(a.tags) + [unreal.Name(TAG)]
+        n += 1
+    # The hall's altar table (round 9, as reference 16): a celadon vase with a flowering branch at the west end, a
+    # scholar's rock on a stand at the east, a book box between; the table's top at HALL_F + 0.82.
+    try:
+        profiles = json.load(open(os.path.join(P.PROJECT_DIR, "SourceArt", "Textures", "ch_vessels.json"), encoding="utf-8"))
+        top = HALL_F + 0.82
+        vase = place_vessel(eas, profiles, "longquan", None, AXIS - 0.62, -49.75, top, stand=True)
+        vase.set_actor_scale3d(unreal.Vector(1.6, 1.6, 1.6))             # an altar vase, not a cabinet piece
+        vo, ve = vase.get_actor_bounds(False)
+        mouth = (vo.z + ve.z) / 100.0
+        twig = sp.spawn("MuseeTree", "Altar branch", "Chenghuai", N.cm(AXIS - 0.62, -49.75, mouth - 0.04),
+                        {"species": N.enum("MuseeTreeSpecies", "CHINESE_PLUM"), "seed": 760, "tree_height": 0.55,
+                         "crown_height": 0.3, "crown_radii": N.v2(0.32, 0.12), "leaf_density": 0.15})
+        if twig:
+            N.set_prop(twig, "follow_today", False)
+            N.set_prop(twig, "solar_term", 4)            # spring leaves just out on the bare branch
+            N.set_prop(twig, "block_visitors", False)
+            twig.tags = list(twig.tags) + [unreal.Name(TAG)]
+            n += 1
+        rock = sp.spawn("MuseeTaihuRock", "Altar rock", "Chenghuai", N.cm(AXIS + 0.6, -49.75, top + 0.03),
+                        {"seed": 761, "rock_material": f"{CH_MATS}/MI_Ch_Taihu.MI_Ch_Taihu"})
+        if rock:
+            o, e = rock.get_actor_bounds(False)
+            k = 0.26 / max(2 * e.z, 1.0) * 100.0
+            rock.set_actor_scale3d(unreal.Vector(k, k, k))
+            o, e = rock.get_actor_bounds(False)
+            loc = rock.get_actor_location()
+            rock.set_actor_location(unreal.Vector(loc.x, loc.y, loc.z - (o.z - e.z) + (top + 0.035) * 100.0 - loc.z), False, False)
+            rock.tags = list(rock.tags) + [unreal.Name(TAG)]
+            n += 1
+        base = mesh_actor(eas, unreal.load_asset("/Engine/BasicShapes/Cylinder"), cm(AXIS + 0.6, -49.75, top + 0.0175))
+        base.set_actor_scale3d(unreal.Vector(0.2, 0.14, 0.035))
+        base.set_actor_label("Altar rock stand")
+        base.tags = [unreal.Name(TAG), unreal.Name(WING)]
+        base.get_component_by_class(unreal.StaticMeshComponent).set_material(0, unreal.load_asset(f"{CH_MATS}/MI_Ch_BlackLacquer"))
+        box = mesh_actor(eas, unreal.load_asset("/Engine/BasicShapes/Cube"), cm(AXIS + 0.12, -49.78, top + 0.04))
+        box.set_actor_scale3d(unreal.Vector(0.26, 0.18, 0.08))
+        box.set_actor_label("Altar book box")
+        box.tags = [unreal.Name(TAG), unreal.Name(WING)]
+        box.get_component_by_class(unreal.StaticMeshComponent).set_material(0, unreal.load_asset(f"{CH_MATS}/MI_Ch_BlackLacquer"))
+    except Exception as ex:  # noqa: BLE001
+        warn(f"the altar table's things: {ex}")
     # The pond's banks: clumps of strap-leaved plants between the edge stones (as Suzhou's ponds have iris and sedge at
     # the water): the museum's orchid clumps, their pots sunk out of sight in the bank's earth. Not at the bridge's ends,
     # the water pavilion or the flower hall's terrace.
