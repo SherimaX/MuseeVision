@@ -571,11 +571,11 @@ def plants(eas):
         vo, ve = vase.get_actor_bounds(False)
         mouth = (vo.z + ve.z) / 100.0
         twig = sp.spawn("MuseeTree", "Altar branch", "Chenghuai", N.cm(AXIS - 0.62, -49.75, mouth - 0.04),
-                        {"species": N.enum("MuseeTreeSpecies", "CHINESE_PLUM"), "seed": 760, "tree_height": 0.55,
-                         "crown_height": 0.3, "crown_radii": N.v2(0.32, 0.12), "leaf_density": 0.15})
+                        {"species": N.enum("MuseeTreeSpecies", "CHINESE_PLUM"), "seed": 760, "tree_height": 0.6,
+                         "crown_height": 0.32, "crown_radii": N.v2(0.34, 0.1), "leaf_density": 0.3})
         if twig:
             N.set_prop(twig, "follow_today", False)
-            N.set_prop(twig, "solar_term", 4)            # spring leaves just out on the bare branch
+            N.set_prop(twig, "solar_term", 1)            # (round 10) a cut branch of plum blossom on the bare wood, as a scholar's vase holds; the leafy one read as a bonsai
             N.set_prop(twig, "block_visitors", False)
             twig.tags = list(twig.tags) + [unreal.Name(TAG)]
             n += 1
@@ -587,7 +587,7 @@ def plants(eas):
             rock.set_actor_scale3d(unreal.Vector(k, k, k))
             o, e = rock.get_actor_bounds(False)
             loc = rock.get_actor_location()
-            rock.set_actor_location(unreal.Vector(loc.x, loc.y, loc.z - (o.z - e.z) + (top + 0.035) * 100.0 - loc.z), False, False)
+            rock.set_actor_location(unreal.Vector(loc.x, loc.y, loc.z + (top + 0.035) * 100.0 - (o.z - e.z)), False, False)   # (round 10: it stood under the floor)
             rock.tags = list(rock.tags) + [unreal.Name(TAG)]
             n += 1
         base = mesh_actor(eas, unreal.load_asset("/Engine/BasicShapes/Cylinder"), cm(AXIS + 0.6, -49.75, top + 0.0175))
