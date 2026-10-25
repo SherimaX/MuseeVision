@@ -1,6 +1,7 @@
 #include "Chenghuai/ChenghuaiHall.h"
 
 #include "Chenghuai/ChenghuaiPaint.h"
+#include "Chenghuai/ChenghuaiTune.h"
 
 namespace ChenghuaiHall
 {
@@ -33,6 +34,13 @@ namespace ChenghuaiHall
 		constexpr double DoorHead = 2.55;        // the door frames' head rail (中槛), above the floor
 	}
 	using namespace HallDims;
+
+	/** The tunable numbers (ChenghuaiTune: Saved/Live/chenghuai.json in a -Live game; the defaults above otherwise). */
+	namespace HallTune
+	{
+		double EaveFront(const FHallSpec& H) { return ChenghuaiTune::Num(TEXT("hall.") + H.Name + TEXT(".EaveFront"), H.EaveFront); }
+		double EaveBack(const FHallSpec& H) { return ChenghuaiTune::Num(TEXT("hall.") + H.Name + TEXT(".EaveBack"), H.EaveBack); }
+	}
 
 	// ------------------------------------------------------------------------------------------------ the section
 
@@ -93,6 +101,7 @@ namespace ChenghuaiHall
 		double BackR = 0.0;               // the back round rafters' end (an open back)
 		HallCurve::FCurve Bed;
 		double PurlinR = 0.14;
+		double Flatten = FlyFlatten;      // tuned: eave.FlyFlatten
 
 		/** The rafters' top (the boarding's underside), straight purlin to purlin, on past the eave purlins. */
 		double RafterTop(double V) const
@@ -111,11 +120,11 @@ namespace ChenghuaiHall
 			if (!bBack)
 			{
 				const double S0 = (Seat[1] - Seat[0]) / (H->PurlinV[1] - H->PurlinV[0]);
-				return RafterTop(EaveR) + Board + S0 * FlyFlatten * (V - EaveR);
+				return RafterTop(EaveR) + Board + S0 * Flatten * (V - EaveR);
 			}
 			const int32 N = H->PurlinV.Num();
 			const double S1 = (Seat[N - 1] - Seat[N - 2]) / (H->PurlinV[N - 1] - H->PurlinV[N - 2]);
-			return RafterTop(BackR) + Board + S1 * FlyFlatten * (V - BackR);
+			return RafterTop(BackR) + Board + S1 * Flatten * (V - BackR);
 		}
 		/** The slab's underside: the boarding over the round rafters, the flying boarding past them. */
 		double Under(double V) const
@@ -143,13 +152,16 @@ namespace ChenghuaiHall
 		G.RidgeI = G.RidgeJ = Top;
 		if (H.bRolled && Top + 1 < N && FMath::Abs(G.Seat[Top + 1] - G.Seat[Top]) < 1e-6) { G.RidgeJ = Top + 1; }
 		G.RidgeV = 0.5 * (H.PurlinV[G.RidgeI] + H.PurlinV[G.RidgeJ]);
-		G.EaveF = H.PurlinV[0] - H.EaveFront;
-		G.EaveR = H.PurlinV[0] - H.EaveFront * EaveRatio;
-		if (H.bSealedBack && H.bBackWall) { G.BackEdge = H.BackWallV1 + H.EaveBack; G.BackR = G.BackEdge; }
+		G.Flatten = ChenghuaiTune::Num(TEXT("eave.FlyFlatten"), FlyFlatten);
+		const double Ratio = ChenghuaiTune::Num(TEXT("eave.EaveRatio"), EaveRatio);
+		const double Front = HallTune::EaveFront(H), Back = HallTune::EaveBack(H);
+		G.EaveF = H.PurlinV[0] - Front;
+		G.EaveR = H.PurlinV[0] - Front * Ratio;
+		if (H.bSealedBack && H.bBackWall) { G.BackEdge = H.BackWallV1 + Back; G.BackR = G.BackEdge; }
 		else
 		{
-			G.BackEdge = H.PurlinV[N - 1] + H.EaveBack;
-			G.BackR = H.PurlinV[N - 1] + H.EaveBack * EaveRatio;
+			G.BackEdge = H.PurlinV[N - 1] + Back;
+			G.BackR = H.PurlinV[N - 1] + Back * Ratio;
 		}
 		// The bed: knots at the eave's edge, the round rafters' end, each purlin (its rafters' top plus the build-up).
 		auto Add = [&G](double X, double Y) { G.Bed.X.Add(X); G.Bed.Y.Add(Y); };
@@ -857,24 +869,30 @@ namespace ChenghuaiHall
 				Kit::SweepSolid(Out[CB::Ridges], TEXT("Ridge"), Kit::RunFrames(G.P(A, G.RidgeV, ZR), G.P(B, G.RidgeV, ZR), L.V3()), P);
 				// The scorpion tails (蝎子尾): at each end, on two courses of carved brick (盘子 under 平草, their edges worn
 				// round), a tail of lime-bedded tiles rising outwards from 30° to nearly 60°, round in section, tapering to its tip.
+				const double Inset = ChenghuaiTune::Num(TEXT("tail.Inset"), 0.35);
+				const double TrayHalf = ChenghuaiTune::Num(TEXT("tail.TrayHalf"), 0.30), PlateHalf = ChenghuaiTune::Num(TEXT("tail.PlateHalf"), 0.24);
+				const double TailLen = ChenghuaiTune::Num(TEXT("tail.Length"), 0.6);
+				const double TailRise = ChenghuaiTune::Num(TEXT("tail.Rise"), 0.26), TailCurl = ChenghuaiTune::Num(TEXT("tail.Curl"), 0.24);
+				const double TailTip = ChenghuaiTune::Num(TEXT("tail.Tip"), 0.32);
+				const double TailW = ChenghuaiTune::Num(TEXT("tail.Width"), 0.055), TailH = ChenghuaiTune::Num(TEXT("tail.Height"), 0.05);
 				for (const int32 End : {0, 1})
 				{
-					const double UE = End == 0 ? A + 0.35 : B - 0.35;
+					const double UE = End == 0 ? A + Inset : B - Inset;
 					const double Out1 = End == 0 ? -1.0 : 1.0;
-					Kit::LRoundBox(Out[CB::Ridges], TEXT("Tail tray"), L, UE - 0.30, UE + 0.30, G.RidgeV - 0.165, G.RidgeV + 0.165, ZR + 0.40, ZR + 0.45, 0.012);
-					Kit::LRoundBox(Out[CB::Ridges], TEXT("Tail plate"), L, UE - 0.24, UE + 0.24, G.RidgeV - 0.13, G.RidgeV + 0.13, ZR + 0.45, ZR + 0.51, 0.025);
+					Kit::LRoundBox(Out[CB::Ridges], TEXT("Tail tray"), L, UE - TrayHalf, UE + TrayHalf, G.RidgeV - 0.165, G.RidgeV + 0.165, ZR + 0.40, ZR + 0.45, 0.012);
+					Kit::LRoundBox(Out[CB::Ridges], TEXT("Tail plate"), L, UE - PlateHalf, UE + PlateHalf, G.RidgeV - 0.13, G.RidgeV + 0.13, ZR + 0.45, ZR + 0.51, 0.025);
 					constexpr int32 Steps = 14;
 					TArray<FVector> Path;
 					for (int32 k = 0; k <= Steps; ++k)
 					{
 						const double T = double(k) / Steps;
-						Path.Add(G.P(UE + Out1 * (0.02 + 0.6 * T), G.RidgeV, ZR + 0.47 + 0.26 * T + 0.24 * T * T));
+						Path.Add(G.P(UE + Out1 * (0.02 + TailLen * T), G.RidgeV, ZR + 0.47 + TailRise * T + TailCurl * T * T));
 					}
 					// The section square to the tail (not upright, which would thin it where it climbs), shrinking to a third.
 					TArray<FFrame> Run = Kit::UprightFrames(Path);
 					for (int32 k = 0; k < Run.Num(); ++k)
 					{
-						const double Taper = FMath::Lerp(1.0, 0.32, double(k) / Steps);
+						const double Taper = FMath::Lerp(1.0, TailTip, double(k) / Steps);
 						Run[k].AxisA = Run[k].NormA * Taper;
 						Run[k].AxisB = Run[k].NormB * Taper;
 					}
@@ -883,7 +901,7 @@ namespace ChenghuaiHall
 					for (int32 k = 0; k < 12; ++k)
 					{
 						const double An = 2.0 * UE_DOUBLE_PI * k / 12;
-						Tail.Add(0.055 * FMath::Cos(An), 0.05 * FMath::Sin(An), true);
+						Tail.Add(TailW * FMath::Cos(An), TailH * FMath::Sin(An), true);
 					}
 					Kit::SweepSolid(Out[CB::Ridges], TEXT("Scorpion tail"), Run, Tail);
 				}
@@ -1031,7 +1049,7 @@ namespace ChenghuaiHall
 				for (int32 k = 0; k < 4; ++k)
 				{
 					const double Za = Z1 - 0.07 * (4 - k), Zb = Za + 0.07;
-					const double Reach = FMath::Min(H.EaveBack - 0.01, 0.06 * (k + 1));
+					const double Reach = FMath::Min(HallTune::EaveBack(H) - 0.01, 0.06 * (k + 1));
 					Kit::LBox(Out[CB::BrickFine], TEXT("Cornice course"), L, H.U0, H.U1, V1 - 0.1, V1 + Reach, Za, FMath::Min(Zb, G.Under(V1 + Reach) - 0.001));
 				}
 			}

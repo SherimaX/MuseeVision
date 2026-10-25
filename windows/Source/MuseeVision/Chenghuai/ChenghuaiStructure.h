@@ -57,6 +57,13 @@ public:
 	UFUNCTION(BlueprintPure, Category = "Musee|Chenghuai")
 	static TArray<FString> GetPartNames();
 
+	/**
+	 * A live geometry round (-Live, ChenghuaiTune): the wing built again with the tuned numbers, materials and all. A
+	 * baked wing's static meshes stand down and its procedural components come back for the rest of the run (no Nanite
+	 * until the next bake). Returns the build's milliseconds.
+	 */
+	double RebuildLive();
+
 	/** Writes the geometry as OBJ (centimetres), a group per solid "part|assembly|solid|closed", for the checks. */
 	UFUNCTION(BlueprintCallable, Category = "Musee|Chenghuai")
 	static bool WriteGeometryObj(const FString& Path);
@@ -147,6 +154,7 @@ public:
 
 private:
 	void Build();
+	void BuildProcedural();
 	void ApplyMaterials();
 	void PlaceLights();
 	void UpdateLights(float Daylight);

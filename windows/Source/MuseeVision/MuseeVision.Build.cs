@@ -29,6 +29,9 @@ public class MuseeVision : ModuleRules
 		if (bStreamline) { PrivateDependencyModuleNames.Add("StreamlineCore"); }
 		PrivateDefinitions.Add("MUSEE_WITH_STREAMLINE=" + (bStreamline ? "1" : "0"));
 
+		// The live bake (-Live, Live/MuseeLiveBake): a rebuilt wing's procedural meshes as static meshes with distance fields.
+		PrivateDependencyModuleNames.AddRange(new string[] { "MeshDescription", "StaticMeshDescription" });
+
 		// Salon interior: the lanterns' live weather from Giverny (Salon/SalonSky, Open-Meteo over HTTPS; no key).
 		if (!PrivateDependencyModuleNames.Contains("HTTP")) { PrivateDependencyModuleNames.Add("HTTP"); }
 		// Salon interior: the rain on the lanterns' glass, made as it plays (Salon/SalonRain: a procedural sound wave).

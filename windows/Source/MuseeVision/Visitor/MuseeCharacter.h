@@ -52,6 +52,7 @@ public:
 	bool InPhotoMode() const { return bPhoto; }
 	/** Enter photo mode (path tracing), if not already in it. */
 	void StartPhotoMode() { if (!bPhoto) { TogglePhoto(); } }
+	void StopPhotoMode() { if (bPhoto) { TogglePhoto(); } }
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Musee")
 	TObjectPtr<UCameraComponent> Camera;
