@@ -577,20 +577,20 @@ def plants(eas):
     rnd = _r.Random(77)
     m = 0
     for bi, (x0, y0, x1, y1) in enumerate(COURT_BEDS):
-        nx, ny = 6, 8
+        nx, ny = 8, 11          # (round 6: denser, lower, as the references' tufts)
         for i in range(nx):
             for j in range(ny):
                 x = x0 + (i + 0.5 + rnd.uniform(-0.3, 0.3)) * (x1 - x0) / nx
                 y = y0 + (j + 0.5 + rnd.uniform(-0.3, 0.3)) * (y1 - y0) / ny
                 if math.hypot(x - (x0 + x1) / 2, y - (y0 + y1) / 2) < 0.45:     # the tree's trunk
                     continue
-                sc = rnd.uniform(1.1, 1.5)
-                a = sp.spawn("MuseePottedPlant", f"Mondo_{bi}_{m}", "Chenghuai", N.cm(x, y, 0.06 - 0.262 * sc - 0.01),
+                sc = rnd.uniform(0.9, 1.2)
+                a = sp.spawn("MuseePottedPlant", f"Mondo_{bi}_{m}", "Chenghuai", N.cm(x, y, 0.06 - 0.262 * sc * 0.42 - 0.01),
                              {"kind": N.enum("MuseePottedPlantKind", "ORCHID"), "seed": 1200 + m})
                 if a:
                     N.set_prop(a, "follow_today", False)
                     N.set_prop(a, "solar_term", 10)           # leaves only, no flower spikes
-                    a.set_actor_scale3d(unreal.Vector(sc, sc, sc * 0.7))
+                    a.set_actor_scale3d(unreal.Vector(sc * 1.15, sc * 1.15, sc * 0.42))
                     a.set_actor_rotation(unreal.Rotator(0, 0, rnd.uniform(0, 360)), False)
                     a.tags = list(a.tags) + [unreal.Name(TAG)]
                     n += 1

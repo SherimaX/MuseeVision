@@ -275,15 +275,20 @@ def specs():
     # damped, the 断纹 smaller (0.18 m a repeat) and faint.)
     # (Round 3, from the painted references: an aged oxblood, darker and browner (0x582422 -> 0x3F1F1B), a little less
     # oil, the crazing a touch more visible, each member a breath of its own tone (BoardTone 0.08).)
-    out["RedLacquer"] = paint(0x3F1F1B, 0.6, 0.35, 0.18, wear=0.12, variation=0.04, tone=0.08,
-                              craze=dict(colour_amount=0.3, contrast=0.95, normal=0.6, scale=0.18))
-    out["GreenLacquer"] = paint(0x284A3D, 0.5, 0.45, 0.15)
+    # (Round 6: the references' red is a deep oxblood (hue about 10-15 degrees), ours read orange (about 36) and cloudy at
+    # a distance: bluer and deeper (0x3F1F1B -> 0x441A1C), the 1.5 m drift and its wear nearly gone (it showed as
+    # blotches), the crazing's colour quieter.)
+    out["RedLacquer"] = paint(0x441A1C, 0.6, 0.35, 0.18, wear=0.04, variation=0.015, tone=0.06,
+                              craze=dict(colour_amount=0.18, contrast=0.9, normal=0.6, scale=0.18))
+    # (Round 6: the painted halls' rafters and the brackets (雀替) are this green too: the references' deep blue-green,
+    # not a mint that read flat in the sun (0x284A3D -> 0x19292B), matt as distemper, no oil.)
+    out["GreenLacquer"] = paint(0x19292B, 0.62, 0.0, 0.25, wear=0.05, variation=0.02)
     out["BlackLacquer"] = paint(0x161310, 0.42, 0.6, 0.1)
     # 楠木, waxed, never painted: golden brown, a fine straight grain (CH_NANMU along each member), the silk of its
     # interlocked grain in the wax's anisotropic sheen (Chatoyance), F0 0.036.
     out["Nanmu"] = MAT.spec("M_Ch_Wood", MAT.merged(MAT.OAK_BOARDS, Roughness=0.36, BoardWidth=0.18, BoardTone=0.05, BoardHue=0.015, BoardJoint=0.1,
                                                     Specular=0.45, ClearCoat=0.12, ClearCoatRoughness=0.22, Anisotropy=-0.55, Chatoyance=0.7),
-                            {"BaseColor": lin(0x74532E)},
+                            {"BaseColor": lin(0x4E2F1F)},   # (round 6: the references' dark interior hardwood; 0x74532E read pale pine)
                             photo=("CH_NANMU", dict(contrast=0.9, normal=0.7, rough_influence=0.8, use_uv0=True, swap_uv=False, block_shift=1.0,
                                                     scale=1.2)))
     # The rafters and the boarding over them (椽, 望板): the same iron red, darkened by a century of lamp smoke and dust

@@ -6,8 +6,11 @@
 
 namespace ChenghuaiHall
 {
-	/** The rafters and their boarding: the red timber's darkened ceiling red (RafterRed), else the timber's own finish. */
+	/** The rafters' boarding: the red timber's darkened ceiling red (RafterRed), else the timber's own finish. */
 	inline int32 RafterPartOf(const FHallSpec& H) { return H.TimberPart == ChenghuaiBuild::RedLacquer ? int32(ChenghuaiBuild::RafterRed) : H.TimberPart; }
+	/** The rafters themselves: in a painted hall blue-green (the references' painted rafters under the red boarding;
+	 *  round 6), else as the boarding. */
+	inline int32 RafterShaftOf(const FHallSpec& H) { return H.bPainted && H.TimberPart == ChenghuaiBuild::RedLacquer ? int32(ChenghuaiBuild::GreenLacquer) : RafterPartOf(H); }
 
 	namespace Kit = ChenghuaiKit;
 	namespace CB = ChenghuaiBuild;
@@ -597,7 +600,28 @@ namespace ChenghuaiHall
 				{
 					const double Span = B - A, R = 0.5 * H.ColD;
 					const double Len = FMath::Min(0.22 * Span, 0.85), Hq = FMath::Min(0.55 * Len, 0.36);
-					if (Span > 1.2)
+					if (Span > 1.2 && H.bBackColumns)
+					{
+						// A gallery: a hanging fret (挂落) the bay's width under the lintel instead (round 6: the references'
+						// corridors): a top rail, a step-fret of short uprights and a lower rail, open below.
+						const double Z0 = G.Zc - LintelH, Hg = 0.26, T = 0.045, Bar = 0.03;
+						const double U0 = A + R + 0.01, U1 = B - R - 0.01;
+						Kit::LRoundBox(Out[H.TimberPart], TEXT("Hanging fret rail"), L, U0, U1, -0.5 * T, 0.5 * T, Z0 - Bar, Z0, 0.006);
+						Kit::LRoundBox(Out[H.TimberPart], TEXT("Hanging fret rail"), L, U0, U1, -0.5 * T, 0.5 * T, Z0 - Hg + 0.06, Z0 - Hg + 0.06 + Bar, 0.006);
+						const int32 NB = FMath::Max(4, FMath::RoundToInt32((U1 - U0) / 0.16));
+						for (int32 k = 0; k <= NB; ++k)
+						{
+							const double Uc = U0 + (U1 - U0) * k / NB;
+							const double Drop = (k % 2 == 0) ? Hg : Hg - 0.06;            // the fret's teeth: longer every other
+							Kit::LRoundBox(Out[H.TimberPart], TEXT("Hanging fret bar"), L, Uc - 0.5 * Bar, Uc + 0.5 * Bar, -0.5 * T, 0.5 * T, Z0 - Drop, Z0 - Bar, 0.005);
+							if (k < NB && k % 2 == 0)
+							{
+								const double Ua = Uc, Ub = U0 + (U1 - U0) * (k + 1) / NB;
+								Kit::LRoundBox(Out[H.TimberPart], TEXT("Hanging fret bar"), L, Ua, Ub, -0.5 * T, 0.5 * T, Z0 - 0.5 * Hg, Z0 - 0.5 * Hg + Bar, 0.005);
+							}
+						}
+					}
+					else if (Span > 1.2)
 					{
 						Bracket(Out[CB::GreenLacquer], L, A + R, 1.0, G.Zc - LintelH, Len, Hq, 0.42 * LintelT);
 						Bracket(Out[CB::GreenLacquer], L, B - R, -1.0, G.Zc - LintelH, Len, Hq, 0.42 * LintelT);
@@ -652,7 +676,17 @@ namespace ChenghuaiHall
 				if (A > 0)
 				{
 					CrossBeam(Out, H, U, -0.22, H.PurlinV[A] + 0.05, G.Seat[0] - Pr * 1.2, BW, BH);
-					Kit::Member(Out[H.TimberPart], TEXT("Tie"), G.P(U, -0.05, G.Zc - 0.75), G.P(U, H.PurlinV[A], G.Zc - 0.75), L.U3(), 0.6 * H.ColD, 0.8 * H.ColD, 0.02);
+					// (Round 6: painted in a painted hall, as the references'; its red end through the eave column read crude.)
+					if (H.bPainted)
+					{
+						const double TW = 0.6 * H.ColD, TH = 0.8 * H.ColD, TZ = G.Zc - 0.75;
+						ChenghuaiPaint::Box(Out[CB::PaintedBeam], TEXT("Tie"), FLocal{H.L.Plan(U, 0.0), H.L.V, H.L.U}, -0.05, H.PurlinV[A], -0.5 * TW, 0.5 * TW,
+											TZ - 0.5 * TH, TZ + 0.5 * TH, 4, 0.1, 0.9);
+					}
+					else
+					{
+						Kit::Member(Out[H.TimberPart], TEXT("Tie"), G.P(U, -0.05, G.Zc - 0.75), G.P(U, H.PurlinV[A], G.Zc - 0.75), L.U3(), 0.6 * H.ColD, 0.8 * H.ColD, 0.02);
+					}
 				}
 				if (B < N - 1)
 				{
@@ -720,7 +754,7 @@ namespace ChenghuaiHall
 					const double Va = H.PurlinV[i], Vb = H.PurlinV[i + 1];
 					if (!Inside(Va) || !Inside(Vb)) { continue; }
 					const FVector A = G.P(U, Va, G.Seat[i] + R), B = G.P(U, Vb, G.Seat[i + 1] + R);
-					Kit::Rod(Out[RafterPartOf(H)], TEXT("Rafter"), A - (B - A).GetSafeNormal() * 0.04, B + (B - A).GetSafeNormal() * 0.04, R, RafterSides);
+					Kit::Rod(Out[RafterShaftOf(H)], TEXT("Rafter"), A - (B - A).GetSafeNormal() * 0.04, B + (B - A).GetSafeNormal() * 0.04, R, RafterSides);
 				}
 				// The eave: round rafters out to EaveR, flying rafters on them to the edge.
 				auto Eave = [&](bool bBack)
@@ -731,15 +765,15 @@ namespace ChenghuaiHall
 					if (!Inside(VR) || !Inside(VF) || FMath::Abs(VF - V0) < 0.1) { return; }
 					const FVector A = G.P(U, V0, G.RafterTop(V0) - R), B = G.P(U, VR, G.RafterTop(VR) - R);
 					const FVector Dir = (B - A).GetSafeNormal();
-					Kit::Rod(Out[RafterPartOf(H)], TEXT("Eave rafter"), A - Dir * 0.2, B, R, RafterSides);
+					Kit::Rod(Out[RafterShaftOf(H)], TEXT("Eave rafter"), A - Dir * 0.2, B, R, RafterSides);
 					if (H.bRafterEnds) { ChenghuaiPaint::EndCap(Out[CB::PaintedBeam], B + Dir * 0.002, Dir, FVector::UpVector, R, true, (Seq++) % 8); }
 					// The flying rafter: its tail on the boarding, its head past the round rafter's end.
 					const double S = bBack ? 1.0 : -1.0;
 					const FVector T0 = G.P(U, VR - S * 0.9, G.RafterTop(VR - S * 0.9) + Board + 0.5 * FlyD);
 					const FVector T1 = G.P(U, VR, G.FlyUnder(VR, bBack) + 0.5 * FlyD);
 					const FVector T2 = G.P(U, VF, G.FlyUnder(VF, bBack) + 0.5 * FlyD);
-					Kit::Member(Out[RafterPartOf(H)], TEXT("Flying rafter tail"), T0, T1 + (T1 - T0).GetSafeNormal() * 0.03, L.U3(), FlyD, FlyD);
-					Kit::Member(Out[RafterPartOf(H)], TEXT("Flying rafter"), T1, T2, L.U3(), FlyD, FlyD);
+					Kit::Member(Out[RafterShaftOf(H)], TEXT("Flying rafter tail"), T0, T1 + (T1 - T0).GetSafeNormal() * 0.03, L.U3(), FlyD, FlyD);
+					Kit::Member(Out[RafterShaftOf(H)], TEXT("Flying rafter"), T1, T2, L.U3(), FlyD, FlyD);
 					if (H.bRafterEnds) { ChenghuaiPaint::EndCap(Out[CB::PaintedBeam], T2 + (T2 - T1).GetSafeNormal() * 0.002, (T2 - T1).GetSafeNormal(), FVector::UpVector, 0.5 * FlyD, false, 8 + (Seq % 4)); }
 				};
 				Eave(false);

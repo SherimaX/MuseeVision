@@ -31,7 +31,7 @@ FONT = "C:/Windows/Fonts/simkai.ttf"
 
 # The palette (aged mineral pigments, sRGB): a scholar's house, restrained (the renderings' dark green and slate beams),
 # the pigments sixty years faded and dusted, not a palace's fresh blue and green.
-BLUE = (34, 52, 68)         # azurite, faded to a dark slate (round 4: darker, as the references' under-eave paint)
+BLUE = (28, 52, 82)         # azurite, a deep blue (round 6: bluer, the references' azurite against the malachite)
 BLUE_L = (78, 100, 112)
 GREEN = (34, 62, 52)        # malachite, dark
 GREEN_L = (84, 116, 100)
@@ -121,6 +121,23 @@ def beads(d, x0, y0, x1, y1, n, c0, c1):
     for i in range(n):
         cy = y0 + h * (i + 0.5)
         d.ellipse([cx - r, cy - r, cx + r, cy + r], fill=c0 if i % 2 == 0 else c1, outline=BLACK)
+
+
+def scroll_clasp(d, cx, y0, y1, colour, flip):
+    """A scrollwork clasp (卡子, round 6): two pairs of thin C-scrolls curling away from a short stem, gold as outline
+    only; the old heavy clasp read as a printed logo."""
+    h = y1 - y0
+    w = max(2, int(h * 0.025))
+    cy = 0.5 * (y0 + y1)
+    for sx in (-1, 1):
+        for sy in (-1, 1):
+            r = h * 0.17
+            ox, oy = cx + sx * r * 0.9, cy + sy * r * 0.85
+            start = {(1, 1): 180, (1, -1): 90, (-1, 1): 270, (-1, -1): 0}[(sx, sy)]
+            d.arc([ox - r, oy - r, ox + r, oy + r], start, start + 270, fill=colour, width=w)
+            r2 = r * 0.45
+            d.arc([ox - r2, oy - r2, ox + r2, oy + r2], start + 90, start + 360, fill=colour, width=w)
+    d.line([(cx - h * 0.05, cy), (cx + h * 0.05, cy)], fill=colour, width=w)
 
 
 def clasp(d, cx, y0, y1, colour, flip):
@@ -217,15 +234,15 @@ def beam_row(style, crop, seed, band_top=0.42):
     board_h = int(H * band_top)
     d.rectangle([0, 0, W, board_h], fill=lerp(other, BLACK, 0.15))
     fret(d, 0, 14, W, board_h - 14, board_h - 28, lerp(other, WHITE, 0.22), 5)
-    brocade(d, 0, board_h + 18, W, H - 18, 56, lerp(lintel_col, WHITE, 0.2), lerp(RED, BLACK, 0.1))
+    brocade(d, 0, board_h + 18, W, H - 18, 30, lerp(lintel_col, WHITE, 0.16), lerp(GOLD, BLACK, 0.25))
     for y, c, wd in ((board_h + 3, BLACK, 4), (board_h + 9, WHITE, 4), (H - 11, WHITE, 4), (H - 4, BLACK, 4), (4, BLACK, 4), (board_h - 6, GOLD, 3)):
         d.line([(0, y), (W, y)], fill=c, width=wd)
     band = int(W * 0.07)
     hoop(d, 0, band, H, lintel_col, other)
     hoop(d, W - band, W, H, lintel_col, other, flip=True)
     for cx, flip in ((W * 0.15, False), (W * 0.85, True)):
-        d.rectangle([cx - 70, board_h + 14, cx + 70, H - 14], fill=lintel_col)
-        clasp(d, cx, board_h + 20, H - 20, GOLD, flip)
+        d.rectangle([cx - 90, board_h + 14, cx + 90, H - 14], fill=lintel_col, outline=GOLD, width=3)
+        scroll_clasp(d, cx, board_h + 26, H - 26, GOLD, flip)
     wrapper(img, W * 0.5, W * 0.36, H * 0.9, crop, lintel_col, other)
     img = age(img, seed, dust=0.05, fade=0.02)
     return img.resize((4096, 512), Image.LANCZOS)
@@ -238,15 +255,15 @@ def plain_row(seed, crop=None):
     img = Image.new("RGB", (W, H), GREEN)
     d = ImageDraw.Draw(img)
     d.rectangle([0, H * 0.5, W, H], fill=BLUE)
-    brocade(d, 0, 18, W, H * 0.5 - 4, 56, lerp(GREEN, WHITE, 0.2), lerp(RED, BLACK, 0.1))
-    brocade(d, 0, H * 0.5 + 4, W, H - 18, 56, lerp(BLUE, WHITE, 0.2), lerp(RED, BLACK, 0.1))
+    brocade(d, 0, 18, W, H * 0.5 - 4, 30, lerp(GREEN, WHITE, 0.16), lerp(GOLD, BLACK, 0.25))
+    brocade(d, 0, H * 0.5 + 4, W, H - 18, 30, lerp(BLUE, WHITE, 0.16), lerp(GOLD, BLACK, 0.25))
     d.line([(0, H * 0.5), (W, H * 0.5)], fill=BLACK, width=4)
     band = int(W * 0.07)
     hoop(d, 0, band, H, BLUE, GREEN)
     hoop(d, W - band, W, H, BLUE, GREEN, flip=True)
     for cx, flip in ((W * 0.17, False), (W * 0.83, True)):
-        d.rectangle([cx - 66, 16, cx + 66, H - 16], fill=GREEN)
-        clasp(d, cx, 24, H - 24, GOLD, flip)
+        d.rectangle([cx - 86, 16, cx + 86, H - 16], fill=GREEN, outline=GOLD, width=3)
+        scroll_clasp(d, cx, 30, H - 30, GOLD, flip)
     wrapper(img, W * 0.5, W * 0.3, H * 0.86, crop, BLUE, GREEN)
     d = ImageDraw.Draw(img)
     d.line([(0, 4), (W, 4)], fill=BLACK, width=6)
@@ -272,12 +289,16 @@ def rafter_heads(seed):
     for k in range(8):
         cell = Image.new("RGB", (512, 512), BLUE)
         d = ImageDraw.Draw(cell)
-        # The dragon's eye: blue, a white ring, a dark pupil; the rim black.
+        # (Round 6: the references' round rafter ends carry a flower roundel (柿子花/宝珠): a gold-ringed blue disc, eight
+        # petals in light blue and white round a gold heart; the old 'dragon's eye' rings read as targets.)
         d.ellipse([10, 10, 502, 502], fill=BLUE, outline=BLACK, width=18)
-        r1 = 170 + (k % 3) * 8
-        d.ellipse([256 - r1, 256 - r1, 256 + r1, 256 + r1], outline=WHITE, width=34)
-        d.ellipse([256 - 70, 256 - 70, 256 + 70, 256 + 70], fill=BLACK)
-        d.ellipse([256 - 26, 256 - 26, 256 + 26, 256 + 26], fill=WHITE)
+        d.ellipse([40, 40, 472, 472], outline=GOLD, width=14)
+        for j in range(8):
+            a0 = math.radians(j * 45 + (k % 2) * 22.5)
+            cx, cy = 256 + 120 * math.cos(a0), 256 + 120 * math.sin(a0)
+            d.ellipse([cx - 62, cy - 62, cx + 62, cy + 62], fill=BLUE_L, outline=BLACK, width=6)
+            d.ellipse([cx - 30, cy - 30, cx + 30, cy + 30], fill=WHITE)
+        d.ellipse([256 - 64, 256 - 64, 256 + 64, 256 + 64], fill=GOLD, outline=BLACK, width=6)
         row6.paste(age(cell, seed + k, dust=0.1, fade=0.15, edges=False), (512 * k, 0))
     font = ImageFont.truetype(FONT, 380)
     for k in range(8):

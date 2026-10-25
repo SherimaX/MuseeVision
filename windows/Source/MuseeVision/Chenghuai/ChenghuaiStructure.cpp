@@ -228,6 +228,9 @@ AChenghuaiStructure::AChenghuaiStructure()
 	// (the museum's histogram starts at EV100 0, which pinned a moonlit court's metering there: 3 stops under)
 	CourtExposure->Settings.bOverride_HistogramLogMin = true;
 	CourtExposure->Settings.HistogramLogMin = -8.f;
+	// (Round 6: the references' tones: the same highlights, but mid-tones and shade a good deal darker (median 66-97 of
+	// 255 to our 120-137): deep shade under the eaves and in the galleries, not open-sky fill. A gamma under 1 on this
+	// wing's own volumes only (no global cvar), a breath more contrast; the sunlit lime and sky stay where they were.)
 	RoomExposure = CreateDefaultSubobject<UPostProcessComponent>(TEXT("RoomExposure"));
 	RoomExposure->SetupAttachment(RootComponent);
 	RoomExposure->bUnbound = true;
@@ -239,6 +242,13 @@ AChenghuaiStructure::AChenghuaiStructure()
 	// photographer would in them (the museum's 6600 K left them peach under the red timber).
 	RoomExposure->Settings.bOverride_WhiteTemp = true;
 	RoomExposure->Settings.WhiteTemp = 5300.f;
+	for (UPostProcessComponent* PP : {CourtExposure.Get(), RoomExposure.Get()})
+	{
+		PP->Settings.bOverride_ColorGamma = true;
+		PP->Settings.ColorGamma = FVector4(0.8, 0.8, 0.8, 1.0);
+		PP->Settings.bOverride_ColorContrast = true;
+		PP->Settings.ColorContrast = FVector4(1.06, 1.06, 1.06, 1.0);
+	}
 
 	const TArray<CB::FChLight> L = CB::Lights();
 	for (int32 i = 0; i < L.Num(); ++i)
