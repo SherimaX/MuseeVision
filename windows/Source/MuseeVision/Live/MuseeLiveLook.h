@@ -33,6 +33,9 @@ public:
 	virtual void OnWorldBeginPlay(UWorld& InWorld) override;
 	virtual void Tick(float DeltaTime) override;
 	virtual TStatId GetStatId() const override { RETURN_QUICK_DECLARE_CYCLE_STAT(UMuseeLiveLook, STATGROUP_Tickables); }
+	/** After material packages were reloaded (UMuseeLiveAssets): materials.json lists the reloaded values, and the live
+	 *  copies are remade on the reloaded instances with look.json applied again on the next tick. */
+	void Reapply() { WriteMaterials(); Mids.Empty(); LookKey.Reset(); }
 
 private:
 	FString LiveDir;

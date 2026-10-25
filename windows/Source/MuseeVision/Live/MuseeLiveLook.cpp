@@ -414,7 +414,9 @@ void UMuseeLiveLook::WriteMaterials()
 		if (It->GetWorld() != World) { continue; }
 		for (int32 i = 0; i < It->GetNumMaterials(); ++i)
 		{
-			if (UMaterialInterface* M = It->GetMaterial(i)) { All.Add(M); }
+			UMaterialInterface* M = It->GetMaterial(i);
+			if (UMaterialInstanceDynamic* D = Cast<UMaterialInstanceDynamic>(M); D && D->GetOuter() == this) { M = D->Parent; }
+			if (M) { All.Add(M); }
 		}
 	}
 	TSharedRef<FJsonObject> Out = MakeShared<FJsonObject>();

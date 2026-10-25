@@ -36,6 +36,8 @@ public:
 	virtual void OnWorldBeginPlay(UWorld& InWorld) override;
 	virtual void Tick(float DeltaTime) override;
 	virtual TStatId GetStatId() const override { RETURN_QUICK_DECLARE_CYCLE_STAT(UMuseeLiveShots, STATGROUP_Tickables); }
+	/** A request is running (hot asset reloads wait for it). */
+	bool IsBusy() const { return Index >= 0; }
 
 private:
 	struct FShot
