@@ -194,12 +194,13 @@ def paint(colour, rough, coat, coat_rough=0.2, outdoor=True, wear=0.3, variation
                     photo=("CH_CRAZE", dict(dict(colour_amount=0.3, contrast=0.8, normal=0.7, rough_influence=0.6, use_uv0=False), **(craze or {}))))
 
 
-def image(texture, rough, coat=0.0, spec=0.5, craze=0.0, tint=(1.0, 1.0, 1.0), craze_contrast=1.2):
+def image(texture, rough, coat=0.0, spec=0.5, craze=0.0, tint=(1.0, 1.0, 1.0), craze_contrast=1.2, craze_normal=None):
     """An atlas painted or lettered (UV0): the painted beams, the plaques; `craze` lays the old paint's crazing over it,
     `tint` (linear) darkens or cools the atlas as old paint under soot."""
     s = MAT.merged(NJ, UB, StrataAmount=0.0, PoreAmount=0.0, VeinAmount=0.0, BlockTone=0.0, MacroVariation=0.03, Roughness=rough,
                    RoughnessVariation=0.05, ClearCoat=coat, ClearCoatRoughness=0.2, TexScale=1.0, TexAspect=1.0, Specular=spec)
-    photo = ("CH_CRAZE", dict(colour_amount=craze, contrast=craze_contrast, normal=craze, rough_influence=0.6)) if craze else None
+    photo = ("CH_CRAZE", dict(colour_amount=craze, contrast=craze_contrast, normal=craze if craze_normal is None else craze_normal,
+                              rough_influence=0.6)) if craze else None
     return MAT.spec("M_Ch_Stone", s, {"BaseColor": tuple(tint)}, textures={"Texture": texture}, switches={"UseTexture": True}, photo=photo)
 
 
@@ -293,8 +294,10 @@ def specs():
                              craze=dict(colour_amount=0.05, contrast=0.4, normal=0.3, scale=0.18))
     out["Chestnut"] = MAT.spec("M_Ch_Wood", MAT.merged(MAT.CHESTNUT_LACQUER, FootDirt=0.06, DustUp=0.06, SplashZone=0.15), {"BaseColor": lin(0x47301F)},
                                photo=("W2", MAT.OAK_PHOTO))
-    # (Round 3: the 苏式 paint aged as in the references: darker, a cooler and quieter blue-green under soot, rougher.)
-    out["PaintedBeam"] = image("ch_suhua", 0.75, 0.08, craze=0.4, tint=(0.48, 0.58, 0.62), craze_contrast=1.4)
+    # (Round 4: the atlas itself now carries the references' dark, muted 苏式 (brocade, fret, layered 箍头, a 包袱 on every
+    # beam). The milky wash over it in rounds 2-3 was the sky's sheen in the crazing's normal and a 0.5 specular, not the
+    # paint: matt distemper now (specular 0.2, no coat, the crazing's relief a breath), under a cool soot tint.)
+    out["PaintedBeam"] = image("ch_suhua", 0.75, 0.0, spec=0.2, craze=0.12, tint=(0.5, 0.56, 0.64), craze_contrast=1.0, craze_normal=0.05)
     out["Engraved"] = image("ch_shutiao", 0.6, 0.0, spec=0.5)
     out["Plaques"] = image("ch_plaques", 0.35, 0.45, craze=0.25)
     out["Brass"] = MAT.spec("M_Metal", {"Roughness": 0.36, "Metallic": 1.0, "Variation": 0.14, "NoiseScale": 0.1, "PatinaAmount": 0.25},

@@ -31,15 +31,15 @@ FONT = "C:/Windows/Fonts/simkai.ttf"
 
 # The palette (aged mineral pigments, sRGB): a scholar's house, restrained (the renderings' dark green and slate beams),
 # the pigments sixty years faded and dusted, not a palace's fresh blue and green.
-BLUE = (40, 60, 76)         # azurite, faded to slate
-BLUE_L = (86, 108, 120)
-GREEN = (42, 76, 64)        # malachite, dark
-GREEN_L = (92, 124, 108)
-RED = (118, 54, 42)         # iron red (铁红) / 章丹 board, dulled
-GOLD = (168, 138, 80)       # ochre-gold linework (matt)
-BLACK = (28, 26, 24)
-WHITE = (232, 226, 210)
-CREAM = (228, 216, 188)
+BLUE = (34, 52, 68)         # azurite, faded to a dark slate (round 4: darker, as the references' under-eave paint)
+BLUE_L = (78, 100, 112)
+GREEN = (34, 62, 52)        # malachite, dark
+GREEN_L = (84, 116, 100)
+RED = (112, 50, 40)         # iron red (铁红) / 章丹, dulled: accents only since round 4
+GOLD = (162, 132, 76)       # ochre-gold linework (matt), thin lines only
+BLACK = (24, 22, 20)
+WHITE = (214, 208, 192)     # the linework's white, dusted
+CREAM = (220, 208, 180)
 
 
 def lerp(a, b, t):
@@ -135,95 +135,134 @@ def clasp(d, cx, y0, y1, colour, flip):
     d.line([(cx, y0 + h * 0.08), (cx, y1 - h * 0.08)], fill=colour, width=int(h * 0.05))
 
 
-def beam_row(style, crop, seed, band_top=0.42):
-    """One bay's lintel and board (virtual 2970 × 512, stretched to 4096): the board (top 42 %) and the lintel under it."""
-    W, H = 2970, 512
-    img = Image.new("RGB", (W, H), GREEN)
+def fret(d, x0, y0, x1, y1, cell, colour, width):
+    """A key fret (回纹) filling a rectangle: square spirals, cell by cell, in one line colour."""
+    nx = max(1, int((x1 - x0) // cell))
+    ny = max(1, int((y1 - y0) // cell))
+    cw, ch = (x1 - x0) / nx, (y1 - y0) / ny
+    for i in range(nx):
+        for j in range(ny):
+            ax, ay = x0 + i * cw, y0 + j * ch
+            l, t, r, b = ax + cw * 0.08, ay + ch * 0.08, ax + cw * 0.92, ay + ch * 0.92
+            sx, sy = (r - l) / 6.0, (b - t) / 6.0
+            pts = [(l, b), (l, t), (r, t), (r, b), (l + sx, b),
+                   (l + sx, t + sy), (r - sx, t + sy), (r - sx, b - sy), (l + 2 * sx, b - sy),
+                   (l + 2 * sx, t + 2 * sy), (r - 2 * sx, t + 2 * sy), (r - 2 * sx, b - 2 * sy)]
+            d.line(pts, fill=colour, width=width, joint="curve")
+
+
+def brocade(d, x0, y0, x1, y1, cell, line, dot):
+    """A brocade (锦纹) of interlocking diamonds with a dot at each heart: the 找头's fill."""
+    nx = max(1, int((x1 - x0) // cell))
+    ny = max(1, int((y1 - y0) // (cell * 0.6)))
+    cw, ch = (x1 - x0) / nx, (y1 - y0) / ny
+    for i in range(nx + 1):
+        for j in range(ny + 1):
+            if (i + j) % 2:
+                continue
+            cx, cy = x0 + i * cw, y0 + j * ch
+            d.line([(cx, cy - ch), (cx + cw, cy), (cx, cy + ch), (cx - cw, cy), (cx, cy - ch)], fill=line, width=3)
+            r = min(cw, ch) * 0.16
+            d.ellipse([cx - r, cy - r, cx + r, cy + r], fill=dot)
+
+
+def hoop(d, x0, x1, H, main, other, flip=False):
+    """The end band (箍头): layered stripes, dark to light, black and white linework, beads in the middle."""
+    w = x1 - x0
+    order = [(0.00, 0.06, BLACK), (0.06, 0.10, WHITE), (0.10, 0.34, other), (0.34, 0.66, main), (0.66, 0.90, other),
+             (0.90, 0.94, WHITE), (0.94, 1.0, BLACK)]
+    for a, b, c in order:
+        xa, xb = (x0 + w * a, x0 + w * b) if not flip else (x1 - w * b, x1 - w * a)
+        d.rectangle([xa, 0, xb, H], fill=c)
+    beads(d, x0 + w * 0.4, 16, x0 + w * 0.6, H - 16, 11, WHITE, lerp(main, WHITE, 0.4))
+    for x in (x0 + w * 0.1, x0 + w * 0.9):
+        d.line([(x, 0), (x, H)], fill=GOLD, width=3)
+
+
+def wrapper(img, cx, pw, ph, crop, ground, other):
+    """The arched panel (包袱): a half-ellipse hanging from the top, its border the layered 'smoke clouds' (烟云), a small
+    ink landscape inside."""
+    W, H = img.size
     d = ImageDraw.Draw(img)
-    board_h = int(H * band_top)
-    lintel_col = GREEN if style % 2 == 0 else BLUE
-    lintel_light = GREEN_L if style % 2 == 0 else BLUE_L
-    other = BLUE if style % 2 == 0 else GREEN
-    d.rectangle([0, 0, W, board_h], fill=RED)
-    d.rectangle([0, board_h, W, H], fill=lintel_col)
-    # The lintel's edges: a black line and a white one (the 'eyebrow' lines).
-    for y, c in ((board_h + 4, BLACK), (board_h + 10, WHITE), (H - 12, WHITE), (H - 5, BLACK)):
-        d.line([(0, y), (W, y)], fill=c, width=4)
-    # The end bands (箍头), each end: a dark band with beads, gold lines either side.
-    band = int(W * 0.055)
-    for x0 in (0, W - band):
-        d.rectangle([x0, 0, x0 + band, H], fill=other)
-        beads(d, x0 + band * 0.28, 14, x0 + band * 0.72, H - 14, 9, WHITE, lintel_light)
-        for x in (x0 + 6, x0 + band - 6):
-            d.line([(x, 0), (x, H)], fill=GOLD, width=6)
-        # A second, thinner band inside (副箍头).
-        xi = x0 + band + 18 if x0 == 0 else x0 - 60
-        d.rectangle([xi, 0, xi + 42, H], fill=other)
-        d.line([(xi + 21, 0), (xi + 21, H)], fill=WHITE, width=5)
-    # The clasps (卡子) in the zones between the bands and the panel.
-    for cx, flip in ((W * 0.13, False), (W * 0.87, True)):
-        clasp(d, cx, board_h + 20, H - 20, GOLD if style % 2 == 0 else WHITE, flip)
-        clasp(d, cx, 14, board_h - 14, lintel_light, flip)
-    # The arched panel (包袱): a half-ellipse hanging from the top, its borders the layered 'smoke clouds' (烟云) in five
-    # steps from dark to light, the backing (托子) outside them.
-    pw = W * 0.38
-    cx = W * 0.5
-    ph = H * 0.9
-    rings = [(24, BLACK), (18, other), (14, lerp(other, WHITE, 0.3)), (12, lerp(other, WHITE, 0.55)), (10, lerp(other, WHITE, 0.8)), (8, GOLD)]
-    grow = sum(r for r, _ in rings) + 26
-    # Backing.
-    d.pieslice([cx - pw / 2 - grow, -ph - grow, cx + pw / 2 + grow, ph + grow], 0, 180, fill=lerp(RED, BLACK, 0.2) if style % 2 == 0 else lerp(GREEN, BLACK, 0.2))
+    rings = [(18, BLACK), (16, other), (12, lerp(other, WHITE, 0.3)), (10, lerp(other, WHITE, 0.55)),
+             (8, lerp(other, WHITE, 0.8)), (6, GOLD)]
+    grow = sum(r for r, _ in rings) + 22
+    d.pieslice([cx - pw / 2 - grow, -ph - grow, cx + pw / 2 + grow, ph + grow], 0, 180, fill=lerp(ground, BLACK, 0.3))
     off = grow
     for r, c in rings:
         d.pieslice([cx - pw / 2 - off, -ph - off, cx + pw / 2 + off, ph + off], 0, 180, fill=c)
         off -= r
-    # The panel's ground and its painting.
     panel = Image.new("L", (W, H), 0)
     ImageDraw.Draw(panel).pieslice([cx - pw / 2, -ph, cx + pw / 2, ph], 0, 180, fill=255)
-    ground = Image.new("RGB", (W, H), CREAM)
+    paper = lerp(CREAM, (150, 140, 118), 0.25)
+    g = Image.new("RGB", (W, H), paper)
     if crop is not None:
         c = crop.resize((int(pw), int(ph)), Image.LANCZOS)
-        # Paler, as mineral paint on a lime ground (not a photograph).
-        c = Image.blend(c, Image.new("RGB", c.size, CREAM), 0.35)
-        ground.paste(c, (int(cx - pw / 2), 0))
-    img = Image.composite(ground, img, panel)
+        c = Image.blend(c, Image.new("RGB", c.size, paper), 0.3)
+        g.paste(c, (int(cx - pw / 2), 0))
+    img.paste(g, (0, 0), panel)
+    ImageDraw.Draw(img).arc([cx - pw / 2, -ph, cx + pw / 2, ph], 0, 180, fill=BLACK, width=4)
+
+
+def beam_row(style, crop, seed, band_top=0.42):
+    """One bay's lintel and board (virtual 2970 × 512, stretched to 4096; one bay per span): the board (top 42 %) in dark
+    green or blue with a key fret, the lintel with brocade in the 找头, layered 箍头 at both ends, scroll clasps, and the
+    big 包袱 in the middle. (Round 4: the references' muted, dense under-eave painting; the flat red board and flat
+    lintels read as stripes.)"""
+    W, H = 2970, 512
+    lintel_col = BLUE if style % 2 == 0 else GREEN
+    other = GREEN if style % 2 == 0 else BLUE
+    img = Image.new("RGB", (W, H), lintel_col)
     d = ImageDraw.Draw(img)
-    d.arc([cx - pw / 2, -ph, cx + pw / 2, ph], 0, 180, fill=BLACK, width=5)
-    img = age(img, seed, fade=0.035)
+    board_h = int(H * band_top)
+    d.rectangle([0, 0, W, board_h], fill=lerp(other, BLACK, 0.15))
+    fret(d, 0, 14, W, board_h - 14, board_h - 28, lerp(other, WHITE, 0.22), 5)
+    brocade(d, 0, board_h + 18, W, H - 18, 56, lerp(lintel_col, WHITE, 0.2), lerp(RED, BLACK, 0.1))
+    for y, c, wd in ((board_h + 3, BLACK, 4), (board_h + 9, WHITE, 4), (H - 11, WHITE, 4), (H - 4, BLACK, 4), (4, BLACK, 4), (board_h - 6, GOLD, 3)):
+        d.line([(0, y), (W, y)], fill=c, width=wd)
+    band = int(W * 0.07)
+    hoop(d, 0, band, H, lintel_col, other)
+    hoop(d, W - band, W, H, lintel_col, other, flip=True)
+    for cx, flip in ((W * 0.15, False), (W * 0.85, True)):
+        d.rectangle([cx - 70, board_h + 14, cx + 70, H - 14], fill=lintel_col)
+        clasp(d, cx, board_h + 20, H - 20, GOLD, flip)
+    wrapper(img, W * 0.5, W * 0.36, H * 0.9, crop, lintel_col, other)
+    img = age(img, seed, dust=0.05, fade=0.02)
     return img.resize((4096, 512), Image.LANCZOS)
 
 
-def plain_row(seed):
+def plain_row(seed, crop=None):
+    """A painted beam (interior beams, backs, undersides): 箍头 at both ends, brocade between, a small 包袱 in the middle,
+    so each span reads as one painted panel (round 4; it was blue and green halves with two clasps)."""
     W, H = 2970, 512
     img = Image.new("RGB", (W, H), GREEN)
     d = ImageDraw.Draw(img)
     d.rectangle([0, H * 0.5, W, H], fill=BLUE)
-    for x0 in (0, W - 160):
-        d.rectangle([x0, 0, x0 + 160, H], fill=BLUE)
-        beads(d, x0 + 45, 16, x0 + 115, H - 16, 9, WHITE, GREEN_L)
-        d.line([(x0 + 8, 0), (x0 + 8, H)], fill=GOLD, width=6)
-        d.line([(x0 + 152, 0), (x0 + 152, H)], fill=GOLD, width=6)
-    for cx, flip in ((W * 0.2, False), (W * 0.8, True)):
-        clasp(d, cx, 20, H - 20, GOLD, flip)
-    d.line([(0, 6), (W, 6)], fill=BLACK, width=6)
-    d.line([(0, H - 6), (W, H - 6)], fill=BLACK, width=6)
-    return age(img, seed, fade=0.035).resize((4096, 512), Image.LANCZOS)
+    brocade(d, 0, 18, W, H * 0.5 - 4, 56, lerp(GREEN, WHITE, 0.2), lerp(RED, BLACK, 0.1))
+    brocade(d, 0, H * 0.5 + 4, W, H - 18, 56, lerp(BLUE, WHITE, 0.2), lerp(RED, BLACK, 0.1))
+    d.line([(0, H * 0.5), (W, H * 0.5)], fill=BLACK, width=4)
+    band = int(W * 0.07)
+    hoop(d, 0, band, H, BLUE, GREEN)
+    hoop(d, W - band, W, H, BLUE, GREEN, flip=True)
+    for cx, flip in ((W * 0.17, False), (W * 0.83, True)):
+        d.rectangle([cx - 66, 16, cx + 66, H - 16], fill=GREEN)
+        clasp(d, cx, 24, H - 24, GOLD, flip)
+    wrapper(img, W * 0.5, W * 0.3, H * 0.86, crop, BLUE, GREEN)
+    d = ImageDraw.Draw(img)
+    d.line([(0, 4), (W, 4)], fill=BLACK, width=6)
+    d.line([(0, H - 4), (W, H - 4)], fill=BLACK, width=6)
+    return age(img, seed, dust=0.05, fade=0.02).resize((4096, 512), Image.LANCZOS)
 
 
 def purlin_row(seed):
-    """A purlin's band, repeated every 3.1 m along it: blue with a brocade of small squares, an end band at the joint."""
+    """A purlin's band, repeated every 3.1 m along it: blue with a key fret, a layered end band at the joint."""
     W, H = 2970, 512
     img = Image.new("RGB", (W, H), BLUE)
     d = ImageDraw.Draw(img)
-    for x in range(0, W, 60):
-        for y in range(40, H - 40, 60):
-            d.rectangle([x + 18, y + 18, x + 42, y + 42], outline=BLUE_L, width=4)
-    for x0 in (0, W - 120):
-        d.rectangle([x0, 0, x0 + 120, H], fill=GREEN)
-        d.line([(x0 + 60, 0), (x0 + 60, H)], fill=WHITE, width=10)
-        d.line([(x0 + 6, 0), (x0 + 6, H)], fill=GOLD, width=5)
-        d.line([(x0 + 114, 0), (x0 + 114, H)], fill=GOLD, width=5)
-    return age(img, seed, fade=0.035).resize((4096, 512), Image.LANCZOS)
+    fret(d, 0, 30, W, H - 30, 112, lerp(BLUE, WHITE, 0.2), 6)
+    hoop(d, 0, 150, H, GREEN, BLUE)
+    hoop(d, W - 150, W, H, GREEN, BLUE, flip=True)
+    return age(img, seed, dust=0.05, fade=0.02).resize((4096, 512), Image.LANCZOS)
 
 
 def rafter_heads(seed):
@@ -256,7 +295,7 @@ def make_suhua():
     rows = []
     for r in range(4):
         rows.append(beam_row(r, crops[r % len(crops)] if crops else None, 100 + r))
-    rows.append(plain_row(200))
+    rows.append(plain_row(200, crops[4 % len(crops)] if crops else None))
     rows.append(purlin_row(300))
     r6, r7 = rafter_heads(400)
     rows += [r6, r7]
