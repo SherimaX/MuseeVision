@@ -475,6 +475,21 @@ WATER = -0.28
 
 
 LATE_GREEN = {"ORCHARD_FRUIT": 10, "CHINESE_PLUM": 10}
+# (Round 5: the references' trees are older and darker, their crowns uneven in tone: each species' leaves tinted down
+# and cooled a little, each twig's leaves a shade of their own (AMuseeTree.LeafTint, LeafVariation); a breath of
+# difference per tree from its seed so no two crowns match.)
+LEAF_TINT = {"ORCHARD_FRUIT": (0.62, 0.66, 0.6), "CHINESE_PLUM": (0.66, 0.7, 0.62), "OSMANTHUS": (0.82, 0.86, 0.8)}
+LEAF_VARIATION = 0.28
+# The four beds of the inner court (as ChenghuaiHouse.cpp lays them, inside their kerbs): mondo grass (沿阶草), not lawn.
+COURT_BEDS = [(-13.66, -41.56, -10.74, -37.64), (-7.66, -41.56, -4.74, -37.64), (-13.66, -34.76, -10.74, -30.84), (-7.66, -34.76, -4.74, -30.84)]
+
+
+def leaf_props(species, seed):
+    t = LEAF_TINT.get(species)
+    if not t:
+        return {}
+    k = 0.92 + 0.16 * ((seed * 37) % 11) / 10.0
+    return {"leaf_tint": unreal.LinearColor(t[0] * k, t[1] * k, t[2] * k, 1.0), "leaf_variation": LEAF_VARIATION}
 
 
 def plants(eas):
@@ -483,6 +498,7 @@ def plants(eas):
     n = 0
     for label, (x, y), species, props, seed in TREES:
         p = {"species": N.enum("MuseeTreeSpecies", species), "seed": seed}
+        p.update(leaf_props(species, seed))
         for k, v in props.items():
             p[k] = N.v2(*v) if isinstance(v, tuple) else v
         a = sp.spawn("MuseeTree", label, "Chenghuai", N.cm(x, y), p)
@@ -555,6 +571,30 @@ def plants(eas):
                     a.tags = list(a.tags) + [unreal.Name(TAG)]
                     n += 1
                 k += 1
+    # The court's beds: mondo grass (沿阶草), the references' low dark tufts under the trees, not lawn: the museum's
+    # strap-leaved clumps (the orchid without its flowers out of season), pots sunk in the bed, on a jittered grid.
+    import random as _r
+    rnd = _r.Random(77)
+    m = 0
+    for bi, (x0, y0, x1, y1) in enumerate(COURT_BEDS):
+        nx, ny = 6, 8
+        for i in range(nx):
+            for j in range(ny):
+                x = x0 + (i + 0.5 + rnd.uniform(-0.3, 0.3)) * (x1 - x0) / nx
+                y = y0 + (j + 0.5 + rnd.uniform(-0.3, 0.3)) * (y1 - y0) / ny
+                if math.hypot(x - (x0 + x1) / 2, y - (y0 + y1) / 2) < 0.45:     # the tree's trunk
+                    continue
+                sc = rnd.uniform(1.1, 1.5)
+                a = sp.spawn("MuseePottedPlant", f"Mondo_{bi}_{m}", "Chenghuai", N.cm(x, y, 0.06 - 0.262 * sc - 0.01),
+                             {"kind": N.enum("MuseePottedPlantKind", "ORCHID"), "seed": 1200 + m})
+                if a:
+                    N.set_prop(a, "follow_today", False)
+                    N.set_prop(a, "solar_term", 10)           # leaves only, no flower spikes
+                    a.set_actor_scale3d(unreal.Vector(sc, sc, sc * 0.7))
+                    a.set_actor_rotation(unreal.Rotator(0, 0, rnd.uniform(0, 360)), False)
+                    a.tags = list(a.tags) + [unreal.Name(TAG)]
+                    n += 1
+                m += 1
     # 石兄: the standing Taihu rock, about 3 m.
     # Its stone the photographed Taihu limestone (MI_Ch_Taihu: weathered, water-stained, moss in its hollows).
     a = sp.spawn("MuseeTaihuRock", "Shixiong", "Chenghuai", N.cm(*ROCK),
@@ -589,8 +629,11 @@ def plants(eas):
             soil.get_component_by_class(unreal.StaticMeshComponent).set_material(0, unreal.load_asset(f"{CH_MATS}/MI_Ch_GardenGround"))
             a = sp.spawn("MuseeTree", label, "Chenghuai", N.cm(x, -42.6, 0.41), {
                 "species": N.enum("MuseeTreeSpecies", "ORCHARD_FRUIT"), "fruit_variant": 1, "seed": 740 + int(x), "tree_height": 1.9,
-                "crown_height": 1.35, "crown_radii": N.v2(0.75, 0.55)})
+                "crown_height": 1.35, "crown_radii": N.v2(0.75, 0.55), **leaf_props("ORCHARD_FRUIT", 740 + int(x))})
             if a:
+                # (Round 5: green with fruit, as the court's trees, not today's yellow.)
+                N.set_prop(a, "follow_today", False)
+                N.set_prop(a, "solar_term", LATE_GREEN["ORCHARD_FRUIT"])
                 a.tags = list(a.tags) + [unreal.Name(TAG)]
                 n += 1
     except Exception as ex:  # noqa: BLE001

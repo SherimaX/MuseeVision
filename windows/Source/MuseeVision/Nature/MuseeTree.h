@@ -69,6 +69,15 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Nature", meta = (ClampMin = "0.1", ClampMax = "3"))
 	float LeafDensity = 1.f;
 
+	/** The leaves' colour multiplied by this (white: the species' own), e.g. a wing's older, darker greens. */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Nature")
+	FLinearColor LeafTint = FLinearColor::White;
+
+	/** Extra variation of the leaves' value cluster to cluster (0: the species' own), so a crown is not one even
+	 *  colour: each twig's leaves darker or lighter by up to this fraction. */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Nature", meta = (ClampMin = "0", ClampMax = "0.6"))
+	float LeafVariation = 0.f;
+
 	/** Visitors walk round the trunk (a capsule), or round the clump (a box). */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Nature")
 	bool bBlockVisitors = true;

@@ -1,4 +1,5 @@
 #include "Chenghuai/ChenghuaiHall.h"
+#include "Algo/Reverse.h"
 
 #include "Chenghuai/ChenghuaiPaint.h"
 #include "Chenghuai/ChenghuaiTune.h"
@@ -230,19 +231,52 @@ namespace ChenghuaiHall
 			return Out;
 		}
 
-		/** A column with its base: a stone (柱顶石) under a raised drum (鼓镜), the shaft tapering 1 %. */
+		/** A column with its base: a stone (柱顶石) under a carved drum (鼓墩: a bulging drum with a bead (连珠) course at
+		 *  top and bottom and a rolled lip, about 0.6 D tall), the shaft tapering 1 %. (Round 5: the references' drum bases;
+		 *  it was a low 鼓镜 disc.) */
 		void Column(FChMeshes& Out, const FHallSpec& H, double U, double V, double Z0, double Z1, double D)
 		{
 			const FVector At = H.L.P(U, V, Z0);
 			const double Side = 1.9 * D;
 			Kit::Box(Out[CB::StoneKerb], TEXT("Column base"), At + FVector(-0.5 * Side, -0.5 * Side, -0.08), At + FVector(0.5 * Side, 0.5 * Side, 0.012));
+			const double Hd = 0.6 * D;
 			FProfile Drum;
-			Drum.Add(0.0, 0.0).Add(0.68 * D, 0.0).Add(0.68 * D, 0.012).Add(0.62 * D, 0.045, true).Add(0.55 * D, 0.055).Add(0.0, 0.055);
-			Kit::Lathe(Out[CB::StoneKerb], TEXT("Base drum"), At + FVector(0, 0, 0.01), FVector::UpVector, Drum, 24, 0.6 * D);
+			Drum.Add(0.0, 0.0).Add(0.66 * D, 0.0).Add(0.68 * D, 0.03 * Hd).Add(0.64 * D, 0.08 * Hd)       // the foot and its bead
+				.Add(0.67 * D, 0.13 * Hd).Add(0.62 * D, 0.18 * Hd)
+				.Add(0.70 * D, 0.38 * Hd, true).Add(0.72 * D, 0.5 * Hd, true).Add(0.70 * D, 0.62 * Hd, true)  // the belly
+				.Add(0.62 * D, 0.82 * Hd).Add(0.65 * D, 0.87 * Hd).Add(0.60 * D, 0.92 * Hd)                 // the top bead
+				.Add(0.58 * D, 0.97 * Hd).Add(0.55 * D, Hd).Add(0.0, Hd);
+			Kit::Lathe(Out[CB::StoneKerb], TEXT("Base drum"), At + FVector(0, 0, 0.01), FVector::UpVector, Drum, 32, 0.7 * D);
 			FProfile Shaft;
+			const double Z00 = 0.01 + Hd;
 			const double R0 = 0.5 * D, R1 = 0.5 * D * (1.0 - 0.01 * (Z1 - Z0) / D * 0.1);
-			Shaft.Add(0.0, 0.0).Add(R0 - 0.008, 0.0).Add(R0, 0.01).Add(R1, Z1 - Z0 - 0.06).Add(0.0, Z1 - Z0 - 0.06);
-			Kit::Lathe(Out[H.TimberPart], TEXT("Column"), At + FVector(0, 0, 0.06), FVector::UpVector, Shaft, 20, R0, true);
+			Shaft.Add(0.0, 0.0).Add(R0 - 0.008, 0.0).Add(R0, 0.01).Add(R1, Z1 - Z0 - Z00).Add(0.0, Z1 - Z0 - Z00);
+			Kit::Lathe(Out[H.TimberPart], TEXT("Column"), At + FVector(0, 0, Z00), FVector::UpVector, Shaft, 20, R0, true);
+		}
+
+		/** A corner bracket (雀替) under a lintel's end at a column: a carved board in the frame's u-z plane, from the
+		 *  column's face (u = Face) out along the bay (Dir ±1) and down from the lintel's underside (ZTop), its lower edge a
+		 *  long curve ending in a scroll (卷草) near the column, Thick across. */
+		void Bracket(FPart& Part, const FLocal& L, double Face, double Dir, double ZTop, double Len, double Hq, double Thick)
+		{
+			TArray<FVector2D> O;
+			O.Add(FVector2D(0.0, 0.0));
+			O.Add(FVector2D(Len, 0.0));
+			// The tip: a small rounded drop, then the long curve down to the column, with two scroll notches on it.
+			O.Add(FVector2D(Len, -0.12 * Hq));
+			O.Add(FVector2D(Len - 0.05 * Len, -0.2 * Hq));
+			const int32 N = 14;
+			for (int32 k = 1; k <= N; ++k)
+			{
+				const double T = double(k) / N;
+				double U = Len * (0.95 - 0.95 * T);
+				double Zz = -Hq * (0.2 + 0.8 * FMath::Pow(T, 1.7));
+				if (k == 5 || k == 10) { Zz += 0.06 * Hq; U += 0.03 * Len; }     // the scrolls' notches
+				O.Add(FVector2D(U, Zz));
+			}
+			O.Add(FVector2D(0.0, -Hq));
+			if (Dir < 0.0) { for (FVector2D& P : O) { P.X = -P.X; } Algo::Reverse(O); }
+			Kit::Extrude(Part, TEXT("Bracket"), O, L.P(Face, 0.0, ZTop), L.U3(), FVector::UpVector, L.V3(), -0.5 * Thick, 0.5 * Thick);
 		}
 
 		/** A beam across (along v) at u, from Va to Vb, its top at Top: a W × Hb section, the arrises eased (抹角). */
@@ -558,6 +592,16 @@ namespace ChenghuaiHall
 				{
 					Kit::LBox(Out[H.TimberPart], TEXT("Eave board"), L, A, B, -0.03, 0.03, G.Zc, BoardTop);
 					Kit::LBox(Out[H.TimberPart], TEXT("Eave lintel"), L, A, B, -0.5 * LintelT, 0.5 * LintelT, G.Zc - LintelH, G.Zc);
+				}
+				// The corner brackets (雀替) under the lintel's ends, at both columns of the bay (round 5: the references').
+				{
+					const double Span = B - A, R = 0.5 * H.ColD;
+					const double Len = FMath::Min(0.22 * Span, 0.85), Hq = FMath::Min(0.55 * Len, 0.36);
+					if (Span > 1.2)
+					{
+						Bracket(Out[CB::GreenLacquer], L, A + R, 1.0, G.Zc - LintelH, Len, Hq, 0.42 * LintelT);
+						Bracket(Out[CB::GreenLacquer], L, B - R, -1.0, G.Zc - LintelH, Len, Hq, 0.42 * LintelT);
+					}
 				}
 				// The facade line's lintel (金枋) over the lattice, in a veranda.
 				if (H.FacadeV > 0.01)
@@ -881,18 +925,41 @@ namespace ChenghuaiHall
 					const double Out1 = End == 0 ? -1.0 : 1.0;
 					Kit::LRoundBox(Out[CB::Ridges], TEXT("Tail tray"), L, UE - TrayHalf, UE + TrayHalf, G.RidgeV - 0.165, G.RidgeV + 0.165, ZR + 0.40, ZR + 0.45, 0.012);
 					Kit::LRoundBox(Out[CB::Ridges], TEXT("Tail plate"), L, UE - PlateHalf, UE + PlateHalf, G.RidgeV - 0.13, G.RidgeV + 0.13, ZR + 0.45, ZR + 0.51, 0.025);
-					constexpr int32 Steps = 14;
-					TArray<FVector> Path;
-					for (int32 k = 0; k <= Steps; ++k)
+					// The tail rises outward, then curls back over itself into a scroll (卷尾) as the references' (round 5: it
+					// ended in a point, a horn): the rising run, then a spiral turning up and back towards the ridge, its
+					// radius closing from Scroll to a third over ScrollTurn degrees.
+					const double Scroll = ChenghuaiTune::Num(TEXT("tail.Scroll"), 0.13), ScrollTurn = ChenghuaiTune::Num(TEXT("tail.ScrollTurn"), 300.0);
+					constexpr int32 Rise = 10, Curl = 18;
+					const int32 Steps = Rise + (Scroll > 0.005 ? Curl : 0);
+					TArray<FVector2D> SZ;   // (outward, up)
+					for (int32 k = 0; k <= Rise; ++k)
 					{
-						const double T = double(k) / Steps;
-						Path.Add(G.P(UE + Out1 * (0.02 + TailLen * T), G.RidgeV, ZR + 0.47 + TailRise * T + TailCurl * T * T));
+						const double T = double(k) / Rise;
+						SZ.Add(FVector2D(0.02 + TailLen * T, 0.47 + TailRise * T + TailCurl * T * T));
 					}
+					if (Scroll > 0.005)
+					{
+						FVector2D Dir = FVector2D(TailLen, TailRise + 2.0 * TailCurl).GetSafeNormal();
+						double Heading = FMath::Atan2(Dir.Y, Dir.X);
+						FVector2D Q = SZ.Last();
+						const double Turn = FMath::DegreesToRadians(ScrollTurn);
+						for (int32 k = 1; k <= Curl; ++k)
+						{
+							const double T = double(k) / Curl;
+							const double R = Scroll * FMath::Lerp(1.0, 0.34, T);
+							const double DA = Turn / Curl;
+							Heading += DA;                                     // turning up and back (counter-clockwise, outward right)
+							Q += FVector2D(FMath::Cos(Heading), FMath::Sin(Heading)) * R * DA;
+							SZ.Add(Q);
+						}
+					}
+					TArray<FVector> Path;
+					for (const FVector2D& Q : SZ) { Path.Add(G.P(UE + Out1 * Q.X, G.RidgeV, ZR + Q.Y)); }
 					// The section square to the tail (not upright, which would thin it where it climbs), shrinking to a third.
 					TArray<FFrame> Run = Kit::UprightFrames(Path);
 					for (int32 k = 0; k < Run.Num(); ++k)
 					{
-						const double Taper = FMath::Lerp(1.0, TailTip, double(k) / Steps);
+						const double Taper = FMath::Lerp(1.0, TailTip, FMath::Min(1.0, double(k) / Rise)) * (k > Rise ? FMath::Lerp(1.0, 0.75, double(k - Rise) / FMath::Max(1, Steps - Rise)) : 1.0);
 						Run[k].AxisA = Run[k].NormA * Taper;
 						Run[k].AxisB = Run[k].NormB * Taper;
 					}

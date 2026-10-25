@@ -310,7 +310,8 @@ namespace ChenghuaiRockery
 		/** Surface nets over the height field, with a stone's roughness on its faces. */
 		void BuildMass(FMeshData& M)
 		{
-			const double Voxel = 0.1;
+			// (Round 5: finer, so the honeycomb's small pockets and the peaks' tunnels resolve; it was 0.1 m.)
+			const double Voxel = ChenghuaiTune::Num(TEXT("rockery.Voxel"), 0.075);
 			const FVector Lo(4.6, -36.8, -0.25), Hi(16.2, -19.7, Summit + 2.3);
 			const int32 NX = FMath::CeilToInt32((Hi.X - Lo.X) / Voxel) + 1;
 			const int32 NY = FMath::CeilToInt32((Hi.Y - Lo.Y) / Voxel) + 1;
@@ -331,6 +332,48 @@ namespace ChenghuaiRockery
 			};
 			const TArray<FHole>& HoleList = Holes();
 			const TArray<FPeak>& PeakList = Peaks();
+			// The honeycomb (瘦漏透皱, round 5): small pockets the water ate into every face, from a jittered grid of
+			// cells (one candidate pocket a cell, kept at PocketShare), and tunnels through each peak at two heights, so
+			// light shows through the stone, as the references' Taihu rocks are full of holes.
+			const double PocketCell = ChenghuaiTune::Num(TEXT("rockery.PocketCell"), 0.42);
+			const double PR0 = ChenghuaiTune::Num(TEXT("rockery.PocketR"), 0.11), PR1 = ChenghuaiTune::Num(TEXT("rockery.PocketRRange"), 0.09);
+			const double Share = ChenghuaiTune::Num(TEXT("rockery.PocketShare"), 0.6);
+			const double TunnelR = ChenghuaiTune::Num(TEXT("rockery.TunnelR"), 0.13);
+			auto Pocket = [&](const FVector& P)
+			{
+				const int32 CI = FMath::FloorToInt32(P.X / PocketCell), CJ = FMath::FloorToInt32(P.Y / PocketCell), CK = FMath::FloorToInt32(P.Z / PocketCell);
+				double Best = 1e9;
+				for (int32 a = -1; a <= 1; ++a) for (int32 b = -1; b <= 1; ++b) for (int32 c = -1; c <= 1; ++c)
+				{
+					const int32 I = CI + a, J = CJ + b, K = CK + c;
+					const int32 Key = I * 73856093 ^ J * 19349663 ^ K * 83492791;
+					if (Kit::Hash01(Key, 901) > Share) { continue; }
+					const FVector C((I + Kit::Hash01(Key, 902)) * PocketCell, (J + Kit::Hash01(Key, 903)) * PocketCell, (K + Kit::Hash01(Key, 904)) * PocketCell);
+					const double R = PR0 + PR1 * Kit::Hash01(Key, 905);
+					Best = FMath::Min(Best, FVector::Dist(P, C) - R);
+				}
+				return Best;   // < 0 inside a pocket
+			};
+			auto Tunnel = [&](const FVector& P)
+			{
+				double Best = 1e9;
+				for (const FPeak& K : PeakList)
+				{
+					if (FVector2D::DistSquared(FVector2D(P.X, P.Y), K.C) > 1.6) { continue; }
+					for (int32 t = 0; t < 2; ++t)
+					{
+						const double Zt = K.Base + K.Tall * (0.38 + 0.3 * t);
+						const double An = K.Turn + 1.3 * t + 0.6 * Kit::Hash01(K.Seed, 910 + t);
+						const FVector Ax(FMath::Cos(An), FMath::Sin(An), 0.25 * (Kit::Hash01(K.Seed, 912 + t) - 0.5));
+						const FVector C(K.C.X, K.C.Y, Zt);
+						const FVector Rel = P - C;
+						const double Along = FMath::Clamp(FVector::DotProduct(Rel, Ax), -1.2, 1.2);
+						const double R = TunnelR * (0.8 + 0.5 * Kit::Hash01(K.Seed, 914 + t)) * (1.0 - 0.45 * t);
+						Best = FMath::Min(Best, (Rel - Ax * Along).Size() - R);
+					}
+				}
+				return Best;
+			};
 			auto Field = [&](const FVector& P)
 			{
 				const double H = HAt(P.X, P.Y);
@@ -344,6 +387,12 @@ namespace ChenghuaiRockery
 					const double D = FVector::Dist(P, O.C);
 					if (D < O.R + 0.3) { F = FMath::Max(F, O.R - D + 0.05 * (MN::Noise(P * 6.0, 79) - 0.5)); }
 				}
+				// The pockets and tunnels cut the stone (only near its surface: a pocket deep inside would be a void).
+				if (F > -0.35 && F < 0.2)
+				{
+					F = FMath::Max(F, -Pocket(P) + 0.03 * (MN::Noise(P * 9.0, 81) - 0.5));
+				}
+				F = FMath::Max(F, -Tunnel(P));
 				// Rough faces: the stone's lumps and the water's vertical wrinkles.
 				const double Rough = 0.07 * (MN::Fbm(P * 2.2, 3, 71) - 0.5) + 0.025 * (MN::Noise(P * 7.0, 73) - 0.5)
 					+ 0.055 * (MN::Noise(FVector(P.X * 5.0, P.Y * 5.0, P.Z * 1.2), 77) - 0.5);
