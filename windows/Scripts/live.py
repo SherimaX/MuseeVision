@@ -252,6 +252,33 @@ def geo(args):
     print("live: no game answered in 60 s (start one with: live.py start)")
 
 
+def no_live_coding():
+    """Live Coding off in this checkout's own (uncommitted) editor settings: a game with it on holds the engine's
+    build lock for every MuseeVision checkout on the PC, so no other worktree could build while it ran."""
+    path = os.path.join(PROJECT, "Saved", "Config", "WindowsEditor", "EditorPerProjectUserSettings.ini")
+    section = "/Script/LiveCoding.LiveCodingSettings"
+    text = open(path, encoding="utf-8-sig").read() if os.path.exists(path) else ""
+    if f"[{section}]" in text:
+        lines, inside, done = [], False, False
+        for line in text.splitlines():
+            if line.strip().startswith("["):
+                if inside and not done:
+                    lines.append("bEnabled=False")
+                    done = True
+                inside = line.strip() == f"[{section}]"
+            elif inside and line.strip().lower().startswith("benabled="):
+                line, done = "bEnabled=False", True
+            lines.append(line)
+        if inside and not done:
+            lines.append("bEnabled=False")
+        text = "\n".join(lines) + "\n"
+    else:
+        text = text.rstrip("\n") + ("\n\n" if text else "") + f"[{section}]\nbEnabled=False\n"
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with open(path, "w", encoding="utf-8") as f:
+        f.write(text)
+
+
 def run_dir(name):
     if os.path.isdir(name):
         return name
@@ -312,6 +339,7 @@ def main():
         sys.exit(__doc__)
     cmd, args = sys.argv[1], sys.argv[2:]
     if cmd == "start":
+        no_live_coding()
         uproject = os.path.join(PROJECT, "MuseeVision.uproject")
         subprocess.Popen([GAME, uproject, "-game", "-Live", "-windowed", "-ResX=1920", "-ResY=1080", "-log"] + args)
         print("live: game starting; edits apply once the map has loaded")
