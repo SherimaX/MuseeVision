@@ -295,11 +295,11 @@ namespace ChenghuaiHouse
 		// door (走马板), the side panels (余塞板) between the frame and the columns; four door pins (门簪) on the rail.
 		const double V = 2.45, DoorW = 1.9, Head = F + 2.75, Top = S.Seat[2] - 0.35;
 		const double UA = 2.3 - 0.5 * DoorW, UB = 2.3 + 0.5 * DoorW;
-		Kit::LBox(Out[CB::RedLacquer], TEXT("Door post"), L, UA - 0.12, UA, V - 0.09, V + 0.09, F, Head);
-		Kit::LBox(Out[CB::RedLacquer], TEXT("Door post"), L, UB, UB + 0.12, V - 0.09, V + 0.09, F, Head);
-		Kit::LBox(Out[CB::RedLacquer], TEXT("Sill"), L, UA - 0.12, UB + 0.12, V - 0.1, V + 0.1, F, F + 0.25);
-		Kit::LBox(Out[CB::RedLacquer], TEXT("Middle rail"), L, 0.95, 3.65, V - 0.09, V + 0.09, Head, Head + 0.2);
-		Kit::LBox(Out[CB::RedLacquer], TEXT("Top rail"), L, 0.95, 3.65, V - 0.09, V + 0.09, Top - 0.15, Top);
+		Kit::LRoundBox(Out[CB::RedLacquer], TEXT("Door post"), L, UA - 0.12, UA, V - 0.09, V + 0.09, F, Head, 0.01);
+		Kit::LRoundBox(Out[CB::RedLacquer], TEXT("Door post"), L, UB, UB + 0.12, V - 0.09, V + 0.09, F, Head, 0.01);
+		Kit::LRoundBox(Out[CB::RedLacquer], TEXT("Sill"), L, UA - 0.12, UB + 0.12, V - 0.1, V + 0.1, F, F + 0.25, 0.01);
+		Kit::LRoundBox(Out[CB::RedLacquer], TEXT("Middle rail"), L, 0.95, 3.65, V - 0.09, V + 0.09, Head, Head + 0.2, 0.01);
+		Kit::LRoundBox(Out[CB::RedLacquer], TEXT("Top rail"), L, 0.95, 3.65, V - 0.09, V + 0.09, Top - 0.15, Top, 0.01);
 		Kit::LBox(Out[CB::RedLacquer], TEXT("Panel over the door"), L, 0.95, 3.65, V - 0.03, V + 0.03, Head + 0.2, Top - 0.15);
 		Kit::LBox(Out[CB::RedLacquer], TEXT("Side panel"), L, 0.95, UA - 0.12, V - 0.03, V + 0.03, F + 0.25, Head);
 		Kit::LBox(Out[CB::RedLacquer], TEXT("Side panel"), L, UB + 0.12, 3.65, V - 0.03, V + 0.03, F + 0.25, Head);

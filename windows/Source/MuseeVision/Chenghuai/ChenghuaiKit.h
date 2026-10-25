@@ -527,6 +527,19 @@ namespace ChenghuaiKit
 		SweepSolid(Part, Name, Run, R > 0.0 ? RoundedRectProfile(W, H, FMath::Min(R, 0.49 * FMath::Min(W, H)), 2) : RectProfile(W, H));
 	}
 
+	/**
+	 * A box of a frame, as LBox, but swept along its longest side with its four long arrises rounded to R: painted
+	 * joinery (a lattice bar, a stile, a sill), whose paint and ground leave no edge sharp.
+	 */
+	inline void LRoundBox(FPart& Part, const FString& Name, const FLocal& L, double U0, double U1, double V0, double V1, double Z0, double Z1, double R)
+	{
+		const double DU = FMath::Abs(U1 - U0), DV = FMath::Abs(V1 - V0), DZ = FMath::Abs(Z1 - Z0);
+		const double UM = 0.5 * (U0 + U1), VM = 0.5 * (V0 + V1), ZM = 0.5 * (Z0 + Z1);
+		if (DU >= DV && DU >= DZ) { Member(Part, Name, L.P(UM - 0.5 * DU, VM, ZM), L.P(UM + 0.5 * DU, VM, ZM), L.V3(), DV, DZ, R); }
+		else if (DZ >= DV) { Member(Part, Name, L.P(UM, VM, ZM - 0.5 * DZ), L.P(UM, VM, ZM + 0.5 * DZ), L.U3(), DU, DV, R); }
+		else { Member(Part, Name, L.P(UM, VM - 0.5 * DV, ZM), L.P(UM, VM + 0.5 * DV, ZM), L.U3(), DU, DZ, R); }
+	}
+
 	/** A round member A → B (a purlin, a rafter, a rod): radius R at A and RB at B (0: R), Segments round. */
 	inline void Rod(FPart& Part, const FString& Name, const FVector& A, const FVector& B, double R, int32 Segments, double RB = 0.0)
 	{

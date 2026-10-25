@@ -19,6 +19,7 @@ namespace ChenghuaiHall
 	{
 		constexpr double SeatOver = 0.12;        // the eave purlin's seat above the column's top, plus its diameter
 		constexpr double RafterD = 0.095;        // round rafters (檐椽)
+		constexpr int32 RafterSides = 16;        // round enough to read round under their painted ends
 		constexpr double RafterPitch = 0.22;     // on centres (一椽一当: a rafter and a rafter's width between)
 		constexpr double FlyD = 0.085;           // square flying rafters (飞椽)
 		constexpr double Board = 0.02;           // the boarding (望板)
@@ -278,14 +279,15 @@ namespace ChenghuaiHall
 	void LatticePanel(FChMeshes& Out, const FLocal& F, double U, double V, double Z, double W, double H, ELattice Pattern, int32 FramePart, bool bPaper)
 	{
 		constexpr double Bar = 0.018, Deep = 0.024, Rim = 0.03;
+		constexpr double Arris = 0.003;   // the bars' edges, rounded by the paint and its ground
 		FPart& P = Out[FramePart];
-		auto Horiz = [&](double U0, double U1, double Zc) { Kit::LBox(P, TEXT("Lattice bar"), F, U0, U1, V, V + Deep, Zc - 0.5 * Bar, Zc + 0.5 * Bar); };
-		auto Vert = [&](double Uc, double Z0, double Z1) { Kit::LBox(P, TEXT("Lattice bar"), F, Uc - 0.5 * Bar, Uc + 0.5 * Bar, V, V + Deep, Z0, Z1); };
+		auto Horiz = [&](double U0, double U1, double Zc) { Kit::LRoundBox(P, TEXT("Lattice bar"), F, U0, U1, V, V + Deep, Zc - 0.5 * Bar, Zc + 0.5 * Bar, Arris); };
+		auto Vert = [&](double Uc, double Z0, double Z1) { Kit::LRoundBox(P, TEXT("Lattice bar"), F, Uc - 0.5 * Bar, Uc + 0.5 * Bar, V, V + Deep, Z0, Z1, Arris); };
 		// The rim (仔边).
-		Kit::LBox(P, TEXT("Lattice rim"), F, U, U + W, V - 0.004, V + Deep + 0.004, Z, Z + Rim);
-		Kit::LBox(P, TEXT("Lattice rim"), F, U, U + W, V - 0.004, V + Deep + 0.004, Z + H - Rim, Z + H);
-		Kit::LBox(P, TEXT("Lattice rim"), F, U, U + Rim, V - 0.004, V + Deep + 0.004, Z + Rim, Z + H - Rim);
-		Kit::LBox(P, TEXT("Lattice rim"), F, U + W - Rim, U + W, V - 0.004, V + Deep + 0.004, Z + Rim, Z + H - Rim);
+		Kit::LRoundBox(P, TEXT("Lattice rim"), F, U, U + W, V - 0.004, V + Deep + 0.004, Z, Z + Rim, 0.005);
+		Kit::LRoundBox(P, TEXT("Lattice rim"), F, U, U + W, V - 0.004, V + Deep + 0.004, Z + H - Rim, Z + H, 0.005);
+		Kit::LRoundBox(P, TEXT("Lattice rim"), F, U, U + Rim, V - 0.004, V + Deep + 0.004, Z + Rim, Z + H - Rim, 0.005);
+		Kit::LRoundBox(P, TEXT("Lattice rim"), F, U + W - Rim, U + W, V - 0.004, V + Deep + 0.004, Z + Rim, Z + H - Rim, 0.005);
 		const double IU0 = U + Rim, IU1 = U + W - Rim, IZ0 = Z + Rim, IZ1 = Z + H - Rim;
 		const double IW = IU1 - IU0, IH = IZ1 - IZ0;
 		if (Pattern == ELattice::IceCrack)
@@ -326,7 +328,7 @@ namespace ChenghuaiHall
 				if (Cut.Num() != 2 || L0.Num() < 3 || L1.Num() < 3 || Area(L0) < 0.0035 || Area(L1) < 0.0035 || (Cut[1] - Cut[0]).Size() < 0.05) { continue; }
 				Cells[Best] = L0;
 				Cells.Add(L1);
-				Kit::Member(P, TEXT("Lattice bar"), F.P(Cut[0].X, V + 0.5 * Deep, Cut[0].Y), F.P(Cut[1].X, V + 0.5 * Deep, Cut[1].Y), F.V3(), Deep, Bar);
+				Kit::Member(P, TEXT("Lattice bar"), F.P(Cut[0].X, V + 0.5 * Deep, Cut[0].Y), F.P(Cut[1].X, V + 0.5 * Deep, Cut[1].Y), F.V3(), Deep, Bar, Arris);
 				++n;
 			}
 		}
@@ -395,12 +397,12 @@ namespace ChenghuaiHall
 	{
 		constexpr double Stile = 0.065, Rail = 0.06, T = 0.065;
 		FPart& P = Out[FramePart];
-		Kit::LBox(P, TEXT("Door stile"), F, U, U + Stile, V, V + T, Z, Z + H);
-		Kit::LBox(P, TEXT("Door stile"), F, U + W - Stile, U + W, V, V + T, Z, Z + H);
+		Kit::LRoundBox(P, TEXT("Door stile"), F, U, U + Stile, V, V + T, Z, Z + H, 0.006);
+		Kit::LRoundBox(P, TEXT("Door stile"), F, U + W - Stile, U + W, V, V + T, Z, Z + H, 0.006);
 		// Five rails (五抹): the foot, under and over the waist panel, under the lattice head's top panel, the head.
 		const double ZApron = Z + 0.30 * H, ZWaist = ZApron + 0.09 * H, ZTop = Z + H - 0.08 * H;
 		const double Rails[5] = {Z, ZApron, ZWaist, ZTop, Z + H - Rail};
-		for (const double R : Rails) { Kit::LBox(P, TEXT("Door rail"), F, U + Stile, U + W - Stile, V, V + T, R, R + Rail); }
+		for (const double R : Rails) { Kit::LRoundBox(P, TEXT("Door rail"), F, U + Stile, U + W - Stile, V, V + T, R, R + Rail, 0.006); }
 		// Panels: the apron (裙板) with a raised carved field, the waist (绦环板) and the top panel, set 1 cm back.
 		auto Panel = [&](double Z0, double Z1, bool bCarved)
 		{
@@ -662,7 +664,7 @@ namespace ChenghuaiHall
 					const double Va = H.PurlinV[i], Vb = H.PurlinV[i + 1];
 					if (!Inside(Va) || !Inside(Vb)) { continue; }
 					const FVector A = G.P(U, Va, G.Seat[i] + R), B = G.P(U, Vb, G.Seat[i + 1] + R);
-					Kit::Rod(Out[RafterPartOf(H)], TEXT("Rafter"), A - (B - A).GetSafeNormal() * 0.04, B + (B - A).GetSafeNormal() * 0.04, R, 8);
+					Kit::Rod(Out[RafterPartOf(H)], TEXT("Rafter"), A - (B - A).GetSafeNormal() * 0.04, B + (B - A).GetSafeNormal() * 0.04, R, RafterSides);
 				}
 				// The eave: round rafters out to EaveR, flying rafters on them to the edge.
 				auto Eave = [&](bool bBack)
@@ -673,7 +675,7 @@ namespace ChenghuaiHall
 					if (!Inside(VR) || !Inside(VF) || FMath::Abs(VF - V0) < 0.1) { return; }
 					const FVector A = G.P(U, V0, G.RafterTop(V0) - R), B = G.P(U, VR, G.RafterTop(VR) - R);
 					const FVector Dir = (B - A).GetSafeNormal();
-					Kit::Rod(Out[RafterPartOf(H)], TEXT("Eave rafter"), A - Dir * 0.2, B, R, 8);
+					Kit::Rod(Out[RafterPartOf(H)], TEXT("Eave rafter"), A - Dir * 0.2, B, R, RafterSides);
 					if (H.bRafterEnds) { ChenghuaiPaint::EndCap(Out[CB::PaintedBeam], B + Dir * 0.002, Dir, FVector::UpVector, R, true, (Seq++) % 8); }
 					// The flying rafter: its tail on the boarding, its head past the round rafter's end.
 					const double S = bBack ? 1.0 : -1.0;
@@ -853,22 +855,37 @@ namespace ChenghuaiHall
 				 .Add(0.12, 0.40).Add(0.075, 0.44, true).Add(0.0, 0.46, true).Add(-0.075, 0.44, true).Add(-0.12, 0.40).Add(-0.12, 0.36).Add(-0.105, 0.34)
 				 .Add(-0.105, 0.14).Add(-0.13, 0.12).Add(-0.13, 0.08).Add(-0.17, 0.06);
 				Kit::SweepSolid(Out[CB::Ridges], TEXT("Ridge"), Kit::RunFrames(G.P(A, G.RidgeV, ZR), G.P(B, G.RidgeV, ZR), L.V3()), P);
-				// The scorpion tails (蝎子尾): at each end a tail rising outwards at 30°, on a plate of carved brick (平草).
+				// The scorpion tails (蝎子尾): at each end, on two courses of carved brick (盘子 under 平草, their edges worn
+				// round), a tail of lime-bedded tiles rising outwards from 30° to nearly 60°, round in section, tapering to its tip.
 				for (const int32 End : {0, 1})
 				{
 					const double UE = End == 0 ? A + 0.35 : B - 0.35;
 					const double Out1 = End == 0 ? -1.0 : 1.0;
-					Kit::LBox(Out[CB::Ridges], TEXT("Tail plate"), L, UE - 0.28, UE + 0.28, G.RidgeV - 0.16, G.RidgeV + 0.16, ZR + 0.40, ZR + 0.47);
+					Kit::LRoundBox(Out[CB::Ridges], TEXT("Tail tray"), L, UE - 0.30, UE + 0.30, G.RidgeV - 0.165, G.RidgeV + 0.165, ZR + 0.40, ZR + 0.45, 0.012);
+					Kit::LRoundBox(Out[CB::Ridges], TEXT("Tail plate"), L, UE - 0.24, UE + 0.24, G.RidgeV - 0.13, G.RidgeV + 0.13, ZR + 0.45, ZR + 0.51, 0.025);
+					constexpr int32 Steps = 14;
 					TArray<FVector> Path;
-					for (int32 k = 0; k <= 8; ++k)
+					for (int32 k = 0; k <= Steps; ++k)
 					{
-						const double T = double(k) / 8;
-						Path.Add(G.P(UE + Out1 * (0.1 + 0.55 * T), G.RidgeV, ZR + 0.44 + 0.34 * T + 0.08 * T * T));
+						const double T = double(k) / Steps;
+						Path.Add(G.P(UE + Out1 * (0.02 + 0.6 * T), G.RidgeV, ZR + 0.47 + 0.26 * T + 0.24 * T * T));
+					}
+					// The section square to the tail (not upright, which would thin it where it climbs), shrinking to a third.
+					TArray<FFrame> Run = Kit::UprightFrames(Path);
+					for (int32 k = 0; k < Run.Num(); ++k)
+					{
+						const double Taper = FMath::Lerp(1.0, 0.32, double(k) / Steps);
+						Run[k].AxisA = Run[k].NormA * Taper;
+						Run[k].AxisB = Run[k].NormB * Taper;
 					}
 					FProfile Tail;
 					Tail.bClosed = true;
-					Tail.Add(-0.06, -0.06).Add(0.06, -0.06).Add(0.06, 0.04).Add(0.0, 0.07, true).Add(-0.06, 0.04);
-					Kit::SweepSolid(Out[CB::Ridges], TEXT("Scorpion tail"), Kit::UprightFrames(Path), Tail);
+					for (int32 k = 0; k < 12; ++k)
+					{
+						const double An = 2.0 * UE_DOUBLE_PI * k / 12;
+						Tail.Add(0.055 * FMath::Cos(An), 0.05 * FMath::Sin(An), true);
+					}
+					Kit::SweepSolid(Out[CB::Ridges], TEXT("Scorpion tail"), Run, Tail);
 				}
 			}
 			else if (H.Ridge == ERidge::Rolled)
@@ -1050,9 +1067,9 @@ namespace ChenghuaiHall
 				}
 				// The frame (槛框): posts against the columns, the head rail under the lintel.
 				constexpr double Post = 0.1, FrameT = 0.1;
-				Kit::LBox(Out[FramePart], TEXT("Frame post"), L, A, A + Post, V - 0.5 * FrameT, V + 0.5 * FrameT, F, Head);
-				Kit::LBox(Out[FramePart], TEXT("Frame post"), L, B - Post, B, V - 0.5 * FrameT, V + 0.5 * FrameT, F, Head);
-				Kit::LBox(Out[FramePart], TEXT("Head rail"), L, A + Post, B - Post, V - 0.5 * FrameT, V + 0.5 * FrameT, Head - 0.1, Head);
+				Kit::LRoundBox(Out[FramePart], TEXT("Frame post"), L, A, A + Post, V - 0.5 * FrameT, V + 0.5 * FrameT, F, Head, 0.008);
+				Kit::LRoundBox(Out[FramePart], TEXT("Frame post"), L, B - Post, B, V - 0.5 * FrameT, V + 0.5 * FrameT, F, Head, 0.008);
+				Kit::LRoundBox(Out[FramePart], TEXT("Head rail"), L, A + Post, B - Post, V - 0.5 * FrameT, V + 0.5 * FrameT, Head - 0.1, Head, 0.008);
 				const double IA = A + Post, IB = B - Post;
 				// A door clears 1.95 m over its sill (the visitor stands 1.8 m): in the low rows (columns of 2.5 m, no
 				// veranda) there's no room left for a transom, and the leaves run up to the head rail.
@@ -1062,14 +1079,14 @@ namespace ChenghuaiHall
 				if (Bay == EBay::Doors || Bay == EBay::DoorsOpen)
 				{
 					// The sill (下槛), the door head (中槛), the transom (横披) of lattice panels between it and the head rail.
-					Kit::LBox(Out[FramePart], TEXT("Sill"), L, IA, IB, V - 0.06, V + 0.06, F, F + 0.1);
-					if (bTransom) { Kit::LBox(Out[FramePart], TEXT("Door head"), L, IA, IB, V - 0.06, V + 0.06, DoorTop, DoorTop + 0.1); }
+					Kit::LRoundBox(Out[FramePart], TEXT("Sill"), L, IA, IB, V - 0.06, V + 0.06, F, F + 0.1, 0.01);
+					if (bTransom) { Kit::LRoundBox(Out[FramePart], TEXT("Door head"), L, IA, IB, V - 0.06, V + 0.06, DoorTop, DoorTop + 0.1, 0.008); }
 					const int32 NT = FMath::Max(1, FMath::RoundToInt32((IB - IA) / 0.95));
 					for (int32 t = 0; t < NT && bTransom; ++t)
 					{
 						const double TA = IA + (IB - IA) * t / NT, TB = IA + (IB - IA) * (t + 1) / NT;
 						LatticePanel(Out, L, TA + 0.01, V - 0.02, DoorTop + 0.1, TB - TA - 0.02, Head - 0.1 - DoorTop - 0.1, Pattern, FramePart, true);
-						if (t > 0) { Kit::LBox(Out[FramePart], TEXT("Transom mullion"), L, TA - 0.03, TA + 0.03, V - 0.05, V + 0.05, DoorTop + 0.1, Head - 0.1); }
+						if (t > 0) { Kit::LRoundBox(Out[FramePart], TEXT("Transom mullion"), L, TA - 0.03, TA + 0.03, V - 0.05, V + 0.05, DoorTop + 0.1, Head - 0.1, 0.006); }
 					}
 					// Leaves: four in a wide bay, two in a narrow one; the middle pair swung in when the bay is open.
 					const int32 NL = (IB - IA) > 2.2 ? 4 : 2;
@@ -1101,16 +1118,16 @@ namespace ChenghuaiHall
 					// The sill wall (槛墙) of rubbed brick, its board (榻板), the window frame, 支摘窗 in two columns.
 					const double ZS = F + SillH;
 					Kit::LBox(Out[CB::BrickFine], TEXT("Sill wall"), L, IA, IB, V - 0.17, V + 0.17, F - 0.05, ZS - 0.06);
-					Kit::LBox(Out[FramePart], TEXT("Sill board"), L, IA - 0.01, IB + 0.01, V - 0.2, V + 0.2, ZS - 0.06, ZS);
-					Kit::LBox(Out[FramePart], TEXT("Window sill"), L, IA, IB, V - 0.05, V + 0.05, ZS, ZS + 0.08);
+					Kit::LRoundBox(Out[FramePart], TEXT("Sill board"), L, IA - 0.01, IB + 0.01, V - 0.2, V + 0.2, ZS - 0.06, ZS, 0.01);
+					Kit::LRoundBox(Out[FramePart], TEXT("Window sill"), L, IA, IB, V - 0.05, V + 0.05, ZS, ZS + 0.08, 0.008);
 					const double Mid = 0.5 * (IA + IB);
-					Kit::LBox(Out[FramePart], TEXT("Window post"), L, Mid - 0.04, Mid + 0.04, V - 0.05, V + 0.05, ZS + 0.08, Head - 0.1);
+					Kit::LRoundBox(Out[FramePart], TEXT("Window post"), L, Mid - 0.04, Mid + 0.04, V - 0.05, V + 0.05, ZS + 0.08, Head - 0.1, 0.006);
 					const double ZW0 = ZS + 0.08, ZW1 = Head - 0.1;
 					const double Split = ZW0 + 0.42 * (ZW1 - ZW0);
 					for (const int32 C : {0, 1})
 					{
 						const double CA = C == 0 ? IA : Mid + 0.04, CB2 = C == 0 ? Mid - 0.04 : IB;
-						Kit::LBox(Out[FramePart], TEXT("Window rail"), L, CA, CB2, V - 0.045, V + 0.045, Split - 0.03, Split + 0.03);
+						Kit::LRoundBox(Out[FramePart], TEXT("Window rail"), L, CA, CB2, V - 0.045, V + 0.045, Split - 0.03, Split + 0.03, 0.005);
 						LatticePanel(Out, L, CA + 0.005, V - 0.025, ZW0 + 0.005, CB2 - CA - 0.01, Split - 0.03 - ZW0 - 0.01, ELattice::Grid, FramePart, true);
 						LatticePanel(Out, L, CA + 0.005, V - 0.025, Split + 0.035, CB2 - CA - 0.01, ZW1 - Split - 0.04, Pattern, FramePart, true);
 					}
