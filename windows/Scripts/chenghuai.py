@@ -152,7 +152,8 @@ def build_masters():
     return out
 
 
-WEATHER_WALL = {"RainStreaks": 0.16, "SplashZone": 0.28, "MossCover": 0.3, "MossUp": 0.5, "MossFoot": 0.8}
+# (Halved 2026-10-25: the same procedural streaks and moss on every wall read as a filter, not as weather.)
+WEATHER_WALL = {"RainStreaks": 0.08, "SplashZone": 0.14, "MossCover": 0.15, "MossUp": 0.25, "MossFoot": 0.4}
 
 
 def brick(key, rough, colour, weather=True):
@@ -166,15 +167,15 @@ def brick(key, rough, colour, weather=True):
                     photo=(key, dict(contrast=1.0, normal=1.0, rough_influence=0.7)), switches=MAT.MACRO)
 
 
-def floor_tile(size, colour, rough, coat, joint):
+def floor_tile(size, colour, rough, coat, joint, coat_rough=0.3, normal=0.7):
     """Square floor bricks (方砖): ground smooth, laid on the square with fine joints; the hall's soaked in tung oil."""
     s = MAT.merged(MAT.QUIET_DRAWN, MAT.STONE_FLOOR, StrataAmount=0.0, PoreAmount=0.1, PoreSize=0.004, VeinAmount=0.0,
                    CourseHeight=size, BlockLength=size, FloorSlab=size, FloorAspect=1.0, FloorStagger=0.0, WallJoints=1.0,
                    FloorJoints=1.0, JointWidth=joint, JointDarkness=0.72, BlockTone=0.2, BlockHue=0.012, Roughness=rough,
-                   RoughnessVariation=0.07, ClearCoat=coat, ClearCoatRoughness=0.3, SlabTilt=0.2, TrafficWear=0.9, RoughWear=0.12,
+                   RoughnessVariation=0.07, ClearCoat=coat, ClearCoatRoughness=coat_rough, SlabTilt=0.2, TrafficWear=0.9, RoughWear=0.12,
                    Specular=0.5)
     return MAT.spec("M_Ch_Stone", s, {"BaseColor": lin(colour)},
-                    photo=("K1", dict(block_shift=1.0, contrast=0.9, normal=0.7, rough_influence=0.5)), switches=MAT.MACRO)
+                    photo=("K1", dict(block_shift=1.0, contrast=0.9, normal=normal, rough_influence=0.5)), switches=MAT.MACRO)
 
 
 def paint(colour, rough, coat, coat_rough=0.2, outdoor=True):
@@ -207,7 +208,7 @@ def specs():
     # ---- Plaster: the garden's and courts' white lime render (粉墙: its mottle photographed, streaked under the copings,
     #      green at the foot), the rooms' whitened hemp lime (大白: a warm neutral, a stone quieter than the lime outside).
     out["PlasterWhite"] = MAT.spec("M_Ch_Plaster", dict({"Roughness": 0.93, "Variation": 0.03, "GrainAmount": 0.02, "Waviness": 0.8, "WaveScale": 0.4,
-                                                        "FootDirt": 0.06, "DustUp": 0.04}, **dict(WEATHER_WALL, RainStreaks=0.22, MossUp=0.0)),
+                                                        "FootDirt": 0.06, "DustUp": 0.04}, **dict(WEATHER_WALL, RainStreaks=0.11, MossUp=0.0)),
                                    {"BaseColor": lin(0xE3DFD5)}, photo=("CH_LIME", dict(colour_amount=0.6, contrast=0.8, normal=0.6, rough_influence=0.3)),
                                    switches=MAT.MACRO)
     out["PlasterRoom"] = MAT.spec("M_Ch_Plaster", {"Roughness": 0.9, "Variation": 0.025, "GrainAmount": 0.015, "Waviness": 0.6, "WaveScale": 0.4,
@@ -216,25 +217,27 @@ def specs():
                                   switches=MAT.MACRO)
     # ---- Stone: 青白石 (Fangshan's grey-white marble) honed and weathered; bluestone (青石) darker, sawn.
     kerb = MAT.merged(NJ, SW, StrataAmount=0.0, VeinAmount=0.04, PoreAmount=0.05, CourseHeight=60.0, BlockLength=1.4, WallJoints=1.0, FloorJoints=1.0,
-                      FloorSlab=1.2, JointWidth=0.002, JointDarkness=0.6, BlockTone=0.1, Roughness=0.6, ClearCoat=0.0, Specular=0.58,
-                      RainStreaks=0.12, SplashZone=0.2, MossCover=0.16, MossUp=0.35, MossFoot=0.7, TrafficWear=0.5)
+                      FloorSlab=1.2, JointWidth=0.002, JointDarkness=0.6, BlockTone=0.1, Roughness=0.45, ClearCoat=0.0, Specular=0.58,
+                      RainStreaks=0.06, SplashZone=0.1, MossCover=0.08, MossUp=0.18, MossFoot=0.35, TrafficWear=0.5)
     out["StoneKerb"] = MAT.spec("M_Ch_Stone", kerb, {"BaseColor": lin(0x9FA09A), "VeinColor": lin(0x8C8E89)},
                                 photo=("S3", dict(block_shift=1.0, contrast=1.35, normal=0.9, rough_influence=0.5)))
     blue = MAT.merged(MAT.QUIET_DRAWN, MAT.STONE_FLOOR, StrataAmount=0.03, PoreAmount=0.05, VeinAmount=0.0, FloorSlab=0.6, FloorAspect=1.5,
                       FloorStagger=0.5, CourseHeight=0.35, BlockLength=0.9, JointWidth=0.003, JointDarkness=0.6, BlockTone=0.14, Roughness=0.62,
-                      ClearCoat=0.0, Specular=0.52, TrafficWear=0.5, SplashZone=0.2, MossCover=0.2, MossUp=0.3, MossFoot=0.8)
+                      ClearCoat=0.0, Specular=0.52, TrafficWear=0.5, SplashZone=0.1, MossCover=0.1, MossUp=0.15, MossFoot=0.4)
     out["BlueStone"] = MAT.spec("M_Ch_Stone", blue, {"BaseColor": lin(0x5D615E)},
                                 photo=("S3", dict(block_shift=1.0, contrast=0.8, normal=0.8, rough_influence=0.5)), switches=MAT.MACRO)
     # ---- Floors: 尺七方砖 soaked in tung oil (the hall, the ear rooms); 尺四 ground-jointed (the rest); the courts' paving
     #      (photographed: moss and dirt in its joints); city bricks on edge for the paths.
-    out["FloorLarge"] = floor_tile(0.54, 0x4F5153, 0.45, 0.25, 0.0015)
+    # (The hall's oiled 金砖 hold dark, near-mirror reflections in life: the Salon's polished floor's coat (0.85 at 0.08), the
+    # bricks' relief halved under it. A coat of 0.6 at 0.12 over the full relief only smeared the reflections.)
+    out["FloorLarge"] = floor_tile(0.54, 0x4F5153, 0.28, 0.85, 0.0015, coat_rough=0.07, normal=0.35)
     out["FloorSmall"] = floor_tile(0.45, 0x585B5C, 0.64, 0.0, 0.002)
     court = MAT.merged(NJ, UB, StrataAmount=0.0, PoreAmount=0.0, BlockTone=0.0, MacroScale=4.0, MacroVariation=0.08, Roughness=0.82,
                        RoughnessVariation=0.06, ClearCoat=0.0, TrafficWear=0.6, RoughWear=0.08, Specular=0.5, Waviness=0.12, WaveScale=0.7,
-                       MossCover=0.14, MossUp=0.25, MossFoot=0.0)
+                       MossCover=0.07, MossUp=0.12, MossFoot=0.0)
     out["CourtPaving"] = MAT.spec("M_Ch_Stone", court, {"BaseColor": lin(0x6E6F6B)},
                                   photo=("CH_PAVING", dict(contrast=1.0, normal=1.0, rough_influence=0.7)), switches=MAT.MACRO)
-    out["CourtPath"] = MAT.spec("M_Ch_Stone", MAT.merged(court, MossCover=0.1, Roughness=0.8), {"BaseColor": lin(0x6A6C69)},
+    out["CourtPath"] = MAT.spec("M_Ch_Stone", MAT.merged(court, MossCover=0.05, Roughness=0.8), {"BaseColor": lin(0x6A6C69)},
                                 photo=("CH_BRICKRUB", dict(contrast=1.0, normal=1.0, rough_influence=0.7)), switches=MAT.MACRO)
     # ---- The garden's ground: pebble mosaic (花街铺地), earth under moss, the rockery's Taihu limestone (photographed,
     #      displaced 3 cm by its own relief: the stone's holes and ridges in the light), the pond's dark bed.
@@ -253,9 +256,10 @@ def specs():
                               {"BaseColor": lin(0x2A2A22)}, photo=("G5", dict(contrast=0.8, normal=0.7, rough_influence=0.4)))
     # ---- Timber: iron-oxide red (铁红) on the lime-and-hemp ground, green and black lacquer (all crazed, oiled), waxed nanmu,
     #      chestnut lacquer.
-    out["RedLacquer"] = paint(0x64251F, 0.52, 0.3)
-    out["GreenLacquer"] = paint(0x284A3D, 0.5, 0.4)
-    out["BlackLacquer"] = paint(0x161310, 0.42, 0.55, 0.12)
+    # (Old tung oil is a satin, not a mirror: a coat of 0.6 at 0.10 turned the red pink and milky, plastic in the path tracer.)
+    out["RedLacquer"] = paint(0x64251F, 0.52, 0.4, 0.15)
+    out["GreenLacquer"] = paint(0x284A3D, 0.5, 0.45, 0.15)
+    out["BlackLacquer"] = paint(0x161310, 0.42, 0.6, 0.1)
     # 楠木, waxed, never painted: golden brown, a fine straight grain (CH_NANMU along each member), the silk of its
     # interlocked grain in the wax's anisotropic sheen (Chatoyance), F0 0.036.
     out["Nanmu"] = MAT.spec("M_Ch_Wood", MAT.merged(MAT.OAK_BOARDS, Roughness=0.36, BoardWidth=0.18, BoardTone=0.05, BoardHue=0.015, BoardJoint=0.1,
@@ -295,12 +299,12 @@ def specs():
     # ---- Roofs: reduction-fired grey clay tiles (小青瓦, 筒瓦) weathered as old roofs are (CH_LICHEN: lichen and moss
     #      in patches, heavier where the slope faces the sky), their lime bed, the ridges' darker brick.
     roof = MAT.merged(NJ, UB, StrataAmount=0.0, PoreAmount=0.06, PoreSize=0.003, BlockTone=0.0, MacroScale=3.0, MacroVariation=0.14, Roughness=0.82,
-                      RoughnessVariation=0.08, ClearCoat=0.0, Specular=0.5, DustUp=0.0, MossCover=0.18, MossUp=0.8, MossFoot=0.0)
+                      RoughnessVariation=0.08, ClearCoat=0.0, Specular=0.5, DustUp=0.0, MossCover=0.09, MossUp=0.4, MossFoot=0.0)
     out["Tiles"] = MAT.spec("M_Ch_Stone", roof, {"BaseColor": lin(0x4D4F4D)},
                             photo=("CH_LICHEN", dict(colour_amount=0.55, contrast=0.9, normal=0.7, rough_influence=0.6, scale=1.4)))
     out["RoofMortar"] = MAT.spec("M_Ch_Plaster", {"Roughness": 0.93, "Variation": 0.06, "GrainAmount": 0.04, "RainStreaks": 0.2},
                                  {"BaseColor": lin(0x8A877F)}, photo=("CH_LIME", dict(colour_amount=0.5, normal=0.6, rough_influence=0.3)))
-    out["Ridges"] = MAT.spec("M_Ch_Stone", MAT.merged(roof, MossCover=0.12, RainStreaks=0.2), {"BaseColor": lin(0x484A48)},
+    out["Ridges"] = MAT.spec("M_Ch_Stone", MAT.merged(roof, MossCover=0.06, RainStreaks=0.1), {"BaseColor": lin(0x484A48)},
                              photo=("CH_BRICKRUB", dict(contrast=0.9, normal=0.8, rough_influence=0.5)))
     # ---- 石兄: the standing Taihu rock (AMuseeTaihuRock's mesh, its RockMaterial): the same photographed limestone, paler
     #      where the rain washes it, dark in its hollows and streaks, moss on its ledges.
