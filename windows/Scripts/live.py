@@ -9,9 +9,16 @@ A change shows within a fraction of a second: no editor step, no relaunch. Witho
     python windows/Scripts/live.py lights [text]                             the lights by label
     python windows/Scripts/live.py materials [text]                          the material instances and their parameters
     python windows/Scripts/live.py shots <id> <name>=x,y,feet,yaw,pitch[@hour] ... [--views views.json]
-                                       [--settle 6] [--fov 84] [--photo] [--hour 14]
+                                       [--settle 6] [--fov 84] [--photo [--preview] [--spp 64]] [--hour 14]
+                                       [--perf 5] [--slow-exposure]
         screenshots from the running game, to Saved/Live/shots/<id>/<name>.png, then done.json. Poses are as
-        -MuseePose (plan metres and degrees). --photo uses the path tracer (settle 480 s unless given).
+        -MuseePose (plan metres and degrees). --photo uses the path tracer (settle 480 s unless given); with
+        --preview it is a quick look: --spp samples (64), 8 bounces, denoised, settle 40 s. --perf N samples frame
+        and GPU times at each view for N s (printed, and in done.json). Eye adaptation is fast during a request so
+        an A/B has settled; --slow-exposure keeps the museum's speed.
+    python windows/Scripts/live.py compare <runA> <runB> [--crop x,y,w,h] [--out dir]
+        side-by-side JPEGs (A left, B right) of the views both shot folders have, to <runB>/compare/ by default;
+        a run is a folder under Saved/Live/shots or a path, and a unique part of a name is enough
         views.json: [{"name": .., "pose": [x, y, feet, yaw, pitch], "hour": .., "fov": .., "settle": .., "photo": ..}]
 
 Keys are section.name.property: post-process fields are FPostProcessSettings names (BloomIntensity or
@@ -147,6 +154,10 @@ def shots(args):
     views = option(args, "--views")
     settle, fov, hour = option(args, "--settle"), option(args, "--fov"), option(args, "--hour")
     photo = option(args, "--photo", False, flag=True)
+    preview = option(args, "--preview", False, flag=True)
+    spp = option(args, "--spp")
+    perf = option(args, "--perf")
+    slow = option(args, "--slow-exposure", False, flag=True)
     if not args:
         sys.exit("shots <id> <name>=x,y,feet,yaw,pitch[@hour] ... [--views views.json]")
     rid, specs = args[0], args[1:]
@@ -166,24 +177,78 @@ def shots(args):
     if hour is not None:
         for s in out:
             s.setdefault("hour", float(hour))
-    req = {"id": f"{rid}_{time.strftime('%H%M%S')}", "photo": photo, "shots": out}
+    req = {"id": f"{rid}_{time.strftime('%H%M%S')}", "photo": photo, "preview": preview, "shots": out}
+    if spp is not None:
+        req["spp"] = int(spp)
+    if perf is not None:
+        req["perf"] = float(perf)
+    if slow:
+        req["fast_exposure"] = False
     if settle is not None:
         req["settle"] = float(settle)
     if fov is not None:
         req["fov"] = float(fov)
     done = os.path.join(LIVE, "shots", req["id"], "done.json")
     save(os.path.join(LIVE, "shots.json"), req)
-    per = float(settle) if settle is not None else (480 if photo else 6)
-    limit = 60 + len(out) * (per + 30)
+    per = float(settle) if settle is not None else ((40 if preview else 480) if photo else 6)
+    limit = 60 + len(out) * (per + 40 + float(perf or 0)) + (150 if photo else 0)   # a game's first path-traced shot warms up
     print(f"live: {len(out)} shots requested as {req['id']}")
     t0 = time.time()
     while time.time() - t0 < limit:
         d = load(done, None)
         if d:
             print(f"live: {len(d['files'])} of {len(out)} shots in {d['seconds']} s -> {os.path.dirname(done)}")
+            for name, p in d.get("perf", {}).items():
+                print(f"perf {name}: {p['frame_ms']} ms ({p['fps']} fps), p99 {p['p99_ms']} ms, GPU {p['gpu_ms']} ms")
             return
         time.sleep(0.5)
     print(f"live: no done.json after {limit:.0f} s (is a -Live game running? live.py start)")
+
+
+def run_dir(name):
+    if os.path.isdir(name):
+        return name
+    root = os.path.join(LIVE, "shots")
+    hits = sorted(d for d in os.listdir(root) if name in d) if os.path.isdir(root) else []
+    exact = [d for d in hits if d == name] or [d for d in hits if d.startswith(name + "_")][-1:]
+    if exact or len(hits) == 1:
+        return os.path.join(root, (exact or hits)[0])
+    sys.exit(f"{name}: " + (f"matches {', '.join(hits)}" if hits else f"no such run in {root}"))
+
+
+def compare(args):
+    from PIL import Image, ImageDraw
+    args = list(args)
+    crop = option(args, "--crop")
+    out = option(args, "--out")
+    if len(args) != 2:
+        sys.exit("compare <runA> <runB> [--crop x,y,w,h] [--out dir]")
+    a, b = run_dir(args[0]), run_dir(args[1])
+    out = out or os.path.join(b, "compare")
+    os.makedirs(out, exist_ok=True)
+    box = None
+    if crop:
+        x, y, w, h = (int(v) for v in crop.split(","))
+        box = (x, y, x + w, y + h)
+    names = sorted(f for f in os.listdir(a) if f.endswith(".png") and os.path.exists(os.path.join(b, f)))
+    if not names:
+        sys.exit("no view is in both runs")
+    for f in names:
+        ia, ib = Image.open(os.path.join(a, f)).convert("RGB"), Image.open(os.path.join(b, f)).convert("RGB")
+        if box:
+            ia, ib = ia.crop(box), ib.crop(box)
+        if ib.size != ia.size:
+            ib = ib.resize(ia.size)
+        w, h = ia.size
+        sheet = Image.new("RGB", (w * 2 + 8, h + 28), (24, 24, 24))
+        sheet.paste(ia, (0, 28))
+        sheet.paste(ib, (w + 8, 28))
+        d = ImageDraw.Draw(sheet)
+        d.text((8, 7), f"A  {os.path.basename(a)}", fill=(230, 230, 230))
+        d.text((w + 16, 7), f"B  {os.path.basename(b)}", fill=(230, 230, 230))
+        path = os.path.join(out, f[:-4] + ".jpg")
+        sheet.save(path, quality=90)
+        print(path)
 
 
 def listing(path, text, show):
@@ -214,6 +279,8 @@ def main():
                 print(f"{name}  {l['class']}  intensity {l['intensity']:g}" + (f"  {l['temperature']:g} K" if "temperature" in l else ""))
     elif cmd == "shots":
         shots(args)
+    elif cmd == "compare":
+        compare(args)
     elif cmd == "materials":
         listing(MATERIALS, args[0] if args else "",
                 lambda n, e: f"{n}  ({e['master']})  " + ", ".join(f"{k}={v:g}" for k, v in e["scalars"].items()))
