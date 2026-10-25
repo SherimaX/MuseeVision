@@ -1,4 +1,5 @@
 #include "Chenghuai/ChenghuaiRockery.h"
+#include "Chenghuai/ChenghuaiTune.h"
 
 #include "Async/ParallelFor.h"
 #include "Chenghuai/ChenghuaiGardenPlan.h"
@@ -219,16 +220,25 @@ namespace ChenghuaiRockery
 		/** The Taihu stones' hollows: spheres that the water wore out of the flanks, 0.25-0.45 m. */
 		struct FHole { FVector C; double R; };
 		/** Standing peaks set on the upper mass: tall, waisted, leaning stones 1.3-2.1 m high. */
-		struct FPeak { FVector2D C; double Base, Tall, R, Squash, Turn; int32 Seed; };
+		struct FPeak { FVector2D C; double Base, Tall, R, Squash, Turn; int32 Seed; double Narrow = 0.38, Waist = 0.2, Lean = 0.25; };
 
+		// Both lists are made again when the tuned numbers change (ChenghuaiTune: rockery.*; a -Live game's trials).
 		const TArray<FHole>& Holes()
 		{
-			static const TArray<FHole> Out = []()
+			static TArray<FHole> Out;
+			static int32 Made = -1;
+			if (Made == ChenghuaiTune::Generation()) { return Out; }
+			Made = ChenghuaiTune::Generation();
+			Out = []()
 			{
 				TArray<FHole> H;
 				const TArray<FVector2D> Foot = Poly(GP::RockeryFoot, GP::RockeryFootCount);
-				for (int32 k = 0; k < 1400 && H.Num() < 110; ++k)
+				const int32 Count = FMath::RoundToInt32(ChenghuaiTune::Num(TEXT("rockery.Hollows"), 110));
+				const int32 Seed = 1400 * FMath::RoundToInt32(ChenghuaiTune::Num(TEXT("rockery.HollowSeed"), 0));
+				const double R0 = ChenghuaiTune::Num(TEXT("rockery.HollowR"), 0.26), R1 = ChenghuaiTune::Num(TEXT("rockery.HollowRRange"), 0.26);
+				for (int32 i = 0; i < 1400 && H.Num() < Count; ++i)
 				{
+					const int32 k = i + Seed;
 					const FVector2D Q(4.9 + 11.0 * Kit::Hash01(k, 401), -36.6 + 16.6 * Kit::Hash01(k, 402));
 					const double DF = SignedDistance(Foot, Q);
 					if (DF > -0.25 || DF < -2.6) { continue; }
@@ -237,7 +247,7 @@ namespace ChenghuaiRockery
 					if (D < PathHalf + 0.7 || FVector2D::Distance(Q, FVector2D(CH::HexCX, CH::HexCY)) < 3.0) { continue; }
 					const double Z = Height(Q);
 					if (Z < 0.45) { continue; }
-					const double R = 0.26 + 0.26 * Kit::Hash01(k, 403);
+					const double R = R0 + R1 * Kit::Hash01(k, 403);
 					H.Add({FVector(Q.X, Q.Y, Z * (0.35 + 0.45 * Kit::Hash01(k, 404))), R});
 				}
 				return H;
@@ -247,12 +257,24 @@ namespace ChenghuaiRockery
 
 		const TArray<FPeak>& Peaks()
 		{
-			static const TArray<FPeak> Out = []()
+			static TArray<FPeak> Out;
+			static int32 Made = -1;
+			if (Made == ChenghuaiTune::Generation()) { return Out; }
+			Made = ChenghuaiTune::Generation();
+			Out = []()
 			{
 				TArray<FPeak> P;
 				const TArray<FVector2D> Foot = Poly(GP::RockeryFoot, GP::RockeryFootCount);
-				for (int32 k = 0; k < 600 && P.Num() < 6; ++k)
+				const int32 Count = FMath::RoundToInt32(ChenghuaiTune::Num(TEXT("rockery.Peaks"), 6));
+				const int32 Seed = 600 * FMath::RoundToInt32(ChenghuaiTune::Num(TEXT("rockery.PeakSeed"), 0));
+				const double Spacing = ChenghuaiTune::Num(TEXT("rockery.PeakSpacing"), 2.6);
+				const double Tall0 = ChenghuaiTune::Num(TEXT("rockery.PeakTall"), 1.3), Tall1 = ChenghuaiTune::Num(TEXT("rockery.PeakTallRange"), 0.8);
+				const double R0 = ChenghuaiTune::Num(TEXT("rockery.PeakR"), 0.36), R1 = ChenghuaiTune::Num(TEXT("rockery.PeakRRange"), 0.2);
+				const double Narrow = ChenghuaiTune::Num(TEXT("rockery.PeakNarrow"), 0.38), Waist = ChenghuaiTune::Num(TEXT("rockery.PeakWaist"), 0.2);
+				const double Lean = ChenghuaiTune::Num(TEXT("rockery.PeakLean"), 0.25);
+				for (int32 i = 0; i < 600 && P.Num() < Count; ++i)
 				{
+					const int32 k = i + Seed;
 					const FVector2D Q(5.2 + 10.4 * Kit::Hash01(k, 501), -36.2 + 15.8 * Kit::Hash01(k, 502));
 					const double DF = SignedDistance(Foot, Q);
 					if (DF > -0.9 || DF < -2.8) { continue; }
@@ -260,11 +282,11 @@ namespace ChenghuaiRockery
 					NearestOnPath(Q, D, S);
 					if (D < PathHalf + 0.95 || FVector2D::Distance(Q, FVector2D(CH::HexCX, CH::HexCY)) < 3.3) { continue; }
 					bool bNear = false;
-					for (const FPeak& O : P) { bNear |= FVector2D::Distance(O.C, Q) < 2.6; }
+					for (const FPeak& O : P) { bNear |= FVector2D::Distance(O.C, Q) < Spacing; }
 					if (bNear) { continue; }
 					const double Z = Height(Q);
-					P.Add({Q, Z - 0.3, 1.3 + 0.8 * Kit::Hash01(k, 503), 0.36 + 0.2 * Kit::Hash01(k, 504), 0.62 + 0.25 * Kit::Hash01(k, 505),
-						   6.28 * Kit::Hash01(k, 506), k});
+					P.Add({Q, Z - 0.3, Tall0 + Tall1 * Kit::Hash01(k, 503), R0 + R1 * Kit::Hash01(k, 504), 0.62 + 0.25 * Kit::Hash01(k, 505),
+						   6.28 * Kit::Hash01(k, 506), k, Narrow, Waist, Lean});
 				}
 				return P;
 			}();
@@ -276,11 +298,11 @@ namespace ChenghuaiRockery
 		{
 			const double Z = P.Z - K.Base;
 			const double T = FMath::Clamp(Z / K.Tall, 0.0, 1.0);
-			const FVector2D Lean(0.25 * FMath::Cos(K.Turn * 1.7), 0.25 * FMath::Sin(K.Turn * 1.7));
+			const FVector2D Lean(K.Lean * FMath::Cos(K.Turn * 1.7), K.Lean * FMath::Sin(K.Turn * 1.7));
 			const FVector2D Rel = FVector2D(P.X, P.Y) - K.C - Lean * T;
 			const double CT = FMath::Cos(K.Turn), ST = FMath::Sin(K.Turn);
 			const FVector2D L(Rel.X * CT + Rel.Y * ST, (-Rel.X * ST + Rel.Y * CT) / K.Squash);
-			const double R = K.R * (1.0 - 0.38 * T) * (1.0 + 0.2 * FMath::Sin(9.0 * T + K.Seed));
+			const double R = K.R * (1.0 - K.Narrow * T) * (1.0 + K.Waist * FMath::Sin(9.0 * T + K.Seed));
 			const double Side = (L.Size() - R) * K.Squash;
 			return FMath::Max(FMath::Max(Side, Z - K.Tall), -Z - 0.25);
 		}

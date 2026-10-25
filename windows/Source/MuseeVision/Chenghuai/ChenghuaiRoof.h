@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "Chenghuai/ChenghuaiKit.h"
+#include "Chenghuai/ChenghuaiTune.h"
 
 /**
  * Real grey clay tiles for Chenghuai's roofs, laid as they are in Beijing (Materials board, 布筒瓦 and 合瓦):
@@ -77,7 +78,7 @@ namespace ChenghuaiRoof
 			S.TopHalf = 0.065;
 			S.PanCourse = 0.19;
 			S.TopCourse = 0.30;
-			return S;
+			return Tuned(S, TEXT("tiles.tong."));
 		}
 		static FTileStyle He()
 		{
@@ -88,6 +89,17 @@ namespace ChenghuaiRoof
 			S.TopHalf = 0.105;
 			S.PanCourse = 0.17;
 			S.TopCourse = 0.17;
+			return Tuned(S, TEXT("tiles.he."));
+		}
+		/** The style with the -Live trial values (ChenghuaiTune: tiles.tong.Pitch, tiles.he.PanHalf, …). */
+		static FTileStyle Tuned(FTileStyle S, const FString& Prefix)
+		{
+			S.Pitch = ChenghuaiTune::Num(Prefix + TEXT("Pitch"), S.Pitch);
+			S.PanHalf = ChenghuaiTune::Num(Prefix + TEXT("PanHalf"), S.PanHalf);
+			S.TopHalf = ChenghuaiTune::Num(Prefix + TEXT("TopHalf"), S.TopHalf);
+			S.PanCourse = ChenghuaiTune::Num(Prefix + TEXT("PanCourse"), S.PanCourse);
+			S.TopCourse = ChenghuaiTune::Num(Prefix + TEXT("TopCourse"), S.TopCourse);
+			S.Lip = ChenghuaiTune::Num(Prefix + TEXT("Lip"), S.Lip);
 			return S;
 		}
 	};

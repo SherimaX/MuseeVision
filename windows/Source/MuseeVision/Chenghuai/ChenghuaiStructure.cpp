@@ -411,6 +411,44 @@ void AChenghuaiStructure::AddTags()
 void AChenghuaiStructure::Build()
 {
 	if (MuseeBake::IsBaked(this)) { return; }
+	BuildProcedural();
+}
+
+double AChenghuaiStructure::RebuildLive()
+{
+	const double T0 = FPlatformTime::Seconds();
+	if (MuseeBake::IsBaked(this))
+	{
+		// the bake's static meshes stand down; the procedural components it retired come back as they were
+		// (MuseeBakeLibrary's Retire keeps their visibility and collision in a musee.bake.was:<visible>,<collision> tag)
+		for (UActorComponent* C : GetComponents())
+		{
+			if (!C) { continue; }
+			if (UPrimitiveComponent* P = Cast<UPrimitiveComponent>(C); P && C->ComponentTags.Contains(MuseeBake::BakedTag()))
+			{
+				P->SetVisibility(false);
+				P->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+				continue;
+			}
+			if (UProceduralMeshComponent* Proc = Cast<UProceduralMeshComponent>(C))
+			{
+				for (const FName& Tag : Proc->ComponentTags)
+				{
+					FString Visible, Collision;
+					if (!Tag.ToString().StartsWith(TEXT("musee.bake.was:")) || !Tag.ToString().RightChop(15).Split(TEXT(","), &Visible, &Collision)) { continue; }
+					Proc->SetVisibility(Visible != TEXT("0"));
+					Proc->SetCollisionEnabled(static_cast<ECollisionEnabled::Type>(FCString::Atoi(*Collision)));
+				}
+			}
+		}
+	}
+	BuildProcedural();
+	ApplyMaterials();
+	return (FPlatformTime::Seconds() - T0) * 1000.0;
+}
+
+void AChenghuaiStructure::BuildProcedural()
+{
 	const CB::FChMeshes Meshes = CB::BuildMeshes();
 	UProceduralMeshComponent* Components[6] = {Structure.Get(), Frame.Get(), Roof.Get(), Glass.Get(), Water.Get(), Guard.Get()};
 	for (UProceduralMeshComponent* Component : Components)

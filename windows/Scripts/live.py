@@ -16,6 +16,11 @@ A change shows within a fraction of a second: no editor step, no relaunch. Witho
         --preview it is a quick look: --spp samples (64), 8 bounces, denoised, settle 40 s. --perf N samples frame
         and GPU times at each view for N s (printed, and in done.json). Eye adaptation is fast during a request so
         an A/B has settled; --slow-exposure keeps the museum's speed.
+    python windows/Scripts/live.py geo tail.Length=0.7 "hall.Main hall.EaveFront=1.2" rockery.PeakSeed=3
+    python windows/Scripts/live.py geo --unset tail.Length ...   |   geo --show   |   geo --keys [text]
+        Chenghuai's geometry, rebuilt in the running game with these numbers (Saved/Live/chenghuai.json); waits for the
+        rebuild and prints its time. --keys lists every tunable number with its default (after a first rebuild).
+        A baked wing turns procedural for the run. Write a value that's right into its default in the code.
     python windows/Scripts/live.py compare <runA> <runB> [--crop x,y,w,h] [--out dir]
         side-by-side JPEGs (A left, B right) of the views both shot folders have, to <runB>/compare/ by default;
         a run is a folder under Saved/Live/shots or a path, and a unique part of a name is enough
@@ -205,6 +210,48 @@ def shots(args):
     print(f"live: no done.json after {limit:.0f} s (is a -Live game running? live.py start)")
 
 
+GEO = os.path.join(LIVE, "chenghuai.json")
+GEO_STATE = os.path.join(LIVE, "geometry_state.json")
+GEO_KEYS = os.path.join(LIVE, "chenghuai_keys.json")
+
+
+def geo(args):
+    data = load(GEO, {})
+    if "--show" in args:
+        print(json.dumps(data, indent=1, ensure_ascii=False))
+        return
+    if "--keys" in args:
+        keys = load(GEO_KEYS, None)
+        if keys is None:
+            sys.exit("no keys yet: they're listed after a first rebuild (any geo edit)")
+        text = next((a for a in args if not a.startswith("--")), "")
+        for k, e in sorted(keys.items()):
+            if text.lower() in k.lower():
+                print(f"{k} = {e['default']:g}" + (f"   (now {e['value']:g})" if "value" in e else ""))
+        return
+    unset = "--unset" in args
+    before = load(GEO_STATE, {}).get("applied", 0)
+    for a in (a for a in args if not a.startswith("--")):
+        key, eq, text = a.partition("=")
+        if unset:
+            data.pop(key, None)
+            continue
+        if not eq:
+            sys.exit(f"{a}: expected key=value")
+        data[key] = float(text)
+    save(GEO, data)
+    t0 = time.time()
+    while time.time() - t0 < 60:
+        st = load(GEO_STATE, {})
+        if st.get("applied", 0) > before:
+            print(f"live: Chenghuai rebuilt in {st.get('ms')} ms")
+            for u in st.get("unused", []):
+                print(f"error: {u}: no build asked for it (geo --keys lists them)")
+            return
+        time.sleep(0.1)
+    print("live: no game answered in 60 s (start one with: live.py start)")
+
+
 def run_dir(name):
     if os.path.isdir(name):
         return name
@@ -279,6 +326,8 @@ def main():
                 print(f"{name}  {l['class']}  intensity {l['intensity']:g}" + (f"  {l['temperature']:g} K" if "temperature" in l else ""))
     elif cmd == "shots":
         shots(args)
+    elif cmd == "geo":
+        geo(args)
     elif cmd == "compare":
         compare(args)
     elif cmd == "materials":
